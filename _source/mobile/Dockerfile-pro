@@ -1,0 +1,20 @@
+FROM node:latest
+#安装pm2
+RUN npm install -g cnpm --registry=https://registry.npm.taobao.org
+RUN cnpm install pm2 -g
+#部署代码
+RUN mkdir -p /app
+WORKDIR /app
+COPY ./package.json /app/
+COPY ./package-lock.json /app/
+## 安装项目依赖
+RUN cnpm install
+COPY . /app
+ENV NODE_ENV=production
+ENV RUNNING_ENV=pro
+ENV CDN_PATH=
+ENV HOST=0.0.0.0
+RUN npm run build
+EXPOSE 3000
+##设置启动项
+CMD [ "pm2-runtime", "start", "/app/ecosystem.config.js" ]
