@@ -1,0 +1,54 @@
+
+/*下拉菜单改变颜色*/
+.el-dropdown-menu__item {
+  white-space: nowrap;
+}
+menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
+  background-color: rgba(245, 243, 241, 1);
+  color: #8B766C;
+}
+
+
+.el-checkbox .el-checkbox__input .el-checkbox__inner {
+  background:rgba(236,236,236,1);
+  border:1px solid rgba(153,153,153,1);
+  border-radius:2px;
+}
+.el-checkbox .el-checkbox__input.is-checked .el-checkbox__inner {
+  background-color: #cdb9b0;
+  border-color: #cdb9b0;
+}
+
+/*滑块*/
+.el-slider__runway {
+  background: #E4E4E4;
+  height: 12px;
+  border-radius: 6px;
+}
+.el-slider__bar {
+  background: linear-gradient(to right, #F0BDC7 , #D17B8F);
+  height: 12px;
+}
+.el-slider__button {
+  height: 20px;
+  width: 20px;
+  /*padding: 4px;*/
+  margin-top: 4px;
+  border-radius: 10px;
+  border: 1px solid #E4E4E4;
+  background-color: #FFFFFF;
+  background-image: url(/element-resource/icon-dot.png);
+  background-size: 12px 12px;
+  background-position: 4px 4px;
+  background-origin: content-box;
+  background-repeat: no-repeat;
+}
+.el-slider__stop {
+  width: 1px;
+  height: 100%;
+  border-radius: 0;
+}
+
+.el-loading-mask {
+  z-index: 100;
+}

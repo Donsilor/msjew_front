@@ -1,0 +1,1977 @@
+{
+  "definition": {
+    "lowding": "loading",
+    "shape": {
+      "round": "Round",
+      "roundDesc": "The popular round diamond has 58 facets to radiate its brilliance, which has been the most splendid diamond among all diamond cuts. ",
+      "Princess": "Princess",
+      "PrincessDesc": "The princess cut is a common diamond cut. The four corners of the princess cut gather colors. So you should choose the princess cut of a high color grade. ",
+      "Emerald": "Emerald",
+      "EmeraldDesc": "The emerald cut adopts the step cut with rectangular facets. The diamond with an emerald cut is less brilliant, so clarity is more important in choosing diamonds of this kind.  ",
+      "Asscher": "Asscher ",
+      "AsscherDesc": "The Asscher cut diamond is similar to the emerald cut, but it is square. The asscher diamond uses the step cut to highlight its diamond clarity. ",
+      "Cushion": "Cushion ",
+      "CushionDesc": "The cushion cut is usually rounded rectangle. To choose a diamond with a cushion cut, the color grade is important. ",
+      "Marquise": " Marquise ",
+      "MarquiseDesc": "The marquise cut has pointed ends, but its facets are brilliant. It can increase the diamond size with the same carat, and make the diamond look larger than it actually is. ",
+      "Radiant": "Radiant ",
+      "RadiantDesc": "The radiant cut is square or rectangular, and its four corners are inclined. The radiant cut can also make the diamond look larger than it actually is. ",
+      "Oval": "Oval",
+      "OvalDesc": "The oval cut ranges from the egg shape to the long shape or narrow shape. The oval cut can also make the diamond look heavier than it actually is. ",
+      "PearShape": "Pear Shape",
+      "PearShapeDesc": "The pear shape has one sharp end and a rounded end. Generally, the sharp end should be worn facing the wearer’s heart. ",
+      "Heart": "Heart",
+      "HeartDesc": "The heart shape has brilliant facets or 58 rhombus and triangular facets to give the fullest play to the diamond’s brilliance. "
+    },
+    "color": {
+      "j": "The last grade of near colorless. The colors on the near colorless diamonds of special shapes or more than one carat are noticeable by the naked eyes. ",
+      "i": "Take a close look at it, you can notice slight colors by the naked eyes, but its value is high. ",
+      "h": "Near colorless. Only when the near colorless iscompared with a higher color grade can it be noticed for color differences, but this does not impair its high value. ",
+      "g": "It is the highest grade of near colorless. Compared with the colorless, the near colorless can be noticed for slight differences of colors, but its value is high.",
+      "f": "It is the most popular colorless grade to set on platinum jewelry. The trained gemologists can notice the slight colors. ",
+      "e": "It is the most popular colorless grade to set on platinum jewelry. Even the well-trained diamond professionals cannot easily notice the slight colors in these diamonds. ",
+      "d": "These diamonds are completely colorless and very rare. They are the highest color grade and also the most popular color grade to set on platinum jewelry. "
+    },
+    "clarity": {
+      "si2": "SI1 and SI2: Slight Inclusions. These inclusions are visible under the 10X magnifier. If these inclusions cannot be noticed by the naked eyes, their value will be high. But a sharp observer can notice inclusions of SI2. ",
+      "si1": "SI1 and SI2: Slight Inclusions. These inclusions are visible under the 10X magnifier. If these inclusions cannot be noticed by the naked eyes, their value will be high. But a sharp observer can notice inclusions of SI2. ",
+      "vs2": "VS1 and VS2: Very Slight Inclusions. VS1 means the inclusions are not easy to find, while VS2 means that the inclusions are easy to find.",
+      "vs1": "VS1 and VS2: Very Slight Inclusions. VS1 means the inclusions are not easy to find, while VS2 means that the inclusions are easy to find.",
+      "vvs2": "VVS1 and VVS 2: Very Very Small Inclusions. Even the expert gemologists cannot notice the inclusions even under a 10X magnifier.",
+      "vvs1": "VVS1 and VVS 2: Very Very Small Inclusions. Even the expert gemologists cannot notice the inclusions even under a 10X magnifier.",
+      "if": "No internal or external blemishes. Internally inclusion-free: There might be external inclusions only. Both are rare to see.",
+      "fl": "No internal or external blemishes. Internally inclusion-free: There might be external inclusions only. Both are rare to see."
+    },
+    "cut": {
+      "gd": "Fair",
+      "gdDesc": "Diamonds of the fair cut are cheaper than diamonds of the very good cut, the former is a good choice to customers with a limited budget. ",
+      "vg": "Good",
+      "vgDesc": "Though diamonds of the good cut has less measurable sparkle or brilliance than that of the ideal cut diamond, the former is cheaper. ",
+      "ideal": "Very Good",
+      "idealDesc": "The highest grade of cut. Its cutting proportion achieves a perfect balance between fire and brilliance in the diamond. ",
+      "scgd": "Fair",
+      "scvg": "Good",
+      "scideal": "Very good"
+    },
+    "style": {
+      "SolitaireRing": "Solitaire",
+      "JumpRing": "Jump",
+      "PaveSetRing": "Pave Set",
+      "ClassicalRing": "Classical",
+      "ChannelSetRing": "Channel Set",
+      "HaloSetRing": "Halo Set",
+      "ThreeStoneRing": "Three Stone",
+      "ClassicSeries": "Classic",
+      "ChannelSetSeries": "Channel-set series",
+      "WeddingRing": "Classic",
+      "ThreeDReliefRing": "Engravable",
+      "DiamondRing": "Diamond",
+      "SpecialRing": "Anniversary",
+      "FullyDiamondInlaidRing": "Eternity",
+      "WeddingAnniversaryRing": "Anniversary",
+      "CasualRing": "Stackable"
+    },
+    "quality": {
+      "platinum14K": "14K White",
+      "platinum18K": "18K White",
+      "gold14K": "14K Yellow",
+      "gold18K": "18K Yellow",
+      "roseGold14K": "14K Rose Gold",
+      "roseGold18K": "Rose Gold",
+      "platinum": "Platinum",
+      "fineSilver925": "925 Sterling Silver"
+    },
+    "sortBy": {
+      "BestSeller": "Best Seller",
+      "Price-from-low-to-high": "Price - From Low To High",
+      "Price-from-high-to-low": "Price - From High To Low",
+      "carat-from-low-to-high": "Carat - From Low To High",
+      "carat-from-high-to-low": "Carat - From High To Low",
+      "color-from-low-to-high": "Color - From Low To High",
+      "color-from-high-to-low": "Color - From High To Low",
+      "cut-from-low-to-high": "Cut - From Low To high",
+      "cut-from-high-to-low": "Cut - From High To Low",
+      "clarity-from-low-to-high": "Clarity - From Low To High",
+      "clarity-from-high-to-low": "Clarity - From High To Low"
+    }
+  },
+  "singleDog": {
+    "pageTitle": "BDD Co. Diamonds and Jewelry 丨special-1111",
+    "back": "Back",
+    "promotionCode": "Promo code:",
+    "notTheSame": "BDD CO. Special 11.11",
+    "proDesign": "Uncover a touching life-long commitment",
+    "chooseRing": "BDD selected ring sets",
+    "promise": "Marking the lifelong promise exclusively between the two of you",
+    "specialShow": "SPECIAL OFFER",
+    "writeDie": "Selected 18K diamond jewelry HK$ 1,111",
+    "btn": "SHOW NOW",
+    "end": "Thank you for supporting the campaign!"
+  },
+  "cart": {
+    "index": {
+      "order": "List",
+      "failed": "Expired",
+      "ring": "Couple Rings",
+      "coustom": "Customize",
+      "number": "Quantity",
+      "remove": "Remove",
+      "similar": "Find similar products",
+      "all": "ALL",
+      "total": "Total",
+      "freight": "（Excluding freight）",
+      "goPay": "CHECKOUT",
+      "toast1": "Choose products before you pay",
+      "toast2": "Deleted"
+    },
+    "sureOrder": {
+      "sureOrder": "CONFIRM ORDER",
+      "login": "Sign in",
+      "settlement": "to speed up settlement or",
+      "accont": "register new accounts",
+      "any": ", manage orders anytime, anywhere",
+      "default": "Default",
+      "address": "Add shipping address",
+      "time": "Estimated delivery:",
+      "week": " days",
+      "send": "Grouped Delivery",
+      "tips": "(Partial delivery is allowed if not checked the box)",
+      "aftermailbox": "Email for receiving order confirmation email",
+      "mailbox": "E-mail",
+      "remark": "Order Remarks",
+      "more": "Up To 300 Characters",
+      "cupon": "Coupon",
+      "allFee": "Item Total：",
+      "preferFee": "Coupon Code：",
+      "logisticsFee": "Shipping： ",
+      "taxFee": "Taxes：",
+      "safeFee": "Insurance：",
+      "orderAmount": "Total",
+      "cuponName": "Select Coupons",
+      "toast1": "No coupons available",
+      "toast2": "Incorrect delivery address",
+      "toast3": "Incorrect e-mail for receiving after-sales voucher, please input again!",
+      "delete": "Delete",
+      "inputCode": "Input Coupon Code",
+      "inputOrSelectCode": "Input/select Coupon Code",
+      "exchange": "Apply"
+    },
+    "pay": {
+      "pay": "Order payment",
+      "tips": "WeChat payment may require install WeChat App.",
+      "goPay": "Pay",
+      "payType0": "PayPal",
+      "type0Text": "Using PayPal’s secure payment solution",
+      "payType1": "Credit Card",
+      "type1Text": "Make secure and fast payment via credit card",
+      "payType2": "China UnionPay",
+      "type2Text": "Using UnionPay cards’secure payment solution",
+      "payType3": "Alipay",
+      "type3Text": "Easier and safer online payment",
+      "payType4": "WeChat Pay",
+      "type4Text": "Easier and safer online payment",
+      "payType5": "Telegraphic Transfer (T/T)",
+      "type5Text": "Extra 1.5% discount for T/T payment.",
+      "type5Text2": "Please note that e-Cheques are not T/T."
+    },
+    "paySuccess": {
+      "title": "ORDER PAID",
+      "orderNo": "Order#",
+      "preferFee": "Discount Information",
+      "coupon": "Coupon",
+      "transPreferFee": "Bank Wire Discount",
+      "payInfo": "Payment Info",
+      "pay": "Pay",
+      "beneficiary": "Beneficiary",
+      "login": "Sign in",
+      "settlement": "to speed up settlement or",
+      "accont": "register new accounts",
+      "any": ", manage orders anytime, anywhere",
+      "server": "Thank you for choosing BDD Co.",
+      "send": "We will send your order voucher to",
+      "paytips": "Wire Transfer Guide",
+      "lookBill": "VIEW ORDER",
+      "orderDetails": "Order Details",
+      "continue": "CONTINUE",
+      "text1": "Wire Transfer",
+      "text2": "Paypal",
+      "text3": "WeChat Pay",
+      "text4": "Alipay",
+      "text5": "Visa/Mastercard",
+      "text6": "China UnionPay",
+      "text7": "Paydollar",
+      "toast1": "Copied",
+      "toast2": "This browser does not support Auto Copy"
+    },
+    "anonymousDetail": {
+      "titlte": "Order Receipt",
+      "tips1": "Thanks for choosing BDD Co. Your order is our top priority. ",
+      "tips2": "Carefully read all emails about the order，",
+      "tips3": "and in case of error in information contact us immediately via email service@bddco.com.",
+      "send": "Deliver when all products are ready",
+      "look": "View delivery policy",
+      "afterMail": "After-sales voucher email",
+      "remark": "Order remarks：",
+      "allFee": "Item Total：",
+      "preferFee": "Discount：",
+      "logisticsFee": "Freight： ",
+      "taxFee": "Taxes：",
+      "safeFee": "Insurance：",
+      "transPreferFee": "Bank Wire Discount:",
+      "orderAmount": "Total",
+      "ring": "Couple Rings",
+      "coustom": "Customize"
+    },
+    "payFailed": {
+      "title": "Sorry, the payment was not completed",
+      "phone": "For any questions, contact customer service (852)-2165 3905",
+      "orderNo": "Order#：",
+      "payAgain": "PAY AGAIN",
+      "continue": "CONTINUE",
+      "toast1": "Copied",
+      "toast2": "This browser does not support Auto Copy"
+    }
+  },
+  "personal": {
+    "index": {
+      "p1": "Order",
+      "p2": "Wish List",
+      "p3": "Review",
+      "p4": "Compare Diamonds",
+      "p5": "Address",
+      "p6": "Coupon",
+      "p7": "Password Security",
+      "loginOut": "LOG OUT",
+      "tips": "Tips",
+      "text": "Log out now?",
+      "cancel": "CANCEL",
+      "course": "SUBMIT"
+    },
+    "account": {
+      "header": "Account information",
+      "title": "Login email",
+      "sex": "Gender",
+      "sexList": [
+        "General model",
+        "Men",
+        "Women"
+      ],
+      "name": "First name",
+      "nametips": "Enter first name",
+      "surname": "Last name",
+      "surnametips": "Enter last name",
+      "marriage": "Marital status",
+      "marriageList": [
+        "Married",
+        "Unmarried",
+        "Remarriage"
+      ],
+      "birthday": "Choose date of birth",
+      "tips": "Tips: Date of birth can be chosen only once. Receive double points in month of birth.",
+      "saveInfo": "SAVE",
+      "toast1": "Enter correct last name，Up to 20 characters for last name",
+      "toast2": "Enter correct first name，Up to 20 characters for first name",
+      "toast3": "Modified",
+      "okTxt": "SUBMIT",
+      "year": "Year",
+      "month": "Month",
+      "day": "Day"
+    },
+    "wish": {
+      "header": "Wish List",
+      "add": "Add",
+      "toast": "Deleted"
+    },
+    "diamondContrast": {
+      "title": "Compare Diamonds",
+      "select": "-Select Diamond-",
+      "carat": "Carat",
+      "color": "Color",
+      "cut": "Cut",
+      "cleaness": "Clarity",
+      "luster": "Polish",
+      "symmetry": "Symmetry",
+      "fluorescence": "Fluorescence",
+      "cuttingDepth": "Cut depth",
+      "stoneSurface": "Diamond facing",
+      "addCart": "ADD TO CART",
+      "remove": "REMOVE",
+      "toast1": "Removed",
+      "toast2": "Added to cart",
+      "toast3": "Failed to add to cart"
+    },
+    "address": {
+      "header": "Address",
+      "default": "Default Address",
+      "setDefault": "Set As Default",
+      "remove": "Delete",
+      "add": "NEW ADDRESS",
+      "toast": "Deleted"
+    },
+    "coupon": {
+      "header": "Coupon",
+      "goUse": "Use",
+      "hasUse": "Used",
+      "expired": "Expired",
+      "unaccalimed": "Unclaimed",
+      "list": [
+        "All",
+        "Available",
+        "Unavailable"
+      ],
+      "all": "All",
+      "available": "Available",
+      "unavailable": "Unavailable",
+      "couponCode": "coupon code",
+      "toUse": "to use",
+      "lave": "lave",
+      "num": "num",
+      "text1": "Full",
+      "text2": "Available",
+      "text3": "Available for the whole mall",
+      "fb1": "Full order ",
+      "fb2": "Software available",
+      "sb1": "Software available HKD ",
+      "sb2": "Available",
+      "left1": "Times:",
+      "left2": "",
+      "code": "Code：",
+      "only": "Software available",
+      "unlimited": "Unlimited"
+    },
+    "password": {
+      "header": "Password Security",
+      "title": "Change Password",
+      "password1": "Old Password",
+      "tips1": "Enter correct original password",
+      "password2": "New Password",
+      "tips2": "Enter new password of 6-18 characters",
+      "password3": "Confirm The New Password",
+      "tips3": "Entered passwords differ",
+      "submit": "SUBMIT",
+      "p1": "1. The password length is 6-18 characters",
+      "p2": "2. The password consists of numbers or letters",
+      "p3": "3. No special character is allowed",
+      "p4": "4. No spaces and Chinese characters are allowed"
+    },
+    "successPassword": {
+      "title": "RESET",
+      "p1": "Your password has been reset. Log in with your new password.",
+      "p2": "Automatically exit after ",
+      "p3": " seconds and back to the login interface",
+      "goLogin": "SIGN IN NOW"
+    },
+    "editAddress": {
+      "header1": "Add Address",
+      "header2": "Edit Address",
+      "name": "*First Name",
+      "nameText1": "Enter first name",
+      "nameText2": "Up to 20 characters for first name",
+      "surname": "*Last Name",
+      "surnameText1": "Enter last name",
+      "surnameText2": "Up to 20 characters for last name",
+      "mailbox": "*Email",
+      "mailboxText1": "Enter Email",
+      "mailboxText2": "Enter correct phone number",
+      "phone": "*Phone",
+      "phoneText1": "Enter phone number",
+      "phoneText2": "Enter correct phone number",
+      "details": "*Address",
+      "detailsText": "Enter full address",
+      "postal": "Postal Code",
+      "storage": "SAVE",
+      "deleteAddress": "DELETE ADDRESS",
+      "area": "Hong Kong (SAR) +852",
+      "country": "*Country/Region",
+      "province": "Province/State",
+      "city": "Region",
+      "country2": "Country",
+      "province2": "Select province/state",
+      "city2": "Region",
+      "pleaseChoose": "Select",
+      "toast1": "Deleted",
+      "toast2": "Added",
+      "countryText": "Select country/regional information",
+      "tips": "Prompts",
+      "text": "Address is not saved, leave now?",
+      "cancel": "CANCEL",
+      "course": "SUBMIT"
+    },
+    "doComment": {
+      "orderComment": "Order Comment",
+      "comment": "Review Now",
+      "shareYourFeeling": "Share your shopping experience",
+      "clear": "SUBMIT",
+      "singleProduct": "Single product",
+      "pairRing": "Couple Rings",
+      "defaultPairRing": "Selected couple rings on BDD Jewelry Mall",
+      "diy": "Customize",
+      "cannotComment": "Can't evaluate",
+      "cableTransfer": "Wire Transfer",
+      "commentSuccess": "Evaluation success",
+      "commentFail": "Evaluation failed"
+    },
+    "comment": {
+      "myComment": "Review",
+      "allComment": "View all",
+      "shrink": "Collapse",
+      "commentsReply": "Customer service reply",
+      "none": "None",
+      "singleProduct": "Single product",
+      "pairRing": "Couple Rings",
+      "defaultPairRing": "Selected couple rings on BDD Jewelry Mall",
+      "diy": "Customize"
+    },
+    "order": {
+      "back": "Back",
+      "myOrder": "Order",
+      "all": "All",
+      "waitingPay": "Payment",
+      "waitingSend": "Delivery",
+      "waitingReceive": "Receipt",
+      "waitingComment": "Review"
+    },
+    "orderDetail": {
+      "orderDetail": "Order Information",
+      "orderStatus": "Order status",
+      "orderNumber": "Order#",
+      "orderTime": "Order time",
+      "payType": "Payment method",
+      "payTime": "Payment time",
+      "logistics": "Logistics",
+      "checkLogistics": "View product location",
+      "logisticsNumber": "Waybill number",
+      "sendTime": "Delivery Time",
+      "sendTogether": "Deliver when all products are ready",
+      "shippingTime": "Delivery Time: 2-4 weeks",
+      "checkSendPolicy": "Check Delivery policy",
+      "voucherEmail": "After-Sales Voucher Email",
+      "mark": "Remarks",
+      "productsCount": "Item Total",
+      "offer": "Discount",
+      "freight": "Freight",
+      "taxes": "Taxes",
+      "insurance": "Insurance",
+      "transPreferFee": "Bank Wire Discount",
+      "orderCount": "Total",
+      "toPay": "CHECKOUT",
+      "cancelOrder": "CANCEL ORDER",
+      "submit": "SUBMIT",
+      "waitingPay": "Payment",
+      "waitingSend": "Delivery",
+      "waitingReceive": "Receipt",
+      "hadReceive": "Received",
+      "waitingComment": "Review",
+      "hadNotPay": "Payment",
+      "hadPay": "Paid",
+      "hadSend": "Shipped",
+      "hadFinish": "Completed",
+      "hadNotComment": "Review",
+      "hadComment": "Comment sent",
+      "returnApplication": "Return request",
+      "returning": "Return is underway",
+      "hadReturn": "Products returned",
+      "cancelTransaction": "Cancel order",
+      "singleProduct": "Single product",
+      "pairRing": "Couple Rings",
+      "defaultPairRing": "Selected couple rings on BDD Jewelry Mall",
+      "diy": "Customize",
+      "cableTransfer": "Wire Transfer",
+      "caveat": "Warning",
+      "cancel": "Cancel",
+      "clear": "SUBMIT",
+      "received": "Received",
+      "confirmCancellationOrder": "Cancel order",
+      "canceled": "Order cancelled",
+      "paytips": "WIRE TRANSFER GUIDE"
+    }
+  },
+  "custom-made": {
+    "chooseMade": "Setting",
+    "chooseRing": "Ring",
+    "chooseNecklace": "Necklace",
+    "chooseBracelet": "Bracelet",
+    "chooseDiamond": "Diamond",
+    "finish": "Complete",
+    "checkMade": "Check Your Customization",
+    "swiperTitle": "Design Visualiser",
+    "size": "Size",
+    "fineness": "Fineness",
+    "carat": "Carat",
+    "color": "Color",
+    "clarity": "Clarity",
+    "cut": "Cut",
+    "addCart": "ADD TO CART",
+    "addCartSuccess": "Added to cart",
+    "addCartFail": "Failed to add to cart"
+  },
+  "diamond": {},
+  "engagement": {
+    "ring-first": "ENGAGEMENT RINGS",
+    "diamond-first": "LOOSE DIAMONDS",
+    "sub-title": "BDD Co. Engagement Diamond Ring"
+  },
+  "forget": {
+    "basic": {
+      "email-null": "Enter email",
+      "email-error": "Enter correct email",
+      "code-null": "Enter verification code",
+      "code-error": "Enter correct verification code",
+      "password-null": "Enter password",
+      "password-not-same": "Entered passwords differ"
+    },
+    "index": {
+      "forget": "Forgot password?",
+      "email": "Email",
+      "email-error": "Enter correct email",
+      "next": "Next"
+    },
+    "new-password": {
+      "reset-password": "Reset password",
+      "input-new-password": "Enter new password",
+      "password-error": "Enter correct password",
+      "confirm-password": "Confirm new password",
+      "password-not-same": "Entered passwords differ",
+      "password-claim": "Password of 6-18 characters，Password consists of numbers or letters，Special characters are not allowed，Spaces and Chinese characters are not allowed",
+      "next": "Next"
+    },
+    "success": {
+      "reset-success": "Reset successfully",
+      "success-message": "Successful password reset. Log in with your new password. Wait for",
+      "replace-message": " seconds to jump to login page.",
+      "login": "Sign in now"
+    },
+    "verify-code": {
+      "forget": "Forgot password?",
+      "had-send-email": "We have sent you an email",
+      "check-it": "containing a verification code that you can reset your new password.",
+      "code": "Verification code",
+      "next": "Next"
+    }
+  },
+  "login": {
+    "email": {
+      "login": "Login",
+      "no-account": "No Account?  Register Here>",
+      "email": "Email",
+      "email-error": "Enter correct email",
+      "password": "Password",
+      "password-error": "Enter login password",
+      "login-now": "LOGIN",
+      "forget": "FORGOT PASSWORD?",
+      "slider-verify-first": "Complete verification to unlock",
+      "slider-verify": "Complete verification to unlock",
+      "input-password": "Enter login password",
+      "login-error": "Wrong account or password",
+      "login-success": "Logged in"
+    },
+    "index": {
+      "login": "Account Login",
+      "no-account": "No Account?  Register Here>",
+      "email-login": "Sign in with email",
+      "oauth-login": "OR",
+      "facebook-login": "Sign in with Facebook",
+      "google-login": "Sign in with Google"
+    }
+  },
+  "marriage-ring": {
+    "index": {
+      "wendding-rings": "WENDDING RINGS",
+      "recommend-pair-rings": "BDD Co. Select Wedding Rings",
+      "see-more": "MORE",
+      "for-women": "FOR WOMEN",
+      "lady-ring": "Women's Rings",
+      "more": "MORE",
+      "for-men": "FOR MEN",
+      "gentlemen-ring": "Men's Rings",
+      "marriage-ring": "Couple Rings"
+    }
+  },
+  "search": {
+    "index": {
+      "back": "Back",
+      "inputKeyword": "Keyword",
+      "inputKeywordPlease": "Please Keyword",
+      "search": "Search",
+      "hotRecommend": "Hot searches",
+      "noHotRecommend": "No hot searches",
+      "history": "Search history",
+      "noResult": "No search history",
+      "cleanHistory": "Reset search history"
+    },
+    "result": {
+      "back": "Back",
+      "inputKeyword": "Keyword",
+      "inputKeywordPlease": "Please Keyword",
+      "search": "Search",
+      "total": "A total of",
+      "goods": "products",
+      "suitability": "Match"
+    }
+  },
+  "comments": {
+    "allComments": "All reviews",
+    "back": "Back",
+    "fiveStarComments": "5-star review",
+    "checkAll": "View all",
+    "shrink": "Collapse",
+    "commentsReply": "Customer service reply"
+  },
+  "index": {
+    "diyTitle": "Design Your Own Engagement Ring",
+    "diySubTitle": "Design Your Own Engagement Ring",
+    "startFromRing": "Start From Ring Setting",
+    "startFromDiamond": "Start From Diamonds",
+    "syiwo": "Spark Your Imagination With Our",
+    "ig": "INSPIRATION GALLERY",
+    "fineJewelry": "FINE JEWELRY",
+    "recommend": "BDD Co. Select Jewelry Series",
+    "checkDetail": "View details",
+    "seeMore": "MORE",
+    "callUs": "Contact",
+    "store": "Store",
+    "storeName": "Hong Kong. Universal Trade Centre",
+    "address": "Address",
+    "addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "tel": "Phone",
+    "email": "E-mail",
+    "title": "BDD Jewelry Mall",
+    "bddRecommend": "BDD Co. Selected",
+    "diamond": "Diamond",
+    "diy": "Design Your Own",
+    "engagement": "Engagement Ring",
+    "find": "Find The Perfect",
+    "marriageRing": "Wedding Ring",
+    "buy": "Shop Fashion",
+    "accessories": "Jewelry"
+  },
+  "register": {
+    "oauthRegister": "Social Account Register",
+    "hadRegister": "Your Account",
+    "facebook": "Sign up with Facebook",
+    "google": "Sign up with Google",
+    "inputInfo": "Or fill out the registration form below",
+    "name": "First Name",
+    "inputName": "Enter first name",
+    "nameError": "Enter correct first name",
+    "surname": "Last Name",
+    "inputSurname": "Enter last name",
+    "surnameError": "Enter correct last name",
+    "email": "Email",
+    "inputEmail": "Enter email",
+    "emailError": "Enter correct email",
+    "inputUnder": "Enter the verification code sent to",
+    "theEmailCode": "Check the spam folder or click on send if you fail to receive the e-mail",
+    "code": "Verification Code",
+    "inputCode": "Enter verification code",
+    "codeError": "Enter correct verification code",
+    "password": "Set Account Password",
+    "passwordError": "Enter password of 6-18 characters",
+    "agree": "Registration represents your agreement and acceptance of the",
+    "bddClause": "BDD Terms and Conditions.",
+    "register": "REGISTER",
+    "registerSuccess": "Registered",
+    "tickTheBDDTerms": "Please read and agree to the BDD Terms & Conditions and Privacy Policy"
+  },
+  "site-switch": {
+    "chooseLanguageCoin": "choose language & currency",
+    "clear": "SUBMIT",
+    "ourShippingPolicy": "Delivery Policy",
+    "ourPayType": "Payment Methods"
+  },
+  "toast": {},
+  "components": {
+    "cart": {
+      "mustKnow": "Notes",
+      "mustKnowContent": "As each diamond is unique and our daily order quantity is substantial, for customers who have ordered our diamonds, we need to further confirm and ensure the availability of the diamonds. Your order will be retained for at most 48 business hours. Once the diamond is confirmed to be in stock, we will send you an e-mail notifying the date of shipment.",
+      "shippingInsuranceContent": "If you choose payment through bank wire transfer, once the diamond is confirmed to be in stock, we will provide wire transfer instruction. To ensure no delay in delivery, please make remittance as soon as you receive the wire transfer instruction. Please note that it usually takes 24 hours for payment to arrive at our bank. The product will be shipped after we confirm the receipt of payment.",
+      "iKnowIt": "I have read and understand",
+      "wireTransferMessage": "Please contact your bank to arrange Telegraphic Transfer/International Transfers. Please note that electronic transfer, electronic cheque, cheques and bank deposits are not Telegraphic Transfer. If you have any questions about Telegraphic Transfer, please contact your bank or email to service@bddco.com contact our customer service.",
+      "wireTransferMaterial": "Telegraphic Transfer required information",
+      "accountNumber": "Account number",
+      "payeeBank": "Beneficiary’s Bank",
+      "payeeBankAddress": "Beneficiary’s Bank Address",
+      "orderMessage": "Your order will retain for up to 48 business hours. Please remit payment as soon as possible in order for us to identify your payment and ensure that the orders can be shipped out on time. After you finish transferring the payments, please email your remittance details and numbers to service@bddco.com. We will confirm your payment once your transfer payment reaches to our bank. ",
+      "attention": "Please note that the transfer payments required 48 hours to reach our bank.",
+      "afterPay": "Once we have confirmed receipt of payment, we will send out an email to state out the date of shipment for the order."
+    },
+    "chooseEject": {
+      "clear": "SUBMIT",
+      "checkResult": "VIEW RESULTS",
+      "mustChoose": "Required"
+    },
+    "confirmBox": {
+      "clear": "SUBMIT"
+    },
+    "diamondProgress": {
+      "carat": "Carat",
+      "cleaness": "Clarity",
+      "color": "Color",
+      "cutting": "Cut",
+      "luster": "Polish",
+      "symmetry": "Symmetry",
+      "checkResult": "VIEW RESULTS"
+    },
+    "empty": {
+      "defaultMessage": "No related information",
+      "listMessage": "No related products",
+      "commentMessage": "No related comments",
+      "searchMessage": "No results",
+      "searchAgain": "search again",
+      "orderMessage": "No order information",
+      "toShopping": "CONTINUE",
+      "signalMessage": "Poor connection",
+      "refresh": "Refresh",
+      "couponMessage": "No coupons",
+      "addressMessage": "No address information",
+      "chooseDiamondContrast": "Choose diamonds to compare",
+      "cartMessage": "Your cart is empty now. Go and look for your favorites."
+    },
+    "footerBar": {
+      "custoService": "Customer Service",
+      "custoServiceTime": "Monday to Friday 9 am to 6 pm",
+      "callUs": "Tel：",
+      "emailUs": "Email",
+      "aboutBDD": "About BDD",
+      "BDDStory": "BDD Brand Story",
+      "diamondKnowledge": "Diamond Knowledge",
+      "payType": "Payment methods",
+      "qualityAndValue": "Quality & Value",
+      "aboutRefund": "Return & Refund Policy",
+      "findRingSize": "Find Out Your Ring Size",
+      "BDDPolicy": "BDD Policy",
+      "freeShipping": "Free Shipping Service",
+      "shippingPolicy": "Delivery Policy",
+      "internationalPolicy": "International Policy",
+      "privacyPolicy": "Privacy Policy",
+      "termsAndConditions": "Terms And Conditions",
+      "onlineStore": "Superior quality diamond online store",
+      "handicraftExpert": "Jewelry expert"
+    },
+    "leftMenu": {
+      "search": "Search",
+      "engagementRing": "ENGAGEMENT RINGS",
+      "designYourRing": "DESIGN DIAMOND RING",
+      "allCategory": "ALL CATEGORIES",
+      "marriageRing": "WEDDING RINGS",
+      "pairRing": "OUR COUPLE RINGS",
+      "ringForGentlemen": "MEN'S RINGS",
+      "ringForLady": "WOMEN'S RINGS",
+      "onlyDiamond": "DIAMONDS",
+      "accessories": "JEWELRY",
+      "knowledge": "KNOWLEDGE",
+      "callus": "Call Us",
+      "tel": "Tel",
+      "mail": "E-mail"
+    },
+    "noMoreData": {
+      "noMore": "No more"
+    },
+    "personal": {
+      "setBirthday": "Choose date of birth",
+      "chooseStartTime": "Please choose the start time first!",
+      "year": "Year",
+      "month": "Month",
+      "day": "Day",
+      "hour": "Hour",
+      "minute": "Minute",
+      "second": "Second",
+      "back": "Back",
+      "orderNum": "Order#",
+      "orderNumber": "Order Number",
+      "orderCount": "Total",
+      "cancelOrder": "Cancel Order",
+      "toPay": "Pay Now",
+      "confirmReceipt": "Confirm Receipt",
+      "toEvaluate": "Review Now",
+      "singleProduct": "Single product",
+      "pairRing": "Couple Rings",
+      "defaultPairRing": "Selected couple rings on BDD Jewelry Mall",
+      "diy": "Customize",
+      "unpaid": "Payment",
+      "paid": "Paid",
+      "shipped": "Shipped",
+      "completed": "Completed",
+      "noComment": "Review",
+      "commented": "Comment sent",
+      "returnApplication": "Return request",
+      "returning": "Return is underway",
+      "returned": "Products returned",
+      "cancelled": "Canceled",
+      "caveat": "Warning",
+      "cancel": "CANCEL",
+      "clear": "SUBMIT",
+      "received": "Received",
+      "confirmCancellationOrder": "Cancel Order",
+      "canceled": "Order cancelled",
+      "paytips": "Wire Transfer guide",
+      "text": "Make payment within 23 hours and 59 minutes or your order will be canceled ",
+      "tips": "Confirm to leave the checkout page ?"
+    },
+    "progressBar": {
+      "price": "Price",
+      "checkResult": "VIEW RESULTS"
+    },
+    "requesting": {
+      "requestingMoreData": "Loading more data..."
+    },
+    "sendEmailCode": {
+      "sendCode": "Verification",
+      "inputEmail": "Enter email",
+      "pleaseWait": "Please wait，try it later",
+      "error": "Error",
+      "sendCodeError": "Failed to send verification code",
+      "hadSend": "Sent"
+    },
+    "sliderVerify": {
+      "verifySuccess": "Verified!",
+      "verifyIt": "Slide right to verify"
+    },
+    "swiperTap": {
+      "determine": "SUBMIT"
+    },
+    "whiteBoard": {
+      "caratAnalysis": "Carat refers to the weight of diamond, which is proportional to its size. Use the slider or enter a value to set the range you are interested.",
+      "tenTimesMagnification": "10X magnification",
+      "round": "Round",
+      "roundDesc": "The popular round diamond has 58 facets to radiate its brilliance, which has been the most splendid diamond among all diamond cuts.",
+      "oval": "Oval",
+      "ovalDesc": "The oval cut ranges from the egg shape to the long shape or narrow shape. The oval cut can also make the diamond look heavier than it actually is.",
+      "princessSquare": "Princess",
+      "princessSquareDesc": "The princess cut is a common diamond cut. The four corners of the princess cut gather colors. So you should choose the princess cut of a high color grade.",
+      "octagonalTrapezoid": "Emerald",
+      "octagonalTrapezoidDesc": "The emerald cut adopts the step cut with rectangular facets. The diamond with an emerald cut is less brilliant, so clarity is more important in choosing diamonds of this kind.",
+      "heartShaped": "Heart",
+      "heartShapedDesc": "The heart shape has brilliant facets or 58 rhombus and triangular facets to give the fullest play to the diamond’s brilliance.",
+      "marquise": " Marquise",
+      "marquiseDesc": "The marquise cut has pointed ends, but its facets are brilliant. It can increase the diamond size with the same carat, and make the diamond look larger than it actually is.",
+      "pincushion": "Cushion",
+      "pincushionDesc": "The cushion cut is usually rounded rectangle. To choose a diamond with a cushion cut, the color grade is important.",
+      "dropShape": "Pear Shape",
+      "dropShapeDesc": "The pear shape has one sharp end and a rounded end. Generally, the sharp end should be worn facing the wearer’s heart.",
+      "laserSquare": "Asscher",
+      "laserSquareDesc": "The Asscher cut diamond is similar to the emerald cut, but it is square. The asscher diamond uses the step cut to highlight its diamond clarity.",
+      "octagonalLaser": "Radiant",
+      "octagonalLaserDesc": "The radiant cut is square or rectangular, and its four corners are inclined. The radiant cut can also make the diamond look larger than it actually is.",
+      "chooseLanguageCoin": "Choose Language & Currency",
+      "clear": "SUBMIT",
+      "sizeTop": "All rings on BDD Mall are in US units, Contact customer service for the units of measurement, such as SI or Chinese units of measurement if you are from other regions.",
+      "sizeBot": "How to measure my ring size?",
+      "expressShit": "Shipping is charged according to your delivery address.",
+      "expressShits": "Click to view",
+      "expressLink": "free delivery service",
+      "texShit": "Taxes are levied according to your delivery address.",
+      "texShits": "Click to view",
+      "texLink": "International policy",
+      "safeShit": "Insurance premium is charged based on your delivery address.",
+      "gay1": "1. The redemption condition of the discount code is only applicable to the purchase of designated products. After redemption, the amount at discount is shown when checking out.",
+      "gay2": "2. The discount code cannot be used together with any other discounts or discount code and cannot be used in previous orders;",
+      "gay3": "3. The discount conditions and terms can be changed at any time without prior notice and may be restricted by other limitations."
+    },
+    "tipMessage": {
+      "tipMain": "Get Free Necklace For Any Engagement Rings Purchase!",
+      "valued": "Valued At",
+      "price": "680.00"
+    }
+  },
+  "detailCommons": {
+    "include": "This Product Includes",
+    "chooseColor": "Color",
+    "chooseSize": "Size",
+    "us-version": "US",
+    "cmw": "You know the most suitable Product to express your love. Select from our series, like diamonds and styles to create your unique work.",
+    "addCart": "ADD TO CART",
+    "noTotalStock": "NO STOCK",
+    "notInSale": "SOLD OUT",
+    "startDJ": "START CUSTOMIZING",
+    "sureCheck": "CONFIRM",
+    "goodsDetail": "Product Details",
+    "goods": "Product ",
+    "clientSay": "Reviews",
+    "allComments": "All Reviews",
+    "noComments": "No Reviews",
+    "fineness": "Color",
+    "specificationToast": "Please choose size",
+    "stArrContent": "Select",
+    "chooseRingSizeToast": "Please choose size",
+    "addCartSuccess": "Added to cart",
+    "addCartFail": "Failed to add to cart",
+    "addWishFail": "Failed to add to wish list",
+    "addCompareFail": "Failed to add diamond to compare",
+    "removeWishFail": "Failed to remove wish list",
+    "removeCompareFail": "Failed to remove diamond from comparison",
+    "addWishSuccess": "Added to wish list",
+    "removeWishSuccess": "remove wish list",
+    "addComparedSuccess": "Added to diamond comparison",
+    "removeComparedSuccess": "remove diamond from comparison",
+    "pairRing": "Couple Rings",
+    "diamondOpen360": "on",
+    "diamondClose360": "off",
+    "addTo": "ADD TO",
+    "addToRingTuo": "ADD TO RING",
+    "now4c": "Current Selected Diamond 4C",
+    "getMore4c": "Get To Know 4C",
+    "diamondWight": "CARAT",
+    "carat": "Carat",
+    "caratDiamond": "Carat Diamond",
+    "remember": "Remember that diamond price increases exponentially with increase in carat as heavier diamonds are rarer",
+    "color": "COLOR",
+    "cut": "CUT",
+    "clarity": "CLARITY",
+    "tenTimes": "10X magnification",
+    "addToRing": "ADD TO RING",
+    "addToNecklace": "ADD TO NECKIACE",
+    "addToBracelet": "ADD TO BRACELET",
+    "lady": "Women",
+    "gentlemen": "Men",
+    "general": "General model"
+  },
+  "listCommons": {
+    "sliders": [
+      "Necklace",
+      "Pendant",
+      "Ear stud",
+      "Earring",
+      "Bracelet",
+      "Bangle"
+    ],
+    "style": "Style",
+    "fineness": "Color",
+    "total": "Results",
+    "goods": "",
+    "price": "Price",
+    "accessories": "Accessories",
+    "all": "All",
+    "marriage-ring": "wedding ring",
+    "engagement-ring": "engagement ring",
+    "stArrContent": "Select",
+    "lady": "Women",
+    "gentlemen": "Men",
+    "general": "General model",
+    "specificationToast": "Please choose specifications",
+    "bddOnlyDiamond": "BDD Loose Diamond Series",
+    "ringList": "Rings List",
+    "shape": "Shape",
+    "carat": "Carat",
+    "color": "Color",
+    "clarity": "Clarity",
+    "cut": "Cut",
+    "luster": "Polish",
+    "symmetry": "Symmetry"
+  },
+  "help-pages": {
+    "brandStory": {
+      "header": "BDD BrandStory",
+      "found": "We are committed to online shopping platform to offer high-quality GIA-graded diamond jewelry at a reasonable price as well as diamonds and wedding rings for flexible match. The fashionable jewelries are also available with BDD.",
+      "prove": "It witnesses the important moment of proposal and engagement.",
+      "with": "It stays you every day.",
+      "moment": "Every brilliance and shine reflects the true self from deep down.A well-chosen diamond will turn every moment of life into an unforgettable one.",
+      "diffent": "Do not want to have the mediocre design or buy branded products with an unreasonably high price for the brand.",
+      "choose": "How should you choose the most desirable diamond ring?",
+      "understand": "Perhaps, BDD knows the diamond that suits you best.",
+      "right": "But you are still free to decide how to match the ring and the diamond.",
+      "dream": "You use it to interpret love, and it helps you brighten your life. It reflects reality and dreams, whether soft or strong.",
+      "summary": "BDD for i-Smart you – Keep dream in heart and pursue it forever.",
+      "slogan": "Dare to Dream",
+      "advantages": "4 Major Advantages of BDD",
+      "show": [
+        {
+          "src": 4,
+          "tip": "An Expert In Diamond",
+          "con": "Diamond guidance and instruction"
+        },
+        {
+          "src": 5,
+          "tip": "High Price/Performance Ratio",
+          "con": "Best quality at the most reasonable price"
+        },
+        {
+          "src": 6,
+          "tip": "Quality Assurance",
+          "con": "Skillful process and GIA grading"
+        },
+        {
+          "src": 7,
+          "tip": "Match Customization",
+          "con": "Express your personality in life"
+        }
+      ]
+    },
+    "knowledge": {
+      "header": "Knowledge",
+      "four": "4C Of Diamand",
+      "desc": "This concise guide explains the diamond 4C (carat weight, color, clarity, cut), which is the most important thing to know when buying a diamond.",
+      "more": "FIND MORE DIAMANDS",
+      "show": [
+        {
+          "src": "knowledge-kl",
+          "tip": "Carat",
+          "con": "The word Carat refers to the total weight of a diamond, not its size.",
+          "href": "diamondCarat"
+        },
+        {
+          "src": "knowledge-ys",
+          "tip": "Color",
+          "con": "The second most important element in 4C is Color, or the degree of colorlessness.The more colorless, the higher the grade.",
+          "href": "diamondColor"
+        },
+        {
+          "src": "knowledge-jd",
+          "tip": "Clarity",
+          "con": "It is usually the least important part of the 4C, because minor flaws are usually not obvious.",
+          "href": "diamondCleanliness"
+        },
+        {
+          "src": "knowledge-xz",
+          "tip": "Shape",
+          "con": "Different diamond shapes have different properties that affect price and quality levels.",
+          "href": "diamondShape"
+        },
+        {
+          "src": "knowledge-qg",
+          "tip": "Cut",
+          "con": "Among the 4cs, Cut is the most important ring, which can have a significant impact on how well a diamond shines.",
+          "href": "diamondCut"
+        },
+        {
+          "src": "knowledge-rz",
+          "tip": "Certification",
+          "con": "Every BDD diamond provides authoritative reports.",
+          "href": "proof"
+        }
+      ],
+      "custom": "SELECT DIAMOND TO START CUSTOMIZATION"
+    },
+    "diamondCarat": {
+      "header": "Diamond Carat",
+      "title": "Diamond Carat",
+      "define": "Carat and Point are the measure of a diamond’s weight, but carat weight may not accurately reflect the size of diamonds.The top of a diamond in a ring is often used to evaluate its size, because we view a diamond from the top when it set into a ring.To understand diamond size, in addition to the carat weight, the diameter of diamond crown (top) and the diamond cut grade should also be considered.",
+      "choose": "Key Points",
+      "rate": "We view a diamond from the top when it set into a ring, so this part is very important.Diamond with well-cut has the proper proportions which can reflect the maximum amount of light (or sparkle) out of the top, thus, the reflected light from the top makes it appear larger. In addition, for the poor cut diamond, much of the weight may be “concentrated” in the base of the diamond, making the diamond appear smaller than its actual carat weight would suggest. Thus, a diamond with lower carat weight but higher cut grade may appear larger than a diamond with larger carat weight but poor cut grade.",
+      "desc": "Diamond carat weight may not be able to fully and accurately reflect the size of the diamond",
+      "tips": "References Before You Buy",
+      "remind": "The measurement of the budget before buying diamonds is very important. Here are some suggestions for you to choose the diamond:",
+      "tip1": "When choosing a diamond carat weight, consider the size of the wearer's finger, the size of the setting, and your budget.",
+      "tip2": "Diamond appears larger on smaller the finger. A 1 carat diamond looks much larger on a size 4 finger than a size 9.",
+      "tip3": "If you have a limited budget, and a larger carat weight is important to you, consider a diamond with an I or J color, SI1-SI2 clarity and good cut grade.",
+      "tip4": "We view a diamond from the top when it set into a ring, so this part is very important.",
+      "view": "VIEW"
+    },
+    "diamondColor": {
+      "header": "Diamond Color",
+      "title": "Diamond Color",
+      "define": "Diamond color refers to the degree of its colorless.Diamond color grade ranges from D to Z, D is the highest color grade, while Z is the lowest.BDD Co. only provides diamonds with a color grade of J or higher.",
+      "rate": "BDD Co. only sells the finest diamonds with color grades D to J. Diamonds with color grade D-J are colorless or near-colorless, with color that is usually barely noticeable to the unaided eye.",
+      "tips": "References Before You Buy",
+      "tip1": "• The human eye will normally detect light first, then color. Therefore, color is generally considered as the second-most important characteristic when buying a diamond.",
+      "tip2": "• The larger the diamond, the color becomes more noticeable. Especially, diamond with two carats or greater.",
+      "tip3": "• There is no big visible difference between diamonds of one color grade, for example, D to E or F to G, is difficult to detect the different with the unaided eye. But, the cost savings can be significant.",
+      "tip4": "• The type of metal in which a diamond is set can complement its color. Platinum and white gold best complement diamonds with color grade D to H, while I and J color grade diamonds can be set with yellow gold."
+    },
+    "diamondCleanliness": {
+      "header": "Diamond Clarity",
+      "title": "Diamond Clarity",
+      "define": "Diamond clarity refers to the extent it has no inclusions and surface features,Almost all diamonds have different number and size of the tiny imperfections.BDD Co. only carries diamonds of SI2 grade clarity or above.Almost every single natural diamond has a variety of tiny and natural internal characteristics called “inclusions” and external characteristics called “blemishes.”",
+      "choose": "Diamond Clarity Grade",
+      "rate": "Under 10x magnification, evaluating diamond clarity involves determining the size, number, position, nature, relief of these characteristics and the extent of the impact on the overall appearance of the diamond. These imperfections can affect the amount of light reflected and refracted by the diamond, thus reducing the brilliance, scintillation and fire. Therefore, Diamond clarity is also an important characteristic. The fewer and smaller inclusions and blemishes are identified, the purer and higher clarity the diamond. In general, the higher diamond clarity grade, the more valuable the diamond.",
+      "times": "Under 10x magnification",
+      "tips": "References Before You Buy",
+      "tip1": "• Most imperfections are too small to be seen by the unaided eye.",
+      "tip2": "• Excellent value for the “eye-clean” diamonds, which have no imperfections visible to the unaided eye through the crown. But they are much less expensive than FL or IF diamonds, which are extremely rare and so the prices are relatively higher.",
+      "tip3": "• As the size of the diamond increases, the size of the facets also increases and becomes clearer, which means the importance of purchasing diamonds with higher clarity grade increases."
+    },
+    "diamondShape": {
+      "header": "Diamond Shape",
+      "list": [
+        {
+          "src": 1,
+          "tip": "Round",
+          "href": "round"
+        },
+        {
+          "src": 2,
+          "tip": "Princess",
+          "href": "princess"
+        },
+        {
+          "src": 3,
+          "tip": "Emerald",
+          "href": "emerald"
+        },
+        {
+          "src": 4,
+          "tip": "Cushion",
+          "href": "cushion"
+        },
+        {
+          "src": 5,
+          "tip": "Oval",
+          "href": "oval"
+        },
+        {
+          "src": 6,
+          "tip": "Marquise",
+          "href": "marquise"
+        },
+        {
+          "src": 7,
+          "tip": "Heart",
+          "href": "heart"
+        },
+        {
+          "src": 8,
+          "tip": "Asscher",
+          "href": "asscher"
+        },
+        {
+          "src": 9,
+          "tip": "Pear",
+          "href": "pear"
+        },
+        {
+          "src": 10,
+          "tip": "Radiant",
+          "href": "radiant"
+        }
+      ],
+      "show": [
+        {
+          "src": "round",
+          "tip": "Round",
+          "con": "The round-cut diamond has been, so far, the most popular and most widely studied diamond shape. In the past 100 years, diamond cutters make use of the advanced theories of light behavior and precise mathematical calculations to optimize the fire and sparkle of the round diamond. Apart from its popularity among consumers and academic circles, the round diamond cut demonstrates a high flexibility in balancing cut, color and clarity, and gives you the desired fire and brilliance. To maximize the brilliance of the traditional round diamond, we can choose one from the two highest cut grades, either ideal or very good, and then choose the fire and degree of symmetry by the grade of ideal, excellent or very good. If you want to choose the round diamond with excellent sparkle, please consider diamonds of BDD Co.."
+        },
+        {
+          "src": "princess",
+          "tip": "Princess",
+          "con": "This has been the most popular non-round diamond. Its charming sparkle and unique cut makes it a popular choice of engagement rings. The princess-cut diamond has pointed corners and is traditionally square in shape. In choosing the color grade, we realize that, in spite of the attractive price of the non-round diamond of J color, color may be slightly visible in its corners. Besides, the princess-cut diamonds can vary greatly in how square or rectangular they are."
+        },
+        {
+          "src": "emerald",
+          "tip": "Emerald",
+          "con": "What makes the emerald diamond shape different is its pavilion, which is cut with rectangular facets to create a unique optical appearance. The table of the diamond is relatively large and open, which can highlight the diamond clarity. If you choose the diamond featuring an emerald cut and a low clarity grade, such as SI (Slightly Included), please check the clarity plot on the diamond certificate. Besides, the  emerald-cut diamonds can vary greatly in how rectangular they are. If you like the diamond with an emerald cut and a square outline, you can take a look at the laser-cut square diamond."
+        },
+        {
+          "src": "cushion",
+          "tip": "Cushion",
+          "con": "The unique shape has been popular for more than one century. The cushion-cut diamond has rounded corners, large facets to increase the diamond’s brilliance. These larger facets can highlight the diamond’s clarity. If you choose the SI grade, please check the clarity plot on the certificate. The cushion-cut diamond has different shapes ranging from square to rectangular. If you want to find out your desired cushion-cut size, please check the ratio of the length to the width in the detail page of every type of diamond or in our interactive diamond search. The ratio of the length to the width decides the diamond outline, which is the appearance of the diamond viewed from the top."
+        },
+        {
+          "src": "oval",
+          "tip": "Oval",
+          "con": "The oval diamond has a beautiful sparkle, which is similar to that of the round diamond. The oval diamond is also very popular, because its length can length can accentuate long, slender fingers. If you want to find out your desired oval size, please check the ratio of the length to the width in the detail page of every type of diamond or in our interactive diamond search. The ratio of the length to the width decides the diamond outline, which is the appearance of the diamond viewed from the top."
+        },
+        {
+          "src": "marquise",
+          "tip": "Marquise",
+          "con": "The marquise diamond shape can maximize the carat weight so that the diamond will appear larger in appearance. Set the bright diamond with the round or pear-shaped side stones to look more beautiful and elegant. The length of the marquise diamond makes fingers appear long and slender. If you want to find out your desired marquise size, please check the ratio of the length to the width in the detail page of every type of diamond or in our interactive diamond search. The ratio of the length to the width decides the diamond outline, which is the appearance of the diamond viewed from the top."
+        },
+        {
+          "src": "heart",
+          "tip": "Heart",
+          "con": "Heart is the best symbol of love. The heart-shaped diamond is unique, turning it into a unique choice of diamonds among different types of diamond. In choosing the color grade, we should consider that in the J-color heart-shaped diamond, though attractive in price, color may be slightly visible in its corners. If you want to find out your desired oval size, please check the ratio of the length to the width in the detail page of every type of diamond or in our interactive diamond search. The ratio of the length to the width decides the diamond outline, which is the appearance of the diamond viewed from the top."
+        },
+        {
+          "src": "asscher",
+          "tip": "Asscher",
+          "con": "The Asscher-cut diamond, which is beautiful and unique, is similar to the emerald diamond in cut. The only difference is that the former is square. Besides, the Asscher-cut diamond shape has a pavilion that is cut with rectangular facets in the same style as the emerald-cut. This shape can highlight the diamond clarity, so if you choose the clarity grade of SI (Slightly Included), please read the clarity plot on the diamond certificate. In choosing the color grade, you should keep in mind that the J-color non-round diamond, though attractive in price, might have slight color in its corners."
+        },
+        {
+          "src": "pear",
+          "tip": "Pear",
+          "con": "The bright diamond has a tapered end and a rounded end. So it is also known for its tear drop shape. The unique shape of the pear turns this diamond into a popular choice of diamond among different types of diamond. If you choose the elongated pear shape, the diamond length creates a subtle slimming effect on the fingers."
+        },
+        {
+          "src": "radiant",
+          "tip": "Radiant",
+          "con": "The well-trimmed corner is the signature of radiant cut diamonds. The radiant cut has become a popular and versatile choice of jewelry. The radiant cut set with the baguette or round side stones looks equally charming. The radiant-cut diamond differs significantly in degree of rectangularity. If you want to find out your desired radiant cut size, please check the ratio of the length to the width in the detail page of every type of diamond or in our interactive diamond search. The ratio of the length to the width decides the diamond outline, which is the appearance of the diamond viewed from the top."
+        }
+      ]
+    },
+    "diamondCut": {
+      "header": "Diamond Cut",
+      "title": "Diamond Cut",
+      "define": "Diamond cut determines the degree of sparkle.The human eye normally detects sparkle (light performance) first. This is why diamond cut is essential for the appearance and value of a diamond, and is generally considered to be the most important characteristic.It affects the overall appearance of diamonds.",
+      "choose": "Cut Grade",
+      "rate": "According to GIA’s professional evaluation, cut grades range from 'Excellent' to 'Poor.' An overall cut grade for a diamond includes the weight ratio, measurement, facet angles, as well as the diamond’s brightness, fire, scintillation, polish and symmetry.",
+      "tips": "References Before You Buy",
+      "tip1": "• The sparkle of a well-cut diamond can make the diamond appear bigger than the actual size of the carat weight.",
+      "tip2": "• Shape and cut are different, Shape is a diamond’s form, such as round or oval; cut is a grade that refers to the performance of a diamond’s light return, which we generally known as sparkle.",
+      "tip3": "• Diamond cut is important to the overall beauty, BDD Co. recommend purchasing the highest cut grade within your budget.",
+      "tip4": "• The highest cut grade diamonds cost more and they are rarer, because the skill and experience needed by the diamond cutter and far more time is required to produce such a beautiful well-cut stone.",
+      "tip5": "• To have both of the beauty and value of diamonds within your budget, Good or Very Good cut grade is a good choice."
+    },
+    "proof": {
+      "header": "Diamond Certification",
+      "title": "The Importance Of Diamond Certification",
+      "define": "Before purchasing a diamond, customers should review the certificate as a proof that the diamond has gone through a professional and impartial examination.",
+      "choose": "Diamond Certificate",
+      "rate": "A diamond certificate is a certificate of authenticity, which is issued after a team of gemologists completing the evaluation of the diamond. The diamond is measured, evaluated and scrutinized by trained eyes, a jeweler’s loupe, a microscope, and other professional tools. A completed Diamond Grading Report contains scientifically determined information on diamond shape, clarity, color, cut, carat weight, proportions and finish.",
+      "characteristic": "BDD Co. Diamonds Are Certified",
+      "report": "Every loose diamond sold by BDD Co. has been analyzed and graded by the Gemological Institute of America (GIA), and comes with the appraisal report 'Diamond Grading Report' (1 carat or more) or characteristics summary report 'Diamond Dossier' (less than 1 carat). GIA created the first, and now globally accepted standard for describing diamonds: Cut, Color, Clarity, and Carat Weight. The Diamond 4Cs is the most critical features for diamond identification, valuation and pricing. GIA is the world’s most credible and recognized diamond grading laboratory which is also recognized as the original and unrivaled source for accuracy and integrity in diamond grading. Each report is not only the proof of the natural diamond but also the guarantee of diamonds’ quality, beauty and value; it is the trading standards for the world’s diamond dealers, and the most widely recognized diamond report in the industry.",
+      "certificate": "View Diamond Certificates Before Purchasing",
+      "remind": "You can view the diamond certificates on our BDD Co. website before purchasing any certified diamonds; we provide basically three kinds of grading reports and documents:",
+      "gia1": "GIA Diamond Grading Report",
+      "gia2": "GIA Diamond Dossier®",
+      "gia3": "BDD Co. Appraisal",
+      "mail1": "If you are interested in a diamond and a certificate is not available for viewing on the site, simply contact us at"
+    },
+    "paymentMethod": {
+      "header": "Payment Methods",
+      "advice": "BDD Co. suggests clients using the following currencies as main trading currencies at www.bddco.com:",
+      "remind": "Australian Dollar (AUD), Canadian Dollar (CAD), Czech Koruna (CZK), Danish Kroner (DKK), Euro (EUR), Great British Pound (GBP), Hong Kong Dollar (HKD), Hungarian Forint (HUF), Israeli New Shekel (ILS), Japanese Yen (JPY), Mexican Peso (MXN), New Taiwan Dollar (TWD), New Zealand Dollar (NZD), Norwegian Krone (NOK), Philippine Peso (PHP), Polish Zloty (PLN), Renminbi (RMB), Russian Ruble (RUB), Singapore Dollar (SGD), Swedish Krona (SEK), Swiss Franc (CHF), Thai Baht (THB), United States Dollar (USD).",
+      "protect": "In order to create a safe online shopping environment for clients. BDD Co. dedicates in enhancing the website security and co-operates with PayPal to protect clients' personal information and bank account data. All the transactions at bddco.com will be processed through PayPal.",
+      "more": "For more information about PayPal, please click",
+      "here": "here",
+      "payment": " The Method Of Payment",
+      "paypal": "PayPal：",
+      "thePaypal": "If clients have a PayPal account. Client can process the payment through PayPal account.",
+      "creditcard": "Credit Card：",
+      "theCreditcard": "Clients can also make the payment through Credit Cards (e.g. Visa, MasterCard, American Express, Discover, Diners Club or JCB etc). Our website is receiving all the Credit Cards payments through PayPal.",
+      "remittance": "Bank Wire/International Money Transfer (IMT)/Telegraphic Transfer (TT)/Cash Deposit in Bank：",
+      "theRemittance": " If clients do not have PayPal accounts or Credit Cards, clients can use Bank Wire/Money Transfer as payment methods, which clients will have 1.5% off discount.",
+      "tip1": "Bank Wire/Money Transfer may take three business days for transferring and receiving the payment.",
+      "tip2": "The discount of choosing Bank Wire/Money Transfer method is calculated before the insurance fee and the import duty/tax charge.",
+      "tip3": "Most banks will charge the processing/admin fee of Bank Wire/Money Transfer.",
+      "unionpay": "Union Pay：",
+      "theUnionpay": "Clients are also able to use Union Pay (which must be issued by the bank in mainland China) to make the payment.",
+      "about": "About PayPal",
+      "con2": "In order to enhance customers' shopping experience at our website, BDD Co. has built up a partnership with PayPal to provide a more reliable and secure way in making payment.",
+      "con3": "BDD Co. having a partnership with PayPal providing customers:",
+      "pro1": "Flexibility: Making payment from different funding source (e.g. Balance of PayPal A/C, Credit Card or bank account)",
+      "pro2": "Privacy: Making payment without providing financial information.",
+      "pro3": "Security: PayPal and BDD Co. are committed to protecting your account from unauthorized transactions and ensuring the benefit and safety of your account, which you can be assured shopping and trading at our website.",
+      "know": "If you want to know more about PayPal, please visit: ",
+      "use": "Using PayPal",
+      "check": "When you process the payment after confirming your billing address and delivery address, the website will link you to a payment page of PayPal. You can either use Credit Card or PayPal account to make the payment. When you finish your payment, you will be transferred back to BDD Co. website to complete the buying processes. After the processes are finished, you will receive a confirmation email from BDD Co. If you have any questions, please send email to"
+    },
+    "qualityValue": {
+      "header": "Quality & Value",
+      "remind": "BDD Co. is committed to providing customers with the finest quality loose diamonds and jewelry, and adheres to provide customers exceptional quality choices and extraordinary value. Our jewelry pieces are crafted, selected and inspected against high quality standards, so that the customers can buy with peace of mind. Customers can select according to their needs, preferences and budget.",
+      "best": "Finest Diamond Quality",
+      "rate": "As online diamond retailer, BDD Co. pre-screened superior quality loose diamonds. Its cutting, clarity and color are rated according to a standardized international grading scale. Every single loose diamond comes with a grading report and laser inscriptions issued by the Gemological Institute of America (GIA). GIA is the largest, most respected nonprofit source of gemological knowledge in the world; it is recognized as the original and unrivaled source for accuracy and integrity in diamond grading. ",
+      "tip1": "Diamond Jewelry",
+      "con1": "For reasons of quality assurance, all the diamonds set in our jewelry (including the smallest diamonds) meet BDD Co. strict minimum quality standards. Each diamond is colorless to near-colorless (D-J grade color) with exceptional clarity (FL-SI2 grade clarity).",
+      "tip2": "Platinum Jewelry",
+      "con2": "Platinum is enduring, strong, high in purity and corrosion resistance and not easily oxidized precious metals; it represents eternal love. Also, its natural white platinum metallic luster brings out the brilliance and elegance of diamonds. Therefore, so many people choose it for engagement and wedding rings. All of our platinum is 95% pure.",
+      "tip3": "Gold Jewelry",
+      "con3": "Gold is a popular precious metal. Our rings and jewelry have several colors and alloys including both 18k and 14k yellow, white and rose gold. Our range of gold rings and jewelry will fit customers' different needs and budgets.",
+      "tip4": "Silver Jewelry",
+      "con4": "All of our silver pieces are 92.5% alloy sterling silver. This alloy has the desired metallic luster, brightness and hardness, and it is the best combination of fashion, exquisite and durability.",
+      "more": "To know more, please refer to",
+      "link": "Knowledge"
+    },
+    "returnedGoods": {
+      "header": "Return & Refund Policy",
+      "tit1": "7-Day Money Back Guarantee",
+      "con1": "You are able to return or exchange the product for any reasons within 7 days from when it was received, we are happy to arrange a replacement or full refund (not including the shipping insurance premium, tax and shipping fee) in order to ensure that every customer is satisfied.",
+      "con2": "Every customer purchased from BDD Co. will enjoy a 7-day right of return. Customers will only need to pay for the return shipping and insurance fee. Please note that the purchased products must remain original purchase condition, also include all the product documents, and be shipped within 7 days to qualify for return. For orders shipping to China, 7-day will start from when the customers receive the products, and 20% reservation fee is non-refundable. To get a return authorization on orders, please follow the steps below.",
+      "tit2": "Before Accepting The Shipment",
+      "con3": "All of your orders we ship are fully insured. It is important that if the package or product delivered to you arrives damaged or tampered, please refuse the shipment, take pictures for record and email us immediately at service@bddco.com. For damaged or missing products, please keep all the packaging materials and articles during the waiting process. Claims for damaged or lost products must be reported within 5 days after receipt the parcel. BDD Co. will not be responsible for lost or damaged returned shipments.",
+      "tit3": "International Returns",
+      "con4": "If any additional costs or charges arise during the process of returning the products, BDD Co. will not be responsible for the costs or charges. BDD Co. reserves the right to charge you for any fees we incur at the time of package receipt. To avoid additional charges, we recommend sending your return via our preferred insured FedEx carrier. For your convenience and at your discretion, we can assist you to purchase the insurance at a discounted rate by shipping with FedEx International Priority® service.",
+      "tit4": "Shipping Charges",
+      "con5": "In terms of return shipping fee, BDD Co. will not be responsible for the unauthorized expenses. Therefore, please be informed that Do Not ship returns C.O.D (Cash on Delivery). Please retain all shipping materials for FedEx pick up and/or inspection.",
+      "con6": "If we make a request of products recall. Depending on the situation, we may be responsible for partially or fully return shipping expenses at our discretion. However, we will not be responsible for the additional cost arising out of the unauthorized delivery services.",
+      "con7": "To Prepare Returning The Products For An Exchange Or Refund：",
+      "con8": "1.For all returns, please email us at service@bddco.com prior to returning the products. You need to provide your BDD Co. Order# and return code (the return code will be sent to you after we achieve mutual consent about the return issues). Please be informed that the products should be packed carefully and securely in its original packaging along with all the documents relating to the products and purchase full insurance for the products. If you cannot achieve the above requirements, return application will not be processed.",
+      "con9": "2.If your product was delivered with a diamond certificate and that certificate is not returned, you will have to pay a diamond certificate replacement fee of USD250 (or equivalent amount in other currencies).",
+      "con10": "During the return process, we recommend that you pack your products carefully and securely in its original packaging materials and purchase a full insurance for the products. We are not responsible for lost or stolen articles. Therefore, it is essential to purchase full insurances for the products. Customers will need to purchase full insurances for the products by themselves or contact us for insurance purchase assistance. For safety reasons, do not write 'BDD Co.', 'Diamond', 'Gold' or 'Jewelry' anywhere on the outside of the box.",
+      "tit5": "After BDD Co. Received Your Return",
+      "con11": "Once the parcel arrives in our hands, we will send you a confirmation email and will conduct the return process during Monday to Friday.",
+      "con12": "Your returned products will be sent to our jewelry expert for a comprehensive examination, which including a series of quality inspection to ensure that the products did not suffer any damage or modification (Please be informed that the jewelry expert is not BDD Co. immediate staff). Once we found the products are damaged or has been modified, the return application will be considered invalid. If there are any questions regarding your return, we will contact you. In contrast, once we found the products are completely fine in every aspect, your return will be fully processed and you will receive a return (exchange/refund) confirmation email.",
+      "con13": "For products exchange, if you have already received the return confirmation email and are expecting a return shipment, you will receive a shipping confirmation the day of the outbound shipment.",
+      "tit6": "Reward Points Returns",
+      "con14": "If you used reward points in purchasing the products, after your returned products have been recognized by the quality assurance department, we will preferentially return the number of reward points you used back into your BDD Co. member account in 1-2 business days. If you purchased more than one product and you decided to keep some of those products. In this case, reward points cannot be used on the products you decided to keep, the reward points you have used will be recalculated and preferentially returned to your BDD Co. member account at the day of returning reward points.",
+      "tit7": "Change or Cancel An Order",
+      "con15": "If you would like to change or cancel an order, please email us at",
+      "con16": "We will check the progress of the order transport and see whether it is possible to accommodate order changes before the products have been shipped. Some changes may increase the preparation time and result in a shipping delay. We cannot accommodate changes or cancellations on special request orders and/or the orders that have already been shipped. If your parcel has already been shipped, please contact us to carry on the return arrangement in accordance with the return policy after you received the parcel.",
+      "tip1": "In case of any dispute, BDD Co. reserves the right of final decision."
+    },
+    "sizeGuide": {
+      "header": "Find Out Your Ring Size",
+      "define": "BDD Co. realizes that you may want to know the ring size of a particular finger. Therefore, we provide a free printable ring size guide which including a ring size ruler, a ring size comparative photograph and an international ring size comparison chart to help you find out the ring size. Before you print, please download the PDF below and do not open it through any browsers, and ensure that the setting “Page Sizing & Handling” is set to “Actual size” or “None” on your print dialog box.",
+      "guide": "Ring Size Guide",
+      "cnPage": "Chinese Version",
+      "enPage": "English Version",
+      "view": "VIEW",
+      "measure": "Measurement Of Your Finger’s Size",
+      "tip1": "For a comfortably fit ring, it will not fall off while you are wearing it snugly, but also can be loose enough to slide through your knuckle.",
+      "tip2": "Note: finger’s size is varying under different temperature, weather, and timing in a day. Therefore:",
+      "tip3": "Please measuring your finger under a stable or warm surrounding, for example during the night time, normally your hand will be warmer than daytime.",
+      "tip4": "Please measuring your finger three to four times separately in order to avoid measurement deviation and misreading the measurement ruler.",
+      "tip5": "Avoid using rope or the same paper ruler repeatedly, because these materials will twist or elongate, which will cause deviation in measurement result.",
+      "adjust": "Free Resizing",
+      "con1": "For our diamond engagement rings, BDD Co. provides complimentary resizing on all customized engagement rings when within the manufacturer's recommended sizing range, during the first 6 months. Please note that some of our rings are not able to be resized due to their design. ",
+      "con2": "Simply contact our Diamond & Jewellery Consultant by sending email to",
+      "con3": "to arrange for your free resize. According to our return policy, you will be responsible for the return shipping and insurance fee. For the wedding bands, your ring can be exchanged for another size within 30 days of purchase. Please note that if you choose to exchange another size, your new ring may has a reduction or increase in precious metal weight, or contain fewer or more diamonds which may cause an increase or decrease in the price."
+    },
+    "freeShipping": {
+      "header": "Free Shipping Service",
+      "define": "When pre-tax orders’value exceeds certain amount, the orders will be offered free FedEx International Priority® delivery service. The minimum pre-tax order’s value for free shipping will vary from countries to countries. The following chart will show the minimum pre-tax order value for free shipping in different countries/regions.",
+      "country": "Country/Region",
+      "value": "Minimum Order Value(USD)",
+      "delivery": [
+        {
+          "name": "Australia",
+          "value": "168"
+        },
+        {
+          "name": "Austria",
+          "value": "194"
+        },
+        {
+          "name": "Belgium",
+          "value": "194"
+        },
+        {
+          "name": "Brazil",
+          "value": "335"
+        },
+        {
+          "name": "Canada",
+          "value": "194"
+        },
+        {
+          "name": "Chile",
+          "value": "335"
+        },
+        {
+          "name": "China",
+          "value": "168"
+        },
+        {
+          "name": "Cyprus",
+          "value": "206"
+        },
+        {
+          "name": "Denmark",
+          "value": "194"
+        },
+        {
+          "name": "Estonia",
+          "value": "335"
+        },
+        {
+          "name": "Finland",
+          "value": "194"
+        },
+        {
+          "name": "France",
+          "value": "194"
+        },
+        {
+          "name": "Germany",
+          "value": "194"
+        },
+        {
+          "name": "Greece",
+          "value": "194"
+        },
+        {
+          "name": "Guam",
+          "value": "194"
+        },
+        {
+          "name": "Hong Kong",
+          "value": "0"
+        },
+        {
+          "name": "Hungary",
+          "value": "206"
+        },
+        {
+          "name": "India",
+          "value": "194"
+        },
+        {
+          "name": "Indonesia",
+          "value": "168"
+        },
+        {
+          "name": "Ireland",
+          "value": "194"
+        },
+        {
+          "name": "Italy",
+          "value": "194"
+        },
+        {
+          "name": "Japan",
+          "value": "168"
+        },
+        {
+          "name": "Korea",
+          "value": "155"
+        },
+        {
+          "name": "Latvia",
+          "value": "335"
+        },
+        {
+          "name": "Lithuania",
+          "value": "335"
+        },
+        {
+          "name": "Luxembourg",
+          "value": "194"
+        },
+        {
+          "name": "Macau",
+          "value": "155"
+        },
+        {
+          "name": "Malta",
+          "value": "194"
+        },
+        {
+          "name": "Netherlands",
+          "value": "194"
+        },
+        {
+          "name": "New Zealand",
+          "value": "168"
+        },
+        {
+          "name": "Northern Mariana Islands",
+          "value": "194"
+        },
+        {
+          "name": "Norway",
+          "value": "194"
+        },
+        {
+          "name": "Philippines",
+          "value": "155"
+        },
+        {
+          "name": "Poland",
+          "value": "206"
+        },
+        {
+          "name": "Portugal",
+          "value": "194"
+        },
+        {
+          "name": "Puerto Rico",
+          "value": "194"
+        },
+        {
+          "name": "Romania",
+          "value": "335"
+        },
+        {
+          "name": "Saudi Arabia",
+          "value": "335"
+        },
+        {
+          "name": "Singapore",
+          "value": "155"
+        },
+        {
+          "name": "Slovakia",
+          "value": "206"
+        },
+        {
+          "name": "Slovenia",
+          "value": "335"
+        },
+        {
+          "name": "South Africa",
+          "value": "335"
+        },
+        {
+          "name": "Spain",
+          "value": "194"
+        },
+        {
+          "name": "Sweden",
+          "value": "194"
+        },
+        {
+          "name": "Switzerland",
+          "value": "194"
+        },
+        {
+          "name": "Taiwan",
+          "value": "155"
+        },
+        {
+          "name": "Thailand",
+          "value": "155"
+        },
+        {
+          "name": "Turkey",
+          "value": "206"
+        },
+        {
+          "name": "United Arab Emirates",
+          "value": "206"
+        },
+        {
+          "name": "United Kingdom",
+          "value": "194"
+        },
+        {
+          "name": "United States",
+          "value": "194"
+        },
+        {
+          "name": "US Virgin Islands",
+          "value": "194"
+        },
+        {
+          "name": "Vietnam",
+          "value": "155"
+        }
+      ]
+    },
+    "deliveryPolicy": {
+      "header": "Shipping Policy",
+      "title": "All of your orders we ship are all fully insured.",
+      "define": "Note: We suggest all customers to carefully check whether your parcels are intact before receiving or signing for receipt. If there are traces of deliberate destruction on the parcel, please make sure to take pictures for record and email us immediately at",
+      "tit1": "Delivery Details",
+      "con1": "If pre-tax orders’ value exceeds certain amount, the orders will be offered free shipping service. The minimum pre-tax order’s value for free shipping varies from countries to countries. Please check the details in the ",
+      "link1": "Free Shipping Policy",
+      "con2": ". In order to deliver the parcels to you safely, BDD Co. will only accept and ship to a street address, not a P.O. Box address. BDD Co. requires customers to sign for receipt, even though in some cases our carrier may give certain exemptions. If recipients are not able to receive the parcels on Monday to Friday, we are able to rearrange the delivery on Saturday for an additional fee. For this arrangement, please contact BDD Co. customer service specialist by sending email to service@bddco.com.",
+      "tit2": "International And Hong Kong Shipping",
+      "con3": "For orders delivering to Hong Kong, the parcels will be delivered via DHL. For international orders, they will be delivered via FedEx International Priority®. We accept orders from 53 countries/regions. For more details, please check our ",
+      "link2": "International Policy",
+      "tit3": "When The Order Will Be Shipped",
+      "con4": "If you make a purchase before the cutoff time on a regular business day Monday to Friday (Hong Kong Time), we will begin processing your order that day. Purchases that make during Saturday, Sunday, holiday or after the cutoff time on a regular business day will be processed in the subsequent business days.",
+      "tit4": "Estimated Arrival Times",
+      "con5": "Time that required for your orders to be arrived the destinations vary from places to places. In order to make customers aware when the orders will be arrived, below are estimated arrival times after your order has been shipped for various destinations. These estimated arrival times are including the estimated times required for transportation and customs clearance time. Actual delivery may vary. Please note that the following list did not include all the countries. If you cannot find your countries in the list, please contact BDD Co. customer service specialist by email to",
+      "tit5": "Missed The Parcels",
+      "con6": "If you could not be at the parcel shipping destination at the time the parcel arrives to be signed for receipt, the parcel might be then delivered to the local FedEx locations. It allows recipients to sign for receipt from there in spare time. Find your nearest FedEx locations from here",
+      "link3": "https://www.fedex.com/zh-hk/home.html",
+      "tip1": "Noted: You will have to check the shipping address is correct when placing an order, any loss resulting from your erroneous cannot be compensated.",
+      "country": "Countries",
+      "days": "Estimated Arrival Time",
+      "delivery": [
+        {
+          "country": "Australia",
+          "days": "4-5 days"
+        },
+        {
+          "country": "Belgium",
+          "days": "4-6 days"
+        },
+        {
+          "country": "Brazil",
+          "days": "6-10 days"
+        },
+        {
+          "country": "Canada",
+          "days": "3-5 days"
+        },
+        {
+          "country": "Denmark",
+          "days": "3-5 days"
+        },
+        {
+          "country": "Finland",
+          "days": "4-9 days"
+        },
+        {
+          "country": "France",
+          "days": "4-5 days"
+        },
+        {
+          "country": "Germany",
+          "days": "4-5 days"
+        },
+        {
+          "country": "Greece",
+          "days": "5-6 days"
+        },
+        {
+          "country": "Hong Kong",
+          "days": "1-3 days"
+        },
+        {
+          "country": "India",
+          "days": "3-10 days"
+        },
+        {
+          "country": "Ireland",
+          "days": "4-5 days"
+        },
+        {
+          "country": "Italy",
+          "days": "4-6 days"
+        },
+        {
+          "country": "Japan",
+          "days": "3-5 days"
+        },
+        {
+          "country": "Malaysia",
+          "days": "3-6 days"
+        },
+        {
+          "country": "Netherlands",
+          "days": "4-5 days"
+        },
+        {
+          "country": "New Zealand",
+          "days": "5-6 days"
+        },
+        {
+          "country": "Norway",
+          "days": "4-10 days"
+        },
+        {
+          "country": "Philippines",
+          "days": "3-6 days"
+        },
+        {
+          "country": "Poland",
+          "days": "5-6 days"
+        },
+        {
+          "country": "Portugal",
+          "days": "4-5 days"
+        },
+        {
+          "country": "Saudi Arabia",
+          "days": "5-11 days"
+        },
+        {
+          "country": "Singapore",
+          "days": "3-4 days"
+        },
+        {
+          "country": "South Korea",
+          "days": "4-6 days"
+        },
+        {
+          "country": "Spain",
+          "days": "5-6 days"
+        },
+        {
+          "country": "Sweden",
+          "days": "4-10 days"
+        },
+        {
+          "country": "Switzerland",
+          "days": "11-12 days"
+        },
+        {
+          "country": "Taiwan",
+          "days": "3-4 days"
+        },
+        {
+          "country": "Thailand",
+          "days": "4-6 days"
+        },
+        {
+          "country": "Turkey",
+          "days": "6-9 days"
+        },
+        {
+          "country": "United Arab Emirates",
+          "days": "3-7 days"
+        },
+        {
+          "country": "United Kingdom",
+          "days": "4-5 days"
+        },
+        {
+          "country": "United States",
+          "days": "3-4 days"
+        },
+        {
+          "country": "Vietnam",
+          "days": "4-6 days"
+        }
+      ]
+    },
+    "privacyPolicy": {
+      "header": "Privacy Policy",
+      "define": "In order to enhance customers’ shopping experience and satisfaction, BDD Co. (including its affiliates and subsidiaries) has always been committed to protect and secure customers’ personal information. The following information is provided to you of what types of information we collect, the reasons and the usages of such information. In this article, 'Website' refers to BDD Co. website, mobile apps and other software. Also, 'Service' in this article includes our site, customer service calls and any other product or shopping services that provided by BDD Co.",
+      "tit1": "Data Collection",
+      "tip1": "(i）Source of Data",
+      "con1": "We receive and may store all the personal information that you provide to us, whether in oral or in written at various times. This includes personal information provided to us through any ways or manners, including, but not limited to, through BDD Co. website, various social media services (e.g. Facebook, WeChat Pay Pay, Whatsapp, Twitter, Sina), customer service calls, email or various promotional activities. Also, information will be collected by Cookies or other technologies. If your browser permits, you can turn off the Cookies function, but once the browser’s Cookies function closed, you will not be able to use some of the features or functions of this website. For more information about cookies and how to not accept cookies, you can refer to www.allaboutcookies.org.",
+      "tip2": "(ii）Types of Data",
+      "con2": "We collect and may store the following data or information, including but not limited to all personal information, such as: name, gender, birthday, title, contact numbers (telephone, fax, mobile phone), postal address and e-mail address; payment and transaction information, shipping and billing information (if you purchase our products) ; communication records between you and BDD Co.; other information about occupation, marital status, interests, demographics, views and experience on our product and service preferences, monthly income, the suggested contact method. Thus, we could provide you the most intimate service.",
+      "con3": "You may provide your friends’ name and contact information to us through one of the website features 'Refer a Friend'. Therefore, we are able to send you and your friends available product information, various forms of preferential or gifts. The information about you and your friends collected from 'Refer a Friend' will be stored or used in the manner described in this Privacy Policy All the information we collected about you may combined with other information related to you.",
+      "tip3": "(iii）Children under 13",
+      "con4": "BDD Co. will not collect personal information from children under the age of 13. If we receive personal identity information of children under the age of 13, we will delete the data record to protect children’s privacy online.",
+      "tit2": "Use Of Your Personal Information",
+      "con5": "All the information we collect about you and your friends may be used for the purpose of running the basic operational functions, improving the efficiency and functionality, development and analysis, assessing the effectiveness of advertising and other purposes with your consent (The above intended usages are collectively referred as general purposes). This information may share with our partners to achieve the same general purposes as described above.",
+      "con6": "Basic Operational Functions: for example, we need to use Cookies to maintain our website services, including but not limited to the shopping basket function, the account login system, preventing and detecting of fraud or abuse, responding to your requests and inquiries, managing and implementing various activities.",
+      "con7": "Efficiency and Functionality: including but not limited to managing or confirming your orders, inspecting and testing your personal information to ensure the accurateness and completeness, and recording your preferences for products and services.",
+      "con8": "Development and Analysis: including but not limited to improving, increasing and developing new services and products, understanding the structure of the customer base, shopping behaviors, preferences and interests etc.",
+      "con9": "Effectiveness of Advertising: including but not limited to developing new promotion models and methods to improve the customer experience, providing personalized advertising content and product information and services, as well as planning and implementing various types of promotional activities and events.",
+      "con10": "We will combine all the information you provide to us over time and we will combine such information with information that is from our partners, data instruments and publicly accessible information.",
+      "tit3": "Website Links",
+      "con11": "In order to provide more information to you, our website may provide links to third-party websites which are not under our control and not covered by this Privacy Policy. This Privacy Policy only applies to our website https://www.bddco.com/ and we are not taking any responsibility if you visit the third-party websites through the hyperlinks on our website. We encourage you to read the privacy policies when you visit other websites.",
+      "tit4": "Information That We May Share With Others",
+      "con12": "Your personal information may transfer to trusted third parties service providers. They will help us in providing services to you or offering services to you directly, which including market research and analysis, data and records management, website server hosting, shipping and payment processing, mail and e-mail processing, marketing, execution, assemble, special events and other operators etc.",
+      "con13": "We may disclose your information in the following cases: (1) reasonably comply with any applicable law, regulation, legal processes or governmental requests, including to meet national security or law enforcement requirements; (2) assist in the investigation or prevention of illegal activities, suspected fraud; (3) situations involving potential threats to the physical safety of any person; (4) any purpose to prevent and reduce the risk of illegal behavior; (5) to enforce any agreement with you; (6) business transfer; (7) summary information (excluded personal identification summary record).",
+      "tit5": "Safety",
+      "con14": "We adopted a series of physical and electronic security technologies, procedures and organizational protective measures to protect the safety of your personal information, including preventing your personal information from unauthorized access, use or disclosure. Although we have precise security technologies and comprehensive protective measures and procedures, we still cannot guarantee or warrant your personal information and the information you sent to us can be 100% secure.",
+      "tit6": "Inquiries",
+      "con15": "If you have any questions in relation to this privacy policy, please email us at",
+      "con16": ""
+    },
+    "clause": {
+      "header": "TERMS AND CONDITIONS",
+      "define1": "All of the terms and conditions below are applicable to the BDD Co. website located at www.bddco.com, its affiliated companies and all other associated websites that link to www.bddco.com. BDD Co. website: www.bddco.com is collectively called “the website”. Please read the Terms and Conditions carefully. When you use the website, it means that you agree to be bound by these terms and conditions.",
+      "define2": "The terms and conditions below will rule your using and purchasing on the BDD Co. website and form up an agreement between you and BDD Co. For any policies, guides, terms and conditions from the website, BDD Co. retains the right for changing or revising them at any time, and in its sole discretion. All changing or revising will become effective directly when the modifications post on the site. If you continually use the website after the site posts its changing or revising, BDD Co. will regard you as accepting the changing or revising. Therefore, the suggestion is that you should often read the Terms and Conditions of the website and all applicable policies and guides, which make you clearly understanding the terms and conditions of using the website. If you are not agreeing on the changing or revising of the terms and conditions, you must stop using the website immediately.",
+      "tit1": "Product Pricing And Supply Situation",
+      "con1": "Due to sometimes the website receiving large amounts of order, that we may not be able to post a notification on the website before a product goes out of stock. If this situation happens, we will directly contact you to look for a possible solution. If you are interested in a product which is in purchasing stage, please contact our customer service of the website for inquiring when the product is back in stock.",
+      "con2": "The website may appear some inaccurate display, such as data or price. Although our staffs do their best for avoiding these situations and errors, accidents may happen. Therefore, we retain the right for correcting any and all errors when the errors do occur. We will not sell any product which is marked an incorrect price. If the listed price of the product is lower than its actual price, we will make our own discretion either contact you for notification and ask for your instructions before the product is shipped out or notify you that the order is canceled. You agree either paying the difference between the charged price and the actual price or returning the product. We can change our products’ prices any time without notice. For the inconvenience which may happen, we do apologize. We do not negotiate our products’ prices and all the prices are the company’s decisions and are final.",
+      "tit2": "Diamond Certificate",
+      "con3": "We will ship your chosen loose diamond together with the diamond certificate after you made the order. All of our diamond certificates are issued by the Gemological Institute of America (GIA). It is expensive and time-consuming to replace a diamond certificate. Therefore, we require each diamond certificate to be shipped back with each returned diamond. If you do not return the certificate with your diamond, we will charge you US$250 as a replacement fee for the certificate.",
+      "tit3": "Purchasing And Comparing Later",
+      "con4": "Purchasing and comparing later is not allowed, because we want to keep our products’ prices low. Purchasing and comparing later means that customers intend to buy several products and keep the one like most, and then returning the remaining ones. This kind of actions causes us not able to restock accurately and leading high inventory cost. We are happy to help you in choosing products. If you want to know more the quality of our products, please feel free to contact our customer service by email at service@bddco.com.",
+      "tit4": "Website Information Guidelines",
+      "con5": "BDD Co. makes all effort to ensure that the online catalogue is as complete and accurate as possible. In order to allow you viewing our products in detail clearly, some of our products’ actual sizes may appear different from our photos. Besides, based on every monitor setting, products’ color displaying may appear slightly different.",
+      "con6": "We aim to provide information and detail that you need before making purchase decisions as much as possible, which you can view and judge the shape and beauty of our products. According to the regulations of Federal Trade Commission (FTC) and the standard of the industry, BDD Co. announces that the total carat weight may have 0.05 carats differences between the actual product and the weight shown on the website.",
+      "con7": "The products’ sizes that our website provided are based on the format and standard of manufacturing. The finishing process and retouching process may cause slight differences in width of wedding rings. Therefore, machine made wedding bands may have 0.2mm difference in width, while cast manufactured rings may vary slightly more. These are all allowed by BDD Co.",
+      "con8": "For the diamond products that are with more than one diamond, we provide an average total carat weight of each product that has a number of diamonds. All our diamonds’ clarity and color grades are provided as an average. If information shows the minimum, all diamonds in the product are at the stated standard, or above the stated standard. If information shows the average, all diamonds are averagely equal to the stated quality or higher or lower than the stated quality.",
+      "tit5": "Ethics Policy Of Sourcing",
+      "con9": "BDD Co. only purchases diamonds from reputable and formal diamond suppliers. Same as us, the suppliers we have chosen also comply with the Kimberley Process. The process is an international system and policy that monitors the diamond trades and ensures the diamonds are from formal sources that free of conflict.",
+      "tit6": "Privacy Policy",
+      "con10": "If you want to know about how BDD Co. collects and uses the personal information from its customers, please refer to our Privacy Policy.",
+      "tit7": "Website Content",
+      "con11": "All content and materials of the website, including, without limitation, the Blue Danube Diamond and BDD Co. logo, and all text, information, images, pictures, graphics, looking, feeling, data, files, designs, software, selection, coordination, sound files, other files and all arrangement of selections (collectively called the “Website Materials”) are proprietary properties of BDD Co. or its users or its licensors and are all protected by trademark laws, copyright, patent, trade dress and other intellectual property rights and unfair competition laws.",
+      "tit8": "Trademark",
+      "con12": "Blue Danube Diamond, BDD Co., Create Your Own Ring, Blue Danube Diamond and BDD Co. logos, slogan and any other service or product name contained in our website are the trademarks of Blue Danube Diamond and BDD Co. and its licensors or suppliers, and cannot be used, imitated or copied, in whole or in part, without the prior written permission of BDD Co. and the applicable trademark holder. Anyone who does not obtain our prior written permission cannot imitate, copy or use 'Blue Danube Diamond', 'BDD Co.', or any other name, trademark, product or service name, or any other “hidden text”, or any metatags of Blue Danube Diamond and BDD Co. The names or logos of 'Blue Danube Diamond', 'BDD Co.', product names, registered trademarks and all other trademarks mentioned in our website are the property of their respective owners.",
+      "tit9": "Website Using",
+      "con13": "You will be given a limited license for using the website when you access the website. You can electronically copy (except where prohibited without a license) the website materials and print to hard copy for personally non-commercial using as reference information only. Such license is subject to these terms and conditions but not include: (1) using the website or website materials for resale or other commercial using. (2) using any pictures, product lists and descriptions for commercial using. (3) public display or disseminate the website material. (4) using or changing the website, website materials or any part of the website for any derivative using. (5) using any automated means (scraping, robots, spiders or any similar automatic data collection methods) as the way being interaction with the website for monitoring, extracting or collecting data from the website. (6) downloading any part of information and website materials from the website (except page caching). (7) causing any appear windows (no matter if it covers our website), exit windows, advertisings, expanding buttons, or any other windows that cover, frame, minimize or inhibit the website. (8) any using means that affects and interferes the website’s normal operation. (9) any using methods with our website or our website materials that are different to the intended purpose. Before gaining our written permission, using methods which are different to the intended purpose of the license are prohibited and violated. We will stop the authorization. The unauthorized using of the website may offend some applicable and related laws, including without limitation applicable communications regulations and statutes and trademark and copyright laws. Whether by implication, estoppel or other ways, except we stated clearly at here, otherwise these terms and conditions will not be seen as authorization to intellectual property rights. The license can be retracted any time by BDD Co.",
+      "tit10": "The Policies of Infringer",
+      "con14": "According to the applicable copyright laws and other applicable laws, BDD Co. will make decisions at solo discretion to intercept and/or stop site users or account holders who are considered to be infringers in accessing or using the website. BDD Co. may also at its sole discretion terminate the accounts of any infringers according to the situation.",
+      "tit11": "Third Party Content",
+      "con15": "BDD Co. may provide links to web pages and content of third parties as a service which clients may be interested in this information. BDD Co. does not monitor or control any third party web pages or their content. BDD Co. does not endorse any third party content and cannot guarantee the accuracy and integrity of the third party web pages and their content. BDD Co. does not warrant or represent the accuracy of any information in third party content, and takes no responsibility to review and update any third party content and web page. Users will be seen as agree to take their own risk if users use those web pages or third party content.",
+      "tit12": "Advertising And Promotion",
+      "con16": "BDD Co. may run promotions and advertisements from third parties on our website. Your participation in promotions or business dealings, or correspondence with, third party advertisers, and any warranties, terms and conditions with such dealings, are solely between you and the third parties. BDD Co. does not undertake any responsibility and liability if there is any loss or damage as the result of any dealings between you and such non-BDD Co. advertisers on our website.",
+      "tit13": "Submission",
+      "con17": "You acknowledge and agree that any materials, including but not limited to ideas, drawings, creative or original materials, comments, questions, suggestions, plans, notes or other information that regarding to BDD Co., this website or our products and services that are suggested or provided by you to BDD Co. are non-confidential and shall become the exclusive property of BDD Co. BDD Co. will own all intellectual property rights and exclusive rights, that BDD Co. can use or disseminate these materials unlimitedly for commercial or any purpose or otherwise, without acknowledgment or compensation to you. You grant the right to BDD Co. and its sublicensees and affiliates to use the name of such content which you submit to us, if they choose to use the name. You represent or warrant that: 1. you own all the rights of the materials and content that you submit to us, or you have the right to submit the materials and content to us; 2. the materials and content submitted to us are accurate and not misleading; and 3. posting and using the materials or the content that you provide will not cause injury to or infringe any rights of anyone or entity.",
+      "tit14": "Protection And Compensation",
+      "con18": "You agree to indemnify, defend and hold harmless BDD Co., its service providers, consultants and independent contractors, and their respective employees, directors, and agents, from and against any claims, liabilities, damages, expenses and costs (including, but not limited to, reasonable attorneys' fees) related to or arising out of any Content you store, post or otherwise transmit on or through our website or your use of or inability to use our website, including but not limited to any actual or threatened claim, demand or suit made against BDD Co. and/or its service providers, independent contractors, directors, employees or consultants, relating to or arising out of the Content, your conduct, your infringement of these terms and conditions or your infringement of the rights of any third party.",
+      "tit15": "Warranty Disclaimer",
+      "con19": "Except BDD Co. clearly itemize and indicate in a writing, the content, products and services provided or contained on the website are provided on an “as is” basis without any kind of warranties, either express or implied. BDD Co. disclaims all other warranties, express or implied, including, without limitation, implied warranties of merchantability, fitness for a particular purpose, title and non-infringement as to the materials, information and content in our website. BDD Co. does not represent or warrant that the materials and content in our website or the services are complete, accurate, current, reliable or error-free. BDD Co. does not represent or warrant that our website or its servers would not be invaded or harassed by viruses or any other harmful components.",
+      "tit16": "Limitation Of Liability",
+      "con20": "In any situation, BDD Co., its directors, employees, members or agents are not liable for any direct, indirect, special, consequential damages or any other damages or expenses of any kind, (including, without limitation, loss of data, loss of profits or loss of use), whether in an action in contract, tort (including but not limited to negligence) or otherwise, in any way connecting with or arising out of the use of our website, the products and services or the content contained in or accessed through our website, Including but not limited to any damages caused by or resulting from reliance by user on any information obtained from BDD Co., or that result from interruptions, omissions, mistakes, deletion of email or files, defects, viruses, errors, transmission or operation delay, or any failure of performance, whether or not resulting from acts of god, destruction, failure of communications, theft or accessing to the BDD Co.’s records, programs or services without authorization.",
+      "tit17": "The Use Of Legal And Venues",
+      "con21": "These terms and conditions and your use of this website will be governed by and construed in accordance with the laws of Hong Kong Special Administrative Region of the People's Republic of China, applicable to agreements made and to be entirely performed within Hong Kong Special Administrative Region of the People's Republic of China, without resort to its conflict of law provisions. You agree that any action at law or in equity arising out of or relating to these Terms and Conditions shall be filed only in the courts located in Hong Kong, and you hereby irrevocably and unconditionally consent and submit to the exclusive jurisdiction of such courts over any suit, action or proceeding arising out of your use of this website, any purchase from this website, or these Terms and Conditions.",
+      "tit18": "Modification And Notification",
+      "con22": "You agree that BDD Co. can revise these Terms and Conditions, and any other policies on our website at any time. When the website posts the revised Terms and Conditions or policies, it constitutes sufficient notification of such revising.",
+      "tit19": "Termination",
+      "con23": "Notwithstanding any of these Terms and Conditions, BDD Co. retains the right and its solo discretion to terminate your license of using its website, and to prevent or block your access to and use of its website without notice.",
+      "tit20": "Severability",
+      "con24": "The provisions contained in each clause of these Terms and Conditions shall be enforceable independently of each of the others and its validity shall not be affected if any of the others is invalid. If any provision of these terms and conditions is determined to be invalid, unlawful or any reason that is unenforceable, then that provision shall not affect the validity and enforceability of any remaining provisions.",
+      "tit21": "Questions And Contact",
+      "con25": "If you have any questions, please feel free to contact us by sending email to service@bddco.com. These Terms and Conditions are not applicable to the content that provided by Parcelpro Insurance Company. Terms and Conditions updated on 16th December 2016."
+    },
+    "internationalPolicy": {
+      "header": "International Policies",
+      "tab1": "Policy",
+      "tab2": "Fees",
+      "policy": "This international shipping policy is applicable to BDD Co. and/or www.bddco.com website orders. ",
+      "define": "We accept orders from the following countries or regions: Australia, Austria, Belgium, Brazil, Canada, Chile, China, Cyprus, Denmark, Estonia, Finland, France, Germany, Greece, Guam, Hong Kong, Hungary, India, Indonesia, Ireland, Italy, Japan, South Korea, Latvia, Lithuania, Luxembourg, Macau, Malta, Netherlands, New Zealand, Northern Mariana Islands, Norway, Philippines, Poland, Portugal, Puerto Rico, Romania, Saudi Arabia, Singapore, Slovakia, Slovenia, South Africa, Spain, Sweden, Switzerland, Taiwan, Thailand, Turkey, United Arab Emirates , United Kingdom, United States, US Virgin Islands and Vietnam.",
+      "mail": "Please email",
+      "know": "to contact our customer services for more details.",
+      "tit1": "Importer Of Records",
+      "con1": "The importer of record refers to the importer, whether the entity or individual, who is responsible for ensuring that goods are imported in accordance with the laws and regulations of the destination country or region. The importer of record is responsible for paying all the import duties, taxes, and fees assessed by customs or the carrier.",
+      "con2": "For all the countries or regions in which BDD Co. accepts orders from, the recipient is the importer of record. The recipient must ensure the imported goods are in accordance with the laws and regulations of the destination country. During the delivery process and before the goods delivered to the recipient’s hands, the customs of the destination country or region might levy duties, taxes, administrative expenses or any other expenses on the goods. The recipient will need to take full responsibility of paying for such charges and expenses under any circumstances.",
+      "tit2": "Ownership And Risk",
+      "con3": "The products’ ownership and risk of loss will be transferred to the recipients once the shipments have been picked up by the carrier from BDD Co.",
+      "tit3": "Restrictions",
+      "con4": "Whether the products are eligible to be shipped to the destination country or region would be depended on the local ordinances and restrictions.",
+      "tit4": "Shipment",
+      "con5": "All international orders are shipped via FedEx International Priority®. Once the order exceedscertain value, customers will not need to pay for any shipping fees. If there is any question about the expected shipping time, please note that you can contact our customer service atservice@bddco.com or simply use the FedEx tracking number to check the delivery schedule onFedEx Tracking System.",
+      "tit5": "Asset Protection",
+      "con6": "All international orders are fully insured, which ensures that every order shipment is risk-free. Every order is insured and under protected by a premier global insurance company from the time it leaves BDD Co. to when it arrives at your door. The insurance costs are equivalent to 0.32% of the order value and will be applied during the checkout process. However, the insurance costs for orders to the UAE and China might not be the same and if the order value exceeds the limit set by the insurance company, this fee will be fine-tuned. After you complete the purchase process, the insurance agreement details and claim procedures will be sent to your e-mail. In order to strengthen the safety of the shipments, BDD Co. may require recipients to sign for receipt in order to verify the identity.",
+      "tit6": "Order Payment",
+      "con7": "BDD Co. accepts the following currencies: Australian Dollar (AUD), Canadian Dollar (CAD), Czech Koruna (CZK), Danish Kroner (DKK), Euro (EUR), Great British Pound (GBP), Hong Kong Dollar (HKD), Hungarian Forint (HUF), Israeli New Shekel (ILS), Japanese Yen (JPY), Mexican Peso (MXN), New Taiwan Dollar (TWD), New Zealand Dollar (NZD), Norwegian Krone (NOK), Philippine Peso (PHP), Polish Zloty (PLN), Renminbi (RMB), Russian Ruble (RUB), Singapore Dollar (SGD), Swedish Krona (SEK), Swiss Franc (CHF), Thai Baht (THB), United States Dollar (USD).",
+      "con8": "For more details, please visit BDD Co. International Currency and Payment Method. ",
+      "con9": "Once your order value reaches the minimum order value, the order’s shipping charges will be exempted.",
+      "con10": "For more details, please visit the",
+      "link1": "Free Shipping Policy.",
+      "tit7": "Customs, Duties And Taxes",
+      "con11": "Your order may be imposed import duties, taxes, customs fees and other charges by the customs office of the destination country or region. These additional charges and fees required by customs clearance are the responsibility of the recipient and shall be paid by the recipient. When your orders arrive to the customs office of the destination country or region, either the appointed logistics carrier or customs office will contact you directly and arrange the payment of any charges.",
+      "tit8": "Common Clearance Fees",
+      "con12": "Security Surcharge - A security fee may be imposed as the carrier is required by the heightened international security to make ongoing expenditures to meet more strict international security conditions.",
+      "con13": "Advancement Fee - In some cases, the carrier may pay duty and tax charges on the customer’s behalf in advance, in order to expedite customs clearance. For example, when the customs office of the country or region requires paying the customs charges before customs clearance. An advancement fee will be assessed and billed to the customer.",
+      "con14": "Warehouse Fee – If duties and taxes are not paid or your order is unable to be delivered, you may be charged a warehouse fee.",
+      "con15": "The following table listed out the estimated tax and duty rates and other customs charges in different countries or regions, but the charges listed below may not equal to the actual amount charged by the customs. BDD Co. has no control over these charges. For more information on customs, duties and taxes, please contact your local customs office.",
+      "thead1": "Estimated Duty Rate",
+      "thead2": "Estimated Tax Rate",
+      "thead3": "Order Value",
+      "thead4": "Import Declaration Fee",
+      "thead5": "The Total Estimated Duty and Tax Rate",
+      "site": "Website",
+      "table1": {
+        "country": "Australia",
+        "tbody11": "Loose diamonds: 0%",
+        "tbody12": "Order value below AU$ 1,000: 0%",
+        "tbody13": "Other orders: 5%",
+        "tbody21": "10%",
+        "tbody22": "Order value below AU$ 1,000: 0%",
+        "tbody31": "Between AU$1,000 to AU$10,000",
+        "tbody32": "AU$50.00",
+        "tbody41": "All AU$10,000 or more",
+        "tbody42": "AU$152.00",
+        "tbody51": "0% to 15.5%",
+        "tip": "Note: It might also include Australian Quarantine and Inspection Service Fees (AQIS): AU$33.00",
+        "web": "www.customs.gov.au",
+        "tel": "Phone: From outside Australia (61) 2-6275-6666, From Australia 1300-363-263"
+      },
+      "table2": {
+        "country": "Guam",
+        "tbody11": "0%",
+        "tbody21": "4%",
+        "tbody31": "Order value below US$1,000",
+        "tbody41": "0%",
+        "tbody51": "0% to 4%",
+        "web": "www.cqa.guam.gov",
+        "tel": "Phone:(671)475-6220"
+      },
+      "table3": {
+        "country": "Hong Kong",
+        "tbody11": "0%",
+        "tbody21": "0%",
+        "tbody51": "0%",
+        "web": "www.customs.gov.hk",
+        "tel": "Phone:(852)2815-7711"
+      },
+      "table4": {
+        "country": "Japan",
+        "tbody11": "Loose diamonds: 0%",
+        "tbody12": "Other products: 0% 至 5.5%(depends on the country of manufacture)",
+        "tbody21": "8%",
+        "tbody51": "8% to 13.5%",
+        "tip": "Note: After recipients receive the parcel, customers may need to pay the FedEx Advancement Fee of JPY 500.",
+        "web": "www.customs.go.jp",
+        "tel": "Phone: From outside Japan: (81) 3-3529-0700, From Japan: 03-3529-0700"
+      },
+      "table5": {
+        "country": "Macau",
+        "tbody11": "0%",
+        "tbody21": "0%",
+        "tbody51": "0%",
+        "web": "www.customs.gov.mo",
+        "tel": "Phone: (853) 2896-5001"
+      },
+      "table6": {
+        "country": "New Zealand",
+        "tbody11": "Loose diamonds: 0%",
+        "tbody12": "Other products: 0% to 5% (depends on the Country of manufacture)",
+        "tbody21": "15%",
+        "tbody31": "Order value exceed NZ$1,000",
+        "tbody41": "Import fee: NZ$24.75",
+        "tbody42": "Biosecurity Systems Entry Levy fee: NZ$12.50",
+        "tbody51": "15% to 20%",
+        "tip": "Note: Customer is required to provide a free Importer Number in order to receive the parcels, and that number will be issued within 1-3 days after you submitting the application form to the Customs.",
+        "web": "www.customs.govt.nz",
+        "tel": "Phone: From outside NZ: (64) 9-300-5399, From NZ: 0800-428-786"
+      },
+      "table7": {
+        "country": "Northern Mariana Islands",
+        "tbody11": "0%",
+        "tbody21": "5.75%",
+        "tbody51": "5.75%",
+        "web": "www.cnmidof.net/customs",
+        "tel": "Phone: 670-664-1607"
+      },
+      "table8": {
+        "country": "Puerto Rico",
+        "tbody11": "0%",
+        "tbody21": "0%",
+        "tbody51": "0%",
+        "web": "www.cbp.gov",
+        "tel": "Phone: From outside U.S.: (703) 526-4200, From NZ: 1-877-CBP-5511"
+      },
+      "table9": {
+        "country": "Singapore",
+        "tbody11": "0%",
+        "tbody21": "7%",
+        "tbody51": "7%",
+        "tip": "Note: the recipients, as the importer of record, should take the responsibility to work with the local authorities and resolve any products and taxes related issues. If a customer wants a GST refund because of an order is returned or because of a resize, repair or exchange order is assessed GST tax, the customer will need to compliance with the relevant procedures with the Singaporean authorities in handling such refund procedures by themselves. BDD Co. is not able to control tax assessments and refund decisions which are made by the Singapore tax authorities. It may take up to 30 business days to fulfill the requests of copies of shipping documents that are needed to apply for tax refund.",
+        "web": "www.customs.gov.sg",
+        "tel": "Phone: (065) 6355 2000"
+      },
+      "table10": {
+        "country": "Taiwan",
+        "tbody11": "0%",
+        "tbody21": "5%",
+        "tbody51": "5%",
+        "tel": "Phone: 02-24222310"
+      },
+      "table11": {
+        "country": "United Arab Emirates",
+        "tbody11": "Loose Diamonds: 0%",
+        "tbody12": "Gold Jewellery: 1%",
+        "tbody13": "Gold and Diamond Jewellery: 1.5%",
+        "tbody14": "All Other Jewellery: 5%",
+        "tbody21": "0%",
+        "tbody51": "0% to 5%",
+        "tip": "Note: Duties set by the UAE are non-refundable.",
+        "web": "www.sharjahcustoms.gov.ae",
+        "tel": "Phone: 0097 06 5282216 / 0097 06 5282666"
+      },
+      "table12": {
+        "country": "US Virgin Islands",
+        "tbody11": "0%",
+        "tbody21": "0%",
+        "tbody51": "0% to 5%",
+        "web": "www.cbp.gov"
+      },
+      "tit9": "Limitations",
+      "con16": "Please note that products shipped to the destination country or region may not comply with its laws or regulations, which including standards, specifications, and labeling requirements. The customer is responsible in determining whether the products are lawful and legally imported into the destination country or region.",
+      "tit10": "Privacy",
+      "con17": "International shipping parcels may be opened and inspected by the destination country or region customs authorities. Information related to your orders and the products may be passed on to the shippers and the customs authorities in order to complete the formalities of the customs clearance.",
+      "tit11": "Returns",
+      "con18": "In order to maximize customers’ shopping experience satisfaction, our return policy is very flexible. You are able to return or exchange the product for any reasons within 7 days from when it was received. However, the products must remain their original purchase conditions and has no custom engraving.",
+      "con19": "For orders shipping to China, 7-day will start from when the customers receive the products, and 20% reservation fee is non-refundable. For more details, please read our",
+      "link2": "Return Policy",
+      "tip1": "Terms and Conditions updated on April 13, 2017."
+    }
+  },
+  "error": {
+    "notFound": "the page you are looking for can not be found",
+    "toIndex": "back to index",
+    "somethingError": "something went wrong",
+    "cartIsFull": "Shopping Cart Is Full",
+    "wishListIsFull": "Wish List Is Full",
+    "comparedListIsFull": "Compared List Is Full"
+  },
+  "callUs": {
+    "holiday": "Monday to Friday 9 am to 6 pm ",
+    "niubi": "(except Hong Kong public holidays)",
+    "goBack": "Back",
+    "book": "Make an appointment",
+    "name": "First name",
+    "surname": "Last name",
+    "arrivalTime": "Choose booking time",
+    "bookDate": "Date of visit",
+    "bookTime": "Time of visit",
+    "engagementRing": "ENGAGEMENT RINGS",
+    "marriageRing": "WEDDING RINGS",
+    "fashionAccessory": "JEWELLERY",
+    "leaveAMessage": "Leave a message",
+    "submit": "SUBMIT",
+
+    "callUs": "Contact",
+    "store": "Store",
+    "storeName": "Hong Kong. Universal Trade Centre",
+    "address": "Address",
+    "addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "tel": "Tel",
+    "email": "E-mail",
+
+    "submitSuccessTitle": "Successful submission",
+    "submitSuccessDesc": "We will confirm our appointment with you as soon as possible within one working day.",
+    "submitFailTitle": "Failed to commit",
+    "submitFailDesc": "Please do not repeat the submission, if in doubt, please contact online customer service.",
+    "confirm": "CONFIRMED",
+    "bookTimeError": "Select the true time",
+    "inputTheLastName": "Input the true last name",
+    "inputTheFirstName": "Input the true first name",
+    "inputTelphone": "Input the true phone",
+    "selectTheCorrectDate": "Select the correct date",
+    "selectAnAppointmentTime": "Select an appointment time"
+  }
+}

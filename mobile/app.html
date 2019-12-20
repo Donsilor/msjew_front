@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html {{ HTML_ATTRS }}>
+<head {{ HEAD_ATTRS }}>
+  {{ HEAD }}
+
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2403946323186797');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1"
+         src="https://www.facebook.com/tr?id=2403946323186797&ev=PageView
+&noscript=1"/>
+  </noscript>
+  <!-- End Facebook Pixel Code -->
+
+</head>
+<body {{ BODY_ATTRS }}>
+{{ APP }}
+
+<script type="text/javascript">
+  (function(){
+    var script0 = document.createElement("script");
+    script0.src = "//j02.optimix.asia/events/opxLoader.js";
+    script0.type = "text/javascript";
+    script0.async = "async";
+    document.getElementsByTagName("head")[0].appendChild(script0);
+    var opxUid='0';
+    var opxcounter='1';
+    var opxClientID='6012';
+    var opxParams="opxvrsn=ut;opxUid="+opxUid+";"+"opxClientID="+opxClientID+";"+"opxcounter="+opxcounter+";";
+    if (script0.readyState) {
+      script0.onreadystatechange = function() {
+        if (script0.readyState == "loaded" || script0.readyState == "complete") {
+          opxLoad("//e02.optimix.asia", opxParams);
+        }
+      };
+    } else {
+      script0.onload = function () {
+        opxLoad("//e02.optimix.asia", opxParams);
+      };
+    }
+  })();
+</script>
+</body>
+</html>

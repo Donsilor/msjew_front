@@ -1,0 +1,588 @@
+// 列表页条件通用样式
+.search-condition {
+  padding: 0 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .condition-item {
+    //width: 400px;
+    //height: 190px;
+    //margin-bottom: 40px;
+    margin-bottom: 17px;
+
+    .condition-name {
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: 400;
+      color: #1b1b1b;
+
+      .prompt-icon {
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        font-size: 14px;
+        background: #debeab;
+        border-radius: 9px;
+        color: #fff;
+        text-align: center;
+        display: inline-block;
+      }
+    }
+  }
+
+  .condition-style {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    position: relative;
+
+    .condition-name {
+      flex-grow: 0;
+      flex-shrink: 0;
+      min-width: 0;
+      font-weight: 400;
+      position: relative;
+    }
+
+    .options {
+      //flex-grow: 1;
+      flex-shrink: 1;
+      min-width: 0;
+      width: calc(100% - 50px);
+      margin-right: 50px;
+      //width: 82%;
+      position: relative;
+      list-style: none;
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+
+      .option-item {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 90px;
+        height: 108px;
+        box-sizing: border-box;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        transition: all 0.2s linear;
+
+        .item-icon {
+          position: relative;
+          width: 100%;
+          height: 65px;
+          box-sizing: border-box;
+          margin: 0 auto 6px auto;
+
+          img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 68px;
+            /*height: 26px;*/
+          }
+        }
+
+        .item-name {
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-family: Microsoft YaHei;
+          font-weight: 400;
+          color: rgba(27, 27, 27, 1);
+          text-align: center;
+        }
+
+        &.active {
+          border: 1px solid rgba(186, 127, 140, 1);
+          box-shadow: 0px 3px 0px 0px rgba(226, 159, 192, 0.35);
+        }
+      }
+    }
+  }
+
+  .condition-material {
+    display: flex;
+    align-items: center;
+    /*width: calc(100% - 500px);*/
+    flex-grow: 1;
+    flex-shrink: 1;
+    min-width: 0;
+    position: relative;
+
+    .condition-name {
+      flex-grow: 0;
+      flex-shrink: 0;
+      font-weight: 400;
+      min-width: 0;
+      position: relative;
+    }
+
+    .options {
+      flex-grow: 1;
+      flex-shrink: 1;
+      //width: 82%;
+      width: calc(100% - 50px);
+      margin-right: 50px;
+      min-width: 0;
+      position: relative;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .option-item {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 84px;
+        height: 108px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: all 0.2s linear;
+
+        .item-icon {
+          position: relative;
+          width: 100%;
+          height: 65px;
+          padding-top: 5px;
+          box-sizing: border-box;
+          margin: 0 auto 6px auto;
+
+          img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            /*height: 26px;*/
+          }
+        }
+
+        .item-name {
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-family: Microsoft YaHei;
+          font-weight: 400;
+          color: rgba(27, 27, 27, 1);
+          text-align: center;
+        }
+
+        &.active {
+          border: 1px solid rgba(186, 127, 140, 1);
+          box-shadow: 0px 3px 0px 0px rgba(226, 159, 192, 0.35);
+        }
+      }
+    }
+  }
+
+  .range-slider {
+    .operate-area {
+      /*区间选择*/
+      .range {
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+
+        .range-input {
+          position: relative;
+          flex-grow: 1;
+          flex-shrink: 1;
+          min-width: 0;
+          padding: 9px 12px;
+          box-sizing: border-box;
+          border: 1px solid rgba(207, 164, 141, 1);
+          font-size: 14px;
+          font-family: Nunito Sans;
+          font-weight: 400;
+          color: rgba(27, 27, 27, 1);
+          display: flex;
+          align-items: center;
+
+          &.min-range {
+            width: 130px;
+          }
+
+          &.max-range {
+            width: 140px;
+          }
+
+          .range-text {
+            flex-grow: 1;
+            flex-shrink: 1;
+            min-width: 0;
+            position: relative;
+
+            input {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+              font-size: 14px;
+              font-family: Nunito Sans;
+              font-weight: 400;
+              color: rgba(27, 27, 27, 1);
+
+              &:focus {
+                opacity: 1;
+                background-color: #ffffff;
+              }
+            }
+          }
+        }
+
+        .to {
+          position: relative;
+          flex-grow: 0;
+          flex-shrink: 0;
+          min-width: 0;
+          margin: 0 24px;
+        }
+      }
+
+      .slider {
+        margin-bottom: 15px;
+      }
+
+      .fast {
+        display: flex;
+        justify-content: space-between;
+
+        .fast-item {
+          flex-grow: 1;
+          flex-shrink: 1;
+          margin-right: 15px;
+          height: 24px;
+          line-height: 24px;
+          text-align: center;
+          background: rgba(248, 248, 248, 1);
+          border: 1px solid rgba(235, 235, 235, 1);
+          font-size: 12px;
+          font-family: Nunito Sans;
+          font-weight: 400;
+          color: rgba(153, 153, 153, 1);
+          cursor: pointer;
+
+          &:nth-last-of-type(1) {
+            margin-right: 0;
+          }
+        }
+      }
+
+      /*间隔选择*/
+      .range-options {
+        display: flex;
+
+        .range-options-item {
+          flex-grow: 1;
+          flex-shrink: 1;
+          position: relative;
+          width: 10px;
+          overflow: hidden;
+          text-align: center;
+          font-size:14px;
+          font-family:CTHeiTiSF;
+          font-weight:400;
+          color:rgba(17,17,17,1);
+        }
+      }
+    }
+  }
+}
+
+// 列表页标题
+.list-title {
+  padding-top: 30px;
+  .title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 1);
+    text-align: center;
+  }
+  .sub-title {
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: rgba(102, 102, 102, 1);
+    text-align: center;
+  }
+}
+
+// 排序方式
+.sort {
+  border-bottom: 1px solid rgba(244, 242, 243, 1);
+  text-align: right;
+  .sort-type {
+    display: inline-block;
+    position: relative;
+    height: 32px;
+    border-bottom: 2px solid #f09b9b;
+
+    .using-type {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+
+      .type-name {
+        flex-grow: 0;
+        flex-shrink: 0;
+        font-size: 14px;
+        font-family: CTHeiTiSF;
+        font-weight: 400;
+        color: rgba(240, 155, 155, 1);
+      }
+
+      .iconfont {
+        margin-left: 20px;
+        font-size: 11px;
+        color: rgba(240, 155, 155, 1);
+      }
+    }
+
+    .type-list {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      list-style: none;
+      background-color: #ffffff;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.1s linear;
+      z-index: 10;
+
+      .type-item {
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
+        text-align: left;
+        font-size: 14px;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: rgba(99, 99, 99, 1);
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background-color 0.1s linear;
+
+        &:hover {
+          background-color: rgba(244, 218, 211, 0.5);
+        }
+
+        &.active {
+          color: rgba(255, 255, 255, 1);
+          background-color: #f4dad3;
+        }
+      }
+    }
+
+    &:hover {
+      .type-list {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+.list-content {
+  //min-height: 500px;
+  .list-data {
+    min-width: 1360px;
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    /*justify-content: space-between;*/
+
+    .data-item {
+      flex-grow: 0;
+      flex-shrink: 0;
+      /*width: 340px;*/
+      width: 25%;
+      height: 480px;
+      margin-bottom: 3px;
+      box-sizing: border-box;
+      transition: all 0.2s linear;
+
+      &.product {
+        border: 10px solid transparent;
+      }
+      &.ad-short,
+      &.ad-long {
+        border: 0;
+        .ad-image {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+
+          img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            max-height: 100%;
+          }
+        }
+      }
+      &.ad-long {
+        /*width: 680px;*/
+        width: 50%;
+      }
+      .product-content {
+        position: relative;
+        .product-image {
+          position: relative;
+          overflow: hidden;
+          .main-image,
+          .sub-image {
+            /*width: 320px;*/
+            width: 100%;
+            height: 320px;
+            /*transform: scale(1, 1);*/
+            /*transition: all 0.2s linear;*/
+            display: inline-block;
+          }
+          .sub-image {
+            display: none;
+          }
+          .wish-state {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.1s linear;
+
+            .iconfont {
+              font-size: 24px;
+              color: #aaa;
+            }
+            .iconxin {
+              color: #EFA19F;
+            }
+          }
+        }
+
+        .product-info {
+          padding: 14px 20px 20px 20px;
+          box-sizing: border-box;
+
+          .product-price {
+            margin-bottom: 11px;
+            text-align: center;
+            font-size: 24px;
+            font-family: twCenMT;
+            font-weight: 400;
+            color: rgba(242, 155, 135, 1);
+
+            .coin {
+              margin-right: 6px;
+            }
+
+            .price {
+            }
+          }
+
+          .product-title {
+            font-size: 12px;
+            font-family: Microsoft YaHei;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+            line-height: 22px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+          }
+        }
+      }
+      .ad-content {
+        width: 100%;
+        height: 100%;
+      }
+
+      &:hover {
+        &.product {
+          border: 10px solid rgba(244, 242, 243, 1);
+        }
+        .product-content {
+          .product-image {
+            .main-image {
+              display: none;
+            }
+            .sub-image {
+              display: inline-block;
+            }
+            .wish-state {
+              opacity: 1;
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.more-list-data {
+  min-width: 1360px;
+  max-width: 1366px;
+  height: 90px;
+  background: rgba(244, 242, 243, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .check-more {
+    width: 190px;
+    height: 44px;
+    background: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(153, 153, 153, 1);
+    font-size: 14px;
+    font-family: Microsoft YaHei;
+    font-weight: 400;
+    color: rgba(153, 153, 153, 1);
+    cursor: pointer;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
