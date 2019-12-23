@@ -8,7 +8,7 @@
             <img src="/login/mail.png" />
           </span>
           <input
-            v-model="info.mobile"
+            v-model="info.account"
             type="text"
             v-bind:class="{active:isActive}"
             :placeholder="$t(`${lang}.mailbox`)"
@@ -45,6 +45,7 @@
             <input
               v-model="info.code"
               type="text"
+              v-bind:class="{active:isActive}"
               :placeholder="$t(`${lang}.code`)"
               @keydown.enter="login"
             />
@@ -180,6 +181,9 @@ export default {
     })
   },
   methods: {
+    // keyupphone(){
+    //    _this.isActive =true
+    // },
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='
@@ -209,9 +213,15 @@ export default {
       //   _this.$errorMessage(_this.$t(`${lang}.codeTips`))
       //   return
       // }
+      // let phone_rule = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/
+      if(_this.info.mobile === ''||_this.info.password === ''||_this.info.code === ''){
+        _this.isActive =true
+        _this.passwordErr = true
+        _this.codeErr = true
+      }
+      //  if (_this.info.mobile === ''||!phone_rule.test(_this.info.mobile)) {
       if (_this.info.mobile === '') {
         _this.phoneErr = true
-        _this.isActive =true
       } else if (_this.info.password === '') {
         _this.phoneErr = false
         _this.passwordErr = true
@@ -272,7 +282,7 @@ export default {
         })
         .catch(err => {
           console.error(err)
-          _this.requesting = false
+          _this.requesting = false 
           _this.refreshCode()
           _this.$errorMessage(err.message)
         })

@@ -944,6 +944,19 @@ export default {
         }
       }
       return result
+      
+      // const language = this.$store.state.language
+      // const languageOptions = this.$bddDefinition.languageOptions
+      // let type = 1
+      // let result = ''
+      // for (let n = 0, length = languageOptions.length; n < length; n++) {
+      //   if (languageOptions[n].type === type) {
+      //     result = languageOptions[n]
+      //     break
+      //   }
+      // }
+      // console.log(result)
+      // return result
     },
     coinInfo() {
       let result = ''

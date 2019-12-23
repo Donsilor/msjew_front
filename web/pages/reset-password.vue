@@ -44,11 +44,15 @@
                       v-model="info.code"
                       type="text"
                       :placeholder="$t(`${lang}.schedule1-code`)"
+                      @keydown.enter="changeSchedule2(1)"
                     />
                   </div>
                   <div class="send-email-code">
                     <send-email-code :email="info.email"></send-email-code>
                   </div>
+                </div>
+                <div v-show="codetip" class="error-tip">
+                  {{ $t(`${lang}.schedule2-codetips`) }}
                 </div>
               </div>
               <div class="button-group">
@@ -62,91 +66,46 @@
               </div>
             </div>
           </li>
-          <!-- <li class="item item-2" :style="scheduleContentStyle">
-            <h3 class="item-title">{{ $t(`${lang}.forgetPassword`) }}</h3>
-            <div class="item-content">
-              <div class="item-icon">
-                <img src="/reset-password/email.png" />
-              </div> -->
-              <!-- <h2 class="tip">
-                {{ $t(`${lang}.hadSendEmailCode1`) }}
-                <span>{{ info.email }}</span>
-                {{ $t(`${lang}.hadSendEmailCode2`) }}
-              </h2> -->
-              <!-- <div class="wrong-email">
-                <span>{{ $t(`${lang}.wrongEmail`) }}</span>
-                <span class="rewrite" @click="changeSchedule2(1)">
-                  {{ $t(`${lang}.changeEmail`) }}
-                </span>
-              </div> -->
-              <!-- <div class="input-line">
-                <input
-                  v-model="info.code"
-                  class="bottom-border-input"
-                  :placeholder="$t(`${lang}.inputEmailCode`)"
-                  @keydown.enter="changeSchedule(3)"
-                />
-              </div> -->
-              <!-- 设置密码 -->
-              <!-- <div class="button-group">
-                <button
-                  v-loading="ajaxLoading"
-                  class="submit-button"
-                  @click="changeSchedule2(3)"
-                >
-                  {{ $t(`${lang}.submit`) }}
-                </button>
-              </div>
-            </div>
-          </li> -->
           <li class="item item-3" :style="scheduleContentStyle">
             <h3 class="item-title">{{ $t(`${lang}.forgetPassword`) }}</h3>
             <div class="item-content">
-              <h2 class="tip">
-                {{ $t(`${lang}.newPassword`) }}
-              </h2>
-              <h3 class="sub-tip">
-                {{ $t(`${lang}.newPasswordTip`) }}
-              </h3>
-              <div class="wrong-email">
-                <span>{{ $t(`${lang}.wrongEmail`) }}</span>
-                <span class="rewrite" @click="changeSchedule2(1)">
-                  {{ $t(`${lang}.changeEmail`) }}
-                </span>
-              </div>
-              <div class="input-line relative ">
+              <div class="input-line relative">
                 <input
                   v-model="info.password"
                   class="bottom-border-input pwdinput"
-                  :type="info.showPassword ? 'text' : 'password'"
-                  :placeholder="$t(`${lang}.setpwd`)"
-                  @keydown.enter="changeSchedule2(3)"
+                  :placeholder="$t(`${lang}.newPassword`)"
+                  @keydown.enter="changeSchedule(3)"
                 />
                 <div class="password-eye" @click="changeRegisterPasswordStatus">
                   <i v-show="!info.showPassword" class="iconfont iconcloes"></i>
                   <i v-show="info.showPassword" class="iconfont iconopen"></i>
+                </div>
+                <div class="pwd-error-tip">
+                  {{ $t(`${lang}.newpwdtips`) }}
                 </div>
               </div>
               <div class="input-line relative">
                 <input
                   v-model="info.confirmdPassword"
                   class="bottom-border-input pwdinput"
-                  :type="info.showPassword ? 'text' : 'password'"
-                  :placeholder="$t(`${lang}.confirmpwd`)"
-                  @keydown.enter="changeSchedule2(3)"
+                  :placeholder="$t(`${lang}.confirmPassword`)"
+                  @keydown.enter="changeSchedule(3)"
                 />
                 <div class="password-eye" @click="changeRegisterPasswordStatus">
                   <i v-show="!info.showPassword" class="iconfont iconcloes"></i>
                   <i v-show="info.showPassword" class="iconfont iconopen"></i>
+                </div>
+                <div class="pwd-error-tip">
+                  {{ $t(`${lang}.repwdtips`) }}
                 </div>
               </div>
               <div class="button-group">
                 <button
                   v-loading="ajaxLoading"
                   class="submit-button"
-                  @click="changeSchedule2(3)"
+                  @click="changeSchedule(3)"
                 >
-                  {{ $t(`${lang}.ConfirmReset`) }}
+                  {{ $t(`${lang}.reset`) }}
                 </button>
               </div>
             </div>
@@ -323,6 +282,9 @@ export default {
   data() {
     return {
       phonetip:false,
+      codetip:false,
+      pwdtips:true,
+      repwdtips:true,
       active: 0,
       lang,
       waitSecond: 10,
@@ -362,7 +324,6 @@ export default {
       ],
       info: {
         email: '',
-        phone: '',
         code: '',
         password: '',
         confirmdPassword: '',
@@ -388,6 +349,7 @@ export default {
     _this.$nextTick(() => {})
   },
   methods: {
+    // 点击图标切换密码格式
     changeRegisterPasswordStatus() {
       const info = JSON.parse(JSON.stringify(this.info))
       info.showPassword = !info.showPassword
@@ -403,6 +365,7 @@ export default {
       }
       return ''
     },
+    // 繁体和英文步骤条
     async changeSchedule(key) {
       const _this = this
       const nextScheduleKey = key
@@ -411,6 +374,7 @@ export default {
       switch (key) {
         case 1:
           const info = JSON.parse(JSON.stringify(_this.info))
+          console.log("eee",info)
           info.email = ''
           info.code = ''
           info.password = ''
@@ -461,9 +425,7 @@ export default {
       const nextScheduleKey = key
 
       _this.ajaxLoading = true
-       if (_this.info.email===''){
-            _this.phonetip=true
-          }
+     
       switch (key) {
         case 1:
           const info = JSON.parse(JSON.stringify(_this.info))
@@ -472,10 +434,17 @@ export default {
           info.password = ''
           info.confirmdPassword = ''
           _this.info = info
+          try {
+            await  _this.sendCode()
+          } catch (e) {
+            _this.$errorMessage(e.message)
+            _this.ajaxLoading = false
+            return
+          }
           break
         case 2:
           try {
-            await _this.sendCode()
+            await  _this.sendCode()
           } catch (e) {
             _this.$errorMessage(e.message)
             _this.ajaxLoading = false
@@ -520,6 +489,7 @@ export default {
           })
           .catch(err => {
             reject(err)
+            console.log(err)
           })
       })
     },
@@ -962,7 +932,7 @@ export default {
   }
   .password-eye {
     position: absolute;
-    top: 50%;
+    top: 45%;
     right: 5px;
     transform: translate(0, -50%);
 
@@ -974,5 +944,16 @@ export default {
 }
 .pwdinput{
   text-align: left !important;
+  margin-bottom: 20px!important;
+}
+.pwd-error-tip{
+  position: absolute;
+  top: 65%;
+  left: 0%;
+  padding-top: 4px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(242, 155, 135, 1);
 }
 </style>
