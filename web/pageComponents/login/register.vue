@@ -1,116 +1,13 @@
 <template>
   <div>
-    <div v-if="language === 'zh_CN'" class="register-item">
-      <div class="">
-        <!-- 姓名 -->
-        <div class="relative margin-bottom-20">
-          <div class="register-input">
-            <input
-              v-model="info.surname"
-              type="text"
-              :placeholder="$t(`${lang}.name`)"
-            />
-          </div>
-          <div class="error-tip">
-            {{ $t(`${lang}.surnameTips`) }}
-          </div>
-        </div>
-      </div>
-      <!-- 手机号 -->
-      <div class="relative margin-bottom-20">
-        <div class="register-input">
-          <input
-            v-model="info.email"
-            type="text"
-            :placeholder="$t(`${lang}.mailbox`)"
-          />
-        </div>
-        <div class="error-tip">
-          {{ $t(`${lang}.phoneTips`) }}
-        </div>
-      </div>
-      <!-- 输入验证码 -->
-      <div class="relative margin-bottom-20">
-        <div class="row-flex">
-          <div class="register-input margin-right-20">
-            <input
-              v-model="info.code"
-              type="text"
-              :placeholder="$t(`${lang}.VerificationCode`)"
-            />
-          </div>
-          <div class="send-email-code">
-            <send-email-code :email="info.email"></send-email-code>
-          </div>
-        </div>
-        <div class="error-tip">
-          {{ $t(`${lang}.codeTips`) }}
-        </div>
-      </div>
-      <!-- 设置密码 -->
-      <div class="relative margin-bottom-20">
-        <div class="register-input">
-          <input
-            v-model="info.password"
-            class="padding-right-30"
-            :type="info.showPassword ? 'text' : 'password'"
-            :placeholder="$t(`${lang}.pwdType`)"
-          />
-          <div class="password-eye" @click="changeRegisterPasswordStatus">
-            <i v-show="!info.showPassword" class="iconfont iconcloes"></i>
-            <i v-show="info.showPassword" class="iconfont iconopen"></i>
-          </div>
-        </div>
-        <div class="error-tip">
-          {{ $t(`${lang}.passwordTips`) }}
-        </div>
-      </div>
-      <!-- 确认密码 -->
-      <div class="relative margin-bottom-40">
-        <div class="register-input">
-          <input
-            v-model="info.password"
-            class="padding-right-30"
-            :type="info.showPassword ? 'text' : 'password'"
-            :placeholder="$t(`${lang}.repwdType`)"
-          />
-          <div class="password-eye" @click="changeRegisterPasswordStatus">
-            <i v-show="!info.showPassword" class="iconfont iconcloes"></i>
-            <i v-show="info.showPassword" class="iconfont iconopen"></i>
-          </div>
-        </div>
-        <div class="error-tip">
-          {{ $t(`${lang}.passwordTips`) }}
-        </div>
-      </div>
-      <div
-        class="agreement row-flex align-item-start justify-center margin-bottom-10"
-      >
-        <el-checkbox v-model="info.agreement"></el-checkbox>
-        <p class="agreement-content">
-          {{ $t(`${lang}.checked`) }}
-          <!-- <nuxt-link :to="{ path: '/policies/terms-and-conditions' }">
-           {{ $t(`${lang}.rule`) }}
-          </nuxt-link> -->
-          <!-- <a href="/policies/terms-and-conditions" target="_blank">{{ $t(`${lang}.rule`) }}</a> -->
-          <a href="/policies/terms-and-conditions" target="_blank">
-            {{ $t(`${lang}.rule`) }}
-          </a>
-        </p>
-      </div>
-      <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="register">
-          {{ $t(`${lang}.registration`) }}
-        </button>
-      </div>
-    </div>
+    
     <!-- 英文和繁体 -->
-    <div v-else class="register-item">
+    <div  class="register-item">
       <div class="row-flex">
         <div class="relative margin-right-20 margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="info.surname"
+              v-model="firstname"
               type="text"
               :placeholder="$t(`${lang}.surname`)"
             />
@@ -122,7 +19,7 @@
         <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="info.name"
+              v-model="lastname"
               type="text"
               :placeholder="$t(`${lang}.name`)"
             />
@@ -135,7 +32,7 @@
       <div class="relative margin-bottom-20">
         <div class="register-input">
           <input
-            v-model="info.email"
+            v-model="email"
             type="text"
             :placeholder="$t(`${lang}.email`)"
           />
@@ -148,30 +45,50 @@
         <div class="row-flex">
           <div class="register-input margin-right-20">
             <input
-              v-model="info.code"
+              v-model="code"
               type="text"
               :placeholder="$t(`${lang}.code`)"
             />
           </div>
           <div class="send-email-code">
-            <send-email-code :email="info.email"></send-email-code>
+            <!-- <send-email-code :email="info.email"></send-email-code> -->
+            <button  :class="['getCode', className]" :disabled="waiting" @click="sendCode">
+              {{ waitingText }}
+            </button>
           </div>
         </div>
         <div class="error-tip">
           {{ $t(`${lang}.codeTips`) }}
         </div>
       </div>
-      <div class="relative margin-bottom-40">
+      <div class="relative margin-bottom-20">
         <div class="register-input">
           <input
-            v-model="info.password"
+            v-model="password"
             class="padding-right-30"
-            :type="info.showPassword ? 'text' : 'password'"
+            :type="showPassword ? 'text' : 'password'"
             :placeholder="$t(`${lang}.password`)"
           />
           <div class="password-eye" @click="changeRegisterPasswordStatus">
-            <i v-show="!info.showPassword" class="iconfont iconcloes"></i>
-            <i v-show="info.showPassword" class="iconfont iconopen"></i>
+            <i v-show="!showPassword" class="iconfont iconcloes"></i>
+            <i v-show="showPassword" class="iconfont iconopen"></i>
+          </div>
+        </div>
+        <div class="error-tip">
+          {{ $t(`${lang}.passwordTips`) }}
+        </div>
+      </div>
+      <div class="relative margin-bottom-20">
+        <div class="register-input">
+          <input
+            v-model="password_repetition"
+            class="padding-right-30"
+            :type="showPassword ? 'text' : 'password'"
+            :placeholder="$t(`${lang}.password`)"
+          />
+          <div class="password-eye" @click="changeRegisterPasswordStatus">
+            <i v-show="!showPassword" class="iconfont iconcloes"></i>
+            <i v-show="showPassword" class="iconfont iconopen"></i>
           </div>
         </div>
         <div class="error-tip">
@@ -181,7 +98,7 @@
       <div
         class="agreement row-flex align-item-start justify-center margin-bottom-10"
       >
-        <el-checkbox v-model="info.agreement"></el-checkbox>
+        <el-checkbox v-model="agreement"></el-checkbox>
         <p class="agreement-content">
           {{ $t(`${lang}.checked`) }}
           <nuxt-link :to="{ path: '/policies/terms-and-conditions' }">
@@ -200,21 +117,62 @@
 
 <script>
 import Input from '@/mixins/input.js'
+import qs from "qs";
 const lang = 'login'
+const langcode = 'components.sendEmailCode'
+const defaultTime = 5
 export default {
   mixins: [Input],
+  props: {
+    className: {
+      type: Array,
+      required: false,
+      default() {
+        return []
+      }
+    },
+    type: {
+      type: String,
+      required: false,
+      default: 'send',
+      validator(value) {
+        return ['send', 'reset'].includes(value)
+      }
+    }
+  },
   data() {
     return {
       lang,
-      info: {
-        surname: '',
-        name: '',
-        phone: '',
-        code: '',
-        password: '',
-        showPassword: true,
-        agreement: true
-      },
+      langcode,
+      waitingTime: defaultTime,
+      waiting: false,
+      waitingText:'发送验证码',
+      firstname: '',
+      lastname: '',
+      email: '',
+      code: '',
+      password: '',
+      showPassword: true,
+      password_repetition:'',
+      agreement: true,
+      // info: {
+      //   firstname: '',
+      //   lastname: '',
+      //   email: '',
+      //   code: '',
+      //   password: '',
+      //   showPassword: true,
+      //   agreement: true
+      // },
+      // info2: {
+      //   name:'',
+      //   mobile: '',
+      //   code: '',
+      //   password: '',
+      //   password_repetition:'',
+      //   showPassword: true,
+      //   agreement: true
+      // },
       requesting: false,
       language: ''
       // mobileErr: false
@@ -250,30 +208,52 @@ export default {
           type: 'login'
         }
       })
-      if (!_this.info.surname) {
+      if (!_this.firstname) {
         _this.$errorMessage(_this.$t(`${lang}.surnameTips`))
       }
-      if (!_this.info.name) {
+      if (!_this.lastname) {
         _this.$errorMessage(_this.$t(`${lang}.nameTips`))
       }
-      if (!_this.$helpers.trueEmail(_this.info.email)) {
+      if (!_this.$helpers.trueEmail(_this.email)) {
         _this.$errorMessage(_this.$t(`${lang}.mailTips`))
       }
-      if (!_this.info.code) {
+      if (!_this.code) {
         _this.$errorMessage(_this.$t(`${lang}.codeTips`))
       }
-      if (!_this.info.password) {
+      if (!_this.password) {
+        _this.$errorMessage(_this.$t(`${lang}.pwdType`))
+      }
+       if (!_this.password_repetition) {
         _this.$errorMessage(_this.$t(`${lang}.pwdType`))
       }
       _this.requesting = true
-      _this
-        .$axios({
+      this.$axios({
           method: 'post',
-          url: `/web/user/signup`,
-          params: _this.info
+          url: '/web/site/email-register',
+          data: {
+            'firstname':_this.firstname,
+            'lastname':_this.lastname,
+            'email': _this.email,
+            'code':_this.code,
+            'password':_this.password,
+            'password_repetition':_this.password_repetition
+          },
+          transformRequest: [function (data) {
+            let ret = ''
+            for (let it in data) {
+              ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            }
+            return ret
+          }],
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
         })
         .then(data => {
-          console.log(data)
+          console.log('dddd',data)
+          // if(data.code===422){
+          //   _this.$message.err(data.message);
+          // }
           _this.requesting = false
           _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
           _this.$router.replace({
@@ -284,16 +264,105 @@ export default {
           })
         })
         .catch(err => {
-          console.error(err)
+          console.log("请求",err)
           _this.requesting = false
           _this.$errorMessage(err.message)
         })
+    },
+     // 倒计时
+    countDown() {
+      const _this = this
+      const countDownStart = setInterval(function() {
+        if (_this.waitingTime === 0) {
+          clearInterval(countDownStart)
+          _this.setWait()
+          _this.waitingText = _this.$t(`${langcode}.sendCode`)
+          _this.waitingTime = defaultTime
+        } else {
+          _this.waitingText = `${_this.$t(`${langcode}.hadSend`)}(${
+            _this.waitingTime
+          }s)`
+          _this.waitingTime--
+        }
+      }, 1000)
+    },
+
+     // 设置为倒计时状态
+    setWait() {
+      if (this.waiting) {
+        this.waiting = false
+      } else {
+        this.waiting = true
+        this.countDown()
+      }
+    },
+     // 发送验证码
+    sendCode() {
+      const _this = this
+      console.log("sss",_this.email)
+      if (_this.email.length === 0) {
+        this.$errorMessage(_this.$t(`${langcode}.inputEmail`))
+        return
+      }
+      if (_this.waiting) {
+        this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
+        return
+      }
+      _this.setWait()
+       this.$axios({
+        method: "post",
+        url: '/web/site/email-code',
+        data:{
+          'email': _this.email,
+          'usage': 'register'
+        },
+        transformRequest: [function (data) {
+          let ret = ''
+          for (let it in data) {
+            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+          }
+          return ret
+        }],
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(data => {
+        console.log("ssss",data)
+        _this.code=data.code
+        _this.sendReturn(data)
+      }).catch(err => {
+        _this.resetCountDown()
+        _this.$ConfirmBox({
+          title: _this.$t(`${langcode}.error`),
+          message: `${err.message}`
+        })
+      })
+      // Helpers.requestServer(options)
+    },
+    // 重置倒计时
+    resetCountDown() {
+      this.waitingTime = 0
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+.getCode {
+  width: 100%;
+  height: 34px;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(168, 143, 130, 1);
+  background: rgba(255, 255, 255, 1);
+  border: 1px solid rgba(236, 236, 236, 1);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.getCode:disabled {
+  background-color: #999999;
+}
 .margin-bottom-29 {
   margin-bottom: 29px;
 }

@@ -21,7 +21,7 @@ import _7e8f3f88 from '..\\layouts\\mixins.js'
 const layouts = { "_default": _6f6c098b,"_mixins": _7e8f3f88 }
 
 export default {
-  head: {"title":"BDD Co","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"\u002F\u002Fat.alicdn.com\u002Ft\u002Ffont_1084741_as3v5yvkbke.css"}],"script":[],"style":[]},
+  head: {"title":"BDD Co(Git)","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"},{"rel":"stylesheet","href":"\u002F\u002Fat.alicdn.com\u002Ft\u002Ffont_1084741_as3v5yvkbke.css"}],"script":[],"style":[]},
 
   render(h, props) {
     const loadingEl = h('NuxtLoading', { ref: 'loading' })

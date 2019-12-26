@@ -1,16 +1,17 @@
 <template>
   <div>
     <!-- 简体中文登录模块 -->
-    <div v-if="language === 'zh_CN'" class="login-item">
+    <!-- <div v-if="language === 'zh_CN'" class="login-item">
       <div class="relative margin-bottom-20">
         <div class="login-input icon-input" >
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
           <input
-            v-model="info.account"
+            v-model="info.mobile"
             type="text"
             v-bind:class="{active:isActive}"
+             v-on:input="aa"
             :placeholder="$t(`${lang}.mailbox`)"
           />
         </div>
@@ -62,7 +63,7 @@
         </div>
       </div>
       <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="login">
+        <button v-loading="requesting" class="submit" @click="loginCN">
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
@@ -73,16 +74,16 @@
         <img src="/login/facebook.png" class="oauth-type" />
         <img src="/login/google.png" class="oauth-type" />
       </div>
-    </div>
+    </div> -->
     <!-- 英文和繁体登录模块 -->
-    <div v-else class="login-item">
+    <div  class="login-item">
       <div class="relative margin-bottom-20">
         <div class="login-input icon-input">
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
           <input
-            v-model="info.account"
+            v-model="account"
             type="text"
             :placeholder="$t(`${lang}.mailbox`)"
           />
@@ -97,7 +98,7 @@
             <img src="/login/lock.png" />
           </span>
           <input
-            v-model="info.password"
+            v-model="password"
             type="password"
             :placeholder="$t(`${lang}.password`)"
           />
@@ -115,7 +116,7 @@
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
             <input
-              v-model="info.code"
+              v-model="code"
               type="text"
               :placeholder="$t(`${lang}.code`)"
               @keydown.enter="login"
@@ -124,7 +125,7 @@
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code
               ref="picture-verification-code"
-              :identify-code="info.pictureCode"
+              :identify-code="pictureCode"
             ></picture-verification-code>
           </div>
         </div>
@@ -156,13 +157,18 @@ export default {
   data() {
     return {
       lang,
-      info: {
-        account: '',
-        mobile: '',
-        password: '',
-        code: '',
-        pictureCode: ''
-      },
+      // info: {
+      //   account: '',
+      //   mobile: '',
+      //   password: '',
+      //   code: '',
+      //   pictureCode: ''
+      // },
+      account: '',
+      mobile: '',
+      password: '',
+      code: '',
+      pictureCode: '',
       requesting: false,
       language: '',
       phoneErr: false,
@@ -181,9 +187,13 @@ export default {
     })
   },
   methods: {
-    // keyupphone(){
-    //    _this.isActive =true
-    // },
+    aa(){
+      const _this = this
+      if(!_this.info.mobile===""){
+        _this.isActive =false
+      }
+      console.log("aaaa")
+    },
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='
@@ -196,92 +206,57 @@ export default {
     },
     // 生成驗證碼
     refreshCode() {
-      const info = JSON.parse(JSON.stringify(this.info))
+      // const info = JSON.parse(JSON.stringify(this.info))
       const result = []
       const library = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
       this.identifyCode = ''
       for (let i = 0; i < 4; i++) {
         result.push(library[Math.floor(Math.random() * 9)])
       }
-      info.pictureCode = result.join('')
-      this.info = info
+      this.pictureCode = result.join('')
+      // this.info = info
     },
     // 登录
     login() {
       const _this = this
-      // if (_this.info.code !== _this.info.pictureCode) {
-      //   _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-      //   return
-      // }
-      // let phone_rule = /^(13[0-9]|14[5-9]|15[012356789]|166|17[0-8]|18[0-9]|19[8-9])[0-9]{8}$/
-      if(_this.info.mobile === ''||_this.info.password === ''||_this.info.code === ''){
-        _this.isActive =true
-        _this.passwordErr = true
-        _this.codeErr = true
-      }
-      //  if (_this.info.mobile === ''||!phone_rule.test(_this.info.mobile)) {
-      if (_this.info.mobile === '') {
-        _this.phoneErr = true
-      } else if (_this.info.password === '') {
-        _this.phoneErr = false
-        _this.passwordErr = true
-      } else if (_this.info.code === '') {
-        _this.passwordErr = false
-        _this.codeErr = true
-      } else if (_this.info.code !== _this.info.pictureCode) {
-        _this.codeErr = false
-        _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-        return
-      }
-      // 繁体和英文
-      if (_this.info.account === '') {
-        _this.mailErr = true
-      } else if (_this.info.password === '') {
-        _this.mailErr = false
-        _this.passwordErr = true
-      } else if (_this.info.code === '') {
-        _this.passwordErr = false
-        _this.codeErr = true
-      } else if (_this.info.code !== _this.info.pictureCode) {
-        _this.codeErr = false
-        _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-        return
-      }
       _this.requesting = true
-      _this
-        .$axios({
+      this.$axios({
           method: 'post',
-          url: `/web/login/submitLogin`,
-          params: Object.assign(_this.info, {
-            social: 'account'
-          })
-        })
-        .then(data => {
-          console.log(data)
-          _this.requesting = false
-          console.log('data=======>', data)
-          if (!data.token) {
-            throw new Error(_this.lang['login-error'])
+          url: '/web/site/login',
+          params:{            
+          },
+          data:{
+            'username': _this.account,
+            'password': _this.password
           }
-          _this.$store.commit('setToken', data.token)
-          _this.$store.dispatch('getUserInfo')
+        })
+        .then(res => {
+          console.log("登陆结果",res)
+          if (res.code==200){
+            // _this.requesting = false
+            _this.$successMessage(res.message)
+            _this.$store.commit('setToken', res.data.access_token)
+            //_this.$store.dispatch('getUserInfo')
+            const lastUrl = _this.$store.state.lastUrl
+            _this.$store.commit('setLastUrl', '')
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              } else {
+                _this.$router.replace({
+                  path: '/'
+                })
+              }
+            }, 0)
 
-          const lastUrl = _this.$store.state.lastUrl
-          _this.$store.commit('setLastUrl', '')
-          setTimeout(() => {
-            if (lastUrl) {
-              _this.$router.replace({
-                path: lastUrl
-              })
-            } else {
-              _this.$router.replace({
-                path: '/'
-              })
-            }
-          }, 0)
+          } else {
+            throw new Error (res.message)
+          }          
         })
         .catch(err => {
-          console.error(err)
+          //console.error(err)
           _this.requesting = false 
           _this.refreshCode()
           _this.$errorMessage(err.message)

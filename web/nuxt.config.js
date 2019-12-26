@@ -8,7 +8,7 @@ const STATIC_PATH = process.env.STATIC_PATH || ''
 console.log('RUNNING_ENV=====>', RUNNING_ENV)
 
 const serverUrl = {
-  dev: 'https://bddco.leyouwangluo.com/bdd-web',
+  dev: 'http://bdd.bddia.com/api',
   test: 'http://192.168.2.111/bdd-web',
   pro: 'https://www.bddia.com/bdd-web'
 }
@@ -21,18 +21,17 @@ const resourceUrl = {
 
 console.log('serverUrl=======>', serverUrl[RUNNING_ENV])
 console.log('resourceUrl=======>', resourceUrl[RUNNING_ENV])
-
 module.exports = {
   mode: 'universal',
   server: {
-    port: 8082, // default: 3000
-    host: '0.0.0.0' // default: localhost
+    port: 8318, // default: 3000
+    host: '0.0.0.0' // default: localhost 0.0.0.0
   },
   /*
    ** Headers of the page
    */
   head: {
-    title: 'BDD Co',
+    title: 'BDD Co(Git)',
     meta: [
       { charset: 'utf-8' },
       {
@@ -121,7 +120,7 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    prefix: '/api',
+    prefix: 'http://bdd.bddia.com/api',
     proxy: true
   },
   proxy: [

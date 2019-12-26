@@ -106,8 +106,8 @@ const setupProgress = (axios, ctx) => {
 export default (ctx, inject) => {
   // baseURL
   const baseURL = process.browser
-      ? '/api'
-      : (process.env._AXIOS_BASE_URL_ || 'http://localhost:8082/api')
+      ? 'http://bdd.bddia.com/api'
+      : (process.env._AXIOS_BASE_URL_ || 'http://localhost:8318http://bdd.bddia.com/api')
 
   // Create fresh objects for all default header scopes
   // Axios creates only one which is shared across SSR requests!

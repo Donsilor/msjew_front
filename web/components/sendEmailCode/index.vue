@@ -1,13 +1,12 @@
 <template>
-  <button :class="['getCode', className]" :disabled="waiting" @click="sendCode">
+  <button  :class="['getCode', className]" :disabled="waiting" @click="sendCode">
     {{ waitingText }}
   </button>
 </template>
 <style scoped>
 .getCode {
   width: 100%;
-  height: 100%;
-
+  height: 34px;
   font-size: 14px;
   font-weight: 400;
   color: rgba(168, 143, 130, 1);
@@ -53,13 +52,14 @@ export default {
       lang,
       waiting: false,
       waitingTime: defaultTime,
-      waitingText: this.$t(`${lang}.sendCode`)
+      waitingText: this.$t(`${lang}.sendCode`),
+      language: ''
     }
   },
   computed: {
     url() {
       return this.type === 'send'
-        ? '/web/user/sendCode'
+        ? '/web/site/email-code'
         : '/web/user/resetEmail'
     },
     method() {
@@ -74,40 +74,41 @@ export default {
   beforeDestroy() {},
   methods: {
     // 发送验证码
-    sendCode() {
-      const _this = this
+    // sendCode() {
+    //   const _this = this
 
-      if (_this.email.length === 0) {
-        this.$errorMessage(_this.$t(`${lang}.inputEmail`))
-        return
-      }
-      if (_this.waiting) {
-        this.$errorMessage(_this.$t(`${lang}.pleaseWait`))
-        return
-      }
+    //   if (_this.email.length === 0) {
+    //     this.$errorMessage(_this.$t(`${lang}.inputEmail`))
+    //     return
+    //   }
+    //   if (_this.waiting) {
+    //     this.$errorMessage(_this.$t(`${lang}.pleaseWait`))
+    //     return
+    //   }
 
-      _this.setWait()
-      this.$axios({
-        method: _this.method,
-        url: _this.url,
-        params: {
-          email: _this.email
-        }
-      })
-        .then(data => {
-          console.log(data)
-          _this.sendReturn(data)
-        })
-        .catch(err => {
-          _this.resetCountDown()
-          _this.$ConfirmBox({
-            title: _this.$t(`${lang}.error`),
-            message: `${err.message}`
-          })
-        })
+    //   _this.setWait()
+    //   this.$axios({
+    //     method: _this.method,
+    //     url: _this.url,
+    //     params: {
+    //       email: _this.email,
+    //       usage: 'register'
+    //     }
+    //   })
+    //     .then(data => {
+    //       _this.sendReturn(data)
+    //       console.log("ssss",data)
+    //     })
+    //     .catch(err => {
+    //       _this.resetCountDown()
+    //       _this.$ConfirmBox({
+    //         title: _this.$t(`${lang}.error`),
+    //         message: `${err.message}`
+    //       })
+    //     })
 
-      // Helpers.requestServer(options)
-    },
+    //   // Helpers.requestServer(options)
+    // },
 
     // 设置为倒计时状态
     setWait() {
