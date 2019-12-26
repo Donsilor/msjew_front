@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- 简体中文 -->
     <div v-if="language === 'zh_CN'" class="register-item">
       <div class="">
         <!-- 姓名 -->
@@ -12,7 +13,7 @@
               :placeholder="$t(`${lang}.name`)"
             />
           </div>
-          <div class="error-tip">
+          <div v-show="nameShow" class="error-tip">
             {{ $t(`${lang}.surnameTips`) }}
           </div>
         </div>
@@ -23,11 +24,12 @@
           <input
             v-model="mobile"
             type="text"
+            @blur="input"
             v-bind:class="{active:isActivemobile}"
             :placeholder="$t(`${lang}.mailbox`)"
           />
         </div>
-        <div class="error-tip">
+        <div v-show="mobileShow" class="error-tip">
           {{ $t(`${lang}.phoneTips`) }}
         </div>
       </div>
@@ -49,7 +51,7 @@
             </button>
           </div>
         </div>
-        <div class="error-tip">
+        <div v-show="codeShow" class="error-tip">
           {{ $t(`${lang}.codeTips`) }}
         </div>
       </div>
@@ -58,6 +60,7 @@
         <div class="register-input">
           <input
             v-model="password"
+            @blur="input"
             v-bind:class="{active:isActivepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
@@ -68,7 +71,7 @@
             <i v-show="showPassword" class="iconfont iconopen"></i>
           </div>
         </div>
-        <div class="error-tip">
+        <div v-show="pwdShow" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
         </div>
       </div>
@@ -78,6 +81,7 @@
           <input
             v-model=" password_repetition"
             v-bind:class="{active:isActiverepwd}"
+            @blur="input"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
             :placeholder="$t(`${lang}.repwdType`)"
@@ -87,8 +91,8 @@
             <i v-show="showPassword" class="iconfont iconopen"></i>
           </div>
         </div>
-        <div class="error-tip">
-          {{ $t(`${lang}.passwordTips`) }}
+        <div v-show="repwdShow" class="error-tip">
+          {{ $t(`${lang}.repasswordTips`) }}
         </div>
       </div>
       <div
@@ -123,9 +127,9 @@
               :placeholder="$t(`${lang}.surname`)"
             />
           </div>
-          <div class="error-tip">
+          <!-- <div class="error-tip">
             {{ $t(`${lang}.surnameTips`) }}
-          </div>
+          </div> -->
         </div>
         <div class="relative margin-bottom-20">
           <div class="register-input">
@@ -135,9 +139,9 @@
               :placeholder="$t(`${lang}.name`)"
             />
           </div>
-          <div class="error-tip">
+          <!-- <div class="error-tip">
             {{ $t(`${lang}.nameTips`) }}
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="relative margin-bottom-20">
@@ -145,10 +149,11 @@
           <input
             v-model="email"
             type="text"
+            v-bind:class="{active:isActivemail}"
             :placeholder="$t(`${lang}.email`)"
           />
         </div>
-        <div class="error-tip">
+        <div v-show="emailShow" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
         </div>
       </div>
@@ -157,6 +162,7 @@
           <div class="register-input margin-right-20">
             <input
               v-model="code"
+              v-bind:class="{active:isActivecode}"
               type="text"
               :placeholder="$t(`${lang}.code`)"
             />
@@ -168,7 +174,7 @@
             </button>
           </div>
         </div>
-        <div class="error-tip">
+        <div v-show="codeShow" class="error-tip">
           {{ $t(`${lang}.codeTips`) }}
         </div>
       </div>
@@ -176,6 +182,7 @@
         <div class="register-input">
           <input
             v-model="password"
+            v-bind:class="{active:isActivepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
             :placeholder="$t(`${lang}.password`)"
@@ -185,7 +192,7 @@
             <i v-show="showPassword" class="iconfont iconopen"></i>
           </div>
         </div>
-        <div class="error-tip">
+        <div v-show="pwdShow" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
         </div>
       </div>
@@ -193,16 +200,17 @@
         <div class="register-input">
           <input
             v-model="password_repetition"
+            v-bind:class="{active:isActiverepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
-            :placeholder="$t(`${lang}.password`)"
+            :placeholder="$t(`${lang}.repassword`)"
           />
           <div class="password-eye" @click="changeRegisterPasswordStatus">
             <i v-show="!showPassword" class="iconfont iconcloes"></i>
             <i v-show="showPassword" class="iconfont iconopen"></i>
           </div>
         </div>
-        <div class="error-tip">
+        <div v-show="repwdShow" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
         </div>
       </div>
@@ -265,16 +273,23 @@ export default {
       email: '',
       code: '',
       password: '',
-      showPassword: true,
+      showPassword: false,
       password_repetition:'',
       agreement: true,
       requesting: false,
       language: '',
       isActivename:false,
       isActivemobile:false,
+      isActivemail:false,
       isActivecode:false,
       isActivepwd:false,
-      isActiverepwd:false
+      isActiverepwd:false,
+      nameShow:false,
+      mobileShow:false,
+      emailShow:false,
+      codeShow:false,
+      pwdShow:false,
+      repwdShow:false,
     }
   },
   computed: {},
@@ -294,36 +309,83 @@ export default {
       }
       return ''
     },
+    // 点击图标切换密码类型
     changeRegisterPasswordStatus() {
       const info = JSON.parse(JSON.stringify(this.info))
       info.showPassword = !info.showPassword
       this.info = info
     },
+    input(){
+      if (!(/^1[3456789]\d{9}$/.test(this.mobile))){
+        this.isActivemobile=true;
+        this.mobileShow=true;
+      }else if (!this.code){
+        this.isActivemobile=false;
+        this.mobileShow=false;
+        this.isActivecode=true;
+        this.codeShow=true;
+      }else if (!this.password){
+        this.isActivecode=false;
+        this.codeShow=false;
+        this.isActivepwd=true;
+        this.pwdShow=true;
+      }else if (!this.password_repetition) {
+        this.isActiverepwd=true;
+        this.repwdShow=true;
+        this.isActivepwd=false;
+        this.pwdShow=false;
+      }else if(this.password !==this.password_repetition){
+        this.isActiverepwd=true;
+        this.repwdShow=true;
+      }else{
+        this.isActiverepwd=false;
+        this.repwdShow=false;
+      }
+     
+    },
     // 简体中文注册
     registerCN() {
       const _this = this
-      // _this.$router.replace({
-      //   path: '/login',
-      //   query: {
-      //     type: 'login'
-      //   }
-      // })
-      if (!_this.name) {
-        _this.isActivename=true;
+      
+      if(!_this.mobile && !_this.code && !_this.password && !_this.password_repetition){
+        _this.isActivemobile=true;
+        _this.mobileShow=true;
+        _this.isActivecode=true;
+        _this.codeShow=true;
+        _this.isActivepwd=true;
+        _this.pwdShow=true;
+        _this.isActiverepwd=true;
+        _this.repwdShow=true;
       }
-      if (!_this.mobile) {
-        _this.$errorMessage(_this.$t(`${lang}.mailTips`))
+      if (!_this.mobile || !(/^1[3456789]\d{9}$/.test(_this.mobile))) {
+        _this.isActivemobile=true;
+        _this.mobileShow=true;
+      } else if (!_this.code) {
+        _this.isActivecode=true;
+        _this.codeShow=true;
+        _this.isActivemobile=false;
+        _this.mobileShow=false;
+      }else if (!_this.password) {
+        _this.isActivepwd=true;
+        _this.pwdShow=true;
+        _this.isActivecode=false;
+        _this.codeShow=false;
+      } else if (!_this.password_repetition) {
+        _this.isActiverepwd=true;
+        _this.repwdShow=true;
+        _this.isActivrepwd=false;
+        _this.pwdShow=false;
+      } else if (_this.agreemen=false) {
+        _this.$errorMessage(_this.$t(`${lang}.tips`))
+      } else{
+        _this.$router.replace({
+          path: '/login',
+          query: {
+            type: 'login'
+          }
+        })
       }
-      if (!_this.code) {
-        _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-      }
-      if (!_this.password) {
-        _this.$errorMessage(_this.$t(`${lang}.pwdType`))
-      }
-       if (!_this.password_repetition) {
-        _this.$errorMessage(_this.$t(`${lang}.pwdType`))
-      }
-      _this.requesting = true
+      // _this.requesting = true
       this.$axios({
           method: 'post',
           url: '/web/site/mobile-register',
@@ -345,7 +407,9 @@ export default {
                 type: 'register'
               }
             })
-          }
+          }else {
+            throw new Error (res.message)
+          }   
         })
         .catch(err => {
           console.log("请求",err)
@@ -412,7 +476,7 @@ export default {
           _this.$errorMessage(err.message)
         })
     },
-     // 倒计时
+    // 倒计时
     countDown() {
       const _this = this
       const countDownStart = setInterval(function() {
@@ -430,7 +494,7 @@ export default {
       }, 1000)
     },
 
-     // 设置为倒计时状态
+    // 设置为倒计时状态
     setWait() {
       if (this.waiting) {
         this.waiting = false
@@ -439,6 +503,7 @@ export default {
         this.countDown()
       }
     },
+    
     // 发送邮箱验证码
     sendCode() {
       const _this = this
@@ -460,9 +525,9 @@ export default {
           'usage': 'register'
         }
       }).then(res => {
-        console.log("ssss",res)
+        console.log("邮箱验证码",res)
         _this.code=res.code
-        _this.sendReturn(res)
+        // _this.sendReturn(res)
       }).catch(err => {
         _this.resetCountDown()
         _this.$ConfirmBox({
@@ -493,10 +558,12 @@ export default {
           'usage': 'register'
         }
       }).then(res => {
-        console.log("ssss",res)
+        console.log("手机验证码",res)
         if (res.code==200){
           _this.code=res.data.code
-          _this.sendReturn(res)
+           _this.isActivecode=false;
+          _this.codeShow=false;
+          // _this.sendReturn(res)
         } else {
           throw new Error (res.message)
         }   
@@ -549,7 +616,7 @@ export default {
   font-size: 12px;
   font-weight: 400;
   color: rgba(242, 155, 135, 1);
-  display: none;
+  // display: none;
 }
 
 .register-item {

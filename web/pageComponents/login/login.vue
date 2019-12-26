@@ -228,7 +228,7 @@ export default {
             // _this.requesting = false
             _this.$successMessage(res.message)
             _this.$store.commit('setToken', res.data.access_token)
-            //_this.$store.dispatch('getUserInfo')
+            _this.$store.dispatch('getUserInfo')
             const lastUrl = _this.$store.state.lastUrl
             _this.$store.commit('setLastUrl', '')
             setTimeout(() => {
@@ -274,7 +274,7 @@ export default {
             // _this.requesting = false
             _this.$successMessage(res.message)
             _this.$store.commit('setToken', res.data.access_token)
-            //_this.$store.dispatch('getUserInfo')
+            _this.$store.dispatch('getUserInfo')
             const lastUrl = _this.$store.state.lastUrl
             _this.$store.commit('setLastUrl', '')
             setTimeout(() => {

@@ -7,17 +7,17 @@
     <div class="base-info">
       <div class="base-info-line">
         <div class="base-info-line-title">{{ $t(`${lang}.email`) }}</div>
-        <div class="base-info-line-content">{{ userInfo.account }}</div>
+        <div class="base-info-line-content">{{ userInfo.username }}</div>
       </div>
       <div class="base-info-line">
         <input
-          v-model="userInfo.surname"
+          v-model="userInfo.lastname"
           class="base-name-input"
           :placeholder="$t(`${lang}.lastName`)"
           type="text"
         />
         <input
-          v-model="userInfo.name"
+          v-model="userInfo.firstname"
           class="base-name-input"
           :placeholder="$t(`${lang}.firstName`)"
           type="text"
@@ -181,8 +181,8 @@ export default {
       lang,
       userInfo: {
         account: `akm`,
-        surname: ``,
-        name: ``,
+        firstname: ``,
+        lastname: ``,
         gender: 0,
         marStatus: 1,
         birthday: ``,
@@ -335,10 +335,10 @@ export default {
     },
     getUserInfo() {
       this.$axios
-        .get('/web/user/me')
+        .get('/web/member/member/me')
         .then(res => {
           console.log(res)
-          this.userInfo = res
+          this.userInfo = res.data
           this.loading = false
           if (this.userInfo.birthday) {
             this.year = moment(this.userInfo.birthday).format('YYYY')
@@ -355,11 +355,11 @@ export default {
         })
     },
     saveInfo() {
-      if (this.userInfo.surname === '' || this.userInfo.surname.length > 20) {
+      if (this.userInfo.firstname === '' || this.userInfo.firstname.length > 20) {
         this.$message.error(this.$t(`${lang}.name1`))
         return
       }
-      if (this.userInfo.name === '' || this.userInfo.name.length > 20) {
+      if (this.userInfo.lastname === '' || this.userInfo.lastname.length > 20) {
         this.$message.error(this.$t(`${lang}.name1`))
         return
       }
@@ -368,8 +368,8 @@ export default {
       ).format('x')
       this.$axios
         .post('/web/myAccount/updateBaseUserInfo', {
-          surname: this.userInfo.surname,
-          name: this.userInfo.name,
+          firstname: this.userInfo.firstname,
+          lastname: this.userInfo.lastname,
           revEmail: this.userInfo.revEmail,
           gender: this.userInfo.gender,
           marStatus: this.userInfo.marStatus,

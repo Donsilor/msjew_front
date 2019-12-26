@@ -37,7 +37,7 @@
       <i class="iconfont iconrentou" />
       <div>
         {{ $t(`${lang}.darling`) }}{{ $store.state.userInfo.name
-        }}{{ $store.state.userInfo.surname }}
+        }}{{ $store.state.userInfo.firstname }}
       </div>
       <div
         v-show="!addressMore && address.length !== 0"

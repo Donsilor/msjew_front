@@ -42,6 +42,7 @@ function makeCartGoodGroups(cart = []) {
         groupType: item.groupType || null,
         data: [item]
       }
+      // console.log("yyy",localData)
     }
   })
   let keys = Object.keys(localData)
@@ -154,11 +155,12 @@ export default {
   getUserInfo({ $axios, state, commit, dispatch }) {
     return this.$axios({
       method: 'get',
-      url: `/web/user/me`
+      url:'web/member/member/me'
     })
-      .then(data => {
-        commit('setUserInfo', data)
-        return data
+      .then(res => {
+        console.log("个人",res.data)
+        commit('setUserInfo', res.data)
+        return res.data
       })
       .catch(err => {
         return Promise.reject(err)
@@ -233,10 +235,11 @@ export default {
       })
       sendData = sendData.concat(data)
     })
+    console.log("购物车",sendData)
 
     return this.$axios({
       method: 'post',
-      url: `/web/goodsCart/add`,
+      url: 'web/member/cart/add',
       data: {
         addType: 2, // 类别(1:普通批量添加,2:登录批量添加
         goodsCartList: sendData
@@ -504,10 +507,13 @@ export default {
     // console.log('getOnlineCart=====>')
     return this.$axios({
       method: 'get',
-      url: `/web/goodsCart/list`
-    })
-      .then(data => {
-        return makeCartGoodGroups(data)
+      url:'/web/member/cart',
+      params:{
+      }
+    }).then(res => {
+        console.log("购物车列表",res)
+        // console.log("yyy",makeCartGoodGroups(res))
+        return makeCartGoodGroups(res.data)
       })
       .catch(err => {
         return Promise.reject(err)
@@ -547,7 +553,7 @@ export default {
       method: 'get',
       url: `/web/goodsCart/count`
     })
-      .then(data => {
+      .then(res=> {
         console.log('线上购物车商品总数====>', data)
         return data
       })
@@ -597,7 +603,7 @@ export default {
       sendData = sendData.concat(goods)
     })
 
-    // console.log('sendData===========>', sendData)
+    console.log('sendData===========>', sendData)
 
     return this.$axios({
       method: 'post',
