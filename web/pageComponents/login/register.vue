@@ -1,8 +1,119 @@
 <template>
   <div>
-    
+    <div v-if="language === 'zh_CN'" class="register-item">
+      <div class="">
+        <!-- 姓名 -->
+        <div class="relative margin-bottom-20">
+          <div class="register-input">
+            <input
+              v-model="name"
+              type="text"
+              v-bind:class="{active:isActivename}"
+              :placeholder="$t(`${lang}.name`)"
+            />
+          </div>
+          <div class="error-tip">
+            {{ $t(`${lang}.surnameTips`) }}
+          </div>
+        </div>
+      </div>
+      <!-- 手机号 -->
+      <div class="relative margin-bottom-20">
+        <div class="register-input">
+          <input
+            v-model="mobile"
+            type="text"
+            v-bind:class="{active:isActivemobile}"
+            :placeholder="$t(`${lang}.mailbox`)"
+          />
+        </div>
+        <div class="error-tip">
+          {{ $t(`${lang}.phoneTips`) }}
+        </div>
+      </div>
+      <!-- 输入验证码 -->
+      <div class="relative margin-bottom-20">
+        <div class="row-flex">
+          <div class="register-input margin-right-20">
+            <input
+              v-model="code"
+              v-bind:class="{active:isActivecode}"
+              type="text"
+              :placeholder="$t(`${lang}.VerificationCode`)"
+            />
+          </div>
+          <div class="send-email-code">
+            <!-- <send-email-code :email="info.email"></send-email-code> -->
+            <button  :class="['getCode', className]" :disabled="waiting" @click="sendPhoneCode">
+              {{ waitingText }}
+            </button>
+          </div>
+        </div>
+        <div class="error-tip">
+          {{ $t(`${lang}.codeTips`) }}
+        </div>
+      </div>
+      <!-- 设置密码 -->
+      <div class="relative margin-bottom-20">
+        <div class="register-input">
+          <input
+            v-model="password"
+            v-bind:class="{active:isActivepwd}"
+            class="padding-right-30"
+            :type="showPassword ? 'text' : 'password'"
+            :placeholder="$t(`${lang}.pwdType`)"
+          />
+          <div class="password-eye" @click="changeRegisterPasswordStatus">
+            <i v-show="!showPassword" class="iconfont iconcloes"></i>
+            <i v-show="showPassword" class="iconfont iconopen"></i>
+          </div>
+        </div>
+        <div class="error-tip">
+          {{ $t(`${lang}.passwordTips`) }}
+        </div>
+      </div>
+      <!-- 确认密码 -->
+      <div class="relative margin-bottom-40">
+        <div class="register-input">
+          <input
+            v-model=" password_repetition"
+            v-bind:class="{active:isActiverepwd}"
+            class="padding-right-30"
+            :type="showPassword ? 'text' : 'password'"
+            :placeholder="$t(`${lang}.repwdType`)"
+          />
+          <div class="password-eye" @click="changeRegisterPasswordStatus">
+            <i v-show="!showPassword" class="iconfont iconcloes"></i>
+            <i v-show="showPassword" class="iconfont iconopen"></i>
+          </div>
+        </div>
+        <div class="error-tip">
+          {{ $t(`${lang}.passwordTips`) }}
+        </div>
+      </div>
+      <div
+        class="agreement row-flex align-item-start justify-center margin-bottom-10"
+      >
+        <el-checkbox v-model="agreement"></el-checkbox>
+        <p class="agreement-content">
+          {{ $t(`${lang}.checked`) }}
+          <!-- <nuxt-link :to="{ path: '/policies/terms-and-conditions' }">
+           {{ $t(`${lang}.rule`) }}
+          </nuxt-link> -->
+          <!-- <a href="/policies/terms-and-conditions" target="_blank">{{ $t(`${lang}.rule`) }}</a> -->
+          <a href="/policies/terms-and-conditions" target="_blank">
+            {{ $t(`${lang}.rule`) }}
+          </a>
+        </p>
+      </div>
+      <div class="margin-bottom-29">
+        <button v-loading="requesting" class="submit" @click="registerCN">
+          {{ $t(`${lang}.registration`) }}
+        </button>
+      </div>
+    </div>
     <!-- 英文和繁体 -->
-    <div  class="register-item">
+    <div v-else class="register-item">
       <div class="row-flex">
         <div class="relative margin-right-20 margin-bottom-20">
           <div class="register-input">
@@ -146,36 +257,24 @@ export default {
       langcode,
       waitingTime: defaultTime,
       waiting: false,
-      waitingText:'发送验证码',
+      waitingText: this.$t(`${langcode}.sendCode`),
       firstname: '',
       lastname: '',
+      name: '',
+      mobile: '',
       email: '',
       code: '',
       password: '',
       showPassword: true,
       password_repetition:'',
       agreement: true,
-      // info: {
-      //   firstname: '',
-      //   lastname: '',
-      //   email: '',
-      //   code: '',
-      //   password: '',
-      //   showPassword: true,
-      //   agreement: true
-      // },
-      // info2: {
-      //   name:'',
-      //   mobile: '',
-      //   code: '',
-      //   password: '',
-      //   password_repetition:'',
-      //   showPassword: true,
-      //   agreement: true
-      // },
       requesting: false,
-      language: ''
-      // mobileErr: false
+      language: '',
+      isActivename:false,
+      isActivemobile:false,
+      isActivecode:false,
+      isActivepwd:false,
+      isActiverepwd:false
     }
   },
   computed: {},
@@ -200,21 +299,19 @@ export default {
       info.showPassword = !info.showPassword
       this.info = info
     },
-    register() {
+    // 简体中文注册
+    registerCN() {
       const _this = this
-      _this.$router.replace({
-        path: '/login',
-        query: {
-          type: 'login'
-        }
-      })
-      if (!_this.firstname) {
-        _this.$errorMessage(_this.$t(`${lang}.surnameTips`))
+      // _this.$router.replace({
+      //   path: '/login',
+      //   query: {
+      //     type: 'login'
+      //   }
+      // })
+      if (!_this.name) {
+        _this.isActivename=true;
       }
-      if (!_this.lastname) {
-        _this.$errorMessage(_this.$t(`${lang}.nameTips`))
-      }
-      if (!_this.$helpers.trueEmail(_this.email)) {
+      if (!_this.mobile) {
         _this.$errorMessage(_this.$t(`${lang}.mailTips`))
       }
       if (!_this.code) {
@@ -229,6 +326,62 @@ export default {
       _this.requesting = true
       this.$axios({
           method: 'post',
+          url: '/web/site/mobile-register',
+          data: {
+            'mobile':_this.mobile,
+            'code':_this.code,
+            'password':_this.password,
+            'password_repetition':_this.password_repetition
+          }
+        })
+        .then(res => {
+          console.log('dddd',res)
+          if(res.code==200){
+            _this.requesting = false
+            _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
+            _this.$router.replace({
+              path: '/index',
+              query: {
+                type: 'register'
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log("请求",err)
+          _this.requesting = false
+          _this.$errorMessage(err.message)
+        })
+    },
+    register() {
+      const _this = this
+      _this.$router.replace({
+        path: '/login',
+        query: {
+          type: 'login'
+        }
+      })
+      // if (!_this.firstname) {
+      //   _this.$errorMessage(_this.$t(`${lang}.surnameTips`))
+      // }
+      // if (!_this.lastname) {
+      //   _this.$errorMessage(_this.$t(`${lang}.nameTips`))
+      // }
+      // if (!_this.$helpers.trueEmail(_this.email)) {
+      //   _this.$errorMessage(_this.$t(`${lang}.mailTips`))
+      // }
+      // if (!_this.code) {
+      //   _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+      // }
+      // if (!_this.password) {
+      //   _this.$errorMessage(_this.$t(`${lang}.pwdType`))
+      // }
+      //  if (!_this.password_repetition) {
+      //   _this.$errorMessage(_this.$t(`${lang}.pwdType`))
+      // }
+      _this.requesting = true
+      this.$axios({
+          method: 'post',
           url: '/web/site/email-register',
           data: {
             'firstname':_this.firstname,
@@ -237,20 +390,10 @@ export default {
             'code':_this.code,
             'password':_this.password,
             'password_repetition':_this.password_repetition
-          },
-          transformRequest: [function (data) {
-            let ret = ''
-            for (let it in data) {
-              ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-            }
-            return ret
-          }],
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
           }
         })
-        .then(data => {
-          console.log('dddd',data)
+        .then(res => {
+          console.log('dddd',res)
           // if(data.code===422){
           //   _this.$message.err(data.message);
           // }
@@ -296,7 +439,7 @@ export default {
         this.countDown()
       }
     },
-     // 发送验证码
+    // 发送邮箱验证码
     sendCode() {
       const _this = this
       console.log("sss",_this.email)
@@ -315,23 +458,51 @@ export default {
         data:{
           'email': _this.email,
           'usage': 'register'
-        },
-        transformRequest: [function (data) {
-          let ret = ''
-          for (let it in data) {
-            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-          }
-          return ret
-        }],
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
         }
-      }).then(data => {
-        console.log("ssss",data)
-        _this.code=data.code
-        _this.sendReturn(data)
+      }).then(res => {
+        console.log("ssss",res)
+        _this.code=res.code
+        _this.sendReturn(res)
       }).catch(err => {
         _this.resetCountDown()
+        _this.$ConfirmBox({
+          title: _this.$t(`${langcode}.error`),
+          message: `${err.message}`
+        })
+      })
+      // Helpers.requestServer(options)
+    },
+    // 发送手机验证码
+    sendPhoneCode() {
+      const _this = this
+      console.log("sss",_this.mobile)
+      if (_this.mobile.length === 0) {
+        this.$errorMessage(_this.$t(`${langcode}.inputPhone`))
+        return
+      }
+      if (_this.waiting) {
+        this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
+        return
+      }
+      _this.setWait()
+       this.$axios({
+        method: "post",
+        url: '/web/site/sms-code',
+        data:{
+          'mobile': _this.mobile,
+          'usage': 'register'
+        }
+      }).then(res => {
+        console.log("ssss",res)
+        if (res.code==200){
+          _this.code=res.data.code
+          _this.sendReturn(res)
+        } else {
+          throw new Error (res.message)
+        }   
+      }).catch(err => {
+        _this.resetCountDown()
+         _this.$errorMessage(err.message)
         _this.$ConfirmBox({
           title: _this.$t(`${langcode}.error`),
           message: `${err.message}`
@@ -348,6 +519,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.active{
+  border-bottom: 1px solid #F3A18E!important;
+}
 .getCode {
   width: 100%;
   height: 34px;

@@ -1,5 +1,5 @@
 export default function({ $axios, store }) {
-  $axios.defaults.baseURL = 'http://bdd.bddia.com/api'
+  $axios.defaults.baseURL = 'http://www.bddmall.com/api'
   $axios.onRequest(config => {
     // if (config.params) {
     //   for (const n in config.params) {
@@ -24,7 +24,7 @@ export default function({ $axios, store }) {
   $axios.onResponse(res => {
     const data = res.data || {}
     return data;
-    
+
     if (data.hasOwnProperty('code')) {
       if (data.code === 200) {
          return Promise.resolve(

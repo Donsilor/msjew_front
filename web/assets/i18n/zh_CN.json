@@ -288,7 +288,7 @@
       "copyrightRight": "© 2019 BDD Co. All Rights Reserved."
     },
     "sendEmailCode": {
-      "sendCode": "发送验证码222",
+      "sendCode": "发送验证码",
       "inputEmail": "請輸入電子郵件",
       "inputPhone": "请输入正确手机号码",
       "pleaseWait": "時間正在冷卻，請稍後再試",

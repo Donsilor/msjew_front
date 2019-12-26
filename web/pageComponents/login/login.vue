@@ -1,17 +1,16 @@
 <template>
   <div>
     <!-- 简体中文登录模块 -->
-    <!-- <div v-if="language === 'zh_CN'" class="login-item">
+    <div v-if="language === 'zh_CN'" class="login-item">
       <div class="relative margin-bottom-20">
         <div class="login-input icon-input" >
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
           <input
-            v-model="info.mobile"
+            v-model="mobile"
             type="text"
             v-bind:class="{active:isActive}"
-             v-on:input="aa"
             :placeholder="$t(`${lang}.mailbox`)"
           />
         </div>
@@ -25,7 +24,7 @@
             <img src="/login/lock.png" />
           </span>
           <input
-            v-model="info.password"
+            v-model="password"
             type="password"
             v-bind:class="{active:isActive}"
             :placeholder="$t(`${lang}.password`)"
@@ -44,7 +43,7 @@
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
             <input
-              v-model="info.code"
+              v-model="code"
               type="text"
               v-bind:class="{active:isActive}"
               :placeholder="$t(`${lang}.code`)"
@@ -54,7 +53,7 @@
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code
               ref="picture-verification-code"
-              :identify-code="info.pictureCode"
+              :identify-code="pictureCode"
             ></picture-verification-code>
           </div>
         </div>
@@ -74,7 +73,7 @@
         <img src="/login/facebook.png" class="oauth-type" />
         <img src="/login/google.png" class="oauth-type" />
       </div>
-    </div> -->
+    </div>
     <!-- 英文和繁体登录模块 -->
     <div  class="login-item">
       <div class="relative margin-bottom-20">
@@ -187,13 +186,6 @@ export default {
     })
   },
   methods: {
-    aa(){
-      const _this = this
-      if(!_this.info.mobile===""){
-        _this.isActive =false
-      }
-      console.log("aaaa")
-    },
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='
@@ -215,6 +207,52 @@ export default {
       }
       this.pictureCode = result.join('')
       // this.info = info
+    },
+    // 中文登录
+    loginCN() {
+      const _this = this
+      _this.requesting = true
+      this.$axios({
+          method: 'post',
+          url: '/web/site/login',
+          params:{            
+          },
+          data:{
+            'username': _this.mobile,
+            'password': _this.password
+          }
+        })
+        .then(res => {
+          console.log("登陆结果",res)
+          if (res.code==200){
+            // _this.requesting = false
+            _this.$successMessage(res.message)
+            _this.$store.commit('setToken', res.data.access_token)
+            //_this.$store.dispatch('getUserInfo')
+            const lastUrl = _this.$store.state.lastUrl
+            _this.$store.commit('setLastUrl', '')
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              } else {
+                _this.$router.replace({
+                  path: '/'
+                })
+              }
+            }, 0)
+
+          } else {
+            throw new Error (res.message)
+          }          
+        })
+        .catch(err => {
+          //console.error(err)
+          _this.requesting = false 
+          _this.refreshCode()
+          _this.$errorMessage(err.message)
+        })
     },
     // 登录
     login() {
