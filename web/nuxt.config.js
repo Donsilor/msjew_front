@@ -8,9 +8,9 @@ const STATIC_PATH = process.env.STATIC_PATH || ''
 console.log('RUNNING_ENV=====>', RUNNING_ENV)
 
 const serverUrl = {
-  dev: 'http://bdd.bddia.com/api',
+  dev: 'http://www.bddmall.com/api',
   test: 'http://192.168.2.111/bdd-web',
-  pro: 'https://www.bddia.com/bdd-web'
+  pro: 'http://bdd.bddia.com/api'
 }
 
 const resourceUrl = {
