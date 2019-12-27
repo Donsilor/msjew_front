@@ -120,12 +120,12 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    prefix: 'http://bdd.bddia.com/api',
+    prefix: serverUrl[RUNNING_ENV],
     proxy: true
   },
-  proxy: [
+  /*proxy: [
     [
-      '/api',
+      '/',
       {
         target: serverUrl[RUNNING_ENV],
         changeOrigin: true,
@@ -133,7 +133,7 @@ module.exports = {
         pathRewrite: { '^/api/': '/' }
       }
     ]
-  ],
+  ],*/
   router: {
     middleware: ['setBasic', 'setToken'],
     scrollBehavior(to, from, savedPosition) {

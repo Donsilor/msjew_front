@@ -1,5 +1,5 @@
 export default function({ $axios, store }) {
-  $axios.defaults.baseURL = 'http://www.bddmall.com/api'
+  //$axios.defaults.baseURL = 'http://www.bddmall.com/api'
   $axios.onRequest(config => {
     // if (config.params) {
     //   for (const n in config.params) {
