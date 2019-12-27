@@ -1,0 +1,12 @@
+/_source/web/.project
+/_source/web/.nuxt
+/_source/web/.settings
+/_source/web/node_modules
+/_source/web/.buildpath
+.nuxt
+.settings
+node_modules
+.buildpath
+.project
+/web/node_modules
+/web/.nuxt
