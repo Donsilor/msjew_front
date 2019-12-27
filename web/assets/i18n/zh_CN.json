@@ -711,6 +711,7 @@
       "psw9": "请输入6-16位字符的新密码",
       "success": "修改成功",
       "email": "登入邮箱地址：",
+      "phone": "登录手机号码",
       "lastName": "姓氏",
       "firstName": "名称",
       "bookEmail": "邮件订阅",

@@ -5,9 +5,15 @@
       <div class="title-name">{{ $t(`${lang}.base`) }}</div>
     </div>
     <div class="base-info">
-      <div class="base-info-line">
-        <div class="base-info-line-title">{{ $t(`${lang}.email`) }}</div>
-        <div class="base-info-line-content">{{ userInfo.username }}</div>
+      <div>
+        <div v-if="language==='zh_CN'" class="base-info-line">
+          <div class="base-info-line-title">{{ $t(`${lang}.phone`) }}</div>
+          <div class="base-info-line-content">{{ userInfo.mobile }}</div>
+        </div>
+        <div v-else class="base-info-line">
+          <div class="base-info-line-title">{{ $t(`${lang}.email`) }}</div>
+          <div class="base-info-line-content">{{ userInfo.username }}</div>
+        </div>
       </div>
       <div class="base-info-line">
         <input
@@ -197,7 +203,8 @@ export default {
       days: [],
       fbEmail:'',
       ggMail: '',
-      isBirthday: false
+      isBirthday: false,
+      language:''
     }
   },
   computed: {
@@ -261,7 +268,20 @@ export default {
     }
     this.day = this.days[0]
   },
+  mounted(){
+    this.language = this.getCookie('language')
+  },
   methods: {
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     doYear() {
       const nowy = new Date().getFullYear()
       const nowm = new Date().getMonth()
