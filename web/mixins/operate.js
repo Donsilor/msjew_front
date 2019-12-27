@@ -28,7 +28,7 @@ export default {
       const goodInfo = {
         goodsId: id,
         groupId: null,
-        groupType: null,
+        group_type: null,
         type: 1
       }
 
@@ -86,7 +86,7 @@ export default {
       const goodInfo = {
         goodsId: id,
         groupId: null,
-        groupType: null,
+        group_type: null,
         type: 1
       }
 

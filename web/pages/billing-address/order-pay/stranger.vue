@@ -326,15 +326,15 @@
     </div>
     <div class="cart-goods">
       <div v-for="(g, index) in good" :key="index">
-        <div v-if="g.groupType === null" class="finished">
+        <div v-if="g.group_type === null" class="finished">
           <div class="cart-radio"></div>
           <single :g="g" :options="false"></single>
         </div>
-        <div v-if="g.groupType === 1" class="couple">
+        <div v-if="g.group_type === 1" class="couple">
           <div class="cart-radio"></div>
           <double :g="g" :options="false"></double>
         </div>
-        <div v-if="g.groupType === 2" class="customization">
+        <div v-if="g.group_type === 2" class="customization">
           <div class="cart-radio"></div>
           <madeUp
             :g="g"
@@ -730,7 +730,7 @@ export default {
           goodsDetailsId: this.good[i].data[0].goodsDetailsId,
           goodsId: this.good[i].data[0].goodsId,
           groupId: this.good[i].data[0].groupId || null,
-          groupType: this.good[i].groupType
+          group_type: this.good[i].group_type
         }
         carts.push(o)
       }
@@ -901,7 +901,7 @@ export default {
           goodsDetailsId: this.good[i].data[0].goodsDetailsId,
           goodsId: this.good[i].data[0].goodsId,
           groupId: this.good[i].data[0].groupId || null,
-          groupType: this.good[i].groupType
+          group_type: this.good[i].group_type
         }
         json.carts.push(o)
       }

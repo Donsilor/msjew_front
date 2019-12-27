@@ -75,11 +75,11 @@ export default {
             o.index = i
             o.time = moment(body[i].createTime).format('YYYY-MM-DD')
             if (o.groupId) {
-              o.groupType = o.groupType === 2 ? 1 : null
+              o.group_type = o.group_type === 2 ? 1 : null
               o.delId = o.id
               o.id = o.groupId
             } else {
-              o.groupType = o.groupType === 2 ? 1 : null
+              o.group_type = o.group_type === 2 ? 1 : null
               o.delId = o.id
               o.id = o.goodsId
             }

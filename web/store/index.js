@@ -31,7 +31,8 @@ export const state = () => {
       revEmail: null,
       salt: null,
       status: null,
-      firstname: null
+      firstname: null,
+      lastname: null
     },
 
     /**

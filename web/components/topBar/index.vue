@@ -46,7 +46,7 @@
               <el-dropdown type="primary" trigger="click" placement="bottom">
                 <span class="row-flex align-item-center el-dropdown-link">
                   <i class="iconfont icongerenzhongxin"></i>
-                  {{ userInfo.name }} {{ userInfo.firstname }}
+                  {{ userInfo.lastname }} {{ userInfo.firstname }}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">

@@ -7,7 +7,7 @@
         <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="name"
+              v-model="firstname"
               type="text"
               v-bind:class="{active:isActivename}"
               :placeholder="$t(`${lang}.name`)"
@@ -315,96 +315,97 @@ export default {
       info.showPassword = !info.showPassword
       this.info = info
     },
+    // 输入框
     input(){
-      if (!(/^1[3456789]\d{9}$/.test(this.mobile))){
-        this.isActivemobile=true;
-        this.mobileShow=true;
-      }else if (!this.code){
-        this.isActivemobile=false;
-        this.mobileShow=false;
-        this.isActivecode=true;
-        this.codeShow=true;
-      }else if (!this.password){
-        this.isActivecode=false;
-        this.codeShow=false;
-        this.isActivepwd=true;
-        this.pwdShow=true;
-      }else if (!this.password_repetition) {
-        this.isActiverepwd=true;
-        this.repwdShow=true;
-        this.isActivepwd=false;
-        this.pwdShow=false;
-      }else if(this.password !==this.password_repetition){
-        this.isActiverepwd=true;
-        this.repwdShow=true;
-      }else{
-        this.isActiverepwd=false;
-        this.repwdShow=false;
-      }
+      // if (!(/^1[3456789]\d{9}$/.test(this.mobile))){
+      //   this.isActivemobile=true;
+      //   this.mobileShow=true;
+      // }else if (!this.code){
+      //   this.isActivemobile=false;
+      //   this.mobileShow=false;
+      //   this.isActivecode=true;
+      //   this.codeShow=true;
+      // }else if (!this.password){
+      //   this.isActivecode=false;
+      //   this.codeShow=false;
+      //   this.isActivepwd=true;
+      //   this.pwdShow=true;
+      // }else if (!this.password_repetition) {
+      //   this.isActiverepwd=true;
+      //   this.repwdShow=true;
+      //   this.isActivepwd=false;
+      //   this.pwdShow=false;
+      // }else if(this.password !==this.password_repetition){
+      //   this.isActiverepwd=true;
+      //   this.repwdShow=true;
+      // }else{
+      //   this.isActiverepwd=false;
+      //   this.repwdShow=false;
+      // }
      
     },
     // 简体中文注册
     registerCN() {
       const _this = this
-      
-      if(!_this.mobile && !_this.code && !_this.password && !_this.password_repetition){
-        _this.isActivemobile=true;
-        _this.mobileShow=true;
-        _this.isActivecode=true;
-        _this.codeShow=true;
-        _this.isActivepwd=true;
-        _this.pwdShow=true;
-        _this.isActiverepwd=true;
-        _this.repwdShow=true;
-      }
-      if (!_this.mobile || !(/^1[3456789]\d{9}$/.test(_this.mobile))) {
-        _this.isActivemobile=true;
-        _this.mobileShow=true;
-      } else if (!_this.code) {
-        _this.isActivecode=true;
-        _this.codeShow=true;
-        _this.isActivemobile=false;
-        _this.mobileShow=false;
-      }else if (!_this.password) {
-        _this.isActivepwd=true;
-        _this.pwdShow=true;
-        _this.isActivecode=false;
-        _this.codeShow=false;
-      } else if (!_this.password_repetition) {
-        _this.isActiverepwd=true;
-        _this.repwdShow=true;
-        _this.isActivrepwd=false;
-        _this.pwdShow=false;
-      } else if (_this.agreemen=false) {
-        _this.$errorMessage(_this.$t(`${lang}.tips`))
-      } else{
-        _this.$router.replace({
-          path: '/login',
-          query: {
-            type: 'login'
-          }
-        })
-      }
+      // if(!_this.mobile && !_this.code && !_this.password && !_this.password_repetition){
+        //   _this.isActivemobile=true;
+        //   _this.mobileShow=true;
+        //   _this.isActivecode=true;
+        //   _this.codeShow=true;
+        //   _this.isActivepwd=true;
+        //   _this.pwdShow=true;
+        //   _this.isActiverepwd=true;
+        //   _this.repwdShow=true;
+        // }
+        // if (!_this.mobile || !(/^1[3456789]\d{9}$/.test(_this.mobile))) {
+        //   _this.isActivemobile=true;
+        //   _this.mobileShow=true;
+        // } else if (!_this.code) {
+        //   _this.isActivecode=true;
+        //   _this.codeShow=true;
+        //   _this.isActivemobile=false;
+        //   _this.mobileShow=false;
+        // } else if (!_this.password) {
+        //   _this.isActivepwd=true;
+        //   _this.pwdShow=true;
+        //   _this.isActivecode=false;
+        //   _this.codeShow=false;
+        // } else if (!_this.password_repetition) {
+        //   _this.isActiverepwd=true;
+        //   _this.repwdShow=true;
+        //   _this.isActivrepwd=false;
+        //   _this.pwdShow=false;
+        // } else if (_this.agreemen=false) {
+        //   _this.$errorMessage(_this.$t(`${lang}.tips`))
+        // } else{
+        //   _this.$router.replace({
+        //     path: '/login',
+        //     query: {
+        //       type: 'login'
+        //     }
+        //   })
+      // }
       // _this.requesting = true
       this.$axios({
           method: 'post',
           url: '/web/site/mobile-register',
           data: {
             'mobile':_this.mobile,
+            'lastname':_this.firstname,
             'code':_this.code,
             'password':_this.password,
             'password_repetition':_this.password_repetition
           }
         })
         .then(res => {
-          console.log('dddd',res)
+          console.log('注册结果',res)
           if(res.code==200){
             _this.requesting = false
             _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
             _this.$router.replace({
-              path: '/index',
+              path: '/login',
               query: {
-                type: 'register'
+                type: 'login'
               }
             })
           }else {
@@ -419,31 +420,13 @@ export default {
     },
     register() {
       const _this = this
-      _this.$router.replace({
-        path: '/login',
-        query: {
-          type: 'login'
-        }
-      })
-      // if (!_this.firstname) {
-      //   _this.$errorMessage(_this.$t(`${lang}.surnameTips`))
-      // }
-      // if (!_this.lastname) {
-      //   _this.$errorMessage(_this.$t(`${lang}.nameTips`))
-      // }
-      // if (!_this.$helpers.trueEmail(_this.email)) {
-      //   _this.$errorMessage(_this.$t(`${lang}.mailTips`))
-      // }
-      // if (!_this.code) {
-      //   _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-      // }
-      // if (!_this.password) {
-      //   _this.$errorMessage(_this.$t(`${lang}.pwdType`))
-      // }
-      //  if (!_this.password_repetition) {
-      //   _this.$errorMessage(_this.$t(`${lang}.pwdType`))
-      // }
-      _this.requesting = true
+      // _this.$router.replace({
+      //   path: '/login',
+      //   query: {
+      //     type: 'login'
+      //   }
+      // })
+      // _this.requesting = true
       this.$axios({
           method: 'post',
           url: '/web/site/email-register',
@@ -457,18 +440,19 @@ export default {
           }
         })
         .then(res => {
-          console.log('dddd',res)
-          // if(data.code===422){
-          //   _this.$message.err(data.message);
-          // }
-          _this.requesting = false
-          _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-          _this.$router.replace({
-            path: '/index',
-            query: {
-              type: 'register'
-            }
-          })
+          console.log('注册结果',res)
+          if(res.code==200){
+            _this.requesting = false
+            _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
+            _this.$router.replace({
+              path: '/login',
+              query: {
+                type: 'login'
+              }
+            })
+          }else {
+            throw new Error (res.message)
+          }  
         })
         .catch(err => {
           console.log("请求",err)
@@ -526,14 +510,19 @@ export default {
         }
       }).then(res => {
         console.log("邮箱验证码",res)
-        _this.code=res.code
+        if (res.code==200){
+          _this.code=res.data.code
+        }else {
+          throw new Error (res.message)
+        }   
         // _this.sendReturn(res)
       }).catch(err => {
         _this.resetCountDown()
-        _this.$ConfirmBox({
-          title: _this.$t(`${langcode}.error`),
-          message: `${err.message}`
-        })
+        _this.$errorMessage(err.message)
+        // _this.$ConfirmBox({
+        //   title: _this.$t(`${langcode}.error`),
+        //   message: `${err.message}`
+        // })
       })
       // Helpers.requestServer(options)
     },

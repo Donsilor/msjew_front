@@ -13,7 +13,8 @@
             @click="toPersonalAccount"
           />
         </div>
-        <div class="email">{{ showEmail }}</div>
+        <div v-if="language === 'zh_CN'" class="email">{{showMobile}}</div>
+        <div v-else class="email">{{ showEmail }}</div>
         <div class="middle-line" />
         <div class="link-box">
           <nuxt-link
@@ -72,12 +73,16 @@ export default {
           url: '/account/diamond-compare',
           name: this.$t(`${lang}.index.compare`)
         }
-      ]
+      ],
+      language:''
     }
   },
   computed: {
     userInfo() {
       return this.$store.state.userInfo
+    },
+    showMobile() {
+      let result = this.mobile
     },
     showEmail() {
       const hidenLength = 4
@@ -118,11 +123,22 @@ export default {
   },
   created() {},
   mounted() {
+    this.language = this.getCookie('language')
     // if (!this.$store.getters.hadLogin) {
     //   this.$router.replace(`/login`)
     // }
   },
   methods: {
+     // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     toPersonalAccount() {
       this.$router.replace(`/account/settings`)
     }

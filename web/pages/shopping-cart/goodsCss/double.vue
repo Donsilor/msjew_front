@@ -154,7 +154,7 @@ export default {
       const data = {
         goodsId: null,
         groupId: this.g.data[0].groupId,
-        groupType: this.g.groupType,
+       group_type: this.g.group_type,
         type: 1
       }
       this.$store

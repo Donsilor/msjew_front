@@ -1495,7 +1495,7 @@ export default {
         goodsDetailsId: '88888888',
         goodsId: productInfo.goodsId,
         groupId: null,
-        groupType: null,
+        group_type: null,
         serviceId: 0,
         serviceVal: 'string'
       }

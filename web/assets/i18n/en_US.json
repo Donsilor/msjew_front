@@ -325,6 +325,7 @@
     "mailTips": "Enter correct email",
     "password": "Enter Password",
     "passwordTips": "Enter login password",
+    "logintips":"login successful",
     "forget": "Forget Password?",
     "code": "Verification",
     "codeTips": "Enter correct verification code",

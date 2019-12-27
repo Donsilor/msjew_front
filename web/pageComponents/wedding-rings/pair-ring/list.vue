@@ -368,7 +368,7 @@ export default {
       const goodInfo = {
         goodsId: null,
         groupId: id,
-        groupType: 1,
+        group_type: 1,
         type: 1
       }
 

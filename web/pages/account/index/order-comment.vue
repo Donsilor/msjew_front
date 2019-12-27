@@ -33,7 +33,7 @@
         </div>
         <div class="right-dm">
           <!--          第一个-->
-          <div class="rdm-box" @click="jumpDetail(d.data[0], d.groupType, 1)">
+          <div class="rdm-box" @click="jumpDetail(d.data[0], d.group_type, 1)">
             <div class="rdm-img">
               <img :src="$imageStrToArray(d.data[0].goodsImages)[0]" alt="" />
             </div>
@@ -51,7 +51,7 @@
           <div
             v-if="d.data[1]"
             class="rdm-box"
-            @click="jumpDetail(d.data[1], d.groupType, 0)"
+            @click="jumpDetail(d.data[1], d.group_type, 0)"
           >
             <div class="rdm-img">
               <img :src="$imageStrToArray(d.data[1].goodsImages)[0]" alt="" />
@@ -144,27 +144,27 @@ export default {
           const newGroup = {
             id: `${good.orderId}-${good.joinCartTime}`,
             image: good.goodsImages,
-            groupType: good.groupType,
+            group_type: good.group_type,
             groupTypeText: this.$t(`${lang}.singleProduct`),
             goodsName: good.goodsName
           }
 
-          if ([null, 0, '0'].includes(good.groupType)) {
+          if ([null, 0, '0'].includes(good.group_type)) {
             // 单品
-            newGroup.groupType = 0
+            newGroup.group_type = 0
             newGroup.groupTypeText = this.$t(`${lang}.singleProduct`)
           }
-          if (good.groupType === 1) {
+          if (good.group_type === 1) {
             // 對戒
-            newGroup.groupType = 1
+            newGroup.group_type = 1
             newGroup.groupTypeText = this.$t(`${lang}.pairRing`)
             newGroup.goodsName =
               good.ringName || this.$t(`${lang}.defaultPairRing`)
             newGroup.image = good.ringImg || '/marriage-ring/default.png'
           }
-          if (good.groupType === 2) {
+          if (good.group_type === 2) {
             // 定制
-            newGroup.groupType = 2
+            newGroup.group_type = 2
             newGroup.groupTypeText = this.$t(`${lang}.diy`)
           }
 
@@ -195,7 +195,7 @@ export default {
       // 删除钻石单品（钻石单品不能评论）
       for (let n = keys.length - 1; n >= 0; n--) {
         if (
-          [null, 0, '0'].includes(result[n].groupType) &&
+          [null, 0, '0'].includes(result[n].group_type) &&
           result[n].data[0].categoryId === 1
         ) {
           // 单品钻石
@@ -206,7 +206,7 @@ export default {
       // 将定制的商品进行排序，钻石放在后面
       result.map(item => {
         console.log('item====>', item)
-        if (item.groupType === 2) {
+        if (item.group_type === 2) {
           // 定制
           const diamond = []
           const pedestal = []

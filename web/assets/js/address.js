@@ -22,9 +22,9 @@ export default {
   methods: {
     getListOne() {
       this.$axios
-        .get('/web/myAccount/listArea')
+        .get('/web/common/area')
         .then(res => {
-          // console.log('country===>', res)
+          console.log('country===>', res)
           this.countryList = res
           this.countryList.unshift({
             areaId: '',

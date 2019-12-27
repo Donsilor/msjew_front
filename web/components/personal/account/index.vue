@@ -28,7 +28,7 @@
         <div class="base-info-line-content gender-choose">
           <div class="single-radio">
             <input
-              :checked="userInfo.gender === 1"
+              :checked="userInfo.gender == 1"
               type="radio"
               @click="userInfo.gender = 1"
             />
@@ -36,7 +36,7 @@
           </div>
           <div class="single-radio">
             <input
-              :checked="userInfo.gender === 2"
+              :checked="userInfo.gender == 2"
               type="radio"
               @click="userInfo.gender = 2"
             />
@@ -44,7 +44,7 @@
           </div>
           <div class="single-radio">
             <input
-              :checked="userInfo.gender === 0"
+              :checked="userInfo.gender == 0"
               type="radio"
               @click="userInfo.gender = 0"
             />
@@ -57,21 +57,21 @@
         <div class="base-info-line-content marriage-choose">
           <div class="single-radio">
             <input
-              :checked="userInfo.marStatus === 0"
+              :checked="userInfo.marriage == 0"
               type="radio"
-              @click="userInfo.marStatus = 0"
+              @click="userInfo.marriage = 0"
             />
-            <span @click="userInfo.marStatus = 0">{{
+            <span @click="userInfo.marriage = 0">{{
               $t(`${lang}.married`)
             }}</span>
           </div>
           <div class="single-radio">
             <input
-              :checked="userInfo.marStatus === 1"
+              :checked="userInfo.marriage == 1"
               type="radio"
-              @click="userInfo.marStatus = 1"
+              @click="userInfo.marriage = 1"
             />
-            <span @click="userInfo.marStatus = 1">{{
+            <span @click="userInfo.marriage = 1">{{
               $t(`${lang}.unmarried`)
             }}</span>
           </div>
@@ -128,18 +128,18 @@
         <div class="bind-info-title">{{ $t(`${lang}.faceLook`) }}</div>
         <div class="bind-info-content">
           <img
-            v-show="!userInfo.facebookAccount"
+            v-show="!userInfo.facebook_account"
             class="bind-img"
             src="../../../static/personal/account/facelook.png"
             alt=""
           />
-          <div v-show="!userInfo.facebookAccount" class="bind-input-box">
+          <div v-show="!userInfo.facebook_account" class="bind-input-box">
             <input v-model="fbEmail" type="text" class="bind-input" />
-            <span class="bind-input-span" @click="checkEmail(fbEmail, 2)">{{
+            <span class="bind-input-span" @click="checkEmail(fbEmail, 'facebook_account')">{{
               $t(`${lang}.bind`)
             }}</span>
           </div>
-          <div v-show="userInfo.facebookAccount" class="bind-btn">
+          <div v-show="userInfo.facebook_account" class="bind-btn">
             <div>{{ showFacebookAccount }}&nbsp;</div>
             <div class="bind-status">{{ $t(`${lang}.alreadyBind`) }}</div>
           </div>
@@ -149,18 +149,18 @@
         <div class="bind-info-title">{{ $t(`${lang}.google`) }}</div>
         <div class="bind-info-content">
           <img
-            v-show="!userInfo.googleAccount"
+            v-show="!userInfo.google_account"
             class="bind-img"
             src="../../../static/personal/account/google.png"
             alt=""
           />
-          <div v-show="!userInfo.googleAccount" class="bind-input-box">
+          <div v-show="!userInfo.google_account" class="bind-input-box">
             <input v-model="ggMail" type="text" class="bind-input" />
-            <span class="bind-input-span" @click="checkEmail(ggMail, 1)">{{
+            <span class="bind-input-span" @click="checkEmail(ggMail, 'google_account')">{{
               $t(`${lang}.bind`)
             }}</span>
           </div>
-          <div v-show="userInfo.googleAccount" class="bind-btn">
+          <div v-show="userInfo.google_account" class="bind-btn">
             <div>{{ showGoogleAccount }}&nbsp;</div>
             <div class="bind-status">{{ $t(`${lang}.alreadyBind`) }}</div>
           </div>
@@ -184,10 +184,10 @@ export default {
         firstname: ``,
         lastname: ``,
         gender: 0,
-        marStatus: 1,
+        marriage: 1,
         birthday: ``,
-        facebookAccount: ``,
-        googleAccount: ``
+        facebook_account: ``,
+        google_account: ``
       },
       year: new Date().getFullYear(),
       years: [],
@@ -195,15 +195,15 @@ export default {
       months: [],
       day: '',
       days: [],
-      fbEmail: ``,
-      ggMail: ``,
+      fbEmail:'',
+      ggMail: '',
       isBirthday: false
     }
   },
   computed: {
     showFacebookAccount() {
       const hidenLength = 4
-      let result = this.userInfo.facebookAccount
+      let result = this.userInfo.facebook_account
       if ([undefined, null].includes(result)) {
         return result
       }
@@ -225,7 +225,7 @@ export default {
     },
     showGoogleAccount() {
       const hidenLength = 4
-      let result = this.userInfo.googleAccount
+      let result = this.userInfo.google_account
       if ([undefined, null].includes(result)) {
         return result
       }
@@ -339,6 +339,7 @@ export default {
         .then(res => {
           console.log(res)
           this.userInfo = res.data
+          console.log('uuuu',this.userInfo)
           this.loading = false
           if (this.userInfo.birthday) {
             this.year = moment(this.userInfo.birthday).format('YYYY')
@@ -363,20 +364,23 @@ export default {
         this.$message.error(this.$t(`${lang}.name1`))
         return
       }
-      this.userInfo.birthday = moment(
-        this.year + '-' + this.month + '-' + this.day
-      ).format('x')
+      this.userInfo.birthday =  this.year + '-' + this.month + '-' + this.day     
       this.$axios
-        .post('/web/myAccount/updateBaseUserInfo', {
+        .post('/web/member/member/edit', {
           firstname: this.userInfo.firstname,
           lastname: this.userInfo.lastname,
-          revEmail: this.userInfo.revEmail,
+          // revEmail: this.userInfo.revEmail,
           gender: this.userInfo.gender,
-          marStatus: this.userInfo.marStatus,
+          marriage: this.userInfo.marriage,
+          // google_account: this.ggMail,
+          // facebook_account: this.fbEmail
           birthday: this.userInfo.birthday
         })
         .then(res => {
-          console.log(res)
+          console.log("修改",res)
+          if(res.code !=200) {
+            throw new Error(res.message)
+          }
           this.$message({
             message: this.$t(`${lang}.success`),
             type: 'success'
@@ -395,22 +399,20 @@ export default {
         this.$message.error(this.$t(`${lang}.emailGood`))
         return
       }
-      const data = this.$helpers.transformRequest(
-        JSON.parse(JSON.stringify({ email: e, type })),
-        false
-      )
+      let data = {};
+      data[type] = e;      
       this.$axios
-        .post('/web/myAccount/bindEmail', data)
+        .post('web/member/member/edit',data)
         .then(res => {
+          if(res.code !=200) {
+            throw new Error(res.message)
+          }
           this.$message({
-            message: this.lang.bindSuccess,
+            message: this.$t(`${lang}.bindSuccess`),
             type: 'success'
           })
-          if (type === 1) {
-            this.userInfo.googleAccount = e
-          } else if (type === 2) {
-            this.userInfo.facebookAccount = e
-          }
+          this.userInfo[type] = e
+          
         })
         .catch(err => {
           if (!err.response) {

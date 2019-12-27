@@ -326,6 +326,7 @@
     "password": "設置密碼*",
     "repassword": "確認密碼*",
     "passwordTips": "請正確輸入密碼",
+    "logintips": "登入成功",
     "forget": "忘記密碼？",
     "code": "請輸入驗證碼*",
     "codeTips": "請輸入正確驗證碼",

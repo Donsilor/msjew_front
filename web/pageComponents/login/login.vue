@@ -35,9 +35,9 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <nuxt-link :to="{ path: '/reset-password' }">
+        <!-- <nuxt-link :to="{ path: '/reset-password' }">
           {{ $t(`${lang}.forget`) }}
-        </nuxt-link>
+        </nuxt-link> -->
       </div>
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
@@ -75,7 +75,7 @@
       </div>
     </div>
     <!-- 英文和繁体登录模块 -->
-    <div  class="login-item">
+    <div v-else class="login-item">
       <div class="relative margin-bottom-20">
         <div class="login-input icon-input">
           <span class="icon">
@@ -107,9 +107,9 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <nuxt-link :to="{ path: '/reset-password' }">
+        <!-- <nuxt-link :to="{ path: '/reset-password' }">
           {{ $t(`${lang}.forget`) }}
-        </nuxt-link>
+        </nuxt-link> -->
       </div>
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
@@ -156,13 +156,6 @@ export default {
   data() {
     return {
       lang,
-      // info: {
-      //   account: '',
-      //   mobile: '',
-      //   password: '',
-      //   code: '',
-      //   pictureCode: ''
-      // },
       account: '',
       mobile: '',
       password: '',
@@ -225,24 +218,28 @@ export default {
         .then(res => {
           console.log("登陆结果",res)
           if (res.code==200){
-            // _this.requesting = false
-            _this.$successMessage(res.message)
-            _this.$store.commit('setToken', res.data.access_token)
-            _this.$store.dispatch('getUserInfo')
-            const lastUrl = _this.$store.state.lastUrl
-            _this.$store.commit('setLastUrl', '')
-            setTimeout(() => {
-              if (lastUrl) {
-                _this.$router.replace({
-                  path: lastUrl
-                })
-              } else {
-                _this.$router.replace({
-                  path: '/'
-                })
-              }
-            }, 0)
-
+            if (_this.code !== _this.pictureCode) {
+              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+              _this.requesting = false
+            }else{
+              _this.$successMessage(_this.$t(`${lang}.logintips`))
+              _this.$store.commit('setToken', res.data.access_token)
+              _this.$store.dispatch('getUserInfo')
+              const lastUrl = _this.$store.state.lastUrl
+              _this.$store.commit('setLastUrl', '')
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                } else {
+                  _this.$router.replace({
+                    path: '/'
+                  })
+                }
+              }, 0)
+            }
+            
           } else {
             throw new Error (res.message)
           }          
@@ -271,23 +268,27 @@ export default {
         .then(res => {
           console.log("登陆结果",res)
           if (res.code==200){
-            // _this.requesting = false
-            _this.$successMessage(res.message)
-            _this.$store.commit('setToken', res.data.access_token)
-            _this.$store.dispatch('getUserInfo')
-            const lastUrl = _this.$store.state.lastUrl
-            _this.$store.commit('setLastUrl', '')
-            setTimeout(() => {
-              if (lastUrl) {
-                _this.$router.replace({
-                  path: lastUrl
-                })
-              } else {
-                _this.$router.replace({
-                  path: '/'
-                })
-              }
-            }, 0)
+            if (_this.code !== _this.pictureCode) {
+              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+              _this.requesting = false
+            }else {
+              _this.$successMessage(_this.$t(`${lang}.logintips`))
+              _this.$store.commit('setToken',res.data.access_token)
+              _this.$store.dispatch('getUserInfo')
+              const lastUrl = _this.$store.state.lastUrl
+              _this.$store.commit('setLastUrl', '')
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                } else {
+                  _this.$router.replace({
+                    path: '/'
+                  })
+                }
+              }, 0)
+            }
 
           } else {
             throw new Error (res.message)

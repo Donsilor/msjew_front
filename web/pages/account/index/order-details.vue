@@ -398,7 +398,7 @@ export default {
         query: {}
       }
 
-      if (obj.groupType === 1) {
+      if (obj.group_type === 1) {
         // console.log(`对戒💍`)
         route = {
           path: `/ring/wedding-rings/${obj.goodsName.replace(/\//g, '')}`,

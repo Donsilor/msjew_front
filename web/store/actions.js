@@ -39,10 +39,9 @@ function makeCartGoodGroups(cart = []) {
     } else {
       localData[item[keyName]] = {
         id: item[keyName].toString(),
-        groupType: item.groupType || null,
+        group_type: item.group_type || null,
         data: [item]
       }
-      // console.log("yyy",localData)
     }
   })
   let keys = Object.keys(localData)
@@ -55,7 +54,7 @@ function makeCartGoodGroups(cart = []) {
 
   // 将定制的商品进行排序，钻石放在后面
   result.map(item => {
-    if (item.groupType === null) {
+    if (item.group_type === null) {
       // 单品
       const simpleGoodsEntity = item.data[0].simpleGoodsEntity || {}
       item.groupTypeText = '单品'
@@ -63,7 +62,7 @@ function makeCartGoodGroups(cart = []) {
       item.image = simpleGoodsEntity.goodsImages
       item.coinType = simpleGoodsEntity.coinType
       item.price = simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
-    } else if (item.groupType === 1) {
+    } else if (item.group_type === 1) {
       // 对戒
       const ringsSimpleGoodsEntity = item.data[0].ringsSimpleGoodsEntity || {}
       item.groupTypeText = '对戒'
@@ -75,7 +74,7 @@ function makeCartGoodGroups(cart = []) {
           .retailMallPrice +
         item.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
           .retailMallPrice
-    } else if (item.groupType === 2) {
+    } else if (item.group_type === 2) {
       // 定制
       const diamond = []
       const pedestal = []
@@ -245,7 +244,7 @@ export default {
         goodsCartList: sendData
       }
     })
-      .then(data => {
+      .then(res => {
         dispatch('cleanLocalCart')
         return Promise.resolve('success')
       })
@@ -307,9 +306,9 @@ export default {
 
     return this.$axios({
       method: 'post',
-      url: `/web/goodsCart/add`,
+      url: 'web/member/cart/add',
       data: {
-        addType: 1, // 类别(1:普通批量添加,2:登录批量添加
+        goods_type: 1, // 类别(1:普通批量添加,2:登录批量添加
         goodsCartList: goods
       }
     })
@@ -507,11 +506,9 @@ export default {
     // console.log('getOnlineCart=====>')
     return this.$axios({
       method: 'get',
-      url:'/web/member/cart',
-      params:{
-      }
+      url:'/web/member/cart'
     }).then(res => {
-        console.log("购物车列表",res)
+        console.log("购物车列表",res.data)
         // console.log("yyy",makeCartGoodGroups(res))
         return makeCartGoodGroups(res.data)
       })
@@ -686,7 +683,7 @@ export default {
     }
     const sendData = goods.map(item => {
       delete item.id
-      delete item.groupType
+      delete item.group_type
       return item
     })
 
@@ -758,7 +755,7 @@ export default {
     // console.log('addOnlineWish=====>')
 
     const sendData = goods.map(item => {
-      delete item.groupType
+      delete item.group_type
       return item
     })
 
@@ -1049,7 +1046,7 @@ export default {
             result = {
               goodsId: null,
               groupId: item.id,
-              groupType: 1,
+              group_type: 1,
 
               name: item.name,
               images: item.ringImg,
@@ -1062,7 +1059,7 @@ export default {
             result = {
               goodsId: item.goodId,
               groupId: null,
-              groupType: null,
+              group_type: null,
 
               name: item.goodsName,
               images: item.goodsImages,
@@ -1118,7 +1115,7 @@ export default {
     }
     const sendData = goods.map(item => {
       delete item.id
-      delete item.groupType
+      delete item.group_type
       return item
     })
 
@@ -1190,7 +1187,7 @@ export default {
     // console.log('addOnlineCompared=====>')
 
     const sendData = goods.map(item => {
-      delete item.groupType
+      delete item.group_type
       return item
     })
 
