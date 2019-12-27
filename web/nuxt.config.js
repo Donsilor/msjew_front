@@ -120,8 +120,8 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    prefix: 'http://bdd.bddia.com/api',
-    proxy: true
+    // prefix: '/api',
+    // proxy: true
   },
   proxy: [
     [
