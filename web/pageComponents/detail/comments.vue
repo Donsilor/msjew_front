@@ -1,6 +1,6 @@
 <template>
   <section class="comments">
-    <h2 class="section-name">
+    <!-- <h2 class="section-name">
       {{ $t(`${lang}.customerReviews`) }}（{{ total_count || 0 }}）
     </h2>
     <h3 class="average-score">
@@ -12,8 +12,8 @@
           :class="['iconfont', n <= avgLevel ? 'iconxing' : 'iconxing1']"
         ></i>
       </div>
-    </h3>
-    <div class="tab">
+    </h3> -->
+    <!-- <div class="tab">
       <label>
         <input v-model="shouType" type="radio" name="evaType" value="1" />
         <span>{{ $t(`${lang}.allReviews`) }}</span>
@@ -22,8 +22,8 @@
         <input v-model="shouType" type="radio" name="evaType" value="2" />
         <span>{{ $t(`${lang}.fiveStarReviews`) }}</span>
       </label>
-    </div>
-    <div class="list-data">
+    </div> -->
+   <!-- <div class="list-data">
       <div v-for="(item, index) in showingData" :key="index" class="item">
         <div class="left-info">
           <p class="comment-desc">{{ item.commentsDesc }}</p>
@@ -55,9 +55,9 @@
       >
         {{ $t(`${lang}.loadingMore`) }}
       </button>
-    </div>
+    </div> -->
     <!--    <no-more-data v-show="noMoreListData"></no-more-data>-->
-    <bdd-empty v-show="noListData" :type="'comment'"></bdd-empty>
+    <!-- <bdd-empty v-show="noListData" :type="'comment'"></bdd-empty> -->
   </section>
 </template>
 

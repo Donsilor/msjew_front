@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="links">
-      <ul class="social-links">
+      <!-- <ul class="social-links">
         <li v-for="(item, index) in socials" :key="index" class="item">
           <a :href="item.href" target="_blank">
             <div class="item-image">
@@ -47,7 +47,7 @@
             </div>
           </a>
         </li>
-      </ul>
+      </ul> -->
     </div>
     <footer class="copy-right">
       <div class="copy-right-content">
@@ -328,6 +328,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 52px;
 
     .social-links,
     .friend-links,

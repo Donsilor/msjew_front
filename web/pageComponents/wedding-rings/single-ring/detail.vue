@@ -152,7 +152,7 @@
             确认选择
           </button>
         </div>
-        <div class="other-info">
+        <!-- <div class="other-info">
           <ul class="operates">
             <li class="item wish-state">
               <i
@@ -170,7 +170,7 @@
               </span>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </section>
     <!--    推荐商品-->
@@ -252,16 +252,16 @@ export default {
             _this.$scrollTopTo(targetEle, top)
           }
         },
-        {
-          key: 'reviews',
-          name: this.$t(`${lang}.customerReviews`),
-          ref: '',
-          onClick() {
-            const targetEle = document.getElementsByClassName('layout-box')[0]
-            const top = _this.$refs['product-comments'].$el.offsetTop - 110
-            _this.$scrollTopTo(targetEle, top)
-          }
-        }
+        // {
+        //   key: 'reviews',
+        //   name: this.$t(`${lang}.customerReviews`),
+        //   ref: '',
+        //   onClick() {
+        //     const targetEle = document.getElementsByClassName('layout-box')[0]
+        //     const top = _this.$refs['product-comments'].$el.offsetTop - 110
+        //     _this.$scrollTopTo(targetEle, top)
+        //   }
+        // }
       ],
       activeTab: 'desc',
       materialColors: {

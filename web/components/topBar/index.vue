@@ -63,7 +63,7 @@
             </div>
 
             <!--        心愿单-->
-            <nuxt-link
+          <!--  <nuxt-link
               :to="{ path: hadLogin ? '/account/wish-list' : '/login' }"
             >
               <div class="item wish">
@@ -72,7 +72,7 @@
                   >{{ $t(`${lang}.wish`) }}({{ wishAmount }})</span
                 >
               </div>
-            </nuxt-link>
+            </nuxt-link> -->
 
             <!--        购物车-->
             <nuxt-link :to="{ path: '/shopping-cart' }">
@@ -603,72 +603,72 @@ export default {
                 ]
               }
             ],
-            [
-              {
-                key: 'material',
-                groupName: this.$t(`${lang}.weddingRingMenu.color`),
-                data: [
-                  {
-                    id: 120,
-                    name: this.$t(`${lang}.weddingRingMenu.14KWhite`),
-                    icon: 'iconmaterial-big-pt color-icon color-14k-white',
-                    to: {
-                      path: '/wedding-rings/14k-white'
-                    }
-                  },
-                  {
-                    id: 28,
-                    name: this.$t(`${lang}.weddingRingMenu.18KWhite`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-white',
-                    to: {
-                      path: '/wedding-rings/18k-white'
-                    }
-                  },
-                  {
-                    id: 122,
-                    name: this.$t(`${lang}.weddingRingMenu.14KYellow`),
-                    icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
-                    to: {
-                      path: '/wedding-rings/14k-yellow'
-                    }
-                  },
-                  {
-                    id: 123,
-                    name: this.$t(`${lang}.weddingRingMenu.18KYellow`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
-                    to: {
-                      path: '/wedding-rings/18k-yellow'
-                    }
-                  },
-                  {
-                    id: 124,
-                    name: this.$t(`${lang}.weddingRingMenu.platinum`),
-                    icon: 'iconmaterial-big-pt color-icon color-platinum',
-                    to: {
-                      path: '/wedding-rings/platinum'
-                    }
-                  },
-                  {
-                    id: 125,
-                    name: this.$t(`${lang}.weddingRingMenu.18KRoseGold`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
-                    to: {
-                      path: '/wedding-rings/18k-rose-gold'
-                    }
-                  }
-                  // {
-                  //   name: this.$t(`${lang}.weddingRingMenu.14KRoseGold`),
-                  //   icon: 'iconstar-zs',
-                  //   href: '/wedding-rings/14k-rose-gold'
-                  // },
-                  // {
-                  //   name: this.$t(`${lang}.weddingRingMenu.fineSilver`),
-                  //   icon: 'iconstar-zs',
-                  //   href: '/wedding-rings/fine-silver'
-                  // }
-                ]
-              }
-            ]
+            // [
+            //   {
+            //     key: 'material',
+            //     groupName: this.$t(`${lang}.weddingRingMenu.color`),
+            //     data: [
+            //       {
+            //         id: 120,
+            //         name: this.$t(`${lang}.weddingRingMenu.14KWhite`),
+            //         icon: 'iconmaterial-big-pt color-icon color-14k-white',
+            //         to: {
+            //           path: '/wedding-rings/14k-white'
+            //         }
+            //       },
+            //       {
+            //         id: 28,
+            //         name: this.$t(`${lang}.weddingRingMenu.18KWhite`),
+            //         icon: 'iconmaterial-big-pt color-icon color-18k-white',
+            //         to: {
+            //           path: '/wedding-rings/18k-white'
+            //         }
+            //       },
+            //       {
+            //         id: 122,
+            //         name: this.$t(`${lang}.weddingRingMenu.14KYellow`),
+            //         icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+            //         to: {
+            //           path: '/wedding-rings/14k-yellow'
+            //         }
+            //       },
+            //       {
+            //         id: 123,
+            //         name: this.$t(`${lang}.weddingRingMenu.18KYellow`),
+            //         icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
+            //         to: {
+            //           path: '/wedding-rings/18k-yellow'
+            //         }
+            //       },
+            //       {
+            //         id: 124,
+            //         name: this.$t(`${lang}.weddingRingMenu.platinum`),
+            //         icon: 'iconmaterial-big-pt color-icon color-platinum',
+            //         to: {
+            //           path: '/wedding-rings/platinum'
+            //         }
+            //       },
+            //       {
+            //         id: 125,
+            //         name: this.$t(`${lang}.weddingRingMenu.18KRoseGold`),
+            //         icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
+            //         to: {
+            //           path: '/wedding-rings/18k-rose-gold'
+            //         }
+            //       }
+            //       // {
+            //       //   name: this.$t(`${lang}.weddingRingMenu.14KRoseGold`),
+            //       //   icon: 'iconstar-zs',
+            //       //   href: '/wedding-rings/14k-rose-gold'
+            //       // },
+            //       // {
+            //       //   name: this.$t(`${lang}.weddingRingMenu.fineSilver`),
+            //       //   icon: 'iconstar-zs',
+            //       //   href: '/wedding-rings/fine-silver'
+            //       // }
+            //     ]
+            //   }
+            // ]
           ]
         },
         diamond: {
@@ -944,7 +944,7 @@ export default {
         }
       }
       return result
-      
+
       // const language = this.$store.state.language
       // const languageOptions = this.$bddDefinition.languageOptions
       // let type = 1
