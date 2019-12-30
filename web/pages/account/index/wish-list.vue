@@ -61,8 +61,8 @@ export default {
         .get('/web/collection/list', {
           params: {
             type: 1,
-            currPage: 1,
-            pageSize: 1000
+            page: 1,
+            page_size: 1000
           }
         })
         .then(res => {

@@ -56,7 +56,7 @@ const conditionMaps = {
     material: 120
   },
   '18k-white': {
-    material: 121
+    material: 28
   },
   '14k-yellow': {
     material: 122

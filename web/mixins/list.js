@@ -10,7 +10,7 @@ export default {
       keyword: '', // 搜索关键词
       sortOptions: this.CONDITION_INFO.sortBy.default,
       sortTypeIndex: null,
-      pageSize: 10,
+      page_size: 10,
 
       canSearchWithoutKeyword: true,
       pageInfo: null,
@@ -35,15 +35,15 @@ export default {
     },
     // 所有已请求的页码的数据集合
     allData() {
-      const totalPage =
-        this.pageInfo && this.pageInfo.totalPage ? this.pageInfo.totalPage : 0
+      const page_count =
+        this.pageInfo && this.pageInfo.page_count ? this.pageInfo.page_count : 0
       const listData = this.listData
       let result = []
 
-      if (!totalPage) {
+      if (!page_count) {
         return result
       }
-      for (let n = 1; n < totalPage + 1; n++) {
+      for (let n = 1; n < page_count + 1; n++) {
         if (!listData.hasOwnProperty(n)) {
           continue
         }
@@ -67,8 +67,8 @@ export default {
 
       if (
         pageInfo &&
-        pageInfo.currPage > 0 &&
-        pageInfo.currPage >= pageInfo.totalPage
+        pageInfo.page > 0 &&
+        pageInfo.page >= pageInfo.page_count
       ) {
         result = false
       }
@@ -87,7 +87,7 @@ export default {
       if (
         !this.requestingListData &&
         pageInfo &&
-        pageInfo.currPage >= pageInfo.totalPage &&
+        pageInfo.page >= pageInfo.page_count &&
         !this.isDefaultPageInfo
       ) {
         console.log('最后一页了')
@@ -99,16 +99,16 @@ export default {
     noListData() {
       return (
         this.pageInfo &&
-        this.pageInfo.totalCount === 0 &&
+        this.pageInfo.total_count === 0 &&
         !this.requestingListData
       )
     },
-    totalCount() {
-      return this.pageInfo && this.pageInfo.totalCount
-        ? this.pageInfo.totalCount
+    total_count() {
+      return this.pageInfo && this.pageInfo.total_count
+        ? this.pageInfo.total_count
         : 0
-      // return this.pageInfo && this.pageInfo.totalCount
-      //   ? this.pageInfo.totalCount
+      // return this.pageInfo && this.pageInfo.total_count
+      //   ? this.pageInfo.total_count
       //   : ''
     },
     // 列表特定header参数
@@ -125,27 +125,27 @@ export default {
     },
     // 下一页码
     nextCurrPageNum() {
-      let currPage =
-        this.pageInfo && this.pageInfo.currPage ? this.pageInfo.currPage : 1
-      if (this.pageInfo === null || this.pageInfo.totalPage === null) {
+      let page =
+        this.pageInfo && this.pageInfo.page ? this.pageInfo.page : 1
+      if (this.pageInfo === null || this.pageInfo.page_count === null) {
         // 首次请求
-        currPage = 1
-      } else if (currPage < this.pageInfo.totalPage) {
-        currPage++
+        page = 1
+      } else if (page < this.pageInfo.page_count) {
+        page++
       } else {
         console.log('已到最后一页')
-        currPage = null
+        page = null
       }
-      return currPage
+      return page
     }
   },
   methods: {
     defaultPageInfo() {
       return {
-        totalCount: 0, // 数据总数量
-        pageSize: 10, // 每页数量
-        totalPage: null, // 最大页码
-        currPage: 0 // 当前页码
+        total_count: 0, // 数据总数量
+        page_size: 10, // 每页数量
+        page_count: null, // 最大页码
+        page: 0 // 当前页码
       }
     },
     // 改变排序方式，重新搜索
@@ -211,7 +211,7 @@ export default {
       this.getPageInfo(this.nextCurrPageNum)
     },
     // 请求当前页数据
-    getPageInfo(currPage = 1) {
+    getPageInfo(page = 1) {
       const _this = this
       const keyword = _this.keyword
 
@@ -221,8 +221,8 @@ export default {
       }
 
       // 此次请求标识
-      const reqMark = `${currPage}`
-      // const reqMark = `${currPage}-${keyword}`
+      const reqMark = `${page}`
+      // const reqMark = `${page}-${keyword}`
 
       if (this.isRequesting(reqMark)) {
         console.log('不重复请求')
@@ -234,11 +234,11 @@ export default {
           _this.addRequesting(reqMark, cancel)
         }),
         data: {
-          currPage
+          page
         }
       }
 
-      console.log(`请求页码为：${currPage}`)
+      console.log(`请求页码为：${page}`)
 
       _this
         .$axios({
@@ -250,11 +250,12 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
-          if (data.list) {
-            _this.listData[currPage] = JSON.parse(JSON.stringify(data.list))
+          var data = data.data
+          if (data.data) {
+            _this.listData[page] = JSON.parse(JSON.stringify(data.data))
           }
-          // _this.listData[currPage] = JSON.parse(JSON.stringify(data.list || []))
-          delete data.list
+          // _this.listData[page] = JSON.parse(JSON.stringify(data.list || []))
+          delete data.data
           _this.setPageInfo(data)
           _this.removeRequesting(reqMark)
         })

@@ -74,8 +74,8 @@ export default {
         .get('/web/collection/list', {
           params: {
             type: 2,
-            currPage: 1,
-            pageSize: 99
+            page: 1,
+            page_size: 99
           }
         })
         .then(res => {

@@ -496,7 +496,7 @@
     "to": "to",
 
     "title": "COUPLE RINGS",
-    "totalCountTitle": "COUPLE RINGS ({totalCount} Results)",
+    "totalCountTitle": "COUPLE RINGS ({total_count} Results)",
     "titleDesc": "No matter how time changes, every one of us desires the love of a lifetime",
     "sort": "Sort By"
   },
@@ -511,7 +511,7 @@
     "to": "to",
 
     "title": "WEDDING RING",
-    "totalCountTitle": "WEDDING RING ({totalCount} Results)",
+    "totalCountTitle": "WEDDING RING ({total_count} Results)",
     "titleDesc": "Let us make a promise with this ring and spend the rest of our life since this moment on.",
     "sort": "Sort By"
   },
@@ -586,7 +586,7 @@
     "fluorescence": "Fluorescence",
 
     "title": "DIAMOND",
-    "totalCountTitle": "DIAMOND ({totalCount} Results)",
+    "totalCountTitle": "DIAMOND ({total_count} Results)",
     "titleDesc": "The popular round diamond has 58 facets to radiate its brilliance, which has been the most splendid diamond among all diamond cuts.",
 
     "allDiamonds": "All diamonds",
@@ -635,7 +635,7 @@
     "to": "to",
 
     "title": "ENGAGEMENT RING",
-    "totalCountTitle": "ENGAGEMENT RING ({totalCount} Results)",
+    "totalCountTitle": "ENGAGEMENT RING ({total_count} Results)",
     "titleDesc": "There are different ring settings optional. The solitaire ring is a symbol of true love, and its taste will last together with the solitaire.",
     "sort": "Sort By"
   },
@@ -649,7 +649,7 @@
     "sort": "Sort By",
 
     "title": "JEWELRY",
-    "totalCountTitle": "JEWELRY ({totalCount} Results)",
+    "totalCountTitle": "JEWELRY ({total_count} Results)",
     "titleDesc": "Choose various accessories to show your taste"
 
   },

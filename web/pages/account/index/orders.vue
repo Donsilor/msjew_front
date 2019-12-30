@@ -295,7 +295,7 @@ export default {
     getList() {
       this.$axios
         .get('/web/myOrder/listMyOrder', {
-          params: { orderStatus: 0, currPage: 1, pageSize: 9999 }
+          params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
           // console.log(res)
@@ -380,7 +380,7 @@ export default {
       this.activeIndex = status
       this.$axios
         .get('/web/myOrder/listMyOrder', {
-          params: { orderStatus: status, currPage: 1, pageSize: 9999 }
+          params: { orderStatus: status, page: 1, page_size: 9999 }
         })
         .then(res => {
           // console.log(res)

@@ -1,7 +1,7 @@
 <template>
   <section class="comments">
     <h2 class="section-name">
-      {{ $t(`${lang}.customerReviews`) }}（{{ totalCount || 0 }}）
+      {{ $t(`${lang}.customerReviews`) }}（{{ total_count || 0 }}）
     </h2>
     <h3 class="average-score">
       <span class="num">{{ avgLevel }}</span>
@@ -91,8 +91,8 @@ export default {
     return {
       lang,
       listMethod: 'get',
-      listUrl: '/web/goodsComments/getGoodsComments',
-      pageSize: 13,
+      listUrl: '/web/goods/comments/index',
+      page_size: 13,
       // 显示类型(1-所有，2-五星好评)
       shouType: 1,
       avgLevel: 0
@@ -140,7 +140,7 @@ export default {
         })
     },
     // 请求当前页数据
-    getPageInfo(currPage = 1) {
+    getPageInfo(page = 1) {
       const _this = this
       const keyword = _this.keyword
 
@@ -150,8 +150,8 @@ export default {
       }
 
       // 此次请求标识
-      const reqMark = `${currPage}`
-      // const reqMark = `${currPage}-${keyword}`
+      const reqMark = `${page}`
+      // const reqMark = `${page}-${keyword}`
 
       if (this.isRequesting(reqMark)) {
         console.log('不重复请求')
@@ -163,18 +163,18 @@ export default {
           _this.addRequesting(reqMark, cancel)
         }),
         data: {
-          currPage
+          page
         },
         params: {
           goodsId: this.goodId,
           groupId: this.groupId,
-          currPage,
-          pageSize: this.pageSize,
+          page,
+          page_size: this.page_size,
           shouType: this.shouType
         }
       }
 
-      console.log(`请求页码为：${currPage}`)
+      console.log(`请求页码为：${page}`)
 
       _this
         .$axios({
@@ -186,11 +186,12 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
-          if (data.list) {
-            _this.listData[currPage] = JSON.parse(JSON.stringify(data.list))
+          var data = data.data;
+          if (data.data) {
+            _this.listData[page] = JSON.parse(JSON.stringify(data.data))
           }
-          // _this.listData[currPage] = JSON.parse(JSON.stringify(data.list || []))
-          delete data.list
+          // _this.listData[page] = JSON.parse(JSON.stringify(data.list || []))
+          delete data.data
           _this.setPageInfo(data)
           _this.removeRequesting(reqMark)
         })

@@ -148,10 +148,10 @@
     </section>
     <section class="list-title">
       <h1 class="title">
-        {{ $t(`${lang}.totalCountTitle`, { totalCount }) }}
+        {{ $t(`${lang}.totalCountTitle`, { total_count }) }}
         <!--        {{-->
-        <!--          totalCount-->
-        <!--            ? $t(`${lang}.totalCountTitle`, { totalCount })-->
+        <!--          total_count-->
+        <!--            ? $t(`${lang}.totalCountTitle`, { total_count })-->
         <!--            : $t(`${lang}.title`)-->
         <!--        }}-->
       </h1>
@@ -257,8 +257,8 @@ export default {
   data() {
     return {
       lang,
-      listUrl: '/web/goods/searchGoods',
-      pageSize: 13,
+      listUrl: '/web/goods/style/search',
+      page_size: 16,
       manStyleOptions: this.CONDITION_INFO.style.manRings,
       ladyStyleOptions: this.CONDITION_INFO.style.womanRings,
       materialOptions: this.CONDITION_INFO.quality.rings,
@@ -332,6 +332,7 @@ export default {
       if (conditions.material) {
         params.push({
           type: 3,
+          paramId:10,
           paramName: 'material',
           valueType: 1,
           configValues: conditions.material === '' ? [] : [conditions.material]
@@ -347,7 +348,7 @@ export default {
         // 排序类型（1:升 2:降）
         orderType: sortInfo.sortType,
         // 每页显示数量
-        pageSize: this.pageSize,
+        page_size: this.page_size,
         // 参数数组
         params
       }
@@ -388,8 +389,10 @@ export default {
         } else {
           item.itemType = 'product'
           item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
+        
           item.to = {
-            path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+            // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+            path: '/ring/wedding-rings/'+ item.id,
             query: {
               goodId: item.id,
               ringType: 'single'

@@ -40,25 +40,27 @@
         >
           <!--          商品数据-->
           <div v-if="item.itemType === 'product'" class="product-content">
-            <div class="product-image">
-              <img class="main-image" :src="item.goodsImages[0]" />
-              <img
-                class="sub-image"
-                :src="item.goodsImages[1] || item.goodsImages[0]"
-              />
-              <div class="wish-state">
-                <i
-                  v-if="inWish(item.id)"
-                  class="iconfont iconxin"
-                  @click.stop.prevent="setWish(item.id)"
-                ></i>
-                <i
-                  v-else
-                  class="iconfont iconkongxin"
-                  @click.stop.prevent="setWish(item.id)"
-                ></i>
+            <nuxt-link :to="item.to">
+              <div class="product-image">
+                <img class="main-image" :src="item.goodsImages[0]" />
+                <img
+                  class="sub-image"
+                  :src="item.goodsImages[1] || item.goodsImages[0]"
+                />
+                <div class="wish-state">
+                  <i
+                    v-if="inWish(item.id)"
+                    class="iconfont iconxin"
+                    @click.stop.prevent="setWish(item.id)"
+                  ></i>
+                  <i
+                    v-else
+                    class="iconfont iconkongxin"
+                    @click.stop.prevent="setWish(item.id)"
+                  ></i>
+                </div>
               </div>
-            </div>
+              </nuxt-link>
             <div class="product-info">
               <div class="product-price">
                 <span class="coin">{{ item.coinType }}</span>
@@ -111,10 +113,10 @@ export default {
     return {
       lang,
       listMethod: 'get',
-      listUrl: '/web/goods/searchAllGoods',
+      listUrl: '/web/common/search/index',
       sortOptions: this.CONDITION_INFO.sortBy.search,
       sortTypeIndex: 0,
-      pageSize: 16,
+      page_size: 16,
       keyword: ''
     }
   },
@@ -133,9 +135,9 @@ export default {
         // orderParam: sortInfo.sortBy,
         sortType: sortInfo.sortType,
         // 每页显示数量
-        pageSize: this.pageSize,
+        page_size: this.page_size,
 
-        currPage: this.nextCurrPageNum
+        page: this.nextCurrPageNum
       }
       return data
     },
@@ -169,6 +171,14 @@ export default {
         } else {
           item.itemType = 'product'
           item.goodsImages = _this.imageStrToArray(item.goodsImages)
+          item.to = {
+            // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+            path: '/ring/wedding-rings/'+ item.id,
+            query: {
+              goodId: item.id,
+              ringType: 'single'
+            }
+          }
         }
       })
       return allData
@@ -203,7 +213,7 @@ export default {
       })
     },
     // 请求当前页数据
-    getPageInfo(currPage = 1) {
+    getPageInfo(page = 1) {
       const _this = this
       const keyword = _this.keyword
 
@@ -213,8 +223,8 @@ export default {
       }
 
       // 此次请求标识
-      const reqMark = `${currPage}`
-      // const reqMark = `${currPage}-${keyword}`
+      const reqMark = `${page}`
+      // const reqMark = `${page}-${keyword}`
 
       if (this.isRequesting(reqMark)) {
         console.log('不重复请求')
@@ -226,11 +236,11 @@ export default {
           _this.addRequesting(reqMark, cancel)
         }),
         data: {
-          currPage
+          page
         }
       }
 
-      console.log(`请求页码为：${currPage}`)
+      console.log(`请求页码为：${page}`)
 
       _this
         .$axios({
@@ -261,11 +271,12 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
-          if (data.list) {
-            _this.listData[currPage] = JSON.parse(JSON.stringify(data.list))
+          var data = data.data
+          if (data.data) {
+            _this.listData[page] = JSON.parse(JSON.stringify(data.data))
           }
-          // _this.listData[currPage] = JSON.parse(JSON.stringify(data.list || []))
-          delete data.list
+          // _this.listData[page] = JSON.parse(JSON.stringify(data.list || []))
+          delete data.data
           _this.setPageInfo(data)
           _this.removeRequesting(reqMark)
         })

@@ -14,9 +14,9 @@ const serverUrl = {
 }
 
 const resourceUrl = {
-  dev: 'https://bdd-dev.oss-cn-shenzhen.aliyuncs.com/',
-  test: 'http://bdd-dev.oss-cn-shenzhen.aliyuncs.com/',
-  pro: 'https://bdd-cdn.leyouwangluo.com/'
+  dev: '',
+  test: '',
+  pro: ''
 }
 
 console.log('serverUrl=======>', serverUrl[RUNNING_ENV])

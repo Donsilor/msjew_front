@@ -328,12 +328,12 @@ export default {
       ],
       activeTab: 'desc',
       materialColors: {
-        120: 'color-14k-white',
-        121: 'color-18k-white',
-        122: 'color-14k-yellow',
-        123: 'color-18k-yellow',
-        124: 'color-platinum',
-        125: 'color-18k-rose-gold'
+        31: 'color-14k-white',
+        28: 'color-18k-white',
+        32: 'color-14k-yellow',
+        29: 'color-18k-yellow',
+        34: 'color-platinum',
+        30: 'color-18k-rose-gold'
       },
       firstRingChecked: {
         materialIndex: 0,
@@ -410,7 +410,7 @@ export default {
         //   "stock":358345,
         //   "retailPrice":null,
         //   "retailMallPrice":1350,
-        //   "material":121,
+        //   "material":28,
         //   "size":129
         // },
         const item = details[n]

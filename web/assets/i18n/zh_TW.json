@@ -497,7 +497,7 @@
     "to": "至",
 
     "title": "对戒戒指",
-    "totalCountTitle": "对戒戒指 ({totalCount} 款)",
+    "totalCountTitle": "对戒戒指 ({total_count} 款)",
     "titleDesc": "無論時代如何變化，每個人都渴望一生一世的真愛",
     "sort": "排序"
   },
@@ -512,7 +512,7 @@
     "to": "至",
 
     "title": "結婚戒指",
-    "totalCountTitle": "結婚戒指 ({totalCount} 款)",
+    "totalCountTitle": "結婚戒指 ({total_count} 款)",
     "titleDesc": "願作此生相依的應允 , 願為此今刻決定往後",
     "sort": "排序"
   },
@@ -588,7 +588,7 @@
     "fluorescence": "螢光",
 
     "title": "鑽石",
-    "totalCountTitle": "顯示 ({totalCount} 颗鑽石)",
+    "totalCountTitle": "顯示 ({total_count} 颗鑽石)",
     "titleDesc": "受歡迎的圓形切割鑽石最能透過 58 個刻面綻放光芒，是鑽石切割中最精彩的鑽石。",
 
     "allDiamonds": "所有鑽石",
@@ -637,7 +637,7 @@
     "to": "至",
 
     "title": "訂婚戒指",
-    "totalCountTitle": "訂婚戒指 ({totalCount} 款)",
+    "totalCountTitle": "訂婚戒指 ({total_count} 款)",
     "titleDesc": "戒扥款式可多變, 一夥真心總不變 , 高貴氣質石長存",
     "sort": "排序"
   },
@@ -651,7 +651,7 @@
     "sort": "排序",
 
     "title": "配飾",
-    "totalCountTitle": "配飾 ({totalCount} 款)",
+    "totalCountTitle": "配飾 ({total_count} 款)",
     "titleDesc": "通過選擇各種配飾，來展示您所想要的配飾"
 
   },

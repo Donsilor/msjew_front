@@ -530,10 +530,10 @@
     </div>
     <section class="list-title">
       <h1 class="title">
-        {{ $t(`${lang}.totalCountTitle`, { totalCount }) }}
+        {{ $t(`${lang}.totalCountTitle`, { total_count }) }}
         <!--        {{-->
-        <!--          totalCount-->
-        <!--            ? $t(`${lang}.totalCountTitle`, { totalCount })-->
+        <!--          total_count-->
+        <!--            ? $t(`${lang}.totalCountTitle`, { total_count })-->
         <!--            : $t(`${lang}.title`)-->
         <!--        }}-->
       </h1>
@@ -847,7 +847,7 @@ export default {
     return {
       lang,
       listUrl: '/web/goods/searchGoods',
-      pageSize: 14,
+      page_size: 14,
       showMoreCondition: false,
 
       shapeOptions: this.CONDITION_INFO.shape,
@@ -958,8 +958,8 @@ export default {
       return [
         {
           key: 'allDiamonds',
-          name: this.totalCount
-            ? `${this.$t(`${lang}.allDiamonds`)}(${this.totalCount})`
+          name: this.total_count
+            ? `${this.$t(`${lang}.allDiamonds`)}(${this.total_count})`
             : `${this.$t(`${lang}.allDiamonds`)}`
         },
         {
@@ -1217,7 +1217,7 @@ export default {
         // 排序类型（1:升 2:降）
         orderType: sortInfo.sortType,
         // 每页显示数量
-        pageSize: this.pageSize,
+        page_size: this.page_size,
         // 参数数组
         params: dealParams
       }

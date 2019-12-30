@@ -68,7 +68,7 @@ export default {
     const getSingleRing = () => {
       return $axios({
         method: 'post',
-        url: '/web/goods/goodsDetail',
+        url: '/web/goods/style/detail',
         params: {
           goodsId: route.query.goodId || ''
         },
@@ -94,6 +94,9 @@ export default {
         }
       })
         .then(data => {
+          var data = data.data;
+          console.log(11);
+          console.log(data);
           return {
             info: data,
             ringType,

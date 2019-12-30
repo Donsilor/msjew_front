@@ -450,7 +450,7 @@ export default {
                     }
                   },
                   {
-                    id: 121,
+                    id: 28,
                     name: this.$t(`${lang}.engagementRingMenu.18KWhite`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
@@ -617,7 +617,7 @@ export default {
                     }
                   },
                   {
-                    id: 121,
+                    id: 28,
                     name: this.$t(`${lang}.weddingRingMenu.18KWhite`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {

@@ -124,10 +124,10 @@
     </section>
     <section class="list-title">
       <h1 class="title">
-        {{ $t(`${lang}.totalCountTitle`, { totalCount }) }}
+        {{ $t(`${lang}.totalCountTitle`, { total_count }) }}
         <!--        {{-->
-        <!--          totalCount-->
-        <!--            ? $t(`${lang}.totalCountTitle`, { totalCount })-->
+        <!--          total_count-->
+        <!--            ? $t(`${lang}.totalCountTitle`, { total_count })-->
         <!--            : $t(`${lang}.title`)-->
         <!--        }}-->
       </h1>
@@ -234,7 +234,7 @@ export default {
     return {
       lang,
       listUrl: '/web/goods/searchGoods',
-      pageSize: 8,
+      page_size: 8,
       styleOptions: this.CONDITION_INFO.style.rings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
@@ -303,7 +303,7 @@ export default {
         // 排序类型（1:升 2:降）
         orderType: sortInfo.sortType,
         // 每页显示数量
-        pageSize: this.pageSize,
+        page_size: this.page_size,
         // 参数数组
         params
       }
