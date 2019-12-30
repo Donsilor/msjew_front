@@ -3,9 +3,9 @@
     <div class="good-info">
       <nuxt-link :to="getJumpLink(g)">
         <div class="good-img" @click="goDetail()">
-          <img :src="imageStrToArray(g.image)[0]" alt="" />
+          <img :src="imageStrToArray(g.image)" alt="" />
           <div
-            v-if="g.data[0].simpleGoodsEntity.goodsStatus !== 2"
+            
             class="img-bord"
           >
             <span>{{ $t(`cart.Invalid`) }}</span>
@@ -111,7 +111,8 @@ export default {
       }
       this.$store
         .dispatch('addWish', data)
-        .then(data => {
+        .then(res => {
+          console.log("good",data)
           this.$successMessage(this.$t(`cart.addWishSuccess`))
         })
         .catch(err => {

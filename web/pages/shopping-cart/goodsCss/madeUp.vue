@@ -8,10 +8,7 @@
               :src="imageStrToArray(g.data[0].simpleGoodsEntity.goodsImages)[0]"
             />
             <div
-              v-if="
-                g.data[0].simpleGoodsEntity.goodsStatus !== 2 &&
-                  g.data[1].simpleGoodsEntity.goodsStatus !== 2
-              "
+             
               class="img-bord"
             >
               <span>{{ $t(`cart.Invalid`) }}</span>
@@ -23,7 +20,7 @@
             </div>
             <div>
               SKU：{{
-                g.data[0].simpleGoodsEntity.simpleGoodsDetails.goodsDetailsCode
+                
               }}
             </div>
           </div>
@@ -42,7 +39,7 @@
             {{ g.coinType }}
             {{
               formatNumber(
-                g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+               
               )
             }}
           </div>
@@ -55,10 +52,6 @@
               alt=""
             />
             <div
-              v-if="
-                g.data[0].simpleGoodsEntity.goodsStatus === 1 &&
-                  g.data[1].simpleGoodsEntity.goodsStatus === 1
-              "
               class="img-bord"
             >
               <span>{{ $t(`cart.Invalid`) }}</span>
@@ -70,7 +63,7 @@
             </div>
             <div>
               SKU：{{
-                g.data[1].simpleGoodsEntity.simpleGoodsDetails.goodsDetailsCode
+                
               }}
             </div>
           </div>
@@ -80,11 +73,11 @@
               :key="k"
             >
               <span
-                v-if="k !== g.data[1].simpleGoodsEntity.baseConfig.length - 1"
+                
                 >{{ i.configAttrIVal }},</span
               >
               <span
-                v-if="k === g.data[1].simpleGoodsEntity.baseConfig.length - 1"
+                
                 >{{ i.configAttrIVal }}</span
               >
             </span>
@@ -94,7 +87,7 @@
             {{ g.coinType }}
             {{
               formatNumber(
-                g.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+               
               )
             }}
           </div>
@@ -102,16 +95,13 @@
       </nuxt-link>
       <div
         v-show="options"
-        v-if="
-          g.data[0].simpleGoodsEntity.goodsStatus === 2 &&
-            g.data[1].simpleGoodsEntity.goodsStatus === 2
-        "
+       
         class="good-btn"
       >
         <div class="wish-img"></div>
         <i class="iconfont iconlajitong" @click="deleteGood()" />
       </div>
-      <div v-show="options" v-else class="lose-btn">
+      <div v-show="options"  class="lose-btn">
         <div @click="searchSimilar()">
           {{ $t(`cart.searchSimilar`) }}
         </div>

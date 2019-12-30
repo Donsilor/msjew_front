@@ -35,9 +35,9 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <!-- <nuxt-link :to="{ path: '/reset-password' }">
+        <nuxt-link :to="{ path: '/reset-password' }">
           {{ $t(`${lang}.forget`) }}
-        </nuxt-link> -->
+        </nuxt-link>
       </div>
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
@@ -107,9 +107,9 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <!-- <nuxt-link :to="{ path: '/reset-password' }">
+        <nuxt-link :to="{ path: '/reset-password' }">
           {{ $t(`${lang}.forget`) }}
-        </nuxt-link> -->
+        </nuxt-link>
       </div>
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">

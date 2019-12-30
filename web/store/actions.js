@@ -56,24 +56,21 @@ function makeCartGoodGroups(cart = []) {
   result.map(item => {
     if (item.group_type === null) {
       // 单品
-      const simpleGoodsEntity = item.data[0].simpleGoodsEntity || {}
-      item.groupTypeText = '单品'
-      item.goodsName = simpleGoodsEntity.goodsName
-      item.image = simpleGoodsEntity.goodsImages
-      item.coinType = simpleGoodsEntity.coinType
-      item.price = simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+      const goods_spec = item.data[0]|| {}
+      // item.groupTypeText = '单品'
+      item.goodsName = goods_spec.goods_name
+      item.image = goods_spec.goods_image
+      item.coinType = goods_spec.currency
+      item.price = goods_spec.goods_price
     } else if (item.group_type === 1) {
       // 对戒
-      const ringsSimpleGoodsEntity = item.data[0].ringsSimpleGoodsEntity || {}
-      item.groupTypeText = '对戒'
-      item.goodsName = ringsSimpleGoodsEntity.name
+      const goods_spec = item.data[0] || {}
+      console.log("good",goods_spec)
+      // item.groupTypeText = '对戒'
+      item.goodsName = goods_spec.goods_name
       item.image = ringsSimpleGoodsEntity.ringImg
-      item.coinType = ringsSimpleGoodsEntity.coinType
-      item.price =
-        ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
-          .retailMallPrice +
-        item.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
-          .retailMallPrice
+      item.coinType = goods_spec.goods_image
+      item.price =goods_spec.goods_price
     } else if (item.group_type === 2) {
       // 定制
       const diamond = []
@@ -545,7 +542,7 @@ export default {
   },
   // 获取在线购物车商品数量
   getOnlineCartAmount({ $axios, state, getters, commit, dispatch }) {
-    // console.log('getOnlineCartAmount=====>')
+    // console.log('getOnlineCartAmount=====>')  /web/goodsCart/count
     return this.$axios({
       method: 'get',
       url: `/web/goodsCart/count`

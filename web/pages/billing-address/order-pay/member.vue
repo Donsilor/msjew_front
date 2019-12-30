@@ -75,7 +75,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.firstName }}{{ a.lastName }}</div>
+            <div>{{ a.firstname }}{{ a.lastname }}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -135,21 +135,21 @@
             <div
               :class="[
                 { 'border-change': borderChange === 1 },
-                { 'border-wrong': wrongInput.firstName }
+                { 'border-wrong': wrongInput.firstname }
               ]"
               class="input-box"
             >
               <input
-                v-model="addressData.firstName"
-                :class="{ 'wrong-input': wrongInput.firstName }"
+                v-model="addressData.firstname"
+                :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
                 @focus="
                   borderChange = 1
-                  wrongInput.firstName = false
+                  wrongInput.firstname = false
                 "
                 @blur="borderChange = 0"
               />
-              <div v-show="wrongInput.firstName" class="wrong-alert">
+              <div v-show="wrongInput.firstname" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
               </div>
             </div>
@@ -161,21 +161,21 @@
             <div
               :class="[
                 { 'border-change': borderChange === 2 },
-                { 'border-wrong': wrongInput.lastName }
+                { 'border-wrong': wrongInput.lastname }
               ]"
               class="input-box"
             >
               <input
-                v-model="addressData.lastName"
-                :class="{ 'wrong-input': wrongInput.lastName }"
+                v-model="addressData.lastname"
+                :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
                 @focus="
                   borderChange = 2
-                  wrongInput.lastName = false
+                  wrongInput.lastname = false
                 "
                 @blur="borderChange = 0"
               />
-              <div v-show="wrongInput.lastName" class="wrong-alert">
+              <div v-show="wrongInput.lastname" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
               </div>
             </div>
@@ -418,8 +418,8 @@
       ><span>{{ $t(`${lang}.price`) }}</span>
     </div>
     <div class="cart-goods">
-      <div v-for="(g, index) in good" :key="index">
-        <div v-if="g.group_type === null" class="finished">
+      <div >
+        <div  class="finished">
           <div class="cart-radio"></div>
           <single :g="g" :options="false"></single>
         </div>
@@ -730,8 +730,8 @@ export default {
       isEdit: false,
       noWay: false,
       addressData: {
-        lastName: '',
-        firstName: '',
+        lastname: '',
+        firstname: '',
         userTel: '',
         userMail: '',
         checkEmail: '',
@@ -742,8 +742,8 @@ export default {
       },
       borderChange: 0,
       wrongInput: {
-        firstName: false,
-        lastName: false,
+        firstname: false,
+        lastname: false,
         userTel: false,
         userMail: false,
         checkEmail: false,
@@ -825,13 +825,15 @@ export default {
         }
       })
   },
-  mounted() {},
+  mounted() {
+    this.getAddress();
+  },
   methods: {
     getAddress() {
       this.$axios
-        .get('/web/myAccount/getMyAddress')
+        .get('/web/member/address')
         .then(res => {
-          console.log(res)
+          console.log("获取地址",res)
           this.address = []
           for (const i in res) {
             if (res[i].isDefault === 1) {
@@ -858,8 +860,8 @@ export default {
     resetAddressInp() {
       this.phoneNum = this.phoneJson[0]
       this.addressData = {
-        lastName: '',
-        firstName: '',
+        lastname: '',
+        firstname: '',
         userTel: '',
         userMail: '',
         checkEmail: '',
@@ -869,8 +871,8 @@ export default {
         remark: ''
       }
       this.wrongInput = {
-        firstName: false,
-        lastName: false,
+        firstname: false,
+        lastname: false,
         userTel: false,
         userMail: false,
         checkEmail: false,
@@ -887,16 +889,16 @@ export default {
     },
     createAddress() {
       console.log('create')
-      if (this.addressData.firstName === '') {
+      if (this.addressData.firstname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
-        this.wrongInput.firstName = true
+        this.wrongInput.firstname = true
         return false
       }
-      if (this.addressData.lastName === '') {
+      if (this.addressData.lastname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
-        this.wrongInput.lastName = true
+        this.wrongInput.lastname = true
         return false
       }
       if (
@@ -934,8 +936,8 @@ export default {
       const data = this.$helpers.transformRequest(
         JSON.parse(
           JSON.stringify({
-            firstName: this.addressData.firstName,
-            lastName: this.addressData.lastName,
+            firstname: this.addressData.firstname,
+            lastname: this.addressData.lastname,
             userTelCode: this.phoneNum.phone_code,
             userTel: this.addressData.userTel,
             userMail: this.addressData.userMail,
@@ -949,8 +951,9 @@ export default {
         false
       )
       this.$axios
-        .post('/web/myAccount/saveUserAddress', data)
+        .post('/web/member/address/add', data)
         .then(res => {
+          console.log("添加地址",res)
           this.getAddress()
           this.resetAddressInp()
         })
@@ -968,8 +971,8 @@ export default {
       const data = this.$helpers.cloneObject(obj)
       this.addressData = {
         id: data.id,
-        firstName: data.firstName,
-        lastName: data.lastName,
+        firstname: data.firstname,
+        lastname: data.lastname,
         userTel: data.userTel,
         userMail: data.userMail,
         checkEmail: data.userMail,
@@ -995,28 +998,28 @@ export default {
     },
     saveAddress() {
       console.log('save')
-      if (this.addressData.firstName === '') {
+      if (this.addressData.firstname === '') {
         this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
-        this.wrongInput.firstName = true
+        this.wrongInput.firstname = true
         return false
       }
-      if (this.addressData.firstName.length > 20) {
+      if (this.addressData.firstname.length > 20) {
         this.wrongMsg = this.$t(`${lang}.wip7`)
         this.alertBox = true
-        this.wrongInput.firstName = true
+        this.wrongInput.firstname = true
         return false
       }
-      if (this.addressData.lastName === '') {
+      if (this.addressData.lastname === '') {
         this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
-        this.wrongInput.lastName = true
+        this.wrongInput.lastname = true
         return false
       }
-      if (this.addressData.lastName.length > 20) {
+      if (this.addressData.lastname.length > 20) {
         this.wrongMsg = this.$t(`${lang}.wip9`)
         this.alertBox = true
-        this.wrongInput.lastName = true
+        this.wrongInput.lastname = true
         return false
       }
       if (
@@ -1055,8 +1058,8 @@ export default {
         JSON.parse(
           JSON.stringify({
             id: this.addressData.id,
-            firstName: this.addressData.firstName,
-            lastName: this.addressData.lastName,
+            firstname: this.addressData.firstname,
+            lastname: this.addressData.lastname,
             userTelCode: this.phoneNum.phone_code,
             userTel: this.addressData.userTel,
             userMail: this.addressData.userMail,
@@ -1070,8 +1073,9 @@ export default {
         false
       )
       this.$axios
-        .post('/web/myAccount/saveUserAddress', data)
+        .post('/web/member/address/edit', data)
         .then(res => {
+          console.log("修改地址",res)
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -1098,8 +1102,9 @@ export default {
         false
       )
       this.$axios
-        .post('/web/myAccount/delMyAddress', data)
+        .post('/web/member/address/del', data)
         .then(res => {
+          console.log("删除地址",res)
           this.getAddress()
         })
         .catch(err => {

@@ -69,12 +69,12 @@ export default {
       }
       const data = this.$helpers.transformRequest(
         JSON.parse(
-          JSON.stringify({ oldPassword: this.oldPsw, newPassword: this.newPsw })
+          JSON.stringify({ original_password: this.oldPsw, password: this.newPsw,password_repetition:this.agaPsw })
         ),
         false
       )
       this.$axios
-        .post('/web/myAccount/updateUserPassword', data)
+        .post('/web/member/member/up-pwd', data)
         .then(res => {
           console.log(res)
           this.$message({

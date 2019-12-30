@@ -10,32 +10,16 @@
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
-          <div v-if="g.group_type == null" class="finished">
-          <div v-if="g.goods_type == 2" class="cart-radio">
-              <div
-                v-show="!g.tick"
-                class="free-check"
-                @click="ticksCHeck(index)"
-              />
-              <i
-                v-show="g.tick"
-                class="iconfont icongou"
-                @click="ticksCHeck(index)"
-              />
+          <div v-if="g.group_type === null" class="finished">
+            <div  class="cart-radio">
+              <div v-show="!g.tick" class="free-check" @click="ticksCHeck(index)"/>
+              <i v-show="g.tick" class="iconfont icongou" @click="ticksCHeck(index)"/>
             </div>
-            <div v-else class="cart-radio"></div>
-
+            <div class="cart-radio"></div>
             <single :g="g" @reloadList="getList"></single>
-
           </div>
-          <div v-if="g.group_type == 1" class="couple">
+          <div v-if="g.group_type === 1" class="couple">
             <div
-              v-if="
-                g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
-                  .goodsStatus == 2 &&
-                  g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
-                    .goodsStatus == 2
-              "
               class="cart-radio"
             >
               <div
@@ -49,17 +33,11 @@
                 @click="ticksCHeck(index)"
               />
             </div>
-            <div v-else class="cart-radio"></div>
-
+            <div class="cart-radio"></div>
             <double :g="g" @reloadList="getList"></double>
-
           </div>
-          <div v-if="g.group_type == 2" class="customization">
+          <div v-if="g.group_type === 2" class="customization">
             <div
-              v-if="
-                g.data[0].simpleGoodsEntity.goodsStatus == 2 &&
-                g.data[1].simpleGoodsEntity.goodsStatus == 2
-              "
               class="cart-radio"
             >
               <div
@@ -73,7 +51,7 @@
                 @click="ticksCHeck(index)"
               />
             </div>
-            <div v-else class="cart-radio"></div>
+            <div  class="cart-radio"></div>
 
             <madeUp
               :g="g"
@@ -163,11 +141,11 @@ export default {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
-          // console.log("cart",res.data)
+          console.log("cart购物车",res)
           for (const i in res) {
             res[i].tick = false
           }
-          this.good = res
+          this.good = res.data
         })
         .catch(err => {
           console.log(err)

@@ -12,7 +12,7 @@ export default {
       city: { areaId: '', areaName: '- - -' },
       cityList: [{ areaId: '', areaName: '- - -' }],
       phoneJson: PhoneJson,
-      phoneNum: { cn: '', en: '', phone_code: '' }
+      phoneNum: { cn: '', en: '',zh: '', phone_code: '' }
     }
   },
   beforeMount() {
@@ -22,14 +22,19 @@ export default {
   methods: {
     getListOne() {
       this.$axios
-        .get('/web/myAccount/listArea')
+        .get('/web/common/area')
         .then(res => {
-          // console.log('country===>', res)
-          this.countryList = res
-          this.countryList.unshift({
-            areaId: '',
-            areaName: this.$t(`${lang}.select`)
-          })
+          if(res.code==200){
+            console.log("获取国家",res)
+            this.countryList = res.data
+            this.countryList.unshift({
+              areaId: '',
+              areaName: this.$t(`${lang}.select`)
+            })
+            // console.log('country===>', res.countryList.areaName)
+          }else {
+            throw new Error (res.message)
+          }  
         })
         .catch(err => {
           if (!err.response) {
@@ -48,13 +53,13 @@ export default {
         return
       }
       this.$axios
-        .get('/web/myAccount/listArea', {
-          params: { areaId: this.country.areaId }
+        .get('/web/common/area', {
+          params: { pid: this.country.areaId }
         })
         .then(res => {
-          // console.log('province===>', res)
+          console.log('省份=====>', this.provinceList)
           if (res) {
-            this.provinceList = res
+            this.provinceList = res.data
             this.provinceList.unshift({
               areaId: '',
               areaName: this.$t(`${lang}.select`)
@@ -84,13 +89,13 @@ export default {
         return
       }
       this.$axios
-        .get('/web/myAccount/listArea', {
-          params: { areaId: this.province.areaId }
+        .get('/web/common/area', {
+          params: { pid:this.province.areaId }
         })
         .then(res => {
-          // console.log('city===>', res)
+          console.log('城市===>',this.cityList)
           if (res) {
-            this.cityList = res
+            this.cityList = res.data
             this.cityList.unshift({
               areaId: '',
               areaName: this.$t(`${lang}.select`)
@@ -110,26 +115,25 @@ export default {
         })
     },
     async setAddress(obj) {
-      // console.log(obj)
+       console.log('111111',obj)
       let step = false
-      this.country = { areaId: obj.countryId, areaName: obj.countryName }
+      this.country = {areaId: obj.country_id, areaName: obj.country_name }
       await this.$axios
-        .get('/web/myAccount/listArea', {
-          params: { areaId: obj.countryId }
+        .get('/web/common/area', {
+          params: { pid: obj.country_id }
         })
         .then(res => {
-          // console.log(res)
+          console.log('拿到了省份',res);
           if (res) {
-            // console.log('拿到了省份');
-            this.provinceList = res
+            this.provinceList = res.data
             this.provinceList.unshift({
               areaId: '',
               areaName: this.$t(`${lang}.select`)
             })
-            if (obj.provinceId) {
+            if (obj.province_id) {
               this.province = {
-                areaId: obj.provinceId,
-                areaName: obj.provinceName
+                areaId: obj.province_id,
+                areaName: obj.province_name
               }
             } else {
               this.province = this.provinceList[0]
@@ -152,22 +156,22 @@ export default {
             // console.log(err)
           }
         })
-      if (step) return false
+      // if (step) return false
       await this.$axios
-        .get('/web/myAccount/listArea', {
-          params: { areaId: obj.provinceId }
+        .get('/web/common/area', {
+          params: { pid: obj.province_id }
         })
         .then(res => {
           // console.log(res)
           if (res) {
-            // console.log('拿到了城市');
-            this.cityList = res
+            console.log('拿到了城市',res);
+            this.cityList = res.data
             this.cityList.unshift({
               areaId: '',
               areaName: this.$t(`${lang}.select`)
             })
-            this.city = obj.cityId
-              ? { areaId: obj.cityId, areaName: obj.cityName }
+            this.city = obj.city_id
+              ? { areaId: obj.city_id, areaName: obj.city_name }
               : this.cityList[0]
           } else {
             this.cityList = [{ areaId: '', areaName: '- - -' }]
