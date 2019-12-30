@@ -420,13 +420,6 @@ export default {
     },
     register() {
       const _this = this
-      // _this.$router.replace({
-      //   path: '/login',
-      //   query: {
-      //     type: 'login'
-      //   }
-      // })
-      // _this.requesting = true
       this.$axios({
           method: 'post',
           url: '/web/site/email-register',
@@ -511,7 +504,7 @@ export default {
       }).then(res => {
         console.log("邮箱验证码",res)
         if (res.code==200){
-          _this.code=res.data.code
+          // _this.code=res.data.code
         }else {
           throw new Error (res.message)
         }   

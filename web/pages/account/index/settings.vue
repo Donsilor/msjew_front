@@ -11,8 +11,8 @@
     </div>
     <personal-account v-if="activeIndex === 0" />
     <personal-address v-if="activeIndex === 1" />
-    <personal-coupon v-if="activeIndex === 2" />
-    <personal-psw v-if="activeIndex === 3" />
+    <!-- <personal-coupon v-if="activeIndex === 2" /> -->
+    <personal-psw v-if="activeIndex === 2" />
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default {
       tabs: [
         this.$t(`${lang}.info`),
         this.$t(`${lang}.address`),
-        this.$t(`${lang}.coupon`),
+        // this.$t(`${lang}.coupon`),
         this.$t(`${lang}.psw1`)
       ]
     }

@@ -993,7 +993,13 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout', lang)
-      window.location.reload()
+      // window.location.reload()
+      this.$router.replace({
+        path: '/login',
+        query: {
+          type: 'login'
+        }
+      })
     },
     toSearch() {
       this.$router.push({
