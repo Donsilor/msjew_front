@@ -673,7 +673,7 @@
           </div>
         </div>
       </section>
-      <section v-show="activeListType === 'list'" class="list-content list">
+     <section v-show="activeListType === 'list'" class="list-content list">
         <ul class="list-data-item list-header">
           <li class="item">
             <span>{{ $t(`${lang}.thumbnail`) }}</span>
@@ -903,22 +903,22 @@ export default {
           key: 'sale_price',
           name: this.$t(`${lang}.price`)
         },
-        {
-          key: 'carat',
-          name: this.$t(`${lang}.carat`)
-        },
-        {
-          key: 'clarity',
-          name: this.$t(`${lang}.clarity`)
-        },
-        {
-          key: 'cut',
-          name: this.$t(`${lang}.cut`)
-        },
-        {
-          key: 'color',
-          name: this.$t(`${lang}.color`)
-        }
+        // {
+        //   key: 'carat',
+        //   name: this.$t(`${lang}.carat`)
+        // },
+        // {
+        //   key: 'clarity',
+        //   name: this.$t(`${lang}.clarity`)
+        // },
+        // {
+        //   key: 'cut',
+        //   name: this.$t(`${lang}.cut`)
+        // },
+        // {
+        //   key: 'color',
+        //   name: this.$t(`${lang}.color`)
+        // }
       ],
       sortTypeOptions: {
         default: {
@@ -934,7 +934,6 @@ export default {
           image: '/diamonds/sort-up.png'
         }
       },
-      sortType: 'default'
     }
   },
   computed: {
@@ -962,15 +961,15 @@ export default {
             ? `${this.$t(`${lang}.allDiamonds`)}(${this.total_count})`
             : `${this.$t(`${lang}.allDiamonds`)}`
         },
-        {
-          key: 'compare',
-          name:
-            this.$store.state.comparedAmount !== null
-              ? `${this.$t(`${lang}.compare`)}(${
-                  this.$store.state.comparedAmount
-                })`
-              : `${this.$t(`${lang}.compare`)}`
-        }
+        // {
+        //   key: 'compare',
+        //   name:
+        //     this.$store.state.comparedAmount !== null
+        //       ? `${this.$t(`${lang}.compare`)}(${
+        //           this.$store.state.comparedAmount
+        //         })`
+        //       : `${this.$t(`${lang}.compare`)}`
+        // }
       ]
     },
     // 列表显示方式的排序类型数组
@@ -1258,72 +1257,72 @@ export default {
           item.itemType = 'product'
           item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
           item.properties = [
-            {
-              name: 'SKU',
-              value: specsModels.SKU || ''
-            },
-            {
-              name: this.$t(`${lang}.shape`),
-              value: specsModels.shape || ''
-            },
-            {
-              name: this.$t(`${lang}.carat`),
-              value: specsModels.carat || ''
-            },
-            {
-              name: this.$t(`${lang}.color`),
-              value: specsModels.color || ''
-            },
-            {
-              name: this.$t(`${lang}.clarity`),
-              value: specsModels.clarity || ''
-            },
-            {
-              name: this.$t(`${lang}.cut`),
-              value: specsModels.cut || ''
-            },
-            {
-              name: this.$t(`${lang}.polish`),
-              value: specsModels.polish || ''
-            },
-            {
-              name: this.$t(`${lang}.symmetry`),
-              value: specsModels.symmetry || ''
-            },
-            {
-              name: this.$t(`${lang}.fluorescence`),
-              value: specsModels.fluorescence || ''
-            },
-            {
-              name: this.$t(`${lang}.certificate`),
-              value: specsModels.card || ''
-            }
+            // {
+            //   name: 'SKU',
+            //   value: specsModels.SKU || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.shape`),
+            //   value: specsModels.shape || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.carat`),
+            //   value: specsModels.carat || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.color`),
+            //   value: specsModels.color || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.clarity`),
+            //   value: specsModels.clarity || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.cut`),
+            //   value: specsModels.cut || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.polish`),
+            //   value: specsModels.polish || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.symmetry`),
+            //   value: specsModels.symmetry || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.fluorescence`),
+            //   value: specsModels.fluorescence || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.certificate`),
+            //   value: specsModels.card || ''
+            // }
           ]
           item.listProperties = [
-            {
-              name: this.$t(`${lang}.shape`),
-              value: specsModels.shape || ''
-            },
-            {
-              name: this.$t(`${lang}.carat`),
-              value: specsModels.carat || ''
-            },
-            {
-              name: this.$t(`${lang}.color`),
-              value: specsModels.color || ''
-            },
-            {
-              name: this.$t(`${lang}.clarity`),
-              value: specsModels.clarity || ''
-            },
-            {
-              name: this.$t(`${lang}.cut`),
-              value: specsModels.cut || ''
-            },
-            {
-              name: this.$t(`${lang}.price`),
-              value: item.salePrice || '--'
-            }
+            // {
+            //   name: this.$t(`${lang}.shape`),
+            //   value: specsModels.shape || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.carat`),
+            //   value: specsModels.carat || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.color`),
+            //   value: specsModels.color || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.clarity`),
+            //   value: specsModels.clarity || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.cut`),
+            //   value: specsModels.cut || ''
+            // },
+            // {
+            //   name: this.$t(`${lang}.price`),
+            //   value: item.salePrice || '--'
+            // }
           ]
           if (this.$route.query.step) {
             item.to = {

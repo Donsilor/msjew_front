@@ -63,16 +63,16 @@ export default {
         //   url: '/account/comment',
         //   name: this.$t(`${lang}.index.comment`)
         // },
-        {
-          img: require('../../static/personal/wish.png'),
-          url: '/account/wish-list',
-          name: this.$t(`${lang}.index.wish`)
-        },
-        {
-          img: require('../../static/personal/diamondContrast.png'),
-          url: '/account/diamond-compare',
-          name: this.$t(`${lang}.index.compare`)
-        }
+        // {
+        //   img: require('../../static/personal/wish.png'),
+        //   url: '/account/wish-list',
+        //   name: this.$t(`${lang}.index.wish`)
+        // },
+        // {
+        //   img: require('../../static/personal/diamondContrast.png'),
+        //   url: '/account/diamond-compare',
+        //   name: this.$t(`${lang}.index.compare`)
+        // }
       ],
       language:''
     }
@@ -149,7 +149,7 @@ export default {
 <style scoped lang="less">
 .personal {
   width: 1360px;
-  min-height: 990px;
+  min-height: 540px;
   margin: 0 auto;
   padding: 20px 40px;
   background: #f5f3f1;
@@ -224,8 +224,8 @@ export default {
     }
     .right-box {
       width: 1000px;
-      padding: 40px 30px 20px;
-      min-height: 1100px;
+      padding: 40px 30px 0;
+      min-height: 500px;
       background: #ffffff;
       margin-left: 16px;
     }
