@@ -112,7 +112,7 @@ export default {
         goodsDetailsId: '88888888',
         goodsId: d.simpleGoodsEntity.goodId,
         groupId: null,
-        group_type: null,
+        groupType: null,
         serviceId: 0,
         serviceVal: 'string'
       }

@@ -204,7 +204,7 @@ export default {
     // 中文登录
     loginCN() {
       const _this = this
-      _this.requesting = true
+      // _this.requesting = true
       this.$axios({
           method: 'post',
           url: '/web/site/login',
@@ -254,7 +254,7 @@ export default {
     // 登录
     login() {
       const _this = this
-      _this.requesting = true
+      // _this.requesting = true
       this.$axios({
           method: 'post',
           url: '/web/site/login',
@@ -306,6 +306,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+input::placeholder{
+  color:#C0C4CC;
+}
 .margin-bottom-29 {
   margin-bottom: 29px;
 }

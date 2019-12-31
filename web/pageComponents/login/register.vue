@@ -9,6 +9,7 @@
             <input
               v-model="firstname"
               type="text"
+              @focus="enter"
               v-bind:class="{active:isActivename}"
               :placeholder="$t(`${lang}.name`)"
             />
@@ -24,7 +25,7 @@
           <input
             v-model="mobile"
             type="text"
-            @blur="input"
+            @focus="enter"
             v-bind:class="{active:isActivemobile}"
             :placeholder="$t(`${lang}.mailbox`)"
           />
@@ -39,6 +40,7 @@
           <div class="register-input margin-right-20">
             <input
               v-model="code"
+              @focus="enter"
               v-bind:class="{active:isActivecode}"
               type="text"
               :placeholder="$t(`${lang}.VerificationCode`)"
@@ -60,7 +62,7 @@
         <div class="register-input">
           <input
             v-model="password"
-            @blur="input"
+            @focus="enter"
             v-bind:class="{active:isActivepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
@@ -81,7 +83,7 @@
           <input
             v-model=" password_repetition"
             v-bind:class="{active:isActiverepwd}"
-            @blur="input"
+            @focus="enter"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
             :placeholder="$t(`${lang}.repwdType`)"
@@ -123,6 +125,7 @@
           <div class="register-input">
             <input
               v-model="firstname"
+               @focus="enter"
               type="text"
               :placeholder="$t(`${lang}.surname`)"
             />
@@ -135,6 +138,7 @@
           <div class="register-input">
             <input
               v-model="lastname"
+               @focus="enter"
               type="text"
               :placeholder="$t(`${lang}.name`)"
             />
@@ -148,6 +152,7 @@
         <div class="register-input">
           <input
             v-model="email"
+             @focus="enter"
             type="text"
             v-bind:class="{active:isActivemail}"
             :placeholder="$t(`${lang}.email`)"
@@ -162,6 +167,7 @@
           <div class="register-input margin-right-20">
             <input
               v-model="code"
+               @focus="enter"
               v-bind:class="{active:isActivecode}"
               type="text"
               :placeholder="$t(`${lang}.code`)"
@@ -182,6 +188,7 @@
         <div class="register-input">
           <input
             v-model="password"
+             @focus="enter"
             v-bind:class="{active:isActivepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
@@ -200,6 +207,7 @@
         <div class="register-input">
           <input
             v-model="password_repetition"
+             @focus="enter"
             v-bind:class="{active:isActiverepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
@@ -299,6 +307,13 @@ export default {
     _this.$nextTick(() => {})
   },
   methods: {
+    enter(){
+      // this.isActivename=true
+      // if(this.isActivename=true){
+      //   this.isActivemobile=true
+      // }
+      
+    },
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='
@@ -568,6 +583,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+input::placeholder{
+  color:#C0C4CC;
+}
 .active{
   border-bottom: 1px solid #F3A18E!important;
 }

@@ -372,7 +372,7 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
-      // console.log(this.$helpers.base64Decode(this.$route.query.steps))
+      console.log(this.$helpers.base64Decode(this.$route.query.steps))
       if (this.$route.query.isBack) {
         this.checkDetail()
       }
@@ -431,7 +431,7 @@ export default {
       const goodInfo = {
         goodsId: null,
         groupId: id,
-        group_type: 1,
+        groupType: 1,
         type: 1
       }
 

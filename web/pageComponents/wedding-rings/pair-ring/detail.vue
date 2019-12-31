@@ -540,7 +540,7 @@ export default {
       const goodInfo = {
         goodsId: null,
         groupId: id,
-        group_type: 1,
+        groupType: 1,
         type: 1
       }
 
@@ -569,7 +569,7 @@ export default {
           goodsDetailsId: _this.firstRingSimpleDetail.id,
           goodsId: _this.firstRingSimpleDetail.goodsId,
           groupId: _this.info.id,
-          group_type: 1,
+          groupType: 1,
           serviceId: 0,
           serviceVal: 'string'
         },
@@ -578,7 +578,7 @@ export default {
           goodsDetailsId: _this.secondRingSimpleDetail.id,
           goodsId: _this.secondRingSimpleDetail.goodsId,
           groupId: _this.info.id,
-          group_type: 1,
+          groupType: 1,
           serviceId: 0,
           serviceVal: 'string'
         }
