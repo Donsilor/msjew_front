@@ -419,15 +419,15 @@
     </div>
     <div class="cart-goods">
       <div >
-        <div  class="finished">
+        <div v-if="g.groupType === null" class="finished">
           <div class="cart-radio"></div>
           <single :g="g" :options="false"></single>
         </div>
-        <div v-if="g.group_type === 1" class="couple">
+        <div v-if="g.groupType === 1" class="couple">
           <div class="cart-radio"></div>
           <double :g="g" :options="false"></double>
         </div>
-        <div v-if="g.group_type === 2" class="customization">
+        <div v-if="g.groupType === 2" class="customization">
           <div class="cart-radio"></div>
           <madeUp
             :g="g"
@@ -1239,7 +1239,7 @@ export default {
     getTex() {
       const arr = []
       for (const i in this.good) {
-        if (this.good[i].group_type === null) {
+        if (this.good[i].groupType === null) {
           arr.push(this.good[i].data[0].id)
         } else {
           arr.push(this.good[i].data[0].id)
@@ -1298,7 +1298,7 @@ export default {
       }
       const arr = []
       for (const i in this.good) {
-        if (this.good[i].group_type === null) {
+        if (this.good[i].groupType === null) {
           arr.push(this.good[i].data[0].id)
         } else {
           arr.push(this.good[i].data[0].id)

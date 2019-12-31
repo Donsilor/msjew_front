@@ -10,16 +10,33 @@
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
-          <div v-if="g.group_type === null" class="finished">
-            <div  class="cart-radio">
-              <div v-show="!g.tick" class="free-check" @click="ticksCHeck(index)"/>
-              <i v-show="g.tick" class="iconfont icongou" @click="ticksCHeck(index)"/>
+          <div v-if="g.groupType === null" class="finished">
+            <div
+              v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
+              class="cart-radio"
+            >
+              <div
+                v-show="!g.tick"
+                class="free-check"
+                @click="ticksCHeck(index)"
+              />
+              <i
+                v-show="g.tick"
+                class="iconfont icongou"
+                @click="ticksCHeck(index)"
+              />
             </div>
-            <div class="cart-radio"></div>
+            <div v-else class="cart-radio"></div>
             <single :g="g" @reloadList="getList"></single>
           </div>
-          <div v-if="g.group_type === 1" class="couple">
+          <div v-if="g.groupType === 1" class="couple">
             <div
+              v-if="
+                g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
+                  .goodsStatus === 2 &&
+                  g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
+                    .goodsStatus === 2
+              "
               class="cart-radio"
             >
               <div
@@ -33,11 +50,15 @@
                 @click="ticksCHeck(index)"
               />
             </div>
-            <div class="cart-radio"></div>
+            <div v-else class="cart-radio"></div>
             <double :g="g" @reloadList="getList"></double>
           </div>
-          <div v-if="g.group_type === 2" class="customization">
+          <div v-if="g.groupType === 2" class="customization">
             <div
+              v-if="
+                g.data[0].simpleGoodsEntity.goodsStatus === 2 &&
+                  g.data[1].simpleGoodsEntity.goodsStatus === 2
+              "
               class="cart-radio"
             >
               <div
@@ -51,14 +72,12 @@
                 @click="ticksCHeck(index)"
               />
             </div>
-            <div  class="cart-radio"></div>
-
+            <div v-else class="cart-radio"></div>
             <madeUp
               :g="g"
               :word="$t(`${lang}.customMade`)"
               @reloadList="getList"
             ></madeUp>
-
           </div>
         </div>
       </div>
@@ -86,7 +105,7 @@
           <span>（{{ $t(`${lang}.freeExpress`) }})</span>
         </div>
         <div class="total-price">
-          {{ $store.state.coinType }} {{ formatNumber(totalPrice) }}
+          {{ $store.state.coin }} {{ formatNumber(totalPrice) }}
         </div>
         <div v-if="!banBtn" class="go-order" @click="goOrder()">
           {{ $t(`${lang}.Settlement`) }}
@@ -141,11 +160,11 @@ export default {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
-          console.log("cart购物车",res)
+          console.log("1230",res)
           for (const i in res) {
             res[i].tick = false
           }
-          this.good = res.data
+          this.good = res
         })
         .catch(err => {
           console.log(err)
@@ -180,7 +199,8 @@ export default {
         : (this.totalPrice += this.good[i].price)
       this.good[i].tick = !this.good[i].tick
       this.good = JSON.parse(JSON.stringify(this.good))
-      if (this.tickNum === this.good.length) {
+        console.log("length",this.good.length)
+      if (this.tickNum == this.good.length) {
         this.allTick = true
       } else {
         this.allTick = false
@@ -215,7 +235,7 @@ export default {
       const data = []
       for (const i in this.good) {
         if (
-          this.good[i].group_type === null &&
+          this.good[i].groupType === null &&
           this.good[i].data[0].simpleGoodsEntity.goodsStatus !== 2
         ) {
           data.push(this.good[i].id)

@@ -73,7 +73,7 @@ export default {
           goodsDetailsId: _this.simpleDetail.id,
           goodsId: _this.simpleDetail.goodsId,
           groupId: null,
-          group_type: null,
+          groupType: null,
           serviceId: 0,
           serviceVal: 'string'
         }

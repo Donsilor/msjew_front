@@ -125,11 +125,11 @@
       </div>
     </div>
     <div class="base-btn" @click="saveInfo()">{{ $t(`${lang}.save`) }}</div>
-    <div class="pink-title">
+    <!-- <div class="pink-title">
       <div class="pink-line" />
       <div class="title-name">{{ $t(`${lang}.link`) }}</div>
-    </div>
-    <div class="bind-info">
+    </div> -->
+    <!-- <div class="bind-info">
       <div class="bind-info-line">
         <div class="bind-info-title">{{ $t(`${lang}.faceLook`) }}</div>
         <div class="bind-info-content">
@@ -172,7 +172,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -384,7 +384,7 @@ export default {
         this.$message.error(this.$t(`${lang}.name1`))
         return
       }
-      this.userInfo.birthday =  this.year + '-' + this.month + '-' + this.day     
+      this.userInfo.birthday =  this.year + '-' + this.month + '-' + this.day
       this.$axios
         .post('/web/member/member/edit', {
           firstname: this.userInfo.firstname,
@@ -420,7 +420,7 @@ export default {
         return
       }
       let data = {};
-      data[type] = e;      
+      data[type] = e;
       this.$axios
         .post('web/member/member/edit',data)
         .then(res => {
@@ -432,7 +432,7 @@ export default {
             type: 'success'
           })
           this.userInfo[type] = e
-          
+
         })
         .catch(err => {
           if (!err.response) {
@@ -573,7 +573,7 @@ export default {
     text-align: center;
     cursor: pointer;
     margin-left: 28px;
-    margin-bottom: 50px;
+    // margin-bottom: 50px;
   }
   .bind-info {
     padding: 40px 28px;

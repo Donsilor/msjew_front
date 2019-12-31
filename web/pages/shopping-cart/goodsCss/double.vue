@@ -3,8 +3,14 @@
     <div class="good-info">
       <nuxt-link :to="getJumpLink(g)">
         <div class="good-img" @click="goDetail()">
-          <img :src="imageStrToArray(g.image)" alt="" />
+          <img :src="imageStrToArray(g.image)[0]" alt="" />
           <div
+            v-if="
+              g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus !==
+                2 &&
+                g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
+                  .goodsStatus !== 2
+            "
             class="img-bord"
           >
             <span>{{ $t(`cart.Invalid`) }}</span>
@@ -18,12 +24,14 @@
           </div>
           <div>
             SKU：{{
-             
+              g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
+                .simpleGoodsDetails.goodsDetailsCode
             }}
           </div>
           <div>
             SKU：{{
-             
+              g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
+                .simpleGoodsDetails.goodsDetailsCode
             }}
           </div>
         </div>
@@ -36,18 +44,19 @@
                 .simpleGoodsEntity.baseConfig"
               :key="'info1=' + k"
             >
-              <div  class="infos">
+              <div v-if="i.configId === 196" class="infos">
                 <div>{{ i.configVal }}</div>
                 <div>{{ i.configAttrIVal }}</div>
               </div>
             </div>
             <div
-              v-for="(s, v) in g.data[0].goods_spec"
+              v-for="(s, v) in g.data[0].ringsSimpleGoodsEntity
+                .simpleGoodsEntity.detailConfig"
               :key="'info2=' + v"
               class="infos"
             >
-              <div>{{ s.attr_name }}</div>
-              <div>{{ s.attr_value }}</div>
+              <div>{{ s.configVal }}</div>
+              <div>{{ s.configAttrIVal }}</div>
             </div>
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
@@ -55,7 +64,8 @@
             {{ g.coinType }}
             {{
               formatNumber(
-                g.data[0].price
+                g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
+                  .simpleGoodsDetails.retailMallPrice
               )
             }}
           </div>
@@ -67,7 +77,7 @@
                 .simpleGoodsEntity.baseConfig"
               :key="'info3=' + j"
             >
-              <div  class="infos">
+              <div v-if="i.configId === 196" class="infos">
                 <div>{{ i.configVal }}</div>
                 <div>{{ i.configAttrIVal }}</div>
               </div>
@@ -87,7 +97,8 @@
             {{ g.coinType }}
             {{
               formatNumber(
-                g.data[1].price
+                g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
+                  .simpleGoodsDetails.retailMallPrice
               )
             }}
           </div>
@@ -96,6 +107,11 @@
       </div>
       <div
         v-show="options"
+        v-if="
+          g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus ===
+            2 &&
+            g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus === 2
+        "
         class="good-btn"
       >
         <div class="wish-img">
@@ -104,7 +120,7 @@
         <div />
         <i class="iconfont iconlajitong" @click="deleteGood()" />
       </div>
-      <div v-show="options" class="lose-btn">
+      <div v-show="options" v-else class="lose-btn">
         <div @click="searchSimilar()">
           {{ $t(`cart.searchSimilar`) }}
         </div>
@@ -137,8 +153,8 @@ export default {
     addWish() {
       const data = {
         goodsId: null,
-        groupId: this.g.data[0].group_id,
-       group_type: this.g.group_type,
+        groupId: this.g.data[0].groupId,
+        groupType: this.g.groupType,
         type: 1
       }
       this.$store

@@ -315,16 +315,16 @@ export default {
             _this.$scrollTopTo(targetEle, top)
           }
         },
-        {
-          key: 'reviews',
-          name: this.$t(`${lang}.customerReviews`),
-          ref: '',
-          onClick() {
-            const targetEle = document.getElementsByClassName('layout-box')[0]
-            const top = _this.$refs['product-comments'].$el.offsetTop - 110
-            _this.$scrollTopTo(targetEle, top)
-          }
-        }
+        // {
+        //   key: 'reviews',
+        //   name: this.$t(`${lang}.customerReviews`),
+        //   ref: '',
+        //   onClick() {
+        //     const targetEle = document.getElementsByClassName('layout-box')[0]
+        //     const top = _this.$refs['product-comments'].$el.offsetTop - 110
+        //     _this.$scrollTopTo(targetEle, top)
+        //   }
+        // }
       ],
       activeTab: 'desc',
       materialColors: {
@@ -540,7 +540,7 @@ export default {
       const goodInfo = {
         goodsId: null,
         groupId: id,
-        group_type: 1,
+        groupType: 1,
         type: 1
       }
 
@@ -569,7 +569,7 @@ export default {
           goodsDetailsId: _this.firstRingSimpleDetail.id,
           goodsId: _this.firstRingSimpleDetail.goodsId,
           groupId: _this.info.id,
-          group_type: 1,
+          groupType: 1,
           serviceId: 0,
           serviceVal: 'string'
         },
@@ -578,7 +578,7 @@ export default {
           goodsDetailsId: _this.secondRingSimpleDetail.id,
           goodsId: _this.secondRingSimpleDetail.goodsId,
           groupId: _this.info.id,
-          group_type: 1,
+          groupType: 1,
           serviceId: 0,
           serviceVal: 'string'
         }

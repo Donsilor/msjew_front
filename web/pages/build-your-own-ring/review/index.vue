@@ -403,7 +403,7 @@ export default {
               ? this.steps.steps[0].goodsId
               : this.steps.steps[1].goodsId,
           groupId: timeSock,
-          group_type: 2,
+          groupType: 2,
           serviceId: 0,
           serviceVal: 'string'
         },
@@ -418,7 +418,7 @@ export default {
               ? this.steps.steps[1].goodsId
               : this.steps.steps[0].goodsId,
           groupId: timeSock,
-          group_type: 2,
+          groupType: 2,
           serviceId: 0,
           serviceVal: 'string'
         }

@@ -180,7 +180,7 @@ export default function({ req, res, app, store }) {
       query: {}
     }
 
-    if (obj.group_type === 1) {
+    if (obj.groupType === 1) {
       // console.log(`对戒💍`)
       route = {
         path: `/ring/wedding-rings/${obj.goodsName.replace(/\//g, '')}`,
@@ -189,7 +189,7 @@ export default function({ req, res, app, store }) {
           ringType: 'pair'
         }
       }
-    } else if (obj.group_type === 2) {
+    } else if (obj.groupType === 2) {
       // console.log(`定制💍`)
       const steps = {
         steps: [

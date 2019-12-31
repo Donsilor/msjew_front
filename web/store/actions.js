@@ -29,17 +29,19 @@ function getTimestampUuid() {
   return new Date().getTime().toString()
 }
 
-function makeCartGoodGroups(cart = []) {
+function makeCartGoodGroups(cart=[]) {
+  console.log("cart",cart)
   const result = []
   const localData = {}
   const keyName = 'createTime'
   cart.forEach(item => {
-    if (localData.hasOwnProperty(item[keyName])) {
-      localData[item[keyName]].data.push(item)
+    // result.push(item)
+    if (localData.hasOwnProperty(item)) {
+      localData[item].data.push(item)
     } else {
-      localData[item[keyName]] = {
+      localData[item] = {
         id: item[keyName].toString(),
-        group_type: item.group_type || null,
+        groupType: item.groupType || null,
         data: [item]
       }
     }
@@ -51,32 +53,37 @@ function makeCartGoodGroups(cart = []) {
   keys.forEach(item => {
     result.push(localData[item])
   })
-
   // 将定制的商品进行排序，钻石放在后面
   result.map(item => {
-    if (item.group_type === null) {
+    console
+    if (item.groupType === null) {
       // 单品
-      const goods_spec = item.data[0]|| {}
-      // item.groupTypeText = '单品'
-      item.goodsName = goods_spec.goods_name
-      item.image = goods_spec.goods_image
-      item.coinType = goods_spec.currency
-      item.price = goods_spec.goods_price
-    } else if (item.group_type === 1) {
+      const simpleGoodsEntity = item.data[0].simpleGoodsEntity || {}
+      item.groupTypeText = '单品'
+      item.goodsName = simpleGoodsEntity.goodsName
+      item.image = simpleGoodsEntity.goodsImages
+      item.coinType = simpleGoodsEntity.coinType
+      item.price = simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+    } else if (item.groupType === 1) {
       // 对戒
-      const goods_spec = item.data[0] || {}
-      console.log("good",goods_spec)
-      // item.groupTypeText = '对戒'
-      item.goodsName = goods_spec.goods_name
+      const ringsSimpleGoodsEntity = item.data[0].ringsSimpleGoodsEntity || {}
+      item.groupTypeText = '对戒'
+      item.goodsName = ringsSimpleGoodsEntity.name
       item.image = ringsSimpleGoodsEntity.ringImg
-      item.coinType = goods_spec.goods_image
-      item.price =goods_spec.goods_price
-    } else if (item.group_type === 2) {
+      item.coinType = ringsSimpleGoodsEntity.coinType
+      item.price =
+        ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
+          .retailMallPrice +
+        item.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
+          .retailMallPrice
+    } else if (item.groupType === 2) {
       // 定制
       const diamond = []
       const pedestal = []
       item.data.forEach(detail => {
-        if (detail.categoryId === 1) {
+        console.log("data",detail)
+        if (detail.categoryId ===
+           1) {
           diamond.push(detail)
         } else {
           pedestal.push(detail)
@@ -95,7 +102,7 @@ function makeCartGoodGroups(cart = []) {
     return item
   })
 
-  console.log(result)
+  // console.log("result",result)
 
   return result
 }
@@ -401,19 +408,16 @@ export default {
         if (cart[n].id === groupId.toString()) {
           cart[n].data.forEach(good => {
             ids.push(good.id)
+           
           })
         }
       }
     })
-
     return this.$axios({
       method: 'post',
-      url: `/web/goodsCart/delete`,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
+      url: '/web/member/cart/del',
       data: {
-        ids
+        id:ids
       },
       transformRequest: [
         function(data) {
@@ -431,6 +435,7 @@ export default {
       ]
     })
       .then(data => {
+        console.log("count",data)
         // 重新请求购物车数量（和购物车列表）
         return Promise.resolve('success')
       })
@@ -506,7 +511,6 @@ export default {
       url:'/web/member/cart'
     }).then(res => {
         console.log("购物车列表",res.data)
-        // console.log("yyy",makeCartGoodGroups(res))
         return makeCartGoodGroups(res.data)
       })
       .catch(err => {
@@ -680,7 +684,7 @@ export default {
     }
     const sendData = goods.map(item => {
       delete item.id
-      delete item.group_type
+      delete item.groupType
       return item
     })
 
@@ -752,7 +756,7 @@ export default {
     // console.log('addOnlineWish=====>')
 
     const sendData = goods.map(item => {
-      delete item.group_type
+      delete item.groupType
       return item
     })
 
@@ -1043,7 +1047,7 @@ export default {
             result = {
               goodsId: null,
               groupId: item.id,
-              group_type: 1,
+              groupType: 1,
 
               name: item.name,
               images: item.ringImg,
@@ -1056,7 +1060,7 @@ export default {
             result = {
               goodsId: item.goodId,
               groupId: null,
-              group_type: null,
+              groupType: null,
 
               name: item.goodsName,
               images: item.goodsImages,
@@ -1112,7 +1116,7 @@ export default {
     }
     const sendData = goods.map(item => {
       delete item.id
-      delete item.group_type
+      delete item.groupType
       return item
     })
 
@@ -1184,7 +1188,7 @@ export default {
     // console.log('addOnlineCompared=====>')
 
     const sendData = goods.map(item => {
-      delete item.group_type
+      delete item.grouptype
       return item
     })
 

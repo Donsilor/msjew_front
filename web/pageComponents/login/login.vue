@@ -66,13 +66,13 @@
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
-      <div class="gap-line margin-bottom-28">
+     <!-- <div class="gap-line margin-bottom-28">
         <span>{{ $t(`${lang}.logins`) }}</span>
       </div>
       <div class="row-flex justify-center">
         <img src="/login/facebook.png" class="oauth-type" />
         <img src="/login/google.png" class="oauth-type" />
-      </div>
+      </div> -->
     </div>
     <!-- 英文和繁体登录模块 -->
     <div v-else class="login-item">
@@ -137,13 +137,13 @@
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
-      <div class="gap-line margin-bottom-28">
+      <!-- <div class="gap-line margin-bottom-28">
         <span>{{ $t(`${lang}.logins`) }}</span>
-      </div>
-      <div class="row-flex justify-center">
-        <img src="/login/facebook.png" class="oauth-type" />
-        <img src="/login/google.png" class="oauth-type" />
-      </div>
+      </div> -->
+      <!-- <div class="row-flex justify-center"> -->
+        <!-- <img src="/login/facebook.png" class="oauth-type" /> -->
+        <!-- <img src="/login/google.png" class="oauth-type" /> -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -204,11 +204,11 @@ export default {
     // 中文登录
     loginCN() {
       const _this = this
-      _this.requesting = true
+      // _this.requesting = true
       this.$axios({
           method: 'post',
           url: '/web/site/login',
-          params:{            
+          params:{
           },
           data:{
             'username': _this.mobile,
@@ -239,14 +239,14 @@ export default {
                 }
               }, 0)
             }
-            
+
           } else {
             throw new Error (res.message)
-          }          
+          }
         })
         .catch(err => {
           //console.error(err)
-          _this.requesting = false 
+          _this.requesting = false
           _this.refreshCode()
           _this.$errorMessage(err.message)
         })
@@ -254,11 +254,11 @@ export default {
     // 登录
     login() {
       const _this = this
-      _this.requesting = true
+      // _this.requesting = true
       this.$axios({
           method: 'post',
           url: '/web/site/login',
-          params:{            
+          params:{
           },
           data:{
             'username': _this.account,
@@ -292,11 +292,11 @@ export default {
 
           } else {
             throw new Error (res.message)
-          }          
+          }
         })
         .catch(err => {
           //console.error(err)
-          _this.requesting = false 
+          _this.requesting = false
           _this.refreshCode()
           _this.$errorMessage(err.message)
         })
@@ -306,6 +306,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+input::placeholder{
+  color:#C0C4CC;
+}
 .margin-bottom-29 {
   margin-bottom: 29px;
 }
