@@ -604,72 +604,72 @@ export default {
               }
             ],
 
-            // [
-            //   {
-            //     key: 'material',
-            //     groupName: this.$t(`${lang}.weddingRingMenu.color`),
-            //     data: [
-            //       {
-            //         id: 31,
-            //         name: this.$t(`${lang}.weddingRingMenu.14KWhite`),
-            //         icon: 'iconmaterial-big-pt color-icon color-14k-white',
-            //         to: {
-            //           path: '/wedding-rings/14k-white'
-            //         }
-            //       },
-            //       {
-            //         id: 28,
-            //         name: this.$t(`${lang}.weddingRingMenu.18KWhite`),
-            //         icon: 'iconmaterial-big-pt color-icon color-18k-white',
-            //         to: {
-            //           path: '/wedding-rings/18k-white'
-            //         }
-            //       },
-            //       {
-            //         id: 32,
-            //         name: this.$t(`${lang}.weddingRingMenu.14KYellow`),
-            //         icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
-            //         to: {
-            //           path: '/wedding-rings/14k-yellow'
-            //         }
-            //       },
-            //       {
-            //         id: 29,
-            //         name: this.$t(`${lang}.weddingRingMenu.18KYellow`),
-            //         icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
-            //         to: {
-            //           path: '/wedding-rings/18k-yellow'
-            //         }
-            //       },
-            //       {
-            //         id: 34,
-            //         name: this.$t(`${lang}.weddingRingMenu.platinum`),
-            //         icon: 'iconmaterial-big-pt color-icon color-platinum',
-            //         to: {
-            //           path: '/wedding-rings/platinum'
-            //         }
-            //       },
-            //       {
-            //         id: 30,
-            //         name: this.$t(`${lang}.weddingRingMenu.18KRoseGold`),
-            //         icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
-            //         to: {
-            //           path: '/wedding-rings/18k-rose-gold'
-            //         }
-            //       }
-            //       // {
-            //       //   name: this.$t(`${lang}.weddingRingMenu.14KRoseGold`),
-            //       //   icon: 'iconstar-zs',
-            //       //   href: '/wedding-rings/14k-rose-gold'
-            //       // },
-            //       // {
-            //       //   name: this.$t(`${lang}.weddingRingMenu.fineSilver`),
-            //       //   icon: 'iconstar-zs',
-            //       //   href: '/wedding-rings/fine-silver'
-            //       // }
-            //     ]
-            //   }
-            // ]
+            [
+              {
+                key: 'material',
+                groupName: this.$t(`${lang}.weddingRingMenu.color`),
+                data: [
+                  {
+                    id: 31,
+                    name: this.$t(`${lang}.weddingRingMenu.14KWhite`),
+                    icon: 'iconmaterial-big-pt color-icon color-14k-white',
+                    to: {
+                      path: '/wedding-rings/14k-white'
+                    }
+                  },
+                  {
+                    id: 28,
+                    name: this.$t(`${lang}.weddingRingMenu.18KWhite`),
+                    icon: 'iconmaterial-big-pt color-icon color-18k-white',
+                    to: {
+                      path: '/wedding-rings/18k-white'
+                    }
+                  },
+                  {
+                    id: 32,
+                    name: this.$t(`${lang}.weddingRingMenu.14KYellow`),
+                    icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+                    to: {
+                      path: '/wedding-rings/14k-yellow'
+                    }
+                  },
+                  {
+                    id: 29,
+                    name: this.$t(`${lang}.weddingRingMenu.18KYellow`),
+                    icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
+                    to: {
+                      path: '/wedding-rings/18k-yellow'
+                    }
+                  },
+                  {
+                    id: 34,
+                    name: this.$t(`${lang}.weddingRingMenu.platinum`),
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
+                    to: {
+                      path: '/wedding-rings/platinum'
+                    }
+                  },
+                  {
+                    id: 30,
+                    name: this.$t(`${lang}.weddingRingMenu.18KRoseGold`),
+                    icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
+                    to: {
+                      path: '/wedding-rings/18k-rose-gold'
+                    }
+                  }
+                  // {
+                  //   name: this.$t(`${lang}.weddingRingMenu.14KRoseGold`),
+                  //   icon: 'iconstar-zs',
+                  //   href: '/wedding-rings/14k-rose-gold'
+                  // },
+                  // {
+                  //   name: this.$t(`${lang}.weddingRingMenu.fineSilver`),
+                  //   icon: 'iconstar-zs',
+                  //   href: '/wedding-rings/fine-silver'
+                  // }
+                ]
+              }
+            ]
 
           ]
         },

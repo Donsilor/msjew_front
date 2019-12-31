@@ -375,7 +375,7 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
-      console.log(this.$helpers.base64Decode(this.$route.query.steps))
+      // console.log(this.$helpers.base64Decode(this.$route.query.steps))
       if (this.$route.query.isBack) {
         this.checkDetail()
       }
@@ -459,7 +459,6 @@ export default {
       const ringChecked = JSON.parse(JSON.stringify(this.ringChecked))
       const productInfo = this.productInfo
       const details = productInfo.details
-
       for (let n = 0, length = details.length; n < length; n++) {
         const detailItem = details[n]
         if (detailItem.id === queryId) {
