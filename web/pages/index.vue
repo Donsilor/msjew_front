@@ -6,8 +6,12 @@
         :autoplay="true"
         :height="bannerHeight + 'px'"
       >
-        <el-carousel-item v-for="(item, index) in banner" :key="index">
-          <!--          有链接地址，且是外部链接-->
+      <el-carousel-item v-if="ad > 0" v-for="(item, index) in ad" :key="index">
+          <img class="banner-img" :src="item.image" alt="">
+      </el-carousel-item>
+
+        <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
+                   有链接地址，且是外部链接
           <a
             v-if="item.openType === 1 && item.url"
             :href="item.url"
@@ -17,7 +21,7 @@
               <img :src="item.image" />
             </div>
           </a>
-          <!--          有链接地址，且不是外部链接-->
+                   有链接地址，且不是外部链接
           <nuxt-link
             v-else-if="item.url && !item.isOutUrl"
             :to="{ path: item.url }"
@@ -26,17 +30,17 @@
               <img :src="item.image" />
             </div>
           </nuxt-link>
-          <!--          有链接地址，且是外部链接-->
+                   有链接地址，且是外部链接
           <a v-else-if="item.url && item.isOutUrl" :href="item.url">
             <div class="banner-item">
               <img :src="item.image" />
             </div>
           </a>
-          <!--          没有链接地址-->
+                   没有链接地址
           <div v-else-if="!item.url" class="banner-item">
             <img :src="item.image" />
           </div>
-        </el-carousel-item>
+        </el-carousel-item> -->
       </el-carousel>
     </section>
     <section class="design">
@@ -314,6 +318,7 @@ export default {
   mixins: [CategoryIndexPage],
   data() {
     return {
+      bannerHeight: 300,
       lang,
       recommendCategories: [
         {
@@ -508,7 +513,6 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
-      console.log('this is index.vue')
     })
   },
   methods: {
@@ -568,6 +572,10 @@ section {
   overflow: hidden;
 }
 .banner {
+  max-width: 1920px;
+  min-width: 1525px;
+  margin: 0 auto;
+
   overflow-x: hidden;
   .banner-item {
     width: 100%;
@@ -575,7 +583,7 @@ section {
     line-height: 0;
     font-size: 0;
 
-    img {
+    .banner-img {
       width: 100%;
       height: 100%;
     }
