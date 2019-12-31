@@ -20,7 +20,7 @@ export default {
     const getSingleRing = () => {
       return $axios({
         method: 'post',
-        url: '/web/goods/goodsDetail',
+        url: '/web/goods/style/detail',
         params: {
           goodsId: route.query.goodId || ''
         },

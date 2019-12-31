@@ -29,7 +29,7 @@ export default {
     const getPairRing = () => {
       return $axios({
         method: 'post',
-        url: '/web/ring/ringDetail',
+        url: '/web/goods/ring/detail',
         params: {
           id: route.query.goodId || ''
         },
@@ -55,6 +55,7 @@ export default {
         }
       })
         .then(data => {
+          var data = data.data;
           return {
             info: data,
             ringType,

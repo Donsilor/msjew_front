@@ -196,22 +196,22 @@ export default {
     info() {
       const showingSpecs = {}
       this.specs.forEach(item => {
-        if (item.configId === 31) {
+        if (item.configId === 18) {
           showingSpecs.caratWeight = item.configAttrVal
-        } else if (item.configId === 34) {
+        } else if (item.configId === 50) {
           showingSpecs.color = item.configAttrVal
           showingSpecs.colorIndex = item.configAttrId
-        } else if (item.configId === 33) {
+        } else if (item.configId === 22) {
           showingSpecs.cut = item.configAttrVal
           showingSpecs.cutName = item.configAttrName
-          if (item.configAttrId === 30) {
+          if (item.configAttrId === 13) {
             showingSpecs.cutIndex = 2
-          } else if (item.configAttrId === 29) {
+          } else if (item.configAttrId === 14) {
             showingSpecs.cutIndex = 3
-          } else if (item.configAttrId === 28) {
+          } else if (item.configAttrId === 15) {
             showingSpecs.cutIndex = 4
           }
-        } else if (item.configId === 35) {
+        } else if (item.configId === 51) {
           showingSpecs.clarity = item.configAttrVal
           showingSpecs.clarityName = item.configAttrName
           showingSpecs.clarityIndex = item.configAttrId

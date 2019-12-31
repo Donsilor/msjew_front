@@ -303,7 +303,7 @@ export default {
       const details = productInfo.details
       
       const ringChecked = _this.ringChecked
-
+     
       const material =
         productInfo.materials.length > 0 &&
         productInfo.materials[ringChecked.materialIndex]
@@ -394,7 +394,7 @@ export default {
     getRingInfo() {
       const _this = this
       const product = _this.info ? JSON.parse(JSON.stringify(_this.info)) : {}
-
+      
       return Object.assign({}, product, {
         targetUser: (() => {
           const specs = product.specs || []
@@ -410,7 +410,7 @@ export default {
         sizes: product.sizes || [],
         specs: product.specs || [],
         details: product.details || [],
-        goodsServicesJsons: (product.goodsServicesJsons || []).map(item => {
+        goodsServicesJsons: (product.goodsServicesJsons || []).map(item => {         
           item.img = _this.imageStrToArray(item.img)
           return item
         })
@@ -458,7 +458,8 @@ export default {
       console.log(queryId, `qid==============`, queryStep)
       const ringChecked = JSON.parse(JSON.stringify(this.ringChecked))
       const productInfo = this.productInfo
-      const details = productInfo.details
+      const details = productInfo.details  
+      
       for (let n = 0, length = details.length; n < length; n++) {
         const detailItem = details[n]
         if (detailItem.id === queryId) {

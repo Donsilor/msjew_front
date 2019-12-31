@@ -233,8 +233,8 @@ export default {
   data() {
     return {
       lang,
-      listUrl: '/web/ring/searchRing',
-      page_size: 13,
+      listUrl: '/web/goods/ring/search',
+      page_size: 16,
       styleOptions: this.CONDITION_INFO.style.coupleRings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
@@ -307,7 +307,7 @@ export default {
           item.ringImg = _this.imageStrToArray(item.ringImg || '')
           item.goodsImages = item.ringImg
           item.to = {
-            path: '/ring/wedding-rings/' + item.name.replace(/\//g, ''),
+            path: '/ring/wedding-rings/' + item.id.replace(/\//g, ''),
             query: {
               goodId: item.id,
               ringType: 'pair'
