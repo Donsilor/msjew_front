@@ -9,8 +9,14 @@
           </span>
           <input
             v-model="mobile"
+            @focus="focusEvent1"
+            @blur="blurEvent1"
+            @keydown="keydownEvent1"
+            @keyup="keyupEvent1"
+            @keypress="keypressEvent1"
+            @change="changeEvent1"
             type="text"
-            v-bind:class="{active:isActive}"
+            v-bind:class="{active:isActive1}"
             :placeholder="$t(`${lang}.mailbox`)"
           />
         </div>
@@ -26,7 +32,7 @@
           <input
             v-model="password"
             type="password"
-            v-bind:class="{active:isActive}"
+            v-bind:class="{active:isActive2}"
             :placeholder="$t(`${lang}.password`)"
           />
         </div>
@@ -45,7 +51,7 @@
             <input
               v-model="code"
               type="text"
-              v-bind:class="{active:isActive}"
+              v-bind:class="{active:isActive3}"
               :placeholder="$t(`${lang}.code`)"
               @keydown.enter="login"
             />
@@ -167,11 +173,22 @@ export default {
       passwordErr: false,
       codeErr: false,
       mailErr: false,
-      isActive: false
+      isActive1: false,
+      isActive2: false,
+      isActive3: false
     }
   },
-  computed: {},
+  computed: {
+   
+  },
+  watch:{
+    
+  },
   mounted() {
+    if(this.mobile==''){
+      this.isActive1=true
+      this.phoneErr=true
+    }
     this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {
@@ -179,6 +196,31 @@ export default {
     })
   },
   methods: {
+    focusEvent1(e){
+      console.log("zzzz")
+    },
+    blurEvent1(e){
+
+    },
+    keydownEvent1(e){
+      
+    },
+    keyupEvent1(){
+      this.isActive1=false
+      this.phoneErr=false
+    },
+    keypressEvent1(){
+      this.isActive1=false
+      this.phoneErr=false
+      // if(this.mobile==''){
+      //   this.isActive1=true
+      //   this.phoneErr=true
+      // }
+      // console.log("xxx")
+    },
+    changeEvent1(){
+     
+    },
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='
@@ -205,6 +247,14 @@ export default {
     loginCN() {
       const _this = this
       // _this.requesting = true
+       if(_this.mobile === ''||_this.password === ''||_this.code === ''){
+        _this.isActive1 =true
+        _this.isActive2 =true
+        _this.isActive3 =true
+        _this.phoneErr = true
+        _this.passwordErr = true
+        _this.codeErr = true
+      }
       this.$axios({
           method: 'post',
           url: '/web/site/login',
@@ -241,7 +291,7 @@ export default {
             }
 
           } else {
-            throw new Error (res.message)
+            // throw new Error (res.message)
           }
         })
         .catch(err => {
