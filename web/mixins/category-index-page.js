@@ -9,14 +9,14 @@ export default {
   computed: {
     banner() {
       const ad = JSON.parse(
-        JSON.stringify(this.ad && this.ad[0] ? this.ad[0] : [])
+        JSON.stringify(this.ad  ? this.ad : [])
       )
-
-      console.log(ad)
+      
 
       let result = []
       if (ad.advertImgModelList && ad.advertImgModelList.length > 0) {
         result = ad.advertImgModelList
+        
         for (let n = 0, length = result.length; n < length; n++) {
           result[n].openType = ad.tdOpenType
           result[n].image = this.completionImageStr(result[n].image)

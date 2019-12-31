@@ -13,34 +13,34 @@ const conditionMaps = {
 
   // 形状
   'round-cut': {
-    shape: 18
+    shape: 16
   },
   'oval-cut': {
-    shape: 25
+    shape: 17
   },
   'princess-cut': {
-    shape: 19
+    shape: 54
   },
   'emerald-cut': {
-    shape: 20
+    shape: 55
   },
   'heart-shaped': {
-    shape: 27
+    shape: 56
   },
   'marquise-cut': {
-    shape: 23
+    shape: 57
   },
   'cushion-cut': {
-    shape: 22
+    shape: 58
   },
   'pear-shaped': {
-    shape: 26
+    shape: 59
   },
   'asscher-cut': {
-    shape: 21
+    shape: 60
   },
   'radiant-cut': {
-    shape: 24
+    shape: 61
   }
 }
 

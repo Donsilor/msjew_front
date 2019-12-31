@@ -319,7 +319,7 @@ export default {
       lang,
       shapeList: [
         {
-          id: 18,
+          id: 16,
           name: this.$t(`${lang}.shape.round`),
           image: '/diamonds/shape/round.png',
           desc: this.$t(`${lang}.shape.roundDesc`),
@@ -328,7 +328,7 @@ export default {
           }
         },
         {
-          id: 25,
+          id: 17,
           name: this.$t(`${lang}.shape.oval`),
           image: '/diamonds/shape/oval.png',
           desc: this.$t(`${lang}.shape.ovalDesc`),
@@ -337,7 +337,7 @@ export default {
           }
         },
         {
-          id: 19,
+          id: 54,
           name: this.$t(`${lang}.shape.princess`),
           image: '/diamonds/shape/pincess.png',
           desc: this.$t(`${lang}.shape.princessDesc`),
@@ -346,7 +346,7 @@ export default {
           }
         },
         {
-          id: 20,
+          id: 55,
           name: this.$t(`${lang}.shape.emerald`),
           image: '/diamonds/shape/emerald.png',
           desc: this.$t(`${lang}.shape.emeraldDesc`),
@@ -355,7 +355,7 @@ export default {
           }
         },
         {
-          id: 27,
+          id: 56,
           name: this.$t(`${lang}.shape.heart`),
           image: '/diamonds/shape/heart.png',
           desc: this.$t(`${lang}.shape.heartDesc`),
@@ -364,7 +364,7 @@ export default {
           }
         },
         {
-          id: 23,
+          id: 57,
           name: this.$t(`${lang}.shape.marquise`),
           image: '/diamonds/shape/marquise.png',
           desc: this.$t(`${lang}.shape.marquiseDesc`),
@@ -373,7 +373,7 @@ export default {
           }
         },
         {
-          id: 22,
+          id: 58,
           name: this.$t(`${lang}.shape.cushion`),
           image: '/diamonds/shape/cushion.png',
           desc: this.$t(`${lang}.shape.cushionDesc`),
@@ -382,7 +382,7 @@ export default {
           }
         },
         {
-          id: 26,
+          id: 59,
           name: this.$t(`${lang}.shape.pearShape`),
           image: '/diamonds/shape/pear.png',
           desc: this.$t(`${lang}.shape.pearShapeDesc`),
@@ -391,7 +391,7 @@ export default {
           }
         },
         {
-          id: 21,
+          id: 60,
           name: this.$t(`${lang}.shape.asscher`),
           image: '/diamonds/shape/asscher.png',
           desc: this.$t(`${lang}.shape.asscherDesc`),
@@ -400,7 +400,7 @@ export default {
           }
         },
         {
-          id: 24,
+          id: 61,
           name: this.$t(`${lang}.shape.radiant`),
           image: '/diamonds/shape/radiant.png',
           desc: this.$t(`${lang}.shape.radiantDesc`),

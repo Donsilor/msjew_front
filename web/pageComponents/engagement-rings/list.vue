@@ -233,7 +233,7 @@ export default {
   data() {
     return {
       lang,
-      listUrl: '/web/goods/searchGoods',
+      listUrl: '/web/goods/style/search',
       page_size: 8,
       styleOptions: this.CONDITION_INFO.style.rings,
       materialOptions: this.CONDITION_INFO.quality.rings,
@@ -280,6 +280,7 @@ export default {
         {
           type: 2,
           paramName: 'engaged_style',
+          paramId:40,
           valueType: 1,
           configValues: [conditions.style || -1]
         }
@@ -289,6 +290,7 @@ export default {
         params.push({
           type: 3,
           paramName: 'material',
+          paramId:10,
           valueType: 1,
           configValues: conditions.material === '' ? [] : [conditions.material]
         })
@@ -297,7 +299,7 @@ export default {
       const data = {
         advertType: 1,
         // 商品类别ID
-        categoryId: 2,
+        categoryId: 12,
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）
@@ -358,7 +360,7 @@ export default {
             item.to = {
               path:
                 '/build-your-own-ring/setting-details/' +
-                item.goodsName.replace(/\//g, ''),
+                item.id.replace(/\//g, ''),
               query: {
                 step: this.$route.query.step,
                 steps: this.$route.query.steps,
@@ -369,7 +371,7 @@ export default {
           } else {
             item.to = {
               path:
-                '/ring/engagement-rings/' + item.goodsName.replace(/\//g, ''),
+                '/ring/engagement-rings/' + item.id.replace(/\//g, ''),
               query: {
                 goodId: item.id,
                 ringType: 'engagement'

@@ -442,7 +442,7 @@ export default {
                 groupName: this.$t(`${lang}.engagementRingMenu.color`),
                 data: [
                   {
-                    id: 120,
+                    id: 31,
                     name: this.$t(`${lang}.engagementRingMenu.14KWhite`),
                     icon: 'iconmaterial-big-pt color-icon color-14k-white',
                     to: {
@@ -458,7 +458,7 @@ export default {
                     }
                   },
                   {
-                    id: 122,
+                    id: 32,
                     name: this.$t(`${lang}.engagementRingMenu.14KYellow`),
                     icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
@@ -466,7 +466,7 @@ export default {
                     }
                   },
                   {
-                    id: 123,
+                    id: 29,
                     name: this.$t(`${lang}.engagementRingMenu.18KYellow`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
@@ -474,7 +474,7 @@ export default {
                     }
                   },
                   {
-                    id: 124,
+                    id: 34,
                     name: this.$t(`${lang}.engagementRingMenu.platinum`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
@@ -482,7 +482,7 @@ export default {
                     }
                   },
                   {
-                    id: 125,
+                    id: 30,
                     name: this.$t(`${lang}.engagementRingMenu.18KRoseGold`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
@@ -609,7 +609,7 @@ export default {
                 groupName: this.$t(`${lang}.weddingRingMenu.color`),
                 data: [
                   {
-                    id: 120,
+                    id: 31,
                     name: this.$t(`${lang}.weddingRingMenu.14KWhite`),
                     icon: 'iconmaterial-big-pt color-icon color-14k-white',
                     to: {
@@ -625,7 +625,7 @@ export default {
                     }
                   },
                   {
-                    id: 122,
+                    id: 32,
                     name: this.$t(`${lang}.weddingRingMenu.14KYellow`),
                     icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
@@ -633,7 +633,7 @@ export default {
                     }
                   },
                   {
-                    id: 123,
+                    id: 29,
                     name: this.$t(`${lang}.weddingRingMenu.18KYellow`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
@@ -641,7 +641,7 @@ export default {
                     }
                   },
                   {
-                    id: 124,
+                    id: 34,
                     name: this.$t(`${lang}.weddingRingMenu.platinum`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
@@ -649,7 +649,7 @@ export default {
                     }
                   },
                   {
-                    id: 125,
+                    id: 30,
                     name: this.$t(`${lang}.weddingRingMenu.18KRoseGold`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {

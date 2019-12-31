@@ -4,70 +4,70 @@ export default language => {
   return {
     shape: [
       {
-        id: 18,
+        id: 16,
         name: lang.shape.round,
         icon: '/diamonds/shape-icon/1.png',
         image: '/diamonds/shape/round.png',
         desc: lang.shape.roundDesc
       },
       {
-        id: 19,
+        id: 17,
         name: lang.shape.Princess,
         icon: '/diamonds/shape-icon/2.png',
         image: '/diamonds/shape/pincess.png',
         desc: lang.shape.PrincessDesc
       },
       {
-        id: 20,
+        id: 54,
         name: lang.shape.Emerald,
         icon: '/diamonds/shape-icon/10.png',
         image: '/diamonds/shape/emerald.png',
         desc: lang.shape.EmeraldDesc
       },
       {
-        id: 21,
+        id: 55,
         name: lang.shape.Asscher,
         icon: '/diamonds/shape-icon/8.png',
         image: '/diamonds/shape/asscher.png',
         desc: lang.shape.AsscherDesc
       },
       {
-        id: 22,
+        id: 56,
         name: lang.shape.Cushion,
         icon: '/diamonds/shape-icon/4.png',
         image: '/diamonds/shape/cushion.png',
         desc: lang.shape.CushionDesc
       },
       {
-        id: 23,
+        id: 57,
         name: lang.shape.Marquise,
         icon: '/diamonds/shape-icon/6.png',
         image: '/diamonds/shape/marquise.png',
         desc: lang.shape.MarquiseDesc
       },
       {
-        id: 24,
+        id: 58,
         name: lang.shape.Radiant,
         icon: '/diamonds/shape-icon/3.png',
         image: '/diamonds/shape/radiant.png',
         desc: lang.shape.RadiantDesc
       },
       {
-        id: 25,
+        id: 59,
         name: lang.shape.Oval,
         icon: '/diamonds/shape-icon/5.png',
         image: '/diamonds/shape/oval.png',
         desc: lang.shape.OvalDesc
       },
       {
-        id: 26,
+        id: 60,
         name: lang.shape.PearShape,
         icon: '/diamonds/shape-icon/9.png',
         image: '/diamonds/shape/pear.png',
         desc: lang.shape.PearShapeDesc
       },
       {
-        id: 27,
+        id: 61,
         name: lang.shape.Heart,
         icon: '/diamonds/shape-icon/7.png',
         image: '/diamonds/shape/heart.png',
@@ -269,43 +269,43 @@ export default language => {
     style: {
       rings: [
         {
-          id: 445,
+          id: 109,
           name: lang.style.SolitaireRing,
           image: '/engagement-rings/ring-style/1.png',
           desc: lang.style.SolitaireRingDesc
         },
         {
-          id: 446,
+          id: 110,
           name: lang.style.JumpRing,
           image: '/engagement-rings/ring-style/4.png',
           desc: lang.style.JumpRingDesc
         },
         {
-          id: 447,
+          id: 111,
           name: lang.style.PaveSetRing,
           image: '/engagement-rings/ring-style/5.png',
           desc: lang.style.PaveSetRingDesc
         },
         {
-          id: 448,
+          id: 112,
           name: lang.style.ClassicalRing,
           image: '/engagement-rings/ring-style/7.png',
           desc: lang.style.ClassicalRingDesc
         },
         {
-          id: 449,
+          id: 113,
           name: lang.style.ChannelSetRing,
           image: '/engagement-rings/ring-style/6.png',
           desc: lang.style.ChannelSetRingDesc
         },
         {
-          id: 450,
+          id: 114,
           name: lang.style.HaloSetRing,
           image: '/engagement-rings/ring-style/2.png',
           desc: lang.style.HaloSetRingDesc
         },
         {
-          id: 451,
+          id: 115,
           name: lang.style.ThreeStoneRing,
           image: '/engagement-rings/ring-style/3.png',
           desc: lang.style.ThreeStoneRingDesc
@@ -325,25 +325,25 @@ export default language => {
       ],
       manRings: [
         {
-          id: 457,
+          id: 165,
           image: `/ring-style/man/1.png`,
           name: lang.style.WeddingRing,
           desc: lang.style.ManWeddingRingDesc
         },
         {
-          id: 458,
+          id: 166,
           image: `/ring-style/man/2.png`,
           name: lang.style.ThreeDReliefRing,
           desc: lang.style.ThreeDReliefRingDesc
         },
         {
-          id: 459,
+          id: 167,
           image: `/ring-style/man/3.png`,
           name: lang.style.DiamondRing,
           desc: lang.style.ManDiamondRingDesc
         },
         {
-          id: 460,
+          id: 168,
           image: `/ring-style/man/4.png`,
           name: lang.style.SpecialRing,
           desc: lang.style.SpecialRingDesc
@@ -351,31 +351,31 @@ export default language => {
       ],
       womanRings: [
         {
-          id: 452,
+          id: 160,
           image: `/ring-style/woman/1.png`,
           name: lang.style.WeddingRing,
           desc: lang.style.WeddingRingDesc
         },
         {
-          id: 453,
+          id: 161,
           image: `/ring-style/woman/2.png`,
           name: lang.style.FullyDiamondInlaidRing,
           desc: lang.style.FullyDiamondInlaidRingDesc
         },
         {
-          id: 454,
+          id: 162,
           image: `/ring-style/woman/3.png`,
           name: lang.style.WeddingAnniversaryRing,
           desc: lang.style.WeddingAnniversaryRingDesc
         },
         {
-          id: 455,
+          id: 163,
           image: `/ring-style/woman/4.png`,
           name: lang.style.DiamondRing,
           desc: lang.style.DiamondRingDesc
         },
         {
-          id: 456,
+          id: 164,
           image: `/ring-style/woman/5.png`,
           name: lang.style.CasualRing,
           desc: lang.style.CasualRingDesc

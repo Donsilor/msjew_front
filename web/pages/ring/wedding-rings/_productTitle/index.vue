@@ -95,8 +95,6 @@ export default {
       })
         .then(data => {
           var data = data.data;
-          console.log(11);
-          console.log(data);
           return {
             info: data,
             ringType,

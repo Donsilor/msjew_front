@@ -346,7 +346,7 @@ export default {
 
       diamonds: [
         {
-          id: '18',
+          id: '16',
           name: this.$t(`${lang}.round`),
           desc: this.$t(`${lang}.roundDesc`),
           img: '/index/round.png',
@@ -355,7 +355,7 @@ export default {
           }
         },
         {
-          id: '19',
+          id: '17',
           name: this.$t(`${lang}.princessSquare`),
           desc: this.$t(`${lang}.princessSquareDesc`),
           img: '/index/pincess.png',
@@ -364,7 +364,7 @@ export default {
           }
         },
         {
-          id: '20',
+          id: '54',
           name: this.$t(`${lang}.octagonalTrapezoid`),
           desc: this.$t(`${lang}.octagonalTrapezoidDesc`),
           img: '/index/emerald.png',
@@ -373,7 +373,7 @@ export default {
           }
         },
         {
-          id: '21',
+          id: '55',
           name: this.$t(`${lang}.laserSquare`),
           desc: this.$t(`${lang}.laserSquareDesc`),
           img: '/index/asscher.png',
@@ -382,7 +382,7 @@ export default {
           }
         },
         {
-          id: '22',
+          id: '56',
           name: this.$t(`${lang}.pincushion`),
           desc: this.$t(`${lang}.pincushionDesc`),
           img: '/index/cushion.png',
@@ -391,7 +391,7 @@ export default {
           }
         },
         {
-          id: '23',
+          id: '57',
           name: this.$t(`${lang}.marquise`),
           desc: this.$t(`${lang}.marquiseDesc`),
           img: '/index/marquise.png',
@@ -400,7 +400,7 @@ export default {
           }
         },
         {
-          id: '24',
+          id: '58',
           name: this.$t(`${lang}.octagonalLaser`),
           desc: this.$t(`${lang}.octagonalLaserDesc`),
           img: '/index/radiant.png',
@@ -409,7 +409,7 @@ export default {
           }
         },
         {
-          id: '25',
+          id: '59',
           name: this.$t(`${lang}.oval`),
           desc: this.$t(`${lang}.ovalDesc`),
           img: '/index/oval.png',
@@ -418,7 +418,7 @@ export default {
           }
         },
         {
-          id: '26',
+          id: '60',
           name: this.$t(`${lang}.dropShape`),
           desc: this.$t(`${lang}.dropShapeDesc`),
           img: '/index/pear.png',
@@ -427,7 +427,7 @@ export default {
           }
         },
         {
-          id: '27',
+          id: '61',
           name: this.$t(`${lang}.heartShaped`),
           desc: this.$t(`${lang}.heartShapedDesc`),
           img: '/index/heart.png',
@@ -443,7 +443,7 @@ export default {
   computed: {
     hotProductInfo() {
       const webSite = JSON.parse(
-        JSON.stringify(this.webSite && this.webSite[0] ? this.webSite[0] : [])
+        JSON.stringify(this.webSite ? this.webSite : [])
       )
 
       const result = {
@@ -453,13 +453,13 @@ export default {
 
       if (webSite.moduleGoods) {
         webSite.moduleGoods.forEach(item => {
-          const product = item.goods
+          const product = item
           product.showType = webSite.showType
           product.goodsImages = this.imageStrToArray(product.goodsImages || '')
           // 删除后端无故增加的一层嵌套
-          product.configAttriEntity = product.configAttriEntity[product.id]
+          // product.configAttriEntity = product.configAttriEntity[product.id]
           product.to = {
-            path: `/ring/engagement-rings/${product.goodsName.replace(
+            path: `/ring/engagement-rings/${product.id.replace(
               /\//g,
               ''
             )}`,
@@ -487,12 +487,14 @@ export default {
 
     return $axios({
       method: 'get',
-      url: '/web/Website/queryWebsiteModule',
+      url: '/web/home/index/web-site',
       params: {
         type: 1
       }
     })
       .then(data => {
+        var data = data.data;
+        console.log(data);
         return {
           ad: data.advert,
           webSite: data.webSite,

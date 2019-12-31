@@ -13,45 +13,45 @@ const conditionMaps = {
 
   // 款式映射
   solitaire: {
-    style: 445
+    style: 109
   },
   jump: {
-    style: 446
+    style: 110
   },
   'pave-set': {
-    style: 447
+    style: 111
   },
   classical: {
-    style: 448
+    style: 112
   },
   'channel-set': {
-    style: 449
+    style: 113
   },
   'halo-set': {
-    style: 450
+    style: 114
   },
   'three-stone': {
-    style: 451
+    style: 115
   },
 
   // 成色
   '14k-white': {
-    material: 120
+    material: 31
   },
   '18k-white': {
     material: 28
   },
   '14k-yellow': {
-    material: 122
+    material: 32
   },
   '18k-yellow': {
-    material: 123
+    material: 29
   },
   platinum: {
-    material: 126
+    material: 34
   },
   '18k-rose-gold': {
-    material: 125
+    material: 30
   }
 }
 

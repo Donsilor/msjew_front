@@ -14,7 +14,7 @@
               'option-item',
               { active: option.id === searchConditions.style }
             ]"
-            @click="changeStyle(20, option.id)"
+            @click="changeStyle(54, option.id)"
           >
             <div class="item-icon">
               <img :src="option.image" />
@@ -38,7 +38,7 @@
               'option-item',
               { active: option.id === searchConditions.style }
             ]"
-            @click="changeStyle(10, option.id)"
+            @click="changeStyle(55, option.id)"
           >
             <div class="item-icon">
               <img :src="option.image" />
@@ -278,8 +278,8 @@ export default {
       const id = this.searchConditions.style
       const styleOptions = this.searchConditions.styleSex
         ? {
-            10: this.manStyleOptions,
-            20: this.ladyStyleOptions
+            55: this.manStyleOptions,
+            54: this.ladyStyleOptions
           }[this.searchConditions.styleSex]
         : []
       if (id === '') {
@@ -318,12 +318,13 @@ export default {
         })
       } else {
         const styleSexMap = {
-          10: 'marry_style_man',
-          20: 'marry_style_wom'
+          55: 'marry_style_man',
+          54: 'marry_style_wom'
         }
         params.push({
           type: 2,
           paramName: styleSexMap[conditions.styleSex],
+          paramId:conditions.styleSex,
           valueType: 1,
           configValues: conditions.style === '' ? [] : [conditions.style]
         })

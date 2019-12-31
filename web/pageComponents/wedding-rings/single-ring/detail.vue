@@ -301,6 +301,7 @@ export default {
       const _this = this
       const productInfo = _this.productInfo
       const details = productInfo.details
+      
       const ringChecked = _this.ringChecked
 
       const material =
@@ -314,6 +315,7 @@ export default {
           : null
 
       let result = null
+      
       for (let n = 0, length = details.length; n < length; n++) {
         const item = details[n]
         if (item.material === material && item.size === size) {
@@ -321,6 +323,7 @@ export default {
           break
         }
       }
+      
       return result
     },
     startDj() {

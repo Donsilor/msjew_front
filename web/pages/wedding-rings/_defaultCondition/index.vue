@@ -13,62 +13,62 @@ const conditionMaps = {
 
   // 女款
   'womens-classic': {
-    styleSex: 20,
-    style: 452
+    styleSex: 54,
+    style: 160
   },
   'womens-eternity': {
-    styleSex: 20,
-    style: 453
+    styleSex: 54,
+    style: 161
   },
   'womens-anniversary': {
-    styleSex: 20,
-    style: 454
+    styleSex: 54,
+    style: 162
   },
   'womens-diamond': {
-    styleSex: 20,
-    style: 455
+    styleSex: 54,
+    style: 163
   },
   'womens-stackable': {
-    styleSex: 20,
-    style: 456
+    styleSex: 54,
+    style: 164
   },
 
   // 男款
   'mens-classic': {
-    styleSex: 10,
-    style: 457
+    styleSex: 55,
+    style: 165
   },
   'mens-carved': {
-    styleSex: 10,
-    style: 458
+    styleSex: 55,
+    style: 166
   },
   'mens-diamond': {
-    styleSex: 10,
-    style: 459
+    styleSex: 55,
+    style: 167
   },
   'mens-alternative-metals': {
-    styleSex: 10,
-    style: 460
+    styleSex: 55,
+    style: 168
   },
 
   // 成色
   '14k-white': {
-    material: 120
+    material: 31
   },
   '18k-white': {
     material: 28
   },
   '14k-yellow': {
-    material: 122
+    material: 32
   },
   '18k-yellow': {
-    material: 123
+    material: 29
   },
   platinum: {
-    material: 126
+    material: 34
   },
   '18k-rose-gold': {
-    material: 125
+    material: 30
   }
 }
 
