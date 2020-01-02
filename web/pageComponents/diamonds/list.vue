@@ -628,7 +628,7 @@
                       <span class="number">{{ item.specsModels.cardNo }}</span>
                     </div>
                   </div>
-                  <div
+                  <!-- <div
                     class="right-item fixed-flex-item row-flex align-item-center"
                   >
                     <div class="compared-state">
@@ -653,7 +653,7 @@
                         @click.stop.prevent="setWish(item.id)"
                       ></i>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -846,8 +846,8 @@ export default {
   data() {
     return {
       lang,
-      listUrl: '/web/goods/searchGoods',
-      page_size: 14,
+      listUrl: '/web/goods/diamond/search',
+      page_size: 16,
       showMoreCondition: false,
 
       shapeOptions: this.CONDITION_INFO.shape,
@@ -1257,78 +1257,78 @@ export default {
           item.itemType = 'product'
           item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
           item.properties = [
-            // {
-            //   name: 'SKU',
-            //   value: specsModels.SKU || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.shape`),
-            //   value: specsModels.shape || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.carat`),
-            //   value: specsModels.carat || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.color`),
-            //   value: specsModels.color || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.clarity`),
-            //   value: specsModels.clarity || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.cut`),
-            //   value: specsModels.cut || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.polish`),
-            //   value: specsModels.polish || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.symmetry`),
-            //   value: specsModels.symmetry || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.fluorescence`),
-            //   value: specsModels.fluorescence || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.certificate`),
-            //   value: specsModels.card || ''
-            // }
+            {
+              name: 'SKU',
+              value: specsModels.SKU || ''
+            },
+            {
+              name: this.$t(`${lang}.shape`),
+              value: specsModels.shape || ''
+            },
+            {
+              name: this.$t(`${lang}.carat`),
+              value: specsModels.carat || ''
+            },
+            {
+              name: this.$t(`${lang}.color`),
+              value: specsModels.color || ''
+            },
+            {
+              name: this.$t(`${lang}.clarity`),
+              value: specsModels.clarity || ''
+            },
+            {
+              name: this.$t(`${lang}.cut`),
+              value: specsModels.cut || ''
+            },
+            {
+              name: this.$t(`${lang}.polish`),
+              value: specsModels.polish || ''
+            },
+            {
+              name: this.$t(`${lang}.symmetry`),
+              value: specsModels.symmetry || ''
+            },
+            {
+              name: this.$t(`${lang}.fluorescence`),
+              value: specsModels.fluorescence || ''
+            },
+            {
+              name: this.$t(`${lang}.certificate`),
+              value: specsModels.card || ''
+            }
           ]
           item.listProperties = [
-            // {
-            //   name: this.$t(`${lang}.shape`),
-            //   value: specsModels.shape || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.carat`),
-            //   value: specsModels.carat || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.color`),
-            //   value: specsModels.color || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.clarity`),
-            //   value: specsModels.clarity || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.cut`),
-            //   value: specsModels.cut || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.price`),
-            //   value: item.salePrice || '--'
-            // }
+            {
+              name: this.$t(`${lang}.shape`),
+              value: specsModels.shape || ''
+            },
+            {
+              name: this.$t(`${lang}.carat`),
+              value: specsModels.carat || ''
+            },
+            {
+              name: this.$t(`${lang}.color`),
+              value: specsModels.color || ''
+            },
+            {
+              name: this.$t(`${lang}.clarity`),
+              value: specsModels.clarity || ''
+            },
+            {
+              name: this.$t(`${lang}.cut`),
+              value: specsModels.cut || ''
+            },
+            {
+              name: this.$t(`${lang}.price`),
+              value: item.salePrice || '--'
+            }
           ]
           if (this.$route.query.step) {
             item.to = {
               path:
                 '/build-your-own-ring/diamond-details/' +
-                item.goodsName.replace(/\//g, ''),
+                item.id.replace(/\//g, ''),
               query: {
                 step: this.$route.query.step,
                 steps: this.$route.query.steps,
@@ -1337,7 +1337,7 @@ export default {
             }
           } else {
             item.to = {
-              path: '/diamond-details/' + item.goodsName.replace(/\//g, ''),
+              path: '/diamond-details/' + item.id.replace(/\//g, ''),
               query: {
                 goodId: item.id
               }
@@ -1427,7 +1427,7 @@ export default {
           }
         })
         item.to = {
-          path: '/diamond-details/' + item.goodsName.replace(/\//g, ''),
+          path: '/diamond-details/' + item.id.replace(/\//g, ''),
           query: {
             goodId: item.id
           }

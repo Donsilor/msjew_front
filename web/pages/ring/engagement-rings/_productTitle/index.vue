@@ -59,6 +59,7 @@ export default {
     return getSingleRing()
   },
   mounted() {
+
     const _this = this
     _this.$nextTick(() => {
       // 读取路径上的参数cut：{{

@@ -36,7 +36,6 @@ export default {
     // 是否有存货
     hadStock() {
       try {
-        console.log(55,this.simpleDetail);
         if (this.simpleDetail.stock > 0) {
           return true
         }
