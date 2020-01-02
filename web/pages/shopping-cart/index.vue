@@ -105,7 +105,7 @@
           <span>（{{ $t(`${lang}.freeExpress`) }})</span>
         </div>
         <div class="total-price">
-          {{ $store.state.coin }} {{ formatNumber(totalPrice) }}
+          {{ $store.state.coin }} {{  formatNumber(totalPrice)  }}
         </div>
         <div v-if="!banBtn" class="go-order" @click="goOrder()">
           {{ $t(`${lang}.Settlement`) }}
@@ -183,8 +183,9 @@ export default {
         this.totalPrice = 0
         for (const i in this.good) {
           this.good[i].tick = true
-          this.totalPrice += this.good[i].price
+          this.totalPrice +=parseFloat(this.good[i].price) 
         }
+          console.log("price=====",this.totalPrice)
         this.tickNum = this.good.length
         this.totalNum = this.good.length
         this.allTick = !this.allTick
@@ -194,11 +195,13 @@ export default {
     ticksCHeck(i) {
       this.good[i].tick ? this.tickNum-- : this.tickNum++
       this.good[i].tick ? this.totalNum-- : this.totalNum++
+      
       this.good[i].tick
-        ? (this.totalPrice -= this.good[i].price)
-        : (this.totalPrice += this.good[i].price)
+        ? (this.totalPrice -=parseFloat(this.good[i].price) )
+        : (this.totalPrice += parseFloat(this.good[i].price))
       this.good[i].tick = !this.good[i].tick
       this.good = JSON.parse(JSON.stringify(this.good))
+      // console.log("ticknum=====",tickNum)
         console.log("length",this.good.length)
       if (this.tickNum == this.good.length) {
         this.allTick = true
@@ -264,13 +267,14 @@ export default {
     goOrder() {
       const data = []
       for (const i in this.good) {
+        // console.log(this.good[i])
         if (this.good[i].tick) {
           data.push(this.good[i].id)
         }
       }
       if (data.length !== this.tickNum) return
       // console.log(data)
-      const cartIds = data.join('&&')
+      const cartIds = data.join(',')
       this.$router.push({
         path: `/billing-address`,
         query: { cartIds }

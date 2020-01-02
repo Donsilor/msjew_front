@@ -995,13 +995,14 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout', lang)
+       this.$router.push('/login')
       // window.location.reload()
-      this.$router.replace({
-        path: '/login',
-        query: {
-          type: 'login'
-        }
-      })
+      // this.$router.replace({
+      //   path: '/login',
+      //   query: {
+      //     type: 'login'
+      //   }
+      // })
     },
     toSearch() {
       this.$router.push({

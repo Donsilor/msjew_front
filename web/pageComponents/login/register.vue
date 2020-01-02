@@ -9,7 +9,8 @@
             <input
               v-model="firstname"
               type="text"
-              @focus="enter"
+              @focus="focusEvent1"
+              @blur="blurEvent1"
               v-bind:class="{active:isActivename}"
               :placeholder="$t(`${lang}.name`)"
             />
@@ -25,7 +26,8 @@
           <input
             v-model="mobile"
             type="text"
-            @focus="enter"
+            @focus="focusEvent2"
+            @blur="blurEvent2"
             v-bind:class="{active:isActivemobile}"
             :placeholder="$t(`${lang}.mailbox`)"
           />
@@ -40,7 +42,8 @@
           <div class="register-input margin-right-20">
             <input
               v-model="code"
-              @focus="enter"
+              @focus="focusEvent3"
+              @blur="blurEvent3"
               v-bind:class="{active:isActivecode}"
               type="text"
               :placeholder="$t(`${lang}.VerificationCode`)"
@@ -62,7 +65,8 @@
         <div class="register-input">
           <input
             v-model="password"
-            @focus="enter"
+            @focus="focusEvent4"
+            @blur="blurEvent4"
             v-bind:class="{active:isActivepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
@@ -83,7 +87,8 @@
           <input
             v-model=" password_repetition"
             v-bind:class="{active:isActiverepwd}"
-            @focus="enter"
+            @focus="focusEvent5"
+            @blur="blurEvent5"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
             :placeholder="$t(`${lang}.repwdType`)"
@@ -125,7 +130,9 @@
           <div class="register-input">
             <input
               v-model="firstname"
-               @focus="enter"
+              @focus="focusEvents"
+              @blur="blurEvents"
+              v-bind:class="{active:isActivefisrt}"
               type="text"
               :placeholder="$t(`${lang}.surname`)"
             />
@@ -138,7 +145,9 @@
           <div class="register-input">
             <input
               v-model="lastname"
-               @focus="enter"
+              @focus="focusEvent"
+              @blur="blurEvent"
+              v-bind:class="{active:isActivelast}"
               type="text"
               :placeholder="$t(`${lang}.name`)"
             />
@@ -152,7 +161,8 @@
         <div class="register-input">
           <input
             v-model="email"
-             @focus="enter"
+            @focus="focusEvent2"
+            @blur="blurEvent2"
             type="text"
             v-bind:class="{active:isActivemail}"
             :placeholder="$t(`${lang}.email`)"
@@ -167,7 +177,8 @@
           <div class="register-input margin-right-20">
             <input
               v-model="code"
-               @focus="enter"
+              @focus="focusEvent3"
+              @blur="blurEvent3"
               v-bind:class="{active:isActivecode}"
               type="text"
               :placeholder="$t(`${lang}.code`)"
@@ -188,7 +199,8 @@
         <div class="register-input">
           <input
             v-model="password"
-             @focus="enter"
+            @focus="focusEvent4"
+            @blur="blurEvent4"
             v-bind:class="{active:isActivepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
@@ -207,7 +219,8 @@
         <div class="register-input">
           <input
             v-model="password_repetition"
-             @focus="enter"
+            @focus="focusEvent5"
+            @blur="blurEvent5"
             v-bind:class="{active:isActiverepwd}"
             class="padding-right-30"
             :type="showPassword ? 'text' : 'password'"
@@ -247,7 +260,7 @@ import Input from '@/mixins/input.js'
 import qs from "qs";
 const lang = 'login'
 const langcode = 'components.sendEmailCode'
-const defaultTime = 5
+const defaultTime = 60
 export default {
   mixins: [Input],
   props: {
@@ -287,6 +300,8 @@ export default {
       requesting: false,
       language: '',
       isActivename:false,
+      isActivefisrt:false,
+      isActivelast:false,
       isActivemobile:false,
       isActivemail:false,
       isActivecode:false,
@@ -300,6 +315,24 @@ export default {
       repwdShow:false,
     }
   },
+  watch:{
+    mobile(){
+      if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+        this.mobileShow=true
+      }else{
+        this.mobileShow=false
+        this.isActivemobile=false
+      }
+    },
+    password_repetition(){
+      if(this.password_repetition!=this.password){
+        this.repwdShow=true
+      }else{
+        this.isActiverepwd=false
+        this.repwdShow=false
+      }
+    }
+  },
   computed: {},
   mounted() {
     this.language = this.getCookie('language')
@@ -307,12 +340,66 @@ export default {
     _this.$nextTick(() => {})
   },
   methods: {
-    enter(){
-      // this.isActivename=true
-      // if(this.isActivename=true){
-      //   this.isActivemobile=true
-      // }
-      
+    // 姓
+    blurEvents(){
+      this.isActivefisrt=false
+    },
+    // 名
+    blurEvent(){
+      this.isActivelast=false
+    },
+    // 姓名
+    blurEvent1(){
+      this.isActivename=false;
+    },
+    // 手机号/邮箱
+    blurEvent2(){
+      this.isActivemobile=false
+      this.isActivemail=false
+    },
+    // 验证码
+    blurEvent3(){
+      this.isActivecode=false
+      this.codeShow=false
+    },
+    // 密码
+    blurEvent4(){
+      this.isActivepwd=false
+      this.pwdShow=false
+    },
+    // 确认密码
+    blurEvent5(){
+      this.isActiverepwd=false
+    },
+    // 姓
+    focusEvents(){
+      console.log("aa")
+      this.isActivefisrt=true
+    },
+    // 名
+    focusEvent(){
+      this.isActivelast=true
+    },
+    // 姓名
+    focusEvent1(){
+      this.isActivename=true;
+    },
+    // 手机号/邮箱
+    focusEvent2(){
+      this.isActivemobile=true
+      this.isActivemail=true
+    },
+    // 验证码
+    focusEvent3(){
+      this.isActivecode=true
+    },
+    // 密码
+    focusEvent4(){
+      this.isActivepwd=true
+    },
+    // 确认密码
+    focusEvent5(){
+      this.isActiverepwd=true
     },
     // 查询cookie
     getCookie(cname) {
@@ -326,9 +413,9 @@ export default {
     },
     // 点击图标切换密码类型
     changeRegisterPasswordStatus() {
-      const info = JSON.parse(JSON.stringify(this.info))
-      info.showPassword = !info.showPassword
-      this.info = info
+      // const info = JSON.parse(JSON.stringify(this.info))
+      this.showPassword = !this.showPassword
+      // this.info = info
     },
     // 输入框
     input(){
@@ -362,44 +449,21 @@ export default {
     // 简体中文注册
     registerCN() {
       const _this = this
-      // if(!_this.mobile && !_this.code && !_this.password && !_this.password_repetition){
-        //   _this.isActivemobile=true;
-        //   _this.mobileShow=true;
-        //   _this.isActivecode=true;
-        //   _this.codeShow=true;
-        //   _this.isActivepwd=true;
-        //   _this.pwdShow=true;
-        //   _this.isActiverepwd=true;
-        //   _this.repwdShow=true;
-        // }
-        // if (!_this.mobile || !(/^1[3456789]\d{9}$/.test(_this.mobile))) {
-        //   _this.isActivemobile=true;
-        //   _this.mobileShow=true;
-        // } else if (!_this.code) {
-        //   _this.isActivecode=true;
-        //   _this.codeShow=true;
-        //   _this.isActivemobile=false;
-        //   _this.mobileShow=false;
-        // } else if (!_this.password) {
-        //   _this.isActivepwd=true;
-        //   _this.pwdShow=true;
-        //   _this.isActivecode=false;
-        //   _this.codeShow=false;
-        // } else if (!_this.password_repetition) {
-        //   _this.isActiverepwd=true;
-        //   _this.repwdShow=true;
-        //   _this.isActivrepwd=false;
-        //   _this.pwdShow=false;
-        // } else if (_this.agreemen=false) {
-        //   _this.$errorMessage(_this.$t(`${lang}.tips`))
-        // } else{
-        //   _this.$router.replace({
-        //     path: '/login',
-        //     query: {
-        //       type: 'login'
-        //     }
-        //   })
-      // }
+      if(!_this.agreement) {
+        _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
+      }
+      if(_this.mobile==''){
+        _this.mobileShow=true
+      }else if(!_this.code && !_this.password && !_this.password_repetition){
+        _this.isActivemobile=false;
+        _this.mobileShow=false;
+        _this.isActivecode=true;
+        _this.codeShow=true;
+        _this.isActivepwd=true;
+        _this.pwdShow=true;
+        _this.isActiverepwd=true;
+        _this.repwdShow=true;
+      }
       // _this.requesting = true
       this.$axios({
           method: 'post',
@@ -435,6 +499,21 @@ export default {
     },
     register() {
       const _this = this
+       if(!_this.agreement) {
+        _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
+      }
+      if(_this.email==''){
+        _this.emailShow=true
+      }else if(!_this.code && !_this.password && !_this.password_repetition){
+        _this.isActivemail=false;
+        _this.emailShow=false;
+        _this.isActivecode=true;
+        _this.codeShow=true;
+        _this.isActivepwd=true;
+        _this.pwdShow=true;
+        _this.isActiverepwd=true;
+        _this.repwdShow=true;
+      }
       this.$axios({
           method: 'post',
           url: '/web/site/email-register',
@@ -519,6 +598,7 @@ export default {
       }).then(res => {
         console.log("邮箱验证码",res)
         if (res.code==200){
+           _this.$successMessage(_this.$t(`${langcode}.hadSend`))
           // _this.code=res.data.code
         }else {
           throw new Error (res.message)
@@ -537,16 +617,16 @@ export default {
     // 发送手机验证码
     sendPhoneCode() {
       const _this = this
-      console.log("sss",_this.mobile)
       if (_this.mobile.length === 0) {
-        this.$errorMessage(_this.$t(`${langcode}.inputPhone`))
-        return
+        _this.mobileShow=true
+      }else{
+        _this.setWait()
       }
-      if (_this.waiting) {
-        this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-        return
-      }
-      _this.setWait()
+      // if (_this.waiting) {
+      //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
+      //   return
+      // }
+     
        this.$axios({
         method: "post",
         url: '/web/site/sms-code',
@@ -557,7 +637,8 @@ export default {
       }).then(res => {
         console.log("手机验证码",res)
         if (res.code==200){
-          _this.code=res.data.code
+          _this.$successMessage(_this.$t(`${langcode}.hadSend`))
+          // _this.code=res.data.code
            _this.isActivecode=false;
           _this.codeShow=false;
           // _this.sendReturn(res)

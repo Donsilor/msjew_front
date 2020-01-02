@@ -600,7 +600,7 @@ export default {
     return {
       lang,
       canSubmit: false,
-      pathTakeIds: this.$route.query.cartIds.split('&&'),
+      pathTakeIds: this.$route.query.cartIds.split(','),
       userInfo: {},
       confirmBox: false,
       addressData: {
@@ -675,8 +675,8 @@ export default {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
-          console.log(`good======>`, res)
-          this.good = res
+          console.log(`good22222======>`, res.data)
+          this.good = res.data
           this.goodsPrice = 0
           for (const i in res) {
             this.goodsPrice += res[i].price
@@ -761,37 +761,37 @@ export default {
         })
     },
     getTex() {
-      this.canSubmit = false
-      this.$axios
-        .get('/web/order/getAnonymousTax', {
-          params: {
-            countryId: this.country.areaId,
-            provinceId: this.province.areaId,
-            cityId: this.city.areaId,
-            preferFee: this.preferFee,
-            productAmount: this.goodsPrice
-          }
-        })
-        .then(res => {
-          this.canSubmit = true
-          this.tex = res
-        })
-        .catch(err => {
-          this.canSubmit = false
-          this.$message.error(err.message)
-          this.tex = {
-            logisticsFee: 0,
-            taxFee: 0,
-            safeFee: 0,
-            orderAmount: null,
-            planDays: '--'
-          }
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
+      // this.canSubmit = false
+      // this.$axios
+      //   .get('/web/order/getAnonymousTax', {
+      //     params: {
+      //       countryId: this.country.areaId,
+      //       provinceId: this.province.areaId,
+      //       cityId: this.city.areaId,
+      //       preferFee: this.preferFee,
+      //       productAmount: this.goodsPrice
+      //     }
+      //   })
+      //   .then(res => {
+      //     this.canSubmit = true
+      //     this.tex = res
+      //   })
+      //   .catch(err => {
+      //     this.canSubmit = false
+      //     this.$message.error(err.message)
+      //     this.tex = {
+      //       logisticsFee: 0,
+      //       taxFee: 0,
+      //       safeFee: 0,
+      //       orderAmount: null,
+      //       planDays: '--'
+      //     }
+      //     if (!err.response) {
+      //       this.$message.error(err.message)
+      //     } else {
+      //       // console.log(err)
+      //     }
+      //   })
     },
     createOrder() {
       if (!this.canSubmit) {
