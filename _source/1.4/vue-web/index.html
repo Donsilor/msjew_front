@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>BDD Co.-品質優越鑽石網上店 | 手飾專家</title>
+		<link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+		<meta name="description" content="BDD Co.預先篩選出品質優越並擁有最權威的獨立鑽石分級實驗室GIA鑑定證書的裸鑽。這裡，您可以創造自己的戒指">
+		<meta name="keywords" content="14k, 18k, 925 silver, BDD CO., BDDCO., blue danube diamond, bracelet, earring, engagement ring, GIA diamond, jewelry, necklace, platinum, ring, rose gold, wedding ring, white gold, yellow gold, 925純銀, GIA證書, 手鍊, 手鐲, 白金, 耳環, 求婚戒指, 玫瑰金, 珠寶首飾, 結婚戒指, 項鍊, 黃金, 鉑金, 裸鑽, 藍色多瑙河鑽石, 鑽石">
+		<meta property="og:url" content="http://bddia.com/index.html">
+		<meta property="og:type" content="website">
+		<meta property="og:title" content="BDD Co.-品質優越鑽石網上店 | 手飾專家">
+		<meta property="og:description" content="BDD Co.預先篩選出品質優越並擁有最權威的獨立鑽石分級實驗室GIA鑑定證書的裸鑽。這裡，您可以創造自己的戒指">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-102007445-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-102007445-1', { 'optimize_id': 'GTM-NRVWWJK'});
+    </script>
+
+		<!-- Facebook Pixel Code -->
+		<script>
+			!function(f,b,e,v,n,t,s)
+			{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+					n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+				if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+				n.queue=[];t=b.createElement(e);t.async=!0;
+				t.src=v;s=b.getElementsByTagName(e)[0];
+				s.parentNode.insertBefore(t,s)}(window,document,'script',
+					'https://connect.facebook.net/en_US/fbevents.js');
+			fbq('init', '2403946323186797');
+			fbq('track', 'PageView');
+		</script>
+		<noscript>
+			<img height="1" width="1"
+					 src="https://www.facebook.com/tr?id=2403946323186797&ev=PageView
+&noscript=1"/>
+		</noscript>
+		<!-- End Facebook Pixel Code -->
+
+	</head>
+	<body>
+		<div class="update-browser" style="display: none;">
+			<img src="static/images/nav/bigLogo.png" />
+			<div class="first">LOOKS LIKE YOUR BROWSER IS OUT OF DATE</div>
+			<div class="second">This prototype may not look or function correctly until you update your browser</div>
+			<ul>
+				<li>Google Chrome<span>v60 and later</span></li>
+				<li>Mozilla Firefox<span>v60 and later</span></li>
+				<li>Microsoft IE<span>v9.0 and later</span></li>
+				<li>Microsoft Edge<span>v17 and later</span></li>
+				<li>Apple Safari <span> v10 and later</span></li>
+			</ul>
+			<div id="download-btn">UPDATE BROWSER</div>
+		</div>
+		<div id="app">
+		</div>
+		<style type="text/css">
+			.update-browser{
+				margin: 0px;
+				padding:0px;
+				text-align: center;
+				font-family: "微软雅黑";
+			}
+			.update-browser img {
+				height: 64px;
+				margin-top: 10%;
+				margin-bottom: 40px;
+			}
+
+			.update-browser .first{
+				font-size: 37px;
+				font-weight: bold;
+				color: #666666;
+				margin-bottom: 16px;
+			}
+
+			.update-browser .second {
+				margin-bottom: 40px;
+				font-size: 21px;
+				color: #999999;
+			}
+
+			.update-browser ul {
+				width: 675px;
+				height: 242px;
+				background: #F0F0F0;
+				border-radius: 8px;
+				display: inline-block;
+				margin: 0 ;
+				color: #999999;
+				text-align: left;
+				padding-top: 10px;
+			}
+
+			.update-browser li {
+				font-size: 21px;
+				font-weight: bold;
+				height: 45px;
+				line-height: 45px;
+				list-style: none;
+				position: relative;
+				margin-left: 40px;
+				margin-right: 42px;
+			}
+
+			.update-browser li span {
+				position: absolute;
+				right: 0px;
+				top: 0px;
+			}
+
+			#download-btn {
+				width: 675px;
+				height: 52px;
+				line-height: 52px;
+				background: #AA8A7B;
+				border-radius: 10px;
+				margin: 0 auto;
+				margin-top: 40px;
+				font-size: 21px;
+				cursor: pointer;
+				font-weight: bold;
+				color: white;
+			}
+		</style>
+		<script>
+			window.onload = function() {
+				if(getBrowerType() === 'IE9' || getBrowerType() === 'IE8' || getBrowerType() === 'IE7' || getBrowerType() === 'IE6') {
+					//解决IE8之类不支持getElementsByClassName
+					if(!document.getElementsByClassName) {
+						document.getElementsByClassName = function(className, element) {
+							var children = (element || document).getElementsByTagName('*');
+							var elements = new Array();
+							for(var i = 0; i < children.length; i++) {
+								var child = children[i];
+								var classNames = child.className.split(' ');
+								for(var j = 0; j < classNames.length; j++) {
+									if(classNames[j] == className) {
+										elements.push(child);
+										break;
+									}
+								}
+							}
+							return elements;
+						};
+					}
+					document.getElementsByClassName('update-browser')[0].style.display = "block";
+					document.getElementById('app').style.display = 'none';
+					document.getElementById('download-btn').onclick = function() {
+						window.open('http://outdatedbrowser.com/en');
+					}
+				}
+			}
+
+			function getBrowerType() {
+				var type = ''
+				var userMananer = (navigator.userAgent).toUpperCase()
+				if(userMananer.indexOf('MSIE 6') > -1) {
+					type = 'IE6'
+				} else if(userMananer.indexOf('MSIE 7') > -1) {
+					type = 'IE7'
+				} else if(userMananer.indexOf('MSIE 8') > -1) {
+					type = 'IE8'
+				} else if(userMananer.indexOf('MSIE 9') > -1) {
+					type = 'IE9'
+				} else if(userMananer.indexOf('MSIE 10') > -1) {
+					type = 'IE10'
+				} else if(userMananer.indexOf('TRIDENT') > -1 && userMananer.indexOf('RV') > -1) {
+					type = 'IE11'
+				} else if(userMananer.indexOf('CHROME') > -1) {
+					type = 'Chrome'
+				} else if(userMananer.indexOf('FIREFOX') > -1) {
+					type = 'Firefox'
+				} else if(userMananer.indexOf('OPERA') > -1) {
+					type = 'Opera'
+				} else {
+					type = 'other'
+				}
+				return type
+			}
+		</script>
+
+		<!-- 第三方客服聊天功能 -->
+		<!-- Start of LiveChat (www.livechatinc.com) code -->
+		<script type="text/javascript">
+		  window.__lc = window.__lc || {};
+		  window.__lc.license = 10943482;
+		  (function() {
+			var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+			lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+		  })();
+		</script>
+		<noscript>
+		<a href="https://www.livechatinc.com/chat-with/10943482/" rel="nofollow">Chat with us</a>,
+		powered by <a href="https://www.livechatinc.com/?welcome" rel="noopener nofollow" target="_blank">LiveChat</a>
+		</noscript>
+		<!-- End of LiveChat code -->
+
+		<!-- 第三方网站代码统计功能 -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-102007445-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-102007445-1');
+		</script>
+
+<!--		Google廣告行銷代碼-->
+		<script type="text/javascript">
+			(function(){
+				var script0 = document.createElement("script");
+				script0.src = "//j02.optimix.asia/events/opxLoader.js";
+				script0.type = "text/javascript";
+				script0.async = "async";
+				document.getElementsByTagName("head")[0].appendChild(script0);
+				var opxUid='0';
+				var opxcounter='1';
+				var opxClientID='6012';
+				var opxParams="opxvrsn=ut;opxUid="+opxUid+";"+"opxClientID="+opxClientID+";"+"opxcounter="+opxcounter+";";
+				if (script0.readyState) {
+					script0.onreadystatechange = function() {
+						if (script0.readyState == "loaded" || script0.readyState == "complete") {
+							opxLoad("//e02.optimix.asia", opxParams);
+						}
+					};
+				} else {
+					script0.onload = function () {
+						opxLoad("//e02.optimix.asia", opxParams);
+					};
+				}
+			})();
+		</script>
+	</body>
+
+</html>

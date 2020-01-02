@@ -1,0 +1,87 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;box-sizing:border-box;}
+html{color:#000;overflow-y:scroll;overflow:-moz-scrollbars-vertical}
+body,button,input,select,textarea{font-size:12px;font-family:'微软雅黑','Microsoft YaHeiarial','Hiragino Sans GB','Microsoft Yahei','宋体',\5b8b\4f53,Tahoma,Arial,Helvetica,STHeiti}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+address, cite, dfn, em, var{font-style:normal}
+small{font-size:12px}
+ul,ol{list-style:none}
+a { color:#666666; text-decoration:none; }
+a:visited,a:hover, a:active, a:focus { color:#666666; text-decoration:none; }
+legend{color:#000}
+fieldset,img{border:0}
+button,input,select,textarea{font-size:100%}
+table{border-collapse:collapse;border-spacing:0}
+img{-ms-interpolation-mode:bicubic}
+textarea{resize:vertical}
+.left{float:left}
+.right{float:right}
+.overflow{overflow:hidden}
+.hide{display:none}
+.block{display:block}
+.inline{display:inline}
+.error{color:#F00;font-size:12px}
+label,button{cursor:pointer}
+.clearfix:after{content:'\20';display:block;height:0;clear:both}
+.clearfix{zoom:1}.clear{clear:both;height:0;line-height:0;font-size:0;visibility:hidden;overflow:hidden}
+.wordwrap{word-break:break-all;word-wrap:break-word}
+pre.wordwrap{white-space:pre-wrap}
+body{text-align:center}
+body,form{position:relative}
+td{text-align:left}
+img{border:0}
+legend { color:#000; }
+fieldset, img { border:0; }
+button, input, select, textarea { font-size:100%; }
+table { border-collapse:collapse; border-spacing:0; }
+div {box-sizing:border-box;}
+.el-message {
+	position: fixed !important;
+	top: 200px;
+}
+.el-slider__runway {
+	background: #E4E4E4;
+	height: 12px;
+	border-radius: 6px;
+}
+.el-slider__bar {
+	background: linear-gradient(to right, #F0BDC7 , #D17B8F);
+	height: 12px;
+}
+.el-slider__button {
+	height: 20px;
+	border: 1px solid #EAEAEA!important;
+    width: 20px;
+	padding: 4px;
+	margin-top: 4px;
+    border-radius: 10px;
+    border: 1px solid #E4E4E4;
+	background-color: #FFFFFF;
+	background-image: url(../../../static/images/diamond/icon-dot.png);
+	background-size: 10px 10px;
+	background-origin: content-box;
+	background-repeat: no-repeat;
+}
+@font-face {
+font-family: twCenMt;
+src: url('./twCenMt.ttf');
+}
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+/* 垂直滚动条的滑动块 */
+
+::-webkit-scrollbar-thumb{
+	border-radius: 8px;
+	-webkit-box-shadow: #CEBEB0;
+	background-color: #CEBEB0;
+}
+.el-tooltip__popper{
+	margin-top:-90px;
+}
+.el-select-dropdown{
+	top: 36px!important;
+}
+.el-popover{
+	margin-top: -30px;
+}
