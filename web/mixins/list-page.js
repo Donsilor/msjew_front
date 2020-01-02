@@ -18,5 +18,14 @@ export default {
       this.searchConditions,
       this.defaultCondition
     )
-  }
+  },
+  // mounted(){
+  //   var seCo = localStorage.getItem('searchCondition');
+  //   if(!seCo){}else{
+  //     this.searchConditions = JSON.parse(seCo)
+  //   }
+
+  //   var searchCondition = JSON.stringify(this.searchConditions);
+  //   localStorage.setItem('searchCondition',searchCondition);
+  // },
 }

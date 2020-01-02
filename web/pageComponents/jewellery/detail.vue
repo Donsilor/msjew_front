@@ -120,7 +120,7 @@
           </button>
         </div>
         <div class="other-info">
-          <ul class="operates">
+          <!-- <ul class="operates">
             <li class="item wish-state">
               <i
                 v-if="inWish(info.id)"
@@ -136,7 +136,7 @@
                 {{ $t(`${lang}.wish`) }}
               </span>
             </li>
-          </ul>
+          </ul> -->
         </div>
       </div>
     </section>

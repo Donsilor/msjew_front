@@ -641,7 +641,7 @@
                         @click="setCompared(item.id)"
                       ></i>
                     </div>
-                    <div class="wish-state">
+                    <!-- <div class="wish-state">
                       <i
                         v-if="inWish(item.id)"
                         class="iconfont iconxin active"
@@ -652,7 +652,7 @@
                         class="iconfont iconkongxin"
                         @click.stop.prevent="setWish(item.id)"
                       ></i>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>

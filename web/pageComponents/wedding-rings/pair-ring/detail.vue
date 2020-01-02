@@ -202,7 +202,7 @@
             {{ $t(`${lang}.addCart`) }}
           </button>
         </div>
-        <div class="other-info">
+       <!-- <div class="other-info">
           <ul class="operates">
             <li class="item wish-state">
               <i
@@ -220,7 +220,7 @@
               </span>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </section>
     <!--    推荐商品-->

@@ -6,7 +6,7 @@
         :autoplay="true"
         :height="bannerHeight + 'px'"
       >
-      <el-carousel-item v-if="ad > 0" v-for="(item, index) in ad" :key="index">
+     <el-carousel-item v-for="(item, index) in ad" :key="index">
           <img class="banner-img" :src="item.image" alt="">
       </el-carousel-item>
 
@@ -500,6 +500,7 @@ export default {
       .then(data => {
         var data = data.data;
         console.log(data);
+        console.log(11111111)
         return {
           ad: data.advert,
           webSite: data.webSite,
