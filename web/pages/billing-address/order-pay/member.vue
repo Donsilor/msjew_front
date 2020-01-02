@@ -721,7 +721,7 @@ export default {
   data() {
     return {
       lang,
-      pathTakeIds: this.$route.query.cartIds.split('&&'),
+      pathTakeIds: this.$route.query.cartIds.split(','),
       canSubmit: false,
       address: [],
       addressMore: false,
@@ -796,10 +796,10 @@ export default {
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
-        .then(res => {
-          console.log(`good======>`, res)
-          this.good = res
+        .then(data => {          
+          this.good = data
           resolve()
+          // console.log(resolve)
         })
         .catch(err => {
           if (!err.response) {
@@ -815,7 +815,7 @@ export default {
         this.getAddress()
       })
       .then(() => {
-        this.getCouponList()
+        // this.getCouponList()
       })
       .catch(err => {
         if (!err.response) {
@@ -1147,129 +1147,129 @@ export default {
       this.coupon = this.coupons[0]
     },
     checkCount() {
-      if (this.address.length === 0) {
-        this.$message({
-          message: this.$t(`${lang}.msg1`),
-          type: 'warning'
-        })
-        this.coupon = { couponCode: this.$t(`${lang}.coupon1`), couponId: '' }
-        this.preferFee = 0
-        this.tex.logisticsFee = 0
-        this.tex.taxFee = 0
-        this.tex.safeFee = 0
-        this.tex.planDays = '1-12'
-        return
-      }
-      if (
-        (this.coupon.couponId === '' && this.isToo) ||
-        (this.tooInp === '' && !this.isToo)
-      ) {
-        return
-      }
-      let data = {}
-      if (this.isToo) {
-        //  下拉选择
-        data = {
-          couponId: this.coupon.couponId,
-          cartIds: this.pathTakeIds.join(',')
-        }
-      } else {
-        //  用户输入
-        data = {
-          couponCode: this.tooInp,
-          cartIds: this.pathTakeIds.join(',')
-        }
-      }
-      this.$axios
-        .get('/web/order/getCouponAmount', { params: data })
-        .then(res => {
-          this.makeGay = true
-          this.preferFee = res
-          this.getTex()
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-            this.preferFee = 0
-            this.die = true
-            this.familyDie = err.message
-            this.getTex()
-          } else {
-            // console.log(err)
-          }
-        })
+      // if (this.address.length === 0) {
+      //   this.$message({
+      //     message: this.$t(`${lang}.msg1`),
+      //     type: 'warning'
+      //   })
+      //   this.coupon = { couponCode: this.$t(`${lang}.coupon1`), couponId: '' }
+      //   this.preferFee = 0
+      //   this.tex.logisticsFee = 0
+      //   this.tex.taxFee = 0
+      //   this.tex.safeFee = 0
+      //   this.tex.planDays = '1-12'
+      //   return
+      // }
+      // if (
+      //   (this.coupon.couponId === '' && this.isToo) ||
+      //   (this.tooInp === '' && !this.isToo)
+      // ) {
+      //   return
+      // }
+      // let data = {}
+      // if (this.isToo) {
+      //   //  下拉选择
+      //   data = {
+      //     couponId: this.coupon.couponId,
+      //     cartIds: this.pathTakeIds.join(',')
+      //   }
+      // } else {
+      //   //  用户输入
+      //   data = {
+      //     couponCode: this.tooInp,
+      //     cartIds: this.pathTakeIds.join(',')
+      //   }
+      // }
+      // this.$axios
+      //   .get('/web/order/getCouponAmount', { params: data })
+      //   .then(res => {
+      //     this.makeGay = true
+      //     this.preferFee = res
+      //     this.getTex()
+      //   })
+      //   .catch(err => {
+      //     if (!err.response) {
+      //       this.$message.error(err.message)
+      //       this.preferFee = 0
+      //       this.die = true
+      //       this.familyDie = err.message
+      //       this.getTex()
+      //     } else {
+      //       // console.log(err)
+      //     }
+      //   })
     },
     getCouponList() {
-      const data = this.$helpers.transformRequest(
-        JSON.parse(
-          JSON.stringify({
-            cartIds: this.pathTakeIds.join(',')
-          })
-        ),
-        false
-      )
-      this.$axios
-        .post('/web/order/getCoupons', data)
-        .then(res => {
-          if (res) {
-            this.coupons = res
-            this.coupons.unshift({
-              couponCode: this.$t(`${lang}.coupon1`),
-              couponId: ''
-            })
-            this.coupon = {
-              couponCode: this.$t(`${lang}.coupon1`),
-              couponId: ''
-            }
-          } else {
-            this.coupons = [{ couponCode: '- - -', couponId: '' }]
-            this.coupon = { couponCode: '- - -', couponId: '' }
-          }
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-            this.coupons = [{ couponCode: '- - -', couponId: '' }]
-            this.coupon = { couponCode: '- - -', couponId: '' }
-          } else {
-            // console.log(err)
-          }
-        })
+      // const data = this.$helpers.transformRequest(
+      //   JSON.parse(
+      //     JSON.stringify({
+      //       cartIds: this.pathTakeIds.join(',')
+      //     })
+      //   ),
+      //   false
+      // )
+      // this.$axios
+      //   .post('/web/order/getCoupons', data)
+      //   .then(res => {
+      //     if (res) {
+      //       this.coupons = res
+      //       this.coupons.unshift({
+      //         couponCode: this.$t(`${lang}.coupon1`),
+      //         couponId: ''
+      //       })
+      //       this.coupon = {
+      //         couponCode: this.$t(`${lang}.coupon1`),
+      //         couponId: ''
+      //       }
+      //     } else {
+      //       this.coupons = [{ couponCode: '- - -', couponId: '' }]
+      //       this.coupon = { couponCode: '- - -', couponId: '' }
+      //     }
+      //   })
+      //   .catch(err => {
+      //     if (!err.response) {
+      //       this.$message.error(err.message)
+      //       this.coupons = [{ couponCode: '- - -', couponId: '' }]
+      //       this.coupon = { couponCode: '- - -', couponId: '' }
+      //     } else {
+      //       // console.log(err)
+      //     }
+      //   })
     },
     getTex() {
-      const arr = []
-      for (const i in this.good) {
-        if (this.good[i].groupType === null) {
-          arr.push(this.good[i].data[0].id)
-        } else {
-          arr.push(this.good[i].data[0].id)
-          arr.push(this.good[i].data[1].id)
-        }
-      }
-      const data = arr.join(',')
-      this.canSubmit = false
-      this.$axios
-        .get('/web/order/getTax', {
-          params: {
-            addressId: this.orderAddress.id,
-            preferFee: this.preferFee,
-            cartIds: data
-          }
-        })
-        .then(res => {
-          this.canSubmit = true
-          this.tex = res
-        })
-        .catch(err => {
-          this.coupons = [{ couponCode: '- - -', couponId: '' }]
-          this.coupon = { couponCode: '- - -', couponId: '' }
-          this.canSubmit = false
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
+      // const arr = []
+      // for (const i in this.good) {
+      //   if (this.good[i].groupType === null) {
+      //     arr.push(this.good[i].data[0].id)
+      //   } else {
+      //     arr.push(this.good[i].data[0].id)
+      //     arr.push(this.good[i].data[1].id)
+      //   }
+      // }
+      // const data = arr.join(',')
+      // this.canSubmit = false
+      // this.$axios
+      //   .get('/web/order/getTax', {
+      //     params: {
+      //       addressId: this.orderAddress.id,
+      //       preferFee: this.preferFee,
+      //       cartIds: data
+      //     }
+      //   })
+      //   .then(res => {
+      //     this.canSubmit = true
+      //     this.tex = res
+      //   })
+      //   .catch(err => {
+      //     this.coupons = [{ couponCode: '- - -', couponId: '' }]
+      //     this.coupon = { couponCode: '- - -', couponId: '' }
+      //     this.canSubmit = false
+      //     if (!err.response) {
+      //       this.$message.error(err.message)
+      //     } else {
+      //       // console.log(err)
+      //     }
+        // })
     },
     createOrder() {
       if (!this.canSubmit) {

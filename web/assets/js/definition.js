@@ -77,43 +77,43 @@ export default language => {
 
     color: [
       {
-        id: 37,
+        id: 53,
         url: `/diamonds/color/J.png`,
         name: `J`,
         desc: lang.color.j
       },
       {
-        id: 36,
+        id: 52,
         url: `/diamonds/color/I.png`,
         name: `I`,
         desc: lang.color.i
       },
       {
-        id: 35,
+        id: 51,
         url: `/diamonds/color/H.png`,
         name: `H`,
         desc: lang.color.h
       },
       {
-        id: 34,
+        id: 50,
         url: `/diamonds/color/G.png`,
         name: `G`,
         desc: lang.color.g
       },
       {
-        id: 33,
+        id: 22,
         url: `/diamonds/color/F.png`,
         name: `F`,
         desc: lang.color.f
       },
       {
-        id: 32,
+        id: 19,
         url: `/diamonds/color/E.png`,
         name: `E`,
         desc: lang.color.e
       },
       {
-        id: 31,
+        id: 18,
         url: `/diamonds/color/D.png`,
         name: `D`,
         desc: lang.color.d
@@ -122,49 +122,49 @@ export default language => {
 
     clarity: [
       {
-        id: 38,
+        id: 66,
         url: `/diamonds/clarity/SI2.png`,
         name: `SI2`,
         desc: lang.clarity.si2
       },
       {
-        id: 39,
+        id: 65,
         url: `/diamonds/clarity/SI1.png`,
         name: `SI1`,
         desc: lang.clarity.si1
       },
       {
-        id: 40,
+        id: 64,
         url: `/diamonds/clarity/VS2.png`,
         name: `VS2`,
         desc: lang.clarity.vs2
       },
       {
-        id: 41,
+        id: 63,
         url: `/diamonds/clarity/VS1.png`,
         name: `VS1`,
         desc: lang.clarity.vs1
       },
       {
-        id: 42,
+        id: 62,
         url: `/diamonds/clarity/VVS2.png`,
         name: `VVS2`,
         desc: lang.clarity.vvs2
       },
       {
-        id: 43,
+        id: 8,
         url: `/diamonds/clarity/VVS1.png`,
         name: `VVS1`,
         desc: lang.clarity.vvs1
       },
       {
-        id: 44,
+        id: 7,
         url: `/diamonds/clarity/IF.png`,
         name: `IF`,
         desc: lang.clarity.if
       },
       {
-        id: 45,
+        id: 6,
         url: `/diamonds/clarity/FL.png`,
         name: `FL`,
         desc: lang.clarity.fl
@@ -175,21 +175,21 @@ export default language => {
       {
         name: lang.cut.gd,
         sortCut: lang.cut.scgd,
-        id: 28,
+        id: 15,
         url: `/diamonds/cut/GD.png`,
         desc: lang.cut.gdDesc
       },
       {
         name: lang.cut.vg,
         sortCut: lang.cut.scvg,
-        id: 29,
+        id: 14,
         url: `/diamonds/cut/vg.png`,
         desc: lang.cut.vgDesc
       },
       {
         name: lang.cut.ideal,
         sortCut: lang.cut.scideal,
-        id: 30,
+        id: 13,
         url: `/diamonds/cut/id.png`,
         desc: lang.cut.idealDesc
       }
@@ -199,17 +199,17 @@ export default language => {
       {
         name: 'Ex',
         shortCut: `Ex`,
-        id: 48
+        id: 67
       },
       {
         name: 'VG',
         shortCut: `VG`,
-        id: 47
+        id: 68
       },
       {
         name: 'GD',
         shortCut: `GD`,
-        id: 46
+        id: 69
       }
     ],
 
@@ -217,17 +217,17 @@ export default language => {
       {
         name: 'Ex',
         shortCut: `Ex`,
-        id: 51
+        id: 70
       },
       {
         name: 'VG',
         shortCut: `VG`,
-        id: 50
+        id: 71
       },
       {
         name: 'GD',
         shortCut: `GD`,
-        id: 49
+        id: 72
       }
     ],
 

@@ -36,7 +36,6 @@ export default {
     // 是否有存货
     hadStock() {
       try {
-        console.log(55,this.simpleDetail);
         if (this.simpleDetail.stock > 0) {
           return true
         }
@@ -69,13 +68,14 @@ export default {
       }
       const goodInfo = [
         {
-          goodsCount: 1,
+          goods_num: 1,
           goodsDetailsId: _this.simpleDetail.id,
-          goodsId: _this.simpleDetail.goodsId,
-          groupId: null,
-          groupType: null,
+          goods_id: _this.simpleDetail.goodsId,
+          group_id: null,
+          group_type: null,
           serviceId: 0,
-          serviceVal: 'string'
+          serviceVal: 'string',
+          goods_type:1
         }
       ]
       console.log(goodInfo)
