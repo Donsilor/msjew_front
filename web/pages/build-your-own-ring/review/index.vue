@@ -308,7 +308,7 @@ export default {
       this.steps = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.steps)
       )
-      this.getPrice(this.steps.steps[0].goodsId, this.steps.steps[1].goodsId)
+      this.getPrice(this.steps.steps[0].goodsId, this.steps.steps[1].goodsId,this.steps.steps[0].ct)
     })
   },
   methods: {
@@ -337,7 +337,7 @@ export default {
         })
       })
     },
-    async getPrice(id1, id2) {
+    async getPrice(id1, id2, ct) {
       const data1 = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ goodsId: id1 })),
         false
@@ -346,11 +346,18 @@ export default {
         JSON.parse(JSON.stringify({ goodsId: id2 })),
         false
       )
+      if(ct === 1){
+        var url1 = `/web/goods/diamond/detail`;
+        var url2 = `/web/goods/style/detail`;
+      }else{
+        var url1 = `/web/goods/style/detail`;
+        var url2 = `/web/goods/diamond/detail`;
+      }
       await this.$axios
-        .post(`/web/goods/diamond/detail`, data1)
+        .post(url1, data1)
         .then(data => {
           var res = data.data;
-          console.log(`11111111111111`,res )
+          console.log(`11111111111111`,res,this.steps.steps )
           this.block1.name = res.goodsName
           this.block1.sku = res.goodsCode
           this.block1.pick = res.goodsImages.split(`,`)[0] || ``
@@ -371,7 +378,7 @@ export default {
           }
         })
       await this.$axios
-        .post(`/web/goods/style/detail`, data2)
+        .post(url2, data2)
         .then(data => {
           var res = data.data;
           console.log( `2222222222222222222`,res)

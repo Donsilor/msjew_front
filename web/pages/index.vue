@@ -502,7 +502,7 @@ export default {
         return {
           ad: data.advert,
           webSite: data.webSite,
-          seoInfo
+          // seoInfo
         }
       })
       .catch(err => {

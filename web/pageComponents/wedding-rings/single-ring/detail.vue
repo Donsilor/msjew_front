@@ -119,39 +119,39 @@
             {{ formatNumber(price) }}
           </span>
         </div>
-        <div v-if="!$route.query.isBack" class="button-group">
-          <nuxt-link
-            v-if="productInfo.goodsMod === 1 && canAddCart"
-            :to="startDj"
-          >
-            <button class="start-dj">
-              开始DJ
+        <div class="button-group">
+          <blank v-if="!$route.query.isBack"> 
+            <nuxt-link
+              v-if="productInfo.goodsMod === 1 && (parseInt($route.query.step) !== 2 && $route.query.step) && canAddCart"
+              :to="startDj"
+            >
+              <button class="start-dj">
+                开始DJ
+              </button>
+            </nuxt-link>
+            <button
+              v-loading="addingCart"
+              :class="['add-to-cart', { active: canAddCart }]"
+              @click="addCart"
+            >
+              {{ $t(`${lang}.addCart`) }}
             </button>
-          </nuxt-link>
-          <button
-            v-loading="addingCart"
-            :class="['add-to-cart', { active: canAddCart }]"
-            @click="addCart"
-          >
-            {{ $t(`${lang}.addCart`) }}
-          </button>
-        </div>
-        <div
-          v-if="
+          </blank>
+          <blank v-if="
             (parseInt($route.query.step) !== 1 && $route.query.step) ||
               $route.query.isBack
-          "
-          class="button-group"
-        >
-          <nuxt-link v-if="canAddCart" :to="finishDj">
-            <button :class="['add-to-cart', { active: canAddCart }]">
+          "> 
+            <nuxt-link v-if="canAddCart" :to="finishDj">
+              <button :class="['add-to-cart', { active: canAddCart }]">
+                确认选择
+              </button>
+            </nuxt-link>
+            <button v-else :class="['add-to-cart', { active: canAddCart }]">
               确认选择
             </button>
-          </nuxt-link>
-          <button v-else :class="['add-to-cart', { active: canAddCart }]">
-            确认选择
-          </button>
+          </blank>
         </div>
+        
         <!-- <div class="other-info">
           <ul class="operates">
             <li class="item wish-state">

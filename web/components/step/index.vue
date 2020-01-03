@@ -176,11 +176,11 @@ export default {
     // console.log(this.steps, `<=========`)
     this.step = parseInt(this.$route.query.step)
     if (this.step !== 1) {
-      this.getPrice(this.steps.steps[0].goodsId, this.steps.steps[1].goodsId)
+      this.getPrice(this.steps.steps[0].goodsId, this.steps.steps[1].goodsId,this.steps.steps[0].ct)
     }
   },
   methods: {
-    async getPrice(id1, id2 = null) {
+    async getPrice(id1, id2 = null,ct = null) {
       console.log(id1, !id2)
       const data1 = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ goodsId: id1 })),
@@ -190,17 +190,23 @@ export default {
         JSON.parse(JSON.stringify({ goodsId: id2 })),
         false
       )
+      console.log(888,ct,id1,id2);
       if (!id2) {
+        if(ct === 1){
+          var url = `/web/goods/diamond/detail`
+        }else{
+          var url = `/web/goods/style/detail`
+        }
         this.$axios
-          .post(`/web/goods/style/detail`, data1)
+          .post(url, data1)
           .then(res => {
             this.name1 = res.goodsName
-            for (const i in res.simpleGoodsDetailsList) {
+            for (const i in res.details) {
               if (
                 this.steps.steps[0].goodsDetailsId ===
-                res.simpleGoodsDetailsList[i].id
+                res.details[i].id
               ) {
-                this.price1 = res.simpleGoodsDetailsList[i].retailMallPrice
+                this.price1 = res.details[i].retailMallPrice
               }
             }
           })
@@ -212,16 +218,25 @@ export default {
             }
           })
       } else {
+        
+        if(ct === 1){
+          var url1 = `/web/goods/diamond/detail`
+          var url2 = `/web/goods/style/detail`
+        }else{
+          var url1 = `/web/goods/style/detail`
+          var url2 = `/web/goods/diamond/detail`
+        }
+        console.log(999,url1,url2)
         await this.$axios
-          .post(`/web/goods/style/detail`, data1)
+          .post(url1, data1)
           .then(res => {
             this.name1 = res.goodsName
-            for (const i in res.simpleGoodsDetailsList) {
+            for (const i in res.details) {
               if (
                 this.steps.steps[0].goodsDetailsId ===
-                res.simpleGoodsDetailsList[i].id
+                res.details[i].id
               ) {
-                this.price1 = res.simpleGoodsDetailsList[i].retailMallPrice
+                this.price1 = res.details[i].retailMallPrice
               }
             }
           })
@@ -233,15 +248,15 @@ export default {
             }
           })
         await this.$axios
-          .post(`/web/goods/diamond/detail`, data2)
+          .post(url2, data2)
           .then(res => {
             this.name2 = res.goodsName
-            for (const i in res.simpleGoodsDetailsList) {
+            for (const i in res.details) {
               if (
                 this.steps.steps[1].goodsDetailsId ===
-                res.simpleGoodsDetailsList[i].id
+                res.details[i].id
               ) {
-                this.price2 = res.simpleGoodsDetailsList[i].retailMallPrice
+                this.price2 = res.details[i].retailMallPrice
               }
             }
           })
