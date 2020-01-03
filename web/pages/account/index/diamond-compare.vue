@@ -70,25 +70,25 @@ export default {
   },
   methods: {
     getList() {
-      this.$axios
-        .get('/web/collection/list', {
-          params: {
-            type: 2,
-            page: 1,
-            page_size: 99
-          }
-        })
-        .then(res => {
-          // console.log(res)
-          this.data = res.list
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
+      // this.$axios
+      //   .get('/web/collection/list', {
+      //     params: {
+      //       type: 2,
+      //       page: 1,
+      //       page_size: 99
+      //     }
+      //   })
+      //   .then(res => {
+      //     // console.log(res)
+      //     this.data = res.list
+      //   })
+      //   .catch(err => {
+      //     if (!err.response) {
+      //       this.$message.error(err.message)
+      //     } else {
+      //       // console.log(err)
+      //     }
+      //   })
     },
     deleteDiamond(id) {
       this.$store

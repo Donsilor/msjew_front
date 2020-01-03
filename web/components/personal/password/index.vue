@@ -55,28 +55,29 @@ export default {
   },
   methods: {
     submit() {
-      if (this.oldPsw === '') {
-        this.$message.error(this.lang.psw5)
-        return
-      }
-      if (this.newPsw !== this.agaPsw) {
-        this.$message.error(this.lang.psw8)
-        return
-      }
-      if (!RegPassword.test(this.newPsw)) {
-        this.$message.error(this.lang.psw9)
-        return
-      }
+      // console.log("aaaaa")
+      // if (this.oldPsw === '') {
+      //   this.$message.error(this.lang.psw5)
+      //   return
+      // }
+      // if (this.newPsw !== this.agaPsw) {
+      //   this.$message.error(this.lang.psw8)
+      //   return
+      // }
+      // if (!RegPassword.test(this.newPsw)) {
+      //   this.$message.error(this.lang.psw9)
+      //   return
+      // }
       const data = this.$helpers.transformRequest(
         JSON.parse(
-          JSON.stringify({ original_password: this.oldPsw, password: this.newPsw,password_repetition:this.agaPsw })
+          JSON.stringify({ original_password: this.oldPsw,password: this.newPsw,password_repetition:this.agaPsw })
         ),
         false
       )
       this.$axios
         .post('/web/member/member/up-pwd', data)
         .then(res => {
-          console.log(res)
+          console.log("修改密码",res)
           this.$message({
             message: this.$t(`${lang}.success`),
             type: 'success'

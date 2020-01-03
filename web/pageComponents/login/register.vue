@@ -578,15 +578,13 @@ export default {
     // 发送邮箱验证码
     sendCode() {
       const _this = this
-      console.log("sss",_this.email)
       if (_this.email.length === 0) {
-        this.$errorMessage(_this.$t(`${langcode}.inputEmail`))
-        return
+        _this.emailShow=true
       }
-      if (_this.waiting) {
-        this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-        return
-      }
+      // if (_this.waiting) {
+      //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
+      //   return
+      // }
       _this.setWait()
        this.$axios({
         method: "post",

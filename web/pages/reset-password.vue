@@ -37,7 +37,7 @@
                   {{ $t(`${lang}.schedule1-phonetips`) }}
                 </div>
               </div>
-              <div class="relative margin-bottom-20 code margin-top-30">
+              <!-- <div class="relative margin-bottom-20 code margin-top-30">
                 <div class="row-flex code-main">
                   <div class="register-input margin-right-20">
                     <input
@@ -55,7 +55,7 @@
                 <div v-show="codetip" class="error-tip">
                   {{ $t(`${lang}.schedule2-codetips`) }}
                 </div>
-              </div>
+              </div> -->
               <div class="button-group">
                 <button
                   v-loading="ajaxLoading"
@@ -69,6 +69,25 @@
           </li>
           <li class="item item-3" :style="scheduleContentStyle">
             <h3 class="item-title">{{ $t(`${lang}.forgetPassword`) }}</h3>
+            <div class="relative margin-bottom-20 code margin-top-30">
+              <div class="row-flex code-main">
+                <div class="register-input ">
+                  <input
+                    v-model="code"
+                    type="text"
+                    :placeholder="$t(`${lang}.schedule1-code`)"
+                  />
+                </div>
+                <!-- <div class="send-email-code">
+                  <button  :class="['getCode', className]" :disabled="waiting" @click="sendPhoneCode">
+                    {{ waitingText }}
+                  </button>
+                </div> -->
+              </div>
+              <div v-show="codetip" class="error-tip">
+                {{ $t(`${lang}.schedule2-codetips`) }}
+              </div>
+            </div>
             <div class="item-content">
               <div class="input-line relative">
                 <input
@@ -435,12 +454,7 @@ export default {
     // 发送手机验证码
     sendPhoneCode() {
       const _this = this
-      // return new Promise((resolve, reject) => {
-        // if (_this.waiting) {
-        //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-        //   return
-        // }
-        _this.setWait()
+      return new Promise((resolve, reject) => {
         _this
         .$axios({
             method: 'post',
@@ -451,17 +465,18 @@ export default {
             }
           })
           .then(res => {
-            if(res.code==200){
-              _this.$successMessage("发送成功")
-              _this.requesting = false
-            }
+            resolve(res)
+            // if(res.code==200){
+            //   _this.$successMessage("发送成功")
+            //   // _this.requesting = false
+            // }
           })
           .catch(err => {
-             _this.resetCountDown()
-            _this.requesting = false
-            _this.$errorMessage(err.message)
+             reject(err)
+            // _this.requesting = false
+            // _this.$errorMessage(err.message)
           })
-      // })
+      })
       // Helpers.requestServer(options)
     },
     // 发送邮箱验证码
@@ -589,21 +604,21 @@ export default {
       _this.ajaxLoading = false
       _this.activeScheduleKey = nextScheduleKey
     },
-    // 中文步骤条
     async changeSchedule2(key) {
       const _this = this
       const nextScheduleKey = key
       _this.ajaxLoading = true
       switch (key) {
         case 1:
-           break;
+          
+          break
         case 2:
           try {
-            await _this.mobiletip()
+            await _this.sendPhoneCode()
           } catch (e) {
             _this.$errorMessage(e.message)
             _this.ajaxLoading = false
-            return false
+            return
           }
           break
         case 3:
@@ -624,33 +639,70 @@ export default {
           return
       }
       _this.ajaxLoading = false
-     _this.activeScheduleKey = nextScheduleKey
+      _this.activeScheduleKey = nextScheduleKey
     },
+    // 中文步骤条
+    // async changeSchedule2(key) {
+    //   const _this = this
+    //   const nextScheduleKey = key
+    //   _this.ajaxLoading = true
+    //   switch (key) {
+    //     case 1:
+    //        break;
+    //     case 2:
+    //       try {
+    //         await _this.mobiletip()
+    //       } catch (e) {
+    //         _this.$errorMessage(e.message)
+    //         _this.ajaxLoading = false
+    //         return false
+    //       }
+    //       break
+    //     case 3:
+    //       try {
+    //         await _this.resetMobilePassword()
+    //       } catch (e) {
+    //         _this.$errorMessage(e.message)
+    //         _this.ajaxLoading = false
+    //         return
+    //       }
+    //       _this.waitTimeout = setTimeout(() => {
+    //         clearTimeout(_this.waitTimeout)
+    //         _this.toLogin()
+    //       }, _this.waitSecond * 1000)
+    //       break
+    //     default:
+    //       _this.ajaxLoading = false
+    //       return
+    //   }
+    //   _this.ajaxLoading = false
+    //  _this.activeScheduleKey = nextScheduleKey
+    // },
     // 验证验证码
     //  compareMobileCode() {
-    //     const _this = this
-    //     return new Promise((resolve, reject) => {
-    //       if (!_this.code) {
-    //         reject(new Error(_this.$t(`${lang}.inputEmailCode`)))
-    //       }
+      //     const _this = this
+      //     return new Promise((resolve, reject) => {
+      //       if (!_this.code) {
+      //         reject(new Error(_this.$t(`${lang}.inputEmailCode`)))
+      //       }
 
-    //       _this
-    //         .$axios({
-    //           method: 'post',
-    //           url: '/web/user/compareCode',
-    //           params: {
-    //             email: _this.mobile,
-    //             code: _this.code
-    //           }
-    //         })
-    //         .then(res => {
-    //           console.log(data)
-    //           resolve(data)
-    //         })
-    //         .catch(err => {
-    //           reject(err)
-    //         })
-    //     })
+      //       _this
+      //         .$axios({
+      //           method: 'post',
+      //           url: '/web/user/compareCode',
+      //           params: {
+      //             email: _this.mobile,
+      //             code: _this.code
+      //           }
+      //         })
+      //         .then(res => {
+      //           console.log(data)
+      //           resolve(data)
+      //         })
+      //         .catch(err => {
+      //           reject(err)
+      //         })
+      //     })
     //   },
       compareCode() {
         const _this = this
@@ -681,6 +733,9 @@ export default {
     resetMobilePassword() {
       const _this = this
       return new Promise((resolve, reject) => {
+        if (!_this.code) {
+          reject(new Error("请输入验证码"))
+        }
         if (!_this.password) {
           reject(new Error(_this.$t(`${lang}.newPassword`)))
         }
@@ -1021,7 +1076,7 @@ input{
             width: 400px;
             margin: auto;
             text-align: left;
-            padding-top: 30px;
+            // padding-top: 30px;
 
             .tip {
               margin: 0 auto 20px auto;
@@ -1134,7 +1189,7 @@ input{
 
       & {
         input {
-          width: 285px;
+          width: 399px;
           height: 33px;
           line-height: 33px;
           border-bottom: 1px solid #999999;

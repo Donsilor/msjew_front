@@ -212,11 +212,18 @@ export default {
       isActive3: false
     }
   },
+   watch:{
+    // mobile(){
+    //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+    //     this.$errorMessage("请输入手机号")
+    //   }else{
+    //     this.mobileShow=false
+    //     this.isActivemobile=false
+    //   }
+    // }
+  },
   computed: {
    
-  },
-  watch:{
-    
   },
   mounted() {
     // if(this.mobile==''){
@@ -248,7 +255,7 @@ export default {
     },
     keypressEvent1(){
       this.isActive1=false
-      this.phoneErr=false
+      // this.phoneErr=false
     },
     changeEvent1(){
      
@@ -320,13 +327,17 @@ export default {
     // 中文登录
     loginCN() {
       const _this = this
-      // _this.requesting = true
-      if(_this.mobile === ''||_this.password === ''||_this.code === ''){
+     
+      if(_this.mobile === ''){
         _this.isActive1 =true
-        _this.isActive2 =true
-        _this.isActive3 =true
         _this.phoneErr = true
+      }
+      if(_this.password === ''){
+         _this.isActive2 =true
         _this.passwordErr = true
+      }
+      if(_this.code === ''){
+        _this.isActive3 =true
         _this.codeErr = true
       }
       this.$axios({
@@ -345,6 +356,8 @@ export default {
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
+            }else if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+              this.$errorMessage(_this.$t(`${lang}.phoneTips`))
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken', res.data.access_token)
@@ -403,7 +416,9 @@ export default {
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
-            }else {
+            }else if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(_this.email)){
+              this.$errorMessage(_this.$t(`${lang}.emailtips`))
+            }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken',res.data.access_token)
               _this.$store.dispatch('getUserInfo')

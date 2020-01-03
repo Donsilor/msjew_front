@@ -8,7 +8,7 @@
       <div
         v-for="(a, index) in address"
         :key="index"
-        :class="{ 'addr-active': a.is_default === 0 }"
+        :class="{ 'addr-active': a=== isDefault }"
         class="addr-block"
       >
         <div class="addr-title">
@@ -30,7 +30,7 @@
         <div class="font-size-14 color-333">{{ a.zip_code }}</div>
         <div class="font-size-14 color-333">{{ a.email }}</div>
         <div
-          v-if="a.is_default === 0"
+          v-if="a=== isDefault"
           class="font-size-14"
           style="color: #f29b87; margin-top: 6px;"
         >
@@ -48,7 +48,7 @@
           {{ $t(`${lang}.change`) }}
         </div>
         <img
-          v-show="a.is_default == 0"
+          v-show="a == isDefault"
           src="../../../static/personal/account/address-bar.png"
         />
       </div>
@@ -553,7 +553,8 @@ export default {
         zip_code: ``
       },
       checkEmail: ``,
-      language:''
+      language:'',
+      isDefault:{}
     }
   },
   computed: {
@@ -594,6 +595,7 @@ export default {
           if(res.code==200){
             console.log('获取地址成功', res)
             this.address = res.data
+            this.isDefault=res.data[0]
           }
           else {
             throw new Error (res.message)
@@ -725,14 +727,14 @@ export default {
         this.$message.error(this.$t(`${lang}.wip5`))
         return
       }
-      // if (!Email.test(this.using.email)) {
-      //   this.$message.error(this.$t(`${lang}.wip6`))
-      //   return
-      // }
-      // if (this.using.email !== this.checkEmail) {
-      //   this.$message.error(this.$t(`${lang}.wip7`))
-      //   return
-      // }
+      if (!Email.test(this.using.email)) {
+        this.$message.error(this.$t(`${lang}.wip6`))
+        return
+      }
+      if (this.using.email !== this.checkEmail) {
+        this.$message.error(this.$t(`${lang}.wip7`))
+        return
+      }
       if (this.using.mobile === '') {
         this.$message.error(this.$t(`${lang}.wip8`))
         return

@@ -614,7 +614,7 @@ export default {
 
     return this.$axios({
       method: 'post',
-      url: `/web/goodsCart/postCart`,
+      url: '/web/member/cart',
       data: sendData
     })
       .then(data => {
@@ -946,21 +946,21 @@ export default {
   // 获取在线心愿单数据
   getOnlineWish({ $axios, state, getters, commit, dispatch }) {
     // console.log('getOnlineWish=====>')
-    return this.$axios({
-      method: 'get',
-      url: `/web/collection/list`,
-      params: {
-        type: 1,
-        page: 1,
-        page_size: 9999
-      }
-    })
-      .then(data => {
-        return makeWishGoodGroups(data.list)
-      })
-      .catch(err => {
-        return Promise.reject(err)
-      })
+    // return this.$axios({
+    //   method: 'get',
+    //   url: `/web/collection/list`,
+    //   params: {
+    //     type: 1,
+    //     page: 1,
+    //     page_size: 9999
+    //   }
+    // })
+    //   .then(data => {
+    //     return makeWishGoodGroups(data.list)
+    //   })
+    //   .catch(err => {
+    //     return Promise.reject(err)
+    //   })
   },
   // 获取本地心愿单数据
   getLocalWish({ $axios, state, getters, commit, dispatch }) {
@@ -1382,21 +1382,21 @@ export default {
   // 获取在线对比数据
   getOnlineCompared({ $axios, state, getters, commit, dispatch }) {
     // console.log('getOnlineCompared=====>')
-    return this.$axios({
-      method: 'get',
-      url: `/web/collection/list`,
-      params: {
-        type: 2,
-        page: 1,
-        page_size: 9999
-      }
-    })
-      .then(data => {
-        return makeComparedGoodGroups(data.list)
-      })
-      .catch(err => {
-        return Promise.reject(err)
-      })
+    // return this.$axios({
+    //   method: 'get',
+    //   url: `/web/collection/list`,
+    //   params: {
+    //     type: 2,
+    //     page: 1,
+    //     page_size: 9999
+    //   }
+    // })
+    //   .then(data => {
+    //     return makeComparedGoodGroups(data.list)
+    //   })
+    //   .catch(err => {
+    //     return Promise.reject(err)
+    //   })
   },
   // 获取本地对比数据
   getLocalCompared({ $axios, state, getters, commit, dispatch }) {
