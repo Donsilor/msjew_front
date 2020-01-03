@@ -1257,46 +1257,46 @@ export default {
           item.itemType = 'product'
           item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
           item.properties = [
-            // {
-            //   name: 'SKU',
-            //   value: specsModels.SKU || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.shape`),
-            //   value: specsModels.shape || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.carat`),
-            //   value: specsModels.carat || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.color`),
-            //   value: specsModels.color || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.clarity`),
-            //   value: specsModels.clarity || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.cut`),
-            //   value: specsModels.cut || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.polish`),
-            //   value: specsModels.polish || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.symmetry`),
-            //   value: specsModels.symmetry || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.fluorescence`),
-            //   value: specsModels.fluorescence || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.certificate`),
-            //   value: specsModels.card || ''
-            // }
+            {
+              name: 'SKU',
+              value: specsModels.SKU || ''
+            },
+            {
+              name: this.$t(`${lang}.shape`),
+              value: specsModels.shape || ''
+            },
+            {
+              name: this.$t(`${lang}.carat`),
+              value: specsModels.carat || ''
+            },
+            {
+              name: this.$t(`${lang}.color`),
+              value: specsModels.color || ''
+            },
+            {
+              name: this.$t(`${lang}.clarity`),
+              value: specsModels.clarity || ''
+            },
+            {
+              name: this.$t(`${lang}.cut`),
+              value: specsModels.cut || ''
+            },
+            {
+              name: this.$t(`${lang}.polish`),
+              value: specsModels.polish || ''
+            },
+            {
+              name: this.$t(`${lang}.symmetry`),
+              value: specsModels.symmetry || ''
+            },
+            {
+              name: this.$t(`${lang}.fluorescence`),
+              value: specsModels.fluorescence || ''
+            },
+            {
+              name: this.$t(`${lang}.certificate`),
+              value: specsModels.card || ''
+            }
           ]
           item.listProperties = [
             // {
@@ -1338,7 +1338,7 @@ export default {
             }
           } else {
             item.to = {
-              path: '/diamond-details/' + item.goodsName.replace(/\//g, ''),
+              path: '/diamond-details/' + item.id,
               query: {
                 goodId: item.id
               }
