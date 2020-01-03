@@ -31,7 +31,7 @@ export default {
       return $axios({
         method: 'post',
         url: '/web/ring/ringDetail',
-        data: {
+        params: {
           id: route.query.goodId || ''
         },
         transformRequest: [
@@ -70,7 +70,7 @@ export default {
       return $axios({
         method: 'post',
         url: '/web/goods/style/detail',
-        data: {
+        params: {
           goodsId: route.query.goodId || ''
         },
         transformRequest: [
@@ -122,6 +122,25 @@ export default {
       // }}，且引入钻石商品详情页面文件，使用query中的id调用接口获取商品数据
     })
 
+    if(!this.ringType){
+      var ringT = localStorage.getItem('ringType');
+      if(!ringT){}else{
+        this.ringType = JSON.parse(ringT)
+      }
+    }else{
+      var ringType = JSON.stringify(this.ringType)
+      localStorage.setItem('ringType', ringType)
+    }
+
+    if(!this.info){
+      var info = localStorage.getItem('info');
+      if(!info){}else{
+        this.info = JSON.parse(info)
+      }
+    }else{
+      var info = JSON.stringify(this.info)
+      localStorage.setItem('info', info)
+    }
   }
 }
 </script>
