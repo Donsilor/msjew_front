@@ -1504,10 +1504,11 @@ export default {
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
-        .then(data => {   
+        .then(res => {   
           // console.log("aaa",data)       
-          this.good = data
+          this.good = res
           resolve()
+          //  this.getTex()
         })
         .catch(err => {
           if (!err.response) {
@@ -1521,6 +1522,7 @@ export default {
     promise
       .then(() => {
         this.getAddress()
+        // this.getTex()
       })
       .then(() => {
         // this.getCouponList()
@@ -1534,9 +1536,9 @@ export default {
       })
   },
   mounted() {
-    this.getAddress();
+    // this.getAddress();
     this.language = this.getCookie('language')
-   
+    
   },
   methods: {
     // 查询cookie
@@ -1558,7 +1560,7 @@ export default {
           this.address = res.data
 
           // for (const i in res) {
-          //   if (res[i].isDefault === 1) {
+          //   if (res[i].is_default === 1) {
           //     this.address.unshift(res[i])
           //   } else {
           //     this.address.push(res[i])
@@ -2032,7 +2034,8 @@ export default {
       const data = {
             cart_ids: arr.join(','),
             buyer_remark: this.remark,
-            order_amount: this.tex.productAmount,
+            productAmount: this.tex.productAmount,
+            order_amount: this.tex.orderAmount,
             buyer_address_id: this.orderAddress.id,
           }
       console.log("pppp",data)

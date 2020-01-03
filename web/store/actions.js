@@ -246,7 +246,7 @@ export default {
       method: 'post',
       url: 'web/member/cart/add',
       data: {
-        goods_type: 1, // 类别(1:普通批量添加,2:登录批量添加
+        // goods_type: 1, // 类别(1:普通批量添加,2:登录批量添加
         goodsCartList: sendData
       }
     })
@@ -502,6 +502,7 @@ export default {
     dispatch('getCartAmount')
     request
       .then(data => {
+        console.log("本地",data)
         commit('setCart', data)
         return Promise.resolve(data)
       })
@@ -526,7 +527,7 @@ export default {
   },
   // 获取本地购物车数据
   getLocalCart({ $axios, state, getters, commit, dispatch }) {
-    // console.log('getLocalCart=====>')
+    // console.log('getLocalCart=====>',localStorage.getItem(CART))
     return JSON.parse(localStorage.getItem(CART) || '[]')
   },
   // 获取购物车商品数量
@@ -630,13 +631,15 @@ export default {
     return new Promise((resolve, reject) => {
       dispatch('getLocalCart')
         .then(data => {
+          console.log("本地购物车列表11111",data)
           dispatch('localCartToGoodsInfo', data)
             .then(data => {
-              commit('setCart', data)
+             
+              commit('setCart',data)
               resolve(data)
             })
             .catch(err => {
-              console.error(err)
+              // console.error("aaaaaa===",err)
               reject(err)
             })
         })

@@ -36,7 +36,7 @@ export default function({ $axios, store }) {
         if (data.code == 401) {
           console.log('is 401')
           store.dispatch('logout')
-          this.$router.push('/login')
+          // this.$router.push('/login')
           // window.location.href = '/login'
           return
         }

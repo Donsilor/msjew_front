@@ -995,7 +995,9 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout', lang)
-       this.$router.push('/login')
+      window.location.reload()
+      // this.$store.dispatch('logout', lang)
+      //  this.$router.push('/login')
       // window.location.reload()
       // this.$router.replace({
       //   path: '/login',
