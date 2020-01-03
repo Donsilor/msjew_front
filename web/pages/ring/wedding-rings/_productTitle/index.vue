@@ -30,7 +30,7 @@ export default {
     const getPairRing = () => {
       return $axios({
         method: 'post',
-        url: '/web/ring/ringDetail',
+        url: '/web/goods/ring/detail',
         data: {
           id: route.query.goodId || ''
         },
@@ -55,7 +55,8 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
-        .then(data => {
+        .then(res => {
+          var data =res.data;
           return {
             info: data,
             ringType,
@@ -94,8 +95,8 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
-        .then(data => {
-          var data = data.data;
+        .then(res => {
+          var data = res.data;
           return {
             info: data,
             ringType,
