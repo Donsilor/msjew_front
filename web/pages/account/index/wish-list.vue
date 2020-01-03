@@ -57,73 +57,73 @@ export default {
   },
   methods: {
     getList() {
-      this.$axios
-        .get('/web/collection/list', {
-          params: {
-            type: 1,
-            page: 1,
-            page_size: 1000
-          }
-        })
-        .then(res => {
-          console.log('wish===>', res)
-          this.data = []
-          const body = res.list
-          for (const i in res.list) {
-            const o = body[i]
-            o.loading = false
-            o.index = i
-            o.time = moment(body[i].createTime).format('YYYY-MM-DD')
-            if (o.groupId) {
-              o.groupType = o.groupType === 2 ? 1 : null
-              o.delId = o.id
-              o.id = o.groupId
-            } else {
-              o.groupType = o.groupType === 2 ? 1 : null
-              o.delId = o.id
-              o.id = o.goodsId
-            }
-            console.log(o)
-            if (body[i].simpleGoodsEntity) {
-              o.price = o.simpleGoodsEntity.salePrice
-              o.coinType = o.simpleGoodsEntity.coinType
-              o.goodsImages = res.list[i].simpleGoodsEntity.goodsImages || ''
-              o.name = o.simpleGoodsEntity.goodsName
-            } else {
-              o.price = o.ringsSimpleGoodsEntity.salePrice
-              o.coinType = o.ringsSimpleGoodsEntity.coinType
-              o.name = o.ringsSimpleGoodsEntity.name
-              o.goodsImages = o.ringsSimpleGoodsEntity.ringImg
-                ? o.ringsSimpleGoodsEntity.ringImg
-                : ''
-            }
-            if (this.data.length === 0) {
-              this.data.push({ time: o.time, data: [o] })
-              continue
-            }
-            let lock = false
-            for (const j in this.data) {
-              if (this.data[j].time === o.time) {
-                lock = j
-                break
-              }
-            }
-            if (lock) {
-              this.data[lock].data.push(o)
-            } else {
-              const obj = {
-                time: o.time,
-                data: [o]
-              }
-              this.data.push(obj)
-            }
-          }
-          this.wishLoading = false
-          console.log('new Wish ===>', this.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      // this.$axios
+      //   .get('/web/collection/list', {
+      //     params: {
+      //       type: 1,
+      //       page: 1,
+      //       page_size: 1000
+      //     }
+      //   })
+      //   .then(res => {
+      //     console.log('wish===>', res)
+      //     this.data = []
+      //     const body = res.list
+      //     for (const i in res.list) {
+      //       const o = body[i]
+      //       o.loading = false
+      //       o.index = i
+      //       o.time = moment(body[i].createTime).format('YYYY-MM-DD')
+      //       if (o.groupId) {
+      //         o.groupType = o.groupType === 2 ? 1 : null
+      //         o.delId = o.id
+      //         o.id = o.groupId
+      //       } else {
+      //         o.groupType = o.groupType === 2 ? 1 : null
+      //         o.delId = o.id
+      //         o.id = o.goodsId
+      //       }
+      //       console.log(o)
+      //       if (body[i].simpleGoodsEntity) {
+      //         o.price = o.simpleGoodsEntity.salePrice
+      //         o.coinType = o.simpleGoodsEntity.coinType
+      //         o.goodsImages = res.list[i].simpleGoodsEntity.goodsImages || ''
+      //         o.name = o.simpleGoodsEntity.goodsName
+      //       } else {
+      //         o.price = o.ringsSimpleGoodsEntity.salePrice
+      //         o.coinType = o.ringsSimpleGoodsEntity.coinType
+      //         o.name = o.ringsSimpleGoodsEntity.name
+      //         o.goodsImages = o.ringsSimpleGoodsEntity.ringImg
+      //           ? o.ringsSimpleGoodsEntity.ringImg
+      //           : ''
+      //       }
+      //       if (this.data.length === 0) {
+      //         this.data.push({ time: o.time, data: [o] })
+      //         continue
+      //       }
+      //       let lock = false
+      //       for (const j in this.data) {
+      //         if (this.data[j].time === o.time) {
+      //           lock = j
+      //           break
+      //         }
+      //       }
+      //       if (lock) {
+      //         this.data[lock].data.push(o)
+      //       } else {
+      //         const obj = {
+      //           time: o.time,
+      //           data: [o]
+      //         }
+      //         this.data.push(obj)
+      //       }
+      //     }
+      //     this.wishLoading = false
+      //     console.log('new Wish ===>', this.data)
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //   })
     },
     goDetail(d) {
       console.log(d)

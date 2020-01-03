@@ -446,7 +446,7 @@
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.deliveryInformation`) }}</div>
         </div>
-        <div v-if="good.length > 1" class="is-pack">
+        <!-- <div v-if="good.length > 1" class="is-pack">
           <div
             v-show="!isAllPack"
             class="free-check"
@@ -461,7 +461,7 @@
             <span>{{ $t(`${lang}.sendTogether`) }}</span
             ><span>（{{ $t(`${lang}.chatBor`) }}）</span>
           </div>
-        </div>
+        </div> -->
         <div class="send-time">
           <div class="send-left">
             <div>{{ $t(`${lang}.sendTime`) }}</div>
@@ -904,21 +904,21 @@
               <div
                 :class="[
                   { 'border-change': borderChange === 3 },
-                  { 'border-wrong': wrongInput.userTel }
+                  { 'border-wrong': wrongInput.mobile }
                 ]"
                 class="input-box tel"
               >
                 <input
-                  v-model="addressData.userTel"
-                  :class="{ 'wrong-input': wrongInput.userTel }"
+                  v-model="addressData.mobile"
+                  :class="{ 'wrong-input': wrongInput.mobile }"
                   type="text"
                   @focus="
                     borderChange = 3
-                    wrongInput.userTel = false
+                    wrongInput.mobile = false
                   "
                   @blur="borderChange = 0"
                 />
-                <div v-show="wrongInput.userTel" class="wrong-alert">
+                <div v-show="wrongInput.mobile" class="wrong-alert">
                   {{ $t(`${lang}.wrongInput`) }}
                 </div>
               </div>
@@ -931,21 +931,21 @@
             <div
               :class="[
                 { 'border-change': borderChange === 4 },
-                { 'border-wrong': wrongInput.userMail }
+                { 'border-wrong': wrongInput.email }
               ]"
               class="input-box"
             >
               <input
-                v-model="addressData.userMail"
-                :class="{ 'wrong-input': wrongInput.userMail }"
+                v-model="addressData.email"
+                :class="{ 'wrong-input': wrongInput.email }"
                 type="text"
                 @focus="
                   borderChange = 4
-                  wrongInput.userMail = false
+                  wrongInput.email = false
                 "
                 @blur="borderChange = 0"
               />
-              <div v-show="wrongInput.userMail" class="wrong-alert">
+              <div v-show="wrongInput.email" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
               </div>
             </div>
@@ -1037,20 +1037,20 @@
             <div
               :class="[
                 { 'border-change': borderChange === 6 },
-                { 'border-wrong': wrongInput.address }
+                { 'border-wrong': wrongInput.address_details }
               ]"
               class="input-box"
             >
               <textarea
-                v-model="addressData.address"
-                :class="{ 'wrong-input': wrongInput.address }"
+                v-model="addressData.address_details"
+                :class="{ 'wrong-input': wrongInput.address_details }"
                 @focus="
                   borderChange = 6
-                  wrongInput.address = false
+                  wrongInput.address_details = false
                 "
                 @blur="borderChange = 0"
               />
-              <div v-show="wrongInput.address" class="wrong-alert">
+              <div v-show="wrongInput.address_details" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
               </div>
             </div>
@@ -1062,21 +1062,21 @@
             <div
               :class="[
                 { 'border-change': borderChange === 7 },
-                { 'border-wrong': wrongInput.zipCode }
+                { 'border-wrong': wrongInput.zip_code }
               ]"
               class="input-box"
             >
               <input
-                v-model="addressData.zipCode"
-                :class="{ 'wrong-input': wrongInput.zipCode }"
+                v-model="addressData.zip_code"
+                :class="{ 'wrong-input': wrongInput.zip_code }"
                 type="text"
                 @focus="
                   borderChange = 7
-                  wrongInput.zipCode = false
+                  wrongInput.zip_code = false
                 "
                 @blur="borderChange = 0"
               />
-              <div v-show="wrongInput.zipCode" class="wrong-alert">
+              <div v-show="wrongInput.zip_code" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
               </div>
             </div>
@@ -1242,7 +1242,7 @@
         </div>
       </div>
       <div class="right-info">
-        <div v-show="!makeGay" class="coupon">
+        <!-- <div v-show="!makeGay" class="coupon">
           <div class="two-on-one">
             <input
               ref="too"
@@ -1295,7 +1295,7 @@
               <div>{{ $t(`${lang}.gay3`) }}</div>
             </div>
           </div>
-        </div>
+        </div> -->
         <div class="new-address-title">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
@@ -1536,6 +1536,7 @@ export default {
   mounted() {
     this.getAddress();
     this.language = this.getCookie('language')
+   
   },
   methods: {
     // 查询cookie
@@ -1584,7 +1585,7 @@ export default {
       this.addressData = {
         lastname: '',
         firstname: '',
-        userTel: '',
+        mobile: '',
         userMail: '',
         checkEmail: '',
         address: '',
@@ -1595,7 +1596,7 @@ export default {
       this.wrongInput = {
         firstname: false,
         lastname: false,
-        userTel: false,
+        mobile: false,
         userMail: false,
         checkEmail: false,
         address: false,
@@ -1607,7 +1608,7 @@ export default {
     },
     changeAddress(obj) {
       this.orderAddress = obj
-      this.getTex()
+      // this.getTex()
     },
     createAddress() {
       console.log('create')
@@ -1638,12 +1639,12 @@ export default {
         this.wrongInput.email = true
         return false
       }
-      // if (this.addressData.email !== this.addressData.checkEmail) {
-      //   this.wrongMsg = this.$t(`${lang}.wip3`)
-      //   this.alertBox = true
-      //   this.wrongInput.checkEmail = true
-      //   return false
-      // }
+      if (this.addressData.email !== this.addressData.checkEmail) {
+        this.wrongMsg = this.$t(`${lang}.wip3`)
+        this.alertBox = true
+        this.wrongInput.checkEmail = true
+        return false
+      }
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
@@ -1744,21 +1745,21 @@ export default {
         return false
       }
       if (
-        !RegMobile.test(this.addressData.userTel) &&
-        !RegTelephone.test(this.addressData.userTel)
+        !RegMobile.test(this.addressData.mobile) &&
+        !RegTelephone.test(this.addressData.mobile)
       ) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
-        this.wrongInput.userTel = true
+        this.wrongInput.mobile = true
         return false
       }
-      if (!Email.test(this.addressData.userMail)) {
+      if (!Email.test(this.addressData.email)) {
         this.wrongMsg = this.$t(`${lang}.wip3`)
         this.alertBox = true
         this.wrongInput.userMail = true
         return false
       }
-      if (this.addressData.userMail !== this.addressData.checkEmail) {
+      if (this.addressData.email !== this.addressData.checkEmail) {
         this.wrongMsg = this.$t(`${lang}.wip3`)
         this.alertBox = true
         this.wrongInput.checkEmail = true
@@ -1781,14 +1782,14 @@ export default {
             id: this.addressData.id,
             firstname: this.addressData.firstname,
             lastname: this.addressData.lastname,
-            userTelCode: this.phoneNum.phone_code,
-            userTel: this.addressData.userTel,
-            userMail: this.addressData.userMail,
-            countryId: this.country.areaId,
-            provinceId: this.province.areaId,
+            mobile_code: this.phoneNum.phone_code,
+           mobile: this.addressData.mobile,
+            email: this.addressData.email,
+            country_id: this.country.areaId,
+            province_id: this.province.areaId,
             cityId: this.city.areaId,
-            address: this.addressData.address,
-            zipCode: this.addressData.zipCode
+            address_details: this.addressData._details,
+            zip_code: this.addressData.zip_code
           })
         ),
         false
@@ -1856,7 +1857,7 @@ export default {
       this.tooInp = ''
       this.makeGay = false
       this.preferFee = 0
-      this.getTex()
+      // this.getTex()
       this.coupon = this.coupons[0]
       this.fuckYou = false
     },
@@ -1958,45 +1959,45 @@ export default {
       //   })
     },
     getTex() {
-      // const arr = []
-      // for (const i in this.good) {
-      //   if (this.good[i].groupType === null) {
-      //     arr.push(this.good[i].data[0].id)
-      //   } else {
-      //     arr.push(this.good[i].data[0].id)
-      //     arr.push(this.good[i].data[1].id)
-      //   }
-      // }
-      // const data = arr.join(',')
-      // this.canSubmit = false
-      // this.$axios
-      //   .get('/web/order/getTax', {
-      //     params: {
-      //       addressId: this.orderAddress.id,
-      //       preferFee: this.preferFee,
-      //       cartIds: data
-      //     }
-      //   })
-      //   .then(res => {
-      //     this.canSubmit = true
-      //     this.tex = res
-      //   })
-      //   .catch(err => {
-      //     this.coupons = [{ couponCode: '- - -', couponId: '' }]
-      //     this.coupon = { couponCode: '- - -', couponId: '' }
-      //     this.canSubmit = false
-      //     if (!err.response) {
-      //       this.$message.error(err.message)
-      //     } else {
-      //       // console.log(err)
-      //     }
-        // })
+      const arr = []
+      for (const i in this.good) {
+        if (this.good[i].groupType === null) {
+          arr.push(this.good[i].data[0].id)
+        } else {
+          arr.push(this.good[i].data[0].id)
+          arr.push(this.good[i].data[1].id)
+        }
+      }
+      const data = arr.join(',')
+      this.canSubmit = false
+      this.$axios
+        .get('/web/member/order/tax', {
+          params: {
+            addressId: this.orderAddress.id,
+            cartIds: data
+          }
+        })
+        .then(res => {
+          console.log("tex",res)
+          this.canSubmit = true
+          this.tex = res.data
+        })
+        .catch(err => {
+          this.coupons = [{ couponCode: '- - -', couponId: '' }]
+          this.coupon = { couponCode: '- - -', couponId: '' }
+          this.canSubmit = false
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
     },
     createOrder() {
-      // console.log()
-      // if (!this.canSubmit) {
-      //   return
-      // }
+      console.log()
+      if (!this.canSubmit) {
+        return
+      }
       if (this.orderAddress.id === '') {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
@@ -2004,7 +2005,7 @@ export default {
       }
       // if (
       //   !Email.test(
-      //     this.isSameEmail ? this.orderAddress.userMail : this.orderEmail
+      //     this.isSameEmail ? this.orderAddress.email : this.orderEmail
       //   )
       // ) {
       //   this.wrongMsg = this.$t(`${lang}.msg5`)
