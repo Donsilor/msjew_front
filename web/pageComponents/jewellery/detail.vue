@@ -119,6 +119,7 @@
             {{ $t(`${lang}.addCart`) }}
           </button>
         </div>
+
         <!-- <div class="other-info">
           <ul class="operates">
             <li class="item wish-state">
@@ -136,8 +137,10 @@
                 {{ $t(`${lang}.wish`) }}
               </span>
             </li>
+
           </ul>
         </div> -->
+
       </div>
     </section>
     <!--    推荐商品-->

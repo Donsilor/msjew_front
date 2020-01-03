@@ -101,7 +101,7 @@
             <div>
               <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
               <select v-model="phoneNum">
-                <option v-for="(p, index) in phoneJson" :key="index" :value="p">{{
+                <option v-for="(p, index) in phoneJson.slice(2, 2)" :key="index" :value="p">{{
                   psn ? p.en :psn ? p.cn :p.zh
                 }}</option>
               </select>
@@ -203,7 +203,7 @@
             <div>
               <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
               <select v-model="phoneNum">
-                <option v-for="(p, index) in phoneJson" :key="index" :value="p">{{
+                <option v-for="(p, index) in phoneJson.slice(2, 2)" :key="index" :value="p">{{
                   psn ? p.en :psn ? p.cn :p.zh
                 }}</option>
               </select>
@@ -615,19 +615,21 @@ export default {
       console.log("ddasdas",obj)
       this.resetAddress()
       this.clone = this.$helpers.cloneObject(obj)
-      // this.phoneNum.phone_code=obj.mobile_code
-      // console.log("克隆",this.clone.email)
-      if(this.language==='zh_CN'){
-        this.email=obj.email
-        this.checkEmail = obj.email
-      }else{
-        this.checkEmail = obj.email
-        console.log("ippppp",this.checkEmail)
-          const code = obj.email.split('+').reverse()
-          JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
-            if (o.phone_code === '+' + code[0]) this.phoneNum = o
-          })
-      }
+      this.checkEmail = obj.email
+      console.log("email",this.checkEmail)
+      const code = obj.mobile_code.split('+').reverse()
+      JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
+        if (o.phone_code === '+' + code[0]) this.phoneNum = o
+      })
+      // if(this.language==='zh_CN'){
+      //   this.email=obj.email
+      // }else{
+      //   this.checkEmail = obj.email
+      //   const code = obj.userTelCode.split('+').reverse()
+      //   JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
+      //     if (o.phone_code === '+' + code[0]) this.phoneNum = o
+      //   })
+      // }
       this.setAddress(obj).then(res => {
         if (!res) {
           this.isShow = !this.isShow

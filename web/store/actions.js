@@ -30,22 +30,23 @@ function getTimestampUuid() {
 }
 
 function makeCartGoodGroups(cart=[]) {
-  console.log("cart",cart)
+  // console.log("cart",cart)
   const result = []
   const localData = {}
-  const keyName = 'createTime'
+  const keyName = 'id'
   cart.forEach(item => {
     // result.push(item)
-    if (localData.hasOwnProperty(item)) {
-      localData[item].data.push(item)
+    if (localData.hasOwnProperty(item[keyName])) {
+      localData[item[keyName]].data.push(item)
     } else {
-      localData[item] = {
+      localData[item[keyName]] = {
         id: item[keyName].toString(),
         groupType: item.groupType || null,
         data: [item]
       }
     }
   })
+  // console.log("local",localData)
   let keys = Object.keys(localData)
   keys = keys.sort((a, b) => {
     return b - a
@@ -53,6 +54,7 @@ function makeCartGoodGroups(cart=[]) {
   keys.forEach(item => {
     result.push(localData[item])
   })
+  // console.log("iiiii", result)
   // 将定制的商品进行排序，钻石放在后面
   result.map(item => {
     console
@@ -81,7 +83,7 @@ function makeCartGoodGroups(cart=[]) {
       const diamond = []
       const pedestal = []
       item.data.forEach(detail => {
-        console.log("data",detail)
+        // console.log("data",detail)
         if (detail.categoryId ===
            1) {
           diamond.push(detail)
@@ -161,7 +163,7 @@ export default {
       url:'web/member/member/me'
     })
       .then(res => {
-        console.log("个人",res.data)
+        // console.log("个人",res.data)
         commit('setUserInfo', res.data)
         return res.data
       })
@@ -181,7 +183,7 @@ export default {
       try {
         let searchHistory = await dispatch('getLocalSearchHistory')
         searchHistory = searchHistory.slice(0, 4)
-        console.log('searchHistory=====>', searchHistory)
+        // console.log('searchHistory=====>', searchHistory)
         let start = -1
         searchHistory.forEach((item, index) => {
           if (item.keyword === keyword) {
@@ -237,18 +239,19 @@ export default {
         return good
       })
       sendData = sendData.concat(data)
+      // console.log("购物车",sendData)
     })
-    console.log("购物车",sendData)
 
     return this.$axios({
       method: 'post',
       url: 'web/member/cart/add',
       data: {
-        addType: 2, // 类别(1:普通批量添加,2:登录批量添加
+        goods_type: 1, // 类别(1:普通批量添加,2:登录批量添加
         goodsCartList: sendData
       }
     })
       .then(res => {
+        console.log("hahahah",res)
         dispatch('cleanLocalCart')
         return Promise.resolve('success')
       })
@@ -261,6 +264,7 @@ export default {
   },
   // 加入到购物车
   addCart({ $axios, state, getters, commit, dispatch }, goods = []) {
+    console.log("lalal",goods)
     let data = null
     if (Array.isArray(goods)) {
       data = goods
@@ -297,7 +301,7 @@ export default {
   },
   // 加入到线上购物车中
   addOnlineCart({ $axios, state, getters, commit, dispatch }, goods = []) {
-    // console.log('addOnlineCart=====>')
+    // console.log('addOnlineCart=====>',goods)
     const time = getTimestampUuid()
 
     goods = goods.map(item => {
@@ -306,17 +310,20 @@ export default {
       return item
     })
 
-    // // console.log('goods-------->', goods)
+    console.log('goods-------->', goods)
 
     return this.$axios({
       method: 'post',
       url: 'web/member/cart/add',
       data: {
-        goods_type: 1, // 类别(1:普通批量添加,2:登录批量添加
+        // goods_type: 1, // 类别(1:普通批量添加,2:登录批量添加
         goodsCartList: goods
       }
     })
       .then(data => {
+        // this.getOnlineCart()
+        // this.getCart()
+        console.log("添加购物车",data)
         // 重新请求购物车数量（和购物车列表）
         return Promise.resolve('success')
       })
@@ -545,15 +552,17 @@ export default {
     return request
   },
   // 获取在线购物车商品数量
-  getOnlineCartAmount({ $axios, state, getters, commit, dispatch }) {
+  async  getOnlineCartAmount({ $axios, state, getters, commit, dispatch }) {
+    // const cart =await dispatch('getList')
+    // return cart.length
     // console.log('getOnlineCartAmount=====>')  /web/goodsCart/count
     return this.$axios({
       method: 'get',
-      url: `/web/goodsCart/count`
+      url: '/web/member/cart/count'
     })
       .then(res=> {
-        console.log('线上购物车商品总数====>', data)
-        return data
+        // console.log('线上购物车商品总数====>', data)
+        return res.data
       })
       .catch(err => {
         return Promise.reject(err)
@@ -663,7 +672,8 @@ export default {
         result.push(item)
       }
     })
-    // console.log(`inTest=====> `, cart)
+    console.log(`inTest=====> `, cart)
+    console.log(`cccc=====> `, result)
     return result
   },
 

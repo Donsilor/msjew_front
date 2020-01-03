@@ -23,22 +23,25 @@ export default function({ $axios, store }) {
   })
   $axios.onResponse(res => {
     const data = res.data || {}
-    return data;
+    // console.log("data",res.data)
+    // return data;
 
     if (data.hasOwnProperty('code')) {
-      if (data.code === 200) {
+      if (data.code == 200) {
          return Promise.resolve(
-          ![undefined].includes(data.data) ? data.data : null
+          ![undefined].includes(data) ? data : null
         ) 
         // return Promise.resolve(data.data || null)
       } else {
-        if (data.code === 401) {
+        if (data.code == 401) {
           console.log('is 401')
           store.dispatch('logout')
+          this.$router.push('/login')
           // window.location.href = '/login'
           return
         }
-        return Promise.reject(new Error(data.message || 'something error'))
+        // return Promise.reject(new Error(data.message || 'something error'))
+        return Promise.reject(new Error(data.message|| 'something error'))
       }
     } else {
       return Promise.resolve(data || null)
@@ -47,5 +50,6 @@ export default function({ $axios, store }) {
   $axios.onError(error => {
     // console.log('$axios.onError===>', error)
     return Promise.reject(error)
+      // throw new Error(11111)
   })
 }

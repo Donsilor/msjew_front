@@ -15,6 +15,7 @@
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
             @change="changeEvent1"
+            @input="input"
             type="text"
             v-bind:class="{active:isActive1}"
             :placeholder="$t(`${lang}.mailbox`)"
@@ -31,6 +32,12 @@
           </span>
           <input
             v-model="password"
+            @focus="focusEvent2"
+            @blur="blurEvent2"
+            @keydown="keydownEvent2"
+            @keyup="keyupEvent2"
+            @keypress="keypressEvent2"
+            @change="changeEvent2"
             type="password"
             v-bind:class="{active:isActive2}"
             :placeholder="$t(`${lang}.password`)"
@@ -50,10 +57,15 @@
           <div class="login-input verification-code-input">
             <input
               v-model="code"
+              @focus="focusEvent3"
+              @blur="blurEvent3"
+              @keydown="keydownEvent3"
+              @keyup="keyupEvent3"
+              @keypress="keypressEvent3"
+              @change="changeEvent3"
               type="text"
               v-bind:class="{active:isActive3}"
               :placeholder="$t(`${lang}.code`)"
-              @keydown.enter="login"
             />
           </div>
           <div class="code-picture" @click="refreshCode">
@@ -89,11 +101,19 @@
           </span>
           <input
             v-model="account"
+            @focus="focusEvent1"
+            @blur="blurEvent1"
+            @keydown="keydownEvent1"
+            @keyup="keyupEvent1"
+            @keypress="keypressEvent1"
+            @change="changeEvent1"
+            @input="input"
+            v-bind:class="{active:isActive1}"
             type="text"
             :placeholder="$t(`${lang}.mailbox`)"
           />
         </div>
-        <div v-show="mailErr" class="error-tip">
+        <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
         </div>
       </div>
@@ -104,6 +124,13 @@
           </span>
           <input
             v-model="password"
+            @focus="focusEvent2"
+            @blur="blurEvent2"
+            @keydown="keydownEvent2"
+            @keyup="keyupEvent2"
+            @keypress="keypressEvent2"
+            @change="changeEvent2"
+            v-bind:class="{active:isActive2}"
             type="password"
             :placeholder="$t(`${lang}.password`)"
           />
@@ -122,6 +149,13 @@
           <div class="login-input verification-code-input">
             <input
               v-model="code"
+              @focus="focusEvent3"
+              @blur="blurEvent3"
+              @keydown="keydownEvent3"
+              @keyup="keyupEvent3"
+              @keypress="keypressEvent3"
+              @change="changeEvent3"
+              v-bind:class="{active:isActive3}"
               type="text"
               :placeholder="$t(`${lang}.code`)"
               @keydown.enter="login"
@@ -185,10 +219,10 @@ export default {
     
   },
   mounted() {
-    if(this.mobile==''){
-      this.isActive1=true
-      this.phoneErr=true
-    }
+    // if(this.mobile==''){
+    //   this.isActive1=true
+    //   this.phoneErr=true
+    // }
     this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {
@@ -196,6 +230,9 @@ export default {
     })
   },
   methods: {
+    input(){
+
+    },
     focusEvent1(e){
       console.log("zzzz")
     },
@@ -212,13 +249,50 @@ export default {
     keypressEvent1(){
       this.isActive1=false
       this.phoneErr=false
-      // if(this.mobile==''){
-      //   this.isActive1=true
-      //   this.phoneErr=true
-      // }
-      // console.log("xxx")
     },
     changeEvent1(){
+     
+    },
+
+    focusEvent2(e){
+      console.log("zzzz")
+    },
+    blurEvent2(e){
+
+    },
+    keydownEvent2(e){
+      
+    },
+    keyupEvent2(){
+      this.isActive2=false
+      this.passwordErr=false
+    },
+    keypressEvent2(){
+     
+    },
+    changeEvent2(){
+     
+    },
+    focusEvent3(e){
+      console.log("zzzz")
+    },
+    blurEvent3(e){
+
+    },
+    keydownEvent3(e){
+      
+    },
+    keyupEvent3(){
+      if(this.code == this.pictureCode){
+        this.isActive3=false
+        this.codeErr=false
+      }
+    },
+    keypressEvent3(){
+      // this.isActive3=false
+      // this.passwordErr=false
+    },
+    changeEvent3(){
      
     },
     // 查询cookie
@@ -247,7 +321,7 @@ export default {
     loginCN() {
       const _this = this
       // _this.requesting = true
-       if(_this.mobile === ''||_this.password === ''||_this.code === ''){
+      if(_this.mobile === ''||_this.password === ''||_this.code === ''){
         _this.isActive1 =true
         _this.isActive2 =true
         _this.isActive3 =true
@@ -267,7 +341,7 @@ export default {
         })
         .then(res => {
           console.log("登陆结果",res)
-          if (res.code==200){
+          // if (res.code==200){
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
@@ -290,9 +364,9 @@ export default {
               }, 0)
             }
 
-          } else {
-            // throw new Error (res.message)
-          }
+          // } else {
+          //   throw new Error (res.message)
+          // }
         })
         .catch(err => {
           //console.error(err)
@@ -305,6 +379,14 @@ export default {
     login() {
       const _this = this
       // _this.requesting = true
+      if(_this.account === ''||_this.password === ''||_this.code === ''){
+        _this.isActive1 =true
+        _this.isActive2 =true
+        _this.isActive3 =true
+        _this.phoneErr = true
+        _this.passwordErr = true
+        _this.codeErr = true
+      }
       this.$axios({
           method: 'post',
           url: '/web/site/login',

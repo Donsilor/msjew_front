@@ -202,7 +202,7 @@
             {{ $t(`${lang}.addCart`) }}
           </button>
         </div>
-        <!-- <div class="other-info">
+       <!-- <div class="other-info">
           <ul class="operates">
             <li class="item wish-state">
               <i
@@ -500,7 +500,7 @@ export default {
           const specs = product.specs || []
           let result = '--'
           specs.forEach(item => {
-            if (item.configId === '26') {
+            if (item.configId === 196) {
               result = item.configAttrVal
             }
           })

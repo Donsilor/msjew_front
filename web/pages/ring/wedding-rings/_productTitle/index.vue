@@ -121,6 +121,12 @@ export default {
       //   $route.params.productTitle
       // }}，且引入钻石商品详情页面文件，使用query中的id调用接口获取商品数据
     })
+
+    if(!this.ringType){
+    }else{
+      console.log(this.ringType)
+      localStorage.setItem('ringType',ringType)
+    }
   }
 }
 </script>

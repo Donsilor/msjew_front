@@ -44,7 +44,6 @@
                       v-model="code"
                       type="text"
                       :placeholder="$t(`${lang}.schedule1-code`)"
-                      @keydown.enter="changeSchedule2(1)"
                     />
                   </div>
                   <div class="send-email-code">
@@ -160,7 +159,7 @@
               <h2 class="tip">{{ $t(`${lang}.address`) }}</h2>
               <div class="input-line">
                 <input
-                  v-model="email"
+                  v-model="info.email"
                   class="bottom-border-input"
                   @keydown.enter="changeSchedule(2)"
                 />
@@ -184,7 +183,7 @@
               </div>
               <h2 class="tip">
                 {{ $t(`${lang}.hadSendEmailCode1`) }}
-                <span>{{ email }}</span>
+                <span>{{ info.email }}</span>
                 {{ $t(`${lang}.hadSendEmailCode2`) }}
               </h2>
               <div class="wrong-email">
@@ -195,7 +194,7 @@
               </div>
               <div class="input-line">
                 <input
-                  v-model="code"
+                  v-model="info.code"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.inputEmailCode`)"
                   @keydown.enter="changeSchedule(3)"
@@ -229,7 +228,7 @@
               </div>
               <div class="input-line">
                 <input
-                  v-model="password"
+                  v-model="info.password"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.newPassword`)"
                   @keydown.enter="changeSchedule(4)"
@@ -237,7 +236,7 @@
               </div>
               <div class="input-line">
                 <input
-                  v-model="password_repetition"
+                  v-model="info.password_repetition"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.confirmPassword`)"
                   @keydown.enter="changeSchedule(4)"
@@ -281,7 +280,7 @@
 import Input from '@/mixins/input.js'
 const lang = 'resetPassword'
 const langcode = 'components.sendEmailCode'
-const defaultTime = 15
+const defaultTime = 60
 export default {
   components: {},
   mixins: [Input],
@@ -313,6 +312,7 @@ export default {
       repwdtips:true,
       active: 0,
       lang,
+      langcode,
       waitSecond: 10,
       waitTimeout: null,
       activeScheduleKey: 1,
@@ -348,16 +348,13 @@ export default {
           name: this.$t(`${lang}.schedule4`)
         }
       ],
-      // info: {
-      //   mobile:'',
-      //   email: '',
-      //   code: '',
-      //   password: '',
-      //   password_repetition: '',
-      //   showPassword: false
-      // },
+      info: {
+        email: '',
+        code: '',
+        password: '',
+        password_repetition: '',
+      },
       mobile:'',
-      email: '',
       code: '',
       password: '',
       password_repetition: '',
@@ -365,6 +362,15 @@ export default {
       ajaxLoading: false,
       language: ''
     }
+  },
+  watch:{
+    // mobile(){
+    //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+    //     this.phonetip=true
+    //   }else{
+    //     this.phonetip=false
+    //   }
+    // }
   },
   computed: {
     scheduleContentStyle() {
@@ -400,6 +406,7 @@ export default {
     },
     // 倒计时
     countDown() {
+      console.log(this.waitingTime)
       const _this = this
       const countDownStart = setInterval(function() {
         if (_this.waitingTime === 0) {
@@ -408,6 +415,7 @@ export default {
           _this.waitingText = _this.$t(`${langcode}.sendCode`)
           _this.waitingTime = defaultTime
         } else {
+         
           _this.waitingText = `${_this.$t(`${langcode}.hadSend`)}(${
             _this.waitingTime
           }s)`
@@ -427,104 +435,125 @@ export default {
     // 发送手机验证码
     sendPhoneCode() {
       const _this = this
-      // console.log("sss",_this.mobile)
-      // if (_this.info.mobile.length === 0) {
-      //   this.$errorMessage(_this.$t(`${langcode}.inputPhone`))
-      //   return
-      // }
-      // if (_this.waiting) {
-      //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-      //   return
-      // }
-      _this.setWait()
-       this.$axios({
-        method: "post",
-        url: '/web/site/sms-code',
-        data:{
-          'mobile': _this.mobile,
-          'usage': 'up-pwd'
-        }
-      }).then(res => {
-        console.log("手机验证码",res)
-        if (res.code==200){
-          _this.code=res.data.code
-          _this.isActivecode=false;
-          _this.codeShow=false;
-          // _this.sendReturn(res)
-        } else {
-          throw new Error (res.message)
-        }   
-      }).catch(err => {
-        _this.resetCountDown()
-         _this.$errorMessage(err.message)
-        _this.$ConfirmBox({
-          title: _this.$t(`${langcode}.error`),
-          message: `${err.message}`
-        })
-      })
+      // return new Promise((resolve, reject) => {
+        // if (_this.waiting) {
+        //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
+        //   return
+        // }
+        _this.setWait()
+        _this
+        .$axios({
+            method: 'post',
+            url: '/web/site/sms-code',
+            data: {
+              'mobile': _this.mobile,
+              'usage': 'up-pwd'
+            }
+          })
+          .then(res => {
+            if(res.code==200){
+              _this.$successMessage("发送成功")
+              _this.requesting = false
+            }
+          })
+          .catch(err => {
+             _this.resetCountDown()
+            _this.requesting = false
+            _this.$errorMessage(err.message)
+          })
+      // })
       // Helpers.requestServer(options)
     },
     // 发送邮箱验证码
-    sendEmailCode() {
+    sendCode() {
       const _this = this
-      // console.log("sss",_this.email)
-      // if (_this.email.length === 0) {
-      //   this.$errorMessage(_this.$t(`${langcode}.inputEmail`))
-      //   return
-      // }
-      // if (_this.waiting) {
-      //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-      //   return
-      // }
-      _this.setWait()
-       this.$axios({
-        method: "post",
-        url: '/web/site/email-code',
-        data:{
-          'email': _this.email,
-          'usage': 'up-pwd'
-        }
-      }).then(res => {
-        console.log("邮箱验证码",res)
-        if (res.code==200){
-          // _this.code=res.data.code
-        }else {
-          throw new Error (res.message)
-        }   
-        // _this.sendReturn(res)
-      }).catch(err => {
-        _this.resetCountDown()
-        _this.$errorMessage(err.message)
-        // _this.$ConfirmBox({
-        //   title: _this.$t(`${langcode}.error`),
-        //   message: `${err.message}`
-        // })
+      return new Promise((resolve, reject) => {
+        _this
+          .$axios({
+            method: 'post',
+            url: '/web/site/email-code',
+            data: {
+              'email': _this.info.email,
+              'usage': 'up-pwd'
+            }
+          })
+          .then(res => {
+            console.log("啦啦啦",res)
+            resolve(res)
+          })
+          .catch(err => {
+            console.log(err)
+            reject(err)
+          })
       })
-      // Helpers.requestServer(options)
     },
+    // sendCode() {
+      //   const _this = this
+      //   // console.log("sss",_this.info.email)
+      //   if (_this.info.email=='') {
+      //     this.$errorMessage(_this.$t(`${langcode}.inputEmail`))
+      //     return
+      //   }
+      //   if (_this.waiting) {
+      //     this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
+      //     return
+      //   }
+      //   _this.setWait()
+      //    this.$axios({
+      //     method: "post",
+      //     url: '/web/site/email-code',
+      //     data:{
+      //       'email': _this.info.email,
+      //       'usage': 'up-pwd'
+      //     }
+      //   }).then(res => {
+      //     console.log("邮箱验证码",res)
+      //     // if (res.code==200){
+      //       // _this.code=res.data.code
+      //     // }else {
+      //     //   throw new Error (res.message)
+      //     // }   
+      //     // _this.sendReturn(res)
+      //   }).catch(err => {
+      //     _this.resetCountDown()
+      //     _this.$errorMessage(err.message)
+      //     // _this.$ConfirmBox({
+      //     //   title: _this.$t(`${langcode}.error`),
+      //     //   message: `${err.message}`
+      //     // })
+      //   })
+      //   // Helpers.requestServer(options)
+    // },
     // 重置倒计时
     resetCountDown() {
       this.waitingTime = 0
+    },
+    mobiletip(){
+      if(this.mobile==''){
+        throw new Error ("手机号不能为空")
+      }
+      if(this.code==''){
+        throw new Error ("验证码不能为空")
+      }
     },
     // 繁体和英文步骤条
     async changeSchedule(key) {
       const _this = this
       const nextScheduleKey = key
-
       _this.ajaxLoading = true
       switch (key) {
         case 1:
-          // const info = JSON.parse(JSON.stringify(_this.info))
-          // console.log("eee",info)
-          this.email = ''
-          this.code = ''
-          this.password = ''
-          this.password_repetition = ''
-          // _this.info = info
+          const info = JSON.parse(JSON.stringify(_this.info))
+          info.email = ''
+          info.code = ''
+          info.password = ''
+          info.confirmdPassword = ''
+          _this.info = info
           break
         case 2:
           try {
-            await _this.sendEmailCode()
+            await _this.sendCode()
+            // console.log("aaaa")
           } catch (e) {
             _this.$errorMessage(e.message)
             _this.ajaxLoading = false
@@ -532,6 +561,13 @@ export default {
           }
           break
         case 3:
+          try {
+            // await _this.compareCode()
+          } catch (e) {
+            _this.$errorMessage(e.message)
+            _this.ajaxLoading = false
+            return
+          }
           break
         case 4:
           try {
@@ -560,21 +596,15 @@ export default {
       _this.ajaxLoading = true
       switch (key) {
         case 1:
-          // const info = JSON.parse(JSON.stringify(_this.info))
-          this.mobile = ''
-          this.code = ''
-          this.password = ''
-          this.password_repetition = ''
-          // _this.info = info
+           break;
+        case 2:
           try {
-            await  _this.sendPhoneCode()
+            await _this.mobiletip()
           } catch (e) {
             _this.$errorMessage(e.message)
             _this.ajaxLoading = false
-            return
+            return false
           }
-          break
-        case 2:
           break
         case 3:
           try {
@@ -594,34 +624,59 @@ export default {
           return
       }
       _this.ajaxLoading = false
-      _this.activeScheduleKey = nextScheduleKey
+     _this.activeScheduleKey = nextScheduleKey
     },
     // 验证验证码
-      // compareCode() {
-      //   const _this = this
-      //   return new Promise((resolve, reject) => {
-      //     if (!_this.info.code) {
-      //       reject(new Error(_this.$t(`${lang}.inputEmailCode`)))
-      //     }
+    //  compareMobileCode() {
+    //     const _this = this
+    //     return new Promise((resolve, reject) => {
+    //       if (!_this.code) {
+    //         reject(new Error(_this.$t(`${lang}.inputEmailCode`)))
+    //       }
 
-      //     _this
-      //       .$axios({
-      //         method: 'post',
-      //         url: '/web/user/compareCode',
-      //         params: {
-      //           email: _this.info.email,
-      //           code: _this.info.code
-      //         }
-      //       })
-      //       .then(data => {
-      //         console.log(data)
-      //         resolve(data)
-      //       })
-      //       .catch(err => {
-      //         reject(err)
-      //       })
-      //   })
-      // },
+    //       _this
+    //         .$axios({
+    //           method: 'post',
+    //           url: '/web/user/compareCode',
+    //           params: {
+    //             email: _this.mobile,
+    //             code: _this.code
+    //           }
+    //         })
+    //         .then(res => {
+    //           console.log(data)
+    //           resolve(data)
+    //         })
+    //         .catch(err => {
+    //           reject(err)
+    //         })
+    //     })
+    //   },
+      compareCode() {
+        const _this = this
+        return new Promise((resolve, reject) => {
+          if (!_this.info.code) {
+            reject(new Error(_this.$t(`${lang}.inputEmailCode`)))
+          }
+
+          _this
+            .$axios({
+              method: 'post',
+              url: '/web/user/compareCode',
+              params: {
+                email: _this.info.email,
+                code: _this.info.code
+              }
+            })
+            .then(data => {
+              console.log(data)
+              resolve(data)
+            })
+            .catch(err => {
+              reject(err)
+            })
+        })
+      },
     // 重置号码密码
     resetMobilePassword() {
       const _this = this
@@ -633,8 +688,7 @@ export default {
           reject(new Error(_this.$t(`${lang}.confirmPassword`)))
         }
 
-        _this
-          .$axios({
+        this.$axios({
             method: 'post',
             url: '/web/site/mobile-up-pwd',
             data:{
@@ -645,12 +699,12 @@ export default {
             }
           })
           .then(res => {
-            if(res.code==200){
+            // if(res.code==200){
               console.log("重置手机密码",res)
               resolve(res)
-            }else {
-              throw new Error (res.message)
-            }  
+            // }else {
+            //   throw new Error (res.message)
+            // }  
           })
           .catch(err => {
             reject(err)
@@ -661,31 +715,30 @@ export default {
     resetEmailPassword() {
       const _this = this
       return new Promise((resolve, reject) => {
-        if (!_this.password) {
-          reject(new Error(_this.$t(`${lang}.newPassword`)))
-        }
-        if (!_this.password_repetition) {
-          reject(new Error(_this.$t(`${lang}.confirmPassword`)))
-        }
+        // if (!_this.info.password) {
+        //   reject(new Error(_this.$t(`${lang}.newPassword`)))
+        // }
+        // if (!_this.info.password_repetition) {
+        //   reject(new Error(_this.$t(`${lang}.confirmPassword`)))
+        // }
 
-        _this
-          .$axios({
+        this.$axios({
             method: 'post',
             url: 'web/site/email-up-pwd',
             data:{
-              "email":_this.email,
-              "code":_this.code,
-              "password":_this.password,
-              "password_repetition":_this.password_repetition
+              "email":_this.info.email,
+              "code":_this.info.code,
+              "password":_this.info.password,
+              "password_repetition":_this.info.password_repetition
             }
           })
           .then(res => {
-            if(res.code==200){
+            // if(res.code==200){
               console.log("重置邮箱密码",res)
               resolve(res)
-            } else {
-              throw new Error (res.message)
-            }  
+            // } else {
+            //   throw new Error (res.message)
+            // }  
           })
           .catch(err => {
             reject(err)
@@ -703,6 +756,12 @@ export default {
 </script>
 
 <style scoped lang="less">
+input::placeholder{
+  color:#C0C4CC!important;
+}
+input{
+  color: #999999;
+}
 .getCode {
   width: 100%;
   height: 34px;
@@ -1080,7 +1139,7 @@ export default {
           line-height: 33px;
           border-bottom: 1px solid #999999;
           box-sizing: border-box;
-          font-size: 14px;
+          font-size: 16px;
           font-weight: 400;
           color: #999999;
         }

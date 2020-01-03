@@ -47,7 +47,7 @@
                   class="sub-image"
                   :src="item.goodsImages[1] || item.goodsImages[0]"
                 />
-                <div class="wish-state">
+                <!-- <div class="wish-state">
                   <i
                     v-if="inWish(item.id)"
                     class="iconfont iconxin"
@@ -58,7 +58,7 @@
                     class="iconfont iconkongxin"
                     @click.stop.prevent="setWish(item.id)"
                   ></i>
-                </div>
+                </div> -->
               </div>
               </nuxt-link>
             <div class="product-info">

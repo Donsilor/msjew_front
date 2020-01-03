@@ -11,7 +11,7 @@
           <div class="product-image">
             <img class="main-image" :src="item.images[0]" />
             <img class="sub-image" :src="item.images[1] || item.images[0]" />
-            <div class="wish-state">
+            <!-- <div class="wish-state">
               <i
                 v-if="inWish(item.id)"
                 class="iconfont iconxin"
@@ -22,7 +22,7 @@
                 class="iconfont iconkongxin"
                 @click.stop.prevent="setWish(item.id)"
               ></i>
-            </div>
+            </div> -->
           </div>
           <div class="product-info">
             <div class="product-price">
