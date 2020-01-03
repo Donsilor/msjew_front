@@ -149,9 +149,10 @@
             确认选择
           </button>
         </div>
+        <!--
         <div class="other-info">
           <ul class="operates">
-            <!-- <li class="item wish-state">
+             <li class="item wish-state">
               <i
                 v-if="inWish(info.id)"
                 class="iconfont iconxin active"
@@ -165,7 +166,7 @@
               <span>
                 {{ $t(`${lang}.wish`) }}
               </span>
-            </li> -->
+            </li> 
             <li class="item compared-state">
               <i
                 v-if="inCompared(info.id)"

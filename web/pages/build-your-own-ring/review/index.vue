@@ -350,7 +350,7 @@ export default {
         .post(`/web/goods/diamond/detail`, data1)
         .then(data => {
           var res = data.data;
-          // console.log(`11111111111111`,res )
+          console.log(`11111111111111`,res )
           this.block1.name = res.goodsName
           this.block1.sku = res.goodsCode
           this.block1.pick = res.goodsImages.split(`,`)[0] || ``
@@ -374,7 +374,7 @@ export default {
         .post(`/web/goods/style/detail`, data2)
         .then(data => {
           var res = data.data;
-          // console.log( `2222222222222222222`,res)
+          console.log( `2222222222222222222`,res)
           this.block2.name = res.goodsName
           this.block2.sku = res.goodsCode
           this.block2.pick = res.goodsImages.split(`,`)[0] || ``

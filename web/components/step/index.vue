@@ -192,7 +192,7 @@ export default {
       )
       if (!id2) {
         this.$axios
-          .post(`/wap/goods/goodsDetail`, data1)
+          .post(`/web/goods/style/detail`, data1)
           .then(res => {
             this.name1 = res.goodsName
             for (const i in res.simpleGoodsDetailsList) {
@@ -213,7 +213,7 @@ export default {
           })
       } else {
         await this.$axios
-          .post(`/wap/goods/goodsDetail`, data1)
+          .post(`/web/goods/style/detail`, data1)
           .then(res => {
             this.name1 = res.goodsName
             for (const i in res.simpleGoodsDetailsList) {
@@ -233,7 +233,7 @@ export default {
             }
           })
         await this.$axios
-          .post(`/wap/goods/goodsDetail`, data2)
+          .post(`/web/goods/diamond/detail`, data2)
           .then(res => {
             this.name2 = res.goodsName
             for (const i in res.simpleGoodsDetailsList) {
