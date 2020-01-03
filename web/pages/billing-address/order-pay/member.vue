@@ -1,5 +1,6 @@
 <template>
-  <div class="order">
+<div>
+  <div v-if="language === 'zh_CN'" class="order">
     <!--    步骤模块-->
     <div class="order-step">
       <div class="one-step">
@@ -71,7 +72,7 @@
           class="addr-block"
         >
           <div class="addr-title">
-            <div>{{ a.countryName }}{{ a.provinceName }}-{{ a.cityName }}</div>
+            <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
@@ -79,15 +80,718 @@
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
-            {{ a.countryName }}-{{ a.provinceName }}{{ a.cityName
-            }}{{ a.address }}
+           {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
+          }}{{ a.address_details }}
           </div>
           <div class="addr-user-phone">
-            <div>{{ a.userTelCode }}</div>
-            <div>{{ a.userTel }}</div>
+            <div>{{ a.mobile_code }}</div>
+            <div>{{ a.mobile }}</div>
           </div>
-          <div class="font-size-14 color-333">{{ a.zipCode }}</div>
-          <div class="font-size-14 color-333">{{ a.userMail }}</div>
+          <div class="font-size-14 color-333">{{ a.zip_code }}</div>
+          <div class="font-size-14 color-333">{{ a.email }}</div>
+          <div class="addr-board" @click="changeAddress(a)" />
+          <i
+            class="iconfont iconlajitong"
+            @click="
+              deleteAddressId = a.id
+              confirmBox = true
+            "
+          />
+          <div
+            class="addr-btn"
+            @click="
+              newAddress = true
+              changeAddressInfo(a)
+            "
+          >
+            {{ $t(`${lang}.change`) }}
+          </div>
+          <img
+            v-show="a === orderAddress"
+            src="../../../static/personal/account/address-bar.png"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!--    新增&修改地址模块-->
+    <div
+      :style="[
+        { height: newAddress ? '360px' : '0px' },
+        { padding: newAddress ? '20px 51px 0 36px' : '0' }
+      ]"
+      class="new-address"
+    >
+      <div class="new-address-title">
+        <div class="na-line" />
+        <div class="na-title">{{ $t(`${lang}.address`) }}</div>
+        <div class="na-little-word">{{ $t(`${lang}.mustInput`) }}</div>
+      </div>
+      <div class="new-address-input">
+        <!--        左边输入框-->
+        <div class="left-side">
+          <!--          姓名-->
+          <div class="input-line">
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
+            <div
+              :class="[
+                { 'border-change': borderChange === 1 },
+                { 'border-wrong': wrongInput.firstname }
+              ]"
+              class="input-box"
+            >
+              <input
+                v-model="addressData.firstname"
+                :class="{ 'wrong-input': wrongInput.firstname }"
+                type="text"
+                @focus="
+                  borderChange = 1
+                  wrongInput.firstname = false
+                "
+                @blur="borderChange = 0"
+              />
+              <div v-show="wrongInput.firstname" class="wrong-alert">
+                {{ $t(`${lang}.wrongInput`) }}
+              </div>
+            </div>
+          </div>
+
+          <!--          姓名-->
+          <div class="input-line">
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+            <div
+              :class="[
+                { 'border-change': borderChange === 2 },
+                { 'border-wrong': wrongInput.lastname }
+              ]"
+              class="input-box"
+            >
+              <input
+                v-model="addressData.lastname"
+                :class="{ 'wrong-input': wrongInput.lastname }"
+                type="text"
+                @focus="
+                  borderChange = 2
+                  wrongInput.lastname = false
+                "
+                @blur="borderChange = 0"
+              />
+              <div v-show="wrongInput.lastname" class="wrong-alert">
+                {{ $t(`${lang}.wrongInput`) }}
+              </div>
+            </div>
+          </div>
+
+          <!--          电话-->
+          <div class="input-line">
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
+            <div class="tel-special">
+              <div class="tel-area">
+                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
+                <select v-model="phoneNum">
+                  <option
+                    v-for="(p, index) in phoneJson"
+                    :key="index"
+                    :value="p"
+                    >{{  psn ? p.en :psn ? p.cn :p.zh }}{{ p.phone_code }}</option
+                  >
+                </select>
+                <i class="iconfont iconxiala" />
+              </div>
+              <div
+                :class="[
+                  { 'border-change': borderChange === 3 },
+                  { 'border-wrong': wrongInput.mobile }
+                ]"
+                class="input-box tel"
+              >
+                <input
+                  v-model="addressData.mobile"
+                  :class="{ 'wrong-input': wrongInput.mobile }"
+                  type="text"
+                  @focus="
+                    borderChange = 3
+                    wrongInput.mobile = false
+                  "
+                  @blur="borderChange = 0"
+                />
+                <div v-show="wrongInput.mobile" class="wrong-alert">
+                  {{ $t(`${lang}.wrongInput`) }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--          邮箱-->
+          <div class="input-line">
+            <div class="label">{{ $t(`${lang}.email`) }}</div>
+            <div
+              :class="[
+                { 'border-change': borderChange === 4 },
+                { 'border-wrong': wrongInput.email }
+              ]"
+              class="input-box"
+            >
+              <input
+                v-model="addressData.email"
+                :class="{ 'wrong-input': wrongInput.email }"
+                type="text"
+                @focus="
+                  borderChange = 4
+                  wrongInput.email = false
+                "
+                @blur="borderChange = 0"
+              />
+              <div v-show="wrongInput.email" class="wrong-alert">
+                {{ $t(`${lang}.wrongInput`) }}
+              </div>
+            </div>
+          </div>
+
+          <!--          确认邮箱-->
+          <!-- <div class="input-line">
+            <div class="label">*{{ $t(`${lang}.checkEmail`) }}</div>
+            <div
+              :class="[
+                { 'border-change': borderChange === 5 },
+                { 'border-wrong': wrongInput.checkEmail }
+              ]"
+              class="input-box"
+            >
+              <input
+                v-model="addressData.checkEmail"
+                :class="{ 'wrong-input': wrongInput.checkEmail }"
+                type="text"
+                @focus="
+                  borderChange = 5
+                  wrongInput.checkEmail = false
+                "
+                @blur="borderChange = 0"
+              />
+              <div v-show="wrongInput.checkEmail" class="wrong-alert">
+                {{ $t(`${lang}.wrongInputAgain`) }}
+              </div>
+            </div>
+          </div> -->
+        </div>
+
+        <!--        右边输入框-->
+        <div class="right-side">
+          <!--          国家-->
+          <div class="input-line">
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.country`) }}</div>
+            <div class="input-box">
+              <input :value="country.areaName" type="address" />
+              <select v-model="country" @change="getListTwo()">
+                <option
+                  v-for="(c, index) in countryList.slice(2, 3)"
+                  :key="index"
+                  :value="c"
+                  >{{ c.areaName }}</option
+                >
+              </select>
+              <i class="iconfont iconxiala" />
+            </div>
+          </div>
+
+          <!--          省份-->
+          <div class="input-line">
+            <div class="label">{{ $t(`${lang}.province`) }}</div>
+            <div class="input-box">
+              <input :value="province.areaName" type="address" />
+              <select v-model="province" @change="getListThree()">
+                <option
+                  v-for="(p, index) in provinceList"
+                  :key="index"
+                  :value="p"
+                  >{{ p.areaName }}</option
+                >
+              </select>
+              <i class="iconfont iconxiala" />
+            </div>
+          </div>
+
+          <!--          城市-->
+          <div class="input-line">
+            <div class="label">{{ $t(`${lang}.city`) }}</div>
+            <div class="input-box">
+              <input :value="city.areaName" type="address" />
+              <select v-model="city">
+                <option
+                  v-for="(c, index) in cityList"
+                  :key="index"
+                  :value="c"
+                  >{{ c.areaName }}</option
+                >
+              </select>
+              <i class="iconfont iconxiala" />
+            </div>
+          </div>
+
+          <!--          详细地址-->
+          <div class="input-line">
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.longAddress`) }}</div>
+            <div
+              :class="[
+                { 'border-change': borderChange === 6 },
+                { 'border-wrong': wrongInput.address_details }
+              ]"
+              class="input-box"
+            >
+              <textarea
+                v-model="addressData.address_details"
+                :class="{ 'wrong-input': wrongInput.address_details }"
+                @focus="
+                  borderChange = 6
+                  wrongInput.address_details = false
+                "
+                @blur="borderChange = 0"
+              />
+              <div v-show="wrongInput.address_details" class="wrong-alert">
+                {{ $t(`${lang}.wrongInput`) }}
+              </div>
+            </div>
+          </div>
+
+          <!--          邮编-->
+          <div class="input-line">
+            <div class="label">{{ $t(`${lang}.zipCode`) }}</div>
+            <div
+              :class="[
+                { 'border-change': borderChange === 7 },
+                { 'border-wrong': wrongInput.zip_code }
+              ]"
+              class="input-box"
+            >
+              <input
+                v-model="addressData.zip_code"
+                :class="{ 'wrong-input': wrongInput.zip_code }"
+                type="text"
+                @focus="
+                  borderChange = 7
+                  wrongInput.zip_code = false
+                "
+                @blur="borderChange = 0"
+              />
+              <div v-show="wrongInput.zip_code" class="wrong-alert">
+                {{ $t(`${lang}.wrongInput`) }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="new-address-btn"
+        @click="isEdit ? saveAddress() : createAddress()"
+      >
+        {{ $t(`${lang}.sure`)
+        }}<span v-show="!isEdit">{{ $t(`${lang}.add`) }}</span
+        ><span v-show="isEdit">{{ $t(`${lang}.edit`) }}</span>
+      </div>
+      <div
+        v-show="noWay"
+        class="close-new-address-btn"
+        @click="
+          newAddress = false
+          resetAddressInp()
+        "
+      >
+        {{ $t(`${lang}.seeLess`) }}
+      </div>
+    </div>
+
+    <!--    新增地址按钮-->
+    <div
+      v-show="!newAddress"
+      class="is-new-address"
+      @click="
+        newAddress = true
+        isEdit = false
+      "
+    >
+      + {{ $t(`${lang}.addAddress`) }}
+    </div>
+
+    <!--    购物车模块-->
+    <div class="cart-top-bar">
+      <span>{{ $t(`${lang}.info`) }}</span
+      ><span>{{ $t(`${lang}.number`) }}</span
+      ><span>{{ $t(`${lang}.price`) }}</span>
+    </div>
+    <div class="cart-goods">
+      <div v-for="(g, index) in good" :key="index">
+        <div v-if="g.groupType === null" class="finished">
+          <div class="cart-radio"></div>
+          <single :g="g" :options="false"></single>
+        </div>
+        <div v-if="g.groupType === 1" class="couple">
+          <div class="cart-radio"></div>
+          <double :g="g" :options="false"></double>
+        </div>
+        <div v-if="g.groupType === 2" class="customization">
+          <div class="cart-radio"></div>
+          <madeUp
+            :g="g"
+            :options="false"
+            :word="$t(`cart.customMade`)"
+          ></madeUp>
+        </div>
+      </div>
+    </div>
+
+    <!--    订单信息模块-->
+    <div class="order-info">
+      <div class="left-info">
+        <div class="new-address-title">
+          <div class="na-line" />
+          <div class="na-title">{{ $t(`${lang}.deliveryInformation`) }}</div>
+        </div>
+        <div v-if="good.length > 1" class="is-pack">
+          <div
+            v-show="!isAllPack"
+            class="free-check"
+            @click="isAllPack = !isAllPack"
+          />
+          <i
+            v-show="isAllPack"
+            class="iconfont icongou"
+            @click="isAllPack = !isAllPack"
+          />
+          <div>
+            <span>{{ $t(`${lang}.sendTogether`) }}</span
+            ><span>（{{ $t(`${lang}.chatBor`) }}）</span>
+          </div>
+        </div>
+        <div class="send-time">
+          <div class="send-left">
+            <div>{{ $t(`${lang}.sendTime`) }}</div>
+            <div>
+              <router-link to="/deliveryPolicy">{{
+                $t(`${lang}.checkDeliveryPolicy`)
+              }}</router-link>
+            </div>
+          </div>
+          <div class="send-right">
+            {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+          </div>
+        </div>
+        <!-- <div class="after-sale-email">
+          <div>{{ $t(`${lang}.showHouEmail`) }}</div>
+          <div>
+            <div
+              v-show="!isSameEmail"
+              class="free-check"
+              @click="isSameEmail = !isSameEmail"
+            />
+            <i
+              v-show="isSameEmail"
+              class="iconfont icongou"
+              @click="isSameEmail = !isSameEmail"
+            />
+            <span>{{ $t(`${lang}.sameTongAddress`) }}</span>
+          </div>
+        </div> -->
+        <!-- <div
+          :class="[
+            { 'border-change': borderChange === 8 },
+            { 'border-wrong': wrongInput.odMail }
+          ]"
+          class="after-sale-email-input"
+        >
+          <input
+            v-show="!isSameEmail"
+            v-model="orderEmail"
+            :class="{ 'wrong-input': wrongInput.odMail }"
+            type="text"
+            @focus="
+              borderChange = 8
+              wrongInput.odMail = false
+            "
+            @blur="borderChange = 0"
+          />
+          <input
+            v-show="isSameEmail"
+            v-model="orderAddress.userMail"
+            :class="{ 'wrong-input': wrongInput.odMail }"
+            type="text"
+            @focus="
+              borderChange = 8
+              wrongInput.odMail = false
+            "
+            @blur="borderChange = 0"
+          />
+        </div> -->
+        <div class="message">
+          <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
+          <textarea
+            v-model="remark"
+            :class="[
+              { 'border-change': borderChange === 9 },
+              { 'wrong-input': wrongInput.remark },
+              { 'border-wrong': wrongInput.remark }
+            ]"
+            @focus="
+              borderChange = 9
+              wrongInput.remark = false
+            "
+            @blur="borderChange = 0"
+          />
+        </div>
+      </div>
+      <div class="right-info">
+        <!-- <div v-show="!makeGay" class="coupon">
+          <div class="two-on-one">
+            <input
+              ref="too"
+              v-model="tooInp"
+              :placeholder="$t(`${lang}.tooInp`)"
+              :style="[{ opacity: isToo ? 0 : 1 }]"
+              type="text"
+              class="too-input"
+              @input="fuckYouM(`mother`)"
+            />
+            <i class="iconfont iconxiala" />
+            <div v-show="isToo" class="too-tell" @click="tooFocus">
+              {{ coupon.couponCode }}
+            </div>
+            <select
+              v-model="coupon"
+              class="too-select"
+              @click="
+                isToo = true
+                tooInp = ''
+                die = false
+                fuckYouM(`father`)
+              "
+              @change="fuckYouM(`father`)"
+            >
+              <option v-for="(c, index) in coupons" :key="index" :value="c"
+                >{{ c.couponCode }}
+                {{ c.discountType === 1 ? `${c.discountAmount}%` : `` }}
+                {{
+                  c.discountType === 2 ? `HKD${c.discountAmount}` : ``
+                }}</option
+              >
+            </select>
+          </div>
+          <div
+            :style="[
+              { backgroundColor: fuckYou ? 'rgba(170,138,123,1)' : '#eee' }
+            ]"
+            class="too-btn"
+            @click="checkCount"
+          >
+            {{ $t(`${lang}.exchange`) }}
+          </div>
+          <div v-show="die" class="too-die">{{ familyDie }}</div>
+          <div class="too-wenhao">
+            ?
+            <div class="too-gay">
+              <div>{{ $t(`${lang}.gay1`) }}</div>
+              <div>{{ $t(`${lang}.gay2`) }}</div>
+              <div>{{ $t(`${lang}.gay3`) }}</div>
+            </div>
+          </div>
+        </div> -->
+        <div class="new-address-title">
+          <div class="na-line" />
+          <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
+        </div>
+        <div class="price-detail">
+          <div class="detail-line">
+            <div>{{ $t(`${lang}.goodsNum`) }}</div>
+            <div class="hkd">{{ good.length }}</div>
+          </div>
+          <div class="detail-line">
+            <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
+            <div class="hkd">
+              {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
+            </div>
+          </div>
+          <div v-show="makeGay" class="detail-line">
+            <div>
+              *{{ $t(`${lang}.coupon`) }}:
+              <span style="color: red;">{{
+                isToo ? coupon.couponCode : tooInp
+              }}</span>
+              <span
+                style="color: red;text-decoration: underline;cursor: pointer;"
+                @click="removeCoupon"
+                >{{ $t(`${lang}.sc`) }}</span
+              >
+            </div>
+            <div class="hkd color-pink">
+              -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
+            </div>
+          </div>
+          <div class="detail-line">
+            <div>
+              <span>{{ $t(`${lang}.expressMoney`) }}</span>
+              <div class="question">
+                <a href="/freeShipping" target="_blank"><span>?</span></a>
+                <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
+              </div>
+            </div>
+            <div class="hkd color-gold">
+              +{{ $store.state.coin }} {{ formatMoney(tex.logisticsFee) }}
+            </div>
+          </div>
+          <div class="detail-line">
+            <div>
+              <span>{{ $t(`${lang}.tex`) }}</span>
+              <div class="question">
+                <a href="/internationalPolicy" target="_blank"
+                  ><span>?</span></a
+                >
+                <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
+              </div>
+            </div>
+            <div class="hkd color-gold">
+              +{{ $store.state.coin }} {{ formatMoney(tex.taxFee) }}
+            </div>
+          </div>
+          <div class="detail-line">
+            <div>
+              <span>{{ $t(`${lang}.insurance`) }}</span>
+              <div class="question">
+                <span>?</span>
+                <div class="answer">{{ $t(`${lang}.insuranceSay`) }}</div>
+              </div>
+            </div>
+            <div class="hkd color-gold">
+              +{{ $store.state.coin }} {{ formatMoney(tex.safeFee) }}
+            </div>
+          </div>
+          <div class="detail-line">
+            <div class="font-size-16 color-333">
+              {{ $t(`${lang}.totalMoney`) }}
+            </div>
+            <div class="hkd color-pink price-big">
+              {{ $store.state.coin }}
+              {{ formatMoney(tex.orderAmount || goodsPrice) }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-line" />
+      <div
+        :class="['buy-btn', { disabled: !canSubmit }]"
+        @click="createOrder()"
+      >
+        <span
+          >{{ $store.state.coin }}
+          {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+        >
+        <span>{{ $t(`${lang}.beiQin`) }}</span>
+      </div>
+    </div>
+
+    <message-box
+      v-show="confirmBox"
+      :title="$t(`${lang}.msgTitle1`)"
+      :message="$t(`${lang}.msgContent1`)"
+      type="two"
+      @cancel="confirmBox = false"
+      @sure="deleteAddress()"
+    />
+    <message-box
+      v-show="alertBox"
+      :message="wrongMsg"
+      :title="$t(`${lang}.msgTitle1`)"
+      type="one"
+      @done="alertBox = false"
+    />
+  </div>
+  <!-- 繁体 -->
+  <div v-else class="order">
+    <!--    步骤模块-->
+    <div class="order-step">
+      <div class="one-step">
+        <div class="step-img">
+          <img src="../../../static/order/step.png" alt="" />
+          <span>1</span>
+        </div>
+        <div class="step-arrow">
+          <img src="../../../static/order/arrow.png" alt="" />
+        </div>
+        <div class="step-title">{{ $t(`${lang}.ConfirmOrder`) }}</div>
+        <div class="step-desc">{{ $t(`${lang}.finishOrder`) }}</div>
+      </div>
+      <div class="one-step">
+        <div class="step-img">
+          <span>2</span>
+        </div>
+        <div class="step-arrow" />
+        <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
+        <div class="step-desc" />
+      </div>
+      <div class="one-step">
+        <div class="step-img">
+          <span>3</span>
+        </div>
+        <div class="step-arrow" />
+        <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
+        <div class="step-desc" />
+      </div>
+      <div class="step-line" />
+    </div>
+
+    <!--    用户名称和提示登陆-->
+    <div class="user-info">
+      <i class="iconfont iconrentou" />
+      <div>
+        {{ $t(`${lang}.darling`) }}{{ $store.state.userInfo.name
+        }}{{ $store.state.userInfo.firstname }}
+      </div>
+      <div
+        v-show="!addressMore && address.length !== 0"
+        @click="addressMore = true"
+      >
+        {{ $t(`${lang}.seeMore`) }}
+      </div>
+      <div
+        v-show="addressMore && address.length !== 0"
+        @click="addressMore = false"
+      >
+        {{ $t(`${lang}.seeLess`) }}
+      </div>
+    </div>
+
+    <!--    地址列表模块-->
+    <div
+      v-show="address.length !== 0"
+      :style="{
+        height: addressMore
+          ? `${270 * Math.ceil(address.length / 2)}px`
+          : '250px'
+      }"
+      class="address-box"
+    >
+      <div class="addr-blocks">
+        <div
+          v-for="(a, index) in address"
+          :key="index"
+          :class="{ 'addr-active': a === orderAddress }"
+          class="addr-block"
+        >
+          <div class="addr-title">
+            <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
+            <!--              <div>CHN</div>-->
+          </div>
+          <div class="addr-user">
+            <div>{{ a.firstname }}{{ a.lastname }}</div>
+            <div>（{{ $t(`${lang}.get`) }}）</div>
+          </div>
+          <div class="addr-address">
+           {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
+          }}{{ a.address_details }}
+          </div>
+          <div class="addr-user-phone">
+            <div>{{ a.mobile_code }}</div>
+            <div>{{ a.mobile }}</div>
+          </div>
+          <div class="font-size-14 color-333">{{ a.zip_code }}</div>
+          <div class="font-size-14 color-333">{{ a.email }}</div>
           <div class="addr-board" @click="changeAddress(a)" />
           <i
             class="iconfont iconlajitong"
@@ -418,7 +1122,7 @@
       ><span>{{ $t(`${lang}.price`) }}</span>
     </div>
     <div class="cart-goods">
-      <div >
+      <div v-for="(g, index) in good" :key="index">
         <div v-if="g.groupType === null" class="finished">
           <div class="cart-radio"></div>
           <single :g="g" :options="false"></single>
@@ -701,6 +1405,7 @@
       @done="alertBox = false"
     />
   </div>
+</div>
 </template>
 
 <script>
@@ -720,23 +1425,24 @@ export default {
   mixins: [Address],
   data() {
     return {
+      language:'',
       lang,
       pathTakeIds: this.$route.query.cartIds.split(','),
       canSubmit: false,
       address: [],
       addressMore: false,
-      orderAddress: { userMail: '' },
+      orderAddress: { email: '' },
       newAddress: false,
       isEdit: false,
       noWay: false,
       addressData: {
         lastname: '',
         firstname: '',
-        userTel: '',
-        userMail: '',
+        mobile: '',
+        email: '',
         checkEmail: '',
-        address: '',
-        zipCode: '',
+        address_details: '',
+        zip_code: '',
         odMail: '',
         remark: ''
       },
@@ -744,11 +1450,11 @@ export default {
       wrongInput: {
         firstname: false,
         lastname: false,
-        userTel: false,
-        userMail: false,
+        mobile: false,
+        email: false,
         checkEmail: false,
-        address: false,
-        zipCode: false,
+        address_details: false,
+        zip_code: false,
         odMail: false,
         remark: false
       },
@@ -785,8 +1491,10 @@ export default {
     pnN() {
       if (this.$store.state.language === 'en_US') {
         return this.phoneNum.en
-      }
-      return this.phoneNum.cn
+      }else if(this.$store.state.language === 'zh_TW'){
+        return this.phoneNum.cn
+      }else
+        return this.phoneNum.zh
     },
     psn() {
       return this.$store.state.language === 'en_US'
@@ -796,10 +1504,10 @@ export default {
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
-        .then(data => {          
+        .then(data => {   
+          // console.log("aaa",data)       
           this.good = data
           resolve()
-          // console.log(resolve)
         })
         .catch(err => {
           if (!err.response) {
@@ -827,21 +1535,35 @@ export default {
   },
   mounted() {
     this.getAddress();
+    this.language = this.getCookie('language')
   },
   methods: {
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
+    // 获取地址
     getAddress() {
       this.$axios
         .get('/web/member/address')
         .then(res => {
           console.log("获取地址",res)
-          this.address = []
-          for (const i in res) {
-            if (res[i].isDefault === 1) {
-              this.address.unshift(res[i])
-            } else {
-              this.address.push(res[i])
-            }
-          }
+          this.address = res.data
+
+          // for (const i in res) {
+          //   if (res[i].isDefault === 1) {
+          //     this.address.unshift(res[i])
+          //   } else {
+          //     this.address.push(res[i])
+          //   }
+          // }
+          console.log("地址",this.address)
           this.orderAddress = this.address[0]
           this.newAddress = false
           this.isEdit = false
@@ -902,54 +1624,52 @@ export default {
         return false
       }
       if (
-        !RegMobile.test(this.addressData.userTel) &&
-        !RegTelephone.test(this.addressData.userTel)
+        !RegMobile.test(this.addressData.mobile) &&
+        !RegTelephone.test(this.addressData.mobile)
       ) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
-        this.wrongInput.userTel = true
+        this.wrongInput.mobile = true
         return false
       }
-      if (!Email.test(this.addressData.userMail)) {
+      if (!Email.test(this.addressData.email)) {
         this.wrongMsg = this.$t(`${lang}.wip3`)
         this.alertBox = true
-        this.wrongInput.userMail = true
+        this.wrongInput.email = true
         return false
       }
-      if (this.addressData.userMail !== this.addressData.checkEmail) {
-        this.wrongMsg = this.$t(`${lang}.wip3`)
-        this.alertBox = true
-        this.wrongInput.checkEmail = true
-        return false
-      }
+      // if (this.addressData.email !== this.addressData.checkEmail) {
+      //   this.wrongMsg = this.$t(`${lang}.wip3`)
+      //   this.alertBox = true
+      //   this.wrongInput.checkEmail = true
+      //   return false
+      // }
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
         return false
       }
-      if (!this.addressData.address) {
+      if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
-        this.wrongInput.address = true
+        this.wrongInput.address_details = true
         return false
       }
-      const data = this.$helpers.transformRequest(
-        JSON.parse(
-          JSON.stringify({
+      const data = {
             firstname: this.addressData.firstname,
             lastname: this.addressData.lastname,
-            userTelCode: this.phoneNum.phone_code,
-            userTel: this.addressData.userTel,
-            userMail: this.addressData.userMail,
-            countryId: this.country.areaId,
-            provinceId: this.province.areaId,
-            cityId: this.city.areaId,
-            address: this.addressData.address,
-            zipCode: this.addressData.zipCode
-          })
-        ),
-        false
-      )
+            mobile_code: this.phoneNum.phone_code,
+            mobile: this.addressData.mobile,
+            email: this.addressData.email,
+            country_id: this.country.areaId,
+            province_id: this.province.areaId,
+            city_id: this.city.areaId,
+            address_details: this.addressData.address_details,
+            zip_code: this.addressData.zip_code
+          }
+      //   false
+      // )
+      console.log("电话",data)
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
@@ -973,16 +1693,17 @@ export default {
         id: data.id,
         firstname: data.firstname,
         lastname: data.lastname,
-        userTel: data.userTel,
-        userMail: data.userMail,
-        checkEmail: data.userMail,
-        countryId: data.countryId,
-        provinceId: data.provinceId,
-        cityId: data.cityId,
-        address: data.address,
-        zipCode: data.zipCode
+        mobile: data.mobile,
+        email: data.email,
+        checkEmail: data.email,
+        country_id: data.country_id,
+        province_id: data.province_id,
+        city_id: data.city_id,
+        address_details: data.address_details,
+        zip_code: data.zip_code
       }
-      const code = data.userTelCode.split('+').reverse()
+      console.log("code",this.addressData)
+      const code = data.mobile_code.split('+').reverse()
       JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
         if (o.phone_code === '+' + code[0]) {
           this.phoneNum = o
@@ -1098,7 +1819,7 @@ export default {
         this.orderAddress = {}
       }
       const data = this.$helpers.transformRequest(
-        JSON.parse(JSON.stringify({ addressId: this.deleteAddressId })),
+        JSON.parse(JSON.stringify({ id: this.deleteAddressId })),
         false
       )
       this.$axios
@@ -1272,24 +1993,25 @@ export default {
         // })
     },
     createOrder() {
-      if (!this.canSubmit) {
-        return
-      }
+      // console.log()
+      // if (!this.canSubmit) {
+      //   return
+      // }
       if (this.orderAddress.id === '') {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
       }
-      if (
-        !Email.test(
-          this.isSameEmail ? this.orderAddress.userMail : this.orderEmail
-        )
-      ) {
-        this.wrongMsg = this.$t(`${lang}.msg5`)
-        this.wrongInput.odMail = true
-        this.alertBox = true
-        return false
-      }
+      // if (
+      //   !Email.test(
+      //     this.isSameEmail ? this.orderAddress.userMail : this.orderEmail
+      //   )
+      // ) {
+      //   this.wrongMsg = this.$t(`${lang}.msg5`)
+      //   this.wrongInput.odMail = true
+      //   this.alertBox = true
+      //   return false
+      // }
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
@@ -1305,28 +2027,18 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
-      const data = this.$helpers.transformRequest(
-        JSON.parse(
-          JSON.stringify({
-            cartIds: arr.join(','),
-            allSend: this.isAllPack ? 1 : 2,
-            userRemark: this.remark,
-            productAmount: this.tex.productAmount,
-            orderAmount: this.tex.orderAmount,
-            userAddressId: this.orderAddress.id,
-            afterMail: this.isSameEmail
-              ? this.orderAddress.userMail
-              : this.orderEmail,
-            recvType: 1,
-            preferId: this.isToo ? this.coupon.couponId : '',
-            preferCode: this.isToo ? '' : this.tooInp
-          })
-        ),
-        false
-      )
+      console.log("arr",arr)
+      const data = {
+            cart_ids: arr.join(','),
+            buyer_remark: this.remark,
+            order_amount: this.tex.productAmount,
+            buyer_address_id: this.orderAddress.id,
+          }
+      console.log("pppp",data)
       this.$axios
-        .post('/web/order/createOrder', data)
+        .post('/web/member/order/add', data)
         .then(res => {
+          console.log("创建订单",res)
           this.$store.dispatch('getCart')
           this.$router.replace({
             path: '/payment-options',
@@ -1350,6 +2062,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.star{
+  color: #c28c8c;
+}
 div {
   box-sizing: border-box;
 }
