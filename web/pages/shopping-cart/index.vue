@@ -185,7 +185,7 @@ export default {
           this.good[i].tick = true
           this.totalPrice +=parseFloat(this.good[i].price) 
         }
-          console.log("price=====",this.totalPrice)
+          // console.log("price=====",this.totalPrice)
         this.tickNum = this.good.length
         this.totalNum = this.good.length
         this.allTick = !this.allTick
@@ -202,7 +202,7 @@ export default {
       this.good[i].tick = !this.good[i].tick
       this.good = JSON.parse(JSON.stringify(this.good))
       // console.log("ticknum=====",tickNum)
-        console.log("length",this.good.length)
+        // console.log("length",this.good.length)
       if (this.tickNum == this.good.length) {
         this.allTick = true
       } else {

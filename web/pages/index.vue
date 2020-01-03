@@ -499,8 +499,6 @@ export default {
     })
       .then(data => {
         var data = data.data;
-        console.log(data);
-        console.log(11111111)
         return {
           ad: data.advert,
           webSite: data.webSite,
