@@ -1,20 +1,44 @@
 <template>
   <div class="page-content">
     <section class="search-condition">
-      <!--      款式条件-->
-      <div class="condition-item condition-style">
+      <!--      女士戒指-->
+      <div class="condition-item condition-style condition-lady-style">
         <h2 class="condition-name">
-          {{ $t(`${lang}.style`) }}
+          {{ $t(`${lang}.woman`) }}
         </h2>
         <ul class="options">
           <li
-            v-for="(option, index) in styleOptions"
+            v-for="(option, index) in ladyStyleOptions"
             :key="index"
             :class="[
               'option-item',
               { active: option.id === searchConditions.style }
             ]"
-            @click="changeStyle(option.id)"
+            @click="changeStyle(54, option.id)"
+          >
+            <div class="item-icon">
+              <img :src="option.image" />
+            </div>
+            <div class="item-name">
+              {{ option.name }}
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!--      男士戒指-->
+      <div class="condition-item condition-style condition-man-style">
+        <h2 class="condition-name">
+          {{ $t(`${lang}.man`) }}
+        </h2>
+        <ul class="options">
+          <li
+            v-for="(option, index) in manStyleOptions"
+            :key="index"
+            :class="[
+              'option-item',
+              { active: option.id === searchConditions.style }
+            ]"
+            @click="changeStyle(55, option.id)"
           >
             <div class="item-icon">
               <img :src="option.image" />
@@ -137,7 +161,7 @@
     <section class="sort">
       <div class="sort-type">
         <div class="using-type">
-          <span class="type-name">{{ $t(`${lang}.sort`) }}</span>
+          <span class="type-name">排序</span>
           <i class="iconfont iconxiala"></i>
         </div>
         <ul class="type-list">
@@ -159,8 +183,31 @@
           :key="index"
           :class="['data-item', item.itemType]"
         >
+
+        <!--          广告数据-->
+          <div v-if="index === 3" class="ad-content">
+            <el-carousel height="480px">
+              <el-carousel-item>
+                <div class="ad-image">
+                  <!-- <img :src="ad.image[0]" /> -->
+                  <img src="https://bdd-cdn.leyouwangluo.com/adt/image1566006775171.png" />
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+          <div v-if="index === 8" class="ad-content">
+            <el-carousel height="480px">
+              <el-carousel-item>
+                <div class="ad-image">
+                  <!-- <img :src="ad.image[0]" /> -->
+                  <img src="https://bdd-cdn.leyouwangluo.com/adt/image1566006789377.png" />
+                </div>
+              </el-carousel-item>
+            </el-carousel>
+          </div>
+         
           <!--          商品数据-->
-          <div v-if="item.itemType === 'product'" class="product-content">
+          <div v-else class="product-content">
             <nuxt-link :to="item.to">
               <div class="product-image">
                 <img class="main-image" :src="item.goodsImages[0]" />
@@ -192,19 +239,7 @@
               </div>
             </div>
           </div>
-          <!--          广告数据-->
-          <div v-else class="ad-content">
-            <el-carousel height="480px">
-              <el-carousel-item
-                v-for="(ad, adIndex) in item.advertImgModelList"
-                :key="adIndex"
-              >
-                <div class="ad-image">
-                  <img :src="ad.image[0]" />
-                </div>
-              </el-carousel-item>
-            </el-carousel>
-          </div>
+          
         </div>
       </div>
       <div v-show="showNextPageButton" class="more-list-data">
@@ -227,19 +262,21 @@ import List from '@/mixins/list.js'
 import ListPage from '@/mixins/list-page.js'
 import Operate from '@/mixins/operate.js'
 const defaultPriceRange = [200, 300000]
-const lang = 'engagementRingsList'
+const lang = 'singleRingsList'
 export default {
   mixins: [List, ListPage, Operate],
   data() {
     return {
       lang,
       listUrl: '/web/goods/style/search',
-      page_size: 8,
-      styleOptions: this.CONDITION_INFO.style.rings,
+      page_size: 13,
+      manStyleOptions: this.CONDITION_INFO.style.manRings,
+      ladyStyleOptions: this.CONDITION_INFO.style.womanRings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
       fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
       searchConditions: {
+        styleSex: '', // 20-女戒款式， 10-男戒款式
         style: '',
         material: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
@@ -250,7 +287,12 @@ export default {
     activeStyleInfo() {
       let result = {}
       const id = this.searchConditions.style
-      const styleOptions = this.styleOptions
+      const styleOptions = this.searchConditions.styleSex
+        ? {
+            55: this.manStyleOptions,
+            54: this.ladyStyleOptions
+          }[this.searchConditions.styleSex]
+        : []
       if (id === '') {
         return result
       }
@@ -275,31 +317,43 @@ export default {
           valueType: 2,
           beginValue: conditions.priceRange[0],
           endValue: conditions.priceRange[1]
-        },
-        // 款式
-        {
-          type: 2,
-          paramName: 'engaged_style',
-          paramId:40,
-          valueType: 1,
-          configValues: [conditions.style || -1]
         }
       ]
+
+      if (!conditions.styleSex) {
+        params.push({
+          type: 2,
+          paramName: 'engaged_style',
+          valueType: 1,
+          configValues: [-2]
+        })
+      } else {
+        const styleSexMap = {
+          55: 'marry_style_man',
+          54: 'marry_style_wom'
+        }
+        params.push({
+          type: 2,
+          paramName: styleSexMap[conditions.styleSex],
+          valueType: 1,
+          configValues: conditions.style === '' ? [] : [conditions.style]
+        })
+      }
 
       if (conditions.material) {
         params.push({
           type: 3,
-          paramName: 'material',
           paramId:10,
+          paramName: 'material',
           valueType: 1,
           configValues: conditions.material === '' ? [] : [conditions.material]
         })
       }
 
       const data = {
-        advertType: 1,
+        advertType: 2,
         // 商品类别ID
-        categoryId: 12,
+        categoryId: 2,
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）
@@ -313,16 +367,6 @@ export default {
       // 已选商品id
       if (this.$route.query.selectGoodsId) {
         data.selectGoodsId = this.$route.query.selectGoodsId
-      }
-
-      // 已选商品id
-      if (this.$route.query.step) {
-        params.push({
-          type: 1,
-          paramName: 'goods_mod',
-          valueType: 1,
-          configValues: [1]
-        })
       }
       return data
     },
@@ -355,27 +399,13 @@ export default {
           adNum++
         } else {
           item.itemType = 'product'
-          item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
-          if (this.$route.query.step) {
-            item.to = {
-              path:
-                '/build-your-own-ring/setting-details/' +
-                item.id,
-              query: {
-                step: this.$route.query.step,
-                steps: this.$route.query.steps,
-                goodId: item.id,
-                ringType: 'engagement'
-              }
-            }
-          } else {
-            item.to = {
-              path:
-                '/ring/engagement-rings/' + item.id,
-              query: {
-                goodId: item.id,
-                ringType: 'engagement'
-              }
+          item.goodsImages = _this.imageStrToArray(item.goodsImages || '')        
+          item.to = {
+            // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+            path: '/ring/wedding-rings',
+            query: {
+              goodId: item.id,
+              ringType: 'single'
             }
           }
         }
@@ -384,7 +414,6 @@ export default {
     }
   },
   mounted() {
-    console.log(66666);
     const _this = this
     _this.$nextTick(() => {
       _this.research()
@@ -392,11 +421,18 @@ export default {
   },
   methods: {
     // 改变款式条件
-    changeStyle(value) {
+    changeStyle(sex, value) {
       const searchConditions = this.searchConditions
-      if (searchConditions.style === value) {
+      console.log('styleSex====>', searchConditions.styleSex, sex)
+      console.log('style====>', searchConditions.style, value)
+      if (
+        searchConditions.styleSex === sex &&
+        searchConditions.style === value
+      ) {
+        this.changeCondition('styleSex', '')
         this.changeCondition('style', '')
       } else {
+        this.changeCondition('styleSex', sex)
         this.changeCondition('style', value)
       }
     },
@@ -432,22 +468,27 @@ export default {
 }
 .search-condition {
   .condition-style {
-    width: 98%;
-    display: flex;
+    width: auto;
 
     .condition-name {
-      flex-grow: 0;
-      flex-shrink: 0;
       margin-right: 30px;
       font-size: 18px;
       font-family: Microsoft YaHei;
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
     }
-    .options {
-      flex-grow: 1;
-      flex-shrink: 1;
-    }
+  }
+
+  .condition-lady-style {
+    flex-grow: 2;
+    flex-shrink: 2;
+    width: auto;
+  }
+
+  .condition-man-style {
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: auto;
   }
 
   .condition-material {

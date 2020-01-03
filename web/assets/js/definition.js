@@ -613,42 +613,42 @@ export default language => {
     jewellery: [
       {
         id: 206,
-        type_id: 4,
+        categoryId: 4,
         name: lang.jewellery.necklaces,
         iconfont: 'iconJewelry-necklace',
         qualityName: 'necklace'
       },
       {
         id: 207,
-        type_id: 5,
+        categoryId: 5,
         name: lang.jewellery.pendants,
         iconfont: 'icondiamond-pendant',
         qualityName: 'pendant'
       },
       {
         id: 208,
-        type_id: 6,
+        categoryId: 6,
         name: lang.jewellery.earStud,
         iconfont: 'icondiamond-earring',
         qualityName: 'studEarring'
       },
       {
         id: 209,
-        type_id: 7,
+        categoryId: 7,
         name: lang.jewellery.earrings,
         iconfont: 'iconsp-dz1',
         qualityName: 'earring'
       },
       {
         id: 210,
-        type_id: 8,
+        categoryId: 8,
         name: lang.jewellery.bracelets,
         iconfont: 'iconJewelry-bracelet',
         qualityName: 'braceletLine'
       },
       {
         id: 211,
-        type_id: 9,
+        categoryId: 9,
         name: lang.jewellery.bangles,
         iconfont: 'iconshouhuan',
         qualityName: 'bracelet'

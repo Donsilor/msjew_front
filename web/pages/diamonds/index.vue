@@ -414,8 +414,8 @@ export default {
         {
           icon: 'iconstar-jt',
           name: this.$t(`${lang}.diyRing`),
-          type: 3
-        }
+          type: 12
+        },
         // {
         //   icon: 'icondiamond-pendant',
         //   name: this.$t(`${lang}.diyNecklace`),
@@ -427,9 +427,9 @@ export default {
         //   type: 5
         // }
       ],
-      activeCategoryType: 3,
+      activeCategoryType: 12,
       activeProductIndex: {
-        3: 0
+        12: 0
       }
     }
   },
@@ -442,14 +442,14 @@ export default {
     },
     categoryProduct() {
       const webSite = JSON.parse(
-        JSON.stringify(this.webSite && this.webSite[0] ? this.webSite[0] : [])
+        JSON.stringify(this.webSite  ? this.webSite : [])
       )
       const moduleGoods = webSite.moduleGoods || []
       const result = {}
 
       moduleGoods.forEach(item => {
         if (!result.hasOwnProperty(item.type)) {
-          result[item.type] = []
+          result[webSite.type] = []
         }
 
         const getToInfoByProductInfo = product => {
@@ -458,9 +458,9 @@ export default {
             query: {}
           }
 
-          if (product.type === 3) {
+          if (product.type === 12) {
             // 订婚戒指
-            result.path = `/ring/engagement-rings/${product.goodsName.replace(
+            result.path = `/ring/engagement-rings/${product.id.replace(
               /\//g,
               ''
             )}`
@@ -472,13 +472,14 @@ export default {
           return result
         }
 
-        const good = item.goods
+        const good = item
+        
         good.showType = webSite.showType
-        good.type = item.type
+        good.type = webSite.type
         good.goodsImages = this.imageStrToArray(good.goodsImages || '')
-        good.to = getToInfoByProductInfo(good)
-
-        result[item.type].push(good)
+        good.to = getToInfoByProductInfo(good)  
+        result[webSite.type].push(good)
+        console.log(333,result);
       })
       return result
     },
@@ -500,14 +501,15 @@ export default {
 
     return $axios({
       method: 'get',
-      url: '/web/Website/queryWebsiteModule',
+      url: '/web/goods/diamond/web-site',
       params: {
-        type: 4
+        // type: 4
       }
     })
-      .then(data => {
+      .then(res => {
+        var data = res.data;
         return {
-          seoInfo,
+          // seoInfo,
           ad: data.advert,
           webSite: data.webSite
         }

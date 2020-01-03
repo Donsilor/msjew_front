@@ -37,10 +37,10 @@
                 <img :src="imageStrToArray(block2.pick)" />
                 <div class="title-block">
                   <div class="title-block-name">
-                    {{ block1.name }}
+                    {{ block2.name }}
                   </div>
                   <div class="title-block-sku">
-                    {{ block1.sku }}
+                    {{ block2.sku }}
                   </div>
                 </div>
               </div>
@@ -261,10 +261,13 @@ export default {
           : steps.steps[0].goodsId
       return $axios({
         method: 'post',
-        url: '/web/goods/goodsDetail',
-        params: {
-          goodsId
+        url: '/web/goods/style/detail',
+        data: {
+           goodsId
         },
+        // params: {
+        //   goodsId
+        // },
         transformRequest: [
           function(data) {
             let ret = ''
@@ -286,7 +289,8 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
-        .then(data => {
+        .then(res => {
+          var data = res.data;
           return {
             info: data
           }
@@ -343,13 +347,14 @@ export default {
         false
       )
       await this.$axios
-        .post(`/wap/goods/goodsDetail`, data1)
-        .then(res => {
-          // console.log(res, `11111111111111`)
+        .post(`/web/goods/diamond/detail`, data1)
+        .then(data => {
+          var res = data.data;
+          console.log(`11111111111111`,res )
           this.block1.name = res.goodsName
           this.block1.sku = res.goodsCode
           this.block1.pick = res.goodsImages.split(`,`)[0] || ``
-          for (const i in res.simpleGoodsDetailsList) {
+          for (const i in res.details) {
             if (
               this.steps.steps[0].goodsDetailsId ===
               res.simpleGoodsDetailsList[i].id
@@ -366,9 +371,10 @@ export default {
           }
         })
       await this.$axios
-        .post(`/wap/goods/goodsDetail`, data2)
-        .then(res => {
-          // console.log(res, `2222222222222222222`)
+        .post(`/web/goods/style/detail`, data2)
+        .then(data => {
+          var res = data.data;
+          console.log( `2222222222222222222`,res)
           this.block2.name = res.goodsName
           this.block2.sku = res.goodsCode
           this.block2.pick = res.goodsImages.split(`,`)[0] || ``

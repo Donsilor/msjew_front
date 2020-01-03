@@ -12,7 +12,7 @@ export default {
         JSON.stringify(this.ad  ? this.ad : [])
       )
       
-
+      
       let result = []
       if (ad.advertImgModelList && ad.advertImgModelList.length > 0) {
         result = ad.advertImgModelList

@@ -20,8 +20,8 @@ export default {
     const getSingleRing = () => {
       return $axios({
         method: 'post',
-        url: '/web/goods/goodsDetail',
-        params: {
+        url: '/web/goods/style/detail',
+        data: {
           goodsId: route.query.goodId || ''
         },
         transformRequest: [
@@ -45,7 +45,8 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
-        .then(data => {
+        .then(res => {
+          var data = res.data;
           return {
             info: data,
             seoInfo: app.$getDetailSeoInfo(data)

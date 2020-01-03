@@ -21,7 +21,7 @@ export default {
       return $axios({
         method: 'post',
         url: '/web/goods/style/detail',
-        params: {
+        data: {
           goodsId: route.query.goodId || ''
         },
         transformRequest: [
@@ -45,7 +45,8 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
-        .then(data => {
+        .then(res => {
+          var data = res.data;
           return {
             info: data
           }

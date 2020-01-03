@@ -233,15 +233,15 @@
 import List from '@/mixins/list.js'
 import ListPage from '@/mixins/list-page.js'
 import Operate from '@/mixins/operate.js'
-const defaultPriceRange = [200, 300000]
+const defaultPriceRange = [0, 300000]
 const lang = 'jewelleryList'
 export default {
   mixins: [List, ListPage, Operate],
   data() {
     return {
       lang,
-      listUrl: '/web/goods/searchGoods',
-      page_size: 13,
+      listUrl: '/web/goods/style/search',
+      page_size: 16,
       jewelleryOptions: this.CONDITION_INFO.jewellery,
       quality: this.CONDITION_INFO.quality,
       defaultPriceRange,
@@ -257,7 +257,6 @@ export default {
     materialOptions() {
       const categoryId = this.searchConditions.categoryId
       const category = this.getCategoryById(categoryId)
-
       return this.quality[category.qualityName]
     },
     // 列表特定body参数
@@ -278,6 +277,7 @@ export default {
       if (conditions.materialIndex) {
         params.push({
           type: 3,
+          paramId:10,
           paramName: 'material',
           valueType: 1,
           configValues: [this.materialOptions[conditions.materialIndex].id]
@@ -337,10 +337,7 @@ export default {
           item.itemType = 'product'
           item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
           item.to = {
-            path: `/jewellery/${categoryName}/${item.goodsName.replace(
-              /\//g,
-              ''
-            )}`,
+            path: `/jewellery/${categoryName}/${item.id}`,
             query: {
               goodId: item.id
             }

@@ -149,7 +149,7 @@
             确认选择
           </button>
         </div>
-        <div class="other-info">
+        <!-- <div class="other-info">
           <ul class="operates">
             <li class="item wish-state">
               <i
@@ -182,7 +182,7 @@
               </span>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </section>
     <!--    &lt;!&ndash;    推荐商品&ndash;&gt;-->
@@ -341,6 +341,7 @@ export default {
           break
         }
       }
+      console.log(55,result);
       return result
     },
     startDj() {

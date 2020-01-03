@@ -119,7 +119,7 @@
             {{ $t(`${lang}.addCart`) }}
           </button>
         </div>
-        <div class="other-info">
+        <!-- <div class="other-info">
           <ul class="operates">
             <li class="item wish-state">
               <i
@@ -137,7 +137,7 @@
               </span>
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </section>
     <!--    推荐商品-->
@@ -289,7 +289,8 @@ export default {
       ringChecked: {
         materialIndex: 0,
         sizeIndex: 0
-      }
+      },
+      jewelleryOptions: this.CONDITION_INFO.jewellery,
     }
   },
   computed: {
@@ -348,6 +349,28 @@ export default {
     _this.$nextTick(() => {})
   },
   methods: {
+    getCategoryById(categoryId) {
+      const jewelleryOptions = this.jewelleryOptions
+      let result = null
+      for (let n = 0; n < jewelleryOptions.length; n++) {
+        if (jewelleryOptions[n].categoryId === categoryId) {
+          result = jewelleryOptions[n]
+          break
+        }
+      }
+      return result
+    },
+    getRecommendProductRouteInfo(product = {}) {
+      const category = this.getCategoryById(product.categoryId)
+      const categoryName = category && category.qualityName ? category.qualityName : 'other'
+      return {
+        path: `/jewellery/${categoryName}/${product.id}`,
+        query: {
+          goodId: product.id,
+          ringType: 'single'
+        }
+      }
+    },
     getProductInfo() {
       const _this = this
       const product = _this.info ? JSON.parse(JSON.stringify(_this.info)) : {}

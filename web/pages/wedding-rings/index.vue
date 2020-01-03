@@ -228,13 +228,13 @@ export default {
       if (webSite.moduleGoods && webSite.moduleGoods.length > 0) {
         const moduleGoods = []
         webSite.moduleGoods.forEach(item => {
-          const productInfo = item.ring
+          const productInfo = item
           // 处理商品图片路径
           productInfo.ringImg = this.imageStrToArray(productInfo.ringImg || '')
           // 增加打开方式
           productInfo.showType = webSite.showType
           productInfo.to = {
-            path: '/ring/wedding-rings/' + productInfo.name.replace(/\//g, ''),
+            path: '/ring/wedding-rings/' + productInfo.id.replace(/\//g, ''),
             query: {
               goodId: productInfo.id,
               ringType: 'pair'
@@ -258,7 +258,7 @@ export default {
       if (webSite.moduleGoods && webSite.moduleGoods.length > 0) {
         const moduleGoods = []
         webSite.moduleGoods.forEach(item => {
-          const productInfo = item.goods
+          const productInfo = item
           // 处理商品图片路径
           productInfo.goodsImages = this.imageStrToArray(
             productInfo.goodsImages || ''
@@ -267,7 +267,7 @@ export default {
           productInfo.showType = webSite.showType
           productInfo.to = {
             path:
-              '/ring/wedding-rings/' + productInfo.goodsName.replace(/\//g, ''),
+              '/ring/wedding-rings/' + productInfo.id.replace(/\//g, ''),
             query: {
               goodId: productInfo.id,
               ringType: 'single'
@@ -285,22 +285,22 @@ export default {
     recommendManRingInfo() {
       // const _this = this
       const webSite = JSON.parse(
-        JSON.stringify(this.webSite && this.webSite[2] ? this.webSite[2] : {})
+        JSON.stringify(this.webSite && this.webSite[2]  ? this.webSite[2] : {})
       )
 
       if (webSite.moduleGoods && webSite.moduleGoods.length > 0) {
         const moduleGoods = []
         webSite.moduleGoods.forEach(item => {
-          const productInfo = item.goods
+          const productInfo = item
           // 处理商品图片路径
           productInfo.goodsImages = this.imageStrToArray(
             productInfo.goodsImages || ''
           )
           // 增加打开方式
-          productInfo.showType = webSite.showType
+          // productInfo.showType = webSite.showType
           productInfo.to = {
             path:
-              '/ring/wedding-rings/' + productInfo.goodsName.replace(/\//g, ''),
+              '/ring/wedding-rings/' + productInfo.id.replace(/\//g, ''),
             query: {
               goodId: productInfo.id,
               ringType: 'single'
@@ -321,12 +321,13 @@ export default {
 
     return $axios({
       method: 'get',
-      url: '/web/Website/queryWebsiteModule',
+      url: '/web/goods/ring/web-site',
       params: {
         type: 3
       }
     })
-      .then(data => {
+      .then(res => {
+        var data = res.data
         return {
           seoInfo,
           ad: data.advert,

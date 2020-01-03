@@ -1328,7 +1328,8 @@ export default {
             item.to = {
               path:
                 '/build-your-own-ring/diamond-details/' +
-                item.id.replace(/\//g, ''),
+                // item.id.replace(/\//g, ''),
+                item.id,
               query: {
                 step: this.$route.query.step,
                 steps: this.$route.query.steps,

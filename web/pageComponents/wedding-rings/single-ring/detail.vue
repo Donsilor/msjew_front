@@ -384,7 +384,7 @@ export default {
   methods: {
     getRecommendProductRouteInfo(product = {}) {
       return {
-        path: `/ring/wedding-rings/${product.name.replace(/\//g, '')}`,
+        path: `/ring/wedding-rings/${product.id}`,
         query: {
           goodId: product.id,
           ringType: 'single'

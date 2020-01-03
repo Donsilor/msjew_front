@@ -207,7 +207,7 @@ import CategoryIndexPage from '@/mixins/category-index-page.js'
 const lang = 'engagementRing'
 export default {
   head() {
-    return this.seoInfo || {}
+    // return this.seoInfo || {}
   },
   mixins: [CategoryIndexPage],
   data() {
@@ -227,7 +227,7 @@ export default {
   computed: {
     recommendRings() {
       const webSite = JSON.parse(
-        JSON.stringify(this.webSite && this.webSite[0] ? this.webSite[0] : [])
+        JSON.stringify(this.webSite ? this.webSite : [])
       )
 
       const result = {
@@ -237,16 +237,14 @@ export default {
 
       if (webSite.moduleGoods) {
         webSite.moduleGoods.forEach(item => {
-          const product = item.goods
-          product.showType = webSite.showType
+          const product = item
+          // product.showType = webSite.showType
           product.goodsImages = this.imageStrToArray(product.goodsImages || '')
+          
           // 删除后端无故增加的一层嵌套
-          product.configAttriEntity = product.configAttriEntity[product.id]
+          // product.configAttriEntity = product.configAttriEntity[product.id]
           product.to = {
-            path: `/ring/engagement-rings/${product.goodsName.replace(
-              /\//g,
-              ''
-            )}`,
+            path: `/ring/engagement-rings/${product.id}`,
             query: {
               goodId: product.id,
               ringType: 'engagement'
@@ -261,18 +259,19 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(2)
+    // const seoInfo = await app.$getSeoInfo(2)
     console.log(33);
     return $axios({
       method: 'get',
-      url: '/web/Website/queryWebsiteModule',
+      url: '/web/goods/style/web-site',
       params: {
-        type: 2
+        // type: 2
       }
     })
-      .then(data => {
+      .then(res => {
+        var data = res.data;
         return {
-          seoInfo,
+          // seoInfo,
           ad: data.advert,
           webSite: data.webSite
         }
