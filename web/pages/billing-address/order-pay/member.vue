@@ -2072,10 +2072,10 @@ export default {
         })
     },
     createOrder() {
-      // console.log()
-      // if (!this.canSubmit) {
-      //   return
-      // }
+      console.log()
+      if (!this.canSubmit) {
+        return
+      }
       if (this.orderAddress.id === '') {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
@@ -2100,7 +2100,7 @@ export default {
       const data = {
         cart_ids: arr.join(','),
         buyer_remark: this.remark,
-        productAmount: this.tex.productAmount,
+        // productAmount: this.tex.productAmount,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
       }
@@ -2108,14 +2108,14 @@ export default {
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
-          console.log("创建订单",res)
+          console.log("创建订单",res.data.orderAmount)
           this.$store.dispatch('getCart')
           this.$router.replace({
             path: '/payment-options',
             query: {
-              orderId: res.orderId,
-              price: res.orderAmount,
-              coinType: res.coinType
+              orderId: res.data.orderId,
+              price: res.data.orderAmount,
+              coinType: res.data.coinType
             }
           })
         })
@@ -2164,24 +2164,23 @@ export default {
       }
       console.log("arr",arr)
       const data = {
-            cart_ids: arr.join(','),
-            buyer_remark: this.remark,
-            productAmount: this.tex.productAmount,
-            order_amount: this.tex.orderAmount,
-            buyer_address_id: this.orderAddress.id,
-          }
-      console.log("pppp",data)
+        cart_ids: arr.join(','),
+        buyer_remark: this.remark,
+        order_amount: this.tex.orderAmount,
+        buyer_address_id: this.orderAddress.id
+      }
+      // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
-          console.log("创建订单",res)
+          console.log("创建订单",res.data.orderAmount)
           this.$store.dispatch('getCart')
           this.$router.replace({
             path: '/payment-options',
             query: {
-              orderId: res.orderId,
-              price: res.orderAmount,
-              coinType: res.coinType
+              orderId: res.data.orderId,
+              price: res.data.orderAmount,
+              coinType: res.data.coinType
             }
           })
         })
