@@ -121,7 +121,8 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     prefix: serverUrl[RUNNING_ENV],
-    proxy: true
+    baseURL:serverUrl[RUNNING_ENV],
+    // proxy: true
   },
   /*proxy: [
     [

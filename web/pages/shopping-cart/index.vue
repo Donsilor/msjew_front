@@ -223,6 +223,9 @@ export default {
       this.$store
         .dispatch(`removeCart`, data)
         .then(data => {
+          this.totalNum=0
+          this.totalPrice=0
+          this.allTick=false  
           this.$successMessage(this.$t(`${lang}.deleteSuccess`))
           this.getList()
         })

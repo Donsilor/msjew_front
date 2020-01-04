@@ -417,7 +417,7 @@ export default {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
             }else if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(_this.email)){
-              this.$errorMessage(_this.$t(`${lang}.emailtips`))
+              this.$errorMessage(_this.$t(`${lang}.emailTips`))
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken',res.data.access_token)

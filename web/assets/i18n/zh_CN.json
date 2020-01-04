@@ -325,7 +325,7 @@
     "mailbox": "手机号*",
     "mailTips": "请输入正确的手机号*",
     "phoneTips": "请正确输入手机号",
-    "emailtips":"请正确输入邮箱",
+    "emailTips":"请正确输入邮箱",
     "password": "请输入密码*",
     "passwordTips": "请输入正确的密码",
     "repasswordTips": "请确认密码",

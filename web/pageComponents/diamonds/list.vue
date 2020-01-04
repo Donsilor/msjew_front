@@ -570,8 +570,8 @@
             :class="['item', { active: sortTypeIndex === index }]"
             @click="changeSort(index)"
           >
-            <span class="type-name">{{ type.name }}</span>
-            <img
+            <span v-if="index === 0" class="type-name">{{ type.name }}</span>
+            <img v-if="index === 0"
               :src="
                 sortTypeIndex === index
                   ? sortTypeOptions[sortType].image
@@ -686,13 +686,13 @@
             :key="index"
             :class="[
               'item',
-              'order-item',
+              { 'order-item': sortTypeItem.index === 0 },
               { active: sortTypeIndex === sortTypeItem.index }
             ]"
             @click="changeSort(sortTypeItem.index)"
           >
             <span>{{ sortTypeItem.name }}</span>
-            <img
+            <img v-if="sortTypeItem.index === 0"
               :src="
                 sortTypeIndex === sortTypeItem.index
                   ? sortTypeOptions[sortType].image
@@ -700,12 +700,12 @@
               "
             />
           </li>
-          <li class="item">
+          <!-- <li class="item">
             <span>{{ $t(`${lang}.addWish`) }}</span>
           </li>
           <li class="item">
             <span>{{ $t(`${lang}.compare`) }}</span>
-          </li>
+          </li> -->
           <li class="item">
             <span>{{ $t(`${lang}.viewDetail`) }}</span>
           </li>
@@ -725,7 +725,7 @@
           >
             <span>{{ property.value }}</span>
           </li>
-          <li class="item">
+          <!-- <li class="item">
             <div class="wish-state">
               <i
                 v-if="inWish(data.id)"
@@ -750,7 +750,7 @@
                 @click="setCompared(data.id)"
               ></i>
             </div>
-          </li>
+          </li> -->
           <li class="item">
             <nuxt-link :to="data.to">
               <button class="detail-button">
@@ -977,6 +977,7 @@ export default {
       const result = []
       const sortOptions = this.sortOptions
       const orderRule = ['carat', 'color', 'clarity', 'cut', 'sale_price']
+      // const orderRule = ['sale_price']
       orderRule.forEach(key => {
         for (let n = 0, length = sortOptions.length; n < length; n++) {
           if (sortOptions[n].key === key) {
@@ -995,6 +996,7 @@ export default {
       return result
     },
     usingSortInfo() {
+      console.log(99,this.sortType,this.sortTypeOptions);
       const sortOptions = JSON.parse(JSON.stringify(this.sortOptions))
       const index = this.sortTypeIndex
       const result = sortOptions[index]
@@ -1015,8 +1017,8 @@ export default {
     specialDatas() {
       const _this = this
       const conditions = this.searchConditions
-      console.log(conditions)
       const sortInfo = this.usingSortInfo
+      console.log(11,sortInfo,this.sortType)
       const params = [
         // 形状
         {
@@ -1299,30 +1301,30 @@ export default {
             }
           ]
           item.listProperties = [
-            // {
-            //   name: this.$t(`${lang}.shape`),
-            //   value: specsModels.shape || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.carat`),
-            //   value: specsModels.carat || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.color`),
-            //   value: specsModels.color || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.clarity`),
-            //   value: specsModels.clarity || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.cut`),
-            //   value: specsModels.cut || ''
-            // },
-            // {
-            //   name: this.$t(`${lang}.price`),
-            //   value: item.salePrice || '--'
-            // }
+            {
+              name: this.$t(`${lang}.shape`),
+              value: specsModels.shape || ''
+            },
+            {
+              name: this.$t(`${lang}.carat`),
+              value: specsModels.carat || ''
+            },
+            {
+              name: this.$t(`${lang}.color`),
+              value: specsModels.color || ''
+            },
+            {
+              name: this.$t(`${lang}.clarity`),
+              value: specsModels.clarity || ''
+            },
+            {
+              name: this.$t(`${lang}.cut`),
+              value: specsModels.cut || ''
+            },
+            {
+              name: this.$t(`${lang}.price`),
+              value: item.salePrice || '--'
+            }
           ]
           if (this.$route.query.step) {
             item.to = {
@@ -1466,21 +1468,30 @@ export default {
       }
     },
     // 改变排序方式，重新搜索
-    changeSort(index) {
+    changeSort(index) {     
       if (this.sortTypeIndex === index) {
         switch (this.sortType) {
           case 'down':
+            this.sortTypeIndex = index
             this.sortType = 'up'
             break
           case 'up':
-            this.sortTypeIndex = ''
+            this.sortTypeIndex = index
             this.sortType = 'default'
+            break
+          case 'default':
+            this.sortTypeIndex = index
+            this.sortType = 'down'
+            break
         }
       } else {
         this.sortTypeIndex = index
         this.sortType = 'down'
       }
-      this.research()
+      if(index === 0){
+        this.research()
+      }
+      
     },
     changeCondition(key, value) {
       const searchConditions = JSON.parse(JSON.stringify(this.searchConditions))

@@ -494,7 +494,7 @@ export default {
       method: 'get',
       url: '/web/home/index/web-site',
       params: {
-        type: 1
+        // type: 1,
       }
     })
       .then(data => {
