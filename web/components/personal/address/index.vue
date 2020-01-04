@@ -120,7 +120,7 @@
               <input :value="country.areaName" type="text" />
               <select v-model="country" @change="getListTwo">
                 <option
-                  v-for="(c, index) in countryList"
+                  v-for="(c, index) in countryList.slice(2,3)"
                   :key="index"
                   :value="c"
                   >{{ c.areaName }}</option
@@ -222,7 +222,7 @@
               <input :value="country.areaName" type="text" />
               <select v-model="country" @change="getListTwo">
                 <option
-                  v-for="(c, index) in countryList"
+                  v-for="(c, index) in countryList.slice(2,3)"
                   :key="index"
                   :value="c"
                   >{{ c.areaName }}</option
@@ -592,14 +592,14 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-          if(res.code==200){
+          // if(res.code==200){
             console.log('获取地址成功', res)
             this.address = res.data
             this.isDefault=res.data[0]
-          }
-          else {
-            throw new Error (res.message)
-          }    
+          // }
+          // else {
+          //   throw new Error (res.message)
+          // }    
           // console.log("地址",this.address)
           // this.isShow = false
           // this.isDel = false
@@ -651,12 +651,12 @@ export default {
       this.$axios
         .post('/web/member/address/edit',data)
         .then(res => {
-          if(res.code==200){
+          // if(res.code==200){
             console.log("修改默认地址成功",res)
             this.getData()
-          }else {
-            throw new Error (res.message)
-          }    
+          // }else {
+          //   throw new Error (res.message)
+          // }    
         })
         .catch(err => {
           if (!err.response) {

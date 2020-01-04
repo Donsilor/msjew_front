@@ -604,6 +604,7 @@ export default {
       _this.ajaxLoading = false
       _this.activeScheduleKey = nextScheduleKey
     },
+    // 中文
     async changeSchedule2(key) {
       const _this = this
       const nextScheduleKey = key

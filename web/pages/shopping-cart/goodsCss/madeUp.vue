@@ -108,8 +108,8 @@
         "
         class="good-btn"
       >
-        <div class="wish-img"></div>
-        <i class="iconfont iconlajitong" @click="deleteGood()" />
+        <!-- <div class="wish-img"></div>
+        <i class="iconfont iconlajitong" @click="deleteGood()" /> -->
       </div>
       <div v-show="options" v-else class="lose-btn">
         <div @click="searchSimilar()">

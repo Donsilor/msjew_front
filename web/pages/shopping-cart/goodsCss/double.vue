@@ -114,9 +114,9 @@
         "
         class="good-btn"
       >
-        <div class="wish-img">
-          <i class="iconfont" @click="addWish(g)">&#xe645;</i>
-        </div>
+        <!-- <div class="wish-img">
+          <i class="iconfont" @click="addWish(g)">&#xe645;</i> -->
+        <!-- </div> -->
         <div />
         <i class="iconfont iconlajitong" @click="deleteGood()" />
       </div>

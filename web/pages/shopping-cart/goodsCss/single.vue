@@ -66,9 +66,9 @@
         v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
         class="good-btn"
       >
-        <div class="wish-img">
+        <!-- <div class="wish-img">
           <i class="iconfont" @click="addWish(g)">&#xe645;</i>
-        </div>
+        </div> -->
         <div />
         <i class="iconfont iconlajitong" @click="deleteGood()" />
       </div>
