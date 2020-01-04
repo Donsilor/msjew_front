@@ -977,6 +977,8 @@
     "sort": "排序"
   },
   "detail": {
+    "goodsId": "商品ID",
+    "chooseSize": "獲取我的指圈號",
     "back": "返回上一步",
     "color": "成色",
     "size": "尺寸",

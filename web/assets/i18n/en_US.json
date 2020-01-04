@@ -975,6 +975,8 @@
     "sort": "Sort By"
   },
   "detail": {
+    "goodsId": "Product ID",
+    "chooseSize": "Get my finger size",
     "back": "Back",
     "color": "Color",
     "size": "size",

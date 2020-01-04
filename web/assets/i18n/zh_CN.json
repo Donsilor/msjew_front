@@ -896,7 +896,7 @@
     "customMade": "定制",
     "Invalid": "已失效",
     "allTick": "全选",
-    "delete": "刪除",
+    "delete": "删除",
     "cleanInvalidBaby": "清除失效商品",
     "checked": "件数",
     "total": "商品总额",
@@ -995,6 +995,8 @@
     "sort": "排序"
   },
   "detail": {
+    "goodsId": "商品ID",
+    "chooseSize": "获取我的指圈号",
     "back": "返回上一步",
     "color": "成色",
     "size": "尺寸",
@@ -2291,4 +2293,3 @@
     "msg8": "数据获取失败，请返回购物车重试！"
   }
 }
-

@@ -53,13 +53,13 @@
 
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        // justify-content: space-between;
 
         .left-properties {
-          width: 280px;
+          width: 240px;
         }
         .right-properties {
-          width: 340px;
+          width: 420px;
         }
 
         .left-properties,
@@ -77,8 +77,7 @@
             }
 
             .item-name {
-              width: 90px;
-              margin-right: 8px;
+              width: 50px;
               font-size: 14px;
               font-family: Microsoft YaHei;
               font-weight: 400;
@@ -205,19 +204,29 @@
                 font-family: Microsoft YaHei;
                 font-weight: 400;
                 color: rgba(102, 102, 102, 1);
+                margin: 0 6px 0 10px;
               }
 
               .prompt-icon {
                 cursor: pointer;
-                width: 18px;
-                height: 18px;
+                width: 16px;
+                height: 16px;
                 font-size: 14px;
                 background: #debeab;
-                border-radius: 9px;
+                border-radius: 50%;
                 color: #fff;
                 text-align: center;
                 display: inline-block;
+                line-height: 14px;
+                margin-left: 10px;
               }
+            }
+            .choose-size{
+                text-decoration: underline;
+                font-size: 12px;
+                color: #aa8a7b;
+                cursor: pointer;
+                margin-left: 6px;
             }
           }
         }
