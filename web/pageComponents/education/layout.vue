@@ -160,6 +160,8 @@ export default {
       overflow: hidden;
       box-sizing: border-box;
       background-color: #fafaf9;
+      border: 1px solid #d7d7d7;
+      height: 534px;
     }
 
     .list-content {
@@ -221,6 +223,7 @@ export default {
       padding-left: 50px;
       font-weight: normal;
       margin-left: 5px;
+      font-size: 100%;
       span {
         width: 2px;
         height: 2px;

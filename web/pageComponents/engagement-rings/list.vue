@@ -84,7 +84,7 @@
               </div>
             </div>
             <span class="to">
-              {{ $t(`${lang}.to`) }}
+              <!-- {{ $t(`${lang}.to`) }} -->
             </span>
             <div class="range-input max-range">
               <span class="coin">{{ $store.state.coin }}</span>
@@ -481,6 +481,7 @@ export default {
     }
 
     .operate-area {
+      margin-right: 70px;
       width: 400px;
     }
   }

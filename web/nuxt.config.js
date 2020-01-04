@@ -25,7 +25,11 @@ module.exports = {
   mode: 'universal',
   server: {
     port: 8318, // default: 3000
+<<<<<<< HEAD
     host: '192.168.1.183' // default: localhost 0.0.0.0
+=======
+    host: '0.0.0.0' // default: localhost 0.0.0.0
+>>>>>>> fdce073a2ad2f37b069af3b014e95782d6fef151
   },
   /*
    ** Headers of the page
@@ -122,7 +126,8 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
     prefix: serverUrl[RUNNING_ENV],
-    proxy: true
+    baseURL:serverUrl[RUNNING_ENV],
+    // proxy: true
   },
   /*proxy: [
     [

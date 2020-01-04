@@ -55,7 +55,7 @@ export default {
         const image = new Image()
         image.src = _this.banner[0].image
         image.onload = result => {
-          console.log(image.width, image.height)
+          // console.log(image.width, image.height)
           _this.bannerHeight =
             (document.body.clientWidth * image.height) / image.width
         }

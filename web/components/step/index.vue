@@ -33,8 +33,8 @@
               </div>
             </div>
           </div>
-          <div class="single-step-right-side">
-            <div class="single-step-right-side-icon">
+          <div class="single-step-right-side active">
+            <div class="single-step-right-side-icon" :class="">
               <i
                 v-if="steps.steps[0].ct === 1"
                 class="iconfont iconicon-zuanshi"
@@ -218,7 +218,7 @@ export default {
             }
           })
       } else {
-        
+
         if(ct === 1){
           var url1 = `/web/goods/diamond/detail`
           var url2 = `/web/goods/style/detail`
@@ -396,7 +396,7 @@ export default {
             text-align: center;
             line-height: 40px;
             color: #ffffff;
-            background: rgba(221, 176, 170, 1);
+            background: #d1d1d1;
             border-radius: 50%;
             margin-right: 22px;
             .iconfont {
@@ -434,5 +434,9 @@ export default {
       }
     }
   }
+}
+
+.single-step-right-side-icon.active{
+  border: 1px solid red;
 }
 </style>
