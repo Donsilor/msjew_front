@@ -1212,7 +1212,7 @@ export default {
 
       const data = {
         // 商品类别ID
-        categoryId: 1,
+        categoryId: 15,
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）
@@ -1489,7 +1489,8 @@ export default {
         this.sortType = 'down'
       }
       if(index === 0){
-        this.research()
+        this.research()  
+        
       }
       
     },
