@@ -2106,7 +2106,7 @@ export default {
       }
       console.log("pppp",data)
       this.$axios
-        .post('/web/member/order/add', data)
+        .post('/web/member/order/create', data)
         .then(res => {
           console.log("创建订单",res)
           this.$store.dispatch('getCart')
@@ -2172,7 +2172,7 @@ export default {
           }
       console.log("pppp",data)
       this.$axios
-        .post('/web/member/order/add', data)
+        .post('/web/member/order/create', data)
         .then(res => {
           console.log("创建订单",res)
           this.$store.dispatch('getCart')
