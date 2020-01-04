@@ -141,13 +141,8 @@
       "choose": "选择",
       "check": "查看",
       "edit": "修改",
-<<<<<<< HEAD
       "cart": "购物车",
       "diamond": "钻石",
-=======
-      "cart": "定製",
-      "diamond": "鑽石",
->>>>>>> fdce073a2ad2f37b069af3b014e95782d6fef151
       "ring": "戒托"
     },
     "eftGuide": {
