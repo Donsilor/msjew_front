@@ -631,7 +631,7 @@
                   <div
                     class="right-item fixed-flex-item row-flex align-item-center"
                   >
-                    <div class="compared-state">
+                    <!-- <div class="compared-state">
                       <i
                         :class="[
                           'iconfont',
@@ -640,7 +640,7 @@
                         ]"
                         @click="setCompared(item.id)"
                       ></i>
-                    </div>
+                    </div> -->
                     <!-- <div class="wish-state">
                       <i
                         v-if="inWish(item.id)"
@@ -903,22 +903,22 @@ export default {
           key: 'sale_price',
           name: this.$t(`${lang}.price`)
         },
-        // {
-        //   key: 'carat',
-        //   name: this.$t(`${lang}.carat`)
-        // },
-        // {
-        //   key: 'clarity',
-        //   name: this.$t(`${lang}.clarity`)
-        // },
-        // {
-        //   key: 'cut',
-        //   name: this.$t(`${lang}.cut`)
-        // },
-        // {
-        //   key: 'color',
-        //   name: this.$t(`${lang}.color`)
-        // }
+        {
+          key: 'carat',
+          name: this.$t(`${lang}.carat`)
+        },
+        {
+          key: 'clarity',
+          name: this.$t(`${lang}.clarity`)
+        },
+        {
+          key: 'cut',
+          name: this.$t(`${lang}.cut`)
+        },
+        {
+          key: 'color',
+          name: this.$t(`${lang}.color`)
+        }
       ],
       sortTypeOptions: {
         default: {

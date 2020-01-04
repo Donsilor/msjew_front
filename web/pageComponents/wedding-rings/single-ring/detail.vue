@@ -120,7 +120,7 @@
           </span>
         </div>
         <div class="button-group">
-          <blank v-if="!$route.query.isBack"> 
+          <blank v-if="!$route.query.isBack">
             <nuxt-link
               v-if="productInfo.goodsMod === 1 && (parseInt($route.query.step) !== 2 && $route.query.step) && canAddCart"
               :to="startDj"
@@ -140,7 +140,7 @@
           <blank v-if="
             (parseInt($route.query.step) !== 1 && $route.query.step) ||
               $route.query.isBack
-          "> 
+          ">
             <nuxt-link v-if="canAddCart" :to="finishDj">
               <button :class="['add-to-cart', { active: canAddCart }]">
                 确认选择
@@ -151,7 +151,7 @@
             </button>
           </blank>
         </div>
-        
+
         <!-- <div class="other-info">
           <ul class="operates">
             <li class="item wish-state">
@@ -301,9 +301,9 @@ export default {
       const _this = this
       const productInfo = _this.productInfo
       const details = productInfo.details
-      
+
       const ringChecked = _this.ringChecked
-     
+
       const material =
         productInfo.materials.length > 0 &&
         productInfo.materials[ringChecked.materialIndex]
@@ -315,7 +315,7 @@ export default {
           : null
 
       let result = null
-      
+
       for (let n = 0, length = details.length; n < length; n++) {
         const item = details[n]
         if (item.material === material && item.size === size) {
@@ -323,7 +323,7 @@ export default {
           break
         }
       }
-      
+
       return result
     },
     startDj() {
@@ -394,7 +394,7 @@ export default {
     getRingInfo() {
       const _this = this
       const product = _this.info ? JSON.parse(JSON.stringify(_this.info)) : {}
-      
+
       return Object.assign({}, product, {
         targetUser: (() => {
           const specs = product.specs || []
@@ -410,7 +410,7 @@ export default {
         sizes: product.sizes || [],
         specs: product.specs || [],
         details: product.details || [],
-        goodsServicesJsons: (product.goodsServicesJsons || []).map(item => {         
+        goodsServicesJsons: (product.goodsServicesJsons || []).map(item => {
           item.img = _this.imageStrToArray(item.img)
           return item
         })
@@ -458,8 +458,8 @@ export default {
       console.log(queryId, `qid==============`, queryStep)
       const ringChecked = JSON.parse(JSON.stringify(this.ringChecked))
       const productInfo = this.productInfo
-      const details = productInfo.details  
-      
+      const details = productInfo.details
+
       for (let n = 0, length = details.length; n < length; n++) {
         const detailItem = details[n]
         if (detailItem.id === queryId) {
