@@ -542,7 +542,7 @@ export default {
     } else {
       // 未登录的操作
       // console.log('未登录的操作')
-      // request = dispatch('getLocalCartAmount')
+      request = dispatch('getLocalCartAmount')
       this.$router.push(`/login`)
     }
     request
@@ -999,7 +999,7 @@ export default {
     // console.log('getOnlineWishAmount=====>')
     return this.$axios({
       method: 'get',
-      url: `/web/collection/count`,
+      // url: `/web/collection/count`,
       params: {
         type: 1
       }
@@ -1435,7 +1435,7 @@ export default {
     // console.log('getOnlineComparedAmount=====>')
     return this.$axios({
       method: 'get',
-      url: `/web/collection/count`,
+      // url: `/web/collection/count`,
       params: {
         type: 2
       }
