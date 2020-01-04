@@ -2223,7 +2223,7 @@
     "firstName": "名",
     "wrongInput": "输入有误",
     "telephone": "电话",
-    "email": "电邮地址",
+    "email": "邮箱",
     "checkEmail": "确认电邮地址",
     "wrongInputAgain": "两次输入不一致",
     "country": "国家/地区",

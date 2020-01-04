@@ -681,7 +681,7 @@ input::placeholder{
 }
 
 .getCode:disabled {
-  background-color: #999999;
+  // background-color: #999999;
 }
 .margin-bottom-29 {
   margin-bottom: 29px;

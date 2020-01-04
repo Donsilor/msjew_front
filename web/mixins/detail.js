@@ -70,7 +70,7 @@ export default {
         {
           goods_num: 1,
           goodsDetailsId: _this.simpleDetail.id,
-          goods_id:  _this.simpleDetail.id,
+          goods_id: _this.simpleDetail.id,
           group_id: null,
           group_type: null,
           serviceId: 0,

@@ -241,7 +241,7 @@ export default {
 
     },
     focusEvent1(e){
-      console.log("zzzz")
+      // console.log("zzzz")
     },
     blurEvent1(e){
 
@@ -281,7 +281,7 @@ export default {
      
     },
     focusEvent3(e){
-      console.log("zzzz")
+      // console.log("zzzz")
     },
     blurEvent3(e){
 
@@ -412,12 +412,10 @@ export default {
         })
         .then(res => {
           console.log("登陆结果",res)
-          if (res.code==200){
+          // if (res.code==200){
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
-            }else if(!/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(_this.email)){
-              this.$errorMessage(_this.$t(`${lang}.emailTips`))
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken',res.data.access_token)
@@ -437,9 +435,9 @@ export default {
               }, 0)
             }
 
-          } else {
-            throw new Error (res.message)
-          }
+          // } else {
+          //   throw new Error (res.message)
+          // }
         })
         .catch(err => {
           //console.error(err)

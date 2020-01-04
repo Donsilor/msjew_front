@@ -239,7 +239,7 @@ export default {
         return good
       })
       sendData = sendData.concat(data)
-      // console.log("购物车",sendData)
+      console.log("购物车",sendData)
     })
 
     return this.$axios({
@@ -264,7 +264,7 @@ export default {
   },
   // 加入到购物车
   addCart({ $axios, state, getters, commit, dispatch }, goods = []) {
-    console.log("lalal",goods)
+    // console.log("lalal",goods)
     let data = null
     if (Array.isArray(goods)) {
       data = goods
@@ -286,7 +286,11 @@ export default {
     } else {
       // 未登录的操作
       // console.log('未登录的操作')
+      // this.$errorMessage("请先登录！")
+      // return Promise.reject(err)
       request = dispatch('addLocalCart', data)
+      // alert("请先登录")
+      // this.$router.push(`/login`)
     }
     request
       .then(data => {
@@ -321,8 +325,6 @@ export default {
       }
     })
       .then(data => {
-        // this.getOnlineCart()
-        // this.getCart()
         console.log("添加购物车",data)
         // 重新请求购物车数量（和购物车列表）
         return Promise.resolve('success')
@@ -502,7 +504,7 @@ export default {
     dispatch('getCartAmount')
     request
       .then(data => {
-        console.log("本地",data)
+        // console.log("本地",data)
         commit('setCart', data)
         return Promise.resolve(data)
       })
@@ -518,7 +520,7 @@ export default {
       method: 'get',
       url:'/web/member/cart'
     }).then(res => {
-        console.log("购物车列表",res.data)
+        // console.log("购物车列表",res.data)
         return makeCartGoodGroups(res.data)
       })
       .catch(err => {
@@ -540,7 +542,8 @@ export default {
     } else {
       // 未登录的操作
       // console.log('未登录的操作')
-      request = dispatch('getLocalCartAmount')
+      // request = dispatch('getLocalCartAmount')
+      this.$router.push(`/login`)
     }
     request
       .then(data => {
@@ -614,7 +617,7 @@ export default {
     console.log('sendData===========>', sendData)
 
     return this.$axios({
-      method: 'post',
+      method: 'get',
       url: '/web/member/cart',
       data: sendData
     })

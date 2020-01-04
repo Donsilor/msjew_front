@@ -8,7 +8,7 @@ const STATIC_PATH = process.env.STATIC_PATH || ''
 console.log('RUNNING_ENV=====>', RUNNING_ENV)
 
 const serverUrl = {
-  dev: 'http://www.bddmall.com/api',
+  dev: 'http://www.bddmall.com/api',   //http://api.bddco.com/     http://www.bddmall.com/api
   test: 'http://192.168.2.111/bdd-web',
   pro: 'http://bdd.bddia.com/api'
 }
@@ -25,7 +25,7 @@ module.exports = {
   mode: 'universal',
   server: {
     port: 8318, // default: 3000
-    host: '192.168.1.123' // default: localhost 0.0.0.0
+    host: '192.168.1.183' // default: localhost 0.0.0.0
   },
   /*
    ** Headers of the page
@@ -84,6 +84,7 @@ module.exports = {
   plugins: [
     { src: '@/plugins/basics', ssr: true },
     { src: '@/plugins/axios', ssr: true },
+    { src: '@/plugins/login', ssr: true },
     { src: '@/plugins/init-helpers', ssr: false },
     { src: '@/plugins/ssr-helpers', ssr: true },
     { src: '@/plugins/vue-components', ssr: true },

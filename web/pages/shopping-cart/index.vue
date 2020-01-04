@@ -270,13 +270,11 @@ export default {
     goOrder() {
       const data = []
       for (const i in this.good) {
-        // console.log(this.good[i])
         if (this.good[i].tick) {
           data.push(this.good[i].id)
         }
       }
       if (data.length !== this.tickNum) return
-      // console.log(data)
       const cartIds = data.join(',')
       this.$router.push({
         path: `/billing-address`,

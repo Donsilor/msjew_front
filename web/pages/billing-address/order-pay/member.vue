@@ -1,5 +1,6 @@
 <template>
 <div>
+  <!-- 中文简体 -->
   <div v-if="language === 'zh_CN'" class="order">
     <!--    步骤模块-->
     <div class="order-step">
@@ -190,10 +191,10 @@
                 <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
                 <select v-model="phoneNum">
                   <option
-                    v-for="(p, index) in phoneJson"
+                    v-for="(p, index) in phoneJson.slice(2,2)"
                     :key="index"
                     :value="p"
-                    >{{  psn ? p.en :psn ? p.cn :p.zh }}{{ p.phone_code }}</option
+                    >{{ psn ? p.en :psn ? p.cn :p.zh }}</option
                   >
                 </select>
                 <i class="iconfont iconxiala" />
@@ -234,17 +235,17 @@
             >
               <input
                 v-model="addressData.email"
-                :class="{ 'wrong-input': wrongInput.email }"
+               
                 type="text"
                 @focus="
                   borderChange = 4
-                  wrongInput.email = false
+                 
                 "
                 @blur="borderChange = 0"
               />
-              <div v-show="wrongInput.email" class="wrong-alert">
+              <!-- <div v-show="wrongInput.email" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
-              </div>
+              </div> -->
             </div>
           </div>
 
@@ -466,7 +467,7 @@
           <div class="send-left">
             <div>{{ $t(`${lang}.sendTime`) }}</div>
             <div>
-              <router-link to="/deliveryPolicy">{{
+              <router-link to="/policies/shipping">{{
                 $t(`${lang}.checkDeliveryPolicy`)
               }}</router-link>
             </div>
@@ -896,7 +897,7 @@
                     v-for="(p, index) in phoneJson"
                     :key="index"
                     :value="p"
-                    >{{ psn ? p.en : p.cn }}{{ p.phone_code }}</option
+                    >{{ psn ? p.en :psn ? p.cn :p.zh }}{{ p.phone_code }}</option
                   >
                 </select>
                 <i class="iconfont iconxiala" />
@@ -1085,7 +1086,7 @@
       </div>
       <div
         class="new-address-btn"
-        @click="isEdit ? saveAddress() : createAddress()"
+        @click="isEdit ? saveAddress() : createAddress1()"
       >
         {{ $t(`${lang}.sure`)
         }}<span v-show="!isEdit">{{ $t(`${lang}.add`) }}</span
@@ -1379,7 +1380,7 @@
       <div class="info-line" />
       <div
         :class="['buy-btn', { disabled: !canSubmit }]"
-        @click="createOrder()"
+        @click="createOrder1()"
       >
         <span
           >{{ $store.state.coin }}
@@ -1495,6 +1496,7 @@ export default {
         return this.phoneNum.cn
       }else
         return this.phoneNum.zh
+        // console.log("代码",this.phoneNum.zh)
     },
     psn() {
       return this.$store.state.language === 'en_US'
@@ -1504,11 +1506,9 @@ export default {
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
-        .then(res => {   
-          // console.log("aaa",data)       
+        .then(res => {        
           this.good = res
           resolve()
-          //  this.getTex()
         })
         .catch(err => {
           if (!err.response) {
@@ -1522,7 +1522,6 @@ export default {
     promise
       .then(() => {
         this.getAddress()
-        // this.getTex()
       })
       .then(() => {
         // this.getCouponList()
@@ -1538,7 +1537,6 @@ export default {
   mounted() {
     // this.getAddress();
     this.language = this.getCookie('language')
-    
   },
   methods: {
     // 查询cookie
@@ -1583,7 +1581,7 @@ export default {
         })
     },
     resetAddressInp() {
-      this.phoneNum = this.phoneJson[0]
+      // this.phoneNum = this.phoneJson[0]
       this.addressData = {
         lastname: '',
         firstname: '',
@@ -1610,10 +1608,88 @@ export default {
     },
     changeAddress(obj) {
       this.orderAddress = obj
-      // this.getTex()
+      console.log(this.orderAddress)
+      this.getTex()
     },
     createAddress() {
-      console.log('create')
+      // console.log('create')
+      if (this.addressData.firstname === '') {
+        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.alertBox = true
+        this.wrongInput.firstname = true
+        return false
+      }
+      if (this.addressData.lastname === '') {
+        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.alertBox = true
+        this.wrongInput.lastname = true
+        return false
+      }
+      if (
+        !RegMobile.test(this.addressData.mobile) &&
+        !RegTelephone.test(this.addressData.mobile)
+      ) {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
+        return false
+      }
+      // if (!Email.test(this.addressData.email)) {
+      //   this.wrongMsg = this.$t(`${lang}.wip3`)
+      //   this.alertBox = true
+      //   this.wrongInput.email = true
+      //   return false
+      // }
+      // if (this.addressData.email !== this.addressData.checkEmail) {
+      //   this.wrongMsg = this.$t(`${lang}.wip3`)
+      //   this.alertBox = true
+      //   this.wrongInput.checkEmail = true
+      //   return false
+      // }
+      if (!this.country.areaId) {
+        this.wrongMsg = this.$t(`${lang}.wip4`)
+        this.alertBox = true
+        return false
+      }
+      if (!this.addressData.address_details) {
+        this.wrongMsg = this.$t(`${lang}.wip5`)
+        this.alertBox = true
+        this.wrongInput.address_details = true
+        return false
+      }
+      const data = {
+            firstname: this.addressData.firstname,
+            lastname: this.addressData.lastname,
+            mobile_code: this.phoneNum.phone_code,
+            mobile: this.addressData.mobile,
+            email: this.addressData.email,
+            country_id: this.country.areaId,
+            province_id: this.province.areaId,
+            city_id: this.city.areaId,
+            address_details: this.addressData.address_details,
+            zip_code: this.addressData.zip_code
+          }
+      //   false
+      // )
+      console.log("电话",data)
+      this.$axios
+        .post('/web/member/address/add', data)
+        .then(res => {
+          console.log("添加地址",res)
+          this.getAddress()
+          this.resetAddressInp()
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
+    },
+    // 繁体
+    createAddress1() {
+      // console.log('create')
       if (this.addressData.firstname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
@@ -1996,6 +2072,62 @@ export default {
         })
     },
     createOrder() {
+      // console.log()
+      // if (!this.canSubmit) {
+      //   return
+      // }
+      if (this.orderAddress.id === '') {
+        this.wrongMsg = this.$t(`${lang}.msg4`)
+        this.alertBox = true
+        return false
+      }
+      if (this.remark.length >= 300) {
+        this.wrongMsg = this.$t(`${lang}.msg6`)
+        this.wrongInput.remark = true
+        this.alertBox = true
+        return false
+      }
+      const arr = []
+      for (const i in this.good) {
+        if (this.good[i].groupType === null) {
+          arr.push(this.good[i].data[0].id)
+        } else {
+          arr.push(this.good[i].data[0].id)
+          arr.push(this.good[i].data[1].id)
+        }
+      }
+      console.log("arr",arr)
+      const data = {
+        cart_ids: arr.join(','),
+        buyer_remark: this.remark,
+        productAmount: this.tex.productAmount,
+        order_amount: this.tex.orderAmount,
+        buyer_address_id: this.orderAddress.id,
+      }
+      console.log("pppp",data)
+      this.$axios
+        .post('/web/member/order/add', data)
+        .then(res => {
+          console.log("创建订单",res)
+          this.$store.dispatch('getCart')
+          this.$router.replace({
+            path: '/payment-options',
+            query: {
+              orderId: res.orderId,
+              price: res.orderAmount,
+              coinType: res.coinType
+            }
+          })
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
+    },
+    createOrder1() {
       console.log()
       if (!this.canSubmit) {
         return
@@ -2005,16 +2137,16 @@ export default {
         this.alertBox = true
         return false
       }
-      // if (
-      //   !Email.test(
-      //     this.isSameEmail ? this.orderAddress.email : this.orderEmail
-      //   )
-      // ) {
-      //   this.wrongMsg = this.$t(`${lang}.msg5`)
-      //   this.wrongInput.odMail = true
-      //   this.alertBox = true
-      //   return false
-      // }
+      if (
+        !Email.test(
+          this.isSameEmail ? this.orderAddress.email : this.orderEmail
+        )
+      ) {
+        this.wrongMsg = this.$t(`${lang}.msg5`)
+        this.wrongInput.odMail = true
+        this.alertBox = true
+        return false
+      }
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true

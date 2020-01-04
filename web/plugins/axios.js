@@ -21,6 +21,7 @@ export default function({ $axios, store }) {
     // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     return config
   })
+  
   $axios.onResponse(res => {
     const data = res.data || {}
     // console.log("data",res.data)
@@ -36,7 +37,7 @@ export default function({ $axios, store }) {
         if (data.code == 401) {
           console.log('is 401')
           store.dispatch('logout')
-          // this.$router.push('/login')
+          this.$router.push('/login')
           // window.location.href = '/login'
           return
         }
