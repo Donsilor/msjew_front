@@ -41,23 +41,23 @@
       </div>
       <div class="pay-blocks">
         <div
-          :class="{ 'pay-choose': payWay === 2 }"
+          :class="{ 'pay-choose': payWay == 4 }"
           class="pay-block"
-          @click="payWay = 2"
+          @click="payWay = 4"
         >
           <div class="pay-img">
             <img src="../../static/order/paypalpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.PayPal`) }}</div>
-          <div v-show="payWay === 2" class="pay-price">
+          <div v-show="payWay == 4" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay === 2" class="choose-tick">
+          <div v-show="payWay == 4" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
 
-        <div
+        <!-- <div
           :class="{ 'pay-choose': payWay === 5 }"
           class="pay-block"
           @click="payWay = 5"
@@ -66,49 +66,49 @@
             <img src="../../static/order/visapay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-          <div v-show="payWay === 5" class="pay-price">
+          <div v-show="payWay == 5" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>  
-          <div v-show="payWay === 5" class="choose-tick">
+          <div v-show="payWay == 5" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div>
+        </div> -->
         <div
-          :class="{ 'pay-choose': payWay === 6 }"
+          :class="{ 'pay-choose': payWay == 3 }"
           class="pay-block"
-          @click="payWay = 6"
+          @click="payWay = 3"
         >
           <div class="pay-img">
             <img src="../../static/order/unionpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
-          <div v-show="payWay === 6" class="pay-price">
+          <div v-show="payWay === 3" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay === 6" class="choose-tick">
+          <div v-show="payWay == 3" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
 
         <div
-          :class="{ 'pay-choose': payWay === 4 }"
+          :class="{ 'pay-choose': payWay == 2 }"
           class="pay-block"
-          @click="payWay = 4"
+          @click="payWay = 2"
         >
           <div class="pay-img">
             <img src="../../static/order/alipay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay === 4" class="pay-price">
+          <div v-show="payWay == 2" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay === 4" class="choose-tick">
+          <div v-show="payWay == 2" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
 
-        <div
-          :class="{ 'pay-choose': payWay === 3 }"
+        <!-- <div
+          :class="{ 'pay-choose': payWay == 3 }"
           class="pay-block"
           @click="payWay = 3"
         >
@@ -116,16 +116,16 @@
             <img src="../../static/order/wechatpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay === 3" class="pay-price">
+          <div v-show="payWay == 3" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay === 3" class="choose-tick">
+          <div v-show="payWay == 3" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div>
+        </div> -->
 
-        <div
-          :class="{ 'pay-choose': payWay === 1 }"
+        <!-- <div
+          :class="{ 'pay-choose': payWay == 1 }"
           class="pay-block"
           @click="payWay = 1"
         >
@@ -133,13 +133,13 @@
             <img src="../../static/order/epay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
-          <div v-show="payWay === 1" class="pay-price">
+          <div v-show="payWay == 1" class="pay-price">
             {{ coinType }} {{ formatMoney(ttPrice) }}
           </div>
-          <div v-show="payWay === 1" class="choose-tick">
+          <div v-show="payWay == 1" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div>
+        </div> -->
 
         <div class="pay-question" @click="answer = true">?</div>
       </div>
@@ -198,14 +198,15 @@ export default {
   },
   methods: {
     goPay() {
-      let pay = 0
-      if (this.payWay === 1) {
-        pay = 1
-      } else if (this.payWay === 2 || this.payWay === 5) {
-        pay = 2
-      } else if (this.payWay === 6 || this.payWay === 4 || this.payWay === 3) {
-        pay = 7
-      }
+      let pay = this.payway
+      // if (this.payWay == 1) {
+      //   pay = 1
+      // } else if (this.payWay == 2 || this.payWay == 5) {
+      //   pay = 2
+      // } else if (this.payWay == 6 || this.payWay == 4 || this.payWay == 3) {
+      //   pay = 7
+      // }
+    console.log("方式",this.payway)
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(
       //     JSON.stringify({
@@ -227,6 +228,7 @@ export default {
         // payChannel: pay
         payType: 2,
         tradeType:"pc",
+        returnUrl:'http://www2.bddco.com/'
         // data:{
         //   orderId: this.$route.query.orderId,
         // }
@@ -235,46 +237,50 @@ export default {
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {
+          window.location.href=res.data.config
+          //  this.$router.replace({
+          //    path:res.data.config
+          //  })
           // console.log(res)
-          if (res) {
-            if (pay !== 7) {
-              window.location.replace(res)
-            } else {
-              const promise = new Promise((resolve, reject) => {
-                this.form = []
-                const obj = JSON.parse(res)
-                const objKey = Object.keys(obj)
-                for (const i in objKey) {
-                  if (objKey[i] === 'url') {
-                    this.actionLink = obj[objKey[i]]
-                    continue
-                  }
-                  const o = {
-                    name: objKey[i],
-                    val: obj[objKey[i]]
-                  }
-                  this.form.push(o)
-                }
-                resolve()
-              })
-              promise.then(() => {
-                setTimeout(() => {
-                  this.isPay = false
-                  document.getElementById('unionPay').click()
-                }, 2000)
-              })
-            }
-          } else {
-            this.$router.replace({
-              path: 'complete-payment',
-              query: {
-                orderId: this.$route.query.orderId,
-                price: this.$route.query.price,
-                coinType: this.$route.query.coinType,
-                type: `transfer`
-              }
-            })
-          }
+          // if (res) {
+          //   if (pay !== 7) {
+          //     window.location.replace(res)
+          //   } else {
+          //     const promise = new Promise((resolve, reject) => {
+          //       this.form = []
+          //       const obj = JSON.parse(res)
+          //       const objKey = Object.keys(obj)
+          //       for (const i in objKey) {
+          //         if (objKey[i] === 'url') {
+          //           this.actionLink = obj[objKey[i]]
+          //           continue
+          //         }
+          //         const o = {
+          //           name: objKey[i],
+          //           val: obj[objKey[i]]
+          //         }
+          //         this.form.push(o)
+          //       }
+          //       resolve()
+          //     })
+          //     promise.then(() => {
+          //       setTimeout(() => {
+          //         this.isPay = false
+          //         document.getElementById('unionPay').click()
+          //       }, 2000)
+          //     })
+          //   }
+          // } else {
+          //   this.$router.replace({
+          //     path: 'complete-payment',
+          //     query: {
+          //       orderId: this.$route.query.orderId,
+          //       price: this.$route.query.price,
+          //       coinType: this.$route.query.coinType,
+          //       type: `transfer`
+          //     }
+          //   })
+          // }
         })
         .catch(err => {
           this.goingPay = false
