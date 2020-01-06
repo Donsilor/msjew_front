@@ -35,7 +35,7 @@
         <div v-for="(o, index) in listData" :key="index" class="blocks-mark">
           <div class="list-head">
             <p>{{ o.orderTime }}</p>
-            <p>{{ $t(`${lang}.orderNumber`) }}：{{ o.orderNo }}</p>
+            <p>{{ $t(`${lang}.orderNumber`) }}：{{ o.orderNO }}</p>
             <p>
               {{ $t(`${lang}.orderStatus`) }}：
               <span :style="{ color: getStatusColor(o.orderStatus) }">{{
@@ -389,7 +389,7 @@ export default {
             const o = res.data.data[i]
             o.orderTime = moment(o.orderTime* 1000).format('YYYY-MM-DD HH:mm:ss')
             // o.orderTime = moment(o.orderTime).format('YYYY-MM-DD')
-            // console.log("o.time",o.orderTime)
+            console.log("o.time",o.orderTime)
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)

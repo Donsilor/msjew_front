@@ -198,7 +198,14 @@ export default {
   },
   methods: {
     goPay() {
-      let pay = this.payway
+      let pay = 0
+      if(this.payWay==2){
+        pay = 2
+      }else if(this.payWay==3){
+        pay = 3
+      }else if(this.payWay==4){
+        pay = 4
+      }
       // if (this.payWay == 1) {
       //   pay = 1
       // } else if (this.payWay == 2 || this.payWay == 5) {
@@ -206,7 +213,7 @@ export default {
       // } else if (this.payWay == 6 || this.payWay == 4 || this.payWay == 3) {
       //   pay = 7
       // }
-    console.log("方式",this.payway)
+    console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(
       //     JSON.stringify({
@@ -226,7 +233,7 @@ export default {
         orderId: this.$route.query.orderId,
         // // visa付款自动转成PayPal付款
         // payChannel: pay
-        payType: 2,
+        payType: pay,
         tradeType:"pc",
         returnUrl:'http://www2.bddco.com/'
         // data:{
@@ -237,50 +244,50 @@ export default {
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {
-          window.location.href=res.data.config
+          // window.location.href=res.data.config
           //  this.$router.replace({
           //    path:res.data.config
           //  })
           // console.log(res)
-          // if (res) {
-          //   if (pay !== 7) {
-          //     window.location.replace(res)
-          //   } else {
-          //     const promise = new Promise((resolve, reject) => {
-          //       this.form = []
-          //       const obj = JSON.parse(res)
-          //       const objKey = Object.keys(obj)
-          //       for (const i in objKey) {
-          //         if (objKey[i] === 'url') {
-          //           this.actionLink = obj[objKey[i]]
-          //           continue
-          //         }
-          //         const o = {
-          //           name: objKey[i],
-          //           val: obj[objKey[i]]
-          //         }
-          //         this.form.push(o)
-          //       }
-          //       resolve()
-          //     })
-          //     promise.then(() => {
-          //       setTimeout(() => {
-          //         this.isPay = false
-          //         document.getElementById('unionPay').click()
-          //       }, 2000)
-          //     })
-          //   }
-          // } else {
-          //   this.$router.replace({
-          //     path: 'complete-payment',
-          //     query: {
-          //       orderId: this.$route.query.orderId,
-          //       price: this.$route.query.price,
-          //       coinType: this.$route.query.coinType,
-          //       type: `transfer`
-          //     }
-          //   })
-          // }
+          if (res) {
+            if (pay !== 7) {
+              window.location.replace(res.data.config)
+            } else {
+              const promise = new Promise((resolve, reject) => {
+                this.form = []
+                const obj = JSON.parse(res)
+                const objKey = Object.keys(obj)
+                for (const i in objKey) {
+                  if (objKey[i] === 'url') {
+                    this.actionLink = obj[objKey[i]]
+                    continue
+                  }
+                  const o = {
+                    name: objKey[i],
+                    val: obj[objKey[i]]
+                  }
+                  this.form.push(o)
+                }
+                resolve()
+              })
+              promise.then(() => {
+                setTimeout(() => {
+                  this.isPay = false
+                  document.getElementById('unionPay').click()
+                }, 2000)
+              })
+            }
+          } else {
+            this.$router.replace({
+              path: 'http://www2.bddco.com/',
+              // query: {
+              //   orderId: this.$route.query.orderId,
+              //   price: this.$route.query.price,
+              //   coinType: this.$route.query.coinType,
+              //   type: `transfer`
+              // }
+            })
+          }
         })
         .catch(err => {
           this.goingPay = false
