@@ -68,12 +68,11 @@
           <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
           <div v-show="payWay === 5" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
-          </div>
+          </div>  
           <div v-show="payWay === 5" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
-
         <div
           :class="{ 'pay-choose': payWay === 6 }"
           class="pay-block"
@@ -207,21 +206,36 @@ export default {
       } else if (this.payWay === 6 || this.payWay === 4 || this.payWay === 3) {
         pay = 7
       }
-      const data = this.$helpers.transformRequest(
-        JSON.parse(
-          JSON.stringify({
-            orderId: this.$route.query.orderId,
-            // visa付款自动转成PayPal付款
-            payChannel: pay
-          })
-        ),
-        false
-      )
+      // const data = this.$helpers.transformRequest(
+      //   JSON.parse(
+      //     JSON.stringify({
+      //       orderId: this.$route.query.orderId,
+      //       // // visa付款自动转成PayPal付款
+      //       // payChannel: pay
+      //       payType: 2,
+      //       tradeType:"pc",
+      //       // data:{
+      //       //    orderId: this.$route.query.orderId,
+      //       // }
+      //     })
+      //   ),
+      //   false
+      // )
+      const data ={
+        orderId: this.$route.query.orderId,
+        // // visa付款自动转成PayPal付款
+        // payChannel: pay
+        payType: 2,
+        tradeType:"pc",
+        // data:{
+        //   orderId: this.$route.query.orderId,
+        // }
+      }
       this.goingPay = true
       this.$axios
-        .post('/web/pay/toPay', data)
+        .post('/web/pay/create', data)
         .then(res => {
-          console.log(res)
+          // console.log(res)
           if (res) {
             if (pay !== 7) {
               window.location.replace(res)
