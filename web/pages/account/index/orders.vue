@@ -384,19 +384,19 @@ export default {
           params: { orderStatus: status, page: 1, page_size: 9999 }
         })
         .then(res => {
-          console.log("订单列表====",res.data)
+          // console.log("订单列表====",res.data)
           for (const i in res.data.data) {
             const o = res.data.data[i]
             o.orderTime = moment(o.orderTime* 1000).format('YYYY-MM-DD HH:mm:ss')
             // o.orderTime = moment(o.orderTime).format('YYYY-MM-DD')
-            console.log("o.time",o.orderTime)
+            // console.log("o.time",o.orderTime)
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
             })
           }
           this.listData = res.data.data
-          console.log("订单",this.listData)
+          // console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {

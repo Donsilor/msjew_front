@@ -18,12 +18,12 @@ export default {
   },
   beforeMount() {
     this.getListOne()
-    this.phoneNum = this.phoneJson[0]
-    // if (this.$store.state.language === 'en_US' || this.$store.state.language === 'zh_TW') {
-    //   return this.phoneNum = this.phoneJson[0]
-    // }else if(this.$store.state.language === 'zh_CN'){
-    //   return this.phoneNum = this.phoneJson[1]
-    // }
+    // this.phoneNum = this.phoneJson[0]
+    if (this.$store.state.language === 'en_US' || this.$store.state.language === 'zh_TW') {
+      return this.phoneNum = this.phoneJson[0]
+    }else if(this.$store.state.language === 'zh_CN'){
+      return this.phoneNum = this.phoneJson[1]
+    }
   },
   methods: {
     getListOne() {
