@@ -406,32 +406,41 @@ export default {
       const timeSock = new Date().getTime()
       const goodInfo = [
         {
-          goodsCount: 1,
+          goods_num: 1,
           goodsDetailsId:
             this.steps.steps[0].ct === 1
               ? this.steps.steps[0].goodsDetailsId
               : this.steps.steps[1].goodsDetailsId,
-          goodsId:
+          goods_id:
             this.steps.steps[0].ct === 1
               ? this.steps.steps[0].goodsId
               : this.steps.steps[1].goodsId,
-          groupId: timeSock,
-          groupType: 2,
+          goods_type:
+            this.steps.steps[0].ct === 1
+              ? this.steps.steps[0].categoryId
+              : this.steps.steps[1].categoryId,
+          group_id: timeSock,
+          group_type: 2,
           serviceId: 0,
-          serviceVal: 'string'
+          serviceVal: 'string',
+          
         },
         {
-          goodsCount: 1,
+          goods_num: 1,
           goodsDetailsId:
             this.steps.steps[0].ct === 1
               ? this.steps.steps[1].goodsDetailsId
               : this.steps.steps[0].goodsDetailsId,
-          goodsId:
+          goods_id:
             this.steps.steps[0].ct === 1
               ? this.steps.steps[1].goodsId
               : this.steps.steps[0].goodsId,
-          groupId: timeSock,
-          groupType: 2,
+          goods_type:
+            this.steps.steps[0].ct === 1
+              ? this.steps.steps[1].categoryId
+              : this.steps.steps[0].categoryId,
+          group_id: timeSock,
+          group_type: 2,
           serviceId: 0,
           serviceVal: 'string'
         }

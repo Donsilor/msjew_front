@@ -44,7 +44,12 @@
             <!--        登录后的用户菜单-->
             <div v-else class="item user">
               <el-dropdown type="primary" trigger="click" placement="bottom">
-                <span class="row-flex align-item-center el-dropdown-link">
+                <!-- <span v-if="{user}">
+                  <i class="iconfont icongerenzhongxin"></i>
+                  {{ userInfo.lastname }} {{ userInfo.firstname }}
+                  <i class="iconfont iconkuozhan"></i>
+                </span> -->
+                <span  class="row-flex align-item-center el-dropdown-link">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ userInfo.lastname }} {{ userInfo.firstname }}
                   <i class="iconfont iconkuozhan"></i>

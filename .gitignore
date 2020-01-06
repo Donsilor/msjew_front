@@ -10,3 +10,4 @@ node_modules
 .project
 /web/node_modules
 /web/.nuxt
+/web/nuxt.config.js

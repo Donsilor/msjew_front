@@ -18,29 +18,14 @@ export default {
   },
   beforeMount() {
     this.getListOne()
-    if (this.$store.state.language === 'en_US' || this.$store.state.language === 'zh_TW') {
-      return this.phoneNum = this.phoneJson[0]
-    }else if(this.$store.state.language === 'zh_CN'){
-      return this.phoneNum = this.phoneJson[1]
-      // console.log("状态码", this.phoneNum)
-    }
-    // this.phoneNum = this.phoneJson[1]
-    // console.log("状态码", this.phoneNum)
+    this.phoneNum = this.phoneJson[0]
+    // if (this.$store.state.language === 'en_US' || this.$store.state.language === 'zh_TW') {
+    //   return this.phoneNum = this.phoneJson[0]
+    // }else if(this.$store.state.language === 'zh_CN'){
+    //   return this.phoneNum = this.phoneJson[1]
+    // }
   },
-  // mounted(){
-  //   this.language = this.getCookie('language')
-  // },
   methods: {
-    // 查询cookie
-    // getCookie(cname) {
-    //   const name = cname + '='
-    //   const ca = document.cookie.split(';')
-    //   for (let i = 0; i < ca.length; i++) {
-    //     const c = ca[i].trim()
-    //     if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-    //   }
-    //   return ''
-    // },
     getListOne() {
       this.$axios
         .get('/web/common/area')
