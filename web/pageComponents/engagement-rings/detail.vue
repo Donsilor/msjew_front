@@ -329,6 +329,7 @@ export default {
           {
             goodsId: this.simpleDetail.goodsId,
             goodsDetailsId: this.simpleDetail.id,
+            categoryId: this.simpleDetail.categoryId,
             ct: 2,
             cartId: ``,
             page: `detail`
@@ -336,6 +337,7 @@ export default {
           {
             goodsId: null,
             goodsDetailsId: null,
+            categoryId: null,
             ct: null,
             cartId: ``,
             page: `list`
@@ -355,6 +357,7 @@ export default {
       )
       queryStep.steps[1].goodsId = this.simpleDetail.goodsId
       queryStep.steps[1].goodsDetailsId = this.simpleDetail.id
+      queryStep.steps[1].categoryId = this.simpleDetail.categoryId
       queryStep.steps[1].ct = 2
       queryStep.step = 3
       const strStep = JSON.stringify(queryStep)
