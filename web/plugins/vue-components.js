@@ -6,8 +6,10 @@ import PictureVerificationCode from '@/components/pictureVerificationCode'
 import SendEmailCode from '@/components/sendEmailCode'
 import Swiper from '@/components/swiper'
 import NoMoreData from '@/components/no-more-data'
-import Empty from '@/components/empty'
+// import Empty from '@/components/empty'
 import Step from '@/components/step'
+import scroll from '@/components/scroll'
+import mesBox from '@/components/mesBox'
 
 // 个人中心
 import PersonalAccount from '@/components/personal/account'
@@ -22,8 +24,10 @@ Vue.use(PictureVerificationCode)
 Vue.use(SendEmailCode)
 Vue.use(Swiper)
 Vue.use(NoMoreData)
-Vue.use(Empty)
+// Vue.use(Empty)
 Vue.use(Step)
+Vue.use(scroll)
+Vue.use(mesBox)
 
 // 个人中心
 Vue.use(PersonalAccount)

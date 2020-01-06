@@ -1697,7 +1697,15 @@ export default {
                 flex-shrink: 1;
                 min-width: 0;
                 position: relative;
-
+                
+                span{
+                  display: inline-block;
+                  width: 100%;
+                  overflow: hidden;
+                  word-wrap: nowrap;
+                  border: 1px solid red;
+                }
+                
                 input {
                   position: absolute;
                   top: 0;

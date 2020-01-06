@@ -2,6 +2,6 @@ import Component from './index.vue'
 
 export default {
   install(Vue) {
-    Vue.component('mes-box', Component)
+    Vue.component('message-box', Component)
   }
 }

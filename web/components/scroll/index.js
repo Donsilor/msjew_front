@@ -1,7 +1,6 @@
 import Component from './index.vue'
-
 export default {
   install(Vue) {
-    Vue.component('mes-box', Component)
+    Vue.component('scroll', Component)
   }
 }

@@ -1,5 +1,4 @@
 <template>
-  <!-- <div v-show="boxShow" class="messageBox"> -->
   <div v-show="1" class="messageBox">
     <div class="msgBg">
       <div class="icon"></div>
