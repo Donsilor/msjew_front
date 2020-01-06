@@ -33,8 +33,8 @@
               </div>
             </div>
           </div>
-          <div class="single-step-right-side active">
-            <div class="single-step-right-side-icon" :class="">
+          <div class="single-step-right-side">
+            <div class="single-step-right-side-icon">
               <i
                 v-if="steps.steps[0].ct === 1"
                 class="iconfont iconicon-zuanshi"

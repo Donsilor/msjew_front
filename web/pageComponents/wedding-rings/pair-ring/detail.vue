@@ -11,7 +11,7 @@
         <h2 class="product-name">
           {{ info.name }}
         </h2>
-        <div class="product-code">ID:{{ info.ringCode }}</div>
+        <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.ringCode }}</div>
         <div class="sku">
           <div class="left-properties">
             <div v-if="firstRing.materials.length > 0" class="property-item">
@@ -168,6 +168,7 @@
                   <b slot="reference" class="prompt-icon">!</b>
                 </el-popover>
               </div>
+              <div class="choose-size">{{ $t(`${lang}.choose`) }}></div>
             </div>
           </div>
         </div>
@@ -245,7 +246,7 @@
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
         <h2>{{ $t(`${lang}.pairRingDetails`) }}</h2>
-        <h3>ID：{{ info.ringCode }}</h3>
+        <h3>{{ $t(`${lang}.goodsId`) }}：{{ info.ringCode }}</h3>
       </div>
       <div class="attr-group">
         <h3 class="group-name">{{ $t(`${lang}.ring01`) }}</h3>
