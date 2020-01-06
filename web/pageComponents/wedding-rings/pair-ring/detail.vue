@@ -565,22 +565,24 @@ export default {
       }
       const goodInfo = [
         {
-          goodsCount: 1,
+          goods_num: 1,
           goodsDetailsId: _this.firstRingSimpleDetail.id,
-          goodsId: _this.firstRingSimpleDetail.goodsId,
-          groupId: _this.info.id,
-          groupType: 1,
+          goods_id: _this.firstRingSimpleDetail.goodsId,
+          group_id: _this.info.id,
+          group_type: 1,
           serviceId: 0,
-          serviceVal: 'string'
+          serviceVal: 'string',
+          goods_type:2
         },
         {
-          goodsCount: 1,
+          goods_num: 1,
           goodsDetailsId: _this.secondRingSimpleDetail.id,
-          goodsId: _this.secondRingSimpleDetail.goodsId,
-          groupId: _this.info.id,
-          groupType: 1,
+          goods_id: _this.secondRingSimpleDetail.goodsId,
+          group_id: _this.info.id,
+          group_type: 1,
           serviceId: 0,
-          serviceVal: 'string'
+          serviceVal: 'string',
+          goods_type:2
         }
       ]
       console.log(goodInfo)
