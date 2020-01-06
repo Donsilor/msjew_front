@@ -44,10 +44,10 @@
 
     <div v-if="data.details && data.details.length > 0" class="info-block">
       <div class="block-title">
-        <span v-if="data.orderStatus === 1">{{
+        <span v-if="data.orderStatus === '10'">{{
           $t(`${lang}.pendingPayment`)
         }}</span>
-        <span v-else-if="data.orderStatus === 10">{{
+        <span v-else-if="data.orderStatus === '0'">{{
           $t(`${lang}.closed`)
         }}</span>
         <span v-else>{{ $t(`${lang}.toBbeDelivered`) }}</span>
@@ -354,28 +354,36 @@ export default {
   methods: {
     getStatusText(status) {
       // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
-      return [
-        '',
-        this.$t(`${lang}.status`)[0],
-        this.$t(`${lang}.status`)[1],
-        this.$t(`${lang}.status`)[2],
-        this.$t(`${lang}.status`)[3],
-        this.$t(`${lang}.status`)[4],
-        this.$t(`${lang}.status`)[5],
-        this.$t(`${lang}.status`)[6],
-        this.$t(`${lang}.status`)[7],
-        this.$t(`${lang}.status`)[8],
-        this.$t(`${lang}.status`)[9]
-      ][status]
+      // return [
+      //   '',
+      //   this.$t(`${lang}.status`)[0],
+      //   this.$t(`${lang}.status`)[1],
+      //   this.$t(`${lang}.status`)[2],
+      //   this.$t(`${lang}.status`)[3],
+      //   this.$t(`${lang}.status`)[4],
+      //   this.$t(`${lang}.status`)[5],
+      //   this.$t(`${lang}.status`)[6],
+      //   this.$t(`${lang}.status`)[7],
+      //   this.$t(`${lang}.status`)[8],
+      //   this.$t(`${lang}.status`)[9]
+      // ][status]
+      var status_value =  {
+          0 :this.$t(`${lang}.cancelTransaction`),
+          10: this.$t(`${lang}.hadNotPay`),
+          20: this.$t(`${lang}.hadPay`),
+          30: this.$t(`${lang}.hadSend`),
+          40: this.$t(`${lang}.hadFinish`),
+        };
+      return status_value[status];
     },
     getData() {
       this.$axios
-        .get('/web/myOrder/getOrderDetails', {
+        .get('/web/member/order/detail', {
           params: { orderId: this.oid }
         })
         .then(res => {
           // console.log(res)
-          this.data = res
+          this.data = res.data
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
           )
@@ -401,7 +409,7 @@ export default {
       if (obj.groupType === 1) {
         // console.log(`对戒💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.goodsName.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.id.replace(/\//g, '')}`,
           query: {
             goodId: obj.groupId,
             ringType: 'pair'
@@ -414,7 +422,7 @@ export default {
         if (ct === 1) {
           // console.log(`💎`)
           route = {
-            path: `/diamond-details/${obj.goodsName.replace(/\//g, '')}`,
+            path: `/diamond-details/${obj.id.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId
             }
@@ -422,7 +430,7 @@ export default {
         } else if (ct === 2) {
           // console.log(`💍`)
           route = {
-            path: `/ring/wedding-rings/${obj.goodsName.replace(/\//g, '')}`,
+            path: `/ring/wedding-rings/${obj.id.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId,
               ringType: 'single'
@@ -431,7 +439,7 @@ export default {
         } else {
           // console.log(`饰品`)
           route = {
-            path: `/jewellery/all/${obj.goodsName.replace(/\//g, '')}`,
+            path: `/jewellery/all/${obj.id.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId
             }

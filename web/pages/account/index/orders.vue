@@ -239,22 +239,22 @@ export default {
         { name: this.$t(`${lang}.allOrder`), status: 0, num: 0 },
         {
           name: this.$t(`${lang}.waitingPay`),
-          status: 1,
+          status: 10,
           num: 0
         },
         {
           name: this.$t(`${lang}.waitingSend`),
-          status: 2,
+          status: 20,
           num: 0
         },
         {
           name: this.$t(`${lang}.waitingReceive`),
-          status: 3,
+          status: 30,
           num: 0
         },
         {
-          name: this.$t(`${lang}.waitingComment`),
-          status: 5,
+          name: this.$t(`${lang}.hadFinish`),
+          status: 40,
           num: 0
         }
       ],
@@ -332,13 +332,13 @@ export default {
             if (res.data.data[i].orderStatus == 10) {
               //  没给钱
               this.list.ordered.push(o)
-            } else if (res.data.data[i].orderStatus == 30) {
+            } else if (res.data.data[i].orderStatus == 20) {
               //  给了钱没发货
               this.list.paid.push(o)
-            } else if (res.data.data[i].orderStatus === 3) {
+            } else if (res.data.data[i].orderStatus === 30) {
               //  发了货没收到
               this.list.send.push(o)
-            } else if (res.data.data[i].orderStatus === 4) {
+            } else if (res.data.data[i].orderStatus === 40) {
               //  订单完成了
               this.list.finished.push(o)
             } else if (res.data.data[i].orderStatus === 5) {
@@ -423,20 +423,29 @@ export default {
       ][status]
     },
     getStatusText(status) {
-      // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
-      return [
-        '',
-        this.$t(`${lang}.hadNotPay`),
-        this.$t(`${lang}.hadPay`),
-        this.$t(`${lang}.hadSend`),
-        this.$t(`${lang}.hadFinish`),
-        this.$t(`${lang}.hadNotComment`),
-        this.$t(`${lang}.hadComment`),
-        this.$t(`${lang}.returnApplication`),
-        this.$t(`${lang}.returning`),
-        this.$t(`${lang}.hadReturn`),
-        this.$t(`${lang}.cancelTransaction`)
-      ][status]
+      // 10-未付款,20-已付款,30-已发货,40-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
+      // return [
+      //   '',
+      //   this.$t(`${lang}.hadNotPay`),
+      //   this.$t(`${lang}.hadPay`),
+      //   this.$t(`${lang}.hadSend`),
+      //   this.$t(`${lang}.hadFinish`),
+      //   this.$t(`${lang}.hadNotComment`),
+      //   this.$t(`${lang}.hadComment`),
+      //   this.$t(`${lang}.returnApplication`),
+      //   this.$t(`${lang}.returning`),
+      //   this.$t(`${lang}.hadReturn`),
+      //   this.$t(`${lang}.cancelTransaction`)
+      // ][status]
+
+      var status_value =  {
+          0 : this.$t(`${lang}.cancelTransaction`),
+          10: this.$t(`${lang}.hadNotPay`),
+          20: this.$t(`${lang}.hadPay`),
+          30: this.$t(`${lang}.hadSend`),
+          40: this.$t(`${lang}.hadFinish`),
+        };
+      return status_value[status];
     },
     cancelOrder() {
       const data = this.$helpers.transformRequest(
@@ -444,7 +453,7 @@ export default {
         false
       )
       this.$axios
-        .post('/web/myOrder/cancelOrder', data)
+        .post('/web/member/order/cancel', data)
         .then(res => {
           // console.log(res)
           this.cancelOrderStatus = false
