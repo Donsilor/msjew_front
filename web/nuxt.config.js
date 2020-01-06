@@ -19,8 +19,8 @@ const resourceUrl = {
   pro: ''
 }
 
-console.log('serverUrl=======>', serverUrl[RUNNING_ENV])
-console.log('resourceUrl=======>', resourceUrl[RUNNING_ENV])
+// console.log('serverUrl=======>', serverUrl[RUNNING_ENV])
+// console.log('resourceUrl=======>', resourceUrl[RUNNING_ENV])
 module.exports = {
   mode: 'universal',
   server: {
