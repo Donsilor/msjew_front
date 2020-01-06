@@ -191,7 +191,7 @@
                 <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
                 <select v-model="phoneNum">
                   <option
-                    v-for="(p, index) in phoneJson.slice(2,2)"
+                    v-for="(p, index) in phoneJson"
                     :key="index"
                     :value="p"
                     >{{ psn ? p.en :psn ? p.cn :p.zh }}</option
@@ -285,7 +285,7 @@
               <input :value="country.areaName" type="address" />
               <select v-model="country" @change="getListTwo()">
                 <option
-                  v-for="(c, index) in countryList.slice(2, 3)"
+                  v-for="(c, index) in countryList"
                   :key="index"
                   :value="c"
                   >{{ c.areaName }}</option
@@ -1170,7 +1170,7 @@
           <div class="send-left">
             <div>{{ $t(`${lang}.sendTime`) }}</div>
             <div>
-              <router-link to="/deliveryPolicy">{{
+              <router-link to="/policies/shipping">{{
                 $t(`${lang}.checkDeliveryPolicy`)
               }}</router-link>
             </div>
@@ -1215,7 +1215,7 @@
           />
           <input
             v-show="isSameEmail"
-            v-model="orderAddress.userMail"
+            v-model="orderAddress.email"
             :class="{ 'wrong-input': wrongInput.odMail }"
             type="text"
             @focus="
@@ -1848,10 +1848,10 @@ export default {
         this.alertBox = true
         return false
       }
-      if (!this.addressData.address) {
+      if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
-        this.wrongInput.address = true
+        this.wrongInput.address_details = true
         return false
       }
       const data = this.$helpers.transformRequest(
@@ -1866,7 +1866,7 @@ export default {
             country_id: this.country.areaId,
             province_id: this.province.areaId,
             cityId: this.city.areaId,
-            address_details: this.addressData._details,
+            address_details: this.addressData.address_details,
             zip_code: this.addressData.zip_code
           })
         ),
