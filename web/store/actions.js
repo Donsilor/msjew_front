@@ -999,7 +999,7 @@ export default {
     // console.log('getOnlineWishAmount=====>')
     return this.$axios({
       method: 'get',
-      // url: `/web/collection/count`,
+      url: `/web/collection/count`,
       params: {
         type: 1
       }
@@ -1435,7 +1435,7 @@ export default {
     // console.log('getOnlineComparedAmount=====>')
     return this.$axios({
       method: 'get',
-      // url: `/web/collection/count`,
+      url: `/web/collection/count`,
       params: {
         type: 2
       }
