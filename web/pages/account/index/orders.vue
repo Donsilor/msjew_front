@@ -71,7 +71,7 @@
           </div>
 
           <!--待付款-->
-          <div v-if="o.orderStatus === 1" class="list-footer">
+          <div v-if="o.orderStatus == 10" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
@@ -93,7 +93,7 @@
               </div>
             </nuxt-link>
             <div
-              v-if="o.payChannel === 1"
+              v-if="o.payChannel == 1"
               class="btn-a"
               @click="showEftGuide()"
             >
@@ -106,7 +106,7 @@
           </div>
 
           <!--待发货-->
-          <div v-if="o.orderStatus === 2" class="list-footer">
+          <div v-if="o.orderStatus ==30" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
@@ -119,7 +119,7 @@
           </div>
 
           <!--待收货-->
-          <div v-if="o.orderStatus === 3" class="list-footer">
+          <div v-if="o.orderStatus == 3" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
@@ -141,7 +141,7 @@
           </div>
 
           <!--已完成单独钻石不可评论和查看评论的-->
-          <div v-if="o.orderStatus === 4" class="list-footer">
+          <div v-if="o.orderStatus == 4" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
@@ -154,7 +154,7 @@
           </div>
 
           <!--待评论-->
-          <div v-if="o.orderStatus === 5" class="list-footer">
+          <div v-if="o.orderStatus == 5" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
@@ -170,7 +170,7 @@
           </div>
 
           <!--已完成，評價完成的非单独钻石的订单-->
-          <div v-if="o.orderStatus === 6" class="list-footer">
+          <div v-if="o.orderStatus == 50" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
@@ -186,7 +186,7 @@
           </div>
 
           <!--已取消-->
-          <div v-if="o.orderStatus === 10" class="list-footer">
+          <div v-if="o.orderStatus == 0" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
@@ -294,11 +294,11 @@ export default {
   methods: {
     getList() {
       this.$axios
-        .get('/web/myOrder/listMyOrder', {
+        .get('/web/member/order', {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
-          // console.log(res)
+          console.log("我的订单列表",res.data.data)
           this.list = {
             //  没给钱
             ordered: [],
@@ -321,42 +321,42 @@ export default {
             //  订单取消了
             closed: []
           }
-          for (const i in res.list) {
-            const o = res.list[i]
-            o.orderTime = moment(o.orderTime).format('YYYY/MM/DD HH:mm:ss')
-            res.list[i].details.map(obj => {
+          for (const i in res.data.data) {
+            const o = res.data.data[i]
+            o.orderTime = moment(o.orderTime).format('YYYY/MM/DD')
+            res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
               obj.link = `132`
             })
-            if (res.list[i].orderStatus === 1) {
+            if (res.data.data[i].orderStatus == 10) {
               //  没给钱
               this.list.ordered.push(o)
-            } else if (res.list[i].orderStatus === 2) {
+            } else if (res.data.data[i].orderStatus == 30) {
               //  给了钱没发货
               this.list.paid.push(o)
-            } else if (res.list[i].orderStatus === 3) {
+            } else if (res.data.data[i].orderStatus === 3) {
               //  发了货没收到
               this.list.send.push(o)
-            } else if (res.list[i].orderStatus === 4) {
+            } else if (res.data.data[i].orderStatus === 4) {
               //  订单完成了
               this.list.finished.push(o)
-            } else if (res.list[i].orderStatus === 5) {
+            } else if (res.data.data[i].orderStatus === 5) {
               //  收到货了没评论
               this.list.receive.push(o)
-            } else if (res.list[i].orderStatus === 6) {
+            } else if (res.data.data[i].orderStatus === 6) {
               //  已经评论了
               this.list.comment.push(o)
-            } else if (res.list[i].orderStatus === 7) {
+            } else if (res.data.data[i].orderStatus === 7) {
               //  可以申请售后退货
               this.list.apply.push(o)
-            } else if (res.list[i].orderStatus === 8) {
+            } else if (res.data.data[i].orderStatus === 8) {
               //  退货中
               this.list.returning.push(o)
-            } else if (res.list[i].orderStatus === 9) {
+            } else if (res.data.data[i].orderStatus === 9) {
               //  退货完成了
               this.list.returned.push(o)
-            } else if (res.list[i].orderStatus === 10) {
+            } else if (res.data.data[i].orderStatus === 10) {
               //  订单取消了
               this.list.closed.push(o)
             }
@@ -366,7 +366,7 @@ export default {
           this.tabsParam[2].num = this.list.paid.length
           this.tabsParam[3].num = this.list.send.length
           this.tabsParam[4].num = this.list.receive.length
-          this.tabsParam[0].num = res.list.length
+          this.tabsParam[0].num = res.data.data.length
         })
         .catch(err => {
           if (!err.response) {
@@ -377,22 +377,26 @@ export default {
         })
     },
     getStatusOrders(status) {
+      console.log(status)
       this.activeIndex = status
       this.$axios
-        .get('/web/myOrder/listMyOrder', {
+        .get('/web/member/order', {
           params: { orderStatus: status, page: 1, page_size: 9999 }
         })
         .then(res => {
-          // console.log(res)
-          for (const i in res.list) {
-            const o = res.list[i]
-            o.orderTime = moment(o.orderTime).format('YYYY-MM-DD HH:mm:ss')
-            res.list[i].details.map(obj => {
+          console.log("订单列表====",res.data)
+          for (const i in res.data.data) {
+            const o = res.data.data[i]
+            o.orderTime = moment(o.orderTime* 1000).format('YYYY-MM-DD HH:mm:ss')
+            // o.orderTime = moment(o.orderTime).format('YYYY-MM-DD')
+            console.log("o.time",o.orderTime)
+            res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
             })
           }
-          this.listData = res.list
+          this.listData = res.data.data
+          console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {
