@@ -33,14 +33,15 @@ function makeCartGoodGroups(cart=[]) {
   // console.log("cart",cart)
   const result = []
   const localData = {}
-  const keyName = 'id'
+  const keyName = 'createTime'
   cart.forEach(item => {
     // result.push(item)
     if (localData.hasOwnProperty(item[keyName])) {
       localData[item[keyName]].data.push(item)
     } else {
       localData[item[keyName]] = {
-        id: item[keyName].toString(),
+        // id: item[keyName].toString(),
+        id: item['id'].toString(),
         groupType: item.groupType || null,
         data: [item]
       }
@@ -98,8 +99,8 @@ function makeCartGoodGroups(cart=[]) {
       item.image = simpleGoodsEntity.goodsImages
       item.coinType = simpleGoodsEntity.coinType
       item.price =
-        simpleGoodsEntity.simpleGoodsDetails.retailMallPrice +
-        item.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+      parseFloat(simpleGoodsEntity.simpleGoodsDetails.retailMallPrice) +
+      parseFloat(item.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice)
     }
     return item
   })
@@ -999,7 +1000,7 @@ export default {
     // console.log('getOnlineWishAmount=====>')
     return this.$axios({
       method: 'get',
-      url: `/web/collection/count`,
+      // url: `/web/collection/count`,
       params: {
         type: 1
       }
@@ -1435,7 +1436,7 @@ export default {
     // console.log('getOnlineComparedAmount=====>')
     return this.$axios({
       method: 'get',
-      url: `/web/collection/count`,
+      // url: `/web/collection/count`,
       params: {
         type: 2
       }

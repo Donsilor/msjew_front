@@ -1364,7 +1364,7 @@ export default {
       const _this = this
       const lang = _this.lang
       const compares =
-        JSON.parse(JSON.stringify(_this.$store.state.compared)) || []
+        JSON.parse(JSON.stringify(_this.$store.state.compared || '')) || []
       console.log('compares===>', compares)
       const propertyMap = [
         {
