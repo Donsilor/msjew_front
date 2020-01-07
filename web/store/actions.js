@@ -75,10 +75,10 @@ function makeCartGoodGroups(cart=[]) {
       item.image = ringsSimpleGoodsEntity.ringImg
       item.coinType = ringsSimpleGoodsEntity.coinType
       item.price =
-      parseFloat(ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
-          .retailMallPrice) +
-        parseFloat(item.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
-          .retailMallPrice)
+        ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
+          .retailMallPrice +
+        item.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
+          .retailMallPrice
     } else if (item.groupType === 2) {
       // 定制
       const diamond = []
@@ -252,7 +252,7 @@ export default {
       }
     })
       .then(res => {
-        console.log("hahahah",res)
+        // console.log("hahahah",res)
         dispatch('cleanLocalCart')
         return Promise.resolve('success')
       })
@@ -279,19 +279,17 @@ export default {
       return Promise.reject(new Error('goods can not be null'))
     }
 
-    let request = null
+    // let request = null
     if (getters.hadLogin) {
       // 已登录的操作
       // console.log('已登录的操作')
       request = dispatch('addOnlineCart', data)
     } else {
       // 未登录的操作
-      // console.log('未登录的操作')
-      // this.$errorMessage("请先登录！")
-      // return Promise.reject(err)
-      request = dispatch('addLocalCart', data)
-      // alert("请先登录")
-      // this.$router.push(`/login`)
+      setTimeout(() => {
+        this.$router.push(`/login`)
+      }, 2000)
+      return Promise.reject(new Error('只有登录后才可以加入购物车'))
     }
     request
       .then(data => {
@@ -326,7 +324,7 @@ export default {
       }
     })
       .then(data => {
-        console.log("添加购物车",data)
+        // console.log("添加购物车",data)
         // 重新请求购物车数量（和购物车列表）
         return Promise.resolve('success')
       })
@@ -336,13 +334,6 @@ export default {
   },
   // 加入到本地购物车中
   addLocalCart({ $axios, state, getters, commit, dispatch }, goods = []) {
-    // console.log('addLocalCart=====>')
-    // const time = new Date().getTime()
-    // goods = goods.map((item, index) => {
-    //   item.id = `${time}${index}`
-    //   return item
-    // })
-
     const time = getTimestampUuid()
     const addInfo = {
       id: time,
@@ -351,18 +342,19 @@ export default {
       data: goods
     }
 
-    return new Promise(async (resolve, reject) => {
+   return new Promise(async (resolve, reject) => {
       try {
-        let cart = await dispatch('getLocalCart')
-        cart = cart.concat(addInfo)
-        if (cart.length > 30) {
-          return reject(new Error(lang.cartIsFull))
-        }
+        // let cart = await dispatch('getLocalCart')
+        // cart = cart.concat(addInfo)
+        // if (cart .length > 30) {
+        //   return reject(new Error(lang.cartIsFull))
+        // }
         // cart = cart.concat(goods)
         // 本地加入购物车数据
         // localStorage.setItem(CART, JSON.stringify(cart))
-        return resolve('success')
+        return resolve()
       } catch (e) {
+        console.log("eeeeee",e)
         return reject(e)
       }
     })
@@ -502,6 +494,7 @@ export default {
       // 未登录的操作
       // console.log('未登录的操作')
       request = dispatch('getLocalCartAndDealData')
+      // return Promise.reject(new Error('请登录！'))
     }
     dispatch('getCartAmount')
     request
@@ -543,9 +536,8 @@ export default {
       request = dispatch('getOnlineCartAmount')
     } else {
       // 未登录的操作
-      // console.log('未登录的操作')
+      // return Promise.reject(new Error('请登录！'))
       request = dispatch('getLocalCartAmount')
-      this.$router.push(`/login`)
     }
     request
       .then(data => {

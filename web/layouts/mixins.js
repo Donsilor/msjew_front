@@ -27,6 +27,8 @@ export default {
         // 获取用户数据
         await _this.$store.dispatch('getUserInfo')
         // 同步购物车
+        // await  _this.$store.dispatch('getOnlineCartAmount')
+        //  _this.$store.dispatch('getOnlineCartAmount')
         await _this.$store.dispatch('synchronizeCart')
         // 同步心愿单
         await _this.$store.dispatch('synchronizeWish')
@@ -34,10 +36,12 @@ export default {
         await _this.$store.dispatch('synchronizeCompared')
       } else {
       }
+     
       // 获取心愿单
       _this.$store.dispatch('getWish')
       // 获取购物车
       _this.$store.dispatch('getCart')
+      // console.log("layout",_this.$store.dispatch('getCart'))
       // 获取对比数据
       _this.$store.dispatch('getCompared')
 
