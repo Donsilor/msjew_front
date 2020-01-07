@@ -93,7 +93,7 @@
             <div class="item language">
               <el-dropdown
                 type="primary"
-               
+
                 placement="bottom"
                 @command="setLanguage"
               >
@@ -116,7 +116,7 @@
             <div class="item coin">
               <el-dropdown
                 type="primary"
-                
+
                 placement="bottom"
                 @command="setCoin"
               >
@@ -988,7 +988,6 @@ export default {
       this.fixedStatus = !!status
     },
     changeActiveNavMenu(nav) {
-      console.log('....')
       this.activeNavMenu = nav
     },
     setCoin(coin) {
