@@ -43,13 +43,13 @@
 
             <!--        登录后的用户菜单-->
             <div v-else class="item user">
-              <el-dropdown type="primary" trigger="click" placement="bottom">
-                <!-- <span v-if="{user}">
+              <el-dropdown type="primary"  placement="bottom">
+                <span v-if="userInfo.lastname==''||userInfo.firstname==''" class="row-flex align-item-center el-dropdown-link">
                   <i class="iconfont icongerenzhongxin"></i>
-                  {{ userInfo.lastname }} {{ userInfo.firstname }}
+                  {{ userInfo.username }}
                   <i class="iconfont iconkuozhan"></i>
-                </span> -->
-                <span  class="row-flex align-item-center el-dropdown-link">
+                </span>
+                <span v-else class="row-flex align-item-center el-dropdown-link">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ userInfo.lastname }} {{ userInfo.firstname }}
                   <i class="iconfont iconkuozhan"></i>
@@ -93,7 +93,7 @@
             <div class="item language">
               <el-dropdown
                 type="primary"
-                trigger="click"
+               
                 placement="bottom"
                 @command="setLanguage"
               >
@@ -116,7 +116,7 @@
             <div class="item coin">
               <el-dropdown
                 type="primary"
-                trigger="click"
+                
                 placement="bottom"
                 @command="setCoin"
               >
@@ -1001,7 +1001,10 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout', lang)
-      this.$router.push(`/login`)
+      window.location.reload()
+      // this.$router.push('/login')
+      // this.$store.dispatch('logout', lang)
+      // this.$router.push(`/login`)
       // this.$store.dispatch('logout', lang)
       //  this.$router.push('/login')
       // window.location.reload()

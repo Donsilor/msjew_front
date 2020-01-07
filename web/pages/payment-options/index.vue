@@ -41,18 +41,18 @@
       </div>
       <div class="pay-blocks">
         <div
-          :class="{ 'pay-choose': payWay == 4 }"
+          :class="{ 'pay-choose': payWay == 6 }"
           class="pay-block"
-          @click="payWay = 4"
+          @click="payWay = 6"
         >
           <div class="pay-img">
             <img src="../../static/order/paypalpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.PayPal`) }}</div>
-          <div v-show="payWay == 4" class="pay-price">
+          <div v-show="payWay == 6" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 4" class="choose-tick">
+          <div v-show="payWay == 6" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
@@ -203,8 +203,8 @@ export default {
         pay = 2
       }else if(this.payWay==3){
         pay = 3
-      }else if(this.payWay==4){
-        pay = 4
+      }else if(this.payWay==6){
+        pay = 6
       }
       // if (this.payWay == 1) {
       //   pay = 1
@@ -236,9 +236,6 @@ export default {
         payType: pay,
         tradeType:"pc",
         returnUrl:'http://www2.bddco.com/'
-        // data:{
-        //   orderId: this.$route.query.orderId,
-        // }
       }
       this.goingPay = true
       this.$axios

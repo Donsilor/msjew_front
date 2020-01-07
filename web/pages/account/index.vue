@@ -31,6 +31,10 @@
         <div class="middle-line" />
       </div>
       <div class="right-box">
+        <div class="header-title">
+          <img data-v-accc3fe4="" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABS2lUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4KPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPgogPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIi8+CiA8L3JkZjpSREY+CjwveDp4bXBtZXRhPgo8P3hwYWNrZXQgZW5kPSJyIj8+nhxg7wAAANhJREFUOI3N0T1KA1EUBtCTYRS00gVYWWcDrsEFuIIZprdxEUKaCPOwFrSwcwn2cQmBbCBKgmh+LJw04+jEPAx+7X3f4T4u/z2dsiyvcIr3CGcHD3meFykKnOExAjzBLYoUrxhgtImUZZkQwgBTSLDAQcR2qv4S0togQQ9HLcAM5xjWB3UQJnhpAec+f/YldXCBixbsxyQx5a2ATUe5w3HD2z6ufwsucY/DhrdPayzYCN6sU/wuf3KUDsaRzrhypNhDF8+bSCEEVX9/BZa4xFvEhrsIEf0t5gP+JCj0zwrpugAAAABJRU5ErkJggg==">
+          <h3 data-v-accc3fe4="">{{ $t(`${langs}.title`) }}</h3>
+        </div>
         <!--        <router-view v-if="token" />-->
         <router-view />
       </div>
@@ -40,12 +44,14 @@
 
 <script>
 const lang = 'personal'
+const langs = 'personal.account'
 export default {
   name: 'Index',
   middleware: 'mustLogin',
   data() {
     return {
       lang,
+      langs,
       token: '',
       leftList: [
         {
@@ -82,7 +88,10 @@ export default {
       return this.$store.state.userInfo
     },
     showMobile() {
-      let result = this.mobile
+      const hidenLength = 4
+      let result = this.userInfo.username
+      
+      return result
     },
     showEmail() {
       const hidenLength = 4
@@ -129,7 +138,7 @@ export default {
     // }
   },
   methods: {
-     // 查询cookie
+    // 查询cookie
     getCookie(cname) {
       const name = cname + '='
       const ca = document.cookie.split(';')
@@ -147,6 +156,23 @@ export default {
 </script>
 
 <style scoped lang="less">
+.header-title {
+  text-align: left;
+  margin-bottom: 30px;
+}
+.header-title img {
+  float: left;
+  width: 26px;
+  height: 26px;
+}
+.header-title h3 {
+  display: inline-block;
+  margin-left: 20px;
+  font-size: 24px;
+  line-height: 26px;
+  font-weight: 400;
+  color: #f29b87;
+}
 .personal {
   width: 1360px;
   min-height: 540px;

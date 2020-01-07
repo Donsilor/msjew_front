@@ -101,7 +101,7 @@
             <div>
               <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
               <select v-model="phoneNum">
-                <option v-for="(p, index) in phoneJson.slice(2, 2)" :key="index" :value="p">{{
+                <option v-for="(p, index) in phoneJson" :key="index" :value="p">{{
                   psn ? p.en :psn ? p.cn :p.zh
                 }}</option>
               </select>
@@ -120,7 +120,7 @@
               <input :value="country.areaName" type="text" />
               <select v-model="country" @change="getListTwo">
                 <option
-                  v-for="(c, index) in countryList.slice(2,3)"
+                  v-for="(c, index) in countryList"
                   :key="index"
                   :value="c"
                   >{{ c.areaName }}</option

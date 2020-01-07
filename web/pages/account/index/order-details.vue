@@ -295,6 +295,7 @@ export default {
     statusSteps() {
       // data.orderStatus
       const orderStatus = this.data.orderStatus
+      console.log("******",orderStatus)
       const result = [
         {
           id: 0,
@@ -323,28 +324,44 @@ export default {
         }
       ]
       // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
-      if (['', 1, 10].includes(orderStatus)) {
+      if(orderStatus==0|| orderStatus==10){
         result[0].active = true
-      } else if ([2].includes(orderStatus)) {
-        result[0].active = true
-        result[1].active = true
-      } else if ([3].includes(orderStatus)) {
+      }else if(orderStatus==20|| orderStatus==30){
         result[0].active = true
         result[1].active = true
-        result[2].active = true
-      } else if ([4, 5].includes(orderStatus)) {
+      }else if(orderStatus==40){
         result[0].active = true
         result[1].active = true
         result[2].active = true
-        result[3].active = true
-      } else if ([6, 7, 8, 9].includes(orderStatus)) {
-        result[0].active = true
+      }else if(orderStatus==50){
+         result[0].active = true
         result[1].active = true
         result[2].active = true
         result[3].active = true
-        result[4].active = true
       }
-      // console.log(result)
+      // console.log("jjjjjj", result[0])
+      // if ([, 1, 10].includes(orderStatus)) {
+      //   result[0].active = true
+      // } else if ([2].includes(orderStatus)) {
+      //   result[0].active = true
+      //   result[1].active = true
+      // } else if ([3].includes(orderStatus)) {
+      //   result[0].active = true
+      //   result[1].active = true
+      //   result[2].active = true
+      // } else if ([4, 5].includes(orderStatus)) {
+      //   result[0].active = true
+      //   result[1].active = true
+      //   result[2].active = true
+      //   result[3].active = true
+      // } else if ([6, 7, 8, 9].includes(orderStatus)) {
+      //   result[0].active = true
+      //   result[1].active = true
+      //   result[2].active = true
+      //   result[3].active = true
+      //   result[4].active = true
+      // }
+      // console.log("result",result)
       return result
     }
   },
@@ -353,6 +370,7 @@ export default {
   },
   methods: {
     getStatusText(status) {
+      // console.log("状态码",status)
       // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
       // return [
       //   '',
@@ -367,6 +385,7 @@ export default {
       //   this.$t(`${lang}.status`)[8],
       //   this.$t(`${lang}.status`)[9]
       // ][status]
+      
       var status_value =  {
           0 :this.$t(`${lang}.cancelTransaction`),
           10: this.$t(`${lang}.hadNotPay`),
@@ -374,9 +393,11 @@ export default {
           30: this.$t(`${lang}.hadSend`),
           40: this.$t(`${lang}.hadFinish`),
         };
+      // console.log("kkkk",status_value[status])  
       return status_value[status];
     },
     getData() {
+      console.log("id",this.oid)
       this.$axios
         .get('/web/member/order/detail', {
           params: { orderId: this.oid }
@@ -401,6 +422,7 @@ export default {
         })
     },
     goToDetail(obj) {
+      console.log("issssss",obj)
       let route = {
         path: '/',
         query: {}

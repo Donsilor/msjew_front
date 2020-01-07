@@ -53,14 +53,14 @@
           <div class="row-line">
             <div class="input">
               <input
-                v-model="info.lastName"
+                v-model="info.last_name"
                 :placeholder="'*' + $t(`${lang}.name`)"
                 maxlength="20"
               />
             </div>
             <div class="input">
               <input
-                v-model="info.firstName"
+                v-model="info.first_name"
                 :placeholder="'*' + $t(`${lang}.surname`)"
                 maxlength="20"
               />
@@ -74,7 +74,7 @@
                 {{ checkedPhoneCodeInfo.name }} {{ checkedPhoneCodeInfo.value }}
               </div>
               <i class="iconfont iconxiala" />
-              <select v-model="info.telCode">
+              <select v-model="info.mobile_code">
                 <option
                   v-for="(item, index) in countryPhoneCodeOptions"
                   :key="index"
@@ -92,15 +92,15 @@
           </div>
           <div class="row-line">
             <div class="date-input-el">
-              <div :class="['date-text', { active: info.bookDate }]">
+              <div :class="['date-text', { active: info.book_date }]">
                 {{
-                  info.bookDate ? info.bookDate : '*' + $t(`${lang}.bookDate`)
+                  info.book_date ? info.book_date : '*' + $t(`${lang}.bookDate`)
                 }}
               </div>
               <i class="iconfont iconriqi" />
               <div class="date-input">
                 <el-date-picker
-                  v-model="info.bookDate"
+                  v-model="info.book_date"
                   :clearable="false"
                   style="width: 100%;"
                   type="date"
@@ -110,13 +110,13 @@
               </div>
             </div>
             <div class="select date-input-el">
-              <div :class="['select-text', { active: info.bookTime }]">
+              <div :class="['select-text', { active: info.book_time }]">
                 {{
-                  info.bookTime ? info.bookTime : '*' + $t(`${lang}.bookTime`)
+                  info.book_time ? info.book_time : '*' + $t(`${lang}.bookTime`)
                 }}
               </div>
               <i class="iconfont iconxiala" />
-              <select v-model="info.bookTime">
+              <select v-model="info.book_time">
                 <option
                   v-for="(option, index) in bookTimeOptions"
                   :key="index"
@@ -133,7 +133,7 @@
               class="radio-option"
               @click="checkGoodsType(each.type)"
             >
-              <span :class="['radio', { active: each.type === info.goodsType }]"
+              <span :class="['radio', { active: each.type === info.type_id }]"
                 >✔</span
               >
               <span class="radio-name">{{ each.name }}</span>
@@ -141,7 +141,7 @@
           </div>
           <div class="textarea-line">
             <textarea
-              v-model="info.message"
+              v-model="info.content"
               :placeholder="$t(`${lang}.leaveAMessage`)"
             />
           </div>
@@ -254,14 +254,14 @@ export default {
         }
       ],
       info: {
-        lastName: '', // 名
-        firstName: '', // 姓氏
-        telCode: '+852',
+        last_name: '', // 名
+        first_name: '', // 姓氏
+        mobile_code: '+852',
         telphone: '',
-        bookDate: '',
-        bookTime: '',
-        goodsType: 2,
-        message: ''
+        book_date: '',
+        book_time: '',
+        type_id: 2,
+        content: ''
       },
       isSuccessful: false,
       isFail: false
@@ -289,7 +289,7 @@ export default {
       const info = this.info
       const countryCodes = this.countryPhoneCodeOptions
       for (let n = 0, length = countryCodes.length; n < length; n++) {
-        if (countryCodes[n].value === info.telCode) {
+        if (countryCodes[n].value === info.mobile_code) {
           result = countryCodes[n]
           break
         }
@@ -301,17 +301,17 @@ export default {
   methods: {
     setBookDate(value) {
       const info = JSON.parse(JSON.stringify(this.info))
-      info.bookDate = value
+      info.book_date = value
       this.info = info
     },
     setBookTime(value) {
       const info = JSON.parse(JSON.stringify(this.info))
-      info.bookTime = value
+      info.book_time = value
       this.info = info
     },
     checkGoodsType(type) {
       const info = JSON.parse(JSON.stringify(this.info))
-      info.goodsType = type
+      info.type_id = type
       this.info = info
     },
     submitSuccessfulShow() {
@@ -330,12 +330,12 @@ export default {
       const _this = this
       const info = JSON.parse(JSON.stringify(this.info))
 
-      if (!info.lastName) {
+      if (!info.last_name) {
         this.$errorMessage(this.$t(`${lang}.inputTheLastName`))
         return
       }
 
-      if (!info.firstName) {
+      if (!info.first_name) {
         this.$errorMessage(this.$t(`${lang}.inputTheFirstName`))
         return
       }
@@ -345,17 +345,17 @@ export default {
         return
       }
 
-      if (!info.bookDate) {
+      if (!info.book_date) {
         this.$errorMessage(this.$t(`${lang}.selectTheCorrectDate`))
         return
       }
 
-      if (!info.bookTime) {
+      if (!info.book_time) {
         this.$errorMessage(this.$t(`${lang}.selectAnAppointmentTime`))
         return
       }
 
-      info.arrivalTime = Moment(info.bookDate + ' ' + info.bookTime).valueOf()
+      info.arrivalTime = Moment(info.book_date + ' ' + info.book_time).valueOf()
 
       const tomorrow = Moment()
         .add(1, 'd')
@@ -369,7 +369,7 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/web/reservation/addReservation`,
+          url: `/web/member/contact/add`,
           data: info
         })
         .then(data => {

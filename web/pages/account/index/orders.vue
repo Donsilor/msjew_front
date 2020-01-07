@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <!--待付款-->
+          <!--待付款 10-->
           <div v-if="o.orderStatus == 10" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
@@ -105,7 +105,7 @@
             >
           </div>
 
-          <!--待发货-->
+          <!--待发货 30-->
           <div v-if="o.orderStatus ==30" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
@@ -118,8 +118,13 @@
             >
           </div>
 
-          <!--待收货-->
-          <div v-if="o.orderStatus == 3" class="list-footer">
+          <!--待收货 未付款 10;
+            已支付 20;
+            待发货 30;
+            已发货 40;
+            已完成 50;
+            已取消 0;-->
+          <div v-if="o.orderStatus == 40" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
@@ -388,8 +393,6 @@ export default {
           for (const i in res.data.data) {
             const o = res.data.data[i]
             o.orderTime = moment(o.orderTime* 1000).format('YYYY-MM-DD HH:mm:ss')
-            // o.orderTime = moment(o.orderTime).format('YYYY-MM-DD')
-            console.log("o.time",o.orderTime)
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
@@ -445,6 +448,7 @@ export default {
           30: this.$t(`${lang}.hadSend`),
           40: this.$t(`${lang}.hadFinish`),
         };
+        console.log("bbbbb",status_value[status])
       return status_value[status];
     },
     cancelOrder() {
@@ -514,7 +518,7 @@ export default {
       if (obj.groupType === 1) {
         // console.log(`对戒💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.goodsName.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.id.replace(/\//g, '')}`,
           query: {
             goodId: obj.groupId,
             ringType: 'pair'
@@ -524,18 +528,27 @@ export default {
         // console.log(obj.data[0].simpleGoodsEntity)
         const ct = obj.categoryId
         // console.log(ct)
-        if (ct === 1) {
+        if (ct === '15') {
           // console.log(`💎`)
           route = {
-            path: `/diamond-details/${obj.goodsName.replace(/\//g, '')}`,
+            path: `/diamond-details/${obj.id.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId
             }
           }
-        } else if (ct === 2) {
+        } else if (ct === '2' ||ct === '13' || ct === '14') { //戒指
           // console.log(`💍`)
           route = {
-            path: `/ring/wedding-rings/${obj.goodsName.replace(/\//g, '')}`,
+            path: `/ring/wedding-rings/${obj.id.replace(/\//g, '')}`,
+            query: {
+              goodId: obj.goodsId,
+              ringType: 'single'
+            }
+          }
+        }else if (ct === '12') { //戒托
+          // console.log(`💍`)
+          route = {
+            path: `/ring/engagement-rings/${obj.id.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId,
               ringType: 'single'
@@ -544,7 +557,7 @@ export default {
         } else {
           // console.log(`饰品`)
           route = {
-            path: `/jewellery/all/${obj.goodsName.replace(/\//g, '')}`,
+            path: `/jewellery/all/${obj.id.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId
             }
