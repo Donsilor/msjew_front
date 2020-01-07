@@ -90,7 +90,9 @@ export default {
     showMobile() {
       const hidenLength = 4
       let result = this.userInfo.username
-      
+      if(result){
+        result=result.replace(result.substr(3, 4),"****")
+      }
       return result
     },
     showEmail() {
@@ -138,6 +140,7 @@ export default {
     // }
   },
   methods: {
+   
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='

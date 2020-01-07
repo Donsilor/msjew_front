@@ -481,12 +481,26 @@ export default {
           if(res.code==200){
             _this.requesting = false
             _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-            _this.$router.replace({
-              path: '/login',
-              query: {
-                type: 'login'
-              }
-            })
+             _this.$store.commit('setToken', res.data.access_token)
+              _this.$store.dispatch('getUserInfo')
+               _this.$store.commit('setLastUrl', '')
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                } else {
+                  _this.$router.replace({
+                    path: '/'
+                  })
+                }
+              }, 0)
+            // _this.$router.replace({
+            //   path: '/login',
+            //   query: {
+            //     type: 'login'
+            //   }
+            // })
           }else {
             throw new Error (res.message)
           }   
@@ -531,12 +545,26 @@ export default {
           if(res.code==200){
             _this.requesting = false
             _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-            _this.$router.replace({
-              path: '/login',
-              query: {
-                type: 'login'
-              }
-            })
+             _this.$store.commit('setToken', res.data.access_token)
+              _this.$store.dispatch('getUserInfo')
+              _this.$store.commit('setLastUrl', '')
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                } else {
+                  _this.$router.replace({
+                    path: '/'
+                  })
+                }
+              }, 0)
+            // _this.$router.replace({
+            //   path: '/login',
+            //   query: {
+            //     type: 'login'
+            //   }
+            // })
           }else {
             throw new Error (res.message)
           }  
