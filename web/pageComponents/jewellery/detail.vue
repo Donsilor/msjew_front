@@ -165,7 +165,7 @@
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
         <h2>{{ $t(`${lang}.goodsDetails`) }}</h2>
-        <h3>ID：{{ info.goodsCode }}</h3>
+        <h3>{{ $t(`${lang}.goodsId`) }}：{{ info.goodsCode }}</h3>
       </div>
       <div class="attr-group">
         <h3 class="group-name">{{ $t(`${lang}.productParameters`) }}</h3>

@@ -11,7 +11,7 @@
         <h2 class="product-name">
           {{ info.name }}
         </h2>
-        <div class="product-code">ID:{{ info.ringCode }}</div>
+        <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.ringCode }}</div>
         <div class="sku">
           <div class="left-properties">
             <div v-if="firstRing.materials.length > 0" class="property-item">
@@ -168,6 +168,7 @@
                   <b slot="reference" class="prompt-icon">!</b>
                 </el-popover>
               </div>
+              <div class="choose-size">{{ $t(`${lang}.choose`) }}></div>
             </div>
           </div>
         </div>
@@ -245,7 +246,7 @@
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
         <h2>{{ $t(`${lang}.pairRingDetails`) }}</h2>
-        <h3>ID：{{ info.ringCode }}</h3>
+        <h3>{{ $t(`${lang}.goodsId`) }}：{{ info.ringCode }}</h3>
       </div>
       <div class="attr-group">
         <h3 class="group-name">{{ $t(`${lang}.ring01`) }}</h3>
@@ -565,22 +566,24 @@ export default {
       }
       const goodInfo = [
         {
-          goodsCount: 1,
+          goods_num: 1,
           goodsDetailsId: _this.firstRingSimpleDetail.id,
-          goodsId: _this.firstRingSimpleDetail.goodsId,
-          groupId: _this.info.id,
-          groupType: 1,
+          goods_id: _this.firstRingSimpleDetail.goodsId,
+          group_id: _this.info.id,
+          group_type: 1,
           serviceId: 0,
-          serviceVal: 'string'
+          serviceVal: 'string',
+          goods_type:2
         },
         {
-          goodsCount: 1,
+          goods_num: 1,
           goodsDetailsId: _this.secondRingSimpleDetail.id,
-          goodsId: _this.secondRingSimpleDetail.goodsId,
-          groupId: _this.info.id,
-          groupType: 1,
+          goods_id: _this.secondRingSimpleDetail.goodsId,
+          group_id: _this.info.id,
+          group_type: 1,
           serviceId: 0,
-          serviceVal: 'string'
+          serviceVal: 'string',
+          goods_type:2
         }
       ]
       console.log(goodInfo)

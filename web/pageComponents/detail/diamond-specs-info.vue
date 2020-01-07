@@ -83,14 +83,14 @@
             </li>
           </ul>
         </div>
-        <div class="right-info">
+        <!-- <div class="right-info">
           <div class="ten-magnification">
             {{ $t(`${lang}.tenMagnification`) }}
           </div>
           <div class="clarity-image">
             <img :src="activeClarity.image" />
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

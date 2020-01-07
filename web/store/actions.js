@@ -75,10 +75,10 @@ function makeCartGoodGroups(cart=[]) {
       item.image = ringsSimpleGoodsEntity.ringImg
       item.coinType = ringsSimpleGoodsEntity.coinType
       item.price =
-        ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
-          .retailMallPrice +
-        item.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
-          .retailMallPrice
+      parseFloat(ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
+          .retailMallPrice) +
+        parseFloat(item.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.simpleGoodsDetails
+          .retailMallPrice)
     } else if (item.groupType === 2) {
       // 定制
       const diamond = []

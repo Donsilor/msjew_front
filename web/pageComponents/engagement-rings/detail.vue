@@ -11,7 +11,7 @@
         <h2 class="product-name">
           {{ info.goodsName }}
         </h2>
-        <div class="product-code">ID:{{ info.goodsCode }}</div>
+        <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div class="sku">
           <div class="left-properties">
             <div v-if="productInfo.materials.length > 0" class="property-item">
@@ -94,6 +94,7 @@
                   <b slot="reference" class="prompt-icon">!</b>
                 </el-popover>
               </div>
+              <div class="choose-size">{{ $t(`${lang}.choose`) }}></div>
             </div>
           </div>
         </div>

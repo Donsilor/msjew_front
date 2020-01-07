@@ -14,7 +14,7 @@
         <h2 class="product-name">
           {{ info.goodsName }}
         </h2>
-        <div class="product-code">ID:{{ info.goodsCode }}</div>
+        <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div v-if="showSkuBox" class="sku">
           <div class="left-properties">
             <div v-if="productInfo.materials.length > 0" class="property-item">
@@ -122,7 +122,7 @@
         >
           <nuxt-link v-if="canAddCart" :to="startDj">
             <button class="start-dj">
-              开始DJ
+				{{ $t(`${lang}.addToRing`) }}
             </button>
           </nuxt-link>
           <button
@@ -166,7 +166,7 @@
               <span>
                 {{ $t(`${lang}.wish`) }}
               </span>
-            </li> 
+            </li>
             <li class="item compared-state">
               <i
                 v-if="inCompared(info.id)"
@@ -208,7 +208,7 @@
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
         <h2>{{ $t(`${lang}.goodsDetails`) }}</h2>
-        <h3>ID：{{ info.goodsCode }}</h3>
+        <h3>{{ $t(`${lang}.goodsId`) }}: {{ info.goodsCode }}</h3>
       </div>
       <div class="attr-group">
         <h3 class="group-name">{{ $t(`${lang}.productParameters`) }}</h3>
