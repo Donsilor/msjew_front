@@ -119,21 +119,21 @@
       "bangles": "Bangles"
     },
     "polish": {
-      "46": "Good",
-      "47": "Excellent",
-      "48": "Brilliant"
+      "69": "Good",
+      "68": "Excellent",
+      "67": "Brilliant"
     },
     "symmetry": {
-      "49": "Good",
-      "50": "Excellent",
-      "51": "Brilliant"
+      "72": "Good",
+      "71": "Excellent",
+      "70": "Brilliant"
     },
     "fluorescence": {
-      "52": "Very strong",
-      "53": "Strong",
-      "54": "Medium",
-      "55": "Weak",
-      "56": "None/negligible"
+      "20": "Very strong",
+      "21": "Strong",
+      "120": "Medium",
+      "121": "Weak",
+      "122": "None/negligible"
     }
   },
   "components": {

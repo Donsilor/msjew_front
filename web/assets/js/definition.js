@@ -658,66 +658,66 @@ export default language => {
     diamond: {
       polish: [
         {
-          id: 46,
-          name: lang.polish['46']
+          id: 69,
+          name: lang.polish['69']
         },
         {
-          id: 47,
-          name: lang.polish['47']
+          id: 68,
+          name: lang.polish['68']
         },
         {
-          id: 48,
-          name: lang.polish['48']
+          id: 67,
+          name: lang.polish['67']
         }
       ],
       symmetry: [
         {
-          id: 49,
-          name: lang.symmetry['49']
+          id: 72,
+          name: lang.symmetry['72']
         },
         {
-          id: 50,
-          name: lang.symmetry['50']
+          id: 71,
+          name: lang.symmetry['71']
         },
         {
-          id: 51,
-          name: lang.symmetry['51']
+          id: 70,
+          name: lang.symmetry['70']
         }
       ],
       card: [
         {
-          id: 442,
+          id: 138,
           name: 'GIA'
         },
         {
-          id: 443,
+          id: 151,
           name: 'AGS'
         },
         {
-          id: 444,
+          id: 152,
           name: 'IGI'
         }
       ],
       fluorescence: [
         {
-          id: 52,
-          name: lang.fluorescence['52']
+          id: 122,
+          name: lang.fluorescence['122']
         },
         {
-          id: 53,
-          name: lang.fluorescence['53']
+          id: 121,
+          name: lang.fluorescence['121']
         },
         {
-          id: 54,
-          name: lang.fluorescence['54']
+          id: 120,
+          name: lang.fluorescence['120']
         },
         {
-          id: 55,
-          name: lang.fluorescence['55']
+          id: 21,
+          name: lang.fluorescence['21']
         },
         {
-          id: 56,
-          name: lang.fluorescence['56']
+          id: 20,
+          name: lang.fluorescence['20']
         }
       ]
     },

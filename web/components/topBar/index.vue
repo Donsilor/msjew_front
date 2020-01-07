@@ -156,7 +156,7 @@
                   @mouseover="changeActiveNavMenu(nav.key)"
                   @mouseout="changeActiveNavMenu('')"
                 >
-                  <nuxt-link v-if="nav.to" :to="nav.to">
+                  <nuxt-link v-if="nav.to" :to="nav.to" target="_blank">
                     <div
                       :class="[
                         'nav-item-name',

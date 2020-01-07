@@ -410,7 +410,7 @@ export default {
         targetUser: (() => {
           let result = '--'
           specs.forEach(item => {
-            if (item.configId === 196) {
+            if (item.configId === 26) {
               result = item.configAttrVal
             }
           })
@@ -428,9 +428,9 @@ export default {
           let gay = false
           let gayNum = ``
           specs.forEach(item => {
-            if (item.configId === 191) {
+            if (item.configId === 31) {
               gayNum = item.configAttrVal
-            } else if (item.configId === 192 && item.configAttrId === 442) {
+            } else if (item.configId === 48 && item.configAttrId === 138) {
               gay = true
             }
           })

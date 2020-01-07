@@ -113,37 +113,37 @@ export default {
       lang,
       color: [
         {
-          id: 31,
+          id: 18,
           image: `/diamonds/specs-info/D.png`,
           name: `D`
         },
         {
-          id: 32,
+          id: 19,
           image: `/diamonds/specs-info/E.png`,
           name: `E`
         },
         {
-          id: 33,
+          id: 22,
           image: `/diamonds/specs-info/F.png`,
           name: `F`
         },
         {
-          id: 34,
+          id: 50,
           image: `/diamonds/specs-info/G.png`,
           name: `G`
         },
         {
-          id: 35,
+          id: 51,
           image: `/diamonds/specs-info/H.png`,
           name: `H`
         },
         {
-          id: 36,
+          id: 52,
           image: `/diamonds/specs-info/I.png`,
           name: `I`
         },
         {
-          id: 37,
+          id: 53,
           image: `/diamonds/specs-info/J.png`,
           name: `J`
         },
@@ -160,25 +160,25 @@ export default {
       ],
       clarity: [
         {
-          ids: [44, 45],
+          ids: [6, 7],
           name: 'FL/LF',
           desc: this.$t(`${lang}.clarityTips1`),
           image: `/diamonds/specs-info/FL.png`
         },
         {
-          ids: [42, 43],
+          ids: [8, 62],
           name: 'VVS1/VVS2',
           desc: this.$t(`${lang}.clarityTips2`),
           image: `/diamonds/specs-info/VVS1.png`
         },
         {
-          ids: [40, 41],
+          ids: [63, 64],
           name: 'VS1/VS2',
           desc: this.$t(`${lang}.clarityTips3`),
           image: `/diamonds/specs-info/VS1.png`
         },
         {
-          ids: [38, 39],
+          ids: [65, 66],
           name: 'SI1/SI2',
           desc: this.$t(`${lang}.clarityTips4`),
           image: `/diamonds/specs-info/SI1.png`

@@ -1372,35 +1372,35 @@ export default {
           name: 'GIA'
         },
         {
-          id: 31,
+          id: 5,
           name: _this.$t(`${lang}.carat`)
         },
         {
-          id: 34,
+          id: 7,
           name: _this.$t(`${lang}.color`)
         },
         {
-          id: 35,
+          id: 2,
           name: _this.$t(`${lang}.clarity`)
         },
         {
-          id: 33,
+          id: 4,
           name: _this.$t(`${lang}.cut`)
         },
         {
-          id: 40,
+          id: 33,
           name: _this.$t(`${lang}.table`)
         },
         {
-          id: 39,
+          id: 32,
           name: _this.$t(`${lang}.depth`)
         },
         {
-          id: 32,
+          id: 6,
           name: _this.$t(`${lang}.shape`)
         },
         {
-          id: 38,
+          id: 8,
           name: _this.$t(`${lang}.fluorescence`)
         }
       ]
