@@ -362,6 +362,7 @@ export default {
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken', res.data.access_token)
               _this.$store.dispatch('getUserInfo')
+             
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
               setTimeout(() => {

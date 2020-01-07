@@ -26,7 +26,7 @@ export default ({ req, app, store, $axios }, inject) => {
   inject('getSeoInfo', type => {
     return $axios({
       method: `get`,
-      url: `/web/WebsiteSeo/queryWebsiteSeo`,
+      url: `web/WebsiteSeo/queryWebsiteSeo`,
       params: {
         type
       }

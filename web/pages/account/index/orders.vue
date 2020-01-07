@@ -70,7 +70,7 @@
             </div>
           </div>
 
-          <!--待付款-->
+          <!--待付款 10-->
           <div v-if="o.orderStatus == 10" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
@@ -105,7 +105,7 @@
             >
           </div>
 
-          <!--待发货-->
+          <!--待发货 30-->
           <div v-if="o.orderStatus ==30" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
@@ -118,8 +118,13 @@
             >
           </div>
 
-          <!--待收货-->
-          <div v-if="o.orderStatus == 3" class="list-footer">
+          <!--待收货 未付款 10;
+            已支付 20;
+            待发货 30;
+            已发货 40;
+            已完成 50;
+            已取消 0;-->
+          <div v-if="o.orderStatus == 40" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
