@@ -279,13 +279,14 @@ export default {
       return Promise.reject(new Error('goods can not be null'))
     }
 
-    // let request = null
+    let request = null
     if (getters.hadLogin) {
       // 已登录的操作
       // console.log('已登录的操作')
       request = dispatch('addOnlineCart', data)
     } else {
       // 未登录的操作
+      // request = dispatch('addLocalCart', data)
       setTimeout(() => {
         this.$router.push(`/login`)
       }, 2000)
@@ -324,7 +325,7 @@ export default {
       }
     })
       .then(data => {
-        // console.log("添加购物车",data)
+        console.log("添加购物车",data)
         // 重新请求购物车数量（和购物车列表）
         return Promise.resolve('success')
       })
@@ -344,14 +345,14 @@ export default {
 
    return new Promise(async (resolve, reject) => {
       try {
-        // let cart = await dispatch('getLocalCart')
-        // cart = cart.concat(addInfo)
-        // if (cart .length > 30) {
-        //   return reject(new Error(lang.cartIsFull))
-        // }
-        // cart = cart.concat(goods)
+        let cart = await dispatch('getLocalCart')
+        cart = cart.concat(addInfo)
+        if (cart .length > 30) {
+          return reject(new Error(lang.cartIsFull))
+        }
+        cart = cart.concat(goods)
         // 本地加入购物车数据
-        // localStorage.setItem(CART, JSON.stringify(cart))
+        // localStorage.setItem`(CART, JSON.stringify(cart))
         return resolve()
       } catch (e) {
         console.log("eeeeee",e)
