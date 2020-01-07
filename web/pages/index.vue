@@ -88,7 +88,9 @@
           :scale="true"
           :scale-multiple="1.5"
           :indicator="false"
+          @change="changeActiveHotProduct"
         >
+
           <div
             v-for="(product, n) in hotProductInfo.products"
             :key="n"
@@ -481,6 +483,7 @@ export default {
       return result
     },
     activeHotProductInfo() {
+      console.log(1111,this.activeHotProductIndex)
       return this.hotProductInfo.products[this.activeHotProductIndex] || {}
     },
     activeDiamondInfo() {
