@@ -941,7 +941,6 @@ export default {
     ...mapState(['cartAmount', 'wishAmount']),
     ...mapGetters(['userInfo', 'hadLogin']),
     showMobile() {
-      const hidenLength = 4
       let result = this.userInfo.username
       if(result){
         result=result.replace(result.substr(3, 4),"****")

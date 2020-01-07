@@ -484,23 +484,23 @@ export default {
              _this.$store.commit('setToken', res.data.access_token)
               _this.$store.dispatch('getUserInfo')
                _this.$store.commit('setLastUrl', '')
-              setTimeout(() => {
-                if (lastUrl) {
-                  _this.$router.replace({
-                    path: lastUrl
-                  })
-                } else {
-                  _this.$router.replace({
-                    path: '/'
-                  })
-                }
-              }, 0)
-            // _this.$router.replace({
-            //   path: '/login',
-            //   query: {
-            //     type: 'login'
-            //   }
-            // })
+              // setTimeout(() => {
+              //   if (lastUrl) {
+              //     _this.$router.replace({
+              //       path: lastUrl
+              //     })
+              //   } else {
+              //     _this.$router.replace({
+              //       path: '/'
+              //     })
+              //   }
+              // }, 0)
+            _this.$router.replace({
+              path: '/',
+              query: {
+                type: 'login'
+              }
+            })
           }else {
             throw new Error (res.message)
           }   
