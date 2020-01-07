@@ -6,11 +6,11 @@
     </div>
     <div class="base-info">
       <div>
-        <div v-if="language==='zh_CN'" class="base-info-line">
+        <!-- <div v-if="language==='zh_CN'" class="base-info-line">
           <div class="base-info-line-title">{{ $t(`${lang}.phone`) }}</div>
           <div class="base-info-line-content">{{ userInfo.mobile }}</div>
-        </div>
-        <div v-else class="base-info-line">
+        </div> -->
+        <div  class="base-info-line">
           <div class="base-info-line-title">{{ $t(`${lang}.email`) }}</div>
           <div class="base-info-line-content">{{ userInfo.username }}</div>
         </div>
@@ -186,7 +186,8 @@ export default {
     return {
       lang,
       userInfo: {
-        account: `akm`,
+        account: ``,
+        mobile:'',
         firstname: ``,
         lastname: ``,
         gender: 0,

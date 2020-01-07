@@ -213,14 +213,14 @@ export default {
     }
   },
    watch:{
-    mobile(){
-      if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-        this.$errorMessage("请输入手机号")
-      }else{
-        this.mobileShow=false
-        this.isActivemobile=false
-      }
-    }
+    // mobile(){
+    //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+    //     this.$errorMessage("请输入手机号")
+    //   }else{
+    //     this.mobileShow=false
+    //     this.isActivemobile=false
+    //   }
+    // }
   },
   computed: {
   //  aa(){
