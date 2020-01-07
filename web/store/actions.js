@@ -359,7 +359,8 @@ export default {
           return reject(new Error(lang.cartIsFull))
         }
         // cart = cart.concat(goods)
-        localStorage.setItem(CART, JSON.stringify(cart))
+        // 本地加入购物车数据
+        // localStorage.setItem(CART, JSON.stringify(cart))
         return resolve('success')
       } catch (e) {
         return reject(e)
@@ -635,7 +636,7 @@ export default {
     return new Promise((resolve, reject) => {
       dispatch('getLocalCart')
         .then(data => {
-          console.log("本地购物车列表11111",data)
+          // console.log("本地购物车列表11111",data)
           dispatch('localCartToGoodsInfo', data)
             .then(data => {
              

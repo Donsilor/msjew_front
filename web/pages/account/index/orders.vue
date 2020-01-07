@@ -388,8 +388,6 @@ export default {
           for (const i in res.data.data) {
             const o = res.data.data[i]
             o.orderTime = moment(o.orderTime* 1000).format('YYYY-MM-DD HH:mm:ss')
-            // o.orderTime = moment(o.orderTime).format('YYYY-MM-DD')
-            console.log("o.time",o.orderTime)
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
@@ -445,6 +443,7 @@ export default {
           30: this.$t(`${lang}.hadSend`),
           40: this.$t(`${lang}.hadFinish`),
         };
+        console.log("bbbbb",status_value[status])
       return status_value[status];
     },
     cancelOrder() {
