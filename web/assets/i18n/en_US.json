@@ -138,12 +138,12 @@
   },
   "components": {
     "step": {
-      "choose": "選擇",
-      "check": "查看",
+      "choose": "Select",
+      "check": "Review",
       "edit": "修改",
-      "cart": "購物車",
-      "diamond": "鑽石",
-      "ring": "Setting"
+      "cart": "Complete",
+      "diamond": "Diamond",
+      "ring": "Ring"
     },
     "eftGuide": {
       "title": "Wire transfer guide",
@@ -476,6 +476,8 @@
     "contactUs": "CONTACT US"
   },
   "weddingRings": {
+    "belongOurRing":"Love at the moment,love at BDD",
+    "freeCollocation":"My Heart Collection",
     "weddingRings": "Wedding Rings",
     "weddingRing": "Wedding Ring",
     "weddingRingContent": "Explore our handmade collection or discover how you can design and even help make your own unique ring.",
@@ -972,7 +974,9 @@
   "search": {
     "keywordPlaceholder": "Keyword",
     "search": "Search",
-    "sort": "Sort By"
+    "sort": "Sort By",
+    "homePage": "Homepage",
+    "result": "Search results"
   },
   "detail": {
     "goodsId": "Product ID",

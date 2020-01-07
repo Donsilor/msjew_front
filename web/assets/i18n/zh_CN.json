@@ -139,11 +139,11 @@
   "components": {
     "step": {
       "choose": "选择",
-      "check": "查看",
+      "check": "审查",
       "edit": "修改",
-      "cart": "购物车",
+      "cart": "定制",
       "diamond": "钻石",
-      "ring": "镶嵌"
+      "ring": "戒托"
     },
     "eftGuide": {
       "title": "电汇指引",
@@ -399,7 +399,6 @@
     "ourAddress": "我们的办公地址",
     "bookDate": "预约日期",
     "bookTime": "请选择预约时间*",
-
     "header": "联络我们",
     "goBack": "预约來店",
     "name": "名称",
@@ -494,6 +493,8 @@
     "contactUs": "CONTACT US"
   },
   "weddingRings": {
+    "belongOurRing":"懂你的心 成双成对",
+    "freeCollocation":"自由搭配 爱我所爱",
     "weddingRings": "WEDDING RINGS",
     "weddingRing": "结婚戒指",
     "weddingRingContent": "用BDD结婚戒指说“我愿意”,在纪念日和特殊场合说“我会永远”",
@@ -992,7 +993,9 @@
   "search": {
     "keywordPlaceholder": "请输入关键字搜索",
     "search": "搜索",
-    "sort": "排序"
+    "sort": "排序",
+    "homePage": "首页",
+    "result": " 搜索結果"
   },
   "detail": {
     "goodsId": "商品ID",

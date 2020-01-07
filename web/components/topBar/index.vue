@@ -43,13 +43,13 @@
 
             <!--        登录后的用户菜单-->
             <div v-else class="item user">
-              <el-dropdown type="primary" trigger="click" placement="bottom">
-                <span v-if="userInfo.lastname==''||userInfo.firstname==''">
+              <el-dropdown type="primary"  placement="bottom">
+                <span v-if="userInfo.lastname==''||userInfo.firstname==''" class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
-                  {{ userInfo.username }}
+                  {{ showMobile }}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
-                <span v-else class="row-flex align-item-center el-dropdown-link">
+                <span v-else class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ userInfo.lastname }} {{ userInfo.firstname }}
                   <i class="iconfont iconkuozhan"></i>
@@ -93,11 +93,11 @@
             <div class="item language">
               <el-dropdown
                 type="primary"
-                trigger="click"
+
                 placement="bottom"
                 @command="setLanguage"
               >
-                <span class="row-flex align-item-center el-dropdown-link">
+                <span class="row-flex align-item-center el-dropdown-link span">
                   {{ languageInfo.content }}<i class="iconfont iconkuozhan"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
@@ -116,7 +116,7 @@
             <div class="item coin">
               <el-dropdown
                 type="primary"
-                trigger="click"
+
                 placement="bottom"
                 @command="setCoin"
               >
@@ -940,6 +940,13 @@ export default {
   computed: {
     ...mapState(['cartAmount', 'wishAmount']),
     ...mapGetters(['userInfo', 'hadLogin']),
+    showMobile() {
+      let result = this.userInfo.username
+      if(result){
+        result=result.replace(result.substr(9, 100),"....")
+      }
+      return result
+    },
     languageInfo() {
       let result = ''
       const language = this.$store.state.language
@@ -1000,8 +1007,8 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout', lang)
+      this.$router.push('/login')
       window.location.reload()
-      // this.$router.push('/login')
       // this.$store.dispatch('logout', lang)
       // this.$router.push(`/login`)
       // this.$store.dispatch('logout', lang)
@@ -1148,13 +1155,17 @@ export default {
             }
           }
           .user {
-            margin-right: 35px;
+            margin-right: 50px;
 
             .icongerenzhongxin {
+              // width: 20px;
+              // height: 22px;
               font-size: 22px;
               color: #666666;
             }
             .iconkuozhan {
+              // width: 20px;
+              // height: 22px;
               font-size: 6px;
               color: #636363;
               display: inline-block;
@@ -1169,7 +1180,7 @@ export default {
             }
           }
           .cart {
-            margin-right: 30px;
+            margin-right: 50px;
 
             .icongouwuche {
               font-size: 22px;
@@ -1177,7 +1188,7 @@ export default {
             }
           }
           .language {
-            margin-right: 30px;
+            margin-right: 50px;
 
             .iconkuozhan {
               font-size: 6px;
@@ -1187,7 +1198,7 @@ export default {
             }
           }
           .coin {
-            margin-right: 14px;
+            margin-right: 30px;
 
             .iconkuozhan {
               font-size: 6px;
@@ -1571,5 +1582,8 @@ export default {
       }
     }
   }
+}
+.span{
+  outline: none
 }
 </style>

@@ -139,11 +139,11 @@
   "components": {
     "step": {
       "choose": "選擇",
-      "check": "查看",
+      "check": "審查",
       "edit": "修改",
       "cart": "定製",
       "diamond": "鑽石",
-      "ring": "鑲嵌"
+      "ring": "戒托"
     },
     "eftGuide": {
       "title": "電匯指引",
@@ -477,6 +477,8 @@
     "contactUs": "CONTACT US"
   },
   "weddingRings": {
+    "belongOurRing":"懂您的心 成雙成對",
+    "freeCollocation":"自由搭配 愛我所愛",
     "weddingRings": "WEDDING RINGS",
     "weddingRing": "結婚戒指",
     "weddingRingContent": "用BDD結婚戒指說“我願意”,在紀念日和特殊場合說“我會永遠”",
@@ -974,7 +976,9 @@
   "search": {
     "keywordPlaceholder": "請輸入關鍵字搜索",
     "search": "搜索",
-    "sort": "排序"
+    "sort": "排序",
+    "homePage": "首页",
+    "result": " 搜索結果"
   },
   "detail": {
     "goodsId": "商品ID",

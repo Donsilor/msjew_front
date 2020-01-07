@@ -4,10 +4,12 @@
       <el-carousel
         trigger="click"
         :autoplay="true"
-        :height="bannerHeight + 'px'"
+        :height="bannerHeig + 'px'"
       >
      <el-carousel-item v-for="(item, index) in ad" :key="index">
+        <a :href="item.addres || ''">
           <img class="banner-img" :src="item.image" alt="">
+        </a>
       </el-carousel-item>
 
         <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
@@ -249,7 +251,7 @@
                 <h3 class="name">{{ $t(`${lang}.diamondStudEarrings`) }}</h3>
                 <p class="desc">{{ $t(`${lang}.diamondStudsInfo`) }}</p>
                 <div class="button-group">
-                  <nuxt-link :to="{ path: '/jewellery/all' }">
+                  <nuxt-link :to="{ path: 'jewellery/ear-stud' }">
                     <button>{{ $t(`${lang}.browse`) }}</button>
                   </nuxt-link>
                 </div>
@@ -320,7 +322,7 @@ export default {
   mixins: [CategoryIndexPage],
   data() {
     return {
-      bannerHeight: 300,
+      bannerHeig: 640,
       lang,
       recommendCategories: [
         {
@@ -502,6 +504,7 @@ export default {
     })
       .then(data => {
         var data = data.data;
+        console.log(data)
         return {
           ad: data.advert,
           webSite: data.webSite,

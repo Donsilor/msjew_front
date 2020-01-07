@@ -1861,7 +1861,7 @@ export default {
             firstname: this.addressData.firstname,
             lastname: this.addressData.lastname,
             mobile_code: this.phoneNum.phone_code,
-           mobile: this.addressData.mobile,
+            mobile: this.addressData.mobile,
             email: this.addressData.email,
             country_id: this.country.areaId,
             province_id: this.province.areaId,
@@ -2165,9 +2165,13 @@ export default {
       console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
+        allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
-        buyer_address_id: this.orderAddress.id
+        buyer_address_id: this.orderAddress.id,
+        afterMail: this.isSameEmail
+        ? this.orderAddress.userMail
+        : this.orderEmail,
       }
       // console.log("pppp",data)
       this.$axios

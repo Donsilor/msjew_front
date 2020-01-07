@@ -36,7 +36,8 @@
     </section>
     <section class="recommend-pair-ring">
       <h1 class="section-title">
-        {{ recommendPairRingInfo.moduleTitle }}
+        <!-- {{ recommendPairRingInfo.moduleTitle }} -->
+        {{ $t(`${lang}.belongOurRing`) }}
       </h1>
       <div class="section-title-line"></div>
       <ul class="list">
@@ -83,7 +84,8 @@
     </section>
     <section class="recommend-ring">
       <h1 class="section-title">
-        {{ recommendLadyRingInfo.moduleTitle }}
+        <!-- {{ recommendLadyRingInfo.moduleTitle }} -->
+        {{ $t(`${lang}.freeCollocation`) }}
       </h1>
       <div class="section-title-line"></div>
       <div class="recommend-category lady-ring">
@@ -679,5 +681,8 @@ section {
       }
     }
   }
+}
+.page{
+  margin-bottom: 50px;
 }
 </style>

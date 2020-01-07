@@ -24,7 +24,7 @@ export default function({ $axios, store }) {
   
   $axios.onResponse(res => {
     const data = res.data || {}
-    // console.log("data",res.data)
+    // console.log("data",res.data.refresh_token)
     // return data;
 
     if (data.hasOwnProperty('code')) {
@@ -37,7 +37,8 @@ export default function({ $axios, store }) {
         if (data.code == 401) {
           console.log('is 401')
           store.dispatch('logout')
-          this.$router.push('/login')
+          // _this.$store.commit('setToken', data.refresh_token)
+          // this.$router.push('/login')
           // window.location.href = '/login'
           return
         }

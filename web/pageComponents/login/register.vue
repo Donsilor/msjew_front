@@ -108,13 +108,13 @@
         <el-checkbox v-model="agreement"></el-checkbox>
         <p class="agreement-content">
           {{ $t(`${lang}.checked`) }}
-          <!-- <nuxt-link :to="{ path: '/policies/terms-and-conditions' }">
+          <nuxt-link :to="{ path: '/policies/terms-and-conditions' }" target="_blank">
            {{ $t(`${lang}.rule`) }}
-          </nuxt-link> -->
+          </nuxt-link>
           <!-- <a href="/policies/terms-and-conditions" target="_blank">{{ $t(`${lang}.rule`) }}</a> -->
-          <a href="/policies/terms-and-conditions" target="_blank">
+          <!-- <a href="/policies/terms-and-conditions" target="_blank">
             {{ $t(`${lang}.rule`) }}
-          </a>
+          </a> -->
         </p>
       </div>
       <div class="margin-bottom-29">
@@ -481,12 +481,21 @@ export default {
           if(res.code==200){
             _this.requesting = false
             _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-            _this.$router.replace({
-              path: '/login',
-              query: {
-                type: 'login'
+            _this.$store.commit('setToken', res.data.access_token)
+            _this.$store.dispatch('getUserInfo')
+            const lastUrl = _this.$store.state.lastUrl
+            _this.$store.commit('setLastUrl', '')
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              } else {
+                _this.$router.replace({
+                  path: '/'
+                })
               }
-            })
+            }, 0)
           }else {
             throw new Error (res.message)
           }   
@@ -531,12 +540,21 @@ export default {
           if(res.code==200){
             _this.requesting = false
             _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-            _this.$router.replace({
-              path: '/login',
-              query: {
-                type: 'login'
-              }
-            })
+             _this.$store.commit('setToken', res.data.access_token)
+              _this.$store.dispatch('getUserInfo')
+              const lastUrl = _this.$store.state.lastUrl
+              _this.$store.commit('setLastUrl', '')
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                } else {
+                  _this.$router.replace({
+                    path: '/'
+                  })
+                }
+              }, 0)
           }else {
             throw new Error (res.message)
           }  

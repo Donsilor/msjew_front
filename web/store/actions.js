@@ -119,6 +119,19 @@ function makeComparedGoodGroups(compared = []) {
 }
 
 export default {
+  // 重新获取token
+  // tokenDataFn({ $axios, state, getters, commit, dispatch }){
+  //   return this.$axios({
+  //     method: 'post',
+  //     url:'/web/site/refresh'
+  //   }).then(res => {
+  //       // console.log("购物车列表",res.data)
+        
+  //     })
+  //     .catch(err => {
+  //       return Promise.reject(err)
+  //     })
+  // },  
   nuxtServerInit({ commit }, { req, app, $axios }) {
     // $axios({
     //   method: `get`,
