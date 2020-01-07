@@ -4,10 +4,12 @@
       <el-carousel
         trigger="click"
         :autoplay="true"
-        :height="bannerHeight + 'px'"
+        :height="bannerHeig + 'px'"
       >
      <el-carousel-item v-for="(item, index) in ad" :key="index">
+        <a :href="item.addres || ''">
           <img class="banner-img" :src="item.image" alt="">
+        </a>
       </el-carousel-item>
 
         <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
@@ -318,7 +320,7 @@ export default {
   mixins: [CategoryIndexPage],
   data() {
     return {
-      bannerHeight: 640,
+      bannerHeig: 640,
       lang,
       recommendCategories: [
         {
@@ -499,6 +501,7 @@ export default {
     })
       .then(data => {
         var data = data.data;
+        console.log(data)
         return {
           ad: data.advert,
           webSite: data.webSite,
