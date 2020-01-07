@@ -397,6 +397,7 @@ export default {
       return status_value[status];
     },
     getData() {
+      console.log("id",this.oid)
       this.$axios
         .get('/web/member/order/detail', {
           params: { orderId: this.oid }
@@ -421,6 +422,7 @@ export default {
         })
     },
     goToDetail(obj) {
+      console.log("issssss",obj)
       let route = {
         path: '/',
         query: {}
