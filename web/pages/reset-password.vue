@@ -78,11 +78,11 @@
                     :placeholder="$t(`${lang}.schedule1-code`)"
                   />
                 </div>
-                <!-- <div class="send-email-code">
+                <div class="send-email-code">
                   <button  :class="['getCode', className]" :disabled="waiting" @click="sendPhoneCode">
                     {{ waitingText }}
                   </button>
-                </div> -->
+                </div>
               </div>
               <div v-show="codetip" class="error-tip">
                 {{ $t(`${lang}.schedule2-codetips`) }}
@@ -454,7 +454,8 @@ export default {
     // 发送手机验证码
     sendPhoneCode() {
       const _this = this
-      return new Promise((resolve, reject) => {
+      // return new Promise((resolve, reject) => {
+        _this.setWait()
         _this
         .$axios({
             method: 'post',
@@ -465,80 +466,81 @@ export default {
             }
           })
           .then(res => {
-            resolve(res)
-            // if(res.code==200){
-            //   _this.$successMessage("发送成功")
-            //   // _this.requesting = false
-            // }
+            // resolve(res)
+            if(res.code==200){
+              _this.$successMessage("发送成功")
+              // _this.requesting = false
+            }
           })
           .catch(err => {
-             reject(err)
-            // _this.requesting = false
-            // _this.$errorMessage(err.message)
+            //  reject(err)
+             _this.resetCountDown()
+            _this.requesting = false
+            _this.$errorMessage(err.message)
           })
-      })
+      // })
       // Helpers.requestServer(options)
     },
     // 发送邮箱验证码
-    sendCode() {
-      const _this = this
-      return new Promise((resolve, reject) => {
-        _this
-          .$axios({
-            method: 'post',
-            url: '/web/site/email-code',
-            data: {
-              'email': _this.info.email,
-              'usage': 'up-pwd'
-            }
-          })
-          .then(res => {
-            console.log("啦啦啦",res)
-            resolve(res)
-          })
-          .catch(err => {
-            console.log(err)
-            reject(err)
-          })
-      })
-    },
     // sendCode() {
-      //   const _this = this
-      //   // console.log("sss",_this.info.email)
-      //   if (_this.info.email=='') {
-      //     this.$errorMessage(_this.$t(`${langcode}.inputEmail`))
-      //     return
-      //   }
-      //   if (_this.waiting) {
-      //     this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-      //     return
-      //   }
-      //   _this.setWait()
-      //    this.$axios({
-      //     method: "post",
-      //     url: '/web/site/email-code',
-      //     data:{
-      //       'email': _this.info.email,
-      //       'usage': 'up-pwd'
-      //     }
-      //   }).then(res => {
-      //     console.log("邮箱验证码",res)
-      //     // if (res.code==200){
-      //       // _this.code=res.data.code
-      //     // }else {
-      //     //   throw new Error (res.message)
-      //     // }   
-      //     // _this.sendReturn(res)
-      //   }).catch(err => {
-      //     _this.resetCountDown()
-      //     _this.$errorMessage(err.message)
-      //     // _this.$ConfirmBox({
-      //     //   title: _this.$t(`${langcode}.error`),
-      //     //   message: `${err.message}`
-      //     // })
-      //   })
-      //   // Helpers.requestServer(options)
+    //   const _this = this
+    //   return new Promise((resolve, reject) => {
+    //     _this
+    //       .$axios({
+    //         method: 'post',
+    //         url: '/web/site/email-code',
+    //         data: {
+    //           'email': _this.info.email,
+    //           'usage': 'up-pwd'
+    //         }
+    //       })
+    //       .then(res => {
+    //         console.log("啦啦啦",res)
+    //         resolve(res)
+    //       })
+    //       .catch(err => {
+    //         console.log(err)
+    //         reject(err)
+    //       })
+    //   })
     // },
+    sendCode() {
+        const _this = this
+        // console.log("sss",_this.info.email)
+        if (_this.info.email=='') {
+          this.$errorMessage(_this.$t(`${langcode}.inputEmail`))
+          return
+        }
+        if (_this.waiting) {
+          this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
+          return
+        }
+        _this.setWait()
+         this.$axios({
+          method: "post",
+          url: '/web/site/email-code',
+          data:{
+            'email': _this.info.email,
+            'usage': 'up-pwd'
+          }
+        }).then(res => {
+          console.log("邮箱验证码",res)
+          // if (res.code==200){
+            // _this.code=res.data.code
+          // }else {
+          //   throw new Error (res.message)
+          // }   
+          // _this.sendReturn(res)
+        }).catch(err => {
+          _this.resetCountDown()
+          _this.$errorMessage(err.message)
+          // _this.$ConfirmBox({
+          //   title: _this.$t(`${langcode}.error`),
+          //   message: `${err.message}`
+          // })
+        })
+        // Helpers.requestServer(options)
+    },
     // 重置倒计时
     resetCountDown() {
       this.waitingTime = 0
@@ -547,8 +549,8 @@ export default {
       if(this.mobile==''){
         throw new Error ("手机号不能为空")
       }
-      if(this.code==''){
-        throw new Error ("验证码不能为空")
+      if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+        throw new Error ("请输入正确手机号")
       }
     },
     // 繁体和英文步骤条
@@ -605,80 +607,80 @@ export default {
       _this.activeScheduleKey = nextScheduleKey
     },
     // 中文
-    async changeSchedule2(key) {
-      const _this = this
-      const nextScheduleKey = key
-      _this.ajaxLoading = true
-      switch (key) {
-        case 1:
-          
-          break
-        case 2:
-          try {
-            await _this.sendPhoneCode()
-          } catch (e) {
-            _this.$errorMessage(e.message)
-            _this.ajaxLoading = false
-            return
-          }
-          break
-        case 3:
-          try {
-            await _this.resetMobilePassword()
-          } catch (e) {
-            _this.$errorMessage(e.message)
-            _this.ajaxLoading = false
-            return
-          }
-          _this.waitTimeout = setTimeout(() => {
-            clearTimeout(_this.waitTimeout)
-            _this.toLogin()
-          }, _this.waitSecond * 1000)
-          break
-        default:
-          _this.ajaxLoading = false
-          return
-      }
-      _this.ajaxLoading = false
-      _this.activeScheduleKey = nextScheduleKey
-    },
-    // 中文步骤条
     // async changeSchedule2(key) {
-    //   const _this = this
-    //   const nextScheduleKey = key
-    //   _this.ajaxLoading = true
-    //   switch (key) {
-    //     case 1:
-    //        break;
-    //     case 2:
-    //       try {
-    //         await _this.mobiletip()
-    //       } catch (e) {
-    //         _this.$errorMessage(e.message)
-    //         _this.ajaxLoading = false
-    //         return false
-    //       }
-    //       break
-    //     case 3:
-    //       try {
-    //         await _this.resetMobilePassword()
-    //       } catch (e) {
-    //         _this.$errorMessage(e.message)
-    //         _this.ajaxLoading = false
-    //         return
-    //       }
-    //       _this.waitTimeout = setTimeout(() => {
-    //         clearTimeout(_this.waitTimeout)
-    //         _this.toLogin()
-    //       }, _this.waitSecond * 1000)
-    //       break
-    //     default:
-    //       _this.ajaxLoading = false
-    //       return
-    //   }
-    //   _this.ajaxLoading = false
-    //  _this.activeScheduleKey = nextScheduleKey
+      //   const _this = this
+      //   const nextScheduleKey = key
+      //   _this.ajaxLoading = true
+      //   switch (key) {
+      //     case 1:
+            
+      //       break
+      //     case 2:
+      //       try {
+      //         await _this.sendPhoneCode()
+      //       } catch (e) {
+      //         _this.$errorMessage(e.message)
+      //         _this.ajaxLoading = false
+      //         return
+      //       }
+      //       break
+      //     case 3:
+      //       try {
+      //         await _this.resetMobilePassword()
+      //       } catch (e) {
+      //         _this.$errorMessage(e.message)
+      //         _this.ajaxLoading = false
+      //         return
+      //       }
+      //       _this.waitTimeout = setTimeout(() => {
+      //         clearTimeout(_this.waitTimeout)
+      //         _this.toLogin()
+      //       }, _this.waitSecond * 1000)
+      //       break
+      //     default:
+      //       _this.ajaxLoading = false
+      //       return
+      //   }
+      //   _this.ajaxLoading = false
+      //   _this.activeScheduleKey = nextScheduleKey
     // },
+    // 中文步骤条
+    async changeSchedule2(key) {
+        const _this = this
+        const nextScheduleKey = key
+        _this.ajaxLoading = true
+        switch (key) {
+          case 1:
+            break;
+          case 2:
+            try {
+              await _this.mobiletip()
+            } catch (e) {
+              _this.$errorMessage(e.message)
+              _this.ajaxLoading = false
+              return false
+            }
+            break
+          case 3:
+            try {
+              await _this.resetMobilePassword()
+            } catch (e) {
+              _this.$errorMessage(e.message)
+              _this.ajaxLoading = false
+              return
+            }
+            _this.waitTimeout = setTimeout(() => {
+              clearTimeout(_this.waitTimeout)
+              _this.toLogin()
+            }, _this.waitSecond * 1000)
+            break
+          default:
+            _this.ajaxLoading = false
+            return
+        }
+        _this.ajaxLoading = false
+       _this.activeScheduleKey = nextScheduleKey
+    },
     // 验证验证码
     //  compareMobileCode() {
       //     const _this = this
@@ -831,7 +833,7 @@ input{
 }
 
 .getCode:disabled {
-  background-color: #999999;
+  // background-color: #999999;
 }
 .bottom-border-input {
   height: 37px;
@@ -1190,7 +1192,7 @@ input{
 
       & {
         input {
-          width: 399px;
+          width: 280px;
           height: 33px;
           line-height: 33px;
           border-bottom: 1px solid #999999;
@@ -1198,6 +1200,7 @@ input{
           font-size: 16px;
           font-weight: 400;
           color: #999999;
+          margin-right: 26px
         }
       }
     }

@@ -46,7 +46,7 @@
               <el-dropdown type="primary"  placement="bottom">
                 <span v-if="userInfo.lastname==''||userInfo.firstname==''" class="row-flex align-item-center el-dropdown-link">
                   <i class="iconfont icongerenzhongxin"></i>
-                  {{ userInfo.username }}
+                  {{ showMobile }}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
                 <span v-else class="row-flex align-item-center el-dropdown-link">
@@ -940,6 +940,13 @@ export default {
   computed: {
     ...mapState(['cartAmount', 'wishAmount']),
     ...mapGetters(['userInfo', 'hadLogin']),
+    showMobile() {
+      let result = this.userInfo.username
+      if(result){
+        result=result.replace(result.substr(3, 4),"****")
+      }
+      return result
+    },
     languageInfo() {
       let result = ''
       const language = this.$store.state.language
@@ -1001,7 +1008,7 @@ export default {
     logout() {
       this.$store.dispatch('logout', lang)
       window.location.reload()
-      // this.$router.push('/login')
+      this.$router.push('/login')
       // this.$store.dispatch('logout', lang)
       // this.$router.push(`/login`)
       // this.$store.dispatch('logout', lang)
@@ -1151,10 +1158,14 @@ export default {
             margin-right: 50px;
 
             .icongerenzhongxin {
+              // width: 20px;
+              // height: 22px;
               font-size: 22px;
               color: #666666;
             }
             .iconkuozhan {
+              // width: 20px;
+              // height: 22px;
               font-size: 6px;
               color: #636363;
               display: inline-block;

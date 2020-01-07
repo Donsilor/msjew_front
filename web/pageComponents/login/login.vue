@@ -223,7 +223,10 @@ export default {
     // }
   },
   computed: {
-   
+  //  aa(){
+  //    let result=this.$store.state.refreshCode
+  //    console.log(result) 
+  //  }
   },
   mounted() {
     // if(this.mobile==''){
@@ -360,6 +363,8 @@ export default {
               this.$errorMessage(_this.$t(`${lang}.phoneTips`))
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
+              // _this.$store.commit("refreshToken",res.data.refresh_token);
+            
               _this.$store.commit('setToken', res.data.access_token)
               _this.$store.dispatch('getUserInfo')
              
@@ -393,13 +398,17 @@ export default {
     login() {
       const _this = this
       // _this.requesting = true
-      if(_this.account === ''||_this.password === ''||_this.code === ''){
+      if(_this.account === ''){
         _this.isActive1 =true
-        _this.isActive2 =true
-        _this.isActive3 =true
         _this.phoneErr = true
-        _this.passwordErr = true
-        _this.codeErr = true
+      }
+      if(_this.password === ''){
+         _this.isActive2 =true
+         _this.passwordErr = true
+      }
+      if(_this.code === ''){
+         _this.isActive3 =true
+         _this.codeErr = true
       }
       this.$axios({
           method: 'post',

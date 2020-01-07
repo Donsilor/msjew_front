@@ -1215,7 +1215,7 @@
           />
           <input
             v-show="isSameEmail"
-            v-model="orderAddress.email"
+            v-model="orderEmail"
             :class="{ 'wrong-input': wrongInput.odMail }"
             type="text"
             @focus="
@@ -1861,7 +1861,7 @@ export default {
             firstname: this.addressData.firstname,
             lastname: this.addressData.lastname,
             mobile_code: this.phoneNum.phone_code,
-           mobile: this.addressData.mobile,
+            mobile: this.addressData.mobile,
             email: this.addressData.email,
             country_id: this.country.areaId,
             province_id: this.province.areaId,

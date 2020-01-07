@@ -1,4 +1,5 @@
 <template>
+
   <div class="orders">
     <div class="pink-title">
       <div class="pink-line" />
@@ -334,16 +335,18 @@ export default {
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
               obj.link = `132`
             })
+            console.log("llllll",res.data.data[i].orderStatus)
             if (res.data.data[i].orderStatus == 10) {
               //  没给钱
               this.list.ordered.push(o)
-            } else if (res.data.data[i].orderStatus == 20) {
+            } else if (res.data.data[i].orderStatus == 30) {
+              
               //  给了钱没发货
               this.list.paid.push(o)
-            } else if (res.data.data[i].orderStatus === 30) {
+            } else if (res.data.data[i].orderStatus == 40) {
               //  发了货没收到
               this.list.send.push(o)
-            } else if (res.data.data[i].orderStatus === 40) {
+            } else if (res.data.data[i].orderStatus == 50) {
               //  订单完成了
               this.list.finished.push(o)
             } else if (res.data.data[i].orderStatus === 5) {
