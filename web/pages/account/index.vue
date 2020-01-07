@@ -13,8 +13,8 @@
             @click="toPersonalAccount"
           />
         </div>
-        <div v-if="language === 'zh_CN'" class="email">{{showMobile}}</div>
-        <div v-else class="email">{{ showEmail }}</div>
+        <!-- <div v-if="language === 'zh_CN'" class="email">{{showMobile}}</div> -->
+        <div class="email">{{ showEmail }}</div>
         <div class="middle-line" />
         <div class="link-box">
           <nuxt-link
@@ -97,7 +97,7 @@ export default {
     },
     showEmail() {
       const hidenLength = 4
-      let result = this.userInfo.email
+      let result = this.userInfo.username
       if (result) {
         result = result.split('@')
         if (result[0].length < hidenLength + 1) {
