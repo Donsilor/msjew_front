@@ -27,8 +27,8 @@
               <div class="single-step-left-side-word-big">
                 {{
                   steps.steps[0].ct === 1
-                    ? $t(`${lang}.diamond`)
-                    : $t(`${lang}.ring`)
+                    ?$t(`${lang}.diamond`)
+                    :$t(`${lang}.ring`)
                 }}
               </div>
             </div>

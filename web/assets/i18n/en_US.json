@@ -138,12 +138,12 @@
   },
   "components": {
     "step": {
-      "choose": "選擇",
-      "check": "查看",
+      "choose": "Select",
+      "check": "Review",
       "edit": "修改",
-      "cart": "購物車",
-      "diamond": "鑽石",
-      "ring": "Setting"
+      "cart": "Complete",
+      "diamond": "Diamond",
+      "ring": "Ring"
     },
     "eftGuide": {
       "title": "Wire transfer guide",
@@ -972,7 +972,9 @@
   "search": {
     "keywordPlaceholder": "Keyword",
     "search": "Search",
-    "sort": "Sort By"
+    "sort": "Sort By",
+    "homePage": "Homepage",
+    "result": "Search results"
   },
   "detail": {
     "goodsId": "Product ID",

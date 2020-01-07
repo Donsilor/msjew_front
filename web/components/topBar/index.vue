@@ -988,6 +988,7 @@ export default {
       this.fixedStatus = !!status
     },
     changeActiveNavMenu(nav) {
+      console.log('....')
       this.activeNavMenu = nav
     },
     setCoin(coin) {
@@ -1145,7 +1146,7 @@ export default {
             }
           }
           .user {
-            margin-right: 35px;
+            margin-right: 50px;
 
             .icongerenzhongxin {
               font-size: 22px;
@@ -1166,7 +1167,7 @@ export default {
             }
           }
           .cart {
-            margin-right: 30px;
+            margin-right: 50px;
 
             .icongouwuche {
               font-size: 22px;
@@ -1174,7 +1175,7 @@ export default {
             }
           }
           .language {
-            margin-right: 30px;
+            margin-right: 50px;
 
             .iconkuozhan {
               font-size: 6px;
@@ -1184,7 +1185,7 @@ export default {
             }
           }
           .coin {
-            margin-right: 14px;
+            margin-right: 30px;
 
             .iconkuozhan {
               font-size: 6px;

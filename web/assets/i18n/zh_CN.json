@@ -139,11 +139,11 @@
   "components": {
     "step": {
       "choose": "选择",
-      "check": "查看",
+      "check": "审查",
       "edit": "修改",
-      "cart": "购物车",
+      "cart": "定制",
       "diamond": "钻石",
-      "ring": "镶嵌"
+      "ring": "戒托"
     },
     "eftGuide": {
       "title": "电汇指引",
@@ -992,7 +992,9 @@
   "search": {
     "keywordPlaceholder": "请输入关键字搜索",
     "search": "搜索",
-    "sort": "排序"
+    "sort": "排序",
+    "homePage": "首页",
+    "result": " 搜索結果"
   },
   "detail": {
     "goodsId": "商品ID",

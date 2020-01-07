@@ -247,7 +247,7 @@
                 <h3 class="name">{{ $t(`${lang}.diamondStudEarrings`) }}</h3>
                 <p class="desc">{{ $t(`${lang}.diamondStudsInfo`) }}</p>
                 <div class="button-group">
-                  <nuxt-link :to="{ path: '/jewellery/all' }">
+                  <nuxt-link :to="{ path: 'jewellery/ear-stud' }">
                     <button>{{ $t(`${lang}.browse`) }}</button>
                   </nuxt-link>
                 </div>
@@ -318,7 +318,7 @@ export default {
   mixins: [CategoryIndexPage],
   data() {
     return {
-      bannerHeight: 300,
+      bannerHeight: 640,
       lang,
       recommendCategories: [
         {
