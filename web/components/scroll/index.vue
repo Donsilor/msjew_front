@@ -15,6 +15,10 @@
     },
     mounted() {
       window.addEventListener('scroll', this.scrollToTop);
+      console.log(scroll)
+    },
+    destroyed() {
+      window.removeEventListener('scroll', this.scrollToTop)
     },
     methods: {
       // 点击图片回到顶部方法，加计时器是为了过渡顺滑
@@ -46,16 +50,14 @@
 
 <style>
   .to-top {
-    /* position: fixed; */
-    top: 85%;
-    transform: translateY(-50%);
-    right: 30px;
+    position: absolute;
+    bottom: 220px;
+    right: 15px;
+    z-index: 666;
     z-index: 9999;
-    /* width: 50px; */
-    /* height: 50px; */
+    width: 50px;
+    height: 50px;
     background-color: #a096b4;
-    width: 100%;
-    height: 100%;
     box-shadow: 4px 4px 0px 0px rgba(214, 180, 177, 0.5);
     border-radius: 6px;
     text-align: center;

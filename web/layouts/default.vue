@@ -14,12 +14,8 @@
       <footer-bar></footer-bar>
     </div>
 
-    <div class="scroll-box">
-      <scroll></scroll>
-    </div>
-
     <div>
-      <mesBox></mesBox>
+      <!-- <scroll></scroll> -->
     </div>
   </div>
 </template>
@@ -70,14 +66,5 @@ export default {
     flex-shrink: 0;
     flex-grow: 0;
   }
-}
-.scroll-box{
-  position: flex;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  flex-grow: 1;
-  flex-shrink: 1;
 }
 </style>

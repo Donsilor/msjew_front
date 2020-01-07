@@ -9,7 +9,6 @@ import NoMoreData from '@/components/no-more-data'
 // import Empty from '@/components/empty'
 import Step from '@/components/step'
 import scroll from '@/components/scroll'
-import mesBox from '@/components/mesBox'
 
 // 个人中心
 import PersonalAccount from '@/components/personal/account'
@@ -27,7 +26,6 @@ Vue.use(NoMoreData)
 // Vue.use(Empty)
 Vue.use(Step)
 Vue.use(scroll)
-Vue.use(mesBox)
 
 // 个人中心
 Vue.use(PersonalAccount)

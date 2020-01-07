@@ -1468,7 +1468,7 @@ export default {
       }
     },
     // 改变排序方式，重新搜索
-    changeSort(index) {     
+    changeSort(index) {
       if (this.sortTypeIndex === index) {
         switch (this.sortType) {
           case 'down':
@@ -1489,10 +1489,10 @@ export default {
         this.sortType = 'down'
       }
       if(index === 0){
-        this.research()  
-        
+        this.research()
+
       }
-      
+
     },
     changeCondition(key, value) {
       const searchConditions = JSON.parse(JSON.stringify(this.searchConditions))
@@ -1697,15 +1697,7 @@ export default {
                 flex-shrink: 1;
                 min-width: 0;
                 position: relative;
-                
-                span{
-                  display: inline-block;
-                  width: 100%;
-                  overflow: hidden;
-                  word-wrap: nowrap;
-                  border: 1px solid red;
-                }
-                
+
                 input {
                   position: absolute;
                   top: 0;
