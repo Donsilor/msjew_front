@@ -1,5 +1,6 @@
 <template>
   <div class="page-content">
+    <section class="crumbs">{{ $t(`${lang}.homePage`) }} > {{ $t(`${lang}.result`) }}</section>
     <section class="search-keyword">
       <input
         v-model="keyword"
@@ -95,7 +96,7 @@
           {{ $t('common.getMore') }}
         </button>
       </div>
-      <no-more-data v-show="noMoreListData"></no-more-data>
+      <no-more-data v-show="showingData.length == 0"></no-more-data>
       <bdd-empty v-show="noListData" type="search"></bdd-empty>
     </section>
   </div>
@@ -117,7 +118,8 @@ export default {
       sortOptions: this.CONDITION_INFO.sortBy.search,
       sortTypeIndex: 0,
       page_size: 16,
-      keyword: ''
+      keyword: '',
+      noMoreListData: false
     }
   },
   computed: {
@@ -329,5 +331,11 @@ export default {
   max-width: 1366px;
   margin: 0 auto;
   padding: 40px 0;
+}
+
+.crumbs{
+  margin: -16px 0 20px;
+  font-size: 12px;
+  color: #333;
 }
 </style>
