@@ -75,7 +75,7 @@ export default {
           group_type: null,
           serviceId: 0,
           serviceVal: 'string',
-          goods_type:1
+          goods_type:_this.simpleDetail.categoryId
         }
       ]
       console.log(goodInfo)
