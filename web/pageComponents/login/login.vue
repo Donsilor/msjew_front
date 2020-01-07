@@ -213,14 +213,14 @@ export default {
     }
   },
    watch:{
-    // mobile(){
-    //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-    //     this.$errorMessage("请输入手机号")
-    //   }else{
-    //     this.mobileShow=false
-    //     this.isActivemobile=false
-    //   }
-    // }
+    mobile(){
+      if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+        this.$errorMessage("请输入手机号")
+      }else{
+        this.mobileShow=false
+        this.isActivemobile=false
+      }
+    }
   },
   computed: {
   //  aa(){
@@ -359,12 +359,9 @@ export default {
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
-            }else if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-              this.$errorMessage(_this.$t(`${lang}.phoneTips`))
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               // _this.$store.commit("refreshToken",res.data.refresh_token);
-            
               _this.$store.commit('setToken', res.data.access_token)
               _this.$store.dispatch('getUserInfo')
              

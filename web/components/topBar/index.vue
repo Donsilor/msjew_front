@@ -44,12 +44,12 @@
             <!--        登录后的用户菜单-->
             <div v-else class="item user">
               <el-dropdown type="primary"  placement="bottom">
-                <span v-if="userInfo.lastname==''||userInfo.firstname==''" class="row-flex align-item-center el-dropdown-link">
+                <span v-if="userInfo.lastname==''||userInfo.firstname==''" class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ showMobile }}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
-                <span v-else class="row-flex align-item-center el-dropdown-link">
+                <span v-else class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ userInfo.lastname }} {{ userInfo.firstname }}
                   <i class="iconfont iconkuozhan"></i>
@@ -97,7 +97,7 @@
                 placement="bottom"
                 @command="setLanguage"
               >
-                <span class="row-flex align-item-center el-dropdown-link">
+                <span class="row-flex align-item-center el-dropdown-link span">
                   {{ languageInfo.content }}<i class="iconfont iconkuozhan"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
@@ -943,7 +943,7 @@ export default {
     showMobile() {
       let result = this.userInfo.username
       if(result){
-        result=result.replace(result.substr(3, 4),"****")
+        result=result.replace(result.substr(9, 100),"....")
       }
       return result
     },
@@ -1008,8 +1008,8 @@ export default {
     },
     logout() {
       this.$store.dispatch('logout', lang)
-      window.location.reload()
       this.$router.push('/login')
+      window.location.reload()
       // this.$store.dispatch('logout', lang)
       // this.$router.push(`/login`)
       // this.$store.dispatch('logout', lang)
@@ -1583,5 +1583,8 @@ export default {
       }
     }
   }
+}
+.span{
+  outline: none
 }
 </style>

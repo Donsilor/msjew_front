@@ -1215,7 +1215,7 @@
           />
           <input
             v-show="isSameEmail"
-            v-model="orderEmail"
+            v-model="orderAddress.email"
             :class="{ 'wrong-input': wrongInput.odMail }"
             type="text"
             @focus="
@@ -2165,9 +2165,13 @@ export default {
       console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
+        allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
-        buyer_address_id: this.orderAddress.id
+        buyer_address_id: this.orderAddress.id,
+        afterMail: this.isSameEmail
+        ? this.orderAddress.userMail
+        : this.orderEmail,
       }
       // console.log("pppp",data)
       this.$axios
