@@ -43,8 +43,8 @@
 
             <!--        登录后的用户菜单-->
             <div v-else class="item user">
-              <el-dropdown type="primary" trigger="click" placement="bottom">
-                <span v-if="userInfo.lastname==''||userInfo.firstname==''">
+              <el-dropdown type="primary"  placement="bottom">
+                <span v-if="userInfo.lastname==''||userInfo.firstname==''" class="row-flex align-item-center el-dropdown-link">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ userInfo.username }}
                   <i class="iconfont iconkuozhan"></i>
@@ -93,7 +93,7 @@
             <div class="item language">
               <el-dropdown
                 type="primary"
-                trigger="click"
+               
                 placement="bottom"
                 @command="setLanguage"
               >
@@ -116,7 +116,7 @@
             <div class="item coin">
               <el-dropdown
                 type="primary"
-                trigger="click"
+                
                 placement="bottom"
                 @command="setCoin"
               >
