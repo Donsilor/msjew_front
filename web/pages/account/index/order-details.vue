@@ -367,6 +367,7 @@ export default {
       //   this.$t(`${lang}.status`)[8],
       //   this.$t(`${lang}.status`)[9]
       // ][status]
+      
       var status_value =  {
           0 :this.$t(`${lang}.cancelTransaction`),
           10: this.$t(`${lang}.hadNotPay`),
@@ -374,6 +375,7 @@ export default {
           30: this.$t(`${lang}.hadSend`),
           40: this.$t(`${lang}.hadFinish`),
         };
+      console.log("kkkk",status_value[status])  
       return status_value[status];
     },
     getData() {

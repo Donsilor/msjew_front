@@ -13,6 +13,10 @@
     <div class="layout-footer">
       <footer-bar></footer-bar>
     </div>
+
+    <div>
+      <!-- <scroll></scroll> -->
+    </div>
   </div>
 </template>
 

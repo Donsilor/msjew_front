@@ -143,7 +143,7 @@
       "edit": "修改",
       "cart": "购物车",
       "diamond": "钻石",
-      "ring": "戒托"
+      "ring": "镶嵌"
     },
     "eftGuide": {
       "title": "电汇指引",
@@ -996,6 +996,7 @@
   },
   "detail": {
     "goodsId": "商品ID",
+    "addToRing": "添加到戒托",
     "chooseSize": "获取我的指圈号",
     "back": "返回上一步",
     "color": "成色",

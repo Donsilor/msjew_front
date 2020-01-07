@@ -143,7 +143,7 @@
       "edit": "修改",
       "cart": "購物車",
       "diamond": "鑽石",
-      "ring": "戒托"
+      "ring": "Setting"
     },
     "eftGuide": {
       "title": "Wire transfer guide",
@@ -976,6 +976,7 @@
   },
   "detail": {
     "goodsId": "Product ID",
+    "addToRing": "ADD TO RING",
     "chooseSize": "Get my finger size",
     "back": "Back",
     "color": "Color",
