@@ -250,17 +250,17 @@ export default {
         },
         {
           name: this.$t(`${lang}.waitingSend`),
-          status: 20,
-          num: 0
-        },
-        {
-          name: this.$t(`${lang}.waitingReceive`),
           status: 30,
           num: 0
         },
         {
-          name: this.$t(`${lang}.hadFinish`),
+          name: this.$t(`${lang}.waitingReceive`),
           status: 40,
+          num: 0
+        },
+        {
+          name: this.$t(`${lang}.hadFinish`),
+          status: 50,
           num: 0
         }
       ],
@@ -373,7 +373,7 @@ export default {
           this.tabsParam[1].num = this.list.ordered.length
           this.tabsParam[2].num = this.list.paid.length
           this.tabsParam[3].num = this.list.send.length
-          this.tabsParam[4].num = this.list.receive.length
+          this.tabsParam[4].num = this.list.finished.length
           this.tabsParam[0].num = res.data.data.length
         })
         .catch(err => {
@@ -447,9 +447,10 @@ export default {
       var status_value =  {
           0 : this.$t(`${lang}.cancelTransaction`),
           10: this.$t(`${lang}.hadNotPay`),
-          20: this.$t(`${lang}.hadPay`),
-          30: this.$t(`${lang}.hadSend`),
-          40: this.$t(`${lang}.hadFinish`),
+          // 20: this.$t(`${lang}.hadPay`),
+          30: this.$t(`${lang}.waitingSend`),
+          40: this.$t(`${lang}.hadSend`),
+          50: this.$t(`${lang}.hadFinish`),
         };
         console.log("bbbbb",status_value[status])
       return status_value[status];
@@ -476,12 +477,12 @@ export default {
         })
     },
     receiveGoods() {
+      const data = this.$helpers.transformRequest(
+        JSON.parse(JSON.stringify({ orderId: this.rid })),
+        false
+      )
       this.$axios
-        .get('/web/myOrder/confirmReceipt', {
-          params: {
-            orderId: this.rid
-          }
-        })
+        .post('/web/member/order/confirm-receipt', data)
         .then(res => {
           // console.log(res)
           this.receiveOrder = false
