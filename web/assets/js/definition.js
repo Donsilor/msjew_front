@@ -11,28 +11,28 @@ export default language => {
         desc: lang.shape.roundDesc
       },
       {
-        id: 17,
+        id: 54,
         name: lang.shape.Princess,
         icon: '/diamonds/shape-icon/2.png',
         image: '/diamonds/shape/pincess.png',
         desc: lang.shape.PrincessDesc
       },
       {
-        id: 54,
+        id: 55,
         name: lang.shape.Emerald,
         icon: '/diamonds/shape-icon/10.png',
         image: '/diamonds/shape/emerald.png',
         desc: lang.shape.EmeraldDesc
       },
       {
-        id: 55,
+        id: 60,
         name: lang.shape.Asscher,
         icon: '/diamonds/shape-icon/8.png',
         image: '/diamonds/shape/asscher.png',
         desc: lang.shape.AsscherDesc
       },
       {
-        id: 56,
+        id: 58,
         name: lang.shape.Cushion,
         icon: '/diamonds/shape-icon/4.png',
         image: '/diamonds/shape/cushion.png',
@@ -46,28 +46,28 @@ export default language => {
         desc: lang.shape.MarquiseDesc
       },
       {
-        id: 58,
+        id: 61,
         name: lang.shape.Radiant,
         icon: '/diamonds/shape-icon/3.png',
         image: '/diamonds/shape/radiant.png',
         desc: lang.shape.RadiantDesc
       },
       {
-        id: 59,
+        id: 17,
         name: lang.shape.Oval,
         icon: '/diamonds/shape-icon/5.png',
         image: '/diamonds/shape/oval.png',
         desc: lang.shape.OvalDesc
       },
       {
-        id: 60,
+        id: 59,
         name: lang.shape.PearShape,
         icon: '/diamonds/shape-icon/9.png',
         image: '/diamonds/shape/pear.png',
         desc: lang.shape.PearShapeDesc
       },
       {
-        id: 61,
+        id: 56,
         name: lang.shape.Heart,
         icon: '/diamonds/shape-icon/7.png',
         image: '/diamonds/shape/heart.png',

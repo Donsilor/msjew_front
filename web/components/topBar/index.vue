@@ -380,7 +380,10 @@ export default {
                     name: this.$t(
                       `${lang}.engagementRingMenu.matchWithRoundDiamonds`
                     ),
-                    icon: ''
+                    icon: '',
+                    to: {
+                      path: this.$startDj(1)
+                    }
                   }
                 ]
               }

@@ -130,6 +130,7 @@
             :class="['add-to-cart', { active: canAddCart }]"
             @click="addCart"
           >
+         
             {{ $t(`${lang}.addCart`) }}
           </button>
         </div>

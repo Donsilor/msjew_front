@@ -220,16 +220,16 @@ export default {
             _this.$scrollTopTo(targetEle, top)
           }
         },
-        {
-          key: 'reviews',
-          name: this.$t(`${lang}.customerReviews`),
-          ref: '',
-          onClick() {
-            const targetEle = document.getElementsByClassName('layout-box')[0]
-            const top = _this.$refs['product-comments'].$el.offsetTop - 110
-            _this.$scrollTopTo(targetEle, top)
-          }
-        }
+        // {
+        //   key: 'reviews',
+        //   name: this.$t(`${lang}.customerReviews`),
+        //   ref: '',
+        //   onClick() {
+        //     const targetEle = document.getElementsByClassName('layout-box')[0]
+        //     const top = _this.$refs['product-comments'].$el.offsetTop - 110
+        //     _this.$scrollTopTo(targetEle, top)
+        //   }
+        // }
       ],
       activeTab: 'desc',
       materialColors: {

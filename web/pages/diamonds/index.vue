@@ -446,9 +446,9 @@ export default {
       )
       const moduleGoods = webSite.moduleGoods || []
       const result = {}
-
+      // result[webSite.type] = []
       moduleGoods.forEach(item => {
-        if (!result.hasOwnProperty(item.type)) {
+        if (!result.hasOwnProperty(webSite.type)) {
           result[webSite.type] = []
         }
 
@@ -479,8 +479,9 @@ export default {
         good.goodsImages = this.imageStrToArray(good.goodsImages || '')
         good.to = getToInfoByProductInfo(good)  
         result[webSite.type].push(good)
-        console.log(333,result);
+        
       })
+      console.log(333,result);
       return result
     },
     activeProductInfo() {

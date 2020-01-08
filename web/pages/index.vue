@@ -364,7 +364,7 @@ export default {
           }
         },
         {
-          id: '17',
+          id: '54',
           name: this.$t(`${lang}.princessSquare`),
           desc: this.$t(`${lang}.princessSquareDesc`),
           img: '/index/pincess.png',
@@ -373,7 +373,7 @@ export default {
           }
         },
         {
-          id: '54',
+          id: '55',
           name: this.$t(`${lang}.octagonalTrapezoid`),
           desc: this.$t(`${lang}.octagonalTrapezoidDesc`),
           img: '/index/emerald.png',
@@ -382,7 +382,7 @@ export default {
           }
         },
         {
-          id: '55',
+          id: '60',
           name: this.$t(`${lang}.laserSquare`),
           desc: this.$t(`${lang}.laserSquareDesc`),
           img: '/index/asscher.png',
@@ -391,7 +391,7 @@ export default {
           }
         },
         {
-          id: '56',
+          id: '58',
           name: this.$t(`${lang}.pincushion`),
           desc: this.$t(`${lang}.pincushionDesc`),
           img: '/index/cushion.png',
@@ -409,7 +409,7 @@ export default {
           }
         },
         {
-          id: '58',
+          id: '61',
           name: this.$t(`${lang}.octagonalLaser`),
           desc: this.$t(`${lang}.octagonalLaserDesc`),
           img: '/index/radiant.png',
@@ -418,7 +418,7 @@ export default {
           }
         },
         {
-          id: '59',
+          id: '17',
           name: this.$t(`${lang}.oval`),
           desc: this.$t(`${lang}.ovalDesc`),
           img: '/index/oval.png',
@@ -427,7 +427,7 @@ export default {
           }
         },
         {
-          id: '60',
+          id: '59',
           name: this.$t(`${lang}.dropShape`),
           desc: this.$t(`${lang}.dropShapeDesc`),
           img: '/index/pear.png',
@@ -436,7 +436,7 @@ export default {
           }
         },
         {
-          id: '61',
+          id: '56',
           name: this.$t(`${lang}.heartShaped`),
           desc: this.$t(`${lang}.heartShapedDesc`),
           img: '/index/heart.png',
