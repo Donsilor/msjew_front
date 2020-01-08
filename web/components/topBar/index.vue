@@ -343,7 +343,7 @@ export default {
       ],
       menus: {
         'engagement-ring': {
-          image: 'https://bdd-cdn.leyouwangluo.com/adt/image1564544333790.png',
+          image: '/adt/image1564544333790.png',
           groups: [
             [
               {
@@ -510,7 +510,7 @@ export default {
           ]
         },
         'wedding-ring': {
-          image: 'https://bdd-cdn.leyouwangluo.com/adt/image1564544333790.png',
+          image: '/adt/image1564544333790.png',
           groups: [
             [
               {
@@ -679,7 +679,7 @@ export default {
           ]
         },
         diamond: {
-          image: 'https://bdd-cdn.leyouwangluo.com/adt/image1564544333790.png',
+          image: '/adt/image1564544333790.png',
           groups: [
             [
               {
@@ -808,7 +808,7 @@ export default {
           ]
         },
         'jewellery-accessories': {
-          image: 'https://bdd-cdn.leyouwangluo.com/adt/image1564544333790.png',
+          image: '/adt/image1564544333790.png',
           groups: [
             [
               {
@@ -907,7 +907,7 @@ export default {
                     ),
                     icon: 'iconJewelry-gift-d',
                     to: {
-                      path: '/'
+                      path: `/jewellery/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
                     }
                   },
                   {
@@ -916,7 +916,7 @@ export default {
                     ),
                     icon: 'iconJewelry-gift-design',
                     to: {
-                      path: '/'
+                      path: '/diamonds'
                     }
                   },
                   {
@@ -925,7 +925,7 @@ export default {
                     ),
                     icon: 'iconJewelry-gift-woman',
                     to: {
-                      path: '/'
+                      path: '/jewellery/necklaces'
                     }
                   }
                 ]
