@@ -31,6 +31,7 @@ export default function({ $axios, store }) {
     const data = res.data || {}
     if (data.hasOwnProperty('code')) {
       if (data.code == 200) {
+       
          return Promise.resolve(
           ![undefined].includes(data) ? data : null
         ) 
@@ -40,7 +41,7 @@ export default function({ $axios, store }) {
           console.log('is 401')
           // this.$store.commit('setToken',data.refresh_token)
           store.dispatch('logout')
-          this.$router.push('/login')
+          // this.$router.push('/login')
           return
         }
         return Promise.reject(new Error(data.message|| 'something error'))

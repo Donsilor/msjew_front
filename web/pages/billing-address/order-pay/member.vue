@@ -1687,7 +1687,10 @@ export default {
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
-          console.log("添加地址",res)
+          this.$message({
+            message: this.$t(`${lang}.success`),
+            type: 'success'
+          })
           this.getAddress()
           this.resetAddressInp()
         })
@@ -1777,6 +1780,10 @@ export default {
         .post('/web/member/address/add', data)
         .then(res => {
           console.log("添加地址",res)
+          this.$message({
+            message: this.$t(`${lang}.success`),
+            type: 'success'
+          })
           this.getAddress()
           this.resetAddressInp()
         })

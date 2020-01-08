@@ -2188,6 +2188,7 @@
     "getMore": "MORE"
   },
   "order": {
+    "success":"Added successfully!",
     "tooInp": "Input/select Coupon Code",
     "tooInpShort": "Input Coupon Code",
     "ConfirmOrder": "Shopping cart",
