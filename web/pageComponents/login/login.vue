@@ -354,17 +354,14 @@ export default {
           }
         })
         .then(res => {
-          console.log("登陆结果",res)
-          // if (res.code==200){
+          localStorage.setItem("refreshToken",res.data.refresh_token);
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
-              // _this.$store.commit("refreshToken",res.data.refresh_token);
               _this.$store.commit('setToken', res.data.access_token)
               _this.$store.dispatch('getUserInfo')
-             
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
               setTimeout(() => {
@@ -376,10 +373,15 @@ export default {
                   _this.$router.replace({
                     path: '/'
                   })
+                  
                 }
               }, 0)
+              setTimeout(() => {
+                 window.location.reload()
+              }, 1000)
+              
             }
-
+          
           // } else {
           //   throw new Error (res.message)
           // }
@@ -426,6 +428,9 @@ export default {
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken',res.data.access_token)
+              // if(res.code==401){
+              //   _this.$store.commit('setToken',res.data.refresh_token)
+              // }
               _this.$store.dispatch('getUserInfo')
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
@@ -440,11 +445,10 @@ export default {
                   })
                 }
               }, 0)
+              setTimeout(() => {
+                window.location.reload()
+              }, 1000)
             }
-
-          // } else {
-          //   throw new Error (res.message)
-          // }
         })
         .catch(err => {
           //console.error(err)

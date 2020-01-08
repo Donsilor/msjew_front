@@ -2191,6 +2191,7 @@
     "getMore": "加載更多..."
   },
   "order": {
+    "success":"添加成功！",
     "tooInp": "輸入/選擇優惠碼",
     "tooInpShort": "輸入優惠碼",
     "ConfirmOrder": "購物車",

@@ -30,17 +30,12 @@ export default {
       this.$axios
         .get('/web/common/area')
         .then(res => {
-          if(res.code==200){
-            console.log("获取国家",res)
             this.countryList = res.data
             this.countryList.unshift({
               areaId: '',
               areaName: this.$t(`${lang}.select`)
             })
-            // console.log('country===>', res.countryList.areaName)
-          }else {
-            throw new Error (res.message)
-          }  
+            // console.log('country===>', res.countryList.areaName) 
         })
         .catch(err => {
           if (!err.response) {
@@ -63,7 +58,7 @@ export default {
           params: { pid: this.country.areaId }
         })
         .then(res => {
-          console.log('省份=====>', this.provinceList)
+          // console.log('省份=====>', this.provinceList)
           if (res) {
             this.provinceList = res.data
             this.provinceList.unshift({
@@ -74,6 +69,7 @@ export default {
             this.cityList = [{ areaId: '', areaName: '- - -' }]
             this.city = { areaId: '', areaName: '- - -' }
           } else {
+            console.log("gggg1111")
             this.provinceList = [{ areaId: '', areaName: '- - -' }]
             this.province = { areaId: '', areaName: '- - -' }
             this.cityList = [{ areaId: '', areaName: '- - -' }]
@@ -89,17 +85,17 @@ export default {
         })
     },
     getListThree() {
-      if (this.province.areaId === '') {
+      if (this.province.areaId == '') {
         this.cityList = [{ areaId: '', areaName: '- - -' }]
         this.city = { areaId: '', areaName: '- - -' }
-        return
+        return 
       }
       this.$axios
         .get('/web/common/area', {
           params: { pid:this.province.areaId }
         })
         .then(res => {
-          console.log('城市===>',this.cityList)
+          // console.log('城市===>',this.province.areaId)
           if (res) {
             this.cityList = res.data
             this.cityList.unshift({
@@ -121,7 +117,7 @@ export default {
         })
     },
     async setAddress(obj) {
-       console.log('111111',obj)
+      //  console.log('111111',obj)
       let step = false
       this.country = {areaId: obj.country_id, areaName: obj.country_name }
       await this.$axios
@@ -129,7 +125,7 @@ export default {
           params: { pid: obj.country_id }
         })
         .then(res => {
-          console.log('拿到了省份',res);
+          // console.log('拿到了省份',res);
           if (res) {
             this.provinceList = res.data
             this.provinceList.unshift({

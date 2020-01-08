@@ -24,6 +24,25 @@ const SEARCHHISTORY = 'searchHistory'
 //   return result
 // }
 
+
+
+
+// function refreshTokenRequst({ $axios, state, getters, commit, dispatch }){
+//   const refreshToken = JSON.parse(localStorage.getItem('_token') || '[]')
+//   return this.$axios({
+//     method: 'post',
+//     url:'/web/site/refresh',
+//     data:{
+//       refresh_token:refreshToken
+//     }
+//   }).then(res => {
+//     localStorage.setItem('refreshToken',res.data.refreshToken);
+//     localStorage.setItem('token',res.data.token);
+//     onAccessTokenFetched()
+//   })
+// }
+
+
 // 获取不会重复的类时间戳
 function getTimestampUuid() {
   return new Date().getTime().toString()
@@ -132,6 +151,25 @@ export default {
   //       return Promise.reject(err)
   //     })
   // },  
+
+  // refreshTokenRequst({ $axios, state, getters, commit, dispatch }){
+  //   const refreshToken =localStorage.getItem('refreshToken')
+  //   console.log("refreshToken",refreshToken)
+  //   return this.$axios({
+  //     method: 'post',
+  //     url:'/web/site/refresh',
+  //     data:{
+  //       refresh_token:refreshToken
+  //     }
+  //   }).then(res => {
+  //     console.log("refreshtoken",res)
+  //     this.$store.commit('setToken',res.data.refresh_token)
+  //     // localStorage.setItem('refreshToken',res.data.refresh_token);
+  //     // localStorage.setItem('access_token',res.data.access_token);
+  //   })
+  // },
+
+
   nuxtServerInit({ commit }, { req, app, $axios }) {
     // $axios({
     //   method: `get`,
@@ -303,7 +341,7 @@ export default {
       setTimeout(() => {
         this.$router.push(`/login`)
       }, 2000)
-      return Promise.reject(new Error('只有登录后才可以加入购物车'))
+      return Promise.reject(new Error('请先登陆！'))
     }
     request
       .then(data => {

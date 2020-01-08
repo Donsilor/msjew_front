@@ -22,12 +22,13 @@ export default {
     _this.$nextTick(async () => {
       if (!_this.$store.state.coin || !_this.$store.state.language) {
       }
-
       if (_this.$store.getters.hadLogin) {
+        
         // 获取用户数据
         await _this.$store.dispatch('getUserInfo')
         // 同步购物车
-        // await  _this.$store.dispatch('getOnlineCartAmount')
+        // await _this.$store.dispatch('refreshTokenRequst')
+        await  _this.$store.dispatch('getOnlineCartAmount')
         //  _this.$store.dispatch('getOnlineCartAmount')
         await _this.$store.dispatch('synchronizeCart')
         // 同步心愿单
@@ -36,7 +37,8 @@ export default {
         await _this.$store.dispatch('synchronizeCompared')
       } else {
       }
-     
+      _this.$store.dispatch('getOnlineCartAmount')
+      // await _this.$store.dispatch('refreshTokenRequst')
       // 获取心愿单
       _this.$store.dispatch('getWish')
       // 获取购物车

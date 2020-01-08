@@ -1625,15 +1625,27 @@ export default {
         this.wrongInput.lastname = true
         return false
       }
-      if (
-        !RegMobile.test(this.addressData.mobile) &&
-        !RegTelephone.test(this.addressData.mobile)
-      ) {
+       if (!RegMobile.test(this.addressData.mobile)) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
         this.wrongInput.mobile = true
         return false
       }
+      if (!RegTelephone.test(this.addressData.mobile)) {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
+        return false
+      }
+      // if (
+      //   !RegMobile.test(this.addressData.mobile) &&
+      //   !RegTelephone.test(this.addressData.mobile)
+      // ) {
+      //   this.wrongMsg = this.$t(`${lang}.wip2`)
+      //   this.alertBox = true
+      //   this.wrongInput.mobile = true
+      //   return false
+      // }
       // if (!Email.test(this.addressData.email)) {
       //   this.wrongMsg = this.$t(`${lang}.wip3`)
       //   this.alertBox = true
@@ -1675,7 +1687,10 @@ export default {
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
-          console.log("添加地址",res)
+          this.$message({
+            message: this.$t(`${lang}.success`),
+            type: 'success'
+          })
           this.getAddress()
           this.resetAddressInp()
         })
@@ -1702,15 +1717,27 @@ export default {
         this.wrongInput.lastname = true
         return false
       }
-      if (
-        !RegMobile.test(this.addressData.mobile) &&
-        !RegTelephone.test(this.addressData.mobile)
-      ) {
+      if (!RegMobile.test(this.addressData.mobile)) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
         this.wrongInput.mobile = true
         return false
       }
+      if (!RegTelephone.test(this.addressData.mobile)) {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
+        return false
+      }
+      // if (
+      //   !RegMobile.test(this.addressData.mobile) &&
+      //   !RegTelephone.test(this.addressData.mobile)
+      // ) {
+      //   this.wrongMsg = this.$t(`${lang}.wip2`)
+      //   this.alertBox = true
+      //   this.wrongInput.mobile = true
+      //   return false
+      // }
       if (!Email.test(this.addressData.email)) {
         this.wrongMsg = this.$t(`${lang}.wip3`)
         this.alertBox = true
@@ -1753,6 +1780,10 @@ export default {
         .post('/web/member/address/add', data)
         .then(res => {
           console.log("添加地址",res)
+          this.$message({
+            message: this.$t(`${lang}.success`),
+            type: 'success'
+          })
           this.getAddress()
           this.resetAddressInp()
         })
@@ -2165,13 +2196,13 @@ export default {
       console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
-        allSend: this.isAllPack ? 1 : 2,
+        // allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        afterMail: this.isSameEmail
-        ? this.orderAddress.userMail
-        : this.orderEmail,
+        // afterMail: this.isSameEmail
+        // ? this.orderAddress.userMail
+        // : this.orderEmail,
       }
       // console.log("pppp",data)
       this.$axios
