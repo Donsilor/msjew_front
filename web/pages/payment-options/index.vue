@@ -73,7 +73,7 @@
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div> -->
-        <div
+        <!-- <div
           :class="{ 'pay-choose': payWay == 3 }"
           class="pay-block"
           @click="payWay = 3"
@@ -88,7 +88,7 @@
           <div v-show="payWay == 3" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div>
+        </div> -->
 
         <div
           :class="{ 'pay-choose': payWay == 2 }"
@@ -235,7 +235,7 @@ export default {
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        returnUrl:'http://www2.bddco.com/'
+        returnUrl:'http://www2.bddco.com/account/orders'
       }
       this.goingPay = true
       this.$axios
@@ -276,7 +276,7 @@ export default {
             }
           } else {
             this.$router.replace({
-              path: 'http://www2.bddco.com/',
+              path: 'http://www2.bddco.com/account/orders',
               // query: {
               //   orderId: this.$route.query.orderId,
               //   price: this.$route.query.price,

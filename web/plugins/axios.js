@@ -1,4 +1,8 @@
 export default function({ $axios, store }) {
+  // const token = store.state.token
+  // if(token){
+  //   let refreshToken = store.state.refreshToken
+  // }
   //$axios.defaults.baseURL = 'http://www.bddmall.com/api'
   $axios.onRequest(config => {
     // if (config.params) {
@@ -21,12 +25,10 @@ export default function({ $axios, store }) {
     // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     return config
   })
-  
+
+
   $axios.onResponse(res => {
     const data = res.data || {}
-    // console.log("data",res.data.refresh_token)
-    // return data;
-
     if (data.hasOwnProperty('code')) {
       if (data.code == 200) {
          return Promise.resolve(
@@ -36,13 +38,11 @@ export default function({ $axios, store }) {
       } else {
         if (data.code == 401) {
           console.log('is 401')
+          // this.$store.commit('setToken',data.refresh_token)
           store.dispatch('logout')
-          // _this.$store.commit('setToken', data.refresh_token)
-          // this.$router.push('/login')
-          // window.location.href = '/login'
+          this.$router.push('/login')
           return
         }
-        // return Promise.reject(new Error(data.message || 'something error'))
         return Promise.reject(new Error(data.message|| 'something error'))
       }
     } else {
@@ -52,6 +52,5 @@ export default function({ $axios, store }) {
   $axios.onError(error => {
     // console.log('$axios.onError===>', error)
     return Promise.reject(error)
-      // throw new Error(11111)
   })
 }

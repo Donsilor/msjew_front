@@ -168,7 +168,7 @@
               />
             </div>
           </div>
-          <div class="new-addr-btn" @click="createAddress()">
+          <div class="new-addr-btn" @click="createAddress1()">
             {{ $t(`${lang}.save`) }}
           </div>
         </div>
@@ -743,6 +743,88 @@ export default {
         !RegMobile.test(this.using.mobile) &&
         !RegTelephone.test(this.using.mobile)
       ) {
+        this.$message.error(this.$t(`${lang}.wip9`))
+        return
+      }
+      if (!this.country.areaId) {
+        this.$message.error(this.$t(`${lang}.wip10`))
+        return false
+      }
+      if (this.using.address_details === '') {
+        this.$message.error(this.$t(`${lang}.wip11`))
+        return
+      }
+      const json = {
+        firstname: this.using.firstname,
+        lastname: this.using.lastname,
+        mobile_code: this.phoneNum.phone_code,
+        mobile: this.using.mobile,
+        email: this.using.email,
+        country_id: this.country.areaId,
+        province_id: this.province.areaId,
+        city_id: this.city.areaId,
+        address_details: this.using.address_details,
+        zip_code: this.using.zip_code
+      }
+      // const data = this.$helpers.transformRequest(
+      //   JSON.parse(JSON.stringify(json)),
+      //   false
+      // )
+      this.$axios
+        .post('web/member/address/add',json)
+        .then(res => {
+          if(res.code==200){
+            console.log("新增地址成功",res)
+            this.getData()
+            this.resetAddress()
+          }else {
+            throw new Error (res.message)
+          }    
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
+    },
+    // 新建地址
+    createAddress1() {
+      // console.log("this.u",this.using)
+      if (this.using.firstname === '') {
+        this.$message.error(this.$t(`${lang}.wip1`))
+        return
+      }
+      if (this.using.firstname.length > 20) {
+        this.$message.error(this.$t(`${lang}.wip2`))
+        return
+      }
+      if (this.using.lastname === '') {
+        this.$message.error(this.$t(`${lang}.wip3`))
+        return
+      }
+      if (this.using.lastname.length > 20) {
+        this.$message.error(this.$t(`${lang}.wip4`))
+        return
+      }
+      if (this.using.email === '') {
+        this.$message.error(this.$t(`${lang}.wip5`))
+        return
+      }
+      if (!Email.test(this.using.email)) {
+        this.$message.error(this.$t(`${lang}.wip6`))
+        return
+      }
+      if (this.using.mobile === '') {
+        this.$message.error(this.$t(`${lang}.wip8`))
+        return
+      }
+      if (!RegMobile.test(this.using.mobile)) {
+        this.$message.error(this.$t(`${lang}.wip9`))
+        return
+      }
+      if (!RegTelephone.test(this.using.mobile)) {
         this.$message.error(this.$t(`${lang}.wip9`))
         return
       }

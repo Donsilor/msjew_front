@@ -354,6 +354,8 @@ export default {
           }
         })
         .then(res => {
+          localStorage.setItem("refreshToken",res.data.refresh_token);
+          // localStorage.setItem("access_token",res.data.access_token);
           console.log("登陆结果",res)
           // if (res.code==200){
             if (_this.code !== _this.pictureCode) {
@@ -364,7 +366,6 @@ export default {
               // _this.$store.commit("refreshToken",res.data.refresh_token);
               _this.$store.commit('setToken', res.data.access_token)
               _this.$store.dispatch('getUserInfo')
-             
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
               setTimeout(() => {
@@ -426,6 +427,9 @@ export default {
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken',res.data.access_token)
+              if(res.code==401){
+                _this.$store.commit('setToken',res.data.refresh_token)
+              }
               _this.$store.dispatch('getUserInfo')
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')

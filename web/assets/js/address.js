@@ -24,23 +24,21 @@ export default {
     }else if(this.$store.state.language === 'zh_CN'){
       return this.phoneNum = this.phoneJson[1]
     }
+
+    if(this.$store.state.language === 'zh_CN'){
+      return this.country
+    }
   },
   methods: {
     getListOne() {
       this.$axios
         .get('/web/common/area')
         .then(res => {
-          if(res.code==200){
-            console.log("获取国家",res)
             this.countryList = res.data
             this.countryList.unshift({
               areaId: '',
               areaName: this.$t(`${lang}.select`)
-            })
-            // console.log('country===>', res.countryList.areaName)
-          }else {
-            throw new Error (res.message)
-          }  
+            }) 
         })
         .catch(err => {
           if (!err.response) {
@@ -51,7 +49,7 @@ export default {
         })
     },
     getListTwo() {
-      if (this.country.areaId === '') {
+      if (this.country.areaId == '') {
         this.provinceList = [{ areaId: '', areaName: '- - -' }]
         this.province = { areaId: '', areaName: '- - -' }
         this.cityList = [{ areaId: '', areaName: '- - -' }]
@@ -63,8 +61,8 @@ export default {
           params: { pid: this.country.areaId }
         })
         .then(res => {
-          console.log('省份=====>', this.provinceList)
           if (res) {
+            console.log('省份=====>',res)
             this.provinceList = res.data
             this.provinceList.unshift({
               areaId: '',
@@ -89,7 +87,8 @@ export default {
         })
     },
     getListThree() {
-      if (this.province.areaId === '') {
+      if (this.province.areaId == '') {
+        console.log("this.",this.province.areaId)
         this.cityList = [{ areaId: '', areaName: '- - -' }]
         this.city = { areaId: '', areaName: '- - -' }
         return
@@ -99,15 +98,15 @@ export default {
           params: { pid:this.province.areaId }
         })
         .then(res => {
-          console.log('城市===>',this.cityList)
           if (res) {
+            console.log('城市===>',res)
             this.cityList = res.data
             this.cityList.unshift({
               areaId: '',
               areaName: this.$t(`${lang}.select`)
             })
             this.city = { areaId: '', areaName: this.$t(`${lang}.select`) }
-          } else {
+          } else{
             this.cityList = [{ areaId: '', areaName: '- - -' }]
             this.city = { areaId: '', areaName: '- - -' }
           }
@@ -121,7 +120,6 @@ export default {
         })
     },
     async setAddress(obj) {
-       console.log('111111',obj)
       let step = false
       this.country = {areaId: obj.country_id, areaName: obj.country_name }
       await this.$axios
@@ -129,8 +127,8 @@ export default {
           params: { pid: obj.country_id }
         })
         .then(res => {
-          console.log('拿到了省份',res);
           if (res) {
+            console.log('拿到了省份',res.data);
             this.provinceList = res.data
             this.provinceList.unshift({
               areaId: '',
@@ -145,14 +143,14 @@ export default {
               this.province = this.provinceList[0]
               this.cityList = [{ areaId: '', areaName: '- - -' }]
               this.city = { areaId: '', areaName: '- - -' }
-              step = true
+              step = false
             }
           } else {
             this.provinceList = [{ areaId: '', areaName: '- - -' }]
             this.province = { areaId: '', areaName: '- - -' }
             this.cityList = [{ areaId: '', areaName: '- - -' }]
             this.city = { areaId: '', areaName: '- - -' }
-            step = true
+            step = false
           }
         })
         .catch(err => {
@@ -162,13 +160,12 @@ export default {
             // console.log(err)
           }
         })
-      // if (step) return false
+      if (step) return false
       await this.$axios
         .get('/web/common/area', {
           params: { pid: obj.province_id }
         })
         .then(res => {
-          // console.log(res)
           if (res) {
             console.log('拿到了城市',res);
             this.cityList = res.data

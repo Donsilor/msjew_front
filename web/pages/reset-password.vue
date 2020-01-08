@@ -216,6 +216,21 @@
                   v-model="info.code"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.inputEmailCode`)"
+                />
+              </div>
+              <div class="input-line">
+                <input
+                  v-model="info.password"
+                  class="bottom-border-input"
+                  :placeholder="$t(`${lang}.newPassword`)"
+                  @keydown.enter="changeSchedule(3)"
+                />
+              </div>
+              <div class="input-line">
+                <input
+                  v-model="info.password_repetition"
+                  class="bottom-border-input"
+                  :placeholder="$t(`${lang}.confirmPassword`)"
                   @keydown.enter="changeSchedule(3)"
                 />
               </div>
@@ -230,7 +245,7 @@
               </div>
             </div>
           </li>
-          <li class="item item-3" :style="scheduleContentStyle">
+          <!-- <li class="item item-3" :style="scheduleContentStyle">
             <h3 class="item-title">{{ $t(`${lang}.forgetPassword`) }}</h3>
             <div class="item-content">
               <h2 class="tip">
@@ -250,7 +265,7 @@
                   v-model="info.password"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.newPassword`)"
-                  @keydown.enter="changeSchedule(4)"
+                  @keydown.enter="changeSchedule(3)"
                 />
               </div>
               <div class="input-line">
@@ -258,20 +273,20 @@
                   v-model="info.password_repetition"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.confirmPassword`)"
-                  @keydown.enter="changeSchedule(4)"
+                  @keydown.enter="changeSchedule(3)"
                 />
               </div>
               <div class="button-group">
                 <button
                   v-loading="ajaxLoading"
                   class="submit-button"
-                  @click="changeSchedule(4)"
+                  @click="changeSchedule(3)"
                 >
                   {{ $t(`${lang}.reset`) }}
                 </button>
               </div>
             </div>
-          </li>
+          </li> -->
           <li class="item item-4" :style="scheduleContentStyle">
             <div class="item-content">
               <h2 class="tip">{{ $t(`${lang}.hadReset`) }}</h2>
@@ -342,14 +357,10 @@ export default {
         },
         {
           key: 2,
-          name: this.$t(`${lang}.schedule2`)
-        },
-        {
-          key: 3,
           name: this.$t(`${lang}.schedule3`)
         },
         {
-          key: 4,
+          key: 3,
           name: this.$t(`${lang}.schedule4`)
         }
       ],
@@ -454,7 +465,7 @@ export default {
     // 发送手机验证码
     sendPhoneCode() {
       const _this = this
-      // return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => {
         _this.setWait()
         _this
         .$axios({
@@ -466,80 +477,65 @@ export default {
             }
           })
           .then(res => {
-            // resolve(res)
+            resolve(res)
             if(res.code==200){
-              _this.$successMessage("发送成功")
+              // _this.$successMessage("发送成功")
               // _this.requesting = false
             }
           })
           .catch(err => {
-            //  reject(err)
+             reject(err)
              _this.resetCountDown()
             _this.requesting = false
-            _this.$errorMessage(err.message)
+            // _this.$errorMessage(err.message)
           })
-      // })
+      })
       // Helpers.requestServer(options)
     },
     // 发送邮箱验证码
     // sendCode() {
-    //   const _this = this
-    //   return new Promise((resolve, reject) => {
-    //     _this
-    //       .$axios({
-    //         method: 'post',
-    //         url: '/web/site/email-code',
-    //         data: {
-    //           'email': _this.info.email,
-    //           'usage': 'up-pwd'
-    //         }
-    //       })
-    //       .then(res => {
-    //         console.log("啦啦啦",res)
-    //         resolve(res)
-    //       })
-    //       .catch(err => {
-    //         console.log(err)
-    //         reject(err)
-    //       })
-    //   })
+      //   const _this = this
+      //   return new Promise((resolve, reject) => {
+      //     _this
+      //       .$axios({
+      //         method: 'post',
+      //         url: '/web/site/email-code',
+      //         data: {
+      //           'email': _this.info.email,
+      //           'usage': 'up-pwd'
+      //         }
+      //       })
+      //       .then(res => {
+      //         console.log("啦啦啦",res)
+      //         resolve(res)
+      //       })
+      //       .catch(err => {
+      //         console.log(err)
+      //         reject(err)
+      //       })
+      //   })
     // },
     sendCode() {
         const _this = this
-        // console.log("sss",_this.info.email)
-        if (_this.info.email=='') {
-          this.$errorMessage(_this.$t(`${langcode}.inputEmail`))
-          return
-        }
-        if (_this.waiting) {
-          this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-          return
-        }
-        _this.setWait()
-         this.$axios({
-          method: "post",
-          url: '/web/site/email-code',
-          data:{
-            'email': _this.info.email,
-            'usage': 'up-pwd'
-          }
-        }).then(res => {
-          console.log("邮箱验证码",res)
-          // if (res.code==200){
-            // _this.code=res.data.code
-          // }else {
-          //   throw new Error (res.message)
-          // }   
-          // _this.sendReturn(res)
-        }).catch(err => {
-          _this.resetCountDown()
-          _this.$errorMessage(err.message)
-          // _this.$ConfirmBox({
-          //   title: _this.$t(`${langcode}.error`),
-          //   message: `${err.message}`
-          // })
+        return new Promise((resolve, reject) => {
+         _this
+        .$axios({
+            method: 'post',
+            url: '/web/site/email-code',
+            data:{
+              'email': _this.info.email,
+              'usage': 'up-pwd'
+            }
+          })
+          .then(res => {
+            resolve(res)
+          })
+          .catch(err => {
+             reject(err)
+            _this.requesting = false
+            // _this.$errorMessage(err.message)
+          })
         })
-        // Helpers.requestServer(options)
     },
     // 重置倒计时
     resetCountDown() {
@@ -552,6 +548,15 @@ export default {
       if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
         throw new Error ("请输入正确手机号")
       }
+     
+    },
+    emialtip(){
+      if (this.info.email=='') {
+        throw new Error ("邮箱不能为空")
+      }
+      if (!((/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/).test(this.info.email))) {
+        throw new Error ("请输入正确邮箱")
+      }
     },
     // 繁体和英文步骤条
     async changeSchedule(key) {
@@ -561,7 +566,7 @@ export default {
       switch (key) {
         case 1:
           const info = JSON.parse(JSON.stringify(_this.info))
-          info.email = ''
+          // info.email = ''
           info.code = ''
           info.password = ''
           info.confirmdPassword = ''
@@ -569,24 +574,15 @@ export default {
           break
         case 2:
           try {
+            await _this.emialtip()
             await _this.sendCode()
-            // console.log("aaaa")
           } catch (e) {
             _this.$errorMessage(e.message)
             _this.ajaxLoading = false
-            return
+            return false
           }
           break
         case 3:
-          try {
-            // await _this.compareCode()
-          } catch (e) {
-            _this.$errorMessage(e.message)
-            _this.ajaxLoading = false
-            return
-          }
-          break
-        case 4:
           try {
             await _this.resetEmailPassword()
           } catch (e) {
@@ -655,6 +651,7 @@ export default {
           case 2:
             try {
               await _this.mobiletip()
+              await _this.sendPhoneCode()
             } catch (e) {
               _this.$errorMessage(e.message)
               _this.ajaxLoading = false
@@ -773,12 +770,15 @@ export default {
     resetEmailPassword() {
       const _this = this
       return new Promise((resolve, reject) => {
-        // if (!_this.info.password) {
-        //   reject(new Error(_this.$t(`${lang}.newPassword`)))
-        // }
-        // if (!_this.info.password_repetition) {
-        //   reject(new Error(_this.$t(`${lang}.confirmPassword`)))
-        // }
+        if (!_this.info.code) {
+          reject(new Error("请输入验证码"))
+        }
+        if (!_this.info.password) {
+          reject(new Error(_this.$t(`${lang}.newPassword`)))
+        }
+        if (!_this.info.password_repetition) {
+          reject(new Error(_this.$t(`${lang}.confirmPassword`)))
+        }
 
         this.$axios({
             method: 'post',
@@ -792,7 +792,7 @@ export default {
           })
           .then(res => {
             // if(res.code==200){
-              console.log("重置邮箱密码",res)
+              // console.log("重置邮箱密码",res)
               resolve(res)
             // } else {
             //   throw new Error (res.message)
@@ -800,6 +800,7 @@ export default {
           })
           .catch(err => {
             reject(err)
+            // _this.$errorMessage(err.message)
           })
       })
     },
@@ -883,7 +884,7 @@ input{
 
       .item {
         position: relative;
-        width: 290px;
+        width: 394px;
         height: 168px;
         background: rgba(255, 255, 255, 1);
         border: 1px solid #e6e6e6;
