@@ -83,14 +83,14 @@
             </li>
           </ul>
         </div>
-        <!-- <div class="right-info">
+        <div class="right-info">
           <div class="ten-magnification">
             {{ $t(`${lang}.tenMagnification`) }}
           </div>
           <div class="clarity-image">
             <img :src="activeClarity.image" />
           </div>
-        </div> -->
+        </div>
       </div>
     </div>
   </section>
@@ -160,25 +160,25 @@ export default {
       ],
       clarity: [
         {
-          ids: [6, 7],
+          ids: ['6', '7'],
           name: 'FL/LF',
           desc: this.$t(`${lang}.clarityTips1`),
           image: `/diamonds/specs-info/FL.png`
         },
         {
-          ids: [8, 62],
+          ids: ['8', '62'],
           name: 'VVS1/VVS2',
           desc: this.$t(`${lang}.clarityTips2`),
           image: `/diamonds/specs-info/VVS1.png`
         },
         {
-          ids: [63, 64],
+          ids: ['63', '64'],
           name: 'VS1/VS2',
           desc: this.$t(`${lang}.clarityTips3`),
           image: `/diamonds/specs-info/VS1.png`
         },
         {
-          ids: [65, 66],
+          ids: ['65', '66'],
           name: 'SI1/SI2',
           desc: this.$t(`${lang}.clarityTips4`),
           image: `/diamonds/specs-info/SI1.png`
@@ -196,22 +196,22 @@ export default {
     info() {
       const showingSpecs = {}
       this.specs.forEach(item => {
-        if (item.configId === 18) {
+        if (item.configId === '5') {
           showingSpecs.caratWeight = item.configAttrVal
-        } else if (item.configId === 50) {
+        } else if (item.configId === '7') {
           showingSpecs.color = item.configAttrVal
           showingSpecs.colorIndex = item.configAttrId
-        } else if (item.configId === 22) {
+        } else if (item.configId === '4') {
           showingSpecs.cut = item.configAttrVal
           showingSpecs.cutName = item.configAttrName
-          if (item.configAttrId === 13) {
+          if (item.configAttrId === '13') {
             showingSpecs.cutIndex = 2
-          } else if (item.configAttrId === 14) {
+          } else if (item.configAttrId === '14') {
             showingSpecs.cutIndex = 3
-          } else if (item.configAttrId === 15) {
+          } else if (item.configAttrId === '15') {
             showingSpecs.cutIndex = 4
           }
-        } else if (item.configId === 51) {
+        } else if (item.configId === '2') {
           showingSpecs.clarity = item.configAttrVal
           showingSpecs.clarityName = item.configAttrName
           showingSpecs.clarityIndex = item.configAttrId

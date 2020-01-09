@@ -1558,8 +1558,8 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-          console.log("获取地址",res)
           this.address = res.data
+<<<<<<< HEAD
           // for (const i in res.data) {
           //   if (res[i].is_default == 1) {
           //     this.address.unshift(res.data[i])
@@ -1570,12 +1570,29 @@ export default {
           if(this.address.length !=0){
             this.orderAddress = this.address[0]
             console.log("地址",this.orderAddress)
+=======
+          if(this.address.length != 0){
+            console.log(111111)
+            // for (const i in res) {
+            //   if (res[i].is_default === 1) {
+            //     this.address.unshift(res[i])
+            //   } else {
+            //     this.address.push(res[i])
+            //   }
+            // }
+            console.log("地址",this.address)
+            this.orderAddress = this.address[0]
+>>>>>>> 8e67303545d38aabeb8773d9023266d6a48e1925
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
             this.getTex()
             this.resetAddressInp()
           }
+<<<<<<< HEAD
+=======
+          
+>>>>>>> 8e67303545d38aabeb8773d9023266d6a48e1925
         })
         .catch(err => {
           // if (!err.response) {
