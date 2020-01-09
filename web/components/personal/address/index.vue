@@ -593,7 +593,7 @@ export default {
         .get('/web/member/address')
         .then(res => {
           // if(res.code==200){
-            console.log('获取地址成功', res)
+            // console.log('获取地址成功', res)
             this.address = res.data
             this.isDefault=res.data[0]
           // }

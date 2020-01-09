@@ -1215,7 +1215,7 @@
           />
           <input
             v-show="isSameEmail"
-            v-model="orderAddress.email"
+            v-model="orderEmail"
             :class="{ 'wrong-input': wrongInput.odMail }"
             type="text"
             @focus="
@@ -1432,7 +1432,7 @@ export default {
       canSubmit: false,
       address: [],
       addressMore: false,
-      orderAddress: { email: '' },
+      orderAddress: {email: ''},
       newAddress: false,
       isEdit: false,
       noWay: false,
@@ -1503,6 +1503,7 @@ export default {
     }
   },
   created() {
+    // console.log("ssss",this.orderAddress.email)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
@@ -1535,6 +1536,7 @@ export default {
       })
   },
   mounted() {
+    // console.log("ssss",this.orderAddress.email)
     // this.getAddress();
     this.language = this.getCookie('language')
   },
@@ -1556,7 +1558,6 @@ export default {
         .then(res => {
           console.log("获取地址",res)
           this.address = res.data
-
           // for (const i in res) {
           //   if (res[i].is_default === 1) {
           //     this.address.unshift(res[i])
@@ -1586,7 +1587,7 @@ export default {
         lastname: '',
         firstname: '',
         mobile: '',
-        userMail: '',
+        email: '',
         checkEmail: '',
         address: '',
         zipCode: '',
@@ -1597,7 +1598,7 @@ export default {
         firstname: false,
         lastname: false,
         mobile: false,
-        userMail: false,
+        email: false,
         checkEmail: false,
         address: false,
         zipCode: false,
@@ -1608,7 +1609,7 @@ export default {
     },
     changeAddress(obj) {
       this.orderAddress = obj
-      console.log(this.orderAddress)
+      console.log("aaa",this.orderAddress)
       this.getTex()
     },
     createAddress() {
@@ -1865,7 +1866,7 @@ export default {
       if (!Email.test(this.addressData.email)) {
         this.wrongMsg = this.$t(`${lang}.wip3`)
         this.alertBox = true
-        this.wrongInput.userMail = true
+        this.wrongInput.email = true
         return false
       }
       if (this.addressData.email !== this.addressData.checkEmail) {
@@ -2131,7 +2132,6 @@ export default {
       const data = {
         cart_ids: arr.join(','),
         buyer_remark: this.remark,
-        // productAmount: this.tex.productAmount,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
       }
@@ -2160,9 +2160,9 @@ export default {
     },
     createOrder1() {
       console.log()
-      if (!this.canSubmit) {
-        return
-      }
+      // if (!this.canSubmit) {
+      //   return
+      // }
       if (this.orderAddress.id === '') {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
@@ -2196,19 +2196,19 @@ export default {
       console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
-        // allSend: this.isAllPack ? 1 : 2,
+        allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        // afterMail: this.isSameEmail
-        // ? this.orderAddress.userMail
-        // : this.orderEmail,
+        afterMail: this.isSameEmail
+        ? this.orderAddress.email
+        : this.orderEmail,
       }
       // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
-          console.log("创建订单",res.data.orderAmount)
+          // console.log("创建订单",res.data.orderAmount)
           this.$store.dispatch('getCart')
           this.$router.replace({
             path: '/payment-options',

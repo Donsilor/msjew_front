@@ -365,11 +365,15 @@ export default {
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
               setTimeout(() => {
+                //  _this.$router.replace({
+                //     path: '/'
+                //   })
                 if (lastUrl) {
                   _this.$router.replace({
                     path: lastUrl
                   })
-                } else {
+                } 
+                else {
                   _this.$router.replace({
                     path: '/'
                   })
