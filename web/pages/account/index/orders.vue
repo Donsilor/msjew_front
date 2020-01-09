@@ -105,7 +105,18 @@
               }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
-
+          <!--已付款 20-->
+          <div v-if="o.orderStatus ==20" class="list-footer">
+            <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
+              ><button>
+                {{ $t(`${lang}.orderDetail`) }}
+              </button>
+            </nuxt-link>
+            <span
+              >{{ $t(`${lang}.orderPrice`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+            >
+          </div>
           <!--待发货 30-->
           <div v-if="o.orderStatus ==30" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"

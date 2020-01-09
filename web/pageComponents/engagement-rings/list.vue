@@ -161,7 +161,7 @@
         >
           <!--          商品数据-->
           <div v-if="item.itemType === 'product'" class="product-content">
-            <nuxt-link :to="item.to">
+            <nuxt-link :to="item.to" target="_blank">
               <div class="product-image">
                 <img class="main-image" :src="item.goodsImages[0]" />
                 <img
@@ -384,7 +384,6 @@ export default {
     }
   },
   mounted() {
-    console.log(66666);
     const _this = this
     _this.$nextTick(() => {
       _this.research()
