@@ -39,9 +39,9 @@ export default function({ $axios, store }) {
       } else {
         if (data.code == 401) {
           console.log('is 401')
+          // store.dispatch('refreshTokenRequst')
           // this.$store.commit('setToken',data.refresh_token)
-          store.dispatch('logout')
-          // this.$router.push('/login')
+          // store.dispatch('logout')
           return
         }
         return Promise.reject(new Error(data.message|| 'something error'))

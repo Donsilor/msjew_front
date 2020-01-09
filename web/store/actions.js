@@ -162,10 +162,14 @@ export default {
   //       refresh_token:refreshToken
   //     }
   //   }).then(res => {
-  //     console.log("refreshtoken",res)
   //     this.$store.commit('setToken',res.data.refresh_token)
-  //     // localStorage.setItem('refreshToken',res.data.refresh_token);
-  //     // localStorage.setItem('access_token',res.data.access_token);
+      // if(res.code==401){
+      // }
+      // console.log("refreshtoken",res)
+      // commit('setToken',res.data.refresh_token)
+      // this.$store.commit('setToken',res.data.refresh_token)
+      // localStorage.setItem('refreshToken',res.data.refresh_token);
+      // localStorage.setItem('access_token',res.data.access_token);
   //   })
   // },
 

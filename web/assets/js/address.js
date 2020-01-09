@@ -5,15 +5,14 @@ export default {
   data() {
     return {
       lang,
-      country: { areaId: '', areaName: this.$t(`${lang}.select`) },
+      country: { areaId: '', areaName: this.$t(`${lang}.select`)},
       countryList: [{ areaId: '', areaName: this.$t(`${lang}.select`) }],
       province: { areaId: '', areaName: '- - -' },
       provinceList: [{ areaId: '', areaName: '- - -' }],
       city: { areaId: '', areaName: '- - -' },
       cityList: [{ areaId: '', areaName: '- - -' }],
       phoneJson: PhoneJson,
-      phoneNum: { cn: '', en: '', zh: '', phone_code: '' },
-      // language:''
+      phoneNum: { cn: '', en: '', zh: '', phone_code: '' }
     }
   },
   beforeMount() {
@@ -23,6 +22,10 @@ export default {
       return this.phoneNum = this.phoneJson[0]
     }else if(this.$store.state.language === 'zh_CN'){
       return this.phoneNum = this.phoneJson[1]
+    }
+    if(this.$store.state.language === 'zh_CN'){
+      // this.country={ areaId: '7', areaName: '中国' },
+      // this.countryList=[{ areaId: '7', areaName: '中国' }]
     }
   },
   methods: {
@@ -35,6 +38,17 @@ export default {
               areaId: '',
               areaName: this.$t(`${lang}.select`)
             })
+            // if(this.$store.state.language === 'zh_CN'){
+            //   this.countryList.unshift({
+            //     areaId: '7',
+            //     areaName: this.$t(`${lang}.select`)
+            //   })
+            // }else{
+            //   this.countryList.unshift({
+            //     areaId: '',
+            //     areaName: this.$t(`${lang}.select`)
+            //   })
+            // }
             // console.log('country===>', res.countryList.areaName) 
         })
         .catch(err => {
@@ -58,8 +72,8 @@ export default {
           params: { pid: this.country.areaId }
         })
         .then(res => {
-          // console.log('省份=====>', this.provinceList)
-          if (res) {
+          console.log('省份=====>', res)
+          if (!res.data.length==0) {
             this.provinceList = res.data
             this.provinceList.unshift({
               areaId: '',
@@ -69,11 +83,10 @@ export default {
             this.cityList = [{ areaId: '', areaName: '- - -' }]
             this.city = { areaId: '', areaName: '- - -' }
           } else {
-            console.log("gggg1111")
-            this.provinceList = [{ areaId: '', areaName: '- - -' }]
-            this.province = { areaId: '', areaName: '- - -' }
-            this.cityList = [{ areaId: '', areaName: '- - -' }]
-            this.city = { areaId: '', areaName: '- - -' }
+            this.provinceList = [{ areaId: '0', areaName: '- - -' }]
+            this.province = { areaId: '0', areaName: '- - -' }
+            this.cityList = [{ areaId: '0', areaName: '- - -' }]
+            this.city = { areaId: '0', areaName: '- - -' }
           }
         })
         .catch(err => {
@@ -95,8 +108,9 @@ export default {
           params: { pid:this.province.areaId }
         })
         .then(res => {
-          // console.log('城市===>',this.province.areaId)
-          if (res) {
+          console.log('城市===>',res)
+          console.log('城市===>qqq',res.data.length)
+          if (!res.data.length==0){
             this.cityList = res.data
             this.cityList.unshift({
               areaId: '',
@@ -104,8 +118,8 @@ export default {
             })
             this.city = { areaId: '', areaName: this.$t(`${lang}.select`) }
           } else {
-            this.cityList = [{ areaId: '', areaName: '- - -' }]
-            this.city = { areaId: '', areaName: '- - -' }
+            this.cityList = [{ areaId: '0', areaName: '- - -' }]
+            this.city = { areaId: '0', areaName: '- - -' }
           }
         })
         .catch(err => {
@@ -117,7 +131,6 @@ export default {
         })
     },
     async setAddress(obj) {
-      //  console.log('111111',obj)
       let step = false
       this.country = {areaId: obj.country_id, areaName: obj.country_name }
       await this.$axios
@@ -158,7 +171,7 @@ export default {
             // console.log(err)
           }
         })
-      // if (step) return false
+      if (step) return false
       await this.$axios
         .get('/web/common/area', {
           params: { pid: obj.province_id }
