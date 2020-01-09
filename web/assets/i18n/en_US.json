@@ -300,7 +300,9 @@
       "cancel": "Cancel"
     },
     "noMoreData": {
-      "noMore": "No more"
+      "noMore": "No result found, please try different keywords.",
+      "changeKeyword": "Try another keyword",
+      "noGoods": "Out of stock"
     },
     "diamondPopovers": {
       "caratMessage": "Carat refers to the size of a diamond, which is proportional to its carat"
