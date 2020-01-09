@@ -695,6 +695,7 @@
       "expiredCoupon": "不可使用优惠码"
     },
     "account": {
+      "account":"我的账号",
       "title": "我的账户资料",
       "base": "基本讯息",
       "link": "第三方账号绑定",

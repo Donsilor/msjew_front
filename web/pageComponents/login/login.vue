@@ -361,13 +361,11 @@ export default {
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken', res.data.access_token)
-              _this.$store.dispatch('getUserInfo')
+                // _this.$store.dispatch('getUserInfo')
+              // _this.$store.commit('setUserInfo',res.data)
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
               setTimeout(() => {
-                //  _this.$router.replace({
-                //     path: '/'
-                //   })
                 if (lastUrl) {
                   _this.$router.replace({
                     path: lastUrl
@@ -377,11 +375,10 @@ export default {
                   _this.$router.replace({
                     path: '/'
                   })
-                  
                 }
               }, 0)
               setTimeout(() => {
-                 window.location.reload()
+                window.location.reload()
               }, 1000)
               
             }
@@ -432,10 +429,9 @@ export default {
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
               _this.$store.commit('setToken',res.data.access_token)
-              // if(res.code==401){
-              //   _this.$store.commit('setToken',res.data.refresh_token)
-              // }
-              _this.$store.dispatch('getUserInfo')
+              // _this.$store.commit('setUserInfo',res.data) getOnlineCartAmount
+              // _this.$store.dispatch('getUserInfo')
+              // _this.$store.dispatch('getOnlineCartAmount')
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
               setTimeout(() => {
@@ -455,7 +451,6 @@ export default {
             }
         })
         .catch(err => {
-          //console.error(err)
           _this.requesting = false
           _this.refreshCode()
           _this.$errorMessage(err.message)

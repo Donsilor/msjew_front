@@ -677,6 +677,7 @@
       "expiredCoupon": "Useless Coupon"
     },
     "account": {
+      "account":"My account",
       "title": "Account Information",
       "base": "Basic Information",
       "link": "Connect third party account",

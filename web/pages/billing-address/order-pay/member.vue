@@ -1150,7 +1150,7 @@
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.deliveryInformation`) }}</div>
         </div>
-        <div v-if="good.length > 1" class="is-pack">
+        <!-- <div v-if="good.length > 1" class="is-pack">
           <div
             v-show="!isAllPack"
             class="free-check"
@@ -1165,7 +1165,7 @@
             <span>{{ $t(`${lang}.sendTogether`) }}</span
             ><span>（{{ $t(`${lang}.chatBor`) }}）</span>
           </div>
-        </div>
+        </div> -->
         <div class="send-time">
           <div class="send-left">
             <div>{{ $t(`${lang}.sendTime`) }}</div>
@@ -1215,7 +1215,7 @@
           />
           <input
             v-show="isSameEmail"
-            v-model="orderEmail"
+            v-model="orderAddress.email"
             :class="{ 'wrong-input': wrongInput.odMail }"
             type="text"
             @focus="
@@ -1432,7 +1432,8 @@ export default {
       canSubmit: false,
       address: [],
       addressMore: false,
-      orderAddress: {email: ''},
+      orderAddress:{email:''},
+      // orderAddress: ,
       newAddress: false,
       isEdit: false,
       noWay: false,
@@ -1470,7 +1471,7 @@ export default {
       makeGay: false,
       fuckYou: false,
       familyDie: ``,
-      isAllPack: false,
+      // isAllPack: false,
       isSameEmail: false,
       orderEmail: ``,
       remark: '',
@@ -1512,11 +1513,11 @@ export default {
           resolve()
         })
         .catch(err => {
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
+          // } else {
+          //   // console.log(err)
+          // }
           resolve()
         })
     })
@@ -1525,14 +1526,15 @@ export default {
         this.getAddress()
       })
       .then(() => {
+        // this.getAddress()
         // this.getCouponList()
       })
       .catch(err => {
-        if (!err.response) {
+        // if (!err.response) {
           this.$message.error(err.message)
-        } else {
-          // console.log(err)
-        }
+        // } else {
+        //   // console.log(err)
+        // }
       })
   },
   mounted() {
@@ -1558,27 +1560,29 @@ export default {
         .then(res => {
           console.log("获取地址",res)
           this.address = res.data
-          // for (const i in res) {
-          //   if (res[i].is_default === 1) {
-          //     this.address.unshift(res[i])
+          // for (const i in res.data) {
+          //   if (res[i].is_default == 1) {
+          //     this.address.unshift(res.data[i])
           //   } else {
-          //     this.address.push(res[i])
+          //     this.address.push(res.data[i])
           //   }
           // }
-          console.log("地址",this.address)
-          this.orderAddress = this.address[0]
-          this.newAddress = false
-          this.isEdit = false
-          this.noWay = true
-          this.getTex()
-          this.resetAddressInp()
+          if(this.address.length !=0){
+            this.orderAddress = this.address[0]
+            console.log("地址",this.orderAddress)
+            this.newAddress = false
+            this.isEdit = false
+            this.noWay = true
+            this.getTex()
+            this.resetAddressInp()
+          }
         })
         .catch(err => {
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
+          // } else {
             // console.log(err)
-          }
+          // }
         })
     },
     resetAddressInp() {
@@ -1696,11 +1700,11 @@ export default {
           this.resetAddressInp()
         })
         .catch(err => {
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     // 繁体
@@ -1789,11 +1793,11 @@ export default {
           this.resetAddressInp()
         })
         .catch(err => {
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     changeAddressInfo(obj) {
@@ -1916,11 +1920,11 @@ export default {
           })
         })
         .catch(err => {
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     deleteAddress() {
@@ -1940,11 +1944,11 @@ export default {
           this.getAddress()
         })
         .catch(err => {
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     fuckYouM(who) {
@@ -2096,11 +2100,11 @@ export default {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
           this.coupon = { couponCode: '- - -', couponId: '' }
           this.canSubmit = false
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     createOrder() {
@@ -2151,11 +2155,11 @@ export default {
           })
         })
         .catch(err => {
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     createOrder1() {
@@ -2196,7 +2200,7 @@ export default {
       console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
-        allSend: this.isAllPack ? 1 : 2,
+        // allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
@@ -2220,11 +2224,11 @@ export default {
           })
         })
         .catch(err => {
-          if (!err.response) {
+          // if (!err.response) {
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
+          // } else {
+          //   // console.log(err)
+          // }
         })
     }
   }

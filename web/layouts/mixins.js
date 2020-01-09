@@ -35,7 +35,7 @@ export default {
         await _this.$store.dispatch('getUserInfo')
         // 同步购物车
         // await _this.$store.dispatch('refreshTokenRequst')
-        await  _this.$store.dispatch('getOnlineCartAmount')
+        // await  _this.$store.dispatch('getOnlineCartAmount')
         //  _this.$store.dispatch('getOnlineCartAmount')
         await _this.$store.dispatch('synchronizeCart')
         // 同步心愿单

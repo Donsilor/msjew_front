@@ -22,26 +22,48 @@ export default function({ $axios, store }) {
     config.headers['x-api-currency']= store.state.coin || ''
     config.headers['x-api-language'] = store.state.language || ''
     // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-    // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     return config
   })
 
+  // let subscribers = [];
+  // function onAccessTokenFetched() {
+  //     subscribers.forEach((callback)=>{
+  //         callback();
+  //     })
+  //     subscribers = [];
+  // }
+
+  // function addSubscriber(callback) {
+  //     subscribers.push(callback)
+  // }
+
+
+//   if(isRefreshing){
+//     refreshTokenRequst()
+//   }
+//   isRefreshing = false;
+//   const retryOriginalRequest = new Promise((resolve) => {
+//     addSubscriber(()=>{
+//         resolve(request(url, options))
+//     })
+// })
+// return retryOriginalRequest;
 
   $axios.onResponse(res => {
     const data = res.data || {}
+    const refreshToken =localStorage.getItem('refreshToken')
+    // console.log("refreshToken",refreshToken)
     if (data.hasOwnProperty('code')) {
       if (data.code == 200) {
-       
-         return Promise.resolve(
+        return Promise.resolve(
           ![undefined].includes(data) ? data : null
         ) 
         // return Promise.resolve(data.data || null)
       } else {
         if (data.code == 401) {
           console.log('is 401')
-          // store.dispatch('refreshTokenRequst')
-          // this.$store.commit('setToken',data.refresh_token)
-          // store.dispatch('logout')
+          store.dispatch('logout')
+          // this.$router.push('/login')
           return
         }
         return Promise.reject(new Error(data.message|| 'something error'))
