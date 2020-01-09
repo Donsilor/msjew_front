@@ -2,12 +2,17 @@ export default {
   data() {
     return {}
   },
+  beforeMount(){
+    // this.$store.commit('refreshTokenRequst')
+    // console.log("ppppppp******")
+  },
   computed: {
     language() {
       return `language-${this.$store.state.language}`
     }
   },
   watch: {
+    
     // 每次切换路由，滚动到顶部
     $route(val, oldVal) {
       const layoutBox = this.$refs['layout-box']
@@ -18,6 +23,8 @@ export default {
     }
   },
   mounted() {
+    
+    // console.log("ppppppp******")
     const _this = this
     _this.$nextTick(async () => {
       if (!_this.$store.state.coin || !_this.$store.state.language) {
@@ -28,7 +35,7 @@ export default {
         await _this.$store.dispatch('getUserInfo')
         // 同步购物车
         // await _this.$store.dispatch('refreshTokenRequst')
-        await  _this.$store.dispatch('getOnlineCartAmount')
+        // await  _this.$store.dispatch('getOnlineCartAmount')
         //  _this.$store.dispatch('getOnlineCartAmount')
         await _this.$store.dispatch('synchronizeCart')
         // 同步心愿单
@@ -47,6 +54,7 @@ export default {
       // 获取对比数据
       _this.$store.dispatch('getCompared')
 
+      
       // _this
       //   .$axios({
       //     method: `get`,

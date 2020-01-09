@@ -588,7 +588,7 @@
           >
             <!--          商品数据-->
             <div v-if="item.itemType === 'product'" class="product-content">
-              <nuxt-link :to="item.to">
+              <nuxt-link :to="item.to" target="_blank">
                 <div class="product-image">
                   <img class="main-image" :src="item.goodsImages[0]" />
                   <img class="sub-image" :src="item.goodsImages[0]" />
@@ -934,6 +934,12 @@ export default {
           image: '/diamonds/sort-up.png'
         }
       },
+
+      sortInfo:{
+          content: '',
+          sortType: '',
+          sortBy: ''
+      },
     }
   },
   computed: {
@@ -995,29 +1001,29 @@ export default {
       })
       return result
     },
-    usingSortInfo() {
-      console.log(99,this.sortType,this.sortTypeOptions);
-      const sortOptions = JSON.parse(JSON.stringify(this.sortOptions))
-      const index = this.sortTypeIndex
-      const result = sortOptions[index]
-        ? {
-            content: sortOptions[index].name,
-            sortType: this.sortTypeOptions[this.sortType].key,
-            sortBy: sortOptions[index].key
-          }
-        : {
-            content: '',
-            sortType: '',
-            sortBy: ''
-          }
-      result.index = index
-      return result
-    },
+    // usingSortInfo() {
+    //   const sortOptions = JSON.parse(JSON.stringify(this.sortOptions))
+    //   const index = this.sortTypeIndex
+    //   const result = sortOptions[index]
+    //     ? {
+    //         content: sortOptions[index].name,
+    //         sortType: this.sortTypeOptions[this.sortType].key,
+    //         sortBy: sortOptions[index].key
+    //       }
+    //     : {
+    //         content: '',
+    //         sortType: '',
+    //         sortBy: ''
+    //       }
+    //   result.index = index
+    //   console.log(22222,result)
+    //   return result
+    // },
     // 列表特定body参数
     specialDatas() {
       const _this = this
       const conditions = this.searchConditions
-      const sortInfo = this.usingSortInfo
+      const sortInfo = this.sortInfo
       console.log(11,sortInfo,this.sortType)
       const params = [
         // 形状
@@ -1467,6 +1473,8 @@ export default {
         this.changeCondition('shape', value)
       }
     },
+
+
     // 改变排序方式，重新搜索
     changeSort(index) {
       if (this.sortTypeIndex === index) {
@@ -1488,11 +1496,23 @@ export default {
         this.sortTypeIndex = index
         this.sortType = 'down'
       }
-      if(index === 0){
+      if(index === 0){  //目前只有价格排序
+        const sortOptions = JSON.parse(JSON.stringify(this.sortOptions))
+        this.sortInfo = sortOptions[index]
+        ? {
+            content: sortOptions[index].name,
+            sortType: this.sortTypeOptions[this.sortType].key,
+            sortBy: sortOptions[index].key
+          }
+        : {
+            content: '',
+            sortType: '',
+            sortBy: ''
+          }
         this.research()
-
       }
-
+      
+    console.log(1111111,this.sortType);
     },
     changeCondition(key, value) {
       const searchConditions = JSON.parse(JSON.stringify(this.searchConditions))

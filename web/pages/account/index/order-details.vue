@@ -45,12 +45,24 @@
     <div v-if="data.details && data.details.length > 0" class="info-block">
       <div class="block-title">
         <span v-if="data.orderStatus === '10'">{{
-          $t(`${lang}.pendingPayment`)
+          $t(`${lang_pay}.waitingPay`)
+        }}</span>
+        <span v-else-if="data.orderStatus === '20'">{{
+          $t(`${lang_pay}.hadReceive`)
+        }}</span>
+        <span v-else-if="data.orderStatus === '30'">{{
+          $t(`${lang_pay}.waitingSend`)
+        }}</span>
+        <span v-else-if="data.orderStatus === '40'">{{
+          $t(`${lang_pay}.hadSend`)
         }}</span>
         <span v-else-if="data.orderStatus === '0'">{{
-          $t(`${lang}.closed`)
+          $t(`${lang_pay}.closed`)
         }}</span>
-        <span v-else>{{ $t(`${lang}.toBbeDelivered`) }}</span>
+        <span v-else-if="data.orderStatus === '50'">{{
+          $t(`${lang_pay}.hadFinish`)
+        }}</span>
+      
       </div>
       <div class="addr-info">
         <div class="addr">
@@ -272,11 +284,13 @@
 <script>
 import moment from 'moment'
 const lang = 'personal.orderDetail'
+const lang_pay = 'personal.userOrder'
 export default {
   name: 'OrderDetails',
   data() {
     return {
       lang,
+      lang_pay,
       oid: this.$route.query.orderId,
       data: {
         address: {
@@ -326,7 +340,7 @@ export default {
       // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
       if(orderStatus==0|| orderStatus==10){
         result[0].active = true
-      }else if(orderStatus==20|| orderStatus==30){
+      }else if(orderStatus==20 || orderStatus==30){
         result[0].active = true
         result[1].active = true
       }else if(orderStatus==40){

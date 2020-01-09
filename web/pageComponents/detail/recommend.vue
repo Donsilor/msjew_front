@@ -6,7 +6,7 @@
       :class="['data-item', 'product']"
     >
       <!--          商品数据-->
-      <nuxt-link :to="item.to || { path: '/' }">
+      <nuxt-link :to="item.to || { path: '/' }" target="_blank">
         <div class="product-content">
           <div class="product-image">
             <img class="main-image" :src="item.images[0]" />

@@ -681,6 +681,7 @@
       "expiredCoupon": "不可使用優惠碼"
     },
     "account": {
+      "account":"我的賬號",
       "title": "我的賬戶資料",
       "base": "基本訊息",
       "link": "第三方賬號綁定",
