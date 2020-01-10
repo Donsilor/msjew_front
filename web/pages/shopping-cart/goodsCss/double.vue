@@ -44,7 +44,7 @@
                 .simpleGoodsEntity.baseConfig"
               :key="'info1=' + k"
             >
-              <div v-if="i.configId === 196" class="infos">
+              <div v-if="i.configId === 26" class="infos">
                 <div>{{ i.configVal }}</div>
                 <div>{{ i.configAttrIVal }}</div>
               </div>
@@ -77,7 +77,7 @@
                 .simpleGoodsEntity.baseConfig"
               :key="'info3=' + j"
             >
-              <div v-if="i.configId === 196" class="infos">
+              <div v-if="i.configId === 26" class="infos">
                 <div>{{ i.configVal }}</div>
                 <div>{{ i.configAttrIVal }}</div>
               </div>
