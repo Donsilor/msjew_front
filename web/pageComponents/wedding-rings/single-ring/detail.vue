@@ -85,6 +85,7 @@
                   </li>
                 </ul>
               </div>
+
               <div class="helper-popover">
                 <span class="helper-name">
                   {{ $t(`${lang}.USEdition`) }}
@@ -94,7 +95,7 @@
                   <b slot="reference" class="prompt-icon">!</b>
                 </el-popover>
               </div>
-              <div class="choose-size">{{ $t(`${lang}.choose`) }}></div>
+              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
             </div>
           </div>
         </div>
@@ -404,7 +405,7 @@ export default {
           const specs = product.specs || []
           let result = '--'
           specs.forEach(item => {
-            if (item.configId === 196) {
+            if (item.configId === 26) {
               result = item.configAttrVal
             }
           })
