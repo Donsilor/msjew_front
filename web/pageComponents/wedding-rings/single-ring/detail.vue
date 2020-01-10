@@ -94,7 +94,7 @@
                   <b slot="reference" class="prompt-icon">!</b>
                 </el-popover>
               </div>
-              <div class="choose-size">{{ $t(`${lang}.choose`) }}></div>
+              <div class="choose-size">{{ $t(`${lang}.chooseSize`) }}></div>
             </div>
           </div>
         </div>
