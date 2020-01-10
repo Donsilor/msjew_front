@@ -16,17 +16,22 @@ export default {
     }
   },
   beforeMount() {
+    if(this.$store.state.language === 'zh_CN'){
+      this.country={areaId:'7',areaName: '中国'}
+      this.countryList=[{ areaId:'7',areaName: '中国'}]
+      this.getListTwo()
+    }
     this.getListOne()
+    
     // this.phoneNum = this.phoneJson[0]
+  
     if (this.$store.state.language === 'en_US' || this.$store.state.language === 'zh_TW') {
       return this.phoneNum = this.phoneJson[0]
     }else if(this.$store.state.language === 'zh_CN'){
       return this.phoneNum = this.phoneJson[1]
     }
-    if(this.$store.state.language === 'zh_CN'){
-      // this.country={ areaId: '7', areaName: '中国' },
-      // this.countryList=[{ areaId: '7', areaName: '中国' }]
-    }
+    
+    
   },
   methods: {
     getListOne() {
@@ -34,21 +39,12 @@ export default {
         .get('/web/common/area')
         .then(res => {
             this.countryList = res.data
-            this.countryList.unshift({
-              areaId: '',
-              areaName: this.$t(`${lang}.select`)
-            })
-            // if(this.$store.state.language === 'zh_CN'){
-            //   this.countryList.unshift({
-            //     areaId: '7',
-            //     areaName: this.$t(`${lang}.select`)
-            //   })
-            // }else{
-            //   this.countryList.unshift({
-            //     areaId: '',
-            //     areaName: this.$t(`${lang}.select`)
-            //   })
-            // }
+            // this.countryList.unshift({
+            //   areaId: '',
+            //   areaName: this.$t(`${lang}.select`)
+            // })
+
+            
             // console.log('country===>', res.countryList.areaName) 
         })
         .catch(err => {
@@ -208,6 +204,12 @@ export default {
       this.provinceList = [{ areaId: '', areaName: '- - -' }]
       this.city = { areaId: '', areaName: '- - -' }
       this.cityList = [{ areaId: '', areaName: '- - -' }]
+
+      if(this.$store.state.language === 'zh_CN'){
+        this.country={areaId:'7',areaName: '中国'}
+        this.countryList=[{ areaId:'7',areaName: '中国'}]
+        this.getListTwo()
+      }
     }
   }
 }
