@@ -51,7 +51,7 @@ export default function({ $axios, store }) {
 
   $axios.onResponse(res => {
     const data = res.data || {}
-    const refreshToken =localStorage.getItem('refreshToken')
+    
     // console.log("refreshToken",refreshToken)
     if (data.hasOwnProperty('code')) {
       if (data.code == 200) {
@@ -61,6 +61,7 @@ export default function({ $axios, store }) {
         // return Promise.resolve(data.data || null)
       } else {
         if (data.code == 401) {
+          // const refreshToken =localStorage.getItem('refreshToken')
           console.log('is 401')
           store.dispatch('logout')
           // this.$router.push('/login')
