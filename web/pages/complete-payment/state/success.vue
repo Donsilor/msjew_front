@@ -69,7 +69,7 @@
           {{ $t(`${lang}.orderCode`) }}<span>{{ data.orderNo }}</span>
         </div>
       </div>
-      <div class="right-side">
+      <!-- <div class="right-side">
         <div class="new-address-title">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.registered`) }}</div>
@@ -80,7 +80,7 @@
         <div class="login-btn" @click="toLogin">
           {{ $t(`${lang}.registered`) }}
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="middle-bar">
       <i class="iconfont icongantanhao" /><span>{{

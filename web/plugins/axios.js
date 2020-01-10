@@ -7,18 +7,18 @@ export default function({ $axios, store }) {
     //     )
     //     config.params[n] = encodeURIComponent(config.params[n])
     //   }
+    // // }
+    // let refreshToken=localStorage.getItem('refreshToken')
+    // let time=localStorage.getItem("expirationTime");
+    // if(time>=7200){
+    //   refreshToken=store.state.token
+    //   // console.log(store.state.token)
     // }
-    let refreshToken=localStorage.getItem('refreshToken')
-    let time=localStorage.getItem("expirationTime");
-    if(time>=7200){
-      refreshToken=store.state.token
-      // console.log(store.state.token)
-    }
-    setInterval(() => {
+    // setInterval(() => {
       
-    }, 1200000);
-    console.log('refreshToken=======>',refreshToken)
-    console.log('time=======>',time)
+    // }, 1200000);
+    // console.log('refreshToken=======>',refreshToken)
+    // console.log('time=======>',time)
     // console.log('token=======>',store.state.token)
     // console.log('coin=======>', store.state.coin)
     // console.log('language=======>', store.state.language)

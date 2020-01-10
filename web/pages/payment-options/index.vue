@@ -206,13 +206,6 @@ export default {
       }else if(this.payWay==6){
         pay = 6
       }
-      // if (this.payWay == 1) {
-      //   pay = 1
-      // } else if (this.payWay == 2 || this.payWay == 5) {
-      //   pay = 2
-      // } else if (this.payWay == 6 || this.payWay == 4 || this.payWay == 3) {
-      //   pay = 7
-      // }
     console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(
@@ -235,48 +228,48 @@ export default {
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        returnUrl:'http://www2.bddco.com/account/orders'
+        // returnUrl:'http://www2.bddco.com/complete-payment'
       }
       this.goingPay = true
-      if (res) {
-            if (pay !== 7) {
-              window.location.replace(res)
-            } else {
-              const promise = new Promise((resolve, reject) => {
-                this.form = []
-                const obj = JSON.parse(res)
-                const objKey = Object.keys(obj)
-                for (const i in objKey) {
-                  if (objKey[i] === 'url') {
-                    this.actionLink = obj[objKey[i]]
-                    continue
-                  }
-                  const o = {
-                    name: objKey[i],
-                    val: obj[objKey[i]]
-                  }
-                  this.form.push(o)
-                }
-                resolve()
-              })
-              promise.then(() => {
-                setTimeout(() => {
-                  this.isPay = false
-                  document.getElementById('unionPay').click()
-                }, 2000)
-              })
-            }
-          } else {
-            this.$router.replace({
-              path: 'complete-payment',
-              query: {
-                orderId: this.$route.query.orderId,
-                price: this.$route.query.price,
-                coinType: this.$route.query.coinType,
-                type: `transfer`
-              }
-            })
-          }
+      // if (res.data.config) {
+      //   if (pay !== 7) {
+      //     window.location.replace(res.data.config)
+      //   } else {
+      //     const promise = new Promise((resolve, reject) => {
+      //       this.form = []
+      //       const obj = JSON.parse(res.data.config)
+      //       const objKey = Object.keys(obj)
+      //       for (const i in objKey) {
+      //         if (objKey[i] === 'url') {
+      //           this.actionLink = obj[objKey[i]]
+      //           continue
+      //         }
+      //         const o = {
+      //           name: objKey[i],
+      //           val: obj[objKey[i]]
+      //         }
+      //         this.form.push(o)
+      //       }
+      //       resolve()
+      //     })
+      //     promise.then(() => {
+      //       setTimeout(() => {
+      //         this.isPay = false
+      //         document.getElementById('unionPay').click()
+      //       }, 2000)
+      //     })
+      //   }
+      // } else {
+      //   this.$router.replace({
+      //     path: '/complete-payment',
+      //     query: {
+      //       orderId: this.$route.query.orderId,
+      //       price: this.$route.query.price,
+      //       coinType: this.$route.query.coinType,
+      //       type: `transfer`
+      //     }
+      //   })
+      // }
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {
@@ -285,13 +278,13 @@ export default {
           //    path:res.data.config
           //  })
           // console.log(res)
-          if (res) {
+          if (res.data.config) {
             if (pay !== 7) {
               window.location.replace(res.data.config)
             } else {
               const promise = new Promise((resolve, reject) => {
                 this.form = []
-                const obj = JSON.parse(res)
+                const obj = JSON.parse(res.data.config)
                 const objKey = Object.keys(obj)
                 for (const i in objKey) {
                   if (objKey[i] === 'url') {
@@ -315,13 +308,13 @@ export default {
             }
           } else {
             this.$router.replace({
-              path: 'http://www2.bddco.com/account/orders',
-              // query: {
-              //   orderId: this.$route.query.orderId,
-              //   price: this.$route.query.price,
-              //   coinType: this.$route.query.coinType,
-              //   type: `transfer`
-              // }
+              path: '/complete-payment',
+              query: {
+                orderId: this.$route.query.orderId,
+                price: this.$route.query.price,
+                coinType: this.$route.query.coinType,
+                type: `transfer`
+              }
             })
           }
         })
