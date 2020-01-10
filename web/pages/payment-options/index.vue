@@ -238,6 +238,45 @@ export default {
         returnUrl:'http://www2.bddco.com/account/orders'
       }
       this.goingPay = true
+      if (res) {
+            if (pay !== 7) {
+              window.location.replace(res)
+            } else {
+              const promise = new Promise((resolve, reject) => {
+                this.form = []
+                const obj = JSON.parse(res)
+                const objKey = Object.keys(obj)
+                for (const i in objKey) {
+                  if (objKey[i] === 'url') {
+                    this.actionLink = obj[objKey[i]]
+                    continue
+                  }
+                  const o = {
+                    name: objKey[i],
+                    val: obj[objKey[i]]
+                  }
+                  this.form.push(o)
+                }
+                resolve()
+              })
+              promise.then(() => {
+                setTimeout(() => {
+                  this.isPay = false
+                  document.getElementById('unionPay').click()
+                }, 2000)
+              })
+            }
+          } else {
+            this.$router.replace({
+              path: 'complete-payment',
+              query: {
+                orderId: this.$route.query.orderId,
+                price: this.$route.query.price,
+                coinType: this.$route.query.coinType,
+                type: `transfer`
+              }
+            })
+          }
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {

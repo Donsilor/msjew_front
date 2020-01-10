@@ -153,6 +153,7 @@ export default {
   // },  
 
   refreshTokenRequst({ $axios, state, getters, commit, dispatch }){
+    let nowDate=parseInt((new Date()).getTime()/1000)
     const refreshToken =localStorage.getItem('refreshToken')
     console.log("refreshToken",refreshToken)
     return this.$axios({
@@ -164,9 +165,6 @@ export default {
     }).then(res => {
         localStorage.setItem('refreshToken',res.data.refresh_token);
         this.$store.commit('setToken',res.data.access_token);
-        onAccessTokenFetched();
-        isRefreshing = true;
-      // this.$store.commit('setToken',res.data.refresh_token)
     })
   },
 

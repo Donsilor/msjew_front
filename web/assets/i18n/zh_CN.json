@@ -359,6 +359,10 @@
     "registrySuccessful": "注册成功"
   },
   "resetPassword": {
+    "mobileTips":"请输入正确手机号",
+    "emailTips":"请输入正确邮箱",
+    "emptyMobile":"手机号不能为空",
+    "emptyEmail":"邮箱不能为空",
     "schedule1": "请输入电邮",
     "schedule1-phone": "手机号*",
     "schedule1-code": "输入验证码*",
