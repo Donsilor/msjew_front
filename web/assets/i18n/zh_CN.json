@@ -2208,7 +2208,8 @@
     "removeWishFail": "移除心愿单失败",
     "removeComparedSuccess": "移除钻石对比成功",
     "removeCompareFail": "移除钻石对比失败",
-    "getMore": "加载更多..."
+    "getMore": "加载更多...",
+    "error": "页面出错了"
   },
   "order": {
     "success":"添加成功！",

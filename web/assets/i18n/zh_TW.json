@@ -2192,7 +2192,8 @@
     "removeWishFail": "移除心願單失敗",
     "removeComparedSuccess": "移除鑽石對比成功",
     "removeCompareFail": "移除鑽石對比失敗",
-    "getMore": "加載更多..."
+    "getMore": "加載更多...",
+    "error": "頁面出錯了"
   },
   "order": {
     "success":"添加成功！",
