@@ -216,7 +216,7 @@
           {{ $t('common.getMore') }}
         </button>
       </div>
-      <no-more-data v-show="noMoreListData"></no-more-data>
+      <no-more-data v-show="showingData.length == 0" :type = "2"></no-more-data>
       <bdd-empty v-show="noListData" type="product"></bdd-empty>
     </section>
   </div>

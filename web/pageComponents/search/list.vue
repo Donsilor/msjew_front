@@ -7,6 +7,7 @@
         class="keyword-input"
         :placeholder="$t(`${lang}.keywordPlaceholder`)"
         @keyup.enter="toSearch"
+        ref = "k_input"
       />
       <button class="search-btn" @click="toSearch">
         {{ $t(`${lang}.search`) }}
@@ -96,7 +97,7 @@
           {{ $t('common.getMore') }}
         </button>
       </div>
-      <no-more-data v-show="showingData.length == 0"></no-more-data>
+      <no-more-data v-show="showingData.length == 0" :type = "1" @changeFn = "changeFng()"></no-more-data>
       <bdd-empty v-show="noListData" type="search"></bdd-empty>
     </section>
   </div>
@@ -291,6 +292,10 @@ export default {
           }
           _this.removeRequesting(reqMark)
         })
+    },
+    changeFng(){
+      this.keyword = '';
+      this.$refs.k_input.focus()
     }
   }
 }
@@ -318,12 +323,13 @@ export default {
     }
   }
   .search-btn {
-    padding: 0 20px;
+    width: 125px;
     height: 32px;
     background: #c1aaa0;
     font-size: 14px;
     color: #fff;
     cursor: pointer;
+    text-align: center;
   }
 }
 .page-content {

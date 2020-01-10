@@ -769,7 +769,7 @@
           {{ $t('common.getMore') }}
         </button>
       </div>
-      <no-more-data v-show="noMoreListData"></no-more-data>
+      <no-more-data v-show="showingData.length  == 0" :type = "2"></no-more-data>
       <bdd-empty v-show="noListData" type="product"></bdd-empty>
     </div>
     <div v-show="activeTab === 'compare'" class="compare-tab-content">
@@ -1511,7 +1511,7 @@ export default {
           }
         this.research()
       }
-      
+
     console.log(1111111,this.sortType);
     },
     changeCondition(key, value) {

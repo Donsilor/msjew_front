@@ -53,19 +53,22 @@
 <style>
   .to-top {
     position: absolute;
-    bottom: 220px;
-    right: 15px;
+    bottom: 20px;
+    right: 10px;
     z-index: 666;
     z-index: 9999;
-    width: 50px;
-    height: 50px;
-    box-shadow: 4px 4px 0px 0px rgba(214, 180, 177, 0.5);
+    width: 42px;
+    height: 42px;
+    /* box-shadow: 4px 4px 0px 0px rgba(214, 180, 177, 0.5); */
     border-radius: 6px;
     text-align: center;
     line-height: 50px;
     cursor: pointer;
-    background: #a096b4 url(../../static/common/toTop.png) no-repeat center 60%;
+    background: #cebeb0 url(../../static/common/toTop.png) no-repeat center 60%;
     background-size: 85% 85%;
+  }
+  .to-top:hover{
+    background-color: #8b766c;
   }
 
   .to-top .iconfont {

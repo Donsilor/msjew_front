@@ -300,7 +300,9 @@
       "cancel": "取消"
     },
     "noMoreData": {
-      "noMore": "暫無更多"
+      "noMore": "未找到合適的商品，您可以換一個關鍵詞搜尋",
+      "changeKeyword": "換個關鍵詞試試",
+      "noGoods": "暫無商品"
     },
     "diamondPopovers": {
       "caratMessage": "克拉是指鑽石的重量，與其大小成正比。使用滑塊或輸入值以查找您有興趣瀏覽的範圍。"

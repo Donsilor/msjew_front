@@ -222,7 +222,7 @@
             {{ $t('common.getMore') }}
           </button>
         </div>
-        <no-more-data v-show="noMoreListData"></no-more-data>
+        <no-more-data v-show="showingData == 0" :type = "2"></no-more-data>
         <bdd-empty v-show="noListData" type="product"></bdd-empty>
       </section>
     </div>
@@ -353,10 +353,10 @@ export default {
     if(priceRange_val !== undefined){
       this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
       this.changePriceRange(this.priceRange);
-      
+
     }
-    
-    
+
+
     _this.$nextTick(() => {
       _this.research()
     })

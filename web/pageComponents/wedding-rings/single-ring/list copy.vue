@@ -205,7 +205,7 @@
               </el-carousel-item>
             </el-carousel>
           </div>
-         
+
           <!--          商品数据-->
           <div v-else class="product-content">
             <nuxt-link :to="item.to" target="_blank">
@@ -239,7 +239,7 @@
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
       <div v-show="showNextPageButton" class="more-list-data">
@@ -251,7 +251,7 @@
           {{ $t('common.getMore') }}
         </button>
       </div>
-      <no-more-data v-show="noMoreListData"></no-more-data>
+      <no-more-data v-show="showingData.length == 0" :type = "2"></no-more-data>
       <bdd-empty v-show="noListData" type="product"></bdd-empty>
     </section>
   </div>
@@ -399,7 +399,7 @@ export default {
           adNum++
         } else {
           item.itemType = 'product'
-          item.goodsImages = _this.imageStrToArray(item.goodsImages || '')        
+          item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
           item.to = {
             // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
             path: '/ring/wedding-rings',
