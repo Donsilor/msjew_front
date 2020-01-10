@@ -126,7 +126,7 @@
             :to="startDj"
           >
             <button class="start-dj">
-              开始DJ
+              {{ $t(`${lang}.ConfirmTheChoice`) }}
             </button>
           </nuxt-link>
           <button
