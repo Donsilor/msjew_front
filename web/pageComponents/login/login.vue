@@ -354,7 +354,7 @@ export default {
           }
         })
         .then(res => {
-          localStorage.setItem("refreshToken",res.data.refresh_token);
+          // localStorage.setItem("refreshToken",res.data.refresh_token);
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
