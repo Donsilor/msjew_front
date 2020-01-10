@@ -543,19 +543,19 @@ export default {
     },
     mobiletip(){
       if(this.mobile==''){
-        throw new Error ("手机号不能为空")
+        throw new Error (this.$t(`${lang}.emptyMobile`))
       }
       if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-        throw new Error ("请输入正确手机号")
+        throw new Error (this.$t(`${lang}.mobileTips`))
       }
      
     },
     emialtip(){
       if (this.info.email=='') {
-        throw new Error ("邮箱不能为空")
+        throw new Error (this.$t(`${lang}.emptyEmail`))
       }
       if (!((/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/).test(this.info.email))) {
-        throw new Error ("请输入正确邮箱")
+        throw new Error (this.$t(`${lang}.emailTips`))
       }
     },
     // 繁体和英文步骤条
@@ -704,37 +704,37 @@ export default {
       //         })
       //     })
     //   },
-      compareCode() {
-        const _this = this
-        return new Promise((resolve, reject) => {
-          if (!_this.info.code) {
-            reject(new Error(_this.$t(`${lang}.inputEmailCode`)))
-          }
+    // compareCode() {
+      //   const _this = this
+      //   return new Promise((resolve, reject) => {
+      //     if (!_this.info.code) {
+      //       reject(new Error(_this.$t(`${lang}.inputEmailCode`)))
+      //     }
 
-          _this
-            .$axios({
-              method: 'post',
-              url: '/web/user/compareCode',
-              params: {
-                email: _this.info.email,
-                code: _this.info.code
-              }
-            })
-            .then(data => {
-              console.log(data)
-              resolve(data)
-            })
-            .catch(err => {
-              reject(err)
-            })
-        })
-      },
+      //     _this
+      //       .$axios({
+      //         method: 'post',
+      //         url: '/web/user/compareCode',
+      //         params: {
+      //           email: _this.info.email,
+      //           code: _this.info.code
+      //         }
+      //       })
+      //       .then(data => {
+      //         console.log(data)
+      //         resolve(data)
+      //       })
+      //       .catch(err => {
+      //         reject(err)
+      //       })
+      //   })
+      // },
     // 重置号码密码
     resetMobilePassword() {
       const _this = this
       return new Promise((resolve, reject) => {
         if (!_this.code) {
-          reject(new Error("请输入验证码"))
+          reject(new Error(_this.$t(`${lang}.schedule2-codetips`))) 
         }
         if (!_this.password) {
           reject(new Error(_this.$t(`${lang}.newPassword`)))
@@ -771,7 +771,7 @@ export default {
       const _this = this
       return new Promise((resolve, reject) => {
         if (!_this.info.code) {
-          reject(new Error("请输入验证码"))
+          reject(new Error(_this.$t(`${lang}.schedule2-codetips`)))
         }
         if (!_this.info.password) {
           reject(new Error(_this.$t(`${lang}.newPassword`)))

@@ -85,6 +85,7 @@
                   </li>
                 </ul>
               </div>
+
               <div class="helper-popover">
                 <span class="helper-name">
                   {{ $t(`${lang}.USEdition`) }}
@@ -94,7 +95,7 @@
                   <b slot="reference" class="prompt-icon">!</b>
                 </el-popover>
               </div>
-              <div class="choose-size">{{ $t(`${lang}.chooseSize`) }}></div>
+              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
             </div>
           </div>
         </div>

@@ -351,9 +351,14 @@
     "registrySuccessful": "註冊成功"
   },
   "resetPassword": {
+    "mobileTips":"請輸入正確手機號",
+    "emailTips":"請輸入正確郵箱",
+    "emptyMobile":"手機號不能為空",
+    "emptyEmail":"郵箱不能為空",
     "schedule1": "請輸入電郵",
     "schedule2": "身份確認",
     "schedule3": "重設密碼",
+    "schedule2-codetips": "請輸入驗證碼",
     "schedule4": "完成",
     "forgetPassword": "忘記密碼",
     "address": "請輸入您的BDD賬戶電郵地址*",
@@ -2192,7 +2197,8 @@
     "removeWishFail": "移除心願單失敗",
     "removeComparedSuccess": "移除鑽石對比成功",
     "removeCompareFail": "移除鑽石對比失敗",
-    "getMore": "加載更多..."
+    "getMore": "加載更多...",
+    "error": "頁面出錯了"
   },
   "order": {
     "success":"添加成功！",

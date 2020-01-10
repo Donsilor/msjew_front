@@ -350,10 +350,15 @@
     "registrySuccessful": "Registered"
   },
   "resetPassword": {
+    "mobileTips": "Please enter the correct mobile phone number",
+    "emailTips": "Please enter the correct email",
+    "emptyMobile": "Mobile phone number cannot be empty",
+    "emptyEmail": "Email cannot be empty",
     "schedule1": "Enter Email ",
     "schedule2": "Verification Code",
     "schedule3": "Reset Password",
     "schedule4": "Completed",
+    "schedule2-codetips": "Please enter a verification code",
     "forgetPassword": "Forgot Password",
     "address": "Please enter the email provided in the registration:",
     "tips1": "*Your email is not a BDD member account. Please register first ",
@@ -2189,7 +2194,8 @@
     "removeWishFail": "Failed to remove wish list",
     "removeComparedSuccess": "remove diamond from comparison",
     "removeCompareFail": "Failed to remove diamond from comparison",
-    "getMore": "MORE"
+    "getMore": "MORE",
+    "error": "Page Error"
   },
   "order": {
     "success":"Added successfully!",
