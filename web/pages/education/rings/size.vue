@@ -38,7 +38,7 @@
 
 <script>
 import Layout from '@/pageComponents/policies/layout.vue'
-const lang = 'education.rings.size'
+const lang = 'education.ring.size'
 export default {
   components: {
     Layout
