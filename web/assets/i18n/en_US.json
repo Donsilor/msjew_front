@@ -2194,7 +2194,8 @@
     "removeWishFail": "Failed to remove wish list",
     "removeComparedSuccess": "remove diamond from comparison",
     "removeCompareFail": "Failed to remove diamond from comparison",
-    "getMore": "MORE"
+    "getMore": "MORE",
+    "error": "Page Error"
   },
   "order": {
     "success":"Added successfully!",
