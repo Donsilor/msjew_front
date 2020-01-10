@@ -9,12 +9,8 @@
           </span>
           <input
             v-model="mobile"
-            @focus="focusEvent1"
-            @blur="blurEvent1"
-            @keydown="keydownEvent1"
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
-            @change="changeEvent1"
             @input="input"
             type="text"
             v-bind:class="{active:isActive1}"
@@ -32,12 +28,8 @@
           </span>
           <input
             v-model="password"
-            @focus="focusEvent2"
-            @blur="blurEvent2"
-            @keydown="keydownEvent2"
             @keyup="keyupEvent2"
             @keypress="keypressEvent2"
-            @change="changeEvent2"
             type="password"
             v-bind:class="{active:isActive2}"
             :placeholder="$t(`${lang}.password`)"
@@ -57,12 +49,8 @@
           <div class="login-input verification-code-input">
             <input
               v-model="code"
-              @focus="focusEvent3"
-              @blur="blurEvent3"
-              @keydown="keydownEvent3"
               @keyup="keyupEvent3"
               @keypress="keypressEvent3"
-              @change="changeEvent3"
               type="text"
               v-bind:class="{active:isActive3}"
               :placeholder="$t(`${lang}.code`)"
@@ -101,12 +89,8 @@
           </span>
           <input
             v-model="account"
-            @focus="focusEvent1"
-            @blur="blurEvent1"
-            @keydown="keydownEvent1"
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
-            @change="changeEvent1"
             @input="input"
             v-bind:class="{active:isActive1}"
             type="text"
@@ -124,12 +108,8 @@
           </span>
           <input
             v-model="password"
-            @focus="focusEvent2"
-            @blur="blurEvent2"
-            @keydown="keydownEvent2"
             @keyup="keyupEvent2"
             @keypress="keypressEvent2"
-            @change="changeEvent2"
             v-bind:class="{active:isActive2}"
             type="password"
             :placeholder="$t(`${lang}.password`)"
@@ -149,12 +129,8 @@
           <div class="login-input verification-code-input">
             <input
               v-model="code"
-              @focus="focusEvent3"
-              @blur="blurEvent3"
-              @keydown="keydownEvent3"
               @keyup="keyupEvent3"
               @keypress="keypressEvent3"
-              @change="changeEvent3"
               v-bind:class="{active:isActive3}"
               type="text"
               :placeholder="$t(`${lang}.code`)"
@@ -243,15 +219,6 @@ export default {
     input(){
 
     },
-    focusEvent1(e){
-      // console.log("zzzz")
-    },
-    blurEvent1(e){
-
-    },
-    keydownEvent1(e){
-      
-    },
     keyupEvent1(){
       this.isActive1=false
       this.phoneErr=false
@@ -260,37 +227,12 @@ export default {
       this.isActive1=false
       // this.phoneErr=false
     },
-    changeEvent1(){
-     
-    },
-
-    focusEvent2(e){
-      console.log("zzzz")
-    },
-    blurEvent2(e){
-
-    },
-    keydownEvent2(e){
-      
-    },
     keyupEvent2(){
       this.isActive2=false
       this.passwordErr=false
     },
     keypressEvent2(){
      
-    },
-    changeEvent2(){
-     
-    },
-    focusEvent3(e){
-      // console.log("zzzz")
-    },
-    blurEvent3(e){
-
-    },
-    keydownEvent3(e){
-      
     },
     keyupEvent3(){
       if(this.code == this.pictureCode){
@@ -301,9 +243,6 @@ export default {
     keypressEvent3(){
       // this.isActive3=false
       // this.passwordErr=false
-    },
-    changeEvent3(){
-     
     },
     // 查询cookie
     getCookie(cname) {
@@ -355,6 +294,7 @@ export default {
         })
         .then(res => {
           localStorage.setItem("refreshToken",res.data.refresh_token);
+          localStorage.setItem("expirationTime",res.data.expiration_time);
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false

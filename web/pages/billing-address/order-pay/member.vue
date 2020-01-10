@@ -99,6 +99,13 @@
             "
           />
           <div
+            v-if="a === orderAddress"
+            class="font-size-14 mrAdd"
+            style="color: #f29b87; margin-top: 6px;"
+          >
+            {{ $t(`${langs}.mrAddress`) }}
+          </div>
+          <div
             class="addr-btn"
             @click="
               newAddress = true
@@ -793,6 +800,7 @@
           </div>
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
+          
           <div class="addr-board" @click="changeAddress(a)" />
           <i
             class="iconfont iconlajitong"
@@ -801,6 +809,13 @@
               confirmBox = true
             "
           />
+          <div
+            v-if="a === orderAddress"
+            class="font-size-14 mrAdd"
+            style="color: #f29b87; margin-top: 6px;"
+          >
+            {{ $t(`${langs}.mrAddress`) }}
+          </div>
           <div
             class="addr-btn"
             @click="
@@ -1179,7 +1194,7 @@
             {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
           </div>
         </div>
-        <div class="after-sale-email">
+        <!-- <div class="after-sale-email">
           <div>{{ $t(`${lang}.showHouEmail`) }}</div>
           <div>
             <div
@@ -1194,8 +1209,8 @@
             />
             <span>{{ $t(`${lang}.sameTongAddress`) }}</span>
           </div>
-        </div>
-        <div
+        </div> -->
+        <!-- <div
           :class="[
             { 'border-change': borderChange === 8 },
             { 'border-wrong': wrongInput.odMail }
@@ -1224,7 +1239,7 @@
             "
             @blur="borderChange = 0"
           />
-        </div>
+        </div> -->
         <div class="message">
           <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
           <textarea
@@ -1416,6 +1431,7 @@ import madeUp from '../../shopping-cart/goodsCss/madeUp'
 import Address from '@/assets/js/address.js'
 import { Email, RegMobile, RegTelephone } from '@/assets/js/require-lee.js'
 const lang = 'order'
+const langs = 'personal.account'
 export default {
   name: 'Member',
   components: {
@@ -1428,6 +1444,7 @@ export default {
     return {
       language:'',
       lang,
+      langs,
       pathTakeIds: this.$route.query.cartIds.split(','),
       canSubmit: false,
       address: [],
@@ -2164,24 +2181,24 @@ export default {
     },
     createOrder1() {
       console.log()
-      // if (!this.canSubmit) {
-      //   return
-      // }
+      if (!this.canSubmit) {
+        return
+      }
       if (this.orderAddress.id === '') {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
       }
-      if (
-        !Email.test(
-          this.isSameEmail ? this.orderAddress.email : this.orderEmail
-        )
-      ) {
-        this.wrongMsg = this.$t(`${lang}.msg5`)
-        this.wrongInput.odMail = true
-        this.alertBox = true
-        return false
-      }
+      // if (
+      //   !Email.test(
+      //     this.isSameEmail ? this.orderAddress.email : this.orderEmail
+      //   )
+      // ) {
+      //   this.wrongMsg = this.$t(`${lang}.msg5`)
+      //   this.wrongInput.odMail = true
+      //   this.alertBox = true
+      //   return false
+      // }
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
@@ -2204,9 +2221,9 @@ export default {
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        afterMail: this.isSameEmail
-        ? this.orderAddress.email
-        : this.orderEmail,
+        // afterMail: this.isSameEmail
+        // ? this.orderAddress.email
+        // : this.orderEmail,
       }
       // console.log("pppp",data)
       this.$axios
@@ -2467,6 +2484,15 @@ div {
           text-align: center;
           cursor: pointer;
           top: 30px;
+          right: 28px;
+          z-index: 40;
+        }
+        .mrAdd{
+          position: absolute;
+          text-align: center;
+          cursor: pointer;
+          background: #fff;
+          top: 0px;
           right: 28px;
           z-index: 40;
         }

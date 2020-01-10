@@ -1,9 +1,4 @@
 export default function({ $axios, store }) {
-  // const token = store.state.token
-  // if(token){
-  //   let refreshToken = store.state.refreshToken
-  // }
-  //$axios.defaults.baseURL = 'http://www.bddmall.com/api'
   $axios.onRequest(config => {
     // if (config.params) {
     //   for (const n in config.params) {
@@ -13,8 +8,18 @@ export default function({ $axios, store }) {
     //     config.params[n] = encodeURIComponent(config.params[n])
     //   }
     // }
-
-    // console.log('token=======>', store.state.token)
+    let refreshToken=localStorage.getItem('refreshToken')
+    let time=localStorage.getItem("expirationTime");
+    if(time>=7200){
+      refreshToken=store.state.token
+      // console.log(store.state.token)
+    }
+    setInterval(() => {
+      
+    }, 1200000);
+    console.log('refreshToken=======>',refreshToken)
+    console.log('time=======>',time)
+    // console.log('token=======>',store.state.token)
     // console.log('coin=======>', store.state.coin)
     // console.log('language=======>', store.state.language)
 
@@ -25,29 +30,7 @@ export default function({ $axios, store }) {
     return config
   })
 
-  // let subscribers = [];
-  // function onAccessTokenFetched() {
-  //     subscribers.forEach((callback)=>{
-  //         callback();
-  //     })
-  //     subscribers = [];
-  // }
 
-  // function addSubscriber(callback) {
-  //     subscribers.push(callback)
-  // }
-
-
-//   if(isRefreshing){
-//     refreshTokenRequst()
-//   }
-//   isRefreshing = false;
-//   const retryOriginalRequest = new Promise((resolve) => {
-//     addSubscriber(()=>{
-//         resolve(request(url, options))
-//     })
-// })
-// return retryOriginalRequest;
 
   $axios.onResponse(res => {
     const data = res.data || {}
