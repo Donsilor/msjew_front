@@ -1570,12 +1570,20 @@ export default {
             // }
             console.log("地址",this.address)
             this.orderAddress = this.address[0]
+<<<<<<< HEAD
+=======
+
+>>>>>>> e7b56705cf440cc37d387fe654b8161382c081a8
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
             this.getTex()
             this.resetAddressInp()
           }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e7b56705cf440cc37d387fe654b8161382c081a8
         })
         .catch(err => {
           // if (!err.response) {
