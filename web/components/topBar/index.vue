@@ -1009,8 +1009,11 @@ export default {
       window.location.reload()
     },
     logout() {
+      // window.location.reload()
       this.$store.dispatch('logout', lang)
-      window.location.reload()
+      setTimeout(() => {
+        window.location.reload()
+      },0)
       this.$router.push('/login')
       // this.$store.dispatch('logout', lang)
       // this.$router.push(`/login`)
