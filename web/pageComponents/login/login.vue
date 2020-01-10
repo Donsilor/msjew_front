@@ -382,7 +382,6 @@ export default {
               }, 1000)
               
             }
-          
           // } else {
           //   throw new Error (res.message)
           // }

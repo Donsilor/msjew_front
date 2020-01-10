@@ -8,13 +8,13 @@ export default function({ $axios, store, app }) {
   Vue.use(Element, {
     i18n: function(path, options) {
       let value = i18n.t(path, options)
-      if (value !== null && value !== 'undefined') {
+      if (value !== null && value !== undefined) {
         return value
       }
       return ''
     }
   })
-  // Vue.use(Element, { locale: app.$userLanguage === 'zh-TW' ? ZhCn : En })
+  Vue.use(Element, { locale: app.$userLanguage === 'zh-TW' ? ZhCn : En })
   // Vue.use(Element, { locale: app.$userLanguage === 'zh_TW' ? ZhTw : app.$userLanguage==='en_US'?En :ZhCn})
   // Vue.use(Element, { locale: app.$userLanguage === 'zh_TW' || 'zh_CN' ? ZhCn : En })
 }

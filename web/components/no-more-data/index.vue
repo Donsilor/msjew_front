@@ -1,20 +1,22 @@
 <template>
-  <div class="no-more-data" v-if="type == 1">
-    <div class="no-more-img type-a">
-      <img src="../../static/search/search.png" alt="">
+  <div>
+    <div class="no-more-data" v-if="type == 1">
+      <div class="no-more-img type-a">
+        <img src="../../static/search/search.png" alt="">
+      </div>
+      <div class="no-more-row">
+        <span>{{ $t(`${lang}.noMore`) }}</span>
+        <span class="under-line"  @click="changeKey()">{{ $t(`${lang}.changeKeyword`) }}</span>
+      </div>
     </div>
-    <div class="no-more-row">
-      <span>{{ $t(`${lang}.noMore`) }}</span>
-      <span class="under-line"  @click="changeKey()">{{ $t(`${lang}.changeKeyword`) }}</span>
-    </div>
-  </div>
 
-  <div class="no-more-data" v-else>
-    <div class="no-goods-img">
-      <img src="../../static/search/product.png" alt="">
-    </div>
-    <div class="no-more-row text-two">
-      <span>{{ $t(`${lang}.noGoods`) }}</span>
+    <div class="no-more-data" v-if="type == 2">
+      <div class="no-goods-img">
+        <img src="../../static/search/product.png" alt="">
+      </div>
+      <div class="no-more-row text-two">
+        <span>{{ $t(`${lang}.noGoods`) }}</span>
+      </div>
     </div>
   </div>
 </template>

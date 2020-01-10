@@ -94,7 +94,7 @@
                   <b slot="reference" class="prompt-icon">!</b>
                 </el-popover>
               </div>
-              <div class="choose-size">{{ $t(`${lang}.choose`) }}></div>
+              <div class="choose-size">{{ $t(`${lang}.chooseSize`) }}></div>
             </div>
           </div>
         </div>
@@ -127,7 +127,7 @@
               :to="startDj"
             >
               <button class="start-dj">
-                开始DJ
+                {{ $t(`${lang}.ConfirmTheChoice`) }}
               </button>
             </nuxt-link>
             <button

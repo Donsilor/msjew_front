@@ -303,7 +303,7 @@
     "noMoreData": {
       "noMore": "未找到合适的商品，您可以換一个关键词搜索",
       "changeKeyword": "换个关键词试试",
-      "noGoods": "暫無商品"
+      "noGoods": "暂无商品"
     },
     "diamondPopovers": {
       "caratMessage": "克拉是指鑽石的重量，與其大小成正比。使用滑塊或輸入值以查找您有興趣瀏覽的範圍。"
@@ -1013,6 +1013,7 @@
     "needHelpForRingSize": "如果您是其他区域的客户，请联络客服告知指圈号版本，可以是欧版、中国大陆版本。",
     "checkMyRingSize": "如何测量我的指圈号？",
 
+    "ConfirmTheChoice": "确认选择",
     "addCart": "加入购物车",
     "wish": "心愿单",
     "addCartSuccess": "加入购物车成功",
