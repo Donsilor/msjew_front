@@ -1,7 +1,7 @@
 <template>
   <div>
-    <single-ring-detail :info="info"></single-ring-detail>
-    <!-- <sole-out></sole-out> -->
+    <single-ring-detail v-if="info.length != 0" :info="info"></single-ring-detail>
+    <sole-out v-else></sole-out>
   </div>
 </template>
 
