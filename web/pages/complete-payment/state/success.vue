@@ -52,7 +52,7 @@
         {{ $t(`${lang}.orderCode`) }}<span>{{ data.orderNo }}</span>
       </div>
        <div class="order-num">
-         <nuxt-link :to="{name: ''}">返回商品页</nuxt-link>
+         <nuxt-link :to="{name: '/account/orders'}">{{ $t(`${lang}.comeBack`) }}</nuxt-link>
       </div>
     </div>
     <!--未登陆的中间信息-->

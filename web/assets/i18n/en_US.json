@@ -927,6 +927,7 @@
     "payQuestion": "Payment error"
   },
   "finishPay": {
+    "comeBack": "Return to product page",
     "confirmOrder": "Shopping cart",
     "finishOrderInfo": "Complete your order information",
     "orderPay": "Delivery Method and Payment",
