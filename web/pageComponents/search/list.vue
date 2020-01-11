@@ -97,8 +97,8 @@
           {{ $t('common.getMore') }}
         </button>
       </div>
-      <no-more-data v-show="showingData.length == 0" :type = "1" @changeFn = "changeFng()"></no-more-data>
-      <bdd-empty v-show="noListData" type="search"></bdd-empty>
+      <no-more-data v-show="showingData.length == 0" :dataVal = "1" @changeFn = "changeFng()"></no-more-data>
+      <!-- <bdd-empty v-show="noListData" type="search"></bdd-empty> -->
     </section>
   </div>
 </template>

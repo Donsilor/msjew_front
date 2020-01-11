@@ -10,8 +10,6 @@
 <script>
   const lang = 'common'
   export default {
-    components: {
-    },
     data() {
       return {
         lang,
