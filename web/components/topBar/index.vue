@@ -49,12 +49,18 @@
                   {{ showMobile }}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
-                <span v-else class="row-flex align-item-center el-dropdown-link span">
+                 <span v-else-if="language === 'zh_CN'&&userInfo.lastname!==''&&userInfo.firstname!==''" class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ userInfo.lastname }} {{ userInfo.firstname }}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
-                <el-dropdown-menu slot="dropdown">
+                <span v-else  class="row-flex align-item-center el-dropdown-link span">
+                  <i class="iconfont icongerenzhongxin"></i>
+                  {{ userInfo.firstname }} {{ userInfo.lastname }}
+                  <i class="iconfont iconkuozhan"></i>
+                </span>
+               
+                <el-dropdown-menu slot="dropdown" >
                   <el-dropdown-item v-for="(item, n) in userMenus" :key="n">
                     <nuxt-link v-if="item.to" :to="item.to">
                       {{ item.name }}
@@ -279,6 +285,7 @@ const lang = 'components.topBar'
 export default {
   data() {
     return {
+      language:'',
       lang,
       keyword: '',
       languageOptions: this.$bddDefinition.languageOptions,
@@ -989,10 +996,22 @@ export default {
     }
   },
   mounted() {
+    this.language = this.getCookie('language')
+    // console.log("kkkkkkk",this.$store.state.language)
     const _this = this
     _this.$nextTick(() => {})
   },
   methods: {
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     ...mapMutations(['setCoin', 'setLanguage']),
     fixed(status) {
       this.fixedStatus = !!status

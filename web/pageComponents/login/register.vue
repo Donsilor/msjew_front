@@ -2,9 +2,39 @@
   <div>
     <!-- 简体中文 -->
     <div v-if="language === 'zh_CN'" class="register-item">
-      <div class="">
-        <!-- 姓名 -->
+      <div class="row-flex">
+        <div class="relative margin-right-20 margin-bottom-20">
+          <div class="register-input">
+            <input
+              v-model="firstname"
+              @focus="focusEvents"
+              @blur="blurEvents"
+              v-bind:class="{active:isActivefisrt}"
+              type="text"
+              :placeholder="$t(`${lang}.surname`)"
+            />
+          </div>
+          <!-- <div class="error-tip">
+            {{ $t(`${lang}.surnameTips`) }}
+          </div> -->
+        </div>
         <div class="relative margin-bottom-20">
+          <div class="register-input">
+            <input
+              v-model="lastname"
+              @focus="focusEvent"
+              @blur="blurEvent"
+              v-bind:class="{active:isActivelast}"
+              type="text"
+              :placeholder="$t(`${lang}.name`)"
+            />
+          </div>
+          <!-- <div class="error-tip">
+            {{ $t(`${lang}.nameTips`) }}
+          </div> -->
+        </div>
+        <!-- 姓名 -->
+        <!-- <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
               v-model="firstname"
@@ -18,7 +48,7 @@
           <div v-show="nameShow" class="error-tip">
             {{ $t(`${lang}.surnameTips`) }}
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- 手机号 -->
       <div class="relative margin-bottom-20">

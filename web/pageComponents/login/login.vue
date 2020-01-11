@@ -11,7 +11,6 @@
             v-model="mobile"
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
-            @input="input"
             type="text"
             v-bind:class="{active:isActive1}"
             :placeholder="$t(`${lang}.mailbox`)"
@@ -91,7 +90,6 @@
             v-model="account"
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
-            @input="input"
             v-bind:class="{active:isActive1}"
             type="text"
             :placeholder="$t(`${lang}.mailbox`)"
@@ -216,9 +214,6 @@ export default {
     })
   },
   methods: {
-    input(){
-
-    },
     keyupEvent1(){
       this.isActive1=false
       this.phoneErr=false
