@@ -30,8 +30,6 @@ export default {
     }else if(this.$store.state.language === 'zh_CN'){
       return this.phoneNum = this.phoneJson[1]
     }
-    
-    
   },
   methods: {
     getListOne() {

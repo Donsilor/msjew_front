@@ -56,7 +56,7 @@
         {{ $t(`${lang}.loadingMore`) }}
       </button>
     </div> -->
-    <!--    <no-more-data v-show="showingData.length == 0" :type = "2"></no-more-data>-->
+    <!--    <no-more-data v-show="showingData.length == 0" :dataVal = "2"></no-more-data>-->
     <!-- <bdd-empty v-show="noListData" :type="'comment'"></bdd-empty> -->
   </section>
 </template>

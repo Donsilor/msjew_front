@@ -927,6 +927,7 @@
     "payQuestion": "Payment error"
   },
   "finishPay": {
+    "comeBack": "Return to product page",
     "confirmOrder": "Shopping cart",
     "finishOrderInfo": "Complete your order information",
     "orderPay": "Delivery Method and Payment",
@@ -2195,7 +2196,8 @@
     "removeComparedSuccess": "remove diamond from comparison",
     "removeCompareFail": "Failed to remove diamond from comparison",
     "getMore": "MORE",
-    "error": "Page Error"
+    "error": "Page Error",
+    "soleOut": "The Goods Have Sold Out"
   },
   "order": {
     "success":"Added successfully!",

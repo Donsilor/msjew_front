@@ -945,6 +945,7 @@
     "payQuestion": "支付遇到问题"
   },
   "finishPay": {
+    "comeBack":"返回商品页",
     "confirmOrder": "购物车",
     "finishOrderInfo": "完善您的订单讯息",
     "orderPay": "订单支付",
@@ -2213,7 +2214,8 @@
     "removeComparedSuccess": "移除钻石对比成功",
     "removeCompareFail": "移除钻石对比失败",
     "getMore": "加载更多...",
-    "error": "页面出错了"
+    "error": "页面出错了",
+    "soleOut": "商品已售罄"
   },
   "order": {
     "success":"添加成功！",

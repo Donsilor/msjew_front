@@ -929,6 +929,7 @@
     "payQuestion": "支付遇到問題"
   },
   "finishPay": {
+    "comeBack":"返回商品頁",
     "confirmOrder": "購物車",
     "finishOrderInfo": "完善您的訂單訊息",
     "orderPay": "訂單支付",
@@ -2198,7 +2199,8 @@
     "removeComparedSuccess": "移除鑽石對比成功",
     "removeCompareFail": "移除鑽石對比失敗",
     "getMore": "加載更多...",
-    "error": "頁面出錯了"
+    "error": "頁面出錯了",
+    "soleOut": "商品已售罄"
   },
   "order": {
     "success":"添加成功！",

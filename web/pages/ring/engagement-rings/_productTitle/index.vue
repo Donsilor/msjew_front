@@ -1,19 +1,25 @@
 <template>
-  <single-ring-detail :info="info"></single-ring-detail>
+  <div>
+    <single-ring-detail v-if="info.length != 0" :info="info"></single-ring-detail>
+    <sole-out v-else></sole-out>
+  </div>
 </template>
 
 <script>
 import SingleRingDetail from '@/pageComponents/engagement-rings/detail.vue'
+import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   head() {
     return this.seoInfo || {}
   },
   components: {
-    SingleRingDetail
+    SingleRingDetail,
+    SoleOut
   },
   data() {
     return {
-      info: null
+      info: null,
+      ifHaveGoods: true
     }
   },
   asyncData({ $axios, route, store, app }) {

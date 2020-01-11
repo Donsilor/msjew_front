@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="no-more-data" v-if="type == 1">
+    <div class="no-more-data" v-if="dataVal == 1">
       <div class="no-more-img type-a">
         <img src="../../static/search/search.png" alt="">
       </div>
@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div class="no-more-data" v-if="type == 2">
+    <div class="no-more-data" v-else-if="dataVal == 2">
       <div class="no-goods-img">
         <img src="../../static/search/product.png" alt="">
       </div>
@@ -26,10 +26,9 @@ export default {
   data() {
     return {
       lang,
-      type : 0
     }
   },
-  props:['type'],
+  props:['dataVal'],
   methods:{
     changeKey(){
       this.$emit('changeFn',true)

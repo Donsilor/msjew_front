@@ -36,9 +36,9 @@
         </div>
       </nuxt-link>
     </div>
-    <div class="empty">
+    <!-- <div class="empty">
       <bdd-empty v-show="recommends.length === 0" type="product"></bdd-empty>
-    </div>
+    </div> -->
   </div>
 </template>
 

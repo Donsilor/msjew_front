@@ -74,7 +74,7 @@
           <div class="new-addr-name">
             <div>
               <input
-                v-model="using.lastname"
+                v-model="using.firstname"
                 :placeholder="$t(`${lang}.firstName`) + '*'"
                 type="text"
               />
@@ -82,7 +82,7 @@
 
             <div>
               <input
-                v-model="using.firstname"
+                v-model="using.lastname"
                 :placeholder="$t(`${lang}.lastName`) + '*'"
                 type="text"
               />
@@ -281,7 +281,7 @@
           <div class="new-addr-name">
             <div>
               <input
-                v-model="using.lastname"
+                v-model="using.firstname"
                 :placeholder="$t(`${lang}.firstName`) + '*'"
                 type="text"
               />
@@ -289,7 +289,7 @@
 
             <div>
               <input
-                v-model="using.firstname"
+                v-model="using.lastname"
                 :placeholder="$t(`${lang}.lastName`) + '*'"
                 type="text"
               />
@@ -808,14 +808,14 @@ export default {
         this.$message.error(this.$t(`${lang}.wip4`))
         return
       }
-      if (this.using.email === '') {
-        this.$message.error(this.$t(`${lang}.wip5`))
-        return
-      }
-      if (!Email.test(this.using.email)) {
-        this.$message.error(this.$t(`${lang}.wip6`))
-        return
-      }
+      // if (this.using.email === '') {
+      //   this.$message.error(this.$t(`${lang}.wip5`))
+      //   return
+      // }
+      // if (!Email.test(this.using.email)) {
+      //   this.$message.error(this.$t(`${lang}.wip6`))
+      //   return
+      // }
       if (this.using.mobile === '') {
         this.$message.error(this.$t(`${lang}.wip8`))
         return
@@ -889,10 +889,10 @@ export default {
         this.$message.error(this.$t(`${lang}.wip4`))
         return
       }
-      if (this.clone.email === '') {
-        this.$message.error(this.$t(`${lang}.wip5`))
-        return
-      }
+      // if (this.clone.email === '') {
+      //   this.$message.error(this.$t(`${lang}.wip5`))
+      //   return
+      // }
       // if (!Email.test(this.clone.email)) {
       //   this.$message.error(this.$t(`${lang}.wip6`))
       //   return
@@ -922,8 +922,8 @@ export default {
       }
       const json = {
         id: this.clone.id,
-        firstname: this.clone.lastname,
-        lastname: this.clone.firstname,
+        firstname: this.clone.firstname,
+        lastname: this.clone.lastname,
         mobile_code: this.phoneNum.phone_code,
         mobile: this.clone.mobile,
         email: this.clone.email,
