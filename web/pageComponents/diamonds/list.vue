@@ -769,8 +769,8 @@
           {{ $t('common.getMore') }}
         </button>
       </div>
-      <no-more-data v-show="showingData.length  == 0" :type = "2"></no-more-data>
-      <bdd-empty v-show="noListData" type="product"></bdd-empty>
+      <no-more-data v-show="showingData.length  == 0" :dataVal = "2"></no-more-data>
+      <!-- <bdd-empty v-show="noListData" type="product"></bdd-empty> -->
     </div>
     <div v-show="activeTab === 'compare'" class="compare-tab-content">
       <section class="compare-data">
@@ -815,7 +815,7 @@
           </div>
         </div>
       </section>
-      <bdd-empty v-show="compareData.length === 0" type="compare"></bdd-empty>
+      <!-- <bdd-empty v-show="compareData.length === 0" type="compare"></bdd-empty> -->
     </div>
   </div>
 </template>
