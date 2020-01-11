@@ -118,7 +118,7 @@
             >
           </div>
           <!--待发货 30-->
-          <div v-if="o.orderStatus ==30||o.orderStatus ==20" class="list-footer">
+          <div v-if="o.orderStatus ==30" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
