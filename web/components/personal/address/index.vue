@@ -54,17 +54,17 @@
       </div>
     </div>
     <div class="addr-mid dle-btn">
-      <div v-show="!isShow" class="middle-btn-show" @click="newAddress()">
+      <div v-show="!isShow" style="cursor: pointer;" class="middle-btn-show" @click="newAddress()">
         + {{ $t(`${lang}.newAddress`) }}
       </div>
-      <div v-show="isShow" class="middle-btn-title">
-        <span v-show="isNew" class="middle-btn-title-name">{{
+      <div v-show="isShow"  class="middle-btn-title">
+        <span v-show="isNew" style="cursor: pointer;" class="middle-btn-title-name">{{
           $t(`${lang}.newAddress`)
         }}</span
-        ><span v-show="isEdit" class="middle-btn-title-name">{{
+        ><span v-show="isEdit" style="cursor: pointer;" class="middle-btn-title-name">{{
           $t(`${lang}.editAddress`)
         }}</span
-        ><span class="middle-btn-title-hide" @click="resetAddress()">{{
+        ><span class="middle-btn-title-hide" style="cursor: pointer;margin-left:50px;" @click="resetAddress()">{{
           $t(`${lang}.show-hey`)
         }}</span>
       </div>
@@ -1135,7 +1135,7 @@ export default {
   .addr-middle-btn {
     padding: 0 28px;
     .middle-btn-show {
-      cursor: pointer;
+      cursor: pointer!important;
       display: inline-block;
     }
     .middle-btn-title {
@@ -1149,6 +1149,7 @@ export default {
         font-size: 16px;
         font-weight: 400;
         color: rgba(242, 155, 135, 1);
+        cursor: pointer!important;
       }
       .middle-btn-title-hide {
         cursor: pointer;
