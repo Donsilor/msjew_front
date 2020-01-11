@@ -340,6 +340,7 @@ export default {
           }
           for (const i in res.data.data) {
             const o = res.data.data[i]
+            console.log("ppppppppppppppppppp",o)
             o.orderTime = moment(o.orderTime).format('YYYY/MM/DD')
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
@@ -350,7 +351,8 @@ export default {
             if (res.data.data[i].orderStatus == 10) {
               //  没给钱
               this.list.ordered.push(o)
-            } else if (res.data.data[i].orderStatus == 30) {
+              console.log("777777",o)
+            } else if (res.data.data[i].orderStatus == 20||res.data.data[i].orderStatus == 30) {
               
               //  给了钱没发货
               this.list.paid.push(o)
