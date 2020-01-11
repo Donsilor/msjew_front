@@ -228,7 +228,7 @@ export default {
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        // returnUrl:'http://www2.bddco.com/complete-payment'
+        returnUrl:'http://www2.bddco.com/complete-payment'
       }
       this.goingPay = true
       // if (res.data.config) {
