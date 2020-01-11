@@ -8,6 +8,7 @@
             <img src="/login/mail.png" />
           </span>
           <input
+            autocompleted="new-password" 
             v-model="mobile"
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
@@ -26,6 +27,7 @@
             <img src="/login/lock.png" />
           </span>
           <input
+            autocompleted="new-password" 
             v-model="password"
             @keyup="keyupEvent2"
             @keypress="keypressEvent2"
@@ -48,6 +50,7 @@
           <div class="login-input verification-code-input">
             <input
               v-model="code"
+              autocompleted="new-password" 
               @keyup="keyupEvent3"
               @keypress="keypressEvent3"
               type="text"
@@ -88,6 +91,7 @@
           </span>
           <input
             v-model="account"
+            autocompleted="new-password" 
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
             v-bind:class="{active:isActive1}"
@@ -106,6 +110,7 @@
           </span>
           <input
             v-model="password"
+            autocompleted="new-password" 
             @keyup="keyupEvent2"
             @keypress="keypressEvent2"
             v-bind:class="{active:isActive2}"
@@ -127,6 +132,7 @@
           <div class="login-input verification-code-input">
             <input
               v-model="code"
+              autocompleted="new-password" 
               @keyup="keyupEvent3"
               @keypress="keypressEvent3"
               v-bind:class="{active:isActive3}"
