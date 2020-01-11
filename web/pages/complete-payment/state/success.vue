@@ -51,6 +51,9 @@
       <div class="order-num">
         {{ $t(`${lang}.orderCode`) }}<span>{{ data.orderNo }}</span>
       </div>
+       <div class="order-num">
+         <nuxt-link :to="{name: ''}">返回商品页</nuxt-link>
+      </div>
     </div>
     <!--未登陆的中间信息-->
     <div v-else class="success-info-out">
@@ -159,7 +162,7 @@
               {{ data.coinCode }} {{ formatMoney(data.productAmount) }}
             </div>
           </div>
-          <div class="info-line">
+          <!-- <div class="info-line">
             <div class="label">{{ $t(`${lang}.coupon`) }}</div>
             <div class="ff color-pink">
               -{{ data.coinCode }} {{ formatMoney(data.preferFee) }}
@@ -170,7 +173,7 @@
             <div class="ff">
               +{{ data.coinCode }} {{ formatMoney(data.logisticsFee) }}
             </div>
-          </div>
+          </div> -->
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.tex`) }}</div>
             <div class="ff">

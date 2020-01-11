@@ -458,7 +458,7 @@ export default {
       var status_value =  {
           0 : this.$t(`${lang}.cancelTransaction`),
           10: this.$t(`${lang}.hadNotPay`),
-          // 20: this.$t(`${lang}.hadPay`),
+          20: this.$t(`${lang}.waitingSend`),
           30: this.$t(`${lang}.waitingSend`),
           40: this.$t(`${lang}.hadSend`),
           50: this.$t(`${lang}.hadFinish`),
