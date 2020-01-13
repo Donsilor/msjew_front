@@ -2,10 +2,6 @@ export default {
   data() {
     return {}
   },
-  beforeMount(){
-    // this.$store.commit('refreshTokenRequst')
-    // console.log("ppppppp******")
-  },
   computed: {
     language() {
       return `language-${this.$store.state.language}`
@@ -23,8 +19,6 @@ export default {
     }
   },
   mounted() {
-    
-    // console.log("ppppppp******")
     const _this = this
     _this.$nextTick(async () => {
       if (!_this.$store.state.coin || !_this.$store.state.language) {
@@ -34,10 +28,14 @@ export default {
         // 获取用户数据
         await _this.$store.dispatch('getUserInfo')
         // 同步购物车
+<<<<<<< HEAD
+        // await _this.$store.dispatch('synchronizeCart')
+=======
         await _this.$store.dispatch('refreshTokenRequst')
         await  _this.$store.dispatch('getOnlineCartAmount')
         //  _this.$store.dispatch('getOnlineCartAmount')
         await _this.$store.dispatch('synchronizeCart')
+>>>>>>> 93120a6984ec48d923b9c655fca5ddde42f4190f
         // 同步心愿单
         await _this.$store.dispatch('synchronizeWish')
         // 同步对比

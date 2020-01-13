@@ -621,17 +621,18 @@ export default {
     } else {
       // 未登录的操作
       // return Promise.reject(new Error('请登录！'))
-      request = dispatch('getLocalCartAmount')
+      // request = dispatch('getLocalCartAmount')
+      // console
     }
-    request
-      .then(data => {
-        commit('setCartAmount', data)
-        return Promise.resolve(data)
-      })
-      .catch(err => {
-        return Promise.reject(err)
-      })
-    return request
+    // request
+    //   .then(data => {
+    //     commit('setCartAmount', data)
+    //     return Promise.resolve(data)
+    //   })
+    //   .catch(err => {
+    //     return Promise.reject(err)
+    //   })
+    // return request
   },
   // 获取在线购物车商品数量
   async  getOnlineCartAmount({ $axios, state, getters, commit, dispatch }) {
@@ -658,8 +659,8 @@ export default {
   // 获取本地购物车商品数量
   async getLocalCartAmount({ $axios, state, getters, commit, dispatch }) {
     // console.log('getLocalCartAmount=====>')
-    const cart = await dispatch('getLocalCart')
-    return cart.length
+    // const cart = await dispatch('getLocalCart')
+    // return cart.length
   },
   // 使用本地购物车数据置换购物车商品数据
   localCartToGoodsInfo(

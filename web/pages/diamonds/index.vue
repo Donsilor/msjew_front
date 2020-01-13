@@ -825,7 +825,7 @@ section {
     margin-bottom: 60px;
 
     .category-product {
-      width: 1366px;
+      width: 1386px;
       margin: 0 auto;
       display: flex;
       flex-wrap: wrap;

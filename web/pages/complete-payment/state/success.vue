@@ -279,9 +279,9 @@ export default {
       })
       .then(res => {
         this.data = res.data
-        setTimeout(() => {
-          this.$router.push({path: "/"}); // 强制切换当前路由 path
-        }, 5000);
+        // setTimeout(() => {
+        //   this.$router.push({path: "/"}); // 强制切换当前路由 path
+        // }, 5000);
         // console.log("wwwww",this.data)
       })
       .catch(err => {
@@ -292,10 +292,13 @@ export default {
         }
       })
       this.$axios
-      .post('/web/member/order/verific', {
+      .post('/web/pay/verify', {
           return_url: window.location.href
       })
       .then(res => {
+        setTimeout(() => {
+          this.$router.push({path: "/"}); // 强制切换当前路由 path
+        }, 5000);
         console.log("return_url",res)
       })
       .catch(err => {
