@@ -207,6 +207,8 @@ export default {
   logout({ $axios, state, commit, dispatch }) {
     commit('setToken', '')
     localStorage.setItem('refreshToken','');
+    localStorage.setItem('refreshToken','');
+    localStorage.setItem('refreshToken','');
 
   },
   // 获取用户数据
@@ -613,7 +615,7 @@ export default {
     })
       .then(res=> {
         // console.log('线上购物车商品总数====>', data)
-        if(res.data == 200){
+        if(res.code == 200){
           return res.data
         }else{
           return
