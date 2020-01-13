@@ -1,6 +1,6 @@
 <template>
   <div>
-    <single-ring-detail v-if="info.data.length != 0" :info="info"></single-ring-detail>
+    <single-ring-detail v-if="ifaa" :info="info"></single-ring-detail>
     <sole-out v-else></sole-out>
   </div>
 </template>
@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       info: null,
-      ifHaveGoods: true
+      ifHaveGoods: true,
+      ifaa:true
     }
   },
   asyncData({ $axios, route, store, app }) {
@@ -51,9 +52,12 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded'
         }
       })
-        .then(data => {
-          var data = data.data;
-          // console.log(3333333,data);
+        .then(res => {
+          var data = res.data;
+          console.log(3333333,res);
+          if(res.code != 200){
+            ifaa = false
+          }
           return {
             info: data,
             seoInfo: app.$getDetailSeoInfo(data)
@@ -73,6 +77,7 @@ export default {
       //   $route.params.productTitle
       // }}，且引入钻石商品详情页面文件，使用query中的id调用接口获取商品数据
     })
+
   }
 }
 </script>
