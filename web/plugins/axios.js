@@ -45,14 +45,13 @@ export default function({ $axios, store }) {
       } else {
         if (data.code == 401) {
           // const refreshToken =localStorage.getItem('refreshToken')
-          store.dispatch('refreshTokenRequst') //刷新token
+          // store.dispatch('refreshTokenRequst') //刷新token
 
           console.log('is 401')
           // store.dispatch('logout')
           // this.$router.push('/login')
           
         }else{
-          return Promise.resolve(data || null)
           return Promise.reject(new Error(data.message|| 'something error'))
         }
         
