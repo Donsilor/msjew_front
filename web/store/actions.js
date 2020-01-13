@@ -618,6 +618,15 @@ export default {
       // 已登录的操作
       // console.log('已登录的操作')
       request = dispatch('getOnlineCartAmount')
+      request
+      .then(data => {
+        commit('setCartAmount', data)
+        return Promise.resolve(data)
+      })
+      .catch(err => {
+        return Promise.reject(err)
+      })
+    return request
     } else {
       // 未登录的操作
       // return Promise.reject(new Error('请登录！'))
