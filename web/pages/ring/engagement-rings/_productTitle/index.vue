@@ -1,6 +1,6 @@
 <template>
   <div>
-    <single-ring-detail v-if="ifaa" :info="info"></single-ring-detail>
+    <single-ring-detail v-if="1" :info="info"></single-ring-detail>
     <sole-out v-else></sole-out>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
     return {
       info: null,
       ifHaveGoods: true,
-      ifaa:true
+      ifaa:false
     }
   },
   asyncData({ $axios, route, store, app }) {
@@ -54,10 +54,7 @@ export default {
       })
         .then(res => {
           var data = res.data;
-          console.log(3333333,res);
-          if(res.code != 200){
-            ifaa = false
-          }
+          console.log(3333333,data);
           return {
             info: data,
             seoInfo: app.$getDetailSeoInfo(data)

@@ -274,14 +274,17 @@ export default {
       if(_this.mobile === ''){
         _this.isActive1 =true
         _this.phoneErr = true
+        return
       }
       if(_this.password === ''){
          _this.isActive2 =true
         _this.passwordErr = true
+        return
       }
       if(_this.code === ''){
         _this.isActive3 =true
         _this.codeErr = true
+        return
       }
       this.$axios({
           method: 'post',
@@ -345,14 +348,17 @@ export default {
       if(_this.account === ''){
         _this.isActive1 =true
         _this.phoneErr = true
+        return
       }
       if(_this.password === ''){
          _this.isActive2 =true
          _this.passwordErr = true
+         return
       }
       if(_this.code === ''){
          _this.isActive3 =true
          _this.codeErr = true
+         return
       }
       this.$axios({
           method: 'post',
@@ -366,6 +372,11 @@ export default {
         })
         .then(res => {
           console.log("登陆结果",res)
+            localStorage.setItem("refreshToken",res.data.refresh_token);
+            let nowDate = parseInt((new Date()).getTime()/1000)
+            localStorage.setItem("login_time",nowDate);
+            localStorage.setItem("refresh_time",nowDate);
+
           // if (res.code==200){
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
