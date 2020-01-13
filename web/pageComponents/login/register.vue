@@ -2,296 +2,296 @@
   <div>
     <!-- 简体中文 -->
     <div v-if="language === 'zh_CN'" class="register-item">
-      <div class="row-flex">
-        <div class="relative margin-right-20 margin-bottom-20">
-          <div class="register-input">
-            <input
-              v-model="firstname"
-              autocompleted="new-password" 
-              @focus="focusEvents"
-              @blur="blurEvents"
-              v-bind:class="{active:isActivefisrt}"
-              type="text"
-              :placeholder="$t(`${lang}.surname`)"
-            />
+      <form>
+        <div class="row-flex">
+          <div class="relative margin-right-20 margin-bottom-20">
+            <div class="register-input">
+              <input
+                v-model="firstname"
+                autocompleted="new-password" 
+                @focus="focusEvents"
+                @blur="blurEvents"
+                v-bind:class="{active:isActivefisrt}"
+                type="text"
+                :placeholder="$t(`${lang}.surname`)"
+              />
+            </div>
+            <!-- <div class="error-tip">
+              {{ $t(`${lang}.surnameTips`) }}
+            </div> -->
           </div>
-          <!-- <div class="error-tip">
-            {{ $t(`${lang}.surnameTips`) }}
+          <div class="relative margin-bottom-20">
+            <div class="register-input">
+              <input
+                v-model="lastname"
+                autocompleted="new-password" 
+                @focus="focusEvent"
+                @blur="blurEvent"
+                v-bind:class="{active:isActivelast}"
+                type="text"
+                :placeholder="$t(`${lang}.name`)"
+              />
+            </div>
+            <!-- <div class="error-tip">
+              {{ $t(`${lang}.nameTips`) }}
+            </div> -->
+          </div>
+          <!-- 姓名 -->
+          <!-- <div class="relative margin-bottom-20">
+            <div class="register-input">
+              <input
+                v-model="firstname"
+                type="text"
+                @focus="focusEvent1"
+                @blur="blurEvent1"
+                v-bind:class="{active:isActivename}"
+                :placeholder="$t(`${lang}.name`)"
+              />
+            </div>
+            <div v-show="nameShow" class="error-tip">
+              {{ $t(`${lang}.surnameTips`) }}
+            </div>
           </div> -->
         </div>
+        <!-- 手机号 -->
         <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="lastname"
-              autocompleted="new-password" 
-              @focus="focusEvent"
-              @blur="blurEvent"
-              v-bind:class="{active:isActivelast}"
+              v-model="mobile"
               type="text"
-              :placeholder="$t(`${lang}.name`)"
+              @focus="focusEvent2"
+              @blur="blurEvent2"
+              v-bind:class="{active:isActivemobile}"
+              :placeholder="$t(`${lang}.mailbox`)"
             />
           </div>
-          <!-- <div class="error-tip">
-            {{ $t(`${lang}.nameTips`) }}
-          </div> -->
+          <div v-show="mobileShow" class="error-tip">
+            {{ $t(`${lang}.phoneTips`) }}
+          </div>
         </div>
-        <!-- 姓名 -->
-        <!-- <div class="relative margin-bottom-20">
+        <!-- 输入验证码 -->
+        <div class="relative margin-bottom-20">
+          <div class="row-flex">
+            <div class="register-input margin-right-20">
+              <input
+                v-model="code"
+                autocomplete="new-password"
+                @focus="focusEvent3"
+                @blur="blurEvent3"
+                v-bind:class="{active:isActivecode}"
+                type="text"
+                :placeholder="$t(`${lang}.VerificationCode`)"
+              />
+            </div>
+            <div class="send-email-code">
+              <!-- <send-email-code :email="info.email"></send-email-code> -->
+              <button  :class="['getCode', className]" :disabled="waiting" @click="sendPhoneCode">
+                {{ waitingText }}
+              </button>
+            </div>
+          </div>
+          <div v-show="codeShow" class="error-tip">
+            {{ $t(`${lang}.codeTips`) }}
+          </div>
+        </div>
+        <!-- 设置密码 -->
+        <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="firstname"
-              type="text"
-              @focus="focusEvent1"
-              @blur="blurEvent1"
-              v-bind:class="{active:isActivename}"
-              :placeholder="$t(`${lang}.name`)"
+              v-model="password"
+              autocomplete="new-password" 
+              @focus="focusEvent4"
+              @blur="blurEvent4"
+              v-bind:class="{active:isActivepwd}"
+              class="padding-right-30"
+              :type="showPassword ? 'text' : 'password'"
+              :placeholder="$t(`${lang}.pwdType`)"
             />
+            <div class="password-eye" @click="changeRegisterPasswordStatus">
+              <i v-show="!showPassword" class="iconfont iconcloes"></i>
+              <i v-show="showPassword" class="iconfont iconopen"></i>
+            </div>
           </div>
-          <div v-show="nameShow" class="error-tip">
-            {{ $t(`${lang}.surnameTips`) }}
+          <div v-show="pwdShow" class="error-tip">
+            {{ $t(`${lang}.passwordTips`) }}
           </div>
-        </div> -->
-      </div>
-      <!-- 手机号 -->
-      <div class="relative margin-bottom-20">
-        <div class="register-input">
-          <input
-            v-model="mobile"
-            type="text"
-            @focus="focusEvent2"
-            @blur="blurEvent2"
-            v-bind:class="{active:isActivemobile}"
-            :placeholder="$t(`${lang}.mailbox`)"
-          />
         </div>
-        <div v-show="mobileShow" class="error-tip">
-          {{ $t(`${lang}.phoneTips`) }}
-        </div>
-      </div>
-      <!-- 输入验证码 -->
-      <div class="relative margin-bottom-20">
-        <div class="row-flex">
-          <div class="register-input margin-right-20">
+        <!-- 确认密码 -->
+        <div class="relative margin-bottom-40">
+          <div class="register-input">
             <input
-              v-model="code"
+              v-model=" password_repetition"
               autocompleted="new-password" 
-              @focus="focusEvent3"
-              @blur="blurEvent3"
-              v-bind:class="{active:isActivecode}"
-              type="text"
-              :placeholder="$t(`${lang}.VerificationCode`)"
+              v-bind:class="{active:isActiverepwd}"
+              @focus="focusEvent5"
+              @blur="blurEvent5"
+              class="padding-right-30"
+              :type="showPassword ? 'text' : 'password'"
+              :placeholder="$t(`${lang}.repwdType`)"
             />
+            <div class="password-eye" @click="changeRegisterPasswordStatus">
+              <i v-show="!showPassword" class="iconfont iconcloes"></i>
+              <i v-show="showPassword" class="iconfont iconopen"></i>
+            </div>
           </div>
-          <div class="send-email-code">
-            <!-- <send-email-code :email="info.email"></send-email-code> -->
-            <button  :class="['getCode', className]" :disabled="waiting" @click="sendPhoneCode">
-              {{ waitingText }}
-            </button>
-          </div>
-        </div>
-        <div v-show="codeShow" class="error-tip">
-          {{ $t(`${lang}.codeTips`) }}
-        </div>
-      </div>
-      <!-- 设置密码 -->
-      <div class="relative margin-bottom-20">
-        <div class="register-input">
-          <input
-            v-model="password"
-            autocompleted="new-password" 
-            @focus="focusEvent4"
-            @blur="blurEvent4"
-            v-bind:class="{active:isActivepwd}"
-            class="padding-right-30"
-            :type="showPassword ? 'text' : 'password'"
-            :placeholder="$t(`${lang}.pwdType`)"
-          />
-          <div class="password-eye" @click="changeRegisterPasswordStatus">
-            <i v-show="!showPassword" class="iconfont iconcloes"></i>
-            <i v-show="showPassword" class="iconfont iconopen"></i>
+          <div v-show="repwdShow" class="error-tip">
+            {{ $t(`${lang}.repasswordTips`) }}
           </div>
         </div>
-        <div v-show="pwdShow" class="error-tip">
-          {{ $t(`${lang}.passwordTips`) }}
-        </div>
-      </div>
-      <!-- 确认密码 -->
-      <div class="relative margin-bottom-40">
-        <div class="register-input">
-          <input
-            v-model=" password_repetition"
-            autocompleted="new-password" 
-            v-bind:class="{active:isActiverepwd}"
-            @focus="focusEvent5"
-            @blur="blurEvent5"
-            class="padding-right-30"
-            :type="showPassword ? 'text' : 'password'"
-            :placeholder="$t(`${lang}.repwdType`)"
-          />
-          <div class="password-eye" @click="changeRegisterPasswordStatus">
-            <i v-show="!showPassword" class="iconfont iconcloes"></i>
-            <i v-show="showPassword" class="iconfont iconopen"></i>
-          </div>
-        </div>
-        <div v-show="repwdShow" class="error-tip">
-          {{ $t(`${lang}.repasswordTips`) }}
-        </div>
-      </div>
-      <div
-        class="agreement row-flex align-item-start justify-center margin-bottom-10"
-      >
-        <el-checkbox v-model="agreement"></el-checkbox>
-        <p class="agreement-content">
-          {{ $t(`${lang}.checked`) }}
-          <nuxt-link :to="{ path: '/policies/terms-and-conditions' }" target="_blank">
-           {{ $t(`${lang}.rule`) }}
-          </nuxt-link>
-          <!-- <a href="/policies/terms-and-conditions" target="_blank">{{ $t(`${lang}.rule`) }}</a> -->
-          <!-- <a href="/policies/terms-and-conditions" target="_blank">
+        <div class="agreement row-flex align-item-start justify-center margin-bottom-10" >
+          <el-checkbox v-model="agreement"></el-checkbox>
+          <p class="agreement-content">
+            {{ $t(`${lang}.checked`) }}
+            <nuxt-link :to="{ path: '/policies/terms-and-conditions' }" target="_blank">
             {{ $t(`${lang}.rule`) }}
-          </a> -->
-        </p>
-      </div>
-      <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="registerCN">
-          {{ $t(`${lang}.registration`) }}
-        </button>
-      </div>
+            </nuxt-link>
+            <!-- <a href="/policies/terms-and-conditions" target="_blank">{{ $t(`${lang}.rule`) }}</a> -->
+            <!-- <a href="/policies/terms-and-conditions" target="_blank">
+              {{ $t(`${lang}.rule`) }}
+            </a> -->
+          </p>
+        </div>
+        <div class="margin-bottom-29">
+          <button v-loading="requesting" class="submit" @click="registerCN">
+            {{ $t(`${lang}.registration`) }}
+          </button>
+        </div>
+      </form>
     </div>
     <!-- 英文和繁体 -->
     <div v-else class="register-item">
-      <div class="row-flex">
-        <div class="relative margin-right-20 margin-bottom-20">
-          <div class="register-input">
-            <input
-              v-model="firstname"
-              autocompleted="new-password" 
-              @focus="focusEvents"
-              @blur="blurEvents"
-              v-bind:class="{active:isActivefisrt}"
-              type="text"
-              :placeholder="$t(`${lang}.surname`)"
-            />
+      <form>
+        <div class="row-flex">
+          <div class="relative margin-right-20 margin-bottom-20">
+            <div class="register-input">
+              <input
+                v-model="firstname"
+                autocompleted="new-password" 
+                @focus="focusEvents"
+                @blur="blurEvents"
+                v-bind:class="{active:isActivefisrt}"
+                type="text"
+                :placeholder="$t(`${lang}.surname`)"
+              />
+            </div>
+            <!-- <div class="error-tip">
+              {{ $t(`${lang}.surnameTips`) }}
+            </div> -->
           </div>
-          <!-- <div class="error-tip">
-            {{ $t(`${lang}.surnameTips`) }}
-          </div> -->
+          <div class="relative margin-bottom-20">
+            <div class="register-input">
+              <input
+                v-model="lastname"
+                autocompleted="new-password" 
+                @focus="focusEvent"
+                @blur="blurEvent"
+                v-bind:class="{active:isActivelast}"
+                type="text"
+                :placeholder="$t(`${lang}.name`)"
+              />
+            </div>
+            <!-- <div class="error-tip">
+              {{ $t(`${lang}.nameTips`) }}
+            </div> -->
+          </div>
         </div>
         <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="lastname"
+              v-model="email"
               autocompleted="new-password" 
-              @focus="focusEvent"
-              @blur="blurEvent"
-              v-bind:class="{active:isActivelast}"
+              @focus="focusEvent2"
+              @blur="blurEvent2"
               type="text"
-              :placeholder="$t(`${lang}.name`)"
+              v-bind:class="{active:isActivemail}"
+              :placeholder="$t(`${lang}.email`)"
             />
           </div>
-          <!-- <div class="error-tip">
-            {{ $t(`${lang}.nameTips`) }}
-          </div> -->
+          <div v-show="emailShow" class="error-tip">
+            {{ $t(`${lang}.mailTips`) }}
+          </div>
         </div>
-      </div>
-      <div class="relative margin-bottom-20">
-        <div class="register-input">
-          <input
-            v-model="email"
-            autocompleted="new-password" 
-            @focus="focusEvent2"
-            @blur="blurEvent2"
-            type="text"
-            v-bind:class="{active:isActivemail}"
-            :placeholder="$t(`${lang}.email`)"
-          />
+        <div class="relative margin-bottom-20">
+          <div class="row-flex">
+            <div class="register-input margin-right-20">
+              <input
+                v-model="code"
+                autocomplete="new-password" 
+                @focus="focusEvent3"
+                @blur="blurEvent3"
+                v-bind:class="{active:isActivecode}"
+                type="text"
+                :placeholder="$t(`${lang}.code`)"
+              />
+            </div>
+            <div class="send-email-code">
+              <!-- <send-email-code :email="info.email"></send-email-code> -->
+              <button  :class="['getCode', className]" :disabled="waiting" @click="sendCode">
+                {{ waitingText }}
+              </button>
+            </div>
+          </div>
+          <div v-show="codeShow" class="error-tip">
+            {{ $t(`${lang}.codeTips`) }}
+          </div>
         </div>
-        <div v-show="emailShow" class="error-tip">
-          {{ $t(`${lang}.mailTips`) }}
-        </div>
-      </div>
-      <div class="relative margin-bottom-20">
-        <div class="row-flex">
-          <div class="register-input margin-right-20">
+        <div class="relative margin-bottom-20">
+          <div class="register-input">
             <input
-              v-model="code"
-              autocompleted="new-password" 
-              @focus="focusEvent3"
-              @blur="blurEvent3"
-              v-bind:class="{active:isActivecode}"
-              type="text"
-              :placeholder="$t(`${lang}.code`)"
+              v-model="password"
+              autocomplete="new-password" 
+              @focus="focusEvent4"
+              @blur="blurEvent4"
+              v-bind:class="{active:isActivepwd}"
+              class="padding-right-30"
+              :type="showPassword ? 'text' : 'password'"
+              :placeholder="$t(`${lang}.password`)"
             />
+            <div class="password-eye" @click="changeRegisterPasswordStatus">
+              <i v-show="!showPassword" class="iconfont iconcloes"></i>
+              <i v-show="showPassword" class="iconfont iconopen"></i>
+            </div>
           </div>
-          <div class="send-email-code">
-            <!-- <send-email-code :email="info.email"></send-email-code> -->
-            <button  :class="['getCode', className]" :disabled="waiting" @click="sendCode">
-              {{ waitingText }}
-            </button>
-          </div>
-        </div>
-        <div v-show="codeShow" class="error-tip">
-          {{ $t(`${lang}.codeTips`) }}
-        </div>
-      </div>
-      <div class="relative margin-bottom-20">
-        <div class="register-input">
-          <input
-            v-model="password"
-            autocompleted="new-password" 
-            @focus="focusEvent4"
-            @blur="blurEvent4"
-            v-bind:class="{active:isActivepwd}"
-            class="padding-right-30"
-            :type="showPassword ? 'text' : 'password'"
-            :placeholder="$t(`${lang}.password`)"
-          />
-          <div class="password-eye" @click="changeRegisterPasswordStatus">
-            <i v-show="!showPassword" class="iconfont iconcloes"></i>
-            <i v-show="showPassword" class="iconfont iconopen"></i>
+          <div v-show="pwdShow" class="error-tip">
+            {{ $t(`${lang}.passwordTips`) }}
           </div>
         </div>
-        <div v-show="pwdShow" class="error-tip">
-          {{ $t(`${lang}.passwordTips`) }}
-        </div>
-      </div>
-      <div class="relative margin-bottom-20">
-        <div class="register-input">
-          <input
-            v-model="password_repetition"
-            autocompleted="new-password" 
-            @focus="focusEvent5"
-            @blur="blurEvent5"
-            v-bind:class="{active:isActiverepwd}"
-            class="padding-right-30"
-            :type="showPassword ? 'text' : 'password'"
-            :placeholder="$t(`${lang}.repassword`)"
-          />
-          <div class="password-eye" @click="changeRegisterPasswordStatus">
-            <i v-show="!showPassword" class="iconfont iconcloes"></i>
-            <i v-show="showPassword" class="iconfont iconopen"></i>
+        <div class="relative margin-bottom-20">
+          <div class="register-input">
+            <input
+              v-model="password_repetition"
+              autocompleted="new-password" 
+              @focus="focusEvent5"
+              @blur="blurEvent5"
+              v-bind:class="{active:isActiverepwd}"
+              class="padding-right-30"
+              :type="showPassword ? 'text' : 'password'"
+              :placeholder="$t(`${lang}.repassword`)"
+            />
+            <div class="password-eye" @click="changeRegisterPasswordStatus">
+              <i v-show="!showPassword" class="iconfont iconcloes"></i>
+              <i v-show="showPassword" class="iconfont iconopen"></i>
+            </div>
+          </div>
+          <div v-show="repwdShow" class="error-tip">
+            {{ $t(`${lang}.passwordTips`) }}
           </div>
         </div>
-        <div v-show="repwdShow" class="error-tip">
-          {{ $t(`${lang}.passwordTips`) }}
+        <div class="agreement row-flex align-item-start justify-center margin-bottom-10">
+          <el-checkbox v-model="agreement"></el-checkbox>
+          <p class="agreement-content">
+            {{ $t(`${lang}.checked`) }}
+            <nuxt-link :to="{ path: '/policies/terms-and-conditions' }">
+              {{ $t(`${lang}.rule`) }}
+            </nuxt-link>
+          </p>
         </div>
-      </div>
-      <div
-        class="agreement row-flex align-item-start justify-center margin-bottom-10"
-      >
-        <el-checkbox v-model="agreement"></el-checkbox>
-        <p class="agreement-content">
-          {{ $t(`${lang}.checked`) }}
-          <nuxt-link :to="{ path: '/policies/terms-and-conditions' }">
-            {{ $t(`${lang}.rule`) }}
-          </nuxt-link>
-        </p>
-      </div>
-      <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="register">
-          {{ $t(`${lang}.registration`) }}
-        </button>
-      </div>
+        <div class="margin-bottom-29">
+          <button v-loading="requesting" class="submit" @click="register">
+            {{ $t(`${lang}.registration`) }}
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>

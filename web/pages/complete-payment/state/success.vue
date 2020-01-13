@@ -208,6 +208,7 @@
 </template>
 
 <script>
+   
 const lang = `finishPay`
 export default {
   name: 'Success',
@@ -215,6 +216,7 @@ export default {
     return {
       lang,
       oid: this.$route.query.orderId,
+      return_url:'',
       // data: {
       //   address: {
       //     countryName: '',
@@ -267,6 +269,8 @@ export default {
     }
   },
   mounted() {
+    //  console.log(window);
+    // console.log("url======",this.return_url)
     this.$axios
       .get('/web/member/order/detail', {
         params: {
@@ -277,18 +281,22 @@ export default {
         this.data = res.data
         setTimeout(() => {
           this.$router.push({path: "/"}); // 强制切换当前路由 path
-          // loading.close();
         }, 5000);
-        // setTimeout(() => {
-        //   _this.$router.replace({
-        //     path: '/'
-        //   })
-        // }, 5000)
-        console.log("wwwww",this.data)
-        // this.data.details.forEach(obj => {
-        //   obj.detailSpecs = JSON.parse(obj.detailSpecs)
-        //   obj.goodsImages = obj.goodsImages.split(',')[0]
-        // })
+        // console.log("wwwww",this.data)
+      })
+      .catch(err => {
+        if (!err.response) {
+          this.$message.error(err.message)
+        } else {
+          // console.log(err)
+        }
+      })
+      this.$axios
+      .post('/web/member/order/verific', {
+          return_url: window.location.href
+      })
+      .then(res => {
+        console.log("return_url",res)
       })
       .catch(err => {
         if (!err.response) {
