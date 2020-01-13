@@ -1,6 +1,6 @@
 <template>
   <div>
-    <single-ring-detail v-if="1" :info="info"></single-ring-detail>
+    <single-ring-detail v-if="info" :info="info"></single-ring-detail>
     <sole-out v-else></sole-out>
   </div>
 </template>
@@ -20,7 +20,6 @@ export default {
     return {
       info: null,
       ifHaveGoods: true,
-      ifaa:false
     }
   },
   asyncData({ $axios, route, store, app }) {
@@ -54,7 +53,6 @@ export default {
       })
         .then(res => {
           var data = res.data;
-          console.log(3333333,data);
           return {
             info: data,
             seoInfo: app.$getDetailSeoInfo(data)
@@ -67,7 +65,6 @@ export default {
     return getSingleRing()
   },
   mounted() {
-
     const _this = this
     _this.$nextTick(() => {
       // 读取路径上的参数cut：{{
