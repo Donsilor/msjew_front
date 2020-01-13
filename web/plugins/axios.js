@@ -70,6 +70,7 @@ export default function({ $axios, store }) {
           // this.$router.push('/login')
           
         }else{
+          return Promise.resolve(data || null)
           return Promise.reject(new Error(data.message|| 'something error'))
         }
         
