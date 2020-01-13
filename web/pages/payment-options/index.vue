@@ -224,61 +224,17 @@ export default {
       // )
       const data ={
         orderId: this.$route.query.orderId,
-        // // visa付款自动转成PayPal付款 https://www2.bddco.com
+        // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
         returnUrl:'https://www2.bddco.com/complete-payment?orderId='+this.$route.query.orderId
       }
       this.goingPay = true
-      // if (res.data.config) {
-      //   if (pay !== 7) {
-      //     window.location.replace(res.data.config)
-      //   } else {
-      //     const promise = new Promise((resolve, reject) => {
-      //       this.form = []
-      //       const obj = JSON.parse(res.data.config)
-      //       const objKey = Object.keys(obj)
-      //       for (const i in objKey) {
-      //         if (objKey[i] === 'url') {
-      //           this.actionLink = obj[objKey[i]]
-      //           continue
-      //         }
-      //         const o = {
-      //           name: objKey[i],
-      //           val: obj[objKey[i]]
-      //         }
-      //         this.form.push(o)
-      //       }
-      //       resolve()
-      //     })
-      //     promise.then(() => {
-      //       setTimeout(() => {
-      //         this.isPay = false
-      //         document.getElementById('unionPay').click()
-      //       }, 2000)
-      //     })
-      //   }
-      // } else {
-      //   this.$router.replace({
-      //     path: '/complete-payment',
-      //     query: {
-      //       orderId: this.$route.query.orderId,
-      //       price: this.$route.query.price,
-      //       coinType: this.$route.query.coinType,
-      //       type: `transfer`
-      //     }
-      //   })
-      // }
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {
           console.log("url",res)
-          // window.location.href=res.data.config
-          //  this.$router.replace({
-          //    path:res.data.config
-          //  })
-          // console.log(res)
           if (res.data.config) {
             if (pay !== 7) {
               window.location.replace(res.data.config)
@@ -314,7 +270,6 @@ export default {
                 orderId: this.$route.query.orderId,
                 price: this.$route.query.price,
                 coinType: this.$route.query.coinType,
-
                 type: `transfer`
               }
             })
