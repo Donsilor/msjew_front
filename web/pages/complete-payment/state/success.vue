@@ -45,15 +45,20 @@
       <div class="order-email">
         <span>{{ $t(`${lang}.weWillSendTo`) }}</span
         ><span>{{ data.afterMail }}</span
-        ><i class="iconfont iconzuoshangjiantou" />
+        >
+        <!-- <i class="iconfont iconzuoshangjiantou" /> -->
       </div>
       <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
       <div class="order-num">
-        {{ $t(`${lang}.orderCode`) }}<span>{{ data.orderNo }}</span>
+        {{ $t(`${lang}.orderCode`) }}
+          <nuxt-link :to="`/account/order-details?orderId=${this.oid}`">
+            <span class="underline" @click="orderDetail()">{{ data.orderNo }}</span>
+          </nuxt-link>
       </div>
-       <div class="order-num">
+      <nuxt-link :to="{name: '/order-details'}"></nuxt-link>
+       <!-- <div class="order-num">
          <nuxt-link :to="{name: '/account/orders'}">{{ $t(`${lang}.comeBack`) }}</nuxt-link>
-      </div>
+      </div> -->
     </div>
     <!--未登陆的中间信息-->
     <div v-else class="success-info-out">
@@ -65,11 +70,12 @@
         <div class="order-email">
           <span>{{ $t(`${lang}.weWillSendTo`) }}</span
           ><span>{{ data.afterMail }}</span
-          ><i class="iconfont iconzuoshangjiantou" />
+          >
+          <!-- <i class="iconfont iconzuoshangjiantou" /> -->
         </div>
         <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
         <div class="order-num">
-          {{ $t(`${lang}.orderCode`) }}<span>{{ data.orderNo }}</span>
+          {{ $t(`${lang}.orderCode`) }}<span class="underline">{{ data.orderNo }}</span>
         </div>
       </div>
       <!-- <div class="right-side">
@@ -85,12 +91,12 @@
         </div>
       </div> -->
     </div>
-    <div class="middle-bar">
+    <!-- <div class="middle-bar">
       <i class="iconfont icongantanhao" /><span>{{
         $t(`${lang}.balabalaAgain`)
       }}</span>
-    </div>
-    <div class="order-info">
+    </div> -->
+    <!-- <div class="order-info">
       <div class="left-info">
         <div class="address-info">
           <div class="new-address-title">
@@ -99,24 +105,23 @@
           </div>
           <div class="user-info">
             <div class="user-name">
-              {{ data.orderAddress.lastName }}{{ data.orderAddress.firstName
-              }}<span>{{ lang.get }}</span>
-            </div>
+              {{ data.address.lastName }}{{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
+            </div> -->
             <!--            <div class="user-phone"><span>{{ data.orderAddress.userTelCode }}</span>{{ data.orderAddress.userTel }}</div>-->
           </div>
-          <div class="user-address">
-            {{ data.orderAddress.countryName }}-{{
-              data.orderAddress.provinceName
-            }}{{ data.orderAddress.cityName }}{{ data.orderAddress.address }}
+          <!-- <div class="user-address">
+            {{ data.address.countryName }}-{{
+             data.address.provinceName
+            }}{{data.address.cityName }}{{ data.address.address }}
           </div>
           <div class="user-phone">
-            <div>{{ data.orderAddress.userTelCode }}</div>
-            <div>{{ data.orderAddress.userTel }}</div>
+            <div>{{data.address.userTelCode }}</div>
+            <div>{{ data.address.userTel }}</div>
           </div>
-          <div class="post-num">{{ data.orderAddress.zipCode }}</div>
-          <div class="email-address">{{ data.orderAddress.userMail }}</div>
+          <div class="post-num">{{ data.address.zipCode }}</div>
+          <div class="email-address">{{ data.address.userMail }}</div> -->
           <!--          <div class="country-code">CHN</div>-->
-          <div class="line">
+          <!-- <div class="line">
             <img
               src="../../../static/personal/account/address-bar.png"
               alt=""
@@ -161,7 +166,7 @@
             <div class="ff">
               {{ data.coinCode }} {{ formatMoney(data.productAmount) }}
             </div>
-          </div>
+          </div> -->
           <!-- <div class="info-line">
             <div class="label">{{ $t(`${lang}.coupon`) }}</div>
             <div class="ff color-pink">
@@ -174,7 +179,7 @@
               +{{ data.coinCode }} {{ formatMoney(data.logisticsFee) }}
             </div>
           </div> -->
-          <div class="info-line">
+          <!-- <div class="info-line">
             <div class="label">{{ $t(`${lang}.tex`) }}</div>
             <div class="ff">
               +{{ data.coinCode }} {{ formatMoney(data.taxFee) }}
@@ -198,8 +203,8 @@
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </div> 
+  </div>-->
 </template>
 
 <script>
@@ -210,13 +215,24 @@ export default {
     return {
       lang,
       oid: this.$route.query.orderId,
+      // data: {
+      //   address: {
+      //     countryName: '',
+      //     provinceName: '',
+      //     cityName: '',
+      //     address: '',
+      //     firstName: '',
+      //     lastName: '',
+      //     userMail: ''
+      //   }
+      // }
       data: {
         allSend: null,
         coinCode: null,
         coinId: null,
         id: null,
         logisticsFee: null,
-        orderAddress: {
+        address: {
           address: null,
           addressType: null,
           cityId: null,
@@ -224,9 +240,9 @@ export default {
           countryId: null,
           countryName: null,
           createTime: null,
-          firstName: null,
+          firstName: '',
           id: null,
-          lastName: null,
+          lastName: '',
           orderId: null,
           provinceId: null,
           provinceName: null,
@@ -252,13 +268,27 @@ export default {
   },
   mounted() {
     this.$axios
-      .get('/web/order/getPayOrderInfo', {
+      .get('/web/member/order/detail', {
         params: {
           orderId: this.oid
         }
       })
       .then(res => {
-        this.data = res
+        this.data = res.data
+        setTimeout(() => {
+          this.$router.push({path: "/"}); // 强制切换当前路由 path
+          // loading.close();
+        }, 5000);
+        // setTimeout(() => {
+        //   _this.$router.replace({
+        //     path: '/'
+        //   })
+        // }, 5000)
+        console.log("wwwww",this.data)
+        // this.data.details.forEach(obj => {
+        //   obj.detailSpecs = JSON.parse(obj.detailSpecs)
+        //   obj.goodsImages = obj.goodsImages.split(',')[0]
+        // })
       })
       .catch(err => {
         if (!err.response) {
@@ -277,6 +307,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 div {
   box-sizing: border-box;
 }
@@ -856,5 +887,8 @@ div {
       }
     }
   }
+}
+.underline{
+  text-decoration:underline
 }
 </style>

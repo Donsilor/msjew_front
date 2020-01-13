@@ -2,9 +2,41 @@
   <div>
     <!-- 简体中文 -->
     <div v-if="language === 'zh_CN'" class="register-item">
-      <div class="">
-        <!-- 姓名 -->
+      <div class="row-flex">
+        <div class="relative margin-right-20 margin-bottom-20">
+          <div class="register-input">
+            <input
+              v-model="firstname"
+              autocompleted="new-password" 
+              @focus="focusEvents"
+              @blur="blurEvents"
+              v-bind:class="{active:isActivefisrt}"
+              type="text"
+              :placeholder="$t(`${lang}.surname`)"
+            />
+          </div>
+          <!-- <div class="error-tip">
+            {{ $t(`${lang}.surnameTips`) }}
+          </div> -->
+        </div>
         <div class="relative margin-bottom-20">
+          <div class="register-input">
+            <input
+              v-model="lastname"
+              autocompleted="new-password" 
+              @focus="focusEvent"
+              @blur="blurEvent"
+              v-bind:class="{active:isActivelast}"
+              type="text"
+              :placeholder="$t(`${lang}.name`)"
+            />
+          </div>
+          <!-- <div class="error-tip">
+            {{ $t(`${lang}.nameTips`) }}
+          </div> -->
+        </div>
+        <!-- 姓名 -->
+        <!-- <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
               v-model="firstname"
@@ -18,7 +50,7 @@
           <div v-show="nameShow" class="error-tip">
             {{ $t(`${lang}.surnameTips`) }}
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- 手机号 -->
       <div class="relative margin-bottom-20">
@@ -42,6 +74,7 @@
           <div class="register-input margin-right-20">
             <input
               v-model="code"
+              autocompleted="new-password" 
               @focus="focusEvent3"
               @blur="blurEvent3"
               v-bind:class="{active:isActivecode}"
@@ -65,6 +98,7 @@
         <div class="register-input">
           <input
             v-model="password"
+            autocompleted="new-password" 
             @focus="focusEvent4"
             @blur="blurEvent4"
             v-bind:class="{active:isActivepwd}"
@@ -86,6 +120,7 @@
         <div class="register-input">
           <input
             v-model=" password_repetition"
+            autocompleted="new-password" 
             v-bind:class="{active:isActiverepwd}"
             @focus="focusEvent5"
             @blur="blurEvent5"
@@ -130,6 +165,7 @@
           <div class="register-input">
             <input
               v-model="firstname"
+              autocompleted="new-password" 
               @focus="focusEvents"
               @blur="blurEvents"
               v-bind:class="{active:isActivefisrt}"
@@ -145,6 +181,7 @@
           <div class="register-input">
             <input
               v-model="lastname"
+              autocompleted="new-password" 
               @focus="focusEvent"
               @blur="blurEvent"
               v-bind:class="{active:isActivelast}"
@@ -161,6 +198,7 @@
         <div class="register-input">
           <input
             v-model="email"
+            autocompleted="new-password" 
             @focus="focusEvent2"
             @blur="blurEvent2"
             type="text"
@@ -177,6 +215,7 @@
           <div class="register-input margin-right-20">
             <input
               v-model="code"
+              autocompleted="new-password" 
               @focus="focusEvent3"
               @blur="blurEvent3"
               v-bind:class="{active:isActivecode}"
@@ -199,6 +238,7 @@
         <div class="register-input">
           <input
             v-model="password"
+            autocompleted="new-password" 
             @focus="focusEvent4"
             @blur="blurEvent4"
             v-bind:class="{active:isActivepwd}"
@@ -219,6 +259,7 @@
         <div class="register-input">
           <input
             v-model="password_repetition"
+            autocompleted="new-password" 
             @focus="focusEvent5"
             @blur="blurEvent5"
             v-bind:class="{active:isActiverepwd}"

@@ -8,10 +8,10 @@
             <img src="/login/mail.png" />
           </span>
           <input
+            autocompleted="new-password" 
             v-model="mobile"
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
-            @input="input"
             type="text"
             v-bind:class="{active:isActive1}"
             :placeholder="$t(`${lang}.mailbox`)"
@@ -27,6 +27,7 @@
             <img src="/login/lock.png" />
           </span>
           <input
+            autocompleted="new-password" 
             v-model="password"
             @keyup="keyupEvent2"
             @keypress="keypressEvent2"
@@ -49,6 +50,7 @@
           <div class="login-input verification-code-input">
             <input
               v-model="code"
+              autocompleted="new-password" 
               @keyup="keyupEvent3"
               @keypress="keypressEvent3"
               type="text"
@@ -89,9 +91,9 @@
           </span>
           <input
             v-model="account"
+            autocompleted="new-password" 
             @keyup="keyupEvent1"
             @keypress="keypressEvent1"
-            @input="input"
             v-bind:class="{active:isActive1}"
             type="text"
             :placeholder="$t(`${lang}.mailbox`)"
@@ -108,6 +110,7 @@
           </span>
           <input
             v-model="password"
+            autocompleted="new-password" 
             @keyup="keyupEvent2"
             @keypress="keypressEvent2"
             v-bind:class="{active:isActive2}"
@@ -129,6 +132,7 @@
           <div class="login-input verification-code-input">
             <input
               v-model="code"
+              autocompleted="new-password" 
               @keyup="keyupEvent3"
               @keypress="keypressEvent3"
               v-bind:class="{active:isActive3}"
@@ -216,9 +220,6 @@ export default {
     })
   },
   methods: {
-    input(){
-
-    },
     keyupEvent1(){
       this.isActive1=false
       this.phoneErr=false

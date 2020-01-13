@@ -210,6 +210,7 @@ export default {
         align-items: center;
         .editBtn {
           margin-left: 10px;
+          cursor: pointer;
         }
       }
       .email {

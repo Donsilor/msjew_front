@@ -390,7 +390,7 @@
       </div>
       <div
         class="new-address-btn"
-        @click="isEdit ? saveAddress() : createAddress()"
+        @click="isEdit ? saveAddress1() : createAddress()"
       >
         {{ $t(`${lang}.sure`)
         }}<span v-show="!isEdit">{{ $t(`${lang}.add`) }}</span
@@ -1849,6 +1849,91 @@ export default {
         // console.log('赋值后的B：', this.addressData);
       })
     },
+    saveAddress1() {
+      console.log('save')
+      if (this.addressData.firstname === '') {
+        this.wrongMsg = this.$t(`${lang}.wip6`)
+        this.alertBox = true
+        this.wrongInput.firstname = true
+        return false
+      }
+      if (this.addressData.firstname.length > 20) {
+        this.wrongMsg = this.$t(`${lang}.wip7`)
+        this.alertBox = true
+        this.wrongInput.firstname = true
+        return false
+      }
+      if (this.addressData.lastname === '') {
+        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.alertBox = true
+        this.wrongInput.lastname = true
+        return false
+      }
+      if (this.addressData.lastname.length > 20) {
+        this.wrongMsg = this.$t(`${lang}.wip9`)
+        this.alertBox = true
+        this.wrongInput.lastname = true
+        return false
+      }
+      if (
+        !RegMobile.test(this.addressData.mobile) &&
+        !RegTelephone.test(this.addressData.mobile)
+      ) {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
+        return false
+      }
+      
+      if (!this.country.areaId) {
+        this.wrongMsg = this.$t(`${lang}.wip4`)
+        this.alertBox = true
+        return false
+      }
+      if (!this.addressData.address_details) {
+        this.wrongMsg = this.$t(`${lang}.wip5`)
+        this.alertBox = true
+        this.wrongInput.address_details = true
+        return false
+      }
+      const data = this.$helpers.transformRequest(
+        JSON.parse(
+          JSON.stringify({
+            id: this.addressData.id,
+            firstname: this.addressData.firstname,
+            lastname: this.addressData.lastname,
+            mobile_code: this.phoneNum.phone_code,
+            mobile: this.addressData.mobile,
+            email: this.addressData.email,
+            country_id: this.country.areaId,
+            province_id: this.province.areaId,
+            cityId: this.city.areaId,
+            address_details: this.addressData.address_details,
+            zip_code: this.addressData.zip_code
+          })
+        ),
+        false
+      )
+      this.$axios
+        .post('/web/member/address/edit', data)
+        .then(res => {
+          console.log("修改地址",res)
+          this.getAddress()
+          this.resetAddressInp()
+          this.$message({
+            message: this.$t(`${lang}.msg3`),
+            type: 'success'
+          })
+        })
+        .catch(err => {
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
+        })
+    },
+    // 繁体
     saveAddress() {
       console.log('save')
       if (this.addressData.firstname === '') {
