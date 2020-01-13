@@ -20,7 +20,6 @@ export default {
     return {
       info: null,
       ifHaveGoods: true,
-      ifShow: true
     }
   },
   asyncData({ $axios, route, store, app }) {
@@ -54,7 +53,6 @@ export default {
       })
         .then(res => {
           var data = res.data;
-          console.log(11111)
           console.log(3333333,data);
           return {
             info: data,
@@ -68,7 +66,6 @@ export default {
     return getSingleRing()
   },
   mounted() {
-
     const _this = this
     _this.$nextTick(() => {
       // 读取路径上的参数cut：{{

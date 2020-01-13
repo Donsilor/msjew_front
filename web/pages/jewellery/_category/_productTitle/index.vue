@@ -1,15 +1,18 @@
 <template>
-  <jewellery-detail :info="info"></jewellery-detail>
+  <jewellery-detail v-if="info" :info="info"></jewellery-detail>
+  <sole-out v-else></sole-out>
 </template>
 
 <script>
 import JewelleryDetail from '@/pageComponents/jewellery/detail.vue'
+import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   head() {
     return this.seoInfo || {}
   },
   components: {
-    JewelleryDetail
+    JewelleryDetail,
+    SoleOut
   },
   data() {
     return {

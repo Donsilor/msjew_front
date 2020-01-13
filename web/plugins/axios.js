@@ -54,7 +54,6 @@ export default function({ $axios, store }) {
         }else{
           return Promise.reject(new Error(data.message|| 'something error'))
         }
-        
       }
     } else {
       return Promise.resolve(data || null)

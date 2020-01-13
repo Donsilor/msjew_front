@@ -1,11 +1,13 @@
 <template>
   <div>
-    <list-content :default-condition="defaultCondition"></list-content>
+    <list-content v-if="defaultCondition" :default-condition="defaultCondition"></list-content>
+    <sole-out v-else></sole-out>
   </div>
 </template>
 
 <script>
 import ListContent from '@/pageComponents/wedding-rings/single-ring/list.vue'
+import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 
 // 默认条件映射
 const conditionMaps = {

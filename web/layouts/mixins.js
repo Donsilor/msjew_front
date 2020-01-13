@@ -2,10 +2,6 @@ export default {
   data() {
     return {}
   },
-  beforeMount(){
-    // this.$store.commit('refreshTokenRequst')
-    // console.log("ppppppp******")
-  },
   computed: {
     language() {
       return `language-${this.$store.state.language}`
@@ -23,8 +19,6 @@ export default {
     }
   },
   mounted() {
-    
-    // console.log("ppppppp******")
     const _this = this
     _this.$nextTick(async () => {
       if (!_this.$store.state.coin || !_this.$store.state.language) {

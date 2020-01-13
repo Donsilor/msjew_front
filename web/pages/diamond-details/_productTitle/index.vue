@@ -1,15 +1,18 @@
 <template>
-  <diamond-detail :info="info"></diamond-detail>
+  <diamond-detail v-if="info" :info="info"></diamond-detail>
+  <sole-out v-else></sole-out>
 </template>
 
 <script>
 import DiamondDetail from '@/pageComponents/diamonds/detail.vue'
+import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   head() {
     return this.seoInfo || {}
   },
   components: {
-    DiamondDetail
+    DiamondDetail,
+    SoleOut
   },
   data() {
     return {

@@ -1,15 +1,19 @@
 <template>
   <div>
     <step></step>
-    <Details :info="info"></Details>
+    <Details v-if="info" :info="info"></Details>
+    <sole-out v-else></sole-out>
   </div>
 </template>
 
 <script>
 import details from '@/pageComponents/wedding-rings/single-ring/detail.vue'
+import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
+
 export default {
   components: {
-    Details: details
+    Details: details,
+    SoleOut
   },
   data() {
     return {

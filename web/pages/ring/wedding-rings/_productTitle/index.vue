@@ -1,9 +1,7 @@
 <template>
   <pair-ring-detail v-if="ringType === 'pair'" :info="info"></pair-ring-detail>
-  <single-ring-detail
-    v-else-if="ringType === 'single'"
-    :info="info"
-  ></single-ring-detail>
+  <single-ring-detail v-else-if="ringType === 'single'" :info="info"></single-ring-detail>
+  <sole-out v-else></sole-out>
   <!--  <single-ring-detail v-if="true" :info="info"></single-ring-detail>-->
   <!--  <pair-ring-detail v-else :info="info"></pair-ring-detail>-->
 </template>
@@ -11,13 +9,15 @@
 <script>
 import PairRingDetail from '@/pageComponents/wedding-rings/pair-ring/detail.vue'
 import SingleRingDetail from '@/pageComponents/wedding-rings/single-ring/detail.vue'
+import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   head() {
     return this.seoInfo || {}
   },
   components: {
     PairRingDetail,
-    SingleRingDetail
+    SingleRingDetail,
+    SoleOut
   },
   data() {
     return {
