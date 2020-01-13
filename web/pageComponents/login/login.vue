@@ -293,8 +293,12 @@ export default {
           }
         })
         .then(res => {
-          localStorage.setItem("refreshToken",res.data.refresh_token);
-          localStorage.setItem("expirationTime",res.data.expiration_time);
+            localStorage.setItem("refreshToken",res.data.refresh_token);
+            
+            let nowDate = parseInt((new Date()).getTime()/1000)
+            localStorage.setItem("login_time",nowDate);
+            localStorage.setItem("refresh_time",nowDate);
+
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false

@@ -46,7 +46,7 @@ export default {
     },
     // 是否可以加入购物车
     canAddCart() {
-      console.log(11,this.inSale,22,this.hadStock)
+      // console.log(11,this.inSale,22,this.hadStock)
       return this.inSale && this.hadStock
     }
   },

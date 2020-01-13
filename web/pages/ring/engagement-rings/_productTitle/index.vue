@@ -1,6 +1,6 @@
 <template>
   <div>
-    <single-ring-detail v-if="info.length != 0" :info="info"></single-ring-detail>
+    <single-ring-detail v-if="info.data.length != 0" :info="info"></single-ring-detail>
     <sole-out v-else></sole-out>
   </div>
 </template>
@@ -53,6 +53,7 @@ export default {
       })
         .then(data => {
           var data = data.data;
+          // console.log(3333333,data);
           return {
             info: data,
             seoInfo: app.$getDetailSeoInfo(data)

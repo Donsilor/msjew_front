@@ -164,7 +164,7 @@ export default {
       }
     }).then(res => {
         localStorage.setItem('refreshToken',res.data.refresh_token);
-        this.$store.commit('setToken',res.data.access_token);
+        commit('setToken',res.data.access_token);
     })
   },
 
@@ -206,6 +206,8 @@ export default {
   // 退出登录
   logout({ $axios, state, commit, dispatch }) {
     commit('setToken', '')
+    localStorage.setItem('refreshToken','');
+
   },
   // 获取用户数据
   getUserInfo({ $axios, state, commit, dispatch }) {
@@ -611,7 +613,12 @@ export default {
     })
       .then(res=> {
         // console.log('线上购物车商品总数====>', data)
-        return res.data
+        if(res.data == 200){
+          return res.data
+        }else{
+          return
+        }
+        
       })
       .catch(err => {
         return Promise.reject(err)

@@ -1024,7 +1024,6 @@ export default {
       const _this = this
       const conditions = this.searchConditions
       const sortInfo = this.sortInfo
-      console.log(11,sortInfo,this.sortType)
       const params = [
         // 形状
         {
