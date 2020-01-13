@@ -274,14 +274,17 @@ export default {
       if(_this.mobile === ''){
         _this.isActive1 =true
         _this.phoneErr = true
+        return
       }
       if(_this.password === ''){
          _this.isActive2 =true
         _this.passwordErr = true
+        return
       }
       if(_this.code === ''){
         _this.isActive3 =true
         _this.codeErr = true
+        return
       }
       this.$axios({
           method: 'post',
@@ -345,14 +348,17 @@ export default {
       if(_this.account === ''){
         _this.isActive1 =true
         _this.phoneErr = true
+        return
       }
       if(_this.password === ''){
          _this.isActive2 =true
          _this.passwordErr = true
+         return
       }
       if(_this.code === ''){
          _this.isActive3 =true
          _this.codeErr = true
+         return
       }
       this.$axios({
           method: 'post',
