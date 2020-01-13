@@ -492,9 +492,11 @@ export default {
       const _this = this
       if(!_this.agreement) {
         _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
+        return
       }
       if(_this.mobile==''){
         _this.mobileShow=true
+        return
       }else if(!_this.code && !_this.password && !_this.password_repetition){
         _this.isActivemobile=false;
         _this.mobileShow=false;
@@ -504,6 +506,7 @@ export default {
         _this.pwdShow=true;
         _this.isActiverepwd=true;
         _this.repwdShow=true;
+        return
       }
       // _this.requesting = true
       this.$axios({
@@ -511,7 +514,8 @@ export default {
           url: '/web/site/mobile-register',
           data: {
             'mobile':_this.mobile,
-            'lastname':_this.firstname,
+            'firstname':_this.firstname,
+            'lastname':_this.lastname,
             'code':_this.code,
             'password':_this.password,
             'password_repetition':_this.password_repetition
@@ -519,41 +523,40 @@ export default {
         })
         .then(res => {
           console.log('注册结果',res)
-          if(res.code==200){
-            _this.requesting = false
-            _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-            _this.$store.commit('setToken', res.data.access_token)
-            _this.$store.dispatch('getUserInfo')
-            const lastUrl = _this.$store.state.lastUrl
-            _this.$store.commit('setLastUrl', '')
-            setTimeout(() => {
-              if (lastUrl) {
-                _this.$router.replace({
-                  path: lastUrl
-                })
-              } else {
-                _this.$router.replace({
-                  path: '/'
-                })
-              }
-            }, 0)
-          }else {
-            throw new Error (res.message)
-          }   
+          _this.requesting = false
+          _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
+          _this.$store.commit('setToken', res.data.access_token)
+          _this.$store.dispatch('getUserInfo')
+          const lastUrl = _this.$store.state.lastUrl
+          _this.$store.commit('setLastUrl', '')
+          setTimeout(() => {
+            if (lastUrl) {
+              _this.$router.replace({
+                path: lastUrl
+              })
+            } else {
+              _this.$router.replace({
+                path: '/'
+              })
+            }
+          }, 0)   
         })
         .catch(err => {
           console.log("请求",err)
           _this.requesting = false
           _this.$errorMessage(err.message)
+          return
         })
     },
     register() {
       const _this = this
        if(!_this.agreement) {
         _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
+        return
       }
       if(_this.email==''){
         _this.emailShow=true
+        return
       }else if(!_this.code && !_this.password && !_this.password_repetition){
         _this.isActivemail=false;
         _this.emailShow=false;
@@ -563,6 +566,7 @@ export default {
         _this.pwdShow=true;
         _this.isActiverepwd=true;
         _this.repwdShow=true;
+        return
       }
       this.$axios({
           method: 'post',
@@ -578,27 +582,24 @@ export default {
         })
         .then(res => {
           console.log('注册结果',res)
-          if(res.code==200){
-            _this.requesting = false
-            _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-             _this.$store.commit('setToken', res.data.access_token)
-              _this.$store.dispatch('getUserInfo')
-              const lastUrl = _this.$store.state.lastUrl
-              _this.$store.commit('setLastUrl', '')
-              setTimeout(() => {
-                if (lastUrl) {
-                  _this.$router.replace({
-                    path: lastUrl
-                  })
-                } else {
-                  _this.$router.replace({
-                    path: '/'
-                  })
-                }
-              }, 0)
-          }else {
-            throw new Error (res.message)
-          }  
+          _this.requesting = false
+          _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
+          _this.$store.commit('setToken', res.data.access_token)
+          _this.$store.dispatch('getUserInfo')
+          const lastUrl = _this.$store.state.lastUrl
+          _this.$store.commit('setLastUrl', '')
+          setTimeout(() => {
+            if (lastUrl) {
+              _this.$router.replace({
+                path: lastUrl
+              })
+            } else {
+              _this.$router.replace({
+                path: '/'
+              })
+            }
+          }, 0)
+
         })
         .catch(err => {
           console.log("请求",err)
