@@ -281,7 +281,7 @@ export default {
   },
   computed: {
     thumbnails() {
-      return this.imageStrToArray(this.info.goodsImages || '')
+        return this.imageStrToArray(this.info.goodsImages || '')
     },
     productInfo() {
       return this.getRingInfo()
