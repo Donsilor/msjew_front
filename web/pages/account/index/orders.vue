@@ -315,6 +315,9 @@ export default {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
+          if(res.code != 200){
+            return 
+          }
           console.log("我的订单列表",res.data.data)
           this.list = {
             //  没给钱
@@ -405,6 +408,9 @@ export default {
           params: { orderStatus: status, page: 1, page_size: 9999 }
         })
         .then(res => {
+          if(res.code != 200){
+            return 
+          }
           // console.log("订单列表====",res.data)
           for (const i in res.data.data) {
             const o = res.data.data[i]

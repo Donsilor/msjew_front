@@ -372,6 +372,11 @@ export default {
         })
         .then(res => {
           console.log("登陆结果",res)
+            localStorage.setItem("refreshToken",res.data.refresh_token);
+            let nowDate = parseInt((new Date()).getTime()/1000)
+            localStorage.setItem("login_time",nowDate);
+            localStorage.setItem("refresh_time",nowDate);
+
           // if (res.code==200){
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
