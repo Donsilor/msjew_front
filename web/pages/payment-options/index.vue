@@ -224,11 +224,11 @@ export default {
       // )
       const data ={
         orderId: this.$route.query.orderId,
-        // // visa付款自动转成PayPal付款
+        // // visa付款自动转成PayPal付款 https://www2.bddco.com
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        returnUrl:'https://www2.bddco.com//complete-payment?orderId='+this.$route.query.orderId
+        returnUrl:'https://www2.bddco.com/complete-payment?orderId='+this.$route.query.orderId
       }
       this.goingPay = true
       // if (res.data.config) {
@@ -273,6 +273,7 @@ export default {
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {
+          console.log("url",res)
           // window.location.href=res.data.config
           //  this.$router.replace({
           //    path:res.data.config
@@ -313,6 +314,7 @@ export default {
                 orderId: this.$route.query.orderId,
                 price: this.$route.query.price,
                 coinType: this.$route.query.coinType,
+
                 type: `transfer`
               }
             })
