@@ -190,6 +190,9 @@ export default {
             window.location.reload()
           }, 1000)
 
+        }else{
+          dispatch('logout')
+          return
         }
         
     })
