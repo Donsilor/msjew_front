@@ -45,28 +45,10 @@ export default function({ $axios, store }) {
       } else {
         if (data.code == 401) {
           // const refreshToken =localStorage.getItem('refreshToken')
-          const login_time = parseInt(localStorage.getItem('login_time'));
-          const refresh_time = parseInt(localStorage.getItem('refresh_time'));
-          let nowDate = parseInt((new Date()).getTime()/1000)
-          let refresh_once_time = 10  //过期后每隔多少时间刷新token
-          let refresh_out_time = 15 * 24 * 3600  //多少时间后不能刷新
-          // console.log(1111,nowDate - login_time, nowDate - refresh_time)
-          if(nowDate - login_time < refresh_out_time){
-            if(nowDate - refresh_time > refresh_once_time){
-              localStorage.setItem("refresh_time",nowDate);
-              store.dispatch('refreshTokenRequst')
-            }
-            return 
-          }else{
-            store.dispatch('logout')
-            // setTimeout(() => {
-            //   this.$router.push('/login')
-            // }, 1000)
-            return Promise.resolve(null)
-          }
+          store.dispatch('refreshTokenRequst') //刷新token
 
           console.log('is 401')
-          store.dispatch('logout')
+          // store.dispatch('logout')
           // this.$router.push('/login')
           
         }else{
