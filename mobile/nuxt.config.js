@@ -8,17 +8,21 @@ const STATIC_PATH = process.env.STATIC_PATH || ''
 console.log('RUNNING_ENV=====>', RUNNING_ENV)
 
 const serverUrl = {
-  dev: 'https://bddco.leyouwangluo.com/bdd-web',
+  dev: 'http://www.bddmall.com/api/index.php',
   test: 'http://192.168.2.111/bdd-web',
   pre: 'https://www.bddia.com/bdd-web',
   pro: 'https://www.bddco.com/bdd-web'
 }
 
 const resourceUrl = {
-  dev: 'https://bdd-dev.oss-cn-shenzhen.aliyuncs.com/',
-  test: 'http://bdd-dev.oss-cn-shenzhen.aliyuncs.com/',
-  pre: 'https://bdd-cdn.leyouwangluo.com/',
-  pro: 'https://bdd-cdn.leyouwangluo.com/'
+  dev: '',
+  test: '',
+  pre: '',
+  pro: ''
+  // dev: 'https://bdd-dev.oss-cn-shenzhen.aliyuncs.com/',
+  // test: 'http://bdd-dev.oss-cn-shenzhen.aliyuncs.com/',
+  // pre: 'https://bdd-cdn.leyouwangluo.com/',
+  // pro: 'https://bdd-cdn.leyouwangluo.com/'
 }
 
 console.log('serverUrl=======>', serverUrl[RUNNING_ENV])
@@ -124,8 +128,10 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    prefix: '/api',
-    proxy: true
+    prefix: serverUrl[RUNNING_ENV],
+    baseURL:serverUrl[RUNNING_ENV],
+    // prefix: '/api',
+    // proxy: true
   },
   proxy: [
     [
@@ -168,14 +174,14 @@ module.exports = {
      */
     extend(config, ctx) {
       // Run ESLint on save
-      if (ctx.isDev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
-      }
+      // if (ctx.isDev && ctx.isClient) {
+      //   config.module.rules.push({
+      //     enforce: 'pre',
+      //     test: /\.(js|vue)$/,
+      //     loader: 'eslint-loader',
+      //     exclude: /(node_modules)/
+      //   })
+      // }
     },
     optimization: {
       splitChunks: {
