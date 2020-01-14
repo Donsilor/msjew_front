@@ -1506,7 +1506,6 @@ export default {
       }
     }
   },
-  
   computed: {
     pnN() {
       if (this.$store.state.language === 'en_US') {
