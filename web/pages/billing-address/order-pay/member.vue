@@ -1506,7 +1506,6 @@ export default {
       }
     }
   },
-  
   computed: {
     pnN() {
       if (this.$store.state.language === 'en_US') {
@@ -2916,7 +2915,7 @@ div {
           .infos {
             width: 100%;
             display: flex;
-            margin-bottom: 21px;
+            margin-bottom: 10px;
             div:nth-child(1) {
               width: 50%;
               color: #666;
@@ -3220,7 +3219,7 @@ div {
               .infos {
                 width: 100%;
                 display: flex;
-                margin-bottom: 21px;
+                margin-bottom: 10px;
                 div:nth-child(1) {
                   width: 50%;
                   color: #666;

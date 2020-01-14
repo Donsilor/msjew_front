@@ -541,7 +541,7 @@ export default {
       if (obj.groupType === 1) {
         // console.log(`对戒💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.id.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.groupId.replace(/\//g, '')}`,
           query: {
             goodId: obj.groupId,
             ringType: 'pair'
@@ -554,7 +554,7 @@ export default {
         if (ct === '15') {
           // console.log(`💎`)
           route = {
-            path: `/diamond-details/${obj.id.replace(/\//g, '')}`,
+            path: `/diamond-details/${obj.goodsId.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId
             }
@@ -562,7 +562,7 @@ export default {
         } else if (ct === '2' ||ct === '13' || ct === '14') { //戒指
           // console.log(`💍`)
           route = {
-            path: `/ring/wedding-rings/${obj.id.replace(/\//g, '')}`,
+            path: `/ring/wedding-rings/${obj.goodsId.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId,
               ringType: 'single'
@@ -571,7 +571,7 @@ export default {
         }else if (ct === '12') { //戒托
           // console.log(`💍`)
           route = {
-            path: `/ring/engagement-rings/${obj.id.replace(/\//g, '')}`,
+            path: `/ring/engagement-rings/${obj.goodsId.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId,
               ringType: 'single'
@@ -580,7 +580,7 @@ export default {
         } else {
           // console.log(`饰品`)
           route = {
-            path: `/jewellery/all/${obj.id.replace(/\//g, '')}`,
+            path: `/jewellery/all/${obj.goodsId.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId
             }

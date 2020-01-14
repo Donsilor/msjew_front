@@ -2,7 +2,7 @@
   <div>
     <!-- 简体中文 -->
     <div v-if="language === 'zh_CN'" class="register-item">
-      <form>
+      <!-- <form> -->
         <div class="row-flex">
           <div class="relative margin-right-20 margin-bottom-20">
             <div class="register-input">
@@ -156,7 +156,7 @@
             {{ $t(`${lang}.registration`) }}
           </button>
         </div>
-      </form>
+      <!-- </form> -->
     </div>
     <!-- 英文和繁体 -->
     <div v-else class="register-item">
@@ -556,9 +556,9 @@ export default {
       }
       if(_this.email==''){
         _this.emailShow=true
-        return
+        return false;
       }else if(!_this.code && !_this.password && !_this.password_repetition){
-        _this.isActivemail=false;
+        _this.isActivemail = false;
         _this.emailShow=false;
         _this.isActivecode=true;
         _this.codeShow=true;

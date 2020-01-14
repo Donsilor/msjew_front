@@ -3,7 +3,7 @@
     <Header :title="lang.header" />
     <div class="content">
       <h5>{{ lang.title }}</h5>
-      <p class="email">{{ date.email }}</p>
+      <p class="email">{{ date.username }}</p>
       <div class="mod">
         <Single
           :name="lang.sex"
@@ -13,7 +13,7 @@
         />
         <div class="input-mod">
           <bdd-input
-            v-model="date.name"
+            v-model="date.firstname"
             :placeholder="lang.name"
             @blur="textName"
           ></bdd-input>
@@ -23,7 +23,7 @@
         </div>
         <div class="input-mod">
           <bdd-input
-            v-model="date.surname"
+            v-model="date.lastname"
             :placeholder="lang.surname"
             @blur="textSurname"
           ></bdd-input>
@@ -34,7 +34,7 @@
         <Single
           :name="lang.marriage"
           :list="lang.marriageList"
-          :val="date.marStatus"
+          :val="date.marriage"
           @close="choice2"
         />
         <div class="margin-top-20 datepicker">
@@ -104,10 +104,11 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/user/me`
+          url: `/web/member/member/me`
         })
         .then(res => {
-          this.date = res
+          console.log("info",res)
+          this.date = res.data
           if (this.date.birthday) {
             this.birthday =
               moment(this.date.birthday).format('YYYY') +
@@ -130,22 +131,22 @@ export default {
     },
     textSurname() {
       console.log(this.date, 'dsgdf')
-      if (this.date.surname === '' || this.date.surname.length > 20) {
+      if (this.date.lastname === '' || this.date.lastname.length > 20) {
         this.$toast.show(this.lang.toast1)
       }
     },
     textName() {
-      console.log(this.date.name, 'dsgdf')
-      if (this.date.name === '' || this.date.name.length > 20) {
+      console.log(this.date.lastname, 'dsgdf')
+      if (this.date.firstname === '' || this.date.firstname.length > 20) {
         this.$toast.show(this.lang.toast2)
       }
     },
     saveInfo() {
-      if (this.date.surname === '' || this.date.surname.length > 20) {
+      if (this.date.lastname === '' || this.date.lastname.length > 20) {
         this.$toast.show(this.lang.toast1)
         return
       }
-      if (this.date.name === '' || this.date.name.length > 20) {
+      if (this.date.firstname === '' || this.date.firstname.length > 20) {
         this.$toast.show(this.lang.toast2)
         return
       }
@@ -154,13 +155,13 @@ export default {
       }
       this.$axios({
         method: 'post',
-        url: '/wap/myAccount/updateBaseUserInfo',
+        url: '/web/member/member/edit',
         data: {
-          surname: this.date.surname,
-          name: this.date.name,
-          revEmail: this.date.revEmail,
+          lastname: this.date.lastname,
+          firstname: this.date.firstname,
+          // revEmail: this.date.revEmail,
           gender: this.date.gender, // 性别（0-保密，1-男，2-女）
-          marStatus: this.date.marStatus, // （0-已婚，1-未婚，2-再婚）
+          marriage: this.date.marriage, // （0-已婚，1-未婚，2-再婚）
           birthday: this.date.birthday
         }
       })

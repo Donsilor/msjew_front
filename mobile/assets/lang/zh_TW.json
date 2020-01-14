@@ -526,6 +526,7 @@
       "next": "下一步"
     },
     "new-password": {
+      "code": "驗證碼",
       "reset-password": "重置密碼",
       "input-new-password": "輸入新密碼",
       "password-error": "密碼格式錯誤",
@@ -666,7 +667,9 @@
     "inputCode": "請輸入驗證碼",
     "codeError": "請輸入正確的驗證碼",
     "password": "設置賬號密碼",
+    "repassword": "確認密碼",
     "passwordError": "請輸入6-18位字符的密碼",
+    "repasswordError": "密碼不一致",
     "agree": "登記即代表本人已經同意並接受",
     "bddClause": "BDD條件與條款",
     "register": "登記",

@@ -12,15 +12,15 @@
           :class="moveIndex === index && move ? 'moveActive' : 'moveNo'"
         >
           <div class="left" @click="selectAddress(item)">
-            <p class="p1 ow-h1">{{ item.firstName }} {{ item.lastName }}</p>
-            <p class="p2">{{ item.userTelCode }} {{ item.userTel }}</p>
-            <p class="p3">{{ item.userMail }}</p>
+            <p class="p1 ow-h1">{{ item.firstname }} {{ item.lastname }}</p>
+            <p class="p2">{{ item.mobile_code }} {{ item.mobile }}</p>
+            <p class="p3">{{ item.email }}</p>
             <p class="p4 ellipsis-address ow-h2">
-              {{ item.countryName }}-{{ item.provinceName }}-{{
-                item.cityName
-              }}-{{ item.address }}
+              {{ item.country_name}}-{{ item.province_name }}-{{
+                item.city_name
+              }}-{{ item.address_details }}
             </p>
-            <span v-if="item.isDefault === 1" class="btn btn-active">{{
+            <span v-if="item.is_default == 1" class="btn btn-active">{{
               lang.default
             }}</span>
             <span
@@ -39,7 +39,7 @@
           </div>
         </li>
       </ul>
-      <bdd-empty v-if="address.length === 0" :type="'address'"></bdd-empty>
+      <bdd-empty v-if="address.length == 0" :type="'address'"></bdd-empty>
     </div>
     <div class="btn-fixed">
       <div class="btn-common btn-pink" @click="editAddress(null)">
@@ -82,19 +82,21 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/myAccount/getMyAddress`
+          url: `/web/member/address`
         })
         .then(res => {
+          console.log("address",res)
           _this.address = []
-          if (res && res.length > 0) {
-            res.map((item, index) => {
-              if (item.isDefault === 1) {
+          if (res.data && res.data.length > 0) {
+            res.data.map((item, index) => {
+              if (item.is_default === 0) {
                 _this.address.unshift(item)
               } else {
                 _this.address.push(item)
               }
             })
           }
+          console.log("ad", _this.address)
         })
         .catch(err => {
           console.log(err)
@@ -116,13 +118,15 @@ export default {
     },
     // 設為默認
     changeDefaultAddress(id) {
+      console.log("id",id)
       const _this = this
       _this
         .$axios({
           method: 'post',
-          url: `/wap/myAccount/updateDefaultAddress`,
-          params: {
-            defaultAddressId: id
+          url: `/web/member/address/edit`,
+          data: {
+            id:id,
+            is_default:1
           }
         })
         .then(res => {
@@ -139,9 +143,9 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/wap/myAccount/delMyAddress`,
-          params: {
-            addressId: id
+          url: `/web/member/address/del`,
+          data: {
+            id: id
           }
         })
         .then(res => {

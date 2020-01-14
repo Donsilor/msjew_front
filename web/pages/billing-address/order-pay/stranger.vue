@@ -1563,7 +1563,7 @@ div {
           .infos {
             width: 100%;
             display: flex;
-            margin-bottom: 21px;
+            margin-bottom: 10px;
 
             div:nth-child(1) {
               width: 50%;
@@ -1730,7 +1730,7 @@ div {
             .infos {
               width: 100%;
               display: flex;
-              margin-bottom: 21px;
+              margin-bottom: 10px;
 
               div:nth-child(1) {
                 width: 50%;
