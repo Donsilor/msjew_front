@@ -185,19 +185,19 @@ export default {
         // this.totalNum = 0
         this.totalPrice = 0
         for (const i in this.good) {
-          this.good[i].tick = true
-          // if(this.good[i].simpleGoodsEntity.goodsStatus!==2){
-          //   this.good[i].tick = false
-          // }
-          console.log("price=====",i)
+          if(this.good[i].data[0].simpleGoodsEntity.goodsStatus!==2){
+            this.good[i].tick = false
+            continue;
+          }else{
+            this.good[i].tick = true
+          }
+          // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
           this.totalPrice +=parseFloat(this.good[i].price) 
         }
-        console.log("price=====",this.good)
-        console.log("price=====",  this.totalPrice)
+        // console.log("price=====2",this.good)
         this.tickNum = this.good.length
         this.totalNum = this.good.length
         this.allTick = !this.allTick
-        console.log("选中",this.tickNum)
       }
       this.good = JSON.parse(JSON.stringify(this.good))
     },
@@ -209,8 +209,6 @@ export default {
         : (this.totalPrice += parseFloat(this.good[i].price))
       this.good[i].tick = !this.good[i].tick
       this.good = JSON.parse(JSON.stringify(this.good))
-      // console.log("ticknum=====",tickNum)
-        // console.log("length",this.good.length)
       if (this.tickNum == this.good.length) {
         this.allTick = true
       } else {
@@ -283,6 +281,8 @@ export default {
           data.push(this.good[i].id)
         }
       }
+      console.log("length",data.length)
+       console.log("length333",this.tickNum)
       if (data.length !== this.tickNum) return
       const cartIds = data.join(',')
       this.$router.push({
