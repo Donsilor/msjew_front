@@ -622,32 +622,33 @@ export default {
         this.$toast.show(this.lang.toast2)
         return
       }
-      if (!Email.test(this.mailbox)) {
-        this.$toast.show(this.lang.toast3)
-        return
-      }
+      // if (!Email.test(this.mailbox)) {
+      //   this.$toast.show(this.lang.toast3)
+      //   return
+      // }
       if (this.isLogin) {
         this.$axios({
           method: 'post',
-          url: `/wap/order/createOrder`,
-          params: {
-            cartIds: this.idList.join(','),
-            allSend: this.isSend ? 1 : 2,
-            userRemark: this.userRemark,
-            productAmount: this.allFee.productAmount,
-            orderAmount: this.allFee.orderAmount,
-            userAddressId: this.address.id,
-            afterMail: this.mailbox,
-            recvType: 1,
-            preferId: this.selectCouponId ? this.selectCouponId : null,
-            preferCode: this.inputCouponCode ? this.inputCouponCode : null
+          url: `/web/member/order/create`,
+          data: {
+            cart_ids: this.idList.join(','),
+            // allSend: this.isSend ? 1 : 2,
+            buyer_remark: this.userRemark,
+            // productAmount: this.allFee.productAmount,
+            order_amount: this.allFee.orderAmount,
+            buyer_address_id: this.address.id,
+            // afterMail: this.mailbox,
+            // recvType: 1,
+            // preferId: this.selectCouponId ? this.selectCouponId : null,
+            // preferCode: this.inputCouponCode ? this.inputCouponCode : null
           }
         })
           .then(res => {
+            console.log("总额",res.data)
             this.$router.replace({
               name: 'cart-pay',
               query: {
-                info: JSON.stringify(res)
+                info: JSON.stringify(res.data)
               }
             })
           })
