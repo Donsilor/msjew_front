@@ -197,7 +197,7 @@ div {
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 21px;
+      margin-bottom: 10px;
       div:nth-child(1) {
         width: 40px;
         height: 40px;
