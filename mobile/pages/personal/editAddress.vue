@@ -1,120 +1,241 @@
 <template>
-  <div class="edit-address">
-    <div class="header">
-      <span>
-        {{ title }}
-      </span>
-      <i class="icon iconfont iconicon-test2" @click="goBack"></i>
+  <div>
+    <div v-if="language === 'zh_CN'" class="edit-address">
+      <div class="header">
+        <span>
+          {{ title }}
+        </span>
+        <i class="icon iconfont iconicon-test2" @click="goBack"></i>
+      </div>
+      <div class="mod">
+        <div class="input-mod">
+          <bdd-input
+            v-model="name"
+            :placeholder="lang.name"
+            @input="check(1)"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: nameTrue }]">
+          {{ nameText }}
+        </div>
+
+        <div class="input-mod">
+          <bdd-input
+            v-model="surname"
+            :placeholder="lang.surname"
+            @input="check(2)"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: surnameTrue }]">
+          {{ surnameText }}
+        </div>
+
+        <div class="input-mod" @click="showSelect">
+          <bdd-input
+            v-model="mailbox"
+            :placeholder="lang.mailbox"
+            @input="check(3)"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: mailboxTrue }]">
+          {{ mailboxText }}
+        </div>
+
+        <div class="test-mod" @click="showSwiperTap">
+          {{ area }}
+          <i class="icon iconfont iconxiala"></i>
+        </div>
+        <div :class="['error-message', { active: areaTrue }]">
+          {{ areaText }}
+        </div>
+
+        <div class="input-mod">
+          <bdd-input
+            v-model="phone"
+            :placeholder="lang.phone"
+            @input="check(4)"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: phoneTrue }]">
+          {{ phoneText }}
+        </div>
+
+        <div class="text-area">
+          <textarea
+            v-model="details"
+            maxlength="300"
+            :placeholder="lang.details"
+            @keyup="check(5)"
+          ></textarea>
+        </div>
+        <div :class="['error-message', { active: detailsTrue }]">
+          {{ detailsText }}
+        </div>
+
+        <div class="test-mod" @click="showCountry">
+          {{ country }}
+          <i class="icon iconfont iconxiala"></i>
+        </div>
+        <div :class="['error-message', { active: countryTrue }]">
+          {{ countryText }}
+        </div>
+
+        <div class="test-mod" @click="showProvince">
+          {{ province }}
+          <i class="icon iconfont iconxiala"></i>
+        </div>
+
+        <div class="test-mod" @click="showCity">
+          {{ city }}
+          <i class="icon iconfont iconxiala"></i>
+        </div>
+
+        <div class="input-mod">
+          <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
+        </div>
+
+        <div class="btn-common btn-pink btn-address" @click="createAddress">
+          {{ lang.storage }}
+        </div>
+        <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
+          {{ lang.deleteAddress }}
+        </div>
+        <swiper-tap
+          ref="suitability1"
+          :list="arealist"
+          @clear="sureArea"
+        ></swiper-tap>
+        <swiper-tap
+          ref="country"
+          :list="countryList"
+          @clear="countrySure"
+        ></swiper-tap>
+        <swiper-tap
+          ref="province"
+          :list="provinceList"
+          @clear="provinceSure"
+        ></swiper-tap>
+        <swiper-tap ref="city" :list="cityList" @clear="citySure"></swiper-tap>
+      </div>
     </div>
-    <div class="mod">
-      <div class="input-mod">
-        <bdd-input
-          v-model="name"
-          :placeholder="lang.name"
-          @input="check(1)"
-        ></bdd-input>
+    <!-- 繁体 -->
+    <div v-else class="edit-address">
+      <div class="header">
+        <span>
+          {{ title }}
+        </span>
+        <i class="icon iconfont iconicon-test2" @click="goBack"></i>
       </div>
-      <div :class="['error-message', { active: nameTrue }]">
-        {{ nameText }}
-      </div>
+      <div class="mod">
+        <div class="input-mod">
+          <bdd-input
+            v-model="name"
+            :placeholder="lang.name"
+            @input="check(1)"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: nameTrue }]">
+          {{ nameText }}
+        </div>
 
-      <div class="input-mod">
-        <bdd-input
-          v-model="surname"
-          :placeholder="lang.surname"
-          @input="check(2)"
-        ></bdd-input>
-      </div>
-      <div :class="['error-message', { active: surnameTrue }]">
-        {{ surnameText }}
-      </div>
+        <div class="input-mod">
+          <bdd-input
+            v-model="surname"
+            :placeholder="lang.surname"
+            @input="check(2)"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: surnameTrue }]">
+          {{ surnameText }}
+        </div>
 
-      <div class="input-mod" @click="showSelect">
-        <bdd-input
-          v-model="mailbox"
-          :placeholder="lang.mailbox"
-          @input="check(3)"
-        ></bdd-input>
-      </div>
-      <div :class="['error-message', { active: mailboxTrue }]">
-        {{ mailboxText }}
-      </div>
+        <div class="input-mod" @click="showSelect">
+          <bdd-input
+            v-model="mailbox"
+            :placeholder="lang.mailbox"
+            @input="check(3)"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: mailboxTrue }]">
+          {{ mailboxText }}
+        </div>
 
-      <div class="test-mod" @click="showSwiperTap">
-        {{ area }}
-        <i class="icon iconfont iconxiala"></i>
-      </div>
-      <div :class="['error-message', { active: areaTrue }]">
-        {{ areaText }}
-      </div>
+        <div class="test-mod" @click="showSwiperTap">
+          {{ area }}
+          <i class="icon iconfont iconxiala"></i>
+        </div>
+        <div :class="['error-message', { active: areaTrue }]">
+          {{ areaText }}
+        </div>
 
-      <div class="input-mod">
-        <bdd-input
-          v-model="phone"
-          :placeholder="lang.phone"
-          @input="check(4)"
-        ></bdd-input>
-      </div>
-      <div :class="['error-message', { active: phoneTrue }]">
-        {{ phoneText }}
-      </div>
+        <div class="input-mod">
+          <bdd-input
+            v-model="phone"
+            :placeholder="lang.phone"
+            @input="check(4)"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: phoneTrue }]">
+          {{ phoneText }}
+        </div>
 
-      <div class="text-area">
-        <textarea
-          v-model="details"
-          maxlength="300"
-          :placeholder="lang.details"
-          @keyup="check(5)"
-        ></textarea>
-      </div>
-      <div :class="['error-message', { active: detailsTrue }]">
-        {{ detailsText }}
-      </div>
+        <div class="text-area">
+          <textarea
+            v-model="details"
+            maxlength="300"
+            :placeholder="lang.details"
+            @keyup="check(5)"
+          ></textarea>
+        </div>
+        <div :class="['error-message', { active: detailsTrue }]">
+          {{ detailsText }}
+        </div>
 
-      <div class="test-mod" @click="showCountry">
-        {{ country }}
-        <i class="icon iconfont iconxiala"></i>
-      </div>
-      <div :class="['error-message', { active: countryTrue }]">
-        {{ countryText }}
-      </div>
+        <div class="test-mod" @click="showCountry">
+          {{ country }}
+          <i class="icon iconfont iconxiala"></i>
+        </div>
+        <div :class="['error-message', { active: countryTrue }]">
+          {{ countryText }}
+        </div>
 
-      <div class="test-mod" @click="showProvince">
-        {{ province }}
-        <i class="icon iconfont iconxiala"></i>
-      </div>
+        <div class="test-mod" @click="showProvince">
+          {{ province }}
+          <i class="icon iconfont iconxiala"></i>
+        </div>
 
-      <div class="test-mod" @click="showCity">
-        {{ city }}
-        <i class="icon iconfont iconxiala"></i>
-      </div>
+        <div class="test-mod" @click="showCity">
+          {{ city }}
+          <i class="icon iconfont iconxiala"></i>
+        </div>
 
-      <div class="input-mod">
-        <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
-      </div>
+        <div class="input-mod">
+          <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
+        </div>
 
-      <div class="btn-common btn-pink btn-address" @click="createAddress">
-        {{ lang.storage }}
+        <div class="btn-common btn-pink btn-address" @click="createAddress">
+          {{ lang.storage }}
+        </div>
+        <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
+          {{ lang.deleteAddress }}
+        </div>
+        <swiper-tap
+          ref="suitability1"
+          :list="arealist"
+          @clear="sureArea"
+        ></swiper-tap>
+        <swiper-tap
+          ref="country"
+          :list="countryList"
+          @clear="countrySure"
+        ></swiper-tap>
+        <swiper-tap
+          ref="province"
+          :list="provinceList"
+          @clear="provinceSure"
+        ></swiper-tap>
+        <swiper-tap ref="city" :list="cityList" @clear="citySure"></swiper-tap>
       </div>
-      <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
-        {{ lang.deleteAddress }}
-      </div>
-      <swiper-tap
-        ref="suitability1"
-        :list="arealist"
-        @clear="sureArea"
-      ></swiper-tap>
-      <swiper-tap
-        ref="country"
-        :list="countryList"
-        @clear="countrySure"
-      ></swiper-tap>
-      <swiper-tap
-        ref="province"
-        :list="provinceList"
-        @clear="provinceSure"
-      ></swiper-tap>
-      <swiper-tap ref="city" :list="cityList" @clear="citySure"></swiper-tap>
     </div>
   </div>
 </template>
@@ -142,8 +263,10 @@ export default {
       mailboxTrue: false,
       mailboxText: '',
       area: this.LANGUAGE.personal.editAddress.area,
-      userTelCode: '+852',
+      areaCN: this.LANGUAGE.personal.editAddress.areaCN,
+      userTelCode: '',
       arealist: PhoneJson,
+      // arealistCN: PhoneJson,
       areaTrue: false,
       areaText: '',
       phone: '',
@@ -166,16 +289,39 @@ export default {
       cityId: '',
       isLogin: !!this.$store.state.token,
       isOver: true,
-      postals: false
+      postals: false,
+      language:''
     }
+  },
+  computed:{
+   
   },
   created() {
     this.getinfo()
     this.getListOne()
     this.getArealist()
   },
-  mounted() {},
+  mounted() {
+    this.language = this.getCookie('language')
+    console.log("cookie",this.language)
+    if(this.language === 'zh_CN'){
+      this.userTelCode='+86' 
+      this.area="中国 +86"
+    }else {
+      this.userTelCode='+852'
+    }
+  },
   methods: {
+     // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     goBack() {
       if (this.$route.query.type === 'add') {
         if (
@@ -222,19 +368,28 @@ export default {
         this.arealist = []
         PhoneJson.map((item, index) => {
           const o = {
-            content: language === 'zh_TW' ? item.cn : item.en,
+            content: language === 'zh_TW' ? item.cn:  language === 'zh_CN' ?item.zh:item.en,
             phone_code: item.phone_code
           }
           this.arealist.push(o)
         })
+        console.log("区号",this.arealist)
       }
     },
     sureArea(val) {
+      console.log("val",val)
       this.userTelCode = this.arealist[val.index].phone_code
       this.area =
         this.arealist[val.index].content +
         ' ' +
         this.arealist[val.index].phone_code
+      // if(_this.language === 'zh_CN'){
+      //   this.arealist[val.index].phone_code='+85'
+      //   this.area =
+      //   this.arealist[val.index].content +
+      //   ' ' +
+      //   this.arealist[val.index].phone_code
+      // }
     },
     // 登录状态下修改地址信息回填
     getinfo() {
@@ -243,38 +398,39 @@ export default {
       }
       this.title = this.lang.header1
       const address = storage.get('myAdders', 0)
+      // console.log("地址",this.$route.query.firstName)
       if (this.$route.query.id) {
         this.title = this.lang.header2
         this.id = this.$route.query.id
-        this.name = this.$route.query.firstName
-        this.surname = this.$route.query.lastName
-        this.userTelCode = this.$route.query.userTelCode
-        this.phone = this.$route.query.userTel
-        this.mailbox = this.$route.query.userMail
-        this.country = this.$route.query.countryName
-        this.countryId = this.$route.query.countryId
-        this.province = this.$route.query.provinceName
-        this.provinceId = this.$route.query.provinceId
-        this.city = this.$route.query.cityName
-        this.cityId = this.$route.query.cityId
-        this.details = this.$route.query.address
-        this.postal = this.$route.query.zipCode
+        this.name = this.$route.query.firstname
+        this.surname = this.$route.query.lastname
+        this.userTelCode = this.$route.query.mobile_code
+        this.phone = this.$route.query.mobile
+        this.mailbox = this.$route.query.email
+        this.country = this.$route.query.country_name
+        this.countryId = this.$route.query.country_id
+        this.province = this.$route.query.province_name
+        this.provinceId = this.$route.query.province_id
+        this.city = this.$route.query.city_name
+        this.cityId = this.$route.query.city_id
+        this.details = this.$route.query.address_details
+        this.postal = this.$route.query.zip_code
       } else if (address && this.$route.query.type !== 'add') {
         this.title = this.lang.header2
         this.id = address.id
-        this.name = address.name
-        this.surname = address.surname
-        this.userTelCode = address.userTelCode
-        this.phone = address.phone
-        this.mailbox = address.mailbox
-        this.country = address.country
-        this.countryId = address.countryId
-        this.province = address.province
-        this.provinceId = address.provinceId
-        this.city = address.city
-        this.cityId = address.cityId
-        this.details = address.details
-        this.postal = address.postal
+        this.name = address.firstname
+        this.surname = address.lastname
+        this.userTelCode = address.mobile_code
+        this.phone = address.mobile
+        this.mailbox = address.email
+        this.country = address.country_name
+        this.countryId = address.country_id
+        this.province = address.province_name
+        this.provinceId = address.province_id
+        this.city = address.city_name
+        this.cityId = address.city_id
+        this.details = address.address_details
+        this.postal = address.zip_code
       }
     },
     // 获取国家列表
@@ -283,18 +439,25 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/myAccount/listArea`
+          url: `/web/common/area`
         })
         .then(res => {
+          console.log("area",res.data)
           _this.countryList = []
-          for (let i = 0; i < res.length; i++) {
+          for (let i = 0; i < res.data.length; i++) {
             const o = {
-              id: res[i].areaId,
-              content: res[i].areaName
+              id: res.data[i].areaId,
+              content: res.data[i].areaName
             }
             _this.countryList.push(o)
           }
+          // if(_this.language === 'zh_CN'){
+          //   _this.country="中国"
+          //   this.getListTwo()
+          //   this.getListThree()
+          // }
           _this.countryList.unshift({ id: '', content: this.lang.pleaseChoose })
+          console.log("国家",_this.countryList)
           this.getListTwo()
           this.getListThree()
         })
@@ -309,19 +472,21 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/myAccount/listArea`,
+          url: `/web/common/area`,
           params: {
-            areaId: this.countryId
+            pid: this.countryId
           }
         })
         .then(res => {
           _this.provinceList = []
-          for (let i = 0; i < res.length; i++) {
+          for (let i = 0; i < res.data.length; i++) {
             const o = {
-              id: res[i].areaId,
-              content: res[i].areaName
+              id: res.data[i].areaId,
+              content: res.data[i].areaName
             }
-            _this.provinceList.push(o)
+            if(!res.data.length==0){
+              _this.provinceList.push(o)
+            }
           }
           _this.provinceList.unshift({
             id: '',
@@ -339,17 +504,17 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/myAccount/listArea`,
+          url: `/web/common/area`,
           params: {
-            areaId: this.provinceId
+            pid: this.provinceId
           }
         })
         .then(res => {
           _this.cityList = []
-          for (let i = 0; i < res.length; i++) {
+          for (let i = 0; i < res.data.length; i++) {
             const o = {
-              id: res[i].areaId,
-              content: res[i].areaName
+              id: res.data[i].areaId,
+              content: res.data[i].areaName
             }
             _this.cityList.push(o)
           }
@@ -414,9 +579,9 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/wap/myAccount/delMyAddress`,
-          params: {
-            addressId: id
+          url: `/web/member/address/del`,
+          data: {
+            id: id
           }
         })
         .then(res => {
@@ -502,25 +667,25 @@ export default {
         this.isOver = false
         const json = {
           id: this.$route.query.id ? this.$route.query.id : null,
-          firstName: this.name,
-          lastName: this.surname,
-          userTelCode: this.userTelCode,
-          userTel: this.phone,
-          userMail: this.mailbox,
-          countryId: this.countryId,
-          provinceId: this.provinceId,
-          cityId: this.cityId,
-          address: this.details,
-          zipCode: this.postal
+          firstname: this.name,
+          lastname: this.surname,
+          mobile_code: this.userTelCode,
+          mobile: this.phone,
+          email: this.mailbox,
+          country_id: this.countryId,
+          province_id: this.provinceId,
+          city_id: this.cityId,
+          address_details: this.details,
+          zip_code: this.postal
         }
         const data = JSON.parse(JSON.stringify(json))
-        if (this.isLogin) {
+        if (this.isLogin&&this.$route.query.type!=="add") {
           const _this = this
           _this
             .$axios({
               method: 'post',
-              url: `/wap/myAccount/saveUserAddress`,
-              params: data
+              url: `/web/member/address/edit`,
+              data: data
             })
             .then(res => {
               this.$toast.show(this.lang.toast2)
@@ -533,7 +698,28 @@ export default {
               this.isOver = true
               console.log(err)
             })
-        } else {
+        } else if(this.$route.query.type=="add"){
+          const _this = this
+          _this
+            .$axios({
+              method: 'post',
+              url: `/web/member/address/add`,
+              data: data
+            })
+            .then(res => {
+              console.log("aaaa",res)
+              this.$toast.show(this.lang.toast2)
+              setTimeout(() => {
+                this.$router.go(-1)
+                this.isOver = true
+              }, 3000)
+            })
+            .catch(err => {
+              this.isOver = true
+              console.log(err)
+            })
+
+        }else{
           const json2 = {
             id: this.$route.query.id ? this.$route.query.id : null,
             name: this.name,

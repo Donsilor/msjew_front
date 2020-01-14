@@ -72,7 +72,7 @@ export default {
   getUserInfo({ $axios, state, commit, dispatch }) {
     return this.$axios({
       method: 'get',
-      url: `/wap/user/me`
+      url: `/web/member/member/me`
     })
       .then(data => {
         commit('setUserInfo', data)

@@ -3,175 +3,388 @@
     <div class="operate-bar">
       <i class="icon iconfont iconguanbi close" @click="goBack($router)"></i>
     </div>
-    <section class="page-content">
-      <div class="title-bar">
-        <span class="title" style="opacity: 0">{{ lang.oauthRegister }}</span>
-        <span class="login" @click="toLogin">{{ lang.hadRegister }}></span>
-      </div>
-
-      <div class="oauth">
-        <div class="line-box">
-          <button class="full-btn facebook" @click="oauthLogin('facebook')">
-            <img src="/facebook.svg" class="btn-icon" />
-            <span class="btn-message">{{ lang.facebook }}</span>
-          </button>
-        </div>
-        <div class="line-box">
-          <button class="full-btn google" @click="oauthLogin('google')">
-            <img src="/google.svg" class="btn-icon" />
-            <span class="btn-message">{{ lang.google }}&nbsp;&nbsp;&nbsp;</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="info">
-        <div class="title">{{ lang.inputInfo }}</div>
-
-        <div class="line-box input-line">
-          <bdd-input
-            v-model="info.name"
-            :placeholder="`*${lang.name}`"
-            :padding="'0 3% 0 3%'"
-            @blur="inputKey('name')"
-          ></bdd-input>
-          <div
-            :class="[
-              'error-message',
-              { active: hadInput('name') && !info.name }
-            ]"
-          >
-            {{ lang.nameError }}
-          </div>
-        </div>
-        <div class="line-box input-line">
-          <bdd-input
-            v-model="info.surname"
-            :placeholder="`*${lang.surname}`"
-            :padding="'0 3% 0 3%'"
-            @blur="inputKey('surname')"
-          ></bdd-input>
-          <div
-            :class="[
-              'error-message',
-              { active: hadInput('surname') && !info.surname }
-            ]"
-          >
-            {{ lang.surnameError }}
-          </div>
-        </div>
-        <div class="line-box input-line">
-          <bdd-input
-            v-model="info.email"
-            :placeholder="`*${lang.email}`"
-            :padding="'0 3% 0 3%'"
-            @blur="inputKey('email')"
-          ></bdd-input>
-          <div
-            :class="[
-              'error-message',
-              { active: hadInput('email') && !trueEmail }
-            ]"
-          >
-            {{ lang.emailError }}
-          </div>
+    <!-- 中文简体 -->
+    <div v-if="language === 'zh_CN'">
+      <section  class="page-content">
+        <div class="title-bar">
+          <span class="title" style="opacity: 0">{{ lang.oauthRegister }}</span>
+          <span class="login" @click="toLogin">{{ lang.hadRegister }}></span>
         </div>
 
-        <div class="line-box input-line">
-          <div v-show="showCodeMessage" class="message">
-            {{ lang.inputUnder }} {{ info.email }} {{ lang.theEmailCode }}
+        <!-- <div class="oauth">
+          <div class="line-box">
+            <button class="full-btn facebook" @click="oauthLogin('facebook')">
+              <img src="/facebook.svg" class="btn-icon" />
+              <span class="btn-message">{{ lang.facebook }}</span>
+            </button>
           </div>
-          <div style="position: relative;">
+          <div class="line-box">
+            <button class="full-btn google" @click="oauthLogin('google')">
+              <img src="/google.svg" class="btn-icon" />
+              <span class="btn-message">{{ lang.google }}&nbsp;&nbsp;&nbsp;</span>
+            </button>
+          </div>
+        </div> -->
+
+        <div class="info">
+          <div class="title">{{ lang.RegisterTitle }}</div>
+          <!-- 名称 -->
+          <div class="line-box input-line">
             <bdd-input
-              v-model="info.code"
-              :placeholder="`*${lang.code}`"
-              :padding="'0 30% 0 3%'"
-              @blur="inputKey('code')"
+              v-model="info.name"
+              :placeholder="`${lang.name}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('name')"
             ></bdd-input>
-            <div class="send-code">
-              <send-email-code
-                :email="info.email"
-                @send="sendCode"
-              ></send-email-code>
+            <!-- <div
+              :class="[
+                'error-message',
+                { active: hadInput('name') && !info.name }
+              ]"
+            >
+              {{ lang.nameError }}
+            </div> -->
+          </div>
+          <!-- 姓氏 -->
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.surname"
+              :placeholder="`${lang.surname}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('surname')"
+            ></bdd-input>
+            <!-- <div
+              :class="[
+                'error-message',
+                { active: hadInput('surname') && !info.surname }
+              ]"
+            >
+              {{ lang.surnameError }}
+            </div> -->
+          </div>
+          <!-- 手机号 -->
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.mobile"
+              :placeholder="`${lang.mobile}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('mobile')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('mobile') && !trueMobile }
+              ]"
+            >
+              {{ lang.emailError }}
             </div>
           </div>
-          <div
-            :class="[
-              'error-message',
-              { active: hadInput('code') && !trueCode }
-            ]"
-          >
-            {{ lang.codeError }}
+          <!-- 验证码 -->
+          <div class="line-box input-line">
+            <div v-show="showCodeMessage" class="message">
+              {{ lang.inputUnder }} {{ info.mobile }} {{ lang.theMobileCode }}
+            </div>
+            <div style="position: relative;">
+              <bdd-input
+                v-model="info.code"
+                :placeholder="`${lang.code}`"
+                :padding="'0 30% 0 3%'"
+                @blur="inputKey('code')"
+              ></bdd-input>
+              <div class="send-code">
+                <!-- <send-email-code
+                  :email="info.email"
+                  @send="sendCode"
+                ></send-email-code> -->
+                <button :class="['getCode', className]" :disabled="waiting" @click="sendMbileCode">
+                  {{ waitingText }}
+                </button>
+              </div>
+            </div>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('code') && !trueCode }
+              ]"
+            >
+              {{ lang.codeError }}
+            </div>
+          </div>
+          <!-- 设置密码 -->
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.password"
+              :type="'password'"
+              :placeholder="`${lang.password}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('password')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('password') && !truePassword }
+              ]"
+            >
+              {{ lang.passwordError }}
+            </div>
+          </div>
+          <!-- 确认密码 -->
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.password_repetition"
+              :type="'password'"
+              :placeholder="`${lang.repassword}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('repassword')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('repassword') && !trueRepassword }
+              ]"
+            >
+              {{ lang.repasswordError }}
+            </div>
           </div>
         </div>
 
-        <div class="line-box input-line">
-          <bdd-input
-            v-model="info.password"
-            :type="'password'"
-            :placeholder="`*${lang.password}`"
-            :padding="'0 3% 0 3%'"
-            @blur="inputKey('password')"
-          ></bdd-input>
-          <div
-            :class="[
-              'error-message',
-              { active: hadInput('password') && !truePassword }
-            ]"
-          >
-            {{ lang.passwordError }}
+        <div class="protocol">
+          <span class="checked-box" @click="agreeIt">
+            <i :class="['iconfont', 'icongou', { agree: agree }]"></i>
+          </span>
+          <div class="protocol-info">
+            {{ lang.agree }}
+            <nuxt-link to="/help-pages/clause">{{ lang.bddClause }}</nuxt-link>
           </div>
         </div>
-      </div>
 
-      <div class="protocol">
-        <span class="checked-box" @click="agreeIt">
-          <i :class="['iconfont', 'icongou', { agree: agree }]"></i>
-        </span>
-        <div class="protocol-info">
-          {{ lang.agree }}
-          <nuxt-link to="/help-pages/clause">{{ lang.bddClause }}</nuxt-link>
+        <div class="line-box">
+          <button class="full-btn to-register" @click="registerCN">
+            <span class="btn-message">{{ lang.register }}</span>
+          </button>
         </div>
-      </div>
+      </section>
+    </div>
+    <!-- 繁体中文 -->
+    <div v-else>
+      <section class="page-content">
+        <div class="title-bar">
+          <span class="title" style="opacity: 0">{{ lang.oauthRegister }}</span>
+          <span class="login" @click="toLogin">{{ lang.hadRegister }}></span>
+        </div>
 
-      <div class="line-box">
-        <button class="full-btn to-register" @click="register">
-          <span class="btn-message">{{ lang.register }}</span>
-        </button>
-      </div>
-    </section>
+        <div class="oauth">
+          <div class="line-box">
+            <button class="full-btn facebook" @click="oauthLogin('facebook')">
+              <img src="/facebook.svg" class="btn-icon" />
+              <span class="btn-message">{{ lang.facebook }}</span>
+            </button>
+          </div>
+          <div class="line-box">
+            <button class="full-btn google" @click="oauthLogin('google')">
+              <img src="/google.svg" class="btn-icon" />
+              <span class="btn-message">{{ lang.google }}&nbsp;&nbsp;&nbsp;</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="info">
+          <div class="title">{{ lang.inputInfo }}</div>
+
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.name"
+              :placeholder="`*${lang.name}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('name')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('name') && !info.name }
+              ]"
+            >
+              {{ lang.nameError }}
+            </div>
+          </div>
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.surname"
+              :placeholder="`*${lang.surname}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('surname')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('surname') && !info.surname }
+              ]"
+            >
+              {{ lang.surnameError }}
+            </div>
+          </div>
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.email"
+              :placeholder="`*${lang.email}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('email')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('email') && !trueEmail }
+              ]"
+            >
+              {{ lang.emailError }}
+            </div>
+          </div>
+
+          <div class="line-box input-line">
+            <div v-show="showCodeMessage" class="message">
+              {{ lang.inputUnder }} {{ info.email }} {{ lang.theEmailCode }}
+            </div>
+            <div style="position: relative;">
+              <bdd-input
+                v-model="info.code"
+                :placeholder="`*${lang.code}`"
+                :padding="'0 30% 0 3%'"
+                @blur="inputKey('code')"
+              ></bdd-input>
+              <div class="send-code">
+                <!-- <send-email-code
+                  :email="info.email"
+                  @send="sendCode"
+                ></send-email-code> -->
+                <button :class="['getCode', className]" :disabled="waiting" @click="sendEmailCode">
+                  {{ waitingText }}
+                </button>
+              </div>
+            </div>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('code') && !trueCode }
+              ]"
+            >
+              {{ lang.codeError }}
+            </div>
+          </div>
+
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.password"
+              :type="'password'"
+              :placeholder="`*${lang.password}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('password')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('password') && !truePassword }
+              ]"
+            >
+              {{ lang.passwordError }}
+            </div>
+          </div>
+
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.repassword"
+              :type="'password'"
+              :placeholder="`*${lang.repassword}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('repassword')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('repassword') && !trueRepassword }
+              ]"
+            >
+              {{ lang.repasswordError }}
+            </div>
+          </div>
+        </div>
+
+        <div class="protocol">
+          <span class="checked-box" @click="agreeIt">
+            <i :class="['iconfont', 'icongou', { agree: agree }]"></i>
+          </span>
+          <div class="protocol-info">
+            {{ lang.agree }}
+            <nuxt-link to="/help-pages/clause">{{ lang.bddClause }}</nuxt-link>
+          </div>
+        </div>
+
+        <div class="line-box">
+          <button class="full-btn to-register" @click="register">
+            <span class="btn-message">{{ lang.register }}</span>
+          </button>
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
 <script>
 import Input from '@/mixins/input.js'
+const defaultTime = 60
 export default {
   middleware: 'replaceWhenTokenCanUse',
   layout: 'no-bar',
   mixins: [Input],
-  props: {},
+  props: {
+    className: {
+      type: Array,
+      required: false,
+      default() {
+        return []
+      }
+    },
+    type: {
+      type: String,
+      required: false,
+      default: 'send',
+      validator(value) {
+        return ['send', 'reset'].indexOf(value) !== -1
+      }
+    }
+  },
   data() {
     return {
       lang: this.LANGUAGE.register,
+      langcode:this.LANGUAGE.components.sendEmailCode,
       info: {
         email: '',
+        mobile:'',
         password: '',
+        password_repetition: '',
         surname: '', // 姓氏
         name: '', // 名
         code: ''
       },
       hadSendCode: false,
-      agree: true
+      agree: true,
+      language:'',
+      waiting: false,
+      waitingTime: defaultTime,
+      waitingText: this.LANGUAGE.components.sendEmailCode.sendCode
     }
   },
   computed: {
-    trueName() {
-      return this.info.name
-    },
-    trueSurname() {
-      return this.info.surname
-    },
+    // trueName() {
+    //   return this.info.name
+    // },
+    // trueSurname() {
+    //   return this.info.surname
+    // },
     trueEmail() {
       return this.$helpers && this.$helpers.trueEmail(this.info.email)
+    },
+    trueMobile() {
+      return this.info.mobile && (/^1[3456789]\d{9}$/.test(this.info.mobile))
     },
     trueCode() {
       return ['', null].indexOf(this.info.code) === -1
@@ -181,23 +394,168 @@ export default {
     },
     showCodeMessage() {
       return this.hadSendCode && this.hadInput('email') && this.trueEmail
+    },
+    showCodeMessage() {
+      return this.hadSendCode && this.hadInput('mobile') && this.trueMobile
+    },
+    trueRepassword(){
+      return this.info.password_repetition && this.info.password==this.info.password_repetition
     }
   },
   mounted() {
+    this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {})
   },
   methods: {
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     toLogin() {
       this.$router.replace({
         name: 'login'
       })
+    },
+    // 发送手机验证码
+    sendMbileCode(){
+      this.hadSendCode = true
+      const _this = this
+       _this.setWait()
+      this.$axios({
+        method: "post",
+        url: "/site/sms-code",
+        data: {
+          'mobile': _this.info.mobile,
+          'usage': 'register'
+        }
+      })
+        .then(data => {
+          console.log(data)
+          // _this.sendReturn(data)
+        })
+        .catch(err => {
+          _this.resetCountDown()
+          _this.$ConfirmBox({
+            title: _this.lang.error,
+            message: `${err.message}`
+            // message: `${_this.lang.sendCodeError}，${err.message}`
+          })
+        })
+
+    },
+    // 发送邮箱验证码
+    sendEmailCode() {
+      this.hadSendCode = true
+      const _this = this
+      _this.setWait()
+       this.$axios({
+        method: "post",
+        url: '/site/email-code',
+        data:{
+          'email': _this.info.email,
+          'usage': 'register'
+        }
+      })
+       .then(data => {
+          console.log(data)
+          // _this.sendReturn(data)
+        })
+        .catch(err => {
+          _this.resetCountDown()
+          _this.$ConfirmBox({
+            title: _this.lang.error,
+            message: `${err.message}`
+            // message: `${_this.lang.sendCodeError}，${err.message}`
+          })
+        })
+    },
+    // 倒计时
+    countDown() {
+      const _this = this
+      const countDownStart = setInterval(function() {
+        if (_this.waitingTime === 0) {
+          clearInterval(countDownStart)
+          _this.setWait()
+          _this.waitingText = _this.$t(`${langcode}.sendCode`)
+          _this.waitingTime = defaultTime
+        } else {
+          _this.waitingText = `${_this.$t(`${langcode}.hadSend`)}(${
+            _this.waitingTime
+          }s)`
+          _this.waitingTime--
+        }
+      }, 1000)
+    },
+    // 重置倒计时
+    resetCountDown() {
+      this.waitingTime = 0
+    },
+    // 设置为倒计时状态
+    setWait() {
+      if (this.waiting) {
+        this.waiting = false
+      } else {
+        this.waiting = true
+        this.countDown()
+      }
     },
     sendCode() {
       this.hadSendCode = true
     },
     agreeIt() {
       this.agree = !this.agree
+    },
+    registerCN() {
+      const _this = this
+      // if (!_this.trueName) {
+      //   _this.$toast(_this.lang.inputName)
+      //   return
+      // }
+      // if (!_this.trueSurname) {
+      //   _this.$toast(_this.lang.inputSurname)
+      //   return
+      // }
+      if (!_this.trueMobile) {
+        _this.$toast(_this.lang.emailError)
+        return
+      }
+      if (!_this.trueCode) {
+        _this.$toast(_this.lang.inputCode)
+        return
+      }
+      if (!_this.truePassword) {
+        _this.$toast(_this.lang.passwordError)
+        return
+      }
+      if (!_this.agree) {
+        _this.$toast(_this.lang.tickTheBDDTerms)
+        return
+      }
+
+      _this
+        .$axios({
+          method: 'post',
+          url: `/site/mobile-register`,
+          data: this.info
+        })
+        .then(data => {
+          _this.$toast.show(_this.lang.registerSuccess)
+          setTimeout(() => {
+            _this.$router.push({
+              name: 'login-email'
+            })
+          }, 2000)
+        })
+        .catch(err => {
+          _this.$toast.show(err.message)
+        })
     },
     register() {
       const _this = this
@@ -229,10 +587,11 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/wap/user/signup`,
-          params: this.info
+          url: `/site/email-register`,
+          data: this.info
         })
-        .then(data => {
+        .then(res => {
+          console.log("11111",res)
           _this.$toast.show(_this.lang.registerSuccess)
           setTimeout(() => {
             _this.$router.push({
@@ -270,6 +629,22 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.getCode {
+  width: 90px;
+  height: 32px;
+
+  text-align: center;
+  background: rgba(125, 174, 120, 1);
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+}
+
+.getCode:disabled {
+  background-color: #999999;
+}
 .operate-bar {
   padding: 21px 20px 0 20px;
   height: 17px;

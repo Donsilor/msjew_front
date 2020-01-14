@@ -3,7 +3,7 @@
     <div class="comments-title title-with-back">
       {{ lang.allComments }}({{ totalCount }})
       <div class="go-back-btn" @click="goBack($router)">
-        <span>< {{ lang.back }}</span>
+        <span> {{ lang.back }}</span>
       </div>
     </div>
     <div class="comments-stars">

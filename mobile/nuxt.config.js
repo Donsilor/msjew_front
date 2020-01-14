@@ -133,17 +133,17 @@ module.exports = {
     // prefix: '/api',
     // proxy: true
   },
-  proxy: [
-    [
-      '/api',
-      {
-        target: serverUrl[RUNNING_ENV],
-        changeOrigin: true,
-        ogLevel: 'debug',
-        pathRewrite: { '^/api/': '/' }
-      }
-    ]
-  ],
+  // proxy: [
+  //   [
+  //     '/api/web',
+  //     {
+  //       target: serverUrl[RUNNING_ENV],
+  //       changeOrigin: true,
+  //       ogLevel: 'debug',
+  //       pathRewrite: { '^/api/web/': '/' }
+  //     }
+  //   ]
+  // ],
   router: {
     middleware: ['setBasic', 'setToken', 'pcToWap'],
     scrollBehavior: function(to, from, savedPosition) {

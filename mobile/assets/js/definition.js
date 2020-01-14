@@ -671,6 +671,11 @@ export default language => {
         code: 'en_US',
         content: 'English',
         shortCut: 'En'
+      },
+      {
+        code: 'zh_CN',
+        content: '中文简体',
+        shortCut: '简'
       }
     ],
 

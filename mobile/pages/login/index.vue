@@ -1,44 +1,90 @@
 <template>
-  <section>
-    <div class="title-bar">
-      <span class="title">
-        {{ lang['login'] }}
-      </span>
-      <span class="register" @click="toRegister">
-        {{ lang['no-account'] }}
-      </span>
-    </div>
-    <div class="line-box">
-      <button class="full-btn email" @click="toEmailLogin">
-        <img src="/email.svg" class="btn-icon" />
-        <span class="btn-message">
-          {{ lang['email-login'] }}
+<div>
+  <div v-if="language === 'zh_CN'">
+    <section>
+      <div class="title-bar">
+        <span class="title">
+          {{ lang['login'] }}
         </span>
-      </button>
-    </div>
+        <span class="register" @click="toRegister">
+          {{ lang['no-account'] }}
+        </span>
+      </div>
+      <div class="line-box">
+        <button class="full-btn phone" @click="toEmailLogin">
+          <img src="/email.svg" class="btn-icon" />
+          <span class="btn-message">
+            {{ lang['email-login'] }}
+          </span>
+        </button>
+      </div>
 
-    <!--    <div class="tip">-->
-    <!--      <span class="tip-message">-->
-    <!--        {{ lang['oauth-login'] }}-->
-    <!--      </span>-->
-    <!--    </div>-->
-    <div class="line-box">
-      <button class="full-btn facebook" @click="oauthLogin('facebook')">
-        <img src="/facebook.svg" class="btn-icon" />
-        <span class="btn-message">
-          {{ lang['facebook-login'] }}
+      <!--    <div class="tip">-->
+      <!--      <span class="tip-message">-->
+      <!--        {{ lang['oauth-login'] }}-->
+      <!--      </span>-->
+      <!--    </div>-->
+      <div class="line-box">
+        <button class="full-btn facebook" @click="oauthLogin('facebook')">
+          <img src="/facebook.svg" class="btn-icon" />
+          <span class="btn-message">
+            {{ lang['facebook-login'] }}
+          </span>
+        </button>
+      </div>
+      <div class="line-box">
+        <button class="full-btn google" @click="oauthLogin('google')">
+          <img src="/google.svg" class="btn-icon" />
+          <span class="btn-message">
+            {{ lang['google-login'] }}&nbsp;&nbsp;&nbsp;
+          </span>
+        </button>
+      </div>
+    </section>
+  </div>
+  <div v-else>
+    <section>
+      <div class="title-bar">
+        <span class="title">
+          {{ lang['login'] }}
         </span>
-      </button>
-    </div>
-    <div class="line-box">
-      <button class="full-btn google" @click="oauthLogin('google')">
-        <img src="/google.svg" class="btn-icon" />
-        <span class="btn-message">
-          {{ lang['google-login'] }}&nbsp;&nbsp;&nbsp;
+        <span class="register" @click="toRegister">
+          {{ lang['no-account'] }}
         </span>
-      </button>
-    </div>
-  </section>
+      </div>
+      <div class="line-box">
+        <button class="full-btn email" @click="toEmailLogin">
+          <img src="/email.svg" class="btn-icon" />
+          <span class="btn-message">
+            {{ lang['email-login'] }}
+          </span>
+        </button>
+      </div>
+
+      <!--    <div class="tip">-->
+      <!--      <span class="tip-message">-->
+      <!--        {{ lang['oauth-login'] }}-->
+      <!--      </span>-->
+      <!--    </div>-->
+      <div class="line-box">
+        <button class="full-btn facebook" @click="oauthLogin('facebook')">
+          <img src="/facebook.svg" class="btn-icon" />
+          <span class="btn-message">
+            {{ lang['facebook-login'] }}
+          </span>
+        </button>
+      </div>
+      <div class="line-box">
+        <button class="full-btn google" @click="oauthLogin('google')">
+          <img src="/google.svg" class="btn-icon" />
+          <span class="btn-message">
+            {{ lang['google-login'] }}&nbsp;&nbsp;&nbsp;
+          </span>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>
 </template>
 
 <script>
@@ -46,10 +92,24 @@ export default {
   layout: 'login',
   data() {
     return {
-      lang: this.LANGUAGE.login.index
+      lang: this.LANGUAGE.login.index,
+      language:''
     }
   },
+  mounted(){
+    this.language = this.getCookie('language')
+  },
   methods: {
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     toRegister() {
       this.$router.push({
         name: 'register'
@@ -112,6 +172,15 @@ export default {
 .full-btn.email img {
   width: 18px;
   margin-right: 10px;
+}
+.full-btn.phone {
+  font-size: 18px;
+  color: #ffffff;
+  background-color: #f29b87;
+}
+.full-btn.phone img {
+  width: 18px;
+  margin-right: 20px;
 }
 .full-btn.facebook {
   font-size: 14px;
