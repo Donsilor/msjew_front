@@ -55,8 +55,8 @@ export default {
           url: `/wap/collection/list`,
           params: {
             type: 1,
-            currPage: 1,
-            pageSize: 1000
+            page: 1,
+            page_size: 1000
           }
         })
         .then(res => {
@@ -148,7 +148,7 @@ export default {
           })
         } else if (obj.simpleGoodsEntity.categoryId === 2) {
           console.log('是个戒指💍')
-          if (obj.simpleGoodsEntity.baseConfig[0].configAttrId === 59) {
+          if (obj.simpleGoodsEntity.specs[0].configAttrId === 59) {
             console.log('还是个結婚戒指💍')
             this.$router.push({
               name: 'marriage-ring-single-ring-detail',
@@ -156,7 +156,7 @@ export default {
                 goodId: obj.goodsId
               }
             })
-          } else if (obj.simpleGoodsEntity.baseConfig[0].configAttrId === 60) {
+          } else if (obj.simpleGoodsEntity.specs[0].configAttrId === 60) {
             console.log('还是个訂婚戒指💍')
             this.$router.push({
               name: 'engagement-engagement-rings',

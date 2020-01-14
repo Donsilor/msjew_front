@@ -29,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    this.categoryId = 2
+    this.categoryId = 12
     this.madeUpEv()
   },
   methods: {

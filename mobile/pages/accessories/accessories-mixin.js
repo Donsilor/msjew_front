@@ -6,9 +6,9 @@ export default {
       required: false,
       default() {
         return {
-          baseConfig: [],
+          specs: [],
           carveStatus: 0,
-          categoryId: 2,
+          categoryId: 1,
           coinType: '',
           colletion: 0,
           customStatus: 0,
@@ -25,14 +25,14 @@ export default {
           goodsServicesJson: {},
           goodsStatus: null,
           htmlUrl: '',
-          materialsConfig: [{ id: 0 }],
+          materials: [{ id: 0 }],
           metaDesc: '',
           metaTitle: '',
           metaWord: '',
           qrCode: '',
           salePrice: 0,
-          simpleGoodsDetailsList: [],
-          sizesConfig: [{ content: '1' }],
+          details: [],
+          sizes: [{ content: '1' }],
           totalStock: 0
         }
       }
@@ -63,7 +63,7 @@ export default {
         commentsLevel: ``,
         showStatus: 1
       },
-      totalCount: 0
+      total_count: 0
     }
   },
   created() {},
@@ -80,13 +80,13 @@ export default {
   mounted() {
     console.log(this.goodInfo)
     this.conditions[0].checked = [
-      this.goodInfo.materialsConfig.length > 0
-        ? this.goodInfo.materialsConfig[0].id
+      this.goodInfo.materials.length > 0
+        ? this.goodInfo.materials[0].id
         : ``
     ]
-    this.conditions[0].options = this.goodInfo.materialsConfig
-    this.chooseSize = this.goodInfo.sizesConfig
-      ? this.goodInfo.sizesConfig[0].content
+    this.conditions[0].options = this.goodInfo.materials
+    this.chooseSize = this.goodInfo.sizes
+      ? this.goodInfo.sizes[0].content
       : ``
     this.showPi = this.goodInfo.salePrice
     this.iAmShowMaker()
@@ -106,16 +106,16 @@ export default {
       .get(`/wap/goodsComments/getGoodsComments`, {
         params: {
           goodsId: this.$route.query.goodId,
-          currPage: 1,
-          pageSize: 99999,
+          page: 1,
+          page_size: 99999,
           shouType: 1
         }
       })
       .then(res => {
-        if (!res.totalCount || !res.list || !(res.list.length > 0)) {
+        if (!res.total_count || !res.list || !(res.list.length > 0)) {
           return
         }
-        this.totalCount = res.totalCount || 0
+        this.total_count = res.total_count || 0
         res.list[0].createTime = Moment(res.list[0].createTime).format(
           'YYYY.MM.DD'
         )
@@ -159,8 +159,8 @@ export default {
       this.iAmShowMaker()
     },
     iAmShowMaker() {
-      const bullShit = this.goodInfo.simpleGoodsDetailsList
-      if (this.goodInfo.sizesConfig) {
+      const bullShit = this.goodInfo.details
+      if (this.goodInfo.sizes) {
         if (this.chooseSizeId === ``) {
           this.showPi = this.goodInfo.salePrice
         } else {
@@ -193,7 +193,7 @@ export default {
       if (!(this.canAddCart && this.inSale)) {
         return
       }
-      if (!this.sendDetailsId && this.goodInfo.sizesConfig) {
+      if (!this.sendDetailsId && this.goodInfo.sizes) {
         this.$toast(this.lang.specificationToast)
         return
       }
@@ -244,7 +244,7 @@ export default {
       if (!(this.canAddCart && this.inSale)) {
         return
       }
-      if (!this.sendDetailsId && this.goodInfo.sizesConfig) {
+      if (!this.sendDetailsId && this.goodInfo.sizes) {
         this.$toast(this.lang.specificationToast)
         return
       }

@@ -811,8 +811,8 @@ export default {
       url: `/wap/collection/list`,
       params: {
         type: 1,
-        currPage: 1,
-        pageSize: 9999
+        page: 1,
+        page_size: 9999
       }
     })
       .then(data => {
@@ -1249,8 +1249,8 @@ export default {
       url: `/wap/collection/list`,
       params: {
         type: 2,
-        currPage: 1,
-        pageSize: 9999
+        page: 1,
+        page_size: 9999
       }
     })
       .then(data => {

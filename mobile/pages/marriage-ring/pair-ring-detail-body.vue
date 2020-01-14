@@ -150,9 +150,9 @@
           {{ firstRing.userSexText }}
         </div>
         <div class="sku-table">
-          <div v-for="(b, index) in firstRing.baseConfig" :key="index">
-            <span>{{ b.configVal }}</span>
-            <span>{{ b.configAttrIVal }}</span>
+          <div v-for="(b, index) in firstRing.specs" :key="index">
+            <span>{{ b.configName }}</span>
+            <span>{{ b.configAttrVal }}</span>
           </div>
         </div>
       </div>
@@ -161,9 +161,9 @@
           {{ secondRing.userSexText }}
         </div>
         <div class="sku-table">
-          <div v-for="(b, index) in secondRing.baseConfig" :key="index">
-            <span>{{ b.configVal }}</span>
-            <span>{{ b.configAttrIVal }}</span>
+          <div v-for="(b, index) in secondRing.specs" :key="index">
+            <span>{{ b.configName }}</span>
+            <span>{{ b.configAttrVal }}</span>
           </div>
         </div>
       </div>
@@ -171,7 +171,7 @@
     </div>
     <div class="comment">
       <div class="comment-title">
-        {{ lang.clientSay }} <span>({{ totalCount }})</span>
+        {{ lang.clientSay }} <span>({{ total_count }})</span>
       </div>
       <div class="comment-stars">
         <i
@@ -186,7 +186,7 @@
         ></i>
         <span>{{ starNum.toFixed(1) }}</span>
       </div>
-      <template v-if="totalCount > 0">
+      <template v-if="total_count > 0">
         <div class="comment-box">
           <div class="client-user">{{ showEmail(comments.userAccount) }}</div>
           <div class="time-and-stars">
@@ -227,7 +227,7 @@
 
     <swiper-tap
       ref="first-ring-suitability"
-      :list="firstRing.sizesConfig"
+      :list="firstRing.sizes"
       @clear="firstRingClearSize"
     ></swiper-tap>
     <choose-eject
@@ -241,7 +241,7 @@
 
     <swiper-tap
       ref="second-ring-suitability"
-      :list="secondRing.sizesConfig"
+      :list="secondRing.sizes"
       @clear="secondRingClearSize"
     ></swiper-tap>
     <choose-eject

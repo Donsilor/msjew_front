@@ -23,7 +23,7 @@
         <div class="title">
           <div>
             {{ lang.total }}
-            <span>{{ (pageInfo && pageInfo.totalCount) || 0 }}</span>
+            <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>
             {{ lang.goods }}
           </div>
           <div @click="showSwiperTap">
