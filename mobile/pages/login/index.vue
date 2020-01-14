@@ -22,7 +22,7 @@
     <!--        {{ lang['oauth-login'] }}-->
     <!--      </span>-->
     <!--    </div>-->
-    <div class="line-box">
+    <!-- <div class="line-box">
       <button class="full-btn facebook" @click="oauthLogin('facebook')">
         <img src="/facebook.svg" class="btn-icon" />
         <span class="btn-message">
@@ -37,7 +37,7 @@
           {{ lang['google-login'] }}&nbsp;&nbsp;&nbsp;
         </span>
       </button>
-    </div>
+    </div> -->
   </section>
 </template>
 

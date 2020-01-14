@@ -145,7 +145,7 @@
           : lang.notInSale
       }}</span>
     </div>
-    <div class="wish-and-share">
+    <!-- <div class="wish-and-share">
       <i
         :class="[
           'iconfont',
@@ -167,7 +167,7 @@
       />
       <div />
       <i class="iconfont iconfb" @click="$shareFacelook()" />
-    </div>
+    </div> -->
     <div class="ring-details">
       <div class="details-title">
         {{ lang.goodsDetail }}

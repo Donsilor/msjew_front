@@ -99,7 +99,7 @@
           : lang.notInSale
       }}
     </div>
-    <div class="wish-and-share">
+    <!-- <div class="wish-and-share">
       <i
         :class="[
           'iconfont',
@@ -111,7 +111,7 @@
       />
       <div />
       <i class="iconfont iconfb" @click="$shareFacelook()" />
-    </div>
+    </div> -->
     <div class="ring-details">
       <div class="details-title">
         {{ lang.goodsDetail }}
@@ -127,7 +127,7 @@
       </div>
       <div class="desc-content" v-html="goodInfo.goodsDesc"></div>
     </div>
-    <div class="comment">
+    <!-- <div class="comment">
       <div class="comment-title">
         {{ lang.clientSay }} <span>({{ totalCount }})</span>
       </div>
@@ -180,7 +180,7 @@
           {{ lang.noComments }}
         </div>
       </template>
-    </div>
+    </div> -->
     <footer-bar></footer-bar>
 
     <swiper-tap

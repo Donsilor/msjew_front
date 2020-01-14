@@ -124,7 +124,7 @@
           : lang.notInSale
       }}</span>
     </div>
-    <div class="wish-and-share">
+    <!-- <div class="wish-and-share">
       <i
         :class="[
           'iconfont',
@@ -207,7 +207,7 @@
           {{ lang.noComments }}
         </div>
       </template>
-    </div>
+    </div> -->
     <swiper-tap
       ref="suitability"
       :list="goodInfo.sizesConfig"
