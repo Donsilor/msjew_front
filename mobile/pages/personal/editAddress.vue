@@ -293,11 +293,12 @@ export default {
       language:''
     }
   },
-  computed:{
-   
-  },
+  // beforeMount(){
+
+  // },
   created() {
     this.getinfo()
+
     this.getListOne()
     this.getArealist()
   },
@@ -383,13 +384,6 @@ export default {
         this.arealist[val.index].content +
         ' ' +
         this.arealist[val.index].phone_code
-      // if(_this.language === 'zh_CN'){
-      //   this.arealist[val.index].phone_code='+85'
-      //   this.area =
-      //   this.arealist[val.index].content +
-      //   ' ' +
-      //   this.arealist[val.index].phone_code
-      // }
     },
     // 登录状态下修改地址信息回填
     getinfo() {
@@ -451,11 +445,6 @@ export default {
             }
             _this.countryList.push(o)
           }
-          // if(_this.language === 'zh_CN'){
-          //   _this.country="中国"
-          //   this.getListTwo()
-          //   this.getListThree()
-          // }
           _this.countryList.unshift({ id: '', content: this.lang.pleaseChoose })
           console.log("国家",_this.countryList)
           this.getListTwo()

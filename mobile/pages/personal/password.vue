@@ -103,10 +103,11 @@ export default {
         _this
           .$axios({
             method: 'post',
-            url: `/wap/myAccount/updateUserPassword`,
-            params: {
-              oldPassword: this.password1,
-              newPassword: this.password2
+            url: `/web/member/member/up-pwd`,
+            data: {
+              original_password:this.password1,
+              password: this.password2,
+              password_repetition: this.password3
             }
           })
           .then(res => {
