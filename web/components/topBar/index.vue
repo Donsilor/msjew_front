@@ -214,9 +214,9 @@
                 >
                   <i class="iconfont icongerenzhongxin"></i>
                 </nuxt-link>
-                <nuxt-link :to="{ path: '/account/wish-list' }">
+                <!-- <nuxt-link :to="{ path: '/account/wish-list' }">
                   <i class="iconfont icongerenzhongxin_xinyuandan"></i>
-                </nuxt-link>
+                </nuxt-link> -->
                 <nuxt-link :to="{ path: '/shopping-cart' }">
                   <i class="iconfont icongouwuche"></i>
                 </nuxt-link>
@@ -1358,7 +1358,8 @@ export default {
             .icon-group {
               display: flex;
               flex-direction: row;
-              justify-content: space-between;
+              justify-content: space-around;
+              // justify-content: space-between;
               width: 120px;
 
               .iconfont {
