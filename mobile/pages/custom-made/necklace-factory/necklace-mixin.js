@@ -20,9 +20,9 @@ export default {
       sendGoodsId: null,
       sendDetailsId: null,
       goodInfo: {
-        baseConfig: [],
+        specs: [],
         carveStatus: 0,
-        categoryId: 2,
+        categoryId: 4,
         coinType: '',
         colletion: 0,
         customStatus: 0,
@@ -39,14 +39,14 @@ export default {
         goodsServicesJson: {},
         goodsStatus: null,
         htmlUrl: '',
-        materialsConfig: [],
+        materials: [],
         metaDesc: '',
         metaTitle: '',
         metaWord: '',
         qrCode: '',
         salePrice: 0,
-        simpleGoodsDetailsList: [],
-        sizesConfig: [],
+        details: [],
+        sizes: [],
         totalStock: 0
       },
       starNum: 5,
@@ -57,7 +57,7 @@ export default {
         commentsLevel: `5`,
         showStatus: 1
       },
-      totalCount: 0
+      total_count: 0
     }
   },
   computed: {
@@ -88,22 +88,22 @@ export default {
       })
         .then(res => {
           const mcArr = []
-          for (const i in res.materialsConfig) {
+          for (const i in res.materials) {
             const o = {
-              id: res.materialsConfig[i].configAttrId,
-              name: res.materialsConfig[i].configAttrIVal,
-              image: this.$IMG_URL + res.materialsConfig[i].configAttrImg
+              id: res.materials[i].id,
+              name: res.materials[i].name,
+              image: this.$IMG_URL + res.materials[i].configAttrImg
             }
             mcArr.push(o)
           }
-          res.materialsConfig = mcArr
-          if (res.sizesConfig) {
+          res.materials = mcArr
+          if (res.sizes) {
             const stArr = []
-            for (const i in res.sizesConfig) {
+            for (const i in res.sizes) {
               const o = {
-                content: res.sizesConfig[i].configAttrIVal,
-                sortType: res.sizesConfig[i].configAttrId,
-                sortBy: res.sizesConfig[i].configAttrId
+                content: res.sizes[i].name,
+                sortType: res.sizes[i].id,
+                sortBy: res.sizes[i].id
               }
               stArr.push(o)
             }
@@ -112,13 +112,13 @@ export default {
               sortType: ``,
               sortBy: ``
             })
-            res.sizesConfig = stArr
+            res.sizes = stArr
           }
           res.goodsDesc = res.goodsDesc.includes(`<script>`)
             ? ''
             : res.goodsDesc
           this.goodInfo = res
-          this.conditions[0].options = this.goodInfo.materialsConfig
+          this.conditions[0].options = this.goodInfo.materials
           if (this.$route.query.isBack) {
             const melo = JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
@@ -127,27 +127,27 @@ export default {
               melo.steps[0].ct === 1
                 ? melo.steps[1].goodsDetailsId
                 : melo.steps[0].goodsDetailsId
-            for (let i = 0; i < res.simpleGoodsDetailsList.length; i++) {
-              if (res.simpleGoodsDetailsList[i].id === thatId) {
-                this.showPi = res.simpleGoodsDetailsList[i].retailMallPrice
-                if (res.sizesConfig) {
-                  for (let j = 0; j < res.sizesConfig.length; j++) {
+            for (let i = 0; i < res.details.length; i++) {
+              if (res.details[i].id === thatId) {
+                this.showPi = res.details[i].retailMallPrice
+                if (res.sizes) {
+                  for (let j = 0; j < res.sizes.length; j++) {
                     if (
-                      res.sizesConfig[j].sortBy ===
-                      res.simpleGoodsDetailsList[i].size
+                      res.sizes[j].sortBy ===
+                      res.details[i].size
                     ) {
-                      this.chooseSize = res.sizesConfig[j].content
-                      this.chooseSizeId = res.sizesConfig[j].sortBy
+                      this.chooseSize = res.sizes[j].content
+                      this.chooseSizeId = res.sizes[j].sortBy
                       this.sizeLine = j
                     }
                   }
                 }
-                for (let j = 0; j < res.materialsConfig.length; j++) {
+                for (let j = 0; j < res.materials.length; j++) {
                   if (
-                    res.materialsConfig[j].id ===
-                    res.simpleGoodsDetailsList[i].material
+                    res.materials[j].id ===
+                    res.details[i].material
                   ) {
-                    this.conditions[0].checked = [res.materialsConfig[j].id]
+                    this.conditions[0].checked = [res.materials[j].id]
                   }
                 }
               }
@@ -155,10 +155,10 @@ export default {
           } else {
             this.showPi = this.goodInfo.salePrice
             this.conditions[0].checked = [
-              this.goodInfo.materialsConfig[0].id || ''
+              this.goodInfo.materials[0].id || ''
             ]
-            if (res.sizesConfig) {
-              this.chooseSize = this.goodInfo.sizesConfig[0].content
+            if (res.sizes) {
+              this.chooseSize = this.goodInfo.sizes[0].content
             }
           }
           this.iAmShowMaker()
@@ -182,16 +182,16 @@ export default {
         .get(`/wap/goodsComments/getGoodsComments`, {
           params: {
             goodsId: this.$route.query.goodId,
-            currPage: 1,
-            pageSize: 99999,
+            page: 1,
+            page_size: 99999,
             shouType: 1
           }
         })
         .then(res => {
-          if (!res.totalCount || !res.list || !(res.list.length > 0)) {
+          if (!res.total_count || !res.list || !(res.list.length > 0)) {
             return
           }
-          this.totalCount = res.totalCount || 0
+          this.total_count = res.total_count || 0
           res.list[0].createTime = Moment(res.list[0].createTime).format(
             'YYYY.MM.DD'
           )
@@ -236,8 +236,8 @@ export default {
       this.iAmShowMaker()
     },
     iAmShowMaker() {
-      const bullShit = this.goodInfo.simpleGoodsDetailsList
-      if (this.goodInfo.sizesConfig) {
+      const bullShit = this.goodInfo.details
+      if (this.goodInfo.sizes) {
         if (this.chooseSizeId === ``) {
           this.showPi = this.goodInfo.salePrice
         } else {
@@ -271,7 +271,7 @@ export default {
         return
       }
       if (!this.sendGoodsId || !this.sendDetailsId) {
-        if (this.goodInfo.sizesConfig) {
+        if (this.goodInfo.sizes) {
           this.$toast(this.lang.chooseRingSizeToast)
           return
         }

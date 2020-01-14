@@ -13,23 +13,23 @@
             {{ info1.goodsName }}
           </div>
           <div class="content-desc">SKU：{{ info1.goodsCode }}</div>
-          <div v-for="(c, index) in info1.simpleGoodsDetailsList" :key="index">
+          <div v-for="(c, index) in info1.details" :key="index">
             <div v-if="parseInt(c.id) === parseInt(infoCheck)">
               <div
-                v-for="m in info1.materialsConfig"
+                v-for="m in info1.materials"
                 v-show="parseInt(m.configAttrId) === parseInt(c.material)"
                 :key="m.configAttrId"
                 class="content-desc"
               >
-                {{ lang.fineness }}：{{ m.configAttrIVal }}
+                {{ lang.fineness }}：{{ m.configAttrVal }}
               </div>
               <div
-                v-for="s in info1.sizesConfig"
+                v-for="s in info1.sizes"
                 v-show="parseInt(s.configAttrId) === parseInt(c.size)"
                 :key="s.configAttrId"
                 class="content-desc"
               >
-                {{ lang.size }}：{{ s.configAttrIVal }}
+                {{ lang.size }}：{{ s.configAttrVal }}
               </div>
               <div class="content-price">
                 {{ c.coinType }} {{ formatNumber(c.retailMallPrice) }}
@@ -47,36 +47,36 @@
             {{ info2.goodsName }}
           </div>
           <div class="content-desc">SKU：{{ info2.goodsCode }}</div>
-          <div v-for="d in info2.baseConfig" :key="d.configId">
+          <div v-for="d in info2.specs" :key="d.configId">
             <div v-if="parseInt(d.configId) === 31" class="content-desc">
-              {{ lang.carat }}：{{ d.configAttrIVal }}
+              {{ lang.carat }}：{{ d.configAttrVal }}
             </div>
             <div v-if="parseInt(d.configId) === 34" class="content-desc">
-              {{ lang.color }}：{{ d.configAttrIVal }}
+              {{ lang.color }}：{{ d.configAttrVal }}
             </div>
             <div v-if="parseInt(d.configId) === 33" class="content-desc">
-              {{ lang.cut }}：{{ d.configAttrIVal }}
+              {{ lang.cut }}：{{ d.configAttrVal }}
             </div>
             <div v-if="parseInt(d.configId) === 35" class="content-desc">
-              {{ lang.clarity }}：{{ d.configAttrIVal }}
+              {{ lang.clarity }}：{{ d.configAttrVal }}
             </div>
           </div>
           <div class="content-price">
-            {{ info2.simpleGoodsDetailsList[0].coinType }}
-            {{ formatNumber(info2.simpleGoodsDetailsList[0].retailMallPrice) }}
+            {{ info2.details[0].coinType }}
+            {{ formatNumber(info2.details[0].retailMallPrice) }}
           </div>
         </div>
       </div>
     </div>
     <div class="add-cart-btn" @click="addCart">
       <span>{{ lang.addCart }} </span>
-      <div v-for="(c, index) in info1.simpleGoodsDetailsList" :key="index">
+      <div v-for="(c, index) in info1.details" :key="index">
         <span v-if="parseInt(c.id) === parseInt(infoCheck)" class="price-add">
           {{ c.coinType }}
           {{
             formatNumber(
               c.retailMallPrice +
-                info2.simpleGoodsDetailsList[0].retailMallPrice
+                info2.details[0].retailMallPrice
             )
           }}
         </span>
@@ -111,7 +111,7 @@ export default {
       lock: false,
       info1: {},
       info2: {
-        simpleGoodsDetailsList: [
+        details: [
           {
             coinType: `HKD`,
             retailMallPrice: 0

@@ -296,13 +296,13 @@ export default {
             const gdi = JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
             ).steps[0].goodsDetailsId
-            for (const i in res.simpleGoodsDetailsList) {
-              if (gdi === res.simpleGoodsDetailsList[i].id) {
+            for (const i in res.details) {
+              if (gdi === res.details[i].id) {
                 const o = {
                   url: `${this.$IMG_URL}${res.goodsImages.split(',')[0]}`,
                   title: `${res.goodsName}`,
                   price: `${res.coinType} ${
-                    res.simpleGoodsDetailsList[i].retailMallPrice
+                    res.details[i].retailMallPrice
                   }`,
                   step: 1
                 }
@@ -331,13 +331,13 @@ export default {
             const gdi = JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
             ).steps[0].goodsDetailsId
-            for (const i in res.simpleGoodsDetailsList) {
-              if (gdi === res.simpleGoodsDetailsList[i].id) {
+            for (const i in res.details) {
+              if (gdi === res.details[i].id) {
                 const o = {
                   url: `${this.$IMG_URL}${res.goodsImages.split(',')[0]}`,
                   title: `${res.goodsName}`,
                   price: `${res.coinType} ${
-                    res.simpleGoodsDetailsList[i].retailMallPrice
+                    res.details[i].retailMallPrice
                   }`,
                   step: 1
                 }
@@ -361,13 +361,13 @@ export default {
             const gdi = JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
             ).steps[1].goodsDetailsId
-            for (const i in res.simpleGoodsDetailsList) {
-              if (gdi === res.simpleGoodsDetailsList[i].id) {
+            for (const i in res.details) {
+              if (gdi === res.details[i].id) {
                 const o = {
                   url: `${this.$IMG_URL}${res.goodsImages.split(',')[0]}`,
                   title: `${res.goodsName}`,
                   price: `${res.coinType} ${
-                    res.simpleGoodsDetailsList[i].retailMallPrice
+                    res.details[i].retailMallPrice
                   }`,
                   step: 2
                 }

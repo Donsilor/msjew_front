@@ -228,7 +228,7 @@ export default {
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        returnUrl:'http://localhost:8318/complete-payment?orderId='+this.$route.query.orderId
+        returnUrl:'https://www2.bddco.com/complete-payment?orderId='+this.$route.query.orderId
       }
       this.goingPay = true
       this.$axios

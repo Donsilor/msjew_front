@@ -273,10 +273,12 @@ export default {
       const ad = JSON.parse(
         JSON.stringify(this.ad && this.ad[0] ? this.ad[0] : [])
       )
+     
 
       let result = []
       if (ad.advertImgModelList && ad.advertImgModelList.length > 0) {
         result = ad.advertImgModelList
+         
         for (let n = 0, length = result.length; n < length; n++) {
           result[n].openType = ad.tdOpenType
           result[n].image = this.completionImageStr(result[n].image)
@@ -289,6 +291,7 @@ export default {
           url: ''
         })
       }
+      
       return result
     },
     cardsInfo() {
@@ -302,26 +305,26 @@ export default {
       let result = []
       const cardInfo = this.cardsInfo
       const data = cardInfo.moduleGoods || []
-
-      for (let n = 0, length = data.length; n < length; n++) {
-        result = result.concat(data[n].goods ? data[n].goods : [])
-        result = result.concat(data[n].ring ? data[n].ring : [])
-      }
-
-      for (let n = 0, length = result.length; n < length; n++) {
-        const keys = Object.keys(result[n].configAttriEntity)
-        let configAttriEntity = []
-        if (keys.length > 0) {
-          keys.map(item => {
-            configAttriEntity = configAttriEntity.concat(
-              result[n].configAttriEntity[item]
-            )
-          })
-        }
-        result[n].showType = cardInfo.showType
-        result[n].configAttriEntity = configAttriEntity
-      }
-      return result
+      return data ;
+      
+      // for (let n = 0, length = data.length; n < length; n++) {
+      //   result = result.concat(data[n].goods ? data[n].goods : [])
+      //   result = result.concat(data[n].ring ? data[n].ring : [])
+      // }
+      // for (let n = 0, length = result.length; n < length; n++) {
+      //   const keys = Object.keys(result[n].configAttriEntity)
+      //   let configAttriEntity = []
+      //   if (keys.length > 0) {
+      //     keys.map(item => {
+      //       configAttriEntity = configAttriEntity.concat(
+      //         result[n].configAttriEntity[item]
+      //       )
+      //     })
+      //   }
+      //   result[n].showType = cardInfo.showType
+      //   result[n].configAttriEntity = configAttriEntity
+      // }
+      // return result
     }
   },
   async asyncData({ $axios, route, store, app }) {
@@ -329,12 +332,12 @@ export default {
 
     return $axios({
       method: 'get',
-      url: '/wap/Website/queryWebsiteModuleWap',
+      url: '/wap/home/index/web-site',
       params: {
         type: 1
       }
     })
-      .then(data => {
+      .then(data => {     
         return {
           seoInfo,
           ad: data.advert,
@@ -360,7 +363,7 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: '/wap/Website/queryWebsiteModuleWap',
+          url: '/wap/home/index/web-site',
           params: {
             type: 1
           }

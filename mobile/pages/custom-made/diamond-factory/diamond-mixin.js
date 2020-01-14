@@ -14,9 +14,9 @@ export default {
       sendDetailsId: null,
       addWay: false,
       goodInfo: {
-        baseConfig: [],
+        specs: [],
         carveStatus: 0,
-        categoryId: 2,
+        categoryId: 3,
         coinType: '',
         colletion: 0,
         customStatus: 0,
@@ -33,14 +33,14 @@ export default {
         goodsServicesJson: {},
         goodsStatus: null,
         htmlUrl: '',
-        materialsConfig: [],
+        materials: [],
         metaDesc: '',
         metaTitle: '',
         metaWord: '',
         qrCode: '',
         salePrice: 0,
-        simpleGoodsDetailsList: [],
-        sizesConfig: [],
+        details: [],
+        sizes: [],
         totalStock: 0
       },
       is360: false,
@@ -90,19 +90,19 @@ export default {
         .then(res => {
           console.log(res)
           const mcArr = []
-          for (const i in res.materialsConfig) {
+          for (const i in res.materials) {
             const o = {
-              id: res.materialsConfig[i].configAttrId,
-              name: res.materialsConfig[i].configAttrIVal,
-              image: this.$IMG_URL + res.materialsConfig[i].configAttrImg
+              id: res.materials[i].id,
+              name: res.materials[i].name,
+              image: this.$IMG_URL + res.materials[i].configAttrImg
             }
             mcArr.push(o)
             const stArr = []
-            for (const i in res.sizesConfig) {
+            for (const i in res.sizes) {
               const o = {
-                content: res.sizesConfig[i].configAttrIVal,
-                sortType: res.sizesConfig[i].configAttrId,
-                sortBy: res.sizesConfig[i].configAttrId
+                content: res.sizes[i].name,
+                sortType: res.sizes[i].id,
+                sortBy: res.sizes[i].id
               }
               stArr.push(o)
             }
@@ -111,20 +111,20 @@ export default {
               sortType: ``,
               sortBy: ``
             })
-            res.sizesConfig = stArr
-            res.materialsConfig = mcArr
+            res.sizes = stArr
+            res.materials = mcArr
             res.goodsDesc = res.goodsDesc.includes(`<script>`)
               ? ''
               : res.goodsDesc
           }
           this.goodInfo = res
           this.showPi = this.goodInfo.salePrice
-          for (let i = 0; i < this.goodInfo.baseConfig.length; i++) {
-            if (this.goodInfo.baseConfig[i].configId === 33) {
-              this.force.cut = this.goodInfo.baseConfig[i].configAttrId
-            } else if (this.goodInfo.baseConfig[i].configId === 31) {
+          for (let i = 0; i < this.goodInfo.specs.length; i++) {
+            if (this.goodInfo.specs[i].configId === 33) {
+              this.force.cut = this.goodInfo.specs[i].configAttrId
+            } else if (this.goodInfo.specs[i].configId === 31) {
               this.force.carat = parseFloat(
-                this.goodInfo.baseConfig[i].configAttrIVal
+                this.goodInfo.specs[i].configAttrVal
               )
               if (this.force.carat < 2 && this.force.carat > 1) {
                 this.caratLeft = (this.force.carat - 1) * 50 + 50
@@ -137,14 +137,14 @@ export default {
               } else if (this.force.carat === 1) {
                 this.caratLeft = 50
               }
-            } else if (this.goodInfo.baseConfig[i].configId === 34) {
-              this.force.color = this.goodInfo.baseConfig[i].configAttrId
-            } else if (this.goodInfo.baseConfig[i].configId === 35) {
-              this.force.clarity = this.goodInfo.baseConfig[i].configAttrId
+            } else if (this.goodInfo.specs[i].configId === 34) {
+              this.force.color = this.goodInfo.specs[i].configAttrId
+            } else if (this.goodInfo.specs[i].configId === 35) {
+              this.force.clarity = this.goodInfo.specs[i].configAttrId
             }
           }
-          this.sendGoodsId = this.goodInfo.simpleGoodsDetailsList[0].goodsId
-          this.sendDetailsId = this.goodInfo.simpleGoodsDetailsList[0].id
+          this.sendGoodsId = this.goodInfo.details[0].goodsId
+          this.sendDetailsId = this.goodInfo.details[0].id
           if (this.goodInfo.goods3ds) {
             this.is360 = true
             this.has360 = true
@@ -154,9 +154,9 @@ export default {
           }
           let gay = false
           let gayNum = ``
-          this.goodInfo.baseConfig.forEach(item => {
+          this.goodInfo.specs.forEach(item => {
             if (item.configId === 191) {
-              gayNum = item.configAttrIVal
+              gayNum = item.configAttrVal
             } else if (item.configId === 192 && item.configAttrId === 442) {
               gay = true
             }

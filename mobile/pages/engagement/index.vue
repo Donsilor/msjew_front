@@ -162,10 +162,11 @@ export default {
     recommends() {
       const recommendInfo = this.recommendInfo
       let result = recommendInfo.moduleGoods || []
-      result = result.map(item => {
-        item = item.goods && item.goods[0] ? item.goods[0] : {}
-        return item
-      })
+      
+      // result = result.map(item => {
+      //   item = item.goods && item.goods[0] ? item.goods[0] : {}
+      //   return item
+      // })
       result = result.map(item => {
         // console.log('item.goodsImages====>', item.goodsImages)
         item.showType = recommendInfo.showType
@@ -204,6 +205,7 @@ export default {
       //   item.showType = designer.showType
       //   return item
       // })
+      
       return result
     }
   },
@@ -212,12 +214,13 @@ export default {
 
     return $axios({
       method: 'get',
-      url: '/wap/Website/queryWebsiteModuleWap',
+      url: '/wap/goods/style/web-site',
       params: {
         type: 2
       }
     })
       .then(data => {
+        console.log(444444,data)
         return {
           seoInfo,
           ad: data.advert,
@@ -240,7 +243,7 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: '/wap/Website/queryWebsiteModuleWap',
+          url: '/wap/goods/style/web-site',
           params: {
             type: 2
           }

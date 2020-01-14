@@ -115,6 +115,7 @@ export default {
     newPasswordFinishCN(data = '') {
       const _this = this
       const info = JSON.parse(JSON.stringify(_this.info))
+      info.code = data.code || ''
       info.password = data.password || ''
       info.password_repetition = data.password_repetition || ''
       _this.info = info
@@ -131,8 +132,8 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/site/mobile-up-pwd`,
-          params: info
+          url: `/web/site/mobile-up-pwd`,
+          data: info
         })
         .then(data => {
           console.log(data)
@@ -170,7 +171,7 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/site/email-up-pwd`,
+          url: `/web/site/email-up-pwd`,
           data:info
         })
         .then(res => {

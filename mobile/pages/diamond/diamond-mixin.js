@@ -5,9 +5,9 @@ export default {
       required: false,
       default() {
         return {
-          baseConfig: [],
+          specs: [],
           carveStatus: 0,
-          categoryId: 2,
+          categoryId: 7,
           diamondCompare: 0,
           coinType: '',
           colletion: 0,
@@ -25,14 +25,14 @@ export default {
           goodsServicesJson: {},
           goodsStatus: null,
           htmlUrl: '',
-          materialsConfig: [],
+          materials: [],
           metaDesc: '',
           metaTitle: '',
           metaWord: '',
           qrCode: '',
           salePrice: 0,
-          simpleGoodsDetailsList: [],
-          sizesConfig: [],
+          details: [],
+          sizes: [],
           totalStock: 0
         }
       }
@@ -80,12 +80,12 @@ export default {
   },
   mounted() {
     console.log(this.goodInfo)
-    for (let i = 0; i < this.goodInfo.baseConfig.length; i++) {
-      if (this.goodInfo.baseConfig[i].configId === 33) {
-        this.force.cut = this.goodInfo.baseConfig[i].configAttrId
-      } else if (this.goodInfo.baseConfig[i].configId === 31) {
+    for (let i = 0; i < this.goodInfo.specs.length; i++) {
+      if (this.goodInfo.specs[i].configId === 33) {
+        this.force.cut = this.goodInfo.specs[i].configAttrId
+      } else if (this.goodInfo.specs[i].configId === 31) {
         this.force.carat = parseFloat(
-          this.goodInfo.baseConfig[i].configAttrIVal
+          this.goodInfo.specs[i].configAttrVal
         )
         if (this.force.carat < 2 && this.force.carat > 1) {
           this.caratLeft = (this.force.carat - 1) * 50 + 50
@@ -98,10 +98,10 @@ export default {
         } else if (this.force.carat === 1) {
           this.caratLeft = 50
         }
-      } else if (this.goodInfo.baseConfig[i].configId === 34) {
-        this.force.color = this.goodInfo.baseConfig[i].configAttrId
-      } else if (this.goodInfo.baseConfig[i].configId === 35) {
-        this.force.clarity = this.goodInfo.baseConfig[i].configAttrId
+      } else if (this.goodInfo.specs[i].configId === 34) {
+        this.force.color = this.goodInfo.specs[i].configAttrId
+      } else if (this.goodInfo.specs[i].configId === 35) {
+        this.force.clarity = this.goodInfo.specs[i].configAttrId
       }
     }
     console.log(this.force)
@@ -117,7 +117,7 @@ export default {
   },
   methods: {
     iAmShowMaker() {
-      const bullShit = this.goodInfo.simpleGoodsDetailsList
+      const bullShit = this.goodInfo.details
       this.showPi = bullShit[0].retailMallPrice
       this.sendGoodsId = bullShit[0].goodsId
       this.sendDetailsId = bullShit[0].id
