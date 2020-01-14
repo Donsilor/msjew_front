@@ -390,12 +390,12 @@ export default {
           return result
         })(),
         materials: product.materials || [],
-        // sizes: product.sizes || [],
-        sizes:(() =>{
-            const sizes = product.sizes || []
-            sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
-            return sizes;
-        })(),
+        sizes: product.sizes || [],
+        // sizes:(() =>{
+        //     const sizes = product.sizes || []
+        //     sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+        //     return sizes;
+        // })(),
         specs: product.specs || [],
         details: product.details || [],
         goodsServicesJsons: (product.goodsServicesJsons || []).map(item => {
