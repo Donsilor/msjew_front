@@ -25,6 +25,7 @@ import Swiper from '@/components/swiper'
 import SwiperTap from '@/components/swiper-tap'
 import SliderVerify from '@/components/slider-verify'
 import SendEmailCode from '@/components/send-email-code'
+import pictureVerificationCode from '@/components/picture-verification-code'
 import TopBar from '@/components/top-bar'
 import FooterBar from '@/components/footer-bar'
 import ScrollBox from '@/components/scroll-box'
@@ -44,6 +45,7 @@ Vue.use(Swiper)
 
 Vue.use(SliderVerify)
 Vue.use(SendEmailCode)
+Vue.use(pictureVerificationCode)
 Vue.use(TopBar)
 Vue.use(FooterBar)
 

@@ -176,9 +176,9 @@
         {{ lang.goods }}ID：{{ goodInfo.goodsCode }}
       </div>
       <div class="sku-table">
-        <div v-for="(b, index) in goodInfo.baseConfig" :key="index">
-          <span>{{ b.configVal }}</span>
-          <span>{{ b.configAttrIVal }}</span>
+        <div v-for="(b, index) in goodInfo.specs" :key="index">
+          <span>{{ b.configName }}</span>
+          <span>{{ b.configAttrVal }}</span>
         </div>
       </div>
     </div>

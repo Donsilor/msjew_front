@@ -88,7 +88,7 @@
                 {{ $t(`${lang}.cancelOrder`) }}
               </button></a
             >
-            <nuxt-link :to="goToPay(o.id, o.coinCode, o.orderAmount)"
+            <nuxt-link :to="goToPay(o.id, o.coinCode, o.orderAmount, o.paymentType)"
               ><div v-if="o.payChannel !== 1" class="btn-a">
                 {{ $t(`${lang}.toPay`) }}
               </div>
@@ -316,7 +316,7 @@ export default {
         })
         .then(res => {
           if(res.code != 200){
-            return 
+            return
           }
           console.log("我的订单列表",res.data.data)
           this.list = {
@@ -356,7 +356,7 @@ export default {
               this.list.ordered.push(o)
               console.log("777777",o)
             } else if (res.data.data[i].orderStatus == 20||res.data.data[i].orderStatus == 30) {
-              
+
               //  给了钱没发货
               this.list.paid.push(o)
             } else if (res.data.data[i].orderStatus == 40) {
@@ -409,7 +409,7 @@ export default {
         })
         .then(res => {
           if(res.code != 200){
-            return 
+            return
           }
           // console.log("订单列表====",res.data)
           for (const i in res.data.data) {
@@ -516,13 +516,14 @@ export default {
           }
         })
     },
-    goToPay(j, k, v) {
+    goToPay(j, k, v, p) {
       const route = {
         path: '/payment-options',
         query: {
           coinType: k,
           orderId: j,
-          price: v
+          price: v,
+          payType: p
         }
       }
       return this.routeDataToUrl(route)
@@ -541,7 +542,7 @@ export default {
       if (obj.groupType === 1) {
         // console.log(`对戒💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.id.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.groupId.replace(/\//g, '')}`,
           query: {
             goodId: obj.groupId,
             ringType: 'pair'
@@ -554,7 +555,7 @@ export default {
         if (ct === '15') {
           // console.log(`💎`)
           route = {
-            path: `/diamond-details/${obj.id.replace(/\//g, '')}`,
+            path: `/diamond-details/${obj.goodsId.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId
             }
@@ -562,7 +563,7 @@ export default {
         } else if (ct === '2' ||ct === '13' || ct === '14') { //戒指
           // console.log(`💍`)
           route = {
-            path: `/ring/wedding-rings/${obj.id.replace(/\//g, '')}`,
+            path: `/ring/wedding-rings/${obj.goodsId.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId,
               ringType: 'single'
@@ -571,7 +572,7 @@ export default {
         }else if (ct === '12') { //戒托
           // console.log(`💍`)
           route = {
-            path: `/ring/engagement-rings/${obj.id.replace(/\//g, '')}`,
+            path: `/ring/engagement-rings/${obj.goodsId.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId,
               ringType: 'single'
@@ -580,7 +581,7 @@ export default {
         } else {
           // console.log(`饰品`)
           route = {
-            path: `/jewellery/all/${obj.id.replace(/\//g, '')}`,
+            path: `/jewellery/all/${obj.goodsId.replace(/\//g, '')}`,
             query: {
               goodId: obj.goodsId
             }

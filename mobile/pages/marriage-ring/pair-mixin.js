@@ -55,7 +55,7 @@ export default {
         commentsLevel: ``,
         showStatus: 1
       },
-      totalCount: 0
+      total_count: 0
     }
   },
   computed: {
@@ -85,10 +85,10 @@ export default {
         carveStatus: '',
         goodsServices: '',
         goodsServicesJsons: [],
-        baseConfig: [],
-        materialsConfig: [],
-        sizesConfig: [],
-        simpleGoodsDetailsList: []
+        specs: [],
+        materials: [],
+        sizes: [],
+        details: []
       }
     },
     ringBanners() {
@@ -126,21 +126,21 @@ export default {
     },
     firstRingPrize() {
       let result = 0
-      const simpleGoodsDetailsList = this.firstRing.simpleGoodsDetailsList
-      for (let n = 0, length = simpleGoodsDetailsList.length; n < length; n++) {
+      const details = this.firstRing.details
+      for (let n = 0, length = details.length; n < length; n++) {
         if (
           this.firstRingQuality.checked.indexOf(
-            simpleGoodsDetailsList[n].material
+            details[n].material
           ) > -1 &&
-          simpleGoodsDetailsList[n].size === this.firstRingSize.id
+          details[n].size === this.firstRingSize.id
         ) {
-          result = simpleGoodsDetailsList[n].retailMallPrice
+          result = details[n].retailMallPrice
           break
         }
       }
       if (!result) {
-        result = simpleGoodsDetailsList[0]
-          ? simpleGoodsDetailsList[0].retailMallPrice
+        result = details[0]
+          ? details[0].retailMallPrice
           : 0
       }
       console.log('firstRingPrize=====>', result)
@@ -148,21 +148,21 @@ export default {
     },
     secondRingPrize() {
       let result = 0
-      const simpleGoodsDetailsList = this.secondRing.simpleGoodsDetailsList
-      for (let n = 0, length = simpleGoodsDetailsList.length; n < length; n++) {
+      const details = this.secondRing.details
+      for (let n = 0, length = details.length; n < length; n++) {
         if (
           this.secondRingQuality.checked.indexOf(
-            simpleGoodsDetailsList[n].material
+            details[n].material
           ) > -1 &&
-          simpleGoodsDetailsList[n].size === this.secondRingSize.id
+          details[n].size === this.secondRingSize.id
         ) {
-          result = simpleGoodsDetailsList[n].retailMallPrice
+          result = details[n].retailMallPrice
           break
         }
       }
       if (!result) {
-        result = simpleGoodsDetailsList[0]
-          ? simpleGoodsDetailsList[0].retailMallPrice
+        result = details[0]
+          ? details[0].retailMallPrice
           : 0
       }
       console.log('secondRingPrize=====>', result)
@@ -234,7 +234,7 @@ export default {
       return this.secondRingSize.text || this.lang.stArrContent
     },
     firstRingSimpleDetail() {
-      const list = this.firstRing.simpleGoodsDetailsList
+      const list = this.firstRing.details
       let result = null
 
       console.log(
@@ -257,7 +257,7 @@ export default {
       return result
     },
     secondRingSimpleDetail() {
-      const list = this.secondRing.simpleGoodsDetailsList
+      const list = this.secondRing.details
       let result = null
 
       for (let n = 0, length = list.length; n < length; n++) {
@@ -280,24 +280,24 @@ export default {
   },
   created() {
     this.firstRingSize = {
-      id: this.firstRing.sizesConfig[0].sortType,
-      text: this.firstRing.sizesConfig[0].content
+      id: this.firstRing.sizes[0].sortType,
+      text: this.firstRing.sizes[0].content
     }
     this.firstRingQuality = {
-      checked: this.firstRing.materialsConfig[0].id
-        ? [this.firstRing.materialsConfig[0].id]
+      checked: this.firstRing.materials[0].id
+        ? [this.firstRing.materials[0].id]
         : [],
-      options: this.firstRing.materialsConfig
+      options: this.firstRing.materials
     }
     this.secondRingSize = {
-      id: this.secondRing.sizesConfig[0].sortType,
-      text: this.secondRing.sizesConfig[0].content
+      id: this.secondRing.sizes[0].sortType,
+      text: this.secondRing.sizes[0].content
     }
     this.secondRingQuality = {
-      checked: this.secondRing.materialsConfig[0].id
-        ? [this.secondRing.materialsConfig[0].id]
+      checked: this.secondRing.materials[0].id
+        ? [this.secondRing.materials[0].id]
         : [],
-      options: this.secondRing.materialsConfig
+      options: this.secondRing.materials
     }
   },
   mounted() {
@@ -317,16 +317,16 @@ export default {
       .get(`/wap/goodsComments/getGoodsComments`, {
         params: {
           groupId: this.$route.query.ringId,
-          currPage: 1,
-          pageSize: 99999,
+          page: 1,
+          page_size: 99999,
           shouType: 1
         }
       })
       .then(res => {
-        if (!res.totalCount || !res.list || !(res.list.length > 0)) {
+        if (!res.total_count || !res.list || !(res.list.length > 0)) {
           return
         }
-        this.totalCount = res.totalCount || 0
+        this.total_count = res.total_count || 0
         res.list[0].createTime = Moment(res.list[0].createTime).format(
           'YYYY.MM.DD'
         )
@@ -344,20 +344,20 @@ export default {
       }
 
       const mcArr = []
-      for (const i in goodInfo.materialsConfig) {
+      for (const i in goodInfo.materials) {
         const o = {
-          id: goodInfo.materialsConfig[i].configAttrId,
-          name: goodInfo.materialsConfig[i].configAttrIVal,
-          image: this.$IMG_URL + goodInfo.materialsConfig[i].configAttrImg || ''
+          id: goodInfo.materials[i].id,
+          name: goodInfo.materials[i].name,
+          image: this.$IMG_URL + goodInfo.materials[i].configAttrImg || ''
         }
         mcArr.push(o)
       }
       const stArr = []
-      for (const i in goodInfo.sizesConfig) {
+      for (const i in goodInfo.sizes) {
         const o = {
-          content: goodInfo.sizesConfig[i].configAttrIVal,
-          sortType: goodInfo.sizesConfig[i].configAttrId,
-          sortBy: goodInfo.sizesConfig[i].configAttrId
+          content: goodInfo.sizes[i].name,
+          sortType: goodInfo.sizes[i].id,
+          sortBy: goodInfo.sizes[i].id
         }
         stArr.push(o)
       }
@@ -366,13 +366,13 @@ export default {
         sortType: ``,
         sortBy: ``
       })
-      goodInfo.sizesConfig = stArr
-      goodInfo.materialsConfig = mcArr
+      goodInfo.sizes = stArr
+      goodInfo.materials = mcArr
       goodInfo.goodsDesc = goodInfo.goodsDesc.includes(`<script>`)
         ? ''
         : goodInfo.goodsDesc
 
-      const baseConfig = goodInfo.baseConfig
+      const specs = goodInfo.specs
       const sexMap = {
         462: {
           type: 0,
@@ -387,9 +387,9 @@ export default {
           text: this.lang.general
         }
       }
-      for (let n = 0, length = baseConfig.length; n < length; n++) {
-        if (baseConfig[n].configId === 196) {
-          const sex = sexMap[baseConfig[n].configAttrId]
+      for (let n = 0, length = specs.length; n < length; n++) {
+        if (specs[n].configId === 196) {
+          const sex = sexMap[specs[n].configAttrId]
           goodInfo.userSex = sex.type
           goodInfo.userSexText = sex.text
           break
@@ -443,7 +443,7 @@ export default {
       this.secondRingQuality = secondRingQuality
     },
     iAmShowMaker() {
-      const bullShit = this.goodInfo.simpleGoodsDetailsList
+      const bullShit = this.goodInfo.details
       if (this.chooseSizeId === ``) {
         this.showPi = this.goodInfo.salePrice
       } else {

@@ -136,7 +136,7 @@
       />
       <div />
       <i class="iconfont iconfb" @click="$shareFacelook()" />
-    </div>
+    </div> -->
     <div class="ring-details">
       <div class="details-title">
         {{ lang.goodsDetail }}
@@ -145,16 +145,16 @@
         {{ lang.goods }}ID：{{ goodInfo.goodsCode }}
       </div>
       <div class="sku-table">
-        <div v-for="(b, index) in goodInfo.baseConfig" :key="index">
-          <span>{{ b.configVal }}</span>
-          <span>{{ b.configAttrIVal }}</span>
+        <div v-for="(b, index) in goodInfo.specs" :key="index">
+          <span>{{ b.configName }}</span>
+          <span>{{ b.configAttrVal }}</span>
         </div>
       </div>
       <div class="desc-content" v-html="goodInfo.goodsDesc"></div>
     </div>
-    <div class="comment">
+    <!-- <div class="comment">
       <div class="comment-title">
-        {{ lang.clientSay }} <span>({{ totalCount }})</span>
+        {{ lang.clientSay }} <span>({{ total_count }})</span>
       </div>
       <div class="comment-stars">
         <i
@@ -169,7 +169,7 @@
         ></i>
         <span>{{ starNum.toFixed(1) }}</span>
       </div>
-      <template v-if="totalCount > 0">
+      <template v-if="total_count > 0">
         <div class="comment-box">
           <div class="client-user">
             {{ showEmail(comments.userAccount) }}
@@ -210,7 +210,7 @@
     </div> -->
     <swiper-tap
       ref="suitability"
-      :list="goodInfo.sizesConfig"
+      :list="goodInfo.sizes"
       :choose-line="sizeLine"
       @clear="getSortBy"
     ></swiper-tap>
@@ -232,7 +232,7 @@ export default {
   mixins: [Mx],
   computed: {
     canAddCart() {
-      const body = this.goodInfo.simpleGoodsDetailsList
+      const body = this.goodInfo.details
       if (this.goodInfo.totalStock > 0) {
         for (const i in body) {
           if (parseInt(this.sendDetailsId) === body[i].id) {

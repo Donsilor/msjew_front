@@ -18,11 +18,11 @@ export function formatMoney1(number, places, symbol, thousand, decimal) {
 /**
  *	分页对象
  */
-export function Page(curPage, pageSize, totalCount) {
+export function Page(curPage, page_size, total_count) {
 	this.curPage = curPage; //当前页
-	this.pageSize = pageSize; //每页数据量
-	this.totalCount = totalCount; //总数量
-	this.pageNum = Math.ceil(totalCount / pageSize); //总页数
+	this.page_size = page_size; //每页数据量
+	this.total_count = total_count; //总数量
+	this.pageNum = Math.ceil(total_count / page_size); //总页数
 	this.isFirst = curPage === 1; //是否第一页
 	this.isLast = curPage === this.pageNum || this.pageNum === 0; //是否最后一页
 	this.nextPage = !this.isLast; //是否有下一页

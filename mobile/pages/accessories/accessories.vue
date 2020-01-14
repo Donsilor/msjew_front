@@ -60,22 +60,22 @@ export default {
         // }
         if (!infos) return { data: {} }
         const mcArr = []
-        for (const i in infos.materialsConfig) {
+        for (const i in infos.materials) {
           const o = {
-            id: infos.materialsConfig[i].configAttrId,
-            name: infos.materialsConfig[i].configAttrIVal,
-            image: app.$IMG_URL + infos.materialsConfig[i].configAttrImg
+            id: infos.materials[i].id,
+            name: infos.materials[i].name,
+            image: app.$IMG_URL + infos.materials[i].configAttrImg
           }
           mcArr.push(o)
         }
-        infos.materialsConfig = mcArr
-        if (res.sizesConfig) {
+        infos.materials = mcArr
+        if (res.sizes) {
           const stArr = []
-          for (const i in res.sizesConfig) {
+          for (const i in res.sizes) {
             const o = {
-              content: res.sizesConfig[i].configAttrIVal,
-              sortType: res.sizesConfig[i].configAttrId,
-              sortBy: res.sizesConfig[i].configAttrId
+              content: res.sizes[i].name,
+              sortType: res.sizes[i].id,
+              sortBy: res.sizes[i].id
             }
             stArr.push(o)
           }
@@ -84,7 +84,7 @@ export default {
             sortType: ``,
             sortBy: ``
           })
-          res.sizesConfig = stArr
+          res.sizes = stArr
         }
         infos.goodsDesc = infos.goodsDesc.includes(`<script>`)
           ? ''

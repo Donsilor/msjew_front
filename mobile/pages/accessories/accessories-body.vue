@@ -150,7 +150,7 @@
           ]"
         ></i>
         <span>{{ starNum.toFixed(1) }}</span>
-      </div> -->
+        </div> -->
       <!-- <template v-if="totalCount > 0">
         <div class="comment-box">
           <div class="client-user">

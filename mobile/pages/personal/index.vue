@@ -2,8 +2,8 @@
   <div class="personal">
     <div class="top" @click="toAccount('personal-account')">
       <img :src="headImg" />
-      <p>{{ date.name }} {{ date.surname }}</p>
-      <p>{{ replacepos(date.email, 2, 4, '***') }}</p>
+      <p>{{ date.lastname }} {{ date.firstname }}</p>
+      <p>{{ replacepos(date.username, 2, 4, '***') }}</p>
       <i
         class="icon iconfont icongerenzhongxin-_xiugai font-size-18 color-999 margin-bottom-10"
       ></i>
@@ -120,10 +120,11 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/user/me`
+          url: `/web/member/member/me`
         })
         .then(res => {
-          this.date = res
+          console.log("eeee",res)
+          this.date = res.data
           if (this.date === 1) {
             this.headImg = require('~/static/personal/men.png')
           } else if (this.date === 2) {

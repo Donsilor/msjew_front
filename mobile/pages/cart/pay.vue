@@ -148,10 +148,11 @@ export default {
       }
       this.$axios({
         method: 'post',
-        url: `/wap/pay/toPay`,
-        params: {
+        url: `/web/pay/create`,
+        data: {
           orderId: this.info.orderId,
-          payChannel: pay
+          payChannel: pay,
+          returnUrl:'https://www2.bddco.com/complete-payment?orderId='+this.info.orderId
         }
       })
         .then(res => {

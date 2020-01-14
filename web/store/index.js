@@ -38,7 +38,7 @@ export const state = () => {
     /**
      * 购物车
      */
-    cartAmount: null,
+    cartAmount:0,
     cart: null,
 
     /**

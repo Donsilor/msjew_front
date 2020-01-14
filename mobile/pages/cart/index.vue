@@ -30,7 +30,7 @@
                 <p>SKU：{{ item.sku }}</p>
                 <p class="p">
                   {{
-                    getconfig(item.config, item.simpleGoodsEntity.baseConfig)
+                    getconfig(item.config, item.simpleGoodsEntity.specs)
                   }}
                 </p>
                 <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
@@ -51,7 +51,7 @@
                     {{
                       getconfig(
                         list[index + 1].config,
-                        list[index + 1].simpleGoodsEntity.baseConfig
+                        list[index + 1].simpleGoodsEntity.specs
                       )
                     }}
                   </p>
@@ -236,8 +236,8 @@ export default {
         })
         // 价格汇总
         if (this.list[i].isSelect) {
-          console.log(i, 'iiii')
-          newPrice = newPrice + this.list[i].salePrice
+          // console.log(i, 'iiii')
+          newPrice = newPrice + parseFloat(this.list[i].salePrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
             this.sumNum = this.sumNum + 1
@@ -253,6 +253,7 @@ export default {
         }
       }
       this.sumPrice = newPrice
+      // console.log("价格",this.sumPrice)
     },
     // 删除商品
     remove(item, index) {
@@ -298,9 +299,9 @@ export default {
       if (list.length > 0) {
         list.map((item, index) => {
           if (index === list.length - 1) {
-            text = text + item.configAttrIVal
+            text = text + item.configAttrVal
           } else {
-            text = text + item.configAttrIVal + ' /  '
+            text = text + item.configAttrVal + ' /  '
           }
         })
       }
@@ -308,7 +309,7 @@ export default {
         list2.map((item, index) => {
           if (item.configId === 196) {
             console.log(list2, '9999', item)
-            text = text + ' /  ' + item.configAttrIVal
+            text = text + ' /  ' + item.configAttrVal
           }
         })
       }
@@ -376,10 +377,10 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/goodsCart/list`
+          url: `/web/member/cart`
         })
         .then(res => {
-          this.doFormat(res)
+          this.doFormat(res.data)
         })
         .catch(err => {
           console.log('err:', err)
@@ -405,7 +406,7 @@ export default {
               item.groupType === 1
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.detailConfig
                 : item.simpleGoodsEntity.categoryId === 1
-                ? item.simpleGoodsEntity.baseConfig
+                ? item.simpleGoodsEntity.specs
                 : item.simpleGoodsEntity.detailConfig,
             sku:
               item.groupType === 1
@@ -513,7 +514,7 @@ export default {
             }
           })
         } else if (item.simpleGoodsEntity.categoryId === 2) {
-          if (item.simpleGoodsEntity.baseConfig[0].configAttrId === 59) {
+          if (item.simpleGoodsEntity.specs[0].configAttrId === 59) {
             console.log('还是个結婚戒指💍')
             this.$router.push({
               name: 'marriage-ring-single-ring-detail',
@@ -522,7 +523,7 @@ export default {
                 cartId: this.isLogin ? item.id : item.localSn
               }
             })
-          } else if (item.simpleGoodsEntity.baseConfig[0].configAttrId === 60) {
+          } else if (item.simpleGoodsEntity.specs[0].configAttrId === 60) {
             console.log('还是个訂婚戒指💍')
             this.$router.push({
               name: 'engagement-engagement-rings',
