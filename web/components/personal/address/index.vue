@@ -15,7 +15,7 @@
           <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
         </div>
         <div class="addr-user">
-          <div>{{ a.firstname }}{{ a.lastname }}</div>
+          <div>{{ a.realname }}</div>
           <div>{{ $t(`${lang}.get`) }}</div>
         </div>
         <div class="addr-address">
@@ -72,18 +72,19 @@
       <div v-if="language==='zh_CN'">
         <div v-show="isNew && isShow" class="new-addr">
           <div class="new-addr-name">
-            <div>
-              <input
-                v-model="using.firstname"
-                :placeholder="$t(`${lang}.firstName`) + '*'"
-                type="text"
-              />
-            </div>
 
             <div>
               <input
                 v-model="using.lastname"
                 :placeholder="$t(`${lang}.lastName`) + '*'"
+                type="text"
+              />
+            </div>
+
+             <div>
+              <input
+                v-model="using.firstname"
+                :placeholder="$t(`${lang}.firstName`) + '*'"
                 type="text"
               />
             </div>

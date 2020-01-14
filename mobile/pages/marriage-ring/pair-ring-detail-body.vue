@@ -127,7 +127,7 @@
           : lang.notInSale
       }}
     </div>
-    <div class="wish-and-share">
+    <!-- <div class="wish-and-share">
       <i
         :class="[
           'iconfont',
@@ -222,7 +222,7 @@
           {{ lang.noComments }}
         </div>
       </template>
-    </div>
+    </div> -->
     <footer-bar></footer-bar>
 
     <swiper-tap
