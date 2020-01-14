@@ -51,12 +51,12 @@
                 </span>
                  <span v-else-if="language === 'zh_CN'&&userInfo.lastname!==''&&userInfo.firstname!==''" class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
-                  {{ userInfo.lastname }} {{ userInfo.firstname }}
+                  {{ userInfo.realname }}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
                 <span v-else  class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
-                  {{ userInfo.firstname }} {{ userInfo.lastname }}
+                  {{ userInfo.realname}}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
                

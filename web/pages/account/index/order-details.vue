@@ -48,7 +48,7 @@
           $t(`${lang_pay}.waitingPay`)
         }}</span>
         <span v-else-if="data.orderStatus === '20'">{{
-          $t(`${lang_pay}.hadReceive`)
+          $t(`${lang_pay}.hadPay`)
         }}</span>
         <span v-else-if="data.orderStatus === '30'">{{
           $t(`${lang_pay}.waitingSend`)
