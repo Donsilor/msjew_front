@@ -8,7 +8,8 @@ const STATIC_PATH = process.env.STATIC_PATH || ''
 console.log('RUNNING_ENV=====>', RUNNING_ENV)
 
 const serverUrl = {
-  dev: 'https://bddco.leyouwangluo.com/bdd-web',
+  // dev: 'https://bddco.leyouwangluo.com/bdd-web',
+  dev: 'http://www.bddmall.com/api',
   test: 'http://192.168.2.111/bdd-web',
   pre: 'https://www.bddia.com/bdd-web',
   pro: 'https://www.bddco.com/bdd-web'
@@ -124,20 +125,22 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    prefix: '/api',
-    proxy: true
+    prefix: serverUrl[RUNNING_ENV] ,
+    baseURL:serverUrl[RUNNING_ENV] ,
+    // prefix: '/api/web',
+    // proxy: true
   },
-  proxy: [
-    [
-      '/api',
-      {
-        target: serverUrl[RUNNING_ENV],
-        changeOrigin: true,
-        ogLevel: 'debug',
-        pathRewrite: { '^/api/': '/' }
-      }
-    ]
-  ],
+  // proxy: [
+  //   [
+  //     '/api/web',
+  //     {
+  //       target: serverUrl[RUNNING_ENV],
+  //       changeOrigin: true,
+  //       ogLevel: 'debug',
+  //       pathRewrite: { '^/api/web/': '/' }
+  //     }
+  //   ]
+  // ],
   router: {
     middleware: ['setBasic', 'setToken', 'pcToWap'],
     scrollBehavior: function(to, from, savedPosition) {
