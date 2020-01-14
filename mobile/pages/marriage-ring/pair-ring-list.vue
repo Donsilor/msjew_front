@@ -25,7 +25,7 @@
       <div class="title">
         <div>
           {{ lang.total }}
-          <span>{{ (pageInfo && pageInfo.totalCount) || 0 }}</span>
+          <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>
           {{ lang.goods }}
         </div>
         <div @click="showSwiperTap">
@@ -127,7 +127,7 @@ export default {
       this.research()
     },
     // 请求当前页数据
-    getPageInfo(currPage = 1) {
+    getPageInfo(page = 1) {
       const _this = this
       const keyword = _this.keyword
 
@@ -137,7 +137,7 @@ export default {
       }
 
       // 此次请求标识
-      const reqMark = `${currPage}-${keyword}`
+      const reqMark = `${page}-${keyword}`
 
       if (this.isRequesting(reqMark)) {
         console.log('不重复请求')
@@ -151,17 +151,17 @@ export default {
         data: {
           beginPrice: _this.beginPrice,
           endPrice: _this.endPrice,
-          currPage: currPage,
+          page: page,
           materialValue: _this.conditions[1].checked,
           orderParam: _this.sortBy,
           orderType: _this.sortType,
-          pageSize: 10,
+          page_size: 10,
           styleValue: _this.conditions[0].checked,
           userId: null
         }
       }
 
-      console.log(`请求页码为：${currPage}`)
+      console.log(`请求页码为：${page}`)
 
       _this
         .$axios({
@@ -171,13 +171,13 @@ export default {
           params: Object.assign(options.params || {}, _this.specialParams),
           data: options.data || {}
         })
-        .then(data => {
-          if (data.list) {
-            _this.listData[currPage] = JSON.parse(JSON.stringify(data.list))
+        .then(res => {
+          if (res.data) {
+            _this.listData[page] = JSON.parse(JSON.stringify(res.data))
           }
-          // _this.listData[currPage] = JSON.parse(JSON.stringify(data.list || []))
-          delete data.list
-          _this.setPageInfo(data)
+          // _this.listData[page] = JSON.parse(JSON.stringify(res.data || []))
+          delete res.data
+          _this.setPageInfo(res)
           _this.removeRequesting(reqMark)
         })
         .catch(err => {

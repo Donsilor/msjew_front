@@ -627,7 +627,7 @@ export default {
             break
           case 2:
             // 戒指
-            ringRouter(info.data[0].baseConfig[0].configAttrId)
+            ringRouter(info.data[0].specs[0].configAttrId)
             // ringRouter(info.data[0].configAttrId)
             break
           case 3:

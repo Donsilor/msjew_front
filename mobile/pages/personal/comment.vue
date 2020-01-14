@@ -120,7 +120,7 @@ export default {
       lang: this.LANGUAGE.personal.comment,
       listMethod: 'get',
       listUrl: '/wap/myComments/getUserComments',
-      pageSize: 9999,
+      page_size: 9999,
 
       activeComments: []
     }

@@ -16,7 +16,7 @@
                 <p>SKU：{{ item.sku }}</p>
                 <p class="p">
                   {{
-                    getconfig(item.config, item.simpleGoodsEntity.baseConfig)
+                    getconfig(item.config, item.simpleGoodsEntity.specs)
                   }}
                 </p>
                 <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
@@ -37,7 +37,7 @@
                     {{
                       getconfig(
                         list[index + 1].config,
-                        list[index + 1].simpleGoodsEntity.baseConfig
+                        list[index + 1].simpleGoodsEntity.specs
                       )
                     }}
                   </p>
@@ -91,9 +91,9 @@ export default {
       if (list.length > 0) {
         list.map((item, index) => {
           if (index === list.length - 1) {
-            text = text + item.configAttrIVal
+            text = text + item.configAttrVal
           } else {
-            text = text + item.configAttrIVal + ' /  '
+            text = text + item.configAttrVal + ' /  '
           }
         })
       }
@@ -101,7 +101,7 @@ export default {
         list2.map((item, index) => {
           if (item.configId === 196) {
             // console.log(list2, '9999', item)
-            text = text + ' /  ' + item.configAttrIVal
+            text = text + ' /  ' + item.configAttrVal
           }
         })
       }

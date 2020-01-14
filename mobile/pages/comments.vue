@@ -1,7 +1,7 @@
 <template>
   <div class="list-page all-comments">
     <div class="comments-title title-with-back">
-      {{ lang.allComments }}({{ totalCount }})
+      {{ lang.allComments }}({{ total_count }})
       <div class="go-back-btn" @click="goBack($router)">
         <span> {{ lang.back }}</span>
       </div>
@@ -105,9 +105,9 @@ export default {
       }
       return showData
     },
-    totalCount() {
-      return this.pageInfo && this.pageInfo.totalCount
-        ? this.pageInfo.totalCount
+    total_count() {
+      return this.pageInfo && this.pageInfo.total_count
+        ? this.pageInfo.total_count
         : 0
     }
   },

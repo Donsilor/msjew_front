@@ -10,7 +10,7 @@ export default {
       keyword: '', // 搜索关键词
       sortType: this.CONDITION_INFO.sortBy.default[0].sortType, // 排序1:升2:降3:默认不排序
       sortBy: this.CONDITION_INFO.sortBy.default[0].sortBy, // 排序字段->默认销量
-      pageSize: 20,
+      page_size: 20,
 
       canSearchWithoutKeyword: true,
       pageInfo: null,
@@ -22,15 +22,15 @@ export default {
   computed: {
     // 所有已请求的页码的数据集合
     showData() {
-      const totalPage =
-        this.pageInfo && this.pageInfo.totalPage ? this.pageInfo.totalPage : 0
+      const page_count =
+        this.pageInfo && this.pageInfo.page_count ? this.pageInfo.page_count : 0
       const listData = this.listData
       let result = []
 
-      if (!totalPage) {
+      if (!page_count) {
         return result
       }
-      for (let n = 1; n < totalPage + 1; n++) {
+      for (let n = 1; n < page_count + 1; n++) {
         if (!listData.hasOwnProperty(n)) {
           continue
         }
@@ -44,12 +44,12 @@ export default {
     // 是否是最后一页
     noMoreListData() {
       let result = false
-      if (!this.pageInfo || typeof this.pageInfo.totalPage !== 'number') {
+      if (!this.pageInfo || typeof this.pageInfo.page_count !== 'number') {
         result = false
       } else if (
         Object.keys(this.listData).length ===
-          parseInt(this.pageInfo.totalPage) &&
-        this.pageInfo.totalCount > 0
+          parseInt(this.pageInfo.page_count) &&
+        this.pageInfo.total_count > 0
       ) {
         result = true
       }
@@ -59,7 +59,7 @@ export default {
     noListData() {
       return (
         this.pageInfo &&
-        this.pageInfo.totalCount === 0 &&
+        this.pageInfo.total_count === 0 &&
         !this.requestingListData
       )
     },
@@ -79,10 +79,10 @@ export default {
   methods: {
     defaultPageInfo() {
       return {
-        totalCount: 0, // 数据总数量
-        pageSize: 10, // 每页数量
-        totalPage: null, // 最大页码
-        currPage: 0 // 当前页码
+        total_count: 0, // 数据总数量
+        page_size: 10, // 每页数量
+        page_count: null, // 最大页码
+        page: 0 // 当前页码
       }
     },
     setPageInfo(info = {}) {
@@ -133,22 +133,22 @@ export default {
       this.getNextPage()
     },
     getNextPage() {
-      let currPage =
-        this.pageInfo && this.pageInfo.currPage ? this.pageInfo.currPage : 1
-      if (this.pageInfo === null || this.pageInfo.totalPage === null) {
+      let page =
+        this.pageInfo && this.pageInfo.page ? this.pageInfo.page : 1
+      if (this.pageInfo === null || this.pageInfo.page_count === null) {
         // 首次请求
-        currPage = 1
-      } else if (currPage < this.pageInfo.totalPage) {
-        currPage++
+        page = 1
+      } else if (page < this.pageInfo.page_count) {
+        page++
       } else {
         console.log('已到最后一页')
         return
       }
-      console.log('currPage=======>', currPage)
-      this.getPageInfo(currPage)
+      console.log('page=======>', page)
+      this.getPageInfo(page)
     },
     // 请求当前页数据
-    getPageInfo(currPage = 1) {
+    getPageInfo(page = 1) {
       const _this = this
       const keyword = _this.keyword
 
@@ -158,7 +158,7 @@ export default {
       }
 
       // 此次请求标识
-      const reqMark = `${currPage}-${keyword}`
+      const reqMark = `${page}-${keyword}`
 
       if (this.isRequesting(reqMark)) {
         console.log('不重复请求')
@@ -171,14 +171,14 @@ export default {
         }),
         params: {
           keyword: keyword,
-          currPage: currPage,
-          pageSize: _this.pageSize,
+          page: page,
+          page_size: _this.page_size,
           sortType: _this.sortType,
           sortBy: _this.sortBy
         }
       }
 
-      console.log(`请求页码为：${currPage}`)
+      console.log(`请求页码为：${page}`)
 
       _this
         .$axios({
@@ -188,13 +188,13 @@ export default {
           params: Object.assign(options.params || {}, _this.specialParams),
           data: Object.assign(options.data || {}, _this.specialDatas)
         })
-        .then(data => {
-          if (data.list) {
-            _this.listData[currPage] = JSON.parse(JSON.stringify(data.list))
+        .then(res => {
+          if (res.data) {
+            _this.listData[page] = JSON.parse(JSON.stringify(res.data))
           }
-          // _this.listData[currPage] = JSON.parse(JSON.stringify(data.list || []))
-          delete data.list
-          _this.setPageInfo(data)
+          // _this.listData[page] = JSON.parse(JSON.stringify(res.data || []))
+          delete res.data
+          _this.setPageInfo(res)
           _this.removeRequesting(reqMark)
         })
         .catch(err => {

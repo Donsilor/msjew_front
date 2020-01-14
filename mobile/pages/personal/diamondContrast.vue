@@ -51,61 +51,61 @@
           <ul>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 31)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 31)
               }}</span>
               <span>{{ lang.carat }}</span>
             </li>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 34)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 34)
               }}</span>
               <span>{{ lang.color }}</span>
             </li>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 33)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 33)
               }}</span>
               <span>{{ lang.cut }}</span>
             </li>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 35)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 35)
               }}</span>
               <span>{{ lang.cleaness }}</span>
             </li>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 36)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 36)
               }}</span>
               <span>{{ lang.luster }}</span>
             </li>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 37)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 37)
               }}</span>
               <span>{{ lang.symmetry }}</span>
             </li>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 38)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 38)
               }}</span>
               <span>{{ lang.fluorescence }}</span>
             </li>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 39)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 39)
               }}</span>
               <span>{{ lang.cuttingDepth }}</span>
             </li>
             <li>
               <span>{{
-                getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 40)
+                getVal(list1[diamond01].simpleGoodsEntity.specs, 40)
               }}</span>
               <span>{{ lang.stoneSurface }}</span>
             </li>
             <li>
-              {{ getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 192)
-              }}{{ getVal(list1[diamond01].simpleGoodsEntity.baseConfig, 191) }}
+              {{ getVal(list1[diamond01].simpleGoodsEntity.specs, 192)
+              }}{{ getVal(list1[diamond01].simpleGoodsEntity.specs, 191) }}
             </li>
           </ul>
           <div class="btn1" @click="addCart(list1[diamond01])">
@@ -135,62 +135,62 @@
             <ul>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 31)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 31)
                 }}</span>
                 <span>{{ lang.carat }}</span>
               </li>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 34)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 34)
                 }}</span>
                 <span>{{ lang.color }}</span>
               </li>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 33)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 33)
                 }}</span>
                 <span>{{ lang.cut }}</span>
               </li>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 35)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 35)
                 }}</span>
                 <span>{{ lang.cleaness }}</span>
               </li>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 36)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 36)
                 }}</span>
                 <span>{{ lang.luster }}</span>
               </li>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 37)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 37)
                 }}</span>
                 <span>{{ lang.symmetry }}</span>
               </li>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 38)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 38)
                 }}</span>
                 <span>{{ lang.fluorescence }}</span>
               </li>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 39)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 39)
                 }}</span>
                 <span>{{ lang.cuttingDepth }}</span>
               </li>
               <li>
                 <span>{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 40)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 40)
                 }}</span>
                 <span>{{ lang.stoneSurface }}</span>
               </li>
               <li>
-                {{ getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 192)
+                {{ getVal(list2[diamond02].simpleGoodsEntity.specs, 192)
                 }}{{
-                  getVal(list2[diamond02].simpleGoodsEntity.baseConfig, 191)
+                  getVal(list2[diamond02].simpleGoodsEntity.specs, 191)
                 }}
               </li>
             </ul>
@@ -254,8 +254,8 @@ export default {
           url: `/wap/collection/list`,
           params: {
             type: 2,
-            currPage: 1,
-            pageSize: 99
+            page: 1,
+            page_size: 99
           }
         })
         .then(res => {
@@ -374,7 +374,7 @@ export default {
       let val = '--'
       list.map((item, index) => {
         if (item.configId === id) {
-          val = item.configAttrIVal
+          val = item.configAttrVal
         }
       })
       return val

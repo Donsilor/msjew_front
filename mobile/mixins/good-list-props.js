@@ -2,7 +2,7 @@ export default {
   data() {
     return {
       listMethod: 'post',
-      listUrl: `/wap/goods/searchGoods`,
+      listUrl: `/wap/goods/style/search`,
 
       categoryId: '', // 商品类别ID(-1表示所有)
       sortType: this.CONDITION_INFO.sortBy.default[0].sortType, // 排序1:升2:降3:默认不排序
