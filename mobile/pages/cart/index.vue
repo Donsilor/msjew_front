@@ -236,8 +236,8 @@ export default {
         })
         // 价格汇总
         if (this.list[i].isSelect) {
-          console.log(i, 'iiii')
-          newPrice = newPrice + this.list[i].salePrice
+          // console.log(i, 'iiii')
+          newPrice = newPrice + parseFloat(this.list[i].salePrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
             this.sumNum = this.sumNum + 1
@@ -253,6 +253,7 @@ export default {
         }
       }
       this.sumPrice = newPrice
+      // console.log("价格",this.sumPrice)
     },
     // 删除商品
     remove(item, index) {
@@ -376,10 +377,10 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/goodsCart/list`
+          url: `/web/member/cart`
         })
         .then(res => {
-          this.doFormat(res)
+          this.doFormat(res.data)
         })
         .catch(err => {
           console.log('err:', err)

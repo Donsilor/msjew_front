@@ -409,10 +409,11 @@ export default {
     // console.log('getOnlineCart=====>')
     return this.$axios({
       method: 'get',
-      url: `/wap/goodsCart/list`
+      url: `/web/member/cart`
     })
       .then(data => {
-        return makeCartGoodGroups(data)
+        console.log("购物车列表",data.data)
+        return makeCartGoodGroups(data.data)
       })
       .catch(err => {
         return Promise.reject(err)
@@ -450,11 +451,11 @@ export default {
     // console.log('getOnlineCartAmount=====>')
     return this.$axios({
       method: 'get',
-      url: `/wap/goodsCart/count`
+      url: `/web/member/cart/count`
     })
       .then(data => {
-        console.log('线上购物车商品总数====>', data)
-        return data
+        // console.log('线上购物车商品总数====>', data)
+        return data.data
       })
       .catch(err => {
         return Promise.reject(err)

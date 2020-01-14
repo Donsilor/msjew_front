@@ -11,14 +11,14 @@
     <div class="address">
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
-          <span>{{ address.firstName }} {{ address.lastName }}</span
+          <span>{{ address.firstname }} {{ address.lastname }}</span
           ><span v-if="!$route.query.id">{{ lang.default }}</span>
         </div>
-        <p>{{ address.userTelCode }} {{ address.userTel }}</p>
+        <p>{{ address.mobile_code }} {{ address.mobile }}</p>
         <p class="p ow-h2">
-          {{ address.countryName }}-{{ address.provinceName }}-{{
-            address.cityName
-          }}-{{ address.address }}
+          {{ address.country_name }}-{{ address.province_name }}-{{
+            address.country_name
+          }}-{{ address.address_details }}
         </p>
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
@@ -349,121 +349,121 @@ export default {
     },
     // 查询匿名使用优惠卷时可以优惠的金额
     checkCount() {
-      const carts = []
-      const goodList = this.list
-      for (const i in goodList) {
-        const o = {
-          createTime: goodList[i].createTime || new Date().getTime(),
-          goodsCount: 1,
-          goodsDetailsId: goodList[i].goodsDetailsId,
-          goodsId: goodList[i].goodsId,
-          groupId: goodList[i].groupId,
-          groupType: goodList[i].groupType
-        }
-        carts.push(o)
-      }
-      this.$axios({
-        method: 'post',
-        url: '/wap/order/getAnonymousCouponAmount',
-        data: {
-          couponCode: this.inputCouponCode.trim(),
-          carts: carts,
-          session: this.session
-        }
-      })
-        .then(data => {
-          console.log(data)
-          if (!(data > 0)) {
-            return
-          }
-          // 优惠金额
-          console.log('优惠金额====>', data)
-          this.sureCoupon = true
-          this.preferFee = data
-          this.inputCouponInfo = {
-            couponCode: this.inputCouponCode.trim(),
-            discountAmount: data
-          }
-          this.getTex()
-        })
-        .catch(err => {
-          console.log(err)
-          this.$toast(err.message)
-          this.cleanAllCoupon()
-        })
+      // const carts = []
+      // const goodList = this.list
+      // for (const i in goodList) {
+      //   const o = {
+      //     createTime: goodList[i].createTime || new Date().getTime(),
+      //     goodsCount: 1,
+      //     goodsDetailsId: goodList[i].goodsDetailsId,
+      //     goodsId: goodList[i].goodsId,
+      //     groupId: goodList[i].groupId,
+      //     groupType: goodList[i].groupType
+      //   }
+      //   carts.push(o)
+      // }
+      // this.$axios({
+      //   method: 'post',
+      //   url: '/wap/order/getAnonymousCouponAmount',
+      //   data: {
+      //     couponCode: this.inputCouponCode.trim(),
+      //     carts: carts,
+      //     session: this.session
+      //   }
+      // })
+      //   .then(data => {
+      //     console.log(data)
+      //     if (!(data > 0)) {
+      //       return
+      //     }
+      //     // 优惠金额
+      //     console.log('优惠金额====>', data)
+      //     this.sureCoupon = true
+      //     this.preferFee = data
+      //     this.inputCouponInfo = {
+      //       couponCode: this.inputCouponCode.trim(),
+      //       discountAmount: data
+      //     }
+      //     this.getTex()
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //     this.$toast(err.message)
+      //     this.cleanAllCoupon()
+      //   })
     },
     // 获取优惠券金额
     getCouponAmount() {
-      this.$axios({
-        method: 'get',
-        url: `/wap/order/getCouponAmount`,
-        params: {
-          couponCode: this.inputCouponCode,
-          couponId: this.selectCouponId,
-          cartIds: this.idList.join(',')
-        }
-      })
-        .then(data => {
-          if (!(data > 0)) {
-            return
-          }
-          this.sureCoupon = true
-          this.preferFee = data
-          if (this.hasAddress) {
-            this.getTex()
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          this.$toast(err.message)
-          this.cleanAllCoupon()
-        })
+      // this.$axios({
+      //   method: 'get',
+      //   url: `/wap/order/getCouponAmount`,
+      //   params: {
+      //     couponCode: this.inputCouponCode,
+      //     couponId: this.selectCouponId,
+      //     cartIds: this.idList.join(',')
+      //   }
+      // })
+      //   .then(data => {
+      //     if (!(data > 0)) {
+      //       return
+      //     }
+      //     this.sureCoupon = true
+      //     this.preferFee = data
+      //     if (this.hasAddress) {
+      //       this.getTex()
+      //     }
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //     this.$toast(err.message)
+      //     this.cleanAllCoupon()
+      //   })
     },
     // 获取登录状态下优惠卷列表
     getCouponList() {
-      if (this.isLogin && this.list.length > 0) {
-        this.$axios({
-          method: 'post',
-          url: `/wap/order/getCoupons`,
-          params: {
-            cartIds: this.idList.join(',')
-          }
-        })
-          .then(res => {
-            if (res && res.length > 0) {
-              // [
-              //   {
-              //     "couponCode": "string",
-              //     "couponId": 0,
-              //     "discountAmount": 0,
-              //     "discountType": 0
-              //   }
-              // ]
-              res.map(item => {
-                const map = {
-                  1: `${item.discountAmount}% OFF`,
-                  2: `-HKD ${item.discountAmount}`
-                }
-                item.desc = `${item.couponCode}  ${map[item.discountType]}`
-                return item
-              })
-              this.cuponList = res
-            } else {
-              this.cuponList = [
-                {
-                  couponCode: '',
-                  couponId: 0,
-                  discountAmount: 0,
-                  discountType: 0,
-                  desc: '暫無可使用優惠碼'
-                }
-              ]
-            }
-          })
-          .catch(err => {
-            console.log(err)
-          })
-      }
+      // if (this.isLogin && this.list.length > 0) {
+      //   this.$axios({
+      //     method: 'post',
+      //     url: `/wap/order/getCoupons`,
+      //     params: {
+      //       cartIds: this.idList.join(',')
+      //     }
+      //   })
+      //     .then(res => {
+      //       if (res && res.length > 0) {
+      //         // [
+      //         //   {
+      //         //     "couponCode": "string",
+      //         //     "couponId": 0,
+      //         //     "discountAmount": 0,
+      //         //     "discountType": 0
+      //         //   }
+      //         // ]
+      //         res.map(item => {
+      //           const map = {
+      //             1: `${item.discountAmount}% OFF`,
+      //             2: `-HKD ${item.discountAmount}`
+      //           }
+      //           item.desc = `${item.couponCode}  ${map[item.discountType]}`
+      //           return item
+      //         })
+      //         this.cuponList = res
+      //       } else {
+      //         this.cuponList = [
+      //           {
+      //             couponCode: '',
+      //             couponId: 0,
+      //             discountAmount: 0,
+      //             discountType: 0,
+      //             desc: '暫無可使用優惠碼'
+      //           }
+      //         ]
+      //       }
+      //     })
+      //     .catch(err => {
+      //       console.log(err)
+      //     })
+      // }
     },
     // 输入优惠码
     onInputCouponCode() {
@@ -516,10 +516,10 @@ export default {
       let data = {}
       let url = ''
       if (this.isLogin) {
-        url = `/wap/order/getTax`
+        url = `/web/member/order/tax`
         data = {
           addressId: this.address.id,
-          preferFee: this.preferFee,
+          // preferFee: this.preferFee,
           cartIds: this.idList.join(',')
         }
       } else {
@@ -538,8 +538,10 @@ export default {
         params: data
       })
         .then(res => {
+          // console.log("费用",res)
           this.canSubmit = true
-          this.allFee = res
+          this.allFee = res.data
+          console.log("费用",this.allFee)
         })
         .catch(err => {
           this.canSubmit = false
@@ -554,13 +556,15 @@ export default {
         _this
           .$axios({
             method: 'get',
-            url: `/wap/myAccount/getMyAddress`
+            url: `/web/member/address`
           })
           .then(res => {
             _this.address = ''
             _this.hasAddress = false
-            if (res && res.length > 0) {
-              res.map((item, index) => {
+            // console.log("address",res.data)
+            if (res.data && res.data.length > 0) {
+              res.data.map((item, index) => {
+                console.log("item",item)
                 if (this.$route.query.id) {
                   if (
                     this.$route.query.id === item.id ||
@@ -569,7 +573,7 @@ export default {
                     _this.address = item
                     _this.hasAddress = true
                   }
-                } else if (!this.$route.query.id && item.isDefault === 1) {
+                } else if (!this.$route.query.id && item.is_default === 1) {
                   _this.address = item
                   _this.hasAddress = true
                 }

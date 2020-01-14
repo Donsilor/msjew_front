@@ -86,6 +86,7 @@ export default {
     formatMoney: formatMoney,
     // 属性数值转化成字符串
     getconfig(list, list2) {
+      
       let text = ''
       if (list.length > 0) {
         list.map((item, index) => {
@@ -104,6 +105,7 @@ export default {
           }
         })
       }
+      console.log("list",text)
       return text
     },
     back() {

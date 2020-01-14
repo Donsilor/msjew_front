@@ -184,7 +184,11 @@ export default {
         this.$toast(this.lang['password-not-same'])
         return
       }
-      this.emitEvent()
+      if(this.language==='zh_CN'){
+        this.emitEventCN()
+      }else{
+        this.emitEvent()
+      }
     },
     
     // 倒计时
@@ -272,6 +276,13 @@ export default {
     },
     emitEvent() {
       this.$emit('newPasswordFinish', {
+        password: this.password,
+        password_repetition: this.password_repetition,
+        code:this.code
+      })
+    },
+    emitEventCN() {
+      this.$emit('newPasswordFinishCN', {
         password: this.password,
         password_repetition: this.password_repetition,
         code:this.code
