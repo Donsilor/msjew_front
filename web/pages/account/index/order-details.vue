@@ -77,8 +77,7 @@
             </div>
             <div class="user-info">
               <div>
-                {{ data.address.firstName }} {{ data.address.lastName
-                }}<span>{{ $t(`${lang}.get`) }}</span>
+                {{ data.address.lastName }} {{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
               </div>
               <div>
                 <span>{{ data.address.userTelCode }}</span>
@@ -399,7 +398,7 @@ export default {
       //   this.$t(`${lang}.status`)[8],
       //   this.$t(`${lang}.status`)[9]
       // ][status]
-      
+
       var status_value =  {
           0 :this.$t(`${lang}.cancelTransaction`),
           10: this.$t(`${lang}.hadNotPay`),
@@ -407,7 +406,7 @@ export default {
           30: this.$t(`${lang}.hadSend`),
           40: this.$t(`${lang}.hadFinish`),
         };
-      // console.log("kkkk",status_value[status])  
+      // console.log("kkkk",status_value[status])
       return status_value[status];
     },
     getData() {
