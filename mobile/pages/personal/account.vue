@@ -108,7 +108,7 @@ export default {
         })
         .then(res => {
           console.log("info",res)
-          this.date = res.data
+          this.date = res
           if (this.date.birthday) {
             this.birthday =
               moment(this.date.birthday).format('YYYY') +

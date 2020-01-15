@@ -87,8 +87,8 @@ export default {
         .then(res => {
           console.log("address",res)
           _this.address = []
-          if (res.data && res.data.length > 0) {
-            res.data.map((item, index) => {
+          if (res && res.length > 0) {
+            res.map((item, index) => {
               if (item.is_default === 0) {
                 _this.address.unshift(item)
               } else {

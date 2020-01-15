@@ -4,61 +4,61 @@ export default language => {
   return {
     shape: [
       {
-        id: 18,
+        id: 16,
         name: lang.shape.round,
         image: '/diamond/shape/1.png',
         desc: lang.shape.roundDesc
       },
       {
-        id: 19,
+        id: 54,
         name: lang.shape.Princess,
         image: '/diamond/shape/2.png',
         desc: lang.shape.PrincessDesc
       },
       {
-        id: 20,
+        id: 55,
         name: lang.shape.Emerald,
         image: '/diamond/shape/3.png',
         desc: lang.shape.EmeraldDesc
       },
       {
-        id: 21,
+        id: 60,
         name: lang.shape.Asscher,
         image: '/diamond/shape/8.png',
         desc: lang.shape.AsscherDesc
       },
       {
-        id: 22,
+        id: 58,
         name: lang.shape.Cushion,
         image: '/diamond/shape/4.png',
         desc: lang.shape.CushionDesc
       },
       {
-        id: 23,
+        id: 57,
         name: lang.shape.Marquise,
         image: '/diamond/shape/6.png',
         desc: lang.shape.MarquiseDesc
       },
       {
-        id: 24,
+        id: 61,
         name: lang.shape.Radiant,
         image: '/diamond/shape/10.png',
         desc: lang.shape.RadiantDesc
       },
       {
-        id: 25,
+        id: 17,
         name: lang.shape.Oval,
         image: '/diamond/shape/5.png',
         desc: lang.shape.OvalDesc
       },
       {
-        id: 26,
+        id: 59,
         name: lang.shape.PearShape,
         image: '/diamond/shape/9.png',
         desc: lang.shape.PearShapeDesc
       },
       {
-        id: 27,
+        id: 56,
         name: lang.shape.Heart,
         image: '/diamond/shape/7.png',
         desc: lang.shape.HeartDesc
@@ -67,43 +67,43 @@ export default language => {
 
     color: [
       {
-        id: 37,
+        id: 53,
         url: `/diamond/color/J.png`,
         name: `J`,
         desc: lang.color.j
       },
       {
-        id: 36,
+        id: 52,
         url: `/diamond/color/I.png`,
         name: `I`,
         desc: lang.color.i
       },
       {
-        id: 35,
+        id: 51,
         url: `/diamond/color/H.png`,
         name: `H`,
         desc: lang.color.h
       },
       {
-        id: 34,
+        id: 50,
         url: `/diamond/color/G.png`,
         name: `G`,
         desc: lang.color.g
       },
       {
-        id: 33,
+        id: 22,
         url: `/diamond/color/F.png`,
         name: `F`,
         desc: lang.color.f
       },
       {
-        id: 32,
+        id: 19,
         url: `/diamond/color/E.png`,
         name: `E`,
         desc: lang.color.e
       },
       {
-        id: 31,
+        id: 18,
         url: `/diamond/color/D.png`,
         name: `D`,
         desc: lang.color.d
@@ -112,49 +112,49 @@ export default language => {
 
     clarity: [
       {
-        id: 38,
+        id: 66,
         url: `/diamond/clarity/SI2.png`,
         name: `SI2`,
         desc: lang.clarity.si2
       },
       {
-        id: 39,
+        id: 65,
         url: `/diamond/clarity/SI1.png`,
         name: `SI1`,
         desc: lang.clarity.si1
       },
       {
-        id: 40,
+        id: 64,
         url: `/diamond/clarity/VS2.png`,
         name: `VS2`,
         desc: lang.clarity.vs2
       },
       {
-        id: 41,
+        id: 63,
         url: `/diamond/clarity/VS1.png`,
         name: `VS1`,
         desc: lang.clarity.vs1
       },
       {
-        id: 42,
+        id: 62,
         url: `/diamond/clarity/VVS2.png`,
         name: `VVS2`,
         desc: lang.clarity.vvs2
       },
       {
-        id: 43,
+        id: 8,
         url: `/diamond/clarity/VVS1.png`,
         name: `VVS1`,
         desc: lang.clarity.vvs1
       },
       {
-        id: 44,
+        id: 7,
         url: `/diamond/clarity/IF.png`,
         name: `IF`,
         desc: lang.clarity.if
       },
       {
-        id: 45,
+        id: 6,
         url: `/diamond/clarity/FL.png`,
         name: `FL`,
         desc: lang.clarity.fl
@@ -165,21 +165,21 @@ export default language => {
       {
         name: lang.cut.gd,
         sortCut: lang.cut.scgd,
-        id: 28,
+        id: 15,
         url: `/diamond/cut/GD.png`,
         desc: lang.cut.gdDesc
       },
       {
         name: lang.cut.vg,
         sortCut: lang.cut.scvg,
-        id: 29,
+        id: 14,
         url: `/diamond/cut/vg.png`,
         desc: lang.cut.vgDesc
       },
       {
         name: lang.cut.ideal,
         sortCut: lang.cut.scideal,
-        id: 30,
+        id: 13,
         url: `/diamond/cut/id.png`,
         desc: lang.cut.idealDesc
       }
@@ -189,17 +189,17 @@ export default language => {
       {
         name: 'Ex',
         shortCut: `Ex`,
-        id: 48
+        id: 67
       },
       {
         name: 'VG',
         shortCut: `VG`,
-        id: 47
+        id: 68
       },
       {
         name: 'GD',
         shortCut: `GD`,
-        id: 46
+        id: 69
       }
     ],
 
@@ -207,17 +207,17 @@ export default language => {
       {
         name: 'Ex',
         shortCut: `Ex`,
-        id: 51
+        id: 70
       },
       {
         name: 'VG',
         shortCut: `VG`,
-        id: 50
+        id: 71
       },
       {
         name: 'GD',
         shortCut: `GD`,
-        id: 49
+        id: 72
       }
     ],
 
@@ -259,37 +259,37 @@ export default language => {
     style: {
       rings: [
         {
-          id: 445,
+          id: 109,
           name: lang.style.SolitaireRing,
           image: '/ring-type/1.png'
         },
         {
-          id: 446,
+          id: 110,
           name: lang.style.JumpRing,
           image: '/ring-type/4.png'
         },
         {
-          id: 447,
+          id: 111,
           name: lang.style.PaveSetRing,
           image: '/ring-type/5.png'
         },
         {
-          id: 448,
+          id: 112,
           name: lang.style.ClassicalRing,
           image: '/ring-type/7.png'
         },
         {
-          id: 449,
+          id: 113,
           name: lang.style.ChannelSetRing,
           image: '/ring-type/6.png'
         },
         {
-          id: 450,
+          id: 114,
           name: lang.style.HaloSetRing,
           image: '/ring-type/2.png'
         },
         {
-          id: 451,
+          id: 115,
           name: lang.style.ThreeStoneRing,
           image: '/ring-type/3.png'
         }
@@ -308,49 +308,49 @@ export default language => {
       ],
       manRings: [
         {
-          id: 457,
+          id: 165,
           image: `/ring-type/man/1.png`,
           name: lang.style.WeddingRing
         },
         {
-          id: 458,
+          id: 166,
           image: `/ring-type/man/2.png`,
           name: lang.style.ThreeDReliefRing
         },
         {
-          id: 459,
+          id: 167,
           image: `/ring-type/man/3.png`,
           name: lang.style.DiamondRing
         },
         {
-          id: 460,
+          id: 168,
           image: `/ring-type/man/4.png`,
           name: lang.style.SpecialRing
         }
       ],
       womanRings: [
         {
-          id: 452,
+          id: 160,
           image: `/ring-type/woman/1.png`,
           name: lang.style.WeddingRing
         },
         {
-          id: 453,
+          id: 161,
           image: `/ring-type/woman/2.png`,
           name: lang.style.FullyDiamondInlaidRing
         },
         {
-          id: 454,
+          id: 162,
           image: `/ring-type/woman/3.png`,
           name: lang.style.WeddingAnniversaryRing
         },
         {
-          id: 455,
+          id: 163,
           image: `/ring-type/woman/4.png`,
           name: lang.style.DiamondRing
         },
         {
-          id: 456,
+          id: 164,
           image: `/ring-type/woman/5.png`,
           name: lang.style.CasualRing
         }
@@ -360,224 +360,224 @@ export default language => {
     quality: {
       rings: [
         {
-          id: 120,
+          id: 31,
           name: lang.quality.platinum14K,
           image: '/ring-color/1.png'
         },
         {
-          id: 121,
+          id: 28,
           name: lang.quality.platinum18K,
           image: '/ring-color/2.png'
         },
         {
-          id: 122,
+          id: 32,
           name: lang.quality.gold14K,
           image: '/ring-color/3.png'
         },
         {
-          id: 123,
+          id: 29,
           name: lang.quality.gold18K,
           image: '/ring-color/4.png'
         },
         {
-          id: 126,
+          id: 34,
           name: lang.quality.platinum,
           image: '/ring-color/5.png'
         },
         {
-          id: 125,
+          id: 30,
           name: lang.quality.roseGold18K,
           image: '/ring-color/6.png'
         }
       ],
       necklace: [
         {
-          id: 219,
+          id: 31,
           name: lang.quality.platinum14K,
           image: '/ring-color/1.png'
         },
         {
-          id: 222,
+          id: 28,
           name: lang.quality.platinum18K,
           image: '/ring-color/2.png'
         },
         {
-          id: 220,
+          id: 32,
           name: lang.quality.gold14K,
           image: '/ring-color/3.png'
         },
         {
-          id: 223,
+          id: 29,
           name: lang.quality.gold18K,
           image: '/ring-color/4.png'
         },
         {
-          id: 225,
+          id: 34,
           name: lang.quality.platinum,
           image: '/ring-color/5.png'
         },
         {
-          id: 224,
+          id: 30,
           name: lang.quality.roseGold18K,
           image: '/ring-color/6.png'
         }
       ],
       pendant: [
         {
-          id: 227,
+          id: 31,
           name: lang.quality.platinum14K,
           image: '/ring-color/1.png'
         },
         {
-          id: 230,
+          id: 28,
           name: lang.quality.platinum18K,
           image: '/ring-color/2.png'
         },
         {
-          id: 228,
+          id: 32,
           name: lang.quality.gold14K,
           image: '/ring-color/3.png'
         },
         {
-          id: 231,
+          id: 29,
           name: lang.quality.gold18K,
           image: '/ring-color/4.png'
         },
         {
-          id: 233,
+          id: 34,
           name: lang.quality.platinum,
           image: '/ring-color/5.png'
         },
         {
-          id: 232,
+          id: 30,
           name: lang.quality.roseGold18K,
           image: '/ring-color/6.png'
         }
       ],
       studEarring: [
         {
-          id: 235,
+          id: 31,
           name: lang.quality.platinum14K,
           image: '/ring-color/1.png'
         },
         {
-          id: 238,
+          id: 28,
           name: lang.quality.platinum18K,
           image: '/ring-color/2.png'
         },
         {
-          id: 236,
+          id: 32,
           name: lang.quality.gold14K,
           image: '/ring-color/3.png'
         },
         {
-          id: 239,
+          id: 29,
           name: lang.quality.gold18K,
           image: '/ring-color/4.png'
         },
         {
-          id: 241,
+          id: 34,
           name: lang.quality.platinum,
           image: '/ring-color/5.png'
         },
         {
-          id: 240,
+          id: 30,
           name: lang.quality.roseGold18K,
           image: '/ring-color/6.png'
         }
       ],
       earring: [
         {
-          id: 243,
+          id: 31,
           name: lang.quality.platinum14K,
           image: '/ring-color/1.png'
         },
         {
-          id: 246,
+          id: 28,
           name: lang.quality.platinum18K,
           image: '/ring-color/2.png'
         },
         {
-          id: 244,
+          id: 32,
           name: lang.quality.gold14K,
           image: '/ring-color/3.png'
         },
         {
-          id: 247,
+          id: 29,
           name: lang.quality.gold18K,
           image: '/ring-color/4.png'
         },
         {
-          id: 249,
+          id: 34,
           name: lang.quality.platinum,
           image: '/ring-color/5.png'
         },
         {
-          id: 248,
+          id: 30,
           name: lang.quality.roseGold18K,
           image: '/ring-color/6.png'
         }
       ],
       BraceletLine: [
         {
-          id: 251,
+          id: 31,
           name: lang.quality.platinum14K,
           image: '/ring-color/1.png'
         },
         {
-          id: 254,
+          id: 28,
           name: lang.quality.platinum18K,
           image: '/ring-color/2.png'
         },
         {
-          id: 252,
+          id: 32,
           name: lang.quality.gold14K,
           image: '/ring-color/3.png'
         },
         {
-          id: 255,
+          id: 29,
           name: lang.quality.gold18K,
           image: '/ring-color/4.png'
         },
         {
-          id: 257,
+          id: 34,
           name: lang.quality.platinum,
           image: '/ring-color/5.png'
         },
         {
-          id: 256,
+          id: 30,
           name: lang.quality.roseGold18K,
           image: '/ring-color/6.png'
         }
       ],
       bracelet: [
         {
-          id: 259,
+          id: 31,
           name: lang.quality.platinum14K,
           image: '/ring-color/1.png'
         },
         {
-          id: 262,
+          id: 28,
           name: lang.quality.platinum18K,
           image: '/ring-color/2.png'
         },
         {
-          id: 260,
+          id: 32,
           name: lang.quality.gold14K,
           image: '/ring-color/3.png'
         },
         {
-          id: 263,
+          id: 29,
           name: lang.quality.gold18K,
           image: '/ring-color/4.png'
         },
         {
-          id: 265,
+          id: 34,
           name: lang.quality.platinum,
           image: '/ring-color/5.png'
         },
         {
-          id: 264,
+          id: 30,
           name: lang.quality.roseGold18K,
           image: '/ring-color/6.png'
         }
@@ -628,36 +628,36 @@ export default language => {
           sortType: 2,
           sortBy: `carat`
         },
-        {
-          content: lang.sortBy['color-from-low-to-high'],
-          sortType: 1,
-          sortBy: `color`
-        },
-        {
-          content: lang.sortBy['color-from-high-to-low'],
-          sortType: 2,
-          sortBy: `color`
-        },
-        {
-          content: lang.sortBy['cut-from-low-to-high'],
-          sortType: 1,
-          sortBy: `cut`
-        },
-        {
-          content: lang.sortBy['cut-from-high-to-low'],
-          sortType: 2,
-          sortBy: `cut`
-        },
-        {
-          content: lang.sortBy['clarity-from-low-to-high'],
-          sortType: 1,
-          sortBy: `clarity`
-        },
-        {
-          content: lang.sortBy['clarity-from-high-to-low'],
-          sortType: 2,
-          sortBy: `clarity`
-        }
+        // {
+        //   content: lang.sortBy['color-from-low-to-high'],
+        //   sortType: 1,
+        //   sortBy: `color`
+        // },
+        // {
+        //   content: lang.sortBy['color-from-high-to-low'],
+        //   sortType: 2,
+        //   sortBy: `color`
+        // },
+        // {
+        //   content: lang.sortBy['cut-from-low-to-high'],
+        //   sortType: 1,
+        //   sortBy: `cut`
+        // },
+        // {
+        //   content: lang.sortBy['cut-from-high-to-low'],
+        //   sortType: 2,
+        //   sortBy: `cut`
+        // },
+        // {
+        //   content: lang.sortBy['clarity-from-low-to-high'],
+        //   sortType: 1,
+        //   sortBy: `clarity`
+        // },
+        // {
+        //   content: lang.sortBy['clarity-from-high-to-low'],
+        //   sortType: 2,
+        //   sortBy: `clarity`
+        // }
       ]
     },
 
