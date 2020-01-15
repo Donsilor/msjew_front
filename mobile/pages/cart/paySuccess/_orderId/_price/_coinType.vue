@@ -136,7 +136,7 @@ export default {
     },
     getinfo() {
       this.$axios({
-        url: '/web/order/getPayOrderInfo',
+        url: '/web/member/order/detail',
         meth: 'get',
         params: {
           orderId: this.$route.params.orderId

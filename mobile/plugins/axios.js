@@ -1,42 +1,39 @@
-export default function({ $axios, store }) {
+export default function ({
+  $axios,
+  store
+}) {
   $axios.onRequest(config => {
-    // if (config.params) {
-    //   for (const n in config.params) {
-    //     console.log(
-    //       config.params[n] + '======>' + encodeURIComponent(config.params[n])
-    //     )
-    //     config.params[n] = encodeURIComponent(config.params[n])
-    //   }
-    // }
-
-    // console.log('token=======>', store.state.token)
-    // console.log('coin=======>', store.state.coin)
-    // console.log('language=======>', store.state.language)
     config.headers['x-api-key'] = store.state.token || ''
-    config.headers['x-api-currency']= store.state.coin || ''
+    config.headers['x-api-currency'] = store.state.coin || ''
     config.headers['x-api-language'] = store.state.language || ''
-    // config.headers.token = store.state.token || ''
-    // config.headers.coin = store.state.coin || ''
-    // config.headers.locale = store.state.language || ''
-    // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     return config
   })
   $axios.onResponse(res => {
     const data = res.data || {}
+    if (process.server == false) {
+      let accessToken = localStorage.getItem('accessToken')
+      if (!accessToken && store.state.token) {
+        store.dispatch('logout')
+        window.location.href = '/login'
+      }
+    }
     if (data.hasOwnProperty('code')) {
-      if (data.code === 200) {
-        return Promise.resolve(
-          [undefined].indexOf(data) === -1 ? data : null
-        )
-        // return Promise.resolve(data.data || null)
-      } else {
-        if (data.code === 401) {
-          console.log('is 401')
-          store.dispatch('logout')
-          // window.location.href = '/login'
-          return
+      if (data.code == 200) {
+        return Promise.resolve(![undefined].includes(data.data) ? data.data : null)
+        //return Promise.resolve(data.data || null)
+      } else if (data.code == 401) {
+        if (process.server == false) {
+          let accessToken = localStorage.getItem('accessToken')
+          if (!accessToken || accessToken == store.state.token) {
+            store.dispatch('logout')
+            window.location.href = '/login'
+          } else {
+            store.commit('setToken', accessToken)
+            window.location.reload()
+          }
         }
+      } else {
         return Promise.reject(new Error(data.message || 'something error'))
       }
     } else {

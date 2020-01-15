@@ -337,7 +337,7 @@ export default {
         type: 1
       }
     })
-      .then(data => {     
+      .then(data => {    
         return {
           seoInfo,
           ad: data.advert,

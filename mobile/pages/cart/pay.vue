@@ -76,41 +76,41 @@ export default {
       list: [
         {
           url: '/cart/pay.png',
-          type: 0,
+          type: 6,
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        {
-          url: '/cart/card.png',
-          type: 1,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-          url: '/cart/up.png',
-          type: 2,
-          title: this.LANGUAGE.cart.pay.payType2,
-          des: this.LANGUAGE.cart.pay.type2Text
-        },
+        // {
+        //   url: '/cart/card.png',
+        //   type: 1,
+        //   title: this.LANGUAGE.cart.pay.payType1,
+        //   des: this.LANGUAGE.cart.pay.type1Text
+        // },
+        // {
+        //   url: '/cart/up.png',
+        //   type: 2,
+        //   title: this.LANGUAGE.cart.pay.payType2,
+        //   des: this.LANGUAGE.cart.pay.type2Text
+        // },
         {
           url: '/cart/ap.png',
-          type: 3,
+          type: 2,
           title: this.LANGUAGE.cart.pay.payType3,
           des: this.LANGUAGE.cart.pay.type3Text
         },
-        {
-          url: '/cart/wac.png',
-          type: 4,
-          title: this.LANGUAGE.cart.pay.payType4,
-          des: this.LANGUAGE.cart.pay.type4Text
-        },
-        {
-          url: '/cart/ph.png',
-          type: 5,
-          title: this.LANGUAGE.cart.pay.payType5,
-          des: this.LANGUAGE.cart.pay.type5Text,
-          des2: this.LANGUAGE.cart.pay.type5Text2
-        }
+        // {
+        //   url: '/cart/wac.png',
+        //   type: 4,
+        //   title: this.LANGUAGE.cart.pay.payType4,
+        //   des: this.LANGUAGE.cart.pay.type4Text
+        // },
+        // {
+        //   url: '/cart/ph.png',
+        //   type: 5,
+        //   title: this.LANGUAGE.cart.pay.payType5,
+        //   des: this.LANGUAGE.cart.pay.type5Text,
+        //   des2: this.LANGUAGE.cart.pay.type5Text2
+        // }
       ],
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
@@ -135,30 +135,41 @@ export default {
     goPaySuccess() {
       this.isPay = true
       let pay = 0
-      if (this.typeIndex === 5) {
-        pay = 1
-      } else if (this.typeIndex === 1 || this.typeIndex === 0) {
+      if(this.typeIndex == 0){
+        pay = 6
+      }else if(this.typeIndex == 1){
         pay = 2
-      } else if (
-        this.typeIndex === 4 ||
-        this.typeIndex === 3 ||
-        this.typeIndex === 2
-      ) {
+      }else if(this.typeIndex == 5){
         pay = 7
       }
+      // if (this.typeIndex === 5) {
+      //   pay = 1
+      // } else if (this.typeIndex === 1 || this.typeIndex === 0) {
+      //   pay = 2
+      // } else if (
+      //   this.typeIndex === 4 ||
+      //   this.typeIndex === 3 ||
+      //   this.typeIndex === 2
+      // ) {
+      //   pay = 7
+      // }
+      console.log("paytype",pay)
       this.$axios({
+        // http://localhost:3000/     https://www2.bddco.com
         method: 'post',
         url: `/web/pay/create`,
         data: {
           orderId: this.info.orderId,
-          payChannel: pay,
-          returnUrl:'https://www2.bddco.com/complete-payment?orderId='+this.info.orderId
+          payType: pay,
+          tradeType:'wap',
+          returnUrl:'http://localhost:3000/cart-payFailed-orderId-price-coinType?orderId='+this.info.orderId
         }
       })
         .then(res => {
+          console.log("config",res)
           if (res) {
             if (pay !== 7) {
-              window.location.replace(res)
+              window.location.replace(res.config)
             } else {
               const promise = new Promise((resolve, reject) => {
                 this.form = []

@@ -12,7 +12,7 @@
             <li>{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
             <li>{{ lang.orderTime }}：{{ info.orderTime }}</li>
-            <template v-if="info.orderStatus > 1 && info.orderStatus !== 10">
+            <template v-if="info.orderStatus > 20 && info.orderStatus !== 50">
               <li>{{ lang.payType }}：{{ info.payChannelText }}</li>
               <li>{{ lang.payTime }}：{{ info.payTime }}</li>
             </template>
@@ -489,13 +489,13 @@ export default {
     getInfo() {
       this.$axios({
         method: `get`,
-        url: `/wap/myOrder/getOrderDetails`,
+        url: `/web/member/order/detail`,
         params: {
           orderId: this.$route.query.orderId
         }
       })
         .then(data => {
-          data.orderTime = Moment(data.orderTime).format('YYYY/MM/DD HH:mm:ss')
+          data.orderTime = Moment(data.orderTime* 1000).format('YYYY/MM/DD HH:mm:ss')
           data.payChannelText = data.payChannel
             ? this.payChannelText(data.payChannel)
             : data.orderStatus > 1

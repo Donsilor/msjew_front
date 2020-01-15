@@ -27,14 +27,14 @@ export default {
       }
 
       if (_this.$store.getters.hadLogin) {
+        await _this.$store.dispatch('refreshTokenRequst')
         // 同步购物车
         await _this.$store.dispatch('synchronizeCart')
         // 同步心愿单
         await _this.$store.dispatch('synchronizeWish')
         // 同步对比
         await _this.$store.dispatch('synchronizeCompared')
-      } else {
-      }
+      } else {}
       // 获取心愿单
       _this.$store.dispatch('getWish')
       // 获取购物车

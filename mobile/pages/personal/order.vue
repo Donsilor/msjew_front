@@ -42,19 +42,19 @@ export default {
           text: this.LANGUAGE.personal.order.all
         },
         {
-          code: 1,
+          code: 10,
           text: this.LANGUAGE.personal.order.waitingPay
         },
         {
-          code: 2,
+          code: 30,
           text: this.LANGUAGE.personal.order.waitingSend
         },
         {
-          code: 3,
+          code: 40,
           text: this.LANGUAGE.personal.order.waitingReceive
         },
         {
-          code: 5, // 传5表示待評價的订单(后端确定的逻辑)
+          code: 50, // 传5表示待評價的订单(后端确定的逻辑)
           text: this.LANGUAGE.personal.order.waitingComment
         }
       ],
@@ -75,8 +75,10 @@ export default {
     },
     barActiveChange(val) {
       this.orderStatus = val
+      console.log('val',this.orderStatus)
     },
     arrivalBottom() {
+      // console.log(3333333)
       this.$refs['data-list'].getNextPage &&
         this.$refs['data-list'].getNextPage()
     }

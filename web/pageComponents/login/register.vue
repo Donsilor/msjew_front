@@ -522,13 +522,17 @@ export default {
           }
         })
         .then(res => {
-          console.log('注册结果',res)
+          const data = res.data
           _this.requesting = false
           _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-          _this.$store.commit('setToken', res.data.access_token)
-          _this.$store.dispatch('getUserInfo')
+		  
+		  localStorage.setItem('refreshToken',data.refresh_token);
+		  localStorage.setItem('accessToken',data.access_token);
+          _this.$store.commit('setToken', data.access_token)
+          _this.$store.commit('setUserInfo',data.member)
           const lastUrl = _this.$store.state.lastUrl
           _this.$store.commit('setLastUrl', '')
+		  
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({
@@ -581,13 +585,18 @@ export default {
           }
         })
         .then(res => {
-          console.log('注册结果',res)
+          const data = res.data
+		  
           _this.requesting = false
           _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-          _this.$store.commit('setToken', res.data.access_token)
-          _this.$store.dispatch('getUserInfo')
+		  
+		  localStorage.setItem('refreshToken',data.refresh_token);
+		  localStorage.setItem('accessToken',data.access_token);
+          _this.$store.commit('setToken', data.access_token)
+          _this.$store.commit('setUserInfo',data.member)
           const lastUrl = _this.$store.state.lastUrl
           _this.$store.commit('setLastUrl', '')
+		  
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({

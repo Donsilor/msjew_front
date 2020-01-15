@@ -81,14 +81,14 @@
           </div>
           <div class="btn">
             <span
-              v-if="[1].indexOf(order.orderStatus) > -1"
+              v-if="(order.orderStatus) > -1"
               class="btn2"
               @click="cancelOrder(order.id)"
               >{{ lang.cancelOrder }}</span
             >
             <span
               v-if="
-                [1].indexOf(order.orderStatus) > -1 && order.payChannel === 1
+                (order.orderStatus) > -1 && order.payChannel === 1
               "
               class="btn1"
               @click.stop="paytips = !paytips"
@@ -96,7 +96,7 @@
             >
             <span
               v-if="
-                [1].indexOf(order.orderStatus) > -1 && order.payChannel !== 1
+                (order.orderStatus) > -1 && order.payChannel !== 1
               "
               class="btn1"
               @click.stop="goPay(order)"
@@ -147,8 +147,9 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.components.personal,
+      // langs: this.LANGUAGE.order,
       listMethod: 'get',
-      listUrl: '/wap/myOrder/listMyOrder',
+      listUrl: '/web/member/order',
       paytips: false
     }
   },
@@ -156,7 +157,6 @@ export default {
     // 所有已请求的页码的数据集合
     showOrderList() {
       let showData = JSON.parse(JSON.stringify(this.showData))
-
       showData = showData.map(order => {
         const details = order.details
 
@@ -266,7 +266,7 @@ export default {
   },
   methods: {
     canComment(order) {
-      console.log(order.details)
+      console.log("order",order)
       const details = order.details
       let num = 0
       for (let n = 0, length = details.length; n < length; n++) {
@@ -287,17 +287,19 @@ export default {
     },
     statusText(status) {
       const map = {
-        1: this.lang.unpaid,
-        2: this.lang.paid,
-        3: this.lang.shipped,
-        4: this.lang.completed,
-        5: this.lang.noComment,
-        6: this.lang.commented,
-        7: this.lang.returnApplication,
-        8: this.lang.returning,
-        9: this.lang.returned,
-        10: this.lang.cancelled
+        0: this.lang.cancelled,
+        10: this.lang.unpaid,
+        20: this.lang.paid,
+        30: this.lang.waitingSend, 
+        40: this.lang.shipped,
+        50: this.lang.completed,
+        // 6: this.lang.commented,
+        // 7: this.lang.returnApplication,
+        // 8: this.lang.returning,
+        // 9: this.lang.returned,
+       
       }
+      console.log("status",map[status])
       return map[status]
     },
     // 跳转到详情页

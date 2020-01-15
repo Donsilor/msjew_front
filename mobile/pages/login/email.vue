@@ -1,142 +1,49 @@
 <template>
-<div>
-  <div v-if="language === 'zh_CN'">
-    <section>
-      <div class="title-bar">
-        <span class="title">
-          {{ lang['login'] }}
-        </span>
-        <span class="register" @click="toRegister">
-          {{ lang['no-account'] }}
-        </span>
-      </div>
-      <div class="line-box input-line">
-        <bdd-input
-          v-model="loginInfo.username"
-          :placeholder="lang['email']"
-          @blur="inputKey('username')"
-        ></bdd-input>
-        <div
-          :class="[
+  <div>
+    <div v-if="language === 'zh_CN'">
+      <section>
+        <div class="title-bar">
+          <span class="title">
+            {{ lang['login'] }}
+          </span>
+          <span class="register" @click="toRegister">
+            {{ lang['no-account'] }}
+          </span>
+        </div>
+        <div class="line-box input-line">
+          <bdd-input v-model="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
+          <div :class="[
             'error-message',
             { active: !trueUsernameM && hadInput('username') }
-          ]"
-        >
-          {{ lang['email-error'] }}
-        </div>
-      </div>
-      <div class="line-box input-line">
-        <bdd-input
-          v-model="loginInfo.password"
-          :placeholder="lang['password']"
-          :type="'password'"
-          @blur="inputKey('password')"
-        ></bdd-input>
-        <div
-          :class="[
-            'error-message',
-            { active: !truePassword && hadInput('password') }
-          ]"
-        >
-          {{ lang['password-error'] }}
-        </div>
-      </div>
-      <div class="line-box input-line">
-        <div class="code">
-          <bdd-input
-            v-model="code"
-            :placeholder="lang['Code']"
-            @blur="inputKey('code')"
-          ></bdd-input>
-          <div class="code-picture" @click="refreshCode">
-            <picture-verification-code
-              ref="picture-verification-code"
-              :identify-code="pictureCode"
-            ></picture-verification-code>
+          ]">
+            {{ lang['email-error'] }}
           </div>
         </div>
-        <div
-          :class="[
-            'error-message',
-            { active: ! trueCode && hadInput('code') }
-          ]"
-        >
-          {{ lang['code-error'] }}
-        </div>
-      </div>
-
-      <!-- <div v-show="needSliderVerify" class="line-box verify-line">
-        <slider-verify
-          ref="slider-verify"
-          @finish="sliderVerifyFinish"
-        ></slider-verify>
-        <div
-          :class="[
-            'error-message',
-            { active: needSliderVerify && !sliderVerify }
-          ]"
-        >
-          {{ lang['slider-verify-first'] }}
-        </div>
-      </div> -->
-
-      <div class="line-box button-line">
-        <button class="full-btn login" @click="loginCN">
-          <span class="btn-message">{{ lang['login-now'] }}</span>
-        </button>
-      </div>
-      <div class="line-box button-line">
-        <button class="full-btn forget" @click="toForget">
-          <span class="btn-message">
-            {{ lang['forget'] }}
-          </span>
-        </button>
-      </div>
-    </section>
-  </div>
-  <div v-else>
-    <section>
-      <div class="title-bar">
-        <span class="title">
-          {{ lang['login'] }}
-        </span>
-        <span class="register" @click="toRegister">
-          {{ lang['no-account'] }}
-        </span>
-      </div>
-      <div class="line-box input-line">
-        <bdd-input
-          v-model="loginInfo.username"
-          :placeholder="lang['email']"
-          @blur="inputKey('username')"
-        ></bdd-input>
-        <div
-          :class="[
-            'error-message',
-            { active: !trueUsername && hadInput('username') }
-          ]"
-        >
-          {{ lang['email-error'] }}
-        </div>
-      </div>
-      <div class="line-box input-line">
-        <bdd-input
-          v-model="loginInfo.password"
-          :placeholder="lang['password']"
-          :type="'password'"
-          @blur="inputKey('password')"
-        ></bdd-input>
-        <div
-          :class="[
+        <div class="line-box input-line">
+          <bdd-input v-model="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')"></bdd-input>
+          <div :class="[
             'error-message',
             { active: !truePassword && hadInput('password') }
-          ]"
-        >
-          {{ lang['password-error'] }}
+          ]">
+            {{ lang['password-error'] }}
+          </div>
         </div>
-      </div>
+        <div class="line-box input-line">
+          <div class="code">
+            <bdd-input v-model="code" :placeholder="lang['Code']" @blur="inputKey('code')"></bdd-input>
+            <div class="code-picture" @click="refreshCode">
+              <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
+            </div>
+          </div>
+          <div :class="[
+            'error-message',
+            { active: ! trueCode && hadInput('code') }
+          ]">
+            {{ lang['code-error'] }}
+          </div>
+        </div>
 
-      <!-- <div v-show="needSliderVerify" class="line-box verify-line">
+        <!-- <div v-show="needSliderVerify" class="line-box verify-line">
         <slider-verify
           ref="slider-verify"
           @finish="sliderVerifyFinish"
@@ -151,21 +58,79 @@
         </div>
       </div> -->
 
-      <div class="line-box button-line">
-        <button class="full-btn login" @click="login">
-          <span class="btn-message">{{ lang['login-now'] }}</span>
-        </button>
-      </div>
-      <div class="line-box button-line">
-        <button class="full-btn forget" @click="toForget">
-          <span class="btn-message">
-            {{ lang['forget'] }}
+        <div class="line-box button-line">
+          <button class="full-btn login" @click="loginCN">
+            <span class="btn-message">{{ lang['login-now'] }}</span>
+          </button>
+        </div>
+        <div class="line-box button-line">
+          <button class="full-btn forget" @click="toForget">
+            <span class="btn-message">
+              {{ lang['forget'] }}
+            </span>
+          </button>
+        </div>
+      </section>
+    </div>
+    <div v-else>
+      <section>
+        <div class="title-bar">
+          <span class="title">
+            {{ lang['login'] }}
           </span>
-        </button>
-      </div>
-    </section>
+          <span class="register" @click="toRegister">
+            {{ lang['no-account'] }}
+          </span>
+        </div>
+        <div class="line-box input-line">
+          <bdd-input v-model="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
+          <div :class="[
+            'error-message',
+            { active: !trueUsername && hadInput('username') }
+          ]">
+            {{ lang['email-error'] }}
+          </div>
+        </div>
+        <div class="line-box input-line">
+          <bdd-input v-model="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')"></bdd-input>
+          <div :class="[
+            'error-message',
+            { active: !truePassword && hadInput('password') }
+          ]">
+            {{ lang['password-error'] }}
+          </div>
+        </div>
+
+        <!-- <div v-show="needSliderVerify" class="line-box verify-line">
+        <slider-verify
+          ref="slider-verify"
+          @finish="sliderVerifyFinish"
+        ></slider-verify>
+        <div
+          :class="[
+            'error-message',
+            { active: needSliderVerify && !sliderVerify }
+          ]"
+        >
+          {{ lang['slider-verify-first'] }}
+        </div>
+      </div> -->
+
+        <div class="line-box button-line">
+          <button class="full-btn login" @click="login">
+            <span class="btn-message">{{ lang['login-now'] }}</span>
+          </button>
+        </div>
+        <div class="line-box button-line">
+          <button class="full-btn forget" @click="toForget">
+            <span class="btn-message">
+              {{ lang['forget'] }}
+            </span>
+          </button>
+        </div>
+      </section>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -173,39 +138,39 @@ import Input from '@/mixins/input.js'
 export default {
   layout: 'login',
   mixins: [Input],
-  data() {
+  data () {
     return {
       lang: this.LANGUAGE.login.email,
       loginInfo: {
         username: '',
         password: '',
       },
-      code:'',
+      code: '',
       pictureCode: '',
       verifyStatus: 1, // 控制滑动验证是否显示
       sliderVerify: false, // 滑动验证是否完成
       errorKeys: [],
-      language:''
+      language: ''
     }
   },
   computed: {
-    needSliderVerify() {
+    needSliderVerify () {
       return this.verifyStatus === 2
     },
-    trueUsername() {
+    trueUsername () {
       return this.$helpers && this.$helpers.trueEmail(this.loginInfo.username)
     },
-    trueUsernameM() {
+    trueUsernameM () {
       return this.loginInfo.username && (/^1[3456789]\d{9}$/.test(this.loginInfo.username))
     },
-    truePassword() {
+    truePassword () {
       return this.loginInfo.password && this.loginInfo.password.length > 5
     },
-    trueCode(){
+    trueCode () {
       return this.code && this.code == this.pictureCode
     }
   },
-  mounted() {
+  mounted () {
     this.refreshCode()
     this.language = this.getCookie('language')
     const _this = this
@@ -214,8 +179,8 @@ export default {
     })
   },
   methods: {
-     // 查询cookie
-    getCookie(cname) {
+    // 查询cookie
+    getCookie (cname) {
       const name = cname + '='
       const ca = document.cookie.split(';')
       for (let i = 0; i < ca.length; i++) {
@@ -225,7 +190,7 @@ export default {
       return ''
     },
     // 生成驗證碼
-    refreshCode() {
+    refreshCode () {
       // const info = JSON.parse(JSON.stringify(this.info))
       const result = []
       const library = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -236,12 +201,12 @@ export default {
       this.pictureCode = result.join('')
       // this.info = info
     },
-    toRegister() {
+    toRegister () {
       this.$router.push({
         name: 'register'
       })
     },
-    toForget() {
+    toForget () {
       this.$router.push({
         name: 'forget'
       })
@@ -269,7 +234,7 @@ export default {
     //   this.sliderVerify = false
     //   this.$refs['slider-verify'].reset()
     // },
-    loginCN() {
+    loginCN () {
       const _this = this
       if (_this.needSliderVerify && !_this.sliderVerify) {
         _this.$toast.show(_this.lang['slider-verify'])
@@ -283,7 +248,7 @@ export default {
         _this.$toast.show(_this.lang['input-password'])
         return
       }
-       if (_this.code !== _this.pictureCode) {
+      if (_this.code !== _this.pictureCode) {
         _this.$toast.show(_this.lang['input-code'])
         return
       }
@@ -296,10 +261,16 @@ export default {
         })
         .then(res => {
           // console.log('data=======>', data)
-          if (!res.data.access_token) {
+          if (!res.access_token) {
             throw new Error(_this.lang['login-error'])
           }
-          _this.$store.commit('setToken',res.data.access_token)
+          localStorage.setItem("refreshToken", res.refresh_token);
+          localStorage.setItem("accessToken", res.access_token);
+          let nowDate = parseInt((new Date()).getTime() / 1000)
+          localStorage.setItem("refreshTime", nowDate);
+
+          _this.$store.commit('setToken', res.access_token)
+          _this.$store.commit('setUserInfo', res.member);
           _this.$toast.show(_this.lang['login-success'])
 
           const lastUrl = _this.$store.state.lastUrl
@@ -322,7 +293,7 @@ export default {
           // _this.getVerifyStatus()
         })
     },
-    login() {
+    login () {
       const _this = this
       if (_this.needSliderVerify && !_this.sliderVerify) {
         _this.$toast.show(_this.lang['slider-verify'])
@@ -344,13 +315,21 @@ export default {
           data: _this.loginInfo
         })
         .then(res => {
-          console.log('data=======>', res.data.access_token)
-          if (!res.data.access_token) {
+          console.log('data=======>', res.access_token)
+
+
+          if (!res.access_token) {
             throw new Error(_this.lang['login-error'])
           }
-          _this.$store.commit('setToken', res.data.access_token)
-          _this.$toast.show(_this.lang['login-success'])
 
+          localStorage.setItem("refreshToken", res.refresh_token);
+          localStorage.setItem("accessToken", res.access_token);
+          let nowDate = parseInt((new Date()).getTime() / 1000)
+          localStorage.setItem("refreshTime", nowDate);
+
+          _this.$store.commit('setToken', res.access_token)
+          _this.$toast.show(_this.lang['login-success'])
+          _this.$store.commit('setUserInfo', res.member);
           const lastUrl = _this.$store.state.lastUrl
           _this.$store.commit('setLastUrl', '')
           setTimeout(() => {

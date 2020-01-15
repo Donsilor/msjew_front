@@ -124,7 +124,7 @@ export default {
         })
         .then(res => {
           console.log("eeee",res)
-          this.date = res.data
+          this.date = res
           if (this.date === 1) {
             this.headImg = require('~/static/personal/men.png')
           } else if (this.date === 2) {
@@ -139,10 +139,10 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/myAccount/OrderCount`
+          url: `/web/member/order`
         })
         .then(res => {
-          this.orderCount = res.orderCount
+          this.orderCount = res.total_count
           this.couponCount = res.couponCount
           console.log(res)
         })
