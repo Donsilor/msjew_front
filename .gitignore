@@ -11,3 +11,4 @@ node_modules
 /web/node_modules
 /web/.nuxt
 /web/nuxt.config.js
+/mobile/nuxt.config.js
