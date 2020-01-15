@@ -314,12 +314,12 @@ export default {
     console.log('removeOnlineCart=====>')
     return this.$axios({
       method: 'post',
-      url: `/wap/goodsCart/delete`,
+      url: `/web/member/cart/del`,
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded'
       },
       data: {
-        ids: goods
+        id: goods
       },
       transformRequest: [
         function(data) {
@@ -412,8 +412,8 @@ export default {
       url: `/web/member/cart`
     })
       .then(data => {
-        console.log("购物车列表",data.data)
-        return makeCartGoodGroups(data.data)
+        // console.log("购物车列表",data.data)
+        return makeCartGoodGroups(data)
       })
       .catch(err => {
         return Promise.reject(err)
@@ -455,7 +455,7 @@ export default {
     })
       .then(data => {
         // console.log('线上购物车商品总数====>', data)
-        return data.data
+        return data
       })
       .catch(err => {
         return Promise.reject(err)

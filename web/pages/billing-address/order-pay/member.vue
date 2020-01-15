@@ -77,7 +77,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.firstname }}{{ a.lastname }}</div>
+            <div>{{ a.realname }}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -144,21 +144,21 @@
             <div
               :class="[
                 { 'border-change': borderChange === 1 },
-                { 'border-wrong': wrongInput.firstname }
+                { 'border-wrong': wrongInput.lastname }
               ]"
               class="input-box"
             >
               <input
-                v-model="addressData.firstname"
-                :class="{ 'wrong-input': wrongInput.firstname }"
+                v-model="addressData.lastname"
+                :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
                 @focus="
                   borderChange = 1
-                  wrongInput.firstname = false
+                  wrongInput.lastname = false
                 "
                 @blur="borderChange = 0"
               />
-              <div v-show="wrongInput.firstname" class="wrong-alert">
+              <div v-show="wrongInput.lastname" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
               </div>
             </div>
@@ -170,21 +170,21 @@
             <div
               :class="[
                 { 'border-change': borderChange === 2 },
-                { 'border-wrong': wrongInput.lastname }
+                { 'border-wrong': wrongInput.firstname }
               ]"
               class="input-box"
             >
               <input
-                v-model="addressData.lastname"
-                :class="{ 'wrong-input': wrongInput.lastname }"
+                v-model="addressData.firstname"
+                :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
                 @focus="
                   borderChange = 2
-                  wrongInput.lastname = false
+                  wrongInput.firstname = false
                 "
                 @blur="borderChange = 0"
               />
-              <div v-show="wrongInput.lastname" class="wrong-alert">
+              <div v-show="wrongInput.firstname" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
               </div>
             </div>
@@ -787,7 +787,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.firstname }}{{ a.lastname }}</div>
+            <div>{{ a.realname}}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -849,12 +849,12 @@
       <div class="new-address-input">
         <!--        左边输入框-->
         <div class="left-side">
-          <!--          姓名-->
+          <!--          名-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.lastName`) }}</div>
+            <div class="label">*{{ $t(`${lang}.firstName`) }}</div>
             <div
               :class="[
-                { 'border-change': borderChange === 1 },
+                { 'border-change': borderChange === 2 },
                 { 'border-wrong': wrongInput.firstname }
               ]"
               class="input-box"
@@ -864,7 +864,7 @@
                 :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
                 @focus="
-                  borderChange = 1
+                  borderChange = 2
                   wrongInput.firstname = false
                 "
                 @blur="borderChange = 0"
@@ -874,13 +874,12 @@
               </div>
             </div>
           </div>
-
-          <!--          姓名-->
+          <!--          姓-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.firstName`) }}</div>
+            <div class="label">*{{ $t(`${lang}.lastName`) }}</div>
             <div
               :class="[
-                { 'border-change': borderChange === 2 },
+                { 'border-change': borderChange === 1 },
                 { 'border-wrong': wrongInput.lastname }
               ]"
               class="input-box"
@@ -890,7 +889,7 @@
                 :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
                 @focus="
-                  borderChange = 2
+                  borderChange = 1
                   wrongInput.lastname = false
                 "
                 @blur="borderChange = 0"
@@ -900,6 +899,7 @@
               </div>
             </div>
           </div>
+
 
           <!--          电话-->
           <div class="input-line">

@@ -94,7 +94,7 @@
           <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
         </div>
 
-        <div class="btn-common btn-pink btn-address" @click="createAddress">
+        <div class="btn-common btn-pink btn-address" @click="createAddressCN">
           {{ lang.storage }}
         </div>
         <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
@@ -436,17 +436,17 @@ export default {
           url: `/web/common/area`
         })
         .then(res => {
-          console.log("area",res.data)
+          // console.log("area",res.data)
           _this.countryList = []
-          for (let i = 0; i < res.data.length; i++) {
+          for (let i = 0; i < res.length; i++) {
             const o = {
-              id: res.data[i].areaId,
-              content: res.data[i].areaName
+              id: res[i].areaId,
+              content: res[i].areaName
             }
             _this.countryList.push(o)
           }
           _this.countryList.unshift({ id: '', content: this.lang.pleaseChoose })
-          console.log("国家",_this.countryList)
+          // console.log("国家",_this.countryList)
           this.getListTwo()
           this.getListThree()
         })
@@ -468,12 +468,12 @@ export default {
         })
         .then(res => {
           _this.provinceList = []
-          for (let i = 0; i < res.data.length; i++) {
+          for (let i = 0; i < res.length; i++) {
             const o = {
-              id: res.data[i].areaId,
-              content: res.data[i].areaName
+              id: res[i].areaId,
+              content: res[i].areaName
             }
-            if(!res.data.length==0){
+            if(!res.length==0){
               _this.provinceList.push(o)
             }
           }
@@ -500,10 +500,10 @@ export default {
         })
         .then(res => {
           _this.cityList = []
-          for (let i = 0; i < res.data.length; i++) {
+          for (let i = 0; i < res.length; i++) {
             const o = {
-              id: res.data[i].areaId,
-              content: res.data[i].areaName
+              id: res[i].areaId,
+              content: res[i].areaName
             }
             _this.cityList.push(o)
           }
@@ -642,6 +642,100 @@ export default {
         this.countryTrue = true
       }
     },
+    // 简体
+    createAddressCN() {
+      this.check(0)
+      if (
+        this.nameTrue === false &&
+        this.surnameTrue === false &&
+        // this.mailboxTrue === false &&
+        this.phoneTrue === false &&
+        this.detailsTrue === false &&
+        this.countryTrue === false &&
+        this.isOver === true
+      ) {
+        this.isOver = false
+        const json = {
+          id: this.$route.query.id ? this.$route.query.id : null,
+          firstname: this.name,
+          lastname: this.surname,
+          mobile_code: this.userTelCode,
+          mobile: this.phone,
+          email: this.mailbox,
+          country_id: this.countryId,
+          province_id: this.provinceId,
+          city_id: this.cityId,
+          address_details: this.details,
+          zip_code: this.postal
+        }
+        const data = JSON.parse(JSON.stringify(json))
+        if (this.isLogin&&this.$route.query.type!=="add") {
+          const _this = this
+          _this
+            .$axios({
+              method: 'post',
+              url: `/web/member/address/edit`,
+              data: data
+            })
+            .then(res => {
+              this.$toast.show(this.lang.toast2)
+              setTimeout(() => {
+                this.$router.go(-1)
+                this.isOver = true
+              }, 3000)
+            })
+            .catch(err => {
+              this.isOver = true
+              console.log(err)
+            })
+        } else if(this.$route.query.type=="add"){
+          const _this = this
+          _this
+            .$axios({
+              method: 'post',
+              url: `/web/member/address/add`,
+              data: data
+            })
+            .then(res => {
+              console.log("aaaa",res)
+              this.$toast.show(this.lang.toast2)
+              setTimeout(() => {
+                this.$router.go(-1)
+                this.isOver = true
+              }, 3000)
+            })
+            .catch(err => {
+              this.isOver = true
+              console.log(err)
+            })
+
+        }else{
+          const json2 = {
+            id: this.$route.query.id ? this.$route.query.id : null,
+            name: this.name,
+            surname: this.surname,
+            userTelCode: this.userTelCode,
+            phone: this.phone,
+            mailbox: this.mailbox,
+            country: this.country,
+            countryId: this.countryId,
+            province: this.province,
+            provinceId: this.provinceId,
+            city: this.city,
+            cityId: this.cityId,
+            details: this.details,
+            postal: this.postal
+          }
+          const data2 = JSON.parse(JSON.stringify(json2))
+          storage && storage.set('myAdders', data2)
+          setTimeout(() => {
+            this.$router.go(-1)
+            this.isOver = true
+          }, 1500)
+        }
+      }
+    },
+    // 繁体
     createAddress() {
       this.check(0)
       if (

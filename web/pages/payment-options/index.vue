@@ -68,7 +68,7 @@
           <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
           <div v-show="payWay == 5" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
-          </div>  
+          </div>
           <div v-show="payWay == 5" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -178,7 +178,7 @@ export default {
   data() {
     return {
       lang,
-      payWay: 2,
+      payWay: this.$route.query.payType || 2,
       answer: false,
       pay: false,
       isPay: false,

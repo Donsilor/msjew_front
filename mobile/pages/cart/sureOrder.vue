@@ -47,10 +47,10 @@
           <b>{{ lang.send }}</b>
           <p>{{ lang.tips }}</p>
         </div>
-        <div class="input-mod">
+        <!-- <div class="input-mod">
           <div class="tips"><span>*</span>{{ lang.aftermailbox }}</div>
           <bdd-input v-model="mailbox" :placeholder="lang.mailbox"></bdd-input>
-        </div>
+        </div> -->
         <div class="text-area">
           <p>{{ lang.remark }}</p>
           <textarea
@@ -60,10 +60,7 @@
             :placeholder="lang.more"
           ></textarea>
         </div>
-        <div
-          v-show="!(sureCoupon && usingCouponInfo.couponCode)"
-          class="coupon"
-        >
+        <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
               <div class="coupon-code">
@@ -115,7 +112,7 @@
               <i class="iconfont icongantanhao2"></i>
             </div>
           </div>
-        </div>
+        </div> -->
         <ul class="price">
           <!--          <li v-if="isLogin" @click="selectCupon">-->
           <!--            <span>{{ lang.cupon }}</span-->
@@ -540,7 +537,7 @@ export default {
         .then(res => {
           // console.log("费用",res)
           this.canSubmit = true
-          this.allFee = res.data
+          this.allFee = res
           console.log("费用",this.allFee)
         })
         .catch(err => {
@@ -562,8 +559,8 @@ export default {
             _this.address = ''
             _this.hasAddress = false
             // console.log("address",res.data)
-            if (res.data && res.data.length > 0) {
-              res.data.map((item, index) => {
+            if (res && res.length > 0) {
+              res.map((item, index) => {
                 console.log("item",item)
                 if (this.$route.query.id) {
                   if (
@@ -622,28 +619,29 @@ export default {
         this.$toast.show(this.lang.toast2)
         return
       }
-      if (!Email.test(this.mailbox)) {
-        this.$toast.show(this.lang.toast3)
-        return
-      }
+      // if (!Email.test(this.mailbox)) {
+      //   this.$toast.show(this.lang.toast3)
+      //   return
+      // }
       if (this.isLogin) {
         this.$axios({
           method: 'post',
-          url: `/wap/order/createOrder`,
-          params: {
-            cartIds: this.idList.join(','),
-            allSend: this.isSend ? 1 : 2,
-            userRemark: this.userRemark,
-            productAmount: this.allFee.productAmount,
-            orderAmount: this.allFee.orderAmount,
-            userAddressId: this.address.id,
-            afterMail: this.mailbox,
-            recvType: 1,
-            preferId: this.selectCouponId ? this.selectCouponId : null,
-            preferCode: this.inputCouponCode ? this.inputCouponCode : null
+          url: `/web/member/order/create`,
+          data: {
+            cart_ids: this.idList.join(','),
+            // allSend: this.isSend ? 1 : 2,
+            buyer_remark: this.userRemark,
+            // productAmount: this.allFee.productAmount,
+            order_amount: this.allFee.orderAmount,
+            buyer_address_id: this.address.id,
+            // afterMail: this.mailbox,
+            // recvType: 1,
+            // preferId: this.selectCouponId ? this.selectCouponId : null,
+            // preferCode: this.inputCouponCode ? this.inputCouponCode : null
           }
         })
           .then(res => {
+            console.log("总额",res)
             this.$router.replace({
               name: 'cart-pay',
               query: {

@@ -97,22 +97,22 @@
         </ul>
       </div>
     </section>
-    <section class="social-media">
+    <section class="social-media" style="height: 10px !important;">
       <!--      <div class="item">-->
       <!--        <i class="iconfont icon_weibo"></i>-->
       <!--      </div>-->
       <!--      <div class="item">-->
       <!--        <i class="iconfont icon_Twitter"></i>-->
       <!--      </div>-->
-      <a href="https://www.instagram.com/bddco_jewelry" class="item">
+      <!--      <a href="https://www.instagram.com/bddco_jewelry" class="item">
         <span>Instagram</span>
         <i class="iconfont icon_ins"></i>
-      </a>
-      <div class="line-item"></div>
-      <a href="https://www.facebook.com/bddco.hk" class="item">
+      </a>-->
+      <!--      <div class="line-item"></div> -->
+      <!--      <a href="https://www.facebook.com/bddco.hk" class="item">
         <span>Facebook</span>
         <i class="iconfont icon_fb"></i>
-      </a>
+      </a> -->
     </section>
     <section class="page-info">
       <span class="text">{{ lang.onlineStore }}</span>

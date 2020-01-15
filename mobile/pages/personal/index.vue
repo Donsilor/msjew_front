@@ -18,27 +18,27 @@
             <span v-if="orderCount > 0">{{ orderCount }}</span>
           </div>
         </li>
-        <li @click="toNext('personal-wish')">
+        <!-- <li @click="toNext('personal-wish')">
           <i class="icon iconfont left-icon iconicon-xinyuandan"></i>
           <div class="right">
             <p>{{ lang.p2 }}</p>
             <i class="icon iconfont iconyou"></i>
           </div>
-        </li>
-        <li @click="toNext('personal-comment')">
+        </li> -->
+        <!-- <li @click="toNext('personal-comment')">
           <i class="icon iconfont left-icon icongerenzhongxin-_pinglun"></i>
           <div class="right">
             <p>{{ lang.p3 }}</p>
             <i class="icon iconfont iconyou"></i>
           </div>
-        </li>
-        <li @click="toNext('personal-diamondContrast')">
+        </li> -->
+        <!-- <li @click="toNext('personal-diamondContrast')">
           <i class="icon iconfont left-icon icongerenzhongxin_duibi"></i>
           <div class="right border-none">
             <p>{{ lang.p4 }}</p>
             <i class="icon iconfont iconyou"></i>
           </div>
-        </li>
+        </li> -->
         <li class="border-top" @click="toNext('personal-address')">
           <i
             class="icon iconfont left-icon icongerenzhongxin-_shouhuodizhi"
@@ -48,14 +48,14 @@
             <i class="icon iconfont iconyou"></i>
           </div>
         </li>
-        <li @click="toNext('personal-coupon')">
+        <!-- <li @click="toNext('personal-coupon')">
           <i class="icon iconfont left-icon icongerenzhongxin-_youhuiquan"></i>
           <div class="right">
             <p>{{ lang.p6 }}</p>
             <i class="icon iconfont iconyou"></i>
             <span v-if="couponCount > 0">{{ couponCount }}</span>
           </div>
-        </li>
+        </li> -->
         <li @click="toNext('personal-password')">
           <i class="icon iconfont left-icon icongerenzhongxin-_mimaanquan"></i>
           <div class="right">
@@ -124,7 +124,7 @@ export default {
         })
         .then(res => {
           console.log("eeee",res)
-          this.date = res.data
+          this.date = res
           if (this.date === 1) {
             this.headImg = require('~/static/personal/men.png')
           } else if (this.date === 2) {
