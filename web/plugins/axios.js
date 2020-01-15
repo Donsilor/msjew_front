@@ -12,11 +12,14 @@ export default function({ $axios, store }) {
 
   $axios.onResponse(res => {
     const data = res.data || {}   
-    //const accessToken = localStorage.getItem('accessToken')
-	//if(accessToken == '' && store.state.token) {
-	//	store.dispatch('logout')
-	//	return 
-	//}
+
+	if(process.server == false) {
+		let accessToken = localStorage.getItem('accessToken')
+		if(!accessToken && store.state.token) {
+			store.dispatch('logout')
+			return 
+		}
+	}
     if (data.hasOwnProperty('code')) {
       if (data.code == 200) {
         return Promise.resolve(
@@ -25,13 +28,15 @@ export default function({ $axios, store }) {
         // return Promise.resolve(data.data || null)
       } else {
         if (data.code == 401) {
-          console.log('is 401')		  
-		  //if(accessToken == '' || accessToken == store.state.token) {
-			//store.dispatch('logout')			
-		  //}else {
-			//localStorage.setItem('accessToken',accessToken)  
-			//window.location.reload() 
-		  //}          
+			if(process.server == false) {
+				let accessToken = localStorage.getItem('accessToken')
+				if(!accessToken || accessToken == store.state.token) {
+					store.dispatch('logout')			
+				}else { 
+					window.location.reload() 
+				} 
+			}		  
+		           
         }else{
           return Promise.reject(new Error(data.message|| 'something error'))
         }
