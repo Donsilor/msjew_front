@@ -318,7 +318,7 @@ export default {
           if(res.code != 200){
             return
           }
-          console.log("我的订单列表",res.data.data)
+          // console.log("我的订单列表",res.data.data)
           this.list = {
             //  没给钱
             ordered: [],
