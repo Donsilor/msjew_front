@@ -1,16 +1,12 @@
 <template>
   <div class="page">
     <section class="banner">
-      <el-carousel
-        trigger="click"
-        :autoplay="true"
-        :height="bannerHeig + 'px'"
-      >
-     <el-carousel-item v-for="(item, index) in ad" :key="index">
-        <a :href="item.addres || ''">
-          <img class="banner-img" :src="item.image" alt="">
-        </a>
-      </el-carousel-item>
+      <el-carousel trigger="click" :autoplay="true" :height="bannerHeig + 'px'">
+        <el-carousel-item v-for="(item, index) in ad" :key="index">
+          <a :href="item.addres || ''">
+            <img class="banner-img" :src="item.image" alt="">
+          </a>
+        </el-carousel-item>
 
         <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
                    有链接地址，且是外部链接
@@ -54,11 +50,7 @@
     </section>
     <section class="recommend-category">
       <div class="categories">
-        <div
-          v-for="(category, index) in recommendCategories"
-          :key="index"
-          class="category-item"
-        >
+        <div v-for="(category, index) in recommendCategories" :key="index" class="category-item">
           <nuxt-link :to="category.to">
             <div class="bg">
               <img :src="category.bgImage" />
@@ -84,25 +76,10 @@
       </h1>
       <div class="section-title-line"></div>
       <div class="hot-list" :style="{ height: hotProductItemWidth + 'px' }">
-        <swiper
-          ref="hot-product-list"
-          :item-width="20"
-          :scale="true"
-          :scale-multiple="1.5"
-          :indicator="false"
-          @change="changeActiveHotProduct"
-        >
+        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveHotProduct">
 
-          <div
-            v-for="(product, n) in hotProductInfo.products"
-            :key="n"
-            class="product-item"
-          >
-            <a
-              v-if="product.showType === 1"
-              :href="routeDataToUrl(product.to)"
-              target="_blank"
-            >
+          <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
+            <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
               <div class="product-image">
                 <img class="product-image" :src="product.goodsImages[0]" />
               </div>
@@ -158,14 +135,7 @@
         {{ $t(`${lang}.360DiamondInfo`) }}
       </h2>
       <div class="diamond-list" :style="{ height: diamondItemWidth + 'px' }">
-        <swiper
-          ref="diamond-list"
-          :item-width="20"
-          :scale="true"
-          :scale-multiple="1.5"
-          :indicator="false"
-          @change="changeActiveDiamond"
-        >
+        <swiper ref="diamond-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveDiamond">
           <div v-for="(diamond, n) in diamonds" :key="n" class="product-item">
             <nuxt-link :to="diamond.to">
               <div class="product-image">
@@ -313,14 +283,30 @@ import CategoryIndexPage from '@/mixins/category-index-page.js'
 import Interactive from '@/pageComponents/index/interactive.vue'
 const lang = 'index'
 export default {
-  head() {
-    return this.seoInfo || {}
+  head () {
+    return this.seoInfo || {
+      title: 'BDD Co. 訂製完美訂婚鑽戒 | bddco.com',
+      meta: [
+        {
+          name: 'title',
+          content: 'BDD Co. 訂製完美訂婚鑽戒 | bddco.com'
+        },
+        {
+          name: 'description',
+          content: 'BDD Co.細選鑽石戒指及首飾，提供自配戒指服務，專屬設計更能見證您們的愛情。馬上選購或預約試載，7天退換保證。'
+        },
+        {
+          name: 'keywords',
+          content: '925純銀, GIA證書, 手鍊, 手鐲, 白金, 耳環, 求婚戒指, 玫瑰金, 珠寶首飾, 結婚戒指, 項鍊, 黃金, 鉑金, 裸鑽, 藍色多瑙河鑽石, 鑽石'
+        }
+      ]
+    }
   },
   components: {
     Interactive
   },
   mixins: [CategoryIndexPage],
-  data() {
+  data () {
     return {
       bannerHeig: 640,
       lang,
@@ -450,7 +436,7 @@ export default {
     }
   },
   computed: {
-    hotProductInfo() {
+    hotProductInfo () {
       const webSite = JSON.parse(
         JSON.stringify(this.webSite ? this.webSite : [])
       )
@@ -484,16 +470,18 @@ export default {
       result.products = products
       return result
     },
-    activeHotProductInfo() {
-      console.log(1111,this.activeHotProductIndex)
+    activeHotProductInfo () {
+      // console.log(1111,this.activeHotProductIndex)
       return this.hotProductInfo.products[this.activeHotProductIndex] || {}
     },
-    activeDiamondInfo() {
+    activeDiamondInfo () {
       return this.diamonds[this.activeDiamondIndex] || {}
     }
   },
-  async asyncData({ $axios, route, store, app }) {
+  async asyncData ({ $axios, route, store, app }) {
     const seoInfo = await app.$getSeoInfo(1)
+    // console.log(seoInfo)
+
 
     return $axios({
       method: 'get',
@@ -504,40 +492,41 @@ export default {
     })
       .then(data => {
         var data = data.data;
-        console.log(data)
+
         return {
           ad: data.advert,
           webSite: data.webSite,
-          // seoInfo
+          seoInfo
         }
       })
       .catch(err => {
         console.error(err)
       })
   },
-  mounted() {
+  mounted () {
     const _this = this
     _this.$nextTick(() => {
-    })
+    }),
+      console.log(1111)
   },
   methods: {
     // 页面尺寸改变时触发重新计算
-    screenResize() {
+    screenResize () {
       const _this = this
       _this.resetBannerSize()
       _this.hotProductItemWidth = document.body.clientWidth / 5
       _this.diamondItemWidth = document.body.clientWidth / 5
     },
-    changeActiveHotProduct(data) {
+    changeActiveHotProduct (data) {
       this.activeHotProductIndex = data.index
     },
-    nextActiveHotProduct(type) {
+    nextActiveHotProduct (type) {
       this.$refs['hot-product-list'].goNext(type)
     },
-    changeActiveDiamond(data) {
+    changeActiveDiamond (data) {
       this.activeDiamondIndex = data.index
     },
-    nextActiveDiamond(type) {
+    nextActiveDiamond (type) {
       this.$refs['diamond-list'].goNext(type)
     }
   }

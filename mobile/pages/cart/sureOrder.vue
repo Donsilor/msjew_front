@@ -271,7 +271,7 @@ export default {
     },
     showOrderAmount() {
       let result = '--'
-      console.log('this.allFee=====>', JSON.stringify(this.allFee))
+      // console.log('this.allFee=====>', JSON.stringify(this.allFee))
       if (this.allFee.orderAmount === null) {
         result = this.formatMoney(this.productAmount)
       } else if (typeof this.allFee.orderAmount === 'number') {

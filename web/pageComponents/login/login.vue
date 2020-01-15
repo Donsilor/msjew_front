@@ -3,19 +3,11 @@
     <!-- 简体中文登录模块 -->
     <div v-if="language === 'zh_CN'" class="login-item">
       <div class="relative margin-bottom-20">
-        <div class="login-input icon-input" >
+        <div class="login-input icon-input">
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input
-            autocompleted="new-password" 
-            v-model="mobile"
-            @keyup="keyupEvent1"
-            @keypress="keypressEvent1"
-            type="text"
-            v-bind:class="{active:isActive1}"
-            :placeholder="$t(`${lang}.mailbox`)"
-          />
+          <input autocompleted="new-password" v-model="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phone`) }}
@@ -26,15 +18,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input
-            autocompleted="new-password" 
-            v-model="password"
-            @keyup="keyupEvent2"
-            @keypress="keypressEvent2"
-            type="password"
-            v-bind:class="{active:isActive2}"
-            :placeholder="$t(`${lang}.password`)"
-          />
+          <input autocompleted="new-password" v-model="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.pwd`) }}
@@ -48,21 +32,10 @@
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
-            <input
-              v-model="code"
-              autocompleted="new-password" 
-              @keyup="keyupEvent3"
-              @keypress="keypressEvent3"
-              type="text"
-              v-bind:class="{active:isActive3}"
-              :placeholder="$t(`${lang}.code`)"
-            />
+            <input v-model="code" autocompleted="new-password" @keyup="keyupEvent3" @keypress="keypressEvent3" type="text" v-bind:class="{active:isActive3}" :placeholder="$t(`${lang}.code`)" />
           </div>
           <div class="code-picture" @click="refreshCode">
-            <picture-verification-code
-              ref="picture-verification-code"
-              :identify-code="pictureCode"
-            ></picture-verification-code>
+            <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
           </div>
         </div>
         <div v-show="codeErr" class="error-tip">
@@ -74,7 +47,7 @@
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
-     <!-- <div class="gap-line margin-bottom-28">
+      <!-- <div class="gap-line margin-bottom-28">
         <span>{{ $t(`${lang}.logins`) }}</span>
       </div>
       <div class="row-flex justify-center">
@@ -89,15 +62,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input
-            v-model="account"
-            autocompleted="new-password" 
-            @keyup="keyupEvent1"
-            @keypress="keypressEvent1"
-            v-bind:class="{active:isActive1}"
-            type="text"
-            :placeholder="$t(`${lang}.mailbox`)"
-          />
+          <input v-model="account" autocompleted="new-password" @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
@@ -108,15 +73,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input
-            v-model="password"
-            autocompleted="new-password" 
-            @keyup="keyupEvent2"
-            @keypress="keypressEvent2"
-            v-bind:class="{active:isActive2}"
-            type="password"
-            :placeholder="$t(`${lang}.password`)"
-          />
+          <input v-model="password" autocompleted="new-password" @keyup="keyupEvent2" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
@@ -130,22 +87,10 @@
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
-            <input
-              v-model="code"
-              autocompleted="new-password" 
-              @keyup="keyupEvent3"
-              @keypress="keypressEvent3"
-              v-bind:class="{active:isActive3}"
-              type="text"
-              :placeholder="$t(`${lang}.code`)"
-              @keydown.enter="login"
-            />
+            <input v-model="code" autocompleted="new-password" @keyup="keyupEvent3" @keypress="keypressEvent3" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.code`)" @keydown.enter="login" />
           </div>
           <div class="code-picture" @click="refreshCode">
-            <picture-verification-code
-              ref="picture-verification-code"
-              :identify-code="pictureCode"
-            ></picture-verification-code>
+            <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
           </div>
         </div>
         <div v-show="codeErr" class="error-tip">
@@ -161,8 +106,8 @@
         <span>{{ $t(`${lang}.logins`) }}</span>
       </div> -->
       <!-- <div class="row-flex justify-center"> -->
-        <!-- <img src="/login/facebook.png" class="oauth-type" /> -->
-        <!-- <img src="/login/google.png" class="oauth-type" /> -->
+      <!-- <img src="/login/facebook.png" class="oauth-type" /> -->
+      <!-- <img src="/login/google.png" class="oauth-type" /> -->
       <!-- </div> -->
     </div>
   </div>
@@ -173,7 +118,7 @@ import Input from '@/mixins/input.js'
 const lang = 'login'
 export default {
   mixins: [Input],
-  data() {
+  data () {
     return {
       lang,
       account: '',
@@ -192,7 +137,7 @@ export default {
       isActive3: false
     }
   },
-   watch:{
+  watch: {
     // mobile(){
     //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
     //     this.$errorMessage("请输入手机号")
@@ -203,12 +148,12 @@ export default {
     // }
   },
   computed: {
-  //  aa(){
-  //    let result=this.$store.state.refreshCode
-  //    console.log(result) 
-  //  }
+    //  aa(){
+    //    let result=this.$store.state.refreshCode
+    //    console.log(result) 
+    //  }
   },
-  mounted() {
+  mounted () {
     // if(this.mobile==''){
     //   this.isActive1=true
     //   this.phoneErr=true
@@ -220,33 +165,33 @@ export default {
     })
   },
   methods: {
-    keyupEvent1(){
-      this.isActive1=false
-      this.phoneErr=false
+    keyupEvent1 () {
+      this.isActive1 = false
+      this.phoneErr = false
     },
-    keypressEvent1(){
-      this.isActive1=false
+    keypressEvent1 () {
+      this.isActive1 = false
       // this.phoneErr=false
     },
-    keyupEvent2(){
-      this.isActive2=false
-      this.passwordErr=false
+    keyupEvent2 () {
+      this.isActive2 = false
+      this.passwordErr = false
     },
-    keypressEvent2(){
-     
+    keypressEvent2 () {
+
     },
-    keyupEvent3(){
-      if(this.code == this.pictureCode){
-        this.isActive3=false
-        this.codeErr=false
+    keyupEvent3 () {
+      if (this.code == this.pictureCode) {
+        this.isActive3 = false
+        this.codeErr = false
       }
     },
-    keypressEvent3(){
+    keypressEvent3 () {
       // this.isActive3=false
       // this.passwordErr=false
     },
     // 查询cookie
-    getCookie(cname) {
+    getCookie (cname) {
       const name = cname + '='
       const ca = document.cookie.split(';')
       for (let i = 0; i < ca.length; i++) {
@@ -256,7 +201,7 @@ export default {
       return ''
     },
     // 生成驗證碼
-    refreshCode() {
+    refreshCode () {
       // const info = JSON.parse(JSON.stringify(this.info))
       const result = []
       const library = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
@@ -268,67 +213,66 @@ export default {
       // this.info = info
     },
     // 中文登录
-    loginCN() {
+    loginCN () {
       const _this = this
-     
-      if(_this.mobile === ''){
-        _this.isActive1 =true
+
+      if (_this.mobile === '') {
+        _this.isActive1 = true
         _this.phoneErr = true
         return
       }
-      if(_this.password === ''){
-         _this.isActive2 =true
+      if (_this.password === '') {
+        _this.isActive2 = true
         _this.passwordErr = true
         return
       }
-      if(_this.code === ''){
-        _this.isActive3 =true
+      if (_this.code === '') {
+        _this.isActive3 = true
         _this.codeErr = true
         return
       }
       this.$axios({
-          method: 'post',
-          url: '/web/site/login',
-          params:{
-          },
-          data:{
-            'username': _this.mobile,
-            'password': _this.password
-          }
-        })
+        method: 'post',
+        url: '/web/site/login',
+        params: {
+        },
+        data: {
+          'username': _this.mobile,
+          'password': _this.password
+        }
+      })
         .then(res => {
-		    const data = res.data 
-            localStorage.setItem("refreshToken",data.refresh_token);
-            localStorage.setItem("accessToken",data.access_token);
-            let nowDate = parseInt((new Date()).getTime()/1000)
-            localStorage.setItem("loginTime",nowDate);
-            localStorage.setItem("refreshTime",nowDate);
+          const data = res.data
+          localStorage.setItem("refreshToken", data.refresh_token);
+          localStorage.setItem("accessToken", data.access_token);
+          let nowDate = parseInt((new Date()).getTime() / 1000)
+          localStorage.setItem("refreshTime", nowDate);
 
-            if (_this.code !== _this.pictureCode) {
-              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-              _this.requesting = false
-            }else{
-              _this.$successMessage(_this.$t(`${lang}.logintips`))
-              _this.$store.commit('setToken', data.access_token)
-              _this.$store.commit('setUserInfo',data.member)
-              const lastUrl = _this.$store.state.lastUrl
-              _this.$store.commit('setLastUrl', '')
-			  console.log('login',data)
-			   
-              setTimeout(() => {
-                if (lastUrl) {
-                  _this.$router.replace({
-                    path: lastUrl
-                  })
-                } 
-                else {
-                  _this.$router.replace({
-                    path: '/'
-                  })
-                }
-              }, 0)          
-              
-            }          
+          if (_this.code !== _this.pictureCode) {
+            _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+            _this.requesting = false
+          } else {
+            _this.$successMessage(_this.$t(`${lang}.logintips`))
+            _this.$store.commit('setToken', data.access_token)
+            _this.$store.commit('setUserInfo', data.member)
+            const lastUrl = _this.$store.state.lastUrl
+            _this.$store.commit('setLastUrl', '')
+            console.log('login', data)
+
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              }
+              else {
+                _this.$router.replace({
+                  path: '/'
+                })
+              }
+            }, 0)
+
+          }
         })
         .catch(err => {
           //console.error(err)
@@ -338,70 +282,69 @@ export default {
         })
     },
     // 登录
-    login() {
+    login () {
       const _this = this
       // _this.requesting = true
-      if(_this.account === ''){
-        _this.isActive1 =true
+      if (_this.account === '') {
+        _this.isActive1 = true
         _this.phoneErr = true
         return
       }
-      if(_this.password === ''){
-         _this.isActive2 =true
-         _this.passwordErr = true
-         return
+      if (_this.password === '') {
+        _this.isActive2 = true
+        _this.passwordErr = true
+        return
       }
-      if(_this.code === ''){
-         _this.isActive3 =true
-         _this.codeErr = true
-         return
+      if (_this.code === '') {
+        _this.isActive3 = true
+        _this.codeErr = true
+        return
       }
       this.$axios({
-          method: 'post',
-          url: '/web/site/login',
-          params:{
-          },
-          data:{
-            'username': _this.account,
-            'password': _this.password
-          }
-        })
+        method: 'post',
+        url: '/web/site/login',
+        params: {
+        },
+        data: {
+          'username': _this.account,
+          'password': _this.password
+        }
+      })
         .then(res => {
-                
-            const data = res.data 
-            localStorage.setItem("refreshToken",data.refresh_token);
-            localStorage.setItem("accessToken",data.access_token);
-            let nowDate = parseInt((new Date()).getTime()/1000)
-            localStorage.setItem("loginTime",nowDate);
-            localStorage.setItem("refreshTime",nowDate);
 
-            if (_this.code !== _this.pictureCode) {
-              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-              _this.requesting = false
-            }else{
-              _this.$successMessage(_this.$t(`${lang}.logintips`))
-              _this.$store.commit('setToken', data.access_token)
-              _this.$store.commit('setUserInfo',data.member);
-			  console.log('login',data)
-              const lastUrl = _this.$store.state.lastUrl
-              _this.$store.commit('setLastUrl', '')
-              setTimeout(() => {
-                if (lastUrl) {
-                  _this.$router.replace({
-                    path: lastUrl
-                  })
-                } 
-                else {
-                  _this.$router.replace({
-                    path: '/'
-                  })
-                }
-              }, 0)
-              /*setTimeout(() => {
-                window.location.reload()
-              }, 1000)*/
-              
-            }          
+          const data = res.data
+          localStorage.setItem("refreshToken", data.refresh_token);
+          localStorage.setItem("accessToken", data.access_token);
+          let nowDate = parseInt((new Date()).getTime() / 1000)
+          localStorage.setItem("refreshTime", nowDate);
+
+          if (_this.code !== _this.pictureCode) {
+            _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+            _this.requesting = false
+          } else {
+            _this.$successMessage(_this.$t(`${lang}.logintips`))
+            _this.$store.commit('setToken', data.access_token)
+            _this.$store.commit('setUserInfo', data.member);
+            console.log('login', data)
+            const lastUrl = _this.$store.state.lastUrl
+            _this.$store.commit('setLastUrl', '')
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              }
+              else {
+                _this.$router.replace({
+                  path: '/'
+                })
+              }
+            }, 0)
+            /*setTimeout(() => {
+              window.location.reload()
+            }, 1000)*/
+
+          }
         })
         .catch(err => {
           _this.requesting = false
@@ -414,8 +357,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-input::placeholder{
-  color:#C0C4CC;
+input::placeholder {
+  color: #c0c4cc;
 }
 .margin-bottom-29 {
   margin-bottom: 29px;
@@ -543,8 +486,8 @@ input::placeholder{
     width: 35px;
     margin: 0 15px;
   }
-  .active{
-    border:1px solid #F4A997!important;
+  .active {
+    border: 1px solid #f4a997 !important;
     border-radius: 6px;
   }
 }

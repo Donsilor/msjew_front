@@ -794,6 +794,7 @@
       "unpaid": "未付款",
       "paid": "已付款",
       "shipped": "已發貨",
+      "waitingSend": "待發貨",
       "completed": "已完成",
       "noComment": "未評價",
       "commented": "已評價",

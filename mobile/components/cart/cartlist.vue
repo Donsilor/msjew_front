@@ -88,24 +88,26 @@ export default {
     getconfig(list, list2) {
       // console.log("list",list)
       let text = ''
-      if (list.length > 0) {
-        list.map((item, index) => {
-          if (index === list.length - 1) {
-            text = text + item.configAttrIVal
-          } else {
-            text = text + item.configAttrIVal + ' /  '
-          }
-        })
+      if(list !== undefined){
+        if (list.length > 0) {
+          list.map((item, index) => {
+            if (index === list.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+        if (list2 && list2.length > 0) {
+          list2.map((item, index) => {
+            if (item.configId === 196) {
+              // console.log(list2, '9999', item)
+              text = text + ' /  ' + item.configAttrIVal
+            }
+          })
+        }
+        return text
       }
-      if (list2 && list2.length > 0) {
-        list2.map((item, index) => {
-          if (item.configId === 196) {
-            // console.log(list2, '9999', item)
-            text = text + ' /  ' + item.configAttrIVal
-          }
-        })
-      }
-      return text
     },
     back() {
       this.$router.go(-1)
