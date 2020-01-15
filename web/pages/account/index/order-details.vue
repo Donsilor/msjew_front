@@ -76,8 +76,11 @@
               }}{{ data.address.cityName }}
             </div>
             <div class="user-info">
-              <div>
-                {{ data.address.lastName }} {{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
+              <div v-if="language === 'en_US'">
+                {{ data.address.firstName }} {{ data.address.lastName }}<span>{{ $t(`${lang}.get`) }}</span>
+              </div>
+              <div v-else>
+                {{ data.address.lastName }}{{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
               </div>
               <div>
                 <span>{{ data.address.userTelCode }}</span>
@@ -287,6 +290,7 @@ const lang_pay = 'personal.userOrder'
 export default {
   name: 'OrderDetails',
   data() {
+    console.log('abc', this.$cookies)
     return {
       lang,
       lang_pay,
@@ -379,9 +383,20 @@ export default {
     }
   },
   mounted() {
+    this.language = this.getCookie('language')
     this.getData()
   },
   methods: {
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     getStatusText(status) {
       // console.log("状态码",status)
       // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
