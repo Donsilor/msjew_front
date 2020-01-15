@@ -80,7 +80,6 @@ export default {
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshTime');
-    window.location.reload()
   },
   // 获取用户数据
   getUserInfo({

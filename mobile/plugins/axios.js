@@ -11,12 +11,11 @@ export default function ({
   })
   $axios.onResponse(res => {
     const data = res.data || {}
-
     if (process.server == false) {
       let accessToken = localStorage.getItem('accessToken')
       if (!accessToken && store.state.token) {
         store.dispatch('logout')
-        return
+        window.location.href = '/'
       }
     }
     if (data.hasOwnProperty('code')) {
@@ -24,10 +23,12 @@ export default function ({
         return Promise.resolve(![undefined].includes(data.data) ? data.data : null)
         //return Promise.resolve(data.data || null)
       } else if (data.code == 401) {
+        store.dispatch('logout')
         if (process.server == false) {
           let accessToken = localStorage.getItem('accessToken')
           if (!accessToken || accessToken == store.state.token) {
             store.dispatch('logout')
+            window.location.href = '/'
           } else {
             window.location.reload()
           }
