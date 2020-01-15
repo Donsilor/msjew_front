@@ -47,10 +47,10 @@
           <b>{{ lang.send }}</b>
           <p>{{ lang.tips }}</p>
         </div>
-        <div class="input-mod">
+        <!-- <div class="input-mod">
           <div class="tips"><span>*</span>{{ lang.aftermailbox }}</div>
           <bdd-input v-model="mailbox" :placeholder="lang.mailbox"></bdd-input>
-        </div>
+        </div> -->
         <div class="text-area">
           <p>{{ lang.remark }}</p>
           <textarea
@@ -60,10 +60,7 @@
             :placeholder="lang.more"
           ></textarea>
         </div>
-        <div
-          v-show="!(sureCoupon && usingCouponInfo.couponCode)"
-          class="coupon"
-        >
+        <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
               <div class="coupon-code">
@@ -115,7 +112,7 @@
               <i class="iconfont icongantanhao2"></i>
             </div>
           </div>
-        </div>
+        </div> -->
         <ul class="price">
           <!--          <li v-if="isLogin" @click="selectCupon">-->
           <!--            <span>{{ lang.cupon }}</span-->
@@ -540,7 +537,7 @@ export default {
         .then(res => {
           // console.log("费用",res)
           this.canSubmit = true
-          this.allFee = res.data
+          this.allFee = res
           console.log("费用",this.allFee)
         })
         .catch(err => {
@@ -562,8 +559,8 @@ export default {
             _this.address = ''
             _this.hasAddress = false
             // console.log("address",res.data)
-            if (res.data && res.data.length > 0) {
-              res.data.map((item, index) => {
+            if (res && res.length > 0) {
+              res.map((item, index) => {
                 console.log("item",item)
                 if (this.$route.query.id) {
                   if (
@@ -644,11 +641,11 @@ export default {
           }
         })
           .then(res => {
-            console.log("总额",res.data)
+            console.log("总额",res)
             this.$router.replace({
               name: 'cart-pay',
               query: {
-                info: JSON.stringify(res.data)
+                info: JSON.stringify(res)
               }
             })
           })

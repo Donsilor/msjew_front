@@ -278,9 +278,9 @@ export default {
         }
         this.$axios({
           method: 'post',
-          url: '/wap/goodsCart/delete',
-          params: {
-            ids: arr2.join(',')
+          url: '/web/member/cart/del',
+          data: {
+            id: arr2.join(',')
           }
         })
           .then(res => {
@@ -296,24 +296,27 @@ export default {
     // 属性数值转化成字符串
     getconfig(list, list2) {
       let text = ''
-      if (list.length > 0) {
-        list.map((item, index) => {
-          if (index === list.length - 1) {
-            text = text + item.configAttrVal
-          } else {
-            text = text + item.configAttrVal + ' /  '
+        // console.log("length",list)
+        if(list !== undefined){
+          if (list.length > 0) {
+            list.map((item, index) => {
+              if (index === list.length - 1) {
+                text = text + item.configAttrVal
+              } else {
+                text = text + item.configAttrVal + ' /  '
+              }
+            })
           }
-        })
-      }
-      if (list2 && list2.length > 0) {
-        list2.map((item, index) => {
-          if (item.configId === 196) {
-            console.log(list2, '9999', item)
-            text = text + ' /  ' + item.configAttrVal
+          if (list2 && list2.length > 0) {
+            list2.map((item, index) => {
+              if (item.configId === 196) {
+                console.log(list2, '9999', item)
+                text = text + ' /  ' + item.configAttrVal
+              }
+            })
           }
-        })
-      }
-      return text
+          return text
+        }
     },
     // 获取本地数据
     getLocalList(list) {
@@ -380,7 +383,7 @@ export default {
           url: `/web/member/cart`
         })
         .then(res => {
-          this.doFormat(res.data)
+          this.doFormat(res)
         })
         .catch(err => {
           console.log('err:', err)

@@ -124,7 +124,7 @@ export default {
         })
         .then(res => {
           console.log("eeee",res)
-          this.date = res.data
+          this.date = res
           if (this.date === 1) {
             this.headImg = require('~/static/personal/men.png')
           } else if (this.date === 2) {

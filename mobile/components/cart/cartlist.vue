@@ -16,7 +16,7 @@
                 <p>SKU：{{ item.sku }}</p>
                 <p class="p">
                   {{
-                    getconfig(item.config, item.simpleGoodsEntity.specs)
+                    getconfig(item.config, item.simpleGoodsEntity.baseConfig)
                   }}
                 </p>
                 <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
@@ -37,7 +37,7 @@
                     {{
                       getconfig(
                         list[index + 1].config,
-                        list[index + 1].simpleGoodsEntity.specs
+                        list[index + 1].simpleGoodsEntity.baseConfig
                       )
                     }}
                   </p>
@@ -86,14 +86,14 @@ export default {
     formatMoney: formatMoney,
     // 属性数值转化成字符串
     getconfig(list, list2) {
-      
+      // console.log("list",list)
       let text = ''
       if (list.length > 0) {
         list.map((item, index) => {
           if (index === list.length - 1) {
-            text = text + item.configAttrVal
+            text = text + item.configAttrIVal
           } else {
-            text = text + item.configAttrVal + ' /  '
+            text = text + item.configAttrIVal + ' /  '
           }
         })
       }
@@ -101,11 +101,10 @@ export default {
         list2.map((item, index) => {
           if (item.configId === 196) {
             // console.log(list2, '9999', item)
-            text = text + ' /  ' + item.configAttrVal
+            text = text + ' /  ' + item.configAttrIVal
           }
         })
       }
-      console.log("list",text)
       return text
     },
     back() {

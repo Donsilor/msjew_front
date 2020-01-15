@@ -27,7 +27,7 @@ export default function({ $axios, store }) {
     if (data.hasOwnProperty('code')) {
       if (data.code === 200) {
         return Promise.resolve(
-          [undefined].indexOf(data) === -1 ? data : null
+          [undefined].indexOf(data.data) === -1 ? data.data : null
         )
         // return Promise.resolve(data.data || null)
       } else {

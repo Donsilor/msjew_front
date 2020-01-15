@@ -296,10 +296,10 @@ export default {
         })
         .then(res => {
           // console.log('data=======>', data)
-          if (!res.data.access_token) {
+          if (!res.access_token) {
             throw new Error(_this.lang['login-error'])
           }
-          _this.$store.commit('setToken',res.data.access_token)
+          _this.$store.commit('setToken',res.access_token)
           _this.$toast.show(_this.lang['login-success'])
 
           const lastUrl = _this.$store.state.lastUrl
@@ -344,11 +344,11 @@ export default {
           data: _this.loginInfo
         })
         .then(res => {
-          console.log('data=======>', res.data.access_token)
-          if (!res.data.access_token) {
+          console.log('data=======>', res.access_token)
+          if (!res.access_token) {
             throw new Error(_this.lang['login-error'])
           }
-          _this.$store.commit('setToken', res.data.access_token)
+          _this.$store.commit('setToken', res.access_token)
           _this.$toast.show(_this.lang['login-success'])
 
           const lastUrl = _this.$store.state.lastUrl
