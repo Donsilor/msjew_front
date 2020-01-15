@@ -22,24 +22,6 @@ export default function ({$axios, store}) {
     }
     if (data.hasOwnProperty('code')) {
       if (data.code == 200) {
-<<<<<<< HEAD
-        return Promise.resolve(
-          ![undefined].includes(data) ? data : null
-        ) 
-        // return Promise.resolve(data.data || null)
-      } else {
-        if (data.code == 401) {
-          if(process.server == false) {
-            let accessToken = localStorage.getItem('accessToken')
-            if(!accessToken || accessToken == store.state.token) {
-              store.dispatch('logout')			
-            }else { 
-              window.location.reload() 
-            } 
-          }		  
-        }else{
-          return Promise.reject(new Error(data.message|| 'something error'))
-=======
         return Promise.resolve(![undefined].includes(data) ? data : null)
         //return Promise.resolve(data.data || null)
       } else if (data.code == 401) {
@@ -50,7 +32,6 @@ export default function ({$axios, store}) {
           } else {
             window.location.reload()
           }
->>>>>>> 8ad6f8d03218c73f1f5055e9cc91ec4161a70163
         }
       } else {
         return Promise.reject(new Error(data.message || 'something error'))
