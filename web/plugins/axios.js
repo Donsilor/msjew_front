@@ -20,7 +20,7 @@ export default function ({
       let accessToken = localStorage.getItem('accessToken')
       if (!accessToken && store.state.token) {
         store.dispatch('logout')
-        return
+        window.location.href = '/login'
       }
     }
     if (data.hasOwnProperty('code')) {
@@ -32,7 +32,9 @@ export default function ({
           let accessToken = localStorage.getItem('accessToken')
           if (!accessToken || accessToken == store.state.token) {
             store.dispatch('logout')
+            window.location.href = '/login'
           } else {
+            store.commit('setToken', accessToken)
             window.location.reload()
           }
         }
