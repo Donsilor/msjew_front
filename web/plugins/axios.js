@@ -1,8 +1,8 @@
-export default function({ $axios, store }) {
+export default function ({$axios, store}) {
   $axios.onRequest(config => {
-	  
+
     config.headers['x-api-key'] = store.state.token || ''
-    config.headers['x-api-currency']= store.state.coin || ''
+    config.headers['x-api-currency'] = store.state.coin || ''
     config.headers['x-api-language'] = store.state.language || ''
     // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
     return config
@@ -11,17 +11,18 @@ export default function({ $axios, store }) {
 
 
   $axios.onResponse(res => {
-    const data = res.data || {}   
+    const data = res.data || {}
 
-	if(process.server == false) {
-		let accessToken = localStorage.getItem('accessToken')
-		if(!accessToken && store.state.token) {
-			store.dispatch('logout')
-			return 
-		}
-	}
+    if (process.server == false) {
+      let accessToken = localStorage.getItem('accessToken')
+      if (!accessToken && store.state.token) {
+        store.dispatch('logout')
+        return
+      }
+    }
     if (data.hasOwnProperty('code')) {
       if (data.code == 200) {
+<<<<<<< HEAD
         return Promise.resolve(
           ![undefined].includes(data) ? data : null
         ) 
@@ -38,7 +39,21 @@ export default function({ $axios, store }) {
           }		  
         }else{
           return Promise.reject(new Error(data.message|| 'something error'))
+=======
+        return Promise.resolve(![undefined].includes(data) ? data : null)
+        //return Promise.resolve(data.data || null)
+      } else if (data.code == 401) {
+        if (process.server == false) {
+          let accessToken = localStorage.getItem('accessToken')
+          if (!accessToken || accessToken == store.state.token) {
+            store.dispatch('logout')
+          } else {
+            window.location.reload()
+          }
+>>>>>>> 8ad6f8d03218c73f1f5055e9cc91ec4161a70163
         }
+      } else {
+        return Promise.reject(new Error(data.message || 'something error'))
       }
     } else {
       return Promise.resolve(data || null)
