@@ -154,9 +154,9 @@ export default {
 
     return this.$axios({
       method: 'post',
-      url: `/wap/goodsCart/add`,
+      url: `/web/member/cart/add`,
       data: {
-        addType: 2, // 类别(1:普通批量添加,2:登录批量添加
+        // addType: 2, // 类别(1:普通批量添加,2:登录批量添加
         goodsCartList: sendData
       }
     })
@@ -211,24 +211,35 @@ export default {
   addOnlineCart({ $axios, state, getters, commit, dispatch }, goods = []) {
     // console.log('addOnlineCart=====>')
     const time = getTimestampUuid()
+      goods = goods.map(function(item) {
+        item.createTime = time
+        item.updateTime = time
+        return {
+          createTime:item.createTime,
+          updateTime:item.updateTime,
+          goods_num: item.goodsCount,
+          goodsDetailsId:item.goodsDetailsId,
+          goods_id: item.goodsId,
+          group_id: item.groupId,
+          group_type: item.groupType,
+          serviceId: 0,
+          serviceVal: 'string',
+          goods_type:15
+        }
+    });
 
-    goods = goods.map(item => {
-      item.createTime = time
-      item.updateTime = time
-      return item
-    })
-
-    // // console.log('goods-------->', goods)
+    console.log('goods-------->', goods)
 
     return this.$axios({
       method: 'post',
-      url: `/wap/goodsCart/add`,
+      url: `/web/member/cart/add`,
       data: {
-        addType: 1, // 类别(1:普通批量添加,2:登录批量添加
+        // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
         goodsCartList: goods
       }
     })
       .then(data => {
+        console.log("加入购物车",data)
         // 重新请求购物车数量（和购物车列表）
         return Promise.resolve('success')
       })
@@ -464,8 +475,8 @@ export default {
   // 获取本地购物车商品数量
   async getLocalCartAmount({ $axios, state, getters, commit, dispatch }) {
     // console.log('getLocalCartAmount=====>')
-    const cart = await dispatch('getLocalCart')
-    return cart.length
+    // const cart = await dispatch('getLocalCart')
+    // return cart.length
   },
   // 使用本地购物车数据置换购物车商品数据
   localCartToGoodsInfo(
@@ -1448,8 +1459,8 @@ export default {
     // console.log('cancelOrder=====>')
     return this.$axios({
       method: 'post',
-      url: `/wap/myOrder/cancelOrder`,
-      params: {
+      url: `/web/member/order/cancel`,
+      data: {
         orderId: orderId
       }
     })

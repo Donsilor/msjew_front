@@ -48,6 +48,7 @@ export default {
   },
   methods: {
     back(ind, val) {
+      // console.log("tab",ind)
       if (ind >= this.stepindex) {
         return val
       } else {

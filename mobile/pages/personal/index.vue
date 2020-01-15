@@ -139,10 +139,10 @@ export default {
       _this
         .$axios({
           method: 'get',
-          url: `/wap/myAccount/OrderCount`
+          url: `/web/member/order`
         })
         .then(res => {
-          this.orderCount = res.orderCount
+          this.orderCount = res.total_count
           this.couponCount = res.couponCount
           console.log(res)
         })

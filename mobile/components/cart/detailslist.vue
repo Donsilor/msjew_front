@@ -80,16 +80,18 @@ export default {
     // 属性数值转化成字符串
     getconfig(list) {
       let text = ''
-      if (list.length > 0) {
-        JSON.parse(list).map((item, index) => {
-          if (index === list.length - 1) {
-            text = text + item.value
-          } else {
-            text = text + item.value + ' /  '
-          }
-        })
+      if(list !== undefined){
+        if (list.length > 0) {
+          JSON.parse(list).map((item, index) => {
+            if (index === list.length - 1) {
+              text = text + item.value
+            } else {
+              text = text + item.value + ' /  '
+            }
+          })
+        }
+        return text
       }
-      return text
     },
     back() {
       this.$router.go(-1)

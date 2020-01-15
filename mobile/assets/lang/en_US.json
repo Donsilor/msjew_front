@@ -465,6 +465,7 @@
       "hadNotPay": "Payment",
       "hadPay": "Paid",
       "hadSend": "Shipped",
+      "waitingSend": "Delivery",
       "hadFinish": "Completed",
       "hadNotComment": "Review",
       "hadComment": "Comment sent",
