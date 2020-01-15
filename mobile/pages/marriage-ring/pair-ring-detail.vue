@@ -39,7 +39,7 @@ export default {
   asyncData({ $axios, route, store, app }) {
     const request = $axios({
       method: `post`,
-      url: `/wap/goods/ringsDetail`,
+      url: `/wap/goods/ring/detail`,
       headers: {
         token: store.state.token || ''
       },

@@ -64,7 +64,7 @@
 
 <script>
 import List from '@/mixins/list.js'
-import GoodListProps from '@/mixins/good-list-props.js'
+import GoodListProps from '@/mixins/good-search-list-props.js'
 export default {
   layout: 'no-bar',
   mixins: [List, GoodListProps],
@@ -118,7 +118,6 @@ export default {
     },
     toDetail(info) {
       let routerName = ''
-
       switch (info.categoryId) {
         case 1:
           // 钻石
@@ -126,13 +125,7 @@ export default {
           break
         case 2:
           // 戒指
-          if (info.ringId) {
-            // 对戒
-            routerName = 'marriage-ring-pair-ring-detail'
-          } else {
-            // 单个戒指
-            routerName = 'engagement-engagement-rings'
-          }
+          routerName = 'marriage-ring-single-ring-detail'
           break
         case 3:
           // 珠宝饰品
@@ -162,6 +155,11 @@ export default {
           // 手镯
           routerName = 'accessories-accessories'
           break
+        case 12:
+          routerName = 'engagement-engagement-rings'
+          break
+        // 对戒
+        //routerName = 'marriage-ring-single-ring-detail'    
       }
 
       this.$router.push({

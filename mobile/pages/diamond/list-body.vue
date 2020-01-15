@@ -132,7 +132,7 @@
 <script>
 import Mixin from './mixin.js'
 import List from '@/mixins/list.js'
-import GoodListProps from '@/mixins/good-list-props.js'
+import GoodListProps from '@/mixins/good-diamond-list-props.js'
 export default {
   name: 'List',
   mixins: [Mixin, List, GoodListProps]
