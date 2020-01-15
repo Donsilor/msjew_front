@@ -61,19 +61,38 @@ function makeComparedGoodGroups(compared = []) {
 }
 
 export default {
-  nuxtServerInit({ commit }, { req, app }) {
+  nuxtServerInit({
+    commit
+  }, {
+    req,
+    app
+  }) {
     // console.log('nuxtServerInit======>')
   },
   // 退出登录
-  logout({ $axios, state, commit, dispatch }) {
+  logout({
+    $axios,
+    state,
+    commit,
+    dispatch
+  }) {
     commit('setToken', '')
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshTime');
+    window.location.reload()
   },
   // 获取用户数据
-  getUserInfo({ $axios, state, commit, dispatch }) {
+  getUserInfo({
+    $axios,
+    state,
+    commit,
+    dispatch
+  }) {
     return this.$axios({
-      method: 'get',
-      url: `/web/member/member/me`
-    })
+        method: 'get',
+        url: `/web/member/member/me`
+      })
       .then(data => {
         commit('setUserInfo', data)
         return data
@@ -86,10 +105,22 @@ export default {
   /**
    * 历史搜索记录
    */
-  getLocalSearchHistory({ $axios, state, getters, commit, dispatch }) {
+  getLocalSearchHistory({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     return JSON.parse(localStorage.getItem(SEARCHHISTORY) || '[]')
   },
-  addLocalSearchHistory({ $axios, state, getters, commit, dispatch }, keyword) {
+  addLocalSearchHistory({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, keyword) {
     return new Promise(async (resolve, reject) => {
       try {
         let searchHistory = await dispatch('getLocalSearchHistory')
@@ -115,7 +146,13 @@ export default {
       }
     })
   },
-  cleanLocalSearchHistory({ $axios, state, getters, commit, dispatch }) {
+  cleanLocalSearchHistory({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     return new Promise((resolve, reject) => {
       try {
         localStorage.setItem(SEARCHHISTORY, '[]')
@@ -130,7 +167,13 @@ export default {
    * 购物车相关
    */
   // 同步到线上购物车中
-  async synchronizeCart({ $axios, state, getters, commit, dispatch }) {
+  async synchronizeCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('synchronizeCart=====>')
 
     if (!getters.hadLogin) {
@@ -153,13 +196,13 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/web/member/cart/add`,
-      data: {
-        // addType: 2, // 类别(1:普通批量添加,2:登录批量添加
-        goodsCartList: sendData
-      }
-    })
+        method: 'post',
+        url: `/web/member/cart/add`,
+        data: {
+          // addType: 2, // 类别(1:普通批量添加,2:登录批量添加
+          goodsCartList: sendData
+        }
+      })
       .then(data => {
         dispatch('cleanLocalCart')
         return Promise.resolve('success')
@@ -172,7 +215,13 @@ export default {
       })
   },
   // 加入到购物车
-  addCart({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     let data = null
     if (goods instanceof Array) {
       data = goods
@@ -208,38 +257,44 @@ export default {
     return request
   },
   // 加入到线上购物车中
-  addOnlineCart({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addOnlineCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     // console.log('addOnlineCart=====>')
     const time = getTimestampUuid()
-      goods = goods.map(function(item) {
-        item.createTime = time
-        item.updateTime = time
-        return {
-          createTime:item.createTime,
-          updateTime:item.updateTime,
-          goods_num: item.goodsCount,
-          goodsDetailsId:item.goodsDetailsId,
-          goods_id: item.goodsId,
-          group_id: item.groupId,
-          group_type: item.groupType,
-          serviceId: 0,
-          serviceVal: 'string',
-          goods_type:15
-        }
+    goods = goods.map(function (item) {
+      item.createTime = time
+      item.updateTime = time
+      return {
+        createTime: item.createTime,
+        updateTime: item.updateTime,
+        goods_num: item.goodsCount,
+        goodsDetailsId: item.goodsDetailsId,
+        goods_id: item.goodsId,
+        group_id: item.groupId,
+        group_type: item.groupType,
+        serviceId: 0,
+        serviceVal: 'string',
+        goods_type: 15
+      }
     });
 
     console.log('goods-------->', goods)
 
     return this.$axios({
-      method: 'post',
-      url: `/web/member/cart/add`,
-      data: {
-        // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
-        goodsCartList: goods
-      }
-    })
+        method: 'post',
+        url: `/web/member/cart/add`,
+        data: {
+          // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
+          goodsCartList: goods
+        }
+      })
       .then(data => {
-        console.log("加入购物车",data)
+        console.log("加入购物车", data)
         // 重新请求购物车数量（和购物车列表）
         return Promise.resolve('success')
       })
@@ -248,7 +303,13 @@ export default {
       })
   },
   // 加入到本地购物车中
-  addLocalCart({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addLocalCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     // console.log('addLocalCart=====>')
     // const time = new Date().getTime()
     // goods = goods.map((item, index) => {
@@ -280,7 +341,13 @@ export default {
     })
   },
   // 删除购物车商品
-  removeCart({ $axios, state, getters, commit, dispatch }, goods = []) {
+  removeCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     console.log('removeCart=====>')
     let data = null
     if (goods instanceof Array) {
@@ -321,32 +388,38 @@ export default {
     return request
   },
   // 删除线上购物车中的商品
-  removeOnlineCart({ $axios, state, getters, commit, dispatch }, goods = []) {
+  removeOnlineCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     console.log('removeOnlineCart=====>')
     return this.$axios({
-      method: 'post',
-      url: `/web/member/cart/del`,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      data: {
-        id: goods
-      },
-      transformRequest: [
-        function(data) {
-          let ret = ''
-          for (const it in data) {
-            // 过滤空元素
-            if (data[it] === '' || data[it] === null) {
-              continue
+        method: 'post',
+        url: `/web/member/cart/del`,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        data: {
+          id: goods
+        },
+        transformRequest: [
+          function (data) {
+            let ret = ''
+            for (const it in data) {
+              // 过滤空元素
+              if (data[it] === '' || data[it] === null) {
+                continue
+              }
+              ret +=
+                encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
             }
-            ret +=
-              encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            return ret
           }
-          return ret
-        }
-      ]
-    })
+        ]
+      })
       .then(data => {
         // 重新请求购物车数量（和购物车列表）
         return Promise.resolve('success')
@@ -356,7 +429,13 @@ export default {
       })
   },
   // 删除本地购物车中的商品
-  removeLocalCart({ $axios, state, getters, commit, dispatch }, goods = []) {
+  removeLocalCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     console.log('removeLocalCart=====>')
     goods = goods.map(item => {
       let result = ''
@@ -389,11 +468,23 @@ export default {
     })
   },
   // 清空本地购物车中所有商品
-  cleanLocalCart({ $axios, state, getters, commit, dispatch }) {
+  cleanLocalCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     localStorage.setItem(CART, JSON.stringify([]))
   },
   // 获取购物车数据
-  getCart({ $axios, state, getters, commit, dispatch }) {
+  getCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     let request = null
     if (getters.hadLogin) {
       // 已登录的操作
@@ -416,12 +507,18 @@ export default {
     return request
   },
   // 获取在线购物车数据
-  getOnlineCart({ $axios, state, getters, commit, dispatch }) {
+  getOnlineCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getOnlineCart=====>')
     return this.$axios({
-      method: 'get',
-      url: `/web/member/cart`
-    })
+        method: 'get',
+        url: `/web/member/cart`
+      })
       .then(data => {
         // console.log("购物车列表",data.data)
         return makeCartGoodGroups(data)
@@ -431,12 +528,24 @@ export default {
       })
   },
   // 获取本地购物车数据
-  getLocalCart({ $axios, state, getters, commit, dispatch }) {
+  getLocalCart({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getLocalCart=====>')
     return JSON.parse(localStorage.getItem(CART) || '[]')
   },
   // 获取购物车商品数量
-  getCartAmount({ $axios, state, getters, commit, dispatch }) {
+  getCartAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     let request = null
     if (getters.hadLogin) {
       // 已登录的操作
@@ -458,12 +567,18 @@ export default {
     return request
   },
   // 获取在线购物车商品数量
-  getOnlineCartAmount({ $axios, state, getters, commit, dispatch }) {
+  getOnlineCartAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getOnlineCartAmount=====>')
     return this.$axios({
-      method: 'get',
-      url: `/web/member/cart/count`
-    })
+        method: 'get',
+        url: `/web/member/cart/count`
+      })
       .then(data => {
         // console.log('线上购物车商品总数====>', data)
         return data
@@ -473,14 +588,25 @@ export default {
       })
   },
   // 获取本地购物车商品数量
-  async getLocalCartAmount({ $axios, state, getters, commit, dispatch }) {
+  async getLocalCartAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getLocalCartAmount=====>')
     // const cart = await dispatch('getLocalCart')
     // return cart.length
   },
   // 使用本地购物车数据置换购物车商品数据
-  localCartToGoodsInfo(
-    { $axios, state, getters, commit, dispatch },
+  localCartToGoodsInfo({
+      $axios,
+      state,
+      getters,
+      commit,
+      dispatch
+    },
     localCart
   ) {
     let data = null
@@ -517,10 +643,10 @@ export default {
     // console.log('sendData===========>', sendData)
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/goodsCart/postCart`,
-      data: sendData
-    })
+        method: 'post',
+        url: `/wap/goodsCart/postCart`,
+        data: sendData
+      })
       .then(data => {
         return makeCartGoodGroups(data)
       })
@@ -529,7 +655,13 @@ export default {
       })
   },
   // 获取本地购物车，并转换数据格式
-  getLocalCartAndDealData({ $axios, state, getters, commit, dispatch }) {
+  getLocalCartAndDealData({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getLocalCartAndDealData=====>')
     return new Promise((resolve, reject) => {
       dispatch('getLocalCart')
@@ -555,7 +687,13 @@ export default {
    * 心愿单相关
    */
   // 同步到线上心愿单中
-  async synchronizeWish({ $axios, state, getters, commit, dispatch }) {
+  async synchronizeWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('synchronizeWish=====>')
 
     if (!getters.hadLogin) {
@@ -573,14 +711,14 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/collection/addList`,
-      data: {
-        addType: 2, // 类别(1:普通批量添加,2:登录批量添加
-        type: 1,
-        userCollectionList: sendData
-      }
-    })
+        method: 'post',
+        url: `/wap/collection/addList`,
+        data: {
+          addType: 2, // 类别(1:普通批量添加,2:登录批量添加
+          type: 1,
+          userCollectionList: sendData
+        }
+      })
       .then(data => {
         dispatch('cleanLocalWish')
         return Promise.resolve('success')
@@ -593,7 +731,13 @@ export default {
       })
   },
   // 加入到心愿单
-  addWish({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     let data = null
     if (goods instanceof Array) {
       data = goods
@@ -636,7 +780,13 @@ export default {
     return request
   },
   // 加入到线上心愿单中
-  addOnlineWish({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addOnlineWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     // console.log('addOnlineWish=====>')
 
     const sendData = goods.map(item => {
@@ -645,14 +795,14 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/collection/addList`,
-      data: {
-        addType: 1, // 类别(1:普通批量添加,2:登录批量添加
-        type: 1,
-        userCollectionList: sendData
-      }
-    })
+        method: 'post',
+        url: `/wap/collection/addList`,
+        data: {
+          addType: 1, // 类别(1:普通批量添加,2:登录批量添加
+          type: 1,
+          userCollectionList: sendData
+        }
+      })
       .then(data => {
         // 重新请求心愿单数量（和心愿单列表）
         return Promise.resolve('success')
@@ -662,7 +812,13 @@ export default {
       })
   },
   // 加入到本地心愿单中
-  addLocalWish({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addLocalWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     // console.log('addLocalWish=====>')
 
     goods = goods.map(item => {
@@ -688,7 +844,13 @@ export default {
     })
   },
   // 删除心愿单商品
-  removeWish({ $axios, state, getters, commit, dispatch }, goods = []) {
+  removeWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     let data = null
     if (goods instanceof Array) {
       data = goods
@@ -728,7 +890,13 @@ export default {
     return request
   },
   // 删除线上心愿单中的商品
-  removeOnlineWish({ $axios, state, getters, commit, dispatch }, goods = []) {
+  removeOnlineWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     // console.log('removeOnlineWish=====>')
 
     // 将商品id转换为心愿单id
@@ -745,12 +913,12 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/collection/delete`,
-      params: {
-        ids: goods.join(',')
-      }
-    })
+        method: 'post',
+        url: `/wap/collection/delete`,
+        params: {
+          ids: goods.join(',')
+        }
+      })
       .then(data => {
         // 重新请求心愿单数量（和心愿单列表）
         return Promise.resolve('success')
@@ -760,7 +928,13 @@ export default {
       })
   },
   // 删除本地心愿单中的商品
-  removeLocalWish({ $axios, state, getters, commit, dispatch }, goods = []) {
+  removeLocalWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     // console.log('removeLocalWish=====>', goods)
     return new Promise(async (resolve, reject) => {
       try {
@@ -789,11 +963,23 @@ export default {
     })
   },
   // 清空本地心愿单中所有商品
-  cleanLocalWish({ $axios, state, getters, commit, dispatch }) {
+  cleanLocalWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     localStorage.setItem(WISH, JSON.stringify([]))
   },
   // 获取心愿单数据
-  getWish({ $axios, state, getters, commit, dispatch }) {
+  getWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     let request = null
     if (getters.hadLogin) {
       // 已登录的操作
@@ -816,17 +1002,23 @@ export default {
     return request
   },
   // 获取在线心愿单数据
-  getOnlineWish({ $axios, state, getters, commit, dispatch }) {
+  getOnlineWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getOnlineWish=====>')
     return this.$axios({
-      method: 'get',
-      url: `/wap/collection/list`,
-      params: {
-        type: 1,
-        page: 1,
-        page_size: 9999
-      }
-    })
+        method: 'get',
+        url: `/wap/collection/list`,
+        params: {
+          type: 1,
+          page: 1,
+          page_size: 9999
+        }
+      })
       .then(data => {
         return makeWishGoodGroups(data.list)
       })
@@ -835,11 +1027,23 @@ export default {
       })
   },
   // 获取本地心愿单数据
-  getLocalWish({ $axios, state, getters, commit, dispatch }) {
+  getLocalWish({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     return Promise.resolve(JSON.parse(localStorage.getItem(WISH) || '[]'))
   },
   // 获取心愿单商品数量
-  getWishAmount({ $axios, state, getters, commit, dispatch }) {
+  getWishAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     let request = null
     if (getters.hadLogin) {
       // 已登录的操作
@@ -861,15 +1065,21 @@ export default {
     return request
   },
   // 获取在线心愿单商品数量
-  getOnlineWishAmount({ $axios, state, getters, commit, dispatch }) {
+  getOnlineWishAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getOnlineWishAmount=====>')
     return this.$axios({
-      method: 'get',
-      url: `/wap/collection/count`,
-      params: {
-        type: 1
-      }
-    })
+        method: 'get',
+        url: `/wap/collection/count`,
+        params: {
+          type: 1
+        }
+      })
       .then(data => {
         // console.log('线上心愿单商品总数====>', data)
         return data['collection-1']
@@ -879,14 +1089,25 @@ export default {
       })
   },
   // 获取本地心愿单商品数量
-  async getLocalWishAmount({ $axios, state, getters, commit, dispatch }) {
+  async getLocalWishAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getLocalWishAmount=====>')
     const wish = await dispatch('getLocalWish')
     return wish.length
   },
   // 使用本地心愿单数据置换心愿单商品数据
-  localWishToGoodsInfo(
-    { $axios, state, getters, commit, dispatch },
+  localWishToGoodsInfo({
+      $axios,
+      state,
+      getters,
+      commit,
+      dispatch
+    },
     localWish
   ) {
     // console.log('localWishToGoodsInfo=====>', localWish)
@@ -916,10 +1137,10 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/goodsCart/postBDD`,
-      data: data
-    })
+        method: 'post',
+        url: `/wap/goodsCart/postBDD`,
+        data: data
+      })
       .then(data => {
         data = data.map((item, index) => {
           let result = {}
@@ -960,7 +1181,13 @@ export default {
       })
   },
   // 获取本地心愿单，并转换数据格式
-  getLocalWishAndDealData({ $axios, state, getters, commit, dispatch }) {
+  getLocalWishAndDealData({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getLocalWishAndDealData=====>')
     return new Promise((resolve, reject) => {
       dispatch('getLocalWish')
@@ -985,7 +1212,13 @@ export default {
    * 对比相关
    */
   // 同步到线上对比中
-  async synchronizeCompared({ $axios, state, getters, commit, dispatch }) {
+  async synchronizeCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('synchronizeCompared=====>')
 
     if (!getters.hadLogin) {
@@ -1003,14 +1236,14 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/collection/addList`,
-      data: {
-        addType: 2, // 类别(1:普通批量添加,2:登录批量添加
-        type: 2,
-        userCollectionList: sendData
-      }
-    })
+        method: 'post',
+        url: `/wap/collection/addList`,
+        data: {
+          addType: 2, // 类别(1:普通批量添加,2:登录批量添加
+          type: 2,
+          userCollectionList: sendData
+        }
+      })
       .then(data => {
         dispatch('cleanLocalCompared')
         return Promise.resolve('success')
@@ -1023,7 +1256,13 @@ export default {
       })
   },
   // 加入到对比
-  addCompared({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     let data = null
     if (goods instanceof Array) {
       data = goods
@@ -1066,7 +1305,13 @@ export default {
     return request
   },
   // 加入到线上对比中
-  addOnlineCompared({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addOnlineCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     // console.log('addOnlineCompared=====>')
 
     const sendData = goods.map(item => {
@@ -1075,14 +1320,14 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/collection/addList`,
-      data: {
-        addType: 1, // 类别(1:普通批量添加,2:登录批量添加
-        type: 2,
-        userCollectionList: sendData
-      }
-    })
+        method: 'post',
+        url: `/wap/collection/addList`,
+        data: {
+          addType: 1, // 类别(1:普通批量添加,2:登录批量添加
+          type: 2,
+          userCollectionList: sendData
+        }
+      })
       .then(data => {
         // 重新请求对比数量（和对比列表）
         return Promise.resolve('success')
@@ -1092,7 +1337,13 @@ export default {
       })
   },
   // 加入到本地对比中
-  addLocalCompared({ $axios, state, getters, commit, dispatch }, goods = []) {
+  addLocalCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     // console.log('addLocalCompared=====>')
 
     goods = goods.map(item => {
@@ -1118,7 +1369,13 @@ export default {
     })
   },
   // 删除对比商品
-  removeCompared({ $axios, state, getters, commit, dispatch }, goods = []) {
+  removeCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, goods = []) {
     let data = null
     if (goods instanceof Array) {
       data = goods
@@ -1158,8 +1415,13 @@ export default {
     return request
   },
   // 删除线上对比中的商品
-  removeOnlineCompared(
-    { $axios, state, getters, commit, dispatch },
+  removeOnlineCompared({
+      $axios,
+      state,
+      getters,
+      commit,
+      dispatch
+    },
     goods = []
   ) {
     // console.log('removeOnlineCompared=====>')
@@ -1178,12 +1440,12 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/collection/delete`,
-      params: {
-        ids: goods.join(',')
-      }
-    })
+        method: 'post',
+        url: `/wap/collection/delete`,
+        params: {
+          ids: goods.join(',')
+        }
+      })
       .then(data => {
         // 重新请求对比数量（和对比列表）
         return Promise.resolve('success')
@@ -1193,8 +1455,13 @@ export default {
       })
   },
   // 删除本地对比中的商品
-  removeLocalCompared(
-    { $axios, state, getters, commit, dispatch },
+  removeLocalCompared({
+      $axios,
+      state,
+      getters,
+      commit,
+      dispatch
+    },
     goods = []
   ) {
     // console.log('removeLocalCompared=======>', goods)
@@ -1227,11 +1494,23 @@ export default {
     })
   },
   // 清空本地对比中的商品
-  cleanLocalCompared({ $axios, state, getters, commit, dispatch }) {
+  cleanLocalCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     localStorage.setItem(COMPARED, JSON.stringify([]))
   },
   // 获取对比数据
-  getCompared({ $axios, state, getters, commit, dispatch }) {
+  getCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     let request = null
     if (getters.hadLogin) {
       // 已登录的操作
@@ -1254,17 +1533,23 @@ export default {
     return request
   },
   // 获取在线对比数据
-  getOnlineCompared({ $axios, state, getters, commit, dispatch }) {
+  getOnlineCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getOnlineCompared=====>')
     return this.$axios({
-      method: 'get',
-      url: `/wap/collection/list`,
-      params: {
-        type: 2,
-        page: 1,
-        page_size: 9999
-      }
-    })
+        method: 'get',
+        url: `/wap/collection/list`,
+        params: {
+          type: 2,
+          page: 1,
+          page_size: 9999
+        }
+      })
       .then(data => {
         return makeComparedGoodGroups(data.list)
       })
@@ -1273,11 +1558,23 @@ export default {
       })
   },
   // 获取本地对比数据
-  getLocalCompared({ $axios, state, getters, commit, dispatch }) {
+  getLocalCompared({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     return Promise.resolve(JSON.parse(localStorage.getItem(COMPARED) || '[]'))
   },
   // 获取对比商品数量
-  getComparedAmount({ $axios, state, getters, commit, dispatch }) {
+  getComparedAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     let request = null
     if (getters.hadLogin) {
       // 已登录的操作
@@ -1299,15 +1596,21 @@ export default {
     return request
   },
   // 获取在线对比商品数量
-  getOnlineComparedAmount({ $axios, state, getters, commit, dispatch }) {
+  getOnlineComparedAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getOnlineComparedAmount=====>')
     return this.$axios({
-      method: 'get',
-      url: `/wap/collection/count`,
-      params: {
-        type: 2
-      }
-    })
+        method: 'get',
+        url: `/wap/collection/count`,
+        params: {
+          type: 2
+        }
+      })
       .then(data => {
         // console.log('线上对比商品总数====>', data)
         return data['collection-2']
@@ -1317,14 +1620,25 @@ export default {
       })
   },
   // 获取本地对比商品数量
-  async getLocalComparedAmount({ $axios, state, getters, commit, dispatch }) {
+  async getLocalComparedAmount({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getLocalComparedAmount=====>')
     const wish = await dispatch('getLocalCompared')
     return wish.length
   },
   // 使用本地对比数据置换对比商品数据
-  localComparedToGoodsInfo(
-    { $axios, state, getters, commit, dispatch },
+  localComparedToGoodsInfo({
+      $axios,
+      state,
+      getters,
+      commit,
+      dispatch
+    },
     localCompared
   ) {
     // console.log('localComparedToGoodsInfo=====>', localCompared)
@@ -1354,10 +1668,10 @@ export default {
     })
 
     return this.$axios({
-      method: 'post',
-      url: `/wap/goodsCart/postBDD`,
-      data: data
-    })
+        method: 'post',
+        url: `/wap/goodsCart/postBDD`,
+        data: data
+      })
       .then(data => {
         data = data.map((item, index) => {
           let result = {}
@@ -1398,7 +1712,13 @@ export default {
       })
   },
   // 获取本地对比，并转换数据格式
-  getLocalComparedAndDealData({ $axios, state, getters, commit, dispatch }) {
+  getLocalComparedAndDealData({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }) {
     // console.log('getLocalComparedAndDealData=====>')
     return new Promise((resolve, reject) => {
       dispatch('getLocalCompared')
@@ -1421,13 +1741,19 @@ export default {
   },
 
   // 获取产品平均评分
-  getGoodAvgLevel({ $axios, state, getters, commit, dispatch }, options = {}) {
+  getGoodAvgLevel({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, options = {}) {
     // console.log('getGoodAvgLevel=====>')
     return this.$axios({
-      method: 'get',
-      url: `/wap/goodsComments/getAvgLevel`,
-      params: options.params || {}
-    })
+        method: 'get',
+        url: `/wap/goodsComments/getAvgLevel`,
+        params: options.params || {}
+      })
       .then(data => {
         // console.log('获取产品平均评分====>', data)
         return data
@@ -1438,15 +1764,21 @@ export default {
   },
 
   // 订单确认收货
-  orderSigning({ $axios, state, getters, commit, dispatch }, orderId) {
+  orderSigning({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, orderId) {
     // console.log('orderSigning=====>')
     return this.$axios({
-      method: 'get',
-      url: `/wap/myOrder/confirmReceipt`,
-      params: {
-        orderId: orderId
-      }
-    })
+        method: 'get',
+        url: `/wap/myOrder/confirmReceipt`,
+        params: {
+          orderId: orderId
+        }
+      })
       .then(data => {
         return data
       })
@@ -1455,15 +1787,21 @@ export default {
       })
   },
   // 取消订单
-  cancelOrder({ $axios, state, getters, commit, dispatch }, orderId) {
+  cancelOrder({
+    $axios,
+    state,
+    getters,
+    commit,
+    dispatch
+  }, orderId) {
     // console.log('cancelOrder=====>')
     return this.$axios({
-      method: 'post',
-      url: `/web/member/order/cancel`,
-      data: {
-        orderId: orderId
-      }
-    })
+        method: 'post',
+        url: `/web/member/order/cancel`,
+        data: {
+          orderId: orderId
+        }
+      })
       .then(data => {
         return data
       })
