@@ -18,18 +18,18 @@ export default function ({
 
         if (process.server == false) {
             let accessToken = localStorage.getItem('accessToken')
-            console.log('t1======>', accessToken, ',', store.state.token)
-            /*if (!accessToken && store.state.token) {
+            //console.log('t1======>', accessToken, ',', store.state.token)
+            if (!accessToken && store.state.token) {
                 store.dispatch('logout')
                 window.location.href = '/login'
-            }*/
+            }
         }
         if (data.hasOwnProperty('code')) {
             if (data.code == 200) {
                 return Promise.resolve(![undefined].includes(data) ? data : null)
                 //return Promise.resolve(data.data || null)
             } else if (data.code == 401) {
-                /*if (process.server == false) {
+                if (process.server == false) {
                     let accessToken = localStorage.getItem('accessToken')
                     if (!accessToken || accessToken == store.state.token) {
                         store.dispatch('logout')
@@ -37,7 +37,7 @@ export default function ({
                     } else {
                         window.location.reload()
                     }
-                }*/
+                }
             } else {
                 return Promise.reject(new Error(data.message || 'something error'))
             }

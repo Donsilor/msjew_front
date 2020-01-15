@@ -153,28 +153,16 @@ export default {
     // },  
 
     refreshTokenRequst ({ $axios, state, getters, commit, dispatch }) {
-        const login_time = parseInt(localStorage.getItem('login_time'));
-        const refresh_time = parseInt(localStorage.getItem('refresh_time'));
+
+        const loginTime = parseInt(localStorage.getItem('loginTime'));
+        const refreshTime = parseInt(localStorage.getItem('refreshTime'));
         let nowDate = parseInt((new Date()).getTime() / 1000)
-        let refresh_once_time = 30 * 60  //过期后每隔多少时间刷新token
-        let refresh_out_time = 15 * 24 * 3600  //多少时间后不能刷新
-
-        // console.log(9999,nowDate - login_time,nowDate - refresh_time)
-        if (nowDate - login_time < refresh_out_time) {
-            if (nowDate - refresh_time < refresh_once_time) {
-                return
-            }
-
-        } else {
-            dispatch('logout')
-            return
-        }
+        let refreshOnceTime = 30 * 60  //过期后每隔多少时间刷新token    
 
         const refreshToken = localStorage.getItem('refreshToken')
-        if (refreshToken === null) {
+        if (!refreshToken || (nowDate - refreshTime < refreshOnceTime)) {
             return
         }
-        console.log("refreshToken", refreshToken)
         return this.$axios({
             method: 'post',
             url: '/web/site/refresh',
@@ -183,15 +171,14 @@ export default {
             }
         }).then(res => {
             if (res.code == 200) {
-                localStorage.setItem("refresh_time", nowDate);
+                localStorage.setItem("refreshTime", nowDate);
                 localStorage.setItem('refreshToken', res.data.refresh_token);
+                localStorage.setItem('accessToken', res.data.access_token);
                 commit('setToken', res.data.access_token);
                 window.location.reload()
-
             } else {
                 dispatch('logout')
                 window.location.reload()
-
             }
 
         })
