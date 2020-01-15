@@ -29,7 +29,7 @@ export default function ({
                 return Promise.resolve(![undefined].includes(data) ? data : null)
                 //return Promise.resolve(data.data || null)
             } else if (data.code == 401) {
-                if (process.server == false) {
+                /*if (process.server == false) {
                     let accessToken = localStorage.getItem('accessToken')
                     if (!accessToken || accessToken == store.state.token) {
                         store.dispatch('logout')
@@ -37,7 +37,7 @@ export default function ({
                     } else {
                         window.location.reload()
                     }
-                }
+                }*/
             } else {
                 return Promise.reject(new Error(data.message || 'something error'))
             }
