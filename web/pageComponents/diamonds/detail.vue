@@ -130,7 +130,7 @@
             :class="['add-to-cart', { active: canAddCart }]"
             @click="addCart"
           >
-         
+
             {{ $t(`${lang}.addCart`) }}
           </button>
         </div>
@@ -244,6 +244,25 @@ import OrderInclude from '@/pageComponents/detail/order-include.vue'
 import DiamondSpecsInfo from '@/pageComponents/detail/diamond-specs-info.vue'
 const lang = 'detail'
 export default {
+  head() {
+    return {
+      title: this.info.goodsName,
+      meta: [
+        {
+          name: 'title',
+          content: this.info.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.info.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.info.goodsName,
+        }
+      ]
+    }
+  },
   components: {
     TopNav,
     ProductImages,

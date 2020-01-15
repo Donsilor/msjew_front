@@ -27,7 +27,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 666;
+    z-index: -1;
+	min-width: 1366px;
+  min-height: 600px;
   }
   .sole-box{
     position: absolute;
@@ -41,5 +43,6 @@
   }
   .sole-box .text{
     text-align: center;
+    margin-top: -10px;
   }
 </style>
