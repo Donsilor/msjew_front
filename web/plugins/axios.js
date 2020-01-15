@@ -18,10 +18,11 @@ export default function ({
 
         if (process.server == false) {
             let accessToken = localStorage.getItem('accessToken')
-            if (!accessToken && store.state.token) {
+            console.log('t1======>', accessToken, ',', store.state.token)
+            /*if (!accessToken && store.state.token) {
                 store.dispatch('logout')
                 window.location.href = '/login'
-            }
+            }*/
         }
         if (data.hasOwnProperty('code')) {
             if (data.code == 200) {
