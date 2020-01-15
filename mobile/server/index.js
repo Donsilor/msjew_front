@@ -10,15 +10,9 @@ config.dev = process.env.NODE_ENV !== 'production'
 async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
-<<<<<<< HEAD
 
-
-  // const { host, port } = nuxt.options.server
-  const { host, port } = { host: '0.0.0.0', port: '3000' }
-=======
   const { host, port } = nuxt.options.server
   // const { host, port } = { host: '0.0.0.0', port: '3000' }
->>>>>>> 7ca0c07bb04820289102549360e2b1ad4aa5d9b5
 
 
   // Build only in dev mode
