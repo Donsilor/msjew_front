@@ -297,22 +297,24 @@ export default {
           }
         })
         .then(res => {
-            localStorage.setItem("refreshToken",res.data.refresh_token);
-            
+		    const data = res.data 
+            localStorage.setItem("refreshToken",data.refresh_token);
+            localStorage.setItem("accessToken",data.access_token);
             let nowDate = parseInt((new Date()).getTime()/1000)
-            localStorage.setItem("login_time",nowDate);
-            localStorage.setItem("refresh_time",nowDate);
+            localStorage.setItem("loginTime",nowDate);
+            localStorage.setItem("refreshTime",nowDate);
 
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
-              _this.$store.commit('setToken', res.data.access_token)
-                // _this.$store.dispatch('getUserInfo')
-              // _this.$store.commit('setUserInfo',res.data)
+              _this.$store.commit('setToken', data.access_token)
+              _this.$store.commit('setUserInfo',data.member)
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
+			  console.log('login',data)
+			   
               setTimeout(() => {
                 if (lastUrl) {
                   _this.$router.replace({
@@ -324,15 +326,9 @@ export default {
                     path: '/'
                   })
                 }
-              }, 0)
-              setTimeout(() => {
-                window.location.reload()
-              }, 1000)
+              }, 0)          
               
-            }
-          // } else {
-          //   throw new Error (res.message)
-          // }
+            }          
         })
         .catch(err => {
           //console.error(err)
@@ -371,22 +367,22 @@ export default {
           }
         })
         .then(res => {
-          console.log("登陆结果",res)
-            localStorage.setItem("refreshToken",res.data.refresh_token);
+                
+            const data = res.data 
+            localStorage.setItem("refreshToken",data.refresh_token);
+            localStorage.setItem("accessToken",data.access_token);
             let nowDate = parseInt((new Date()).getTime()/1000)
-            localStorage.setItem("login_time",nowDate);
-            localStorage.setItem("refresh_time",nowDate);
+            localStorage.setItem("loginTime",nowDate);
+            localStorage.setItem("refreshTime",nowDate);
 
-          // if (res.code==200){
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
             }else{
               _this.$successMessage(_this.$t(`${lang}.logintips`))
-              _this.$store.commit('setToken',res.data.access_token)
-              // _this.$store.commit('setUserInfo',res.data) getOnlineCartAmount
-              // _this.$store.dispatch('getUserInfo')
-              // _this.$store.dispatch('getOnlineCartAmount')
+              _this.$store.commit('setToken', data.access_token)
+              _this.$store.commit('setUserInfo',data.member);
+			  console.log('login',data)
               const lastUrl = _this.$store.state.lastUrl
               _this.$store.commit('setLastUrl', '')
               setTimeout(() => {
@@ -394,16 +390,18 @@ export default {
                   _this.$router.replace({
                     path: lastUrl
                   })
-                } else {
+                } 
+                else {
                   _this.$router.replace({
                     path: '/'
                   })
                 }
               }, 0)
-              setTimeout(() => {
+              /*setTimeout(() => {
                 window.location.reload()
-              }, 1000)
-            }
+              }, 1000)*/
+              
+            }          
         })
         .catch(err => {
           _this.requesting = false

@@ -138,43 +138,20 @@ function makeComparedGoodGroups(compared = []) {
 }
 
 export default {
-  // 重新获取token
-  // tokenDataFn({ $axios, state, getters, commit, dispatch }){
-  //   return this.$axios({
-  //     method: 'post',
-  //     url:'/web/site/refresh'
-  //   }).then(res => {
-  //       // console.log("购物车列表",res.data)
-        
-  //     })
-  //     .catch(err => {
-  //       return Promise.reject(err)
-  //     })
-  // },  
-
+  //刷新token 
   refreshTokenRequst({ $axios, state, getters, commit, dispatch }){
-    const login_time = parseInt(localStorage.getItem('login_time'));
-    const refresh_time = parseInt(localStorage.getItem('refresh_time'));
+    const refreshTime = parseInt(localStorage.getItem('refreshTime'));
     let nowDate = parseInt((new Date()).getTime()/1000)
-    let refresh_once_time = 30 * 60  //过期后每隔多少时间刷新token
-    let refresh_out_time = 15 * 24 * 3600  //多少时间后不能刷新
-    
-    // console.log(9999,nowDate - login_time,nowDate - refresh_time)
-    if(nowDate - login_time < refresh_out_time){
-      if(nowDate - refresh_time < refresh_once_time){
-        return
-      }
-       
-    }else{
-      dispatch('logout')
-      return
-    }
+    let refreshOnceTime = 30 * 60  //过期后每隔多少时间刷新token
 
-    const refreshToken =localStorage.getItem('refreshToken')
-    if(refreshToken === null){
-      return
+    if(nowDate - refreshTime < refreshOnceTime){
+        return
+    }   
+
+    const refreshToken = localStorage.getItem('refreshToken')
+    if(!refreshToken){
+       return
     }
-    console.log("refreshToken",refreshToken)
     return this.$axios({
       method: 'post',
       url:'/web/site/refresh',
@@ -183,18 +160,15 @@ export default {
       }
     }).then(res => {
         if(res.code == 200){
-          localStorage.setItem("refresh_time",nowDate);
+          localStorage.setItem("refreshTime",nowDate);
           localStorage.setItem('refreshToken',res.data.refresh_token);
+		  localStorage.setItem('accessToken',res.data.access_token);
           commit('setToken',res.data.access_token);
           window.location.reload()
-
         }else{
-          dispatch('logout')
-          window.location.reload()
-        
-        }
-        
-    })
+          dispatch('logout')      
+        }        
+    });
   },
 
 
@@ -233,12 +207,12 @@ export default {
     //   })
   },
   // 退出登录
-  logout({ $axios, state, commit, dispatch }) {
+  logout({ $axios, state, commit, dispatch }) { 
     commit('setToken', '')
-    localStorage.setItem('refreshToken','');
-    localStorage.setItem('refreshToken','');
-    localStorage.setItem('refreshToken','');
-
+    localStorage.removeItem('refreshToken');
+    localStorage.removeItem('accessToken');	
+	localStorage.removeItem('refreshTime');
+	window.location.reload() 
   },
   // 获取用户数据
   getUserInfo({ $axios, state, commit, dispatch }) {
