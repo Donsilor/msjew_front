@@ -1,4 +1,7 @@
-export default function ({$axios, store}) {
+export default function ({
+  $axios,
+  store
+}) {
   $axios.onRequest(config => {
 
     config.headers['x-api-key'] = store.state.token || ''
