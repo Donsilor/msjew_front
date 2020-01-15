@@ -290,15 +290,19 @@ export default {
       isLogin: !!this.$store.state.token,
       isOver: true,
       postals: false,
-      language:''
+      language:'',
     }
   },
   // beforeMount(){
+  //   if(this.language === 'zh_CN'){
+  //     console.log(444444)
+  //     this.countryList=[{ id:'7',content: '中国'}]
+  //     this.getListOne()
+  //   }
 
   // },
   created() {
     this.getinfo()
-
     this.getListOne()
     this.getArealist()
   },
@@ -443,7 +447,7 @@ export default {
               id: res[i].areaId,
               content: res[i].areaName
             }
-            _this.countryList.push(o)
+              _this.countryList.push(o)
           }
           _this.countryList.unshift({ id: '', content: this.lang.pleaseChoose })
           // console.log("国家",_this.countryList)
@@ -608,10 +612,12 @@ export default {
         this.surnameTrue = true
         return
       }
-      if ((val === 3 || val === 0) && this.mailbox === '') {
-        this.mailboxText = this.lang.mailboxText1
-        this.mailboxTrue = true
-        return
+      if(!this.language === 'zh_CN'){
+        if ((val === 3 || val === 0) && this.mailbox === '') {
+          this.mailboxText = this.lang.mailboxText1
+          this.mailboxTrue = true
+          return
+        }
       }
       if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
         this.mailboxText = this.lang.mailboxText2
