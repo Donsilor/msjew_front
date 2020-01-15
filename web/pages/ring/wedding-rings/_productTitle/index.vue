@@ -12,7 +12,23 @@ import SingleRingDetail from '@/pageComponents/wedding-rings/single-ring/detail.
 import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   head() {
-    return this.seoInfo || {}
+    return this.seoInfo || {
+      title: this.info.goodsName,
+      meta: [
+        {
+          name: 'title',
+          content: '首页2'
+        },
+        {
+          name: 'description',
+          content: '首页3'
+        },
+        {
+          name: 'keywords',
+          content: '首页4'
+        }
+      ]
+    }
   },
   components: {
     PairRingDetail,

@@ -311,7 +311,23 @@ import CategoryIndexPage from '@/mixins/category-index-page.js'
 const lang = 'diamonds'
 export default {
   head() {
-    return this.seoInfo || {}
+    return this.seoInfo || {
+      title: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網',
+      meta: [
+        {
+          name: 'title',
+          content: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網'
+        },
+        {
+          name: 'description',
+          content: 'BDD官網商品列表推出手鍊, 手鐲, 白金, 耳環, 戒指等鉆石珠寶和K金首飾圖片，裸鉆價格、鉑金價格以及K金價格介紹。'
+        },
+        {
+          name: 'keywords',
+          content: '手鍊, 手鐲, 白金, 耳環, 戒指, k金, 項鍊, 黃金, 鉑金, 鉆石'
+        }
+      ]
+    }
   },
   mixins: [CategoryIndexPage],
   data() {

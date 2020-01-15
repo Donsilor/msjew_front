@@ -199,38 +199,38 @@ export default {
 
 
   nuxtServerInit({ commit }, { req, app, $axios }) {
-    // $axios({
-    //   method: `get`,
-    //   url: `/web/WebsiteSeo/webSetlist`
-    // })
-    //   .then(res => {
-    //     // console.log('res============>', res)
-    //     if (res && res[0]) {
-    //       // commit('setPageInfo', res[0].name)
-    //       const data = res[0]
-    //       if (!data) {
-    //         return
-    //       }
-    //       app.head.title = data.name
-    //       app.head.meta = app.head.meta.concat([
-    //         {
-    //           name: 'title',
-    //           content: data.titleAddd
-    //         },
-    //         {
-    //           name: 'desc',
-    //           content: data.metaDesc
-    //         },
-    //         {
-    //           name: 'keyword',
-    //           content: data.metaKeyword
-    //         }
-    //       ])
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.error(err)
-    //   })
+    $axios({
+      method: `get`,
+      url: `/web/WebsiteSeo/webSetlist`
+    })
+      .then(res => {
+        // console.log('res============>', res)
+        if (res && res[0]) {
+          // commit('setPageInfo', res[0].name)
+          const data = res[0]
+          if (!data) {
+            return
+          }
+          app.head.title = data.name
+          app.head.meta = app.head.meta.concat([
+            {
+              name: 'title',
+              content: data.titleAddd
+            },
+            {
+              name: 'desc',
+              content: data.metaDesc
+            },
+            {
+              name: 'keyword',
+              content: data.metaKeyword
+            }
+          ])
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
   },
   // 退出登录
   logout({ $axios, state, commit, dispatch }) {

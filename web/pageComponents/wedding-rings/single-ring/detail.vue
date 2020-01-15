@@ -230,6 +230,25 @@ import Comments from '@/pageComponents/detail/comments.vue'
 import RecommendData from '@/pageComponents/detail/recommend.vue'
 const lang = 'detail'
 export default {
+  head() {
+    return {
+      title: this.info.goodsName,
+      meta: [
+        {
+          name: 'title',
+          content: this.info.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.info.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.info.goodsName,
+        }
+      ]
+    }
+  },
   components: {
     TopNav,
     ProductImages,

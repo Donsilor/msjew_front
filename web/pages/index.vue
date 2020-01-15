@@ -314,7 +314,23 @@ import Interactive from '@/pageComponents/index/interactive.vue'
 const lang = 'index'
 export default {
   head() {
-    return this.seoInfo || {}
+    return this.seoInfo || {
+      title: 'BDD Co. 訂製完美訂婚鑽戒 | bddco.com',
+      meta: [
+        {
+          name: 'title',
+          content: 'BDD Co. 訂製完美訂婚鑽戒 | bddco.com'
+        },
+        {
+          name: 'description',
+          content: 'BDD Co.細選鑽石戒指及首飾，提供自配戒指服務，專屬設計更能見證您們的愛情。馬上選購或預約試載，7天退換保證。'
+        },
+        {
+          name: 'keywords',
+          content: '925純銀, GIA證書, 手鍊, 手鐲, 白金, 耳環, 求婚戒指, 玫瑰金, 珠寶首飾, 結婚戒指, 項鍊, 黃金, 鉑金, 裸鑽, 藍色多瑙河鑽石, 鑽石'
+        }
+      ]
+    }
   },
   components: {
     Interactive
@@ -485,7 +501,7 @@ export default {
       return result
     },
     activeHotProductInfo() {
-      console.log(1111,this.activeHotProductIndex)
+      // console.log(1111,this.activeHotProductIndex)
       return this.hotProductInfo.products[this.activeHotProductIndex] || {}
     },
     activeDiamondInfo() {
@@ -493,7 +509,9 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(1)
+    // const seoInfo = await app.$getSeoInfo(1)
+    // console.log(seoInfo)
+
 
     return $axios({
       method: 'get',
@@ -504,11 +522,11 @@ export default {
     })
       .then(data => {
         var data = data.data;
-        console.log(data)
+
         return {
           ad: data.advert,
           webSite: data.webSite,
-          // seoInfo
+          seoInfo
         }
       })
       .catch(err => {
@@ -518,7 +536,8 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
-    })
+    }),
+    console.log(1111)
   },
   methods: {
     // 页面尺寸改变时触发重新计算
