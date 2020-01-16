@@ -557,6 +557,7 @@
       "login": "Login",
       "no-account": "No Account?  Register Here>",
       "email": "Email",
+      "phone": "Phone",
       "email-error": "Enter correct email",
       "password": "Password",
       "password-error": "Enter login password",
@@ -574,7 +575,8 @@
       "email-login": "Sign in with email",
       "oauth-login": "OR",
       "facebook-login": "Sign in with Facebook",
-      "google-login": "Sign in with Google"
+      "google-login": "Sign in with Google",
+      "phone-login": "Sign in with cellphone"
     }
   },
   "marriage-ring": {

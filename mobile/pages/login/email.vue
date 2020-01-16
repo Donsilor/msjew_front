@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="language === 'zh_CN'">
+    <!-- <div v-if="language === 'zh_CN'"> -->
       <section>
         <div class="title-bar">
           <span class="title">
@@ -11,7 +11,8 @@
           </span>
         </div>
         <div class="line-box input-line">
-          <bdd-input v-model="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-if="loginType == 1" v-model="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-else v-model="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsernameM && hadInput('username') }
@@ -28,7 +29,7 @@
             {{ lang['password-error'] }}
           </div>
         </div>
-        <div class="line-box input-line">
+        <div class="line-box input-line" v-if="loginType == 2">
           <div class="code">
             <bdd-input v-model="code" :placeholder="lang['Code']" @blur="inputKey('code')"></bdd-input>
             <div class="code-picture" @click="refreshCode">
@@ -71,8 +72,8 @@
           </button>
         </div>
       </section>
-    </div>
-    <div v-else>
+    <!-- </div> -->
+    <!-- <div v-else>
       <section>
         <div class="title-bar">
           <span class="title">
@@ -99,7 +100,7 @@
           ]">
             {{ lang['password-error'] }}
           </div>
-        </div>
+        </div> -->
 
         <!-- <div v-show="needSliderVerify" class="line-box verify-line">
         <slider-verify
@@ -116,7 +117,7 @@
         </div>
       </div> -->
 
-        <div class="line-box button-line">
+        <!-- <div class="line-box button-line">
           <button class="full-btn login" @click="login">
             <span class="btn-message">{{ lang['login-now'] }}</span>
           </button>
@@ -129,7 +130,7 @@
           </button>
         </div>
       </section>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -150,7 +151,8 @@ export default {
       verifyStatus: 1, // 控制滑动验证是否显示
       sliderVerify: false, // 滑动验证是否完成
       errorKeys: [],
-      language: ''
+      language: '',
+      loginType: 1
     }
   },
   computed: {
@@ -177,6 +179,7 @@ export default {
     _this.$nextTick(() => {
       // _this.getVerifyStatus()
     })
+    this.loginType = localStorage.getItem('loginType')
   },
   methods: {
     // 查询cookie

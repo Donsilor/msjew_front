@@ -57,7 +57,7 @@
     </div>
     <div class="price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
     <div class="promise-box">
-      <div
+      <!-- <div
         v-for="(c, index) in goodInfo.goodsServicesJsons"
         :key="index"
         class="promise-info"
@@ -66,7 +66,7 @@
           <img :src="$IMG_URL + c.img" alt="" />
         </div>
         <span>{{ c.name }}</span>
-      </div>
+      </div> -->
     </div>
     <!--首次进入-->
     <div
