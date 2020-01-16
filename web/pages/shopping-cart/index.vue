@@ -30,13 +30,18 @@
             <single :g="g" @reloadList="getList"></single>
           </div>
           <div v-if="g.groupType === 1" class="couple">
-            <div
+            <!-- <div
               v-if="
                 g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
                   .goodsStatus === 2 &&
                   g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
                     .goodsStatus === 2
               "
+              class="cart-radio"
+            > -->
+            <div
+              v-if="
+                g.data[0].ringsSimpleGoodsEntity.status === '1'"
               class="cart-radio"
             >
               <div

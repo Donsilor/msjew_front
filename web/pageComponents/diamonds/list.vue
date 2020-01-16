@@ -1454,7 +1454,7 @@ export default {
           }
         })
         item.to = {
-          path: '/diamond-details/' + item.goodsName.replace(/\//g, ''),
+          path: '/diamond-details/' + item.id,
           query: {
             goodId: item.id
           }

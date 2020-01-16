@@ -54,7 +54,7 @@
         <div
           :class="['error-message', { active: !trueMobile && hadInput('mobile') }]"
         >
-          {{ lang['email-error'] }}
+          {{ lang['mobile-error'] }}
         </div>
       </div>
 
@@ -158,7 +158,7 @@ export default {
        _this.setWait()
       this.$axios({
         method: "post",
-        url: "/site/sms-code",
+        url: "/web/site/sms-code",
         data: {
           'mobile': _this.mobile,
           'usage': 'up-pwd'

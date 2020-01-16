@@ -526,7 +526,7 @@ export default {
       .then(res => {
         var data = res.data;
         return {
-          // seoInfo,
+          seoInfo,
           ad: data.advert,
           webSite: data.webSite
         }

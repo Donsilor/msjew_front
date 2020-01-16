@@ -6,6 +6,7 @@ export default function ({
         config.headers['x-api-key'] = store.state.token || ''
         config.headers['x-api-currency'] = store.state.coin || ''
         config.headers['x-api-language'] = store.state.language || ''
+        config.headers['x-api-platform'] = 'wap'
         // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
         return config
     })
@@ -29,6 +30,7 @@ export default function ({
                         store.dispatch('logout')
                         window.location.href = '/login'
                     } else {
+                        store.commit('setToken',accessToken)
                         window.location.reload()
                     }
                 }

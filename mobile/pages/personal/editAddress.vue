@@ -378,7 +378,7 @@ export default {
           }
           this.arealist.push(o)
         })
-        console.log("区号",this.arealist)
+        // console.log("区号",this.arealist)
       }
     },
     sureArea(val) {
@@ -412,7 +412,7 @@ export default {
         this.city = this.$route.query.city_name
         this.cityId = this.$route.query.city_id
         this.details = this.$route.query.address_details
-        this.postal = this.$route.query.zip_code
+        this.postal = this.$route.query.zip_code.toString()
       } else if (address && this.$route.query.type !== 'add') {
         this.title = this.lang.header2
         this.id = address.id
@@ -428,7 +428,7 @@ export default {
         this.city = address.city_name
         this.cityId = address.city_id
         this.details = address.address_details
-        this.postal = address.zip_code
+        this.postal = address.zip_code.toString()
       }
     },
     // 获取国家列表
@@ -612,7 +612,14 @@ export default {
         this.surnameTrue = true
         return
       }
-      if(!this.language === 'zh_CN'){
+      if(this.$store.state.language === 'zh_CN'){
+        if ((val === 3 || val === 0) && this.mailbox === '') {
+          this.mailboxText = this.lang.mailboxText1
+          this.mailboxTrue = false
+          return
+        }
+        
+      }else {
         if ((val === 3 || val === 0) && this.mailbox === '') {
           this.mailboxText = this.lang.mailboxText1
           this.mailboxTrue = true
@@ -629,11 +636,12 @@ export default {
         this.phoneTrue = true
         return
       }
-      if (
-        (val === 4 || val === 0) &&
-        !RegMobile.test(this.phone) &&
-        !RegTelephone.test(this.phone)
-      ) {
+      if ((val === 4 || val === 0) && !RegMobile.test(this.phone) ) {
+        this.phoneText = this.lang.phoneText2
+        this.phoneTrue = true
+        return
+      }
+      if ((val === 4 || val === 0) && !RegTelephone.test(this.phone)) {
         this.phoneText = this.lang.phoneText2
         this.phoneTrue = true
         return
@@ -675,6 +683,7 @@ export default {
           zip_code: this.postal
         }
         const data = JSON.parse(JSON.stringify(json))
+        console.log("json")
         if (this.isLogin&&this.$route.query.type!=="add") {
           const _this = this
           _this
@@ -703,6 +712,9 @@ export default {
               data: data
             })
             .then(res => {
+              // if (!res.length==0) {
+
+              // }
               console.log("aaaa",res)
               this.$toast.show(this.lang.toast2)
               setTimeout(() => {

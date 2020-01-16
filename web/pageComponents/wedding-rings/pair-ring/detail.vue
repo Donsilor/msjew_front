@@ -592,7 +592,7 @@ export default {
         {
           goods_num: 1,
           goodsDetailsId: _this.firstRingSimpleDetail.id,
-          goods_id: _this.firstRingSimpleDetail.goodsId,
+          goods_id: _this.firstRingSimpleDetail.id,
           group_id: _this.info.id,
           group_type: 1,
           serviceId: 0,
@@ -602,7 +602,7 @@ export default {
         {
           goods_num: 1,
           goodsDetailsId: _this.secondRingSimpleDetail.id,
-          goods_id: _this.secondRingSimpleDetail.goodsId,
+          goods_id: _this.secondRingSimpleDetail.id,
           group_id: _this.info.id,
           group_type: 1,
           serviceId: 0,

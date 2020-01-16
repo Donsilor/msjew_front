@@ -142,7 +142,7 @@ export default {
       return this.password === this.password_repetition
     },
     trueCode() {
-      return !!this.code
+      return this.code
     },
     errorMessage() {
       return this.code && this.trueCode ? '' : this.lang['code-null']
@@ -173,7 +173,7 @@ export default {
     },
     toNext() {
       if (!this.trueCode) {
-        this.$toast(this.lang['password-error'])
+        this.$toast(this.lang['code-err'])
         return
       }
       if (!this.truePassword) {
@@ -254,7 +254,7 @@ export default {
        _this.setWait()
       this.$axios({
         method: "post",
-        url: "/site/email-code",
+        url: "/web/site/email-code",
         data: {
           'email': _this.email,
           'usage': 'up-pwd'

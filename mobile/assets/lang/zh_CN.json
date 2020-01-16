@@ -372,7 +372,7 @@
         "surnameText2": "姓氏最长20个字符",
         "mailbox": "*电邮地址",
         "mailboxText1": "请输入电邮地址",
-        "mailboxText2": "请输入正确的电话号码",
+        "mailboxText2": "请输入正确的电子邮件",
         "phone": "*电话",
         "phoneText1": "请输入电话号码",
         "phoneText2": "请输入正确的电话号码",
@@ -561,8 +561,10 @@
       "email": {
         "login": "登录",
         "no-account": "注册>",
-        "email": "登录名*",
-        "email-error": "请输入正确的电话号码",
+        "email": "电邮地址",
+        "phone": "手机号",
+        "email-error": "请输入正确的电邮地址",
+        "phone-error": "请输入正确的电话号码",
         "password": "密码*",
         "password-error": "请输入登入密码",
         "code-error": "验证码错误",
@@ -579,11 +581,12 @@
       "index": {
         "login": "会员登入",
         "no-account": "没有账户？在此登记>",
-        "email-login": "手机号登入",
+        "email-login": "电子邮件登入",
         "phone-login": "手机号登录",
         "oauth-login": "社交账号登入",
         "facebook-login": "Facebook登入",
-        "google-login": "Google登入"
+        "google-login": "Google登入",
+        "phone-login": "手机号登入"
       }
     },
     "marriage-ring": {
@@ -1972,7 +1975,7 @@
       "fashionAccessory": "时尚饰品",
       "leaveAMessage": "留言讯息",
       "submit": "提 交",
-  
+
       "callUs": "联络我们",
       "store": "门店",
       "storeName": "香港 - 环贸中心",
@@ -1980,7 +1983,7 @@
       "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
       "tel": "电话",
       "email": "电邮",
-  
+
       "submitSuccessTitle": "提交成功",
       "submitSuccessDesc": "我们将在一个工作天内尽快与您确认预约",
       "submitFailTitle": "提交失败",
@@ -1994,4 +1997,3 @@
       "selectAnAppointmentTime": "请选择预约时间"
     }
   }
-  
