@@ -103,6 +103,7 @@ export default {
         })
     },
     moveLeft(val) {
+      // console.log("move",this.move)
       if (this.move) {
         this.move = false
         this.moveIndex = -1

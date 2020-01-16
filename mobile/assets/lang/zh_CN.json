@@ -372,7 +372,7 @@
         "surnameText2": "姓氏最长20个字符",
         "mailbox": "*电邮地址",
         "mailboxText1": "请输入电邮地址",
-        "mailboxText2": "请输入正确的电话号码",
+        "mailboxText2": "请输入正确的电子邮件",
         "phone": "*电话",
         "phoneText1": "请输入电话号码",
         "phoneText2": "请输入正确的电话号码",
