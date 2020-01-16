@@ -15,7 +15,7 @@ export default function ({
 
     $axios.onResponse(res => {
         const data = res.data || {}
-
+        /*
         if (process.server == false) {
             let accessToken = localStorage.getItem('accessToken')
             //console.log('t1======>', accessToken, ',', store.state.token)
@@ -23,7 +23,7 @@ export default function ({
                 store.dispatch('logout')
                 window.location.href = '/login'
             }
-        }
+        }*/
         if (data.hasOwnProperty('code')) {
             if (data.code == 200) {
                 return Promise.resolve(![undefined].includes(data) ? data : null)
