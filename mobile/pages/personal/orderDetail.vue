@@ -294,8 +294,8 @@ export default {
         result[3].title = this.lang.hadReceive
         result[4].title = this.lang.hadFinish
       }
-
       return result
+      console.log("result",result)
     },
     step() {
       const status = this.info.orderStatus
@@ -378,6 +378,7 @@ export default {
         40: this.lang.shipped,
         50: this.lang.completed,
       }
+    console.log("", map[status])
       return map[status]
     },
     payChannelText(payChannel) {
