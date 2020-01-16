@@ -41,7 +41,7 @@ export default {
     const lang = app.$bddLanguage.detailCommons
     return $axios({
       method: `post`,
-      url: `/wap/goods/goodsDetail`,
+      url: `/wap/goods/diamond/detail`,
       headers: {
         token: store.state.token || ''
       },

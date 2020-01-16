@@ -374,21 +374,21 @@ export default {
 
       const specs = goodInfo.specs
       const sexMap = {
-        462: {
+        '42': {
           type: 0,
           text: this.lang.lady
         },
-        461: {
+        '41': {
           type: 1,
           text: this.lang.gentlemen
         },
-        572: {
+        '43': {
           type: 2,
           text: this.lang.general
         }
       }
       for (let n = 0, length = specs.length; n < length; n++) {
-        if (specs[n].configId === 196) {
+        if (specs[n].configId === '26') {
           const sex = sexMap[specs[n].configAttrId]
           goodInfo.userSex = sex.type
           goodInfo.userSexText = sex.text

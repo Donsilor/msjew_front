@@ -215,7 +215,7 @@ export default {
         result = ad.advertImgModelList
         for (let n = 0, length = result.length; n < length; n++) {
           result[n].openType = ad.tdOpenType
-          result[n].image = this.completionImageStr(result[n].image)
+          result[n].image = this.completionImageStr(result[n].dsImg)
           result[n].url = result[n].addres
         }
       } else {
@@ -238,10 +238,10 @@ export default {
     recommendPairRings() {
       const recommendInfo = this.recommendPairRingInfo
       let result = recommendInfo.moduleGoods || []
-      result = result.map(item => {
-        item = item.ring && item.ring[0] ? item.ring[0] : {}
-        return item
-      })
+      // result = result.map(item => {
+      //   item = item.ring && item.ring[0] ? item.ring[0] : {}
+      //   return item
+      // })
       result = result.map(item => {
         item.showType = recommendInfo.showType
         item.ringImg = this.imageStrToArray(item.ringImg)
@@ -283,10 +283,10 @@ export default {
     recommendLadyRings() {
       const recommendInfo = this.recommendLadyRingInfo
       let result = recommendInfo.moduleGoods || []
-      result = result.map(item => {
-        item = item.goods && item.goods[0] ? item.goods[0] : {}
-        return item
-      })
+      // result = result.map(item => {
+      //   item = item.goods && item.goods[0] ? item.goods[0] : {}
+      //   return item
+      // })
       result = result.map(item => {
         item.showType = recommendInfo.showType
         item.goodsImages = this.imageStrToArray(item.goodsImages)
@@ -324,9 +324,9 @@ export default {
 
     return $axios({
       method: 'get',
-      url: '/wap/Website/queryWebsiteModuleWap',
+      url: '/wap/goods/ring/web-site',
       params: {
-        type: 3
+        // type: 3
       }
     })
       .then(data => {

@@ -89,8 +89,8 @@ export default {
       const _this = this
       _this
         .$axios({
-          method: 'post',
-          url: '/wap/goods/getSearchKeyword'
+          method: 'get',
+          url: '/wap/common/search/index'
         })
         .then(data => {
           // data = {
