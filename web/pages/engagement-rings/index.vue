@@ -275,7 +275,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    // const seoInfo = await app.$getSeoInfo(2)
+    const seoInfo = await app.$getSeoInfo(2)
     console.log(33);
     return $axios({
       method: 'get',
@@ -287,7 +287,7 @@ export default {
       .then(res => {
         var data = res.data;
         return {
-          // seoInfo,
+          seoInfo,
           ad: data.advert,
           webSite: data.webSite
         }

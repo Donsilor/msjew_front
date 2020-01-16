@@ -26,26 +26,27 @@ export default ({ req, app, store, $axios }, inject) => {
   inject('getSeoInfo', type => {
     return $axios({
       method: `get`,
-      url: `web/WebsiteSeo/queryWebsiteSeo`,
+      url: `web/common/seo/index`,
       params: {
         type
       }
     })
-      .then(data => {
+      .then(res => {
+        var data = res.data
         return {
-          title: data.pageTitle,
+          title: data.meta_title,
           meta: [
             {
               name: 'title',
-              content: data.pageTitle
+              content: data.meta_title
             },
             {
               name: 'description',
-              content: data.mataExplain
+              content: data.meta_desc
             },
             {
               name: 'keywords',
-              content: data.mataKeyword
+              content: data.meta_word
             }
           ]
         }
