@@ -4,12 +4,20 @@
       <nuxt-link :to="getJumpLink(g)">
         <div class="good-img" @click="goDetail()">
           <img :src="imageStrToArray(g.image)[0]" alt="" />
-          <div
+          <!-- <div
             v-if="
               g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus !==
                 2 &&
                 g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
                   .goodsStatus !== 2
+            "
+            class="img-bord"
+          >
+            <span>{{ $t(`cart.Invalid`) }}</span>
+          </div> -->
+          <div
+            v-if="
+              g.data[0].ringsSimpleGoodsEntity.status !== '1'
             "
             class="img-bord"
           >
@@ -105,12 +113,19 @@
         </div>
         <div class="couple-line" />
       </div>
-      <div
+      <!-- <div
         v-show="options"
         v-if="
           g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus ===
             2 &&
             g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus === 2
+        "
+        class="good-btn"
+      > -->
+       <div
+        v-show="options"
+        v-if="
+          g.data[0].ringsSimpleGoodsEntity.status === '1'
         "
         class="good-btn"
       >
@@ -121,7 +136,7 @@
         <i class="iconfont iconlajitong" @click="deleteGood()" />
       </div>
       <div v-show="options" v-else class="lose-btn">
-        <div @click="searchSimilar()">
+        <div @click="searchSimilar(g.data[0])">
           {{ $t(`cart.searchSimilar`) }}
         </div>
         <div />
@@ -186,7 +201,68 @@ export default {
           }
         })
     },
-    searchSimilar() {}
+    searchSimilar(info) {
+      console.log(33333,info)
+      let routerName = ''
+      switch (info.goodsType) {
+        case 15:
+          // 钻石
+          routerName = '/diamonds/round-cut'
+          break
+        case 2:
+          if(info.groupType == 1){
+            //对戒
+             routerName = '/wedding-rings/classic-series'
+          }else{
+            // 戒指
+             routerName = '/wedding-rings/all'
+          }
+          
+          
+          break
+        case 3:
+          // 珠宝饰品
+          routerName = '/jewellery/all'
+          break
+        case 4:
+          // 项链
+          routerName = '/jewellery/necklaces'
+          break
+        case 5:
+          // 吊坠
+          routerName = '/jewellery/pendants'
+          break
+        case 6:
+          // 耳钉
+          routerName = '/jewellery/ear-stud'
+          break
+        case 7:
+          // 耳环
+          routerName = '/jewellery/earrings'
+          break
+        case 8:
+          // 手链
+          routerName = '/jewellery/bracelets'
+          break
+        case 9:
+          // 手镯
+          routerName = '/jewellery/bangles'
+          break
+        case 12:
+          routerName = '/engagement-rings/all'
+          break
+          
+      }
+ 
+      const routerJump = this.$router.resolve({
+        path: routerName,
+        query: {
+          
+        }
+      })
+      window.open(routerJump.href, '_blank')
+      //  用分类id和商品id去搜索
+    }
   }
 }
 </script>
