@@ -120,6 +120,11 @@ export default {
       info.password_repetition = data.password_repetition || ''
       _this.info = info
 
+      if (!info.code) {
+        _this.$toast(_this.lang['code-null'])
+        return
+      }
+
       if (!info.password) {
         _this.$toast(_this.lang['password-null'])
         return
@@ -152,12 +157,12 @@ export default {
       info.password = data.password || ''
       info.password_repetition = data.password_repetition || ''
       _this.info = info
-      // console.log("info",info)
 
-      // if (!info.code) {
-      //   _this.$toast(_this.lang['password-null'])
-      //   return
-      // }
+      if (!info.code) {
+        _this.$toast(_this.lang['code-null'])
+        console.log(1111)
+        return
+      }
 
       if (!info.password) {
         _this.$toast(_this.lang['password-null'])

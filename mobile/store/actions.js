@@ -250,7 +250,11 @@ export default {
         } else {
             // 未登录的操作
             // console.log('未登录的操作')
-            request = dispatch('addLocalCart', data)
+            // request = dispatch('addLocalCart', data)
+            setTimeout(() => {
+                this.$router.push(`/login`)
+            }, 2000)
+            return Promise.reject(new Error('请先登陆！'))
         }
         request
             .then(data => {
@@ -340,7 +344,7 @@ export default {
                     return reject(new Error(lang.cartIsFull))
                 }
                 // cart = cart.concat(goods)
-                localStorage.setItem(CART, JSON.stringify(cart))
+                // localStorage.setItem(CART, JSON.stringify(cart))
                 return resolve('success')
             } catch (e) {
                 return reject(e)

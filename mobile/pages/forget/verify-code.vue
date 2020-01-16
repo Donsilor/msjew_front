@@ -217,7 +217,7 @@ export default {
        _this.setWait()
       this.$axios({
         method: "post",
-        url: "/site/email-code",
+        url: "/web/site/email-code",
         data: {
           'email': _this.email,
           'usage': 'up-pwd'
