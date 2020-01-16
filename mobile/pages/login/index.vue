@@ -1,7 +1,7 @@
 <template>
 <div>
-  <div v-if="language === 'zh_CN'">
-    <section>
+  <!-- <div v-if="language === 'zh_CN'"> -->
+  <!--  <section>
       <div class="title-bar">
         <span class="title">
           {{ lang['login'] }}
@@ -17,7 +17,7 @@
             {{ lang['email-login'] }}
           </span>
         </button>
-      </div>
+      </div> -->
 
       <!--    <div class="tip">-->
       <!--      <span class="tip-message">-->
@@ -40,9 +40,9 @@
           </span>
         </button>
       </div> -->
-    </section>
-  </div>
-  <div v-else>
+    <!-- </section> -->
+  <!-- </div> -->
+  <div>
     <section>
       <div class="title-bar">
         <span class="title">
@@ -82,6 +82,15 @@
           </span>
         </button>
       </div> -->
+
+      <div class="line-box">
+        <button class="full-btn phone" @click="toPhoneLogoin">
+          <img src="../../static/login/shoujihao.png" class="btn-icon" />
+          <span class="btn-message">
+            {{ lang['phone-login'] }}&nbsp;&nbsp;&nbsp;
+          </span>
+        </button>
+      </div>
     </section>
   </div>
 </div>
@@ -116,6 +125,13 @@ export default {
       })
     },
     toEmailLogin() {
+      localStorage.setItem('loginType','1')
+      this.$router.push({
+        name: 'login-email'
+      })
+    },
+    toPhoneLogoin(){
+      localStorage.setItem('loginType','2')
       this.$router.push({
         name: 'login-email'
       })
@@ -174,13 +190,15 @@ export default {
   margin-right: 10px;
 }
 .full-btn.phone {
-  font-size: 18px;
+  font-size: 16px;
   color: #ffffff;
-  background-color: #f29b87;
+  /* background-color: #a24612; */
+  background-color: #a8cdb6;
+  letter-spacing: 1px;
 }
 .full-btn.phone img {
   width: 18px;
-  margin-right: 20px;
+  margin: 0 8px 0 6px;
 }
 .full-btn.facebook {
   font-size: 14px;
@@ -214,4 +232,5 @@ export default {
   padding: 0 29px;
   background-color: #ffffff;
 }
+
 </style>

@@ -530,6 +530,7 @@
       "reset-password": "重置密碼",
       "input-new-password": "輸入新密碼",
       "password-error": "密碼格式錯誤",
+      "code-err":"驗證碼錯誤",
       "confirm-password": "確認新密碼",
       "password-not-same": "密碼不一致",
       "password-claim": "長度為6-18位字符密碼，密碼由數位或字母組成，不允許設置特殊字符，不能使用空格和中文",
@@ -555,7 +556,9 @@
       "login": "登入",
       "no-account": "没有賬戶？在此登記>",
       "email": "電郵地址",
+      "phone": "手機號",
       "email-error": "請輸入正確的電郵地址",
+      "phone-error": "請輸入正確的電話號碼",
       "password": "密碼",
       "password-error": "請輸入登入密碼",
       "login-now": "登入",
@@ -572,7 +575,8 @@
       "email-login": "電子郵件登入",
       "oauth-login": "社交賬號登入",
       "facebook-login": "Facebook登入",
-      "google-login": "Google登入"
+      "google-login": "Google登入",
+      "phone-login": "手機號登入"
     }
   },
   "marriage-ring": {

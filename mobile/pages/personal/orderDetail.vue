@@ -232,14 +232,14 @@
             {{ lang.paytips }}
           </div>
           <div
-            v-if="[1].indexOf(info.orderStatus) > -1 && info.payChannel !== 1"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20"
             class="btn-block"
             @click="goPay(info)"
           >
             {{ lang.toPay }}
           </div>
           <div
-            v-if="[1].indexOf(info.orderStatus) > -1"
+            v-if="(info.orderStatus) > 0"
             class="btn-white"
             @click="cancelOrder"
           >
@@ -284,18 +284,18 @@ export default {
         { step: '5', title: this.lang.hadFinish }
       ]
 
-      if (status >= 2) {
+      if (status >= 20) {
         result[1].title = this.lang.hadPay
       }
-      if (status >= 3) {
+      if (status >= 40) {
         result[2].title = this.lang.hadSend
       }
-      if (status >= 4) {
+      if (status >= 50) {
         result[3].title = this.lang.hadReceive
         result[4].title = this.lang.hadFinish
       }
-
       return result
+      console.log("result",result)
     },
     step() {
       const status = this.info.orderStatus
@@ -313,10 +313,10 @@ export default {
       //   result = 4
       // }
 
-      if (status >= 2) {
+      if (status >= 20) {
         result = 2
       }
-      if (status >= 3) {
+      if (status >= 30) {
         result = 3
       }
       if (status >= 4) {
@@ -371,17 +371,14 @@ export default {
   methods: {
     statusText(status) {
       const map = {
-        1: this.lang.hadNotPay,
-        2: this.lang.hadPay,
-        3: this.lang.hadSend,
-        4: this.lang.hadFinish,
-        5: this.lang.hadNotComment,
-        6: this.lang.hadComment,
-        7: this.lang.returnApplication,
-        8: this.lang.returning,
-        9: this.lang.hadReturn,
-        10: this.lang.cancelTransaction
+        0: this.lang.cancelled,
+        10: this.lang.unpaid,
+        20: this.lang.paid,
+        30: this.lang.waitingSend, 
+        40: this.lang.shipped,
+        50: this.lang.completed,
       }
+    console.log("", map[status])
       return map[status]
     },
     payChannelText(payChannel) {
