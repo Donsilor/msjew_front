@@ -528,9 +528,11 @@
       "next": "Next"
     },
     "new-password": {
+      "code": "Verification Code",
       "reset-password": "Reset password",
       "input-new-password": "Enter new password",
       "password-error": "Enter correct password",
+      "code-err": "Wrong verification code",
       "confirm-password": "Confirm new password",
       "password-not-same": "Entered passwords differ",
       "password-claim": "Password of 6-18 characters，Password consists of numbers or letters，Special characters are not allowed，Spaces and Chinese characters are not allowed",
@@ -555,7 +557,9 @@
       "login": "Login",
       "no-account": "No Account?  Register Here>",
       "email": "Email",
-      "email-error": "Enter correct email",
+      "phone": "Phone",
+      "email-error": "Enter correct cellphone",
+      "phone-error": "Enter correct email",
       "password": "Password",
       "password-error": "Enter login password",
       "login-now": "LOGIN",
@@ -572,7 +576,8 @@
       "email-login": "Sign in with email",
       "oauth-login": "OR",
       "facebook-login": "Sign in with Facebook",
-      "google-login": "Sign in with Google"
+      "google-login": "Sign in with Google",
+      "phone-login": "Sign in with cellphone"
     }
   },
   "marriage-ring": {

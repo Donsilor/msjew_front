@@ -712,6 +712,9 @@ export default {
               data: data
             })
             .then(res => {
+              // if (!res.length==0) {
+
+              // }
               console.log("aaaa",res)
               this.$toast.show(this.lang.toast2)
               setTimeout(() => {

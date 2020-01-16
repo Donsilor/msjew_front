@@ -25,7 +25,7 @@
         class="promise-info"
       >
         <div class="promise-img">
-          <img :src="$IMG_URL + c.img" alt="" />
+          <img :src= url[index] alt="" />
         </div>
         <span>{{ c.name }}</span>
       </div>
@@ -204,6 +204,16 @@
 import Mx from './single-mixin'
 export default {
   mixins: [Mx],
+  data(){
+    return {
+      url:[
+        require('../../static/marriage-ring/icon-01.png'),
+        require('../../static/marriage-ring/icon-02.png'),
+        require('../../static/marriage-ring/icon-03.png'),
+        require('../../static/marriage-ring/icon-04.png')
+      ]
+    }
+  },
   computed: {
     canAddCart() {
       const body = this.goodInfo.details
