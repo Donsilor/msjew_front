@@ -29,7 +29,7 @@ export default function ({
                         store.dispatch('logout')
                         window.location.href = '/login'
                     } else {
-                        window.location.reload()
+                        // window.location.reload()
                     }
                 }
             } else {

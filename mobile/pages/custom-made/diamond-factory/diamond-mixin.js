@@ -82,7 +82,7 @@ export default {
     if (this.$route.query.goodId) {
       this.$axios({
         method: `post`,
-        url: `/wap/goods/goodsDetail`,
+        url: `/wap/goods/diamond/detail`,
         params: {
           goodsId: this.$route.query.goodId
         }
@@ -120,9 +120,9 @@ export default {
           this.goodInfo = res
           this.showPi = this.goodInfo.salePrice
           for (let i = 0; i < this.goodInfo.specs.length; i++) {
-            if (this.goodInfo.specs[i].configId === 33) {
+            if (this.goodInfo.specs[i].configId === 4) {
               this.force.cut = this.goodInfo.specs[i].configAttrId
-            } else if (this.goodInfo.specs[i].configId === 31) {
+            } else if (this.goodInfo.specs[i].configId === 5) {
               this.force.carat = parseFloat(
                 this.goodInfo.specs[i].configAttrVal
               )
@@ -137,9 +137,9 @@ export default {
               } else if (this.force.carat === 1) {
                 this.caratLeft = 50
               }
-            } else if (this.goodInfo.specs[i].configId === 34) {
+            } else if (this.goodInfo.specs[i].configId === 7) {
               this.force.color = this.goodInfo.specs[i].configAttrId
-            } else if (this.goodInfo.specs[i].configId === 35) {
+            } else if (this.goodInfo.specs[i].configId === 2) {
               this.force.clarity = this.goodInfo.specs[i].configAttrId
             }
           }
@@ -155,9 +155,9 @@ export default {
           let gay = false
           let gayNum = ``
           this.goodInfo.specs.forEach(item => {
-            if (item.configId === 191) {
+            if (item.configId === 31) {
               gayNum = item.configAttrVal
-            } else if (item.configId === 192 && item.configAttrId === 442) {
+            } else if (item.configId === 48 && item.configAttrId === 60) {
               gay = true
             }
           })

@@ -81,14 +81,14 @@
           </div>
           <div class="btn">
             <span
-              v-if="(order.orderStatus) > -1"
+              v-if="(order.orderStatus) > 0"
               class="btn2"
               @click="cancelOrder(order.id)"
               >{{ lang.cancelOrder }}</span
             >
             <span
               v-if="
-                (order.orderStatus) > -1 && order.payChannel === 1
+                [1].indexOf(order.orderStatus) > -1 
               "
               class="btn1"
               @click.stop="paytips = !paytips"
@@ -96,14 +96,14 @@
             >
             <span
               v-if="
-                (order.orderStatus) > -1 && order.payChannel !== 1
+                (order.orderStatus) > 0 && (order.orderStatus)<20
               "
               class="btn1"
               @click.stop="goPay(order)"
               >{{ lang.toPay }}</span
             >
             <span
-              v-if="[3].indexOf(order.orderStatus) > -1"
+              v-if="(order.orderStatus) > 30"
               class="btn1"
               @click="orderSigning(order.id)"
               >{{ lang.confirmReceipt }}</span
@@ -266,8 +266,8 @@ export default {
   },
   methods: {
     canComment(order) {
-      console.log("order",order)
       const details = order.details
+      // console.log("order",details.length)
       let num = 0
       for (let n = 0, length = details.length; n < length; n++) {
         if (
@@ -276,7 +276,9 @@ export default {
         ) {
           num++
         }
+        //  console.log('indexof',details[n].data[0].categoryId)
       }
+    
       return [5].indexOf(order.orderStatus) > -1 && details.length !== num
       // return [4, 5].indexOf(order.orderStatus) > -1 && details.length !== num
     },

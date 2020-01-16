@@ -1,7 +1,7 @@
 <template>
   <div class="step-window">
     <div class="step">
-      <img
+      <!-- <img
         v-if="step === 1 && !$route.query.isBack"
         class="step-img"
         src="../../static/components/step/step-one.png"
@@ -15,7 +15,36 @@
         v-else
         class="step-img"
         src="../../static/components/step/step-three.png"
-      />
+      /> -->
+
+      <div class="step-bg clf">
+        <div class="list fl list-a" :class="[step === 1 && !$route.query.isBack ? 'active' : '']">
+          <div class="bg-color"></div>
+          <div class="img-box img-a">
+            <img class="img-a-l-a" src="../../static/components/step/img-a.png" alt="">
+            <img class="img-a-l-b" src="../../static/components/step/img-d.png" alt="">
+          </div>
+        </div>
+
+        <div class="list fl list-b" :class="[step === 2 && !$route.query.isBack ? 'active' : '']">
+          <div class="bg-color"></div>
+          <div class="img-box img-b-l">
+            <img class="img-b-l-a" src="../../static/components/step/img-b.png" alt="">
+          </div>
+          <div class="img-box img-b-r">
+            <img class="img-b-r-a" src="../../static/components/step/img-a.png" alt="">
+            <img class="img-b-r-b" src="../../static/components/step/img-d.png" alt="">
+          </div>
+        </div>
+
+        <div class="list fl list-c" :class="[step === 3 && !$route.query.isBack ? 'active' : '']">
+          <div class="bg-color"></div>
+          <div class="img-box img-c">
+            <img class="img-c-l" src="../../static/components/step/img-b.png" alt="">
+          </div>
+        </div>
+      </div>
+
       <div class="step-box">
         <div class="single-step">
           <div class="single-step-left-side">
@@ -34,7 +63,7 @@
             </div>
           </div>
           <div class="single-step-right-side">
-            <div class="single-step-right-side-icon">
+            <div class="single-step-right-side-icon" :class="[step === 1 ? 'active' : '']">
               <i
                 v-if="steps.steps[0].ct === 1"
                 class="iconfont iconicon-zuanshi"
@@ -80,7 +109,7 @@
             </div>
           </div>
           <div class="single-step-right-side">
-            <div class="single-step-right-side-icon">
+            <div class="single-step-right-side-icon" :class="[step === 2 ? 'active' : '']">
               <i
                 v-if="steps.steps[0].ct === 2"
                 class="iconfont iconicon-zuanshi"
@@ -122,7 +151,7 @@
             </div>
           </div>
           <div class="single-step-right-side">
-            <div class="single-step-right-side-icon">
+            <div class="single-step-right-side-icon" :class="[step === 3 ? 'active' : '']">
               <i class="iconfont icongouwuche"></i>
             </div>
             <div
@@ -436,7 +465,154 @@ export default {
   }
 }
 
+.step-bg{
+  width: 1360px;
+  height: 80px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 0;
+}
+.step-bg .list{
+  height: 100%;
+  float: left;
+  box-sizing: box-sizing;
+  position: relative;
+}
+.step-bg img{
+  width: 100%;
+  height: 100%;
+}
+
+.step-bg .list-a{
+  width: 453px;
+}
+.step-bg .list-b{
+  width: 454px;
+}
+.step-bg .list-c{
+  width: 453px;
+}
+
+.step-bg .list-a .bg-color{
+  width: 433px;
+  height: 100%;
+}
+.step-bg .list-b .bg-color{
+  width: 414px;
+  height: 100%;
+  margin-left: 20px;
+}
+.step-bg .list-c .bg-color{
+  width: 433px;
+  height: 100%;
+  margin-left: 20px;
+}
+
+
+.step-bg .active .bg-color{
+  border: 1px solid #f7b5a1;
+  -webkit-box-shadow: 2px 4px 0 #fadfd7;
+  box-shadow: 2px 4px 0 #fadfd7;
+  background-color: #fff;
+  height: 88px;
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+.step-bg .list-a.active .bg-color,
+.step-bg .list-b.active .bg-color{
+  border-right: 0;
+}
+.step-bg .list-c.active .bg-color{
+  border-left: 0;
+}
+
+.step-bg .list-a .img-box{
+  width: 40px;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  right: -20px;
+  z-index: 2;
+}
+
+.step-bg .list-a.active .img-box{
+  height: 92px;
+}
+.step-bg .list-a .img-a-l-a{
+  display: none;
+}
+
+.step-bg .list-a.active .img-a-l-a{
+  display: block;
+}
+.step-bg .list-a.active .img-a-l-b{
+  display: none;
+}
+
+.step-bg .img-b-l{
+  width: 40px;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: -18px;
+  z-index: 2;
+}
+
+.step-bg .img-b-r{
+  width: 40px;
+  height: 100%;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  right: -20px;
+}
+
+.step-bg .list-b.active .list-b-l,
+.step-bg .list-b.active .list-b-r,
+.step-bg .list-c.active .list-c-l{
+  height: 92px;
+}
+.step-bg .list-b .img-b-r-a{
+  display: none;
+}
+
+.step-bg .list-b.active .img-box{
+  height: 92px;
+}
+.step-bg .list-b.active .img-b-r-a{
+  display: block;
+}
+.step-bg .list-b.active .img-b-r-b{
+  display: none;
+}
+.list-b .img-b-l-a{
+  display: none;
+}
+.list-b.active .img-b-l-a{
+  display: block;
+}
+
+.step-bg .list-c .img-box{
+  width: 40px;
+  height: 92px;
+  margin: 0;
+  position: absolute;
+  top: 0px;
+  left: -20px;
+  display: none;
+}
+.step-bg .list-c.active .img-box{
+  display: block;
+}
+
+.step-window .step .step-box .single-step{
+  padding-right: 20px;
+}
+
 .single-step-right-side-icon.active{
-  border: 1px solid red;
+  background-color: #ddb1aa !important;
 }
 </style>

@@ -139,7 +139,7 @@
       />
       <div />
       <i class="iconfont iconfb" @click="$shareFacelook()" />
-    </div>
+    </div> -->
     <div class="ring-details">
       <div class="details-title">
         {{ lang.goodsDetail }}
@@ -169,7 +169,7 @@
       </div>
       <div class="desc-content" v-html="ringDetail"></div>
     </div>
-    <div class="comment">
+    <!-- <div class="comment">
       <div class="comment-title">
         {{ lang.clientSay }} <span>({{ total_count }})</span>
       </div>

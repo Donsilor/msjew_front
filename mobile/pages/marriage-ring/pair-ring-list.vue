@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.listCommons,
-      listUrl: `/wap/goods/searchRing`,
+      listUrl: `/wap/goods/ring/search`,
       beginPrice: 0,
       endPrice: 100000000
     }
