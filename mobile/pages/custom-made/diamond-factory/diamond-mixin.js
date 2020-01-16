@@ -12,6 +12,7 @@ export default {
       caratLeft: 0,
       sendGoodsId: null,
       sendDetailsId: null,
+      categoryId: null,
       addWay: false,
       goodInfo: {
         specs: [],
@@ -145,6 +146,7 @@ export default {
           }
           this.sendGoodsId = this.goodInfo.details[0].goodsId
           this.sendDetailsId = this.goodInfo.details[0].id
+          this.categoryId = this.goodInfo.details[0].categoryId
           if (this.goodInfo.goods3ds) {
             this.is360 = true
             this.has360 = true
@@ -185,6 +187,7 @@ export default {
       this.$emit(`step`, {
         goodsId: this.sendGoodsId,
         detailsId: this.sendDetailsId,
+        goodsType: this.categoryId,
         type: type
       })
     },
@@ -202,6 +205,7 @@ export default {
         goodsId: this.sendGoodsId,
         groupId: null,
         groupType: null,
+        goodsType: this.categoryId,
         serviceId: 0,
         serviceVal: 'string'
       }

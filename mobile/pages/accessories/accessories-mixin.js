@@ -55,6 +55,7 @@ export default {
       showPi: 0,
       sendGoodsId: null,
       sendDetailsId: null,
+      categoryId:null,
       starNum: 5,
       comments: {
         userAccount: ``,
@@ -173,6 +174,7 @@ export default {
               this.showPi = bullShit[i].retailMallPrice
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
             }
           }
         }
@@ -185,6 +187,7 @@ export default {
             this.showPi = bullShit[i].retailMallPrice
             this.sendGoodsId = bullShit[i].goodsId
             this.sendDetailsId = bullShit[i].id
+            this.categoryId = bullShit[i].categoryId
           }
         }
       }
@@ -203,6 +206,7 @@ export default {
         goodsId: this.sendGoodsId,
         groupId: null,
         groupType: null,
+        goodsType: this.categoryId,
         serviceId: 0,
         serviceVal: 'string'
       }
@@ -253,6 +257,7 @@ export default {
           {
             goodsId: this.sendGoodsId,
             goodsDetailsId: this.sendDetailsId,
+            goodsType: this.categoryId,
             ct: this.goodInfo.categoryId,
             cartId: ``,
             page: `detail`
@@ -260,6 +265,7 @@ export default {
           {
             goodsId: null,
             goodsDetailsId: null,
+            goodsType: null,
             ct: 1,
             cartId: ``,
             page: `list`

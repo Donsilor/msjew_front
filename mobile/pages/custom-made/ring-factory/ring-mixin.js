@@ -19,6 +19,7 @@ export default {
       showPi: 0,
       sendGoodsId: null,
       sendDetailsId: null,
+      categoryId: null,
       goodInfo: {
         specs: [],
         carveStatus: 0,
@@ -232,6 +233,7 @@ export default {
         this.showPi = this.goodInfo.salePrice
         this.sendGoodsId = ``
         this.sendDetailsId = ``
+        this.categoryId = ``
       } else {
         for (const i in bullShit) {
           if (
@@ -242,6 +244,7 @@ export default {
             this.showPi = bullShit[i].retailMallPrice
             this.sendGoodsId = bullShit[i].goodsId
             this.sendDetailsId = bullShit[i].id
+            this.categoryId = bullShit[i].categoryId
           }
         }
       }
@@ -258,6 +261,7 @@ export default {
       this.$emit(`step`, {
         goodsId: this.sendGoodsId,
         detailsId: this.sendDetailsId,
+        goodsType: this.categoryId,
         type: type,
         goodInfo: this.goodInfo
       })
@@ -266,6 +270,7 @@ export default {
       if (!(this.canAddCart && this.inSale)) {
         return
       }
+      
       if (!this.sendDetailsId) {
         this.$toast(this.lang.specificationToast)
         return
@@ -276,6 +281,7 @@ export default {
         goodsId: this.sendGoodsId,
         groupId: null,
         groupType: null,
+        goodsType: parseInt(this.categoryId),
         serviceId: 0,
         serviceVal: 'string'
       }
@@ -310,6 +316,7 @@ export default {
       // }
       const goodInfo = {
         goodsId: this.goodInfo.goodId,
+        goodsType: this.categoryId,
         groupId: null,
         groupType: null,
         type: 1
