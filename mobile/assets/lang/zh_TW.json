@@ -555,6 +555,7 @@
       "login": "登入",
       "no-account": "没有賬戶？在此登記>",
       "email": "電郵地址",
+      "phone": "手機號",
       "email-error": "請輸入正確的電郵地址",
       "password": "密碼",
       "password-error": "請輸入登入密碼",
@@ -572,7 +573,8 @@
       "email-login": "電子郵件登入",
       "oauth-login": "社交賬號登入",
       "facebook-login": "Facebook登入",
-      "google-login": "Google登入"
+      "google-login": "Google登入",
+      "phone-login": "手機號登入"
     }
   },
   "marriage-ring": {
