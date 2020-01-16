@@ -2,7 +2,7 @@
   <div>
     <!-- 简体中文 -->
     <div v-if="language === 'zh_CN'" class="register-item">
-      <!-- <form> -->
+      <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
         <div class="row-flex">
           <div class="relative margin-right-20 margin-bottom-20">
             <div class="register-input">
@@ -85,7 +85,7 @@
             </div>
             <div class="send-email-code">
               <!-- <send-email-code :email="info.email"></send-email-code> -->
-              <button  :class="['getCode', className]" :disabled="waiting" @click="sendPhoneCode">
+              <button  :class="['getCode', className]" type="button" :disabled="waiting" @click="sendPhoneCode">
                 {{ waitingText }}
               </button>
             </div>
@@ -152,11 +152,11 @@
           </p>
         </div>
         <div class="margin-bottom-29">
-          <button v-loading="requesting" class="submit" @click="registerCN">
+          <button v-loading="requesting" type="button" class="submit" @click="registerCN">
             {{ $t(`${lang}.registration`) }}
           </button>
         </div>
-      <!-- </form> -->
+      </form>
     </div>
     <!-- 英文和繁体 -->
     <div v-else class="register-item">
@@ -226,7 +226,7 @@
             </div>
             <div class="send-email-code">
               <!-- <send-email-code :email="info.email"></send-email-code> -->
-              <button  :class="['getCode', className]" :disabled="waiting" @click="sendCode">
+              <button  :class="['getCode', className]" type="button" :disabled="waiting" @click="sendCode">
                 {{ waitingText }}
               </button>
             </div>
@@ -287,7 +287,7 @@
           </p>
         </div>
         <div class="margin-bottom-29">
-          <button v-loading="requesting" class="submit" @click="register">
+          <button v-loading="requesting" type="button" class="submit" @click="register">
             {{ $t(`${lang}.registration`) }}
           </button>
         </div>
@@ -365,6 +365,14 @@ export default {
         this.isActivemobile=false
       }
     },
+    email(){
+      if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
+        this.emailShow=true
+      }else{
+        this.emailShow=false
+        this.isActivemail=false
+      }
+    },
     password_repetition(){
       if(this.password_repetition!=this.password){
         this.repwdShow=true
@@ -381,6 +389,10 @@ export default {
     _this.$nextTick(() => {})
   },
   methods: {
+    change() {
+      //动作：阻止表单数据提交
+      return false;
+    },
     // 姓
     blurEvents(){
       this.isActivefisrt=false

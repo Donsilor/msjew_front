@@ -8,7 +8,7 @@
       <div
         v-for="(a, index) in address"
         :key="index"
-        :class="{ 'addr-active': a=== isDefault }"
+        :class="{ 'addr-active': a.is_default === 1 }"
         class="addr-block"
       >
         <div class="addr-title">
@@ -30,7 +30,7 @@
         <div class="font-size-14 color-333">{{ a.zip_code }}</div>
         <div class="font-size-14 color-333">{{ a.email }}</div>
         <div
-          v-if="a=== isDefault"
+          v-if="a.is_default === 1"
           class="font-size-14"
           style="color: #f29b87; margin-top: 6px;"
         >
@@ -48,7 +48,7 @@
           {{ $t(`${lang}.change`) }}
         </div>
         <img
-          v-show="a == isDefault"
+          v-show="a.is_default === 1"
           src="../../../static/personal/account/address-bar.png"
         />
       </div>
@@ -177,16 +177,16 @@
           <div class="new-addr-name">
             <div>
               <input
-                v-model="clone.firstname"
-                :placeholder="$t(`${lang}.firstName`) + '*'"
+                v-model="clone.lastname"
+                :placeholder="$t(`${lang}.lastName`) + '*'"
                 type="text"
               />
             </div>
 
             <div>
               <input
-                v-model="clone.lastname"
-                :placeholder="$t(`${lang}.lastName`) + '*'"
+                v-model="clone.firstname"
+                :placeholder="$t(`${lang}.firstName`) + '*'"
                 type="text"
               />
             </div>
@@ -596,7 +596,6 @@ export default {
           // if(res.code==200){
             // console.log('获取地址成功', res)
             this.address = res.data
-            this.isDefault=res.data[0]
           // }
           // else {
           //   throw new Error (res.message)
@@ -646,7 +645,7 @@ export default {
     changeDefaultAddress(id) {
       console.log("aaa",id)
       const data = this.$helpers.transformRequest(
-        JSON.parse(JSON.stringify({ id:id,is_default: 0 })),
+        JSON.parse(JSON.stringify({ id:id,is_default: 1 })),
         false
       )
       this.$axios
@@ -790,7 +789,7 @@ export default {
           }
         })
     },
-    // 新建地址
+    // 新建地址简体
     createAddress1() {
       // console.log("this.u",this.using)
       if (this.using.firstname === '') {
@@ -938,7 +937,7 @@ export default {
         JSON.parse(JSON.stringify(json)),
         false
       )   
-      // console.log("邮件",this.clone.email)
+      console.log("json",json)
       this.$axios
         .post('/web/member/address/edit', data)
         .then(res => {
