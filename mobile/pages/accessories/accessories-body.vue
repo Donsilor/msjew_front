@@ -25,7 +25,7 @@
         class="promise-info"
       >
         <div class="promise-img">
-          <img :src="$IMG_URL + c.img" alt="" />
+          <img :src= url[index] alt="" />
         </div>
         <span>{{ c.name }}</span>
       </div>
@@ -150,7 +150,7 @@
           ]"
         ></i>
         <span>{{ starNum.toFixed(1) }}</span>
-        </div> 
+        </div>
        <template v-if="totalCount > 0">
         <div class="comment-box">
           <div class="client-user">
@@ -183,12 +183,12 @@
         >
           {{ lang.allComments }} >
         </div>
-      </template> 
+      </template>
       <template v-else>
         <div class="no-comment">
           {{ lang.noComments }}
         </div>
-      </template> 
+      </template>
     </div> -->
     <footer-bar></footer-bar>
     <swiper-tap
@@ -212,6 +212,16 @@
 import Mx from './accessories-mixin'
 export default {
   mixins: [Mx],
+  data(){
+    return{
+      url:[
+        require('../../static/marriage-ring/icon-01.png'),
+        require('../../static/marriage-ring/icon-02.png'),
+        require('../../static/marriage-ring/icon-03.png'),
+        require('../../static/marriage-ring/icon-04.png')
+      ]
+    }
+  },
   computed: {
     canAddCart() {
       const body = this.goodInfo.simpleGoodsDetailsList
