@@ -528,9 +528,11 @@
       "next": "Next"
     },
     "new-password": {
+      "code": "Verification Code",
       "reset-password": "Reset password",
       "input-new-password": "Enter new password",
       "password-error": "Enter correct password",
+      "code-err": "Wrong verification code",
       "confirm-password": "Confirm new password",
       "password-not-same": "Entered passwords differ",
       "password-claim": "Password of 6-18 characters，Password consists of numbers or letters，Special characters are not allowed，Spaces and Chinese characters are not allowed",

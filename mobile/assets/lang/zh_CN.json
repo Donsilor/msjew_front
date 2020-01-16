@@ -582,6 +582,7 @@
         "login": "会员登入",
         "no-account": "没有账户？在此登记>",
         "email-login": "电子邮件登入",
+        "phone-login": "手机号登录",
         "oauth-login": "社交账号登入",
         "facebook-login": "Facebook登入",
         "google-login": "Google登入",

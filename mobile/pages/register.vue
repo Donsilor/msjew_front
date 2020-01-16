@@ -173,7 +173,7 @@
           <span class="login" @click="toLogin">{{ lang.hadRegister }}></span>
         </div>
 
-        <div class="oauth">
+        <!-- <div class="oauth">
           <div class="line-box">
             <button class="full-btn facebook" @click="oauthLogin('facebook')">
               <img src="/facebook.svg" class="btn-icon" />
@@ -186,7 +186,7 @@
               <span class="btn-message">{{ lang.google }}&nbsp;&nbsp;&nbsp;</span>
             </button>
           </div>
-        </div>
+        </div> -->
 
         <div class="info">
           <div class="title">{{ lang.inputInfo }}</div>
@@ -194,7 +194,7 @@
           <div class="line-box input-line">
             <bdd-input
               v-model="info.name"
-              :placeholder="`*${lang.name}`"
+              :placeholder="`${lang.name}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('name')"
             ></bdd-input>
@@ -210,7 +210,7 @@
           <div class="line-box input-line">
             <bdd-input
               v-model="info.surname"
-              :placeholder="`*${lang.surname}`"
+              :placeholder="`${lang.surname}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('surname')"
             ></bdd-input>
@@ -363,7 +363,7 @@ export default {
         password_repetition: '',
         surname: '', // 姓氏
         name: '', // 名
-        code: ''
+        code: '',
       },
       hadSendCode: false,
       agree: true,
@@ -430,7 +430,7 @@ export default {
        _this.setWait()
       this.$axios({
         method: "post",
-        url: "/site/sms-code",
+        url: "/web/site/sms-code",
         data: {
           'mobile': _this.info.mobile,
           'usage': 'register'
@@ -457,7 +457,7 @@ export default {
       _this.setWait()
        this.$axios({
         method: "post",
-        url: '/site/email-code',
+        url: '/web/site/email-code',
         data:{
           'email': _this.info.email,
           'usage': 'register'
@@ -559,14 +559,14 @@ export default {
     },
     register() {
       const _this = this
-      if (!_this.trueName) {
-        _this.$toast(_this.lang.inputName)
-        return
-      }
-      if (!_this.trueSurname) {
-        _this.$toast(_this.lang.inputSurname)
-        return
-      }
+      // if (!_this.trueName) {
+      //   _this.$toast(_this.lang.inputName)
+      //   return
+      // }
+      // if (!_this.trueSurname) {
+      //   _this.$toast(_this.lang.inputSurname)
+      //   return
+      // }
       if (!_this.trueEmail) {
         _this.$toast(_this.lang.emailError)
         return

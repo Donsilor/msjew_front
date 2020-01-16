@@ -530,6 +530,7 @@
       "reset-password": "重置密碼",
       "input-new-password": "輸入新密碼",
       "password-error": "密碼格式錯誤",
+      "code-err":"驗證碼錯誤",
       "confirm-password": "確認新密碼",
       "password-not-same": "密碼不一致",
       "password-claim": "長度為6-18位字符密碼，密碼由數位或字母組成，不允許設置特殊字符，不能使用空格和中文",

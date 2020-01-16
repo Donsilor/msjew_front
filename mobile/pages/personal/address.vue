@@ -131,6 +131,17 @@ export default {
           }
         })
         .then(res => {
+          console.log("address",_this.address)
+          // let addressarr = []
+          // let i = 0;
+          // for(i;i < _this.address.length;i++){
+          //   addressarr.push(_this.address[i+index])
+          //   if(i+index >= _this.address.length-1){
+          //     index = 0-(i+1);
+          //   }
+          // }
+          // console.log(addressarr)
+          // return addressarr;
           this.getData()
           this.$router.go(-1)
         })
