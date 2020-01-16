@@ -76,11 +76,8 @@
               }}{{ data.address.cityName }}
             </div>
             <div class="user-info">
-              <div v-if="language === 'en_US'">
-                {{ data.address.firstName }} {{ data.address.lastName }}<span>{{ $t(`${lang}.get`) }}</span>
-              </div>
-              <div v-else>
-                {{ data.address.lastName }}{{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
+              <div>
+                {{ data.address.realname }}<span>{{ $t(`${lang}.get`) }}</span>
               </div>
               <div>
                 <span>{{ data.address.userTelCode }}</span>
@@ -146,7 +143,7 @@
             </div>
             <div class="user-info">
               <div>
-                {{ data.address.firstName }} {{ data.address.lastName
+                {{ data.address.realName }} {{ data.address.lastName
                 }}<span>{{ $t(`${lang}.get`) }}</span>
               </div>
               <div>
@@ -290,7 +287,6 @@ const lang_pay = 'personal.userOrder'
 export default {
   name: 'OrderDetails',
   data() {
-    console.log('abc', this.$cookies)
     return {
       lang,
       lang_pay,
@@ -301,8 +297,7 @@ export default {
           provinceName: '',
           cityName: '',
           address: '',
-          firstName: '',
-          lastName: '',
+          realName: '',
           userMail: ''
         }
       }
@@ -312,7 +307,6 @@ export default {
     statusSteps() {
       // data.orderStatus
       const orderStatus = this.data.orderStatus
-      console.log("******",orderStatus)
       const result = [
         {
           id: 0,
@@ -356,63 +350,14 @@ export default {
         result[2].active = true
         result[3].active = true
       }
-      // console.log("jjjjjj", result[0])
-      // if ([, 1, 10].includes(orderStatus)) {
-      //   result[0].active = true
-      // } else if ([2].includes(orderStatus)) {
-      //   result[0].active = true
-      //   result[1].active = true
-      // } else if ([3].includes(orderStatus)) {
-      //   result[0].active = true
-      //   result[1].active = true
-      //   result[2].active = true
-      // } else if ([4, 5].includes(orderStatus)) {
-      //   result[0].active = true
-      //   result[1].active = true
-      //   result[2].active = true
-      //   result[3].active = true
-      // } else if ([6, 7, 8, 9].includes(orderStatus)) {
-      //   result[0].active = true
-      //   result[1].active = true
-      //   result[2].active = true
-      //   result[3].active = true
-      //   result[4].active = true
-      // }
-      // console.log("result",result)
       return result
     }
   },
   mounted() {
-    this.language = this.getCookie('language')
     this.getData()
   },
   methods: {
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     getStatusText(status) {
-      // console.log("状态码",status)
-      // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
-      // return [
-      //   '',
-      //   this.$t(`${lang}.status`)[0],
-      //   this.$t(`${lang}.status`)[1],
-      //   this.$t(`${lang}.status`)[2],
-      //   this.$t(`${lang}.status`)[3],
-      //   this.$t(`${lang}.status`)[4],
-      //   this.$t(`${lang}.status`)[5],
-      //   this.$t(`${lang}.status`)[6],
-      //   this.$t(`${lang}.status`)[7],
-      //   this.$t(`${lang}.status`)[8],
-      //   this.$t(`${lang}.status`)[9]
-      // ][status]
 
       var status_value =  {
           0 :this.$t(`${lang}.cancelTransaction`),
