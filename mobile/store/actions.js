@@ -79,57 +79,34 @@ export default {
                 refresh_token: refreshToken
             }
         }).then(res => {
-            if (res.code == 200) {
-                localStorage.setItem("refreshTime", nowDate);
-                localStorage.setItem('refreshToken', res.data.refresh_token);
-                localStorage.setItem('accessToken', res.data.access_token);
-                commit('setToken', res.data.access_token);
-                window.location.reload()
-            } else {
-                dispatch('logout')
-                window.location.reload()
-            }
-
+            localStorage.setItem("refreshTime", nowDate);
+            localStorage.setItem('refreshToken', res.refresh_token);
+            localStorage.setItem('accessToken', res.access_token);
+            commit('setToken', res.access_token);
+            window.location.reload()
         })
     },
-    nuxtServerInit ({
-        commit
-    }, {
-        req,
-        app
-    }) {
+    nuxtServerInit ({ commit }, { req, app }) {
         // console.log('nuxtServerInit======>')
     },
     // 退出登录
-    logout ({
-        $axios,
-        state,
-        commit,
-        dispatch
-    }) {
+    logout ({ $axios, state, commit, dispatch }) {
         commit('setToken', '')
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshTime');
     },
     // 获取用户数据
-    getUserInfo ({
-        $axios,
-        state,
-        commit,
-        dispatch
-    }) {
+    getUserInfo ({ $axios, state, commit, dispatch }) {
         return this.$axios({
             method: 'get',
             url: `/web/member/member/me`
+        }).then(data => {
+            commit('setUserInfo', data)
+            return data
+        }).catch(err => {
+            return Promise.reject(err)
         })
-            .then(data => {
-                commit('setUserInfo', data)
-                return data
-            })
-            .catch(err => {
-                return Promise.reject(err)
-            })
     },
 
     /**
