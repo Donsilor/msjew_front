@@ -81,9 +81,9 @@ export default {
   mounted() {
     console.log(this.goodInfo)
     for (let i = 0; i < this.goodInfo.specs.length; i++) {
-      if (this.goodInfo.specs[i].configId === 33) {
+      if (this.goodInfo.specs[i].configId === 4) {
         this.force.cut = this.goodInfo.specs[i].configAttrId
-      } else if (this.goodInfo.specs[i].configId === 31) {
+      } else if (this.goodInfo.specs[i].configId === 5) {
         this.force.carat = parseFloat(
           this.goodInfo.specs[i].configAttrVal
         )
@@ -98,9 +98,9 @@ export default {
         } else if (this.force.carat === 1) {
           this.caratLeft = 50
         }
-      } else if (this.goodInfo.specs[i].configId === 34) {
+      } else if (this.goodInfo.specs[i].configId === 7) {
         this.force.color = this.goodInfo.specs[i].configAttrId
-      } else if (this.goodInfo.specs[i].configId === 35) {
+      } else if (this.goodInfo.specs[i].configId === 2) {
         this.force.clarity = this.goodInfo.specs[i].configAttrId
       }
     }

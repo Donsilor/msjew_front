@@ -148,7 +148,7 @@ export default {
     makeDiamond(i) {
       this.$axios({
         method: `post`,
-        url: `/wap/goods/goodsDetail`,
+        url: `/wap/goods/diamond/detail`,
         params: {
           goodsId: i
         }
@@ -165,7 +165,7 @@ export default {
     makeOther(i) {
       this.$axios({
         method: `post`,
-        url: `/wap/goods/goodsDetail`,
+        url: `/wap/goods/style/detail`,
         params: {
           goodsId: i
         }

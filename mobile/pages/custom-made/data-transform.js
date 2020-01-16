@@ -271,20 +271,26 @@ export default {
     async makeBoardArr() {
       const ctNum = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.melo)
-      ).steps[1].ct
+      ).steps[0].ct
       this.diamondTag = parseInt(ctNum)
-      setTimeout(() => {
-        this.diamondTag = parseInt(ctNum)
-      }, 0)
+      // setTimeout(() => {
+      //   this.diamondTag = parseInt(ctNum)
+      // }, 0)
       // console.log(
       //   `diamond=========>`,
       //   JSON.parse(this.$helpers.base64Decode(this.$route.query.melo))
       // )
-      // console.log(this.diamondTag)
+      
+      
       if (!this.$route.query.isBack && parseInt(this.$route.query.step) === 2) {
+        if(this.diamondTag == 2){
+          var url1 =  `/wap/goods/style/detail`;
+        }else{
+          var url1 =  `/wap/goods/diamond/detail`; 
+        }
         this.$axios({
           method: `post`,
-          url: `/wap/goods/goodsDetail`,
+          url: url1,
           params: {
             goodsId: JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
@@ -317,9 +323,19 @@ export default {
         this.$route.query.isBack ||
         parseInt(this.$route.query.step) === 3
       ) {
+        // console.log(444444)
+        if(this.diamondTag == 1){
+          var url2 =  `/wap/goods/diamond/detail`;
+          var url3 =  `/wap/goods/style/detail`;
+          
+        }else{
+          var url2 =  `/wap/goods/style/detail`;
+          var url3 =  `/wap/goods/diamond/detail`;
+        }
+
         await this.$axios({
           method: `post`,
-          url: `/wap/goods/goodsDetail`,
+          url: url2,
           params: {
             goodsId: JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
@@ -350,7 +366,7 @@ export default {
           })
         await this.$axios({
           method: `post`,
-          url: `/wap/goods/goodsDetail`,
+          url: url3,
           params: {
             goodsId: JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)

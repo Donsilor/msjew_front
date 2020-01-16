@@ -127,9 +127,9 @@
         {{ lang.goods }}ID：{{ goodInfo.goodsCode }}
       </div>
       <div class="sku-table">
-        <div v-for="(b, index) in goodInfo.baseConfig" :key="index">
-          <span>{{ b.configVal }}</span>
-          <span>{{ b.configAttrIVal }}</span>
+        <div v-for="(b, index) in goodInfo.specs" :key="index">
+          <span>{{ b.configName }}</span>
+          <span>{{ b.configAttrVal }}</span>
         </div>
       </div>
       <div class="desc-content" v-html="goodInfo.goodsDesc"></div>
@@ -150,8 +150,8 @@
           ]"
         ></i>
         <span>{{ starNum.toFixed(1) }}</span>
-        </div> -->
-      <!-- <template v-if="totalCount > 0">
+        </div> 
+       <template v-if="totalCount > 0">
         <div class="comment-box">
           <div class="client-user">
             {{ showEmail(comments.userAccount) }}
@@ -183,13 +183,13 @@
         >
           {{ lang.allComments }} >
         </div>
-      </template> -->
-      <!-- <template v-else>
+      </template> 
+      <template v-else>
         <div class="no-comment">
           {{ lang.noComments }}
         </div>
-      </template> -->
-    <!-- </div> -->
+      </template> 
+    </div> -->
     <footer-bar></footer-bar>
     <swiper-tap
       ref="suitability"

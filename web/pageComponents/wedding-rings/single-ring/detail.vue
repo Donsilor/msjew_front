@@ -122,7 +122,7 @@
           </span>
         </div>
         <div class="button-group">
-          <blank v-if="!$route.query.isBack">
+          <span v-if="!$route.query.isBack">
             <nuxt-link
               v-if="productInfo.goodsMod === 1 && (parseInt($route.query.step) !== 2 && $route.query.step) && canAddCart"
               :to="startDj"
@@ -138,8 +138,8 @@
             >
               {{ $t(`${lang}.addCart`) }}
             </button>
-          </blank>
-          <blank v-if="
+          </span>
+          <span v-if="
             (parseInt($route.query.step) !== 1 && $route.query.step) ||
               $route.query.isBack
           ">
@@ -151,7 +151,7 @@
             <button v-else :class="['add-to-cart', { active: canAddCart }]">
               确认选择
             </button>
-          </blank>
+          </span>
         </div>
 
         <!-- <div class="other-info">
