@@ -175,10 +175,10 @@ export default {
                 localStorage.setItem('refreshToken', res.data.refresh_token);
                 localStorage.setItem('accessToken', res.data.access_token);
                 commit('setToken', res.data.access_token);
-                window.location.reload()
+                //window.location.reload()
             } else {
                 dispatch('logout')
-                window.location.reload()
+                //window.location.reload()
             }
 
         })

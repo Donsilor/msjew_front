@@ -83,7 +83,7 @@ export default {
             localStorage.setItem('refreshToken', res.refresh_token);
             localStorage.setItem('accessToken', res.access_token);
             commit('setToken', res.access_token);
-            window.location.reload()
+            //window.location.reload()
         })
     },
     nuxtServerInit ({ commit }, { req, app }) {
