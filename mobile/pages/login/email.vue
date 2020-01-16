@@ -1,89 +1,16 @@
 <template>
   <div>
-    <!-- <div v-if="language === 'zh_CN'"> -->
-      <section>
-        <div class="title-bar">
-          <span class="title">
-            {{ lang['login'] }}
-          </span>
-          <span class="register" @click="toRegister">
-            {{ lang['no-account'] }}
-          </span>
-        </div>
-        <div class="line-box input-line">
-          <bdd-input v-if="loginType == 1" v-model="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
-          <bdd-input v-else v-model="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
-          <div :class="[
-            'error-message',
-            { active: !trueUsernameM && hadInput('username') }
-          ]">
-            {{ lang['email-error'] }}
-          </div>
-        </div>
-        <div class="line-box input-line">
-          <bdd-input v-model="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')"></bdd-input>
-          <div :class="[
-            'error-message',
-            { active: !truePassword && hadInput('password') }
-          ]">
-            {{ lang['password-error'] }}
-          </div>
-        </div>
-        <div class="line-box input-line" v-if="loginType == 2">
-          <div class="code">
-            <bdd-input v-model="code" :placeholder="lang['Code']" @blur="inputKey('code')"></bdd-input>
-            <div class="code-picture" @click="refreshCode">
-              <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
-            </div>
-          </div>
-          <div :class="[
-            'error-message',
-            { active: ! trueCode && hadInput('code') }
-          ]">
-            {{ lang['code-error'] }}
-          </div>
-        </div>
-
-        <!-- <div v-show="needSliderVerify" class="line-box verify-line">
-        <slider-verify
-          ref="slider-verify"
-          @finish="sliderVerifyFinish"
-        ></slider-verify>
-        <div
-          :class="[
-            'error-message',
-            { active: needSliderVerify && !sliderVerify }
-          ]"
-        >
-          {{ lang['slider-verify-first'] }}
-        </div>
-      </div> -->
-
-        <div class="line-box button-line">
-          <button class="full-btn login" @click="loginCN">
-            <span class="btn-message">{{ lang['login-now'] }}</span>
-          </button>
-        </div>
-        <div class="line-box button-line">
-          <button class="full-btn forget" @click="toForget">
-            <span class="btn-message">
-              {{ lang['forget'] }}
-            </span>
-          </button>
-        </div>
-      </section>
-    <!-- </div> -->
-    <!-- <div v-else>
-      <section>
-        <div class="title-bar">
-          <span class="title">
-            {{ lang['login'] }}
-          </span>
-          <span class="register" @click="toRegister">
-            {{ lang['no-account'] }}
-          </span>
-        </div>
-        <div class="line-box input-line">
+    <section>
+      <div class="title-bar">
+        <span class="title">
+          {{ lang['login'] }}
+        </span>
+        <span class="register" @click="toRegister">
+          {{ lang['no-account'] }}
+        </span>
+      </div>
+      <div class="line-box input-line">
+        <div v-if="loginType == 1">
           <bdd-input v-model="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
           <div :class="[
             'error-message',
@@ -92,45 +19,68 @@
             {{ lang['email-error'] }}
           </div>
         </div>
-        <div class="line-box input-line">
-          <bdd-input v-model="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')"></bdd-input>
+        <div v-else>
+          <bdd-input v-model="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
           <div :class="[
             'error-message',
-            { active: !truePassword && hadInput('password') }
+            { active: !trueUsernameM && hadInput('username') }
           ]">
-            {{ lang['password-error'] }}
+            {{ lang['phone-error'] }}
           </div>
-        </div> -->
+        </div>
+      </div>
+      <div class="line-box input-line">
+        <bdd-input v-model="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')"></bdd-input>
+        <div :class="[
+          'error-message',
+          { active: !truePassword && hadInput('password') }
+        ]">
+          {{ lang['password-error'] }}
+        </div>
+      </div>
+      <div class="line-box input-line" v-if="loginType == 2">
+        <div class="code">
+          <bdd-input v-model="code" :placeholder="lang['Code']" @blur="inputKey('code')"></bdd-input>
+          <div class="code-picture" @click="refreshCode">
+            <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
+          </div>
+        </div>
+        <div :class="[
+          'error-message',
+          { active: ! trueCode && hadInput('code') }
+        ]">
+          {{ lang['code-error'] }}
+        </div>
+      </div>
 
-        <!-- <div v-show="needSliderVerify" class="line-box verify-line">
-        <slider-verify
-          ref="slider-verify"
-          @finish="sliderVerifyFinish"
-        ></slider-verify>
-        <div
-          :class="[
-            'error-message',
-            { active: needSliderVerify && !sliderVerify }
-          ]"
-        >
-          {{ lang['slider-verify-first'] }}
-        </div>
-      </div> -->
-
-        <!-- <div class="line-box button-line">
-          <button class="full-btn login" @click="login">
-            <span class="btn-message">{{ lang['login-now'] }}</span>
-          </button>
-        </div>
-        <div class="line-box button-line">
-          <button class="full-btn forget" @click="toForget">
-            <span class="btn-message">
-              {{ lang['forget'] }}
-            </span>
-          </button>
-        </div>
-      </section>
+      <!-- <div v-show="needSliderVerify" class="line-box verify-line">
+      <slider-verify
+        ref="slider-verify"
+        @finish="sliderVerifyFinish"
+      ></slider-verify>
+      <div
+        :class="[
+          'error-message',
+          { active: needSliderVerify && !sliderVerify }
+        ]"
+      >
+        {{ lang['slider-verify-first'] }}
+      </div>
     </div> -->
+
+      <div class="line-box button-line">
+        <button class="full-btn login" @click="loginCN">
+          <span class="btn-message">{{ lang['login-now'] }}</span>
+        </button>
+      </div>
+      <div class="line-box button-line">
+        <button class="full-btn forget" @click="toForget">
+          <span class="btn-message">
+            {{ lang['forget'] }}
+          </span>
+        </button>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -241,18 +191,26 @@ export default {
       const _this = this
       if (_this.needSliderVerify && !_this.sliderVerify) {
         _this.$toast.show(_this.lang['slider-verify'])
+        console.log(11111111)
         return
       }
       if (!this.trueUsernameM) {
-        _this.$toast.show(_this.lang['email-error'])
+        if(_this.loginType == 1){
+          _this.$toast.show('6666')
+        }else{
+          _this.$toast.show(_this.lang['email-error'])
+        }
+        console.log(22222)
         return
       }
       if (!_this.truePassword) {
         _this.$toast.show(_this.lang['input-password'])
+        console.log(33333333)
         return
       }
       if (_this.code !== _this.pictureCode) {
         _this.$toast.show(_this.lang['input-code'])
+        console.log(4444444)
         return
       }
 

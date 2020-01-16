@@ -557,6 +557,7 @@
       "email": "電郵地址",
       "phone": "手機號",
       "email-error": "請輸入正確的電郵地址",
+      "phone-error": "請輸入正確的電話號碼",
       "password": "密碼",
       "password-error": "請輸入登入密碼",
       "login-now": "登入",

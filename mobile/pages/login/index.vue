@@ -192,7 +192,8 @@ export default {
 .full-btn.phone {
   font-size: 16px;
   color: #ffffff;
-  background-color: #a24612;
+  /* background-color: #a24612; */
+  background-color: #a8cdb6;
   letter-spacing: 1px;
 }
 .full-btn.phone img {
