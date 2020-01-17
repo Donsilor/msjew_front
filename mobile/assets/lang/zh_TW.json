@@ -381,6 +381,8 @@
       "postal": "郵政編碼",
       "storage": "儲 存",
       "deleteAddress": "刪除地址",
+      "areaCN": "中國 +86",
+      "china":"中國",
       "area": "香港 +852",
       "country": "*選擇國家/地區",
       "province": "選擇省份/州",
@@ -514,6 +516,8 @@
     "basic": {
       "email-null": "郵箱不能为空",
       "email-error": "郵箱格式錯誤",
+      "mobile-null": "電話不能為空",
+      "mobile-error": "電話格式錯誤",
       "code-null": "驗證碼不能為空",
       "code-error": "驗證碼錯誤",
       "password-null": "密碼不能為空",
@@ -522,8 +526,11 @@
     "index": {
       "forget": "忘記密碼",
       "email": "電子郵件",
+      "mobile":"手機號*",
       "email-error": "郵箱格式錯誤",
-      "next": "下一步"
+      "mobile-error": "電話格式錯誤",
+      "next": "下一步",
+      "code": "輸入驗證碼*"
     },
     "new-password": {
       "code": "驗證碼",
@@ -563,6 +570,8 @@
       "password-error": "請輸入登入密碼",
       "login-now": "登入",
       "forget": "忘記密碼？",
+      "Code": "輸入驗證碼",
+      "code-error": "驗證碼錯誤",
       "slider-verify-first": "請先完成驗證",
       "slider-verify": "請完成驗證解鎖",
       "input-password": "請輸入登入密碼",

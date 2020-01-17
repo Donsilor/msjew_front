@@ -316,9 +316,9 @@ export default {
     console.log("cookie",this.language)
     if(this.language === 'zh_CN'){
       this.userTelCode='+86' 
-      this.area="中国 +86"
+      this.area=this.lang.areaCN   //"中国 +86"
       this.countryId = 7
-      this.country = '中国'
+      this.country = this.lang.china   //'中国'
     }else {
       this.userTelCode='+852'
     }

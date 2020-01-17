@@ -7,7 +7,7 @@
           <span class="order-status">{{ statusText(order.orderStatus) }}</span>
         </div>
         <div class="top">
-          <span>{{ order.orderNo }}</span>
+          <span>{{ order.orderNO }}</span>
         </div>
         <div class="mod" @click="toDetail(order.id)">
           <ul>
