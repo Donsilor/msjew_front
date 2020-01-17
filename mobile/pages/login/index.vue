@@ -48,10 +48,19 @@
         <span class="title">
           {{ lang['login'] }}
         </span>
-        <span class="register" @click="toRegister">
+        <!-- <span class="register" @click="toRegister">
           {{ lang['no-account'] }}
-        </span>
+        </span> -->
       </div>
+      <div class="line-box">
+        <button class="full-btn phone" @click="toPhoneLogoin">
+          <img src="../../static/login/shoujihao.png" class="btn-icon" />
+          <span class="btn-message">
+            {{ lang['phone-login'] }}&nbsp;&nbsp;&nbsp;
+          </span>
+        </button>
+      </div>
+      
       <div class="line-box">
         <button class="full-btn email" @click="toEmailLogin">
           <img src="/email.svg" class="btn-icon" />
@@ -83,14 +92,7 @@
         </button>
       </div> -->
 
-      <div class="line-box">
-        <button class="full-btn phone" @click="toPhoneLogoin">
-          <img src="../../static/login/shoujihao.png" class="btn-icon" />
-          <span class="btn-message">
-            {{ lang['phone-login'] }}&nbsp;&nbsp;&nbsp;
-          </span>
-        </button>
-      </div>
+      
     </section>
   </div>
 </div>

@@ -663,6 +663,11 @@ export default language => {
 
     languageOptions: [
       {
+        code: 'zh_CN',
+        content: '中文简体',
+        shortCut: '简'
+      },
+      {
         code: 'zh_TW',
         content: '繁體中文',
         shortCut: '繁'
@@ -671,22 +676,18 @@ export default language => {
         code: 'en_US',
         content: 'English',
         shortCut: 'En'
-      },
-      {
-        code: 'zh_CN',
-        content: '中文简体',
-        shortCut: '简'
       }
+      
     ],
 
     coinOptions: [
       {
-        code: 'HKD',
-        content: 'HKD'
-      },
-      {
         code: 'CNY',
         content: 'CNY'
+      },
+      {
+        code: 'HKD',
+        content: 'HKD'
       },
       {
         code: 'USD',

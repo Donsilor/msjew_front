@@ -382,6 +382,7 @@
         "storage": "储存",
         "deleteAddress": "删除地址",
         "areaCN": "中国 +86",
+        "china":"中国",
         "area": "香港 +852",
         "country": "*选择国家/地区",
         "province": "选择省份/州",
@@ -435,7 +436,7 @@
       "orderDetail": {
         "orderDetail": "订单详情",
         "orderStatus": "订单状态",
-        "orderNumber": "訂單編號",
+        "orderNumber": "订单编号",
         "orderTime": "订单编号",
         "payType": "付款方式",
         "payTime": "付款时间",
@@ -456,7 +457,7 @@
         "transPreferFee": "电汇支付优惠",
         "orderCount": "订单总额",
         "toPay": "去付款",
-        "cancelOrder": "取消訂單",
+        "cancelOrder": "取消订单",
         "submit": "提交",
         "waitingPay": "待付款",
         "waitingSend": "待发货",
@@ -570,7 +571,7 @@
         "code-error": "验证码错误",
         "login-now": "登录",
         "forget": "忘记密码？",
-        "Code": "输入验证码*",
+        "Code": "输入验证码",
         "slider-verify-first": "请先完成验证",
         "slider-verify": "请完成验证解锁",
         "input-password": "请输入登入密码",
@@ -581,12 +582,11 @@
       "index": {
         "login": "会员登入",
         "no-account": "没有账户？在此登记>",
-        "email-login": "电子邮件登入",
-        "phone-login": "手机号登录",
+        "email-login": "电子邮件登入/注册",
+        "phone-login": "手机号登录/注册",
         "oauth-login": "社交账号登入",
         "facebook-login": "Facebook登入",
-        "google-login": "Google登入",
-        "phone-login": "手机号登入"
+        "google-login": "Google登入"
       }
     },
     "marriage-ring": {
@@ -674,8 +674,10 @@
       "inputSurname": "请输入姓氏",
       "surnameError": "请输入正确的姓氏",
       "mobile": "手机号*",
+      "email": "邮箱*",
       "inputEmail": "请输入电邮地址",
-      "emailError": "请输入正确的电话号码",
+      "emailError": "请输入正确的邮箱地址",
+      "phoneError": "请输入正确的电话号码",
       "inputUnder": "在下面输入发送到",
       "theEmailCode": "的验证码。如果没有收到电子邮件，请查看垃圾邮件文件 夹或稍后点击发送",
       "code": "输入验证码*",

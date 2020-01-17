@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="language === 'zh_CN'" class="edit-address">
+    <div  class="edit-address">
       <div class="header">
         <span>
           {{ title }}
@@ -94,7 +94,10 @@
           <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
         </div>
 
-        <div class="btn-common btn-pink btn-address" @click="createAddressCN">
+        <div v-if="loginType == 2 " class="btn-common btn-pink btn-address cn" @click="createAddressCN">
+          {{ lang.storage }}
+        </div>
+        <div v-else class="btn-common btn-pink btn-address" @click="createAddress">
           {{ lang.storage }}
         </div>
         <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
@@ -119,7 +122,7 @@
       </div>
     </div>
     <!-- 繁体 -->
-    <div v-else class="edit-address">
+    <!-- <div  class="edit-address">
       <div class="header">
         <span>
           {{ title }}
@@ -236,7 +239,7 @@
         ></swiper-tap>
         <swiper-tap ref="city" :list="cityList" @clear="citySure"></swiper-tap>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -291,6 +294,7 @@ export default {
       isOver: true,
       postals: false,
       language:'',
+      loginType:''
     }
   },
   // beforeMount(){
@@ -307,11 +311,14 @@ export default {
     this.getArealist()
   },
   mounted() {
+    this.loginType=localStorage.getItem('loginType')
     this.language = this.getCookie('language')
     console.log("cookie",this.language)
     if(this.language === 'zh_CN'){
       this.userTelCode='+86' 
-      this.area="中国 +86"
+      this.area=this.lang.areaCN   //"中国 +86"
+      this.countryId = 7
+      this.country = this.lang.china   //'中国'
     }else {
       this.userTelCode='+852'
     }
@@ -503,21 +510,34 @@ export default {
           }
         })
         .then(res => {
-          _this.cityList = []
-          for (let i = 0; i < res.length; i++) {
-            const o = {
-              id: res[i].areaId,
-              content: res[i].areaName
+
+          console.log(11111,res);
+          if(res.length == 0){
+            this.cityId = 0
+            this.city ='----'
+           
+          }else{
+            _this.cityList = []
+            for (let i = 0; i < res.length; i++) {
+              const o = {
+                id: res[i].areaId,
+                content: res[i].areaName
+              }
+              _this.cityList.push(o)
             }
-            _this.cityList.push(o)
+           _this.cityList.unshift({ id: '', content: this.lang.pleaseChoose })
           }
-          _this.cityList.unshift({ id: '', content: this.lang.pleaseChoose })
+
+          
         })
         .catch(err => {
           console.log(err)
         })
     },
     showCountry() {
+      // if(this.$store.state.language === 'zh_CN'){
+      //   this.country = '中国'
+      // }
       this.countryId = ''
       this.country = this.lang.country
       this.provinceList = []
@@ -610,27 +630,34 @@ export default {
       if ((val === 2 || val === 0) && this.surname.length > 20) {
         this.surnameText = this.lang.surnameText2
         this.surnameTrue = true
-        return
+        return fa
       }
-      if(this.$store.state.language === 'zh_CN'){
-        if ((val === 3 || val === 0) && this.mailbox === '') {
+      if(this.language == 'zh_CN'){
+        console.log(222)
+        if ((val === 3 ) ) {
           this.mailboxText = this.lang.mailboxText1
+          this.mailboxTrue = false
+          return 
+        }
+        if ((val === 3 ) && !Email.test(this.mailbox)) {
+          console.log(333)
+          this.mailboxText = this.lang.mailboxText2
           this.mailboxTrue = false
           return
         }
-        
-      }else {
+      }else{
         if ((val === 3 || val === 0) && this.mailbox === '') {
           this.mailboxText = this.lang.mailboxText1
           this.mailboxTrue = true
           return
         }
-      }
-      if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
-        this.mailboxText = this.lang.mailboxText2
-        this.mailboxTrue = true
-        return
-      }
+        if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
+          console.log(333)
+          this.mailboxText = this.lang.mailboxText2
+          this.mailboxTrue = true
+          return
+        }
+      } 
       if ((val === 4 || val === 0) && this.phone === '') {
         this.phoneText = this.lang.phoneText1
         this.phoneTrue = true
@@ -662,7 +689,7 @@ export default {
       if (
         this.nameTrue === false &&
         this.surnameTrue === false &&
-        // this.mailboxTrue === false &&
+        this.mailboxTrue === false &&
         this.phoneTrue === false &&
         this.detailsTrue === false &&
         this.countryTrue === false &&
@@ -683,7 +710,7 @@ export default {
           zip_code: this.postal
         }
         const data = JSON.parse(JSON.stringify(json))
-        console.log("json")
+        // console.log("json")
         if (this.isLogin&&this.$route.query.type!=="add") {
           const _this = this
           _this
@@ -723,8 +750,9 @@ export default {
               }, 3000)
             })
             .catch(err => {
+              _this.$toast.show(err.message)
               this.isOver = true
-              console.log(err)
+              // console.log(err)
             })
 
         }else{
