@@ -186,29 +186,49 @@ export default {
         this.totalNum = 0
         this.totalPrice = 0
       } else {
-        // this.tickNum = 0
-        // this.totalNum = 0
+        this.tickNum = 0
+        this.totalNum = 0
         this.totalPrice = 0
         for (const i in this.good) {
-          if(this.good[i].data[0].simpleGoodsEntity.goodsStatus!==2){
-            this.good[i].tick = false
-            continue;
+          if(this.good[i].groupType == 1){
+             if(parseInt(this.good[i].data[0].ringsSimpleGoodsEntity.status) === 0){
+                this.good[i].tick = false
+                continue;
+              }
+              this.tickNum += 2
+              this.totalNum += 2
+
           }else{
-            this.good[i].tick = true
+              if(this.good[i].data[0].simpleGoodsEntity.goodsStatus!==2){
+                this.good[i].tick = false
+                continue;
+              }
+              this.tickNum += 1
+              this.totalNum += 1
           }
+
+           this.good[i].tick = true
+         
           // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
           this.totalPrice +=parseFloat(this.good[i].price) 
         }
         // console.log("price=====2",this.good)
-        this.tickNum = this.good.length
-        this.totalNum = this.good.length
+        // this.tickNum = this.good.length
+        // this.totalNum = this.good.length
         this.allTick = !this.allTick
       }
       this.good = JSON.parse(JSON.stringify(this.good))
     },
     ticksCHeck(i) {
-      this.good[i].tick ? this.tickNum-- : this.tickNum++
-      this.good[i].tick ? this.totalNum-- : this.totalNum++
+      if(this.good[i].groupType == 1){
+          this.good[i].tick ? this.tickNum -= 2  : this.tickNum += 2
+          this.good[i].tick ? this.totalNum -= 2 : this.totalNum +=2
+      }else{
+         this.good[i].tick ? this.tickNum-- : this.tickNum++
+         this.good[i].tick ? this.totalNum-- : this.totalNum++
+      }
+
+     
       this.good[i].tick
         ? (this.totalPrice -=parseFloat(this.good[i].price) )
         : (this.totalPrice += parseFloat(this.good[i].price))
