@@ -535,9 +535,9 @@ export default {
         })
     },
     showCountry() {
-      if(this.$store.state.language === 'zh_CN'){
-        this.country = '中国'
-      }
+      // if(this.$store.state.language === 'zh_CN'){
+      //   this.country = '中国'
+      // }
       this.countryId = ''
       this.country = this.lang.country
       this.provinceList = []
@@ -630,28 +630,34 @@ export default {
       if ((val === 2 || val === 0) && this.surname.length > 20) {
         this.surnameText = this.lang.surnameText2
         this.surnameTrue = true
-        return
+        return fa
       }
       if(this.loginType == 2){
-        if ((val === 3 || val === 0) && this.mailbox === '') {
+        console.log(222)
+        if ((val === 3 ) ) {
           this.mailboxText = this.lang.mailboxText1
+          this.mailboxTrue = false
+          return 
+        }
+        if ((val === 3 ) && !Email.test(this.mailbox)) {
+          console.log(333)
+          this.mailboxText = this.lang.mailboxText2
           this.mailboxTrue = false
           return
         }
-        
-      }else {
+      }else{
         if ((val === 3 || val === 0) && this.mailbox === '') {
           this.mailboxText = this.lang.mailboxText1
           this.mailboxTrue = true
           return
         }
-      }
-      
-      if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
-        this.mailboxText = this.lang.mailboxText2
-        this.mailboxTrue = true
-        return
-      }
+        if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
+          console.log(333)
+          this.mailboxText = this.lang.mailboxText2
+          this.mailboxTrue = true
+          return
+        }
+      } 
       if ((val === 4 || val === 0) && this.phone === '') {
         this.phoneText = this.lang.phoneText1
         this.phoneTrue = true
@@ -683,7 +689,7 @@ export default {
       if (
         this.nameTrue === false &&
         this.surnameTrue === false &&
-        // this.mailboxTrue === false &&
+        this.mailboxTrue === false &&
         this.phoneTrue === false &&
         this.detailsTrue === false &&
         this.countryTrue === false &&
