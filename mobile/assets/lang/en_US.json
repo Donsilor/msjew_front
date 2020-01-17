@@ -573,11 +573,11 @@
     "index": {
       "login": "Account Login",
       "no-account": "No Account?  Register Here>",
-      "email-login": "Sign in with email",
+      "email-login": "Email login / register",
       "oauth-login": "OR",
       "facebook-login": "Sign in with Facebook",
       "google-login": "Sign in with Google",
-      "phone-login": "Sign in with cellphone"
+      "phone-login": "Phone Number Login / Register"
     }
   },
   "marriage-ring": {
@@ -663,9 +663,11 @@
     "surname": "Last Name",
     "inputSurname": "Enter last name",
     "surnameError": "Enter correct last name",
+    "mobile": "Mobile number *",
     "email": "Email",
     "inputEmail": "Enter email",
     "emailError": "Enter correct email",
+    "phoneError": "Please enter the correct phone number",
     "inputUnder": "Enter the verification code sent to",
     "theEmailCode": "Check the spam folder or click on send if you fail to receive the e-mail",
     "code": "Verification Code",

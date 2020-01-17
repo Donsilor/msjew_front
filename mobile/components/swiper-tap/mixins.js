@@ -98,11 +98,11 @@ export default {
         }
       }
       const goUp = () => {
-        console.log(`up`)
+        // console.log(`up`)
         startY = endY
       }
       const goDown = () => {
-        console.log(`down`)
+        // console.log(`down`)
         startY = endY
       }
       const deleteListener = () => {

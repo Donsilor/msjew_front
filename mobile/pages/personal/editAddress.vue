@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="language === 'zh_CN'" class="edit-address">
+    <div  class="edit-address">
       <div class="header">
         <span>
           {{ title }}
@@ -94,7 +94,10 @@
           <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
         </div>
 
-        <div class="btn-common btn-pink btn-address" @click="createAddressCN">
+        <div v-if="loginType == 2 " class="btn-common btn-pink btn-address cn" @click="createAddressCN">
+          {{ lang.storage }}
+        </div>
+        <div v-else class="btn-common btn-pink btn-address" @click="createAddress">
           {{ lang.storage }}
         </div>
         <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
@@ -119,7 +122,7 @@
       </div>
     </div>
     <!-- 繁体 -->
-    <div v-else class="edit-address">
+    <!-- <div  class="edit-address">
       <div class="header">
         <span>
           {{ title }}
@@ -236,7 +239,7 @@
         ></swiper-tap>
         <swiper-tap ref="city" :list="cityList" @clear="citySure"></swiper-tap>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -291,6 +294,7 @@ export default {
       isOver: true,
       postals: false,
       language:'',
+      loginType:''
     }
   },
   // beforeMount(){
@@ -307,11 +311,14 @@ export default {
     this.getArealist()
   },
   mounted() {
+    this.loginType=localStorage.getItem('loginType')
     this.language = this.getCookie('language')
     console.log("cookie",this.language)
     if(this.language === 'zh_CN'){
       this.userTelCode='+86' 
       this.area="中国 +86"
+      this.countryId = 7
+      this.country = '中国'
     }else {
       this.userTelCode='+852'
     }
@@ -503,21 +510,34 @@ export default {
           }
         })
         .then(res => {
-          _this.cityList = []
-          for (let i = 0; i < res.length; i++) {
-            const o = {
-              id: res[i].areaId,
-              content: res[i].areaName
+
+          console.log(11111,res);
+          if(res.length == 0){
+            this.cityId = 0
+            this.city ='----'
+           
+          }else{
+            _this.cityList = []
+            for (let i = 0; i < res.length; i++) {
+              const o = {
+                id: res[i].areaId,
+                content: res[i].areaName
+              }
+              _this.cityList.push(o)
             }
-            _this.cityList.push(o)
+           _this.cityList.unshift({ id: '', content: this.lang.pleaseChoose })
           }
-          _this.cityList.unshift({ id: '', content: this.lang.pleaseChoose })
+
+          
         })
         .catch(err => {
           console.log(err)
         })
     },
     showCountry() {
+      if(this.$store.state.language === 'zh_CN'){
+        this.country = '中国'
+      }
       this.countryId = ''
       this.country = this.lang.country
       this.provinceList = []
@@ -612,7 +632,7 @@ export default {
         this.surnameTrue = true
         return
       }
-      if(this.$store.state.language === 'zh_CN'){
+      if(this.loginType == 2){
         if ((val === 3 || val === 0) && this.mailbox === '') {
           this.mailboxText = this.lang.mailboxText1
           this.mailboxTrue = false
@@ -723,8 +743,9 @@ export default {
               }, 3000)
             })
             .catch(err => {
+              _this.$toast.show(err.message)
               this.isOver = true
-              console.log(err)
+              // console.log(err)
             })
 
         }else{

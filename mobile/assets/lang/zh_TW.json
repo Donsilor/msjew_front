@@ -572,11 +572,11 @@
     "index": {
       "login": "會員登入",
       "no-account": "没有賬戶？在此登記>",
-      "email-login": "電子郵件登入",
+      "email-login": "電子郵件登入/註冊",
       "oauth-login": "社交賬號登入",
       "facebook-login": "Facebook登入",
       "google-login": "Google登入",
-      "phone-login": "手機號登入"
+      "phone-login": "手機號登入/註冊"
     }
   },
   "marriage-ring": {
@@ -662,9 +662,11 @@
     "surname": "姓氏",
     "inputSurname": "請輸入姓氏",
     "surnameError": "請輸入正確的姓氏",
+    "mobile": "手機號*",
     "email": "電郵地址",
     "inputEmail": "請輸入電郵地址",
     "emailError": "請輸入正確的電郵地址",
+    "phoneError": "請輸入正確的電話號碼",
     "inputUnder": "在下面輸入發送到",
     "theEmailCode": "的驗證碼。如果沒有收到電子郵件，請查看垃圾郵件文件 夾或稍後點擊發送",
     "code": "驗證碼",

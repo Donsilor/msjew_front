@@ -81,7 +81,7 @@
           </div>
           <div class="btn">
             <span
-              v-if="(order.orderStatus) > 0"
+              v-if="(order.orderStatus) > 0 && (order.orderStatus)<20"
               class="btn2"
               @click="cancelOrder(order.id)"
               >{{ lang.cancelOrder }}</span
