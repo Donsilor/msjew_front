@@ -176,6 +176,9 @@
 const lang = `pay`
 export default {
   data() {
+    if ( parseInt(this.$route.query.payType)===7 ) {
+      this.$route.query.payType = 2
+    }
     return {
       lang,
       payWay: this.$route.query.payType || 2,

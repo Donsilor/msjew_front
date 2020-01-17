@@ -186,9 +186,9 @@ export default {
         }
       } else if (item.groupType === 1) {
         if (
-          item.goodsStatus === 2 &&
-          this.list[ind + 1].goodsStatus === 2 &&
-          item.status
+          // item.goodsStatus === 2 &&
+          // this.list[ind + 1].goodsStatus === 2 &&
+          item.status === '1'
         ) {
           status = true
         }

@@ -18,6 +18,7 @@ export default {
         this.$helpers.base64Decode(this.$route.query.melo)
       )
       melo.steps[0].goodsDetailsId = data.detailsId
+      melo.steps[0].goodsType = data.goodsType
       melo.steps[0].goodsId = data.goodsId
       melo.steps[0].page = `detail`
       if (parseInt(data.type) === 2) {

@@ -12,13 +12,13 @@ export default function ({
     })
     $axios.onResponse(res => {
         const data = res.data || {}
-        if (process.server == false) {
+        /*if (process.server == false) {
             let accessToken = localStorage.getItem('accessToken')
             if (!accessToken && store.state.token) {
                 store.dispatch('logout')
                 window.location.href = '/login'
             }
-        }
+        }*/
         if (data.hasOwnProperty('code')) {
             if (data.code == 200) {
                 return Promise.resolve(![undefined].includes(data.data) ? data.data : null)

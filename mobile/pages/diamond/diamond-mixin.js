@@ -51,6 +51,7 @@ export default {
       caratLeft: 0,
       sendGoodsId: null,
       sendDetailsId: null,
+      categoryId: null,
       addWay: false,
       is360: false,
       has360: false
@@ -121,6 +122,7 @@ export default {
       this.showPi = bullShit[0].retailMallPrice
       this.sendGoodsId = bullShit[0].goodsId
       this.sendDetailsId = bullShit[0].id
+      this.categoryId = bullShit[0].categoryId
     },
     goTo4C() {
       this.$router.push({
@@ -136,6 +138,7 @@ export default {
           {
             goodsId: this.sendGoodsId,
             goodsDetailsId: this.sendDetailsId,
+            goodsType: this.categoryId,
             ct: 1,
             cartId: ``,
             page: `detail`
@@ -143,6 +146,7 @@ export default {
           {
             goodsId: null,
             goodsDetailsId: null,
+            goodsType: null,
             ct: null,
             cartId: ``,
             page: `list`
@@ -193,6 +197,7 @@ export default {
         goodsId: this.sendGoodsId,
         groupId: null,
         groupType: null,
+        goodsType: this.categoryId,
         serviceId: 0,
         serviceVal: 'string'
       }

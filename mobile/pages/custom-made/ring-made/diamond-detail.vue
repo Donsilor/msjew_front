@@ -19,6 +19,7 @@ export default {
         this.$helpers.base64Decode(this.$route.query.melo)
       )
       melo.steps[1].goodsDetailsId = data.detailsId
+      melo.steps[1].goodsType = data.goodsType
       melo.steps[1].goodsId = data.goodsId
       melo.steps[1].ct = 1
       this.$router.push({

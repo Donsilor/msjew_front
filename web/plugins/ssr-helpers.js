@@ -183,9 +183,9 @@ export default function({ req, res, app, store }) {
     if (obj.groupType === 1) {
       // console.log(`对戒💍`)
       route = {
-        path: `/ring/wedding-rings/${obj.goodsName.replace(/\//g, '')}`,
+        path: `/ring/wedding-rings/${obj.data[0].goodsId}`,
         query: {
-          goodId: obj.data[0].groupId,
+          goodId: obj.data[0].goodsId,
           ringType: 'pair'
         }
       }
@@ -222,10 +222,10 @@ export default function({ req, res, app, store }) {
       // console.log(obj.data[0].simpleGoodsEntity)
       const ct = obj.data[0].simpleGoodsEntity.categoryId
       // console.log(ct)
-      if (ct === 1) {
+      if (ct === 15) {
         // console.log(`💎`)
         route = {
-          path: `/diamond-details/${obj.goodsName.replace(/\//g, '')}`,
+          path: `/diamond-details/${obj.data[0].goodsId}`,
           query: {
             goodId: obj.data[0].goodsId
           }
@@ -233,7 +233,7 @@ export default function({ req, res, app, store }) {
       } else if (ct === 2) {
         // console.log(`💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.goodsName.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.data[0].goodsId}`,
           query: {
             goodId: obj.data[0].goodsId,
             ringType: 'single'
@@ -242,7 +242,7 @@ export default function({ req, res, app, store }) {
       } else {
         // console.log(`饰品`)
         route = {
-          path: `/jewellery/all/${obj.goodsName.replace(/\//g, '')}`,
+          path: `/jewellery/all/${obj.data[0].goodsId}`,
           query: {
             goodId: obj.data[0].goodsId
           }
