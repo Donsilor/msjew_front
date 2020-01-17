@@ -646,6 +646,7 @@ export default {
           return
         }
       }
+      
       if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
         this.mailboxText = this.lang.mailboxText2
         this.mailboxTrue = true
