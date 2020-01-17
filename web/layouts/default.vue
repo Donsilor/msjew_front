@@ -26,6 +26,20 @@
         btnFlag: false
       }
     },
+    head: {
+      script: [
+        {
+          src: '/live-chat.js',
+          type: 'text/javascript',
+          charset: 'utf-8'
+        },
+        {
+          src: '/facebook-pixel-code.js',
+          type: 'text/javascript',
+          charset: 'utf-8'
+        }
+      ]
+    },
     mounted() {
       const _this = this
       _this.$nextTick(() => {
