@@ -598,7 +598,7 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/site/mobile-register`,
+          url: `/web/site/mobile-register`,
           data: this.info
         })
         .then(data => {
@@ -643,7 +643,7 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/site/email-register`,
+          url: `/web/site/email-register`,
           data: this.info
         })
         .then(res => {

@@ -632,7 +632,7 @@ export default {
         this.surnameTrue = true
         return fa
       }
-      if(this.loginType == 2){
+      if(this.language == 'zh_CN'){
         console.log(222)
         if ((val === 3 ) ) {
           this.mailboxText = this.lang.mailboxText1
@@ -710,7 +710,7 @@ export default {
           zip_code: this.postal
         }
         const data = JSON.parse(JSON.stringify(json))
-        console.log("json")
+        // console.log("json")
         if (this.isLogin&&this.$route.query.type!=="add") {
           const _this = this
           _this
