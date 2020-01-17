@@ -371,14 +371,14 @@ export default {
   methods: {
     statusText(status) {
       const map = {
-        0: this.lang.cancelled,
-        10: this.lang.unpaid,
-        20: this.lang.paid,
+        0: this.lang.cancelOrder,
+        10: this.lang.hadNotPay,
+        20: this.lang.hadPay,
         30: this.lang.waitingSend, 
-        40: this.lang.shipped,
-        50: this.lang.completed,
+        40: this.lang.hadSend,
+        50: this.lang.hadFinish,
       }
-    console.log("", map[status])
+    console.log("detail_stutas", map)
       return map[status]
     },
     payChannelText(payChannel) {

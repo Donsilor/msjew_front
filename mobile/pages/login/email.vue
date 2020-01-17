@@ -5,7 +5,10 @@
         <span class="title">
           {{ lang['login'] }}
         </span>
-        <span class="register" @click="toRegister">
+        <!-- <span v-if="loginType == 1"  class="register" @click="toEmailRegister">
+          {{ lang['no-account'] }}
+        </span> -->
+        <span  class="register" @click="toRegister">
           {{ lang['no-account'] }}
         </span>
       </div>
@@ -68,8 +71,13 @@
       </div>
     </div> -->
 
-      <div class="line-box button-line">
-        <button class="full-btn login" @click="loginCN">
+      <div class="line-box button-line" v-if="loginType == 2">
+        <button class="full-btn login zh" @click="loginCN">
+          <span class="btn-message">{{ lang['login-now'] }}</span>
+        </button>
+      </div>
+       <div class="line-box button-line" v-else>
+        <button class="full-btn login" @click="login">
           <span class="btn-message">{{ lang['login-now'] }}</span>
         </button>
       </div>
@@ -102,7 +110,8 @@ export default {
       sliderVerify: false, // 滑动验证是否完成
       errorKeys: [],
       language: '',
-      loginType: 1
+      loginType: '',
+      registerType:1
     }
   },
   computed: {
@@ -124,6 +133,7 @@ export default {
   },
   mounted () {
     this.refreshCode()
+    this.loginType=localStorage.getItem('loginType')
     this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {
@@ -154,11 +164,19 @@ export default {
       this.pictureCode = result.join('')
       // this.info = info
     },
+    // toEmailRegister () {
+    //   localStorage.setItem('registerType','1')
+    //   this.$router.push({
+    //     name: 'register'
+    //   })
+    // },
     toRegister () {
+      // localStorage.setItem('registerType','2')
       this.$router.push({
         name: 'register'
       })
     },
+    
     toForget () {
       this.$router.push({
         name: 'forget'
@@ -191,26 +209,18 @@ export default {
       const _this = this
       if (_this.needSliderVerify && !_this.sliderVerify) {
         _this.$toast.show(_this.lang['slider-verify'])
-        console.log(11111111)
         return
       }
       if (!this.trueUsernameM) {
-        if(_this.loginType == 1){
-          _this.$toast.show('6666')
-        }else{
-          _this.$toast.show(_this.lang['email-error'])
-        }
-        console.log(22222)
+          _this.$toast.show(_this.lang['phone-error'])
         return
       }
       if (!_this.truePassword) {
         _this.$toast.show(_this.lang['input-password'])
-        console.log(33333333)
         return
       }
       if (_this.code !== _this.pictureCode) {
         _this.$toast.show(_this.lang['input-code'])
-        console.log(4444444)
         return
       }
 

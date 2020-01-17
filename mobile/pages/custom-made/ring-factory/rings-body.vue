@@ -236,7 +236,7 @@ export default {
       if (this.goodInfo.totalStock > 0) {
         for (const i in body) {
           if (parseInt(this.sendDetailsId) === body[i].id) {
-            return body[i].stock > 0
+            return parseInt(body[i].stock) > 0
           }
         }
       } else {

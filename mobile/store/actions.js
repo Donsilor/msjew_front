@@ -285,12 +285,12 @@ export default {
                 updateTime: item.updateTime,
                 goods_num: item.goodsCount,
                 goodsDetailsId: item.goodsDetailsId,
-                goods_id: item.goodsId,
+                goods_id: item.goodsDetailsId,
                 group_id: item.groupId,
-                group_type: item.groupType,
+                group_type: parseInt(item.groupType),
                 serviceId: 0,
                 serviceVal: 'string',
-                goods_type: 15
+                goods_type: item.goodsType
             }
         });
 

@@ -179,6 +179,7 @@ export default {
     },
     // 判断是否失效
     getStatus(item, ind) {
+      console.log(item)
       let status = false
       if (item.groupType === 2) {
         if (item.goodsStatus === 2 && this.list[ind + 1].goodsStatus === 2) {
@@ -186,9 +187,9 @@ export default {
         }
       } else if (item.groupType === 1) {
         if (
-          item.goodsStatus === 2 &&
-          this.list[ind + 1].goodsStatus === 2 &&
-          item.status
+          // item.goodsStatus === 2 &&
+          // this.list[ind + 1].goodsStatus === 2 &&
+          item.status === '1'
         ) {
           status = true
         }
@@ -200,6 +201,7 @@ export default {
     // 全选与反选
     selectAlls() {
       this.selectAll = !this.selectAll
+      
       for (let i = 0; i < this.list.length; i++) {
         if (this.list[i].goodsStatus === 2 && this.list[i].status === 1) {
           this.list[i].isSelect = this.selectAll
@@ -207,6 +209,7 @@ export default {
           this.list[i].isSelect = false
         }
       }
+      console.log(this.selectAll)
       this.getNum()
     },
     // 选择商品

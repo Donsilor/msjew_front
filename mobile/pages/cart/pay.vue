@@ -155,25 +155,25 @@ export default {
       // }
       console.log("paytype",pay)
       this.$axios({
-        // http://localhost:3000/     https://www2.bddco.com
+        // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/
         method: 'post',
         url: `/web/pay/create`,
         data: {
           orderId: this.info.orderId,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'http://localhost:3000/cart-payFailed-orderId-price-coinType?orderId='+this.info.orderId
+          returnUrl:'https://wap2.bddco.com/cart-paySuccess-orderId-price-coinType?orderId='+this.info.orderId
         }
       })
         .then(res => {
           console.log("config",res)
-          if (res) {
+          if (res.config) {
             if (pay !== 7) {
               window.location.replace(res.config)
             } else {
               const promise = new Promise((resolve, reject) => {
                 this.form = []
-                const obj = JSON.parse(res)
+                const obj = JSON.parse(res.config)
                 const objKey = Object.keys(obj)
                 for (const i in objKey) {
                   if (objKey[i] === 'url') {
@@ -195,7 +195,8 @@ export default {
                 }, 2000)
               })
             }
-          } else if (!res) {
+          } else if (!res.config){
+            console.log(88888888)
             this.isPay = false
             this.$router.replace({
               name: 'cart-paySuccess-orderId-price-coinType',

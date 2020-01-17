@@ -4,7 +4,7 @@
       <i class="icon iconfont iconguanbi close" @click="goBack($router)"></i>
     </div>
     <!-- 中文简体 -->
-    <div v-if="language === 'zh_CN'">
+    <div >
       <section  class="page-content">
         <div class="title-bar">
           <span class="title" style="opacity: 0">{{ lang.oauthRegister }}</span>
@@ -27,7 +27,8 @@
         </div> -->
 
         <div class="info">
-          <div class="title">{{ lang.RegisterTitle }}</div>
+          <div class="title" v-if="loginType == 2 ">{{ lang.RegisterTitle }}</div>
+          <div class="title" v-else>{{ lang.inputInfo }}</div>
           <!-- 名称 -->
           <div class="line-box input-line">
             <bdd-input
@@ -63,7 +64,7 @@
             </div> -->
           </div>
           <!-- 手机号 -->
-          <div class="line-box input-line">
+          <div class="line-box input-line mobile" v-if="loginType == 2 "> 
             <bdd-input
               v-model="info.mobile"
               :placeholder="`${lang.mobile}`"
@@ -79,8 +80,26 @@
               {{ lang.emailError }}
             </div>
           </div>
+          <!-- 邮箱 -->
+          <div class="line-box input-line email" v-else>
+            <bdd-input
+              v-model="info.email"
+              :placeholder="`*${lang.email}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('email')"
+            ></bdd-input>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('email') && !trueEmail }
+              ]"
+            >
+              {{ lang.emailError }}
+            </div>
+          </div>
+
           <!-- 验证码 -->
-          <div class="line-box input-line">
+          <div class="line-box input-line" v-if="loginType == 2">
             <div v-show="showCodeMessage" class="message">
               {{ lang.inputUnder }} {{ info.mobile }} {{ lang.theMobileCode }}
             </div>
@@ -110,6 +129,36 @@
               {{ lang.codeError }}
             </div>
           </div>
+
+          <!-- 繁体验证码 -->
+          <div class="line-box input-line" v-else>
+            <div v-show="showCodeMessage" class="message">
+              {{ lang.inputUnder }} {{ info.email }} {{ lang.theEmailCode }}
+            </div>
+            <div style="position: relative;">
+              <bdd-input
+                v-model="info.code"
+                :placeholder="`*${lang.code}`"
+                :padding="'0 30% 0 3%'"
+                @blur="inputKey('code')"
+              ></bdd-input>
+              <div class="send-code">
+                <button :class="['getCode', className]" :disabled="waiting" @click="sendEmailCode">
+                  {{ waitingText }}
+                </button>
+              </div>
+            </div>
+            <div
+              :class="[
+                'error-message',
+                { active: hadInput('code') && !trueCode }
+              ]"
+            >
+              {{ lang.codeError }}
+            </div>
+          </div>
+
+
           <!-- 设置密码 -->
           <div class="line-box input-line">
             <bdd-input
@@ -158,20 +207,25 @@
           </div>
         </div>
 
-        <div class="line-box">
+        <div class="line-box mobile" v-if="loginType == 2">
           <button class="full-btn to-register" @click="registerCN">
+            <span class="btn-message">{{ lang.register }}</span>
+          </button>
+        </div>
+        <div class="line-box email" v-else>
+          <button class="full-btn to-register" @click="register">
             <span class="btn-message">{{ lang.register }}</span>
           </button>
         </div>
       </section>
     </div>
     <!-- 繁体中文 -->
-    <div v-else>
+    <!-- <div v-else>
       <section class="page-content">
         <div class="title-bar">
           <span class="title" style="opacity: 0">{{ lang.oauthRegister }}</span>
           <span class="login" @click="toLogin">{{ lang.hadRegister }}></span>
-        </div>
+        </div> -->
 
         <!-- <div class="oauth">
           <div class="line-box">
@@ -188,7 +242,7 @@
           </div>
         </div> -->
 
-        <div class="info">
+        <!-- <div class="info">
           <div class="title">{{ lang.inputInfo }}</div>
 
           <div class="line-box input-line">
@@ -223,7 +277,8 @@
               {{ lang.surnameError }}
             </div>
           </div>
-          <div class="line-box input-line">
+
+          <div class="line-box input-line b" >
             <bdd-input
               v-model="info.email"
               :placeholder="`*${lang.email}`"
@@ -252,10 +307,6 @@
                 @blur="inputKey('code')"
               ></bdd-input>
               <div class="send-code">
-                <!-- <send-email-code
-                  :email="info.email"
-                  @send="sendCode"
-                ></send-email-code> -->
                 <button :class="['getCode', className]" :disabled="waiting" @click="sendEmailCode">
                   {{ waitingText }}
                 </button>
@@ -324,7 +375,7 @@
           </button>
         </div>
       </section>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -370,7 +421,8 @@ export default {
       language:'',
       waiting: false,
       waitingTime: defaultTime,
-      waitingText: this.LANGUAGE.components.sendEmailCode.sendCode
+      waitingText: this.LANGUAGE.components.sendEmailCode.sendCode,
+      loginType: ''
     }
   },
   computed: {
@@ -403,6 +455,8 @@ export default {
     }
   },
   mounted() {
+    this.loginType=localStorage.getItem('loginType')
+    console.log("ttttt",this.loginType)
     this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {})
@@ -483,12 +537,10 @@ export default {
         if (_this.waitingTime === 0) {
           clearInterval(countDownStart)
           _this.setWait()
-          _this.waitingText = _this.$t(`${langcode}.sendCode`)
+          _this.waitingText = _this.langcode.sendCode
           _this.waitingTime = defaultTime
         } else {
-          _this.waitingText = `${_this.$t(`${langcode}.hadSend`)}(${
-            _this.waitingTime
-          }s)`
+          _this.waitingText = `${_this.langcode.hadSend}(${_this.waitingTime}s)`
           _this.waitingTime--
         }
       }, 1000)
@@ -509,6 +561,10 @@ export default {
     sendCode() {
       this.hadSendCode = true
     },
+    // 重置倒计时
+    resetCountDown() {
+      this.waitingTime = 0
+    },
     agreeIt() {
       this.agree = !this.agree
     },
@@ -523,7 +579,7 @@ export default {
       //   return
       // }
       if (!_this.trueMobile) {
-        _this.$toast(_this.lang.emailError)
+        _this.$toast(_this.lang.phoneError)
         return
       }
       if (!_this.trueCode) {
@@ -542,7 +598,7 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/site/mobile-register`,
+          url: `/web/site/mobile-register`,
           data: this.info
         })
         .then(data => {
@@ -587,7 +643,7 @@ export default {
       _this
         .$axios({
           method: 'post',
-          url: `/site/email-register`,
+          url: `/web/site/email-register`,
           data: this.info
         })
         .then(res => {

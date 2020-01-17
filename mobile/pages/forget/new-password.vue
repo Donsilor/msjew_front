@@ -6,7 +6,7 @@
       </span>
     </div>
 
-    <div v-if="language==='zh_CN'" class="line-box input-line">
+    <div v-if="loginType == 2" class="line-box input-line">
       <bdd-input
         v-model="code"
         :placeholder="lang['code']"
@@ -131,7 +131,8 @@ export default {
       code:'',
       password: '',
       password_repetition: '',
-      language:''
+      language:'',
+      loginType:''
     }
   },
   computed: {
@@ -149,6 +150,7 @@ export default {
     }
   },
   mounted() {
+    this.loginType=localStorage.getItem('loginType')
     this.language = this.getCookie('language')
    
     const _this = this
