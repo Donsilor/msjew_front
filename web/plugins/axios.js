@@ -35,6 +35,7 @@ export default function ({
                         store.dispatch('logout')
                         window.location.href = '/login'
                     } else {
+						store.commit('setToken',accessToken)
                         window.location.reload()
                     }
                 }
