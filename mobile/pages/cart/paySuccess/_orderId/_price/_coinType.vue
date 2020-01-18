@@ -11,7 +11,7 @@
     <div class="code">
       <span>{{ lang.orderNo }}</span
       ><span
-        >{{ info.orderNO
+        >{{ info.orderNo
         }}<i
           class="icon iconfont iconcopy copy-btn"
           :data-clipboard-text="info.orderNo"
@@ -131,16 +131,16 @@ export default {
   methods: {
     formatMoney: formatMoney,
     goIndex() {
-      // this.$router.replace({
-      //   name: 'index'
-      // })
+      this.$router.replace({
+        name: 'index'
+      })
     },
     getinfo() {
       this.$axios({
         url: '/web/member/order/detail',
         meth: 'get',
         params: {
-          orderId: this.$route.params.orderId
+          orderId: this.$route.query.orderId
         }
       })
         .then(res => {
