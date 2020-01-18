@@ -162,10 +162,11 @@ export default {
           orderId: this.info.orderId,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'https://wap2.bddco.com/cart-paySuccess-orderId-price-coinType?orderId='+this.info.orderId
+          returnUrl:'https://wap2.bddco.com/cart/paySuccess?orderId='+this.info.orderId
         }
       })
         .then(res => {
+          
           console.log("config",res)
           if (res.config) {
             if (pay !== 7) {
@@ -210,6 +211,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          this.$toast.show(err)
           this.$router.replace({
             name: 'cart-payFailed-orderId-price-coinType',
             params: {

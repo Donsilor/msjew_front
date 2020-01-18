@@ -172,7 +172,7 @@
         </ul>
       </div>
     </div>
-    <div :class="['submit', { disabled: !canSubmit }]" @click="createOrder">
+    <div :class="['submit']" @click="createOrder">
       <span>{{ lang.sureOrder }}</span>
     </div>
     <order-express ref="orderExpress"></order-express>
@@ -271,14 +271,19 @@ export default {
     },
     showOrderAmount() {
       let result = '--'
-      // console.log('this.allFee=====>', JSON.stringify(this.allFee))
+      console.log('this.allFee=====>', JSON.stringify(this.allFee))
       if (this.allFee.orderAmount === null) {
+        console.log(11111) 
         result = this.formatMoney(this.productAmount)
-      } else if (typeof this.allFee.orderAmount === 'number') {
+      } else  {
+        console.log(22222) 
         result = this.formatMoney(this.allFee.orderAmount)
-      } else {
-        result = '--'
-      }
+      } 
+      // else {
+      //   console.log(33333) 
+      //   result = '--'
+      // }
+      console.log("result",result) 
       return result
     }
   },
@@ -297,7 +302,8 @@ export default {
       this.productAmount = 0
       this.list.map((item, index) => {
         this.idList.push(item.id)
-        this.productAmount = this.productAmount + item.salePrice
+        // this.productAmount = this.productAmount + item.salePrice 
+        this.productAmount = parseInt(this.productAmount + item.salePrice) 
       })
       this.getData() // 获取地址
       this.getCouponList() // 获取优惠券列表
@@ -519,31 +525,33 @@ export default {
           // preferFee: this.preferFee,
           cartIds: this.idList.join(',')
         }
-      } else {
-        url = `/wap/order/getAnonymousTax`
-        data = {
-          countryId: this.address.countryId,
-          provinceId: this.address.provinceId,
-          cityId: this.address.cityId,
-          preferFee: this.preferFee,
-          productAmount: this.productAmount
-        }
-      }
+      } 
+      // else {
+      //   url = `/wap/order/getAnonymousTax`
+      //   data = {
+      //     countryId: this.address.countryId,
+      //     provinceId: this.address.provinceId,
+      //     cityId: this.address.cityId,
+      //     preferFee: this.preferFee,
+      //     productAmount: this.productAmount
+      //   }
+      // }
       this.$axios({
         method: 'get',
         url: url,
         params: data
       })
         .then(res => {
-          // console.log("费用",res)
+          console.log("费用",res)
           this.canSubmit = true
           this.allFee = res
-          console.log("费用",this.allFee)
+          // console.log("费用",this.allFee)
         })
         .catch(err => {
           this.canSubmit = false
           this.$toast.show(err.message)
           this.allFee = this.defaultAllFeeInfo()
+          // console.log("ggg",this.allFee)
         })
     },
     // 获取地址
@@ -561,7 +569,7 @@ export default {
             // console.log("address",res.data)
             if (res && res.length > 0) {
               res.map((item, index) => {
-                console.log("item",item)
+                // console.log("item",item)
                 if (this.$route.query.id) {
                   if (
                     this.$route.query.id === item.id ||
@@ -612,9 +620,9 @@ export default {
 
     //  创建订单
     createOrder() {
-      if (!this.canSubmit) {
-        return
-      }
+      // if (!this.canSubmit) {
+      //   return
+      // }
       if (!this.hasAddress) {
         this.$toast.show(this.lang.toast2)
         return
@@ -641,7 +649,7 @@ export default {
           }
         })
           .then(res => {
-            console.log("总额",res)
+            // console.log("总额",res)
             this.$router.replace({
               name: 'cart-pay',
               query: {
@@ -938,7 +946,8 @@ export default {
         }
         textarea {
           padding: 12px 10px;
-          width: 321px;
+          width: 100%;
+          // width: 321px;
           height: 40px;
           font-size: 14px;
           line-height: 14px;

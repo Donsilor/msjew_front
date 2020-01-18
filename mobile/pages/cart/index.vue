@@ -179,7 +179,7 @@ export default {
     },
     // 判断是否失效
     getStatus(item, ind) {
-      console.log(item)
+      // console.log(item)
       let status = false
       if (item.groupType === 2) {
         if (item.goodsStatus === 2 && this.list[ind + 1].goodsStatus === 2) {
@@ -261,7 +261,7 @@ export default {
     // 删除商品
     remove(item, index) {
       if (!this.isLogin) {
-        console.log('item', item)
+        // console.log('item', item)
         let arr = null
         if (item.groupType === 0) {
           arr = item.localSn
@@ -299,28 +299,28 @@ export default {
     // 属性数值转化成字符串
     getconfig(list, list2) {
       let text = ''
-        // console.log("length",list)
-        if(list !== undefined){
-          if (list.length > 0) {
-            list.map((item, index) => {
-              if (index === list.length - 1) {
-                text = text + item.configAttrVal
-              } else {
-                text = text + item.configAttrVal + ' /  '
-              }
-            })
+      if (list.length > 0) {
+        // console.log("item",list)
+        list.map((item, index) => {
+          
+          if (index === list.length - 1) {
+            text = text + item.configAttrIVal
+          } else {
+            text = text + item.configAttrIVal + ' /  '
           }
-          if (list2 && list2.length > 0) {
-            list2.map((item, index) => {
-              if (item.configId === 196) {
-                console.log(list2, '9999', item)
-                text = text + ' /  ' + item.configAttrVal
-              }
-            })
+        })
+      }
+      if (list2 && list2.length > 0) {
+        list2.map((item, index) => {
+          if (item.configId === 196) {
+            console.log(list2, '9999', item)
+            text = text + ' /  ' + item.configAttrIVal
           }
-          return text
-        }
+        })
+      }
+      return text
     },
+
     // 获取本地数据
     getLocalList(list) {
       this.$axios({
