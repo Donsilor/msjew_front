@@ -29,8 +29,14 @@
         <div :class="['error-message', { active: surnameTrue }]">
           {{ surnameText }}
         </div>
-
-        <div class="input-mod" @click="showSelect">
+        <div v-if="language==='zh_CN'" class="input-mod" @click="showSelect">
+          <bdd-input
+            v-model="mailbox"
+            :placeholder="lang.mailbox"
+            @input="check(3)"
+          ></bdd-input>
+        </div>
+        <div v-else class="input-mod" @click="showSelect">
           <bdd-input
             v-model="mailbox"
             :placeholder="lang.mailbox"

@@ -211,6 +211,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          this.$toast.show(err)
           this.$router.replace({
             name: 'cart-payFailed-orderId-price-coinType',
             params: {
