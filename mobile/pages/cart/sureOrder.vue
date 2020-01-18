@@ -538,7 +538,7 @@ export default {
           // console.log("费用",res)
           this.canSubmit = true
           this.allFee = res
-          console.log("费用",this.allFee)
+          // console.log("费用",this.allFee)
         })
         .catch(err => {
           this.canSubmit = false
@@ -561,7 +561,7 @@ export default {
             // console.log("address",res.data)
             if (res && res.length > 0) {
               res.map((item, index) => {
-                console.log("item",item)
+                // console.log("item",item)
                 if (this.$route.query.id) {
                   if (
                     this.$route.query.id === item.id ||
@@ -641,7 +641,7 @@ export default {
           }
         })
           .then(res => {
-            console.log("总额",res)
+            // console.log("总额",res)
             this.$router.replace({
               name: 'cart-pay',
               query: {

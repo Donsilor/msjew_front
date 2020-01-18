@@ -11,7 +11,7 @@
     <div class="code">
       <span>{{ lang.orderNo }}</span
       ><span
-        >{{ info.orderNo
+        >{{ info.orderNO
         }}<i
           class="icon iconfont iconcopy copy-btn"
           :data-clipboard-text="info.orderNo"
@@ -126,13 +126,14 @@ export default {
     _this.$nextTick(() => {
       _this.getinfo()
     })
+      _this.geturl()
   },
   methods: {
     formatMoney: formatMoney,
     goIndex() {
-      this.$router.replace({
-        name: 'index'
-      })
+      // this.$router.replace({
+      //   name: 'index'
+      // })
     },
     getinfo() {
       this.$axios({
@@ -143,8 +144,23 @@ export default {
         }
       })
         .then(res => {
+          console.log("aaa",res)
           this.info = res
-          this.getChannelType(this.info.payChannel)
+          // this.getChannelType(this.info.payChannel)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    geturl(){
+      this.$axios({
+        url: '/web/pay/verify',
+        meth: 'post',
+        data: {
+          return_url: window.location.href
+        }
+      })
+        .then(res => {
         })
         .catch(err => {
           console.log(err)

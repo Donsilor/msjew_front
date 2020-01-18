@@ -162,18 +162,19 @@ export default {
           orderId: this.info.orderId,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'https://wap2.bddco.com/cart-paySuccess-orderId-price-coinType?orderId='+this.info.orderId
+          returnUrl:'http://localhost:8328/cart/paySuccess/:orderId?/:price?/:coinType?orderId='+this.info.orderId
         }
       })
         .then(res => {
-          console.log("config",res)
-          if (res.config) {
+          
+          // console.log("config",res)
+          if (res) {
             if (pay !== 7) {
               window.location.replace(res.config)
             } else {
               const promise = new Promise((resolve, reject) => {
                 this.form = []
-                const obj = JSON.parse(res.config)
+                const obj = JSON.parse(res)
                 const objKey = Object.keys(obj)
                 for (const i in objKey) {
                   if (objKey[i] === 'url') {
@@ -195,7 +196,7 @@ export default {
                 }, 2000)
               })
             }
-          } else if (!res.config){
+          } else {
             console.log(88888888)
             this.isPay = false
             this.$router.replace({

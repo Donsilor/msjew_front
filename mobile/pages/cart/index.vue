@@ -179,7 +179,7 @@ export default {
     },
     // 判断是否失效
     getStatus(item, ind) {
-      console.log(item)
+      // console.log(item)
       let status = false
       if (item.groupType === 2) {
         if (item.goodsStatus === 2 && this.list[ind + 1].goodsStatus === 2) {
@@ -261,7 +261,7 @@ export default {
     // 删除商品
     remove(item, index) {
       if (!this.isLogin) {
-        console.log('item', item)
+        // console.log('item', item)
         let arr = null
         if (item.groupType === 0) {
           arr = item.localSn
@@ -320,31 +320,6 @@ export default {
       }
       return text
     },
-    // getconfig(list, list2) {
-    //   let text = ''
-    //   if (list.length > 0) {
-    //     console.log("text",list)
-    //     list.map((item, index) => {
-    //       if (index === list.length - 1) {
-    //         text = text + item.configAttrVal
-    //       } else {
-    //         text = text + item.configAttrVal + ' /  '
-    //       }
-    //     })
-    //   }
-    //   if (list2 && list2.length > 0) {
-    //     list2.map((item, index) => {
-    //       if (item.configId === 196) {
-    //         console.log(list2, '9999', item)
-    //         text = text + ' /  ' + item.configAttrVal
-    //       }
-    //     })
-    //   }  
-    //   return text
-    // },
-
-
-
 
     // 获取本地数据
     getLocalList(list) {
