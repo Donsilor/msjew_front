@@ -125,6 +125,7 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       _this.getinfo()
+      _this.geturl()
     })
   },
   methods: {
@@ -145,6 +146,21 @@ export default {
         .then(res => {
           this.info = res
           this.getChannelType(this.info.payChannel)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    geturl(){
+      this.$axios({
+        url: '/web/pay/verify',
+        meth: 'post',
+        data: {
+          return_url: window.location.href
+        }
+      })
+        .then(res => {
+          console.log("verify",res)
         })
         .catch(err => {
           console.log(err)
