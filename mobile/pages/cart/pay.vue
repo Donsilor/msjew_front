@@ -162,19 +162,19 @@ export default {
           orderId: this.info.orderId,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'http://localhost:8328/cart/paySuccess/?orderId='+this.info.orderId
+          returnUrl:'http://localhost:8328/cart/paySuccess?orderId='+this.info.orderId
         }
       })
         .then(res => {
           
-          // console.log("config",res)
-          if (res) {
+          console.log("config",res)
+          if (res.config) {
             if (pay !== 7) {
               window.location.replace(res.config)
             } else {
               const promise = new Promise((resolve, reject) => {
                 this.form = []
-                const obj = JSON.parse(res)
+                const obj = JSON.parse(res.config)
                 const objKey = Object.keys(obj)
                 for (const i in objKey) {
                   if (objKey[i] === 'url') {
@@ -196,7 +196,7 @@ export default {
                 }, 2000)
               })
             }
-          } else {
+          } else if (!res.config){
             console.log(88888888)
             this.isPay = false
             this.$router.replace({

@@ -126,7 +126,6 @@ export default {
     _this.$nextTick(() => {
       _this.getinfo()
     })
-      _this.geturl()
   },
   methods: {
     formatMoney: formatMoney,
@@ -144,23 +143,8 @@ export default {
         }
       })
         .then(res => {
-          console.log("aaa",res)
           this.info = res
-          // this.getChannelType(this.info.payChannel)
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
-    geturl(){
-      this.$axios({
-        url: '/web/pay/verify',
-        meth: 'post',
-        data: {
-          return_url: window.location.href
-        }
-      })
-        .then(res => {
+          this.getChannelType(this.info.payChannel)
         })
         .catch(err => {
           console.log(err)
