@@ -301,7 +301,7 @@ export default {
         // 9: this.lang.returned,
        
       }
-      console.log("status",map[status])
+      // console.log("status",map[status])
       return map[status]
     },
     // 跳转到详情页

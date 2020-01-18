@@ -123,7 +123,7 @@ export default {
           url: `/web/member/member/me`
         })
         .then(res => {
-          console.log("eeee",res)
+          // console.log("eeee",res)
           this.date = res
           if (this.date === 1) {
             this.headImg = require('~/static/personal/men.png')
@@ -144,7 +144,7 @@ export default {
         .then(res => {
           this.orderCount = res.total_count
           this.couponCount = res.couponCount
-          console.log(res)
+          // console.log(res)
         })
         .catch(err => {
           console.log(err)

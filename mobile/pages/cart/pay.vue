@@ -92,12 +92,12 @@ export default {
         //   title: this.LANGUAGE.cart.pay.payType2,
         //   des: this.LANGUAGE.cart.pay.type2Text
         // },
-        {
-          url: '/cart/ap.png',
-          type: 2,
-          title: this.LANGUAGE.cart.pay.payType3,
-          des: this.LANGUAGE.cart.pay.type3Text
-        },
+        // {
+        //   url: '/cart/ap.png',
+        //   type: 2,
+        //   title: this.LANGUAGE.cart.pay.payType3,
+        //   des: this.LANGUAGE.cart.pay.type3Text
+        // },
         // {
         //   url: '/cart/wac.png',
         //   type: 4,
@@ -160,12 +160,14 @@ export default {
         url: `/web/pay/create`,
         data: {
           orderId: this.info.orderId,
+          coinType: this.info.coinType,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'https://wap2.bddco.com/cart-paySuccess-orderId-price-coinType?orderId='+this.info.orderId
+          returnUrl:'https://wap2.bddco.com/cart/paySuccess?orderId='+this.info.orderId
         }
       })
         .then(res => {
+
           console.log("config",res)
           if (res.config) {
             if (pay !== 7) {
@@ -210,6 +212,7 @@ export default {
         })
         .catch(err => {
           console.log(err)
+          this.$toast.show(err)
           this.$router.replace({
             name: 'cart-payFailed-orderId-price-coinType',
             params: {

@@ -125,6 +125,7 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       _this.getinfo()
+      _this.geturl()
     })
   },
   methods: {
@@ -137,9 +138,9 @@ export default {
     getinfo() {
       this.$axios({
         url: '/web/member/order/detail',
-        meth: 'get',
+        method: 'get',
         params: {
-          orderId: this.$route.params.orderId
+          orderId: this.$route.query.orderId
         }
       })
         .then(res => {
@@ -149,6 +150,21 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    geturl(){
+      this.$axios({
+        url: '/web/pay/verify',
+        method: 'post',
+        data: {
+          return_url: window.location.href
+        }
+      })
+      .then(res => {
+        console.log("verify",res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
     getChannelType(type) {
       // 订单支付渠道(1-电汇,2-paypal,3-微信,4-支付宝,5-visa/Mastercard,6-銀聯,7-paydollar)
