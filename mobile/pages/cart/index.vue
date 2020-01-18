@@ -33,7 +33,7 @@
                     getconfig(item.config, item.simpleGoodsEntity.specs)
                   }}
                 </p>
-                <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                <!-- <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b> -->
                 <div v-if="item.groupType === 1" class="btn-type">
                   {{ lang.ring }}
                 </div>

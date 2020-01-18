@@ -1,6 +1,6 @@
 <template>
   <div>
-    <step></step>
+    <step v-if="info"></step>
     <Details v-if="info" :info="info"></Details>
     <sole-out v-else></sole-out>
   </div>

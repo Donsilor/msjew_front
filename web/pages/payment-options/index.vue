@@ -90,7 +90,7 @@
           </div>
         </div> -->
 
-        <div
+        <!-- <div
           :class="{ 'pay-choose': payWay == 2 }"
           class="pay-block"
           @click="payWay = 2"
@@ -105,7 +105,7 @@
           <div v-show="payWay == 2" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div>
+        </div> -->
 
         <!-- <div
           :class="{ 'pay-choose': payWay == 3 }"

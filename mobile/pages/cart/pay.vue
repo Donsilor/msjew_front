@@ -92,12 +92,12 @@ export default {
         //   title: this.LANGUAGE.cart.pay.payType2,
         //   des: this.LANGUAGE.cart.pay.type2Text
         // },
-        {
-          url: '/cart/ap.png',
-          type: 2,
-          title: this.LANGUAGE.cart.pay.payType3,
-          des: this.LANGUAGE.cart.pay.type3Text
-        },
+        // {
+        //   url: '/cart/ap.png',
+        //   type: 2,
+        //   title: this.LANGUAGE.cart.pay.payType3,
+        //   des: this.LANGUAGE.cart.pay.type3Text
+        // },
         // {
         //   url: '/cart/wac.png',
         //   type: 4,
@@ -166,7 +166,7 @@ export default {
         }
       })
         .then(res => {
-          
+
           console.log("config",res)
           if (res.config) {
             if (pay !== 7) {

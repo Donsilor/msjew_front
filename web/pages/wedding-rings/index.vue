@@ -34,9 +34,9 @@
         </el-carousel-item>
       </el-carousel>
     </section>
-    <section class="recommend-pair-ring">
+    <!-- <section class="recommend-pair-ring">
       <h1 class="section-title">
-        <!-- {{ recommendPairRingInfo.moduleTitle }} -->
+        111{{ recommendPairRingInfo.moduleTitle }}111
         {{ $t(`${lang}.belongOurRing`) }}
       </h1>
       <div class="section-title-line"></div>
@@ -81,7 +81,7 @@
           <button class="more">{{ $t(`${lang}.morePairRings`) }}</button>
         </nuxt-link>
       </div>
-    </section>
+    </section> -->
     <section class="recommend-ring">
       <h1 class="section-title">
         <!-- {{ recommendLadyRingInfo.moduleTitle }} -->
