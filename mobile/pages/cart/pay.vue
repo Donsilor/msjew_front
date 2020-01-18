@@ -160,6 +160,7 @@ export default {
         url: `/web/pay/create`,
         data: {
           orderId: this.info.orderId,
+          coinType: this.info.coinType,
           payType: pay,
           tradeType:'wap',
           returnUrl:'https://wap2.bddco.com/cart/paySuccess?orderId='+this.info.orderId
