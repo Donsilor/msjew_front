@@ -145,6 +145,7 @@ export default {
               {
                 goodsId: melo.steps[1].goodsId,
                 goodsDetailsId: melo.steps[1].goodsDetailsId,
+                goodsType: melo.steps[1].goodsType,
                 ct: melo.steps[1].ct,
                 cartId: melo.steps[1].cartId,
                 page: `detail`
@@ -152,6 +153,7 @@ export default {
               {
                 goodsId: null,
                 goodsDetailsId: null,
+                goodsType: null,
                 ct: melo.steps[0].ct,
                 cartId: melo.steps[0].cartId,
                 page: `list`
@@ -176,6 +178,7 @@ export default {
               {
                 goodsId: melo.steps[1].goodsId,
                 goodsDetailsId: melo.steps[1].goodsDetailsId,
+                goodsType: melo.steps[1].goodsType,
                 ct: melo.steps[1].ct,
                 cartId: melo.steps[1].cartId,
                 page: `detail`
@@ -183,6 +186,7 @@ export default {
               {
                 goodsId: null,
                 goodsDetailsId: null,
+                goodsType: null,
                 ct: melo.steps[0].ct,
                 cartId: melo.steps[0].cartId,
                 page: `list`
@@ -209,6 +213,7 @@ export default {
               {
                 goodsId: null,
                 goodsDetailsId: null,
+                goodsType: null,
                 ct: melo.steps[0].ct,
                 cartId: ``,
                 page: `list`
@@ -216,6 +221,7 @@ export default {
               {
                 goodsId: null,
                 goodsDetailsId: null,
+                goodsType: null,
                 ct: null,
                 cartId: ``,
                 page: `list`
@@ -244,6 +250,7 @@ export default {
             {
               goodsId: melo.steps[0].goodsId,
               goodsDetailsId: melo.steps[0].goodsDetailsId,
+              goodsType: melo.steps[0].goodsType,
               ct: melo.steps[0].ct,
               cartId: melo.steps[0].cartId,
               page: `detail`
@@ -251,6 +258,7 @@ export default {
             {
               goodsId: null,
               goodsDetailsId: null,
+              goodsType: null,
               ct: melo.steps[1].ct,
               cartId: melo.steps[1].cartId,
               page: `list`
@@ -475,6 +483,10 @@ export default {
                 : melo.steps[1].goodsId,
             groupId: timeSock,
             groupType: 2,
+            goodsType:
+              melo.steps[0].ct === 1
+                ? melo.steps[0].goodsType
+                : melo.steps[1].goodsType,
             serviceId: 0,
             serviceVal: 'string'
           },
@@ -490,6 +502,10 @@ export default {
                 : melo.steps[0].goodsId,
             groupId: timeSock,
             groupType: 2,
+            goodsType:
+              melo.steps[0].ct === 1
+                ? melo.steps[1].goodsType
+                : melo.steps[0].goodsType,
             serviceId: 0,
             serviceVal: 'string'
           }

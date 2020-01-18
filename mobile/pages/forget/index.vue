@@ -4,7 +4,7 @@
       <span class="title">{{ lang.forget }}</span>
     </div>
     <!-- 中文简体 -->
-    <div v-if="language==='zh_CN'">
+    <!-- <div v-if="language==='zh_CN'"> -->
       <!-- <div class="line-box input-line">
         <bdd-input
           v-model="mobile"
@@ -45,7 +45,7 @@
           {{ lang.codeError }}
         </div>
       </div> -->
-      <div class="line-box input-line">
+      <div class="line-box input-line" v-if="loginType == 2">
         <bdd-input
           v-model="mobile"
           :placeholder="lang.mobile"
@@ -58,15 +58,7 @@
         </div>
       </div>
 
-      <div class="line-box">
-        <button class="full-btn to-next" @click="toNextCN">
-          <span class="btn-message">{{ lang.next }}</span>
-        </button>
-      </div>
-    </div>
-    <!-- 繁体 -->
-    <div v-else >
-      <div class="line-box input-line">
+      <div class="line-box input-line" v-else>
         <bdd-input
           v-model="email"
           :placeholder="lang.email"
@@ -78,12 +70,21 @@
           {{ lang['email-error'] }}
         </div>
       </div>
-      <div class="line-box">
+
+      <div class="line-box" v-if="loginType == 2">
+        <button class="full-btn to-next" @click="toNextCN">
+          <span class="btn-message">{{ lang.next }}</span>
+        </button>
+      </div>
+    <!-- </div> -->
+    <!-- 繁体 -->
+    <!-- <div v-else > -->
+      <div class="line-box" v-else>
         <button class="full-btn to-next" @click="toNext">
           <span class="btn-message">{{ lang.next }}</span>
         </button>
       </div>
-    </div>
+    <!-- </div> -->
 
   </section>
 </template>
@@ -120,7 +121,8 @@ export default {
       language:'',
       waiting: false,
       waitingTime: defaultTime,
-      waitingText: this.LANGUAGE.components.sendEmailCode.sendCode
+      waitingText: this.LANGUAGE.components.sendEmailCode.sendCode,
+      loginType:''
     }
   },
   computed: {
@@ -138,6 +140,7 @@ export default {
     },
   },
   mounted(){
+    this.loginType=localStorage.getItem('loginType')
     this.language = this.getCookie('language')
   },
   methods: {

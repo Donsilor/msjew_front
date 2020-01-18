@@ -1,6 +1,6 @@
 <template>
-  <pair-ring-detail v-if="ringType === 'pair'" :info="info"></pair-ring-detail>
-  <single-ring-detail v-else-if="ringType === 'single'" :info="info"></single-ring-detail>
+  <pair-ring-detail v-if="ringType === 'pair' && info" :info="info"></pair-ring-detail>
+  <single-ring-detail v-else-if="ringType === 'single' && info" :info="info"></single-ring-detail>
   <sole-out v-else></sole-out>
   <!--  <single-ring-detail v-if="true" :info="info"></single-ring-detail>-->
   <!--  <pair-ring-detail v-else :info="info"></pair-ring-detail>-->
@@ -12,23 +12,7 @@ import SingleRingDetail from '@/pageComponents/wedding-rings/single-ring/detail.
 import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   head() {
-    return this.seoInfo || {
-      title: this.info.goodsName,
-      meta: [
-        {
-          name: 'title',
-          content: '首页2'
-        },
-        {
-          name: 'description',
-          content: '首页3'
-        },
-        {
-          name: 'keywords',
-          content: '首页4'
-        }
-      ]
-    }
+    return this.seoInfo 
   },
   components: {
     PairRingDetail,

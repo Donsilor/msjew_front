@@ -62,7 +62,7 @@
         <span v-else-if="data.orderStatus === '50'">{{
           $t(`${lang_pay}.hadFinish`)
         }}</span>
-      
+
       </div>
       <div class="addr-info">
         <div class="addr">
@@ -77,7 +77,7 @@
             </div>
             <div class="user-info">
               <div>
-                {{ data.address.realname }}<span>{{ $t(`${lang}.get`) }}</span>
+                {{ data.address.realName }}<span>{{ $t(`${lang}.get`) }}</span>
               </div>
               <div>
                 <span>{{ data.address.userTelCode }}</span>
@@ -143,8 +143,7 @@
             </div>
             <div class="user-info">
               <div>
-                {{ data.address.realName }} {{ data.address.lastName
-                }}<span>{{ $t(`${lang}.get`) }}</span>
+                {{ data.address.realName }}<span>{{ $t(`${lang}.get`) }}</span>
               </div>
               <div>
                 <span>{{ data.address.userTelCode }}</span>

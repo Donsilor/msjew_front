@@ -7,7 +7,7 @@
           <span class="order-status">{{ statusText(order.orderStatus) }}</span>
         </div>
         <div class="top">
-          <span>{{ order.orderNo }}</span>
+          <span>{{ order.orderNO }}</span>
         </div>
         <div class="mod" @click="toDetail(order.id)">
           <ul>
@@ -81,7 +81,7 @@
           </div>
           <div class="btn">
             <span
-              v-if="(order.orderStatus) > 0"
+              v-if="(order.orderStatus) > 0 && (order.orderStatus)<20"
               class="btn2"
               @click="cancelOrder(order.id)"
               >{{ lang.cancelOrder }}</span

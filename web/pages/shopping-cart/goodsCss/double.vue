@@ -17,7 +17,7 @@
           </div> -->
           <div
             v-if="
-              g.data[0].ringsSimpleGoodsEntity.status !== '1'
+              parseInt(g.data[0].ringsSimpleGoodsEntity.status) === 0
             "
             class="img-bord"
           >
@@ -68,7 +68,7 @@
             </div>
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
-          <div class="good-price">
+          <!-- <div class="good-price">
             {{ g.coinType }}
             {{
               formatNumber(
@@ -76,7 +76,7 @@
                   .simpleGoodsDetails.retailMallPrice
               )
             }}
-          </div>
+          </div> -->
         </div>
         <div class="one-person">
           <div class="good-information">
@@ -101,7 +101,7 @@
             </div>
           </div>
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
-          <div class="good-price">
+          <!-- <div class="good-price">
             {{ g.coinType }}
             {{
               formatNumber(
@@ -109,10 +109,21 @@
                   .simpleGoodsDetails.retailMallPrice
               )
             }}
-          </div>
+          </div> -->
         </div>
         <div class="couple-line" />
+        
       </div>
+      <div class="good-price">
+            {{ g.coinType }}
+            {{
+              formatNumber(
+                g.data[0].ringsSimpleGoodsEntity.salePrice
+              )
+            }}
+          </div>
+      
+      
       <!-- <div
         v-show="options"
         v-if="
@@ -352,15 +363,23 @@ export default {
           text-align: center;
         }
       }
+      
       .couple-line {
         position: absolute;
         top: 173px;
         left: -56px;
-        width: 600px;
+        width: 400px;
         height: 1px;
         border-bottom: 1px dotted rgba(221, 221, 221, 1);
       }
     }
+    .good-price {
+          font-family: twCenMt;
+          font-size: 18px;
+          color: #f29b87;
+          width: 130px;
+          text-align: center;
+        }
     .good-btn {
       width: 80px;
       height: 21px;

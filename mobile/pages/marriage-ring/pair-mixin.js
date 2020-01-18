@@ -456,6 +456,7 @@ export default {
             this.showPi = bullShit[i].retailMallPrice
             this.sendGoodsId = bullShit[i].goodsId
             this.sendDetailsId = bullShit[i].id
+            this.categoryId = bullShit[i].categoryId
           }
         }
       }
@@ -475,6 +476,7 @@ export default {
           goodsId: this.firstRingSimpleDetail.goodsId,
           groupId: this.goodInfo.id,
           groupType: 1,
+          goodsType: this.firstRingSimpleDetail.categoryId,
           serviceId: 0,
           serviceVal: 'string'
         },
@@ -484,6 +486,7 @@ export default {
           goodsId: this.secondRingSimpleDetail.goodsId,
           groupId: this.goodInfo.id,
           groupType: 1,
+          goodsType: this.secondRingSimpleDetail.categoryId,
           serviceId: 0,
           serviceVal: 'string'
         }
