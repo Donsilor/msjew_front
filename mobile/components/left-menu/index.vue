@@ -8,7 +8,7 @@
             <img src="/hongkong-round.png" />
           </div>
           <div class="language">
-            <span>繁/EN</span>
+            <span>简/繁/EN</span>
           </div>
           <span class="gap-line"></span>
           <div class="coin">

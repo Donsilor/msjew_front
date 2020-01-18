@@ -130,13 +130,13 @@ export default {
       this.date.marStatus = val
     },
     textSurname() {
-      console.log(this.date, 'dsgdf')
+      console.log(this.date.lastname.length, 'dsgdf')
       if (this.date.lastname === '' || this.date.lastname.length > 20) {
         this.$toast.show(this.lang.toast1)
       }
     },
     textName() {
-      console.log(this.date.lastname, 'dsgdf')
+      // console.log(this.date.lastname, 'dsgdf')
       if (this.date.firstname === '' || this.date.firstname.length > 20) {
         this.$toast.show(this.lang.toast2)
       }

@@ -563,7 +563,7 @@
         "login": "登录",
         "no-account": "注册>",
         "email": "电邮地址",
-        "phone": "手机号",
+        "phone": "手机号*",
         "email-error": "请输入正确的电邮地址",
         "phone-error": "请输入正确的电话号码",
         "password": "密码*",

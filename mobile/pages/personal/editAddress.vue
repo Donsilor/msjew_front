@@ -510,11 +510,10 @@ export default {
           }
         })
         .then(res => {
-
           console.log(11111,res);
           if(res.length == 0){
             this.cityId = 0
-            this.city ='----'
+            this.city ='------'
            
           }else{
             _this.cityList = []
@@ -525,7 +524,7 @@ export default {
               }
               _this.cityList.push(o)
             }
-           _this.cityList.unshift({ id: '', content: this.lang.pleaseChoose })
+          //  _this.cityList.unshift({ id: '', content: this.lang.pleaseChoose })
           }
 
           
@@ -576,13 +575,22 @@ export default {
       this.getListThree()
     },
     showCity() {
+      console.log("99999",this.cityList.length)
       this.cityId = ''
-      this.city = this.lang.city
+      
+      if(this.cityList.length == 0){
+        this.city = '-----'
+        
+      }else {
+        this.city = this.lang.city
+      }
       if (!this.provinceId) {
+        console.log("66666")
         this.$toast.show(this.lang.province2)
         return
       }
       if (this.cityList.length > 1) {
+        console.log("4444")
         this.$refs.city.show()
       }
     },

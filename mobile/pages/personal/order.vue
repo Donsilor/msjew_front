@@ -75,7 +75,7 @@ export default {
     },
     barActiveChange(val) {
       this.orderStatus = val
-      console.log('val',this.orderStatus)
+      // console.log('val',this.orderStatus)
     },
     arrivalBottom() {
       // console.log(3333333)
