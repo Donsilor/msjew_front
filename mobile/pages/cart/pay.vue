@@ -162,7 +162,7 @@ export default {
           orderId: this.info.orderId,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'http://localhost:8328/cart/paySuccess/:orderId?/:price?/:coinType?orderId='+this.info.orderId
+          returnUrl:'https://wap2.bddco.com/cart/paySuccess/:orderId?/:price?/:coinType?orderId='+this.info.orderId
         }
       })
         .then(res => {
