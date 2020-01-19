@@ -6,7 +6,7 @@ export default function({ req, res, redirect, store , route}) {
     return  !!u.match(/AppleWebKit.*Mobile.*/)||                   //是否为移动终端
         (u.indexOf('Trident') > -1||                            //IE内核
         u.indexOf('Presto') > -1 ||                             //opera内核
-        u.indexOf('AppleWebKit') > -1||                       //苹果、谷歌内核
+        u.indexOf('AppleWebKit') > -1,                         //苹果、谷歌内核
         u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1 ||    //火狐内核
         
         !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)||              //ios终端
@@ -82,7 +82,7 @@ function queryParams (data) {
         }, 
         // 订婚详情
         {
-          'pcUrl':/^\/ring\/engagement-rings/,
+          'pcUrl':/^\/ring\/engagement-rings$/,
           'mobileUrl':`/engagement/engagement-rings`,
           'params':{
             'goodId':'goodId',
@@ -96,7 +96,7 @@ function queryParams (data) {
         },
         // 结婚 详情
         {
-          'pcUrl':/\/ring\/wedding-rings/,
+          'pcUrl':/\/ring\/wedding-rings$/,
           'mobileUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',
@@ -105,7 +105,7 @@ function queryParams (data) {
         },
         // 裸钻
         {
-          'pcUrl':/\/diamonds/,
+          'pcUrl':/\/diamonds$/,
           'mobileUrl':`/diamond/list`
         },
         // 选择戒托  build-your-own-ring/settings
@@ -115,7 +115,7 @@ function queryParams (data) {
         },
         // 戒托详情
         {
-          'pcUrl':/\/build-your-own-ring\/setting-details/,
+          'pcUrl':/\/build-your-own-ring\/setting-details$/,
           'mobileUrl':`/custom-made/ring-made/ring-detail`,
           'params':{
             'goodId':'goodId',
@@ -144,7 +144,7 @@ function queryParams (data) {
         },
         // 裸钻详情
         {
-          'pcUrl':/\/diamond-details/,
+          'pcUrl':/\/diamond-details$/,
           'mobileUrl':`/diamond/diamonds`,
           'params':{
             'goodId':'goodId',
@@ -152,7 +152,7 @@ function queryParams (data) {
           },
         },
         {
-          'pcUrl':/\/jewellery\/necklace/,
+          'pcUrl':/\/jewellery\/necklace$/,
           'mobileUrl':`/accessories/accessories`,
           'params':{
             'goodId':'goodId',
@@ -168,6 +168,7 @@ function queryParams (data) {
           let rule = rules[i]
 
           if((rule['pcUrl']).test(href[0])) {
+            (rule['pcUrl']).req
             let url = host + rule['mobileUrl']
 
             let param = ''

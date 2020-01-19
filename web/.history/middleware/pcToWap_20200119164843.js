@@ -6,7 +6,7 @@ export default function({ req, res, redirect, store , route}) {
     return  !!u.match(/AppleWebKit.*Mobile.*/)||                   //是否为移动终端
         (u.indexOf('Trident') > -1||                            //IE内核
         u.indexOf('Presto') > -1 ||                             //opera内核
-        u.indexOf('AppleWebKit') > -1||                       //苹果、谷歌内核
+        u.indexOf('AppleWebKit') > -1,                         //苹果、谷歌内核
         u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1 ||    //火狐内核
         
         !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)||              //ios终端
@@ -105,7 +105,7 @@ function queryParams (data) {
         },
         // 裸钻
         {
-          'pcUrl':/\/diamonds/,
+          'pcUrl':/\/diamonds$/,
           'mobileUrl':`/diamond/list`
         },
         // 选择戒托  build-your-own-ring/settings
@@ -148,7 +148,6 @@ function queryParams (data) {
           'mobileUrl':`/diamond/diamonds`,
           'params':{
             'goodId':'goodId',
-            'ringType':'ringType',
           },
         },
         {
@@ -156,7 +155,6 @@ function queryParams (data) {
           'mobileUrl':`/accessories/accessories`,
           'params':{
             'goodId':'goodId',
-            'ringType':'ringType',
           },
         },
       ]
