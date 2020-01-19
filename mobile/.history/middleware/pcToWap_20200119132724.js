@@ -1,14 +1,22 @@
 export default function({ req, res, redirect, store , route}) {
   // console.log('req==================>', req)
   // console.log('res==================>', res)
+  // let isMobile = (ua) => {
+  //   return !!ua.match(/AppleWebKit.*Mobile.*/)
+  // }
+  // let userAgent = req ? req.headers['user-agent'] : navigator.userAgent || ''
+  // if(/Android|webOS| iPhone | iPad | iPod |BlackBerry|opera mini|opera mobile|appleWebkit.*mobile|mobile/i.test(navigator.userAgent)) {
+    // console.log("url",navigator.userAgent)
+    // window.location.href = "域名地址/mobile/index.html";
+  // }
   function isWap(u) {
     // var u = navigator.userAgent, app = navigator.appVersion;
-    return !!u.match(/AppleWebKit.*Mobile.*/)||                   //是否为移动终端
+    return  u.indexOf('AppleWebKit') > -1,                         //苹果、谷歌内核
         (u.indexOf('Trident') > -1||                            //IE内核
         u.indexOf('Presto') > -1 ||                             //opera内核
-        u.indexOf('AppleWebKit') > -1,                         //苹果、谷歌内核
-        u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1 ||    //火狐内核
         
+        u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1 ||    //火狐内核
+        !!u.match(/AppleWebKit.*Mobile.*/)||                   //是否为移动终端
         !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)||              //ios终端
         u.indexOf('Android') > -1 || u.indexOf('Linux') > -1||//android终端或者uc浏览器
         u.indexOf('iPhone') > -1||                              //是否为iPhone或者QQHD浏览器
@@ -57,7 +65,7 @@ function queryParams (data) {
   
     let u = req.headers['user-agent']
 
-    if(isWap(u)) {
+    if(!isWap(u)) {
       return
     }
 
@@ -73,22 +81,13 @@ function queryParams (data) {
         {
           'mobileUrl':/^\/$/,
           'pcUrl':`/`,
+          
         },
         // 订婚  engagement   engagement-rings
         {
           'mobileUrl':/\/engagement\//,
-          'pcUrl':`/engagement-rings`,
-        }, 
-        // 订婚详情
-        // 'pcUrl':/^\/ring\/engagement-rings\//,
-          // 'mobileUrl':`/engagement/engagement-rings`,
-        {
-          'mobileUrl':/\/engagement\/engagement-rings\//,
-          'pcUrl':`/ring/engagement-rings`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
+          'pcUrl':`/engagement-rings`
+          
         }, 
         // 结婚  marriage-ring wedding-rings
         {
@@ -101,7 +100,6 @@ function queryParams (data) {
           'pcUrl':`/ring/wedding-rings`,
           'params':{
             'goodId':'goodId',
-            'ringType':'ringType',
           },
         },
         // 裸钻   diamond/list  diamonds
@@ -117,16 +115,12 @@ function queryParams (data) {
         // 戒托详情  custom-made/ring-made/ring-detail  build-your-own-ring/setting-details
         {
           'mobileUrl':/\/custom-made\/ring-made\/ring-detail/,
-          'pcUrl':`/build-your-own-ring/setting-details`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
+          'pcUrl':`/build-your-own-ring/setting-details`
         },
         // 选择钻石   diamond/list build-your-own-ring/diamonds
         {
           'mobileUrl':/\/diamond\/list/,
-          'pcUrl':`/build-your-own-ring/diamonds`
+          'mobileUrl':`/build-your-own-ring/diamonds`
         },
         // 主石戒  diamond/list   engagement-rings/solitaire
         {
@@ -143,21 +137,6 @@ function queryParams (data) {
           'mobileUrl':/\/help-pages\/knowledge/,
           'pcUrl':`/education/diamonds/carat`
         },
-        // 裸钻详情  diamond/diamonds  diamond-details
-        {
-          'mobileUrl':/\/diamond\/diamonds/,
-          'pcUrl':`/diamond-details`,
-          'params':{
-            'goodId':'goodId',
-          },
-        },
-        {
-          'mobileUrl':/\/accessories\/accessories/,
-          'pcUrl':`/jewellery/necklace`,
-          'params':{
-            'goodId':'goodId',
-          },
-        }
       ]
 
       if(href.length>0) {
@@ -189,11 +168,11 @@ function queryParams (data) {
             }
 // console.log(url)
             redirect(url)
-            return  
+            return
           }
         }
       }
-      redirect(host)
+
       return
       console.log("ggggggggggg1245678901", path) 
       // redirect(`http://localhost:8328/diamond/diamonds?goodId=`)

@@ -6,7 +6,13 @@ const app = express()
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
-
+if (process.server == false) {
+  let href = window.location.href
+  if(href.indexOf('http://') ===0){
+      window.location.href = href.replace('http://','https://')
+      return
+  }
+}
 async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)

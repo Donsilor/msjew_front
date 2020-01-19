@@ -77,18 +77,8 @@ function queryParams (data) {
         // 订婚  engagement   engagement-rings
         {
           'mobileUrl':/\/engagement\//,
-          'pcUrl':`/engagement-rings`,
-        }, 
-        // 订婚详情
-        // 'pcUrl':/^\/ring\/engagement-rings\//,
-          // 'mobileUrl':`/engagement/engagement-rings`,
-        {
-          'mobileUrl':/\/engagement\/engagement-rings\//,
-          'pcUrl':`/ring/engagement-rings`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
+          'pcUrl':`/engagement-rings/`
+          
         }, 
         // 结婚  marriage-ring wedding-rings
         {
@@ -152,7 +142,7 @@ function queryParams (data) {
           },
         },
         {
-          'mobileUrl':/\/accessories\/accessories/,
+          'mobileUrl':/\/accessories/accessories/,
           'pcUrl':`/jewellery/necklace`,
           'params':{
             'goodId':'goodId',
@@ -189,11 +179,11 @@ function queryParams (data) {
             }
 // console.log(url)
             redirect(url)
-            return  
+            return
           }
         }
       }
-      redirect(host)
+
       return
       console.log("ggggggggggg1245678901", path) 
       // redirect(`http://localhost:8328/diamond/diamonds?goodId=`)

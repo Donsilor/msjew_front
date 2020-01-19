@@ -75,13 +75,10 @@ function queryParams (data) {
           'pcUrl':`/`,
         },
         // 订婚  engagement   engagement-rings
-        {
-          'mobileUrl':/\/engagement\//,
-          'pcUrl':`/engagement-rings`,
-        }, 
-        // 订婚详情
-        // 'pcUrl':/^\/ring\/engagement-rings\//,
-          // 'mobileUrl':`/engagement/engagement-rings`,
+        // {
+        //   'mobileUrl':/\/engagement\//,
+        //   'pcUrl':`/engagement-rings`,
+        // }, 
         {
           'mobileUrl':/\/engagement\/engagement-rings\//,
           'pcUrl':`/ring/engagement-rings`,

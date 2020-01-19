@@ -1,9 +1,17 @@
 export default function({ req, res, redirect, store , route}) {
   // console.log('req==================>', req)
   // console.log('res==================>', res)
+  // let isMobile = (ua) => {
+  //   return !!ua.match(/AppleWebKit.*Mobile.*/)
+  // }
+  // let userAgent = req ? req.headers['user-agent'] : navigator.userAgent || ''
+  // if(/Android|webOS| iPhone | iPad | iPod |BlackBerry|opera mini|opera mobile|appleWebkit.*mobile|mobile/i.test(navigator.userAgent)) {
+    // console.log("url",navigator.userAgent)
+    // window.location.href = "域名地址/mobile/index.html";
+  // }
   function isWap(u) {
     // var u = navigator.userAgent, app = navigator.appVersion;
-    return !!u.match(/AppleWebKit.*Mobile.*/)||                   //是否为移动终端
+    return  !!u.match(/AppleWebKit.*Mobile.*/)||                   //是否为移动终端
         (u.indexOf('Trident') > -1||                            //IE内核
         u.indexOf('Presto') > -1 ||                             //opera内核
         u.indexOf('AppleWebKit') > -1,                         //苹果、谷歌内核
@@ -57,7 +65,7 @@ function queryParams (data) {
   
     let u = req.headers['user-agent']
 
-    if(isWap(u)) {
+    if(!isWap(u)) {
       return
     }
 
@@ -73,91 +81,68 @@ function queryParams (data) {
         {
           'mobileUrl':/^\/$/,
           'pcUrl':`/`,
-        },
-        // 订婚  engagement   engagement-rings
-        {
-          'mobileUrl':/\/engagement\//,
-          'pcUrl':`/engagement-rings`,
-        }, 
-        // 订婚详情
-        // 'pcUrl':/^\/ring\/engagement-rings\//,
-          // 'mobileUrl':`/engagement/engagement-rings`,
-        {
-          'mobileUrl':/\/engagement\/engagement-rings\//,
-          'pcUrl':`/ring/engagement-rings`,
           'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
+            'fdf':'fdsf',
+            'fdsf':'abc'
+          },
+        },
+        // 订婚
+        {
+          'mobileUrl':/\/engagement-rings\//,
+          'pcUrl':`/engagement`,
+          'params':{
+            'goodId':'fdsf',
+            'ringType':'abc'
           },
         }, 
-        // 结婚  marriage-ring wedding-rings
+        // 结婚   ring/wedding-rings
         {
-          'mobileUrl':/^\/marriage-ring\//,
-          'pcUrl':`/wedding-rings`
+          'mobileUrl':/^\/wedding-rings\//,
+          'pcUrl':`/marriage-ring`
         },
-        // 结婚 详情  marriage-ring/single-ring-detail  ring/wedding-rings
+        // 结婚 详情  marriage-ring/single-ring-detail
         {
-          'mobileUrl':/^\/marriage-ring\/single-ring-detail\//,
-          'pcUrl':`/ring/wedding-rings`,
+          'mobileUrl':/^\/ring\/wedding-rings\//,
+          'pcUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',
-            'ringType':'ringType',
           },
         },
         // 裸钻   diamond/list  diamonds
         {
-          'mobileUrl':/\/diamond\/list/,
-          'pcUrl':`/diamonds`
+          'mobileUrl':/\/diamonds/,
+          'pcUrl':`/diamond/list`
         },
         // 选择戒托   custom-made/ring-made/ring-list  build-your-own-ring/settings
         {
-          'mobileUrl':/\/custom-made\/ring-made\/ring-list/,
-          'pcUrl':`/build-your-own-ring/settings`
+          'mobileUrl':/\/build-your-own-ring\/settings/,
+          'pcUrl':`/custom-made/ring-made/ring-list`
         },
         // 戒托详情  custom-made/ring-made/ring-detail  build-your-own-ring/setting-details
         {
-          'mobileUrl':/\/custom-made\/ring-made\/ring-detail/,
-          'pcUrl':`/build-your-own-ring/setting-details`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
+          'mobileUrl':/\/build-your-own-ring\/setting-details/,
+          'pcUrl':`/custom-made/ring-made/ring-detail`
         },
         // 选择钻石   diamond/list build-your-own-ring/diamonds
         {
-          'mobileUrl':/\/diamond\/list/,
-          'pcUrl':`/build-your-own-ring/diamonds`
+          'mobileUrl':/\/build-your-own-ring\/diamonds/,
+          'mobileUrl':`/diamond/list`
         },
-        // 主石戒  diamond/list   engagement-rings/solitaire
+        // 主石戒  iamond/list   engagement-rings/solitaire
         {
-          'mobileUrl':/\/diamond\/list/,
-          'pcUrl':`/engagement-rings/solitaire`
+          'mobileUrl':/\/engagement-rings\/solitaire/,
+          'pcUrl':`/diamond/list`
         },
         // 珠宝首饰   accessories/list jewellery/all
         {
-          'mobileUrl':/\/accessories\/list/,
-          'pcUrl':`/jewellery/all`
+          'mobileUrl':/\/jewellery\/all/,
+          'pcUrl':`/accessories/list`
         },
-        // 知识 help-pages/knowledge  education/diamonds/carat
+        // 知识 accessories/list  education/diamonds/carat
         {
-          'mobileUrl':/\/help-pages\/knowledge/,
-          'pcUrl':`/education/diamonds/carat`
+          'mobileUrl':/\/education\/diamonds\/carat/,
+          'pcUrl':`/accessories/list`
         },
-        // 裸钻详情  diamond/diamonds  diamond-details
-        {
-          'mobileUrl':/\/diamond\/diamonds/,
-          'pcUrl':`/diamond-details`,
-          'params':{
-            'goodId':'goodId',
-          },
-        },
-        {
-          'mobileUrl':/\/accessories\/accessories/,
-          'pcUrl':`/jewellery/necklace`,
-          'params':{
-            'goodId':'goodId',
-          },
-        }
       ]
 
       if(href.length>0) {
@@ -166,8 +151,8 @@ function queryParams (data) {
 
           let rule = rules[i]
 
-          if((rule['mobileUrl']).test(href[0])) {
-            let url = host + rule['pcUrl']
+          if((rule['pcUrl']).test(href[0])) {
+            let url = host + rule['mobileUrl']
 
             let param = ''
             if(typeof rule['params'] !== 'undefined') {
@@ -189,11 +174,11 @@ function queryParams (data) {
             }
 // console.log(url)
             redirect(url)
-            return  
+            return
           }
         }
       }
-      redirect(host)
+
       return
       console.log("ggggggggggg1245678901", path) 
       // redirect(`http://localhost:8328/diamond/diamonds?goodId=`)

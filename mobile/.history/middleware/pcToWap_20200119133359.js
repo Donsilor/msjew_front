@@ -57,11 +57,11 @@ function queryParams (data) {
   
     let u = req.headers['user-agent']
 
-    if(isWap(u)) {
+    if(!isWap(u)) {
       return
     }
 
-    let host = 'http://localhost:8318';
+    let host = 'http://192.168.1.183:8318';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -77,18 +77,8 @@ function queryParams (data) {
         // 订婚  engagement   engagement-rings
         {
           'mobileUrl':/\/engagement\//,
-          'pcUrl':`/engagement-rings`,
-        }, 
-        // 订婚详情
-        // 'pcUrl':/^\/ring\/engagement-rings\//,
-          // 'mobileUrl':`/engagement/engagement-rings`,
-        {
-          'mobileUrl':/\/engagement\/engagement-rings\//,
-          'pcUrl':`/ring/engagement-rings`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
+          'pcUrl':`/engagement-rings`
+          
         }, 
         // 结婚  marriage-ring wedding-rings
         {
@@ -101,7 +91,6 @@ function queryParams (data) {
           'pcUrl':`/ring/wedding-rings`,
           'params':{
             'goodId':'goodId',
-            'ringType':'ringType',
           },
         },
         // 裸钻   diamond/list  diamonds
@@ -117,16 +106,12 @@ function queryParams (data) {
         // 戒托详情  custom-made/ring-made/ring-detail  build-your-own-ring/setting-details
         {
           'mobileUrl':/\/custom-made\/ring-made\/ring-detail/,
-          'pcUrl':`/build-your-own-ring/setting-details`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
+          'pcUrl':`/build-your-own-ring/setting-details`
         },
         // 选择钻石   diamond/list build-your-own-ring/diamonds
         {
           'mobileUrl':/\/diamond\/list/,
-          'pcUrl':`/build-your-own-ring/diamonds`
+          'mobileUrl':`/build-your-own-ring/diamonds`
         },
         // 主石戒  diamond/list   engagement-rings/solitaire
         {
@@ -143,21 +128,6 @@ function queryParams (data) {
           'mobileUrl':/\/help-pages\/knowledge/,
           'pcUrl':`/education/diamonds/carat`
         },
-        // 裸钻详情  diamond/diamonds  diamond-details
-        {
-          'mobileUrl':/\/diamond\/diamonds/,
-          'pcUrl':`/diamond-details`,
-          'params':{
-            'goodId':'goodId',
-          },
-        },
-        {
-          'mobileUrl':/\/accessories\/accessories/,
-          'pcUrl':`/jewellery/necklace`,
-          'params':{
-            'goodId':'goodId',
-          },
-        }
       ]
 
       if(href.length>0) {
@@ -189,11 +159,11 @@ function queryParams (data) {
             }
 // console.log(url)
             redirect(url)
-            return  
+            return
           }
         }
       }
-      redirect(host)
+
       return
       console.log("ggggggggggg1245678901", path) 
       // redirect(`http://localhost:8328/diamond/diamonds?goodId=`)

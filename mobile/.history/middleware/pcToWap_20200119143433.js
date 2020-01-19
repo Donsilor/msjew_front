@@ -78,10 +78,11 @@ function queryParams (data) {
         {
           'mobileUrl':/\/engagement\//,
           'pcUrl':`/engagement-rings`,
+          'params':{
+            'goodId':'goodId',
+            'ringType':'ringType',
+          },
         }, 
-        // 订婚详情
-        // 'pcUrl':/^\/ring\/engagement-rings\//,
-          // 'mobileUrl':`/engagement/engagement-rings`,
         {
           'mobileUrl':/\/engagement\/engagement-rings\//,
           'pcUrl':`/ring/engagement-rings`,

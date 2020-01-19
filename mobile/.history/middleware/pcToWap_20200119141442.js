@@ -77,18 +77,8 @@ function queryParams (data) {
         // 订婚  engagement   engagement-rings
         {
           'mobileUrl':/\/engagement\//,
-          'pcUrl':`/engagement-rings`,
-        }, 
-        // 订婚详情
-        // 'pcUrl':/^\/ring\/engagement-rings\//,
-          // 'mobileUrl':`/engagement/engagement-rings`,
-        {
-          'mobileUrl':/\/engagement\/engagement-rings\//,
-          'pcUrl':`/ring/engagement-rings`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
+          'pcUrl':`/engagement-rings/`
+          
         }, 
         // 结婚  marriage-ring wedding-rings
         {
@@ -126,7 +116,7 @@ function queryParams (data) {
         // 选择钻石   diamond/list build-your-own-ring/diamonds
         {
           'mobileUrl':/\/diamond\/list/,
-          'pcUrl':`/build-your-own-ring/diamonds`
+          'mobileUrl':`/build-your-own-ring/diamonds`
         },
         // 主石戒  diamond/list   engagement-rings/solitaire
         {
@@ -145,19 +135,12 @@ function queryParams (data) {
         },
         // 裸钻详情  diamond/diamonds  diamond-details
         {
-          'mobileUrl':/\/diamond\/diamonds/,
-          'pcUrl':`/diamond-details`,
+          'pcUrl':/\/diamond-details/,
+          'mobileUrl':`/diamond/diamonds`,
           'params':{
             'goodId':'goodId',
           },
         },
-        {
-          'mobileUrl':/\/accessories\/accessories/,
-          'pcUrl':`/jewellery/necklace`,
-          'params':{
-            'goodId':'goodId',
-          },
-        }
       ]
 
       if(href.length>0) {
@@ -189,11 +172,11 @@ function queryParams (data) {
             }
 // console.log(url)
             redirect(url)
-            return  
+            return
           }
         }
       }
-      redirect(host)
+
       return
       console.log("ggggggggggg1245678901", path) 
       // redirect(`http://localhost:8328/diamond/diamonds?goodId=`)
