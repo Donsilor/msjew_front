@@ -325,7 +325,7 @@
     "registration": "Register",
     "mailbox": "Enter Email",
     "mailTips": "Enter correct email",
-    "password": "Enter Password*",
+    "password": "Enter Password",
     "passwordTips": "Enter login password",
     "logintips":"login successful",
     "repassword": "Confirm Password *",
