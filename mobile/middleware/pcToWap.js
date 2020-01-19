@@ -61,7 +61,7 @@ function queryParams (data) {
       return
     }
 
-    let host = 'https://www2.bddco.com/';
+    let host = 'http://localhost:8318';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -76,14 +76,14 @@ function queryParams (data) {
         },
         // 订婚  engagement   engagement-rings
         {
-          'mobileUrl':/\/engagement\//,
+          'mobileUrl':/\/engagement$/,
           'pcUrl':`/engagement-rings`,
         }, 
         // 订婚详情
         // 'pcUrl':/^\/ring\/engagement-rings\//,
           // 'mobileUrl':`/engagement/engagement-rings`,
         {
-          'mobileUrl':/\/engagement\/engagement-rings\//,
+          'mobileUrl':/\/engagement\/engagement-rings/,
           'pcUrl':`/ring/engagement-rings`,
           'params':{
             'goodId':'goodId',
@@ -92,13 +92,13 @@ function queryParams (data) {
         }, 
         // 结婚  marriage-ring wedding-rings
         {
-          'mobileUrl':/^\/marriage-ring\//,
+          'mobileUrl':/^\/marriage-ring$/,
           'pcUrl':`/wedding-rings`
         },
         // 结婚 详情  marriage-ring/single-ring-detail  ring/wedding-rings
         {
-          'mobileUrl':/^\/marriage-ring\/single-ring-detail\//,
-          'pcUrl':`/ring/wedding-rings`,
+          'mobileUrl':/^\/marriage-ring\/single-ring-detail/,
+          'pcUrl':`/ring/engagement-rings`,
           'params':{
             'goodId':'goodId',
             'ringType':'ringType',
@@ -106,12 +106,12 @@ function queryParams (data) {
         },
         // 裸钻   diamond/list  diamonds
         {
-          'mobileUrl':/\/diamond\/list/,
+          'mobileUrl':/\/diamond\/list$/,
           'pcUrl':`/diamonds`
         },
         // 选择戒托   custom-made/ring-made/ring-list  build-your-own-ring/settings
         {
-          'mobileUrl':/\/custom-made\/ring-made\/ring-list/,
+          'mobileUrl':/\/custom-made\/ring-made\/ring-list$/,
           'pcUrl':`/build-your-own-ring/settings`
         },
         // 戒托详情  custom-made/ring-made/ring-detail  build-your-own-ring/setting-details
@@ -125,22 +125,22 @@ function queryParams (data) {
         },
         // 选择钻石   diamond/list build-your-own-ring/diamonds
         {
-          'mobileUrl':/\/diamond\/list/,
+          'mobileUrl':/\/diamond\/list$/,
           'pcUrl':`/build-your-own-ring/diamonds`
         },
         // 主石戒  diamond/list   engagement-rings/solitaire
         {
-          'mobileUrl':/\/diamond\/list/,
+          'mobileUrl':/\/diamond\/list$/,
           'pcUrl':`/engagement-rings/solitaire`
         },
         // 珠宝首饰   accessories/list jewellery/all
         {
-          'mobileUrl':/\/accessories\/list/,
+          'mobileUrl':/\/accessories\/list$/,
           'pcUrl':`/jewellery/all`
         },
         // 知识 help-pages/knowledge  education/diamonds/carat
         {
-          'mobileUrl':/\/help-pages\/knowledge/,
+          'mobileUrl':/\/help-pages\/knowledge$/,
           'pcUrl':`/education/diamonds/carat`
         },
         // 裸钻详情  diamond/diamonds  diamond-details
@@ -152,8 +152,8 @@ function queryParams (data) {
           },
         },
         {
-          'mobileUrl':/\/accessories\/accessories/,
-          'pcUrl':`/jewellery/necklace`,
+          'mobileUrl':/\/accessories\/accessories$/,
+          'pcUrl':`/jewellery/necklace/{goodId}`,
           'params':{
             'goodId':'goodId',
           },
@@ -178,8 +178,9 @@ function queryParams (data) {
               Object.keys(params).forEach(function(key) {
                 if(typeof query1[key] !== 'undefined') {
                   query2[params[key]] = query1[key]
+                  url = url.replace('{'+key+'}',query1[key])
                 }
-              });
+              })
               // param = queryParams(query2)
               href[1] = queryParams(query2)
             }
@@ -187,7 +188,7 @@ function queryParams (data) {
             if(href.length>1) {
               url = url + '?' + param + href[1]
             }
-// console.log(url)
+            console.log(url)
             redirect(url)
             return  
           }
@@ -195,88 +196,8 @@ function queryParams (data) {
       }
       redirect(host)
       return
-      console.log("ggggggggggg1245678901", path) 
-      // redirect(`http://localhost:8328/diamond/diamonds?goodId=`)
-      // 订婚戒指落地页
-      const engagementRingIndexReg = /^\/engagementRingDetails$/
-      if (engagementRingIndexReg.test(path)) {
-        // console.log("aaaa",path)
-        // console.log('结婚戒指落地页')
-        redirect(`/engagement`)
-        return
-      }
-
-      // 结婚戒指落地页
-      const marriageRingIndexReg = /^\/weddingRingDetails$/
-      if (marriageRingIndexReg.test(path)) {
-        // console.log('结婚戒指落地页')
-        redirect(`/marriage-ring`)
-        return
-      }
-
-      // 钻石
-      const diamondsReg = /^\/seleceDiamond\/(.*)\/2$/
-      if (diamondsReg.test(path)) {
-        // console.log('钻石')
-        redirect(`http://localhost:8328/diamond/diamonds?goodId=${path.match(diamondsReg)[1]}`)
-        return
-      }
-
-      // 饰品
-      const accessoriesReg = /^\/seleceJewellery\/(.*)\/1$/
-      if (accessoriesReg.test(path)) {
-        // console.log('饰品')
-        redirect(
-          `http://localhost:8328/accessories/accessories?goodId=${path.match(accessoriesReg)[1]}`
-        )
-        return
-      }
-
-      // 结婚单戒
-      const singleRingReg = /^\/seleceWedding\/(.*)$/
-      if (singleRingReg.test(path)) {
-        // console.log('结婚单戒')
-        redirect(
-          `http://localhost:8328/marriage-ring/single-ring-detail?goodId=${
-            path.match(singleRingReg)[1]
-          }`
-        )
-        return
-      }
-
-      // 结婚对戒
-      const pairRingReg = /^\/seleceRightRing\/(.*)$/
-      if (pairRingReg.test(path)) {
-        // console.log('结婚对戒')
-        redirect(
-          `http://localhost:8328/marriage-ring/pair-ring-detail?ringId=${path.match(pairRingReg)[1]}`
-        )
-        return
-      }
-
-      // 订婚戒指
-      const engagementRingReg = /^\/seleceEngagement\/(.*)\/2$/
-
-      if (engagementRingReg.test(path)) {
-        // console.log('订婚戒指')
-        redirect(
-          `http://localhost:8328/engagement-rings/engagement-rings?goodId=${
-            path.match(engagementRingReg)[1]
-          }`
-        )
-      }
     }
-    // return isMobile(userAgent) ? '' : redirect(route.fullPath)
+    console.log("req.originalUrl",req.originalUrl)
     toWapUrl(req.originalUrl)
   }
 }
-// export default function ({ isServer, req, redirect, route }) {
-//   let pcOrigin = 'http://localhost:8318'
-//   let mobileOrigin = 'http://localhost:8328'
-//   let isMobile = (ua) => {
-//     return !!ua.match(/AppleWebKit.*Mobile.*/)
-//   }
-//   let userAgent = req ? req.headers['user-agent'] : navigator.userAgent || ''
-//   return isMobile(userAgent) ? '' : redirect(pcOrigin + route.fullPath)
-//   // 使用redirect 重定向到外链需要加上前缀:http / https
-// }
