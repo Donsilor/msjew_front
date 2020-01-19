@@ -5,11 +5,10 @@
 /_source/web/.buildpath
 .nuxt
 .settings
-.history
 node_modules
 .buildpath
 .project
 /web/nuxt.config.js
+/web/.history
 /mobile/nuxt.config.js
-
-
+/mobile/.history
