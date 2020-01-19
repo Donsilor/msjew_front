@@ -256,8 +256,8 @@ export default {
             _this.$store.commit('setToken', data.access_token)
             _this.$store.commit('setUserInfo', data.member)
             const lastUrl = _this.$store.state.lastUrl
-            _this.$store.commit('setLastUrl', '')
-            console.log('login', data)
+            //_this.$store.commit('setLastUrl', '')
+            console.log('login', lastUrl)
 
             setTimeout(() => {
               if (lastUrl) {
@@ -325,9 +325,10 @@ export default {
             _this.$successMessage(_this.$t(`${lang}.logintips`))
             _this.$store.commit('setToken', data.access_token)
             _this.$store.commit('setUserInfo', data.member);
-            console.log('login', data)
+            
             const lastUrl = _this.$store.state.lastUrl
-            _this.$store.commit('setLastUrl', '')
+            //_this.$store.commit('setLastUrl', '')
+			console.log('login', lastUrl)
             setTimeout(() => {
               if (lastUrl) {
                 _this.$router.replace({

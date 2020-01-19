@@ -70,7 +70,7 @@ export default function(content) {
       // res.setHeader('Set-Cookie', [`lastUrl=${lastUrl}; Path=/;`])
       store.commit('setLastUrl', lastUrl)
     }
-    console.log('setBasic req====>', resetCookie)
+    //console.log('setBasic req====>', resetCookie)
     res.setHeader('Set-Cookie', resetCookie)
   }
 }

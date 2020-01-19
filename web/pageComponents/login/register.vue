@@ -661,6 +661,7 @@ export default {
       const _this = this
       if (_this.email.length === 0) {
         _this.emailShow=true
+        return
       }
       // if (_this.waiting) {
       //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
@@ -698,6 +699,7 @@ export default {
       const _this = this
       if (_this.mobile.length === 0) {
         _this.mobileShow=true
+        return
       }else{
         _this.setWait()
       }

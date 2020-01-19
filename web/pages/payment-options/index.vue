@@ -227,6 +227,7 @@ export default {
       // )
       const data ={
         orderId: this.$route.query.orderId,
+        coinType: this.$route.query.coinType,
         // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318
         // payChannel: pay
         payType: pay,

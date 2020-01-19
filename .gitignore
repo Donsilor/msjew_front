@@ -8,7 +8,7 @@
 node_modules
 .buildpath
 .project
-/web/node_modules
-/web/.nuxt
 /web/nuxt.config.js
+/web/.history
 /mobile/nuxt.config.js
+/mobile/.history
