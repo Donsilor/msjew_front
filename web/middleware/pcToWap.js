@@ -1,5 +1,7 @@
 export default function({ req, res, redirect, store }) {
+  console.log(111111)
   // console.log('req==================>', req)
+  console.log(22222)
   // console.log('res==================>', res)
   if (process.server) {
     const toWapUrl = path => {

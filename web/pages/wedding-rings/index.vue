@@ -211,9 +211,6 @@
 import CategoryIndexPage from '@/mixins/category-index-page.js'
 const lang = 'weddingRings'
 export default {
-  head() {
-    return this.seoInfo || {}
-  },
   mixins: [CategoryIndexPage],
   head() {
     return this.seoInfo || {
