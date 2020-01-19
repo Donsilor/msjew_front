@@ -61,7 +61,7 @@ function queryParams (data) {
       return
     }
 
-    let host = 'http://localhost:8318';
+    let host = 'https://www2.bddco.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
