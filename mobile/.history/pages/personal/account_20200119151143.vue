@@ -11,55 +11,27 @@
           :val="date.gender"
           @close="choice1"
         />
-        <div v-if="this.language==='zh_CN'">
-          <div class="input-mod">
-            <bdd-input
-              v-model="date.lastname"
-              :placeholder="lang.surname"
-              @blur="textSurname"
-            ></bdd-input>
-          </div>
-          <div :class="['error-message', { active: !trueSurname }]">
-            {{ lang.surnametips }}
-          </div>
-          <div class="input-mod">
-            <bdd-input
-              v-model="date.firstname"
-              :placeholder="lang.name"
-              @blur="textName"
-            ></bdd-input>
-          </div>
-          <div :class="['error-message', { active: !trueName }]">
-            {{ lang.nametips }}
-          </div>
-          
+        
+        <div class="input-mod">
+          <bdd-input
+            v-model="date.firstname"
+            :placeholder="lang.name"
+            @blur="textName"
+          ></bdd-input>
         </div>
-
-        <div v-else>
-           <div class="input-mod">
-            <bdd-input
-              v-model="date.firstname"
-              :placeholder="lang.name"
-              @blur="textName"
-            ></bdd-input>
-          </div>
-          <div :class="['error-message', { active: !trueName }]">
-            {{ lang.nametips }}
-          </div>
-           <div class="input-mod">
-            <bdd-input
-              v-model="date.lastname"
-              :placeholder="lang.surname"
-              @blur="textSurname"
-            ></bdd-input>
-          </div>
-          <div :class="['error-message', { active: !trueSurname }]">
-            {{ lang.surnametips }}
-          </div>
-         
-          
+        <div :class="['error-message', { active: !trueName }]">
+          {{ lang.nametips }}
         </div>
-
+        <div class="input-mod">
+          <bdd-input
+            v-model="date.lastname"
+            :placeholder="lang.surname"
+            @blur="textSurname"
+          ></bdd-input>
+        </div>
+        <div :class="['error-message', { active: !trueSurname }]">
+          {{ lang.surnametips }}
+        </div>
         <Single
           :name="lang.marriage"
           :list="lang.marriageList"
@@ -104,29 +76,16 @@ export default {
       birthday: null,
       trueName: true,
       date: this.$route.query,
-      trueSurname: true,
-      language:''
+      trueSurname: true
     }
   },
   created() {
     this.getinfo()
   },
   mounted() {
-    console.log("ddddd",this.date)
-    this.language = this.getCookie('language')
     this.$nextTick(() => {})
   },
   methods: {
-     // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     test() {
       if (window.Mdate && !this.date.birthday) {
         new window.Mdate('time', {

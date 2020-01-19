@@ -11,17 +11,7 @@
           :val="date.gender"
           @close="choice1"
         />
-        <div v-if="this.language==='zh_CN'">
-          <div class="input-mod">
-            <bdd-input
-              v-model="date.lastname"
-              :placeholder="lang.surname"
-              @blur="textSurname"
-            ></bdd-input>
-          </div>
-          <div :class="['error-message', { active: !trueSurname }]">
-            {{ lang.surnametips }}
-          </div>
+        <div v-if="">
           <div class="input-mod">
             <bdd-input
               v-model="date.firstname"
@@ -32,21 +22,21 @@
           <div :class="['error-message', { active: !trueName }]">
             {{ lang.nametips }}
           </div>
-          
+          <div class="input-mod">
+            <bdd-input
+              v-model="date.lastname"
+              :placeholder="lang.surname"
+              @blur="textSurname"
+            ></bdd-input>
+          </div>
+          <div :class="['error-message', { active: !trueSurname }]">
+            {{ lang.surnametips }}
+          </div>
         </div>
 
-        <div v-else>
-           <div class="input-mod">
-            <bdd-input
-              v-model="date.firstname"
-              :placeholder="lang.name"
-              @blur="textName"
-            ></bdd-input>
-          </div>
-          <div :class="['error-message', { active: !trueName }]">
-            {{ lang.nametips }}
-          </div>
-           <div class="input-mod">
+        <div>
+          <div class="input-mod">
+            <div class="input-mod">
             <bdd-input
               v-model="date.lastname"
               :placeholder="lang.surname"
@@ -56,7 +46,15 @@
           <div :class="['error-message', { active: !trueSurname }]">
             {{ lang.surnametips }}
           </div>
-         
+            <bdd-input
+              v-model="date.firstname"
+              :placeholder="lang.name"
+              @blur="textName"
+            ></bdd-input>
+          </div>
+          <div :class="['error-message', { active: !trueName }]">
+            {{ lang.nametips }}
+          </div>
           
         </div>
 
@@ -112,7 +110,6 @@ export default {
     this.getinfo()
   },
   mounted() {
-    console.log("ddddd",this.date)
     this.language = this.getCookie('language')
     this.$nextTick(() => {})
   },

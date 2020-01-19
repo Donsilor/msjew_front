@@ -38,16 +38,6 @@
         <div v-else>
            <div class="input-mod">
             <bdd-input
-              v-model="date.firstname"
-              :placeholder="lang.name"
-              @blur="textName"
-            ></bdd-input>
-          </div>
-          <div :class="['error-message', { active: !trueName }]">
-            {{ lang.nametips }}
-          </div>
-           <div class="input-mod">
-            <bdd-input
               v-model="date.lastname"
               :placeholder="lang.surname"
               @blur="textSurname"
@@ -56,7 +46,16 @@
           <div :class="['error-message', { active: !trueSurname }]">
             {{ lang.surnametips }}
           </div>
-         
+          <div class="input-mod">
+            <bdd-input
+              v-model="date.firstname"
+              :placeholder="lang.name"
+              @blur="textName"
+            ></bdd-input>
+          </div>
+          <div :class="['error-message', { active: !trueName }]">
+            {{ lang.nametips }}
+          </div>
           
         </div>
 
