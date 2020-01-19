@@ -3,19 +3,20 @@ export default function({ req, res, redirect, store , route}) {
   // console.log('res==================>', res)
   function isWap(u) {
     // var u = navigator.userAgent, app = navigator.appVersion;
-    return !!u.match(/AppleWebKit.*Mobile.*/)||                   //是否为移动终端
-        (u.indexOf('Trident') > -1||                            //IE内核
-        u.indexOf('Presto') > -1 ||                             //opera内核
-        u.indexOf('AppleWebKit') > -1,                         //苹果、谷歌内核
-        u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1 ||    //火狐内核
+    return !!u.match(/AppleWebKit.*Mobile.*/)
+    // ||                   //是否为移动终端
+    //     (u.indexOf('Trident') > -1||                            //IE内核
+    //     u.indexOf('Presto') > -1 ||                             //opera内核
+    //     u.indexOf('AppleWebKit') > -1||                         //苹果、谷歌内核
+    //     u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1 ||    //火狐内核
         
-        !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)||              //ios终端
-        u.indexOf('Android') > -1 || u.indexOf('Linux') > -1||//android终端或者uc浏览器
-        u.indexOf('iPhone') > -1||                              //是否为iPhone或者QQHD浏览器
-        u.indexOf('iPad') > -1||                                  //是否iPad
-        u.indexOf('Safari') == -1||                             //是否web应该程序，没有头部与底部
-        u.indexOf('MicroMessenger') > -1||                      //是否微信 （2015-01-22新增）
-        u.match(/\sQQ/i) == " qq"  )                                //是否QQ
+    //     !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)||              //ios终端
+    //     u.indexOf('Android') > -1 || u.indexOf('Linux') > -1||//android终端或者uc浏览器
+    //     u.indexOf('iPhone') > -1||                              //是否为iPhone或者QQHD浏览器
+    //     u.indexOf('iPad') > -1||                                  //是否iPad
+    //     u.indexOf('Safari') == -1||                             //是否web应该程序，没有头部与底部
+    //     u.indexOf('MicroMessenger') > -1||                      //是否微信 （2015-01-22新增）
+    //     u.match(/\sQQ/i) == " qq"  )                                //是否QQ
 }
 
 const getQueryFromUrl = url => {
@@ -61,7 +62,7 @@ function queryParams (data) {
       return
     }
 
-    let host = 'https://www2.bddco.com';
+    let host = 'https://www.bddco.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
