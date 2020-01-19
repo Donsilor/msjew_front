@@ -140,7 +140,7 @@ function queryParams (data) {
         // 知识
         {
           'pcUrl':/\/education\/diamonds\/carat$/,
-          'mobileUrl':`/accessories/list`
+          'mobileUrl':`/help-pages/knowledge`
         },
         // 裸钻详情
         {
@@ -158,7 +158,7 @@ function queryParams (data) {
             'goodId':'goodId',
             'ringType':'ringType',
           },
-        },
+        }
       ]
 
       if(href.length>0) {
