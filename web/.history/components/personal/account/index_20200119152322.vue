@@ -31,7 +31,7 @@
             type="text"
           />
         </div>
-        <div class="base-info-line" v-else>
+        <div v-else>
           <input
             v-model="userInfo.firstname"
             class="base-name-input"

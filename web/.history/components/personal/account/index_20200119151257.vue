@@ -16,7 +16,7 @@
         </div> -->
       </div>
       <div class="base-info-line">
-        <div class="base-info-line" v-if="this.language==='zh_CN'">
+        <div v-if="this.language==='zh_CN'">
            <input
             v-model="userInfo.lastname"
             class="base-name-input"
@@ -31,7 +31,7 @@
             type="text"
           />
         </div>
-        <div class="base-info-line" v-else>
+        <div v-else>
           <input
             v-model="userInfo.firstname"
             class="base-name-input"
@@ -44,6 +44,7 @@
             :placeholder="$t(`${lang}.lastName`)"
             type="text"
           />
+          
         </div>
         
       </div>
