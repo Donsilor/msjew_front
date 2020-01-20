@@ -209,7 +209,7 @@ export default {
       }else if(this.payWay==6){
         pay = 6
       }
-    console.log("方式",pay)
+    // console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(
       //     JSON.stringify({
@@ -238,7 +238,7 @@ export default {
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {
-          console.log("url",res)
+          // console.log("url",res)
           if (res.data.config) {
             if (pay !== 7) {
               window.location.replace(res.data.config)

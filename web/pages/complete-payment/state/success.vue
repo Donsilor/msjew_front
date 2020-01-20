@@ -299,7 +299,7 @@ export default {
         setTimeout(() => {
           this.$router.push({path: "/"}); // 强制切换当前路由 path
         }, 5000);
-        console.log("return_url",res)
+        // console.log("return_url",res)
       })
       .catch(err => {
         if (!err.response) {

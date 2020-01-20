@@ -340,7 +340,7 @@ export default {
       const monthBig = [1, 3, 5, 7, 8, 10, 12]
       const monthSmall = [4, 6, 9, 11]
       if (thisYear && thisMonth) {
-        console.log(1)
+        // console.log(1)
         this.days = []
         for (let i = 0; i < nowd; i++) {
           i < 9 ? this.days.push('0' + (i + 1)) : this.days.push(i + 1)
@@ -376,9 +376,9 @@ export default {
       this.$axios
         .get('/web/member/member/me')
         .then(res => {
-          console.log(res)
+          // console.log(res)
           this.userInfo = res.data
-          console.log('uuuu',this.userInfo)
+          // console.log('uuuu',this.userInfo)
           this.loading = false
           if (this.userInfo.birthday) {
             this.year = moment(this.userInfo.birthday).format('YYYY')
@@ -416,7 +416,7 @@ export default {
           birthday: this.userInfo.birthday
         })
         .then(res => {
-          console.log("修改",res)
+          // console.log("修改",res)
           if(res.code !=200) {
             throw new Error(res.message)
           }

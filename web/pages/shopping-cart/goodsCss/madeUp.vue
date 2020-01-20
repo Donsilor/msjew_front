@@ -151,7 +151,7 @@ export default {
   },
   methods: {
     goDetail() {
-      console.log(this.g)
+      // console.log(this.g)
       // this.getJumpLink(this.g)
     },
     deleteGood() {

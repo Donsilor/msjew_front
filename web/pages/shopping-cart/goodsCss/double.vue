@@ -213,7 +213,7 @@ export default {
         })
     },
     searchSimilar(info) {
-      console.log(33333,info)
+      // console.log(33333,info)
       let routerName = ''
       switch (info.goodsType) {
         case 15:

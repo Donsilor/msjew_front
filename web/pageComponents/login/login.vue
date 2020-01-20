@@ -257,7 +257,7 @@ export default {
             _this.$store.commit('setUserInfo', data.member)
             const lastUrl = _this.$store.state.lastUrl
             //_this.$store.commit('setLastUrl', '')
-            console.log('login', lastUrl)
+            // console.log('login', lastUrl)
 
             setTimeout(() => {
               if (lastUrl) {
@@ -328,7 +328,7 @@ export default {
             
             const lastUrl = _this.$store.state.lastUrl
             //_this.$store.commit('setLastUrl', '')
-			console.log('login', lastUrl)
+			// console.log('login', lastUrl)
             setTimeout(() => {
               if (lastUrl) {
                 _this.$router.replace({

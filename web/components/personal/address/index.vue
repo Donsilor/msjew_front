@@ -614,11 +614,11 @@ export default {
     },
     // 修改地址
     changeAddress(obj) {
-      console.log("ddasdas",obj)
+      // console.log("ddasdas",obj)
       this.resetAddress()
       this.clone = this.$helpers.cloneObject(obj)
       this.checkEmail = obj.email
-      console.log("email",this.checkEmail)
+      // console.log("email",this.checkEmail)
       const code = obj.mobile_code.split('+').reverse()
       JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
         if (o.phone_code === '+' + code[0]) this.phoneNum = o
@@ -643,7 +643,7 @@ export default {
     },
     // 修改默认地址
     changeDefaultAddress(id) {
-      console.log("aaa",id)
+      // console.log("aaa",id)
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ id:id,is_default: 1 })),
         false
@@ -652,7 +652,7 @@ export default {
         .post('/web/member/address/edit',data)
         .then(res => {
           // if(res.code==200){
-            console.log("修改默认地址成功",res)
+            // console.log("修改默认地址成功",res)
             this.getData()
           // }else {
           //   throw new Error (res.message)
@@ -774,7 +774,7 @@ export default {
         .post('web/member/address/add',json)
         .then(res => {
           if(res.code==200){
-            console.log("新增地址成功",res)
+            // console.log("新增地址成功",res)
             this.getData()
             this.resetAddress()
           }else {
@@ -856,7 +856,7 @@ export default {
         .post('web/member/address/add',json)
         .then(res => {
           if(res.code==200){
-            console.log("新增地址成功",res)
+            // console.log("新增地址成功",res)
             this.getData()
             this.resetAddress()
           }else {
@@ -937,12 +937,12 @@ export default {
         JSON.parse(JSON.stringify(json)),
         false
       )   
-      console.log("json",json)
+      // console.log("json",json)
       this.$axios
         .post('/web/member/address/edit', data)
         .then(res => {
           if(res.code==200){
-            console.log("修改成功",res)
+            // console.log("修改成功",res)
             this.getData()
             this.resetAddress()
           }else {
@@ -969,7 +969,7 @@ export default {
             this.isDel = false
             this.getData()
             this.resetAddress()
-            console.log("删除",res)
+            // console.log("删除",res)
           }else {
             throw new Error (res.message)
           }    

@@ -63,7 +63,7 @@ export default {
 
   // 用户信息
   userInfo(state, getters) {
-    console.log('用户信息用户信息用户信息用户信息')
+    // console.log('用户信息用户信息用户信息用户信息')
     const userInfo = state.userInfo
     return userInfo
   }

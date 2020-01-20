@@ -1584,7 +1584,7 @@ export default {
             //     this.address.push(res[i])
             //   }
             // }
-            console.log("地址",this.address)
+            // console.log("地址",this.address)
             this.orderAddress = this.address[0]
             this.newAddress = false
             this.isEdit = false
@@ -1629,7 +1629,7 @@ export default {
     },
     changeAddress(obj) {
       this.orderAddress = obj
-      console.log("aaa",this.orderAddress)
+      // console.log("aaa",this.orderAddress)
       this.getTex()
     },
     createAddress() {
@@ -1704,7 +1704,7 @@ export default {
           }
       //   false
       // )
-      console.log("电话",data)
+      // console.log("电话",data)
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
@@ -1796,11 +1796,11 @@ export default {
           }
       //   false
       // )
-      console.log("电话",data)
+      // console.log("电话",data)
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
-          console.log("添加地址",res)
+          // console.log("添加地址",res)
           this.$message({
             message: this.$t(`${lang}.success`),
             type: 'success'
@@ -1833,7 +1833,7 @@ export default {
         address_details: data.address_details,
         zip_code: data.zip_code
       }
-      console.log("code",this.addressData)
+      // console.log("code",this.addressData)
       const code = data.mobile_code.split('+').reverse()
       JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
         if (o.phone_code === '+' + code[0]) {
@@ -1849,7 +1849,7 @@ export default {
       })
     },
     saveAddress1() {
-      console.log('save')
+      // console.log('save')
       if (this.addressData.firstname === '') {
         this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
@@ -1916,7 +1916,7 @@ export default {
       this.$axios
         .post('/web/member/address/edit', data)
         .then(res => {
-          console.log("修改地址",res)
+          // console.log("修改地址",res)
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -1934,7 +1934,7 @@ export default {
     },
     // 繁体
     saveAddress() {
-      console.log('save')
+      // console.log('save')
       if (this.addressData.firstname === '') {
         this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
@@ -2012,7 +2012,7 @@ export default {
       this.$axios
         .post('/web/member/address/edit', data)
         .then(res => {
-          console.log("修改地址",res)
+          // console.log("修改地址",res)
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -2029,7 +2029,7 @@ export default {
         })
     },
     deleteAddress() {
-      console.log('delete')
+      // console.log('delete')
       this.confirmBox = false
       if (this.orderAddress.id === this.deleteAddressId) {
         this.orderAddress = {}
@@ -2041,7 +2041,7 @@ export default {
       this.$axios
         .post('/web/member/address/del', data)
         .then(res => {
-          console.log("删除地址",res)
+          // console.log("删除地址",res)
           this.getAddress()
         })
         .catch(err => {
@@ -2193,7 +2193,7 @@ export default {
           }
         })
         .then(res => {
-          console.log("tex",res)
+          // console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
         })
@@ -2209,7 +2209,7 @@ export default {
         })
     },
     createOrder() {
-      console.log()
+      // console.log()
       if (!this.canSubmit) {
         return
       }
@@ -2233,18 +2233,18 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
-      console.log("arr",arr)
+      // console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
       }
-      console.log("pppp",data)
+      // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
-          console.log("创建订单",res.data.orderAmount)
+          // console.log("创建订单",res.data.orderAmount)
           this.$store.dispatch('getCart')
           this.$router.replace({
             path: '/payment-options',
@@ -2264,7 +2264,7 @@ export default {
         })
     },
     createOrder1() {
-      console.log()
+      // console.log()
       if (!this.canSubmit) {
         return
       }
@@ -2298,7 +2298,7 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
-      console.log("arr",arr)
+      // console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
         // allSend: this.isAllPack ? 1 : 2,

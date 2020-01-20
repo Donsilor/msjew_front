@@ -165,7 +165,7 @@ export default {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
-          console.log("1230",res)
+          // console.log("1230",res)
           for (const i in res) {
             res[i].tick = false
           }
@@ -176,7 +176,7 @@ export default {
         })
     },
     allTicks() {
-      console.log("全选",this.allTick)
+      // console.log("全选",this.allTick)
       if (this.allTick) {
         for (const i in this.good) {
           this.good[i].tick = false
@@ -306,8 +306,8 @@ export default {
           data.push(this.good[i].id)
         }
       }
-      console.log("length",data.length)
-       console.log("length333",this.tickNum)
+      // console.log("length",data.length)
+      //  console.log("length333",this.tickNum)
       if (data.length !== this.tickNum) return
       const cartIds = data.join(',')
       this.$router.push({

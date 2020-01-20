@@ -428,7 +428,7 @@ export default {
     },
     // 姓
     focusEvents(){
-      console.log("aa")
+      // console.log("aa")
       this.isActivefisrt=true
     },
     // 名
@@ -560,7 +560,7 @@ export default {
           }, 0)   
         })
         .catch(err => {
-          console.log("请求",err)
+          // console.log("请求",err)
           _this.requesting = false
           _this.$errorMessage(err.message)
           return
@@ -625,7 +625,7 @@ export default {
 
         })
         .catch(err => {
-          console.log("请求",err)
+          // console.log("请求",err)
           _this.requesting = false
           _this.$errorMessage(err.message)
         })
@@ -678,7 +678,7 @@ export default {
           'usage': 'register'
         }
       }).then(res => {
-        console.log("邮箱验证码",res)
+        // console.log("邮箱验证码",res)
         if (res.code==200){
            _this.$successMessage(_this.$t(`${langcode}.hadSend`))
           // _this.code=res.data.code
@@ -718,7 +718,7 @@ export default {
           'usage': 'register'
         }
       }).then(res => {
-        console.log("手机验证码",res)
+        // console.log("手机验证码",res)
         if (res.code==200){
           _this.$successMessage(_this.$t(`${langcode}.hadSend`))
           // _this.code=res.data.code

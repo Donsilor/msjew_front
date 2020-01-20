@@ -77,7 +77,7 @@ export default {
       this.$axios
         .post('/web/member/member/up-pwd', data)
         .then(res => {
-          console.log("修改密码",res)
+          // console.log("修改密码",res)
           this.$message({
             message: this.$t(`${lang}.success`),
             type: 'success'
