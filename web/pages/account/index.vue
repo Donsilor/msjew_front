@@ -161,7 +161,7 @@ export default {
 <style scoped lang="less">
 .header-title {
   text-align: left;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 .header-title img {
   float: left;
