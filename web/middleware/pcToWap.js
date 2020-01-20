@@ -60,7 +60,7 @@ function queryParams (data) {
     if(!isWap(u)) {
       return
     }
-
+    // http://localhost:8328   https://wap.bddco.com
     let host = 'https://wap.bddco.com';
 
     const toWapUrl = path => {

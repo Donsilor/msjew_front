@@ -44,16 +44,16 @@
             <!--        登录后的用户菜单-->
             <div v-else class="item user">
               <el-dropdown type="primary"  placement="bottom">
-                <span v-if="userInfo.lastname==''||userInfo.firstname==''" class="row-flex align-item-center el-dropdown-link span">
+                <span v-if="userInfo.lastname==null||userInfo.firstname==null" class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ showMobile }}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
-                 <span v-else-if="language === 'zh_CN'&&userInfo.lastname!==''&&userInfo.firstname!==''" class="row-flex align-item-center el-dropdown-link span">
+                <!-- <span v-else-if="language === 'zh_CN'&&userInfo.lastname!==''&&userInfo.firstname!==''" class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ userInfo.realname }}
                   <i class="iconfont iconkuozhan"></i>
-                </span>
+                </span> -->
                 <span v-else  class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ userInfo.realname}}

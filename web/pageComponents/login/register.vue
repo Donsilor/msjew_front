@@ -4,23 +4,7 @@
     <div v-if="language === 'zh_CN'" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
         <div class="row-flex">
-          <div class="relative margin-right-20 margin-bottom-20">
-            <div class="register-input">
-              <input
-                v-model="firstname"
-                autocompleted="new-password" 
-                @focus="focusEvents"
-                @blur="blurEvents"
-                v-bind:class="{active:isActivefisrt}"
-                type="text"
-                :placeholder="$t(`${lang}.surname`)"
-              />
-            </div>
-            <!-- <div class="error-tip">
-              {{ $t(`${lang}.surnameTips`) }}
-            </div> -->
-          </div>
-          <div class="relative margin-bottom-20">
+          <div class="relative margin-bottom-20 margin-right-20" >
             <div class="register-input">
               <input
                 v-model="lastname"
@@ -29,13 +13,31 @@
                 @blur="blurEvent"
                 v-bind:class="{active:isActivelast}"
                 type="text"
-                :placeholder="$t(`${lang}.name`)"
+                :placeholder="$t(`${lang}.surname`)"
               />
             </div>
             <!-- <div class="error-tip">
               {{ $t(`${lang}.nameTips`) }}
             </div> -->
           </div>
+
+          <div class="relative  margin-bottom-20">
+            <div class="register-input">
+              <input
+                v-model="firstname"
+                autocompleted="new-password" 
+                @focus="focusEvents"
+                @blur="blurEvents"
+                v-bind:class="{active:isActivefisrt}"
+                type="text"
+                :placeholder="$t(`${lang}.name`)"
+              />
+            </div>
+            <!-- <div class="error-tip">
+              {{ $t(`${lang}.surnameTips`) }}
+            </div> -->
+          </div>
+          
           <!-- 姓名 -->
           <!-- <div class="relative margin-bottom-20">
             <div class="register-input">
@@ -171,7 +173,7 @@
                 @blur="blurEvents"
                 v-bind:class="{active:isActivefisrt}"
                 type="text"
-                :placeholder="$t(`${lang}.surname`)"
+                :placeholder="$t(`${lang}.name`)"
               />
             </div>
             <!-- <div class="error-tip">
@@ -187,7 +189,7 @@
                 @blur="blurEvent"
                 v-bind:class="{active:isActivelast}"
                 type="text"
-                :placeholder="$t(`${lang}.name`)"
+                :placeholder="$t(`${lang}.surname`)"
               />
             </div>
             <!-- <div class="error-tip">

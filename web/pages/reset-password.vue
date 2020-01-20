@@ -453,6 +453,19 @@ export default {
         }
       }, 1000)
     },
+    // countDown10() {
+    //   console.log(this.waitSecond)
+    //   const _this = this
+    //   const countDownStart = setInterval(function() {
+    //     if (_this.waitSecond === 0) {
+    //       clearInterval(countDownStart)
+    //       _this.setWait()
+    //       _this.waitSecond = 10
+    //     } else {
+    //       _this.waitSecond--
+    //     }
+    //   }, 1000)
+    // },
      // 设置为倒计时状态
     setWait() {
       if (this.waiting) {
@@ -590,10 +603,21 @@ export default {
             _this.ajaxLoading = false
             return
           }
-          _this.waitTimeout = setTimeout(() => {
-            clearTimeout(_this.waitTimeout)
-            _this.toLogin()
-          }, _this.waitSecond * 1000)
+          _this.waitTimeout=setInterval(() => {
+            _this.waitSecond--;
+            if(_this.waitSecond<=0){
+              clearInterval(_this.waitTimeout);
+              _this.toLogin()
+              _this.waitSecond=10
+            }
+          },1000);
+          // _this.waitTimeout = setTimeout(() => {
+          //   _this.waitSecond--
+          //   if(_this.waitSecond<=0){
+          //     clearTimeout(_this.waitTimeout)
+          //     _this.toLogin()
+          //   }
+          // },1000)
           break
         default:
           _this.ajaxLoading = false
@@ -666,10 +690,19 @@ export default {
               _this.ajaxLoading = false
               return
             }
-            _this.waitTimeout = setTimeout(() => {
-              clearTimeout(_this.waitTimeout)
-              _this.toLogin()
-            }, _this.waitSecond * 1000)
+            _this.waitTimeout=setInterval(() => {
+              _this.waitSecond--;
+              if(_this.waitSecond<=0){
+                clearInterval(_this.waitTimeout);
+                _this.toLogin()
+                _this.waitSecond=10
+              }
+            },1000);
+            // _this.waitTimeout = setTimeout(() => {
+            //   _this.waitSecond--
+            //   clearTimeout(_this.waitTimeout)
+            //   _this.toLogin()
+            // }, _this.waitSecond * 1000)
             break
           default:
             _this.ajaxLoading = false
@@ -803,6 +836,16 @@ export default {
             // _this.$errorMessage(err.message)
           })
       })
+    },
+    numCount(){
+      const _this = this
+      _this.waitTimeout = setTimeout(() => {
+        _this.waitSecond--
+        if(_this.waitSecond<=0){
+          clearTimeout(_this.waitTimeout)
+          _this.toLogin()
+        }
+      },1000)
     },
     toLogin() {
       const _this = this
