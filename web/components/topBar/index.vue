@@ -44,7 +44,7 @@
             <!--        登录后的用户菜单-->
             <div v-else class="item user">
               <el-dropdown type="primary"  placement="bottom">
-                <span v-if="userInfo.lastname==null||userInfo.firstname==null" class="row-flex align-item-center el-dropdown-link span">
+                <span v-if="userInfo.lastname==null||userInfo.lastname==''||userInfo.firstname==null||userInfo.firstname==''" class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
                   {{ showMobile }}
                   <i class="iconfont iconkuozhan"></i>
