@@ -703,7 +703,7 @@
     "account": {
       "account":"我的账号",
       "title": "我的账户资料",
-      "base": "基本讯息",
+      "base": "基本信息",
       "link": "第三方账号绑定",
       "address": "我的地址",
       "coupon": "我的优惠码",
