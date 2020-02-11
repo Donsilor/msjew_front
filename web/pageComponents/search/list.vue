@@ -174,14 +174,35 @@ export default {
         } else {
           item.itemType = 'product'
           item.goodsImages = _this.imageStrToArray(item.goodsImages)
-          item.to = {
-            // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
-            path: '/ring/wedding-rings/'+ item.id,
-            query: {
-              goodId: item.id,
-              ringType: 'single'
+          if(item.categoryId == 2){
+            item.to = {
+              // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+              path: '/ring/wedding-rings/'+ item.id,
+              query: {
+                goodId: item.id,
+                ringType: 'single'
+              }
+            }
+          }else if(item.categoryId == 12){
+            item.to = {
+              // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+              path: '/ring/engagement-rings/'+ item.id,
+              query: {
+                goodId: item.id,
+                ringType: 'engagement'
+              }
+            }
+
+          }else{
+            item.to = {
+              // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+              path: '/jewellery/necklace/'+ item.id,
+              query: {
+                goodId: item.id
+              }
             }
           }
+          
         }
       })
       return allData
