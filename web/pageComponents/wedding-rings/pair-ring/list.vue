@@ -226,7 +226,7 @@
 import List from '@/mixins/list.js'
 import ListPage from '@/mixins/list-page.js'
 import Operate from '@/mixins/operate.js'
-const defaultPriceRange = [200, 300000]
+const defaultPriceRange = [0, 300000]
 const lang = 'pairRingsList'
 export default {
   mixins: [List, ListPage, Operate],
