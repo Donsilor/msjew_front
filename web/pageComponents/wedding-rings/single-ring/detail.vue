@@ -379,7 +379,7 @@ export default {
       const queryStep = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.steps)
       )
-      queryStep.steps[1].goodsId = this.simpleDetail.id
+      queryStep.steps[1].goodsId = this.simpleDetail.goodsId
       queryStep.steps[1].goodsDetailsId = this.simpleDetail.id
       queryStep.steps[1].categoryId = this.simpleDetail.categoryId
       queryStep.steps[1].ct = 2
