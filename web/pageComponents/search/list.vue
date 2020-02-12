@@ -193,6 +193,16 @@ export default {
               }
             }
 
+          }else if(item.categoryId == -1){  //对戒
+            item.to = {
+              // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+              path: '/ring/wedding-rings/'+ item.id,
+              query: {
+                goodId: item.id,
+                ringType: 'pair'
+              }
+            }
+
           }else{
             item.to = {
               // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
