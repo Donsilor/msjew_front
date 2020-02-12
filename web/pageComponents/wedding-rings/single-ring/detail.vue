@@ -351,7 +351,7 @@ export default {
       const step = {
         steps: [
           {
-            goodsId: this.simpleDetail.id,
+            goodsId: this.simpleDetail.goodsId,
             goodsDetailsId: this.simpleDetail.id,
             categoryId: this.simpleDetail.categoryId,
             ct: 2,
