@@ -61,8 +61,16 @@ function queryParams (data) {
     if(isWap(u)) {
       return
     }
+    // https://www.bdd.bddia.com   https://www.bddco.com
+    
+    // 本地环境
+    // let host = 'http://localhost:8318';
 
+    // 正式环境
     let host = 'https://www.bddco.com';
+
+    // 测试环境
+    // let host = 'https://www.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {

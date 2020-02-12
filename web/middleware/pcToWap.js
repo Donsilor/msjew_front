@@ -60,8 +60,16 @@ function queryParams (data) {
     if(!isWap(u)) {
       return
     }
-    // http://localhost:8328   https://wap.bddco.com
+    // http://localhost:8328   https://wap.bddco.com   https://wap.bdd.bddia.com
+
+    // 本地环境
+    // let host = 'http://localhost:8328';
+
+    // 正式环境
     let host = 'https://wap.bddco.com';
+
+    // 测试环境
+    // let host = 'https://wap.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -73,7 +81,6 @@ function queryParams (data) {
         {
           'pcUrl':/^\/$/,
           'mobileUrl':`/`,
-          
         },
         // 订婚
         {

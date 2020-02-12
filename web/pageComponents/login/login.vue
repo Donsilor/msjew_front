@@ -7,7 +7,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input autocompleted="new-password" v-model="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" />
+          <input  v-model="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phone`) }}
@@ -18,7 +18,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input autocompleted="new-password" v-model="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" />
+          <input  v-model="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.pwd`) }}
@@ -32,7 +32,7 @@
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
-            <input v-model="code" autocompleted="new-password" @keyup="keyupEvent3" @keypress="keypressEvent3" type="text" v-bind:class="{active:isActive3}" :placeholder="$t(`${lang}.code`)" />
+            <input v-model="code"  @keyup="keyupEvent3" @keypress="keypressEvent3" type="text" v-bind:class="{active:isActive3}" :placeholder="$t(`${lang}.code`)" />
           </div>
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
@@ -62,7 +62,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input v-model="account" autocompleted="new-password" @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" />
+          <input v-model="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
@@ -73,7 +73,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input v-model="password" autocompleted="new-password" @keyup="keyupEvent2" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" />
+          <input v-model="password"  @keyup="keyupEvent2" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
@@ -87,7 +87,7 @@
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
-            <input v-model="code" autocompleted="new-password" @keyup="keyupEvent3" @keypress="keypressEvent3" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.code`)" @keydown.enter="login" />
+            <input v-model="code"  @keyup="keyupEvent3" @keypress="keypressEvent3" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.code`)" @keydown.enter="login" />
           </div>
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
@@ -356,6 +356,8 @@ export default {
   }
 }
 </script>
+
+
 
 <style lang="less" scoped>
 input::placeholder {

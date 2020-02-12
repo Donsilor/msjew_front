@@ -8,7 +8,7 @@
             <div class="register-input">
               <input
                 v-model="lastname"
-                autocompleted="new-password" 
+                
                 @focus="focusEvent"
                 @blur="blurEvent"
                 v-bind:class="{active:isActivelast}"
@@ -25,7 +25,7 @@
             <div class="register-input">
               <input
                 v-model="firstname"
-                autocompleted="new-password" 
+                 
                 @focus="focusEvents"
                 @blur="blurEvents"
                 v-bind:class="{active:isActivefisrt}"
@@ -77,7 +77,7 @@
             <div class="register-input margin-right-20">
               <input
                 v-model="code"
-                autocomplete="new-password"
+                readonly onfocus="this.removeAttribute('readonly');"
                 @focus="focusEvent3"
                 @blur="blurEvent3"
                 v-bind:class="{active:isActivecode}"
@@ -101,7 +101,7 @@
           <div class="register-input">
             <input
               v-model="password"
-              autocomplete="new-password" 
+              readonly onfocus="this.removeAttribute('readonly');"
               @focus="focusEvent4"
               @blur="blurEvent4"
               v-bind:class="{active:isActivepwd}"
@@ -123,7 +123,7 @@
           <div class="register-input">
             <input
               v-model=" password_repetition"
-              autocompleted="new-password" 
+              readonly onfocus="this.removeAttribute('readonly');" 
               v-bind:class="{active:isActiverepwd}"
               @focus="focusEvent5"
               @blur="blurEvent5"
@@ -168,7 +168,7 @@
             <div class="register-input">
               <input
                 v-model="firstname"
-                autocompleted="new-password" 
+                 
                 @focus="focusEvents"
                 @blur="blurEvents"
                 v-bind:class="{active:isActivefisrt}"
@@ -184,7 +184,7 @@
             <div class="register-input">
               <input
                 v-model="lastname"
-                autocompleted="new-password" 
+                 
                 @focus="focusEvent"
                 @blur="blurEvent"
                 v-bind:class="{active:isActivelast}"
@@ -201,7 +201,7 @@
           <div class="register-input">
             <input
               v-model="email"
-              autocompleted="new-password" 
+              
               @focus="focusEvent2"
               @blur="blurEvent2"
               type="text"
@@ -218,7 +218,7 @@
             <div class="register-input margin-right-20">
               <input
                 v-model="code"
-                autocomplete="new-password" 
+                 
                 @focus="focusEvent3"
                 @blur="blurEvent3"
                 v-bind:class="{active:isActivecode}"
@@ -241,7 +241,7 @@
           <div class="register-input">
             <input
               v-model="password"
-              autocomplete="new-password" 
+               
               @focus="focusEvent4"
               @blur="blurEvent4"
               v-bind:class="{active:isActivepwd}"
@@ -262,7 +262,7 @@
           <div class="register-input">
             <input
               v-model="password_repetition"
-              autocompleted="new-password" 
+               
               @focus="focusEvent5"
               @blur="blurEvent5"
               v-bind:class="{active:isActiverepwd}"

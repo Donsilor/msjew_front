@@ -102,6 +102,7 @@
                 <el-date-picker
                   v-model="info.book_date"
                   :clearable="false"
+                  :picker-options="pickerOptions"
                   style="width: 100%;"
                   type="date"
                   value-format="yyyy-MM-dd"
@@ -116,7 +117,7 @@
                 }}
               </div>
               <i class="iconfont iconxiala" />
-              <select v-model="info.book_time">
+              <select v-model="info.book_time" >
                 <option
                   v-for="(option, index) in bookTimeOptions"
                   :key="index"
@@ -204,6 +205,12 @@ export default {
   data() {
     return {
       lang,
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7;   //禁用以前的日期，今天不禁用
+          // return date.getTime() <= Date.now();    //禁用今天以及以前的日期
+        }
+      },
       ringTypes: [
         {
           type: 2,

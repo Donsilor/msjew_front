@@ -93,3 +93,8 @@
     }
   }
 </style>
+<style>
+.el-message{
+    top:250px!important;  
+}
+</style>
