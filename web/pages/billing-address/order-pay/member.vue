@@ -1577,15 +1577,15 @@ export default {
         .then(res => {
           this.address = res.data
           if(this.address.length != 0){
-            // for (const i in res) {
-            //   if (res[i].is_default === 1) {
-            //     this.address.unshift(res[i])
+            // for (const i in res.data) {
+            //   if (res.data[i].is_default === 1) {
+            //     this.address.unshift(res.data[i])
             //   } else {
-            //     this.address.push(res[i])
+            //     this.address.push(res.data[i])
             //   }
             // }
-            // console.log("地址",this.address)
             this.orderAddress = this.address[0]
+            console.log("地址",this.orderAddress)
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
@@ -1646,7 +1646,7 @@ export default {
         this.wrongInput.lastname = true
         return false
       }
-       if (!RegMobile.test(this.addressData.mobile)) {
+      if (!RegMobile.test(this.addressData.mobile)) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
         this.wrongInput.mobile = true
@@ -1738,18 +1738,18 @@ export default {
         this.wrongInput.lastname = true
         return false
       }
-      if (!RegMobile.test(this.addressData.mobile)) {
-        this.wrongMsg = this.$t(`${lang}.wip2`)
-        this.alertBox = true
-        this.wrongInput.mobile = true
-        return false
-      }
-      if (!RegTelephone.test(this.addressData.mobile)) {
-        this.wrongMsg = this.$t(`${lang}.wip2`)
-        this.alertBox = true
-        this.wrongInput.mobile = true
-        return false
-      }
+      // if (!RegMobile.test(this.addressData.mobile)) {
+      //   this.wrongMsg = this.$t(`${lang}.wip2`)
+      //   this.alertBox = true
+      //   this.wrongInput.mobile = true
+      //   return false
+      // }
+      // if (!RegTelephone.test(this.addressData.mobile)) {
+      //   this.wrongMsg = this.$t(`${lang}.wip2`)
+      //   this.alertBox = true
+      //   this.wrongInput.mobile = true
+      //   return false
+      // }
       // if (
       //   !RegMobile.test(this.addressData.mobile) &&
       //   !RegTelephone.test(this.addressData.mobile)
@@ -2209,14 +2209,16 @@ export default {
         })
     },
     createOrder() {
+      // console.log("4444",this.address)
       // console.log()
-      if (!this.canSubmit) {
-        return
-      }
-      if (this.orderAddress.id === '') {
+      // if (!this.canSubmit) {
+      //   return
+      // }
+      if (this.address.length == 0) {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
+        
       }
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
@@ -2256,19 +2258,20 @@ export default {
           })
         })
         .catch(err => {
-          // if (!err.response) {
+          if (!err.response) {
             this.$message.error(err.message)
-          // } else {
-          //   // console.log(err)
-          // }
+          } else {
+            // console.log(err)
+          }
         })
     },
     createOrder1() {
+      // console.log("tttttt",this.orderAddress)
       // console.log()
-      if (!this.canSubmit) {
-        return
-      }
-      if (this.orderAddress.id === '') {
+      // if (!this.canSubmit) {
+      //   return
+      // }
+      if (this.address.length == 0) {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false

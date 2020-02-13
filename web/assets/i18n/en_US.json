@@ -2285,7 +2285,7 @@
     "wip8": "Enter first name",
     "wip9": "Up to 20 characters for first name",
     "msg3": "Failed to create",
-    "msg4": "Incorrect delivery address",
+    "msg4": "Please add the shipping address first!",
     "msg5": "Your e-mail is incorrect. Please enter again!",
     "msg6": "Word count in note reaches limit",
     "msg7": "Error, error location: jump to payment when placing order",
