@@ -136,6 +136,7 @@ export default {
 
           const lastUrl = _this.$store.state.lastUrl
           _this.$store.commit('setLastUrl', '')
+          console.log("lasturl",lastUrl)
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({

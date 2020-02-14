@@ -204,7 +204,7 @@ function queryParams (data) {
       redirect(host)
       return 
     }
-    console.log("req.originalUrl",req.originalUrl)
+    console.log("req.originalUrl----",req.originalUrl)
     toWapUrl(req.originalUrl)
   }
 }

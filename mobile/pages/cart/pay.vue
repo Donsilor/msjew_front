@@ -155,7 +155,7 @@ export default {
       // }
       console.log("paytype",pay)
       this.$axios({
-        // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/
+        // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/ http://wap.bdd.bddia.com
         method: 'post',
         url: `/web/pay/create`,
         data: {
@@ -163,7 +163,7 @@ export default {
           coinType: this.info.coinType,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'https://wap2.bddco.com/cart/paySuccess?orderId='+this.info.orderId
+          returnUrl:'https://wap.bdd.bddia.com/cart/paySuccess?orderId='+this.info.orderId
         }
       })
         .then(res => {
