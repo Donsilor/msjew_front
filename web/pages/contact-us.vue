@@ -362,16 +362,16 @@ export default {
         return
       }
 
-      info.arrivalTime = Moment(info.book_date + ' ' + info.book_time).valueOf()
+      // info.arrivalTime = Moment(info.book_date + ' ' + info.book_time).valueOf()
 
-      const tomorrow = Moment()
-        .add(1, 'd')
-        .format('YYYY-MM-DD')
+      // const tomorrow = Moment()
+      //   .add(1, 'd')
+      //   .format('YYYY-MM-DD')
 
-      if (info.arrivalTime <= Moment(tomorrow).valueOf()) {
-        this.$errorMessage(this.$t(`${lang}.bookTimeError`))
-        return
-      }
+      // if (info.arrivalTime <= Moment(tomorrow).valueOf()) {
+      //   this.$errorMessage(this.$t(`${lang}.bookTimeError`))
+      //   return
+      // }
 
       _this
         .$axios({
