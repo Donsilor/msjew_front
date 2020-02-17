@@ -34,7 +34,7 @@
               </p>
             </div>
           </dd>
-          <dd class="item">
+          <!-- <dd class="item">
             <div class="dd-icon">
               <i class="iconfont icondizhi" />
             </div>
@@ -44,11 +44,11 @@
                 {{ $t(`${lang}.addressDetail`) }}
               </p>
             </div>
-          </dd>
+          </dd> -->
         </dl>
       </section>
-      <div class="title">{{ $t(`${lang}.book`) }}</div>
-      <section v-show="!isSuccessful" class="reservation">
+      <!-- <div class="title">{{ $t(`${lang}.book`) }}</div> -->
+      <!-- <section v-show="!isSuccessful" class="reservation">
         <div class="reservation-content">
           <div class="row-line">
             <div class="input">
@@ -102,6 +102,7 @@
                 <el-date-picker
                   v-model="info.book_date"
                   :clearable="false"
+                  :picker-options="pickerOptions"
                   style="width: 100%;"
                   type="date"
                   value-format="yyyy-MM-dd"
@@ -116,7 +117,7 @@
                 }}
               </div>
               <i class="iconfont iconxiala" />
-              <select v-model="info.book_time">
+              <select v-model="info.book_time" >
                 <option
                   v-for="(option, index) in bookTimeOptions"
                   :key="index"
@@ -151,7 +152,7 @@
             </button>
           </div>
         </div>
-      </section>
+      </section> -->
       <section v-show="isSuccessful" class="submit-successful">
         <div class="successful-content">
           <div class="status-icon">
@@ -204,6 +205,12 @@ export default {
   data() {
     return {
       lang,
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() < Date.now() - 8.64e7;   //禁用以前的日期，今天不禁用
+          // return date.getTime() <= Date.now();    //禁用今天以及以前的日期
+        }
+      },
       ringTypes: [
         {
           type: 2,
@@ -355,16 +362,16 @@ export default {
         return
       }
 
-      info.arrivalTime = Moment(info.book_date + ' ' + info.book_time).valueOf()
+      // info.arrivalTime = Moment(info.book_date + ' ' + info.book_time).valueOf()
 
-      const tomorrow = Moment()
-        .add(1, 'd')
-        .format('YYYY-MM-DD')
+      // const tomorrow = Moment()
+      //   .add(1, 'd')
+      //   .format('YYYY-MM-DD')
 
-      if (info.arrivalTime <= Moment(tomorrow).valueOf()) {
-        this.$errorMessage(this.$t(`${lang}.bookTimeError`))
-        return
-      }
+      // if (info.arrivalTime <= Moment(tomorrow).valueOf()) {
+      //   this.$errorMessage(this.$t(`${lang}.bookTimeError`))
+      //   return
+      // }
 
       _this
         .$axios({
@@ -420,7 +427,8 @@ export default {
       flex-shrink: 1;
       min-width: 0;
       position: relative;
-      padding: 25px 16px 25px 24px;
+      // padding: 25px 16px 25px 24px;
+      padding: 60px 16px 60px 24px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;

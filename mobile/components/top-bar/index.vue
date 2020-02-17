@@ -13,7 +13,8 @@
     </div>
     <div class="right">
       <div class="icon" @click="toPersonal">
-        <i class="iconfont icongerenzhongxin"></i>
+        <i class="iconfont icongerenzhongxin" v-show="showa"></i>
+        <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
       </div>
       <div class="icon" @click="toCart">
         <i class="iconfont icongouwuche"></i>
@@ -39,6 +40,12 @@ export default {
       default: false
     }
   },
+  data(){
+    return{
+      showa:true,
+      showb:false
+    }
+  },
   computed: {
     ...mapGetters(['cartAmount'])
   },
@@ -47,6 +54,12 @@ export default {
     _this.$nextTick(() => {
       _this.getCartAmount()
     })
+    if(_this.$store.getters.hadLogin){
+      this.showa=false
+      this.showb=true
+      // this.isActive=true
+      // this.show=true
+    }
   },
   methods: {
     ...mapActions(['getCartAmount']),
@@ -79,8 +92,16 @@ export default {
   }
 }
 </script>
+<style >
+.coloricon .icongerenzhongxin:before{
+  color:#f29b87;
+}
+</style>
+<style scoped> 
+/* .active{
+  color:#f29b87;
+} */
 
-<style scoped>
 .top-bar {
   position: relative;
   width: 100%;

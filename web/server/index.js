@@ -10,9 +10,15 @@ config.dev = process.env.NODE_ENV !== 'production'
 async function start() {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
-
+  
   const { host, port } = nuxt.options.server
-
+  // let path
+  // if (config.dev) {
+  //   path = 'https://www.bdd.bddia.com'
+  // } else {
+  //   path = 'https://www.bddco.com'
+  // }
+  // export default path
   // Build only in dev mode
   if (config.dev) {
     const builder = new Builder(nuxt)

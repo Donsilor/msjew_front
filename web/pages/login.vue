@@ -88,7 +88,9 @@ export default {
 
   .bg {
     width: 100%;
+    // height: 550px;  necklace  bg
     height: 100%;
+    min-height: 90vh;
     background-image: url('/login/necklace.png'), url('/login/bg.png');
     background-repeat: no-repeat, no-repeat;
     background-size: cover, cover;

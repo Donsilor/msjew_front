@@ -61,8 +61,16 @@ function queryParams (data) {
     if(isWap(u)) {
       return
     }
+    // https://www.bdd.bddia.com   https://www.bddco.com
+    
+    // 本地环境
+    // let host = 'http://localhost:8318';
 
-    let host = 'https://www.bddco.com';
+    // 正式环境
+    // let host = 'https://www.bddco.com';
+
+    // 测试环境
+    let host = 'https://www.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -71,9 +79,20 @@ function queryParams (data) {
 
       let href =  path.split('?')
       let rules = [
+        // 首页
         {
           'mobileUrl':/^\/$/,
           'pcUrl':`/`,
+        },
+        // 登录
+        {
+          'mobileUrl':/\/login/,
+          'pcUrl':`/login`
+        },
+        // 注册  /login?type=register  /login/email
+        {
+          'mobileUrl':/\/login\/email/,
+          'pcUrl':`/login?type=register`
         },
         // 订婚  engagement   engagement-rings
         {

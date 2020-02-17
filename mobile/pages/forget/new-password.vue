@@ -186,7 +186,7 @@ export default {
         this.$toast(this.lang['password-not-same'])
         return
       }
-      if(this.language==='zh_CN'){
+      if(this.loginType == 2){
         this.emitEventCN()
       }else{
         this.emitEvent()

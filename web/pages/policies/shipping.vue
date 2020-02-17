@@ -125,7 +125,7 @@ export default {
         font-size: 16px;
         div {
           float: left;
-          width: 25%;
+          width: 24%;
           text-align: left;
           padding-left: 10px;
         }
