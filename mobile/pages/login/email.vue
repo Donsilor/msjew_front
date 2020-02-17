@@ -245,7 +245,7 @@ export default {
           _this.$toast.show(_this.lang['login-success'])
 
           const lastUrl = _this.$store.state.lastUrl
-          //_this.$store.commit('setLastUrl', '')
+          _this.$store.commit('setLastUrl', '')
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({
@@ -302,7 +302,7 @@ export default {
           _this.$toast.show(_this.lang['login-success'])
           _this.$store.commit('setUserInfo', res.member);
           const lastUrl = _this.$store.state.lastUrl
-          //_this.$store.commit('setLastUrl', '')
+          _this.$store.commit('setLastUrl', '')
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({

@@ -34,7 +34,7 @@
               </p>
             </div>
           </dd>
-          <dd class="item">
+          <!-- <dd class="item">
             <div class="dd-icon">
               <i class="iconfont icondizhi" />
             </div>
@@ -44,11 +44,11 @@
                 {{ $t(`${lang}.addressDetail`) }}
               </p>
             </div>
-          </dd>
+          </dd> -->
         </dl>
       </section>
-      <div class="title">{{ $t(`${lang}.book`) }}</div>
-      <section v-show="!isSuccessful" class="reservation">
+      <!-- <div class="title">{{ $t(`${lang}.book`) }}</div> -->
+      <!-- <section v-show="!isSuccessful" class="reservation">
         <div class="reservation-content">
           <div class="row-line">
             <div class="input">
@@ -152,7 +152,7 @@
             </button>
           </div>
         </div>
-      </section>
+      </section> -->
       <section v-show="isSuccessful" class="submit-successful">
         <div class="successful-content">
           <div class="status-icon">
@@ -427,7 +427,8 @@ export default {
       flex-shrink: 1;
       min-width: 0;
       position: relative;
-      padding: 25px 16px 25px 24px;
+      // padding: 25px 16px 25px 24px;
+      padding: 60px 16px 60px 24px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;

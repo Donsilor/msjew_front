@@ -66,10 +66,10 @@ function queryParams (data) {
     // let host = 'http://localhost:8328';
 
     // 正式环境
-    let host = 'https://wap.bddco.com';
+    // let host = 'https://wap.bddco.com';
 
     // 测试环境
-    // let host = 'https://wap.bdd.bddia.com';
+    let host = 'https://wap.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -78,9 +78,20 @@ function queryParams (data) {
 
       let href =  path.split('?')
       let rules = [
+        // 首页
         {
           'pcUrl':/^\/$/,
           'mobileUrl':`/`,
+        },
+        // 登录
+        {
+          'pcUrl':/\/login/,
+          'mobileUrl':`/login`
+        },
+         // 注册  /login?type=register  /login/email
+         {
+          'pcUrl':/\/login?type=register/,
+          'mobileUrl':`/login/email`
         },
         // 订婚
         {

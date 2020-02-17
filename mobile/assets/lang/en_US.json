@@ -149,7 +149,7 @@
       "orderAmount": "Total",
       "cuponName": "Select Coupons",
       "toast1": "No coupons available",
-      "toast2": "Incorrect delivery address",
+      "toast2": "Please check the default address",
       "toast3": "Incorrect e-mail for receiving after-sales voucher, please input again!",
       "delete": "Delete",
       "inputCode": "Input Coupon Code",
