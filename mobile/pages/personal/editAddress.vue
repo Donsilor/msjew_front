@@ -682,11 +682,11 @@ export default {
         this.phoneTrue = true
         return
       }
-      if ((val === 4 || val === 0) && !RegTelephone.test(this.phone)) {
-        this.phoneText = this.lang.phoneText2
-        this.phoneTrue = true
-        return
-      }
+      // if ((val === 4 || val === 0) && !RegTelephone.test(this.phone)) {
+      //   this.phoneText = this.lang.phoneText2
+      //   this.phoneTrue = true
+      //   return
+      // }
       if ((val === 5 || val === 0) && this.details === '') {
         this.detailsText = this.lang.detailsText
         this.detailsTrue = true
