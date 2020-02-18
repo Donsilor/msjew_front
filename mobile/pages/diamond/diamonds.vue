@@ -67,7 +67,8 @@ export default {
           const o = {
             id: infos.materials[i].id,
             name: infos.materials[i].name,
-            image: app.$IMG_URL + infos.materials[i].configAttrImg
+            // image: app.$IMG_URL + infos.materials[i].configAttrImg
+            image: infos.materials[i].image
           }
           mcArr.push(o)
         }

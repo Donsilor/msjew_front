@@ -25,7 +25,8 @@ export default {
         method: 'post',
         url: '/web/goods/style/detail',
         data: {
-          goodsId: route.query.goodId || ''
+          goodsId: route.query.goodId || '',
+          backend: route.query.backend || ''
         },
         transformRequest: [
           function(data) {

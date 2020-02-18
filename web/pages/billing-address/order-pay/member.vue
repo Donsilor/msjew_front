@@ -1633,17 +1633,17 @@ export default {
       this.getTex()
     },
     createAddress() {
-      // console.log('create')
+      // console.log('create')  /[^\d]/g,''
+       if (this.addressData.lastname === '') {
+        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.alertBox = true
+        this.wrongInput.lastname = true
+        return false
+      }
       if (this.addressData.firstname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.firstname = true
-        return false
-      }
-      if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
-        this.alertBox = true
-        this.wrongInput.lastname = true
         return false
       }
       if (!RegMobile.test(this.addressData.mobile)) {
@@ -1736,6 +1736,12 @@ export default {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
+        return false
+      }
+      if (!RegMobile.test(this.addressData.mobile)) {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
         return false
       }
       // if (!RegMobile.test(this.addressData.mobile)) {

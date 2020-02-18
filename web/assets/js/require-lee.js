@@ -7,6 +7,8 @@ export const RegPassword = new RegExp(
 
 const _mobil = /^1+[0-9]{10}$/
 
+// export const mobile =/^[0-9]*$/ 
+
 // const _pw = /(?!^(\d+|[a-zA-Z]+|[~!@#$%^&-_*?]+)$)^[\w~!@#$%\^&-_*?]{7,20}$/
 const _pw = /(^[0-9]{6,20}$)|(^[a-zA-Z]{6,20}$)|(^[0-9a-zA-Z]{6,20}$)/
 export const Reg = { _mobil, _pw }
@@ -24,7 +26,8 @@ export const RegNumOrDecimal2 = /(^[1-9]{1}\d*$)|(^0.\d{1,2}$)|(^[1-9]\d*.\d{1,2
 export const RegAlphaNum = /(^[0-9]+$)|(^[a-zA-Z]+$)|(^[0-9a-zA-Z]+$)/
 
 // 手机号码
-export const RegMobile = /^1[\d]{10}$/
+export const RegMobile = /^[0-9]*$/ 
+// export const RegMobile = /^1[\d]{10}$/
 
 // 固话号码
 export const RegTelephone = /^[0-9]{1,20}$/

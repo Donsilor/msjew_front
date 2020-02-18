@@ -25,7 +25,8 @@ export default {
         method: 'post',
         url: '/web/goods/diamond/detail',
         data: {
-           goodsId: route.query.goodId || ''
+           goodsId: route.query.goodId || '',
+           backend: route.query.backend || ''
         },
         // params: {
         //   goodsId: route.query.goodId || ''
