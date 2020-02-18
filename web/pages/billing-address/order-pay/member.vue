@@ -1633,7 +1633,7 @@ export default {
       this.getTex()
     },
     createAddress() {
-      // console.log('create')
+      // console.log('create')  /[^\d]/g,''
       if (this.addressData.firstname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
