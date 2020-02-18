@@ -735,13 +735,14 @@ export default {
         this.$message.error(this.$t(`${lang}.wip7`))
         return
       }
-      if (this.using.mobile === '') {
-        this.$message.error(this.$t(`${lang}.wip8`))
-        return
-      }
+      // if (this.using.mobile === '') {
+      //   this.$message.error(this.$t(`${lang}.wip8`))
+      //   return
+      // }
       if (
-        !RegMobile.test(this.using.mobile) &&
-        !RegTelephone.test(this.using.mobile)
+        !RegMobile.test(this.using.mobile) 
+        // &&
+        // !RegTelephone.test(this.using.mobile)
       ) {
         this.$message.error(this.$t(`${lang}.wip9`))
         return
