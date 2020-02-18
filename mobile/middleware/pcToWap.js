@@ -67,10 +67,10 @@ function queryParams (data) {
     // let host = 'http://localhost:8318';
 
     // 正式环境
-    let host = 'https://www.bddco.com';
+    // let host = 'https://www.bddco.com';
 
     // 测试环境
-    // let host = 'https://www.bdd.bddia.com';
+    let host = 'https://www.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
