@@ -53,6 +53,8 @@ function queryParams (data) {
   return _result.length ? _result.join('&') + '&' : ''
 }
 
+  console.log(4444);
+
   if (process.server) {
   
     let u = req.headers['user-agent']
@@ -63,11 +65,11 @@ function queryParams (data) {
     // http://localhost:8328   https://wap.bddco.com   https://wap.bdd.bddia.com
 
     // 本地环境
-    // let host = 'http://localhost:8328';
+     let host = 'http://127.0.0.1:8328';
 
     // 正式环境
     //let host = 'https://wap.bddco.com';
-    let host = 'http://wap.bdd.bddia.com';
+    //let host = 'http://wap.bdd.bddia.com';
 	
 	
 
@@ -98,13 +100,13 @@ function queryParams (data) {
         },
         // 订婚
         {
-          'pcUrl':/^\/engagement-rings$/,
+          'pcUrl':/^\/engagement-rings\/$/,
           'mobileUrl':`/engagement`,
         }, 
         // 订婚列表
 
         {
-          'pcUrl':/^\/engagement-rings\/solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold$/,
+          'pcUrl':/^\/engagement-rings\/(solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)$/,
           'mobileUrl':`/engagement/list`,
         }, 
         // 订婚详情
@@ -118,24 +120,24 @@ function queryParams (data) {
         }, 
         // 结婚   ring/wedding-rings
         {
-          'pcUrl':/^\/wedding-rings$/,
+          'pcUrl':/^\/wedding-rings\/$/,
           'mobileUrl':`/marriage-ring`
         },
 		
 		 // 结婚列表
 
         {
-          'pcUrl':/^\/wedding-rings\/womens-classic|womens-eternity|womens-anniversary|womens-diamond|womens-stackable|mens-classic|mens-carved|mens-diamond|mens-alternative-metals|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold$/,
+          'pcUrl':/^\/wedding-rings\/(womens-classic|womens-eternity|womens-anniversary|womens-diamond|womens-stackable|mens-classic|mens-carved|mens-diamond|mens-alternative-metals|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)$/,
           'mobileUrl':`/marriage-ring/single-ring`,
         }, 
 		
         // 结婚 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings\/\d?goodId=\d\&ringType=single$/,
+          'pcUrl':/^\/ring\/wedding-rings\/\d/,
           'mobileUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',
-            'ringType':'ringType',
+            'ringType':'single',
           },
         },
 		
@@ -147,10 +149,11 @@ function queryParams (data) {
 		
 		// 对戒 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings\/\d?goodId=\d\&ringType=pair$/,
+          'pcUrl':/^\/ring\/wedding-rings\/\d/,
           'mobileUrl':`/marriage-ring/pair-ring-detail`,
           'params':{
             'goodId':'goodId',
+			'ringType':'pair',
           },
         },
 		
@@ -214,7 +217,7 @@ function queryParams (data) {
 		
 		 // 珠宝首饰   /jewellery/all
         {
-          'pcUrl':/^\/jewellery\/all|necklaces|pendants|ear-stud|earrings|bracelets|bangles$/,
+          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles)$/,
           'mobileUrl':`/accessories/list`
 		  
         },
@@ -222,7 +225,7 @@ function queryParams (data) {
 		
 		// 珠宝首饰详情   /jewellery/all
         {
-          'pcUrl':/^\/jewellery\/all|necklaces|pendants|ear-stud|earrings|bracelets|bangles\/\d/,
+          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles)\/\d/,
           'mobileUrl':`/accessories/accessories`,
 		  'params':{
             'goodId':'goodId',
@@ -230,7 +233,7 @@ function queryParams (data) {
         },
         // 知识
         {
-          'pcUrl':/^\/education\/diamonds\/carat|cut|color|clarity|shape|certification|maintenance$/,
+          'pcUrl':/^\/education\/diamonds\/(carat|cut|color|clarity|shape|certification|maintenance)$/,
           'mobileUrl':`/help-pages/knowledge`
         },
         
@@ -263,7 +266,9 @@ function queryParams (data) {
               Object.keys(params).forEach(function(key) {
                 if(typeof query1[key] !== 'undefined') {
                   query2[params[key]] = query1[key]
-                }
+                }else{
+				  query2[key] = params[key]
+				}
               });
               // param = queryParams(query2)
               href[1] = queryParams(query2)
