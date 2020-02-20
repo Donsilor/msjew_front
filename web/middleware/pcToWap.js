@@ -130,7 +130,7 @@ function queryParams (data) {
 		
         // 结婚|对戒 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings\/\d\?/,
+          'pcUrl':/^\/ring\/wedding-rings\/\d/,
           'mobileUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',

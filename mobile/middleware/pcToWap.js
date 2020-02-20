@@ -100,6 +100,10 @@ function queryParams (data) {
           'mobileUrl':/^\/engagement\/list\/?$/,
           'pcUrl':`/engagement-rings/list`,
         }, 
+		{
+          'mobileUrl':/^\/engagement\/?$/,
+          'pcUrl':`/engagement-rings`,
+        }, 
         // 订婚详情
         {
           'mobileUrl':/^\/engagement\/engagement-rings/,
@@ -152,7 +156,7 @@ function queryParams (data) {
 		// 裸钻
         {
           'mobileUrl':/^\/diamonds\/list\/?$/,
-          'pcUrl':`/diamond/list`
+          'pcUrl':`/diamonds/list`
         },
 		
 		// 裸钻详情
