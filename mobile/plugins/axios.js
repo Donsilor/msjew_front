@@ -4,7 +4,7 @@ export default function ({
 }) {
     $axios.onRequest(config => {
         config.headers['x-api-key'] = store.state.token || ''
-        config.headers['x-api-currency'] = store.state.coin || ''
+        config.headers['x-api-currency'] = store.state.coin || 'CNY'
         config.headers['x-api-language'] = store.state.language || ''
         config.headers['x-api-platform'] = 'wap'
         // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
