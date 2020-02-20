@@ -128,13 +128,13 @@ function queryParams (data) {
           'mobileUrl':`/marriage-ring/single-ring`,
         }, 
 		
-        // 结婚 详情
+        // 结婚|对戒 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings\/\d/,
+          'pcUrl':/^\/ring\/wedding-rings\/\d\?/,
           'mobileUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',
-            'ringType':'single',
+            'ringType':'ringType',
           },
         },
 		
@@ -145,14 +145,14 @@ function queryParams (data) {
         },
 		
 		// 对戒 详情
-        {
-          'pcUrl':/^\/ring\/wedding-rings\/\d\?goodId\=6\&ringType\=pair$/,
+        /*{
+          'pcUrl':/^\/ring\/wedding-rings\/\d\?goodId\=6\&ringType/,
           'mobileUrl':`/marriage-ring/pair-ring-detail`,
           'params':{
             'goodId':'goodId',
-			'ringType':'pair',
+			'ringType':'ringType',
           },
-        },
+        },*/
 		
 		
 		// 裸钻
@@ -222,7 +222,7 @@ function queryParams (data) {
 		
 		// 珠宝首饰详情   /jewellery/all
         {
-          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles)\/\d/,
+          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles|studEarring)\/\d/,
           'mobileUrl':`/accessories/accessories`,
 		  'params':{
             'goodId':'goodId',
