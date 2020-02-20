@@ -103,7 +103,7 @@ function queryParams (data) {
         // 订婚列表
 
         {
-          'pcUrl':/^\/engagement-rings\/(solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)/?$/,
+          'pcUrl':/^\/engagement-rings\/(solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)\/?$/,
           'mobileUrl':`/engagement/list`,
         }, 
         // 订婚详情
@@ -124,7 +124,7 @@ function queryParams (data) {
 		 // 结婚列表
 
         {
-          'pcUrl':/^\/wedding-rings\/(womens-classic|womens-eternity|womens-anniversary|womens-diamond|womens-stackable|mens-classic|mens-carved|mens-diamond|mens-alternative-metals|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)/?$/,
+          'pcUrl':/^\/wedding-rings\/(womens-classic|womens-eternity|womens-anniversary|womens-diamond|womens-stackable|mens-classic|mens-carved|mens-diamond|mens-alternative-metals|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)\/?$/,
           'mobileUrl':`/marriage-ring/single-ring`,
         }, 
 		
@@ -140,7 +140,7 @@ function queryParams (data) {
 		
 		// 对戒列表
         {
-          'pcUrl':/^\/wedding-rings\/(classic-series|channel-set-series)/?/,
+          'pcUrl':/^\/wedding-rings\/(classic-series|channel-set-series)\/?/,
           'mobileUrl':`/marriage-ring/pair-ring`
         },
 		
@@ -174,7 +174,7 @@ function queryParams (data) {
 		
         // 选择戒托  build-your-own-ring/settings
         {
-          'pcUrl':/^\/build-your-own-ring\/settings/?$/,
+          'pcUrl':/^\/build-your-own-ring\/settings\/?$/,
           'mobileUrl':`/custom-made/ring-made/ring-list`,
           'params':{
             'step':'step',
@@ -192,7 +192,7 @@ function queryParams (data) {
 
         // 选择钻石 build-your-own-ring/diamonds
         {
-          'pcUrl':/^\/build-your-own-ring\/diamonds/?$/,
+          'pcUrl':/^\/build-your-own-ring\/diamonds\/?$/,
           'mobileUrl':`/custom-made/diamond-made/diamond-list`,
           'params':{
             'step':'step',
@@ -214,7 +214,7 @@ function queryParams (data) {
 		
 		 // 珠宝首饰   /jewellery/all
         {
-          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles)/?$/,
+          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles)\/?$/,
           'mobileUrl':`/accessories/list`
 		  
         },
@@ -230,7 +230,7 @@ function queryParams (data) {
         },
         // 知识
         {
-          'pcUrl':/^\/education\/diamonds\/(carat|cut|color|clarity|shape|certification|maintenance)/?$/,
+          'pcUrl':/^\/education\/diamonds\/(carat|cut|color|clarity|shape|certification|maintenance)\/?$/,
           'mobileUrl':`/help-pages/knowledge`
         },
         
