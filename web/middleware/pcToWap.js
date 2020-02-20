@@ -95,12 +95,12 @@ function queryParams (data) {
         },
          // 注册  /login?type=register  /login/email
          {
-          'pcUrl':/\/login?type=register/,
+          'pcUrl':/\/login\?type=register/,
           'mobileUrl':`/login/email`
         },
         // 订婚
         {
-          'pcUrl':/^\/engagement-rings\/$/,
+          'pcUrl':/^\/engagement-rings\/?$/,
           'mobileUrl':`/engagement`,
         }, 
         // 订婚列表
@@ -120,7 +120,7 @@ function queryParams (data) {
         }, 
         // 结婚   ring/wedding-rings
         {
-          'pcUrl':/^\/wedding-rings\/$/,
+          'pcUrl':/^\/wedding-rings\/?$/,
           'mobileUrl':`/marriage-ring`
         },
 		
@@ -143,7 +143,7 @@ function queryParams (data) {
 		
 		// 对戒列表
         {
-          'pcUrl':/^\/wedding-rings\/classic-series|channel-set-series/,
+          'pcUrl':/^\/wedding-rings\/(classic-series|channel-set-series)/,
           'mobileUrl':`/marriage-ring/pair-ring`
         },
 		
