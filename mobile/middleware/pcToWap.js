@@ -65,14 +65,14 @@ function queryParams (data) {
     
     // 本地环境
     //let host = 'http://127.0.0.1:8318';
-	console.log('RUNNING_ENV',redirect);
+	// console.log('RUNNING_ENV',redirect);
 
-	let host = 'http://www.bdd.bddia.com';
+	// let host = 'http://www.bdd.bddia.com';
     // 正式环境
     // let host = 'https://www.bddco.com';
 
     // 测试环境
-    // let host = 'https://www.bdd.bddia.com';
+     let host = 'https://www.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -130,7 +130,7 @@ function queryParams (data) {
           'pcUrl':`/ring/engagement-rings`,
           'params':{
             'goodId':'goodId',
-            'ringType':'ringType',
+            'ringType':'single',
           },
         },
 		
@@ -146,7 +146,7 @@ function queryParams (data) {
           'pcUrl':`/ring/wedding-rings`,
           'params':{
             'goodId':'goodId',
-			      'ringType':'ringType',
+			'ringType':'pair',
           },
         },
 		
@@ -258,8 +258,10 @@ function queryParams (data) {
               Object.keys(params).forEach(function(key) {
                 if(typeof query1[key] !== 'undefined') {
                   query2[params[key]] = query1[key]
-                  url = url.replace('{'+key+'}',query1[key])
-                }
+                  //url = url.replace('{'+key+'}',query1[key])
+                }else{
+				  query2[key] = params[key]
+				}
               })
               // param = queryParams(query2)
               href[1] = queryParams(query2)

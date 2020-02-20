@@ -65,7 +65,7 @@ function queryParams (data) {
     // http://localhost:8328   https://wap.bddco.com   https://wap.bdd.bddia.com
 
     // 本地环境
-     let host = 'http://127.0.0.1:8328';
+     //let host = 'http://127.0.0.1:8328';
 
     // 正式环境
     //let host = 'https://wap.bddco.com';
@@ -74,7 +74,7 @@ function queryParams (data) {
 	
 
     // 测试环境
-    // let host = 'https://wap.bdd.bddia.com';
+     let host = 'https://wap.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -149,7 +149,7 @@ function queryParams (data) {
 		
 		// 对戒 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings\/\d/,
+          'pcUrl':/^\/ring\/wedding-rings\/\d\?goodId\=6\&ringType\=pair$/,
           'mobileUrl':`/marriage-ring/pair-ring-detail`,
           'params':{
             'goodId':'goodId',
