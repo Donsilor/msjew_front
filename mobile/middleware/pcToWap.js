@@ -81,7 +81,7 @@ function queryParams (data) {
       let rules = [
         // 首页
         {
-          'mobileUrl':/^\/$/,
+          'mobileUrl':/^\/?$/,
           'pcUrl':`/`,
         },
         // 登录
