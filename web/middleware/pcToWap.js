@@ -130,7 +130,7 @@ function queryParams (data) {
 		
         // 结婚 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings(.*?)goodId\=[0-9]+\&ringType\=single/,
+          'pcUrl':/^\/ring\/wedding-rings(.*)single$/,ring/wedding-rings?goodId=117&ringType=single
           'mobileUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',
@@ -146,7 +146,7 @@ function queryParams (data) {
 		
 		// 对戒 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings(.*?)goodId\=6&ringType\=pair/,
+          'pcUrl':/^\/ring\/wedding-rings(.*)goodId\=6\&ringType\=pair/,
           'mobileUrl':`/marriage-ring/pair-ring-detail`,
           'params':{
             'goodId':'goodId',
