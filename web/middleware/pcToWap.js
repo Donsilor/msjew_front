@@ -53,6 +53,8 @@ function queryParams (data) {
   return _result.length ? _result.join('&') + '&' : ''
 }
 
+  console.log(4444);
+
   if (process.server) {
   
     let u = req.headers['user-agent']
@@ -62,14 +64,14 @@ function queryParams (data) {
     }
     // http://localhost:8328   https://wap.bddco.com   https://wap.bdd.bddia.com
 
-    // 本地环境
-    // let host = 'http://localhost:8328';
-
-    // 正式环境
-    let host = 'https://wap.bddco.com';
-
-    // 测试环境
-    // let host = 'https://wap.bdd.bddia.com';
+    //头部host
+	let headerHost = req.headers['host']
+    //生产环境
+	let host = 'https://wap.bddco.com';
+    if(!(/bddco\.com/).test(headerHost)) {
+		//测试环境
+		host = 'http://wap.bdd.bddia.com';
+	}
 
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -90,13 +92,19 @@ function queryParams (data) {
         },
          // 注册  /login?type=register  /login/email
          {
-          'pcUrl':/\/login?type=register/,
+          'pcUrl':/\/login\?type=register/,
           'mobileUrl':`/login/email`
         },
         // 订婚
         {
-          'pcUrl':/^\/engagement-rings$/,
+          'pcUrl':/^\/engagement-rings\/?$/,
           'mobileUrl':`/engagement`,
+        }, 
+        // 订婚列表
+
+        {
+          'pcUrl':/^\/engagement-rings\/(solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)$/,
+          'mobileUrl':`/engagement/list`,
         }, 
         // 订婚详情
         {
@@ -109,72 +117,130 @@ function queryParams (data) {
         }, 
         // 结婚   ring/wedding-rings
         {
-          'pcUrl':/^\/wedding-rings$/,
+          'pcUrl':/^\/wedding-rings\/?$/,
           'mobileUrl':`/marriage-ring`
         },
+		
+		 // 结婚列表
+
+        {
+          'pcUrl':/^\/wedding-rings\/(womens-classic|womens-eternity|womens-anniversary|womens-diamond|womens-stackable|mens-classic|mens-carved|mens-diamond|mens-alternative-metals|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+        }, 
+		
         // 结婚 详情
         {
-          'pcUrl':/\/ring\/wedding-rings/,
+          'pcUrl':/^\/ring\/wedding-rings\/\d/,
           'mobileUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',
-            'ringType':'ringType',
+            'ringType':'single',
           },
         },
-        // 裸钻
+		
+		// 对戒列表
         {
-          'pcUrl':/\/diamonds/,
+          'pcUrl':/^\/wedding-rings\/(classic-series|channel-set-series)/,
+          'mobileUrl':`/marriage-ring/pair-ring`
+        },
+		
+		// 对戒 详情
+        {
+          'pcUrl':/^\/ring\/wedding-rings\/\d\?goodId\=6\&ringType\=pair$/,
+          'mobileUrl':`/marriage-ring/pair-ring-detail`,
+          'params':{
+            'goodId':'goodId',
+			'ringType':'pair',
+          },
+        },
+		
+		
+		// 裸钻
+        {
+          'pcUrl':/^\/diamonds/,
           'mobileUrl':`/diamond/list`
         },
+		
+		// 裸钻详情
+        {
+          'pcUrl':/^\/diamond-details/,
+          'mobileUrl':`/diamond/diamonds`,
+          'params':{
+            'goodId':'goodId'
+          
+          },
+        },
+		
+		
         // 选择戒托  build-your-own-ring/settings
         {
-          'pcUrl':/\/build-your-own-ring\/settings$/,
-          'mobileUrl':`/custom-made/ring-made/ring-list`
+          'pcUrl':/^\/build-your-own-ring\/settings$/,
+          'mobileUrl':`/custom-made/ring-made/ring-list`,
+          'params':{
+            'step':'step',
+          },
         },
-        // 戒托详情
+        // 选择戒托戒托详情
         {
-          'pcUrl':/\/build-your-own-ring\/setting-details/,
+          'pcUrl':/^\/build-your-own-ring\/setting-details/,
           'mobileUrl':`/custom-made/ring-made/ring-detail`,
           'params':{
             'goodId':'goodId',
             'ringType':'ringType',
           },
         },
+
         // 选择钻石 build-your-own-ring/diamonds
         {
-          'pcUrl':/\/build-your-own-ring\/diamonds$/,
-          'mobileUrl':`/diamond/list`
+          'pcUrl':/^\/build-your-own-ring\/diamonds$/,
+          'mobileUrl':`/custom-made/diamond-made/diamond-list`,
+          'params':{
+            'step':'step',
+          },
         },
-        // 主石戒 build-your-own-ring/diamonds
+
+        // 选择钻石钻石详情
         {
-          'pcUrl':/\/engagement-rings\/solitaire$/,
-          'mobileUrl':`/diamond/list`
+          'pcUrl':/^\/build-your-own-ring\/diamond-details/,
+          'mobileUrl':`/custom-made/diamond-made/diamond-detail`,
+          'params':{
+            'goodId':'goodId',
+            'step':'step'
+          },
         },
-        // 珠宝首饰   /jewellery/all
+
+        
+        
+		
+		 // 珠宝首饰   /jewellery/all
         {
-          'pcUrl':/\/jewellery\/all$/,
+          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles)$/,
           'mobileUrl':`/accessories/list`
+		  
+        },
+		
+		
+		// 珠宝首饰详情   /jewellery/all
+        {
+          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles)\/\d/,
+          'mobileUrl':`/accessories/accessories`,
+		  'params':{
+            'goodId':'goodId',
+          },
         },
         // 知识
         {
-          'pcUrl':/\/education\/diamonds\/carat$/,
+          'pcUrl':/^\/education\/diamonds\/(carat|cut|color|clarity|shape|certification|maintenance)$/,
           'mobileUrl':`/help-pages/knowledge`
         },
-        // 裸钻详情
+        
+		//搜索
         {
-          'pcUrl':/\/diamond-details/,
-          'mobileUrl':`/diamond/diamonds`,
+          'pcUrl':/^\/search/,
+          'mobileUrl':`/search/result`,
           'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
-        },
-        {
-          'pcUrl':/\/jewellery\/necklace/,
-          'mobileUrl':`/accessories/accessories`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
+            'keyword':'keyword'
+            
           },
         }
       ]
@@ -197,7 +263,9 @@ function queryParams (data) {
               Object.keys(params).forEach(function(key) {
                 if(typeof query1[key] !== 'undefined') {
                   query2[params[key]] = query1[key]
-                }
+                }else{
+				  query2[key] = params[key]
+				}
               });
               // param = queryParams(query2)
               href[1] = queryParams(query2)

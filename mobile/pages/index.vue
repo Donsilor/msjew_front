@@ -433,7 +433,7 @@ export default {
           // 結婚戒指
           routerUrl = '/marriage-ring/pair-ring-detail'
           routerQuery = {
-            ringId: card.id
+            goodId: card.id
           }
           return
         }
