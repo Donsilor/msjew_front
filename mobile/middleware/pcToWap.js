@@ -256,7 +256,7 @@ function queryParams (data) {
               Object.keys(params).forEach(function(key) {
                 if(typeof query1[key] !== 'undefined') {
                   query2[params[key]] = query1[key]
-                  //url = url.replace('{'+key+'}',query1[key])
+                  url = url.replace('{'+key+'}',query1[key])
                 }else{
 				  query2[key] = params[key]
 				}
