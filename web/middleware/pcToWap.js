@@ -66,7 +66,10 @@ function queryParams (data) {
     // let host = 'http://localhost:8328';
 
     // 正式环境
-    let host = 'https://wap.bddco.com';
+    //let host = 'https://wap.bddco.com';
+    let host = baseMobileUrl[RUNNING_ENV] || 'https://wap.bddco.com';
+	
+	
 
     // 测试环境
     // let host = 'https://wap.bdd.bddia.com';
@@ -98,6 +101,12 @@ function queryParams (data) {
           'pcUrl':/^\/engagement-rings$/,
           'mobileUrl':`/engagement`,
         }, 
+        // 订婚列表
+
+        {
+          'pcUrl':/^\/engagement-rings\/solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold$/,
+          'mobileUrl':`/engagement/list`,
+        }, 
         // 订婚详情
         {
           'pcUrl':/^\/ring\/engagement-rings/,
@@ -112,69 +121,126 @@ function queryParams (data) {
           'pcUrl':/^\/wedding-rings$/,
           'mobileUrl':`/marriage-ring`
         },
+		
+		 // 结婚列表
+
+        {
+          'pcUrl':/^\/wedding-rings\/womens-classic|womens-eternity|womens-anniversary|womens-diamond|womens-stackable|mens-classic|mens-carved|mens-diamond|mens-alternative-metals|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+        }, 
+		
         // 结婚 详情
         {
-          'pcUrl':/\/ring\/wedding-rings/,
+          'pcUrl':/^\/ring\/wedding-rings\/\d?goodId=\d\&ringType=single$/,
           'mobileUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',
             'ringType':'ringType',
           },
         },
-        // 裸钻
+		
+		// 对戒列表
         {
-          'pcUrl':/\/diamonds/,
+          'pcUrl':/^\/wedding-rings\/classic-series|channel-set-series/,
+          'mobileUrl':`/marriage-ring/pair-ring`
+        },
+		
+		// 对戒 详情
+        {
+          'pcUrl':/^\/ring\/wedding-rings\/\d?goodId=\d\&ringType=pair$/,
+          'mobileUrl':`/marriage-ring/pair-ring-detail`,
+          'params':{
+            'goodId':'goodId',
+          },
+        },
+		
+		
+		// 裸钻
+        {
+          'pcUrl':/^\/diamonds/,
           'mobileUrl':`/diamond/list`
         },
+		
+		// 裸钻详情
+        {
+          'pcUrl':/^\/diamond-details/,
+          'mobileUrl':`/diamond/diamonds`,
+          'params':{
+            'goodId':'goodId'
+          
+          },
+        },
+		
+		
         // 选择戒托  build-your-own-ring/settings
         {
-          'pcUrl':/\/build-your-own-ring\/settings$/,
-          'mobileUrl':`/custom-made/ring-made/ring-list`
+          'pcUrl':/^\/build-your-own-ring\/settings$/,
+          'mobileUrl':`/custom-made/ring-made/ring-list`,
+          'params':{
+            'step':'step',
+          },
         },
-        // 戒托详情
+        // 选择戒托戒托详情
         {
-          'pcUrl':/\/build-your-own-ring\/setting-details/,
+          'pcUrl':/^\/build-your-own-ring\/setting-details/,
           'mobileUrl':`/custom-made/ring-made/ring-detail`,
           'params':{
             'goodId':'goodId',
             'ringType':'ringType',
           },
         },
+
         // 选择钻石 build-your-own-ring/diamonds
         {
-          'pcUrl':/\/build-your-own-ring\/diamonds$/,
-          'mobileUrl':`/diamond/list`
+          'pcUrl':/^\/build-your-own-ring\/diamonds$/,
+          'mobileUrl':`/custom-made/diamond-made/diamond-list`,
+          'params':{
+            'step':'step',
+          },
         },
-        // 主石戒 build-your-own-ring/diamonds
+
+        // 选择钻石钻石详情
         {
-          'pcUrl':/\/engagement-rings\/solitaire$/,
-          'mobileUrl':`/diamond/list`
+          'pcUrl':/^\/build-your-own-ring\/diamond-details/,
+          'mobileUrl':`/custom-made/diamond-made/diamond-detail`,
+          'params':{
+            'goodId':'goodId',
+            'step':'step'
+          },
         },
-        // 珠宝首饰   /jewellery/all
+
+        
+        
+		
+		 // 珠宝首饰   /jewellery/all
         {
-          'pcUrl':/\/jewellery\/all$/,
+          'pcUrl':/^\/jewellery\/all|necklaces|pendants|ear-stud|earrings|bracelets|bangles$/,
           'mobileUrl':`/accessories/list`
+		  
+        },
+		
+		
+		// 珠宝首饰详情   /jewellery/all
+        {
+          'pcUrl':/^\/jewellery\/all|necklaces|pendants|ear-stud|earrings|bracelets|bangles\/\d/,
+          'mobileUrl':`/accessories/accessories`,
+		  'params':{
+            'goodId':'goodId',
+          },
         },
         // 知识
         {
-          'pcUrl':/\/education\/diamonds\/carat$/,
+          'pcUrl':/^\/education\/diamonds\/carat|cut|color|clarity|shape|certification|maintenance$/,
           'mobileUrl':`/help-pages/knowledge`
         },
-        // 裸钻详情
+        
+		//搜索
         {
-          'pcUrl':/\/diamond-details/,
-          'mobileUrl':`/diamond/diamonds`,
+          'pcUrl':/^\/search/,
+          'mobileUrl':`/search/result`,
           'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
-        },
-        {
-          'pcUrl':/\/jewellery\/necklace/,
-          'mobileUrl':`/accessories/accessories`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
+            'keyword':'keyword'
+            
           },
         }
       ]

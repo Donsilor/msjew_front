@@ -166,7 +166,7 @@ export default {
         name: routerName,
         query: {
           goodId: info.goodsId || info.id,
-          ringId: info.ringId
+          goodId: info.ringId
         }
       })
     },
