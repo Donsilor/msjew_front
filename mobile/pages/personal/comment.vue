@@ -398,7 +398,7 @@ export default {
         console.log('对戒')
         routerName = 'marriage-ring-pair-ring-detail'
         routerQuery = {
-          ringId: info.data[0].goodsRingModelList.id
+          goodId: info.data[0].goodsRingModelList.id
         }
       }
       if ([2].indexOf(info.groupType) > -1) {

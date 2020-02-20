@@ -96,7 +96,7 @@ export default {
               id: res.materials[i].id,
               name: res.materials[i].name,
               // image: this.$IMG_URL + res.materials[i].configAttrImg
-              image: infos.materials[i].image
+              image: res.materials[i].image
             }
             mcArr.push(o)
             const stArr = []

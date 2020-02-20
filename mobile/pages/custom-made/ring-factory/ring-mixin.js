@@ -88,13 +88,14 @@ export default {
       }
     })
       .then(res => {
+        console.log(4444,res)
         const mcArr = []
         for (const i in res.materials) {
           const o = {
             id: res.materials[i].id,
             name: res.materials[i].name,
             // image: this.$IMG_URL + res.materials[i].configAttrImg
-            image: infos.materials[i].image
+            image: res.materials[i].image
 
           }
           mcArr.push(o)
@@ -113,9 +114,10 @@ export default {
           sortType: ``,
           sortBy: ``
         })
+        
         res.sizes = stArr
         res.materials = mcArr
-        res.goodsDesc = res.goodsDesc.includes(`<script>`) ? '' : res.goodsDesc
+        // res.goodsDesc = res.goodsDesc.includes(`<script>`) ? '' : res.goodsDesc
         this.goodInfo = res
         this.conditions[0].options = this.goodInfo.materials
         if (this.$route.query.isBack) {
