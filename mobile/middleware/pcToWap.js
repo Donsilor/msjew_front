@@ -65,7 +65,9 @@ function queryParams (data) {
     
     // 本地环境
     //let host = 'http://127.0.0.1:8318';
-	let host = baseWebUrl[RUNNING_ENV] || 'https://www.bddco.com';
+	console.log('RUNNING_ENV',redirect);
+
+	let host = 'http://www.bdd.bddia.com';
     // 正式环境
     // let host = 'https://www.bddco.com';
 

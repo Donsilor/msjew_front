@@ -67,7 +67,7 @@ function queryParams (data) {
 
     // 正式环境
     //let host = 'https://wap.bddco.com';
-    let host = baseMobileUrl[RUNNING_ENV] || 'https://wap.bddco.com';
+    let host = 'http://wap.bdd.bddia.com';
 	
 	
 
