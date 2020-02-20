@@ -222,7 +222,7 @@ function queryParams (data) {
 		
 		// 珠宝首饰详情   /jewellery/all
         {
-          'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles|studEarring)\/\d/,
+          'pcUrl':/^\/jewellery\/(all|necklace|pendants|ear-stud|earrings|bracelets|bangles|studEarring)\/\d/,
           'mobileUrl':`/accessories/accessories`,
 		  'params':{
             'goodId':'goodId',
