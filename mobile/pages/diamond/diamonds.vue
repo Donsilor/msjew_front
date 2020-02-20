@@ -61,6 +61,7 @@ export default {
         // } else {
         //   infos = res
         // }
+        
         if (!infos) return { data: {} }
         const mcArr = []
         for (const i in infos.materials) {
@@ -86,11 +87,10 @@ export default {
           sortType: ``,
           sortBy: ``
         })
+        
         infos.sizes = stArr
         infos.materials = mcArr
-        infos.goodsDesc = infos.goodsDesc.includes(`<script>`)
-          ? ''
-          : infos.goodsDesc
+        infos.goodsDesc = infos.goodsDesc
         let gay = false
         let gayNum = ``
         infos.specs.forEach(item => {
@@ -100,9 +100,11 @@ export default {
             gay = true
           }
         })
+         
         infos.goodsGiaImage = gay
           ? `https://www.gia.edu/report-check?reportno=${gayNum}`
           : ``
+        
         return { data: infos, seoInfo: app.$getDetailSeoInfo(infos) }
       })
       .catch(err => {
