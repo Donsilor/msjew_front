@@ -111,14 +111,14 @@ function queryParams (data) {
         }, 
         // 结婚   ring/wedding-rings
         {
-          'mobileUrl':/^\/marriage-ring$/,
+          'mobileUrl':/^\/marriage-ring/?$/,
           'pcUrl':`/wedding-rings`
         },
 		
 		 // 结婚列表
 
         {
-          'mobileUrl':/^\/marriage-ring\/single-ring$/,
+          'mobileUrl':/^\/marriage-ring\/single-ring/?$/,
           'pcUrl':`/wedding-rings/list`,
         }, 
 		
@@ -134,7 +134,7 @@ function queryParams (data) {
 		
 		// 对戒列表
         {
-          'mobileUrl':/^\/marriage-ring\/pair-ring$/,
+          'mobileUrl':/^\/marriage-ring\/pair-ring/?$/,
           'pcUrl':`/wedding-rings/classic-series`
         },
 		
@@ -151,7 +151,7 @@ function queryParams (data) {
 		
 		// 裸钻
         {
-          'mobileUrl':/^\/diamonds\/list$/,
+          'mobileUrl':/^\/diamonds\/list/?$/,
           'pcUrl':`/diamond/list`
         },
 		
@@ -168,7 +168,7 @@ function queryParams (data) {
 		
         // 选择戒托  build-your-own-ring/settings
         {
-          'mobileUrl':/^\/custom-made\/ring-made\/ring-list$/,
+          'mobileUrl':/^\/custom-made\/ring-made\/ring-list/?$/,
           'pcUrl':`/build-your-own-ring/settings`,
           'params':{
             'step':'step',
@@ -186,7 +186,7 @@ function queryParams (data) {
 
         // 选择钻石 build-your-own-ring/diamonds
         {
-          'mobileUrl':/^\/custom-made\/diamond-made\/diamond-list$/,
+          'mobileUrl':/^\/custom-made\/diamond-made\/diamond-list/?$/,
           'pcUrl':`/build-your-own-ring/diamonds`,
           'params':{
             'step':'step',
@@ -206,7 +206,7 @@ function queryParams (data) {
         
         // 珠宝首饰   /jewellery/all
         {
-          'mobileUrl':/^\/accessories\/list$/,
+          'mobileUrl':/^\/accessories\/list/?$/,
           'pcUrl':`/jewellery/all`
         },
 		
@@ -223,7 +223,7 @@ function queryParams (data) {
         },
         // 知识
         {
-          'mobileUrl':/^\/help-pages\/knowledge$/,
+          'mobileUrl':/^\/help-pages\/knowledge/?$/,
           'pcUrl':`/education/diamonds/carat`
         },
         
@@ -256,7 +256,7 @@ function queryParams (data) {
               Object.keys(params).forEach(function(key) {
                 if(typeof query1[key] !== 'undefined') {
                   query2[params[key]] = query1[key]
-                  //url = url.replace('{'+key+'}',query1[key])
+                  url = url.replace('{'+key+'}',query1[key])
                 }else{
 				  query2[key] = params[key]
 				}
