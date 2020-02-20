@@ -155,7 +155,7 @@ function queryParams (data) {
 		
 		// 裸钻
         {
-          'mobileUrl':/^\/diamonds\/list\/?$/,
+          'mobileUrl':/^\/diamond\/list\/?$/,
           'pcUrl':`/diamonds/list`
         },
 		
