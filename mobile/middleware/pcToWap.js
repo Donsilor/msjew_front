@@ -57,22 +57,20 @@ function queryParams (data) {
   if (process.server) {
   
     let u = req.headers['user-agent']
-
+    
+	//console.log('headerHost',headerHost);
     if(isWap(u)) {
       return
     }
     // https://www.bdd.bddia.com   https://www.bddco.com
-    
-    // 本地环境
-    //let host = 'http://127.0.0.1:8318';
-	// console.log('RUNNING_ENV',redirect);
-
-	// let host = 'http://www.bdd.bddia.com';
-    // 正式环境
-    // let host = 'https://www.bddco.com';
-
-    // 测试环境
-     let host = 'https://www.bdd.bddia.com';
+	//头部host
+	let headerHost = req.headers['host']
+    //生产环境
+	let host = 'https://www.bddco.com';
+    if(!(/bddco\.com/).test(headerHost)) {
+		//测试环境
+		host = 'http://www.bdd.bddia.com';
+	}
 
     const toWapUrl = path => {
       if(path === '/undefined') {

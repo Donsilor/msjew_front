@@ -64,17 +64,14 @@ function queryParams (data) {
     }
     // http://localhost:8328   https://wap.bddco.com   https://wap.bdd.bddia.com
 
-    // 本地环境
-     //let host = 'http://127.0.0.1:8328';
-
-    // 正式环境
-    //let host = 'https://wap.bddco.com';
-    //let host = 'http://wap.bdd.bddia.com';
-	
-	
-
-    // 测试环境
-     let host = 'https://wap.bdd.bddia.com';
+    //头部host
+	let headerHost = req.headers['host']
+    //生产环境
+	let host = 'https://wap.bddco.com';
+    if(!(/bddco\.com/).test(headerHost)) {
+		//测试环境
+		host = 'http://wap.bdd.bddia.com';
+	}
 
     const toWapUrl = path => {
       if(path === '/undefined') {
