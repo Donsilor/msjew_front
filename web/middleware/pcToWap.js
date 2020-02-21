@@ -149,7 +149,7 @@ function queryParams (data) {
           'pcUrl':/^\/ring\/wedding-rings\/6/,
           'mobileUrl':`/marriage-ring/pair-ring-detail`,
           'params':{
-            'goodId':'goodId',
+            'goodId':'6',
 			'ringType':'pair',
           },
         },
