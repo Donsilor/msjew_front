@@ -146,7 +146,7 @@ function queryParams (data) {
 		
 		// 对戒 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings(.*)goodId\=6\&ringType\=pair/,
+          'pcUrl':/^\/ring\/wedding-rings\/6/,
           'mobileUrl':`/marriage-ring/pair-ring-detail`,
           'params':{
             'goodId':'goodId',
