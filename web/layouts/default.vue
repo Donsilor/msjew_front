@@ -20,10 +20,17 @@
   import Mixin from './mixins'
   export default {
     mixins: [Mixin],
+    // provide () {
+    //   return {
+    //     reload: this.reload,
+      
+    //   }
+    // },
     data() {
       return {
         scrollTop: 0,
-        btnFlag: false
+        btnFlag: false,
+        // isRouterAlive: true
       }
     },
     mounted() {
@@ -34,6 +41,13 @@
       })
     },
     methods: {
+      // reload () {
+      //   this.isRouterAlive = false
+      //   this.$nextTick(function () {
+        
+      //     this.isRouterAlive = true
+      //   })
+      // },
       goTo(){
         const topB = document.getElementsByClassName('layout-box')[0];
 
