@@ -247,15 +247,14 @@ function queryParams (data) {
       ]
 
       if(href.length>0) {
-
+		let currUrl = href.length>1 ? href[0]+ "?" +href[1] : href[0]
+		//console.log(44444,currUrl)
+		
         for(let i=0;i<rules.length;i++) {
-
           let rule = rules[i]
-		  let currUrl = href.length>1 ? href[0]+ "?" +href[1] : href[0]
-		  console.log(44444,currUrl)
+		  
           if((rule['pcUrl']).test(currUrl)) {
             let url = host + rule['mobileUrl']
-
             let param = ''
             if(typeof rule['params'] !== 'undefined') {
               let params = rule['params'];
