@@ -26,10 +26,12 @@ const getQueryFromUrl = url => {
   }
   url = url.slice(start + 1, url.length)
   const query = url.split('&')
+  // console.log("sdssass",url)
   for (let n = 0, length = query.length; n < length; n++) {
     const item = query[n].split('=')
     result[item[0]] = item[1]
   }
+  // console.log("result",result)
   return result
 }
 
@@ -49,7 +51,7 @@ function queryParams (data) {
       _result.push(encodeURIComponent(key) + '=' + encodeURIComponent(value))
     }
   }
-
+ 
   return _result.length ? _result.join('&') + '&' : ''
 }
 
@@ -66,10 +68,10 @@ function queryParams (data) {
     // let host = 'http://localhost:8328';
 
     // 正式环境
-    let host = 'https://wap.bddco.com';
+    // let host = 'https://wap.bddco.com';
 
     // 测试环境
-    // let host = 'https://wap.bdd.bddia.com';
+    let host = 'https://wap.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {

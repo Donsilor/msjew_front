@@ -1521,12 +1521,13 @@ export default {
     }
   },
   created() {
-    // console.log("ssss",this.orderAddress.email)
+    console.log("ssss",this.pathTakeIds)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {        
           this.good = res
+          console.log("res",res)
           resolve()
         })
         .catch(err => {
@@ -2189,6 +2190,7 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
+      console.log("this.good",this.good)
       const data = arr.join(',')
       this.canSubmit = false
       this.$axios
