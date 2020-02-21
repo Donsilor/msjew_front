@@ -71,7 +71,7 @@ function queryParams (data) {
 		//测试环境
 		host = 'http://www.bdd.bddia.com';
 	}
-
+    
     const toWapUrl = path => {
       if(path === '/undefined') {
         return
@@ -129,10 +129,10 @@ function queryParams (data) {
         // 结婚 详情
         {
           'mobileUrl':/^\/marriage-ring\/single-ring-detail/,
-          'pcUrl':`/ring/engagement-rings`,
+          'pcUrl':`/ring/wedding-rings/1`,
           'params':{
             'goodId':'goodId',
-            'ringType':'single',
+            'ringType':'ringType',
           },
         },
 		
@@ -145,10 +145,10 @@ function queryParams (data) {
 		// 对戒 详情
         {
           'mobileUrl':/^\/marriage-ring\/pair-ring-detail/,
-          'pcUrl':`/ring/wedding-rings`,
+          'pcUrl':`/ring/wedding-rings/1`,
           'params':{
             'goodId':'goodId',
-			'ringType':'pair',
+			'ringType':'ringType',
           },
         },
 		

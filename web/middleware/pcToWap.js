@@ -53,7 +53,6 @@ function queryParams (data) {
   return _result.length ? _result.join('&') + '&' : ''
 }
 
-  console.log(4444);
 
   if (process.server) {
   
@@ -72,7 +71,7 @@ function queryParams (data) {
 		//测试环境
 		host = 'http://wap.bdd.bddia.com';
 	}
-
+   
     const toWapUrl = path => {
       if(path === '/undefined') {
         return
@@ -130,11 +129,12 @@ function queryParams (data) {
 		
         // 结婚 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings(.*?)goodId\=\d+\&ringType\=single/,
+          'pcUrl':/^\/ring\/wedding-rings\/\d+\?goodId=\d+\&ringType=single/,
+
           'mobileUrl':`/marriage-ring/single-ring-detail`,
           'params':{
             'goodId':'goodId',
-            'ringType':'single',
+            'ringType':'ringType',
           },
         },
 		
@@ -146,11 +146,12 @@ function queryParams (data) {
 		
 		// 对戒 详情
         {
-          'pcUrl':/^\/ring\/wedding-rings(.*?)goodId\=\d+\&ringType\=pair/,
+
+          'pcUrl':/^\/ring\/wedding-rings\/\d+\?goodId=\d+&ringType=pair/,
           'mobileUrl':`/marriage-ring/pair-ring-detail`,
           'params':{
             'goodId':'goodId',
-			'ringType':'pair',
+			'ringType':'ringType',
           },
         },
 		
@@ -250,8 +251,9 @@ function queryParams (data) {
         for(let i=0;i<rules.length;i++) {
 
           let rule = rules[i]
-
-          if((rule['pcUrl']).test(href[0])) {
+		  let currUrl = href.length>1 ? href[0]+ "?" +href[1] : href[0]
+		  console.log(44444,currUrl)
+          if((rule['pcUrl']).test(currUrl)) {
             let url = host + rule['mobileUrl']
 
             let param = ''
