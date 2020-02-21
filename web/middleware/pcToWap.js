@@ -71,6 +71,7 @@ function queryParams (data) {
 		//测试环境
 		host = 'http://wap.bdd.bddia.com';
 	}
+	//host = '127.0.0.1:8328'
    
     const toWapUrl = path => {
       if(path === '/undefined') {
@@ -101,10 +102,119 @@ function queryParams (data) {
         }, 
         // 订婚列表
 
+
+       /*
         {
           'pcUrl':/^\/engagement-rings\/(solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)\/?$/,
           'mobileUrl':`/engagement/list`,
         }, 
+		*/
+		
+		{
+          'pcUrl':/^\/engagement-rings\/solitaire$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'109',
+          },
+        }, 
+		
+		//开口戒
+		{
+          'pcUrl':/^\/engagement-rings\/jump$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'110',
+          },
+        }, 
+		
+		//密钉戒
+
+		{
+          'pcUrl':/^\/engagement-rings\/pave-set$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'111',
+          },
+        }, 
+		{
+          'pcUrl':/^\/engagement-rings\/classical$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'112',
+          },
+        }, 
+		{
+          'pcUrl':/^\/engagement-rings\/channel-set$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'113',
+          },
+        }, 
+		{
+          'pcUrl':/^\/engagement-rings\/halo-set$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'114',
+          },
+        }, 
+		{
+          'pcUrl':/^\/engagement-rings\/three-stone$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'115',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/14k-white$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'31',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/18k-white$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'28',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/14k-yellow$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'32',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/18k-yellow$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'29',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/platinum$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'34',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/18k-rose-gold$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'30',
+          },
+        }, 
+		
+		
+		
         // 订婚详情
         {
           'pcUrl':/^\/ring\/engagement-rings/,
@@ -121,11 +231,145 @@ function queryParams (data) {
         },
 		
 		 // 结婚列表
-
+       /*
         {
           'pcUrl':/^\/wedding-rings\/(womens-classic|womens-eternity|womens-anniversary|womens-diamond|womens-stackable|mens-classic|mens-carved|mens-diamond|mens-alternative-metals|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)\/?$/,
           'mobileUrl':`/marriage-ring/single-ring`,
         }, 
+		*/
+		
+		{
+          'pcUrl':/^\/wedding-rings\/womens-classic$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',   
+            'style':'160',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/womens-eternity$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',   
+            'style':'161',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/womens-anniversary$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',   
+            'style':'162',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/womens-diamond$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',   
+            'style':'163',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/womens-stackable$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',    
+            'style':'164',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/mens-classic$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'gentlemen',    
+            'style':'165',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/mens-carved$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'gentlemen',    
+            'style':'166',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/mens-diamond$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'gentlemen',  
+            'style':'167',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/mens-alternative-metals$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'gentlemen',  
+            'style':'168',
+          },
+        }, 
+		
+		
+		
+		
+		
+		
+		{
+          'pcUrl':/^\/wedding-rings\/14k-white$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',   
+            'material':'31',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/wedding-rings\/18k-white$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady', 
+            'material':'28',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/wedding-rings\/14k-yellow$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady', 
+            'material':'32',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/wedding-rings\/18k-yellow$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',  
+            'material':'29',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/wedding-rings\/platinum$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',  
+            'material':'34',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/wedding-rings\/18k-rose-gold$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		  'params':{
+			'type':'lady',  
+            'material':'30',
+          },
+        }, 
+		
 		
         // 结婚 详情
         {
