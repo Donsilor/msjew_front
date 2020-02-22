@@ -383,10 +383,21 @@ function queryParams (data) {
         },
 		
 		// 对戒列表
-        {
-          'pcUrl':/^\/wedding-rings\/(classic-series|channel-set-series)\/?/,
-          'mobileUrl':`/marriage-ring/pair-ring`
-        },
+		{
+          'pcUrl':/^\/wedding-rings\/classic-series$/,
+          'mobileUrl':`/marriage-ring/pair-ring`,
+		  'params':{  
+            'style':'1',
+          },
+        }, 
+		{
+          'pcUrl':/^\/wedding-rings\/channel-set-series$/,
+          'mobileUrl':`/marriage-ring/pair-ring`,
+		  'params':{  
+            'style':'2',
+          },
+        }, 
+		
 		
 		// 对戒 详情
         {
@@ -401,6 +412,76 @@ function queryParams (data) {
 		
 		
 		// 裸钻
+		{
+          'pcUrl':/^\/diamonds\/round-cut$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'16',
+          },
+        }, 
+		{
+          'pcUrl':/^\/diamonds\/asscher-cut$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'17',
+          },
+        }, 
+		{
+          'pcUrl':/^\/diamonds\/princess-cut$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'54',
+          },
+        }, 
+		{
+          'pcUrl':/^\/diamonds\/emerald-cut$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'55',
+          },
+        }, 
+		{
+          'pcUrl':/^\/diamonds\/heart-shaped$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'56',
+          },
+        }, 
+		{
+          'pcUrl':/^\/diamonds\/marquise-cut$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'57',
+          },
+        }, 
+		{
+          'pcUrl':/^\/diamonds\/cushion-cut$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'58',
+          },
+        }, 	
+		{
+          'pcUrl':/^\/diamonds\/pear-shaped$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'59',
+          },
+        }, 
+		{
+          'pcUrl':/^\/diamonds\/asscher-cut$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'60',
+          },
+        }, 
+		{
+          'pcUrl':/^\/diamonds\/radiant-cut$/,
+          'mobileUrl':`/diamond/list`,
+		  'params':{  
+            'shape':'61',
+          },
+        }, 
         {
           'pcUrl':/^\/diamonds/,
           'mobileUrl':`/diamond/list`
@@ -419,9 +500,10 @@ function queryParams (data) {
 		
         // 选择戒托  build-your-own-ring/settings
         {
-          'pcUrl':/^\/build-your-own-ring\/settings\/?$/,
+          'pcUrl':/^\/build-your-own-ring\/settings/,
           'mobileUrl':`/custom-made/ring-made/ring-list`,
           'params':{
+			'steps':'melo',
             'step':'step',
           },
         },
@@ -432,14 +514,19 @@ function queryParams (data) {
           'params':{
             'goodId':'goodId',
             'ringType':'ringType',
+			'steps':'melo',
+			'step':'step'
           },
         },
+		
+		
 
         // 选择钻石 build-your-own-ring/diamonds
         {
-          'pcUrl':/^\/build-your-own-ring\/diamonds\/?$/,
+          'pcUrl':/^\/build-your-own-ring\/diamonds/,
           'mobileUrl':`/custom-made/diamond-made/diamond-list`,
           'params':{
+            'steps':'melo',
             'step':'step',
           },
         },
@@ -450,34 +537,149 @@ function queryParams (data) {
           'mobileUrl':`/custom-made/diamond-made/diamond-detail`,
           'params':{
             'goodId':'goodId',
-            'step':'step'
+            'steps':'melo',
+			'step':'step'
           },
         },
-
-        
+		
+		
         
 		
 		 // 珠宝首饰   /jewellery/all
+		 /*
         {
           'pcUrl':/^\/jewellery\/(all|necklaces|pendants|ear-stud|earrings|bracelets|bangles)\/?$/,
           'mobileUrl':`/accessories/list`
 		  
         },
+		*/
+		{
+          'pcUrl':/^\/jewellery\/necklaces$/,
+          'mobileUrl':`/accessories/list`,
+		  'params':{  
+            'actIndex':'0',
+          },
+        }, 
+		{
+          'pcUrl':/^\/jewellery\/pendants$/,
+          'mobileUrl':`/accessories/list`,
+		  'params':{  
+            'actIndex':'1',
+          },
+        }, 
+		{
+          'pcUrl':/^\/jewellery\/ear-stud$/,
+          'mobileUrl':`/accessories/list`,
+		  'params':{  
+            'actIndex':'2',
+          },
+        }, 
+		{
+          'pcUrl':/^\/jewellery\/earrings$/,
+          'mobileUrl':`/accessories/list`,
+		  'params':{  
+            'actIndex':'3',
+          },
+        }, 
+		{
+          'pcUrl':/^\/jewellery\/bracelets$/,
+          'mobileUrl':`/accessories/list`,
+		  'params':{  
+            'actIndex':'4',
+          },
+        }, 
+		{
+          'pcUrl':/^\/jewellery\/bangles$/,
+          'mobileUrl':`/accessories/list`,
+		  'params':{  
+            'actIndex':'5',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/jewellery\/all$/,
+          'mobileUrl':`/accessories/list`,
+        }, 	
 		
 		
 		// 珠宝首饰详情   /jewellery/all
         {
-          'pcUrl':/^\/jewellery\/(all|necklace|pendants|ear-stud|earrings|bracelets|bangles|studEarring)\/\d/,
+          'pcUrl':/^\/jewellery\/(all|necklace|pendant|studEarring|earring|bracelet|braceletLine)\/\d/,
           'mobileUrl':`/accessories/accessories`,
 		  'params':{
             'goodId':'goodId',
           },
         },
         // 知识
+		//克拉
         {
-          'pcUrl':/^\/education\/diamonds\/(carat|cut|color|clarity|shape|certification|maintenance)\/?$/,
-          'mobileUrl':`/help-pages/knowledge`
+          'pcUrl':/^\/education\/diamonds\/carat\/?$/,
+          'mobileUrl':`/help-pages/diamondCarat`
         },
+		{
+          'pcUrl':/^\/education\/diamonds\/cut\/?$/,
+          'mobileUrl':`/help-pages/diamondCut`
+        },
+		{
+          'pcUrl':/^\/education\/diamonds\/color\/?$/,
+          'mobileUrl':`/help-pages/diamondColor`
+        },
+		{
+          'pcUrl':/^\/education\/diamonds\/clarity\/?$/,
+          'mobileUrl':`/help-pages/diamondCleanliness`
+        },
+		{
+          'pcUrl':/^\/education\/diamonds\/shape\/?$/,
+          'mobileUrl':`/help-pages/diamondShape`
+        },
+		{
+          'pcUrl':/^\/education\/diamonds\/certification\/?$/,
+          'mobileUrl':`/help-pages/proof`
+        },
+		
+		//钻石护理
+		{
+          'pcUrl':/^\/education\/diamonds\/maintenance\/?$/,
+          'mobileUrl':`/help-pages/diamondCarat`
+        },
+		{
+          'pcUrl':/^\/education\/rings\/size\/?$/,
+          'mobileUrl':`/help-pages/sizeguide`
+        },
+		
+		{
+          'pcUrl':/^\/policies\/payment-methods\/?$/,
+          'mobileUrl':`/help-pages/paymentMethod`
+        },
+		{
+          'pcUrl':/^\/policies\/quality-value\/?$/,
+          'mobileUrl':`/help-pages/qualityValue`
+        },
+		{
+          'pcUrl':/^\/policies\/return-refund-policy\/?$/,
+          'mobileUrl':`/help-pages/paymentMethod`
+        },
+		{
+          'pcUrl':/^\/policies\/free-shipping\/?$/,
+          'mobileUrl':`/help-pages/freeShipping`
+        },
+		{
+          'pcUrl':/^\/policies\/shipping\/?$/,
+          'mobileUrl':`/help-pages/deliveryPolicy`
+        },
+		{
+          'pcUrl':/^\/policies\/international\/?$/,
+          'mobileUrl':`/help-pages/internationalPolicy`
+        },
+		{
+          'pcUrl':/^\/policies\/privacy-policy\/?$/,
+          'mobileUrl':`/help-pages/privacyPolicy`
+        },
+		{
+          'pcUrl':/^\/policies\/terms-and-conditions\/?$/,
+          'mobileUrl':`/help-pages/clause`
+        },
+		
         
 		//搜索
         {
@@ -504,10 +706,11 @@ function queryParams (data) {
               let params = rule['params'];
               let query2 = {}
               let query1 = getQueryFromUrl(req.originalUrl)
+			  
               
               Object.keys(params).forEach(function(key) {
                 if(typeof query1[key] !== 'undefined') {
-                  query2[params[key]] = query1[key]
+                  query2[params[key]] = unescape(query1[key])
                 }else{
 				  query2[key] = params[key]
 				}
