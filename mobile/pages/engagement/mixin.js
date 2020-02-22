@@ -7,14 +7,14 @@ export default {
           type: 'eject-choose-pro',
           key: 'style',
           name: this.LANGUAGE.listCommons.style,
-          checked: ``,
+          checked: typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:'',
           options: this.CONDITION_INFO.style.rings
         },
         {
           type: 'eject-choose-pro',
           key: 'quality',
           name: this.LANGUAGE.listCommons.fineness,
-          checked: ``,
+          checked: typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:'',
           options: this.CONDITION_INFO.quality.rings
         },
         {
