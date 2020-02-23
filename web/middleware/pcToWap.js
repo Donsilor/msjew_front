@@ -87,18 +87,22 @@ function queryParams (data) {
         },
         // 登录
         {
-          'pcUrl':/\/login/,
+          'pcUrl':/^\/login\/?$/,
+          'mobileUrl':`/login`
+        },
+		{
+          'pcUrl':/^\/login\/\?type=login/,
           'mobileUrl':`/login`
         },
          // 注册  /login?type=register  /login/email
-         {
-          'pcUrl':/\/login\?type=register/,
-          'mobileUrl':`/login/email`
+        {
+          'pcUrl':/^\/login\/\?type=register/,
+          'mobileUrl':`/register`
         },
         // 订婚
         {
           'pcUrl':/^\/engagement-rings\/?$/,
-          'mobileUrl':`/engagement`,
+          'mobileUrl':`/engagement`
         }, 
         // 订婚列表
 
@@ -597,9 +601,20 @@ function queryParams (data) {
         }, 
 		
 		{
+          'pcUrl':/^\/jewellery\/all\?priceRange=.*/,
+          'mobileUrl':`/accessories/list`,
+		  'params':{  
+            'startPrice':'0',
+			'endPrice':'1000'
+          },
+        }, 	
+		
+		{
           'pcUrl':/^\/jewellery\/all$/,
           'mobileUrl':`/accessories/list`,
         }, 	
+		
+		
 		
 		
 		// 珠宝首饰详情   /jewellery/all
@@ -689,12 +704,27 @@ function queryParams (data) {
             'keyword':'keyword'
             
           },
-        }
+        },
+		
+		//购物车
+		{
+          'pcUrl':/^\/shopping-cart\/?$/,
+          'mobileUrl':`/cart`,
+          
+        },
+		//密码
+		{
+          'pcUrl':/^\/reset-password\/?$/,
+          'mobileUrl':`/forget`,
+          
+        },
+		
+		
       ]
 
       if(href.length>0) {
 		let currUrl = href.length>1 ? href[0]+ "?" +href[1] : href[0]
-		//console.log(44444,currUrl)
+		console.log(44444,currUrl)
 		
         for(let i=0;i<rules.length;i++) {
           let rule = rules[i]
