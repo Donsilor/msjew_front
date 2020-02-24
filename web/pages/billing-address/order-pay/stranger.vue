@@ -33,7 +33,7 @@
         </div>
         <div class="step-line" />
       </div>
-      <div v-show="show">
+      
         <!--    用户名称和提示登陆-->
         <div class="user-info">
           <i class="iconfont iconrentou" />
@@ -48,7 +48,7 @@
             <span>{{ $t(`${lang}.balabalabala`) }}</span>
           </div>
         </div>
-
+<div v-show="show">
         <!--    地址模块-->
         <div class="new-address">
           <div class="new-address-title">
@@ -320,7 +320,193 @@
           </div>
         </div>
       </div>
+      <!--支付模块  -->
+      <div class="payways">
+        <!-- 支付 -->
+        <div class="pay">
+          <!-- <div class="order-step">
+            <div class="one-step">
+              <div class="step-img">
+                <img src="../../../static/order/step.png" alt="" />
+                <span>1</span>
+              </div>
+              <div class="step-arrow">
+                <img src="../../../static/order/arrow.png" alt="" />
+              </div>
+              <div class="step-title">{{ $t(`${lang2}.confirmOrder`) }}</div>
+              <div class="step-desc">{{ $t(`${lang2}.finishOrderInfo`) }}</div>
+            </div>
+            <div class="one-step">
+              <div class="step-img">
+                <img src="../../../static/order/step.png" alt="" />
+                <span>2</span>
+              </div>
+              <div class="step-arrow">
+                <img src="../../../static/order/arrow.png" alt="" />
+              </div>
+              <div class="step-title">{{ $t(`${lang2}.orderPay`) }}</div>
+              <div class="step-desc">{{ $t(`${lang2}.payWay`) }}</div>
+            </div>
+            <div class="one-step">
+              <div class="step-img">
+                <span>3</span>
+              </div>
+              <div class="step-arrow" />
+              <div class="step-title">{{ $t(`${lang2}.finishPay`) }}</div>
+              <div class="step-desc" />
+            </div>
+            <div class="step-line-one" />
+            <div class="step-line-two" />
+          </div> -->
+          <div v-loading="goingPay" class="pay-ways">
+            <div class="new-address-title">
+              <div class="na-line" />
+              <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
+            </div>
+            <div class="pay-blocks">
+              <div
+                :class="{ 'pay-choose': payWay == 6 }"
+                class="pay-block"
+                @click="Way(6)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/paypalpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
+                <div v-show="payWay == 6" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 6" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
 
+              <!-- <div
+                :class="{ 'pay-choose': payWay === 5 }"
+                class="pay-block"
+                @click="payWay = 5"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/visapay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
+                <div v-show="payWay == 5" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 5" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 3 }"
+                class="pay-block"
+                @click="payWay = 3"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/unionpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
+                <div v-show="payWay === 3" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 3" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <div
+                :class="{ 'pay-choose': payWay == 2 }"
+                class="pay-block"
+                @click="Way(2)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/alipay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
+                <div v-show="payWay == 2" class="pay-price">
+                  <!-- {{ coinType }} {{ formatMoney(price) }} -->
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 2" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 3 }"
+                class="pay-block"
+                @click="payWay = 3"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/wechatpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
+                <div v-show="payWay == 3" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 3" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 1 }"
+                class="pay-block"
+                @click="payWay = 1"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/epay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
+                <div v-show="payWay == 1" class="pay-price">
+                  {{ coinType }} {{ formatMoney(ttPrice) }}
+                </div>
+                <div v-show="payWay == 1" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <div class="pay-question" @click="answer = true">?</div>
+            </div>
+            <!-- <div
+              :class="['buy-btn', { disabled: !canSubmit }]"
+              @click="createOrder()"
+            >
+              <span
+                >{{ $store.state.coin }}
+                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+              >
+              <span>{{ $t(`${lang}.beiQin`) }}</span>
+              
+            </div> -->
+            <!-- <div class="pay-btn" @click="goPay()">{{ $t(`${lang2}.pay`) }}</div> -->
+          </div>
+          <!--    unionPayHide-->
+          <div v-show="false">
+            <form :action="actionLink" method="post">
+              <div v-for="(f, index) in form" :key="index">
+                <label :for="f.name">{{ f.name }}</label>
+                <input v-model="f.val" :name="f.name" />
+              </div>
+              <input id="unionPay" type="submit" value="akm" />
+            </form>
+          </div>
+          <message-box
+            v-show="answer"
+            :title="$t(`${lang}.msgTitle1`)"
+            :message="$t(`${lang}.msgContent1`)"
+            type="one"
+            @done="answer = false"
+          />
+          <message-box
+            v-show="failedOrder"
+            :title="$t(`${lang}.msgTitle2`)"
+            :message="$t(`${lang}.msgContent2`)"
+            type="one"
+            @done="failedOrder = false"
+          />
+        </div>
+      </div>
       <!--    购物车模块-->
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
@@ -558,6 +744,16 @@
           </div>
         </div>
         <div class="info-line" />
+        <div
+          :class="['buy-btn', { disabled: !canSubmit }]"
+          @click="createOrder()"
+        >
+          <!-- <span
+            >{{ $store.state.coin }}
+            {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+          > -->
+          <span>{{ $t(`${lang}.beiQin`) }}</span>
+        </div>
         <!-- <div
           :class="['buy-btn', { disabled: !canSubmit }]"
           @click="createOrder()"
@@ -567,193 +763,7 @@
         </div> -->
       </div>
 
-       <!--支付模块  -->
-      <div class="payways">
-        <!-- 支付 -->
-        <div class="pay">
-          <!-- <div class="order-step">
-            <div class="one-step">
-              <div class="step-img">
-                <img src="../../../static/order/step.png" alt="" />
-                <span>1</span>
-              </div>
-              <div class="step-arrow">
-                <img src="../../../static/order/arrow.png" alt="" />
-              </div>
-              <div class="step-title">{{ $t(`${lang2}.confirmOrder`) }}</div>
-              <div class="step-desc">{{ $t(`${lang2}.finishOrderInfo`) }}</div>
-            </div>
-            <div class="one-step">
-              <div class="step-img">
-                <img src="../../../static/order/step.png" alt="" />
-                <span>2</span>
-              </div>
-              <div class="step-arrow">
-                <img src="../../../static/order/arrow.png" alt="" />
-              </div>
-              <div class="step-title">{{ $t(`${lang2}.orderPay`) }}</div>
-              <div class="step-desc">{{ $t(`${lang2}.payWay`) }}</div>
-            </div>
-            <div class="one-step">
-              <div class="step-img">
-                <span>3</span>
-              </div>
-              <div class="step-arrow" />
-              <div class="step-title">{{ $t(`${lang2}.finishPay`) }}</div>
-              <div class="step-desc" />
-            </div>
-            <div class="step-line-one" />
-            <div class="step-line-two" />
-          </div> -->
-          <div v-loading="goingPay" class="pay-ways">
-            <div class="new-address-title">
-              <div class="na-line" />
-              <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
-            </div>
-            <div class="pay-blocks">
-              <div
-                :class="{ 'pay-choose': payWay == 6 }"
-                class="pay-block"
-                @click="Way(6)"
-              >
-                <div class="pay-img">
-                  <img src="../../../static/order/paypalpay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
-                <div v-show="payWay == 6" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
-                </div>
-                <div v-show="payWay == 6" class="choose-tick">
-                  <img src="../../../static/order/tick.png" alt="" />
-                </div>
-              </div>
-
-              <!-- <div
-                :class="{ 'pay-choose': payWay === 5 }"
-                class="pay-block"
-                @click="payWay = 5"
-              >
-                <div class="pay-img">
-                  <img src="../../static/order/visapay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-                <div v-show="payWay == 5" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
-                </div>
-                <div v-show="payWay == 5" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div> -->
-              <!-- <div
-                :class="{ 'pay-choose': payWay == 3 }"
-                class="pay-block"
-                @click="payWay = 3"
-              >
-                <div class="pay-img">
-                  <img src="../../static/order/unionpay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
-                <div v-show="payWay === 3" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
-                </div>
-                <div v-show="payWay == 3" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div> -->
-
-              <div
-                :class="{ 'pay-choose': payWay == 2 }"
-                class="pay-block"
-                @click="Way(2)"
-              >
-                <div class="pay-img">
-                  <img src="../../../static/order/alipay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 2" class="pay-price">
-                  <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
-                </div>
-                <div v-show="payWay == 2" class="choose-tick">
-                  <img src="../../../static/order/tick.png" alt="" />
-                </div>
-              </div>
-
-              <!-- <div
-                :class="{ 'pay-choose': payWay == 3 }"
-                class="pay-block"
-                @click="payWay = 3"
-              >
-                <div class="pay-img">
-                  <img src="../../static/order/wechatpay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-                <div v-show="payWay == 3" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
-                </div>
-                <div v-show="payWay == 3" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div> -->
-
-              <!-- <div
-                :class="{ 'pay-choose': payWay == 1 }"
-                class="pay-block"
-                @click="payWay = 1"
-              >
-                <div class="pay-img">
-                  <img src="../../static/order/epay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
-                <div v-show="payWay == 1" class="pay-price">
-                  {{ coinType }} {{ formatMoney(ttPrice) }}
-                </div>
-                <div v-show="payWay == 1" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div> -->
-
-              <div class="pay-question" @click="answer = true">?</div>
-            </div>
-            <div
-              :class="['buy-btn', { disabled: !canSubmit }]"
-              @click="createOrder()"
-            >
-              <span
-                >{{ $store.state.coin }}
-                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
-              >
-              <span>{{ $t(`${lang}.beiQin`) }}</span>
-              
-            </div>
-            <!-- <div class="pay-btn" @click="goPay()">{{ $t(`${lang2}.pay`) }}</div> -->
-          </div>
-          <!--    unionPayHide-->
-          <div v-show="false">
-            <form :action="actionLink" method="post">
-              <div v-for="(f, index) in form" :key="index">
-                <label :for="f.name">{{ f.name }}</label>
-                <input v-model="f.val" :name="f.name" />
-              </div>
-              <input id="unionPay" type="submit" value="akm" />
-            </form>
-          </div>
-          <message-box
-            v-show="answer"
-            :title="$t(`${lang}.msgTitle1`)"
-            :message="$t(`${lang}.msgContent1`)"
-            type="one"
-            @done="answer = false"
-          />
-          <message-box
-            v-show="failedOrder"
-            :title="$t(`${lang}.msgTitle2`)"
-            :message="$t(`${lang}.msgContent2`)"
-            type="one"
-            @done="failedOrder = false"
-          />
-        </div>
-      </div>
+      
       <message-box
         v-show="confirmBox"
         :title="$t(`${lang}.msgTitle1`)"
@@ -1091,6 +1101,194 @@
         </div>
       </div>
 
+      <!--支付模块  -->
+      <div class="payways">
+        <!-- 支付 -->
+        <div class="pay">
+          <!-- <div class="order-step">
+            <div class="one-step">
+              <div class="step-img">
+                <img src="../../../static/order/step.png" alt="" />
+                <span>1</span>
+              </div>
+              <div class="step-arrow">
+                <img src="../../../static/order/arrow.png" alt="" />
+              </div>
+              <div class="step-title">{{ $t(`${lang2}.confirmOrder`) }}</div>
+              <div class="step-desc">{{ $t(`${lang2}.finishOrderInfo`) }}</div>
+            </div>
+            <div class="one-step">
+              <div class="step-img">
+                <img src="../../../static/order/step.png" alt="" />
+                <span>2</span>
+              </div>
+              <div class="step-arrow">
+                <img src="../../../static/order/arrow.png" alt="" />
+              </div>
+              <div class="step-title">{{ $t(`${lang2}.orderPay`) }}</div>
+              <div class="step-desc">{{ $t(`${lang2}.payWay`) }}</div>
+            </div>
+            <div class="one-step">
+              <div class="step-img">
+                <span>3</span>
+              </div>
+              <div class="step-arrow" />
+              <div class="step-title">{{ $t(`${lang2}.finishPay`) }}</div>
+              <div class="step-desc" />
+            </div>
+            <div class="step-line-one" />
+            <div class="step-line-two" />
+          </div> -->
+          <div v-loading="goingPay" class="pay-ways">
+            <div class="new-address-title">
+              <div class="na-line" />
+              <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
+            </div>
+            <div class="pay-blocks">
+              <div
+                :class="{ 'pay-choose': payWay == 6 }"
+                class="pay-block"
+                @click="Way(6)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/paypalpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
+                <div v-show="payWay == 6" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 6" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay === 5 }"
+                class="pay-block"
+                @click="payWay = 5"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/visapay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
+                <div v-show="payWay == 5" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 5" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 3 }"
+                class="pay-block"
+                @click="payWay = 3"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/unionpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
+                <div v-show="payWay === 3" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 3" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <div
+                :class="{ 'pay-choose': payWay == 2 }"
+                class="pay-block"
+                @click="Way(2)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/alipay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
+                <div v-show="payWay == 2" class="pay-price">
+                  <!-- {{ coinType }} {{ formatMoney(price) }} -->
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 2" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 3 }"
+                class="pay-block"
+                @click="payWay = 3"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/wechatpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
+                <div v-show="payWay == 3" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 3" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 1 }"
+                class="pay-block"
+                @click="payWay = 1"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/epay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
+                <div v-show="payWay == 1" class="pay-price">
+                  {{ coinType }} {{ formatMoney(ttPrice) }}
+                </div>
+                <div v-show="payWay == 1" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <div class="pay-question" @click="answer = true">?</div>
+            </div>
+            <!-- <div
+              :class="['buy-btn', { disabled: !canSubmit }]"
+              @click="createOrder()"
+            >
+              <span
+                >{{ $store.state.coin }}
+                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+              >
+              <span>{{ $t(`${lang}.beiQin`) }}</span>
+              
+            </div> -->
+            <!-- <div class="pay-btn" @click="goPay()">{{ $t(`${lang2}.pay`) }}</div> -->
+          </div>
+          <!--    unionPayHide-->
+          <div v-show="false">
+            <form :action="actionLink" method="post">
+              <div v-for="(f, index) in form" :key="index">
+                <label :for="f.name">{{ f.name }}</label>
+                <input v-model="f.val" :name="f.name" />
+              </div>
+              <input id="unionPay" type="submit" value="akm" />
+            </form>
+          </div>
+          <message-box
+            v-show="answer"
+            :title="$t(`${lang}.msgTitle1`)"
+            :message="$t(`${lang}.msgContent1`)"
+            type="one"
+            @done="answer = false"
+          />
+          <message-box
+            v-show="failedOrder"
+            :title="$t(`${lang}.msgTitle2`)"
+            :message="$t(`${lang}.msgContent2`)"
+            type="one"
+            @done="failedOrder = false"
+          />
+        </div>
+      </div>
+
       <!--    购物车模块-->
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
@@ -1337,193 +1535,7 @@
         </div> -->
       </div>
 
-      <!--支付模块  -->
-      <div class="payways">
-        <!-- 支付 -->
-        <div class="pay">
-          <!-- <div class="order-step">
-            <div class="one-step">
-              <div class="step-img">
-                <img src="../../../static/order/step.png" alt="" />
-                <span>1</span>
-              </div>
-              <div class="step-arrow">
-                <img src="../../../static/order/arrow.png" alt="" />
-              </div>
-              <div class="step-title">{{ $t(`${lang2}.confirmOrder`) }}</div>
-              <div class="step-desc">{{ $t(`${lang2}.finishOrderInfo`) }}</div>
-            </div>
-            <div class="one-step">
-              <div class="step-img">
-                <img src="../../../static/order/step.png" alt="" />
-                <span>2</span>
-              </div>
-              <div class="step-arrow">
-                <img src="../../../static/order/arrow.png" alt="" />
-              </div>
-              <div class="step-title">{{ $t(`${lang2}.orderPay`) }}</div>
-              <div class="step-desc">{{ $t(`${lang2}.payWay`) }}</div>
-            </div>
-            <div class="one-step">
-              <div class="step-img">
-                <span>3</span>
-              </div>
-              <div class="step-arrow" />
-              <div class="step-title">{{ $t(`${lang2}.finishPay`) }}</div>
-              <div class="step-desc" />
-            </div>
-            <div class="step-line-one" />
-            <div class="step-line-two" />
-          </div> -->
-          <div v-loading="goingPay" class="pay-ways">
-            <div class="new-address-title">
-              <div class="na-line" />
-              <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
-            </div>
-            <div class="pay-blocks">
-              <div
-                :class="{ 'pay-choose': payWay == 6 }"
-                class="pay-block"
-                @click="Way(6)"
-              >
-                <div class="pay-img">
-                  <img src="../../../static/order/paypalpay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
-                <div v-show="payWay == 6" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
-                </div>
-                <div v-show="payWay == 6" class="choose-tick">
-                  <img src="../../../static/order/tick.png" alt="" />
-                </div>
-              </div>
-
-              <!-- <div
-                :class="{ 'pay-choose': payWay === 5 }"
-                class="pay-block"
-                @click="payWay = 5"
-              >
-                <div class="pay-img">
-                  <img src="../../static/order/visapay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-                <div v-show="payWay == 5" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
-                </div>
-                <div v-show="payWay == 5" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div> -->
-              <!-- <div
-                :class="{ 'pay-choose': payWay == 3 }"
-                class="pay-block"
-                @click="payWay = 3"
-              >
-                <div class="pay-img">
-                  <img src="../../static/order/unionpay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
-                <div v-show="payWay === 3" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
-                </div>
-                <div v-show="payWay == 3" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div> -->
-
-              <div
-                :class="{ 'pay-choose': payWay == 2 }"
-                class="pay-block"
-                @click="Way(2)"
-              >
-                <div class="pay-img">
-                  <img src="../../../static/order/alipay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 2" class="pay-price">
-                  <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
-                </div>
-                <div v-show="payWay == 2" class="choose-tick">
-                  <img src="../../../static/order/tick.png" alt="" />
-                </div>
-              </div>
-
-              <!-- <div
-                :class="{ 'pay-choose': payWay == 3 }"
-                class="pay-block"
-                @click="payWay = 3"
-              >
-                <div class="pay-img">
-                  <img src="../../static/order/wechatpay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-                <div v-show="payWay == 3" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
-                </div>
-                <div v-show="payWay == 3" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div> -->
-
-              <!-- <div
-                :class="{ 'pay-choose': payWay == 1 }"
-                class="pay-block"
-                @click="payWay = 1"
-              >
-                <div class="pay-img">
-                  <img src="../../static/order/epay.png" alt="" />
-                </div>
-                <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
-                <div v-show="payWay == 1" class="pay-price">
-                  {{ coinType }} {{ formatMoney(ttPrice) }}
-                </div>
-                <div v-show="payWay == 1" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div> -->
-
-              <div class="pay-question" @click="answer = true">?</div>
-            </div>
-            <div
-              :class="['buy-btn', { disabled: !canSubmit }]"
-              @click="createOrder()"
-            >
-              <span
-                >{{ $store.state.coin }}
-                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
-              >
-              <span>{{ $t(`${lang}.beiQin`) }}</span>
-              
-            </div>
-            <!-- <div class="pay-btn" @click="goPay()">{{ $t(`${lang2}.pay`) }}</div> -->
-          </div>
-          <!--    unionPayHide-->
-          <div v-show="false">
-            <form :action="actionLink" method="post">
-              <div v-for="(f, index) in form" :key="index">
-                <label :for="f.name">{{ f.name }}</label>
-                <input v-model="f.val" :name="f.name" />
-              </div>
-              <input id="unionPay" type="submit" value="akm" />
-            </form>
-          </div>
-          <message-box
-            v-show="answer"
-            :title="$t(`${lang}.msgTitle1`)"
-            :message="$t(`${lang}.msgContent1`)"
-            type="one"
-            @done="answer = false"
-          />
-          <message-box
-            v-show="failedOrder"
-            :title="$t(`${lang}.msgTitle2`)"
-            :message="$t(`${lang}.msgContent2`)"
-            type="one"
-            @done="failedOrder = false"
-          />
-        </div>
-      </div>
+      
 
       <message-box
         v-show="confirmBox"
@@ -1652,7 +1664,6 @@ export default {
     }
   },
   created() {
-   
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
@@ -1701,8 +1712,8 @@ export default {
       if(ways==6){
         this.show=false
       }else{
-        this.$errorMessage('请登陆后支付！')
-        // const url=window.location.href
+        this.$errorMessage(this.$t(`${lang}.firstLogin`))
+        // const url=window.location.href  _this.$t(`${lang}.logintips`
         // setTimeout(() => {
         //   this.$router.push({
         //     path: `/login`,
@@ -3023,8 +3034,8 @@ div {
   .order-info {
     position: relative;
     width: 1300px;
-    // height: 544px;
-    height: 314px;
+    height: 544px;
+    // height: 314px;
     background: rgba(255, 255, 255, 1);
     padding: 30px 50px 0 35px;
     display: flex;
@@ -3460,12 +3471,12 @@ div {
 
       span:nth-child(1) {
         font-family: twCenMt;
-        margin-right: 50px;
+        // margin-right: 50px;
       }
 
       &.disabled {
-        background: #ddd;
-        color: #aaa;
+        // background: #ddd;
+        // color: #aaa;
       }
     }
   }
@@ -3604,8 +3615,8 @@ div {
   .pay-ways {
     width: 1300px;
     background-color: #fff;
-    // padding: 39px 40px 40px;
-     padding: 39px 40px 95px;
+    padding: 39px 40px 40px;
+    //  padding: 39px 40px 95px;
     .new-address-title {
       width: 1300-51-36px;
       height: 20px;

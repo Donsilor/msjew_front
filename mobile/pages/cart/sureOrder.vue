@@ -23,23 +23,24 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <div v-if="!hasAddress" class="no-address" @click="goAddress">
+      <!-- <div v-if="!hasAddress" class="no-address" @click="goAddress">
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
-      </div>
+      </div> -->
     </div>
     <!-- 支付方式 -->
-    <div class="payways">
+    <div class="payways" v-if="!isLogin">
       <div class="pay">
-        <Header :title="lang2.pay" tips="1" />
+        <!-- <Header :title="lang2.pay" tips="1" />
         <div class="proce">
           <span>{{ info.coinType }} </span>
           {{ formatMoney(price) }}
-        </div>
+        </div> -->
         <ul>
-          <li v-for="(item, index) in list" :key="index">
-            <div v-show="price > 0 || (price == 0 && item.type === 5)">
+          <li v-for="(item, index) in list2" :key="index">
+            <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
+            <div >
               <img :src="item.url" />
               <div class="right">
                 <span
@@ -64,14 +65,15 @@
           </li>
         </ul>
         <div class="tips">
-          <i class="icon iconfont icongantanhao1"></i><span>{{ lang.tips }}</span>
+          <i class="icon iconfont icongantanhao1"></i><span>{{ lang2.tips }}</span>
         </div>
-        <div class="btn" @click="goPaySuccess">
-          {{ list[typeIndex].title }}
+        <!-- <div class="btn" @click="goPaySuccess"> 
+          @click="goPaySuccess"
+          {{ list2[typeIndex].title }}
           {{ lang2.goPay }}
           {{ info.coinType }}
           {{ formatMoney(price) }}
-        </div>
+        </div> -->
 
         <!--    unionPayHide-->
         <div v-show="false">
@@ -226,14 +228,20 @@
           </li>
           <li>
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ showOrderAmount }}</span>
+            ><span>{{ coin }} {{ formatMoney(allFee.productAmount || productAmount) }}</span>
           </li>
         </ul>
       </div>
     </div>
+    <!-- 未登录 -->
+    <!-- <div v-if="!isLogin" :class="['submit']" @click="createOrder2">
+      <span>{{ lang.sureOrder }}</span>
+    </div> -->
+
     <div :class="['submit']" @click="createOrder">
       <span>{{ lang.sureOrder }}</span>
     </div>
+    
     <order-express ref="orderExpress"></order-express>
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
@@ -265,50 +273,28 @@ export default {
       coin: this.$store.state.coin,
       form: [],
       actionLink: '',
-      list: [
+      list2: [
         {
           url: '/cart/pay.png',
           type: 6,
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        // {
-        //   url: '/cart/card.png',
-        //   type: 1,
-        //   title: this.LANGUAGE.cart.pay.payType1,
-        //   des: this.LANGUAGE.cart.pay.type1Text
-        // },
-        // {
-        //   url: '/cart/up.png',
-        //   type: 2,
-        //   title: this.LANGUAGE.cart.pay.payType2,
-        //   des: this.LANGUAGE.cart.pay.type2Text
-        // },
-        // {
-        //   url: '/cart/ap.png',
-        //   type: 2,
-        //   title: this.LANGUAGE.cart.pay.payType3,
-        //   des: this.LANGUAGE.cart.pay.type3Text
-        // },
-        // {
-        //   url: '/cart/wac.png',
-        //   type: 4,
-        //   title: this.LANGUAGE.cart.pay.payType4,
-        //   des: this.LANGUAGE.cart.pay.type4Text
-        // },
-        // {
-        //   url: '/cart/ph.png',
-        //   type: 5,
-        //   title: this.LANGUAGE.cart.pay.payType5,
-        //   des: this.LANGUAGE.cart.pay.type5Text,
-        //   des2: this.LANGUAGE.cart.pay.type5Text2
-        // }
+        {
+          url: '/cart/ap.png',
+          type: 2,
+          title: this.LANGUAGE.cart.pay.payType3,
+          des: this.LANGUAGE.cart.pay.type3Text
+        }
       ],
       sum: '2,120.00',
-      info: JSON.parse(this.$route.query.info),
-      price: JSON.parse(this.$route.query.info).orderAmount,
+      info:'',
+      price:'',
+      typeIndex:'',
+      // info: JSON.parse(this.$route.query.info),
+      // price: JSON.parse(this.$route.query.info).orderAmount,
+      // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
       needtips: false,
-      typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
 
 
       lang: this.LANGUAGE.cart.sureOrder,
@@ -399,6 +385,7 @@ export default {
     }
   },
   mounted() {
+    
     this.$nextTick(() => {
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
@@ -412,10 +399,12 @@ export default {
       this.idList = []
       this.productAmount = 0
       this.list.map((item, index) => {
+        console.log("sssss=====",item)
         this.idList.push(item.id)
         // this.productAmount = this.productAmount + item.salePrice 
         this.productAmount = parseInt(this.productAmount + item.salePrice) 
       })
+      console.log("sssss",this.idList)
       this.getData() // 获取地址
       this.getCouponList() // 获取优惠券列表
 
@@ -426,6 +415,26 @@ export default {
     })
   },
   methods: {
+    formatMoney: formatMoney,
+    changeType(ind) {
+      // console.log("选择哪一个",ind)
+      this.typeIndex = ind
+      let pay = 0
+      if(this.typeIndex == 0){
+        pay = 6
+      }else if(this.typeIndex == 1){
+        pay = 2
+      }
+      if(pay!==6){
+        this.$toast.show(this.lang.firstLogin)
+      }
+      console.log("选择哪一个",pay)
+      if (ind === 5) {
+        this.price = this.info.orderAmount * 0.985
+      } else {
+        this.price = this.info.orderAmount
+      }
+    },
     defaultAllFeeInfo() {
       return {
         logisticsFee: 0, // 运费金额 ,
@@ -728,15 +737,108 @@ export default {
         }
       }
     },
+    // 支付
+    goPaySuccess() {
+      this.isPay = true
+      let pay = 0
+      if(this.typeIndex == 0){
+        pay = 6
+      }else if(this.typeIndex == 1){
+        pay = 2
+      }else if(this.typeIndex == 5){
+        pay = 7
+      }
+      // if (this.typeIndex === 5) {
+      //   pay = 1
+      // } else if (this.typeIndex === 1 || this.typeIndex === 0) {
+      //   pay = 2
+      // } else if (
+      //   this.typeIndex === 4 ||
+      //   this.typeIndex === 3 ||
+      //   this.typeIndex === 2
+      // ) {
+      //   pay = 7
+      // }
+      console.log("paytype",pay)
+      this.$axios({
+        // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/ http://wap.bdd.bddia.com
+        method: 'post',
+        url: `/web/pay/create`,
+        data: {
+          orderId: this.info.orderId,
+          coinType: this.info.coinType,
+          payType: pay,
+          tradeType:'wap',
+          returnUrl:'https://wap.bdd.bddia.com/cart/paySuccess?orderId='+this.info.orderId
+        }
+      })
+        .then(res => {
 
-    //  创建订单
+          console.log("config",res)
+          if (res.config) {
+            if (pay !== 7) {
+              window.location.replace(res.config)
+            } else {
+              const promise = new Promise((resolve, reject) => {
+                this.form = []
+                const obj = JSON.parse(res.config)
+                const objKey = Object.keys(obj)
+                for (const i in objKey) {
+                  if (objKey[i] === 'url') {
+                    this.actionLink = obj[objKey[i]]
+                    continue
+                  }
+                  const o = {
+                    name: objKey[i],
+                    val: obj[objKey[i]]
+                  }
+                  this.form.push(o)
+                }
+                resolve()
+              })
+              promise.then(() => {
+                setTimeout(() => {
+                  this.isPay = false
+                  document.getElementById('unionPay').click()
+                }, 2000)
+              })
+            }
+          } else if (!res.config){
+            console.log(88888888)
+            this.isPay = false
+            this.$router.replace({
+              name: 'cart-paySuccess-orderId-price-coinType',
+              params: {
+                orderId: this.info.orderId,
+                price: this.info.orderAmount,
+                coinType: this.info.coinType
+              }
+            })
+          }
+        })
+        .catch(err => {
+          console.log(err)
+          this.$toast.show(err)
+          this.$router.replace({
+            name: 'cart-payFailed-orderId-price-coinType',
+            params: {
+              orderId: this.info.orderId,
+              price: this.info.orderAmount,
+              coinType: this.info.coinType
+            }
+          })
+        })
+    },
+    //  已登录创建订单
     createOrder() {
       // if (!this.canSubmit) {
       //   return
       // }
-      if (!this.hasAddress) {
-        this.$toast.show(this.lang.toast2)
-        return
+      if (this.isLogin) {
+        if (!this.hasAddress) {
+          this.$toast.show(this.lang.toast2)
+          return
+        }
       }
       // if (!Email.test(this.mailbox)) {
       //   this.$toast.show(this.lang.toast3)
@@ -772,46 +874,30 @@ export default {
             this.$toast.show(err.message)
           })
       } else {
-        const data = {
-          address: {
-            address: this.address.address,
-            cityId: this.address.cityId,
-            countryId: this.address.countryId,
-            firstName: this.address.firstName,
-            lastName: this.address.lastName,
-            provinceId: this.address.provinceId,
-            userMail: this.address.userMail,
-            userTel: this.address.userTel,
-            userTelCode: this.address.userTelCode,
-            zipCode: this.address.zipCode
-          },
-          afterMail: this.mailbox ? this.mailbox : this.address.userMail,
-          allSend: this.isSend ? 1 : 2,
-          carts: [],
-          productAmount: this.allFee.productAmount,
-          orderAmount: this.allFee.orderAmount,
-          recvType: 1,
-          userRemark: this.userRemark || null,
-
-          couponCode: this.inputCouponCode,
-          session: this.session
-        }
+        const data = []
+        console.log("list------>",this.list)
         for (const i in this.list) {
           const o = {
             createTime: this.list[i].createTime,
-            goodsCount: 1,
+            goods_num: 1,
             goodsDetailsId: this.list[i].goodsDetailsId,
-            goodsId: this.list[i].goodsId,
-            groupId: this.list[i].groupId,
-            groupType:
+            goods_id: this.list[i].goodsId,
+            group_id: this.list[i].groupId,
+            goods_type: this.list[i].goodsStatus,
+            group_type:
               this.list[i].groupType !== 0 ? this.list[i].groupType : null
           }
-          data.carts.push(o)
+          data.push(o)
         }
         this.$axios({
           method: 'post',
-          url: `/wap/order/createAnonymousOrder`,
-          data: data
+          url: `/web/member/order-tourist/create`,
+          data: {
+            goodsCartList:data,
+            tradeType:'wap',
+            coinType:this.$store.state.coin,
+            returnUrl:'https://wap.bdd.bddia.com/cart/paySuccess?orderId='+this.info.orderId
+          }
         })
           .then(res => {
             const arr = []
@@ -820,12 +906,26 @@ export default {
               arr.push(item.localSn)
               this.$store.dispatch('removeCart', arr)
             })
-            this.$router.replace({
-              name: 'cart-pay',
-              query: {
-                info: JSON.stringify(res)
-              }
-            })
+            if (res.config) {
+              window.location.replace(res.config)
+            } else if (!res.config){
+              console.log(88888888)
+              this.isPay = false
+              this.$router.replace({
+                name: 'cart-paySuccess-orderId-price-coinType',
+                params: {
+                  orderId: this.info.orderId,
+                  price: this.info.orderAmount,
+                  coinType: this.info.coinType
+                }
+              })
+            }
+            // this.$router.replace({
+            //   name: 'cart-pay',
+            //   query: {
+            //     info: JSON.stringify(res)
+            //   }
+            // })
           })
           .catch(err => {
             this.$toast.show(err.message)
@@ -1265,9 +1365,16 @@ export default {
 }
 
 // 支付方式
-
+.payways{
+  background: #f2f2f2;
+  padding: 0.266667rem 0.32rem 0;
+}
 .pay {
   padding-bottom: 20px;
+  padding: 24px 16px;
+  background: #ffffff;
+  // text-align: left;
+  border-radius: 5px;
   .proce {
     padding: 30px 0 20px;
     font-size: 28px;

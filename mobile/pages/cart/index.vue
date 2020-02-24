@@ -162,12 +162,14 @@ export default {
       })
     },
     goPay() {
+      console.log("id",this.list)
       const arr = []
       for (let i = 0; i < this.list.length; i++) {
         if (this.list[i].isSelect) {
           arr.push(this.list[i])
         }
       }
+      
       if (arr.length <= 0) {
         this.$toast.show(this.lang.toast1)
       } else if (arr.length > 0) {
@@ -341,6 +343,7 @@ export default {
     // 获取本地local列表
     getLocalCart() {
       this.$store.dispatch('getLocalCart').then(res => {
+        console.log("djkashdkasjdklasj",res)
         if (res.length > 0) {
           this.noListData = false
           this.cartList = []
@@ -375,6 +378,7 @@ export default {
             })
           })
           this.cartList.reverse()
+          console.log("this.cartList",this.cartList)
           this.getLocalList(this.cartList)
         } else {
           this.num = 0
@@ -391,6 +395,7 @@ export default {
           url: `/web/member/cart`
         })
         .then(res => {
+          console.log("线上llll",res)
           this.doFormat(res)
         })
         .catch(err => {
