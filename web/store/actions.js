@@ -306,13 +306,14 @@ export default {
         let sendData = []
         groups.forEach(group => {
             let data = group.data || []
+            console.log("groups",data)
             data = data.map(good => {
                 good.createTime = group.createTime
                 good.updateTime = group.updateTime
                 return good
             })
             sendData = sendData.concat(data)
-            // console.log("购物车", sendData)
+            console.log("购物车", sendData)
         })
 
         return this.$axios({
@@ -324,7 +325,7 @@ export default {
             }
         })
             .then(res => {
-                // console.log("hahahah",res)
+                console.log("hahahah",res)
                 dispatch('cleanLocalCart')
                 return Promise.resolve('success')
             })
