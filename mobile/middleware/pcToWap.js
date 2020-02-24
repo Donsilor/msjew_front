@@ -91,7 +91,7 @@ function queryParams (data) {
         },
         // 注册  /login?type=register  /login/email
         {
-          'mobileUrl':/\/login\/email/,
+          'mobileUrl':/\/register/,
           'pcUrl':`/login?type=register`
         },
 		
@@ -562,6 +562,14 @@ function queryParams (data) {
 
         
         // 珠宝首饰   /jewellery/all
+		{
+          'mobileUrl':/^\/accessories\/list\?startPrice=0&endPrice=1000/,
+          'pcUrl':`/jewellery/necklaces`,
+		  'params':{
+            'priceRange':'WzAsMTAwMF0=',          
+          },
+        },
+		
         {
           'mobileUrl':/^\/accessories\/list\/?$/,
           'pcUrl':`/jewellery/necklaces`,
@@ -698,7 +706,20 @@ function queryParams (data) {
             'keyword':'keyword'
             
           },
-        }
+        },
+		//购物车
+		{
+          'mobileUrl':/^\/cart\/?$/,
+          'pcUrl':`/shopping-cart`,
+          
+        },
+		
+		//密码
+		{
+          'mobileUrl':/^\/forget\/?$/,
+          'pcUrl':`/reset-password`,
+          
+        },
       ]
 
       if(href.length>0) {

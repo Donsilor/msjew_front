@@ -113,7 +113,8 @@ export default {
         font-size: 16px;
         font-weight: 400;
         color: rgba(153, 153, 153, 1);
-        margin-right: 56px;
+        // margin-right: 56px;
+        margin-right: 30px;
         .slider-bar {
           position: absolute;
           bottom: -12px;
