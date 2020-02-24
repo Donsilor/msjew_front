@@ -697,7 +697,7 @@ export default {
 
         return this.$axios({
             method: 'get',
-            url: '/web/member/cart',
+            url: '', ///web/member/cart
             data: sendData
         })
             .then(data => {

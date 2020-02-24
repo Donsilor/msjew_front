@@ -218,7 +218,7 @@
             <div class="register-input margin-right-20">
               <input
                 v-model="code"
-                 
+                readonly onfocus="this.removeAttribute('readonly');"
                 @focus="focusEvent3"
                 @blur="blurEvent3"
                 v-bind:class="{active:isActivecode}"
@@ -241,7 +241,7 @@
           <div class="register-input">
             <input
               v-model="password"
-               
+              readonly onfocus="this.removeAttribute('readonly');" 
               @focus="focusEvent4"
               @blur="blurEvent4"
               v-bind:class="{active:isActivepwd}"
