@@ -325,10 +325,13 @@ export default {
     getLocalList(list) {
       this.$axios({
         method: 'post',
-        url: `/wap/goodsCart/postCart`,
-        data: list
+        url: `/web/member/cart/local`,
+        data: {
+          goodsCartList:list
+        }
       })
         .then(res => {
+          console.log("res",res)
           this.doFormat(res)
         })
         .catch(err => {
@@ -342,8 +345,9 @@ export default {
           this.noListData = false
           this.cartList = []
           res.map((item, index) => {
+            console.log("item",item)
             item.data.map((val, ind) => {
-              // Status 商品状态(1-仓库,2-上架,3-下架,4-删除)
+              // Status 商品状态(1-仓库,2-上架,3-下架,4-删除)   goods_id  goods_type  goods_num  group_type  group_id  createTime
               // 定制
               // createTime: 1560497513455  //对戒时才有用为必传 切为一致 其他情况可传可以不传
               // goodsCount: 1   //都为一
@@ -354,16 +358,17 @@ export default {
               // updateTime: 0 // 创建本地购物车时间id
               const o = {
                 createTime: item.createTime,
-                goodsCount: 1,
+                goods_num: val.goodsCount,
                 goodsDetailsId: val.goodsDetailsId,
-                goodsId: val.goodsId,
-                groupId:
+                goods_id: val.goodsId,
+                goods_type:val.goodsType,
+                group_id:
                   val.groupType === 1
                     ? val.groupId
                     : val.groupType === 2
                     ? item.id
                     : null,
-                groupType: val.groupType,
+                group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
               this.cartList.push(o)
