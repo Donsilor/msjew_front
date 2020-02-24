@@ -35,6 +35,7 @@ const getQueryFromUrl = url => {
 }
 
 function queryParams (data) {
+  // console.log("sssss",data)
   let _result = []
   for (let key in data) {
     let value = data[key]
@@ -67,10 +68,10 @@ function queryParams (data) {
     // let host = 'http://localhost:8318';
 
     // 正式环境
-    let host = 'https://www.bddco.com';
+    // let host = 'https://www.bddco.com';
 
     // 测试环境
-    // let host = 'https://www.bdd.bddia.com';
+    let host = 'https://www.bdd.bddia.com';
 
     const toWapUrl = path => {
       if(path === '/undefined') {
