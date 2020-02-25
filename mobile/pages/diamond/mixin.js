@@ -7,7 +7,7 @@ export default {
           type: 'eject-choose-pro',
           key: 'shape',
           name: this.LANGUAGE.listCommons.shape,
-          checked: ``,
+          checked: typeof this.$route.query.shape !== 'undefined' ? this.$route.query.shape:'',
           options: this.CONDITION_INFO.shape
         },
         {

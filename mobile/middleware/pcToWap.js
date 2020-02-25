@@ -92,7 +92,7 @@ function queryParams (data) {
         },
         // 注册  /login?type=register  /login/email
         {
-          'mobileUrl':/\/login\/email/,
+          'mobileUrl':/\/register/,
           'pcUrl':`/login?type=register`
         },
 		
@@ -392,9 +392,21 @@ function queryParams (data) {
        
 		
 		// 对戒列表
+	
+		{
+          'mobileUrl':/^\/marriage-ring\/pair-ring\?style=2/,
+          'pcUrl':`/wedding-rings/channel-set-series`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		
         {
-          'mobileUrl':/^\/marriage-ring\/pair-ring\/?$/,
-          'pcUrl':`/wedding-rings/classic-series`
+          'mobileUrl':/^\/marriage-ring\/pair-ring\/?/,
+          'pcUrl':`/wedding-rings/classic-series`,
+		  'params':{
+            'param':'none',          
+          },
         },
 		
 		// 对戒 详情
@@ -409,6 +421,77 @@ function queryParams (data) {
 		
 		
 		// 裸钻
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=16/,
+          'pcUrl':`/diamonds/round-cut`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=17/,
+          'pcUrl':`/diamonds/asscher-cut`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=54/,
+          'pcUrl':`/diamonds/princess-cut`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=55/,
+          'pcUrl':`/diamonds/emerald-cut`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=56/,
+          'pcUrl':`/diamonds/heart-shaped`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=57/,
+          'pcUrl':`/diamonds/marquise-cut`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=58/,
+          'pcUrl':`/diamonds/cushion-cut`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=59/,
+          'pcUrl':`/diamonds/pear-shaped`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=60/,
+          'pcUrl':`/diamonds/asscher-cut`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/diamond\/list\?shape=61/,
+          'pcUrl':`/diamonds/radiant-cut`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		
         {
           'mobileUrl':/^\/diamond\/list\/?$/,
           'pcUrl':`/diamonds/list`
@@ -427,9 +510,10 @@ function queryParams (data) {
 		
         // 选择戒托  build-your-own-ring/settings
         {
-          'mobileUrl':/^\/custom-made\/ring-made\/ring-list\/?$/,
+          'mobileUrl':/^\/custom-made\/ring-made\/ring-list/,
           'pcUrl':`/build-your-own-ring/settings`,
           'params':{
+			'melo':'steps',
             'step':'step',
           },
         },
@@ -440,14 +524,28 @@ function queryParams (data) {
           'params':{
             'goodId':'goodId',
             'ringType':'ringType',
+			'melo':'steps',
+            'step':'step',
+          },
+        },
+		
+		{
+          'mobileUrl':/^\/custom-made\/ring-made\/ring-detail/,
+          'pcUrl':`/build-your-own-ring/setting-details`,
+          'params':{
+            'goodId':'goodId',
+            'ringType':'ringType',
+			'melo':'steps',
+            'step':'step',
           },
         },
 
         // 选择钻石 build-your-own-ring/diamonds
         {
-          'mobileUrl':/^\/custom-made\/diamond-made\/diamond-list\/?$/,
+          'mobileUrl':/^\/custom-made\/diamond-made\/diamond-list/,
           'pcUrl':`/build-your-own-ring/diamonds`,
           'params':{
+            'melo':'steps',
             'step':'step',
           },
         },
@@ -458,15 +556,70 @@ function queryParams (data) {
           'pcUrl':`/build-your-own-ring/diamond-details`,
           'params':{
             'goodId':'goodId',
-            'step':'step'
+            'melo':'steps',
+            'step':'step',
           },
         },
 
         
         // 珠宝首饰   /jewellery/all
+		{
+          'mobileUrl':/^\/accessories\/list\?startPrice=0&endPrice=1000/,
+          'pcUrl':`/jewellery/necklaces`,
+		  'params':{
+            'priceRange':'WzAsMTAwMF0=',          
+          },
+        },
+		
         {
           'mobileUrl':/^\/accessories\/list\/?$/,
-          'pcUrl':`/jewellery/all`
+          'pcUrl':`/jewellery/necklaces`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		
+		{
+          'mobileUrl':/^\/accessories\/list\?actIndex=0/,
+          'pcUrl':`/jewellery/necklaces`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/accessories\/list\?actIndex=1/,
+          'pcUrl':`/jewellery/pendants`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/accessories\/list\?actIndex=2/,
+          'pcUrl':`/jewellery/ear-stud`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/accessories\/list\?actIndex=3/,
+          'pcUrl':`/jewellery/earrings`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/accessories\/list\?actIndex=4/,
+          'pcUrl':`/jewellery/bracelets`,
+		  'params':{
+            'param':'none',          
+          },
+        },
+		{
+          'mobileUrl':/^\/accessories\/list\?actIndex=5/,
+          'pcUrl':`/jewellery/bangles`,
+		  'params':{
+            'param':'none',          
+          },
         },
 		
 		
@@ -482,9 +635,69 @@ function queryParams (data) {
         },
         // 知识
         {
+          'mobileUrl':/^\/help-pages\/diamondCarat\/?$/,
+          'pcUrl':`/education/diamonds/carat`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/diamondCut\/?$/,
+          'pcUrl':`/education/diamonds/cut`
+        },
+		
+		{
+          'mobileUrl':/^\/help-pages\/diamondColor\/?$/,
+          'pcUrl':`/education/diamonds/color`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/diamondCleanliness\/?$/,
+          'pcUrl':`/education/diamonds/clarity`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/diamondShape\/?$/,
+          'pcUrl':`/education/diamonds/shape`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/proof\/?$/,
+          'pcUrl':`/education/diamonds/certification`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/sizeguide\/?$/,
+          'pcUrl':`/education/rings/size`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/paymentMethod\/?$/,
+          'pcUrl':`/policies/payment-methods`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/qualityValue\/?$/,
+          'pcUrl':`/policies/quality-value`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/freeShipping\/?$/,
+          'pcUrl':`/policies/free-shipping`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/deliveryPolicy\/?$/,
+          'pcUrl':`/policies/shipping`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/internationalPolicy\/?$/,
+          'pcUrl':`/policies/international`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/privacyPolicy\/?$/,
+          'pcUrl':`/policies/privacy-policy`
+        },
+		{
+          'mobileUrl':/^\/help-pages\/clause\/?$/,
+          'pcUrl':`/policies/terms-and-conditions`
+        },
+		
+		{
           'mobileUrl':/^\/help-pages\/knowledge\/?$/,
           'pcUrl':`/education/diamonds/carat`
         },
+		
+		
         
 		//搜索
         {
@@ -494,7 +707,20 @@ function queryParams (data) {
             'keyword':'keyword'
             
           },
-        }
+        },
+		//购物车
+		{
+          'mobileUrl':/^\/cart\/?$/,
+          'pcUrl':`/shopping-cart`,
+          
+        },
+		
+		//密码
+		{
+          'mobileUrl':/^\/forget\/?$/,
+          'pcUrl':`/reset-password`,
+          
+        },
       ]
 
       if(href.length>0) {
@@ -518,8 +744,8 @@ function queryParams (data) {
 					href.splice(1,1)
 				}				  
                 if(typeof query1[key] !== 'undefined') {
-                  query2[params[key]] = query1[key]
-                  url = url.replace('{'+key+'}',query1[key])
+                  query2[params[key]] = unescape(query1[key])
+                  url = url.replace('{'+key+'}',unescape(query1[key]))
                 }else{
 				  query2[key] = params[key]
 				}
