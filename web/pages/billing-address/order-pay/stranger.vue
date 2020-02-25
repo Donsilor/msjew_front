@@ -1883,7 +1883,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'http://localhost:8318/complete-payment?order_sn={order_sn}'
+          returnUrl:'https://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'
         }
       })
         .then(res => {

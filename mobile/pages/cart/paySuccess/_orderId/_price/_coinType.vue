@@ -230,10 +230,6 @@ export default {
       })
         .then(res => {
           console.log("dssadas",res)
-          // http://localhost:8328/cart/paySuccess?order_sn=BDD202002257130131&success=true&paymentId=PAYID-LZKPBWY1SY85893N6670514K&token=EC-4FG05179MA345290W&PayerID=ZMUBN8MYV9Q5N
-          // http://localhost:8328/cart/paySuccess?order_sn=BDD202002257111721&success=false&token=EC-5R600296LX606351R
-          // http://localhost:8328/cart/paySuccess?order_sn=BDD202002259161073&success=true&paymentId=PAYID-LZKOHII5J030911DM564880T&token=EC-2RY76123C27506544&PayerID=ZMUBN8MYV9Q5N
-          
           this.orderinfo = res
           this.getChannelType(this.orderinfo.payChannel)
          
