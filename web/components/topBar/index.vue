@@ -997,26 +997,27 @@ export default {
     }
   },
   mounted() {
-    console.log("dangqiandizhi",window.location.href)
-    console.log("oldurl==========",window.location)
+    // console.log("dangqiandizhi",window.location.href)
+    // console.log("oldurl==========",window.location)
     this.language = this.getCookie('language')
     // console.log("kkkkkkk",this.$store.state.language)
     const _this = this
     _this.$nextTick(() => {})
   },
   methods: {
+    // 点击登入获取上页url
     login(){
-      const oldurl=window.location.pathname
-      const params=window.location.search
-      const url=oldurl+params
-      localStorage.setItem('url',url)
+      // const oldurl=window.location.pathname
+      // const params=window.location.search
+      // const url=oldurl+params
+      // localStorage.setItem('url',url)
       // setTimeout(() => {
       //   this.$router.push({
       //       path: `/login`,
       //       // query: {url}
       //   })
       // },0)
-      console.log("oldurl",url)
+      // console.log("oldurl",url)
     },
     // 查询cookie
     getCookie(cname) {

@@ -125,6 +125,7 @@ export default {
   methods: {
     formatMoney: formatMoney,
     changeType(ind) {
+      console.log("选择",ind)
       this.typeIndex = ind
       if (ind === 5) {
         this.price = this.info.orderAmount * 0.985
@@ -163,7 +164,7 @@ export default {
           coinType: this.info.coinType,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'https://wap.bdd.bddia.com/cart/paySuccess?orderId='+this.info.orderId
+          returnUrl:'http://wap.bdd.bddia.com/cart/paySuccess?orderId='+this.info.orderId
         }
       })
         .then(res => {

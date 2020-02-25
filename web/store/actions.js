@@ -495,7 +495,7 @@ export default {
             method: 'post',
             url: '/web/member/cart/del',
             data: {
-                id: goods
+                id: ids
             },
             transformRequest: [
                 function (data) {

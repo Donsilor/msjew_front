@@ -125,6 +125,7 @@
       "toast2": "移除成功"
     },
     "sureOrder": {
+      "firstLogin":"請先登錄！",
       "sureOrder": "確認訂單",
       "login": "登入賬戶",
       "settlement": "以加速結算或是",

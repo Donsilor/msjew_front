@@ -201,7 +201,6 @@ export default {
             })
             sendData = sendData.concat(data)
         })
-
         return this.$axios({
             method: 'post',
             url: `/web/member/cart/add`,
@@ -211,6 +210,7 @@ export default {
             }
         })
             .then(data => {
+                console.log("aaaaa",data)
                 dispatch('cleanLocalCart')
                 return Promise.resolve('success')
             })
@@ -250,11 +250,11 @@ export default {
         } else {
             // 未登录的操作
             // console.log('未登录的操作')
-            // request = dispatch('addLocalCart', data)
-            setTimeout(() => {
-                this.$router.push(`/login`)
-            }, 2000)
-            return Promise.reject(new Error('请先登陆！'))
+            request = dispatch('addLocalCart', data)
+            // setTimeout(() => {
+            //     this.$router.push(`/login`)
+            // }, 2000)
+            // return Promise.reject(new Error('请先登陆！'))
         }
         request
             .then(data => {
@@ -344,7 +344,7 @@ export default {
                     return reject(new Error(lang.cartIsFull))
                 }
                 // cart = cart.concat(goods)
-                // localStorage.setItem(CART, JSON.stringify(cart))
+                localStorage.setItem(CART, JSON.stringify(cart))
                 return resolve('success')
             } catch (e) {
                 return reject(e)
@@ -470,6 +470,7 @@ export default {
                     if (goods.indexOf(cart[n].id) === -1) {
                         newCart.push(cart[n])
                     }
+                    console.log("newcart",cart[n].id)
                 }
                 localStorage.setItem(CART, JSON.stringify(newCart))
                 return resolve('success')
@@ -607,8 +608,8 @@ export default {
         dispatch
     }) {
         // console.log('getLocalCartAmount=====>')
-        // const cart = await dispatch('getLocalCart')
-        // return cart.length
+        const cart = await dispatch('getLocalCart')
+        return cart.length
     },
     // 使用本地购物车数据置换购物车商品数据
     localCartToGoodsInfo ({
@@ -655,8 +656,10 @@ export default {
 
         return this.$axios({
             method: 'post',
-            url: `/wap/goodsCart/postCart`,
-            data: sendData
+            url: `/web/member/cart/local`,
+            data:{
+                goodsCartList:sendData
+            } 
         })
             .then(data => {
                 return makeCartGoodGroups(data)

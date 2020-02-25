@@ -2219,6 +2219,7 @@
     "soleOut": "商品已售罄"
   },
   "order": {
+    "firstLogin":"请先登录！",
     "success":"添加成功！",
     "tooInp": "输入/选择优惠码",
     "tooInpShort": "输入优惠码",
