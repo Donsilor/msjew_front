@@ -470,6 +470,7 @@ export default {
                     if (goods.indexOf(cart[n].id) === -1) {
                         newCart.push(cart[n])
                     }
+                    console.log("newcart",cart[n].id)
                 }
                 localStorage.setItem(CART, JSON.stringify(newCart))
                 return resolve('success')

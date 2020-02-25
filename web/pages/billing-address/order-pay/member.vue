@@ -2192,14 +2192,13 @@ export default {
       }
       console.log("this.good",this.good)
       const data = arr.join(',')
+      const datas={
+        addressId: this.orderAddress.id,
+        cartIds: data
+      }
       this.canSubmit = false
       this.$axios
-        .get('/web/member/order/tax', {
-          params: {
-            addressId: this.orderAddress.id,
-            cartIds: data
-          }
-        })
+        .post('/web/member/order/tax', datas)
         .then(res => {
           // console.log("tex",res)
           this.canSubmit = true

@@ -64,9 +64,9 @@
             </div>
           </li>
         </ul>
-        <div class="tips">
+        <!-- <div class="tips">
           <i class="icon iconfont icongantanhao1"></i><span>{{ lang2.tips }}</span>
-        </div>
+        </div> -->
         <!-- <div class="btn" @click="goPaySuccess"> 
           @click="goPaySuccess"
           {{ list2[typeIndex].title }}
@@ -227,8 +227,9 @@
             <span>+{{ coin }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
           <li>
+            <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ formatMoney(allFee.productAmount || productAmount) }}</span>
+            ><span>{{ coin }} {{ showOrderAmount }}</span>
           </li>
         </ul>
       </div>
@@ -280,12 +281,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        {
-          url: '/cart/ap.png',
-          type: 2,
-          title: this.LANGUAGE.cart.pay.payType3,
-          des: this.LANGUAGE.cart.pay.type3Text
-        }
+        // {
+        //   url: '/cart/ap.png',
+        //   type: 2,
+        //   title: this.LANGUAGE.cart.pay.payType3,
+        //   des: this.LANGUAGE.cart.pay.type3Text
+        // }
       ],
       sum: '2,120.00',
       info:'',
@@ -320,7 +321,8 @@ export default {
       inputCouponInfo: null,
       selectCouponId: '',
       cuponList: [],
-      session: ''
+      session: '',
+      info:[]
     }
   },
   computed: {
@@ -367,15 +369,26 @@ export default {
       return result
     },
     showOrderAmount() {
+      // console.log("allfee",)
       let result = '--'
-      console.log('this.allFee=====>', JSON.stringify(this.allFee))
-      if (this.allFee.orderAmount === null) {
-        console.log(11111) 
-        result = this.formatMoney(this.productAmount)
-      } else  {
-        console.log(22222) 
-        result = this.formatMoney(this.allFee.orderAmount)
-      } 
+      // console.log('this.allFee=====>', JSON.stringify(this.allFee))
+       if (this.isLogin){
+         if (this.allFee.orderAmount === null) {
+           console.log(11111) 
+           result = this.formatMoney(this.productAmount)
+         } else  {
+           console.log(22222) 
+           result = this.formatMoney(this.allFee.orderAmount)
+         } 
+       } else {
+         if (this.allFee.order_amount === null) {
+           console.log(11111) 
+           result = this.formatMoney(this.goods_amount)
+         } else  {
+           console.log(22222) 
+           result = this.formatMoney(this.allFee.order_amount)
+         } 
+       }
       // else {
       //   console.log(33333) 
       //   result = '--'
@@ -396,15 +409,18 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
+      console.log(this.list,'fffffffffffff')
       this.idList = []
       this.productAmount = 0
       this.list.map((item, index) => {
-        console.log("sssss=====",item)
+        // console.log("sssss=====",item.id)
         this.idList.push(item.id)
-        // this.productAmount = this.productAmount + item.salePrice 
+        // this.idList.push(item.localSn)
+        //  console.log("sssss",this.idList)
+        // this.productAmount = this.productAmount + item.salePrice   localSn
         this.productAmount = parseInt(this.productAmount + item.salePrice) 
       })
-      console.log("sssss",this.idList)
+     
       this.getData() // 获取地址
       this.getCouponList() // 获取优惠券列表
 
@@ -645,27 +661,38 @@ export default {
           // preferFee: this.preferFee,
           cartIds: this.idList.join(',')
         }
-      } 
-      // else {
-      //   url = `/wap/order/getAnonymousTax`
-      //   data = {
-      //     countryId: this.address.countryId,
-      //     provinceId: this.address.provinceId,
-      //     cityId: this.address.cityId,
-      //     preferFee: this.preferFee,
-      //     productAmount: this.productAmount
-      //   }
-      // }
+      } else {
+        console.log("this.list",this.list)
+        url = `/web/member/order-tourist/tax`
+        const goodsCartList=[]
+        for (const i in this.list) {
+          const o = {            
+            createTime: this.list[i].createTime,
+            goods_num: 1,
+            goodsDetailsId: this.list[i].goodsDetailsId,
+            goods_id: this.list[i].goodsDetailsId,
+            group_id: this.list[i].groupId,
+            goods_type: this.list[i].goodsStatus,
+            group_type:
+              this.list[i].groupType !== 0 ? this.list[i].groupType : null
+          }
+          goodsCartList.push(o)
+          console.log("list........",o)
+        }
+        data = {goodsCartList:goodsCartList}
+        console.log("list........",data)
+      }
       this.$axios({
-        method: 'get',
+        method: 'post',
         url: url,
-        params: data
+        data: data
       })
         .then(res => {
-          console.log("费用",res)
+          // console.log("费用",res)
           this.canSubmit = true
           this.allFee = res
-          // console.log("费用",this.allFee)
+          // this.info=res.details
+          // console.log("费用>>>>>>>>",this.info)
         })
         .catch(err => {
           this.canSubmit = false
@@ -731,104 +758,13 @@ export default {
             address: address.details
           }
         }
-        if (this.hasAddress) {
+        // if (this.hasAddress) {
           // 获取相关费用
           this.getTex()
-        }
+        // }
       }
     },
     // 支付
-    goPaySuccess() {
-      this.isPay = true
-      let pay = 0
-      if(this.typeIndex == 0){
-        pay = 6
-      }else if(this.typeIndex == 1){
-        pay = 2
-      }else if(this.typeIndex == 5){
-        pay = 7
-      }
-      // if (this.typeIndex === 5) {
-      //   pay = 1
-      // } else if (this.typeIndex === 1 || this.typeIndex === 0) {
-      //   pay = 2
-      // } else if (
-      //   this.typeIndex === 4 ||
-      //   this.typeIndex === 3 ||
-      //   this.typeIndex === 2
-      // ) {
-      //   pay = 7
-      // }
-      console.log("paytype",pay)
-      this.$axios({
-        // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/ http://wap.bdd.bddia.com
-        method: 'post',
-        url: `/web/pay/create`,
-        data: {
-          orderId: this.info.orderId,
-          coinType: this.info.coinType,
-          payType: pay,
-          tradeType:'wap',
-          returnUrl:'https://wap.bdd.bddia.com/cart/paySuccess?orderId='+this.info.orderId
-        }
-      })
-        .then(res => {
-
-          console.log("config",res)
-          if (res.config) {
-            if (pay !== 7) {
-              window.location.replace(res.config)
-            } else {
-              const promise = new Promise((resolve, reject) => {
-                this.form = []
-                const obj = JSON.parse(res.config)
-                const objKey = Object.keys(obj)
-                for (const i in objKey) {
-                  if (objKey[i] === 'url') {
-                    this.actionLink = obj[objKey[i]]
-                    continue
-                  }
-                  const o = {
-                    name: objKey[i],
-                    val: obj[objKey[i]]
-                  }
-                  this.form.push(o)
-                }
-                resolve()
-              })
-              promise.then(() => {
-                setTimeout(() => {
-                  this.isPay = false
-                  document.getElementById('unionPay').click()
-                }, 2000)
-              })
-            }
-          } else if (!res.config){
-            console.log(88888888)
-            this.isPay = false
-            this.$router.replace({
-              name: 'cart-paySuccess-orderId-price-coinType',
-              params: {
-                orderId: this.info.orderId,
-                price: this.info.orderAmount,
-                coinType: this.info.coinType
-              }
-            })
-          }
-        })
-        .catch(err => {
-          console.log(err)
-          this.$toast.show(err)
-          this.$router.replace({
-            name: 'cart-payFailed-orderId-price-coinType',
-            params: {
-              orderId: this.info.orderId,
-              price: this.info.orderAmount,
-              coinType: this.info.coinType
-            }
-          })
-        })
-    },
     //  已登录创建订单
     createOrder() {
       // if (!this.canSubmit) {
@@ -875,7 +811,7 @@ export default {
           })
       } else {
         const data = []
-        console.log("list------>",this.list)
+        console.log("未登录",this.list)
         for (const i in this.list) {
           const o = {
             createTime: this.list[i].createTime,
@@ -889,6 +825,8 @@ export default {
           }
           data.push(o)
         }
+        console.log("data",data)
+        // console.log("paytype",this.$route.query)
         this.$axios({
           method: 'post',
           url: `/web/member/order-tourist/create`,
@@ -896,16 +834,17 @@ export default {
             goodsCartList:data,
             tradeType:'wap',
             coinType:this.$store.state.coin,
-            returnUrl:'https://wap.bdd.bddia.com/cart/paySuccess?orderId='+this.info.orderId
+            returnUrl:'http://localhost:8328/cart/paySuccess?order_sn={order_sn}' //http://localhost:8318
           }
         })
           .then(res => {
-            const arr = []
-            this.list.map((item, index) => {
-              console.log(arr)
-              arr.push(item.localSn)
-              this.$store.dispatch('removeCart', arr)
-            })
+            console.log("返回结果",res)
+            // const arr = []
+            // this.list.map((item, index) => {
+            //   console.log(arr)
+            //   arr.push(item.localSn)
+            //   this.$store.dispatch('removeCart', arr)
+            // })
             if (res.config) {
               window.location.replace(res.config)
             } else if (!res.config){

@@ -43,16 +43,16 @@
         <div><i class="iconfont icongou" /></div>
       </div>
       <div class="order-email">
-        <span>{{ $t(`${lang}.weWillSendTo`) }}</span
+        <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span
         ><span>{{ data.afterMail }}</span
-        >
+        > -->
         <!-- <i class="iconfont iconzuoshangjiantou" /> -->
       </div>
       <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
       <div class="order-num">
         {{ $t(`${lang}.orderCode`) }}
           <nuxt-link :to="`/account/order-details?orderId=${this.oid}`">
-            <span class="underline" @click="orderDetail()">{{ data.orderNo }}</span>
+            <span class="underline" >{{ data.orderNo }}</span>
           </nuxt-link>
       </div>
       <nuxt-link :to="{name: '/order-details'}"></nuxt-link>
@@ -60,6 +60,7 @@
          <nuxt-link :to="{name: '/account/orders'}">{{ $t(`${lang}.comeBack`) }}</nuxt-link>
       </div> -->
     </div>
+
     <!--未登陆的中间信息-->
     <div v-else class="success-info-out">
       <div class="left-side">
@@ -68,14 +69,17 @@
           <div><i class="iconfont icongou" /></div>
         </div>
         <div class="order-email">
-          <span>{{ $t(`${lang}.weWillSendTo`) }}</span
-          ><span>{{ data.afterMail }}</span
-          >
+          <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span>
+          <span>{{ data.afterMail }}</span> -->
           <!-- <i class="iconfont iconzuoshangjiantou" /> -->
         </div>
         <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
         <div class="order-num">
-          {{ $t(`${lang}.orderCode`) }}<span class="underline">{{ data.orderNo }}</span>
+          {{ $t(`${lang}.orderCode`) }}
+          <nuxt-link :to="`/account/order-details?order_sn=${this.oid}`">
+            <span class="underline" >{{ data2.orderNo }}</span>
+          </nuxt-link>
+          <!-- <span class="underline">{{ data.orderNo }}</span> -->
         </div>
       </div>
       <!-- <div class="right-side">
@@ -96,8 +100,8 @@
         $t(`${lang}.balabalaAgain`)
       }}</span>
     </div> -->
-    <!-- <div class="order-info">
-      <div class="left-info">
+    <div class="order-info">
+      <!-- <div class="left-info">
         <div class="address-info">
           <div class="new-address-title">
             <div class="na-line" />
@@ -106,10 +110,10 @@
           <div class="user-info">
             <div class="user-name">
               {{ data.address.lastName }}{{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
-            </div> -->
-            <!--            <div class="user-phone"><span>{{ data.orderAddress.userTelCode }}</span>{{ data.orderAddress.userTel }}</div>-->
+            </div>
+            <div class="user-phone"><span>{{ data.orderAddress.userTelCode }}</span>{{ data.orderAddress.userTel }}</div>
           </div>
-          <!-- <div class="user-address">
+          <div class="user-address">
             {{ data.address.countryName }}-{{
              data.address.provinceName
             }}{{data.address.cityName }}{{ data.address.address }}
@@ -119,9 +123,9 @@
             <div>{{ data.address.userTel }}</div>
           </div>
           <div class="post-num">{{ data.address.zipCode }}</div>
-          <div class="email-address">{{ data.address.userMail }}</div> -->
-          <!--          <div class="country-code">CHN</div>-->
-          <!-- <div class="line">
+          <div class="email-address">{{ data.address.userMail }}</div> 
+          <div class="country-code">CHN</div>
+           <div class="line">
             <img
               src="../../../static/personal/account/address-bar.png"
               alt=""
@@ -144,8 +148,8 @@
             </dl>
           </div>
         </div>
-      </div>
-      <div class="right-info">
+      </div> -->
+      <!-- <div class="right-info">
         <div class="new-address-title">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
@@ -166,8 +170,8 @@
             <div class="ff">
               {{ data.coinCode }} {{ formatMoney(data.productAmount) }}
             </div>
-          </div> -->
-          <!-- <div class="info-line">
+          </div>
+          <div class="info-line">
             <div class="label">{{ $t(`${lang}.coupon`) }}</div>
             <div class="ff color-pink">
               -{{ data.coinCode }} {{ formatMoney(data.preferFee) }}
@@ -178,8 +182,8 @@
             <div class="ff">
               +{{ data.coinCode }} {{ formatMoney(data.logisticsFee) }}
             </div>
-          </div> -->
-          <!-- <div class="info-line">
+          </div> 
+           <div class="info-line">
             <div class="label">{{ $t(`${lang}.tex`) }}</div>
             <div class="ff">
               +{{ data.coinCode }} {{ formatMoney(data.taxFee) }}
@@ -200,11 +204,11 @@
           <div class="big-info">
             <div>{{ $t(`${lang}.orderTotal`) }}</div>
             <div>{{ data.coinCode }} {{ formatMoney(data.orderAmount) }}</div>
-          </div>
+          </div> 
         </div>
-      </div>
+      </div> -->
     </div> 
-  </div>-->
+  </div>
 </template>
 
 <script>
@@ -215,11 +219,12 @@ export default {
   data() {
     return {
       lang,
-      oid: this.$route.query.orderId,
+      oid: this.$route.query.order_sn||this.$route.query.orderId,
+      // oid2: this.$route.query.orderId,
       return_url:'',
       // data: {
       //   address: {
-      //     countryName: '',
+      //     countryName: '',  http://localhost:8318/complete-payment    http://localhost:8328/cart/paySuccess
       //     provinceName: '',
       //     cityName: '',
       //     address: '',
@@ -265,40 +270,103 @@ export default {
         recvType: null,
         safeFee: null,
         taxFee: null
+      },
+      data2: {
+        allSend: null,
+        coinCode: null,
+        coinId: null,
+        id: null,
+        logisticsFee: null,
+        address: {
+          address: null,
+          addressType: null,
+          cityId: null,
+          cityName: null,
+          countryId: null,
+          countryName: null,
+          createTime: null,
+          firstName: '',
+          id: null,
+          lastName: '',
+          orderId: null,
+          provinceId: null,
+          provinceName: null,
+          userAccount: null,
+          userId: null,
+          userMail: null,
+          userTel: null,
+          userTelCode: null,
+          zipCode: null
+        },
+        orderAmount: null,
+        orderNo: null,
+        orderStatus: null,
+        otherFee: null,
+        preferFee: null,
+        productAmount: null,
+        productCount: null,
+        recvType: null,
+        safeFee: null,
+        taxFee: null
       }
     }
   },
   mounted() {
-    //  console.log(window);
-    // console.log("url======",this.return_url)
-    this.$axios
-      .get('/web/member/order/detail', {
-        params: {
-          orderId: this.oid
-        }
-      })
-      .then(res => {
-        this.data = res.data
-        // setTimeout(() => {
-        //   this.$router.push({path: "/"}); // 强制切换当前路由 path
-        // }, 5000);
-        // console.log("wwwww",this.data)
-      })
-      .catch(err => {
-        if (!err.response) {
-          this.$message.error(err.message)
-        } else {
-          // console.log(err)
-        }
-      })
+     console.log("window",this.oid);
+    // console.log("url======",this.oid2)
+    if(this.$store.getters.hadLogin){
       this.$axios
+        .get('/web/member/order/detail', {
+          params: {
+            orderId: this.oid
+          }
+        })
+        .then(res => {
+          this.data = res.data
+          // setTimeout(() => {
+          //   this.$router.push({path: "/"}); // 强制切换当前路由 path
+          // }, 5000);
+          // console.log("wwwww",this.data)
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+      })
+    }else{
+      this.$axios
+        .get('/web/member/order-tourist/detail', {
+          params: {
+            order_sn: this.oid
+          }
+        })
+        .then(res => {
+          console.log("order_sn",res)
+          this.data2 = res.data
+          // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
+          setTimeout(() => {
+            this.$router.push({path: "/"}); // 强制切换当前路由 path
+          }, 5000);
+          // console.log("wwwww",this.data)
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+      })
+    }
+    this.$axios
       .post('/web/pay/verify', {
           return_url: window.location.href
       })
       .then(res => {
-        setTimeout(() => {
-          this.$router.push({path: "/"}); // 强制切换当前路由 path
-        }, 5000);
+        // setTimeout(() => {
+        //   this.$router.push({path: "/"}); // 强制切换当前路由 path
+        // }, 10000);
         // console.log("return_url",res)
       })
       .catch(err => {
@@ -505,6 +573,7 @@ div {
     background: rgba(255, 255, 255, 1);
     text-align: center;
     display: flex;
+    justify-content: center;
     .left-side {
       width: 50%;
       padding-top: 59px;

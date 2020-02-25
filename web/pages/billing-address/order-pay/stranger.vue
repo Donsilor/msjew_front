@@ -413,8 +413,8 @@
                   <img src="../../static/order/tick.png" alt="" />
                 </div>
               </div> -->
-
-              <div
+              <!-- 支付宝 -->
+              <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
                 class="pay-block"
                 @click="Way(2)"
@@ -423,14 +423,14 @@
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 2" class="pay-price">
+                <div v-show="payWay == 2" class="pay-price"> -->
                   <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-              </div>
+              </div> -->
 
               <!-- <div
                 :class="{ 'pay-choose': payWay == 3 }"
@@ -1526,13 +1526,13 @@
           </div>
         </div>
         <div class="info-line" />
-        <!-- <div
+        <div
           :class="['buy-btn', { disabled: !canSubmit }]"
           @click="createOrder()"
         >
-          <span>{{ $store.state.coin }} {{ showOrderAmount }}</span>
+          <!-- <span>{{ $store.state.coin }} {{ showOrderAmount }}</span> -->
           <span>{{ $t(`${lang}.beiQin`) }}</span>
-        </div> -->
+        </div>
       </div>
 
       
@@ -1575,7 +1575,7 @@ export default {
   mixins: [Address],
   data() {
     return {
-      url:'',
+      // url:'',
       show:false,
       goingPay: false,
       payWay: 0 ,
@@ -1652,11 +1652,11 @@ export default {
     },
     showOrderAmount() {
       let result = '--'
-      // console.log('this.tex=====>', JSON.stringify(this.tex))
-      if (this.tex.orderAmount === null) {
+      console.log('this.tex=====>', this.tex)
+      if (this.tex.order_amount === null) {
         result = this.formatMoney(this.goodsPrice)
-      } else if (typeof this.tex.orderAmount === 'number') {
-        result = this.formatMoney(this.tex.orderAmount)
+      } else if (typeof this.tex.order_amount === 'number') {
+        result = this.formatMoney(this.tex.order_amount)
       } else {
         result = '--'
       }
@@ -1688,7 +1688,7 @@ export default {
     })
     promise
       .then(() => {
-        // this.getTex()
+        this.getTex()
       })
       .catch(err => {
         if (!err.response) {
@@ -1699,6 +1699,7 @@ export default {
       })
   },
   mounted() {
+    // this.getTex()
     this.language = this.getCookie('language')
     window.addEventListener('scroll', this.scrollToTop);
   },
@@ -1762,7 +1763,7 @@ export default {
       this.tooInp = ''
       this.makeGay = false
       this.preferFee = 0
-      this.getTex()
+      // this.getTex()
       this.fuckYou = false
     },
     checkCount() {
@@ -1805,39 +1806,49 @@ export default {
       //   })
     },
     getTex() {
-      // this.canSubmit = false
-      // this.$axios
-      //   .get('/web/order/getAnonymousTax', {
-      //     params: {
-      //       countryId: this.country.areaId,
-      //       provinceId: this.province.areaId,
-      //       cityId: this.city.areaId,
-      //       preferFee: this.preferFee,
-      //       productAmount: this.goodsPrice
-      //     }
-      //   })
-      //   .then(res => {
-      //     this.canSubmit = true
-      //     this.tex = res
-      //   })
-      //   .catch(err => {
-      //     this.canSubmit = false
-      //     this.$message.error(err.message)
-      //     this.tex = {
-      //       logisticsFee: 0,
-      //       taxFee: 0,
-      //       safeFee: 0,
-      //       orderAmount: null,
-      //       planDays: '--'
-      //     }
-      //     if (!err.response) {
-      //       this.$message.error(err.message)
-      //     } else {
-      //       // console.log(err)
-      //     }
-      //   })
+      this.canSubmit = false
+      const json=[]
+      console.log("this.good",this.good)
+      for (const i in this.good) {
+        const o = {
+          createTime: this.good[i].data[0].createTime || new Date().getTime(),
+          goods_num: this.good[i].data[0].goodsCount,
+          goodsDetailsId: this.good[i].data[0].goodsDetailsId,
+          goods_id: this.good[i].data[0].goodsDetailsId,
+          group_id: this.good[i].data[0].groupId || null,
+          group_type:this.good[i].data[0].groupType,
+          goods_type: this.good[i].data[0].goodsType
+        }  
+        json.push(o)
+        console.log("sssss",json)
+      }
+      this.$axios
+        .post('/web/member/order-tourist/tax', {
+            goodsCartList:json
+          })
+        .then(res => {
+          this.canSubmit = true
+          this.tex = res.data
+          console.log("税费",this.tex)
+        })
+        .catch(err => {
+          this.canSubmit = false
+          this.$message.error(err.message)
+          this.tex = {
+            logisticsFee: 0,
+            taxFee: 0,
+            safeFee: 0,
+            orderAmount: null,
+            planDays: '--'
+          }
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
     },
-    createOrder() {
+    createOrder() { 
       const json=[]
       // const json = {
       //   carts: [],
@@ -1856,12 +1867,14 @@ export default {
           goodsDetailsId: this.good[i].data[0].goodsDetailsId,
           goods_id: this.good[i].data[0].goodsId,
           group_id: this.good[i].data[0].groupId || null,
+          group_type:this.good[i].data[0].groupType,
           goods_type: this.good[i].data[0].goodsType
+          
 
           // goods_id  goods_type   goods_num   group_type  group_id  createTime
         }  
         json.push(o)
-        console.log("sssss",json)
+        console.log("sssss",this.$route.query)
       }
       this.$axios({
         method: 'post',
@@ -1870,7 +1883,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'http://localhost:8318/complete-payment?orderId='+this.$route.query.orderId
+          returnUrl:'http://localhost:8318/complete-payment?order_sn={order_sn}'
         }
       })
         .then(res => {
