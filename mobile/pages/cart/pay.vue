@@ -163,7 +163,7 @@ export default {
           coinType: this.info.coinType,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'https://wap.bdd.bddia.com/cart/paySuccess?orderId='+this.info.orderId
+          returnUrl:'https://wap.bddco.com/cart/paySuccess?orderId='+this.info.orderId
         }
       })
         .then(res => {
