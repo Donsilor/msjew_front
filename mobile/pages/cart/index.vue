@@ -363,7 +363,7 @@ export default {
                 createTime: item.createTime,
                 goods_num: val.goodsCount,
                 goodsDetailsId: val.goodsDetailsId,
-                goods_id: val.goodsId,
+                goods_id: val.goodsDetailsId,
                 goods_type:val.goodsType,
                 group_id:
                   val.groupType === 1
@@ -374,6 +374,7 @@ export default {
                 group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
+              console.log("ooooo>>>",o)
               this.cartList.push(o)
             })
           })

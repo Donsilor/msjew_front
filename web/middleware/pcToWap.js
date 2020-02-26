@@ -64,7 +64,6 @@ function queryParams (data) {
       return
     }
     // http://localhost:8328   https://wap.bddco.com   https://wap.bdd.bddia.com
-
     //头部host
 	let headerHost = req.headers['host']
     //生产环境

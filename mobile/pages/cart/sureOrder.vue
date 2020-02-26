@@ -817,7 +817,7 @@ export default {
             createTime: this.list[i].createTime,
             goods_num: 1,
             goodsDetailsId: this.list[i].goodsDetailsId,
-            goods_id: this.list[i].goodsId,
+            goods_id: this.list[i].goodsDetailsId,
             group_id: this.list[i].groupId,
             goods_type: this.list[i].goodsStatus,
             group_type:
