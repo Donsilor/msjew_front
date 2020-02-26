@@ -1578,7 +1578,7 @@ export default {
       // url:'',
       show:false,
       goingPay: false,
-      payWay: 0 ,
+      payWay: 6 ,
       actionLink: '',
       form: [],
       answer: false,
@@ -1855,6 +1855,9 @@ export default {
         })
     },
     createOrder() { 
+      // if(this.payWay==''){
+      //   console.log(")
+      // }
       let json=[]
      
       for (const i in this.good) {
@@ -1880,7 +1883,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //
+          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318
         }
       })
         .then(res => {

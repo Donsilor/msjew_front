@@ -181,7 +181,7 @@ export default {
     }
     return {
       lang,
-      payWay: this.$route.query.payType || 2,
+      payWay: this.$route.query.payType || 6,
       answer: false,
       pay: false,
       isPay: false,
