@@ -702,13 +702,13 @@ export default {
 
         console.log('sendData===========>', sendData)
 
-        return this.$axios({
-            method: 'post',
-            url: '/web/member/cart/local',
-            data: {
-                goodsCartList:sendData
-            }
-        })
+			return this.$axios({
+				method: 'post',
+				url: '/web/member/cart/local',
+				data: {
+					goodsCartList:sendData
+				}
+			})
             .then(res => {
                 console.log("本地置换数据",res.data)
                 return makeCartGoodGroups(res.data)
