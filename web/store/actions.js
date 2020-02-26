@@ -308,7 +308,7 @@ export default {
             data = data.map(good => {
                 good.createTime = group.createTime
                 good.updateTime = group.updateTime
-                good.goods_id = good.goodsDetailsId 
+                good.goods_id = good.goodsDetailsId
                 return good
             })
             sendData = sendData.concat(data)
