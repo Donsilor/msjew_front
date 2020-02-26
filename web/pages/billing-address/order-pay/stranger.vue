@@ -1880,7 +1880,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'
+          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //
         }
       })
         .then(res => {

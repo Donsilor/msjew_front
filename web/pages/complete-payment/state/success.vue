@@ -364,6 +364,7 @@ export default {
           return_url: window.location.href
       })
       .then(res => {
+        this.$store.dispatch('removeCart', this.oid)
         // setTimeout(() => {
         //   this.$router.push({path: "/"}); // 强制切换当前路由 path
         // }, 10000);
