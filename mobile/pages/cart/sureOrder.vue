@@ -51,7 +51,7 @@
                 <b
                   >{{ item.title }}
                   <span
-                    v-if="item.type == '5'"
+                    v-if="item.type == ''"
                     class="ph"
                     @click="needtips = !needtips"
                     >?</span
@@ -770,6 +770,10 @@ export default {
       // if (!this.canSubmit) {
       //   return
       // }
+      if(this.typeIndex==''){
+        this.$toast.show("请选择支付方式")
+        return
+      }
       if (this.isLogin) {
         if (!this.hasAddress) {
           this.$toast.show(this.lang.toast2)
