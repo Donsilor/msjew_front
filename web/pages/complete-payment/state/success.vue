@@ -346,9 +346,9 @@ export default {
           console.log("order_sn",res)
           this.data2 = res.data
           // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
-          setTimeout(() => {
-            this.$router.push({path: "/"}); // 强制切换当前路由 path
-          }, 5000);
+          // setTimeout(() => {
+          //   this.$router.push({path: "/"}); // 强制切换当前路由 path
+          // }, 5000);
           // console.log("wwwww",this.data)
         })
         .catch(err => {
@@ -364,7 +364,8 @@ export default {
           return_url: window.location.href
       })
       .then(res => {
-        this.$store.dispatch('removeCart', this.oid)
+        console.log("oid",this.oid)
+        this.$store.dispatch('removeCart',this.oid)
         // setTimeout(() => {
         //   this.$router.push({path: "/"}); // 强制切换当前路由 path
         // }, 10000);
