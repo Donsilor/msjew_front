@@ -133,7 +133,7 @@ export default {
         this.$router.push({
           name: 'marriage-ring-pair-ring-detail',
           query: {
-            ringId: obj.groupId
+            goodId: obj.groupId
           }
         })
       } else {

@@ -511,7 +511,7 @@ export default {
         this.$router.push({
           name: 'marriage-ring-pair-ring-detail',
           query: {
-            ringId: item.groupId,
+            goodId: item.groupId,
             ct: this.isLogin ? item.id : item.localSn,
             dt1: item.goodsDetailsId,
             dt2: this.list[index + 1].goodsDetailsId
