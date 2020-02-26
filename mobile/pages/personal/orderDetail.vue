@@ -683,7 +683,7 @@ export default {
         console.log('info====>', info)
         routerName = 'marriage-ring-pair-ring-detail'
         routerQuery = {
-          ringId: info.data[0].groupId
+          goodId: info.data[0].groupId
         }
       }
       if ([2].indexOf(info.groupType) > -1) {

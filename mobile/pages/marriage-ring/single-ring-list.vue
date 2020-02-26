@@ -120,12 +120,14 @@ export default {
     _this.$nextTick(() => {
       this.conditions[0].options = this.CONDITION_INFO.style.womanRings
       this.categoryId = 2
-      this.changeGender(this.$route.query.type)
+      let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
+      let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
+      this.changeGender(this.$route.query.type,style,material)
       // this.madeUpEv()
     })
   },
   methods: {
-    changeGender(type = 'lady') {
+    changeGender(type = 'lady',style,material) {
       if (['lady', 'gentlemen'].indexOf(type) > -1) {
         this.gender = type
       }
@@ -133,8 +135,8 @@ export default {
         type === `lady`
           ? this.CONDITION_INFO.style.womanRings
           : this.CONDITION_INFO.style.manRings
-      this.conditions[0].checked = ''
-      this.conditions[1].checked = ''
+      this.conditions[0].checked = style
+      this.conditions[1].checked = material
       this.madeUpEv()
     },
     // 组装Ev

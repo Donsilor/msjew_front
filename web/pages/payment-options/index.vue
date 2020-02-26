@@ -228,11 +228,11 @@ export default {
       const data ={
         orderId: this.$route.query.orderId,
         coinType: this.$route.query.coinType,
-        // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318   https://www.bdd.bddia.com
+        // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318   https://www.bdd.bddia.com https://www.bddco.com/
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        returnUrl:'https://www.bdd.bddia.com/complete-payment?orderId='+this.$route.query.orderId
+        returnUrl:'http://www.bdd.bddia.com/complete-payment?orderId='+this.$route.query.orderId
       }
       this.goingPay = true
       this.$axios
