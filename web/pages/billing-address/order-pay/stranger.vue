@@ -1856,7 +1856,8 @@ export default {
     },
     createOrder() { 
       // if(this.payWay==''){
-      //   console.log(")
+      //   console.log("请选择支付方式")
+      //   return
       // }
       let json=[]
      
