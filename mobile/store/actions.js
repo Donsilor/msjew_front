@@ -33,6 +33,7 @@ function makeCartGoodGroups (cart = []) {
     const result = []
     const localData = {}
     cart.forEach(item => {
+        item.goodsId=item.goodsDetailsId
         if (localData.hasOwnProperty(item.localSn)) {
             localData[item.localSn].data.push(item)
         } else {
@@ -43,6 +44,7 @@ function makeCartGoodGroups (cart = []) {
         }
     })
     let keys = Object.keys(localData)
+    console.log("keys",keys)
     keys = keys.sort((a, b) => {
         return b - a
     })
@@ -181,7 +183,7 @@ export default {
         commit,
         dispatch
     }) {
-        // console.log('synchronizeCart=====>')
+        console.log('synchronizeCart=====>同步购物车')
 
         if (!getters.hadLogin) {
             return Promise.reject(new Error('只有登录后才可以同步购物车'))
@@ -194,10 +196,18 @@ export default {
         let sendData = []
         groups.forEach(group => {
             let data = group.data || []
+            console.log("data",data)
             data = data.map(good => {
-                good.createTime = group.createTime
-                good.updateTime = group.updateTime
-                return good
+                let item = {}
+                item.createTime = group.createTime
+                item.updateTime = group.updateTime
+                item.goods_id = good.goodsId
+                item.goods_type = good.goodsType
+                item.goods_num = good.goodsCount
+                item.group_type = good.groupType
+                item.group_id = good.groupId
+                // item.goodsDetailsId = good.goodsDetailsId
+                return item
             })
             sendData = sendData.concat(data)
         })
@@ -210,7 +220,7 @@ export default {
             }
         })
             .then(data => {
-                console.log("aaaaa",data)
+                // console.log("aaaaa",data)
                 dispatch('cleanLocalCart')
                 return Promise.resolve('success')
             })
@@ -647,6 +657,7 @@ export default {
             goods = goods.map(good => {
                 good.updateTime = item.id
                 good.createTime = item.id
+                good.goods_id = good.goodsDetailsId
                 return good
             })
             sendData = sendData.concat(goods)
