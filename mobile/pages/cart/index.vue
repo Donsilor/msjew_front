@@ -203,11 +203,13 @@ export default {
     // 全选与反选
     selectAlls() {
       this.selectAll = !this.selectAll
-      
+      console.log("全选", this.list)
       for (let i = 0; i < this.list.length; i++) {
-        if (this.list[i].goodsStatus === 2 && this.list[i].status === 1) {
+        if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
+           console.log("所有")
           this.list[i].isSelect = this.selectAll
         } else {
+          console.log("否则")
           this.list[i].isSelect = false
         }
       }

@@ -433,6 +433,25 @@ export default {
             }
         })
     },
+    //
+    setLocalCartOrder({ $axios, state, getters, commit, dispatch }, orderSn) {
+        const cartOrderSn = 'cartOrderSn'
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                localStorage.setItem(cartOrderSn, orderSn)
+                return resolve()
+            } catch (e) {
+                return reject(e)
+            }
+        })
+    },
+    //
+    getLocalCartOrder ({ $axios, state, getters, commit, dispatch }) {
+        const cartOrderSn = 'cartOrderSn'
+        return localStorage.getItem(cartOrderSn)
+    },
+
     // 删除购物车商品
     removeCart ({ $axios, state, getters, commit, dispatch }, goods = []) {
         console.log('removeCart=====>',goods)

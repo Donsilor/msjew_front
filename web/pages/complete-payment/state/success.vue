@@ -220,7 +220,6 @@ export default {
     return {
       lang,
       oid: this.$route.query.order_sn||this.$route.query.orderId,
-      // oid2: this.$route.query.orderId,
       return_url:'',
       // data: {
       //   address: {
@@ -336,6 +335,9 @@ export default {
           }
       })
     }else{
+      this.$store.dispatch('getLocalCartOrder').then(v => {
+        this.$store.dispatch('removeCart',v)
+      })
       this.$axios
         .get('/web/member/order-tourist/detail', {
           params: {
@@ -364,8 +366,10 @@ export default {
           return_url: window.location.href
       })
       .then(res => {
-        console.log("oid",this.oid)
-        this.$store.dispatch('removeCart',this.oid)
+        console.log("oid",this.oid2)
+        // if(res){
+          
+        // }
         // setTimeout(() => {
         //   this.$router.push({path: "/"}); // 强制切换当前路由 path
         // }, 10000);

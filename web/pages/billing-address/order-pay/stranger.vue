@@ -1668,6 +1668,7 @@ export default {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
+          this.$store.commit('setLocalCartOrder', this.pathTakeIds)
           console.log(`good22222======>`, res)
           // for(const i in res){
           //   console.log("遍历",i)
