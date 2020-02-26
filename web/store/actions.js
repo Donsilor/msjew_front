@@ -54,8 +54,8 @@ function makeCartGoodGroups (cart = []) {
     const localData = {}
     const keyName = 'createTime'
     cart.forEach(item => {
-        // result.push(item)
-        
+    //    console.log("item>>>>>>>>>",item)
+        item.goodsId=item.goodsDetailsId
         if (localData.hasOwnProperty(item[keyName])) {
             localData[item[keyName]].data.push(item)
         } else {
@@ -80,7 +80,6 @@ function makeCartGoodGroups (cart = []) {
     // console.log("iiiii", result)
     // 将定制的商品进行排序，钻石放在后面
     result.map(item => {
-        console
         if (item.groupType === null) {
             // 单品
             const simpleGoodsEntity = item.data[0].simpleGoodsEntity || {}
@@ -293,7 +292,7 @@ export default {
      */
     // 同步到线上购物车中
     async synchronizeCart ({ $axios, state, getters, commit, dispatch }) {
-        // console.log('synchronizeCart=====>')
+        console.log('synchronizeCart=====>同步购物车')
 
         if (!getters.hadLogin) {
             return Promise.reject(new Error('只有登录后才可以同步购物车'))
@@ -312,8 +311,8 @@ export default {
                 return good
             })
             sendData = sendData.concat(data)
-            // console.log("购物车", sendData)
         })
+        console.log("购物车", sendData)
 
         return this.$axios({
             method: 'post',
@@ -383,6 +382,7 @@ export default {
         goods = goods.map(item => {
             item.createTime = time
             item.updateTime = time
+            item.goods_id=item.goodsDetailsId
             return item
         })
 
@@ -668,7 +668,7 @@ export default {
         { $axios, state, getters, commit, dispatch },
         localCart
     ) {
-        // console.log("localtion",localCart)
+        console.log("localtion",localCart)
         let data = null
         if (Array.isArray(localCart)) {
             data = localCart
@@ -691,10 +691,12 @@ export default {
         let sendData = []
         data.forEach(item => {
             let goods = item.data
+            console.log(goods,'dssasdf')
             // console.log('goods----------->', item)
             goods = goods.map(good => {
                 good.updateTime = item.id
                 good.createTime = item.id
+                good.goods_id = good.goodsDetailsId
                 return good
             })
             sendData = sendData.concat(goods)
