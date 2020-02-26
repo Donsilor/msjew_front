@@ -243,6 +243,7 @@ export default {
         if (this.list[i].isSelect) {
           // console.log(i, 'iiii')
           newPrice = newPrice + parseFloat(this.list[i].salePrice)
+          console.log("price",newPrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
             this.sumNum = this.sumNum + 1

@@ -243,6 +243,7 @@ export default {
           _this.$store.commit('setToken', res.access_token)
           _this.$store.commit('setUserInfo', res.member);
           _this.$toast.show(_this.lang['login-success'])
+          _this.$store.dispatch('synchronizeCart')
           // _this.$store.dispatch('synchronizeCart')
           const lastUrl = _this.$store.state.lastUrl
           _this.$store.commit('setLastUrl', '')
@@ -302,7 +303,7 @@ export default {
           _this.$toast.show(_this.lang['login-success'])
           _this.$store.commit('setUserInfo', res.member);
           const lastUrl = _this.$store.state.lastUrl
-          //  _this.$store.dispatch('synchronizeCart')
+           _this.$store.dispatch('synchronizeCart')
           _this.$store.commit('setLastUrl', '')
           setTimeout(() => {
             if (lastUrl) {

@@ -183,7 +183,7 @@
             <span>{{ lang.allFee }} </span
             ><span
               >{{ coin }}
-              {{ formatMoney(allFee.productAmount || productAmount) }}</span
+              {{ formatMoney( productAmount) }}</span
             >
           </li>
           <li v-show="preferFee > 0">
@@ -398,7 +398,7 @@ export default {
     }
   },
   mounted() {
-    
+    console.log("allFee",this.allFee)
     this.$nextTick(() => {
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
@@ -409,16 +409,17 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
-      console.log(this.list,'fffffffffffff')
+      // console.log(this.list,'fffffffffffff')
       this.idList = []
       this.productAmount = 0
       this.list.map((item, index) => {
         // console.log("sssss=====",item.id)
         this.idList.push(item.id)
         // this.idList.push(item.localSn)
-        //  console.log("sssss",this.idList)
+        //  console.log("sssss",this.productAmount)
         // this.productAmount = this.productAmount + item.salePrice   localSn
-        this.productAmount = parseInt(this.productAmount + item.salePrice) 
+        this.productAmount = parseFloat(this.productAmount + item.salePrice) 
+        // console.log("productAmount",this.productAmount)
       })
      
       this.getData() // 获取地址
@@ -431,7 +432,6 @@ export default {
     })
   },
   methods: {
-    formatMoney: formatMoney,
     changeType(ind) {
       // console.log("选择哪一个",ind)
       this.typeIndex = ind

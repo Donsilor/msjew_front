@@ -1669,6 +1669,9 @@ export default {
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           console.log(`good22222======>`, res)
+          // for(const i in res){
+          //   console.log("遍历",i)
+          // }
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
@@ -1807,20 +1810,23 @@ export default {
     },
     getTex() {
       this.canSubmit = false
-      const json=[]
-      console.log("this.good",this.good)
+      let json=[]
+     
       for (const i in this.good) {
-        const o = {
-          createTime: this.good[i].data[0].createTime || new Date().getTime(),
-          goods_num: this.good[i].data[0].goodsCount,
-          goodsDetailsId: this.good[i].data[0].goodsDetailsId,
-          goods_id: this.good[i].data[0].goodsDetailsId,
-          group_id: this.good[i].data[0].groupId || null,
-          group_type:this.good[i].data[0].groupType,
-          goods_type: this.good[i].data[0].goodsType
-        }  
-        json.push(o)
-        console.log("sssss",json)
+        let group = this.good[i].data
+        let item = group.map(item => {
+          return {
+            createTime: item.createTime || new Date().getTime(),
+            goods_num: item.goodsCount,
+            goodsDetailsId: item.goodsDetailsId,
+            goods_id: item.goodsDetailsId,
+            group_id: item.groupId || null,
+            group_type:item.groupType,
+            goods_type: item.goodsType
+          }
+        })
+
+        json = json.concat(item)
       }
       this.$axios
         .post('/web/member/order-tourist/tax', {
@@ -1849,32 +1855,23 @@ export default {
         })
     },
     createOrder() { 
-      const json=[]
-      // const json = {
-      //   carts: [],
-      //   orderAmount: this.tex.orderAmount,
-      //   productAmount: this.goodsPrice,
-      //   recvType: 1,
-      //   userRemark: this.remark,
-      //   session: new Date().getTime().toString(),
-      //   couponCode: this.tooInp
-      // }
-      console.log("this.good",this.good)
+      let json=[]
+     
       for (const i in this.good) {
-        const o = {
-          createTime: this.good[i].data[0].createTime || new Date().getTime(),
-          goods_num: this.good[i].data[0].goodsCount,
-          goodsDetailsId: this.good[i].data[0].goodsDetailsId,
-          goods_id: this.good[i].data[0].goodsId,
-          group_id: this.good[i].data[0].groupId || null,
-          group_type:this.good[i].data[0].groupType,
-          goods_type: this.good[i].data[0].goodsType
-          
+        let group = this.good[i].data
+        let item = group.map(item => {
+          return {
+            createTime: item.createTime || new Date().getTime(),
+            goods_num: item.goodsCount,
+            goodsDetailsId: item.goodsDetailsId,
+            goods_id: item.goodsDetailsId,
+            group_id: item.groupId || null,
+            group_type:item.groupType,
+            goods_type: item.goodsType
+          }
+        })
 
-          // goods_id  goods_type   goods_num   group_type  group_id  createTime
-        }  
-        json.push(o)
-        console.log("sssss",this.$route.query)
+        json = json.concat(item)
       }
       this.$axios({
         method: 'post',
@@ -1883,12 +1880,12 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'https://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'
+          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'
         }
       })
         .then(res => {
           // console.log('od===>', res)
-          this.$store.dispatch('removeCart', this.pathTakeIds)
+          // this.$store.dispatch('removeCart', this.pathTakeIds)
           if(res.data.config){
             window.location.replace(res.data.config)
           }else {
