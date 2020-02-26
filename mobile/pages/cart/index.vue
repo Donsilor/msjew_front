@@ -374,6 +374,7 @@ export default {
                 group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
+              console.log("ooooo>>>",o)
               this.cartList.push(o)
             })
           })

@@ -663,7 +663,7 @@ export default {
             sendData = sendData.concat(goods)
         })
 
-        // console.log('sendData===========>', sendData)
+        console.log('sendData===========>', sendData)
 
         return this.$axios({
             method: 'post',
