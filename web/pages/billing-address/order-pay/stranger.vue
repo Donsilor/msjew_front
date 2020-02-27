@@ -1745,7 +1745,7 @@ export default {
       localStorage.setItem('url',url)
       setTimeout(() => {
         this.$router.push({
-            path: `/login`,
+            path: `/login?type=register`,
             // query: {url}
         })
       },0)
