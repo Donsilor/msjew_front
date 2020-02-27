@@ -1699,5 +1699,39 @@ export default {
             .catch(err => {
                 return Promise.reject(err)
             })
+    },
+
+
+    // 获取用户数据
+    getSiteSetting ({ $axios, state, commit, dispatch },type='') {
+        return this.$axios({
+            method: 'get',
+            url: '/web/site/setting'
+        })
+            .then(res => {
+                console.log("配置",res.data)
+                if(type == 'coin'){
+                    commit('setCoin', res.data.currency)
+                    return res.data.currency
+                }else if(type == 'language'){
+                    commit('setLanguage', res.data.language)
+                    return res.data.language
+                }else if(type == 'area'){
+                    console.log("11111115555",res.data)
+                    commit('setAreaId', res.data.area_id)
+                    return res.data.area_id
+                }else{
+                    commit('setCoin', res.data.currency)
+                    commit('setLanguage', res.data.language)
+                    return res.data
+                }
+                
+                
+                
+                
+            })
+            .catch(err => {
+                return Promise.reject(err)
+            })
     }
 }
