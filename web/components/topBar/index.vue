@@ -1008,6 +1008,10 @@ export default {
     // 点击登入获取上页url
     login(){
       const oldurl=window.location.pathname
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+      }
       const params=window.location.search
       const url=oldurl+params
       localStorage.setItem('url',url)
