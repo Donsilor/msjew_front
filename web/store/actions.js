@@ -67,7 +67,7 @@ function makeCartGoodGroups (cart = []) {
     })
     
     let keys = Object.keys(localData)
-    console.log("local",keys)
+    // console.log("local",keys)
     keys = keys.sort((a, b) => {
         return b - a
     })
@@ -291,7 +291,7 @@ export default {
      */
     // 同步到线上购物车中
     async synchronizeCart ({ $axios, state, getters, commit, dispatch }) {
-        console.log('synchronizeCart=====>同步购物车')
+        // console.log('synchronizeCart=====>同步购物车')
 
         if (!getters.hadLogin) {
             return Promise.reject(new Error('只有登录后才可以同步购物车'))
@@ -433,7 +433,7 @@ export default {
             }
         })
     },
-    //保存订单id
+    //保存游客订单id
     setLocalCartOrder({ $axios, state, getters, commit, dispatch }, orderSn) {
         const cartOrderSn = 'cartOrderSn'
 
@@ -446,7 +446,7 @@ export default {
             }
         })
     },
-    //获取订单id
+    //获取游客订单id
     getLocalCartOrder ({ $axios, state, getters, commit, dispatch }) {
         const cartOrderSn = 'cartOrderSn'
         return localStorage.getItem(cartOrderSn)

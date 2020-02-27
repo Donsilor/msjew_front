@@ -162,7 +162,7 @@ export default {
       })
     },
     goPay() {
-      console.log("id",this.list)
+      // console.log("id",this.list)
       const arr = []
       for (let i = 0; i < this.list.length; i++) {
         if (this.list[i].isSelect) {
@@ -203,13 +203,13 @@ export default {
     // 全选与反选
     selectAlls() {
       this.selectAll = !this.selectAll
-      console.log("全选", this.list)
+      // console.log("全选", this.list)
       for (let i = 0; i < this.list.length; i++) {
         if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
-           console.log("所有")
+          //  console.log("所有")
           this.list[i].isSelect = this.selectAll
         } else {
-          console.log("否则")
+          // console.log("否则")
           this.list[i].isSelect = false
         }
       }
@@ -245,7 +245,7 @@ export default {
         if (this.list[i].isSelect) {
           // console.log(i, 'iiii')
           newPrice = newPrice + parseFloat(this.list[i].salePrice)
-          console.log("price",newPrice)
+          // console.log("price",newPrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
             this.sumNum = this.sumNum + 1
@@ -336,7 +336,7 @@ export default {
         }
       })
         .then(res => {
-          console.log("res",res)
+          // console.log("res",res)
           this.doFormat(res)
         })
         .catch(err => {
@@ -346,12 +346,12 @@ export default {
     // 获取本地local列表
     getLocalCart() {
       this.$store.dispatch('getLocalCart').then(res => {
-        console.log("djkashdkasjdklasj",res)
+        // console.log("djkashdkasjdklasj",res)
         if (res.length > 0) {
           this.noListData = false
           this.cartList = []
           res.map((item, index) => {
-            console.log("item",item)
+            // console.log("item",item)
             item.data.map((val, ind) => {
               // Status 商品状态(1-仓库,2-上架,3-下架,4-删除)   goods_id  goods_type  goods_num  group_type  group_id  createTime
               // 定制
@@ -377,12 +377,12 @@ export default {
                 group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
-              console.log("ooooo>>>",o)
+              // console.log("ooooo>>>",o)
               this.cartList.push(o)
             })
           })
           this.cartList.reverse()
-          console.log("this.cartList",this.cartList)
+          // console.log("this.cartList",this.cartList)
           this.getLocalList(this.cartList)
         } else {
           this.num = 0
@@ -399,7 +399,7 @@ export default {
           url: `/web/member/cart`
         })
         .then(res => {
-          console.log("线上llll",res)
+          // console.log("线上llll",res)
           this.doFormat(res)
         })
         .catch(err => {

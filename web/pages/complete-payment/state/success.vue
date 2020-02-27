@@ -311,7 +311,7 @@ export default {
     }
   },
   mounted() {
-     console.log("window",this.oid);
+    //  console.log("window",this.oid);
     // console.log("url======",this.oid2)
     if(this.$store.getters.hadLogin){
       this.$axios
@@ -322,9 +322,9 @@ export default {
         })
         .then(res => {
           this.data = res.data
-          // setTimeout(() => {
-          //   this.$router.push({path: "/"}); // 强制切换当前路由 path
-          // }, 5000);
+          setTimeout(() => {
+            this.$router.push({path: "/"}); // 强制切换当前路由 path
+          }, 5000);
           // console.log("wwwww",this.data)
         })
         .catch(err => {
@@ -349,9 +349,9 @@ export default {
           // console.log("order_sn",res)
           this.data2 = res.data
           // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
-          // setTimeout(() => {
-          //   this.$router.push({path: "/"}); // 强制切换当前路由 path
-          // }, 5000);
+          setTimeout(() => {
+            this.$router.push({path: "/"}); // 强制切换当前路由 path
+          }, 5000);
           // console.log("wwwww",this.data)
         })
         .catch(err => {
@@ -367,7 +367,7 @@ export default {
           return_url: window.location.href
       })
       .then(res => {
-        console.log("oid",this.oid2)
+        // console.log("oid",this.oid2)
         // if(res){
           
         // }

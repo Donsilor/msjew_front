@@ -773,10 +773,12 @@ export default {
       //   return
       // }
       // console.log("aaaa",this.typeIndex)
-      if(this.typeIndex!==0){
-        this.$toast.show(this.lang.toast4)
-        return
-      }
+       if (!this.isLogin) {
+         if(this.typeIndex!==0){
+           this.$toast.show(this.lang.toast4)
+           return
+         }
+       }
       if (this.isLogin) {
         if (!this.hasAddress) {
           this.$toast.show(this.lang.toast2)
