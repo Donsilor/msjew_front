@@ -34,13 +34,6 @@ export default {
     state.language = val
     Cookie && Cookie.set('language', val, { path: '/' })
   },
-
-  setAreaId(state, val) {
-    console.log(666)
-    state.area_id = val
-    Cookie && Cookie.set('area_id', val, { path: '/' })
-  },
-
   setUserInfo(state, val) {
     state.userInfo = val
     // Vue.set(state, 'userInfo', val)

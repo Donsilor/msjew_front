@@ -21,17 +21,8 @@ export default {
     mounted () {
         const _this = this
         _this.$nextTick(async () => {
-            console.log(11111,_this.$store.state.coin,_this.$store.state.language,_this.$store.state.area_id)
             if (!_this.$store.state.coin || !_this.$store.state.language) {
-                console.log(22)
-                await _this.$store.dispatch('getSiteSetting')
             }
-
-            if(!_this.$store.state.area_id){
-                console.log(333)
-                await _this.$store.dispatch('getSiteSetting','area')
-            }
-
             if (_this.$store.getters.hadLogin) {
 
                 // 获取用户数据
