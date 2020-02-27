@@ -325,6 +325,7 @@ export default {
   },
   data() {
     return {
+      url:this.$route.query.url,
       lang,
       langcode,
       waitingTime: defaultTime,
@@ -544,8 +545,11 @@ export default {
 		  localStorage.setItem('accessToken',data.access_token);
           _this.$store.commit('setToken', data.access_token)
           _this.$store.commit('setUserInfo',data.member)
-          const lastUrl = _this.$store.state.lastUrl
-          _this.$store.commit('setLastUrl', '')
+          _this.$store.dispatch('synchronizeCart')
+            // const lastUrl = _this.$store.state.lastUrl
+            const lastUrl=localStorage.getItem("url")
+          // const lastUrl = _this.$store.state.lastUrl
+          // _this.$store.commit('setLastUrl', '')
 		  
           setTimeout(() => {
             if (lastUrl) {
@@ -608,9 +612,11 @@ export default {
 		  localStorage.setItem('accessToken',data.access_token);
           _this.$store.commit('setToken', data.access_token)
           _this.$store.commit('setUserInfo',data.member)
-          const lastUrl = _this.$store.state.lastUrl
-          _this.$store.commit('setLastUrl', '')
-		  
+          // const lastUrl = _this.$store.state.lastUrl
+          // _this.$store.commit('setLastUrl', '')
+          _this.$store.dispatch('synchronizeCart')
+            // const lastUrl = _this.$store.state.lastUrl
+            const lastUrl=localStorage.getItem("url")
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({
