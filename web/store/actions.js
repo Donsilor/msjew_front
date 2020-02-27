@@ -433,7 +433,7 @@ export default {
             }
         })
     },
-    //
+    //保存订单id
     setLocalCartOrder({ $axios, state, getters, commit, dispatch }, orderSn) {
         const cartOrderSn = 'cartOrderSn'
 
@@ -446,7 +446,7 @@ export default {
             }
         })
     },
-    //
+    //获取订单id
     getLocalCartOrder ({ $axios, state, getters, commit, dispatch }) {
         const cartOrderSn = 'cartOrderSn'
         return localStorage.getItem(cartOrderSn)

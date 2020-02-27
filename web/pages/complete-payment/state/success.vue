@@ -336,7 +336,8 @@ export default {
       })
     }else{
       this.$store.dispatch('getLocalCartOrder').then(v => {
-        this.$store.dispatch('removeCart',v)
+        this.$store.dispatch('removeCart',v.split(','))
+        console.log("v",v)
       })
       this.$axios
         .get('/web/member/order-tourist/detail', {
@@ -345,7 +346,7 @@ export default {
           }
         })
         .then(res => {
-          console.log("order_sn",res)
+          // console.log("order_sn",res)
           this.data2 = res.data
           // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
           // setTimeout(() => {
