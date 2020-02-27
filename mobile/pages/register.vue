@@ -405,6 +405,7 @@ export default {
   },
   data() {
     return {
+      url:this.$route.query.url,
       lang: this.LANGUAGE.register,
       langcode:this.LANGUAGE.components.sendEmailCode,
       info: {
@@ -602,12 +603,30 @@ export default {
           data: this.info
         })
         .then(data => {
+          console.log("11111",)
           _this.$toast.show(_this.lang.registerSuccess)
+          _this.$store.commit('setToken', data.access_token)
+          _this.$store.commit('setUserInfo', data.member);
+          const lastUrl=localStorage.getItem("url")
+          // _this.$store.commit('setLastUrl', '')
+           _this.$store.dispatch('synchronizeCart')
+          console.log("order-lastUrL",lastUrl)
           setTimeout(() => {
-            _this.$router.push({
-              name: 'login-email'
-            })
+            if (lastUrl) {
+              _this.$router.replace({
+                path: lastUrl
+              })
+            } else {
+              _this.$router.replace({
+                name: 'login-email'
+              })
+            }
           }, 2000)
+          // setTimeout(() => {
+          //   _this.$router.push({
+          //     name: 'login-email'
+          //   })
+          // }, 2000)
         })
         .catch(err => {
           _this.$toast.show(err.message)
@@ -649,11 +668,28 @@ export default {
         .then(res => {
           console.log("11111",res)
           _this.$toast.show(_this.lang.registerSuccess)
+          _this.$store.commit('setToken', res.access_token)
+          _this.$store.commit('setUserInfo', res.member);
+           _this.$store.dispatch('synchronizeCart')
+          const lastUrl=localStorage.getItem("url")
+          // _this.$store.commit('setLastUrl', '')
+          console.log("order-lastUrL",lastUrl)
           setTimeout(() => {
-            _this.$router.push({
-              name: 'login-email'
-            })
+            if (lastUrl) {
+              _this.$router.replace({
+                path: lastUrl
+              })
+            } else {
+              _this.$router.replace({
+                name: 'login-email'
+              })
+            }
           }, 2000)
+          // setTimeout(() => {
+          //   _this.$router.push({
+          //     name: 'login-email'
+          //   })
+          // }, 2000)
         })
         .catch(err => {
           _this.$toast.show(err.message)

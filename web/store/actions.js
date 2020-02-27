@@ -52,20 +52,17 @@ function makeCartGoodGroups (cart = []) {
     // console.log("cart",cart)
     const result = []
     const localData = {}
-    const keyName = 'createTime'
     cart.forEach(item => {
-    //    console.log("item>>>>>>>>>",item)
+        let groupId = item['groupId'] || item['id'] || item['createTime']
         item.goodsId=item.goodsDetailsId
-        if (localData.hasOwnProperty(item[keyName])) {
-            localData[item[keyName]].data.push(item)
+        if (localData.hasOwnProperty(groupId)) {
+            localData[groupId].data.push(item)
         } else {
-            localData[item[keyName]] = {
-                id: item[keyName].toString(),
-                // id: String(item['id']),
+            localData[groupId] = {
+                id: groupId.toString(),
                 groupType: item.groupType || null,
                 data: [item]
             }
-            
         }
     })
     
@@ -80,6 +77,7 @@ function makeCartGoodGroups (cart = []) {
     // console.log("iiiii", result)
     // 将定制的商品进行排序，钻石放在后面
     result.map(item => {
+        // console.log('a',item)
         if (item.groupType === null) {
             // 单品
             const simpleGoodsEntity = item.data[0].simpleGoodsEntity || {}
@@ -123,6 +121,7 @@ function makeCartGoodGroups (cart = []) {
                 parseFloat(simpleGoodsEntity.simpleGoodsDetails.retailMallPrice) +
                 parseFloat(item.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice)
         }
+        // console.log('a',item)
         return item
     })
 
@@ -308,6 +307,7 @@ export default {
             data = data.map(good => {
                 good.createTime = group.createTime
                 good.updateTime = group.updateTime
+                good.goods_id = good.goodsDetailsId
                 return good
             })
             sendData = sendData.concat(data)
@@ -382,7 +382,7 @@ export default {
         goods = goods.map(item => {
             item.createTime = time
             item.updateTime = time
-            item.goods_id=item.goodsDetailsId
+            item.goods_id = item.goodsDetailsId
             return item
         })
 
@@ -433,6 +433,25 @@ export default {
             }
         })
     },
+    //保存订单id
+    setLocalCartOrder({ $axios, state, getters, commit, dispatch }, orderSn) {
+        const cartOrderSn = 'cartOrderSn'
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                localStorage.setItem(cartOrderSn, orderSn)
+                return resolve()
+            } catch (e) {
+                return reject(e)
+            }
+        })
+    },
+    //获取订单id
+    getLocalCartOrder ({ $axios, state, getters, commit, dispatch }) {
+        const cartOrderSn = 'cartOrderSn'
+        return localStorage.getItem(cartOrderSn)
+    },
+
     // 删除购物车商品
     removeCart ({ $axios, state, getters, commit, dispatch }, goods = []) {
         console.log('removeCart=====>',goods)

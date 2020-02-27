@@ -201,12 +201,12 @@ export default {
                 let item = {}
                 item.createTime = group.createTime
                 item.updateTime = group.updateTime
-                item.goods_id = good.goodsId
+                item.goods_id = good.goodsDetailsId
                 item.goods_type = good.goodsType
                 item.goods_num = good.goodsCount
                 item.group_type = good.groupType
                 item.group_id = good.groupId
-                // item.goodsDetailsId = good.goodsDetailsId
+                item.goodsDetailsId = good.goodsDetailsId
                 return item
             })
             sendData = sendData.concat(data)
@@ -663,7 +663,7 @@ export default {
             sendData = sendData.concat(goods)
         })
 
-        // console.log('sendData===========>', sendData)
+        console.log('sendData===========>', sendData)
 
         return this.$axios({
             method: 'post',

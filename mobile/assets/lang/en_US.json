@@ -151,6 +151,7 @@
       "cuponName": "Select Coupons",
       "toast1": "No coupons available",
       "toast2": "Please check the default address",
+      "toast4": "Please select a payment method!",
       "toast3": "Incorrect e-mail for receiving after-sales voucher, please input again!",
       "delete": "Delete",
       "inputCode": "Input Coupon Code",

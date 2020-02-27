@@ -51,7 +51,7 @@
                 <b
                   >{{ item.title }}
                   <span
-                    v-if="item.type == '5'"
+                    v-if="item.type == ''"
                     class="ph"
                     @click="needtips = !needtips"
                     >?</span
@@ -183,7 +183,7 @@
             <span>{{ lang.allFee }} </span
             ><span
               >{{ coin }}
-              {{ formatMoney(allFee.productAmount || productAmount) }}</span
+              {{ formatMoney( productAmount) }}</span
             >
           </li>
           <li v-show="preferFee > 0">
@@ -270,6 +270,7 @@ export default {
   },
   data() {
     return {
+      url:'', 
       lang2: this.LANGUAGE.cart.pay,
       coin: this.$store.state.coin,
       form: [],
@@ -398,7 +399,7 @@ export default {
     }
   },
   mounted() {
-    
+    console.log("allFee",this.allFee)
     this.$nextTick(() => {
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
@@ -409,16 +410,17 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
-      console.log(this.list,'fffffffffffff')
+      // console.log(this.list,'fffffffffffff')
       this.idList = []
       this.productAmount = 0
       this.list.map((item, index) => {
         // console.log("sssss=====",item.id)
         this.idList.push(item.id)
         // this.idList.push(item.localSn)
-        //  console.log("sssss",this.idList)
+        //  console.log("sssss",this.productAmount)
         // this.productAmount = this.productAmount + item.salePrice   localSn
-        this.productAmount = parseInt(this.productAmount + item.salePrice) 
+        this.productAmount = parseFloat(this.productAmount + item.salePrice) 
+        // console.log("productAmount",this.productAmount)
       })
      
       this.getData() // 获取地址
@@ -431,7 +433,6 @@ export default {
     })
   },
   methods: {
-    formatMoney: formatMoney,
     changeType(ind) {
       // console.log("选择哪一个",ind)
       this.typeIndex = ind
@@ -441,6 +442,7 @@ export default {
       }else if(this.typeIndex == 1){
         pay = 2
       }
+      
       if(pay!==6){
         this.$toast.show(this.lang.firstLogin)
       }
@@ -770,6 +772,11 @@ export default {
       // if (!this.canSubmit) {
       //   return
       // }
+      // console.log("aaaa",this.typeIndex)
+      if(this.typeIndex!==0){
+        this.$toast.show(this.lang.toast4)
+        return
+      }
       if (this.isLogin) {
         if (!this.hasAddress) {
           this.$toast.show(this.lang.toast2)
@@ -817,7 +824,7 @@ export default {
             createTime: this.list[i].createTime,
             goods_num: 1,
             goodsDetailsId: this.list[i].goodsDetailsId,
-            goods_id: this.list[i].goodsId,
+            goods_id: this.list[i].goodsDetailsId,
             group_id: this.list[i].groupId,
             goods_type: this.list[i].goodsStatus,
             group_type:
@@ -872,6 +879,23 @@ export default {
       }
     },
     gologin(type) {
+      // 点击登入获取上页url
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/cart\/sureOrder/).test(oldurl)){
+          oldurl = '/cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      // setTimeout(() => {
+      //   this.$router.push({
+      //       path: `/login`,
+      //       // query: {url}
+      //   })
+      // },0)
       let name = 'register'
       if (type === 1) {
         name = 'login'

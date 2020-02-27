@@ -34,21 +34,21 @@
         <div class="step-line" />
       </div>
       
-        <!--    用户名称和提示登陆-->
-        <div class="user-info">
-          <i class="iconfont iconrentou" />
-          <div class="login-line">
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.login`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balbala`) }}</span>
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balabalabala`) }}</span>
-          </div>
+      <!--    用户名称和提示登陆-->
+      <div class="user-info">
+        <i class="iconfont iconrentou" />
+        <div class="login-line">
+          <nuxt-link to="/login"
+            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balbala`) }}</span>
+          <nuxt-link to="/login"
+            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
-<div v-show="show">
+      </div>
+      <div v-show="show">
         <!--    地址模块-->
         <div class="new-address">
           <div class="new-address-title">
@@ -320,6 +320,7 @@
           </div>
         </div>
       </div>
+
       <!--支付模块  -->
       <div class="payways">
         <!-- 支付 -->
@@ -507,6 +508,7 @@
           />
         </div>
       </div>
+
       <!--    购物车模块-->
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
@@ -813,22 +815,22 @@
         </div>
         <div class="step-line" />
       </div>
-      <div v-show="show">
-        <!--    用户名称和提示登陆-->
-        <div class="user-info">
-          <i class="iconfont iconrentou" />
-          <div class="login-line">
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.login`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balbala`) }}</span>
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balabalabala`) }}</span>
-          </div>
+     
+      <!--    用户名称和提示登陆-->
+      <div class="user-info">
+        <i class="iconfont iconrentou" />
+        <div class="login-line">
+          <nuxt-link to="/login"
+            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balbala`) }}</span>
+          <nuxt-link to="/login"
+            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
-
+      </div>
+      <div v-show="show">
         <!--    地址模块-->
         <div class="new-address">
           <div class="new-address-title">
@@ -1195,7 +1197,7 @@
                 </div>
               </div> -->
 
-              <div
+              <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
                 class="pay-block"
                 @click="Way(2)"
@@ -1204,14 +1206,14 @@
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 2" class="pay-price">
+                <div v-show="payWay == 2" class="pay-price"> -->
                   <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-              </div>
+              </div> -->
 
               <!-- <div
                 :class="{ 'pay-choose': payWay == 3 }"
@@ -1575,10 +1577,10 @@ export default {
   mixins: [Address],
   data() {
     return {
-      // url:'',
+      url:'',
       show:false,
       goingPay: false,
-      payWay: 0 ,
+      payWay: '' ,
       actionLink: '',
       form: [],
       answer: false,
@@ -1668,7 +1670,8 @@ export default {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
-          console.log(`good22222======>`, res)
+          this.$store.dispatch('setLocalCartOrder',this.pathTakeIds)
+          console.log(`good22222======>`, this.pathTakeIds)
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
@@ -1707,6 +1710,44 @@ export default {
     window.removeEventListener('scroll', this.scrollToTop)
   },
   methods: {
+    // 点击登入获取上页url
+    login(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
+      // console.log("oldurl",url)
+    },
+    register(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
+    },
     Way(ways){
       this.payWay=ways
       console.log("payway",ways)
@@ -1714,7 +1755,7 @@ export default {
         this.show=false
       }else{
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        // const url=window.location.href  _this.$t(`${lang}.logintips`
+        // const url=window.location.href  
         // setTimeout(() => {
         //   this.$router.push({
         //     path: `/login`,
@@ -1807,20 +1848,23 @@ export default {
     },
     getTex() {
       this.canSubmit = false
-      const json=[]
-      console.log("this.good",this.good)
+      let json=[]
+     
       for (const i in this.good) {
-        const o = {
-          createTime: this.good[i].data[0].createTime || new Date().getTime(),
-          goods_num: this.good[i].data[0].goodsCount,
-          goodsDetailsId: this.good[i].data[0].goodsDetailsId,
-          goods_id: this.good[i].data[0].goodsDetailsId,
-          group_id: this.good[i].data[0].groupId || null,
-          group_type:this.good[i].data[0].groupType,
-          goods_type: this.good[i].data[0].goodsType
-        }  
-        json.push(o)
-        console.log("sssss",json)
+        let group = this.good[i].data
+        let item = group.map(item => {
+          return {
+            createTime: item.createTime || new Date().getTime(),
+            goods_num: item.goodsCount,
+            goodsDetailsId: item.goodsDetailsId,
+            goods_id: item.goodsDetailsId,
+            group_id: item.groupId || null,
+            group_type:item.groupType,
+            goods_type: item.goodsType
+          }
+        })
+
+        json = json.concat(item)
       }
       this.$axios
         .post('/web/member/order-tourist/tax', {
@@ -1849,32 +1893,28 @@ export default {
         })
     },
     createOrder() { 
-      const json=[]
-      // const json = {
-      //   carts: [],
-      //   orderAmount: this.tex.orderAmount,
-      //   productAmount: this.goodsPrice,
-      //   recvType: 1,
-      //   userRemark: this.remark,
-      //   session: new Date().getTime().toString(),
-      //   couponCode: this.tooInp
-      // }
-      console.log("this.good",this.good)
+      if(this.payWay==''){
+        // console.log("请选择支付方式")_this.$t(`${lang}.codeTips`)
+        this.$errorMessage(this.$t(`${lang}.msg9`))
+        return
+      }
+      let json=[]
+     
       for (const i in this.good) {
-        const o = {
-          createTime: this.good[i].data[0].createTime || new Date().getTime(),
-          goods_num: this.good[i].data[0].goodsCount,
-          goodsDetailsId: this.good[i].data[0].goodsDetailsId,
-          goods_id: this.good[i].data[0].goodsId,
-          group_id: this.good[i].data[0].groupId || null,
-          group_type:this.good[i].data[0].groupType,
-          goods_type: this.good[i].data[0].goodsType
-          
+        let group = this.good[i].data
+        let item = group.map(item => {
+          return {
+            createTime: item.createTime || new Date().getTime(),
+            goods_num: item.goodsCount,
+            goodsDetailsId: item.goodsDetailsId,
+            goods_id: item.goodsDetailsId,
+            group_id: item.groupId || null,
+            group_type:item.groupType,
+            goods_type: item.goodsType
+          }
+        })
 
-          // goods_id  goods_type   goods_num   group_type  group_id  createTime
-        }  
-        json.push(o)
-        console.log("sssss",this.$route.query)
+        json = json.concat(item)
       }
       this.$axios({
         method: 'post',
@@ -1883,12 +1923,12 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'https://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'
+          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com
         }
       })
         .then(res => {
           // console.log('od===>', res)
-          this.$store.dispatch('removeCart', this.pathTakeIds)
+          // this.$store.dispatch('removeCart', this.pathTakeIds)
           if(res.data.config){
             window.location.replace(res.data.config)
           }else {

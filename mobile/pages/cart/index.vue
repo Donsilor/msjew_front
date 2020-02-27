@@ -203,11 +203,13 @@ export default {
     // 全选与反选
     selectAlls() {
       this.selectAll = !this.selectAll
-      
+      console.log("全选", this.list)
       for (let i = 0; i < this.list.length; i++) {
-        if (this.list[i].goodsStatus === 2 && this.list[i].status === 1) {
+        if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
+           console.log("所有")
           this.list[i].isSelect = this.selectAll
         } else {
+          console.log("否则")
           this.list[i].isSelect = false
         }
       }
@@ -243,6 +245,7 @@ export default {
         if (this.list[i].isSelect) {
           // console.log(i, 'iiii')
           newPrice = newPrice + parseFloat(this.list[i].salePrice)
+          console.log("price",newPrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
             this.sumNum = this.sumNum + 1
@@ -363,7 +366,7 @@ export default {
                 createTime: item.createTime,
                 goods_num: val.goodsCount,
                 goodsDetailsId: val.goodsDetailsId,
-                goods_id: val.goodsId,
+                goods_id: val.goodsDetailsId,
                 goods_type:val.goodsType,
                 group_id:
                   val.groupType === 1
@@ -374,6 +377,7 @@ export default {
                 group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
+              console.log("ooooo>>>",o)
               this.cartList.push(o)
             })
           })

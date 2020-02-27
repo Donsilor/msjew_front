@@ -1,6 +1,7 @@
 // 格式化金额显示
 /* eslint-disable*/
 export function formatMoney1(number, places, symbol, thousand, decimal) {
+	// return number
 	//formatMoney(12345678)=> $ 12,345,678
 	//formatMoney(12345678,0, "$ ")=> $ 12,345,678
 	//formatMoney(12345678,0, "$ ")=> $4.999,99
@@ -41,6 +42,7 @@ export function removeFormatMoney(num) {
  * return	格式化後的數值字符串
  */
 export function formatMoney(num, type) {
+	// return num
 	if(!num) {
 		return '0.00';
 	}
