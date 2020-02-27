@@ -6,12 +6,12 @@ export default function(content) {
   const definition = app.$bddDefinition
   const coinOptions = definition.coinOptions
   const languageOptions = definition.languageOptions
-
   if (isServer) {
     const resetCookie = []
     let coin = ''
     let language = ''
     let lastUrl = ''
+    let area_id = ''
 
     const expiresDate = new Date()
     expiresDate.setDate(expiresDate.getDate() + 365)
@@ -22,7 +22,40 @@ export default function(content) {
       coin = cookie.coin || ''
       language = cookie.language || ''
       lastUrl = cookie.lastUrl || ''
+      area_id = cookie.area_id || ''
     }
+    
+    
+
+    if (language) {
+      let trueLanguage = false
+      for (let n = 0, length = languageOptions.length; n < length; n++) {
+        if (language === languageOptions[n].code) {
+          trueLanguage = true
+          break
+        }
+      }
+      if (!trueLanguage) {
+        language = languageOptions[0].code
+      }
+      resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
+      // res.setHeader('Set-Cookie', [`language=${language}; Path=/;`])
+      store.commit('setLanguage', language)
+    } else {
+      //language = app.$bddDefinition.languageOptions[0].code
+      //resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
+      //store.commit('setLanguage', language)
+    }
+
+
+    if(language == 'zh_TW') {
+      coin = 'HKD';
+    }else if (language == 'en_US'){
+      coin = 'USD';
+    }else if (language == 'zh_CH'){
+      coin = 'CNY';
+    }
+
 
     if (coin) {
       let trueCoin = false
@@ -40,30 +73,19 @@ export default function(content) {
       // res.setHeader('Set-Cookie', [`coin=${coin}; Path=/;`])
       store.commit('setCoin', coin)
     } else {
-      coin = app.$bddDefinition.coinOptions[0].code
-      resetCookie.push(`coin=${coin}; Path=/;`)
-      store.commit('setCoin', coin)
+      //coin = app.$bddDefinition.coinOptions[0].code
+      //resetCookie.push(`coin=${coin}; Path=/;`)
+      //store.commit('setCoin', coin)
     }
 
-    if (language) {
-      let trueLanguage = false
-      for (let n = 0, length = languageOptions.length; n < length; n++) {
-        if (language === languageOptions[n].code) {
-          trueLanguage = true
-          break
-        }
-      }
-      if (!trueLanguage) {
-        language = languageOptions[0].code
-      }
-      resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
-      // res.setHeader('Set-Cookie', [`language=${language}; Path=/;`])
-      store.commit('setLanguage', language)
+    if (area_id) {
+      resetCookie.push(`area_id=${area_id}; Path=/;`)
+      store.commit('setAreaId', area_id)
     } else {
-      language = app.$bddDefinition.languageOptions[0].code
-      resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
-      store.commit('setLanguage', language)
+      // store.commit('setAreaId', area_id)
+      
     }
+    
 
     if (lastUrl) {
       resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
