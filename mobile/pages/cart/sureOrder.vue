@@ -441,6 +441,7 @@ export default {
       }else if(this.typeIndex == 1){
         pay = 2
       }
+      
       if(pay!==6){
         this.$toast.show(this.lang.firstLogin)
       }
@@ -770,7 +771,8 @@ export default {
       // if (!this.canSubmit) {
       //   return
       // }
-      if(this.typeIndex==''){
+      // console.log("aaaa",this.typeIndex)
+      if(this.typeIndex!==0){
         this.$toast.show("请选择支付方式")
         return
       }

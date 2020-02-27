@@ -1575,7 +1575,7 @@ export default {
   mixins: [Address],
   data() {
     return {
-      // url:'',
+      url:'',
       show:false,
       goingPay: false,
       payWay: 6 ,
@@ -1668,10 +1668,8 @@ export default {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
-          console.log(`good22222======>`, res)
-          // for(const i in res){
-          //   console.log("遍历",i)
-          // }
+          this.$store.dispatch('setLocalCartOrder',this.pathTakeIds)
+          console.log(`good22222======>`, this.pathTakeIds)
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
@@ -1717,7 +1715,7 @@ export default {
         this.show=false
       }else{
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        // const url=window.location.href  _this.$t(`${lang}.logintips`
+        // const url=window.location.href  
         // setTimeout(() => {
         //   this.$router.push({
         //     path: `/login`,
@@ -1884,7 +1882,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318
+          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com
         }
       })
         .then(res => {
