@@ -578,7 +578,8 @@
       "slider-verify": "請完成驗證解鎖",
       "input-password": "請輸入登入密碼",
       "login-error": "用戶或密碼錯誤！",
-      "login-success": "登錄成功"
+      "login-success": "登錄成功",
+      "input-code": "請輸入驗證碼"
     },
     "index": {
       "login": "會員登入",
