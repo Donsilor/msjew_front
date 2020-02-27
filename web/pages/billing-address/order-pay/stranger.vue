@@ -1575,7 +1575,7 @@ export default {
   mixins: [Address],
   data() {
     return {
-      // url:'',
+      url:'',
       show:false,
       goingPay: false,
       payWay: 6 ,
@@ -1715,7 +1715,7 @@ export default {
         this.show=false
       }else{
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        // const url=window.location.href  _this.$t(`${lang}.logintips`
+        // const url=window.location.href  
         // setTimeout(() => {
         //   this.$router.push({
         //     path: `/login`,

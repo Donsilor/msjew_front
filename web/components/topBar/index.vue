@@ -1007,16 +1007,16 @@ export default {
   methods: {
     // 点击登入获取上页url
     login(){
-      // const oldurl=window.location.pathname
-      // const params=window.location.search
-      // const url=oldurl+params
-      // localStorage.setItem('url',url)
-      // setTimeout(() => {
-      //   this.$router.push({
-      //       path: `/login`,
-      //       // query: {url}
-      //   })
-      // },0)
+      const oldurl=window.location.pathname
+      const params=window.location.search
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
       // console.log("oldurl",url)
     },
     // 查询cookie
