@@ -43,7 +43,8 @@ export default {
   data(){
     return{
       showa:true,
-      showb:false
+      showb:false,
+      url:'',
     }
   },
   computed: {
@@ -80,6 +81,22 @@ export default {
       })
     },
     toPersonal() {
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/cart\/sureOrder/).test(oldurl)){
+          oldurl = '/cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      // setTimeout(() => {
+      //   this.$router.push({
+      //       path: `/login`,
+      //       // query: {url}
+      //   })
+      // },0)
       this.$router.push({
         name: 'personal'
       })
