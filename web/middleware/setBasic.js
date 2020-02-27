@@ -42,9 +42,9 @@ export default function(content) {
       // res.setHeader('Set-Cookie', [`language=${language}; Path=/;`])
       store.commit('setLanguage', language)
     } else {
-      //language = app.$bddDefinition.languageOptions[0].code
-      //resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
-      //store.commit('setLanguage', language)
+      language = app.$bddDefinition.languageOptions[0].code
+      resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
+      store.commit('setLanguage', language)
     }
 
 
@@ -73,9 +73,9 @@ export default function(content) {
       // res.setHeader('Set-Cookie', [`coin=${coin}; Path=/;`])
       store.commit('setCoin', coin)
     } else {
-      //coin = app.$bddDefinition.coinOptions[0].code
-      //resetCookie.push(`coin=${coin}; Path=/;`)
-      //store.commit('setCoin', coin)
+      coin = app.$bddDefinition.coinOptions[0].code
+      resetCookie.push(`coin=${coin}; Path=/;`)
+      store.commit('setCoin', coin)
     }
 
     if (area_id) {
