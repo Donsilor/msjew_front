@@ -569,7 +569,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -675,7 +675,7 @@
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
-              <!-- <div class="hkd">{{ good.length }}</div> -->
+              <div class="hkd">{{ good.length }}</div>
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -1351,7 +1351,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -1457,7 +1457,7 @@
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
-              <!-- <div class="hkd">{{ good.length }}</div> -->
+              <div class="hkd">{{ good.length }}</div>
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -1622,6 +1622,7 @@ export default {
       good: [],
       goodsPrice: 0,
       preferFee: 0,
+      planDays: '1-12',
       tex: {
         logisticsFee: 0,
         taxFee: 0,
@@ -1666,6 +1667,7 @@ export default {
     }
   },
   created() {
+    // console.log("planDays",this.tex.planDays)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
@@ -1878,13 +1880,13 @@ export default {
         .catch(err => {
           this.canSubmit = false
           this.$message.error(err.message)
-          this.tex = {
-            logisticsFee: 0,
-            taxFee: 0,
-            safeFee: 0,
-            orderAmount: null,
-            planDays: '--'
-          }
+          // this.tex = {
+          //   logisticsFee: 0,
+          //   taxFee: 0,
+          //   safeFee: 0,
+          //   orderAmount: null,
+          //   planDays: '--'
+          // }
           if (!err.response) {
             this.$message.error(err.message)
           } else {

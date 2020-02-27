@@ -67,7 +67,7 @@ function makeCartGoodGroups (cart = []) {
     })
     
     let keys = Object.keys(localData)
-    console.log("local",keys)
+    // console.log("local",keys)
     keys = keys.sort((a, b) => {
         return b - a
     })
@@ -291,7 +291,7 @@ export default {
      */
     // 同步到线上购物车中
     async synchronizeCart ({ $axios, state, getters, commit, dispatch }) {
-        console.log('synchronizeCart=====>同步购物车')
+        // console.log('synchronizeCart=====>同步购物车')
 
         if (!getters.hadLogin) {
             return Promise.reject(new Error('只有登录后才可以同步购物车'))
@@ -433,7 +433,7 @@ export default {
             }
         })
     },
-    //保存订单id
+    //保存游客订单id
     setLocalCartOrder({ $axios, state, getters, commit, dispatch }, orderSn) {
         const cartOrderSn = 'cartOrderSn'
 
@@ -446,7 +446,7 @@ export default {
             }
         })
     },
-    //获取订单id
+    //获取游客订单id
     getLocalCartOrder ({ $axios, state, getters, commit, dispatch }) {
         const cartOrderSn = 'cartOrderSn'
         return localStorage.getItem(cartOrderSn)
@@ -1695,6 +1695,40 @@ export default {
         })
             .then(data => {
                 return data
+            })
+            .catch(err => {
+                return Promise.reject(err)
+            })
+    },
+
+
+    // 获取用户数据
+    getSiteSetting ({ $axios, state, commit, dispatch },type='') {
+        return this.$axios({
+            method: 'get',
+            url: '/web/site/setting'
+        })
+            .then(res => {
+                console.log("配置",res.data)
+                if(type == 'coin'){
+                    commit('setCoin', res.data.currency)
+                    return res.data.currency
+                }else if(type == 'language'){
+                    commit('setLanguage', res.data.language)
+                    return res.data.language
+                }else if(type == 'area'){
+                    console.log("11111115555",res.data)
+                    commit('setAreaId', res.data.area_id)
+                    return res.data.area_id
+                }else{
+                    commit('setCoin', res.data.currency)
+                    commit('setLanguage', res.data.language)
+                    return res.data
+                }
+                
+                
+                
+                
             })
             .catch(err => {
                 return Promise.reject(err)
