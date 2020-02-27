@@ -23,11 +23,11 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <!-- <div v-if="!hasAddress" class="no-address" @click="goAddress">
+      <div v-if="!hasAddress&&isLogin" class="no-address" @click="goAddress">
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
-      </div> -->
+      </div>
     </div>
     <!-- 支付方式 -->
     <div class="payways" v-if="!isLogin">
