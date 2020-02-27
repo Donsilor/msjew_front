@@ -270,6 +270,7 @@ export default {
   },
   data() {
     return {
+      url:'', 
       lang2: this.LANGUAGE.cart.pay,
       coin: this.$store.state.coin,
       form: [],
@@ -773,7 +774,7 @@ export default {
       // }
       // console.log("aaaa",this.typeIndex)
       if(this.typeIndex!==0){
-        this.$toast.show("请选择支付方式")
+        this.$toast.show(this.lang.toast4)
         return
       }
       if (this.isLogin) {
@@ -878,6 +879,23 @@ export default {
       }
     },
     gologin(type) {
+      // 点击登入获取上页url
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/cart\/sureOrder/).test(oldurl)){
+          oldurl = '/cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      // setTimeout(() => {
+      //   this.$router.push({
+      //       path: `/login`,
+      //       // query: {url}
+      //   })
+      // },0)
       let name = 'register'
       if (type === 1) {
         name = 'login'

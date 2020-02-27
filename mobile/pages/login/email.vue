@@ -248,7 +248,7 @@ export default {
           // _this.$store.dispatch('synchronizeCart')
           // const lastUrl = _this.$store.state.lastUrl
           const lastUrl=localStorage.getItem("url")
-          _this.$store.commit('setLastUrl', '')
+          // _this.$store.commit('setLastUrl', '')
           console.log("order-lastUrL",lastUrl)
           setTimeout(() => {
             if (lastUrl) {
@@ -308,7 +308,7 @@ export default {
           // const lastUrl = _this.$store.state.lastUrl
           const lastUrl=localStorage.getItem("url")
            _this.$store.dispatch('synchronizeCart')
-          _this.$store.commit('setLastUrl', '')
+          // _this.$store.commit('setLastUrl', '')
           console.log("order-lastUrL",lastUrl)
           setTimeout(() => {
             if (lastUrl) {

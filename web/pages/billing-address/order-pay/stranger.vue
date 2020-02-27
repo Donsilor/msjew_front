@@ -34,21 +34,21 @@
         <div class="step-line" />
       </div>
       
-        <!--    用户名称和提示登陆-->
-        <div class="user-info">
-          <i class="iconfont iconrentou" />
-          <div class="login-line">
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.login`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balbala`) }}</span>
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balabalabala`) }}</span>
-          </div>
+      <!--    用户名称和提示登陆-->
+      <div class="user-info">
+        <i class="iconfont iconrentou" />
+        <div class="login-line">
+          <nuxt-link to="/login"
+            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balbala`) }}</span>
+          <nuxt-link to="/login"
+            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
-<div v-show="show">
+      </div>
+      <div v-show="show">
         <!--    地址模块-->
         <div class="new-address">
           <div class="new-address-title">
@@ -320,6 +320,7 @@
           </div>
         </div>
       </div>
+
       <!--支付模块  -->
       <div class="payways">
         <!-- 支付 -->
@@ -507,6 +508,7 @@
           />
         </div>
       </div>
+
       <!--    购物车模块-->
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
@@ -813,22 +815,22 @@
         </div>
         <div class="step-line" />
       </div>
-      <div v-show="show">
-        <!--    用户名称和提示登陆-->
-        <div class="user-info">
-          <i class="iconfont iconrentou" />
-          <div class="login-line">
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.login`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balbala`) }}</span>
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balabalabala`) }}</span>
-          </div>
+     
+      <!--    用户名称和提示登陆-->
+      <div class="user-info">
+        <i class="iconfont iconrentou" />
+        <div class="login-line">
+          <nuxt-link to="/login"
+            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balbala`) }}</span>
+          <nuxt-link to="/login"
+            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
-
+      </div>
+      <div v-show="show">
         <!--    地址模块-->
         <div class="new-address">
           <div class="new-address-title">
@@ -1195,7 +1197,7 @@
                 </div>
               </div> -->
 
-              <div
+              <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
                 class="pay-block"
                 @click="Way(2)"
@@ -1204,14 +1206,14 @@
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 2" class="pay-price">
+                <div v-show="payWay == 2" class="pay-price"> -->
                   <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-              </div>
+              </div> -->
 
               <!-- <div
                 :class="{ 'pay-choose': payWay == 3 }"
@@ -1578,7 +1580,7 @@ export default {
       url:'',
       show:false,
       goingPay: false,
-      payWay: 6 ,
+      payWay: '' ,
       actionLink: '',
       form: [],
       answer: false,
@@ -1708,6 +1710,44 @@ export default {
     window.removeEventListener('scroll', this.scrollToTop)
   },
   methods: {
+    // 点击登入获取上页url
+    login(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
+      // console.log("oldurl",url)
+    },
+    register(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
+    },
     Way(ways){
       this.payWay=ways
       console.log("payway",ways)
@@ -1853,10 +1893,11 @@ export default {
         })
     },
     createOrder() { 
-      // if(this.payWay==''){
-      //   console.log("请选择支付方式")
-      //   return
-      // }
+      if(this.payWay==''){
+        // console.log("请选择支付方式")_this.$t(`${lang}.codeTips`)
+        this.$errorMessage(this.$t(`${lang}.msg9`))
+        return
+      }
       let json=[]
      
       for (const i in this.good) {

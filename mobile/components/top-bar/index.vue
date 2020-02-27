@@ -81,6 +81,7 @@ export default {
       })
     },
     toPersonal() {
+      // 点击登入获取上页url
       let oldurl=window.location.pathname
       let params=window.location.search
       //如果是订单确认页面，返回到购物车
