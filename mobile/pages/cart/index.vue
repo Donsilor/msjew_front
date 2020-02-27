@@ -162,12 +162,14 @@ export default {
       })
     },
     goPay() {
+      // console.log("id",this.list)
       const arr = []
       for (let i = 0; i < this.list.length; i++) {
         if (this.list[i].isSelect) {
           arr.push(this.list[i])
         }
       }
+      
       if (arr.length <= 0) {
         this.$toast.show(this.lang.toast1)
       } else if (arr.length > 0) {
@@ -201,11 +203,13 @@ export default {
     // 全选与反选
     selectAlls() {
       this.selectAll = !this.selectAll
-      
+      // console.log("全选", this.list)
       for (let i = 0; i < this.list.length; i++) {
-        if (this.list[i].goodsStatus === 2 && this.list[i].status === 1) {
+        if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
+          //  console.log("所有")
           this.list[i].isSelect = this.selectAll
         } else {
+          // console.log("否则")
           this.list[i].isSelect = false
         }
       }
@@ -241,6 +245,7 @@ export default {
         if (this.list[i].isSelect) {
           // console.log(i, 'iiii')
           newPrice = newPrice + parseFloat(this.list[i].salePrice)
+          // console.log("price",newPrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
             this.sumNum = this.sumNum + 1
@@ -325,10 +330,13 @@ export default {
     getLocalList(list) {
       this.$axios({
         method: 'post',
-        url: `/wap/goodsCart/postCart`,
-        data: list
+        url: `/web/member/cart/local`,
+        data: {
+          goodsCartList:list
+        }
       })
         .then(res => {
+          // console.log("res",res)
           this.doFormat(res)
         })
         .catch(err => {
@@ -338,12 +346,14 @@ export default {
     // 获取本地local列表
     getLocalCart() {
       this.$store.dispatch('getLocalCart').then(res => {
+        // console.log("djkashdkasjdklasj",res)
         if (res.length > 0) {
           this.noListData = false
           this.cartList = []
           res.map((item, index) => {
+            // console.log("item",item)
             item.data.map((val, ind) => {
-              // Status 商品状态(1-仓库,2-上架,3-下架,4-删除)
+              // Status 商品状态(1-仓库,2-上架,3-下架,4-删除)   goods_id  goods_type  goods_num  group_type  group_id  createTime
               // 定制
               // createTime: 1560497513455  //对戒时才有用为必传 切为一致 其他情况可传可以不传
               // goodsCount: 1   //都为一
@@ -354,22 +364,25 @@ export default {
               // updateTime: 0 // 创建本地购物车时间id
               const o = {
                 createTime: item.createTime,
-                goodsCount: 1,
+                goods_num: val.goodsCount,
                 goodsDetailsId: val.goodsDetailsId,
-                goodsId: val.goodsId,
-                groupId:
+                goods_id: val.goodsDetailsId,
+                goods_type:val.goodsType,
+                group_id:
                   val.groupType === 1
                     ? val.groupId
                     : val.groupType === 2
                     ? item.id
                     : null,
-                groupType: val.groupType,
+                group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
+              // console.log("ooooo>>>",o)
               this.cartList.push(o)
             })
           })
           this.cartList.reverse()
+          // console.log("this.cartList",this.cartList)
           this.getLocalList(this.cartList)
         } else {
           this.num = 0
@@ -386,6 +399,7 @@ export default {
           url: `/web/member/cart`
         })
         .then(res => {
+          // console.log("线上llll",res)
           this.doFormat(res)
         })
         .catch(err => {

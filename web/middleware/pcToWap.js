@@ -26,10 +26,12 @@ const getQueryFromUrl = url => {
   }
   url = url.slice(start + 1, url.length)
   const query = url.split('&')
+  // console.log("sdssass",url)
   for (let n = 0, length = query.length; n < length; n++) {
     const item = query[n].split('=')
     result[item[0]] = item[1]
   }
+  // console.log("result",result)
   return result
 }
 
@@ -49,7 +51,7 @@ function queryParams (data) {
       _result.push(encodeURIComponent(key) + '=' + encodeURIComponent(value))
     }
   }
-
+ 
   return _result.length ? _result.join('&') + '&' : ''
 }
 
@@ -62,7 +64,6 @@ function queryParams (data) {
       return
     }
     // http://localhost:8328   https://wap.bddco.com   https://wap.bdd.bddia.com
-
     //头部host
 	let headerHost = req.headers['host']
     //生产环境
@@ -71,8 +72,7 @@ function queryParams (data) {
 		//测试环境
 		host = 'http://wap.bdd.bddia.com';
 	}
-	//host = '127.0.0.1:8328'
-   
+
     const toWapUrl = path => {
       if(path === '/undefined') {
         return

@@ -125,6 +125,7 @@
         "toast2": "移除成功"
       },
       "sureOrder": {
+        "firstLogin":"请先登录！",
         "sureOrder": "确认订单",
         "login": "登入账户",
         "settlement": "以加速结算或是",
@@ -150,6 +151,7 @@
         "cuponName": "选择优惠码",
         "toast1": "暂无可用优惠码",
         "toast2": "请勾选默认地址",
+        "toast4":"请选择支付方式！",
         "toast3": "接收售后凭证的电邮地址输入有误，请重新输入！",
         "delete": "刪除",
         "inputCode": "输入优惠码",

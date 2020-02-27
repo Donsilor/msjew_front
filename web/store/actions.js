@@ -52,22 +52,22 @@ function makeCartGoodGroups (cart = []) {
     // console.log("cart",cart)
     const result = []
     const localData = {}
-    const keyName = 'createTime'
     cart.forEach(item => {
-        // result.push(item)
-        if (localData.hasOwnProperty(item[keyName])) {
-            localData[item[keyName]].data.push(item)
+        let groupId = item['groupId'] || item['id'] || item['createTime']
+        item.goodsId=item.goodsDetailsId
+        if (localData.hasOwnProperty(groupId)) {
+            localData[groupId].data.push(item)
         } else {
-            localData[item[keyName]] = {
-                // id: item[keyName].toString(),
-                id: item['id'].toString(),
+            localData[groupId] = {
+                id: groupId.toString(),
                 groupType: item.groupType || null,
                 data: [item]
             }
         }
     })
-    // console.log("local",localData)
+    
     let keys = Object.keys(localData)
+    // console.log("local",keys)
     keys = keys.sort((a, b) => {
         return b - a
     })
@@ -77,7 +77,7 @@ function makeCartGoodGroups (cart = []) {
     // console.log("iiiii", result)
     // 将定制的商品进行排序，钻石放在后面
     result.map(item => {
-        console
+        // console.log('a',item)
         if (item.groupType === null) {
             // 单品
             const simpleGoodsEntity = item.data[0].simpleGoodsEntity || {}
@@ -121,6 +121,7 @@ function makeCartGoodGroups (cart = []) {
                 parseFloat(simpleGoodsEntity.simpleGoodsDetails.retailMallPrice) +
                 parseFloat(item.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice)
         }
+        // console.log('a',item)
         return item
     })
 
@@ -290,7 +291,7 @@ export default {
      */
     // 同步到线上购物车中
     async synchronizeCart ({ $axios, state, getters, commit, dispatch }) {
-        // console.log('synchronizeCart=====>')
+        // console.log('synchronizeCart=====>同步购物车')
 
         if (!getters.hadLogin) {
             return Promise.reject(new Error('只有登录后才可以同步购物车'))
@@ -306,11 +307,12 @@ export default {
             data = data.map(good => {
                 good.createTime = group.createTime
                 good.updateTime = group.updateTime
+                good.goods_id = good.goodsDetailsId
                 return good
             })
             sendData = sendData.concat(data)
-            console.log("购物车", sendData)
         })
+        console.log("购物车", sendData)
 
         return this.$axios({
             method: 'post',
@@ -355,11 +357,11 @@ export default {
             request = dispatch('addOnlineCart', data)
         } else {
             // 未登录的操作
-            // request = dispatch('addLocalCart', data)
-            setTimeout(() => {
-                this.$router.push(`/login`)
-            }, 2000)
-            return Promise.reject(new Error('请先登陆！'))
+            request = dispatch('addLocalCart', data)
+            // setTimeout(() => {
+            //     this.$router.push(`/login`)
+            // }, 2000)
+            // return Promise.reject(new Error('请先登陆！'))
         }
         request
             .then(data => {
@@ -380,6 +382,7 @@ export default {
         goods = goods.map(item => {
             item.createTime = time
             item.updateTime = time
+            item.goods_id = item.goodsDetailsId
             return item
         })
 
@@ -404,6 +407,7 @@ export default {
     },
     // 加入到本地购物车中
     addLocalCart ({ $axios, state, getters, commit, dispatch }, goods = []) {
+        console.log("2222",goods)
         const time = getTimestampUuid()
         const addInfo = {
             id: time,
@@ -419,19 +423,38 @@ export default {
                 if (cart.length > 30) {
                     return reject(new Error(lang.cartIsFull))
                 }
-                cart = cart.concat(goods)
+                // cart = cart.concat(goods)
                 // 本地加入购物车数据
-                // localStorage.setItem`(CART, JSON.stringify(cart))
+                localStorage.setItem(CART, JSON.stringify(cart))
                 return resolve()
             } catch (e) {
-                console.log("eeeeee", e)
+                // console.log("eeeeee", e)
                 return reject(e)
             }
         })
     },
+    //保存游客订单id
+    setLocalCartOrder({ $axios, state, getters, commit, dispatch }, orderSn) {
+        const cartOrderSn = 'cartOrderSn'
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                localStorage.setItem(cartOrderSn, orderSn)
+                return resolve()
+            } catch (e) {
+                return reject(e)
+            }
+        })
+    },
+    //获取游客订单id
+    getLocalCartOrder ({ $axios, state, getters, commit, dispatch }) {
+        const cartOrderSn = 'cartOrderSn'
+        return localStorage.getItem(cartOrderSn)
+    },
+
     // 删除购物车商品
     removeCart ({ $axios, state, getters, commit, dispatch }, goods = []) {
-        console.log('removeCart=====>')
+        console.log('removeCart=====>',goods)
         let data = null
         if (Array.isArray(goods)) {
             data = JSON.parse(JSON.stringify(goods))
@@ -472,7 +495,7 @@ export default {
     },
     // 删除线上购物车中的商品
     removeOnlineCart ({ $axios, state, getters, commit, dispatch }, goods = []) {
-        console.log('removeOnlineCart=====>')
+        // console.log('removeOnlineCart=====>',goods)
 
         const cart = state.cart
         const ids = []
@@ -486,6 +509,7 @@ export default {
                 }
             }
         })
+        // console.log("id",ids)
         return this.$axios({
             method: 'post',
             url: '/web/member/cart/del',
@@ -518,7 +542,7 @@ export default {
     },
     // 删除本地购物车中的商品
     removeLocalCart ({ $axios, state, getters, commit, dispatch }, goods = []) {
-        console.log('removeLocalCart=====>')
+        console.log('removeLocalCart=====>',goods)
         goods = goods.map(item => {
             let result = ''
             switch (typeof item) {
@@ -533,6 +557,7 @@ export default {
             }
             return result
         })
+        
         return new Promise(async (resolve, reject) => {
             try {
                 const newCart = []
@@ -558,7 +583,7 @@ export default {
         let request = null
         if (getters.hadLogin) {
             // 已登录的操作
-            // console.log('已登录的操作')
+            console.log('已登录的操作')
             request = dispatch('getOnlineCart')
         } else {
             // 未登录的操作
@@ -602,38 +627,38 @@ export default {
         let request = null
         if (getters.hadLogin) {
             // 已登录的操作
-            // console.log('已登录的操作')
+            console.log('已登录的操作')
             request = dispatch('getOnlineCartAmount')
-            request
-                .then(data => {
-                    commit('setCartAmount', data)
-                    return Promise.resolve(data)
-                })
-                .catch(err => {
-                    return Promise.reject(err)
-                })
-            return request
+            // request
+            //     .then(data => {
+            //         commit('setCartAmount', data)
+            //         return Promise.resolve(data)
+            //     })
+            //     .catch(err => {
+            //         return Promise.reject(err)
+            //     })
+            // return request
         } else {
             // 未登录的操作
             // return Promise.reject(new Error('请登录！'))
-            // request = dispatch('getLocalCartAmount')
+            request = dispatch('getLocalCartAmount')
             // console
         }
-        // request
-        //   .then(data => {
-        //     commit('setCartAmount', data)
-        //     return Promise.resolve(data)
-        //   })
-        //   .catch(err => {
-        //     return Promise.reject(err)
-        //   })
-        // return request
+        request
+          .then(data => {
+            commit('setCartAmount', data)
+            return Promise.resolve(data)
+          })
+          .catch(err => {
+            return Promise.reject(err)
+          })
+        return request
     },
     // 获取在线购物车商品数量
     async  getOnlineCartAmount ({ $axios, state, getters, commit, dispatch }) {
         // const cart =await dispatch('getList')
-        // return cart.length
-        // console.log('getOnlineCartAmount=====>')  /web/goodsCart/count
+        // return cart.length  /web/goodsCart/count
+        // console.log('getOnlineCartAmount=====>',)
         return this.$axios({
             method: 'get',
             url: '/web/member/cart/count'
@@ -653,15 +678,16 @@ export default {
     },
     // 获取本地购物车商品数量
     async getLocalCartAmount ({ $axios, state, getters, commit, dispatch }) {
-        // console.log('getLocalCartAmount=====>')
-        // const cart = await dispatch('getLocalCart')
-        // return cart.length
+        const cart = await dispatch('getLocalCart')
+        // console.log('getLocalCartAmount=====>',cart.length)
+        return cart.length
     },
     // 使用本地购物车数据置换购物车商品数据
     localCartToGoodsInfo (
         { $axios, state, getters, commit, dispatch },
         localCart
     ) {
+        console.log("localtion",localCart)
         let data = null
         if (Array.isArray(localCart)) {
             data = localCart
@@ -684,10 +710,12 @@ export default {
         let sendData = []
         data.forEach(item => {
             let goods = item.data
-            // console.log('goods----------->', goods)
+            console.log(goods,'dssasdf')
+            // console.log('goods----------->', item)
             goods = goods.map(good => {
                 good.updateTime = item.id
                 good.createTime = item.id
+                good.goods_id = good.goodsDetailsId
                 return good
             })
             sendData = sendData.concat(goods)
@@ -696,12 +724,15 @@ export default {
         console.log('sendData===========>', sendData)
 
         return this.$axios({
-            method: 'get',
-            url: '', ///web/member/cart
-            data: sendData
+            method: 'post',
+            url: '/web/member/cart/local',
+            data: {
+                goodsCartList:sendData
+            }
         })
-            .then(data => {
-                return makeCartGoodGroups(data)
+            .then(res => {
+                console.log("本地置换数据",res.data)
+                return makeCartGoodGroups(res.data)
             })
             .catch(err => {
                 return Promise.reject(err)
@@ -736,7 +767,7 @@ export default {
         { $axios, state, getters, commit, dispatch },
         goods = []
     ) {
-        // console.log('getCartGoodsByCartId=====>')
+        console.log('getCartGoodsByCartId=====>',goods)
         let data = null
         if (Array.isArray(goods)) {
             data = JSON.parse(JSON.stringify(goods))
@@ -750,14 +781,16 @@ export default {
             )
         }
         await dispatch(`getCart`)
+        // console.log("cart==========",state.cart)
         const cart = state.cart || []
         const result = []
         cart.forEach(item => {
+            // console.log("cart==========",state.cart)
             if (data.includes(item.id)) {
                 result.push(item)
             }
         })
-        console.log(`inTest=====> `, cart)
+        // console.log(`inTest=====> `, cart)
         console.log(`cccc=====> `, result)
         return result
     },
@@ -1662,6 +1695,40 @@ export default {
         })
             .then(data => {
                 return data
+            })
+            .catch(err => {
+                return Promise.reject(err)
+            })
+    },
+
+
+    // 获取用户数据
+    getSiteSetting ({ $axios, state, commit, dispatch },type='') {
+        return this.$axios({
+            method: 'get',
+            url: '/web/site/setting'
+        })
+            .then(res => {
+                console.log("配置",res.data)
+                if(type == 'coin'){
+                    commit('setCoin', res.data.currency)
+                    return res.data.currency
+                }else if(type == 'language'){
+                    commit('setLanguage', res.data.language)
+                    return res.data.language
+                }else if(type == 'area'){
+                    console.log("11111115555",res.data)
+                    commit('setAreaId', res.data.area_id)
+                    return res.data.area_id
+                }else{
+                    commit('setCoin', res.data.currency)
+                    commit('setLanguage', res.data.language)
+                    return res.data
+                }
+                
+                
+                
+                
             })
             .catch(err => {
                 return Promise.reject(err)

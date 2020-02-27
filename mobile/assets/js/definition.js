@@ -682,12 +682,12 @@ export default language => {
 
     coinOptions: [
       {
-        code: 'CNY',
-        content: 'CNY'
-      },
-      {
         code: 'HKD',
         content: 'HKD'
+      },
+      {
+        code: 'CNY',
+        content: 'CNY'
       },
       {
         code: 'USD',
