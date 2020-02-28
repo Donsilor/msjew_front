@@ -1,5 +1,6 @@
 import LANGUAGE from '@/assets/i18n/index.js'
-const lang = LANGUAGE.error
+import axios from 'axios'
+
 
 const CART = 'cart'
 const WISH = 'wish'
@@ -25,8 +26,6 @@ const SEARCHHISTORY = 'searchHistory'
 // }
 
 
-
-
 // function refreshTokenRequst({ $axios, state, getters, commit, dispatch }){
 //   const refreshToken = JSON.parse(localStorage.getItem('_token') || '[]')
 //   return this.$axios({
@@ -41,6 +40,24 @@ const SEARCHHISTORY = 'searchHistory'
 //     onAccessTokenFetched()
 //   })
 // }
+
+// console.log(222)
+//  axios.get('http://www.bdd.com/api/web/site/setting').then((res) => {
+//     const Cookie = process.client ? require('js-cookie') : undefined
+//     Cookie && Cookie.set('language', res.data.language, { path: '/' })
+//     localStorage.setItem('language', res.data.language)
+
+//     Cookie && Cookie.set('coin', res.data.coin, { path: '/' })
+//     localStorage.setItem('coin', res.data.coin)
+
+//     Cookie && Cookie.set('areaId', res.data.area_id, { path: '/' })
+//     localStorage.setItem('areaId', res.data.areaId)
+//     //code
+//    console.log(222,res)
+//   }).catch((error) => {
+//     console.log(error)
+//   })
+
 
 
 // 获取不会重复的类时间戳
@@ -139,6 +156,7 @@ function makeComparedGoodGroups (compared = []) {
 }
 
 export default {
+    
     // 重新获取token
     // tokenDataFn({ $axios, state, getters, commit, dispatch }){
     //   return this.$axios({
@@ -186,40 +204,57 @@ export default {
     },
 
 
-    nuxtServerInit ({ commit }, { req, app, $axios }) {
-        $axios({
-            method: `get`,
-            url: `/web/WebsiteSeo/webSetlist`
-        })
-            .then(res => {
-                // console.log('res============>', res)
-                if (res && res[0]) {
-                    // commit('setPageInfo', res[0].name)
-                    const data = res[0]
-                    if (!data) {
-                        return
-                    }
-                    app.head.title = data.name
-                    app.head.meta = app.head.meta.concat([
-                        {
-                            name: 'title',
-                            content: data.titleAddd
-                        },
-                        {
-                            name: 'desc',
-                            content: data.metaDesc
-                        },
-                        {
-                            name: 'keyword',
-                            content: data.metaKeyword
-                        }
-                    ])
-                }
+    nuxtServerInit ({ commit }, { req, res,app,store,$axios }) {
+        
+        // let language = store.state.language||''
+        // let coin = store.state.coin||''
+        // let areaId = store.state.areaId|''
+        const cookieparser =  require('cookieparser') || undefined
+        let setting = ''   
+        let lastUrl = ''
+        if (req.headers.cookie) {
+            const cookie = cookieparser.parse(req.headers.cookie || '')
+            setting = cookie.setting || ''
+            lastUrl = cookie.lastUrl || ''
+          }
+
+        console.log(22,setting)
+        if (setting != 'frist'){
+            console.log(33)
+            $axios({
+                method: `get`,
+                url: `/web/site/setting`
             })
-            .catch(err => {
-                console.error(err)
-            })
+                .then(data => {
+                    const resetCookie = []
+                    const expiresDate = new Date()
+                    expiresDate.setDate(expiresDate.getDate() + 365)
+                    const expires = expiresDate.toUTCString()
+
+
+                    resetCookie.push(`language=${data.data.language}; Path=/; expires=${expires}`)
+                    commit('setLanguage', data.data.language)
+
+                    resetCookie.push(`coin=${data.data.currency}; Path=/;`)                  
+                    commit('setCoin', data.data.currency)
+
+                    resetCookie.push(`areaId=${data.data.area_id}; Path=/;`)
+                    commit('setAreaId', data.data.area_id)
+
+                    setting = 'frist'
+                    resetCookie.push(`setting=${setting}; Path=/; expires=${expires}`)
+                    commit('setSetting', setting)
+                    // console.log('res============>', res)
+                    res.setHeader('Set-Cookie', resetCookie)
+                })
+                .catch(err => {
+                    console.error(err)
+                })
+        }
+        
     },
+
+
     // 退出登录
     logout ({ $axios, state, commit, dispatch }) {
         commit('setToken', '')
@@ -1680,5 +1715,43 @@ export default {
             .catch(err => {
                 return Promise.reject(err)
             })
-    }
+    },
+
+//   // 获取用户数据
+//   getSiteSetting ({ $axios, state, commit, dispatch },type='') {
+//     return this.$axios({
+//         method: 'get',
+//         url: '/web/site/setting'
+//     })
+//         .then(res => {
+//             // console.log("个人",res.data)
+//             if(type == 'coin'){
+//                 commit('setCoin', res.data.currency)
+//                 localStorage.setItem('coin', res.data.currency)
+//                 return res.data.currency
+//             }else if(type == 'language'){
+//                 commit('setLanguage', res.data.language)
+//                 localStorage.setItem('language', res.data.language)
+//                 return res.data.language
+//             }else if(type == 'area'){
+//                 commit('setAreaId', res.data.area_id)
+//                 localStorage.setItem('areaId', res.data.area_id)
+//                 return res.data.area_id
+//             }else{
+//                 commit('setCoin', res.data.currency)
+//                 commit('setLanguage', res.data.language)
+//                 localStorage.setItem('coin', res.data.currency)
+//                 localStorage.setItem('language', res.data.language)
+//                 return res.data
+//             }
+            
+            
+            
+            
+//         })
+//         .catch(err => {
+//             return Promise.reject(err)
+//         })
+// }
+
 }
