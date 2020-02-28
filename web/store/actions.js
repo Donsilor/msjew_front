@@ -202,48 +202,44 @@ export default {
 
         })
     },
-
-
-    nuxtServerInit ({ commit }, { req, res,app,store,$axios }) {
-        
-        // let language = store.state.language||''
-        // let coin = store.state.coin||''
-        // let areaId = store.state.areaId|''
+    getAreaSetting({ $axios, state, getters, commit, dispatch }){
         const cookieparser =  require('cookieparser') || undefined
-        let setting = ''   
-        let lastUrl = ''
+        let areaId = '' 
+        let language = ''
+        let coin = '';  
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')
-            setting = cookie.setting || ''
-            lastUrl = cookie.lastUrl || ''
-          }
-
+            areaId = cookie.areaSetting || ''
+            language = cookie.language || ''
+            coin = cookie.coin || ''
+        }
         console.log(22,setting)
-        if (setting != 'frist'){
+        if (!areaId || !language || !coin){
             console.log(33)
             $axios({
                 method: `get`,
                 url: `/web/site/setting`
-            })
-                .then(data => {
+            }).then(data => {
                     const resetCookie = []
                     const expiresDate = new Date()
                     expiresDate.setDate(expiresDate.getDate() + 365)
                     const expires = expiresDate.toUTCString()
 
-
-                    resetCookie.push(`language=${data.data.language}; Path=/; expires=${expires}`)
-                    commit('setLanguage', data.data.language)
-
-                    resetCookie.push(`coin=${data.data.currency}; Path=/;`)                  
-                    commit('setCoin', data.data.currency)
+                    if(!language) {
+                        resetCookie.push(`language=${data.data.language}; Path=/;`)
+                        commit('setLanguage', data.data.language)
+                    }
+                    
+                    if(!coin) {
+                        resetCookie.push(`coin=${data.data.currency}; Path=/;`)                  
+                        commit('setCoin', data.data.currency)
+                    }
 
                     resetCookie.push(`areaId=${data.data.area_id}; Path=/;`)
                     commit('setAreaId', data.data.area_id)
 
-                    setting = 'frist'
-                    resetCookie.push(`setting=${setting}; Path=/; expires=${expires}`)
-                    commit('setSetting', setting)
+                    //resetCookie.push(`areaSetting=1; Path=/; expires=${expires}`)
+                    //commit('setSetting', setting)
                     // console.log('res============>', res)
                     res.setHeader('Set-Cookie', resetCookie)
                 })
@@ -251,9 +247,12 @@ export default {
                     console.error(err)
                 })
         }
-        
     },
 
+    nuxtServerInit ({ commit }, { req, res,app,store,$axios }) {
+                
+    },
+    
 
     // 退出登录
     logout ({ $axios, state, commit, dispatch }) {
