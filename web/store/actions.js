@@ -202,45 +202,25 @@ export default {
         })
     },
     getAreaSetting({ $axios, state, getters, commit, dispatch }){
-        const cookieparser =  require('cookieparser') || undefined
-        let areaId = '' 
-        let language = ''
-        let coin = '';  
-        if (req.headers.cookie) {
-            const cookie = cookieparser.parse(req.headers.cookie || '')
-            areaId = cookie.areaSetting || ''
-            language = cookie.language || ''
-            coin = cookie.coin || ''
-        }
-        console.log(22,setting)
+        //const cookieparser =  require('cookieparser') || undefined
+        const Cookie = process.client ? require('js-cookie') : undefined
+        let areaId = Cookie.get('areaId')
+        let language = Cookie.get('language')
+        let coin = Cookie.get('coin')        
         if (!areaId || !language || !coin){
             console.log(33)
             $axios({
                 method: `get`,
                 url: `/web/site/setting`
             }).then(data => {
-                    const resetCookie = []
-                    const expiresDate = new Date()
-                    expiresDate.setDate(expiresDate.getDate() + 365)
-                    const expires = expiresDate.toUTCString()
-
                     if(!language) {
-                        resetCookie.push(`language=${data.data.language}; Path=/;`)
                         commit('setLanguage', data.data.language)
-                    }
-                    
+                    }                    
                     if(!coin) {
                         resetCookie.push(`coin=${data.data.currency}; Path=/;`)                  
                         commit('setCoin', data.data.currency)
                     }
-
-                    resetCookie.push(`areaId=${data.data.area_id}; Path=/;`)
                     commit('setAreaId', data.data.area_id)
-
-                    //resetCookie.push(`areaSetting=1; Path=/; expires=${expires}`)
-                    //commit('setSetting', setting)
-                    // console.log('res============>', res)
-                    res.setHeader('Set-Cookie', resetCookie)
                 })
                 .catch(err => {
                     console.error(err)
