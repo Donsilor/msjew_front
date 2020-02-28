@@ -2290,6 +2290,7 @@
     "msg5": "Your e-mail is incorrect. Please enter again!",
     "msg6": "Word count in note reaches limit",
     "msg7": "Error, error location: jump to payment when placing order",
-    "msg8": "Failed to acquire data, please return to cart and try again!"
+    "msg8": "Failed to acquire data, please return to cart and try again!",
+    "msg9": "Please select a payment method!"
   }
 }

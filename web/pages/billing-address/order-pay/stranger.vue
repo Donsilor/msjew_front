@@ -34,21 +34,21 @@
         <div class="step-line" />
       </div>
       
-        <!--    用户名称和提示登陆-->
-        <div class="user-info">
-          <i class="iconfont iconrentou" />
-          <div class="login-line">
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.login`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balbala`) }}</span>
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balabalabala`) }}</span>
-          </div>
+      <!--    用户名称和提示登陆-->
+      <div class="user-info">
+        <i class="iconfont iconrentou" />
+        <div class="login-line">
+          <nuxt-link to="/login"
+            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balbala`) }}</span>
+          <nuxt-link to="/login"
+            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
-<div v-show="show">
+      </div>
+      <div v-show="show">
         <!--    地址模块-->
         <div class="new-address">
           <div class="new-address-title">
@@ -320,6 +320,7 @@
           </div>
         </div>
       </div>
+
       <!--支付模块  -->
       <div class="payways">
         <!-- 支付 -->
@@ -507,6 +508,7 @@
           />
         </div>
       </div>
+
       <!--    购物车模块-->
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
@@ -567,7 +569,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -673,7 +675,7 @@
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
-              <!-- <div class="hkd">{{ good.length }}</div> -->
+              <div class="hkd">{{ good.length }}</div>
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -813,22 +815,22 @@
         </div>
         <div class="step-line" />
       </div>
-      <div v-show="show">
-        <!--    用户名称和提示登陆-->
-        <div class="user-info">
-          <i class="iconfont iconrentou" />
-          <div class="login-line">
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.login`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balbala`) }}</span>
-            <nuxt-link to="/login"
-              ><span>{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-            >
-            <span>{{ $t(`${lang}.balabalabala`) }}</span>
-          </div>
+     
+      <!--    用户名称和提示登陆-->
+      <div class="user-info">
+        <i class="iconfont iconrentou" />
+        <div class="login-line">
+          <nuxt-link to="/login"
+            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balbala`) }}</span>
+          <nuxt-link to="/login"
+            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
-
+      </div>
+      <div v-show="show">
         <!--    地址模块-->
         <div class="new-address">
           <div class="new-address-title">
@@ -1195,7 +1197,7 @@
                 </div>
               </div> -->
 
-              <div
+              <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
                 class="pay-block"
                 @click="Way(2)"
@@ -1204,14 +1206,14 @@
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 2" class="pay-price">
+                <div v-show="payWay == 2" class="pay-price"> -->
                   <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-              </div>
+              </div> -->
 
               <!-- <div
                 :class="{ 'pay-choose': payWay == 3 }"
@@ -1349,7 +1351,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -1455,7 +1457,7 @@
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
-              <!-- <div class="hkd">{{ good.length }}</div> -->
+              <div class="hkd">{{ good.length }}</div>
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -1575,10 +1577,10 @@ export default {
   mixins: [Address],
   data() {
     return {
-      // url:'',
+      url:'',
       show:false,
       goingPay: false,
-      payWay: 6 ,
+      payWay: '' ,
       actionLink: '',
       form: [],
       answer: false,
@@ -1620,6 +1622,7 @@ export default {
       good: [],
       goodsPrice: 0,
       preferFee: 0,
+      planDays: '1-12',
       tex: {
         logisticsFee: 0,
         taxFee: 0,
@@ -1664,14 +1667,13 @@ export default {
     }
   },
   created() {
+    // console.log("planDays",this.tex.planDays)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
-          console.log(`good22222======>`, res)
-          // for(const i in res){
-          //   console.log("遍历",i)
-          // }
+          this.$store.dispatch('setLocalCartOrder',this.pathTakeIds)
+          console.log(`good22222======>`, this.pathTakeIds)
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
@@ -1710,6 +1712,44 @@ export default {
     window.removeEventListener('scroll', this.scrollToTop)
   },
   methods: {
+    // 点击登入获取上页url
+    login(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
+      // console.log("oldurl",url)
+    },
+    register(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
+    },
     Way(ways){
       this.payWay=ways
       console.log("payway",ways)
@@ -1717,7 +1757,7 @@ export default {
         this.show=false
       }else{
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        // const url=window.location.href  _this.$t(`${lang}.logintips`
+        // const url=window.location.href  
         // setTimeout(() => {
         //   this.$router.push({
         //     path: `/login`,
@@ -1840,13 +1880,13 @@ export default {
         .catch(err => {
           this.canSubmit = false
           this.$message.error(err.message)
-          this.tex = {
-            logisticsFee: 0,
-            taxFee: 0,
-            safeFee: 0,
-            orderAmount: null,
-            planDays: '--'
-          }
+          // this.tex = {
+          //   logisticsFee: 0,
+          //   taxFee: 0,
+          //   safeFee: 0,
+          //   orderAmount: null,
+          //   planDays: '--'
+          // }
           if (!err.response) {
             this.$message.error(err.message)
           } else {
@@ -1855,10 +1895,11 @@ export default {
         })
     },
     createOrder() { 
-      // if(this.payWay==''){
-      //   console.log("请选择支付方式")
-      //   return
-      // }
+      if(this.payWay==''){
+        // console.log("请选择支付方式")_this.$t(`${lang}.codeTips`)
+        this.$errorMessage(this.$t(`${lang}.msg9`))
+        return
+      }
       let json=[]
      
       for (const i in this.good) {
@@ -1884,7 +1925,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318
+          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com
         }
       })
         .then(res => {

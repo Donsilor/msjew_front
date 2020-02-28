@@ -579,7 +579,8 @@
       "slider-verify": "Complete verification to unlock",
       "input-password": "Enter login password",
       "login-error": "Wrong account or password",
-      "login-success": "Logged in"
+      "login-success": "Logged in",
+      "input-code": "Please enter a verification code"
     },
     "index": {
       "login": "Account Login",
