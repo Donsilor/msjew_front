@@ -32,22 +32,23 @@ export default {
                 await _this.$store.dispatch('getOnlineCartAmount')
                 //  _this.$store.dispatch('getOnlineCartAmount')
                 await _this.$store.dispatch('synchronizeCart')
-                // 同步心愿单
-                await _this.$store.dispatch('synchronizeWish')
-                // 同步对比
-                await _this.$store.dispatch('synchronizeCompared')
+                // 同步心愿单 暂时屏蔽2020-2-28
+                //await _this.$store.dispatch('synchronizeWish')
+                // 同步对比 暂时屏蔽2020-2-28
+                //await _this.$store.dispatch('synchronizeCompared')
             } else {
             }
             // _this.$store.dispatch('getOnlineCartAmount')
             // await _this.$store.dispatch('refreshTokenRequst')
-            // 获取心愿单
-            _this.$store.dispatch('getWish')
+            // 获取心愿单 暂时屏蔽 2020-2-28
+            //_this.$store.dispatch('getWish')
             // 获取购物车
             _this.$store.dispatch('getCart')
             // console.log("layout",_this.$store.dispatch('getCart'))
-            // 获取对比数据
-            _this.$store.dispatch('getCompared')
-
+            // 获取对比数据 暂时屏蔽 2020-2-28
+            //_this.$store.dispatch('getCompared')
+            // 获取当前ip区域设置 
+			_this.$store.dispatch('getAreaSetting')
 
             // _this
             //   .$axios({
