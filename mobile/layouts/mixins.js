@@ -26,7 +26,7 @@ export default {
             _this.$store.dispatch('localAreaSetting')
             //语言选择弹窗 
             if (!_this.$store.state.coin || !_this.$store.state.language) {
-                _this.$refs['site-switch'].show()
+                //_this.$refs['site-switch'].show()
             }
 
             if (_this.$store.getters.hadLogin) {

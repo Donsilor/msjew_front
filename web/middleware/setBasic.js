@@ -37,12 +37,11 @@ export default function(content) {
       if (!trueCoin) {
         coin = coinOptions[0].code
       }
-      // console.log('reset coin====>', coin)
-      //resetCookie.push(`coin=${coin}; Path=/;`)
+      resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
       store.commit('setCoin', coin)
     } else {
       coin = app.$bddDefinition.coinOptions[0].code
-      //resetCookie.push(`coin=${coin}; Path=/;`)
+      //resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
       store.commit('setCoin', coin)
     }
 
@@ -57,7 +56,7 @@ export default function(content) {
       if (!trueLanguage) {
         language = languageOptions[0].code
       }
-      //resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
+      resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
       store.commit('setLanguage', language)
     } else {
       language = app.$bddDefinition.languageOptions[0].code
@@ -66,13 +65,12 @@ export default function(content) {
     }
 
     if (areaId) {      
-      //resetCookie.push(`areaId=${language}; Path=/; expires=${expires}`)
+      resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
       store.commit('setAreaId', areaId)
     }
 
     if (lastUrl) {
       resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
-      // res.setHeader('Set-Cookie', [`lastUrl=${lastUrl}; Path=/;`])
       store.commit('setLastUrl', lastUrl)
     }
     console.log('setBasic req====>', resetCookie)

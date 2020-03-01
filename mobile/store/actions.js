@@ -77,25 +77,34 @@ export default {
         let areaId = Cookie.get('areaId')
         let language = Cookie.get('language')
         let coin = Cookie.get('coin')        
-        if (!areaId || !language || !coin){
-            this.$axios({
-                method: `get`,
-                url: `/web/site/setting`
-            }).then(data => {
-                if(!language) {
-                    commit('setLanguage', data.language)
-                }                    
-                if(!coin) {
-                    //resetCookie.push(`coin=${data.currency}; Path=/;`)                  
-                    commit('setCoin', data.currency)
-                }
+        
+        //刷新时间控制
+        let refreshAreaTime = parseInt(localStorage.getItem('refreshAreaTime'));
+        let nowDate = parseInt((new Date()).getTime() / 1000)
+        let refreshOnceTime = 60  //过期后每隔多少秒刷新地区    
+        if ((language && coin) && (nowDate - refreshAreaTime < refreshOnceTime)) {
+            return
+        }
+        this.$axios({
+            method: `get`,
+            url: `/web/site/setting`
+        }).then(data => {
+            if(!language) {
+                commit('setLanguage', data.language)
+            }                    
+            if(!coin) {               
+                commit('setCoin', data.currency)
+            }
+            localStorage.setItem('refreshAreaTime',nowDate)
+            if(data.area_id != areaId) {
                 commit('setAreaId', data.area_id)
                 window.location.reload();
-            })
-            .catch(err => {
-                console.error(err)
-            })
-        }
+            } 
+        })
+        .catch(err => {
+            console.error(err)
+        })
+        
     },
     nuxtServerInit ({ commit }, { req, app }) {
         // console.log('nuxtServerInit======>')
