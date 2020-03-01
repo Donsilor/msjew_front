@@ -100,6 +100,7 @@ export default {
                 commit('setAreaId', data.area_id)
                 window.location.reload();
             } 
+            
         })
         .catch(err => {
             console.error(err)

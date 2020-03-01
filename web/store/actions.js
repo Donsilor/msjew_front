@@ -162,8 +162,8 @@ export default {
             if(data.area_id != areaId) {
                 commit('setAreaId', data.area_id)
                 window.location.reload();
-            } 
-                     
+            }
+                                 
         })
         .catch(err => {
             console.error(err)
