@@ -1,28 +1,11 @@
 import LANGUAGE from '@/assets/lang/index.js'
+const Cookie = process.client ? require('js-cookie') : undefined
 const lang = LANGUAGE.error
 
 const CART = 'cart'
 const WISH = 'wish'
 const COMPARED = 'compared'
 const SEARCHHISTORY = 'searchHistory'
-
-// let lastTimestamp = 0
-// let lastNum = 0
-//
-// // 获取不会重复的类时间戳
-// function getTimestampUuid() {
-//   const time = new Date().getTime().toString()
-//   time = time.substr(0, time.length - 3)
-//   let result = time
-//   if (time === lastTimestamp) {
-//     lastNum++
-//   } else {
-//     lastTimestamp = time
-//     lastNum = 0
-//   }
-//   result = `${time}${lastNum}`
-//   return result
-// }
 
 // 获取不会重复的类时间戳
 function getTimestampUuid () {
@@ -63,7 +46,8 @@ function makeComparedGoodGroups (compared = []) {
 }
 
 export default {
-    refreshTokenRequst ({ $axios, state, getters, commit, dispatch }) {
+    //刷新登录token
+    refreshTokenRequest ({ $axios, state, getters, commit, dispatch }) {
 
         const loginTime = parseInt(localStorage.getItem('loginTime'));
         const refreshTime = parseInt(localStorage.getItem('refreshTime'));
@@ -87,6 +71,31 @@ export default {
             commit('setToken', res.access_token);
             //window.location.reload()
         })
+    },
+    //根据IP缓存本地默认 地区，语言，货币
+    localAreaSetting({ $axios, state, getters, commit, dispatch }){
+        let areaId = Cookie.get('areaId')
+        let language = Cookie.get('language')
+        let coin = Cookie.get('coin')        
+        if (!areaId || !language || !coin){
+            this.$axios({
+                method: `get`,
+                url: `/web/site/setting`
+            }).then(data => {
+                if(!language) {
+                    commit('setLanguage', data.language)
+                }                    
+                if(!coin) {
+                    //resetCookie.push(`coin=${data.currency}; Path=/;`)                  
+                    commit('setCoin', data.currency)
+                }
+                commit('setAreaId', data.area_id)
+                window.location.reload();
+            })
+            .catch(err => {
+                console.error(err)
+            })
+        }
     },
     nuxtServerInit ({ commit }, { req, app }) {
         // console.log('nuxtServerInit======>')

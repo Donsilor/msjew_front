@@ -846,7 +846,7 @@ export default {
             goodsCartList:data,
             tradeType:'wap',
             coinType:this.$store.state.coin,
-            returnUrl:'http://wap.bdd.bddia.com/cart/paySuccess?order_sn={order_sn}' //http://localhost:8328
+            returnUrl:'https://wap.bddco.com/cart/paySuccess?order_sn={order_sn}' //http://localhost:8328
           }
         })
           .then(res => {

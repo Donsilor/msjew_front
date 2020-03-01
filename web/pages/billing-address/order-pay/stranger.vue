@@ -1745,7 +1745,7 @@ export default {
       localStorage.setItem('url',url)
       setTimeout(() => {
         this.$router.push({
-            path: `/login`,
+            path: `/login?type=register`,
             // query: {url}
         })
       },0)
@@ -1925,7 +1925,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'http://www.bdd.bddia.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com
+          returnUrl:'https://www.bddco.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com
         }
       })
         .then(res => {
