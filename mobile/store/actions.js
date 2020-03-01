@@ -85,11 +85,10 @@ export default {
                 if(!language) {
                     commit('setLanguage', data.language)
                 }                    
-                if(!coin) {
-                    //resetCookie.push(`coin=${data.currency}; Path=/;`)                  
+                if(!coin) {               
                     commit('setCoin', data.currency)
                 }
-                commit('setAreaId', data.area_id)
+                commit('setAreaId', data.area_id)                
                 window.location.reload();
             })
             .catch(err => {
