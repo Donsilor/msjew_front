@@ -1,64 +1,11 @@
 import LANGUAGE from '@/assets/i18n/index.js'
 import axios from 'axios'
 
-
+const Cookie = process.client ? require('js-cookie') : undefined
 const CART = 'cart'
 const WISH = 'wish'
 const COMPARED = 'compared'
 const SEARCHHISTORY = 'searchHistory'
-
-// let lastTimestamp = 0
-// let lastNum = 0
-//
-// // 获取不会重复的类时间戳
-// function getTimestampUuid() {
-//   const time = new Date().getTime().toString()
-//   time = time.substr(0, time.length - 3)
-//   let result = time
-//   if (time === lastTimestamp) {
-//     lastNum++
-//   } else {
-//     lastTimestamp = time
-//     lastNum = 0
-//   }
-//   result = `${time}${lastNum}`
-//   return result
-// }
-
-
-// function refreshTokenRequst({ $axios, state, getters, commit, dispatch }){
-//   const refreshToken = JSON.parse(localStorage.getItem('_token') || '[]')
-//   return this.$axios({
-//     method: 'post',
-//     url:'/web/site/refresh',
-//     data:{
-//       refresh_token:refreshToken
-//     }
-//   }).then(res => {
-//     localStorage.setItem('refreshToken',res.data.refreshToken);
-//     localStorage.setItem('token',res.data.token);
-//     onAccessTokenFetched()
-//   })
-// }
-
-// console.log(222)
-//  axios.get('http://www.bdd.com/api/web/site/setting').then((res) => {
-//     const Cookie = process.client ? require('js-cookie') : undefined
-//     Cookie && Cookie.set('language', res.data.language, { path: '/' })
-//     localStorage.setItem('language', res.data.language)
-
-//     Cookie && Cookie.set('coin', res.data.coin, { path: '/' })
-//     localStorage.setItem('coin', res.data.coin)
-
-//     Cookie && Cookie.set('areaId', res.data.area_id, { path: '/' })
-//     localStorage.setItem('areaId', res.data.areaId)
-//     //code
-//    console.log(222,res)
-//   }).catch((error) => {
-//     console.log(error)
-//   })
-
-
 
 // 获取不会重复的类时间戳
 function getTimestampUuid () {
@@ -156,22 +103,8 @@ function makeComparedGoodGroups (compared = []) {
 }
 
 export default {
-    
-    // 重新获取token
-    // tokenDataFn({ $axios, state, getters, commit, dispatch }){
-    //   return this.$axios({
-    //     method: 'post',
-    //     url:'/web/site/refresh'
-    //   }).then(res => {
-    //       // console.log("购物车列表",res.data)
-
-    //     })
-    //     .catch(err => {
-    //       return Promise.reject(err)
-    //     })
-    // },  
-
-    refreshTokenRequst ({ $axios, state, getters, commit, dispatch }) {
+    //刷新token
+    refreshTokenRequest ({ $axios, state, getters, commit, dispatch }) {
 
         const loginTime = parseInt(localStorage.getItem('loginTime'));
         const refreshTime = parseInt(localStorage.getItem('refreshTime'));
@@ -202,38 +135,35 @@ export default {
 
         })
     },
-    getAreaSetting({ $axios, state, getters, commit, dispatch }){
-        //const cookieparser =  require('cookieparser') || undefined
-        const Cookie = process.client ? require('js-cookie') : undefined
+    //根据IP缓存本地默认 地区，语言，货币
+    localAreaSetting({ $axios, state, getters, commit, dispatch }){
         let areaId = Cookie.get('areaId')
         let language = Cookie.get('language')
         let coin = Cookie.get('coin')        
         if (!areaId || !language || !coin){
-            console.log(33)
-            $axios({
+            this.$axios({
                 method: `get`,
                 url: `/web/site/setting`
-            }).then(data => {
-                    if(!language) {
-                        commit('setLanguage', data.data.language)
-                    }                    
-                    if(!coin) {
-                        resetCookie.push(`coin=${data.data.currency}; Path=/;`)                  
-                        commit('setCoin', data.data.currency)
-                    }
-                    commit('setAreaId', data.data.area_id)
-                })
-                .catch(err => {
-                    console.error(err)
-                })
+            }).then(res => {
+                const data = res.data
+                if(!language) {
+                    commit('setLanguage', data.language)
+                }                    
+                if(!coin) {               
+                    commit('setCoin', data.currency)
+                }
+                commit('setAreaId', data.area_id)
+                window.location.reload();
+            })
+            .catch(err => {
+                console.error(err)
+            })
         }
     },
 
     nuxtServerInit ({ commit }, { req, res,app,store,$axios }) {
                 
     },
-    
-
     // 退出登录
     logout ({ $axios, state, commit, dispatch }) {
         commit('setToken', '')
@@ -247,14 +177,14 @@ export default {
             method: 'get',
             url: 'web/member/member/me'
         })
-            .then(res => {
-                // console.log("个人",res.data)
-                commit('setUserInfo', res.data)
-                return res.data
-            })
-            .catch(err => {
-                return Promise.reject(err)
-            })
+        .then(res => {
+            // console.log("个人",res.data)
+            commit('setUserInfo', res.data)
+            return res.data
+        })
+        .catch(err => {
+            return Promise.reject(err)
+        })
     },
 
     /**
