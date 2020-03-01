@@ -168,7 +168,8 @@ export default {
             localStorage.setItem('refreshAreaTime',nowDate)
             if(setFlag) {
                 location.reload();
-            }         
+            }        
+
         })
         .catch(err => {
             console.error(err)
