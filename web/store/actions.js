@@ -152,18 +152,23 @@ export default {
             url: `/web/site/setting`
         }).then(res => {
             const data = res.data
+            let setFlag = false
             if(!language) {
+                setFlag = true
                 commit('setLanguage', data.language)
             }                    
-            if(!coin) {               
+            if(!coin) {
+                setFlag = true               
                 commit('setCoin', data.currency)
-            }
-            localStorage.setItem('refreshAreaTime',nowDate)
+            }            
             if(data.area_id != areaId) {
+                setFlag = true
                 commit('setAreaId', data.area_id)
-                window.location.reload();
             } 
-                     
+            localStorage.setItem('refreshAreaTime',nowDate)
+            if(setFlag) {
+                location.reload();
+            }         
         })
         .catch(err => {
             console.error(err)
