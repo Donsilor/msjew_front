@@ -125,6 +125,7 @@ export default {
   methods: {
     formatMoney: formatMoney,
     changeType(ind) {
+      console.log("选择",ind)
       this.typeIndex = ind
       if (ind === 5) {
         this.price = this.info.orderAmount * 0.985

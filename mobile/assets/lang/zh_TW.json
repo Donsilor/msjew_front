@@ -125,6 +125,7 @@
       "toast2": "移除成功"
     },
     "sureOrder": {
+      "firstLogin":"請先登錄！",
       "sureOrder": "確認訂單",
       "login": "登入賬戶",
       "settlement": "以加速結算或是",
@@ -150,6 +151,7 @@
       "cuponName": "選擇優惠碼",
       "toast1": "暫無可用優惠碼",
       "toast2": "請勾選默認地址",
+      "toast4":"請選擇支付方式！",
       "toast3": "接收售後憑證的電郵地址輸入有誤，請重新輸入！",
       "delete": "刪除",
       "inputCode": "輸入優惠碼",
@@ -576,7 +578,8 @@
       "slider-verify": "請完成驗證解鎖",
       "input-password": "請輸入登入密碼",
       "login-error": "用戶或密碼錯誤！",
-      "login-success": "登錄成功"
+      "login-success": "登錄成功",
+      "input-code": "請輸入驗證碼"
     },
     "index": {
       "login": "會員登入",

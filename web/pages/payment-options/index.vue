@@ -181,7 +181,7 @@ export default {
     }
     return {
       lang,
-      payWay: this.$route.query.payType || 2,
+      payWay: this.$route.query.payType || 6,
       answer: false,
       pay: false,
       isPay: false,
@@ -228,7 +228,7 @@ export default {
       const data ={
         orderId: this.$route.query.orderId,
         coinType: this.$route.query.coinType,
-        // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318  https://www.bddco.com/
+        // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318   https://www.bdd.bddia.com https://www.bddco.com/
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
