@@ -12,6 +12,7 @@ export default function(content) {
     let coin = ''
     let language = ''
     let lastUrl = ''
+    let areaId = ''
 
     const expiresDate = new Date()
     expiresDate.setDate(expiresDate.getDate() + 365)
@@ -22,6 +23,7 @@ export default function(content) {
       coin = cookie.coin || ''
       language = cookie.language || ''
       lastUrl = cookie.lastUrl || ''
+      areaId  = cookie.areaId || ''
     }
 
     if (coin) {
@@ -61,6 +63,11 @@ export default function(content) {
       language = app.$bddDefinition.languageOptions[0].code
       //resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
       store.commit('setLanguage', language)
+    }
+
+    if (areaId) {      
+      //resetCookie.push(`areaId=${language}; Path=/; expires=${expires}`)
+      store.commit('setAreaId', areaId)
     }
 
     if (lastUrl) {
