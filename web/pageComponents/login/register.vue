@@ -545,9 +545,9 @@ export default {
 		  localStorage.setItem('accessToken',data.access_token);
           _this.$store.commit('setToken', data.access_token)
           _this.$store.commit('setUserInfo',data.member)
-          _this.$store.dispatch('synchronizeCart')
             // const lastUrl = _this.$store.state.lastUrl
             const lastUrl=localStorage.getItem("url")
+          _this.$store.dispatch('synchronizeCart')
           // const lastUrl = _this.$store.state.lastUrl
           // _this.$store.commit('setLastUrl', '')
 		  
@@ -614,9 +614,9 @@ export default {
           _this.$store.commit('setUserInfo',data.member)
           // const lastUrl = _this.$store.state.lastUrl
           // _this.$store.commit('setLastUrl', '')
-          _this.$store.dispatch('synchronizeCart')
             // const lastUrl = _this.$store.state.lastUrl
             const lastUrl=localStorage.getItem("url")
+          _this.$store.dispatch('synchronizeCart')
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({

@@ -23,11 +23,11 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <!-- <div v-if="!hasAddress" class="no-address" @click="goAddress">
+      <div v-if="!hasAddress&&isLogin" class="no-address" @click="goAddress">
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
-      </div> -->
+      </div>
     </div>
     <!-- 支付方式 -->
     <div class="payways" v-if="!isLogin">
@@ -95,7 +95,7 @@
       <div class="content">
         <div class="time">
           <span>{{ lang.time }}</span
-          ><span>{{ allFee.planDays }}{{ lang.week }}</span>
+          ><span>{{ planDays }}{{ lang.week }}</span>
         </div>
         <div v-if="productNum > 1" class="send">
           <div
@@ -316,6 +316,7 @@ export default {
       userRemark: '',
       isSend: true,
       productNum: 0,
+      planDays:'',
 
       sureCoupon: false,
       inputCouponCode: '',
@@ -399,7 +400,7 @@ export default {
     }
   },
   mounted() {
-    console.log("allFee",this.allFee)
+    
     this.$nextTick(() => {
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
@@ -411,6 +412,8 @@ export default {
 
       this.list = JSON.parse(storage.get('myCartList', 0))
       // console.log(this.list,'fffffffffffff')
+      this.planDays = this.allFee.planDays
+      console.log("allFee",this.planDays)
       this.idList = []
       this.productAmount = 0
       this.list.map((item, index) => {
@@ -773,10 +776,12 @@ export default {
       //   return
       // }
       // console.log("aaaa",this.typeIndex)
-      if(this.typeIndex!==0){
-        this.$toast.show(this.lang.toast4)
-        return
-      }
+       if (!this.isLogin) {
+         if(this.typeIndex!==0){
+           this.$toast.show(this.lang.toast4)
+           return
+         }
+       }
       if (this.isLogin) {
         if (!this.hasAddress) {
           this.$toast.show(this.lang.toast2)
@@ -841,7 +846,7 @@ export default {
             goodsCartList:data,
             tradeType:'wap',
             coinType:this.$store.state.coin,
-            returnUrl:'http://wap.bdd.bddia.com/cart/paySuccess?order_sn={order_sn}' //http://localhost:8328
+            returnUrl:'https://wap.bddco.com/cart/paySuccess?order_sn={order_sn}' //http://localhost:8328
           }
         })
           .then(res => {

@@ -187,6 +187,7 @@ export default {
               line-height: 20px;
               font-weight: 400;
               color: rgba(148, 116, 101, 1);
+              margin-top: 14px;
             }
           }
         }
