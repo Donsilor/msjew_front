@@ -269,7 +269,7 @@ export default {
             }
           } else {
             this.$router.replace({
-              path: '/complete-payment',
+              path: '/complete-paySuccess',
               query: {
                 orderId: this.$route.query.orderId,
                 price: this.$route.query.price,
