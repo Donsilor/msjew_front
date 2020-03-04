@@ -38,6 +38,14 @@ export default {
     state.userInfo = val
     // Vue.set(state, 'userInfo', val)
   },
+  setAreaId(state, val) {
+    state.areaId = val
+    Cookie && Cookie.set('areaId', val, { path: '/' })
+  },
+  setSetting(state, val) {
+    state.setting = val
+    Cookie && Cookie.set('setting', val, { path: '/' })
+  },
 
   /**
    * 购物车
@@ -51,6 +59,8 @@ export default {
     // console.log('setCart=====>', val)
     state.cart = val
   },
+ 
+
 
   /**
    * 心愿单
