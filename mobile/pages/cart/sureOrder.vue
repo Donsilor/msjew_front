@@ -823,6 +823,7 @@ export default {
           })
       } else {
         const data = []
+        let baseUrl=this.$store.getters.baseUrl
         console.log("未登录",this.list)
         for (const i in this.list) {
           const o = {
@@ -846,7 +847,7 @@ export default {
             goodsCartList:data,
             tradeType:'wap',
             coinType:this.$store.state.coin,
-            returnUrl:'http://wap.bdd.bddia.com/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
+            returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
           }
         })
           .then(res => {

@@ -1704,6 +1704,8 @@ export default {
       })
   },
   mounted() {
+    // const baseUrl=this.$store.getters.baseUrl
+    // console.log("baseUrl",baseUrl)
     // this.getTex()
     this.language = this.getCookie('language')
     window.addEventListener('scroll', this.scrollToTop);
@@ -1895,6 +1897,8 @@ export default {
         })
     },
     createOrder() { 
+      let baseUrl=this.$store.getters.baseUrl
+
       if(this.payWay==''){
         // console.log("请选择支付方式")_this.$t(`${lang}.codeTips`)
         this.$errorMessage(this.$t(`${lang}.msg9`))
@@ -1925,7 +1929,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'http://www.bdd.bddia.com/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
+          returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
         }
       })
         .then(res => {

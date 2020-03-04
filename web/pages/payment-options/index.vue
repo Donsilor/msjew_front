@@ -223,6 +223,7 @@ export default {
       //   ),
       //   false
       // )
+      let baseUrl=this.$store.getters.baseUrl
       const data ={
         orderId: this.$route.query.orderId,
         coinType: this.$route.query.coinType,
@@ -230,7 +231,7 @@ export default {
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        returnUrl:'http://www.bdd.bddia.com/complete-paySuccess?orderId='+this.$route.query.orderId
+        returnUrl:baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
       }
       this.goingPay = true
       this.$axios
