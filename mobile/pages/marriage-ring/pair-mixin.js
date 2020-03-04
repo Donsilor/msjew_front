@@ -284,7 +284,7 @@ export default {
       text: this.firstRing.sizes[0].content
     }
     this.firstRingQuality = {
-      checked: this.firstRing.materials.length != 0
+      checked: this.firstRing.materials[0].id
         ? [this.firstRing.materials[0].id]
         : [],
       options: this.firstRing.materials
@@ -294,7 +294,7 @@ export default {
       text: this.secondRing.sizes[0].content
     }
     this.secondRingQuality = {
-      checked: this.secondRing.materials.length != 0
+      checked: this.secondRing.materials[0].id
         ? [this.secondRing.materials[0].id]
         : [],
       options: this.secondRing.materials
