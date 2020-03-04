@@ -405,15 +405,15 @@ export default {
       const configIds = []
       const configAttrIds = []
 
-      let routerUrl = '/marriage-ring/single-ring-detail'
+      let routerUrl = ''
       let routerQuery = {
         goodId: card.id
       }
 
-      // configAttriEntity.map(item => {
-      //   configIds.push(item.configId)
-      //   configAttrIds.push(item.configAttrId)
-      // })
+      configAttriEntity.map(item => {
+        configIds.push(item.configId)
+        configAttrIds.push(item.configAttrId)
+      })
 
       const ringRouter = () => {
         if (configAttrIds.indexOf(60) > -1) {
@@ -445,45 +445,44 @@ export default {
         // console.log('都不是')
       }
 
-
-      // switch (card.categoryId) {
-      //   case 1:
-      //     // 钻石
-      //     routerUrl = '/diamond/diamonds'
-      //     break
-      //   case 2:
-      //     // 戒指
-      //     ringRouter()
-      //     break
-      //   case 3:
-      //     // 珠宝饰品
-      //     routerUrl = '/accessories/accessories'
-      //     break
-      //   case 4:
-      //     // 项链
-      //     routerUrl = '/accessories/accessories'
-      //     break
-      //   case 5:
-      //     // 吊坠
-      //     routerUrl = '/accessories/accessories'
-      //     break
-      //   case 6:
-      //     // 耳钉
-      //     routerUrl = '/accessories/accessories'
-      //     break
-      //   case 7:
-      //     // 耳环
-      //     routerUrl = '/accessories/accessories'
-      //     break
-      //   case 8:
-      //     // 手链
-      //     routerUrl = '/accessories/accessories'
-      //     break
-      //   case 9:
-      //     // 手镯
-      //     routerUrl = '/accessories/accessories'
-      //     break
-      // }
+      switch (card.categoryId) {
+        case 1:
+          // 钻石
+          routerUrl = '/diamond/diamonds'
+          break
+        case 2:
+          // 戒指
+          ringRouter()
+          break
+        case 3:
+          // 珠宝饰品
+          routerUrl = '/accessories/accessories'
+          break
+        case 4:
+          // 项链
+          routerUrl = '/accessories/accessories'
+          break
+        case 5:
+          // 吊坠
+          routerUrl = '/accessories/accessories'
+          break
+        case 6:
+          // 耳钉
+          routerUrl = '/accessories/accessories'
+          break
+        case 7:
+          // 耳环
+          routerUrl = '/accessories/accessories'
+          break
+        case 8:
+          // 手链
+          routerUrl = '/accessories/accessories'
+          break
+        case 9:
+          // 手镯
+          routerUrl = '/accessories/accessories'
+          break
+      }
 
       const queryStr = Object.keys(routerQuery)
         .map(key => {
@@ -497,10 +496,8 @@ export default {
       }
     },
     moreCard() {
+      const card = this.cards[this.activeCard]
 
-<<<<<<< HEAD
-      this.$router.push({
-=======
       // console.log('card====>', card)
       if (!card) {
         return
@@ -520,15 +517,11 @@ export default {
         if (configAttrIds.indexOf(462) > -1) {
           // 女士
           this.$router.push({
->>>>>>> 7b92bc7735381624cc43b4569285efb4c41723c4
             name: 'marriage-ring-single-ring',
             query: {
               type: 'lady'
             }
           })
-<<<<<<< HEAD
-      // const card = this.cards[this.activeCard]
-=======
           return
         }
         if (configAttrIds.indexOf(60) > -1) {
@@ -554,117 +547,66 @@ export default {
         }
         // console.log('都不是')
       }
->>>>>>> 7b92bc7735381624cc43b4569285efb4c41723c4
 
-      // console.log('card====>', card)
-      // if (!card) {
-      //   return
-      // }
+      let routerName = ''
+      let routerQuery = {}
 
-      // const configAttriEntity = card.configAttriEntity
-
-      // const configIds = []
-      // const configAttrIds = []
-
-      // configAttriEntity.map(item => {
-      //   configIds.push(item.configId)
-      //   configAttrIds.push(item.configAttrId)
-      // })
-
-      // const ringRouter = () => {
-      //   if (configAttrIds.indexOf(462) > -1) {
-      //     // 女士
-      //     this.$router.push({
-      //       name: 'marriage-ring-single-ring',
-      //       query: {
-      //         type: 'lady'
-      //       }
-      //     })
-      //     return
-      //   }
-      //   if (configAttrIds.indexOf(60) > -1) {
-      //     // 訂婚戒指
-      //     this.$router.push({
-      //       name: 'marriage-ring-pair-ring'
-      //     })
-      //     return
-      //   }
-      //   if (configAttrIds.indexOf(59) > -1) {
-      //     // 結婚戒指
-      //     this.$router.push({
-      //       name: 'marriage-ring-pair-ring'
-      //     })
-      //     return
-      //   }
-      //   if (configAttrIds.indexOf(61) > -1) {
-      //     // 裝飾戒指
-      //     this.$router.push({
-      //       name: 'marriage-ring-single-ring'
-      //     })
-      //     return
-      //   }
-      //   console.log('都不是')
-      // }
-
-      // let routerName = ''
-      // let routerQuery = {}
-
-      // switch (card.categoryId) {
-      //   case 1:
-      //     // 钻石
-      //     routerName = 'diamond-list'
-      //     break
-      //   case 2:
-      //     // 戒指
-      //     ringRouter()
-      //     return
-      //   case 3:
-      //     // 珠宝饰品
-      //     routerName = 'accessories-list'
-      //     break
-      //   case 4:
-      //     // 项链
-      //     routerName = 'accessories-list'
-      //     routerQuery = {
-      //       actIndex: 0
-      //     }
-      //     break
-      //   case 5:
-      //     // 吊坠
-      //     routerName = 'accessories-list'
-      //     routerQuery = {
-      //       actIndex: 1
-      //     }
-      //     break
-      //   case 6:
-      //     // 耳钉
-      //     routerName = 'accessories-list'
-      //     routerQuery = {
-      //       actIndex: 2
-      //     }
-      //     break
-      //   case 7:
-      //     // 耳环
-      //     routerName = 'accessories-list'
-      //     routerQuery = {
-      //       actIndex: 3
-      //     }
-      //     break
-      //   case 8:
-      //     // 手链
-      //     routerName = 'accessories-list'
-      //     routerQuery = {
-      //       actIndex: 4
-      //     }
-      //     break
-      //   case 9:
-      //     // 手镯
-      //     routerName = 'accessories-list'
-      //     routerQuery = {
-      //       actIndex: 5
-      //     }
-      //     break
-      // }
+      switch (card.categoryId) {
+        case 1:
+          // 钻石
+          routerName = 'diamond-list'
+          break
+        case 2:
+          // 戒指
+          ringRouter()
+          return
+        case 3:
+          // 珠宝饰品
+          routerName = 'accessories-list'
+          break
+        case 4:
+          // 项链
+          routerName = 'accessories-list'
+          routerQuery = {
+            actIndex: 0
+          }
+          break
+        case 5:
+          // 吊坠
+          routerName = 'accessories-list'
+          routerQuery = {
+            actIndex: 1
+          }
+          break
+        case 6:
+          // 耳钉
+          routerName = 'accessories-list'
+          routerQuery = {
+            actIndex: 2
+          }
+          break
+        case 7:
+          // 耳环
+          routerName = 'accessories-list'
+          routerQuery = {
+            actIndex: 3
+          }
+          break
+        case 8:
+          // 手链
+          routerName = 'accessories-list'
+          routerQuery = {
+            actIndex: 4
+          }
+          break
+        case 9:
+          // 手镯
+          routerName = 'accessories-list'
+          routerQuery = {
+            actIndex: 5
+          }
+          break
+      }
 
       this.$router.push({
         name: routerName,
