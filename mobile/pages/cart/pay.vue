@@ -155,6 +155,7 @@ export default {
       //   pay = 7
       // }
       console.log("paytype",pay)
+      let baseUrl=this.$store.getters.baseUrl
       this.$axios({
         // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/ http://wap.bdd.bddia.com https://wap.bddco.com/complete/paySuccess
         method: 'post',
@@ -164,7 +165,7 @@ export default {
           coinType: this.info.coinType,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'http://wap.bdd.bddia.com/complete/paySuccess?orderId='+this.info.orderId
+          returnUrl:baseUrl+'/complete/paySuccess?orderId='+this.info.orderId
         }
       })
         .then(res => {
