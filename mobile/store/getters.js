@@ -63,5 +63,5 @@ export default {
        host = 'http://wap.bdd.bddia.com'
     }
     return host 
-}
+  }
 }

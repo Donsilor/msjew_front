@@ -101,6 +101,9 @@ export default {
             if(data.area_id != areaId) {
                 setFlag = true 
                 commit('setAreaId', data.area_id)
+                if(data.area_id != 99) {
+                    window.location.reload();
+                }                
             } 
             localStorage.setItem('refreshAreaTime',nowDate)
             if(setFlag) {
@@ -328,16 +331,16 @@ export default {
             }
         });
 
-        console.log('goods-------->', goods)
+        //console.log('goods-------->', goods)
 
         return this.$axios({
-            method: 'post',
-            url: `/web/member/cart/add`,
-            data: {
-                // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
-                goodsCartList: goods
-            }
-        })
+                method: 'post',
+                url: `/web/member/cart/add`,
+                data: {
+                    // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
+                    goodsCartList: goods
+                }
+            })
             .then(data => {
                 console.log("加入购物车", data)
                 // 重新请求购物车数量（和购物车列表）
@@ -393,7 +396,7 @@ export default {
         commit,
         dispatch
     }, goods = []) {
-        console.log('removeCart=====>')
+        //console.log('removeCart=====>')
         let data = null
         if (goods instanceof Array) {
             data = JSON.parse(JSON.stringify(goods))
@@ -687,7 +690,7 @@ export default {
             sendData = sendData.concat(goods)
         })
 
-        console.log('sendData===========>', sendData)
+        //console.log('sendData===========>', sendData)
 
         return this.$axios({
             method: 'post',

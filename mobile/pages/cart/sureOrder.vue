@@ -282,12 +282,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        // {
-        //   url: '/cart/ap.png',
-        //   type: 2,
-        //   title: this.LANGUAGE.cart.pay.payType3,
-        //   des: this.LANGUAGE.cart.pay.type3Text
-        // }
+        {
+          url: '/cart/paydollar.png',
+          type: 8,
+          title: this.LANGUAGE.cart.pay.payType3,
+          des: this.LANGUAGE.cart.pay.type3Text
+        }
       ],
       sum: '2,120.00',
       info:'',
@@ -823,6 +823,7 @@ export default {
           })
       } else {
         const data = []
+        let baseUrl=this.$store.getters.baseUrl
         console.log("未登录",this.list)
         for (const i in this.list) {
           const o = {
@@ -846,7 +847,7 @@ export default {
             goodsCartList:data,
             tradeType:'wap',
             coinType:this.$store.state.coin,
-            returnUrl:'http://wap.bdd.bddia.com/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
+            returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
           }
         })
           .then(res => {

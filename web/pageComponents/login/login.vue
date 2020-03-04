@@ -182,8 +182,7 @@ export default {
     this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {
-       console.log("ssaasa",this.oldUrl)
-      _this.refreshCode()
+       _this.refreshCode()
     })
   },
   methods: {
