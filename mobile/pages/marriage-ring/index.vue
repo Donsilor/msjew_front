@@ -358,7 +358,7 @@ export default {
           }
         })
         .then(data => {
-          console.log(data)
+          // console.log(data)
           _this.ad = data.advert
           _this.webSite = data.webSite
         })

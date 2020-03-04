@@ -237,7 +237,7 @@ export default {
       // }
     },
     emitEvent2() {
-      console.log('emitEvent2')
+      // console.log('emitEvent2')
       this.$emit('mobileFinish',this.mobile)
     }
   }

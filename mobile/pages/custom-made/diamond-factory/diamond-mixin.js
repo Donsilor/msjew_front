@@ -89,7 +89,7 @@ export default {
         }
       })
         .then(res => {
-          console.log(res)
+          // console.log(res)
           const mcArr = []
           for (const i in res.materials) {
             const o = {

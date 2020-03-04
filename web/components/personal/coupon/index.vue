@@ -107,7 +107,7 @@ export default {
       this.$axios
         .get('/web/myAccount/getCpupon')
         .then(res => {
-          console.log('coupon===>', res)
+          // console.log('coupon===>', res)
 
           const dealCouponInfo = info => {
             info.couponsNum =

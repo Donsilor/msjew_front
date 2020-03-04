@@ -27,7 +27,7 @@ function makeCartGoodGroups (cart = []) {
         }
     })
     let keys = Object.keys(localData)
-    console.log("keys",keys)
+    // console.log("keys",keys)
     keys = keys.sort((a, b) => {
         return b - a
     })
@@ -153,7 +153,7 @@ export default {
             try {
                 let searchHistory = await dispatch('getLocalSearchHistory')
                 searchHistory = searchHistory.slice(0, 4)
-                console.log('searchHistory=====>', searchHistory)
+                // console.log('searchHistory=====>', searchHistory)
                 let start = -1
                 searchHistory.forEach((item, index) => {
                     if (item.keyword === keyword) {
@@ -166,7 +166,7 @@ export default {
                 searchHistory.unshift({
                     keyword: keyword
                 })
-                console.log('searchHistory after=====>', searchHistory)
+                // console.log('searchHistory after=====>', searchHistory)
                 localStorage.setItem(SEARCHHISTORY, JSON.stringify(searchHistory))
                 return resolve('success')
             } catch (e) {
@@ -202,7 +202,7 @@ export default {
         commit,
         dispatch
     }) {
-        console.log('synchronizeCart=====>同步购物车')
+        // console.log('synchronizeCart=====>同步购物车')
 
         if (!getters.hadLogin) {
             return Promise.reject(new Error('只有登录后才可以同步购物车'))
@@ -435,7 +435,7 @@ export default {
         commit,
         dispatch
     }, goods = []) {
-        console.log('removeOnlineCart=====>')
+        // console.log('removeOnlineCart=====>')
         return this.$axios({
             method: 'post',
             url: `/web/member/cart/del`,
@@ -476,7 +476,7 @@ export default {
         commit,
         dispatch
     }, goods = []) {
-        console.log('removeLocalCart=====>')
+        // console.log('removeLocalCart=====>')
         goods = goods.map(item => {
             let result = ''
             switch (typeof item) {
@@ -499,7 +499,7 @@ export default {
                     if (goods.indexOf(cart[n].id) === -1) {
                         newCart.push(cart[n])
                     }
-                    console.log("newcart",cart[n].id)
+                    // console.log("newcart",cart[n].id)
                 }
                 localStorage.setItem(CART, JSON.stringify(newCart))
                 return resolve('success')

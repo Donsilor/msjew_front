@@ -182,7 +182,7 @@ export default {
   },
   mounted() {
     this.list = JSON.parse(storage.get('myCartList', 0))
-    console.log("myCartList",this.list)
+    // console.log("myCartList",this.list)
     const _this = this
     _this.$nextTick(() => {
       if (this.isLogin){
@@ -229,7 +229,7 @@ export default {
         }
       })
         .then(res => {
-          console.log("dssadas",res)
+          // console.log("dssadas",res)
           this.orderinfo = res
           this.getChannelType(this.orderinfo.payChannel)
          
@@ -253,7 +253,7 @@ export default {
             console.log(arr)
             this.$store.dispatch('removeCart', arr)
           })
-        console.log("verify",res)
+        // console.log("verify",res)
       })
       .catch(err => {
         console.log(err)

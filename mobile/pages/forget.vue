@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     mobileFinish(mobile = '') {
-      console.log('mobileFinish===>',mobile)
+      // console.log('mobileFinish===>',mobile)
       const _this = this
       const info = JSON.parse(JSON.stringify(_this.info))
       info.mobile = mobile
@@ -63,7 +63,7 @@ export default {
       })
     },
     emailFinish(email = '') {
-      console.log('emailFinish===>', email)
+      // console.log('emailFinish===>', email)
       const _this = this
       const info = JSON.parse(JSON.stringify(_this.info))
       info.email = email
@@ -141,7 +141,7 @@ export default {
           data: info
         })
         .then(data => {
-          console.log(data)
+          // console.log(data)
           _this.$router.push({
             name: 'forget-success'
           })
@@ -160,7 +160,7 @@ export default {
 
       if (!info.code) {
         _this.$toast(_this.lang['code-null'])
-        console.log(1111)
+        // console.log(1111)
         return
       }
 
@@ -180,7 +180,7 @@ export default {
           data:info
         })
         .then(res => {
-          console.log(res)
+          // console.log(res)
           _this.$router.push({
             name: 'forget-success'
           })
