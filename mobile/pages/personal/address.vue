@@ -85,7 +85,7 @@ export default {
           url: `/web/member/address`
         })
         .then(res => {
-          console.log("address",res)
+          // console.log("address",res)
           _this.address = []
           if (res && res.length > 0) {
             res.map((item, index) => {
@@ -96,7 +96,7 @@ export default {
               }
             })
           }
-          console.log("ad", _this.address)
+          // console.log("ad", _this.address)
         })
         .catch(err => {
           console.log(err)
@@ -111,7 +111,7 @@ export default {
         this.move = true
         this.moveIndex = val.name
       }
-      console.log('moveLeft', val.name)
+      // console.log('moveLeft', val.name)
     },
     moveRight(val) {
       this.move = false
@@ -119,7 +119,7 @@ export default {
     },
     // 設為默認
     changeDefaultAddress(id) {
-      console.log("id",id)
+      // console.log("id",id)
       const _this = this
       _this
         .$axios({
@@ -131,7 +131,7 @@ export default {
           }
         })
         .then(res => {
-          console.log("address",_this.address)
+          // console.log("address",_this.address)
           // let addressarr = []
           // let i = 0;
           // for(i;i < _this.address.length;i++){
@@ -179,7 +179,7 @@ export default {
       }
     },
     editAddress(val) {
-      console.log(val, '444')
+      // console.log(val, '444')
       if (val) {
         this.$router.push({
           name: 'personal-editAddress',

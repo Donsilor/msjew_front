@@ -143,7 +143,7 @@ export default {
           ? details[0].retailMallPrice
           : 0
       }
-      console.log('firstRingPrize=====>', result)
+      // console.log('firstRingPrize=====>', result)
       return result
     },
     secondRingPrize() {
@@ -165,7 +165,7 @@ export default {
           ? details[0].retailMallPrice
           : 0
       }
-      console.log('secondRingPrize=====>', result)
+      // console.log('secondRingPrize=====>', result)
       return result
     },
     showPrice() {
@@ -237,10 +237,10 @@ export default {
       const list = this.firstRing.details
       let result = null
 
-      console.log(
-        'this.firstRingQuality.checked=====>',
-        this.firstRingQuality.checked
-      )
+      // console.log(
+      //   'this.firstRingQuality.checked=====>',
+      //   this.firstRingQuality.checked
+      // )
 
       for (let n = 0, length = list.length; n < length; n++) {
         if (

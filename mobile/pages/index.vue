@@ -395,7 +395,7 @@ export default {
       this.activeCard = index
     },
     toCardDetail(card) {
-      console.log('card====>', card)
+      // console.log('card====>', card)
       if (!card) {
         return
       }
@@ -415,35 +415,36 @@ export default {
       //   configAttrIds.push(item.configAttrId)
       // })
 
-      // const ringRouter = () => {
-      //   if (configAttrIds.indexOf(60) > -1) {
-      //     // 訂婚戒指
-      //     routerUrl = '/engagement/engagement-rings'
-      //     return
-      //   }
-      //   if (
-      //     configAttrIds.indexOf(461) > -1 ||
-      //     configAttrIds.indexOf(462) > -1
-      //   ) {
-      //     // 男女戒
-      //     routerUrl = '/marriage-ring/single-ring-detail'
-      //     return
-      //   }
-      //   if (configAttrIds.indexOf(59) > -1) {
-      //     // 結婚戒指
-      //     routerUrl = '/marriage-ring/pair-ring-detail'
-      //     routerQuery = {
-      //       goodId: card.id
-      //     }
-      //     return
-      //   }
-      //   if (configAttrIds.indexOf(61) > -1) {
-      //     // 裝飾戒指
-      //     routerUrl = '/marriage-ring/single-ring-detail'
-      //     return
-      //   }
-      //   console.log('都不是')
-      // }
+      const ringRouter = () => {
+        if (configAttrIds.indexOf(60) > -1) {
+          // 訂婚戒指
+          routerUrl = '/engagement/engagement-rings'
+          return
+        }
+        if (
+          configAttrIds.indexOf(461) > -1 ||
+          configAttrIds.indexOf(462) > -1
+        ) {
+          // 男女戒
+          routerUrl = '/marriage-ring/single-ring-detail'
+          return
+        }
+        if (configAttrIds.indexOf(59) > -1) {
+          // 結婚戒指
+          routerUrl = '/marriage-ring/pair-ring-detail'
+          routerQuery = {
+            goodId: card.id
+          }
+          return
+        }
+        if (configAttrIds.indexOf(61) > -1) {
+          // 裝飾戒指
+          routerUrl = '/marriage-ring/single-ring-detail'
+          return
+        }
+        // console.log('都不是')
+      }
+
 
       // switch (card.categoryId) {
       //   case 1:
@@ -497,13 +498,63 @@ export default {
     },
     moreCard() {
 
+<<<<<<< HEAD
       this.$router.push({
+=======
+      // console.log('card====>', card)
+      if (!card) {
+        return
+      }
+
+      const configAttriEntity = card.configAttriEntity
+
+      const configIds = []
+      const configAttrIds = []
+
+      configAttriEntity.map(item => {
+        configIds.push(item.configId)
+        configAttrIds.push(item.configAttrId)
+      })
+
+      const ringRouter = () => {
+        if (configAttrIds.indexOf(462) > -1) {
+          // 女士
+          this.$router.push({
+>>>>>>> 7b92bc7735381624cc43b4569285efb4c41723c4
             name: 'marriage-ring-single-ring',
             query: {
               type: 'lady'
             }
           })
+<<<<<<< HEAD
       // const card = this.cards[this.activeCard]
+=======
+          return
+        }
+        if (configAttrIds.indexOf(60) > -1) {
+          // 訂婚戒指
+          this.$router.push({
+            name: 'marriage-ring-pair-ring'
+          })
+          return
+        }
+        if (configAttrIds.indexOf(59) > -1) {
+          // 結婚戒指
+          this.$router.push({
+            name: 'marriage-ring-pair-ring'
+          })
+          return
+        }
+        if (configAttrIds.indexOf(61) > -1) {
+          // 裝飾戒指
+          this.$router.push({
+            name: 'marriage-ring-single-ring'
+          })
+          return
+        }
+        // console.log('都不是')
+      }
+>>>>>>> 7b92bc7735381624cc43b4569285efb4c41723c4
 
       // console.log('card====>', card)
       // if (!card) {
@@ -620,7 +671,7 @@ export default {
         query: routerQuery
       })
 
-      console.log('configAttrIds===>', configAttrIds)
+      // console.log('configAttrIds===>', configAttrIds)
     },
     routerTo(routerName = '', query = {}) {
       if (!routerName) {

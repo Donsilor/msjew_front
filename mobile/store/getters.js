@@ -44,11 +44,11 @@ export default {
   },
   inCompared(state, getters) {
     return goodId => {
-      console.log('goodId==============>', goodId)
-      console.log(
-        'getters.comparedGoodIds==============>',
-        getters.comparedGoodIds
-      )
+      // console.log('goodId==============>', goodId)
+      // console.log(
+      //   'getters.comparedGoodIds==============>',
+      //   getters.comparedGoodIds
+      // )
       return getters.comparedGoodIds.indexOf(goodId) > -1
     }
   },

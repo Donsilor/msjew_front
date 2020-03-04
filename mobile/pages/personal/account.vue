@@ -149,7 +149,7 @@ export default {
           url: `/web/member/member/me`
         })
         .then(res => {
-          console.log("info",res)
+          // console.log("info",res)
           this.date = res
           if (this.date.birthday) {
             this.birthday =
@@ -172,7 +172,7 @@ export default {
       this.date.marStatus = val
     },
     textSurname() {
-      console.log(this.date.lastname.length, 'dsgdf')
+      // console.log(this.date.lastname.length, 'dsgdf')
       if (this.date.lastname === '' || this.date.lastname.length > 20) {
         this.$toast.show(this.lang.toast1)
       }

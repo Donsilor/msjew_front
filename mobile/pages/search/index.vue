@@ -111,7 +111,7 @@ export default {
         _this.$store
           .dispatch('getLocalSearchHistory')
           .then(data => {
-            console.log('data====>', data)
+            // console.log('data====>', data)
             _this.historySearch = data
           })
           .catch(err => {
