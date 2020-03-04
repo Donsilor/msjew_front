@@ -66,5 +66,16 @@ export default {
     // console.log('用户信息用户信息用户信息用户信息')
     const userInfo = state.userInfo
     return userInfo
+  },
+  baseUrl() {
+      let host = window.location.host;
+      if((/bddco\.com/).test(host)) {
+         //正式
+         host = 'https://www.bddco.com'
+      }else{
+         //测试
+         host = 'http://www.bdd.bddia.com'
+      }
+      return host 
   }
 }
