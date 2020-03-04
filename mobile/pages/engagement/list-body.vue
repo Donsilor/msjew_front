@@ -63,11 +63,7 @@
       <footer-bar v-if="noMoreListData"></footer-bar>
     </div>
     <!--匹配度select-->
-    <swiper-tap
-      ref="suitability"
-      :choose-line="0"
-      @clear="getSortBy"
-    ></swiper-tap>
+    <swiper-tap ref="suitability" @clear="getSortBy"></swiper-tap>
     <!--形状选择底部弹出-->
     <choose-eject-pro
       ref="style-eject-choose-pro"

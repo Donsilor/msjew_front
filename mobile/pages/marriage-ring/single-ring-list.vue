@@ -75,11 +75,7 @@
       <!--      <no-more-data v-if="noMoreListData"></no-more-data>-->
       <footer-bar v-if="noMoreListData"></footer-bar>
     </div>
-    <swiper-tap
-      ref="suitability"
-      :choose-line="0"
-      @clear="getSortBy"
-    ></swiper-tap>
+    <swiper-tap ref="suitability" @clear="getSortBy"></swiper-tap>
     <choose-eject-pro
       ref="style-eject-choose-pro"
       :title="lang.style"
