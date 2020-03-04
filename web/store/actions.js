@@ -637,11 +637,8 @@ export default {
         return cart.length
     },
     // 使用本地购物车数据置换购物车商品数据
-    localCartToGoodsInfo (
-        { $axios, state, getters, commit, dispatch },
-        localCart
-    ) {
-        console.log("localtion",localCart)
+    localCartToGoodsInfo ({ $axios, state, getters, commit, dispatch },localCart) {
+        //console.log("localtion",localCart)
         let data = null
         if (Array.isArray(localCart)) {
             data = localCart
@@ -664,7 +661,6 @@ export default {
         let sendData = []
         data.forEach(item => {
             let goods = item.data
-            console.log(goods,'dssasdf')
             // console.log('goods----------->', item)
             goods = goods.map(good => {
                 good.updateTime = item.id
@@ -675,7 +671,7 @@ export default {
             sendData = sendData.concat(goods)
         })
 
-        console.log('sendData===========>', sendData)
+        //console.log('sendData===========>', sendData)
 
         return this.$axios({
             method: 'post',
@@ -685,7 +681,7 @@ export default {
             }
         })
             .then(res => {
-                console.log("本地置换数据",res.data)
+                //console.log("本地置换数据",res.data)
                 return makeCartGoodGroups(res.data)
             })
             .catch(err => {
@@ -717,11 +713,8 @@ export default {
         })
     },
     // 根据购物车id获取对应的购物车商品
-    async getCartGoodsByCartId (
-        { $axios, state, getters, commit, dispatch },
-        goods = []
-    ) {
-        console.log('getCartGoodsByCartId=====>',goods)
+    async getCartGoodsByCartId ({ $axios, state, getters, commit, dispatch },goods = []) {
+        //console.log('getCartGoodsByCartId=====>',goods)
         let data = null
         if (Array.isArray(goods)) {
             data = JSON.parse(JSON.stringify(goods))
@@ -745,7 +738,7 @@ export default {
             }
         })
         // console.log(`inTest=====> `, cart)
-        console.log(`cccc=====> `, result)
+        //console.log(`cccc=====> `, result)
         return result
     },
 
@@ -868,7 +861,7 @@ export default {
             return item
         })
 
-        console.log('addWish=========>', goods)
+        //console.log('addWish=========>', goods)
 
         return new Promise(async (resolve, reject) => {
             try {
