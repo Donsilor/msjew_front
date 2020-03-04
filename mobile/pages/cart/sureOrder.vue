@@ -846,7 +846,7 @@ export default {
             goodsCartList:data,
             tradeType:'wap',
             coinType:this.$store.state.coin,
-            returnUrl:'https://wap.bddco.com/cart/paySuccess?order_sn={order_sn}' //http://localhost:8328
+            returnUrl:'http://wap.bdd.bddia.com/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
           }
         })
           .then(res => {
@@ -863,7 +863,7 @@ export default {
               console.log(88888888)
               this.isPay = false
               this.$router.replace({
-                name: 'cart-paySuccess-orderId-price-coinType',
+                name: 'complete-paySuccess-orderId-price-coinType',
                 params: {
                   orderId: this.info.orderId,
                   price: this.info.orderAmount,

@@ -1925,7 +1925,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'https://www.bddco.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com
+          returnUrl:'http://www.bdd.bddia.com/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
         }
       })
         .then(res => {
@@ -1935,7 +1935,7 @@ export default {
             window.location.replace(res.data.config)
           }else {
             this.$router.replace({
-              path: '/complete-payment',
+              path: '/complete-paySuccess',
               query: {
                 orderId: this.$route.query.orderId,
                 price: this.$route.query.price,
