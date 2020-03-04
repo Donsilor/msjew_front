@@ -382,22 +382,22 @@
                 </div>
               </div>
 
-              <!-- <div
-                :class="{ 'pay-choose': payWay === 5 }"
+              <div
+                :class="{ 'pay-choose': payWay === 8 }"
                 class="pay-block"
-                @click="payWay = 5"
+                @click="Way(8)"
               >
                 <div class="pay-img">
-                  <img src="../../static/order/visapay.png" alt="" />
+                  <img src="../../../static/order/paydollar.jpg" alt="" />
                 </div>
-                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-                <div v-show="payWay == 5" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
+                <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
+                <div v-show="payWay == 8" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
-                <div v-show="payWay == 5" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
+                <div v-show="payWay == 8" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
                 </div>
-              </div> -->
+              </div>
               <!-- <div
                 :class="{ 'pay-choose': payWay == 3 }"
                 class="pay-block"
@@ -467,7 +467,7 @@
                 </div>
               </div> -->
 
-              <div class="pay-question" @click="answer = true">?</div>
+              <!-- <div class="pay-question" @click="answer = true">?</div> -->
             </div>
             <!-- <div
               :class="['buy-btn', { disabled: !canSubmit }]"
@@ -1164,22 +1164,22 @@
                 </div>
               </div>
 
-              <!-- <div
-                :class="{ 'pay-choose': payWay === 5 }"
+               <div
+                :class="{ 'pay-choose': payWay === 8 }"
                 class="pay-block"
-                @click="payWay = 5"
+                @click="Way(8)"
               >
                 <div class="pay-img">
-                  <img src="../../static/order/visapay.png" alt="" />
+                  <img src="../../../static/order/paydollar.jpg" alt="" />
                 </div>
-                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-                <div v-show="payWay == 5" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
+                <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
+                <div v-show="payWay == 8" class="pay-price">
+                  {{  $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
-                <div v-show="payWay == 5" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
+                <div v-show="payWay == 8" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
                 </div>
-              </div> -->
+              </div>
               <!-- <div
                 :class="{ 'pay-choose': payWay == 3 }"
                 class="pay-block"
@@ -1249,7 +1249,7 @@
                 </div>
               </div> -->
 
-              <div class="pay-question" @click="answer = true">?</div>
+              <!-- <div class="pay-question" @click="answer = true">?</div> -->
             </div>
             <!-- <div
               :class="['buy-btn', { disabled: !canSubmit }]"
