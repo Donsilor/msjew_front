@@ -509,6 +509,7 @@ export default {
       // if (!card) {
       //   return
       // }
+      
 
       // const configAttriEntity = card.configAttriEntity
 
