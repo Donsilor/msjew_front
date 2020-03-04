@@ -89,19 +89,25 @@ export default {
             method: `get`,
             url: `/web/site/setting`
         }).then(data => {
+            let setFlag = false
             if(!language) {
+                setFlag = true
                 commit('setLanguage', data.language)
             }                    
-            if(!coin) {               
+            if(!coin) {  
+                setFlag = true             
                 commit('setCoin', data.currency)
             }
-            localStorage.setItem('refreshAreaTime',nowDate)
-            if(data.area_id != areaId) {
+            if(data.area_id != areaId) {                
                 commit('setAreaId', data.area_id)
                 if(data.area_id != 99) {
-                    window.location.reload();
+                    setFlag = true 
                 }                
             } 
+            localStorage.setItem('refreshAreaTime',nowDate)
+            if(setFlag) {
+                location.reload();
+            }
             
         })
         .catch(err => {
