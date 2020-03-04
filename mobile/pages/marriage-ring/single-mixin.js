@@ -76,7 +76,7 @@ export default {
       type: 'eject-choose-pro',
       key: 'quality',
       name: this.lang.fineness,
-      checked: this.goodInfo.materials[0].id || '',
+      checked: this.goodInfo.materials.length != 0?this.goodInfo.materials[0].id : '',
       options: this.goodInfo.materials
     })
     this.chooseSize = this.goodInfo.sizes[0].content
