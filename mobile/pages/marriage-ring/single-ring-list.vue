@@ -127,7 +127,7 @@ export default {
     })
   },
   methods: {
-    changeGender(type = 'lady',style,material) {
+    changeGender(type = 'lady',style='',material='') {
       if (['lady', 'gentlemen'].indexOf(type) > -1) {
         this.gender = type
       }

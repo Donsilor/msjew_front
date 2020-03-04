@@ -159,14 +159,15 @@ export default {
           routerName = 'engagement-engagement-rings'
           break
         // 对戒
-        //routerName = 'marriage-ring-single-ring-detail'    
+        case -1:
+          routerName = 'marriage-ring-single-ring-detail'
+          break    
       }
 
       this.$router.push({
         name: routerName,
         query: {
           goodId: info.goodsId || info.id,
-          goodId: info.ringId
         }
       })
     },

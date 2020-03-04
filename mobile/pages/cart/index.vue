@@ -520,8 +520,7 @@ export default {
             }
           })
         } else if (item.simpleGoodsEntity.categoryId === 2) {
-          if (item.simpleGoodsEntity.specs[0].configAttrId === 59) {
-            console.log('还是个結婚戒指💍')
+           console.log('还是个結婚戒指💍')
             this.$router.push({
               name: 'marriage-ring-single-ring-detail',
               query: {
@@ -529,8 +528,8 @@ export default {
                 cartId: this.isLogin ? item.id : item.localSn
               }
             })
-          } else if (item.simpleGoodsEntity.specs[0].configAttrId === 60) {
-            console.log('还是个訂婚戒指💍')
+        }else if (item.simpleGoodsEntity.categoryId === 12) {
+          console.log('还是个訂婚戒指💍')
             this.$router.push({
               name: 'engagement-engagement-rings',
               query: {
@@ -538,7 +537,6 @@ export default {
                 cartId: this.isLogin ? item.id : item.localSn
               }
             })
-          }
         } else {
           // 饰品
           this.$router.push({
