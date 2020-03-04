@@ -50,7 +50,7 @@ export default {
         const refName = `${info.key}-${info.type}`
         this.$refs[refName] && this.$refs[refName].showIt()
       } else if (info.type === `eject-choose`) {
-        console.log(this.$refs[info.key])
+        // console.log(this.$refs[info.key])
         this.$refs[info.key].show()
       }
     },
@@ -77,7 +77,7 @@ export default {
       this.$refs[index].show()
     },
     getBacks(val) {
-      console.log(val)
+      // console.log(val)
       this.conditions.forEach(obj => {
         if (obj.key === val.name) {
           if (val.content.length !== 0) {
@@ -109,7 +109,7 @@ export default {
       }
       this.ev += `^goods_mod=1`
       this.research()
-      console.log(this.ev)
+      // console.log(this.ev)
     }
   }
 }

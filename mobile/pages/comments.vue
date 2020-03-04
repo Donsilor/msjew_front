@@ -146,7 +146,7 @@ export default {
     showComment(id) {
       const activeIds = JSON.parse(JSON.stringify(this.activeIds))
       const start = activeIds.indexOf(id)
-      console.log('start========>', start)
+      // console.log('start========>', start)
       if (start > -1) {
         activeIds.splice(start, 1)
       } else {

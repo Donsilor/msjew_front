@@ -121,7 +121,7 @@ export default {
           .join('-')}`
       }
       this.research()
-      console.log(this.ev)
+      // console.log(this.ev)
     }
   }
 }

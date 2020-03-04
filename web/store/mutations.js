@@ -51,7 +51,7 @@ export default {
    * 购物车
    */
   setCartAmount(state, val) {
-    console.log('setCartAmount=====>', val)
+    //console.log('setCartAmount=====>', val)
     state.cartAmount = val
     // console.log("acount",state.cartAmount)
   },

@@ -27,7 +27,7 @@ function makeCartGoodGroups (cart = []) {
         }
     })
     let keys = Object.keys(localData)
-    console.log("keys",keys)
+    // console.log("keys",keys)
     keys = keys.sort((a, b) => {
         return b - a
     })
@@ -89,17 +89,25 @@ export default {
             method: `get`,
             url: `/web/site/setting`
         }).then(data => {
+            let setFlag = false
             if(!language) {
+                setFlag = true
                 commit('setLanguage', data.language)
             }                    
-            if(!coin) {               
+            if(!coin) {  
+                setFlag = true             
                 commit('setCoin', data.currency)
             }
-            localStorage.setItem('refreshAreaTime',nowDate)
-            if(data.area_id != areaId) {
+            if(data.area_id != areaId) {                
                 commit('setAreaId', data.area_id)
-                window.location.reload();
+                if(data.area_id != 99) {
+                    setFlag = true 
+                }                
             } 
+            localStorage.setItem('refreshAreaTime',nowDate)
+            if(setFlag) {
+                location.reload();
+            }
             
         })
         .catch(err => {
@@ -153,7 +161,7 @@ export default {
             try {
                 let searchHistory = await dispatch('getLocalSearchHistory')
                 searchHistory = searchHistory.slice(0, 4)
-                console.log('searchHistory=====>', searchHistory)
+                // console.log('searchHistory=====>', searchHistory)
                 let start = -1
                 searchHistory.forEach((item, index) => {
                     if (item.keyword === keyword) {
@@ -166,7 +174,7 @@ export default {
                 searchHistory.unshift({
                     keyword: keyword
                 })
-                console.log('searchHistory after=====>', searchHistory)
+                // console.log('searchHistory after=====>', searchHistory)
                 localStorage.setItem(SEARCHHISTORY, JSON.stringify(searchHistory))
                 return resolve('success')
             } catch (e) {
@@ -202,7 +210,7 @@ export default {
         commit,
         dispatch
     }) {
-        console.log('synchronizeCart=====>同步购物车')
+        // console.log('synchronizeCart=====>同步购物车')
 
         if (!getters.hadLogin) {
             return Promise.reject(new Error('只有登录后才可以同步购物车'))
@@ -323,16 +331,16 @@ export default {
             }
         });
 
-        console.log('goods-------->', goods)
+        //console.log('goods-------->', goods)
 
         return this.$axios({
-            method: 'post',
-            url: `/web/member/cart/add`,
-            data: {
-                // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
-                goodsCartList: goods
-            }
-        })
+                method: 'post',
+                url: `/web/member/cart/add`,
+                data: {
+                    // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
+                    goodsCartList: goods
+                }
+            })
             .then(data => {
                 console.log("加入购物车", data)
                 // 重新请求购物车数量（和购物车列表）
@@ -388,7 +396,7 @@ export default {
         commit,
         dispatch
     }, goods = []) {
-        console.log('removeCart=====>')
+        //console.log('removeCart=====>')
         let data = null
         if (goods instanceof Array) {
             data = JSON.parse(JSON.stringify(goods))
@@ -435,7 +443,7 @@ export default {
         commit,
         dispatch
     }, goods = []) {
-        console.log('removeOnlineCart=====>')
+        // console.log('removeOnlineCart=====>')
         return this.$axios({
             method: 'post',
             url: `/web/member/cart/del`,
@@ -476,7 +484,7 @@ export default {
         commit,
         dispatch
     }, goods = []) {
-        console.log('removeLocalCart=====>')
+        // console.log('removeLocalCart=====>')
         goods = goods.map(item => {
             let result = ''
             switch (typeof item) {
@@ -499,7 +507,7 @@ export default {
                     if (goods.indexOf(cart[n].id) === -1) {
                         newCart.push(cart[n])
                     }
-                    console.log("newcart",cart[n].id)
+                    // console.log("newcart",cart[n].id)
                 }
                 localStorage.setItem(CART, JSON.stringify(newCart))
                 return resolve('success')
@@ -682,7 +690,7 @@ export default {
             sendData = sendData.concat(goods)
         })
 
-        console.log('sendData===========>', sendData)
+        //console.log('sendData===========>', sendData)
 
         return this.$axios({
             method: 'post',
