@@ -80,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.goodInfo)
+    // console.log(this.goodInfo)
     for (let i = 0; i < this.goodInfo.specs.length; i++) {
       if (this.goodInfo.specs[i].configId === 4) {
         this.force.cut = this.goodInfo.specs[i].configAttrId
@@ -105,8 +105,8 @@ export default {
         this.force.clarity = this.goodInfo.specs[i].configAttrId
       }
     }
-    console.log(this.force)
-    console.log(this.force.carat, this.caratLeft)
+    // console.log(this.force)
+    // console.log(this.force.carat, this.caratLeft)
     this.iAmShowMaker()
     if (this.goodInfo.goods3ds) {
       this.is360 = true

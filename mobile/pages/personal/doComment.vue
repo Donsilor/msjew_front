@@ -140,7 +140,7 @@ export default {
         }
         // return item
       })
-      console.log('result=======>', result)
+      // console.log('result=======>', result)
       return result
     }
   },
@@ -182,7 +182,7 @@ export default {
       const result = []
 
       details.map(good => {
-        console.log('good=====>', good)
+        // console.log('good=====>', good)
         if (groups.hasOwnProperty(good.joinCartTime)) {
           // 将数据处理为直接可用的数据
           good.detailSpecs = JSON.parse(good.detailSpecs || '[]')
@@ -254,7 +254,7 @@ export default {
 
       // 将定制的商品进行排序，钻石放在后面
       result.map(item => {
-        console.log('item====>', item)
+        // console.log('item====>', item)
         if (item.groupType === 2) {
           // 定制
           const diamond = []
@@ -286,7 +286,7 @@ export default {
           }
         })
         .then(data => {
-          console.log('data====>', data)
+          // console.log('data====>', data)
 
           if (data.orderStatus !== 5) {
             this.$toast(this.lang.cannotComment)
@@ -333,7 +333,7 @@ export default {
       const goodsCommentsModel = []
 
       allDetails.forEach(group => {
-        console.log('group=====>', group)
+        // console.log('group=====>', group)
         group.data.forEach(good => {
           // 商品里面的组成物品
           const addData = {
@@ -357,7 +357,7 @@ export default {
         }
       })
         .then(data => {
-          console.log('data=====>', data)
+          // console.log('data=====>', data)
           this.$toast(this.lang.commentSuccess)
           setTimeout(() => {
             this.$router.replace({

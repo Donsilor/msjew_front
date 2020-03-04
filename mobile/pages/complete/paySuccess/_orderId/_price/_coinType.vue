@@ -1,54 +1,109 @@
 <template>
   <div class="pay-success">
-    <div class="top">
-      <img src="@/static/cart/success.png" />
-      <p class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
-      <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
-        <span class="font-size-16">{{ info.coinCode }}</span>
-        {{ info.orderAmount }}
-      </p>
+    <!-- 已登录 -->
+    <div v-if="hadLogin">
+      <div class="top">
+        <img src="@/static/cart/success.png" />
+        <p class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+        <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+          <span class="font-size-16">{{ info.coinCode }}</span>
+          {{ info.orderAmount }}
+        </p>
+      </div>
+      <div class="code">
+        <span>{{ lang.orderNo }}</span
+        ><span
+          >{{ info.orderNo
+          }}<i
+            class="icon iconfont iconcopy copy-btn"
+            :data-clipboard-text="info.orderNo"
+            @click="copy"
+          ></i
+        ></span>
+      </div>
+      <ul class="price">
+        <li v-if="info.preferFee || info.transPreferFee">
+          <div class="title">
+            {{ lang.preferFee }}
+          </div>
+          <div v-if="info.preferFee" class="info">
+            <span>{{ lang.coupon }}</span>
+            <span>-{{ info.coinCode }}{{ info.preferFee }}</span>
+          </div>
+          <div v-if="info.transPreferFee" class="info">
+            <span> {{ lang.transPreferFee }}</span>
+            <span>-{{ info.coinCode }}{{ info.transPreferFee }}</span>
+          </div>
+        </li>
+        <li>
+          <div class="title">
+            {{ lang.payInfo }}
+          </div>
+          <div class="info">
+            <span>{{ text }}{{ lang.pay }}</span>
+            <span>{{ info.coinCode }}{{ formatMoney(info.orderAmount) }}</span>
+          </div>
+        </li>
+        <li>
+          <div class="title">
+            <span>{{ lang.beneficiary }}</span>
+            <span>BDD.Co.</span>
+          </div>
+        </li>
+      </ul>
     </div>
-    <div class="code">
-      <span>{{ lang.orderNo }}</span
-      ><span
-        >{{ info.orderNo
-        }}<i
-          class="icon iconfont iconcopy copy-btn"
-          :data-clipboard-text="info.orderNo"
-          @click="copy"
-        ></i
-      ></span>
+    <!-- 未登录 -->
+    <div v-else>
+      <div class="top">
+        <img src="@/static/cart/success.png" />
+        <p class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+        <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+          <span class="font-size-16">{{ orderinfo.coinCode }}</span>
+          {{ orderinfo.orderAmount }}
+        </p>
+      </div>
+      <div class="code">
+        <span>{{ lang.orderNo }}</span
+        ><span
+          >{{ orderinfo.orderNo
+          }}<i
+            class="icon iconfont iconcopy copy-btn"
+            :data-clipboard-text="orderinfo.orderNo"
+            @click="copy"
+          ></i
+        ></span>
+      </div>
+      <ul class="price">
+        <!-- <li v-if="orderinfo.preferFee || orderinfo.transPreferFee">
+          <div class="title">
+            {{ lang.preferFee }}
+          </div>
+          <div v-if="orderinfo.preferFee" class="info">
+            <span>{{ lang.coupon }}</span>
+            <span>-{{ orderinfo.coinCode }}{{ orderinfo.preferFee }}</span>
+          </div>
+          <div v-if="orderinfo.transPreferFee" class="info">
+            <span> {{ lang.transPreferFee }}</span>
+            <span>-{{ orderinfo.coinCode }}{{ orderinfo.transPreferFee }}</span>
+          </div>
+        </li> -->
+        <li>
+          <div class="title">
+            {{ lang.payInfo }}
+          </div>
+          <div class="info">
+            <span>{{ text }}{{ lang.pay }}</span>
+            <span>{{ info.coinCode }}{{ formatMoney(orderinfo.orderAmount) }}</span>
+          </div>
+        </li>
+        <li>
+          <div class="title">
+            <span>{{ lang.beneficiary }}</span>
+            <span>BDD.Co.</span>
+          </div>
+        </li>
+      </ul>
     </div>
-    <ul class="price">
-      <li v-if="info.preferFee || info.transPreferFee">
-        <div class="title">
-          {{ lang.preferFee }}
-        </div>
-        <div v-if="info.preferFee" class="info">
-          <span>{{ lang.coupon }}</span>
-          <span>-{{ info.coinCode }}{{ info.preferFee }}</span>
-        </div>
-        <div v-if="info.transPreferFee" class="info">
-          <span> {{ lang.transPreferFee }}</span>
-          <span>-{{ info.coinCode }}{{ info.transPreferFee }}</span>
-        </div>
-      </li>
-      <li>
-        <div class="title">
-          {{ lang.payInfo }}
-        </div>
-        <div class="info">
-          <span>{{ text }}{{ lang.pay }}</span>
-          <span>{{ info.coinCode }}{{ formatMoney(info.orderAmount) }}</span>
-        </div>
-      </li>
-      <li>
-        <div class="title">
-          <span>{{ lang.beneficiary }}</span>
-          <span>BDD.Co.</span>
-        </div>
-      </li>
-    </ul>
     <div v-if="!hadLogin" class="gologin">
       <i class="icon iconfont icongantanhao2"></i>
       <a @click="gologin(1)"> {{ lang.login }}</a> {{ lang.settlement }}
@@ -69,7 +124,7 @@
         {{ lang.paytips }}
       </div>
       <div
-        v-if="info.payChannel !== 1"
+        v-if="info.payChannel !== 1&&hadLogin"
         class="btn-common btn-black"
         @click="goDetails"
       >
@@ -96,6 +151,7 @@
 </template>
 
 <script>
+const storage = process.client ? require('good-storage').default : {}
 import { formatMoney } from '@/assets/js/filterUtil.js'
 import PatTips from '@/components/cart/paytips.vue'
 import Clipboard from 'clipboard'
@@ -113,7 +169,10 @@ export default {
       paytips: false,
       info: '',
       text: '',
-      typeIndex: 0
+      typeIndex: 0,
+      orderinfo:'',
+      isLogin: !!this.$store.state.token,
+      list:[]
     }
   },
   computed: {
@@ -122,9 +181,17 @@ export default {
     }
   },
   mounted() {
+    this.list = JSON.parse(storage.get('myCartList', 0))
+    // console.log("myCartList",this.list)
     const _this = this
     _this.$nextTick(() => {
-      _this.getinfo()
+      if (this.isLogin){
+        _this.getinfo()
+      }else{
+        // setTimeout(() => {
+          _this.getinfo2()
+        // },5000);
+      }
       _this.geturl()
     })
   },
@@ -144,8 +211,28 @@ export default {
         }
       })
         .then(res => {
+          
           this.info = res
           this.getChannelType(this.info.payChannel)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 未登录
+    getinfo2() {
+      this.$axios({
+        url: '/web/member/order-tourist/detail',
+        method: 'get',
+        params: {
+          order_sn: this.$route.query.order_sn
+        }
+      })
+        .then(res => {
+          // console.log("dssadas",res)
+          this.orderinfo = res
+          this.getChannelType(this.orderinfo.payChannel)
+         
         })
         .catch(err => {
           console.log(err)
@@ -160,7 +247,13 @@ export default {
         }
       })
       .then(res => {
-        console.log("verify",res)
+          const arr = []
+          this.list.map((item, index) => {
+            arr.push(item.localSn)
+            console.log(arr)
+            this.$store.dispatch('removeCart', arr)
+          })
+        // console.log("verify",res)
       })
       .catch(err => {
         console.log(err)
@@ -172,7 +265,7 @@ export default {
         case 1:
           this.text = this.lang.text1
           break
-        case 2:
+        case 6:
           this.text = this.lang.text2
           break
         case 3:
@@ -184,9 +277,9 @@ export default {
         case 5:
           this.text = this.lang.text5
           break
-        case 6:
-          this.text = this.lang.text6
-          break
+        // case 6:
+        //   this.text = this.lang.text6
+        //   break
         case 7:
           this.text = this.lang.text7
           break

@@ -6,7 +6,7 @@ const i18n = require('@/assets/i18n/index.js').getLang
 
 export default ({ req, app, store, $axios }, inject) => {
   // 设置语言
-  let language = 'zh_TW'
+  let language = 'en_US'
   if (isServer) {
     if (req && req.headers && req.headers.cookie) {
       const cookie = cookieparser.parse(req.headers.cookie || '')

@@ -359,7 +359,7 @@ export default {
           data: info
         })
         .then(data => {
-          console.log(data)
+          // console.log(data)
           _this.submitSuccessfulShow()
         })
         .catch(err => {

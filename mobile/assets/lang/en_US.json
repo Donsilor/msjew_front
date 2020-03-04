@@ -125,6 +125,7 @@
       "toast2": "Deleted"
     },
     "sureOrder": {
+      "firstLogin": "Please login first!",
       "sureOrder": "CONFIRM ORDER",
       "login": "Sign in",
       "settlement": "to speed up settlement or",
@@ -150,6 +151,7 @@
       "cuponName": "Select Coupons",
       "toast1": "No coupons available",
       "toast2": "Please check the default address",
+      "toast4": "Please select a payment method!",
       "toast3": "Incorrect e-mail for receiving after-sales voucher, please input again!",
       "delete": "Delete",
       "inputCode": "Input Coupon Code",
@@ -166,8 +168,8 @@
       "type1Text": "Make secure and fast payment via credit card",
       "payType2": "China UnionPay",
       "type2Text": "Using UnionPay cards’secure payment solution",
-      "payType3": "Alipay",
-      "type3Text": "Easier and safer online payment",
+      "payType3": "PayDollar",
+      "type3Text": "Pay securely with PayDollar",
       "payType4": "WeChat Pay",
       "type4Text": "Easier and safer online payment",
       "payType5": "Telegraphic Transfer (T/T)",
@@ -577,7 +579,8 @@
       "slider-verify": "Complete verification to unlock",
       "input-password": "Enter login password",
       "login-error": "Wrong account or password",
-      "login-success": "Logged in"
+      "login-success": "Logged in",
+      "input-code": "Please enter a verification code"
     },
     "index": {
       "login": "Account Login",

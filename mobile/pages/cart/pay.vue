@@ -81,11 +81,11 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         // {
-        //   url: '/cart/card.png',
-        //   type: 1,
+        //   url: '/cart/paydollar.png',
+        //   type: 8,
         //   title: this.LANGUAGE.cart.pay.payType1,
         //   des: this.LANGUAGE.cart.pay.type1Text
-        // },
+        // }
         // {
         //   url: '/cart/up.png',
         //   type: 2,
@@ -120,11 +120,12 @@ export default {
     }
   },
   created() {
-    console.log('w333', JSON.parse(this.$route.query.info))
+    // console.log('w333', JSON.parse(this.$route.query.info))
   },
   methods: {
     formatMoney: formatMoney,
     changeType(ind) {
+      // console.log("选择",ind)
       this.typeIndex = ind
       if (ind === 5) {
         this.price = this.info.orderAmount * 0.985
@@ -138,7 +139,7 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 2
+        pay = 8
       }else if(this.typeIndex == 5){
         pay = 7
       }
@@ -153,9 +154,10 @@ export default {
       // ) {
       //   pay = 7
       // }
-      console.log("paytype",pay)
+      // console.log("paytype",pay)
+      let baseUrl=this.$store.getters.baseUrl
       this.$axios({
-        // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/ http://wap.bdd.bddia.com
+        // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/ http://wap.bdd.bddia.com https://wap.bddco.com/complete/paySuccess
         method: 'post',
         url: `/web/pay/create`,
         data: {
@@ -163,12 +165,12 @@ export default {
           coinType: this.info.coinType,
           payType: pay,
           tradeType:'wap',
-          returnUrl:'https://wap.bddco.com/cart/paySuccess?orderId='+this.info.orderId
+          returnUrl:baseUrl+'/complete/paySuccess?orderId='+this.info.orderId
         }
       })
         .then(res => {
 
-          console.log("config",res)
+          // console.log("config",res)
           if (res.config) {
             if (pay !== 7) {
               window.location.replace(res.config)
@@ -198,10 +200,10 @@ export default {
               })
             }
           } else if (!res.config){
-            console.log(88888888)
+            // console.log(88888888)
             this.isPay = false
             this.$router.replace({
-              name: 'cart-paySuccess-orderId-price-coinType',
+              name: 'complete-paySuccess-orderId-price-coinType',
               params: {
                 orderId: this.info.orderId,
                 price: this.info.orderAmount,
@@ -224,7 +226,7 @@ export default {
         })
     },
     showSelect() {
-      console.log('6767')
+      // console.log('6767')
     }
   }
 }

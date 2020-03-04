@@ -61,7 +61,7 @@ export default {
         }
       })
         .then(res => {
-          console.log(res, 'e7etry')
+          // console.log(res, 'e7etry')
           this.info = res
         })
         .catch(err => {

@@ -497,7 +497,7 @@ export default {
         result[webSite.type].push(good)
         
       })
-      console.log(333,result);
+      // console.log(333,result);
       return result
     },
     activeProductInfo() {
