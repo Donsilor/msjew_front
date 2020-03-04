@@ -1521,12 +1521,13 @@ export default {
     }
   },
   created() {
-    // console.log("ssss",this.orderAddress.email)
+    console.log("ssss",this.pathTakeIds)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {        
           this.good = res
+          console.log("res",res)
           resolve()
         })
         .catch(err => {
@@ -2189,15 +2190,15 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
+      console.log("this.good",this.good)
       const data = arr.join(',')
+      const datas={
+        addressId: this.orderAddress.id,
+        cartIds: data
+      }
       this.canSubmit = false
       this.$axios
-        .get('/web/member/order/tax', {
-          params: {
-            addressId: this.orderAddress.id,
-            cartIds: data
-          }
-        })
+        .post('/web/member/order/tax', datas)
         .then(res => {
           // console.log("tex",res)
           this.canSubmit = true

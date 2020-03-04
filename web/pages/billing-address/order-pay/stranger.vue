@@ -1,583 +1,1560 @@
 <template>
-  <div class="order">
-    <!--    步骤模块-->
-    <div class="order-step">
-      <div class="one-step">
-        <div class="step-img">
-          <img src="../../../static/order/step.png" alt="" />
-          <span>1</span>
+  <div>
+    <!-- 中文简体 -->
+    <div v-if="language === 'zh_CN'" class="order">
+      <!--    步骤模块-->
+      <div class="order-step">
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>1</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.ConfirmOrder`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.finishOrder`) }}</div>
         </div>
-        <div class="step-arrow">
-          <img src="../../../static/order/arrow.png" alt="" />
+        <div class="one-step">
+          <div class="step-img">
+            <span>2</span>
+          </div>
+          <div class="step-arrow" />
+          <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
+          <div class="step-desc" />
         </div>
-        <div class="step-title">{{ $t(`${lang}.ConfirmOrder`) }}</div>
-        <div class="step-desc">{{ $t(`${lang}.finishOrder`) }}</div>
+        <div class="one-step">
+          <div class="step-img">
+            <span>3</span>
+          </div>
+          <div class="step-arrow" />
+          <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
+          <div class="step-desc" />
+        </div>
+        <div class="step-line" />
       </div>
-      <div class="one-step">
-        <div class="step-img">
-          <span>2</span>
+      
+      <!--    用户名称和提示登陆-->
+      <div class="user-info">
+        <i class="iconfont iconrentou" />
+        <div class="login-line">
+          <nuxt-link to="/login"
+            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balbala`) }}</span>
+          <nuxt-link to="/login"
+            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
-        <div class="step-arrow" />
-        <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
-        <div class="step-desc" />
       </div>
-      <div class="one-step">
-        <div class="step-img">
-          <span>3</span>
-        </div>
-        <div class="step-arrow" />
-        <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
-        <div class="step-desc" />
-      </div>
-      <div class="step-line" />
-    </div>
+      <div v-show="show">
+        <!--    地址模块-->
+        <div class="new-address">
+          <div class="new-address-title">
+            <div class="na-line" />
+            <div class="na-title">{{ $t(`${lang}.address`) }}</div>
+            <div class="na-little-word">{{ $t(`${lang}.mustInput`) }}</div>
+          </div>
+          <div class="new-address-input">
+            <!--        左边输入框-->
+            <div class="left-side">
+              <!--          姓名-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.lastName`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 1 },
+                    { 'border-wrong': wrongInput.firstName }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.firstName"
+                    :class="{ 'wrong-input': wrongInput.firstName }"
+                    type="text"
+                    @focus="
+                      borderChange = 1
+                      wrongInput.firstName = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.firstName" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
 
-    <!--    用户名称和提示登陆-->
-    <div class="user-info">
-      <i class="iconfont iconrentou" />
-      <div class="login-line">
-        <nuxt-link to="/login"
-          ><span>{{ $t(`${lang}.login`) }}</span></nuxt-link
-        >
-        <span>{{ $t(`${lang}.balbala`) }}</span>
-        <nuxt-link to="/login"
-          ><span>{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-        >
-        <span>{{ $t(`${lang}.balabalabala`) }}</span>
-      </div>
-    </div>
+              <!--          姓名-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.firstName`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 2 },
+                    { 'border-wrong': wrongInput.lastName }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.lastName"
+                    :class="{ 'wrong-input': wrongInput.lastName }"
+                    type="text"
+                    @focus="
+                      borderChange = 2
+                      wrongInput.lastName = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.lastName" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
 
-    <!--    地址模块-->
-    <div class="new-address">
-      <div class="new-address-title">
-        <div class="na-line" />
-        <div class="na-title">{{ $t(`${lang}.address`) }}</div>
-        <div class="na-little-word">{{ $t(`${lang}.mustInput`) }}</div>
-      </div>
-      <div class="new-address-input">
-        <!--        左边输入框-->
-        <div class="left-side">
-          <!--          姓名-->
-          <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.lastName`) }}</div>
-            <div
-              :class="[
-                { 'border-change': borderChange === 1 },
-                { 'border-wrong': wrongInput.firstName }
-              ]"
-              class="input-box"
-            >
-              <input
-                v-model="addressData.firstName"
-                :class="{ 'wrong-input': wrongInput.firstName }"
-                type="text"
-                @focus="
-                  borderChange = 1
-                  wrongInput.firstName = false
-                "
-                @blur="borderChange = 0"
-              />
-              <div v-show="wrongInput.firstName" class="wrong-alert">
-                {{ $t(`${lang}.wrongInput`) }}
+              <!--          电话-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.telephone`) }}</div>
+                <div class="tel-special">
+                  <div class="tel-area">
+                    <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
+                    <select v-model="phoneNum">
+                      <option
+                        v-for="(p, index) in phoneJson"
+                        :key="index"
+                        :value="p"
+                        >{{ psn ? p.en : p.cn }}{{ p.phone_code }}
+                      </option>
+                    </select>
+                    <i class="iconfont iconxiala" />
+                  </div>
+                  <div
+                    :class="[
+                      { 'border-change': borderChange === 3 },
+                      { 'border-wrong': wrongInput.userTel }
+                    ]"
+                    class="input-box tel"
+                  >
+                    <input
+                      v-model="addressData.userTel"
+                      :class="{ 'wrong-input': wrongInput.userTel }"
+                      type="text"
+                      @focus="
+                        borderChange = 3
+                        wrongInput.userTel = false
+                      "
+                      @blur="borderChange = 0"
+                    />
+                    <div v-show="wrongInput.userTel" class="wrong-alert">
+                      {{ $t(`${lang}.wrongInput`) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--          邮箱-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.email`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 4 },
+                    { 'border-wrong': wrongInput.userMail }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.userMail"
+                    :class="{ 'wrong-input': wrongInput.userMail }"
+                    type="text"
+                    @focus="
+                      borderChange = 4
+                      wrongInput.userMail = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.userMail" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
+
+              <!--          确认邮箱-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.checkEmail`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 5 },
+                    { 'border-wrong': wrongInput.checkEmail }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.checkEmail"
+                    :class="{ 'wrong-input': wrongInput.checkEmail }"
+                    type="text"
+                    @focus="
+                      borderChange = 5
+                      wrongInput.checkEmail = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.checkEmail" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInputAgain`) }}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!--          姓名-->
-          <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.firstName`) }}</div>
-            <div
-              :class="[
-                { 'border-change': borderChange === 2 },
-                { 'border-wrong': wrongInput.lastName }
-              ]"
-              class="input-box"
-            >
-              <input
-                v-model="addressData.lastName"
-                :class="{ 'wrong-input': wrongInput.lastName }"
-                type="text"
-                @focus="
-                  borderChange = 2
-                  wrongInput.lastName = false
-                "
-                @blur="borderChange = 0"
-              />
-              <div v-show="wrongInput.lastName" class="wrong-alert">
-                {{ $t(`${lang}.wrongInput`) }}
+            <!--        右边输入框-->
+            <div class="right-side">
+              <!--          国家-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.country`) }}</div>
+                <div class="input-box">
+                  <input :value="country.areaName" type="address" />
+                  <select
+                    v-model="country"
+                    @change="
+                      getListTwo()
+                      getTex()
+                    "
+                  >
+                    <option
+                      v-for="(c, index) in countryList"
+                      :key="index"
+                      :value="c"
+                      >{{ c.areaName }}
+                    </option>
+                  </select>
+                  <i class="iconfont iconxiala" />
+                </div>
               </div>
-            </div>
-          </div>
 
-          <!--          电话-->
-          <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.telephone`) }}</div>
-            <div class="tel-special">
-              <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
-                <select v-model="phoneNum">
-                  <option
-                    v-for="(p, index) in phoneJson"
-                    :key="index"
-                    :value="p"
-                    >{{ psn ? p.en : p.cn }}{{ p.phone_code }}
-                  </option>
-                </select>
-                <i class="iconfont iconxiala" />
+              <!--          省份-->
+              <div class="input-line">
+                <div class="label">{{ $t(`${lang}.province`) }}</div>
+                <div class="input-box">
+                  <input :value="province.areaName" type="address" />
+                  <select
+                    v-model="province"
+                    @change="
+                      getListThree()
+                      getTex()
+                    "
+                  >
+                    <option
+                      v-for="(p, index) in provinceList"
+                      :key="index"
+                      :value="p"
+                      >{{ p.areaName }}
+                    </option>
+                  </select>
+                  <i class="iconfont iconxiala" />
+                </div>
               </div>
-              <div
-                :class="[
-                  { 'border-change': borderChange === 3 },
-                  { 'border-wrong': wrongInput.userTel }
-                ]"
-                class="input-box tel"
-              >
-                <input
-                  v-model="addressData.userTel"
-                  :class="{ 'wrong-input': wrongInput.userTel }"
-                  type="text"
-                  @focus="
-                    borderChange = 3
-                    wrongInput.userTel = false
-                  "
-                  @blur="borderChange = 0"
-                />
-                <div v-show="wrongInput.userTel" class="wrong-alert">
-                  {{ $t(`${lang}.wrongInput`) }}
+
+              <!--          城市-->
+              <div class="input-line">
+                <div class="label">{{ $t(`${lang}.city`) }}</div>
+                <div class="input-box">
+                  <input :value="city.areaName" type="address" />
+                  <select v-model="city" @change="getTex()">
+                    <option v-for="(c, index) in cityList" :key="index" :value="c"
+                      >{{ c.areaName }}
+                    </option>
+                  </select>
+                  <i class="iconfont iconxiala" />
+                </div>
+              </div>
+
+              <!--          详细地址-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.longAddress`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 6 },
+                    { 'border-wrong': wrongInput.address }
+                  ]"
+                  class="input-box"
+                >
+                  <textarea
+                    v-model="addressData.address"
+                    :class="{ 'wrong-input': wrongInput.address }"
+                    @focus="
+                      borderChange = 6
+                      wrongInput.address = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.address" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
+
+              <!--          邮编-->
+              <div class="input-line">
+                <div class="label">{{ $t(`${lang}.zipCode`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 7 },
+                    { 'border-wrong': wrongInput.zipCode }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.zipCode"
+                    :class="{ 'wrong-input': wrongInput.zipCode }"
+                    type="text"
+                    @focus="
+                      borderChange = 7
+                      wrongInput.zipCode = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.zipCode" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!--          邮箱-->
-          <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.email`) }}</div>
-            <div
-              :class="[
-                { 'border-change': borderChange === 4 },
-                { 'border-wrong': wrongInput.userMail }
-              ]"
-              class="input-box"
-            >
-              <input
-                v-model="addressData.userMail"
-                :class="{ 'wrong-input': wrongInput.userMail }"
-                type="text"
-                @focus="
-                  borderChange = 4
-                  wrongInput.userMail = false
-                "
-                @blur="borderChange = 0"
-              />
-              <div v-show="wrongInput.userMail" class="wrong-alert">
-                {{ $t(`${lang}.wrongInput`) }}
-              </div>
-            </div>
-          </div>
-
-          <!--          确认邮箱-->
-          <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.checkEmail`) }}</div>
-            <div
-              :class="[
-                { 'border-change': borderChange === 5 },
-                { 'border-wrong': wrongInput.checkEmail }
-              ]"
-              class="input-box"
-            >
-              <input
-                v-model="addressData.checkEmail"
-                :class="{ 'wrong-input': wrongInput.checkEmail }"
-                type="text"
-                @focus="
-                  borderChange = 5
-                  wrongInput.checkEmail = false
-                "
-                @blur="borderChange = 0"
-              />
-              <div v-show="wrongInput.checkEmail" class="wrong-alert">
-                {{ $t(`${lang}.wrongInputAgain`) }}
-              </div>
-            </div>
-          </div>
         </div>
+      </div>
 
-        <!--        右边输入框-->
-        <div class="right-side">
-          <!--          国家-->
-          <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.country`) }}</div>
-            <div class="input-box">
-              <input :value="country.areaName" type="address" />
-              <select
-                v-model="country"
-                @change="
-                  getListTwo()
-                  getTex()
-                "
-              >
-                <option
-                  v-for="(c, index) in countryList"
-                  :key="index"
-                  :value="c"
-                  >{{ c.areaName }}
-                </option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-          </div>
-
-          <!--          省份-->
-          <div class="input-line">
-            <div class="label">{{ $t(`${lang}.province`) }}</div>
-            <div class="input-box">
-              <input :value="province.areaName" type="address" />
-              <select
-                v-model="province"
-                @change="
-                  getListThree()
-                  getTex()
-                "
-              >
-                <option
-                  v-for="(p, index) in provinceList"
-                  :key="index"
-                  :value="p"
-                  >{{ p.areaName }}
-                </option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-          </div>
-
-          <!--          城市-->
-          <div class="input-line">
-            <div class="label">{{ $t(`${lang}.city`) }}</div>
-            <div class="input-box">
-              <input :value="city.areaName" type="address" />
-              <select v-model="city" @change="getTex()">
-                <option v-for="(c, index) in cityList" :key="index" :value="c"
-                  >{{ c.areaName }}
-                </option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-          </div>
-
-          <!--          详细地址-->
-          <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.longAddress`) }}</div>
-            <div
-              :class="[
-                { 'border-change': borderChange === 6 },
-                { 'border-wrong': wrongInput.address }
-              ]"
-              class="input-box"
-            >
-              <textarea
-                v-model="addressData.address"
-                :class="{ 'wrong-input': wrongInput.address }"
-                @focus="
-                  borderChange = 6
-                  wrongInput.address = false
-                "
-                @blur="borderChange = 0"
-              />
-              <div v-show="wrongInput.address" class="wrong-alert">
-                {{ $t(`${lang}.wrongInput`) }}
+      <!--支付模块  -->
+      <div class="payways">
+        <!-- 支付 -->
+        <div class="pay">
+          <!-- <div class="order-step">
+            <div class="one-step">
+              <div class="step-img">
+                <img src="../../../static/order/step.png" alt="" />
+                <span>1</span>
               </div>
-            </div>
-          </div>
-
-          <!--          邮编-->
-          <div class="input-line">
-            <div class="label">{{ $t(`${lang}.zipCode`) }}</div>
-            <div
-              :class="[
-                { 'border-change': borderChange === 7 },
-                { 'border-wrong': wrongInput.zipCode }
-              ]"
-              class="input-box"
-            >
-              <input
-                v-model="addressData.zipCode"
-                :class="{ 'wrong-input': wrongInput.zipCode }"
-                type="text"
-                @focus="
-                  borderChange = 7
-                  wrongInput.zipCode = false
-                "
-                @blur="borderChange = 0"
-              />
-              <div v-show="wrongInput.zipCode" class="wrong-alert">
-                {{ $t(`${lang}.wrongInput`) }}
+              <div class="step-arrow">
+                <img src="../../../static/order/arrow.png" alt="" />
               </div>
+              <div class="step-title">{{ $t(`${lang2}.confirmOrder`) }}</div>
+              <div class="step-desc">{{ $t(`${lang2}.finishOrderInfo`) }}</div>
             </div>
+            <div class="one-step">
+              <div class="step-img">
+                <img src="../../../static/order/step.png" alt="" />
+                <span>2</span>
+              </div>
+              <div class="step-arrow">
+                <img src="../../../static/order/arrow.png" alt="" />
+              </div>
+              <div class="step-title">{{ $t(`${lang2}.orderPay`) }}</div>
+              <div class="step-desc">{{ $t(`${lang2}.payWay`) }}</div>
+            </div>
+            <div class="one-step">
+              <div class="step-img">
+                <span>3</span>
+              </div>
+              <div class="step-arrow" />
+              <div class="step-title">{{ $t(`${lang2}.finishPay`) }}</div>
+              <div class="step-desc" />
+            </div>
+            <div class="step-line-one" />
+            <div class="step-line-two" />
+          </div> -->
+          <div v-loading="goingPay" class="pay-ways">
+            <div class="new-address-title">
+              <div class="na-line" />
+              <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
+            </div>
+            <div class="pay-blocks">
+              <div
+                :class="{ 'pay-choose': payWay == 6 }"
+                class="pay-block"
+                @click="Way(6)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/paypalpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
+                <div v-show="payWay == 6" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 6" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay === 5 }"
+                class="pay-block"
+                @click="payWay = 5"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/visapay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
+                <div v-show="payWay == 5" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 5" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 3 }"
+                class="pay-block"
+                @click="payWay = 3"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/unionpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
+                <div v-show="payWay === 3" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 3" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+              <!-- 支付宝 -->
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 2 }"
+                class="pay-block"
+                @click="Way(2)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/alipay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
+                <div v-show="payWay == 2" class="pay-price"> -->
+                  <!-- {{ coinType }} {{ formatMoney(price) }} -->
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 2" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 3 }"
+                class="pay-block"
+                @click="payWay = 3"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/wechatpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
+                <div v-show="payWay == 3" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 3" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 1 }"
+                class="pay-block"
+                @click="payWay = 1"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/epay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
+                <div v-show="payWay == 1" class="pay-price">
+                  {{ coinType }} {{ formatMoney(ttPrice) }}
+                </div>
+                <div v-show="payWay == 1" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <div class="pay-question" @click="answer = true">?</div>
+            </div>
+            <!-- <div
+              :class="['buy-btn', { disabled: !canSubmit }]"
+              @click="createOrder()"
+            >
+              <span
+                >{{ $store.state.coin }}
+                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+              >
+              <span>{{ $t(`${lang}.beiQin`) }}</span>
+              
+            </div> -->
+            <!-- <div class="pay-btn" @click="goPay()">{{ $t(`${lang2}.pay`) }}</div> -->
+          </div>
+          <!--    unionPayHide-->
+          <div v-show="false">
+            <form :action="actionLink" method="post">
+              <div v-for="(f, index) in form" :key="index">
+                <label :for="f.name">{{ f.name }}</label>
+                <input v-model="f.val" :name="f.name" />
+              </div>
+              <input id="unionPay" type="submit" value="akm" />
+            </form>
+          </div>
+          <message-box
+            v-show="answer"
+            :title="$t(`${lang}.msgTitle1`)"
+            :message="$t(`${lang}.msgContent1`)"
+            type="one"
+            @done="answer = false"
+          />
+          <message-box
+            v-show="failedOrder"
+            :title="$t(`${lang}.msgTitle2`)"
+            :message="$t(`${lang}.msgContent2`)"
+            type="one"
+            @done="failedOrder = false"
+          />
+        </div>
+      </div>
+
+      <!--    购物车模块-->
+      <div class="cart-top-bar">
+        <span>{{ $t(`${lang}.info`) }}</span
+        ><span>{{ $t(`${lang}.number`) }}</span
+        ><span>{{ $t(`${lang}.price`) }}</span>
+      </div>
+      <div class="cart-goods">
+        <div v-for="(g, index) in good" :key="index">
+          <div v-if="g.groupType === null" class="finished">
+            <div class="cart-radio"></div>
+            <single :g="g" :options="false"></single>
+          </div>
+          <div v-if="g.groupType === 1" class="couple">
+            <div class="cart-radio"></div>
+            <double :g="g" :options="false"></double>
+          </div>
+          <div v-if="g.groupType === 2" class="customization">
+            <div class="cart-radio"></div>
+            <madeUp
+              :g="g"
+              :options="false"
+              :word="$t(`cart.customMade`)"
+            ></madeUp>
           </div>
         </div>
       </div>
-    </div>
 
-    <!--    购物车模块-->
-    <div class="cart-top-bar">
-      <span>{{ $t(`${lang}.info`) }}</span
-      ><span>{{ $t(`${lang}.number`) }}</span
-      ><span>{{ $t(`${lang}.price`) }}</span>
-    </div>
-    <div class="cart-goods">
-      <div v-for="(g, index) in good" :key="index">
-        <div v-if="g.groupType === null" class="finished">
-          <div class="cart-radio"></div>
-          <single :g="g" :options="false"></single>
-        </div>
-        <div v-if="g.groupType === 1" class="couple">
-          <div class="cart-radio"></div>
-          <double :g="g" :options="false"></double>
-        </div>
-        <div v-if="g.groupType === 2" class="customization">
-          <div class="cart-radio"></div>
-          <madeUp
-            :g="g"
-            :options="false"
-            :word="$t(`cart.customMade`)"
-          ></madeUp>
-        </div>
-      </div>
-    </div>
-
-    <!--    订单信息模块-->
-    <div class="order-info">
-      <div class="left-info">
-        <div class="new-address-title">
-          <div class="na-line" />
-          <div class="na-title">{{ $t(`${lang}.deliveryInformation`) }}</div>
-        </div>
-        <div v-if="good.length > 1" class="is-pack">
-          <div
-            v-show="!isAllPack"
-            class="free-check"
-            @click="isAllPack = !isAllPack"
-          />
-          <i
-            v-show="isAllPack"
-            class="iconfont icongou"
-            @click="isAllPack = !isAllPack"
-          />
-          <div>
-            <span>{{ $t(`${lang}.sendTogether`) }}</span
-            ><span>（{{ $t(`${lang}.chatBor`) }}）</span>
+      <!--    订单信息模块-->
+      <div class="order-info">
+        <div class="left-info">
+          <div class="new-address-title">
+            <div class="na-line" />
+            <div class="na-title">{{ $t(`${lang}.deliveryInformation`) }}</div>
           </div>
-        </div>
-        <div class="send-time">
-          <div class="send-left">
-            <div>{{ $t(`${lang}.sendTime`) }}</div>
-            <div>
-              <router-link to="/deliveryPolicy">{{
-                $t(`${lang}.checkDeliveryPolicy`)
-              }}</router-link>
-            </div>
-          </div>
-          <div class="send-right">
-            {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
-          </div>
-        </div>
-        <div class="after-sale-email">
-          <div>{{ $t(`${lang}.showHouEmail`) }}</div>
-          <div>
+          <!-- <div v-if="good.length > 1" class="is-pack">
             <div
-              v-show="!isSameEmail"
+              v-show="!isAllPack"
               class="free-check"
-              @click="isSameEmail = !isSameEmail"
+              @click="isAllPack = !isAllPack"
             />
             <i
-              v-show="isSameEmail"
+              v-show="isAllPack"
               class="iconfont icongou"
-              @click="isSameEmail = !isSameEmail"
+              @click="isAllPack = !isAllPack"
             />
-            <span>{{ $t(`${lang}.sameTongAddress`) }}</span>
+            <div>
+              <span>{{ $t(`${lang}.sendTogether`) }}</span
+              ><span>（{{ $t(`${lang}.chatBor`) }}）</span>
+            </div>
+          </div> -->
+          <div class="send-time">
+            <div class="send-left">
+              <div>{{ $t(`${lang}.sendTime`) }}</div>
+              <div>
+                <router-link to="/deliveryPolicy">{{
+                  $t(`${lang}.checkDeliveryPolicy`)
+                }}</router-link>
+              </div>
+            </div>
+            <div class="send-right">
+              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
+            </div>
           </div>
-        </div>
-        <div
-          :class="[
-            { 'border-change': borderChange === 8 },
-            { 'border-wrong': wrongInput.odMail }
-          ]"
-          class="after-sale-email-input"
-        >
-          <input
-            v-show="!isSameEmail"
-            v-model="orderEmail"
-            :class="{ 'wrong-input': wrongInput.odMail }"
-            type="text"
-            @focus="
-              borderChange = 8
-              wrongInput.odMail = false
-            "
-            @blur="borderChange = 0"
-          />
-          <input
-            v-show="isSameEmail"
-            v-model="addressData.userMail"
-            :class="{ 'wrong-input': wrongInput.odMail }"
-            type="text"
-            @focus="
-              borderChange = 8
-              wrongInput.odMail = false
-            "
-            @blur="borderChange = 0"
-          />
-        </div>
-        <div class="message">
-          <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
-          <textarea
-            v-model="remark"
+          <!-- <div class="after-sale-email">
+            <div>{{ $t(`${lang}.showHouEmail`) }}</div>
+            <div>
+              <div
+                v-show="!isSameEmail"
+                class="free-check"
+                @click="isSameEmail = !isSameEmail"
+              />
+              <i
+                v-show="isSameEmail"
+                class="iconfont icongou"
+                @click="isSameEmail = !isSameEmail"
+              />
+              <span>{{ $t(`${lang}.sameTongAddress`) }}</span>
+            </div>
+          </div> -->
+          <!-- <div
             :class="[
-              { 'border-change': borderChange === 9 },
-              { 'wrong-input': wrongInput.remark },
-              { 'border-wrong': wrongInput.remark }
+              { 'border-change': borderChange === 8 },
+              { 'border-wrong': wrongInput.odMail }
             ]"
-            @focus="
-              borderChange = 9
-              wrongInput.remark = false
-            "
-            @blur="borderChange = 0"
+            class="after-sale-email-input"
+          >
+            <input
+              v-show="!isSameEmail"
+              v-model="orderEmail"
+              :class="{ 'wrong-input': wrongInput.odMail }"
+              type="text"
+              @focus="
+                borderChange = 8
+                wrongInput.odMail = false
+              "
+              @blur="borderChange = 0"
+            />
+            <input
+              v-show="isSameEmail"
+              v-model="addressData.userMail"
+              :class="{ 'wrong-input': wrongInput.odMail }"
+              type="text"
+              @focus="
+                borderChange = 8
+                wrongInput.odMail = false
+              "
+              @blur="borderChange = 0"
+            />
+          </div> -->
+          <div class="message">
+            <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
+            <textarea
+              v-model="remark"
+              :class="[
+                { 'border-change': borderChange === 9 },
+                { 'wrong-input': wrongInput.remark },
+                { 'border-wrong': wrongInput.remark }
+              ]"
+              @focus="
+                borderChange = 9
+                wrongInput.remark = false
+              "
+              @blur="borderChange = 0"
+            />
+          </div>
+        </div>
+        <div class="right-info">
+          <!-- 优惠卷 -->
+          <!-- <div v-show="!makeGay" class="coupon">
+            <div class="two-on-one">
+              <input
+                ref="too"
+                v-model="tooInp"
+                :placeholder="$t(`${lang}.tooInpShort`)"
+                type="text"
+                class="too-input"
+                @focus="die = false"
+                @input="fuckYouM"
+              />
+            </div>
+            <div
+              :style="[
+                { backgroundColor: fuckYou ? 'rgba(170,138,123,1)' : '#eee' }
+              ]"
+              class="too-btn"
+              @click="checkCount"
+            >
+              {{ $t(`${lang}.exchange`) }}
+            </div>
+            <div v-show="die" class="too-die">{{ familyDie }}</div>
+            <div class="too-wenhao">
+              ?
+              <div class="too-gay">
+                <div>{{ $t(`${lang}.gay1`) }}</div>
+                <div>{{ $t(`${lang}.gay2`) }}</div>
+                <div>{{ $t(`${lang}.gay3`) }}</div>
+              </div>
+            </div>
+          </div> -->
+          <div class="new-address-title">
+            <div class="na-line" />
+            <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
+          </div>
+          <div class="price-detail">
+            <div class="detail-line">
+              <div>{{ $t(`${lang}.goodsNum`) }}</div>
+              <div class="hkd">{{ good.length }}</div>
+            </div>
+            <div class="detail-line">
+              <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
+              <div class="hkd">
+                {{ $store.state.coin }} {{ formatMoney(goodsPrice) }}
+              </div>
+            </div>
+            <div v-show="makeGay" class="detail-line">
+              <div>
+                *{{ $t(`${lang}.coupon`) }}:
+                <span style="color: red;">{{ tooInp }}</span>
+                <span
+                  style="color: red;text-decoration: underline;cursor: pointer;"
+                  @click="removeCoupon"
+                  >{{ $t(`${lang}.sc`) }}</span
+                >
+              </div>
+              <div class="hkd color-pink">
+                -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
+              </div>
+            </div>
+            <div class="detail-line">
+              <div>
+                <span>{{ $t(`${lang}.expressMoney`) }}</span>
+                <div class="question">
+                  <a href="/freeShipping" target="_blank"><span>?</span></a>
+                  <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
+                </div>
+              </div>
+              <div class="hkd color-gold">
+                +{{ $store.state.coin }} {{ formatMoney(tex.logisticsFee) }}
+              </div>
+            </div>
+            <div class="detail-line">
+              <div>
+                <span>{{ $t(`${lang}.tex`) }}</span>
+                <div class="question">
+                  <a href="/internationalPolicy" target="_blank"
+                    ><span>?</span></a
+                  >
+                  <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
+                </div>
+              </div>
+              <div class="hkd color-gold">
+                +{{ $store.state.coin }} {{ formatMoney(tex.taxFee) }}
+              </div>
+            </div>
+            <div class="detail-line">
+              <div>
+                <span>{{ $t(`${lang}.insurance`) }}</span>
+                <div class="question">
+                  <span>?</span>
+                  <div class="answer">{{ $t(`${lang}.insuranceSay`) }}</div>
+                </div>
+              </div>
+              <div class="hkd color-gold">
+                +{{ $store.state.coin }} {{ formatMoney(tex.safeFee) }}
+              </div>
+            </div>
+            <div class="detail-line">
+              <div class="font-size-16 color-333">
+                {{ $t(`${lang}.totalMoney`) }}
+              </div>
+              <div class="hkd color-pink price-big">
+                {{ $store.state.coin }} {{ showOrderAmount }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="info-line" />
+        <div
+          :class="['buy-btn', { disabled: !canSubmit }]"
+          @click="createOrder()"
+        >
+          <!-- <span
+            >{{ $store.state.coin }}
+            {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+          > -->
+          <span>{{ $t(`${lang}.beiQin`) }}</span>
+        </div>
+        <!-- <div
+          :class="['buy-btn', { disabled: !canSubmit }]"
+          @click="createOrder()"
+        >
+          <span>{{ $store.state.coin }} {{ showOrderAmount }}</span>
+          <span>{{ $t(`${lang}.beiQin`) }}</span>
+        </div> -->
+      </div>
+
+      
+      <message-box
+        v-show="confirmBox"
+        :title="$t(`${lang}.msgTitle1`)"
+        :message="$t(`${lang}.msgContent1`)"
+        type="two"
+        @cancel="confirmBox = false"
+        @sure="deleteAddress()"
+      />
+      <message-box
+        v-show="alertBox"
+        :message="wrongMsg"
+        :title="$t(`${lang}.msgTitle1`)"
+        type="one"
+        @done="alertBox = false"
+      />
+    </div>
+    <!-- 繁体和英文 -->
+    <div v-else class="order">
+      <!--    步骤模块-->
+      <div class="order-step">
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>1</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.ConfirmOrder`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.finishOrder`) }}</div>
+        </div>
+        <div class="one-step">
+          <div class="step-img">
+            <span>2</span>
+          </div>
+          <div class="step-arrow" />
+          <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
+          <div class="step-desc" />
+        </div>
+        <div class="one-step">
+          <div class="step-img">
+            <span>3</span>
+          </div>
+          <div class="step-arrow" />
+          <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
+          <div class="step-desc" />
+        </div>
+        <div class="step-line" />
+      </div>
+     
+      <!--    用户名称和提示登陆-->
+      <div class="user-info">
+        <i class="iconfont iconrentou" />
+        <div class="login-line">
+          <nuxt-link to="/login"
+            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balbala`) }}</span>
+          <nuxt-link to="/login"
+            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
+          >
+          <span>{{ $t(`${lang}.balabalabala`) }}</span>
+        </div>
+      </div>
+      <div v-show="show">
+        <!--    地址模块-->
+        <div class="new-address">
+          <div class="new-address-title">
+            <div class="na-line" />
+            <div class="na-title">{{ $t(`${lang}.address`) }}</div>
+            <div class="na-little-word">{{ $t(`${lang}.mustInput`) }}</div>
+          </div>
+          <div class="new-address-input">
+            <!--        左边输入框-->
+            <div class="left-side">
+              <!--          姓名-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.lastName`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 1 },
+                    { 'border-wrong': wrongInput.firstName }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.firstName"
+                    :class="{ 'wrong-input': wrongInput.firstName }"
+                    type="text"
+                    @focus="
+                      borderChange = 1
+                      wrongInput.firstName = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.firstName" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
+
+              <!--          姓名-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.firstName`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 2 },
+                    { 'border-wrong': wrongInput.lastName }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.lastName"
+                    :class="{ 'wrong-input': wrongInput.lastName }"
+                    type="text"
+                    @focus="
+                      borderChange = 2
+                      wrongInput.lastName = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.lastName" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
+
+              <!--          电话-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.telephone`) }}</div>
+                <div class="tel-special">
+                  <div class="tel-area">
+                    <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
+                    <select v-model="phoneNum">
+                      <option
+                        v-for="(p, index) in phoneJson"
+                        :key="index"
+                        :value="p"
+                        >{{ psn ? p.en : p.cn }}{{ p.phone_code }}
+                      </option>
+                    </select>
+                    <i class="iconfont iconxiala" />
+                  </div>
+                  <div
+                    :class="[
+                      { 'border-change': borderChange === 3 },
+                      { 'border-wrong': wrongInput.userTel }
+                    ]"
+                    class="input-box tel"
+                  >
+                    <input
+                      v-model="addressData.userTel"
+                      :class="{ 'wrong-input': wrongInput.userTel }"
+                      type="text"
+                      @focus="
+                        borderChange = 3
+                        wrongInput.userTel = false
+                      "
+                      @blur="borderChange = 0"
+                    />
+                    <div v-show="wrongInput.userTel" class="wrong-alert">
+                      {{ $t(`${lang}.wrongInput`) }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!--          邮箱-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.email`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 4 },
+                    { 'border-wrong': wrongInput.userMail }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.userMail"
+                    :class="{ 'wrong-input': wrongInput.userMail }"
+                    type="text"
+                    @focus="
+                      borderChange = 4
+                      wrongInput.userMail = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.userMail" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
+
+              <!--          确认邮箱-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.checkEmail`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 5 },
+                    { 'border-wrong': wrongInput.checkEmail }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.checkEmail"
+                    :class="{ 'wrong-input': wrongInput.checkEmail }"
+                    type="text"
+                    @focus="
+                      borderChange = 5
+                      wrongInput.checkEmail = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.checkEmail" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInputAgain`) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--        右边输入框-->
+            <div class="right-side">
+              <!--          国家-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.country`) }}</div>
+                <div class="input-box">
+                  <input :value="country.areaName" type="address" />
+                  <select
+                    v-model="country"
+                    @change="
+                      getListTwo()
+                      getTex()
+                    "
+                  >
+                    <option
+                      v-for="(c, index) in countryList"
+                      :key="index"
+                      :value="c"
+                      >{{ c.areaName }}
+                    </option>
+                  </select>
+                  <i class="iconfont iconxiala" />
+                </div>
+              </div>
+
+              <!--          省份-->
+              <div class="input-line">
+                <div class="label">{{ $t(`${lang}.province`) }}</div>
+                <div class="input-box">
+                  <input :value="province.areaName" type="address" />
+                  <select
+                    v-model="province"
+                    @change="
+                      getListThree()
+                      getTex()
+                    "
+                  >
+                    <option
+                      v-for="(p, index) in provinceList"
+                      :key="index"
+                      :value="p"
+                      >{{ p.areaName }}
+                    </option>
+                  </select>
+                  <i class="iconfont iconxiala" />
+                </div>
+              </div>
+
+              <!--          城市-->
+              <div class="input-line">
+                <div class="label">{{ $t(`${lang}.city`) }}</div>
+                <div class="input-box">
+                  <input :value="city.areaName" type="address" />
+                  <select v-model="city" @change="getTex()">
+                    <option v-for="(c, index) in cityList" :key="index" :value="c"
+                      >{{ c.areaName }}
+                    </option>
+                  </select>
+                  <i class="iconfont iconxiala" />
+                </div>
+              </div>
+
+              <!--          详细地址-->
+              <div class="input-line">
+                <div class="label">*{{ $t(`${lang}.longAddress`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 6 },
+                    { 'border-wrong': wrongInput.address }
+                  ]"
+                  class="input-box"
+                >
+                  <textarea
+                    v-model="addressData.address"
+                    :class="{ 'wrong-input': wrongInput.address }"
+                    @focus="
+                      borderChange = 6
+                      wrongInput.address = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.address" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
+
+              <!--          邮编-->
+              <div class="input-line">
+                <div class="label">{{ $t(`${lang}.zipCode`) }}</div>
+                <div
+                  :class="[
+                    { 'border-change': borderChange === 7 },
+                    { 'border-wrong': wrongInput.zipCode }
+                  ]"
+                  class="input-box"
+                >
+                  <input
+                    v-model="addressData.zipCode"
+                    :class="{ 'wrong-input': wrongInput.zipCode }"
+                    type="text"
+                    @focus="
+                      borderChange = 7
+                      wrongInput.zipCode = false
+                    "
+                    @blur="borderChange = 0"
+                  />
+                  <div v-show="wrongInput.zipCode" class="wrong-alert">
+                    {{ $t(`${lang}.wrongInput`) }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--支付模块  -->
+      <div class="payways">
+        <!-- 支付 -->
+        <div class="pay">
+          <!-- <div class="order-step">
+            <div class="one-step">
+              <div class="step-img">
+                <img src="../../../static/order/step.png" alt="" />
+                <span>1</span>
+              </div>
+              <div class="step-arrow">
+                <img src="../../../static/order/arrow.png" alt="" />
+              </div>
+              <div class="step-title">{{ $t(`${lang2}.confirmOrder`) }}</div>
+              <div class="step-desc">{{ $t(`${lang2}.finishOrderInfo`) }}</div>
+            </div>
+            <div class="one-step">
+              <div class="step-img">
+                <img src="../../../static/order/step.png" alt="" />
+                <span>2</span>
+              </div>
+              <div class="step-arrow">
+                <img src="../../../static/order/arrow.png" alt="" />
+              </div>
+              <div class="step-title">{{ $t(`${lang2}.orderPay`) }}</div>
+              <div class="step-desc">{{ $t(`${lang2}.payWay`) }}</div>
+            </div>
+            <div class="one-step">
+              <div class="step-img">
+                <span>3</span>
+              </div>
+              <div class="step-arrow" />
+              <div class="step-title">{{ $t(`${lang2}.finishPay`) }}</div>
+              <div class="step-desc" />
+            </div>
+            <div class="step-line-one" />
+            <div class="step-line-two" />
+          </div> -->
+          <div v-loading="goingPay" class="pay-ways">
+            <div class="new-address-title">
+              <div class="na-line" />
+              <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
+            </div>
+            <div class="pay-blocks">
+              <div
+                :class="{ 'pay-choose': payWay == 6 }"
+                class="pay-block"
+                @click="Way(6)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/paypalpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
+                <div v-show="payWay == 6" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 6" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay === 5 }"
+                class="pay-block"
+                @click="payWay = 5"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/visapay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
+                <div v-show="payWay == 5" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 5" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 3 }"
+                class="pay-block"
+                @click="payWay = 3"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/unionpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
+                <div v-show="payWay === 3" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 3" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 2 }"
+                class="pay-block"
+                @click="Way(2)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/alipay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
+                <div v-show="payWay == 2" class="pay-price"> -->
+                  <!-- {{ coinType }} {{ formatMoney(price) }} -->
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 2" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 3 }"
+                class="pay-block"
+                @click="payWay = 3"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/wechatpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
+                <div v-show="payWay == 3" class="pay-price">
+                  {{ coinType }} {{ formatMoney(price) }}
+                </div>
+                <div v-show="payWay == 3" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <!-- <div
+                :class="{ 'pay-choose': payWay == 1 }"
+                class="pay-block"
+                @click="payWay = 1"
+              >
+                <div class="pay-img">
+                  <img src="../../static/order/epay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
+                <div v-show="payWay == 1" class="pay-price">
+                  {{ coinType }} {{ formatMoney(ttPrice) }}
+                </div>
+                <div v-show="payWay == 1" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div> -->
+
+              <div class="pay-question" @click="answer = true">?</div>
+            </div>
+            <!-- <div
+              :class="['buy-btn', { disabled: !canSubmit }]"
+              @click="createOrder()"
+            >
+              <span
+                >{{ $store.state.coin }}
+                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+              >
+              <span>{{ $t(`${lang}.beiQin`) }}</span>
+              
+            </div> -->
+            <!-- <div class="pay-btn" @click="goPay()">{{ $t(`${lang2}.pay`) }}</div> -->
+          </div>
+          <!--    unionPayHide-->
+          <div v-show="false">
+            <form :action="actionLink" method="post">
+              <div v-for="(f, index) in form" :key="index">
+                <label :for="f.name">{{ f.name }}</label>
+                <input v-model="f.val" :name="f.name" />
+              </div>
+              <input id="unionPay" type="submit" value="akm" />
+            </form>
+          </div>
+          <message-box
+            v-show="answer"
+            :title="$t(`${lang}.msgTitle1`)"
+            :message="$t(`${lang}.msgContent1`)"
+            type="one"
+            @done="answer = false"
+          />
+          <message-box
+            v-show="failedOrder"
+            :title="$t(`${lang}.msgTitle2`)"
+            :message="$t(`${lang}.msgContent2`)"
+            type="one"
+            @done="failedOrder = false"
           />
         </div>
       </div>
-      <div class="right-info">
-        <div v-show="!makeGay" class="coupon">
-          <div class="two-on-one">
+
+      <!--    购物车模块-->
+      <div class="cart-top-bar">
+        <span>{{ $t(`${lang}.info`) }}</span
+        ><span>{{ $t(`${lang}.number`) }}</span
+        ><span>{{ $t(`${lang}.price`) }}</span>
+      </div>
+      <div class="cart-goods">
+        <div v-for="(g, index) in good" :key="index">
+          <div v-if="g.groupType === null" class="finished">
+            <div class="cart-radio"></div>
+            <single :g="g" :options="false"></single>
+          </div>
+          <div v-if="g.groupType === 1" class="couple">
+            <div class="cart-radio"></div>
+            <double :g="g" :options="false"></double>
+          </div>
+          <div v-if="g.groupType === 2" class="customization">
+            <div class="cart-radio"></div>
+            <madeUp
+              :g="g"
+              :options="false"
+              :word="$t(`cart.customMade`)"
+            ></madeUp>
+          </div>
+        </div>
+      </div>
+
+      <!--    订单信息模块-->
+      <div class="order-info">
+        <div class="left-info">
+          <div class="new-address-title">
+            <div class="na-line" />
+            <div class="na-title">{{ $t(`${lang}.deliveryInformation`) }}</div>
+          </div>
+          <!-- <div v-if="good.length > 1" class="is-pack">
+            <div
+              v-show="!isAllPack"
+              class="free-check"
+              @click="isAllPack = !isAllPack"
+            />
+            <i
+              v-show="isAllPack"
+              class="iconfont icongou"
+              @click="isAllPack = !isAllPack"
+            />
+            <div>
+              <span>{{ $t(`${lang}.sendTogether`) }}</span
+              ><span>（{{ $t(`${lang}.chatBor`) }}）</span>
+            </div>
+          </div> -->
+          <div class="send-time">
+            <div class="send-left">
+              <div>{{ $t(`${lang}.sendTime`) }}</div>
+              <div>
+                <router-link to="/deliveryPolicy">{{
+                  $t(`${lang}.checkDeliveryPolicy`)
+                }}</router-link>
+              </div>
+            </div>
+            <div class="send-right">
+              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
+            </div>
+          </div>
+          <!-- <div class="after-sale-email">
+            <div>{{ $t(`${lang}.showHouEmail`) }}</div>
+            <div>
+              <div
+                v-show="!isSameEmail"
+                class="free-check"
+                @click="isSameEmail = !isSameEmail"
+              />
+              <i
+                v-show="isSameEmail"
+                class="iconfont icongou"
+                @click="isSameEmail = !isSameEmail"
+              />
+              <span>{{ $t(`${lang}.sameTongAddress`) }}</span>
+            </div>
+          </div> -->
+          <!-- <div
+            :class="[
+              { 'border-change': borderChange === 8 },
+              { 'border-wrong': wrongInput.odMail }
+            ]"
+            class="after-sale-email-input"
+          >
             <input
-              ref="too"
-              v-model="tooInp"
-              :placeholder="$t(`${lang}.tooInpShort`)"
+              v-show="!isSameEmail"
+              v-model="orderEmail"
+              :class="{ 'wrong-input': wrongInput.odMail }"
               type="text"
-              class="too-input"
-              @focus="die = false"
-              @input="fuckYouM"
+              @focus="
+                borderChange = 8
+                wrongInput.odMail = false
+              "
+              @blur="borderChange = 0"
+            />
+            <input
+              v-show="isSameEmail"
+              v-model="addressData.userMail"
+              :class="{ 'wrong-input': wrongInput.odMail }"
+              type="text"
+              @focus="
+                borderChange = 8
+                wrongInput.odMail = false
+              "
+              @blur="borderChange = 0"
+            />
+          </div> -->
+          <div class="message">
+            <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
+            <textarea
+              v-model="remark"
+              :class="[
+                { 'border-change': borderChange === 9 },
+                { 'wrong-input': wrongInput.remark },
+                { 'border-wrong': wrongInput.remark }
+              ]"
+              @focus="
+                borderChange = 9
+                wrongInput.remark = false
+              "
+              @blur="borderChange = 0"
             />
           </div>
-          <div
-            :style="[
-              { backgroundColor: fuckYou ? 'rgba(170,138,123,1)' : '#eee' }
-            ]"
-            class="too-btn"
-            @click="checkCount"
-          >
-            {{ $t(`${lang}.exchange`) }}
-          </div>
-          <div v-show="die" class="too-die">{{ familyDie }}</div>
-          <div class="too-wenhao">
-            ?
-            <div class="too-gay">
-              <div>{{ $t(`${lang}.gay1`) }}</div>
-              <div>{{ $t(`${lang}.gay2`) }}</div>
-              <div>{{ $t(`${lang}.gay3`) }}</div>
-            </div>
-          </div>
         </div>
-        <div class="new-address-title">
-          <div class="na-line" />
-          <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-        </div>
-        <div class="price-detail">
-          <div class="detail-line">
-            <div>{{ $t(`${lang}.goodsNum`) }}</div>
-            <div class="hkd">{{ good.length }}</div>
-          </div>
-          <div class="detail-line">
-            <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
-            <div class="hkd">
-              {{ $store.state.coin }} {{ formatMoney(goodsPrice) }}
+        <div class="right-info">
+          <!-- 优惠券 -->
+          <!-- <div v-show="!makeGay" class="coupon">
+            <div class="two-on-one">
+              <input
+                ref="too"
+                v-model="tooInp"
+                :placeholder="$t(`${lang}.tooInpShort`)"
+                type="text"
+                class="too-input"
+                @focus="die = false"
+                @input="fuckYouM"
+              />
             </div>
-          </div>
-          <div v-show="makeGay" class="detail-line">
-            <div>
-              *{{ $t(`${lang}.coupon`) }}:
-              <span style="color: red;">{{ tooInp }}</span>
-              <span
-                style="color: red;text-decoration: underline;cursor: pointer;"
-                @click="removeCoupon"
-                >{{ $t(`${lang}.sc`) }}</span
-              >
+            <div
+              :style="[
+                { backgroundColor: fuckYou ? 'rgba(170,138,123,1)' : '#eee' }
+              ]"
+              class="too-btn"
+              @click="checkCount"
+            >
+              {{ $t(`${lang}.exchange`) }}
             </div>
-            <div class="hkd color-pink">
-              -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
-            </div>
-          </div>
-          <div class="detail-line">
-            <div>
-              <span>{{ $t(`${lang}.expressMoney`) }}</span>
-              <div class="question">
-                <a href="/freeShipping" target="_blank"><span>?</span></a>
-                <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
+            <div v-show="die" class="too-die">{{ familyDie }}</div>
+            <div class="too-wenhao">
+              ?
+              <div class="too-gay">
+                <div>{{ $t(`${lang}.gay1`) }}</div>
+                <div>{{ $t(`${lang}.gay2`) }}</div>
+                <div>{{ $t(`${lang}.gay3`) }}</div>
               </div>
             </div>
-            <div class="hkd color-gold">
-              +{{ $store.state.coin }} {{ formatMoney(tex.logisticsFee) }}
-            </div>
+          </div> -->
+          <div class="new-address-title">
+            <div class="na-line" />
+            <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
           </div>
-          <div class="detail-line">
-            <div>
-              <span>{{ $t(`${lang}.tex`) }}</span>
-              <div class="question">
-                <a href="/internationalPolicy" target="_blank"
-                  ><span>?</span></a
+          <div class="price-detail">
+            <div class="detail-line">
+              <div>{{ $t(`${lang}.goodsNum`) }}</div>
+              <div class="hkd">{{ good.length }}</div>
+            </div>
+            <div class="detail-line">
+              <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
+              <div class="hkd">
+                {{ $store.state.coin }} {{ formatMoney(goodsPrice) }}
+              </div>
+            </div>
+            <div v-show="makeGay" class="detail-line">
+              <div>
+                *{{ $t(`${lang}.coupon`) }}:
+                <span style="color: red;">{{ tooInp }}</span>
+                <span
+                  style="color: red;text-decoration: underline;cursor: pointer;"
+                  @click="removeCoupon"
+                  >{{ $t(`${lang}.sc`) }}</span
                 >
-                <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
+              </div>
+              <div class="hkd color-pink">
+                -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
               </div>
             </div>
-            <div class="hkd color-gold">
-              +{{ $store.state.coin }} {{ formatMoney(tex.taxFee) }}
-            </div>
-          </div>
-          <div class="detail-line">
-            <div>
-              <span>{{ $t(`${lang}.insurance`) }}</span>
-              <div class="question">
-                <span>?</span>
-                <div class="answer">{{ $t(`${lang}.insuranceSay`) }}</div>
+            <div class="detail-line">
+              <div>
+                <span>{{ $t(`${lang}.expressMoney`) }}</span>
+                <div class="question">
+                  <a href="/freeShipping" target="_blank"><span>?</span></a>
+                  <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
+                </div>
+              </div>
+              <div class="hkd color-gold">
+                +{{ $store.state.coin }} {{ formatMoney(tex.logisticsFee) }}
               </div>
             </div>
-            <div class="hkd color-gold">
-              +{{ $store.state.coin }} {{ formatMoney(tex.safeFee) }}
+            <div class="detail-line">
+              <div>
+                <span>{{ $t(`${lang}.tex`) }}</span>
+                <div class="question">
+                  <a href="/internationalPolicy" target="_blank"
+                    ><span>?</span></a
+                  >
+                  <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
+                </div>
+              </div>
+              <div class="hkd color-gold">
+                +{{ $store.state.coin }} {{ formatMoney(tex.taxFee) }}
+              </div>
             </div>
-          </div>
-          <div class="detail-line">
-            <div class="font-size-16 color-333">
-              {{ $t(`${lang}.totalMoney`) }}
+            <div class="detail-line">
+              <div>
+                <span>{{ $t(`${lang}.insurance`) }}</span>
+                <div class="question">
+                  <span>?</span>
+                  <div class="answer">{{ $t(`${lang}.insuranceSay`) }}</div>
+                </div>
+              </div>
+              <div class="hkd color-gold">
+                +{{ $store.state.coin }} {{ formatMoney(tex.safeFee) }}
+              </div>
             </div>
-            <div class="hkd color-pink price-big">
-              {{ $store.state.coin }} {{ showOrderAmount }}
+            <div class="detail-line">
+              <div class="font-size-16 color-333">
+                {{ $t(`${lang}.totalMoney`) }}
+              </div>
+              <div class="hkd color-pink price-big">
+                {{ $store.state.coin }} {{ showOrderAmount }}
+              </div>
             </div>
           </div>
         </div>
+        <div class="info-line" />
+        <div
+          :class="['buy-btn', { disabled: !canSubmit }]"
+          @click="createOrder()"
+        >
+          <!-- <span>{{ $store.state.coin }} {{ showOrderAmount }}</span> -->
+          <span>{{ $t(`${lang}.beiQin`) }}</span>
+        </div>
       </div>
-      <div class="info-line" />
-      <div
-        :class="['buy-btn', { disabled: !canSubmit }]"
-        @click="createOrder()"
-      >
-        <span>{{ $store.state.coin }} {{ showOrderAmount }}</span>
-        <span>{{ $t(`${lang}.beiQin`) }}</span>
-      </div>
-    </div>
 
-    <message-box
-      v-show="confirmBox"
-      :title="$t(`${lang}.msgTitle1`)"
-      :message="$t(`${lang}.msgContent1`)"
-      type="two"
-      @cancel="confirmBox = false"
-      @sure="deleteAddress()"
-    />
-    <message-box
-      v-show="alertBox"
-      :message="wrongMsg"
-      :title="$t(`${lang}.msgTitle1`)"
-      type="one"
-      @done="alertBox = false"
-    />
+      
+
+      <message-box
+        v-show="confirmBox"
+        :title="$t(`${lang}.msgTitle1`)"
+        :message="$t(`${lang}.msgContent1`)"
+        type="two"
+        @cancel="confirmBox = false"
+        @sure="deleteAddress()"
+      />
+      <message-box
+        v-show="alertBox"
+        :message="wrongMsg"
+        :title="$t(`${lang}.msgTitle1`)"
+        type="one"
+        @done="alertBox = false"
+      />
+    </div>
   </div>
 </template>
 
@@ -588,6 +1565,8 @@ import madeUp from '../../shopping-cart/goodsCss/madeUp'
 import Address from '@/assets/js/address.js'
 import { Email, RegMobile, RegTelephone } from '@/assets/js/require-lee.js'
 const lang = 'order'
+const langs = 'personal.account'
+const lang2 = `pay`
 export default {
   name: 'Stranger',
   components: {
@@ -598,7 +1577,17 @@ export default {
   mixins: [Address],
   data() {
     return {
+      url:'',
+      show:false,
+      goingPay: false,
+      payWay: '' ,
+      actionLink: '',
+      form: [],
+      answer: false,
+      failedOrder: false,
       lang,
+      langs,
+      lang2,
       canSubmit: false,
       pathTakeIds: this.$route.query.cartIds.split(','),
       userInfo: {},
@@ -633,6 +1622,7 @@ export default {
       good: [],
       goodsPrice: 0,
       preferFee: 0,
+      planDays: '1-12',
       tex: {
         logisticsFee: 0,
         taxFee: 0,
@@ -644,26 +1634,32 @@ export default {
       tooInp: '',
       makeGay: false,
       fuckYou: false,
-      familyDie: ``
+      familyDie: ``,
+      language:'',
+      scrollTop: 0,
+
     }
   },
   computed: {
     pnN() {
       if (this.$store.state.language === 'en_US') {
         return this.phoneNum.en
-      }
-      return this.phoneNum.cn
+      }else if(this.$store.state.language === 'zh_TW'){
+        return this.phoneNum.cn
+      }else
+        return this.phoneNum.zh
+        // console.log("代码",this.phoneNum.zh)
     },
     psn() {
       return this.$store.state.language === 'en_US'
     },
     showOrderAmount() {
       let result = '--'
-      console.log('this.tex=====>', JSON.stringify(this.tex))
-      if (this.tex.orderAmount === null) {
+      console.log('this.tex=====>', this.tex)
+      if (this.tex.order_amount === null) {
         result = this.formatMoney(this.goodsPrice)
-      } else if (typeof this.tex.orderAmount === 'number') {
-        result = this.formatMoney(this.tex.orderAmount)
+      } else if (typeof this.tex.order_amount === 'number') {
+        result = this.formatMoney(this.tex.order_amount)
       } else {
         result = '--'
       }
@@ -671,12 +1667,14 @@ export default {
     }
   },
   created() {
+    // console.log("planDays",this.tex.planDays)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
-          console.log(`good22222======>`, res.data)
-          this.good = res.data
+          this.$store.dispatch('setLocalCartOrder',this.pathTakeIds)
+          console.log(`good22222======>`, this.pathTakeIds)
+          this.good = res
           this.goodsPrice = 0
           for (const i in res) {
             this.goodsPrice += res[i].price
@@ -695,7 +1693,7 @@ export default {
     })
     promise
       .then(() => {
-        // this.getTex()
+        this.getTex()
       })
       .catch(err => {
         if (!err.response) {
@@ -705,8 +1703,98 @@ export default {
         }
       })
   },
-  mounted() {},
+  mounted() {
+    // this.getTex()
+    this.language = this.getCookie('language')
+    window.addEventListener('scroll', this.scrollToTop);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.scrollToTop)
+  },
   methods: {
+    // 点击登入获取上页url
+    login(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
+      // console.log("oldurl",url)
+    },
+    register(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login?type=register`,
+            // query: {url}
+        })
+      },0)
+    },
+    Way(ways){
+      this.payWay=ways
+      console.log("payway",ways)
+      if(ways==6){
+        this.show=false
+      }else{
+        this.$errorMessage(this.$t(`${lang}.firstLogin`))
+        // const url=window.location.href  
+        // setTimeout(() => {
+        //   this.$router.push({
+        //     path: `/login`,
+        //     query: {url}
+        //   })
+        //   // this.$router.push(`/login`)
+        // }, 2000)
+        // this.wrongMsg = this.$t(`${lang}.wip5`)
+        // this.alertBox = true
+        // alert('请添加地址并登陆后支付！')
+        // this.show=true
+        // if (this.orderAddress.id === '') {
+          const topB = document.getElementsByClassName('layout-box')[0];
+          const that = this
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-that.scrollTop / 5)
+            topB.scrollTop = that.scrollTop + ispeed
+            if (that.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
+          //  console.log("qeqweqweqw",this.scrollTop)
+          // this.newAddress = true
+          // this.isEdit = false
+        // }
+      }
+    },
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     fuckYouM() {
       if (this.tooInp.trim() === '') {
         this.fuckYou = false
@@ -718,74 +1806,41 @@ export default {
       this.tooInp = ''
       this.makeGay = false
       this.preferFee = 0
-      this.getTex()
+      // this.getTex()
       this.fuckYou = false
     },
     checkCount() {
-      const carts = []
-      for (const i in this.good) {
-        const o = {
-          createTime: this.good[i].data[0].createTime || new Date().getTime(),
-          goodsCount: 1,
-          goodsDetailsId: this.good[i].data[0].goodsDetailsId,
-          goodsId: this.good[i].data[0].goodsId,
-          groupId: this.good[i].data[0].groupId || null,
-          groupType: this.good[i].groupType
-        }
-        carts.push(o)
-      }
-      if (this.tooInp.trim() === '') {
-        return
-      }
-      this.$axios
-        .post('/web/order/getAnonymousCouponAmount', {
-          couponCode: this.tooInp.trim(),
-          carts,
-          session: new Date().getTime().toString()
-        })
-        .then(res => {
-          this.makeGay = true
-          this.preferFee = res.data
-          this.getTex()
-        })
-        .catch(err => {
-          this.preferFee = 0
-          this.die = true
-          this.familyDie = err.message
-          this.getTex()
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
-    },
-    getTex() {
-      // this.canSubmit = false
+      // const carts = []
+      // for (const i in this.good) {
+      //   const o = {
+      //     createTime: this.good[i].data[0].createTime || new Date().getTime(),
+      //     goodsCount: 1,
+      //     goodsDetailsId: this.good[i].data[0].goodsDetailsId,
+      //     goodsId: this.good[i].data[0].goodsId,
+      //     groupId: this.good[i].data[0].groupId || null,
+      //     groupType: this.good[i].groupType
+      //   }
+      //   carts.push(o)
+      // }
+      // if (this.tooInp.trim() === '') {
+      //   return
+      // }
       // this.$axios
-      //   .get('/web/order/getAnonymousTax', {
-      //     params: {
-      //       countryId: this.country.areaId,
-      //       provinceId: this.province.areaId,
-      //       cityId: this.city.areaId,
-      //       preferFee: this.preferFee,
-      //       productAmount: this.goodsPrice
-      //     }
+      //   .post('/web/order/getAnonymousCouponAmount', {
+      //     couponCode: this.tooInp.trim(),
+      //     carts,
+      //     session: new Date().getTime().toString()
       //   })
       //   .then(res => {
-      //     this.canSubmit = true
-      //     this.tex = res
+      //     this.makeGay = true
+      //     this.preferFee = res.data
+      //     this.getTex()
       //   })
       //   .catch(err => {
-      //     this.canSubmit = false
-      //     this.$message.error(err.message)
-      //     this.tex = {
-      //       logisticsFee: 0,
-      //       taxFee: 0,
-      //       safeFee: 0,
-      //       orderAmount: null,
-      //       planDays: '--'
-      //     }
+      //     this.preferFee = 0
+      //     this.die = true
+      //     this.familyDie = err.message
+      //     this.getTex()
       //     if (!err.response) {
       //       this.$message.error(err.message)
       //     } else {
@@ -793,131 +1848,110 @@ export default {
       //     }
       //   })
     },
-    createOrder() {
-      if (!this.canSubmit) {
-        return
-      }
-      if (this.addressData.firstName === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
-        this.alertBox = true
-        this.wrongInput.firstName = true
-        return false
-      }
-      if (this.addressData.firstName.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip7`)
-        this.alertBox = true
-        this.wrongInput.firstName = true
-        return false
-      }
-      if (this.addressData.lastName === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
-        this.alertBox = true
-        this.wrongInput.lastName = true
-        return false
-      }
-      if (this.addressData.lastName.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip9`)
-        this.alertBox = true
-        this.wrongInput.lastName = true
-        return false
-      }
-      if (
-        !RegMobile.test(this.addressData.userTel) &&
-        !RegTelephone.test(this.addressData.userTel)
-      ) {
-        this.wrongMsg = this.$t(`${lang}.wip2`)
-        this.alertBox = true
-        this.wrongInput.userTel = true
-        return false
-      }
-      if (!Email.test(this.addressData.userMail)) {
-        this.wrongMsg = this.$t(`${lang}.wip3`)
-        this.alertBox = true
-        this.wrongInput.userMail = true
-        return false
-      }
-      if (this.addressData.userMail !== this.addressData.checkEmail) {
-        this.wrongMsg = this.$t(`${lang}.wip3`)
-        this.alertBox = true
-        this.wrongInput.checkEmail = true
-        return false
-      }
-      if (!this.country.areaId) {
-        this.wrongMsg = this.$t(`${lang}.wip4`)
-        this.alertBox = true
-        return false
-      }
-      if (!this.addressData.address) {
-        this.wrongMsg = this.$t(`${lang}.wip5`)
-        this.alertBox = true
-        this.wrongInput.address = true
-        return false
-      }
-      if (
-        !Email.test(
-          this.isSameEmail ? this.addressData.userMail : this.orderEmail
-        )
-      ) {
-        this.wrongMsg = this.$t(`${lang}.msg5`)
-        this.wrongInput.odMail = true
-        this.alertBox = true
-        return false
-      }
-      if (this.remark.length >= 300) {
-        this.wrongMsg = this.$t(`${lang}.msg6`)
-        this.wrongInput.remark = true
-        this.alertBox = true
-        return false
-      }
-      const json = {
-        address: {
-          address: this.addressData.address,
-          cityId: this.city.areaId,
-          countryId: this.country.areaId,
-          firstName: this.addressData.firstName,
-          lastName: this.addressData.lastName,
-          provinceId: this.province.areaId,
-          userMail: this.addressData.userMail,
-          userTel: this.addressData.userTel,
-          userTelCode: this.phoneNum.phone_code,
-          zipCode: this.addressData.zipCode
-        },
-        afterMail: this.isSameEmail
-          ? this.addressData.userMail
-          : this.orderEmail,
-        allSend: this.isAllPack ? 1 : 2,
-        carts: [],
-        orderAmount: this.tex.orderAmount,
-        productAmount: this.goodsPrice,
-        recvType: 1,
-        userRemark: this.remark,
-        session: new Date().getTime().toString(),
-        couponCode: this.tooInp
-      }
+    getTex() {
+      this.canSubmit = false
+      let json=[]
+     
       for (const i in this.good) {
-        const o = {
-          createTime: this.good[i].data[0].createTime || new Date().getTime(),
-          goodsCount: 1,
-          goodsDetailsId: this.good[i].data[0].goodsDetailsId,
-          goodsId: this.good[i].data[0].goodsId,
-          groupId: this.good[i].data[0].groupId || null,
-          groupType: this.good[i].groupType
-        }
-        json.carts.push(o)
+        let group = this.good[i].data
+        let item = group.map(item => {
+          return {
+            createTime: item.createTime || new Date().getTime(),
+            goods_num: item.goodsCount,
+            goodsDetailsId: item.goodsDetailsId,
+            goods_id: item.goodsDetailsId,
+            group_id: item.groupId || null,
+            group_type:item.groupType,
+            goods_type: item.goodsType
+          }
+        })
+
+        json = json.concat(item)
       }
       this.$axios
-        .post('/web/order/createAnonymousOrder', json)
+        .post('/web/member/order-tourist/tax', {
+            goodsCartList:json
+          })
+        .then(res => {
+          this.canSubmit = true
+          this.tex = res.data
+          console.log("税费",this.tex)
+        })
+        .catch(err => {
+          this.canSubmit = false
+          this.$message.error(err.message)
+          // this.tex = {
+          //   logisticsFee: 0,
+          //   taxFee: 0,
+          //   safeFee: 0,
+          //   orderAmount: null,
+          //   planDays: '--'
+          // }
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
+    },
+    createOrder() { 
+      if(this.payWay==''){
+        // console.log("请选择支付方式")_this.$t(`${lang}.codeTips`)
+        this.$errorMessage(this.$t(`${lang}.msg9`))
+        return
+      }
+      let json=[]
+     
+      for (const i in this.good) {
+        let group = this.good[i].data
+        let item = group.map(item => {
+          return {
+            createTime: item.createTime || new Date().getTime(),
+            goods_num: item.goodsCount,
+            goodsDetailsId: item.goodsDetailsId,
+            goods_id: item.goodsDetailsId,
+            group_id: item.groupId || null,
+            group_type:item.groupType,
+            goods_type: item.goodsType
+          }
+        })
+
+        json = json.concat(item)
+      }
+      this.$axios({
+        method: 'post',
+        url: '/web/member/order-tourist/create',
+        data: {
+          goodsCartList:json,
+          tradeType:'pc',
+          coinType:this.$store.state.coin,
+          returnUrl:'https://www.bddco.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com
+        }
+      })
         .then(res => {
           // console.log('od===>', res)
-          this.$store.dispatch('removeCart', this.pathTakeIds)
-          this.$router.replace({
-            path: '/payment-options',
-            query: {
-              orderId: res.orderId,
-              price: res.orderAmount,
-              coinType: res.coinType
-            }
-          })
+          // this.$store.dispatch('removeCart', this.pathTakeIds)
+          if(res.data.config){
+            window.location.replace(res.data.config)
+          }else {
+            this.$router.replace({
+              path: '/complete-payment',
+              query: {
+                orderId: this.$route.query.orderId,
+                price: this.$route.query.price,
+                coinType: this.$route.query.coinType,
+                type: `transfer`
+              }
+            })
+          }
+          // this.$router.replace({
+          //   path: '/payment-options',
+          //   query: {
+          //     orderId: res.orderId,
+          //     price: res.orderAmount,
+          //     coinType: res.coinType
+          //   }
+          // })
         })
         .catch(err => {
           if (!err.response) {
@@ -1475,7 +2509,7 @@ div {
     font-size: 16px;
     color: #666;
     padding-left: 77px;
-
+    margin-top: 20px;
     span {
       display: block;
     }
@@ -2056,6 +3090,7 @@ div {
     position: relative;
     width: 1300px;
     height: 544px;
+    // height: 314px;
     background: rgba(255, 255, 255, 1);
     padding: 30px 50px 0 35px;
     display: flex;
@@ -2491,13 +3526,258 @@ div {
 
       span:nth-child(1) {
         font-family: twCenMt;
-        margin-right: 50px;
+        // margin-right: 50px;
       }
 
       &.disabled {
-        background: #ddd;
-        color: #aaa;
+        // background: #ddd;
+        // color: #aaa;
       }
+    }
+  }
+}
+
+
+// 支付页面样式
+div {
+  box-sizing: border-box;
+}
+// .payways{
+//   position: absolute;
+//   top:300px;
+// }
+.pay {
+  width: 1360px;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+  text-align: left;
+  background: rgba(248, 248, 248, 1);
+  padding: 33px 0px 38px;
+  .buy-btn {
+      position: absolute;
+      bottom: 60px;
+      left: 410px;
+      width: 480px;
+      height: 40px;
+      background: rgba(51, 51, 51, 1);
+      text-align: center;
+      line-height: 40px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      span:nth-child(1) {
+        font-family: twCenMt;
+        margin-right: 50px;
+      }
+    }
+  .order-step {
+    width: 1300px;
+    height: 182px;
+    background: rgba(255, 255, 255, 1);
+    display: flex;
+    position: relative;
+    justify-content: center;
+    padding-top: 36px;
+    margin-bottom: 20px;
+    .one-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      margin-right: 250-31-31px;
+      position: relative;
+      z-index: 9;
+      .step-img {
+        width: 58px;
+        height: 58px;
+        background: rgba(225, 225, 225, 1);
+        border: 4px solid rgba(217, 217, 217, 1);
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+        color: #fff;
+        font-size: 22px;
+        position: relative;
+        box-sizing: border-box;
+        margin-bottom: 4px;
+        img {
+          position: absolute;
+          top: -4px;
+          left: -4px;
+          width: 58px;
+          height: 58px;
+          display: block;
+        }
+        span {
+          position: relative;
+          z-index: 10;
+        }
+      }
+      .step-arrow {
+        width: 12px;
+        height: 6px;
+        margin-bottom: 9px;
+        img {
+          width: 100%;
+          height: 100%;
+          display: block;
+        }
+      }
+      .step-title {
+        font-size: 18px;
+        color: #666;
+        line-height: 18px;
+        margin-bottom: 10px;
+      }
+      .step-desc {
+        color: #666;
+        line-height: 16px;
+        width: 121px;
+        text-align: center;
+        font-size: 12px;
+      }
+    }
+    .one-step:nth-child(3) {
+      margin-right: 0;
+    }
+    .step-line-one {
+      position: absolute;
+      top: 65px;
+      left: 37%;
+      transform: translateX(-50%);
+      width: (250 * 2+58+20)/2px;
+      height: 4px;
+      background: linear-gradient(
+        270deg,
+        rgba(234, 186, 196, 1) 0%,
+        rgba(215, 136, 155, 1) 97%
+      );
+      box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0);
+      z-index: 0;
+    }
+    .step-line-two {
+      position: absolute;
+      top: 65px;
+      left: 62%;
+      transform: translateX(-50%);
+      width: (250 * 2+58+20)/2px;
+      height: 4px;
+      background: #e1e1e1;
+      z-index: 0;
+    }
+  }
+  .pay-ways {
+    width: 1300px;
+    background-color: #fff;
+    padding: 39px 40px 40px;
+    //  padding: 39px 40px 95px;
+    .new-address-title {
+      width: 1300-51-36px;
+      height: 20px;
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 17px;
+      .na-line {
+        width: 4px;
+        height: 20px;
+        background: rgba(207, 164, 141, 1);
+        border-radius: 2px;
+        margin-right: 8px;
+      }
+      .na-title {
+        font-size: 20px;
+        color: #333;
+        line-height: 20px;
+        margin-right: 11px;
+      }
+    }
+    .pay-blocks {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      .pay-block {
+        transition: 0.2s linear;
+        position: relative;
+        width: 590px;
+        height: 120px;
+        background: rgba(248, 248, 248, 1);
+        border: 1px solid rgba(205, 205, 205, 1);
+        margin-bottom: 40px;
+        cursor: pointer;
+        padding: 17px 0 0 53px;
+        .pay-img {
+          width: 189px;
+          height: 56px;
+          /*background-color: pink;*/
+          margin-bottom: 7px;
+          img {
+            display: block;
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .pay-desc {
+          font-size: 14px;
+          color: #1d1d1d;
+          line-height: 14px;
+        }
+        .pay-price {
+          font-size: 24px;
+          font-family: twCenMt;
+          color: #f29b87;
+          position: absolute;
+          right: 80px;
+          top: 50px;
+          line-height: 24px;
+        }
+        .choose-tick {
+          position: absolute;
+          right: 0;
+          bottom: 0;
+          width: 27px;
+          height: 26px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+      .pay-block:hover {
+        box-shadow: 2px 2px 4px 0px rgba(84, 84, 84, 0.16);
+      }
+      .pay-choose {
+        background-color: #ffffff;
+        border: 1px solid rgba(186, 127, 140, 1);
+        box-shadow: 2px 2px 4px 0px rgba(84, 84, 84, 0.16);
+      }
+      .pay-question {
+        position: absolute;
+        bottom: 89px;
+        right: 31px;
+        width: 22px;
+        height: 22px;
+        line-height: 22px;
+        background: rgba(220, 148, 165, 1);
+        border-radius: 50%;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        z-index: 29;
+      }
+    }
+    .pay-btn {
+      width: 480px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      color: #fff;
+      background: rgba(51, 51, 51, 1);
+      cursor: pointer;
+      margin: 0 auto;
     }
   }
 }

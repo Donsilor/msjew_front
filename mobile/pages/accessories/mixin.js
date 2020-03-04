@@ -30,8 +30,8 @@ export default {
           type: 'eject-choose',
           key: 'price-bar',
           name: this.LANGUAGE.listCommons.price,
-          checked: ``,
-          options: []
+          checked: (typeof this.$route.query.startPrice !== 'undefined' && typeof this.$route.query.endPrice !== 'undefined')  ? this.$route.query.startPrice + '-' + this.$route.query.endPrice:'',
+          options: (typeof this.$route.query.startPrice !== 'undefined' && typeof this.$route.query.endPrice !== 'undefined')  ? [{id:this.$route.query.startPrice,name:this.$route.query.startPrice/1000 + `K`},{id:this.$route.query.endPrice,name:this.$route.query.endPrice/1000 + `K`}]:[]
         }
       ],
       conditionWord: this.CONDITION_INFO.sortBy.default[0].content,

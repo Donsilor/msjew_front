@@ -218,7 +218,7 @@
             <div class="register-input margin-right-20">
               <input
                 v-model="code"
-                 
+                readonly onfocus="this.removeAttribute('readonly');"
                 @focus="focusEvent3"
                 @blur="blurEvent3"
                 v-bind:class="{active:isActivecode}"
@@ -241,7 +241,7 @@
           <div class="register-input">
             <input
               v-model="password"
-               
+              readonly onfocus="this.removeAttribute('readonly');" 
               @focus="focusEvent4"
               @blur="blurEvent4"
               v-bind:class="{active:isActivepwd}"
@@ -325,6 +325,7 @@ export default {
   },
   data() {
     return {
+      url:this.$route.query.url,
       lang,
       langcode,
       waitingTime: defaultTime,
@@ -544,8 +545,11 @@ export default {
 		  localStorage.setItem('accessToken',data.access_token);
           _this.$store.commit('setToken', data.access_token)
           _this.$store.commit('setUserInfo',data.member)
-          const lastUrl = _this.$store.state.lastUrl
-          _this.$store.commit('setLastUrl', '')
+            // const lastUrl = _this.$store.state.lastUrl
+            const lastUrl=localStorage.getItem("url")
+          _this.$store.dispatch('synchronizeCart')
+          // const lastUrl = _this.$store.state.lastUrl
+          // _this.$store.commit('setLastUrl', '')
 		  
           setTimeout(() => {
             if (lastUrl) {
@@ -608,9 +612,11 @@ export default {
 		  localStorage.setItem('accessToken',data.access_token);
           _this.$store.commit('setToken', data.access_token)
           _this.$store.commit('setUserInfo',data.member)
-          const lastUrl = _this.$store.state.lastUrl
-          _this.$store.commit('setLastUrl', '')
-		  
+          // const lastUrl = _this.$store.state.lastUrl
+          // _this.$store.commit('setLastUrl', '')
+            // const lastUrl = _this.$store.state.lastUrl
+            const lastUrl=localStorage.getItem("url")
+          _this.$store.dispatch('synchronizeCart')
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({

@@ -120,6 +120,7 @@ export default {
   mixins: [Input],
   data () {
     return {
+      url:this.$route.query.url,
       lang,
       account: '',
       mobile: '',
@@ -134,9 +135,11 @@ export default {
       mailErr: false,
       isActive1: false,
       isActive2: false,
-      isActive3: false
+      isActive3: false,
+      oldUrl:''
     }
   },
+  
   watch: {
     // mobile(){
     //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
@@ -147,13 +150,31 @@ export default {
     //   }
     // }
   },
+  // mixins: [],
+  // vuex: {
+  //  actions: {fetchCertificates},
+  // },
+
   computed: {
     //  aa(){
     //    let result=this.$store.state.refreshCode
     //    console.log(result) 
     //  }
   },
+  beforeRouteEnter (to, from, next){
+    next(vm => {
+      // 通过 `vm` 访问组件实例,将值传入oldUrl
+      console.log("ssssss",vm)
+      vm.oldUrl = from.path
+    })
+  },
   mounted () {
+    // this.$nextTick(()=>{
+    //   // 验证是否获取到了上页的url
+    //   console.log(this.oldUrl)
+    // })
+    
+    // console.log("url-------",this.url)
     // if(this.mobile==''){
     //   this.isActive1=true
     //   this.phoneErr=true
@@ -161,6 +182,7 @@ export default {
     this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {
+       console.log("ssaasa",this.oldUrl)
       _this.refreshCode()
     })
   },
@@ -255,8 +277,10 @@ export default {
             _this.$successMessage(_this.$t(`${lang}.logintips`))
             _this.$store.commit('setToken', data.access_token)
             _this.$store.commit('setUserInfo', data.member)
-            const lastUrl = _this.$store.state.lastUrl
-            _this.$store.commit('setLastUrl','')
+             _this.$store.dispatch('synchronizeCart')
+            // const lastUrl = _this.$store.state.lastUrl
+            const lastUrl=localStorage.getItem("url")
+            // _this.$store.commit('setLastUrl','')
             console.log('login', lastUrl)
 
             setTimeout(() => {
@@ -325,9 +349,10 @@ export default {
             _this.$successMessage(_this.$t(`${lang}.logintips`))
             _this.$store.commit('setToken', data.access_token)
             _this.$store.commit('setUserInfo', data.member);
-            
-            const lastUrl = _this.$store.state.lastUrl
-            _this.$store.commit('setLastUrl', '')
+             _this.$store.dispatch('synchronizeCart')
+            // const lastUrl = _this.$store.state.lastUrl
+            // _this.$store.commit('setLastUrl', '')
+            const lastUrl=localStorage.getItem("url")
 			      console.log('loginf', lastUrl)
             setTimeout(() => {
               if (lastUrl) {
@@ -337,7 +362,7 @@ export default {
               }
               else {
                 _this.$router.replace({
-                  path: '/'
+                  path:'/'
                 })
               }
             }, 0)

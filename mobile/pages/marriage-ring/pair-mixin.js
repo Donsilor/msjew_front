@@ -304,7 +304,7 @@ export default {
     this.$axios
       .get(`/wap/goodsComments/getAvgLevel`, {
         params: {
-          groupId: this.$route.query.ringId
+          groupId: this.$route.query.goodId
         }
       })
       .then(res => {
@@ -316,7 +316,7 @@ export default {
     this.$axios
       .get(`/wap/goodsComments/getGoodsComments`, {
         params: {
-          groupId: this.$route.query.ringId,
+          groupId: this.$route.query.goodId,
           page: 1,
           page_size: 99999,
           shouType: 1

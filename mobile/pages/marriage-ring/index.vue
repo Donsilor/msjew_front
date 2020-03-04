@@ -374,12 +374,12 @@ export default {
     },
     toPairRingDetail(info) {
       if (info.showType === 1) {
-        window.open(`/marriage-ring/pair-ring-detail?ringId=${info.id}`)
+        window.open(`/marriage-ring/pair-ring-detail?goodId=${info.id}`)
       } else {
         this.$router.push({
           name: 'marriage-ring-pair-ring-detail',
           query: {
-            ringId: info.id
+            goodId: info.id
           }
         })
       }

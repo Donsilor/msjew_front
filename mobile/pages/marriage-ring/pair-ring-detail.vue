@@ -44,7 +44,7 @@ export default {
         token: store.state.token || ''
       },
       params: {
-        ringId: route.query.ringId
+        ringId: route.query.goodId
       }
     })
       .then(res => {
@@ -72,7 +72,7 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       const options = {
-        params: { groupId: _this.$route.query.ringId }
+        params: { groupId: _this.$route.query.goodId }
       }
       _this.$store
         .dispatch('getGoodAvgLevel', options)

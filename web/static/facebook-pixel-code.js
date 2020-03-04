@@ -10,8 +10,9 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '1026397204360675');
 fbq('track', 'PageView');
-
+/*
 <noscript>< img height="1" width="1" style="display:none"
 src="https://www.facebook.com/tr?id=1026397204360675&ev=PageView&noscript=1"
 /></noscript>
+*/
 // <!-- End Facebook Pixel Code -->
