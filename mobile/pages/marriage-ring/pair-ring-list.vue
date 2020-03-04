@@ -140,7 +140,7 @@ export default {
       const reqMark = `${page}-${keyword}`
 
       if (this.isRequesting(reqMark)) {
-        console.log('不重复请求')
+        // console.log('不重复请求')
         return
       }
 

@@ -134,7 +134,7 @@ export default {
       const melo = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.melo)
       )
-      console.log(`Carmelo Anthony=======>`, melo)
+      // console.log(`Carmelo Anthony=======>`, melo)
       if (parseInt(melo.steps[0].ct) === 1) {
         this.makeDiamond(melo.steps[0].goodsId)
         this.makeOther(melo.steps[1].goodsId)
@@ -154,7 +154,7 @@ export default {
         }
       })
         .then(res => {
-          console.log(`finish's Diamond=======>`, res)
+          // console.log(`finish's Diamond=======>`, res)
           res.goodsImages = res.goodsImages.split(`,`)[0] || ``
           this.info2 = res
         })
@@ -171,7 +171,7 @@ export default {
         }
       })
         .then(res => {
-          console.log(`finish's Other=======>`, res)
+          // console.log(`finish's Other=======>`, res)
           this.swiperImg = res.goodsImages.split(`,`)
           res.goodsImages = res.goodsImages.split(`,`)[0] || ``
           this.info1 = res

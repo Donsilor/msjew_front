@@ -120,12 +120,12 @@ export default {
     }
   },
   created() {
-    console.log('w333', JSON.parse(this.$route.query.info))
+    // console.log('w333', JSON.parse(this.$route.query.info))
   },
   methods: {
     formatMoney: formatMoney,
     changeType(ind) {
-      console.log("选择",ind)
+      // console.log("选择",ind)
       this.typeIndex = ind
       if (ind === 5) {
         this.price = this.info.orderAmount * 0.985
@@ -154,7 +154,7 @@ export default {
       // ) {
       //   pay = 7
       // }
-      console.log("paytype",pay)
+      // console.log("paytype",pay)
       let baseUrl=this.$store.getters.baseUrl
       this.$axios({
         // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/ http://wap.bdd.bddia.com https://wap.bddco.com/complete/paySuccess
@@ -170,7 +170,7 @@ export default {
       })
         .then(res => {
 
-          console.log("config",res)
+          // console.log("config",res)
           if (res.config) {
             if (pay !== 7) {
               window.location.replace(res.config)
@@ -200,7 +200,7 @@ export default {
               })
             }
           } else if (!res.config){
-            console.log(88888888)
+            // console.log(88888888)
             this.isPay = false
             this.$router.replace({
               name: 'complete-paySuccess-orderId-price-coinType',
@@ -226,7 +226,7 @@ export default {
         })
     },
     showSelect() {
-      console.log('6767')
+      // console.log('6767')
     }
   }
 }

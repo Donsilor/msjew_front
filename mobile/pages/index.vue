@@ -395,7 +395,7 @@ export default {
       this.activeCard = index
     },
     toCardDetail(card) {
-      console.log('card====>', card)
+      // console.log('card====>', card)
       if (!card) {
         return
       }
@@ -442,7 +442,7 @@ export default {
           routerUrl = '/marriage-ring/single-ring-detail'
           return
         }
-        console.log('都不是')
+        // console.log('都不是')
       }
 
       switch (card.categoryId) {
@@ -498,7 +498,7 @@ export default {
     moreCard() {
       const card = this.cards[this.activeCard]
 
-      console.log('card====>', card)
+      // console.log('card====>', card)
       if (!card) {
         return
       }
@@ -545,7 +545,7 @@ export default {
           })
           return
         }
-        console.log('都不是')
+        // console.log('都不是')
       }
 
       let routerName = ''
@@ -613,7 +613,7 @@ export default {
         query: routerQuery
       })
 
-      console.log('configAttrIds===>', configAttrIds)
+      // console.log('configAttrIds===>', configAttrIds)
     },
     routerTo(routerName = '', query = {}) {
       if (!routerName) {

@@ -88,7 +88,7 @@ export default {
       }
     })
       .then(res => {
-        console.log(4444,res)
+        // console.log(4444,res)
         const mcArr = []
         for (const i in res.materials) {
           const o = {
@@ -212,7 +212,7 @@ export default {
       return result.join(', ')
     },
     showChooseEject(info) {
-      console.log(info)
+      // console.log(info)
       const refName = `${info.key}-${info.type}`
       this.$refs[refName] &&
         this.$refs[refName].showIt(this.conditions[0].checked)
@@ -257,7 +257,7 @@ export default {
       if (!(this.canAddCart && this.inSale)) {
         return
       }
-      console.log(this.sendGoodsId, this.sendDetailsId)
+      // console.log(this.sendGoodsId, this.sendDetailsId)
       if (!this.sendGoodsId || !this.sendDetailsId) {
         this.$toast(this.lang.chooseRingSizeToast)
         return

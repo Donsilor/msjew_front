@@ -1897,8 +1897,11 @@ export default {
         })
     },
     createOrder() { 
+      if(this.payWay!==6){
+        this.$errorMessage(this.$t(`${lang}.firstLogin`))
+        return
+      }
       let baseUrl=this.$store.getters.baseUrl
-
       if(this.payWay==''){
         // console.log("请选择支付方式")_this.$t(`${lang}.codeTips`)
         this.$errorMessage(this.$t(`${lang}.msg9`))

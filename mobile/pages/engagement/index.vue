@@ -220,7 +220,7 @@ export default {
       }
     })
       .then(data => {
-        console.log(444444,data)
+        // console.log(444444,data)
         return {
           seoInfo,
           ad: data.advert,
@@ -297,13 +297,13 @@ export default {
       }
     },
     testClick() {
-      console.log('testClick')
+      // console.log('testClick')
     },
     bannerChange(index) {
-      console.log('bannerChange===>', index)
+      // console.log('bannerChange===>', index)
     },
     changeActivePairRing(index) {
-      console.log('changeActivePairRing===>', index)
+      // console.log('changeActivePairRing===>', index)
       this.activeRecommend = index
     },
     toUrl(info = {}) {

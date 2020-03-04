@@ -224,7 +224,7 @@ export default {
         }
       })
         .then(data => {
-          console.log(data)
+          // console.log(data)
           // _this.sendReturn(data)
         })
         .catch(err => {
