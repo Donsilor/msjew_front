@@ -80,12 +80,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        // {
-        //   url: '/cart/card.png',
-        //   type: 1,
-        //   title: this.LANGUAGE.cart.pay.payType1,
-        //   des: this.LANGUAGE.cart.pay.type1Text
-        // },
+        {
+          url: '/cart/paydollar.png',
+          type: 8,
+          title: this.LANGUAGE.cart.pay.payType1,
+          des: this.LANGUAGE.cart.pay.type1Text
+        }
         // {
         //   url: '/cart/up.png',
         //   type: 2,
@@ -139,7 +139,7 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 2
+        pay = 8
       }else if(this.typeIndex == 5){
         pay = 7
       }
