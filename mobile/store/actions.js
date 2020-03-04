@@ -98,7 +98,9 @@ export default {
             localStorage.setItem('refreshAreaTime',nowDate)
             if(data.area_id != areaId) {
                 commit('setAreaId', data.area_id)
-                window.location.reload();
+                if(data.area_id != 99) {
+                    window.location.reload();
+                }                
             } 
             
         })

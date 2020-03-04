@@ -137,6 +137,7 @@ export default {
     },
     //根据IP缓存本地默认 地区，语言，货币
     localAreaSetting({ $axios, state, getters, commit, dispatch }){
+
         let areaId = Cookie.get('areaId')
         let language = Cookie.get('language')
         let coin = Cookie.get('coin')        
@@ -161,7 +162,9 @@ export default {
             localStorage.setItem('refreshAreaTime',nowDate)
             if(data.area_id != areaId) {
                 commit('setAreaId', data.area_id)
-                window.location.reload();
+                if(data.area_id != 99) {
+                    window.location.reload();
+                }                              
             }
                                  
         })

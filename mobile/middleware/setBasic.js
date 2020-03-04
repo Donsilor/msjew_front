@@ -8,6 +8,10 @@ export default function({ req, res, app, store }) {
 
   if (isServer) {
     const resetCookie = []
+    let _language = 'en_US' //默认语言
+    let _coin = 'USD'  //默认货币
+    let _areaId = 99 //默认地区
+
     let coin = ''
     let language = ''
     let lastUrl = ''
@@ -39,6 +43,8 @@ export default function({ req, res, app, store }) {
       // console.log('reset coin====>', coin)
       resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
       store.commit('setCoin', coin)
+    }else{
+      store.commit('setCoin', _coin)
     }
     if (language) {
       let trueLanguage = false
@@ -53,10 +59,14 @@ export default function({ req, res, app, store }) {
       }
       resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
       store.commit('setLanguage', language)
+    }else{
+      store.commit('setLanguage', _language)
     }
     if (areaId) {   
       resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)   
       store.commit('setAreaId', areaId)
+    }else{
+      store.commit('setAreaId', _areaId)
     }
     if (lastUrl) {
       resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
