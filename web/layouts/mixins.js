@@ -31,10 +31,8 @@ export default {
                 // 获取用户数据
                 await _this.$store.dispatch('getUserInfo')
                 // 同步购物车
-                await _this.$store.dispatch('')
-                await _this.$store.dispatch('getOnlineCartAmount')
-                //  _this.$store.dispatch('getOnlineCartAmount')
                 await _this.$store.dispatch('synchronizeCart')
+                await _this.$store.dispatch('getOnlineCartAmount')              
                 // 同步心愿单 暂时屏蔽2020-2-28
                 //await _this.$store.dispatch('synchronizeWish')
                 // 同步对比 暂时屏蔽2020-2-28

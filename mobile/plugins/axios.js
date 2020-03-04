@@ -4,8 +4,8 @@ export default function ({
 }) {
     $axios.onRequest(config => {
         config.headers['x-api-key'] = store.state.token || ''
-        config.headers['x-api-currency'] = store.state.coin || 'CNY'
-        config.headers['x-api-language'] = store.state.language || 'zh_CN'
+        config.headers['x-api-currency'] = store.state.coin || ''
+        config.headers['x-api-language'] = store.state.language || ''
         config.headers['x-api-area'] = store.state.areaId || '' // 当前所属地区
         config.headers['x-api-server'] = process.server ? 1 : 0 //是否是服务器端请求
         config.headers['x-api-platform'] = 'wap'
