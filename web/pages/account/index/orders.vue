@@ -47,11 +47,11 @@
           <div v-for="(d, _index) in o.details" :key="_index" class="list-body">
             <div class="left">
               <nuxt-link :to="goDetails(d)"
-                ><img :src="IMG_URL + d.goodsImages"
+                 target="_blank"><img :src="IMG_URL + d.goodsImages"
               /></nuxt-link>
             </div>
             <div class="mid">
-              <nuxt-link :to="goDetails(d)">
+              <nuxt-link :to="goDetails(d)" target="_blank">
                 <h5>{{ d.goodsName }}</h5>
                 <p>SKU：{{ d.goodsCode }}</p>
                 <div
@@ -550,9 +550,9 @@ export default {
         }
       } else {
         // console.log(obj.data[0].simpleGoodsEntity)
-        const ct = obj.categoryId
+        const ct = parseInt(obj.categoryId)
         // console.log(ct)
-        if (ct === '15') {
+        if (ct === 15) {
           // console.log(`💎`)
           route = {
             path: `/diamond-details/${obj.goodsId.replace(/\//g, '')}`,
@@ -560,7 +560,7 @@ export default {
               goodId: obj.goodsId
             }
           }
-        } else if (ct === '2' ||ct === '13' || ct === '14') { //戒指
+        } else if (ct === 2 ||ct === 13 || ct === 14) { //戒指
           // console.log(`💍`)
           route = {
             path: `/ring/wedding-rings/${obj.goodsId.replace(/\//g, '')}`,
@@ -569,7 +569,7 @@ export default {
               ringType: 'single'
             }
           }
-        }else if (ct === '12') { //戒托
+        }else if (ct === 12) { //戒托
           // console.log(`💍`)
           route = {
             path: `/ring/engagement-rings/${obj.goodsId.replace(/\//g, '')}`,
