@@ -601,7 +601,7 @@ export default {
 
 <style scoped lang="less">
 .address {
-  min-height: 100%;
+  min-height: 100vh;
   background: #f5f5f5;
   .content {
     display: inline-block;
