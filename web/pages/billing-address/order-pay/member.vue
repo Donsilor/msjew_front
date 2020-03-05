@@ -903,7 +903,7 @@
 
           <!--          电话-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.telephone`) }}</div>
+            <div class="label">{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
                 <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
