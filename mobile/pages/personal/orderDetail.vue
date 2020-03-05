@@ -408,8 +408,8 @@ export default {
               return item.value
             })
             .join(' / ')
-          groups[good.joinCartTime].goodsPrice += good.goodsPrice
-          groups[good.joinCartTime].data.push(good)
+          // groups[good.joinCartTime].goodsPrice += good.goodsPrice
+          groups[good.id].data.push(good)
         } else {
           const newGroup = {
             id: `${good.orderId}-${good.joinCartTime}`,
@@ -448,7 +448,7 @@ export default {
           newGroup.data = [good]
           newGroup.image = this.imageStrToArray(newGroup.image)[0]
 
-          groups[good.joinCartTime] = newGroup
+          groups[good.id] = newGroup
         }
       })
 
@@ -624,8 +624,12 @@ export default {
             break
           case 2:
             // 戒指
-            ringRouter(info.data[0].specs[0].configAttrId)
+            // ringRouter(info.data[0].specs[0].configAttrId)
             // ringRouter(info.data[0].configAttrId)
+            routerName = 'marriage-ring-single-ring-detail'
+            routerQuery = {
+              goodId: goodId
+            }
             break
           case 3:
             // 珠宝饰品
@@ -676,6 +680,20 @@ export default {
               goodId: goodId
             }
             break
+          case 12:
+          //戒托--订婚戒指
+          routerName = 'engagement-engagement-rings'
+          routerQuery = {
+            goodId: goodId
+          }
+          break
+          case 15:
+          // 裸钻
+          routerName = 'diamond-diamonds'
+          routerQuery = {
+            goodId: goodId
+          }
+          break
         }
       }
       if ([1].indexOf(info.groupType) > -1) {

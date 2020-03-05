@@ -25,7 +25,7 @@
                 <span>x 1</span>
                 <p>SKU：{{ detail.data[0].goodsCode }}</p>
                 <p>{{ detail.data[0].detailSpecs }}</p>
-                <b>{{ order.coinCode }} {{ order.productAmount }}</b>
+                <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
               </div>
 
               <!--              对戒-->
@@ -159,11 +159,11 @@ export default {
       let showData = JSON.parse(JSON.stringify(this.showData))
       showData = showData.map(order => {
         const details = order.details
-
+        
         // 以joinCartTime为下标，组合对戒和定制
         const groups = {}
         const result = []
-
+      
         details.map(good => {
           if (groups.hasOwnProperty(good.joinCartTime)) {
             // 将数据处理为直接可用的数据
@@ -209,10 +209,10 @@ export default {
 
             newGroup.data = [good]
             newGroup.image = this.imageStrToArray(newGroup.image)[0]
-            groups[good.joinCartTime] = newGroup
+            groups[good.id] = newGroup
           }
         })
-
+        
         let keys = Object.keys(groups)
         keys = keys.sort((a, b) => {
           return b - a
