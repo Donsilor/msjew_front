@@ -383,19 +383,19 @@
               </div>
 
               <!-- <div
-                :class="{ 'pay-choose': payWay === 5 }"
+                :class="{ 'pay-choose': payWay === 8 }"
                 class="pay-block"
-                @click="payWay = 5"
+                @click="Way(8)"
               >
                 <div class="pay-img">
-                  <img src="../../static/order/visapay.png" alt="" />
+                  <img src="../../../static/order/paydollar.jpg" alt="" />
                 </div>
-                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-                <div v-show="payWay == 5" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
+                <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
+                <div v-show="payWay == 8" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
-                <div v-show="payWay == 5" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
+                <div v-show="payWay == 8" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div> -->
               <!-- <div
@@ -467,7 +467,7 @@
                 </div>
               </div> -->
 
-              <div class="pay-question" @click="answer = true">?</div>
+              <!-- <div class="pay-question" @click="answer = true">?</div> -->
             </div>
             <!-- <div
               :class="['buy-btn', { disabled: !canSubmit }]"
@@ -1164,20 +1164,20 @@
                 </div>
               </div>
 
-              <!-- <div
-                :class="{ 'pay-choose': payWay === 5 }"
+               <!-- <div
+                :class="{ 'pay-choose': payWay === 8 }"
                 class="pay-block"
-                @click="payWay = 5"
+                @click="Way(8)"
               >
                 <div class="pay-img">
-                  <img src="../../static/order/visapay.png" alt="" />
+                  <img src="../../../static/order/paydollar.jpg" alt="" />
                 </div>
-                <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-                <div v-show="payWay == 5" class="pay-price">
-                  {{ coinType }} {{ formatMoney(price) }}
+                <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
+                <div v-show="payWay == 8" class="pay-price">
+                  {{  $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
-                <div v-show="payWay == 5" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
+                <div v-show="payWay == 8" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div> -->
               <!-- <div
@@ -1249,7 +1249,7 @@
                 </div>
               </div> -->
 
-              <div class="pay-question" @click="answer = true">?</div>
+              <!-- <div class="pay-question" @click="answer = true">?</div> -->
             </div>
             <!-- <div
               :class="['buy-btn', { disabled: !canSubmit }]"
@@ -1704,6 +1704,8 @@ export default {
       })
   },
   mounted() {
+    // const baseUrl=this.$store.getters.baseUrl
+    // console.log("baseUrl",baseUrl)
     // this.getTex()
     this.language = this.getCookie('language')
     window.addEventListener('scroll', this.scrollToTop);
@@ -1895,6 +1897,11 @@ export default {
         })
     },
     createOrder() { 
+      if(this.payWay!==6){
+        this.$errorMessage(this.$t(`${lang}.firstLogin`))
+        return
+      }
+      let baseUrl=this.$store.getters.baseUrl
       if(this.payWay==''){
         // console.log("请选择支付方式")_this.$t(`${lang}.codeTips`)
         this.$errorMessage(this.$t(`${lang}.msg9`))
@@ -1925,7 +1932,7 @@ export default {
           goodsCartList:json,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          returnUrl:'https://www.bddco.com/complete-payment?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com
+          returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
         }
       })
         .then(res => {
@@ -1935,7 +1942,7 @@ export default {
             window.location.replace(res.data.config)
           }else {
             this.$router.replace({
-              path: '/complete-payment',
+              path: '/complete-paySuccess',
               query: {
                 orderId: this.$route.query.orderId,
                 price: this.$route.query.price,

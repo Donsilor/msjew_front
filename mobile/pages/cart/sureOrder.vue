@@ -258,7 +258,7 @@ import { Email } from '../../assets/js/require-lee'
 import { formatMoney } from '@/assets/js/filterUtil.js'
 import NeedKnow from '@/components/cart/needKnow.vue'
 const storage = process.client ? require('good-storage').default : {}
-console.log(storage, 'storage')
+// console.log(storage, 'storage')
 export default {
   name: 'SureOrder',
   layout: 'no-bar',
@@ -283,8 +283,8 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         // {
-        //   url: '/cart/ap.png',
-        //   type: 2,
+        //   url: '/cart/paydollar.png',
+        //   type: 8,
         //   title: this.LANGUAGE.cart.pay.payType3,
         //   des: this.LANGUAGE.cart.pay.type3Text
         // }
@@ -376,18 +376,18 @@ export default {
       // console.log('this.allFee=====>', JSON.stringify(this.allFee))
        if (this.isLogin){
          if (this.allFee.orderAmount === null) {
-           console.log(11111) 
+          //  console.log(11111) 
            result = this.formatMoney(this.productAmount)
          } else  {
-           console.log(22222) 
+          //  console.log(22222) 
            result = this.formatMoney(this.allFee.orderAmount)
          } 
        } else {
          if (this.allFee.order_amount === null) {
-           console.log(11111) 
+          //  console.log(11111) 
            result = this.formatMoney(this.goods_amount)
          } else  {
-           console.log(22222) 
+          //  console.log(22222) 
            result = this.formatMoney(this.allFee.order_amount)
          } 
        }
@@ -395,7 +395,7 @@ export default {
       //   console.log(33333) 
       //   result = '--'
       // }
-      console.log("result",result) 
+      // console.log("result",result) 
       return result
     }
   },
@@ -413,7 +413,7 @@ export default {
       this.list = JSON.parse(storage.get('myCartList', 0))
       // console.log(this.list,'fffffffffffff')
       this.planDays = this.allFee.planDays
-      console.log("allFee",this.planDays)
+      // console.log("allFee",this.planDays)
       this.idList = []
       this.productAmount = 0
       this.list.map((item, index) => {
@@ -449,7 +449,6 @@ export default {
       if(pay!==6){
         this.$toast.show(this.lang.firstLogin)
       }
-      console.log("选择哪一个",pay)
       if (ind === 5) {
         this.price = this.info.orderAmount * 0.985
       } else {
@@ -667,7 +666,7 @@ export default {
           cartIds: this.idList.join(',')
         }
       } else {
-        console.log("this.list",this.list)
+        // console.log("this.list",this.list)
         url = `/web/member/order-tourist/tax`
         const goodsCartList=[]
         for (const i in this.list) {
@@ -682,10 +681,10 @@ export default {
               this.list[i].groupType !== 0 ? this.list[i].groupType : null
           }
           goodsCartList.push(o)
-          console.log("list........",o)
+          // console.log("list........",o)
         }
         data = {goodsCartList:goodsCartList}
-        console.log("list........",data)
+        // console.log("list........",data)
       }
       this.$axios({
         method: 'post',
@@ -823,7 +822,8 @@ export default {
           })
       } else {
         const data = []
-        console.log("未登录",this.list)
+        let baseUrl=this.$store.getters.baseUrl
+        // console.log("未登录",this.list)
         for (const i in this.list) {
           const o = {
             createTime: this.list[i].createTime,
@@ -837,7 +837,7 @@ export default {
           }
           data.push(o)
         }
-        console.log("data",data)
+        // console.log("data",data)
         // console.log("paytype",this.$route.query)
         this.$axios({
           method: 'post',
@@ -846,11 +846,11 @@ export default {
             goodsCartList:data,
             tradeType:'wap',
             coinType:this.$store.state.coin,
-            returnUrl:'https://wap.bddco.com/cart/paySuccess?order_sn={order_sn}' //http://localhost:8328
+            returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
           }
         })
           .then(res => {
-            console.log("返回结果",res)
+            // console.log("返回结果",res)
             // const arr = []
             // this.list.map((item, index) => {
             //   console.log(arr)
@@ -860,10 +860,10 @@ export default {
             if (res.config) {
               window.location.replace(res.config)
             } else if (!res.config){
-              console.log(88888888)
+              // console.log(88888888)
               this.isPay = false
               this.$router.replace({
-                name: 'cart-paySuccess-orderId-price-coinType',
+                name: 'complete-paySuccess-orderId-price-coinType',
                 params: {
                   orderId: this.info.orderId,
                   price: this.info.orderAmount,

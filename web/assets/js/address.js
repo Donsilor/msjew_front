@@ -66,7 +66,7 @@ export default {
           params: { pid: this.country.areaId }
         })
         .then(res => {
-          console.log('省份=====>', res)
+          // console.log('省份=====>', res)
           if (!res.data.length==0) {
             this.provinceList = res.data
             this.provinceList.unshift({
@@ -102,8 +102,8 @@ export default {
           params: { pid:this.province.areaId }
         })
         .then(res => {
-          console.log('城市===>',res)
-          console.log('城市===>qqq',res.data.length)
+          // console.log('城市===>',res)
+          // console.log('城市===>qqq',res.data.length)
           if (!res.data.length==0){
             this.cityList = res.data
             this.cityList.unshift({
@@ -173,7 +173,7 @@ export default {
         .then(res => {
           // console.log(res)
           if (res) {
-            console.log('拿到了城市',res);
+            // console.log('拿到了城市',res);
             this.cityList = res.data
             this.cityList.unshift({
               areaId: '',

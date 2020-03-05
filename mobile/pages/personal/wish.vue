@@ -60,7 +60,7 @@ export default {
           }
         })
         .then(res => {
-          console.log('wish===>', res)
+          // console.log('wish===>', res)
           _this.list = []
           const body = res.list
           for (const i in res.list) {

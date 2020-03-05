@@ -119,7 +119,7 @@ export default {
         }
       })
         .then(data => {
-          console.log('data====>', data)
+          // console.log('data====>', data)
           this.doFormat(data.details)
         })
         .catch(err => {
@@ -138,7 +138,7 @@ export default {
     },
     // 格式化数据列表
     doFormat(res) {
-      console.log('res', res)
+      // console.log('res', res)
       this.list = []
       if (res && res.length > 0) {
         res.map((item, index) => {
@@ -160,7 +160,7 @@ export default {
           }
           this.list.push(o)
         })
-        console.log('list>', this.list)
+        // console.log('list>', this.list)
       } else {
       }
     },

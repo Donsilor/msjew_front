@@ -28,7 +28,7 @@ export default function({ req, res, redirect, store }) {
       query.token &&
       !req.originalUrl.includes('/paySuccess/') &&
       !req.originalUrl.includes('/payFailed/')&&
-      !req.originalUrl.includes('/complete-payment')
+      !req.originalUrl.includes('/complete-paySuccess')
     ) {
       token = query.token
     } else if (req.headers.cookie) {

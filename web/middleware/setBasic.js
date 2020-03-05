@@ -8,7 +8,10 @@ export default function(content) {
   const languageOptions = definition.languageOptions
 
   if (isServer) {
-    const resetCookie = []
+    const resetCookie = []    
+    let _language = 'en_US' //默认语言
+    let _coin = 'USD'  //默认货币
+    let _areaId = 99 //默认地区
     let coin = ''
     let language = ''
     let lastUrl = ''
@@ -40,9 +43,7 @@ export default function(content) {
       resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
       store.commit('setCoin', coin)
     } else {
-      coin = app.$bddDefinition.coinOptions[0].code
-      //resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
-      store.commit('setCoin', coin)
+      store.commit('setCoin', _coin)
     }
 
     if (language) {
@@ -56,17 +57,18 @@ export default function(content) {
       if (!trueLanguage) {
         language = languageOptions[0].code
       }
+      console.log('language:Setbasic1:',language)
       resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
       store.commit('setLanguage', language)
     } else {
-      language = app.$bddDefinition.languageOptions[0].code
-      //resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
-      store.commit('setLanguage', language)
+      store.commit('setLanguage', _language)
     }
-
+    
     if (areaId) {      
       resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
       store.commit('setAreaId', areaId)
+    }else{
+      store.commit('setAreaId', _areaId)
     }
 
     if (lastUrl) {

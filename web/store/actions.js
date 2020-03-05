@@ -137,6 +137,7 @@ export default {
     },
     //根据IP缓存本地默认 地区，语言，货币
     localAreaSetting({ $axios, state, getters, commit, dispatch }){
+
         let areaId = Cookie.get('areaId')
         let language = Cookie.get('language')
         let coin = Cookie.get('coin')        
@@ -152,16 +153,24 @@ export default {
             url: `/web/site/setting`
         }).then(res => {
             const data = res.data
+            let setFlag = false
             if(!language) {
+                setFlag = true
                 commit('setLanguage', data.language)
             }                    
-            if(!coin) {               
+            if(!coin) {  
+                setFlag = true             
                 commit('setCoin', data.currency)
             }
-            localStorage.setItem('refreshAreaTime',nowDate)
-            if(data.area_id != areaId) {
+            if(data.area_id != areaId) {                
                 commit('setAreaId', data.area_id)
-                window.location.reload();
+                if(data.area_id != 99) {
+                    setFlag = true 
+                }                
+            } 
+            localStorage.setItem('refreshAreaTime',nowDate)
+            if(setFlag) {
+                location.reload();
             }
                                  
         })
@@ -637,11 +646,8 @@ export default {
         return cart.length
     },
     // 使用本地购物车数据置换购物车商品数据
-    localCartToGoodsInfo (
-        { $axios, state, getters, commit, dispatch },
-        localCart
-    ) {
-        console.log("localtion",localCart)
+    localCartToGoodsInfo ({ $axios, state, getters, commit, dispatch },localCart) {
+        //console.log("localtion",localCart)
         let data = null
         if (Array.isArray(localCart)) {
             data = localCart
@@ -664,7 +670,6 @@ export default {
         let sendData = []
         data.forEach(item => {
             let goods = item.data
-            console.log(goods,'dssasdf')
             // console.log('goods----------->', item)
             goods = goods.map(good => {
                 good.updateTime = item.id
@@ -675,7 +680,7 @@ export default {
             sendData = sendData.concat(goods)
         })
 
-        console.log('sendData===========>', sendData)
+        //console.log('sendData===========>', sendData)
 
         return this.$axios({
             method: 'post',
@@ -685,7 +690,7 @@ export default {
             }
         })
             .then(res => {
-                console.log("本地置换数据",res.data)
+                //console.log("本地置换数据",res.data)
                 return makeCartGoodGroups(res.data)
             })
             .catch(err => {
@@ -717,11 +722,8 @@ export default {
         })
     },
     // 根据购物车id获取对应的购物车商品
-    async getCartGoodsByCartId (
-        { $axios, state, getters, commit, dispatch },
-        goods = []
-    ) {
-        console.log('getCartGoodsByCartId=====>',goods)
+    async getCartGoodsByCartId ({ $axios, state, getters, commit, dispatch },goods = []) {
+        //console.log('getCartGoodsByCartId=====>',goods)
         let data = null
         if (Array.isArray(goods)) {
             data = JSON.parse(JSON.stringify(goods))
@@ -745,7 +747,7 @@ export default {
             }
         })
         // console.log(`inTest=====> `, cart)
-        console.log(`cccc=====> `, result)
+        //console.log(`cccc=====> `, result)
         return result
     },
 
@@ -868,7 +870,7 @@ export default {
             return item
         })
 
-        console.log('addWish=========>', goods)
+        //console.log('addWish=========>', goods)
 
         return new Promise(async (resolve, reject) => {
             try {
