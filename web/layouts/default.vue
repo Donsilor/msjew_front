@@ -20,20 +20,35 @@
   import Mixin from './mixins'
   export default {
     mixins: [Mixin],
+    // provide () {
+    //   return {
+    //     reload: this.reload,
+      
+    //   }
+    // },
     data() {
       return {
         scrollTop: 0,
-        btnFlag: false
+        btnFlag: false,
+        // isRouterAlive: true
       }
     },
     mounted() {
       const _this = this
       _this.$nextTick(() => {
         // _this.getSetting()
+        console.log(10)
         if (!_this.$store.state.coin || !_this.$store.state.language) {}
       })
     },
     methods: {
+      // reload () {
+      //   this.isRouterAlive = false
+      //   this.$nextTick(function () {
+        
+      //     this.isRouterAlive = true
+      //   })
+      // },
       goTo(){
         const topB = document.getElementsByClassName('layout-box')[0];
 

@@ -58,18 +58,18 @@
         </div>
 
         <!-- <div
-          :class="{ 'pay-choose': payWay === 5 }"
+          :class="{ 'pay-choose': payWay === 8 }"
           class="pay-block"
-          @click="payWay = 5"
+          @click="payWay = 8"
         >
           <div class="pay-img">
-            <img src="../../static/order/visapay.png" alt="" />
+            <img src="../../static/order/paydollar.jpg" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-          <div v-show="payWay == 5" class="pay-price">
+          <div v-show="payWay == 8" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 5" class="choose-tick">
+          <div v-show="payWay == 8" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div> -->
@@ -141,7 +141,7 @@
           </div>
         </div> -->
 
-        <div class="pay-question" @click="answer = true">?</div>
+        <!-- <div class="pay-question" @click="answer = true">?</div> -->
       </div>
       <div class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
     </div>
@@ -181,7 +181,7 @@ export default {
     }
     return {
       lang,
-      payWay: this.$route.query.payType || 2,
+      payWay: this.$route.query.payType || 6,
       answer: false,
       pay: false,
       isPay: false,
@@ -202,14 +202,12 @@ export default {
   methods: {
     goPay() {
       let pay = 0
-      if(this.payWay==2){
-        pay = 2
-      }else if(this.payWay==3){
-        pay = 3
-      }else if(this.payWay==6){
+      if(this.payWay==6){
         pay = 6
+      }else if(this.payWay==8){
+        pay = 8
       }
-    // console.log("方式",pay)
+    console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(
       //     JSON.stringify({
@@ -225,14 +223,15 @@ export default {
       //   ),
       //   false
       // )
+      let baseUrl=this.$store.getters.baseUrl
       const data ={
         orderId: this.$route.query.orderId,
         coinType: this.$route.query.coinType,
-        // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318  https://www.bddco.com/
+        // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318   https://www.bdd.bddia.com https://www.bddco.com/
         // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        returnUrl:'https://www.bddco.com/complete-payment?orderId='+this.$route.query.orderId
+        returnUrl:baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
       }
       this.goingPay = true
       this.$axios
@@ -269,7 +268,7 @@ export default {
             }
           } else {
             this.$router.replace({
-              path: '/complete-payment',
+              path: '/complete-paySuccess',
               query: {
                 orderId: this.$route.query.orderId,
                 price: this.$route.query.price,

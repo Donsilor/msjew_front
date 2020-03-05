@@ -8,10 +8,14 @@ export default function(content) {
   const languageOptions = definition.languageOptions
 
   if (isServer) {
-    const resetCookie = []
+    const resetCookie = []    
+    let _language = 'en_US' //默认语言
+    let _coin = 'USD'  //默认货币
+    let _areaId = 99 //默认地区
     let coin = ''
     let language = ''
     let lastUrl = ''
+    let areaId = ''
 
     const expiresDate = new Date()
     expiresDate.setDate(expiresDate.getDate() + 365)
@@ -22,6 +26,7 @@ export default function(content) {
       coin = cookie.coin || ''
       language = cookie.language || ''
       lastUrl = cookie.lastUrl || ''
+      areaId  = cookie.areaId || ''
     }
 
     if (coin) {
@@ -35,14 +40,10 @@ export default function(content) {
       if (!trueCoin) {
         coin = coinOptions[0].code
       }
-      // console.log('reset coin====>', coin)
-      resetCookie.push(`coin=${coin}; Path=/;`)
-      // res.setHeader('Set-Cookie', [`coin=${coin}; Path=/;`])
+      resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
       store.commit('setCoin', coin)
     } else {
-      coin = app.$bddDefinition.coinOptions[0].code
-      resetCookie.push(`coin=${coin}; Path=/;`)
-      store.commit('setCoin', coin)
+      store.commit('setCoin', _coin)
     }
 
     if (language) {
@@ -56,21 +57,25 @@ export default function(content) {
       if (!trueLanguage) {
         language = languageOptions[0].code
       }
+      console.log('language:Setbasic1:',language)
       resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
-      // res.setHeader('Set-Cookie', [`language=${language}; Path=/;`])
       store.commit('setLanguage', language)
     } else {
-      language = app.$bddDefinition.languageOptions[0].code
-      resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
-      store.commit('setLanguage', language)
+      store.commit('setLanguage', _language)
+    }
+    
+    if (areaId) {      
+      resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
+      store.commit('setAreaId', areaId)
+    }else{
+      store.commit('setAreaId', _areaId)
     }
 
     if (lastUrl) {
       resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
-      // res.setHeader('Set-Cookie', [`lastUrl=${lastUrl}; Path=/;`])
       store.commit('setLastUrl', lastUrl)
     }
-    //console.log('setBasic req====>', resetCookie)
+    console.log('setBasic req====>', resetCookie)
     res.setHeader('Set-Cookie', resetCookie)
   }
 }

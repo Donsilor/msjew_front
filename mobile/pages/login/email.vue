@@ -99,6 +99,7 @@ export default {
   mixins: [Input],
   data () {
     return {
+      url:this.$route.query.url,
       lang: this.LANGUAGE.login.email,
       loginInfo: {
         username: '',
@@ -243,9 +244,12 @@ export default {
           _this.$store.commit('setToken', res.access_token)
           _this.$store.commit('setUserInfo', res.member);
           _this.$toast.show(_this.lang['login-success'])
-
-          const lastUrl = _this.$store.state.lastUrl
-          _this.$store.commit('setLastUrl', '')
+          _this.$store.dispatch('synchronizeCart')
+          // _this.$store.dispatch('synchronizeCart')
+          // const lastUrl = _this.$store.state.lastUrl
+          const lastUrl=localStorage.getItem("url")
+          // _this.$store.commit('setLastUrl', '')
+          console.log("order-lastUrL",lastUrl)
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({
@@ -301,8 +305,11 @@ export default {
           _this.$store.commit('setToken', res.access_token)
           _this.$toast.show(_this.lang['login-success'])
           _this.$store.commit('setUserInfo', res.member);
-          const lastUrl = _this.$store.state.lastUrl
-          _this.$store.commit('setLastUrl', '')
+          // const lastUrl = _this.$store.state.lastUrl
+          const lastUrl=localStorage.getItem("url")
+           _this.$store.dispatch('synchronizeCart')
+          // _this.$store.commit('setLastUrl', '')
+          console.log("order-lastUrL",lastUrl)
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({

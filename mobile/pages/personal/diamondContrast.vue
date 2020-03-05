@@ -275,7 +275,7 @@ export default {
         .catch(err => {
           console.log('err:', err)
         })
-      console.log(this.list, '5555')
+      // console.log(this.list, '5555')
     },
     godetail(id) {
       this.$router.push({

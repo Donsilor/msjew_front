@@ -33,6 +33,10 @@ export default {
     // console.log('setUserInfo=====>', val)
     state.userInfo = val
   },
+  setAreaId(state, val) {
+    state.areaId = val
+    Cookie && Cookie.set('areaId', val, { path: '/' })
+  },
 
   /**
    * 购物车
