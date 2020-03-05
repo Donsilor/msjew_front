@@ -10,7 +10,7 @@ export default {
       keyword: '', // 搜索关键词
       sortType: this.CONDITION_INFO.sortBy.default[0].sortType, // 排序1:升2:降3:默认不排序
       sortBy: this.CONDITION_INFO.sortBy.default[0].sortBy, // 排序字段->默认销量
-      page_size: 20,
+      page_size: 6,
 
       canSearchWithoutKeyword: true,
       pageInfo: null,
@@ -80,7 +80,7 @@ export default {
     defaultPageInfo() {
       return {
         total_count: 0, // 数据总数量
-        page_size: 10, // 每页数量
+        page_size: 6, // 每页数量
         page_count: null, // 最大页码
         page: 0 // 当前页码
       }
