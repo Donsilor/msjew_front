@@ -77,7 +77,7 @@ export default {
       _this.$store
         .dispatch('getGoodAvgLevel', options)
         .then(data => {
-          console.log(data)
+          // console.log(data)
           _this.averageScores = data.hasOwnProperty('avgLevel')
             ? data.avgLevel.toString()
             : '5.0'

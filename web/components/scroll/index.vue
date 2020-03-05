@@ -15,7 +15,7 @@
     },
     mounted() {
       window.addEventListener('scroll', this.scrollToTop);
-      console.log(scroll)
+      // console.log(scroll)
     },
     destroyed() {
       window.removeEventListener('scroll', this.scrollToTop)

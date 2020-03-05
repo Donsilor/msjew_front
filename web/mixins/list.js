@@ -238,7 +238,7 @@ export default {
         }
       }
 
-      console.log(`请求页码为：${page}`)
+      //console.log(`请求页码为：${page}`)
 
       _this
         .$axios({

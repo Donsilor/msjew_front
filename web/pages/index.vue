@@ -506,8 +506,8 @@ export default {
   mounted () {
     const _this = this
     _this.$nextTick(() => {
-    }),
-      console.log(1111)
+      
+    })
   },
   methods: {
     // 页面尺寸改变时触发重新计算

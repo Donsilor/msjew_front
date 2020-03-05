@@ -56,12 +56,12 @@ export default {
         const refName = `${info.key}-${info.type}`
         this.$refs[refName] && this.$refs[refName].showIt()
       } else if (info.type === `eject-choose`) {
-        console.log(this.$refs[info.key])
+        // console.log(this.$refs[info.key])
         this.$refs[info.key].show()
       }
     },
     getCheckedIds(data = []) {
-      console.log(data)
+      // console.log(data)
       const result = []
       for (let n = 0, length = data.length; n < length; n++) {
         result.push(data[n].id)
@@ -126,7 +126,7 @@ export default {
       }
       this.ev += `^goods_mod=1`
       this.research()
-      console.log(this.ev)
+      // console.log(this.ev)
     }
   }
 }

@@ -114,7 +114,7 @@ export default {
     },
     getBacks(val) {
       if (val.name === `carat-bar` || val.name === `price-bar`) {
-        console.log(val)
+        // console.log(val)
         this.conditions.forEach(obj => {
           if (obj.key === val.name) {
             if (val.content.length !== 0) {
@@ -173,7 +173,7 @@ export default {
           .join('||')}`
       }
       this.research()
-      console.log(this.ev)
+      // console.log(this.ev)
     }
   }
 }

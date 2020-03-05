@@ -125,6 +125,7 @@
         "toast2": "移除成功"
       },
       "sureOrder": {
+        "firstLogin":"请先登录！",
         "sureOrder": "确认订单",
         "login": "登入账户",
         "settlement": "以加速结算或是",
@@ -150,6 +151,7 @@
         "cuponName": "选择优惠码",
         "toast1": "暂无可用优惠码",
         "toast2": "请勾选默认地址",
+        "toast4":"请选择支付方式！",
         "toast3": "接收售后凭证的电邮地址输入有误，请重新输入！",
         "delete": "刪除",
         "inputCode": "输入优惠码",
@@ -166,8 +168,8 @@
         "type1Text": "在网上以您的信用卡快速安全地付款",
         "payType2": "中国银行",
         "type2Text": "使用中国银联银行卡安全支付",
-        "payType3": "支付宝",
-        "type3Text": "网上付款、方便、快捷",
+        "payType3": "PayDollar",
+        "type3Text": "使用PayDollar安全支付",
         "payType4": "微信",
         "type4Text": "网上付款、方便、快捷",
         "payType5": "电汇",

@@ -8,9 +8,14 @@ export default function({ req, res, app, store }) {
 
   if (isServer) {
     const resetCookie = []
+    let _language = 'en_US' //默认语言
+    let _coin = 'USD'  //默认货币
+    let _areaId = 99 //默认地区
+
     let coin = ''
     let language = ''
     let lastUrl = ''
+    let areaId = ''
 
     const expiresDate = new Date()
     expiresDate.setDate(expiresDate.getDate() + 365)
@@ -21,6 +26,7 @@ export default function({ req, res, app, store }) {
       coin = cookie.coin || ''
       language = cookie.language || ''
       lastUrl = cookie.lastUrl || ''
+      areaId  = cookie.areaId || ''
     }
 
     if (coin) {
@@ -36,8 +42,9 @@ export default function({ req, res, app, store }) {
       }
       // console.log('reset coin====>', coin)
       resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
-      // res.setHeader('Set-Cookie', [`coin=${coin}; Path=/;`])
       store.commit('setCoin', coin)
+    }else{
+      store.commit('setCoin', _coin)
     }
     if (language) {
       let trueLanguage = false
@@ -51,12 +58,18 @@ export default function({ req, res, app, store }) {
         language = languageOptions[0].code
       }
       resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
-      // res.setHeader('Set-Cookie', [`language=${language}; Path=/;`])
       store.commit('setLanguage', language)
+    }else{
+      store.commit('setLanguage', _language)
+    }
+    if (areaId) {   
+      resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)   
+      store.commit('setAreaId', areaId)
+    }else{
+      store.commit('setAreaId', _areaId)
     }
     if (lastUrl) {
       resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
-      // res.setHeader('Set-Cookie', [`lastUrl=${lastUrl}; Path=/;`])
       store.commit('setLastUrl', lastUrl)
     }
     // console.log('setBasic req====>', req)

@@ -37,7 +37,7 @@
             <nuxt-link v-if="!hadLogin" to="/login">
               <div class="item user">
                 <i class="iconfont icongerenzhongxin"></i>
-                <span class="text">{{ $t(`${lang}.login`) }}</span>
+                <span class="text" @click="login()">{{ $t(`${lang}.login`) }}</span>
               </div>
             </nuxt-link>
 
@@ -285,6 +285,7 @@ const lang = 'components.topBar'
 export default {
   data() {
     return {
+      url:'',
       language:'',
       lang,
       keyword: '',
@@ -996,12 +997,34 @@ export default {
     }
   },
   mounted() {
+    // console.log("dangqiandizhi",window.location.href)
+    // console.log("oldurl==========",window.location)
     this.language = this.getCookie('language')
     // console.log("kkkkkkk",this.$store.state.language)
     const _this = this
     _this.$nextTick(() => {})
   },
   methods: {
+    // 点击登入获取上页url
+    login(){
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/billing-address/).test(oldurl)){
+          oldurl = '/shopping-cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      setTimeout(() => {
+        this.$router.push({
+            path: `/login`,
+            // query: {url}
+        })
+      },0)
+      // console.log("oldurl",url)
+    },
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='
@@ -1028,12 +1051,14 @@ export default {
       window.location.reload()
     },
     logout() {
-      // window.location.reload()
       this.$store.dispatch('logout', lang)
-      setTimeout(() => {
-        window.location.reload()
-      },0)
-      this.$router.push('/login')
+      window.location.reload()
+      // window.location.reload()
+      // this.$store.dispatch('logout', lang)
+      // setTimeout(() => {
+      //   window.location.reload()
+      // },0)
+      // this.$router.push('/login')
       // this.$store.dispatch('logout', lang)
       // this.$router.push(`/login`)
       // this.$store.dispatch('logout', lang)
