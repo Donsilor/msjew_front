@@ -101,7 +101,7 @@ export default {
       this.$refs.suitability.show()
     },
     searchAgain() {
-      console.log('点击了重新搜索')
+      // console.log('点击了重新搜索')
       this.$router.replace({
         name: 'search-result',
         query: {
@@ -111,7 +111,7 @@ export default {
         }
       })
       if (!this.$store.getters.hadLogin) {
-        console.log('this.keyword=====>', this.keyword)
+        // console.log('this.keyword=====>', this.keyword)
         this.$store.dispatch('addLocalSearchHistory', this.keyword)
       }
       this.research()
@@ -159,14 +159,15 @@ export default {
           routerName = 'engagement-engagement-rings'
           break
         // 对戒
-        //routerName = 'marriage-ring-single-ring-detail'    
+        case -1:
+          routerName = 'marriage-ring-single-ring-detail'
+          break    
       }
 
       this.$router.push({
         name: routerName,
         query: {
           goodId: info.goodsId || info.id,
-          goodId: info.ringId
         }
       })
     },
