@@ -155,7 +155,7 @@ export default {
           materialValue: _this.conditions[1].checked,
           orderParam: _this.sortBy,
           orderType: _this.sortType,
-          page_size: 10,
+          page_size: 6,
           styleValue: _this.conditions[0].checked,
           userId: null
         }
