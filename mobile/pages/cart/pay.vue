@@ -80,12 +80,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        {
-          url: '/cart/paydollar.png',
-          type: 8,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
-        }
+        // {
+        //   url: '/cart/paydollar.png',
+        //   type: 8,
+        //   title: this.LANGUAGE.cart.pay.payType1,
+        //   des: this.LANGUAGE.cart.pay.type1Text
+        // }
         // {
         //   url: '/cart/up.png',
         //   type: 2,

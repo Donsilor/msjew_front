@@ -395,7 +395,7 @@ export default {
       this.activeCard = index
     },
     toCardDetail(card) {
-      //console.log('card====>', card)
+      // console.log('card====>', card)
       if (!card) {
         return
       }
@@ -414,6 +414,7 @@ export default {
       //   configIds.push(item.configId)
       //   configAttrIds.push(item.configAttrId)
       // })
+
 
       // const ringRouter = () => {
       //   if (configAttrIds.indexOf(60) > -1) {
@@ -444,7 +445,6 @@ export default {
       //   }
       //   console.log('都不是')
       // }
-
       // switch (card.categoryId) {
       //   case 1:
       //     // 钻石
@@ -496,19 +496,21 @@ export default {
       }
     },
     moreCard() {
-
       this.$router.push({
             name: 'marriage-ring-single-ring',
             query: {
               type: 'lady'
             }
           })
+
       // const card = this.cards[this.activeCard]
+
 
       // console.log('card====>', card)
       // if (!card) {
       //   return
       // }
+      
 
       // const configAttriEntity = card.configAttriEntity
 
@@ -620,7 +622,7 @@ export default {
         query: routerQuery
       })
 
-      //console.log('configAttrIds===>', configAttrIds)
+      // console.log('configAttrIds===>', configAttrIds)
     },
     routerTo(routerName = '', query = {}) {
       if (!routerName) {
