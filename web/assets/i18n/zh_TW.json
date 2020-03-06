@@ -2203,7 +2203,7 @@
     "soleOut": "商品已售罄"
   },
   "order": {
-    "firstLogin":"請先登錄！",
+    "firstLogin":"請先登錄或註冊！",
     "success":"添加成功！",
     "tooInp": "輸入/選擇優惠碼",
     "tooInpShort": "輸入優惠碼",
