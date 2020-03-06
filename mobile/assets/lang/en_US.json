@@ -177,6 +177,7 @@
       "type5Text2": "Please note that e-Cheques are not T/T."
     },
     "paySuccess": {
+      "handing": "Order processing ...",
       "title": "ORDER PAID",
       "orderNo": "Order#",
       "preferFee": "Discount Information",

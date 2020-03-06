@@ -177,6 +177,7 @@
       "type5Text2": "注意，電子支票並非電匯"
     },
     "paySuccess": {
+      "handing":"訂單處理中.....",
       "title": "訂單支付成功",
       "orderNo": "訂單編號",
       "preferFee": "優惠訊息",
