@@ -4,7 +4,8 @@
     <div v-if="hadLogin">
       <div class="top">
         <img src="@/static/cart/success.png" />
-        <p class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+        <!-- <p v-if="verify === false" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
+        <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
           <span class="font-size-16">{{ info.coinCode }}</span>
           {{ info.orderAmount }}
@@ -56,7 +57,8 @@
     <div v-else>
       <div class="top">
         <img src="@/static/cart/success.png" />
-        <p class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+        <!-- <p v-if="verify == false" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
+        <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
           <span class="font-size-16">{{ orderinfo.coinCode }}</span>
           {{ orderinfo.orderAmount }}
@@ -124,7 +126,7 @@
         {{ lang.paytips }}
       </div>
       <div
-        v-if="info.payChannel !== 1&&hadLogin"
+        v-if="info.payChannel !== 1"
         class="btn-common btn-black"
         @click="goDetails"
       >
@@ -172,7 +174,8 @@ export default {
       typeIndex: 0,
       orderinfo:'',
       isLogin: !!this.$store.state.token,
-      list:[]
+      list:[],
+      verify:''
     }
   },
   computed: {
@@ -181,6 +184,16 @@ export default {
     }
   },
   mounted() {
+     if(this.$route.query.success == 'false'){
+        console.log(11111111)  
+        this.$router.push({
+          name: 'cart-payFailed-orderId-price-coinType',
+          query: {   
+            orderId: this.$route.query.orderId||this.$route.query.order_sn,
+          }
+        })
+      }
+      console.log("aa",this.$route.query)
     this.list = JSON.parse(storage.get('myCartList', 0))
     // console.log("myCartList",this.list)
     const _this = this
@@ -247,6 +260,9 @@ export default {
         }
       })
       .then(res => {
+       
+        // this.verify=res.verification_status;
+        // console.log("verify",this.verify)
           const arr = []
           this.list.map((item, index) => {
             arr.push(item.localSn)
