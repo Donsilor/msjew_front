@@ -2201,7 +2201,7 @@
     "soleOut": "The Goods Have Sold Out"
   },
   "order": {
-    "firstLogin": "Please login first!",
+    "firstLogin": "Please login or register!",
     "success":"Added successfully!",
     "tooInp": "Input/select Coupon Code",
     "tooInpShort": "Input Coupon Code",

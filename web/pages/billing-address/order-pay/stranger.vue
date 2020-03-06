@@ -1897,16 +1897,25 @@ export default {
         })
     },
     createOrder() { 
-      if(this.payWay!==6){
-        this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        return
-      }
-      let baseUrl=this.$store.getters.baseUrl
       if(this.payWay==''){
-        // console.log("请选择支付方式")_this.$t(`${lang}.codeTips`)
         this.$errorMessage(this.$t(`${lang}.msg9`))
         return
       }
+      if(this.payWay!==6){
+          this.$errorMessage(this.$t(`${lang}.firstLogin`))
+          const topB = document.getElementsByClassName('layout-box')[0];
+          const that = this
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-that.scrollTop / 5)
+            topB.scrollTop = that.scrollTop + ispeed
+            if (that.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
+        return
+      }
+      let baseUrl=this.$store.getters.baseUrl
+      
       let json=[]
      
       for (const i in this.good) {

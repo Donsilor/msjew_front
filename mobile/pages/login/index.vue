@@ -68,7 +68,7 @@
             {{ lang['email-login'] }}
           </span>
         </button>
-      </div>
+      </div>   
 
       <!--    <div class="tip">-->
       <!--      <span class="tip-message">-->

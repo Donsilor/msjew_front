@@ -776,8 +776,12 @@ export default {
       // }
       // console.log("aaaa",this.typeIndex)
        if (!this.isLogin) {
-         if(this.typeIndex!==0){
+          if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
+           return
+         }
+         if(this.typeIndex!==0){
+            this.$toast.show(this.lang.firstLogin)
            return
          }
        }
