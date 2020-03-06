@@ -1897,7 +1897,6 @@ export default {
         })
     },
     createOrder() { 
-      let baseUrl=this.$store.getters.baseUrl
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
