@@ -282,12 +282,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        // {
-        //   url: '/cart/paydollar.png',
-        //   type: 8,
-        //   title: this.LANGUAGE.cart.pay.payType3,
-        //   des: this.LANGUAGE.cart.pay.type3Text
-        // }
+        {
+          url: '/cart/paydollar.png',
+          type: 8,
+          title: this.LANGUAGE.cart.pay.payType3,
+          des: this.LANGUAGE.cart.pay.type3Text
+        }
       ],
       sum: '2,120.00',
       info:'',
