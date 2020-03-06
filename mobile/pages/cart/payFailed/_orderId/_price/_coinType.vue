@@ -1,50 +1,118 @@
 <template>
   <div class="pay-success">
-    <div class="top">
-      <i class="icon iconfont iconicon-test2"></i>
-      <h4 class="color-333 font-size-14 margin-top-10 ">
-        {{ lang.title }}
-      </h4>
-      <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
-        {{ lang.phone }}
-      </p>
-    </div>
-    <div class="code">
-      <span> {{ lang.orderNo }} </span
-      ><span
-        >{{ info.orderNo
-        }}<i
-          class="icon iconfont iconcopy copy-btn"
-          :data-clipboard-text="info.orderNo"
-          @click="copy"
-        ></i
-      ></span>
-    </div>
-    <div class="btn">
-      <div class="btn-common btn-black" @click="returnBack">
-        {{ lang.payAgain }}
+    <div v-if="hadLogin">
+      <div class="top">
+        <i class="icon iconfont iconicon-test2"></i>
+        <h4 class="color-333 font-size-14 margin-top-10 ">
+          {{ lang.title }}
+        </h4>
+        <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+          {{ lang.phone }}
+        </p>
       </div>
-      <div class="btn-common btn-gray" @click="goIndex">
-        {{ lang.continue }}
+      <div class="code">
+        <span> {{ lang.orderNo }} </span
+        ><span
+          >{{ info.orderNo
+          }}<i
+            class="icon iconfont iconcopy copy-btn"
+            :data-clipboard-text="info.orderNo"
+            @click="copy"
+          ></i
+        ></span>
+      </div>
+      <div class="btn">
+        <div class="btn-common btn-black" @click="returnBack">
+          {{ lang.payAgain }}
+        </div>
+        <div class="btn-common btn-gray" @click="goIndex">
+          {{ lang.continue }}
+        </div>
+      </div>
+    </div>
+    <div v-else>
+      <div class="top">
+        <i class="icon iconfont iconicon-test2"></i>
+        <h4 class="color-333 font-size-14 margin-top-10 ">
+          {{ lang.title }}
+        </h4>
+        <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+          {{ lang.phone }}
+        </p>
+      </div>
+      <div class="code">
+        <span> {{ lang.orderNo }} </span
+        ><span
+          >{{ orderinfo.orderNo}}<i
+            class="icon iconfont iconcopy copy-btn"
+            :data-clipboard-text="orderinfo.orderNo"
+            @click="copy"
+          ></i
+        ></span>
+      </div>
+      <div class="btn">
+        <div class="btn-common btn-black" @click="returnBack2">
+          {{ lang.payAgain }}
+        </div>
+        <div class="btn-common btn-gray" @click="goIndex">
+          {{ lang.continue }}
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+const storage = process.client ? require('good-storage').default : {}
 import Clipboard from 'clipboard'
 export default {
   name: 'Paysuccess',
-  layout: 'no-bar',
+  layout: 'no-bar',    
   data() {
     return {
       lang: this.LANGUAGE.cart.payFailed,
       orderId: this.$route.params.orderId,
-      info: ''
+      isLogin: !!this.$store.state.token,
+      info: '',
+      orderinfo:'',
+      infos:{
+        orderId:'',
+        coinType:'',
+        price:''
+      },
+      info2:{
+        orderId:'',
+        coinType:'',
+        orderAmount:''
+      },
+      list:[]
+    }
+  },
+  computed: {
+    hadLogin() {
+      return this.$store.getters.hadLogin
     }
   },
   created() {
-    this.getinfo()
+    
+    // console.log("dfsdfsdsad")
+
+    // console.log("dfsdfsdsad",storage)
+   
+    // this.getinfo()
+  },
+  mounted(){
+     this.list = JSON.parse(storage.get('myCartList', 0))
+    console.log("已登录",this.isLogin)
+    const _this = this
+    _this.$nextTick(() => {
+      if (this.isLogin){
+        _this.getinfo()
+      }else{
+
+        _this.getinfo2()
+      }
+    })
   },
   methods: {
     goIndex() {
@@ -57,12 +125,34 @@ export default {
         url: '/web/member/order/detail',
         meth: 'get',
         params: {
-          orderId: this.$route.params.orderId
+          orderId: this.$route.query.orderId,
+        }
+      })
+        .then(res => {//http://localhost:8328/cart/pay?info=%7B%22coinType%22%3A%22HKD%22,%22orderAmount%22%3A%221855.16%22,%22orderId%22%3A280%7D
+          this.infos.orderId=res.id
+          this.infos.coinType=res.coinCode
+          this.infos.orderAmount=res.orderAmount
+          console.log(res, 'e7etry')
+          this.info = res
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+     // 未登录
+    getinfo2() {
+      this.$axios({
+        url: '/web/member/order-tourist/detail',
+        method: 'get',
+        params: {
+          order_sn: this.$route.query.orderId
         }
       })
         .then(res => {
-          // console.log(res, 'e7etry')
-          this.info = res
+          this.orderinfo = res
+          console.log(res)
+          this.getChannelType(this.orderinfo.payChannel)
+         
         })
         .catch(err => {
           console.log(err)
@@ -80,17 +170,76 @@ export default {
       })
     },
     returnBack() {
-      const res = {
-        orderId: this.$route.params.orderId,
-        orderAmount: this.$route.params.price,
-        coinType: this.$route.params.coinType
-      }
-      this.$router.replace({
+      const res = this.infos
+      this.$router.push({
         name: 'cart-pay',
         query: {
           info: JSON.stringify(res)
         }
       })
+    },
+    returnBack2() {
+      const res = this.list
+      const data = []
+        let baseUrl=this.$store.getters.baseUrl
+        // console.log("未登录",this.list)
+        for (const i in this.list) {
+          const o = {
+            createTime: this.list[i].createTime,
+            goods_num: 1,
+            goodsDetailsId: this.list[i].goodsDetailsId,
+            goods_id: this.list[i].goodsDetailsId,
+            group_id: this.list[i].groupId,
+            goods_type: this.list[i].goodsStatus,
+            group_type:
+              this.list[i].groupType !== 0 ? this.list[i].groupType : null
+          }
+          data.push(o)
+        }
+        // console.log("data",data)
+        // console.log("paytype",this.$route.query)
+        this.$axios({
+          method: 'post',
+          url: `/web/member/order-tourist/create`,
+          data: {
+            goodsCartList:data,
+            tradeType:'wap',
+            coinType:this.$store.state.coin,
+            returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
+          }
+        })
+          .then(res => {
+            // console.log("返回结果",res)
+            // const arr = []
+            // this.list.map((item, index) => {
+            //   console.log(arr)
+            //   arr.push(item.localSn)
+            //   this.$store.dispatch('removeCart', arr)
+            // })
+            if (res.config) {
+              window.location.replace(res.config)
+            } else if (!res.config){
+              // console.log(88888888)
+              this.isPay = false
+              this.$router.replace({
+                name: 'complete-paySuccess-orderId-price-coinType',
+                params: {
+                  orderId: this.info.orderId,
+                  price: this.info.orderAmount,
+                  coinType: this.info.coinType
+                }
+              })
+            }
+            // this.$router.replace({
+            //   name: 'cart-pay',
+            //   query: {
+            //     info: JSON.stringify(res)
+            //   }
+            // })
+          })
+          .catch(err => {
+            this.$toast.show(err.message)
+          })
     },
     goToFail() {
       this.$router.push({
