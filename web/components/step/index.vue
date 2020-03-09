@@ -229,13 +229,14 @@ export default {
         this.$axios
           .post(url, data1)
           .then(res => {
-            this.name1 = res.goodsName
-            for (const i in res.details) {
+            let data = res.data;
+            this.name1 = data.goodsName
+            for (const i in data.details) {
               if (
                 this.steps.steps[0].goodsDetailsId ===
-                res.details[i].id
+                data.details[i].id
               ) {
-                this.price1 = res.details[i].retailMallPrice
+                this.price1 = data.details[i].retailMallPrice
               }
             }
           })
@@ -259,13 +260,14 @@ export default {
         await this.$axios
           .post(url1, data1)
           .then(res => {
-            this.name1 = res.goodsName
-            for (const i in res.details) {
+            let data = res.data;
+            this.name1 = data.goodsName
+            for (const i in data.details) {
               if (
                 this.steps.steps[0].goodsDetailsId ===
-                res.details[i].id
+                data.details[i].id
               ) {
-                this.price1 = res.details[i].retailMallPrice
+                this.price1 = data.details[i].retailMallPrice
               }
             }
           })
@@ -279,13 +281,14 @@ export default {
         await this.$axios
           .post(url2, data2)
           .then(res => {
-            this.name2 = res.goodsName
-            for (const i in res.details) {
+            let data = res.data;
+            this.name2 = data.goodsName
+            for (const i in data.details) {
               if (
                 this.steps.steps[1].goodsDetailsId ===
-                res.details[i].id
+                data.details[i].id
               ) {
-                this.price2 = res.details[i].retailMallPrice
+                this.price2 = data.details[i].retailMallPrice
               }
             }
           })
@@ -301,26 +304,26 @@ export default {
     stepBack(step) {
       if (step === 1) {
         if (this.steps.steps[0].ct === 1) {
-          return `/build-your-own-ring/diamond-details/${this.name1}?goodId=${
+          return `/build-your-own-ring/diamond-details/${this.steps.steps[0].goodsId}?goodId=${
             this.steps.steps[0].goodsId
           }&step=1&steps=${this.$helpers.base64Encode(
             JSON.stringify(this.steps)
           )}&isBack=true`
         } else {
-          return `/build-your-own-ring/setting-details/${this.name1}?goodId=${
+          return `/build-your-own-ring/setting-details/${this.steps.steps[0].goodsId}?goodId=${
             this.steps.steps[0].goodsId
           }&step=1&steps=${this.$helpers.base64Encode(
             JSON.stringify(this.steps)
           )}&ringType=engagement&isBack=true`
         }
       } else if (this.steps.steps[0].ct === 1) {
-        return `/build-your-own-ring/setting-details/${this.name2}?goodId=${
+        return `/build-your-own-ring/setting-details/${this.steps.steps[0].goodsId}?goodId=${
           this.steps.steps[1].goodsId
         }&step=2&steps=${this.$helpers.base64Encode(
           JSON.stringify(this.steps)
         )}&isBack=true`
       } else {
-        return `/build-your-own-ring/diamond-details/${this.name2}?goodId=${
+        return `/build-your-own-ring/diamond-details/${this.steps.steps[0].goodsId}?goodId=${
           this.steps.steps[1].goodsId
         }&step=2&steps=${this.$helpers.base64Encode(
           JSON.stringify(this.steps)
