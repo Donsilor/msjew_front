@@ -233,8 +233,8 @@ export default {
             this.name1 = data.goodsName
             for (const i in data.details) {
               if (
-                this.steps.steps[0].goodsDetailsId ===
-                data.details[i].id
+                parseInt(this.steps.steps[0].goodsDetailsId) ===
+                parseInt(data.details[i].id)
               ) {
                 this.price1 = data.details[i].retailMallPrice
               }
@@ -264,8 +264,8 @@ export default {
             this.name1 = data.goodsName
             for (const i in data.details) {
               if (
-                this.steps.steps[0].goodsDetailsId ===
-                data.details[i].id
+                parseInt(this.steps.steps[0].goodsDetailsId) ===
+                parseInt(data.details[i].id)
               ) {
                 this.price1 = data.details[i].retailMallPrice
               }
@@ -285,8 +285,8 @@ export default {
             this.name2 = data.goodsName
             for (const i in data.details) {
               if (
-                this.steps.steps[1].goodsDetailsId ===
-                data.details[i].id
+                parseInt(this.steps.steps[1].goodsDetailsId) ===
+                parseInt(data.details[i].id)
               ) {
                 this.price2 = data.details[i].retailMallPrice
               }
