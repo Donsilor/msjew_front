@@ -570,14 +570,16 @@ export default {
           {
             goodsId: gs1,
             goodsDetailsId: gd1,
-            ct: ct1,
+            ct: ct1 === 15 ? 1 : 2,
+            goodsType: ct1,
             cartId: ci1,
             page: `detail`
           },
           {
             goodsId: gs2,
             goodsDetailsId: gd2,
-            ct: ct2,
+            ct: ct2 === 15 ? 1 : 2,
+            goodsType: ct2,
             cartId: ci2,
             page: `detail`
           }
