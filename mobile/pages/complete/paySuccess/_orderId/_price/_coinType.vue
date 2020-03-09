@@ -194,7 +194,7 @@ export default {
         })
       }
       console.log("aa",this.$route.query)
-    this.list = JSON.parse(storage.get('myCartList', 0))
+    this.list = JSON.parse(storage.get('myCartList', 0))   
     // console.log("myCartList",this.list)
     const _this = this
     _this.$nextTick(() => {
