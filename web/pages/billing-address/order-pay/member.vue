@@ -632,7 +632,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="invoice.invoice_type == 1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.invoice_type == 2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },
@@ -1477,7 +1477,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.invoice_type == 2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },
