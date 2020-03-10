@@ -632,7 +632,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="invoice.invoice_type == 2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.invoice_type == 1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },
@@ -669,10 +669,11 @@
               <div class="msgbox" v-show="gou">
                 <div class="gou-img">
                   <img src="../../../static/order/ticks.png" alt="">
+                  <p>{{ $t(`${lang2}.Submitted`) }}</p>
                 </div>
-                <div class="btn">
+                <!-- <div class="btn">
                   <button @click="complete">{{ $t(`${lang2}.carryOut`) }}</button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -1477,7 +1478,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="invoice.invoice_type == 2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.invoice_type == 1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },
@@ -1514,10 +1515,11 @@
               <div class="msgbox" v-show="gou">
                 <div class="gou-img">
                   <img src="../../../static/order/ticks.png" alt="">
+                  <p>{{ $t(`${lang2}.Submitted`) }}</p>
                 </div>
-                <div class="btn">
+                <!-- <div class="btn">
                   <button @click="complete">{{ $t(`${lang2}.carryOut`) }}</button>
-                </div>
+                </div> -->
               </div>
             </div>
           </div>
@@ -2590,7 +2592,7 @@ export default {
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        invoice:this.invoice
+        invoice:invoice
       }
       // console.log("pppp",data)
       this.$axios
@@ -2659,7 +2661,7 @@ export default {
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        invoice:this.invoice
+        invoice:invoice
         // afterMail: this.isSameEmail
         // ? this.orderAddress.email
         // : this.orderEmail,
@@ -4121,10 +4123,14 @@ div {
     font-size: 12px;
   }
   .gou-img{
-    display: flex;
-    justify-content: center;
-    width: 455px;
-    padding: 100px 0;
+      // display: flex;
+      // justify-content: center;   
+      width: 455px;
+      padding: 0px 180px;
+      img{
+        width: 75px;
+        height: 75px;
+      }
   }
   .invoice-btn{
     margin-left: 20px;

@@ -762,9 +762,9 @@
                 <div class="msgbox" v-show="gou">
                   <div class="gou-img">
                     <img src="../../../static/order/ticks.png" alt="">
-                    <p>提交成功</p>
+                    <p>{{ $t(`${lang3}.Submitted`) }}</p>
                   </div>
-                  <!-- <div class="btn">
+                  <!-- <div class="btn"> Submitted
                     <button @click="complete">{{ $t(`${lang3}.carryOut`) }}</button>
                   </div> -->
                 </div>
@@ -1678,11 +1678,11 @@
                 <div class="msgbox" v-show="gou">
                   <div class="gou-img">
                     <img src="../../../static/order/ticks.png" alt="">
-                     <p>提交成功</p>
+                    <p>{{ $t(`${lang3}.Submitted`) }}</p>
                   </div>
-                  <div class="btn">
+                  <!-- <div class="btn">
                     <button @click="complete">{{ $t(`${lang3}.carryOut`) }}</button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

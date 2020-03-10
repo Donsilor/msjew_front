@@ -2312,6 +2312,7 @@
     "msg9":"请选择支付方式!"
   },
   "invoice":{
+    "Submitted":"提交成功",
     "email":"邮箱",
     "default":"默认不开发票",
     "Invoicing":"开发票",

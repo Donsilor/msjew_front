@@ -2294,6 +2294,7 @@
     "msg9": "Please select a payment method!"
   },
   "invoice": {
+    "Submitted": "Submitted successfully",
     "email": "Email",
     "default": "Default is not invoiced",
     "Invoicing": "Invoicing",

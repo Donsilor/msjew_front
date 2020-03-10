@@ -2296,6 +2296,7 @@
     "msg9":"請選擇支付方式!"
   },
   "invoice":{
+    "Submitted":"提交成功",
     "email":"郵箱",
     "default":"默认不开发票",
     "Invoicing":"开发票",
