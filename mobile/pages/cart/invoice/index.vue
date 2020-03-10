@@ -60,7 +60,6 @@ export default {
                 tax_number:'',
                 is_electronic:'0'
             },
-            info:{},
             totolPrice:this.$route.query.price,
             kai:this.$route.query.kai,
             coin: this.$store.state.coin,
@@ -69,8 +68,8 @@ export default {
         }
     },
     mounted(){
-        this.invoice = this.info
-        console.log(this.totolPrice)
+        // this.invoice = this.info
+        console.log(this.kai)
     },
     methods:{
         selected(ind){
@@ -100,11 +99,9 @@ export default {
                    return
                 }
             }
-            // this.invoice.invoice_type = this.selectType
-            // this.invoice.invoice_title = this.title
-            // this.invoice.tax_number = this.tax
+            let info = {}
             if(this.kai == true){
-                let info = this.info
+                info = this.invoice
             }
             this.$router.push({
                 name: 'cart-sureOrder',
@@ -112,15 +109,6 @@ export default {
                     invoice:info
                 }
             })
-            // if(this.isLogin){
-
-            //     this.$router.push({
-            //         name: 'cart-sureOrder',
-            //         query:{
-            //             invoice:{info}
-            //         }
-            //     })
-            // }
         }
     }
 }

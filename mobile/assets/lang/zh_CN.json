@@ -125,11 +125,13 @@
         "toast2": "移除成功"
       },
       "invoice":{
+        "personal":"个人",
+        "company":"企业",
         "NotInvoiced":"不开发票",
         "Invoicing":"开发票",
         "invo":"发票",
         "email":"邮箱",
-        "InvoiceType":"发票类型",
+        "InvoiceType":"发票类型",        
         "InvoiceDetails":"发票详情",
         "HeaderType":"抬头类型",
         "PaperInvoice":"纸质发票",
@@ -137,7 +139,7 @@
         "BusinessUnit":"企业单位",
         "UnBusinessUnit":"个人/非企业单位",
         "Invoice":"发票抬头",
-        "TaxID":"税号",
+        "TaxID":"发票税号",
         "holder1":"填写发票抬头",
         "holder2":"填写纳税人识别号",
         "totalAmount":"总金额",

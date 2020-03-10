@@ -411,6 +411,9 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
+      if(this.$route.query.invoice !== ''){
+        this.kai = true
+      }
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
       } else {

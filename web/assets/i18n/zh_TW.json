@@ -2296,6 +2296,8 @@
     "msg9":"請選擇支付方式!"
   },
   "invoice":{
+    "personal":"個人",
+    "company":"企業",
     "Submitted":"提交成功",
     "email":"郵箱",
     "default":"默认不开发票",
@@ -2309,7 +2311,7 @@
     "BusinessUnit":"企業單位",
     "UnBusinessUnit":"個人/非企業單位",
     "Invoice":"發票抬頭",
-    "TaxID":"稅號",
+    "TaxID":"發票稅號",
     "holder1":"填寫發票抬頭",
     "holder2":"填寫納稅人識別號",
     "totalAmount":"總金額",

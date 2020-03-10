@@ -125,6 +125,8 @@
       "toast2": "Deleted"
     },
     "invoice": {
+      "personal":"personal",
+      "company":"company",
       "NotInvoiced": "Not Invoiced",
       "Invoicing": "Invoicing",
       "invo": "Invoice",
@@ -137,7 +139,7 @@
       "BusinessUnit": "Business Unit",
       "UnBusinessUnit": "Individual / Non-Business Unit",
       "Invoice": "Invoice Header",
-      "TaxID": "Tax ID",
+      "TaxID": "Invoice tax number",
       "holder1": "Fill Invoice Header",
       "holder2": "Fill in the taxpayer identification number",
       "totalAmount": "Total Amount",

@@ -221,15 +221,15 @@
         </div>
         <div class="order-infos">
           <div class="info-line">
-            <div class="label"> {{ $t(`${lang_invoice}.email`) }}</div>
-            <div class="ff color-pink">
-              {{ invoice.email }}
-            </div>
-          </div>
-          <div class="info-line">
             <div class="label"> {{ $t(`${lang_invoice}.InvoiceType`) }}</div>
             <div class="orderNo">
               {{ type }}
+            </div>
+          </div>
+          <div class="info-line">
+            <div class="label"> {{ $t(`${lang_invoice}.HeaderType`) }}</div>
+            <div class="ff ">
+              {{ headType }}
             </div>
           </div>
           <div class="info-line">
@@ -338,7 +338,8 @@ export default {
         isElectronic: '',
         taxNumber: ""
       },
-      type:''
+      type:'',
+      headType:''
     }
   },
   computed: {
@@ -425,10 +426,15 @@ export default {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
           })
-          if(this.data.invoice.invoiceType == 2){
+          if(this.data.invoice.isElectronic == 0){
             this.type = this.$t(`${lang_invoice}.PaperInvoice`)
           } else {
             this.type = this.$t(`${lang_invoice}.ElectronicInvoice`)
+          }
+          if(this.data.invoice.invoiceType == 2){
+            this.headType = this.$t(`${lang_invoice}.personal`)
+          } else {
+            this.headType = this.$t(`${lang_invoice}.company`)
           }
         })
         .catch(err => {
