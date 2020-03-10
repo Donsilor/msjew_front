@@ -129,6 +129,7 @@
       "InvoiceDetails":"發票詳情",
       "HeaderType":"抬頭類型",
       "PaperInvoice":"紙質發票",
+      "InvoiceType":"發票類型",
       "ElectronicInvoice":"電子發票",
       "BusinessUnit":"企業單位",
       "UnBusinessUnit":"個人/非企業單位",

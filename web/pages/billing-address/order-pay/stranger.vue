@@ -1844,8 +1844,8 @@ export default {
   mixins: [Address],
   data() {
     return {
-      aa:this.$t(`${lang2}.PaperInvoice`),
-      bb:this.$t(`${lang2}.ElectronicInvoice`),
+      aa:this.$t(`${lang3}.PaperInvoice`),
+      bb:this.$t(`${lang3}.ElectronicInvoice`),
       iconShow:false,
       invoiceBox:false,
       invoiceRise:'',

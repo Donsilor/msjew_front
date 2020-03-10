@@ -126,6 +126,7 @@
       },
       "invoice":{
         "email":"邮箱",
+        "InvoiceType":"发票类型",
         "InvoiceDetails":"发票详情",
         "HeaderType":"抬头类型",
         "PaperInvoice":"纸质发票",

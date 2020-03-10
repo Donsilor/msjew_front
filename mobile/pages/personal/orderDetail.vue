@@ -163,10 +163,10 @@
         <!-- <p class="title">发票信息</p> -->
         <ul>
           <template v-if="invoice.invoiceType == 2">
-            <li>{{ lang2.HeaderType }}：{{ lang2.PaperInvoice }}</li>
+            <li>{{ lang2.InvoiceType }}：{{ lang2.PaperInvoice }}</li>
           </template>
           <template v-if="invoice.invoiceType == 1">
-            <li>{{ lang2.HeaderType }}：{{ lang2.ElectronicInvoice }}</li>
+            <li>{{ lang2.InvoiceType }}：{{ lang2.ElectronicInvoice }}</li>
           </template>
           <li>{{ lang2.email }}：{{ statusText(invoice.email) }}</li>
           <li>{{ lang2.Invoice }}：{{ invoice.invoiceTitle }}</li>

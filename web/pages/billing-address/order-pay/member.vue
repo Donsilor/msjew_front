@@ -632,7 +632,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="invoice.is_electronic==2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.is_electronic == 2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },

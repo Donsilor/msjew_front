@@ -128,6 +128,7 @@
       "email": "Email",
       "InvoiceDetails": "Invoice Details",
       "HeaderType": "HeaderType",
+      "InvoiceType": "Invoice Type",
       "PaperInvoice": "Paper Invoice",
       "ElectronicInvoice": "Electronic Invoice",
       "BusinessUnit": "Business Unit",
