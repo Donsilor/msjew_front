@@ -2,7 +2,7 @@
   <div class="pay-success">
     <!-- 已登录 -->
     <div v-if="hadLogin">
-      <p v-show="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p>
+      <p v-show="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
       <div class="top" v-show="this.$route.query.success !== 'false'">
         <img src="@/static/cart/success.png" />
         <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
@@ -185,12 +185,12 @@ export default {
   },
   mounted() {
      if(this.$route.query.success == 'false'){
-        this.$router.push({
-          name: 'cart-payFailed-orderId-price-coinType',
-          query: {   
-            orderId: this.$route.query.orderId||this.$route.query.order_sn,
-          }
-        })
+        // this.$router.push({
+        //   name: 'cart-payFailed-orderId-price-coinType',
+        //   query: {   
+        //     orderId: this.$route.query.orderId||this.$route.query.order_sn,
+        //   }
+        // })
         // setTimeout(() => {
         //   this.$router.push({
         //     name: 'cart-payFailed-orderId-price-coinType',
