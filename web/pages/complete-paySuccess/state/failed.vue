@@ -45,7 +45,7 @@
         </div>
         <div class="btn-two">
           <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
-          <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div>
+          <!-- <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div> -->
         </div>
       </div>
     </div>
