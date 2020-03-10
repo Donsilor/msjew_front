@@ -9,8 +9,7 @@
             />
             <div
               v-if="
-                g.data[0].simpleGoodsEntity.goodsStatus !== 2 &&
-                  g.data[1].simpleGoodsEntity.goodsStatus !== 2
+                g.data[0].simpleGoodsEntity.goodsStatus !== 2
               "
               class="img-bord"
             >
@@ -55,9 +54,7 @@
               alt=""
             />
             <div
-              v-if="
-                g.data[0].simpleGoodsEntity.goodsStatus === 1 &&
-                  g.data[1].simpleGoodsEntity.goodsStatus === 1
+              v-if="g.data[1].simpleGoodsEntity.goodsStatus !== 2
               "
               class="img-bord"
             >
