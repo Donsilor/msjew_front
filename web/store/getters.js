@@ -75,7 +75,7 @@ export default {
        host = 'https://www.bddco.com'
     }else{
        //测试
-       host = 'http://localhost:8318'
+       host = 'http://www.bdd.bddia.com'
     }
     return host 
   }
