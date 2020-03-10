@@ -687,9 +687,9 @@
                   <div class="base-info-line">
                     <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang3}.HeaderType`) }}</div>
                     <div class="base-info-line-content marriage-choose" >
-                      <el-radio-group v-model="radio" @change="handle">
-                        <el-radio :label="1">{{ $t(`${lang3}.UnBusinessUnit`) }}</el-radio>
-                        <el-radio :label="2">{{ $t(`${lang3}.BusinessUnit`) }}</el-radio>
+                      <el-radio-group v-model="invoice.invoice_type" @change="handle">
+                        <el-radio :label="2">{{ $t(`${lang3}.UnBusinessUnit`) }}</el-radio>
+                        <el-radio :label="1">{{ $t(`${lang3}.BusinessUnit`) }}</el-radio>
                       </el-radio-group>
                       <div v-show="redioShow" class="emplty">
                         {{ $t(`${lang3}.hint1`) }}
@@ -706,7 +706,7 @@
                       class="input-box"
                     >
                       <input
-                        v-model="invoiceRise"
+                        v-model="invoice.invoice_title"
                         :class="{ 'wrong-input': wrongInput.lastname }"
                         type="text"
                         @focus="
@@ -721,7 +721,7 @@
                     {{ $t(`${lang3}.hint2`) }}
                   </div>
                   <div class="input-line">
-                    <div class="label"><span v-if="radio==2" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
+                    <div class="label"><span v-if="invoice.is_electronic==2" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
                     <div
                       :class="[
                         { 'border-change': borderChange === 2 },
@@ -730,7 +730,7 @@
                       class="input-box"
                     >
                       <input
-                        v-model="invoiceCode"
+                        v-model="invoice.tax_number"
                         :class="{ 'wrong-input': wrongInput.lastname }"
                         type="text"
                         @focus="
@@ -1550,7 +1550,7 @@
             />
           </div>
 
-           <!-- 发票按钮 -->
+          <!-- 发票按钮 -->
           <div class="invoice">
 
             <div class="invoice-btn">
@@ -1570,8 +1570,8 @@
                   
                   <p class="title">{{ $t(`${lang3}.Invoicings`) }}</p>
                   <!-- <div class="btn_type">
-                    <button @click="zhizhi" :class="{active:isactive}">{{ $t(`${lang3}.PaperInvoice`) }}</button>
-                    <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang3}.ElectronicInvoice`) }}</button>
+                    <button @click="zhizhi" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
+                    <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
                   </div> -->
                   <div class="input-line" v-show="isactive == true">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceDetails`) }}</div>
@@ -1602,12 +1602,12 @@
                   <div class="base-info-line">
                     <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang3}.HeaderType`) }}</div>
                     <div class="base-info-line-content marriage-choose" >
-                      <el-radio-group v-model="radio" @change="handle">
-                        <el-radio :label="1">{{ $t(`${lang3}.UnBusinessUnit`) }}</el-radio>
-                        <el-radio :label="2">{{ $t(`${lang3}.BusinessUnit`) }}</el-radio>
+                      <el-radio-group v-model="invoice.invoice_type" @change="handle">
+                        <el-radio :label="2">{{ $t(`${lang3}.UnBusinessUnit`) }}</el-radio>
+                        <el-radio :label="1">{{ $t(`${lang3}.BusinessUnit`) }}</el-radio>
                       </el-radio-group>
                       <div v-show="redioShow" class="emplty">
-                        {{ $t(`${lang2}.hint1`) }}
+                        {{ $t(`${lang3}.hint1`) }}
                       </div>
                     </div>
                   </div>
@@ -1621,7 +1621,7 @@
                       class="input-box"
                     >
                       <input
-                        v-model="invoiceRise"
+                        v-model="invoice.invoice_title"
                         :class="{ 'wrong-input': wrongInput.lastname }"
                         type="text"
                         @focus="
@@ -1636,7 +1636,7 @@
                     {{ $t(`${lang3}.hint2`) }}
                   </div>
                   <div class="input-line">
-                    <div class="label"><span v-if="radio==2" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
+                    <div class="label"><span v-if="invoice.is_electronic==2" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
                     <div
                       :class="[
                         { 'border-change': borderChange === 2 },
@@ -1645,7 +1645,7 @@
                       class="input-box"
                     >
                       <input
-                        v-model="invoiceCode"
+                        v-model="invoice.tax_number"
                         :class="{ 'wrong-input': wrongInput.lastname }"
                         type="text"
                         @focus="
@@ -1657,7 +1657,7 @@
                     </div>
                   </div>
                   <div v-show="taxShow" class="empltyErr">
-                    {{ $t(`${lang2}.hint3`) }}
+                    {{ $t(`${lang3}.hint3`) }}
                   </div>
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
@@ -1844,8 +1844,8 @@ export default {
   mixins: [Address],
   data() {
     return {
-      aa:"纸质发票",
-      bb:"电子发票",
+      aa:this.$t(`${lang2}.PaperInvoice`),
+      bb:this.$t(`${lang2}.ElectronicInvoice`),
       iconShow:false,
       invoiceBox:false,
       invoiceRise:'',
@@ -1859,6 +1859,12 @@ export default {
       taxShow:false,
       isactive:true,
       Active:false,
+      invoice:{
+        invoice_type:'',
+        invoice_title:'',
+        tax_number:'',
+        is_electronic:"0"
+      },
       url:'',
       show:false,
       goingPay: false,
@@ -1920,12 +1926,7 @@ export default {
       familyDie: ``,
       language:'',
       scrollTop: 0,
-      invoice:{
-        invoice_type:"",
-        invoice_title:"",
-        tax_number:"",
-        is_electronic:"0"
-      }
+      
     }
   },
   computed: {
@@ -2025,21 +2026,18 @@ export default {
       }
     },
     confirm(){
-      if(this.radio == ''){
+      if(this.invoice.is_electronic == ''){
         this.redioShow = true
         return
       } 
-      if(this.invoiceRise == ''){
+      if(this.invoice.invoice_title == ''){
         this.typeShow = true
         return
       } 
-      if(this.invoiceCode == ''){
+      if(this.invoice.tax_number == ''){
         this.taxShow = true
         return
       } 
-      this.radio = this.invoice.is_electronic
-      this.invoiceCode =this.invoice.invoice_title
-      this.invoiceCode = this.invoice.tax_number
       this.content = false
       this.gou = true
     },

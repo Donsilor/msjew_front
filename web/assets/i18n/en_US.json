@@ -2294,6 +2294,7 @@
     "msg9": "Please select a payment method!"
   },
   "invoice": {
+    "email": "Email",
     "default": "Default is not invoiced",
     "Invoicing": "Invoicing",
     "Invoicings": "Invoicing",
@@ -2301,6 +2302,7 @@
     "ElectronicInvoice": "Electronic Invoice",
     "InvoiceDetails": "Invoice Details",
     "HeaderType": "HeaderType",
+    "InvoiceType": "Invoice Type",
     "BusinessUnit": "Business Unit",
     "UnBusinessUnit": "Individual / Non-Business Unit",
     "Invoice": "Invoice Header",

@@ -820,6 +820,7 @@ export default {
             // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
+            invoice:this.$route.query.invoice
             // afterMail: this.mailbox,
             // recvType: 1,
             // preferId: this.selectCouponId ? this.selectCouponId : null,
@@ -862,6 +863,7 @@ export default {
           url: `/web/member/order-tourist/create`,
           data: {
             goodsCartList:data,
+            invoice:this.$route.query.invoice,
             tradeType:'wap',
             coinType:this.$store.state.coin,
             returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328

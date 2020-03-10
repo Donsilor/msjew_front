@@ -125,8 +125,11 @@
       "toast2": "Deleted"
     },
     "invoice": {
+      "email": "Email",
       "InvoiceDetails": "Invoice Details",
       "HeaderType": "HeaderType",
+      "PaperInvoice": "Paper Invoice",
+      "ElectronicInvoice": "Electronic Invoice",
       "BusinessUnit": "Business Unit",
       "UnBusinessUnit": "Individual / Non-Business Unit",
       "Invoice": "Invoice Header",

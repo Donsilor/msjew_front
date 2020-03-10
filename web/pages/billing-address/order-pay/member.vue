@@ -550,11 +550,11 @@
         <div class="invoice">
 
           <div class="invoice-btn">
-            <div v-show="!iconShow" @click="show">
+            <div v-show="!iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
               <span>{{ $t(`${lang2}.default`) }}</span> 
             </div>
-            <div v-show="iconShow" @click="show">
+            <div v-show="iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
               <span>{{ $t(`${lang2}.Invoicing`) }}</span>
             </div>
@@ -598,9 +598,9 @@
                 <div class="base-info-line">
                   <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
                   <div class="base-info-line-content marriage-choose" >
-                    <el-radio-group v-model="radio" @change="handle">
-                      <el-radio :label="1">{{ $t(`${lang2}.UnBusinessUnit`) }}</el-radio>
-                      <el-radio :label="2">{{ $t(`${lang2}.BusinessUnit`) }}</el-radio>
+                    <el-radio-group v-model="invoice.invoice_type" @change="handle">
+                      <el-radio :label="2">{{ $t(`${lang2}.UnBusinessUnit`) }}</el-radio>
+                      <el-radio :label="1">{{ $t(`${lang2}.BusinessUnit`) }}</el-radio>
                     </el-radio-group>
                     <div v-show="redioShow" class="emplty">
                       {{ $t(`${lang2}.hint1`) }}
@@ -617,7 +617,7 @@
                     class="input-box"
                   >
                     <input
-                      v-model="invoiceRise"
+                      v-model="invoice.invoice_title"
                       :class="{ 'wrong-input': wrongInput.lastname }"
                       type="text"
                       @focus="
@@ -632,7 +632,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="radio==2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.is_electronic==2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },
@@ -641,7 +641,7 @@
                     class="input-box"
                   >
                     <input
-                      v-model="invoiceCode"
+                      v-model="invoice.tax_number"
                       :class="{ 'wrong-input': wrongInput.lastname }"
                       type="text"
                       @focus="
@@ -1395,11 +1395,11 @@
         <div class="invoice">
 
           <div class="invoice-btn">
-            <div v-show="!iconShow" @click="show">
+            <div v-show="!iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
               <span>{{ $t(`${lang2}.default`) }}</span> 
             </div>
-            <div v-show="iconShow" @click="show">
+            <div v-show="iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
               <span>{{ $t(`${lang2}.Invoicing`) }}</span>
             </div>
@@ -1443,9 +1443,9 @@
                 <div class="base-info-line">
                   <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
                   <div class="base-info-line-content marriage-choose" >
-                    <el-radio-group v-model="radio" @change="handle">
-                      <el-radio :label="1">{{ $t(`${lang2}.UnBusinessUnit`) }}</el-radio>
-                      <el-radio :label="2">{{ $t(`${lang2}.BusinessUnit`) }}</el-radio>
+                    <el-radio-group v-model="invoice.invoice_type" @change="handle">
+                      <el-radio :label="2">{{ $t(`${lang2}.UnBusinessUnit`) }}</el-radio>
+                      <el-radio :label="1">{{ $t(`${lang2}.BusinessUnit`) }}</el-radio>
                     </el-radio-group>
                     <div v-show="redioShow" class="emplty">
                       {{ $t(`${lang2}.hint1`) }}
@@ -1462,7 +1462,7 @@
                     class="input-box"
                   >
                     <input
-                      v-model="invoiceRise"
+                      v-model="invoice.invoice_title"
                       :class="{ 'wrong-input': wrongInput.lastname }"
                       type="text"
                       @focus="
@@ -1477,7 +1477,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="radio==2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.is_electronic==2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },
@@ -1486,7 +1486,7 @@
                     class="input-box"
                   >
                     <input
-                      v-model="invoiceCode"
+                      v-model="invoice.tax_number"
                       :class="{ 'wrong-input': wrongInput.lastname }"
                       type="text"
                       @focus="
@@ -1709,8 +1709,8 @@ export default {
   mixins: [Address],
   data() {
     return {
-      aa:"纸质发票",
-      bb:"电子发票",
+      aa:this.$t(`${lang2}.PaperInvoice`),
+      bb:this.$t(`${lang2}.ElectronicInvoice`),
       iconShow:false,
       invoiceBox:false,
       invoiceRise:'',
@@ -1788,11 +1788,11 @@ export default {
         planDays: '1-12'
       },
       invoice:{
-        invoice_type:"",
-        invoice_title:"",
-        tax_number:"",
+        invoice_type:'',
+        invoice_title:'',
+        tax_number:'',
         is_electronic:"0"
-      }
+      },
     }
   },
   computed: {
@@ -1863,7 +1863,7 @@ export default {
     close(){
        this.content = false
     },
-    show(){
+    show2(){
       this.iconShow=!this.iconShow
       if(this.iconShow == true){
         this.invoiceBox = true
@@ -1872,21 +1872,20 @@ export default {
       }
     },
     confirm(){
-      if(this.radio == ''){
+      if(this.invoice.is_electronic == ''){
         this.redioShow = true
         return
       } 
-      if(this.invoiceRise == ''){
+      if(this.invoice.invoice_title == ''){
         this.typeShow = true
         return
       } 
-      if(this.invoiceCode == ''){
-        this.taxShow = true
-        return
-      } 
-      this.radio = this.invoice.is_electronic
-      this.invoiceCode =this.invoice.invoice_title
-      this.invoiceCode = this.invoice.tax_number
+      if(this.invoice.is_electronic == 1){
+        if(this.invoice.tax_number == ''){
+          this.taxShow = true
+          return
+        } 
+      }
       this.content = false
       this.gou = true
     },

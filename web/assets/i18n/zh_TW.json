@@ -2296,6 +2296,7 @@
     "msg9":"請選擇支付方式!"
   },
   "invoice":{
+    "email":"郵箱",
     "default":"默认不开发票",
     "Invoicing":"开发票",
     "Invoicings":"开具发票",
@@ -2303,6 +2304,7 @@
     "ElectronicInvoice":"電子發票",
     "InvoiceDetails":"發票詳情",
     "HeaderType":"抬頭類型",
+    "InvoiceType":"發票類型",
     "BusinessUnit":"企業單位",
     "UnBusinessUnit":"個人/非企業單位",
     "Invoice":"發票抬頭",
