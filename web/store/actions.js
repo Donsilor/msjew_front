@@ -158,21 +158,21 @@ export default {
                 setFlag = true
                 commit('setLanguage', data.language)
             }                    
-            if(!coin) {  
-                setFlag = true             
+            if(!coin) {
+                setFlag = true               
                 commit('setCoin', data.currency)
             }
+			localStorage.setItem('refreshAreaTime',nowDate)            
             if(data.area_id != areaId) {                
                 commit('setAreaId', data.area_id)
-                if(data.area_id != 99) {
-                    setFlag = true 
-                }                
-            } 
-            localStorage.setItem('refreshAreaTime',nowDate)
-            if(setFlag) {
-                location.reload();
+				if(data.area_id != 99) {
+                    setFlag = true
+                } 
             }
-                                 
+			if(setFlag) {
+				window.location.reload();
+			}                         
+
         })
         .catch(err => {
             console.error(err)
@@ -702,13 +702,13 @@ export default {
 
         //console.log('sendData===========>', sendData)
 
-        return this.$axios({
-            method: 'post',
-            url: '/web/member/cart/local',
-            data: {
-                goodsCartList:sendData
-            }
-        })
+			return this.$axios({
+				method: 'post',
+				url: '/web/member/cart/local',
+				data: {
+					goodsCartList:sendData
+				}
+			})
             .then(res => {
                 //console.log("本地置换数据",res.data)
                 return makeCartGoodGroups(res.data)
@@ -1675,5 +1675,6 @@ export default {
             .catch(err => {
                 return Promise.reject(err)
             })
-    }
+    },   
+
 }

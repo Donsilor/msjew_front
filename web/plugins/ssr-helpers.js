@@ -190,7 +190,7 @@ export default function({ req, res, app, store }) {
         }
       }
     } else if (obj.groupType === 2) {
-      // console.log(`定制💍`)
+      console.log(`定制💍`)
       const steps = {
         steps: [
           {
@@ -223,15 +223,13 @@ export default function({ req, res, app, store }) {
       const ct = parseInt(obj.data[0].simpleGoodsEntity.categoryId)
       // console.log(ct)
       if (ct === 15) {
-        // console.log(`💎`)
         route = {
           path: `/diamond-details/${obj.data[0].goodsId}`,
           query: {
             goodId: obj.data[0].goodsId
           }
         }
-      } else if (ct === 2) {
-        // console.log(`💍`)
+      } else if (parseInt(ct) === 2) {
         route = {
           path: `/ring/wedding-rings/${obj.data[0].goodsId}`,
           query: {
@@ -239,8 +237,7 @@ export default function({ req, res, app, store }) {
             ringType: 'single'
           }
         }
-      }else if (ct === 12) {
-        // console.log(`💍`)
+      }else if (parseInt(ct) === 12) {
         route = {
           path: `/ring/engagement-rings/${obj.data[0].goodsId}`,
           query: {

@@ -219,7 +219,7 @@ export default {
         JSON.parse(JSON.stringify({ goodsId: id2 })),
         false
       )
-      console.log(888,ct,id1,id2);
+      // console.log(888,ct,id1,id2);
       if (!id2) {
         if(ct === 1){
           var url = `/web/goods/diamond/detail`
@@ -229,7 +229,7 @@ export default {
         this.$axios
           .post(url, data1)
           .then(res => {
-            let data = res.data;
+            let data = res.data
             this.name1 = data.goodsName
             for (const i in data.details) {
               if (
@@ -256,11 +256,11 @@ export default {
           var url1 = `/web/goods/style/detail`
           var url2 = `/web/goods/diamond/detail`
         }
-        console.log(999,url1,url2)
+      
         await this.$axios
           .post(url1, data1)
           .then(res => {
-            let data = res.data;
+            let data = res.data
             this.name1 = data.goodsName
             for (const i in data.details) {
               if (
@@ -281,7 +281,7 @@ export default {
         await this.$axios
           .post(url2, data2)
           .then(res => {
-            let data = res.data;
+            let data = res.data
             this.name2 = data.goodsName
             for (const i in data.details) {
               if (
@@ -317,6 +317,7 @@ export default {
           )}&ringType=engagement`
         }
       } else if (this.steps.steps[0].ct === 1) {
+
         return `/build-your-own-ring/setting-details/${this.steps.steps[0].goodsId}?goodId=${
           this.steps.steps[1].goodsId
         }&step=2&steps=${this.$helpers.base64Encode(

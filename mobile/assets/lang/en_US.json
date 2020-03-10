@@ -125,7 +125,7 @@
       "toast2": "Deleted"
     },
     "sureOrder": {
-      "firstLogin": "Please login first!",
+      "firstLogin": "Please login or register!",
       "sureOrder": "CONFIRM ORDER",
       "login": "Sign in",
       "settlement": "to speed up settlement or",

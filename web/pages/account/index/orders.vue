@@ -47,11 +47,11 @@
           <div v-for="(d, _index) in o.details" :key="_index" class="list-body">
             <div class="left">
               <nuxt-link :to="goDetails(d)"
-                ><img :src="IMG_URL + d.goodsImages"
+                 target="_blank"><img :src="IMG_URL + d.goodsImages"
               /></nuxt-link>
             </div>
             <div class="mid">
-              <nuxt-link :to="goDetails(d)">
+              <nuxt-link :to="goDetails(d)" target="_blank">
                 <h5>{{ d.goodsName }}</h5>
                 <p>SKU：{{ d.goodsCode }}</p>
                 <div

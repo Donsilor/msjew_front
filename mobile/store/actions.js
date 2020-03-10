@@ -108,7 +108,6 @@ export default {
             if(setFlag) {
                 location.reload();
             }
-            
         })
         .catch(err => {
             console.error(err)
