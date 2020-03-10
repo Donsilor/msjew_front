@@ -18,7 +18,7 @@ function makeCartGoodGroups (cart = []) {
     const localData = {}
     cart.forEach(item => {
         let groupId = item['groupId'] || item['id'] || item['createTime']
-        item.goodsId=item.goodsDetailsId
+        // item.goodsId=item.goodsDetailsId
         if (localData.hasOwnProperty(groupId)) {
             localData[groupId].data.push(item)
         } else {

@@ -368,8 +368,8 @@ export default {
           this.block1.pick = res.goodsImages.split(`,`)[0] || ``
           for (const i in res.details) {
             if (
-              this.steps.steps[0].goodsDetailsId ===
-              res.details[i].id
+              parseInt(this.steps.steps[0].goodsDetailsId) ===
+              parseInt(res.details[i].id)
             ) {
               this.block1.price = res.details[i].retailMallPrice
             }
@@ -392,8 +392,8 @@ export default {
           this.block2.pick = res.goodsImages.split(`,`)[0] || ``
           for (const i in res.details) {
             if (
-              this.steps.steps[1].goodsDetailsId ===
-              res.details[i].id
+              parseInt(this.steps.steps[1].goodsDetailsId) ===
+              parseInt(res.details[i].id)
             ) {
               this.block2.price = res.details[i].retailMallPrice
             }

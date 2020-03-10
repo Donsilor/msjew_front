@@ -196,14 +196,14 @@ export default function({ req, res, app, store }) {
           {
             goodsId: obj.data[0].goodsId,
             goodsDetailsId: obj.data[0].goodsDetailsId,
-            ct: obj.data[0].simpleGoodsEntity.categoryId,
+            ct: obj.data[0].simpleGoodsEntity.categoryId === 15 ? 1 : 2,
             cartId: obj.id,
             page: `detail`
           },
           {
             goodsId: obj.data[1].goodsId,
             goodsDetailsId: obj.data[1].goodsDetailsId,
-            ct: obj.data[1].simpleGoodsEntity.categoryId,
+            ct: obj.data[1].simpleGoodsEntity.categoryId === 15 ? 1 : 2,
             cartId: obj.id,
             page: `detail`
           }
@@ -220,7 +220,7 @@ export default function({ req, res, app, store }) {
       }
     } else {
       // console.log(obj.data[0].simpleGoodsEntity)
-      const ct = obj.data[0].simpleGoodsEntity.categoryId
+      const ct = parseInt(obj.data[0].simpleGoodsEntity.categoryId)
       // console.log(ct)
       if (ct === 15) {
         // console.log(`💎`)
@@ -237,6 +237,15 @@ export default function({ req, res, app, store }) {
           query: {
             goodId: obj.data[0].goodsId,
             ringType: 'single'
+          }
+        }
+      }else if (ct === 12) {
+        // console.log(`💍`)
+        route = {
+          path: `/ring/engagement-rings/${obj.data[0].goodsId}`,
+          query: {
+            goodId: obj.data[0].goodsId,
+            ringType: 'engagement'
           }
         }
       } else {

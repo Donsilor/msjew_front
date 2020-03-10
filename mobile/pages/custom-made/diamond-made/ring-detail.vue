@@ -20,6 +20,7 @@ export default {
       melo.steps[1].goodsDetailsId = data.detailsId
       melo.steps[1].goodsId = data.goodsId
       melo.steps[1].ct = 2
+      melo.steps[1].goodsType = data.goodsType
       this.$router.push({
         name: `custom-made-diamond-made-ring-detail`,
         query: {
