@@ -126,7 +126,7 @@
         {{ lang.paytips }}
       </div>
       <div
-        v-if="info.payChannel !== 1"
+        v-if="info.payChannel !== 1&&hadLogin"
         class="btn-common btn-black"
         @click="goDetails"
       >
