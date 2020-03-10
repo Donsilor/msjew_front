@@ -191,14 +191,21 @@ export default {
         this.totalPrice = 0
         for (const i in this.good) {
           if(this.good[i].groupType == 1){
+            // console.log(11111)
              if(parseInt(this.good[i].data[0].ringsSimpleGoodsEntity.status) === 0){
                 this.good[i].tick = false
                 continue;
               }
-              this.tickNum += 2
-              this.totalNum += 2
+              this.tickNum += 1
+              this.totalNum += 1
+
+          }else if(this.good[i].groupType == 2){
+            // console.log(22222)
+              this.tickNum += 1
+              this.totalNum += 1
 
           }else{
+            // console.log(333333)
               if(this.good[i].data[0].simpleGoodsEntity.goodsStatus!==2){
                 this.good[i].tick = false
                 continue;
@@ -207,7 +214,8 @@ export default {
               this.totalNum += 1
           }
 
-           this.good[i].tick = true
+          this.good[i].tick = true
+          // console.log("tick",this.good[i].tick)
          
           // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
           this.totalPrice +=parseFloat(this.good[i].price) 
@@ -220,9 +228,9 @@ export default {
       this.good = JSON.parse(JSON.stringify(this.good))
     },
     ticksCHeck(i) {
-      if(this.good[i].groupType == 1){
-          this.good[i].tick ? this.tickNum -= 2  : this.tickNum += 2
-          this.good[i].tick ? this.totalNum -= 2 : this.totalNum +=2
+      if(this.good[i].groupType == 1&&this.good[i].groupType == 2){
+          this.good[i].tick ? this.tickNum -= 1  : this.tickNum += 1
+          this.good[i].tick ? this.totalNum -= 1 : this.totalNum +=1
       }else{
          this.good[i].tick ? this.tickNum-- : this.tickNum++
          this.good[i].tick ? this.totalNum-- : this.totalNum++
@@ -305,9 +313,10 @@ export default {
         if (this.good[i].tick) {
           data.push(this.good[i].id)
         }
+      // console.log("length",this.good[i].tick)
       }
-      // console.log("length",data.length)
       //  console.log("length333",this.tickNum)
+      //  console.log("data.length",data.length)
       if (data.length !== this.tickNum) return
       const cartIds = data.join(',')
       this.$router.push({

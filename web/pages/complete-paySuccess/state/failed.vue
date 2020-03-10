@@ -1,50 +1,101 @@
 <template>
-  <div class="failed">
-    <div class="order-step">
-      <div class="one-step">
-        <div class="step-img">
-          <img src="../../../static/order/step.png" alt="" />
-          <span>1</span>
+  <div>
+    <div v-if="$store.getters.hadLogin" class="failed">
+      <div class="order-step">
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>1</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.confirmOrder`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.finishOrderInfo`) }}</div>
         </div>
-        <div class="step-arrow">
-          <img src="../../../static/order/arrow.png" alt="" />
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>2</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.payWay`) }}</div>
         </div>
-        <div class="step-title">{{ $t(`${lang}.confirmOrder`) }}</div>
-        <div class="step-desc">{{ $t(`${lang}.finishOrderInfo`) }}</div>
+        <div class="one-step">
+          <div class="step-img">
+            <span>3</span>
+          </div>
+          <div class="step-arrow" />
+          <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
+          <div class="step-desc" />
+        </div>
+        <div class="step-line-one" />
+        <div class="step-line-two" />
       </div>
-      <div class="one-step">
-        <div class="step-img">
-          <img src="../../../static/order/step.png" alt="" />
-          <span>2</span>
+      <div class="info-box">
+        <div class="title">
+          <div><img src="../../../static/order/close.png" alt="" /></div>
+          <div>{{ $t(`${lang}.payFail`) }}</div>
         </div>
-        <div class="step-arrow">
-          <img src="../../../static/order/arrow.png" alt="" />
+        <div class="tel">
+          {{ $t(`${lang}.contactPhone`) }}
         </div>
-        <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
-        <div class="step-desc">{{ $t(`${lang}.payWay`) }}</div>
+        <div class="btn-two">
+          <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
+          <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div>
+        </div>
       </div>
-      <div class="one-step">
-        <div class="step-img">
-          <span>3</span>
-        </div>
-        <div class="step-arrow" />
-        <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
-        <div class="step-desc" />
-      </div>
-      <div class="step-line-one" />
-      <div class="step-line-two" />
     </div>
-    <div class="info-box">
-      <div class="title">
-        <div><img src="../../../static/order/close.png" alt="" /></div>
-        <div>{{ $t(`${lang}.payFail`) }}</div>
+    <div v-else class="failed">
+      <div class="order-step">
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>1</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.confirmOrder`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.finishOrderInfo`) }}</div>
+        </div>
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>2</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.payWay`) }}</div>
+        </div>
+        <div class="one-step">
+          <div class="step-img">
+            <span>3</span>
+          </div>
+          <div class="step-arrow" />
+          <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
+          <div class="step-desc" />
+        </div>
+        <div class="step-line-one" />
+        <div class="step-line-two" />
       </div>
-      <div class="tel">
-        {{ $t(`${lang}.contactPhone`) }}
-      </div>
-      <div class="btn-two">
-        <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
-        <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div>
+      <div class="info-box">
+        <div class="title">
+          <div><img src="../../../static/order/close.png" alt="" /></div>
+          <div>{{ $t(`${lang}.payFail`) }}</div>
+        </div>
+        <div class="tel">
+          {{ $t(`${lang}.contactPhone`) }}
+        </div>
+        <div class="btn-two">
+          <div @click="returnBack2()">{{ $t(`${lang}.repay`) }}</div>
+          <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -56,7 +107,69 @@ export default {
   name: 'Failed',
   data() {
     return {
-      lang
+      lang,
+      good:[],
+      info2:{
+        orderId:'',
+        coinType:'',
+        orderAmount:''
+      },
+    }
+  },
+  created(){
+    // this.$store.dispatch('getLocalOrder').then(res => {
+    //   this.good=res
+    //   console.log("vres",res)
+    // })
+  },
+  mounted(){
+    if(this.$store.getters.hadLogin){
+      this.$axios
+        .get('/web/member/order/detail', {
+          params: {
+            orderId: this.oid
+          }
+        })
+        .then(res => {
+          this.infos.orderId=res.id
+          this.infos.coinType=res.coinCode
+          this.infos.orderAmount=res.orderAmount
+          // console.log("wwwww",this.data)
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+      })
+    }else{
+      this.$store.dispatch('getLocalOrder').then(v => {
+        this.good = v
+        console.log("vres",this.good)
+      })
+      this.$axios
+        .get('/web/member/order-tourist/detail', {
+          params: {
+            order_sn: this.oid
+          }
+        })
+        .then(res => {
+          // console.log("order_sn",res)
+          // this.data2 = res.data
+          // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
+          setTimeout(() => {
+            this.$router.push({path: "/"}); // 强制切换当前路由 path
+          }, 5000);
+          // console.log("wwwww",this.data)
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+      })
     }
   },
   methods: {
@@ -64,11 +177,73 @@ export default {
       this.$router.replace({
         path: 'payment-options',
         params: {
-          orderId: this.$route.params.orderId,
-          price: this.$route.params.price,
-          coinType: this.$route.params.coinType
+          orderId: this.infos.orderId,
+          price: this.infos.orderAmount,
+          coinType: this.infos.coinType
         }
       })
+    },
+    returnBack2() {
+      let baseUrl=this.$store.getters.baseUrl
+      let json=[]
+      for (const i in this.good) {
+        let group = this.good[i].data
+        let item = group.map(item => {
+          return {
+            createTime: item.createTime || new Date().getTime(),
+            goods_num: item.goodsCount,
+            goodsDetailsId: item.goodsDetailsId,
+            goods_id: item.goodsDetailsId,
+            group_id: item.groupId || null,
+            group_type:item.groupType,
+            goods_type: item.goodsType
+          }
+        })
+
+        json = json.concat(item)
+      }
+      this.$axios({
+        method: 'post',
+        url: '/web/member/order-tourist/create',
+        data: {
+          goodsCartList:json,
+          tradeType:'pc',
+          coinType:this.$store.state.coin,
+          returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
+        }
+      })
+        .then(res => {
+          // console.log('od===>', res)
+          // this.$store.dispatch('removeCart', this.pathTakeIds)
+          if(res.data.config){
+            window.location.replace(res.data.config)
+          }else {
+            this.$router.replace({
+              path: '/complete-paySuccess',
+              query: {
+                orderId: this.$route.query.orderId,
+                price: this.$route.query.price,
+                coinType: this.$route.query.coinType,
+                type: `transfer`
+              }
+            })
+          }
+          // this.$router.replace({
+          //   path: '/payment-options',
+          //   query: {
+          //     orderId: res.orderId,
+          //     price: res.orderAmount,
+          //     coinType: res.coinType
+          //   }
+          // })
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
     },
     goToFail() {
       this.$router.push({

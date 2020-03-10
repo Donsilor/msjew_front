@@ -130,7 +130,7 @@ export default {
   },
   methods: {
     getThatS() {
-      if (this.lock || this.bdArr.length < 2) return
+      // if (this.lock || this.bdArr.length < 2) return
       const melo = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.melo)
       )

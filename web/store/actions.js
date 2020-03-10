@@ -396,7 +396,7 @@ export default {
             }
         })
     },
-    //保存游客订单id
+    //保存游客订单id 后加
     setLocalCartOrder({ $axios, state, getters, commit, dispatch }, orderSn) {
         const cartOrderSn = 'cartOrderSn'
 
@@ -409,10 +409,30 @@ export default {
             }
         })
     },
-    //获取游客订单id
+    //获取游客订单id 后加
     getLocalCartOrder ({ $axios, state, getters, commit, dispatch }) {
         const cartOrderSn = 'cartOrderSn'
         return localStorage.getItem(cartOrderSn)
+    },
+
+    //保存游客订单信息 后加
+    setLocalOrder({ $axios, state, getters, commit, dispatch }, orders) {
+        console.log("orders",orders)
+        const cartOrder = 'cartOrder'
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                localStorage.setItem(cartOrder,orders)
+                return resolve()
+            } catch (e) {
+                return reject(e)
+            }
+        })
+    },
+    //获取游客订单信息 后加
+    getLocalOrder ({ $axios, state, getters, commit, dispatch }) {
+        const cartOrder = 'cartOrder'
+        return localStorage.getItem(cartOrder)
     },
 
     // 删除购物车商品

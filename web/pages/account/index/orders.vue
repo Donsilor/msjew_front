@@ -343,18 +343,18 @@ export default {
           }
           for (const i in res.data.data) {
             const o = res.data.data[i]
-            console.log("ppppppppppppppppppp",o)
+            // console.log("ppppppppppppppppppp",o)
             o.orderTime = moment(o.orderTime).format('YYYY/MM/DD')
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
               obj.link = `132`
             })
-            console.log("llllll",res.data.data[i].orderStatus)
+            // console.log("llllll",res.data.data[i].orderStatus)
             if (res.data.data[i].orderStatus == 10) {
               //  没给钱
               this.list.ordered.push(o)
-              console.log("777777",o)
+              // console.log("777777",o)
             } else if (res.data.data[i].orderStatus == 20||res.data.data[i].orderStatus == 30) {
 
               //  给了钱没发货
@@ -471,7 +471,7 @@ export default {
           40: this.$t(`${lang}.hadSend`),
           50: this.$t(`${lang}.hadFinish`),
         };
-        console.log("bbbbb",status_value[status])
+        // console.log("bbbbb",status_value[status])
       return status_value[status];
     },
     cancelOrder() {

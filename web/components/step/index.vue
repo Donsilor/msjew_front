@@ -317,13 +317,14 @@ export default {
           )}&ringType=engagement`
         }
       } else if (this.steps.steps[0].ct === 1) {
-        return `/build-your-own-ring/setting-details/${this.steps.steps[1].goodsId}?goodId=${
+
+        return `/build-your-own-ring/setting-details/${this.steps.steps[0].goodsId}?goodId=${
           this.steps.steps[1].goodsId
         }&step=2&steps=${this.$helpers.base64Encode(
           JSON.stringify(this.steps)
         )}`
       } else {
-        return `/build-your-own-ring/diamond-details/${this.steps.steps[1].goodsId}?goodId=${
+        return `/build-your-own-ring/diamond-details/${this.steps.steps[0].goodsId}?goodId=${
           this.steps.steps[1].goodsId
         }&step=2&steps=${this.$helpers.base64Encode(
           JSON.stringify(this.steps)

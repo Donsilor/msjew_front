@@ -33,7 +33,7 @@
                     getconfig(item.config, item.simpleGoodsEntity.specs)
                   }}
                 </p>
-                <!-- <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b> -->
+                <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
                 <div v-if="item.groupType === 1" class="btn-type">
                   {{ lang.ring }}
                 </div>
@@ -482,9 +482,9 @@ export default {
     switchName(i) {
       const num = parseInt(i)
       switch (num) {
-        case 1:
+        case 15:
           return `diamond`
-        case 2:
+        case 12:
           return `ring`
         case 4:
           return `necklace`
@@ -524,7 +524,7 @@ export default {
       }
       // 去单品详情
       if (item.groupType === 0) {
-        if (item.simpleGoodsEntity.categoryId === 1) {
+        if (item.simpleGoodsEntity.categoryId === 15) {
           // 是个钻石💎
           this.$router.push({
             name: 'diamond-diamonds',
@@ -570,14 +570,16 @@ export default {
           {
             goodsId: gs1,
             goodsDetailsId: gd1,
-            ct: ct1,
+            ct: ct1 === 15 ? 1 : 2,
+            goodsType: ct1,
             cartId: ci1,
             page: `detail`
           },
           {
             goodsId: gs2,
             goodsDetailsId: gd2,
-            ct: ct2,
+            ct: ct2 === 15 ? 1 : 2,
+            goodsType: ct2,
             cartId: ci2,
             page: `detail`
           }

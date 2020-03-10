@@ -94,15 +94,9 @@ export default {
     }
   },
   created() {
-    
-    // console.log("dfsdfsdsad")
-
-    // console.log("dfsdfsdsad",storage)
-   
-    // this.getinfo()
   },
   mounted(){
-     this.list = JSON.parse(storage.get('myCartList', 0))
+    this.list = JSON.parse(storage.get('myCartList', 0))
     console.log("已登录",this.isLogin)
     const _this = this
     _this.$nextTick(() => {
