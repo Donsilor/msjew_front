@@ -185,12 +185,12 @@ export default {
   },
   mounted() {
      if(this.$route.query.success == 'false'){
-        // this.$router.push({
-        //   name: 'cart-payFailed-orderId-price-coinType',
-        //   query: {   
-        //     orderId: this.$route.query.orderId||this.$route.query.order_sn,
-        //   }
-        // })
+        this.$router.push({
+          name: 'cart-payFailed-orderId-price-coinType',
+          query: {   
+            orderId: this.$route.query.orderId||this.$route.query.order_sn,
+          }
+        })
         // setTimeout(() => {
         //   this.$router.push({
         //     name: 'cart-payFailed-orderId-price-coinType',
