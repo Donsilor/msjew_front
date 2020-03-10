@@ -60,6 +60,7 @@ export default {
                 tax_number:'',
                 is_electronic:'0'
             },
+            info:{},
             totolPrice:this.$route.query.price,
             coin: this.$store.state.coin,
             lang: this.LANGUAGE.cart.invoice,
@@ -67,6 +68,7 @@ export default {
         }
     },
     mounted(){
+        this.invoice = this.info
         console.log(this.totolPrice)
     },
     methods:{
@@ -100,7 +102,7 @@ export default {
             // this.invoice.invoice_type = this.selectType
             // this.invoice.invoice_title = this.title
             // this.invoice.tax_number = this.tax
-            let info = this.invoice
+            let info = this.info
             this.$router.push({
                 name: 'cart-sureOrder',
                 query:{

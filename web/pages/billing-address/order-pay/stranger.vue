@@ -1865,6 +1865,7 @@ export default {
         tax_number:'',
         is_electronic:"0"
       },
+      invoices:{},
       url:'',
       show:false,
       goingPay: false,
