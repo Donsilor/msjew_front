@@ -819,7 +819,7 @@ export default {
       // }
       let info = {}
       if(this.kai == true){
-        info = this.$route.query.invoice
+        info = this.$route.params.invoice
       }
       if (this.isLogin) {
         this.$axios({
