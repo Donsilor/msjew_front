@@ -314,7 +314,7 @@ export default {
     if(this.$route.query.success == 'false'){
         console.log(11111111)  
         this.$router.replace({
-          path: '/complete-paySuccess?type=failed',
+          path: '/complete-paySuccess/state/failed',
           params: {   
             orderId: this.$route.query.orderId||this.$route.query.order_sn,
           }
