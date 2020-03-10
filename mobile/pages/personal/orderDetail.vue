@@ -159,14 +159,14 @@
           </div>
         </div>
       </div>
-      <div class="invoice">
+      <div class="invoice" v-show="invoice.length > 0">
         <!-- <p class="title">发票信息</p> -->
         <ul>
          
-          <template v-if="invoice.isElectronic == 0">
+          <template v-if="invoice.isElectronic !== 0">
             <li>{{ lang2.InvoiceType }}：{{ lang2.PaperInvoice }}</li>
           </template>
-          <template v-if="invoice.isElectronic !== 0">
+          <template v-if="invoice.isElectronic == 0">
             <li>{{ lang2.InvoiceType}}：{{ lang2.ElectronicInvoice }}</li>
           </template>
           <template v-if="invoice.invoiceType == 2">

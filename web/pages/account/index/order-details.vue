@@ -214,32 +214,34 @@
     </div>
 
     <div class="bot-info">
-      <div class="left-info">
-        <div class="new-address-title">
-          <div class="na-line" />
-          <div class="na-title"> {{ $t(`${lang_invoice}.InvoiceDetails`) }}</div>
-        </div>
-        <div class="order-infos">
-          <div class="info-line">
-            <div class="label"> {{ $t(`${lang_invoice}.InvoiceType`) }}</div>
-            <div class="orderNo">
-              {{ type }}
+      <div class="left-info" >
+        <div v-show="this.invoice.length > 0">
+          <div class="new-address-title">
+            <div class="na-line" />
+            <div class="na-title"> {{ $t(`${lang_invoice}.InvoiceDetails`) }}</div>
+          </div>
+          <div class="order-infos">
+            <div class="info-line">
+              <div class="label"> {{ $t(`${lang_invoice}.InvoiceType`) }}</div>
+              <div class="orderNo">
+                {{ type }}
+              </div>
             </div>
-          </div>
-          <div class="info-line">
-            <div class="label"> {{ $t(`${lang_invoice}.HeaderType`) }}</div>
-            <div class="ff ">
-              {{ headType }}
+            <div class="info-line">
+              <div class="label"> {{ $t(`${lang_invoice}.HeaderType`) }}</div>
+              <div class="ff ">
+                {{ headType }}
+              </div>
             </div>
-          </div>
-          <div class="info-line">
-            <div class="label"> {{ $t(`${lang_invoice}.Invoice`) }}</div>
-            <div class="ff">{{ invoice.invoiceTitle }}</div>
-          </div>
-          <div class="info-line">
-            <div class="label"> {{ $t(`${lang_invoice}.TaxID`) }}</div>
-            <div class="ff">
-              {{ invoice.taxNumber }}
+            <div class="info-line">
+              <div class="label"> {{ $t(`${lang_invoice}.Invoice`) }}</div>
+              <div class="ff">{{ invoice.invoiceTitle }}</div>
+            </div>
+            <div class="info-line">
+              <div class="label"> {{ $t(`${lang_invoice}.TaxID`) }}</div>
+              <div class="ff">
+                {{ invoice.taxNumber }}
+              </div>
             </div>
           </div>
         </div>
@@ -426,7 +428,7 @@ export default {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
           })
-          if(this.data.invoice.isElectronic == 0){
+          if(!this.data.invoice.isElectronic){
             this.type = this.$t(`${lang_invoice}.PaperInvoice`)
           } else {
             this.type = this.$t(`${lang_invoice}.ElectronicInvoice`)
