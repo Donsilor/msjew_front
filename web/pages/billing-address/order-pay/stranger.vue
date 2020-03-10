@@ -2291,7 +2291,9 @@ export default {
 
         json = json.concat(item)
       }
-      if(this.iconShow == false && this.invoiceBox == true){
+      console.log(this.iconShow)
+      if(this.iconShow ){
+        console.log(1111)
         invoice = this.invoice
       }
       this.$axios({

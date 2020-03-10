@@ -2583,7 +2583,7 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
-      if(this.iconShow == false && this.invoiceBox == true){
+      if(this.iconShow ){
         invoice = this.invoice
       }
       // console.log("arr",arr)
@@ -2666,7 +2666,7 @@ export default {
         // ? this.orderAddress.email
         // : this.orderEmail,
       }
-      if(this.iconShow == false && this.invoiceBox == true){
+      if(this.iconShow){
         invoice = this.invoice
       }
       // console.log("pppp",data)
