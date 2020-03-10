@@ -224,7 +224,7 @@ export default {
       // data: {
       //   address: {
       //     countryName: '',  http://localhost:8318/complete-payment    http://localhost:8328/cart/paySuccess
-      //     provinceName: '',
+      //     provinceName: '',  https://bdd.bddia.com/api/index.php/api/web/member/order-tourist/detail?order_sn=BDD202003098114447
       //     cityName: '',
       //     address: '',
       //     firstName: '',
@@ -311,8 +311,29 @@ export default {
     }
   },
   mounted() {
-    //  console.log("window",this.oid);
-    // console.log("url======",this.oid2)
+    if(this.$route.query.success == 'false'){
+        this.$router.replace({
+          path: '/complete-paySuccess/state/failed',
+          query: {   
+            orderId: this.$route.query.orderId || this.$route.query.order_sn,
+          }
+        })
+        // setTimeout(() => {
+        //   this.$router.replace({
+        //     path: '/complete-paySuccess/state/failed',
+        //     query: {   
+        //       orderId: this.$route.query.orderId || this.$route.query.order_sn,
+        //     }
+        //   })
+        // }, 3000);  
+        return
+      }else{
+        this.$store.dispatch('getLocalCartOrder').then(v => {
+          this.$store.dispatch('removeCart',v.split(','))
+          console.log("v",v)
+        })
+      }
+    // console.log("url======",this.oid2) http://localhost:8318/complete-paySuccess?type=failed
     if(this.$store.getters.hadLogin){
       this.$axios
         .get('/web/member/order/detail', {
@@ -321,6 +342,7 @@ export default {
           }
         })
         .then(res => {
+          console.log("window",this.$route.query);
           this.data = res.data
           setTimeout(() => {
             this.$router.push({path: "/"}); // 强制切换当前路由 path
@@ -335,10 +357,7 @@ export default {
           }
       })
     }else{
-      this.$store.dispatch('getLocalCartOrder').then(v => {
-        this.$store.dispatch('removeCart',v.split(','))
-        console.log("v",v)
-      })
+      
       this.$axios
         .get('/web/member/order-tourist/detail', {
           params: {

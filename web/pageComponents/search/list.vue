@@ -202,6 +202,14 @@ export default {
                 ringType: 'pair'
               }
             }
+          }else if(item.categoryId == 15){
+            item.to = {
+              // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+              path: '/diamond-details/'+ item.id,
+              query: {
+                goodId: item.id
+              }
+            }
 
           }else{
             item.to = {

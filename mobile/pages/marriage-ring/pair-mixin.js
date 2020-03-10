@@ -348,7 +348,8 @@ export default {
         const o = {
           id: goodInfo.materials[i].id,
           name: goodInfo.materials[i].name,
-          image: this.$IMG_URL + goodInfo.materials[i].configAttrImg || ''
+          image: goodInfo.materials[i].image
+          // image: this.$IMG_URL + goodInfo.materials[i].configAttrImg || ''
         }
         mcArr.push(o)
       }

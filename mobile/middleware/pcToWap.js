@@ -72,6 +72,7 @@ function queryParams (data) {
 		//测试环境
 		host = 'http://www.bdd.bddia.com';
 	}
+
     const toWapUrl = path => {
       if(path === '/undefined') {
         return

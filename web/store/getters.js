@@ -67,7 +67,6 @@ export default {
     const userInfo = state.userInfo
     return userInfo
   },
-
   //当前网址域名
   baseUrl() {
     let host = window.location.host;

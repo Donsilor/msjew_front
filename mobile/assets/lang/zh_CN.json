@@ -125,7 +125,7 @@
         "toast2": "移除成功"
       },
       "sureOrder": {
-        "firstLogin":"请先登录！",
+        "firstLogin":"请先登录或注册！",
         "sureOrder": "确认订单",
         "login": "登入账户",
         "settlement": "以加速结算或是",

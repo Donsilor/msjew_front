@@ -2,10 +2,10 @@
   <div class="pay-success">
     <!-- 已登录 -->
     <div v-if="hadLogin">
-      <div class="top">
+      <div class="top" v-show="this.$route.query.success !== 'false'">
         <img src="@/static/cart/success.png" />
-        <!-- <p v-if="verify === false" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
-        <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+        <!-- <p v-if="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
+        <p v-if="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
           <span class="font-size-16">{{ info.coinCode }}</span>
           {{ info.orderAmount }}
@@ -23,7 +23,7 @@
         ></span>
       </div>
       <ul class="price">
-        <li v-if="info.preferFee || info.transPreferFee">
+        <!-- <li v-if="info.preferFee || info.transPreferFee">
           <div class="title">
             {{ lang.preferFee }}
           </div>
@@ -35,7 +35,7 @@
             <span> {{ lang.transPreferFee }}</span>
             <span>-{{ info.coinCode }}{{ info.transPreferFee }}</span>
           </div>
-        </li>
+        </li> -->
         <li>
           <div class="title">
             {{ lang.payInfo }}
@@ -53,10 +53,10 @@
         </li>
       </ul>
     </div>
-    <!-- 未登录 -->
+    <!-- 未登录 -->  
     <div v-else>
-      <div class="top">
-        <img src="@/static/cart/success.png" />
+      <div class="top" v-show="this.$route.query.success !== 'false'">
+        <img src="@/static/cart/success.png"  />
         <!-- <p v-if="verify == false" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
         <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
@@ -95,7 +95,7 @@
           </div>
           <div class="info">
             <span>{{ text }}{{ lang.pay }}</span>
-            <span>{{ info.coinCode }}{{ formatMoney(orderinfo.orderAmount) }}</span>
+            <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.orderAmount) }}</span>
           </div>
         </li>
         <li>
@@ -126,7 +126,7 @@
         {{ lang.paytips }}
       </div>
       <div
-        v-if="info.payChannel !== 1"
+        v-if="info.payChannel !== 1&&hadLogin"
         class="btn-common btn-black"
         @click="goDetails"
       >
@@ -185,16 +185,24 @@ export default {
   },
   mounted() {
      if(this.$route.query.success == 'false'){
-        console.log(11111111)  
         this.$router.push({
           name: 'cart-payFailed-orderId-price-coinType',
           query: {   
             orderId: this.$route.query.orderId||this.$route.query.order_sn,
           }
         })
+        // setTimeout(() => {
+        //   this.$router.push({
+        //     name: 'cart-payFailed-orderId-price-coinType',
+        //     query: {   
+        //       orderId: this.$route.query.orderId||this.$route.query.order_sn,
+        //     }
+        //   })
+        // }, 3000);  
+        
       }
       console.log("aa",this.$route.query)
-    this.list = JSON.parse(storage.get('myCartList', 0))
+    this.list = JSON.parse(storage.get('myCartList', 0))   
     // console.log("myCartList",this.list)
     const _this = this
     _this.$nextTick(() => {
@@ -224,7 +232,7 @@ export default {
         }
       })
         .then(res => {
-          
+
           this.info = res
           this.getChannelType(this.info.payChannel)
         })
@@ -242,7 +250,7 @@ export default {
         }
       })
         .then(res => {
-          // console.log("dssadas",res)
+          console.log("dssadas",res)
           this.orderinfo = res
           this.getChannelType(this.orderinfo.payChannel)
          

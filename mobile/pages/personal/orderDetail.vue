@@ -615,7 +615,7 @@ export default {
         }
 
         switch (info.data[0].categoryId) {
-          case 1:
+          case 15:
             // 钻石
             routerName = 'diamond-diamonds'
             routerQuery = {
@@ -687,13 +687,7 @@ export default {
             goodId: goodId
           }
           break
-          case 15:
-          // 裸钻
-          routerName = 'diamond-diamonds'
-          routerQuery = {
-            goodId: goodId
-          }
-          break
+          
         }
       }
       if ([1].indexOf(info.groupType) > -1) {

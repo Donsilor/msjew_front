@@ -1673,7 +1673,8 @@ export default {
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           this.$store.dispatch('setLocalCartOrder',this.pathTakeIds)
-          console.log(`good22222======>`, this.pathTakeIds)
+          this.$store.dispatch('setLocalOrder',res)
+          console.log(`good22222======>`, res)
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
@@ -1897,7 +1898,6 @@ export default {
         })
     },
     createOrder() { 
-      let baseUrl=this.$store.getters.baseUrl
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -1924,6 +1924,21 @@ export default {
         }, 22)
         return
       }
+      if(this.payWay!==6){
+          this.$errorMessage(this.$t(`${lang}.firstLogin`))
+          const topB = document.getElementsByClassName('layout-box')[0];
+          const that = this
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-that.scrollTop / 5)
+            topB.scrollTop = that.scrollTop + ispeed
+            if (that.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
+        return
+      }
+      let baseUrl=this.$store.getters.baseUrl
+      
       let json=[]
      
       for (const i in this.good) {

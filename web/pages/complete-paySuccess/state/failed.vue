@@ -1,50 +1,101 @@
 <template>
-  <div class="failed">
-    <div class="order-step">
-      <div class="one-step">
-        <div class="step-img">
-          <img src="../../../static/order/step.png" alt="" />
-          <span>1</span>
+  <div>
+    <div v-if="$store.getters.hadLogin" class="failed">
+      <div class="order-step">
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>1</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.confirmOrder`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.finishOrderInfo`) }}</div>
         </div>
-        <div class="step-arrow">
-          <img src="../../../static/order/arrow.png" alt="" />
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>2</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.payWay`) }}</div>
         </div>
-        <div class="step-title">{{ $t(`${lang}.confirmOrder`) }}</div>
-        <div class="step-desc">{{ $t(`${lang}.finishOrderInfo`) }}</div>
+        <div class="one-step">
+          <div class="step-img">
+            <span>3</span>
+          </div>
+          <div class="step-arrow" />
+          <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
+          <div class="step-desc" />
+        </div>
+        <div class="step-line-one" />
+        <div class="step-line-two" />
       </div>
-      <div class="one-step">
-        <div class="step-img">
-          <img src="../../../static/order/step.png" alt="" />
-          <span>2</span>
+      <div class="info-box">
+        <div class="title">
+          <div><img src="../../../static/order/close.png" alt="" /></div>
+          <div>{{ $t(`${lang}.payFail`) }}</div>
         </div>
-        <div class="step-arrow">
-          <img src="../../../static/order/arrow.png" alt="" />
+        <div class="tel">
+          {{ $t(`${lang}.contactPhone`) }}
         </div>
-        <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
-        <div class="step-desc">{{ $t(`${lang}.payWay`) }}</div>
+        <div class="btn-two">
+          <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
+          <!-- <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div> -->
+        </div>
       </div>
-      <div class="one-step">
-        <div class="step-img">
-          <span>3</span>
-        </div>
-        <div class="step-arrow" />
-        <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
-        <div class="step-desc" />
-      </div>
-      <div class="step-line-one" />
-      <div class="step-line-two" />
     </div>
-    <div class="info-box">
-      <div class="title">
-        <div><img src="../../../static/order/close.png" alt="" /></div>
-        <div>{{ $t(`${lang}.payFail`) }}</div>
+    <div v-else class="failed">
+      <div class="order-step">
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>1</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.confirmOrder`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.finishOrderInfo`) }}</div>
+        </div>
+        <div class="one-step">
+          <div class="step-img">
+            <img src="../../../static/order/step.png" alt="" />
+            <span>2</span>
+          </div>
+          <div class="step-arrow">
+            <img src="../../../static/order/arrow.png" alt="" />
+          </div>
+          <div class="step-title">{{ $t(`${lang}.orderPay`) }}</div>
+          <div class="step-desc">{{ $t(`${lang}.payWay`) }}</div>
+        </div>
+        <div class="one-step">
+          <div class="step-img">
+            <span>3</span>
+          </div>
+          <div class="step-arrow" />
+          <div class="step-title">{{ $t(`${lang}.finishPay`) }}</div>
+          <div class="step-desc" />
+        </div>
+        <div class="step-line-one" />
+        <div class="step-line-two" />
       </div>
-      <div class="tel">
-        {{ $t(`${lang}.contactPhone`) }}
-      </div>
-      <div class="btn-two">
-        <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
-        <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div>
+      <div class="info-box">
+        <div class="title">
+          <div><img src="../../../static/order/close.png" alt="" /></div>
+          <div>{{ $t(`${lang}.payFail`) }}</div>
+        </div>
+        <div class="tel">
+          {{ $t(`${lang}.contactPhone`) }}
+        </div>
+        <div class="btn-two">
+          <div @click="returnBack2()">{{ $t(`${lang}.repay`) }}</div>
+          <!-- <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div> -->
+        </div>
       </div>
     </div>
   </div>
@@ -56,19 +107,97 @@ export default {
   name: 'Failed',
   data() {
     return {
-      lang
+      oid: this.$route.query.order_sn||this.$route.query.orderId,
+      lang,
+      good:[],
+      info2:{
+        orderId:'',
+        coinType:'',
+        orderAmount:''
+      },
+    }
+  },
+  created(){
+    // this.$store.dispatch('getLocalOrder').then(res => {
+    //   this.good=res
+    //   console.log("vres",res)
+    // })
+  },
+  mounted(){
+    // this.$store.dispatch('getLocalOrder').then(res => {
+    //   this.good = res
+    //   console.log("vres",res)
+    // })
+    if(this.$store.getters.hadLogin){
+      this.$axios
+        .get('/web/member/order/detail', {
+          params: {
+            orderId: this.oid
+          }
+        })
+        .then(res => {
+          this.info2.orderId = res.data.id
+          this.info2.coinType = res.data.coinCode
+          this.info2.orderAmount = res.data.orderAmount
+          console.log("wwwww",this.info2.orderId)
+        })
+        .catch(err => {
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+      })
+    }else{
+      // this.$store.dispatch('getLocalCartOrder').then(v => {
+      //   this.$store.dispatch('removeCart',v.split(','))
+      //   console.log("v",v)
+      // }) 
+      // this.$axios
+      //   .get('/web/member/order-tourist/detail', {
+      //     params: {
+      //       order_sn: this.oid
+      //     }
+      //   })
+      //   .then(res => {
+      //     // console.log("order_sn",res)
+      //     // this.data2 = res.data
+      //     // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
+      //     // setTimeout(() => {
+      //     //   this.$router.push({path: "/"}); // 强制切换当前路由 path
+      //     // }, 5000);
+      //     // console.log("wwwww",this.data)
+      //   })
+      //   .catch(err => {
+      //     if (!err.response) {
+      //       this.$message.error(err.message)
+      //     } else {
+      //       // console.log(err)
+      //     }
+      // })
     }
   },
   methods: {
     returnBack() {
       this.$router.replace({
-        path: 'payment-options',
-        params: {
-          orderId: this.$route.params.orderId,
-          price: this.$route.params.price,
-          coinType: this.$route.params.coinType
+        path: '/payment-options',
+        query: {
+          orderId: this.info2.orderId,
+          price: this.info2.orderAmount,
+          coinType: this.info2.coinType
         }
       })
+    },
+    returnBack2() {
+      this.$store.dispatch('getLocalCartOrder').then(v => {
+        this.$router.replace({
+          path: '/billing-address',
+          query: {
+            cartIds: v,
+          }
+        })
+      })
+      
     },
     goToFail() {
       this.$router.push({
