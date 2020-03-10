@@ -2034,10 +2034,12 @@ export default {
         this.typeShow = true
         return
       } 
-      if(this.invoice.tax_number == ''){
-        this.taxShow = true
-        return
-      } 
+      if(this.invoice.is_electronic == 1){
+        if(this.invoice.tax_number == ''){
+          this.taxShow = true
+          return
+        } 
+      }
       this.content = false
       this.gou = true
     },
