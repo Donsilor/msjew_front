@@ -2,8 +2,8 @@
   <div class="pay-success">
     <!-- 已登录 -->
     <div v-if="hadLogin">
-      <div class="top" >
-        <img src="@/static/cart/success.png" v-if="this.$route.query.success == 'false'"/>
+      <div class="top" v-show="this.$route.query.success !== 'false'">
+        <img src="@/static/cart/success.png" />
         <!-- <p v-if="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
         <p v-if="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
@@ -55,10 +55,10 @@
     </div>
     <!-- 未登录 -->  
     <div v-else>
-      <div class="top" >
-        <img src="@/static/cart/success.png" v-if="this.$route.query.success == 'false'" />
+      <div class="top" v-show="this.$route.query.success !== 'false'">
+        <img src="@/static/cart/success.png"  />
         <!-- <p v-if="verify == false" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
-        <p v-if="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+        <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
           <span class="font-size-16">{{ orderinfo.coinCode }}</span>
           {{ orderinfo.orderAmount }}
