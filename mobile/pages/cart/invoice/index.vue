@@ -68,8 +68,8 @@ export default {
         }
     },
     mounted(){
-        // this.invoice = this.info
-        console.log(this.kai)
+        
+        // console.log(this.kai)
     },
     methods:{
         selected(ind){
@@ -99,14 +99,10 @@ export default {
                    return
                 }
             }
-            let info = {}
-            if(this.kai == true){
-                info = this.invoice
-            }
             this.$router.push({
                 name: 'cart-sureOrder',
-                query:{
-                    invoice:info
+                params:{
+                    invoice:this.invoice
                 }
             })
         }

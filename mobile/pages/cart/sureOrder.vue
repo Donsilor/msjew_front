@@ -340,7 +340,7 @@ export default {
     }
   },
   computed: {
-
+    
     selectedCouponInfo() {
       const _this = this
       let result = {}
@@ -409,11 +409,15 @@ export default {
       return result
     }
   },
+  created(){
+    // console.log("aaaa",)
+    //     this.kai = this.$route.query.invoice !== ''
+  },
   mounted() {
+    console.log("query",this.$route.params.invoice)
     this.$nextTick(() => {
-      if(this.$route.query.invoice !== ''){
-        this.kai = true
-      }
+      this.kai = typeof this.$route.params.invoice !== 'undefined' && this.$route.params.invoice.invoice_title != ''
+      console.log(this.kai)
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
       } else {
@@ -813,6 +817,10 @@ export default {
       //   this.$toast.show(this.lang.toast3)
       //   return
       // }
+      let info = {}
+      if(this.kai == true){
+        info = this.$route.query.invoice
+      }
       if (this.isLogin) {
         this.$axios({
           method: 'post',
@@ -824,7 +832,7 @@ export default {
             // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
-            invoice:this.$route.query.invoice
+            invoice: info
             // afterMail: this.mailbox,
             // recvType: 1,
             // preferId: this.selectCouponId ? this.selectCouponId : null,
