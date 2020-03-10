@@ -215,7 +215,7 @@
 
     <div class="bot-info">
       <div class="left-info" >
-        <div v-show="this.invoice.length > 0">
+        <div v-show="this.invoice && this.invoice.invoiceTitle">
           <div class="new-address-title">
             <div class="na-line" />
             <div class="na-title"> {{ $t(`${lang_invoice}.InvoiceDetails`) }}</div>
