@@ -312,13 +312,14 @@ export default {
   },
   mounted() {
     if(this.$route.query.success == 'false'){
-        console.log(11111111)  
-        this.$router.replace({
-          path: '/complete-paySuccess/state/failed',
-          query: {   
-            orderId: this.$route.query.orderId || this.$route.query.order_sn,
-          }
-        })
+        setTimeout(() => {
+          this.$router.replace({
+            path: '/complete-paySuccess/state/failed',
+            query: {   
+              orderId: this.$route.query.orderId || this.$route.query.order_sn,
+            }
+          })
+        }, 3000);  
         return
       }else{
         this.$store.dispatch('getLocalCartOrder').then(v => {
