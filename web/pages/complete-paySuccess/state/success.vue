@@ -320,7 +320,7 @@ export default {
           }
         })
       }
-    // console.log("url======",this.oid2)
+    // console.log("url======",this.oid2) http://localhost:8318/complete-paySuccess?type=failed
     if(this.$store.getters.hadLogin){
       this.$axios
         .get('/web/member/order/detail', {
