@@ -1858,7 +1858,7 @@ export default {
       this.Active = true
     },
     handle(){
-      console.log("取到的值是"+this.radio);
+      console.log("取到的值是"+this.invoice.invoice_type);
     },
     close(){
       this.invoiceBox = false
