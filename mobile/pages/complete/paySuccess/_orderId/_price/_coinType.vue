@@ -117,7 +117,7 @@
       <p>{{ lang.send }}</p>
       <p>{{ info.afterMail }}</p>
     </div>
-    <div class="btn" v-show="this.$route.query.success == 'false'">
+    <div class="btn">
       <div
         v-if="info.payChannel === 1"
         class="btn-common btn-black"
