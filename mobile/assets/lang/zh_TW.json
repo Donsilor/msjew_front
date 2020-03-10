@@ -124,6 +124,22 @@
       "toast1": "請選擇要結賬商品",
       "toast2": "移除成功"
     },
+    "invoice":{
+      "InvoiceDetails":"發票詳情",
+      "HeaderType":"抬頭類型",
+      "BusinessUnit":"企業單位",
+      "UnBusinessUnit":"個人/非企業單位",
+      "Invoice":"發票抬頭",
+      "TaxID":"稅號",
+      "holder1":"填寫發票抬頭",
+      "holder2":"填寫納稅人識別號",
+      "totalAmount":"總金額",
+      "tips":"*稍後紙質發票會隨訂單商品一起快遞給您,請注意查收！",
+      "confirm":"確認提交",
+      "hint1":"抬頭類型不能為空",
+      "hint2":"發票抬頭不能為空",
+      "hint3":"稅號不能為空"
+    },
     "sureOrder": {
       "firstLogin":"請先登錄！",
       "sureOrder": "確認訂單",

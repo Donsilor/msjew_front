@@ -121,6 +121,16 @@
             :placeholder="lang.more"
           ></textarea>
         </div>
+        <!-- 开具发票 -->
+        <div class="invoice">
+          <div class="title">
+            <span>发票</span>
+            <div>
+              <span v-show="!kai" @click="show">不开发票</span>
+              <span v-show="kai" @click="show">开发票</span>
+            </div>
+          </div>
+        </div>
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
@@ -175,10 +185,10 @@
           </div>
         </div> -->
         <ul class="price">
-          <!--          <li v-if="isLogin" @click="selectCupon">-->
-          <!--            <span>{{ lang.cupon }}</span-->
-          <!--            ><span>{{ cuponName }}</span>-->
-          <!--          </li>-->
+          <!-- <li v-if="isLogin" @click="selectCupon">
+            <span>{{ lang.cupon }}</span
+            ><span>{{ cuponName }}</span>
+          </li> -->
           <li>
             <span>{{ lang.allFee }} </span
             ><span
@@ -270,6 +280,7 @@ export default {
   },
   data() {
     return {
+      kai:false,
       url:'', 
       lang2: this.LANGUAGE.cart.pay,
       coin: this.$store.state.coin,
@@ -324,10 +335,12 @@ export default {
       selectCouponId: '',
       cuponList: [],
       session: '',
-      info:[]
+      info:[],
+      totlePrice:''
     }
   },
   computed: {
+
     selectedCouponInfo() {
       const _this = this
       let result = {}
@@ -391,16 +404,12 @@ export default {
            result = this.formatMoney(this.allFee.order_amount)
          } 
        }
-      // else {
-      //   console.log(33333) 
-      //   result = '--'
-      // }
-      // console.log("result",result) 
+       this.totlePrice = result
+       console.log("dddd",this.totlePrice)
       return result
     }
   },
   mounted() {
-    
     this.$nextTick(() => {
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
@@ -436,6 +445,15 @@ export default {
     })
   },
   methods: {
+    show(){
+      this.kai = !this.kai
+      this.$router.push({
+        name: 'cart-invoice',
+        query:{
+          price:this.totlePrice
+        }
+      })
+    },
     changeType(ind) {
       // console.log("选择哪一个",ind)
       this.typeIndex = ind
@@ -1331,7 +1349,13 @@ export default {
     line-height: 14px;
   }
 }
-
+// 发票
+.invoice{
+  .title{
+    display: flex;
+    justify-content: space-between;
+  }
+}
 // 支付方式
 .payways{
   background: #f2f2f2;

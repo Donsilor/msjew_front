@@ -124,6 +124,22 @@
       "toast1": "Choose products before you pay",
       "toast2": "Deleted"
     },
+    "invoice": {
+      "InvoiceDetails": "Invoice Details",
+      "HeaderType": "HeaderType",
+      "BusinessUnit": "Business Unit",
+      "UnBusinessUnit": "Individual / Non-Business Unit",
+      "Invoice": "Invoice Header",
+      "TaxID": "Tax ID",
+      "holder1": "Fill Invoice Header",
+      "holder2": "Fill in the taxpayer identification number",
+      "totalAmount": "Total Amount",
+      "tips": "* A paper invoice will be delivered to you with the order product later, please check it!",
+      "confirm": "Confirm submission",
+      "hint1": "Header type cannot be empty",
+      "hint2": "Invoice header cannot be empty",
+      "hint3": "Tax ID cannot be empty"
+    },
     "sureOrder": {
       "firstLogin": "Please login first!",
       "sureOrder": "CONFIRM ORDER",
