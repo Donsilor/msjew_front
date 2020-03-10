@@ -659,7 +659,7 @@
                     <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
                   </div> -->
                   <div class="input-line" v-show="isactive == true">
-                    <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceDetails`) }}</div>
+                    <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
                     <div class="input-box">
                       <input
                         style="text-align:center;"
@@ -684,6 +684,10 @@
                       />
                     </div>
                   </div> -->
+                  <!-- invoice_type:'',
+      invoice_title:'',
+      tax_number:'',
+      is_electronic:"0", -->
                   <div class="base-info-line">
                     <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang3}.HeaderType`) }}</div>
                     <div class="base-info-line-content marriage-choose" >
@@ -720,8 +724,8 @@
                   <div v-show="typeShow" class="empltyErr">
                     {{ $t(`${lang3}.hint2`) }}
                   </div>
-                  <div class="input-line">
-                    <div class="label"><span v-if="invoice.is_electronic==2" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
+                  <div class="input-line">  
+                    <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
                     <div
                       :class="[
                         { 'border-change': borderChange === 2 },
@@ -758,10 +762,11 @@
                 <div class="msgbox" v-show="gou">
                   <div class="gou-img">
                     <img src="../../../static/order/ticks.png" alt="">
+                    <p>提交成功</p>
                   </div>
-                  <div class="btn">
+                  <!-- <div class="btn">
                     <button @click="complete">{{ $t(`${lang3}.carryOut`) }}</button>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -1554,11 +1559,11 @@
           <div class="invoice">
 
             <div class="invoice-btn">
-              <div v-show="!iconShow" @click="show2">
+              <div v-show="!iconShow" @click="show2(1)">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang3}.default`) }}</span> 
               </div>
-              <div v-show="iconShow" @click="show2">
+              <div v-show="iconShow" @click="show2(2)">
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
                 <span>{{ $t(`${lang3}.Invoicing`) }}</span>
               </div>
@@ -1636,7 +1641,7 @@
                     {{ $t(`${lang3}.hint2`) }}
                   </div>
                   <div class="input-line">
-                    <div class="label"><span v-if="invoice.is_electronic==2" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
+                    <div class="label"><span v-if="invoice.invoice_type == 1" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
                     <div
                       :class="[
                         { 'border-change': borderChange === 2 },
@@ -1673,6 +1678,7 @@
                 <div class="msgbox" v-show="gou">
                   <div class="gou-img">
                     <img src="../../../static/order/ticks.png" alt="">
+                     <p>提交成功</p>
                   </div>
                   <div class="btn">
                     <button @click="complete">{{ $t(`${lang3}.carryOut`) }}</button>
@@ -1859,6 +1865,10 @@ export default {
       taxShow:false,
       isactive:true,
       Active:false,
+      // invoice_type:'',
+      // invoice_title:'',
+      // tax_number:'',
+      // is_electronic:"0",
       invoice:{
         invoice_type:'',
         invoice_title:'',
@@ -1994,9 +2004,7 @@ export default {
       })
   },
   mounted() {
-    // const baseUrl=this.$store.getters.baseUrl
-    // console.log("baseUrl",baseUrl)
-    // this.getTex()
+    
     this.language = this.getCookie('language')
     window.addEventListener('scroll', this.scrollToTop);
   },
@@ -2022,12 +2030,14 @@ export default {
       this.iconShow=!this.iconShow
       if(this.iconShow == true){
         this.invoiceBox = true
+        this.content = true
       }else{
         this.invoiceBox = false
+        this.content = false
       }
     },
     confirm(){
-      if(this.invoice.is_electronic == ''){
+      if(this.invoice.invoice_type == ''){
         this.redioShow = true
         return
       } 
@@ -2035,14 +2045,19 @@ export default {
         this.typeShow = true
         return
       } 
-      if(this.invoice.is_electronic == 1){
+      if(this.invoice.invoice_type == 1){
         if(this.invoice.tax_number == ''){
           this.taxShow = true
           return
         } 
       }
-      this.content = false
       this.gou = true
+      this.content = false
+      setTimeout(() => {
+        this.content = false
+        this.gou = false
+        this.invoiceBox = false
+      }, 1000);
     },
     complete(){
       this.invoiceBox = false
@@ -2258,8 +2273,8 @@ export default {
         }, 22)
         return
       }
+      let invoice = {}
       let json=[]
-     
       for (const i in this.good) {
         let group = this.good[i].data
         let item = group.map(item => {
@@ -2276,12 +2291,15 @@ export default {
 
         json = json.concat(item)
       }
+      if(this.iconShow == false && this.invoiceBox == true){
+        invoice = this.invoice
+      }
       this.$axios({
         method: 'post',
         url: '/web/member/order-tourist/create',
         data: {
           goodsCartList:json,
-          invoice:this.invoice,
+          invoice:invoice,
           tradeType:'pc',
           coinType:this.$store.state.coin,
           returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
@@ -2325,6 +2343,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.star{
+  color: #c28c8c;
+}
 div {
   box-sizing: border-box;
 }
@@ -4170,10 +4191,14 @@ div {
     font-size: 12px;
   }
   .gou-img{
-    display: flex;
-    justify-content: center;
+    // display: flex;
+    // justify-content: center;   
     width: 455px;
-    padding: 100px 0;
+    padding: 0px 180px;
+    img{
+      width: 75px;
+      height: 75px;
+    }
   }
   .invoice-btn{
     margin-left: 20px;

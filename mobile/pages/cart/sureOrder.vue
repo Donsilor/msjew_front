@@ -124,10 +124,10 @@
         <!-- 开具发票 -->
         <div class="invoice">
           <div class="title">
-            <span>发票</span>
+            <span>{{ lang3.invo }}</span>
             <div>
-              <span v-show="!kai" @click="show">不开发票</span>
-              <span v-show="kai" @click="show">开发票</span>
+              <span class="underline" v-show="!kai" @click="show">{{ lang3.NotInvoiced }}</span>
+              <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
         </div>
@@ -283,6 +283,7 @@ export default {
       kai:false,
       url:'', 
       lang2: this.LANGUAGE.cart.pay,
+      lang3: this.LANGUAGE.cart.invoice,
       coin: this.$store.state.coin,
       form: [],
       actionLink: '',
@@ -328,7 +329,6 @@ export default {
       isSend: true,
       productNum: 0,
       planDays:'',
-
       sureCoupon: false,
       inputCouponCode: '',
       inputCouponInfo: null,
@@ -450,7 +450,8 @@ export default {
       this.$router.push({
         name: 'cart-invoice',
         query:{
-          price:this.totlePrice
+          price:this.totlePrice,
+          kai:this.kai
         }
       })
     },
@@ -1353,7 +1354,12 @@ export default {
 }
 // 发票
 .invoice{
+  .underline{
+    text-decoration: underline;
+  }
   .title{
+    font-size: 14px;
+    color: rgba(51, 51, 51, 1);
     display: flex;
     justify-content: space-between;
   }

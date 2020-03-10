@@ -125,6 +125,9 @@
       "toast2": "Deleted"
     },
     "invoice": {
+      "NotInvoiced": "Not Invoiced",
+      "Invoicing": "Invoicing",
+      "invo": "Invoice",
       "email": "Email",
       "InvoiceDetails": "Invoice Details",
       "HeaderType": "HeaderType",

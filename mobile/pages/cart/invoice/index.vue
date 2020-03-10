@@ -32,7 +32,7 @@
         <div class="totle">
             <div class="title"><span>{{ lang.totalAmount }}</span></div>
             <div class="rise_select">
-                <span>{{ coin }}{{totolPrice}}</span>
+                <span>{{ coin }} {{totolPrice}}</span>
             </div>
         </div>
         <div class="tips">
@@ -62,6 +62,7 @@ export default {
             },
             info:{},
             totolPrice:this.$route.query.price,
+            kai:this.$route.query.kai,
             coin: this.$store.state.coin,
             lang: this.LANGUAGE.cart.invoice,
             isLogin: !!this.$store.state.token,
@@ -102,7 +103,9 @@ export default {
             // this.invoice.invoice_type = this.selectType
             // this.invoice.invoice_title = this.title
             // this.invoice.tax_number = this.tax
-            let info = this.info
+            if(this.kai == true){
+                let info = this.info
+            }
             this.$router.push({
                 name: 'cart-sureOrder',
                 query:{

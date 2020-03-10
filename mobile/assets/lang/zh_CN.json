@@ -125,6 +125,9 @@
         "toast2": "移除成功"
       },
       "invoice":{
+        "NotInvoiced":"不开发票",
+        "Invoicing":"开发票",
+        "invo":"发票",
         "email":"邮箱",
         "InvoiceType":"发票类型",
         "InvoiceDetails":"发票详情",

@@ -125,6 +125,9 @@
       "toast2": "移除成功"
     },
     "invoice":{
+      "NotInvoiced":"不開發票",
+      "Invoicing":"開發票",
+      "invo":"發票",
       "email":"郵箱",
       "InvoiceDetails":"發票詳情",
       "HeaderType":"抬頭類型",

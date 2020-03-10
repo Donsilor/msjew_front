@@ -632,7 +632,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="invoice.is_electronic == 2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.invoice_type == 1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },
@@ -1477,7 +1477,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <div class="input-line">
-                  <div class="label"><span v-if="invoice.is_electronic==2" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
                       { 'border-change': borderChange === 2 },
@@ -1861,18 +1861,20 @@ export default {
       console.log("取到的值是"+this.radio);
     },
     close(){
-       this.content = false
+      this.invoiceBox = false
     },
     show2(){
       this.iconShow=!this.iconShow
       if(this.iconShow == true){
         this.invoiceBox = true
+        this.content = true
       }else{
         this.invoiceBox = false
+        this.content = false
       }
     },
     confirm(){
-      if(this.invoice.is_electronic == ''){
+      if(this.invoice.invoice_type == ''){
         this.redioShow = true
         return
       } 
@@ -1880,20 +1882,24 @@ export default {
         this.typeShow = true
         return
       } 
-      if(this.invoice.is_electronic == 1){
+      if(this.invoice.invoice_type == 1){
         if(this.invoice.tax_number == ''){
           this.taxShow = true
           return
         } 
       }
-      this.content = false
       this.gou = true
+      this.content = false
+      setTimeout(() => {
+        this.content = false
+        this.gou = false
+        this.invoiceBox = false
+      }, 1000);
     },
     complete(){
       this.invoiceBox = false
       // this.iconShow = false
     },
-    // 查询cookie
     getCookie(cname) {
       const name = cname + '='
       const ca = document.cookie.split(';')
@@ -2566,6 +2572,7 @@ export default {
         return false
       }
       const arr = []
+      let invoice = {}
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
           arr.push(this.good[i].data[0].id)
@@ -2573,6 +2580,9 @@ export default {
           arr.push(this.good[i].data[0].id)
           arr.push(this.good[i].data[1].id)
         }
+      }
+      if(this.iconShow == false && this.invoiceBox == true){
+        invoice = this.invoice
       }
       // console.log("arr",arr)
       const data = {
@@ -2633,6 +2643,7 @@ export default {
         return false
       }
       const arr = []
+      let invoice = {}
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
           arr.push(this.good[i].data[0].id)
@@ -2652,6 +2663,9 @@ export default {
         // afterMail: this.isSameEmail
         // ? this.orderAddress.email
         // : this.orderEmail,
+      }
+      if(this.iconShow == false && this.invoiceBox == true){
+        invoice = this.invoice
       }
       // console.log("pppp",data)
       this.$axios
