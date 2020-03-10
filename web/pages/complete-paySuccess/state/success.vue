@@ -315,9 +315,15 @@ export default {
         console.log(11111111)  
         this.$router.replace({
           path: '/complete-paySuccess/state/failed',
-          params: {   
-            orderId: this.$route.query.orderId||this.$route.query.order_sn,
+          query: {   
+            orderId: this.$route.query.orderId || this.$route.query.order_sn,
           }
+        })
+        return
+      }else{
+        this.$store.dispatch('getLocalCartOrder').then(v => {
+          this.$store.dispatch('removeCart',v.split(','))
+          console.log("v",v)
         })
       }
     // console.log("url======",this.oid2) http://localhost:8318/complete-paySuccess?type=failed
@@ -344,10 +350,7 @@ export default {
           }
       })
     }else{
-      this.$store.dispatch('getLocalCartOrder').then(v => {
-        this.$store.dispatch('removeCart',v.split(','))
-        console.log("v",v)
-      })
+      
       this.$axios
         .get('/web/member/order-tourist/detail', {
           params: {

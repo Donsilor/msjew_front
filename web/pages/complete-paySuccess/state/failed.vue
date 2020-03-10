@@ -94,7 +94,7 @@
         </div>
         <div class="btn-two">
           <div @click="returnBack2()">{{ $t(`${lang}.repay`) }}</div>
-          <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div>
+          <!-- <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div> -->
         </div>
       </div>
     </div>
@@ -107,6 +107,7 @@ export default {
   name: 'Failed',
   data() {
     return {
+      oid: this.$route.query.order_sn||this.$route.query.orderId,
       lang,
       good:[],
       info2:{
@@ -123,6 +124,10 @@ export default {
     // })
   },
   mounted(){
+    // this.$store.dispatch('getLocalOrder').then(res => {
+    //   this.good = res
+    //   console.log("vres",res)
+    // })
     if(this.$store.getters.hadLogin){
       this.$axios
         .get('/web/member/order/detail', {
@@ -131,10 +136,10 @@ export default {
           }
         })
         .then(res => {
-          this.infos.orderId=res.id
-          this.infos.coinType=res.coinCode
-          this.infos.orderAmount=res.orderAmount
-          // console.log("wwwww",this.data)
+          this.info2.orderId = res.data.id
+          this.info2.coinType = res.data.coinCode
+          this.info2.orderAmount = res.data.orderAmount
+          console.log("wwwww",this.info2.orderId)
         })
         .catch(err => {
           if (!err.response) {
@@ -144,106 +149,55 @@ export default {
           }
       })
     }else{
-      this.$store.dispatch('getLocalOrder').then(v => {
-        this.good = v
-        console.log("vres",this.good)
-      })
-      this.$axios
-        .get('/web/member/order-tourist/detail', {
-          params: {
-            order_sn: this.oid
-          }
-        })
-        .then(res => {
-          // console.log("order_sn",res)
-          // this.data2 = res.data
-          // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
-          setTimeout(() => {
-            this.$router.push({path: "/"}); // 强制切换当前路由 path
-          }, 5000);
-          // console.log("wwwww",this.data)
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-      })
+      // this.$store.dispatch('getLocalCartOrder').then(v => {
+      //   this.$store.dispatch('removeCart',v.split(','))
+      //   console.log("v",v)
+      // }) 
+      // this.$axios
+      //   .get('/web/member/order-tourist/detail', {
+      //     params: {
+      //       order_sn: this.oid
+      //     }
+      //   })
+      //   .then(res => {
+      //     // console.log("order_sn",res)
+      //     // this.data2 = res.data
+      //     // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
+      //     // setTimeout(() => {
+      //     //   this.$router.push({path: "/"}); // 强制切换当前路由 path
+      //     // }, 5000);
+      //     // console.log("wwwww",this.data)
+      //   })
+      //   .catch(err => {
+      //     if (!err.response) {
+      //       this.$message.error(err.message)
+      //     } else {
+      //       // console.log(err)
+      //     }
+      // })
     }
   },
   methods: {
     returnBack() {
       this.$router.replace({
-        path: 'payment-options',
-        params: {
-          orderId: this.infos.orderId,
-          price: this.infos.orderAmount,
-          coinType: this.infos.coinType
+        path: '/payment-options',
+        query: {
+          orderId: this.info2.orderId,
+          price: this.info2.orderAmount,
+          coinType: this.info2.coinType
         }
       })
     },
     returnBack2() {
-      let baseUrl=this.$store.getters.baseUrl
-      let json=[]
-      for (const i in this.good) {
-        let group = this.good[i].data
-        let item = group.map(item => {
-          return {
-            createTime: item.createTime || new Date().getTime(),
-            goods_num: item.goodsCount,
-            goodsDetailsId: item.goodsDetailsId,
-            goods_id: item.goodsDetailsId,
-            group_id: item.groupId || null,
-            group_type:item.groupType,
-            goods_type: item.goodsType
+      this.$store.dispatch('getLocalCartOrder').then(v => {
+        this.$router.replace({
+          path: '/billing-address',
+          query: {
+            cartIds: v,
           }
         })
-
-        json = json.concat(item)
-      }
-      this.$axios({
-        method: 'post',
-        url: '/web/member/order-tourist/create',
-        data: {
-          goodsCartList:json,
-          tradeType:'pc',
-          coinType:this.$store.state.coin,
-          returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
-        }
       })
-        .then(res => {
-          // console.log('od===>', res)
-          // this.$store.dispatch('removeCart', this.pathTakeIds)
-          if(res.data.config){
-            window.location.replace(res.data.config)
-          }else {
-            this.$router.replace({
-              path: '/complete-paySuccess',
-              query: {
-                orderId: this.$route.query.orderId,
-                price: this.$route.query.price,
-                coinType: this.$route.query.coinType,
-                type: `transfer`
-              }
-            })
-          }
-          // this.$router.replace({
-          //   path: '/payment-options',
-          //   query: {
-          //     orderId: res.orderId,
-          //     price: res.orderAmount,
-          //     coinType: res.coinType
-          //   }
-          // })
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
+      
     },
     goToFail() {
       this.$router.push({
