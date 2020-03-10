@@ -2,10 +2,10 @@
   <div class="pay-success">
     <!-- 已登录 -->
     <div v-if="hadLogin">
+      <p v-show="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p>
       <div class="top" v-show="this.$route.query.success !== 'false'">
         <img src="@/static/cart/success.png" />
-        <!-- <p v-if="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
-        <p v-if="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+        <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
           <span class="font-size-16">{{ info.coinCode }}</span>
           {{ info.orderAmount }}
@@ -55,9 +55,9 @@
     </div>
     <!-- 未登录 -->  
     <div v-else>
+      <p v-show="this.$route.query.success == 'false' " class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
       <div class="top" v-show="this.$route.query.success !== 'false'">
         <img src="@/static/cart/success.png"  />
-        <!-- <p v-if="verify == false" class="color-333 font-size-14 margin-top-10 ">{{ lang.handing }}</p> -->
         <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
           <span class="font-size-16">{{ orderinfo.coinCode }}</span>
@@ -117,7 +117,7 @@
       <p>{{ lang.send }}</p>
       <p>{{ info.afterMail }}</p>
     </div>
-    <div class="btn">
+    <div class="btn" v-show="this.$route.query.success == 'false'">
       <div
         v-if="info.payChannel === 1"
         class="btn-common btn-black"
@@ -132,7 +132,7 @@
       >
         {{ lang.lookBill }}
       </div>
-      <div
+      <div 
         v-if="info.payChannel !== 1"
         class="btn-common btn-gray btn-black"
         @click="goIndex"
@@ -185,12 +185,12 @@ export default {
   },
   mounted() {
      if(this.$route.query.success == 'false'){
-        this.$router.push({
-          name: 'cart-payFailed-orderId-price-coinType',
-          query: {   
-            orderId: this.$route.query.orderId||this.$route.query.order_sn,
-          }
-        })
+        // this.$router.push({
+        //   name: 'cart-payFailed-orderId-price-coinType',
+        //   query: {   
+        //     orderId: this.$route.query.orderId||this.$route.query.order_sn,
+        //   }
+        // })
         // setTimeout(() => {
         //   this.$router.push({
         //     name: 'cart-payFailed-orderId-price-coinType',
@@ -376,6 +376,11 @@ export default {
 </script>
 
 <style scoped lang="less">
+.handing{
+  padding: 20px;
+  color:#f29b87;
+  font-size: 20px;
+}
 .pay-success {
   width: 90%;
   margin: 0 5%;
