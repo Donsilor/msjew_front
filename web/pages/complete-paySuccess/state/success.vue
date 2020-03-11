@@ -420,7 +420,7 @@ export default {
                 if(this.verifyCount < 10) {
                     setTimeout(this.payVerify, 5000);
                     return
-                }
+                } 
                 this.$router.replace({
                   path: '/complete-paySuccess/state/failed',
                   query: {   
