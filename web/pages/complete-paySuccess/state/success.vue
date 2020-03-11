@@ -64,7 +64,7 @@
     <!--未登陆的中间信息-->
     <div v-else class="success-info-out">
       <div class="left-side">
-        <div v-show="success">
+        <div v-show="stepPaySuccess">
           <div class="diamond-img">
             <img src="../../../static/order/diamond.png" alt="" />
             <div><i class="iconfont icongou" /></div>
@@ -83,7 +83,7 @@
             <!-- <span class="underline">{{ data.orderNo }}</span> -->
           </div>
         </div>
-        <div v-show="vertry">
+        <div v-show="stepPayVerify">
           <p class="handing">{{ $t(`${lang}.handing`) }}</p>
         </div>
       </div>
@@ -315,13 +315,30 @@ export default {
         taxFee: null
       },
       verify_statue:'',
-      vertry:true,
-      success:false,
-      verifyCount:0
+      stepPayVerify:true,//支付验证
+      stepPaySuccess:false,//支付验证成功
+      verifyCount:0  //支付验证次数
     }
   },
   mounted() {
-    if(this.$store.getters.hadLogin) {
+      if(this.$route.query.success == 'false'){
+        this.$router.replace({
+          path: '/complete-paySuccess/state/failed',
+          query: {   
+            orderId: this.$route.query.orderId || this.$route.query.order_sn,
+          }
+        })  
+        // return
+      }else {
+        this.payVerify()
+        // return
+      }
+      // if(this.$route.query.success == 'true'){
+      //   this.geturl()
+      //   console.log("aaaaaa")
+      // }
+    // console.log("url======",this.oid2) http://localhost:8318/complete-paySuccess?type=failed
+    if(this.$store.getters.hadLogin){
       this.$axios
         .get('/web/member/order/detail', {
           params: {
@@ -329,14 +346,21 @@ export default {
           }
         })
         .then(res => {
+          console.log("window",this.$route.query);
           this.data = res.data
+          setTimeout(() => {
+            this.$router.push({path: "/"}); // 强制切换当前路由 path
+          }, 5000);
+          // console.log("wwwww",this.data)
         })
         .catch(err => {
           if (!err.response) {
             this.$message.error(err.message)
+          } else {
+            // console.log(err)
           }
       })
-    } else {
+    }else{
       this.$axios
         .get('/web/member/order-tourist/detail', {
           params: {
@@ -344,46 +368,57 @@ export default {
           }
         })
         .then(res => {
+          // console.log("order_sn",res)
           this.data2 = res.data
+          // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
+          setTimeout(() => {
+            this.$router.push({path: "/"}); // 强制切换当前路由 path
+          }, 5000);
+          // console.log("wwwww",this.data)
         })
         .catch(err => {
           if (!err.response) {
             this.$message.error(err.message)
+          } else {
+            // console.log(err)
           }
       })
     }
-
-    if(this.$route.query.success == 'false') {
-      this.$router.replace({
-        path: '/complete-paySuccess/state/failed',
-        query: {
-          orderId: this.$route.query.orderId || this.$route.query.order_sn,
-        }
-      })
-      
-    } else {
-      this.geturl()
-    }
-    return
+    // this.$axios
+    //   .post('/web/pay/verify', {
+    //       return_url: window.location.href
+    //   })
+    //   .then(res => {
+    //     this.verification_status = res.data.verification_status
+    //     console.log("oid",this.verification_status)
+    //   })
+    //   .catch(err => {
+    //     if (!err.response) {
+    //       this.$message.error(err.message)
+    //     } else {
+    //       // console.log(err)
+    //     }
+    //   })
   },
   methods: {
     toLogin() {
       this.$router.push(`/login`)
     },
-    geturl(){
+    payVerify(){
       this.$axios({
             url: '/web/pay/verify',
             method: 'post',
+            timeout:8000,
             data: {
               return_url: window.location.href
             }
         })
         .then(res => {
-            this.verify_statue = res.data.verification_status
-            if(this.verify_statue !== 'true') {
+            const data =  res.data
+            if(data.verification_status !== 'true') {
                 this.verifyCount++
-                if(this.verifyCount<4) {
-                    setTimeout(this.geturl, 5000);
+                if(this.verifyCount < 3) {
+                    setTimeout(this.payVerify, 1000);
                     return
                 }
                 this.$router.replace({
@@ -395,15 +430,23 @@ export default {
             }else {
               this.$store.dispatch('getLocalCartOrder').then(v => {
                 this.$store.dispatch('removeCart',v.split(','))
+                // console.log("v",v)
               })
-              this.success = true
-              this.vertry = false
-              setTimeout(() => {
-                this.$router.push({path: "/"}); // 强制切换当前路由 path
-              }, 5000);
+              this.stepPaySuccess = true
+              this.stepPayVerify = false
             }
         })
         .catch(err => {
+            if(this.verifyCount < 3) {
+                 setTimeout(this.payVerify, 1000);
+            }else{
+                this.$router.replace({
+                  path: '/complete-paySuccess/state/failed',
+                  query: {   
+                    orderId: this.$route.query.orderId || this.$route.query.order_sn,
+                  }
+                })  
+            }
             console.log(err)
         })
     }
