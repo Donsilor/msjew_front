@@ -64,7 +64,7 @@
     <!--未登陆的中间信息-->
     <div v-else class="success-info-out">
       <div class="left-side">
-        <div v-show="success">
+        <div v-show="stepPaySuccess">
           <div class="diamond-img">
             <img src="../../../static/order/diamond.png" alt="" />
             <div><i class="iconfont icongou" /></div>
@@ -83,7 +83,7 @@
             <!-- <span class="underline">{{ data.orderNo }}</span> -->
           </div>
         </div>
-        <div v-show="vertry">
+        <div v-show="stepPayVerify">
           <p class="handing">{{ $t(`${lang}.handing`) }}</p>
         </div>
       </div>
@@ -315,9 +315,9 @@ export default {
         taxFee: null
       },
       verify_statue:'',
-      vertry:true,
-      success:false,
-      verifyCount:0
+      stepPayVerify:true,//支付验证
+      stepPaySuccess:false,//支付验证成功
+      verifyCount:0  //支付验证次数
     }
   },
   mounted() {
@@ -330,7 +330,7 @@ export default {
         })  
         // return
       }else {
-        this.geturl()
+        this.payVerify()
         // return
       }
       // if(this.$route.query.success == 'true'){
@@ -404,7 +404,7 @@ export default {
     toLogin() {
       this.$router.push(`/login`)
     },
-    geturl(){
+    payVerify(){
       this.$axios({
             url: '/web/pay/verify',
             method: 'post',
@@ -413,11 +413,11 @@ export default {
             }
         })
         .then(res => {
-            this.verify_statue = res.data.verification_status
-            if(this.verify_statue !== 'true') {
+            const data =  res.data
+            if(data.verification_status !== 'true') {
                 this.verifyCount++
-                if(this.verifyCount<4) {
-                    setTimeout(this.geturl, 5000);
+                if(this.verifyCount < 4) {
+                    setTimeout(this.payVerify, 5000);
                     return
                 }
                 this.$router.replace({
@@ -431,8 +431,8 @@ export default {
                 this.$store.dispatch('removeCart',v.split(','))
                 // console.log("v",v)
               })
-              this.success = true
-              this.vertry = false
+              this.stepPaySuccess = true
+              this.stepPayVerify = false
             }
         })
         .catch(err => {
