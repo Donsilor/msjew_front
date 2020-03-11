@@ -322,9 +322,8 @@ export default {
             return 
         })
 
-        this.list = JSON.parse(storage.get('myCartList', 0))   
-        
-        _this.$nextTick(() => {
+        this.list = JSON.parse(storage.get('myCartList', 0))          
+        //_this.$nextTick(() => {
           if (this.isLogin){
             _this.getinfo()
           }else{
@@ -332,7 +331,7 @@ export default {
               _this.getinfo2()
             // },5000);
           }
-        })
+        //})
     },
     getChannelType(type) {
       // 订单支付渠道(1-电汇,2-paypal,3-微信,4-支付宝,5-visa/Mastercard,6-銀聯,7-paydollar)
