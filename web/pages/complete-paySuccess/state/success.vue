@@ -333,72 +333,7 @@ export default {
         this.payVerify()
         // return
       }
-      // if(this.$route.query.success == 'true'){
-      //   this.geturl()
-      //   console.log("aaaaaa")
-      // }
-    // console.log("url======",this.oid2) http://localhost:8318/complete-paySuccess?type=failed
-    if(this.$store.getters.hadLogin){
-      this.$axios
-        .get('/web/member/order/detail', {
-          params: {
-            orderId: this.oid
-          }
-        })
-        .then(res => {
-          console.log("window",this.$route.query);
-          this.data = res.data
-          setTimeout(() => {
-            this.$router.push({path: "/"}); // 强制切换当前路由 path
-          }, 5000);
-          // console.log("wwwww",this.data)
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-      })
-    }else{
-      this.$axios
-        .get('/web/member/order-tourist/detail', {
-          params: {
-            order_sn: this.oid
-          }
-        })
-        .then(res => {
-          // console.log("order_sn",res)
-          this.data2 = res.data
-          // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
-          setTimeout(() => {
-            this.$router.push({path: "/"}); // 强制切换当前路由 path
-          }, 5000);
-          // console.log("wwwww",this.data)
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-      })
-    }
-    // this.$axios
-    //   .post('/web/pay/verify', {
-    //       return_url: window.location.href
-    //   })
-    //   .then(res => {
-    //     this.verification_status = res.data.verification_status
-    //     console.log("oid",this.verification_status)
-    //   })
-    //   .catch(err => {
-    //     if (!err.response) {
-    //       this.$message.error(err.message)
-    //     } else {
-    //       // console.log(err)
-    //     }
-    //   })
+      
   },
   methods: {
     toLogin() {
@@ -420,7 +355,7 @@ export default {
                 if(this.verifyCount < 10) {
                     setTimeout(this.payVerify, 5000);
                     return
-                } 
+                }
                 this.$router.replace({
                   path: '/complete-paySuccess/state/failed',
                   query: {   
@@ -439,6 +374,7 @@ export default {
         .catch(err => {
             if(this.verifyCount < 10) {
                  setTimeout(this.payVerify, 5000);
+                 return 
             }else{
                 this.$router.replace({
                   path: '/complete-paySuccess/state/failed',
@@ -449,6 +385,53 @@ export default {
             }
             console.log(err)
         })
+
+        if(this.$store.getters.hadLogin){
+            this.$axios
+              .get('/web/member/order/detail', {
+                params: {
+                  orderId: this.oid
+                }
+              })
+              .then(res => {
+                console.log("window",this.$route.query);
+                this.data = res.data
+                setTimeout(() => {
+                  this.$router.push({path: "/"}); // 强制切换当前路由 path
+                }, 5000);
+                // console.log("wwwww",this.data)
+              })
+              .catch(err => {
+                if (!err.response) {
+                  this.$message.error(err.message)
+                } else {
+                  // console.log(err)
+                }
+            })
+          }else{
+            this.$axios
+              .get('/web/member/order-tourist/detail', {
+                params: {
+                  order_sn: this.oid
+                }
+              })
+              .then(res => {
+                // console.log("order_sn",res)
+                this.data2 = res.data
+                // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
+                setTimeout(() => {
+                  this.$router.push({path: "/"}); // 强制切换当前路由 path
+                }, 5000);
+                // console.log("wwwww",this.data)
+              })
+              .catch(err => {
+                if (!err.response) {
+                  this.$message.error(err.message)
+                } else {
+                  // console.log(err)
+                }
+            })
+          }
     }
   }
 }
