@@ -321,6 +321,7 @@ export default {
     }
   },
   mounted() {
+
       if(this.$route.query.success == 'false'){
         this.$router.replace({
           path: '/complete-paySuccess/state/failed',
@@ -328,12 +329,12 @@ export default {
             orderId: this.$route.query.orderId || this.$route.query.order_sn,
           }
         })  
-        // return
+        return
       }else {
         this.payVerify()
         // return
-      }
-      
+      }     
+
   },
   methods: {
     toLogin() {
@@ -362,11 +363,12 @@ export default {
                     orderId: this.$route.query.orderId || this.$route.query.order_sn,
                   }
                 })  
+				return
             }else {
               this.$store.dispatch('getLocalCartOrder').then(v => {
                 this.$store.dispatch('removeCart',v.split(','))
-                // console.log("v",v)
               })
+
               this.stepPaySuccess = true
               this.stepPayVerify = false
             }
