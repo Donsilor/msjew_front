@@ -376,7 +376,6 @@ export default {
         .catch(err => {
             if(this.verifyCount < 10) {
                  setTimeout(this.payVerify, 5000);
-                 return 
             }else{
                 this.$router.replace({
                   path: '/complete-paySuccess/state/failed',
@@ -386,6 +385,7 @@ export default {
                 })  
             }
             console.log(err)
+            return
         })
 
         if(this.$store.getters.hadLogin){
