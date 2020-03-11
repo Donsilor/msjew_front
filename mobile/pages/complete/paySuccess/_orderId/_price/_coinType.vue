@@ -201,19 +201,7 @@ export default {
           return
       }else{
           this.payVerify()
-      }
-
-    this.list = JSON.parse(storage.get('myCartList', 0))   
-    const _this = this
-    _this.$nextTick(() => {
-      if (this.isLogin){
-        _this.getinfo()
-      }else{
-        // setTimeout(() => {
-          _this.getinfo2()
-        // },5000);
-      }
-    })
+      }    
   },
   methods: {
     formatMoney: formatMoney,
@@ -281,11 +269,13 @@ export default {
     //   })
     // },
     payVerify(){
-      this.$axios({
+      
+      const _this = this
+
+      _this.$axios({
             url: '/web/pay/verify',
             method: 'post',
             timeout:8000,
-            async:true,
             data: {
                 return_url: window.location.href
             }
@@ -304,6 +294,7 @@ export default {
                         orderId: this.$route.query.orderId||this.$route.query.order_sn,
                     }
                 })
+                return
             }
             else {
               const arr = []
@@ -329,6 +320,18 @@ export default {
             }
             console.log(err)
             return 
+        })
+
+        this.list = JSON.parse(storage.get('myCartList', 0))   
+        
+        _this.$nextTick(() => {
+          if (this.isLogin){
+            _this.getinfo()
+          }else{
+            // setTimeout(() => {
+              _this.getinfo2()
+            // },5000);
+          }
         })
     },
     getChannelType(type) {
