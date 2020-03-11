@@ -326,51 +326,20 @@ export default {
     }
   },
   mounted() {
-    if(this.$store.getters.hadLogin){
-      this.$axios
-        .get('/web/member/order/detail', {
-          params: {
-            orderId: this.oid
-          }
-        })
-        .then(res => {
-          console.log("window",this.$route.query);
-          this.data = res.data
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          }
-      })
-    }else{
-      this.$axios
-        .get('/web/member/order-tourist/detail', {
-          params: {
-            order_sn: this.oid
-          }
-        })
-        .then(res => {
-          this.data2 = res.data
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          }
-      })
-    }
 
-    if(this.$route.query.success == 'false') {
-      this.$router.replace({
-        path: '/complete-paySuccess/state/failed',
-        query: {   
-          orderId: this.$route.query.orderId || this.$route.query.order_sn,
-        }
-      })  
-    } else {
-      this.payVerify()
-    }
+      if(this.$route.query.success == 'false'){
+        this.$router.replace({
+          path: '/complete-paySuccess/state/failed',
+          query: {   
+            orderId: this.$route.query.orderId || this.$route.query.order_sn,
+          }
+        })  
+        return
+      }else {
+        this.payVerify()
+        // return
+      }     
 
-    return
   },
   methods: {
     toLogin() {
@@ -399,6 +368,7 @@ export default {
                     orderId: this.$route.query.orderId || this.$route.query.order_sn,
                   }
                 })  
+				        return
             }else {
               this.$store.dispatch('getLocalCartOrder').then(v => {
                 this.$store.dispatch('removeCart',v.split(','))
@@ -406,10 +376,6 @@ export default {
 
               this.stepPaySuccess = true
               this.stepPayVerify = false
-
-              setTimeout(() => {
-                this.$router.push({path: "/"}); // 强制切换当前路由 path
-              }, 5000);
             }
         })
         .catch(err => {
@@ -424,7 +390,55 @@ export default {
                 })  
             }
             console.log(err)
+            return
         })
+
+        if(this.$store.getters.hadLogin){
+            this.$axios
+              .get('/web/member/order/detail', {
+                params: {
+                  orderId: this.oid
+                }
+              })
+              .then(res => {
+                console.log("window",this.$route.query);
+                this.data = res.data
+                setTimeout(() => {
+                  this.$router.push({path: "/"}); // 强制切换当前路由 path
+                }, 5000);
+                // console.log("wwwww",this.data)
+              })
+              .catch(err => {
+                if (!err.response) {
+                  this.$message.error(err.message)
+                } else {
+                  // console.log(err)
+                }
+            })
+          }else{
+            this.$axios
+              .get('/web/member/order-tourist/detail', {
+                params: {
+                  order_sn: this.oid
+                }
+              })
+              .then(res => {
+                // console.log("order_sn",res)
+                this.data2 = res.data
+                // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
+                setTimeout(() => {
+                  this.$router.push({path: "/"}); // 强制切换当前路由 path
+                }, 5000);
+                // console.log("wwwww",this.data)
+              })
+              .catch(err => {
+                if (!err.response) {
+                  this.$message.error(err.message)
+                } else {
+                  // console.log(err)
+                }
+            })
+          }
     }
   }
 }
