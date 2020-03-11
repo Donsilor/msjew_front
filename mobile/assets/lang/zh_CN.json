@@ -177,7 +177,7 @@
         "type5Text2": "注意，电子支票并非电汇"
       },
       "paySuccess": {
-        "handing":"订单处理中.....",
+        "handing":"订单处理中......",
         "title": "订单支付成功",
         "orderNo": "订单编号",
         "preferFee": "优惠讯息",

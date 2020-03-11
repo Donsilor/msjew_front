@@ -84,7 +84,7 @@
           </div>
         </div>
         <div v-show="vertry">
-          <p class="handing">数据加载中......</p>
+          <p class="handing">{{ $t(`${lang}.handing`) }}</p>
         </div>
       </div>
       <!-- <div class="right-side">
@@ -219,6 +219,7 @@
 <script>
    
 const lang = `finishPay`
+// console.log("aa",$t(`${lang}.hangding`))
 export default {
   name: 'Success',
   data() {
@@ -330,8 +331,8 @@ export default {
         // return
       }else {
         this.geturl()
+        // return
       }
-      return
       // if(this.$route.query.success == 'true'){
       //   this.geturl()
       //   console.log("aaaaaa")
@@ -360,7 +361,6 @@ export default {
           }
       })
     }else{
-      
       this.$axios
         .get('/web/member/order-tourist/detail', {
           params: {

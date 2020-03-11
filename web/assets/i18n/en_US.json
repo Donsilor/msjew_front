@@ -928,6 +928,7 @@
     "payQuestion": "Payment error"
   },
   "finishPay": {
+    "handing": "Order processing ......",
     "comeBack": "Return to product page",
     "confirmOrder": "Shopping cart",
     "finishOrderInfo": "Complete your order information",
