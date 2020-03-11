@@ -38,27 +38,32 @@
     </div>
     <!--登陆的中间信息-->
     <div v-if="$store.getters.hadLogin" class="success-info-in">
-      <div class="diamond-img">
-        <img src="../../../static/order/diamond.png" alt="" />
-        <div><i class="iconfont icongou" /></div>
+      <div v-show="stepPaySuccess">
+        <div class="diamond-img">
+          <img src="../../../static/order/diamond.png" alt="" />
+          <div><i class="iconfont icongou" /></div>
+        </div>
+        <div class="order-email">
+          <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span
+          ><span>{{ data.afterMail }}</span
+          > -->
+          <!-- <i class="iconfont iconzuoshangjiantou" /> -->
+        </div>
+        <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
+        <div class="order-num">
+          {{ $t(`${lang}.orderCode`) }}
+            <nuxt-link :to="`/account/order-details?orderId=${this.oid}`">
+              <span class="underline" >{{ data.orderNo }}</span>
+            </nuxt-link>
+        </div>
+        <nuxt-link :to="{name: '/order-details'}"></nuxt-link>
+        <!-- <div class="order-num">
+          <nuxt-link :to="{name: '/account/orders'}">{{ $t(`${lang}.comeBack`) }}</nuxt-link>
+        </div> -->
       </div>
-      <div class="order-email">
-        <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span
-        ><span>{{ data.afterMail }}</span
-        > -->
-        <!-- <i class="iconfont iconzuoshangjiantou" /> -->
+      <div v-show="stepPayVerify">
+        <p class="handing">{{ $t(`${lang}.handing`) }}</p>
       </div>
-      <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
-      <div class="order-num">
-        {{ $t(`${lang}.orderCode`) }}
-          <nuxt-link :to="`/account/order-details?orderId=${this.oid}`">
-            <span class="underline" >{{ data.orderNo }}</span>
-          </nuxt-link>
-      </div>
-      <nuxt-link :to="{name: '/order-details'}"></nuxt-link>
-       <!-- <div class="order-num">
-         <nuxt-link :to="{name: '/account/orders'}">{{ $t(`${lang}.comeBack`) }}</nuxt-link>
-      </div> -->
     </div>
 
     <!--未登陆的中间信息-->
