@@ -295,7 +295,7 @@ export default {
       this.$axios({
             url: '/web/pay/verify',
             method: 'post',
-            timeout:6000,
+            timeout:8000,
             data: {
                 return_url: window.location.href
             }
@@ -305,7 +305,7 @@ export default {
             if(data.verification_status !== 'true') {
                 this.verifyCount ++
                 if(this.verifyCount < 3) {
-                    setTimeout(this.payVerify, 5000);
+                    setTimeout(this.payVerify, 1000);
                     return
                 }
                 this.$router.push({
@@ -328,7 +328,7 @@ export default {
         })
         .catch(err => {
             if(this.verifyCount < 4) {
-                 setTimeout(this.payVerify, 5000);
+                 setTimeout(this.payVerify, 1000);
             }else{
                 this.$router.push({
                     name: 'cart-payFailed-orderId-price-coinType',
