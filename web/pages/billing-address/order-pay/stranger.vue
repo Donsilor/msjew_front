@@ -708,6 +708,28 @@
                       </div>
                     </div>
                   </div>
+                  <!-- 邮箱 -->
+                  <div class="input-line" v-show="Active == true">
+                    <div class="label"><span class="star">*</span>{{ $t(`${lang3}.email`) }}</div>
+                    <div
+                      :class="[
+                        { 'border-change': borderChange === 1 },
+                        { 'border-wrong': wrongInput.lastname }
+                      ]"
+                      class="input-box"
+                    >
+                      <input
+                        v-model="invoice.email"
+                        :class="{ 'wrong-input': wrongInput.lastname }"
+                        type="text"
+                        @focus="
+                          borderChange = 1
+                          wrongInput.lastname = false
+                        "
+                        @blur="borderChange = 0"
+                      />
+                    </div>
+                  </div>
                   <div class="input-line">
                     <div class="label"><span class="star">*</span>{{ $t(`${lang3}.Invoice`) }}</div>
                     <div
@@ -1635,6 +1657,28 @@
                       </div>
                     </div>
                   </div>
+                  <!-- 邮箱 -->
+                  <div class="input-line" v-show="Active == true">
+                    <div class="label"><span class="star">*</span>{{ $t(`${lang3}.email`) }}</div>
+                    <div
+                      :class="[
+                        { 'border-change': borderChange === 1 },
+                        { 'border-wrong': wrongInput.lastname }
+                      ]"
+                      class="input-box"
+                    >
+                      <input
+                        v-model="invoice.email"
+                        :class="{ 'wrong-input': wrongInput.lastname }"
+                        type="text"
+                        @focus="
+                          borderChange = 1
+                          wrongInput.lastname = false
+                        "
+                        @blur="borderChange = 0"
+                      />
+                    </div>
+                  </div>
                   <div class="input-line">
                     <div class="label"><span class="star">*</span>{{ $t(`${lang3}.Invoice`) }}</div>
                     <div
@@ -1892,7 +1936,8 @@ export default {
         invoice_type:'',
         invoice_title:'',
         tax_number:'',
-        is_electronic:"0"
+        is_electronic:"0",
+        email:''
       },
       invoices:{},
       url:'',
