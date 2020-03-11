@@ -327,12 +327,15 @@ export default {
             orderId: this.$route.query.orderId || this.$route.query.order_sn,
           }
         })  
-        return
-      }
-      if(this.$route.query.success == 'true'){
+        // return
+      }else {
         this.geturl()
-        console.log("aaaaaa")
       }
+      return
+      // if(this.$route.query.success == 'true'){
+      //   this.geturl()
+      //   console.log("aaaaaa")
+      // }
     // console.log("url======",this.oid2) http://localhost:8318/complete-paySuccess?type=failed
     if(this.$store.getters.hadLogin){
       this.$axios
