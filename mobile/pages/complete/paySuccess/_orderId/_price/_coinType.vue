@@ -304,7 +304,7 @@ export default {
 
             if(data.verification_status !== 'true') {
                 this.verifyCount ++
-                if(this.verifyCount < 4) {
+                if(this.verifyCount < 5) {
                     setTimeout(this.payVerify, 5000);
                     return
                 }
@@ -327,7 +327,7 @@ export default {
             }
         })
         .catch(err => {
-            if(this.verifyCount < 4) {
+            if(this.verifyCount < 5) {
                  setTimeout(this.payVerify, 5000);
             }else{
                 this.$router.push({
