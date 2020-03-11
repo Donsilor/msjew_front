@@ -295,15 +295,16 @@ export default {
       this.$axios({
             url: '/web/pay/verify',
             method: 'post',
+            timeout:6000,
             data: {
                 return_url: window.location.href
             }
         })
         .then(data => {
-          
+
             if(data.verification_status !== 'true') {
                 this.verifyCount ++
-                if(this.verifyCount<3) {
+                if(this.verifyCount < 3) {
                     setTimeout(this.payVerify, 5000);
                     return
                 }
@@ -326,6 +327,16 @@ export default {
             }
         })
         .catch(err => {
+            if(this.verifyCount < 4) {
+                 setTimeout(this.payVerify, 5000);
+            }else{
+                this.$router.push({
+                    name: 'cart-payFailed-orderId-price-coinType',
+                    query: {   
+                        orderId: this.$route.query.orderId||this.$route.query.order_sn,
+                    }
+                })
+            }
             console.log(err)
         })
     },
