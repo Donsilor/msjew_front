@@ -25,7 +25,7 @@
           :key="n"
           class="products-item"
           @click="toDetail(detail)"
-        >
+          >
           <img :src="detail.image" />
           <div v-if="detail.groupType !== 0" class="group-type">
             {{ detail.groupTypeText }}
@@ -79,6 +79,7 @@
             >
           </div>
         </div>
+
 
         <!--        已发货商品-->
         <div v-for="(bundle, n) in outDetails" :key="n" class="bundle-item">
@@ -157,6 +158,27 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="invoice" v-show="invoice && invoice.invoiceTitle">
+        <!-- <p class="title">发票信息</p> -->
+        <ul>
+         
+          <template v-if="!invoice.isElectronic">
+            <li>{{ lang2.InvoiceType }}：{{ lang2.PaperInvoice }}</li>
+          </template>
+          <template v-else>
+            <li>{{ lang2.InvoiceType}}：{{ lang2.ElectronicInvoice }}</li>
+          </template>
+          <template v-if="invoice.invoiceType == 2">
+            <li>{{ lang2.HeaderType }}：{{ lang2.personal }}</li>
+          </template>
+          <template v-if="invoice.invoiceType == 1">
+            <li>{{ lang2.HeaderType}}：{{ lang2.company }}</li>
+          </template>
+          <!-- <li>{{ lang2.email }}：{{ statusText(invoice.email) }}</li> -->
+          <li>{{ lang2.Invoice }}：{{ invoice.invoiceTitle }}</li>
+          <li>{{ lang2.TaxID }}：{{ invoice.taxNumber }}</li> 
+        </ul>
       </div>
       <div class="footer">
         <div class="more">
@@ -269,8 +291,10 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.personal.orderDetail,
+      lang2: this.LANGUAGE.cart.invoice,
       info: {},
-      paytips: false
+      paytips: false,
+      invoice:{}
     }
   },
   computed: {
@@ -502,6 +526,7 @@ export default {
             ? Moment(data.payTime).format('YYYY/MM/DD HH:mm:ss')
             : ''
           this.info = data
+          this.invoice = data.invoice
         })
         .catch(err => {
           console.log(err)
@@ -765,6 +790,18 @@ export default {
         color: rgba(148, 116, 101, 1);
       }
     }
+    .invoice {
+        width: 355px;
+        margin: 0px auto 10px;
+        padding: 10px 14px;
+        background: #fff;
+        border-radius: 5px;
+        font-size: 12px;
+        line-height: 22px;
+        font-weight: 400;
+        text-align: left;
+        color: rgba(148, 116, 101, 1);
+      }
     .details {
       padding: 10px;
       box-sizing: border-box;

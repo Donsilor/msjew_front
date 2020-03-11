@@ -2294,5 +2294,32 @@
     "msg7": "出错了，出错位置：下订单跳转支付",
     "msg8": "数据获取失败，请返回购物车重试！",
     "msg9":"請選擇支付方式!"
+  },
+  "invoice":{
+    "personal":"個人",
+    "company":"企業",
+    "Submitted":"提交成功",
+    "email":"郵箱",
+    "default":"默认不开发票",
+    "Invoicing":"开发票",
+    "Invoicings":"开具发票",
+    "PaperInvoice":"紙質發票",
+    "ElectronicInvoice":"電子發票",
+    "InvoiceDetails":"發票詳情",
+    "HeaderType":"抬頭類型",
+    "InvoiceType":"發票類型",
+    "BusinessUnit":"企業單位",
+    "UnBusinessUnit":"個人/非企業單位",
+    "Invoice":"發票抬頭",
+    "TaxID":"發票稅號",
+    "holder1":"填寫發票抬頭",
+    "holder2":"填寫納稅人識別號",
+    "totalAmount":"總金額",
+    "tips":"*稍後紙質發票會隨訂單商品一起快遞給您,請注意查收！",
+    "confirm":"確認提交",
+    "carryOut":"完成",
+    "hint1":"抬頭類型不能為空",
+    "hint2":"發票抬頭不能為空",
+    "hint3":"稅號不能為空"
   }
 }

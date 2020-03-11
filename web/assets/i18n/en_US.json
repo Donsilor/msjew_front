@@ -2292,5 +2292,32 @@
     "msg7": "Error, error location: jump to payment when placing order",
     "msg8": "Failed to acquire data, please return to cart and try again!",
     "msg9": "Please select a payment method!"
+  },
+  "invoice": {
+    "personal":"personal",
+    "company":"company",
+    "Submitted": "Submitted successfully",
+    "email": "Email",
+    "default": "Default is not invoiced",
+    "Invoicing": "Invoicing",
+    "Invoicings": "Invoicing",
+    "PaperInvoice": "Paper Invoice",
+    "ElectronicInvoice": "Electronic Invoice",
+    "InvoiceDetails": "Invoice Details",
+    "HeaderType": "HeaderType",
+    "InvoiceType": "Invoice Type",
+    "BusinessUnit": "Business Unit",
+    "UnBusinessUnit": "Individual / Non-Business Unit",
+    "Invoice": "Invoice Header",
+    "TaxID": "Invoice tax number",
+    "holder1": "Fill Invoice Header",
+    "holder2": "Fill in the taxpayer identification number",
+    "totalAmount": "Total Amount",
+    "tips": "* A paper invoice will be delivered to you with the order product later, please check it!",
+    "confirm": "Confirm",
+    "carryOut": "Done",
+    "hint1": "Header type cannot be empty",
+    "hint2": "Invoice header cannot be empty",
+    "hint3": "Tax ID cannot be empty"
   }
 }

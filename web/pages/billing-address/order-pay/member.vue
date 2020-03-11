@@ -545,6 +545,140 @@
             @blur="borderChange = 0"
           />
         </div>
+
+        <!-- 发票按钮 -->
+        <div class="invoice">
+
+          <div class="invoice-btn">
+            <div v-show="!iconShow" @click="show2">
+              <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
+              <span>{{ $t(`${lang2}.default`) }}</span> 
+            </div>
+            <div v-show="iconShow" @click="show2">
+              <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
+              <span>{{ $t(`${lang2}.Invoicing`) }}</span>
+            </div>
+          </div>
+          <div class="invoice-box" v-show="invoiceBox">
+            <div class="msg">
+              <div class="msgbox" v-show="content">
+                <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
+                
+                <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
+                <!-- <div class="btn_type">
+                  <button @click="zhizhi" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
+                  <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
+                </div> -->
+                <div class="input-line" v-show="isactive == true">
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceDetails`) }}</div>
+                  <div class="input-box">
+                    <input
+                      style="text-align:center;"
+                      disabled
+                      v-model="aa"
+                      readonly
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <!-- <div class="input-line" v-show="Active == true">
+                  <div class="label"><span class="star"></span>发票类型</div>
+                  <div class="input-box">
+                    <input
+                      style="text-align:center;"
+                      disabled
+                      v-model="bb"
+                      readonly
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                    />
+                  </div>
+                </div> -->
+                <div class="base-info-line">
+                  <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
+                  <div class="base-info-line-content marriage-choose" >
+                    <el-radio-group v-model="invoice.invoice_type" @change="handle">
+                      <el-radio :label="2">{{ $t(`${lang2}.UnBusinessUnit`) }}</el-radio>
+                      <el-radio :label="1">{{ $t(`${lang2}.BusinessUnit`) }}</el-radio>
+                    </el-radio-group>
+                    <div v-show="redioShow" class="emplty">
+                      {{ $t(`${lang2}.hint1`) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="input-line">
+                  <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
+                  <div
+                    :class="[
+                      { 'border-change': borderChange === 1 },
+                      { 'border-wrong': wrongInput.lastname }
+                    ]"
+                    class="input-box"
+                  >
+                    <input
+                      v-model="invoice.invoice_title"
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                      @focus="
+                        borderChange = 1
+                        wrongInput.lastname = false
+                      "
+                      @blur="borderChange = 0"
+                    />
+                  </div>
+                </div>
+                <div v-show="typeShow" class="empltyErr">
+                  {{ $t(`${lang2}.hint2`) }}
+                </div>
+                <div class="input-line">
+                  <div class="label"><span v-if="invoice.invoice_type == 1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div
+                    :class="[
+                      { 'border-change': borderChange === 2 },
+                      { 'border-wrong': wrongInput.lastname }
+                    ]"
+                    class="input-box"
+                  >
+                    <input
+                      v-model="invoice.tax_number"
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                      @focus="
+                        borderChange = 2
+                        wrongInput.lastname = false
+                      "
+                      @blur="borderChange = 0"
+                    />
+                  </div>
+                </div>
+                <div v-show="taxShow" class="empltyErr">
+                  {{ $t(`${lang2}.hint3`) }}
+                </div>
+                <div class="total">
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
+                  <div class="totle-price">
+                    <span>{{ $store.state.coin }}{{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                  </div>
+                </div>
+                <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
+                <div class="btn">
+                  <button @click="confirm">{{ $t(`${lang2}.confirm`) }}</button>
+                </div>
+              </div>
+              <div class="msgbox" v-show="gou">
+                <div class="gou-img">
+                  <img src="../../../static/order/ticks.png" alt="">
+                  <p>{{ $t(`${lang2}.Submitted`) }}</p>
+                </div>
+                <!-- <div class="btn">
+                  <button @click="complete">{{ $t(`${lang2}.carryOut`) }}</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
       <div class="right-info">
         <!-- <div v-show="!makeGay" class="coupon">
@@ -1256,6 +1390,140 @@
             @blur="borderChange = 0"
           />
         </div>
+
+
+        <!-- 发票按钮 -->
+        <div class="invoice">
+
+          <div class="invoice-btn">
+            <div v-show="!iconShow" @click="show2">
+              <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
+              <span>{{ $t(`${lang2}.default`) }}</span> 
+            </div>
+            <div v-show="iconShow" @click="show2">
+              <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
+              <span>{{ $t(`${lang2}.Invoicing`) }}</span>
+            </div>
+          </div>
+          <div class="invoice-box" v-show="invoiceBox">
+            <div class="msg">
+              <div class="msgbox" v-show="content">
+                <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
+                
+                <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
+                <!-- <div class="btn_type">
+                  <button @click="zhizhi" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
+                  <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
+                </div> -->
+                <div class="input-line" v-show="isactive == true">
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceDetails`) }}</div>
+                  <div class="input-box">
+                    <input
+                      style="text-align:center;"
+                      disabled
+                      v-model="aa"
+                      readonly
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <!-- <div class="input-line" v-show="Active == true">
+                  <div class="label"><span class="star"></span>发票类型</div>
+                  <div class="input-box">
+                    <input
+                      style="text-align:center;"
+                      disabled
+                      v-model="bb"
+                      readonly
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                    />
+                  </div>
+                </div> -->
+                <div class="base-info-line">
+                  <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
+                  <div class="base-info-line-content marriage-choose" >
+                    <el-radio-group v-model="invoice.invoice_type" @change="handle">
+                      <el-radio :label="2">{{ $t(`${lang2}.UnBusinessUnit`) }}</el-radio>
+                      <el-radio :label="1">{{ $t(`${lang2}.BusinessUnit`) }}</el-radio>
+                    </el-radio-group>
+                    <div v-show="redioShow" class="emplty">
+                      {{ $t(`${lang2}.hint1`) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="input-line">
+                  <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
+                  <div
+                    :class="[
+                      { 'border-change': borderChange === 1 },
+                      { 'border-wrong': wrongInput.lastname }
+                    ]"
+                    class="input-box"
+                  >
+                    <input
+                      v-model="invoice.invoice_title"
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                      @focus="
+                        borderChange = 1
+                        wrongInput.lastname = false
+                      "
+                      @blur="borderChange = 0"
+                    />
+                  </div>
+                </div>
+                <div v-show="typeShow" class="empltyErr">
+                  {{ $t(`${lang2}.hint2`) }}
+                </div>
+                <div class="input-line">
+                  <div class="label"><span v-if="invoice.invoice_type == 1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div
+                    :class="[
+                      { 'border-change': borderChange === 2 },
+                      { 'border-wrong': wrongInput.lastname }
+                    ]"
+                    class="input-box"
+                  >
+                    <input
+                      v-model="invoice.tax_number"
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                      @focus="
+                        borderChange = 2
+                        wrongInput.lastname = false
+                      "
+                      @blur="borderChange = 0"
+                    />
+                  </div>
+                </div>
+                <div v-show="taxShow" class="empltyErr">
+                  {{ $t(`${lang2}.hint3`) }}
+                </div>
+                <div class="total">
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
+                  <div class="totle-price">
+                    <span>{{ $store.state.coin }}{{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                  </div>
+                </div>
+                <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
+                <div class="btn">
+                  <button @click="confirm">{{ $t(`${lang2}.confirm`) }}</button>
+                </div>
+              </div>
+              <div class="msgbox" v-show="gou">
+                <div class="gou-img">
+                  <img src="../../../static/order/ticks.png" alt="">
+                  <p>{{ $t(`${lang2}.Submitted`) }}</p>
+                </div>
+                <!-- <div class="btn">
+                  <button @click="complete">{{ $t(`${lang2}.carryOut`) }}</button>
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="right-info">
         <!-- <div v-show="!makeGay" class="coupon">
@@ -1432,6 +1700,7 @@ import Address from '@/assets/js/address.js'
 import { Email, RegMobile, RegTelephone } from '@/assets/js/require-lee.js'
 const lang = 'order'
 const langs = 'personal.account'
+const lang2 = 'invoice'
 export default {
   name: 'Member',
   components: {
@@ -1442,9 +1711,25 @@ export default {
   mixins: [Address],
   data() {
     return {
+      aa:this.$t(`${lang2}.PaperInvoice`),
+      bb:this.$t(`${lang2}.ElectronicInvoice`),
+      iconShow:false,
+      invoiceBox:false,
+      invoiceRise:'',
+      invoiceCode:'',
+      gou:false,
+      content:true,
+      selectStatus:0,
+      radio:'',
+      redioShow:false,
+      typeShow:false,
+      taxShow:false,
+      isactive:true,
+      Active:false,
       language:'',
       lang,
       langs,
+      lang2,
       pathTakeIds: this.$route.query.cartIds.split(','),
       canSubmit: false,
       address: [],
@@ -1503,7 +1788,13 @@ export default {
         orderAmount: 0,
         productAmount: 0,
         planDays: '1-12'
-      }
+      },
+      invoice:{
+        invoice_type:'',
+        invoice_title:'',
+        tax_number:'',
+        is_electronic:"0"
+      },
     }
   },
   computed: {
@@ -1556,12 +1847,61 @@ export default {
       })
   },
   mounted() {
-    // console.log("ssss",this.orderAddress.email)
     // this.getAddress();
     this.language = this.getCookie('language')
   },
   methods: {
-    // 查询cookie
+    zhizhi(){
+      this.isactive = true
+      this.Active = false
+    },
+    dianzi(){
+      this.isactive = false
+      this.Active = true
+    },
+    handle(){
+      console.log("取到的值是"+this.invoice.invoice_type);
+    },
+    close(){
+      this.invoiceBox = false
+    },
+    show2(){
+      this.iconShow=!this.iconShow
+      if(this.iconShow == true){
+        this.invoiceBox = true
+        this.content = true
+      }else{
+        this.invoiceBox = false
+        this.content = false
+      }
+    },
+    confirm(){
+      if(this.invoice.invoice_type == ''){
+        this.redioShow = true
+        return
+      } 
+      if(this.invoice.invoice_title == ''){
+        this.typeShow = true
+        return
+      } 
+      if(this.invoice.invoice_type == 1){
+        if(this.invoice.tax_number == ''){
+          this.taxShow = true
+          return
+        } 
+      }
+      this.gou = true
+      this.content = false
+      setTimeout(() => {
+        this.content = false
+        this.gou = false
+        this.invoiceBox = false
+      }, 1000);
+    },
+    complete(){
+      this.invoiceBox = false
+      // this.iconShow = false
+    },
     getCookie(cname) {
       const name = cname + '='
       const ca = document.cookie.split(';')
@@ -2234,6 +2574,7 @@ export default {
         return false
       }
       const arr = []
+      let invoice = {}
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
           arr.push(this.good[i].data[0].id)
@@ -2242,12 +2583,16 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
+      if(this.iconShow ){
+        invoice = this.invoice
+      }
       // console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
+        invoice:invoice
       }
       // console.log("pppp",data)
       this.$axios
@@ -2300,6 +2645,7 @@ export default {
         return false
       }
       const arr = []
+      let invoice = {}
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
           arr.push(this.good[i].data[0].id)
@@ -2315,9 +2661,13 @@ export default {
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
+        invoice:invoice
         // afterMail: this.isSameEmail
         // ? this.orderAddress.email
         // : this.orderEmail,
+      }
+      if(this.iconShow){
+        invoice = this.invoice
       }
       // console.log("pppp",data)
       this.$axios
@@ -3743,6 +4093,382 @@ div {
         margin-right: 50px;
       }
     }
+  }
+}
+.invoice{
+  .btn_type{
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    button{
+      width: 145px;
+      height: 35px;
+      border-radius: 4px;
+      color:#ccc;
+      border:1px solid #ddd;
+    }
+    .active{
+      border:1px solid #8b766c;
+    }
+  }
+  .empltyErr{
+    // margin: 10px 0;
+    color:red;
+    margin-left: 142px;
+    font-size: 12px;
+  }
+  .emplty{
+    margin: 10px 0;
+    color:red;
+    font-size: 12px;
+  }
+  .gou-img{
+      // display: flex;
+      // justify-content: center;   
+      width: 455px;
+      padding: 0px 180px;
+      img{
+        width: 75px;
+        height: 75px;
+      }
+  }
+  .invoice-btn{
+    margin-left: 20px;
+    div{
+      display: flex;
+    }
+    span{
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+      margin-left: 10px;
+    }
+  }
+  .tips{
+    margin: 20px 0;
+    font-size: 12px;
+  }
+  .btn{
+    text-align: center;
+    margin-top: 50px;
+    button{
+      width: 120px;
+      height: 35px;
+      background: #8b766c; 
+      border-radius: 4px;
+      color:#fff;
+    }
+  }
+  .title{
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .invoice-box{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 99999999;
+    top: 0;
+    left: 0;
+    .msg{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      .msgbox{
+        border-radius: 8px;
+        padding: 30px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 520px;
+        background: rgba(255, 255, 255, 1);
+        .cha{
+          text-align: right;
+          i{
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+  .total{
+    margin-top: 50px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    .totle-price{
+      width: 70%;
+      color: #f29b87;
+    }
+  }
+  .base-info-line {
+      display: flex;
+      font-size: 14px;
+      color: #333;
+      padding-top: 15px;
+      // margin-bottom: 30px;
+      .base-info-line-title {
+        width: 110px;
+        margin-right: 20px;
+      }
+      .base-name-input {
+        display: block;
+        width: 190px;
+        height: 41px;
+        line-height: 41px;
+        -webkit-appearance: none;
+        outline: 0;
+        padding: 0;
+        margin: 0 27px 0 0;
+        border: 0;
+        border-bottom: 1px solid #999;
+        color: #999;
+        font-size: 14px;
+      }
+      .gender-choose,
+      .marriage-choose {
+        // display: flex;
+        // align-items: center;
+        margin-left: 10px;
+        .single-radio {
+          width: 160px;
+          input[type='radio'] {
+            width: 14px;
+            height: 14px;
+            margin-right: 10px;
+            -webkit-appearance: radio;
+          }
+          span {
+            cursor: pointer;
+          }
+        }
+      }
+      .birthday-choose {
+        display: flex;
+        align-items: center;
+        .single-radio {
+          width: 120px;
+          position: relative;
+          margin-right: 30px;
+          border-bottom: 1px solid rgba(153, 153, 153, 1);
+          font-size: 14px;
+          color: #333;
+          span:nth-child(1) {
+            display: inline-block;
+          }
+          span:nth-child(2) {
+            width: 50px;
+            display: inline-block;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+          }
+          .iconxiala {
+            position: absolute;
+            font-size: 12px;
+            width: 12px;
+            height: 12px;
+            line-height: 12px;
+            display: block;
+            color: #999;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+          select {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+          }
+          .once-tell {
+            /*width: max-content;*/
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            transform: translateY(100%);
+            font-size: 12px;
+            color: #999;
+          }
+        }
+      }
+    }
+  .input-line {
+    padding: 10px 0;
+    //  margin-bottom: 20px;
+        width: 455px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .label {
+          font-size: 14px;
+          color: #333;
+        }
+        .input-box {
+          width: 315px;
+          border: 1px solid rgba(221, 221, 221, 1);
+          border-radius: 4px;
+          position: relative;
+          color: #111;
+          input[type='text'] {
+            width: 314px;
+            height: 38px;
+            line-height: 38px;
+            display: block;
+            -webkit-appearance: none;
+            border-radius: 4px;
+            border: 0;
+            outline: 0;
+            font-size: 16px;
+            padding: 0 13px;
+          }
+          textarea {
+            width: 315px;
+            height: 58px;
+            line-height: 29px;
+            display: block;
+            -webkit-appearance: none;
+            border-radius: 4px;
+            border: 0;
+            outline: 0;
+            font-size: 16px;
+            padding: 0 13px;
+            resize: none;
+          }
+          input[type='address'] {
+            width: 315px;
+            height: 32px;
+            line-height: 32px;
+            display: block;
+            -webkit-appearance: none;
+            border-radius: 4px;
+            border: 0;
+            outline: 0;
+            font-size: 14px;
+            padding: 0 13px;
+            background: rgba(249, 249, 249, 1);
+          }
+          select {
+            position: absolute;
+            z-index: 9;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+          }
+          .iconxiala {
+            position: absolute;
+            font-size: 12px;
+            width: 12px;
+            height: 12px;
+            line-height: 12px;
+            display: block;
+            color: #aa8a7b;
+            left: 379px;
+            top: 50%;
+            transform: translateY(-50%);
+          }
+          .wrong-input {
+            color: #d9423e;
+          }
+          .wrong-alert {
+            position: absolute;
+            width: 109+7px;
+            height: 23px;
+            line-height: 23px;
+            text-align: center;
+            color: #d9423e;
+            background-image: url('../../../static/order/wrong-input.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            top: 9px;
+            right: 19px;
+          }
+        }
+        .tel-special {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 420px;
+          .tel {
+            width: 290px;
+            input[type='text'] {
+              width: 288px;
+            }
+          }
+          .tel-area {
+            width: 120px;
+            height: 40px;
+            background: rgba(248, 248, 248, 1);
+            border: 1px solid rgba(221, 221, 221, 1);
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+            input {
+              width: 100%;
+              height: 100%;
+              line-height: 38px;
+              text-align: left;
+              background: rgba(248, 248, 248, 1);
+              -webkit-appearance: none;
+              border: 0;
+              padding: 0 0 0 13px;
+              margin: 0;
+              outline: 0;
+            }
+            select {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              opacity: 0;
+            }
+            .iconxiala {
+              position: absolute;
+              font-size: 12px;
+              width: 12px;
+              height: 12px;
+              line-height: 12px;
+              display: block;
+              color: #aa8a7b;
+              right: 12px;
+              top: 50%;
+              transform: translateY(-50%);
+            }
+          }
+        }
+        .border-change {
+          border: 1px solid rgba(170, 138, 123, 1);
+        }
+        .border-wrong {
+          border: 1px solid #d9423e;
+        }
+      }
+}
+</style>
+<style lang="less">
+.order{
+  .el-radio__input.is-checked .el-radio__inner {
+      border-color: #8b766c;
+      background: #8b766c;
+  }
+  .el-radio__input.is-checked+.el-radio__label{
+    color: #606266;
+  }
+  .el-radio__inner:hover {
+    border-color: #8b766c;
+  }
+  .el-select{
+    width: 70%;
   }
 }
 </style>

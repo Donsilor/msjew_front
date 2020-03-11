@@ -214,7 +214,38 @@
     </div>
 
     <div class="bot-info">
-      <div class="left-info" />
+      <div class="left-info" >
+        <div v-show="this.invoice && this.invoice.invoiceTitle">
+          <div class="new-address-title">
+            <div class="na-line" />
+            <div class="na-title"> {{ $t(`${lang_invoice}.InvoiceDetails`) }}</div>
+          </div>
+          <div class="order-infos">
+            <div class="info-line">
+              <div class="label"> {{ $t(`${lang_invoice}.InvoiceType`) }}</div>
+              <div class="orderNo">
+                {{ type }}
+              </div>
+            </div>
+            <div class="info-line">
+              <div class="label"> {{ $t(`${lang_invoice}.HeaderType`) }}</div>
+              <div class="ff ">
+                {{ headType }}
+              </div>
+            </div>
+            <div class="info-line">
+              <div class="label"> {{ $t(`${lang_invoice}.Invoice`) }}</div>
+              <div class="ff">{{ invoice.invoiceTitle }}</div>
+            </div>
+            <div class="info-line">
+              <div class="label"> {{ $t(`${lang_invoice}.TaxID`) }}</div>
+              <div class="ff">
+                {{ invoice.taxNumber }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="right-info">
         <div class="new-address-title">
           <div class="na-line" />
@@ -283,12 +314,14 @@
 import moment from 'moment'
 const lang = 'personal.orderDetail'
 const lang_pay = 'personal.userOrder'
+const lang_invoice = 'invoice'
 export default {
   name: 'OrderDetails',
   data() {
     return {
       lang,
       lang_pay,
+      lang_invoice,
       oid: this.$route.query.orderId,
       data: {
         address: {
@@ -299,7 +332,16 @@ export default {
           realName: '',
           userMail: ''
         }
-      }
+      },
+      invoice:{
+        email: "",
+        invoiceTitle: "",
+        invoiceType: '',
+        isElectronic: '',
+        taxNumber: ""
+      },
+      type:'',
+      headType:''
     }
   },
   computed: {
@@ -375,8 +417,10 @@ export default {
           params: { orderId: this.oid }
         })
         .then(res => {
-          // console.log(res)
           this.data = res.data
+          this.invoice = res.data.invoice
+          console.log(this.invoice)
+          
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
           )
@@ -384,6 +428,16 @@ export default {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
           })
+          if(!this.data.invoice.isElectronic){
+            this.type = this.$t(`${lang_invoice}.PaperInvoice`)
+          } else {
+            this.type = this.$t(`${lang_invoice}.ElectronicInvoice`)
+          }
+          if(this.data.invoice.invoiceType == 2){
+            this.headType = this.$t(`${lang_invoice}.personal`)
+          } else {
+            this.headType = this.$t(`${lang_invoice}.company`)
+          }
         })
         .catch(err => {
           if (!err.response) {
@@ -803,6 +857,94 @@ export default {
     margin-bottom: 30px;
     .right-info {
       width: 470px;
+      background: rgba(255, 255, 255, 1);
+      .new-address-title {
+        height: 20px;
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 17px;
+        .na-line {
+          width: 4px;
+          height: 20px;
+          background: #000;
+          border-radius: 2px;
+          margin-right: 20px;
+        }
+        .na-title {
+          font-size: 20px;
+          color: #333;
+          line-height: 20px;
+          margin-right: 11px;
+        }
+      }
+      .order-infos {
+        .info-line {
+          width: 100%;
+          height: 34px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 20px;
+          input {
+            text-align: right;
+            width: 230px;
+            height: 18px;
+            font-size: 16px;
+            line-height: 16px;
+            -webkit-appearance: none;
+            border: 0;
+            outline: 0;
+            padding: 0;
+            margin: 0;
+            background: white;
+          }
+          .ff {
+            font-family: twCenMt;
+            font-size: 16px;
+            color: #333;
+          }
+          .copy-btn {
+            float: right;
+            width: 40px;
+            height: 20px;
+            line-height: 18px;
+            background: rgba(245, 244, 244, 1);
+            border: 1px solid rgba(174, 174, 174, 1);
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            margin-left: 10px;
+            color: #666;
+            font-size: 12px;
+          }
+          .label {
+            font-size: 14px;
+            color: #656565;
+          }
+          .color-gold {
+            color: #aa8a7b;
+            font-size: 16px;
+            line-height: 20px;
+          }
+          .color-pink {
+            color: #f29b87;
+          }
+          .big-label {
+            font-size: 16px;
+            font-weight: bold;
+          }
+          .big-ff {
+            font-size: 20px;
+            font-weight: bold;
+          }
+        }
+        .info-line:nth-child(2n) {
+          background: rgba(249, 249, 249, 1);
+        }
+      }
+    }
+    .left-info {
+      width: 390px;
       background: rgba(255, 255, 255, 1);
       .new-address-title {
         height: 20px;

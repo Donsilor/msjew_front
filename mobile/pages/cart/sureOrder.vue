@@ -121,6 +121,16 @@
             :placeholder="lang.more"
           ></textarea>
         </div>
+        <!-- 开具发票 -->
+        <div class="invoice">
+          <div class="title">
+            <span>{{ lang3.invo }}</span>
+            <div>
+              <span class="underline" v-show="!kai" @click="show">{{ lang3.NotInvoiced }}</span>
+              <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
+            </div>
+          </div>
+        </div>
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
@@ -175,10 +185,10 @@
           </div>
         </div> -->
         <ul class="price">
-          <!--          <li v-if="isLogin" @click="selectCupon">-->
-          <!--            <span>{{ lang.cupon }}</span-->
-          <!--            ><span>{{ cuponName }}</span>-->
-          <!--          </li>-->
+          <!-- <li v-if="isLogin" @click="selectCupon">
+            <span>{{ lang.cupon }}</span
+            ><span>{{ cuponName }}</span>
+          </li> -->
           <li>
             <span>{{ lang.allFee }} </span
             ><span
@@ -270,8 +280,10 @@ export default {
   },
   data() {
     return {
+      kai:false,
       url:'', 
       lang2: this.LANGUAGE.cart.pay,
+      lang3: this.LANGUAGE.cart.invoice,
       coin: this.$store.state.coin,
       form: [],
       actionLink: '',
@@ -317,17 +329,18 @@ export default {
       isSend: true,
       productNum: 0,
       planDays:'',
-
       sureCoupon: false,
       inputCouponCode: '',
       inputCouponInfo: null,
       selectCouponId: '',
       cuponList: [],
       session: '',
-      info:[]
+      info:[],
+      totlePrice:''
     }
   },
   computed: {
+    
     selectedCouponInfo() {
       const _this = this
       let result = {}
@@ -391,17 +404,20 @@ export default {
            result = this.formatMoney(this.allFee.order_amount)
          } 
        }
-      // else {
-      //   console.log(33333) 
-      //   result = '--'
-      // }
-      // console.log("result",result) 
+       this.totlePrice = result
+       console.log("dddd",this.totlePrice)
       return result
     }
   },
+  created(){
+    // console.log("aaaa",)
+    //     this.kai = this.$route.query.invoice !== ''
+  },
   mounted() {
-    
+    console.log("query",this.$route.params.invoice)
     this.$nextTick(() => {
+      this.kai = typeof this.$route.params.invoice !== 'undefined' && this.$route.params.invoice.invoice_title != ''
+      console.log(this.kai)
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
       } else {
@@ -436,6 +452,16 @@ export default {
     })
   },
   methods: {
+    show(){
+      this.kai = !this.kai
+      this.$router.push({
+        name: 'cart-invoice',
+        query:{
+          price:this.totlePrice,
+          kai:this.kai
+        }
+      })
+    },
     changeType(ind) {
       // console.log("选择哪一个",ind)
       this.typeIndex = ind
@@ -795,6 +821,10 @@ export default {
       //   this.$toast.show(this.lang.toast3)
       //   return
       // }
+      let info = {}
+      if(this.kai == true){
+        info = this.$route.params.invoice
+      }
       if (this.isLogin) {
         this.$axios({
           method: 'post',
@@ -806,6 +836,7 @@ export default {
             // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
+            invoice: info
             // afterMail: this.mailbox,
             // recvType: 1,
             // preferId: this.selectCouponId ? this.selectCouponId : null,
@@ -848,6 +879,7 @@ export default {
           url: `/web/member/order-tourist/create`,
           data: {
             goodsCartList:data,
+            invoice:this.$route.query.invoice,
             tradeType:'wap',
             coinType:this.$store.state.coin,
             returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
@@ -1335,7 +1367,18 @@ export default {
     line-height: 14px;
   }
 }
-
+// 发票
+.invoice{
+  .underline{
+    text-decoration: underline;
+  }
+  .title{
+    font-size: 14px;
+    color: rgba(51, 51, 51, 1);
+    display: flex;
+    justify-content: space-between;
+  }
+}
 // 支付方式
 .payways{
   background: #f2f2f2;
