@@ -417,7 +417,7 @@ export default {
             const data =  res.data
             if(data.verification_status !== 'true') {
                 this.verifyCount++
-                if(this.verifyCount < 5) {
+                if(this.verifyCount < 10) {
                     setTimeout(this.payVerify, 5000);
                     return
                 }
@@ -437,7 +437,7 @@ export default {
             }
         })
         .catch(err => {
-            if(this.verifyCount < 5) {
+            if(this.verifyCount < 10) {
                  setTimeout(this.payVerify, 5000);
             }else{
                 this.$router.replace({
