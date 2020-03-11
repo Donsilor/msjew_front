@@ -345,56 +345,7 @@ export default {
     toLogin() {
       this.$router.push(`/login`)
     },
-    payVerify(){
-      this.$axios({
-            url: '/web/pay/verify',
-            method: 'post',
-            timeout:8000,
-            data: {
-              return_url: window.location.href
-            }
-        })
-        .then(res => {
-            const data =  res.data
-            if(data.verification_status !== 'true') {
-                this.verifyCount++
-                if(this.verifyCount < 10) {
-                    setTimeout(this.payVerify, 5000);
-                    return
-                }
-                this.$router.replace({
-                  path: '/complete-paySuccess/state/failed',
-                  query: {   
-                    orderId: this.$route.query.orderId || this.$route.query.order_sn,
-                  }
-                })  
-				        return
-            }else {
-              this.$store.dispatch('getLocalCartOrder').then(v => {
-                this.$store.dispatch('removeCart',v.split(','))
-              })
-
-              this.stepPaySuccess = true
-              this.stepPayVerify = false
-            }
-        })
-        .catch(err => {
-            if(this.verifyCount < 10) {
-                 setTimeout(this.payVerify, 5000);
-            }else{
-                this.$router.replace({
-                  path: '/complete-paySuccess/state/failed',
-                  query: {   
-                    orderId: this.$route.query.orderId || this.$route.query.order_sn,
-                  }
-                })  
-            }
-            console.log(err)
-            return
-        })
-        if(this.stepPaySuccess === false){
-             return 
-        }
+    orderInfo(){
         if(this.$store.getters.hadLogin){
             this.$axios
               .get('/web/member/order/detail', {
@@ -441,6 +392,55 @@ export default {
                 }
             })
           }
+    },
+    payVerify(){
+      this.$axios({
+            url: '/web/pay/verify',
+            method: 'post',
+            timeout:8000,
+            data: {
+              return_url: window.location.href
+            }
+        })
+        .then(res => {
+            const data =  res.data
+            if(data.verification_status !== 'true') {
+                this.verifyCount++
+                if(this.verifyCount < 10) {
+                    setTimeout(this.payVerify, 5000);
+                    return
+                }
+                this.$router.replace({
+                  path: '/complete-paySuccess/state/failed',
+                  query: {   
+                    orderId: this.$route.query.orderId || this.$route.query.order_sn,
+                  }
+                })  
+				        return
+            }else {
+              this.$store.dispatch('getLocalCartOrder').then(v => {
+                this.$store.dispatch('removeCart',v.split(','))
+              })
+
+              this.stepPaySuccess = true
+              this.stepPayVerify = false
+              this.orderInfo()
+            }
+        })
+        .catch(err => {
+            if(this.verifyCount < 10) {
+                 setTimeout(this.payVerify, 5000);
+            }else{
+                this.$router.replace({
+                  path: '/complete-paySuccess/state/failed',
+                  query: {   
+                    orderId: this.$route.query.orderId || this.$route.query.order_sn,
+                  }
+                })  
+            }
+            console.log(err)
+            return
+        })
     }
   }
 }
