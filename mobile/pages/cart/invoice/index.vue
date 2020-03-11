@@ -1,16 +1,13 @@
 <template>
     <div class="invoice">
-        <div class="detail">{{ lang.InvoiceDetails }}</div>
-        <Header :title="lang.myOrder" @back="goBack" />
+        <Header :title="lang.InvoiceDetails" @back="goBack" class="detail"/>
         <div>
             <div class="select"> 
                 <div>
-                    <i :class="{ icongou: select2 }" @click="selected(2)" class="icon iconfont "></i>
-                    <span>{{ lang.UnBusinessUnit }}</span>
+                    <button @click="zhizhi(0)" :class="{'active':invoice.is_electronic == '0'}">{{ lang.PaperInvoice }}</button>
                 </div>
                 <div>
-                    <i :class="{ icongou: select1 }" @click="selected(1)" class="icon iconfont"></i>
-                    <span>{{ lang.BusinessUnit }}</span>
+                    <button @click="zhizhi(1)" :class="{'isactive':invoice.is_electronic == '1'}">{{ lang.ElectronicInvoice }}</button>
                 </div>
                 
             </div>   
@@ -83,6 +80,8 @@ export default {
             coin: this.$store.state.coin,
             lang: this.LANGUAGE.cart.invoice,
             isLogin: !!this.$store.state.token,
+            isactive:true,
+            Active:false
         }
     },
     mounted(){
@@ -90,9 +89,26 @@ export default {
         // console.log(this.kai)
     },
     methods:{
+        zhizhi(or){
+            // console.log("纸质",this.isactive,this.Active)
+            this.invoice.is_electronic = or;
+            console.log(this.invoice.is_electronic)
+            // if(or == '0'){
+            //     this.isactive != this.Active
+            //     // this.Active = false
+            // }
+        },
+        dianzi(or){
+            // if(or == '1'){
+            //     this.isactive != this.Active
+            //     // this.Active = true
+            // }
+            // console.log("电子",this.isactive,this.Active)
+            this.invoice.is_electronic = or;
+        },
         goBack() {
             this.$router.replace({
-                name: 'personal'
+                name: 'cart-sureOrder'
             })
         },
         selected(ind){
@@ -140,7 +156,7 @@ export default {
     .detail{
         height: 50px;
         line-height: 50px;
-        text-align: left;
+        text-align: center;
         padding-left: 15px;
         background: #ddd;
         font-size: 20px;
@@ -149,13 +165,22 @@ export default {
     .select{
         display: flex;
         justify-content:space-around;
-        padding-top:20px;
+        padding-top:10px;
         div{
             display: flex;
-            span{
-                margin-left: 10px;
-                display: inline-block;
-                line-height: 20px;
+            button{
+                width: 140px;
+                border:1px solid #ddd;
+                height: 35px;
+                border-radius: 6px;
+                font-size: 15px;
+                color: #bbb;
+            }
+            .active{
+                border:1px solid #8b766c;
+            }
+            .isactive{
+                border:1px solid #8b766c;
             }
         }
     }

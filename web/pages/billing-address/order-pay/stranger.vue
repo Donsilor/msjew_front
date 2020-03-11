@@ -659,9 +659,9 @@
                     <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang3}.ElectronicInvoice`) }}</button>
                   </div>
                   <!-- 纸质 -->
-                  <div class="input-line" v-show="isactive == true">
+                  <div class="input-line" >
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
-                    <div class="input-box">
+                    <div class="input-box" v-show="isactive == true">
                       <input
                         style="text-align:center;"
                         disabled
@@ -671,9 +671,19 @@
                         type="text"
                       />
                     </div>
+                    <div class="input-box" v-show="Active == true">
+                      <input
+                        style="text-align:center;"
+                        disabled
+                        v-model="bb"
+                        readonly
+                        :class="{ 'wrong-input': wrongInput.lastname }"
+                        type="text"
+                      />
+                    </div>
                   </div>
                   <!-- 电子 -->
-                  <div class="input-line" v-show="Active == true">
+                  <!-- <div class="input-line" >
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
                     <div class="input-box">
                       <input
@@ -685,7 +695,7 @@
                         type="text"
                       />
                     </div>
-                  </div>
+                  </div> -->
                   <div class="base-info-line">
                     <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang3}.HeaderType`) }}</div>
                     <div class="base-info-line-content marriage-choose" >
@@ -1576,9 +1586,9 @@
                     <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang3}.PaperInvoice`) }}</button>
                     <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang3}.ElectronicInvoice`) }}</button>
                   </div>
-                  <div class="input-line" v-show="isactive == true">
+                  <div class="input-line" >
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
-                    <div class="input-box">
+                    <div class="input-box" v-show="isactive == true">
                       <input
                         style="text-align:center;"
                         disabled
@@ -1588,9 +1598,19 @@
                         type="text"
                       />
                     </div>
+                    <div class="input-box" v-show="Active == true">
+                      <input
+                        style="text-align:center;"
+                        disabled
+                        v-model="bb"
+                        readonly
+                        :class="{ 'wrong-input': wrongInput.lastname }"
+                        type="text"
+                      />
+                    </div>
                   </div>
                   <!-- 电子 -->
-                  <div class="input-line" v-show="Active == true">
+                  <!-- <div class="input-line" v-show="Active == true">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
                     <div class="input-box">
                       <input
@@ -1602,7 +1622,7 @@
                         type="text"
                       />
                     </div>
-                  </div>
+                  </div> -->
                   <div class="base-info-line">
                     <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang3}.HeaderType`) }}</div>
                     <div class="base-info-line-content marriage-choose" >
@@ -1872,7 +1892,7 @@ export default {
         invoice_type:'',
         invoice_title:'',
         tax_number:'',
-        is_electronic:""
+        is_electronic:"0"
       },
       invoices:{},
       url:'',

@@ -946,6 +946,9 @@ export default {
     .left-info {
       width: 390px;
       background: rgba(255, 255, 255, 1);
+      .orderNo{
+        font-size: 16px;
+      }
       .new-address-title {
         height: 20px;
         display: flex;

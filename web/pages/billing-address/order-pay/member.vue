@@ -582,20 +582,30 @@
                     />
                   </div>
                 </div>
-                <div class="input-line" v-show="Active == true">
-                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
-                  <div class="input-box">
-                    <input
-                      style="text-align:center;"
-                      disabled
-                      v-model="bb"
-                      readonly
-                      :class="{ 'wrong-input': wrongInput.lastname }"
-                      type="text"
-                    />
+                <div class="input-line" >
+                    <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
+                    <div class="input-box" v-show="isactive == true">
+                      <input
+                        style="text-align:center;"
+                        disabled
+                        v-model="aa"
+                        readonly
+                        :class="{ 'wrong-input': wrongInput.lastname }"
+                        type="text"
+                      />
+                    </div>
+                    <div class="input-box" v-show="Active == true">
+                      <input
+                        style="text-align:center;"
+                        disabled
+                        v-model="bb"
+                        readonly
+                        :class="{ 'wrong-input': wrongInput.lastname }"
+                        type="text"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div class="base-info-line">
+                <!-- <div class="base-info-line">
                   <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
                   <div class="base-info-line-content marriage-choose" >
                     <el-radio-group v-model="invoice.invoice_type" @change="handle">
@@ -606,7 +616,7 @@
                       {{ $t(`${lang2}.hint1`) }}
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="input-line">
                   <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
                   <div
@@ -1415,20 +1425,30 @@
                   <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
                   <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
                 </div>
-                <div class="input-line" v-show="isactive == true">
-                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
-                  <div class="input-box">
-                    <input
-                      style="text-align:center;"
-                      disabled
-                      v-model="aa"
-                      readonly
-                      :class="{ 'wrong-input': wrongInput.lastname }"
-                      type="text"
-                    />
+                <div class="input-line" >
+                    <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
+                    <div class="input-box" v-show="isactive == true">
+                      <input
+                        style="text-align:center;"
+                        disabled
+                        v-model="aa"
+                        readonly
+                        :class="{ 'wrong-input': wrongInput.lastname }"
+                        type="text"
+                      />
+                    </div>
+                    <div class="input-box" v-show="Active == true">
+                      <input
+                        style="text-align:center;"
+                        disabled
+                        v-model="bb"
+                        readonly
+                        :class="{ 'wrong-input': wrongInput.lastname }"
+                        type="text"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div class="input-line" v-show="Active == true">
+                <!-- <div class="input-line" v-show="Active == true">
                   <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
                   <div class="input-box">
                     <input
@@ -1440,7 +1460,7 @@
                       type="text"
                     />
                   </div>
-                </div>
+                </div> -->
                 <div class="base-info-line">
                   <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
                   <div class="base-info-line-content marriage-choose" >
@@ -1793,7 +1813,7 @@ export default {
         invoice_type:'',
         invoice_title:'',
         tax_number:'',
-        is_electronic:""
+        is_electronic:"0"
       },
     }
   },
