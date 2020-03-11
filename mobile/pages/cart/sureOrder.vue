@@ -1367,6 +1367,7 @@ export default {
 .invoice{
   .underline{
     text-decoration: underline;
+    color:#75BEEE;
   }
   .title{
     font-size: 14px;

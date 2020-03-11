@@ -654,10 +654,11 @@
                   <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
                   
                   <p class="title">{{ $t(`${lang3}.Invoicings`) }}</p>
-                  <!-- <div class="btn_type">
-                    <button @click="zhizhi" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
-                    <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
-                  </div> -->
+                  <div class="btn_type">
+                    <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang3}.PaperInvoice`) }}</button>
+                    <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang3}.ElectronicInvoice`) }}</button>
+                  </div>
+                  <!-- 纸质 -->
                   <div class="input-line" v-show="isactive == true">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
                     <div class="input-box">
@@ -671,8 +672,9 @@
                       />
                     </div>
                   </div>
-                  <!-- <div class="input-line" v-show="Active == true">
-                    <div class="label"><span class="star"></span>发票类型</div>
+                  <!-- 电子 -->
+                  <div class="input-line" v-show="Active == true">
+                    <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
                     <div class="input-box">
                       <input
                         style="text-align:center;"
@@ -683,11 +685,7 @@
                         type="text"
                       />
                     </div>
-                  </div> -->
-                  <!-- invoice_type:'',
-      invoice_title:'',
-      tax_number:'',
-      is_electronic:"0", -->
+                  </div>
                   <div class="base-info-line">
                     <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang3}.HeaderType`) }}</div>
                     <div class="base-info-line-content marriage-choose" >
@@ -751,7 +749,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ $store.state.coin }}{{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                      <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang3}.tips`) }}</p>
@@ -1574,12 +1572,12 @@
                   <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
                   
                   <p class="title">{{ $t(`${lang3}.Invoicings`) }}</p>
-                  <!-- <div class="btn_type">
-                    <button @click="zhizhi" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
-                    <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
-                  </div> -->
+                  <div class="btn_type">
+                    <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang3}.PaperInvoice`) }}</button>
+                    <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang3}.ElectronicInvoice`) }}</button>
+                  </div>
                   <div class="input-line" v-show="isactive == true">
-                    <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceDetails`) }}</div>
+                    <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
                     <div class="input-box">
                       <input
                         style="text-align:center;"
@@ -1591,8 +1589,9 @@
                       />
                     </div>
                   </div>
-                  <!-- <div class="input-line" v-show="Active == true">
-                    <div class="label"><span class="star"></span>发票类型</div>
+                  <!-- 电子 -->
+                  <div class="input-line" v-show="Active == true">
+                    <div class="label"><span class="star"></span>{{ $t(`${lang3}.InvoiceType`) }}</div>
                     <div class="input-box">
                       <input
                         style="text-align:center;"
@@ -1603,7 +1602,7 @@
                         type="text"
                       />
                     </div>
-                  </div> -->
+                  </div>
                   <div class="base-info-line">
                     <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang3}.HeaderType`) }}</div>
                     <div class="base-info-line-content marriage-choose" >
@@ -1667,7 +1666,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ $store.state.coin }}{{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                      <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang3}.tips`) }}</p>
@@ -1873,7 +1872,7 @@ export default {
         invoice_type:'',
         invoice_title:'',
         tax_number:'',
-        is_electronic:"0"
+        is_electronic:""
       },
       invoices:{},
       url:'',
@@ -1937,7 +1936,7 @@ export default {
       familyDie: ``,
       language:'',
       scrollTop: 0,
-      
+      is_electronic:''
     }
   },
   computed: {
@@ -2004,7 +2003,6 @@ export default {
       })
   },
   mounted() {
-    
     this.language = this.getCookie('language')
     window.addEventListener('scroll', this.scrollToTop);
   },
@@ -2012,11 +2010,15 @@ export default {
     window.removeEventListener('scroll', this.scrollToTop)
   },
   methods: {
-    zhizhi(){
+    zhizhi(or){
+      // console.log("纸质",or)
+      this.invoice.is_electronic = or;
       this.isactive = true
       this.Active = false
     },
-    dianzi(){
+    dianzi(or){
+      // console.log("电子",or)
+      this.invoice.is_electronic = or;
       this.isactive = false
       this.Active = true
     },
@@ -2028,6 +2030,8 @@ export default {
     },
     show2(){
       this.iconShow=!this.iconShow
+      this.invoice.is_electronic = 0
+      console.log("dddd",this.invoice.is_electronic)
       if(this.iconShow == true){
         this.invoiceBox = true
         this.content = true
@@ -2347,6 +2351,8 @@ export default {
 <style lang="less" scoped>
 .star{
   color: #c28c8c;
+  display: inline-block;
+  width: 10px;
 }
 div {
   box-sizing: border-box;
@@ -4284,6 +4290,7 @@ div {
       .base-info-line-title {
         width: 110px;
         margin-right: 20px;
+        font-size: 16px;
       }
       .base-name-input {
         display: block;
@@ -4378,7 +4385,7 @@ div {
         justify-content: space-between;
         align-items: center;
         .label {
-          font-size: 14px;
+          font-size: 16px;
           color: #333;
         }
         .input-box {

@@ -1,16 +1,30 @@
 <template>
     <div class="invoice">
         <div class="detail">{{ lang.InvoiceDetails }}</div>
-        <div class="type">
-            <div class="title"><span><span class="star">*</span>&nbsp;{{ lang.HeaderType }}</span></div>
-            <div class="type_select">
+        <Header :title="lang.myOrder" @back="goBack" />
+        <div>
+            <div class="select"> 
+                <div>
+                    <i :class="{ icongou: select2 }" @click="selected(2)" class="icon iconfont "></i>
+                    <span>{{ lang.UnBusinessUnit }}</span>
+                </div>
                 <div>
                     <i :class="{ icongou: select1 }" @click="selected(1)" class="icon iconfont"></i>
                     <span>{{ lang.BusinessUnit }}</span>
                 </div>
+                
+            </div>   
+        </div>
+        <div class="type">
+            <div class="title"><span><span class="star">*</span>&nbsp;{{ lang.HeaderType }}</span></div>
+            <div class="type_select">
                 <div>
                     <i :class="{ icongou: select2 }" @click="selected(2)" class="icon iconfont "></i>
                     <span>{{ lang.UnBusinessUnit }}</span>
+                </div>
+                <div style="margin-left:25px;">
+                    <i :class="{ icongou: select1 }" @click="selected(1)" class="icon iconfont"></i>
+                    <span>{{ lang.BusinessUnit }}</span>
                 </div>
             </div>
         </div>
@@ -44,9 +58,13 @@
     </div>
 </template>
 <script>
+import Header from '@/components/personal/common-header.vue'
 export default {
     name:"invoice",
     layout: 'no-footer-bar',
+    components: {
+        Header,
+    },
     data(){
         return{
             select1:false,
@@ -72,6 +90,11 @@ export default {
         // console.log(this.kai)
     },
     methods:{
+        goBack() {
+            this.$router.replace({
+                name: 'personal'
+            })
+        },
         selected(ind){
             if(ind == 1){
                 this.select1 = true
@@ -123,16 +146,31 @@ export default {
         font-size: 20px;
         // color:#eee;
     }
+    .select{
+        display: flex;
+        justify-content:space-around;
+        padding-top:20px;
+        div{
+            display: flex;
+            span{
+                margin-left: 10px;
+                display: inline-block;
+                line-height: 20px;
+            }
+        }
+    }
     .type{
         padding: 20px;
         // height: 20px;
         display: flex;
-        // justify-content: space-between;
+        justify-content: space-between;
         border-bottom:1px solid #ddd;
         .type_select{
-            // display: flex;
+            width:220px;
+            display: flex;
+            // justify-content: space-around;
             // height: 20px;
-            margin-left: 30px;
+            // margin-left: 30px;
             margin-top: 10px;
             div:first-child{
                 margin-bottom: 10px;

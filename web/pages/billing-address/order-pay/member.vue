@@ -565,12 +565,12 @@
                 <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
                 
                 <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
-                <!-- <div class="btn_type">
-                  <button @click="zhizhi" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
-                  <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
-                </div> -->
+                <div class="btn_type">
+                  <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
+                  <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
+                </div>
                 <div class="input-line" v-show="isactive == true">
-                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceDetails`) }}</div>
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
                   <div class="input-box">
                     <input
                       style="text-align:center;"
@@ -582,8 +582,8 @@
                     />
                   </div>
                 </div>
-                <!-- <div class="input-line" v-show="Active == true">
-                  <div class="label"><span class="star"></span>发票类型</div>
+                <div class="input-line" v-show="Active == true">
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
                   <div class="input-box">
                     <input
                       style="text-align:center;"
@@ -594,7 +594,7 @@
                       type="text"
                     />
                   </div>
-                </div> -->
+                </div>
                 <div class="base-info-line">
                   <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
                   <div class="base-info-line-content marriage-choose" >
@@ -1411,12 +1411,12 @@
                 <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
                 
                 <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
-                <!-- <div class="btn_type">
-                  <button @click="zhizhi" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
-                  <button @click="dianzi" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
-                </div> -->
+                <div class="btn_type">
+                  <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
+                  <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
+                </div>
                 <div class="input-line" v-show="isactive == true">
-                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceDetails`) }}</div>
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
                   <div class="input-box">
                     <input
                       style="text-align:center;"
@@ -1428,8 +1428,8 @@
                     />
                   </div>
                 </div>
-                <!-- <div class="input-line" v-show="Active == true">
-                  <div class="label"><span class="star"></span>发票类型</div>
+                <div class="input-line" v-show="Active == true">
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
                   <div class="input-box">
                     <input
                       style="text-align:center;"
@@ -1440,7 +1440,7 @@
                       type="text"
                     />
                   </div>
-                </div> -->
+                </div>
                 <div class="base-info-line">
                   <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
                   <div class="base-info-line-content marriage-choose" >
@@ -1793,7 +1793,7 @@ export default {
         invoice_type:'',
         invoice_title:'',
         tax_number:'',
-        is_electronic:"0"
+        is_electronic:""
       },
     }
   },
@@ -1851,11 +1851,15 @@ export default {
     this.language = this.getCookie('language')
   },
   methods: {
-    zhizhi(){
+    zhizhi(or){
+      // console.log("纸质",or)
+      this.invoice.is_electronic = or;
       this.isactive = true
       this.Active = false
     },
-    dianzi(){
+    dianzi(or){
+      // console.log("电子",or)
+      this.invoice.is_electronic = or;
       this.isactive = false
       this.Active = true
     },
@@ -1867,6 +1871,7 @@ export default {
     },
     show2(){
       this.iconShow=!this.iconShow
+      this.invoice.is_electronic = 0
       if(this.iconShow == true){
         this.invoiceBox = true
         this.content = true

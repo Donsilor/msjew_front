@@ -137,7 +137,7 @@
         "PaperInvoice":"纸质发票",
         "ElectronicInvoice":"电子发票",
         "BusinessUnit":"企业单位",
-        "UnBusinessUnit":"个人/非企业单位",
+        "UnBusinessUnit":"个人",
         "Invoice":"发票抬头",
         "TaxID":"发票税号",
         "holder1":"填写发票抬头",

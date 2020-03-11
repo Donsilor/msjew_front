@@ -137,7 +137,7 @@
       "PaperInvoice": "Paper Invoice",
       "ElectronicInvoice": "Electronic Invoice",
       "BusinessUnit": "Business Unit",
-      "UnBusinessUnit": "Individual / Non-Business Unit",
+      "UnBusinessUnit": "Individual",
       "Invoice": "Invoice Header",
       "TaxID": "Invoice tax number",
       "holder1": "Fill Invoice Header",

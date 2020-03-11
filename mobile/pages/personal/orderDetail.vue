@@ -799,7 +799,7 @@ export default {
     .invoice {
         width: 355px;
         margin: 0px auto 10px;
-        padding: 10px 14px;
+        padding: 10px 18px;
         background: #fff;
         border-radius: 5px;
         font-size: 12px;
