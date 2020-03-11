@@ -199,6 +199,7 @@ export default {
               }
           })
       }else{
+      
           this.payVerify()
       }
     //  if(this.$route.query.success == 'false' && this.verification_status == 'false'){
