@@ -2,8 +2,8 @@
   <div class="pay-success">
     <!-- 已登录 -->
     <div v-if="hadLogin">
-      <p v-show="this.$route.query.success == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
-      <div class="top" v-show="this.$route.query.success !== 'false'">
+      <p v-show="this.$route.query.success == 'false' && this.verification_status == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
+      <div class="top" v-show="this.$route.query.success !== 'false' && this.verification_status == 'false'">
         <img src="@/static/cart/success.png" />
         <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
@@ -55,8 +55,8 @@
     </div>
     <!-- 未登录 -->  
     <div v-else>
-      <p v-show="this.$route.query.success == 'false' " class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
-      <div class="top" v-show="this.$route.query.success !== 'false'">
+      <p v-show="this.$route.query.success == 'false' && this.verification_status == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
+      <div class="top" v-show="this.$route.query.success !== 'false' && this.verification_status == 'false'">
         <img src="@/static/cart/success.png"  />
         <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
@@ -175,7 +175,7 @@ export default {
       orderinfo:'',
       isLogin: !!this.$store.state.token,
       list:[],
-      verify:''
+      verification_status:''
     }
   },
   computed: {
@@ -184,7 +184,7 @@ export default {
     }
   },
   mounted() {
-     if(this.$route.query.success == 'false'){
+     if(this.$route.query.success == 'false' && this.verification_status == 'false'){
         this.$router.push({
           name: 'cart-payFailed-orderId-price-coinType',
           query: {   
@@ -268,9 +268,7 @@ export default {
         }
       })
       .then(res => {
-       
-        // this.verify=res.verification_status;
-        // console.log("verify",this.verify)
+        this.verification_status = res.verification_status
           const arr = []
           this.list.map((item, index) => {
             arr.push(item.localSn)

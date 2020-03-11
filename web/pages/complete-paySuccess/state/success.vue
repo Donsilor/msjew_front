@@ -307,11 +307,12 @@ export default {
         recvType: null,
         safeFee: null,
         taxFee: null
-      }
+      },
+      verification_status:''
     }
   },
   mounted() {
-    if(this.$route.query.success == 'false'){
+    if(this.$route.query.success == 'false'&& this.verification_status == 'false'){
         this.$router.replace({
           path: '/complete-paySuccess/state/failed',
           query: {   
@@ -386,7 +387,8 @@ export default {
           return_url: window.location.href
       })
       .then(res => {
-        // console.log("oid",this.oid2)
+        this.verification_status = res.data.verification_status
+        console.log("oid",this.verification_status)
         // if(res){
           
         // }
