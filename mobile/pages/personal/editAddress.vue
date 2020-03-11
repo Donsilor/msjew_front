@@ -518,9 +518,14 @@ export default {
         .then(res => {
           console.log(11111,res);
           if(res.length == 0){
+            _this.cityList = []
             this.cityId = 0
             this.city ='------'
-           
+            const i ={
+              id: '0',
+              content: '------'
+            }
+            _this.cityList.push(i)
           }else{
             _this.cityList = []
             for (let i = 0; i < res.length; i++) {
@@ -585,7 +590,7 @@ export default {
       this.cityId = ''
       
       if(this.cityList.length == 0){
-        this.city = '-----'
+        this.city = '------'
         
       }else {
         this.city = this.lang.city
@@ -595,10 +600,11 @@ export default {
         this.$toast.show(this.lang.province2)
         return
       }
-      if (this.cityList.length > 1) {
-        console.log("4444")
-        this.$refs.city.show()
-      }
+      this.$refs.city.show()
+      // if (this.cityList.length > 1) {
+      //   console.log("4444")
+      //   this.$refs.city.show()
+      // }
     },
     // 刪除地址
     deleteAddress(id) {
