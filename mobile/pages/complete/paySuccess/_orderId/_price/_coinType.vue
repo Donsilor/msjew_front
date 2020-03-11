@@ -201,20 +201,8 @@ export default {
       }else{
           this.payVerify()
       }
-    //  if(this.$route.query.success == 'false' && this.verification_status == 'false'){
-    //     this.$router.push({
-    //       name: 'cart-payFailed-orderId-price-coinType',
-    //       query: {   
-    //         orderId: this.$route.query.orderId||this.$route.query.order_sn,
-    //       }
-    //     })
-    //     // setTimeout(() => {
-    //     // }, 3000);  
-        
-    //   }
-      console.log("aa",this.$route.query)
+
     this.list = JSON.parse(storage.get('myCartList', 0))   
-    // console.log("myCartList",this.list)
     const _this = this
     _this.$nextTick(() => {
       if (this.isLogin){
@@ -296,6 +284,7 @@ export default {
             url: '/web/pay/verify',
             method: 'post',
             timeout:8000,
+            async:true,
             data: {
                 return_url: window.location.href
             }
@@ -338,6 +327,7 @@ export default {
                 })
             }
             console.log(err)
+            return 
         })
     },
     getChannelType(type) {

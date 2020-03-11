@@ -350,6 +350,7 @@ export default {
             url: '/web/pay/verify',
             method: 'post',
             timeout:8000,
+            async:true,
             data: {
               return_url: window.location.href
             }
