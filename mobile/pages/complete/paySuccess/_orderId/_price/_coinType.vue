@@ -246,28 +246,6 @@ export default {
           console.log(err)
         })
     },
-    // geturl(){
-    //   this.$axios({
-    //     url: '/web/pay/verify',
-    //     method: 'post',
-    //     data: {
-    //       return_url: window.location.href
-    //     }
-    //   })
-    //   .then(res => {
-    //     this.verification_status = res.verification_status
-    //       const arr = []
-    //       this.list.map((item, index) => {
-    //         arr.push(item.localSn)
-    //         console.log(arr)
-    //         this.$store.dispatch('removeCart', arr)
-    //       })
-    //     // console.log("verify",res)
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
-    // },
     payVerify(){
       
       const _this = this
@@ -321,7 +299,9 @@ export default {
             console.log(err)
             return 
         })
-
+        if(this.stepPaySuccess === false){
+           return 
+        }
         this.list = JSON.parse(storage.get('myCartList', 0))          
         //_this.$nextTick(() => {
           if (this.isLogin){

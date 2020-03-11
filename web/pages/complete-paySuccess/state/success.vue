@@ -392,7 +392,9 @@ export default {
             console.log(err)
             return
         })
-
+        if(this.stepPaySuccess === false){
+             return 
+        }
         if(this.$store.getters.hadLogin){
             this.$axios
               .get('/web/member/order/detail', {
