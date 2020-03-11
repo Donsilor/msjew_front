@@ -1,154 +1,159 @@
 <template>
   <div class="pay-success">
-    <!-- 已登录 -->
-    <div v-if="hadLogin">
-      <p v-show="this.$route.query.success == 'false' && this.verification_status == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
-      <div class="top" v-show="this.$route.query.success !== 'false' && this.verification_status == 'false'">
-        <img src="@/static/cart/success.png" />
-        <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
-        <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
-          <span class="font-size-16">{{ info.coinCode }}</span>
-          {{ info.orderAmount }}
-        </p>
-      </div>
-      <div class="code">
-        <span>{{ lang.orderNo }}</span
-        ><span
-          >{{ info.orderNo
-          }}<i
-            class="icon iconfont iconcopy copy-btn"
-            :data-clipboard-text="info.orderNo"
-            @click="copy"
-          ></i
-        ></span>
-      </div>
-      <ul class="price">
-        <!-- <li v-if="info.preferFee || info.transPreferFee">
-          <div class="title">
-            {{ lang.preferFee }}
-          </div>
-          <div v-if="info.preferFee" class="info">
-            <span>{{ lang.coupon }}</span>
-            <span>-{{ info.coinCode }}{{ info.preferFee }}</span>
-          </div>
-          <div v-if="info.transPreferFee" class="info">
-            <span> {{ lang.transPreferFee }}</span>
-            <span>-{{ info.coinCode }}{{ info.transPreferFee }}</span>
-          </div>
-        </li> -->
-        <li>
-          <div class="title">
-            {{ lang.payInfo }}
-          </div>
-          <div class="info">
-            <span>{{ text }}{{ lang.pay }}</span>
-            <span>{{ info.coinCode }}{{ formatMoney(info.orderAmount) }}</span>
-          </div>
-        </li>
-        <li>
-          <div class="title">
-            <span>{{ lang.beneficiary }}</span>
-            <span>BDD.Co.</span>
-          </div>
-        </li>
-      </ul>
+    <div v-show="verity">
+      <p  class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
     </div>
-    <!-- 未登录 -->  
-    <div v-else>
-      <p v-show="this.$route.query.success == 'false' && this.verification_status == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
-      <div class="top" v-show="this.$route.query.success !== 'false' && this.verification_status == 'false'">
-        <img src="@/static/cart/success.png"  />
-        <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
-        <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
-          <span class="font-size-16">{{ orderinfo.coinCode }}</span>
-          {{ orderinfo.orderAmount }}
-        </p>
+    <div v-show="succcess">
+      <!-- 已登录 -->
+      <div v-if="hadLogin">
+        <!-- <p v-show="this.$route.query.success == 'false' && this.verification_status == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p> -->
+        <div class="top">
+          <img src="@/static/cart/success.png" />
+          <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+          <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+            <span class="font-size-16">{{ info.coinCode }}</span>
+            {{ info.orderAmount }}
+          </p>
+        </div>
+        <div class="code">
+          <span>{{ lang.orderNo }}</span
+          ><span
+            >{{ info.orderNo
+            }}<i
+              class="icon iconfont iconcopy copy-btn"
+              :data-clipboard-text="info.orderNo"
+              @click="copy"
+            ></i
+          ></span>
+        </div>
+        <ul class="price">
+          <!-- <li v-if="info.preferFee || info.transPreferFee">
+            <div class="title">
+              {{ lang.preferFee }}
+            </div>
+            <div v-if="info.preferFee" class="info">
+              <span>{{ lang.coupon }}</span>
+              <span>-{{ info.coinCode }}{{ info.preferFee }}</span>
+            </div>
+            <div v-if="info.transPreferFee" class="info">
+              <span> {{ lang.transPreferFee }}</span>
+              <span>-{{ info.coinCode }}{{ info.transPreferFee }}</span>
+            </div>
+          </li> -->
+          <li>
+            <div class="title">
+              {{ lang.payInfo }}
+            </div>
+            <div class="info">
+              <span>{{ text }}{{ lang.pay }}</span>
+              <span>{{ info.coinCode }}{{ formatMoney(info.orderAmount) }}</span>
+            </div>
+          </li>
+          <li>
+            <div class="title">
+              <span>{{ lang.beneficiary }}</span>
+              <span>BDD.Co.</span>
+            </div>
+          </li>
+        </ul>
       </div>
-      <div class="code">
-        <span>{{ lang.orderNo }}</span
-        ><span
-          >{{ orderinfo.orderNo
-          }}<i
-            class="icon iconfont iconcopy copy-btn"
-            :data-clipboard-text="orderinfo.orderNo"
-            @click="copy"
-          ></i
-        ></span>
+      <!-- 未登录 -->  
+      <div v-else>
+        <!-- <p v-show="this.$route.query.success == 'false' && this.verification_status == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p> -->
+        <div class="top" >
+          <img src="@/static/cart/success.png"  />
+          <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
+          <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+            <span class="font-size-16">{{ orderinfo.coinCode }}</span>
+            {{ orderinfo.orderAmount }}
+          </p>
+        </div>
+        <div class="code">
+          <span>{{ lang.orderNo }}</span
+          ><span
+            >{{ orderinfo.orderNo
+            }}<i
+              class="icon iconfont iconcopy copy-btn"
+              :data-clipboard-text="orderinfo.orderNo"
+              @click="copy"
+            ></i
+          ></span>
+        </div>
+        <ul class="price">
+          <!-- <li v-if="orderinfo.preferFee || orderinfo.transPreferFee">
+            <div class="title">
+              {{ lang.preferFee }}
+            </div>
+            <div v-if="orderinfo.preferFee" class="info">
+              <span>{{ lang.coupon }}</span>
+              <span>-{{ orderinfo.coinCode }}{{ orderinfo.preferFee }}</span>
+            </div>
+            <div v-if="orderinfo.transPreferFee" class="info">
+              <span> {{ lang.transPreferFee }}</span>
+              <span>-{{ orderinfo.coinCode }}{{ orderinfo.transPreferFee }}</span>
+            </div>
+          </li> -->
+          <li>
+            <div class="title">
+              {{ lang.payInfo }}
+            </div>
+            <div class="info">
+              <span>{{ text }}{{ lang.pay }}</span>
+              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.orderAmount) }}</span>
+            </div>
+          </li>
+          <li>
+            <div class="title">
+              <span>{{ lang.beneficiary }}</span>
+              <span>BDD.Co.</span>
+            </div>
+          </li>
+        </ul>
       </div>
-      <ul class="price">
-        <!-- <li v-if="orderinfo.preferFee || orderinfo.transPreferFee">
-          <div class="title">
-            {{ lang.preferFee }}
-          </div>
-          <div v-if="orderinfo.preferFee" class="info">
-            <span>{{ lang.coupon }}</span>
-            <span>-{{ orderinfo.coinCode }}{{ orderinfo.preferFee }}</span>
-          </div>
-          <div v-if="orderinfo.transPreferFee" class="info">
-            <span> {{ lang.transPreferFee }}</span>
-            <span>-{{ orderinfo.coinCode }}{{ orderinfo.transPreferFee }}</span>
-          </div>
-        </li> -->
-        <li>
-          <div class="title">
-            {{ lang.payInfo }}
-          </div>
-          <div class="info">
-            <span>{{ text }}{{ lang.pay }}</span>
-            <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.orderAmount) }}</span>
-          </div>
-        </li>
-        <li>
-          <div class="title">
-            <span>{{ lang.beneficiary }}</span>
-            <span>BDD.Co.</span>
-          </div>
-        </li>
-      </ul>
+      <div v-if="!hadLogin" class="gologin">
+        <i class="icon iconfont icongantanhao2"></i>
+        <a @click="gologin(1)"> {{ lang.login }}</a> {{ lang.settlement }}
+        <a @click="gologin">{{ lang.accont }}</a
+        >{{ lang.any }}
+      </div>
+      <div class="server">
+        <p>{{ lang.server }}</p>
+        <p>{{ lang.send }}</p>
+        <p>{{ info.afterMail }}</p>
+      </div>
+      <div class="btn">
+        <div
+          v-if="info.payChannel === 1"
+          class="btn-common btn-black"
+          @click="paytips = !paytips"
+        >
+          {{ lang.paytips }}
+        </div>
+        <div
+          v-if="info.payChannel !== 1&&hadLogin"
+          class="btn-common btn-black"
+          @click="goDetails"
+        >
+          {{ lang.lookBill }}
+        </div>
+        <div 
+          v-if="info.payChannel !== 1"
+          class="btn-common btn-gray btn-black"
+          @click="goIndex"
+        >
+          {{ lang.continue }}
+        </div>
+        <div v-if="info.payChannel === 1" class="btn-more">
+          <span class="btn-common btn-gray" @click="goDetails">{{
+            lang.orderDetails
+          }}</span>
+          <span class="btn-common btn-gray" @click="goIndex">{{
+            lang.continue
+          }}</span>
+        </div>
+      </div>
+      <PatTips v-if="paytips" @close="paytips = !paytips" />
     </div>
-    <div v-if="!hadLogin" class="gologin">
-      <i class="icon iconfont icongantanhao2"></i>
-      <a @click="gologin(1)"> {{ lang.login }}</a> {{ lang.settlement }}
-      <a @click="gologin">{{ lang.accont }}</a
-      >{{ lang.any }}
-    </div>
-    <div class="server">
-      <p>{{ lang.server }}</p>
-      <p>{{ lang.send }}</p>
-      <p>{{ info.afterMail }}</p>
-    </div>
-    <div class="btn">
-      <div
-        v-if="info.payChannel === 1"
-        class="btn-common btn-black"
-        @click="paytips = !paytips"
-      >
-        {{ lang.paytips }}
-      </div>
-      <div
-        v-if="info.payChannel !== 1&&hadLogin"
-        class="btn-common btn-black"
-        @click="goDetails"
-      >
-        {{ lang.lookBill }}
-      </div>
-      <div 
-        v-if="info.payChannel !== 1"
-        class="btn-common btn-gray btn-black"
-        @click="goIndex"
-      >
-        {{ lang.continue }}
-      </div>
-      <div v-if="info.payChannel === 1" class="btn-more">
-        <span class="btn-common btn-gray" @click="goDetails">{{
-          lang.orderDetails
-        }}</span>
-        <span class="btn-common btn-gray" @click="goIndex">{{
-          lang.continue
-        }}</span>
-      </div>
-    </div>
-    <PatTips v-if="paytips" @close="paytips = !paytips" />
   </div>
 </template>
 
@@ -175,7 +180,10 @@ export default {
       orderinfo:'',
       isLogin: !!this.$store.state.token,
       list:[],
-      verification_status:''
+      verify_statue:'',
+      verity:true,
+      succcess:false,
+      verifyCount:0,
     }
   },
   computed: {
@@ -184,23 +192,27 @@ export default {
     }
   },
   mounted() {
-     if(this.$route.query.success == 'false' && this.verification_status == 'false'){
-        this.$router.push({
-          name: 'cart-payFailed-orderId-price-coinType',
-          query: {   
-            orderId: this.$route.query.orderId||this.$route.query.order_sn,
-          }
-        })
-        // setTimeout(() => {
-        //   this.$router.push({
-        //     name: 'cart-payFailed-orderId-price-coinType',
-        //     query: {   
-        //       orderId: this.$route.query.orderId||this.$route.query.order_sn,
-        //     }
-        //   })
-        // }, 3000);  
-        
+      if (this.$route.query.success == 'false') {
+          this.$router.push({
+              name: 'cart-payFailed-orderId-price-coinType',
+              query: {   
+                  orderId: this.$route.query.orderId||this.$route.query.order_sn,
+              }
+          })
+      }else{
+          this.geturl()
       }
+    //  if(this.$route.query.success == 'false' && this.verification_status == 'false'){
+    //     this.$router.push({
+    //       name: 'cart-payFailed-orderId-price-coinType',
+    //       query: {   
+    //         orderId: this.$route.query.orderId||this.$route.query.order_sn,
+    //       }
+    //     })
+    //     // setTimeout(() => {
+    //     // }, 3000);  
+        
+    //   }
       console.log("aa",this.$route.query)
     this.list = JSON.parse(storage.get('myCartList', 0))   
     // console.log("myCartList",this.list)
@@ -213,7 +225,6 @@ export default {
           _this.getinfo2()
         // },5000);
       }
-      _this.geturl()
     })
   },
   methods: {
@@ -259,27 +270,65 @@ export default {
           console.log(err)
         })
     },
+    // geturl(){
+    //   this.$axios({
+    //     url: '/web/pay/verify',
+    //     method: 'post',
+    //     data: {
+    //       return_url: window.location.href
+    //     }
+    //   })
+    //   .then(res => {
+    //     this.verification_status = res.verification_status
+    //       const arr = []
+    //       this.list.map((item, index) => {
+    //         arr.push(item.localSn)
+    //         console.log(arr)
+    //         this.$store.dispatch('removeCart', arr)
+    //       })
+    //     // console.log("verify",res)
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
+    // },
     geturl(){
       this.$axios({
-        url: '/web/pay/verify',
-        method: 'post',
-        data: {
-          return_url: window.location.href
-        }
-      })
-      .then(res => {
-        this.verification_status = res.verification_status
-          const arr = []
-          this.list.map((item, index) => {
-            arr.push(item.localSn)
-            console.log(arr)
-            this.$store.dispatch('removeCart', arr)
-          })
-        // console.log("verify",res)
-      })
-      .catch(err => {
-        console.log(err)
-      })
+            url: '/web/pay/verify',
+            method: 'post',
+            data: {
+                return_url: window.location.href
+            }
+        })
+        .then(data => {
+            this.verify_statue = data.verification_status
+            if(this.verify_statue !== 'true') {
+                this.verifyCount++
+                if(this.verifyCount<3) {
+                    setTimeout(this.geturl, 5000);
+                    return
+                }
+                this.$router.push({
+                    name: 'cart-payFailed-orderId-price-coinType',
+                    query: {   
+                        orderId: this.$route.query.orderId||this.$route.query.order_sn,
+                    }
+                })
+            }
+            else {
+              const arr = []
+              this.list.map((item, index) => {
+                arr.push(item.localSn)
+                console.log(arr)
+                this.$store.dispatch('removeCart', arr)
+              })
+              this.succcess = true
+              this.verity = false
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
     },
     getChannelType(type) {
       // 订单支付渠道(1-电汇,2-paypal,3-微信,4-支付宝,5-visa/Mastercard,6-銀聯,7-paydollar)

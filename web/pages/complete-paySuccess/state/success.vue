@@ -64,22 +64,27 @@
     <!--未登陆的中间信息-->
     <div v-else class="success-info-out">
       <div class="left-side">
-        <div class="diamond-img">
-          <img src="../../../static/order/diamond.png" alt="" />
-          <div><i class="iconfont icongou" /></div>
+        <div v-show="success">
+          <div class="diamond-img">
+            <img src="../../../static/order/diamond.png" alt="" />
+            <div><i class="iconfont icongou" /></div>
+          </div>
+          <div class="order-email">
+            <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span>
+            <span>{{ data.afterMail }}</span> -->
+            <!-- <i class="iconfont iconzuoshangjiantou" /> -->
+          </div>
+          <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
+          <div class="order-num">
+            {{ $t(`${lang}.orderCode`) }}
+            <nuxt-link :to="`/account/order-details?order_sn=${this.oid}`">
+              <span class="underline" >{{ data2.orderNo }}</span>
+            </nuxt-link>
+            <!-- <span class="underline">{{ data.orderNo }}</span> -->
+          </div>
         </div>
-        <div class="order-email">
-          <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span>
-          <span>{{ data.afterMail }}</span> -->
-          <!-- <i class="iconfont iconzuoshangjiantou" /> -->
-        </div>
-        <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
-        <div class="order-num">
-          {{ $t(`${lang}.orderCode`) }}
-          <nuxt-link :to="`/account/order-details?order_sn=${this.oid}`">
-            <span class="underline" >{{ data2.orderNo }}</span>
-          </nuxt-link>
-          <!-- <span class="underline">{{ data.orderNo }}</span> -->
+        <div v-show="vertry">
+          <p class="handing">数据加载中......</p>
         </div>
       </div>
       <!-- <div class="right-side">
@@ -308,31 +313,25 @@ export default {
         safeFee: null,
         taxFee: null
       },
-      verification_status:''
+      verify_statue:'',
+      vertry:true,
+      success:false,
+      verifyCount:0
     }
   },
   mounted() {
-    if(this.$route.query.success == 'false'&& this.verification_status == 'false'){
+      if(this.$route.query.success == 'false'){
         this.$router.replace({
           path: '/complete-paySuccess/state/failed',
           query: {   
             orderId: this.$route.query.orderId || this.$route.query.order_sn,
           }
-        })
-        // setTimeout(() => {
-        //   this.$router.replace({
-        //     path: '/complete-paySuccess/state/failed',
-        //     query: {   
-        //       orderId: this.$route.query.orderId || this.$route.query.order_sn,
-        //     }
-        //   })
-        // }, 3000);  
+        })  
         return
-      }else{
-        this.$store.dispatch('getLocalCartOrder').then(v => {
-          this.$store.dispatch('removeCart',v.split(','))
-          console.log("v",v)
-        })
+      }
+      if(this.$route.query.success == 'true'){
+        this.geturl()
+        console.log("aaaaaa")
       }
     // console.log("url======",this.oid2) http://localhost:8318/complete-paySuccess?type=failed
     if(this.$store.getters.hadLogin){
@@ -369,9 +368,9 @@ export default {
           // console.log("order_sn",res)
           this.data2 = res.data
           // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
-          setTimeout(() => {
-            this.$router.push({path: "/"}); // 强制切换当前路由 path
-          }, 5000);
+          // setTimeout(() => {
+          //   this.$router.push({path: "/"}); // 强制切换当前路由 path
+          // }, 5000);
           // console.log("wwwww",this.data)
         })
         .catch(err => {
@@ -382,39 +381,71 @@ export default {
           }
       })
     }
-    this.$axios
-      .post('/web/pay/verify', {
-          return_url: window.location.href
-      })
-      .then(res => {
-        this.verification_status = res.data.verification_status
-        console.log("oid",this.verification_status)
-        // if(res){
-          
-        // }
-        // setTimeout(() => {
-        //   this.$router.push({path: "/"}); // 强制切换当前路由 path
-        // }, 10000);
-        // console.log("return_url",res)
-      })
-      .catch(err => {
-        if (!err.response) {
-          this.$message.error(err.message)
-        } else {
-          // console.log(err)
-        }
-      })
+    // this.$axios
+    //   .post('/web/pay/verify', {
+    //       return_url: window.location.href
+    //   })
+    //   .then(res => {
+    //     this.verification_status = res.data.verification_status
+    //     console.log("oid",this.verification_status)
+    //   })
+    //   .catch(err => {
+    //     if (!err.response) {
+    //       this.$message.error(err.message)
+    //     } else {
+    //       // console.log(err)
+    //     }
+    //   })
   },
   methods: {
     toLogin() {
       this.$router.push(`/login`)
+    },
+    geturl(){
+      this.$axios({
+            url: '/web/pay/verify',
+            method: 'post',
+            data: {
+              return_url: window.location.href
+            }
+        })
+        .then(res => {
+            this.verify_statue = res.data.verification_status
+            if(this.verify_statue !== 'true') {
+                this.verifyCount++
+                if(this.verifyCount<4) {
+                    setTimeout(this.geturl, 5000);
+                    return
+                }
+                this.$router.replace({
+                  path: '/complete-paySuccess/state/failed',
+                  query: {   
+                    orderId: this.$route.query.orderId || this.$route.query.order_sn,
+                  }
+                })  
+            }else {
+              this.$store.dispatch('getLocalCartOrder').then(v => {
+                this.$store.dispatch('removeCart',v.split(','))
+                // console.log("v",v)
+              })
+              this.success = true
+              this.vertry = false
+            }
+        })
+        .catch(err => {
+            console.log(err)
+        })
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-
+.handing{
+  padding: 20px;
+  color:#f29b87;
+  font-size: 40px;
+}
 div {
   box-sizing: border-box;
 }
