@@ -406,8 +406,8 @@ export default {
             const data =  res.data
             if(data.verification_status !== 'true') {
                 this.verifyCount++
-                if(this.verifyCount < 10) {
-                    setTimeout(this.payVerify, 5000);
+                if(this.verifyCount < 3) {
+                    setTimeout(this.payVerify, 8000);
                     return
                 }
                 this.$router.replace({
