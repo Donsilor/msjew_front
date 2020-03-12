@@ -568,7 +568,7 @@
       "email": "Email",
       "phone": "Phone",
       "email-error": "Enter correct cellphone",
-      "phone-error": "Enter correct email",
+      "phone-error": "Your mobile phone number format is not correct, only support the mainland mobile phone number!",
       "password": "Password",
       "password-error": "Enter login password",
       "login-now": "LOGIN",
@@ -580,7 +580,8 @@
       "input-password": "Enter login password",
       "login-error": "Wrong account or password",
       "login-success": "Logged in",
-      "input-code": "Please enter a verification code"
+      "input-code": "Please enter a verification code",
+      "area-code": "China"
     },
     "index": {
       "login": "Account Login",
@@ -679,7 +680,7 @@
     "email": "Email",
     "inputEmail": "Enter email",
     "emailError": "Enter correct email",
-    "phoneError": "Please enter the correct phone number",
+    "phoneError": "Your mobile phone number format is not correct, only support the mainland mobile phone number!",
     "inputUnder": "Enter the verification code sent to",
     "theEmailCode": "Check the spam folder or click on send if you fail to receive the e-mail",
     "code": "Verification Code",
@@ -691,7 +692,8 @@
     "bddClause": "BDD Terms and Conditions.",
     "register": "REGISTER",
     "registerSuccess": "Registered",
-    "tickTheBDDTerms": "Please read and agree to the BDD Terms & Conditions and Privacy Policy"
+    "tickTheBDDTerms": "Please read and agree to the BDD Terms & Conditions and Privacy Policy",
+    "area-code": "China"
   },
   "site-switch": {
     "chooseLanguageCoin": "choose language & currency",

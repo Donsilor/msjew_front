@@ -22,13 +22,16 @@
             {{ lang['email-error'] }}
           </div>
         </div>
-        <div v-else>
+        <div class="email-val-box" v-else>
+          <!-- <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div> -->
           <bdd-input v-model="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsernameM && hadInput('username') }
           ]">
-            {{ lang['phone-error'] }}
+            <div v-if="!trueUsername && hadInput('username')">
+              {{ lang['phone-error'] }}
+            </div>
           </div>
         </div>
       </div>
@@ -177,7 +180,7 @@ export default {
         name: 'register'
       })
     },
-    
+
     toForget () {
       this.$router.push({
         name: 'forget'
@@ -363,16 +366,17 @@ export default {
 /*  margin-bottom: 28px;*/
 /*}*/
 .error-message {
-  height: 8px;
+  min-height: 8px;
   font-size: 13px;
   font-weight: 400;
   text-align: left;
   color: rgba(237, 73, 73, 1);
   opacity: 0;
+  padding-top: 4px;
 }
 .error-message.active {
-  height: 21px;
-  line-height: 28px;
+  min-height: 21px;
+  line-height: 20px;
   opacity: 1;
 }
 .button-line {
@@ -396,4 +400,25 @@ export default {
 .verify-line {
   margin-bottom: 18px;
 }
+
+/* .email-val-box{
+  position: relative;
+}
+.area-code{
+  position: absolute;
+  width: 32%;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid rgba(187, 187, 187, 1);
+  color: #777;
+  background-color: #f9f9f9;
+}
+.email-val-box .input-box{
+  width: 65%;
+  margin-left: 35%;
+}
+.area-code .iconxiala{
+  margin: 6px 0 0 8%;
+  font-size: 14px;
+} */
 </style>

@@ -64,7 +64,8 @@
             </div> -->
           </div>
           <!-- 手机号 -->
-          <div class="line-box input-line mobile" v-if="loginType == 2 "> 
+          <div class="line-box input-line mobile email-val-box" v-if="loginType == 2 ">
+            <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div>
             <bdd-input
               v-model="info.mobile"
               :placeholder="`${lang.mobile}`"
@@ -77,7 +78,9 @@
                 { active: hadInput('mobile') && !trueMobile }
               ]"
             >
-              {{ lang.emailError }}
+              <div v-if="hadInput('mobile') && !trueMobile">
+                {{ lang.phoneError }}
+              </div>
             </div>
           </div>
           <!-- 邮箱 -->
@@ -801,16 +804,17 @@ export default {
     border-right: 7px solid transparent;
   }
   .error-message {
-    height: 8px;
+    min-height: 8px;
     font-size: 12px;
     font-weight: 400;
     text-align: left;
     color: rgba(237, 73, 73, 1);
     opacity: 0;
+    padding-top: 4px;
   }
   .error-message.active {
-    height: 20px;
-    line-height: 26px;
+    min-height: 20px;
+    line-height: 20px;
     opacity: 1;
   }
 }
@@ -903,5 +907,26 @@ export default {
   font-size: 16px;
   color: #ffffff;
   background-color: #f29b87;
+}
+
+.email-val-box{
+  position: relative;
+}
+.area-code{
+  position: absolute;
+  width: 32%;
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid rgba(187, 187, 187, 1);
+  color: #777;
+  background-color: #f9f9f9;
+}
+.email-val-box .input-box{
+  width: 65%;
+  margin-left: 35%;
+}
+.area-code .iconxiala{
+  margin: 6px 0 0 8%;
+  font-size: 14px;
 }
 </style>

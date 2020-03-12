@@ -60,7 +60,7 @@
           </span>
         </button>
       </div>
-      
+
       <div class="line-box">
         <button class="full-btn email" @click="toEmailLogin">
           <img src="/email.svg" class="btn-icon" />
@@ -92,7 +92,7 @@
         </button>
       </div> -->
 
-      
+
     </section>
   </div>
 </div>
