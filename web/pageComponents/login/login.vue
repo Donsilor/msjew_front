@@ -10,7 +10,7 @@
           <input  v-model="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" />
         </div>
         <div v-show="phoneErr" class="error-tip">
-          {{ $t(`${lang}.phone`) }}
+          {{ $t(`${lang}.phoneTips`) }}
         </div>
       </div>
       <div class="relative margin-bottom-20">

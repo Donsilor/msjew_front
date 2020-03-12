@@ -8,7 +8,7 @@
             <div class="register-input">
               <input
                 v-model="lastname"
-                
+
                 @focus="focusEvent"
                 @blur="blurEvent"
                 v-bind:class="{active:isActivelast}"
@@ -25,7 +25,7 @@
             <div class="register-input">
               <input
                 v-model="firstname"
-                 
+
                 @focus="focusEvents"
                 @blur="blurEvents"
                 v-bind:class="{active:isActivefisrt}"
@@ -37,7 +37,7 @@
               {{ $t(`${lang}.surnameTips`) }}
             </div> -->
           </div>
-          
+
           <!-- 姓名 -->
           <!-- <div class="relative margin-bottom-20">
             <div class="register-input">
@@ -57,7 +57,8 @@
         </div>
         <!-- 手机号 -->
         <div class="relative margin-bottom-20">
-          <div class="register-input">
+          <div class="register-input email-val-box">
+            <div class="area-code">中国 +86<i class="iconfont iconxiala"></i></div>
             <input
               v-model="mobile"
               type="text"
@@ -123,7 +124,7 @@
           <div class="register-input">
             <input
               v-model=" password_repetition"
-              readonly onfocus="this.removeAttribute('readonly');" 
+              readonly onfocus="this.removeAttribute('readonly');"
               v-bind:class="{active:isActiverepwd}"
               @focus="focusEvent5"
               @blur="blurEvent5"
@@ -168,7 +169,7 @@
             <div class="register-input">
               <input
                 v-model="firstname"
-                 
+
                 @focus="focusEvents"
                 @blur="blurEvents"
                 v-bind:class="{active:isActivefisrt}"
@@ -184,7 +185,7 @@
             <div class="register-input">
               <input
                 v-model="lastname"
-                 
+
                 @focus="focusEvent"
                 @blur="blurEvent"
                 v-bind:class="{active:isActivelast}"
@@ -201,7 +202,7 @@
           <div class="register-input">
             <input
               v-model="email"
-              
+
               @focus="focusEvent2"
               @blur="blurEvent2"
               type="text"
@@ -241,7 +242,7 @@
           <div class="register-input">
             <input
               v-model="password"
-              readonly onfocus="this.removeAttribute('readonly');" 
+              readonly onfocus="this.removeAttribute('readonly');"
               @focus="focusEvent4"
               @blur="blurEvent4"
               v-bind:class="{active:isActivepwd}"
@@ -262,7 +263,7 @@
           <div class="register-input">
             <input
               v-model="password_repetition"
-               
+
               @focus="focusEvent5"
               @blur="blurEvent5"
               v-bind:class="{active:isActiverepwd}"
@@ -500,7 +501,7 @@ export default {
       //   this.isActiverepwd=false;
       //   this.repwdShow=false;
       // }
-     
+
     },
     // 简体中文注册
     registerCN() {
@@ -540,7 +541,7 @@ export default {
           const data = res.data
           _this.requesting = false
           _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-		  
+
 		  localStorage.setItem('refreshToken',data.refresh_token);
 		  localStorage.setItem('accessToken',data.access_token);
           _this.$store.commit('setToken', data.access_token)
@@ -550,7 +551,7 @@ export default {
           _this.$store.dispatch('synchronizeCart')
           // const lastUrl = _this.$store.state.lastUrl
           // _this.$store.commit('setLastUrl', '')
-		  
+
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({
@@ -561,7 +562,7 @@ export default {
                 path: '/'
               })
             }
-          }, 0)   
+          }, 0)
         })
         .catch(err => {
           // console.log("请求",err)
@@ -604,10 +605,10 @@ export default {
         })
         .then(res => {
           const data = res.data
-		  
+
           _this.requesting = false
           _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-		  
+
 		  localStorage.setItem('refreshToken',data.refresh_token);
 		  localStorage.setItem('accessToken',data.access_token);
           _this.$store.commit('setToken', data.access_token)
@@ -663,7 +664,7 @@ export default {
         this.countDown()
       }
     },
-    
+
     // 发送邮箱验证码
     sendCode() {
       const _this = this
@@ -690,7 +691,7 @@ export default {
           // _this.code=res.data.code
         }else {
           throw new Error (res.message)
-        }   
+        }
         // _this.sendReturn(res)
       }).catch(err => {
         _this.resetCountDown()
@@ -715,7 +716,7 @@ export default {
       //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
       //   return
       // }
-     
+
        this.$axios({
         method: "post",
         url: '/web/site/sms-code',
@@ -733,7 +734,7 @@ export default {
           // _this.sendReturn(res)
         } else {
           throw new Error (res.message)
-        }   
+        }
       }).catch(err => {
         _this.resetCountDown()
          _this.$errorMessage(err.message)
@@ -865,5 +866,30 @@ input::placeholder{
     font-weight: 400;
     color: #8b766c;
   }
+}
+
+.email-val-box{
+  position: relative;
+}
+.area-code{
+  position: absolute;
+  width: 32%;
+  height: 100%;
+  border: 1px solid rgba(187, 187, 187, 1);
+  color: #777;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.email-val-box input{
+  width: 63% !important;
+  margin-left: 37%;
+}
+.area-code .iconxiala{
+  margin: 2px 0 0 8%;
+  font-size: 14px;
 }
 </style>

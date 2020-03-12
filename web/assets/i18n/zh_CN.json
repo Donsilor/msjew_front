@@ -326,7 +326,7 @@
     "registration": "注册",
     "mailbox": "手机号*",
     "mailTips": "请输入正确的手机号*",
-    "phoneTips": "请正确输入手机号",
+    "phoneTips": "手机号码格式不正确，仅支持：大陆手机号！",
     "emailTips":"请正确输入邮箱",
     "password": "请输入密码*",
     "passwordTips": "请输入正确的密码",
