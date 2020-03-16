@@ -862,6 +862,7 @@
       "expressInfo": "物流讯息",
       "express": "物流",
       "WaybillNumber": "运单号",
+      "expressTime": "发货时间",
       "orderStatus": "订单状态",
       "yourBuyInfo": "您的购买详情",
       "orderNum": "订单编号",

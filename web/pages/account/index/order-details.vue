@@ -91,6 +91,20 @@
             </div>
           </div>
         </div>
+        <div class="express" v-if="data.express">
+          <div class="block-title-line">
+            <div />
+            <div>{{ $t(`${lang}.expressInfo`) }}</div>
+          </div>
+          <div class="express-title-info">
+            <div>{{ $t(`${lang}.express`) }}：{{ data.express.companyName }}</div>
+            <div>{{ $t(`${lang}.WaybillNumber`) }}：{{ data.express.expressNo }}</div>
+            <div>&nbsp;</div>
+          </div>
+          <div class="express-time">
+            <div>{{ $t(`${lang}.expressTime`) }}：{{ data.express.delivery_time }}</div>
+          </div>
+        </div>
       </div>
       <div class="goods-info">
         <div class="goods-info-title">
@@ -127,8 +141,8 @@
         <div class="goods-bot-bar" />
       </div>
     </div>
-
-    <div v-for="(detail, nb) in data.outDetails" :key="nb" class="info-block">
+ 
+    <!--<div v-for="(detail, nb) in data.outDetails" :key="nb" class="info-block">
       <div class="block-title">{{ $t(`${lang}.deliveryInfo`) }}{{ n + 1 }}</div>
       <div class="addr-info">
         <div class="addr">
@@ -211,7 +225,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
     <div class="bot-info">
       <div class="left-info" >
@@ -731,6 +745,9 @@ export default {
             color: #f29b87;
             cursor: pointer;
           }
+        }
+        .express-time{
+          margin-top:20px;
         }
       }
     }
