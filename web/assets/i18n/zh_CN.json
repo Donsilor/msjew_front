@@ -789,6 +789,7 @@
       "orderDetail": "订单详情",
       "cancelOrder": "取消订单",
       "toPay": "去付款",
+      "toPayWait": "付款中",
       "wireTransferGuide": "电汇指引",
       "orderPrice": "订单总额",
       "confirmReceipt": "確認收貨",

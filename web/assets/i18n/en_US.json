@@ -771,6 +771,7 @@
       "orderDetail": "Order Details",
       "cancelOrder": "Cancel Order",
       "toPay": "Pay Now",
+      "toPayWait": "付款中",
       "wireTransferGuide": "Wire Transfer Guide",
       "orderPrice": "Total Order Amount",
       "confirmReceipt": "Confirm Receipt",
