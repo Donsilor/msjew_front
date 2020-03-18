@@ -928,6 +928,8 @@
     "payQuestion": "Payment error"
   },
   "finishPay": {
+    "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+    "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
     "handing": "Order processing ......",
     "comeBack": "Return to product page",
     "confirmOrder": "Shopping cart",

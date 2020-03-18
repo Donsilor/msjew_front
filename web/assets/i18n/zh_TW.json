@@ -929,6 +929,8 @@
     "payQuestion": "支付遇到問題"
   },
   "finishPay": {
+    "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",
+    "PayPending2":"您可以先關閉此頁面，稍後我們將以郵件/短信方式通知您！",
     "handing":"訂單處理中......",
     "comeBack":"返回商品頁",
     "confirmOrder": "購物車",

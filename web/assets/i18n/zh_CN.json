@@ -946,6 +946,8 @@
     "payQuestion": "支付遇到问题"
   },
   "finishPay": {
+    "PayPending1":"订单已经提交，系统正在处理中,请稍等。",
+    "PayPending2":"您可以先关闭此页面，稍后我们将以邮件/短信方式通知您！",
     "handing":"订单处理中......",
     "comeBack":"返回商品页",
     "confirmOrder": "购物车",

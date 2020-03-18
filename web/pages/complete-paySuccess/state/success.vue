@@ -36,6 +36,7 @@
       </div>
       <div class="step-line" />
     </div>
+
     <!--登陆的中间信息-->
     <div v-if="$store.getters.hadLogin" class="success-info-in">
       <div v-show="stepPaySuccess">
@@ -64,6 +65,10 @@
       <div v-show="stepPayVerify">
         <p class="handing">{{ $t(`${lang}.handing`) }}</p>
       </div>
+      <div v-show="stepPayPending">
+        <p class="pending1">{{ $t(`${lang}.PayPending1`) }}</p>
+        <p class="pending2">{{ $t(`${lang}.PayPending2`) }}</p>
+      </div>
     </div>
 
     <!--未登陆的中间信息-->
@@ -90,6 +95,10 @@
         </div>
         <div v-show="stepPayVerify">
           <p class="handing">{{ $t(`${lang}.handing`) }}</p>
+        </div>
+        <div v-show="stepPayPending">
+          <p class="pending1">{{ $t(`${lang}.PayPending1`) }}</p>
+          <p class="pending2">{{ $t(`${lang}.PayPending2`) }}</p>
         </div>
       </div>
       <!-- <div class="right-side">
@@ -133,7 +142,7 @@
             <div>{{ data.address.userTel }}</div>
           </div>
           <div class="post-num">{{ data.address.zipCode }}</div>
-          <div class="email-address">{{ data.address.userMail }}</div> 
+          <div class="email-address">{{ data.address.userMail }}</div>
           <div class="country-code">CHN</div>
            <div class="line">
             <img
@@ -192,7 +201,7 @@
             <div class="ff">
               +{{ data.coinCode }} {{ formatMoney(data.logisticsFee) }}
             </div>
-          </div> 
+          </div>
            <div class="info-line">
             <div class="label">{{ $t(`${lang}.tex`) }}</div>
             <div class="ff">
@@ -214,15 +223,15 @@
           <div class="big-info">
             <div>{{ $t(`${lang}.orderTotal`) }}</div>
             <div>{{ data.coinCode }} {{ formatMoney(data.orderAmount) }}</div>
-          </div> 
+          </div>
         </div>
       </div> -->
-    </div> 
+    </div>
   </div>
 </template>
 
 <script>
-   
+
 const lang = `finishPay`
 // console.log("aa",$t(`${lang}.hangding`))
 export default {
@@ -320,32 +329,57 @@ export default {
         taxFee: null
       },
       verify_statue:'',
+      stepPayPending:false,//等待处理
       stepPayVerify:true,//支付验证
       stepPaySuccess:false,//支付验证成功
       verifyCount:0  //支付验证次数
     }
   },
   mounted() {
-
-      if(this.$route.query.success == 'false'){
+      if(this.$route.query.success === "false") {
         this.$router.replace({
           path: '/complete-paySuccess/state/failed',
-          query: {   
+          query: {
             orderId: this.$route.query.orderId || this.$route.query.order_sn,
           }
-        })  
-        return
-      }else {
-        setTimeout(this.payVerify, 5000);
-        // return
-      }     
+        })
+      } else {
+        //订单信息
+        this.orderInfo()
 
+        //验证
+        setTimeout(this.payVerify, 2000);
+      }
   },
   methods: {
     toLogin() {
       this.$router.push(`/login`)
     },
-    orderInfo(){
+    showPaySuccess() {
+      //展示成功页面信息
+      this.stepPaySuccess = true
+      this.stepPayVerify = false
+
+      //移除本地购物车
+      this.$store.dispatch('getLocalCartOrder').then(v => {
+        this.$store.dispatch('removeCart', v.split(','))
+      })
+    },
+    showPayFailed() {
+      //验证失败，跳转到失败页面
+      this.$router.replace({
+        path: '/complete-paySuccess/state/failed',
+        query: {
+          orderId: this.$route.query.orderId || this.$route.query.order_sn
+        }
+      })
+    },
+    showPayPending() {
+      //展示成功页面信息
+      this.stepPayPending = true
+      this.stepPayVerify = false
+    },
+    orderInfo() {
         if(this.$store.getters.hadLogin){
             this.$axios
               .get('/web/member/order/detail', {
@@ -393,53 +427,34 @@ export default {
             })
           }
     },
-    payVerify(){
-      this.$axios({
-            url: '/web/pay/verify',
-            method: 'post',
-            timeout:8000,
-            data: {
-              return_url: window.location.href
-            }
-        })
-        .then(res => {
-            const data =  res.data
-            if(data.verification_status !== 'true') {
-                this.verifyCount++
-                if(this.verifyCount < 2) {
-                    setTimeout(this.payVerify, 15000);
-                    return
-                }
-                this.$router.replace({
-                  path: '/complete-paySuccess/state/failed',
-                  query: {   
-                    orderId: this.$route.query.orderId || this.$route.query.order_sn,
-                  }
-                })  
-				        return
-            }else {
-              this.$store.dispatch('getLocalCartOrder').then(v => {
-                this.$store.dispatch('removeCart',v.split(','))
-              })
+    payVerify() {
+      this.verifyCount++
 
-              this.stepPaySuccess = true
-              this.stepPayVerify = false
-              this.orderInfo()
+      this.$axios({
+          url: '/web/pay/verify',
+          method: 'post',
+          //timeout:60000,
+          data: {
+            return_url: window.location.href
+          }
+      }).then(res => {
+          const data = res.data
+          if (data.verification_status === 'completed') {
+            this.showPaySuccess()
+          } else if (data.verification_status === 'failed') {
+            this.showPayFailed()
+          } else {
+            //对处理中的状态，重试查询5次后，展示留意消息
+            if (this.verifyCount < 2) {
+              setTimeout(this.payVerify, 15000)
             }
+            else {
+              this.showPayPending()
+            }
+          }
         })
         .catch(err => {
-            if(this.verifyCount < 10) {
-                 setTimeout(this.payVerify, 5000);
-            }else{
-                this.$router.replace({
-                  path: '/complete-paySuccess/state/failed',
-                  query: {   
-                    orderId: this.$route.query.orderId || this.$route.query.order_sn,
-                  }
-                })  
-            }
-            console.log(err)
-            return
+          setTimeout(this.payVerify, 15000)
         })
     }
   }
@@ -447,10 +462,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.handing{
+.handing,.pending1{
   padding: 20px;
   color:#f29b87;
   font-size: 40px;
+}
+.pending2 {
+  padding: 20px;
+  color:#666666;
+  font-size: 18px;
 }
 div {
   box-sizing: border-box;

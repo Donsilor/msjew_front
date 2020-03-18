@@ -177,6 +177,8 @@
       "type5Text2": "Please note that e-Cheques are not T/T."
     },
     "paySuccess": {
+      "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+      "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
       "handing": "Order processing ...",
       "title": "ORDER PAID",
       "orderNo": "Order#",
