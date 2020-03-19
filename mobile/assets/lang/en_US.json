@@ -462,6 +462,7 @@
       "transPreferFee": "Bank Wire Discount",
       "orderCount": "Total",
       "toPay": "CHECKOUT",
+      "toPayWait": "Processing",
       "cancelOrder": "CANCEL ORDER",
       "submit": "SUBMIT",
       "waitingPay": "Payment",

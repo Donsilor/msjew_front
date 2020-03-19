@@ -806,6 +806,7 @@
         "orderCount": "订单总额",
         "cancelOrder": "取消订单",
         "toPay": "去付款",
+        "toPayWait": "付款中",
         "confirmReceipt": "确认收货",
         "toEvaluate": "去评价",
         "singleProduct": "单品",

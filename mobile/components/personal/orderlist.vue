@@ -88,7 +88,7 @@
             >
             <span
               v-if="
-                [1].indexOf(order.orderStatus) > -1 
+                [1].indexOf(order.orderStatus) > -1
               "
               class="btn1"
               @click.stop="paytips = !paytips"
@@ -100,7 +100,7 @@
               "
               class="btn1"
               @click.stop="goPay(order)"
-              >{{ lang.toPay }}</span
+              >{{ order.paymentType===0 ? lang.toPay : lang.toPayWait }}</span
             >
             <span
               v-if="(order.orderStatus) > 30"
@@ -159,11 +159,11 @@ export default {
       let showData = JSON.parse(JSON.stringify(this.showData))
       showData = showData.map(order => {
         const details = order.details
-        
+
         // 以joinCartTime为下标，组合对戒和定制
         const groups = {}
         const result = []
-      
+
         details.map(good => {
           if (groups.hasOwnProperty(good.joinCartTime)) {
             // 将数据处理为直接可用的数据
@@ -212,7 +212,7 @@ export default {
             groups[good.id] = newGroup
           }
         })
-        
+
         let keys = Object.keys(groups)
         keys = keys.sort((a, b) => {
           return b - a
@@ -278,7 +278,7 @@ export default {
         }
         //  console.log('indexof',details[n].data[0].categoryId)
       }
-    
+
       return [5].indexOf(order.orderStatus) > -1 && details.length !== num
       // return [4, 5].indexOf(order.orderStatus) > -1 && details.length !== num
     },
@@ -292,14 +292,14 @@ export default {
         0: this.lang.cancelled,
         10: this.lang.unpaid,
         20: this.lang.paid,
-        30: this.lang.waitingSend, 
+        30: this.lang.waitingSend,
         40: this.lang.shipped,
         50: this.lang.completed,
         // 6: this.lang.commented,
         // 7: this.lang.returnApplication,
         // 8: this.lang.returning,
         // 9: this.lang.returned,
-       
+
       }
       // console.log("status",map[status])
       return map[status]

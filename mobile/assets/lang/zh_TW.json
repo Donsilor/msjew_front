@@ -462,6 +462,7 @@
       "transPreferFee": "電匯支付優惠",
       "orderCount": "訂單總額",
       "toPay": "去付款",
+      "toPayWait": "付款中",
       "cancelOrder": "取消訂單",
       "submit": "提交",
       "waitingPay": "待付款",
