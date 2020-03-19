@@ -329,8 +329,8 @@ export default {
         taxFee: null
       },
       verify_statue:'',
-      stepPayPending:false,//等待处理
-      stepPayVerify:true,//支付验证
+      stepPayPending:true,//等待处理
+      stepPayVerify:false,//支付验证
       stepPaySuccess:false,//支付验证成功
       verifyCount:0  //支付验证次数
     }
@@ -358,7 +358,7 @@ export default {
     showPaySuccess() {
       //展示成功页面信息
       this.stepPaySuccess = true
-      this.stepPayVerify = false
+      this.stepPayPending = false
 
       //移除本地购物车
       this.$store.dispatch('getLocalCartOrder').then(v => {

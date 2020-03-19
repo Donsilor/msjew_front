@@ -187,8 +187,8 @@ export default {
       orderinfo:'',
       isLogin: !!this.$store.state.token,
       list:[],
-      stepPayPending:false,//等待处理
-      stepPayVerify:true,//支付验证
+      stepPayPending:true,//等待处理
+      stepPayVerify:false,//支付验证
       stepPaySuccess:false,//支付验证成功
       verifyCount:0,//支付验证次数
     }
@@ -290,7 +290,7 @@ export default {
             this.list = JSON.parse(storage.get('myCartList', 0))
 
             this.stepPaySuccess = true
-            this.stepPayVerify = false
+            this.stepPayPending = false
 
           } else if(data.verification_status === 'failed') {
               this.$router.push({
