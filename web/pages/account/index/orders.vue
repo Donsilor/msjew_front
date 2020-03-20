@@ -90,7 +90,7 @@
             >
             <nuxt-link :to="goToPay(o.id, o.coinCode, o.orderAmount, o.paymentType)"
               ><div v-if="o.payChannel !== 1" class="btn-a">
-                  {{ o.paymentType===0 ?  $t(`${lang}.toPay`) : $t(`${lang}.toPayWait`) }}
+              {{ $t(`${lang}.toPay`) }}
               </div>
             </nuxt-link>
             <div

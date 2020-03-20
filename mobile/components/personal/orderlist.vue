@@ -100,7 +100,7 @@
               "
               class="btn1"
               @click.stop="goPay(order)"
-              >{{ order.paymentType===0 ? lang.toPay : lang.toPayWait }}</span
+              >{{ lang.toPay }}</span
             >
             <span
               v-if="(order.orderStatus) > 30"
