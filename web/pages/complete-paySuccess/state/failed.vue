@@ -154,7 +154,7 @@ export default {
       // this.$store.dispatch('getLocalCartOrder').then(v => {
       //   this.$store.dispatch('removeCart',v.split(','))
       //   console.log("v",v)
-      // }) 
+      // })
       // this.$axios
       //   .get('/web/member/order-tourist/detail', {
       //     params: {
@@ -195,11 +195,12 @@ export default {
         this.$router.replace({
           path: '/billing-address',
           query: {
+            orderId: this.oid,
             cartIds: v,
           }
         })
       })
-      
+
     },
     goToFail() {
       this.$router.push({
