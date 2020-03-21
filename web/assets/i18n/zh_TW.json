@@ -845,6 +845,7 @@
       "expressInfo": "物流訊息",
       "express": "物流",
       "WaybillNumber": "運單號",
+      "expressTime": "發貨時間",
       "orderStatus": "訂單狀態",
       "yourBuyInfo": "您的購買詳情",
       "orderNum": "訂單編號",
