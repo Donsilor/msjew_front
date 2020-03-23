@@ -233,6 +233,12 @@
                 {{ headType }}
               </div>
             </div>
+            <div class="info-line" v-show="invoice.isElectronic == 1">
+              <div class="label"> {{ $t(`${lang_invoice}.email`) }}</div>
+              <div class="ff ">
+                {{ invoice.email }}
+              </div>
+            </div>
             <div class="info-line">
               <div class="label"> {{ $t(`${lang_invoice}.Invoice`) }}</div>
               <div class="ff">{{ invoice.invoiceTitle }}</div>
