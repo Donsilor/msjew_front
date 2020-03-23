@@ -389,8 +389,8 @@
       "title": "RESET",
       "p1": "Your password has been reset. Log in with your new password.",
       "p2": "Automatically exit after ",
-      "p3": " seconds and back to the login interface",
-      "goLogin": "SIGN IN NOW"
+      "p3": " seconds and back to the personal center",
+      "goLogin": "GO BACK NOW"
     },
     "editAddress": {
       "header1": "Add Address",

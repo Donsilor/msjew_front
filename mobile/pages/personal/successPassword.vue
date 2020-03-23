@@ -29,7 +29,7 @@ export default {
     goLogin() {
       this.waitingTime = 0
       this.$router.push({
-        name: 'login'
+        name: 'personal'
       })
     },
     countDown() {
