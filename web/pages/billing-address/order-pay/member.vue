@@ -4212,6 +4212,7 @@ div {
     }
     .active{
       border:1px solid #8b766c;
+      color:#000;
     }
   }
   .empltyErr{

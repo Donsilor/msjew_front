@@ -175,9 +175,9 @@
           <template v-if="invoice.invoiceType == 1">
             <li>{{ lang2.HeaderType}}：{{ lang2.company }}</li>
           </template>
-          <!-- <li>{{ lang2.email }}：{{ statusText(invoice.email) }}</li> -->
           <li>{{ lang2.Invoice }}：{{ invoice.invoiceTitle }}</li>
           <li>{{ lang2.TaxID }}：{{ invoice.taxNumber }}</li> 
+          <li v-show="invoice.isElectronic == 1">{{ lang2.email }}：{{ invoice.email }}</li>
         </ul>
       </div>
       <div class="footer">
@@ -387,6 +387,7 @@ export default {
     }
   },
   mounted() {
+    console.log("inoo",this.invoice)
     const _this = this
     _this.$nextTick(() => {
       _this.getInfo()
@@ -402,7 +403,7 @@ export default {
         40: this.lang.hadSend,
         50: this.lang.hadFinish,
       }
-    console.log("detail_stutas", map)
+    // console.log("detail_stutas", map)
       return map[status]
     },
     payChannelText(payChannel) {

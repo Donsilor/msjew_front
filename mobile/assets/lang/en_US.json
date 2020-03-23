@@ -148,7 +148,8 @@
       "confirm": "Confirm submission",
       "hint1": "Header type cannot be empty",
       "hint2": "Invoice header cannot be empty",
-      "hint3": "Tax ID cannot be empty"
+      "hint3": "Tax ID cannot be empty",
+      "hint4": "Please enter the correct email"
     },
     "sureOrder": {
       "firstLogin": "Please login first!",

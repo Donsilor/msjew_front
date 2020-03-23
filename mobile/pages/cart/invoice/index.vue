@@ -76,7 +76,7 @@ export default {
             tax:'',
             selectType:'',
             invoice:{
-                invoice_type:'',
+                invoice_type:2,
                 invoice_title:'',
                 tax_number:'',
                 is_electronic:'0',
@@ -92,7 +92,9 @@ export default {
         }
     },
     mounted(){
-        
+        if(this.invoice.invoice_type == 2){
+            this.select2 = true
+        }
         // console.log(this.kai)
     },
     methods:{
@@ -134,6 +136,12 @@ export default {
             if(this.invoice.invoice_type == ''){
                this.$toast.show(this.lang.hint1) 
                return
+            }
+            if(this.invoice.is_electronic == 1){
+                if(this.invoice.email == '' || !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.invoice.email))){
+                    this.$toast.show(this.lang.hint4) 
+                    return
+                }
             }
             if(this.invoice.invoice_title == ''){
                this.$toast.show(this.lang.hint2) 
@@ -185,9 +193,11 @@ export default {
             }
             .active{
                 border:1px solid #8b766c;
+                color:#000;
             }
             .isactive{
                 border:1px solid #8b766c;
+                color:#000;
             }
         }
     }
