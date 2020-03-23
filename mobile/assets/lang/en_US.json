@@ -404,7 +404,7 @@
       "mailbox": "*Email",
       "mailboxText1": "Enter Email",
       "mailboxText2": "Enter correct phone number",
-      "phone": "*Phone",
+      "phone": "Phone",
       "phoneText1": "Enter phone number",
       "phoneText2": "Enter correct phone number",
       "details": "*Address",

@@ -404,7 +404,7 @@
         "mailbox": "电邮地址",
         "mailboxText1": "请输入电邮地址",
         "mailboxText2": "请输入正确的电子邮件",
-        "phone": "*电话",
+        "phone": "电话",
         "phoneText1": "请输入电话号码",
         "phoneText2": "请输入正确的电话号码",
         "details": "*详细地址",

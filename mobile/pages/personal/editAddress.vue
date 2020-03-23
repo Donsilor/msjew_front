@@ -55,10 +55,17 @@
           {{ areaText }}
         </div>
 
-        <div class="input-mod">
+        <div v-if="language==='zh_CN'" class="input-mod">
           <bdd-input
             v-model="phone"
-            :placeholder="lang.phone"
+            :placeholder="`*${lang.phone}`"
+            @input="check(4)"
+          ></bdd-input>
+        </div>
+        <div v-else class="input-mod">
+          <bdd-input
+            v-model="phone"
+            :placeholder="`${lang.phone}`"
             @input="check(4)"
           ></bdd-input>
         </div>
@@ -252,7 +259,7 @@
 <script>
 // import storage from 'good-storage'
 import PhoneJson from '../../assets/countrycode.json'
-import { Email, RegMobile, RegTelephone } from '../../assets/js/require-lee'
+import { Email, RegMobile, RegTelephone, RegMobiles } from '../../assets/js/require-lee'
 const storage = process.client ? require('good-storage').default : {}
 export default {
   name: 'EditAddress',
@@ -312,11 +319,13 @@ export default {
 
   // },
   created() {
+    console.log("dddd",this.area)
     this.getinfo()
     this.getListOne()
     this.getArealist()
   },
   mounted() {
+    
     this.loginType=localStorage.getItem('loginType')
     this.language = this.getCookie('language')
     console.log("cookie",this.language)
@@ -516,7 +525,7 @@ export default {
           }
         })
         .then(res => {
-          console.log(11111,res);
+          // console.log(11111,res);
           if(res.length == 0){
             _this.cityList = []
             this.cityId = 0
@@ -652,47 +661,69 @@ export default {
         this.surnameTrue = true
         return fa
       }
-      if(this.language == 'zh_CN'){
-        console.log(222)
-        if ((val === 3 ) ) {
-          this.mailboxText = this.lang.mailboxText1
-          this.mailboxTrue = false
-          return 
+      if(this.language === 'zh_CN'){
+        // console.log(222)
+        if(this.mailbox !== ''){
+          if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
+            this.mailboxText = this.lang.mailboxText2
+            this.mailboxTrue = true
+            return
+          }
         }
-        if ((val === 3 ) && !Email.test(this.mailbox)) {
-          console.log(333)
-          this.mailboxText = this.lang.mailboxText2
-          this.mailboxTrue = false
+         if ((val === 4 || val === 0) && this.phone === '') {
+          this.phoneText = this.lang.phoneText1
+          this.phoneTrue = true
           return
         }
-      }else{
-        if ((val === 3 || val === 0) && this.mailbox === '') {
+        // console.log("area",this.area)
+        if(this.area === '中国 +86'||this.area === '中國 +86'|| this.area === 'China +86'){
+          if ((val === 7 || val === 0) && !RegMobiles.test(this.phone) ) {
+            this.phoneText = this.lang.phoneText2
+            this.phoneTrue = true
+          console.log(11111)
+            return
+          }
+        } else {
+          if ((val === 7 || val === 0) && !RegMobile.test(this.phone) ) {
+            this.phoneText = this.lang.phoneText2
+            this.phoneTrue = true
+          console.log(11111)
+            return
+          }
+        }
+      } else {
+       console.log("3333333")
+        if (( val === 0) && this.mailbox === '') {
           this.mailboxText = this.lang.mailboxText1
           this.mailboxTrue = true
           return
         }
         if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
-          console.log(333)
           this.mailboxText = this.lang.mailboxText2
           this.mailboxTrue = true
           return
         }
-      } 
-      if ((val === 4 || val === 0) && this.phone === '') {
-        this.phoneText = this.lang.phoneText1
-        this.phoneTrue = true
-        return
+        if ((val === 4 ) && this.phone === '') {
+          this.phoneText = this.lang.phoneText1
+          this.phoneTrue = true
+          return
+        }
+        if(this.area === '中国 +86'||this.area === '中國 +86'|| this.area === 'China +86'){
+          if ((val === 7 || val === 0) && !RegMobiles.test(this.phone) ) {
+            this.phoneText = this.lang.phoneText2
+            this.phoneTrue = true
+            return
+          }
+        } else {
+          if ((val === 7 || val === 0) && !RegMobile.test(this.phone) ) {
+            this.phoneText = this.lang.phoneText2
+            this.phoneTrue = true
+          console.log(11111)
+            return
+          }
+        }
       }
-      if ((val === 4 || val === 0) && !RegMobile.test(this.phone) ) {
-        this.phoneText = this.lang.phoneText2
-        this.phoneTrue = true
-        return
-      }
-      // if ((val === 4 || val === 0) && !RegTelephone.test(this.phone)) {
-      //   this.phoneText = this.lang.phoneText2
-      //   this.phoneTrue = true
-      //   return
-      // }
+      // console.log(this.area)
       if ((val === 5 || val === 0) && this.details === '') {
         this.detailsText = this.lang.detailsText
         this.detailsTrue = true
@@ -702,6 +733,7 @@ export default {
         this.countryText = this.lang.countryText
         this.countryTrue = true
       }
+      
     },
     // 简体
     createAddressCN() {

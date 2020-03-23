@@ -404,7 +404,7 @@
       "mailbox": "*電郵地址",
       "mailboxText1": "請輸入電郵地址",
       "mailboxText2": "請輸入正確的電郵地址",
-      "phone": "*電話",
+      "phone": "電話",
       "phoneText1": "請輸入電話號碼",
       "phoneText2": "請輸入正確的電話號碼",
       "details": "*詳細地址",

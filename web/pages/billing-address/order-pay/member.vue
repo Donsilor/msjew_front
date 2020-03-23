@@ -1697,7 +1697,7 @@ import single from '../../shopping-cart/goodsCss/single'
 import double from '../../shopping-cart/goodsCss/double'
 import madeUp from '../../shopping-cart/goodsCss/madeUp'
 import Address from '@/assets/js/address.js'
-import { Email, RegMobile, RegTelephone } from '@/assets/js/require-lee.js'
+import { Email, RegMobile, RegTelephone, RegMobiles } from '@/assets/js/require-lee.js'
 const lang = 'order'
 const langs = 'personal.account'
 const lang2 = 'invoice'
@@ -1987,11 +1987,13 @@ export default {
         this.wrongInput.firstname = true
         return false
       }
-      if (!RegMobile.test(this.addressData.mobile)) {
-        this.wrongMsg = this.$t(`${lang}.wip2`)
-        this.alertBox = true
-        this.wrongInput.mobile = true
-        return false
+      if(this.phoneNum.phone_code == '+86'){
+        if (!RegMobiles.test(this.addressData.mobile)) {
+          this.wrongMsg = this.$t(`${lang}.wip2`)
+          this.alertBox = true
+          this.wrongInput.mobile = true
+          return false
+        }
       }
       if (!RegTelephone.test(this.addressData.mobile)) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
@@ -2079,11 +2081,13 @@ export default {
         this.wrongInput.lastname = true
         return false
       }
-      if (!RegMobile.test(this.addressData.mobile)) {
-        this.wrongMsg = this.$t(`${lang}.wip2`)
-        this.alertBox = true
-        this.wrongInput.mobile = true
-        return false
+      if(this.phoneNum.phone_code == '+86'){
+        if (!RegMobiles.test(this.addressData.mobile)) {
+          this.wrongMsg = this.$t(`${lang}.wip2`)
+          this.alertBox = true
+          this.wrongInput.mobile = true
+          return false
+        }
       }
       // if (!RegMobile.test(this.addressData.mobile)) {
       //   this.wrongMsg = this.$t(`${lang}.wip2`)
@@ -2091,12 +2095,12 @@ export default {
       //   this.wrongInput.mobile = true
       //   return false
       // }
-      // if (!RegTelephone.test(this.addressData.mobile)) {
-      //   this.wrongMsg = this.$t(`${lang}.wip2`)
-      //   this.alertBox = true
-      //   this.wrongInput.mobile = true
-      //   return false
-      // }
+      if (!RegMobile.test(this.addressData.mobile)) {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
+        return false
+      }
       // if (
       //   !RegMobile.test(this.addressData.mobile) &&
       //   !RegTelephone.test(this.addressData.mobile)
