@@ -708,34 +708,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- 邮箱 -->
-                  <div class="input-line" v-show="Active == true">
-                    <div class="label"><span class="star">*</span>{{ $t(`${lang3}.email`) }}</div>
-                    <div
-                      :class="[
-                        { 'border-change': borderChange === 1 },
-                        { 'border-wrong': mailShow }
-                      ]"
-                      class="input-box"
-                    >
-                      <input
-                        v-model="invoice.email"
-                        :class="{ 'wrong-input': mailShow }"
-                        type="text"
-                        @focus="
-                          borderChange = 1
-                          mailShow = false
-                        "
-                        @blur="borderChange = 0"
-                      />
-                    </div>
-                  </div>
-                  <!-- <div v-show="emailShow" class="empltyErr">
-                    {{ $t(`${lang3}.hint4`) }}
-                  </div> -->
-                  <div v-show="mailShow" class="empltyErr">
-                    {{ $t(`${lang3}.hint5`) }}
-                  </div>
+                  
                   <!-- 发票抬头 -->
                   <div class="input-line">
                     <div class="label"><span class="star">*</span>{{ $t(`${lang3}.Invoice`) }}</div>
@@ -785,6 +758,34 @@
                   </div>
                   <div v-show="taxShow" class="empltyErr">
                     {{ $t(`${lang3}.hint3`) }}
+                  </div>
+                  <!-- 邮箱 -->
+                  <div class="input-line" v-show="Active == true">
+                    <div class="label"><span class="star">*</span>{{ $t(`${lang3}.email`) }}</div>
+                    <div
+                      :class="[
+                        { 'border-change': borderChange === 1 },
+                        { 'border-wrong': mailShow }
+                      ]"
+                      class="input-box"
+                    >
+                      <input
+                        v-model="invoice.email"
+                        :class="{ 'wrong-input': mailShow }"
+                        type="text"
+                        @focus="
+                          borderChange = 1
+                          mailShow = false
+                        "
+                        @blur="borderChange = 0"
+                      />
+                    </div>
+                  </div>
+                  <!-- <div v-show="emailShow" class="empltyErr">
+                    {{ $t(`${lang3}.hint4`) }}
+                  </div> -->
+                  <div v-show="mailShow" class="empltyErr">
+                    {{ $t(`${lang3}.hint5`) }}
                   </div>
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
@@ -1666,34 +1667,7 @@
                       </div>
                     </div>
                   </div>
-                  <!-- 邮箱 -->
-                  <div class="input-line" v-show="Active == true">
-                    <div class="label"><span class="star">*</span>{{ $t(`${lang3}.email`) }}</div>
-                    <div
-                      :class="[
-                        { 'border-change': borderChange === 1 },
-                        { 'border-wrong': mailShow }
-                      ]"
-                      class="input-box"
-                    >
-                      <input
-                        v-model="invoice.email"
-                        :class="{ 'wrong-input': mailShow }"
-                        type="text"
-                        @focus="
-                          borderChange = 1
-                          mailShow = false
-                        "
-                        @blur="borderChange = 0"
-                      />
-                    </div>
-                  </div>
-                  <!-- <div v-show="emailShow" class="empltyErr">
-                    {{ $t(`${lang3}.hint4`) }}
-                  </div> -->
-                  <div v-show="mailShow" class="empltyErr">
-                    {{ $t(`${lang3}.hint5`) }}
-                  </div>
+                  
                   <!-- 发票抬头 -->
                   <div class="input-line">
                     <div class="label"><span class="star">*</span>{{ $t(`${lang3}.Invoice`) }}</div>
@@ -1743,6 +1717,34 @@
                   </div>
                   <div v-show="taxShow" class="empltyErr">
                     {{ $t(`${lang3}.hint3`) }}
+                  </div>
+                  <!-- 邮箱 -->
+                  <div class="input-line" v-show="Active == true">
+                    <div class="label"><span class="star">*</span>{{ $t(`${lang3}.email`) }}</div>
+                    <div
+                      :class="[
+                        { 'border-change': borderChange === 1 },
+                        { 'border-wrong': mailShow }
+                      ]"
+                      class="input-box"
+                    >
+                      <input
+                        v-model="invoice.email"
+                        :class="{ 'wrong-input': mailShow }"
+                        type="text"
+                        @focus="
+                          borderChange = 1
+                          mailShow = false
+                        "
+                        @blur="borderChange = 0"
+                      />
+                    </div>
+                  </div>
+                  <!-- <div v-show="emailShow" class="empltyErr">
+                    {{ $t(`${lang3}.hint4`) }}
+                  </div> -->
+                  <div v-show="mailShow" class="empltyErr">
+                    {{ $t(`${lang3}.hint5`) }}
                   </div>
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
@@ -4367,6 +4369,8 @@ div {
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
         width: 520px;
+        height: 695px;
+        // overflow-y: scroll;
         background: rgba(255, 255, 255, 1);
         .cha{
           text-align: right;

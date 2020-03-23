@@ -25,12 +25,6 @@
                 </div>
             </div>
         </div>
-        <div class="rise" v-show="invoice.is_electronic == 1">
-            <div class="title"><span class="star">*</span>&nbsp;<span>{{ lang.email }}</span></div>
-            <div class="rise_select">
-                <input v-model="invoice.email" type="text" :placeholder="lang.holder3">
-            </div>
-        </div>
         <div class="rise">
             <div class="title"><span class="star">*</span>&nbsp;<span>{{ lang.Invoice }}</span></div>
             <div class="rise_select">
@@ -41,6 +35,12 @@
             <div class="title"><span v-if="invoice.invoice_type == 1" class="star">*</span>&nbsp;<span>{{ lang.TaxID }}</span></div>
             <div class="rise_select">
                 <input v-model="invoice.tax_number" type="text" :placeholder="lang.holder2">
+            </div>
+        </div>
+         <div class="rise" v-show="invoice.is_electronic == 1">
+            <div class="title"><span class="star">*</span>&nbsp;<span>{{ lang.email }}</span></div>
+            <div class="rise_select">
+                <input v-model="invoice.email" type="text" :placeholder="lang.holder3">
             </div>
         </div>
         <div class="line">
