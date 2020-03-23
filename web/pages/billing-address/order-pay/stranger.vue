@@ -1580,7 +1580,7 @@ export default {
       url:'',
       show:false,
       goingPay: false,
-      payWay: '' ,
+      payWay: 6 ,
       actionLink: '',
       form: [],
       answer: false,

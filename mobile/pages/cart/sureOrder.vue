@@ -292,7 +292,7 @@ export default {
       sum: '2,120.00',
       info:'',
       price:'',
-      typeIndex:'',
+      typeIndex:0,
       // info: JSON.parse(this.$route.query.info),
       // price: JSON.parse(this.$route.query.info).orderAmount,
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,

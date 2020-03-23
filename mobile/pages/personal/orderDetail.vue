@@ -765,7 +765,7 @@ export default {
         color: rgba(148, 116, 101, 1);
       }
     }
-    .details {
+     .details {
       padding: 10px;
       box-sizing: border-box;
       .products-item {
