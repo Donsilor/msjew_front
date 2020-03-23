@@ -125,8 +125,14 @@ export default {
   methods: {
     formatMoney: formatMoney,
     changeType(ind) {
-      // console.log("选择",ind)
+      console.log("选择",ind)
       this.typeIndex = ind
+      if(this.info.coinType === 'USD'){
+        if(this.typeIndex == 1){
+          this.$toast.show(this.lang.paytip)
+        }
+        return
+      }
       if (ind === 5) {
         this.price = this.info.orderAmount * 0.985
       } else {

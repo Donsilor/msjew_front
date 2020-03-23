@@ -437,7 +437,7 @@ export default {
   },
   methods: {
     changeType(ind) {
-      // console.log("选择哪一个",ind)
+      console.log("选择哪一个",ind)
       this.typeIndex = ind
       let pay = 0
       if(this.typeIndex == 0){

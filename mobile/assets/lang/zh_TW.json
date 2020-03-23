@@ -174,9 +174,12 @@
       "type4Text": "網上付款、方便、快捷",
       "payType5": "電匯",
       "type5Text": "以電匯方式付款將享有1.5%折扣優惠",
-      "type5Text2": "注意，電子支票並非電匯"
+      "type5Text2": "注意，電子支票並非電匯",
+      "paytip":"由於Paydallor不支持“人民幣”和“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！"
     },
     "paySuccess": {
+      "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",
+      "PayPending2":"您可以先關閉此頁面，稍後我們將以郵件/短信方式通知您！",
       "handing":"訂單處理中.....",
       "title": "訂單支付成功",
       "orderNo": "訂單編號",
@@ -460,6 +463,7 @@
       "transPreferFee": "電匯支付優惠",
       "orderCount": "訂單總額",
       "toPay": "去付款",
+      "toPayWait": "付款中",
       "cancelOrder": "取消訂單",
       "submit": "提交",
       "waitingPay": "待付款",
