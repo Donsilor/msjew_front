@@ -33,7 +33,7 @@
         </div>
         <div class="step-line" />
       </div>
-      
+
       <!--    用户名称和提示登陆-->
       <div class="user-info">
         <i class="iconfont iconrentou" />
@@ -478,7 +478,7 @@
                 {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
               >
               <span>{{ $t(`${lang}.beiQin`) }}</span>
-              
+
             </div> -->
             <!-- <div class="pay-btn" @click="goPay()">{{ $t(`${lang2}.pay`) }}</div> -->
           </div>
@@ -903,7 +903,7 @@
         </div> -->
       </div>
 
-      
+
       <message-box
         v-show="confirmBox"
         :title="$t(`${lang}.msgTitle1`)"
@@ -953,7 +953,7 @@
         </div>
         <div class="step-line" />
       </div>
-     
+
       <!--    用户名称和提示登陆-->
       <div class="user-info">
         <i class="iconfont iconrentou" />
@@ -1398,7 +1398,7 @@
                 {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
               >
               <span>{{ $t(`${lang}.beiQin`) }}</span>
-              
+
             </div> -->
             <!-- <div class="pay-btn" @click="goPay()">{{ $t(`${lang2}.pay`) }}</div> -->
           </div>
@@ -1809,7 +1809,7 @@
         </div>
       </div>
 
-      
+
 
       <message-box
         v-show="confirmBox"
@@ -1890,6 +1890,7 @@ export default {
       lang3,
       canSubmit: false,
       pathTakeIds: this.$route.query.cartIds.split(','),
+      orderSn: this.$route.query.orderId,
       userInfo: {},
       confirmBox: false,
       addressData: {
@@ -2109,7 +2110,7 @@ export default {
         this.show=false
       }else{
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        // const url=window.location.href  
+        // const url=window.location.href
         // setTimeout(() => {
         //   this.$router.push({
         //     path: `/login`,
@@ -2203,7 +2204,7 @@ export default {
     getTex() {
       this.canSubmit = false
       let json=[]
-     
+
       for (const i in this.good) {
         let group = this.good[i].data
         let item = group.map(item => {
@@ -2246,7 +2247,7 @@ export default {
           }
         })
     },
-    createOrder() { 
+    createOrder() {
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -2286,10 +2287,11 @@ export default {
           }, 22)
         return
       }
+
       let baseUrl=this.$store.getters.baseUrl      
       let invoice = {}
-
       let json=[]
+
       for (const i in this.good) {
         let group = this.good[i].data
         let item = group.map(item => {
@@ -2315,6 +2317,7 @@ export default {
         method: 'post',
         url: '/web/member/order-tourist/create',
         data: {
+          orderSn:this.orderSn,
           goodsCartList:json,
           invoice:invoice,
           tradeType:'pc',

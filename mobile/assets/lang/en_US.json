@@ -199,9 +199,12 @@
       "type4Text": "Easier and safer online payment",
       "payType5": "Telegraphic Transfer (T/T)",
       "type5Text": "Extra 1.5% discount for T/T payment.",
-      "type5Text2": "Please note that e-Cheques are not T/T."
+      "type5Text2": "Please note that e-Cheques are not T/T.",
+      "paytip": "Since Paydallor does not support 'RMB' and 'USD' for settlement, please switch to other currencies to complete this order, thank you!"
     },
     "paySuccess": {
+      "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+      "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
       "handing": "Order processing ...",
       "title": "ORDER PAID",
       "orderNo": "Order#",
@@ -485,6 +488,7 @@
       "transPreferFee": "Bank Wire Discount",
       "orderCount": "Total",
       "toPay": "CHECKOUT",
+      "toPayWait": "Processing",
       "cancelOrder": "CANCEL ORDER",
       "submit": "SUBMIT",
       "waitingPay": "Payment",

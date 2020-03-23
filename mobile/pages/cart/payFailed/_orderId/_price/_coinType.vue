@@ -67,7 +67,7 @@ const storage = process.client ? require('good-storage').default : {}
 import Clipboard from 'clipboard'
 export default {
   name: 'Paysuccess',
-  layout: 'no-bar',    
+  layout: 'no-bar',
   data() {
     return {
       lang: this.LANGUAGE.cart.payFailed,
@@ -146,7 +146,7 @@ export default {
           this.orderinfo = res
           console.log(res)
           this.getChannelType(this.orderinfo.payChannel)
-         
+
         })
         .catch(err => {
           console.log(err)
@@ -196,6 +196,7 @@ export default {
           method: 'post',
           url: `/web/member/order-tourist/create`,
           data: {
+            orderSn:this.$route.query.orderId,
             goodsCartList:data,
             tradeType:'wap',
             coinType:this.$store.state.coin,
