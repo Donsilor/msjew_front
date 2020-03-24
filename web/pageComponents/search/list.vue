@@ -3,7 +3,7 @@
     <section class="crumbs">{{ $t(`${lang}.homePage`) }} > {{ $t(`${lang}.result`) }}</section>
     <section class="search-keyword">
       <input
-        v-model="keyword"
+        v-model.trim="keyword"
         class="keyword-input"
         :placeholder="$t(`${lang}.keywordPlaceholder`)"
         @keyup.enter="toSearch"
@@ -220,7 +220,7 @@ export default {
               }
             }
           }
-          
+
         }
       })
       return allData
