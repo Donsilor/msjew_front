@@ -137,12 +137,6 @@ export default {
                this.$toast.show(this.lang.hint1) 
                return
             }
-            if(this.invoice.is_electronic == 1){
-                if(this.invoice.email == '' || !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.invoice.email))){
-                    this.$toast.show(this.lang.hint4) 
-                    return
-                }
-            }
             if(this.invoice.invoice_title == ''){
                this.$toast.show(this.lang.hint2) 
                return
@@ -151,6 +145,12 @@ export default {
                 if(this.invoice.tax_number == ''){
                    this.$toast.show(this.lang.hint3) 
                    return
+                }
+            }
+            if(this.invoice.is_electronic == 1){
+                if(this.invoice.email == '' || !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.invoice.email))){
+                    this.$toast.show(this.lang.hint4) 
+                    return
                 }
             }
             this.$router.push({
