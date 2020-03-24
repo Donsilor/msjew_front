@@ -36,16 +36,18 @@
         <div class="step-line-two" />
       </div>
       <div class="info-box">
-        <div class="title">
-          <div><img src="../../../static/order/close.png" alt="" /></div>
-          <div>{{ $t(`${lang}.payFail`) }}</div>
-        </div>
-        <div class="tel">
-          {{ $t(`${lang}.contactPhone`) }}
-        </div>
-        <div class="btn-two">
-          <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
-          <!-- <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div> -->
+        <div >
+          <div class="title">
+            <div><img src="../../../static/order/close.png" alt="" /></div>
+            <div>{{ $t(`${lang}.payFail`) }}</div>
+          </div>
+          <div class="tel">
+            {{ $t(`${lang}.contactPhone`) }}
+          </div>
+          <div class="btn-two">
+            <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
+            <!-- <div @click="goToFail()">{{ $t(`${lang}.payQuestion`) }}</div> -->
+          </div>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
           <!-- <div
             v-if="
               g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus !==
-                2 &&
+                2 ||
                 g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
                   .goodsStatus !== 2
             "

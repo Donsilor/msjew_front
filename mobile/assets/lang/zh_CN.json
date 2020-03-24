@@ -202,7 +202,7 @@
         "type5Text2": "注意，电子支票并非电汇"
       },
       "paySuccess": {
-        "handing":"订单处理中.....",
+        "handing":"订单处理中......",
         "title": "订单支付成功",
         "orderNo": "订单编号",
         "preferFee": "优惠讯息",
@@ -593,7 +593,7 @@
         "email": "电邮地址",
         "phone": "手机号*",
         "email-error": "请输入正确的电邮地址",
-        "phone-error": "请输入正确的电话号码",
+        "phone-error": "手机号码格式不正确，仅支持：大陆手机号！",
         "password": "密码*",
         "password-error": "请输入登入密码",
         "code-error": "验证码错误",
@@ -605,7 +605,8 @@
         "input-password": "请输入登入密码",
         "input-code": "请输入验证码",
         "login-error": "用户或密码错误！",
-        "login-success": "登录成功"
+        "login-success": "登录成功",
+        "area-code": "中国"
       },
       "index": {
         "login": "会员登入",
@@ -705,7 +706,7 @@
       "email": "邮箱*",
       "inputEmail": "请输入电邮地址",
       "emailError": "请输入正确的邮箱地址",
-      "phoneError": "请输入正确的电话号码",
+      "phoneError": "手机号码格式不正确，仅支持：大陆手机号！",
       "inputUnder": "在下面输入发送到",
       "theEmailCode": "的验证码。如果没有收到电子邮件，请查看垃圾邮件文件 夹或稍后点击发送",
       "code": "输入验证码*",
@@ -719,7 +720,8 @@
       "bddClause": "BDD条件与条款",
       "register": "注册",
       "registerSuccess": "登记成功",
-      "tickTheBDDTerms": "请查看并同意BDD条款及细则及私隐政策"
+      "tickTheBDDTerms": "请查看并同意BDD条款及细则及私隐政策",
+      "area-code": "中国"
     },
     "site-switch": {
       "chooseLanguageCoin": "请选择您语言与结算货币",

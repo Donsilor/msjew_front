@@ -81,7 +81,26 @@
         </div>
 
 
+       <!--        发货信息-->
+        <div v-if="info.express" class="bundle-item">
+	     <div class="bundle-info">
+            <div class="bundle-status">{{ lang.hadSend }}</div>
+            <div class="bundle-company">
+              <span>{{ lang.logistics }}：{{ info.express.companyName }}</span>
+              
+            </div>
+            <div class="bundle-code">
+              {{ lang.logisticsNumber }}：{{ info.express.expressNo }}
+            </div>
+            <div class="bundle-time">
+              {{ lang.sendTime }}：{{ info.express.delivery_time }}
+            </div>
+          </div>
+	    </div> 
+
+
         <!--        已发货商品-->
+		<!--
         <div v-for="(bundle, n) in outDetails" :key="n" class="bundle-item">
           <div class="bundle-info">
             <div class="bundle-status">{{ lang.hadSend }}</div>
@@ -108,7 +127,7 @@
                 {{ detail.groupTypeText }}
               </div>
 
-              <!--              单品-->
+                  单品
               <div v-if="detail.groupType === 0" class="right">
                 <h4>
                   {{ detail.goodsName }}
@@ -119,7 +138,7 @@
                 <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b>
               </div>
 
-              <!--              对戒-->
+                       对戒
               <div v-if="detail.groupType === 1" class="right">
                 <h4>
                   {{ detail.goodsName }}
@@ -136,7 +155,7 @@
                 >
               </div>
 
-              <!--              定制-->
+                           定制
               <div v-if="detail.groupType === 2" class="right">
                 <h4 class="order-ellipsis">
                   {{ detail.data[0].goodsName }}
@@ -158,7 +177,9 @@
             </div>
           </div>
         </div>
+         -->
       </div>
+	 
       <div class="invoice" v-show="invoice && invoice.invoiceTitle">
         <!-- <p class="title">发票信息</p> -->
         <ul>

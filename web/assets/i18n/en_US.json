@@ -844,6 +844,7 @@
       "expressInfo": "Logistics",
       "express": "Logistics",
       "WaybillNumber": "Waybill number",
+      "expressTime": "Delivery time",
       "orderStatus": "Order status",
       "yourBuyInfo": "Your order detail",
       "orderNum": "Total order amount",
@@ -928,6 +929,7 @@
     "payQuestion": "Payment error"
   },
   "finishPay": {
+    "handing": "Order processing ......",
     "comeBack": "Return to product page",
     "confirmOrder": "Shopping cart",
     "finishOrderInfo": "Complete your order information",

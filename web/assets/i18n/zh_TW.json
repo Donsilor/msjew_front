@@ -845,6 +845,7 @@
       "expressInfo": "物流訊息",
       "express": "物流",
       "WaybillNumber": "運單號",
+      "expressTime": "發貨時間",
       "orderStatus": "訂單狀態",
       "yourBuyInfo": "您的購買詳情",
       "orderNum": "訂單編號",
@@ -929,6 +930,7 @@
     "payQuestion": "支付遇到問題"
   },
   "finishPay": {
+    "handing":"訂單處理中......",
     "comeBack":"返回商品頁",
     "confirmOrder": "購物車",
     "finishOrderInfo": "完善您的訂單訊息",

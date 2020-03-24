@@ -593,7 +593,7 @@
       "email": "電郵地址",
       "phone": "手機號",
       "email-error": "請輸入正確的電郵地址",
-      "phone-error": "請輸入正確的電話號碼",
+      "phone-error": "手機號碼格式不正確，僅支持：大陸手機號！",
       "password": "密碼",
       "password-error": "請輸入登入密碼",
       "login-now": "登入",
@@ -605,7 +605,8 @@
       "input-password": "請輸入登入密碼",
       "login-error": "用戶或密碼錯誤！",
       "login-success": "登錄成功",
-      "input-code": "請輸入驗證碼"
+      "input-code": "請輸入驗證碼",
+      "area-code": "中國"
     },
     "index": {
       "login": "會員登入",
@@ -704,7 +705,7 @@
     "email": "電郵地址",
     "inputEmail": "請輸入電郵地址",
     "emailError": "請輸入正確的電郵地址",
-    "phoneError": "請輸入正確的電話號碼",
+    "phoneError": "手機號碼格式不正確，僅支持：大陸手機號！",
     "inputUnder": "在下面輸入發送到",
     "theEmailCode": "的驗證碼。如果沒有收到電子郵件，請查看垃圾郵件文件 夾或稍後點擊發送",
     "code": "驗證碼",
@@ -718,7 +719,8 @@
     "bddClause": "BDD條件與條款",
     "register": "登記",
     "registerSuccess": "登記成功",
-    "tickTheBDDTerms": "請查看並同意BDD條款及細則及私隱政策"
+    "tickTheBDDTerms": "請查看並同意BDD條款及細則及私隱政策",
+    "area-code": "中國"
   },
   "site-switch": {
     "chooseLanguageCoin": "請選擇您語言與結算貨幣",

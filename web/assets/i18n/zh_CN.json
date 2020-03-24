@@ -326,7 +326,7 @@
     "registration": "注册",
     "mailbox": "手机号*",
     "mailTips": "请输入正确的手机号*",
-    "phoneTips": "请正确输入手机号",
+    "phoneTips": "手机号码格式不正确，仅支持：大陆手机号！",
     "emailTips":"请正确输入邮箱",
     "password": "请输入密码*",
     "passwordTips": "请输入正确的密码",
@@ -862,6 +862,7 @@
       "expressInfo": "物流讯息",
       "express": "物流",
       "WaybillNumber": "运单号",
+      "expressTime": "发货时间",
       "orderStatus": "订单状态",
       "yourBuyInfo": "您的购买详情",
       "orderNum": "订单编号",
@@ -946,6 +947,7 @@
     "payQuestion": "支付遇到问题"
   },
   "finishPay": {
+    "handing":"订单处理中......",
     "comeBack":"返回商品页",
     "confirmOrder": "购物车",
     "finishOrderInfo": "完善您的订单讯息",
