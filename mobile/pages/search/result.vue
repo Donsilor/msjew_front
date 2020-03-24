@@ -9,7 +9,7 @@
         <div class="operating-area">
           <i class="iconfont iconicon-sousuo"></i>
           <input
-            v-model="keyword"
+            v-model.trim="keyword"
             :placeholder="lang.inputKeyword"
             @keyup.enter="searchAgain"
           />
