@@ -147,6 +147,7 @@ export default {
                    return
                 }
             }
+            
             if(this.invoice.is_electronic == 1){
                 if(this.invoice.email == '' || !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.invoice.email))){
                     this.$toast.show(this.lang.hint4) 
