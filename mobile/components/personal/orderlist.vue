@@ -72,7 +72,8 @@
           </ul>
         </div>
         <div class="bottom">
-          <div class="order">
+          <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
+            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">查看订单</div>
             <span class="title">{{ lang.orderCount }}：</span>
             <div class="order-amount">
               <span class="coin-type">{{ order.coinCode }}</span>
@@ -88,7 +89,7 @@
             >
             <span
               v-if="
-                [1].indexOf(order.orderStatus) > -1 
+                [1].indexOf(order.orderStatus) > -1
               "
               class="btn1"
               @click.stop="paytips = !paytips"
@@ -159,11 +160,11 @@ export default {
       let showData = JSON.parse(JSON.stringify(this.showData))
       showData = showData.map(order => {
         const details = order.details
-        
+
         // 以joinCartTime为下标，组合对戒和定制
         const groups = {}
         const result = []
-      
+
         details.map(good => {
           if (groups.hasOwnProperty(good.joinCartTime)) {
             // 将数据处理为直接可用的数据
@@ -212,7 +213,7 @@ export default {
             groups[good.id] = newGroup
           }
         })
-        
+
         let keys = Object.keys(groups)
         keys = keys.sort((a, b) => {
           return b - a
@@ -278,7 +279,7 @@ export default {
         }
         //  console.log('indexof',details[n].data[0].categoryId)
       }
-    
+
       return [5].indexOf(order.orderStatus) > -1 && details.length !== num
       // return [4, 5].indexOf(order.orderStatus) > -1 && details.length !== num
     },
@@ -292,14 +293,14 @@ export default {
         0: this.lang.cancelled,
         10: this.lang.unpaid,
         20: this.lang.paid,
-        30: this.lang.waitingSend, 
+        30: this.lang.waitingSend,
         40: this.lang.shipped,
         50: this.lang.completed,
         // 6: this.lang.commented,
         // 7: this.lang.returnApplication,
         // 8: this.lang.returning,
         // 9: this.lang.returned,
-       
+
       }
       // console.log("status",map[status])
       return map[status]
@@ -582,5 +583,21 @@ export default {
       }
     }
   }
+}
+
+.order.no-margin{
+  margin-left: 0 !important;
+}
+.btn-look{
+    height: 0.853333rem;
+    padding: 0 0.56rem;
+    border-radius: 0.133333rem;
+    font-size: 0.373333rem;
+    line-height: 0.853333rem;
+    font-weight: 400;
+    text-align: center;
+    color: #F29C88;
+    border: 1px solid #F29C88;
+    margin-right: 0.6rem;
 }
 </style>
