@@ -671,32 +671,34 @@
                     {{ $t(`${lang2}.hint3`) }}
                   </div>
                   <!-- 邮箱 -->
-                  <div class="input-line" v-show="Active == true">
-                    <div class="label"><span class="star">*</span>{{ $t(`${lang2}.email`) }}</div>
-                    <div
-                      :class="[
-                        { 'border-change': borderChange === 1 },
-                        { 'border-wrong': mailShow }
-                      ]"
-                      class="input-box"
-                    >
-                      <input
-                        v-model="invoice.email"
-                        :class="{ 'wrong-input': mailShow }"
-                        type="text"
-                        @focus="
-                          borderChange = 1
-                          mailShow = false
-                        "
-                        @blur="borderChange = 0"
-                      />
+                  <div class="email-box">
+                    <div class="input-line" v-show="Active == true">
+                      <div class="label"><span class="star">*</span>{{ $t(`${lang2}.email`) }}</div>
+                      <div
+                        :class="[
+                          { 'border-change': borderChange === 1 },
+                          { 'border-wrong': mailShow }
+                        ]"
+                        class="input-box"
+                      >
+                        <input
+                          v-model="invoice.email"
+                          :class="{ 'wrong-input': mailShow }"
+                          type="text"
+                          @focus="
+                            borderChange = 1
+                            mailShow = false
+                          "
+                          @blur="borderChange = 0"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <!-- <div v-show="emailShow" class="empltyErr">
-                    {{ $t(`${lang2}.hint4`) }}
-                  </div> -->
-                  <div v-show="mailShow" class="empltyErr">
-                    {{ $t(`${lang2}.hint5`) }}
+                    <!-- <div v-show="emailShow" class="empltyErr">
+                      {{ $t(`${lang2}.hint4`) }}
+                    </div> -->
+                    <div v-show="mailShow" class="empltyErr">
+                      {{ $t(`${lang2}.hint5`) }}
+                    </div>
                   </div>
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
@@ -1560,32 +1562,34 @@
                     {{ $t(`${lang2}.hint3`) }}
                   </div>
                   <!-- 邮箱 -->
-                  <div class="input-line" v-show="Active == true">
-                    <div class="label"><span class="star">*</span>{{ $t(`${lang2}.email`) }}</div>
-                    <div
-                      :class="[
-                        { 'border-change': borderChange === 1 },
-                        { 'border-wrong': mailShow }
-                      ]"
-                      class="input-box"
-                    >
-                      <input
-                        v-model="invoice.email"
-                        :class="{ 'wrong-input': mailShow }"
-                        type="text"
-                        @focus="
-                          borderChange = 1
-                          mailShow = false
-                        "
-                        @blur="borderChange = 0"
-                      />
+                  <div class="email-box">
+                    <div class="input-line" v-show="Active == true">
+                      <div class="label"><span class="star">*</span>{{ $t(`${lang2}.email`) }}</div>
+                      <div
+                        :class="[
+                          { 'border-change': borderChange === 1 },
+                          { 'border-wrong': mailShow }
+                        ]"
+                        class="input-box"
+                      >
+                        <input
+                          v-model="invoice.email"
+                          :class="{ 'wrong-input': mailShow }"
+                          type="text"
+                          @focus="
+                            borderChange = 1
+                            mailShow = false
+                          "
+                          @blur="borderChange = 0"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <!-- <div v-show="emailShow" class="empltyErr">
-                    {{ $t(`${lang2}.hint4`) }}
-                  </div> -->
-                  <div v-show="mailShow" class="empltyErr">
-                    {{ $t(`${lang2}.hint5`) }}
+                    <!-- <div v-show="emailShow" class="empltyErr">
+                      {{ $t(`${lang2}.hint4`) }}
+                    </div> -->
+                    <div v-show="mailShow" class="empltyErr">
+                      {{ $t(`${lang2}.hint5`) }}
+                    </div>
                   </div>
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
@@ -1974,6 +1978,16 @@ export default {
         this.redioShow = true
         return
       } 
+      if(this.invoice.invoice_title == ''){
+        this.typeShow = true
+        return
+      } 
+      if(this.invoice.invoice_type == 1){
+        if(this.invoice.tax_number == ''){
+          this.taxShow = true
+          return
+        } 
+      }
       if(this.invoice.is_electronic == 1){
         if(this.invoice.email == '' || !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.invoice.email))){
           this.mailShow = true
@@ -1984,16 +1998,6 @@ export default {
         //   this.emailShow = false
         //   return
         // }
-      }
-      if(this.invoice.invoice_title == ''){
-        this.typeShow = true
-        return
-      } 
-      if(this.invoice.invoice_type == 1){
-        if(this.invoice.tax_number == ''){
-          this.taxShow = true
-          return
-        } 
       }
       this.gou = true
       this.content = false
@@ -4277,6 +4281,9 @@ div {
     z-index: 99999999;
     top: 0;
     left: 0;
+    .email-box{
+      height: 60px;
+    }
     .msg{
       position: relative;
       width: 100%;
@@ -4291,7 +4298,7 @@ div {
         transform: translateX(-50%) translateY(-50%);
         width: 520px;
         // height: 80%;
-        height: 695px;
+        // height: 695px;
         // overflow-y: scroll;
         background: rgba(255, 255, 255, 1);
         .cha{
