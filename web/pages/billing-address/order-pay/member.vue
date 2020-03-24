@@ -1961,6 +1961,7 @@ export default {
     },
     close(){
       this.invoiceBox = false
+      this.iconShow = false
     },
     show2(){
       this.iconShow=!this.iconShow
