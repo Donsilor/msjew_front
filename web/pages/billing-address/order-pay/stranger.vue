@@ -2126,7 +2126,8 @@ export default {
       console.log("取到的值是"+this.radio);
     },
     close(){
-       this.invoiceBox = false
+      this.invoiceBox = false
+      this.iconShow = false
     },
     show2(){
       this.iconShow=!this.iconShow
@@ -2166,6 +2167,7 @@ export default {
         //   return
         // }
       }
+      
       this.gou = true
       this.content = false
       setTimeout(() => {
