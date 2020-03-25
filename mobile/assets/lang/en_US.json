@@ -387,9 +387,9 @@
     },
     "successPassword": {
       "title": "RESET",
-      "p1": "Your password has been reset. Log in with your new password.",
-      "p2": "Automatically exit after ",
-      "p3": " seconds and back to the personal center",
+      "p1": "Your password has been successfully reset.not need to log in this time",
+      "p2": "You need to log in with your new password next time ",
+      "p3": " Automatically return to personal center in seconds",
       "goLogin": "GO BACK NOW"
     },
     "editAddress": {
