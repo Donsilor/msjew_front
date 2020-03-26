@@ -7,7 +7,6 @@
           <li
             v-for="(item, index) in list"
             :key="index"
-            @click="godetails(item, index)"
           >
             <div
               v-if="
@@ -17,8 +16,9 @@
                   item.groupType !== 0
                 )
               "
-              class="mod-item"
+              class="mod-item" 
             >
+			<div @click="godetails(item, index)">
               <img :src="imageStrToArray(item.goodsImages)[0]" />
               <span v-if="!getStatus(item, index)" class="failed">
                 {{ lang.failed }}
@@ -58,12 +58,13 @@
                   <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
                 </div>
               </div>
+		  </div>
               <div class="domore">
                 <div
                   class="select-icon"
-                  @click="selectAlls"
+                  @click.stop="isSelect(item, index)"
                 >
-                  <i class="icon" :class="{ icongou: selectAll }"></i>
+                  <i class="icon" :class="{ icongou: item.isSelect }"></i>
                 </div>
                 <a
                   v-if="!getStatus(item, index)"
@@ -700,11 +701,10 @@ export default {
             text-align: right;
             color: rgba(153, 153, 153, 1);
             .select-icon {
-              width: 30px;
-              height: 30px;
+              width: 40px;
+              height: 40px;
               text-align: center;
-              border-radius: 50%;
-              margin: -6px 0 0 40px;
+              margin: -10px 0 0 40px;
               cursor: pointer;
             }
               i{
@@ -716,7 +716,7 @@ export default {
                 background: rgba(255, 255, 255, 1);
                 border: 1px solid rgba(153, 153, 153, 1);
                 border-radius: 50%;
-                margin: 5px auto 0;
+                margin: 11px auto 0;
                 display: block;
               }
               .icongou {
