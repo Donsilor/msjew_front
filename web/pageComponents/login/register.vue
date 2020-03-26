@@ -60,7 +60,7 @@
           <div class="register-input email-val-box">
             <div class="area-code">中国 +86<i class="iconfont iconxiala"></i></div>
             <input
-              v-model="mobile"
+              v-model.trim="mobile"
               type="text"
               @focus="focusEvent2"
               @blur="blurEvent2"
@@ -101,7 +101,7 @@
         <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="password"
+              v-model.trim="password"
               readonly onfocus="this.removeAttribute('readonly');"
               @focus="focusEvent4"
               @blur="blurEvent4"
@@ -123,7 +123,7 @@
         <div class="relative margin-bottom-40">
           <div class="register-input">
             <input
-              v-model=" password_repetition"
+              v-model.trim=" password_repetition"
               readonly onfocus="this.removeAttribute('readonly');"
               v-bind:class="{active:isActiverepwd}"
               @focus="focusEvent5"
@@ -201,7 +201,7 @@
         <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="email"
+              v-model.trim="email"
 
               @focus="focusEvent2"
               @blur="blurEvent2"
@@ -241,7 +241,7 @@
         <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="password"
+              v-model.trim="password"
               readonly onfocus="this.removeAttribute('readonly');"
               @focus="focusEvent4"
               @blur="blurEvent4"
@@ -262,7 +262,7 @@
         <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
-              v-model="password_repetition"
+              v-model.trim="password_repetition"
 
               @focus="focusEvent5"
               @blur="blurEvent5"
