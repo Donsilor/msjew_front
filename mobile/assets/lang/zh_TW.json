@@ -130,24 +130,26 @@
       "NotInvoiced":"不開發票",
       "Invoicing":"開發票",
       "invo":"發票",
-      "email":"郵箱",
+      "email":"電子郵箱",
       "InvoiceDetails":"發票詳情",
       "HeaderType":"抬頭類型",
       "PaperInvoice":"紙質發票",
       "InvoiceType":"發票類型",
       "ElectronicInvoice":"電子發票",
       "BusinessUnit":"企業單位",
-      "UnBusinessUnit":"個人/非企業單位",
+      "UnBusinessUnit":"個人",
       "Invoice":"發票抬頭",
       "TaxID":"發票稅號",
       "holder1":"填寫發票抬頭",
       "holder2":"填寫納稅人識別號",
+      "holder3":"填寫郵箱地址",
       "totalAmount":"總金額",
       "tips":"*稍後紙質發票會隨訂單商品一起快遞給您,請注意查收！",
       "confirm":"確認提交",
       "hint1":"抬頭類型不能為空",
       "hint2":"發票抬頭不能為空",
-      "hint3":"稅號不能為空"
+      "hint3":"稅號不能為空",
+      "hint4":"請輸入正確郵箱"
     },
     "sureOrder": {
       "firstLogin":"請先登錄或註冊！",
@@ -387,10 +389,10 @@
     },
     "successPassword": {
       "title": "重置成功",
-      "p1": "您的密碼已經成功重置，請以新的密碼登入",
-      "p2": "",
-      "p3": "秒後將自動退出系統並返回登入界面",
-      "goLogin": "立即登入"
+      "p1": "您的密碼已經成功重置，此次不需登錄",
+      "p2": "下次需使用新密碼進行登錄",
+      "p3": "秒後將自動返回個人中心",
+      "goLogin": "立即返回"
     },
     "editAddress": {
       "header1": "新增地址",
@@ -404,7 +406,7 @@
       "mailbox": "*電郵地址",
       "mailboxText1": "請輸入電郵地址",
       "mailboxText2": "請輸入正確的電郵地址",
-      "phone": "*電話",
+      "phone": "電話",
       "phoneText1": "請輸入電話號碼",
       "phoneText2": "請輸入正確的電話號碼",
       "details": "*詳細地址",

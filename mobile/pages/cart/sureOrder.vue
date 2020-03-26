@@ -489,7 +489,7 @@ export default {
         productAmount: 0, // 商品总价 ,
         safeFee: 0, // 保险金额 ,
         taxFee: 0, // 税费金额
-        planDays: `1-12`
+        planDays: `5-12`
       }
     },
     showCouponTips() {
@@ -1371,6 +1371,7 @@ export default {
 .invoice{
   .underline{
     text-decoration: underline;
+    color:#75BEEE;
   }
   .title{
     font-size: 14px;

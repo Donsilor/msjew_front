@@ -410,7 +410,7 @@ export default {
 .handing,.pending1{
   padding: 20px;
   color:#f29b87;
-  font-size: 20px;
+  font-size: 30px;
 }
 .pending2 {
   padding: 20px;
