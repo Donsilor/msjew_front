@@ -772,6 +772,7 @@
       "orderDetail": "訂單詳情",
       "cancelOrder": "取消訂單",
       "toPay": "去付款",
+      "toPayWait": "付款中",
       "wireTransferGuide": "電匯指引",
       "orderPrice": "訂單總額",
       "confirmReceipt": "確認收貨",
@@ -930,6 +931,8 @@
     "payQuestion": "支付遇到問題"
   },
   "finishPay": {
+    "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",
+    "PayPending2":"您可以先關閉此頁面，稍後我們將以郵件/短信方式通知您！",
     "handing":"訂單處理中......",
     "comeBack":"返回商品頁",
     "confirmOrder": "購物車",
@@ -2301,7 +2304,7 @@
     "personal":"個人",
     "company":"企業",
     "Submitted":"提交成功",
-    "email":"郵箱",
+    "email":"電子郵箱",
     "default":"默认不开发票",
     "Invoicing":"开发票",
     "Invoicings":"开具发票",
@@ -2311,7 +2314,7 @@
     "HeaderType":"抬頭類型",
     "InvoiceType":"發票類型",
     "BusinessUnit":"企業單位",
-    "UnBusinessUnit":"個人/非企業單位",
+    "UnBusinessUnit":"個人",
     "Invoice":"發票抬頭",
     "TaxID":"發票稅號",
     "holder1":"填寫發票抬頭",
@@ -2322,6 +2325,8 @@
     "carryOut":"完成",
     "hint1":"抬頭類型不能為空",
     "hint2":"發票抬頭不能為空",
-    "hint3":"稅號不能為空"
+    "hint3":"稅號不能為空",
+    "hint4":"郵箱不能為空",
+    "hint5":"請輸入正確的郵箱"
   }
 }

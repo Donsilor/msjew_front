@@ -771,6 +771,7 @@
       "orderDetail": "Order Details",
       "cancelOrder": "Cancel Order",
       "toPay": "Pay Now",
+      "toPayWait": "Processing",
       "wireTransferGuide": "Wire Transfer Guide",
       "orderPrice": "Total Order Amount",
       "confirmReceipt": "Confirm Receipt",
@@ -929,6 +930,8 @@
     "payQuestion": "Payment error"
   },
   "finishPay": {
+    "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+    "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
     "handing": "Order processing ......",
     "comeBack": "Return to product page",
     "confirmOrder": "Shopping cart",
@@ -2299,17 +2302,17 @@
     "personal":"personal",
     "company":"company",
     "Submitted": "Submitted successfully",
-    "email": "Email",
+    "email": "E-mail",
     "default": "Default is not invoiced",
     "Invoicing": "Invoicing",
     "Invoicings": "Invoicing",
     "PaperInvoice": "Paper Invoice",
     "ElectronicInvoice": "Electronic Invoice",
-    "InvoiceDetails": "Invoice Details",
+    "InvoiceDetails": "Invoice details",
     "HeaderType": "HeaderType",
     "InvoiceType": "Invoice Type",
     "BusinessUnit": "Business Unit",
-    "UnBusinessUnit": "Individual / Non-Business Unit",
+    "UnBusinessUnit": "Individual",
     "Invoice": "Invoice Header",
     "TaxID": "Invoice tax number",
     "holder1": "Fill Invoice Header",
@@ -2320,6 +2323,8 @@
     "carryOut": "Done",
     "hint1": "Header type cannot be empty",
     "hint2": "Invoice header cannot be empty",
-    "hint3": "Tax ID cannot be empty"
+    "hint3": "Tax ID cannot be empty",
+    "hint4": "Mailbox cannot be empty",
+    "hint5": "Please enter the correct email"
   }
 }
