@@ -1787,7 +1787,7 @@ export default {
         safeFee: 0,
         orderAmount: 0,
         productAmount: 0,
-        planDays: '1-12'
+        planDays: '5-12'
       },
       invoice:{
         invoice_type:'',

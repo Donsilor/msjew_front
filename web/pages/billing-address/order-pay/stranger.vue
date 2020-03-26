@@ -1922,13 +1922,13 @@ export default {
       good: [],
       goodsPrice: 0,
       preferFee: 0,
-      planDays: '1-12',
+      planDays: '5-12',
       tex: {
         logisticsFee: 0,
         taxFee: 0,
         safeFee: 0,
         orderAmount: 0,
-        planDays: '1-12'
+        planDays: '5-12'
       },
       die: false,
       tooInp: '',
