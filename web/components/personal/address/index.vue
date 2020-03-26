@@ -736,10 +736,10 @@ export default {
         this.$message.error(this.$t(`${lang}.wip7`))
         return
       }
-      // if (this.using.mobile === '') {
-      //   this.$message.error(this.$t(`${lang}.wip8`))
-      //   return
-      // }
+      if (this.using.mobile === '') {
+        this.$message.error(this.$t(`${lang}.wip8`))
+        return
+      }
       if(this.phoneNum.phone_code == '+86'){
         if (!RegMobiles.test(this.using.mobile) // && // !RegTelephone.test(this.using.mobile)
         ) {

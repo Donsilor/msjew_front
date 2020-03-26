@@ -65,7 +65,7 @@
         <div v-else class="input-mod">
           <bdd-input
             v-model="phone"
-            :placeholder="`${lang.phone}`"
+            :placeholder="`*${lang.phone}`"
             @input="check(4)"
           ></bdd-input>
         </div>
@@ -662,7 +662,6 @@ export default {
         return fa
       }
       if(this.language === 'zh_CN'){
-        // console.log(222)
         if(this.mailbox !== ''){
           if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
             this.mailboxText = this.lang.mailboxText2
@@ -675,7 +674,6 @@ export default {
           this.phoneTrue = true
           return
         }
-        // console.log("area",this.area)
         if(this.area === '中国 +86'||this.area === '中國 +86'|| this.area === 'China +86'){
           if ((val === 7 || val === 0) && !RegMobiles.test(this.phone) ) {
             this.phoneText = this.lang.phoneText2
@@ -693,7 +691,7 @@ export default {
         }
       } else {
        console.log("3333333")
-        if (( val === 0) && this.mailbox === '') {
+        if ((val === 3 || val === 0) && this.mailbox === '') {
           this.mailboxText = this.lang.mailboxText1
           this.mailboxTrue = true
           return
@@ -703,7 +701,7 @@ export default {
           this.mailboxTrue = true
           return
         }
-        if ((val === 4 ) && this.phone === '') {
+        if ((val === 4|| val === 0 ) && this.phone === '') {
           this.phoneText = this.lang.phoneText1
           this.phoneTrue = true
           return

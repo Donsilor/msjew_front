@@ -985,7 +985,7 @@
         <div class="left-side">
           <!--          名-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.firstName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 2 },
@@ -1010,7 +1010,7 @@
           </div>
           <!--          姓-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.lastName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 1 },
@@ -1037,7 +1037,7 @@
 
           <!--          电话-->
           <div class="input-line">
-            <div class="label">{{ $t(`${lang}.telephone`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
                 <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
@@ -1077,7 +1077,7 @@
 
           <!--          邮箱-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.email`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.email`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 4 },
@@ -1103,7 +1103,7 @@
 
           <!--          确认邮箱-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.checkEmail`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.checkEmail`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 5 },
@@ -1132,7 +1132,7 @@
         <div class="right-side">
           <!--          国家-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.country`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.country`) }}</div>
             <div class="input-box">
               <input :value="country.areaName" type="address" />
               <select v-model="country" @change="getListTwo()">
@@ -1183,7 +1183,7 @@
 
           <!--          详细地址-->
           <div class="input-line">
-            <div class="label">*{{ $t(`${lang}.longAddress`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.longAddress`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 6 },
@@ -2081,6 +2081,12 @@ export default {
         this.wrongInput.lastname = true
         return false
       }
+      if (this.addressData.mobile === '') {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
+        return false
+      }
       if(this.phoneNum.phone_code == '+86'){
         if (!RegMobiles.test(this.addressData.mobile)) {
           this.wrongMsg = this.$t(`${lang}.wip2`)
@@ -2089,12 +2095,6 @@ export default {
           return false
         }
       }
-      // if (!RegMobile.test(this.addressData.mobile)) {
-      //   this.wrongMsg = this.$t(`${lang}.wip2`)
-      //   this.alertBox = true
-      //   this.wrongInput.mobile = true
-      //   return false
-      // }
       if (!RegMobile.test(this.addressData.mobile)) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
