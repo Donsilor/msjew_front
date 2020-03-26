@@ -117,7 +117,7 @@
           :key="_index"
           class="goods-details"
         >
-          <nuxt-link :to="goToDetail(d)">
+          <nuxt-link :to="goToDetail(d)" target="_blank">
             <div class="t1">
               <div class="good-img">
                 <img :src="IMG_URL + d.goodsImages" />

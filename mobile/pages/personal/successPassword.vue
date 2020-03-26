@@ -29,7 +29,7 @@ export default {
     goLogin() {
       this.waitingTime = 0
       this.$router.push({
-        name: 'login'
+        name: 'personal'
       })
     },
     countDown() {
@@ -79,7 +79,7 @@ export default {
     color: rgba(147, 116, 102, 1);
     line-height: 20px;
     padding: 10px 30px;
-    word-break: keep-all;
+    // word-break: keep-all;
   }
   .btn {
     margin-top: 36px;

@@ -515,7 +515,7 @@
 
 <script>
 import Address from '@/assets/js/address.js'
-import { Email, RegMobile, RegTelephone } from '@/assets/js/require-lee.js'
+import { Email, RegMobile, RegTelephone, RegMobiles } from '@/assets/js/require-lee.js'
 const lang = 'personal.account'
 export default {
   name: 'Index',
@@ -575,6 +575,7 @@ export default {
     this.getData()
   },
   mounted(){
+    console.log("ffff",this.phoneNum.phone_code)
     this.language = this.getCookie('language')
   },
   methods: {
@@ -735,15 +736,18 @@ export default {
         this.$message.error(this.$t(`${lang}.wip7`))
         return
       }
-      // if (this.using.mobile === '') {
-      //   this.$message.error(this.$t(`${lang}.wip8`))
-      //   return
-      // }
-      if (
-        !RegMobile.test(this.using.mobile) 
-        // &&
-        // !RegTelephone.test(this.using.mobile)
-      ) {
+      if (this.using.mobile === '') {
+        this.$message.error(this.$t(`${lang}.wip8`))
+        return
+      }
+      if(this.phoneNum.phone_code == '+86'){
+        if (!RegMobiles.test(this.using.mobile) // && // !RegTelephone.test(this.using.mobile)
+        ) {
+          this.$message.error(this.$t(`${lang}.wip9`))
+          return
+        }
+      }
+      if (!RegMobile.test(this.using.mobile)) {
         this.$message.error(this.$t(`${lang}.wip9`))
         return
       }
@@ -821,9 +825,11 @@ export default {
         this.$message.error(this.$t(`${lang}.wip8`))
         return
       }
-      if (!RegMobile.test(this.using.mobile)) {
-        this.$message.error(this.$t(`${lang}.wip9`))
-        return
+      if(this.phoneNum.phone_code == '+86'){
+        if (!RegMobiles.test(this.using.mobile)) {
+          this.$message.error(this.$t(`${lang}.wip9`))
+          return
+        }
       }
       if (!RegTelephone.test(this.using.mobile)) {
         this.$message.error(this.$t(`${lang}.wip9`))
