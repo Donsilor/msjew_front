@@ -210,45 +210,46 @@ export default {
       ul {
         display: inline-block;
         width: 100%;
-        height: 44px;
+        height: 45px;
+        line-height: 45px;
         padding: 0 14px;
         justify-content: space-around;
         li {
           position: relative;
           display: inline-block;
           width: 20%;
-          height: 44px;
+          height: 45px;
           font-size: 14px;
-          line-height: 40px;
+          line-height: 45px;
           font-weight: 400;
           color: rgba(102, 102, 102, 1);
           .text{
             position: relative;
-          }
-          .tip{
-            position: absolute;
-            display: inline-block;
-            top: -38%;
-            left: 83%;
-            width: 16px;
-            height: 16px;
-            line-height: 17px;
-            border-radius: 50%;
-            text-align: center;
-            color: #ffffff;
-            font-size: 10px;
-            font-weight: 400;
-            background-color: #f29b87;
-            // border-radius: 15px;
-            // color: #fff;
-            // display: inline-block;
-            // font-size: 12px;
-            // height: 18px;
-            // line-height: 18px;
-            // padding: 0 6px;
-            // text-align: center;
-            // white-space: nowrap;
-            // background-color: #f29b87;
+            .tip{
+              position: absolute;
+              // display: block;
+              top: -56%;
+              left: 97%;
+              width: 16px;
+              height: 16px;
+              line-height: 17px;
+              border-radius: 100%;
+              text-align: center;
+              color: #ffffff;
+              font-size: 10px;
+              background-color: #f29b87;
+              box-sizing: border-box;
+              // border-radius: 15px;
+              // color: #fff;
+              // display: inline-block;
+              // font-size: 12px;
+              // height: 18px;
+              // line-height: 18px;
+              // padding: 0 6px;
+              // text-align: center;
+              // white-space: nowrap;
+              // background-color: #f29b87;
+            }
           }
           .line {
             position: absolute;
