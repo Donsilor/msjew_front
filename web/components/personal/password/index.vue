@@ -82,10 +82,17 @@ export default {
             message: this.$t(`${lang}.success`),
             type: 'success'
           })
-          setTimeout(() => {
-            this.$store.dispatch(`logout`)
-            this.$router.push(`/login`)
-          }, 1000)
+          localStorage.setItem('refreshToken',res.data.refresh_token);
+		      localStorage.setItem('accessToken',res.data.access_token);
+          this.$store.commit('setToken', res.data.access_token)
+          this.$store.commit('setUserInfo',res.data.member)
+          this.oldPsw = ''
+          this.newPsw = ''
+          this.agaPsw = ''
+          // setTimeout(() => {
+          //   this.$store.dispatch(`logout`)
+          //   this.$router.push(`/login`)
+          // }, 1000)
         })
         .catch(err => {
           if (!err.response) {

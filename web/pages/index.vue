@@ -468,6 +468,7 @@ export default {
         })
       }
       result.products = products
+      console.log(result)
       return result
     },
     activeHotProductInfo () {
@@ -542,7 +543,8 @@ section {
     /*font-weight: bold;*/
     color: rgba(51, 51, 51, 1);
     text-align: center;
-    margin-bottom: 15px;
+    padding-top: 30px;
+    padding-bottom: 50px;
     z-index: 2;
   }
   .section-sub-title {
@@ -727,7 +729,7 @@ section {
 }
 
 .hot {
-  padding-top: 53px;
+  // padding-top: 53px;
   background-color: #fbf8f3;
   overflow-x: hidden;
 

@@ -3,6 +3,13 @@
     <div v-show="stepPayVerify">
       <p  class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p>
     </div>
+    <div v-show="stepPayPending">
+      <p  class="color-333 font-size-14 margin-top-10 pending1">{{ lang.PayPending1 }}</p>
+      <p  class="color-333 font-size-14 margin-top-10 pending2">{{ lang.PayPending2 }}</p>
+      <div class="btn-common btn-gray" @click="goIndex">
+        {{ lang.continue }}
+      </div>
+    </div>
     <div v-show="stepPaySuccess">
       <!-- 已登录 -->
       <div v-if="hadLogin">
@@ -57,7 +64,7 @@
           </li>
         </ul>
       </div>
-      <!-- 未登录 -->  
+      <!-- 未登录 -->
       <div v-else>
         <!-- <p v-show="this.$route.query.success == 'false' && this.verification_status == 'false'" class="color-333 font-size-14 margin-top-10 handing">{{ lang.handing }}</p> -->
         <div class="top" >
@@ -136,7 +143,7 @@
         >
           {{ lang.lookBill }}
         </div>
-        <div 
+        <div
           v-if="info.payChannel !== 1"
           class="btn-common btn-gray btn-black"
           @click="goIndex"
@@ -180,7 +187,8 @@ export default {
       orderinfo:'',
       isLogin: !!this.$store.state.token,
       list:[],
-      stepPayVerify:true,//支付验证
+      stepPayPending:true,//等待处理
+      stepPayVerify:false,//支付验证
       stepPaySuccess:false,//支付验证成功
       verifyCount:0,//支付验证次数
     }
@@ -191,20 +199,31 @@ export default {
     }
   },
   mounted() {
-      if (this.$route.query.success == 'false') {
+      if (this.$route.query.success === "false") {
           this.$router.push({
               name: 'cart-payFailed-orderId-price-coinType',
-              query: {   
+              query: {
                   orderId: this.$route.query.orderId||this.$route.query.order_sn,
               }
           })
-          return
-      }else{
-          this.payVerify()
-      }    
+      } else {
+
+        if (this.isLogin) {
+          this.getinfo()
+        }else{
+          this.getinfo2()
+        }
+
+        setTimeout(this.payVerify, 2000);
+      }
   },
   methods: {
     formatMoney: formatMoney,
+    showPayPending() {
+      //展示成功页面信息
+      this.stepPayPending = true
+      this.stepPayVerify = false
+    },
     goIndex() {
       this.$router.replace({
         name: 'index'
@@ -240,15 +259,17 @@ export default {
           console.log("dssadas",res)
           this.orderinfo = res
           this.getChannelType(this.orderinfo.payChannel)
-         
+
         })
         .catch(err => {
           console.log(err)
         })
     },
     payVerify(){
-      
+
       const _this = this
+
+      this.verifyCount ++
 
       _this.$axios({
             url: '/web/pay/verify',
@@ -260,56 +281,38 @@ export default {
         })
         .then(data => {
 
-            if(data.verification_status !== 'true') {
-                this.verifyCount ++
-                if(this.verifyCount < 10) {
-                    setTimeout(this.payVerify, 5000);
-                    return
-                }
-                this.$router.push({
-                    name: 'cart-payFailed-orderId-price-coinType',
-                    query: {   
-                        orderId: this.$route.query.orderId||this.$route.query.order_sn,
-                    }
-                })
-                return
+          if(data.verification_status === 'completed') {
+            const arr = []
+            this.list.map((item, index) => {
+              arr.push(item.localSn)
+              this.$store.dispatch('removeCart', arr)
+            })
+            this.list = JSON.parse(storage.get('myCartList', 0))
+
+            this.stepPaySuccess = true
+            this.stepPayPending = false
+
+          } else if(data.verification_status === 'failed') {
+              this.$router.push({
+                  name: 'cart-payFailed-orderId-price-coinType',
+                  query: {
+                      orderId: this.$route.query.orderId||this.$route.query.order_sn,
+                  }
+              })
+          }
+          else {
+            if(this.verifyCount < 2) {
+              setTimeout(this.payVerify, 15000);
             }
             else {
-              const arr = []
-              this.list.map((item, index) => {
-                arr.push(item.localSn)
-                console.log(arr)
-                this.$store.dispatch('removeCart', arr)
-              })
-              this.stepPaySuccess = true
-              this.stepPayVerify = false
-              this.list = JSON.parse(storage.get('myCartList', 0))          
-              //_this.$nextTick(() => {
-                if (this.isLogin){
-                  _this.getinfo()
-                }else{
-                  // setTimeout(() => {
-                    _this.getinfo2()
-                  // },5000);
-                }
-              //})
+              this.showPayPending()
             }
-        })
-        .catch(err => {
-            if(this.verifyCount < 10) {
-                 setTimeout(this.payVerify, 5000);
-            }else{
-                this.$router.push({
-                    name: 'cart-payFailed-orderId-price-coinType',
-                    query: {   
-                        orderId: this.$route.query.orderId||this.$route.query.order_sn,
-                    }
-                })
-            }
-            console.log(err)
-            return 
-        })
-        
+          }
+      })
+      .catch(err => {
+        setTimeout(this.payVerify, 15000);
+      })
+
     },
     getChannelType(type) {
       // 订单支付渠道(1-电汇,2-paypal,3-微信,4-支付宝,5-visa/Mastercard,6-銀聯,7-paydollar)
@@ -404,10 +407,15 @@ export default {
 </script>
 
 <style scoped lang="less">
-.handing{
+.handing,.pending1{
   padding: 20px;
   color:#f29b87;
-  font-size: 20px;
+  font-size: 30px;
+}
+.pending2 {
+  padding: 20px;
+  color:#666666;
+  font-size: 12px;
 }
 .pay-success {
   width: 90%;

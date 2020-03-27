@@ -199,9 +199,12 @@
       "type4Text": "Easier and safer online payment",
       "payType5": "Telegraphic Transfer (T/T)",
       "type5Text": "Extra 1.5% discount for T/T payment.",
-      "type5Text2": "Please note that e-Cheques are not T/T."
+      "type5Text2": "Please note that e-Cheques are not T/T.",
+      "paytip": "Since Paydallor does not support 'RMB' and 'USD' for settlement, please switch to other currencies to complete this order, thank you!"
     },
     "paySuccess": {
+      "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+      "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
       "handing": "Order processing ...",
       "title": "ORDER PAID",
       "orderNo": "Order#",
@@ -384,10 +387,10 @@
     },
     "successPassword": {
       "title": "RESET",
-      "p1": "Your password has been reset. Log in with your new password.",
-      "p2": "Automatically exit after ",
-      "p3": " seconds and back to the login interface",
-      "goLogin": "SIGN IN NOW"
+      "p1": "Your password has been successfully reset.not need to log in this time",
+      "p2": "You need to log in with your new password next time ",
+      "p3": " Automatically return to personal center in seconds",
+      "goLogin": "GO BACK NOW"
     },
     "editAddress": {
       "header1": "Add Address",
@@ -401,7 +404,7 @@
       "mailbox": "*Email",
       "mailboxText1": "Enter Email",
       "mailboxText2": "Enter correct phone number",
-      "phone": "*Phone",
+      "phone": "Phone",
       "phoneText1": "Enter phone number",
       "phoneText2": "Enter correct phone number",
       "details": "*Address",
@@ -485,6 +488,7 @@
       "transPreferFee": "Bank Wire Discount",
       "orderCount": "Total",
       "toPay": "CHECKOUT",
+      "toPayWait": "Processing",
       "cancelOrder": "CANCEL ORDER",
       "submit": "SUBMIT",
       "waitingPay": "Payment",
