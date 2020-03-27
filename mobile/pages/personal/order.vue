@@ -11,8 +11,10 @@
               :class="{ active: orderStatus === item.code }"
               @click="barActiveChange(item.code)"
             >
-              {{ item.text }}
-              <span></span>
+              <span class="text">{{ item.text }}<span v-if="item.num > 0" class="tip">{{ item.num }}</span></span>
+              
+              
+              <span class="line"></span>
             </li>
           </ul>
         </div>
@@ -39,27 +41,135 @@ export default {
       statusList: [
         {
           code: 0,
-          text: this.LANGUAGE.personal.order.all
+          text: this.LANGUAGE.personal.order.all,
+          num:0
         },
         {
           code: 10,
-          text: this.LANGUAGE.personal.order.waitingPay
+          text: this.LANGUAGE.personal.order.waitingPay,
+          num:0
         },
         {
           code: 30,
-          text: this.LANGUAGE.personal.order.waitingSend
+          text: this.LANGUAGE.personal.order.waitingSend,
+          num:0
         },
         {
           code: 40,
-          text: this.LANGUAGE.personal.order.waitingReceive
+          text: this.LANGUAGE.personal.order.waitingReceive,
+          num:0
         },
         {
           code: 50, // 传5表示待評價的订单(后端确定的逻辑)
-          text: this.LANGUAGE.personal.order.waitingComment
+          text: this.LANGUAGE.personal.order.waitingComment,
+          num:0
         }
       ],
-      orderStatus: 0
+      orderStatus: 0,
+      list: {
+        //  没给钱
+        ordered: [],
+        //  给了钱没发货
+        paid: [],
+        //  发了货没收到
+        send: [],
+        //  订单完成了
+        finished: [],
+        //  收到货了没评论
+        receive: [],
+        //  已经评论了
+        comment: [],
+        //  可以申请售后退货
+        apply: [],
+        //  退货中
+        returning: [],
+        //  退货完成了
+        returned: [],
+        //  订单取消了
+        closed: []
+      }
     }
+  },
+  created(){
+    this.$axios({
+      method: 'get',
+      url: `/web/member/order`
+    })
+    .then(res => {
+      this.list = {
+          //  没给钱
+          ordered: [],
+          //  给了钱没发货
+          paid: [],
+          //  发了货没收到
+          send: [],
+          //  订单完成了
+          finished: [],
+          //  收到货了没评论
+          receive: [],
+          //  已经评论了
+          comment: [],
+          //  可以申请售后退货
+          apply: [],
+          //  退货中
+          returning: [],
+          //  退货完成了
+          returned: [],
+          //  订单取消了
+          closed: []
+        }
+        for (const i in res.data) {
+          const o = res.data[i]
+          res.data[i].details.map(obj => {
+            obj.goodsImages = obj.goodsImages.split(',')[0]
+            obj.detailSpecs = JSON.parse(obj.detailSpecs)
+            obj.link = `132`
+          })
+          // console.log("llllll",res.data.data[i].orderStatus)
+          if (res.data[i].orderStatus == 10) {
+            //  没给钱
+            this.list.ordered.push(o)
+            // console.log("777777",o)
+          } else if (res.data[i].orderStatus == 20||res.data[i].orderStatus == 30) {
+
+            //  给了钱没发货
+            this.list.paid.push(o)
+          } else if (res.data[i].orderStatus == 40) {
+            //  发了货没收到
+            this.list.send.push(o)
+          } else if (res.data[i].orderStatus == 50) {
+            //  订单完成了
+            this.list.finished.push(o)
+          } else if (res.data[i].orderStatus === 5) {
+            //  收到货了没评论
+            this.list.receive.push(o)
+          } else if (res.data[i].orderStatus === 6) {
+            //  已经评论了
+            this.list.comment.push(o)
+          } else if (res.data[i].orderStatus === 7) {
+            //  可以申请售后退货
+            this.list.apply.push(o)
+          } else if (res.data[i].orderStatus === 8) {
+            //  退货中
+            this.list.returning.push(o)
+          } else if (res.data[i].orderStatus === 9) {
+            //  退货完成了
+            this.list.returned.push(o)
+          } else if (res.data[i].orderStatus === 10) {
+            //  订单取消了
+            this.list.closed.push(o)
+          }
+        }
+        this.statusList[0].num = res.total_count
+        this.statusList[1].num = this.list.ordered.length
+        this.statusList[2].num = this.list.paid.length
+        this.statusList[3].num = this.list.send.length
+        this.statusList[4].num = this.list.finished.length
+      // console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   },
   mounted() {
     this.arrivalBottom()
@@ -112,7 +222,35 @@ export default {
           line-height: 40px;
           font-weight: 400;
           color: rgba(102, 102, 102, 1);
-          span {
+          .text{
+            position: relative;
+          }
+          .tip{
+            position: absolute;
+            display: inline-block;
+            top: -38%;
+            left: 83%;
+            width: 16px;
+            height: 16px;
+            line-height: 17px;
+            border-radius: 50%;
+            text-align: center;
+            color: #ffffff;
+            font-size: 10px;
+            font-weight: 400;
+            background-color: #f29b87;
+            // border-radius: 15px;
+            // color: #fff;
+            // display: inline-block;
+            // font-size: 12px;
+            // height: 18px;
+            // line-height: 18px;
+            // padding: 0 6px;
+            // text-align: center;
+            // white-space: nowrap;
+            // background-color: #f29b87;
+          }
+          .line {
             position: absolute;
             left: 50%;
             bottom: 0;
@@ -124,10 +262,10 @@ export default {
           }
         }
         .active {
-          font-size: 16px;
-          color: #333333;
+          font-size: 14px;
+          color: #f29b87;
 
-          span {
+          .line {
             width: 56px;
             background: rgba(242, 155, 135, 1);
             transition: 0.1s ease-out;
