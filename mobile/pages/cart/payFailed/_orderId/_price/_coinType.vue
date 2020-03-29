@@ -101,10 +101,10 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       if (this.isLogin){
-        _this.getinfo()
+        _this.getOrder()
       }else{
 
-        _this.getinfo2()
+        _this.getTouristOrder()
       }
     })
   },
@@ -114,7 +114,7 @@ export default {
         name: 'index'
       })
     },
-    getinfo() {
+    getOrder() {
       this.$axios({
         url: '/web/member/order/detail',
         meth: 'get',
@@ -134,7 +134,7 @@ export default {
         })
     },
      // 未登录
-    getinfo2() {
+    getTouristOrder() {
       this.$axios({
         url: '/web/member/order-tourist/detail',
         method: 'get',
