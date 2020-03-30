@@ -569,7 +569,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -1530,7 +1530,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -2018,7 +2018,7 @@ export default {
         taxFee: 0,
         safeFee: 0,
         orderAmount: 0,
-        planDays: '5-12'
+        planDays: ''
       },
       die: false,
       tooInp: '',
