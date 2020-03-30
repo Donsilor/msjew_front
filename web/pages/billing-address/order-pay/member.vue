@@ -1438,182 +1438,182 @@
 
 
         <!-- 发票按钮 -->
-          <div class="invoice">
+        <div class="invoice">
 
-            <div class="invoice-btn">
-              <div v-show="!iconShow" @click="show2">
-                <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
-                <span>{{ $t(`${lang2}.default`) }}</span> 
-              </div>
-              <div v-show="iconShow" @click="show2">
-                <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
-                <span>{{ $t(`${lang2}.Invoicing`) }}</span>
-              </div>
+          <div class="invoice-btn">
+            <div v-show="!iconShow" @click="show2">
+              <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
+              <span>{{ $t(`${lang2}.default`) }}</span> 
             </div>
-            <div class="invoice-box" v-show="invoiceBox">
-              <div class="msg">
-                <div class="msgbox" v-show="content">
-                  <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
-                  
-                  <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
-                  <div class="btn_type">
-                    <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
-                    <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
+            <div v-show="iconShow" @click="show2">
+              <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
+              <span>{{ $t(`${lang2}.Invoicing`) }}</span>
+            </div>
+          </div>
+          <div class="invoice-box" v-show="invoiceBox">
+            <div class="msg">
+              <div class="msgbox" v-show="content">
+                <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
+                
+                <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
+                <div class="btn_type">
+                  <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
+                  <button @click="dianzi(1)" :class="{active:Active}">{{ $t(`${lang2}.ElectronicInvoice`) }}</button>
+                </div>
+                <!-- 纸质 -->
+                <div class="input-line" >
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
+                  <div class="input-box" v-show="isactive == true">
+                    <input
+                      style="text-align:center;"
+                      disabled
+                      v-model="aa"
+                      readonly
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                    />
                   </div>
-                  <!-- 纸质 -->
-                  <div class="input-line" >
-                    <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
-                    <div class="input-box" v-show="isactive == true">
-                      <input
-                        style="text-align:center;"
-                        disabled
-                        v-model="aa"
-                        readonly
-                        :class="{ 'wrong-input': wrongInput.lastname }"
-                        type="text"
-                      />
-                    </div>
-                    <div class="input-box" v-show="Active == true">
-                      <input
-                        style="text-align:center;"
-                        disabled
-                        v-model="bb"
-                        readonly
-                        :class="{ 'wrong-input': wrongInput.lastname }"
-                        type="text"
-                      />
+                  <div class="input-box" v-show="Active == true">
+                    <input
+                      style="text-align:center;"
+                      disabled
+                      v-model="bb"
+                      readonly
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                    />
+                  </div>
+                </div>
+                <!-- 电子 -->
+                <!-- <div class="input-line" >
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
+                  <div class="input-box">
+                    <input
+                      style="text-align:center;"
+                      disabled
+                      v-model="bb"
+                      readonly
+                      :class="{ 'wrong-input': wrongInput.lastname }"
+                      type="text"
+                    />
+                  </div>
+                </div> -->
+                <div class="base-info-line">
+                  <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
+                  <div class="base-info-line-content marriage-choose" >
+                    <el-radio-group v-model="invoice.invoice_type" @change="handle">
+                      <el-radio :label="2">{{ $t(`${lang2}.UnBusinessUnit`) }}</el-radio>
+                      <el-radio :label="1">{{ $t(`${lang2}.BusinessUnit`) }}</el-radio>
+                    </el-radio-group>
+                    <div v-show="redioShow" class="emplty">
+                      {{ $t(`${lang2}.hint1`) }}
                     </div>
                   </div>
-                  <!-- 电子 -->
-                  <!-- <div class="input-line" >
-                    <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
-                    <div class="input-box">
-                      <input
-                        style="text-align:center;"
-                        disabled
-                        v-model="bb"
-                        readonly
-                        :class="{ 'wrong-input': wrongInput.lastname }"
-                        type="text"
-                      />
-                    </div>
-                  </div> -->
-                  <div class="base-info-line">
-                    <div class="base-info-line-title"><span class="star">*</span>{{ $t(`${lang2}.HeaderType`) }}</div>
-                    <div class="base-info-line-content marriage-choose" >
-                      <el-radio-group v-model="invoice.invoice_type" @change="handle">
-                        <el-radio :label="2">{{ $t(`${lang2}.UnBusinessUnit`) }}</el-radio>
-                        <el-radio :label="1">{{ $t(`${lang2}.BusinessUnit`) }}</el-radio>
-                      </el-radio-group>
-                      <div v-show="redioShow" class="emplty">
-                        {{ $t(`${lang2}.hint1`) }}
-                      </div>
-                    </div>
+                </div>
+                
+                <!-- 发票抬头 -->
+                <div class="input-line">
+                  <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
+                  <div
+                    :class="[
+                      { 'border-change': borderChange === 2 },
+                      { 'border-wrong': typeShow }
+                    ]"
+                    class="input-box"
+                  >
+                    <input
+                      v-model="invoice.invoice_title"
+                      :class="{ 'wrong-input': typeShow }"
+                      type="text"
+                      @focus="
+                        borderChange = 2
+                        typeShow = false
+                      "
+                      @blur="borderChange = 0"
+                    />
                   </div>
-                  
-                  <!-- 发票抬头 -->
-                  <div class="input-line">
-                    <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
+                </div>
+                <div v-show="typeShow" class="empltyErr">
+                  {{ $t(`${lang2}.hint2`) }}
+                </div>
+                <!-- 发票税号 -->
+                <div class="input-line">  
+                  <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
+                  <div
+                    :class="[
+                      { 'border-change': borderChange === 3 },
+                      { 'border-wrong': taxShow }
+                    ]"
+                    class="input-box"
+                  >
+                    <input
+                      v-model="invoice.tax_number"
+                      :class="{ 'wrong-input': taxShow }"
+                      type="text"
+                      @focus="
+                        borderChange = 3
+                        taxShow = false
+                      "
+                      @blur="borderChange = 0"
+                    />
+                  </div>
+                </div>
+                <div v-show="taxShow" class="empltyErr">
+                  {{ $t(`${lang2}.hint3`) }}
+                </div>
+                <!-- 邮箱 -->
+                <div class="email-box">
+                  <div class="input-line" v-show="Active == true">
+                    <div class="label"><span class="star">*</span>{{ $t(`${lang2}.email`) }}</div>
                     <div
                       :class="[
-                        { 'border-change': borderChange === 2 },
-                        { 'border-wrong': typeShow }
+                        { 'border-change': borderChange === 1 },
+                        { 'border-wrong': mailShow }
                       ]"
                       class="input-box"
                     >
                       <input
-                        v-model="invoice.invoice_title"
-                        :class="{ 'wrong-input': typeShow }"
+                        v-model="invoice.email"
+                        :class="{ 'wrong-input': mailShow }"
                         type="text"
                         @focus="
-                          borderChange = 2
-                          typeShow = false
+                          borderChange = 1
+                          mailShow = false
                         "
                         @blur="borderChange = 0"
                       />
                     </div>
                   </div>
-                  <div v-show="typeShow" class="empltyErr">
-                    {{ $t(`${lang2}.hint2`) }}
-                  </div>
-                  <!-- 发票税号 -->
-                  <div class="input-line">  
-                    <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
-                    <div
-                      :class="[
-                        { 'border-change': borderChange === 3 },
-                        { 'border-wrong': taxShow }
-                      ]"
-                      class="input-box"
-                    >
-                      <input
-                        v-model="invoice.tax_number"
-                        :class="{ 'wrong-input': taxShow }"
-                        type="text"
-                        @focus="
-                          borderChange = 3
-                         taxShow = false
-                        "
-                        @blur="borderChange = 0"
-                      />
-                    </div>
-                  </div>
-                  <div v-show="taxShow" class="empltyErr">
-                    {{ $t(`${lang2}.hint3`) }}
-                  </div>
-                  <!-- 邮箱 -->
-                  <div class="email-box">
-                    <div class="input-line" v-show="Active == true">
-                      <div class="label"><span class="star">*</span>{{ $t(`${lang2}.email`) }}</div>
-                      <div
-                        :class="[
-                          { 'border-change': borderChange === 1 },
-                          { 'border-wrong': mailShow }
-                        ]"
-                        class="input-box"
-                      >
-                        <input
-                          v-model="invoice.email"
-                          :class="{ 'wrong-input': mailShow }"
-                          type="text"
-                          @focus="
-                            borderChange = 1
-                            mailShow = false
-                          "
-                          @blur="borderChange = 0"
-                        />
-                      </div>
-                    </div>
-                    <!-- <div v-show="emailShow" class="empltyErr">
-                      {{ $t(`${lang2}.hint4`) }}
-                    </div> -->
-                    <div v-show="mailShow" class="empltyErr">
-                      {{ $t(`${lang2}.hint5`) }}
-                    </div>
-                  </div>
-                  <div class="total">
-                    <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
-                    <div class="totle-price">
-                      <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
-                    </div>
-                  </div>
-                  <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
-                  <div class="btn">
-                    <button @click="confirm">{{ $t(`${lang2}.confirm`) }}</button>
-                  </div>
-                </div>
-                <div class="msgbox" v-show="gou">
-                  <div class="gou-img">
-                    <img src="../../../static/order/ticks.png" alt="">
-                    <p>{{ $t(`${lang2}.Submitted`) }}</p>
-                  </div>
-                  <!-- <div class="btn"> Submitted
-                    <button @click="complete">{{ $t(`${lang2}.carryOut`) }}</button>
+                  <!-- <div v-show="emailShow" class="empltyErr">
+                    {{ $t(`${lang2}.hint4`) }}
                   </div> -->
+                  <div v-show="mailShow" class="empltyErr">
+                    {{ $t(`${lang2}.hint5`) }}
+                  </div>
                 </div>
+                <div class="total">
+                  <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
+                  <div class="totle-price">
+                    <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                  </div>
+                </div>
+                <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
+                <div class="btn">
+                  <button @click="confirm">{{ $t(`${lang2}.confirm`) }}</button>
+                </div>
+              </div>
+              <div class="msgbox" v-show="gou">
+                <div class="gou-img">
+                  <img src="../../../static/order/ticks.png" alt="">
+                  <p>{{ $t(`${lang2}.Submitted`) }}</p>
+                </div>
+                <!-- <div class="btn"> Submitted
+                  <button @click="complete">{{ $t(`${lang2}.carryOut`) }}</button>
+                </div> -->
               </div>
             </div>
           </div>
+        </div>
       </div>
       <div class="right-info">
         <!-- <div v-show="!makeGay" class="coupon">
@@ -2768,6 +2768,9 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
+      if(this.iconShow){
+        invoice = this.invoice
+      }
       // console.log("arr",arr)
       const data = {
         cart_ids: arr.join(','),
@@ -2780,9 +2783,7 @@ export default {
         // ? this.orderAddress.email
         // : this.orderEmail,
       }
-      if(this.iconShow){
-        invoice = this.invoice
-      }
+      
       // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
