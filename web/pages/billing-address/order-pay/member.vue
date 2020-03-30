@@ -201,7 +201,7 @@
                     v-for="(p, index) in phoneJson"
                     :key="index"
                     :value="p"
-                    >{{ psn ? p.en :psn ? p.cn :p.zh }}</option
+                    >{{ psn ? p.en :psn ? p.cn :p.zh }}{{ p.phone_code }}</option
                   >
                 </select>
                 <i class="iconfont iconxiala" />
@@ -1812,7 +1812,7 @@ export default {
     }
   },
   created() {
-    console.log("ssss",this.pathTakeIds)
+    // console.log("ssss",this.pathTakeIds)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
