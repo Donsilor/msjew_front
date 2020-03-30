@@ -489,7 +489,7 @@ export default {
         productAmount: 0, // 商品总价 ,
         safeFee: 0, // 保险金额 ,
         taxFee: 0, // 税费金额
-        planDays: `5-12`
+        planDays: ``
       }
     },
     showCouponTips() {
@@ -721,6 +721,7 @@ export default {
           // console.log("费用",res)
           this.canSubmit = true
           this.allFee = res
+          this.planDays = this.allFee.planDays
           // this.info=res.details
           // console.log("费用>>>>>>>>",this.info)
         })
@@ -728,6 +729,7 @@ export default {
           this.canSubmit = false
           this.$toast.show(err.message)
           this.allFee = this.defaultAllFeeInfo()
+          
           // console.log("ggg",this.allFee)
         })
     },
