@@ -205,7 +205,7 @@ export default {
 
       if(this.$store.state.language === 'zh_CN'){
         this.country={areaId:'7',areaName: '中国'}
-        this.countryList=[{ areaId:'7',areaName: '中国'}]
+        // this.countryList=[{ areaId:'7',areaName: '中国'}]
         this.getListTwo()
       }
     }
