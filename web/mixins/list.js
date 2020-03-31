@@ -19,7 +19,8 @@ export default {
       listData: {},
       currentPage4: 1,
       totalCount:1,
-      page:1
+      page:1,
+      scrollTop:0
     }
   },
   computed: {
@@ -154,6 +155,17 @@ export default {
     handleCurrentChange(val) {
       this.page = val
       this.getPageInfo()
+      const topB = document.getElementsByClassName('layout-box')[0];
+        const that = this
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 4)
+          // topB.scrollTop = that.scrollTop + ispeed
+          topB.scrollTop = 120
+          console.log(topB.scrollTop)
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
     },
     defaultPageInfo() {
       return {
