@@ -2257,7 +2257,7 @@ export default {
             email: this.addressData.email,
             country_id: this.country.areaId,
             province_id: this.province.areaId,
-            cityId: this.city.areaId,
+            city_id: this.city.areaId,
             address_details: this.addressData.address_details,
             zip_code: this.addressData.zip_code
           })
@@ -2353,7 +2353,7 @@ export default {
             email: this.addressData.email,
             country_id: this.country.areaId,
             province_id: this.province.areaId,
-            cityId: this.city.areaId,
+            city_id: this.city.areaId,
             address_details: this.addressData.address_details,
             zip_code: this.addressData.zip_code
           })
