@@ -232,7 +232,8 @@ export default {
       this.list = JSON.parse(storage.get('myCartList', 0))
 
       this.stepPayPending = false
-      this.stepPayVerify  = true
+      this.stepPayVerify  = false
+      this.stepPaySuccess = true
       if (this.isLogin) {
           this.getOrder()
       }else{
