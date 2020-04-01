@@ -82,7 +82,7 @@ export default {
       type: 1,
 
       listMethod: 'get',
-      listUrl: `/wap/goodsComments/getGoodsComments`,
+      // listUrl: `/wap/goodsComments/getGoodsComments`,
       activeIds: []
     }
   },
