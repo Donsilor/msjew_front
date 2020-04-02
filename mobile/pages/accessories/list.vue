@@ -94,7 +94,7 @@ export default {
   //   }
   // },
   mounted() {
-    console.log("this.",this.seoInfo)
+    // console.log("this.",this.seoInfo)
     if (this.$route.query.actIndex) {
       this.actIndex = parseFloat(this.$route.query.actIndex)
     }

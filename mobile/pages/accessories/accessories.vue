@@ -100,9 +100,6 @@ export default {
         console.log(err)
       })
   },
-  mounted(){
-    console.log("this.info",this.data)
-  },
   methods: {
     showScroll(e) {
       // console.log(e)

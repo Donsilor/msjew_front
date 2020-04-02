@@ -258,9 +258,6 @@ export default {
     inSale() {
       return this.goodInfo.goodsStatus === 2
     }
-  },
-  mounted(){
-    console.log("seo",this.goodInfo.goodsName)
   }
 }
 </script>
