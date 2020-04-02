@@ -638,7 +638,7 @@
           <!-- 发票按钮 -->
           <div class="invoice">
 
-            <div class="invoice-btn">
+            <!-- <div class="invoice-btn">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang3}.default`) }}</span> 
@@ -647,7 +647,7 @@
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
                 <span>{{ $t(`${lang3}.Invoicing`) }}</span>
               </div>
-            </div>
+            </div> -->
             <div class="invoice-box" v-show="invoiceBox">
               <div class="msg">
                 <div class="msgbox" v-show="content">
@@ -1599,7 +1599,7 @@
           <!-- 发票按钮 -->
           <div class="invoice">
 
-            <div class="invoice-btn">
+            <!-- <div class="invoice-btn">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang3}.default`) }}</span> 
@@ -1608,7 +1608,7 @@
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
                 <span>{{ $t(`${lang3}.Invoicing`) }}</span>
               </div>
-            </div>
+            </div> -->
             <div class="invoice-box" v-show="invoiceBox">
               <div class="msg">
                 <div class="msgbox" v-show="content">

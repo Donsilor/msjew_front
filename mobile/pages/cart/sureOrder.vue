@@ -122,7 +122,7 @@
           ></textarea>
         </div>
         <!-- 开具发票 -->
-        <div class="invoice">
+        <!-- <div class="invoice">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -130,7 +130,7 @@
               <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
