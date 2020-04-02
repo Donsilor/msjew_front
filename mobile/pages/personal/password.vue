@@ -111,7 +111,14 @@ export default {
             }
           })
           .then(res => {
-            _this.$store.dispatch('logout')
+            // _this.$store.dispatch('logout')
+            localStorage.setItem("refreshToken", res.refresh_token);
+            localStorage.setItem("accessToken", res.access_token);
+            let nowDate = parseInt((new Date()).getTime() / 1000)
+            localStorage.setItem("refreshTime", nowDate);
+
+            this.$store.commit('setToken', res.access_token)
+            this.$store.commit('setUserInfo', res.member);
             this.$router.push({
               name: 'personal-successPassword'
             })

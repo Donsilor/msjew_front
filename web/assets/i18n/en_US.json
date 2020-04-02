@@ -702,7 +702,7 @@
       "info": "Account",
       "psw8": "Entered passwords differ",
       "psw9": "Enter new password of 6-18 characters",
-      "success": "Reset",
+      "success": "The password is reset successfully. You do not need to log in this time. You need to log in with a new password next time.",
       "email": "Login Email：",
       "lastName": "Last Name",
       "firstName": "First Name",
@@ -771,6 +771,7 @@
       "orderDetail": "Order Details",
       "cancelOrder": "Cancel Order",
       "toPay": "Pay Now",
+      "toPayWait": "Processing",
       "wireTransferGuide": "Wire Transfer Guide",
       "orderPrice": "Total Order Amount",
       "confirmReceipt": "Confirm Receipt",
@@ -929,6 +930,8 @@
     "payQuestion": "Payment error"
   },
   "finishPay": {
+    "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+    "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
     "handing": "Order processing ......",
     "comeBack": "Return to product page",
     "confirmOrder": "Shopping cart",

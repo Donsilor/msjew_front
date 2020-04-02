@@ -282,7 +282,7 @@
             {{ lang.toPay }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20"
             class="btn-white"
             @click="cancelOrder"
           >

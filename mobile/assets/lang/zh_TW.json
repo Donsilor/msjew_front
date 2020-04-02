@@ -199,9 +199,12 @@
       "type4Text": "網上付款、方便、快捷",
       "payType5": "電匯",
       "type5Text": "以電匯方式付款將享有1.5%折扣優惠",
-      "type5Text2": "注意，電子支票並非電匯"
+      "type5Text2": "注意，電子支票並非電匯",
+      "paytip":"由於Paydallor不支持“人民幣”和“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！"
     },
     "paySuccess": {
+      "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",
+      "PayPending2":"您可以先關閉此頁面，稍後我們將以郵件/短信方式通知您！",
       "handing":"訂單處理中.....",
       "title": "訂單支付成功",
       "orderNo": "訂單編號",
@@ -384,10 +387,10 @@
     },
     "successPassword": {
       "title": "重置成功",
-      "p1": "您的密碼已經成功重置，請以新的密碼登入",
-      "p2": "",
-      "p3": "秒後將自動退出系統並返回登入界面",
-      "goLogin": "立即登入"
+      "p1": "您的密碼已經成功重置，此次不需登錄",
+      "p2": "下次需使用新密碼進行登錄",
+      "p3": "秒後將自動返回個人中心",
+      "goLogin": "立即返回"
     },
     "editAddress": {
       "header1": "新增地址",
@@ -401,7 +404,7 @@
       "mailbox": "*電郵地址",
       "mailboxText1": "請輸入電郵地址",
       "mailboxText2": "請輸入正確的電郵地址",
-      "phone": "*電話",
+      "phone": "電話",
       "phoneText1": "請輸入電話號碼",
       "phoneText2": "請輸入正確的電話號碼",
       "details": "*詳細地址",
@@ -485,6 +488,7 @@
       "transPreferFee": "電匯支付優惠",
       "orderCount": "訂單總額",
       "toPay": "去付款",
+      "toPayWait": "付款中",
       "cancelOrder": "取消訂單",
       "submit": "提交",
       "waitingPay": "待付款",

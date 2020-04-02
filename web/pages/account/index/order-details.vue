@@ -117,7 +117,7 @@
           :key="_index"
           class="goods-details"
         >
-          <nuxt-link :to="goToDetail(d)">
+          <nuxt-link :to="goToDetail(d)" target="_blank">
             <div class="t1">
               <div class="good-img">
                 <img :src="IMG_URL + d.goodsImages" />
@@ -528,11 +528,11 @@ export default {
   width: 100%;
   text-align: left;
   .od-top {
-    width: 940px;
+    // width: 940px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 22px;
+    margin-bottom: 50px;
     div:nth-child(1) {
       height: 17px;
       line-height: 17px;
@@ -540,51 +540,54 @@ export default {
       color: rgba(242, 155, 135, 1);
     }
     div:nth-child(2) {
-      width: 424+25+48px;
+      width: 424+25+48+53+100px;
       display: flex;
       justify-content: space-between;
       position: relative;
       p {
-        width: 48px;
+        // width: 80px;
         text-align: center;
         span:nth-child(1) {
           display: block;
-          width: 16px;
-          height: 16px;
+          width: 35px;
+          height: 35px;
           background: rgba(242, 155, 135, 1);
           border-radius: 50%;
           color: #ffffff;
-          line-height: 16px;
+          line-height: 35px;
           margin: 0 auto 5px;
         }
         span:nth-child(2) {
           line-height: 12px;
           height: 12px;
-          font-size: 12px;
+          font-size: 15px;
           color: rgba(242, 155, 135, 1);
         }
       }
       .top-line {
         position: absolute;
-        width: 80px;
+        width: 112px;
         height: 2px;
-        top: 8px;
-        left: 40px;
+        top: 16px;
+        left: 50px;
         .top-line-line {
-          width: 80px;
+          width: 112px;
           height: 2px;
           background: rgba(242, 155, 135, 1);
           border-radius: 1px;
         }
       }
       .top-line:nth-child(7) {
-        left: 40+80+30px;
+        // left: 40+80+30+22+40+6px;
+        left:201px
       }
       .top-line:nth-child(8) {
-        left: 40+80+30+80+35px;
+        // left: 40+80+30+80+35+35+56+12px;
+        left:350px
       }
       .top-line:nth-child(9) {
-        left: 40+80+30+80+30+80+40px;
+        // left: 40+80+30+80+30+80+40+45+75+23px;
+        left:502px;
         background-color: #e6e6e6;
       }
     }

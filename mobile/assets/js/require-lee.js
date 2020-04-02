@@ -27,7 +27,7 @@ export const RegAlphaNum = /(^[0-9]+$)|(^[a-zA-Z]+$)|(^[0-9a-zA-Z]+$)/
 
 // 手机号码
 export const RegMobile = /^[0-9]*$/ 
-// export const RegMobile = /^1[\d]{10}$/
+export const RegMobiles = /^1[\d]{10}$/
 
 // 固话号码
 export const RegTelephone = /^[0-9]{1,20}$/

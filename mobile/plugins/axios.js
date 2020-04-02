@@ -8,7 +8,7 @@ export default function ({
         config.headers['x-api-language'] = store.state.language || ''
         config.headers['x-api-area'] = store.state.areaId || '' // 当前所属地区
         config.headers['x-api-server'] = process.server ? 1 : 0 //是否是服务器端请求
-        config.headers['x-api-platform'] = 'wap'
+        config.headers['x-api-platform'] = 2 //2=>移动端
         // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
         return config
     })
