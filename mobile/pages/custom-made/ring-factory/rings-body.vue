@@ -229,6 +229,25 @@
 <script>
 import Mx from './ring-mixin'
 export default {
+  head() {
+    return {
+      title: this.goodInfo.goodsName,
+      meta: [
+        {
+          name: 'title',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.goodInfo.goodsName,
+        }
+      ]
+    }
+  },
   mixins: [Mx],
   computed: {
     canAddCart() {

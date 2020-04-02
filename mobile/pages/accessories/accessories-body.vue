@@ -211,6 +211,25 @@
 <script>
 import Mx from './accessories-mixin'
 export default {
+   head() {
+    return {
+      title: this.goodInfo.goodsName,
+      meta: [
+        {
+          name: 'title',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.goodInfo.goodsName,
+        }
+      ]
+    }
+  },
   mixins: [Mx],
   data(){
     return{
@@ -239,6 +258,9 @@ export default {
     inSale() {
       return this.goodInfo.goodsStatus === 2
     }
+  },
+  mounted(){
+    console.log("seo",this.goodInfo.goodsName)
   }
 }
 </script>

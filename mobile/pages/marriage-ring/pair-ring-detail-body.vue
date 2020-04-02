@@ -259,6 +259,25 @@
 <script>
 import Mx from './pair-mixin'
 export default {
+  head() {
+    return {
+      title: this.goodInfo.name,
+      meta: [
+        {
+          name: 'title',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.goodInfo.goodsName,
+        }
+      ]
+    }
+  },
   mixins: [Mx],
   data(){
     return{
@@ -294,6 +313,9 @@ export default {
         this.firstRing.goodsStatus === 2 && this.secondRing.goodsStatus === 2
       )
     }
+  },
+  mounted(){
+    console.log("gggg",this.goodInfo)
   }
 }
 </script>

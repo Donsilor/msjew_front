@@ -5,6 +5,7 @@
       @addCart="addCart"
       @addWish="addWish"
       @removeWish="removeWish"
+      
     ></detail-body>
     <div v-show="isHalf" class="scroll-to-top" @click="goTop()">
       <i class="iconfont iconzhiding"></i>
@@ -98,6 +99,9 @@ export default {
       .catch(err => {
         console.log(err)
       })
+  },
+  mounted(){
+    console.log("this.info",this.data)
   },
   methods: {
     showScroll(e) {

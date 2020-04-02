@@ -843,8 +843,9 @@ export default {
     ClarityPopover
   },
   mixins: [List, ListPage, Operate],
+  props:['seo'],
   head() {
-    return this.seoInfo || {
+    return this.seo || {
       title: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網',
       meta: [
         {
