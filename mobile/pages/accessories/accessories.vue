@@ -5,6 +5,7 @@
       @addCart="addCart"
       @addWish="addWish"
       @removeWish="removeWish"
+      
     ></detail-body>
     <div v-show="isHalf" class="scroll-to-top" @click="goTop()">
       <i class="iconfont iconzhiding"></i>

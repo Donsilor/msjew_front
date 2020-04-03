@@ -129,6 +129,7 @@
         { padding: newAddress ? '20px 51px 0 36px' : '0' }
       ]"
       class="new-address"
+      id="addbox"
     >
       <div class="new-address-title">
         <div class="na-line" />
@@ -1888,6 +1889,7 @@ export default {
         is_electronic:"0",
         email:''
       },
+      scrollTop:0 
     }
   },
   computed: {
@@ -2278,6 +2280,20 @@ export default {
         })
     },
     changeAddressInfo(obj) {
+      // const topB = document.getElementsByClassName('layout-box')[0];
+      // const that = this
+      // let timer = setInterval(() => {
+      //   let ispeed = Math.floor(-that.scrollTop / 5)
+      //   topB.scrollTop = 500
+      //   if (that.scrollTop === 0) {
+      //     clearInterval(timer)
+      //   }
+      // }, 22)
+      // document.getElementById('addbox').scrollIntoView({
+      //   block: 'start',
+      //   inline: 'nearest',
+      //   behavior: 'smooth'
+      // })
       // console.log('需要修改的对象：', obj);
       this.isEdit = true
       const data = this.$helpers.cloneObject(obj)
