@@ -122,7 +122,7 @@
           ></textarea>
         </div>
         <!-- 开具发票 -->
-        <div class="invoice">
+        <!-- <div class="invoice">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -130,7 +130,7 @@
               <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
@@ -489,7 +489,7 @@ export default {
         productAmount: 0, // 商品总价 ,
         safeFee: 0, // 保险金额 ,
         taxFee: 0, // 税费金额
-        planDays: `1-12`
+        planDays: `5-12`
       }
     },
     showCouponTips() {
@@ -879,7 +879,7 @@ export default {
           url: `/web/member/order-tourist/create`,
           data: {
             goodsCartList:data,
-            invoice:this.$route.query.invoice,
+            invoice:this.$route.params.invoice,
             tradeType:'wap',
             coinType:this.$store.state.coin,
             returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328

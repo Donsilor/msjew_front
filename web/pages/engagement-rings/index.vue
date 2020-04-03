@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-   <!-- <section class="banner">
+   <section class="banner">
       <el-carousel
         trigger="click"
         arrow="never"
@@ -47,7 +47,7 @@
           </div>
         </el-carousel-item>
       </el-carousel>
-    </section> -->
+    </section>
     <section class="design">
       <h1 class="section-title">
         {{ $t(`${lang}.howToDesignEngagementRing`) }}
@@ -297,6 +297,7 @@ export default {
       })
   },
   mounted() {
+    
     const _this = this
     _this.$nextTick(() => {
       const Swiper = require('swiper/dist/js/swiper.js')

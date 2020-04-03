@@ -16,7 +16,11 @@ export default {
       pageInfo: null,
 
       requestings: {}, // 正在请求的页码
-      listData: {}
+      listData: {},
+      currentPage4: 1,
+      totalCount:1,
+      page:1,
+      scrollTop:0
     }
   },
   computed: {
@@ -37,18 +41,20 @@ export default {
     allData() {
       const page_count =
         this.pageInfo && this.pageInfo.page_count ? this.pageInfo.page_count : 0
+      let page = this.pageInfo && this.pageInfo.page ? this.pageInfo.page : 1
       const listData = this.listData
       let result = []
 
       if (!page_count) {
         return result
       }
-      for (let n = 1; n < page_count + 1; n++) {
-        if (!listData.hasOwnProperty(n)) {
-          continue
-        }
-        result = result.concat(listData[n])
-      }
+      // for (let n = 1; n < page_count + 1; n++) {
+      //   if (!listData.hasOwnProperty(n)) {
+      //     continue
+      //   }
+      //   result = result.concat(listData[n])
+      // }
+      result = result.concat(listData[page])
       return result
     },
     requestingListData() {
@@ -68,7 +74,7 @@ export default {
       if (
         pageInfo &&
         pageInfo.page > 0 &&
-        pageInfo.page >= pageInfo.page_count
+        pageInfo.page > pageInfo.page_count
       ) {
         result = false
       }
@@ -125,27 +131,48 @@ export default {
     },
     // 下一页码
     nextCurrPageNum() {
-      let page =
-        this.pageInfo && this.pageInfo.page ? this.pageInfo.page : 1
-      if (this.pageInfo === null || this.pageInfo.page_count === null) {
-        // 首次请求
+      let page = this.page
+      if (this.pageInfo === null || this.pageInfo.page_count === null){
         page = 1
-      } else if (page < this.pageInfo.page_count) {
-        page++
-      } else {
-        console.log('已到最后一页')
-        page = null
       }
       return page
+      // let page =
+      //   this.pageInfo && this.pageInfo.page ? this.pageInfo.page : 1
+      // if (this.pageInfo === null || this.pageInfo.page_count === null) {
+      //   // 首次请求
+      //   page = 1
+      // } else if (page < this.pageInfo.page_count) {
+      //   page++
+      // } else {
+      //   console.log('已到最后一页')
+      //   page = null
+      // }
+      // return page
     }
   },
   methods: {
+    // 当前点击的页码
+    handleCurrentChange(val) {
+      this.page = val
+      this.getPageInfo()
+      const topB = document.getElementsByClassName('layout-box')[0];
+        const that = this
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 4)
+          // topB.scrollTop = that.scrollTop + ispeed
+          topB.scrollTop = 120
+          console.log(topB.scrollTop)
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+    },
     defaultPageInfo() {
       return {
         total_count: 0, // 数据总数量
         page_size: 10, // 每页数量
         page_count: null, // 最大页码
-        page: 0 // 当前页码
+        page: 1 // 当前页码
       }
     },
     // 改变排序方式，重新搜索
@@ -154,6 +181,8 @@ export default {
       this.research()
     },
     setPageInfo(info = {}) {
+      this.totalCount = Number(info.total_count)
+      this.page = Number(info.page_count)
       // console.log('setPageInfo============>', JSON.stringify(info))
       this.pageInfo = JSON.parse(JSON.stringify(info))
     },
@@ -211,7 +240,7 @@ export default {
       this.getPageInfo(this.nextCurrPageNum)
     },
     // 请求当前页数据
-    getPageInfo(page = 1) {
+    getPageInfo(page = this.page) {
       const _this = this
       const keyword = _this.keyword
 
@@ -230,7 +259,7 @@ export default {
       }
 
       const options = {
-        cancelToken: new CancelToken(cancel => {
+        cancelToken: new CancelToken(cancel => { 
           _this.addRequesting(reqMark, cancel)
         }),
         data: {

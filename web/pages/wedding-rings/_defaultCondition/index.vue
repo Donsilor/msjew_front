@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-content v-if="defaultCondition" :default-condition="defaultCondition"></list-content>
+    <list-content v-if="defaultCondition" :default-condition="defaultCondition" :seo="this.seoInfo"></list-content>
     <sole-out v-else></sole-out>
   </div>
 </template>
@@ -83,6 +83,28 @@ export default {
       defaultCondition:
         conditionMaps[this.$route.params.defaultCondition || 'all'] || {}
     }
+  },
+  async asyncData({ $axios, route, store, app }) {
+    const seoInfo = await app.$getSeoInfo(3)
+
+    return $axios({
+      method: 'get',
+      url: '/web/goods/ring/web-site',
+      params: {
+        type: 3
+      }
+    })
+      .then(res => {
+        var data = res.data
+        return {
+          seoInfo,
+          ad: data.advert,
+          webSite: data.webSite
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
 </script>

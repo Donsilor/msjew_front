@@ -63,6 +63,7 @@
       },
 
       layoutScroll(e) {
+        // console.log(e.target.scrollTop)
         const topBar = this.$refs['top-bar']
         if (e.target.scrollTop > 0) {
           topBar.fixed(true)
