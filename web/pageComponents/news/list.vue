@@ -1,6 +1,6 @@
 <template>
   <layout>
-    <div class="content">
+    <div class="content page-content">
       <div class="article-title">三级分类标题</div>
       <div class="article-content">
         <div class="list active">
@@ -46,6 +46,16 @@
           <div class="release-time">2323.26.52</div>
         </div>
       </div>
+
+      <div class="page-box">
+        <el-pagination
+          @current-change=""
+          :current-page="currentPage4"
+          :page-size="page_size"
+          layout="total, prev, pager, next, jumper"
+          :total="totalCount">
+        </el-pagination>
+      </div>
     </div>
   </layout>
 </template>
@@ -59,7 +69,10 @@ export default {
   },
   data() {
     return {
-      lang
+      lang,
+      currentPage4: 1,
+      page_size: 2,
+      totalCount: 10
     }
   },
   methods: {
@@ -67,6 +80,9 @@ export default {
       this.$router.push({
         path: url
       })
+    },
+    handleCurrentChange(){
+      console.log(1111)
     }
   }
 }
@@ -133,6 +149,17 @@ export default {
   line-height: 76px;
   font-size: 14px;
   float: right;
+}
+
+.page-box{
+  height: 40px;
+  text-align: center;
+  margin: 80px auto;
+
+}
+
+.el-pagination /deep/ .btn-next, .el-pagination /deep/ .btn-prev{
+  background-color: #fff !important;
 }
 
 </style>
