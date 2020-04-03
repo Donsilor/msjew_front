@@ -141,6 +141,13 @@ export default {
     },
     goPaySuccess() {
       this.isPay = true
+      console.log("aaa",this.typeIndex)
+      if(this.info.coinType === 'USD'){
+        if(this.typeIndex == 1){
+          this.$toast.show(this.lang.paytip)
+          return
+        }
+      }
       let pay = 0
       if(this.typeIndex == 0){
         pay = 6
@@ -149,12 +156,7 @@ export default {
       }else if(this.typeIndex == 5){
         pay = 7
       }
-      if(this.info.coinType === 'USD'){
-        if(pay = 8){
-          this.$toast.show(this.lang.paytip)
-        }
-        return
-      }
+      
       // if (this.typeIndex === 5) {
       //   pay = 1
       // } else if (this.typeIndex === 1 || this.typeIndex === 0) {
