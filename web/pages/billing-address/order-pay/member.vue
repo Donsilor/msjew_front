@@ -975,6 +975,7 @@
         { padding: newAddress ? '20px 51px 0 36px' : '0' }
       ]"
       class="new-address"
+      id="addbox"
     >
       <div class="new-address-title">
         <div class="na-line" />
@@ -2179,11 +2180,11 @@ export default {
       //     clearInterval(timer)
       //   }
       // }, 22)
-      // document.getElementById('addbox').scrollIntoView({
-      //   block: 'start',
-      //   inline: 'nearest',
-      //   behavior: 'smooth'
-      // })
+      document.getElementById('addbox').scrollIntoView({
+        block: 'start',
+        inline: 'nearest',
+        behavior: 'smooth'
+      })
       // console.log('需要修改的对象：', obj);
       this.isEdit = true
       const data = this.$helpers.cloneObject(obj)
