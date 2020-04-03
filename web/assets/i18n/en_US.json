@@ -887,7 +887,7 @@
     "price": "Amount",
     "option": "Operation",
     "customMade": "Custom",
-    "Invalid": "Expired Product",
+    "Invalid": "Expired",
     "allTick": "All",
     "delete": "Delete",
     "cleanInvalidBaby": "Clear Expired Product",
