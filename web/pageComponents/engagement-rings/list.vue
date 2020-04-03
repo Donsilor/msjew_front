@@ -263,7 +263,7 @@ export default {
     return {
       lang,
       listUrl: '/web/goods/style/search',
-      page_size: 8,
+      page_size: 16,
       styleOptions: this.CONDITION_INFO.style.rings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
