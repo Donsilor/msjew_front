@@ -1815,13 +1815,13 @@ export default {
     }
   },
   created() {
-    console.log("ssss",this.pathTakeIds)
+    // console.log("ssss",this.pathTakeIds)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {        
           this.good = res
-          console.log("res",res)
+          // console.log("res",res)
           resolve()
         })
         .catch(err => {
@@ -1929,7 +1929,7 @@ export default {
             //   }
             // }
             this.orderAddress = this.address[0]
-            console.log("地址",this.orderAddress)
+            // console.log("地址",this.orderAddress)
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
@@ -2551,7 +2551,7 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
-      console.log("this.good",this.good)
+      // console.log("this.good",this.good)
       const data = arr.join(',')
       const datas={
         addressId: this.orderAddress.id,

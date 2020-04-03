@@ -53,7 +53,7 @@
         />
       </div>
     </div>
-    <div class="addr-mid dle-btn">
+    <div class="addr-mid dle-btn" id="addbox">
       <div v-show="!isShow" style="cursor: pointer;" class="middle-btn-show" @click="newAddress()">
         + {{ $t(`${lang}.newAddress`) }}
       </div>
@@ -173,7 +173,7 @@
             {{ $t(`${lang}.save`) }}
           </div>
         </div>
-        <div v-show="isEdit && isShow" class="new-addr">
+        <div v-show="isEdit && isShow" class="new-addr" >
           <div class="new-addr-name">
             <div>
               <input
@@ -615,6 +615,11 @@ export default {
     },
     // 修改地址
     changeAddress(obj) {
+      document.getElementById('addbox').scrollIntoView({
+        block: 'start',
+        inline: 'nearest',
+        behavior: 'smooth'
+      })
       // console.log("ddasdas",obj)
       this.resetAddress()
       this.clone = this.$helpers.cloneObject(obj)
