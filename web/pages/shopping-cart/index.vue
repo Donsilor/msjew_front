@@ -201,24 +201,24 @@ export default {
   beforeMount() {
     this.getList()
   },
-  mounted(){
-   window.addEventListener('scroll', this.handleScroll, true)
-  },
+  // mounted(){
+  //  window.addEventListener('scroll', this.handleScroll, true)
+  // },
   methods: {
-    handleScroll(e){
-        // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
-        const that = this
-        let scrollTop = e.target.scrollTop;
-        // console.log("scrollTop",scrollTop)
-        that.scrollTop = scrollTop
-        if (that.scrollTop > 150) {
-          this.Settlement1 = false
-          this.Settlement2 = true
-        } else {
-          this.Settlement1 = true
-          this.Settlement2 = false
-        }
-    },
+    // handleScroll(e){
+    //     // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
+    //     const that = this
+    //     let scrollTop = e.target.scrollTop;
+    //     // console.log("scrollTop",scrollTop)
+    //     that.scrollTop = scrollTop
+    //     if (that.scrollTop > 150) {
+    //       this.Settlement1 = false
+    //       this.Settlement2 = true
+    //     } else {
+    //       this.Settlement1 = true
+    //       this.Settlement2 = false
+    //     }
+    // },
     // handleScroll(){
     //   console.log('滚动条发生滚动了')
     //   this.Settlement1 = false

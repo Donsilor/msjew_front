@@ -2179,11 +2179,11 @@ export default {
       //     clearInterval(timer)
       //   }
       // }, 22)
-      document.getElementById('addbox').scrollIntoView({
-        block: 'start',
-        inline: 'nearest',
-        behavior: 'smooth'
-      })
+      // document.getElementById('addbox').scrollIntoView({
+      //   block: 'start',
+      //   inline: 'nearest',
+      //   behavior: 'smooth'
+      // })
       // console.log('需要修改的对象：', obj);
       this.isEdit = true
       const data = this.$helpers.cloneObject(obj)
