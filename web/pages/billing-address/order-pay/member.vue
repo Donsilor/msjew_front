@@ -2171,17 +2171,9 @@ export default {
         })
     },
     changeAddressInfo(obj) {
-      // const topB = document.getElementsByClassName('layout-box')[0];
-      // const that = this
-      // let timer = setInterval(() => {
-      //   let ispeed = Math.floor(-that.scrollTop / 5)
-      //   topB.scrollTop = 500
-      //   if (that.scrollTop === 0) {
-      //     clearInterval(timer)
-      //   }
-      // }, 22)
+      // 点击修改滚顶到地址编辑模块
       document.getElementById('addbox').scrollIntoView({
-        block: 'start',
+        block: 'center',
         inline: 'nearest',
         behavior: 'smooth'
       })
