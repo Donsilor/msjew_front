@@ -16,7 +16,7 @@
                   item.groupType !== 0
                 )
               "
-              class="mod-item" 
+              class="mod-item"
             >
 			<div @click="godetails(item, index)">
               <img :src="imageStrToArray(item.goodsImages)[0]" />
@@ -64,7 +64,7 @@
                   class="select-icon"
                   @click.stop="isSelect(item, index)"
                 >
-                  <i v-if="!getStatus(item, index)" class="icon iconfont" :class="{ icongou: item.isSelect }"></i>
+                  <i v-if="getStatus(item, index)" class="icon iconfont" :class="{ icongou: item.isSelect }"></i>
                 </div>
                 <a
                   v-if="!getStatus(item, index)"
@@ -137,7 +137,7 @@ export default {
   created() {},
   mounted() {
     this.$nextTick(() => {
-      
+
       if (this.isLogin) {
         this.getList()
       } else {
