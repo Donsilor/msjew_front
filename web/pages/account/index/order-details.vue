@@ -257,6 +257,12 @@
                 {{ invoice.taxNumber }}
               </div>
             </div>
+            <div class="info-line" v-show="invoice.isElectronic == 1">
+              <div class="label"> {{ $t(`${lang_invoice}.email`) }}</div>
+              <div class="ff ">
+                {{ invoice.email }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -966,6 +972,9 @@ export default {
     .left-info {
       width: 390px;
       background: rgba(255, 255, 255, 1);
+      .orderNo{
+        font-size: 16px;
+      }
       .new-address-title {
         height: 20px;
         display: flex;

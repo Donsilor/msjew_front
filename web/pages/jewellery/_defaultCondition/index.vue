@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-content v-if="defaultCondition" :default-condition="defaultCondition"></list-content>
+    <list-content v-if="defaultCondition" :default-condition="defaultCondition" :seo="this.seoInfo"></list-content>
     <sole-out v-else></sole-out>
   </div>
 </template>

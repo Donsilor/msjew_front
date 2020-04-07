@@ -14,7 +14,7 @@
       </div>
       <div class="line-box input-line">
         <div v-if="loginType == 1">
-          <bdd-input v-model="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-model.trim="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsername && hadInput('username') }
@@ -24,7 +24,7 @@
         </div>
         <div class="email-val-box" v-else>
           <!-- <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div> -->
-          <bdd-input v-model="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-model.trim="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsernameM && hadInput('username') }
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="line-box input-line">
-        <bdd-input v-model="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')"></bdd-input>
+        <bdd-input v-model.trim="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')"></bdd-input>
         <div :class="[
           'error-message',
           { active: !truePassword && hadInput('password') }

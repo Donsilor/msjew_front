@@ -1,5 +1,5 @@
 <template>
-  <jewellery-detail v-if="info" :info="info"></jewellery-detail>
+  <jewellery-detail v-if="info" :info="info" ></jewellery-detail>
   <sole-out v-else></sole-out>
 </template>
 

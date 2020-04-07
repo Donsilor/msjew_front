@@ -64,7 +64,7 @@
                   class="select-icon"
                   @click.stop="isSelect(item, index)"
                 >
-                  <i class="icon" :class="{ icongou: item.isSelect }"></i>
+                  <i class="icon iconfont" :class="{ icongou: item.isSelect }"></i>
                 </div>
                 <a
                   v-if="!getStatus(item, index)"
@@ -137,6 +137,7 @@ export default {
   created() {},
   mounted() {
     this.$nextTick(() => {
+      
       if (this.isLogin) {
         this.getList()
       } else {
@@ -200,6 +201,24 @@ export default {
         status = true
       }
       return status
+    },
+    // 默认全选
+    defaultAll(){
+      if(!this.isLogin){
+        this.selectAll = !this.selectAll
+        console.log("全选", this.list)
+        for (let i = 0; i < this.list.length; i++) {
+          if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
+            //  console.log("所有")
+            this.list[i].isSelect = this.selectAll
+          } else {
+            // console.log("否则")
+            this.list[i].isSelect = false
+          }
+        }
+        console.log(this.selectAll)
+        this.getNum()
+      }
     },
     // 全选与反选
     selectAlls() {
@@ -339,6 +358,7 @@ export default {
         .then(res => {
           // console.log("res",res)
           this.doFormat(res)
+          this.defaultAll()
         })
         .catch(err => {
           console.log('err:', err)
