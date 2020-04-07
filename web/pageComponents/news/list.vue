@@ -96,6 +96,7 @@
     padding-left: 60px;
     padding-right: 60px;
     border: 1px solid rgba(215, 215, 215, 1);
+	font-family: SourceHanSansCN-N;
   }
 
   .article-title {

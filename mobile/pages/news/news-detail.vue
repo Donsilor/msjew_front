@@ -2,7 +2,7 @@
   <div class="container">
     <div class="back" @click="goback">返回</div>
     <div class="title">文章标题</div>
-    <div class="describe">这是一篇文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章</div>
+    <div class="describe">这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章这是一篇是一文章这是一篇文章</div>
     <div class="detail">文章内容</div>
   </div>
 </template>
@@ -18,6 +18,9 @@
 </script>
 
 <style scoped>
+  .container{
+    font-family: SourceHanSansCN-N;
+  }
   .container{
     position: relative;
     padding: 0 20px 40px;
@@ -46,12 +49,13 @@
   .describe{
     text-align: left;
     font-size: 12px;
-    color: #999;
+    color: #A6A6A6;
     line-height: 18px;
   }
   .detail{
     margin-top: 20px;
     text-align: left;
     font-size: 14px;
+    color: #666;
   }
 </style>

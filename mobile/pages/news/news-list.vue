@@ -40,13 +40,16 @@
 </script>
 
 <style scoped>
+  .container{
+    font-family: SourceHanSansCN-N;
+  }
   a:link,a:visited,a:hover,a:active{
       color: inherit;
   }
   .logo{
     width: 100%;
     height: 120px;
-    border-bottom: 2px solid #C0A8A1;
+    border-bottom: 1px solid #C0A8A1;
   }
   .logo img{
     width: 100%;
@@ -65,7 +68,7 @@
     font-size: 14px;
     color: #C0A8A1;
     text-align: left;
-    border-bottom: 1px solid #C0A8A1;
+    border-bottom: 0.5px solid #C0A8A1;
   }
   .article-info{
     margin-top: 20px;
@@ -76,7 +79,7 @@
     line-height: 40px;
     font-size: 12px;
     color: #999;
-    border-bottom: 1px solid #C0A8A1;
+    border-bottom: 1px solid #D7D7D7;
   }
   .article-info .list a{
     display: block;
