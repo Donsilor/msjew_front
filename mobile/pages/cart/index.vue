@@ -65,7 +65,7 @@
                   :class="{ icongou: item.isSelect }"
                   @click.stop="isSelect(item, index)"
                 ></i>
-                <a
+                <!-- <a
                   v-if="!getStatus(item, index)"
                   class="similar"
                   @click.stop="
@@ -74,15 +74,15 @@
                   ><span v-if="item.groupType === 0"
                     >{{ lang.similar }}
                   </span></a
-                >
-                <!-- <a href="" class="similar"></a> -->
+                > -->
+                <a href="" class="similar"></a>
                 <span class="remove" @click.stop="remove(item, index)"
                   ><i class="icon iconfont iconicon-test2"></i>
                   {{ lang.remove }}</span
                 >
                 <span class="num">{{ lang.number }} *1</span>
               </div>
-              <!-- <div class="findsimilar">
+              <div class="findsimilar">
                 <a
                   v-if="!getStatus(item, index)"
                   class="similar"
@@ -93,7 +93,7 @@
                     >{{ lang.similar }}
                   </span></a
                 >
-              </div> -->
+              </div>
             </div>
           </li>
         </ul>
@@ -413,16 +413,16 @@ export default {
         })
         .then(res => {
           // console.log("线上llll",res)
-          // const result = []
-          // let keys = Object.keys(res)
-          // keys = keys.sort((a, b) => {
-          //   return b - a
-          // })
-          // keys.forEach(item => {
-          //   result.push(res[item])
-          // })
-          // this.doFormat(result)
-          this.doFormat(res)
+          const result = []
+          let keys = Object.keys(res)
+          keys = keys.sort((a, b) => {
+            return b - a
+          })
+          keys.forEach(item => {
+            result.push(res[item])
+          })
+          this.doFormat(result)
+          // this.doFormat(res)
         })
         .catch(err => {
           console.log('err:', err)
