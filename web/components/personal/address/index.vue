@@ -616,7 +616,7 @@ export default {
     // 修改地址
     changeAddress(obj) {
       document.getElementById('addbox').scrollIntoView({
-        block: 'start',
+        block: 'center',
         inline: 'nearest',
         behavior: 'smooth'
       })

@@ -546,7 +546,7 @@ export default {
         dispatch('getCartAmount')
         request
             .then(data => {
-                console.log("cart",data)
+                // console.log("cart",data)
                 commit('setCart', data)
                 return Promise.resolve(data)
             })
