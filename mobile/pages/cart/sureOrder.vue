@@ -122,7 +122,7 @@
           ></textarea>
         </div>
         <!-- 开具发票 -->
-        <!-- <div class="invoice">
+        <div class="invoice" v-if="this.areaId === '1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -130,7 +130,7 @@
               <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
@@ -336,7 +336,8 @@ export default {
       cuponList: [],
       session: '',
       info:[],
-      totlePrice:''
+      totlePrice:'',
+      areaId: this.$store.state.areaId
     }
   },
   computed: {
