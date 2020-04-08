@@ -75,7 +75,7 @@
                     >{{ lang.similar }}
                   </span></a
                 > -->
-                <a href="" class="similar"></a>
+                <a v-if="!getStatus(item, index)" href="" class="similar"></a>
                 <span class="remove" @click.stop="remove(item, index)"
                   ><i class="icon iconfont iconicon-test2"></i>
                   {{ lang.remove }}</span
