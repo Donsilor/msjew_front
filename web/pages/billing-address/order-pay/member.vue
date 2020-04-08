@@ -2255,6 +2255,9 @@ export default {
         this.wrongInput.address_details = true
         return false
       }
+      if(this.city.areaId == ''){
+        this.city.areaId = '0'
+      }
       const data = this.$helpers.transformRequest(
         JSON.parse(
           JSON.stringify({
@@ -2274,7 +2277,7 @@ export default {
         false
       )
       this.$axios
-        .post('/web/member/address/edit', data)
+        .post('/web/member/address/edit',data)
         .then(res => {
           // console.log("修改地址",res)
           this.getAddress()
