@@ -3,6 +3,9 @@
     <div class="bg" @click="hide"></div>
     <div class="menu">
       <div class="top">
+        <div class="icon" @click="hide">
+          <i class="iconfont iconcebianlan"></i>
+        </div>
         <div class="site-info" @click="toSiteSwitch">
           <div class="flag">
             <img src="/hongkong-round.png" />
@@ -15,35 +18,153 @@
             {{ coinInfo.content }}
           </div>
         </div>
-        <div class="icon" @click="hide">
-          <i class="iconfont iconcebianlan"></i>
-        </div>
+        
       </div>
       <div class="content">
-        <div class="search">
+        <!-- <div class="search">
           <button class="search-btn" @click="toPage('search')">
             <i class="iconfont iconicon-sousuo btn-icon"></i>
             <span class="btn-message">{{ lang.search }}</span>
           </button>
-        </div>
+        </div> -->
         <div class="groups">
-          <section v-for="(group, n) in groups" :key="n" class="group">
-            <div
-              v-for="(item, m) in group"
-              :key="m"
-              :class="[
-                'item',
-                { stress: item.stress, 'small-gap': group.length === 1 }
-              ]"
-              @click="toPage(item.routerName, item.query)"
-            >
-              {{ item.name }}
+          <section  class="group">
+            <div class="menus-one"  @click="one(1)">
+              <span >{{lang.Rings}}</span>
+              <i class="iconfont iconxiala status-icon"></i>
+              <div class="menus-two" :class="{ actives: actives1 == true }">
+                <div class="goback" @click.stop="goback(1)">
+                  <i class="iconfont iconxiala status-icon" ></i>
+                  <span>{{lang.Rings}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.engagementRing}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.marriageRing}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.Ring}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.FashionRing}}</span>
+                </div>
+                 <div class="two">
+                  <span>{{lang.CoupleRing}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="menus-one" @click="one(2)">
+              <span>{{lang.necklaces}}</span>
+              <i class="iconfont iconxiala status-icon" ></i>
+              <div class="menus-two" :class="{ actives: actives2 }">
+                <div class="goback" @click.stop="goback(2)">
+                  <i class="iconfont iconxiala status-icon" ></i>
+                  <span>{{lang.necklaces}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.necklace}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.Pendant}}</span>
+                </div>
+
+              </div>
+            </div>
+            <div class="menus-one" @click="one(3)">
+              <span>{{lang.Bracelets}}</span>
+              <i class="iconfont iconxiala status-icon" ></i>
+              <div class="menus-two" :class="{ actives: actives3 }">
+                <div class="goback" @click.stop="goback(3)">
+                  <i class="iconfont iconxiala status-icon" ></i>
+                  <span>{{lang.Bracelets}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.Bracelet}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.bracelet}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="menus-one" @click="one(4)">
+              <span>{{lang.DiamondRingCustomization}}</span>
+              <i class="iconfont iconxiala status-icon" ></i>
+              <div class="menus-two" :class="{ actives: actives4 }">
+                <div class="goback" @click.stop="goback(4)">
+                  <i class="iconfont iconxiala status-icon" ></i>
+                  <span>{{lang.DiamondRingCustomization}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.SelectDiamondFirst}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.DiamondRing}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="menus-one" @click="one(5)">
+              <span>{{lang.activity}}</span>
+              <i class="iconfont iconxiala status-icon" ></i>
+              <div class="menus-two" :class="{ actives: actives5 }">
+                <div class="goback" @click.stop="goback(5)">
+                  <i class="iconfont iconxiala status-icon" ></i>
+                  <span>{{lang.activity}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.BlackFriday}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.coupon}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.SpecialDiscount}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="menus-one" @click="one(6)">
+              <span>{{lang.theme}}</span>
+              <i class="iconfont iconxiala status-icon" ></i>
+              <div class="menus-two" :class="{ actives: actives6 }">
+                <div class="goback" @click.stop="goback(6)">
+                  <i class="iconfont iconxiala status-icon" ></i>
+                  <span>{{lang.theme}}</span>
+                </div>
+               <div class="two">
+                  <span>{{lang.ValentinesDay}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.MothersDay}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.birthdayPresent}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.ChristmasGift}}</span>
+                </div>
+                <div class="two">
+                  <span>{{lang.HalloweenGift}}</span>
+                </div>
+              </div>
+            </div>
+            <div class="menus-one" >
+              <span>{{lang.knowledge}}</span>
             </div>
           </section>
         </div>
       </div>
       <div class="bottom">
-        <div class="call-us">{{ lang.callus }}</div>
+        <div class="call-us">
+          <div class="item">
+              <div class="item-icon">
+                <i class="iconfont icongerenzhongxin"></i>
+                <!-- <img src="/user.png" alt=""> -->
+              </div>
+              <div class="item-name">
+                {{ lang.callus }}
+              </div>
+            </div>
+        </div>
         <div class="help">
           <a href="tel:+852 2165 3905">
             <div class="item">
@@ -55,6 +176,8 @@
               </div>
             </div>
           </a>
+        </div>
+        <div class="help">
           <a href="mailto:service@bddco.com">
             <div class="item">
               <div class="item-icon">
@@ -72,12 +195,77 @@
 </template>
 
 <script>
+// import Header from '@/components/personal/header.vue'
 import Helpers from '@/assets/js/helpers.js'
 export default {
+  // components: {
+  //   Header
+  // },
   data() {
     return {
+      icon:false,
       lang: this.LANGUAGE.components.leftMenu,
       active: false,
+      actives1: false,
+      actives2: false,
+      actives3: false,
+      actives4: false,
+      actives5: false,
+      actives6: false,
+      aa:[
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.engagementRing,
+          routerName: 'engagement'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.engagementRing,
+          routerName: 'engagement'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.engagementRing,
+          routerName: 'engagement'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.engagementRing,
+          routerName: 'engagement'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.engagementRing,
+          routerName: 'engagement'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.engagementRing,
+          routerName: 'engagement'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.engagementRing,
+          routerName: 'engagement'
+        }
+      ],
+      bb:[
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.marriageRing,
+          routerName: 'marriage-ring'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.marriageRing,
+          routerName: 'marriage-ring'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.marriageRing,
+          routerName: 'marriage-ring'
+        }
+      ],
       groups: [
         [
           {
@@ -168,7 +356,209 @@ export default {
             routerName: 'help-pages-knowledge'
           }
         ]
-      ]
+      ],
+      headerData: [
+        {
+          name: this.LANGUAGE.components.leftMenu.Rings,
+          list: [
+            {
+              name: this.LANGUAGE.components.leftMenu.Style,
+              list: [
+                {
+                  name: this.LANGUAGE.components.leftMenu.engagementRing,
+                  routerName: 'engagement'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.marriageRing,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.Ring,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.FashionRing,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.CoupleRing,
+                  age:'20'
+                }
+              ],
+              showItem:false
+            }, 
+          ],
+          show: false
+        }, 
+        {
+          name: this.LANGUAGE.components.leftMenu.necklaces,
+          list: [
+            {
+              name: this.LANGUAGE.components.leftMenu.Style,
+              list: [
+                {
+                  name: this.LANGUAGE.components.leftMenu.necklace,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.Pendant,
+                  age:'20'
+                }
+              ],
+              showItem:false
+            }, 
+          ],
+          show: false
+        }, 
+        {
+          name: this.LANGUAGE.components.leftMenu.Bracelets,
+          list: [
+            {
+              name: this.LANGUAGE.components.leftMenu.Style,
+              list: [
+                {
+                  name: this.LANGUAGE.components.leftMenu.Bracelet,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.bracelet,
+                  age:'20'
+                }
+              ],
+              showItem:false
+            }, 
+          ],
+          show: false
+        }, 
+        {
+          name: this.LANGUAGE.components.leftMenu.DiamondRingCustomization,
+          list: [
+            {
+              name: this.LANGUAGE.components.leftMenu.DesignDiamondRing,
+              list: [
+                {
+                  name: this.LANGUAGE.components.leftMenu.SelectDiamondFirst,
+                  routerName: 'custom-made-ring-made-diamond-list',
+                  query: {
+                    melo: Helpers.base64Encode(
+                      JSON.stringify({
+                        steps: [
+                          {
+                            goodsId: null,
+                            goodsDetailsId: null,
+                            ct: 2,
+                            cartId: ``,
+                            page: `list`
+                          },
+                          {
+                            goodsId: null,
+                            goodsDetailsId: null,
+                            ct: null,
+                            cartId: ``,
+                            page: `list`
+                          }
+                        ]
+                      })
+                    ),
+                    step: 1
+                  }
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.DiamondRing,
+                  routerName: 'custom-made-ring-made-ring-list',
+                  query: {
+                    melo: Helpers.base64Encode(
+                      JSON.stringify({
+                        steps: [
+                          {
+                            goodsId: null,
+                            goodsDetailsId: null,
+                            ct: 2,
+                            cartId: ``,
+                            page: `list`
+                          },
+                          {
+                            goodsId: null,
+                            goodsDetailsId: null,
+                            ct: null,
+                            cartId: ``,
+                            page: `list`
+                          }
+                        ]
+                      })
+                    ),
+                    step: 1
+                  }
+                }
+              ],
+              showItem:false
+            }, 
+          ],
+          show: false
+        }, 
+        {
+          name: this.LANGUAGE.components.leftMenu.activity,
+          list: [
+            {
+              name: this.LANGUAGE.components.leftMenu.Promotions,
+              list: [
+                {
+                  name: this.LANGUAGE.components.leftMenu.BlackFriday,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.coupon,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.SpecialDiscount,
+                  age:'20'
+                }
+              ],
+              showItem:false
+            }, 
+          ],
+          show: false
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.theme,
+          list: [
+            {
+              name: this.LANGUAGE.components.leftMenu.HolidayGift,
+              list: [
+                {
+                  name: this.LANGUAGE.components.leftMenu.ValentinesDay,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.MothersDay,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.birthdayPresent,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.ChristmasGift,
+                  age:'20'
+                },
+                {
+                  name: this.LANGUAGE.components.leftMenu.HalloweenGift,
+                  age:'20'
+                }
+              ],
+              showItem:false
+            }, 
+          ],
+          show: false
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.knowledge,
+          routerName: 'help-pages-knowledge',
+          list:[]
+        }
+      ],
+      length:''
     }
   },
   computed: {
@@ -197,7 +587,38 @@ export default {
       return result
     }
   },
+  mounted(){
+  },
   methods: {
+    one(id){
+      if(id == 1){
+        this.actives1 = true
+      }
+      if(id == 2){
+        this.actives2 = true
+      }
+      if(id == 3){
+        this.actives3 = true
+      }
+      if(id == 4){
+        this.actives4 = true
+      }
+      if(id == 5){
+        this.actives5 = true
+      }
+      if(id == 6){
+        this.actives6 = true
+      }
+    },
+    goback(id){
+      this.actives1 = false
+      this.actives2 = false
+      this.actives3 = false
+      this.actives4 = false
+      this.actives5 = false
+      this.actives6 = false
+    },
+
     show() {
       this.active = true
     },
@@ -228,6 +649,87 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.content{
+  .groups{
+    position: relative;
+    overflow: hidden;
+    .status-icon {
+      flex-grow: 0;
+      flex-shrink: 0;
+      font-size: 16px;
+      color: #666666;
+      transition: all 0.2s linear;
+      transform: rotate(270deg);
+      display: inline-block;
+    }
+    .menus-one{
+      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      height: 60px;
+      padding: 0 10px;
+      border-bottom:1px solid #fff;
+      background-color: #e4ecf0;
+      z-index: 99;
+      span{
+        line-height: 60px;
+      }
+      .menus-two{
+        padding-top: 10px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        left: 0;
+        transform: translate(100%, 0);
+        transition: all 0.2s linear;
+        z-index: 100;
+        .goback{
+          text-align: left;
+          background-color: #e4ecf0;
+          .status-icon{
+            margin-left: 10px;
+            transform: rotate(450deg);
+          }
+          span{
+            display: inline-block;
+            width: 80%;
+            text-align:center; 
+          }
+        }
+        .two{
+          display: flex;
+          justify-content: space-between;
+          height: 60px;
+          padding: 0 10px;
+        }
+      }
+      .actives{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 270px;
+        height: 100%;
+        box-sizing: border-box;
+        background-color: #ffffff;
+        // transition: right .3s ease-in-out;
+        // box-shadow: 0 6px 21px 1px rgba(153, 153, 153, 0.35); /*no*/
+        // transform: translate(50%, 0);
+        transform: translate(0, 0);
+        transition: all 0.3s linear;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
 .left-menu {
   position: fixed;
   width: 100%;
@@ -239,6 +741,18 @@ export default {
 }
 .left-menu.active {
   visibility: visible;
+  background: rgba(0,0,0,0.8);
+  height: 100vh;
+  opacity: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  transition: opacity 0.3s ease-in-out;
+  width: 100vw;
+  z-index: -1;
+  opacity: 1;
+  pointer-events: all;
+  z-index: 0;
 }
 .bg {
   position: relative;
@@ -276,13 +790,14 @@ export default {
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 .top .icon {
-  flex-grow: 1;
-  flex-shrink: 1;
-  color: #f29b87;
+  // flex-grow: 1;
+  // flex-shrink: 1;
+  color: #A2C2D2;
   text-align: right;
+  margin-right: 30px;
 }
 
 /*站点信息*/
@@ -336,9 +851,9 @@ export default {
 .content {
   flex-grow: 1;
   flex-shrink: 1;
-  padding: 0 20px;
+  // padding: 0 20px;
   box-sizing: border-box;
-  overflow: auto;
+  // overflow: auto;
 }
 
 /*搜索栏*/
@@ -384,13 +899,39 @@ export default {
 .bottom {
   flex-grow: 0;
   flex-shrink: 0;
-
+  padding: 0 15px;
   .call-us {
     font-size: 14px;
     font-weight: 400;
-    color: rgba(153, 153, 153, 1);
-    text-align: center;
-    margin-bottom: 20px;
+    // color: rgba(153, 153, 153, 1);
+    text-align: left;
+    margin-bottom: 10px;
+    .item {
+      // margin: 0 30px;
+      display: flex;
+      .item-icon {
+        margin-bottom: 3px;
+        // width: 30px;
+        // height: 30px;
+        line-height: 30px;
+        // background: rgba(179, 179, 179, 1);
+        // border-radius: 50%;
+
+        .iconfont {
+          font-size: 20px;
+          color: rgba(153, 153, 153, 1);
+        }
+      }
+      .item-name {
+        text-align: center;
+        margin-left: 10px;
+        font-size: 14px;
+        line-height: 29px;
+        font-weight: 400;
+        color: rgba(153, 153, 153, 1);
+        // color: 000;
+      }
+    }
   }
 
   /*帮助*/
@@ -398,30 +939,33 @@ export default {
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    align-items: left; 
+    // justify-content: center;
 
     .item {
-      margin: 0 30px;
-
+      // margin: 0 30px;
+      display: flex;
       .item-icon {
         margin-bottom: 3px;
-        width: 30px;
-        height: 30px;
+        // width: 30px;
+        // height: 30px;
         line-height: 30px;
-        background: rgba(179, 179, 179, 1);
-        border-radius: 50%;
+        // background: rgba(179, 179, 179, 1);
+        // border-radius: 50%;
 
         .iconfont {
-          font-size: 18px;
-          color: #ffffff;
+          font-size: 20px;
+          color:rgba(153, 153, 153, 1);
         }
       }
       .item-name {
         text-align: center;
-        font-size: 12px;
+        margin-left: 10px;
+        font-size: 14px;
+        line-height: 29px;
         font-weight: 400;
         color: rgba(153, 153, 153, 1);
+        // color: #000;
       }
     }
   }

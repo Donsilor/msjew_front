@@ -4,12 +4,13 @@
       <div class="icon" @click="showMenu">
         <i class="iconfont iconcebianlan"></i>
       </div>
-      <!--      <div class="icon" @click="toSiteSwitch">-->
-      <!--        <i class="iconfont iconweizhiyuyan"></i>-->
-      <!--      </div>-->
+      <div class="icon search" @click="toPage('search')">
+        <!-- <i class="iconfont iconweizhiyuyan"></i> -->
+        <i class="iconfont iconicon-sousuo btn-icon" ></i>
+      </div>
     </div>
     <div class="center">
-      <img src="/logo.png" class="logo" @click="toIndex" />
+      <img src="/logo1.png" class="logo" @click="toIndex" />
     </div>
     <div class="right">
       <div class="icon" @click="toPersonal">
@@ -106,13 +107,23 @@ export default {
       this.$router.push({
         name: 'cart'
       })
-    }
+    },
+    toPage(routerName = '', query = {}) {
+      if (!routerName) {
+        return
+      }
+      // this.hide()
+      this.$router.push({
+        name: routerName,
+        query: query
+      })
+    },
   }
 }
 </script>
 <style >
 .coloricon .icongerenzhongxin:before{
-  color:#f29b87;
+  color:#A2C2D2;
 }
 </style>
 <style scoped> 
@@ -175,6 +186,9 @@ export default {
 .icon {
   position: relative;
 }
+.search{
+  font-weight: 700;
+}
 .left .icon:nth-of-type(1) {
   margin-right: 25px;
 }
@@ -193,6 +207,6 @@ export default {
   color: #ffffff;
   font-size: 9px;
   font-weight: 400;
-  background-color: #f29b87;
+  background-color: #A2C2D2;
 }
 </style>
