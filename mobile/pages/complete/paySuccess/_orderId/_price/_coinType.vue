@@ -200,20 +200,19 @@ export default {
   },
   mounted() {
       if (this.$route.query.success === "false") {
-          this.$router.push({
-              name: 'cart-payFailed-orderId-price-coinType',
-              query: {
-                  orderId: this.$route.query.orderId||this.$route.query.order_sn,
-              }
-          })
-      } else {
-
-        if (this.isLogin) {
-          this.getinfo()
-        }else{
-          this.getinfo2()
-        }
-
+        this.goPayFailed()
+        //失败后，继续调用验证api，写入支付日志
+        this.$axios({
+            url: '/web/pay/verify',
+            method: 'post',
+            timeout:3000,
+            data: {
+                return_url: window.location.href
+            }
+        })
+        .then(data => {})
+        .catch(err => {})
+      } else {        
         setTimeout(this.payVerify, 2000);
       }
   },
@@ -224,12 +223,38 @@ export default {
       this.stepPayPending = true
       this.stepPayVerify = false
     },
+    goPaySuccess(){
+      const arr = []
+      this.list.map((item, index) => {
+        arr.push(item.localSn)
+        this.$store.dispatch('removeCart', arr)
+      })
+      this.list = JSON.parse(storage.get('myCartList', 0))
+
+      this.stepPayPending = false
+      this.stepPayVerify  = false
+      this.stepPaySuccess = true
+      if (this.isLogin) {
+          this.getOrder()
+      }else{
+          this.getTouristOrder()
+      }
+    },
+    goPayFailed(){
+        this.$router.push({
+            name: 'cart-payFailed-orderId-price-coinType',
+            query: {
+                orderId: this.$route.query.orderId || this.$route.query.order_sn,
+            }
+        })
+    },
     goIndex() {
       this.$router.replace({
         name: 'index'
       })
     },
-    getinfo() {
+    //登录用户订单
+    getOrder() {
       this.$axios({
         url: '/web/member/order/detail',
         method: 'get',
@@ -237,17 +262,16 @@ export default {
           orderId: this.$route.query.orderId
         }
       })
-        .then(res => {
-
-          this.info = res
-          this.getChannelType(this.info.payChannel)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      .then(res => {
+        this.info = res
+        this.getChannelType(this.info.payChannel)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
-    // 未登录
-    getinfo2() {
+    //游客订购单
+    getTouristOrder() {
       this.$axios({
         url: '/web/member/order-tourist/detail',
         method: 'get',
@@ -255,23 +279,20 @@ export default {
           order_sn: this.$route.query.order_sn
         }
       })
-        .then(res => {
-          console.log("dssadas",res)
-          this.orderinfo = res
-          this.getChannelType(this.orderinfo.payChannel)
+      .then(res => {
+        console.log("dssadas",res)
+        this.orderinfo = res
+        this.getChannelType(this.orderinfo.payChannel)
 
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
+    //支付校验
     payVerify(){
-
-      const _this = this
-
       this.verifyCount ++
-
-      _this.$axios({
+      this.$axios({
             url: '/web/pay/verify',
             method: 'post',
             timeout:8000,
@@ -280,29 +301,13 @@ export default {
             }
         })
         .then(data => {
-
-          if(data.verification_status === 'completed') {
-            const arr = []
-            this.list.map((item, index) => {
-              arr.push(item.localSn)
-              this.$store.dispatch('removeCart', arr)
-            })
-            this.list = JSON.parse(storage.get('myCartList', 0))
-
-            this.stepPaySuccess = true
-            this.stepPayPending = false
-
+          if(data.verification_status === 'completed') {            
+            this.goPaySuccess()
           } else if(data.verification_status === 'failed') {
-              this.$router.push({
-                  name: 'cart-payFailed-orderId-price-coinType',
-                  query: {
-                      orderId: this.$route.query.orderId||this.$route.query.order_sn,
-                  }
-              })
-          }
-          else {
+            this.goPayFailed()
+          } else {
             if(this.verifyCount < 2) {
-              setTimeout(this.payVerify, 15000);
+              setTimeout(this.payVerify, 15000)
             }
             else {
               this.showPayPending()
@@ -410,7 +415,7 @@ export default {
 .handing,.pending1{
   padding: 20px;
   color:#f29b87;
-  font-size: 20px;
+  font-size: 30px;
 }
 .pending2 {
   padding: 20px;

@@ -122,7 +122,7 @@
           ></textarea>
         </div>
         <!-- 开具发票 -->
-        <div class="invoice">
+        <div class="invoice" v-if="this.areaId === '1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -336,7 +336,8 @@ export default {
       cuponList: [],
       session: '',
       info:[],
-      totlePrice:''
+      totlePrice:'',
+      areaId: this.$store.state.areaId
     }
   },
   computed: {
@@ -879,7 +880,7 @@ export default {
           url: `/web/member/order-tourist/create`,
           data: {
             goodsCartList:data,
-            invoice:this.$route.query.invoice,
+            invoice:this.$route.params.invoice,
             tradeType:'wap',
             coinType:this.$store.state.coin,
             returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328

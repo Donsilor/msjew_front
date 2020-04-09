@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="cart">
     <div class="cart-container">
       <div class="cart-title">{{ $t(`${lang}.title`) }}</div>
@@ -86,7 +87,7 @@
           </div>
         </div>
       </div>
-      <div class="cart-bot-bar">
+      <div class="cart-bot-bar" v-show="Settlement1">
         <div class="cart-radio">
           <div v-show="!allTick" class="free-check" @click="allTicks()" />
           <i v-show="allTick" class="iconfont icongou" @click="allTicks()" />
@@ -128,6 +129,42 @@
       @done="noGoods = false"
     />
   </div>
+  <div class="cart2">
+    <div class="cart-bot-bar positons" :class="{positon:cartp}" v-show="Settlement2">
+      <div class="cart-radio">
+        <div v-show="!allTick" class="free-check" @click="allTicks()" />
+        <i v-show="allTick" class="iconfont icongou" @click="allTicks()" />
+      </div>
+      <div class="full-radio" @click="allTicks()">
+        {{ $t(`${lang}.allTick`) }}
+      </div>
+      <div class="delete" @click="checkDelete()">
+        <i class="iconfont iconlajitong" />
+        {{ $t(`${lang}.delete`) }}
+      </div>
+      <div class="cart-bot-line" />
+      <div class="clean-useless" @click="deleteLoseGoods()">
+        <i class="iconfont iconqingchushixiaobaobei" />
+        {{ $t(`${lang}.cleanInvalidBaby`) }}
+      </div>
+      <div class="already-choose">
+        {{ $t(`${lang}.checked`) }}
+        <div class="choose-num">{{ totalNum }}</div>
+        {{ $t(`${lang}.total`) }}
+        <span>（{{ $t(`${lang}.freeExpress`) }})</span>
+      </div>
+      <div class="total-price">
+        {{ $store.state.coin }} {{  formatNumber(totalPrice)  }}
+      </div>
+      <div v-if="!banBtn" class="go-order" @click="goOrder()">
+        {{ $t(`${lang}.Settlement`) }}
+      </div>
+      <div v-if="banBtn" class="go-order ban">
+        {{ $t(`${lang}.Settlement`) }}
+      </div>
+    </div>
+  </div> 
+</div>
 </template>
 
 <script>
@@ -149,7 +186,11 @@ export default {
       tickNum: 0,
       totalNum: 0,
       totalPrice: 0,
-      noGoods: false
+      noGoods: false,
+      cartp:false,
+      Settlement1:true,
+      Settlement2:false,
+      scroll: '',
     }
   },
   computed: {
@@ -161,6 +202,7 @@ export default {
   beforeMount() {
     this.getList()
   },
+
   created(){
     
   },
@@ -171,7 +213,27 @@ export default {
       
     })
   },
+
   methods: {
+    // handleScroll(e){
+    //     // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
+    //     const that = this
+    //     let scrollTop = e.target.scrollTop;
+    //     // console.log("scrollTop",scrollTop)
+    //     that.scrollTop = scrollTop
+    //     if (that.scrollTop > 150) {
+    //       this.Settlement1 = false
+    //       this.Settlement2 = true
+    //     } else {
+    //       this.Settlement1 = true
+    //       this.Settlement2 = false
+    //     }
+    // },
+    // handleScroll(){
+    //   console.log('滚动条发生滚动了')
+    //   this.Settlement1 = false
+    //   this.Settlement2 = true
+    // },
     getList() {
       this.$store
         .dispatch(`getCart`)
@@ -399,13 +461,142 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.positons{
+  position: fixed!important;
+  z-index: 999;
+  bottom:0;
+}
+.cart2{
+    .cart-bot-bar {
+      position: relative;
+      // width: 1300px;
+      width: 100%;
+      height: 100px;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      .cart-radio {
+        width: 40px;
+        height: 100px;
+      }
+      .full-radio {
+        font-size: 14px;
+        color: #666;
+        margin-right: 68px;
+        cursor: pointer;
+      }
+      .delete {
+        position: relative;
+        font-size: 14px;
+        color: #666;
+        margin-right: 55px;
+        cursor: pointer;
+        i {
+          display: block;
+          position: absolute;
+          left: -9px;
+          transform: translateX(-100%);
+          font-size: 20px;
+          width: 18px;
+          height: 21px;
+          line-height: 21px;
+          top: -3px;
+          color: #999;
+        }
+      }
+      .add-wish {
+        position: relative;
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        margin-right: 28px;
+        i {
+          display: block;
+          position: absolute;
+          left: -9px;
+          transform: translateX(-100%);
+          font-size: 20px;
+          width: 20px;
+          height: 19px;
+          line-height: 19px;
+          top: -1px;
+          color: #999;
+        }
+      }
+      .cart-bot-line {
+        width: 1px;
+        height: 20px;
+        background: rgba(221, 221, 221, 1);
+        margin-right: 49px;
+      }
+      .clean-useless {
+        position: relative;
+        font-size: 14px;
+        color: #666;
+        cursor: pointer;
+        margin-right: 156px;
+        i {
+          display: block;
+          position: absolute;
+          left: -9px;
+          transform: translateX(-100%);
+          font-size: 16px;
+          width: 16px;
+          height: 16px;
+          line-height: 16px;
+          top: 0;
+          color: #999;
+        }
+      }
+      .already-choose {
+        width: 61+92+117px;
+        display: flex;
+        font-size: 16px;
+        height: 16px;
+        line-height: 16px;
+        color: #666666;
+        margin-right: 24px;
+        .choose-num {
+          width: 72px;
+          color: #666666;
+          font-size: 16px;
+          text-align: center;
+        }
+        span {
+          color: #999;
+        }
+      }
+      .total-price {
+        font-family: twCenMt;
+        font-size: 22px;
+        color: #f29b87;
+      }
+      .go-order {
+        width: 170px;
+        height: 40px;
+        line-height: 40px;
+        background: rgba(170, 138, 123, 1);
+        cursor: pointer;
+        color: #fff;
+        font-size: 16px;
+        text-align: center;
+        position: absolute;
+        right: 49px;
+        top: 30px;
+      }
+      .ban {
+        background: #ccc;
+      }
+    }
+  }
 .cart {
   width: 1360px;
   text-align: left;
   overflow: hidden;
   margin: 0 auto;
   position: relative;
-  .cart-container {
+  
+  .cart-container{
     position: relative;
     overflow: hidden;
     width: 1360px;

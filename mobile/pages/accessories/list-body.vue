@@ -86,8 +86,12 @@ import Mixin from './mixin.js'
 import List from '@/mixins/list.js'
 import GoodListProps from '@/mixins/good-list-props.js'
 export default {
+  head() {
+    return this.seo || {}
+  },
   name: 'List',
-  mixins: [Mixin, List, GoodListProps]
+  mixins: [Mixin, List, GoodListProps],
+  props:['seo'],
 }
 </script>
 

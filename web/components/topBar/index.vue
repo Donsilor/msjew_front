@@ -59,7 +59,7 @@
                   {{ userInfo.realname}}
                   <i class="iconfont iconkuozhan"></i>
                 </span>
-               
+
                 <el-dropdown-menu slot="dropdown" >
                   <el-dropdown-item v-for="(item, n) in userMenus" :key="n">
                     <nuxt-link v-if="item.to" :to="item.to">
@@ -202,7 +202,7 @@
               </ul>
               <div v-show="!fixedStatus" class="search-box">
                 <input
-                  v-model="keyword"
+                  v-model.trim="keyword"
                   :placeholder="$t(`${lang}.search`)"
                   @keyup.enter="toSearch"
                 />

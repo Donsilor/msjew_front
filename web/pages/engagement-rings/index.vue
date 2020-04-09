@@ -297,6 +297,7 @@ export default {
       })
   },
   mounted() {
+    
     const _this = this
     _this.$nextTick(() => {
       const Swiper = require('swiper/dist/js/swiper.js')

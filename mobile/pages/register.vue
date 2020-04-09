@@ -67,7 +67,7 @@
           <div class="line-box input-line mobile email-val-box" v-if="loginType == 2 ">
             <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div>
             <bdd-input
-              v-model="info.mobile"
+              v-model.trim="info.mobile"
               :placeholder="`${lang.mobile}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('mobile')"
@@ -86,7 +86,7 @@
           <!-- 邮箱 -->
           <div class="line-box input-line email" v-else>
             <bdd-input
-              v-model="info.email"
+              v-model.trim="info.email"
               :placeholder="`*${lang.email}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('email')"
@@ -165,7 +165,7 @@
           <!-- 设置密码 -->
           <div class="line-box input-line">
             <bdd-input
-              v-model="info.password"
+              v-model.trim="info.password"
               :type="'password'"
               :placeholder="`${lang.password}`"
               :padding="'0 3% 0 3%'"
@@ -183,7 +183,7 @@
           <!-- 确认密码 -->
           <div class="line-box input-line">
             <bdd-input
-              v-model="info.password_repetition"
+              v-model.trim="info.password_repetition"
               :type="'password'"
               :placeholder="`${lang.repassword}`"
               :padding="'0 3% 0 3%'"
