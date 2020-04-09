@@ -2314,7 +2314,9 @@
     "msg6": "备注字数已满",
     "msg7": "出错了，出错位置：下订单跳转支付",
     "msg8": "数据获取失败，请返回购物车重试！",
-    "msg9":"请选择支付方式!"
+    "msg9":"请选择支付方式!",
+    "useShoppingCard": "使用购物卡",
+    "shoppingCard": "购物卡"
   },
   "invoice":{
     "personal":"个人",
@@ -2344,5 +2346,28 @@
     "hint3":"税号不能为空",
     "hint4":"邮箱不能为空",
     "hint5":"请输入正确的邮箱"
+  },
+  "shoppingCard": {
+    "title": "添加购物卡信息",
+    "cardNumber": "卡号",
+    "cardPassword": "兑换码",
+    "addCard": "添加购物卡",
+    "chooseAll": "全选",
+    "annotation": "*注：多张购物卡，可依次添加验证",
+    "cancle": "取消",
+    "confirm": "确定",
+    "clickVerify": "点击验证",
+    "verifySucceed": "验证成功",
+    "verifyFailing": "验证失败",
+    "balance": "余额",
+    "eliminateCard": "消除此卡",
+    "verifyValid": "购物卡验证有效",
+    "alreadyAdd": "已添加",
+    "verifyInvalid": "无效购物卡",
+    "anewAdd": "重新添加",
+    "msg1": "账号或密码为空，请填写",
+    "msg2": "此卡需要验证成功才能使用",
+    "msg3": "验证失败，清重新填写",
+    "msg4": "有未验证或验证失败的卡！"
   }
 }

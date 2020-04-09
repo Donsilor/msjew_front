@@ -141,7 +141,7 @@
         <div class="goods-bot-bar" />
       </div>
     </div>
- 
+
     <!--<div v-for="(detail, nb) in data.outDetails" :key="nb" class="info-block">
       <div class="block-title">{{ $t(`${lang}.deliveryInfo`) }}{{ n + 1 }}</div>
       <div class="addr-info">
@@ -286,6 +286,12 @@
             <div class="label">{{ $t(`${lang}.totalNum`) }}</div>
             <div class="ff">
               {{ data.coinCode }} {{ formatNumber(data.productAmount) }}
+            </div>
+          </div>
+          <div class="info-line">
+            <div class="label">{{ $t(`${lang}.totalNum`) }}</div>
+            <div class="ff">
+              11111111111111
             </div>
           </div>
           <div class="info-line">
@@ -440,7 +446,7 @@ export default {
           this.data = res.data
           this.invoice = res.data.invoice
           console.log(this.invoice)
-          
+
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
           )

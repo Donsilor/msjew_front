@@ -243,11 +243,11 @@
             >
               <input
                 v-model="addressData.email"
-               
+
                 type="text"
                 @focus="
                   borderChange = 4
-                 
+
                 "
                 @blur="borderChange = 0"
               />
@@ -553,7 +553,7 @@
             <!-- <div class="invoice-btn">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
-                <span>{{ $t(`${lang2}.default`) }}</span> 
+                <span>{{ $t(`${lang2}.default`) }}</span>
               </div>
               <div v-show="iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
@@ -564,7 +564,7 @@
               <div class="msg">
                 <div class="msgbox" v-show="content">
                   <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
-                  
+
                   <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
                   <div class="btn_type">
                     <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
@@ -620,7 +620,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <!-- 发票抬头 -->
                   <div class="input-line">
                     <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
@@ -647,7 +647,7 @@
                     {{ $t(`${lang2}.hint2`) }}
                   </div>
                   <!-- 发票税号 -->
-                  <div class="input-line">  
+                  <div class="input-line">
                     <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                     <div
                       :class="[
@@ -781,9 +781,10 @@
             </div>
           </div>
         </div> -->
-        <div class="new-address-title">
+        <div class="new-address-title" style="width: auto;position: relative;">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
+          <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
         </div>
         <div class="price-detail">
           <div class="detail-line">
@@ -795,6 +796,10 @@
             <div class="hkd">
               {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
             </div>
+          </div>
+          <div class="detail-line" v-for="item in useAmount">
+            <div>{{ $t(`${lang}.shoppingCard`) }}<span class="shopping-card-num">{{item.sn}}</span></div>
+            <div class="hkd">{{item.useAmount}}</div>
           </div>
           <div v-show="makeGay" class="detail-line">
             <div>
@@ -864,7 +869,7 @@
       <div class="info-line" />
       <div
         :class="['buy-btn', { disabled: !canSubmit }]"
-        @click="createOrder()"
+        @click.stop="createOrder()"
       >
         <span
           >{{ $store.state.coin }}
@@ -980,7 +985,7 @@
           </div>
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
-          
+
           <div class="addr-board" @click="changeAddress(a)" />
           <i
             class="iconfont iconlajitong"
@@ -1444,7 +1449,7 @@
           <!-- <div class="invoice-btn">
             <div v-show="!iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
-              <span>{{ $t(`${lang2}.default`) }}</span> 
+              <span>{{ $t(`${lang2}.default`) }}</span>
             </div>
             <div v-show="iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
@@ -1455,7 +1460,7 @@
             <div class="msg">
               <div class="msgbox" v-show="content">
                 <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
-                
+
                 <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
                 <div class="btn_type">
                   <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
@@ -1511,7 +1516,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- 发票抬头 -->
                 <div class="input-line">
                   <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
@@ -1538,7 +1543,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <!-- 发票税号 -->
-                <div class="input-line">  
+                <div class="input-line">
                   <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
@@ -1671,9 +1676,10 @@
             </div>
           </div>
         </div> -->
-        <div class="new-address-title">
+        <div class="new-address-title" style="width: auto;position: relative;">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
+          <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
         </div>
         <div class="price-detail">
           <div class="detail-line">
@@ -1685,6 +1691,10 @@
             <div class="hkd">
               {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
             </div>
+          </div>
+          <div class="detail-line" v-for="item in cardList">
+            <div>{{ $t(`${lang}.shoppingCard`) }}<span class="shopping-card-num">{{item.sn}}</span></div>
+            <div class="hkd">{{item.balance}}</div>
           </div>
           <div v-show="makeGay" class="detail-line">
             <div>
@@ -1754,7 +1764,7 @@
       <div class="info-line" />
       <div
         :class="['buy-btn', { disabled: !canSubmit }]"
-        @click="createOrder1()"
+        @click.stop="createOrder1()"
       >
         <span
           >{{ $store.state.coin }}
@@ -1780,6 +1790,10 @@
       @done="alertBox = false"
     />
   </div>
+
+  <div v-if="ifShowAddCard">
+    <shopping-card @closePop="closeCardPop"></shopping-card>
+  </div>
 </div>
 </template>
 
@@ -1789,6 +1803,7 @@ import double from '../../shopping-cart/goodsCss/double'
 import madeUp from '../../shopping-cart/goodsCss/madeUp'
 import Address from '@/assets/js/address.js'
 import { Email, RegMobile, RegTelephone, RegMobiles } from '@/assets/js/require-lee.js'
+import shoppingCard from '../../../pageComponents/shopping-card/index.vue'
 const lang = 'order'
 const langs = 'personal.account'
 const lang2 = 'invoice'
@@ -1797,7 +1812,8 @@ export default {
   components: {
     single,
     double,
-    madeUp
+    madeUp,
+    shoppingCard
   },
   mixins: [Address],
   data() {
@@ -1889,7 +1905,10 @@ export default {
         is_electronic:"0",
         email:''
       },
-      scrollTop:0 
+      scrollTop:0,
+      ifShowAddCard: false,
+      cardList: [],
+      useAmount: []
     }
   },
   computed: {
@@ -1911,7 +1930,7 @@ export default {
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
-        .then(res => {        
+        .then(res => {
           this.good = res
           console.log("res",res)
           resolve()
@@ -1980,16 +1999,16 @@ export default {
       if(this.invoice.invoice_type == ''){
         this.redioShow = true
         return
-      } 
+      }
       if(this.invoice.invoice_title == ''){
         this.typeShow = true
         return
-      } 
+      }
       if(this.invoice.invoice_type == 1){
         if(this.invoice.tax_number == ''){
           this.taxShow = true
           return
-        } 
+        }
       }
       if(this.invoice.is_electronic == 1){
         if(this.invoice.email == '' || !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.invoice.email))){
@@ -2360,7 +2379,7 @@ export default {
         this.wrongInput.mobile = true
         return false
       }
-      
+
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
@@ -2650,7 +2669,8 @@ export default {
       //     }
       //   })
     },
-    getTex() {
+    getTex(k) {
+      const cards = k || '';
       const arr = []
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
@@ -2664,6 +2684,7 @@ export default {
       const data = arr.join(',')
       const datas={
         addressId: this.orderAddress.id,
+        cards: cards,
         cartIds: data
       }
       this.canSubmit = false
@@ -2673,6 +2694,13 @@ export default {
           // console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
+
+          if(res.data.cards.length != 0){
+            this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
+          }
+          
+          console.log(this.useAmount)
+
         })
         .catch(err => {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
@@ -2695,7 +2723,7 @@ export default {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
-        
+
       }
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
@@ -2717,12 +2745,14 @@ export default {
         invoice = this.invoice
       }
       // console.log("arr",arr)
+
       const data = {
         cart_ids: arr.join(','),
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        invoice:invoice
+        invoice:invoice,
+        card: this.cardList
       }
       // console.log("pppp",data)
       this.$axios
@@ -2735,7 +2765,7 @@ export default {
             query: {
               orderId: res.data.orderId,
               price: res.data.orderAmount,
-              coinType: res.data.coinType
+              coinType: res.data.coinType,
             }
           })
         })
@@ -2799,7 +2829,7 @@ export default {
         // ? this.orderAddress.email
         // : this.orderEmail,
       }
-      
+
       // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
@@ -2822,7 +2852,20 @@ export default {
           //   // console.log(err)
           // }
         })
+    },
+    // 添加购物卡
+    useCard(){
+      this.ifShowAddCard = true;
+    },
+    // 关闭弹窗
+    closeCardPop(k){
+      this.ifShowAddCard = false;
+      if(k != true){
+        this.cardList = k;
+        this.getTex(k);
+      }
     }
+
   }
 }
 </script>
@@ -4256,7 +4299,7 @@ div {
   }
   .gou-img{
       // display: flex;
-      // justify-content: center;   
+      // justify-content: center;
       width: 455px;
       padding: 0px 180px;
       img{
@@ -4286,7 +4329,7 @@ div {
     button{
       width: 120px;
       height: 35px;
-      background: #8b766c; 
+      background: #8b766c;
       border-radius: 4px;
       color:#fff;
     }
@@ -4608,5 +4651,27 @@ div {
   .el-select{
     width: 70%;
   }
+}
+
+.shopping-card-num{
+  display: inline-block;
+  // width: 18px;
+  // height: 18px;
+  // line-height: 18px;
+  margin-left: 4px;
+  font-size: 12px;
+}
+.add-shopping-card{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 24px;
+  line-height: 22px;
+  padding: 0 14px;
+  font-size: 13px;
+  color: #f29b87;
+  border: 1px solid #f29b87;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>

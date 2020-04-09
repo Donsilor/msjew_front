@@ -2296,7 +2296,9 @@
     "msg6": "Word count in note reaches limit",
     "msg7": "Error, error location: jump to payment when placing order",
     "msg8": "Failed to acquire data, please return to cart and try again!",
-    "msg9": "Please select a payment method!"
+    "msg9": "Please select a payment method!",
+    "useShoppingCard": "use shopping card",
+    "shoppingCard": "shopping card"
   },
   "invoice": {
     "personal":"personal",
@@ -2326,5 +2328,28 @@
     "hint3": "Tax ID cannot be empty",
     "hint4": "Mailbox cannot be empty",
     "hint5": "Please enter the correct email"
+  },
+  "shoppingCard": {
+    "title": "添加购物卡信息",
+    "cardNumber": "卡号",
+    "cardPassword": "兑换码",
+    "addCard": "添加购物卡",
+    "chooseAll": "全选",
+    "annotation": "*注：多张购物卡，可依次添加验证",
+    "cancle": "取消",
+    "confirm": "确定",
+    "clickVerify": "点击验证",
+    "verifySucceed": "验证成功",
+    "verifyFailing": "验证失败",
+    "balance": "余额",
+    "eliminateCard": "消除此卡",
+    "verifyValid": "购物卡验证有效",
+    "alreadyAdd": "已添加",
+    "verifyInvalid": "无效购物卡",
+    "anewAdd": "重新添加",
+    "msg1": "账号或密码为空，请填写",
+    "msg2": "此卡需要验证成功才能使用",
+    "msg3": "验证失败，清重新填写",
+    "msg4": "有未验证或验证失败的卡！"
   }
 }
