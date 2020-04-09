@@ -744,7 +744,7 @@ export default {
               border: none;
             }
             .similar {
-              width: 125px;
+              width: 75px;
               text-align: center;
             }
             .remove {
