@@ -312,34 +312,71 @@ export default {
       activeNavMenu: '',
       navList: [
         {
-          key: 'engagement-ring',
-          name: this.$t(`${lang}.engagementRing`),
+          key: 'ring',
+          name: this.$t(`${lang}.ring`),
           to: {
             path: '/engagement-rings'
           }
         },
         {
-          key: 'wedding-ring',
-          name: this.$t(`${lang}.weddingRing`),
+          key: 'necklace',
+          name: this.$t(`${lang}.necklace`),
           to: {
             path: '/wedding-rings'
           }
         },
         {
-          key: 'diamond',
-          name: this.$t(`${lang}.diamond`),
+          key: 'bracelet',
+          name: this.$t(`${lang}.bracelet`),
           to: {
             path: '/diamonds'
           }
         },
         {
-          key: 'jewellery-accessories',
-          name: this.$t(`${lang}.jewelleryAccessories`),
+          key: 'diamond-ring-customization',
+          name: this.$t(`${lang}.customization`),
+          to: {
+            path: '/jewellery/all'
+          }
+        },
+        {
+          key: 'theme-collection',
+          name: this.$t(`${lang}.theme`),
           to: {
             path: '/jewellery/all'
           }
         }
       ],
+      // navList: [
+      //   {
+      //     key: 'engagement-ring',
+      //     name: this.$t(`${lang}.engagementRing`),
+      //     to: {
+      //       path: '/engagement-rings'
+      //     }
+      //   },
+      //   {
+      //     key: 'wedding-ring',
+      //     name: this.$t(`${lang}.weddingRing`),
+      //     to: {
+      //       path: '/wedding-rings'
+      //     }
+      //   },
+      //   {
+      //     key: 'diamond',
+      //     name: this.$t(`${lang}.diamond`),
+      //     to: {
+      //       path: '/diamonds'
+      //     }
+      //   },
+      //   {
+      //     key: 'jewellery-accessories',
+      //     name: this.$t(`${lang}.jewelleryAccessories`),
+      //     to: {
+      //       path: '/jewellery/all'
+      //     }
+      //   }
+      // ],
       otherNavList: [
         {
           key: 'education',
@@ -350,47 +387,46 @@ export default {
         }
       ],
       menus: {
-        'engagement-ring': {
-          image: '/adt/image1564544333790.png',
+        'ring': {
+          // image: '/adt/image1564544333790.png',
           groups: [
             [
               {
-                groupName: this.$t(
-                  `${lang}.engagementRingMenu.designYourEngagementRing`
-                ),
+                groupName: this.$t(`${lang}.ringsMenu.style`),
                 data: [
                   {
-                    name: this.$t(
-                      `${lang}.engagementRingMenu.startFromSetting`
-                    ),
-                    icon: 'iconstar-jt',
+                    name: this.$t(`${lang}.ringsMenu.engagementRing`),
+                    // icon: 'iconring-jy ring-icon',
                     to: {
-                      path: this.$startDj(2)
+                      path: '/engagement-rings/all'
                     }
                   },
                   {
-                    name: this.$t(
-                      `${lang}.engagementRingMenu.startFromDiamond`
-                    ),
-                    icon: 'iconstar-zs',
+                    name: this.$t(`${lang}.ringsMenu.weddingRing`),
+                    // icon: 'iconring-sh ring-icon',
                     to: {
-                      path: this.$startDj(1)
+                      path: '/wedding-rings/all'
                     }
-                  }
-                ]
-              },
-              {
-                groupName: this.$t(
-                  `${lang}.engagementRingMenu.inspiredByCustomerRings`
-                ),
-                data: [
+                  },
                   {
-                    name: this.$t(
-                      `${lang}.engagementRingMenu.matchWithRoundDiamonds`
-                    ),
-                    icon: '',
+                    name: this.$t(`${lang}.ringsMenu.ring`),
+                    // icon: 'iconring-gdx ring-icon',
                     to: {
-                      path: this.$startDj(1)
+                      path: '/wedding-rings/womens-classic'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.ringsMenu.fashionRing`),
+                    // icon: 'iconring-js ring-icon',
+                    to: {
+                      path: '/wedding-rings/womens-classic'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.ringsMenu.CoupleRing`),
+                    // icon: 'iconring-bx ring-icon',
+                    to: {
+                      path: '/wedding-rings/womens-classic'
                     }
                   }
                 ]
@@ -398,55 +434,41 @@ export default {
             ],
             [
               {
-                groupName: this.$t(`${lang}.engagementRingMenu.style`),
+                groupName: this.$t(`${lang}.ringsMenu.color`),
                 data: [
                   {
-                    name: this.$t(`${lang}.engagementRingMenu.solitaire`),
-                    icon: 'iconring-jy ring-icon',
+                    name: this.$t(`${lang}.ringsMenu.18KWhite`),
+                    // icon: 'iconring-jy ring-icon',
                     to: {
-                      path: '/engagement-rings/solitaire'
+                      path: '/engagement-rings/18k-white'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.engagementRingMenu.jump`),
-                    icon: 'iconring-sh ring-icon',
+                    name: this.$t(`${lang}.ringsMenu.18KYellow`),
+                    // icon: 'iconring-sh ring-icon',
                     to: {
-                      path: '/engagement-rings/jump'
+                      path: '/engagement-rings/18k-yellow'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.engagementRingMenu.paveSet`),
-                    icon: 'iconring-gdx ring-icon',
+                    name: this.$t(`${lang}.ringsMenu.18KRoseGold`),
+                    // icon: 'iconring-gdx ring-icon',
                     to: {
-                      path: '/engagement-rings/pave-set'
+                      path: '/engagement-rings/18k-rose-gold'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.engagementRingMenu.classical`),
-                    icon: 'iconring-js ring-icon',
+                    name: this.$t(`${lang}.ringsMenu.platinum`),
+                    // icon: 'iconring-js ring-icon',
                     to: {
-                      path: '/engagement-rings/classical'
+                      path: '/engagement-rings/platinum'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.engagementRingMenu.channelSet`),
-                    icon: 'iconring-bx ring-icon',
+                    name: this.$t(`${lang}.ringsMenu.fineSilver`),
+                    // icon: 'iconring-bx ring-icon',
                     to: {
                       path: '/engagement-rings/channel-set'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.engagementRingMenu.haloSet`),
-                    icon: 'iconring-yx ring-icon',
-                    to: {
-                      path: '/engagement-rings/halo-set'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.engagementRingMenu.threeStone`),
-                    icon: 'iconring-sz ring-icon',
-                    to: {
-                      path: '/engagement-rings/three-stone'
                     }
                   }
                 ]
@@ -455,54 +477,94 @@ export default {
             [
               {
                 key: 'material',
-                groupName: this.$t(`${lang}.engagementRingMenu.color`),
+                groupName: this.$t(`${lang}.ringsMenu.price`),
                 data: [
                   {
                     id: 31,
-                    name: this.$t(`${lang}.engagementRingMenu.14KWhite`),
-                    icon: 'iconmaterial-big-pt color-icon color-14k-white',
+                    name: this.$t(`${lang}.ringsMenu.priceRange1`),
+                    // icon: 'iconmaterial-big-pt color-icon color-14k-white',
                     to: {
-                      path: '/engagement-rings/14k-white'
+                      path: `/engagement-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
                     }
                   },
                   {
                     id: 28,
-                    name: this.$t(`${lang}.engagementRingMenu.18KWhite`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-white',
+                    name: this.$t(`${lang}.ringsMenu.priceRange2`),
+                    // icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: '/engagement-rings/18k-white'
+                      path: ''
                     }
                   },
                   {
                     id: 32,
-                    name: this.$t(`${lang}.engagementRingMenu.14KYellow`),
-                    icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+                    name: this.$t(`${lang}.ringsMenu.priceRange3`),
+                    // icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
-                      path: '/engagement-rings/14k-yellow'
+                      path: ''
                     }
                   },
                   {
                     id: 29,
-                    name: this.$t(`${lang}.engagementRingMenu.18KYellow`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
+                    name: this.$t(`${lang}.ringsMenu.priceRange4`),
+                    // icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
-                      path: '/engagement-rings/18k-yellow'
+                      path: ''
                     }
                   },
                   {
                     id: 34,
-                    name: this.$t(`${lang}.engagementRingMenu.platinum`),
-                    icon: 'iconmaterial-big-pt color-icon color-platinum',
+                    name: this.$t(`${lang}.ringsMenu.priceRange5`),
+                    // icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: '/engagement-rings/platinum'
+                      path: ''
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                key: 'material',
+                groupName: this.$t(`${lang}.ringsMenu.use`),
+                data: [
+                  {
+                    id: 31,
+                    name: this.$t(`${lang}.ringsMenu.engagementRing`),
+                    // icon: 'iconmaterial-big-pt color-icon color-14k-white',
+                    to: {
+                      path: '/engagement-rings/all'
                     }
                   },
                   {
-                    id: 30,
-                    name: this.$t(`${lang}.engagementRingMenu.18KRoseGold`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
+                    id: 28,
+                    name: this.$t(`${lang}.ringsMenu.weddingRing`),
+                    // icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: '/engagement-rings/18k-rose-gold'
+                      path: '/wedding-rings/all'
+                    }
+                  },
+                  {
+                    id: 32,
+                    name: this.$t(`${lang}.ringsMenu.proposalRing`),
+                    // icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+                    to: {
+                      path: ''
+                    }
+                  },
+                  {
+                    id: 29,
+                    name: this.$t(`${lang}.ringsMenu.ValentinesDay`),
+                    // icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
+                    to: {
+                      path: ''
+                    }
+                  },
+                  {
+                    id: 34,
+                    name: this.$t(`${lang}.ringsMenu.birthdayPresent`),
+                    // icon: 'iconmaterial-big-pt color-icon color-platinum',
+                    to: {
+                      path: ''
                     }
                   }
                   // {
@@ -520,25 +582,25 @@ export default {
             ]
           ]
         },
-        'wedding-ring': {
-          image: '/adt/image1564544333790.png',
+        'necklace': {
+          // image: '/adt/image1564544333790.png',
           groups: [
             [
               {
-                groupName: this.$t(`${lang}.weddingRingMenu.coupleRings`),
+                groupName: this.$t(`${lang}.necklaceMenu.style`),
                 data: [
                   {
-                    name: this.$t(`${lang}.weddingRingMenu.classicSeries`),
-                    icon: 'iconmarry-jd ring-icon',
+                    name: this.$t(`${lang}.necklaceMenu.necklace`),
+                    // icon: 'iconmarry-jd ring-icon',
                     to: {
-                      path: '/wedding-rings/classic-series'
+                      path: '/jewellery/necklaces'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.weddingRingMenu.channelSetSeries`),
-                    icon: 'iconmarry-pz ring-icon',
+                    name: this.$t(`${lang}.necklaceMenu.Pendant`),
+                    // icon: 'iconmarry-pz ring-icon',
                     to: {
-                      path: '/wedding-rings/channel-set-series'
+                      path: '/jewellery/pendants'
                     }
                   }
                 ]
@@ -546,323 +608,163 @@ export default {
             ],
             [
               {
-                groupName: this.$t(`${lang}.weddingRingMenu.women`),
+                groupName: this.$t(`${lang}.necklaceMenu.color`),
                 data: [
                   {
-                    name: this.$t(`${lang}.weddingRingMenu.classic`),
-                    icon: 'iconmarry--woman-jingdian ring-icon',
+                    name: this.$t(`${lang}.necklaceMenu.18KWhite`),
+                    // icon: 'iconmarry--woman-jingdian ring-icon',
                     to: {
-                      path: '/wedding-rings/womens-classic'
+                      path: '/jewellery/necklaces/18k-white'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.weddingRingMenu.eternity`),
-                    icon: 'iconmarry--woman-yongheng ring-icon',
+                    name: this.$t(`${lang}.necklaceMenu.18KYellow`),
+                    // icon: 'iconmarry--woman-yongheng ring-icon',
                     to: {
-                      path: '/wedding-rings/womens-eternity'
+                      path: '/jewellery/necklaces/18K-yellow'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.weddingRingMenu.anniversary`),
-                    icon: 'iconmarry--woman-zhounian ring-icon',
+                    name: this.$t(`${lang}.necklaceMenu.18KRoseGold`),
+                    // icon: 'iconmarry--woman-zhounian ring-icon',
                     to: {
-                      path: '/wedding-rings/womens-anniversary'
+                      path: '/jewellery/necklaces/18k-rose-gold'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.weddingRingMenu.diamond`),
-                    icon: 'iconmarry--woman-zuans ring-icon',
+                    name: this.$t(`${lang}.necklaceMenu.platinum`),
+                    // icon: 'iconmarry--woman-zuans ring-icon',
                     to: {
-                      path: '/wedding-rings/womens-diamond'
+                      path: '/jewellery/necklaces/platinum'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.weddingRingMenu.stackable`),
-                    icon: 'iconmarry--woman-duidie ring-icon',
+                    name: this.$t(`${lang}.necklaceMenu.fineSilver`),
+                    // icon: 'iconmarry--woman-duidie ring-icon',
                     to: {
-                      path: '/wedding-rings/womens-stackable'
-                    }
-                  }
-                ]
-              },
-              {
-                groupName: this.$t(`${lang}.weddingRingMenu.men`),
-                data: [
-                  {
-                    name: this.$t(`${lang}.weddingRingMenu.classic`),
-                    icon: 'iconmarry--woman-jingdian ring-icon',
-                    to: {
-                      path: '/wedding-rings/mens-classic'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.weddingRingMenu.engravable`),
-                    icon: 'iconmarry--man-diaoke ring-icon',
-                    to: {
-                      path: '/wedding-rings/mens-carved'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.weddingRingMenu.diamond`),
-                    icon: 'iconmarry--woman-zuans ring-icon',
-                    to: {
-                      path: '/wedding-rings/mens-diamond'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.weddingRingMenu.stackable`),
-                    icon: 'iconmarry--man-jinshu ring-icon',
-                    to: {
-                      path: '/wedding-rings/mens-alternative-metals'
+                      path: '/jewellery/necklaces/fineSilver'
                     }
                   }
                 ]
               }
             ],
-
             [
               {
                 key: 'material',
-                groupName: this.$t(`${lang}.weddingRingMenu.color`),
+                groupName: this.$t(`${lang}.necklaceMenu.price`),
                 data: [
                   {
                     id: 31,
-                    name: this.$t(`${lang}.weddingRingMenu.14KWhite`),
-                    icon: 'iconmaterial-big-pt color-icon color-14k-white',
+                    name: this.$t(`${lang}.necklaceMenu.priceRange1`),
+                    // icon: 'iconmaterial-big-pt color-icon color-14k-white',
+                    to: {
+                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
+                    }
+                  },
+                  {
+                    id: 28,
+                    name: this.$t(`${lang}.necklaceMenu.priceRange2`),
+                    // icon: 'iconmaterial-big-pt color-icon color-18k-white',
+                    to: {
+                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
+                    }
+                  },
+                  {
+                    id: 32,
+                    name: this.$t(`${lang}.necklaceMenu.priceRange3`),
+                    // icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+                    to: {
+                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
+                    }
+                  },
+                  {
+                    id: 29,
+                    name: this.$t(`${lang}.necklaceMenu.priceRange4`),
+                    // icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
+                    to: {
+                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
+                    }
+                  },
+                  {
+                    id: 34,
+                    name: this.$t(`${lang}.necklaceMenu.priceRange5`),
+                    // icon: 'iconmaterial-big-pt color-icon color-platinum',
+                    to: {
+                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 6999]))}`
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                key: 'material',
+                groupName: this.$t(`${lang}.necklaceMenu.use`),
+                data: [
+                  {
+                    id: 31,
+                    name: this.$t(`${lang}.necklaceMenu.ValentinesDay`),
+                    // icon: 'iconmaterial-big-pt color-icon color-14k-white',
                     to: {
                       path: '/wedding-rings/14k-white'
                     }
                   },
                   {
                     id: 28,
-                    name: this.$t(`${lang}.weddingRingMenu.18KWhite`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-white',
+                    name: this.$t(`${lang}.necklaceMenu.MothersDay`),
+                    // icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
                       path: '/wedding-rings/18k-white'
                     }
                   },
                   {
                     id: 32,
-                    name: this.$t(`${lang}.weddingRingMenu.14KYellow`),
-                    icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+                    name: this.$t(`${lang}.necklaceMenu.birthdayPresent`),
+                    // icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
                       path: '/wedding-rings/14k-yellow'
                     }
                   },
                   {
                     id: 29,
-                    name: this.$t(`${lang}.weddingRingMenu.18KYellow`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
+                    name: this.$t(`${lang}.necklaceMenu.ChristmasGift`),
+                    // icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
                       path: '/wedding-rings/18k-yellow'
                     }
                   },
                   {
                     id: 34,
-                    name: this.$t(`${lang}.weddingRingMenu.platinum`),
-                    icon: 'iconmaterial-big-pt color-icon color-platinum',
+                    name: this.$t(`${lang}.necklaceMenu.HalloweenGift`),
+                    // icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/wedding-rings/platinum'
                     }
-                  },
-                  {
-                    id: 30,
-                    name: this.$t(`${lang}.weddingRingMenu.18KRoseGold`),
-                    icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
-                    to: {
-                      path: '/wedding-rings/18k-rose-gold'
-                    }
                   }
-                  // {
-                  //   name: this.$t(`${lang}.weddingRingMenu.14KRoseGold`),
-                  //   icon: 'iconstar-zs',
-                  //   href: '/wedding-rings/14k-rose-gold'
-                  // },
-                  // {
-                  //   name: this.$t(`${lang}.weddingRingMenu.fineSilver`),
-                  //   icon: 'iconstar-zs',
-                  //   href: '/wedding-rings/fine-silver'
-                  // }
                 ]
               }
             ]
-
           ]
         },
-        diamond: {
-          image: '/adt/image1564544333790.png',
+        'bracelet': {
+          // image: '/adt/image1564544333790.png',
           groups: [
             [
               {
                 groupName: this.$t(
-                  `${lang}.diamondMenu.designYourEngagementRing`
+                  `${lang}.braceletMenu.style`
                 ),
                 data: [
                   {
-                    name: this.$t(`${lang}.diamondMenu.startFromSetting`),
-                    icon: 'iconstar-jt',
-                    to: {
-                      path: this.$startDj(2)
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.startFromDiamond`),
-                    icon: 'iconstar-zs',
-                    to: {
-                      path: this.$startDj(1)
-                    }
-                  }
-                ]
-              }
-            ],
-            [
-              {
-                groupName: this.$t(`${lang}.diamondMenu.looseDiamond`),
-                data: [
-                  {
-                    name: this.$t(`${lang}.diamondMenu.round`),
-                    icon: 'iconyuanxin shape-icon',
-                    to: {
-                      path: '/diamonds/round-cut'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.oval`),
-                    icon: 'icontuoyuan shape-icon',
-                    to: {
-                      path: '/diamonds/oval-cut'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.princess`),
-                    icon: 'iconfangxing shape-icon',
-                    to: {
-                      path: '/diamonds/princess-cut'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.emerald`),
-                    icon: 'iconfushe shape-icon',
-                    to: {
-                      path: '/diamonds/emerald-cut'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.heart`),
-                    icon: 'iconaixin shape-icon',
-                    to: {
-                      path: '/diamonds/heart-shaped'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.marquise`),
-                    icon: 'iconhoujue shape-icon',
-                    to: {
-                      path: '/diamonds/marquise-cut'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.cushion`),
-                    icon: 'icondianzi shape-icon',
-                    to: {
-                      path: '/diamonds/cushion-cut'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.pearShape`),
-                    icon: 'iconli shape-icon',
-                    to: {
-                      path: '/diamonds/pear-shaped'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.asscher`),
-                    icon: 'iconaqies shape-icon',
-                    to: {
-                      path: '/diamonds/asscher-cut'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.diamondMenu.radiant`),
-                    icon: 'iconcui shape-icon',
-                    to: {
-                      path: '/diamonds/radiant-cut'
-                    }
-                  }
-                ]
-              }
-            ],
-            [
-              {
-                groupName: this.$t(`${lang}.diamondMenu.designYourOwnJewelry`),
-                data: [
-                  {
-                    name: this.$t(`${lang}.diamondMenu.customRing`),
-                    icon: 'iconJewelry-made-ring',
-                    to: {
-                      path: this.$startDj(2)
-                    }
-                  }
-                  // {
-                  //   name: this.$t(`${lang}.diamondMenu.customBracelet`),
-                  //   icon: 'iconJewelry-bracelet',
-                  //   href: '/'
-                  // },
-                  // {
-                  //   name: this.$t(`${lang}.diamondMenu.customNecklace`),
-                  //   icon: 'iconJewelry-made-Bracelet',
-                  //   href: '/'
-                  // }
-                ]
-              }
-            ]
-          ]
-        },
-        'jewellery-accessories': {
-          image: '/adt/image1564544333790.png',
-          groups: [
-            [
-              {
-                groupName: this.$t(`${lang}.jewelleryAccessoriesMenu.jewelry`),
-                data: [
-                  {
-                    name: this.$t(`${lang}.jewelleryAccessoriesMenu.necklaces`),
-                    icon: 'iconJewelry-necklace',
-                    to: {
-                      path: '/jewellery/necklaces'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.jewelleryAccessoriesMenu.pendants`),
-                    icon: 'icondiamond-pendant',
-                    to: {
-                      path: '/jewellery/pendants'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.jewelleryAccessoriesMenu.earStud`),
-                    icon: 'icondiamond-earring',
-                    to: {
-                      path: '/jewellery/ear-stud'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.jewelleryAccessoriesMenu.earrings`),
-                    icon: 'iconJewelry-earring',
-                    to: {
-                      path: '/jewellery/earrings'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.jewelleryAccessoriesMenu.bracelets`),
-                    icon: 'iconJewelry-bracelet',
+                    name: this.$t(`${lang}.braceletMenu.Bracelet`),
+                    // icon: 'iconstar-jt',
                     to: {
                       path: '/jewellery/bracelets'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.jewelleryAccessoriesMenu.bangles`),
-                    icon: 'iconshouhuan',
+                    name: this.$t(`${lang}.braceletMenu.bracelet`),
+                    // icon: 'iconstar-zs',
                     to: {
                       path: '/jewellery/bangles'
                     }
@@ -870,71 +772,438 @@ export default {
                 ]
               }
             ],
-            // [
-            //   {
-            //     groupName: this.$t(
-            //       `${lang}.jewelleryAccessoriesMenu.customAccessories`
-            //     ),
-            //     data: [
-            //       // {
-            //       //   name: this.$t(
-            //       //     `${lang}.jewelleryAccessoriesMenu.customNecklace`
-            //       //   ),
-            //       //   icon: 'iconJewelry-made-Bracelet',
-            //       //   to: {
-            //       //     path: '/'
-            //       //   }
-            //       // },
-            //       // {
-            //       //   name: this.$t(
-            //       //     `${lang}.jewelleryAccessoriesMenu.customBracelet`
-            //       //   ),
-            //       //   icon: 'iconJewelry-bracelet',
-            //       //   to: {
-            //       //     path: '/'
-            //       //   }
-            //       // },
-            //       {
-            //         name: this.$t(
-            //           `${lang}.jewelleryAccessoriesMenu.customRing`
-            //         ),
-            //         icon: 'iconJewelry-made-ring',
-            //         to: {
-            //           path: '/'
-            //         }
-            //       }
-            //     ]
-            //   }
-            // ],
+            [
+              {
+                groupName: this.$t(`${lang}.braceletMenu.color`),
+                data: [
+                  {
+                    name: this.$t(`${lang}.braceletMenu.18KWhite`),
+                    // icon: 'iconyuanxin shape-icon',
+                    to: {
+                      path: '/diamonds/18k-khite'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.18KYellow`),
+                    // icon: 'icontuoyuan shape-icon',
+                    to: {
+                      path: '/diamonds/18k-yellow'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.18KRoseGold`),
+                    // icon: 'iconfangxing shape-icon',
+                    to: {
+                      path: '/diamonds/18k-rose-gold'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.platinum`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/diamonds/emerald-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.fineSilver`),
+                    // icon: 'iconaixin shape-icon',
+                    to: {
+                      path: '/diamonds/heart-shaped'
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                groupName: this.$t(`${lang}.braceletMenu.price`),
+                data: [
+                  {
+                    name: this.$t(`${lang}.braceletMenu.priceRange1`),
+                    // icon: 'iconyuanxin shape-icon',
+                    to: {
+                      path: '/diamonds/round-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.priceRange2`),
+                    // icon: 'icontuoyuan shape-icon',
+                    to: {
+                      path: '/diamonds/oval-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.priceRange3`),
+                    // icon: 'iconfangxing shape-icon',
+                    to: {
+                      path: '/diamonds/princess-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.priceRange4`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/diamonds/emerald-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.priceRange5`),
+                    // icon: 'iconaixin shape-icon',
+                    to: {
+                      path: '/diamonds/heart-shaped'
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                groupName: this.$t(`${lang}.braceletMenu.use`),
+                data: [
+                  {
+                    name: this.$t(`${lang}.braceletMenu.ValentinesDay`),
+                    // icon: 'iconyuanxin shape-icon',
+                    to: {
+                      path: '/diamonds/round-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.MothersDay`),
+                    // icon: 'icontuoyuan shape-icon',
+                    to: {
+                      path: '/diamonds/oval-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.birthdayPresent`),
+                    // icon: 'iconfangxing shape-icon',
+                    to: {
+                      path: '/diamonds/princess-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.ChristmasGift`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/diamonds/emerald-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.braceletMenu.HalloweenGift`),
+                    // icon: 'iconaixin shape-icon',
+                    to: {
+                      path: '/diamonds/heart-shaped'
+                    }
+                  }
+                ]
+              }
+            ]
+          ]
+        },
+        'diamond-ring-customization': {
+          // image: '/adt/image1564544333790.png',
+          groups: [
             [
               {
                 groupName: this.$t(
-                  `${lang}.jewelleryAccessoriesMenu.specialGift`
+                  `${lang}.diamondMenu.designRing`
+                ),
+                data: [
+                  {
+                    name: this.$t(`${lang}.diamondMenu.SelectDiamondFirst`),
+                    // icon: 'iconstar-jt',
+                    to: {
+                      path: this.$startDj(1)
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.DiamondRing`),
+                    // icon: 'iconstar-zs',
+                    to: {
+                      path: this.$startDj(2)
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                groupName: this.$t(`${lang}.diamondMenu.SettingStyle`),
+                data: [
+                  {
+                    name: this.$t(`${lang}.diamondMenu.ClawRing`),
+                    // icon: 'iconyuanxin shape-icon',
+                    to: {
+                      path: '/diamonds/round-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.GroupRing`),
+                    // icon: 'icontuoyuan shape-icon',
+                    to: {
+                      path: '/diamonds/oval-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.ThreeMainStoneRings`),
+                    // icon: 'iconfangxing shape-icon',
+                    to: {
+                      path: '/engagement-rings/three-stone'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.OpenMouth`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/engagement-rings/jump'
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                groupName: this.$t(`${lang}.diamondMenu.DiamondWeight`),
+                data: [
+                  {
+                    name: this.$t(`${lang}.diamondMenu.WeightRange1`),
+                    // icon: 'iconyuanxin shape-icon',
+                    to: {
+                      path: '/diamonds/round-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.WeightRange2`),
+                    // icon: 'icontuoyuan shape-icon',
+                    to: {
+                      path: '/diamonds/oval-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.WeightRange3`),
+                    // icon: 'iconfangxing shape-icon',
+                    to: {
+                      path: '/diamonds/princess-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.WeightRange4`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/diamonds/emerald-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.WeightRange5`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/diamonds/emerald-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.WeightRange6`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/diamonds/emerald-cut'
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                groupName: this.$t(`${lang}.diamondMenu.use`),
+                data: [
+                  {
+                    name: this.$t(`${lang}.diamondMenu.propose`),
+                    // icon: 'iconyuanxin shape-icon',
+                    to: {
+                      path: '/diamonds/round-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.gotEngaged`),
+                    // icon: 'icontuoyuan shape-icon',
+                    to: {
+                      path: '/diamonds/oval-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.marry`),
+                    // icon: 'iconfangxing shape-icon',
+                    to: {
+                      path: '/diamonds/princess-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.ValentinesDay`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/diamonds/emerald-cut'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.diamondMenu.birthdayPresent`),
+                    // icon: 'iconfushe shape-icon',
+                    to: {
+                      path: '/diamonds/emerald-cut'
+                    }
+                  }
+                ]
+              }
+            ]
+          ]
+        },
+        'theme-collection': {
+          image: '/adt/image1564544333790.png',
+          groups: [
+            [
+              {
+                groupName: this.$t(`${lang}.themeCollectionMenu.Promotions`),
+                data: [
+                  {
+                    name: this.$t(`${lang}.themeCollectionMenu.BlackFriday`),
+                    // icon: 'iconJewelry-necklace',
+                    to: {
+                      path: '/jewellery/necklaces'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.themeCollectionMenu.coupon`),
+                    // icon: 'icondiamond-pendant',
+                    to: {
+                      path: '/jewellery/pendants'
+                    }
+                  },
+                  {
+                    name: this.$t(`${lang}.themeCollectionMenu.SpecialDiscount`),
+                    // icon: 'icondiamond-earring',
+                    to: {
+                      path: '/jewellery/ear-stud'
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                groupName: this.$t(
+                  `${lang}.themeCollectionMenu.HolidayGift`
                 ),
                 data: [
                   {
                     name: this.$t(
-                      `${lang}.jewelleryAccessoriesMenu.giftsUnderHKD1000`
+                      `${lang}.themeCollectionMenu.ValentinesDay`
                     ),
-                    icon: 'iconJewelry-gift-d',
+                    // icon: 'iconJewelry-gift-d',
                     to: {
                       path: `/jewellery/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
                     }
                   },
                   {
                     name: this.$t(
-                      `${lang}.jewelleryAccessoriesMenu.designYourOwnJewelryAccessories`
+                      `${lang}.themeCollectionMenu.MothersDay`
                     ),
-                    icon: 'iconJewelry-gift-design',
+                    // icon: 'iconJewelry-gift-design',
                     to: {
                       path: '/diamonds'
                     }
                   },
                   {
                     name: this.$t(
-                      `${lang}.jewelleryAccessoriesMenu.giftForLadies`
+                      `${lang}.themeCollectionMenu.birthdayPresent`
                     ),
-                    icon: 'iconJewelry-gift-woman',
+                    // icon: 'iconJewelry-gift-woman',
+                    to: {
+                      path: '/jewellery/necklaces'
+                    }
+                  },
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.ChristmasGift`
+                    ),
+                    // icon: 'iconJewelry-gift-woman',
+                    to: {
+                      path: '/jewellery/necklaces'
+                    }
+                  },
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.HalloweenGift`
+                    ),
+                    // icon: 'iconJewelry-gift-woman',
+                    to: {
+                      path: '/jewellery/necklaces'
+                    }
+                  }
+                ]
+              }
+            ],
+            [
+              {
+                groupName: this.$t(
+                  `${lang}.themeCollectionMenu.classification`
+                ),
+                data: [
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.Ring`
+                    ),
+                    // icon: 'iconJewelry-gift-d',
+                    to: {
+                      path: `/jewellery/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 2000]))}`
+                    }
+                  },
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.CoupleRing`
+                    ),
+                    // icon: 'iconJewelry-gift-design',
+                    to: {
+                      path: '/diamonds'
+                    }
+                  },
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.NecklaceAndPendant`
+                    ),
+                    // icon: 'iconJewelry-gift-woman',
+                    to: {
+                      path: '/jewellery/necklaces'
+                    }
+                  },
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.Bracelet`
+                    ),
+                    // icon: 'iconJewelry-gift-woman',
+                    to: {
+                      path: '/jewellery/necklaces'
+                    }
+                  },
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.EarringsAndStuds`
+                    ),
+                    // icon: 'iconJewelry-gift-woman',
+                    to: {
+                      path: '/jewellery/necklaces'
+                    }
+                  },
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.DecorationAndPendant`
+                    ),
+                    // icon: 'iconJewelry-gift-woman',
+                    to: {
+                      path: '/jewellery/necklaces'
+                    }
+                  },
+                  {
+                    name: this.$t(
+                      `${lang}.themeCollectionMenu.other`
+                    ),
+                    // icon: 'iconJewelry-gift-woman',
                     to: {
                       path: '/jewellery/necklaces'
                     }
@@ -945,6 +1214,602 @@ export default {
           ]
         }
       },
+      // menus: {
+      //   'engagement-ring': {
+      //     image: '/adt/image1564544333790.png',
+      //     groups: [
+      //       [
+      //         {
+      //           groupName: this.$t(
+      //             `${lang}.engagementRingMenu.designYourEngagementRing`
+      //           ),
+      //           data: [
+      //             {
+      //               name: this.$t(
+      //                 `${lang}.engagementRingMenu.startFromSetting`
+      //               ),
+      //               icon: 'iconstar-jt',
+      //               to: {
+      //                 path: this.$startDj(2)
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(
+      //                 `${lang}.engagementRingMenu.startFromDiamond`
+      //               ),
+      //               icon: 'iconstar-zs',
+      //               to: {
+      //                 path: this.$startDj(1)
+      //               }
+      //             }
+      //           ]
+      //         },
+      //         {
+      //           groupName: this.$t(
+      //             `${lang}.engagementRingMenu.inspiredByCustomerRings`
+      //           ),
+      //           data: [
+      //             {
+      //               name: this.$t(
+      //                 `${lang}.engagementRingMenu.matchWithRoundDiamonds`
+      //               ),
+      //               icon: '',
+      //               to: {
+      //                 path: this.$startDj(1)
+      //               }
+      //             }
+      //           ]
+      //         }
+      //       ],
+      //       [
+      //         {
+      //           groupName: this.$t(`${lang}.engagementRingMenu.style`),
+      //           data: [
+      //             {
+      //               name: this.$t(`${lang}.engagementRingMenu.solitaire`),
+      //               icon: 'iconring-jy ring-icon',
+      //               to: {
+      //                 path: '/engagement-rings/solitaire'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.engagementRingMenu.jump`),
+      //               icon: 'iconring-sh ring-icon',
+      //               to: {
+      //                 path: '/engagement-rings/jump'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.engagementRingMenu.paveSet`),
+      //               icon: 'iconring-gdx ring-icon',
+      //               to: {
+      //                 path: '/engagement-rings/pave-set'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.engagementRingMenu.classical`),
+      //               icon: 'iconring-js ring-icon',
+      //               to: {
+      //                 path: '/engagement-rings/classical'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.engagementRingMenu.channelSet`),
+      //               icon: 'iconring-bx ring-icon',
+      //               to: {
+      //                 path: '/engagement-rings/channel-set'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.engagementRingMenu.haloSet`),
+      //               icon: 'iconring-yx ring-icon',
+      //               to: {
+      //                 path: '/engagement-rings/halo-set'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.engagementRingMenu.threeStone`),
+      //               icon: 'iconring-sz ring-icon',
+      //               to: {
+      //                 path: '/engagement-rings/three-stone'
+      //               }
+      //             }
+      //           ]
+      //         }
+      //       ],
+      //       [
+      //         {
+      //           key: 'material',
+      //           groupName: this.$t(`${lang}.engagementRingMenu.color`),
+      //           data: [
+      //             {
+      //               id: 31,
+      //               name: this.$t(`${lang}.engagementRingMenu.14KWhite`),
+      //               icon: 'iconmaterial-big-pt color-icon color-14k-white',
+      //               to: {
+      //                 path: '/engagement-rings/14k-white'
+      //               }
+      //             },
+      //             {
+      //               id: 28,
+      //               name: this.$t(`${lang}.engagementRingMenu.18KWhite`),
+      //               icon: 'iconmaterial-big-pt color-icon color-18k-white',
+      //               to: {
+      //                 path: '/engagement-rings/18k-white'
+      //               }
+      //             },
+      //             {
+      //               id: 32,
+      //               name: this.$t(`${lang}.engagementRingMenu.14KYellow`),
+      //               icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+      //               to: {
+      //                 path: '/engagement-rings/14k-yellow'
+      //               }
+      //             },
+      //             {
+      //               id: 29,
+      //               name: this.$t(`${lang}.engagementRingMenu.18KYellow`),
+      //               icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
+      //               to: {
+      //                 path: '/engagement-rings/18k-yellow'
+      //               }
+      //             },
+      //             {
+      //               id: 34,
+      //               name: this.$t(`${lang}.engagementRingMenu.platinum`),
+      //               icon: 'iconmaterial-big-pt color-icon color-platinum',
+      //               to: {
+      //                 path: '/engagement-rings/platinum'
+      //               }
+      //             },
+      //             {
+      //               id: 30,
+      //               name: this.$t(`${lang}.engagementRingMenu.18KRoseGold`),
+      //               icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
+      //               to: {
+      //                 path: '/engagement-rings/18k-rose-gold'
+      //               }
+      //             }
+      //             // {
+      //             //   name: this.$t(`${lang}.engagementRingMenu.14KRoseGold`),
+      //             //   icon: 'iconmaterial-big-pt color-icon',
+      //             //   href: '/engagement-rings/14k-rose-gold'
+      //             // },
+      //             // {
+      //             //   name: this.$t(`${lang}.engagementRingMenu.fineSilver`),
+      //             //   icon: 'iconmaterial-big-pt color-icon',
+      //             //   href: '/engagement-rings/fine-silver'
+      //             // }
+      //           ]
+      //         }
+      //       ]
+      //     ]
+      //   },
+      //   'wedding-ring': {
+      //     image: '/adt/image1564544333790.png',
+      //     groups: [
+      //       [
+      //         {
+      //           groupName: this.$t(`${lang}.weddingRingMenu.coupleRings`),
+      //           data: [
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.classicSeries`),
+      //               icon: 'iconmarry-jd ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/classic-series'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.channelSetSeries`),
+      //               icon: 'iconmarry-pz ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/channel-set-series'
+      //               }
+      //             }
+      //           ]
+      //         }
+      //       ],
+      //       [
+      //         {
+      //           groupName: this.$t(`${lang}.weddingRingMenu.women`),
+      //           data: [
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.classic`),
+      //               icon: 'iconmarry--woman-jingdian ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/womens-classic'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.eternity`),
+      //               icon: 'iconmarry--woman-yongheng ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/womens-eternity'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.anniversary`),
+      //               icon: 'iconmarry--woman-zhounian ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/womens-anniversary'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.diamond`),
+      //               icon: 'iconmarry--woman-zuans ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/womens-diamond'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.stackable`),
+      //               icon: 'iconmarry--woman-duidie ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/womens-stackable'
+      //               }
+      //             }
+      //           ]
+      //         },
+      //         {
+      //           groupName: this.$t(`${lang}.weddingRingMenu.men`),
+      //           data: [
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.classic`),
+      //               icon: 'iconmarry--woman-jingdian ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/mens-classic'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.engravable`),
+      //               icon: 'iconmarry--man-diaoke ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/mens-carved'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.diamond`),
+      //               icon: 'iconmarry--woman-zuans ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/mens-diamond'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.weddingRingMenu.stackable`),
+      //               icon: 'iconmarry--man-jinshu ring-icon',
+      //               to: {
+      //                 path: '/wedding-rings/mens-alternative-metals'
+      //               }
+      //             }
+      //           ]
+      //         }
+      //       ],
+
+      //       [
+      //         {
+      //           key: 'material',
+      //           groupName: this.$t(`${lang}.weddingRingMenu.color`),
+      //           data: [
+      //             {
+      //               id: 31,
+      //               name: this.$t(`${lang}.weddingRingMenu.14KWhite`),
+      //               icon: 'iconmaterial-big-pt color-icon color-14k-white',
+      //               to: {
+      //                 path: '/wedding-rings/14k-white'
+      //               }
+      //             },
+      //             {
+      //               id: 28,
+      //               name: this.$t(`${lang}.weddingRingMenu.18KWhite`),
+      //               icon: 'iconmaterial-big-pt color-icon color-18k-white',
+      //               to: {
+      //                 path: '/wedding-rings/18k-white'
+      //               }
+      //             },
+      //             {
+      //               id: 32,
+      //               name: this.$t(`${lang}.weddingRingMenu.14KYellow`),
+      //               icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+      //               to: {
+      //                 path: '/wedding-rings/14k-yellow'
+      //               }
+      //             },
+      //             {
+      //               id: 29,
+      //               name: this.$t(`${lang}.weddingRingMenu.18KYellow`),
+      //               icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
+      //               to: {
+      //                 path: '/wedding-rings/18k-yellow'
+      //               }
+      //             },
+      //             {
+      //               id: 34,
+      //               name: this.$t(`${lang}.weddingRingMenu.platinum`),
+      //               icon: 'iconmaterial-big-pt color-icon color-platinum',
+      //               to: {
+      //                 path: '/wedding-rings/platinum'
+      //               }
+      //             },
+      //             {
+      //               id: 30,
+      //               name: this.$t(`${lang}.weddingRingMenu.18KRoseGold`),
+      //               icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
+      //               to: {
+      //                 path: '/wedding-rings/18k-rose-gold'
+      //               }
+      //             }
+      //             // {
+      //             //   name: this.$t(`${lang}.weddingRingMenu.14KRoseGold`),
+      //             //   icon: 'iconstar-zs',
+      //             //   href: '/wedding-rings/14k-rose-gold'
+      //             // },
+      //             // {
+      //             //   name: this.$t(`${lang}.weddingRingMenu.fineSilver`),
+      //             //   icon: 'iconstar-zs',
+      //             //   href: '/wedding-rings/fine-silver'
+      //             // }
+      //           ]
+      //         }
+      //       ]
+
+      //     ]
+      //   },
+      //   diamond: {
+      //     image: '/adt/image1564544333790.png',
+      //     groups: [
+      //       [
+      //         {
+      //           groupName: this.$t(
+      //             `${lang}.diamondMenu.designYourEngagementRing`
+      //           ),
+      //           data: [
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.startFromSetting`),
+      //               icon: 'iconstar-jt',
+      //               to: {
+      //                 path: this.$startDj(2)
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.startFromDiamond`),
+      //               icon: 'iconstar-zs',
+      //               to: {
+      //                 path: this.$startDj(1)
+      //               }
+      //             }
+      //           ]
+      //         }
+      //       ],
+      //       [
+      //         {
+      //           groupName: this.$t(`${lang}.diamondMenu.looseDiamond`),
+      //           data: [
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.round`),
+      //               icon: 'iconyuanxin shape-icon',
+      //               to: {
+      //                 path: '/diamonds/round-cut'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.oval`),
+      //               icon: 'icontuoyuan shape-icon',
+      //               to: {
+      //                 path: '/diamonds/oval-cut'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.princess`),
+      //               icon: 'iconfangxing shape-icon',
+      //               to: {
+      //                 path: '/diamonds/princess-cut'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.emerald`),
+      //               icon: 'iconfushe shape-icon',
+      //               to: {
+      //                 path: '/diamonds/emerald-cut'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.heart`),
+      //               icon: 'iconaixin shape-icon',
+      //               to: {
+      //                 path: '/diamonds/heart-shaped'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.marquise`),
+      //               icon: 'iconhoujue shape-icon',
+      //               to: {
+      //                 path: '/diamonds/marquise-cut'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.cushion`),
+      //               icon: 'icondianzi shape-icon',
+      //               to: {
+      //                 path: '/diamonds/cushion-cut'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.pearShape`),
+      //               icon: 'iconli shape-icon',
+      //               to: {
+      //                 path: '/diamonds/pear-shaped'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.asscher`),
+      //               icon: 'iconaqies shape-icon',
+      //               to: {
+      //                 path: '/diamonds/asscher-cut'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.radiant`),
+      //               icon: 'iconcui shape-icon',
+      //               to: {
+      //                 path: '/diamonds/radiant-cut'
+      //               }
+      //             }
+      //           ]
+      //         }
+      //       ],
+      //       [
+      //         {
+      //           groupName: this.$t(`${lang}.diamondMenu.designYourOwnJewelry`),
+      //           data: [
+      //             {
+      //               name: this.$t(`${lang}.diamondMenu.customRing`),
+      //               icon: 'iconJewelry-made-ring',
+      //               to: {
+      //                 path: this.$startDj(2)
+      //               }
+      //             }
+      //             // {
+      //             //   name: this.$t(`${lang}.diamondMenu.customBracelet`),
+      //             //   icon: 'iconJewelry-bracelet',
+      //             //   href: '/'
+      //             // },
+      //             // {
+      //             //   name: this.$t(`${lang}.diamondMenu.customNecklace`),
+      //             //   icon: 'iconJewelry-made-Bracelet',
+      //             //   href: '/'
+      //             // }
+      //           ]
+      //         }
+      //       ]
+      //     ]
+      //   },
+      //   'jewellery-accessories': {
+      //     image: '/adt/image1564544333790.png',
+      //     groups: [
+      //       [
+      //         {
+      //           groupName: this.$t(`${lang}.jewelleryAccessoriesMenu.jewelry`),
+      //           data: [
+      //             {
+      //               name: this.$t(`${lang}.jewelleryAccessoriesMenu.necklaces`),
+      //               icon: 'iconJewelry-necklace',
+      //               to: {
+      //                 path: '/jewellery/necklaces'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.jewelleryAccessoriesMenu.pendants`),
+      //               icon: 'icondiamond-pendant',
+      //               to: {
+      //                 path: '/jewellery/pendants'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.jewelleryAccessoriesMenu.earStud`),
+      //               icon: 'icondiamond-earring',
+      //               to: {
+      //                 path: '/jewellery/ear-stud'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.jewelleryAccessoriesMenu.earrings`),
+      //               icon: 'iconJewelry-earring',
+      //               to: {
+      //                 path: '/jewellery/earrings'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.jewelleryAccessoriesMenu.bracelets`),
+      //               icon: 'iconJewelry-bracelet',
+      //               to: {
+      //                 path: '/jewellery/bracelets'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(`${lang}.jewelleryAccessoriesMenu.bangles`),
+      //               icon: 'iconshouhuan',
+      //               to: {
+      //                 path: '/jewellery/bangles'
+      //               }
+      //             }
+      //           ]
+      //         }
+      //       ],
+      //       // [
+      //       //   {
+      //       //     groupName: this.$t(
+      //       //       `${lang}.jewelleryAccessoriesMenu.customAccessories`
+      //       //     ),
+      //       //     data: [
+      //       //       // {
+      //       //       //   name: this.$t(
+      //       //       //     `${lang}.jewelleryAccessoriesMenu.customNecklace`
+      //       //       //   ),
+      //       //       //   icon: 'iconJewelry-made-Bracelet',
+      //       //       //   to: {
+      //       //       //     path: '/'
+      //       //       //   }
+      //       //       // },
+      //       //       // {
+      //       //       //   name: this.$t(
+      //       //       //     `${lang}.jewelleryAccessoriesMenu.customBracelet`
+      //       //       //   ),
+      //       //       //   icon: 'iconJewelry-bracelet',
+      //       //       //   to: {
+      //       //       //     path: '/'
+      //       //       //   }
+      //       //       // },
+      //       //       {
+      //       //         name: this.$t(
+      //       //           `${lang}.jewelleryAccessoriesMenu.customRing`
+      //       //         ),
+      //       //         icon: 'iconJewelry-made-ring',
+      //       //         to: {
+      //       //           path: '/'
+      //       //         }
+      //       //       }
+      //       //     ]
+      //       //   }
+      //       // ],
+      //       [
+      //         {
+      //           groupName: this.$t(
+      //             `${lang}.jewelleryAccessoriesMenu.specialGift`
+      //           ),
+      //           data: [
+      //             {
+      //               name: this.$t(
+      //                 `${lang}.jewelleryAccessoriesMenu.giftsUnderHKD1000`
+      //               ),
+      //               icon: 'iconJewelry-gift-d',
+      //               to: {
+      //                 path: `/jewellery/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(
+      //                 `${lang}.jewelleryAccessoriesMenu.designYourOwnJewelryAccessories`
+      //               ),
+      //               icon: 'iconJewelry-gift-design',
+      //               to: {
+      //                 path: '/diamonds'
+      //               }
+      //             },
+      //             {
+      //               name: this.$t(
+      //                 `${lang}.jewelleryAccessoriesMenu.giftForLadies`
+      //               ),
+      //               icon: 'iconJewelry-gift-woman',
+      //               to: {
+      //                 path: '/jewellery/necklaces'
+      //               }
+      //             }
+      //           ]
+      //         }
+      //       ]
+      //     ]
+      //   }
+      // },
       fixedStatus: false
     }
   },

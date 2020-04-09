@@ -158,6 +158,12 @@
       "hide": "I have read and understand"
     },
     "topBar": {
+      "ring": "RING",
+      "necklace": "NECKLACE",
+      "bracelet": "BRACELET",
+      "customization": "DIAMONDS",
+      "theme": "THEME COLLECTIONS",
+
       "customerService": "CUSTOMER SERVICE",
       "lifetimeWarranty": "LIFETIME WARRANTY",
       "freeInternationalShipping": "FREE SHIPPING",
@@ -175,7 +181,7 @@
       "buy": "KNOWLEDGE",
       "education": "KNOWLEDGE",
       "search": "Search",
-      "engagementRingMenu": {
+      "ringsMenu": {
         "designYourEngagementRing": "Design Your Engagement Ring",
         "startFromSetting": "Start From A Setting",
         "startFromDiamond": "Start From A Diamond",
@@ -197,10 +203,25 @@
         "platinum": "Platinum",
         "18KRoseGold": "18K Rose Gold",
         "14KRoseGold": "14K Rose Gold",
-        "fineSilver": "Fine Silver"
+        "fineSilver": "Fine Silver",
 
+        "price": "Price",
+        "use": "Use Scene",
+        "engagementRing": "Engagement Ring",
+        "weddingRing": "Wedding Ring",
+        "ring": "Set ring",
+        "fashionRing": "Fashion Ring",
+        "CoupleRing": "CoupleRing",
+        "priceRange1": "Within 1000",
+        "priceRange2": "1000-1999",
+        "priceRange3": "2000-2999",
+        "priceRange4": "3000-4999",
+        "priceRange5": "above 5000",
+        "proposalRing": "Proposal Ring",
+        "ValentinesDay": "Valentines Day",
+        "birthdayPresent": "BirthdayPresent"
       },
-      "weddingRingMenu": {
+      "necklaceMenu": {
         "coupleRings": "Couple Rings",
         "classicSeries": "Classic Series",
         "channelSetSeries": "Channel-Set Series",
@@ -220,9 +241,25 @@
         "platinum": "Platinum",
         "18KRoseGold": "18K Rose Gold",
         "14KRoseGold": "14K Rose Gold",
-        "fineSilver": "Fine Silver"
+        "fineSilver": "Fine Silver",
+
+        "style": "Style",
+        "price": "Price",
+        "use": "Use Scene / Special Gift",
+        "necklace": "Necklace",
+        "Pendant": "Pendant",
+        "ValentinesDay": "Valentines Day",
+        "MothersDay": "Mothers Day",
+        "birthdayPresent": "Birthday Present",
+        "ChristmasGift": "Christmas gift",
+        "HalloweenGift": "Halloween Gift",
+        "priceRange1": "Within 1000",
+        "priceRange2": "1000-1999",
+        "priceRange3": "2000-2999",
+        "priceRange4": "3000-4999",
+        "priceRange5": "above 5000"
       },
-      "diamondMenu": {
+      "braceletMenu": {
         "designYourEngagementRing": "Design Your Engagement Ring",
         "startFromSetting": "Start From A Setting",
         "startFromDiamond": "Start From A Diamond",
@@ -240,9 +277,34 @@
         "designYourOwnJewelry": "Design Your Own Jewelry",
         "customRing": "Custom Ring",
         "customBracelet": "Custom Bracelet",
-        "customNecklace": "Custom Necklace"
+        "customNecklace": "Custom Necklace",
+
+        "style": "Style",
+        "price": "Price",
+        "color": "Conditional",
+        "use": "Use Scene / Special Gift",
+        "Bracelet": "Bracelet",
+        "bracelet": "bracelet",
+        "priceRange1": "Within 1000",
+        "priceRange2": "1000-1999",
+        "priceRange3": "2000-2999",
+        "priceRange4": "3000-4999",
+        "priceRange5": "above 5000",
+        "14KWhite": "14KWhite Gold",
+        "18KWhite": "18k white gold",
+        "14KYellow": "14K Yellow",
+        "18KYellow": "18K Yellow",
+        "platinum": "Platinum",
+        "18KRoseGold": "18K Rose Gold",
+        "14KRoseGold": "14K Rose Gold",
+        "fineSilver": "Sterling Silver",
+        "ValentinesDay": "Valentines Day",
+        "MothersDay": "Mothers Day",
+        "birthdayPresent": "Birthday Present",
+        "ChristmasGift": "Christmas gift",
+        "HalloweenGift": "Halloween Gift"        
       },
-      "jewelleryAccessoriesMenu": {
+      "diamondMenu": {
         "jewelry": "Jewelry",
         "necklaces": "Necklaces",
         "pendants": "Pendants",
@@ -257,7 +319,50 @@
         "specialGift": "Special Gift",
         "giftsUnderHKD1000": "Gifts Under HKD 1000",
         "designYourOwnJewelryAccessories": "Design Your Own Jewelry Accessories",
-        "giftForLadies": "Gift For Ladies"
+        "giftForLadies": "Gift For Ladies",
+
+        "designRing": "Design Exclusive Diamond Ring",
+        "SettingStyle": "Setting Style",
+        "DiamondWeight": "DiamondWeight",
+        "use": "Use Scene / Special Gift",
+        "SelectDiamondFirst": "Select Diamond First",
+        "DiamondRing": "Diamond Ring First",
+        "SingleDiamondRing": "Single Diamond Ring",
+        "ClawRing": "ClawRing",
+        "GroupRing": "Group ring",
+        "ThreeMainStoneRings": "Three MainStoneRings",
+        "OpenMouth": "Opening Ring",
+        "WeightRange1": "0.3ct or less",
+        "WeightRange2": "0.3-0.5ct",
+        "WeightRange3": "0.51ct-0.8ct",
+        "WeightRange4": "0.81ct-1ct",
+        "WeightRange5": "1ct-1.5ct",
+        "WeightRange6": "1.51ct or more",
+        "propose": "Propose",
+        "gotEngaged": "Engagement",
+        "marry": "Marry",
+        "ValentinesDay": "Valentines Day",
+        "birthdayPresent": "BirthdayPresent"
+      },
+      "themeCollectionMenu": {
+        "Promotions": "Promotions",
+        "HolidayGift": "Holiday Gift",
+        "classification": "Classification",
+        "BlackFriday": "Black Friday",
+        "coupon": "Discount",
+        "SpecialDiscount": "Special Discount",
+        "ValentinesDay": "Valentines Day",
+        "MothersDay": "Mothers Day",
+        "birthdayPresent": "Birthday Present",
+        "ChristmasGift": "Christmas gift",
+        "HalloweenGift": "Halloween Gift",
+        "Ring": "Ring",
+        "CoupleRing": "CoupleRing",
+        "NecklaceAndPendant": "Necklace / Pendant",
+        "Bracelet": "Bracelet / Bangle",
+        "EarringsAndStuds": "Earrings / Studs",
+        "DecorationAndPendant": "Decoration / Pendant",
+        "other": "Other"
       }
     },
     "footerBar": {

@@ -158,6 +158,12 @@
       "hide": "我已了解"
     },
     "topBar": {
+      "ring": "戒指",
+      "necklace":"項鍊",
+      "bracelet":"手鍊",
+      "customization":"鑽戒定制",
+      "theme":"主題collections",
+      
       "customerService": "客戶服務",
       "lifetimeWarranty": "終身保修",
       "freeInternationalShipping": "免費運費",
@@ -175,7 +181,7 @@
       "buy": "购买",
       "education": "知識",
       "search": "搜索",
-      "engagementRingMenu": {
+      "ringsMenu": {
         "designYourEngagementRing": "設計自己的訂婚鑽戒",
         "startFromSetting": "從戒托開始",
         "startFromDiamond": "從鑽石開始",
@@ -197,10 +203,25 @@
         "platinum": "鉑金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "純銀"
+        "fineSilver": "純銀",
 
+        "price":"價格",
+        "use":"使用場景",
+        "engagementRing":"訂婚戒指",
+        "weddingRing":"結婚戒指",
+        "ring":"套戒",
+        "fashionRing":"時尚戒指",
+        "CoupleRing":"情侶對戒",
+        "priceRange1":"1000以內",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上",
+        "proposalRing":"求婚戒指",
+        "ValentinesDay":"情人節",
+        "birthdayPresent":"生日禮物"
       },
-      "weddingRingMenu": {
+      "necklaceMenu": {
         "coupleRings": "我們的對戒",
         "classicSeries": "經典系列",
         "channelSetSeries": "排鑲系列",
@@ -220,9 +241,25 @@
         "platinum": "鉑金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "純銀"
+        "fineSilver": "純銀",
+
+        "style": "款式",
+        "price":"價格",
+        "use":"使用場景/特別禮物",
+        "necklace":"項鍊",
+        "Pendant":"吊墜",
+        "ValentinesDay":"情人節",
+        "MothersDay":"母親節",
+        "birthdayPresent":"生日禮物",
+        "ChristmasGift":"聖誕禮物",
+        "HalloweenGift":"萬聖節禮物",
+        "priceRange1":"1000以內",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上"
       },
-      "diamondMenu": {
+      "braceletMenu": {
         "designYourEngagementRing": "設計自己的訂婚鑽戒",
         "startFromSetting": "從戒托開始",
         "startFromDiamond": "從鑽石開始",
@@ -240,9 +277,34 @@
         "designYourOwnJewelry": "設計自己的珠寶",
         "customRing": "定製戒指",
         "customBracelet": "定製手鏈",
-        "customNecklace": "定製項鏈"
+        "customNecklace": "定製項鏈",
+
+        "style": "款式",
+        "price":"價格",
+        "color": "成色",
+        "use":"使用場景/特別禮物",
+        "Bracelet":"手鍊",
+        "bracelet":"手鐲",
+        "priceRange1":"1000以內",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上",
+        "14KWhite": "14K白金",
+        "18KWhite": "18k白金",
+        "14KYellow": "14K黃金",
+        "18KYellow": "18K黃金",
+        "platinum": "鉑金",
+        "18KRoseGold": "18K玫瑰金",
+        "14KRoseGold": "14K玫瑰金",
+        "fineSilver": "純銀",
+        "ValentinesDay":"情人節",
+        "MothersDay":"母親節",
+        "birthdayPresent":"生日禮物",
+        "ChristmasGift":"聖誕禮物",
+        "HalloweenGift":"萬聖節禮物"
       },
-      "jewelleryAccessoriesMenu": {
+      "diamondMenu": {
         "jewelry": "成品配飾",
         "necklaces": "項鏈",
         "pendants": "吊墜",
@@ -257,7 +319,50 @@
         "specialGift": "特別的禮物",
         "giftsUnderHKD1000": "1000港幣以下禮品",
         "designYourOwnJewelryAccessories": "設計自己的珠寶配飾",
-        "giftForLadies": "成品配送給女士的禮品飾"
+        "giftForLadies": "成品配送給女士的禮品飾",
+
+        "designRing":"設計專屬鑽戒",
+        "SettingStyle":"戒托款式",
+        "DiamondWeight":"鑽石重量",
+        "use":"使用場景/特別禮物",
+        "SelectDiamondFirst":"先選鑽石",
+        "DiamondRing":"先鑽戒托",
+        "SingleDiamondRing":"單鑽戒",
+        "ClawRing":"爪鑲戒",
+        "GroupRing":"群鑲戒",
+        "ThreeMainStoneRings":"三主石戒",
+        "OpenMouth":"開口戒",
+        "WeightRange1":"0.3ct以下",
+        "WeightRange2":"0.3-0.5ct",
+        "WeightRange3":"0.51ct-0.8ct",
+        "WeightRange4":"0.81ct-1ct",
+        "WeightRange5":"1ct-1.5ct",
+        "WeightRange6":"1.51ct以上",
+        "propose":"求婚",
+        "gotEngaged":"訂婚",
+        "marry":"結婚",
+        "ValentinesDay":"情人節",
+        "birthdayPresent":"生日禮物"       
+      },
+      "themeCollectionMenu":{
+        "Promotions":"活動特惠",
+        "HolidayGift":"節日禮物",
+        "classification":"分類",
+        "BlackFriday":"黑色星期五",
+        "coupon":"優惠劵",
+        "SpecialDiscount":"特惠折扣",
+        "ValentinesDay":"情人節",
+        "MothersDay":"母親節",
+        "birthdayPresent":"生日禮物",
+        "ChristmasGift":"聖誕禮物",
+        "HalloweenGift":"萬聖節禮物",
+        "Ring":"戒指",
+        "CoupleRing":"情侶對戒",
+        "NecklaceAndPendant":"項鍊/吊墜",
+        "Bracelet":"手鍊/手鐲",
+        "EarringsAndStuds":"耳環/耳釘",
+        "DecorationAndPendant":"擺件/挂件",
+        "other":"其它"
       }
     },
     "footerBar": {

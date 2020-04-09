@@ -158,6 +158,12 @@
       "hide": "我已了解"
     },
     "topBar": {
+      "ring": "戒指",
+      "necklace":"项链",
+      "bracelet":"手链",
+      "customization":"钻戒定制",
+      "theme":"主题collections", 
+      
       "customerService": "客户服务",
       "lifetimeWarranty": "终身保修",
       "freeInternationalShipping": "免费运费",
@@ -175,7 +181,7 @@
       "buy": "购买",
       "education": "知识",
       "search": "搜索",
-      "engagementRingMenu": {
+      "ringsMenu": {
         "designYourEngagementRing": "设计自己的订婚钻戒",
         "startFromSetting": "从戒托开始",
         "startFromDiamond": "从钻石开始",
@@ -197,10 +203,25 @@
         "platinum": "铂金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "纯银"
+        "fineSilver": "纯银",
 
+        "price":"价格",
+        "use":"使用场景",
+        "engagementRing":"订婚戒指",
+        "weddingRing":"结婚戒指",
+        "ring":"套戒",
+        "fashionRing":"时尚戒指",
+        "CoupleRing":"情侣对戒",
+        "priceRange1":"1000以内",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上",
+        "proposalRing":"求婚戒指",
+        "ValentinesDay":"情人节",
+        "birthdayPresent":"生日礼物"
       },
-      "weddingRingMenu": {
+      "necklaceMenu": {
         "coupleRings": "我们的对戒",
         "classicSeries": "经典系列",
         "channelSetSeries": "排镶系列",
@@ -220,9 +241,25 @@
         "platinum": "铂金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "纯银"
+        "fineSilver": "纯银",
+
+        "style": "款式",
+        "price":"价格",
+        "use":"使用场景/特别礼物",
+        "necklace":"项链",
+        "Pendant":"吊坠",
+        "ValentinesDay":"情人节",
+        "MothersDay":"母亲节",
+        "birthdayPresent":"生日礼物",
+        "ChristmasGift":"圣诞礼物",
+        "HalloweenGift":"万圣节礼物",
+        "priceRange1":"1000以内",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上"
       },
-      "diamondMenu": {
+      "braceletMenu": {
         "designYourEngagementRing": "设计自己的订婚钻戒",
         "startFromSetting": "从戒托开始",
         "startFromDiamond": "从钻石开始",
@@ -240,9 +277,34 @@
         "designYourOwnJewelry": "设计自己的珠宝",
         "customRing": "定制戒指",
         "customBracelet": "定制手链",
-        "customNecklace": "定制项链"
+        "customNecklace": "定制项链",
+
+        "style": "款式",
+        "price":"价格",
+        "color": "成色",
+        "use":"使用场景/特别礼物",
+        "Bracelet":"手链",
+        "bracelet":"手镯",
+        "priceRange1":"1000以内",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上",
+        "14KWhite": "14K白金",
+        "18KWhite": "18k白金",
+        "14KYellow": "14K黃金",
+        "18KYellow": "18K黃金",
+        "platinum": "铂金",
+        "18KRoseGold": "18K玫瑰金",
+        "14KRoseGold": "14K玫瑰金",
+        "fineSilver": "纯银",
+        "ValentinesDay":"情人节",
+        "MothersDay":"母亲节",
+        "birthdayPresent":"生日礼物",
+        "ChristmasGift":"圣诞礼物",
+        "HalloweenGift":"万圣节礼物"
       },
-      "jewelleryAccessoriesMenu": {
+      "diamondMenu": {
         "jewelry": "成品配饰",
         "necklaces": "项链",
         "pendants": "吊坠",
@@ -257,7 +319,50 @@
         "specialGift": "特別的礼物",
         "giftsUnderHKD1000": "1000港币以下礼品",
         "designYourOwnJewelryAccessories": "设计自己的珠宝配饰",
-        "giftForLadies": "成品配送给女士的礼品饰"
+        "giftForLadies": "成品配送给女士的礼品饰",
+
+        "designRing":"设计专属钻戒",
+        "SettingStyle":"戒托款式",
+        "DiamondWeight":"钻石重量",
+        "use":"使用场景/特别礼物",
+        "SelectDiamondFirst":"先选钻石",
+        "DiamondRing":"先钻戒托",
+        "SingleDiamondRing":"单钻戒",
+        "ClawRing":"爪镶戒",
+        "GroupRing":"群镶戒",
+        "ThreeMainStoneRings":"三主石戒",
+        "OpenMouth":"开口戒",
+        "WeightRange1":"0.3ct以下",
+        "WeightRange2":"0.3-0.5ct",
+        "WeightRange3":"0.51ct-0.8ct",
+        "WeightRange4":"0.81ct-1ct",
+        "WeightRange5":"1ct-1.5ct",
+        "WeightRange6":"1.51ct以上",
+        "propose":"求婚",
+        "gotEngaged":"订婚",
+        "marry":"结婚",
+        "ValentinesDay":"情人节",
+        "birthdayPresent":"生日礼物"
+      },
+      "themeCollectionMenu":{
+        "Promotions":"活动特惠",
+        "HolidayGift":"节日礼物",
+        "classification":"分类",
+        "BlackFriday":"黑色星期五",
+        "coupon":"优惠劵",
+        "SpecialDiscount":"特惠折扣",
+        "ValentinesDay":"情人节",
+        "MothersDay":"母亲节",
+        "birthdayPresent":"生日礼物",
+        "ChristmasGift":"圣诞礼物",
+        "HalloweenGift":"万圣节礼物",
+        "Ring":"戒指",
+        "CoupleRing":"情侣对戒",
+        "NecklaceAndPendant":"项链/吊坠",
+        "Bracelet":"手链/手镯",
+        "EarringsAndStuds":"耳环/耳钉",
+        "DecorationAndPendant":"摆件/挂件",
+        "other":"其它"
       }
     },
     "footerBar": {

@@ -37,7 +37,12 @@
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.Rings}}</span>
                 </div>
-                <div class="two">
+                <div v-for="(ring, r) in rings" :key="r">
+                  <div class="two" @click="toPage(ring.routerName, ring.query)">
+                    <span>{{ring.name}}</span>
+                  </div>
+                </div>
+                <!-- <div class="two">
                   <span>{{lang.engagementRing}}</span>
                 </div>
                 <div class="two">
@@ -51,7 +56,7 @@
                 </div>
                  <div class="two">
                   <span>{{lang.CoupleRing}}</span>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="menus-one" @click="one(2)">
@@ -62,12 +67,17 @@
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.necklaces}}</span>
                 </div>
-                <div class="two">
+                <div v-for="(necklace, n) in necklaces" :key="n">
+                  <div class="two" @click="toPage(necklace.routerName, necklace.query)">
+                    <span>{{necklace.name}}</span>
+                  </div>
+                </div>
+                <!-- <div class="two" @click.stop="go(1)">
                   <span>{{lang.necklace}}</span>
                 </div>
-                <div class="two">
+                <div class="two" @click.stop="go(2)">
                   <span>{{lang.Pendant}}</span>
-                </div>
+                </div> -->
 
               </div>
             </div>
@@ -79,12 +89,17 @@
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.Bracelets}}</span>
                 </div>
-                <div class="two">
+                <div v-for="(bracelet, b) in Bracelets" :key="b">
+                  <div class="two" @click="toPage(bracelet.routerName, bracelet.query)">
+                    <span>{{bracelet.name}}</span>
+                  </div>
+                </div>
+                <!-- <div class="two">
                   <span>{{lang.Bracelet}}</span>
                 </div>
                 <div class="two">
                   <span>{{lang.bracelet}}</span>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="menus-one" @click="one(4)">
@@ -95,10 +110,10 @@
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.DiamondRingCustomization}}</span>
                 </div>
-                <div class="two">
+                <div class="two" @click.stop="goToMade(1)">
                   <span>{{lang.SelectDiamondFirst}}</span>
                 </div>
-                <div class="two">
+                <div class="two" @click.stop="goToMade(2)">
                   <span>{{lang.DiamondRing}}</span>
                 </div>
               </div>
@@ -147,8 +162,9 @@
                 </div>
               </div>
             </div>
-            <div class="menus-one" >
-              <span>{{lang.knowledge}}</span>
+            <div class="menus-one" @click="goKnowledge">
+              <!-- <nuxt-link :to="{ name: 'help-pages-knowledge' }"></nuxt-link> -->
+              <span >{{lang.knowledge}}</span>
             </div>
           </section>
         </div>
@@ -195,12 +211,12 @@
 </template>
 
 <script>
-// import Header from '@/components/personal/header.vue'
 import Helpers from '@/assets/js/helpers.js'
+import Mixin from '../../pages/accessories/mixin.js'
+import List from '@/mixins/list.js'
+import GoodListProps from '@/mixins/good-list-props.js'
 export default {
-  // components: {
-  //   Header
-  // },
+  mixins: [Mixin, List, GoodListProps],
   data() {
     return {
       icon:false,
@@ -212,7 +228,7 @@ export default {
       actives4: false,
       actives5: false,
       actives6: false,
-      aa:[
+      rings:[
         {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.engagementRing,
@@ -220,50 +236,88 @@ export default {
         },
         {
           stress: true,
-          name: this.LANGUAGE.components.leftMenu.engagementRing,
-          routerName: 'engagement'
+          name: this.LANGUAGE.components.leftMenu.marriageRing,
+          routerName: 'marriage-ring'
         },
         {
           stress: true,
-          name: this.LANGUAGE.components.leftMenu.engagementRing,
-          routerName: 'engagement'
+          name: this.LANGUAGE.components.leftMenu.Ring,
+          routerName: 'marriage-ring-single-ring',
+          query: {
+            type: 'lady'
+          }
         },
         {
           stress: true,
-          name: this.LANGUAGE.components.leftMenu.engagementRing,
-          routerName: 'engagement'
+          name: this.LANGUAGE.components.leftMenu.FashionRing,
+          routerName: 'marriage-ring-single-ring',
+          query: {
+            type: 'lady'
+          }
         },
         {
           stress: true,
-          name: this.LANGUAGE.components.leftMenu.engagementRing,
-          routerName: 'engagement'
+          name: this.LANGUAGE.components.leftMenu.CoupleRing,
+          routerName: 'marriage-ring-single-ring',
+          query: {
+            type: 'lady'
+          }
+        },
+      ],
+      necklaces:[
+        {
+          name: this.LANGUAGE.components.leftMenu.necklace,
+          routerName: 'accessories-list'
         },
         {
-          stress: true,
-          name: this.LANGUAGE.components.leftMenu.engagementRing,
-          routerName: 'engagement'
-        },
-        {
-          stress: true,
-          name: this.LANGUAGE.components.leftMenu.engagementRing,
-          routerName: 'engagement'
+          name: this.LANGUAGE.components.leftMenu.Pendant,
+          routerName: 'accessories-list'
         }
       ],
-      bb:[
+      Bracelets:[
         {
-          stress: true,
-          name: this.LANGUAGE.components.leftMenu.marriageRing,
-          routerName: 'marriage-ring'
+          name: this.LANGUAGE.components.leftMenu.Bracelet,
+          routerName: 'accessories-list'
         },
         {
-          stress: true,
-          name: this.LANGUAGE.components.leftMenu.marriageRing,
-          routerName: 'marriage-ring'
+          name: this.LANGUAGE.components.leftMenu.bracelet,
+          routerName: 'accessories-list'
+        }
+      ],
+      activity:[
+        {
+          name: this.LANGUAGE.components.leftMenu.BlackFriday,
+          age:'20'
         },
         {
-          stress: true,
-          name: this.LANGUAGE.components.leftMenu.marriageRing,
-          routerName: 'marriage-ring'
+          name: this.LANGUAGE.components.leftMenu.coupon,
+          age:'20'
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.SpecialDiscount,
+          age:'20'
+        }
+      ],
+      theme:[
+        {
+          name: this.LANGUAGE.components.leftMenu.ValentinesDay,
+          age:'20'
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.MothersDay,
+          age:'20'
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.birthdayPresent,
+          age:'20'
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.ChristmasGift,
+          age:'20'
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.HalloweenGift,
+          age:'20'
         }
       ],
       groups: [
@@ -357,208 +411,6 @@ export default {
           }
         ]
       ],
-      headerData: [
-        {
-          name: this.LANGUAGE.components.leftMenu.Rings,
-          list: [
-            {
-              name: this.LANGUAGE.components.leftMenu.Style,
-              list: [
-                {
-                  name: this.LANGUAGE.components.leftMenu.engagementRing,
-                  routerName: 'engagement'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.marriageRing,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.Ring,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.FashionRing,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.CoupleRing,
-                  age:'20'
-                }
-              ],
-              showItem:false
-            }, 
-          ],
-          show: false
-        }, 
-        {
-          name: this.LANGUAGE.components.leftMenu.necklaces,
-          list: [
-            {
-              name: this.LANGUAGE.components.leftMenu.Style,
-              list: [
-                {
-                  name: this.LANGUAGE.components.leftMenu.necklace,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.Pendant,
-                  age:'20'
-                }
-              ],
-              showItem:false
-            }, 
-          ],
-          show: false
-        }, 
-        {
-          name: this.LANGUAGE.components.leftMenu.Bracelets,
-          list: [
-            {
-              name: this.LANGUAGE.components.leftMenu.Style,
-              list: [
-                {
-                  name: this.LANGUAGE.components.leftMenu.Bracelet,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.bracelet,
-                  age:'20'
-                }
-              ],
-              showItem:false
-            }, 
-          ],
-          show: false
-        }, 
-        {
-          name: this.LANGUAGE.components.leftMenu.DiamondRingCustomization,
-          list: [
-            {
-              name: this.LANGUAGE.components.leftMenu.DesignDiamondRing,
-              list: [
-                {
-                  name: this.LANGUAGE.components.leftMenu.SelectDiamondFirst,
-                  routerName: 'custom-made-ring-made-diamond-list',
-                  query: {
-                    melo: Helpers.base64Encode(
-                      JSON.stringify({
-                        steps: [
-                          {
-                            goodsId: null,
-                            goodsDetailsId: null,
-                            ct: 2,
-                            cartId: ``,
-                            page: `list`
-                          },
-                          {
-                            goodsId: null,
-                            goodsDetailsId: null,
-                            ct: null,
-                            cartId: ``,
-                            page: `list`
-                          }
-                        ]
-                      })
-                    ),
-                    step: 1
-                  }
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.DiamondRing,
-                  routerName: 'custom-made-ring-made-ring-list',
-                  query: {
-                    melo: Helpers.base64Encode(
-                      JSON.stringify({
-                        steps: [
-                          {
-                            goodsId: null,
-                            goodsDetailsId: null,
-                            ct: 2,
-                            cartId: ``,
-                            page: `list`
-                          },
-                          {
-                            goodsId: null,
-                            goodsDetailsId: null,
-                            ct: null,
-                            cartId: ``,
-                            page: `list`
-                          }
-                        ]
-                      })
-                    ),
-                    step: 1
-                  }
-                }
-              ],
-              showItem:false
-            }, 
-          ],
-          show: false
-        }, 
-        {
-          name: this.LANGUAGE.components.leftMenu.activity,
-          list: [
-            {
-              name: this.LANGUAGE.components.leftMenu.Promotions,
-              list: [
-                {
-                  name: this.LANGUAGE.components.leftMenu.BlackFriday,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.coupon,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.SpecialDiscount,
-                  age:'20'
-                }
-              ],
-              showItem:false
-            }, 
-          ],
-          show: false
-        },
-        {
-          name: this.LANGUAGE.components.leftMenu.theme,
-          list: [
-            {
-              name: this.LANGUAGE.components.leftMenu.HolidayGift,
-              list: [
-                {
-                  name: this.LANGUAGE.components.leftMenu.ValentinesDay,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.MothersDay,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.birthdayPresent,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.ChristmasGift,
-                  age:'20'
-                },
-                {
-                  name: this.LANGUAGE.components.leftMenu.HalloweenGift,
-                  age:'20'
-                }
-              ],
-              showItem:false
-            }, 
-          ],
-          show: false
-        },
-        {
-          name: this.LANGUAGE.components.leftMenu.knowledge,
-          routerName: 'help-pages-knowledge',
-          list:[]
-        }
-      ],
-      length:''
     }
   },
   computed: {
@@ -588,6 +440,7 @@ export default {
     }
   },
   mounted(){
+    console.log("sssss",this.categoryId)
   },
   methods: {
     one(id){
@@ -617,6 +470,51 @@ export default {
       this.actives4 = false
       this.actives5 = false
       this.actives6 = false
+    },
+    goToMade(i) {
+      this.hide()
+      const obj = {
+        steps: [
+          {
+            goodsId: null,
+            goodsDetailsId: null,
+            ct: i,
+            cartId: ``,
+            page: `list`
+          },
+          {
+            goodsId: null,
+            goodsDetailsId: null,
+            ct: null,
+            cartId: ``,
+            page: `list`
+          }
+        ]
+      }
+      console.log("obg",obj)
+      if (i === 1) {
+        this.$router.push({
+          name: `custom-made-diamond-made-diamond-list`,
+          query: {
+            melo: this.$helpers.base64Encode(JSON.stringify(obj)),
+            step: 1
+          }
+        })
+      } else if (i === 2) {
+        this.$router.push({
+          name: `custom-made-ring-made-ring-list`,
+          query: {
+            melo: this.$helpers.base64Encode(JSON.stringify(obj)),
+            step: 1
+          }
+        })
+      }
+    },
+    goKnowledge(){
+      this.hide()
+      this.$router.push({
+        name: 'help-pages-knowledge',
+      })
     },
 
     show() {
@@ -663,14 +561,15 @@ export default {
       display: inline-block;
     }
     .menus-one{
-      font-size: 16px;
+      font-size: 12px;
       display: flex;
       justify-content: space-between;
       height: 60px;
-      padding: 0 10px;
+      padding: 0 20px;
       border-bottom:1px solid #fff;
       background-color: #e4ecf0;
       z-index: 99;
+      color: rgb(15, 14, 14);
       span{
         line-height: 60px;
       }
@@ -685,8 +584,10 @@ export default {
         transition: all 0.2s linear;
         z-index: 100;
         .goback{
+          margin: 0 10px;
           text-align: left;
-          background-color: #e4ecf0;
+          // background-color: #e4ecf0;
+          border-bottom:2px solid #e4ecf0;
           .status-icon{
             margin-left: 10px;
             transform: rotate(450deg);
@@ -701,7 +602,7 @@ export default {
           display: flex;
           justify-content: space-between;
           height: 60px;
-          padding: 0 10px;
+          padding: 0 20px;
         }
       }
       .actives{
@@ -742,7 +643,7 @@ export default {
 .left-menu.active {
   visibility: visible;
   background: rgba(0,0,0,0.8);
-  height: 100vh;
+  // height: 100vh;
   opacity: 0;
   pointer-events: none;
   position: fixed;
@@ -759,6 +660,22 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
+}
+.bg:before,.bg:after {
+  background: #fff;
+  right: 10vw;
+}
+.bg::before,.bg:after{
+  background: #fff;
+  content: "";
+  height: 2px;
+  position: absolute;
+  top: 30px;
+  transform: rotate(45deg);
+  width: 25px;
+}
+.bg:after{
+  transform: rotate(-45deg);
 }
 .menu {
   position: absolute;
@@ -849,7 +766,7 @@ export default {
 
 /*菜单内容*/
 .content {
-  flex-grow: 1;
+  // flex-grow: 1;
   flex-shrink: 1;
   // padding: 0 20px;
   box-sizing: border-box;
@@ -872,7 +789,7 @@ export default {
 
 /*分组*/
 .groups {
-  margin-bottom: 25px;
+  // margin-bottom: 25px;
 }
 .group {
   padding: 10px 0;
@@ -918,8 +835,10 @@ export default {
         // border-radius: 50%;
 
         .iconfont {
+          font-weight: 500;
           font-size: 20px;
-          color: rgba(153, 153, 153, 1);
+          // color: rgb(15, 14, 14);
+          // color: rgba(153, 153, 153, 1);
         }
       }
       .item-name {
@@ -928,7 +847,8 @@ export default {
         font-size: 14px;
         line-height: 29px;
         font-weight: 400;
-        color: rgba(153, 153, 153, 1);
+        color: rgb(15, 14, 14);
+        // color: rgba(153, 153, 153, 1);
         // color: 000;
       }
     }
@@ -954,8 +874,10 @@ export default {
         // border-radius: 50%;
 
         .iconfont {
+          // font-weight: 600;
           font-size: 20px;
-          color:rgba(153, 153, 153, 1);
+          color: rgb(15, 14, 14);
+          // color:rgba(153, 153, 153, 1);
         }
       }
       .item-name {
@@ -964,7 +886,8 @@ export default {
         font-size: 14px;
         line-height: 29px;
         font-weight: 400;
-        color: rgba(153, 153, 153, 1);
+        color: rgb(15, 14, 14);
+        // color: rgba(153, 153, 153, 1);
         // color: #000;
       }
     }
