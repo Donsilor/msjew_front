@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <div class="page-content" v-loading="loading">
     <div class="search-condition">
       <!--      形状条件-->
       <div class="condition-item condition-shape">
@@ -528,7 +528,7 @@
         </ul>
       </div>
     </div>
-    <section class="list-title">
+    <section class="list-title" v-show="this.loading == false">
       <h1 class="title">
         {{ $t(`${lang}.totalCountTitle`, { total_count }) }}
         <!--        {{-->
@@ -580,7 +580,7 @@
             />
           </li>
         </ul>
-        <div class="list-data visual-data">
+        <div class="list-data visual-data" v-loading = "loading">
           <div
             v-for="(item, index) in showingData"
             :key="index"
@@ -778,7 +778,7 @@
           </el-pagination>
         </div>
       </div>
-      <no-more-data v-show="showingData.length  == 0" :dataVal = "2"></no-more-data>
+      <no-more-data v-show="showingData.length  == 0 && this.loading == false" :dataVal = "2"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="product"></bdd-empty> -->
     </div>
     <div v-show="activeTab === 'compare'" class="compare-tab-content">
@@ -968,6 +968,7 @@ export default {
           sortType: '',
           sortBy: ''
       },
+      loading:false
     }
   },
   computed: {
@@ -1264,6 +1265,14 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
+      if(this.allData.length == 0){
+        this.loading = true
+        setTimeout(() => {
+          this.loading = false
+        }, 1000);
+      }else if(this.allData.length > 0){
+        this.loading = false
+      }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       allData.forEach(item => {

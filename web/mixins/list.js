@@ -55,6 +55,7 @@ export default {
       //   result = result.concat(listData[n])
       // }
       result = result.concat(listData[page])
+      console.log("info",result)
       return result
     },
     requestingListData() {

@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <div class="page-content" v-loading="loading">
     <section class="crumbs">{{ $t(`${lang}.homePage`) }} > {{ $t(`${lang}.result`) }}</section>
     <section class="search-keyword">
       <input
@@ -33,7 +33,7 @@
         </ul>
       </div>
     </section>
-    <section class="list-content">
+    <section class="list-content" >
       <div class="list-data">
         <div
           v-for="(item, index) in showingData"
@@ -106,7 +106,7 @@
           </el-pagination>
         </div>
       </div>
-      <no-more-data v-show="showingData.length == 0" :dataVal = "1" @changeFn = "changeFng()"></no-more-data>
+      <no-more-data v-show="showingData.length == 0 && this.loading == false" :dataVal = "1" @changeFn = "changeFng()"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="search"></bdd-empty> -->
     </section>
   </div>
@@ -129,6 +129,7 @@ export default {
       sortTypeIndex: 0,
       page_size: 16,
       keyword: '',
+      loading: false
       // noMoreListData: false
     }
   },
@@ -155,6 +156,15 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
+      console.log("dddd",this.allData.length)
+      if(this.allData.length == 0){
+        this.loading = true
+        setTimeout(() => {
+          this.loading = false
+        }, 1000);
+      }else if(this.allData.length > 0){
+        this.loading = false
+      }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
@@ -246,6 +256,14 @@ export default {
     }
   },
   mounted() {
+    // if(this.allData.length == 0){
+    //   this.loading = true
+    //   setTimeout(() => {
+    //     this.loading = false
+    //   }, 1000);
+    // }else if(this.allData.length > 0){
+    //   this.loading = false
+    // }
     const _this = this
     _this.$nextTick(() => {
       _this.keyword = _this.$helpers.base64Decode(
@@ -256,12 +274,21 @@ export default {
   },
   methods: {
     toSearch() {
+      if(this.allData.length == 0){
+        this.loading = true
+        setTimeout(() => {
+          this.loading = false
+        }, 1000);
+      }else if(this.allData.length > 0){
+        this.loading = false
+      }
       this.$router.replace({
         path: '/search',
         query: {
           keyword: this.$helpers.base64Encode(this.keyword)
         }
       })
+      
     },
     // 请求当前页数据
     getPageInfo(page = this.page) {
