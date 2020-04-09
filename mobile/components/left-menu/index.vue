@@ -565,7 +565,7 @@ export default {
       display: flex;
       justify-content: space-between;
       height: 60px;
-      padding: 0 20px;
+      padding-left:10px;
       border-bottom:1px solid #fff;
       background-color: #e4ecf0;
       z-index: 99;

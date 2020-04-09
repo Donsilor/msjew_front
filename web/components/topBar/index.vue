@@ -608,9 +608,11 @@ export default {
             ],
             [
               {
+                key: 'material',
                 groupName: this.$t(`${lang}.necklaceMenu.color`),
                 data: [
                   {
+                    id: 28,
                     name: this.$t(`${lang}.necklaceMenu.18KWhite`),
                     // icon: 'iconmarry--woman-jingdian ring-icon',
                     to: {
@@ -618,6 +620,7 @@ export default {
                     }
                   },
                   {
+                    id: 29,
                     name: this.$t(`${lang}.necklaceMenu.18KYellow`),
                     // icon: 'iconmarry--woman-yongheng ring-icon',
                     to: {
@@ -625,6 +628,7 @@ export default {
                     }
                   },
                   {
+                    id: 30,
                     name: this.$t(`${lang}.necklaceMenu.18KRoseGold`),
                     // icon: 'iconmarry--woman-zhounian ring-icon',
                     to: {
@@ -632,6 +636,7 @@ export default {
                     }
                   },
                   {
+                    id: 34,
                     name: this.$t(`${lang}.necklaceMenu.platinum`),
                     // icon: 'iconmarry--woman-zuans ring-icon',
                     to: {
