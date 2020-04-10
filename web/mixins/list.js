@@ -283,9 +283,9 @@ export default {
         .then(data => {
           if(!data){
             this.loading = true
-            setTimeout(() => {
-              this.loading = false
-            }, 1000);
+            // setTimeout(() => {
+            //   this.loading = false
+            // }, 1000);
           }
           var data = data.data
           if (data.data) {
