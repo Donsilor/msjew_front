@@ -167,7 +167,7 @@
       // 验证
       verification(k){
         var that = this;
-        that.nowIndex = k;
+        this.nowIndex = k;
 
         if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
           this.$errorMessage(that.$t(`${lang}.msg1`));
@@ -178,14 +178,14 @@
             pw: that.cardList[k].conversionNum,
           })
           .then(res => {
-            this.ifLoading = false;
+            that.ifLoading = false;
             that.ifShowPop = true;
             that.verifyStatus = 1;
             that.cardList[that.nowIndex].balance = res.data.balance;
             that.cardList[that.nowIndex].ifChoose = true;
           })
           .catch(err => {
-            this.ifLoading = false;
+            that.ifLoading = false;
             that.ifShowPop = true;
             that.verifyStatus = 2;
           })
@@ -193,17 +193,16 @@
       },
       // 关闭弹窗
       closePop(){
-        var that = this;
-        that.ifShowPop = false;
-        if(that.verifyStatus == 1){
-          that.cardList[that.nowIndex].type = 1;
-        }else if(that.verifyStatus == 2){
-          that.cardList[that.nowIndex].type = 2;
+        this.ifShowPop = false;
+        if(this.verifyStatus == 1){
+          this.cardList[this.nowIndex].type = 1;
+        }else if(this.verifyStatus == 2){
+          this.cardList[this.nowIndex].type = 2;
           var list = this.$refs.list[this.nowIndex];
           var ipt = list.getElementsByClassName('ipt')[0];
           ipt.focus();
-          // that.cardList[that.nowIndex].account = '';
-          // that.cardList[that.nowIndex].conversionNum = '';
+          // this.cardList[this.nowIndex].account = '';
+          // this.cardList[this.nowIndex].conversionNum = '';
         }
       },
       // 消除此卡
@@ -216,42 +215,41 @@
       chooseList(k){
         var that = this;
         if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
-          that.$errorMessage(that.$t(`${lang}.msg1`));
+          this.$errorMessage(that.$t(`${lang}.msg1`));
         }else{
-          if(that.cardList[k].type == 0){
-            that.$errorMessage(that.$t(`${lang}.msg2`));
-          }else if(that.cardList[k].type == 1){
-            that.cardList[k].ifChoose = true;
-          }else if(that.cardList[k].type == 2){
-            that.$errorMessage(that.$t(`${lang}.msg3`));
+          if(this.cardList[k].type == 0){
+            this.$errorMessage(that.$t(`${lang}.msg2`));
+          }else if(this.cardList[k].type == 1){
+            this.cardList[k].ifChoose = true;
+          }else if(this.cardList[k].type == 2){
+            this.$errorMessage(that.$t(`${lang}.msg3`));
           }
         }
       },
       // 选择全部购物卡
       allChoose(){
-        var flag = false;
-        var that = this;
-        for(var i of that.cardList){
+        var that = this, flag = false;
+        for(var i of this.cardList){
           if(i.account !== '' && i.conversionNum !== ''){
             flag = true;
           }
 
           if(i.type != 1){
-            that.$errorMessage(that.$t(`${lang}.msg4`));
+            this.$errorMessage(that.$t(`${lang}.msg4`));
           }else{
             i.ifChoose = true;
             this.ifChooseAll = true;
           }
-
         }
 
         if(!flag){
-          that.$errorMessage(that.$t(`${lang}.msg1`));
+          this.$errorMessage(that.$t(`${lang}.msg1`));
         }
       },
       // 输入时改变状态
       inputInfo(k){
         this.cardList[k].type = 0;
+        this.cardList[k].ifChoose = false;
       }
 
     }
@@ -442,6 +440,7 @@
   }
 
   .add-card{
+    width: 160px;
     height: 40px;
     border-bottom: 1px solid rgba(110,112,110,0.2);
     display: flex;
