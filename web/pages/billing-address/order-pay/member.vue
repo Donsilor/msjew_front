@@ -1979,7 +1979,7 @@ export default {
     },
     createAddress() {
       // console.log('create')  /[^\d]/g,''
-       if (this.addressData.lastname === '') {
+      if (this.addressData.lastname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
