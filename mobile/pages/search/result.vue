@@ -20,7 +20,7 @@
       </div>
       <!--    list start v-show="this.loading == false"-->
       <div class="list-part" >
-        <div class="title" >
+        <div class="title" v-show="pageInfo && pageInfo.total_count">
           <div>
             {{ lang.total }}
             <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>
@@ -98,8 +98,11 @@ export default {
         _this.similarGoodsId = _this.$route.query.similarGoodsId || ''
       }
       setTimeout(() => {
-        _this.searchAgain()
+       _this.searchAgain()
       }, 1000);
+      // if(_this.pageInfo && _this.pageInfo.total_count){
+      //   _this.searchAgain()
+      // }
       // _this.searchAgain()
     })
   },
@@ -108,19 +111,28 @@ export default {
       const _this = this
       if(_this.$route.query.keyword !== ''){
         _this.$nuxt.$loading.start()
-        setTimeout(() => {
+        if(_this.pageInfo && _this.pageInfo.total_count){
           _this.$nuxt.$loading.finish()
-        }, 1000);
+        }
+        // setTimeout(() => {
+        //   _this.$nuxt.$loading.finish()
+        // }, 1000);
       }
     },
     showSwiperTap() {
       this.$refs.suitability.show()
     },
     searchAgain() {
-      this.$nuxt.$loading.start()
-      setTimeout(() => {
-        this.$nuxt.$loading.finish()
-      }, 1000);
+      // console.log(this.pageInfo,this.pageInfo.total_count)
+      const _this = this
+      _this.$nuxt.$loading.start()
+      if(_this.pageInfo && _this.pageInfo.total_count){
+        console.log(this.pageInfo,this.pageInfo.total_count)
+        _this.$nuxt.$loading.finish()
+      }
+      // setTimeout(() => {
+      //   _this.$nuxt.$loading.finish()
+      // }, 1000);
       // console.log('点击了重新搜索')
       this.$router.replace({
         name: 'search-result',
