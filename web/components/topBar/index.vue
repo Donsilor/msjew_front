@@ -1017,24 +1017,24 @@ export default {
             ],
             [
               {
-                groupName: this.$t(`${lang}.diamondMenu.use`),
+                groupName: this.$t(`${lang}.diamondMenu.color`),
                 data: [
                   {
-                    name: this.$t(`${lang}.diamondMenu.propose`),
+                    name: this.$t(`${lang}.diamondMenu.18KWhite`),
                     // icon: 'iconyuanxin shape-icon',
                     to: {
                       path: '/diamonds/round-cut'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.diamondMenu.gotEngaged`),
+                    name: this.$t(`${lang}.diamondMenu.18KYellow`),
                     // icon: 'icontuoyuan shape-icon',
                     to: {
                       path: '/diamonds/oval-cut'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.diamondMenu.marry`),
+                    name: this.$t(`${lang}.diamondMenu.18KRoseGold`),
                     // icon: 'iconfangxing shape-icon',
                     to: {
                       path: '/diamonds/princess-cut'
