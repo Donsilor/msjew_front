@@ -438,28 +438,28 @@ export default {
                 data: [
                   {
                     name: this.$t(`${lang}.ringsMenu.18KWhite`),
-                    // icon: 'iconring-jy ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
                       path: '/engagement-rings/18k-white'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.18KYellow`),
-                    // icon: 'iconring-sh ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
                       path: '/engagement-rings/18k-yellow'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.18KRoseGold`),
-                    // icon: 'iconring-gdx ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
                       path: '/engagement-rings/18k-rose-gold'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.platinum`),
-                    // icon: 'iconring-js ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/engagement-rings/platinum'
                     }
@@ -562,7 +562,7 @@ export default {
                   {
                     id: 34,
                     name: this.$t(`${lang}.ringsMenu.birthdayPresent`),
-                    // icon: 'iconmaterial-big-pt color-icon color-platinum',
+                    icon: 'iconJewelry-gift-d',
                     to: {
                       path: ''
                     }
