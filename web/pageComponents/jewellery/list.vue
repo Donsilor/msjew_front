@@ -9,11 +9,25 @@
           </h2>
           <ul class="options">
             <li
+              :class="[
+                'option-item',
+                { active: '' === searchConditions.categoryId }
+              ]"
+              @click="changeMaterial('')"
+            >
+              <div class="item-icon">
+                <img src="/ring-material/all.png" />
+              </div>
+              <div class="item-name">
+                {{ $t(`${lang}.colors`) }}
+              </div>
+            </li>
+            <li
               v-for="(option, index) in jewelleryOptions"
               :key="index"
               :class="[
                 'option-item',
-                { active: option.categoryId === searchConditions.categoryId }
+                { active: option.categoryId === searchConditions.categoryId || (searchConditions.categoryId instanceof Array && searchConditions.categoryId.indexOf(option.categoryId) >= 0)}
               ]"
               @click="changeCategoryId(option.categoryId)"
             >
@@ -277,6 +291,7 @@ export default {
       fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
       searchConditions: {
         categoryId: 4,
+        typeId: 4,
         materialIndex: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       }
@@ -284,8 +299,8 @@ export default {
   },
   computed: {
     materialOptions() {
-      const categoryId = this.searchConditions.categoryId
-      const category = this.getCategoryById(categoryId)
+      const typeId = this.searchConditions.typeId
+      const category = this.getCategoryById(typeId)
       return this.quality[category.qualityName]
     },
     // 列表特定body参数
@@ -315,7 +330,7 @@ export default {
 
       const data = {
         // 商品类别ID
-        categoryId: conditions.categoryId,
+        categoryId: conditions.categoryId == '' ? [4,5,6,7,8,9,10]:conditions.categoryId,
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）

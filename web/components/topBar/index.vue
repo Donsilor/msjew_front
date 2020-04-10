@@ -315,28 +315,28 @@ export default {
           key: 'ring',
           name: this.$t(`${lang}.ring`),
           to: {
-            path: '/engagement-rings'
+            path: '/wedding-rings'
           }
         },
         {
           key: 'necklace',
           name: this.$t(`${lang}.necklace`),
           to: {
-            path: '/wedding-rings'
+            path: '/jewellery/necklace-pendant'
           }
         },
         {
           key: 'bracelet',
           name: this.$t(`${lang}.bracelet`),
           to: {
-            path: '/diamonds'
+            path: '/jewellery/bracelet-bangle'
           }
         },
         {
           key: 'diamond-ring-customization',
           name: this.$t(`${lang}.customization`),
           to: {
-            path: '/jewellery/all'
+            path: '/diamonds'
           }
         },
         {
