@@ -1,71 +1,75 @@
 <template>
   <div class="container">
-    <div class="box">
-      <div class="box-border">
-        <div class="title">{{ $t(`${lang}.title`) }}
-          <div class="quit"></div>
-        </div>
-        <div class="card-box clf">
-          <!-- 购物卡列表 -->
-          <div class="list fl" v-for="(item, index) in cardList" ref="list" @input="inputInfo(index)">
-            <div class="card-info">
-              <span class="choose" :class="item.ifChoose ? 'active' : ''" @click="chooseList(index)"></span>
-              <div class="list-content">
-                <div class="child clf">
-                  <span class="icon fl"></span>
-                  <span class="text fl">{{ $t(`${lang}.cardNumber`) }}</span>
-                  <div class="ipt-box fl">
-                    <input type="text" class="ipt" v-model="cardList[index].account">
-                  </div>
-                </div>
-                <div class="child clf">
-                  <span class="icon fl"></span>
-                  <span class="text fl">{{ $t(`${lang}.cardPassword`) }}</span>
-                  <div class="ipt-box fl">
-                    <input type="text" class="ipt" v-model="cardList[index].conversionNum">
-                  </div>
+    <div class="box" v-loading="ifLoading" element-loading-text="验证中..." element-loading-background="rgba(0, 0, 0, 0.3)">
+      <div class="title">{{ $t(`${lang}.title`) }}
+        <div class="quit" @click="quit()"></div>
+      </div>
+      <div class="card-box clf">
+        <!-- 购物卡列表 -->
+        <div class="list fl" v-for="(item, index) in cardList" ref="list" @input="inputInfo(index)">
+          <div class="card-info">
+            <span class="choose" :class="item.ifChoose ? 'active' : ''" @click="chooseList(index)"></span>
+            <div class="list-content">
+              <div class="child clf">
+                <span class="icon fl"></span>
+                <span class="text fl">{{ $t(`${lang}.cardNumber`) }}</span>
+                <div class="ipt-box fl">
+                  <input type="text" class="ipt" v-model="cardList[index].account">
                 </div>
               </div>
-            </div>
-
-            <div class="verify">
-              <!-- 默认状态 -->
-              <div v-if="item.type == 0">
-                <div class="btn" @click="verification(index)">{{ $t(`${lang}.clickVerify`) }}</div>
-                <div class="text"></div>
-              </div>
-              <!-- 成功状态 -->
-              <div v-else-if="item.type == 1" class="verify-success">
-                <div class="btn">{{ $t(`${lang}.verifySucceed`) }}</div>
-                <div class="text">{{ $t(`${lang}.balance`) }}￥{{item.balance}}</div>
-              </div>
-              <!-- 失败状态 -->
-              <div v-else-if="item.type == 2" class="verify-failing">
-                <div class="btn">{{ $t(`${lang}.verifyFailing`) }}</div>
-                <div class="text" @click="eliminate(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
+              <div class="child clf">
+                <span class="icon fl"></span>
+                <span class="text fl">{{ $t(`${lang}.cardPassword`) }}</span>
+                <div class="ipt-box fl">
+                  <input type="text" class="ipt" v-model="cardList[index].conversionNum">
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <!-- 添加 -->
-        <div class="add-card" @click="addCard()">
-          <span class="icon"></span>
-          <span class="text">{{ $t(`${lang}.addCard`) }}</span>
+          <div class="verify">
+            <!-- 默认状态 -->
+            <div v-if="item.type == 0">
+              <div class="btn verify-btn" @click="verification(index)">{{ $t(`${lang}.clickVerify`) }}</div>
+              <div class="text"></div>
+            </div>
+            <!-- 成功状态 -->
+            <div v-else-if="item.type == 1" class="verify-success">
+              <div class="btn">
+                <span class="icon"></span>
+                <span>{{ $t(`${lang}.verifySucceed`) }}</span>
+              </div>
+              <div class="text">{{ $t(`${lang}.balance`) }}￥{{item.balance}}</div>
+            </div>
+            <!-- 失败状态 -->
+            <div v-else-if="item.type == 2" class="verify-failing">
+              <div class="btn">
+                <span class="icon"></span>
+                <span>{{ $t(`${lang}.verifyFailing`) }}</span>
+              </div>
+              <div class="text" @click="eliminate(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- 全选 -->
-        <div class="all-choose" :class="ifChooseAll ? 'active' : ''" @click="allChoose()">
-          <span class="icon"></span>
-          <span class="text">{{ $t(`${lang}.chooseAll`) }}</span>
-        </div>
+      <!-- 添加 -->
+      <div class="add-card" @click="addCard()">
+        <span class="icon"></span>
+        <span class="text">{{ $t(`${lang}.addCard`) }}</span>
+      </div>
 
-        <div class="annotation">{{ $t(`${lang}.annotation`) }}</div>
+      <!-- 全选 -->
+      <div class="all-choose" :class="ifChooseAll ? 'active' : ''" @click="allChoose()">
+        <span class="icon"></span>
+        <span class="text">{{ $t(`${lang}.chooseAll`) }}</span>
+      </div>
 
-        <div class="submit-box">
-          <div class="btn" @click="quit()">{{ $t(`${lang}.cancle`) }}</div>
-          <div class="btn" @click="confirm()">{{ $t(`${lang}.confirm`) }}</div>
-        </div>
+      <div class="annotation">{{ $t(`${lang}.annotation`) }}</div>
+
+      <div class="submit-box">
+        <div class="btn" @click="quit()">{{ $t(`${lang}.cancle`) }}</div>
+        <div class="btn" @click="confirm()">{{ $t(`${lang}.confirm`) }}</div>
       </div>
     </div>
 
@@ -109,7 +113,7 @@
             conversionNum: '',
             balance: '',
             type: 0,
-            ifChoose: false
+            ifChoose: false,
           },
           {
             account: '',
@@ -125,7 +129,8 @@
         verifyStatus: '1',
         nowIndex: 0,
         submit: [],
-        ifChooseAll: false
+        ifChooseAll: false,
+        ifLoading: false
       }
     },
     methods:{
@@ -163,20 +168,27 @@
       verification(k){
         var that = this;
         that.nowIndex = k;
-        this.$axios
-          .post('web/member/card/verify', {
+
+        if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
+          this.$errorMessage(that.$t(`${lang}.msg1`));
+        }else{
+          this.ifLoading = true;
+          this.$axios.post('web/member/card/verify', {
             sn: that.cardList[k].account,
             pw: that.cardList[k].conversionNum,
           })
           .then(res => {
+            this.ifLoading = false;
             that.ifShowPop = true;
-            that.verifyStatus = '1';
+            that.verifyStatus = 1;
             that.cardList[that.nowIndex].balance = res.data.balance;
+            that.cardList[that.nowIndex].ifChoose = true;
           })
           .catch(err => {
             that.ifShowPop = true;
-            that.verifyStatus = '2';
+            that.verifyStatus = 2;
           })
+        }
       },
       // 关闭弹窗
       closePop(){
@@ -210,8 +222,8 @@
           }else if(that.cardList[k].type == 1){
             that.cardList[k].ifChoose = true;
           }else if(that.cardList[k].type == 2){
-          }
             that.$errorMessage(that.$t(`${lang}.msg3`));
+          }
         }
       },
       // 选择全部购物卡
@@ -277,13 +289,9 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 60px;
-  }
-  .box-border{
+    padding: 0 60px;
     width: 962px;
     height: 700px;
-    border: 1px solid #d2d2d2;
-    padding: 0 60px;
     box-sizing: border-box;
     overflow-y: auto;
   }
@@ -295,6 +303,15 @@
     font-size: 20px;
     color: #666;
     border-bottom: 1px solid rgba(110,112,110,0.2);
+  }
+  .title .quit{
+    position: absolute;
+    top: 20%;
+    right: 0px;
+    width: 30px;
+    height: 30px;
+    background: url(../../static/addShoppingCard/quit.png) no-repeat center;
+    background-size: 100% 100%;
   }
 
   .card-box{
@@ -373,6 +390,11 @@
     font-size: 13px;
     color: #615959;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .verify-btn{
     cursor: pointer;
   }
 
@@ -404,6 +426,18 @@
 
   .verify-failing .text{
     cursor: pointer;
+  }
+
+  .verify .icon{
+    width: 16px;
+    height: 16px;
+    background: url(../../static/addShoppingCard/icon-1.png) no-repeat center;
+    background-size: 100% 100%;
+    margin-right: 6px;
+  }
+
+  .verify-failing .icon{
+    background-image: url(../../static/addShoppingCard/icon-2.png);
   }
 
   .add-card{

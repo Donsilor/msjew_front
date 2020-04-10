@@ -2329,7 +2329,9 @@
     "hint2":"發票抬頭不能為空",
     "hint3":"稅號不能為空",
     "hint4":"郵箱不能為空",
-    "hint5":"請輸入正確的郵箱"
+    "hint5":"請輸入正確的郵箱",
+    "shoppingCard": "購物卡",
+    "ultimatelyPay": "實際支付金額"
   },
   "shoppingCard": {
     "title": "添加購物卡信息",

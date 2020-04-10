@@ -2345,7 +2345,9 @@
     "hint2":"发票抬头不能为空",
     "hint3":"税号不能为空",
     "hint4":"邮箱不能为空",
-    "hint5":"请输入正确的邮箱"
+    "hint5":"请输入正确的邮箱",
+    "shoppingCard": "购物卡",
+    "ultimatelyPay": "实际支付金额"
   },
   "shoppingCard": {
     "title": "添加购物卡信息",

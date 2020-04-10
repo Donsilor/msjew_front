@@ -798,8 +798,10 @@
             </div>
           </div>
           <div class="detail-line" v-for="item in useAmount">
-            <div>{{ $t(`${lang}.shoppingCard`) }}<span class="shopping-card-num">{{item.sn}}</span></div>
-            <div class="hkd">{{item.useAmount}}</div>
+            <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+            <div class="hkd color-pink">
+              -{{ $store.state.coin }} {{item.useAmount}}
+            </div>
           </div>
           <div v-show="makeGay" class="detail-line">
             <div>
@@ -873,7 +875,7 @@
       >
         <span
           >{{ $store.state.coin }}
-          {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+          {{ formatMoney(tex.payAmount || goodsPrice) }}</span
         >
         <span>{{ $t(`${lang}.beiQin`) }}</span>
       </div>
@@ -1692,10 +1694,13 @@
               {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
             </div>
           </div>
-          <div class="detail-line" v-for="item in cardList">
-            <div>{{ $t(`${lang}.shoppingCard`) }}<span class="shopping-card-num">{{item.sn}}</span></div>
-            <div class="hkd">{{item.balance}}</div>
+          <div class="detail-line" v-for="item in useAmount">
+            <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+            <div class="hkd color-pink">
+              -{{ $store.state.coin }} {{item.useAmount}}
+            </div>
           </div>
+          
           <div v-show="makeGay" class="detail-line">
             <div>
               *{{ $t(`${lang}.coupon`) }}:
@@ -1768,7 +1773,7 @@
       >
         <span
           >{{ $store.state.coin }}
-          {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+          {{ formatMoney(tex.payAmount || goodsPrice) }}</span
         >
         <span>{{ $t(`${lang}.beiQin`) }}</span>
       </div>
@@ -2698,7 +2703,7 @@ export default {
           if(res.data.cards.length != 0){
             this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
           }
-          
+
           console.log(this.useAmount)
 
         })
@@ -2714,6 +2719,7 @@ export default {
         })
     },
     createOrder() {
+      var that = this;
       // console.log("4444",this.address)
       // console.log()
       // if (!this.canSubmit) {
@@ -2759,15 +2765,22 @@ export default {
         .post('/web/member/order/create', data)
         .then(res => {
           // console.log("创建订单",res.data.orderAmount)
-          this.$store.dispatch('getCart')
-          this.$router.replace({
-            path: '/payment-options',
-            query: {
-              orderId: res.data.orderId,
-              price: res.data.orderAmount,
-              coinType: res.data.coinType,
-            }
-          })
+          if(res.data.payStatus == 1){
+            that.$successMessage('订单提交成功');
+            that.$router.replace({
+              path: '/account/orders',
+            })
+          }else{
+            this.$store.dispatch('getCart')
+            this.$router.replace({
+              path: '/payment-options',
+              query: {
+                orderId: res.data.orderId,
+                price: res.data.orderAmount,
+                coinType: res.data.coinType,
+              }
+            })
+          }
         })
         .catch(err => {
           if (!err.response) {
@@ -2778,6 +2791,7 @@ export default {
         })
     },
     createOrder1() {
+      var that = this;
       // console.log("tttttt",this.orderAddress)
       // console.log()
       // if (!this.canSubmit) {
@@ -2835,15 +2849,22 @@ export default {
         .post('/web/member/order/create', data)
         .then(res => {
           // console.log("创建订单",res.data.orderAmount)
-          this.$store.dispatch('getCart')
-          this.$router.replace({
-            path: '/payment-options',
-            query: {
-              orderId: res.data.orderId,
-              price: res.data.orderAmount,
-              coinType: res.data.coinType
-            }
-          })
+          if(res.data.payStatus == 1){
+            that.$successMessage('订单提交成功');
+            that.$router.replace({
+              path: '/account/orders',
+            })
+          }else{
+            this.$store.dispatch('getCart')
+            this.$router.replace({
+              path: '/payment-options',
+              query: {
+                orderId: res.data.orderId,
+                price: res.data.orderAmount,
+                coinType: res.data.coinType
+              }
+            })
+          }
         })
         .catch(err => {
           // if (!err.response) {

@@ -288,10 +288,10 @@
               {{ data.coinCode }} {{ formatNumber(data.productAmount) }}
             </div>
           </div>
-          <div class="info-line">
-            <div class="label">{{ $t(`${lang}.totalNum`) }}</div>
-            <div class="ff">
-              11111111111111
+          <div class="info-line" v-for="item in cardList">
+            <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 10">(已解绑)</span>
             </div>
           </div>
           <div class="info-line">
@@ -328,6 +328,12 @@
             <div class="label big-label">{{ $t(`${lang}.orderTotal`) }}</div>
             <div class="ff big-ff">
               {{ data.coinCode }} {{ formatNumber(data.orderAmount) }}
+            </div>
+          </div>
+          <div class="info-line">
+            <div class="label big-label">{{ $t(`${lang_invoice}.ultimatelyPay`) }}</div>
+            <div class="ff big-ff">
+              {{ data.coinCode }} {{ formatNumber(data.payAmount) }}
             </div>
           </div>
         </div>
@@ -367,7 +373,8 @@ export default {
         taxNumber: ""
       },
       type:'',
-      headType:''
+      headType:'',
+      cardList: []
     }
   },
   computed: {
@@ -437,6 +444,7 @@ export default {
       return status_value[status];
     },
     getData() {
+      var that = this;
       console.log("id",this.oid)
       this.$axios
         .get('/web/member/order/detail', {
@@ -445,7 +453,6 @@ export default {
         .then(res => {
           this.data = res.data
           this.invoice = res.data.invoice
-          console.log(this.invoice)
 
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
@@ -464,6 +471,11 @@ export default {
           } else {
             this.headType = this.$t(`${lang_invoice}.company`)
           }
+
+          if(res.data.cards.length != 0){
+            that.cardList = res.data.cards;
+          }
+
         })
         .catch(err => {
           if (!err.response) {
@@ -1067,5 +1079,10 @@ export default {
       }
     }
   }
+}
+
+.fontSize{
+  font-size: 12px;
+  color: #777;
 }
 </style>
