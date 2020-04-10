@@ -652,7 +652,7 @@ export default language => {
         name: lang.jewellery.bangles,
         iconfont: 'iconshouhuan',
         qualityName: 'bracelet'
-      }
+      },
     ],
 
     diamond: {
