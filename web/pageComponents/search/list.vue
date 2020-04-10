@@ -106,7 +106,7 @@
           </el-pagination>
         </div>
       </div>
-      <no-more-data v-show="showingData.length == 0 && this.loading == false" :dataVal = "1" @changeFn = "changeFng()"></no-more-data>
+      <no-more-data v-show="this.allData.length == 0 && totalCount == 0" :dataVal = "1" @changeFn = "changeFng()"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="search"></bdd-empty> -->
     </section>
   </div>
@@ -156,7 +156,6 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("dddd",this.allData.length)
       if(this.allData.length == 0){
         this.loading = true
         setTimeout(() => {
@@ -274,6 +273,7 @@ export default {
   },
   methods: {
     toSearch() {
+      // console.log("this.allData",this.allData)
       if(this.allData.length == 0){
         this.loading = true
         setTimeout(() => {
@@ -349,6 +349,12 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
+          if(!data){
+            this.loading = true
+            setTimeout(() => {
+              this.loading = false
+            }, 1000);
+          }
           var data = data.data
           if (data.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(data.data))
@@ -359,6 +365,10 @@ export default {
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
+          this.loading = true
+          setTimeout(() => {
+            this.loading = false
+          }, 1000);
           console.error(err)
           if (err instanceof Error) {
             console.log('这是一个错误')

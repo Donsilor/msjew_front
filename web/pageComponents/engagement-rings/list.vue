@@ -225,7 +225,7 @@
           </el-pagination>
         </div>
       </div>
-      <no-more-data v-show="showingData.length == 0 && this.loading == false" :dataVal = "2"></no-more-data>
+      <no-more-data v-show="this.allData.length == 0 && totalCount == 0" :dataVal = "2"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="product"></bdd-empty> -->
     </section>
   </div>
