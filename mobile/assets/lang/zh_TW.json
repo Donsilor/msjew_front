@@ -2033,5 +2033,28 @@
     "inputTelphone": "請輸入正確的電話",
     "selectTheCorrectDate": "請選擇正確的日期",
     "selectAnAppointmentTime": "請選擇預約時間"
+  },
+  "shoppingCard": {
+    "title": "添加購物卡信息",
+    "cardNumber": "卡號",
+    "cardPassword": "兌換碼",
+    "addCard": "添加購物卡",
+    "chooseAll": "全選",
+    "annotation": "*註：多張購物卡，可依次添加驗證",
+    "cancle": "取消",
+    "confirm": "確定",
+    "clickVerify": "點擊驗證",
+    "verifySucceed": "驗證成功",
+    "verifyFailing": "驗證失敗",
+    "balance": "余額",
+    "eliminateCard": "消除此卡",
+    "verifyValid": "購物卡驗證有效",
+    "alreadyAdd": "已添加",
+    "verifyInvalid": "無效購物卡",
+    "anewAdd": "重新添加",
+    "msg1": "賬號或密碼為空，請填寫",
+    "msg2": "此卡需要驗證成功才能使用",
+    "msg3": "驗證失敗，清重新填寫",
+    "msg4": "有未驗證或驗證失敗的卡！"
   }
 }

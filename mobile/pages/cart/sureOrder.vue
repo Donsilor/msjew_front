@@ -67,7 +67,7 @@
         <!-- <div class="tips">
           <i class="icon iconfont icongantanhao1"></i><span>{{ lang2.tips }}</span>
         </div> -->
-        <!-- <div class="btn" @click="goPaySuccess"> 
+        <!-- <div class="btn" @click="goPaySuccess">
           @click="goPaySuccess"
           {{ list2[typeIndex].title }}
           {{ lang2.goPay }}
@@ -244,6 +244,8 @@
         </ul>
       </div>
     </div>
+
+    <div style="height: 40px;line-height: 40px;" @click="ifShowShoppingCard = true">加购物卡</div>
     <!-- 未登录 -->
     <!-- <div v-if="!isLogin" :class="['submit']" @click="createOrder2">
       <span>{{ lang.sureOrder }}</span>
@@ -252,11 +254,12 @@
     <div :class="['submit']" @click="createOrder">
       <span>{{ lang.sureOrder }}</span>
     </div>
-    
+
     <order-express ref="orderExpress"></order-express>
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
+    <shopping-card v-if="ifShowShoppingCard"></shopping-card>
   </div>
 </template>
 
@@ -267,6 +270,7 @@ import OrderCouponTips from '@/components/white-board/order-coupon-tips/index.vu
 import { Email } from '../../assets/js/require-lee'
 import { formatMoney } from '@/assets/js/filterUtil.js'
 import NeedKnow from '@/components/cart/needKnow.vue'
+import ShoppingCard from '@/components/shopping-card/index'
 const storage = process.client ? require('good-storage').default : {}
 // console.log(storage, 'storage')
 export default {
@@ -276,12 +280,13 @@ export default {
     Header,
     CartList,
     OrderCouponTips,
-    NeedKnow
+    NeedKnow,
+    ShoppingCard
   },
   data() {
     return {
       kai:false,
-      url:'', 
+      url:'',
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
       coin: this.$store.state.coin,
@@ -336,11 +341,12 @@ export default {
       cuponList: [],
       session: '',
       info:[],
-      totlePrice:''
+      totlePrice:'',
+      ifShowShoppingCard: false
     }
   },
   computed: {
-    
+
     selectedCouponInfo() {
       const _this = this
       let result = {}
@@ -389,20 +395,20 @@ export default {
       // console.log('this.allFee=====>', JSON.stringify(this.allFee))
        if (this.isLogin){
          if (this.allFee.orderAmount === null) {
-          //  console.log(11111) 
+          //  console.log(11111)
            result = this.formatMoney(this.productAmount)
          } else  {
-          //  console.log(22222) 
+          //  console.log(22222)
            result = this.formatMoney(this.allFee.orderAmount)
-         } 
+         }
        } else {
          if (this.allFee.order_amount === null) {
-          //  console.log(11111) 
+          //  console.log(11111)
            result = this.formatMoney(this.goods_amount)
          } else  {
-          //  console.log(22222) 
+          //  console.log(22222)
            result = this.formatMoney(this.allFee.order_amount)
-         } 
+         }
        }
        this.totlePrice = result
        console.log("dddd",this.totlePrice)
@@ -438,10 +444,10 @@ export default {
         // this.idList.push(item.localSn)
         //  console.log("sssss",this.productAmount)
         // this.productAmount = this.productAmount + item.salePrice   localSn
-        this.productAmount = parseFloat(this.productAmount + item.salePrice) 
+        this.productAmount = parseFloat(this.productAmount + item.salePrice)
         // console.log("productAmount",this.productAmount)
       })
-     
+
       this.getData() // 获取地址
       this.getCouponList() // 获取优惠券列表
 
@@ -471,7 +477,7 @@ export default {
       }else if(this.typeIndex == 1){
         pay = 2
       }
-      
+
       if(pay!==6){
         this.$toast.show(this.lang.firstLogin)
       }
@@ -696,7 +702,7 @@ export default {
         url = `/web/member/order-tourist/tax`
         const goodsCartList=[]
         for (const i in this.list) {
-          const o = {            
+          const o = {
             createTime: this.list[i].createTime,
             goods_num: 1,
             goodsDetailsId: this.list[i].goodsDetailsId,

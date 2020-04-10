@@ -2027,5 +2027,28 @@
     "inputTelphone": "Input the true phone",
     "selectTheCorrectDate": "Select the correct date",
     "selectAnAppointmentTime": "Select an appointment time"
+  },
+  "shoppingCard": {
+    "title": "Add shopping card information",
+    "cardNumber": "Card number",
+    "cardPassword": "Redeem code",
+    "addCard": "Add shopping card",
+    "chooseAll": "Check all",
+    "annotation": "*Note: several shopping CARDS can be added for verification",
+    "cancle": "cancel",
+    "confirm": "confirm",
+    "clickVerify": "Click on the validation",
+    "verifySucceed": "Authentication is successful",
+    "verifyFailing": "Validation fails",
+    "balance": "The balance of",
+    "eliminateCard": "Remove the card",
+    "verifyValid": "The gift card is validated",
+    "alreadyAdd": "Have been added",
+    "verifyInvalid": "Invalid shopping card",
+    "anewAdd": "To add",
+    "msg1": "The account number or password is blank, please fill in",
+    "msg2": "This card needs to be validated successfully to be used",
+    "msg3": "Verification failed, please fill in again",
+    "msg4": "There are CARDS that are unverified or failed to verify！"
   }
 }
