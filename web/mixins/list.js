@@ -281,13 +281,13 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
-          console.log(111111)
-          if(!data){
-            _this.loading = true
+          _this.loading = false
+          // if(!data){
+          //   _this.loading = true
             // setTimeout(() => {
             //   this.loading = false
             // }, 1000);
-          }
+          // }
           var data = data.data
           if (data.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(data.data))
@@ -298,7 +298,7 @@ export default {
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
-          _this.loading = true
+          _this.loading = false
           console.log(2222)
           console.error(err)
           if (err instanceof Error) {

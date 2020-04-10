@@ -778,7 +778,7 @@
           </el-pagination>
         </div>
       </div>
-      <no-more-data v-show="this.allData.length == 0 && totalCount == 0" :dataVal = "2"></no-more-data>
+      <no-more-data v-show="this.allData.length == 0 && this.loading == false" :dataVal = "2"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="product"></bdd-empty> -->
     </div>
     <div v-show="activeTab === 'compare'" class="compare-tab-content">
@@ -968,7 +968,7 @@ export default {
           sortType: '',
           sortBy: ''
       },
-      loading:false
+      loading:true
     }
   },
   computed: {

@@ -106,7 +106,7 @@
           </el-pagination>
         </div>
       </div>
-      <no-more-data v-show="this.allData.length == 0 && totalCount == 0" :dataVal = "1" @changeFn = "changeFng()"></no-more-data>
+      <no-more-data v-show="this.allData.length == 0 && this.loading == false" :dataVal = "1" @changeFn = "changeFng()"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="search"></bdd-empty> -->
     </section>
   </div>
