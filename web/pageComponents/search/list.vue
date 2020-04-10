@@ -129,7 +129,7 @@ export default {
       sortTypeIndex: 0,
       page_size: 16,
       keyword: '',
-      loading: false
+      loading: true
       // noMoreListData: false
     }
   },
