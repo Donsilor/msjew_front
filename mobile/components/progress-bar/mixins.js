@@ -239,6 +239,10 @@ export default {
       }
     },
     backOption() {
+      this.$nuxt.$loading.start()
+      setTimeout(() => {
+        this.$nuxt.$loading.finish()
+      }, 1000);
       const jsonBack = {
         name: `price-bar`,
         content: []

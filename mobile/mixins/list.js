@@ -22,6 +22,16 @@ export default {
   computed: {
     // 所有已请求的页码的数据集合
     showData() {
+      if(this.listData.length == 0){
+        this.loading = true
+        console.log(11111)
+        setTimeout(() => {
+          this.loading = false
+        }, 1000);
+      }else if(this.listData.length > 0){
+         console.log(22222)
+        this.loading = false
+      }
       const page_count =
         this.pageInfo && this.pageInfo.page_count ? this.pageInfo.page_count : 0
       const listData = this.listData

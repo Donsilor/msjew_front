@@ -61,9 +61,10 @@ export default {
   z-index: 9998;
 }
 .loading-component {
-  width: 120px;
-  height: 120px;
-  background: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100%;
+  /* background-color: hsla(0,0%,100%,.9); */
+  background: rgba(0, 0, 0, .7);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -76,7 +77,7 @@ export default {
 }
 .loader {
   width: 80px;
-  height: 80px;
+  height: 100%;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
