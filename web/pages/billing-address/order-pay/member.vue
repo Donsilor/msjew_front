@@ -1919,6 +1919,7 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
+          console.log(res.data)
           this.address = res.data
           if(this.address.length != 0){
             // for (const i in res.data) {
@@ -2180,6 +2181,9 @@ export default {
       // console.log('需要修改的对象：', obj);
       this.isEdit = true
       const data = this.$helpers.cloneObject(obj)
+      if(data.zip_code == null){
+        data.zip_code = ''
+      }
       this.addressData = {
         id: data.id,
         firstname: data.firstname,
