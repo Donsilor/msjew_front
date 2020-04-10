@@ -349,12 +349,13 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
-          if(!data){
-            _this.loading = true
-            // setTimeout(() => {
-            //   this.loading = false
-            // }, 1000);
-          }
+          this.loading = false
+          // if(!data){
+          //   _this.loading = true
+          //   // setTimeout(() => {
+          //   //   this.loading = false
+          //   // }, 1000);
+          // }
           console.log(1111)
           var data = data.data
           if (data.data) {
@@ -368,7 +369,7 @@ export default {
         .catch(err => {
           console.error(err)
           console.log(2222)
-          _this.loading = true
+          _this.loading = false
           if (err instanceof Error) {
             console.log('这是一个错误')
           } else {
