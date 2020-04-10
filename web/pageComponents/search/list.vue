@@ -350,11 +350,12 @@ export default {
         })
         .then(data => {
           if(!data){
-            this.loading = true
+            _this.loading = true
             // setTimeout(() => {
             //   this.loading = false
             // }, 1000);
           }
+          console.log(1111)
           var data = data.data
           if (data.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(data.data))
@@ -365,11 +366,9 @@ export default {
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
-          this.loading = true
-          setTimeout(() => {
-            this.loading = false
-          }, 1000);
           console.error(err)
+          console.log(2222)
+          _this.loading = true
           if (err instanceof Error) {
             console.log('这是一个错误')
           } else {

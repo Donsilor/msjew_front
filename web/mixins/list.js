@@ -281,8 +281,9 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
+          console.log(111111)
           if(!data){
-            this.loading = true
+            _this.loading = true
             // setTimeout(() => {
             //   this.loading = false
             // }, 1000);
@@ -297,10 +298,8 @@ export default {
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
-          this.loading = true
-          setTimeout(() => {
-            this.loading = false
-          }, 1000);
+          _this.loading = true
+          console.log(2222)
           console.error(err)
           if (err instanceof Error) {
             console.log('这是一个错误')
