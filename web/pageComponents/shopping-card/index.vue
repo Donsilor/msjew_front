@@ -185,6 +185,7 @@
             that.cardList[that.nowIndex].ifChoose = true;
           })
           .catch(err => {
+            this.ifLoading = false;
             that.ifShowPop = true;
             that.verifyStatus = 2;
           })
