@@ -395,38 +395,45 @@ export default {
                 groupName: this.$t(`${lang}.ringsMenu.style`),
                 data: [
                   {
+                    name: this.$t(`${lang}.ringsMenu.proposalRing`),
+                    // icon: 'iconring-jy ring-icon',
+                    to: {
+                      path: '/wedding-rings/proposal-ring'
+                    }
+                  },
+                  {
                     name: this.$t(`${lang}.ringsMenu.engagementRing`),
                     // icon: 'iconring-jy ring-icon',
                     to: {
-                      path: '/engagement-rings/all'
+                      path: '/wedding-rings/engagement-ring'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.weddingRing`),
                     // icon: 'iconring-sh ring-icon',
                     to: {
-                      path: '/wedding-rings/all'
+                      path: '/wedding-rings/wedding-ring'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.ring`),
                     // icon: 'iconring-gdx ring-icon',
                     to: {
-                      path: '/wedding-rings/womens-classic'
+                      path: '/wedding-rings/ring'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.fashionRing`),
                     // icon: 'iconring-js ring-icon',
                     to: {
-                      path: '/wedding-rings/womens-classic'
+                      path: '/wedding-rings/fashion-ring'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.ringsMenu.CoupleRing`),
+                    name: this.$t(`${lang}.ringsMenu.coupleRing`),
                     // icon: 'iconring-bx ring-icon',
                     to: {
-                      path: '/wedding-rings/womens-classic'
+                      path: '/wedding-rings/couple-ring'
                     }
                   }
                 ]
@@ -440,35 +447,35 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.18KWhite`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: '/engagement-rings/18k-white'
+                      path: '/wedding-rings/18k-white'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.18KYellow`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
-                      path: '/engagement-rings/18k-yellow'
+                      path: '/wedding-rings/18k-yellow'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.18KRoseGold`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
-                      path: '/engagement-rings/18k-rose-gold'
+                      path: '/wedding-rings/18k-rose-gold'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.platinum`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: '/engagement-rings/platinum'
+                      path: '/wedding-rings/platinum'
                     }
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.fineSilver`),
                     // icon: 'iconring-bx ring-icon',
                     to: {
-                      path: '/engagement-rings/channel-set'
+                      path: '/wedding-rings/channel-set'
                     }
                   }
                 ]

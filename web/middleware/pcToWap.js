@@ -233,16 +233,10 @@ function queryParams (data) {
           'mobileUrl':`/marriage-ring`
         },
 		
-		 // 结婚列表
-       /*
-        {
-          'pcUrl':/^\/wedding-rings\/(womens-classic|womens-eternity|womens-anniversary|womens-diamond|womens-stackable|mens-classic|mens-carved|mens-diamond|mens-alternative-metals|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)\/?$/,
-          'mobileUrl':`/marriage-ring/single-ring`,
-        }, 
-		*/
+		
 		
 		{
-          'pcUrl':/^\/wedding-rings\/womens-classic$/,
+          'pcUrl':/^\/wedding-rings\/engagement-ring$/,
           'mobileUrl':`/marriage-ring/single-ring`,
 		  'params':{
 			'type':'lady',   
@@ -250,7 +244,7 @@ function queryParams (data) {
           },
         }, 
 		{
-          'pcUrl':/^\/wedding-rings\/womens-eternity$/,
+          'pcUrl':/^\/wedding-rings\/wedding-ring$/,
           'mobileUrl':`/marriage-ring/single-ring`,
 		  'params':{
 			'type':'lady',   
@@ -258,7 +252,7 @@ function queryParams (data) {
           },
         }, 
 		{
-          'pcUrl':/^\/wedding-rings\/womens-anniversary$/,
+          'pcUrl':/^\/wedding-rings\/proposal-ring$/,
           'mobileUrl':`/marriage-ring/single-ring`,
 		  'params':{
 			'type':'lady',   
@@ -266,7 +260,7 @@ function queryParams (data) {
           },
         }, 
 		{
-          'pcUrl':/^\/wedding-rings\/womens-diamond$/,
+          'pcUrl':/^\/wedding-rings\/fashion-ring$/,
           'mobileUrl':`/marriage-ring/single-ring`,
 		  'params':{
 			'type':'lady',   
@@ -274,13 +268,22 @@ function queryParams (data) {
           },
         }, 
 		{
-          'pcUrl':/^\/wedding-rings\/womens-stackable$/,
+          'pcUrl':/^\/wedding-rings\/ring$/,
           'mobileUrl':`/marriage-ring/single-ring`,
 		  'params':{
 			'type':'lady',    
             'style':'164',
           },
         }, 
+
+        {
+          'pcUrl':/^\/wedding-rings\/couple-ring$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{
+          'type':'lady',    
+                'style':'196',
+              },
+            },  
 		{
           'pcUrl':/^\/wedding-rings\/mens-classic$/,
           'mobileUrl':`/marriage-ring/single-ring`,
