@@ -293,6 +293,7 @@ export default {
     // 请求当前页数据
     getPageInfo(page = this.page) {
       const _this = this
+      _this.loading = true
       const keyword = _this.keyword
 
       if (!_this.canSearchWithoutKeyword && !keyword) {
