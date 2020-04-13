@@ -350,12 +350,14 @@ export default {
         })
         .then(data => {
           this.loading = false
-          // if(!data){
-          //   _this.loading = true
-          //   // setTimeout(() => {
-          //   //   this.loading = false
-          //   // }, 1000);
-          // }
+          if(!data){
+            _this.loading = true
+            // setTimeout(() => {
+            //   this.loading = false
+            // }, 1000);
+          }else{
+            _this.loading = false
+          }
           console.log(1111)
           var data = data.data
           if (data.data) {

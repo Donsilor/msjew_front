@@ -281,13 +281,15 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
-          _this.loading = false
-          // if(!data){
-          //   _this.loading = true
+          // _this.loading = false
+          if(!data){
+            _this.loading = true
             // setTimeout(() => {
             //   this.loading = false
             // }, 1000);
-          // }
+          }else {
+            _this.loading = false
+          }
           var data = data.data
           if (data.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(data.data))
