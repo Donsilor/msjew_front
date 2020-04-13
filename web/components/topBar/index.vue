@@ -1041,14 +1041,14 @@ export default {
                     }
                   },
                   {
-                    name: this.$t(`${lang}.diamondMenu.ValentinesDay`),
+                    name: this.$t(`${lang}.diamondMenu.platinum`),
                     // icon: 'iconfushe shape-icon',
                     to: {
                       path: '/diamonds/emerald-cut'
                     }
                   },
                   {
-                    name: this.$t(`${lang}.diamondMenu.birthdayPresent`),
+                    name: this.$t(`${lang}.diamondMenu.fineSilver`),
                     // icon: 'iconfushe shape-icon',
                     to: {
                       path: '/diamonds/emerald-cut'
