@@ -91,6 +91,7 @@
       </div>
     </div>
 
+    <!-- 确认解除购物卡 -->
     <div class="affirm-eliminate" v-if="ifShowPop2">
       <div class="wrap">
         <div class="whether">{{ $t(`${lang}.confirmUnbinding`) }}</div>
@@ -149,8 +150,6 @@
           this.cardList[i].ifChoose = true;
         }
       }
-
-
     },
     methods:{
       // 添加更多
@@ -189,30 +188,54 @@
       },
       // 验证
       verification(k){
-        var that = this;
+        var that = this, flag = true;
         this.nowIndex = k;
 
         if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
           this.$errorMessage(that.$t(`${lang}.msg1`));
         }else{
-          this.ifLoading = true;
-          this.$axios.post('web/member/card/verify', {
-            sn: that.cardList[k].account,
-            pw: that.cardList[k].conversionNum,
-          })
-          .then(res => {
-            that.ifLoading = false;
-            that.ifShowPop = true;
-            that.verifyStatus = 1;
-            that.cardList[that.nowIndex].balance = res.data.balance;
-            that.cardList[that.nowIndex].ifChoose = true;
-          })
-          .catch(err => {
-            that.ifLoading = false;
-            that.ifShowPop = true;
-            that.verifyStatus = 2;
-          })
+          var ifRepetition = true;
+          for(var i=0,len=this.cardList.length; i<len; i++){
+            if(i != k && this.cardList[i].account == this.cardList[k].account){
+              ifRepetition = false;
+              break
+            }
+          }
+
+          if(!ifRepetition){
+            console.log('不能添加重复');
+          }else{
+            this.ifLoading = true;
+            this.$axios.post('web/member/card/verify', {
+              sn: that.cardList[k].account,
+              pw: that.cardList[k].conversionNum,
+            })
+            .then(res => {
+              that.ifLoading = false;
+              that.ifShowPop = true;
+              that.verifyStatus = 1;
+              that.cardList[that.nowIndex].balance = res.data.balance;
+              that.cardList[that.nowIndex].ifChoose = true;
+
+              for(var i=0,len=this.cardList.length; i<len; i++){
+                if(this.cardList[i].ifChoose != true){
+                  flag = false;
+                }
+              }
+
+              if(flag){
+                this.ifChooseAll = true;
+              }
+            })
+            .catch(err => {
+              that.ifLoading = false;
+              that.ifShowPop = true;
+              that.verifyStatus = 2;
+            })
+          }
         }
+
+
       },
       // 关闭弹窗
       closePop(){
@@ -236,44 +259,74 @@
       },
       // 选择单个购物卡
       chooseList(k){
-        var that = this;
-        if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
-          this.$errorMessage(that.$t(`${lang}.msg1`));
-        }else{
-          if(this.cardList[k].type == 0){
-            this.$errorMessage(that.$t(`${lang}.msg2`));
-          }else if(this.cardList[k].type == 1){
-            this.cardList[k].ifChoose = true;
-          }else if(this.cardList[k].type == 2){
-            this.$errorMessage(that.$t(`${lang}.msg3`));
+        var that=this, flag=true;
+
+        if(this.cardList[k].ifChoose == false){
+          if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
+            this.$errorMessage(that.$t(`${lang}.msg1`));
+          }else{
+            if(this.cardList[k].type == 0){
+              this.$errorMessage(that.$t(`${lang}.msg2`));
+            }else if(this.cardList[k].type == 1){
+              this.cardList[k].ifChoose = true;
+            }else if(this.cardList[k].type == 2){
+              this.$errorMessage(that.$t(`${lang}.msg3`));
+            }
           }
+
+          for(var i=0,len=this.cardList.length; i<len; i++){
+            if(this.cardList[i].ifChoose != true){
+              flag = false;
+            }
+          }
+
+          if(flag){
+            this.ifChooseAll = true;
+          }
+        }else{
+          this.cardList[k].ifChoose = false;
+          this.ifChooseAll = false;
         }
       },
       // 选择全部购物卡
       allChoose(){
-        var that = this, flag = false;
-        for(var i of this.cardList){
-          if(i.account !== '' && i.conversionNum !== ''){
-            flag = true;
+        var that = this, flag = true, flag2 = true;
+        if(this.ifChooseAll == false){
+          for(var i of this.cardList){
+            if(i.account !== '' && i.conversionNum !== ''){
+              flag = false;
+            }
+
+            if(flag){
+              this.$errorMessage(that.$t(`${lang}.msg1`));
+            }
+
+            if(i.type != 1){
+              this.$errorMessage(that.$t(`${lang}.msg4`));
+              flag2 = false;
+            }else{
+              i.ifChoose = true;
+            }
           }
 
-          if(i.type != 1){
-            this.$errorMessage(that.$t(`${lang}.msg4`));
-          }else{
-            i.ifChoose = true;
+          if(flag2 == true){
             this.ifChooseAll = true;
           }
-        }
+        }else{
+          this.ifChooseAll = false;
 
-        if(!flag){
-          this.$errorMessage(that.$t(`${lang}.msg1`));
+          for(var i of this.cardList){
+            i.ifChoose = false;
+          }
         }
       },
       // 输入时改变状态
       inputInfo(k){
         this.cardList[k].type = 0;
         this.cardList[k].ifChoose = false;
+        this.ifChooseAll = false;
         this.ifShowbtn = false;
+        console.log(this.cardList[k].type)
       },
       // 解除绑定
       removeBinding(n){

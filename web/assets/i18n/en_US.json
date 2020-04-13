@@ -2298,7 +2298,7 @@
     "msg8": "Failed to acquire data, please return to cart and try again!",
     "msg9": "Please select a payment method!",
     "useShoppingCard": "use shopping card",
-    "editOrUnbound": "edit/Unbound",
+    "editOrUnbound": "edit/Unbound shopping card",
     "shoppingCard": "shopping card"
   },
   "invoice": {
@@ -2330,7 +2330,7 @@
     "hint4": "Mailbox cannot be empty",
     "hint5": "Please enter the correct email",
     "shoppingCard": "shopping card",
-    "ultimatelyPay": "实际支付金额"
+    "ultimatelyPay": "Actual payment"
   },
   "shoppingCard": {
     "title": "Add shopping card information",
@@ -2352,7 +2352,7 @@
     "alreadyAdd": "Have been added",
     "verifyInvalid": "Invalid shopping card",
     "anewAdd": "To add",
-    "msg1": "The account number or password is blank, please fill in",
+    "msg1": "Shopping card number or exchange code cannot be empty!",
     "msg2": "This card needs to be validated successfully to be used",
     "msg3": "Verification failed, please fill in again",
     "msg4": "There are CARDS that are unverified or failed to verify！"

@@ -2703,9 +2703,6 @@ export default {
           // if(res.data.cards.length != 0){
             this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
           // }
-
-          console.log(777,this.useAmount)
-
         })
         .catch(err => {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
