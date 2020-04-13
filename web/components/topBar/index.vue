@@ -491,7 +491,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange1`),
                     // icon: 'iconmaterial-big-pt color-icon color-14k-white',
                     to: {
-                      path: `/engagement-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
+                      path: `/wedding-rings/price1?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
                     }
                   },
                   {
@@ -499,7 +499,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange2`),
                     // icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: ''
+                      path: `/wedding-rings/price2?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
                     }
                   },
                   {
@@ -507,7 +507,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange3`),
                     // icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
-                      path: ''
+                      path: `/wedding-rings/price3?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
                     }
                   },
                   {
@@ -515,7 +515,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange4`),
                     // icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
-                      path: ''
+                      path: `/wedding-rings/price4?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
                     }
                   },
                   {
@@ -523,7 +523,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange5`),
                     // icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: ''
+                      path: `/wedding-rings/price5?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 300000]))}`
                     }
                   }
                 ]
