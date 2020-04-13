@@ -358,14 +358,15 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      if(this.allData.length == 0){
-        this.loading = true
-        setTimeout(() => {
-          this.loading = false
-        }, 1000);
-      }else if(this.allData.length > 0){
-        this.loading = false
-      }
+      console.log("加载状态",this.loading)
+      // if(this.allData.length == 0){
+      //   this.loading = true
+      //   setTimeout(() => {
+      //     this.loading = false
+      //   }, 1000);
+      // }else if(this.allData.length > 0){
+      //   this.loading = false
+      // }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1

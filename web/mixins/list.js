@@ -284,11 +284,13 @@ export default {
         .then(data => {
           // _this.loading = false
           if(!data){
+            console.log("没数据，未响应，请求失败")
             _this.loading = true
             // setTimeout(() => {
             //   this.loading = false
             // }, 1000);
           }else {
+            console.log("有数据")
             _this.loading = false
           }
           var data = data.data

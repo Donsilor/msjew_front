@@ -156,14 +156,15 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      if(this.allData.length == 0){
-        this.loading = true
-        setTimeout(() => {
-          this.loading = false
-        }, 1000);
-      }else if(this.allData.length > 0){
-        this.loading = false
-      }
+      console.log("加载状态",this.loading)
+      // if(this.allData.length == 0){
+      //   this.loading = true
+      //   setTimeout(() => {
+      //     this.loading = false
+      //   }, 1000);
+      // }else if(this.allData.length > 0){
+      //   this.loading = false
+      // }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
@@ -350,13 +351,15 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
-          this.loading = false
+          // this.loading = false
           if(!data){
+            console.log("没数据，未响应，请求失败")
             _this.loading = true
             // setTimeout(() => {
             //   this.loading = false
             // }, 1000);
           }else{
+            console.log("有数据")
             _this.loading = false
           }
           console.log(1111)
