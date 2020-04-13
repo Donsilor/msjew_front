@@ -784,7 +784,7 @@
         <div class="new-address-title" style="width: auto;position: relative;">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-          <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+          <div class="add-shopping-card" @click="useCard()">{{this.cardType == 1 ? '+'+$t(`${lang}.useShoppingCard`) : $t(`${lang}.editOrUnbound`) }}</div>
         </div>
         <div class="price-detail">
           <div class="detail-line">
@@ -1681,7 +1681,7 @@
         <div class="new-address-title" style="width: auto;position: relative;">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-          <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+          <div class="add-shopping-card" @click="useCard()">{{this.cardType == 1 ? '+'+$t(`${lang}.useShoppingCard`) : $t(`${lang}.editOrUnbound`) }}</div>
         </div>
         <div class="price-detail">
           <div class="detail-line">
@@ -1700,7 +1700,7 @@
               -{{ $store.state.coin }} {{item.useAmount}}
             </div>
           </div>
-          
+
           <div v-show="makeGay" class="detail-line">
             <div>
               *{{ $t(`${lang}.coupon`) }}:
@@ -1797,7 +1797,7 @@
   </div>
 
   <div v-if="ifShowAddCard">
-    <shopping-card @closePop="closeCardPop"></shopping-card>
+    <shopping-card @closePop="closeCardPop" :cardType="useAmount"></shopping-card>
   </div>
 </div>
 </template>
@@ -1913,7 +1913,8 @@ export default {
       scrollTop:0,
       ifShowAddCard: false,
       cardList: [],
-      useAmount: []
+      useAmount: [],
+	  cardType: 1
     }
   },
   computed: {
@@ -1931,7 +1932,6 @@ export default {
     }
   },
   created() {
-    console.log("ssss",this.pathTakeIds)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
@@ -2700,11 +2700,11 @@ export default {
           this.canSubmit = true
           this.tex = res.data
 
-          if(res.data.cards.length != 0){
+          // if(res.data.cards.length != 0){
             this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
-          }
+          // }
 
-          console.log(this.useAmount)
+          console.log(777,this.useAmount)
 
         })
         .catch(err => {
@@ -2877,6 +2877,9 @@ export default {
     // 添加购物卡
     useCard(){
       this.ifShowAddCard = true;
+      if(this.cardList.length != 0){
+        this.cardType = 2;
+      }
     },
     // 关闭弹窗
     closeCardPop(k){
@@ -2884,6 +2887,7 @@ export default {
       if(k != true){
         this.cardList = k;
         this.getTex(k);
+        this.cardType = 2;
       }
     }
 

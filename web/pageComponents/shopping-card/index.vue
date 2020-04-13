@@ -27,28 +27,31 @@
             </div>
           </div>
 
-          <div class="verify">
-            <!-- 默认状态 -->
-            <div v-if="item.type == 0">
-              <div class="btn verify-btn" @click="verification(index)">{{ $t(`${lang}.clickVerify`) }}</div>
-              <div class="text"></div>
-            </div>
-            <!-- 成功状态 -->
-            <div v-else-if="item.type == 1" class="verify-success">
-              <div class="btn">
-                <span class="icon"></span>
-                <span>{{ $t(`${lang}.verifySucceed`) }}</span>
+          <div class="btn-box">
+            <div class="verify">
+              <!-- 默认状态 -->
+              <div v-if="item.type == 0">
+                <div class="btn verify-btn" @click="verification(index)">{{ $t(`${lang}.clickVerify`) }}</div>
+                <div class="text"></div>
               </div>
-              <div class="text">{{ $t(`${lang}.balance`) }}￥{{item.balance}}</div>
-            </div>
-            <!-- 失败状态 -->
-            <div v-else-if="item.type == 2" class="verify-failing">
-              <div class="btn">
-                <span class="icon"></span>
-                <span>{{ $t(`${lang}.verifyFailing`) }}</span>
+              <!-- 成功状态 -->
+              <div v-else-if="item.type == 1" class="verify-success">
+                <div class="btn">
+                  <span class="icon"></span>
+                  <span>{{ $t(`${lang}.verifySucceed`) }}</span>
+                </div>
+                <div class="text">{{ $t(`${lang}.balance`) }}￥{{item.balance}}</div>
               </div>
-              <div class="text" @click="eliminate(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
+              <!-- 失败状态 -->
+              <div v-else-if="item.type == 2" class="verify-failing">
+                <div class="btn">
+                  <span class="icon"></span>
+                  <span>{{ $t(`${lang}.verifyFailing`) }}</span>
+                </div>
+                <div class="text" @click="eliminate(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
+              </div>
             </div>
+            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && index <= cardType.length-1 && ifShowbtn" @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
           </div>
         </div>
       </div>
@@ -73,16 +76,7 @@
       </div>
     </div>
 
-    <!-- 验证中... -->
-    <div class="verify-loading" v-if="0">
-      <div class="verify-loading-box">
-        <div>
-          <img src="" alt="">
-        </div>
-        <div>验证中...</div>
-      </div>
-    </div>
-
+    <!-- 验证弹窗 -->
     <div class="popup" v-if="ifShowPop" :class="verifyStatus == 2 ? 'invalid' : ''" @click="closePop()">
       <div class="pop-box" v-if="verifyStatus == 1">
         <div class="icon"></div>
@@ -97,7 +91,15 @@
       </div>
     </div>
 
-    <div class="affirm-eliminate"></div>
+    <div class="affirm-eliminate" v-if="ifShowPop2">
+      <div class="wrap">
+        <div class="whether">{{ $t(`${lang}.confirmUnbinding`) }}</div>
+        <div class="box-r">
+          <div class="quit btn" @click="closePop2()">{{ $t(`${lang}.cancle`) }}</div>
+          <div class="confirm btn" @click="confirmUnbinding()">{{ $t(`${lang}.confirm`) }}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -130,8 +132,25 @@
         nowIndex: 0,
         submit: [],
         ifChooseAll: false,
-        ifLoading: false
+        ifLoading: false,
+        ifShowPop2: false,
+        removeIndex: -1,
+        ifShowbtn: true
       }
+    },
+    props: ['cardType'],
+    mounted(){
+      if(this.cardType.length != 0){
+        for(var i=0, len=this.cardType.length; i<len; i++){
+          this.cardList[i].account = this.cardType[i].sn;
+          this.cardList[i].conversionNum = this.cardType[i].pw;
+          this.cardList[i].balance = this.cardType[i].useAmount;
+          this.cardList[i].type = 1;
+          this.cardList[i].ifChoose = true;
+        }
+      }
+
+
     },
     methods:{
       // 添加更多
@@ -150,7 +169,13 @@
       },
       // 确定
       confirm(){
+        this.send()
+      },
+      // 发送
+      send(){
         var that = this,j = 0,item = {sn: '',pw: ''};
+
+        console.log(654,this.cardList)
 
         for(var i=0, len=this.cardList.length; i<len; i++){
           if(this.cardList[i].ifChoose == true){
@@ -161,6 +186,8 @@
             j++;
           }
         }
+
+        console.log(that.submit)
 
         this.$emit('closePop', that.submit);
       },
@@ -250,6 +277,32 @@
       inputInfo(k){
         this.cardList[k].type = 0;
         this.cardList[k].ifChoose = false;
+        this.ifShowbtn = false;
+      },
+      // 解除绑定
+      removeBinding(n){
+        // this.cardList[n].account = '';
+        // this.cardList[n].conversionNum = '';
+        // this.cardList[n].balance = '';
+        // this.cardList[n].type = 0;
+        // this.cardList[n].ifChoose = false;
+        this.removeIndex = n;
+        this.ifShowPop2 = true;
+      },
+      // 关闭弹窗
+      closePop2(){
+        this.ifShowPop2 = false;
+      },
+      // 确认解除绑定
+      confirmUnbinding(){
+        this.ifShowPop2 = false;
+        this.cardList[this.removeIndex].account = '';
+        this.cardList[this.removeIndex].conversionNum = '';
+        this.cardList[this.removeIndex].balance = '';
+        this.cardList[this.removeIndex].type = 0;
+        this.cardList[this.removeIndex].ifChoose = false;
+
+        this.send()
       }
 
     }
@@ -376,10 +429,13 @@
     box-sizing: border-box;
   }
 
-  .verify{
+  .btn-box{
     margin-top: 30px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
-  .verify .btn{
+  .btn-box .btn{
     width: 100px;
     height: 26px;
     background-color: #efefef;
@@ -564,5 +620,56 @@
   }
   .popup.invalid .btn{
     background-color: #e19510;
+  }
+
+  .affirm-eliminate{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* display: none; */
+  }
+  .affirm-eliminate .wrap{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #fff;
+    border-radius: 6px;
+  }
+  .whether{
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 6px;
+  }
+  .affirm-eliminate .box-r{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+  }
+  .affirm-eliminate .box-r .btn{
+    width: 100px;
+    height: 26px;
+    background-color: #efefef;
+    border: 1px solid #a0a0a0;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13px;
+    color: #615959;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
   }
 </style>

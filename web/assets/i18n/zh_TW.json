@@ -2300,6 +2300,7 @@
     "msg8": "数据获取失败，请返回購物车重试！",
     "msg9":"請選擇支付方式!",
     "useShoppingCard": "使用購物卡",
+    "editOrUnbound": "編輯/解綁",
     "shoppingCard": "購物卡"
   },
   "invoice":{
@@ -2347,6 +2348,8 @@
     "verifyFailing": "驗證失敗",
     "balance": "余額",
     "eliminateCard": "消除此卡",
+    "unbound": "解除绑定",
+    "confirmUnbinding": "是否確認解除綁定？",
     "verifyValid": "購物卡驗證有效",
     "alreadyAdd": "已添加",
     "verifyInvalid": "無效購物卡",

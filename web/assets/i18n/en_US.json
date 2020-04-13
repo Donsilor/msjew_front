@@ -2298,6 +2298,7 @@
     "msg8": "Failed to acquire data, please return to cart and try again!",
     "msg9": "Please select a payment method!",
     "useShoppingCard": "use shopping card",
+    "editOrUnbound": "edit/Unbound",
     "shoppingCard": "shopping card"
   },
   "invoice": {
@@ -2345,6 +2346,8 @@
     "verifyFailing": "Validation fails",
     "balance": "The balance of",
     "eliminateCard": "Remove the card",
+    "unbound": "remove binding",
+    "confirmUnbinding": "Confirm unbinding？",
     "verifyValid": "The gift card is validated",
     "alreadyAdd": "Have been added",
     "verifyInvalid": "Invalid shopping card",
