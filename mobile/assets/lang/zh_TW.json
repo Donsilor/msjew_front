@@ -183,7 +183,10 @@
       "delete": "刪除",
       "inputCode": "輸入優惠碼",
       "inputOrSelectCode": "輸入/選擇優惠碼",
-      "exchange": "使用"
+      "exchange": "使用",
+      "useShoppingCard": "使用購物卡",
+      "editOrUnbound": "編輯/解綁購物卡",
+      "shoppingCard": "購物卡"
     },
     "pay": {
       "pay": "訂單支付",
@@ -2052,9 +2055,9 @@
     "alreadyAdd": "已添加",
     "verifyInvalid": "無效購物卡",
     "anewAdd": "重新添加",
-    "msg1": "賬號或密碼為空，請填寫",
+    "msg1": "購物卡號或兌換碼不能為空！",
     "msg2": "此卡需要驗證成功才能使用",
-    "msg3": "驗證失敗，清重新填寫",
+    "msg3": "驗證失敗，請重新填寫",
     "msg4": "有未驗證或驗證失敗的卡！"
   }
 }

@@ -183,7 +183,10 @@
       "delete": "Delete",
       "inputCode": "Input Coupon Code",
       "inputOrSelectCode": "Input/select Coupon Code",
-      "exchange": "Apply"
+      "exchange": "Apply",
+      "useShoppingCard": "use shopping card",
+      "editOrUnbound": "edit/Unbound shopping card",
+      "shoppingCard": "shopping card"
     },
     "pay": {
       "pay": "Order payment",
@@ -2046,7 +2049,7 @@
     "alreadyAdd": "Have been added",
     "verifyInvalid": "Invalid shopping card",
     "anewAdd": "To add",
-    "msg1": "The account number or password is blank, please fill in",
+    "msg1": "Shopping card number or exchange code cannot be empty!",
     "msg2": "This card needs to be validated successfully to be used",
     "msg3": "Verification failed, please fill in again",
     "msg4": "There are CARDS that are unverified or failed to verify！"

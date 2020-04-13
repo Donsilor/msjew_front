@@ -216,6 +216,8 @@
               that.verifyStatus = 1;
               that.cardList[that.nowIndex].balance = res.data.balance;
               that.cardList[that.nowIndex].ifChoose = true;
+              
+              console.log(888,res.data.balance)
 
               for(var i=0,len=this.cardList.length; i<len; i++){
                 if(this.cardList[i].ifChoose != true){

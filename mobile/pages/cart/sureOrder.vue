@@ -236,6 +236,12 @@
             </div>
             <span>+{{ coin }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
+          <li v-for="item in useAmount">
+            <div>
+              <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
+            </div>
+            <span class="color-pink">-{{ coin }} {{ item.useAmount }}</span>
+          </li>
           <li>
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
@@ -245,7 +251,7 @@
       </div>
     </div>
 
-    <div style="height: 40px;line-height: 40px;" @click="ifShowShoppingCard = true">加购物卡</div>
+    <div style="height: 40px;line-height: 40px;" @click="addCard()">{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
     <!-- 未登录 -->
     <!-- <div v-if="!isLogin" :class="['submit']" @click="createOrder2">
       <span>{{ lang.sureOrder }}</span>
@@ -259,7 +265,7 @@
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
-    <shopping-card v-if="ifShowShoppingCard"></shopping-card>
+    <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount"></shopping-card>
   </div>
 </template>
 
@@ -315,7 +321,6 @@ export default {
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
       needtips: false,
 
-
       lang: this.LANGUAGE.cart.sureOrder,
       canSubmit: false,
       coin: this.$store.state.coin,
@@ -342,7 +347,10 @@ export default {
       session: '',
       info:[],
       totlePrice:'',
-      ifShowShoppingCard: false
+      ifShowShoppingCard: false,
+      cardList: [],
+      useAmount: [],
+      cardType: 1
     }
   },
   computed: {
@@ -396,10 +404,12 @@ export default {
        if (this.isLogin){
          if (this.allFee.orderAmount === null) {
           //  console.log(11111)
-           result = this.formatMoney(this.productAmount)
+           // result = this.formatMoney(this.productAmount)
+           result = this.formatMoney(this.allFee.payAmount)
          } else  {
           //  console.log(22222)
-           result = this.formatMoney(this.allFee.orderAmount)
+           // result = this.formatMoney(this.allFee.orderAmount)
+           result = this.formatMoney(this.allFee.payAmount)
          }
        } else {
          if (this.allFee.order_amount === null) {
@@ -686,7 +696,8 @@ export default {
       })
     },
     // 登录下获取相关费用
-    getTex() {
+    getTex(k) {
+      const cards = k || '';
       this.canSubmit = false
       let data = {}
       let url = ''
@@ -694,6 +705,7 @@ export default {
         url = `/web/member/order/tax`
         data = {
           addressId: this.address.id,
+          cards: cards,
           // preferFee: this.preferFee,
           cartIds: this.idList.join(',')
         }
@@ -727,6 +739,9 @@ export default {
           // console.log("费用",res)
           this.canSubmit = true
           this.allFee = res
+
+          this.useAmount = JSON.parse(JSON.stringify(res.cards))
+
           // this.info=res.details
           // console.log("费用>>>>>>>>",this.info)
         })
@@ -842,7 +857,8 @@ export default {
             // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
-            invoice: info
+            invoice: info,
+            card: this.cardList
             // afterMail: this.mailbox,
             // recvType: 1,
             // preferId: this.selectCouponId ? this.selectCouponId : null,
@@ -851,12 +867,19 @@ export default {
         })
           .then(res => {
             // console.log("总额",res)
-            this.$router.replace({
-              name: 'cart-pay',
-              query: {
-                info: JSON.stringify(res)
-              }
-            })
+            if(res.payStatus == 1){
+              this.$toast.show('订单提交成功');
+              this.$router.replace({
+                path: '/personal/order',
+              })
+            }else{
+              this.$router.replace({
+                name: 'cart-pay',
+                query: {
+                  info: JSON.stringify(res)
+                }
+              })
+            }
           })
           .catch(err => {
             this.$toast.show(err.message)
@@ -950,7 +973,21 @@ export default {
       this.$router.replace({
         name: name
       })
+    },
+    // 关闭弹窗
+    closeCardPop(k){
+      this.ifShowShoppingCard = false;
+      if(k != true){
+        this.cardList = k;
+        console.log(888,this.cardList)
+        this.getTex(k);
+        this.cardType = 2;
+      }
+    },
+    addCard(){
+        this.ifShowShoppingCard = true
     }
+
   }
 }
 </script>
@@ -1499,5 +1536,9 @@ export default {
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
   }
+}
+
+.color-pink{
+  color: #f29b87;
 }
 </style>

@@ -28,7 +28,7 @@
             </div>
           </div>
 
-          <div class="card-info no-border">
+          <!-- <div class="card-info no-border">
             <span class="choose"></span>
             <div class="list-content">
               <div class="child clf">
@@ -36,12 +36,12 @@
                 <span class="text fl"></span>
                 <div class="ipt-box fl">
                   <div class="verify">
-                    <!-- 默认状态 -->
+                    默认状态
                     <div v-if="item.type == 0">
                       <div class="btn verify-btn" @click="verification(index)">{{ lang.clickVerify }}</div>
                       <div class="text"></div>
                     </div>
-                    <!-- 成功状态 -->
+                    成功状态
                     <div v-else-if="item.type == 1" class="verify-success">
                       <div class="btn">
                         <span class="icon"></span>
@@ -49,7 +49,7 @@
                       </div>
                       <div class="text">{{ lang.balance }}￥{{item.balance}}</div>
                     </div>
-                    <!-- 失败状态 -->
+                    失败状态
                     <div v-else-if="item.type == 2" class="verify-failing">
                       <div class="btn">
                         <span class="icon"></span>
@@ -61,6 +61,34 @@
                 </div>
               </div>
             </div>
+          </div> -->
+
+          <div class="card-info no-border">
+            <div class="verify">
+              <!-- 默认状态 -->
+              <div v-if="item.type == 0">
+                <div class="btn verify-btn" @click="verification(index)">{{ lang.clickVerify }}</div>
+                <div class="text"></div>
+              </div>
+              <!-- 成功状态 -->
+              <div v-else-if="item.type == 1" class="verify-success">
+                <div class="btn">
+                  <span class="icon"></span>
+                  <span>{{ lang.verifySucceed }}</span>
+                </div>
+                <div class="text">{{ lang.balance }}￥{{item.balance}}</div>
+              </div>
+              <!-- 失败状态 -->
+              <div v-else-if="item.type == 2" class="verify-failing">
+                <div class="btn">
+                  <span class="icon"></span>
+                  <span>{{ lang.verifyFailing }}</span>
+                </div>
+                <div class="text" @click="eliminate(index)">{{ lang.eliminateCard }}</div>
+              </div>
+            </div>
+
+            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && index <= cardType.length-1 && ifShowbtn" @click="removeBinding(index)">123</div>
           </div>
 
         </div>
@@ -86,7 +114,8 @@
       </div>
     </div>
 
-    <!-- <div class="popup" v-if="ifShowPop" :class="verifyStatus == 2 ? 'invalid' : ''" @click="closePop()">
+    <!-- 验证弹窗 -->
+    <div class="popup" v-if="ifShowPop" :class="verifyStatus == 2 ? 'invalid' : ''" @click="closePop()">
       <div class="pop-box" v-if="verifyStatus == 1">
         <div class="icon"></div>
         <div class="status">{{ lang.verifyValid }}</div>
@@ -98,9 +127,19 @@
         <div class="status">{{ lang.verifyInvalid }}</div>
         <div class="btn">{{ lang.anewAdd }}</div>
       </div>
-    </div> -->
+    </div>
 
-    <!-- <div class="affirm-eliminate"></div> -->
+    <!-- 确认解除购物卡 -->
+    <div class="affirm-eliminate" v-if="ifShowPop2">
+      <div class="wrap">
+        <div class="whether">153</div>
+        <div class="box-r">
+          <div class="quit btn" @click="closePop2()">354</div>
+          <div class="confirm btn" @click="confirmUnbinding()">354</div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -132,7 +171,22 @@
         nowIndex: 0,
         submit: [],
         ifChooseAll: false,
-        ifLoading: false
+        ifLoading: false,
+        ifShowPop2: false,
+        removeIndex: -1,
+        ifShowbtn: true
+      }
+    },
+    props: ['cardType'],
+    mounted(){
+      if(this.cardType.length != 0){
+        for(var i=0, len=this.cardType.length; i<len; i++){
+          this.cardList[i].account = this.cardType[i].sn;
+          this.cardList[i].conversionNum = this.cardType[i].pw;
+          this.cardList[i].balance = this.cardType[i].useAmount;
+          this.cardList[i].type = 1;
+          this.cardList[i].ifChoose = true;
+        }
       }
     },
     methods:{
@@ -145,6 +199,7 @@
           ifChoose: false
         };
         this.cardList.push(card);
+        this.ifChooseAll = false;
       },
       // 取消
       quit(){
@@ -152,6 +207,10 @@
       },
       // 确定
       confirm(){
+        this.send()
+      },
+      // 发送
+      send(){
         var that = this,j = 0,item = {sn: '',pw: ''};
 
         for(var i=0, len=this.cardList.length; i<len; i++){
@@ -183,8 +242,8 @@
             that.ifLoading = false;
             that.ifShowPop = true;
             that.verifyStatus = 1;
-            that.cardList[that.nowIndex].balance = res.data.balance;
-            that.cardList[that.nowIndex].ifChoose = true;
+            that.cardList[that.nowIndex].balance = res.balance;
+            that.cardList[that.nowIndex].ifChoose = true;            
           })
           .catch(err => {
             that.ifLoading = false;
@@ -219,11 +278,11 @@
           this.$toast.show(this.lang.msg1);
         }else{
           if(this.cardList[k].type == 0){
-            this.$errorMessage(this.$t(`${lang}.msg2`));
+            this.$toast.show(this.lang.msg2);
           }else if(this.cardList[k].type == 1){
             this.cardList[k].ifChoose = true;
           }else if(this.cardList[k].type == 2){
-            this.$errorMessage(this.$t(`${lang}.msg3`));
+            this.$toast.show(this.lang.msg3);
           }
         }
       },
@@ -237,7 +296,7 @@
           }
 
           if(i.type != 1){
-            this.$errorMessage(that.$t(`${lang}.msg4`));
+            this.$toast.show(this.lang.msg4);
           }else{
             i.ifChoose = true;
             this.ifChooseAll = true;
@@ -246,14 +305,38 @@
         }
 
         if(!flag){
-          that.$errorMessage(that.$t(`${lang}.msg1`));
+          this.$toast.show(this.lang.msg1);
         }
       },
       // 输入时改变状态
       inputInfo(k){
         this.cardList[k].type = 0;
         this.cardList[k].ifChoose = false;
-        console.log(111111)
+      },
+      // 解除绑定
+      removeBinding(n){
+        // this.cardList[n].account = '';
+        // this.cardList[n].conversionNum = '';
+        // this.cardList[n].balance = '';
+        // this.cardList[n].type = 0;
+        // this.cardList[n].ifChoose = false;
+        this.removeIndex = n;
+        this.ifShowPop2 = true;
+      },
+      // 关闭弹窗
+      closePop2(){
+        this.ifShowPop2 = false;
+      },
+      // 确认解除绑定
+      confirmUnbinding(){
+        this.ifShowPop2 = false;
+        this.cardList[this.removeIndex].account = '';
+        this.cardList[this.removeIndex].conversionNum = '';
+        this.cardList[this.removeIndex].balance = '';
+        this.cardList[this.removeIndex].type = 0;
+        this.cardList[this.removeIndex].ifChoose = false;
+
+        this.send()
       }
 
     }
@@ -281,10 +364,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1210;
+    z-index: 2;
     width: 100%;
     min-height: 100%;
     background-color: #fff;
+    overflow-y: scroll;
   }
   .box{
     background-color: #fff;
@@ -307,10 +391,10 @@
   .title .quit{
     position: absolute;
     top: 20%;
-    right: 0px;
+    left: 20px;
     width: 30px;
     height: 30px;
-    background: url(../../static/addShoppingCard/quit.png) no-repeat center;
+    background: url(../../static/addShoppingCard/back.png) no-repeat center;
     background-size: 100% 100%;
   }
 
@@ -375,17 +459,18 @@
   .card-info.no-border .choose{
     border-color: transparent;
   }
-  .card-info.no-border .icon{
+  .card-info.no-border .child>.icon{
     background-image: none;
   }
   .card-info.no-border .ipt-box{
     border-color: transparent;
+    height: auto;
   }
 
-  .verify{
-    margin-top: 20px;
+  .card-info{
+    padding-top: 20px;
   }
-  .verify .btn{
+  .card-info .btn{
     width: 100px;
     height: 26px;
     background-color: #efefef;
@@ -568,5 +653,62 @@
   }
   .popup.invalid .btn{
     background-color: #e19510;
+  }
+
+  .card-info.no-border{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .affirm-eliminate{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* display: none; */
+  }
+  .affirm-eliminate .wrap{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #fff;
+    border-radius: 6px;
+  }
+  .whether{
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 6px;
+  }
+  .affirm-eliminate .box-r{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+  }
+  .affirm-eliminate .box-r .btn{
+    width: 100px;
+    height: 26px;
+    background-color: #efefef;
+    border: 1px solid #a0a0a0;
+    text-align: center;
+    line-height: 26px;
+    font-size: 13px;
+    color: #615959;
+    margin: 0 auto;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    cursor: pointer;
   }
 </style>
