@@ -473,7 +473,7 @@ export default {
                   },
                   {
                     name: this.$t(`${lang}.ringsMenu.fineSilver`),
-                    // icon: 'iconring-bx ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/wedding-rings/channel-set'
                     }
@@ -598,14 +598,14 @@ export default {
                 data: [
                   {
                     name: this.$t(`${lang}.necklaceMenu.necklace`),
-                    // icon: 'iconmarry-jd ring-icon',
+                    icon: 'iconJewelry-necklace',
                     to: {
                       path: '/jewellery/necklaces'
                     }
                   },
                   {
                     name: this.$t(`${lang}.necklaceMenu.Pendant`),
-                    // icon: 'iconmarry-pz ring-icon',
+                    icon: 'icondiamond-pendant',
                     to: {
                       path: '/jewellery/pendants'
                     }
@@ -621,7 +621,7 @@ export default {
                   {
                     id: 28,
                     name: this.$t(`${lang}.necklaceMenu.18KWhite`),
-                    // icon: 'iconmarry--woman-jingdian ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
                       path: '/jewellery/necklaces/18k-white'
                     }
@@ -629,7 +629,7 @@ export default {
                   {
                     id: 29,
                     name: this.$t(`${lang}.necklaceMenu.18KYellow`),
-                    // icon: 'iconmarry--woman-yongheng ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
                       path: '/jewellery/necklaces/18K-yellow'
                     }
@@ -637,7 +637,7 @@ export default {
                   {
                     id: 30,
                     name: this.$t(`${lang}.necklaceMenu.18KRoseGold`),
-                    // icon: 'iconmarry--woman-zhounian ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
                       path: '/jewellery/necklaces/18k-rose-gold'
                     }
@@ -645,14 +645,14 @@ export default {
                   {
                     id: 34,
                     name: this.$t(`${lang}.necklaceMenu.platinum`),
-                    // icon: 'iconmarry--woman-zuans ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/jewellery/necklaces/platinum'
                     }
                   },
                   {
                     name: this.$t(`${lang}.necklaceMenu.fineSilver`),
-                    // icon: 'iconmarry--woman-duidie ring-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/jewellery/necklaces/fineSilver'
                     }
@@ -769,14 +769,14 @@ export default {
                 data: [
                   {
                     name: this.$t(`${lang}.braceletMenu.Bracelet`),
-                    // icon: 'iconstar-jt',
+                    icon: 'iconJewelry-bracelet',
                     to: {
                       path: '/jewellery/bracelets'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.bracelet`),
-                    // icon: 'iconstar-zs',
+                    icon: 'iconshouhuan',
                     to: {
                       path: '/jewellery/bangles'
                     }
@@ -790,35 +790,35 @@ export default {
                 data: [
                   {
                     name: this.$t(`${lang}.braceletMenu.18KWhite`),
-                    // icon: 'iconyuanxin shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
                       path: '/diamonds/18k-khite'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.18KYellow`),
-                    // icon: 'icontuoyuan shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
                       path: '/diamonds/18k-yellow'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.18KRoseGold`),
-                    // icon: 'iconfangxing shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
                       path: '/diamonds/18k-rose-gold'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.platinum`),
-                    // icon: 'iconfushe shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/diamonds/emerald-cut'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.fineSilver`),
-                    // icon: 'iconaixin shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/diamonds/heart-shaped'
                     }
@@ -923,14 +923,14 @@ export default {
                 data: [
                   {
                     name: this.$t(`${lang}.diamondMenu.SelectDiamondFirst`),
-                    // icon: 'iconstar-jt',
+                    icon: 'iconstar-zs',
                     to: {
                       path: this.$startDj(1)
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.DiamondRing`),
-                    // icon: 'iconstar-zs',
+                    icon: 'iconstar-jt',
                     to: {
                       path: this.$startDj(2)
                     }
@@ -951,21 +951,21 @@ export default {
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.GroupRing`),
-                    // icon: 'icontuoyuan shape-icon',
+                    icon: 'iconring-yx ring-icon',
                     to: {
                       path: '/diamonds/oval-cut'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.ThreeMainStoneRings`),
-                    // icon: 'iconfangxing shape-icon',
+                    icon: 'iconring-sz ring-icon',
                     to: {
                       path: '/engagement-rings/three-stone'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.OpenMouth`),
-                    // icon: 'iconfushe shape-icon',
+                    icon: 'iconring-sh ring-icon',
                     to: {
                       path: '/engagement-rings/jump'
                     }
@@ -1028,35 +1028,35 @@ export default {
                 data: [
                   {
                     name: this.$t(`${lang}.diamondMenu.18KWhite`),
-                    // icon: 'iconyuanxin shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
                       path: '/diamonds/round-cut'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.18KYellow`),
-                    // icon: 'icontuoyuan shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
                       path: '/diamonds/oval-cut'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.18KRoseGold`),
-                    // icon: 'iconfangxing shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
                       path: '/diamonds/princess-cut'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.platinum`),
-                    // icon: 'iconfushe shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/diamonds/emerald-cut'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.fineSilver`),
-                    // icon: 'iconfushe shape-icon',
+                    icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
                       path: '/diamonds/emerald-cut'
                     }
@@ -1075,7 +1075,7 @@ export default {
                 data: [
                   {
                     name: this.$t(`${lang}.themeCollectionMenu.BlackFriday`),
-                    // icon: 'iconJewelry-necklace',
+                    icon: '',
                     to: {
                       path: '/jewellery/necklaces'
                     }
