@@ -1914,7 +1914,7 @@ export default {
       ifShowAddCard: false,
       cardList: [],
       useAmount: [],
-	  cardType: 1
+      cardType: 1
     }
   },
   computed: {

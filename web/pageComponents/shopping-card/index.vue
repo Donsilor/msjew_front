@@ -175,8 +175,6 @@
       send(){
         var that = this,j = 0,item = {sn: '',pw: ''};
 
-        console.log(654,this.cardList)
-
         for(var i=0, len=this.cardList.length; i<len; i++){
           if(this.cardList[i].ifChoose == true){
             this.submit.push(item);
@@ -186,8 +184,6 @@
             j++;
           }
         }
-
-        console.log(that.submit)
 
         this.$emit('closePop', that.submit);
       },
