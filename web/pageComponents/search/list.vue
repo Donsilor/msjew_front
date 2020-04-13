@@ -239,7 +239,7 @@ export default {
     // 每次切换路由，滚动到顶部
     $route(val, oldVal) {
       const _this = this
-      _this.keyword = _this.$helpers.base64Decode(
+        _this.keyword = _this.$helpers.base64Decode(
         _this.$route.query.keyword || ''
       )
       _this.research()

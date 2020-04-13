@@ -103,12 +103,12 @@
               </div>
             </div>
             <div class="menus-one" @click="one(4)">
-              <span>{{lang.DiamondRingCustomization}}</span>
+              <span>{{lang.DesignDiamondRing}}</span>
               <i class="iconfont iconxiala status-icon" ></i>
               <div class="menus-two" :class="{ actives: actives4 }">
                 <div class="goback" @click.stop="goback(4)">
                   <i class="iconfont iconxiala status-icon" ></i>
-                  <span>{{lang.DiamondRingCustomization}}</span>
+                  <span>{{lang.DesignDiamondRing}}</span>
                 </div>
                 <div class="two" @click.stop="goToMade(1)">
                   <span>{{lang.SelectDiamondFirst}}</span>
@@ -561,11 +561,11 @@ export default {
       display: inline-block;
     }
     .menus-one{
-      font-size: 12px;
+      font-size: 14px;
       display: flex;
       justify-content: space-between;
       height: 60px;
-      padding: 0 20px;
+      padding-left:20px;
       border-bottom:1px solid #fff;
       background-color: #e4ecf0;
       z-index: 99;
