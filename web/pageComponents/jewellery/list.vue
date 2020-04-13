@@ -13,7 +13,7 @@
                 'option-item',
                 { active: '' === searchConditions.categoryId }
               ]"
-              @click="changeMaterial('')"
+              @click="changeCategoryId('')"
             >
               <div class="item-icon">
                 <img src="/ring-material/all.png" />

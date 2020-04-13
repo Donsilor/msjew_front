@@ -1,20 +1,20 @@
 <template>
   <div class="page-content">
     <section class="search-condition">
-      <!--      女士戒指-->
+      <!--      戒指款式-->
       <div class="condition-item condition-style condition-lady-style">
         <h2 class="condition-name">
-          {{ $t(`${lang}.woman`) }}
+          {{ $t(`${lang}.style`) }}
         </h2>
         <ul class="options">
           <li
-            v-for="(option, index) in ladyStyleOptions"
+            v-for="(option, index) in styleStyleOptions"
             :key="index"
             :class="[
               'option-item',
               { active: option.id === searchConditions.style }
             ]"
-            @click="changeStyle(54, option.id)"
+            @click="changeStyle(option.id)"
           >
             <div class="item-icon">
               <img :src="option.image" />
@@ -25,20 +25,20 @@
           </li>
         </ul>
       </div>
-      <!--      男士戒指-->
+      <!--      适用人群-->
       <div class="condition-item condition-style condition-man-style">
         <h2 class="condition-name">
-          {{ $t(`${lang}.man`) }}
+          {{ $t(`${lang}.forPeople`) }}
         </h2>
         <ul class="options">
           <li
-            v-for="(option, index) in manStyleOptions"
+            v-for="(option, index) in forPeopleOptions"
             :key="index"
             :class="[
               'option-item',
-              { active: option.id === searchConditions.style }
+              { active: option.id === searchConditions.forPeople }
             ]"
-            @click="changeStyle(55, option.id)"
+            @click="changeForPeople(option.id)"
           >
             <div class="item-icon">
               <img :src="option.image" />
@@ -288,15 +288,16 @@ export default {
       lang,
       listUrl: '/web/goods/style/search',
       page_size: 16,
-      manStyleOptions: this.CONDITION_INFO.style.manRings,
-      ladyStyleOptions: this.CONDITION_INFO.style.womanRings,
+      forPeopleOptions: this.CONDITION_INFO.style.forPeople,
+      styleStyleOptions: this.CONDITION_INFO.style.styleRings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
       fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
       searchConditions: {
-        styleSex: '', // 20-女戒款式， 10-男戒款式
+        styleSex: '', // 54-款式， 26-适用人群
         style: '',
         material: '',
+        forPeople: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       }
     }
@@ -307,8 +308,8 @@ export default {
       const id = this.searchConditions.style
       const styleOptions = this.searchConditions.styleSex
         ? {
-            55: this.manStyleOptions,
-            54: this.ladyStyleOptions
+            26: this.forPeopleOptions,
+            54: this.styleStyleOptions
           }[this.searchConditions.styleSex]
         : []
       if (id === '') {
@@ -338,27 +339,16 @@ export default {
         }
       ]
 
-      if (!conditions.styleSex) {
+      if (conditions.styleSex) {
         params.push({
           type: 2,
+          paramId:54,
           paramName: 'engaged_style',
-          valueType: 1,
-          configValues: [-2]
-        })
-      } else {
-        const styleSexMap = {
-          55: 'marry_style_man',
-          54: 'marry_style_wom'
-        }
-        params.push({
-          type: 2,
-          paramName: styleSexMap[conditions.styleSex],
-          paramId:conditions.styleSex,
           valueType: 1,
           configValues: conditions.style === '' ? [] : [conditions.style]
         })
-      }
-
+      } 
+      
       if (conditions.material) {
         params.push({
           type: 3,
@@ -368,6 +358,16 @@ export default {
           configValues: conditions.material === '' ? [] : [conditions.material]
         })
       }
+      if (conditions.forPeople) {
+        params.push({
+          type: 2,
+          paramId:26,
+          paramName: 'for_people',
+          valueType: 1,
+          configValues: conditions.forPeople === '' ? [] : [conditions.forPeople]
+        })
+      }
+
 
       const data = {
         advertType: 2,
@@ -441,19 +441,25 @@ export default {
   },
   methods: {
     // 改变款式条件
-    changeStyle(sex, value) {
+    changeStyle(value) {
       const searchConditions = this.searchConditions
-      console.log('styleSex====>', searchConditions.styleSex, sex)
       console.log('style====>', searchConditions.style, value)
       if (
-        searchConditions.styleSex === sex &&
         searchConditions.style === value
       ) {
-        this.changeCondition('styleSex', '')
         this.changeCondition('style', '')
       } else {
-        this.changeCondition('styleSex', sex)
         this.changeCondition('style', value)
+      }
+    },
+
+    // 改变适用人群
+    changeForPeople(value) {
+      const searchConditions = this.searchConditions
+      if (searchConditions.forPeople === value) {
+        this.changeCondition('forPeople', '')
+      } else {
+        this.changeCondition('forPeople', value)
       }
     },
     // 改变材質条件

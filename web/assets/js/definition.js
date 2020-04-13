@@ -379,7 +379,74 @@ export default language => {
           image: `/ring-style/woman/5.png`,
           name: lang.style.CasualRing,
           desc: lang.style.CasualRingDesc
+        },
+        {
+          id: 196,
+          image: `/ring-style/woman/5.png`,
+          name: lang.style.CasualRing,
+          desc: lang.style.CasualRingDesc
         }
+      ],
+      //款式
+      styleRings: [
+        {
+          id: 162,
+          image: `/ring-style/woman/1.png`,
+          name: lang.ringsMenu.proposalRing,
+          desc: lang.style.WeddingRingDesc
+        },
+        {
+          id: 160,
+          image: `/ring-style/woman/2.png`,
+          name: lang.ringsMenu.engagementRing,
+          desc: lang.style.FullyDiamondInlaidRingDesc
+        },
+        {
+          id: 161,
+          image: `/ring-style/woman/3.png`,
+          name: lang.ringsMenu.weddingRing,
+          desc: lang.style.WeddingAnniversaryRingDesc
+        },
+        {
+          id: 164,
+          image: `/ring-style/woman/4.png`,
+          name: lang.ringsMenu.ring,
+          desc: lang.style.DiamondRingDesc
+        },
+        {
+          id: 163,
+          image: `/ring-style/woman/5.png`,
+          name: lang.ringsMenu.fashionRing,
+          desc: lang.style.CasualRingDesc
+        },
+        {
+          id: 196,
+          image: `/ring-style/woman/5.png`,
+          name: lang.ringsMenu.coupleRing,
+          desc: lang.style.CasualRingDesc
+        }
+      ],
+      //款式
+      forPeople: [
+        {
+          id: 41,
+          image: `/ring-style/man/1.png`,
+          name: lang.forPeople.men,
+          desc: lang.style.WeddingRingDesc
+        },
+        {
+          id: 42,
+          image: `/ring-style/man/2.png`,
+          name: lang.forPeople.women,
+          desc: lang.style.FullyDiamondInlaidRingDesc
+        },
+        {
+          id: 43,
+          image: `/ring-style/man/3.png`,
+          name: lang.forPeople.universal,
+          desc: lang.style.WeddingAnniversaryRingDesc
+        },
+      
       ]
     },
 

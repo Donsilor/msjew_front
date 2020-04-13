@@ -13,26 +13,30 @@ import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 const conditionMaps = {
   all: {},
 
-  // 女款
-  'womens-classic': {
+  // 款式
+  'engagement-ring': {
     styleSex: 54,
     style: 160
   },
-  'womens-eternity': {
+  'wedding-ring': {
     styleSex: 54,
     style: 161
   },
-  'womens-anniversary': {
+  'proposal-ring': {
     styleSex: 54,
     style: 162
   },
-  'womens-diamond': {
+  'fashion-ring': {
     styleSex: 54,
     style: 163
   },
-  'womens-stackable': {
+  'ring': {
     styleSex: 54,
     style: 164
+  },
+  'couple-ring': {
+    styleSex: 54,
+    style: 196
   },
 
   // 男款
@@ -71,7 +75,11 @@ const conditionMaps = {
   },
   '18k-rose-gold': {
     material: 30
+  },
+  'channel-set': {
+    material: 35
   }
+
 }
 
 export default {
