@@ -303,6 +303,11 @@ export default {
       }
     }
   },
+  watch: {
+    $route(val, oldVal) {
+      console.log(11111,val)
+    }
+  },
   computed: {
     activeStyleInfo() {
       let result = {}
