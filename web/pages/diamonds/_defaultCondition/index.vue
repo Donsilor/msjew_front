@@ -12,7 +12,12 @@ import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 // 默认条件映射
 const conditionMaps = {
   all: {},
-
+  carat1: {},
+  carat2: {},
+  carat3: {},
+  carat4: {},
+  carat5: {},
+  carat6: {},
   // 形状
   'round-cut': {
     shape: 16

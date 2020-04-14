@@ -54,7 +54,11 @@
       "scideal": "理想"
     },
     "style": {
-      "SolitaireRing": "主石戒",
+      "SolitaireRing": "单石戒",
+      "ClawRing":"爪镶戒",
+      "GroupRing":"群镶戒",
+      "ThreeMainStoneRings":"三主石戒",
+      "OpenMouth":"开口戒",
       "SolitaireRingDesc": "戒扥款式可多变, 一伙真心总不变 , 高贵气质石长存",
       "JumpRing": "开口戒",
       "JumpRingDesc": "首饰界中魔法师, 相隔对岸的法变, 竟能做出此效果",
@@ -116,6 +120,9 @@
       "earStud": "耳钉",
       "earrings": "耳环",
       "bracelets": "手链",
+      "decoration": "摆件",
+      "widgets": "挂件",
+      "other": "其他",
       "bangles": "手环"
     },
     "polish": {
@@ -173,12 +180,20 @@
       "priceRange5":"5000以上",
       "proposalRing":"求婚戒指",
       "ValentinesDay":"情人节",
-      "birthdayPresent":"生日礼物"
+      "birthdayPresent":"生日礼物",
+      "anniversary" : "纪念日"
     },
     "forPeople":{
       "men":"男士",
       "women":"女士",
       "universal":"通用款"
+    },
+    "stoneType": {
+      "diamond":"钻石",
+      "jackpot": "彩宝",
+      "pearl": "珍珠",
+      "jade":"玉石",
+      "other": "其他"
     }
   },
   "components": {
@@ -264,7 +279,8 @@
         "priceRange5":"5000以上",
         "proposalRing":"求婚戒指",
         "ValentinesDay":"情人节",
-        "birthdayPresent":"生日礼物"
+        "birthdayPresent":"生日礼物",
+        "anniversary" : "纪念日"
       },
       "necklaceMenu": {
         "coupleRings": "我们的对戒",
@@ -374,6 +390,7 @@
         "SelectDiamondFirst":"先选钻石",
         "DiamondRing":"先钻戒托",
         "SingleDiamondRing":"单钻戒",
+        "SolitaireRing": "单石戒",
         "ClawRing":"爪镶戒",
         "GroupRing":"群镶戒",
         "ThreeMainStoneRings":"三主石戒",
@@ -833,7 +850,7 @@
     "price": "价格",
     "to": "至",
     "sort": "排序",
-
+    "stoneType": "主石类型",
     "title": "配饰",
     "totalCountTitle": "配饰 ({total_count} 款)",
     "titleDesc": "通过选择各种配饰，来展示您所想要的配饰"

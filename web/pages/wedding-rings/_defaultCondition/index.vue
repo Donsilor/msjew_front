@@ -83,7 +83,28 @@ const conditionMaps = {
   },
   'channel-set': {
     material: 35
-  }
+  },
+
+  //使用场景
+  'engagement-use' :{
+    scenes: 45
+  },
+  'wedding-use' :{
+    scenes: 44
+  },
+  'proposal-use' :{
+    scenes: 46
+  },
+  'valentines-day-use' :{
+    scenes: 49
+  },
+  'birthday-present-use' :{
+    scenes: 48
+  },
+  'anniversary-use' :{
+    scenes: 47
+  },
+  
 
 }
 

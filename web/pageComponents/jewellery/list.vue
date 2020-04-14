@@ -142,6 +142,46 @@
             </div>
           </div>
         </div>
+
+
+        <!--      主石类型-->
+        <div class="condition-item condition-material">
+          <h2 class="condition-name">
+            {{ $t(`${lang}.stoneType`) }}
+          </h2>
+          <ul class="options">
+            <li
+              :class="[
+                'option-item',
+                { active: '' === searchConditions.stoneTypeId }
+              ]"
+              @click="changeStoneType('')"
+            >
+              <div class="item-icon">
+                <img src="/ring-material/all.png" />
+              </div>
+              <div class="item-name">
+                {{ $t(`${lang}.stoneType`) }}
+              </div>
+            </li>
+            <li
+              v-for="(option, index) in stoneType"
+              :key="index"
+              :class="[
+                'option-item',
+                { active: option.id === searchConditions.stoneTypeId }
+              ]"
+              @click="changeStoneType(option.id)"
+            >
+              <div class="item-icon">
+                <img :src="option.image" />
+              </div>
+              <div class="item-name">
+                {{ option.name }}
+              </div>
+            </li>
+          </ul>
+        </div>
       </section>
       <section class="list-title">
         <h1 class="title">
@@ -287,11 +327,13 @@ export default {
       page_size: 16,
       jewelleryOptions: this.CONDITION_INFO.jewellery,
       quality: this.CONDITION_INFO.quality,
+      stoneType: this.CONDITION_INFO.stoneType,
       defaultPriceRange,
       fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
       searchConditions: {
-        categoryId: 4,
+        categoryId: [4,5,6,7,8,9],
         typeId: 4,
+        stoneTypeId:'',
         materialIndex: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       }
@@ -317,7 +359,7 @@ export default {
           endValue: conditions.priceRange[1]
         }
       ]
-
+      
       if (conditions.materialIndex !== "") {
         params.push({
           type: 3,
@@ -327,6 +369,29 @@ export default {
           configValues: [this.materialOptions[conditions.materialIndex].id]
         })
       }
+
+      if (conditions.scenes) {
+        params.push({
+          type: 2,
+          paramId:60,
+          paramName: 'scenes',
+          valueType: 1,
+          configValues: conditions.scenes === '' ? [] : [conditions.scenes]
+        })
+      }
+
+      if (conditions.stoneTypeId !== "") {
+        params.push({
+          type: 3,
+          paramId:56,
+          paramName: 'stone_type',
+          valueType: 1,
+          configValues: conditions.stoneTypeId === '' ? [] : [conditions.stoneTypeId]
+        })
+      }
+
+
+      
 
       const data = {
         // 商品类别ID
@@ -348,7 +413,7 @@ export default {
       return data
     },
     // 处理用于显示的数据
-    showingData() {
+    showingData() { 
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
@@ -424,6 +489,11 @@ export default {
     // 改变材質条件
     changeMaterial(index) {
       this.changeCondition('materialIndex', index)
+    },
+
+    // 改变主石类型条件
+    changeStoneType(index) {
+      this.changeCondition('stoneTypeId', index)
     },
     // 改变价格条件
     changePriceRange(value) {

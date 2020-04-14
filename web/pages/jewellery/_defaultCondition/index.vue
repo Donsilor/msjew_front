@@ -20,26 +20,38 @@ const conditionMaps = {
     categoryId: 4
   },
   pendants: {
-    typeId:5,
+    typeId:4,
     categoryId: 5
   },
   'ear-stud': {
-    typeId:6,
+    typeId:4,
     categoryId: 6
   },
   earrings: {
-    typeId:7,
+    typeId:4,
     categoryId: 7
   },
   bracelets: {
-    typeId:8,
+    typeId:4,
     categoryId: 8
   },
   bangles: {
-    typeId:9,
+    typeId:4,
     categoryId: 9
   },
-   //导航项链
+  decoration: {
+    typeId:4,
+    categoryId: 16
+  },
+  widgets: {
+    typeId:4,
+    categoryId: 17
+  },
+  'others': {
+    typeId:4,
+    categoryId: 18
+  },
+   //导航
   'necklace-pendant':{
     typeId:4,
     categoryId:[4,5]
@@ -48,6 +60,195 @@ const conditionMaps = {
     typeId:4,
     categoryId:[8,9]
   },
+  'earrings-stud':{
+    typeId:4,
+    categoryId:[6,7]
+  },
+  'decoration-widgets':{
+    typeId:4,
+    categoryId:[16,17]
+  },
+
+
+
+
+  //项链-成色
+  'necklace-pendant-18k-white':{
+    typeId:4,
+    categoryId:[4,5],
+    materialIndex : 0
+  },
+  'necklace-pendant-18K-yellow':{
+    typeId:4,
+    categoryId:[4,5],
+    materialIndex : 1
+  },
+  'necklace-pendan-18k-rose-gold':{
+    typeId:4,
+    categoryId:[4,5],
+    materialIndex : 2
+  },
+  'necklace-pendant-platinum':{
+    typeId:4,
+    categoryId:[4,5],
+    materialIndex : 3
+  },
+  'necklace-pendant-fineSilver':{
+    typeId:4,
+    categoryId:[4,5],
+    materialIndex : 4
+  },
+
+
+  //手链-成色
+  'bracelet-bangle-18k-white':{
+    typeId:4,
+    categoryId:[8,9],
+    materialIndex : 0
+  },
+  'bracelet-bangle-18K-yellow':{
+    typeId:4,
+    categoryId:[8,9],
+    materialIndex : 1
+  },
+  'bracelet-bangle-18k-rose-gold':{
+    typeId:4,
+    categoryId:[8,9],
+    materialIndex : 2
+  },
+  'bracelet-bangle-platinum':{
+    typeId:4,
+    categoryId:[8,9],
+    materialIndex : 3
+  },
+  'bracelet-bangle-fineSilver':{
+    typeId:4,
+    categoryId:[8,9],
+    materialIndex : 4
+  },
+
+
+
+
+  'necklace-pendant-price1':{
+    typeId:4,
+    categoryId:[4,5]
+  },
+  'necklace-pendant-price2':{
+    typeId:4,
+    categoryId:[4,5]
+  },
+  'necklace-pendant-price3':{
+    typeId:4,
+    categoryId:[4,5]
+  },
+  'necklace-pendant-price4':{
+    typeId:4,
+    categoryId:[4,5]
+  },
+  'necklace-pendant-price5':{
+    typeId:4,
+    categoryId:[4,5]
+  },
+
+
+
+
+  'bracelet-bangle-price1':{
+    typeId:4,
+    categoryId:[8,9]
+  },
+  'bracelet-bangle-price2':{
+    typeId:4,
+    categoryId:[8,9]
+  },
+  'bracelet-bangle-price3':{
+    typeId:4,
+    categoryId:[8,9]
+  },
+  'bracelet-bangle-price4':{
+    typeId:4,
+    categoryId:[8,9]
+  },
+  'bracelet-bangle-price5':{
+    typeId:4,
+    categoryId:[8,9]
+  },
+
+
+   //项链使用场景
+  'necklace-pendant-valentines-day' :{
+    typeId:4,
+    categoryId:[4,5],
+    scenes: 197
+  },
+  'necklace-pendant-mothers-day' :{
+    typeId:4,
+    categoryId:[4,5],
+    scenes: 198
+  },
+  'necklace-pendant-birthday-present' :{
+    typeId:4,
+    categoryId:[4,5],
+    scenes: 199
+  },
+  'necklace-pendant-christmas-gift' :{
+    typeId:4,
+    categoryId:[4,5],
+    scenes: 200
+  },
+  'necklace-pendant-halloween-gift' :{
+    typeId:4,
+    categoryId:[4,5],
+    scenes: 201
+  },
+
+
+
+  //手链使用场景
+  'bracelet-bangle-valentines-day' :{
+    typeId:4,
+    categoryId:[8,9],
+    scenes: 197
+  },
+  'bracelet-bangle-mothers-day' :{
+    typeId:4,
+    categoryId:[8,9],
+    scenes: 198
+  },
+  'bracelet-bangle-birthday-present' :{
+    typeId:4,
+    categoryId:[8,9],
+    scenes: 199
+  },
+  'bracelet-bangle-christmas-gift' :{
+    typeId:4,
+    categoryId:[8,9],
+    scenes: 200
+  },
+  'bracelet-bangle-halloween-gift' :{
+    typeId:4,
+    categoryId:[8,9],
+    scenes: 201
+  },
+
+  //主题使用场景
+  'valentines-day' :{
+    scenes: 197
+  },
+  'mothers-day' :{
+    scenes: 198
+  },
+  'birthday-present' :{
+    scenes: 199
+  },
+  'christmas-gift' :{
+    scenes: 200
+  },
+  'halloween-gift' :{
+    scenes: 201
+  },
+  
 }
 
 export default {

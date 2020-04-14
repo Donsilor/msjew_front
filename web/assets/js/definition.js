@@ -276,37 +276,37 @@ export default language => {
         },
         {
           id: 110,
-          name: lang.style.JumpRing,
+          name: lang.style.OpenMouth,
           image: '/engagement-rings/ring-style/4.png',
           desc: lang.style.JumpRingDesc
         },
         {
           id: 111,
-          name: lang.style.PaveSetRing,
+          name: lang.style.GroupRing,
           image: '/engagement-rings/ring-style/5.png',
           desc: lang.style.PaveSetRingDesc
         },
-        {
-          id: 112,
-          name: lang.style.ClassicalRing,
-          image: '/engagement-rings/ring-style/7.png',
-          desc: lang.style.ClassicalRingDesc
-        },
-        {
-          id: 113,
-          name: lang.style.ChannelSetRing,
-          image: '/engagement-rings/ring-style/6.png',
-          desc: lang.style.ChannelSetRingDesc
-        },
+        // {
+        //   id: 112,
+        //   name: lang.style.ClassicalRing,
+        //   image: '/engagement-rings/ring-style/7.png',
+        //   desc: lang.style.ClassicalRingDesc
+        // },
+        // {
+        //   id: 113,
+        //   name: lang.style.ChannelSetRing,
+        //   image: '/engagement-rings/ring-style/6.png',
+        //   desc: lang.style.ChannelSetRingDesc
+        // },
         {
           id: 114,
-          name: lang.style.HaloSetRing,
+          name: lang.style.ClawRing,
           image: '/engagement-rings/ring-style/2.png',
           desc: lang.style.HaloSetRingDesc
         },
         {
           id: 115,
-          name: lang.style.ThreeStoneRing,
+          name: lang.style.ThreeMainStoneRings,
           image: '/engagement-rings/ring-style/3.png',
           desc: lang.style.ThreeStoneRingDesc
         }
@@ -491,24 +491,20 @@ export default language => {
       ],
       necklace: [
         {
-          id: 31,
-          name: lang.quality.platinum14K,
-          image: '/ring-material/1.png'
-        },
-        {
           id: 28,
           name: lang.quality.platinum18K,
           image: '/ring-material/2.png'
         },
-        {
-          id: 32,
-          name: lang.quality.gold14K,
-          image: '/ring-material/3.png'
-        },
+     
         {
           id: 29,
           name: lang.quality.gold18K,
           image: '/ring-material/4.png'
+        },
+        {
+          id: 30,
+          name: lang.quality.roseGold18K,
+          image: '/ring-material/6.png'
         },
         {
           id: 34,
@@ -516,10 +512,11 @@ export default language => {
           image: '/ring-material/5.png'
         },
         {
-          id: 30,
-          name: lang.quality.roseGold18K,
-          image: '/ring-material/6.png'
-        }
+          id: 35,
+          name: lang.quality.fineSilver925,
+          image: '/ring-material/5.png'
+        },
+        
       ],
       pendant: [
         {
@@ -683,6 +680,36 @@ export default language => {
       ]
     },
 
+    //石头类型
+    stoneType: [
+      {
+        id: 169,
+        name: lang.stoneType.diamond,
+        image: '/ring-material/1.png'
+      },
+      {
+        id: 184,
+        name: lang.stoneType.jackpot,
+        image: '/ring-material/2.png'
+      },
+      {
+        id: 185,
+        name: lang.stoneType.pearl,
+        image: '/ring-material/3.png'
+      },
+      {
+        id: 186,
+        name: lang.stoneType.jade,
+        image: '/ring-material/4.png'
+      },
+      {
+        id: 187,
+        name: lang.stoneType.other,
+        image: '/ring-material/5.png'
+      }
+      
+    ],
+
     jewellery: [
       {
         id: 206,
@@ -725,6 +752,27 @@ export default language => {
         name: lang.jewellery.bangles,
         iconfont: 'iconshouhuan',
         qualityName: 'bracelet'
+      },
+      {
+        id: 211,
+        categoryId: 16,
+        name: lang.jewellery.decoration,
+        iconfont: 'iconshouhuan',
+        qualityName: 'decoration'
+      },
+      {
+        id: 211,
+        categoryId: 17,
+        name: lang.jewellery.widgets,
+        iconfont: 'iconshouhuan',
+        qualityName: 'widgets'
+      },
+      {
+        id: 211,
+        categoryId: 18,
+        name: lang.jewellery.other,
+        iconfont: 'iconshouhuan',
+        qualityName: 'others'
       },
     ],
 
