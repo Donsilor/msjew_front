@@ -1797,7 +1797,7 @@
   </div>
 
   <div v-if="ifShowAddCard">
-    <shopping-card @closePop="closeCardPop" :cardType="useAmount"></shopping-card>
+    <shopping-card @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine"></shopping-card>
   </div>
 </div>
 </template>
@@ -1914,7 +1914,8 @@ export default {
       ifShowAddCard: false,
       cardList: [],
       useAmount: [],
-      cardType: 1
+      cardType: 1,
+      goodsListLine: []
     }
   },
   computed: {
@@ -1938,6 +1939,10 @@ export default {
         .then(res => {
           this.good = res
           console.log("res",res)
+          for(var i=0; i<res.length; i++){
+            this.goodsListLine.push(res[i].data[0].goodsType)
+          }
+
           resolve()
         })
         .catch(err => {

@@ -27,7 +27,7 @@
             </div>
           </div>
 
-          <div class="btn-box">
+          <div class="btn-box" style="max-width: 376px;">
             <div class="verify">
               <!-- 默认状态 -->
               <div v-if="item.type == 0">
@@ -41,6 +41,7 @@
                   <span>{{ $t(`${lang}.verifySucceed`) }}</span>
                 </div>
                 <div class="text">{{ $t(`${lang}.balance`) }}￥{{item.balance}}</div>
+                <div class="productLine">{{ $t(`${lang}.msg7`) }} <span>({{onlyUseLine}})</span> {{ $t(`${lang}.msg8`) }}</div>
               </div>
               <!-- 失败状态 -->
               <div v-else-if="item.type == 2" class="verify-failing">
@@ -117,6 +118,7 @@
             balance: '',
             type: 0,
             ifChoose: false,
+            ifAllowedToUse: false
           },
           {
             account: '',
@@ -125,7 +127,8 @@
             // conversionNum: 'ab', // 测试密码
             balance: '',
             type: 0,
-            ifChoose: false
+            ifChoose: false,
+            ifAllowedToUse: false
           }
         ],
         ifShowPop: false,
@@ -136,10 +139,12 @@
         ifLoading: false,
         ifShowPop2: false,
         removeIndex: -1,
-        ifShowbtn: true
+        ifShowbtn: true,
+        onlyUseLine: '',
+        onlyUseLineNum: []
       }
     },
-    props: ['cardType'],
+    props: ['cardType','goodsLine'],
     mounted(){
       if(this.cardType.length != 0){
         for(var i=0, len=this.cardType.length; i<len; i++){
@@ -158,7 +163,8 @@
           account: '',
           conversionNum: '',
           type: 0,
-          ifChoose: false
+          ifChoose: false,
+          ifAllowedToUse: false
         };
         this.cardList.push(card);
       },
@@ -203,7 +209,7 @@
           }
 
           if(!ifRepetition){
-            console.log('不能添加重复');
+            this.$errorMessage(that.$t(`${lang}.msg5`));
           }else{
             this.ifLoading = true;
             this.$axios.post('web/member/card/verify', {
@@ -214,10 +220,32 @@
               that.ifLoading = false;
               that.ifShowPop = true;
               that.verifyStatus = 1;
-              that.cardList[that.nowIndex].balance = res.data.balance;
-              that.cardList[that.nowIndex].ifChoose = true;
-              
-              console.log(888,res.data.balance)
+              that.cardList[that.nowIndex].balance = res.data.balance-0;
+
+              that.onlyUseLineNum = res.data.goodsTypeAttach;
+              this.verifyLine(res.data.goodsTypeAttach, k);
+
+              if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
+                that.cardList[that.nowIndex].ifChoose = true;
+              }
+              if(that.cardList[that.nowIndex].balance === 0 && !that.cardList[that.nowIndex].ifAllowedToUse){
+                this.$errorMessage(that.$t(`${lang}.msg6`));
+              }
+
+
+              if(that.cardList[that.nowIndex].balance === 0){
+                this.$errorMessage(that.$t(`${lang}.msg6`));
+              }
+
+              var obj = res.data.goodsTypes;
+              for(var i in obj){
+                this.onlyUseLine += obj[i]+' . '
+              }
+              this.onlyUseLine = this.onlyUseLine.slice(0, -2)
+
+              if(!that.cardList[that.nowIndex].ifAllowedToUse){
+                this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+this.onlyUseLine+") "+that.$t(`${lang}.msg8`));
+              }
 
               for(var i=0,len=this.cardList.length; i<len; i++){
                 if(this.cardList[i].ifChoose != true){
@@ -228,6 +256,7 @@
               if(flag){
                 this.ifChooseAll = true;
               }
+
             })
             .catch(err => {
               that.ifLoading = false;
@@ -238,6 +267,16 @@
         }
 
 
+      },
+      // 验证产品线
+      verifyLine(element, k){
+        for(var i=0, len=this.goodsLine.length; i<len; i++){
+          for(var j=0, lek=element.length; j<lek; j++){
+            if(this.goodsLine[i] == element[j]){
+              this.cardList[k].ifAllowedToUse = true;
+            }
+          }
+        }
       },
       // 关闭弹窗
       closePop(){
@@ -261,58 +300,98 @@
       },
       // 选择单个购物卡
       chooseList(k){
-        var that=this, flag=true;
+        var that=this, flag=true, flag2=true;
+          if(this.cardList[k].ifChoose == false){
+            if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
+              this.$errorMessage(that.$t(`${lang}.msg1`));
+            }else{
+              if(this.cardList[k].type == 0){
+                this.$errorMessage(that.$t(`${lang}.msg2`));
+              }else if(this.cardList[k].type == 1){
+                if(this.cardList[k].balance !== 0){
+                  if(this.cardList[k].if){
+                    this.cardList[k].ifChoose = true;
+                  }else{
+                    this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+this.onlyUseLine+") "+that.$t(`${lang}.msg8`));
+                  }
+                }else{
+                  this.$errorMessage(that.$t(`${lang}.msg6`));
+                }
 
-        if(this.cardList[k].ifChoose == false){
-          if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
-            this.$errorMessage(that.$t(`${lang}.msg1`));
+              }else if(this.cardList[k].type == 2){
+                this.$errorMessage(that.$t(`${lang}.msg3`));
+              }
+            }
+
+            for(var i=0,len=this.cardList.length; i<len; i++){
+              if(!this.cardList[i].ifChoose){
+                flag = false;
+              }
+              if(!this.cardList[i].ifAllowedToUse){
+                flag2 = false;
+              }
+            }
+
+            if(flag && flag2){
+              this.ifChooseAll = true;
+            }
+
           }else{
-            if(this.cardList[k].type == 0){
-              this.$errorMessage(that.$t(`${lang}.msg2`));
-            }else if(this.cardList[k].type == 1){
-              this.cardList[k].ifChoose = true;
-            }else if(this.cardList[k].type == 2){
-              this.$errorMessage(that.$t(`${lang}.msg3`));
-            }
+            this.cardList[k].ifChoose = false;
+            this.ifChooseAll = false;
           }
-
-          for(var i=0,len=this.cardList.length; i<len; i++){
-            if(this.cardList[i].ifChoose != true){
-              flag = false;
-            }
-          }
-
-          if(flag){
-            this.ifChooseAll = true;
-          }
-        }else{
-          this.cardList[k].ifChoose = false;
-          this.ifChooseAll = false;
-        }
       },
       // 选择全部购物卡
       allChoose(){
-        var that = this, flag = true, flag2 = true;
+        var that = this,
+            flag = false,      //账号密码是否为空
+            flag2 = true,     //是否全部通过验证
+            flag3 = true,     //是否有余额为零
+            flag4 = true;     //是否可以使用的产品线
         if(this.ifChooseAll == false){
           for(var i of this.cardList){
             if(i.account !== '' && i.conversionNum !== ''){
-              flag = false;
-            }
-
-            if(flag){
-              this.$errorMessage(that.$t(`${lang}.msg1`));
+              flag = true;
             }
 
             if(i.type != 1){
-              this.$errorMessage(that.$t(`${lang}.msg4`));
               flag2 = false;
-            }else{
-              i.ifChoose = true;
+            }
+
+            if(i.balance === 0){
+              flag3 = false;
+            }
+
+            if(!i.ifAllowedToUse){
+              flag4 = false;
             }
           }
 
-          if(flag2 == true){
+          if(!flag4){
+            // 没有对应的产品线，不可使用！
+            this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+this.onlyUseLine+") "+that.$t(`${lang}.msg8`));
+          }
+
+          if(!flag3){
+            // 此卡余额为0，不可使用！
+            this.$errorMessage(that.$t(`${lang}.msg6`));
+          }
+
+          if(!flag2){
+            // 有未验证或验证失败的卡
+            this.$errorMessage(that.$t(`${lang}.msg4`));
+          }
+
+          if(!flag){
+            // 购物卡号或兑换码不能为空！
+            this.$errorMessage(that.$t(`${lang}.msg1`));
+          }
+
+          if(flag && flag2 && flag3 && flag4){
             this.ifChooseAll = true;
+            for(var i of this.cardList){
+              i.ifChoose = true
+            }
           }
         }else{
           this.ifChooseAll = false;
@@ -328,7 +407,6 @@
         this.cardList[k].ifChoose = false;
         this.ifChooseAll = false;
         this.ifShowbtn = false;
-        console.log(this.cardList[k].type)
       },
       // 解除绑定
       removeBinding(n){
@@ -462,9 +540,9 @@
     background-size: 80% auto;
   }
   .child>.text{
-    width: 54px;
+    width: 58px;
     margin-left: 6px;
-    font-size: 16px;
+    font-size: 14px;
     color: #666;
   }
   .ipt-box{
@@ -544,6 +622,17 @@
 
   .verify-failing .icon{
     background-image: url(../../static/addShoppingCard/icon-2.png);
+  }
+
+  .productLine{
+    text-align: center;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #444;
+    line-height: 16px;
+  }
+  .productLine span{
+    color: #888;
   }
 
   .add-card{

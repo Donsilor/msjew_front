@@ -291,7 +291,7 @@
           <div class="info-line" v-for="item in cardList">
             <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 10">(已解绑)</span>
+              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
             </div>
           </div>
           <div class="info-line">

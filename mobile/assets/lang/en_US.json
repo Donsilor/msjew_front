@@ -184,9 +184,9 @@
       "inputCode": "Input Coupon Code",
       "inputOrSelectCode": "Input/select Coupon Code",
       "exchange": "Apply",
-      "useShoppingCard": "use shopping card",
-      "editOrUnbound": "edit/Unbound shopping card",
-      "shoppingCard": "shopping card"
+      "useShoppingCard": "Use Shopping Card",
+      "editOrUnbound": "Edit/Remove Card",
+      "shoppingCard": "Shopping Card"
     },
     "pay": {
       "pay": "Order payment",
@@ -2032,26 +2032,32 @@
     "selectAnAppointmentTime": "Select an appointment time"
   },
   "shoppingCard": {
-    "title": "Add shopping card information",
-    "cardNumber": "Card number",
-    "cardPassword": "Redeem code",
-    "addCard": "Add shopping card",
+    "title": " Add Shopping Card Information",
+    "cardNumber": "Card Number",
+    "cardPassword": "Redeem Code",
+    "addCard": "Add Card",
     "chooseAll": "Check all",
-    "annotation": "*Note: several shopping CARDS can be added for verification",
-    "cancle": "cancel",
-    "confirm": "confirm",
-    "clickVerify": "Click on the validation",
-    "verifySucceed": "Authentication is successful",
-    "verifyFailing": "Validation fails",
+    "annotation": "*Multiple cards can be used at one time by adding card information and redeem codes.",
+    "cancle": "Cancel",
+    "confirm": "Confirm",
+    "clickVerify": "Verification",
+    "verifySucceed": "Redeemed",
+    "verifyFailing": "Failed",
     "balance": "The balance of",
-    "eliminateCard": "Remove the card",
-    "verifyValid": "The gift card is validated",
+    "eliminateCard": "Delete",
+    "unbound": "Remove Card",
+    "confirmUnbinding": "Confirm unbinding？",
+    "verifyValid": "Invaild Card",
     "alreadyAdd": "Have been added",
     "verifyInvalid": "Invalid shopping card",
     "anewAdd": "To add",
     "msg1": "Shopping card number or exchange code cannot be empty!",
     "msg2": "This card needs to be validated successfully to be used",
     "msg3": "Verification failed, please fill in again",
-    "msg4": "There are CARDS that are unverified or failed to verify！"
+    "msg4": "There are CARDS that are unverified or failed to verify！",
+    "msg5": "Cannot be added repeatedly！",
+    "msg6": "This card has a balance of 0 and is not available！",
+    "msg7": "Limit to buy",
+    "msg8": ""
   }
 }

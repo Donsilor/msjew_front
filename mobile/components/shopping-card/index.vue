@@ -68,7 +68,7 @@
               <!-- 默认状态 -->
               <div v-if="item.type == 0">
                 <div class="btn verify-btn" @click="verification(index)">{{ lang.clickVerify }}</div>
-                <div class="text"></div>
+                <!-- <div class="text"></div> -->
               </div>
               <!-- 成功状态 -->
               <div v-else-if="item.type == 1" class="verify-success">
@@ -88,7 +88,7 @@
               </div>
             </div>
 
-            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && index <= cardType.length-1 && ifShowbtn" @click="removeBinding(index)">123</div>
+            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && index <= cardType.length-1 && item.type != 0 && ifShowbtn" @click="removeBinding(index)">{{ lang.unbound }}</div>
           </div>
 
         </div>
@@ -132,10 +132,10 @@
     <!-- 确认解除购物卡 -->
     <div class="affirm-eliminate" v-if="ifShowPop2">
       <div class="wrap">
-        <div class="whether">153</div>
+        <div class="whether">{{ lang.confirmUnbinding }}</div>
         <div class="box-r">
-          <div class="quit btn" @click="closePop2()">354</div>
-          <div class="confirm btn" @click="confirmUnbinding()">354</div>
+          <div class="quit btn" @click="closePop2()">{{ lang.cancle }}</div>
+          <div class="confirm btn" @click="confirmUnbinding()">{{ lang.confirm }}</div>
         </div>
       </div>
     </div>
@@ -227,29 +227,51 @@
       },
       // 验证
       verification(k){
-        var that = this;
-        that.nowIndex = k;
+        var that = this, flag = true;
+        this.nowIndex = k;
 
         if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
-          this.$errorMessage(that.$t(`${lang}.msg1`));
+          this.$toast.show(this.lang.msg1);
         }else{
-          this.ifLoading = true;
-          this.$axios.post('web/member/card/verify', {
-            sn: that.cardList[k].account,
-            pw: that.cardList[k].conversionNum,
-          })
-          .then(res => {
-            that.ifLoading = false;
-            that.ifShowPop = true;
-            that.verifyStatus = 1;
-            that.cardList[that.nowIndex].balance = res.balance;
-            that.cardList[that.nowIndex].ifChoose = true;            
-          })
-          .catch(err => {
-            that.ifLoading = false;
-            that.ifShowPop = true;
-            that.verifyStatus = 2;
-          })
+          var ifRepetition = true;
+          for(var i=0,len=this.cardList.length; i<len; i++){
+            if(i != k && this.cardList[i].account == this.cardList[k].account){
+              ifRepetition = false;
+              break
+            }
+          }
+
+          if(!ifRepetition){
+            this.$toast.show('不能重复添加');
+          }else{
+            this.ifLoading = true;
+            this.$axios.post('web/member/card/verify', {
+              sn: that.cardList[k].account,
+              pw: that.cardList[k].conversionNum,
+            })
+            .then(res => {
+              that.ifLoading = false;
+              that.ifShowPop = true;
+              that.verifyStatus = 1;
+              that.cardList[that.nowIndex].balance = res.balance;
+              that.cardList[that.nowIndex].ifChoose = true;
+
+              for(var i=0,len=this.cardList.length; i<len; i++){
+                if(this.cardList[i].ifChoose != true){
+                  flag = false;
+                }
+              }
+
+              if(flag){
+                this.ifChooseAll = true;
+              }
+            })
+            .catch(err => {
+              that.ifLoading = false;
+              that.ifShowPop = true;
+              that.verifyStatus = 2;
+            })
+          }
         }
       },
       // 关闭弹窗
@@ -274,44 +296,73 @@
       },
       // 选择单个购物卡
       chooseList(k){
-        if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
-          this.$toast.show(this.lang.msg1);
-        }else{
-          if(this.cardList[k].type == 0){
-            this.$toast.show(this.lang.msg2);
-          }else if(this.cardList[k].type == 1){
-            this.cardList[k].ifChoose = true;
-          }else if(this.cardList[k].type == 2){
-            this.$toast.show(this.lang.msg3);
+        var that=this, flag=true;
+
+        if(this.cardList[k].ifChoose == false){
+          if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
+            this.$toast.show(this.lang.msg1);
+          }else{
+            if(this.cardList[k].type == 0){
+              this.$toast.show(this.lang.msg2);
+            }else if(this.cardList[k].type == 1){
+              this.cardList[k].ifChoose = true;
+            }else if(this.cardList[k].type == 2){
+              this.$toast.show(this.lang.msg3);
+            }
           }
+
+          for(var i=0,len=this.cardList.length; i<len; i++){
+            if(this.cardList[i].ifChoose != true){
+              flag = false;
+            }
+          }
+
+          if(flag){
+            this.ifChooseAll = true;
+          }
+        }else{
+          this.cardList[k].ifChoose = false;
+          this.ifChooseAll = false;
         }
       },
       // 选择全部购物卡
       allChoose(){
-        var flag = false;
-        var that = this;
-        for(var i of this.cardList){
-          if(i.account !== '' && i.conversionNum !== ''){
-            flag = true;
+        var that = this, flag = true, flag2 = true;
+        if(this.ifChooseAll == false){
+          for(var i of this.cardList){
+            if(i.account !== '' && i.conversionNum !== ''){
+              flag = false;
+            }
+
+            if(flag){
+              this.$toast.show(this.lang.msg1);
+            }
+
+            if(i.type != 1){
+              this.$toast.show(this.lang.msg4);
+              flag2 = false;
+            }else{
+              i.ifChoose = true;
+            }
           }
 
-          if(i.type != 1){
-            this.$toast.show(this.lang.msg4);
-          }else{
-            i.ifChoose = true;
+          if(flag2 == true){
             this.ifChooseAll = true;
           }
+        }else{
+          this.ifChooseAll = false;
 
-        }
-
-        if(!flag){
-          this.$toast.show(this.lang.msg1);
+          for(var i of this.cardList){
+            i.ifChoose = false;
+          }
         }
       },
       // 输入时改变状态
       inputInfo(k){
         this.cardList[k].type = 0;
         this.cardList[k].ifChoose = false;
+        this.ifChooseAll = false;
+        this.ifShowbtn = false;
       },
       // 解除绑定
       removeBinding(n){
@@ -384,38 +435,40 @@
     line-height: 50px;
     text-align: center;
     position: relative;
-    font-size: 18px;
+    font-size: 16px;
     color: #666;
     border-bottom: 1px solid rgba(110,112,110,0.2);
   }
   .title .quit{
     position: absolute;
-    top: 20%;
-    left: 20px;
-    width: 30px;
-    height: 30px;
+    top: 50%;
+    left: 0%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
     background: url(../../static/addShoppingCard/back.png) no-repeat center;
     background-size: 100% 100%;
   }
 
-  .card-box{
-    margin-top: 40px;
-  }
+  .card-box{}
 
   .list{
-    margin: 0 auto 20px;
+    margin: 0 auto;
   }
   .card-info{
     display: flex;
     align-items: center;
+    padding-left: 5%;
+    box-sizing: border-box;
   }
   .choose{
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border: 1px solid #a0a0a0;
-    margin-right: 16px;
+    margin-right: 10px;
     border-radius: 50%;
     cursor: pointer;
+    box-sizing: border-box;
   }
   .choose.active{
     background: url(../../static/addShoppingCard/success.png) no-repeat center;
@@ -438,15 +491,15 @@
     background-size: 80% auto;
   }
   .child>.text{
-    width: 54px;
+    width: 50px;
     margin-left: 6px;
-    font-size: 16px;
+    font-size: 12px;
     color: #666;
     text-align: left;
   }
   .ipt-box{
     width: 180px;
-    height: 36px;
+    height: 30px;
     border: 1px solid rgba(170, 170, 170, 0.5);
     margin-left: 6px;
   }
@@ -476,7 +529,7 @@
     background-color: #efefef;
     border: 1px solid #a0a0a0;
     text-align: center;
-    line-height: 26px;
+    line-height: 24px;
     font-size: 13px;
     color: #615959;
     margin: 0 auto;
@@ -535,39 +588,44 @@
     border-bottom: 1px solid rgba(110,112,110,0.2);
     display: flex;
     align-items: center;
+    padding-left: 5%;
     box-sizing: border-box;
     margin-top: 20px;
     cursor: pointer;
   }
   .add-card .icon{
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border: 1px solid #f5af93;
     border-radius: 50%;
+    box-sizing: border-box;
     background: url(../../static/addShoppingCard/add.png) no-repeat center;
     background-size: 80% 80%;
   }
   .add-card .text{
-    font-size: 16px;
+    font-size: 14px;
     color: #f5af93;
     margin-left: 12px;
     text-decoration: underline;
   }
   .all-choose{
-    margin-top: 24px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: 14px;
     color: #8d8c8c;
     text-decoration: underline;
+    padding-left: 5%;
+    box-sizing: border-box;
   }
   .all-choose .icon{
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     border: 1px solid #a0a0a0;
     border-radius: 50%;
     margin-right: 10px;
     cursor: pointer;
+    box-sizing: border-box;
   }
   .all-choose.active .icon{
     background: url(../../static/addShoppingCard/success.png) no-repeat center;
@@ -575,27 +633,27 @@
   }
 
   .annotation{
-    font-size: 16px;
+    font-size: 12px;
     color: #f5af93;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 50px;
   }
   .submit-box{
     /* width: 400px; */
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 40px auto;
-    padding: 0 30px;
+    margin: 20px auto;
+    padding: 0 50px;
   }
   .submit-box .btn{
-    width: 100px;
-    height: 30px;
+    width: 80px;
+    height: 26px;
     text-align: center;
-    line-height: 30px;
+    line-height: 24px;
     border: 1px solid #aaa;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 12px;
     color: #666;
     cursor: pointer;
   }
@@ -616,18 +674,18 @@
     width: 162px;
     height: 162px;
     border: 1px solid #bfbfbf;
-    font-size: 17px;
+    font-size: 15px;
     background-color: #fff;
   }
   .pop-box .icon{
-    width: 46px;
-    height: 46px;
-    margin: 22px auto 0;
+    width: 40px;
+    height: 40px;
+    margin: 26px auto 0;
     background: url(../../static/addShoppingCard/success.png) no-repeat center;
     background-size: 100% 100%;
   }
   .pop-box .status{
-    margin-top: 12px;
+    margin-top: 18px;
     text-align: center;
     color: #157f12;
   }

@@ -185,6 +185,10 @@
           </div>
         </div> -->
         <ul class="price">
+          <li>
+            <div></div>
+            <div class="addShoppingCard" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
+          </li>
           <!-- <li v-if="isLogin" @click="selectCupon">
             <span>{{ lang.cupon }}</span
             ><span>{{ cuponName }}</span>
@@ -251,7 +255,6 @@
       </div>
     </div>
 
-    <div style="height: 40px;line-height: 40px;" @click="addCard()">{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
     <!-- 未登录 -->
     <!-- <div v-if="!isLogin" :class="['submit']" @click="createOrder2">
       <span>{{ lang.sureOrder }}</span>
@@ -1540,5 +1543,15 @@ export default {
 
 .color-pink{
   color: #f29b87;
+}
+
+.addShoppingCard{
+  height: 28px;
+  line-height: 26px;
+  padding: 0 6px;
+  border: 1px solid #f29b87;
+  margin-bottom: 10px;
+  color: #f29b87;
+  border-radius: 4px;
 }
 </style>
