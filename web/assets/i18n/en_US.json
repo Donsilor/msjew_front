@@ -54,7 +54,11 @@
       "scideal": "Ideal"
     },
     "style": {
-      "SolitaireRing": "Solitaire",
+      "SolitaireRing": "Single Stone Ring",
+      "ClawRing": "ClawRing",
+      "GroupRing": "Group ring",
+      "ThreeMainStoneRings": "Three MainStoneRings",
+      "OpenMouth": "Opening Ring",
       "SolitaireRingDesc": "There are different ring settings optional. The solitaire ring is a symbol of true love, and its taste will last together with the solitaire.",
       "JumpRing": "Jump",
       "JumpRingDesc": "The jump ring is known as the magician in jewelry. The symmetric design is amazing.",
@@ -116,6 +120,9 @@
       "earStud": "Ear Stud",
       "earrings": "Earrings",
       "bracelets": "Bracelets",
+      "decoration": "Decoration",
+      "widgets": "Widgets",
+      "other": "Other",
       "bangles": "Bangles"
     },
     "polish": {
@@ -173,12 +180,20 @@
       "priceRange5": "above 5000",
       "proposalRing": "Proposal Ring",
       "ValentinesDay": "Valentines Day",
-      "birthdayPresent": "BirthdayPresent"
+      "birthdayPresent": "BirthdayPresent",
+      "anniversary" : "Anniversary"
     },
     "forPeople":{
       "men":"Men",
       "women":"Women",
       "universal":"Universal"
+    },
+    "stoneType": {
+      "diamond":"Diamond",
+      "jackpot": "Jackpot",
+      "pearl": "Pearl",
+      "jade":"Jade",
+      "other": "Other"
     }
   },
   "components": {
@@ -264,7 +279,8 @@
         "priceRange5": "above 5000",
         "proposalRing": "Proposal Ring",
         "ValentinesDay": "Valentines Day",
-        "birthdayPresent": "BirthdayPresent"
+        "birthdayPresent": "BirthdayPresent",
+        "anniversary" : "Anniversary"
       },
       "necklaceMenu": {
         "coupleRings": "Couple Rings",
@@ -374,6 +390,7 @@
         "SelectDiamondFirst": "Select Diamond First",
         "DiamondRing": "Diamond Ring First",
         "SingleDiamondRing": "Single Diamond Ring",
+        "SolitaireRing": "Single Stone Ring",
         "ClawRing": "ClawRing",
         "GroupRing": "Group ring",
         "ThreeMainStoneRings": "Three MainStoneRings",
@@ -816,7 +833,7 @@
     "price": "Price",
     "to": "to",
     "sort": "Sort By",
-
+    "stoneType": "Stone type",
     "title": "JEWELRY",
     "totalCountTitle": "JEWELRY ({total_count} Results)",
     "titleDesc": "Choose various accessories to show your taste"

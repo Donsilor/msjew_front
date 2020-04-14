@@ -12,12 +12,6 @@ import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 // 默认条件映射
 const conditionMaps = {
   all: {},
-  price1: {},
-  price2: {},
-  price3: {},
-  price4: {},
-  price5: {},
-
   // 款式
   'engagement-ring': {
     styleSex: 54,
@@ -83,7 +77,28 @@ const conditionMaps = {
   },
   'channel-set': {
     material: 35
-  }
+  },
+
+  //使用场景
+  'engagement-use' :{
+    scenes: 45
+  },
+  'wedding-use' :{
+    scenes: 44
+  },
+  'proposal-use' :{
+    scenes: 46
+  },
+  'valentines-day-use' :{
+    scenes: 49
+  },
+  'birthday-present-use' :{
+    scenes: 48
+  },
+  'anniversary-use' :{
+    scenes: 47
+  },
+  
 
 }
 

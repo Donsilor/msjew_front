@@ -122,8 +122,10 @@ export default {
   },
   watch: {
     $route(val, oldVal) {
-      this.changeGender(val.query.type)
+      let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
+      this.changeGender(val.query.type, style)
     }
+    
   },
   created() {},
   mounted() {
@@ -139,13 +141,7 @@ export default {
   },
   methods: {
     changeGender(type = 'lady',style='',material='') {
-      if (['all','lady', 'gentlemen'].indexOf(type) > -1) {
-        this.gender = type
-      }
-      this.conditions[0].options =
-        type === `lady`
-          ? this.CONDITION_INFO.style.womanRings
-          : this.CONDITION_INFO.style.manRings
+      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
       this.conditions[0].checked = style
       this.conditions[1].checked = material
       this.madeUpEv()
@@ -153,17 +149,11 @@ export default {
     // 组装Ev
     madeUpEv() {
       this.ev = ``
-      if (this.gender === `lady`) {
-        if (this.conditions[0].checked === ``) {
+      if (this.conditions[0].checked === ``) {
           this.ev += `marry_style_wom=-1`
         } else {
           this.ev += `marry_style_wom=${this.conditions[0].checked}`
         }
-      } else if (this.conditions[0].checked === ``) {
-        this.ev += `marry_style_man=-1`
-      } else {
-        this.ev += `marry_style_man=${this.conditions[0].checked}`
-      }
 
       if (this.conditions[1].checked !== ``) {
         this.ev += `^material=${this.conditions[1].checked}`

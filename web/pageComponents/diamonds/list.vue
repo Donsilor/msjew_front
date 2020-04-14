@@ -843,6 +843,7 @@ const defaultCaratRange = [0.1, 10]
 const defaultDepthRange = [0, 100]
 const defaultTableRange = [0, 100]
 const lang = 'diamondsList'
+
 export default {
   components: {
     ShapePopover,
@@ -1475,9 +1476,24 @@ export default {
   },
   mounted() {
     const _this = this
+    var caratRange_val =this.$route.query.caratRange
+    if(caratRange_val !== undefined){
+      this.caratRange = JSON.parse(this.$helpers.base64Decode(caratRange_val));
+      this.changeCondition('caratRange', this.caratRange);
+
+    }
     _this.$nextTick(() => {
       _this.research()
     })
+  },
+  watch: {
+    $route(val, oldVal) {
+      var caratRange_val =this.$route.query.caratRange
+      if(caratRange_val !== undefined){
+        this.caratRange = JSON.parse(this.$helpers.base64Decode(caratRange_val));
+        this.changeCondition('caratRange', this.caratRange);
+      }
+    }
   },
   methods: {
     // 显示与隐藏更多条件

@@ -491,7 +491,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange1`),
                     icon: '',
                     to: {
-                      path: `/wedding-rings/price1?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
                     }
                   },
                   {
@@ -499,7 +499,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange2`),
                     icon: '',
                     to: {
-                      path: `/wedding-rings/price2?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
                     }
                   },
                   {
@@ -507,7 +507,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange3`),
                     icon: '',
                     to: {
-                      path: `/wedding-rings/price3?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
                     }
                   },
                   {
@@ -515,7 +515,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange4`),
                     icon: '',
                     to: {
-                      path: `/wedding-rings/price4?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
                     }
                   },
                   {
@@ -523,7 +523,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange5`),
                     icon: '',
                     to: {
-                      path: `/wedding-rings/price5?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 300000]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 300000]))}`
                     }
                   }
                 ]
@@ -535,45 +535,58 @@ export default {
                 groupName: this.$t(`${lang}.ringsMenu.use`),
                 data: [
                   {
-                    id: 31,
+                    id: 45,
                     name: this.$t(`${lang}.ringsMenu.engagementRing`),
                     icon: '',
                     to: {
-                      path: '/engagement-rings/all'
+                      path: '/wedding-rings/engagement-use'
                     }
                   },
                   {
-                    id: 28,
+                    id: 44,
                     name: this.$t(`${lang}.ringsMenu.weddingRing`),
                     icon: '',
                     to: {
-                      path: '/wedding-rings/all'
+                      path: '/wedding-rings/wedding-use'
                     }
                   },
                   {
-                    id: 32,
+                    id: 46,
                     name: this.$t(`${lang}.ringsMenu.proposalRing`),
                     icon: '',
                     to: {
-                      path: ''
+                      path: '/wedding-rings/proposal-use'
                     }
                   },
                   {
-                    id: 29,
+                    id: 49,
                     name: this.$t(`${lang}.ringsMenu.ValentinesDay`),
                     icon: '',
                     to: {
-                      path: ''
+                      path: '/wedding-rings/valentines-day-use'
                     }
                   },
                   {
-                    id: 34,
+                    id: 48,
                     name: this.$t(`${lang}.ringsMenu.birthdayPresent`),
                     icon: 'iconJewelry-gift-d',
                     to: {
-                      path: ''
+                      path: '/wedding-rings/birthday-present-use'
                     }
-                  }
+                  },
+                  {
+                    id: 47,
+                    name: this.$t(`${lang}.ringsMenu.anniversary`),
+                    // icon: 'iconmaterial-big-pt color-icon',
+                    to: {
+                      path: '/wedding-rings/anniversary-use'
+                    }
+                  },
+                  // {
+                  //   name: this.$t(`${lang}.engagementRingMenu.fineSilver`),
+                  //   icon: 'iconmaterial-big-pt color-icon',
+                  //   href: '/engagement-rings/fine-silver'
+                  // }
                 ]
               }
             ]
@@ -613,7 +626,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.18KWhite`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: '/jewellery/necklaces/18k-white'
+                      path: '/jewellery/necklace-pendant-18k-white'
                     }
                   },
                   {
@@ -621,7 +634,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.18KYellow`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
-                      path: '/jewellery/necklaces/18K-yellow'
+                      path: '/jewellery/necklace-pendant-18K-yellow'
                     }
                   },
                   {
@@ -629,7 +642,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.18KRoseGold`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
-                      path: '/jewellery/necklaces/18k-rose-gold'
+                      path: '/jewellery/necklace-pendan-18k-rose-gold'
                     }
                   },
                   {
@@ -637,14 +650,15 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.platinum`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: '/jewellery/necklaces/platinum'
+                      path: '/jewellery/necklace-pendant-platinum'
                     }
                   },
                   {
+                    id: 35,
                     name: this.$t(`${lang}.necklaceMenu.fineSilver`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: '/jewellery/necklaces/fineSilver'
+                      path: '/jewellery/necklace-pendant-fineSilver'
                     }
                   }
                 ]
@@ -660,7 +674,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange1`),
                     icon: '',
                     to: {
-                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 999]))}`
                     }
                   },
                   {
@@ -668,7 +682,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange2`),
                     icon: '',
                     to: {
-                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
                     }
                   },
                   {
@@ -676,7 +690,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange3`),
                     icon: '',
                     to: {
-                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
                     }
                   },
                   {
@@ -684,7 +698,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange4`),
                     icon: '',
                     to: {
-                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
                     }
                   },
                   {
@@ -692,7 +706,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange5`),
                     icon: '',
                     to: {
-                      path: `/jewellery/necklaces?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 6999]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 300000]))}`
                     }
                   }
                 ]
@@ -708,7 +722,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.ValentinesDay`),
                     icon: '',
                     to: {
-                      path: '/wedding-rings/14k-white'
+                      path: '/jewellery/necklace-pendant-valentines-day'
                     }
                   },
                   {
@@ -716,7 +730,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.MothersDay`),
                     icon: '',
                     to: {
-                      path: '/wedding-rings/18k-white'
+                      path: '/jewellery/necklace-pendant-mothers-day'
                     }
                   },
                   {
@@ -724,7 +738,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.birthdayPresent`),
                     icon: '',
                     to: {
-                      path: '/wedding-rings/14k-yellow'
+                      path: '/jewellery/necklace-pendant-birthday-present'
                     }
                   },
                   {
@@ -732,7 +746,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.ChristmasGift`),
                     icon: '',
                     to: {
-                      path: '/wedding-rings/18k-yellow'
+                      path: '/jewellery/necklace-pendant-christmas-gift'
                     }
                   },
                   {
@@ -740,7 +754,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.HalloweenGift`),
                     icon: '',
                     to: {
-                      path: '/wedding-rings/platinum'
+                      path: '/jewellery/necklace-pendant-halloween-gift'
                     }
                   }
                 ]
@@ -776,41 +790,47 @@ export default {
             ],
             [
               {
+                key: 'material',
                 groupName: this.$t(`${lang}.braceletMenu.color`),
                 data: [
                   {
+                    id: 28,
                     name: this.$t(`${lang}.braceletMenu.18KWhite`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: '/diamonds/18k-khite'
+                      path: '/jewellery/bracelet-bangle-18k-white'
                     }
                   },
                   {
+                    id: 29,
                     name: this.$t(`${lang}.braceletMenu.18KYellow`),
-                    icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
-                      path: '/diamonds/18k-yellow'
+                      path: '/jewellery/bracelet-bangle-18K-yellow'
                     }
                   },
                   {
+                    id: 30,
                     name: this.$t(`${lang}.braceletMenu.18KRoseGold`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
-                      path: '/diamonds/18k-rose-gold'
+                      path: '/jewellery/bracelet-bangle-18k-rose-gold'
                     }
                   },
                   {
+                    id: 34,
                     name: this.$t(`${lang}.braceletMenu.platinum`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: '/diamonds/emerald-cut'
+                      path: '/jewellery/bracelet-bangle-platinum'
                     }
                   },
                   {
+                    id: 35,
                     name: this.$t(`${lang}.braceletMenu.fineSilver`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: '/diamonds/heart-shaped'
+                      path: '/jewellery/bracelet-bangle-fineSilver'
                     }
                   }
                 ]
@@ -824,35 +844,35 @@ export default {
                     name: this.$t(`${lang}.braceletMenu.priceRange1`),
                     icon: '',
                     to: {
-                      path: '/diamonds/round-cut'
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 999]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.priceRange2`),
                     icon: '',
                     to: {
-                      path: '/diamonds/oval-cut'
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.priceRange3`),
                     icon: '',
                     to: {
-                      path: '/diamonds/princess-cut'
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.priceRange4`),
                     icon: '',
                     to: {
-                      path: '/diamonds/emerald-cut'
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.priceRange5`),
                     icon: '',
                     to: {
-                      path: '/diamonds/heart-shaped'
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 300000]))}`
                     }
                   }
                 ]
@@ -866,35 +886,35 @@ export default {
                     name: this.$t(`${lang}.braceletMenu.ValentinesDay`),
                     icon: '',
                     to: {
-                      path: '/diamonds/round-cut'
+                      path: '/jewellery/bracelet-bangle-valentines-day'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.MothersDay`),
                     icon: '',
                     to: {
-                      path: '/diamonds/oval-cut'
+                      path: '/jewellery/bracelet-bangle-mothers-day'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.birthdayPresent`),
                     icon: '',
                     to: {
-                      path: '/diamonds/princess-cut'
+                      path: '/jewellery/bracelet-bangle-birthday-present'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.ChristmasGift`),
                     icon: '',
                     to: {
-                      path: '/diamonds/emerald-cut'
+                      path: '/jewellery/bracelet-bangle-christmas-gift'
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.HalloweenGift`),
                     icon: '',
                     to: {
-                      path: '/diamonds/heart-shaped'
+                      path: '/jewellery/bracelet-bangle-halloween-gift'
                     }
                   }
                 ]
@@ -933,17 +953,24 @@ export default {
                 groupName: this.$t(`${lang}.diamondMenu.SettingStyle`),
                 data: [
                   {
+                    name: this.$t(`${lang}.diamondMenu.SolitaireRing`),
+                    // icon: 'iconyuanxin shape-icon',
+                    to: {
+                      path: '/engagement-rings/solitaire'
+                    }
+                  },
+                  {
                     name: this.$t(`${lang}.diamondMenu.ClawRing`),
                     icon: '',
                     to: {
-                      path: '/diamonds/round-cut'
+                      path: '/engagement-rings/halo-set'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.GroupRing`),
                     icon: 'iconring-yx ring-icon',
                     to: {
-                      path: '/diamonds/oval-cut'
+                      path: '/engagement-rings/pave-set'
                     }
                   },
                   {
@@ -971,42 +998,42 @@ export default {
                     name: this.$t(`${lang}.diamondMenu.WeightRange1`),
                     icon: '',
                     to: {
-                      path: '/diamonds/round-cut'
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0, 0.3]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange2`),
                     icon: '',
                     to: {
-                      path: '/diamonds/oval-cut'
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.31, 0.5]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange3`),
                     icon: '',
                     to: {
-                      path: '/diamonds/princess-cut'
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.51, 0.8]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange4`),
                     icon: '',
                     to: {
-                      path: '/diamonds/emerald-cut'
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.81, 0.99]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange5`),
                     icon: '',
                     to: {
-                      path: '/diamonds/emerald-cut'
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([1, 1.5]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange6`),
                     icon: '',
                     to: {
-                      path: '/diamonds/emerald-cut'
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([1.5, 10]))}`
                     }
                   }
                 ]
@@ -1020,35 +1047,35 @@ export default {
                     name: this.$t(`${lang}.diamondMenu.18KWhite`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: '/diamonds/round-cut'
+                      path: '/engagement-rings/18k-white'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.18KYellow`),
-                    icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
+                    icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
-                      path: '/diamonds/oval-cut'
+                      path: '/engagement-rings/18k-yellow'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.18KRoseGold`),
                     icon: 'iconmaterial-big-pt color-icon color-18k-rose-gold',
                     to: {
-                      path: '/diamonds/princess-cut'
+                      path: '/engagement-rings/18k-rose-gold'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.platinum`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: '/diamonds/emerald-cut'
+                      path: '/engagement-rings/platinum'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.fineSilver`),
                     icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: '/diamonds/emerald-cut'
+                      path: '/engagement-rings/channel-set'
                     }
                   }
                 ]
@@ -1099,7 +1126,7 @@ export default {
                     ),
                     // icon: 'icon-qingrenjie',
                     to: {
-                      path: `/jewellery/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
+                      path: `/jewellery/valentines-day`
                     }
                   },
                   {
@@ -1108,7 +1135,7 @@ export default {
                     ),
                     // icon: 'iconJewelry-gift-woman',
                     to: {
-                      path: '/diamonds'
+                      path: `/jewellery/mothers-day`
                     }
                   },
                   {
@@ -1117,7 +1144,7 @@ export default {
                     ),
                     // icon: 'iconJewelry-gift-d',
                     to: {
-                      path: '/jewellery/necklaces'
+                      path: `/jewellery/birthday-present`
                     }
                   },
                   {
@@ -1126,7 +1153,7 @@ export default {
                     ),
                     // icon: 'icon-shengdanjie-',
                     to: {
-                      path: '/jewellery/necklaces'
+                      path: `/jewellery/christmas-gift`
                     }
                   },
                   {
@@ -1135,7 +1162,7 @@ export default {
                     ),
                     // icon: 'icon-nanguadeng-',
                     to: {
-                      path: '/jewellery/necklaces'
+                      path: `/jewellery/halloween-gift`
                     }
                   }
                 ]
@@ -1153,7 +1180,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: `/jewellery/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 2000]))}`
+                      path: `/wedding-rings/all`
                     }
                   },
                   {
@@ -1162,7 +1189,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: '/diamonds'
+                      path: '/wedding-rings/channel-set-series'
                     }
                   },
                   {
@@ -1171,7 +1198,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: '/jewellery/necklaces'
+                      path: '/jewellery/necklace-pendant'
                     }
                   },
                   {
@@ -1180,7 +1207,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: '/jewellery/necklaces'
+                      path: '/jewellery/necklace-pendant'
                     }
                   },
                   {
@@ -1189,7 +1216,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: '/jewellery/necklaces'
+                      path: '/jewellery/earrings-stud'
                     }
                   },
                   {
@@ -1198,7 +1225,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: '/jewellery/necklaces'
+                      path: '/jewellery/decoration-widgets'
                     }
                   },
                   {
@@ -1207,7 +1234,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: '/jewellery/necklaces'
+                      path: '/jewellery/others'
                     }
                   }
                 ]

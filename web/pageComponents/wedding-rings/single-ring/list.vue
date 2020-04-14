@@ -298,7 +298,18 @@ export default {
         style: '',
         material: '',
         forPeople: '',
+        scenes: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
+      }
+    }
+  },
+  watch: {
+    $route(val, oldVal) {
+      var priceRange_val =this.$route.query.priceRange
+      if(priceRange_val !== undefined){
+        this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
+        this.changePriceRange(this.priceRange);
+
       }
     }
   },
@@ -365,6 +376,15 @@ export default {
           paramName: 'for_people',
           valueType: 1,
           configValues: conditions.forPeople === '' ? [] : [conditions.forPeople]
+        })
+      }
+      if (conditions.scenes) {
+        params.push({
+          type: 2,
+          paramId:27,
+          paramName: 'scenes',
+          valueType: 1,
+          configValues: conditions.scenes === '' ? [] : [conditions.scenes]
         })
       }
 

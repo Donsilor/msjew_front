@@ -99,6 +99,11 @@ export default {
       this.actIndex = parseFloat(this.$route.query.actIndex)
     }
   },
+  watch: {
+    $route(to, from){
+      this.actIndex = parseFloat(this.$route.query.actIndex)
+    }
+  },
   methods: {
     arrivalBottom() {
       this.$refs['data-list'].getNextPage()
