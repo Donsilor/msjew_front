@@ -387,6 +387,7 @@ export default {
     }
   },
   mounted() {
+    console.log("dddd",this.materialOptions)
     const _this = this
     var priceRange_val =this.$route.query.priceRange
     if(priceRange_val !== undefined){

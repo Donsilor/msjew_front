@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.goodInfo)
+    // console.log(this.goodInfo)
     this.conditions[0].checked = [
       this.goodInfo.materials.length > 0
         ? this.goodInfo.materials[0].id
@@ -140,7 +140,7 @@ export default {
       return result.join(', ')
     },
     showChooseEject(info) {
-      console.log(info)
+      // console.log(info)
       const refName = `${info.key}-${info.type}`
       this.$refs[refName] &&
         this.$refs[refName].showIt(this.conditions[0].checked)
