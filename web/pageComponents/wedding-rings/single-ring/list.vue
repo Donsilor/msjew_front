@@ -305,7 +305,12 @@ export default {
   },
   watch: {
     $route(val, oldVal) {
-      console.log(11111,val)
+      var priceRange_val =this.$route.query.priceRange
+      if(priceRange_val !== undefined){
+        this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
+        this.changePriceRange(this.priceRange);
+
+      }
     }
   },
   computed: {

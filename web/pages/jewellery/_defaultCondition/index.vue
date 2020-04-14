@@ -129,53 +129,6 @@ const conditionMaps = {
 
 
 
-
-  'necklace-pendant-price1':{
-    typeId:4,
-    categoryId:[4,5]
-  },
-  'necklace-pendant-price2':{
-    typeId:4,
-    categoryId:[4,5]
-  },
-  'necklace-pendant-price3':{
-    typeId:4,
-    categoryId:[4,5]
-  },
-  'necklace-pendant-price4':{
-    typeId:4,
-    categoryId:[4,5]
-  },
-  'necklace-pendant-price5':{
-    typeId:4,
-    categoryId:[4,5]
-  },
-
-
-
-
-  'bracelet-bangle-price1':{
-    typeId:4,
-    categoryId:[8,9]
-  },
-  'bracelet-bangle-price2':{
-    typeId:4,
-    categoryId:[8,9]
-  },
-  'bracelet-bangle-price3':{
-    typeId:4,
-    categoryId:[8,9]
-  },
-  'bracelet-bangle-price4':{
-    typeId:4,
-    categoryId:[8,9]
-  },
-  'bracelet-bangle-price5':{
-    typeId:4,
-    categoryId:[8,9]
-  },
-
-
    //项链使用场景
   'necklace-pendant-valentines-day' :{
     typeId:4,

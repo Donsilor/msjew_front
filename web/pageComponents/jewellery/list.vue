@@ -470,6 +470,16 @@ export default {
       _this.research()
     })
   },
+  watch: {
+    $route(val, oldVal) {
+      var priceRange_val =this.$route.query.priceRange
+      if(priceRange_val !== undefined){
+        this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
+        this.changePriceRange(this.priceRange);
+
+      }
+    }
+  },
   methods: {
     getCategoryById(categoryId) {
       const jewelleryOptions = this.jewelleryOptions

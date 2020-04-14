@@ -100,7 +100,7 @@ export default {
     }
   },
   watch: {
-    arrivalBottom(val, oldval) {
+    $route(to, from){
       this.actIndex = parseFloat(this.$route.query.actIndex)
     }
   },

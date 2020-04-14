@@ -491,7 +491,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange1`),
                     // icon: 'iconmaterial-big-pt color-icon color-14k-white',
                     to: {
-                      path: `/wedding-rings/price1?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
                     }
                   },
                   {
@@ -499,7 +499,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange2`),
                     // icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: `/wedding-rings/price2?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
                     }
                   },
                   {
@@ -507,7 +507,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange3`),
                     // icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
-                      path: `/wedding-rings/price3?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
                     }
                   },
                   {
@@ -515,7 +515,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange4`),
                     // icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
-                      path: `/wedding-rings/price4?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
                     }
                   },
                   {
@@ -523,7 +523,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange5`),
                     // icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: `/wedding-rings/price5?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 300000]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 300000]))}`
                     }
                   }
                 ]
@@ -674,7 +674,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange1`),
                     // icon: 'iconmaterial-big-pt color-icon color-14k-white',
                     to: {
-                      path: `/jewellery/necklace-pendant-price1?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 999]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 999]))}`
                     }
                   },
                   {
@@ -682,7 +682,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange2`),
                     // icon: 'iconmaterial-big-pt color-icon color-18k-white',
                     to: {
-                      path: `/jewellery/necklace-pendant-price2?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
                     }
                   },
                   {
@@ -690,7 +690,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange3`),
                     // icon: 'iconmaterial-big-pt color-icon color-14k-yellow',
                     to: {
-                      path: `/jewellery/necklace-pendant-price3?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
                     }
                   },
                   {
@@ -698,7 +698,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange4`),
                     // icon: 'iconmaterial-big-pt color-icon color-18k-yellow',
                     to: {
-                      path: `/jewellery/necklace-pendant-price4?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
                     }
                   },
                   {
@@ -706,7 +706,7 @@ export default {
                     name: this.$t(`${lang}.necklaceMenu.priceRange5`),
                     // icon: 'iconmaterial-big-pt color-icon color-platinum',
                     to: {
-                      path: `/jewellery/necklace-pendant-price5?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 300000]))}`
+                      path: `/jewellery/necklace-pendant?priceRange=${this.$helpers.base64Encode(JSON.stringify([5000, 300000]))}`
                     }
                   }
                 ]
@@ -844,35 +844,35 @@ export default {
                     name: this.$t(`${lang}.braceletMenu.priceRange1`),
                     // icon: 'iconyuanxin shape-icon',
                     to: {
-                      path: `/jewellery/bracelet-bangle-price1?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 999]))}`
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 999]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.priceRange2`),
                     // icon: 'icontuoyuan shape-icon',
                     to: {
-                      path: `/jewellery/bracelet-bangle-price2?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([1000, 1999]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.priceRange3`),
                     // icon: 'iconfangxing shape-icon',
                     to: {
-                      path: `/jewellery/bracelet-bangle-price3?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([2000, 2999]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.priceRange4`),
                     // icon: 'iconfushe shape-icon',
                     to: {
-                      path: `/jewellery/bracelet-bangle-price4?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 4999]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.braceletMenu.priceRange5`),
                     // icon: 'iconaixin shape-icon',
                     to: {
-                      path: `/jewellery/bracelet-bangle-price5?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 300000]))}`
+                      path: `/jewellery/bracelet-bangle?priceRange=${this.$helpers.base64Encode(JSON.stringify([3000, 300000]))}`
                     }
                   }
                 ]
@@ -998,42 +998,42 @@ export default {
                     name: this.$t(`${lang}.diamondMenu.WeightRange1`),
                     // icon: 'iconyuanxin shape-icon',
                     to: {
-                      path: `/diamonds/carat1?caratRange=${this.$helpers.base64Encode(JSON.stringify([0, 0.3]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0, 0.3]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange2`),
                     // icon: 'icontuoyuan shape-icon',
                     to: {
-                      path: `/diamonds/carat2?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.3, 0.5]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.31, 0.5]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange3`),
                     // icon: 'iconfangxing shape-icon',
                     to: {
-                      path: `/diamonds/carat3?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.51, 0.8]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.51, 0.8]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange4`),
                     // icon: 'iconfushe shape-icon',
                     to: {
-                      path: `/diamonds/carat4?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.81, 1]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.81, 0.99]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange5`),
                     // icon: 'iconfushe shape-icon',
                     to: {
-                      path: `/diamonds/carat5?caratRange=${this.$helpers.base64Encode(JSON.stringify([1, 1.5]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([1, 1.5]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange6`),
                     // icon: 'iconfushe shape-icon',
                     to: {
-                      path: `/diamonds/carat6?caratRange=${this.$helpers.base64Encode(JSON.stringify([1.5, 10]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([1.5, 10]))}`
                     }
                   }
                 ]

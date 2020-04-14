@@ -1486,6 +1486,15 @@ export default {
       _this.research()
     })
   },
+  watch: {
+    $route(val, oldVal) {
+      var caratRange_val =this.$route.query.caratRange
+      if(caratRange_val !== undefined){
+        this.caratRange = JSON.parse(this.$helpers.base64Decode(caratRange_val));
+        this.changeCondition('caratRange', this.caratRange);
+      }
+    }
+  },
   methods: {
     // 显示与隐藏更多条件
     changeMoreConditionState() {
