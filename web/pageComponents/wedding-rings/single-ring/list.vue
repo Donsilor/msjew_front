@@ -435,6 +435,13 @@ export default {
   },
   mounted() {
     const _this = this
+    var priceRange_val =this.$route.query.priceRange
+    if(priceRange_val !== undefined){
+      this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
+      this.changePriceRange(this.priceRange);
+
+    }
+
     _this.$nextTick(() => {
       _this.research()
     })
