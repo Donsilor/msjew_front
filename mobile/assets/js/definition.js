@@ -354,6 +354,33 @@ export default language => {
           image: `/ring-type/woman/5.png`,
           name: lang.style.CasualRing
         }
+      ],
+      otherRings: [
+        {
+          id: 160,
+          image: `/ring-type/woman/1.png`,
+          name: lang.style.WeddingRing
+        },
+        {
+          id: 161,
+          image: `/ring-type/woman/2.png`,
+          name: lang.style.FullyDiamondInlaidRing
+        },
+        {
+          id: 162,
+          image: `/ring-type/woman/3.png`,
+          name: lang.style.WeddingAnniversaryRing
+        },
+        {
+          id: 163,
+          image: `/ring-type/woman/4.png`,
+          name: lang.style.DiamondRing
+        },
+        {
+          id: 164,
+          image: `/ring-type/woman/5.png`,
+          name: lang.style.CasualRing
+        }
       ]
     },
 

@@ -8,6 +8,12 @@
         >
           {{ lang.lady }}
         </button>
+        <!-- <button
+          :class="{ active: gender === 'other' }"
+          @click="changeGender('other')"
+        >
+        其他
+        </button> -->
         <button
           :class="{ active: gender === 'gentlemen' }"
           @click="changeGender('gentlemen')"
@@ -196,7 +202,7 @@ export default {
         border-right: 0;
         border-radius: 15px 0 0 15px;
       }
-      button:nth-of-type(2) {
+      button:nth-of-type(3) {
         border-left: 0;
         border-radius: 0 15px 15px 0;
       }
