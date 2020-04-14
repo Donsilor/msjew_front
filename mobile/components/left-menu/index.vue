@@ -267,11 +267,17 @@ export default {
       necklaces:[
         {
           name: this.LANGUAGE.components.leftMenu.necklace,
-          routerName: 'accessories-list'
+          routerName: 'accessories-list',
+          query:  {
+            actIndex: 0
+          },
         },
         {
           name: this.LANGUAGE.components.leftMenu.Pendant,
-          routerName: 'accessories-list'
+          routerName: 'accessories-list',
+           query:  {
+            actIndex: 1
+          },
         }
       ],
       Bracelets:[
