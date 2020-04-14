@@ -9,8 +9,20 @@
           <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           <span>{{ lang.chooseLanguageCoin }}</span>
         </h1>
-        <div class="select-line-box" @click="chooseLanguage">
-          <span>{{ languageText }}</span>
+        <div class="select-line-box">
+          <!-- <span>{{ languageText }}</span> -->
+          <input :value="language.content" type="text" />
+          <select v-model="language" @change="chooseLanguage(language.code)">
+            <option
+              v-for="(p, index) in languageOptions"
+              :key="index"
+              :value="p"
+              >
+              {{p.content}}
+              <!-- {{ psn ? p.en :psn ? p.cn :p.zh }} -->
+              </option
+            >
+          </select>
           <i class="iconfont iconkuozhan"></i>
         </div>
         <div class="select-line-box" @click="chooseCoin">
@@ -48,7 +60,7 @@
         </nuxt-link>
       </div>
     </div>
-    <swiper-tap
+    <!-- <swiper-tap
       ref="language-tap"
       :list="languageOptions"
       :choose-line="language"
@@ -59,7 +71,7 @@
       :list="coinOptions"
       :choose-line="coin"
       @clear="changeCoin"
-    ></swiper-tap>
+    ></swiper-tap> -->
   </div>
 </template>
 
@@ -82,6 +94,7 @@ export default {
   },
   computed: {
     languageText() {
+      console.log("aa",this.languageOptions[this.language].content)
       return this.languageOptions[this.language].content
     },
     coinText() {
@@ -95,14 +108,18 @@ export default {
     }
   },
   mounted() {
+    // this.language = this.languageOptions[0].content
+    // console.log("this.language",this.language)
+    console.log("this.languageOptions",this.languageOptions[0].content)
     const _this = this
     _this.$nextTick(() => {
-      for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
-        if (_this.languageOptions[n].code === _this.$store.state.language) {
-          _this.language = n
-          break
-        }
-      }
+      
+      // for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
+      //   if (_this.languageOptions[n].code === _this.$store.state.language) {
+      //     _this.language = n
+      //     break
+      //   }
+      // }
 
       for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
         if (_this.coinOptions[n].code === _this.$store.state.coin) {
@@ -113,8 +130,15 @@ export default {
     })
   },
   methods: {
-    chooseLanguage() {
-      this.$refs['language-tap'].show()
+    chooseLanguage(val) {
+      console.log("val",val)
+      this.$store.commit('setLanguage',val)
+      setTimeout(() => {
+        // location.href = '/'
+        // location.reload()
+        location.href = this.$route.query.redirectUri
+      }, 500)
+      // this.$refs['language-tap'].show()
     },
     changeLanguage(data) {
       this.language = data.index
@@ -172,7 +196,37 @@ export default {
     &:nth-of-type(2) {
       margin-bottom: 32px;
     }
-
+    input{
+      width: 100%;
+      height: 100%;
+      line-height: 38px;
+      text-align: left;
+      background: #f8f8f8;
+      -webkit-appearance: none;
+      border: 0;
+      padding: 0 0 0 13px;
+      margin: 0;
+      outline: 0;
+      color: #999999;
+    }
+    select{
+      color: #999999;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      font-size: inherit;
+      -webkit-appearance: none;
+      border: 0;
+      outline: 0;
+      padding: 0;
+      margin: 0;
+      resize: none;
+      border-radius: 0;
+      background: none;
+    }
     position: relative;
     margin-bottom: 18px;
     height: 40px;

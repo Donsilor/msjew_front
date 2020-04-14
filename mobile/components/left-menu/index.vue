@@ -3,21 +3,26 @@
     <div class="bg" @click="hide"></div>
     <div class="menu">
       <div class="top">
-        <div class="icon" @click="hide">
+        <!-- <div class="icon" @click="hide">
           <i class="iconfont iconcebianlan"></i>
-        </div>
+        </div> -->
         <div class="site-info" @click="toSiteSwitch">
           <div class="flag">
-            <img src="/hongkong-round.png" />
+            <img src="/hongkong-square.png" />
           </div>
-          <div class="language">
+          <!-- <div class="language">
             <span>简/繁/EN</span>
-          </div>
-          <span class="gap-line"></span>
+          </div> -->
           <div class="coin">
             {{ coinInfo.content }}
           </div>
+          <span class="gap-line"></span>
         </div>
+          <div class="icon" @click="toPersonal">
+            <i class="iconfont icongerenzhongxin" v-show="showa"></i>
+            <span v-show="showa" class="pl-login">请登入</span>
+            <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
+          </div>
         
       </div>
       <div class="content">
@@ -31,7 +36,7 @@
           <section  class="group">
             <div class="menus-one"  @click="one(1)">
               <span >{{lang.Rings}}</span>
-              <i class="iconfont iconxiala status-icon"></i>
+              <!-- <i class="iconfont iconxiala status-icon"></i> -->
               <div class="menus-two" :class="{ actives: actives1 == true }">
                 <div class="goback" @click.stop="goback(1)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -61,7 +66,7 @@
             </div>
             <div class="menus-one" @click="one(2)">
               <span>{{lang.necklaces}}</span>
-              <i class="iconfont iconxiala status-icon" ></i>
+              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives2 }">
                 <div class="goback" @click.stop="goback(2)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -83,7 +88,7 @@
             </div>
             <div class="menus-one" @click="one(3)">
               <span>{{lang.Bracelets}}</span>
-              <i class="iconfont iconxiala status-icon" ></i>
+              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives3 }">
                 <div class="goback" @click.stop="goback(3)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -104,7 +109,7 @@
             </div>
             <div class="menus-one" @click="one(4)">
               <span>{{lang.DesignDiamondRing}}</span>
-              <i class="iconfont iconxiala status-icon" ></i>
+              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives4 }">
                 <div class="goback" @click.stop="goback(4)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -120,7 +125,7 @@
             </div>
             <div class="menus-one" @click="one(5)">
               <span>{{lang.activity}}</span>
-              <i class="iconfont iconxiala status-icon" ></i>
+              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives5 }">
                 <div class="goback" @click.stop="goback(5)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -139,7 +144,7 @@
             </div>
             <div class="menus-one" @click="one(6)">
               <span>{{lang.theme}}</span>
-              <i class="iconfont iconxiala status-icon" ></i>
+              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives6 }">
                 <div class="goback" @click.stop="goback(6)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -206,6 +211,7 @@
           </a>
         </div>
       </div>
+      <site-switch ref="site-switch"></site-switch>
     </div>
   </div>
 </template>
@@ -228,6 +234,8 @@ export default {
       actives4: false,
       actives5: false,
       actives6: false,
+      showa:true,
+      showb:false,
       rings:[
         {
           stress: true,
@@ -440,9 +448,39 @@ export default {
     }
   },
   mounted(){
+    const _this = this
+    if(_this.$store.getters.hadLogin){
+      this.showa=false
+      this.showb=true
+      // this.isActive=true
+      // this.show=true
+    }
     console.log("sssss",this.categoryId)
   },
   methods: {
+    toPersonal() {
+      this.hide()
+      // 点击登入获取上页url
+      let oldurl=window.location.pathname
+      let params=window.location.search
+      //如果是订单确认页面，返回到购物车
+      if((/^\/cart\/sureOrder/).test(oldurl)){
+          oldurl = '/cart'
+          params = ''
+      }
+      console.log(oldurl);
+      const url=oldurl+params
+      localStorage.setItem('url',url)
+      // setTimeout(() => {
+      //   this.$router.push({
+      //       path: `/login`,
+      //       // query: {url}
+      //   })
+      // },0)
+      this.$router.push({
+        name: 'personal'
+      })
+    },
     one(id){
       if(id == 1){
         this.actives1 = true
@@ -535,6 +573,10 @@ export default {
     },
     toSiteSwitch() {
       this.hide()
+      // this.$refs['site-switch'].show()
+      // if(this.active = false){
+      //   this.$refs['site-switch'].show()
+      // }
       this.$router.push({
         name: 'site-switch',
         query: {
@@ -545,7 +587,11 @@ export default {
   }
 }
 </script>
-
+<style >
+.coloricon .icongerenzhongxin:before{
+  color:#A2C2D2;
+}
+</style>
 <style lang="less" scoped>
 .content{
   .groups{
@@ -567,7 +613,7 @@ export default {
       height: 60px;
       padding-left:20px;
       border-bottom:1px solid #fff;
-      background-color: #e4ecf0;
+      // background-color: #e4ecf0;
       z-index: 99;
       color: rgb(15, 14, 14);
       span{
@@ -703,7 +749,8 @@ export default {
   width: 100%;
   height: 44px;
   padding: 0 20px;
-  margin-bottom: 10px;
+  background-color: #e4ecf0;
+  // margin-bottom: 10px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -712,7 +759,7 @@ export default {
 .top .icon {
   // flex-grow: 1;
   // flex-shrink: 1;
-  color: #A2C2D2;
+  // color: #A2C2D2;
   text-align: right;
   margin-right: 30px;
 }
@@ -725,6 +772,12 @@ export default {
   align-items: center;
   justify-content: center;
   margin-left: 5px;
+}
+.site-info .icon{
+  position: relative;
+}
+.pl-login{
+  color: #6f9eb1;
 }
 .site-info .flag {
   flex-grow: 0;
@@ -756,7 +809,7 @@ export default {
   flex-grow: 0;
   flex-shrink: 0;
   height: 22px;
-  line-height: 20px;
+  line-height: 22px;
   font-size: 13px;
   font-weight: 400;
   color: rgba(102, 102, 102, 1);

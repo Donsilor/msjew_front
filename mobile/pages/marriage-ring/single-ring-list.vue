@@ -3,17 +3,17 @@
     <div class="top-part">
       <div class="title">
         <button
+          :class="{ active: gender === 'all' }"
+          @click="changeGender('all')"
+        >
+          {{lang.own}}
+        </button>
+        <button
           :class="{ active: gender === 'lady' }"
           @click="changeGender('lady')"
         >
           {{ lang.lady }}
         </button>
-        <!-- <button
-          :class="{ active: gender === 'other' }"
-          @click="changeGender('other')"
-        >
-        其他
-        </button> -->
         <button
           :class="{ active: gender === 'gentlemen' }"
           @click="changeGender('gentlemen')"
@@ -117,7 +117,7 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.listCommons,
-      gender: 'lady'
+      gender: 'all'
     }
   },
   watch: {
@@ -139,7 +139,7 @@ export default {
   },
   methods: {
     changeGender(type = 'lady',style='',material='') {
-      if (['lady', 'gentlemen'].indexOf(type) > -1) {
+      if (['all','lady', 'gentlemen'].indexOf(type) > -1) {
         this.gender = type
       }
       this.conditions[0].options =
@@ -200,11 +200,11 @@ export default {
       }
       button:nth-of-type(1) {
         border-right: 0;
-        border-radius: 15px 0 0 15px;
+        // border-radius: 15px 0 0 15px;
       }
       button:nth-of-type(3) {
         border-left: 0;
-        border-radius: 0 15px 15px 0;
+        // border-radius: 0 15px 15px 0;
       }
       button.active {
         color: rgba(255, 255, 255, 1);

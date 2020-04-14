@@ -1031,6 +1031,7 @@
     "stArrContent": "Select",
     "lady": "Women",
     "gentlemen": "Men",
+    "own": "All",
     "general": "General model",
     "specificationToast": "Please choose specifications",
     "bddOnlyDiamond": "BDD Loose Diamond Series",
