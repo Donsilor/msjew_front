@@ -273,16 +273,16 @@ export default language => {
           name: lang.style.PaveSetRing,
           image: '/ring-type/5.png'
         },
-        {
-          id: 112,
-          name: lang.style.ClassicalRing,
-          image: '/ring-type/7.png'
-        },
-        {
-          id: 113,
-          name: lang.style.ChannelSetRing,
-          image: '/ring-type/6.png'
-        },
+        // {
+        //   id: 112,
+        //   name: lang.style.ClassicalRing,
+        //   image: '/ring-type/7.png'
+        // },
+        // {
+        //   id: 113,
+        //   name: lang.style.ChannelSetRing,
+        //   image: '/ring-type/6.png'
+        // },
         {
           id: 114,
           name: lang.style.HaloSetRing,
@@ -353,6 +353,11 @@ export default language => {
           id: 164,
           image: `/ring-type/woman/5.png`,
           name: lang.style.CasualRing
+        },
+        {
+          id: 196,
+          image: `/ring-type/woman/5.png`,
+          name: lang.style.CoupleRing
         }
       ]
     },

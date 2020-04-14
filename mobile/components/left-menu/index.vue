@@ -231,20 +231,34 @@ export default {
       rings:[
         {
           stress: true,
+          name: this.LANGUAGE.components.leftMenu.WeddingAnniversaryRing,
+          routerName: 'marriage-ring-single-ring',
+          query: {
+            style: 162
+          }
+        },
+        {
+          stress: true,
           name: this.LANGUAGE.components.leftMenu.engagementRing,
-          routerName: 'engagement'
+          routerName: 'marriage-ring-single-ring',
+          query: {
+            style: 160
+          }
         },
         {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.marriageRing,
-          routerName: 'marriage-ring'
+          routerName: 'marriage-ring-single-ring',
+          query: {
+            style: 161
+          }
         },
         {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.Ring,
           routerName: 'marriage-ring-single-ring',
           query: {
-            type: 'lady'
+            style: 164
           }
         },
         {
@@ -252,7 +266,7 @@ export default {
           name: this.LANGUAGE.components.leftMenu.FashionRing,
           routerName: 'marriage-ring-single-ring',
           query: {
-            type: 'lady'
+            style: 163
           }
         },
         {
@@ -260,7 +274,7 @@ export default {
           name: this.LANGUAGE.components.leftMenu.CoupleRing,
           routerName: 'marriage-ring-single-ring',
           query: {
-            type: 'lady'
+            style: 196
           }
         },
       ],
@@ -283,11 +297,17 @@ export default {
       Bracelets:[
         {
           name: this.LANGUAGE.components.leftMenu.Bracelet,
-          routerName: 'accessories-list'
+          routerName: 'accessories-list',
+           query:  {
+            actIndex: 4
+          },
         },
         {
           name: this.LANGUAGE.components.leftMenu.bracelet,
-          routerName: 'accessories-list'
+          routerName: 'accessories-list',
+           query:  {
+            actIndex: 5
+          },
         }
       ],
       activity:[
