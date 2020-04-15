@@ -29,7 +29,7 @@
           @click="showChooseEject(each)"
         >
           <div>{{ each.name }}</div>
-          <div class="ow-h1">
+          <div class="ow-h1" :ref="'ow' + key">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}
           </div>
           <!--          <div-->
@@ -122,8 +122,13 @@ export default {
   },
   watch: {
     $route(val, oldVal) {
+      
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
-      this.changeGender(val.query.type, style)
+      let info = {}
+      info.options = this.CONDITION_INFO.style.womanRings
+      info.checked = style.toString()
+      let t =  this.conditionText(info)
+      this.$refs.ow1.innerHTML = t
     }
     
   },
@@ -133,17 +138,16 @@ export default {
     _this.$nextTick(() => {
       this.conditions[0].options = this.CONDITION_INFO.style.womanRings
       this.categoryId = 2
-      let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
-      let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
-      this.changeGender(this.$route.query.type,style,material)
+      let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:''
+      this.changeGender(type)
       // this.madeUpEv()
     })
   },
   methods: {
-    changeGender(type = 'lady',style='',material='') {
-      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
-      this.conditions[0].checked = style
-      this.conditions[1].checked = material
+    changeGender(type = 'lady') {
+      if (['all','lady', 'gentlemen'].indexOf(type) > -1) {
+        this.gender = type
+      }
       this.madeUpEv()
     },
     // 组装Ev
