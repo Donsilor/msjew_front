@@ -476,7 +476,8 @@ export default {
       color: rgba(51, 51, 51, 1);
     }
     .options {
-      flex-grow: 1;
+      width: 43%;
+      // flex-grow: 1;
       flex-shrink: 1;
     }
   }

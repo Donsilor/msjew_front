@@ -62,7 +62,7 @@ export default {
       showa:true,
       showb:false,
       url:'',
-      language:''
+      language:'简'
     }
   },
   computed: {
@@ -161,8 +161,9 @@ export default {
 /*站点信息*/
 .site-info {
   border-radius: 20px;
-  padding: 3px 6px 3px 3px;
+  padding: 1px 6px 1px 1px;
   background-color: #a2c2d2;
+  width: 47px;
   /* flex-grow: 0;
   flex-shrink: 0; */
   display: flex;
@@ -180,8 +181,11 @@ export default {
   height: 16px;
 }
 .site-info .language {
+  display: inline-block;
+  width: 18px;
   flex-grow: 0;
   flex-shrink: 0;
+  margin-top: 3px;
   /* height: 22px;
   line-height: 20px; */
   font-size: 13px;

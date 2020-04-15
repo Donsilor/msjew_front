@@ -20,7 +20,7 @@
         </div>
           <div class="icon" @click="toPersonal">
             <i class="iconfont icongerenzhongxin" v-show="showa"></i>
-            <span v-show="showa" class="pl-login">请登入</span>
+            <span v-show="showa" class="pl-login">{{lang.login}}</span>
             <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
           </div>
         
@@ -35,80 +35,52 @@
         <div class="groups">
           <section  class="group">
             <div class="menus-one"  @click="one(1)">
-              <span >{{lang.Rings}}</span>
+              <span :class="{changeColor:changeColor1}">{{lang.Rings}}</span>
               <!-- <i class="iconfont iconxiala status-icon"></i> -->
               <div class="menus-two" :class="{ actives: actives1 == true }">
                 <div class="goback" @click.stop="goback(1)">
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.Rings}}</span>
                 </div>
-                <div v-for="(ring, r) in rings" :key="r">
-                  <div class="two" @click="toPage(ring.routerName, ring.query)">
+                <div v-for="(ring, r) in rings" :key="r" @click="toPage(ring.routerName, ring.query,r)" :class='{changeColor:r==isactive}'>
+                  <div class="two" >
                     <span>{{ring.name}}</span>
                   </div>
                 </div>
-                <!-- <div class="two">
-                  <span>{{lang.engagementRing}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.marriageRing}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.Ring}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.FashionRing}}</span>
-                </div>
-                 <div class="two">
-                  <span>{{lang.CoupleRing}}</span>
-                </div> -->
               </div>
             </div>
             <div class="menus-one" @click="one(2)">
-              <span>{{lang.necklaces}}</span>
+              <span :class="{changeColor:changeColor2}">{{lang.necklaces}}</span>
               <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives2 }">
                 <div class="goback" @click.stop="goback(2)">
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.necklaces}}</span>
                 </div>
-                <div v-for="(necklace, n) in necklaces" :key="n">
-                  <div class="two" @click="toPage(necklace.routerName, necklace.query)">
+                <div v-for="(necklace, n) in necklaces" :key="n" @click="toPage(necklace.routerName, necklace.query,n)" :class='{changeColor:n==isactive}'>
+                  <div class="two" >
                     <span>{{necklace.name}}</span>
                   </div>
                 </div>
-                <!-- <div class="two" @click.stop="go(1)">
-                  <span>{{lang.necklace}}</span>
-                </div>
-                <div class="two" @click.stop="go(2)">
-                  <span>{{lang.Pendant}}</span>
-                </div> -->
-
               </div>
             </div>
             <div class="menus-one" @click="one(3)">
-              <span>{{lang.Bracelets}}</span>
+              <span :class="{changeColor:changeColor3}">{{lang.Bracelets}}</span>
               <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives3 }">
                 <div class="goback" @click.stop="goback(3)">
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.Bracelets}}</span>
                 </div>
-                <div v-for="(bracelet, b) in Bracelets" :key="b">
-                  <div class="two" @click="toPage(bracelet.routerName, bracelet.query)">
+                <div v-for="(bracelet, b) in Bracelets" :key="b" @click="toPage(bracelet.routerName, bracelet.query,b)" :class='{changeColor:b==isactive}'>
+                  <div class="two" >
                     <span>{{bracelet.name}}</span>
                   </div>
                 </div>
-                <!-- <div class="two">
-                  <span>{{lang.Bracelet}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.bracelet}}</span>
-                </div> -->
               </div>
             </div>
             <div class="menus-one" @click="one(4)">
-              <span>{{lang.DesignDiamondRing}}</span>
+              <span :class="{changeColor:changeColor4}">{{lang.DesignDiamondRing}}</span>
               <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives4 }">
                 <div class="goback" @click.stop="goback(4)">
@@ -116,55 +88,51 @@
                   <span>{{lang.DesignDiamondRing}}</span>
                 </div>
                 <div class="two" @click.stop="goToMade(1)">
-                  <span>{{lang.SelectDiamondFirst}}</span>
+                  <span :class="{changeColor:change1}">{{lang.SelectDiamondFirst}}</span>
                 </div>
                 <div class="two" @click.stop="goToMade(2)">
-                  <span>{{lang.DiamondRing}}</span>
+                  <span :class="{changeColor:change2}">{{lang.DiamondRing}}</span>
                 </div>
               </div>
             </div>
             <div class="menus-one" @click="one(5)">
-              <span>{{lang.activity}}</span>
+              <span :class="{changeColor:changeColor5}">{{lang.activity}}</span>
               <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives5 }">
                 <div class="goback" @click.stop="goback(5)">
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.activity}}</span>
                 </div>
-                <div class="two">
-                  <span>{{lang.BlackFriday}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.coupon}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.SpecialDiscount}}</span>
+                <div v-for="(activity, a) in activity" :key="a" @click="toPage(activity.routerName, activity.query,a)" :class='{changeColor:a==isactive}'>
+                  <div class="two" >
+                    <span>{{activity.name}}</span>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="menus-one" @click="one(6)">
-              <span>{{lang.theme}}</span>
+              <span :class="{changeColor:changeColor6}">{{lang.theme}}</span>
               <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives6 }">
                 <div class="goback" @click.stop="goback(6)">
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.theme}}</span>
                 </div>
-               <div v-for="(theme, b) in themes" :key="b">
-                  <div class="two" @click="toPage(theme.routerName, theme.query)">
+                <div v-for="(theme, t) in themes" :key="t" @click="toPage(theme.routerName, theme.query,t)" :class='{changeColor:t==isactive}'>
+                  <div class="two" >
                     <span>{{theme.name}}</span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="menus-one" @click="goKnowledge">
+            <div class="menus-one" @click="goKnowledge" >
               <!-- <nuxt-link :to="{ name: 'help-pages-knowledge' }"></nuxt-link> -->
-              <span >{{lang.knowledge}}</span>
+              <span :class="{changeColor:changeColor7}">{{lang.knowledge}}</span>
             </div>
           </section>
         </div>
       </div>
-      <div class="bottom">
+      <div class="bottom" v-show="bottom">
         <div class="call-us">
           <div class="item">
               <div class="item-icon">
@@ -215,6 +183,16 @@ export default {
   mixins: [Mixin, List, GoodListProps],
   data() {
     return {
+      isactive:'a',
+      changeColor1:false,
+      changeColor2:false,
+      changeColor3:false,
+      changeColor4:false,
+      changeColor5:false,
+      changeColor6:false,
+      changeColor7:false,
+      change1:false,
+      change2:false,
       icon:false,
       lang: this.LANGUAGE.components.leftMenu,
       active: false,
@@ -226,6 +204,7 @@ export default {
       actives6: false,
       showa:true,
       showb:false,
+      bottom:true,
       rings:[
         {
           stress: true,
@@ -359,97 +338,12 @@ export default {
           },
         }
       ],
-      groups: [
-        [
-          {
-            stress: true,
-            name: this.LANGUAGE.components.leftMenu.engagementRing,
-            routerName: 'engagement'
-          },
-          {
-            stress: false,
-            name: this.LANGUAGE.components.leftMenu.designYourRing,
-            routerName: 'custom-made-ring-made-ring-list',
-            query: {
-              melo: Helpers.base64Encode(
-                JSON.stringify({
-                  steps: [
-                    {
-                      goodsId: null,
-                      goodsDetailsId: null,
-                      ct: 2,
-                      cartId: ``,
-                      page: `list`
-                    },
-                    {
-                      goodsId: null,
-                      goodsDetailsId: null,
-                      ct: null,
-                      cartId: ``,
-                      page: `list`
-                    }
-                  ]
-                })
-              ),
-              step: 1
-            }
-          }
-          // {
-          //   stress: false,
-          //   name: this.LANGUAGE.components.leftMenu.allCategory,
-          //   routerName: 'engagement-list'
-          // }
-        ],
-        [
-          {
-            stress: true,
-            name: this.LANGUAGE.components.leftMenu.marriageRing,
-            routerName: 'marriage-ring'
-          },
-          {
-            stress: false,
-            name: this.LANGUAGE.components.leftMenu.pairRing,
-            routerName: 'marriage-ring-pair-ring'
-          },
-          {
-            stress: false,
-            name: this.LANGUAGE.components.leftMenu.ringForGentlemen,
-            routerName: 'marriage-ring-single-ring',
-            query: {
-              type: 'gentlemen'
-            }
-          },
-          {
-            stress: false,
-            name: this.LANGUAGE.components.leftMenu.ringForLady,
-            routerName: 'marriage-ring-single-ring',
-            query: {
-              type: 'lady'
-            }
-          }
-        ],
-        [
-          {
-            stress: true,
-            name: this.LANGUAGE.components.leftMenu.onlyDiamond,
-            routerName: 'diamond-list'
-          }
-        ],
-        [
-          {
-            stress: true,
-            name: this.LANGUAGE.components.leftMenu.accessories,
-            routerName: 'accessories-list'
-          }
-        ],
-        [
-          {
-            stress: true,
-            name: this.LANGUAGE.components.leftMenu.knowledge,
-            routerName: 'help-pages-knowledge'
-          }
-        ]
-      ],
+      zhishi:[
+        {
+          name: this.LANGUAGE.components.leftMenu.knowledge,
+          routerName: 'help-pages-knowledge',
+        }
+      ]
     }
   },
   computed: {
@@ -479,6 +373,7 @@ export default {
     }
   },
   mounted(){
+    // console.log("dddd",window.location.href)
     const _this = this
     if(_this.$store.getters.hadLogin){
       this.showa=false
@@ -513,26 +408,70 @@ export default {
       })
     },
     one(id){
+      this.bottom = false
       if(id == 1){
         this.actives1 = true
+        this.changeColor2 = false
+        this.changeColor3 = false
+        this.changeColor4 = false
+        this.changeColor5 = false
+        this.changeColor6 = false
+        this.changeColor7 = false
+        this.changeColor1 = true
       }
       if(id == 2){
         this.actives2 = true
+        this.changeColor1 = false
+        this.changeColor3 = false
+        this.changeColor4 = false
+        this.changeColor5 = false
+        this.changeColor6 = false
+        this.changeColor7 = false
+        this.changeColor2 = true
       }
       if(id == 3){
         this.actives3 = true
+        this.changeColor1 = false
+        this.changeColor2 = false
+        this.changeColor4 = false
+        this.changeColor5 = false
+        this.changeColor6 = false
+        this.changeColor7 = false
+        this.changeColor3 = true
       }
       if(id == 4){
         this.actives4 = true
+        this.changeColor1 = false
+        this.changeColor3 = false
+        this.changeColor2 = false
+        this.changeColor5 = false
+        this.changeColor6 = false
+        this.changeColor7 = false
+        this.changeColor4 = true
       }
       if(id == 5){
         this.actives5 = true
+        this.changeColor1 = false
+        this.changeColor3 = false
+        this.changeColor4 = false
+        this.changeColor2 = false
+        this.changeColor6 = false
+        this.changeColor7 = false
+        this.changeColor5 = true
       }
       if(id == 6){
         this.actives6 = true
+        this.changeColor1 = false
+        this.changeColor3 = false
+        this.changeColor4 = false
+        this.changeColor5 = false
+        this.changeColor2 = false
+        this.changeColor7 = false
+        this.changeColor6 = true
       }
     },
     goback(id){
+      this.bottom = true
       this.actives1 = false
       this.actives2 = false
       this.actives3 = false
@@ -560,8 +499,10 @@ export default {
           }
         ]
       }
-      console.log("obg",obj)
+      // console.log("obg",obj)
       if (i === 1) {
+        this.change1 = true
+        this.change2 = false
         this.$router.push({
           name: `custom-made-diamond-made-diamond-list`,
           query: {
@@ -570,6 +511,8 @@ export default {
           }
         })
       } else if (i === 2) {
+        this.change1 = false
+        this.change2 = true
         this.$router.push({
           name: `custom-made-ring-made-ring-list`,
           query: {
@@ -581,6 +524,13 @@ export default {
     },
     goKnowledge(){
       this.hide()
+      this.changeColor1 = false
+      this.changeColor3 = false
+      this.changeColor4 = false
+      this.changeColor5 = false
+      this.changeColor6 = false
+      this.changeColor2 = false
+      this.changeColor7 = true
       this.$router.push({
         name: 'help-pages-knowledge',
       })
@@ -592,7 +542,8 @@ export default {
     hide() {
       this.active = false
     },
-    toPage(routerName = '', query = {}) {
+    toPage(routerName = '', query = {},index) {
+      this.isactive = index;
       if (!routerName) {
         return
       }
@@ -624,6 +575,9 @@ export default {
 }
 </style>
 <style lang="less" scoped>
+.changeColor{
+  color: #6f9eb1;
+}
 .content{
   .groups{
     position: relative;
@@ -641,17 +595,17 @@ export default {
       font-size: 14px;
       display: flex;
       justify-content: space-between;
-      height: 60px;
+      padding: 15px 0;
+      // height: 50px;
       padding-left:20px;
       border-bottom:1px solid #fff;
       // background-color: #e4ecf0;
       z-index: 99;
       color: rgb(15, 14, 14);
-      span{
-        line-height: 60px;
+      >span:hover{
+        color: #6f9eb1;
       }
       .menus-two{
-        padding-top: 10px;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -663,6 +617,7 @@ export default {
         .goback{
           margin: 0 10px;
           text-align: left;
+          padding: 15px 0px;
           // background-color: #e4ecf0;
           border-bottom:2px solid #e4ecf0;
           .status-icon{
@@ -676,10 +631,14 @@ export default {
           }
         }
         .two{
+          padding: 15px 20px;
           display: flex;
           justify-content: space-between;
-          height: 60px;
-          padding: 0 20px;
+          >span:hover{
+            color: #6f9eb1;
+          }
+          // height: 60px;
+          // padding: 0 20px;
         }
       }
       .actives{
@@ -716,6 +675,7 @@ export default {
   left: 0;
   visibility: hidden;
   z-index: 100;
+  // overflow-y: scroll;
 }
 .left-menu.active {
   visibility: visible;
@@ -731,6 +691,8 @@ export default {
   opacity: 1;
   pointer-events: all;
   z-index: 0;
+  overflow-y: scroll;
+  height: 100%;
 }
 .bg {
   position: relative;

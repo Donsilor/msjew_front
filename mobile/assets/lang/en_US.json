@@ -733,7 +733,7 @@
     "area-code": "China"
   },
   "site-switch": {
-    "chooseLanguageCoin": "choose language & currency",
+    "chooseLanguageCoin": "choose currency",
     "clear": "SUBMIT",
     "ourShippingPolicy": "Delivery Policy",
     "ourPayType": "Payment Methods"
@@ -852,7 +852,8 @@
       "MothersDay": "Mothers Day",
       "birthdayPresent": "Birthday Present",
       "ChristmasGift": "Christmas gift",
-      "HalloweenGift": "Halloween Gift"
+      "HalloweenGift": "Halloween Gift",
+      "login":"Please login"
     },
     "noMoreData": {
       "noMore": "No more"
@@ -943,7 +944,7 @@
       "laserSquareDesc": "The Asscher cut diamond is similar to the emerald cut, but it is square. The asscher diamond uses the step cut to highlight its diamond clarity.",
       "octagonalLaser": "Radiant",
       "octagonalLaserDesc": "The radiant cut is square or rectangular, and its four corners are inclined. The radiant cut can also make the diamond look larger than it actually is.",
-      "chooseLanguageCoin": "Choose Language & Currency",
+      "chooseLanguageCoin": "Choose Language",
       "clear": "SUBMIT",
       "sizeTop": "All rings on BDD Mall are in US units, Contact customer service for the units of measurement, such as SI or Chinese units of measurement if you are from other regions.",
       "sizeBot": "How to measure my ring size?",
