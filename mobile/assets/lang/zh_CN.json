@@ -731,7 +731,7 @@
       "area-code": "中国"
     },
     "site-switch": {
-      "chooseLanguageCoin": "请选择您语言与结算货币",
+      "chooseLanguageCoin": "请选择您的结算货币",
       "clear": "确定",
       "ourShippingPolicy": "我们的送货政策",
       "ourPayType": "我们的付款方式"
@@ -849,7 +849,8 @@
         "MothersDay":"母亲节",
         "birthdayPresent":"生日礼物",
         "ChristmasGift":"圣诞礼物",
-        "HalloweenGift":"万圣节礼物"
+        "HalloweenGift":"万圣节礼物",
+        "login":"请登入"
       },
       "noMoreData": {
         "noMore": "暂无更多"
@@ -942,7 +943,7 @@
         "laserSquareDesc": "雷射方形钻石属于八角梯形切割，但形状是正方形。雷射方形切割钻石使用阶梯形切割，能强调宝石的净度。",
         "octagonalLaser": "八角雷射形",
         "octagonalLaserDesc": "八角雷射形切割钻石呈正方形或长方形，四角有斜边。八角雷射形钻石通常会看起来较大。",
-        "chooseLanguageCoin": "选择语言与货币",
+        "chooseLanguageCoin": "选择语言",
         "clear": "确定",
         "sizeTop": "BDD商城所有戒指均使用美版尺寸，如果您是其他区域的客户，请联络客服告知尺寸版本，可以是欧版，中国大陆版本。",
         "sizeBot": "如何测量我的戒指尺寸？",

@@ -9,26 +9,36 @@
           <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           <span>{{ lang.chooseLanguageCoin }}</span>
         </h1>
-        <div class="select-line-box">
-          <!-- <span>{{ languageText }}</span> -->
-          <input :value="language.content" type="text" />
+        <!-- <div class="select-line-box">
+          <input :value="languageText" type="text" />
           <select v-model="language" @change="chooseLanguage(language.code)">
             <option
               v-for="(p, index) in languageOptions"
               :key="index"
-              :value="p"
+              :value="p.content"
               >
               {{p.content}}
-              <!-- {{ psn ? p.en :psn ? p.cn :p.zh }} -->
               </option
             >
           </select>
           <i class="iconfont iconkuozhan"></i>
-        </div>
-        <div class="select-line-box" @click="chooseCoin">
-          <span>{{ coinText }}</span>
+        </div> -->
+        <div class="select-line-box">
+          <input :value="coin" type="text" />
+          <select name="" id="" v-model="coin">
+            <option v-for="(p, index) in coinOptions" :key="index" :value="p.code">
+              {{p.content}}
+            </option>
+          </select>
+         
           <i class="iconfont iconkuozhan"></i>
         </div>
+         <!-- <select name="" id="" v-model="aa">
+            <option value="">1</option>
+            <option value="">2</option>
+            <option value="">3</option>
+            <option value="">4</option>
+          </select> -->
         <div class="button-line-box">
           <button class="full-btn determine" @click="changePage">
             <span class="btn-message">{{ lang.clear }}</span>
@@ -89,12 +99,13 @@ export default {
       language: 0,
       coin: 0,
       languageOptions: this.$bddDefinition.languageOptions,
-      coinOptions: this.$bddDefinition.coinOptions
+      coinOptions: this.$bddDefinition.coinOptions,
+      aa:''
     }
   },
   computed: {
     languageText() {
-      console.log("aa",this.languageOptions[this.language].content)
+      // console.log("aa",this.languageOptions[this.language].content)
       return this.languageOptions[this.language].content
     },
     coinText() {
@@ -107,13 +118,15 @@ export default {
       return this.coinOptions[this.coin].code
     }
   },
+  created(){
+    // console.log("coin",this.coinOptions)
+    this.coin = this.coinOptions[0].content
+  },
   mounted() {
     // this.language = this.languageOptions[0].content
-    // console.log("this.language",this.language)
-    console.log("this.languageOptions",this.languageOptions[0].content)
+    // console.log(this.coinOptions[this.coin].content)
     const _this = this
     _this.$nextTick(() => {
-      
       // for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
       //   if (_this.languageOptions[n].code === _this.$store.state.language) {
       //     _this.language = n
@@ -123,7 +136,7 @@ export default {
 
       for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
         if (_this.coinOptions[n].code === _this.$store.state.coin) {
-          _this.coin = n
+          _this.coin = _this.coinOptions[n].code
           break
         }
       }
@@ -131,31 +144,36 @@ export default {
   },
   methods: {
     chooseLanguage(val) {
-      console.log("val",val)
-      this.$store.commit('setLanguage',val)
-      setTimeout(() => {
-        // location.href = '/'
-        // location.reload()
-        location.href = this.$route.query.redirectUri
-      }, 500)
+      
       // this.$refs['language-tap'].show()
     },
-    changeLanguage(data) {
-      this.language = data.index
-    },
+    // changeLanguage(data) {
+    //   this.language = data.index
+    // },
     chooseCoin() {
-      this.$refs.coinTap.show()
+      // this.$refs.coinTap.show()
     },
     changeCoin(data) {
       this.coin = data.index
     },
-    changePage() {
+    changePage(lang,coin) {
       // this.$toast('根据所选切换站点货币')
       /**
        * 设置语言和货币
        */
-      this.$store.commit('setCoin', this.coinCode)
-      this.$store.commit('setLanguage', this.languageCode)
+      // console.log("this.language",this.coin)
+      // if(this.language == '简体中文'){
+      //   lang = 'zh_CN'
+      // }
+      // if(this.language == '繁體中文'){
+      //   lang = 'zh_TW'
+      // }
+      // if(this.language == 'English'){
+      //   lang = 'en_US'
+      // }
+      // console.log("val",coin)
+      this.$store.commit('setCoin',this.coin)
+      // this.$store.commit('setLanguage', val)
       setTimeout(() => {
         // location.href = '/'
         // location.reload()

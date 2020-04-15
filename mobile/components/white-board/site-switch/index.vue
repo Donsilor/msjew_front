@@ -1,4 +1,5 @@
 <template>
+<!-- @onClose="changePage" -->
   <layout :show="active" @onClose="changePage">
     <template slot="content">
       <div class="content-box">
@@ -8,13 +9,19 @@
             <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           </div>
           <div class="line-text">
-            <span>{{ languageText }}</span>
+            <!-- <span>{{ languageText }}</span> -->
+            <input :value="language" type="text" />
+            <select name="" id="" v-model="language">
+              <option v-for="(p, index) in languageOptions" :key="index" :value="p.content">
+                {{p.content}}
+              </option>
+            </select>
           </div>
           <div class="select-icon">
             <i class="iconfont iconkuozhan"></i>
           </div>
         </div>
-        <div class="select-line" @click="chooseCoin">
+        <!-- <div class="select-line" @click="chooseCoin">
           <div class="line-icon">
             <i class="iconfont iconhuobi"></i>
           </div>
@@ -24,13 +31,13 @@
           <div class="select-icon">
             <i class="iconfont iconkuozhan"></i>
           </div>
-        </div>
+        </div> -->
         <button class="clear-btn" @click="changePage">
           {{ lang.clear }}
         </button>
       </div>
     </template>
-    <template slot="other">
+    <!-- <template slot="other">
       <swiper-tap
         ref="language-tap"
         :list="languageOptions"
@@ -43,7 +50,7 @@
         :choose-line="coin"
         @clear="changeCoin"
       ></swiper-tap>
-    </template>
+    </template> -->
   </layout>
 </template>
 
@@ -57,7 +64,8 @@ export default {
       language: 0,
       coin: 0,
       languageOptions: this.$bddDefinition.languageOptions,
-      coinOptions: this.$bddDefinition.coinOptions
+      coinOptions: this.$bddDefinition.coinOptions,
+      langs:''
     }
   },
   computed: {
@@ -74,10 +82,20 @@ export default {
       return this.coinOptions[this.coin].code
     }
   },
-  mounted() {},
+  mounted() {
+    const _this = this
+    _this.$nextTick(() => {
+      for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
+        if (_this.languageOptions[n].code === _this.$store.state.language) {
+          _this.language = _this.languageOptions[n].content
+          break
+        }
+      }
+    })
+  },
   methods: {
     chooseLanguage() {
-      this.$refs['language-tap'].show()
+      // this.$refs['language-tap'].show()
     },
     changeLanguage(data) {
       this.language = data.index
@@ -93,14 +111,24 @@ export default {
       /**
        * 设置语言和货币
        */
-      this.$store.commit('setCoin', this.coinCode)
-      this.$store.commit('setLanguage', this.languageCode)
-      this.$emit('finish', {
-        coinCode: this.coinCode,
-        coinText: this.coinText,
-        languageCode: this.languageCode,
-        languageText: this.languageText
-      })
+      if(this.language == '中文简体'){
+        this.langs = 'zh_CN'
+      }
+      if(this.language == '繁體中文'){
+        this.langs = 'zh_TW'
+      }
+      if(this.language == 'English'){
+        this.langs = 'en_US'
+      }
+      // console.log("sssss",this.langs)
+      // this.$store.commit('setCoin', this.coinCode)
+      this.$store.commit('setLanguage',this.langs)
+      // this.$emit('finish', {
+      //   coinCode: this.coinCode,
+      //   coinText: this.coinText,
+      //   languageCode: this.languageCode,
+      //   languageText: this.languageText
+      // })
       this.hide()
       setTimeout(() => {
         location.reload()
@@ -123,6 +151,7 @@ export default {
   color: rgba(51, 51, 51, 1);
 }
 .select-line {
+  position: relative;
   margin-bottom: 19px;
   width: 100%;
   padding: 10px;
@@ -165,6 +194,38 @@ export default {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
+    
+    input{
+      width: 100%;
+      height: 100%;
+      line-height: 38px;
+      text-align: left;
+      background: #f8f8f8;
+      -webkit-appearance: none;
+      border: 0;
+      padding: 0 0 0 13px;
+      margin: 0;
+      outline: 0;
+      color: #999999;
+    }
+    select{
+      color: #999999;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      font-size: inherit;
+      -webkit-appearance: none;
+      border: 0;
+      outline: 0;
+      padding: 0;
+      margin: 0;
+      resize: none;
+      border-radius: 0;
+      background: none;
+    }
   }
   .select-icon {
     flex-shrink: 0;
