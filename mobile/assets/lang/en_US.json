@@ -69,7 +69,12 @@
       "SpecialRing": "Anniversary",
       "FullyDiamondInlaidRing": "Eternity",
       "WeddingAnniversaryRing": "Anniversary",
-      "CasualRing": "Stackable"
+      "CasualRing": "Stackable",
+      "ValentinesDay":"ValentinesDay",
+      "MothersDay":"MothersDay",
+      "birthdayPresent":"birthdayPresent",
+      "ChristmasGift":"ChristmasGift",
+      "HalloweenGift":"HalloweenGift"
     },
     "quality": {
       "platinum14K": "14K White",

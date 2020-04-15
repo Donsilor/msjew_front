@@ -28,10 +28,10 @@ export default {
         },
         {
           type: 'eject-choose-pro',
-          key: 'quality',
-          name: this.LANGUAGE.listCommons.fineness,
+          key: 'theme',
+          name: this.LANGUAGE.listCommons.theme,
           checked: ``,
-          options: this.sendCod
+          options: this.CONDITION_INFO.style.theme
         },
         {
           type: 'eject-choose',
@@ -130,6 +130,13 @@ export default {
     clearQuality(data) {
       const conditions = JSON.parse(JSON.stringify(this.conditions))
       conditions[0].checked = this.getCheckedIds(data)
+      this.conditions = conditions
+      this.madeUpEv()
+    },
+
+    clearTheme(data) {
+      const conditions = JSON.parse(JSON.stringify(this.conditions))
+      conditions[1].checked = this.getCheckedIds(data)
       this.conditions = conditions
       this.madeUpEv()
     },

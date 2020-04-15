@@ -72,6 +72,14 @@
       :options="conditions[0].options"
       @clear="clearQuality"
     ></choose-eject-pro>
+    <choose-eject-pro
+      ref="theme-eject-choose-pro"
+      :title="lang.theme"
+      :type="'theme'"
+      :required="true"
+      :options="conditions[1].options"
+      @clear="clearTheme"
+    ></choose-eject-pro>
     <!--价格选择底部弹出-->
     <progress-bar
       ref="price-bar"

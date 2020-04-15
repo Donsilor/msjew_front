@@ -69,7 +69,12 @@
       "SpecialRing": "週年紀念",
       "FullyDiamondInlaidRing": "永恆",
       "WeddingAnniversaryRing": "週年紀念",
-      "CasualRing": "可搭配"
+      "CasualRing": "可搭配",
+      "ValentinesDay":"情人節",
+      "MothersDay":"母親節",
+      "birthdayPresent":"生日禮物",
+      "ChristmasGift":"聖誕禮物",
+      "HalloweenGift":"萬聖節禮物"
     },
     "quality": {
       "platinum14K": "14K白金",

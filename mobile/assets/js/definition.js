@@ -386,7 +386,35 @@ export default language => {
           image: `/ring-type/woman/5.png`,
           name: lang.style.CasualRing
         }
-      ]
+      ],
+
+      theme: [
+        {
+          id: 197,
+          image: `/ring-type/woman/1.png`,
+          name: lang.style.ValentinesDay
+        },
+        {
+          id: 198,
+          image: `/ring-type/woman/2.png`,
+          name: lang.style.MothersDay
+        },
+        {
+          id: 199,
+          image: `/ring-type/woman/3.png`,
+          name: lang.style.birthdayPresent
+        },
+        {
+          id: 200,
+          image: `/ring-type/woman/4.png`,
+          name: lang.style.ChristmasGift
+        },
+        {
+          id: 201,
+          image: `/ring-type/woman/5.png`,
+          name: lang.style.HalloweenGift
+        }
+      ],
     },
 
     quality: {
@@ -658,6 +686,8 @@ export default language => {
         },
       ]
     },
+
+    
 
     sortBy: {
       default: [

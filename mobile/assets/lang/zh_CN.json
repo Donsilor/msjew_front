@@ -70,7 +70,12 @@
         "FullyDiamondInlaidRing": "结婚戒指",
         "WeddingAnniversaryRing": "求婚戒指",
         "CasualRing": "套戒",
-        "CoupleRing":"情侣对戒"
+        "CoupleRing":"情侣对戒",
+        "ValentinesDay":"情人节",
+        "MothersDay":"母亲节",
+        "birthdayPresent":"生日礼物",
+        "ChristmasGift":"圣诞礼物",
+        "HalloweenGift":"万圣节礼物"
 
       },
       "quality": {
