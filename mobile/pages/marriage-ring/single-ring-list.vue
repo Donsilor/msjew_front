@@ -141,7 +141,7 @@ export default {
   },
   methods: {
     changeGender(type = 'lady',style='',material='') {
-      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
+      this.conditions[0].options = this.CONDITION_INFO.style.womanRings 
       this.conditions[0].checked = style
       this.conditions[1].checked = material
       this.madeUpEv()

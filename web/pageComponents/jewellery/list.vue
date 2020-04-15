@@ -4,7 +4,7 @@
       <section class="search-condition">
         <!--      飾品-->
         <div class="condition-item condition-style condition-jewellery-style">
-          <h2 class="condition-name">
+          <h2 class="condition-name" style="margin-right: 70px;">
             {{ $t(`${lang}.jewellery`) }}
           </h2>
           <ul class="options">
@@ -42,7 +42,7 @@
         </div>
         <!--      成色-->
         <div class="condition-item condition-material">
-          <h2 class="condition-name">
+          <h2 class="condition-name" style="margin-right: 70px;">
             {{ $t(`${lang}.color`) }}
           </h2>
           <ul class="options">
@@ -550,7 +550,7 @@ export default {
     width: 100%;
 
     .options {
-      width: 60%;
+      width: 100%;
       .option-item {
         width: 108px;
         border: 1px solid #ccc;
