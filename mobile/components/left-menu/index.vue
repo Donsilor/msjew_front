@@ -18,11 +18,11 @@
           </div>
           <span class="gap-line"></span>
         </div>
-          <div class="icon" @click="toPersonal">
-            <i class="iconfont icongerenzhongxin" v-show="showa"></i>
-            <span v-show="showa" class="pl-login">{{lang.login}}</span>
-            <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
-          </div>
+        <div class="icon" @click="toPersonal">
+          <i class="iconfont icongerenzhongxin" v-show="showa"></i>
+          <span v-show="showa" class="pl-login">{{lang.login}}</span>
+          <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
+        </div>
         
       </div>
       <div class="content">
@@ -740,6 +740,9 @@ export default {
   // color: #A2C2D2;
   text-align: right;
   margin-right: 30px;
+  .iconfont {
+    font-size: 20px;
+  }
 }
 
 /*站点信息*/
