@@ -3,39 +3,62 @@
     <div class="top-part">
       <div class="title">
         <button
-          :class="{ active: gender === 'all' }"
-          @click="changeGender('all')"
+          :class="{ active: gender === -1 }"
+          @click="changeGender(-1)"
         >
           {{lang.own}}
         </button>
         <button
-          :class="{ active: gender === 'lady' }"
-          @click="changeGender('lady')"
+          :class="{ active: gender === 42 }"
+          @click="changeGender(42)"
         >
           {{ lang.lady }}
         </button>
         <button
-          :class="{ active: gender === 'gentlemen' }"
-          @click="changeGender('gentlemen')"
+          :class="{ active: gender === 41 }"
+          @click="changeGender(41)"
         >
           {{ lang.gentlemen }}
         </button>
       </div>
       <div class="choose-box">
-        <div
+        <!-- <div
           v-for="(each, n) in conditions"
           :key="n"
           :class="['choose-btn', { active: each.checked.length > 0 }]"
           @click="showChooseEject(each)"
         >
           <div>{{ each.name }}</div>
-          <div class="ow-h1" :ref="'ow' + key">
+          <div class="ow-h1">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}
           </div>
-          <!--          <div-->
-          <!--            v-show="each.checked.length > 0"-->
-          <!--            class="triangle-down triangle"-->
-          <!--          />-->
+        </div> -->
+        <div
+          :class="['choose-btn', { active: conditions[0].checked.length > 0 }]"
+          @click="showChooseEject(conditions[0])"
+        >
+          <div>{{ conditions[0].name }}</div>
+          <div class="ow-h1">
+            {{ conditions[0].checked.length > 0 ? conditionText(conditions[0]) : lang.all }}
+          </div>
+        </div>
+        <div
+          :class="['choose-btn', { active: conditions[1].checked.length > 0 }]"
+          @click="showChooseEject(conditions[1])"
+        >
+          <div>{{ conditions[1].name }}</div>
+          <div class="ow-h1">
+            {{ conditions[1].checked.length > 0 ? conditionText(conditions[1]) : lang.all }}
+          </div>
+        </div>
+        <div
+          :class="['choose-btn', { active: conditions[2].checked.length > 0 }]"
+          @click="showChooseEject(conditions[2])"
+        >
+          <div>{{ conditions[2].name }}</div>
+          <div class="ow-h1">
+            {{ this.style_text == ''? (conditions[2].checked.length > 0 ? conditionText(conditions[2]) : lang.all) : this.style_text}}
+          </div>
         </div>
       </div>
     </div>
@@ -117,18 +140,20 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.listCommons,
-      gender: 'all'
+      gender: 'all',
+      style_text : '',
     }
   },
   watch: {
     $route(val, oldVal) {
-      
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
-      let info = {}
-      info.options = this.CONDITION_INFO.style.womanRings
-      info.checked = style.toString()
-      let t =  this.conditionText(info)
-      this.$refs.ow1.innerHTML = t
+      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
+      this.conditions[0].checked = style.toString()
+      this.madeUpEv()
+      this.style_text = this.conditionText(this.conditions[0])
+
+      this.changeGender()
+
     }
     
   },
@@ -138,14 +163,15 @@ export default {
     _this.$nextTick(() => {
       this.conditions[0].options = this.CONDITION_INFO.style.womanRings
       this.categoryId = 2
-      let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:''
+      let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:-1
       this.changeGender(type)
+
       // this.madeUpEv()
     })
   },
   methods: {
-    changeGender(type = 'lady') {
-      if (['all','lady', 'gentlemen'].indexOf(type) > -1) {
+    changeGender(type = -1) {
+      if ([-1,41, 42].indexOf(type) > -1) {
         this.gender = type
       }
       this.madeUpEv()
@@ -167,6 +193,7 @@ export default {
           .split(',')
           .join('-')}`
       }
+      this.ev += `^gender=${this.gender}`
       this.research()
       console.log(this.ev)
     }

@@ -41,7 +41,6 @@ export default {
       const result = []
       const checked = info.checked
       const options = info.options
-      console.log(2222,checked)
 
       for (let n = 0, length = options.length; n < length; n++) {
         if (checked.indexOf(options[n].id) > -1) {

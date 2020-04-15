@@ -7,7 +7,7 @@
           :key="n"
           :class="['choose-btn', { active: each.checked.length > 0 }]"
           @click="showChooseEject(each)"
-        >
+        > 
           <div>{{ each.name }}</div>
           <div class="ow-h1">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}

@@ -27,6 +27,13 @@ export default {
           options: this.sendCod
         },
         {
+          type: 'eject-choose-pro',
+          key: 'quality',
+          name: this.LANGUAGE.listCommons.fineness,
+          checked: ``,
+          options: this.sendCod
+        },
+        {
           type: 'eject-choose',
           key: 'price-bar',
           name: this.LANGUAGE.listCommons.price,
@@ -62,8 +69,8 @@ export default {
       }
       this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
       this.conditions[0].checked = ``
-      this.conditions[1].checked = ``
-      this.conditions[1].options = []
+      this.conditions[2].checked = ``
+      this.conditions[2].options = []
       this.isResetProgress = true
       this.madeUpEv()
     }
@@ -140,7 +147,7 @@ export default {
       this.conditions.forEach(obj => {
         if (obj.key === val.name) {
           if (val.content.length !== 0) {
-            obj.checked = `${val.content[0].id},${val.content[1].id}`
+            obj.checked = `${val.content[0].id},${val.content[2].id}`
           } else {
             obj.checked = ``
           }
@@ -161,8 +168,8 @@ export default {
       if (this.conditions[0].checked !== ``) {
         this.ev += `material=${this.conditions[0].checked}`
       }
-      if (this.conditions[1].checked !== ``) {
-        this.ev += `^sale_price=${this.conditions[1].checked
+      if (this.conditions[2].checked !== ``) {
+        this.ev += `^sale_price=${this.conditions[2].checked
           .split(',')
           .join('-')}`
       }

@@ -79,7 +79,7 @@
       "roseGold14K": "14K Rose Gold",
       "roseGold18K": "Rose Gold",
       "platinum": "Platinum",
-      "fineSilver925": "925 Sterling Silver"
+      "fineSilver925": "Sterling Silver"
     },
     "sortBy": {
       "BestSeller": "Best Seller",
@@ -1021,6 +1021,7 @@
       "Bangle"
     ],
     "style": "Style",
+    "theme": "Theme",
     "fineness": "Color",
     "total": "Results",
     "goods": "",

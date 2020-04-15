@@ -81,7 +81,7 @@
         "roseGold14K": "14K玫瑰金",
         "roseGold18K": "18K玫瑰金",
         "platinum": "铂金",
-        "fineSilver925": "925纯银"
+        "fineSilver925": "纯银"
       },
       "sortBy": {
         "BestSeller": "最畅销",
@@ -1026,6 +1026,7 @@
       ],
       "style": "款式",
       "fineness": "成色",
+      "theme": "主题",
       "total": "共",
       "goods": "货品",
       "price": "价格",
