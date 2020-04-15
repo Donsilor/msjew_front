@@ -91,6 +91,7 @@
             <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && index <= cardType.length-1 && item.type != 0 && ifShowbtn" @click="removeBinding(index)">{{ lang.unbound }}</div>
           </div>
 
+          <div class="productLine"><span>123123</span></div>
         </div>
       </div>
 
@@ -155,6 +156,9 @@
             balance: '',
             type: 0,
             ifChoose: false,
+            usableRange: '',
+            ifAllowedToUse: false,
+            ifShowRemove: true
           },
           {
             account: '',
@@ -163,7 +167,10 @@
             // conversionNum: 'ab', // 测试密码
             balance: '',
             type: 0,
-            ifChoose: false
+            ifChoose: false,
+            usableRange: '',
+            ifAllowedToUse: false,
+            ifShowRemove: false
           }
         ],
         ifShowPop: false,
@@ -195,8 +202,12 @@
         var card = {
           account: '',
           conversionNum: '',
+          balance: '',
           type: 0,
-          ifChoose: false
+          ifChoose: false,
+          usableRange: '',
+          ifAllowedToUse: false,
+          ifShowRemove: false
         };
         this.cardList.push(card);
         this.ifChooseAll = false;
@@ -287,12 +298,6 @@
           // that.cardList[that.nowIndex].account = '';
           // that.cardList[that.nowIndex].conversionNum = '';
         }
-      },
-      // 消除此卡
-      eliminate(k){
-        // 提示是否清除？？？？
-        this.cardList.splice(k,1)
-        // this.cardList[k]
       },
       // 选择单个购物卡
       chooseList(k){

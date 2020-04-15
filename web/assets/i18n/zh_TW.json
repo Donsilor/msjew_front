@@ -2346,13 +2346,13 @@
     "clickVerify": "點擊驗證",
     "verifySucceed": "驗證成功",
     "verifyFailing": "驗證失敗",
-    "balance": "余額",
+    "balance": "余額：",
     "eliminateCard": "消除此卡",
     "unbound": "解除绑定",
     "confirmUnbinding": "是否確認解除綁定？",
-    "verifyValid": "購物卡驗證有效",
+    "verifyValid": "購物卡驗證有效！",
     "alreadyAdd": "已添加",
-    "verifyInvalid": "無效購物卡",
+    "verifyInvalid": "卡號活驗證碼輸入有誤！",
     "anewAdd": "重新添加",
     "msg1": "購物卡號或兌換碼不能為空！",
     "msg2": "此卡需要驗證成功才能使用",
@@ -2361,6 +2361,8 @@
     "msg5": "不能重復添加！",
     "msg6": "此卡余額為0，不可使用！",
     "msg7": "限購買",
-    "msg8": "使用"
+    "msg8": "使用",
+    "msg9": "請添加/勾選有效購物卡！",
+    "msg10": "解除綁定成功！"
   }
 }

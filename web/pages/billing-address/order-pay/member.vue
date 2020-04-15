@@ -153,6 +153,7 @@
                 v-model="addressData.lastname"
                 :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 1
                   wrongInput.lastname = false
@@ -179,6 +180,7 @@
                 v-model="addressData.firstname"
                 :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 2
                   wrongInput.firstname = false
@@ -196,7 +198,7 @@
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
+                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
                 <select v-model="phoneNum">
                   <option
                     v-for="(p, index) in phoneJson"
@@ -218,6 +220,7 @@
                   v-model="addressData.mobile"
                   :class="{ 'wrong-input': wrongInput.mobile }"
                   type="text"
+                  autocomplete="off"
                   @focus="
                     borderChange = 3
                     wrongInput.mobile = false
@@ -245,6 +248,7 @@
                 v-model="addressData.email"
 
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 4
 
@@ -290,7 +294,7 @@
           <div class="input-line">
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.country`) }}</div>
             <div class="input-box">
-              <input :value="country.areaName" type="address" />
+              <input :value="country.areaName" type="address" autocomplete="off" />
               <select v-model="country" @change="getListTwo()">
                 <option
                   v-for="(c, index) in countryList"
@@ -307,7 +311,7 @@
           <div class="input-line">
             <div class="label">{{ $t(`${lang}.province`) }}</div>
             <div class="input-box">
-              <input :value="province.areaName" type="address" />
+              <input :value="province.areaName" type="address" autocomplete="off" />
               <select v-model="province" @change="getListThree()">
                 <option
                   v-for="(p, index) in provinceList"
@@ -324,7 +328,7 @@
           <div class="input-line">
             <div class="label">{{ $t(`${lang}.city`) }}</div>
             <div class="input-box">
-              <input :value="city.areaName" type="address" />
+              <input :value="city.areaName" type="address" autocomplete="off" />
               <select v-model="city">
                 <option
                   v-for="(c, index) in cityList"
@@ -350,6 +354,7 @@
               <textarea
                 v-model="addressData.address_details"
                 :class="{ 'wrong-input': wrongInput.address_details }"
+                autocomplete="off"
                 @focus="
                   borderChange = 6
                   wrongInput.address_details = false
@@ -376,6 +381,7 @@
                 v-model="addressData.zip_code"
                 :class="{ 'wrong-input': wrongInput.zip_code }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 7
                   wrongInput.zip_code = false
@@ -539,6 +545,7 @@
               { 'wrong-input': wrongInput.remark },
               { 'border-wrong': wrongInput.remark }
             ]"
+            autocomplete="off"
             @focus="
               borderChange = 9
               wrongInput.remark = false
@@ -581,6 +588,7 @@
                         readonly
                         :class="{ 'wrong-input': wrongInput.lastname }"
                         type="text"
+                        autocomplete="off"
                       />
                     </div>
                     <div class="input-box" v-show="Active == true">
@@ -591,6 +599,7 @@
                         readonly
                         :class="{ 'wrong-input': wrongInput.lastname }"
                         type="text"
+                        autocomplete="off"
                       />
                     </div>
                   </div>
@@ -635,6 +644,7 @@
                         v-model="invoice.invoice_title"
                         :class="{ 'wrong-input': typeShow }"
                         type="text"
+                        autocomplete="off"
                         @focus="
                           borderChange = 2
                           typeShow = false
@@ -660,6 +670,7 @@
                         v-model="invoice.tax_number"
                         :class="{ 'wrong-input': taxShow }"
                         type="text"
+                        autocomplete="off"
                         @focus="
                           borderChange = 3
                          taxShow = false
@@ -686,6 +697,7 @@
                           v-model="invoice.email"
                           :class="{ 'wrong-input': mailShow }"
                           type="text"
+                          autocomplete="off"
                           @focus="
                             borderChange = 1
                             mailShow = false
@@ -864,6 +876,16 @@
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
               {{ formatMoney(tex.orderAmount || goodsPrice) }}
+            </div>
+          </div>
+
+          <div class="detail-line">
+            <div class="font-size-16 color-333">
+              {{ $t(`${lang2}.ultimatelyPay`) }}
+            </div>
+            <div class="hkd color-pink price-big">
+              {{ $store.state.coin }}
+              {{ ultimatelyPay }}
             </div>
           </div>
         </div>
@@ -1050,6 +1072,7 @@
                 v-model="addressData.firstname"
                 :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 2
                   wrongInput.firstname = false
@@ -1075,6 +1098,7 @@
                 v-model="addressData.lastname"
                 :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 1
                   wrongInput.lastname = false
@@ -1093,7 +1117,7 @@
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
+                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
                 <select v-model="phoneNum">
                   <option
                     v-for="(p, index) in phoneJson"
@@ -1115,6 +1139,7 @@
                   v-model="addressData.mobile"
                   :class="{ 'wrong-input': wrongInput.mobile }"
                   type="text"
+                  autocomplete="off"
                   @focus="
                     borderChange = 3
                     wrongInput.mobile = false
@@ -1142,6 +1167,7 @@
                 v-model="addressData.email"
                 :class="{ 'wrong-input': wrongInput.email }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 4
                   wrongInput.email = false
@@ -1168,6 +1194,7 @@
                 v-model="addressData.checkEmail"
                 :class="{ 'wrong-input': wrongInput.checkEmail }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 5
                   wrongInput.checkEmail = false
@@ -1187,7 +1214,7 @@
           <div class="input-line">
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.country`) }}</div>
             <div class="input-box">
-              <input :value="country.areaName" type="address" />
+              <input :value="country.areaName" type="address" autocomplete="off" />
               <select v-model="country" @change="getListTwo()">
                 <option
                   v-for="(c, index) in countryList"
@@ -1204,7 +1231,7 @@
           <div class="input-line">
             <div class="label">{{ $t(`${lang}.province`) }}</div>
             <div class="input-box">
-              <input :value="province.areaName" type="address" />
+              <input :value="province.areaName" type="address" autocomplete="off" />
               <select v-model="province" @change="getListThree()">
                 <option
                   v-for="(p, index) in provinceList"
@@ -1221,7 +1248,7 @@
           <div class="input-line">
             <div class="label">{{ $t(`${lang}.city`) }}</div>
             <div class="input-box">
-              <input :value="city.areaName" type="address" />
+              <input :value="city.areaName" type="address" autocomplete="off" />
               <select v-model="city">
                 <option
                   v-for="(c, index) in cityList"
@@ -1247,6 +1274,7 @@
               <textarea
                 v-model="addressData.address_details"
                 :class="{ 'wrong-input': wrongInput.address_details }"
+                autocomplete="off"
                 @focus="
                   borderChange = 6
                   wrongInput.address_details = false
@@ -1273,6 +1301,7 @@
                 v-model="addressData.zip_code"
                 :class="{ 'wrong-input': wrongInput.zip_code }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 7
                   wrongInput.zip_code = false
@@ -1436,6 +1465,7 @@
               { 'wrong-input': wrongInput.remark },
               { 'border-wrong': wrongInput.remark }
             ]"
+            autocomplete="off"
             @focus="
               borderChange = 9
               wrongInput.remark = false
@@ -1915,7 +1945,8 @@ export default {
       cardList: [],
       useAmount: [],
       cardType: 1,
-      goodsListLine: []
+      goodsListLine: [],
+      ultimatelyPay: 0
     }
   },
   computed: {
@@ -2708,6 +2739,7 @@ export default {
           // if(res.data.cards.length != 0){
             this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
           // }
+
         })
         .catch(err => {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
@@ -2881,6 +2913,8 @@ export default {
       this.ifShowAddCard = true;
       if(this.cardList.length != 0){
         this.cardType = 2;
+      }else{
+        this.cardType = 1;
       }
     },
     // 关闭弹窗
@@ -2890,6 +2924,8 @@ export default {
         this.cardList = k;
         this.getTex(k);
         this.cardType = 2;
+      }else{
+        this.cardType = 1;
       }
     }
 

@@ -2344,7 +2344,7 @@
     "clickVerify": "Verification",
     "verifySucceed": "Redeemed",
     "verifyFailing": "Failed",
-    "balance": "The balance of",
+    "balance": "Balance:",
     "eliminateCard": "Delete",
     "unbound": "Remove Card",
     "confirmUnbinding": "Confirm unbinding？",
@@ -2359,6 +2359,8 @@
     "msg5": "Cannot be added repeatedly！",
     "msg6": "This card has a balance of 0 and is not available！",
     "msg7": "Limit to buy",
-    "msg8": ""
+    "msg8": "",
+    "msg9": "Please add/tick a valid shopping card！",
+    "msg10": "Unbind successfully！"
   }
 }

@@ -6,7 +6,7 @@
       </div>
       <div class="card-box clf">
         <!-- 购物卡列表 -->
-        <div class="list fl" v-for="(item, index) in cardList" ref="list" @input="inputInfo(index)">
+        <div class="list" v-for="(item, index) in cardList" ref="list" @input="inputInfo(index)">
           <div class="card-info">
             <span class="choose" :class="item.ifChoose ? 'active' : ''" @click="chooseList(index)"></span>
             <div class="list-content">
@@ -14,14 +14,14 @@
                 <span class="icon fl"></span>
                 <span class="text fl">{{ $t(`${lang}.cardNumber`) }}</span>
                 <div class="ipt-box fl">
-                  <input type="text" class="ipt" v-model="cardList[index].account">
+                  <input type="text" class="ipt" autocomplete="off" v-model="cardList[index].account">
                 </div>
               </div>
               <div class="child clf">
                 <span class="icon fl"></span>
                 <span class="text fl">{{ $t(`${lang}.cardPassword`) }}</span>
                 <div class="ipt-box fl">
-                  <input type="text" class="ipt" v-model="cardList[index].conversionNum">
+                  <input type="text" class="ipt" autocomplete="off" v-model="cardList[index].conversionNum">
                 </div>
               </div>
             </div>
@@ -40,8 +40,7 @@
                   <span class="icon"></span>
                   <span>{{ $t(`${lang}.verifySucceed`) }}</span>
                 </div>
-                <div class="text">{{ $t(`${lang}.balance`) }}￥{{item.balance}}</div>
-                <div class="productLine">{{ $t(`${lang}.msg7`) }} <span>({{onlyUseLine}})</span> {{ $t(`${lang}.msg8`) }}</div>
+                <div class="text">{{ $t(`${lang}.balance`) }}{{item.balance}}</div>
               </div>
               <!-- 失败状态 -->
               <div v-else-if="item.type == 2" class="verify-failing">
@@ -52,7 +51,11 @@
                 <div class="text" @click="eliminate(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
               </div>
             </div>
-            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && index <= cardType.length-1 && ifShowbtn" @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
+            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && item.ifShowRemove" @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
+          </div>
+
+          <div class="btn-box" style="max-width: 376px;margin-top: 0;" v-if="item.type == 1">
+            <div class="productLine"><span>({{ $t(`${lang}.msg7`) }}{{item.usableRange}}{{ $t(`${lang}.msg8`) }})</span></div>
           </div>
         </div>
       </div>
@@ -118,7 +121,11 @@
             balance: '',
             type: 0,
             ifChoose: false,
-            ifAllowedToUse: false
+            usableRange: '',
+            ifAllowedToUse: false,
+            ifShowRemove: false,
+            startTime: 0,
+            endTime: 0,
           },
           {
             account: '',
@@ -128,31 +135,50 @@
             balance: '',
             type: 0,
             ifChoose: false,
-            ifAllowedToUse: false
+            usableRange: '',
+            ifAllowedToUse: false,
+            ifShowRemove: false,
+            startTime: 0,
+            endTime: 0,
           }
         ],
         ifShowPop: false,
-        verifyStatus: '1',
+        verifyStatus: 1,
         nowIndex: 0,
         submit: [],
         ifChooseAll: false,
         ifLoading: false,
         ifShowPop2: false,
         removeIndex: -1,
-        ifShowbtn: true,
-        onlyUseLine: '',
-        onlyUseLineNum: []
+        ifShowbtn: -1,
+        currency: '',
+        arr5: []
       }
     },
     props: ['cardType','goodsLine'],
     mounted(){
       if(this.cardType.length != 0){
+        var that = this, arr4 = [];
         for(var i=0, len=this.cardType.length; i<len; i++){
           this.cardList[i].account = this.cardType[i].sn;
           this.cardList[i].conversionNum = this.cardType[i].pw;
-          this.cardList[i].balance = this.cardType[i].useAmount;
+          this.cardList[i].balance = this.cardType[i].balance;
           this.cardList[i].type = 1;
           this.cardList[i].ifChoose = true;
+          this.cardList[i].ifShowRemove = true;
+
+          arr4[i] = this.cardType[i].goodsTypes;
+        }
+
+        for(var i=0, len=arr4.length; i<len; i++){
+          this.arr5[i] = '';
+          for(var j in arr4[i]){
+            this.arr5[i] += (arr4[i][j]+'.');
+          }
+        }
+
+        for(var k=0, len=this.arr5.length; k<len; k++){
+          this.cardList[k].usableRange = this.arr5[k];
         }
       }
     },
@@ -162,9 +188,12 @@
         var card = {
           account: '',
           conversionNum: '',
+          balance: '',
           type: 0,
           ifChoose: false,
-          ifAllowedToUse: false
+          usableRange: '',
+          ifAllowedToUse: false,
+          ifShowRemove: false
         };
         this.cardList.push(card);
       },
@@ -174,7 +203,37 @@
       },
       // 确定
       confirm(){
-        this.send()
+        var arr3 = [], //除去无效购物卡
+            flag7 = false; //判断是否有被选中购物卡
+
+        for(var i=0, len=this.cardList.length; i<len; i++){
+          if(!this.cardList[i].ifChoose){
+            arr3.push(i);
+          }else{
+            flag7 = true
+          }
+        }
+
+        arr3 = arr3.reverse();
+
+
+        if(flag7){
+          var that = this;
+          // for(var i=0, len=arr3.length; i<len; i++){
+          //   this.cardList.splice(arr3[i], 1)
+          // }
+
+          this.$successMessage(this.$t(`购物卡添加成功`));
+
+          var Timer = setTimeout(function(){
+            that.send()
+            Timer = null;
+          },1500)
+
+        }else{
+          this.$errorMessage(this.$t(`${lang}.msg9`));
+        }
+
       },
       // 发送
       send(){
@@ -221,40 +280,42 @@
               that.ifShowPop = true;
               that.verifyStatus = 1;
               that.cardList[that.nowIndex].balance = res.data.balance-0;
+              that.currency = res.data.currency;
 
-              that.onlyUseLineNum = res.data.goodsTypeAttach;
-              this.verifyLine(res.data.goodsTypeAttach, k);
+              var c = 0, arr = [];
+              for(var n in res.data.goodsTypes){
+                arr[c] = res.data.goodsTypes[n];
+                c++;
+              }
+
+              that.cardList[that.nowIndex].usableRange = arr.join('.');
+
+              that.verifyLine(res.data.goodsTypeAttach, k);
 
               if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
                 that.cardList[that.nowIndex].ifChoose = true;
               }
               if(that.cardList[that.nowIndex].balance === 0 && !that.cardList[that.nowIndex].ifAllowedToUse){
-                this.$errorMessage(that.$t(`${lang}.msg6`));
+                that.$errorMessage(that.$t(`${lang}.msg6`));
               }
 
 
               if(that.cardList[that.nowIndex].balance === 0){
-                this.$errorMessage(that.$t(`${lang}.msg6`));
+                that.$errorMessage(that.$t(`${lang}.msg6`));
               }
-
-              var obj = res.data.goodsTypes;
-              for(var i in obj){
-                this.onlyUseLine += obj[i]+' . '
-              }
-              this.onlyUseLine = this.onlyUseLine.slice(0, -2)
 
               if(!that.cardList[that.nowIndex].ifAllowedToUse){
-                this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+this.onlyUseLine+") "+that.$t(`${lang}.msg8`));
+                that.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
               }
 
-              for(var i=0,len=this.cardList.length; i<len; i++){
-                if(this.cardList[i].ifChoose != true){
+              for(var i=0,len=that.cardList.length; i<len; i++){
+                if(that.cardList[i].ifChoose != true){
                   flag = false;
                 }
               }
 
               if(flag){
-                this.ifChooseAll = true;
+                that.ifChooseAll = true;
               }
 
             })
@@ -309,10 +370,10 @@
                 this.$errorMessage(that.$t(`${lang}.msg2`));
               }else if(this.cardList[k].type == 1){
                 if(this.cardList[k].balance !== 0){
-                  if(this.cardList[k].if){
+                  if(this.cardList[k].ifAllowedToUse){
                     this.cardList[k].ifChoose = true;
                   }else{
-                    this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+this.onlyUseLine+") "+that.$t(`${lang}.msg8`));
+                    this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
                   }
                 }else{
                   this.$errorMessage(that.$t(`${lang}.msg6`));
@@ -369,7 +430,7 @@
 
           if(!flag4){
             // 没有对应的产品线，不可使用！
-            this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+this.onlyUseLine+") "+that.$t(`${lang}.msg8`));
+            this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
           }
 
           if(!flag3){
@@ -406,7 +467,7 @@
         this.cardList[k].type = 0;
         this.cardList[k].ifChoose = false;
         this.ifChooseAll = false;
-        this.ifShowbtn = false;
+        this.cardList[k].ifShowRemove = false;
       },
       // 解除绑定
       removeBinding(n){
@@ -424,6 +485,7 @@
       },
       // 确认解除绑定
       confirmUnbinding(){
+        var that = this;
         this.ifShowPop2 = false;
         this.cardList[this.removeIndex].account = '';
         this.cardList[this.removeIndex].conversionNum = '';
@@ -431,7 +493,12 @@
         this.cardList[this.removeIndex].type = 0;
         this.cardList[this.removeIndex].ifChoose = false;
 
-        this.send()
+        this.$successMessage(that.$t(`解除绑定成功`));
+
+        var Timer2 = setTimeout(function(){
+          that.send()
+          Timer2 = null;
+        },1500)
       }
 
     }
@@ -497,6 +564,10 @@
 
   .card-box{
     margin-top: 80px;
+    display: flex;
+    align-items: ;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
 
   .list{
@@ -546,7 +617,7 @@
     color: #666;
   }
   .ipt-box{
-    width: 250px;
+    width: 246px;
     height: 36px;
     border: 1px solid rgba(170, 170, 170, 0.5);
     margin-left: 6px;
@@ -629,7 +700,7 @@
     margin-top: 8px;
     font-size: 12px;
     color: #444;
-    line-height: 16px;
+    line-height: 18px;
   }
   .productLine span{
     color: #888;
@@ -720,11 +791,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 162px;
+    width: 180px;
     height: 162px;
     border: 1px solid #bfbfbf;
-    font-size: 17px;
+    font-size: 16px;
     background-color: #fff;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
   .pop-box .icon{
     width: 46px;
@@ -737,6 +810,7 @@
     margin-top: 12px;
     text-align: center;
     color: #157f12;
+    font-size: 14px;
   }
   .pop-box .btn{
     position: absolute;

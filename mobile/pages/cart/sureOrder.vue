@@ -268,7 +268,7 @@
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
-    <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount"></shopping-card>
+    <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine"></shopping-card>
   </div>
 </template>
 
@@ -353,7 +353,8 @@ export default {
       ifShowShoppingCard: false,
       cardList: [],
       useAmount: [],
-      cardType: 1
+      cardType: 1,
+      goodsListLine: []
     }
   },
   computed: {
@@ -446,7 +447,7 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
-      // console.log(this.list,'fffffffffffff')
+      console.log(this.list,'fffffffffffff')
       this.planDays = this.allFee.planDays
       // console.log("allFee",this.planDays)
       this.idList = []
