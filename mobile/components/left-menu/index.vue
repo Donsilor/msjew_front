@@ -150,20 +150,10 @@
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.theme}}</span>
                 </div>
-               <div class="two">
-                  <span>{{lang.ValentinesDay}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.MothersDay}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.birthdayPresent}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.ChristmasGift}}</span>
-                </div>
-                <div class="two">
-                  <span>{{lang.HalloweenGift}}</span>
+               <div v-for="(theme, b) in themes" :key="b">
+                  <div class="two" @click="toPage(theme.routerName, theme.query)">
+                    <span>{{theme.name}}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -332,26 +322,41 @@ export default {
           age:'20'
         }
       ],
-      theme:[
+      themes:[
         {
           name: this.LANGUAGE.components.leftMenu.ValentinesDay,
-          age:'20'
+          routerName: 'accessories-list',
+          query:  {
+            theme: 197
+          },
         },
         {
           name: this.LANGUAGE.components.leftMenu.MothersDay,
-          age:'20'
+          routerName: 'accessories-list',
+          query:  {
+            theme: 198
+          },
         },
         {
           name: this.LANGUAGE.components.leftMenu.birthdayPresent,
-          age:'20'
+          routerName: 'accessories-list',
+          query:  {
+            theme: 199
+          },
         },
         {
           name: this.LANGUAGE.components.leftMenu.ChristmasGift,
-          age:'20'
+          routerName: 'accessories-list',
+          query:  {
+            theme: 200
+          },
         },
         {
           name: this.LANGUAGE.components.leftMenu.HalloweenGift,
-          age:'20'
+          routerName: 'accessories-list',
+          query:  {
+            theme: 201
+          },
         }
       ],
       groups: [

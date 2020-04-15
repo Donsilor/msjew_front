@@ -1023,7 +1023,10 @@
       "Ear stud",
       "Earring",
       "Bracelet",
-      "Bangle"
+      "Bangle",
+      "Decoration",
+      "Pendant",
+      "Other"
     ],
     "style": "Style",
     "theme": "Theme",

@@ -16,7 +16,7 @@
       </div>
       <data-list
         ref="data-list"
-        :send-cod="sliders[actIndex].cod"
+        :send-cod="cod"
         :seo="this.seoInfo"
         :active-index="actIndex"
         @clickData="clickData"
@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.listCommons,
+      cod: this.CONDITION_INFO.quality.necklace,
       sliders: [
         {
           content: this.LANGUAGE.listCommons.sliders[0],
@@ -60,9 +61,22 @@ export default {
         {
           content: this.LANGUAGE.listCommons.sliders[5],
           cod: this.CONDITION_INFO.quality.bracelet
-        }
+        },
+        {
+          content: this.LANGUAGE.listCommons.sliders[6],
+          cod: this.CONDITION_INFO.quality.bracelet
+        },
+        {
+          content: this.LANGUAGE.listCommons.sliders[7],
+          cod: this.CONDITION_INFO.quality.bracelet
+        },
+        {
+          content: this.LANGUAGE.listCommons.sliders[8],
+          cod: this.CONDITION_INFO.quality.bracelet
+        },
+        
       ],
-      actIndex: 0
+      actIndex: -1
     }
   },
   async asyncData({ $axios, route, store, app }) {
@@ -81,7 +95,7 @@ export default {
           seoInfo,
           ad: data.advert,
           webSite: data.webSite,
-          actIndex: route.query.actIndex ? parseFloat(route.query.actIndex) : 0
+          actIndex: route.query.actIndex ? parseFloat(route.query.actIndex) : -1
         }
       })
       .catch(err => {

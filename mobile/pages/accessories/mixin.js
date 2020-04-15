@@ -11,7 +11,7 @@ export default {
       type: Number,
       require: true,
       default() {
-        return 0
+        return -1
       }
     }
   },
@@ -28,7 +28,7 @@ export default {
         },
         {
           type: 'eject-choose-pro',
-          key: 'theme',
+          key: 'style',
           name: this.LANGUAGE.listCommons.theme,
           checked: ``,
           options: this.CONDITION_INFO.style.theme
@@ -42,7 +42,9 @@ export default {
         }
       ],
       conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
-      isResetProgress: false
+      isResetProgress: false,
+      theme_text :'',
+      category : [4,5,6,7,8,9,16,17,18]
     }
   },
   watch: {
@@ -66,12 +68,39 @@ export default {
         case 5:
           this.categoryId = 9
           break
+        case 6:
+          this.categoryId = 16
+          break
+        case 7:
+          this.categoryId = 17
+          break
+        case 8:
+          this.categoryId = 18
+          break
+        
       }
       this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
       this.conditions[0].checked = ``
+      this.conditions[1].options = this.CONDITION_INFO.style.theme
+      this.conditions[1].checked = ``
+      this.theme_text = ''
       this.conditions[2].checked = ``
       this.conditions[2].options = []
       this.isResetProgress = true
+      this.madeUpEv()
+    },
+
+    $route(val, oldVal) {
+      this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
+      this.conditions[0].checked = ``
+      this.conditions[1].options = this.CONDITION_INFO.style.theme
+      let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
+      this.conditions[1].checked = theme.toString()
+      this.theme_text = this.conditionText(this.conditions[1])
+      this.conditions[2].checked = ``
+      this.conditions[2].options = []
+      this.isResetProgress = true
+      this.categoryId = [4,5,6,7,8,9,16,17,18]
       this.madeUpEv()
     }
   },
@@ -95,7 +124,21 @@ export default {
       case 5:
         this.categoryId = 9
         break
+      case 6:
+        this.categoryId = 16
+        break
+      case 7:
+        this.categoryId = 17
+        break
+      case 8:
+        this.categoryId = 18
+        break
+      case -1:
+        this.categoryId = this.category
+        break
     }
+    let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
+    this.conditions[1].checked = theme.toString()
     this.madeUpEv()
   },
   methods: {
@@ -175,6 +218,12 @@ export default {
       if (this.conditions[0].checked !== ``) {
         this.ev += `material=${this.conditions[0].checked}`
       }
+
+      this.ev += ``
+      if (this.conditions[1].checked !== ``) {
+        this.ev += `^theme=${this.conditions[1].checked}`
+      }
+
       if (this.conditions[2].checked !== ``) {
         this.ev += `^sale_price=${this.conditions[2].checked
           .split(',')

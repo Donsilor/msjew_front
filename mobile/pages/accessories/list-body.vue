@@ -2,7 +2,7 @@
   <div class="engagement-part">
     <div class="top-part">
       <div class="choose-box">
-        <div
+        <!-- <div
           v-for="(each, n) in conditions"
           :key="n"
           :class="['choose-btn', { active: each.checked.length > 0 }]"
@@ -12,11 +12,37 @@
           <div class="ow-h1">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}
           </div>
-          <!--          <div-->
-          <!--            v-show="each.checked.length > 0"-->
-          <!--            class="triangle-down triangle"-->
-          <!--          />-->
+        </div> -->
+
+        <div
+          :class="['choose-btn', { active: conditions[0].checked.length > 0 }]"
+          @click="showChooseEject(conditions[0])"
+        >
+          <div>{{ conditions[0].name }}</div>
+          <div class="ow-h1">
+            {{ conditions[0].checked.length > 0 ? conditionText(conditions[0]) : lang.all }}
+          </div>
         </div>
+        <div
+          :class="['choose-btn', { active: conditions[1].checked.length > 0 }]"
+          @click="showChooseEject(conditions[1])"
+        >
+          <div>{{ conditions[1].name }}</div>
+          <div class="ow-h1">
+            {{ this.theme_text == ''? (conditions[1].checked.length > 0 ? conditionText(conditions[1]) : lang.all) : this.theme_text}}
+          </div>
+        </div>
+        <div
+          :class="['choose-btn', { active: conditions[2].checked.length > 0 }]"
+          @click="showChooseEject(conditions[2])"
+        >
+          <div>{{ conditions[2].name }}</div>
+          <div class="ow-h1">
+            {{ conditions[2].checked.length > 0 ? conditionText(conditions[2]) : lang.all }}
+          </div>
+        </div>
+
+
       </div>
     </div>
     <!--    list start-->
@@ -73,9 +99,9 @@
       @clear="clearQuality"
     ></choose-eject-pro>
     <choose-eject-pro
-      ref="theme-eject-choose-pro"
+      ref="style-eject-choose-pro"
       :title="lang.theme"
-      :type="'theme'"
+      :type="'style'"
       :required="true"
       :options="conditions[1].options"
       @clear="clearTheme"
