@@ -33,7 +33,7 @@
         <dt>{{ $t(`${lang}.tit6`) }}</dt>
         <dd>
           {{ $t(`${lang}.con10`) }}
-          <span @click="go('privacyPolicy')">{{ $t(`${lang}.link1`) }}</span>
+          <span @click="go('privacy-policy')">{{ $t(`${lang}.link1`) }}</span>
         </dd>
 
         <dt>{{ $t(`${lang}.tit7`) }}</dt>

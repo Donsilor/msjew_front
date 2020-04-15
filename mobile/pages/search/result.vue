@@ -193,16 +193,35 @@ export default {
           break
         // 对戒
         case -1:
-          routerName = 'marriage-ring-single-ring-detail'
+          routerName = 'marriage-ring-pair-ring-detail'
           break    
       }
 
-      this.$router.push({
-        name: routerName,
-        query: {
-          goodId: info.goodsId || info.id,
-        }
-      })
+      if(info.categoryId == 2){
+          this.$router.push({
+            name: routerName,
+            query: {
+              goodId: info.goodsId || info.id,
+              ringType : 'single'
+            }
+          })
+      }else if(info.categoryId == -1){
+        this.$router.push({
+          name: routerName,
+          query: {
+            goodId: info.goodsId || info.id,
+            ringType : 'pair'
+          }
+        })
+      }else{
+        this.$router.push({
+          name: routerName,
+          query: {
+            goodId: info.goodsId || info.id,
+          }
+        })
+      }
+      
     },
     getSortBy(val) {
       this.conditionWord = val.item.content

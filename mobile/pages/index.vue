@@ -407,7 +407,8 @@ export default {
 
       let routerUrl = '/marriage-ring/single-ring-detail'
       let routerQuery = {
-        goodId: card.id
+        goodId: card.id,
+        ringType : 'single'
       }
 
       // configAttriEntity.map(item => {
