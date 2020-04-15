@@ -26,6 +26,6 @@ export default {
     // clearChoose() {
     //   this.$emit('onClear', this.checkedOptions)
     //   this.hide()
-    // }
+    // } 
   }
 }

@@ -20,7 +20,8 @@ export default {
       currentPage4: 1,
       totalCount:1,
       page:1,
-      scrollTop:0
+      scrollTop:0,
+      loading:``
     }
   },
   computed: {
@@ -55,6 +56,7 @@ export default {
       //   result = result.concat(listData[n])
       // }
       result = result.concat(listData[page])
+      console.log("info",result)
       return result
     },
     requestingListData() {
@@ -242,6 +244,7 @@ export default {
     // 请求当前页数据
     getPageInfo(page = this.page) {
       const _this = this
+      _this.loading = true
       const keyword = _this.keyword
 
       if (!_this.canSearchWithoutKeyword && !keyword) {
@@ -279,6 +282,17 @@ export default {
           cancelToken: options.cancelToken
         })
         .then(data => {
+          // _this.loading = false
+          if(!data){
+            console.log("没数据，未响应，请求失败")
+            _this.loading = true
+            // setTimeout(() => {
+            //   this.loading = false
+            // }, 1000);
+          }else {
+            console.log("有数据")
+            _this.loading = false
+          }
           var data = data.data
           if (data.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(data.data))
@@ -289,6 +303,8 @@ export default {
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
+          _this.loading = false
+          console.log(2222)
           console.error(err)
           if (err instanceof Error) {
             console.log('这是一个错误')

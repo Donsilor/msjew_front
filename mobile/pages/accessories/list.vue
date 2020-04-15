@@ -7,7 +7,7 @@
             v-for="(s, index) in sliders"
             :key="index"
             :class="['slider-one', { active: actIndex === index }]"
-            @click="actIndex = index"
+            @click="actIndex = index;show()"
           >
             {{ s.content }}
             <div v-show="actIndex === index" class="slider-bar"></div>
@@ -100,6 +100,12 @@ export default {
     }
   },
   methods: {
+    show(){
+      this.$nuxt.$loading.start()
+      setTimeout(() => {
+        this.$nuxt.$loading.finish()
+      }, 1000);
+    },
     arrivalBottom() {
       this.$refs['data-list'].getNextPage()
     },

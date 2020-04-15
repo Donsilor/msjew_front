@@ -22,7 +22,7 @@ export default {
     //  hide box
     hide() {
       this.active = false
-    }
+    },
     // clearChoose() {
     //   this.$emit('onClear', this.checkedOptions)
     //   this.hide()

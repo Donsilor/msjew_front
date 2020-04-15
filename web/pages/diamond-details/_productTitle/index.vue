@@ -1,5 +1,5 @@
 <template>
-  <diamond-detail v-if="info" :info="info"></diamond-detail>
+  <diamond-detail v-if="info" :info="info" v-loading = "loading"></diamond-detail>
   <sole-out v-else></sole-out>
 </template>
 
