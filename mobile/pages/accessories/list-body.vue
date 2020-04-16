@@ -139,6 +139,15 @@ export default {
   .list-part {
     @listPart();
   }
+  .choose-btn {
+    position: relative;
+    width: calc((100% - 10px) / 3)!important;
+    height: 50px;
+    background: rgba(250, 250, 250, 1);
+    border: 1px solid rgba(221, 221, 221, 1);
+    border-radius: 5px;
+    margin-bottom: 12px;
+  }
 }
 .eject-choose-pro-title {
   display: flex;
