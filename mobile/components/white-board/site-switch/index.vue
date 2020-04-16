@@ -1,6 +1,6 @@
 <template>
 <!-- @onClose="changePage" -->
-  <layout :show="active" @onClose="changePage">
+  <layout :show="active" @onClose="close">
     <template slot="content">
       <div class="content-box">
         <h2 class="title">{{ lang.chooseLanguageCoin }}</h2>
@@ -133,6 +133,10 @@ export default {
       setTimeout(() => {
         location.reload()
       }, 0)
+    },
+    // 关闭切换语言弹窗
+    close(){
+      this.hide()
     }
   }
 }
