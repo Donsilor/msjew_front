@@ -28,41 +28,6 @@
             </div>
           </div>
 
-          <!-- <div class="card-info no-border">
-            <span class="choose"></span>
-            <div class="list-content">
-              <div class="child clf">
-                <span class="icon fl"></span>
-                <span class="text fl"></span>
-                <div class="ipt-box fl">
-                  <div class="verify">
-                    默认状态
-                    <div v-if="item.type == 0">
-                      <div class="btn verify-btn" @click="verification(index)">{{ lang.clickVerify }}</div>
-                      <div class="text"></div>
-                    </div>
-                    成功状态
-                    <div v-else-if="item.type == 1" class="verify-success">
-                      <div class="btn">
-                        <span class="icon"></span>
-                        <span>{{ lang.verifySucceed }}</span>
-                      </div>
-                      <div class="text">{{ lang.balance }}￥{{item.balance}}</div>
-                    </div>
-                    失败状态
-                    <div v-else-if="item.type == 2" class="verify-failing">
-                      <div class="btn">
-                        <span class="icon"></span>
-                        <span>{{ lang.verifyFailing }}</span>
-                      </div>
-                      <div class="text" @click="eliminate(index)">{{ lang.eliminateCard }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> -->
-
           <div class="card-info no-border">
             <div class="verify">
               <!-- 默认状态 -->
@@ -88,10 +53,10 @@
               </div>
             </div>
 
-            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && index <= cardType.length-1 && item.type != 0 && ifShowbtn" @click="removeBinding(index)">{{ lang.unbound }}</div>
+            <div class="btn" style="margin: 0 0 0 50px" v-if="cardType.length != 0 && item.ifShowRemove" @click="removeBinding(index)">{{ lang.unbound }}</div>
           </div>
 
-          <div class="productLine"><span>123123</span></div>
+          <div class="productLine" v-if="item.type == 1"><span>({{ lang.msg7 }}{{item.usableRange}}{{ lang.msg8 }})</span></div>
         </div>
       </div>
 
@@ -158,41 +123,63 @@
             ifChoose: false,
             usableRange: '',
             ifAllowedToUse: false,
-            ifShowRemove: true
+            ifShowRemove: false,
+            startTime: 0,
+            endTime: 0,
           },
           {
             account: '',
             conversionNum: '',
-            // account: 'BDD2020123456', // 测试账号
-            // conversionNum: 'ab', // 测试密码
             balance: '',
             type: 0,
             ifChoose: false,
             usableRange: '',
             ifAllowedToUse: false,
-            ifShowRemove: false
+            ifShowRemove: false,
+            startTime: 0,
+            endTime: 0,
           }
         ],
         ifShowPop: false,
-        verifyStatus: '1',
+        verifyStatus: 1,
         nowIndex: 0,
         submit: [],
         ifChooseAll: false,
         ifLoading: false,
         ifShowPop2: false,
         removeIndex: -1,
-        ifShowbtn: true
+        ifShowbtn: true,
+
+
+        ifShowbtn: -1,
+        currency: '',
+        arr5: []
       }
     },
-    props: ['cardType'],
+    props: ['cardType','goodsLine'],
     mounted(){
       if(this.cardType.length != 0){
+        var that=this, arr4=[];
         for(var i=0, len=this.cardType.length; i<len; i++){
           this.cardList[i].account = this.cardType[i].sn;
           this.cardList[i].conversionNum = this.cardType[i].pw;
-          this.cardList[i].balance = this.cardType[i].useAmount;
+          this.cardList[i].balance = this.cardType[i].balance;
           this.cardList[i].type = 1;
           this.cardList[i].ifChoose = true;
+          this.cardList[i].ifShowRemove = true;
+
+          arr4[i] = this.cardType[i].goodsTypes;
+        }
+
+        for(var i=0, len=arr4.length; i<len; i++){
+          this.arr5[i] = '';
+          for(var j in arr4[i]){
+            this.arr5[i] += (arr4[i][j]+'.');
+          }
+        }
+
+        for(var k=0, len=this.arr5.length; k<len; k++){
+          this.cardList[k].usableRange = this.arr5[k];
         }
       }
     },
@@ -218,7 +205,36 @@
       },
       // 确定
       confirm(){
-        this.send()
+        var arr3 = [], //除去无效购物卡
+            flag7 = false; //判断是否有被选中购物卡
+
+        for(var i=0, len=this.cardList.length; i<len; i++){
+          if(!this.cardList[i].ifChoose){
+            arr3.push(i);
+          }else{
+            flag7 = true
+          }
+        }
+
+        arr3 = arr3.reverse();
+
+
+        if(flag7){
+          var that = this;
+          // for(var i=0, len=arr3.length; i<len; i++){
+          //   this.cardList.splice(arr3[i], 1)
+          // }
+
+          this.$toast.show(this.lang.msg10);
+
+          var Timer = setTimeout(function(){
+            that.send()
+            Timer = null;
+          },1500)
+
+        }else{
+          this.$toast.show(this.lang.msg9);
+        }
       },
       // 发送
       send(){
@@ -263,18 +279,58 @@
             .then(res => {
               that.ifLoading = false;
               that.ifShowPop = true;
-              that.verifyStatus = 1;
-              that.cardList[that.nowIndex].balance = res.balance;
-              that.cardList[that.nowIndex].ifChoose = true;
+              that.cardList[that.nowIndex].balance = res.balance-0;
+              that.currency = res.currency;
+              that.startTime = res.startTime * 1000;
+              that.endTime = res.endTime * 1000;
 
-              for(var i=0,len=this.cardList.length; i<len; i++){
-                if(this.cardList[i].ifChoose != true){
-                  flag = false;
-                }
+
+              var c = 0, arr = [];
+              for(var n in res.goodsTypes){
+                arr[c] = res.goodsTypes[n];
+                c++;
               }
 
-              if(flag){
-                this.ifChooseAll = true;
+              that.cardList[that.nowIndex].usableRange = arr.join('.');
+
+              that.verifyLine(res.goodsTypeAttach, k);
+
+              var time = new Date().getTime();
+              // console.log(888,time,999,that.startTime,0,that.endTime)
+              if(time > that.startTime && time < that.endTime){
+                that.verifyStatus = 1;
+
+                if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
+                  that.cardList[that.nowIndex].ifChoose = true;
+                }
+
+                if(that.cardList[that.nowIndex].balance === 0 && !that.cardList[that.nowIndex].ifAllowedToUse){
+                  that.$toast.show(this.lang.msg6);
+                }
+
+                if(that.cardList[that.nowIndex].balance === 0){
+                  that.$toast.show(this.lang.msg6);
+                }
+
+                if(!that.cardList[that.nowIndex].ifAllowedToUse){
+                  that.$toast.show(that.lang.msg7+" "+that.cardList[that.nowIndex].usableRange+" "+this.lang.msg8);
+                }
+
+                for(var i=0,len=that.cardList.length; i<len; i++){
+                  if(that.cardList[i].ifChoose != true){
+                    flag = false;
+                  }
+                }
+
+                if(flag){
+                  that.ifChooseAll = true;
+                }
+              }else if(time < that.startTime){
+                that.verifyStatus = 2;
+                // that.$errorMessage(that.$t(`${lang}.msg12`));
+              }else if(time > that.endTime){
+                that.verifyStatus = 2;
+                // that.$errorMessage(that.$t(`${lang}.msg13`));
               }
             })
             .catch(err => {
@@ -282,6 +338,16 @@
               that.ifShowPop = true;
               that.verifyStatus = 2;
             })
+          }
+        }
+      },
+      // 验证产品线
+      verifyLine(element, k){
+        for(var i=0, len=this.goodsLine.length; i<len; i++){
+          for(var j=0, lek=element.length; j<lek; j++){
+            if(this.goodsLine[i] == element[j]){
+              this.cardList[k].ifAllowedToUse = true;
+            }
           }
         }
       },
@@ -367,12 +433,12 @@
         this.cardList[k].type = 0;
         this.cardList[k].ifChoose = false;
         this.ifChooseAll = false;
-        this.ifShowbtn = false;
+        this.cardList[k].ifShowRemove = false;
       },
       // 解除绑定
       removeBinding(n){
-        // this.cardList[n].account = '';
-        // this.cardList[n].conversionNum = '';
+        this.cardList[n].account = '';
+        this.cardList[n].conversionNum = '';
         // this.cardList[n].balance = '';
         // this.cardList[n].type = 0;
         // this.cardList[n].ifChoose = false;
@@ -385,6 +451,7 @@
       },
       // 确认解除绑定
       confirmUnbinding(){
+        var that = this;
         this.ifShowPop2 = false;
         this.cardList[this.removeIndex].account = '';
         this.cardList[this.removeIndex].conversionNum = '';
@@ -392,7 +459,12 @@
         this.cardList[this.removeIndex].type = 0;
         this.cardList[this.removeIndex].ifChoose = false;
 
-        this.send()
+        this.$toast.show(this.lang.msg11);
+
+        var Timer2 = setTimeout(function(){
+          that.send()
+          Timer2 = null;
+        },1500)
       }
 
     }
@@ -648,7 +720,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 20px auto;
+    margin: 20px auto 40px;
     padding: 0 50px;
   }
   .submit-box .btn{
@@ -664,7 +736,7 @@
   }
 
   .popup{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -773,5 +845,12 @@
     -webkit-box-pack: center;
     justify-content: center;
     cursor: pointer;
+  }
+
+  .productLine{
+    margin-top: 10px;
+    line-height: 16px;
+    font-size: 14px;
+    color: #999;
   }
 </style>

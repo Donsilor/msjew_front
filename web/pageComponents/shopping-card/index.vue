@@ -14,20 +14,20 @@
                 <span class="icon fl"></span>
                 <span class="text fl">{{ $t(`${lang}.cardNumber`) }}</span>
                 <div class="ipt-box fl">
-                  <input type="text" class="ipt" autocomplete="off" v-model="cardList[index].account">
+                  <input type="text" class="ipt" autocomplete="off" v-model.trim="cardList[index].account">
                 </div>
               </div>
               <div class="child clf">
                 <span class="icon fl"></span>
                 <span class="text fl">{{ $t(`${lang}.cardPassword`) }}</span>
                 <div class="ipt-box fl">
-                  <input type="text" class="ipt" autocomplete="off" v-model="cardList[index].conversionNum">
+                  <input type="text" class="ipt" autocomplete="off" v-model.trim="cardList[index].conversionNum">
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="btn-box" style="max-width: 376px;">
+          <div class="btn-box" style="max-width: 416px;">
             <div class="verify">
               <!-- 默认状态 -->
               <div v-if="item.type == 0">
@@ -54,7 +54,7 @@
             <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && item.ifShowRemove" @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
           </div>
 
-          <div class="btn-box" style="max-width: 376px;margin-top: 0;" v-if="item.type == 1">
+          <div class="btn-box" style="max-width: 416px;margin-top: 0;" v-if="item.type == 1">
             <div class="productLine"><span>({{ $t(`${lang}.msg7`) }}{{item.usableRange}}{{ $t(`${lang}.msg8`) }})</span></div>
           </div>
         </div>
@@ -130,8 +130,6 @@
           {
             account: '',
             conversionNum: '',
-            // account: 'BDD2020123456', // 测试账号
-            // conversionNum: 'ab', // 测试密码
             balance: '',
             type: 0,
             ifChoose: false,
@@ -150,7 +148,6 @@
         ifLoading: false,
         ifShowPop2: false,
         removeIndex: -1,
-        ifShowbtn: -1,
         currency: '',
         arr5: []
       }
@@ -196,6 +193,7 @@
           ifShowRemove: false
         };
         this.cardList.push(card);
+        this.ifChooseAll = false;
       },
       // 取消
       quit(){
@@ -223,7 +221,7 @@
           //   this.cardList.splice(arr3[i], 1)
           // }
 
-          this.$successMessage(this.$t(`购物卡添加成功`));
+          this.$successMessage(this.$t(`${lang}.msg10`));
 
           var Timer = setTimeout(function(){
             that.send()
@@ -278,9 +276,10 @@
             .then(res => {
               that.ifLoading = false;
               that.ifShowPop = true;
-              that.verifyStatus = 1;
               that.cardList[that.nowIndex].balance = res.data.balance-0;
               that.currency = res.data.currency;
+              that.startTime = res.data.startTime * 1000;
+              that.endTime = res.data.endTime * 1000;
 
               var c = 0, arr = [];
               for(var n in res.data.goodsTypes){
@@ -292,30 +291,42 @@
 
               that.verifyLine(res.data.goodsTypeAttach, k);
 
-              if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
-                that.cardList[that.nowIndex].ifChoose = true;
-              }
-              if(that.cardList[that.nowIndex].balance === 0 && !that.cardList[that.nowIndex].ifAllowedToUse){
-                that.$errorMessage(that.$t(`${lang}.msg6`));
-              }
+              var time = new Date().getTime();
+              // console.log(888,time,999,that.startTime,0,that.endTime)
+              if(time > that.startTime && time < that.endTime){
+                that.verifyStatus = 1;
 
-
-              if(that.cardList[that.nowIndex].balance === 0){
-                that.$errorMessage(that.$t(`${lang}.msg6`));
-              }
-
-              if(!that.cardList[that.nowIndex].ifAllowedToUse){
-                that.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
-              }
-
-              for(var i=0,len=that.cardList.length; i<len; i++){
-                if(that.cardList[i].ifChoose != true){
-                  flag = false;
+                if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
+                  that.cardList[that.nowIndex].ifChoose = true;
                 }
-              }
 
-              if(flag){
-                that.ifChooseAll = true;
+                if(that.cardList[that.nowIndex].balance === 0 && !that.cardList[that.nowIndex].ifAllowedToUse){
+                  that.$errorMessage(that.$t(`${lang}.msg6`));
+                }
+
+                if(that.cardList[that.nowIndex].balance === 0){
+                  that.$errorMessage(that.$t(`${lang}.msg6`));
+                }
+
+                if(!that.cardList[that.nowIndex].ifAllowedToUse){
+                  that.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
+                }
+
+                for(var i=0,len=that.cardList.length; i<len; i++){
+                  if(that.cardList[i].ifChoose != true){
+                    flag = false;
+                  }
+                }
+
+                if(flag){
+                  that.ifChooseAll = true;
+                }
+              }else if(time < that.startTime){
+                that.verifyStatus = 2;
+                that.$errorMessage(that.$t(`${lang}.msg12`));
+              }else if(time > that.endTime){
+                that.verifyStatus = 2;
+                that.$errorMessage(that.$t(`${lang}.msg13`));
               }
 
             })
@@ -369,14 +380,24 @@
               if(this.cardList[k].type == 0){
                 this.$errorMessage(that.$t(`${lang}.msg2`));
               }else if(this.cardList[k].type == 1){
-                if(this.cardList[k].balance !== 0){
-                  if(this.cardList[k].ifAllowedToUse){
-                    this.cardList[k].ifChoose = true;
+                var time = new Date().getTime();
+                // console.log(888,time,999,that.startTime,0,that.endTime)
+                if(time > that.startTime && time < that.endTime){
+                  if(this.cardList[k].balance !== 0){
+                    if(this.cardList[k].ifAllowedToUse){
+                      this.cardList[k].ifChoose = true;
+                    }else{
+                      this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
+                    }
                   }else{
-                    this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
+                    this.$errorMessage(that.$t(`${lang}.msg6`));
                   }
-                }else{
-                  this.$errorMessage(that.$t(`${lang}.msg6`));
+                }else if(time < that.startTime){
+                  that.verifyStatus = 2;
+                  that.$errorMessage(that.$t(`${lang}.msg12`));
+                }else if(time > that.endTime){
+                  that.verifyStatus = 2;
+                  that.$errorMessage(that.$t(`${lang}.msg13`));
                 }
 
               }else if(this.cardList[k].type == 2){
@@ -428,24 +449,8 @@
             }
           }
 
-          if(!flag4){
-            // 没有对应的产品线，不可使用！
-            this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
-          }
-
-          if(!flag3){
-            // 此卡余额为0，不可使用！
-            this.$errorMessage(that.$t(`${lang}.msg6`));
-          }
-
-          if(!flag2){
-            // 有未验证或验证失败的卡
+          if(!flag3 || !flag2 || !flag || !flag4){
             this.$errorMessage(that.$t(`${lang}.msg4`));
-          }
-
-          if(!flag){
-            // 购物卡号或兑换码不能为空！
-            this.$errorMessage(that.$t(`${lang}.msg1`));
           }
 
           if(flag && flag2 && flag3 && flag4){
@@ -493,7 +498,7 @@
         this.cardList[this.removeIndex].type = 0;
         this.cardList[this.removeIndex].ifChoose = false;
 
-        this.$successMessage(that.$t(`解除绑定成功`));
+        this.$successMessage(that.$t(`${lang}.msg11`));
 
         var Timer2 = setTimeout(function(){
           that.send()
@@ -571,16 +576,16 @@
   }
 
   .list{
-    padding-left: 20px;
     margin-bottom: 20px;
   }
-  .list:nth-child(odd) .card-info{
-    border-right: 1px solid #aaa;
+  .list:nth-child(even) .card-info{
+    border-left: 1px solid #aaa;
   }
   .card-info{
     display: flex;
     align-items: center;
-    padding-right: 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
   }
   .choose{
     width: 20px;
@@ -732,6 +737,7 @@
     text-decoration: underline;
   }
   .all-choose{
+    width: 86px;
     margin-top: 24px;
     display: flex;
     align-items: center;
@@ -779,7 +785,7 @@
   }
 
   .popup{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;

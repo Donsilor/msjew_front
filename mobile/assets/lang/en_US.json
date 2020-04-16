@@ -186,7 +186,10 @@
       "exchange": "Apply",
       "useShoppingCard": "Use Shopping Card",
       "editOrUnbound": "Edit/Remove Card",
-      "shoppingCard": "Shopping Card"
+      "shoppingCard": "Shopping Card",
+      "ultimatelyPay": "Actual payment",
+      "submitSuccessfully": "Order Submission Successful!",
+      "PleaseLogin": "Please log in first to use the gift card！"
     },
     "pay": {
       "pay": "Order payment",
@@ -2043,7 +2046,7 @@
     "clickVerify": "Verification",
     "verifySucceed": "Redeemed",
     "verifyFailing": "Failed",
-    "balance": "The balance of",
+    "balance": "Balance:",
     "eliminateCard": "Delete",
     "unbound": "Remove Card",
     "confirmUnbinding": "Confirm unbinding？",
@@ -2058,6 +2061,11 @@
     "msg5": "Cannot be added repeatedly！",
     "msg6": "This card has a balance of 0 and is not available！",
     "msg7": "Limit to buy",
-    "msg8": ""
+    "msg8": "",
+    "msg9": "Please add/tick a valid shopping card！",
+    "msg10": "Shopping card added successfully！",
+    "msg11": "Unbind successfully！",
+    "msg12": "This card is not expired！",
+    "msg13": "This card has expired！"
   }
 }

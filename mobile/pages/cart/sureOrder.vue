@@ -354,7 +354,8 @@ export default {
       cardList: [],
       useAmount: [],
       cardType: 1,
-      goodsListLine: []
+      goodsListLine: [],
+      scrollTop: 0
     }
   },
   computed: {
@@ -434,10 +435,11 @@ export default {
     //     this.kai = this.$route.query.invoice !== ''
   },
   mounted() {
-    console.log("query",this.$route.params.invoice)
+    console.log(99999,this.cardList)
+    // console.log("query",this.$route.params.invoice)
     this.$nextTick(() => {
       this.kai = typeof this.$route.params.invoice !== 'undefined' && this.$route.params.invoice.invoice_title != ''
-      console.log(this.kai)
+      // console.log(this.kai)
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
       } else {
@@ -447,7 +449,6 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
-      console.log(this.list,'fffffffffffff')
       this.planDays = this.allFee.planDays
       // console.log("allFee",this.planDays)
       this.idList = []
@@ -455,11 +456,13 @@ export default {
       this.list.map((item, index) => {
         // console.log("sssss=====",item.id)
         this.idList.push(item.id)
+        this.goodsListLine.push(item.simpleGoodsEntity.categoryId)
         // this.idList.push(item.localSn)
         //  console.log("sssss",this.productAmount)
         // this.productAmount = this.productAmount + item.salePrice   localSn
         this.productAmount = parseFloat(this.productAmount + item.salePrice)
         // console.log("productAmount",this.productAmount)
+
       })
 
       this.getData() // 获取地址
@@ -872,7 +875,7 @@ export default {
           .then(res => {
             // console.log("总额",res)
             if(res.payStatus == 1){
-              this.$toast.show('订单提交成功');
+              that.$toast.show(this.lang.submitSuccessfully);
               this.$router.replace({
                 path: '/personal/order',
               })
@@ -989,7 +992,22 @@ export default {
       }
     },
     addCard(){
+      if(this.isLogin){
         this.ifShowShoppingCard = true
+      }else{
+        var that = this;
+        this.$toast.show(that.lang.PleaseLogin);
+
+        const topC = document.getElementsByClassName('layout-main')[0];
+
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 5)
+          topC.scrollTop = that.scrollTop + ispeed
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+      }
     }
 
   }

@@ -1794,6 +1794,16 @@
               {{ formatMoney(tex.orderAmount || goodsPrice) }}
             </div>
           </div>
+
+          <div class="detail-line">
+            <div class="font-size-16 color-333">
+              {{ $t(`${lang2}.ultimatelyPay`) }}
+            </div>
+            <div class="hkd color-pink price-big">
+              {{ $store.state.coin }}
+              {{ ultimatelyPay }}
+            </div>
+          </div>
         </div>
       </div>
       <div class="info-line" />
@@ -1946,7 +1956,8 @@ export default {
       useAmount: [],
       cardType: 1,
       goodsListLine: [],
-      ultimatelyPay: 0
+      ultimatelyPay: 0,
+      num: 0
     }
   },
   computed: {
@@ -2002,6 +2013,9 @@ export default {
       })
   },
   mounted() {
+    var a = 1512.125311;
+    this.floatingPoint(a);
+    console.log(111,a)
     // this.getAddress();
     this.language = this.getCookie('language')
   },
@@ -2738,6 +2752,7 @@ export default {
 
           // if(res.data.cards.length != 0){
             this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
+            this.ultimatelyPay = res.data.payAmount;
           // }
 
         })
@@ -2800,7 +2815,7 @@ export default {
         .then(res => {
           // console.log("创建订单",res.data.orderAmount)
           if(res.data.payStatus == 1){
-            that.$successMessage('订单提交成功');
+            that.$successMessage(that.$t(`${lang2}.submitSuccessfully`));
             that.$router.replace({
               path: '/account/orders',
             })
@@ -2815,12 +2830,16 @@ export default {
               }
             })
           }
+          console.log('提交成功11111')
         })
         .catch(err => {
           if (!err.response) {
-            this.$message.error(err.message)
+            console.log('提交失败11111')
+            var _this = this;
+            _this.$errorMessage(err.message)
           } else {
-            // console.log(err)
+            console.log('提交失败2222222')
+            console.log(err)
           }
         })
     },
@@ -2872,7 +2891,8 @@ export default {
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        invoice:invoice
+        invoice:invoice,
+        card: this.cardList || '',
         // afterMail: this.isSameEmail
         // ? this.orderAddress.email
         // : this.orderEmail,
@@ -2882,9 +2902,10 @@ export default {
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
+          console.log('提交成功222222')
           // console.log("创建订单",res.data.orderAmount)
           if(res.data.payStatus == 1){
-            that.$successMessage('订单提交成功');
+            that.$successMessage(that.$t(`${lang2}.submitSuccessfully`));
             that.$router.replace({
               path: '/account/orders',
             })
@@ -2901,6 +2922,7 @@ export default {
           }
         })
         .catch(err => {
+          console.log('提交失败333333333')
           // if (!err.response) {
             this.$message.error(err.message)
           // } else {
@@ -2927,7 +2949,13 @@ export default {
       }else{
         this.cardType = 1;
       }
-    }
+    },
+    //处理浮点数异常
+     floatingPoint(num){
+       var that = this;
+        num = num.toFixed(2);
+        return num
+     }
 
   }
 }

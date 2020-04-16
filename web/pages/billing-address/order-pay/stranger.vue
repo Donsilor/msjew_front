@@ -2481,10 +2481,11 @@ export default {
     },
     // 添加购物卡
     useCard(){
-      this.$message.error('请先登录，才能使用购物卡！');
+      const that = this
+
+      that.$errorMessage(that.$t(`${lang3}.PleaseLogin`));
       const topC = document.getElementsByClassName('layout-box')[0];
 
-      const that = this
       let timer = setInterval(() => {
         let ispeed = Math.floor(-that.scrollTop / 5)
         topC.scrollTop = that.scrollTop + ispeed
