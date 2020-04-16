@@ -22,7 +22,7 @@
         </button>
       </div>
       <div class="choose-box">
-        <!-- <div
+        <div
           v-for="(each, n) in conditions"
           :key="n"
           :class="['choose-btn', { active: each.checked.length > 0 }]"
@@ -31,33 +31,6 @@
           <div>{{ each.name }}</div>
           <div class="ow-h1">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}
-          </div>
-        </div> -->
-        <div
-          :class="['choose-btn', { active: conditions[0].checked.length > 0 }]"
-          @click="showChooseEject(conditions[0])"
-        >
-          <div>{{ conditions[0].name }}</div>
-          <div class="ow-h1">
-            {{ conditions[0].checked.length > 0 ? conditionText(conditions[0]) : lang.all }}
-          </div>
-        </div>
-        <div
-          :class="['choose-btn', { active: conditions[1].checked.length > 0 }]"
-          @click="showChooseEject(conditions[1])"
-        >
-          <div>{{ conditions[1].name }}</div>
-          <div class="ow-h1">
-            {{ conditions[1].checked.length > 0 ? conditionText(conditions[1]) : lang.all }}
-          </div>
-        </div>
-        <div
-          :class="['choose-btn', { active: conditions[2].checked.length > 0 }]"
-          @click="showChooseEject(conditions[2])"
-        >
-          <div>{{ conditions[2].name }}</div>
-          <div class="ow-h1">
-            {{ this.style_text == ''? (conditions[2].checked.length > 0 ? conditionText(conditions[2]) : lang.all) : this.style_text}}
           </div>
         </div>
       </div>
@@ -141,7 +114,7 @@ export default {
     return {
       lang: this.LANGUAGE.listCommons,
       gender: 'all',
-      style_text : '',
+  
     }
   },
   watch: {
@@ -149,19 +122,19 @@ export default {
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
       this.conditions[0].options = this.CONDITION_INFO.style.womanRings
       this.conditions[0].checked = style.toString()
-      this.madeUpEv()
-      this.style_text = this.conditionText(this.conditions[0])
-
       this.changeGender()
 
-    }
+    },
+  
     
   },
   created() {},
   mounted() {
     const _this = this
     _this.$nextTick(() => {
+      let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
       this.conditions[0].options = this.CONDITION_INFO.style.womanRings
+      this.conditions[0].checked = style.toString()
       this.categoryId = 2
       let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:-1
       this.changeGender(type)

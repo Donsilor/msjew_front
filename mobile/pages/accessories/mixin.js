@@ -43,7 +43,6 @@ export default {
       ],
       conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
       isResetProgress: false,
-      theme_text :'',
       category : [4,5,6,7,8,9,16,17,18]
     }
   },
@@ -83,7 +82,6 @@ export default {
       this.conditions[0].checked = ``
       this.conditions[1].options = this.CONDITION_INFO.style.theme
       this.conditions[1].checked = ``
-      this.theme_text = ''
       this.conditions[2].checked = ``
       this.conditions[2].options = []
       this.isResetProgress = true
@@ -96,7 +94,6 @@ export default {
       this.conditions[1].options = this.CONDITION_INFO.style.theme
       let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
       this.conditions[1].checked = theme.toString()
-      this.theme_text = this.conditionText(this.conditions[1])
       this.conditions[2].checked = ``
       this.conditions[2].options = []
       this.isResetProgress = true
