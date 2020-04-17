@@ -122,8 +122,8 @@
       "bracelets": "手链",
       "decoration": "摆件",
       "widgets": "挂件",
-      "other": "其他",
-      "bangles": "手环"
+      "other": "其它",
+      "bangles": "手镯"
     },
     "polish": {
       "69": "良好",
@@ -222,7 +222,7 @@
       "necklace":"项链",
       "bracelet":"手链",
       "customization":"钻戒定制",
-      "theme":"主题collections", 
+      "theme":"主题", 
       
       "customerService": "客户服务",
       "lifetimeWarranty": "终身保修",
@@ -713,7 +713,7 @@
     "to": "至",
 
     "title": "结婚戒指",
-    "totalCountTitle": "结婚戒指 ({total_count} 款)",
+    "totalCountTitle": "戒指 ({total_count} 款)",
     "titleDesc": "愿作此生相依的应允 , 愿为此今刻决定往后",
     "sort": "排序"
   },

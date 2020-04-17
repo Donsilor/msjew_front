@@ -292,7 +292,7 @@ export default {
       styleStyleOptions: this.CONDITION_INFO.style.styleRings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
-      fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
+      fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
       searchConditions: {
         styleSex: '', // 54-款式， 26-适用人群
         style: '',

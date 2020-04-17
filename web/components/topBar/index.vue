@@ -1189,7 +1189,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: '/wedding-rings/channel-set-series'
+                      path: '/wedding-rings/classic-series'
                     }
                   },
                   {
@@ -1207,7 +1207,7 @@ export default {
                     ),
                     icon: '',
                     to: {
-                      path: '/jewellery/necklace-pendant'
+                      path: '/jewellery/bracelet-bangle'
                     }
                   },
                   {

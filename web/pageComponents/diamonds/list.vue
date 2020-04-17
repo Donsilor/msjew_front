@@ -882,7 +882,7 @@ export default {
 
       shapeOptions: this.CONDITION_INFO.shape,
       defaultPriceRange,
-      fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
+      fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
       defaultCaratRange,
       fastCaratRanges: [['0.25', '0.70'], ['0.75', '1.02'], ['1.5', '3.00']],
       cutOptions: this.CONDITION_INFO.cut,

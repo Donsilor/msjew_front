@@ -222,7 +222,7 @@
       "necklace": "NECKLACE",
       "bracelet": "BRACELET",
       "customization": "DIAMONDS",
-      "theme": "THEME COLLECTIONS",
+      "theme": "THEME",
 
       "customerService": "CUSTOMER SERVICE",
       "lifetimeWarranty": "LIFETIME WARRANTY",
@@ -697,7 +697,7 @@
     "to": "to",
 
     "title": "WEDDING RING",
-    "totalCountTitle": "WEDDING RING ({total_count} Results)",
+    "totalCountTitle": "RING ({total_count} Results)",
     "titleDesc": "Let us make a promise with this ring and spend the rest of our life since this moment on.",
     "sort": "Sort By"
   },
