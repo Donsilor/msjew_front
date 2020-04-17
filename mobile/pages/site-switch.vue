@@ -9,20 +9,15 @@
           <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           <span>{{ lang.chooseLanguageCoin }}</span>
         </h1>
-        <!-- <div class="select-line-box">
-          <input :value="languageText" type="text" />
-          <select v-model="language" @change="chooseLanguage(language.code)">
-            <option
-              v-for="(p, index) in languageOptions"
-              :key="index"
-              :value="p.content"
-              >
-              {{p.content}}
-              </option
-            >
-          </select>
+        <div class="select-line-box">
+          <input :value="language" type="text" />
+            <select name="" id="" v-model="language">
+              <option v-for="(p, index) in languageOptions" :key="index" :value="p.content">
+                {{p.content}}
+              </option>
+            </select>
           <i class="iconfont iconkuozhan"></i>
-        </div> -->
+        </div>
         <div class="select-line-box">
           <input :value="coin" type="text" />
           <select name="" id="" v-model="coin">
@@ -127,12 +122,12 @@ export default {
     // console.log(this.coinOptions[this.coin].content)
     const _this = this
     _this.$nextTick(() => {
-      // for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
-      //   if (_this.languageOptions[n].code === _this.$store.state.language) {
-      //     _this.language = n
-      //     break
-      //   }
-      // }
+      for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
+        if (_this.languageOptions[n].code === _this.$store.state.language) {
+          _this.language = _this.languageOptions[n].content
+          break
+        }
+      }
 
       for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
         if (_this.coinOptions[n].code === _this.$store.state.coin) {
@@ -161,17 +156,16 @@ export default {
       /**
        * 设置语言和货币
        */
-      // console.log("this.language",this.coin)
-      // if(this.language == '简体中文'){
-      //   lang = 'zh_CN'
-      // }
-      // if(this.language == '繁體中文'){
-      //   lang = 'zh_TW'
-      // }
-      // if(this.language == 'English'){
-      //   lang = 'en_US'
-      // }
-      // console.log("val",coin)
+      if(this.language == '中文简体'){
+        this.langs = 'zh_CN'
+      }
+      if(this.language == '繁體中文'){
+        this.langs = 'zh_TW'
+      }
+      if(this.language == 'English'){
+        this.langs = 'en_US'
+      }
+      this.$store.commit('setLanguage',this.langs)
       this.$store.commit('setCoin',this.coin)
       // this.$store.commit('setLanguage', val)
       setTimeout(() => {
@@ -244,6 +238,10 @@ export default {
       resize: none;
       border-radius: 0;
       background: none;
+      padding-left: 12px;
+      // option{
+      //   padding-left: 10px;
+      // }
     }
     position: relative;
     margin-bottom: 18px;
