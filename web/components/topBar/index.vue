@@ -536,7 +536,7 @@ export default {
                 data: [
                   {
                     id: 45,
-                    name: this.$t(`${lang}.ringsMenu.engagementRing`),
+                    name: this.$t(`${lang}.ringsMenu.engagement`),
                     icon: '',
                     to: {
                       path: '/wedding-rings/engagement-use'
@@ -544,7 +544,7 @@ export default {
                   },
                   {
                     id: 44,
-                    name: this.$t(`${lang}.ringsMenu.weddingRing`),
+                    name: this.$t(`${lang}.ringsMenu.wedding`),
                     icon: '',
                     to: {
                       path: '/wedding-rings/wedding-use'
@@ -552,7 +552,7 @@ export default {
                   },
                   {
                     id: 46,
-                    name: this.$t(`${lang}.ringsMenu.proposalRing`),
+                    name: this.$t(`${lang}.ringsMenu.proposal`),
                     icon: '',
                     to: {
                       path: '/wedding-rings/proposal-use'

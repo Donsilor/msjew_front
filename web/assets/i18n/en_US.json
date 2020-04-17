@@ -278,6 +278,9 @@
         "priceRange4": "3000-4999",
         "priceRange5": "above 5000",
         "proposalRing": "Proposal Ring",
+        "engagement":"Engagement",
+        "wedding":"Wedding",
+        "proposal":"Proposal",
         "ValentinesDay": "Valentines Day",
         "birthdayPresent": "BirthdayPresent",
         "anniversary" : "Anniversary"

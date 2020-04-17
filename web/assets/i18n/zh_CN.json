@@ -278,6 +278,9 @@
         "priceRange4":"3000-4999",
         "priceRange5":"5000以上",
         "proposalRing":"求婚戒指",
+        "engagement":"订婚",
+        "wedding":"结婚",
+        "proposal":"求婚",
         "ValentinesDay":"情人节",
         "birthdayPresent":"生日礼物",
         "anniversary" : "纪念日"
