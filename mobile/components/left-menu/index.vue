@@ -8,7 +8,9 @@
         </div> -->
         <div class="site-info" @click="toSiteSwitch">
           <div class="flag">
-            <img src="/hongkong-square.png" />
+            <img v-show="hkIcon" src="/hongkong-square.png" />
+            <img v-show="cnIcon" src="/china-square.png" />
+            <img v-show="enIcon" src="/USA-square.png" />
           </div>
           <!-- <div class="language">
             <span>简/繁/EN</span>
@@ -184,6 +186,9 @@ export default {
   mixins: [Mixin, List, GoodListProps],
   data() {
     return {
+      cnIcon:true,
+      enIcon:false,
+      hkIcon:false,
       isactive:'a',
       changeColor1:false,
       changeColor2:false,
@@ -379,6 +384,21 @@ export default {
   //   this.getinfo()
   // },
   mounted(){
+    if(this.$store.state.coin == 'CNY'){
+      this.cnIcon = true
+      this.enIcon = false
+      this.hkIcon = false
+    }
+    if(this.$store.state.coin == 'HKD'){
+      this.hkIcon = true
+      this.enIcon = false
+      this.cnIcon = false
+    }
+    if(this.$store.state.coin == 'USD'){
+      this.enIcon = true
+      this.cnIcon = false
+      this.hkIcon = false
+    }
     // console.log("dddd",window.location.href)
     const _this = this
     if(_this.$store.getters.hadLogin){
@@ -786,9 +806,9 @@ export default {
   flex-shrink: 0;
   position: relative;
   width: 100%;
-  height: 55px;
+  height: 50px;
   padding-left:15px;
-  border-top:8px solid #a2c2d2;
+  border-top:4px solid #a2c2d2;
   background-color: #e4ecf0;
   // margin-bottom: 10px;
   box-sizing: border-box;

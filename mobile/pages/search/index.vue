@@ -3,19 +3,25 @@
     <div class="top-bar">
       <div class="go-back-btn" @click="goBack($router)">
         <i class="iconfont iconfanhuiicon-"></i>
-        <span class="text">{{ lang.back }}</span>
+        <!-- <span class="text">{{ lang.back }}</span> -->
       </div>
       <div class="operating-area">
-        <i class="iconfont iconicon-sousuo"></i>
+        
         <input
           v-model="keyword"
           :placeholder="lang.inputKeyword"
           @keyup.enter="search(keyword)"
         />
-        <button class="search-btn" @click="search(keyword)">
+        <img class="cha" src="/component/tip-message/cha.png" @click="clear">
+        <span class="gap-line" ></span>
+        <i class="iconfont iconicon-sousuo" @click="search(keyword)"></i>
+        <!-- <button class="search-btn" @click="search(keyword)">
           {{ lang.search }}
-        </button>
+        </button> -->
       </div>
+      <span class="cancel" @click="goBack($router)">
+        {{ lang.cancel }}
+      </span>
     </div>
     <div class="recommend">
       <section v-if="hotSearch" class="keyword-box">
@@ -78,6 +84,9 @@ export default {
     })
   },
   methods: {
+    clear(){
+      this.keyword= ''
+    },
     dealOnlineData(data) {
       data = data || []
       data = data.map(item => {
@@ -93,31 +102,37 @@ export default {
           url: '/wap/common/search/index'
         })
         .then(data => {
-          // data = {
-          //   searchHistory: null,
-          //   searchHotword: ['王者荣耀', '88889', '朱昌杰']
-          // }
-          _this.hotSearch = _this.dealOnlineData(data.searchHotword)
-          if (this.$store.getters.hadLogin) {
-            _this.historySearch = _this.dealOnlineData(data.searchHistory)
+          data = {
+            searchHistory: null,
+            searchHotword: ['戒指', '项链', '手链']
           }
+          _this.hotSearch = _this.dealOnlineData(data.searchHotword)
+          // if (this.$store.getters.hadLogin) {
+            // _this.historySearch = _this.dealOnlineData(data.searchHistory)
+          // }
         })
         .catch(err => {
           console.error(err)
         })
 
-      if (!this.$store.getters.hadLogin) {
+      // if (!this.$store.getters.hadLogin) {
         // 读取本地历史记录
         _this.$store
           .dispatch('getLocalSearchHistory')
           .then(data => {
-            // console.log('data====>', data)
+            // 过滤空值
+            for(let i=0;i<data.length; i++){
+              if(data[i].keyword == ''){
+                data.splice(i,1)
+              }
+            }
             _this.historySearch = data
-          })
+            // console.log('data====>', _this.historySearch)
+          }) 
           .catch(err => {
             console.error(err)
           })
-      }
+      // }
     },
     cleanSearchHistory() {
       const _this = this
@@ -179,7 +194,8 @@ export default {
   padding: 7px 12px 6px 15px;
   border-bottom: 1px solid rgba(221, 221, 221, 1);
   box-sizing: border-box;
-  background-color: #ffffff;
+  // background-color: #ffffff;
+  background-color: #cedee6;
   display: flex;
   align-items: center;
 
@@ -202,25 +218,42 @@ export default {
   .operating-area {
     height: 32px;
     background: rgba(245, 245, 245, 1);
-    border-radius: 8px;
+    border-radius: 25px;
     flex-grow: 1;
     flex-shrink: 1;
     display: flex;
     align-items: center;
 
     .iconfont {
-      margin: 0 6px 0 12px;
-      font-size: 13px;
-      color: rgba(187, 187, 187, 1);
+      margin: 0 15px 0 10px;
+      font-size: 18px;
+      color: #333333;
+      font-weight: 600;
+      // color: rgba(187, 187, 187, 1);
+    }
+    .cha{
+      width: 17px;
+      height: 16px;
+      font-weight: 600;
+      box-sizing: border-box;
+    }
+    .gap-line{
+      margin: 0 0px 0 10px;
+      width: 1px;
+      height: 16px;
+      font-size: 12px;
+      background-color: #a2c2d2;
     }
     input {
       flex-grow: 1;
       flex-shrink: 1;
       font-size: 14px;
       font-weight: 400;
-      padding-top: 3px;
+      // padding-top: 3px;
+      padding-left: 10px;
       &::-webkit-input-placeholder {
-        color: rgba(187, 187, 187, 1);
+        color: #cedee6;
+        // color: rgba(187, 187, 187, 1);
       }
     }
     .search-btn {
@@ -233,9 +266,14 @@ export default {
       color: rgba(255, 255, 255, 1);
     }
   }
+  .cancel{
+    margin: 0 10px 0 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
 }
 .recommend {
-  background-color: #ffffff;
+  background-color: #F5F5F5;
 
   .keyword-box {
     padding: 0 15px;
@@ -244,9 +282,9 @@ export default {
 
     .box-title {
       padding: 14px 0 21px 0;
-      font-size: 13px;
-      font-weight: 400;
-      color: rgba(153, 153, 153, 1);
+      font-size: 16px;
+      font-weight: 600;
+      // color: rgba(153, 153, 153, 1);
       text-align: left;
     }
     .item {
@@ -279,7 +317,8 @@ export default {
         text-align: left;
         font-size: 15px;
         font-weight: 400;
-        color: rgba(102, 102, 102, 1);
+        color: #010101;
+        // color: rgba(102, 102, 102, 1);
       }
     }
     .no-data {

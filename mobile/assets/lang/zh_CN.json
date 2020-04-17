@@ -646,12 +646,13 @@
     "search": {
       "index": {
         "back": "返回",
-        "inputKeyword": "输入关键词",
+        "inputKeyword": "搜索...",
         "inputKeywordPlease": "请输入关键字",
         "search": "搜索",
+        "cancel":"取消",
         "hotRecommend": "热门搜索",
         "noHotRecommend": "暂无热门搜索推荐",
-        "history": "搜索记录",
+        "history": "搜索历史",
         "noResult": "暂无搜索记录",
         "cleanHistory": "清空搜索记录"
       },

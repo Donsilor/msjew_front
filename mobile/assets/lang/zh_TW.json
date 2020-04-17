@@ -645,12 +645,13 @@
   "search": {
     "index": {
       "back": "返回",
-      "inputKeyword": "輸入關鍵詞",
+      "inputKeyword": "搜索...",
       "inputKeywordPlease": "請輸入關鍵字",
       "search": "搜索",
+      "cancel":"取消",
       "hotRecommend": "熱門搜索",
       "noHotRecommend": "暫無熱門搜索推薦",
-      "history": "搜索記錄",
+      "history": "搜索歷史",
       "noResult": "暫無搜索記錄",
       "cleanHistory": "清空搜索記錄"
     },

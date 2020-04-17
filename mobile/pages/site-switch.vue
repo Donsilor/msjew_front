@@ -169,8 +169,6 @@ export default {
       this.$store.commit('setCoin',this.coin)
       // this.$store.commit('setLanguage', val)
       setTimeout(() => {
-        // location.href = '/'
-        // location.reload()
         location.href = this.$route.query.redirectUri
       }, 500)
     }

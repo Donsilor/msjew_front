@@ -6,7 +6,9 @@
       </div>
       <div class="site-info" @click="toSiteSwitch">
           <div class="flag">
-            <img src="/hongkong-round.png" />
+            <img v-show="hkIcon" src="/hongkong-round.png" />
+            <img v-show="cnIcon" src="/china-round.png" />
+            <img v-show="enIcon" src="/USA-round.png" />
           </div>
           <div class="language">
             <span>{{language}}</span>
@@ -62,7 +64,10 @@ export default {
       showa:true,
       showb:false,
       url:'',
-      language:'简'
+      language:'简',
+      cnIcon:true,
+      enIcon:false,
+      hkIcon:false 
     }
   },
   computed: {
@@ -81,12 +86,21 @@ export default {
     }
     if(this.$store.state.language == 'zh_CN'){
       this.language = '简'
+      this.cnIcon = true
+      this.enIcon = false
+      this.hkIcon = false
     }
     if(this.$store.state.language == 'zh_TW'){
       this.language = '繁'
+      this.hkIcon = true
+      this.enIcon = false
+      this.cnIcon = false
     }
     if(this.$store.state.language == 'en_US'){
       this.language = 'EN'
+      this.enIcon = true
+      this.cnIcon = false
+      this.hkIcon = false
     }
     // console.log("language",this.$store.state.language)
   },
