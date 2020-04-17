@@ -150,6 +150,7 @@ export default {
       width: max-content;
       height: 49px;
       display: flex;
+      // justify-content: space-between;
       align-items: center;
       padding: 0 15px;
       .slider-one {
@@ -158,7 +159,7 @@ export default {
         font-weight: 400;
         color: rgba(153, 153, 153, 1);
         // margin-right: 56px;
-        margin-right: 30px;
+        margin-right: 47px;
         .slider-bar {
           position: absolute;
           bottom: -12px;

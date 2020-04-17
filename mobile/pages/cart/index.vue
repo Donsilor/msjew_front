@@ -131,20 +131,25 @@ export default {
       cartList: [],
       sumNum: 0,
       lang: this.LANGUAGE.cart.index,
-      num: 0
+      num: 0,
+      timer: null 
     }
   },
-  created() {},
+  created() {
+  },
   mounted() {
     this.$nextTick(() => {
-      
       if (this.isLogin) {
         this.getList()
+        // console.log()
       } else {
         this.getLocalCart()
       }
     })
   },
+  // beforeUpdate(){
+  //   this.getList()
+  // },
   //
   methods: {
     formatMoney: formatMoney,

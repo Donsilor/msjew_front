@@ -21,17 +21,22 @@
             <i class="iconfont iconkuozhan"></i>
           </div>
         </div>
-        <!-- <div class="select-line" @click="chooseCoin">
+        <div class="select-line" @click="chooseCoin">
           <div class="line-icon">
             <i class="iconfont iconhuobi"></i>
           </div>
           <div class="line-text">
-            <span>{{ coinText }}</span>
+            <input :value="coin" type="text" />
+            <select name="" id="" v-model="coin">
+              <option v-for="(p, index) in coinOptions" :key="index" :value="p.code">
+                {{p.content}}
+              </option>
+            </select>
           </div>
           <div class="select-icon">
             <i class="iconfont iconkuozhan"></i>
           </div>
-        </div> -->
+        </div>
         <button class="clear-btn" @click="changePage">
           {{ lang.clear }}
         </button>
@@ -91,6 +96,13 @@ export default {
           break
         }
       }
+
+      for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
+        if (_this.coinOptions[n].code === _this.$store.state.coin) {
+          _this.coin = _this.coinOptions[n].code
+          break
+        }
+      }
     })
   },
   methods: {
@@ -101,7 +113,7 @@ export default {
       this.language = data.index
     },
     chooseCoin() {
-      this.$refs.coinTap.show()
+      // this.$refs.coinTap.show()
     },
     changeCoin(data) {
       this.coin = data.index
@@ -120,9 +132,8 @@ export default {
       if(this.language == 'English'){
         this.langs = 'en_US'
       }
-      // console.log("sssss",this.langs)
-      // this.$store.commit('setCoin', this.coinCode)
       this.$store.commit('setLanguage',this.langs)
+      this.$store.commit('setCoin',this.coin)
       // this.$emit('finish', {
       //   coinCode: this.coinCode,
       //   coinText: this.coinText,
@@ -229,6 +240,10 @@ export default {
       resize: none;
       border-radius: 0;
       background: none;
+      padding-left: 12px;
+      // option{
+        
+      // }
     }
   }
   .select-icon {

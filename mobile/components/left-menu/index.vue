@@ -22,6 +22,7 @@
           <i class="iconfont icongerenzhongxin" v-show="showa"></i>
           <span v-show="showa" class="pl-login">{{lang.login}}</span>
           <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
+          <span v-show="showb" class="pl-login">{{ replacepos(date.username, 2, 6, '***') }}</span>
         </div>
         
       </div>
@@ -42,6 +43,7 @@
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.Rings}}</span>
                 </div>
+                <span class="login-border"></span>
                 <div v-for="(ring, r) in rings" :key="r" @click="toPage(ring.routerName, ring.query,r)" :class='{changeColor:r==isactive}'>
                   <div class="two" >
                     <span>{{ring.name}}</span>
@@ -134,15 +136,14 @@
       </div>
       <div class="bottom" v-show="bottom">
         <div class="call-us">
-          <div class="item">
-              <div class="item-icon">
-                <i class="iconfont icongerenzhongxin"></i>
-                <!-- <img src="/user.png" alt=""> -->
-              </div>
-              <div class="item-name">
-                {{ lang.callus }}
-              </div>
+          <!-- <div class="item">
+            <div class="item-icon">
+              <i class="iconfont icongerenzhongxin"></i>
             </div>
+            <div class="item-name">
+              {{ lang.callus }}
+            </div>
+          </div> --> 
         </div>
         <div class="help">
           <a href="tel:+852 2165 3905">
@@ -343,7 +344,8 @@ export default {
           name: this.LANGUAGE.components.leftMenu.knowledge,
           routerName: 'help-pages-knowledge',
         }
-      ]
+      ],
+      date:''
     }
   },
   computed: {
@@ -372,18 +374,54 @@ export default {
       return result
     }
   },
+  // created() {
+  //   this.$store.dispatch('getUserInfo')
+  //   this.getinfo()
+  // },
   mounted(){
     // console.log("dddd",window.location.href)
     const _this = this
     if(_this.$store.getters.hadLogin){
       this.showa=false
       this.showb=true
+      this.$store.dispatch('getUserInfo')
+      this.getinfo()
       // this.isActive=true
       // this.show=true
     }
     console.log("sssss",this.categoryId)
   },
   methods: {
+    getinfo() {
+      const _this = this
+      _this
+        .$axios({
+          method: 'get',
+          url: `/web/member/member/me`
+        })
+        .then(res => {
+          // console.log("eeee",res)
+          this.date = res
+          if (this.date === 1) {
+            this.headImg = require('~/static/personal/men.png')
+          } else if (this.date === 2) {
+            this.headImg = require('~/static/personal/women.png')
+          } else {
+            this.headImg = require('~/static/personal/unknown.png')
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+     // 加密显示
+    replacepos(text, start, stop, replacetext) {
+      if (text) {
+        const mystr =
+          text.substring(0, stop - 3) + replacetext + text.substring(stop + 3)
+        return mystr
+      }
+    },
     toPersonal() {
       this.hide()
       // 点击登入获取上页url
@@ -591,6 +629,12 @@ export default {
       transform: rotate(270deg);
       display: inline-block;
     }
+    // .login-border{
+    //   display: inline-block;
+    //   height: 2px;
+    //   width: 100%;
+    //   background-image: linear-gradient(90deg,#fff,#e4ecf0,#fff);
+    // }
     .menus-one{
       font-size: 14px;
       display: flex;
@@ -598,7 +642,7 @@ export default {
       padding: 15px 0;
       // height: 50px;
       padding-left:20px;
-      border-bottom:1px solid #fff;
+      // border-bottom:2px solid #fff;
       // background-color: #e4ecf0;
       z-index: 99;
       color: rgb(15, 14, 14);
@@ -614,14 +658,15 @@ export default {
         transform: translate(100%, 0);
         transition: all 0.2s linear;
         z-index: 100;
+        background-color: #F5F5F5;
         .goback{
           margin: 0 10px;
           text-align: left;
           padding: 15px 0px;
           // background-color: #e4ecf0;
-          border-bottom:2px solid #e4ecf0;
+          border-bottom:2px solid #A9C6D5;
           .status-icon{
-            margin-left: 10px;
+            margin-left: 5px;
             transform: rotate(450deg);
           }
           span{
@@ -631,7 +676,7 @@ export default {
           }
         }
         .two{
-          padding: 15px 20px;
+          padding: 15px 15px;
           display: flex;
           justify-content: space-between;
           >span:hover{
@@ -648,7 +693,8 @@ export default {
         width: 270px;
         height: 100%;
         box-sizing: border-box;
-        background-color: #ffffff;
+        // background-color: #ffffff;
+        background-color: #F5F5F5;
         // transition: right .3s ease-in-out;
         // box-shadow: 0 6px 21px 1px rgba(153, 153, 153, 0.35); /*no*/
         // transform: translate(50%, 0);
@@ -723,7 +769,7 @@ export default {
   width: 270px;
   height: 100%;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background-color: #F5F5F5;
   box-shadow: 0 6px 21px 1px rgba(153, 153, 153, 0.35); /*no*/
   transform: translate(-100%, 0);
   transition: all 0.2s linear;
@@ -740,8 +786,9 @@ export default {
   flex-shrink: 0;
   position: relative;
   width: 100%;
-  height: 44px;
-  padding: 0 20px;
+  height: 55px;
+  padding-left:15px;
+  border-top:8px solid #a2c2d2;
   background-color: #e4ecf0;
   // margin-bottom: 10px;
   box-sizing: border-box;
@@ -753,8 +800,9 @@ export default {
   // flex-grow: 1;
   // flex-shrink: 1;
   // color: #A2C2D2;
+  display: flex;
   text-align: right;
-  margin-right: 30px;
+  margin-right: 3px;
   .iconfont {
     font-size: 20px;
   }
@@ -774,6 +822,10 @@ export default {
 }
 .pl-login{
   color: #6f9eb1;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+  // font-size: 10px;
 }
 .site-info .flag {
   flex-grow: 0;
@@ -796,10 +848,12 @@ export default {
   box-sizing: border-box;
 }
 .site-info .gap-line {
-  margin: 0 13px;
+  margin: 0 23px 0 30px;
   width: 1px;
   height: 16px;
-  background: rgba(221, 221, 221, 1);
+  font-size: 12px;
+  background-color: #a2c2d2;
+  // background: rgba(221, 221, 221, 1);
 }
 .site-info .coin {
   flex-grow: 0;
@@ -870,6 +924,7 @@ export default {
     font-size: 14px;
     font-weight: 400;
     // color: rgba(153, 153, 153, 1);
+    // height: 34px;
     text-align: left;
     margin-bottom: 10px;
     .item {
