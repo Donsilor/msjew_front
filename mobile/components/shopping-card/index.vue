@@ -160,7 +160,12 @@
     mounted(){
       if(this.cardType.length != 0){
         var that=this, arr4=[];
+        
         for(var i=0, len=this.cardType.length; i<len; i++){
+          if (len > 2 && i > 1) {
+            this.addCard();
+          }
+          
           this.cardList[i].account = this.cardType[i].sn;
           this.cardList[i].conversionNum = this.cardType[i].pw;
           this.cardList[i].balance = this.cardType[i].balance;

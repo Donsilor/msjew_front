@@ -51,7 +51,8 @@
                 <div class="text" @click="eliminate(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
               </div>
             </div>
-            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && item.ifShowRemove" @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
+            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && item.ifShowRemove"
+              @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
           </div>
 
           <div class="btn-box" style="max-width: 416px;margin-top: 0;" v-if="item.type == 1">
@@ -90,7 +91,7 @@
 
       <div class="pop-box" v-if="verifyStatus == 2">
         <div class="icon"></div>
-        <div class="status">{{ $t(`${lang}.verifyInvalid`) }}</div>
+        <div class="status">{{ $t(`${lang}.invalidCards`) }}</div>
         <div class="btn">{{ $t(`${lang}.anewAdd`) }}</div>
       </div>
     </div>
@@ -110,12 +111,11 @@
 
 <script>
   const lang = 'shoppingCard'
-  export default{
-    data(){
-      return{
+  export default {
+    data() {
+      return {
         lang,
-        cardList:[
-          {
+        cardList: [{
             account: '',
             conversionNum: '',
             balance: '',
@@ -152,12 +152,13 @@
         arr5: []
       }
     },
-    props: ['cardType','goodsLine'],
-    mounted(){
-      if(this.cardType.length != 0){
-        var that = this, arr4 = [];
-        for(var i=0, len=this.cardType.length; i<len; i++){
-          if(len > 2 && i > 1){
+    props: ['cardType', 'goodsLine'],
+    mounted() {
+      if (this.cardType.length != 0) {
+        var that = this,
+          arr4 = [];
+        for (var i = 0, len = this.cardType.length; i < len; i++) {
+          if (len > 2 && i > 1) {
             this.addCard();
           }
 
@@ -171,21 +172,21 @@
           arr4[i] = this.cardType[i].goodsTypes;
         }
 
-        for(var i=0, len=arr4.length; i<len; i++){
+        for (var i = 0, len = arr4.length; i < len; i++) {
           this.arr5[i] = '';
-          for(var j in arr4[i]){
-            this.arr5[i] += (arr4[i][j]+'.');
+          for (var j in arr4[i]) {
+            this.arr5[i] += (arr4[i][j] + '.');
           }
         }
 
-        for(var k=0, len=this.arr5.length; k<len; k++){
+        for (var k = 0, len = this.arr5.length; k < len; k++) {
           this.cardList[k].usableRange = this.arr5[k];
         }
       }
     },
-    methods:{
+    methods: {
       // 添加更多
-      addCard(){
+      addCard() {
         var card = {
           account: '',
           conversionNum: '',
@@ -200,18 +201,18 @@
         this.ifChooseAll = false;
       },
       // 取消
-      quit(){
+      quit() {
         this.$emit('closePop', true);
       },
       // 确定
-      confirm(){
+      confirm() {
         var arr3 = [], //除去无效购物卡
-            flag7 = false; //判断是否有被选中购物卡
+          flag7 = false; //判断是否有被选中购物卡
 
-        for(var i=0, len=this.cardList.length; i<len; i++){
-          if(!this.cardList[i].ifChoose){
+        for (var i = 0, len = this.cardList.length; i < len; i++) {
+          if (!this.cardList[i].ifChoose) {
             arr3.push(i);
-          }else{
+          } else {
             flag7 = true
           }
         }
@@ -219,7 +220,7 @@
         arr3 = arr3.reverse();
 
 
-        if(flag7){
+        if (flag7) {
           var that = this;
           // for(var i=0, len=arr3.length; i<len; i++){
           //   this.cardList.splice(arr3[i], 1)
@@ -227,22 +228,27 @@
 
           this.$successMessage(this.$t(`${lang}.msg10`));
 
-          var Timer = setTimeout(function(){
+          var Timer = setTimeout(function() {
             that.send()
             Timer = null;
-          },1500)
+          }, 1500)
 
-        }else{
+        } else {
           this.$errorMessage(this.$t(`${lang}.msg9`));
         }
 
       },
       // 发送
-      send(){
-        var that = this,j = 0,item = {sn: '',pw: ''};
+      send() {
+        var that = this,
+          j = 0,
+          item = {
+            sn: '',
+            pw: ''
+          };
 
-        for(var i=0, len=this.cardList.length; i<len; i++){
-          if(this.cardList[i].ifChoose == true){
+        for (var i = 0, len = this.cardList.length; i < len; i++) {
+          if (this.cardList[i].ifChoose == true) {
             this.submit.push(item);
             this.submit[j].sn = this.cardList[i].account;
             this.submit[j].pw = this.cardList[i].conversionNum;
@@ -251,104 +257,105 @@
           }
         }
 
-        console.log(9999, that.submit)
         this.$emit('closePop', that.submit);
       },
       // 验证
-      verification(k){
-        var that = this, flag = true;
+      verification(k) {
+        var that = this,
+          flag = true;
         this.nowIndex = k;
 
-        if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
+        if (this.cardList[k].account == '' || this.cardList[k].conversionNum == '') {
           this.$errorMessage(that.$t(`${lang}.msg1`));
-        }else{
+        } else {
           var ifRepetition = true;
-          for(var i=0,len=this.cardList.length; i<len; i++){
-            if(i != k && this.cardList[i].account == this.cardList[k].account){
+          for (var i = 0, len = this.cardList.length; i < len; i++) {
+            if (i != k && this.cardList[i].account == this.cardList[k].account) {
               ifRepetition = false;
               break
             }
           }
 
-          if(!ifRepetition){
+          if (!ifRepetition) {
             this.$errorMessage(that.$t(`${lang}.msg5`));
-          }else{
+          } else {
             this.ifLoading = true;
             this.$axios.post('web/member/card/verify', {
-              sn: that.cardList[k].account,
-              pw: that.cardList[k].conversionNum,
-            })
-            .then(res => {
-              that.ifLoading = false;
-              that.ifShowPop = true;
-              that.cardList[that.nowIndex].balance = res.data.balanceCny-0;
-              that.currency = res.data.currency;
-              that.startTime = res.data.startTime * 1000;
-              that.endTime = res.data.endTime * 1000;
+                sn: that.cardList[k].account,
+                pw: that.cardList[k].conversionNum,
+              })
+              .then(res => {
+                that.ifLoading = false;
+                that.ifShowPop = true;
+                that.cardList[that.nowIndex].balance = res.data.balanceCny;
+                that.currency = res.data.currency;
+                that.startTime = res.data.startTime * 1000;
+                that.endTime = res.data.endTime * 1000;
 
-              var c = 0, arr = [];
-              for(var n in res.data.goodsTypes){
-                arr[c] = res.data.goodsTypes[n];
-                c++;
-              }
-
-              that.cardList[that.nowIndex].usableRange = arr.join('.');
-
-              that.verifyLine(res.data.goodsTypeAttach, k);
-
-              var time = new Date().getTime();
-              // console.log(888,time,999,that.startTime,0,that.endTime)
-              if(time > that.startTime && time < that.endTime){
-                that.verifyStatus = 1;
-
-                if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
-                  that.cardList[that.nowIndex].ifChoose = true;
+                var c = 0,
+                  arr = [];
+                for (var n in res.data.goodsTypes) {
+                  arr[c] = res.data.goodsTypes[n];
+                  c++;
                 }
 
-                for(var i=0,len=that.cardList.length; i<len; i++){
-                  if(that.cardList[i].ifChoose != true){
-                    flag = false;
+                that.cardList[that.nowIndex].usableRange = arr.join('.');
+
+                that.verifyLine(res.data.goodsTypeAttach, k);
+
+                var time = new Date().getTime();
+                // console.log(888,time,999,that.startTime,0,that.endTime)
+                if (time > that.startTime && time < that.endTime) {
+                  that.verifyStatus = 1;
+                  that.cardList[that.nowIndex].type = 1;
+
+                  if (that.cardList[that.nowIndex].balance - 0 !== 0 && that.cardList[that.nowIndex].ifAllowedToUse) {
+                    that.cardList[that.nowIndex].ifChoose = true;
                   }
-                }
 
-                if(flag){
-                  that.ifChooseAll = true;
-                }
-              }else if(time < that.startTime){
-                that.verifyStatus = 2;
-                that.$errorMessage(that.$t(`${lang}.msg12`));
-              }else if(time > that.endTime){
-                that.verifyStatus = 2;
-                that.$errorMessage(that.$t(`${lang}.msg13`));
-              }
+                  for (var i = 0, len = that.cardList.length; i < len; i++) {
+                    if (that.cardList[i].ifChoose != true) {
+                      flag = false;
+                    }
+                  }
 
-            })
-            .catch(err => {
-              that.ifLoading = false;
-              that.ifShowPop = true;
-              that.verifyStatus = 2;
-            })
+                  if (flag) {
+                    that.ifChooseAll = true;
+                  }
+                } else if (time < that.startTime) {
+                  that.verifyStatus = 2;
+                  that.cardList[that.nowIndex].type = 2;
+                  that.$errorMessage(that.$t(`${lang}.msg12`));
+                } else if (time > that.endTime) {
+                  that.verifyStatus = 2;
+                  that.cardList[that.nowIndex].type = 2;
+                  that.$errorMessage(that.$t(`${lang}.msg13`));
+                }
+              })
+              .catch(err => {
+                that.ifLoading = false;
+                that.ifShowPop = true;
+                that.verifyStatus = 2;
+              })
           }
         }
-
-
       },
       // 验证产品线
-      verifyLine(element, k){
-        for(var i=0, len=this.goodsLine.length; i<len; i++){
-          for(var j=0, lek=element.length; j<lek; j++){
-            if(this.goodsLine[i] == element[j]){
+      verifyLine(element, k) {
+        for (var i = 0, len = this.goodsLine.length; i < len; i++) {
+          for (var j = 0, lek = element.length; j < lek; j++) {
+            if (this.goodsLine[i] == element[j]) {
               this.cardList[k].ifAllowedToUse = true;
             }
           }
         }
       },
       // 关闭弹窗
-      closePop(){
+      closePop() {
         this.ifShowPop = false;
-        if(this.verifyStatus == 1){
+        if (this.verifyStatus == 1) {
           this.cardList[this.nowIndex].type = 1;
-        }else if(this.verifyStatus == 2){
+        } else if (this.verifyStatus == 2) {
           this.cardList[this.nowIndex].type = 2;
           var list = this.$refs.list[this.nowIndex];
           var ipt = list.getElementsByClassName('ipt')[0];
@@ -358,117 +365,116 @@
         }
       },
       // 消除此卡
-      eliminate(k){
+      eliminate(k) {
         // 提示是否清除？？？？
-        this.cardList.splice(k,1)
+        this.cardList.splice(k, 1)
         // this.cardList[k]
       },
       // 选择单个购物卡
-      chooseList(k){
-        var that=this, flag=true, flag2=true;
-          if(this.cardList[k].ifChoose == false){
-            if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
-              this.$errorMessage(that.$t(`${lang}.msg1`));
-            }else{
-              if(this.cardList[k].type == 0){
-                this.$errorMessage(that.$t(`${lang}.msg2`));
-              }else if(this.cardList[k].type == 1){
-                var time = new Date().getTime();
-                // console.log(888,time,999,that.startTime,0,that.endTime)
-                if(time > that.startTime && time < that.endTime){
-                  if(this.cardList[k].balance !== 0){
-                    if(this.cardList[k].ifAllowedToUse){
-                      this.cardList[k].ifChoose = true;
-                    }else{
-                      this.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
-                    }
-                  }else{
-                    this.$errorMessage(that.$t(`${lang}.msg6`));
-                  }
-                }else if(time < that.startTime){
-                  that.verifyStatus = 2;
-                  that.$errorMessage(that.$t(`${lang}.msg12`));
-                }else if(time > that.endTime){
-                  that.verifyStatus = 2;
-                  that.$errorMessage(that.$t(`${lang}.msg13`));
+      chooseList(k) {
+        var that = this,
+          flag = true,
+          flag2 = true;
+        if (this.cardList[k].ifChoose == false) {
+          if (this.cardList[k].account == '' || this.cardList[k].conversionNum == '') {
+            this.$errorMessage(that.$t(`${lang}.msg1`));
+          } else {
+            if (this.cardList[k].type == 0) {
+              this.$errorMessage(that.$t(`${lang}.msg2`));
+            } else if (this.cardList[k].type == 1) {
+              if (this.cardList[k].balance - 0 !== 0) {
+                if (this.cardList[k].ifAllowedToUse) {
+                  this.cardList[k].ifChoose = true;
+                } else {
+                  this.$errorMessage(that.$t(`${lang}.msg7`) + " (" + that.cardList[that.nowIndex].usableRange + ") " +
+                    that.$t(`${lang}.msg8`));
                 }
+              } else {
+                this.$errorMessage(that.$t(`${lang}.msg6`));
+              }
+            } else if (this.cardList[k].type == 2) {
 
-              }else if(this.cardList[k].type == 2){
-                this.$errorMessage(that.$t(`${lang}.msg3`));
+              var time = new Date().getTime();
+
+              if (time < that.cardList[k].startTime) {
+                that.$errorMessage(that.$t(`${lang}.msg12`));
+              } else if (time > that.cardList[k].endTime) {
+                that.$errorMessage(that.$t(`${lang}.msg13`));
               }
             }
-
-            for(var i=0,len=this.cardList.length; i<len; i++){
-              if(!this.cardList[i].ifChoose){
-                flag = false;
-              }
-              if(!this.cardList[i].ifAllowedToUse){
-                flag2 = false;
-              }
-            }
-
-            if(flag && flag2){
-              this.ifChooseAll = true;
-            }
-
-          }else{
-            this.cardList[k].ifChoose = false;
-            this.ifChooseAll = false;
           }
+
+          for (var i = 0, len = this.cardList.length; i < len; i++) {
+            if (!this.cardList[i].ifChoose) {
+              flag = false;
+            }
+            if (!this.cardList[i].ifAllowedToUse) {
+              flag2 = false;
+            }
+          }
+
+          if (flag && flag2) {
+            this.ifChooseAll = true;
+          }
+
+        } else {
+          this.cardList[k].ifChoose = false;
+          this.ifChooseAll = false;
+        }
       },
       // 选择全部购物卡
-      allChoose(){
+      allChoose() {
         var that = this,
-            flag = false,      //账号密码是否为空
-            flag2 = true,     //是否全部通过验证
-            flag3 = true,     //是否有余额为零
-            flag4 = true;     //是否可以使用的产品线
-        if(this.ifChooseAll == false){
-          for(var i of this.cardList){
-            if(i.account !== '' && i.conversionNum !== ''){
+          flag = false, //账号密码是否为空
+          flag2 = true, //是否全部通过验证
+          flag3 = true, //是否有余额为零
+          flag4 = true; //是否可以使用的产品线
+        if (this.ifChooseAll == false) {
+          for (var i of this.cardList) {
+            if (i.account !== '' && i.conversionNum !== '') {
               flag = true;
             }
 
-            if(i.type != 1){
+            if (i.type != 1) {
               flag2 = false;
             }
 
-            if(i.balance === 0){
+            if (i.balance === 0) {
               flag3 = false;
             }
 
-            if(!i.ifAllowedToUse){
+            if (!i.ifAllowedToUse) {
               flag4 = false;
             }
           }
 
-          if(!flag3 || !flag2 || !flag || !flag4){
+          if (!flag3 || !flag2 || !flag || !flag4) {
             this.$errorMessage(that.$t(`${lang}.msg4`));
           }
 
-          if(flag && flag2 && flag3 && flag4){
+          if (flag && flag2 && flag3 && flag4) {
             this.ifChooseAll = true;
-            for(var i of this.cardList){
+            for (var i of this.cardList) {
               i.ifChoose = true
             }
           }
-        }else{
+        } else {
           this.ifChooseAll = false;
 
-          for(var i of this.cardList){
+          for (var i of this.cardList) {
             i.ifChoose = false;
           }
         }
       },
       // 输入时改变状态
-      inputInfo(k){
+      inputInfo(k) {
         this.cardList[k].type = 0;
         this.cardList[k].ifChoose = false;
         this.ifChooseAll = false;
         this.cardList[k].ifShowRemove = false;
       },
       // 解除绑定
-      removeBinding(n){
+      removeBinding(n) {
         // this.cardList[n].account = '';
         // this.cardList[n].conversionNum = '';
         // this.cardList[n].balance = '';
@@ -478,11 +484,11 @@
         this.ifShowPop2 = true;
       },
       // 关闭弹窗
-      closePop2(){
+      closePop2() {
         this.ifShowPop2 = false;
       },
       // 确认解除绑定
-      confirmUnbinding(){
+      confirmUnbinding() {
         var that = this;
         this.ifShowPop2 = false;
         this.cardList[this.removeIndex].account = '';
@@ -493,10 +499,10 @@
 
         this.$successMessage(that.$t(`${lang}.msg11`));
 
-        var Timer2 = setTimeout(function(){
+        var Timer2 = setTimeout(function() {
           that.send()
           Timer2 = null;
-        },1500)
+        }, 1500)
       }
 
     }
@@ -504,13 +510,15 @@
 </script>
 
 <style scoped>
-  .fl{
+  .fl {
     float: left;
   }
-  .fr{
+
+  .fr {
     float: right;
   }
-  .clf::after{
+
+  .clf::after {
     display: block;
     content: '.';
     height: 0;
@@ -520,7 +528,7 @@
     clear: both;
   }
 
-  .container{
+  .container {
     position: fixed;
     top: 0;
     left: 0;
@@ -529,7 +537,8 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
   }
-  .box{
+
+  .box {
     background-color: #fff;
     position: absolute;
     top: 50%;
@@ -541,16 +550,18 @@
     box-sizing: border-box;
     overflow-y: auto;
   }
-  .title{
+
+  .title {
     height: 100px;
     line-height: 110px;
     text-align: center;
     position: relative;
     font-size: 20px;
     color: #666;
-    border-bottom: 1px solid rgba(110,112,110,0.2);
+    border-bottom: 1px solid rgba(110, 112, 110, 0.2);
   }
-  .title .quit{
+
+  .title .quit {
     position: absolute;
     top: 20%;
     right: 0px;
@@ -560,7 +571,7 @@
     background-size: 100% 100%;
   }
 
-  .card-box{
+  .card-box {
     margin-top: 80px;
     display: flex;
     align-items: ;
@@ -568,19 +579,22 @@
     flex-wrap: wrap;
   }
 
-  .list{
+  .list {
     margin-bottom: 20px;
   }
-  .list:nth-child(even) .card-info{
+
+  .list:nth-child(even) .card-info {
     border-left: 1px solid #aaa;
   }
-  .card-info{
+
+  .card-info {
     display: flex;
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
   }
-  .choose{
+
+  .choose {
     width: 20px;
     height: 20px;
     border: 1px solid #a0a0a0;
@@ -588,52 +602,61 @@
     border-radius: 50%;
     cursor: pointer;
   }
-  .choose.active{
+
+  .choose.active {
     background: url(../../static/addShoppingCard/success.png) no-repeat center;
     background-size: 100% 100%;
     border-color: #157f12;
   }
-  .child{
+
+  .child {
     display: flex;
     align-items: center;
   }
-  .child:first-child{
+
+  .child:first-child {
     margin-bottom: 12px;
   }
-  .child>.icon{
+
+  .child>.icon {
     width: 20px;
     height: 20px;
   }
-  .child:first-child>.icon{
+
+  .child:first-child>.icon {
     background: url(../../static/addShoppingCard/card.png) no-repeat center;
     background-size: 80% auto;
   }
-  .child>.text{
+
+  .child>.text {
     width: 58px;
     margin-left: 6px;
     font-size: 14px;
     color: #666;
   }
-  .ipt-box{
+
+  .ipt-box {
     width: 246px;
     height: 36px;
     border: 1px solid rgba(170, 170, 170, 0.5);
     margin-left: 6px;
   }
-  .ipt-box .ipt{
+
+  .ipt-box .ipt {
     width: 100%;
     height: 100%;
     padding: 0 3%;
     box-sizing: border-box;
   }
 
-  .btn-box{
+  .btn-box {
     margin-top: 30px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
   }
-  .btn-box .btn{
+
+  .btn-box .btn {
     width: 100px;
     height: 26px;
     background-color: #efefef;
@@ -647,17 +670,18 @@
     align-items: center;
     justify-content: center;
   }
-  .verify-btn{
+
+  .verify-btn {
     cursor: pointer;
   }
 
-  .verify-success .btn{
+  .verify-success .btn {
     background-color: #147f12;
     border-color: #147f12;
     color: #fff;
   }
 
-  .verify .text{
+  .verify .text {
     height: 20px;
     line-height: 20px;
     text-align: center;
@@ -667,21 +691,21 @@
     text-decoration: underline;
   }
 
-  .verify-success .text{
+  .verify-success .text {
     color: #147f12;
   }
 
-  .verify-failing .btn{
+  .verify-failing .btn {
     background-color: #ae1010;
     border-color: #ae1010;
     color: #fff;
   }
 
-  .verify-failing .text{
+  .verify-failing .text {
     cursor: pointer;
   }
 
-  .verify .icon{
+  .verify .icon {
     width: 16px;
     height: 16px;
     background: url(../../static/addShoppingCard/icon-1.png) no-repeat center;
@@ -689,25 +713,26 @@
     margin-right: 6px;
   }
 
-  .verify-failing .icon{
+  .verify-failing .icon {
     background-image: url(../../static/addShoppingCard/icon-2.png);
   }
 
-  .productLine{
+  .productLine {
     text-align: center;
     margin-top: 8px;
     font-size: 12px;
     color: #444;
     line-height: 18px;
   }
-  .productLine span{
+
+  .productLine span {
     color: #888;
   }
 
-  .add-card{
+  .add-card {
     width: 160px;
     height: 40px;
-    border-bottom: 1px solid rgba(110,112,110,0.2);
+    border-bottom: 1px solid rgba(110, 112, 110, 0.2);
     display: flex;
     align-items: center;
     padding-left: 20px;
@@ -715,7 +740,8 @@
     margin-top: 20px;
     cursor: pointer;
   }
-  .add-card .icon{
+
+  .add-card .icon {
     width: 20px;
     height: 20px;
     border: 1px solid #f5af93;
@@ -723,14 +749,16 @@
     background: url(../../static/addShoppingCard/add.png) no-repeat center;
     background-size: 80% 80%;
   }
-  .add-card .text{
+
+  .add-card .text {
     font-size: 16px;
     color: #f5af93;
     margin-left: 12px;
     text-decoration: underline;
   }
-  .all-choose{
-    width: 86px;
+
+  .all-choose {
+    width: 106px;
     margin-top: 24px;
     display: flex;
     align-items: center;
@@ -739,7 +767,8 @@
     color: #8d8c8c;
     text-decoration: underline;
   }
-  .all-choose .icon{
+
+  .all-choose .icon {
     width: 20px;
     height: 20px;
     border: 1px solid #a0a0a0;
@@ -747,25 +776,28 @@
     margin-right: 10px;
     cursor: pointer;
   }
-  .all-choose.active .icon{
+
+  .all-choose.active .icon {
     background: url(../../static/addShoppingCard/success.png) no-repeat center;
     background-size: 100% 100%;
   }
 
-  .annotation{
+  .annotation {
     font-size: 16px;
     color: #f5af93;
     padding-left: 50px;
     margin-top: 20px;
   }
-  .submit-box{
+
+  .submit-box {
     width: 400px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin: 40px auto;
   }
-  .submit-box .btn{
+
+  .submit-box .btn {
     width: 114px;
     height: 30px;
     text-align: center;
@@ -777,7 +809,7 @@
     cursor: pointer;
   }
 
-  .popup{
+  .popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -785,7 +817,8 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
   }
-  .pop-box{
+
+  .pop-box {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -798,20 +831,23 @@
     padding: 0 20px;
     box-sizing: border-box;
   }
-  .pop-box .icon{
+
+  .pop-box .icon {
     width: 46px;
     height: 46px;
     margin: 22px auto 0;
     background: url(../../static/addShoppingCard/success.png) no-repeat center;
     background-size: 100% 100%;
   }
-  .pop-box .status{
+
+  .pop-box .status {
     margin-top: 12px;
     text-align: center;
     color: #157f12;
     font-size: 14px;
   }
-  .pop-box .btn{
+
+  .pop-box .btn {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -825,17 +861,19 @@
     cursor: pointer;
   }
 
-  .popup.invalid .pop-box .status{
+  .popup.invalid .pop-box .status {
     color: #e19510;
   }
-  .popup.invalid .icon{
+
+  .popup.invalid .icon {
     background-image: url(../../static/addShoppingCard/failed.png);
   }
-  .popup.invalid .btn{
+
+  .popup.invalid .btn {
     background-color: #e19510;
   }
 
-  .affirm-eliminate{
+  .affirm-eliminate {
     position: fixed;
     top: 0;
     left: 0;
@@ -844,7 +882,8 @@
     background-color: rgba(0, 0, 0, 0.3);
     /* display: none; */
   }
-  .affirm-eliminate .wrap{
+
+  .affirm-eliminate .wrap {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -853,21 +892,24 @@
     background-color: #fff;
     border-radius: 6px;
   }
-  .whether{
+
+  .whether {
     height: 80px;
     line-height: 80px;
     text-align: center;
     background-color: #fff;
     border-radius: 6px;
   }
-  .affirm-eliminate .box-r{
+
+  .affirm-eliminate .box-r {
     height: 40px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 20px;
   }
-  .affirm-eliminate .box-r .btn{
+
+  .affirm-eliminate .box-r .btn {
     width: 100px;
     height: 26px;
     background-color: #efefef;
