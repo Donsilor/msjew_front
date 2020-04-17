@@ -122,6 +122,10 @@ export default {
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
       this.conditions[0].options = this.CONDITION_INFO.style.womanRings
       this.conditions[0].checked = style.toString()
+      this.conditions[1].options = this.CONDITION_INFO.quality.rings
+      this.conditions[1].checked = ``
+      this.conditions[2].checked = ``
+      this.conditions[2].options = []
       this.changeGender()
 
     },
