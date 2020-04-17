@@ -327,13 +327,14 @@
           <div class="info-line">
             <div class="label big-label">{{ $t(`${lang}.orderTotal`) }}</div>
             <div class="ff big-ff">
-              {{ data.coinCode }} {{ formatNumber(data.orderAmount) }}
+              <!-- {{ data.coinCode }} {{ formatNumber(data.orderAmount) }} -->
+              {{ data.coinCode }} {{ data.orderAmount }}
             </div>
           </div>
           <div class="info-line">
             <div class="label big-label">{{ $t(`${lang_invoice}.ultimatelyPay`) }}</div>
             <div class="ff big-ff">
-              {{ data.coinCode }} {{ formatNumber(data.payAmount) }}
+              {{ data.coinCode }} {{ data.payAmount }}
             </div>
           </div>
         </div>

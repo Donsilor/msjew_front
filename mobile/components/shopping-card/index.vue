@@ -284,7 +284,6 @@
               that.startTime = res.startTime * 1000;
               that.endTime = res.endTime * 1000;
 
-
               var c = 0, arr = [];
               for(var n in res.goodsTypes){
                 arr[c] = res.goodsTypes[n];
@@ -298,6 +297,7 @@
               var time = new Date().getTime();
               // console.log(888,time,999,that.startTime,0,that.endTime)
               if(time > that.startTime && time < that.endTime){
+                console.log(111111111)
                 that.verifyStatus = 1;
 
                 if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
@@ -327,10 +327,10 @@
                 }
               }else if(time < that.startTime){
                 that.verifyStatus = 2;
-                // that.$errorMessage(that.$t(`${lang}.msg12`));
+                that.$toast.show(this.lang.msg12);
               }else if(time > that.endTime){
                 that.verifyStatus = 2;
-                // that.$errorMessage(that.$t(`${lang}.msg13`));
+                that.$toast.show(this.lang.msg12);
               }
             })
             .catch(err => {
@@ -367,34 +367,56 @@
       },
       // 选择单个购物卡
       chooseList(k){
-        var that=this, flag=true;
-
-        if(this.cardList[k].ifChoose == false){
-          if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
-            this.$toast.show(this.lang.msg1);
+        var that=this, flag=true, flag2=true;
+          if(this.cardList[k].ifChoose == false){
+            if(this.cardList[k].account == '' || this.cardList[k].conversionNum == ''){
+              this.$toast.show(that.lang.msg1);
+            }else{
+              if(this.cardList[k].type == 0){
+                this.$toast.show(that.lang.msg2);
+              }else if(this.cardList[k].type == 1){
+                var time = new Date().getTime();
+                // console.log(888,time,999,that.startTime,0,that.endTime)
+                if(time > that.startTime && time < that.endTime){
+                  if(this.cardList[k].balance !== 0){
+                    if(this.cardList[k].ifAllowedToUse){
+                      this.cardList[k].ifChoose = true;
+                    }else{
+                      this.$toast.show(that.lang.msg7+" ("+that.cardList[that.nowIndex].usableRange+") "+that.lang.msg7);
+                    }
+                  }else{
+                    this.$toast.show(that.lang.msg6);
+                  }
+                }else if(time < that.startTime){
+                  that.verifyStatus = 2;
+                  this.$toast.show(that.lang.msg12);
+                }else if(time > that.endTime){
+                  that.verifyStatus = 2;
+                  this.$toast.show(that.lang.msg13);
+                }
+        
+              }else if(this.cardList[k].type == 2){
+                this.$toast.show(that.lang.msg3);
+              }
+            }
+        
+            for(var i=0,len=this.cardList.length; i<len; i++){
+              if(!this.cardList[i].ifChoose){
+                flag = false;
+              }
+              if(!this.cardList[i].ifAllowedToUse){
+                flag2 = false;
+              }
+            }
+        
+            if(flag && flag2){
+              this.ifChooseAll = true;
+            }
+        
           }else{
-            if(this.cardList[k].type == 0){
-              this.$toast.show(this.lang.msg2);
-            }else if(this.cardList[k].type == 1){
-              this.cardList[k].ifChoose = true;
-            }else if(this.cardList[k].type == 2){
-              this.$toast.show(this.lang.msg3);
-            }
+            this.cardList[k].ifChoose = false;
+            this.ifChooseAll = false;
           }
-
-          for(var i=0,len=this.cardList.length; i<len; i++){
-            if(this.cardList[i].ifChoose != true){
-              flag = false;
-            }
-          }
-
-          if(flag){
-            this.ifChooseAll = true;
-          }
-        }else{
-          this.cardList[k].ifChoose = false;
-          this.ifChooseAll = false;
-        }
       },
       // 选择全部购物卡
       allChoose(){

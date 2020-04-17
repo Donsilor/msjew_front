@@ -2353,6 +2353,7 @@
     "verifyValid": "Invaild Card",
     "alreadyAdd": "Have been added",
     "verifyInvalid": "Invalid shopping card",
+    "invalidCards": "Invalid shopping card",
     "anewAdd": "To add",
     "msg1": "Shopping card number or exchange code cannot be empty!",
     "msg2": "This card needs to be validated successfully to be used",

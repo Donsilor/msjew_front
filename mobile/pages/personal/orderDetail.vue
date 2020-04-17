@@ -80,14 +80,13 @@
           </div>
         </div>
 
-
        <!--        发货信息-->
         <div v-if="info.express" class="bundle-item">
 	     <div class="bundle-info">
             <div class="bundle-status">{{ lang.hadSend }}</div>
             <div class="bundle-company">
               <span>{{ lang.logistics }}：{{ info.express.companyName }}</span>
-              
+
             </div>
             <div class="bundle-code">
               {{ lang.logisticsNumber }}：{{ info.express.expressNo }}
@@ -96,8 +95,7 @@
               {{ lang.sendTime }}：{{ info.express.delivery_time }}
             </div>
           </div>
-	    </div> 
-
+	    </div>
 
         <!--        已发货商品-->
 		<!--
@@ -179,11 +177,11 @@
         </div>
          -->
       </div>
-	 
+
       <div class="invoice" v-show="invoice && invoice.invoiceTitle">
         <!-- <p class="title">发票信息</p> -->
         <ul>
-         
+
           <template v-if="!invoice.isElectronic">
             <li>{{ lang2.InvoiceType }}：{{ lang2.PaperInvoice }}</li>
           </template>
@@ -197,7 +195,7 @@
             <li>{{ lang2.HeaderType}}：{{ lang2.company }}</li>
           </template>
           <li>{{ lang2.Invoice }}：{{ invoice.invoiceTitle }}</li>
-          <li>{{ lang2.TaxID }}：{{ invoice.taxNumber }}</li> 
+          <li>{{ lang2.TaxID }}：{{ invoice.taxNumber }}</li>
           <li v-show="invoice.isElectronic == 1">{{ lang2.email }}：{{ invoice.email }}</li>
         </ul>
       </div>
@@ -259,11 +257,19 @@
             <span>{{ lang.transPreferFee }}： </span
             ><span>-{{ info.coinCode }} {{ info.transPreferFee }} </span>
           </li>
+          <li v-for="item in cardList">
+            <span>{{ lang.shoppingCard }}：( {{item.sn}} ) </span
+            ><span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
+          </li>
           <div class="all">
             <span>{{ lang.orderCount }}</span
             ><span
               ><em>{{ info.coinCode }} </em>{{ info.orderAmount }}
             </span>
+          </div>
+          <div class="all" style="border-top: 0;">
+            <span>{{ lang.ultimatelyPay }}： </span
+            ><span><em>{{ info.coinCode }} </em>{{ info.payAmount }} </span>
           </div>
         </ul>
         <div class="btn">
@@ -315,7 +321,8 @@ export default {
       lang2: this.LANGUAGE.cart.invoice,
       info: {},
       paytips: false,
-      invoice:{}
+      invoice:{},
+      cardList: []
     }
   },
   computed: {
@@ -420,7 +427,7 @@ export default {
         0: this.lang.cancelOrder,
         10: this.lang.hadNotPay,
         20: this.lang.hadPay,
-        30: this.lang.waitingSend, 
+        30: this.lang.waitingSend,
         40: this.lang.hadSend,
         50: this.lang.hadFinish,
       }
@@ -549,6 +556,7 @@ export default {
             : ''
           this.info = data
           this.invoice = data.invoice
+          this.cardList = data.cards
         })
         .catch(err => {
           console.log(err)
@@ -734,7 +742,7 @@ export default {
             goodId: goodId
           }
           break
-          
+
         }
       }
       if ([1].indexOf(info.groupType) > -1) {
@@ -1104,7 +1112,9 @@ export default {
         }
         .all {
           border-top: 1px solid #dddddd;
-          padding-top: 15px;
+          padding-top: 6px;
+          height: 28px;
+          line-height: 24px;
           span:nth-child(1) {
             float: left;
             font-size: 12px;
@@ -1151,5 +1161,13 @@ export default {
       }
     }
   }
+}
+.all::after{
+  display: block;
+  content: '.';
+  height: 0;
+  clear: both;
+  opacity: 0;
+  visibility: hidden;
 }
 </style>

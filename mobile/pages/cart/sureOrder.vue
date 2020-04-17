@@ -246,10 +246,14 @@
             </div>
             <span class="color-pink">-{{ coin }} {{ item.useAmount }}</span>
           </li>
-          <li>
+          <li class="order-pay">
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ showOrderAmount }}</span>
+            ><span>{{ coin }} {{ orderTotalAmount }}</span>
+          </li>
+          <li class="order-pay" style="border-top: 0;margin-top: 0;">
+            <span>{{ lang.ultimatelyPay }}</span
+            ><span>{{ coin }} {{ ultimatelyPay }}</span>
           </li>
         </ul>
       </div>
@@ -355,7 +359,9 @@ export default {
       useAmount: [],
       cardType: 1,
       goodsListLine: [],
-      scrollTop: 0
+      scrollTop: 0,
+      orderTotalAmount: 0,
+      ultimatelyPay: 0
     }
   },
   computed: {
@@ -748,6 +754,8 @@ export default {
           this.allFee = res
 
           this.useAmount = JSON.parse(JSON.stringify(res.cards))
+          this.orderTotalAmount = res.orderAmount;
+          this.ultimatelyPay = res.payAmount;
 
           // this.info=res.details
           // console.log("费用>>>>>>>>",this.info)
@@ -875,7 +883,7 @@ export default {
           .then(res => {
             // console.log("总额",res)
             if(res.payStatus == 1){
-              that.$toast.show(this.lang.submitSuccessfully);
+              this.$toast.show(this.lang.submitSuccessfully);
               this.$router.replace({
                 path: '/personal/order',
               })
@@ -1379,9 +1387,10 @@ export default {
             color: rgba(153, 153, 153, 1);
           }
         }
-        li:last-child {
-          line-height: 34px;
-          margin-top: 5px;
+        li.order-pay, {
+          line-height: 20px;
+          margin-top: 10px;
+          padding-top: 10px;
           border-top: 1px solid #dddddd;
           span:last-child {
             font-size: 20px;

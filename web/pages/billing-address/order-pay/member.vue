@@ -875,7 +875,8 @@
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
-              {{ formatMoney(tex.orderAmount || goodsPrice) }}
+              {{orderTotalAmount}}
+              <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
             </div>
           </div>
 
@@ -886,6 +887,7 @@
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
               {{ ultimatelyPay }}
+              <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
             </div>
           </div>
         </div>
@@ -895,10 +897,11 @@
         :class="['buy-btn', { disabled: !canSubmit }]"
         @click.stop="createOrder()"
       >
-        <span
-          >{{ $store.state.coin }}
-          {{ formatMoney(tex.payAmount || goodsPrice) }}</span
-        >
+        <span>
+          {{ $store.state.coin }}
+          {{ ultimatelyPay }}
+          <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
+        </span>
         <span>{{ $t(`${lang}.beiQin`) }}</span>
       </div>
     </div>
@@ -1791,7 +1794,8 @@
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
-              {{ formatMoney(tex.orderAmount || goodsPrice) }}
+              {{orderTotalAmount}}
+              <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
             </div>
           </div>
 
@@ -1811,10 +1815,11 @@
         :class="['buy-btn', { disabled: !canSubmit }]"
         @click.stop="createOrder1()"
       >
-        <span
-          >{{ $store.state.coin }}
-          {{ formatMoney(tex.payAmount || goodsPrice) }}</span
-        >
+        <span>
+          {{ $store.state.coin }}
+          {{ ultimatelyPay }}
+          <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
+        </span>
         <span>{{ $t(`${lang}.beiQin`) }}</span>
       </div>
     </div>
@@ -1956,6 +1961,7 @@ export default {
       useAmount: [],
       cardType: 1,
       goodsListLine: [],
+      orderTotalAmount: 0,
       ultimatelyPay: 0,
       num: 0
     }
@@ -2013,9 +2019,6 @@ export default {
       })
   },
   mounted() {
-    var a = 1512.125311;
-    this.floatingPoint(a);
-    console.log(111,a)
     // this.getAddress();
     this.language = this.getCookie('language')
   },
@@ -2752,6 +2755,7 @@ export default {
 
           // if(res.data.cards.length != 0){
             this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
+            this.orderTotalAmount = res.data.orderAmount;
             this.ultimatelyPay = res.data.payAmount;
           // }
 
@@ -2830,15 +2834,12 @@ export default {
               }
             })
           }
-          console.log('提交成功11111')
         })
         .catch(err => {
           if (!err.response) {
-            console.log('提交失败11111')
             var _this = this;
             _this.$errorMessage(err.message)
           } else {
-            console.log('提交失败2222222')
             console.log(err)
           }
         })

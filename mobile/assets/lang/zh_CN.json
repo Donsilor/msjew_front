@@ -496,6 +496,7 @@
       "transPreferFee": "电汇支付优惠",
       "orderCount": "订单总额",
       "toPay": "去付款",
+      "toPayWait": "付款中",
       "cancelOrder": "取消订单",
       "submit": "提交",
       "waitingPay": "待付款",
@@ -524,7 +525,9 @@
       "received": "已确认收货",
       "confirmCancellationOrder": "确认取消订单",
       "canceled": "已取消订单",
-      "paytips": "电汇指引"
+      "paytips": "电汇指引",
+      "shoppingCard": "购物卡",
+      "ultimatelyPay": "实际支付金额"
     }
   },
   "custom-made": {

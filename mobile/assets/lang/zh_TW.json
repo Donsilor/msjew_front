@@ -525,7 +525,9 @@
       "received": "已確認收貨",
       "confirmCancellationOrder": "確認取消订单",
       "canceled": "已取消订单",
-      "paytips": "電匯指引"
+      "paytips": "電匯指引",
+      "shoppingCard": "購物卡",
+      "ultimatelyPay": "實際支付金額"
     }
   },
   "custom-made": {

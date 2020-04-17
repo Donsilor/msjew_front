@@ -40,7 +40,7 @@
                   <span class="icon"></span>
                   <span>{{ $t(`${lang}.verifySucceed`) }}</span>
                 </div>
-                <div class="text">{{ $t(`${lang}.balance`) }}{{item.balance}}</div>
+                <div class="text">{{ $t(`${lang}.balance`) }}¥ {{item.balance}}</div>
               </div>
               <!-- 失败状态 -->
               <div v-else-if="item.type == 2" class="verify-failing">
@@ -157,9 +157,13 @@
       if(this.cardType.length != 0){
         var that = this, arr4 = [];
         for(var i=0, len=this.cardType.length; i<len; i++){
+          if(len > 2 && i > 1){
+            this.addCard();
+          }
+
           this.cardList[i].account = this.cardType[i].sn;
           this.cardList[i].conversionNum = this.cardType[i].pw;
-          this.cardList[i].balance = this.cardType[i].balance;
+          this.cardList[i].balance = this.cardType[i].balanceCny;
           this.cardList[i].type = 1;
           this.cardList[i].ifChoose = true;
           this.cardList[i].ifShowRemove = true;
@@ -247,6 +251,7 @@
           }
         }
 
+        console.log(9999, that.submit)
         this.$emit('closePop', that.submit);
       },
       // 验证
@@ -276,7 +281,7 @@
             .then(res => {
               that.ifLoading = false;
               that.ifShowPop = true;
-              that.cardList[that.nowIndex].balance = res.data.balance-0;
+              that.cardList[that.nowIndex].balance = res.data.balanceCny-0;
               that.currency = res.data.currency;
               that.startTime = res.data.startTime * 1000;
               that.endTime = res.data.endTime * 1000;
@@ -298,18 +303,6 @@
 
                 if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
                   that.cardList[that.nowIndex].ifChoose = true;
-                }
-
-                if(that.cardList[that.nowIndex].balance === 0 && !that.cardList[that.nowIndex].ifAllowedToUse){
-                  that.$errorMessage(that.$t(`${lang}.msg6`));
-                }
-
-                if(that.cardList[that.nowIndex].balance === 0){
-                  that.$errorMessage(that.$t(`${lang}.msg6`));
-                }
-
-                if(!that.cardList[that.nowIndex].ifAllowedToUse){
-                  that.$errorMessage(that.$t(`${lang}.msg7`)+" ("+that.cardList[that.nowIndex].usableRange+") "+that.$t(`${lang}.msg8`));
                 }
 
                 for(var i=0,len=that.cardList.length; i<len; i++){

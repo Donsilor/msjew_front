@@ -526,7 +526,9 @@
       "received": "Received",
       "confirmCancellationOrder": "Cancel order",
       "canceled": "Order cancelled",
-      "paytips": "WIRE TRANSFER GUIDE"
+      "paytips": "WIRE TRANSFER GUIDE",
+      "shoppingCard": "shopping card",
+      "ultimatelyPay": "Actual payment"
     }
   },
   "custom-made": {

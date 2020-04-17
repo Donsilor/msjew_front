@@ -2355,6 +2355,7 @@
     "verifyValid": "購物卡驗證有效！",
     "alreadyAdd": "已添加",
     "verifyInvalid": "卡號活驗證碼輸入有誤！",
+    "invalidCards": "無效購物卡",
     "anewAdd": "重新添加",
     "msg1": "購物卡號或兌換碼不能為空！",
     "msg2": "此卡需要驗證成功才能使用",
