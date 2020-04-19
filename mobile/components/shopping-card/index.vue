@@ -259,6 +259,7 @@
       },
       // 验证
       verification(k){
+				this.$nuxt.$loading.start()
         var that = this, flag = true;
         this.nowIndex = k;
 
@@ -282,6 +283,7 @@
               pw: that.cardList[k].conversionNum,
             })
             .then(res => {
+							this.$nuxt.$loading.finish()
               that.ifLoading = false;
               that.ifShowPop = true;
               that.cardList[that.nowIndex].balance = res.balanceCny-0;

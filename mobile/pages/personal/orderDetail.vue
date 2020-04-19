@@ -238,9 +238,11 @@
             ><span>{{ info.coinCode }} {{ productsPrice }} </span>
           </li>
 		  <li v-for="item in cardList">
-		    <span>{{ lang.shoppingCard }}：({{ cardLengthDispose(item.sn) }}) &nbsp;&nbsp;
-				<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
-			</span>
+		    <span>{{ lang.shoppingCard }}：
+					<em :class="info.orderStatus == 0 ? 'card-color' : ''">
+						({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
+					</em>
+				</span>
 			<span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
 		  </li>
           <li v-if="info.preferFee" class="active">
@@ -1175,5 +1177,8 @@ export default {
   clear: both;
   opacity: 0;
   visibility: hidden;
+}
+.card-color{
+	color: #999;
 }
 </style>
