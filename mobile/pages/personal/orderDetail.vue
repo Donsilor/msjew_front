@@ -237,6 +237,12 @@
             <span>{{ lang.productsCount }}： </span
             ><span>{{ info.coinCode }} {{ productsPrice }} </span>
           </li>
+		  <li v-for="item in cardList">
+		    <span>{{ lang.shoppingCard }}：({{ cardLengthDispose(item.sn) }}) &nbsp;&nbsp;
+				<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
+			</span>
+			<span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
+		  </li>
           <li v-if="info.preferFee" class="active">
             <span>{{ lang.offer }}： </span
             ><span>-{{ info.coinCode }} {{ info.preferFee }} </span>
@@ -257,10 +263,6 @@
             <span>{{ lang.transPreferFee }}： </span
             ><span>-{{ info.coinCode }} {{ info.transPreferFee }} </span>
           </li>
-          <li v-for="item in cardList">
-            <span>{{ lang.shoppingCard }}：( {{item.sn}} ) </span
-            ><span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
-          </li>
           <div class="all">
             <span>{{ lang.orderCount }}</span
             ><span
@@ -268,7 +270,7 @@
             </span>
           </div>
           <div class="all" style="border-top: 0;">
-            <span>{{ lang.ultimatelyPay }}： </span
+            <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span
             ><span><em>{{ info.coinCode }} </em>{{ info.payAmount }} </span>
           </div>
         </ul>
@@ -787,7 +789,11 @@ export default {
         name: routerName,
         query: routerQuery
       })
-    }
+    },
+	cardLengthDispose(num){
+	  num = num.slice(0,3)+'...'+num.slice(-3)
+	  return num;
+	}
   }
 }
 </script>

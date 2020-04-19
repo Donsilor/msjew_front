@@ -882,7 +882,7 @@
 
           <div class="detail-line">
             <div class="font-size-16 color-333">
-              {{ $t(`${lang2}.ultimatelyPay`) }}
+              {{ $t(`${lang2}.NeedPay`) }}
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
@@ -1801,7 +1801,7 @@
 
           <div class="detail-line">
             <div class="font-size-16 color-333">
-              {{ $t(`${lang2}.ultimatelyPay`) }}
+              {{ $t(`${lang2}.NeedPay`) }}
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}

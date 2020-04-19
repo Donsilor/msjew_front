@@ -90,7 +90,7 @@
 
       <div class="pop-box" v-if="verifyStatus == 2">
         <div class="icon"></div>
-        <div class="status">{{ lang.verifyInvalid }}</div>
+        <div class="status">{{ lang.invalidCards }}</div>
         <div class="btn">{{ lang.anewAdd }}</div>
       </div>
     </div>
@@ -168,7 +168,7 @@
           
           this.cardList[i].account = this.cardType[i].sn;
           this.cardList[i].conversionNum = this.cardType[i].pw;
-          this.cardList[i].balance = this.cardType[i].balance;
+          this.cardList[i].balance = this.cardType[i].balanceCny;
           this.cardList[i].type = 1;
           this.cardList[i].ifChoose = true;
           this.cardList[i].ifShowRemove = true;
@@ -274,7 +274,7 @@
           }
 
           if(!ifRepetition){
-            this.$toast.show('不能重复添加');
+            this.$toast.show(this.lang.msg5);
           }else{
             this.ifLoading = true;
             this.$axios.post('web/member/card/verify', {
@@ -284,7 +284,7 @@
             .then(res => {
               that.ifLoading = false;
               that.ifShowPop = true;
-              that.cardList[that.nowIndex].balance = res.balance-0;
+              that.cardList[that.nowIndex].balance = res.balanceCny-0;
               that.currency = res.currency;
               that.startTime = res.startTime * 1000;
               that.endTime = res.endTime * 1000;
@@ -302,24 +302,14 @@
               var time = new Date().getTime();
               // console.log(888,time,999,that.startTime,0,that.endTime)
               if(time > that.startTime && time < that.endTime){
-                console.log(111111111)
                 that.verifyStatus = 1;
+				that.cardList[k].type = 1;
 
-                if(that.cardList[that.nowIndex].balance !== 0 && that.cardList[that.nowIndex].ifAllowedToUse){
-                  that.cardList[that.nowIndex].ifChoose = true;
-                }
-
-                if(that.cardList[that.nowIndex].balance === 0 && !that.cardList[that.nowIndex].ifAllowedToUse){
-                  that.$toast.show(this.lang.msg6);
-                }
-
-                if(that.cardList[that.nowIndex].balance === 0){
-                  that.$toast.show(this.lang.msg6);
-                }
-
-                if(!that.cardList[that.nowIndex].ifAllowedToUse){
-                  that.$toast.show(that.lang.msg7+" "+that.cardList[that.nowIndex].usableRange+" "+this.lang.msg8);
-                }
+                if(that.cardList[k].balance !== 0 && that.cardList[k].ifAllowedToUse){
+                  that.cardList[k].ifChoose = true;
+                }else{
+					that.cardList[k].ifChoose = false;
+				}
 
                 for(var i=0,len=that.cardList.length; i<len; i++){
                   if(that.cardList[i].ifChoose != true){
@@ -332,10 +322,12 @@
                 }
               }else if(time < that.startTime){
                 that.verifyStatus = 2;
+				that.cardList[k].type = 2;
                 that.$toast.show(this.lang.msg12);
               }else if(time > that.endTime){
                 that.verifyStatus = 2;
-                that.$toast.show(this.lang.msg12);
+				that.cardList[k].type = 2;
+                that.$toast.show(this.lang.msg13);
               }
             })
             .catch(err => {
@@ -380,27 +372,26 @@
               if(this.cardList[k].type == 0){
                 this.$toast.show(that.lang.msg2);
               }else if(this.cardList[k].type == 1){
-                var time = new Date().getTime();
-                // console.log(888,time,999,that.startTime,0,that.endTime)
-                if(time > that.startTime && time < that.endTime){
-                  if(this.cardList[k].balance !== 0){
-                    if(this.cardList[k].ifAllowedToUse){
-                      this.cardList[k].ifChoose = true;
-                    }else{
-                      this.$toast.show(that.lang.msg7+" ("+that.cardList[that.nowIndex].usableRange+") "+that.lang.msg7);
-                    }
-                  }else{
-                    this.$toast.show(that.lang.msg6);
-                  }
-                }else if(time < that.startTime){
-                  that.verifyStatus = 2;
-                  this.$toast.show(that.lang.msg12);
-                }else if(time > that.endTime){
-                  that.verifyStatus = 2;
-                  this.$toast.show(that.lang.msg13);
-                }
-        
+				  if(this.cardList[k].balance !== 0){
+					if(this.cardList[k].ifAllowedToUse){
+					  this.cardList[k].ifChoose = true;
+					}else{
+					  this.$toast.show(that.lang.msg7+" ("+that.cardList[that.nowIndex].usableRange+") "+that.lang.msg7);
+					}
+				  }else{
+					this.$toast.show(that.lang.msg6);
+				  }
               }else if(this.cardList[k].type == 2){
+				  this.cardList[k].ifChoose = false;
+				  
+				  var time = new Date().getTime();
+				  if(time < this.cardList[k].startTime){
+					that.verifyStatus = 2;
+					this.$toast.show(that.lang.msg12);
+				  }else if(time > this.cardList[k].endTime){
+					that.verifyStatus = 2;
+					this.$toast.show(that.lang.msg13);
+				  }
                 this.$toast.show(that.lang.msg3);
               }
             }
@@ -436,11 +427,11 @@
               this.$toast.show(this.lang.msg1);
             }
 
-            if(i.type != 1){
+            if(i.type == 1 && i.balance !== 0 && i.ifAllowedToUse){
+				i.ifChoose = true;
+            }else{
               this.$toast.show(this.lang.msg4);
               flag2 = false;
-            }else{
-              i.ifChoose = true;
             }
           }
 

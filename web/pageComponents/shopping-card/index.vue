@@ -580,7 +580,7 @@
   }
 
   .list {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 
   .list:nth-child(even) .card-info {
@@ -737,7 +737,6 @@
     align-items: center;
     padding-left: 20px;
     box-sizing: border-box;
-    margin-top: 20px;
     cursor: pointer;
   }
 

@@ -332,7 +332,7 @@
             </div>
           </div>
           <div class="info-line">
-            <div class="label big-label">{{ $t(`${lang_invoice}.ultimatelyPay`) }}</div>
+            <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
             <div class="ff big-ff">
               {{ data.coinCode }} {{ data.payAmount }}
             </div>

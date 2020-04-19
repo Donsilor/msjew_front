@@ -200,6 +200,12 @@
               {{ formatMoney( productAmount) }}</span
             >
           </li>
+					<li v-for="item in useAmount">
+					  <div>
+					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
+					  </div>
+					  <span class="color-pink">-{{ coin }} {{ item.useAmount }}</span>
+					</li>
           <li v-show="preferFee > 0">
             <div>
               <span>{{ lang.preferFee }}</span>
@@ -240,19 +246,13 @@
             </div>
             <span>+{{ coin }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
-          <li v-for="item in useAmount">
-            <div>
-              <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
-            </div>
-            <span class="color-pink">-{{ coin }} {{ item.useAmount }}</span>
-          </li>
           <li class="order-pay">
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
             ><span>{{ coin }} {{ orderTotalAmount }}</span>
           </li>
           <li class="order-pay" style="border-top: 0;margin-top: 0;">
-            <span>{{ lang.ultimatelyPay }}</span
+            <span>{{ lang.NeedPay }}</span
             ><span>{{ coin }} {{ ultimatelyPay }}</span>
           </li>
         </ul>
