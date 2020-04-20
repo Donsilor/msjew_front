@@ -1,5 +1,5 @@
 <template>
-  <list-content :default-condition="defaultCondition"></list-content>
+  <list-content :default-condition="defaultCondition" :seo="this.seoInfo"></list-content>
 </template>
 
 <script>
@@ -14,6 +14,28 @@ export default {
         style: 2
       }
     }
+  },
+  async asyncData({ $axios, route, store, app }) {
+    const seoInfo = await app.$getSeoInfo(3)
+    console.log(33);
+    return $axios({
+      method: 'get',
+      url: '/web/goods/style/web-site',
+      params: {
+        // type: 2
+      }
+    })
+      .then(res => {
+        var data = res.data;
+        return {
+          seoInfo,
+          ad: data.advert,
+          webSite: data.webSite
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
 </script>

@@ -298,15 +298,15 @@ export default {
       meta: [
         {
           name: 'title',
-          content: this.info.goodsName,
+          content: this.info.name,
         },
         {
           name: 'description',
-          content: this.info.goodsName,
+          content: this.info.name,
         },
         {
           name: 'keywords',
-          content: this.info.goodsName,
+          content: this.info.name,
         }
       ]
     }

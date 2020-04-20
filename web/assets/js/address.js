@@ -177,7 +177,7 @@ export default {
             this.cityList = res.data
             this.cityList.unshift({
               areaId: '',
-              areaName: this.$t(`${lang}.select`)
+              areaName: '- - -'
             })
             this.city = obj.city_id
               ? { areaId: obj.city_id, areaName: obj.city_name }
@@ -205,7 +205,7 @@ export default {
 
       if(this.$store.state.language === 'zh_CN'){
         this.country={areaId:'7',areaName: '中国'}
-        this.countryList=[{ areaId:'7',areaName: '中国'}]
+        // this.countryList=[{ areaId:'7',areaName: '中国'}]
         this.getListTwo()
       }
     }

@@ -341,7 +341,7 @@ export default {
                 }
             })
             .then(data => {
-                console.log("加入购物车", data)
+                // console.log("加入购物车", data)
                 // 重新请求购物车数量（和购物车列表）
                 return Promise.resolve('success')
             })
@@ -546,6 +546,7 @@ export default {
         dispatch('getCartAmount')
         request
             .then(data => {
+                // console.log("cart",data)
                 commit('setCart', data)
                 return Promise.resolve(data)
             })

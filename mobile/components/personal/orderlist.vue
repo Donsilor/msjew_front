@@ -72,7 +72,8 @@
           </ul>
         </div>
         <div class="bottom">
-          <div class="order">
+          <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
+            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">查看订单</div>
             <span class="title">{{ lang.orderCount }}：</span>
             <div class="order-amount">
               <span class="coin-type">{{ order.coinCode }}</span>
@@ -582,5 +583,21 @@ export default {
       }
     }
   }
+}
+
+.order.no-margin{
+  margin-left: 0 !important;
+}
+.btn-look{
+    height: 0.853333rem;
+    padding: 0 0.56rem;
+    border-radius: 0.133333rem;
+    font-size: 0.373333rem;
+    line-height: 0.853333rem;
+    font-weight: 400;
+    text-align: center;
+    color: #F29C88;
+    border: 1px solid #F29C88;
+    margin-right: 0.6rem;
 }
 </style>

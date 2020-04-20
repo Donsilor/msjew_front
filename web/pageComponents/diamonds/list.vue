@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <div class="page-content" v-loading="loading">
     <div class="search-condition">
       <!--      形状条件-->
       <div class="condition-item condition-shape">
@@ -528,7 +528,7 @@
         </ul>
       </div>
     </div>
-    <section class="list-title">
+    <section class="list-title" v-show="this.loading == false">
       <h1 class="title">
         {{ $t(`${lang}.totalCountTitle`, { total_count }) }}
         <!--        {{-->
@@ -580,7 +580,7 @@
             />
           </li>
         </ul>
-        <div class="list-data visual-data">
+        <div class="list-data visual-data" v-loading = "loading">
           <div
             v-for="(item, index) in showingData"
             :key="index"
@@ -761,15 +761,24 @@
         </ul>
       </section>
       <div v-show="showNextPageButton" class="more-list-data">
-        <button
+        <!-- <button
           v-loading="requestingListData"
           class="check-more"
           @click="getNextPage"
         >
           {{ $t('common.getMore') }}
-        </button>
+        </button> -->
+        <div class="block">
+          <el-pagination
+            @current-change="handleCurrentChange"
+            :current-page="currentPage4"
+            :page-size="page_size"
+            layout="total, prev, pager, next, jumper"
+            :total="totalCount">
+          </el-pagination>
+        </div>
       </div>
-      <no-more-data v-show="showingData.length  == 0" :dataVal = "2"></no-more-data>
+      <no-more-data v-show="this.allData.length == 0 && this.loading == false" :dataVal = "2"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="product"></bdd-empty> -->
     </div>
     <div v-show="activeTab === 'compare'" class="compare-tab-content">
@@ -843,8 +852,9 @@ export default {
     ClarityPopover
   },
   mixins: [List, ListPage, Operate],
+  props:['seo'],
   head() {
-    return this.seoInfo || {
+    return this.seo || {
       title: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網',
       meta: [
         {
@@ -959,6 +969,7 @@ export default {
           sortType: '',
           sortBy: ''
       },
+      loading:true
     }
   },
   computed: {
@@ -1255,6 +1266,15 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
+      console.log("加载状态",this.loading)
+      // if(this.allData.length == 0){
+      //   this.loading = true
+      //   setTimeout(() => {
+      //     this.loading = false
+      //   }, 1000);
+      // }else if(this.allData.length > 0){
+      //   this.loading = false
+      // }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       allData.forEach(item => {
@@ -2291,6 +2311,70 @@ export default {
         }
       }
     }
+  }
+}
+</style>
+
+<style lang="less">
+// 修改elementUI分页组件的样式
+.page-content{
+  .el-pagination__sizes{
+    display: none!important;
+  }
+  .el-dialog, .el-pager li{
+    background: none;
+  }
+  .el-pagination button, .el-pagination span:not([class*=suffix]){
+    font-size:16px;
+    height: 37px!important;
+    line-height: 37px;
+  }
+  
+  .el-pager, .el-pager li{
+    font-size: 16px;
+  }
+  .el-pager {
+    height: 37px!important;
+    padding: 5px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    list-style: none;
+    font-size: 0;
+  }
+  .el-pager li.active {
+    color: #fff;
+    border-radius: 50%;
+    cursor: default;
+    background: #c1aaa0!important;
+  }
+  .el-pager li {
+    padding: 0 4px;
+    font-size: 13px;
+    min-width: 28.5px;
+    margin: 0 5px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 20px;
+  }
+  .el-pagination__editor.el-input .el-input__inner{
+    height: 28px;
+  }
+  .el-pagination button:disabled{
+    background-color: #f4f2f3;
+  }
+  .el-pagination .btn-next, .el-pagination .btn-prev{
+    background-color: #f4f2f3;
+  }
+  .el-pager li:hover{
+    color:#c1aaa0;
+  }
+  .el-pagination .btn-next .el-icon, .el-pagination .btn-prev .el-icon{
+    font-size:20px;
+  }
+  .el-pager .active:hover{
+    color: #fff!important;
   }
 }
 </style>

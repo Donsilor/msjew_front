@@ -259,6 +259,25 @@
 <script>
 import Mx from './pair-mixin'
 export default {
+  head() {
+    return {
+      title: this.goodInfo.name,
+      meta: [
+        {
+          name: 'title',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.goodInfo.goodsName,
+        }
+      ]
+    }
+  },
   mixins: [Mx],
   data(){
     return{

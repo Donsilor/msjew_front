@@ -4,7 +4,7 @@
       <i :class="['iconfont', leftIcon]"></i>
     </template>
     <input
-      v-model="inputValue"
+      v-model.trim="inputValue"
       spellcheck="false"
       :class="[{ password: passwordType }]"
       :style="inputStyle"

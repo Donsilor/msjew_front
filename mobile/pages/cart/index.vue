@@ -7,7 +7,6 @@
           <li
             v-for="(item, index) in list"
             :key="index"
-            @click="godetails(item, index)"
           >
             <div
               v-if="
@@ -17,8 +16,9 @@
                   item.groupType !== 0
                 )
               "
-              class="mod-item"
+              class="mod-item" 
             >
+			<div @click="godetails(item, index)">
               <img :src="imageStrToArray(item.goodsImages)[0]" />
               <span v-if="!getStatus(item, index)" class="failed">
                 {{ lang.failed }}
@@ -58,13 +58,33 @@
                   <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
                 </div>
               </div>
+		  </div>
               <div class="domore">
-                <i
-                  v-if="getStatus(item, index)"
-                  class="icon iconfont"
-                  :class="{ icongou: item.isSelect }"
+                <div
+                  class="select-icon"
                   @click.stop="isSelect(item, index)"
-                ></i>
+                >
+                  <i class="icon iconfont" :class="{ icongou: item.isSelect }"></i>
+                </div>
+                <!-- <a
+>>>>>>> 0f415a25d34f948b499dd303a5a6b2d8937d9469
+                  v-if="!getStatus(item, index)"
+                  class="similar"
+                  @click.stop="
+                    goMore(item.simpleGoodsEntity.categoryId, item.goodsId)
+                  "
+                  ><span v-if="item.groupType === 0"
+                    >{{ lang.similar }}
+                  </span></a
+                > -->
+                <a v-if="!getStatus(item, index)" href="" class="similar"></a>
+                <span class="remove" @click.stop="remove(item, index)"
+                  ><i class="icon iconfont iconicon-test2"></i>
+                  {{ lang.remove }}</span
+                >
+                <span class="num">{{ lang.number }} *1</span>
+              </div>
+              <div class="findsimilar">
                 <a
                   v-if="!getStatus(item, index)"
                   class="similar"
@@ -75,11 +95,6 @@
                     >{{ lang.similar }}
                   </span></a
                 >
-                <span class="remove" @click.stop="remove(item, index)"
-                  ><i class="icon iconfont iconicon-test2"></i>
-                  {{ lang.remove }}</span
-                >
-                <span class="num">{{ lang.number }} *1</span>
               </div>
             </div>
           </li>
@@ -170,7 +185,7 @@ export default {
           arr.push(this.list[i])
         }
       }
-      
+
       if (arr.length <= 0) {
         this.$toast.show(this.lang.toast1)
       } else if (arr.length > 0) {
@@ -326,7 +341,7 @@ export default {
       if (list.length > 0) {
         // console.log("item",list)
         list.map((item, index) => {
-          
+
           if (index === list.length - 1) {
             text = text + item.configAttrIVal
           } else {
@@ -420,7 +435,16 @@ export default {
         })
         .then(res => {
           // console.log("线上llll",res)
-          this.doFormat(res)
+          const result = []
+          let keys = Object.keys(res)
+          keys = keys.sort((a, b) => {
+            return b - a
+          })
+          keys.forEach(item => {
+            result.push(res[item])
+          })
+          this.doFormat(result)
+          // this.doFormat(res)
         })
         .catch(err => {
           console.log('err:', err)
@@ -719,30 +743,37 @@ export default {
             font-weight: 400;
             text-align: right;
             color: rgba(153, 153, 153, 1);
-            i {
-              width: 18px;
-              height: 18px;
+            .select-icon {
+              width: 40px;
+              height: 40px;
               text-align: center;
-              font-size: 18px;
-              line-height: 18px;
-              background: rgba(255, 255, 255, 1);
-              border: 1px solid rgba(153, 153, 153, 1);
-              border-radius: 50%;
-              margin-left: 50px;
+              margin: -10px 0 0 40px;
               cursor: pointer;
             }
-            .icongou {
-              background: rgba(242, 155, 135, 1);
-              color: #ffffff;
-              border: 1px solid rgba(242, 155, 135, 1);
-            }
+              i{
+                width: 18px;
+                height: 18px;
+                text-align: center;
+                font-size: 18px;
+                line-height: 18px;
+                background: rgba(255, 255, 255, 1);
+                border: 1px solid rgba(153, 153, 153, 1);
+                border-radius: 50%;
+                margin: 11px auto 0;
+                display: block;
+              }
+              .icongou {
+                background: rgba(242, 155, 135, 1);
+                color: #ffffff;
+                border: 1px solid rgba(242, 155, 135, 1);
+              }
             .iconicon-test2 {
               float: left;
               margin: 0;
               border: none;
             }
             .similar {
-              width: 125px;
+              width: 75px;
               text-align: center;
             }
             .remove {
@@ -752,6 +783,19 @@ export default {
               color: rgba(102, 102, 102, 1);
             }
             a {
+              text-decoration: underline;
+              color: rgba(206, 163, 160, 1);
+              cursor: pointer;
+            }
+          }
+          .findsimilar{
+            text-align: right;
+            margin-top: 15px;
+            font-size: 14px;
+            .similar {
+              width: 125px; 
+            }
+            a{
               text-decoration: underline;
               color: rgba(206, 163, 160, 1);
               cursor: pointer;

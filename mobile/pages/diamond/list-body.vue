@@ -24,7 +24,7 @@
     </div>
     <!--    list start-->
     <div class="list-part">
-      <div class="title">
+      <div class="title" v-show="pageInfo && pageInfo.total_count">
         <div>
           {{ lang.total }}
           <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>

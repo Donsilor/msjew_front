@@ -129,6 +129,7 @@
         { padding: newAddress ? '20px 51px 0 36px' : '0' }
       ]"
       class="new-address"
+      id="addbox"
     >
       <div class="new-address-title">
         <div class="na-line" />
@@ -1019,6 +1020,7 @@
         { padding: newAddress ? '20px 51px 0 36px' : '0' }
       ]"
       class="new-address"
+      id="addbox"
     >
       <div class="new-address-title">
         <div class="na-line" />
@@ -1888,7 +1890,9 @@ export default {
         is_electronic:"0",
         email:''
       },
+      scrollTop:0 ,
       areaId: this.$store.state.areaId,
+
     }
   },
   computed: {
@@ -1906,13 +1910,13 @@ export default {
     }
   },
   created() {
-    console.log("ssss",this.pathTakeIds)
+    // console.log("ssss",this.pathTakeIds)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {        
           this.good = res
-          console.log("res",res)
+          // console.log("res",res)
           resolve()
         })
         .catch(err => {
@@ -2027,6 +2031,7 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
+          console.log(res.data)
           this.address = res.data
           if(this.address.length != 0){
             // for (const i in res.data) {
@@ -2037,7 +2042,7 @@ export default {
             //   }
             // }
             this.orderAddress = this.address[0]
-            console.log("地址",this.orderAddress)
+            // console.log("地址",this.orderAddress)
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
@@ -2086,7 +2091,7 @@ export default {
     },
     createAddress() {
       // console.log('create')  /[^\d]/g,''
-       if (this.addressData.lastname === '') {
+      if (this.addressData.lastname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
@@ -2279,9 +2284,18 @@ export default {
         })
     },
     changeAddressInfo(obj) {
+      // 点击修改滚顶到地址编辑模块
+      document.getElementById('addbox').scrollIntoView({
+        block: 'center',
+        inline: 'nearest',
+        behavior: 'smooth'
+      })
       // console.log('需要修改的对象：', obj);
       this.isEdit = true
       const data = this.$helpers.cloneObject(obj)
+      if(data.zip_code == null){
+        data.zip_code = ''
+      }
       this.addressData = {
         id: data.id,
         firstname: data.firstname,
@@ -2311,41 +2325,53 @@ export default {
       })
     },
     saveAddress1() {
-      // console.log('save')
-      if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
-        this.alertBox = true
-        this.wrongInput.firstname = true
-        return false
-      }
-      if (this.addressData.firstname.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip7`)
-        this.alertBox = true
-        this.wrongInput.firstname = true
-        return false
-      }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
-      if (this.addressData.lastname.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip9`)
+      if (this.addressData.firstname === '') {
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
-        this.wrongInput.lastname = true
+        this.wrongInput.firstname = true
         return false
       }
-      if (
-        !RegMobile.test(this.addressData.mobile) &&
-        !RegTelephone.test(this.addressData.mobile)
-      ) {
+      if(this.phoneNum.phone_code == '+86'){
+        if (!RegMobiles.test(this.addressData.mobile)) {
+          this.wrongMsg = this.$t(`${lang}.wip2`)
+          this.alertBox = true
+          this.wrongInput.mobile = true
+          return false
+        }
+      }
+      if (!RegTelephone.test(this.addressData.mobile)) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
         this.wrongInput.mobile = true
         return false
       }
-      
+      // if (
+      //   !RegMobile.test(this.addressData.mobile) &&
+      //   !RegTelephone.test(this.addressData.mobile)
+      // ) {
+      //   this.wrongMsg = this.$t(`${lang}.wip2`)
+      //   this.alertBox = true
+      //   this.wrongInput.mobile = true
+      //   return false
+      // }
+      // if (!Email.test(this.addressData.email)) {
+      //   this.wrongMsg = this.$t(`${lang}.wip3`)
+      //   this.alertBox = true
+      //   this.wrongInput.email = true
+      //   return false
+      // }
+      // if (this.addressData.email !== this.addressData.checkEmail) {
+      //   this.wrongMsg = this.$t(`${lang}.wip3`)
+      //   this.alertBox = true
+      //   this.wrongInput.checkEmail = true
+      //   return false
+      // }
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
@@ -2356,6 +2382,9 @@ export default {
         this.alertBox = true
         this.wrongInput.address_details = true
         return false
+      }
+      if(this.city.areaId == ''){
+        this.city.areaId = '0'
       }
       const data = this.$helpers.transformRequest(
         JSON.parse(
@@ -2368,7 +2397,7 @@ export default {
             email: this.addressData.email,
             country_id: this.country.areaId,
             province_id: this.province.areaId,
-            cityId: this.city.areaId,
+            city_id: this.city.areaId,
             address_details: this.addressData.address_details,
             zip_code: this.addressData.zip_code
           })
@@ -2376,7 +2405,7 @@ export default {
         false
       )
       this.$axios
-        .post('/web/member/address/edit', data)
+        .post('/web/member/address/edit',data)
         .then(res => {
           // console.log("修改地址",res)
           this.getAddress()
@@ -2398,38 +2427,46 @@ export default {
     saveAddress() {
       // console.log('save')
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
-        this.alertBox = true
-        this.wrongInput.firstname = true
-        return false
-      }
-      if (this.addressData.firstname.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip7`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
       }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
-      if (this.addressData.lastname.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip9`)
-        this.alertBox = true
-        this.wrongInput.lastname = true
-        return false
-      }
-      if (
-        !RegMobile.test(this.addressData.mobile) &&
-        !RegTelephone.test(this.addressData.mobile)
-      ) {
+      if (this.addressData.mobile === '') {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
         this.wrongInput.mobile = true
         return false
       }
+      if(this.phoneNum.phone_code == '+86'){
+        if (!RegMobiles.test(this.addressData.mobile)) {
+          this.wrongMsg = this.$t(`${lang}.wip2`)
+          this.alertBox = true
+          this.wrongInput.mobile = true
+          return false
+        }
+      }
+      if (!RegMobile.test(this.addressData.mobile)) {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
+        return false
+      }
+      // if (
+      //   !RegMobile.test(this.addressData.mobile) &&
+      //   !RegTelephone.test(this.addressData.mobile)
+      // ) {
+      //   this.wrongMsg = this.$t(`${lang}.wip2`)
+      //   this.alertBox = true
+      //   this.wrongInput.mobile = true
+      //   return false
+      // }
       if (!Email.test(this.addressData.email)) {
         this.wrongMsg = this.$t(`${lang}.wip3`)
         this.alertBox = true
@@ -2453,6 +2490,9 @@ export default {
         this.wrongInput.address_details = true
         return false
       }
+      if(this.city.areaId == ''){
+        this.city.areaId = '0'
+      }
       const data = this.$helpers.transformRequest(
         JSON.parse(
           JSON.stringify({
@@ -2464,7 +2504,7 @@ export default {
             email: this.addressData.email,
             country_id: this.country.areaId,
             province_id: this.province.areaId,
-            cityId: this.city.areaId,
+            city_id: this.city.areaId,
             address_details: this.addressData.address_details,
             zip_code: this.addressData.zip_code
           })
@@ -2645,7 +2685,7 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
-      console.log("this.good",this.good)
+      // console.log("this.good",this.good)
       const data = arr.join(',')
       const datas={
         addressId: this.orderAddress.id,

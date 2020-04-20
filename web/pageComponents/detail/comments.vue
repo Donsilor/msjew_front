@@ -117,28 +117,28 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
-      _this.getAvgLevel()
+      // _this.getAvgLevel()
       _this.research()
     })
   },
   methods: {
     // 获取平均分
-    getAvgLevel() {
-      this.$axios
-        .get(`/web/goodsComments/getAvgLevel`, {
-          params: {
-            timeSock: new Date().getTime(),
-            goodsId: this.goodId,
-            groupId: this.groupId
-          }
-        })
-        .then(res => {
-          this.avgLevel = res.avgLevel ? res.avgLevel : 5
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
+    // getAvgLevel() {
+    //   this.$axios
+    //     .get(`/web/goodsComments/getAvgLevel`, {
+    //       params: {
+    //         timeSock: new Date().getTime(),
+    //         goodsId: this.goodId,
+    //         groupId: this.groupId
+    //       }
+    //     })
+    //     .then(res => {
+    //       this.avgLevel = res.avgLevel ? res.avgLevel : 5
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     })
+    // },
     // 请求当前页数据
     getPageInfo(page = 1) {
       const _this = this

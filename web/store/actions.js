@@ -1626,21 +1626,21 @@ export default {
     },
 
     // 获取产品平均评分
-    getGoodAvgLevel ({ $axios, state, getters, commit, dispatch }, options = {}) {
-        // console.log('getGoodAvgLevel=====>')
-        return this.$axios({
-            method: 'get',
-            url: `/web/goodsComments/getAvgLevel`,
-            params: options.params || {}
-        })
-            .then(data => {
-                // console.log('获取产品平均评分====>', data)
-                return data
-            })
-            .catch(err => {
-                return Promise.reject(err)
-            })
-    },
+    // getGoodAvgLevel ({ $axios, state, getters, commit, dispatch }, options = {}) {
+    //     // console.log('getGoodAvgLevel=====>')
+    //     return this.$axios({
+    //         method: 'get',
+    //         url: `/web/goodsComments/getAvgLevel`,
+    //         params: options.params || {}
+    //     })
+    //         .then(data => {
+    //             // console.log('获取产品平均评分====>', data)
+    //             return data
+    //         })
+    //         .catch(err => {
+    //             return Promise.reject(err)
+    //         })
+    // },
 
     // 订单确认收货
     orderSigning ({ $axios, state, getters, commit, dispatch }, orderId) {

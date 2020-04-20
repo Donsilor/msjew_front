@@ -94,28 +94,28 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    this.$axios
-      .get(`/wap/goodsComments/getGoodsComments`, {
-        params: {
-          goodsId: this.$route.query.goodId,
-          page: 1,
-          page_size: 99999,
-          shouType: 1
-        }
-      })
-      .then(res => {
-        if (!res.total_count || !res.list || !(res.list.length > 0)) {
-          return
-        }
-        this.total_count = res.total_count || 0
-        res.list[0].createTime = Moment(res.list[0].createTime).format(
-          'YYYY.MM.DD'
-        )
-        this.comments = res.list[0]
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    // this.$axios
+    //   .get(`/wap/goodsComments/getGoodsComments`, {
+    //     params: {
+    //       goodsId: this.$route.query.goodId,
+    //       page: 1,
+    //       page_size: 99999,
+    //       shouType: 1
+    //     }
+    //   })
+    //   .then(res => {
+    //     if (!res.total_count || !res.list || !(res.list.length > 0)) {
+    //       return
+    //     }
+    //     this.total_count = res.total_count || 0
+    //     res.list[0].createTime = Moment(res.list[0].createTime).format(
+    //       'YYYY.MM.DD'
+    //     )
+    //     this.comments = res.list[0]
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   },
   methods: {
     conditionText() {
