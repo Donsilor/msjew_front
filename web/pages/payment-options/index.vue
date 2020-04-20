@@ -59,18 +59,18 @@
         </div>
         <!-- 支付宝 -->
         <div
-          :class="{ 'pay-choose': payWay == 2 }"
+          :class="{ 'pay-choose': payWay == 82 }"
           class="pay-block"
-          @click="payWay = 2"
+          @click="payWay = 82"
         >
           <div class="pay-img">
             <img src="../../static/order/alipay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay == 2" class="pay-price">
+          <div v-show="payWay == 82" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 2" class="choose-tick">
+          <div v-show="payWay == 82" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
@@ -92,36 +92,36 @@
         </div> -->
         <!-- 微信 -->
         <div
-          :class="{ 'pay-choose': payWay == 1 }"
+          :class="{ 'pay-choose': payWay == 83 }"
           class="pay-block"
-          @click="payWay = 1"
+          @click="payWay = 83"
         >
           <div class="pay-img">
             <img src="../../static/order/wechatpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay == 1" class="pay-price">
+          <div v-show="payWay == 83" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 1" class="choose-tick">
+          <div v-show="payWay == 83" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
         
         <!-- 信用卡 -->
         <div
-          :class="{ 'pay-choose': payWay == 3 }"
+          :class="{ 'pay-choose': payWay == 81 }"
           class="pay-block"
-          @click="payWay = 3"
+          @click="payWay = 81"
         >
           <div class="pay-img">
             <img src="../../static/order/unionpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
-          <div v-show="payWay === 3" class="pay-price">
+          <div v-show="payWay === 81" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 3" class="choose-tick">
+          <div v-show="payWay == 81" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
@@ -206,12 +206,12 @@ export default {
       let pay = 0
       if(this.payWay==6){
         pay = 6
-      }else if(this.payWay==2){
-        pay = 2
-      }else if(this.payWay==1){
-        pay = 1
-      }else if(this.payWay==3){
-        pay = 3
+      }else if(this.payWay==82){
+        pay = 82
+      }else if(this.payWay==83){
+        pay = 83
+      }else if(this.payWay==81){
+        pay = 81
       }
     console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
