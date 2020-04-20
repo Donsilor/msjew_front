@@ -99,9 +99,8 @@
                 </div>
               </div>
             </div>
-            <div class="menus-one" @click="one(5)">
+            <!-- <div class="menus-one" @click="one(5)">
               <span :class="{changeColor:changeColor5}">{{lang.activity}}</span>
-              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives5 }">
                 <div class="goback" @click.stop="goback(5)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -113,7 +112,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="menus-one" @click="one(6)">
               <span :class="{changeColor:changeColor6}">{{lang.theme}}</span>
               <!-- <i class="iconfont iconxiala status-icon" ></i> -->

@@ -2343,7 +2343,7 @@ export default {
                   height: 19px;
                   margin-bottom: 29px;
                   font-size: 14px;
-                  font-weight: 400;
+                  font-weight: 700;
                   color: #333333;
                 }
                 .group-item {
