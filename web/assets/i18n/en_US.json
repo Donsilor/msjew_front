@@ -164,7 +164,7 @@
       "platinum": "Platinum",
       "18KRoseGold": "18K Rose Gold",
       "14KRoseGold": "14K Rose Gold",
-      "fineSilver": "Fine Silver",
+      "fineSilver": "Silver",
 
       "price": "Price",
       "use": "Use Scene",
@@ -263,7 +263,7 @@
         "platinum": "Platinum",
         "18KRoseGold": "18K Rose Gold",
         "14KRoseGold": "14K Rose Gold",
-        "fineSilver": "Fine Silver",
+        "fineSilver": "Silver",
 
         "price": "Price",
         "use": "Use Scene",
@@ -305,7 +305,7 @@
         "platinum": "Platinum",
         "18KRoseGold": "18K Rose Gold",
         "14KRoseGold": "14K Rose Gold",
-        "fineSilver": "Fine Silver",
+        "fineSilver": "Silver",
 
         "style": "Style",
         "price": "Price",
@@ -361,7 +361,7 @@
         "platinum": "Platinum",
         "18KRoseGold": "18K Rose Gold",
         "14KRoseGold": "14K Rose Gold",
-        "fineSilver": "Sterling Silver",
+        "fineSilver": "Silver",
         "ValentinesDay": "Valentines Day",
         "MothersDay": "Mothers Day",
         "birthdayPresent": "Birthday Present",
@@ -405,7 +405,7 @@
         "platinum": "Platinum",
         "18KRoseGold": "18K Rose Gold",
         "14KRoseGold": "14K Rose Gold",
-        "fineSilver": "Sterling Silver",
+        "fineSilver": "Silver",
         "WeightRange1": "0.3ct or less",
         "WeightRange2": "0.3-0.5ct",
         "WeightRange3": "0.51ct-0.8ct",
@@ -419,6 +419,7 @@
         "birthdayPresent": "BirthdayPresent"
       },
       "themeCollectionMenu": {
+        "use": "Use Scene / Special Gift",
         "Promotions": "Promotions",
         "HolidayGift": "Holiday Gift",
         "classification": "Classification",

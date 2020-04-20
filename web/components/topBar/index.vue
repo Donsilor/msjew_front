@@ -715,7 +715,7 @@ export default {
             [
               {
                 key: 'material',
-                groupName: this.$t(`${lang}.necklaceMenu.use`),
+                // groupName: this.$t(`${lang}.necklaceMenu.use`),
                 data: [
                   {
                     id: 31,
@@ -880,7 +880,7 @@ export default {
             ],
             [
               {
-                groupName: this.$t(`${lang}.braceletMenu.use`),
+                // groupName: this.$t(`${lang}.braceletMenu.use`),
                 data: [
                   {
                     name: this.$t(`${lang}.braceletMenu.ValentinesDay`),
@@ -1086,34 +1086,34 @@ export default {
         'theme-collection': {
           image: '/adt/image1564544333790.png',
           groups: [
-            [
-              {
-                groupName: this.$t(`${lang}.themeCollectionMenu.Promotions`),
-                data: [
-                  {
-                    name: this.$t(`${lang}.themeCollectionMenu.BlackFriday`),
-                    // icon: 'icon-blackfriday',
-                    to: {
-                      path: '/jewellery/necklaces'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.themeCollectionMenu.coupon`),
-                    // icon: 'icon-youhuiquan',
-                    to: {
-                      path: '/jewellery/pendants'
-                    }
-                  },
-                  {
-                    name: this.$t(`${lang}.themeCollectionMenu.SpecialDiscount`),
-                    // icon: 'icon-tehuitejia',
-                    to: {
-                      path: '/jewellery/ear-stud'
-                    }
-                  }
-                ]
-              }
-            ],
+            // [
+            //   {
+            //     groupName: this.$t(`${lang}.themeCollectionMenu.Promotions`),
+            //     data: [
+            //       {
+            //         name: this.$t(`${lang}.themeCollectionMenu.BlackFriday`),
+            //         icon: '',
+            //         to: {
+            //           path: '/jewellery/necklaces'
+            //         }
+            //       },
+            //       {
+            //         name: this.$t(`${lang}.themeCollectionMenu.coupon`),
+            //         icon: '',
+            //         to: {
+            //           path: '/jewellery/pendants'
+            //         }
+            //       },
+            //       {
+            //         name: this.$t(`${lang}.themeCollectionMenu.SpecialDiscount`),
+            //         icon: '',
+            //         to: {
+            //           path: '/jewellery/ear-stud'
+            //         }
+            //       }
+            //     ]
+            //   }
+            // ],
             [
               {
                 groupName: this.$t(
@@ -2392,7 +2392,7 @@ export default {
 
             .dotted-right-line {
               margin-right: 58px;
-              border-right: 1px dotted #bbbbbd;
+              border-right: 1px dashed #bbbbbd;
 
               &:before {
                 content: ' ';
