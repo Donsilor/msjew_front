@@ -24,7 +24,7 @@
         </div>
         <div class="email-val-box" v-else>
           <!-- <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div> -->
-          <bdd-input v-model.trim="loginInfo.username" :maxl="maxlength" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-model.trim="loginInfo.username" :maxl="maxlength" :placeholder="lang['phone']" @blur="inputKey('username')" @keydown="keydown"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsernameM && hadInput('username') }
@@ -332,7 +332,12 @@ export default {
           _this.$toast.show(err.message)
           // _this.getVerifyStatus()
         })
-    }
+    },
+	keydown(){
+		this.maxlength = '5'
+	}
+	
+	
   }
 }
 </script>
