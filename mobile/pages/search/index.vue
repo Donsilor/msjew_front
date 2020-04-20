@@ -12,7 +12,7 @@
           :placeholder="lang.inputKeyword"
           @keyup.enter="search(keyword)"
         />
-        <img class="cha" src="/component/tip-message/cha.png" @click="clear">
+        <img class="cha" v-show="this.keyword !== ''" src="/component/tip-message/cha.png" @click="clear">
         <span class="gap-line" ></span>
         <i class="iconfont iconicon-sousuo" @click="search(keyword)"></i>
         <!-- <button class="search-btn" @click="search(keyword)">
@@ -120,7 +120,7 @@ export default {
         _this.$store
           .dispatch('getLocalSearchHistory')
           .then(data => {
-            // 过滤空值
+            // 过滤空值 如果搜索的是空值就不展示在历史记录列表里
             for(let i=0;i<data.length; i++){
               if(data[i].keyword == ''){
                 data.splice(i,1)
@@ -283,7 +283,7 @@ export default {
     .box-title {
       padding: 14px 0 21px 0;
       font-size: 16px;
-      font-weight: 600;
+      // font-weight: 600;
       // color: rgba(153, 153, 153, 1);
       text-align: left;
     }
@@ -317,7 +317,8 @@ export default {
         text-align: left;
         font-size: 15px;
         font-weight: 400;
-        color: #010101;
+        // color: #010101;
+        color: #999999;
         // color: rgba(102, 102, 102, 1);
       }
     }

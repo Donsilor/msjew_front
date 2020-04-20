@@ -657,6 +657,7 @@
     },
     "result": {
       "back": "返回",
+      "cancel":"取消",
       "inputKeyword": "輸入關鍵詞",
       "inputKeywordPlease": "請輸入關鍵字",
       "search": "搜索",

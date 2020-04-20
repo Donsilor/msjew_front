@@ -658,6 +658,7 @@
       },
       "result": {
         "back": "返回",
+        "cancel":"取消",
         "inputKeyword": "输入关键词",
         "inputKeywordPlease": "请输入关键字",
         "search": "搜索",

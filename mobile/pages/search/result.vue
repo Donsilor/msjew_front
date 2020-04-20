@@ -2,7 +2,7 @@
   <div class="page">
     <scroll-box @arrivalBottom="getNextPage">
       <div class="top-bar">
-        <div class="go-back-btn" @click="goBack($router)">
+        <div class="go-back-btn" @click="goBackto">
           <i class="iconfont iconfanhuiicon-"></i>
           <!-- <span class="text">{{ lang.back }}</span> -->
         </div>
@@ -13,13 +13,16 @@
             :placeholder="lang.inputKeyword"
             @keyup.enter="searchAgain"
           />
-          <img class="cha" src="/component/tip-message/cha.png" @click="clear">
+          <img v-show="this.keyword !== ''" class="cha" src="/component/tip-message/cha.png" @click="clear">
           <span class="gap-line" ></span>
           <i class="iconfont iconicon-sousuo" @click="searchAgain"></i>
           <!-- <button class="search-btn" @click="searchAgain">
             {{ lang.search }}
           </button> -->
         </div>
+        <span class="cancel" @click="goBackto">
+          {{ lang.cancel }}
+        </span>
       </div>
       <!--    list start-->
       <div class="list-part">
@@ -76,7 +79,7 @@ export default {
       lang: this.LANGUAGE.search.result,
       // canSearchWithoutKeyword: false,
       similarGoodsId: '',
-      conditionWord: this.CONDITION_INFO.sortBy.default[0].content
+      conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
     }
   },
   computed: {
@@ -182,6 +185,9 @@ export default {
       this.sortType = val.item.sortType
       this.sortBy = val.item.sortBy
       this.searchAgain()
+    },
+    goBackto(){
+      this.$router.go(-2)
     }
   }
 }
@@ -201,7 +207,11 @@ export default {
   background-color: #cedee6;
   display: flex;
   align-items: center;
-
+  .cancel{
+    margin: 0 10px 0 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
   .go-back-btn {
     margin-right: 21px;
     white-space: nowrap;

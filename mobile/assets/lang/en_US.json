@@ -658,6 +658,7 @@
     },
     "result": {
       "back": "Back",
+      "cancel": "Cancel",
       "inputKeyword": "Keyword",
       "inputKeywordPlease": "Please Keyword",
       "search": "Search",
