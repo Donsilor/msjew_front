@@ -255,10 +255,8 @@ export default {
         {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.CoupleRing,
-          routerName: 'marriage-ring-single-ring',
-          query: {
-            style: 196
-          }
+          routerName: 'marriage-ring-pair-ring',
+          
         },
       ],
       necklaces:[

@@ -354,11 +354,7 @@ export default language => {
           image: `/ring-type/woman/5.png`,
           name: lang.style.CasualRing
         },
-        {
-          id: 196,
-          image: `/ring-type/woman/5.png`,
-          name: lang.style.CoupleRing
-        }
+        
       ],
       otherRings: [
         {
