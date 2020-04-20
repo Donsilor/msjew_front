@@ -16,6 +16,7 @@
       @keyup="keyupEvent"
       @keypress="keypressEvent"
       @change="changeEvent"
+	  :maxlength="maxl"
     />
     <template v-if="passwordType">
       <i
@@ -40,6 +41,11 @@
 <script>
 export default {
   props: {
+	maxl: {
+		type: String,
+		required: false,
+		default: '5'
+	},
     value: {
       type: String,
       required: false,
@@ -88,7 +94,8 @@ export default {
   data() {
     return {
       showPassword: false,
-      inputValue: ''
+      inputValue: '',
+	  iptLength: 100
     }
   },
   computed: {
@@ -127,6 +134,7 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       _this.inputValue = this.value
+	console.log(123,this.maxl)
     })
   },
   methods: {

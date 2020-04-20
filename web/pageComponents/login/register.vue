@@ -137,7 +137,7 @@
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.repwdType`)"
-              maxlength="60"
+              maxlength="30"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -262,7 +262,7 @@
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.password`)"
-              maxlength="60"
+              maxlength="30"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>

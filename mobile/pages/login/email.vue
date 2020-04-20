@@ -14,7 +14,7 @@
       </div>
       <div class="line-box input-line">
         <div v-if="loginType == 1">
-          <bdd-input v-model.trim="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-model.trim="loginInfo.username" :maxl="maxlength" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsername && hadInput('username') }
@@ -24,7 +24,7 @@
         </div>
         <div class="email-val-box" v-else>
           <!-- <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div> -->
-          <bdd-input v-model.trim="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-model.trim="loginInfo.username" :maxl="maxlength" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsernameM && hadInput('username') }
@@ -116,7 +116,8 @@ export default {
       errorKeys: [],
       language: '',
       loginType: '',
-      registerType:1
+      registerType:1,
+	  maxlength: '30'
     }
   },
   computed: {
