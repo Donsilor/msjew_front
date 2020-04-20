@@ -133,7 +133,8 @@ export default {
         this.$router.push({
           name: 'marriage-ring-pair-ring-detail',
           query: {
-            goodId: obj.groupId
+            goodId: obj.groupId,
+            ringType : 'pair'
           }
         })
       } else {
@@ -153,7 +154,8 @@ export default {
             this.$router.push({
               name: 'marriage-ring-single-ring-detail',
               query: {
-                goodId: obj.goodsId
+                goodId: obj.goodsId,
+                ringType : 'single'
               }
             })
           } else if (obj.simpleGoodsEntity.specs[0].configAttrId === 60) {

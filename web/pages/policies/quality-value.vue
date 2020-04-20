@@ -16,7 +16,7 @@
         <dd>{{ $t(`${lang}.con4`) }}</dd>
         <dd>
           {{ $t(`${lang}.more`) }}
-          <span @click="go('diamondCarat')">{{ $t(`${lang}.link`) }}</span
+          <span @click="go('/education/diamonds/carat')">{{ $t(`${lang}.link`) }}</span
           >。
         </dd>
       </dl>

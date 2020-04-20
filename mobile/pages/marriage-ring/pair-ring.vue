@@ -49,7 +49,8 @@ export default {
       this.$router.push({
         name: 'marriage-ring-pair-ring-detail',
         query: {
-          goodId: data.ringId
+          goodId: data.ringId,
+          ringType : 'pair'
         }
       })
     }

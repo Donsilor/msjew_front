@@ -390,7 +390,17 @@ function queryParams (data) {
           },
         }, 
        
-		
+    
+     // 对戒 详情
+     {
+      'mobileUrl':/^\/marriage-ring\/pair-ring-detail/,
+      'pcUrl':`/ring/wedding-rings/1`,
+      'params':{
+        'goodId':'goodId',
+  'ringType':'ringType',
+      },
+    },   
+
 		// 对戒列表
 	
 		{
@@ -409,15 +419,7 @@ function queryParams (data) {
           },
         },
 		
-		// 对戒 详情
-        {
-          'mobileUrl':/^\/marriage-ring\/pair-ring-detail/,
-          'pcUrl':`/ring/wedding-rings/1`,
-          'params':{
-            'goodId':'goodId',
-			'ringType':'ringType',
-          },
-        },
+		
 		
 		
 		// 裸钻
