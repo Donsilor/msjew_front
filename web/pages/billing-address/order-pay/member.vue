@@ -159,6 +159,7 @@
                   wrongInput.lastname = false
                 "
                 @blur="borderChange = 0"
+                maxlength="30"
               />
               <div v-show="wrongInput.lastname" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -186,6 +187,7 @@
                   wrongInput.firstname = false
                 "
                 @blur="borderChange = 0"
+                maxlength="30"
               />
               <div v-show="wrongInput.firstname" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -226,6 +228,8 @@
                     wrongInput.mobile = false
                   "
                   @blur="borderChange = 0"
+                  :maxlength="mobileMax"
+                  @input="mobileIpt"
                 />
                 <div v-show="wrongInput.mobile" class="wrong-alert">
                   {{ $t(`${lang}.wrongInput`) }}
@@ -254,6 +258,7 @@
 
                 "
                 @blur="borderChange = 0"
+                maxlength="60"
               />
               <!-- <div v-show="wrongInput.email" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -360,6 +365,7 @@
                   wrongInput.address_details = false
                 "
                 @blur="borderChange = 0"
+                maxlength="300"
               />
               <div v-show="wrongInput.address_details" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -382,11 +388,13 @@
                 :class="{ 'wrong-input': wrongInput.zip_code }"
                 type="text"
                 autocomplete="off"
+                maxlength="11"
                 @focus="
                   borderChange = 7
                   wrongInput.zip_code = false
                 "
                 @blur="borderChange = 0"
+                @input="keydown"
               />
               <div v-show="wrongInput.zip_code" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -455,7 +463,7 @@
     </div>
 
     <!--    订单信息模块-->
-    <div class="order-info">
+    <div class="order-info" style="border: 3px solid red;">
       <div class="left-info">
         <div class="new-address-title">
           <div class="na-line" />
@@ -555,7 +563,7 @@
         </div>
 
         <!-- 发票按钮 -->
-          <div class="invoice">
+          <div class="invoice" style="border: 2px solid blue;">
 
             <!-- <div class="invoice-btn">
               <div v-show="!iconShow" @click="show2">
@@ -582,7 +590,7 @@
                     <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
                     <div class="input-box" v-show="isactive == true">
                       <input
-                        style="text-align:center;"
+                        style="text-align:center"
                         disabled
                         v-model="aa"
                         readonly
@@ -650,6 +658,7 @@
                           typeShow = false
                         "
                         @blur="borderChange = 0"
+                        maxlength="50"
                       />
                     </div>
                   </div>
@@ -676,6 +685,7 @@
                          taxShow = false
                         "
                         @blur="borderChange = 0"
+                        maxlength="50"
                       />
                     </div>
                   </div>
@@ -703,6 +713,7 @@
                             mailShow = false
                           "
                           @blur="borderChange = 0"
+                          maxlength="60"
                         />
                       </div>
                     </div>
@@ -1075,6 +1086,7 @@
                 v-model="addressData.firstname"
                 :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
+                maxlength="30"
                 autocomplete="off"
                 @focus="
                   borderChange = 2
@@ -1101,6 +1113,7 @@
                 v-model="addressData.lastname"
                 :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
+                maxlength="30"
                 autocomplete="off"
                 @focus="
                   borderChange = 1
@@ -1148,6 +1161,8 @@
                     wrongInput.mobile = false
                   "
                   @blur="borderChange = 0"
+                  @input="mobileIpt"
+                  :maxlength="mobileMax"
                 />
                 <div v-show="wrongInput.mobile" class="wrong-alert">
                   {{ $t(`${lang}.wrongInput`) }}
@@ -1171,6 +1186,7 @@
                 :class="{ 'wrong-input': wrongInput.email }"
                 type="text"
                 autocomplete="off"
+                maxlength="60"
                 @focus="
                   borderChange = 4
                   wrongInput.email = false
@@ -1197,6 +1213,7 @@
                 v-model="addressData.checkEmail"
                 :class="{ 'wrong-input': wrongInput.checkEmail }"
                 type="text"
+                maxlength="60"
                 autocomplete="off"
                 @focus="
                   borderChange = 5
@@ -1277,6 +1294,7 @@
               <textarea
                 v-model="addressData.address_details"
                 :class="{ 'wrong-input': wrongInput.address_details }"
+                maxlength="300"
                 autocomplete="off"
                 @focus="
                   borderChange = 6
@@ -1304,12 +1322,14 @@
                 v-model="addressData.zip_code"
                 :class="{ 'wrong-input': wrongInput.zip_code }"
                 type="text"
+                maxlength="11"
                 autocomplete="off"
                 @focus="
                   borderChange = 7
                   wrongInput.zip_code = false
                 "
                 @blur="borderChange = 0"
+                @input="keydown"
               />
               <div v-show="wrongInput.zip_code" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -1571,6 +1591,7 @@
                         typeShow = false
                       "
                       @blur="borderChange = 0"
+                      maxlength="50"
                     />
                   </div>
                 </div>
@@ -1596,6 +1617,7 @@
                         taxShow = false
                       "
                       @blur="borderChange = 0"
+                      maxlength="50"
                     />
                   </div>
                 </div>
@@ -1622,6 +1644,7 @@
                           mailShow = false
                         "
                         @blur="borderChange = 0"
+                        maxlength="60"
                       />
                     </div>
                   </div>
@@ -1963,7 +1986,8 @@ export default {
       goodsListLine: [],
       orderTotalAmount: 0,
       ultimatelyPay: 0,
-      num: 0
+      num: 0,
+      mobileMax: 20
     }
   },
   computed: {
@@ -2956,6 +2980,20 @@ export default {
        var that = this;
         num = num.toFixed(2);
         return num
+     },
+     keydown(){
+       var reg = /^[0-9a-zA-Z\-]{1}$/;
+       var k = this.addressData.zip_code.slice(-1);
+       if(!reg.test(k)){
+         this.addressData.zip_code = this.addressData.zip_code.slice(0,-1)
+       }
+     },
+     mobileIpt(){
+       if(this.pnN == '中国' || this.pnN == '中國' || this.pnN == 'China'){
+         this.mobileMax = 11
+       }else{
+         this.mobileMax = 20
+       }
      }
 
   }

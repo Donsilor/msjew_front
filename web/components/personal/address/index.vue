@@ -78,6 +78,7 @@
                 v-model="using.lastname"
                 :placeholder="$t(`${lang}.lastName`) + '*'"
                 type="text"
+                maxlength="30"
               />
             </div>
 
@@ -86,6 +87,7 @@
                 v-model="using.firstname"
                 :placeholder="$t(`${lang}.firstName`) + '*'"
                 type="text"
+                maxlength="30"
               />
             </div>
           </div>
@@ -95,6 +97,7 @@
                 v-model="using.email"
                 :placeholder="$t(`${lang}.addEmail`)"
                 type="text"
+                maxlength="60"
               />
             </div>
           </div>
@@ -113,6 +116,8 @@
                 v-model="using.mobile"
                 :placeholder="$t(`${lang}.phone`) + '*'"
                 type="tel"
+                :maxlength="mobileMax"
+                @input="mobileIpt"
               />
             </div>
           </div>
@@ -157,6 +162,7 @@
                 v-model="using.address_details"
                 :placeholder="$t(`${lang}.longAddress`) + '*'"
                 type="text"
+                maxlength="300"
               />
             </div>
           </div>
@@ -166,6 +172,8 @@
                 v-model="using.zip_code"
                 :placeholder="$t(`${lang}.zip`) + '*'"
                 type="text"
+                maxlength="11"
+                @input="keydown"
               />
             </div>
           </div>
@@ -180,6 +188,7 @@
                 v-model="clone.lastname"
                 :placeholder="$t(`${lang}.lastName`) + '*'"
                 type="text"
+                maxlength="30"
               />
             </div>
 
@@ -188,6 +197,7 @@
                 v-model="clone.firstname"
                 :placeholder="$t(`${lang}.firstName`) + '*'"
                 type="text"
+                maxlength="30"
               />
             </div>
           </div>
@@ -197,6 +207,7 @@
                 v-model="clone.email"
                 :placeholder="$t(`${lang}.addEmail`)"
                 type="text"
+                maxlength="60"
               />
             </div>
           </div>
@@ -215,6 +226,8 @@
                 v-model="clone.mobile"
                 :placeholder="$t(`${lang}.phone`) + '*'"
                 type="tel"
+                :maxlength="mobileMax"
+                @input="mobileIpt"
               />
             </div>
           </div>
@@ -268,6 +281,8 @@
                 v-model="clone.zip_code"
                 :placeholder="$t(`${lang}.zip`) + '*'"
                 type="text"
+                maxlength="11"
+                @input="keydown"
               />
             </div>
           </div>
@@ -285,6 +300,7 @@
                 v-model="using.firstname"
                 :placeholder="$t(`${lang}.firstName`) + '*'"
                 type="text"
+                maxlength="30"
               />
             </div>
 
@@ -293,6 +309,7 @@
                 v-model="using.lastname"
                 :placeholder="$t(`${lang}.lastName`) + '*'"
                 type="text"
+                maxlength="30"
               />
             </div>
           </div>
@@ -302,6 +319,7 @@
                 v-model="using.email"
                 :placeholder="$t(`${lang}.addEmail`) + '*'"
                 type="text"
+                maxlength="60"
               />
             </div>
           </div>
@@ -311,6 +329,7 @@
                 v-model="checkEmail"
                 :placeholder="$t(`${lang}.sureEmail`) + '*'"
                 type="text"
+                maxlength="60"
               />
             </div>
           </div>
@@ -329,6 +348,8 @@
                 v-model="using.mobile"
                 :placeholder="$t(`${lang}.phone`) + '*'"
                 type="tel"
+                :maxlength="mobileMax"
+                @input="mobileIpt"
               />
             </div>
           </div>
@@ -373,6 +394,7 @@
                 v-model="using.address_details"
                 :placeholder="$t(`${lang}.longAddress`) + '*'"
                 type="text"
+                maxlength="300"
               />
             </div>
           </div>
@@ -382,6 +404,8 @@
                 v-model="using.zip_code"
                 :placeholder="$t(`${lang}.zip`) + '*'"
                 type="text"
+                maxlength="11"
+                @input="keydown"
               />
             </div>
           </div>
@@ -396,6 +420,7 @@
                 v-model="clone.lastname"
                 :placeholder="$t(`${lang}.firstName`) + '*'"
                 type="text"
+                maxlength="30"
               />
             </div>
 
@@ -404,6 +429,7 @@
                 v-model="clone.firstname"
                 :placeholder="$t(`${lang}.lastName`) + '*'"
                 type="text"
+                maxlength="30"
               />
             </div>
           </div>
@@ -413,6 +439,7 @@
                 v-model="clone.email"
                 :placeholder="$t(`${lang}.addEmail`) + '*'"
                 type="text"
+                maxlength="60"
               />
             </div>
           </div>
@@ -422,6 +449,7 @@
                 v-model="checkEmail"
                 :placeholder="$t(`${lang}.sureEmail`) + '*'"
                 type="text"
+                maxlength="60"
               />
             </div>
           </div>
@@ -440,6 +468,8 @@
                 v-model="clone.mobile"
                 :placeholder="$t(`${lang}.phone`) + '*'"
                 type="tel"
+                :maxlength="mobileMax"
+                @input="mobileIpt"
               />
             </div>
           </div>
@@ -484,6 +514,7 @@
                 v-model="clone.address_details"
                 :placeholder="$t(`${lang}.longAddress`) + '*'"
                 type="text"
+                maxlength="300"
               />
             </div>
           </div>
@@ -493,6 +524,8 @@
                 v-model="clone.zip_code"
                 :placeholder="$t(`${lang}.zip`) + '*'"
                 type="text"
+                maxlength="11"
+                @input="keydown"
               />
             </div>
           </div>
@@ -555,7 +588,8 @@ export default {
       },
       checkEmail: ``,
       language:'',
-      isDefault:{}
+      isDefault:{},
+      mobileMax: 20
     }
   },
   computed: {
@@ -600,7 +634,7 @@ export default {
           // }
           // else {
           //   throw new Error (res.message)
-          // }    
+          // }
           // console.log("地址",this.address)
           // this.isShow = false
           // this.isDel = false
@@ -657,7 +691,7 @@ export default {
             this.getData()
           // }else {
           //   throw new Error (res.message)
-          // }    
+          // }
         })
         .catch(err => {
           if (!err.response) {
@@ -784,7 +818,7 @@ export default {
             this.resetAddress()
           }else {
             throw new Error (res.message)
-          }    
+          }
         })
         .catch(err => {
           if (!err.response) {
@@ -868,7 +902,7 @@ export default {
             this.resetAddress()
           }else {
             throw new Error (res.message)
-          }    
+          }
         })
         .catch(err => {
           if (!err.response) {
@@ -943,7 +977,7 @@ export default {
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify(json)),
         false
-      )   
+      )
       // console.log("json",json)
       this.$axios
         .post('/web/member/address/edit', data)
@@ -954,7 +988,7 @@ export default {
             this.resetAddress()
           }else {
             throw new Error (res.message)
-          }    
+          }
         })
         .catch(err => {
           if (!err.response) {
@@ -979,7 +1013,7 @@ export default {
             // console.log("删除",res)
           }else {
             throw new Error (res.message)
-          }    
+          }
         })
         .catch(err => {
           if (!err.response) {
@@ -989,6 +1023,20 @@ export default {
           }
           this.isDel = false
         })
+    },
+    keydown(){
+      var reg = /^[0-9a-zA-Z\-]{1}$/;
+      var k = this.using.zip_code.slice(-1);
+      if(!reg.test(k)){
+        this.using.zip_code = this.using.zip_code.slice(0,-1)
+      }
+    },
+    mobileIpt(){
+      if(this.pnN == '中国' || this.pnN == '中國' || this.pnN == 'China'){
+        this.mobileMax = 11
+      }else{
+        this.mobileMax = 20
+      }
     }
   }
 }

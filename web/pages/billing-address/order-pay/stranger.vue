@@ -1037,6 +1037,7 @@
                     v-model="addressData.firstName"
                     :class="{ 'wrong-input': wrongInput.firstName }"
                     type="text"
+                    maxlength="30"
                     @focus="
                       borderChange = 1
                       wrongInput.firstName = false
