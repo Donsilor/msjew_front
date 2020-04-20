@@ -40,6 +40,7 @@
         <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
       </div>
       <div class="pay-blocks">
+        <!-- paypal -->
         <div
           :class="{ 'pay-choose': payWay == 6 }"
           class="pay-block"
@@ -56,41 +57,8 @@
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
-
+        <!-- 支付宝 -->
         <div
-          :class="{ 'pay-choose': payWay === 8 }"
-          class="pay-block"
-          @click="payWay = 8"
-        >
-          <div class="pay-img">
-            <img src="../../static/order/paydollar.jpg" alt="" />
-          </div>
-          <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-          <div v-show="payWay == 8" class="pay-price">
-            {{ coinType }} {{ formatMoney(price) }}
-          </div>
-          <div v-show="payWay == 8" class="choose-tick">
-            <img src="../../static/order/tick.png" alt="" />
-          </div>
-        </div>
-        <!-- <div
-          :class="{ 'pay-choose': payWay == 3 }"
-          class="pay-block"
-          @click="payWay = 3"
-        >
-          <div class="pay-img">
-            <img src="../../static/order/unionpay.png" alt="" />
-          </div>
-          <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
-          <div v-show="payWay === 3" class="pay-price">
-            {{ coinType }} {{ formatMoney(price) }}
-          </div>
-          <div v-show="payWay == 3" class="choose-tick">
-            <img src="../../static/order/tick.png" alt="" />
-          </div>
-        </div> -->
-
-        <!-- <div
           :class="{ 'pay-choose': payWay == 2 }"
           class="pay-block"
           @click="payWay = 2"
@@ -105,24 +73,58 @@
           <div v-show="payWay == 2" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div> -->
-
+        </div>
         <!-- <div
-          :class="{ 'pay-choose': payWay == 3 }"
+          :class="{ 'pay-choose': payWay === 8 }"
           class="pay-block"
-          @click="payWay = 3"
+          @click="payWay = 8"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/paydollar.jpg" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
+          <div v-show="payWay == 8" class="pay-price">
+            {{ coinType }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 8" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+        </div> -->
+        <!-- 微信 -->
+        <div
+          :class="{ 'pay-choose': payWay == 1 }"
+          class="pay-block"
+          @click="payWay = 1"
         >
           <div class="pay-img">
             <img src="../../static/order/wechatpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay == 3" class="pay-price">
+          <div v-show="payWay == 1" class="pay-price">
+            {{ coinType }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 1" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+        </div>
+        
+        <!-- 信用卡 -->
+        <div
+          :class="{ 'pay-choose': payWay == 3 }"
+          class="pay-block"
+          @click="payWay = 3"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/unionpay.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
+          <div v-show="payWay === 3" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
           <div v-show="payWay == 3" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div> -->
+        </div>
 
         <!-- <div
           :class="{ 'pay-choose': payWay == 1 }"
@@ -204,8 +206,12 @@ export default {
       let pay = 0
       if(this.payWay==6){
         pay = 6
-      }else if(this.payWay==8){
-        pay = 8
+      }else if(this.payWay==2){
+        pay = 2
+      }else if(this.payWay==1){
+        pay = 1
+      }else if(this.payWay==3){
+        pay = 3
       }
     console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
