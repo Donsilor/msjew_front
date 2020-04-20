@@ -7,7 +7,7 @@
             v-for="(s, index) in sliders"
             :key="index"
             :class="['slider-one', { active: actIndex === index }]"
-            @click="actIndex = index"
+            @click="actIndex = index;show()"
           >
             {{ s.content }}
             <div v-show="actIndex === index" class="slider-bar"></div>
@@ -17,6 +17,7 @@
       <data-list
         ref="data-list"
         :send-cod="sliders[actIndex].cod"
+        :seo="this.seoInfo"
         :active-index="actIndex"
         @clickData="clickData"
       ></data-list>
@@ -64,17 +65,47 @@ export default {
       actIndex: 0
     }
   },
-  asyncData(route) {
-    return {
-      actIndex: route.query.actIndex ? parseFloat(route.query.actIndex) : 0
-    }
+  async asyncData({ $axios, route, store, app }) {
+    const seoInfo = await app.$getSeoInfo(5)
+
+    return $axios({
+      method: 'get',
+      url: '/wap/goods/style/web-site',
+      params: {
+        type: 2
+      }
+    })
+      .then(data => {
+        // console.log(444444,data)
+        return {
+          seoInfo,
+          ad: data.advert,
+          webSite: data.webSite,
+          actIndex: route.query.actIndex ? parseFloat(route.query.actIndex) : 0
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
   },
+  // asyncData(route) {
+  //   return {
+  //     actIndex: route.query.actIndex ? parseFloat(route.query.actIndex) : 0
+  //   }
+  // },
   mounted() {
+    // console.log("this.",this.seoInfo)
     if (this.$route.query.actIndex) {
       this.actIndex = parseFloat(this.$route.query.actIndex)
     }
   },
   methods: {
+    show(){
+      this.$nuxt.$loading.start()
+      setTimeout(() => {
+        this.$nuxt.$loading.finish()
+      }, 1000);
+    },
     arrivalBottom() {
       this.$refs['data-list'].getNextPage()
     },

@@ -8,6 +8,7 @@
 <script>
 import DetailBody from '../ring-factory/rings-body'
 export default {
+  
   layout: `no-bar`,
   components: {
     DetailBody

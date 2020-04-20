@@ -150,6 +150,10 @@ export default {
       }
     },
     search(keyword = '') {
+      // this.$nuxt.$loading.start()
+      // setTimeout(() => {
+      //   this.$nuxt.$loading.finish()
+      // }, 1000);
       if (!keyword) {
         if (!this.keyword) {
           this.$toast(this.lang.inputKeywordPlease)

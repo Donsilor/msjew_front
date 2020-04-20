@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" >
     <scroll-box @arrivalBottom="getNextPage">
       <div class="top-bar">
         <div class="go-back-btn" @click="goBack($router)">
@@ -9,7 +9,7 @@
         <div class="operating-area">
           <i class="iconfont iconicon-sousuo"></i>
           <input
-            v-model="keyword"
+            v-model.trim="keyword"
             :placeholder="lang.inputKeyword"
             @keyup.enter="searchAgain"
           />
@@ -18,9 +18,9 @@
           </button>
         </div>
       </div>
-      <!--    list start-->
-      <div class="list-part">
-        <div class="title">
+      <!--    list start v-show="this.loading == false"-->
+      <div class="list-part" >
+        <div class="title" v-show="pageInfo && pageInfo.total_count">
           <div>
             {{ lang.total }}
             <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>
@@ -73,7 +73,7 @@ export default {
       lang: this.LANGUAGE.search.result,
       // canSearchWithoutKeyword: false,
       similarGoodsId: '',
-      conditionWord: this.CONDITION_INFO.sortBy.default[0].content
+      conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
     }
   },
   computed: {
@@ -85,7 +85,11 @@ export default {
       }
     }
   },
-  mounted() {
+ created(){
+    const _this = this
+    _this.show()
+ },
+  mounted(){
     const _this = this
     _this.$nextTick(() => {
       if (_this.$route.query) {
@@ -93,14 +97,42 @@ export default {
         _this.categoryId = _this.$route.query.categoryId || ''
         _this.similarGoodsId = _this.$route.query.similarGoodsId || ''
       }
-      _this.searchAgain()
+      setTimeout(() => {
+       _this.searchAgain()
+      }, 1000);
+      // if(_this.pageInfo && _this.pageInfo.total_count){
+      //   _this.searchAgain()
+      // }
+      // _this.searchAgain()
     })
   },
   methods: {
+    show(){
+      const _this = this
+      if(_this.$route.query.keyword !== ''){
+        _this.$nuxt.$loading.start()
+        if(_this.pageInfo && _this.pageInfo.total_count){
+          _this.$nuxt.$loading.finish()
+        }
+        // setTimeout(() => {
+        //   _this.$nuxt.$loading.finish()
+        // }, 1000);
+      }
+    },
     showSwiperTap() {
       this.$refs.suitability.show()
     },
     searchAgain() {
+      // console.log(this.pageInfo,this.pageInfo.total_count)
+      const _this = this
+      _this.$nuxt.$loading.start()
+      if(_this.pageInfo && _this.pageInfo.total_count){
+        console.log(this.pageInfo,this.pageInfo.total_count)
+        _this.$nuxt.$loading.finish()
+      }
+      // setTimeout(() => {
+      //   _this.$nuxt.$loading.finish()
+      // }, 1000);
       // console.log('点击了重新搜索')
       this.$router.replace({
         name: 'search-result',
@@ -115,6 +147,7 @@ export default {
         this.$store.dispatch('addLocalSearchHistory', this.keyword)
       }
       this.research()
+      
     },
     toDetail(info) {
       let routerName = ''
@@ -182,6 +215,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.loading{
+  opacity: 0.6;
+}
 .page {
   width: 100vw;
   height: 100vh;

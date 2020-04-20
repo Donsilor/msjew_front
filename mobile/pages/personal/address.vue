@@ -31,7 +31,7 @@
             >
             <i
               class="icon iconfont iconyou "
-              @click.stop="editAddress(item)" style="border: 1px solid red;"
+              @click.stop="editAddress(item)"
             ></i>
           </div>
           <div class="right" @click="deleteAddress(item.id)">

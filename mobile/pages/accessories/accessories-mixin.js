@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.goodInfo)
+    // console.log(this.goodInfo)
     this.conditions[0].checked = [
       this.goodInfo.materials.length > 0
         ? this.goodInfo.materials[0].id
@@ -103,28 +103,28 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    this.$axios
-      .get(`/wap/goodsComments/getGoodsComments`, {
-        params: {
-          goodsId: this.$route.query.goodId,
-          page: 1,
-          page_size: 99999,
-          shouType: 1
-        }
-      })
-      .then(res => {
-        if (!res.total_count || !res.list || !(res.list.length > 0)) {
-          return
-        }
-        this.total_count = res.total_count || 0
-        res.list[0].createTime = Moment(res.list[0].createTime).format(
-          'YYYY.MM.DD'
-        )
-        this.comments = res.list[0]
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    // this.$axios
+    //   .get(`/wap/goodsComments/getGoodsComments`, {
+    //     params: {
+    //       goodsId: this.$route.query.goodId,
+    //       page: 1,
+    //       page_size: 99999,
+    //       shouType: 1
+    //     }
+    //   })
+    //   .then(res => {
+    //     if (!res.total_count || !res.list || !(res.list.length > 0)) {
+    //       return
+    //     }
+    //     this.total_count = res.total_count || 0
+    //     res.list[0].createTime = Moment(res.list[0].createTime).format(
+    //       'YYYY.MM.DD'
+    //     )
+    //     this.comments = res.list[0]
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
   },
   methods: {
     conditionText() {
@@ -140,7 +140,7 @@ export default {
       return result.join(', ')
     },
     showChooseEject(info) {
-      console.log(info)
+      // console.log(info)
       const refName = `${info.key}-${info.type}`
       this.$refs[refName] &&
         this.$refs[refName].showIt(this.conditions[0].checked)

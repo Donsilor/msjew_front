@@ -569,7 +569,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -638,7 +638,7 @@
           <!-- 发票按钮 -->
           <div class="invoice">
 
-            <div class="invoice-btn">
+            <div class="invoice-btn" v-if="this.areaId === '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang3}.default`) }}</span> 
@@ -1530,7 +1530,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -1599,7 +1599,7 @@
           <!-- 发票按钮 -->
           <div class="invoice">
 
-            <div class="invoice-btn">
+            <div class="invoice-btn" v-if="this.areaId === '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang3}.default`) }}</span> 
@@ -2018,7 +2018,7 @@ export default {
         taxFee: 0,
         safeFee: 0,
         orderAmount: 0,
-        planDays: '5-12'
+        planDays: ''
       },
       die: false,
       tooInp: '',
@@ -2027,7 +2027,8 @@ export default {
       familyDie: ``,
       language:'',
       scrollTop: 0,
-      is_electronic:''
+      is_electronic:'',
+      areaId : this.$store.state.areaId,
     }
   },
   // watch:{

@@ -7,7 +7,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input  v-model="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" />
+          <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phoneTips`) }}
@@ -18,7 +18,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input  v-model="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" />
+          <input  v-model.trim="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.pwd`) }}
@@ -62,7 +62,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input v-model="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" />
+          <input v-model.trim="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
@@ -73,7 +73,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input v-model="password"  @keyup="keyupEvent2" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" />
+          <input v-model.trim="password"  @keyup="keyupEvent2" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}

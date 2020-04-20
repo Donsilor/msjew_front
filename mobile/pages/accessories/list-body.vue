@@ -21,7 +21,7 @@
     </div>
     <!--    list start-->
     <div class="list-part">
-      <div class="title">
+      <div class="title" v-show="pageInfo && pageInfo.total_count">
         <div>
           {{ lang.total }}
           <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>
@@ -86,8 +86,12 @@ import Mixin from './mixin.js'
 import List from '@/mixins/list.js'
 import GoodListProps from '@/mixins/good-list-props.js'
 export default {
+  head() {
+    return this.seo || {}
+  },
   name: 'List',
-  mixins: [Mixin, List, GoodListProps]
+  mixins: [Mixin, List, GoodListProps],
+  props:['seo'],
 }
 </script>
 
