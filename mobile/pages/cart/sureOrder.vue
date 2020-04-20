@@ -295,11 +295,29 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/paydollar.png',
-          type: 8,
+          url: '/cart/ap.png',
+          type: 2,
           title: this.LANGUAGE.cart.pay.payType3,
           des: this.LANGUAGE.cart.pay.type3Text
+        },
+        {
+          url: '/cart/wac.png',
+          type: 1,
+          title: this.LANGUAGE.cart.pay.payType4,
+          des: this.LANGUAGE.cart.pay.type4Text
+        },
+        {
+          url: '/cart/card.png',
+          type: 3,
+          title: this.LANGUAGE.cart.pay.payType1,
+          des: this.LANGUAGE.cart.pay.type1Text
         }
+        // {
+        //   url: '/cart/paydollar.png',
+        //   type: 8,
+        //   title: this.LANGUAGE.cart.pay.payType3,
+        //   des: this.LANGUAGE.cart.pay.type3Text
+        // }
       ],
       sum: '2,120.00',
       info:'',
