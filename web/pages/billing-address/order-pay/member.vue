@@ -463,7 +463,7 @@
     </div>
 
     <!--    订单信息模块-->
-    <div class="order-info" style="border: 3px solid red;">
+    <div class="order-info">
       <div class="left-info">
         <div class="new-address-title">
           <div class="na-line" />
@@ -563,7 +563,7 @@
         </div>
 
         <!-- 发票按钮 -->
-          <div class="invoice" style="border: 2px solid blue;">
+          <div class="invoice">
 
             <!-- <div class="invoice-btn">
               <div v-show="!iconShow" @click="show2">
