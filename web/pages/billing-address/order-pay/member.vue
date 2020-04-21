@@ -574,7 +574,7 @@
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
                 <span>{{ $t(`${lang2}.Invoicing`) }}</span>
               </div>
-            </div> 
+            </div>
             <div class="invoice-box" v-show="invoiceBox">
               <div class="msg">
                 <div class="msgbox" v-show="content">
@@ -2013,24 +2013,17 @@ export default {
     }
   },
   created() {
-<<<<<<< HEAD
-=======
-    // console.log("ssss",this.pathTakeIds)
->>>>>>> origin/dev_invoice
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           this.good = res
-<<<<<<< HEAD
+
           console.log("res",res)
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
           }
 
-=======
-          // console.log("res",res)
->>>>>>> origin/dev_invoice
           resolve()
         })
         .catch(err => {
@@ -2465,9 +2458,7 @@ export default {
         this.wrongInput.mobile = true
         return false
       }
-<<<<<<< HEAD
 
-=======
       // if (
       //   !RegMobile.test(this.addressData.mobile) &&
       //   !RegTelephone.test(this.addressData.mobile)
@@ -2489,7 +2480,7 @@ export default {
       //   this.wrongInput.checkEmail = true
       //   return false
       // }
->>>>>>> origin/dev_invoice
+
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
