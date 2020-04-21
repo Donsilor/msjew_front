@@ -72,7 +72,6 @@ function queryParams (data) {
 		//测试环境
 		host = 'http://www.bdd.bddia.com';
 	}
-  host = 'http://127.0.0.1:8318';
     const toWapUrl = path => {
       if(path === '/undefined') {
         return
@@ -230,7 +229,7 @@ function queryParams (data) {
         },
         //项链
         {
-          'mobileUrl':/^\/accessories\/list\?actIndex=0/,
+          'mobileUrl':/^\/accessories\/list\?actIndex=0$/,
           'pcUrl':`/jewellery/necklaces`,
           'params':{
             'param':'none',          
@@ -238,12 +237,150 @@ function queryParams (data) {
         },
         //吊坠
         {
-          'mobileUrl':/^\/accessories\/list\?actIndex=1/,
+          'mobileUrl':/^\/accessories\/list\?actIndex=1$/,
           'pcUrl':`/jewellery/pendants`,
           'params':{
             'param':'none',          
           },
         },
+        //手链
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4$/,
+          'pcUrl':`/jewellery/bracelets`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手镯
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=5$/,
+          'pcUrl':`/jewellery/bangles`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //耳环
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=3$/,
+          'pcUrl':`/jewellery/earrings`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //耳钉
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=2$/,
+          'pcUrl':`/jewellery/ear-stud`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //摆件
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=6$/,
+          'pcUrl':`/jewellery/decoration`,
+          'params':{
+            'param':'none',          
+          },
+        },
+         //挂件
+         {
+          'mobileUrl':/^\/accessories\/list\?actIndex=7$/,
+          'pcUrl':`/jewellery/widgets`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //其他
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=8$/,
+          'pcUrl':`/jewellery/others`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--18K白金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=28$/,
+          'pcUrl':`/jewellery/necklace-pendant-18k-white`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--18K黄金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=29$/,
+          'pcUrl':`/jewellery/necklace-pendant-18k-yellow`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--18K玫瑰金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=30$/,
+          'pcUrl':`/jewellery/necklace-pendant-18k-rose-gold`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--铂金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=34$/,
+          'pcUrl':`/jewellery/necklace-pendant-platinum`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--银
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=35$/,
+          'pcUrl':`/jewellery/necklace-pendant-fineSilver`,
+          'params':{
+            'param':'none',          
+          },
+        },
+
+        //手链--18K白金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=28$/,
+          'pcUrl':`/jewellery/bracelet-bangle-18k-white`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链--18K黄金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=29$/,
+          'pcUrl':`/jewellery/bracelet-bangle-18k-yellow`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链--18K玫瑰金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=30$/,
+          'pcUrl':`/jewellery/bracelet-bangle-18k-rose-gold`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链--铂金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=34$/,
+          'pcUrl':`/jewellery/bracelet-bangle-platinum`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链--银
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=35$/,
+          'pcUrl':`/jewellery/bracelet-bangle-fineSilver`,
+          'params':{
+            'param':'none',          
+          },
+        },
+
 
       
         

@@ -72,7 +72,6 @@ function queryParams (data) {
 		//测试环境
 		host = 'http://wap.bdd.bddia.com';
   }
-    host = 'http://127.0.0.1:8328';
     const toWapUrl = path => {
       if(path === '/undefined') {
         return
@@ -261,7 +260,154 @@ function queryParams (data) {
             'actIndex':'1',
           },
         }, 
+        //手链
+		    {
+          'pcUrl':/^\/jewellery\/bracelets$/,
+          'mobileUrl':`/accessories/list`,
+		       'params':{  
+            'actIndex':'4',
+          },
+        }, 
+        //手镯
+		    {
+          'pcUrl':/^\/jewellery\/bangles$/,
+          'mobileUrl':`/accessories/list`,
+		       'params':{  
+            'actIndex':'5',
+          },
+        }, 
+        //耳环
+		    {
+          'pcUrl':/^\/jewellery\/earrings$/,
+          'mobileUrl':`/accessories/list`,
+		       'params':{  
+            'actIndex':'3',
+          },
+        }, 
+        //耳钉
+		    {
+          'pcUrl':/^\/jewellery\/ear-stud$/,
+          'mobileUrl':`/accessories/list`,
+		       'params':{  
+            'actIndex':'2',
+          },
+        }, 
+        //摆件
+        {
+          'pcUrl':/^\/jewellery\/decoration$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'6',
+          },
+        }, 
+        //挂件
+        {
+          'pcUrl':/^\/jewellery\/widgets$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'7',
+          },
+        }, 
+        //其他
+        {
+          'pcUrl':/^\/jewellery\/others$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'8',
+          },
+        }, 
+        //项链--18K白金
+        {
+          'pcUrl':/^\/jewellery\/necklace-pendant-18k-white$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'0',
+            'material':'28'
+          },
+        }, 
+        //项链--18K黄金
+        {
+          'pcUrl':/^\/jewellery\/necklace-pendant-18K-yellow$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'0',
+            'material':'29'
+          },
+        }, 
+        //项链--18K玫瑰金
+        {
+          'pcUrl':/^\/jewellery\/necklace-pendan-18k-rose-gold$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'0',
+            'material':'30'
+          },
+        }, 
+        //项链--铂金
+        {
+          'pcUrl':/^\/jewellery\/necklace-pendant-platinum$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'0',
+            'material':'34'
+          },
+        }, 
+        //项链--银
+        {
+          'pcUrl':/^\/jewellery\/necklace-pendant-fineSilver$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'0',
+            'material':'35'
+          },
+        }, 
 
+
+        //手链--18K白金
+        {
+          'pcUrl':/^\/jewellery\/bracelet-bangle-18k-white$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'4',
+            'material':'28'
+          },
+        }, 
+        //手链--18K黄金
+        {
+          'pcUrl':/^\/jewellery\/bracelet-bangle-18K-yellow$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'4',
+            'material':'29'
+          },
+        }, 
+        //手链--18K玫瑰金
+        {
+          'pcUrl':/^\/jewellery\/bracelet-bangle-18k-rose-gold$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'4',
+            'material':'30'
+          },
+        }, 
+        //手链--铂金
+        {
+          'pcUrl':/^\/jewellery\/bracelet-bangle-platinum$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'4',
+            'material':'34'
+          },
+        }, 
+        //手链--银
+        {
+          'pcUrl':/^\/jewellery\/bracelet-bangle-fineSilver$/,
+          'mobileUrl':`/accessories/list`,
+          'params':{  
+            'actIndex':'4',
+            'material':'35'
+          },
+        }, 
 
 
 

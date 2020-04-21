@@ -11,7 +11,7 @@
             <li
               :class="[
                 'option-item',
-                { active: '' === searchConditions.categoryId || isEqual(searchConditions.categoryId,all_category)}
+                { active: '' === searchConditions.categoryId}
               ]"
               @click="changeCategoryId('')"
             >
@@ -27,7 +27,7 @@
               :key="index"
               :class="[
                 'option-item',
-                { active: option.categoryId === searchConditions.categoryId || (searchConditions.categoryId instanceof Array && searchConditions.categoryId.indexOf(option.categoryId) >= 0 && isEqual(searchConditions.categoryId,all_category) === false)}
+                { active: option.categoryId === searchConditions.categoryId || (searchConditions.categoryId instanceof Array && searchConditions.categoryId.indexOf(option.categoryId) >= 0)}
               ]"
               @click="changeCategoryId(option.categoryId)"
             >
@@ -331,7 +331,7 @@ export default {
       defaultPriceRange,
       fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
       searchConditions: {
-        categoryId: [4,5,6,7,8,9,16,17,18],
+        categoryId: '',
         typeId: 4,
         stoneTypeId:'',
         materialIndex: '',
