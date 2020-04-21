@@ -309,7 +309,7 @@
 
         "style": "Style",
         "price": "Price",
-        "use": "Occasion / Special Gift",
+        "use": "Special Gift",
         "necklace": "Necklaces",
         "Pendant": "Pendants",
         "ValentinesDay": "Valuntine's Day",
@@ -346,7 +346,7 @@
         "style": "Style",
         "price": "Price",
         "color": "Conditional",
-        "use": "Occasion / Special Gift",
+        "use": "Special Gift",
         "Bracelet": "Bracelets",
         "bracelet": "Bangles",
         "priceRange1": "Less than 1000",

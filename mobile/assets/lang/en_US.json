@@ -640,7 +640,8 @@
       "more": "MORE",
       "for-men": "FOR MEN",
       "gentlemen-ring": "Men's Rings",
-      "marriage-ring": "Couple Rings"
+      "marriage-ring": "Marriage Rings",
+      "couple-rings": "Couple Rings"
     }
   },
   "search": {
@@ -855,6 +856,13 @@
       "birthdayPresent": "Birthday Gift",
       "ChristmasGift": "X'mas Gift",
       "HalloweenGift": "Halloween Gift",
+      "rings": "Rings",
+      "CoupleRings": "Couple Rings",
+      "NecklaceAndPendant": "Necklaces/Pendants",
+      "bracelets": "Bracelets/Bangles",
+      "EarringsAndStuds": "Earrings/Stads",
+      "DecorationAndPendant": "Decorations/Charms",
+      "others": "Others",
       "login":"Please login"
     },
     "noMoreData": {
@@ -1032,7 +1040,7 @@
       "Other"
     ],
     "style": "Style",
-    "theme": "Theme",
+    "theme": "Special Gift",
     "fineness": "Color",
     "total": "Results",
     "goods": "",
@@ -1040,6 +1048,7 @@
     "accessories": "Accessories",
     "all": "All",
     "marriage-ring": "wedding ring",
+    "couple-rings": "Couple Rings",
     "engagement-ring": "engagement ring",
     "stArrContent": "Select",
     "lady": "Women",

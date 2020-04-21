@@ -314,7 +314,7 @@
 
         "style": "款式",
         "price":"價格",
-        "use":"使用場景/特別禮物",
+        "use":"特別禮物",
         "necklace":"項鍊",
         "Pendant":"吊墜",
         "ValentinesDay":"情人節",
@@ -351,7 +351,7 @@
         "style": "款式",
         "price":"價格",
         "color": "成色",
-        "use":"使用場景/特別禮物",
+        "use":"特別禮物",
         "Bracelet":"手鍊",
         "bracelet":"手鐲",
         "priceRange1":"1000以內",

@@ -640,7 +640,8 @@
         "more": "MORE",
         "for-men": "FOR MEN",
         "gentlemen-ring": "男士戒指",
-        "marriage-ring": "结婚对戒"
+        "marriage-ring": "结婚对戒",
+        "couple-rings":"情侣对戒"
       }
     },
     "search": {
@@ -857,6 +858,13 @@
         "birthdayPresent":"生日礼物",
         "ChristmasGift":"圣诞礼物",
         "HalloweenGift":"万圣节礼物",
+        "rings":"戒指",
+        "CoupleRings":"情侣对戒",
+        "NecklaceAndPendant":"项链/吊坠",
+        "bracelets":"手链/手镯",
+        "EarringsAndStuds":"耳环/耳钉",
+        "DecorationAndPendant":"摆件/挂件",
+        "others":"其它",
         "login":"请登入"
       },
       "noMoreData": {
@@ -1038,13 +1046,14 @@
       ],
       "style": "款式",
       "fineness": "成色",
-      "theme": "主题",
+      "theme": "特别礼物",
       "total": "共",
       "goods": "货品",
       "price": "价格",
       "accessories": "配饰",
       "all": "所有",
       "marriage-ring": "结婚对戒",
+      "couple-rings":"情侣对戒",
       "engagement-ring": "订婚戒指",
       "stArrContent": "请选择",
       "lady": "女士",

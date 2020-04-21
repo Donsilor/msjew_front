@@ -715,7 +715,7 @@ export default {
             [
               {
                 key: 'material',
-                // groupName: this.$t(`${lang}.necklaceMenu.use`),
+                groupName: this.$t(`${lang}.necklaceMenu.use`),
                 data: [
                   {
                     id: 31,
@@ -880,7 +880,7 @@ export default {
             ],
             [
               {
-                // groupName: this.$t(`${lang}.braceletMenu.use`),
+                groupName: this.$t(`${lang}.braceletMenu.use`),
                 data: [
                   {
                     name: this.$t(`${lang}.braceletMenu.ValentinesDay`),

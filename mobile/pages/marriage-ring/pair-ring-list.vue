@@ -1,7 +1,7 @@
 <template>
   <div class="data-list">
     <div class="top-part">
-      <div class="title">{{ lang['marriage-ring'] }}</div>
+      <div class="title">{{ lang['couple-rings'] }}</div>
       <div class="choose-box">
         <div
           v-for="(each, n) in conditions"
