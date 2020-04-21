@@ -491,7 +491,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.priceRange1`),
                     icon: '',
                     to: {
-                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 1000]))}`
+                      path: `/wedding-rings/all?priceRange=${this.$helpers.base64Encode(JSON.stringify([0, 999]))}`
                     }
                   },
                   {
@@ -998,35 +998,35 @@ export default {
                     name: this.$t(`${lang}.diamondMenu.WeightRange1`),
                     icon: '',
                     to: {
-                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0, 0.3]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0, 0.29]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange2`),
                     icon: '',
                     to: {
-                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.31, 0.5]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.3, 0.49]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange3`),
                     icon: '',
                     to: {
-                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.51, 0.8]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.5, 0.79]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange4`),
                     icon: '',
                     to: {
-                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.81, 0.99]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([0.8, 0.99]))}`
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.WeightRange5`),
                     icon: '',
                     to: {
-                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([1, 1.5]))}`
+                      path: `/diamonds/all?caratRange=${this.$helpers.base64Encode(JSON.stringify([1, 1.49]))}`
                     }
                   },
                   {

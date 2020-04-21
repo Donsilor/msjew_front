@@ -38,7 +38,7 @@ export default {
           key: 'price-bar',
           name: this.LANGUAGE.listCommons.price,
           checked: (typeof this.$route.query.startPrice !== 'undefined' && typeof this.$route.query.endPrice !== 'undefined')  ? this.$route.query.startPrice + '-' + this.$route.query.endPrice:'',
-          options: (typeof this.$route.query.startPrice !== 'undefined' && typeof this.$route.query.endPrice !== 'undefined')  ? [{id:this.$route.query.startPrice,name:this.$route.query.startPrice/1000 + `K`},{id:this.$route.query.endPrice,name:this.$route.query.endPrice/1000 + `K`}]:[]
+          options: (typeof this.$route.query.startPrice !== 'undefined' && typeof this.$route.query.endPrice !== 'undefined')  ? [{id:this.$route.query.startPrice,name:Math.round(this.$route.query.startPrice/1000,2) + `K`},{id:this.$route.query.endPrice,name:Math.round(this.$route.query.endPrice/1000,2) + `K`}]:[]
         }
       ],
       conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
@@ -198,7 +198,7 @@ export default {
       this.conditions.forEach(obj => {
         if (obj.key === val.name) {
           if (val.content.length !== 0) {
-            obj.checked = `${val.content[0].id},${val.content[2].id}`
+            obj.checked = `${val.content[0].id},${val.content[1].id}`
           } else {
             obj.checked = ``
           }
