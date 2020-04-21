@@ -1,5 +1,5 @@
 <template>
-  <div class="page-cover">
+  <div class="page-cover" v-loading="loading">
     <div class="page-content">
       <section class="search-condition">
         <!--      飾品-->
@@ -129,7 +129,7 @@
           </div>
         </div>
       </section>
-      <section class="list-title">
+      <section class="list-title" v-show="this.loading == false">
         <h1 class="title">
           {{ $t(`${lang}.totalCountTitle`, { total_count }) }}
           <!--          {{-->
@@ -231,7 +231,7 @@
             </el-pagination>
           </div>
         </div>
-        <no-more-data v-show="showingData == 0" :dataVal = "2"></no-more-data>
+        <no-more-data v-show="this.allData.length == 0 && this.loading == false" :dataVal = "2"></no-more-data>
         <!-- <bdd-empty v-show="noListData" type="product"></bdd-empty> -->
       </section>
     </div>
@@ -279,7 +279,8 @@ export default {
         categoryId: 4,
         materialIndex: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
-      }
+      },
+      loading: true
     }
   },
   computed: {
@@ -334,6 +335,15 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
+      console.log("加载状态",this.loading)
+      // if(this.allData.length == 0){
+      //   this.loading = true
+      //   setTimeout(() => {
+      //     this.loading = false
+      //   }, 1000);
+      // }else if(this.allData.length > 0){
+      //   this.loading = false
+      // }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
@@ -377,6 +387,7 @@ export default {
     }
   },
   mounted() {
+    console.log("dddd",this.materialOptions)
     const _this = this
     var priceRange_val =this.$route.query.priceRange
     if(priceRange_val !== undefined){

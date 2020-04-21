@@ -565,7 +565,7 @@
         <!-- 发票按钮 -->
           <div class="invoice">
 
-            <!-- <div class="invoice-btn">
+             <div class="invoice-btn" v-if="this.areaId === '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang2}.default`) }}</span>
@@ -574,7 +574,7 @@
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
                 <span>{{ $t(`${lang2}.Invoicing`) }}</span>
               </div>
-            </div> -->
+            </div> 
             <div class="invoice-box" v-show="invoiceBox">
               <div class="msg">
                 <div class="msgbox" v-show="content">
@@ -1063,6 +1063,7 @@
         { padding: newAddress ? '20px 51px 0 36px' : '0' }
       ]"
       class="new-address"
+      id="addbox"
     >
       <div class="new-address-title">
         <div class="na-line" />
@@ -1501,7 +1502,7 @@
         <!-- 发票按钮 -->
         <div class="invoice">
 
-          <!-- <div class="invoice-btn">
+          <div class="invoice-btn" v-if="this.areaId === '1'">
             <div v-show="!iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
               <span>{{ $t(`${lang2}.default`) }}</span>
@@ -1510,7 +1511,7 @@
               <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
               <span>{{ $t(`${lang2}.Invoicing`) }}</span>
             </div>
-          </div> -->
+          </div>
           <div class="invoice-box" v-show="invoiceBox">
             <div class="msg">
               <div class="msgbox" v-show="content">
@@ -1984,6 +1985,7 @@ export default {
         email:''
       },
       scrollTop:0,
+      areaId: this.$store.state.areaId,
       ifShowAddCard: false,
       cardList: [],
       useAmount: [],
@@ -2011,16 +2013,24 @@ export default {
     }
   },
   created() {
+<<<<<<< HEAD
+=======
+    // console.log("ssss",this.pathTakeIds)
+>>>>>>> origin/dev_invoice
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           this.good = res
+<<<<<<< HEAD
           console.log("res",res)
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
           }
 
+=======
+          // console.log("res",res)
+>>>>>>> origin/dev_invoice
           resolve()
         })
         .catch(err => {
@@ -2135,6 +2145,7 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
+          console.log(res.data)
           this.address = res.data
           if(this.address.length != 0){
             // for (const i in res.data) {
@@ -2145,7 +2156,7 @@ export default {
             //   }
             // }
             this.orderAddress = this.address[0]
-            console.log("地址",this.orderAddress)
+            // console.log("地址",this.orderAddress)
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
@@ -2194,7 +2205,7 @@ export default {
     },
     createAddress() {
       // console.log('create')  /[^\d]/g,''
-       if (this.addressData.lastname === '') {
+      if (this.addressData.lastname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
@@ -2387,23 +2398,18 @@ export default {
         })
     },
     changeAddressInfo(obj) {
-      // const topB = document.getElementsByClassName('layout-box')[0];
-      // const that = this
-      // let timer = setInterval(() => {
-      //   let ispeed = Math.floor(-that.scrollTop / 5)
-      //   topB.scrollTop = 500
-      //   if (that.scrollTop === 0) {
-      //     clearInterval(timer)
-      //   }
-      // }, 22)
-      // document.getElementById('addbox').scrollIntoView({
-      //   block: 'start',
-      //   inline: 'nearest',
-      //   behavior: 'smooth'
-      // })
+      // 点击修改滚顶到地址编辑模块
+      document.getElementById('addbox').scrollIntoView({
+        block: 'center',
+        inline: 'nearest',
+        behavior: 'smooth'
+      })
       // console.log('需要修改的对象：', obj);
       this.isEdit = true
       const data = this.$helpers.cloneObject(obj)
+      if(data.zip_code == null){
+        data.zip_code = ''
+      }
       this.addressData = {
         id: data.id,
         firstname: data.firstname,
@@ -2433,41 +2439,57 @@ export default {
       })
     },
     saveAddress1() {
-      // console.log('save')
-      if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
-        this.alertBox = true
-        this.wrongInput.firstname = true
-        return false
-      }
-      if (this.addressData.firstname.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip7`)
-        this.alertBox = true
-        this.wrongInput.firstname = true
-        return false
-      }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
-      if (this.addressData.lastname.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip9`)
+      if (this.addressData.firstname === '') {
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
-        this.wrongInput.lastname = true
+        this.wrongInput.firstname = true
         return false
       }
-      if (
-        !RegMobile.test(this.addressData.mobile) &&
-        !RegTelephone.test(this.addressData.mobile)
-      ) {
+      if(this.phoneNum.phone_code == '+86'){
+        if (!RegMobiles.test(this.addressData.mobile)) {
+          this.wrongMsg = this.$t(`${lang}.wip2`)
+          this.alertBox = true
+          this.wrongInput.mobile = true
+          return false
+        }
+      }
+      if (!RegTelephone.test(this.addressData.mobile)) {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
         this.wrongInput.mobile = true
         return false
       }
+<<<<<<< HEAD
 
+=======
+      // if (
+      //   !RegMobile.test(this.addressData.mobile) &&
+      //   !RegTelephone.test(this.addressData.mobile)
+      // ) {
+      //   this.wrongMsg = this.$t(`${lang}.wip2`)
+      //   this.alertBox = true
+      //   this.wrongInput.mobile = true
+      //   return false
+      // }
+      // if (!Email.test(this.addressData.email)) {
+      //   this.wrongMsg = this.$t(`${lang}.wip3`)
+      //   this.alertBox = true
+      //   this.wrongInput.email = true
+      //   return false
+      // }
+      // if (this.addressData.email !== this.addressData.checkEmail) {
+      //   this.wrongMsg = this.$t(`${lang}.wip3`)
+      //   this.alertBox = true
+      //   this.wrongInput.checkEmail = true
+      //   return false
+      // }
+>>>>>>> origin/dev_invoice
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
@@ -2478,6 +2500,9 @@ export default {
         this.alertBox = true
         this.wrongInput.address_details = true
         return false
+      }
+      if(this.city.areaId == ''){
+        this.city.areaId = '0'
       }
       const data = this.$helpers.transformRequest(
         JSON.parse(
@@ -2498,7 +2523,7 @@ export default {
         false
       )
       this.$axios
-        .post('/web/member/address/edit', data)
+        .post('/web/member/address/edit',data)
         .then(res => {
           // console.log("修改地址",res)
           this.getAddress()
@@ -2520,38 +2545,46 @@ export default {
     saveAddress() {
       // console.log('save')
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
-        this.alertBox = true
-        this.wrongInput.firstname = true
-        return false
-      }
-      if (this.addressData.firstname.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip7`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
       }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
-      if (this.addressData.lastname.length > 20) {
-        this.wrongMsg = this.$t(`${lang}.wip9`)
-        this.alertBox = true
-        this.wrongInput.lastname = true
-        return false
-      }
-      if (
-        !RegMobile.test(this.addressData.mobile) &&
-        !RegTelephone.test(this.addressData.mobile)
-      ) {
+      if (this.addressData.mobile === '') {
         this.wrongMsg = this.$t(`${lang}.wip2`)
         this.alertBox = true
         this.wrongInput.mobile = true
         return false
       }
+      if(this.phoneNum.phone_code == '+86'){
+        if (!RegMobiles.test(this.addressData.mobile)) {
+          this.wrongMsg = this.$t(`${lang}.wip2`)
+          this.alertBox = true
+          this.wrongInput.mobile = true
+          return false
+        }
+      }
+      if (!RegMobile.test(this.addressData.mobile)) {
+        this.wrongMsg = this.$t(`${lang}.wip2`)
+        this.alertBox = true
+        this.wrongInput.mobile = true
+        return false
+      }
+      // if (
+      //   !RegMobile.test(this.addressData.mobile) &&
+      //   !RegTelephone.test(this.addressData.mobile)
+      // ) {
+      //   this.wrongMsg = this.$t(`${lang}.wip2`)
+      //   this.alertBox = true
+      //   this.wrongInput.mobile = true
+      //   return false
+      // }
       if (!Email.test(this.addressData.email)) {
         this.wrongMsg = this.$t(`${lang}.wip3`)
         this.alertBox = true
@@ -2574,6 +2607,9 @@ export default {
         this.alertBox = true
         this.wrongInput.address_details = true
         return false
+      }
+      if(this.city.areaId == ''){
+        this.city.areaId = '0'
       }
       const data = this.$helpers.transformRequest(
         JSON.parse(
@@ -2768,7 +2804,7 @@ export default {
           arr.push(this.good[i].data[1].id)
         }
       }
-      console.log("this.good",this.good)
+      // console.log("this.good",this.good)
       const data = arr.join(',')
       const datas={
         addressId: this.orderAddress.id,

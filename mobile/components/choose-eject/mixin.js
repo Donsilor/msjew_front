@@ -71,6 +71,11 @@ export default {
       this.hideIt()
     },
     clearChoose() {
+      this.$nuxt.$loading.start()
+      setTimeout(() => {
+        this.$nuxt.$loading.finish()
+      }, 1000);
+
       this.$emit('clear', JSON.parse(JSON.stringify(this.choose)))
       this.hideIt()
     }

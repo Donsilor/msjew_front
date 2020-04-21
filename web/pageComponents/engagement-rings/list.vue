@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content">
+  <div class="page-content" v-loading="loading">
     <section class="search-condition">
       <!--      款式条件-->
       <div class="condition-item condition-style">
@@ -122,7 +122,7 @@
         </div>
       </div>
     </section>
-    <section class="list-title">
+    <section class="list-title" v-show="this.loading == false">
       <h1 class="title">
         {{ $t(`${lang}.totalCountTitle`, { total_count }) }}
         <!--        {{-->
@@ -225,7 +225,7 @@
           </el-pagination>
         </div>
       </div>
-      <no-more-data v-show="showingData.length == 0" :dataVal = "2"></no-more-data>
+      <no-more-data v-show="this.allData.length == 0 && this.loading == false" :dataVal = "2"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="product"></bdd-empty> -->
     </section>
   </div>
@@ -264,7 +264,7 @@ export default {
     return {
       lang,
       listUrl: '/web/goods/style/search',
-      page_size: 8,
+      page_size: 16,
       styleOptions: this.CONDITION_INFO.style.rings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
@@ -274,7 +274,8 @@ export default {
         material: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
-      seoInfo:{}
+      seoInfo:{},
+      loading: true
     }
   },
   computed: {
@@ -359,6 +360,15 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
+      console.log("加载状态",this.loading)
+      // if(this.allData.length == 0){
+      //   this.loading = true
+      //   setTimeout(() => {
+      //     this.loading = false
+      //   }, 1000);
+      // }else if(this.allData.length > 0){
+      //   this.loading = false
+      // }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1

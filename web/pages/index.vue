@@ -454,7 +454,7 @@ export default {
         })
       }
       result.products = products
-      console.log(result)
+      // console.log(result)
       return result
     },
     activeHotProductInfo () {

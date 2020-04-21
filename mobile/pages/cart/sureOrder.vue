@@ -122,7 +122,7 @@
           ></textarea>
         </div>
         <!-- 开具发票 -->
-        <!-- <div class="invoice">
+        <div class="invoice" v-if="this.areaId === '1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -130,7 +130,7 @@
               <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
-        </div> -->
+        </div>
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
@@ -354,6 +354,7 @@ export default {
       session: '',
       info:[],
       totlePrice:'',
+      areaId: this.$store.state.areaId,
       ifShowShoppingCard: false,
       cardList: [],
       useAmount: [],
@@ -519,7 +520,7 @@ export default {
         productAmount: 0, // 商品总价 ,
         safeFee: 0, // 保险金额 ,
         taxFee: 0, // 税费金额
-        planDays: `5-12`
+        planDays: ``
       }
     },
     showCouponTips() {
@@ -762,6 +763,8 @@ export default {
           this.ultimatelyPay = res.payAmount;
           this.currency = res.currency;
 
+          this.planDays = this.allFee.planDays
+
           // this.info=res.details
           // console.log("费用>>>>>>>>",this.info)
         })
@@ -769,6 +772,7 @@ export default {
           this.canSubmit = false
           this.$toast.show(err.message)
           this.allFee = this.defaultAllFeeInfo()
+
           // console.log("ggg",this.allFee)
         })
     },
