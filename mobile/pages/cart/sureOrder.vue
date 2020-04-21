@@ -753,7 +753,10 @@ export default {
           this.canSubmit = true
           this.allFee = res
 
-          this.useAmount = JSON.parse(JSON.stringify(res.cards))
+          if(res.cards !== undefined){
+            this.useAmount = JSON.parse(JSON.stringify(res.cards))
+          }
+          
           this.orderTotalAmount = res.orderAmount;
           this.ultimatelyPay = res.payAmount;
 
