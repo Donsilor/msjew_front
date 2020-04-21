@@ -352,7 +352,7 @@ function queryParams (data) {
         //手链--18K黄金
         {
           'mobileUrl':/^\/accessories\/list\?actIndex=4&material=29$/,
-          'pcUrl':`/jewellery/bracelet-bangle-18k-yellow`,
+          'pcUrl':`/jewellery/bracelet-bangle-18K-yellow`,
           'params':{
             'param':'none',          
           },
