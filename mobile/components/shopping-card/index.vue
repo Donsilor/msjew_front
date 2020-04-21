@@ -48,11 +48,11 @@
                   <span class="icon"></span>
                   <span>{{ lang.verifyFailing }}</span>
                 </div>
-                <div class="text" @click="eliminate(index)">{{ lang.eliminateCard }}</div>
+                <div class="text" @click="removeBinding(index)">{{ lang.eliminateCard }}</div>
               </div>
             </div>
 
-            <div class="btn" style="margin: 0 0 0 50px" v-if="cardType.length != 0 && item.ifShowRemove" @click="removeBinding(index)">{{ lang.unbound }}</div>
+            <div class="btn" style="margin: 0 0 0 50px" v-if="item.ifShowRemove" @click="removeBinding(index)">{{ lang.unbound }}</div>
           </div>
 
           <div class="balance-text" v-if="item.type == 1">{{ lang.balance }}¥ {{item.balanceCny}}&nbsp;
@@ -155,9 +155,6 @@
         ifLoading: false,
         ifShowPop2: false,
         removeIndex: -1,
-        ifShowbtn: true,
-
-
         ifShowbtn: -1,
         arr5: []
       }
@@ -314,13 +311,17 @@
               // console.log(888,time,999,that.startTime,0,that.endTime)
               if(time > that.startTime && time < that.endTime){
                 that.verifyStatus = 1;
-				that.cardList[k].type = 1;
+                that.cardList[k].type = 1;
 
                 if(that.cardList[k].balance !== 0 && that.cardList[k].ifAllowedToUse){
                   that.cardList[k].ifChoose = true;
                 }else{
-					that.cardList[k].ifChoose = false;
-				}
+                  that.cardList[k].ifChoose = false;
+                }
+
+                if(that.cardList[k].balance == 0){
+                  that.cardList[k].ifShowRemove = true;
+                }
 
                 for(var i=0,len=that.cardList.length; i<len; i++){
                   if(that.cardList[i].ifChoose != true){
