@@ -311,7 +311,7 @@ function queryParams (data) {
         //项链--18K黄金
         {
           'mobileUrl':/^\/accessories\/list\?actIndex=0&material=29$/,
-          'pcUrl':`/jewellery/necklace-pendant-18k-yellow`,
+          'pcUrl':`/jewellery/necklace-pendant-18K-yellow`,
           'params':{
             'param':'none',          
           },
