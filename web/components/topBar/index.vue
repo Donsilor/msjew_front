@@ -715,7 +715,7 @@ export default {
             [
               {
                 key: 'material',
-                groupName: this.$t(`${lang}.necklaceMenu.use`),
+                // groupName: this.$t(`${lang}.necklaceMenu.use`),
                 data: [
                   {
                     id: 31,
@@ -880,7 +880,7 @@ export default {
             ],
             [
               {
-                groupName: this.$t(`${lang}.braceletMenu.use`),
+                // groupName: this.$t(`${lang}.braceletMenu.use`),
                 data: [
                   {
                     name: this.$t(`${lang}.braceletMenu.ValentinesDay`),
@@ -1086,7 +1086,7 @@ export default {
         'theme-collection': {
           image: '/adt/image1564544333790.png',
           groups: [
-            //优惠活动
+
             // [
             //   {
             //     groupName: this.$t(`${lang}.themeCollectionMenu.Promotions`),
@@ -2393,7 +2393,7 @@ export default {
 
             .dotted-right-line {
               margin-right: 58px;
-              border-right: 1px dotted #bbbbbd;
+              border-right: 1px dashed #bbbbbd;
 
               &:before {
                 content: ' ';

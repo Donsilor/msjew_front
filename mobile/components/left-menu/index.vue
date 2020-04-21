@@ -682,7 +682,7 @@ export default {
           text-align: left;
           padding: 15px 0px;
           // background-color: #e4ecf0;
-          border-bottom:2px solid #A9C6D5;
+          border-bottom:1px solid #A9C6D5;
           .status-icon{
             margin-left: 5px;
             transform: rotate(450deg);

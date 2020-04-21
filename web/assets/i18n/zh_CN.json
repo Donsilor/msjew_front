@@ -263,7 +263,7 @@
         "platinum": "铂金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "纯银",
+        "fineSilver": "银",
 
         "price":"价格",
         "use":"使用场景",
@@ -305,7 +305,7 @@
         "platinum": "铂金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "纯银",
+        "fineSilver": "银",
 
         "style": "款式",
         "price":"价格",
@@ -361,7 +361,7 @@
         "platinum": "铂金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "纯银",
+        "fineSilver": "银",
         "ValentinesDay":"情人节",
         "MothersDay":"母亲节",
         "birthdayPresent":"生日礼物",
@@ -405,7 +405,7 @@
         "platinum": "铂金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "纯银",
+        "fineSilver": "银",
         "WeightRange1":"0.3ct以下",
         "WeightRange2":"0.3-0.5ct",
         "WeightRange3":"0.51ct-0.8ct",
@@ -419,6 +419,7 @@
         "birthdayPresent":"生日礼物"
       },
       "themeCollectionMenu":{
+        "use":"使用场景/特别礼物",
         "Promotions":"活动特惠",
         "HolidayGift":"节日礼物",
         "classification":"分类",
