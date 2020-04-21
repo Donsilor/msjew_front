@@ -84,7 +84,7 @@
       "roseGold14K": "14K玫瑰金",
       "roseGold18K": "18K玫瑰金",
       "platinum": "鉑金",
-      "fineSilver925": "純銀"
+      "fineSilver925": "銀"
     },
     "sortBy": {
       "BestSeller": "最暢銷",
@@ -639,7 +639,8 @@
       "more": "MORE",
       "for-men": "FOR MEN",
       "gentlemen-ring": "男士戒指",
-      "marriage-ring": "結婚對戒"
+      "marriage-ring": "結婚對戒",
+      "couple-rings":"情侶對戒"
     }
   },
   "search": {
@@ -856,6 +857,13 @@
       "birthdayPresent":"生日禮物",
       "ChristmasGift":"聖誕禮物",
       "HalloweenGift":"萬聖節禮物",
+      "rings":"戒指",
+      "CoupleRings":"情侶對戒",
+      "NecklaceAndPendant":"項鍊/吊墜",
+      "bracelets":"手鍊/手鐲",
+      "EarringsAndStuds":"耳環/耳釘",
+      "DecorationAndPendant":"擺件/挂件",
+      "others":"其它",
       "login":"請登入"
     },
     "noMoreData": {
@@ -1034,7 +1042,7 @@
       
     ],
     "style": "款式",
-    "theme": "主題",
+    "theme": "特別禮物",
     "fineness": "成色",
     "total": "共",
     "goods": "貨品",
@@ -1042,6 +1050,7 @@
     "accessories": "配飾",
     "all": "所有",
     "marriage-ring": "結婚對戒",
+    "couple-rings":"情侶對戒",
     "engagement-ring": "訂婚戒指",
     "stArrContent": "請選擇",
     "lady": "女士",

@@ -99,9 +99,8 @@
                 </div>
               </div>
             </div>
-            <div class="menus-one" @click="one(5)">
+            <!-- <div class="menus-one" @click="one(5)">
               <span :class="{changeColor:changeColor5}">{{lang.activity}}</span>
-              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives5 }">
                 <div class="goback" @click.stop="goback(5)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -113,7 +112,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="menus-one" @click="one(6)">
               <span :class="{changeColor:changeColor6}">{{lang.theme}}</span>
               <!-- <i class="iconfont iconxiala status-icon" ></i> -->
@@ -256,6 +255,9 @@ export default {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.CoupleRing,
           routerName: 'marriage-ring-pair-ring',
+          // query: {
+          //   style: 1
+          // }
           
         },
       ],
@@ -307,47 +309,48 @@ export default {
       ],
       themes:[
         {
-          name: this.LANGUAGE.components.leftMenu.ValentinesDay,
+          name: this.LANGUAGE.components.leftMenu.rings,
+          routerName: 'marriage-ring-single-ring',
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.CoupleRings,
+          routerName: 'marriage-ring-pair-ring',
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.NecklaceAndPendant,
           routerName: 'accessories-list',
           query:  {
-            theme: 197
+            actIndex: 0
           },
         },
         {
-          name: this.LANGUAGE.components.leftMenu.MothersDay,
+          name: this.LANGUAGE.components.leftMenu.EarringsAndStuds,
           routerName: 'accessories-list',
           query:  {
-            theme: 198
+            actIndex: 3
           },
         },
         {
-          name: this.LANGUAGE.components.leftMenu.birthdayPresent,
+          name: this.LANGUAGE.components.leftMenu.DecorationAndPendant,
           routerName: 'accessories-list',
           query:  {
-            theme: 199
+            actIndex: 6
           },
         },
         {
-          name: this.LANGUAGE.components.leftMenu.ChristmasGift,
+          name: this.LANGUAGE.components.leftMenu.others,
           routerName: 'accessories-list',
           query:  {
-            theme: 200
-          },
-        },
-        {
-          name: this.LANGUAGE.components.leftMenu.HalloweenGift,
-          routerName: 'accessories-list',
-          query:  {
-            theme: 201
+            actIndex: 8
           },
         }
       ],
-      zhishi:[
-        {
-          name: this.LANGUAGE.components.leftMenu.knowledge,
-          routerName: 'help-pages-knowledge',
-        }
-      ],
+      // zhishi:[
+      //   {
+      //     name: this.LANGUAGE.components.leftMenu.knowledge,
+      //     routerName: 'help-pages-knowledge',
+      //   }
+      // ],
       date:''
     }
   },
@@ -635,9 +638,11 @@ export default {
   color: #6f9eb1;
 }
 .content{
+  overflow: hidden;
   .groups{
+    height: 120%;
     position: relative;
-    overflow: hidden;
+    // overflow: hidden;
     .status-icon {
       flex-grow: 0;
       flex-shrink: 0;
@@ -657,12 +662,12 @@ export default {
       font-size: 14px;
       display: flex;
       justify-content: space-between;
-      padding: 15px 0;
+      padding: 18px 0;
       // height: 50px;
       padding-left:20px;
       // border-bottom:2px solid #fff;
       // background-color: #e4ecf0;
-      z-index: 99;
+      // z-index: 99;
       color: rgb(15, 14, 14);
       >span:hover{
         color: #6f9eb1;
@@ -675,12 +680,12 @@ export default {
         left: 0;
         transform: translate(100%, 0);
         transition: all 0.2s linear;
-        z-index: 100;
+        z-index: 999;
         background-color: #F5F5F5;
         .goback{
           margin: 0 10px;
           text-align: left;
-          padding: 15px 0px;
+          padding: 18px 0px;
           // background-color: #e4ecf0;
           border-bottom:1px solid #A9C6D5;
           .status-icon{
@@ -755,7 +760,7 @@ export default {
   opacity: 1;
   pointer-events: all;
   z-index: 0;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   height: 100%;
 }
 .bg {

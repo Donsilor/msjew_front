@@ -715,7 +715,7 @@ export default {
             [
               {
                 key: 'material',
-                // groupName: this.$t(`${lang}.necklaceMenu.use`),
+                groupName: this.$t(`${lang}.necklaceMenu.use`),
                 data: [
                   {
                     id: 31,
@@ -880,7 +880,7 @@ export default {
             ],
             [
               {
-                // groupName: this.$t(`${lang}.braceletMenu.use`),
+                groupName: this.$t(`${lang}.braceletMenu.use`),
                 data: [
                   {
                     name: this.$t(`${lang}.braceletMenu.ValentinesDay`),
@@ -2344,7 +2344,7 @@ export default {
                   height: 19px;
                   margin-bottom: 29px;
                   font-size: 14px;
-                  font-weight: 400;
+                  font-weight: 700;
                   color: #333333;
                 }
                 .group-item {

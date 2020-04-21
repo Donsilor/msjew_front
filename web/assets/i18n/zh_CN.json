@@ -99,7 +99,7 @@
       "roseGold14K": "14K玫瑰金",
       "roseGold18K": "18K玫瑰金",
       "platinum": "铂金",
-      "fineSilver925": "纯银"
+      "fineSilver925": "银"
     },
     "sortBy": {
       "BestSeller": "最畅销",
@@ -309,7 +309,7 @@
 
         "style": "款式",
         "price":"价格",
-        "use":"使用场景/特别礼物",
+        "use":"特别礼物",
         "necklace":"项链",
         "Pendant":"吊坠",
         "ValentinesDay":"情人节",
@@ -346,7 +346,7 @@
         "style": "款式",
         "price":"价格",
         "color": "成色",
-        "use":"使用场景/特别礼物",
+        "use":"特别礼物",
         "Bracelet":"手链",
         "bracelet":"手镯",
         "priceRange1":"1000以内",
