@@ -569,7 +569,7 @@ export default {
                   {
                     id: 48,
                     name: this.$t(`${lang}.ringsMenu.birthdayPresent`),
-                    icon: 'iconJewelry-gift-d',
+                    // icon: 'iconJewelry-gift-d',
                     to: {
                       path: '/wedding-rings/birthday-present-use'
                     }
@@ -954,14 +954,14 @@ export default {
                 data: [
                   {
                     name: this.$t(`${lang}.diamondMenu.SolitaireRing`),
-                    // icon: 'iconyuanxin shape-icon',
+                    icon: 'iconring-jy ring-icon',
                     to: {
                       path: '/engagement-rings/solitaire'
                     }
                   },
                   {
                     name: this.$t(`${lang}.diamondMenu.ClawRing`),
-                    icon: '',
+                    icon: 'iconring-bx ring-icon',
                     to: {
                       path: '/engagement-rings/halo-set'
                     }
