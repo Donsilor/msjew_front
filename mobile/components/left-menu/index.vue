@@ -258,6 +258,7 @@ export default {
           // query: {
           //   style: 1
           // }
+          
         },
       ],
       necklaces:[

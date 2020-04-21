@@ -78,8 +78,9 @@ export default {
           break
         
       }
+      let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
       this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
-      this.conditions[0].checked = ``
+      this.conditions[0].checked = material.toString()
       this.conditions[1].options = this.CONDITION_INFO.style.theme
       this.conditions[1].checked = ``
       this.conditions[2].checked = ``
@@ -89,8 +90,9 @@ export default {
     },
 
     $route(val, oldVal) {
+      let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
       this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
-      this.conditions[0].checked = ``
+      this.conditions[0].checked = material.toString()
       this.conditions[1].options = this.CONDITION_INFO.style.theme
       let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
       this.conditions[1].checked = theme.toString()
@@ -134,6 +136,8 @@ export default {
         this.categoryId = this.category
         break
     }
+    let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
+    this.conditions[0].checked = material.toString()
     let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
     this.conditions[1].checked = theme.toString()
     this.madeUpEv()

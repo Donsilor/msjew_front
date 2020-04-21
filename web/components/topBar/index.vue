@@ -433,7 +433,7 @@ export default {
                     name: this.$t(`${lang}.ringsMenu.coupleRing`),
                     icon: '',
                     to: {
-                      path: '/wedding-rings/couple-ring'
+                      path: '/wedding-rings/classic-series'
                     }
                   }
                 ]
@@ -1086,27 +1086,28 @@ export default {
         'theme-collection': {
           image: '/adt/image1564544333790.png',
           groups: [
+
             // [
             //   {
             //     groupName: this.$t(`${lang}.themeCollectionMenu.Promotions`),
             //     data: [
             //       {
             //         name: this.$t(`${lang}.themeCollectionMenu.BlackFriday`),
-            //         icon: '',
+            //         // icon: 'icon-blackfriday',
             //         to: {
             //           path: '/jewellery/necklaces'
             //         }
             //       },
             //       {
             //         name: this.$t(`${lang}.themeCollectionMenu.coupon`),
-            //         icon: '',
+            //         // icon: 'icon-youhuiquan',
             //         to: {
             //           path: '/jewellery/pendants'
             //         }
             //       },
             //       {
             //         name: this.$t(`${lang}.themeCollectionMenu.SpecialDiscount`),
-            //         icon: '',
+            //         // icon: 'icon-tehuitejia',
             //         to: {
             //           path: '/jewellery/ear-stud'
             //         }

@@ -72,7 +72,6 @@ function queryParams (data) {
 		//测试环境
 		host = 'http://www.bdd.bddia.com';
 	}
-
     const toWapUrl = path => {
       if(path === '/undefined') {
         return
@@ -95,6 +94,306 @@ function queryParams (data) {
           'mobileUrl':/\/register/,
           'pcUrl':`/login?type=register`
         },
+
+
+        //戒指
+        {
+          'mobileUrl':/^\/marriage-ring\/?$/,
+          'pcUrl':`/wedding-rings`
+        },
+
+        //求婚戒指
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?style=162/,
+          'pcUrl':`/wedding-rings/proposal-ring`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+
+        //订婚戒指
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?style=160/,
+          'pcUrl':`/wedding-rings/engagement-ring`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+        //结婚戒指
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?style=161/,
+          'pcUrl':`/wedding-rings/wedding-ring`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+         //套戒
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?style=164/,
+          'pcUrl':`/wedding-rings/ring`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+        //时尚戒指
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?style=163/,
+          'pcUrl':`/wedding-rings/fashion-ring`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+        //情侣对戒
+        {
+          'mobileUrl':/^\/marriage-ring\/pair-ring$/,
+          'pcUrl':`/wedding-rings/classic-series`,
+		    
+        }, 
+        //18K白
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?material=28/,
+          'pcUrl':`/wedding-rings/18k-white`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+        //18K黄金
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?material=29/,
+          'pcUrl':`/wedding-rings/18k-yellow`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+        //18K玫瑰金
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?material=30/,
+          'pcUrl':`/wedding-rings/18k-rose-gold`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+        //铂金
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?material=35/,
+          'pcUrl':`/wedding-rings/channel-set`,
+		      'params':{
+            'param':'none',          
+          },
+        }, 
+        //戒指 价格0-1000
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?startPrice=0&endPrice=1000/,
+          'pcUrl':`/wedding-rings/all`,
+          'params':{
+            'priceRange':'WzAsMTAwMF0%3D',        
+          },
+        }, 
+        //戒指 价格1000-1999
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?startPrice=1000&endPrice=1999/,
+          'pcUrl':`/wedding-rings/all`,
+          'params':{
+            'priceRange':'WzEwMDAsMTk5OV0%3D',        
+          },
+        }, 
+        //戒指 价格2000-2999
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?startPrice=2000&endPrice=2999/,
+          'pcUrl':`/wedding-rings/all`,
+          'params':{
+            'priceRange':'WzIwMDAsMjk5OV0%3D',        
+          },
+        }, 
+         //戒指 价格3000-4999
+         {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?startPrice=3000&endPrice=4999/,
+          'pcUrl':`/wedding-rings/all`,
+          'params':{
+            'priceRange':'WzMwMDAsNDk5OV0%3D',        
+          },
+        }, 
+        //戒指 价格5000以上
+         {
+          'mobileUrl':/^\/marriage-ring\/single-ring\?startPrice=5000&endPrice=300000/,
+          'pcUrl':`/wedding-rings/all`,
+          'params':{
+            'priceRange':'WzUwMDAsMzAwMDAwXQ%3D%3D',        
+          },
+        }, 
+                
+        //戒指
+        {
+          'mobileUrl':/^\/marriage-ring\/single-ring$/,
+          'pcUrl':`/wedding-rings/all`
+        },
+        //项链
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0$/,
+          'pcUrl':`/jewellery/necklaces`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //吊坠
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=1$/,
+          'pcUrl':`/jewellery/pendants`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4$/,
+          'pcUrl':`/jewellery/bracelets`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手镯
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=5$/,
+          'pcUrl':`/jewellery/bangles`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //耳环
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=3$/,
+          'pcUrl':`/jewellery/earrings`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //耳钉
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=2$/,
+          'pcUrl':`/jewellery/ear-stud`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //摆件
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=6$/,
+          'pcUrl':`/jewellery/decoration`,
+          'params':{
+            'param':'none',          
+          },
+        },
+         //挂件
+         {
+          'mobileUrl':/^\/accessories\/list\?actIndex=7$/,
+          'pcUrl':`/jewellery/widgets`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //其他
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=8$/,
+          'pcUrl':`/jewellery/others`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--18K白金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=28$/,
+          'pcUrl':`/jewellery/necklace-pendant-18k-white`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--18K黄金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=29$/,
+          'pcUrl':`/jewellery/necklace-pendant-18k-yellow`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--18K玫瑰金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=30$/,
+          'pcUrl':`/jewellery/necklace-pendant-18k-rose-gold`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--铂金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=34$/,
+          'pcUrl':`/jewellery/necklace-pendant-platinum`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //项链--银
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=0&material=35$/,
+          'pcUrl':`/jewellery/necklace-pendant-fineSilver`,
+          'params':{
+            'param':'none',          
+          },
+        },
+
+        //手链--18K白金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=28$/,
+          'pcUrl':`/jewellery/bracelet-bangle-18k-white`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链--18K黄金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=29$/,
+          'pcUrl':`/jewellery/bracelet-bangle-18k-yellow`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链--18K玫瑰金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=30$/,
+          'pcUrl':`/jewellery/bracelet-bangle-18k-rose-gold`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链--铂金
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=34$/,
+          'pcUrl':`/jewellery/bracelet-bangle-platinum`,
+          'params':{
+            'param':'none',          
+          },
+        },
+        //手链--银
+        {
+          'mobileUrl':/^\/accessories\/list\?actIndex=4&material=35$/,
+          'pcUrl':`/jewellery/bracelet-bangle-fineSilver`,
+          'params':{
+            'param':'none',          
+          },
+        },
+
+
+      
+        
+
+
+
+
+
+
+
+
+
+
 		
 		//订婚
 		{
@@ -740,24 +1039,25 @@ function queryParams (data) {
               
               Object.keys(params).forEach(function(key) {
 				
-				if(params[key] == 'none'){
-					href.splice(1,1)
-				}				  
+                if(params[key] == 'none'){
+                  href.splice(1,1)
+                }				  
                 if(typeof query1[key] !== 'undefined') {
-                  query2[params[key]] = unescape(query1[key])
+                  // query2[params[key]] = unescape(query1[key])
                   url = url.replace('{'+key+'}',unescape(query1[key]))
                 }else{
-				  query2[key] = params[key]
-				}
+                  query2[key] = unescape(params[key])
+                }
               })
                param = queryParams(query2)
-              //href[1] = queryParams(query2)
+              // href[1] = queryParams(query2)
             }
 
             if(href.length>1) {
               url = url + '?' + param 
+              // url = url + '?' + param + href[1]
             }
-            console.log(url)
+            
             redirect(url)
             return  
           }
