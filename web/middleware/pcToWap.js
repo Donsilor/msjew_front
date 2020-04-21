@@ -71,7 +71,8 @@ function queryParams (data) {
     if(!(/bddco\.com/).test(headerHost)) {
 		//测试环境
 		host = 'http://wap.bdd.bddia.com';
-	}
+  }
+    host = 'http://127.0.0.1:8328';
     const toWapUrl = path => {
       if(path === '/undefined') {
         return
@@ -89,7 +90,7 @@ function queryParams (data) {
           'pcUrl':/^\/login\/?$/,
           'mobileUrl':`/login`
         },
-		{
+		    {
           'pcUrl':/^\/login\/\?type=login/,
           'mobileUrl':`/login`
         },
@@ -98,152 +99,179 @@ function queryParams (data) {
           'pcUrl':/^\/login\/\?type=register/,
           'mobileUrl':`/register`
         },
-        // 订婚
-        {
-          'pcUrl':/^\/engagement-rings\/?$/,
-          'mobileUrl':`/engagement`
-        }, 
-        // 订婚列表
 
 
-       /*
-        {
-          'pcUrl':/^\/engagement-rings\/(solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)\/?$/,
-          'mobileUrl':`/engagement/list`,
-        }, 
-		*/
-		
-		{
-          'pcUrl':/^\/engagement-rings\/solitaire$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'style':'109',
-          },
-        }, 
-		
-		//开口戒
-		{
-          'pcUrl':/^\/engagement-rings\/jump$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'style':'110',
-          },
-        }, 
-		
-		//密钉戒
 
-		{
-          'pcUrl':/^\/engagement-rings\/pave-set$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'style':'111',
-          },
-        }, 
-		{
-          'pcUrl':/^\/engagement-rings\/classical$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'style':'112',
-          },
-        }, 
-		{
-          'pcUrl':/^\/engagement-rings\/channel-set$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'style':'113',
-          },
-        }, 
-		{
-          'pcUrl':/^\/engagement-rings\/halo-set$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'style':'114',
-          },
-        }, 
-		{
-          'pcUrl':/^\/engagement-rings\/three-stone$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'style':'115',
-          },
-        }, 
-		
-		{
-          'pcUrl':/^\/engagement-rings\/14k-white$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'material':'31',
-          },
-        }, 
-		
-		{
-          'pcUrl':/^\/engagement-rings\/18k-white$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'material':'28',
-          },
-        }, 
-		
-		{
-          'pcUrl':/^\/engagement-rings\/14k-yellow$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'material':'32',
-          },
-        }, 
-		
-		{
-          'pcUrl':/^\/engagement-rings\/18k-yellow$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'material':'29',
-          },
-        }, 
-		
-		{
-          'pcUrl':/^\/engagement-rings\/platinum$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'material':'34',
-          },
-        }, 
-		
-		{
-          'pcUrl':/^\/engagement-rings\/18k-rose-gold$/,
-          'mobileUrl':`/engagement/list`,
-		  'params':{
-            'material':'30',
-          },
-        }, 
-		
-		
-		
-        // 订婚详情
-        {
-          'pcUrl':/^\/ring\/engagement-rings/,
-          'mobileUrl':`/engagement/engagement-rings`,
-          'params':{
-            'goodId':'goodId',
-            'ringType':'ringType',
-          },
-        }, 
-        // 结婚   ring/wedding-rings
+
+        // 戒指   ring/wedding-rings
         {
           'pcUrl':/^\/wedding-rings\/?$/,
           'mobileUrl':`/marriage-ring`
         },
-		
-		
-		
-		{
-          'pcUrl':/^\/wedding-rings\/engagement-ring$/,
+		    //求婚戒指
+		    {
+          'pcUrl':/^\/wedding-rings\/proposal-ring$/,
           'mobileUrl':`/marriage-ring/single-ring`,
-		  'params':{
-			'type':'lady',   
-            'style':'160',
+          'params':{            
+              'style':'162',
           },
         }, 
-		{
+        //订婚戒指
+		    {
+          'pcUrl':/^\/wedding-rings\/engagement-ring$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+              'style':'160',
+          },
+        }, 
+        //结婚戒指
+		    {
+          'pcUrl':/^\/wedding-rings\/wedding-ring$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+              'style':'161',
+          },
+        }, 
+        //套接
+		    {
+          'pcUrl':/^\/wedding-rings\/ring$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+              'style':'164',
+          },
+        }, 
+        //时尚戒指
+		    {
+          'pcUrl':/^\/wedding-rings\/fashion-ring$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+              'style':'163',
+          },
+        }, 
+        // 情侣对戒
+        {
+          'pcUrl':/^\/wedding-rings\/classic-series$/,
+          'mobileUrl':`/marriage-ring/pair-ring`
+        },
+        //18K白
+		    {
+          'pcUrl':/^\/wedding-rings\/18k-white$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+             'material':'28',
+          },
+        }, 
+        //18K黄金
+		    {
+          'pcUrl':/^\/wedding-rings\/18k-yellow$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+             'material':'29',
+          },
+        }, 
+        //18K玫瑰金
+		    {
+          'pcUrl':/^\/wedding-rings\/18k-rose-gold$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+             'material':'30',
+          },
+        }, 
+        //铂金
+		    {
+          'pcUrl':/^\/wedding-rings\/platinum$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+             'material':'34',
+          },
+        }, 
+        //银
+		    {
+          'pcUrl':/^\/wedding-rings\/channel-set$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+          'params':{            
+             'material':'35',
+          },
+        }, 
+        //戒指 价格0-1000
+        {
+          'pcUrl':/^\/wedding-rings\/all\?priceRange=WzAsMTAwMF0%3D$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		      'params':{  
+            'startPrice':'0',
+			      'endPrice':'1000'
+          },
+        }, 	
+        //戒指 价格1000-1999
+        {
+          'pcUrl':/^\/wedding-rings\/all\?priceRange=WzEwMDAsMTk5OV0%3D$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		      'params':{  
+            'startPrice':'1000',
+			      'endPrice':'1999'
+          },
+        }, 	
+        //戒指 价格2000-2999
+        {
+          'pcUrl':/^\/wedding-rings\/all\?priceRange=WzIwMDAsMjk5OV0%3D$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		      'params':{  
+            'startPrice':'2000',
+			      'endPrice':'2999'
+          },
+        }, 	
+        //戒指 价格3000-4999
+        {
+          'pcUrl':/^\/wedding-rings\/all\?priceRange=WzMwMDAsNDk5OV0%3D$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		      'params':{  
+            'startPrice':'3000',
+			      'endPrice':'4999'
+          },
+        }, 	
+        //戒指 价格5000以上
+        {
+          'pcUrl':/^\/wedding-rings\/all\?priceRange=WzUwMDAsMzAwMDAwXQ%3D%3D$/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+		      'params':{  
+            'startPrice':'5000',
+			      'endPrice':'300000'
+          },
+        }, 	
+        //戒指其他链接
+        {
+          'pcUrl':/^\/wedding-rings\/?/,
+          'mobileUrl':`/marriage-ring/single-ring`,
+        }, 
+
+        //项链
+		    {
+          'pcUrl':/^\/jewellery\/necklaces$/,
+          'mobileUrl':`/accessories/list`,
+		       'params':{  
+            'actIndex':'0',
+          },
+        }, 
+
+        //吊坠
+		    {
+          'pcUrl':/^\/jewellery\/pendants$/,
+          'mobileUrl':`/accessories/list`,
+		       'params':{  
+            'actIndex':'1',
+          },
+        }, 
+
+
+
+
+
+
+
+
+
+
+		   {
           'pcUrl':/^\/wedding-rings\/wedding-ring$/,
           'mobileUrl':`/marriage-ring/single-ring`,
 		  'params':{
@@ -403,6 +431,144 @@ function queryParams (data) {
             'style':'2',
           },
         }, 
+
+
+
+
+
+
+
+
+        // 戒指
+        {
+          'pcUrl':/^\/engagement-rings\/?$/,
+          'mobileUrl':`/engagement`
+        }, 
+        // 订婚列表
+
+
+       /*
+        {
+          'pcUrl':/^\/engagement-rings\/(solitaire|jump|pave-set|classical|channel-set|halo-set|three-stone|14k-white|18k-white|14k-yellow|18k-yellow|platinum|18k-rose-gold)\/?$/,
+          'mobileUrl':`/engagement/list`,
+        }, 
+		*/
+		
+		{
+          'pcUrl':/^\/engagement-rings\/solitaire$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'109',
+          },
+        }, 
+		
+		//开口戒
+		{
+          'pcUrl':/^\/engagement-rings\/jump$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'110',
+          },
+        }, 
+		
+		//密钉戒
+
+		{
+          'pcUrl':/^\/engagement-rings\/pave-set$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'111',
+          },
+        }, 
+		{
+          'pcUrl':/^\/engagement-rings\/classical$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'112',
+          },
+        }, 
+		{
+          'pcUrl':/^\/engagement-rings\/channel-set$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'113',
+          },
+        }, 
+		{
+          'pcUrl':/^\/engagement-rings\/halo-set$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'114',
+          },
+        }, 
+		{
+          'pcUrl':/^\/engagement-rings\/three-stone$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'style':'115',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/14k-white$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'31',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/18k-white$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'28',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/14k-yellow$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'32',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/18k-yellow$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'29',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/platinum$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'34',
+          },
+        }, 
+		
+		{
+          'pcUrl':/^\/engagement-rings\/18k-rose-gold$/,
+          'mobileUrl':`/engagement/list`,
+		  'params':{
+            'material':'30',
+          },
+        }, 
+		
+		
+		
+        // 订婚详情
+        {
+          'pcUrl':/^\/ring\/engagement-rings/,
+          'mobileUrl':`/engagement/engagement-rings`,
+          'params':{
+            'goodId':'goodId',
+            'ringType':'ringType',
+          },
+        }, 
+        
 		
 		
 		// 对戒 详情
@@ -725,8 +891,7 @@ function queryParams (data) {
       ]
 
       if(href.length>0) {
-		let currUrl = href.length>1 ? href[0]+ "?" +href[1] : href[0]
-		console.log(44444,currUrl)
+	    	let currUrl = href.length>1 ? href[0]+ "?" +href[1] : href[0]
 		
         for(let i=0;i<rules.length;i++) {
           let rule = rules[i]
@@ -744,8 +909,8 @@ function queryParams (data) {
                 if(typeof query1[key] !== 'undefined') {
                   query2[params[key]] = unescape(query1[key])
                 }else{
-				  query2[key] = params[key]
-				}
+				           query2[key] = unescape(params[key])
+				         }
               });
               // param = queryParams(query2)
               href[1] = queryParams(query2)

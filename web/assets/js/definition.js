@@ -419,12 +419,7 @@ export default language => {
           name: lang.ringsMenu.fashionRing,
           desc: lang.style.CasualRingDesc
         },
-        {
-          id: 196,
-          image: `/ring-style/woman/5.png`,
-          name: lang.ringsMenu.coupleRing,
-          desc: lang.style.CasualRingDesc
-        }
+        
       ],
       //款式
       forPeople: [
