@@ -19,7 +19,7 @@
                 <img src="/ring-material/all.png" />
               </div>
               <div class="item-name">
-                {{ $t(`${lang}.colors`) }}
+                {{ $t(`${lang}.type`) }}
               </div>
             </li>
             <li
