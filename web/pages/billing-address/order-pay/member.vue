@@ -727,7 +727,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                      <span>{{ $store.state.coin }} {{ ultimatelyPay }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
@@ -1658,7 +1658,7 @@
                 <div class="total">
                   <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
                   <div class="totle-price">
-                    <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                    <span>{{ $store.state.coin }} {{ ultimatelyPay }}</span>
                   </div>
                 </div>
                 <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
@@ -1865,7 +1865,12 @@
   </div>
 
   <div v-if="ifShowAddCard">
-    <shopping-card @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine"></shopping-card>
+    <shopping-card
+      @closePop="closeCardPop"
+      :cardType="useAmount"
+      :goodsLine ="goodsListLine"
+      :currencyType = "currency"
+    ></shopping-card>
   </div>
 </div>
 </template>
@@ -1987,7 +1992,8 @@ export default {
       orderTotalAmount: 0,
       ultimatelyPay: 0,
       num: 0,
-      mobileMax: 20
+      mobileMax: 20,
+      currency: ''
     }
   },
   computed: {
@@ -2777,10 +2783,13 @@ export default {
           this.canSubmit = true
           this.tex = res.data
 
-          // if(res.data.cards.length != 0){
-            this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
+            if(res.data.cards !== undefined){
+              this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
+            }
+
             this.orderTotalAmount = res.data.orderAmount;
             this.ultimatelyPay = res.data.payAmount;
+            this.currency = res.data.currency
           // }
 
         })

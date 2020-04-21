@@ -40,7 +40,6 @@
                   <span class="icon"></span>
                   <span>{{ $t(`${lang}.verifySucceed`) }}</span>
                 </div>
-                <div class="text">{{ $t(`${lang}.balance`) }}¥ {{item.balance}}</div>
               </div>
               <!-- 失败状态 -->
               <div v-else-if="item.type == 2" class="verify-failing">
@@ -51,8 +50,13 @@
                 <div class="text" @click="eliminate(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
               </div>
             </div>
+
             <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && item.ifShowRemove"
               @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
+          </div>
+
+          <div class="balance-text" v-if="item.type == 1">{{ $t(`${lang}.balance`) }}¥ {{item.balanceCny}}&nbsp;
+            <span v-if="$store.state.coin !== 'CNY'">({{item.currency}} {{item.balance}})</span>
           </div>
 
           <div class="btn-box" style="max-width: 416px;margin-top: 0;" v-if="item.type == 1">
@@ -119,6 +123,8 @@
             account: '',
             conversionNum: '',
             balance: '',
+            balanceCny: '',
+            currency: '',
             type: 0,
             ifChoose: false,
             usableRange: '',
@@ -131,6 +137,8 @@
             account: '',
             conversionNum: '',
             balance: '',
+            balanceCny: '',
+            currency: '',
             type: 0,
             ifChoose: false,
             usableRange: '',
@@ -152,7 +160,7 @@
         arr5: []
       }
     },
-    props: ['cardType', 'goodsLine'],
+    props: ['cardType', 'goodsLine','currencyType'],
     mounted() {
       if (this.cardType.length != 0) {
         var that = this,
@@ -164,7 +172,9 @@
 
           this.cardList[i].account = this.cardType[i].sn;
           this.cardList[i].conversionNum = this.cardType[i].pw;
-          this.cardList[i].balance = this.cardType[i].balanceCny;
+          this.cardList[i].balance = this.cardType[i].balance;
+          this.cardList[i].balanceCny = this.cardType[i].balanceCny;
+          this.cardList[i].currency = this.currencyType;
           this.cardList[i].type = 1;
           this.cardList[i].ifChoose = true;
           this.cardList[i].ifShowRemove = true;
@@ -191,6 +201,8 @@
           account: '',
           conversionNum: '',
           balance: '',
+          balanceCny: '',
+          currency: '',
           type: 0,
           ifChoose: false,
           usableRange: '',
@@ -287,8 +299,9 @@
               .then(res => {
                 that.ifLoading = false;
                 that.ifShowPop = true;
-                that.cardList[that.nowIndex].balance = res.data.balanceCny;
-                that.currency = res.data.currency;
+                that.cardList[k].balance = res.data.balance;
+                that.cardList[k].balanceCny = res.data.balanceCny;
+                that.cardList[k].currency = res.data.currency;
                 that.startTime = res.data.startTime * 1000;
                 that.endTime = res.data.endTime * 1000;
 
@@ -692,6 +705,17 @@
   }
 
   .verify-success .text {
+    color: #147f12;
+  }
+  
+  .balance-text{
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #332323;
+    margin-top: 6px;
+    text-decoration: underline;
     color: #147f12;
   }
 
