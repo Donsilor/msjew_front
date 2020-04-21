@@ -94,8 +94,7 @@ export default {
   data() {
     return {
       showPassword: false,
-      inputValue: '',
-	  iptLength: 100
+      inputValue: ''
     }
   },
   computed: {

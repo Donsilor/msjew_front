@@ -121,8 +121,14 @@
             :placeholder="lang.more"
           ></textarea>
         </div>
+
+        <!-- 添加购物卡 -->
+        <div class="clf">
+          <div class="addShoppingCard fr" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
+        </div>
         <!-- 开具发票 -->
-        <div class="invoice" v-if="this.areaId === '1'">
+        <!-- <div class="invoice" v-if="this.areaId === '1'"> -->
+        <div class="invoice" v-if="'1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -185,10 +191,6 @@
           </div>
         </div> -->
         <ul class="price">
-          <li>
-            <div></div>
-            <div class="addShoppingCard" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
-          </li>
           <!-- <li v-if="isLogin" @click="selectCupon">
             <span>{{ lang.cupon }}</span
             ><span>{{ cuponName }}</span>
@@ -489,7 +491,8 @@ export default {
         name: 'cart-invoice',
         query:{
           price:this.totlePrice,
-          kai:this.kai
+          kai:this.kai,
+          ultimatelyPay: this.ultimatelyPay
         }
       })
     },
@@ -1583,12 +1586,22 @@ export default {
 }
 
 .addShoppingCard{
+  float: right;
   height: 28px;
   line-height: 26px;
   padding: 0 6px;
   border: 1px solid #f29b87;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: #f29b87;
   border-radius: 4px;
+}
+
+.clf::after{
+  display: block;
+  height: 0;
+  content: '.';
+  visibility: hidden;
+  clear: both;
+  opacity: 0;
 }
 </style>

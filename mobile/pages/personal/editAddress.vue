@@ -14,6 +14,7 @@
             :placeholder="lang.name"
             @input="check(1)"
              :maxl="maxlength"
+             @focus="focusFn(1)"
           ></bdd-input>
         </div>
         <div :class="['error-message', { active: nameTrue }]">
@@ -26,6 +27,7 @@
             :placeholder="lang.surname"
             @input="check(2)"
              :maxl="maxlength"
+             @focus="focusFn(2)"
           ></bdd-input>
         </div>
         <div :class="['error-message', { active: surnameTrue }]">
@@ -37,6 +39,7 @@
             :placeholder="lang.mailbox"
             @input="check(3)"
              :maxl="maxlength"
+             @focus="focusFn(3)"
           ></bdd-input>
         </div>
         <div v-else class="input-mod" @click="showSelect">
@@ -45,6 +48,7 @@
             :placeholder="lang.mailbox"
             @input="check(3)"
             :maxl="maxlength"
+            @focus="focusFn(3)"
           ></bdd-input>
         </div>
         <div :class="['error-message', { active: mailboxTrue }]">
@@ -65,6 +69,7 @@
             :placeholder="`*${lang.phone}`"
             @input="check(4)"
             :maxl="maxlength"
+            @focus="focusFn(4)"
           ></bdd-input>
         </div>
         <div v-else class="input-mod">
@@ -73,6 +78,7 @@
             :placeholder="`*${lang.phone}`"
             @input="check(4)"
             :maxl="maxlength"
+            @focus="focusFn(4)"
           ></bdd-input>
         </div>
         <div :class="['error-message', { active: phoneTrue }]">
@@ -86,6 +92,7 @@
             :placeholder="lang.details"
             @keyup="check(5)"
             :maxl="maxlength"
+            @focus="focusFn(5)"
           ></textarea>
         </div>
         <div :class="['error-message', { active: detailsTrue }]">
@@ -652,12 +659,6 @@ export default {
     },
     check(val) {
       this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = false
-      // switch (val){
-      //   case 1: this.maxlength = '2';
-      //     break;
-      //   default: this.maxlength = '30'
-      //     break;
-      // }
 
       if ((val === 1 || val === 0) && this.name === '') {
         this.nameText = this.lang.nameText1
@@ -942,14 +943,25 @@ export default {
     showSelect() {
       console.log('6767')
     },
-    keydown(k, j){
-      this.maxlength = k;
-
-      if(j && j == 'code'){
-        // var reg = /^\d$/;
-        // if(!reg.test(this.code.slice(-1))){
-          // this.code = this.code.slice(0, -1)
-        // }
+    focusFn(k){
+      switch (k){
+        case 1: this.maxlength = '30';
+          break;
+        case 2: this.maxlength = '30';
+          break;
+        case 3: this.maxlength = '60';
+          break;
+        case 4:
+          if(this.area.split('+')[1] == '86'){
+            this.maxlength = '11'
+          }else{
+            this.maxlength = '20'
+          }
+          break;
+        case 5: this.maxlength = '300';
+          break;
+        default: this.maxlength = '30'
+          break;
       }
     }
   }

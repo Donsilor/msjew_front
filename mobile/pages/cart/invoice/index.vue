@@ -49,7 +49,7 @@
         <div class="totle">
             <div class="title"><span>{{ lang.totalAmount }}</span></div>
             <div class="rise_select">
-                <span>{{ coin }} {{totolPrice}}</span>
+                <span>{{ coin }} {{ultimatelyPay}}</span>
             </div>
         </div>
         <div class="tips">
@@ -87,6 +87,7 @@ export default {
             coin: this.$store.state.coin,
             lang: this.LANGUAGE.cart.invoice,
             isLogin: !!this.$store.state.token,
+            ultimatelyPay: this.$route.query.ultimatelyPay,
             isactive:true,
             Active:false
         }
