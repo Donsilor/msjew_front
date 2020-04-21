@@ -41,7 +41,6 @@
                   <span class="icon"></span>
                   <span>{{ lang.verifySucceed }}</span>
                 </div>
-                <div class="text">{{ lang.balance }}￥{{item.balance}}</div>
               </div>
               <!-- 失败状态 -->
               <div v-else-if="item.type == 2" class="verify-failing">
@@ -54,6 +53,10 @@
             </div>
 
             <div class="btn" style="margin: 0 0 0 50px" v-if="cardType.length != 0 && item.ifShowRemove" @click="removeBinding(index)">{{ lang.unbound }}</div>
+          </div>
+
+          <div class="balance-text" v-if="item.type == 1">{{ lang.balance }}¥ {{item.balanceCny}}&nbsp;
+            <span v-if="$store.state.coin !== 'CNY'">({{item.currency}} {{item.balance}})</span>
           </div>
 
           <div class="productLine" v-if="item.type == 1"><span>({{ lang.msg7 }}{{item.usableRange}}{{ lang.msg8 }})</span></div>
@@ -119,6 +122,8 @@
             account: '',
             conversionNum: '',
             balance: '',
+            balanceCny: '',
+            currency: '',
             type: 0,
             ifChoose: false,
             usableRange: '',
@@ -131,6 +136,8 @@
             account: '',
             conversionNum: '',
             balance: '',
+            balanceCny: '',
+            currency: '',
             type: 0,
             ifChoose: false,
             usableRange: '',
@@ -152,23 +159,24 @@
 
 
         ifShowbtn: -1,
-        currency: '',
         arr5: []
       }
     },
-    props: ['cardType','goodsLine'],
+    props: ['cardType','goodsLine','currencyType'],
     mounted(){
       if(this.cardType.length != 0){
         var that=this, arr4=[];
-        
+
         for(var i=0, len=this.cardType.length; i<len; i++){
           if (len > 2 && i > 1) {
             this.addCard();
           }
-          
+
           this.cardList[i].account = this.cardType[i].sn;
           this.cardList[i].conversionNum = this.cardType[i].pw;
-          this.cardList[i].balance = this.cardType[i].balanceCny;
+          this.cardList[i].balance = this.cardType[i].balance;
+          this.cardList[i].balanceCny = this.cardType[i].balanceCny;
+          this.cardList[i].currency = this.currencyType;
           this.cardList[i].type = 1;
           this.cardList[i].ifChoose = true;
           this.cardList[i].ifShowRemove = true;
@@ -195,6 +203,8 @@
           account: '',
           conversionNum: '',
           balance: '',
+          balanceCny: '',
+          currency: '',
           type: 0,
           ifChoose: false,
           usableRange: '',
@@ -259,7 +269,6 @@
       },
       // 验证
       verification(k){
-				this.$nuxt.$loading.start()
         var that = this, flag = true;
         this.nowIndex = k;
 
@@ -277,17 +286,17 @@
           if(!ifRepetition){
             this.$toast.show(this.lang.msg5);
           }else{
-            this.ifLoading = true;
+            this.$nuxt.$loading.start()
             this.$axios.post('web/member/card/verify', {
               sn: that.cardList[k].account,
               pw: that.cardList[k].conversionNum,
             })
             .then(res => {
 							this.$nuxt.$loading.finish()
-              that.ifLoading = false;
               that.ifShowPop = true;
-              that.cardList[that.nowIndex].balance = res.balanceCny-0;
-              that.currency = res.currency;
+              that.cardList[k].balance = res.balance;
+              that.cardList[k].balanceCny = res.balanceCny;
+              that.cardList[k].currency = res.currency;
               that.startTime = res.startTime * 1000;
               that.endTime = res.endTime * 1000;
 
@@ -333,7 +342,7 @@
               }
             })
             .catch(err => {
-              that.ifLoading = false;
+              this.$nuxt.$loading.finish()
               that.ifShowPop = true;
               that.verifyStatus = 2;
             })
@@ -385,7 +394,7 @@
 				  }
               }else if(this.cardList[k].type == 2){
 				  this.cardList[k].ifChoose = false;
-				  
+
 				  var time = new Date().getTime();
 				  if(time < this.cardList[k].startTime){
 					that.verifyStatus = 2;
@@ -397,7 +406,7 @@
                 this.$toast.show(that.lang.msg3);
               }
             }
-        
+
             for(var i=0,len=this.cardList.length; i<len; i++){
               if(!this.cardList[i].ifChoose){
                 flag = false;
@@ -406,11 +415,11 @@
                 flag2 = false;
               }
             }
-        
+
             if(flag && flag2){
               this.ifChooseAll = true;
             }
-        
+
           }else{
             this.cardList[k].ifChoose = false;
             this.ifChooseAll = false;
@@ -557,6 +566,7 @@
     align-items: center;
     padding-left: 5%;
     box-sizing: border-box;
+    /* flex-direction: column; */
   }
   .choose{
     width: 16px;
@@ -872,5 +882,16 @@
     line-height: 16px;
     font-size: 14px;
     color: #999;
+  }
+
+  .balance-text{
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    font-size: 13px;
+    color: #332323;
+    margin-top: 6px;
+    text-decoration: underline;
+    color: #147f12;
   }
 </style>

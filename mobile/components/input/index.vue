@@ -16,7 +16,7 @@
       @keyup="keyupEvent"
       @keypress="keypressEvent"
       @change="changeEvent"
-	  :maxlength="maxl"
+      :maxlength="maxl"
     />
     <template v-if="passwordType">
       <i
@@ -134,7 +134,6 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       _this.inputValue = this.value
-	console.log(123,this.maxl)
     })
   },
   methods: {

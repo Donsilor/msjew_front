@@ -272,7 +272,7 @@
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
-    <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine"></shopping-card>
+    <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
   </div>
 </template>
 
@@ -361,7 +361,8 @@ export default {
       goodsListLine: [],
       scrollTop: 0,
       orderTotalAmount: 0,
-      ultimatelyPay: 0
+      ultimatelyPay: 0,
+      currency: ''
     }
   },
   computed: {
@@ -756,9 +757,10 @@ export default {
           if(res.cards !== undefined){
             this.useAmount = JSON.parse(JSON.stringify(res.cards))
           }
-          
+
           this.orderTotalAmount = res.orderAmount;
           this.ultimatelyPay = res.payAmount;
+          this.currency = res.currency;
 
           // this.info=res.details
           // console.log("费用>>>>>>>>",this.info)
