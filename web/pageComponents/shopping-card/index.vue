@@ -47,12 +47,17 @@
                   <span class="icon"></span>
                   <span>{{ $t(`${lang}.verifyFailing`) }}</span>
                 </div>
-                <div class="text" @click="eliminate(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
+                <div class="text" @click="removeCard(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
               </div>
             </div>
 
-            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="cardType.length != 0 && item.ifShowRemove"
+            <!-- 解除绑定 -->
+            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="item.ifShowRemove"
               @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
+
+            <!-- 移除 -->
+            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="item.balance !== '' && item.balance-0 == 0"
+              @click="removeCard(index)">{{ $t(`${lang}.removeCard`) }}</div>
           </div>
 
           <div class="balance-text" v-if="item.type == 1">{{ $t(`${lang}.balance`) }}¥ {{item.balanceCny}}&nbsp;
@@ -132,20 +137,6 @@
             ifShowRemove: false,
             startTime: 0,
             endTime: 0,
-          },
-          {
-            account: '',
-            conversionNum: '',
-            balance: '',
-            balanceCny: '',
-            currency: '',
-            type: 0,
-            ifChoose: false,
-            usableRange: '',
-            ifAllowedToUse: false,
-            ifShowRemove: false,
-            startTime: 0,
-            endTime: 0,
           }
         ],
         ifShowPop: false,
@@ -166,7 +157,7 @@
         var that = this,
           arr4 = [];
         for (var i = 0, len = this.cardType.length; i < len; i++) {
-          if (len > 2 && i > 1) {
+          if (len > 1 && i > 0) {
             this.addCard();
           }
 
@@ -320,10 +311,10 @@
                 // console.log(888,time,999,that.startTime,0,that.endTime)
                 if (time > that.startTime && time < that.endTime) {
                   that.verifyStatus = 1;
-                  that.cardList[that.nowIndex].type = 1;
+                  that.cardList[k].type = 1;
 
-                  if (that.cardList[that.nowIndex].balance - 0 !== 0 && that.cardList[that.nowIndex].ifAllowedToUse) {
-                    that.cardList[that.nowIndex].ifChoose = true;
+                  if (that.cardList[k].balance - 0 !== 0 && that.cardList[k].ifAllowedToUse) {
+                    that.cardList[k].ifChoose = true;
                   }
 
                   for (var i = 0, len = that.cardList.length; i < len; i++) {
@@ -376,12 +367,6 @@
           // this.cardList[this.nowIndex].account = '';
           // this.cardList[this.nowIndex].conversionNum = '';
         }
-      },
-      // 消除此卡
-      eliminate(k) {
-        // 提示是否清除？？？？
-        this.cardList.splice(k, 1)
-        // this.cardList[k]
       },
       // 选择单个购物卡
       chooseList(k) {
@@ -483,8 +468,8 @@
       inputInfo(k) {
         this.cardList[k].type = 0;
         this.cardList[k].ifChoose = false;
-        this.ifChooseAll = false;
         this.cardList[k].ifShowRemove = false;
+        this.ifChooseAll = false;
       },
       // 解除绑定
       removeBinding(n) {
@@ -495,6 +480,21 @@
         // this.cardList[n].ifChoose = false;
         this.removeIndex = n;
         this.ifShowPop2 = true;
+      },
+      // 移除
+      removeCard(n){
+        this.cardList[0].account = ''
+        this.cardList[0].conversionNum = '';
+        this.cardList[0].balance = '';
+        this.cardList[0].balanceCny = '';
+        this.cardList[0].currency = '';
+        this.cardList[0].type = 0;
+        this.cardList[0].ifChoose = false;
+        this.cardList[0].usableRange = '';
+        this.cardList[0].ifAllowedToUse = false;
+        this.cardList[0].ifShowRemove = false;
+        this.cardList[0].startTime = 0;
+        this.cardList[0].endTime = 0;
       },
       // 关闭弹窗
       closePop2() {
@@ -590,6 +590,10 @@
     align-items: ;
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+
+  .card-box .list:only-child{
+    margin: 0 auto;
   }
 
   .list {
@@ -707,7 +711,7 @@
   .verify-success .text {
     color: #147f12;
   }
-  
+
   .balance-text{
     height: 20px;
     line-height: 20px;

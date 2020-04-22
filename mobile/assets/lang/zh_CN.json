@@ -2054,6 +2054,7 @@
 		"balance": "余额：",
 		"eliminateCard": "消除此卡",
 		"unbound": "解除绑定",
+    "removeCard": "移除",
 		"confirmUnbinding": "是否确认解除绑定？",
 		"verifyValid": "购物卡验证有效！",
 		"alreadyAdd": "已添加",

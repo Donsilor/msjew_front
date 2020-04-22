@@ -2047,6 +2047,7 @@
 		"balance": "Balance:",
 		"eliminateCard": "Delete",
 		"unbound": "Remove Card",
+    "removeCard": "Remove Card",
 		"confirmUnbinding": "Confirm unbinding？",
 		"verifyValid": "Invaild Card",
 		"alreadyAdd": "Have been added",

@@ -2053,6 +2053,7 @@
 		"balance": "余額：",
 		"eliminateCard": "消除此卡",
 		"unbound": "解除绑定",
+    "removeCard": "移除",
 		"confirmUnbinding": "是否確認解除綁定？",
 		"verifyValid": "購物卡驗證有效！",
 		"alreadyAdd": "已添加",

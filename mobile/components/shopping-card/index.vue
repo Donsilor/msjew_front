@@ -48,17 +48,24 @@
                   <span class="icon"></span>
                   <span>{{ lang.verifyFailing }}</span>
                 </div>
-                <div class="text" @click="removeBinding(index)">{{ lang.eliminateCard }}</div>
+                <div class="text" @click="removeCard(index)">{{ lang.eliminateCard }}</div>
               </div>
             </div>
 
+            <!-- 解除绑定 -->
             <div class="btn" style="margin: 0 0 0 50px" v-if="item.ifShowRemove" @click="removeBinding(index)">{{ lang.unbound }}</div>
+
+            <!-- 移除 -->
+            <div class="btn" style="margin: 0 0 0 50px" v-if="item.balance !== '' && item.balance-0 == 0" @click="removeCard(index)">{{ lang.removeCard }}</div>
+
           </div>
 
+          <!-- 余额 -->
           <div class="balance-text" v-if="item.type == 1">{{ lang.balance }}¥ {{item.balanceCny}}&nbsp;
             <span v-if="$store.state.coin !== 'CNY'">({{item.currency}} {{item.balance}})</span>
           </div>
 
+          <!-- 适用范围 -->
           <div class="productLine" v-if="item.type == 1"><span>({{ lang.msg7 }}{{item.usableRange}}{{ lang.msg8 }})</span></div>
         </div>
       </div>
@@ -131,20 +138,6 @@
             ifShowRemove: false,
             startTime: 0,
             endTime: 0,
-          },
-          {
-            account: '',
-            conversionNum: '',
-            balance: '',
-            balanceCny: '',
-            currency: '',
-            type: 0,
-            ifChoose: false,
-            usableRange: '',
-            ifAllowedToUse: false,
-            ifShowRemove: false,
-            startTime: 0,
-            endTime: 0,
           }
         ],
         ifShowPop: false,
@@ -165,7 +158,7 @@
         var that=this, arr4=[];
 
         for(var i=0, len=this.cardType.length; i<len; i++){
-          if (len > 2 && i > 1) {
+          if (len > 1 && i > 0) {
             this.addCard();
           }
 
@@ -319,10 +312,6 @@
                   that.cardList[k].ifChoose = false;
                 }
 
-                if(that.cardList[k].balance == 0){
-                  that.cardList[k].ifShowRemove = true;
-                }
-
                 for(var i=0,len=that.cardList.length; i<len; i++){
                   if(that.cardList[i].ifChoose != true){
                     flag = false;
@@ -474,6 +463,21 @@
         // this.cardList[n].ifChoose = false;
         this.removeIndex = n;
         this.ifShowPop2 = true;
+      },
+      // 移除
+      removeCard(k){
+          this.cardList[k].account = ''
+          this.cardList[k].conversionNum = '';
+          this.cardList[k].balance = '';
+          this.cardList[k].balanceCny = '';
+          this.cardList[k].currency = '';
+          this.cardList[k].type = 0;
+          this.cardList[k].ifChoose = false;
+          this.cardList[k].usableRange = '';
+          this.cardList[k].ifAllowedToUse = false;
+          this.cardList[k].ifShowRemove = false;
+          this.cardList[k].startTime = 0;
+          this.cardList[k].endTime = 0;
       },
       // 关闭弹窗
       closePop2(){
