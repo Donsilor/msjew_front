@@ -99,7 +99,6 @@ export default {
       this.conditions[2].checked = ``
       this.conditions[2].options = []
       this.isResetProgress = true
-      this.categoryId = [4,5,6,7,8,9,16,17,18]
       this.madeUpEv()
     }
   },

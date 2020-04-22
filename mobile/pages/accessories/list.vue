@@ -109,13 +109,15 @@ export default {
   // },
   mounted() {
     // console.log("this.",this.seoInfo)
-    if (this.$route.query.actIndex) {
+    if (typeof this.$route.query.actIndex !== 'undefined') {
       this.actIndex = parseFloat(this.$route.query.actIndex)
     }
+    
   },
   watch: {
     $route(to, from){
       this.actIndex = parseFloat(this.$route.query.actIndex)
+      console.log(3333,this.actIndex)
     }
   },
   methods: {
