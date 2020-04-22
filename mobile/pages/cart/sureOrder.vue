@@ -481,7 +481,7 @@ export default {
       // console.log("allFee",this.planDays)
       this.idList = []
       this.productAmount = 0
-      if(this.list !== null && this.list !== '' && this.list !== 0){
+      if(this.list != 0){
         this.list.map((item, index) => {
           // console.log("sssss=====",item.id)
           this.idList.push(item.id)
@@ -491,7 +491,6 @@ export default {
           // this.productAmount = this.productAmount + item.salePrice   localSn
           this.productAmount = parseFloat(this.productAmount + item.salePrice)
           // console.log("productAmount",this.productAmount)
-
         })
       }
 
@@ -733,6 +732,75 @@ export default {
         }
       })
     },
+
+    // // 登录下获取相关费用
+    // getTex(k) {
+    //   const cards = k || '';
+    //   this.canSubmit = false
+    //   let data = {}
+    //   let url = ''
+    //   if (this.isLogin) {
+    //     url = `/web/member/order/tax`
+    //     data = {
+    //       addressId: this.address.id,
+    //       cards: cards,
+    //       // preferFee: this.preferFee,
+    //       cartIds: this.idList.join(',')
+    //     }
+    //   } else {
+    //     // console.log("this.list",this.list)
+    //     url = `/web/member/order-tourist/tax`
+    //     const goodsCartList=[]
+    //     for (const i in this.list) {
+    //       const o = {
+    //         createTime: this.list[i].createTime,
+    //         goods_num: 1,
+    //         goodsDetailsId: this.list[i].goodsDetailsId,
+    //         goods_id: this.list[i].goodsDetailsId,
+    //         group_id: this.list[i].groupId,
+    //         goods_type: this.list[i].goodsStatus,
+    //         group_type:
+    //           this.list[i].groupType !== 0 ? this.list[i].groupType : null
+    //       }
+    //       goodsCartList.push(o)
+    //       // console.log("list........",o)
+    //     }
+    //     data = {goodsCartList:goodsCartList}
+    //     // console.log("list........",data)
+    //   }
+
+    //   this.$axios({
+    //     method: 'post',
+    //     url: url,
+    //     data: data
+    //   })
+    //     .then(res => {
+    //       // console.log("费用",res)
+    //       this.canSubmit = true
+    //       this.allFee = res
+
+    //       if(res.cards !== undefined){
+    //         this.useAmount = JSON.parse(JSON.stringify(res.cards))
+    //       }
+
+    //       this.orderTotalAmount = res.orderAmount;
+    //       this.ultimatelyPay = res.payAmount;
+    //       this.currency = res.currency;
+
+    //       this.planDays = this.allFee.planDays
+
+    //       // this.info=res.details
+    //       // console.log("费用>>>>>>>>",this.info)
+    //     })
+    //     .catch(err => {
+    //       this.canSubmit = false
+    //       this.$toast.show(err.message)
+    //       this.allFee = this.defaultAllFeeInfo()
+
+    //       // console.log("ggg",this.allFee)
+    //     })
+
+
     // 登录下获取相关费用
     getTex(k) {
       const cards = k || '';
@@ -740,41 +808,20 @@ export default {
       let data = {}
       let url = ''
       if (this.isLogin) {
-        url = `/web/member/order/tax`
-        data = {
-          addressId: this.address.id,
-          cards: cards,
-          // preferFee: this.preferFee,
-          cartIds: this.idList.join(',')
-        }
-      } else {
-        // console.log("this.list",this.list)
-        url = `/web/member/order-tourist/tax`
-        const goodsCartList=[]
-        for (const i in this.list) {
-          const o = {
-            createTime: this.list[i].createTime,
-            goods_num: 1,
-            goodsDetailsId: this.list[i].goodsDetailsId,
-            goods_id: this.list[i].goodsDetailsId,
-            group_id: this.list[i].groupId,
-            goods_type: this.list[i].goodsStatus,
-            group_type:
-              this.list[i].groupType !== 0 ? this.list[i].groupType : null
+        if(this.idList.length){
+          url = `/web/member/order/tax`
+          data = {
+            addressId: this.address.id,
+            cards: cards,
+            // preferFee: this.preferFee,
+            cartIds: this.idList.join(',')
           }
-          goodsCartList.push(o)
-          // console.log("list........",o)
-        }
-        data = {goodsCartList:goodsCartList}
-        // console.log("list........",data)
-      }
 
-      if(list.length){
-        this.$axios({
-          method: 'post',
-          url: url,
-          data: data
-        })
+          this.$axios({
+            method: 'post',
+            url: url,
+            data: data
+          })
           .then(res => {
             // console.log("费用",res)
             this.canSubmit = true
@@ -801,13 +848,74 @@ export default {
             // console.log("ggg",this.allFee)
           })
         }else{
-          this.$toast.show(this.lang.msg10)
           var that = this;
+          this.$toast.show(that.lang.msg10)
           var timer = setTimeout(function(){
             that.$router.replace('/cart');
             clearTimeout(timer)
           },2000)
         }
+      } else {
+        // console.log("this.list",this.list)
+        if(this.list.length){
+          url = `/web/member/order-tourist/tax`
+          const goodsCartList=[]
+          for (const i in this.list) {
+            const o = {
+              createTime: this.list[i].createTime,
+              goods_num: 1,
+              goodsDetailsId: this.list[i].goodsDetailsId,
+              goods_id: this.list[i].goodsDetailsId,
+              group_id: this.list[i].groupId,
+              goods_type: this.list[i].goodsStatus,
+              group_type:
+                this.list[i].groupType !== 0 ? this.list[i].groupType : null
+            }
+            goodsCartList.push(o)
+            // console.log("list........",o)
+          }
+          data = {goodsCartList:goodsCartList}
+          // console.log("list........",data)
+          this.$axios({
+            method: 'post',
+            url: url,
+            data: data
+          })
+          .then(res => {
+            // console.log("费用",res)
+            this.canSubmit = true
+            this.allFee = res
+
+            if(res.cards !== undefined){
+              this.useAmount = JSON.parse(JSON.stringify(res.cards))
+            }
+
+            this.orderTotalAmount = res.orderAmount;
+            this.ultimatelyPay = res.payAmount;
+            this.currency = res.currency;
+
+            this.planDays = this.allFee.planDays
+
+            // this.info=res.details
+            // console.log("费用>>>>>>>>",this.info)
+          })
+          .catch(err => {
+            this.canSubmit = false
+            this.$toast.show(err.message)
+            this.allFee = this.defaultAllFeeInfo()
+
+            // console.log("ggg",this.allFee)
+          })
+        }else{
+          var that = this;
+          this.$toast.show(that.lang.msg10)
+          var timer = setTimeout(function(){
+            that.$router.replace('/cart');
+            clearTimeout(timer)
+          },2000)
+        }
+      }
+
     },
     // 获取地址
     getData() {

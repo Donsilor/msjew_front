@@ -100,7 +100,7 @@
 
       <div class="pop-box" v-if="verifyStatus == 2">
         <div class="icon"></div>
-        <div class="status">{{ lang.invalidCards }}</div>
+        <div class="status">{{ !cardList[nowIndex].verifyDefeated ? lang.invalidCards : lang.verifyInvalid }}</div>
         <div class="btn">{{ lang.anewAdd }}</div>
       </div>
     </div>
@@ -138,6 +138,7 @@
             ifShowRemove: false,
             startTime: 0,
             endTime: 0,
+            verifyDefeated: false
           }
         ],
         ifShowPop: false,
@@ -199,7 +200,8 @@
           ifChoose: false,
           usableRange: '',
           ifAllowedToUse: false,
-          ifShowRemove: false
+          ifShowRemove: false,
+          verifyDefeated: false
         };
         this.cardList.push(card);
         this.ifChooseAll = false;
@@ -332,9 +334,10 @@
               }
             })
             .catch(err => {
-              this.$nuxt.$loading.finish()
+              that.$nuxt.$loading.finish()
               that.ifShowPop = true;
               that.verifyStatus = 2;
+              that.cardList[k].verifyDefeated = true;
             })
           }
         }

@@ -100,7 +100,7 @@
 
       <div class="pop-box" v-if="verifyStatus == 2">
         <div class="icon"></div>
-        <div class="status">{{ $t(`${lang}.invalidCards`) }}</div>
+        <div class="status">{{!cardList[nowIndex].verifyDefeated ? $t(`${lang}.invalidCards`) : $t(`${lang}.verifyInvalid`) }}</div>
         <div class="btn">{{ $t(`${lang}.anewAdd`) }}</div>
       </div>
     </div>
@@ -135,8 +135,9 @@
             usableRange: '',
             ifAllowedToUse: false,
             ifShowRemove: false,
-            startTime: 0,
-            endTime: 0,
+            startTime: 0,                //是否在产品线
+            endTime: 0,                  //是否显示移除按钮
+            verifyDefeated: false        //验证成功失败
           }
         ],
         ifShowPop: false,
@@ -169,6 +170,7 @@
           this.cardList[i].type = 1;
           this.cardList[i].ifChoose = true;
           this.cardList[i].ifShowRemove = true;
+          this.cardList[i].verifyDefeated = false;
 
           arr4[i] = this.cardType[i].goodsTypes;
         }
@@ -198,7 +200,8 @@
           ifChoose: false,
           usableRange: '',
           ifAllowedToUse: false,
-          ifShowRemove: false
+          ifShowRemove: false,
+          verifyDefeated: false
         };
         this.cardList.push(card);
         this.ifChooseAll = false;
@@ -340,6 +343,7 @@
                 that.ifLoading = false;
                 that.ifShowPop = true;
                 that.verifyStatus = 2;
+                that.cardList[k].verifyDefeated = true;
               })
           }
         }
@@ -851,7 +855,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 180px;
-    height: 162px;
+    height: 170px;
     border: 1px solid #bfbfbf;
     font-size: 16px;
     background-color: #fff;
@@ -872,6 +876,7 @@
     text-align: center;
     color: #157f12;
     font-size: 14px;
+    line-height: 20px;
   }
 
   .pop-box .btn {

@@ -2810,15 +2810,13 @@ export default {
           this.canSubmit = true
           this.tex = res.data
 
-            if(res.data.cards !== undefined){
-              this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
-            }
+          if(res.data.cards !== undefined){
+            this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
+          }
 
-            this.orderTotalAmount = res.data.orderAmount;
-            this.ultimatelyPay = res.data.payAmount;
-            this.currency = res.data.currency
-          // }
-
+          this.orderTotalAmount = res.data.orderAmount;
+          this.ultimatelyPay = res.data.payAmount;
+          this.currency = res.data.currency
         })
         .catch(err => {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
@@ -3003,13 +3001,20 @@ export default {
     // 关闭弹窗
     closeCardPop(k){
       this.ifShowAddCard = false;
-      if(k != true){
+
+      if(k !== true && k !== ''){
         this.cardList = k;
         this.getTex(k);
-        this.cardType = 2;
-      }else{
+
         this.cardType = 1;
+      }else if(k === true){
+        if(this.useAmount !== ''){
+          this.cardType = 1;
+        }else{
+          this.cardType = 2;
+        }
       }
+
     },
     //处理浮点数异常
      floatingPoint(num){

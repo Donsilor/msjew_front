@@ -2479,7 +2479,6 @@ export default {
       }
       console.log(this.iconShow)
       if(this.iconShow ){
-        console.log(1111)
         invoice = this.invoice
       }
       this.$axios({
