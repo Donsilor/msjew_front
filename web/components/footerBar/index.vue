@@ -272,7 +272,7 @@ export default {
     position: relative;
     .Shadow{
       position: absolute;
-      border:1px solid pink;
+      // border:1px solid pink;
       padding: 20px;
       left: -30px;
       bottom: 0;
