@@ -250,15 +250,15 @@ export default {
         })
         .catch(err => {
           console.log(err)
-          this.$toast.show(err)
-          this.$router.replace({
-            name: 'cart-payFailed-orderId-price-coinType',
-            params: {
-              orderId: this.info.orderId,
-              price: this.info.orderAmount,
-              coinType: this.info.coinType
-            }
-          })
+          // this.$toast.show(err)
+          // this.$router.replace({
+          //   name: 'cart-payFailed-orderId-price-coinType',
+          //   params: {
+          //     orderId: this.info.orderId,
+          //     price: this.info.orderAmount,
+          //     coinType: this.info.coinType
+          //   }
+          // })
         })
     },
     showSelect() {
