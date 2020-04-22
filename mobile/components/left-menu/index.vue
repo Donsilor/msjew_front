@@ -211,14 +211,7 @@ export default {
       showb:false,
       bottom:true,
       rings:[
-        {
-          stress: true,
-          name: this.LANGUAGE.components.leftMenu.WeddingAnniversaryRing,
-          routerName: 'marriage-ring-single-ring',
-          query: {
-            style: 162
-          }
-        },
+        
         {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.engagementRing,

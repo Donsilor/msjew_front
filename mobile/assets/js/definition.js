@@ -339,11 +339,7 @@ export default language => {
           image: `/ring-type/woman/2.png`,
           name: lang.style.FullyDiamondInlaidRing
         },
-        {
-          id: 162,
-          image: `/ring-type/woman/3.png`,
-          name: lang.style.WeddingAnniversaryRing
-        },
+        
         {
           id: 163,
           image: `/ring-type/woman/4.png`,
@@ -367,11 +363,7 @@ export default language => {
           image: `/ring-type/woman/2.png`,
           name: lang.style.FullyDiamondInlaidRing
         },
-        {
-          id: 162,
-          image: `/ring-type/woman/3.png`,
-          name: lang.style.WeddingAnniversaryRing
-        },
+        
         {
           id: 163,
           image: `/ring-type/woman/4.png`,
