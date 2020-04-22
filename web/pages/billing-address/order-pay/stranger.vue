@@ -397,6 +397,7 @@
                 <div v-show="payWay == 8" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay">*需登录购物</div>
               </div>
               <!-- <div
                 :class="{ 'pay-choose': payWay == 3 }"
@@ -1362,6 +1363,7 @@
                 <div v-show="payWay == 8" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay">*需登录购物</div>
               </div>
               <!-- <div
                 :class="{ 'pay-choose': payWay == 3 }"
@@ -2344,31 +2346,40 @@ export default {
 
         json = json.concat(item)
       }
-      this.$axios
-        .post('/web/member/order-tourist/tax', {
-            goodsCartList:json
+      if(json.length){
+        this.$axios
+          .post('/web/member/order-tourist/tax', {
+              goodsCartList:json
+            })
+          .then(res => {
+            this.canSubmit = true
+            this.tex = res.data
+            console.log("税费",this.tex)
           })
-        .then(res => {
-          this.canSubmit = true
-          this.tex = res.data
-          console.log("税费",this.tex)
-        })
-        .catch(err => {
-          this.canSubmit = false
-          this.$message.error(err.message)
-          // this.tex = {
-          //   logisticsFee: 0,
-          //   taxFee: 0,
-          //   safeFee: 0,
-          //   orderAmount: null,
-          //   planDays: '--'
-          // }
-          if (!err.response) {
+          .catch(err => {
+            this.canSubmit = false
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
+            // this.tex = {
+            //   logisticsFee: 0,
+            //   taxFee: 0,
+            //   safeFee: 0,
+            //   orderAmount: null,
+            //   planDays: '--'
+            // }
+            if (!err.response) {
+              this.$message.error(err.message)
+            } else {
+              // console.log(err)
+            }
+          })
+      }else{
+        this.$message.error(this.$t(`${lang}.msg10`));
+        var that = this;
+        var timer = setTimeout(function(){
+          that.$router.replace('/shopping-cart');
+          clearTimeout(timer)
+        },2000)
+      }
     },
     createOrder() {
       if(this.payWay==''){
@@ -2395,19 +2406,6 @@ export default {
             clearInterval(timer)
           }
         }, 22)
-        return
-      }
-      if(this.payWay!==6){
-          this.$errorMessage(this.$t(`${lang}.firstLogin`))
-          const topB = document.getElementsByClassName('layout-box')[0];
-          const that = this
-          let timer = setInterval(() => {
-            let ispeed = Math.floor(-that.scrollTop / 5)
-            topB.scrollTop = that.scrollTop + ispeed
-            if (that.scrollTop === 0) {
-              clearInterval(timer)
-            }
-          }, 22)
         return
       }
 
@@ -4727,5 +4725,15 @@ div {
   border: 1px solid #f29b87;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.hint_pay{
+  font-size: 12px;
+  font-family: twCenMt;
+  color: #aaa;
+  position: absolute;
+  right: 80px;
+  top: 84px;
+  line-height: 24px;
 }
 </style>

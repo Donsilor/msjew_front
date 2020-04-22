@@ -2291,7 +2291,8 @@
 		"msg9": "Please select a payment method!",
 		"useShoppingCard": "Use Shopping Card",
 		"editOrUnbound": "Edit/Remove Card",
-		"shoppingCard": "Shopping Card"
+		"shoppingCard": "Shopping Card",
+    "msg10": "The shopping cart cannot be empty. Please add the item again"
 	},
 	"invoice": {
 		"personal": "personal",

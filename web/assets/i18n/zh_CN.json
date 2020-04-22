@@ -2309,7 +2309,8 @@
 		"msg9": "请选择支付方式!",
 		"useShoppingCard": "使用购物卡",
 		"editOrUnbound": "编辑/解绑购物卡",
-		"shoppingCard": "购物卡"
+		"shoppingCard": "购物卡",
+    "msg10": "购物车不能为空，请重新添加商品"
 	},
 	"invoice": {
 		"personal": "个人",
