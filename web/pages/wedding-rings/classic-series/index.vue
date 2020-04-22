@@ -11,7 +11,7 @@ export default {
   data() {
     return {
       defaultCondition: {
-        style: 1
+        style: null
       }
     }
   },

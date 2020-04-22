@@ -685,10 +685,10 @@ export default language => {
         code: 'HKD',
         content: 'HKD'
       },
-      {
-        code: 'CNY',
-        content: ''
-      },
+      // {
+      //   code: 'CNY',
+      //   content: 'CNY'
+      // },
       {
         code: 'USD',
         content: 'USD'

@@ -25,9 +25,9 @@ export default {
             //根据IP设置 默认地区，语言，货币
             _this.$store.dispatch('localAreaSetting')
             //语言选择弹窗 
-            if (!_this.$store.state.coin || !_this.$store.state.language) {
-                //_this.$refs['site-switch'].show()
-            }
+            // if (!_this.$store.state.coin || !_this.$store.state.language) {
+                // _this.$refs['site-switch'].show()
+            // }
 
             if (_this.$store.getters.hadLogin) {
                 //刷新token

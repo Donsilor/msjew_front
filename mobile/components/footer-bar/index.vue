@@ -122,7 +122,7 @@
     <div class="copy-right">
       <span class="text">Copyright © 2019 BDD Co.</span>
     </div>
-    <div class="Shadow" @click="changeCny()"></div>
+    <!-- <div class="Shadow" @click="changeCny()"></div> -->
   </div>
 </template>
 
@@ -173,14 +173,14 @@ export default {
 .footer-bar {
   position: relative;
   width: 100%;
-  .Shadow{
-      position: absolute;
-      // border:1px solid pink;
-      padding: 15px;
-      left: 20px;
-      bottom: 20px;
-      // cursor: pointer;
-    }
+  // .Shadow{
+  //     position: absolute;
+  //     // border:1px solid pink;
+  //     padding: 15px;
+  //     left: 20px;
+  //     bottom: 20px;
+  //     // cursor: pointer;
+  //   }
 }
 .gap {
   height: 8px;
