@@ -122,6 +122,7 @@
     <div class="copy-right">
       <span class="text">Copyright © 2019 BDD Co.</span>
     </div>
+    <div class="Shadow" @click="changeCny()"></div>
   </div>
 </template>
 
@@ -152,6 +153,17 @@ export default {
       this.$router.push({
         path: path
       })
+    },
+    changeCny() {
+      // this.$toast('根据所选切换站点货币')
+      /**
+       * 设置语言和货币
+       */
+      this.$store.commit('setCoin', 'CNY')
+      // this.hide()
+      setTimeout(() => {
+        location.reload()
+      }, 0)
     }
   }
 }
@@ -161,6 +173,14 @@ export default {
 .footer-bar {
   position: relative;
   width: 100%;
+  .Shadow{
+      position: absolute;
+      // border:1px solid pink;
+      padding: 15px;
+      left: 20px;
+      bottom: 20px;
+      // cursor: pointer;
+    }
 }
 .gap {
   height: 8px;

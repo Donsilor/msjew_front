@@ -17,7 +17,9 @@
             </div>
           </dd>
         </dl>
+          <div class="Shadow" @click="setCoin()"></div>
       </div>
+      
     </div>
     <div class="links">
       <!-- <ul class="social-links">
@@ -243,7 +245,11 @@ export default {
     _this.$nextTick(() => {})
   },
   methods: {
-    ...mapMutations(['setCoin', 'setLanguage'])
+    ...mapMutations(['setCoin', 'setLanguage']),
+    setCoin() {
+      this.$store.commit('setCoin', 'CNY')
+      window.location.reload()
+    },
   }
 }
 </script>
@@ -253,6 +259,7 @@ export default {
   .foot-menus {
     background-color: #ececec;
   }
+  
   .menus {
     min-width: 1360px;
     max-width: 1366px;
@@ -262,12 +269,20 @@ export default {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-
+    position: relative;
+    .Shadow{
+      position: absolute;
+      border:1px solid pink;
+      padding: 20px;
+      left: -30px;
+      bottom: 0;
+      // cursor: pointer;
+    }
     .menu-group {
       position: relative;
       flex-grow: 0;
       flex-shrink: 0;
-
+      
       .group-name {
         margin-bottom: 20px;
         font-size: 14px;
