@@ -9,11 +9,11 @@
             {{ title }}
           </slot>
         </div>
-        <!-- <div class="button">
+        <div class="button">
           <button class="clear-btn" @click="clearChoose">
             {{ lang.clear }}
           </button>
-        </div> -->
+        </div>
       </div>
       <div class="content">
         <quality-data

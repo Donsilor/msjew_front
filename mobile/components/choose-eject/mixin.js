@@ -65,16 +65,14 @@ export default {
     },
     chooseOption(data = []) {
       this.choose = data
-      this.$emit('clear', JSON.parse(JSON.stringify(this.choose)))
-      this.hideIt()
     },
     closeEmit() {
       this.$emit('close')
       this.hideIt()
     },
     clearChoose() {
-      // this.$emit('clear', JSON.parse(JSON.stringify(this.choose)))
-      // this.hideIt()
+      this.$emit('clear', JSON.parse(JSON.stringify(this.choose)))
+      this.hideIt()
     }
   }
 }
