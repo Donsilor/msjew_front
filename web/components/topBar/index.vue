@@ -395,13 +395,6 @@ export default {
                 groupName: this.$t(`${lang}.ringsMenu.style`),
                 data: [
                   {
-                    name: this.$t(`${lang}.ringsMenu.proposalRing`),
-                    // icon: 'icon-engagement-ring-icon',
-                    to: {
-                      path: '/wedding-rings/proposal-ring'
-                    }
-                  },
-                  {
                     name: this.$t(`${lang}.ringsMenu.engagementRing`),
                     // icon: 'icon-engagement-ring-icon1',
                     to: {

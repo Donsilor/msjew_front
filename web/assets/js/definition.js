@@ -390,12 +390,6 @@ export default language => {
       //款式
       styleRings: [
         {
-          id: 162,
-          image: `/ring-style/woman/1.png`,
-          name: lang.ringsMenu.proposalRing,
-          desc: lang.style.WeddingRingDesc
-        },
-        {
           id: 160,
           image: `/ring-style/woman/2.png`,
           name: lang.ringsMenu.engagementRing,
