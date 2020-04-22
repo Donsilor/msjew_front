@@ -36,11 +36,11 @@
           @change="chooseOption"
         ></shape-data>
       </div>
-      <div class="button-group">
+      <!-- <div class="button-group">
         <button class="full-btn clear-btn" @click="clearChoose">
           {{ lang.checkResult }}
         </button>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
