@@ -483,18 +483,18 @@
       },
       // 移除
       removeCard(n){
-        this.cardList[0].account = ''
-        this.cardList[0].conversionNum = '';
-        this.cardList[0].balance = '';
-        this.cardList[0].balanceCny = '';
-        this.cardList[0].currency = '';
-        this.cardList[0].type = 0;
-        this.cardList[0].ifChoose = false;
-        this.cardList[0].usableRange = '';
-        this.cardList[0].ifAllowedToUse = false;
-        this.cardList[0].ifShowRemove = false;
-        this.cardList[0].startTime = 0;
-        this.cardList[0].endTime = 0;
+        this.cardList[n].account = ''
+        this.cardList[n].conversionNum = '';
+        this.cardList[n].balance = '';
+        this.cardList[n].balanceCny = '';
+        this.cardList[n].currency = '';
+        this.cardList[n].type = 0;
+        this.cardList[n].ifChoose = false;
+        this.cardList[n].usableRange = '';
+        this.cardList[n].ifAllowedToUse = false;
+        this.cardList[n].ifShowRemove = false;
+        this.cardList[n].startTime = 0;
+        this.cardList[n].endTime = 0;
       },
       // 关闭弹窗
       closePop2() {

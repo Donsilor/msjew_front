@@ -315,11 +315,29 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/paydollar.png',
-          type: 8,
+          url: '/cart/ap.png',
+          type: 82,
           title: this.LANGUAGE.cart.pay.payType3,
           des: this.LANGUAGE.cart.pay.type3Text
+        },
+        {
+          url: '/cart/wac.png',
+          type: 83,
+          title: this.LANGUAGE.cart.pay.payType4,
+          des: this.LANGUAGE.cart.pay.type4Text
+        },
+        {
+          url: '/cart/card.png',
+          type: 81,
+          title: this.LANGUAGE.cart.pay.payType1,
+          des: this.LANGUAGE.cart.pay.type1Text
         }
+        // {
+        //   url: '/cart/paydollar.png',
+        //   type: 8,
+        //   title: this.LANGUAGE.cart.pay.payType3,
+        //   des: this.LANGUAGE.cart.pay.type3Text
+        // }
       ],
       sum: '2,120.00',
       info:'',
@@ -463,17 +481,19 @@ export default {
       // console.log("allFee",this.planDays)
       this.idList = []
       this.productAmount = 0
-      this.list.map((item, index) => {
-        // console.log("sssss=====",item.id)
-        this.idList.push(item.id)
-        this.goodsListLine.push(item.simpleGoodsEntity.categoryId)
-        // this.idList.push(item.localSn)
-        //  console.log("sssss",this.productAmount)
-        // this.productAmount = this.productAmount + item.salePrice   localSn
-        this.productAmount = parseFloat(this.productAmount + item.salePrice)
-        // console.log("productAmount",this.productAmount)
+      if(this.list !== null && this.list !== '' && this.list !== 0){
+        this.list.map((item, index) => {
+          // console.log("sssss=====",item.id)
+          this.idList.push(item.id)
+          this.goodsListLine.push(item.simpleGoodsEntity.categoryId)
+          // this.idList.push(item.localSn)
+          //  console.log("sssss",this.productAmount)
+          // this.productAmount = this.productAmount + item.salePrice   localSn
+          this.productAmount = parseFloat(this.productAmount + item.salePrice)
+          // console.log("productAmount",this.productAmount)
 
-      })
+        })
+      }
 
       this.getData() // 获取地址
       this.getCouponList() // 获取优惠券列表
@@ -748,36 +768,46 @@ export default {
         data = {goodsCartList:goodsCartList}
         // console.log("list........",data)
       }
-      this.$axios({
-        method: 'post',
-        url: url,
-        data: data
-      })
-        .then(res => {
-          // console.log("费用",res)
-          this.canSubmit = true
-          this.allFee = res
 
-          if(res.cards !== undefined){
-            this.useAmount = JSON.parse(JSON.stringify(res.cards))
-          }
-
-          this.orderTotalAmount = res.orderAmount;
-          this.ultimatelyPay = res.payAmount;
-          this.currency = res.currency;
-
-          this.planDays = this.allFee.planDays
-
-          // this.info=res.details
-          // console.log("费用>>>>>>>>",this.info)
+      if(list.length){
+        this.$axios({
+          method: 'post',
+          url: url,
+          data: data
         })
-        .catch(err => {
-          this.canSubmit = false
-          this.$toast.show(err.message)
-          this.allFee = this.defaultAllFeeInfo()
+          .then(res => {
+            // console.log("费用",res)
+            this.canSubmit = true
+            this.allFee = res
 
-          // console.log("ggg",this.allFee)
-        })
+            if(res.cards !== undefined){
+              this.useAmount = JSON.parse(JSON.stringify(res.cards))
+            }
+
+            this.orderTotalAmount = res.orderAmount;
+            this.ultimatelyPay = res.payAmount;
+            this.currency = res.currency;
+
+            this.planDays = this.allFee.planDays
+
+            // this.info=res.details
+            // console.log("费用>>>>>>>>",this.info)
+          })
+          .catch(err => {
+            this.canSubmit = false
+            this.$toast.show(err.message)
+            this.allFee = this.defaultAllFeeInfo()
+
+            // console.log("ggg",this.allFee)
+          })
+        }else{
+          this.$toast.show(this.lang.msg10)
+          var that = this;
+          var timer = setTimeout(function(){
+            that.$router.replace('/cart');
+            clearTimeout(timer)
+          },2000)
+        }
     },
     // 获取地址
     getData() {
@@ -930,49 +960,53 @@ export default {
         }
         // console.log("data",data)
         // console.log("paytype",this.$route.query)
-        this.$axios({
-          method: 'post',
-          url: `/web/member/order-tourist/create`,
-          data: {
-            goodsCartList:data,
-            invoice:this.$route.params.invoice,
-            tradeType:'wap',
-            coinType:this.$store.state.coin,
-            returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
-          }
-        })
-          .then(res => {
-            // console.log("返回结果",res)
-            // const arr = []
-            // this.list.map((item, index) => {
-            //   console.log(arr)
-            //   arr.push(item.localSn)
-            //   this.$store.dispatch('removeCart', arr)
-            // })
-            if (res.config) {
-              window.location.replace(res.config)
-            } else if (!res.config){
-              // console.log(88888888)
-              this.isPay = false
-              this.$router.replace({
-                name: 'complete-paySuccess-orderId-price-coinType',
-                params: {
-                  orderId: this.info.orderId,
-                  price: this.info.orderAmount,
-                  coinType: this.info.coinType
-                }
-              })
+        if(data.length){
+          this.$axios({
+            method: 'post',
+            url: `/web/member/order-tourist/create`,
+            data: {
+              goodsCartList:data,
+              invoice:this.$route.params.invoice,
+              tradeType:'wap',
+              coinType:this.$store.state.coin,
+              returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
             }
-            // this.$router.replace({
-            //   name: 'cart-pay',
-            //   query: {
-            //     info: JSON.stringify(res)
-            //   }
-            // })
           })
-          .catch(err => {
-            this.$toast.show(err.message)
-          })
+            .then(res => {
+              // console.log("返回结果",res)
+              // const arr = []
+              // this.list.map((item, index) => {
+              //   console.log(arr)
+              //   arr.push(item.localSn)
+              //   this.$store.dispatch('removeCart', arr)
+              // })
+              if (res.config) {
+                window.location.replace(res.config)
+              } else if (!res.config){
+                // console.log(88888888)
+                this.isPay = false
+                this.$router.replace({
+                  name: 'complete-paySuccess-orderId-price-coinType',
+                  params: {
+                    orderId: this.info.orderId,
+                    price: this.info.orderAmount,
+                    coinType: this.info.coinType
+                  }
+                })
+              }
+              // this.$router.replace({
+              //   name: 'cart-pay',
+              //   query: {
+              //     info: JSON.stringify(res)
+              //   }
+              // })
+            })
+            .catch(err => {
+              this.$toast.show(err.message)
+            })
+          }else{
+            console.log('lalala')
+          }
       }
     },
     gologin(type) {

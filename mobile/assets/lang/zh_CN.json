@@ -190,7 +190,8 @@
 			"ultimatelyPay": "实付金额",
 			"NeedPay": "需付金額",
 			"submitSuccessfully": "订单提交成功!",
-			"PleaseLogin": "请先登录，才能使用购物卡！"
+			"PleaseLogin": "请先登录，才能使用购物卡！",
+      "msg10": "购物车不能为空，请重新添加商品"
 		},
 		"pay": {
 			"pay": "订单支付",
