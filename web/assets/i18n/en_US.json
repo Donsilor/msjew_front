@@ -170,7 +170,7 @@
       "use": "Use Scene",
       "engagementRing": "Engagement Ring",
       "weddingRing": "Wedding Ring",
-      "ring": "Set ring",
+      "ring": "Ring Sets",
       "fashionRing": "Fashion Ring",
       "coupleRing": "CoupleRing",
       "priceRange1": "Within 1000",
@@ -218,9 +218,9 @@
       "hide": "I have read and understand"
     },
     "topBar": {
-      "ring": "RING",
-      "necklace": "NECKLACE",
-      "bracelet": "BRACELET",
+      "ring": "RINGS",
+      "necklace": "NECKLACES",
+      "bracelet": "BRACELETS",
       "customization": "CUSTOM",
       "theme": "COLLECTION",
 
@@ -345,7 +345,7 @@
 
         "style": "Style",
         "price": "Price",
-        "color": "Conditional",
+        "color": "Material",
         "use": "Special Gift",
         "Bracelet": "Bracelets",
         "bracelet": "Bangles",
@@ -385,9 +385,9 @@
         "designYourOwnJewelryAccessories": "Design Your Own Jewelry Accessories",
         "giftForLadies": "Gift For Ladies",
 
-        "designRing": "Design Exclusive Diamond Ring",
-        "SettingStyle": "Setting Style",
-        "DiamondWeight": "DiamondWeight",
+        "designRing": "Custom Diamond Rings",
+        "SettingStyle": "Setting",
+        "DiamondWeight": "Weight",
         "use": "Occasion / Special Gift",
         "color": "Material",
         "SelectDiamondFirst": "Diamond",
