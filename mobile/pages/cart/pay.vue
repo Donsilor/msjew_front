@@ -81,11 +81,29 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/paydollar.png',
-          type: 8,
+          url: '/cart/ap.png',
+          type: 82,
+          title: this.LANGUAGE.cart.pay.payType3,
+          des: this.LANGUAGE.cart.pay.type3Text
+        },
+        {
+          url: '/cart/wac.png',
+          type: 83,
+          title: this.LANGUAGE.cart.pay.payType4,
+          des: this.LANGUAGE.cart.pay.type4Text
+        },
+        {
+          url: '/cart/card.png',
+          type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
         }
+        // {
+        //   url: '/cart/paydollar.png',
+        //   type: 8,
+        //   title: this.LANGUAGE.cart.pay.payType1,
+        //   des: this.LANGUAGE.cart.pay.type1Text
+        // }
         // {
         //   url: '/cart/up.png',
         //   type: 2,
@@ -152,7 +170,11 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 8
+        pay = 82
+      }else if(this.typeIndex == 2){
+        pay = 83
+      }else if(this.typeIndex == 3){
+        pay = 81
       }else if(this.typeIndex == 5){
         pay = 7
       }
@@ -228,15 +250,15 @@ export default {
         })
         .catch(err => {
           console.log(err)
-          this.$toast.show(err)
-          this.$router.replace({
-            name: 'cart-payFailed-orderId-price-coinType',
-            params: {
-              orderId: this.info.orderId,
-              price: this.info.orderAmount,
-              coinType: this.info.coinType
-            }
-          })
+          this.$toast.show(err.message)
+          // this.$router.replace({
+          //   name: 'cart-payFailed-orderId-price-coinType',
+          //   params: {
+          //     orderId: this.info.orderId,
+          //     price: this.info.orderAmount,
+          //     coinType: this.info.coinType
+          //   }
+          // })
         })
     },
     showSelect() {

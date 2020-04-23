@@ -951,7 +951,7 @@ export default language => {
       },
       {
         code: 'CNY',
-        content: ''
+        content: 'CNY'
       },
       {
         code: 'USD',

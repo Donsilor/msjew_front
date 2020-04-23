@@ -438,6 +438,7 @@ function queryParams (data) {
             'priceRange':'WzEwMDAsMTk5OV0%3D',        
           },
         }, 
+
         //手链-手镯--2000-2999
         {
           'mobileUrl':/^\/accessories\/list\?actIndex=4&startPrice=2000&endPrice=2999/,
@@ -478,6 +479,7 @@ function queryParams (data) {
             'param':'none',          
           },
         },
+
         //项链-吊坠 生日礼物
         {
           'mobileUrl':/^\/accessories\/list\?actIndex=0&theme=199$/,

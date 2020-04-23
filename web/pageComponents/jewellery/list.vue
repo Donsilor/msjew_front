@@ -337,7 +337,9 @@ export default {
         materialIndex: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
+      loading: true,
       all_category : [4,5,6,7,8,9,16,17,18]
+
     }
   },
   computed: {
@@ -414,7 +416,16 @@ export default {
       return data
     },
     // 处理用于显示的数据
-    showingData() { 
+    showingData() {
+      console.log("加载状态",this.loading)
+      // if(this.allData.length == 0){
+      //   this.loading = true
+      //   setTimeout(() => {
+      //     this.loading = false
+      //   }, 1000);
+      // }else if(this.allData.length > 0){
+      //   this.loading = false
+      // }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
@@ -458,7 +469,6 @@ export default {
     }
   },
   mounted() {
-    console.log(3333,this.searchConditions.categoryId,this.all_category)
     const _this = this
     var priceRange_val =this.$route.query.priceRange
     if(priceRange_val !== undefined){

@@ -113,6 +113,18 @@ export default {
     })
   },
   methods: {
+    show(){
+      const _this = this
+      if(_this.$route.query.keyword !== ''){
+        _this.$nuxt.$loading.start()
+        if(_this.pageInfo && _this.pageInfo.total_count){
+          _this.$nuxt.$loading.finish()
+        }
+        // setTimeout(() => {
+        //   _this.$nuxt.$loading.finish()
+        // }, 1000);
+      }
+    },
     clear(){
       this.keyword= ''
     },
