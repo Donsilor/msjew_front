@@ -2295,7 +2295,7 @@
 		"editOrUnbound": "編輯/解綁購物卡",
 		"shoppingCard": "購物卡",
     "msg10": "購物車不能為空，請重新添加商品",
-    "msg11": "*需登錄購物"
+    "msg11": "需登錄購物"
 	},
 	"invoice": {
 		"personal": "個人",

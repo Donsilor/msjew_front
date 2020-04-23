@@ -2311,7 +2311,7 @@
 		"editOrUnbound": "编辑/解绑购物卡",
 		"shoppingCard": "购物卡",
     "msg10": "购物车不能为空，请重新添加商品",
-    "msg11": "*需登录购物"
+    "msg11": "需登录购物"
 	},
 	"invoice": {
 		"personal": "个人",
