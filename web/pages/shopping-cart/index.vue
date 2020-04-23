@@ -28,7 +28,7 @@
               />
             </div>
             <div v-else class="cart-radio"></div>
-            <single :g="g" @reloadList="getList"></single>
+            <single :g="g" @reloadList="getList" ></single>
           </div>
           <div v-if="g.groupType === 1" class="couple">
             <!-- <div
@@ -57,7 +57,7 @@
               />
             </div>
             <div v-else class="cart-radio"></div>
-            <double :g="g" @reloadList="getList"></double>
+            <double :g="g" @reloadList="getList" ></double>
           </div>
           <div v-if="g.groupType === 2" class="customization">
             <div

@@ -98,7 +98,19 @@ export default {
       default() {
         return true
       }
-    }
+    },
+    // num:{
+    //   type: Number,
+    //   default() {
+    //     return true
+    //   }
+    // },
+    // price:{
+    //   type: Number,
+    //   default() {
+    //     return true
+    //   }
+    // }
   },
   methods: {
     goDetail() {},
@@ -123,10 +135,13 @@ export default {
         })
     },
     deleteGood() {
+      console.log("g0",this.g.tick)
       const data = [this.g.id]
       this.$store
         .dispatch(`removeCart`, data)
         .then(data => {
+          this.num = 0
+          this.price = 0
           this.$successMessage(this.$t(`cart.deleteSuccess`))
           this.$emit(`reloadList`)
         })
