@@ -233,6 +233,9 @@ export default {
             res[i].tick = false
           }
           this.good = res
+          // this.allTick()
+          // this.ticksCHeck()
+          // this.checkDelete()
         })
         .catch(err => {
           console.log(err)

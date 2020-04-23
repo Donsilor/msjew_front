@@ -151,9 +151,9 @@ export default {
     this.$nextTick(() => {
       if (this.isLogin) {
         this.getList()
-        setTimeout(() => {
-          this.getList()
-        },1000);
+        // setTimeout(() => {
+        //   this.getList()
+        // },1000);
       } else {
         this.getLocalCart()
       }
