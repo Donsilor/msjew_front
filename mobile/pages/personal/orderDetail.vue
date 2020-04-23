@@ -570,7 +570,7 @@ export default {
     goPay(val) {
       const res = {
         coinType: val.coinCode, // 支付币种 ,
-        orderAmount: val.orderAmount, // 支付金额 ,
+        orderAmount: val.payAmount, // 支付金额 ,
         orderId: val.id // 订单ID
       }
       this.$router.push({

@@ -463,7 +463,6 @@ export default {
     //     this.kai = this.$route.query.invoice !== ''
   },
   mounted() {
-    console.log(99999,this.cardList)
     // console.log("query",this.$route.params.invoice)
     this.$nextTick(() => {
       this.kai = typeof this.$route.params.invoice !== 'undefined' && this.$route.params.invoice.invoice_title != ''
@@ -803,7 +802,14 @@ export default {
 
     // 登录下获取相关费用
     getTex(k) {
-      const cards = k || '';
+      var cards = k || '';
+      var cardL = sessionStorage.getItem('cardList');
+
+      if(cardL != null){
+        this.cardList = JSON.parse(cardL);
+        cards = JSON.parse(cardL);
+      }
+
       this.canSubmit = false
       let data = {}
       let url = ''
@@ -828,7 +834,10 @@ export default {
             this.allFee = res
 
             if(res.cards !== undefined){
+              this.cardType = 2;
               this.useAmount = JSON.parse(JSON.stringify(res.cards))
+            }else{
+              this.cardType = 1;
             }
 
             this.orderTotalAmount = res.orderAmount;
@@ -1113,7 +1122,7 @@ export default {
               this.$toast.show(err.message)
             })
           }else{
-            console.log('lalala')
+            // console.log('')
           }
       }
     },
@@ -1146,11 +1155,19 @@ export default {
     // 关闭弹窗
     closeCardPop(k){
       this.ifShowShoppingCard = false;
-      if(k != true){
+
+      if(k != true && k != ''){
         this.cardList = k;
-        console.log(888,this.cardList)
+        sessionStorage.setItem('cardList', JSON.stringify(k))
         this.getTex(k);
         this.cardType = 2;
+      }
+
+      if(k == ''){
+        this.cardType = 1;
+        this.cardList = '';
+        sessionStorage.removeItem('cardList')
+        this.getTex();
       }
     },
     addCard(){
@@ -1172,7 +1189,26 @@ export default {
       }
     }
 
+  },
+
+  // watch:{
+  //    $route: {
+  //       handler: function(val, oldVal){
+  //         console.log(val);
+  //         sessionStorage.removeItem('cardList');
+  //       },
+  //       // 深度观察监听
+  //       deep: true
+  //     }
+  // }
+
+  beforeRouteLeave(to, from, next){
+    if(to.path !== '/cart/invoice'){
+      sessionStorage.removeItem('cardList')
+    }
+    next()
   }
+
 }
 </script>
 

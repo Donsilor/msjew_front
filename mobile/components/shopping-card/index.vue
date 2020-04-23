@@ -48,7 +48,7 @@
                   <span class="icon"></span>
                   <span>{{ lang.verifyFailing }}</span>
                 </div>
-                <div class="text" @click="removeCard(index)">{{ lang.eliminateCard }}</div>
+                <!-- <div class="text" @click="removeCard(index)">{{ lang.eliminateCard }}</div> -->
               </div>
             </div>
 
@@ -56,7 +56,7 @@
             <div class="btn" style="margin: 0 0 0 50px" v-if="item.ifShowRemove" @click="removeBinding(index)">{{ lang.unbound }}</div>
 
             <!-- 移除 -->
-            <div class="btn" style="margin: 0 0 0 50px" v-if="item.balance !== '' && item.balance-0 == 0" @click="removeCard(index)">{{ lang.removeCard }}</div>
+            <div class="btn" style="margin: 0 0 0 50px" v-if="!item.ifShowRemove" @click="removeCard(index)">{{ lang.removeCard }}</div>
 
           </div>
 

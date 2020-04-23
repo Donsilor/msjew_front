@@ -47,7 +47,7 @@
                   <span class="icon"></span>
                   <span>{{ $t(`${lang}.verifyFailing`) }}</span>
                 </div>
-                <div class="text" @click="removeCard(index)">{{ $t(`${lang}.eliminateCard`) }}</div>
+                <!-- <div class="text" @click="removeCard(index)">{{ $t(`${lang}.eliminateCard`) }}</div> -->
               </div>
             </div>
 
@@ -56,7 +56,7 @@
               @click="removeBinding(index)">{{ $t(`${lang}.unbound`) }}</div>
 
             <!-- 移除 -->
-            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="item.balance !== '' && item.balance-0 == 0"
+            <div class="btn" style="margin: 0 0 0 50px;cursor: pointer" v-if="!item.ifShowRemove"
               @click="removeCard(index)">{{ $t(`${lang}.removeCard`) }}</div>
           </div>
 
