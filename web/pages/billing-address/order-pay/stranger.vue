@@ -4780,12 +4780,12 @@ div {
 }
 
 .hint_pay{
-  font-size: 12px;
-  font-family: twCenMt;
-  color: #aaa;
   position: absolute;
   right: 80px;
   top: 84px;
+  font-family: twCenMt;
+  font-size: 12px;
+  color: #aaa;
   line-height: 24px;
 }
 .hint_pay span{
