@@ -127,7 +127,7 @@
             </li>
           </ul>
           <div class="more">
-            <nuxt-link :to="{ path: '/wedding-rings/womens-classic' }">
+            <nuxt-link :to="{ path: '/wedding-rings/engagement-ring' }">
               <button>{{ $t(`${lang}.more`) }}</button>
               <img src="/wedding-rings/arrow-right.png" />
             </nuxt-link>

@@ -54,7 +54,12 @@
       "scideal": "理想"
     },
     "style": {
-      "SolitaireRing": "主石戒",
+      "SolitaireRing": "单石戒",
+      "ClawRing":"爪鑲戒",
+      "GroupRing":"群鑲戒",
+      "ThreeMainStoneRings":"三主石戒",
+      "OpenMouth":"開口戒",
+    
       "SolitaireRingDesc": "戒扥款式可多變, 一夥真心總不變 , 高貴氣質石長存",
       "JumpRing": "開口戒",
       "JumpRingDesc": "首飾界中魔法師, 相隔對岸的法變, 竟能做出此效果",
@@ -95,7 +100,7 @@
       "roseGold14K": "14K玫瑰金",
       "roseGold18K": "18K玫瑰金",
       "platinum": "鉑金",
-      "fineSilver925": "925純銀"
+      "fineSilver925": "銀"
     },
     "sortBy": {
       "BestSeller": "最暢銷",
@@ -116,6 +121,9 @@
       "earStud": "耳釘",
       "earrings": "耳環",
       "bracelets": "手鏈",
+      "decoration": "擺件",
+      "widgets": "挂件",
+      "other": "其它",
       "bangles": "手鐲"
     },
     "polish": {
@@ -134,6 +142,63 @@
       "120": "中等",
       "121": "微弱",
       "122": "忽略"
+    },
+    "ringsMenu": {
+      "designYourEngagementRing": "設計自己的訂婚鑽戒",
+      "startFromSetting": "從戒托開始",
+      "startFromDiamond": "從鑽石開始",
+      "inspiredByCustomerRings": "從客戶戒指獲取靈感",
+      "matchWithRoundDiamonds": "搭配圓形鑽石款式 !",
+      "style": "款式",
+      "solitaire": "主石戒",
+      "jump": "開口戒",
+      "paveSet": "密釘戒",
+      "classical": "古典戒",
+      "channelSet": "迫鑲戒",
+      "haloSet": "外圍鑲嵌戒",
+      "threeStone": "三主石戒",
+      "color": "成色",
+      "14KWhite": "14K白金",
+      "18KWhite": "18k白金",
+      "14KYellow": "14K黃金",
+      "18KYellow": "18K黃金",
+      "platinum": "鉑金",
+      "18KRoseGold": "18K玫瑰金",
+      "14KRoseGold": "14K玫瑰金",
+      "fineSilver": "銀",
+
+      "price":"價格",
+      "use":"使用場景",
+      "engagementRing":"訂婚戒指",
+      "weddingRing":"結婚戒指",
+      "ring":"套戒",
+      "fashionRing":"時尚戒指",
+      "coupleRing":"情侶對戒",
+      "priceRange1":"1000以內",
+      "priceRange2":"1000-1999",
+      "priceRange3":"2000-2999",
+      "priceRange4":"3000-4999",
+      "priceRange5":"5000以上",
+      "proposalRing":"求婚戒指",
+      "engagement":"訂婚",
+      "wedding":"結婚",
+      "proposal":"求婚",
+      "ValentinesDay":"情人節",
+      "birthdayPresent":"生日禮物",
+      "anniversary" : "紀念日"
+      
+    },
+    "forPeople":{
+      "men":"男士",
+      "women":"女士",
+      "universal":"通用款"
+    },
+    "stoneType": {
+      "diamond":"鑽石",
+      "jackpot": "彩寶",
+      "pearl": "珍珠",
+      "jade":"玉石",
+      "other": "其他"
     }
   },
   "components": {
@@ -158,6 +223,12 @@
       "hide": "我已了解"
     },
     "topBar": {
+      "ring": "戒指",
+      "necklace":"項鍊",
+      "bracelet":"手鍊",
+      "customization":"鑽戒定制",
+      "theme":"主題",
+      
       "customerService": "客戶服務",
       "lifetimeWarranty": "終身保修",
       "freeInternationalShipping": "免費運費",
@@ -175,7 +246,7 @@
       "buy": "购买",
       "education": "知識",
       "search": "搜索",
-      "engagementRingMenu": {
+      "ringsMenu": {
         "designYourEngagementRing": "設計自己的訂婚鑽戒",
         "startFromSetting": "從戒托開始",
         "startFromDiamond": "從鑽石開始",
@@ -197,10 +268,29 @@
         "platinum": "鉑金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "純銀"
+        "fineSilver": "銀",
 
+        "price":"價格",
+        "use":"使用場景",
+        "engagementRing":"訂婚戒指",
+        "weddingRing":"結婚戒指",
+        "ring":"套戒",
+        "fashionRing":"時尚戒指",
+        "coupleRing":"情侶對戒",
+        "priceRange1":"1000以內",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上",
+        "proposalRing":"求婚戒指",
+        "engagement":"訂婚",
+        "wedding":"結婚",
+        "proposal":"求婚",
+        "ValentinesDay":"情人節",
+        "birthdayPresent":"生日禮物",
+        "anniversary" : "紀念日"
       },
-      "weddingRingMenu": {
+      "necklaceMenu": {
         "coupleRings": "我們的對戒",
         "classicSeries": "經典系列",
         "channelSetSeries": "排鑲系列",
@@ -220,9 +310,25 @@
         "platinum": "鉑金",
         "18KRoseGold": "18K玫瑰金",
         "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "純銀"
+        "fineSilver": "銀",
+
+        "style": "款式",
+        "price":"價格",
+        "use":"特別禮物",
+        "necklace":"項鍊",
+        "Pendant":"吊墜",
+        "ValentinesDay":"情人節",
+        "MothersDay":"母親節",
+        "birthdayPresent":"生日禮物",
+        "ChristmasGift":"聖誕禮物",
+        "HalloweenGift":"萬聖節禮物",
+        "priceRange1":"1000以內",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上"
       },
-      "diamondMenu": {
+      "braceletMenu": {
         "designYourEngagementRing": "設計自己的訂婚鑽戒",
         "startFromSetting": "從戒托開始",
         "startFromDiamond": "從鑽石開始",
@@ -240,9 +346,34 @@
         "designYourOwnJewelry": "設計自己的珠寶",
         "customRing": "定製戒指",
         "customBracelet": "定製手鏈",
-        "customNecklace": "定製項鏈"
+        "customNecklace": "定製項鏈",
+
+        "style": "款式",
+        "price":"價格",
+        "color": "成色",
+        "use":"特別禮物",
+        "Bracelet":"手鍊",
+        "bracelet":"手鐲",
+        "priceRange1":"1000以內",
+        "priceRange2":"1000-1999",
+        "priceRange3":"2000-2999",
+        "priceRange4":"3000-4999",
+        "priceRange5":"5000以上",
+        "14KWhite": "14K白金",
+        "18KWhite": "18k白金",
+        "14KYellow": "14K黃金",
+        "18KYellow": "18K黃金",
+        "platinum": "鉑金",
+        "18KRoseGold": "18K玫瑰金",
+        "14KRoseGold": "14K玫瑰金",
+        "fineSilver": "銀",
+        "ValentinesDay":"情人節",
+        "MothersDay":"母親節",
+        "birthdayPresent":"生日禮物",
+        "ChristmasGift":"聖誕禮物",
+        "HalloweenGift":"萬聖節禮物"
       },
-      "jewelleryAccessoriesMenu": {
+      "diamondMenu": {
         "jewelry": "成品配飾",
         "necklaces": "項鏈",
         "pendants": "吊墜",
@@ -257,7 +388,61 @@
         "specialGift": "特別的禮物",
         "giftsUnderHKD1000": "1000港幣以下禮品",
         "designYourOwnJewelryAccessories": "設計自己的珠寶配飾",
-        "giftForLadies": "成品配送給女士的禮品飾"
+        "giftForLadies": "成品配送給女士的禮品飾",
+
+        "designRing":"設計專屬鑽戒",
+        "SettingStyle":"戒托款式",
+        "DiamondWeight":"鑽石重量",
+        "use":"使用場景/特別禮物",
+        "color": "成色",
+        "SelectDiamondFirst":"先選鑽石",
+        "DiamondRing":"先鑽戒托",
+        "SingleDiamondRing":"單鑽戒",
+        "SolitaireRing": "单石戒",
+        "ClawRing":"爪鑲戒",
+        "GroupRing":"群鑲戒",
+        "ThreeMainStoneRings":"三主石戒",
+        "OpenMouth":"開口戒",
+        "14KWhite": "14K白金",
+        "18KWhite": "18k白金",
+        "14KYellow": "14K黃金",
+        "18KYellow": "18K黃金",
+        "platinum": "鉑金",
+        "18KRoseGold": "18K玫瑰金",
+        "14KRoseGold": "14K玫瑰金",
+        "fineSilver": "銀",
+        "WeightRange1":"0.3ct以下",
+        "WeightRange2":"0.3-0.5ct",
+        "WeightRange3":"0.51ct-0.8ct",
+        "WeightRange4":"0.81ct-1ct",
+        "WeightRange5":"1ct-1.5ct",
+        "WeightRange6":"1.51ct以上",
+        "propose":"求婚",
+        "gotEngaged":"訂婚",
+        "marry":"結婚",
+        "ValentinesDay":"情人節",
+        "birthdayPresent":"生日禮物"       
+      },
+      "themeCollectionMenu":{
+        "use":"使用場景/特別禮物",
+        "Promotions":"活動特惠",
+        "HolidayGift":"節日禮物",
+        "classification":"分類",
+        "BlackFriday":"黑色星期五",
+        "coupon":"優惠劵",
+        "SpecialDiscount":"特惠折扣",
+        "ValentinesDay":"情人節",
+        "MothersDay":"母親節",
+        "birthdayPresent":"生日禮物",
+        "ChristmasGift":"聖誕禮物",
+        "HalloweenGift":"萬聖節禮物",
+        "Ring":"戒指",
+        "CoupleRing":"情侶對戒",
+        "NecklaceAndPendant":"項鍊/吊墜",
+        "Bracelet":"手鍊/手鐲",
+        "EarringsAndStuds":"耳環/耳釘",
+        "DecorationAndPendant":"擺件/挂件",
+        "other":"其它"
       }
     },
     "footerBar": {
@@ -513,7 +698,7 @@
   "singleRingsList": {
     "man": "男士",
     "woman": "女士",
-
+    "forPeople" : "適用人群",
     "style": "款式",
     "color": "成色",
     "allColor": "所有成色",
@@ -521,7 +706,7 @@
     "to": "至",
 
     "title": "結婚戒指",
-    "totalCountTitle": "結婚戒指 ({total_count} 款)",
+    "totalCountTitle": "戒指 ({total_count} 款)",
     "titleDesc": "願作此生相依的應允 , 願為此今刻決定往後",
     "sort": "排序"
   },
@@ -646,7 +831,7 @@
     "to": "至",
 
     "title": "訂婚戒指",
-    "totalCountTitle": "訂婚戒指 ({total_count} 款)",
+    "totalCountTitle": "戒托 ({total_count} 款)",
     "titleDesc": "戒扥款式可多變, 一夥真心總不變 , 高貴氣質石長存",
     "sort": "排序"
   },
@@ -655,10 +840,11 @@
     "custom": "定製",
     "color": "成色",
     "colors": "所有成色",
+    "type":"所有飾品",
     "price": "價格",
     "to": "至",
     "sort": "排序",
-
+    "stoneType": "主石類型",
     "title": "配飾",
     "totalCountTitle": "配飾 ({total_count} 款)",
     "titleDesc": "通過選擇各種配飾，來展示您所想要的配飾"

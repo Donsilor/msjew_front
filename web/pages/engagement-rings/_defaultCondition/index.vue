@@ -54,7 +54,10 @@ const conditionMaps = {
   },
   '18k-rose-gold': {
     material: 30
-  }
+  },
+  'channel-set': {
+    material: 35
+  },
 }
 
 export default {
