@@ -3002,16 +3002,14 @@ export default {
     closeCardPop(k){
       this.ifShowAddCard = false;
 
-      if(k !== true && k !== ''){
+      if(k !== true){
         this.cardList = k;
         this.getTex(k);
 
-        this.cardType = 1;
-      }else if(k === true){
-        if(this.useAmount !== ''){
-          this.cardType = 1;
+        if(k.length){
+          this.cardType = 2
         }else{
-          this.cardType = 2;
+          this.cardType = 1
         }
       }
 
