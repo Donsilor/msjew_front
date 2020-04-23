@@ -4784,12 +4784,13 @@ div {
   right: 80px;
   top: 84px;
   font-family: twCenMt;
-  font-size: 12px;
+  font-size: 14px;
   color: #aaa;
   line-height: 24px;
 }
 .hint_pay span{
   color: #f00;
-  font-size: 14px;
+  font-size: 18px;
+  opacity: 0.6;
 }
 </style>
