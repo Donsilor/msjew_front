@@ -53,9 +53,9 @@ class Helpers {
     return CryptoJs.enc.Utf8.stringify(CryptoJs.enc.Base64.parse(base64))
   }
 
-  // 判断email格式
+  // 判断email格式 /^[0-9a-zA-Z]+[@][0-9a-zA-Z]+[.][0-9a-zA-Z]+/ 
   trueEmail(str = '') {
-    const regExp = new RegExp(/^[0-9a-zA-Z]+[@][0-9a-zA-Z]+[.][0-9a-zA-Z]+/)
+    const regExp = new RegExp(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
     return regExp.test(str)
   }
 
