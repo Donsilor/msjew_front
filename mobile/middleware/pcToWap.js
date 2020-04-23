@@ -706,14 +706,7 @@ function queryParams (data) {
         }, 
 
  
-		   // 对戒列表
-        {
-          'mobileUrl':/^\/marriage-ring\/pair-ring\/?/,
-          'pcUrl':`/wedding-rings/classic-series`,
-		      'params':{
-            'param':'none',          
-          },
-        },
+		   
 		
 		  // 对戒 详情
         {
@@ -724,7 +717,16 @@ function queryParams (data) {
 			      'ringType':'ringType',
           },
         },
-		
+    
+        
+        // 对戒列表
+        {
+          'mobileUrl':/^\/marriage-ring\/pair-ring\/?/,
+          'pcUrl':`/wedding-rings/classic-series`,
+		      'params':{
+            'param':'none',          
+          },
+        },
 		
       // 裸钻
       {
