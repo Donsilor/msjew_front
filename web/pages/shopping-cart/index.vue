@@ -28,7 +28,8 @@
               />
             </div>
             <div v-else class="cart-radio"></div>
-            <single :g="g" @reloadList="getList" ></single>
+            <!-- :num='totalNum' :price='totalPrice' -->
+            <single :g="g" @reloadList="getList"   @totalnum='changeNum' @totalprice='changePrice'></single>
           </div>
           <div v-if="g.groupType === 1" class="couple">
             <!-- <div
@@ -57,7 +58,7 @@
               />
             </div>
             <div v-else class="cart-radio"></div>
-            <double :g="g" @reloadList="getList" ></double>
+            <double :g="g" @reloadList="getList"  @totalnum='changeNum' @totalprice='changePrice'></double>
           </div>
           <div v-if="g.groupType === 2" class="customization">
             <div
@@ -83,6 +84,8 @@
               :g="g"
               :word="$t(`${lang}.customMade`)"
               @reloadList="getList"
+              @totalnum='changeNum' 
+              @totalprice='changePrice'
             ></madeUp>
           </div>
         </div>
@@ -205,6 +208,14 @@ export default {
   //  window.addEventListener('scroll', this.handleScroll, true)
   // },
   methods: {
+    changeNum(){
+      this.totalNum=0
+      this.allTick=false  
+    },
+    changePrice(){
+      this.totalPrice=0
+      this.allTick=false
+    },
     // handleScroll(e){
     //     // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
     //     const that = this
