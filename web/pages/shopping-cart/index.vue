@@ -391,7 +391,7 @@ export default {
       // console.log("length",this.good[i].tick)
       }
       //  console.log("length333",this.tickNum)
-       console.log("data.length",data.length,this.tickNum)
+      //  console.log("data.length",data.length,this.tickNum)
       if (data.length !== this.tickNum) return
       const cartIds = data.join(',')
       this.$router.push({
