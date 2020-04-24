@@ -140,7 +140,7 @@ export default {
         .then(res => {
           this.info2.orderId = res.data.id
           this.info2.coinType = res.data.coinCode
-          this.info2.orderAmount = res.data.orderAmount
+          this.info2.orderAmount = res.data.payAmount
           console.log("wwwww",this.info2.orderId)
         })
         .catch(err => {

@@ -395,13 +395,16 @@
                 this.$errorMessage(that.$t(`${lang}.msg6`));
               }
             } else if (this.cardList[k].type == 2) {
+              if(this.cardList[k].verifyDefeated){
+                this.$errorMessage(that.$t(`${lang}.verifyInvalid`));
+              }else{
+                var time = new Date().getTime();
 
-              var time = new Date().getTime();
-
-              if (time < that.cardList[k].startTime) {
-                that.$errorMessage(that.$t(`${lang}.msg12`));
-              } else if (time > that.cardList[k].endTime) {
-                that.$errorMessage(that.$t(`${lang}.msg13`));
+                if (time < that.cardList[k].startTime) {
+                  that.$errorMessage(that.$t(`${lang}.msg12`));
+                } else if (time > that.cardList[k].endTime) {
+                  that.$errorMessage(that.$t(`${lang}.msg13`));
+                }
               }
             }
           }
