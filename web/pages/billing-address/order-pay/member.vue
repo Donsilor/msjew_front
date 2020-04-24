@@ -153,11 +153,13 @@
                 v-model="addressData.lastname"
                 :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 1
                   wrongInput.lastname = false
                 "
                 @blur="borderChange = 0"
+                maxlength="30"
               />
               <div v-show="wrongInput.lastname" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -179,11 +181,13 @@
                 v-model="addressData.firstname"
                 :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 2
                   wrongInput.firstname = false
                 "
                 @blur="borderChange = 0"
+                maxlength="30"
               />
               <div v-show="wrongInput.firstname" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -196,7 +200,7 @@
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
+                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
                 <select v-model="phoneNum">
                   <option
                     v-for="(p, index) in phoneJson"
@@ -218,11 +222,14 @@
                   v-model="addressData.mobile"
                   :class="{ 'wrong-input': wrongInput.mobile }"
                   type="text"
+                  autocomplete="off"
                   @focus="
                     borderChange = 3
                     wrongInput.mobile = false
                   "
                   @blur="borderChange = 0"
+                  :maxlength="mobileMax"
+                  @input="mobileIpt"
                 />
                 <div v-show="wrongInput.mobile" class="wrong-alert">
                   {{ $t(`${lang}.wrongInput`) }}
@@ -243,13 +250,15 @@
             >
               <input
                 v-model="addressData.email"
-               
+
                 type="text"
+                autocomplete="off"
                 @focus="
                   borderChange = 4
-                 
+
                 "
                 @blur="borderChange = 0"
+                maxlength="60"
               />
               <!-- <div v-show="wrongInput.email" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -290,7 +299,7 @@
           <div class="input-line">
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.country`) }}</div>
             <div class="input-box">
-              <input :value="country.areaName" type="address" />
+              <input :value="country.areaName" type="address" autocomplete="off" />
               <select v-model="country" @change="getListTwo()">
                 <option
                   v-for="(c, index) in countryList"
@@ -307,7 +316,7 @@
           <div class="input-line">
             <div class="label">{{ $t(`${lang}.province`) }}</div>
             <div class="input-box">
-              <input :value="province.areaName" type="address" />
+              <input :value="province.areaName" type="address" autocomplete="off" />
               <select v-model="province" @change="getListThree()">
                 <option
                   v-for="(p, index) in provinceList"
@@ -324,7 +333,7 @@
           <div class="input-line">
             <div class="label">{{ $t(`${lang}.city`) }}</div>
             <div class="input-box">
-              <input :value="city.areaName" type="address" />
+              <input :value="city.areaName" type="address" autocomplete="off" />
               <select v-model="city">
                 <option
                   v-for="(c, index) in cityList"
@@ -350,11 +359,13 @@
               <textarea
                 v-model="addressData.address_details"
                 :class="{ 'wrong-input': wrongInput.address_details }"
+                autocomplete="off"
                 @focus="
                   borderChange = 6
                   wrongInput.address_details = false
                 "
                 @blur="borderChange = 0"
+                maxlength="300"
               />
               <div v-show="wrongInput.address_details" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -376,11 +387,14 @@
                 v-model="addressData.zip_code"
                 :class="{ 'wrong-input': wrongInput.zip_code }"
                 type="text"
+                autocomplete="off"
+                maxlength="11"
                 @focus="
                   borderChange = 7
                   wrongInput.zip_code = false
                 "
                 @blur="borderChange = 0"
+                @input="keydown"
               />
               <div v-show="wrongInput.zip_code" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -539,6 +553,7 @@
               { 'wrong-input': wrongInput.remark },
               { 'border-wrong': wrongInput.remark }
             ]"
+            autocomplete="off"
             @focus="
               borderChange = 9
               wrongInput.remark = false
@@ -553,18 +568,18 @@
              <div class="invoice-btn" v-if="this.areaId === '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
-                <span>{{ $t(`${lang2}.default`) }}</span> 
+                <span>{{ $t(`${lang2}.default`) }}</span>
               </div>
               <div v-show="iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
                 <span>{{ $t(`${lang2}.Invoicing`) }}</span>
               </div>
-            </div> 
+            </div>
             <div class="invoice-box" v-show="invoiceBox">
               <div class="msg">
                 <div class="msgbox" v-show="content">
                   <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
-                  
+
                   <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
                   <div class="btn_type">
                     <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
@@ -575,12 +590,13 @@
                     <div class="label"><span class="star"></span>{{ $t(`${lang2}.InvoiceType`) }}</div>
                     <div class="input-box" v-show="isactive == true">
                       <input
-                        style="text-align:center;"
+                        style="text-align:center"
                         disabled
                         v-model="aa"
                         readonly
                         :class="{ 'wrong-input': wrongInput.lastname }"
                         type="text"
+                        autocomplete="off"
                       />
                     </div>
                     <div class="input-box" v-show="Active == true">
@@ -591,6 +607,7 @@
                         readonly
                         :class="{ 'wrong-input': wrongInput.lastname }"
                         type="text"
+                        autocomplete="off"
                       />
                     </div>
                   </div>
@@ -620,7 +637,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <!-- 发票抬头 -->
                   <div class="input-line">
                     <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
@@ -635,11 +652,13 @@
                         v-model="invoice.invoice_title"
                         :class="{ 'wrong-input': typeShow }"
                         type="text"
+                        autocomplete="off"
                         @focus="
                           borderChange = 2
                           typeShow = false
                         "
                         @blur="borderChange = 0"
+                        maxlength="50"
                       />
                     </div>
                   </div>
@@ -647,7 +666,7 @@
                     {{ $t(`${lang2}.hint2`) }}
                   </div>
                   <!-- 发票税号 -->
-                  <div class="input-line">  
+                  <div class="input-line">
                     <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                     <div
                       :class="[
@@ -660,11 +679,13 @@
                         v-model="invoice.tax_number"
                         :class="{ 'wrong-input': taxShow }"
                         type="text"
+                        autocomplete="off"
                         @focus="
                           borderChange = 3
                          taxShow = false
                         "
                         @blur="borderChange = 0"
+                        maxlength="50"
                       />
                     </div>
                   </div>
@@ -686,11 +707,13 @@
                           v-model="invoice.email"
                           :class="{ 'wrong-input': mailShow }"
                           type="text"
+                          autocomplete="off"
                           @focus="
                             borderChange = 1
                             mailShow = false
                           "
                           @blur="borderChange = 0"
+                          maxlength="60"
                         />
                       </div>
                     </div>
@@ -704,7 +727,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                      <span>{{ $store.state.coin }} {{ ultimatelyPay }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
@@ -781,9 +804,10 @@
             </div>
           </div>
         </div> -->
-        <div class="new-address-title">
+        <div class="new-address-title" style="width: auto;position: relative;">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
+          <div class="add-shopping-card" @click="useCard()">{{this.cardType == 1 ? '+'+$t(`${lang}.useShoppingCard`) : $t(`${lang}.editOrUnbound`) }}</div>
         </div>
         <div class="price-detail">
           <div class="detail-line">
@@ -794,6 +818,12 @@
             <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
             <div class="hkd">
               {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
+            </div>
+          </div>
+          <div class="detail-line" v-for="item in useAmount">
+            <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+            <div class="hkd color-pink">
+              -{{ $store.state.coin }} {{item.useAmount}}
             </div>
           </div>
           <div v-show="makeGay" class="detail-line">
@@ -856,7 +886,19 @@
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
-              {{ formatMoney(tex.orderAmount || goodsPrice) }}
+              {{orderTotalAmount}}
+              <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
+            </div>
+          </div>
+
+          <div class="detail-line">
+            <div class="font-size-16 color-333">
+              {{ $t(`${lang2}.NeedPay`) }}
+            </div>
+            <div class="hkd color-pink price-big">
+              {{ $store.state.coin }}
+              {{ ultimatelyPay }}
+              <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
             </div>
           </div>
         </div>
@@ -864,12 +906,13 @@
       <div class="info-line" />
       <div
         :class="['buy-btn', { disabled: !canSubmit }]"
-        @click="createOrder()"
+        @click.stop="createOrder()"
       >
-        <span
-          >{{ $store.state.coin }}
-          {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
-        >
+        <span>
+          {{ $store.state.coin }}
+          {{ ultimatelyPay }}
+          <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
+        </span>
         <span>{{ $t(`${lang}.beiQin`) }}</span>
       </div>
     </div>
@@ -980,7 +1023,7 @@
           </div>
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
-          
+
           <div class="addr-board" @click="changeAddress(a)" />
           <i
             class="iconfont iconlajitong"
@@ -1044,6 +1087,8 @@
                 v-model="addressData.firstname"
                 :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
+                maxlength="30"
+                autocomplete="off"
                 @focus="
                   borderChange = 2
                   wrongInput.firstname = false
@@ -1069,6 +1114,8 @@
                 v-model="addressData.lastname"
                 :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
+                maxlength="30"
+                autocomplete="off"
                 @focus="
                   borderChange = 1
                   wrongInput.lastname = false
@@ -1087,7 +1134,7 @@
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
+                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
                 <select v-model="phoneNum">
                   <option
                     v-for="(p, index) in phoneJson"
@@ -1109,11 +1156,14 @@
                   v-model="addressData.mobile"
                   :class="{ 'wrong-input': wrongInput.mobile }"
                   type="text"
+                  autocomplete="off"
                   @focus="
                     borderChange = 3
                     wrongInput.mobile = false
                   "
                   @blur="borderChange = 0"
+                  @input="mobileIpt"
+                  :maxlength="mobileMax"
                 />
                 <div v-show="wrongInput.mobile" class="wrong-alert">
                   {{ $t(`${lang}.wrongInput`) }}
@@ -1136,6 +1186,8 @@
                 v-model="addressData.email"
                 :class="{ 'wrong-input': wrongInput.email }"
                 type="text"
+                autocomplete="off"
+                maxlength="60"
                 @focus="
                   borderChange = 4
                   wrongInput.email = false
@@ -1162,6 +1214,8 @@
                 v-model="addressData.checkEmail"
                 :class="{ 'wrong-input': wrongInput.checkEmail }"
                 type="text"
+                maxlength="60"
+                autocomplete="off"
                 @focus="
                   borderChange = 5
                   wrongInput.checkEmail = false
@@ -1181,7 +1235,7 @@
           <div class="input-line">
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.country`) }}</div>
             <div class="input-box">
-              <input :value="country.areaName" type="address" />
+              <input :value="country.areaName" type="address" autocomplete="off" />
               <select v-model="country" @change="getListTwo()">
                 <option
                   v-for="(c, index) in countryList"
@@ -1198,7 +1252,7 @@
           <div class="input-line">
             <div class="label">{{ $t(`${lang}.province`) }}</div>
             <div class="input-box">
-              <input :value="province.areaName" type="address" />
+              <input :value="province.areaName" type="address" autocomplete="off" />
               <select v-model="province" @change="getListThree()">
                 <option
                   v-for="(p, index) in provinceList"
@@ -1215,7 +1269,7 @@
           <div class="input-line">
             <div class="label">{{ $t(`${lang}.city`) }}</div>
             <div class="input-box">
-              <input :value="city.areaName" type="address" />
+              <input :value="city.areaName" type="address" autocomplete="off" />
               <select v-model="city">
                 <option
                   v-for="(c, index) in cityList"
@@ -1241,6 +1295,8 @@
               <textarea
                 v-model="addressData.address_details"
                 :class="{ 'wrong-input': wrongInput.address_details }"
+                maxlength="300"
+                autocomplete="off"
                 @focus="
                   borderChange = 6
                   wrongInput.address_details = false
@@ -1267,11 +1323,14 @@
                 v-model="addressData.zip_code"
                 :class="{ 'wrong-input': wrongInput.zip_code }"
                 type="text"
+                maxlength="11"
+                autocomplete="off"
                 @focus="
                   borderChange = 7
                   wrongInput.zip_code = false
                 "
                 @blur="borderChange = 0"
+                @input="keydown"
               />
               <div v-show="wrongInput.zip_code" class="wrong-alert">
                 {{ $t(`${lang}.wrongInput`) }}
@@ -1430,6 +1489,7 @@
               { 'wrong-input': wrongInput.remark },
               { 'border-wrong': wrongInput.remark }
             ]"
+            autocomplete="off"
             @focus="
               borderChange = 9
               wrongInput.remark = false
@@ -1445,7 +1505,7 @@
           <div class="invoice-btn" v-if="this.areaId === '1'">
             <div v-show="!iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
-              <span>{{ $t(`${lang2}.default`) }}</span> 
+              <span>{{ $t(`${lang2}.default`) }}</span>
             </div>
             <div v-show="iconShow" @click="show2">
               <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
@@ -1456,7 +1516,7 @@
             <div class="msg">
               <div class="msgbox" v-show="content">
                 <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
-                
+
                 <p class="title">{{ $t(`${lang2}.Invoicings`) }}</p>
                 <div class="btn_type">
                   <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang2}.PaperInvoice`) }}</button>
@@ -1512,7 +1572,7 @@
                     </div>
                   </div>
                 </div>
-                
+
                 <!-- 发票抬头 -->
                 <div class="input-line">
                   <div class="label"><span class="star">*</span>{{ $t(`${lang2}.Invoice`) }}</div>
@@ -1532,6 +1592,7 @@
                         typeShow = false
                       "
                       @blur="borderChange = 0"
+                      maxlength="50"
                     />
                   </div>
                 </div>
@@ -1539,7 +1600,7 @@
                   {{ $t(`${lang2}.hint2`) }}
                 </div>
                 <!-- 发票税号 -->
-                <div class="input-line">  
+                <div class="input-line">
                   <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang2}.TaxID`) }}</div>
                   <div
                     :class="[
@@ -1557,6 +1618,7 @@
                         taxShow = false
                       "
                       @blur="borderChange = 0"
+                      maxlength="50"
                     />
                   </div>
                 </div>
@@ -1583,6 +1645,7 @@
                           mailShow = false
                         "
                         @blur="borderChange = 0"
+                        maxlength="60"
                       />
                     </div>
                   </div>
@@ -1596,7 +1659,7 @@
                 <div class="total">
                   <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
                   <div class="totle-price">
-                    <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                    <span>{{ $store.state.coin }} {{ ultimatelyPay }}</span>
                   </div>
                 </div>
                 <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
@@ -1672,9 +1735,10 @@
             </div>
           </div>
         </div> -->
-        <div class="new-address-title">
+        <div class="new-address-title" style="width: auto;position: relative;">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
+          <div class="add-shopping-card" @click="useCard()">{{this.cardType == 1 ? '+'+$t(`${lang}.useShoppingCard`) : $t(`${lang}.editOrUnbound`) }}</div>
         </div>
         <div class="price-detail">
           <div class="detail-line">
@@ -1687,6 +1751,13 @@
               {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
             </div>
           </div>
+          <div class="detail-line" v-for="item in useAmount">
+            <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+            <div class="hkd color-pink">
+              -{{ $store.state.coin }} {{item.useAmount}}
+            </div>
+          </div>
+
           <div v-show="makeGay" class="detail-line">
             <div>
               *{{ $t(`${lang}.coupon`) }}:
@@ -1747,7 +1818,18 @@
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
-              {{ formatMoney(tex.orderAmount || goodsPrice) }}
+              {{orderTotalAmount}}
+              <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
+            </div>
+          </div>
+
+          <div class="detail-line">
+            <div class="font-size-16 color-333">
+              {{ $t(`${lang2}.NeedPay`) }}
+            </div>
+            <div class="hkd color-pink price-big">
+              {{ $store.state.coin }}
+              {{ ultimatelyPay }}
             </div>
           </div>
         </div>
@@ -1755,12 +1837,13 @@
       <div class="info-line" />
       <div
         :class="['buy-btn', { disabled: !canSubmit }]"
-        @click="createOrder1()"
+        @click.stop="createOrder1()"
       >
-        <span
-          >{{ $store.state.coin }}
-          {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
-        >
+        <span>
+          {{ $store.state.coin }}
+          {{ ultimatelyPay }}
+          <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
+        </span>
         <span>{{ $t(`${lang}.beiQin`) }}</span>
       </div>
     </div>
@@ -1781,6 +1864,15 @@
       @done="alertBox = false"
     />
   </div>
+
+  <div v-if="ifShowAddCard">
+    <shopping-card
+      @closePop="closeCardPop"
+      :cardType="useAmount"
+      :goodsLine ="goodsListLine"
+      :currencyType = "currency"
+    ></shopping-card>
+  </div>
 </div>
 </template>
 
@@ -1790,6 +1882,7 @@ import double from '../../shopping-cart/goodsCss/double'
 import madeUp from '../../shopping-cart/goodsCss/madeUp'
 import Address from '@/assets/js/address.js'
 import { Email, RegMobile, RegTelephone, RegMobiles } from '@/assets/js/require-lee.js'
+import shoppingCard from '../../../pageComponents/shopping-card/index.vue'
 const lang = 'order'
 const langs = 'personal.account'
 const lang2 = 'invoice'
@@ -1798,7 +1891,8 @@ export default {
   components: {
     single,
     double,
-    madeUp
+    madeUp,
+    shoppingCard
   },
   mixins: [Address],
   data() {
@@ -1890,9 +1984,18 @@ export default {
         is_electronic:"0",
         email:''
       },
-      scrollTop:0 ,
+      scrollTop:0,
       areaId: this.$store.state.areaId,
-
+      ifShowAddCard: false,
+      cardList: [],
+      useAmount: [],
+      cardType: 1,
+      goodsListLine: [],
+      orderTotalAmount: 0,
+      ultimatelyPay: 0,
+      num: 0,
+      mobileMax: 20,
+      currency: ''
     }
   },
   computed: {
@@ -1910,13 +2013,17 @@ export default {
     }
   },
   created() {
-    // console.log("ssss",this.pathTakeIds)
     const promise = new Promise((resolve, reject) => {
       this.$store
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
-        .then(res => {        
+        .then(res => {
           this.good = res
-          // console.log("res",res)
+
+          console.log("res",res)
+          for(var i=0; i<res.length; i++){
+            this.goodsListLine.push(res[i].data[0].goodsType)
+          }
+
           resolve()
         })
         .catch(err => {
@@ -1983,16 +2090,16 @@ export default {
       if(this.invoice.invoice_type == ''){
         this.redioShow = true
         return
-      } 
+      }
       if(this.invoice.invoice_title == ''){
         this.typeShow = true
         return
-      } 
+      }
       if(this.invoice.invoice_type == 1){
         if(this.invoice.tax_number == ''){
           this.taxShow = true
           return
-        } 
+        }
       }
       if(this.invoice.is_electronic == 1){
         if(this.invoice.email == '' || !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.invoice.email))){
@@ -2351,6 +2458,7 @@ export default {
         this.wrongInput.mobile = true
         return false
       }
+
       // if (
       //   !RegMobile.test(this.addressData.mobile) &&
       //   !RegTelephone.test(this.addressData.mobile)
@@ -2372,6 +2480,7 @@ export default {
       //   this.wrongInput.checkEmail = true
       //   return false
       // }
+
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
@@ -2675,7 +2784,8 @@ export default {
       //     }
       //   })
     },
-    getTex() {
+    getTex(k) {
+      const cards = k || '';
       const arr = []
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
@@ -2689,6 +2799,7 @@ export default {
       const data = arr.join(',')
       const datas={
         addressId: this.orderAddress.id,
+        cards: cards,
         cartIds: data
       }
       this.canSubmit = false
@@ -2698,6 +2809,14 @@ export default {
           // console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
+
+          if(res.data.cards !== undefined){
+            this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
+          }
+
+          this.orderTotalAmount = res.data.orderAmount;
+          this.ultimatelyPay = res.data.payAmount;
+          this.currency = res.data.currency
         })
         .catch(err => {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
@@ -2711,6 +2830,7 @@ export default {
         })
     },
     createOrder() {
+      var that = this;
       // console.log("4444",this.address)
       // console.log()
       // if (!this.canSubmit) {
@@ -2720,7 +2840,7 @@ export default {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
-        
+
       }
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
@@ -2742,37 +2862,48 @@ export default {
         invoice = this.invoice
       }
       // console.log("arr",arr)
+
       const data = {
         cart_ids: arr.join(','),
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        invoice:invoice
+        invoice:invoice,
+        card: this.cardList
       }
       // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
           // console.log("创建订单",res.data.orderAmount)
-          this.$store.dispatch('getCart')
-          this.$router.replace({
-            path: '/payment-options',
-            query: {
-              orderId: res.data.orderId,
-              price: res.data.orderAmount,
-              coinType: res.data.coinType
-            }
-          })
+          if(res.data.payStatus == 1){
+            that.$successMessage(that.$t(`${lang2}.submitSuccessfully`));
+            that.$router.replace({
+              path: '/account/orders',
+            })
+          }else{
+            this.$store.dispatch('getCart')
+            this.$router.replace({
+              path: '/payment-options',
+              query: {
+                orderId: res.data.orderId,
+                price: res.data.orderAmount,
+                coinType: res.data.coinType,
+              }
+            })
+          }
         })
         .catch(err => {
           if (!err.response) {
-            this.$message.error(err.message)
+            var _this = this;
+            _this.$errorMessage(err.message)
           } else {
-            // console.log(err)
+            console.log(err)
           }
         })
     },
     createOrder1() {
+      var that = this;
       // console.log("tttttt",this.orderAddress)
       // console.log()
       // if (!this.canSubmit) {
@@ -2819,35 +2950,91 @@ export default {
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
-        invoice:invoice
+        invoice:invoice,
+        card: this.cardList || '',
         // afterMail: this.isSameEmail
         // ? this.orderAddress.email
         // : this.orderEmail,
       }
-      
+
       // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
+          console.log('提交成功222222')
           // console.log("创建订单",res.data.orderAmount)
-          this.$store.dispatch('getCart')
-          this.$router.replace({
-            path: '/payment-options',
-            query: {
-              orderId: res.data.orderId,
-              price: res.data.orderAmount,
-              coinType: res.data.coinType
-            }
-          })
+          if(res.data.payStatus == 1){
+            that.$successMessage(that.$t(`${lang2}.submitSuccessfully`));
+            that.$router.replace({
+              path: '/account/orders',
+            })
+          }else{
+            this.$store.dispatch('getCart')
+            this.$router.replace({
+              path: '/payment-options',
+              query: {
+                orderId: res.data.orderId,
+                price: res.data.orderAmount,
+                coinType: res.data.coinType
+              }
+            })
+          }
         })
         .catch(err => {
+          console.log('提交失败333333333')
           // if (!err.response) {
             this.$message.error(err.message)
           // } else {
           //   // console.log(err)
           // }
         })
-    }
+    },
+    // 添加购物卡
+    useCard(){
+      this.ifShowAddCard = true;
+      if(this.cardList.length != 0){
+        this.cardType = 2;
+      }else{
+        this.cardType = 1;
+      }
+    },
+    // 关闭弹窗
+    closeCardPop(k){
+      this.ifShowAddCard = false;
+
+      if(k !== true){
+        this.cardList = k;
+        this.getTex(k);
+
+        if(k.length){
+          this.cardType = 2
+        }else{
+          this.cardType = 1
+        }
+      }
+
+    },
+    //处理浮点数异常
+     floatingPoint(num){
+       var that = this;
+        num = num.toFixed(2);
+        return num
+     },
+     keydown(){
+       var reg = /^[0-9a-zA-Z\-]{1}$/;
+       var k = this.addressData.zip_code.slice(-1);
+       if(!reg.test(k)){
+         this.addressData.zip_code = this.addressData.zip_code.slice(0,-1)
+       }
+     },
+     mobileIpt(){
+       if(this.pnN == '中国' || this.pnN == '中國' || this.pnN == 'China'){
+         this.mobileMax = 11
+       }else{
+         this.mobileMax = 20
+       }
+     }
+
   }
 }
 </script>
@@ -4281,7 +4468,7 @@ div {
   }
   .gou-img{
       // display: flex;
-      // justify-content: center;   
+      // justify-content: center;
       width: 455px;
       padding: 0px 180px;
       img{
@@ -4311,7 +4498,7 @@ div {
     button{
       width: 120px;
       height: 35px;
-      background: #8b766c; 
+      background: #8b766c;
       border-radius: 4px;
       color:#fff;
     }
@@ -4633,5 +4820,27 @@ div {
   .el-select{
     width: 70%;
   }
+}
+
+.shopping-card-num{
+  display: inline-block;
+  // width: 18px;
+  // height: 18px;
+  // line-height: 18px;
+  margin-left: 4px;
+  font-size: 12px;
+}
+.add-shopping-card{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 24px;
+  line-height: 22px;
+  padding: 0 14px;
+  font-size: 13px;
+  color: #f29b87;
+  border: 1px solid #f29b87;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>

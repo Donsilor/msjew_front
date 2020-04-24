@@ -190,7 +190,15 @@
         "delete": "刪除",
         "inputCode": "输入优惠码",
         "inputOrSelectCode": "输入/选择优惠码",
-        "exchange": "使用"
+        "exchange": "使用",
+        "useShoppingCard": "使用购物卡",
+        "editOrUnbound": "编辑/解绑购物卡",
+        "shoppingCard": "购物卡",
+        "ultimatelyPay": "实付金额",
+        "NeedPay": "需付金額",
+        "submitSuccessfully": "订单提交成功!",
+        "PleaseLogin": "请先登录，才能使用购物卡！",
+        "msg10": "购物车不能为空，请重新添加商品"
       },
       "pay": {
         "pay": "订单支付",
@@ -209,7 +217,7 @@
         "payType5": "电汇",
         "type5Text": "以电汇方式付款将享有1.5%折扣优惠",
         "type5Text2": "注意，电子支票并非电汇",
-        "paytip":"由于Paydallor不支持“人民币”和“美元”进行结算，请切换其他货币完成本次订单，谢谢！"
+        "paytip":"由于Paydallor不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！"
       },
       "paySuccess": {
         "PayPending1":"订单已经提交，系统正在处理中,请稍等。",
@@ -496,6 +504,7 @@
         "insurance": "保险",
         "transPreferFee": "电汇支付优惠",
         "orderCount": "订单总额",
+        "toPayWait": "付款中",
         "toPay": "去付款",
         "cancelOrder": "取消订单",
         "submit": "提交",
@@ -525,7 +534,10 @@
         "received": "已确认收货",
         "confirmCancellationOrder": "确认取消订单",
         "canceled": "已取消订单",
-        "paytips": "电汇指引"
+        "paytips": "电汇指引",
+        "shoppingCard": "购物卡",
+        "ultimatelyPay": "实付金额",
+        "NeedPay": "需付金額"
       }
     },
     "custom-made": {
@@ -2070,24 +2082,60 @@
       "leaveAMessage": "留言讯息",
       "submit": "提 交",
 
-      "callUs": "联络我们",
-      "store": "门店",
-      "storeName": "香港 - 环贸中心",
-      "address": "地址",
-      "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
-      "tel": "电话",
-      "email": "电邮",
+		"callUs": "联络我们",
+		"store": "门店",
+		"storeName": "香港 - 环贸中心",
+		"address": "地址",
+		"addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
+		"tel": "电话",
+		"email": "电邮",
 
-      "submitSuccessTitle": "提交成功",
-      "submitSuccessDesc": "我们将在一个工作天内尽快与您确认预约",
-      "submitFailTitle": "提交失败",
-      "submitFailDesc": "请勿重复提交，如有疑问请联络客服",
-      "confirm": "确认",
-      "bookTimeError": "请选择正确的预约时间",
-      "inputTheLastName": "请输入正确的名称",
-      "inputTheFirstName": "请输入正确的姓氏",
-      "inputTelphone": "请输入正确的电话",
-      "selectTheCorrectDate": "请选择正确的日期",
-      "selectAnAppointmentTime": "请选择预约时间"
-    }
-  }
+		"submitSuccessTitle": "提交成功",
+		"submitSuccessDesc": "我们将在一个工作天内尽快与您确认预约",
+		"submitFailTitle": "提交失败",
+		"submitFailDesc": "请勿重复提交，如有疑问请联络客服",
+		"confirm": "确认",
+		"bookTimeError": "请选择正确的预约时间",
+		"inputTheLastName": "请输入正确的名称",
+		"inputTheFirstName": "请输入正确的姓氏",
+		"inputTelphone": "请输入正确的电话",
+		"selectTheCorrectDate": "请选择正确的日期",
+		"selectAnAppointmentTime": "请选择预约时间"
+	},
+	"shoppingCard": {
+		"title": "添加购物卡信息",
+		"cardNumber": "卡号",
+		"cardPassword": "兑换码",
+		"addCard": "添加购物卡",
+		"chooseAll": "全选",
+		"annotation": "*注：多张购物卡，可依次添加验证",
+		"cancle": "取消",
+		"confirm": "确定",
+		"clickVerify": "点击验证",
+		"verifySucceed": "验证成功",
+		"verifyFailing": "验证失败",
+		"balance": "余额：",
+		"eliminateCard": "消除此卡",
+		"unbound": "解除绑定",
+    "removeCard": "移除",
+		"confirmUnbinding": "是否确认解除绑定？",
+		"verifyValid": "购物卡验证有效！",
+		"alreadyAdd": "已添加",
+		"verifyInvalid": "卡号或验证码输入有误!",
+		"invalidCards": "无效购物卡",
+		"anewAdd": "重新添加",
+		"msg1": "购物卡号或兑换码不能为空！",
+		"msg2": "此卡需要验证成功才能使用",
+		"msg3": "验证失败，请重新填写",
+		"msg4": "有未验证或验证失败的卡！",
+		"msg5": "不能重复添加！",
+		"msg6": "此卡余额为0，不可使用！",
+		"msg7": "仅限：",
+		"msg8": "使用",
+		"msg9": "请添加/勾选有效购物卡！",
+		"msg10": "购物卡添加成功！",
+		"msg11": "解除绑定成功！",
+		"msg12": "此卡还未到使用时间！",
+		"msg13": "此卡已超过使用时间！"
+	}
+}

@@ -230,6 +230,7 @@ export default {
         this.$store.dispatch('removeCart', arr)
       })
       this.list = JSON.parse(storage.get('myCartList', 0))
+      sessionStorage.removeItem('cardList');
 
       this.stepPayPending = false
       this.stepPayVerify  = false
