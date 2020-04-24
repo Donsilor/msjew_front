@@ -14,8 +14,8 @@ export default {
           type: 'eject-choose',
           key: 'carat-bar',
           name: this.LANGUAGE.listCommons.carat,
-          checked: ``,
-          options: []
+          checked: (typeof this.$route.query.startCarat !== 'undefined' && typeof this.$route.query.endCarat !== 'undefined')  ? this.$route.query.startCarat + '-' + this.$route.query.endCarat:'',
+          options: (typeof this.$route.query.startCarat !== 'undefined' && typeof this.$route.query.endCarat !== 'undefined')  ? [{id:this.$route.query.startCarat,name:this.$route.query.startCarat},{id:this.$route.query.endCarat,name:this.$route.query.endCarat}]:[]
         },
         {
           type: 'eject-choose',

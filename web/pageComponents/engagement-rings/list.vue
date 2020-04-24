@@ -268,7 +268,7 @@ export default {
       styleOptions: this.CONDITION_INFO.style.rings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
-      fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
+      fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
       searchConditions: {
         style: '',
         material: '',
@@ -486,7 +486,8 @@ export default {
       color: rgba(51, 51, 51, 1);
     }
     .options {
-      flex-grow: 1;
+      width: 43%;
+      // flex-grow: 1;
       flex-shrink: 1;
     }
   }

@@ -650,7 +650,8 @@ export default {
             // 男女戒
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -658,7 +659,8 @@ export default {
             // 結婚戒指
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -666,7 +668,8 @@ export default {
             // 裝飾戒指
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -687,7 +690,8 @@ export default {
             // ringRouter(info.data[0].configAttrId)
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             break
           case 3:
@@ -754,7 +758,8 @@ export default {
         console.log('info====>', info)
         routerName = 'marriage-ring-pair-ring-detail'
         routerQuery = {
-          goodId: info.data[0].groupId
+          goodId: info.data[0].groupId,
+          ringType : 'pair'
         }
       }
       if ([2].indexOf(info.groupType) > -1) {
