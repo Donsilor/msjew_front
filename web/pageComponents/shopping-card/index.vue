@@ -311,7 +311,6 @@
                 that.verifyLine(res.data.goodsTypeAttach, k);
 
                 var time = new Date().getTime();
-                // console.log(888,time,999,that.startTime,0,that.endTime)
                 if (time > that.startTime && time < that.endTime) {
                   that.verifyStatus = 1;
                   that.cardList[k].type = 1;

@@ -202,6 +202,18 @@ class Helpers {
     if (type === 0 && num.split('.')[1] === '00') num = num.split('.')[0]
     return num
   }
+
+  formatM(num) {
+    if (!num) {
+      return '0.00'
+    }
+
+    var decimals = 0
+    if(num.indexOf('.') != -1){
+      decimals = num[1]
+    }
+    return num
+  }
 }
 
 export default new Helpers()
