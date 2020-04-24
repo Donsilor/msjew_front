@@ -13,6 +13,7 @@
           :placeholder="$t(`${lang}.psw5`)"
           autocomplete="new-password"
           type="password"
+          maxlength="30"
         />
       </div>
       <div class="pass-word-line">
@@ -22,6 +23,7 @@
           class="pass-word-line-input"
           :placeholder="$t(`${lang}.psw6`)"
           type="password"
+          maxlength="30"
         />
       </div>
       <div class="pass-word-line">
@@ -31,6 +33,7 @@
           class="pass-word-line-input"
           :placeholder="$t(`${lang}.psw7`)"
           type="password"
+          maxlength="30"
         />
       </div>
     </div>

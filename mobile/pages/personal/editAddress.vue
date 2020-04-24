@@ -13,6 +13,8 @@
             v-model="name"
             :placeholder="lang.name"
             @input="check(1)"
+             :maxl="maxlength"
+             @focus="focusFn(1)"
           ></bdd-input>
         </div>
         <div :class="['error-message', { active: nameTrue }]">
@@ -24,6 +26,8 @@
             v-model="surname"
             :placeholder="lang.surname"
             @input="check(2)"
+             :maxl="maxlength"
+             @focus="focusFn(2)"
           ></bdd-input>
         </div>
         <div :class="['error-message', { active: surnameTrue }]">
@@ -34,6 +38,8 @@
             v-model="mailbox"
             :placeholder="lang.mailbox"
             @input="check(3)"
+             :maxl="maxlength"
+             @focus="focusFn(3)"
           ></bdd-input>
         </div>
         <div v-else class="input-mod" @click="showSelect">
@@ -41,6 +47,8 @@
             v-model="mailbox"
             :placeholder="lang.mailbox"
             @input="check(3)"
+            :maxl="maxlength"
+            @focus="focusFn(3)"
           ></bdd-input>
         </div>
         <div :class="['error-message', { active: mailboxTrue }]">
@@ -60,6 +68,8 @@
             v-model="phone"
             :placeholder="`*${lang.phone}`"
             @input="check(4)"
+            :maxl="maxlength"
+            @focus="focusFn(4)"
           ></bdd-input>
         </div>
         <div v-else class="input-mod">
@@ -67,6 +77,8 @@
             v-model="phone"
             :placeholder="`*${lang.phone}`"
             @input="check(4)"
+            :maxl="maxlength"
+            @focus="focusFn(4)"
           ></bdd-input>
         </div>
         <div :class="['error-message', { active: phoneTrue }]">
@@ -79,6 +91,8 @@
             maxlength="300"
             :placeholder="lang.details"
             @keyup="check(5)"
+            :maxl="maxlength"
+            @focus="focusFn(5)"
           ></textarea>
         </div>
         <div :class="['error-message', { active: detailsTrue }]">
@@ -307,7 +321,8 @@ export default {
       isOver: true,
       postals: false,
       language:'',
-      loginType:''
+      loginType:'',
+      maxlength: '30'
     }
   },
   // beforeMount(){
@@ -325,12 +340,12 @@ export default {
     this.getArealist()
   },
   mounted() {
-    
+
     this.loginType=localStorage.getItem('loginType')
     this.language = this.getCookie('language')
     console.log("cookie",this.language)
     if(this.language === 'zh_CN'){
-      this.userTelCode='+86' 
+      this.userTelCode='+86'
       this.area=this.lang.areaCN   //"中国 +86"
       this.countryId = 7
       this.country = this.lang.china   //'中国'
@@ -434,7 +449,9 @@ export default {
         this.city = this.$route.query.city_name
         this.cityId = this.$route.query.city_id
         this.details = this.$route.query.address_details
-        this.postal = this.$route.query.zip_code.toString()
+        if(this.$route.query.zip_code != null){
+          this.postal = this.$route.query.zip_code.toString()
+        }
       } else if (address && this.$route.query.type !== 'add') {
         this.title = this.lang.header2
         this.id = address.id
@@ -547,7 +564,7 @@ export default {
           //  _this.cityList.unshift({ id: '', content: this.lang.pleaseChoose })
           }
 
-          
+
         })
         .catch(err => {
           console.log(err)
@@ -597,10 +614,10 @@ export default {
     showCity() {
       console.log("99999",this.cityList.length)
       this.cityId = ''
-      
+
       if(this.cityList.length == 0){
         this.city = '------'
-        
+
       }else {
         this.city = this.lang.city
       }
@@ -642,12 +659,13 @@ export default {
     },
     check(val) {
       this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = false
+
       if ((val === 1 || val === 0) && this.name === '') {
         this.nameText = this.lang.nameText1
         this.nameTrue = true
         return
       }
-      if ((val === 1 || val === 0) && this.name.length > 20) {
+      if ((val === 1 || val === 0) && this.name.length > 30) {
         this.nameText = this.lang.nameText2
         this.nameTrue = true
       }
@@ -656,11 +674,12 @@ export default {
         this.surnameTrue = true
         return
       }
-      if ((val === 2 || val === 0) && this.surname.length > 20) {
+      if ((val === 2 || val === 0) && this.surname.length > 30) {
         this.surnameText = this.lang.surnameText2
         this.surnameTrue = true
-        return fa
+        return
       }
+
       if(this.language === 'zh_CN'){
         if(this.mailbox !== ''){
           if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
@@ -678,19 +697,16 @@ export default {
           if ((val === 7 || val === 0) && !RegMobiles.test(this.phone) ) {
             this.phoneText = this.lang.phoneText2
             this.phoneTrue = true
-          console.log(11111)
             return
           }
         } else {
           if ((val === 7 || val === 0) && !RegMobile.test(this.phone) ) {
             this.phoneText = this.lang.phoneText2
             this.phoneTrue = true
-          console.log(11111)
             return
           }
         }
       } else {
-       console.log("3333333")
         if ((val === 3 || val === 0) && this.mailbox === '') {
           this.mailboxText = this.lang.mailboxText1
           this.mailboxTrue = true
@@ -731,7 +747,7 @@ export default {
         this.countryText = this.lang.countryText
         this.countryTrue = true
       }
-      
+
     },
     // 简体
     createAddressCN() {
@@ -926,6 +942,27 @@ export default {
     },
     showSelect() {
       console.log('6767')
+    },
+    focusFn(k){
+      switch (k){
+        case 1: this.maxlength = '30';
+          break;
+        case 2: this.maxlength = '30';
+          break;
+        case 3: this.maxlength = '60';
+          break;
+        case 4:
+          if(this.area.split('+')[1] == '86'){
+            this.maxlength = '11'
+          }else{
+            this.maxlength = '20'
+          }
+          break;
+        case 5: this.maxlength = '300';
+          break;
+        default: this.maxlength = '30'
+          break;
+      }
     }
   }
 }

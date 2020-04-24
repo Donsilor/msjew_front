@@ -189,7 +189,15 @@
       "delete": "刪除",
       "inputCode": "輸入優惠碼",
       "inputOrSelectCode": "輸入/選擇優惠碼",
-      "exchange": "使用"
+      "exchange": "使用",
+      "useShoppingCard": "使用購物卡",
+		"editOrUnbound": "編輯/解綁購物卡",
+		"shoppingCard": "購物卡",
+		"ultimatelyPay": "實付金額",
+		"NeedPay": "需付金額",
+		"submitSuccessfully": "訂單提交成功!",
+		"PleaseLogin": "請先登錄，才能使用購物卡！",
+		"msg10": "購物車不能為空，請重新添加商品"
     },
     "pay": {
       "pay": "訂單支付",
@@ -208,7 +216,7 @@
       "payType5": "電匯",
       "type5Text": "以電匯方式付款將享有1.5%折扣優惠",
       "type5Text2": "注意，電子支票並非電匯",
-      "paytip":"由於Paydallor不支持“人民幣”和“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！"
+      "paytip":"由於Paydallor不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！"
     },
     "paySuccess": {
       "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",
@@ -525,7 +533,10 @@
       "received": "已確認收貨",
       "confirmCancellationOrder": "確認取消订单",
       "canceled": "已取消订单",
-      "paytips": "電匯指引"
+	  "paytips": "電匯指引",
+	  "shoppingCard": "購物卡",
+	  "ultimatelyPay": "實付金額",
+	  "NeedPay": "需付金額"
     }
   },
   "custom-made": {
@@ -2068,24 +2079,60 @@
     "leaveAMessage": "留言訊息",
     "submit": "提 交",
 
-    "callUs": "聯絡我們",
-    "store": "門店",
-    "storeName": "香港 - 環貿中心",
-    "address": "地址",
-    "addressDetail": "香港中環亞畢諾道3號環球貿易中心2304室（*必須預約）",
-    "tel": "電話",
-    "email": "電郵",
+		"callUs": "聯絡我們",
+		"store": "門店",
+		"storeName": "香港 - 環貿中心",
+		"address": "地址",
+		"addressDetail": "香港中環亞畢諾道3號環球貿易中心2304室（*必須預約）",
+		"tel": "電話",
+		"email": "電郵",
 
-    "submitSuccessTitle": "提交成功",
-    "submitSuccessDesc": "我們將在一個工作天內儘快與您確認預約",
-    "submitFailTitle": "提交失敗",
-    "submitFailDesc": "請勿重複提交，如有疑問請聯絡客服",
-    "confirm": "確認",
-    "bookTimeError": "請選擇正確的預約時間",
-    "inputTheLastName": "請輸入正確的名稱",
-    "inputTheFirstName": "請輸入正確的姓氏",
-    "inputTelphone": "請輸入正確的電話",
-    "selectTheCorrectDate": "請選擇正確的日期",
-    "selectAnAppointmentTime": "請選擇預約時間"
-  }
+		"submitSuccessTitle": "提交成功",
+		"submitSuccessDesc": "我們將在一個工作天內儘快與您確認預約",
+		"submitFailTitle": "提交失敗",
+		"submitFailDesc": "請勿重複提交，如有疑問請聯絡客服",
+		"confirm": "確認",
+		"bookTimeError": "請選擇正確的預約時間",
+		"inputTheLastName": "請輸入正確的名稱",
+		"inputTheFirstName": "請輸入正確的姓氏",
+		"inputTelphone": "請輸入正確的電話",
+		"selectTheCorrectDate": "請選擇正確的日期",
+		"selectAnAppointmentTime": "請選擇預約時間"
+	},
+	"shoppingCard": {
+		"title": "添加購物卡信息",
+		"cardNumber": "卡號",
+		"cardPassword": "兌換碼",
+		"addCard": "添加購物卡",
+		"chooseAll": "全選",
+		"annotation": "*註：多張購物卡，可依次添加驗證",
+		"cancle": "取消",
+		"confirm": "確定",
+		"clickVerify": "點擊驗證",
+		"verifySucceed": "驗證成功",
+		"verifyFailing": "驗證失敗",
+		"balance": "余額：",
+		"eliminateCard": "消除此卡",
+		"unbound": "解除绑定",
+    "removeCard": "移除",
+		"confirmUnbinding": "是否確認解除綁定？",
+		"verifyValid": "購物卡驗證有效！",
+		"alreadyAdd": "已添加",
+		"verifyInvalid": "卡號或驗證碼輸入有誤！",
+		"invalidCards": "無效購物卡",
+		"anewAdd": "重新添加",
+		"msg1": "購物卡號或兌換碼不能為空！",
+		"msg2": "此卡需要驗證成功才能使用",
+		"msg3": "驗證失敗，請重新填寫",
+		"msg4": "有未驗證或驗證失敗的卡！",
+		"msg5": "不能重復添加！",
+		"msg6": "此卡余額為0，不可使用！",
+		"msg7": "限購買",
+		"msg8": "使用",
+		"msg9": "請添加/勾選有效購物卡！",
+		"msg10": "購物卡添加成功！",
+		"msg11": "解除綁定成功！",
+		"msg12": "此卡还未到使用時間！",
+		"msg13": "此卡已超過使用時間！"
+	}
 }

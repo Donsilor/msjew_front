@@ -14,7 +14,7 @@
       </div>
       <div class="line-box input-line">
         <div v-if="loginType == 1">
-          <bdd-input v-model.trim="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-model.trim="loginInfo.username" :placeholder="lang['email']" @blur="inputKey('username')" :maxl="maxlength" @input="keydown('60')"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsername && hadInput('username') }
@@ -24,7 +24,7 @@
         </div>
         <div class="email-val-box" v-else>
           <!-- <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div> -->
-          <bdd-input v-model.trim="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')"></bdd-input>
+          <bdd-input v-model.trim="loginInfo.username" :placeholder="lang['phone']" @blur="inputKey('username')" :maxl="maxlength" @input="keydown('11')"></bdd-input>
           <div :class="[
             'error-message',
             { active: !trueUsernameM && hadInput('username') }
@@ -36,7 +36,7 @@
         </div>
       </div>
       <div class="line-box input-line">
-        <bdd-input v-model.trim="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')"></bdd-input>
+        <bdd-input v-model.trim="loginInfo.password" :placeholder="lang['password']" :type="'password'" @blur="inputKey('password')" :maxl="maxlength" @input="keydown('30')"></bdd-input>
         <div :class="[
           'error-message',
           { active: !truePassword && hadInput('password') }
@@ -46,7 +46,7 @@
       </div>
       <div class="line-box input-line" v-if="loginType == 2">
         <div class="code">
-          <bdd-input v-model="code" :placeholder="lang['Code']" @blur="inputKey('code')"></bdd-input>
+          <bdd-input v-model="code" :placeholder="lang['Code']" @blur="inputKey('code')" :maxl="maxlength" @input="keydown('15','code')"></bdd-input>
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
           </div>
@@ -92,6 +92,7 @@
         </button>
       </div>
     </section>
+
   </div>
 </template>
 
@@ -115,7 +116,8 @@ export default {
       errorKeys: [],
       language: '',
       loginType: '',
-      registerType:1
+      registerType:1,
+      maxlength: '30'
     }
   },
   computed: {
@@ -330,7 +332,18 @@ export default {
           _this.$toast.show(err.message)
           // _this.getVerifyStatus()
         })
+    },
+    keydown(k, j){
+      this.maxlength = k;
+
+      if(j && j == 'code'){
+        // var reg = /^\d$/;
+        // if(!reg.test(this.code.slice(-1))){
+          // this.code = this.code.slice(0, -1)
+        // }
+      }
     }
+
   }
 }
 </script>

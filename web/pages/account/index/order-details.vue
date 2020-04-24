@@ -141,7 +141,7 @@
         <div class="goods-bot-bar" />
       </div>
     </div>
- 
+
     <!--<div v-for="(detail, nb) in data.outDetails" :key="nb" class="info-block">
       <div class="block-title">{{ $t(`${lang}.deliveryInfo`) }}{{ n + 1 }}</div>
       <div class="addr-info">
@@ -288,6 +288,12 @@
               {{ data.coinCode }} {{ formatNumber(data.productAmount) }}
             </div>
           </div>
+          <div class="info-line" v-for="item in cardList">
+            <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
+            </div>
+          </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.coupon`) }}</div>
             <div class="ff color-pink">
@@ -321,7 +327,14 @@
           <div class="info-line">
             <div class="label big-label">{{ $t(`${lang}.orderTotal`) }}</div>
             <div class="ff big-ff">
-              {{ data.coinCode }} {{ formatNumber(data.orderAmount) }}
+              <!-- {{ data.coinCode }} {{ formatNumber(data.orderAmount) }} -->
+              {{ data.coinCode }} {{ data.orderAmount }}
+            </div>
+          </div>
+          <div class="info-line">
+            <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
+            <div class="ff big-ff">
+              {{ data.coinCode }} {{ data.payAmount }}
             </div>
           </div>
         </div>
@@ -361,7 +374,8 @@ export default {
         taxNumber: ""
       },
       type:'',
-      headType:''
+      headType:'',
+      cardList: []
     }
   },
   computed: {
@@ -431,6 +445,7 @@ export default {
       return status_value[status];
     },
     getData() {
+      var that = this;
       console.log("id",this.oid)
       this.$axios
         .get('/web/member/order/detail', {
@@ -439,8 +454,7 @@ export default {
         .then(res => {
           this.data = res.data
           this.invoice = res.data.invoice
-          console.log(this.invoice)
-          
+
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
           )
@@ -458,6 +472,11 @@ export default {
           } else {
             this.headType = this.$t(`${lang_invoice}.company`)
           }
+
+          if(res.data.cards.length != 0){
+            that.cardList = res.data.cards;
+          }
+
         })
         .catch(err => {
           if (!err.response) {
@@ -1061,5 +1080,10 @@ export default {
       }
     }
   }
+}
+
+.fontSize{
+  font-size: 12px;
+  color: #777;
 }
 </style>

@@ -67,7 +67,7 @@
         <!-- <div class="tips">
           <i class="icon iconfont icongantanhao1"></i><span>{{ lang2.tips }}</span>
         </div> -->
-        <!-- <div class="btn" @click="goPaySuccess"> 
+        <!-- <div class="btn" @click="goPaySuccess">
           @click="goPaySuccess"
           {{ list2[typeIndex].title }}
           {{ lang2.goPay }}
@@ -121,8 +121,14 @@
             :placeholder="lang.more"
           ></textarea>
         </div>
+
+        <!-- 添加购物卡 -->
+        <div class="clf">
+          <div class="addShoppingCard fr" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
+        </div>
         <!-- 开具发票 -->
-        <div class="invoice" v-if="this.areaId === '1'">
+        <!-- <div class="invoice" v-if="this.areaId === '1'"> -->
+        <div class="invoice" v-if="'1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -196,6 +202,12 @@
               {{ formatMoney( productAmount) }}</span
             >
           </li>
+					<li v-for="item in useAmount">
+					  <div>
+					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
+					  </div>
+					  <span class="color-pink">-{{ coin }} {{ item.useAmount }}</span>
+					</li>
           <li v-show="preferFee > 0">
             <div>
               <span>{{ lang.preferFee }}</span>
@@ -236,14 +248,19 @@
             </div>
             <span>+{{ coin }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
-          <li>
+          <li class="order-pay">
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ showOrderAmount }}</span>
+            ><span>{{ coin }} {{ orderTotalAmount }}</span>
+          </li>
+          <li class="order-pay" style="border-top: 0;margin-top: 0;">
+            <span>{{ lang.NeedPay }}</span
+            ><span>{{ coin }} {{ ultimatelyPay }}</span>
           </li>
         </ul>
       </div>
     </div>
+
     <!-- 未登录 -->
     <!-- <div v-if="!isLogin" :class="['submit']" @click="createOrder2">
       <span>{{ lang.sureOrder }}</span>
@@ -252,11 +269,12 @@
     <div :class="['submit']" @click="createOrder">
       <span>{{ lang.sureOrder }}</span>
     </div>
-    
+
     <order-express ref="orderExpress"></order-express>
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
+    <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
   </div>
 </template>
 
@@ -267,6 +285,7 @@ import OrderCouponTips from '@/components/white-board/order-coupon-tips/index.vu
 import { Email } from '../../assets/js/require-lee'
 import { formatMoney } from '@/assets/js/filterUtil.js'
 import NeedKnow from '@/components/cart/needKnow.vue'
+import ShoppingCard from '@/components/shopping-card/index'
 const storage = process.client ? require('good-storage').default : {}
 // console.log(storage, 'storage')
 export default {
@@ -276,12 +295,13 @@ export default {
     Header,
     CartList,
     OrderCouponTips,
-    NeedKnow
+    NeedKnow,
+    ShoppingCard
   },
   data() {
     return {
       kai:false,
-      url:'', 
+      url:'',
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
       coin: this.$store.state.coin,
@@ -328,7 +348,6 @@ export default {
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
       needtips: false,
 
-
       lang: this.LANGUAGE.cart.sureOrder,
       canSubmit: false,
       coin: this.$store.state.coin,
@@ -355,11 +374,20 @@ export default {
       session: '',
       info:[],
       totlePrice:'',
-      areaId: this.$store.state.areaId
+      areaId: this.$store.state.areaId,
+      ifShowShoppingCard: false,
+      cardList: [],
+      useAmount: [],
+      cardType: 1,
+      goodsListLine: [],
+      scrollTop: 0,
+      orderTotalAmount: 0,
+      ultimatelyPay: 0,
+      currency: ''
     }
   },
   computed: {
-    
+
     selectedCouponInfo() {
       const _this = this
       let result = {}
@@ -408,20 +436,22 @@ export default {
       // console.log('this.allFee=====>', JSON.stringify(this.allFee))
        if (this.isLogin){
          if (this.allFee.orderAmount === null) {
-          //  console.log(11111) 
-           result = this.formatMoney(this.productAmount)
+          //  console.log(11111)
+           // result = this.formatMoney(this.productAmount)
+           result = this.formatMoney(this.allFee.payAmount)
          } else  {
-          //  console.log(22222) 
-           result = this.formatMoney(this.allFee.orderAmount)
-         } 
+          //  console.log(22222)
+           // result = this.formatMoney(this.allFee.orderAmount)
+           result = this.formatMoney(this.allFee.payAmount)
+         }
        } else {
          if (this.allFee.order_amount === null) {
-          //  console.log(11111) 
+          //  console.log(11111)
            result = this.formatMoney(this.goods_amount)
          } else  {
-          //  console.log(22222) 
+          //  console.log(22222)
            result = this.formatMoney(this.allFee.order_amount)
-         } 
+         }
        }
        this.totlePrice = result
        console.log("dddd",this.totlePrice)
@@ -433,10 +463,10 @@ export default {
     //     this.kai = this.$route.query.invoice !== ''
   },
   mounted() {
-    console.log("query",this.$route.params.invoice)
+    // console.log("query",this.$route.params.invoice)
     this.$nextTick(() => {
       this.kai = typeof this.$route.params.invoice !== 'undefined' && this.$route.params.invoice.invoice_title != ''
-      console.log(this.kai)
+      // console.log(this.kai)
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
       } else {
@@ -446,21 +476,23 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
-      // console.log(this.list,'fffffffffffff')
       this.planDays = this.allFee.planDays
       // console.log("allFee",this.planDays)
       this.idList = []
       this.productAmount = 0
-      this.list.map((item, index) => {
-        // console.log("sssss=====",item.id)
-        this.idList.push(item.id)
-        // this.idList.push(item.localSn)
-        //  console.log("sssss",this.productAmount)
-        // this.productAmount = this.productAmount + item.salePrice   localSn
-        this.productAmount = parseFloat(this.productAmount + item.salePrice) 
-        // console.log("productAmount",this.productAmount)
-      })
-     
+      if(this.list != 0){
+        this.list.map((item, index) => {
+          // console.log("sssss=====",item.id)
+          this.idList.push(item.id)
+          this.goodsListLine.push(item.simpleGoodsEntity.categoryId)
+          // this.idList.push(item.localSn)
+          //  console.log("sssss",this.productAmount)
+          // this.productAmount = this.productAmount + item.salePrice   localSn
+          this.productAmount = parseFloat(this.productAmount + item.salePrice)
+          // console.log("productAmount",this.productAmount)
+        })
+      }
+
       this.getData() // 获取地址
       this.getCouponList() // 获取优惠券列表
 
@@ -477,7 +509,8 @@ export default {
         name: 'cart-invoice',
         query:{
           price:this.totlePrice,
-          kai:this.kai
+          kai:this.kai,
+          ultimatelyPay: this.ultimatelyPay
         }
       })
     },
@@ -490,7 +523,7 @@ export default {
       }else if(this.typeIndex == 1){
         pay = 2
       }
-      
+
       if(pay!==6){
         this.$toast.show(this.lang.firstLogin)
       }
@@ -698,59 +731,200 @@ export default {
         }
       })
     },
+
+    // // 登录下获取相关费用
+    // getTex(k) {
+    //   const cards = k || '';
+    //   this.canSubmit = false
+    //   let data = {}
+    //   let url = ''
+    //   if (this.isLogin) {
+    //     url = `/web/member/order/tax`
+    //     data = {
+    //       addressId: this.address.id,
+    //       cards: cards,
+    //       // preferFee: this.preferFee,
+    //       cartIds: this.idList.join(',')
+    //     }
+    //   } else {
+    //     // console.log("this.list",this.list)
+    //     url = `/web/member/order-tourist/tax`
+    //     const goodsCartList=[]
+    //     for (const i in this.list) {
+    //       const o = {
+    //         createTime: this.list[i].createTime,
+    //         goods_num: 1,
+    //         goodsDetailsId: this.list[i].goodsDetailsId,
+    //         goods_id: this.list[i].goodsDetailsId,
+    //         group_id: this.list[i].groupId,
+    //         goods_type: this.list[i].goodsStatus,
+    //         group_type:
+    //           this.list[i].groupType !== 0 ? this.list[i].groupType : null
+    //       }
+    //       goodsCartList.push(o)
+    //       // console.log("list........",o)
+    //     }
+    //     data = {goodsCartList:goodsCartList}
+    //     // console.log("list........",data)
+    //   }
+
+    //   this.$axios({
+    //     method: 'post',
+    //     url: url,
+    //     data: data
+    //   })
+    //     .then(res => {
+    //       // console.log("费用",res)
+    //       this.canSubmit = true
+    //       this.allFee = res
+
+    //       if(res.cards !== undefined){
+    //         this.useAmount = JSON.parse(JSON.stringify(res.cards))
+    //       }
+
+    //       this.orderTotalAmount = res.orderAmount;
+    //       this.ultimatelyPay = res.payAmount;
+    //       this.currency = res.currency;
+
+    //       this.planDays = this.allFee.planDays
+
+    //       // this.info=res.details
+    //       // console.log("费用>>>>>>>>",this.info)
+    //     })
+    //     .catch(err => {
+    //       this.canSubmit = false
+    //       this.$toast.show(err.message)
+    //       this.allFee = this.defaultAllFeeInfo()
+
+    //       // console.log("ggg",this.allFee)
+    //     })
+
+
     // 登录下获取相关费用
-    getTex() {
+    getTex(k) {
+      var cards = k || '';
+      var cardL = sessionStorage.getItem('cardList');
+
+      if(cardL != null){
+        this.cardList = JSON.parse(cardL);
+        cards = JSON.parse(cardL);
+      }
+
       this.canSubmit = false
       let data = {}
       let url = ''
       if (this.isLogin) {
-        url = `/web/member/order/tax`
-        data = {
-          addressId: this.address.id,
-          // preferFee: this.preferFee,
-          cartIds: this.idList.join(',')
+        if(this.idList.length){
+          url = `/web/member/order/tax`
+          data = {
+            addressId: this.address.id,
+            cards: cards,
+            // preferFee: this.preferFee,
+            cartIds: this.idList.join(',')
+          }
+
+          this.$axios({
+            method: 'post',
+            url: url,
+            data: data
+          })
+          .then(res => {
+            // console.log("费用",res)
+            this.canSubmit = true
+            this.allFee = res
+
+            if(res.cards !== undefined){
+              this.cardType = 2;
+              this.useAmount = JSON.parse(JSON.stringify(res.cards))
+            }else{
+              this.cardType = 1;
+            }
+
+            this.orderTotalAmount = res.orderAmount;
+            this.ultimatelyPay = res.payAmount;
+            this.currency = res.currency;
+
+            this.planDays = this.allFee.planDays
+
+            // this.info=res.details
+            // console.log("费用>>>>>>>>",this.info)
+          })
+          .catch(err => {
+            this.canSubmit = false
+            this.$toast.show(err.message)
+            this.allFee = this.defaultAllFeeInfo()
+
+            // console.log("ggg",this.allFee)
+          })
+        }else{
+          var that = this;
+          this.$toast.show(that.lang.msg10)
+          var timer = setTimeout(function(){
+            that.$router.replace('/cart');
+            clearTimeout(timer)
+          },2000)
         }
       } else {
         // console.log("this.list",this.list)
-        url = `/web/member/order-tourist/tax`
-        const goodsCartList=[]
-        for (const i in this.list) {
-          const o = {            
-            createTime: this.list[i].createTime,
-            goods_num: 1,
-            goodsDetailsId: this.list[i].goodsDetailsId,
-            goods_id: this.list[i].goodsDetailsId,
-            group_id: this.list[i].groupId,
-            goods_type: this.list[i].goodsStatus,
-            group_type:
-              this.list[i].groupType !== 0 ? this.list[i].groupType : null
+        if(this.list.length){
+          url = `/web/member/order-tourist/tax`
+          const goodsCartList=[]
+          for (const i in this.list) {
+            const o = {
+              createTime: this.list[i].createTime,
+              goods_num: 1,
+              goodsDetailsId: this.list[i].goodsDetailsId,
+              goods_id: this.list[i].goodsDetailsId,
+              group_id: this.list[i].groupId,
+              goods_type: this.list[i].goodsStatus,
+              group_type:
+                this.list[i].groupType !== 0 ? this.list[i].groupType : null
+            }
+            goodsCartList.push(o)
+            // console.log("list........",o)
           }
-          goodsCartList.push(o)
-          // console.log("list........",o)
+          data = {goodsCartList:goodsCartList}
+          // console.log("list........",data)
+          this.$axios({
+            method: 'post',
+            url: url,
+            data: data
+          })
+          .then(res => {
+            // console.log("费用",res)
+            this.canSubmit = true
+            this.allFee = res
+
+            if(res.cards !== undefined){
+              this.useAmount = JSON.parse(JSON.stringify(res.cards))
+            }
+
+            this.orderTotalAmount = res.orderAmount;
+            this.ultimatelyPay = res.payAmount;
+            this.currency = res.currency;
+
+            this.planDays = this.allFee.planDays
+
+            // this.info=res.details
+            // console.log("费用>>>>>>>>",this.info)
+          })
+          .catch(err => {
+            this.canSubmit = false
+            this.$toast.show(err.message)
+            this.allFee = this.defaultAllFeeInfo()
+
+            // console.log("ggg",this.allFee)
+          })
+        }else{
+          var that = this;
+          this.$toast.show(that.lang.msg10)
+          var timer = setTimeout(function(){
+            that.$router.replace('/cart');
+            clearTimeout(timer)
+          },2000)
         }
-        data = {goodsCartList:goodsCartList}
-        // console.log("list........",data)
       }
-      this.$axios({
-        method: 'post',
-        url: url,
-        data: data
-      })
-        .then(res => {
-          // console.log("费用",res)
-          this.canSubmit = true
-          this.allFee = res
-          this.planDays = this.allFee.planDays
-          // this.info=res.details
-          // console.log("费用>>>>>>>>",this.info)
-        })
-        .catch(err => {
-          this.canSubmit = false
-          this.$toast.show(err.message)
-          this.allFee = this.defaultAllFeeInfo()
-          
-          // console.log("ggg",this.allFee)
-        })
+
     },
     // 获取地址
     getData() {
@@ -857,7 +1031,8 @@ export default {
             // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
-            invoice: info
+            invoice: info,
+            card: this.cardList
             // afterMail: this.mailbox,
             // recvType: 1,
             // preferId: this.selectCouponId ? this.selectCouponId : null,
@@ -866,12 +1041,19 @@ export default {
         })
           .then(res => {
             // console.log("总额",res)
-            this.$router.replace({
-              name: 'cart-pay',
-              query: {
-                info: JSON.stringify(res)
-              }
-            })
+            if(res.payStatus == 1){
+              this.$toast.show(this.lang.submitSuccessfully);
+              this.$router.replace({
+                path: '/personal/order',
+              })
+            }else{
+              this.$router.replace({
+                name: 'cart-pay',
+                query: {
+                  info: JSON.stringify(res)
+                }
+              })
+            }
           })
           .catch(err => {
             this.$toast.show(err.message)
@@ -895,49 +1077,53 @@ export default {
         }
         // console.log("data",data)
         // console.log("paytype",this.$route.query)
-        this.$axios({
-          method: 'post',
-          url: `/web/member/order-tourist/create`,
-          data: {
-            goodsCartList:data,
-            invoice:this.$route.params.invoice,
-            tradeType:'wap',
-            coinType:this.$store.state.coin,
-            returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
-          }
-        })
-          .then(res => {
-            // console.log("返回结果",res)
-            // const arr = []
-            // this.list.map((item, index) => {
-            //   console.log(arr)
-            //   arr.push(item.localSn)
-            //   this.$store.dispatch('removeCart', arr)
-            // })
-            if (res.config) {
-              window.location.replace(res.config)
-            } else if (!res.config){
-              // console.log(88888888)
-              this.isPay = false
-              this.$router.replace({
-                name: 'complete-paySuccess-orderId-price-coinType',
-                params: {
-                  orderId: this.info.orderId,
-                  price: this.info.orderAmount,
-                  coinType: this.info.coinType
-                }
-              })
+        if(data.length){
+          this.$axios({
+            method: 'post',
+            url: `/web/member/order-tourist/create`,
+            data: {
+              goodsCartList:data,
+              invoice:this.$route.params.invoice,
+              tradeType:'wap',
+              coinType:this.$store.state.coin,
+              returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
             }
-            // this.$router.replace({
-            //   name: 'cart-pay',
-            //   query: {
-            //     info: JSON.stringify(res)
-            //   }
-            // })
           })
-          .catch(err => {
-            this.$toast.show(err.message)
-          })
+            .then(res => {
+              // console.log("返回结果",res)
+              // const arr = []
+              // this.list.map((item, index) => {
+              //   console.log(arr)
+              //   arr.push(item.localSn)
+              //   this.$store.dispatch('removeCart', arr)
+              // })
+              if (res.config) {
+                window.location.replace(res.config)
+              } else if (!res.config){
+                // console.log(88888888)
+                this.isPay = false
+                this.$router.replace({
+                  name: 'complete-paySuccess-orderId-price-coinType',
+                  params: {
+                    orderId: this.info.orderId,
+                    price: this.info.orderAmount,
+                    coinType: this.info.coinType
+                  }
+                })
+              }
+              // this.$router.replace({
+              //   name: 'cart-pay',
+              //   query: {
+              //     info: JSON.stringify(res)
+              //   }
+              // })
+            })
+            .catch(err => {
+              this.$toast.show(err.message)
+            })
+          }else{
+            // console.log('')
+          }
       }
     },
     gologin(type) {
@@ -965,8 +1151,64 @@ export default {
       this.$router.replace({
         name: name
       })
+    },
+    // 关闭弹窗
+    closeCardPop(k){
+      this.ifShowShoppingCard = false;
+
+      if(k != true && k != ''){
+        this.cardList = k;
+        sessionStorage.setItem('cardList', JSON.stringify(k))
+        this.getTex(k);
+        this.cardType = 2;
+      }
+
+      if(k == ''){
+        this.cardType = 1;
+        this.cardList = '';
+        sessionStorage.removeItem('cardList')
+        this.getTex();
+      }
+    },
+    addCard(){
+      if(this.isLogin){
+        this.ifShowShoppingCard = true
+      }else{
+        var that = this;
+        this.$toast.show(that.lang.PleaseLogin);
+
+        const topC = document.getElementsByClassName('layout-main')[0];
+
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 5)
+          topC.scrollTop = that.scrollTop + ispeed
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+      }
     }
+
+  },
+
+  // watch:{
+  //    $route: {
+  //       handler: function(val, oldVal){
+  //         console.log(val);
+  //         sessionStorage.removeItem('cardList');
+  //       },
+  //       // 深度观察监听
+  //       deep: true
+  //     }
+  // }
+
+  beforeRouteLeave(to, from, next){
+    if(to.path !== '/cart/invoice'){
+      sessionStorage.removeItem('cardList')
+    }
+    next()
   }
+
 }
 </script>
 
@@ -1335,9 +1577,10 @@ export default {
             color: rgba(153, 153, 153, 1);
           }
         }
-        li:last-child {
-          line-height: 34px;
-          margin-top: 5px;
+        li.order-pay, {
+          line-height: 20px;
+          margin-top: 10px;
+          padding-top: 10px;
           border-top: 1px solid #dddddd;
           span:last-child {
             font-size: 20px;
@@ -1514,5 +1757,29 @@ export default {
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
   }
+}
+
+.color-pink{
+  color: #f29b87;
+}
+
+.addShoppingCard{
+  float: right;
+  height: 28px;
+  line-height: 26px;
+  padding: 0 6px;
+  border: 1px solid #f29b87;
+  margin-bottom: 20px;
+  color: #f29b87;
+  border-radius: 4px;
+}
+
+.clf::after{
+  display: block;
+  height: 0;
+  content: '.';
+  visibility: hidden;
+  clear: both;
+  opacity: 0;
 }
 </style>

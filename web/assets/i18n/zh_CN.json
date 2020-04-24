@@ -446,260 +446,260 @@
       "returnAndRefundPolicy": "退款保障条款及细则",
       "findYourRingSize": "找出您的戒指尺寸",
 
-      "aboutBDD": "关于BDD",
-      "BDDBrandStory": "BDD品牌故事",
-      "diamondKnowledge": "钻石知识",
-      "paymentMethods": "付款方式",
+			"aboutBDD": "关于BDD",
+			"BDDBrandStory": "BDD品牌故事",
+			"diamondKnowledge": "钻石知识",
+			"paymentMethods": "付款方式",
 
-      "BDDPolicy": "BDD政策",
-      "freeShippingService": "免费送递服务",
-      "deliveryPolicy": "送货政策",
-      "internationalPolicy": "国际政策",
-      "privacyPolicy": "私隐政策",
-      "termsAndConditions": "条款及细则",
+			"BDDPolicy": "BDD政策",
+			"freeShippingService": "免费送递服务",
+			"deliveryPolicy": "送货政策",
+			"internationalPolicy": "国际政策",
+			"privacyPolicy": "私隐政策",
+			"termsAndConditions": "条款及细则",
 
-      "contact": "与我们的珠宝顾问联络",
-      "contactTime": "香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外)",
-      "contactTel": "+852 2165 3905",
-      "contactEmail": "service@bddco.com",
-      "getNew": "获取我們的最新资讯",
-      "footdisc": "*通过注册，您确认已查看私隐政策，并同意BDD Co.收集并使用您的电子邮件和性別，以便通过电子邮件发送新闻，促销和更新。您可以通过取消訂閱或通過 service@BDDCo.com 與我們聯絡，隨時撤銷您的同意。",
-      "copyrightLeft": "與我們的珠寶顧問聯絡： 香港時間(GMT+8)星期一至五上午9時至晚上6時 (香港公眾假期除外)  /  +852 2165 3905  /  service@bddco.com",
-      "copyrightRight": "© 2019 BDD Co. All Rights Reserved."
-    },
-    "sendEmailCode": {
-      "sendCode": "发送验证码",
-      "inputEmail": "請輸入電子郵件",
-      "inputPhone": "请输入正确手机号码",
-      "pleaseWait": "時間正在冷卻，請稍後再試",
-      "error": "錯誤",
-      "sendCodeError": "發送驗證碼失敗",
-      "hadSend": "已發送"
-    },
-    "messageBox": {
-      "sure": "確定",
-      "cancel": "取消"
-    },
-    "noMoreData": {
-      "noMore": "未找到合适的商品，您可以換一个关键词搜索",
-      "changeKeyword": "换个关键词试试",
-      "noGoods": "暂无商品"
-    },
-    "diamondPopovers": {
-      "caratMessage": "克拉是指鑽石的重量，與其大小成正比。使用滑塊或輸入值以查找您有興趣瀏覽的範圍。"
-    },
-    "empty": {
-      "product": "暫無商品",
-      "order": "暫無訂單",
-      "wish": "您的心願單暫無收藏",
-      "cart": "您的購物車內暫無商品,去看看心儀的商品吧",
-      "toShopping": "去逛逛",
-      "search": "未找到合適的商品，您可以換一個關鍵詞搜尋",
-      "comment": "暫無評價",
-      "address": "暫無地址",
-      "compare": "暫無鑽石對比",
-      "changeKeyword": "換個關鍵詞試試"
-    }
-  },
-  "login": {
-    "login": "登录",
-    "registration": "注册",
-    "mailbox": "手机号*",
-    "mailTips": "请输入正确的手机号*",
-    "phoneTips": "手机号码格式不正确，仅支持：大陆手机号！",
-    "emailTips":"请正确输入邮箱",
-    "password": "请输入密码*",
-    "passwordTips": "请输入正确的密码",
-    "repasswordTips": "请确认密码",
-    "logintips": "登陆成功",
-    "forget": "忘记密码？",
-    "phone": "请正确输入手机号",
-    "pwd": "请正确输入密码",
-    "code": "请输入正确验证码",
-    "VerificationCode":"输入验证码*",
-    "codeTips": "请输入正确验证码",
-    "getCode": "获取验证码",
-    "num": "S 后重新获取",
-    "logins": "其他登入方式",
-    "surname": "姓氏",
-    "surnameTips": "请输入正确的姓",
-    "name": "名称",
-    "nameTips": "請輸入正確的名稱",
-    "email": "电邮地址",
-    "pwdType": "设置密码*",
-    "tips":"同意BDD条款及细则方可注册！",
-    "repwdType": "确认密码*",
-    "checked": "登记即代表本人接受",
-    "rule": "BDD条款及细则",
-    "submitRegistry": "注册",
-    "agreePlease": "请勾选BDD条款",
-    "callUs": "与我们的珠宝顾问联络： 香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外) / +852 2165 3905 / 电邮我们",
-    "copyRight": "© 2019 BDD Co. All Rights Reserved.",
-    "nameTooLong": "姓氏和名字最长20个字符!",
-    "registrySuccessful": "注册成功"
-  },
-  "resetPassword": {
-    "mobileTips":"请输入正确手机号",
-    "emailTips":"请输入正确邮箱",
-    "emptyMobile":"手机号不能为空",
-    "emptyEmail":"邮箱不能为空",
-    "schedule1": "请输入电邮",
-    "schedule1-phone": "手机号*",
-    "schedule1-code": "输入验证码*",
-    "schedule1-phonetips": "请输入正确手机号",
-    "schedule2": "身份确认",
-    "schedule2-codetips": "请输入验证码",
-    "setpwd": "设置密码*",
-    "confirmpwd": "确认密码*",
-    "newpwdtips":"请输入新密码",
-    "repwdtips":"请确认新密码",
-    "ConfirmReset":"重置",
-    "schedule3": "重设密码",
-    "schedule4": "完成",
-    "forgetPassword": "找回密码",
-    "address": "请输入您的BDD账户电邮地址*",
-    "phone":"请输入您的手机号*",
-    "tips1": "*您的电邮地址非BDD会员，请先 ",
-    "registration": "登记",
-    "next": "下一步",
-    "hadSendEmailCode1": "我们已经将您重置密码的验证码发送至您的邮箱",
-    "hadSendEmailCode2": "请去您的邮箱查收",
-    "wrongEmail": "写错了地址？",
-    "changeEmail": "去更改邮箱 >>",
-    "inputEmailCode": "请输入验证码",
-    "submit": "确认",
-    "newPassword": "请输入新密码",
-    "newPasswordTip": "密码必须至少6个字符，并包含字母和数字",
-    "confirmPassword": "请确认新密码",
-    "reset": "确认重置",
-    "hadReset": "您的密码已经重新设置，请以新密码登入",
-    "waitTimes": "{second} 秒后自动返回登入页面",
-    "loginNow": "立即登入"
-  },
-  "contactUs": {
-    "callToUs": "致电我们",
-    "welcomeYourTel": "期待您的来店咨询",
-    "welcomeYourTelTip": "香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外)",
-    "emailToUs": "电邮我们",
-    "allQuestionWillBeDeal": "所有问题将在两个工作日内 得到解答",
-    "ourAddress": "我们的办公地址",
-    "bookDate": "预约日期",
-    "bookTime": "请选择预约时间*",
-    "header": "联络我们",
-    "goBack": "返回",
-    "book": "预约来店",
-    "name": "名称",
-    "surname": "姓氏",
-    "birthday": "设置生日日期",
-    "engagementRing": "订婚戒指",
-    "marriageRing": "结婚对戒",
-    "fashionAccessory": "时尚饰品",
-    "leaveAMessage": "留言讯息",
-    "submit": "提 交",
+			"contact": "与我们的珠宝顾问联络",
+			"contactTime": "香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外)",
+			"contactTel": "+852 2165 3905",
+			"contactEmail": "service@bddco.com",
+			"getNew": "获取我們的最新资讯",
+			"footdisc": "*通过注册，您确认已查看私隐政策，并同意BDD Co.收集并使用您的电子邮件和性別，以便通过电子邮件发送新闻，促销和更新。您可以通过取消訂閱或通過 service@BDDCo.com 與我們聯絡，隨時撤銷您的同意。",
+			"copyrightLeft": "與我們的珠寶顧問聯絡： 香港時間(GMT+8)星期一至五上午9時至晚上6時 (香港公眾假期除外)  /  +852 2165 3905  /  service@bddco.com",
+			"copyrightRight": "© 2019 BDD Co. All Rights Reserved."
+		},
+		"sendEmailCode": {
+			"sendCode": "发送验证码",
+			"inputEmail": "請輸入電子郵件",
+			"inputPhone": "请输入正确手机号码",
+			"pleaseWait": "時間正在冷卻，請稍後再試",
+			"error": "錯誤",
+			"sendCodeError": "發送驗證碼失敗",
+			"hadSend": "已發送"
+		},
+		"messageBox": {
+			"sure": "確定",
+			"cancel": "取消"
+		},
+		"noMoreData": {
+			"noMore": "未找到合适的商品，您可以換一个关键词搜索",
+			"changeKeyword": "换个关键词试试",
+			"noGoods": "暂无商品"
+		},
+		"diamondPopovers": {
+			"caratMessage": "克拉是指鑽石的重量，與其大小成正比。使用滑塊或輸入值以查找您有興趣瀏覽的範圍。"
+		},
+		"empty": {
+			"product": "暫無商品",
+			"order": "暫無訂單",
+			"wish": "您的心願單暫無收藏",
+			"cart": "您的購物車內暫無商品,去看看心儀的商品吧",
+			"toShopping": "去逛逛",
+			"search": "未找到合適的商品，您可以換一個關鍵詞搜尋",
+			"comment": "暫無評價",
+			"address": "暫無地址",
+			"compare": "暫無鑽石對比",
+			"changeKeyword": "換個關鍵詞試試"
+		}
+	},
+	"login": {
+		"login": "登录",
+		"registration": "注册",
+		"mailbox": "手机号*",
+		"mailTips": "请输入正确的手机号*",
+		"phoneTips": "手机号码格式不正确，仅支持：大陆手机号！",
+		"emailTips": "请正确输入邮箱",
+		"password": "请输入密码*",
+		"passwordTips": "请输入正确的密码",
+		"repasswordTips": "请确认密码",
+		"logintips": "登陆成功",
+		"forget": "忘记密码？",
+		"phone": "请正确输入手机号",
+		"pwd": "请正确输入密码",
+		"code": "请输入正确验证码",
+		"VerificationCode": "输入验证码*",
+		"codeTips": "请输入正确验证码",
+		"getCode": "获取验证码",
+		"num": "S 后重新获取",
+		"logins": "其他登入方式",
+		"surname": "姓氏",
+		"surnameTips": "请输入正确的姓",
+		"name": "名称",
+		"nameTips": "請輸入正確的名稱",
+		"email": "电邮地址",
+		"pwdType": "设置密码*",
+		"tips": "同意BDD条款及细则方可注册！",
+		"repwdType": "确认密码*",
+		"checked": "登记即代表本人接受",
+		"rule": "BDD条款及细则",
+		"submitRegistry": "注册",
+		"agreePlease": "请勾选BDD条款",
+		"callUs": "与我们的珠宝顾问联络： 香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外) / +852 2165 3905 / 电邮我们",
+		"copyRight": "© 2019 BDD Co. All Rights Reserved.",
+		"nameTooLong": "姓氏和名字最长20个字符!",
+		"registrySuccessful": "注册成功"
+	},
+	"resetPassword": {
+		"mobileTips": "请输入正确手机号",
+		"emailTips": "请输入正确邮箱",
+		"emptyMobile": "手机号不能为空",
+		"emptyEmail": "邮箱不能为空",
+		"schedule1": "请输入电邮",
+		"schedule1-phone": "手机号*",
+		"schedule1-code": "输入验证码*",
+		"schedule1-phonetips": "请输入正确手机号",
+		"schedule2": "身份确认",
+		"schedule2-codetips": "请输入验证码",
+		"setpwd": "设置密码*",
+		"confirmpwd": "确认密码*",
+		"newpwdtips": "请输入新密码",
+		"repwdtips": "请确认新密码",
+		"ConfirmReset": "重置",
+		"schedule3": "重设密码",
+		"schedule4": "完成",
+		"forgetPassword": "找回密码",
+		"address": "请输入您的BDD账户电邮地址*",
+		"phone": "请输入您的手机号*",
+		"tips1": "*您的电邮地址非BDD会员，请先 ",
+		"registration": "登记",
+		"next": "下一步",
+		"hadSendEmailCode1": "我们已经将您重置密码的验证码发送至您的邮箱",
+		"hadSendEmailCode2": "请去您的邮箱查收",
+		"wrongEmail": "写错了地址？",
+		"changeEmail": "去更改邮箱 >>",
+		"inputEmailCode": "请输入验证码",
+		"submit": "确认",
+		"newPassword": "请输入新密码",
+		"newPasswordTip": "密码必须至少6个字符，并包含字母和数字",
+		"confirmPassword": "请确认新密码",
+		"reset": "确认重置",
+		"hadReset": "您的密码已经重新设置，请以新密码登入",
+		"waitTimes": "{second} 秒后自动返回登入页面",
+		"loginNow": "立即登入"
+	},
+	"contactUs": {
+		"callToUs": "致电我们",
+		"welcomeYourTel": "期待您的来店咨询",
+		"welcomeYourTelTip": "香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外)",
+		"emailToUs": "电邮我们",
+		"allQuestionWillBeDeal": "所有问题将在两个工作日内 得到解答",
+		"ourAddress": "我们的办公地址",
+		"bookDate": "预约日期",
+		"bookTime": "请选择预约时间*",
+		"header": "联络我们",
+		"goBack": "返回",
+		"book": "预约来店",
+		"name": "名称",
+		"surname": "姓氏",
+		"birthday": "设置生日日期",
+		"engagementRing": "订婚戒指",
+		"marriageRing": "结婚对戒",
+		"fashionAccessory": "时尚饰品",
+		"leaveAMessage": "留言讯息",
+		"submit": "提 交",
 
-    "callUs": "联络我们",
-    "store": "门店",
-    "storeName": "香港 - 环贸中心",
-    "address": "地址",
-    "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
-    "tel": "电话",
-    "email": "电邮",
+		"callUs": "联络我们",
+		"store": "门店",
+		"storeName": "香港 - 环贸中心",
+		"address": "地址",
+		"addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
+		"tel": "电话",
+		"email": "电邮",
 
-    "submitSuccessTitle": "提交成功",
-    "submitSuccessDesc": "我们将在一个工作天内尽快与您确认预约",
-    "submitFailTitle": "提交失败",
-    "submitFailDesc": "请勿重复提交，如有疑问请联络客服",
-    "confirm": "确认",
-    "bookTimeError": "请选择正确的预约时间",
-    "inputTheLastName": "请输入正确的名称",
-    "inputTheFirstName": "请输入正确的姓氏",
-    "inputTelphone": "请输入正确的电话",
-    "selectTheCorrectDate": "请选择正确的日期",
-    "selectAnAppointmentTime": "请选择预约时间"
-  },
-  "index": {
-    "designYourEngagementRing": "设计自己的订婚戒指",
-    "startFromDiamond": "从选择钻石开始",
-    "engagementRings": "订婚系列",
-    "weddingAnd": "婚礼和",
-    "anniversary": "周年纪念",
-    "fineJewelry": "时尚钻饰",
-    "haveProfessionalCertificate": "BDD Co.钻石珠宝均附有专业证书",
-    "professionalCertificateInfo": "BDD Co.提供的钻石珠宝饰品均由国家级鉴定机构，其中包括美国宝石协会（简称GIA）和比利时钻石高阶层议会（简称HRD）进行分析并定级，这些鉴定组织以其严谨、一致和公正的鉴定钻石而享誉全球钻石界。",
-    "startYourDiamondCheck": "立刻开始您的钻石检查",
-    "chooseYourDiamond": "挑选您的钻石",
-    "360DiamondInfo": "以360°高清旋转实际钻石，最大放大40倍触手可及的世界上最大的裸钻系列之一",
-    "round": "圆形",
-    "roundDesc": "最能透过 58 个刻面绽放光芒",
-    "princessSquare": "公主方形",
-    "princessSquareDesc": "美丽的光华及独特的切割",
-    "octagonalTrapezoid": "八角梯形",
-    "octagonalTrapezoidDesc": "长线条营造出优雅精致的外观",
-    "laserSquare": "雷射方形",
-    "laserSquareDesc": "使用阶梯形切割，能强调宝石的净度",
-    "pincushion": "枕形",
-    "pincushionDesc": "角呈圆形，刻面较大，完美突显钻石光华",
-    "marquise": "榄尖形",
-    "marquiseDesc": "两端呈锥形，并有着耀眼的刻面排列",
-    "octagonalLaser": "八角雷射形",
-    "octagonalLaserDesc": "呈正方形或长方形，四角有斜边",
-    "oval": "椭圆形",
-    "ovalDesc": "包括蛋形和更长更窄的形狀",
-    "dropShape": "水滴形",
-    "dropShapeDesc": "长度會巧妙地形成手指修长的效果",
-    "heartShaped": "心形",
-    "heartShapedDesc": "璀璨刻面，或 58 个菱形与三角形刻面",
-    "findYourSparkle": "find your sparkle",
-    "jewelry": "珠宝饰品",
-    "goodForYouEverywhere": "在各种场所，我们的钻石高级珠宝系列将给予独一无二的你增添光彩 每件作品均经过精心手工制作，打造出令人难忘的奢华",
-    "eternityRingsSlow": "eternity rings",
-    "eternalRing": "永恒戒指",
-    "eternityRings": "ETERNITY RINGS",
-    "eternityRingsInfo": "女士的永恒戒指是周年纪念日和特殊场合的完美礼物。一个满镶的永恒戒，与您的订婚戒指或者结婚戒指一起佩戴时闪闪发光。",
-    "explore": "EXPLORE",
-    "menWedding": "men's wedding",
-    "menWeddingRings": "男士结婚戒指",
-    "menWeddingRingsInfo": "男士经典结婚戒指是任何男士的完美选择，简单而粗狂的线条不失儒雅，佩戴在手上总是看起来很棒。",
-    "menWeddingRingsCapital": "MEN'S WEDDING RINGS",
-    "discover": "DISCOVER",
-    "diamondStuds": "diamond studs",
-    "diamondStudEarrings": "钻石耳钉",
-    "diamondStudsInfo": "璀璨而迷人的圆形钻石耳钉为任何场合增添经典优雅气质。",
-    "browse": "BROWSE",
-    "yourDiamondWaiting": "您的钻石在这里等待着...",
-    "yourPersonalDiamondConciergeAwaits": "YOUR PERSONAL DIAMOND CONCIERGE AWAITS...",
-    "understand": "了解",
-    "brandStory": "BDD品牌故事",
-    "witnessContentFirstLine": "它，见证求婚、订婚的人生重要时刻",
-    "witnessContentSecondLine": "它，更与您每日相伴",
-    "witnessContentThirdLine": "每一分光泽与火彩，都是源自内心的性情表达一颗称心如意的钻石，会将生活的每一刻，都变成重要时刻",
-    "scheduleAppointment": "KNOW MORE",
-    "expertLevel": "专家级",
-    "customerService": "客戶服务",
-    "customerServiceInfo": "BDD团队中经过认真的钻石专家将为您提供细致而又专业的服务。通过在线聊天、电话和电子邮件帮助您选择合适您的产品。",
-    "contactUs": "CONTACT US"
-  },
-  "weddingRings": {
-    "belongOurRing":"懂你的心 成双成对",
-    "freeCollocation":"自由搭配 爱我所爱",
-    "weddingRings": "WEDDING RINGS",
-    "weddingRing": "结婚戒指",
-    "weddingRingContent": "用BDD结婚戒指说“我愿意”,在纪念日和特殊场合说“我会永远”",
-    "myWeddingRing": "属于我的结婚戒指",
-    "ourWeddingRing": "属于我们的对戒",
-    "morePairRings": "更多对戒",
-    "more": "MORE",
-    "pairRingGuide": "结婚戒指指南",
-    "howToChoosePairRing": "如何选择传统的经典结婚戒指、结婚对戒？",
-    "howToMatchPairRing": "跟您的订婚戒指如何搭配呢？",
-    "knowMore": "了解更多"
-  },
-  "pairRingsList": {
-    "style": "款式",
-    "color": "成色",
-    "allColor": "所有成色",
-    "price": "价格",
-    "to": "至",
+		"submitSuccessTitle": "提交成功",
+		"submitSuccessDesc": "我们将在一个工作天内尽快与您确认预约",
+		"submitFailTitle": "提交失败",
+		"submitFailDesc": "请勿重复提交，如有疑问请联络客服",
+		"confirm": "确认",
+		"bookTimeError": "请选择正确的预约时间",
+		"inputTheLastName": "请输入正确的名称",
+		"inputTheFirstName": "请输入正确的姓氏",
+		"inputTelphone": "请输入正确的电话",
+		"selectTheCorrectDate": "请选择正确的日期",
+		"selectAnAppointmentTime": "请选择预约时间"
+	},
+	"index": {
+		"designYourEngagementRing": "设计自己的订婚戒指",
+		"startFromDiamond": "从选择钻石开始",
+		"engagementRings": "订婚系列",
+		"weddingAnd": "婚礼和",
+		"anniversary": "周年纪念",
+		"fineJewelry": "时尚钻饰",
+		"haveProfessionalCertificate": "BDD Co.钻石珠宝均附有专业证书",
+		"professionalCertificateInfo": "BDD Co.提供的钻石珠宝饰品均由国家级鉴定机构，其中包括美国宝石协会（简称GIA）和比利时钻石高阶层议会（简称HRD）进行分析并定级，这些鉴定组织以其严谨、一致和公正的鉴定钻石而享誉全球钻石界。",
+		"startYourDiamondCheck": "立刻开始您的钻石检查",
+		"chooseYourDiamond": "挑选您的钻石",
+		"360DiamondInfo": "以360°高清旋转实际钻石，最大放大40倍触手可及的世界上最大的裸钻系列之一",
+		"round": "圆形",
+		"roundDesc": "最能透过 58 个刻面绽放光芒",
+		"princessSquare": "公主方形",
+		"princessSquareDesc": "美丽的光华及独特的切割",
+		"octagonalTrapezoid": "八角梯形",
+		"octagonalTrapezoidDesc": "长线条营造出优雅精致的外观",
+		"laserSquare": "雷射方形",
+		"laserSquareDesc": "使用阶梯形切割，能强调宝石的净度",
+		"pincushion": "枕形",
+		"pincushionDesc": "角呈圆形，刻面较大，完美突显钻石光华",
+		"marquise": "榄尖形",
+		"marquiseDesc": "两端呈锥形，并有着耀眼的刻面排列",
+		"octagonalLaser": "八角雷射形",
+		"octagonalLaserDesc": "呈正方形或长方形，四角有斜边",
+		"oval": "椭圆形",
+		"ovalDesc": "包括蛋形和更长更窄的形狀",
+		"dropShape": "水滴形",
+		"dropShapeDesc": "长度會巧妙地形成手指修长的效果",
+		"heartShaped": "心形",
+		"heartShapedDesc": "璀璨刻面，或 58 个菱形与三角形刻面",
+		"findYourSparkle": "find your sparkle",
+		"jewelry": "珠宝饰品",
+		"goodForYouEverywhere": "在各种场所，我们的钻石高级珠宝系列将给予独一无二的你增添光彩 每件作品均经过精心手工制作，打造出令人难忘的奢华",
+		"eternityRingsSlow": "eternity rings",
+		"eternalRing": "永恒戒指",
+		"eternityRings": "ETERNITY RINGS",
+		"eternityRingsInfo": "女士的永恒戒指是周年纪念日和特殊场合的完美礼物。一个满镶的永恒戒，与您的订婚戒指或者结婚戒指一起佩戴时闪闪发光。",
+		"explore": "EXPLORE",
+		"menWedding": "men's wedding",
+		"menWeddingRings": "男士结婚戒指",
+		"menWeddingRingsInfo": "男士经典结婚戒指是任何男士的完美选择，简单而粗狂的线条不失儒雅，佩戴在手上总是看起来很棒。",
+		"menWeddingRingsCapital": "MEN'S WEDDING RINGS",
+		"discover": "DISCOVER",
+		"diamondStuds": "diamond studs",
+		"diamondStudEarrings": "钻石耳钉",
+		"diamondStudsInfo": "璀璨而迷人的圆形钻石耳钉为任何场合增添经典优雅气质。",
+		"browse": "BROWSE",
+		"yourDiamondWaiting": "您的钻石在这里等待着...",
+		"yourPersonalDiamondConciergeAwaits": "YOUR PERSONAL DIAMOND CONCIERGE AWAITS...",
+		"understand": "了解",
+		"brandStory": "BDD品牌故事",
+		"witnessContentFirstLine": "它，见证求婚、订婚的人生重要时刻",
+		"witnessContentSecondLine": "它，更与您每日相伴",
+		"witnessContentThirdLine": "每一分光泽与火彩，都是源自内心的性情表达一颗称心如意的钻石，会将生活的每一刻，都变成重要时刻",
+		"scheduleAppointment": "KNOW MORE",
+		"expertLevel": "专家级",
+		"customerService": "客戶服务",
+		"customerServiceInfo": "BDD团队中经过认真的钻石专家将为您提供细致而又专业的服务。通过在线聊天、电话和电子邮件帮助您选择合适您的产品。",
+		"contactUs": "CONTACT US"
+	},
+	"weddingRings": {
+		"belongOurRing": "懂你的心 成双成对",
+		"freeCollocation": "自由搭配 爱我所爱",
+		"weddingRings": "WEDDING RINGS",
+		"weddingRing": "结婚戒指",
+		"weddingRingContent": "用BDD结婚戒指说“我愿意”,在纪念日和特殊场合说“我会永远”",
+		"myWeddingRing": "属于我的结婚戒指",
+		"ourWeddingRing": "属于我们的对戒",
+		"morePairRings": "更多对戒",
+		"more": "MORE",
+		"pairRingGuide": "结婚戒指指南",
+		"howToChoosePairRing": "如何选择传统的经典结婚戒指、结婚对戒？",
+		"howToMatchPairRing": "跟您的订婚戒指如何搭配呢？",
+		"knowMore": "了解更多"
+	},
+	"pairRingsList": {
+		"style": "款式",
+		"color": "成色",
+		"allColor": "所有成色",
+		"price": "价格",
+		"to": "至",
 
     "title": "对戒戒指",
     "totalCountTitle": "对戒戒指 ({total_count} 款)",
@@ -777,69 +777,69 @@
   "diamondsList": {
     "to": "至",
 
-    "shape": "形狀",
-    "price": "价格",
-    "carat": "克拉",
-    "cut": "切割",
-    "color": "颜色",
-    "clarity": "净度",
+		"shape": "形狀",
+		"price": "价格",
+		"carat": "克拉",
+		"cut": "切割",
+		"color": "颜色",
+		"clarity": "净度",
 
-    "moreFilters": "更多筛选",
-    "polish": "光泽",
-    "symmetry": "对称",
-    "certificate": "证书",
-    "depth": "深度",
-    "facing": "石面",
-    "fluorescence": "萤光",
+		"moreFilters": "更多筛选",
+		"polish": "光泽",
+		"symmetry": "对称",
+		"certificate": "证书",
+		"depth": "深度",
+		"facing": "石面",
+		"fluorescence": "萤光",
 
-    "title": "钻石",
-    "totalCountTitle": "显示 ({total_count} 颗钻石)",
-    "titleDesc": "受欢迎的圆形切割钻石最能透过 58 个刻面绽放光芒，是钻石切割中最精彩的钻石。",
+		"title": "钻石",
+		"totalCountTitle": "显示 ({total_count} 颗钻石)",
+		"titleDesc": "受欢迎的圆形切割钻石最能透过 58 个刻面绽放光芒，是钻石切割中最精彩的钻石。",
 
-    "allDiamonds": "所有钻石",
-    "compare": "对比",
-    "list": "列表",
-    "visual": "视觉",
-    "thumbnail": "缩略图",
-    "addWish": "加入心愿单單",
-    "viewDetail": "查看详情",
-    "clickToCheck": "点击查看",
+		"allDiamonds": "所有钻石",
+		"compare": "对比",
+		"list": "列表",
+		"visual": "视觉",
+		"thumbnail": "缩略图",
+		"addWish": "加入心愿单單",
+		"viewDetail": "查看详情",
+		"clickToCheck": "点击查看",
 
-    "table": "台面",
-    "addCart": "加入购物车"
-  },
-  "engagementRing": {
-    "engagementRings": "ENGAGEMENT RINGS",
-    "engagementRing": "订婚戒指",
-    "designPromptFirstLine": "设计完美的订婚戒指。先选择您喜欢的戒指款式，接着选择添加",
-    "designPromptSecondLine": "一枚明亮的钻石。最后将钻石与美丽戒指相匹配",
-    "choiceFirst": "先选戒托",
-    "diamondFirst": "先选钻石",
-    "howToDesignEngagementRing": "如何设计订婚戒指",
-    "howToDesignAnEngagementRing": "How to Design an Engagement Ring",
-    "more": "MORE",
-    "whyBelieveBdd": "为什么信赖BDD",
-    "whyTrustBdd": "WHY TRUST BDD",
-    "profession": "专业+证书品质",
-    "professionDesc": "在 BDD Co. 购买任何一颗经认证的裸钻前，您可以在我们的网站查看其证书。",
-    "moreProfessionInfo": "了解专业知识",
-    "valueForMoney": "讲究性价比",
-    "valueForMoneyDesc": "致力为客户提供高品质的裸钻与首饰，并坚持以最合理的价格，提供给客户最高质量的选择。",
-    "moreValueForMoneyInfo": "我需要帮助",
-    "warranty": "终身质保",
-    "warrantyDesc": "我们的首饰是根据高标准挑选及制造而成，让客户可安心购买。",
-    "moreWarrantyInfo": "品质与价值",
-    "afterSale": "售后无忧",
-    "afterSaleDesc": "若在可调整尺寸范围内，BDD Co. 会在前6个月内为您提供免费的戒指尺寸调整。",
-    "moreAfterSaleInfo": "退款保障条款及细则",
-    "startYourDiamondCheck": "立刻开始您的钻石检查"
-  },
-  "engagementRingsList": {
-    "style": "款式",
-    "color": "成色",
-    "allColor": "所有成色",
-    "price": "价格",
-    "to": "至",
+		"table": "台面",
+		"addCart": "加入购物车"
+	},
+	"engagementRing": {
+		"engagementRings": "ENGAGEMENT RINGS",
+		"engagementRing": "订婚戒指",
+		"designPromptFirstLine": "设计完美的订婚戒指。先选择您喜欢的戒指款式，接着选择添加",
+		"designPromptSecondLine": "一枚明亮的钻石。最后将钻石与美丽戒指相匹配",
+		"choiceFirst": "先选戒托",
+		"diamondFirst": "先选钻石",
+		"howToDesignEngagementRing": "如何设计订婚戒指",
+		"howToDesignAnEngagementRing": "How to Design an Engagement Ring",
+		"more": "MORE",
+		"whyBelieveBdd": "为什么信赖BDD",
+		"whyTrustBdd": "WHY TRUST BDD",
+		"profession": "专业+证书品质",
+		"professionDesc": "在 BDD Co. 购买任何一颗经认证的裸钻前，您可以在我们的网站查看其证书。",
+		"moreProfessionInfo": "了解专业知识",
+		"valueForMoney": "讲究性价比",
+		"valueForMoneyDesc": "致力为客户提供高品质的裸钻与首饰，并坚持以最合理的价格，提供给客户最高质量的选择。",
+		"moreValueForMoneyInfo": "我需要帮助",
+		"warranty": "终身质保",
+		"warrantyDesc": "我们的首饰是根据高标准挑选及制造而成，让客户可安心购买。",
+		"moreWarrantyInfo": "品质与价值",
+		"afterSale": "售后无忧",
+		"afterSaleDesc": "若在可调整尺寸范围内，BDD Co. 会在前6个月内为您提供免费的戒指尺寸调整。",
+		"moreAfterSaleInfo": "退款保障条款及细则",
+		"startYourDiamondCheck": "立刻开始您的钻石检查"
+	},
+	"engagementRingsList": {
+		"style": "款式",
+		"color": "成色",
+		"allColor": "所有成色",
+		"price": "价格",
+		"to": "至",
 
     "title": "订婚戒指",
     "totalCountTitle": "戒托 ({total_count} 款)",
@@ -860,1670 +860,1708 @@
     "totalCountTitle": "配饰 ({total_count} 款)",
     "titleDesc": "通过选择各种配饰，来展示您所想要的配饰"
 
-  },
-  "personal": {
-    "index": {
-      "bddco": "BDD Co.会员",
-      "order": "我的订单",
-      "account": "我的账户资料",
-      "comment": "我的评价",
-      "wish": "我的心愿单",
-      "compare": "钻石对比",
-      "select": "请选择",
-      "fb1": "指定商品满 ",
-      "fb2": " 件 可用",
-      "sb1": "指定商品满HKD ",
-      "sb2": " 可用",
-      "left1": "剩余",
-      "left2": "次",
-      "code": "优惠码：",
-      "only": "指定商品",
-      "unlimited": "无限制",
-      "coupon": "我的优惠码",
-      "expiredCoupon": "不可使用优惠码"
-    },
-    "account": {
-      "account":"我的账号",
-      "title": "我的账户资料",
-      "base": "基本信息",
-      "link": "第三方账号绑定",
-      "address": "我的地址",
-      "coupon": "我的优惠码",
-      "psw1": "修改密码",
-      "psw2": "现有密码",
-      "psw3": "新密码",
-      "psw4": "确认新密码",
-      "psw5": "请输入您现有密码",
-      "psw6": "请输入您的新密码",
-      "psw7": "请再次输入您的新密码",
-      "save": "储存",
-      "info": "我的讯息",
-      "psw8": "两次输入的密码不一致",
-      "psw9": "请输入6-16位字符的新密码",
-      "success": "密码重置成功，此次不需登录，下次需使用新密码进行登录",
-      "email": "登入邮箱地址：",
-      "phone": "登录手机号码",
-      "lastName": "姓氏",
-      "firstName": "名称",
-      "bookEmail": "邮件订阅",
-      "yes": "是",
-      "no": "否",
-      "sex": "性別",
-      "male": "男士",
-      "female": "女士",
-      "secret": "保密",
-      "marriage": "婚姻狀況",
-      "married": "已婚",
-      "unmarried": "未婚",
-      "birthday": "出生日期",
-      "year": "年",
-      "msg": "生日设定一次不可修改，生日当月双倍积分哦！",
-      "month": "月",
-      "day": "日",
-      "name1": "请正确填写姓氏，姓氏最长20个字符！",
-      "faceLook": "连结账户 - 我的FACEBOOK",
-      "bind": "绑定",
-      "alreadyBind": "已绑定",
-      "google": "连结账户 - 我的GOOGLE",
-      "emailGood": "请输入正确的电邮地址",
-      "AvailableAnywhere": "全场可用",
-      "expired": "已过期",
-      "used": "已使用",
-      "expiredCoupon": "不可使用优惠码",
-      "full": "满",
-      "use": "可用",
-      "useAnyway": "所有金额可用",
-      "get": "（收）",
-      "mrAddress": "默认地址",
-      "change": "更改",
-      "newAddress": "新增收货地址",
-      "editAddress": "编辑收货地",
-      "show-hey": "收起",
-      "addEmail": "电子邮件",
-      "sureEmail": "确认邮件",
-      "phone": "手提电话",
-      "longAddress": "详细地址",
-      "zip": "邮政编码",
-      "bindSuccess": "绑定成功!",
-      "tips": "提示",
-      "deleteConfirm": "确定要刪除该地址？",
-      "wip1": "请填写姓氏",
-      "wip2": "姓氏最长20个字符！",
-      "wip3": "请填写名字",
-      "wip4": "名字最长20个字符！",
-      "wip5": "请填写电邮地址",
-      "wip6": "请输入正确的电邮地址",
-      "wip7": "两次输入的电邮地址不一致",
-      "wip8": "请填写电话",
-      "wip9": "请填写正确的电话号码",
-      "wip10": "请选择国家／地区讯息",
-      "wip11": "请填写详细地址"
-    },
-    "userOrder": {
-      "myOrder": "我的订单",
-      "orderList": "订单列表",
-      "productInfo": "商品讯息",
-      "productTotal": "商品数量",
-      "productPrice": "商品金额",
-      "orderNumber": "订单编号",
-      "orderStatus": "订单状态",
-      "orderDetail": "订单详情",
-      "cancelOrder": "取消订单",
-      "toPay": "去付款",
-      "toPayWait": "付款中",
-      "wireTransferGuide": "电汇指引",
-      "orderPrice": "订单总额",
-      "confirmReceipt": "確認收貨",
-      "toEvaluate": "去评价",
-      "checkEvaluate": "查看評價",
-      "tips": "温馨提示",
-      "confirmCancelOrder": "确认取消该订单吗？",
-      "confirmFinishOrder": "确认完成本次购物吗",
-      "allOrder": "全部订单",
-      "waitingPay": "待付款",
-      "waitingSend": "待发货",
-      "waitingReceive": "待收货",
-      "waitingComment": "待评价",
-      "sumbit": "提交",
-      "hadReceive": "已收货",
-      "hadNotPay": "未付款",
-      "hadPay": "已付款",
-      "hadSend": "已发货",
-      "hadFinish": "已完成",
-      "hadNotComment": "未评价",
-      "hadComment": "已评价",
-      "returnApplication": "退货申请",
-      "returning": "退货中",
-      "hadReturn": "已退货",
-      "cancelTransaction": "取消交易"
-    },
-    "wish": {
-      "myWish": "我的心愿单",
-      "join": "加入",
-      "areYouSure": "你确定？",
-      "areYouSureToDelete": "你确定要刪掉？",
-      "deleteSuccess": "刪除成功！"
-    },
-    "comment": {
-      "myComment": "我的评价",
-      "commentContent": "评价內容",
-      "productDetail": "商品详情",
-      "goodForYou": "美丽的钻石和戒指伴随着优质的客户服务",
-      "BDDReply": "BDD回复",
-      "BDDCustomerService": "BDD客服为您服务 >>",
-      "none": "无"
-    },
-    "diamondContrast": {
-      "diamondContrast": "钻石对比",
-      "addCart": "加入购物单"
-    },
-    "doComment": {
-      "title": "BDD需要您的建议~",
-      "commentContent": "评价內容",
-      "productDetails": "商品详情",
-      "rateGoods": "给商品打分",
-      "feeling": "您的感受",
-      "SubmitComment": "提交评价",
-      "tips": "提示",
-      "msg": "评论字数不能超过500",
-      "doComment": "请将评论填写完整！",
-      "lessWord": "评论字数不能超过500"
-    },
-    "orderDetail": {
-      "title": "我的订单",
-      "orderTitle": "订单详情",
-      "pendingPayment": "待付款",
-      "closed": "取消交易",
-      "toBbeDelivered": "待发货",
-      "address": "收货地址",
-      "get": "(收)",
-      "goodsInfo": "商品讯息",
-      "goodsNum": "商品数量",
-      "goodsPrice": "商品金额",
-      "deliveryInfo": "收货讯息",
-      "expressInfo": "物流讯息",
-      "express": "物流",
-      "WaybillNumber": "运单号",
-      "expressTime": "发货时间",
-      "orderStatus": "订单状态",
-      "yourBuyInfo": "您的购买详情",
-      "orderNum": "订单编号",
-      "itemsNum": "商品件数",
-      "totalNum": "商品总额",
-      "coupon": "优惠券",
-      "freight": "运费",
-      "tex": "税费",
-      "insurance": "保险费",
-      "transPreferFee": "电汇优惠",
-      "orderTotal": "订单总额",
-      "result": [
-        "拍下商品",
-        "已付款",
-        "已发货",
-        "确认收货",
-        "评价"
-      ],
-      "status": [
-        "未付款",
-        "已付款",
-        "已发货",
-        "已完成",
-        "未评价",
-        "已评价",
-        "退货申请",
-        "退货中",
-        "已退货",
-        "取消交易"
-      ],
-      "copySuccess": "复制成功！",
-      "copyFail": "复制失败，请手动复制订单号！"
-    }
-  },
-  "cart": {
-    "title": "购物车",
-    "info": "商品讯息",
-    "number": "数量",
-    "price": "金额",
-    "option": "操作",
-    "customMade": "定制",
-    "Invalid": "已失效",
-    "allTick": "全选",
-    "delete": "删除",
-    "cleanInvalidBaby": "清除失效商品",
-    "checked": "件数",
-    "total": "商品总额",
-    "freeExpress": "合計",
-    "Settlement": "结算",
-    "msgTitle1": "提示：",
-    "msgContent1": "请选择要结算的商品！",
-    "msgTitle2": "提示：",
-    "msgContent2": "没有选择商品！",
-    "msgTitle3": "删除提示：",
-    "msgContent3": "确认删除当前商品吗？",
-    "deleteSuccess": "移除成功",
-    "addWishSuccess": "加入心愿单成功",
-    "deleteWishSuccess": "删除心愿单成功",
-    "searchSimilar": "找类似"
-  },
-  "pay": {
-    "confirmOrder": "购物车",
-    "finishOrderInfo": "完善您的订单讯息",
-    "orderPay": "订单支付",
-    "finishPay": "确认订单",
-    "finishePay": "已确认订单",
-    "payWay": "选择支付方式",
-    "orderInfo": "订单详情",
-    "PayPal": "使用PayPal安全支付",
-    "visa": "使用PayDollar安全支付",
-    "UnionPay": "使用中国银联银行卡，安全支付",
-    "AliPay": "网上付款，方便，快捷",
-    "EPay": "以电汇方式付款将享有1.5%折扣优惠。注意，电子支票并非电汇。",
-    "pay": "去结账",
-    "msgTitle1": "须知事项",
-    "msgContent1": "<p style='text-align: left;padding-top: 20px;text-indent: 2em;'>由于每一枚钻石都独一无二和我们每日的订单量相当庞大，对于选购了钻石的客户，我们需要进一步确认检查以确保该枚钻石确有存货。目前阶段，您的订单将会暂获保留最长达48个营业小时。存货情况一但获得确认，我们将会发送电邮通知您装运的日期。 </p><p style='text-align: left;padding-top: 20px;text-indent: 2em;'>如果您是透过银行电汇付款，存货情况一但获得确认，我们将提供进一步的电汇指示。为确保运送不被延迟，请在收到电汇指示后尽快把款项汇出。请注意，款项从您汇出的银行到达我们的银行一般需时24个小时。货品将在确认收到款项后发出。 </p>",
-    "msgTitle2": "提示",
-    "msgContent2": "订单提交失败，请重试！",
-    "payFail": "很抱歉，您的订单未支付成功！",
-    "contactPhone": "如有问题请联络客服电话：（852）-2165 3905！",
-    "repay": "重新支付",
-    "payQuestion": "支付遇到问题"
-  },
-  "finishPay": {
-    "PayPending1":"订单已经提交，系统正在处理中,请稍等。",
-    "PayPending2":"您可以先关闭此页面，稍后我们将以邮件/短信方式通知您！",
-    "handing":"订单处理中......",
-    "comeBack":"返回商品页",
-    "confirmOrder": "购物车",
-    "finishOrderInfo": "完善您的订单讯息",
-    "orderPay": "订单支付",
-    "finishPay": "确认订单",
-    "finishePay": "已确认订单",
-    "payWay": "选择支付方式",
-    "balabalabala": "为了方便您的售后服务请保存您的付款截图",
-    "weWillSendTo": "我们已将订单邮件发送至：",
-    "daysGone": "我们会马上处理您的订单",
-    "orderCode": "您的订单编号：",
-    "eweWillSendTo": "已确认订单！我们已将订单确认电邮发送至：",
-    "edaysGone": "确认收到款项后，我们会马上处理您的订单",
-    "balabalaAgain": "您的购买详情（为防止邮件下发失败，请您截图保存凭证）",
-    "address": "送货地址",
-    "get": "（收）",
-    "faFoInfo": "发货讯息",
-    "together": "货物到齐一起送货",
-    "anytime": "可接受：随时送货",
-    "time": "运送时间：2-4周 查看我们的",
-    "policy": "送货政策",
-    "showHoEmail": "接收售后凭证的电邮地址：",
-    "orderInfo": "订单详情",
-    "orderNum": "订单编号",
-    "goodsNum": "商品件数",
-    "goodsPrice": "商品总额",
-    "coupon": "优惠券",
-    "freight": "运费",
-    "tex": "税费",
-    "insurance": "保险费",
-    "transPreferFee": "电汇优惠",
-    "orderTotal": "订单总额",
-    "msg": "复制成功！",
-    "msgErr": "复制失败，请手动复制订单号！",
-    "registered": "登记账户",
-    "balabalabalaAgain": "为使您能够简易的存储您的订单状态，并于日后更快捷方便地作出订购，我们建议您登记一个BDD个人账户，成为BDD会员将获得额外的奖励积分，且我们将尊重您的私隐条约，您的个人讯息将被严格保密。",
-    "eGuide": "电汇指引",
-    "guide1": "请联络您的银行安排电汇/国际转账。请注意我们不接受ACH电子转账、电子支票、支票及银行存款，以上方式均不属电汇。若对电汇有任何疑问，请联络您的银行或发电邮至service@bddco.com与我们的客服专员联络。",
-    "guide2": "您的银行电汇所需的资料：",
-    "guide3": "账户编号：016 - 494 - 475522173",
-    "guide4": "收款人银行：DBS BANK (Hong Kong) Limited",
-    "guide5": "收款人银行地址：11/F, The Center, 99 Queen’s Road Central, Hong Kong",
-    "guide6": "Swift Address：DHBKHKHH",
-    "guide7": "您的订单将获得保留最长48个营业小时。请尽快汇出款项以便我们识别您的付款并确保货品能及时运出。在您汇出款项后请电邮至service@bddco.com通知BDD Co.的客户服务部您的汇款详情及编号。注意：您的汇出的款项或需48小时才能转达到我们的银行。",
-    "guide8": "我们一但确认款项已经收妥，我们即会向您发出一封列明装运日期的电邮。",
-    "iKnow": "我已了解",
-    "newinfo1": "我们将会于2个工作天内处理您的订单，当订单送出时，我们将会向您发出电邮通知。",
-    "newinfo2": "接收电邮地址: ",
-    "newinfo3": "请注意：",
-    "newinfo4": "- 现货商品: 现有库存商品大约需要2-3个工作日安排发货。",
-    "newinfo5": "- 全新订造货品：如货品需订造，顾客服务团队将会联络您确认订造详情及取货时间。",
-    "newinfo6": "- 节日/假期特别安排：如遇公众假期休息及订货日期将会延迟，实际日期将以顾客服务团队回覆作实，敬请见谅。"
-  },
-  "search": {
-    "keywordPlaceholder": "请输入关键字搜索",
-    "search": "搜索",
-    "sort": "排序",
-    "homePage": "首页",
-    "result": " 搜索結果"
-  },
-  "detail": {
-    "goodsId": "商品ID",
-    "addToRing": "添加到戒托",
-    "chooseSize": "获取我的指圈号",
-    "back": "返回上一步",
-    "color": "成色",
-    "size": "尺寸",
-    "USEdition": "美版",
+	},
+	"personal": {
+		"index": {
+			"bddco": "BDD Co.会员",
+			"order": "我的订单",
+			"account": "我的账户资料",
+			"comment": "我的评价",
+			"wish": "我的心愿单",
+			"compare": "钻石对比",
+			"select": "请选择",
+			"fb1": "指定商品满 ",
+			"fb2": " 件 可用",
+			"sb1": "指定商品满HKD ",
+			"sb2": " 可用",
+			"left1": "剩余",
+			"left2": "次",
+			"code": "优惠码：",
+			"only": "指定商品",
+			"unlimited": "无限制",
+			"coupon": "我的优惠码",
+			"expiredCoupon": "不可使用优惠码"
+		},
+		"account": {
+			"account": "我的账号",
+			"title": "我的账户资料",
+			"base": "基本信息",
+			"link": "第三方账号绑定",
+			"address": "我的地址",
+			"coupon": "我的优惠码",
+			"psw1": "修改密码",
+			"psw2": "现有密码",
+			"psw3": "新密码",
+			"psw4": "确认新密码",
+			"psw5": "请输入您现有密码",
+			"psw6": "请输入您的新密码",
+			"psw7": "请再次输入您的新密码",
+			"save": "储存",
+			"info": "我的讯息",
+			"psw8": "两次输入的密码不一致",
+			"psw9": "请输入6-16位字符的新密码",
+			"success": "密码重置成功，此次不需登录，下次需使用新密码进行登录",
+			"email": "登入邮箱地址：",
+			"phone": "登录手机号码",
+			"lastName": "姓氏",
+			"firstName": "名称",
+			"bookEmail": "邮件订阅",
+			"yes": "是",
+			"no": "否",
+			"sex": "性別",
+			"male": "男士",
+			"female": "女士",
+			"secret": "保密",
+			"marriage": "婚姻狀況",
+			"married": "已婚",
+			"unmarried": "未婚",
+			"birthday": "出生日期",
+			"year": "年",
+			"msg": "生日设定一次不可修改，生日当月双倍积分哦！",
+			"month": "月",
+			"day": "日",
+			"name1": "请正确填写姓氏，姓氏最长20个字符！",
+			"faceLook": "连结账户 - 我的FACEBOOK",
+			"bind": "绑定",
+			"alreadyBind": "已绑定",
+			"google": "连结账户 - 我的GOOGLE",
+			"emailGood": "请输入正确的电邮地址",
+			"AvailableAnywhere": "全场可用",
+			"expired": "已过期",
+			"used": "已使用",
+			"expiredCoupon": "不可使用优惠码",
+			"full": "满",
+			"use": "可用",
+			"useAnyway": "所有金额可用",
+			"get": "（收）",
+			"mrAddress": "默认地址",
+			"change": "更改",
+			"newAddress": "新增收货地址",
+			"editAddress": "编辑收货地",
+			"show-hey": "收起",
+			"addEmail": "电子邮件",
+			"sureEmail": "确认邮件",
+			"phone": "手提电话",
+			"longAddress": "详细地址",
+			"zip": "邮政编码",
+			"bindSuccess": "绑定成功!",
+			"tips": "提示",
+			"deleteConfirm": "确定要刪除该地址？",
+			"wip1": "请填写姓氏",
+			"wip2": "姓氏最长20个字符！",
+			"wip3": "请填写名字",
+			"wip4": "名字最长20个字符！",
+			"wip5": "请填写电邮地址",
+			"wip6": "请输入正确的电邮地址",
+			"wip7": "两次输入的电邮地址不一致",
+			"wip8": "请填写电话",
+			"wip9": "请填写正确的电话号码",
+			"wip10": "请选择国家／地区讯息",
+			"wip11": "请填写详细地址"
+		},
+		"userOrder": {
+			"myOrder": "我的订单",
+			"orderList": "订单列表",
+			"productInfo": "商品讯息",
+			"productTotal": "商品数量",
+			"productPrice": "商品金额",
+			"orderNumber": "订单编号",
+			"orderStatus": "订单状态",
+			"orderDetail": "订单详情",
+			"cancelOrder": "取消订单",
+			"toPay": "去付款",
+			"toPayWait": "付款中",
+			"wireTransferGuide": "电汇指引",
+			"orderPrice": "订单总额",
+			"confirmReceipt": "確認收貨",
+			"toEvaluate": "去评价",
+			"checkEvaluate": "查看評價",
+			"tips": "温馨提示",
+			"confirmCancelOrder": "确认取消该订单吗？",
+			"confirmFinishOrder": "确认完成本次购物吗",
+			"allOrder": "全部订单",
+			"waitingPay": "待付款",
+			"waitingSend": "待发货",
+			"waitingReceive": "待收货",
+			"waitingComment": "待评价",
+			"sumbit": "提交",
+			"hadReceive": "已收货",
+			"hadNotPay": "未付款",
+			"hadPay": "已付款",
+			"hadSend": "已发货",
+			"hadFinish": "已完成",
+			"hadNotComment": "未评价",
+			"hadComment": "已评价",
+			"returnApplication": "退货申请",
+			"returning": "退货中",
+			"hadReturn": "已退货",
+			"cancelTransaction": "取消交易"
+		},
+		"wish": {
+			"myWish": "我的心愿单",
+			"join": "加入",
+			"areYouSure": "你确定？",
+			"areYouSureToDelete": "你确定要刪掉？",
+			"deleteSuccess": "刪除成功！"
+		},
+		"comment": {
+			"myComment": "我的评价",
+			"commentContent": "评价內容",
+			"productDetail": "商品详情",
+			"goodForYou": "美丽的钻石和戒指伴随着优质的客户服务",
+			"BDDReply": "BDD回复",
+			"BDDCustomerService": "BDD客服为您服务 >>",
+			"none": "无"
+		},
+		"diamondContrast": {
+			"diamondContrast": "钻石对比",
+			"addCart": "加入购物单"
+		},
+		"doComment": {
+			"title": "BDD需要您的建议~",
+			"commentContent": "评价內容",
+			"productDetails": "商品详情",
+			"rateGoods": "给商品打分",
+			"feeling": "您的感受",
+			"SubmitComment": "提交评价",
+			"tips": "提示",
+			"msg": "评论字数不能超过500",
+			"doComment": "请将评论填写完整！",
+			"lessWord": "评论字数不能超过500"
+		},
+		"orderDetail": {
+			"title": "我的订单",
+			"orderTitle": "订单详情",
+			"pendingPayment": "待付款",
+			"closed": "取消交易",
+			"toBbeDelivered": "待发货",
+			"address": "收货地址",
+			"get": "(收)",
+			"goodsInfo": "商品讯息",
+			"goodsNum": "商品数量",
+			"goodsPrice": "商品金额",
+			"deliveryInfo": "收货讯息",
+			"expressInfo": "物流讯息",
+			"express": "物流",
+			"WaybillNumber": "运单号",
+			"expressTime": "发货时间",
+			"orderStatus": "订单状态",
+			"yourBuyInfo": "您的购买详情",
+			"orderNum": "订单编号",
+			"itemsNum": "商品件数",
+			"totalNum": "商品总额",
+			"coupon": "优惠券",
+			"freight": "运费",
+			"tex": "税费",
+			"insurance": "保险费",
+			"transPreferFee": "电汇优惠",
+			"orderTotal": "订单总额",
+			"result": [
+				"拍下商品",
+				"已付款",
+				"已发货",
+				"确认收货",
+				"评价"
+			],
+			"status": [
+				"未付款",
+				"已付款",
+				"已发货",
+				"已完成",
+				"未评价",
+				"已评价",
+				"退货申请",
+				"退货中",
+				"已退货",
+				"取消交易"
+			],
+			"copySuccess": "复制成功！",
+			"copyFail": "复制失败，请手动复制订单号！"
+		}
+	},
+	"cart": {
+		"title": "购物车",
+		"info": "商品讯息",
+		"number": "数量",
+		"price": "金额",
+		"option": "操作",
+		"customMade": "定制",
+		"Invalid": "已失效",
+		"allTick": "全选",
+		"delete": "删除",
+		"cleanInvalidBaby": "清除失效商品",
+		"checked": "件数",
+		"total": "商品总额",
+		"freeExpress": "合計",
+		"Settlement": "结算",
+		"msgTitle1": "提示：",
+		"msgContent1": "请选择要结算的商品！",
+		"msgTitle2": "提示：",
+		"msgContent2": "没有选择商品！",
+		"msgTitle3": "删除提示：",
+		"msgContent3": "确认删除当前商品吗？",
+		"deleteSuccess": "移除成功",
+		"addWishSuccess": "加入心愿单成功",
+		"deleteWishSuccess": "删除心愿单成功",
+		"searchSimilar": "找类似"
+	},
+	"pay": {
+		"confirmOrder": "购物车",
+		"finishOrderInfo": "完善您的订单讯息",
+		"orderPay": "订单支付",
+		"finishPay": "确认订单",
+		"finishePay": "已确认订单",
+		"payWay": "选择支付方式",
+		"orderInfo": "订单详情",
+		"PayPal": "使用PayPal安全支付",
+		"visa": "使用PayDollar安全支付",
+		"UnionPay": "使用中国银联银行卡，安全支付",
+		"AliPay": "网上付款，方便，快捷",
+		"EPay": "以电汇方式付款将享有1.5%折扣优惠。注意，电子支票并非电汇。",
+		"pay": "去结账",
+		"msgTitle1": "须知事项",
+		"msgContent1": "<p style='text-align: left;padding-top: 20px;text-indent: 2em;'>由于每一枚钻石都独一无二和我们每日的订单量相当庞大，对于选购了钻石的客户，我们需要进一步确认检查以确保该枚钻石确有存货。目前阶段，您的订单将会暂获保留最长达48个营业小时。存货情况一但获得确认，我们将会发送电邮通知您装运的日期。 </p><p style='text-align: left;padding-top: 20px;text-indent: 2em;'>如果您是透过银行电汇付款，存货情况一但获得确认，我们将提供进一步的电汇指示。为确保运送不被延迟，请在收到电汇指示后尽快把款项汇出。请注意，款项从您汇出的银行到达我们的银行一般需时24个小时。货品将在确认收到款项后发出。 </p>",
+		"msgTitle2": "提示",
+		"msgContent2": "订单提交失败，请重试！",
+		"payFail": "很抱歉，您的订单未支付成功！",
+		"contactPhone": "如有问题请联络客服电话：（852）-2165 3905！",
+		"repay": "重新支付",
+		"payQuestion": "支付遇到问题"
+	},
+	"finishPay": {
+		"PayPending1": "订单已经提交，系统正在处理中,请稍等。",
+		"PayPending2": "您可以先关闭此页面，稍后我们将以邮件/短信方式通知您！",
+		"handing": "订单处理中......",
+		"comeBack": "返回商品页",
+		"confirmOrder": "购物车",
+		"finishOrderInfo": "完善您的订单讯息",
+		"orderPay": "订单支付",
+		"finishPay": "确认订单",
+		"finishePay": "已确认订单",
+		"payWay": "选择支付方式",
+		"balabalabala": "为了方便您的售后服务请保存您的付款截图",
+		"weWillSendTo": "我们已将订单邮件发送至：",
+		"daysGone": "我们会马上处理您的订单",
+		"orderCode": "您的订单编号：",
+		"eweWillSendTo": "已确认订单！我们已将订单确认电邮发送至：",
+		"edaysGone": "确认收到款项后，我们会马上处理您的订单",
+		"balabalaAgain": "您的购买详情（为防止邮件下发失败，请您截图保存凭证）",
+		"address": "送货地址",
+		"get": "（收）",
+		"faFoInfo": "发货讯息",
+		"together": "货物到齐一起送货",
+		"anytime": "可接受：随时送货",
+		"time": "运送时间：2-4周 查看我们的",
+		"policy": "送货政策",
+		"showHoEmail": "接收售后凭证的电邮地址：",
+		"orderInfo": "订单详情",
+		"orderNum": "订单编号",
+		"goodsNum": "商品件数",
+		"goodsPrice": "商品总额",
+		"coupon": "优惠券",
+		"freight": "运费",
+		"tex": "税费",
+		"insurance": "保险费",
+		"transPreferFee": "电汇优惠",
+		"orderTotal": "订单总额",
+		"msg": "复制成功！",
+		"msgErr": "复制失败，请手动复制订单号！",
+		"registered": "登记账户",
+		"balabalabalaAgain": "为使您能够简易的存储您的订单状态，并于日后更快捷方便地作出订购，我们建议您登记一个BDD个人账户，成为BDD会员将获得额外的奖励积分，且我们将尊重您的私隐条约，您的个人讯息将被严格保密。",
+		"eGuide": "电汇指引",
+		"guide1": "请联络您的银行安排电汇/国际转账。请注意我们不接受ACH电子转账、电子支票、支票及银行存款，以上方式均不属电汇。若对电汇有任何疑问，请联络您的银行或发电邮至service@bddco.com与我们的客服专员联络。",
+		"guide2": "您的银行电汇所需的资料：",
+		"guide3": "账户编号：016 - 494 - 475522173",
+		"guide4": "收款人银行：DBS BANK (Hong Kong) Limited",
+		"guide5": "收款人银行地址：11/F, The Center, 99 Queen’s Road Central, Hong Kong",
+		"guide6": "Swift Address：DHBKHKHH",
+		"guide7": "您的订单将获得保留最长48个营业小时。请尽快汇出款项以便我们识别您的付款并确保货品能及时运出。在您汇出款项后请电邮至service@bddco.com通知BDD Co.的客户服务部您的汇款详情及编号。注意：您的汇出的款项或需48小时才能转达到我们的银行。",
+		"guide8": "我们一但确认款项已经收妥，我们即会向您发出一封列明装运日期的电邮。",
+		"iKnow": "我已了解",
+		"newinfo1": "我们将会于2个工作天内处理您的订单，当订单送出时，我们将会向您发出电邮通知。",
+		"newinfo2": "接收电邮地址: ",
+		"newinfo3": "请注意：",
+		"newinfo4": "- 现货商品: 现有库存商品大约需要2-3个工作日安排发货。",
+		"newinfo5": "- 全新订造货品：如货品需订造，顾客服务团队将会联络您确认订造详情及取货时间。",
+		"newinfo6": "- 节日/假期特别安排：如遇公众假期休息及订货日期将会延迟，实际日期将以顾客服务团队回覆作实，敬请见谅。"
+	},
+	"search": {
+		"keywordPlaceholder": "请输入关键字搜索",
+		"search": "搜索",
+		"sort": "排序",
+		"homePage": "首页",
+		"result": " 搜索結果"
+	},
+	"detail": {
+		"goodsId": "商品ID",
+		"addToRing": "添加到戒托",
+		"chooseSize": "获取我的指圈号",
+		"back": "返回上一步",
+		"color": "成色",
+		"size": "尺寸",
+		"USEdition": "美版",
 
-    "isUSSizeNow": "本页显示的为美版指圈号",
-    "needHelpForRingSize": "如果您是其他区域的客户，请联络客服告知指圈号版本，可以是欧版、中国大陆版本。",
-    "checkMyRingSize": "如何测量我的指圈号？",
+		"isUSSizeNow": "本页显示的为美版指圈号",
+		"needHelpForRingSize": "如果您是其他区域的客户，请联络客服告知指圈号版本，可以是欧版、中国大陆版本。",
+		"checkMyRingSize": "如何测量我的指圈号？",
 
-    "ConfirmTheChoice": "确认选择",
-    "addCart": "加入购物车",
-    "wish": "心愿单",
-    "addCartSuccess": "加入购物车成功",
-    "compare": "对比",
-    "buySeparately": "单独购买",
-    "youMightAlsoLike": "推荐",
-    "pairRingDetails": "对戒详情",
-    "goodsDetails": "商品详情",
-    "diamond4C": "钻石4C",
-    "lookMoreAboutDiamond": "详细了解钻石",
-    "customerReviews": "客户评价",
-    "productParameters": "产品参数",
-    "ring01": "戒指一",
-    "ring02": "戒指二",
+		"ConfirmTheChoice": "确认选择",
+		"addCart": "加入购物车",
+		"wish": "心愿单",
+		"addCartSuccess": "加入购物车成功",
+		"compare": "对比",
+		"buySeparately": "单独购买",
+		"youMightAlsoLike": "推荐",
+		"pairRingDetails": "对戒详情",
+		"goodsDetails": "商品详情",
+		"diamond4C": "钻石4C",
+		"lookMoreAboutDiamond": "详细了解钻石",
+		"customerReviews": "客户评价",
+		"productParameters": "产品参数",
+		"ring01": "戒指一",
+		"ring02": "戒指二",
 
-    "yourOrderIncludes": "您的订单包括",
-    "service1": "优质包装",
-    "service2": "100%退货",
-    "service3": "30天退货",
-    "service4": "钻石证书",
-    "service5": "终身保修",
-    "service6": "免费快递",
+		"yourOrderIncludes": "您的订单包括",
+		"service1": "优质包装",
+		"service2": "100%退货",
+		"service3": "30天退货",
+		"service4": "钻石证书",
+		"service5": "终身保修",
+		"service6": "免费快递",
 
-    "specs": "当前所选钻石4C",
-    "carat": "克拉",
-    "weight": "钻重",
-    "caratWeight": "克拉钻石",
-    "tips": "请记住，随着克拉重量的增长，钻石价格将呈指数增长，因为克拉越大，钻石越罕见。",
+		"specs": "当前所选钻石4C",
+		"carat": "克拉",
+		"weight": "钻重",
+		"caratWeight": "克拉钻石",
+		"tips": "请记住，随着克拉重量的增长，钻石价格将呈指数增长，因为克拉越大，钻石越罕见。",
 
-    "diamondColor": "颜色",
-    "diamondColor1": "无色",
-    "diamondColor2": "近无色级别",
-    "diamondColor3": "K-Z微黄级别",
-    "notSell": "(BDD不出售)",
+		"diamondColor": "颜色",
+		"diamondColor1": "无色",
+		"diamondColor2": "近无色级别",
+		"diamondColor3": "K-Z微黄级别",
+		"notSell": "(BDD不出售)",
 
-    "cut": "切割",
-    "cutTips": "代表只有3%的高质量钻石才能达到的标准，这种切割使钻石几乎反射了所有进入钻石的光线。",
+		"cut": "切割",
+		"cutTips": "代表只有3%的高质量钻石才能达到的标准，这种切割使钻石几乎反射了所有进入钻石的光线。",
 
-    "clarity": "净度",
-    "clarityTips1": "FL 和 LF : 完美无瑕：没有内部或外部特征。内无瑕：可能只有外部瑕疵。两者都极为罕见。",
-    "clarityTips2": "VVS1 和 VVS2 : 极轻微瑕。特征微细，即使是受过训练的人，在 10 倍放大之下也很难看到。",
-    "clarityTips3": "VS1 和 VS2 : 轻微瑕。在 10 倍放大之下介于不易看到 (VS1) 和比较容易看到 (VS2) 之间的微小内含物。",
-    "clarityTips4": "SI1 和 SI2 : 微瑕。在 10 倍放大之下内含物可见。如果肉眼无瑕疵就具最佳价值。敏锐的肉眼可能察觉到 SI2 内含物。",
-    "clarityTips5": "I1和I2和I3：瑕疵。可能还有更多明显或可见的内含物。 BDD 并不承销净度分级达 I3 的钻石。",
-    "tenMagnification": "10倍放大",
+		"clarity": "净度",
+		"clarityTips1": "FL 和 LF : 完美无瑕：没有内部或外部特征。内无瑕：可能只有外部瑕疵。两者都极为罕见。",
+		"clarityTips2": "VVS1 和 VVS2 : 极轻微瑕。特征微细，即使是受过训练的人，在 10 倍放大之下也很难看到。",
+		"clarityTips3": "VS1 和 VS2 : 轻微瑕。在 10 倍放大之下介于不易看到 (VS1) 和比较容易看到 (VS2) 之间的微小内含物。",
+		"clarityTips4": "SI1 和 SI2 : 微瑕。在 10 倍放大之下内含物可见。如果肉眼无瑕疵就具最佳价值。敏锐的肉眼可能察觉到 SI2 内含物。",
+		"clarityTips5": "I1和I2和I3：瑕疵。可能还有更多明显或可见的内含物。 BDD 并不承销净度分级达 I3 的钻石。",
+		"tenMagnification": "10倍放大",
 
-    "allReviews": "全部评价",
-    "fiveStarReviews": "5星评价",
-    "BDDReply": "BDD回复",
-    "loadingMore": "加载更多..."
-  },
-  "policies": {
-    "layout": {
-      "homepage": "首页",
-      "QAndA": "问答",
-      "BDDService": "BDD服务",
-      "workTime": "香港时间(GMT+8)星期一至五上午9时至晚上6时",
-      "workTel": "+852 21653905",
-      "workEmail": "service@bddco.com",
-      "chooseBDD": "选择BDD",
-      "qualityAndValue": "品质与价值",
-      "returnAndRefundPolicy": "退款保障条款及细则",
-      "findYourRingSize": "找出您的戒指尺寸",
-      "aboutBDD": "关于BDD",
-      "BDDBrandStory": "BDD品牌故事",
-      "diamondKnowledge": "钻石知识",
-      "paymentMethods": "付款方式",
-      "BDDPolicy": "BDD政策",
-      "freeShippingService": "免费送递服务",
-      "deliveryPolicy": "送货政策",
-      "internationalPolicy": "国际政策",
-      "privacyPolicy": "私隐政策",
-      "termsAndConditions": "条款及细则"
-    },
-    "termsAndConditions": {
-      "header": "条款及细则",
-      "define1": "以下所有条款和条件均适用于位于www.bddco.com的BDD Co.网站，其关联公司以及连结至www.bddco.com的所有其他相关网站。 BDD Co.网站：www.bddco.com统称为“网站”。请仔细阅读条款和条件。当您使用本网站时，即表示您同意受这些条款和条件的约束。",
-      "define2": "以下条款和条件将规定您在BDD Co.网站上的使用和购买，并在您和BDD Co.之间形成协议。对于网站上的任何政策，指南，条款和条件，BDD Co.保留更改或随时修改它们，并由其自行​​决定。所有更改或修改将在网站上发布修改后直接生效。如果您在网站更改或修改后继续使用本网站，BDD公司将视您接受更改或修改。因此，建议您经常阅读本网站的条款和条件以及所有适用的政策和指南，以便您清楚地了解使用网站的条款和条件。如果您不同意更改或修改条款和条件，应立刻停止使用本网站。",
-      "tit1": "产品定价和供应情况",
-      "con1": "由于网站有时收到大量订单，我们可能无法在产品缺货之前预先在网站上发布通知。如果发生这种情况，我们将直接与您联络以寻找可能的解决方案。如果您对正在购买阶段的产品感兴趣，请联络我们的网站客户服务部门，以便在产品重新有货时收到补货通知。",
-      "con2": "该网站可能会出现一些不准确的显示，如数据或价格。虽然我们的员工尽力避免这些情况和错误，但事故可能会发生。因此，我们保留在发生错误时纠正任何和所有错误的权利。我们不会出售任何标有不正确价格的产品。如果产品的上市价格低于实际价格，我们将自行决定是否与您联络以获取通知，并在产品发货前询问您的说明或通知您订单已取消。您同意支付收费价格与实际价格之间的差额或退回产品。我们可以随时更改产品价格，恕不另行通知。对于可能发生的不便，我们深表歉意。",
-      "tit2": "钻石证书",
-      "con3": "在您下订单后，我们会将您选择的裸钻与钻石证书一起运送。我们所有的钻石证书均由美国宝石学院（GIA）颁发。更换钻石证书是昂贵且耗时的。因此，我们要求每个钻石证书都与每个退回的钻石一起运回。如果您没有随钻石退还证书，我们将向您收取250美元作为证书的更换费用。",
-      "tit3": "之后购买和比较",
-      "con4": "之后的采购和比较是不允许的，因为我们希望保持产品价格低廉。之后的购买和比较意味着客户打算购买几种产品并保留最多的产品，然后返回剩余的产品。这种行为导致我们无法准确地重新进货并导致高库存成本。我们很乐意帮助您选择产品。如果您想了解更多产品质量，请发送电子邮件至service@bddco.com与我们的客户服务部联络。",
-      "tit4": "网站讯息指南",
-      "con5": "BDD Co.尽一切努力确保在线目录尽可能完整和准确。为了让您能够清楚地查看我们的产品，我们的某些产品的实际尺寸可能与我们的照片有所不同。此外，根据每个显示器设置，产品的颜色显示可能会略有不同。",
-      "con6": "我们的目标是在尽可能做出购买决定之前提供您所需的讯息和细节，您可以查看和判断我们产品的形状和美感。根据联邦贸易委员会（FTC）的规定和行业标准，BDD公司宣布克拉总重量可能与实际项目和网站上显示的重量之间有0.05克拉的差异。",
-      "con7": "我们网站提供的产品尺寸基于制造的格式和标准。整理过程和修饰过程可能会导致结婚戒指的宽度略有差异。因此，机器制造的结婚戒指的宽度可能有0.2mm的差异，而铸造制造的戒指可能略有不同。这些都是BDD公司允许的。",
-      "con8": "对于具有多个钻石的钻石产品，我们提供具有多个钻石的每种产品的平均克拉重量。我们所有钻石的清晰度和颜色等级均以平均值提供。如果讯息显示最小值，则产品中的所有钻石均符合规定的标准，或高于规定的标准。如果讯息显示平均值，则所有钻石平均等于规定的质量或高于或低于规定的质量。",
-      "tit5": "采购的道德政策",
-      "con9": "BDD Co.仅从信誉良好的正规钻石供应商那里购买钻石。与我们一样，我们选择的供应商也遵守金伯利进程。这个过程是一个监督钻石贸易的国际体系和政策，并确保钻石来自没有冲突的正式来源。",
-      "tit6": "私隐政策",
-      "con10": "如果您想了解BDD Co.如何收集和使用其客户的个人讯息，请参阅我们的",
-      "link1": "私隐政策",
-      "tit7": "网站内容",
-      "con11": "网站的所有内容和材料，包括但不限于Blue Danube Diamond和BDD Co.徽标，以及所有文本，讯息，图像，图片，图形，外观，感觉，数据，文件，设计，软件，选择，协调，声音文件，其他文件和所有选择安排（统称为“网站材料”）是BDD Co.或其用户或其许可方的专有财产，并受商标法，版权，专利，商业外观和其他知识产权的保护。产权和不正当竞争法。",
-      "tit8": "商标",
-      "con12": "Blue Danube Diamond，BDD Co.，创建您自己的戒指，Blue Danube Diamond和BDD Co.徽标，标语和我们网站中包含的任何其他服务或产品名称是Blue Danube Diamond和BDD Co.及其许可方或供应商的商标。未经BDD Co.及适用商标持有人事先书面许可，不得全部或部分使用，复制或复制。未获得我们事先书面许可的任何人不得复制，复制或使用“Blue Danube Diamond”，“BDD Co.”或任何其他名称，商标，产品或服务名称，或任何其他“隐藏文本”或任何元标签蓝色多瑙河钻石和BDD公司的名称或标志“蓝色多瑙河钻石”，“BDD公司”，产品名称，注册商标、以及所有其他商标，均为其各自拥有人的财产。",
-      "tit9": "网站使用",
-      "con13": "当您查看该网站时，您将获得使用该网站的有限许可。您可以通过电子方式复制（未经许可禁止的情况下）网站资料，并仅作为参考讯息打印至个人非商业用途的硬拷贝。此类许可受这些条款和条件的约束，但不包括：（1）使用网站或网站材料进行转售或其他商业用途。 （2）使用任何图片，产品清单和商业用途说明。 （3）公开展示或传播网站资料。 （4）使用或更改网站，网站资料或网站任何部分的任何衍生产品使用。 （5）使用任何自动化手段（刮擦，机器人，蜘蛛或任何类似的自动数据收集方法）作为与网站互动的方式进行监控，从网站提取或收集数据。 （6）从网站下载讯息和网站资料的任何部分（页面缓存除外）。 （7）导致任何出现的窗口（无论是否覆盖我们的网站），退出窗口，广告，扩展按钮，或覆盖，框架，最小化或禁止网站的任何其他窗口。 （8）任何影响和干扰网站正常运行的使用方式。 （9）任何使用我们网站或我们的网站资料的方法与预期目的不同。在获得我们的书面许可之前，禁止并违反使用与许可的预期目的不同的方法。我们将停止授权。未经授权使用本网站可能会冒犯一些适用的相关法律，包括但不限于适用的通信法规和法规以及商标和版权法。无论是暗示，禁止反言还是其他方式，除非我们在此明确说明，否则这些条款和条件不会被视为对知识产权的授权，BDD公司随时可以撤销许可证。",
-      "tit10": "侵权政策",
-      "con14": "根据适用的版权法和其他适用法律，BDD Co.将自行决定拦截和/或阻止被视为侵权者查看或使用本网站的网站用户或帐户持有人。 BDD Co.也可以自行决定根据情况终止任何侵权者的账户。",
-      "tit11": "第三方內容",
-      "con15": "BDD Co.可以提供指向第三方网页和内容的连结，作为客户可能对此讯息感兴趣的服务。 BDD Co.不监控或控制任何第三方网页或其内容。 BDD Co.不认可任何第三方内容，也不保证第三方网页及其内容的准确性和完整性。 BDD Co.不保证或代表第三方内容中任何讯息的准确性，也不负责审查和更新任何第三方内容和网页。如果用户使用这些网页或第三方内容，用户将被视为同意自行承担风险。",
-      "tit12": "广告和促销",
-      "con16": "BDD Co.可能会在我们的网站上进行第三方的促销和广告宣传。您参与促销或业务往来，或与第三方广告商的通信，以及此类交易的任何保证，条款和条件，仅限于您与第三方之间。如果您与我们网站上的非BDD Co.广告商之间的任何交易造成任何损失或损害，BDD Co.不承担任何责任和义务。",
-      "tit13": "服从",
-      "con17": "您承认并同意任何材料，包括但不限于有关BDD Co.，本网站或我们的产品和服务的想法，图纸，创意或原始材料，评价，问题，建议，计划，说明或其他讯息。您向BDD Co.建议或提供的讯息均为非机密讯息，并将成为BDD Co.的专有财产.BDD Co.将拥有所有知识产权和专有权，BDD Co.可以无限制地使用或传播这些材料用于商业或任何目的或其他目的，未经您的确认或赔偿​​。您授权BDD Co.及其从属许可证和关联公司使用您提交给我们的此类内容的名称，如果他们选择使用该名称。您声明或保证：1.您拥有您提交给我们的材料和内容的所有权利，或者您有权向我们提交材料和内容；2.提交给我们的材料和内容准确无误导；3.发布和使用您提供的材料或内容不会对任何人或实体造成伤害或侵犯任何权利。",
-      "tit14": "保护和补偿",
-      "con18": "您同意赔偿，并保护BDD Co.，其服务供应商，顾问和独立承包商及其各自的员工，董事和代理人免受任何索赔，责任，损害，费用和成本的损害（包括但不限于，合理的律师费用）与您在我们的网站上或通过我们的网站存储，发布或以其他方式传输或您使用或无法使用我们网站的任何内容相关或由此产生，包括但不限于任何实际或受威胁的声明，对BDD公司和/或其服务供应商，独立承包商，董事，员工或顾问提出的要求或诉讼，涉及或由此内容，您的行为，您对这些条款和条件的侵犯或您侵犯任何第三方。",
-      "tit15": "保修免责声明",
-      "con19": "除BDD公司明确列出并以书面形式表明外，网站上提供或包含的内容，产品和服务均按“原样”提供，不作任何明示或暗示的保证。 BDD Co.不做任何明示或暗示的保证，包括但不限于对我们网站上的材料，讯息和内容的适销性，适用于特定用途，所有权和不侵权的默示保证。 BDD Co.不代表或保证我们网站或服务中的材料和内容是完整，准确，最新，可靠或无错误的。 BDD Co.不声明或保证我们的网站或其服务器不会被病毒或任何其他有害组件侵入或骚扰。",
-      "tit16": "责任限制",
-      "con20": "在任何情况下，BDD Co.，其董事，员工，成员或代理商不对任何直接，间接，特殊，后果性损害或任何其他损害或费用承担责任（包括但不限于数据丢失，损失）利润或使用损失），无论是在合同诉讼中，侵权行为（包括但不限于疏忽）或以其他方式，以任何方式与我们的网站，产品和服务或所含内容的使用相关联或由此产生通过我们的网站查看或查看，包括但不限于用户依赖从BDD公司获得的任何讯息所造成的任何损害，或因中断，遗漏，错误，删除电子邮件或文件，缺陷，病毒而导致的任何损害，错误，传输或操作延迟，或任何性能故障，是否由于上帝的行为，破坏，通讯失败，盗窃或未经授权查看BDD公司的记录，程序或服务而造成的。",
-      "tit17": "法律和场所的使用",
-      "con21": "这些条款和条件以及您对本网站的使用将受中华人民共和国香港特别行政区法律管辖，并根据中华人民共和国香港特别行政区法律解释，适用于在中华人民共和国香港特别行政区，不诉诸其法律冲突规定。您同意由本条款和条件引起或与之相关的任何法律或权益诉讼仅应在位于香港的法院提起，并且您在此不可撤销地无条件地同意并接受此类法院的专属管辖权。因使用本网站，本网站购买或本条款和条件而引起的诉讼。",
-      "tit18": "修改和通知",
-      "con22": "您同意BDD Co.可以随时修改这些条款和条件以及我们网站上的任何其他政策。当网站发布经修订的条款和条件或政策时，它构成了此类修订的充分通知。",
-      "tit19": "终止",
-      "con23": "尽管有这些条款和条件，BDD Co.仍保留终止您使用其网站许可的权利及其个人酌情权，并阻止或阻止您查看和使用其网站，恕不另行通知。",
-      "tit20": "分割",
-      "con24": "本条款和条件的每个条款中包含的规定应独立于其他条款和条件中强制执行，如果其他任何条款和条件无效，则其有效性不受影响。如果这些条款和条件的任何规定被确定为无效，非法或任何不可执行的理由，则该规定不应影响任何其余规定的有效性和可执行性。",
-      "tit21": "问题和联络",
-      "con25": "如果您有任何疑问，请发送电子邮件至service@bddco.com与我们联络。这些条款和条件不适用于Parcelpro Insurance Company提供的内容。条款和条件于2016年12月16日更新。"
-    },
-    "shipping": {
-      "header": "送货政策",
-      "title": "我们发货的所有订单都是全额保险。。",
-      "define": "注意：我们建议所有客户在收到或签收收据之前仔细检查您的包裹是否完好无损。如果包裹上有故意破坏的痕迹，请务必拍照留下记录，并发送电子邮件至service@bddco.com",
-      "tit1": "交货细节",
-      "con1": "如果税前订单的价值超过一定金额，订单将提供",
-      "link1": "免费送递服务",
-      "con2": "。最低税前订单的免费送货价值因国家/地区而异。请查看",
-      "link2": "免费送递服务",
-      "con3": "中的详细讯息。为了安全地将包裹交给您，BDD公司只接受并运送到街道地址，而不是邮政信箱地址。 BDD Co.要求客户签收，即使在某些情况下我们的承运人可能会给予某些豁免。如果收件人无法在周一至周五收到包裹，我们可以在周六重新安排送货服务，但需额外付费。有关此安排，请发送电子邮件至service@bddco.com与BDD Co.客户服务专员联络。",
-      "tit2": "国际和香港航运",
-      "con4": "对于送往香港的订单，包裹将通过DHL送达。对于国际订单，它们将通过FedEx International Priority®提供。我们接受来自53个国家/地区的订单。有关详细讯息，请查看我们的",
-      "link3": "国际政策",
-      "tit3": "订单何时发货",
-      "con5": "如果您在周一至周五（香港时间）的正常工作天截单时间前成功付款购买，我们将在当天开始处理您的订单。在周六，周日，假日或在正常工作日的截单时间之后进行的购买将在随后的工作日处理。",
-      "tit4": "预计抵达时间",
-      "con6": "您的订单到达目的地所需的时间因地点而异。为了让客户知道订单何时到达，以下是您的订单在各个目的地发货后的预计到货时间。这些预计到达时间包括运输和清关时间所需的估计时间。实际交付可能会有所不请注意，以下列表未包括所有国家/地区。如果您在列表中找不到您所在的国家/地区，请发送电子邮件至",
-      "mail": "联络BDD Co.客户服务专员",
-      "tit5": "错过了包裹",
-      "con7": "如果指定的送货地址无人收件，则该包裹可能会被送到当地的FedEx地点。 FedEx允许收件人在营业时间内亲自去签收。这里找到离您最近的FedEx地点",
-      "link4": "https://www.fedex.com/zh-hk/home.html",
-      "tip1": "注意：下订单时您必须检查送货地址是否正确，因错误导致的任何损失都无法得到赔偿。",
-      "country": "国家/地区",
-      "days": "预计到达时间",
-      "delivery": [
-        {
-          "country": "澳大利亚",
-          "days": "4-5天"
-        },
-        {
-          "country": "比利时",
-          "days": "4-6天"
-        },
-        {
-          "country": "巴西",
-          "days": "6-10天"
-        },
-        {
-          "country": "加拿大",
-          "days": "3-5天"
-        },
-        {
-          "country": "丹麦",
-          "days": "3-5天"
-        },
-        {
-          "country": "芬兰",
-          "days": "4-9天"
-        },
-        {
-          "country": "法国",
-          "days": "4-5天"
-        },
-        {
-          "country": "德国",
-          "days": "4-5天"
-        },
-        {
-          "country": "希腊",
-          "days": "5-6天"
-        },
-        {
-          "country": "香港",
-          "days": "1-3天"
-        },
-        {
-          "country": "印度",
-          "days": "3-10天"
-        },
-        {
-          "country": "爱尔兰",
-          "days": "4-5天"
-        },
-        {
-          "country": "意大利",
-          "days": "4-6天"
-        },
-        {
-          "country": "日本",
-          "days": "3-5天"
-        },
-        {
-          "country": "马来西亚",
-          "days": "3-6天"
-        },
-        {
-          "country": "荷兰",
-          "days": "4-5天"
-        },
-        {
-          "country": "新西兰",
-          "days": "5-6天"
-        },
-        {
-          "country": "挪威",
-          "days": "4-10天"
-        },
-        {
-          "country": "菲律宾",
-          "days": "3-6天"
-        },
-        {
-          "country": "波兰",
-          "days": "5-6天"
-        },
-        {
-          "country": "葡萄牙",
-          "days": "4-5天"
-        },
-        {
-          "country": "沙特阿拉伯",
-          "days": "5-11天"
-        },
-        {
-          "country": "新加坡",
-          "days": "3-4天"
-        },
-        {
-          "country": "韩国",
-          "days": "4-6天"
-        },
-        {
-          "country": "西班牙",
-          "days": "5-6天"
-        },
-        {
-          "country": "瑞典",
-          "days": "4-10天"
-        },
-        {
-          "country": "瑞士",
-          "days": "11-12天"
-        },
-        {
-          "country": "台湾",
-          "days": "3-4天"
-        },
-        {
-          "country": "泰国",
-          "days": "4-6天"
-        },
-        {
-          "country": "土耳其",
-          "days": "6-9天"
-        },
-        {
-          "country": "阿拉伯联合酋长国",
-          "days": "3-7天"
-        },
-        {
-          "country": "英国",
-          "days": "4-5天"
-        },
-        {
-          "country": "美国",
-          "days": "3-4天"
-        },
-        {
-          "country": "越南",
-          "days": "4-6天"
-        }
-      ]
-    },
-    "freeShipping": {
-      "header": "免费送递服务",
-      "define": "若顾客税前订单价值超过某数目时，该订单将可享有免费的联邦快递International Priority®送递服务。此税前订单价值将会因不同国家/地区而有所不同。下面列表中将会列出各国/地区免费运送所需的最低税前订单价值。",
-      "country": "国家/地区",
-      "value": "所需税前订单价值(USD)",
-      "delivery": [
-        {
-          "name": "澳大利亚",
-          "value": "168"
-        },
-        {
-          "name": "奥地利",
-          "value": "194"
-        },
-        {
-          "name": "比利时",
-          "value": "194"
-        },
-        {
-          "name": "巴西",
-          "value": "335"
-        },
-        {
-          "name": "加拿大",
-          "value": "194"
-        },
-        {
-          "name": "智利",
-          "value": "335"
-        },
-        {
-          "name": "中国大陆",
-          "value": "168"
-        },
-        {
-          "name": "塞浦路斯",
-          "value": "206"
-        },
-        {
-          "name": "丹麦",
-          "value": "194"
-        },
-        {
-          "name": "爱沙尼亚",
-          "value": "335"
-        },
-        {
-          "name": "芬兰",
-          "value": "194"
-        },
-        {
-          "name": "法国",
-          "value": "194"
-        },
-        {
-          "name": "德国",
-          "value": "194"
-        },
-        {
-          "name": "希腊",
-          "value": "194"
-        },
-        {
-          "name": "关岛",
-          "value": "194"
-        },
-        {
-          "name": "香港",
-          "value": "0"
-        },
-        {
-          "name": "匈牙利",
-          "value": "206"
-        },
-        {
-          "name": "印度",
-          "value": "194"
-        },
-        {
-          "name": "印尼",
-          "value": "168"
-        },
-        {
-          "name": "爱尔兰",
-          "value": "194"
-        },
-        {
-          "name": "意大利",
-          "value": "194"
-        },
-        {
-          "name": "日本",
-          "value": "168"
-        },
-        {
-          "name": "韩国",
-          "value": "155"
-        },
-        {
-          "name": "拉脱维亚",
-          "value": "335"
-        },
-        {
-          "name": "立陶宛",
-          "value": "335"
-        },
-        {
-          "name": "卢森堡",
-          "value": "194"
-        },
-        {
-          "name": "澳门",
-          "value": "155"
-        },
-        {
-          "name": "马耳他",
-          "value": "194"
-        },
-        {
-          "name": "荷兰",
-          "value": "194"
-        },
-        {
-          "name": "新西兰",
-          "value": "168"
-        },
-        {
-          "name": "北馬裏亞納群岛",
-          "value": "194"
-        },
-        {
-          "name": "挪威",
-          "value": "194"
-        },
-        {
-          "name": "菲律宾",
-          "value": "155"
-        },
-        {
-          "name": "波兰",
-          "value": "206"
-        },
-        {
-          "name": "葡萄牙",
-          "value": "194"
-        },
-        {
-          "name": "波多黎各",
-          "value": "194"
-        },
-        {
-          "name": "罗马尼亚",
-          "value": "335"
-        },
-        {
-          "name": "沙特阿拉伯",
-          "value": "335"
-        },
-        {
-          "name": "新加坡",
-          "value": "155"
-        },
-        {
-          "name": "斯洛伐克",
-          "value": "206"
-        },
-        {
-          "name": "斯洛文尼亚",
-          "value": "335"
-        },
-        {
-          "name": "南非",
-          "value": "335"
-        },
-        {
-          "name": "西班牙",
-          "value": "194"
-        },
-        {
-          "name": "瑞典",
-          "value": "194"
-        },
-        {
-          "name": "瑞士",
-          "value": "194"
-        },
-        {
-          "name": "台湾",
-          "value": "155"
-        },
-        {
-          "name": "泰国",
-          "value": "155"
-        },
-        {
-          "name": "土耳其",
-          "value": "206"
-        },
-        {
-          "name": "阿联酋",
-          "value": "206"
-        },
-        {
-          "name": "英国",
-          "value": "194"
-        },
-        {
-          "name": "美国",
-          "value": "194"
-        },
-        {
-          "name": "美国维尔京群岛",
-          "value": "194"
-        },
-        {
-          "name": "越南",
-          "value": "155"
-        }
-      ]
-    },
-    "international": {
-      "header": "国际政策",
-      "define": "此国际运输政策适用于BDD Co.或www.bddco.com网站订单。我们接受来自以下国家或地区的订单：澳大利亚，奥地利，比利时，巴西，加拿大，智利，中国，塞浦路斯，丹麦，爱沙尼亚，芬兰，法国，德国，希腊，关岛，香港，匈牙利，印度，印度尼西亚，爱尔兰，意大利，日本，韩国，拉脱维亚，立陶宛，卢森堡，澳门，马耳他，荷兰，新西兰，北马里亚纳群岛，挪威，菲律宾，波兰，葡萄牙，波多黎各，罗马尼亚，沙特阿拉伯，新加坡，斯洛伐克，斯洛文尼亚，南非洲，西班牙，瑞典，瑞士，台湾，泰国，土耳其，阿拉伯联合酋长国，英国，美国，美属维尔京群岛和越南。",
-      "mail": "请发送电子邮件至",
-      "know": "联络我们的客户服务了解更多详情。",
-      "tit1": "记录进口商",
-      "con1": "记录进口商是指进口商，无论是实体还是个人，负责确保货物按照目的地国家或地区的法律和法规进口。记录进口商负责支付海关或承运人评估的所有进口关税，税款和费用。",
-      "con2": "对于BDD公司接受订单的所有国家或地区，收件人是记录的进口商。收件人必须确保进口货物符合目的地国家的法律和法规。在交付过程中和货物交付给接收方之前，目的地国家或地区的海关可能会对货物征收关税，税款，行政费用或任何其他费用。在任何情况下，收件人都需要承担全部责任支付此类费用和开支。",
-      "tit2": "所有权和风险",
-      "con3": "一但承运人从BDD公司收到货物，产品的所有权和损失风险将转移给收货人。",
-      "tit3": "限制",
-      "con4": "产品是否有资格运往目的地国家或地区将取决于当地的法令和限制。",
-      "tit4": "装船",
-      "con5": "所有国际订单均通过FedEx International Priority®发货。一但订单超过指定金额，客户将无需支付任何运费。如果对预计的运输时间有任何疑问，您可以通过service@bddco.com联络我们的客户服务部门，或者只需使用FedEx追踪号码查看FedEx追踪系统的交付时间表。",
-      "tit5": "资产保护",
-      "con6": "所有国际订单均已完全投保，确保每笔订单都无风险。从离开BDD公司到达门口时，每个订单都由一家顶级全球保险公司承保并受到保护。保险费用相当于订单价值的0.32％，并将在结账过程中应用。但是，对阿联酋和中国的订单的保险费用可能不一样，如果订单价值超过保险公司规定的限额，则该费用将进行微调。完成购买流程后，保险协议详细讯息和索赔程序将发送到您的电子邮箱。为了加强货物的安全性，BDD公司可能会要求收件人签收，以核实身份。",
-      "tit6": "订单付款",
-      "con7": "BDD&nbsp;Co.接受以下货币：澳元（AUD），加拿大元（CAD），捷克克朗（CZK），丹麦克朗（DKK），欧元（EUR），英镑（GBP），港币（HKD），匈牙利福林（HUF），以色列新谢克尔（ILS），日元（JPY），墨西哥比索（MXN），新台币（TWD），新西兰元（NZD），挪威克朗（NOK），菲律宾比索（PHP），波兰兹罗提（PLN） ，人民币（RMB），俄罗斯卢布（RUB），新加坡元（SGD），瑞典克朗（SEK），瑞士法郎（CHF），泰铢（THB），美元（USD）。",
-      "con9": "一旦您的订单价值达到最低订单价值，订单的运费将被免除。",
-      "con10": "有关详细讯息，请查看",
-      "link1": "免费送货政策",
-      "tit7": "海关，关税和税收",
-      "con11": "您的订单可能会被目的地国家或地区的海关征收进口税，税款，海关费和其他费用。海关清关所需的这些额外费用和收费由收件人负责，并由收件人支付。当您的订单到达目的地国家或地区的海关时，指定的物流承运商或海关将直接与您联络并安排支付任何费用。",
-      "tit8": "一般清关费用",
-      "con12": "安全附加费 - 由于国际安全保障要求承运人持续支出以满足更严格的国际安全条件，可能会收取安全费。",
-      "con13": "提前费用 - 在某些情况下，承运人可以提前代表客户支付关税和税费，以加快通关速度。例如，当国家或地区的海关要求在通关前支付海关费用时。将评估预付费并向客户收取费用。",
-      "con14": "仓库费 - 如果没有支付关税和税款或您的订单无法交付，您可能需要支付仓库费。",
-      "con15": "下表列出了不同国家或地区的估计税率和关税以及其他海关费用，但下列费用可能不等于海关收取的实际金额。BDD&nbsp;Co.无法控制这些费用。有关海关，关税和税收的更多讯息，请联络您当地的海关。",
-      "con16": "具体内容参照BDD网站：",
-      "thead1": "估计关税率",
-      "thead2": "估计税率",
-      "thead3": "订单价值",
-      "thead4": "进口报关费",
-      "thead5": "关税及税费估计总额",
-      "site": "网址：",
-      "table1": {
-        "country": "澳洲",
-        "tbody11": "裸钻：0%",
-        "tbody12": "AU$ 1,000 澳元以下的订单：0%",
-        "tbody13": "其他订单：5%",
-        "tbody21": "10%",
-        "tbody22": "AU$ 1,000 澳元以下的订单没有税",
-        "tbody31": "介于AU$1,000 至 AU$10,000",
-        "tbody32": "AU$50.00",
-        "tbody41": "所有AU$10,000 或以上",
-        "tbody42": "AU$152.00",
-        "tbody51": "0% 至 15.5%",
-        "tip": "注意：邮包可能附有澳洲检疫与检查服务费(AQIS):AU$33.00",
-        "web": "www.customs.gov.au",
-        "tel": "电话：澳洲以外：(61)2-6275-6666，來自澳洲：1300-363-263"
-      },
-      "table2": {
-        "country": "关岛",
-        "tbody11": "0%",
-        "tbody21": "4%",
-        "tbody31": "若订单价值在$1,000美元以下",
-        "tbody41": "0%",
-        "tbody51": "0% 至 4%",
-        "web": "www.cqa.guam.gov",
-        "tel": "电话：(671)475-6220"
-      },
-      "table3": {
-        "country": "香港",
-        "tbody11": "0%",
-        "tbody21": "0%",
-        "tbody51": "0%",
-        "web": "www.customs.gov.hk",
-        "tel": "电话：(852)2815-7711"
-      },
-      "table4": {
-        "country": "日本",
-        "tbody11": "裸钻 0%",
-        "tbody12": "其他产品： 0% 至 5.5% (取决于制造国)",
-        "tbody21": "8%",
-        "tbody51": "8% 至 13.5%",
-        "tip": "注意：客戶可能需要在收到包裹之后，支付 500 JPY 的 FedEx 预付款。",
-        "web": "www.customs.go.jp",
-        "tel": "电话：日本以外：(81) 3-3529-0700，來自日本：03-3529-0700"
-      },
-      "table5": {
-        "country": "澳門",
-        "tbody11": "0%",
-        "tbody21": "0%",
-        "tbody51": "0%",
-        "web": "www.customs.gov.mo",
-        "tel": "电话：(853) 2896-5001"
-      },
-      "table6": {
-        "country": "纽西兰",
-        "tbody11": "裸钻 0%",
-        "tbody12": "其他产品： 0% 至 5% (取决于制造国)",
-        "tbody21": "15%",
-        "tbody31": "订单价值超过NZ$1,000",
-        "tbody41": "进口费用：NZ$24.75",
-        "tbody42": "生物保安系统准入费：NZ$12.50",
-        "tbody51": "15% 至 20%",
-        "tip": "注意：客户在收取货品时需持有免费进口商编号，该编号在向当地海关交回申请表格后的1-3天内便会发出。",
-        "web": "www.customs.govt.nz",
-        "tel": "电话：新西兰以外：(64) 9-300-5399，來自新西兰：0800-428-7861"
-      },
-      "table7": {
-        "country": "北马里亚纳群岛",
-        "tbody11": "0%",
-        "tbody21": "5.75%",
-        "tbody51": "5.75%",
-        "web": "www.cnmidof.net/customs",
-        "tel": "电话：670-664-1607"
-      },
-      "table8": {
-        "country": "波多黎各",
-        "tbody11": "0%",
-        "tbody21": "5.75%",
-        "tbody51": "0%",
-        "web": "www.cbp.gov",
-        "tel": "电话：670-664-1607"
-      },
-      "table9": {
-        "country": "新加坡",
-        "tbody11": "0%",
-        "tbody21": "7%",
-        "tbody51": "7%",
-        "tip": "收件人作为名义进口商收取货品，须负责与当地机关合作并解决任何货品及税务相关的问题。若客户的订单被退回或因调整尺寸、维修或退换货品而希望获得退还先前所交的税务，收件人需负责遵从相关程序与新加坡当局办理退还手续。评税及退税的决定是由新加坡当局作出并拥有最终决定权，在这一方面BDD&nbsp;Co.没有任何控制权。若想索取用以申请退税的送运文件副本，可能需要待最多30个工作天审批。",
-        "web": "www.cbp.gov",
-        "tel": "电话：670-664-1607"
-      },
-      "table10": {
-        "country": "台湾",
-        "tbody11": "0%",
-        "tbody21": "5%",
-        "tbody51": "5%",
-        "tel": "电话：02-24222310"
-      },
-      "table11": {
-        "country": "阿联酋",
-        "tbody11": "裸钻 0%",
-        "tbody12": "黄金首饰 1%",
-        "tbody13": "黄金钻石首饰 1.5%",
-        "tbody14": "所有其他首饰：5%",
-        "tbody21": "0%",
-        "tbody51": "0% 至 5%",
-        "tip": "注意：阿拉伯联合酋长国的关税不予返还。",
-        "web": "www.sharjahcustoms.gov.ae",
-        "tel": "电话：0097 06 5282216 / 0097 06 5282666"
-      },
-      "table12": {
-        "country": "美属维京群岛",
-        "tbody11": "0%",
-        "tbody21": "0%",
-        "tbody51": "0% 至 5%",
-        "web": "www.cbp.gov"
-      },
-      "tit9": "限制",
-      "con17": "敬请注意，运送的产品有可能不符合目的地国家或地区的法律或规定，其中包括标准、标签和规格等要求。顾客需自行判断及负责有关产品是否依法合法进口到目的地国家或地区。",
-      "tit10": "私隐权",
-      "con18": "经国际运送的邮件可能会被海关打开查验。关于您的订单、装运和内载关于产品的资料可能会转交给我们的托运人和海关机关，以便办理清关手续。",
-      "tit11": "退货",
-      "con19": "为了让你有更方便愉快的购物体验，我们的退货政策非常灵活。如果您因任何理由对产品感到不满意，您可以在收到商品后7天之内要求把货品（必须保持原来的购买状态和无特订雕刻）退回或换货。",
-      "con20": "对于发送中国的订单，7天是由客户收到货品的日期算起，以及20%的预订费不可退还。详情请查看我们的",
-      "link2": "退货政策",
-      "tip1": "条款及条件更新日期为 2017 年 4 月 13 日。"
-    },
-    "jewelryInsurance": {
-      "header": "珠宝保险",
-      "tit1": "BDD.co的珠宝保险内容如下：",
-      "con1": "珠宝商互助®首饰保险",
-      "con2": "Jewelers Mutual Insurance Company已在次页面上提供内容",
-      "tit2": "立即获取免费报价",
-      "con3": "BDD与保险公司合作，为您提供个人珠宝保险，为您提供美丽永恒安全的珠宝保险。确保您珠宝快速安全送达，让您感受到情感和安全感。",
-      "tit3": "与BDD合作的珠宝保险公司，是唯一一家专门从事珠宝保险的保险公司。",
-      "con4": "珠宝保险®首饰保险的优势包括：",
-      "con5": "全面的全球覆盖范围，超越普通商品保险;",
-      "con6": "防止盗窃，损坏，意外丢失和神秘失踪;",
-      "con7": "灵活选择自己的珠宝商;",
-      "con8": "修复受损珠宝，品质与原件相同;",
-      "con9": "更换相同品牌和类型的丢失珠宝;",
-      "con10": "研究宝石学家（GIA）对员工的珠宝充满热情。",
-      "con11": "如果您对珠宝保险有任何疑问，请发送电子邮件至",
-      "con12": "或致电",
-      "tit4": "*魁北克市不提供保险",
-      "con13": "必须年满18周岁才能申请保险。 Jewelers Mutual是您可能正在考虑的其他保险公司的替代品。 BDD不是Jewelers Mutual的特许代理商，不出售或推荐保险。保险范围受政策中的规定，限制，排除和认可以及您选择的保险范围的限制。",
-      "con14": "通过单击",
-      "link1": "了解更多并获得免费报价您授权",
-      "con15": "Jewelers Mutual使用安全系统从BDD检索并保存此购买的详细讯息，以计算保险报价。检索到的讯息可能包括您的姓名和地址。"
-    },
-    "paymentMethods": {
-      "header": "付款方式",
-      "advice": "BDD Co.建议客户在www.bddco.com使用以下货币作为主要交易货币：澳大利亚元（AUD），加拿大元（CAD），捷克克朗（CZK），丹麦克朗（DKK），欧元（EUR），英镑（ GBP），港元（HKD），匈牙利福林（HUF），以色列新谢克尔（ILS），日元（JPY），墨西哥比索（MXN），新台币（TWD），新西兰元（NZD），挪威克朗（ NOK），菲律宾比索（PHP），波兰兹罗提（PLN），人民币（RMB），俄罗斯卢布（RUB），新加坡元（SGD），瑞典克朗（SEK），瑞士法郎（CHF），泰国泰铢（THB ），美元（USD）。为客户创造安全的在线购物环境。 BDD Co.致力于提高网站安全性并与PayPal合作，以保护客户的个人讯息和银行账户数据。 bddco.com上的所有交易都将通过PayPal处理。有关PayPal的更多讯息，请单击",
-      "here": "此处",
-      "payment": "关于支付",
-      "paypal": "PayPal：如果客户有PayPal帐户。客户可以通过PayPal帐户处理付款。",
-      "creditcard": "信用卡：客户也可以通过信用卡付款（例如Visa，MasterCard，American Express，Discover，Diners Club或JCB等）。我们的网站通过PayPal接收所有信用卡付款。",
-      "remittance": "银行电汇/国际汇款（IMT）/电汇（TT）/银行现金存款：如果客户没有PayPal账户或信用卡，客户可以使用银行电汇/汇款作为付款方式，客户将有1.5％折扣。",
-      "tip1": "银行电汇/汇款可能需要三个工作日才能转账和收款。",
-      "tip2": "选择银行电汇/汇款方式的折扣是在保险费和进口税/税费之前计算的。",
-      "tip3": "大多数银行将收取银行电汇/汇款的处理/管理费。",
-      "unionpay": "银联：客户也可以使用银联（必须由中国大陆银行发行）进行付款。",
-      "about": "关于PayPal",
-      "con1": "为客户创造安全的在线购物环境。 BDD Co.致力于提高网站安全性并与PayPal合作，以保护客户的个人讯息和银行账户数据。 bddco.com上的所有交易都将通过PayPal处理。",
-      "con2": "为了增强客户在我们网站上的购物体验，BDD Co.与PayPal建立了合作伙伴关系，以提供更可靠，更安全的付款方式。",
-      "con3": "BDD Co.与PayPal合作，为客户提供：",
-      "pro1": "灵活性：从不同的资金来源付款（例如，PayPal A/C，信用卡或银行账户余额）",
-      "pro2": "私隐：在不提供财务讯息的情况下付款。",
-      "pro3": "安全性：PayPal和BDD Co.致力于保护您的帐户免受未经授权的交易，并确保您的帐户的利益和安全，您可以放心购物和在我们的网站上交易。",
-      "know": "如果您想了解有关PayPal的更多讯息，请查看：",
-      "use": "PayPal的使用",
-      "check": "在确认您的帐单邮寄地址和收货地址后处理付款时，该网站会将您连结到PayPal的付款页面。您可以使用信用卡或PayPal帐户进行付款。当您完成付款后，您将被转回BDD Co.网站以完成购买流程。完成后，您将收到BDD公司的确认电子邮件。如果您有任何疑问，请发送电子邮件至"
-    },
-    "privacyPolicy": {
-      "header": "私隐政策",
-      "define": "为了提升客户的购物体验和满意度，BDD Co.（包括其附属公司和子公司）一直致力于保护客户的个人资料。以下讯息向您提供我们收集的讯息类型，讯息的原因和用法。在本文中，“网站”是指BDD Co.网站，移动应用程序和其他软件。此外，本文中的“服务”包括我们的网站，客户服务电话以及BDD公司提供的任何其他产品或购物服务。",
-      "update": "BDD Co.偶尔会更新、修改私隐政策。如果有任何修改或更新，“最后更新”日期将写在本文顶部。通过使用我们的网站，服务和/或向我们提供您的个人讯息（包括但不限于注册为我们的会员，其他促销计划或以任何方式联络我们），您接受并同意本私隐政策，包括任何更改或更新。",
-      "privacy": "本私人政策中的“个人讯息”是指与已识别个人或可识别个人相关的任何讯息。",
-      "tit1": "数据采集",
-      "tip1": "(i）数据来源",
-      "con1": "我们收到并可能存储您提供给我们的所有个人讯息，无论是口头还是书面形式。这包括通过任何方式或方式提供给我们的个人讯息，包括但不限于通过BDD Co.网站，各种社交媒体服务（例如Facebook，微信，Whatsapp，Twitter，新浪），客户服务电话，电子邮件或各种促销活动。此外，讯息将通过Cookie或其他技术收集。如果您的浏览器允许，您可以关闭Cookies功能，一但浏览器的Cookies功能关闭，您将无法使用本网站的某些功能。有关cookie以及如何不接受cookie的更多讯息，请参阅www.allaboutcookies.org。",
-      "tip2": "(ii）数据类型",
-      "con2": "我们收集并可能存储以下数据或讯息，包括但不限于所有个人讯息，例如：姓名，性别，生日，职称，联络电话（电话，传真，手机），邮政地址和电子邮件地址，付款和交易讯息，运输和账单讯息（如果您购买我们的产品）；您和BDD公司之间的沟通记录；有关职业，婚姻状况，兴趣，人口统计数据，观点和经验的其他讯息，包括我们的产品和服务偏好，月收入，建议的联络方式。因此，我们可以为您提供最贴心的优质服务。",
-      "con3": "您可以通过网站功能“推荐朋友”向我们提供您朋友的姓名和联络讯息。因此，我们能够向您和您的朋友发送产品讯息，各种形式的优惠或礼品。从“推荐给朋友”收集的有关您和您的朋友的讯息将以本私隐政策中描述的方式存储或使用我们收集的有关您的所有讯息可能会与您有关的其他讯息相结合。",
-      "tip3": "(iii）13 岁以下的儿童",
-      "con4": "BDD公司不会收集13岁以下儿童的个人讯息。如果我们收到13岁以下儿童的个人身份讯息，我们将删除数据记录以保护儿童的在线私隐。",
-      "tit2": "资料使用",
-      "con5": "我们收集的有关您和您的朋友的所有讯息可用于运行基本操作功能，提高效率和功能，开发和分析，评估广告效果和其他目的，并获得您的同意（上述预期用途是统称为一般用途） 。该讯息可与我们的合作伙伴共享，以实现与上述相同的一般目的。",
-      "con6": "基本操作功能：例如，我们需要使用Cookie来维护我们的网站服务，包括但不限于购物车功能，帐户登录系统，防止和检测欺诈或滥用，响应您的请求和查询，管理和实施各种活动。",
-      "con7": "效率和功能：包括但不限于管理或确认您的订单，检查和测试您的个人讯息以确保准确性和完整性，并记录您对产品和服务的偏好。",
-      "con8": "开发和分析：包括但不限于改进，增加和开发新服务和产品，了解客户群的结构，购物行为，偏好和兴趣等。",
-      "con9": "广告的有效性：包括但不限于开发新的促销模式和方法以改善客户体验，提供个性化的广告内容和产品讯息和服务，以及规划和实施各种类型的促销活动和活动。",
-      "con10": "我们会将您提供给我们的所有讯息结合起来，我们会将这些讯息与来自合作伙伴的讯息，数据工具和可公开获取的讯息结合起来。",
-      "tit3": "网站连结",
-      "con11": "为了向您提供更多讯息，我们的网站可能会接连不受我们控制且本私隐政策未涵盖的第三方网站。本私隐政策仅适用于我们的网站https://www.bddco.com/，如果您通过我们网站上的连结查看第三方网站，我们不承担任何责任。我们建议您在查看其他网站时阅读私隐政策。",
-      "tit4": "我们可能与他人分享的讯息",
-      "con12": "您的个人讯息可能会转移给可信的第三方服务供应商。他们将帮助我们为您提供服务或直接为您提供服务，包括市场研究和分析，数据和记录管理，网站服务器托管，运输和支付处理，邮件和电子邮件处理，营销，执行，组装，特别活动和其他运营商等。",
-      "con13": "我们可能会在以下情况下披露您的讯息：（1）合理遵守任何适用的法律，法规，法律程序或政府要求，包括满足国家安全或执法要求;（2）协助调查或预防涉嫌欺诈的非法活动;（3）涉及对任何人的人身安全的潜在威胁的情况;（4）防止和减少违法行为风险的目的;（5）与您签订任何协议;（6）业务转移;（7）摘要讯息（不包括个人身份识别摘要记录）。",
-      "tit5": "安全",
-      "con14": "我们采用了一系列物理和电子安全技术，程序和组织保护措施来保护您的个人讯息的安全，包括防止您的个人讯息被未经授权的查看，使用或披露。虽然我们拥有精确的安全技术和全面的保护措施和程序，但我们仍然无法保证您发送给我们的个人讯息可以100％安全。",
-      "tit6": "查询",
-      "con15": "如果您对本私隐声明有任何的疑问，请电邮致",
-      "con16": "与我们联络。"
-    },
-    "qualityValue": {
-      "header": "品质与价值",
-      "remind": "BDD Co.致力于为客户提供最优质的裸钻和珠宝，并坚持为客户提供卓越的品质选择和非凡的价值。我们的珠宝首饰是根据高质量标准精心制作，选择和检验的，因此客户可以放心购买。客户可以根据自己的需求，偏好和预算进行选择。",
-      "best": "最好的钻石质量",
-      "rate": "作为在线钻石零售商，BDD Co.预先筛选出优质的裸钻。其切割，净度和颜色根据标准化的国际分级标准进行评级。每一枚裸钻都附有由美国宝石学院（GIA）发布的评级报告和激光铭文。 GIA是世界上最大，最受尊敬的非营利性宝石学知识来源，它被认为是钻石分级准确性和完整性的原始和无与伦比的来源。",
-      "tip1": "钻石首饰",
-      "con1": "出于质量保证的原因，我们珠宝中的所有钻石（包括最小的钻石）都符合BDD Co.严格的最低质量标准。每颗钻石均为无色至近无色（DJ级颜色），具有极佳的透明度（FL-SI2级透明度）。",
-      "tip2": "白金首饰",
-      "con2": "铂金耐用，坚固，纯度高，耐腐蚀，不易氧化贵金属;它代表着永恒的爱。此外，其天然白色铂金属光泽带来钻石的光彩和优雅。因此，很多人选择它来订婚和结婚戒指。我们所有的铂金都是95％的纯度。",
-      "tip3": "黄金首饰",
-      "con3": "黄金是一种流行的贵金属。我们的戒指和首饰有多种颜色和合金，包括18k和14k黄，白金和玫瑰金。我们的金戒指和珠宝系列将满足客户的不同需求和预算。",
-      "tip4": "银制首饰",
-      "con4": "我们所有的银片都是92.5％的合金纯银。这种合金具有所需的金属光泽，亮度和硬度，是时尚，精致和耐用的最佳组合。",
-      "more": "要了解更多讯息，请参阅",
-      "link": "知识"
-    },
-    "returnRefundPolicy": {
-      "header": "退款保障条款及细则",
-      "tit1": "7天退款保证",
-      "con1": "您可以在收到产品后7天内以任何理由退回或更换产品，我们很乐意安排更换或全额退款（不包括运费保险费，税费和运费），以确保每一件产品。顾客很满意。",
-      "con2": "从BDD Co.购买的每位客户都将享有7天的退货权。客户只需支付退货运费和保险费。请注意，购买的商品必须保持原始购买状态，还包括所有产品文件，并在7天内发货，以便有资格获得退货。对于运往中国的订单，7天将从客户收到物品开始，20％的预订费用不予退还。要获得订单的退货授权，请按照以下步骤操作。",
-      "tit2": "接受包裹前",
-      "con3": "我们发货的所有订单都是全额保险。重要的是，如果送到您的包裹或物品损坏或被篡改，请拒绝收货，拍照留下记录，并立即发送电子邮件至",
-      "con4": "。对于损坏或丢失的物品，请在等待过程中保留所有包装材料和物品。必须在收到包裹后5天内报告损坏或遗失物品的索赔。 BDD Co.对退回的货物丢失或损坏概不负责。",
-      "tit3": "国际退货",
-      "con5": "如果在退回商品的过程中产生任何额外费用，BDD Co.将保留权利向阁下收取该额外费用。为避免产生额外费用，我们建议您透过我们选择的投保FedEx承运商进行运送退回商品。为了方便您，我们可协助您通过FedEx国际优先分送速递®服务以优惠价购买保险。",
-      "tit4": "运费",
-      "con6": "在退货的运费方面，BDD Co.对未经许可授权的运送费用或任何其他相关的额外费用一概不作补偿。请阁下不要使用货到付款的形式进行退货。请保留FedEx收件和/或查验的所有运送材料。",
-      "con7": "若我们要求阁下将货品退回，我们可能会根据情况赔偿您部分或全部退货运费。但不会对于阁下自行决定使用的特殊运送服务作任何补偿。",
-      "con8": "准备退还产品进行交换或退款：",
-      "con9": "1.对于所有退货，请在退货前电邮给我们service@bddco.com。您需提供BDD Co.订单号码以及退货编码（在和BDD Co.联络退换事宜后，经双方同意后发出）。请注意，我们建议您的货品及其所有相关文件妥善稳妥地包装在原始包装材料中，及为其投购全额保险。若无法达成上述要求，该退货申请将不获处理。",
-      "con10": "2.若您的商品运抵时附有一张钻石证书，而该证书并无退回，则您需要支付250美元（或等值的其他货币）的钻石证书补领费用。",
-      "con11": "在退货的过程中，我们建议您将货品稳妥地包装在原始包装材料中，并投放全额保险。若物品不幸遗失或遭盗窃，我们概不负责。因此阁下应为您的退回货物购买运送保险，以保障自己。退货的保险需顾客自行购买或可向我们查询协助购买。为安全起见，请不要在盒子外露的任何地方有'BDD Co.','钻石','金'或'珠宝首饰'等字眼。",
-      "tit5": "当BDD Co.收到您的退货后",
-      "con12": "一但包裹到达我们手中，我们将向您发送确认电子邮件，并将在周一至周五进行退货。",
-      "con13": "您退回的物品将被送到我们的珠宝专家进行全面检查，其中包括一系列质量检查，以确保物品没有遭受任何损坏或修改（请告知珠宝专家不是BDD公司的直接员工）。一但我们发现物品已损坏或已被修改，退货申请将被视为无效。如果您对退货有任何疑问，我们会与您联络。相反，一但我们发现每个方面的物品都完好无损，您的退货将被全面处理，您将收到退货（换货/退款）确认电子邮件。",
-      "con14": "对于物品交换，如果您已收到退货确认电子邮件并且预计将退回货件，您将在出货当天收到送货确认。",
-      "tit6": "奖赏积分退回",
-      "con15": "若您在购买时使用了奖赏积分，退回的货品在获得品质保证团确认后我们将会在1-2个工作天内优先退回奖赏积分到您的BDD Co.会员帐号。若您当初购买的货品多于一件，您退货的时候选择保留部分不退，奖赏积分将无法使用在您保留的货品上，奖赏积分将会在退回奖赏积分当天重新计算并优先退回到您的BDD Co.会员帐号。",
-      "tit7": "更改或取消订单",
-      "con16": "如果您想更改或取消订单，请发送电子邮件至",
-      "con17": "。我们将您检查订单的最新状态。某些更改可能会增加准备时间并导致运输延迟。我们无法接受特殊要求订单和/或已发货订单的更改或取消。如果您的包裹已发货，请在收到包裹后按照退货政策与我们联络以进行退货安排。",
-      "tip1": "如有任何争议，BDD Co.保留最终决定权。"
-    }
-  },
-  "education": {
-    "layout": {
-      "home": "首页",
-      "knowledge": "知识",
-      "diamond": "钻石",
-      "carat": "克拉",
-      "cut": "切割",
-      "color": "颜色",
-      "clarity": "净度",
-      "shapes": "形状",
-      "certification": "证书证明",
-      "maintenance": "钻石护理",
+		"allReviews": "全部评价",
+		"fiveStarReviews": "5星评价",
+		"BDDReply": "BDD回复",
+		"loadingMore": "加载更多..."
+	},
+	"policies": {
+		"layout": {
+			"homepage": "首页",
+			"QAndA": "问答",
+			"BDDService": "BDD服务",
+			"workTime": "香港时间(GMT+8)星期一至五上午9时至晚上6时",
+			"workTel": "+852 21653905",
+			"workEmail": "service@bddco.com",
+			"chooseBDD": "选择BDD",
+			"qualityAndValue": "品质与价值",
+			"returnAndRefundPolicy": "退款保障条款及细则",
+			"findYourRingSize": "找出您的戒指尺寸",
+			"aboutBDD": "关于BDD",
+			"BDDBrandStory": "BDD品牌故事",
+			"diamondKnowledge": "钻石知识",
+			"paymentMethods": "付款方式",
+			"BDDPolicy": "BDD政策",
+			"freeShippingService": "免费送递服务",
+			"deliveryPolicy": "送货政策",
+			"internationalPolicy": "国际政策",
+			"privacyPolicy": "私隐政策",
+			"termsAndConditions": "条款及细则"
+		},
+		"termsAndConditions": {
+			"header": "条款及细则",
+			"define1": "以下所有条款和条件均适用于位于www.bddco.com的BDD Co.网站，其关联公司以及连结至www.bddco.com的所有其他相关网站。 BDD Co.网站：www.bddco.com统称为“网站”。请仔细阅读条款和条件。当您使用本网站时，即表示您同意受这些条款和条件的约束。",
+			"define2": "以下条款和条件将规定您在BDD Co.网站上的使用和购买，并在您和BDD Co.之间形成协议。对于网站上的任何政策，指南，条款和条件，BDD Co.保留更改或随时修改它们，并由其自行​​决定。所有更改或修改将在网站上发布修改后直接生效。如果您在网站更改或修改后继续使用本网站，BDD公司将视您接受更改或修改。因此，建议您经常阅读本网站的条款和条件以及所有适用的政策和指南，以便您清楚地了解使用网站的条款和条件。如果您不同意更改或修改条款和条件，应立刻停止使用本网站。",
+			"tit1": "产品定价和供应情况",
+			"con1": "由于网站有时收到大量订单，我们可能无法在产品缺货之前预先在网站上发布通知。如果发生这种情况，我们将直接与您联络以寻找可能的解决方案。如果您对正在购买阶段的产品感兴趣，请联络我们的网站客户服务部门，以便在产品重新有货时收到补货通知。",
+			"con2": "该网站可能会出现一些不准确的显示，如数据或价格。虽然我们的员工尽力避免这些情况和错误，但事故可能会发生。因此，我们保留在发生错误时纠正任何和所有错误的权利。我们不会出售任何标有不正确价格的产品。如果产品的上市价格低于实际价格，我们将自行决定是否与您联络以获取通知，并在产品发货前询问您的说明或通知您订单已取消。您同意支付收费价格与实际价格之间的差额或退回产品。我们可以随时更改产品价格，恕不另行通知。对于可能发生的不便，我们深表歉意。",
+			"tit2": "钻石证书",
+			"con3": "在您下订单后，我们会将您选择的裸钻与钻石证书一起运送。我们所有的钻石证书均由美国宝石学院（GIA）颁发。更换钻石证书是昂贵且耗时的。因此，我们要求每个钻石证书都与每个退回的钻石一起运回。如果您没有随钻石退还证书，我们将向您收取250美元作为证书的更换费用。",
+			"tit3": "之后购买和比较",
+			"con4": "之后的采购和比较是不允许的，因为我们希望保持产品价格低廉。之后的购买和比较意味着客户打算购买几种产品并保留最多的产品，然后返回剩余的产品。这种行为导致我们无法准确地重新进货并导致高库存成本。我们很乐意帮助您选择产品。如果您想了解更多产品质量，请发送电子邮件至service@bddco.com与我们的客户服务部联络。",
+			"tit4": "网站讯息指南",
+			"con5": "BDD Co.尽一切努力确保在线目录尽可能完整和准确。为了让您能够清楚地查看我们的产品，我们的某些产品的实际尺寸可能与我们的照片有所不同。此外，根据每个显示器设置，产品的颜色显示可能会略有不同。",
+			"con6": "我们的目标是在尽可能做出购买决定之前提供您所需的讯息和细节，您可以查看和判断我们产品的形状和美感。根据联邦贸易委员会（FTC）的规定和行业标准，BDD公司宣布克拉总重量可能与实际项目和网站上显示的重量之间有0.05克拉的差异。",
+			"con7": "我们网站提供的产品尺寸基于制造的格式和标准。整理过程和修饰过程可能会导致结婚戒指的宽度略有差异。因此，机器制造的结婚戒指的宽度可能有0.2mm的差异，而铸造制造的戒指可能略有不同。这些都是BDD公司允许的。",
+			"con8": "对于具有多个钻石的钻石产品，我们提供具有多个钻石的每种产品的平均克拉重量。我们所有钻石的清晰度和颜色等级均以平均值提供。如果讯息显示最小值，则产品中的所有钻石均符合规定的标准，或高于规定的标准。如果讯息显示平均值，则所有钻石平均等于规定的质量或高于或低于规定的质量。",
+			"tit5": "采购的道德政策",
+			"con9": "BDD Co.仅从信誉良好的正规钻石供应商那里购买钻石。与我们一样，我们选择的供应商也遵守金伯利进程。这个过程是一个监督钻石贸易的国际体系和政策，并确保钻石来自没有冲突的正式来源。",
+			"tit6": "私隐政策",
+			"con10": "如果您想了解BDD Co.如何收集和使用其客户的个人讯息，请参阅我们的",
+			"link1": "私隐政策",
+			"tit7": "网站内容",
+			"con11": "网站的所有内容和材料，包括但不限于Blue Danube Diamond和BDD Co.徽标，以及所有文本，讯息，图像，图片，图形，外观，感觉，数据，文件，设计，软件，选择，协调，声音文件，其他文件和所有选择安排（统称为“网站材料”）是BDD Co.或其用户或其许可方的专有财产，并受商标法，版权，专利，商业外观和其他知识产权的保护。产权和不正当竞争法。",
+			"tit8": "商标",
+			"con12": "Blue Danube Diamond，BDD Co.，创建您自己的戒指，Blue Danube Diamond和BDD Co.徽标，标语和我们网站中包含的任何其他服务或产品名称是Blue Danube Diamond和BDD Co.及其许可方或供应商的商标。未经BDD Co.及适用商标持有人事先书面许可，不得全部或部分使用，复制或复制。未获得我们事先书面许可的任何人不得复制，复制或使用“Blue Danube Diamond”，“BDD Co.”或任何其他名称，商标，产品或服务名称，或任何其他“隐藏文本”或任何元标签蓝色多瑙河钻石和BDD公司的名称或标志“蓝色多瑙河钻石”，“BDD公司”，产品名称，注册商标、以及所有其他商标，均为其各自拥有人的财产。",
+			"tit9": "网站使用",
+			"con13": "当您查看该网站时，您将获得使用该网站的有限许可。您可以通过电子方式复制（未经许可禁止的情况下）网站资料，并仅作为参考讯息打印至个人非商业用途的硬拷贝。此类许可受这些条款和条件的约束，但不包括：（1）使用网站或网站材料进行转售或其他商业用途。 （2）使用任何图片，产品清单和商业用途说明。 （3）公开展示或传播网站资料。 （4）使用或更改网站，网站资料或网站任何部分的任何衍生产品使用。 （5）使用任何自动化手段（刮擦，机器人，蜘蛛或任何类似的自动数据收集方法）作为与网站互动的方式进行监控，从网站提取或收集数据。 （6）从网站下载讯息和网站资料的任何部分（页面缓存除外）。 （7）导致任何出现的窗口（无论是否覆盖我们的网站），退出窗口，广告，扩展按钮，或覆盖，框架，最小化或禁止网站的任何其他窗口。 （8）任何影响和干扰网站正常运行的使用方式。 （9）任何使用我们网站或我们的网站资料的方法与预期目的不同。在获得我们的书面许可之前，禁止并违反使用与许可的预期目的不同的方法。我们将停止授权。未经授权使用本网站可能会冒犯一些适用的相关法律，包括但不限于适用的通信法规和法规以及商标和版权法。无论是暗示，禁止反言还是其他方式，除非我们在此明确说明，否则这些条款和条件不会被视为对知识产权的授权，BDD公司随时可以撤销许可证。",
+			"tit10": "侵权政策",
+			"con14": "根据适用的版权法和其他适用法律，BDD Co.将自行决定拦截和/或阻止被视为侵权者查看或使用本网站的网站用户或帐户持有人。 BDD Co.也可以自行决定根据情况终止任何侵权者的账户。",
+			"tit11": "第三方內容",
+			"con15": "BDD Co.可以提供指向第三方网页和内容的连结，作为客户可能对此讯息感兴趣的服务。 BDD Co.不监控或控制任何第三方网页或其内容。 BDD Co.不认可任何第三方内容，也不保证第三方网页及其内容的准确性和完整性。 BDD Co.不保证或代表第三方内容中任何讯息的准确性，也不负责审查和更新任何第三方内容和网页。如果用户使用这些网页或第三方内容，用户将被视为同意自行承担风险。",
+			"tit12": "广告和促销",
+			"con16": "BDD Co.可能会在我们的网站上进行第三方的促销和广告宣传。您参与促销或业务往来，或与第三方广告商的通信，以及此类交易的任何保证，条款和条件，仅限于您与第三方之间。如果您与我们网站上的非BDD Co.广告商之间的任何交易造成任何损失或损害，BDD Co.不承担任何责任和义务。",
+			"tit13": "服从",
+			"con17": "您承认并同意任何材料，包括但不限于有关BDD Co.，本网站或我们的产品和服务的想法，图纸，创意或原始材料，评价，问题，建议，计划，说明或其他讯息。您向BDD Co.建议或提供的讯息均为非机密讯息，并将成为BDD Co.的专有财产.BDD Co.将拥有所有知识产权和专有权，BDD Co.可以无限制地使用或传播这些材料用于商业或任何目的或其他目的，未经您的确认或赔偿​​。您授权BDD Co.及其从属许可证和关联公司使用您提交给我们的此类内容的名称，如果他们选择使用该名称。您声明或保证：1.您拥有您提交给我们的材料和内容的所有权利，或者您有权向我们提交材料和内容；2.提交给我们的材料和内容准确无误导；3.发布和使用您提供的材料或内容不会对任何人或实体造成伤害或侵犯任何权利。",
+			"tit14": "保护和补偿",
+			"con18": "您同意赔偿，并保护BDD Co.，其服务供应商，顾问和独立承包商及其各自的员工，董事和代理人免受任何索赔，责任，损害，费用和成本的损害（包括但不限于，合理的律师费用）与您在我们的网站上或通过我们的网站存储，发布或以其他方式传输或您使用或无法使用我们网站的任何内容相关或由此产生，包括但不限于任何实际或受威胁的声明，对BDD公司和/或其服务供应商，独立承包商，董事，员工或顾问提出的要求或诉讼，涉及或由此内容，您的行为，您对这些条款和条件的侵犯或您侵犯任何第三方。",
+			"tit15": "保修免责声明",
+			"con19": "除BDD公司明确列出并以书面形式表明外，网站上提供或包含的内容，产品和服务均按“原样”提供，不作任何明示或暗示的保证。 BDD Co.不做任何明示或暗示的保证，包括但不限于对我们网站上的材料，讯息和内容的适销性，适用于特定用途，所有权和不侵权的默示保证。 BDD Co.不代表或保证我们网站或服务中的材料和内容是完整，准确，最新，可靠或无错误的。 BDD Co.不声明或保证我们的网站或其服务器不会被病毒或任何其他有害组件侵入或骚扰。",
+			"tit16": "责任限制",
+			"con20": "在任何情况下，BDD Co.，其董事，员工，成员或代理商不对任何直接，间接，特殊，后果性损害或任何其他损害或费用承担责任（包括但不限于数据丢失，损失）利润或使用损失），无论是在合同诉讼中，侵权行为（包括但不限于疏忽）或以其他方式，以任何方式与我们的网站，产品和服务或所含内容的使用相关联或由此产生通过我们的网站查看或查看，包括但不限于用户依赖从BDD公司获得的任何讯息所造成的任何损害，或因中断，遗漏，错误，删除电子邮件或文件，缺陷，病毒而导致的任何损害，错误，传输或操作延迟，或任何性能故障，是否由于上帝的行为，破坏，通讯失败，盗窃或未经授权查看BDD公司的记录，程序或服务而造成的。",
+			"tit17": "法律和场所的使用",
+			"con21": "这些条款和条件以及您对本网站的使用将受中华人民共和国香港特别行政区法律管辖，并根据中华人民共和国香港特别行政区法律解释，适用于在中华人民共和国香港特别行政区，不诉诸其法律冲突规定。您同意由本条款和条件引起或与之相关的任何法律或权益诉讼仅应在位于香港的法院提起，并且您在此不可撤销地无条件地同意并接受此类法院的专属管辖权。因使用本网站，本网站购买或本条款和条件而引起的诉讼。",
+			"tit18": "修改和通知",
+			"con22": "您同意BDD Co.可以随时修改这些条款和条件以及我们网站上的任何其他政策。当网站发布经修订的条款和条件或政策时，它构成了此类修订的充分通知。",
+			"tit19": "终止",
+			"con23": "尽管有这些条款和条件，BDD Co.仍保留终止您使用其网站许可的权利及其个人酌情权，并阻止或阻止您查看和使用其网站，恕不另行通知。",
+			"tit20": "分割",
+			"con24": "本条款和条件的每个条款中包含的规定应独立于其他条款和条件中强制执行，如果其他任何条款和条件无效，则其有效性不受影响。如果这些条款和条件的任何规定被确定为无效，非法或任何不可执行的理由，则该规定不应影响任何其余规定的有效性和可执行性。",
+			"tit21": "问题和联络",
+			"con25": "如果您有任何疑问，请发送电子邮件至service@bddco.com与我们联络。这些条款和条件不适用于Parcelpro Insurance Company提供的内容。条款和条件于2016年12月16日更新。"
+		},
+		"shipping": {
+			"header": "送货政策",
+			"title": "我们发货的所有订单都是全额保险。。",
+			"define": "注意：我们建议所有客户在收到或签收收据之前仔细检查您的包裹是否完好无损。如果包裹上有故意破坏的痕迹，请务必拍照留下记录，并发送电子邮件至service@bddco.com",
+			"tit1": "交货细节",
+			"con1": "如果税前订单的价值超过一定金额，订单将提供",
+			"link1": "免费送递服务",
+			"con2": "。最低税前订单的免费送货价值因国家/地区而异。请查看",
+			"link2": "免费送递服务",
+			"con3": "中的详细讯息。为了安全地将包裹交给您，BDD公司只接受并运送到街道地址，而不是邮政信箱地址。 BDD Co.要求客户签收，即使在某些情况下我们的承运人可能会给予某些豁免。如果收件人无法在周一至周五收到包裹，我们可以在周六重新安排送货服务，但需额外付费。有关此安排，请发送电子邮件至service@bddco.com与BDD Co.客户服务专员联络。",
+			"tit2": "国际和香港航运",
+			"con4": "对于送往香港的订单，包裹将通过DHL送达。对于国际订单，它们将通过FedEx International Priority®提供。我们接受来自53个国家/地区的订单。有关详细讯息，请查看我们的",
+			"link3": "国际政策",
+			"tit3": "订单何时发货",
+			"con5": "如果您在周一至周五（香港时间）的正常工作天截单时间前成功付款购买，我们将在当天开始处理您的订单。在周六，周日，假日或在正常工作日的截单时间之后进行的购买将在随后的工作日处理。",
+			"tit4": "预计抵达时间",
+			"con6": "您的订单到达目的地所需的时间因地点而异。为了让客户知道订单何时到达，以下是您的订单在各个目的地发货后的预计到货时间。这些预计到达时间包括运输和清关时间所需的估计时间。实际交付可能会有所不请注意，以下列表未包括所有国家/地区。如果您在列表中找不到您所在的国家/地区，请发送电子邮件至",
+			"mail": "联络BDD Co.客户服务专员",
+			"tit5": "错过了包裹",
+			"con7": "如果指定的送货地址无人收件，则该包裹可能会被送到当地的FedEx地点。 FedEx允许收件人在营业时间内亲自去签收。这里找到离您最近的FedEx地点",
+			"link4": "https://www.fedex.com/zh-hk/home.html",
+			"tip1": "注意：下订单时您必须检查送货地址是否正确，因错误导致的任何损失都无法得到赔偿。",
+			"country": "国家/地区",
+			"days": "预计到达时间",
+			"delivery": [{
+					"country": "澳大利亚",
+					"days": "4-5天"
+				},
+				{
+					"country": "比利时",
+					"days": "4-6天"
+				},
+				{
+					"country": "巴西",
+					"days": "6-10天"
+				},
+				{
+					"country": "加拿大",
+					"days": "3-5天"
+				},
+				{
+					"country": "丹麦",
+					"days": "3-5天"
+				},
+				{
+					"country": "芬兰",
+					"days": "4-9天"
+				},
+				{
+					"country": "法国",
+					"days": "4-5天"
+				},
+				{
+					"country": "德国",
+					"days": "4-5天"
+				},
+				{
+					"country": "希腊",
+					"days": "5-6天"
+				},
+				{
+					"country": "香港",
+					"days": "1-3天"
+				},
+				{
+					"country": "印度",
+					"days": "3-10天"
+				},
+				{
+					"country": "爱尔兰",
+					"days": "4-5天"
+				},
+				{
+					"country": "意大利",
+					"days": "4-6天"
+				},
+				{
+					"country": "日本",
+					"days": "3-5天"
+				},
+				{
+					"country": "马来西亚",
+					"days": "3-6天"
+				},
+				{
+					"country": "荷兰",
+					"days": "4-5天"
+				},
+				{
+					"country": "新西兰",
+					"days": "5-6天"
+				},
+				{
+					"country": "挪威",
+					"days": "4-10天"
+				},
+				{
+					"country": "菲律宾",
+					"days": "3-6天"
+				},
+				{
+					"country": "波兰",
+					"days": "5-6天"
+				},
+				{
+					"country": "葡萄牙",
+					"days": "4-5天"
+				},
+				{
+					"country": "沙特阿拉伯",
+					"days": "5-11天"
+				},
+				{
+					"country": "新加坡",
+					"days": "3-4天"
+				},
+				{
+					"country": "韩国",
+					"days": "4-6天"
+				},
+				{
+					"country": "西班牙",
+					"days": "5-6天"
+				},
+				{
+					"country": "瑞典",
+					"days": "4-10天"
+				},
+				{
+					"country": "瑞士",
+					"days": "11-12天"
+				},
+				{
+					"country": "台湾",
+					"days": "3-4天"
+				},
+				{
+					"country": "泰国",
+					"days": "4-6天"
+				},
+				{
+					"country": "土耳其",
+					"days": "6-9天"
+				},
+				{
+					"country": "阿拉伯联合酋长国",
+					"days": "3-7天"
+				},
+				{
+					"country": "英国",
+					"days": "4-5天"
+				},
+				{
+					"country": "美国",
+					"days": "3-4天"
+				},
+				{
+					"country": "越南",
+					"days": "4-6天"
+				}
+			]
+		},
+		"freeShipping": {
+			"header": "免费送递服务",
+			"define": "若顾客税前订单价值超过某数目时，该订单将可享有免费的联邦快递International Priority®送递服务。此税前订单价值将会因不同国家/地区而有所不同。下面列表中将会列出各国/地区免费运送所需的最低税前订单价值。",
+			"country": "国家/地区",
+			"value": "所需税前订单价值(USD)",
+			"delivery": [{
+					"name": "澳大利亚",
+					"value": "168"
+				},
+				{
+					"name": "奥地利",
+					"value": "194"
+				},
+				{
+					"name": "比利时",
+					"value": "194"
+				},
+				{
+					"name": "巴西",
+					"value": "335"
+				},
+				{
+					"name": "加拿大",
+					"value": "194"
+				},
+				{
+					"name": "智利",
+					"value": "335"
+				},
+				{
+					"name": "中国大陆",
+					"value": "168"
+				},
+				{
+					"name": "塞浦路斯",
+					"value": "206"
+				},
+				{
+					"name": "丹麦",
+					"value": "194"
+				},
+				{
+					"name": "爱沙尼亚",
+					"value": "335"
+				},
+				{
+					"name": "芬兰",
+					"value": "194"
+				},
+				{
+					"name": "法国",
+					"value": "194"
+				},
+				{
+					"name": "德国",
+					"value": "194"
+				},
+				{
+					"name": "希腊",
+					"value": "194"
+				},
+				{
+					"name": "关岛",
+					"value": "194"
+				},
+				{
+					"name": "香港",
+					"value": "0"
+				},
+				{
+					"name": "匈牙利",
+					"value": "206"
+				},
+				{
+					"name": "印度",
+					"value": "194"
+				},
+				{
+					"name": "印尼",
+					"value": "168"
+				},
+				{
+					"name": "爱尔兰",
+					"value": "194"
+				},
+				{
+					"name": "意大利",
+					"value": "194"
+				},
+				{
+					"name": "日本",
+					"value": "168"
+				},
+				{
+					"name": "韩国",
+					"value": "155"
+				},
+				{
+					"name": "拉脱维亚",
+					"value": "335"
+				},
+				{
+					"name": "立陶宛",
+					"value": "335"
+				},
+				{
+					"name": "卢森堡",
+					"value": "194"
+				},
+				{
+					"name": "澳门",
+					"value": "155"
+				},
+				{
+					"name": "马耳他",
+					"value": "194"
+				},
+				{
+					"name": "荷兰",
+					"value": "194"
+				},
+				{
+					"name": "新西兰",
+					"value": "168"
+				},
+				{
+					"name": "北馬裏亞納群岛",
+					"value": "194"
+				},
+				{
+					"name": "挪威",
+					"value": "194"
+				},
+				{
+					"name": "菲律宾",
+					"value": "155"
+				},
+				{
+					"name": "波兰",
+					"value": "206"
+				},
+				{
+					"name": "葡萄牙",
+					"value": "194"
+				},
+				{
+					"name": "波多黎各",
+					"value": "194"
+				},
+				{
+					"name": "罗马尼亚",
+					"value": "335"
+				},
+				{
+					"name": "沙特阿拉伯",
+					"value": "335"
+				},
+				{
+					"name": "新加坡",
+					"value": "155"
+				},
+				{
+					"name": "斯洛伐克",
+					"value": "206"
+				},
+				{
+					"name": "斯洛文尼亚",
+					"value": "335"
+				},
+				{
+					"name": "南非",
+					"value": "335"
+				},
+				{
+					"name": "西班牙",
+					"value": "194"
+				},
+				{
+					"name": "瑞典",
+					"value": "194"
+				},
+				{
+					"name": "瑞士",
+					"value": "194"
+				},
+				{
+					"name": "台湾",
+					"value": "155"
+				},
+				{
+					"name": "泰国",
+					"value": "155"
+				},
+				{
+					"name": "土耳其",
+					"value": "206"
+				},
+				{
+					"name": "阿联酋",
+					"value": "206"
+				},
+				{
+					"name": "英国",
+					"value": "194"
+				},
+				{
+					"name": "美国",
+					"value": "194"
+				},
+				{
+					"name": "美国维尔京群岛",
+					"value": "194"
+				},
+				{
+					"name": "越南",
+					"value": "155"
+				}
+			]
+		},
+		"international": {
+			"header": "国际政策",
+			"define": "此国际运输政策适用于BDD Co.或www.bddco.com网站订单。我们接受来自以下国家或地区的订单：澳大利亚，奥地利，比利时，巴西，加拿大，智利，中国，塞浦路斯，丹麦，爱沙尼亚，芬兰，法国，德国，希腊，关岛，香港，匈牙利，印度，印度尼西亚，爱尔兰，意大利，日本，韩国，拉脱维亚，立陶宛，卢森堡，澳门，马耳他，荷兰，新西兰，北马里亚纳群岛，挪威，菲律宾，波兰，葡萄牙，波多黎各，罗马尼亚，沙特阿拉伯，新加坡，斯洛伐克，斯洛文尼亚，南非洲，西班牙，瑞典，瑞士，台湾，泰国，土耳其，阿拉伯联合酋长国，英国，美国，美属维尔京群岛和越南。",
+			"mail": "请发送电子邮件至",
+			"know": "联络我们的客户服务了解更多详情。",
+			"tit1": "记录进口商",
+			"con1": "记录进口商是指进口商，无论是实体还是个人，负责确保货物按照目的地国家或地区的法律和法规进口。记录进口商负责支付海关或承运人评估的所有进口关税，税款和费用。",
+			"con2": "对于BDD公司接受订单的所有国家或地区，收件人是记录的进口商。收件人必须确保进口货物符合目的地国家的法律和法规。在交付过程中和货物交付给接收方之前，目的地国家或地区的海关可能会对货物征收关税，税款，行政费用或任何其他费用。在任何情况下，收件人都需要承担全部责任支付此类费用和开支。",
+			"tit2": "所有权和风险",
+			"con3": "一但承运人从BDD公司收到货物，产品的所有权和损失风险将转移给收货人。",
+			"tit3": "限制",
+			"con4": "产品是否有资格运往目的地国家或地区将取决于当地的法令和限制。",
+			"tit4": "装船",
+			"con5": "所有国际订单均通过FedEx International Priority®发货。一但订单超过指定金额，客户将无需支付任何运费。如果对预计的运输时间有任何疑问，您可以通过service@bddco.com联络我们的客户服务部门，或者只需使用FedEx追踪号码查看FedEx追踪系统的交付时间表。",
+			"tit5": "资产保护",
+			"con6": "所有国际订单均已完全投保，确保每笔订单都无风险。从离开BDD公司到达门口时，每个订单都由一家顶级全球保险公司承保并受到保护。保险费用相当于订单价值的0.32％，并将在结账过程中应用。但是，对阿联酋和中国的订单的保险费用可能不一样，如果订单价值超过保险公司规定的限额，则该费用将进行微调。完成购买流程后，保险协议详细讯息和索赔程序将发送到您的电子邮箱。为了加强货物的安全性，BDD公司可能会要求收件人签收，以核实身份。",
+			"tit6": "订单付款",
+			"con7": "BDD&nbsp;Co.接受以下货币：澳元（AUD），加拿大元（CAD），捷克克朗（CZK），丹麦克朗（DKK），欧元（EUR），英镑（GBP），港币（HKD），匈牙利福林（HUF），以色列新谢克尔（ILS），日元（JPY），墨西哥比索（MXN），新台币（TWD），新西兰元（NZD），挪威克朗（NOK），菲律宾比索（PHP），波兰兹罗提（PLN） ，人民币（RMB），俄罗斯卢布（RUB），新加坡元（SGD），瑞典克朗（SEK），瑞士法郎（CHF），泰铢（THB），美元（USD）。",
+			"con9": "一旦您的订单价值达到最低订单价值，订单的运费将被免除。",
+			"con10": "有关详细讯息，请查看",
+			"link1": "免费送货政策",
+			"tit7": "海关，关税和税收",
+			"con11": "您的订单可能会被目的地国家或地区的海关征收进口税，税款，海关费和其他费用。海关清关所需的这些额外费用和收费由收件人负责，并由收件人支付。当您的订单到达目的地国家或地区的海关时，指定的物流承运商或海关将直接与您联络并安排支付任何费用。",
+			"tit8": "一般清关费用",
+			"con12": "安全附加费 - 由于国际安全保障要求承运人持续支出以满足更严格的国际安全条件，可能会收取安全费。",
+			"con13": "提前费用 - 在某些情况下，承运人可以提前代表客户支付关税和税费，以加快通关速度。例如，当国家或地区的海关要求在通关前支付海关费用时。将评估预付费并向客户收取费用。",
+			"con14": "仓库费 - 如果没有支付关税和税款或您的订单无法交付，您可能需要支付仓库费。",
+			"con15": "下表列出了不同国家或地区的估计税率和关税以及其他海关费用，但下列费用可能不等于海关收取的实际金额。BDD&nbsp;Co.无法控制这些费用。有关海关，关税和税收的更多讯息，请联络您当地的海关。",
+			"con16": "具体内容参照BDD网站：",
+			"thead1": "估计关税率",
+			"thead2": "估计税率",
+			"thead3": "订单价值",
+			"thead4": "进口报关费",
+			"thead5": "关税及税费估计总额",
+			"site": "网址：",
+			"table1": {
+				"country": "澳洲",
+				"tbody11": "裸钻：0%",
+				"tbody12": "AU$ 1,000 澳元以下的订单：0%",
+				"tbody13": "其他订单：5%",
+				"tbody21": "10%",
+				"tbody22": "AU$ 1,000 澳元以下的订单没有税",
+				"tbody31": "介于AU$1,000 至 AU$10,000",
+				"tbody32": "AU$50.00",
+				"tbody41": "所有AU$10,000 或以上",
+				"tbody42": "AU$152.00",
+				"tbody51": "0% 至 15.5%",
+				"tip": "注意：邮包可能附有澳洲检疫与检查服务费(AQIS):AU$33.00",
+				"web": "www.customs.gov.au",
+				"tel": "电话：澳洲以外：(61)2-6275-6666，來自澳洲：1300-363-263"
+			},
+			"table2": {
+				"country": "关岛",
+				"tbody11": "0%",
+				"tbody21": "4%",
+				"tbody31": "若订单价值在$1,000美元以下",
+				"tbody41": "0%",
+				"tbody51": "0% 至 4%",
+				"web": "www.cqa.guam.gov",
+				"tel": "电话：(671)475-6220"
+			},
+			"table3": {
+				"country": "香港",
+				"tbody11": "0%",
+				"tbody21": "0%",
+				"tbody51": "0%",
+				"web": "www.customs.gov.hk",
+				"tel": "电话：(852)2815-7711"
+			},
+			"table4": {
+				"country": "日本",
+				"tbody11": "裸钻 0%",
+				"tbody12": "其他产品： 0% 至 5.5% (取决于制造国)",
+				"tbody21": "8%",
+				"tbody51": "8% 至 13.5%",
+				"tip": "注意：客戶可能需要在收到包裹之后，支付 500 JPY 的 FedEx 预付款。",
+				"web": "www.customs.go.jp",
+				"tel": "电话：日本以外：(81) 3-3529-0700，來自日本：03-3529-0700"
+			},
+			"table5": {
+				"country": "澳門",
+				"tbody11": "0%",
+				"tbody21": "0%",
+				"tbody51": "0%",
+				"web": "www.customs.gov.mo",
+				"tel": "电话：(853) 2896-5001"
+			},
+			"table6": {
+				"country": "纽西兰",
+				"tbody11": "裸钻 0%",
+				"tbody12": "其他产品： 0% 至 5% (取决于制造国)",
+				"tbody21": "15%",
+				"tbody31": "订单价值超过NZ$1,000",
+				"tbody41": "进口费用：NZ$24.75",
+				"tbody42": "生物保安系统准入费：NZ$12.50",
+				"tbody51": "15% 至 20%",
+				"tip": "注意：客户在收取货品时需持有免费进口商编号，该编号在向当地海关交回申请表格后的1-3天内便会发出。",
+				"web": "www.customs.govt.nz",
+				"tel": "电话：新西兰以外：(64) 9-300-5399，來自新西兰：0800-428-7861"
+			},
+			"table7": {
+				"country": "北马里亚纳群岛",
+				"tbody11": "0%",
+				"tbody21": "5.75%",
+				"tbody51": "5.75%",
+				"web": "www.cnmidof.net/customs",
+				"tel": "电话：670-664-1607"
+			},
+			"table8": {
+				"country": "波多黎各",
+				"tbody11": "0%",
+				"tbody21": "5.75%",
+				"tbody51": "0%",
+				"web": "www.cbp.gov",
+				"tel": "电话：670-664-1607"
+			},
+			"table9": {
+				"country": "新加坡",
+				"tbody11": "0%",
+				"tbody21": "7%",
+				"tbody51": "7%",
+				"tip": "收件人作为名义进口商收取货品，须负责与当地机关合作并解决任何货品及税务相关的问题。若客户的订单被退回或因调整尺寸、维修或退换货品而希望获得退还先前所交的税务，收件人需负责遵从相关程序与新加坡当局办理退还手续。评税及退税的决定是由新加坡当局作出并拥有最终决定权，在这一方面BDD&nbsp;Co.没有任何控制权。若想索取用以申请退税的送运文件副本，可能需要待最多30个工作天审批。",
+				"web": "www.cbp.gov",
+				"tel": "电话：670-664-1607"
+			},
+			"table10": {
+				"country": "台湾",
+				"tbody11": "0%",
+				"tbody21": "5%",
+				"tbody51": "5%",
+				"tel": "电话：02-24222310"
+			},
+			"table11": {
+				"country": "阿联酋",
+				"tbody11": "裸钻 0%",
+				"tbody12": "黄金首饰 1%",
+				"tbody13": "黄金钻石首饰 1.5%",
+				"tbody14": "所有其他首饰：5%",
+				"tbody21": "0%",
+				"tbody51": "0% 至 5%",
+				"tip": "注意：阿拉伯联合酋长国的关税不予返还。",
+				"web": "www.sharjahcustoms.gov.ae",
+				"tel": "电话：0097 06 5282216 / 0097 06 5282666"
+			},
+			"table12": {
+				"country": "美属维京群岛",
+				"tbody11": "0%",
+				"tbody21": "0%",
+				"tbody51": "0% 至 5%",
+				"web": "www.cbp.gov"
+			},
+			"tit9": "限制",
+			"con17": "敬请注意，运送的产品有可能不符合目的地国家或地区的法律或规定，其中包括标准、标签和规格等要求。顾客需自行判断及负责有关产品是否依法合法进口到目的地国家或地区。",
+			"tit10": "私隐权",
+			"con18": "经国际运送的邮件可能会被海关打开查验。关于您的订单、装运和内载关于产品的资料可能会转交给我们的托运人和海关机关，以便办理清关手续。",
+			"tit11": "退货",
+			"con19": "为了让你有更方便愉快的购物体验，我们的退货政策非常灵活。如果您因任何理由对产品感到不满意，您可以在收到商品后7天之内要求把货品（必须保持原来的购买状态和无特订雕刻）退回或换货。",
+			"con20": "对于发送中国的订单，7天是由客户收到货品的日期算起，以及20%的预订费不可退还。详情请查看我们的",
+			"link2": "退货政策",
+			"tip1": "条款及条件更新日期为 2017 年 4 月 13 日。"
+		},
+		"jewelryInsurance": {
+			"header": "珠宝保险",
+			"tit1": "BDD.co的珠宝保险内容如下：",
+			"con1": "珠宝商互助®首饰保险",
+			"con2": "Jewelers Mutual Insurance Company已在次页面上提供内容",
+			"tit2": "立即获取免费报价",
+			"con3": "BDD与保险公司合作，为您提供个人珠宝保险，为您提供美丽永恒安全的珠宝保险。确保您珠宝快速安全送达，让您感受到情感和安全感。",
+			"tit3": "与BDD合作的珠宝保险公司，是唯一一家专门从事珠宝保险的保险公司。",
+			"con4": "珠宝保险®首饰保险的优势包括：",
+			"con5": "全面的全球覆盖范围，超越普通商品保险;",
+			"con6": "防止盗窃，损坏，意外丢失和神秘失踪;",
+			"con7": "灵活选择自己的珠宝商;",
+			"con8": "修复受损珠宝，品质与原件相同;",
+			"con9": "更换相同品牌和类型的丢失珠宝;",
+			"con10": "研究宝石学家（GIA）对员工的珠宝充满热情。",
+			"con11": "如果您对珠宝保险有任何疑问，请发送电子邮件至",
+			"con12": "或致电",
+			"tit4": "*魁北克市不提供保险",
+			"con13": "必须年满18周岁才能申请保险。 Jewelers Mutual是您可能正在考虑的其他保险公司的替代品。 BDD不是Jewelers Mutual的特许代理商，不出售或推荐保险。保险范围受政策中的规定，限制，排除和认可以及您选择的保险范围的限制。",
+			"con14": "通过单击",
+			"link1": "了解更多并获得免费报价您授权",
+			"con15": "Jewelers Mutual使用安全系统从BDD检索并保存此购买的详细讯息，以计算保险报价。检索到的讯息可能包括您的姓名和地址。"
+		},
+		"paymentMethods": {
+			"header": "付款方式",
+			"advice": "BDD Co.建议客户在www.bddco.com使用以下货币作为主要交易货币：澳大利亚元（AUD），加拿大元（CAD），捷克克朗（CZK），丹麦克朗（DKK），欧元（EUR），英镑（ GBP），港元（HKD），匈牙利福林（HUF），以色列新谢克尔（ILS），日元（JPY），墨西哥比索（MXN），新台币（TWD），新西兰元（NZD），挪威克朗（ NOK），菲律宾比索（PHP），波兰兹罗提（PLN），人民币（RMB），俄罗斯卢布（RUB），新加坡元（SGD），瑞典克朗（SEK），瑞士法郎（CHF），泰国泰铢（THB ），美元（USD）。为客户创造安全的在线购物环境。 BDD Co.致力于提高网站安全性并与PayPal合作，以保护客户的个人讯息和银行账户数据。 bddco.com上的所有交易都将通过PayPal处理。有关PayPal的更多讯息，请单击",
+			"here": "此处",
+			"payment": "关于支付",
+			"paypal": "PayPal：如果客户有PayPal帐户。客户可以通过PayPal帐户处理付款。",
+			"creditcard": "信用卡：客户也可以通过信用卡付款（例如Visa，MasterCard，American Express，Discover，Diners Club或JCB等）。我们的网站通过PayPal接收所有信用卡付款。",
+			"remittance": "银行电汇/国际汇款（IMT）/电汇（TT）/银行现金存款：如果客户没有PayPal账户或信用卡，客户可以使用银行电汇/汇款作为付款方式，客户将有1.5％折扣。",
+			"tip1": "银行电汇/汇款可能需要三个工作日才能转账和收款。",
+			"tip2": "选择银行电汇/汇款方式的折扣是在保险费和进口税/税费之前计算的。",
+			"tip3": "大多数银行将收取银行电汇/汇款的处理/管理费。",
+			"unionpay": "银联：客户也可以使用银联（必须由中国大陆银行发行）进行付款。",
+			"about": "关于PayPal",
+			"con1": "为客户创造安全的在线购物环境。 BDD Co.致力于提高网站安全性并与PayPal合作，以保护客户的个人讯息和银行账户数据。 bddco.com上的所有交易都将通过PayPal处理。",
+			"con2": "为了增强客户在我们网站上的购物体验，BDD Co.与PayPal建立了合作伙伴关系，以提供更可靠，更安全的付款方式。",
+			"con3": "BDD Co.与PayPal合作，为客户提供：",
+			"pro1": "灵活性：从不同的资金来源付款（例如，PayPal A/C，信用卡或银行账户余额）",
+			"pro2": "私隐：在不提供财务讯息的情况下付款。",
+			"pro3": "安全性：PayPal和BDD Co.致力于保护您的帐户免受未经授权的交易，并确保您的帐户的利益和安全，您可以放心购物和在我们的网站上交易。",
+			"know": "如果您想了解有关PayPal的更多讯息，请查看：",
+			"use": "PayPal的使用",
+			"check": "在确认您的帐单邮寄地址和收货地址后处理付款时，该网站会将您连结到PayPal的付款页面。您可以使用信用卡或PayPal帐户进行付款。当您完成付款后，您将被转回BDD Co.网站以完成购买流程。完成后，您将收到BDD公司的确认电子邮件。如果您有任何疑问，请发送电子邮件至"
+		},
+		"privacyPolicy": {
+			"header": "私隐政策",
+			"define": "为了提升客户的购物体验和满意度，BDD Co.（包括其附属公司和子公司）一直致力于保护客户的个人资料。以下讯息向您提供我们收集的讯息类型，讯息的原因和用法。在本文中，“网站”是指BDD Co.网站，移动应用程序和其他软件。此外，本文中的“服务”包括我们的网站，客户服务电话以及BDD公司提供的任何其他产品或购物服务。",
+			"update": "BDD Co.偶尔会更新、修改私隐政策。如果有任何修改或更新，“最后更新”日期将写在本文顶部。通过使用我们的网站，服务和/或向我们提供您的个人讯息（包括但不限于注册为我们的会员，其他促销计划或以任何方式联络我们），您接受并同意本私隐政策，包括任何更改或更新。",
+			"privacy": "本私人政策中的“个人讯息”是指与已识别个人或可识别个人相关的任何讯息。",
+			"tit1": "数据采集",
+			"tip1": "(i）数据来源",
+			"con1": "我们收到并可能存储您提供给我们的所有个人讯息，无论是口头还是书面形式。这包括通过任何方式或方式提供给我们的个人讯息，包括但不限于通过BDD Co.网站，各种社交媒体服务（例如Facebook，微信，Whatsapp，Twitter，新浪），客户服务电话，电子邮件或各种促销活动。此外，讯息将通过Cookie或其他技术收集。如果您的浏览器允许，您可以关闭Cookies功能，一但浏览器的Cookies功能关闭，您将无法使用本网站的某些功能。有关cookie以及如何不接受cookie的更多讯息，请参阅www.allaboutcookies.org。",
+			"tip2": "(ii）数据类型",
+			"con2": "我们收集并可能存储以下数据或讯息，包括但不限于所有个人讯息，例如：姓名，性别，生日，职称，联络电话（电话，传真，手机），邮政地址和电子邮件地址，付款和交易讯息，运输和账单讯息（如果您购买我们的产品）；您和BDD公司之间的沟通记录；有关职业，婚姻状况，兴趣，人口统计数据，观点和经验的其他讯息，包括我们的产品和服务偏好，月收入，建议的联络方式。因此，我们可以为您提供最贴心的优质服务。",
+			"con3": "您可以通过网站功能“推荐朋友”向我们提供您朋友的姓名和联络讯息。因此，我们能够向您和您的朋友发送产品讯息，各种形式的优惠或礼品。从“推荐给朋友”收集的有关您和您的朋友的讯息将以本私隐政策中描述的方式存储或使用我们收集的有关您的所有讯息可能会与您有关的其他讯息相结合。",
+			"tip3": "(iii）13 岁以下的儿童",
+			"con4": "BDD公司不会收集13岁以下儿童的个人讯息。如果我们收到13岁以下儿童的个人身份讯息，我们将删除数据记录以保护儿童的在线私隐。",
+			"tit2": "资料使用",
+			"con5": "我们收集的有关您和您的朋友的所有讯息可用于运行基本操作功能，提高效率和功能，开发和分析，评估广告效果和其他目的，并获得您的同意（上述预期用途是统称为一般用途） 。该讯息可与我们的合作伙伴共享，以实现与上述相同的一般目的。",
+			"con6": "基本操作功能：例如，我们需要使用Cookie来维护我们的网站服务，包括但不限于购物车功能，帐户登录系统，防止和检测欺诈或滥用，响应您的请求和查询，管理和实施各种活动。",
+			"con7": "效率和功能：包括但不限于管理或确认您的订单，检查和测试您的个人讯息以确保准确性和完整性，并记录您对产品和服务的偏好。",
+			"con8": "开发和分析：包括但不限于改进，增加和开发新服务和产品，了解客户群的结构，购物行为，偏好和兴趣等。",
+			"con9": "广告的有效性：包括但不限于开发新的促销模式和方法以改善客户体验，提供个性化的广告内容和产品讯息和服务，以及规划和实施各种类型的促销活动和活动。",
+			"con10": "我们会将您提供给我们的所有讯息结合起来，我们会将这些讯息与来自合作伙伴的讯息，数据工具和可公开获取的讯息结合起来。",
+			"tit3": "网站连结",
+			"con11": "为了向您提供更多讯息，我们的网站可能会接连不受我们控制且本私隐政策未涵盖的第三方网站。本私隐政策仅适用于我们的网站https://www.bddco.com/，如果您通过我们网站上的连结查看第三方网站，我们不承担任何责任。我们建议您在查看其他网站时阅读私隐政策。",
+			"tit4": "我们可能与他人分享的讯息",
+			"con12": "您的个人讯息可能会转移给可信的第三方服务供应商。他们将帮助我们为您提供服务或直接为您提供服务，包括市场研究和分析，数据和记录管理，网站服务器托管，运输和支付处理，邮件和电子邮件处理，营销，执行，组装，特别活动和其他运营商等。",
+			"con13": "我们可能会在以下情况下披露您的讯息：（1）合理遵守任何适用的法律，法规，法律程序或政府要求，包括满足国家安全或执法要求;（2）协助调查或预防涉嫌欺诈的非法活动;（3）涉及对任何人的人身安全的潜在威胁的情况;（4）防止和减少违法行为风险的目的;（5）与您签订任何协议;（6）业务转移;（7）摘要讯息（不包括个人身份识别摘要记录）。",
+			"tit5": "安全",
+			"con14": "我们采用了一系列物理和电子安全技术，程序和组织保护措施来保护您的个人讯息的安全，包括防止您的个人讯息被未经授权的查看，使用或披露。虽然我们拥有精确的安全技术和全面的保护措施和程序，但我们仍然无法保证您发送给我们的个人讯息可以100％安全。",
+			"tit6": "查询",
+			"con15": "如果您对本私隐声明有任何的疑问，请电邮致",
+			"con16": "与我们联络。"
+		},
+		"qualityValue": {
+			"header": "品质与价值",
+			"remind": "BDD Co.致力于为客户提供最优质的裸钻和珠宝，并坚持为客户提供卓越的品质选择和非凡的价值。我们的珠宝首饰是根据高质量标准精心制作，选择和检验的，因此客户可以放心购买。客户可以根据自己的需求，偏好和预算进行选择。",
+			"best": "最好的钻石质量",
+			"rate": "作为在线钻石零售商，BDD Co.预先筛选出优质的裸钻。其切割，净度和颜色根据标准化的国际分级标准进行评级。每一枚裸钻都附有由美国宝石学院（GIA）发布的评级报告和激光铭文。 GIA是世界上最大，最受尊敬的非营利性宝石学知识来源，它被认为是钻石分级准确性和完整性的原始和无与伦比的来源。",
+			"tip1": "钻石首饰",
+			"con1": "出于质量保证的原因，我们珠宝中的所有钻石（包括最小的钻石）都符合BDD Co.严格的最低质量标准。每颗钻石均为无色至近无色（DJ级颜色），具有极佳的透明度（FL-SI2级透明度）。",
+			"tip2": "白金首饰",
+			"con2": "铂金耐用，坚固，纯度高，耐腐蚀，不易氧化贵金属;它代表着永恒的爱。此外，其天然白色铂金属光泽带来钻石的光彩和优雅。因此，很多人选择它来订婚和结婚戒指。我们所有的铂金都是95％的纯度。",
+			"tip3": "黄金首饰",
+			"con3": "黄金是一种流行的贵金属。我们的戒指和首饰有多种颜色和合金，包括18k和14k黄，白金和玫瑰金。我们的金戒指和珠宝系列将满足客户的不同需求和预算。",
+			"tip4": "银制首饰",
+			"con4": "我们所有的银片都是92.5％的合金纯银。这种合金具有所需的金属光泽，亮度和硬度，是时尚，精致和耐用的最佳组合。",
+			"more": "要了解更多讯息，请参阅",
+			"link": "知识"
+		},
+		"returnRefundPolicy": {
+			"header": "退款保障条款及细则",
+			"tit1": "7天退款保证",
+			"con1": "您可以在收到产品后7天内以任何理由退回或更换产品，我们很乐意安排更换或全额退款（不包括运费保险费，税费和运费），以确保每一件产品。顾客很满意。",
+			"con2": "从BDD Co.购买的每位客户都将享有7天的退货权。客户只需支付退货运费和保险费。请注意，购买的商品必须保持原始购买状态，还包括所有产品文件，并在7天内发货，以便有资格获得退货。对于运往中国的订单，7天将从客户收到物品开始，20％的预订费用不予退还。要获得订单的退货授权，请按照以下步骤操作。",
+			"tit2": "接受包裹前",
+			"con3": "我们发货的所有订单都是全额保险。重要的是，如果送到您的包裹或物品损坏或被篡改，请拒绝收货，拍照留下记录，并立即发送电子邮件至",
+			"con4": "。对于损坏或丢失的物品，请在等待过程中保留所有包装材料和物品。必须在收到包裹后5天内报告损坏或遗失物品的索赔。 BDD Co.对退回的货物丢失或损坏概不负责。",
+			"tit3": "国际退货",
+			"con5": "如果在退回商品的过程中产生任何额外费用，BDD Co.将保留权利向阁下收取该额外费用。为避免产生额外费用，我们建议您透过我们选择的投保FedEx承运商进行运送退回商品。为了方便您，我们可协助您通过FedEx国际优先分送速递®服务以优惠价购买保险。",
+			"tit4": "运费",
+			"con6": "在退货的运费方面，BDD Co.对未经许可授权的运送费用或任何其他相关的额外费用一概不作补偿。请阁下不要使用货到付款的形式进行退货。请保留FedEx收件和/或查验的所有运送材料。",
+			"con7": "若我们要求阁下将货品退回，我们可能会根据情况赔偿您部分或全部退货运费。但不会对于阁下自行决定使用的特殊运送服务作任何补偿。",
+			"con8": "准备退还产品进行交换或退款：",
+			"con9": "1.对于所有退货，请在退货前电邮给我们service@bddco.com。您需提供BDD Co.订单号码以及退货编码（在和BDD Co.联络退换事宜后，经双方同意后发出）。请注意，我们建议您的货品及其所有相关文件妥善稳妥地包装在原始包装材料中，及为其投购全额保险。若无法达成上述要求，该退货申请将不获处理。",
+			"con10": "2.若您的商品运抵时附有一张钻石证书，而该证书并无退回，则您需要支付250美元（或等值的其他货币）的钻石证书补领费用。",
+			"con11": "在退货的过程中，我们建议您将货品稳妥地包装在原始包装材料中，并投放全额保险。若物品不幸遗失或遭盗窃，我们概不负责。因此阁下应为您的退回货物购买运送保险，以保障自己。退货的保险需顾客自行购买或可向我们查询协助购买。为安全起见，请不要在盒子外露的任何地方有'BDD Co.','钻石','金'或'珠宝首饰'等字眼。",
+			"tit5": "当BDD Co.收到您的退货后",
+			"con12": "一但包裹到达我们手中，我们将向您发送确认电子邮件，并将在周一至周五进行退货。",
+			"con13": "您退回的物品将被送到我们的珠宝专家进行全面检查，其中包括一系列质量检查，以确保物品没有遭受任何损坏或修改（请告知珠宝专家不是BDD公司的直接员工）。一但我们发现物品已损坏或已被修改，退货申请将被视为无效。如果您对退货有任何疑问，我们会与您联络。相反，一但我们发现每个方面的物品都完好无损，您的退货将被全面处理，您将收到退货（换货/退款）确认电子邮件。",
+			"con14": "对于物品交换，如果您已收到退货确认电子邮件并且预计将退回货件，您将在出货当天收到送货确认。",
+			"tit6": "奖赏积分退回",
+			"con15": "若您在购买时使用了奖赏积分，退回的货品在获得品质保证团确认后我们将会在1-2个工作天内优先退回奖赏积分到您的BDD Co.会员帐号。若您当初购买的货品多于一件，您退货的时候选择保留部分不退，奖赏积分将无法使用在您保留的货品上，奖赏积分将会在退回奖赏积分当天重新计算并优先退回到您的BDD Co.会员帐号。",
+			"tit7": "更改或取消订单",
+			"con16": "如果您想更改或取消订单，请发送电子邮件至",
+			"con17": "。我们将您检查订单的最新状态。某些更改可能会增加准备时间并导致运输延迟。我们无法接受特殊要求订单和/或已发货订单的更改或取消。如果您的包裹已发货，请在收到包裹后按照退货政策与我们联络以进行退货安排。",
+			"tip1": "如有任何争议，BDD Co.保留最终决定权。"
+		}
+	},
+	"education": {
+		"layout": {
+			"home": "首页",
+			"knowledge": "知识",
+			"diamond": "钻石",
+			"carat": "克拉",
+			"cut": "切割",
+			"color": "颜色",
+			"clarity": "净度",
+			"shapes": "形状",
+			"certification": "证书证明",
+			"maintenance": "钻石护理",
 
-      "engagementRings": "订婚戒指",
-      "weddingRings": "结婚戒指"
-    },
-    "ring": {
-      "size": {
-        "header": "找出您的戒指尺寸",
-        "define": "BDD Co.了解您可能不知道自己或者对方的戒指尺寸。因此，我们为您提供了一个可列印的戒指尺寸指南，当中包含戒指尺寸测量条，戒指大小对照图和国际尺寸对照表，以帮助您找出正确的戒指尺寸。在你列印出来前，请先下载以下的PDF，并不要以浏览器开启，确保于“页面大小调整和处理”项中设定为“实际大小”或“无”。",
-        "guide": "戒指尺寸指南",
-        "cnPage": "中文版本",
-        "enPage": "英文版本",
-        "measure": "手指尺寸测量",
-        "tip1": "对于一个舒适的戒指戴在手指上，不会脱落，但同时可轻松滑过您的手指关节。",
-        "tip2": "*注意: 手指大小会因温度，天气，和一天内的时间而出现变化。因此:",
-        "tip3": "请选择温度较温暖或温度平稳的时候进行测量，例如晚上手比较温暖的时候。",
-        "tip4": "请分开各自进行3至4次测量，以免出现错误的测量和误读测量条。",
-        "tip5": "避免使用绳子或重复使用同一张纸进行测量，这些材质会因多次重复使用而出现扭曲和延伸，从而令测量结果出现偏差。",
-        "adjust": "免费调整尺寸",
-        "con1": "对于我们的钻石订婚戒指，若在生产商推荐的可调整尺寸范围内，BDD Co.会在前6个月内为您提供免费的戒指尺寸调整。请注意，我们部分的戒指由于款式的原因是无法调整尺寸的。请电邮至",
-        "con2": "与我们的钻饰珠宝顾问联络，以安排您的免费尺寸调整服务。根据我们的",
-        "link": "退货政策",
-        "con3": "，您需要承担退还商品的费用。对于结婚戒指，您可以在购买后的30天内更换另一个尺寸的戒指。请注意，如果您选择更换其它尺寸，新的戒指可能包含较少或者较多钻石，其贵金属重量可能会减少或增加，这些都有可能导致价格上升或下降。"
-      },
-      "engagementRing": {
-        "header": "订婚戒指",
-        "define": "购买订婚戒指最重要的步骤之一是确定您的戒指类型。 BDD提供各种订婚戒指款式，从经典纸牌到现代张力戒指。无论您是寻找一个温和的传统戒指还是更闪亮的东西，BDD都有适合您的戒指型。",
-        "list": [
-          {
-            "src": "ring-6",
-            "tip": "主石戒",
-            "con": "主石戒~ 戒扥款式可多变, 一伙真心总不骗, 高贵气质石长存."
-          },
-          {
-            "src": "ring-7",
-            "tip": "密钉戒",
-            "con": "密钉戒~ 戒指上的璀璨闪碎能映照出 , 夜空中的繁星闪烁 !主石旁潻夜空闪烁让您看到 , 群星中的皎洁明月"
-          },
-          {
-            "src": "ring-8",
-            "tip": "迫镶戒",
-            "con": "迫镶管道式镶嵌,特显工艺上微妙, 除了设计上独特, 工艺亦是同重要."
-          },
-          {
-            "src": "ring-9",
-            "tip": "古典戒",
-            "con": "要形造古朴优雅的特性,可经手中闪烁的钻戒,好让您从回惜日的时光."
-          },
-          {
-            "src": "ring-10",
-            "tip": "外围镶嵌戒",
-            "con": "天上闪烁璀璨的光环, 落在外围镶嵌的指环."
-          },
-          {
-            "src": "ring-11",
-            "tip": "开口戒",
-            "con": "开口戒~首饰界中魔法师, 相隔对岸的法变, 竟能做出此效果."
-          },
-          {
-            "src": "ring-12",
-            "tip": "三主石戒",
-            "con": "三个不能共存的时空 ( 过去 , 现在, 将来 ) , 三者亦能互连之感觉 ( 回忆, 感恩 , 希望 ) , 三石戒可见一生中的写照. "
-          }
-        ]
-      },
-      "weddingRing": {
-        "header": "结婚戒指",
-        "define": "选购订婚和结婚戒指不应成为难题。我们努力简化购买流程，授权和培育我们的客户，最终帮助他们购买一款他们能珍藏一生的首饰。了解所有您需要知道的，为您找寻最合适的戒指。",
-        "list": [
-          {
-            "src": "ring-1",
-            "tip": "女士婚戒",
-            "con": "愿作此生相依的应允 , 愿为此今刻决定往后."
-          },
-          {
-            "src": "ring-2",
-            "tip": "周年纪念戒",
-            "con": "想必爱情故事的背后 , 总有相遇互勉之时候 , 当中会有一点深深的安慰 , 怎样才能留下更深的诺印."
-          },
-          {
-            "src": "ring-3",
-            "tip": "浑身镶嵌戒",
-            "con": "永恒不灭的闪烁引领光彩生活的延续, 浑身钻戒的璀璨带来四周身旁的目光."
-          },
-          {
-            "src": "ring-4",
-            "tip": "男士婚戒",
-            "con": "一双赋予真摰爱情的信物, 双相许下永伴终生的承诺."
-          },
-          {
-            "src": "ring-5",
-            "tip": "立体浮雕戒.",
-            "con": "立体活现形态的设计 , 特显不爱平凡的您 . 深深刻画的纹理, 更可印证久经考验的爱侣."
-          }
-        ]
-      }
-    },
-    "diamonds": {
-      "carat": {
-        "header": "钻石克拉",
-        "define": "钻石的克拉重量不一定能完全准确地反映出一颗钻石的大小，就如同样体重可以搭配不同的高度。 BDD Co. 建议除了克拉重量，还要考虑另外两个相关特征：钻石冠部（顶部）的直径（以毫米为量度单位）和钻石的切工等级。",
-        "choose": "选购窍门",
-        "important": "我们看到钻石戒指时，最直接的就是看到钻石的顶部，所以这部分很重要。",
-        "rate": "切割良好的钻石有适当的比例，能把大部分的光线从其顶部反射出来，散发出的光芒从而令其看来更大。另外，切割不良的钻石，还有可能底部太深，把很多重量集中在下面，令钻石看来比其实际克拉重量要小。因此，一颗克拉重量较低但切工等级较高的钻石，可能比一颗克拉重量较高但切工不良的钻石，看起来更大。",
-        "desc": "克拉是指钻石的重量，与其大小成正比。使用滑块或输入值以查找您有兴趣浏览的范围。",
-        "tip1": "0.3克拉钻石",
-        "tip2": "0.5克拉钻石",
-        "tip3": "0.7克拉钻石",
-        "tip4": "1克拉钻石",
-        "tip5": "1.5克拉钻石",
-        "tip6": "2克拉钻石",
-        "tip7": "3克拉钻石",
-        "tip8": "5克拉钻石",
-        "remind": "请记住，随着克拉重量的增长，钻石价格将呈指数增长，因为克拉越大，钻石越罕见。",
-        "list": [
-          {
-            "src": "radiant",
-            "con": "八角雷射形"
-          },
-          {
-            "src": "round",
-            "con": "圆形"
-          },
-          {
-            "src": "cushion",
-            "con": "枕形"
-          },
-          {
-            "src": "pincess",
-            "con": "公主方形"
-          },
-          {
-            "src": "pear",
-            "con": "水滴形"
-          },
-          {
-            "src": "oval",
-            "con": "椭圆形"
-          },
-          {
-            "src": "marquise",
-            "con": "榄尖形"
-          },
-          {
-            "src": "heart",
-            "con": "心形"
-          },
-          {
-            "src": "emerald",
-            "con": "八角梯形"
-          },
-          {
-            "src": "asscher",
-            "con": "雷射方形"
-          }
-        ],
-        "tip": "TIPS:挑选克拉重量的方法",
-        "tips": "在购买钻石前预算的衡量非常重要，以下是给你挑选钻石大小的建议:",
-        "tips1": "1.参考多数人挑选一颗钻石的预算，约占[一个月~二个月的薪资]，这是你值得为她投资的。",
-        "tips2": "2.假设要购买的一克拉钻石超出您的预算，您可以在颜色(color)、切割(cut)、净度(clarity)上稍微减低标准，一样可以挑选到满足她的钻戒。",
-        "tips3": "3.请留意您另一伴手指细度，假如一克拉钻戒与她的手型不搭配时，可考虑一克拉以下的重量。",
-        "tips4": "4.同样大小的钻石放在各种款式及各类镶法的底座上，视觉效果会不同，请发挥创意为您的她挑选一枚专属钻戒。"
-      },
-      "cut": {
-        "header": "钻石切割",
-        "define": "钻石切割是选购钻石时至应考量的因素。切割是影响闪烁度和火彩的最重要的因素，未达到高级别切割水平的钻石即使质量上乘，看起来仍然可能黯淡无光。切割过深的钻石可能导致视觉效果低于实际尺寸。我们提供选购技巧、钻石切割分级表和对照表以及其他专业技巧说明，供您选出预算范围内至上乘的切割。",
-        "choose": "根据 GIA 净度评级标尺确定的钻石类型",
-        "rate": "1953年，Richard T.Liddicoat及其同事创立了美国宝石学院(GIA)钻石评级系统和净度标尺。 GIA钻石评级标尺分为6个类别和11个钻石净度等级。在钻石净度标尺（也常被成为钻石评级表）上，关于钻石评级类别和净度等级的详细列表如下：",
-        "tit1": "精准比例、抛光与对称度，让钻石反射最多光线。世界上仅有不到 1% 的钻石达到这样的标准。",
-        "tit2": "最高切割分级。它的切割比例在钻石中形成了火光和亮光的完美平衡。",
-        "tit3": "可测得的火光或亮光虽比理想型切割钻石略少，但价格却更实惠。",
-        "tit4": "价格比非常好切割的钻石要低，但对精打细算的顾客来说仍不失为一颗美丽的钻石。",
-        "tit5": "通常显得暗哑无光或呈玻璃状。 BDD 不提供低等级商品。",
-        "tips": "购买前参考事项",
-        "tip1": "• 良好的切割所反射出来的亮光能令钻石看起来比实际克拉重量的大小更大。",
-        "tip2": "• 钻石切割不等同于钻石的形状，钻石形状是指钻石的外形，例如：圆形、椭圆形；而切割等级是代表其光线折射表现，即我们一般称为的亮光特性。",
-        "tip3": "• 切割影响钻石整体的美观，BDD Co. 建议选择在您的预算内最高切割等级的钻石。",
-        "tip4": "• 拥有高级别切割的钻石需要精湛技艺和经验丰富的切割师傅以长时间创制，所以较为珍稀和昂贵。",
-        "tip5": "• 在一定的预算内想一并拥有美观和价值的钻石，良好或非常好的切割等级是不错的选择。"
-      },
-      "color": {
-        "header": "钻石颜色",
-        "define": "除了钻石切割，颜色是选择钻石时应考量的第二大特性。品质上乘的钻石呈无色状态，质量较次的则有可察觉的色彩，体现为淡黄色。",
-        "rate": "美国宝石学院(GIA)按照一个从D（无色）到Z（淡黄色或棕色）的衡量标尺对钻石成色进行分级。 D-Z钻石也被称为白色钻石，但其实大部分钻石（包括H和G级成色钻石）都有不同程度的色彩。",
-        "tit1": "钻石成色表钻石色彩一览",
-        "remind": "GIA 钻石成色标尺是行业公认的钻石成色评级标准。在该标尺被确定为标准之前，其他成色评级系统会使用 A、B 和 C 级别，因此为了避免混淆，GIA 从 D 开始评级。 GIA 钻石表分为六大类，钻石级别也从完全无色到淡色不等。被评为 D 的钻石完全无色，非常稀有，而 G 级和 H 级成色钻石近乎无色，但因为定价较低，所以性价比非常高。成色表越往下，色彩级别越低，淡黄成色也易察觉。",
-        "level": "级成色钻石",
-        "con1": "镶嵌于铂金或白金中最受青睐的最高级的完全「无色」分级。格外罕见。",
-        "con2": "镶嵌于铂金或白金中最受青睐的「无色」分级。即使是受过训练的人也很难察觉到的极微量的颜色。",
-        "con3": "镶嵌于铂金或白金中最受青睐的「无色」分级。经过训练的宝石鉴定家可察觉到的微量颜色。",
-        "con4": "最高等级的「近乎无色」分级。当与更高等级的「无色」分级比对时才可能察觉到颜色的不同。价值极佳。",
-        "con5": "「近乎无色」分级，只有当 与更高等级的颜色比对时才能察觉到颜色。价值极佳。",
-        "con6": "近距离仔细观察时，肉眼或能略微察觉其成色。价值非凡。",
-        "con7": "最后一级「近乎无色」的钻石，尤其是特殊形状或超过 1 克拉的钻石，肉眼可能会略微察觉到颜色。",
-        "con8": "颜色由明显微弱到无需仔细观察已可见。 BDD 不承销此等成色分级的钻石。",
-        "tips": "购买前参考事项",
-        "tip1": "• 人的眼睛一般会先对亮光有感应，其次就是颜色。所以，在选购钻石的时候，颜色一般会被认为是第二重要特征。",
-        "tip2": "• 钻石越大，其颜色会愈加明显，尤其是两克拉或以上的钻石。",
-        "tip3": "• 钻石在相距一个颜色等级的分别不大，例如：D 和 E 的分别，F 和 G 的分别，很难只以肉眼去分辨单中微妙的差别。但是它们的价格差距有时却可以很大。",
-        "tip4": "• 镶嵌钻石的金属种类可以衬托钻石的颜色。铂金和白金最衬托 D 至 H 颜色等级的钻石，而 I 和 J 可以搭配黄金。"
-      },
-      "clarity": {
-        "header": "钻石净度",
-        "define": "钻石净度，是指其无内含物和表面特征的程度,几乎全部的钻石都有不同数量和大小的细小瑕疵。 BDD Co. 只挑选SI2等级以上的钻石，很多细微瑕疵并不会影响钻石的美丽。天然的钻石几乎每颗都具有细小﹑天然瑕疵，在内部的我们称之为“内含物”， 在表面的则称为“表面特征”。",
-        "rate": "在十倍放大镜底下，评鉴钻石净度的准则，当中包括了上述特征的大小、数量、位置、本质、明显度与对钻石整体外观的影响程度。而钻石瑕疵会影响光线折射，将光线阻挡或造成偏向，从而降低其光泽、明亮度和火彩。因此，钻石的净度也是评量一颗钻石的重要特征。瑕疵数量越少和越小的钻石，它净度分级就越高。一般而言，钻石的净度越高，价值越高。",
-        "con1": "完美无瑕，没有内部或外部特征。内无瑕：可能只有外部瑕疵。两者都极为罕见。",
-        "con2": "极轻微瑕，特征微细，即使是受过训练的人，在 10 倍放大之下也很难看到。",
-        "con3": "轻微瑕，在 10 倍放大之下介于不易看到 (VS1) 和比较容易看到 (VS2) 之间的微小内含物。",
-        "con4": "微瑕，在 10 倍放大之下内含物可见。如果肉眼无瑕疵就具最佳价值。敏锐的肉眼可能察觉到 SI2 内含物。",
-        "con5": "瑕疵，可能还有更多明显或可见的内含物。 BDD 并不承销净度分级达I1/I 2/ I3 的钻石。",
-        "times": "10倍放大",
-        "tips": "购买前参考事项",
-        "tip1": "• 很多瑕疵都不能以肉眼察看到。",
-        "tip2": "• 肉眼下无瑕疵的钻石具备好价值，但比起 FL 或 IF 净度级别的钻石便宜，FL 和 IF 钻石极之罕有，因而价格也相对高很多。",
-        "tip3": "• 钻石越大，刻面的面积也越大越清晰，较高的净度分级也越加重要。"
-      },
-      "shape": {
-        "header": "钻石形狀",
-        "define": "BDD对所有钻石形状均采取同样的高品质标准。我们拥有一系列精美无比的传统圆形钻，也提供品质上乘的非圆形（或称“异形”）钻石。我们的所有认证钻石形状均由 GIA 或 AGSL 评级，达到 FL-SI2 净度、D-J 成色，并拥有理想、非常好或良好等多个切割等级。 BDD 钻石经过专业切割，达到无以伦比的闪烁度和光效应，足以吸引室内每一寸眼光。",
-        "choose": "选择您的钻石形状",
-        "list": [
-          {
-            "tip": "圆形",
-            "src": "iconyuanxin"
-          },
-          {
-            "tip": "公主方形",
-            "src": "iconfangxing"
-          },
-          {
-            "tip": "八角梯形",
-            "src": "iconfushe"
-          },
-          {
-            "tip": "枕形",
-            "src": "icondianzi"
-          },
-          {
-            "tip": "椭圆形",
-            "src": "icontuoyuan"
-          },
-          {
-            "tip": "榄尖形",
-            "src": "iconhoujue"
-          },
-          {
-            "tip": "心形",
-            "src": "iconaixin"
-          },
-          {
-            "tip": "雷射方形",
-            "src": "iconaqies"
-          },
-          {
-            "tip": "水滴形",
-            "src": "iconli"
-          },
-          {
-            "tip": "八角雷射形",
-            "src": "iconcui"
-          }
-        ],
-        "show": [
-          {
-            "src": "round",
-            "tip": "圆形",
-            "con": "圆形钻石是当今最受欢迎以及获得最多研究的钻石形状。近100年来，钻石切割师利用先进的光习性理论以及精确的数学计算，优化圆形钻的火光及光华。除了是最受欢迎以及获得最多研究的形状，圆形钻石切割在平衡切割﹑成色及净度上一般都有较高的灵活性，而且仍然具备您希望达到的火光和光华。要将传统圆形钻的闪烁发挥至极限，从以下两种最高切割分级，即理想或非常好切割选择其一，然后选择理想﹑优异或非常好的抛光及对称度分级。若要选择绽放卓越亮光的圆钻，请考虑BDD钻石。"
-          },
-          {
-            "src": "pincess",
-            "tip": "公主方形",
-            "con": "这是我们最受欢迎的非圆形钻石。其美丽的光华及独特的切割，让公主方形切割钻石成为订婚戒指的热门选择。公主形呈尖角，传统多为方形。选择成色分级的时候，要考虑到 J 成色非圆形钻石的价格固然吸引人，然而在角落的位置则可能略有颜色。此外，公主方形钻石在成正方形或长方形的程度上可以有很大的差别。"
-          },
-          {
-            "src": "emerald",
-            "tip": "八角梯形",
-            "con": "八角梯形钻石形状的不同之处是它的亭部，其切割成长方形的刻面，形成独特的光学视觉外观。这形状的桌面较大而敞开，因而突显钻石的净度。如果您选择绿宝石形切割而净度分级较低的钻石，例如微瑕 （SI），请谨记查阅钻石证书上的净度绘图。此外，八角梯形切割钻石在成长方形的程度上可以有很大的差别。如果您喜欢八角梯形切割而轮廓成正方形的钻石，可寻找雷射方形钻石。"
-          },
-          {
-            "src": "cushion",
-            "tip": "枕形",
-            "con": "这独一无二的形状已流行了超过一个世纪。枕形切割钻石的角呈圆形，刻面较大，完美突显钻石光华。这些较大的刻面突出了钻石的净度，如果您挑选微瑕净度分级，请谨记查阅钻石证书上的净度绘图。枕形切割钻石有不同形状，由正方形至长方形不等。若要寻找您想要的枕形钻石，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定钻石的轮廓，亦即从上方观看时的模样。"
-          },
-          {
-            "src": "oval",
-            "tip": "椭圆形",
-            "con": "椭圆形钻石具有美丽的光华，与圆形钻相似。椭圆形钻石同样非常受欢迎，原因是其长度能突显出手指的细长纤幼。若要寻找您想要的椭圆形尺寸，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定椭圆形钻石的轮廓，亦即从上方观看时的模样。"
-          },
-          {
-            "src": "marquise",
-            "tip": "榄尖形",
-            "con": "榄尖形钻石的形状可将克拉重量提升到最高，令钻石在外观上显得更大。将这种明亮形切割的钻石配搭圆形或梨形辅石，更显美观大方，而榄尖形钻石的长度令手指看来更细长纤幼。若要寻找您想要的榄尖形尺寸，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定钻石的轮廓，亦即从上方观看时的模样"
-          },
-          {
-            "src": "heart",
-            "tip": "心形",
-            "con": "心是爱情的最佳象征。心形钻石独一无二的外型， 令其成为不同类型钻石首饰的独特选择。选择成色分级的时候，要考虑到尽管 J成色心形钻石的价格固然吸引人，然而在角落的位置则可能略有颜色。若要找寻您想要的心形尺寸，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定心形钻石的轮廓，亦即从上方观看时的模样。"
-          },
-          {
-            "src": "asscher",
-            "tip": "雷射方形",
-            "con": "这个漂亮而独特的形状几乎与八角梯形切割相同，唯一的分别在于其为正方形。此外，雷射方形切割钻石的亭部切割成长方形刻面，与八角梯形切割一样。这个形状会突显钻石的净度，因此，如果您选择微瑕 （SI） 净度，请谨记查阅钻石证书上的净度绘图。选择成色分级的时候，要考虑到 J 成色非圆形钻石的价格固然吸引人，然而在角落的位置则可能略有颜色。"
-          },
-          {
-            "src": "pear",
-            "tip": "水滴形",
-            "con": "这种明亮形切割钻石有单一尖端及圆形底部，因而亦称为泪滴形。水滴形的独特外观，令其成为不同类型钻石首饰的热门选择。如果您选择修长的水滴形，钻石的长度会巧妙地形成手指修长的效果。"
-          },
-          {
-            "src": "radiant",
-            "tip": "八角雷射形",
-            "con": "修齐的角位是这款钻石的特征，令八角雷射形切割成为珠宝中热门及多用途的选择。八角雷射形切割钻石配衬长方形或圆形辅石，同样漂亮动人。八角雷射形切割钻石在长方形度方面可以有很大的差别。若要寻找您想要的八角雷射形尺寸，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定钻石的轮廓，亦即从上方观看时的模样。"
-          }
-        ]
-      },
-      "certification": {
-        "header": "证书证明",
-        "title": "钻石鉴定证书的重要性",
-        "define": "客户选购钻石的时候，应审阅其证书，以确保钻石经过专业及公正的评级鉴定。",
-        "choose": "鉴定证书",
-        "rate": "鉴定证书是一份由宝石鉴定师团队对钻石进行完整的评估后才发放的鉴定证书。该钻石会经过经训练人士的肉眼、小型放大镜、显微镜及其它专业工具来量度、评定及检验。鉴定证书中包括钻石形状、净度、成色、切割、克拉重量、比例和修饰等的科学鉴定资料。",
-        "characteristic": "BDD Co. 的钻石鉴定报告",
-        "report": "BDD Co. 售卖的每颗裸钻都经由美国宝石研究院(GIA) 鉴定与评级，并附带该学院发放的鉴定报告“Diamond Grading Report” （一克拉以上）或特征汇总报告“Diamond Dossier”（一克拉以下）。 GIA 创立了当今业内公认的评级系统：称为 4C 标准，包括了：切割(Cut)、成色(Color)、净度(Clarity) 和克拉重量(Carat)。这 4C 标准对钻石的鉴定、估值和定价是最为关键的特征。该研究院是全世界最具公信力与认可的钻石分析和分级实验室，并以精确及公正的钻石分级制度见称，严格苛求的程度不是任何国家鉴定机构所能比拟的。每份报告不仅是钻石天然的证明，同时也是钻石品质、美观与价值的保证; 是全世界钻石商所依据买卖的标准; 也是钻石市场上最广受认定的鉴定证书。",
-        "certificate": "购买前请查看鉴定证书",
-        "remind": "在BDD Co.购买任何一颗经认证的裸钻前，您可以在我们的网站查看其证书，我们提供的分级报告书及档大致有3种：",
-        "gia1": "GIA 钻石鉴定证书",
-        "gia2": "GIA 钻石鉴定精简版证书",
-        "gia3": "BDD Co.鉴定",
-        "mail1": "若未能检视其证书，可透过电邮",
-        "mail2": "联络我们"
-      },
-      "maintenance": {
-        "header": "钻石护理",
-        "define": "钻石保养小贴士",
-        "con1": "1.当您在故家务时及使用化妆品时，尽量不要佩戴戒指，漂白剂和化妆品虽不会损坏钻石，但是会​​使镶托褪色或变色。",
-        "con2": "2.洗碗或做粗活时不要佩戴钻石，钻石虽然坚硬，但是若依其纹理方向受到重击可能会有损伤。",
-        "con3": "3.在准备泡温泉、游泳或前往健身房享受桑拿浴时，尽量不要佩戴戒指。低的水温和桑拿浴的热蒸汽都可能导致手指收缩，戒指也更容易滑落。",
-        "con4": "4.每年将您的钻石首饰拿到正规珠宝店检查-次，查看镶托是否松脱与磨损，重新给它加固定和进行免费翻新。",
-        "con5": "5.应将您的银首饰分开存放在珠宝箱或布袋内，以免碰撞刮花及其他损坏。也应避免接触家居化学品如漂白剂、氨水，或加氯消毒的游泳池水。",
-        "con6": "6.应注意防止银锈积聚，当银与空气中的硫或硫化氢接触，就会自然形成银锈，令表面失去光泽、暗哑无光。经常配戴您的银首饰，以及在佩戴银饰后，将饰物密封于胶袋中，这些都是防止银锈积聚的好方法。",
-        "con7": "7.定期清洗银器将可防止银锈及保持银器明亮有光泽。银锈在出现初期时最容易去除，可以以暖水及不含氯的清洁液洗擦表面，再以软布抹干，最后以抹银布轻擦表面。您也可以使用专门去锈配方的亮光剂、溶剂来除去银锈。"
-      }
-    }
-  },
-  "brandStory": {
-    "header": "BDD品牌故事",
-    "found": "我们致力于网购平台，提供高品质而价格优惠的GIA评级钻石首饰除了可供灵活配搭的钻石及婚嫁戒指，BDD同时提供时尚珠宝首饰。",
-    "prove": "它，见证求婚、订婚的人生重要时刻",
-    "with": "它，更与您每日相伴",
-    "moment": "每一分光泽与火彩，都是源自内心的性情表达一颗称心如意的钻石，会将生活的每一刻，都变成重要时刻",
-    "diffent": "不想流俗于平庸的设计之中，更不想承担虚高的品牌溢价",
-    "choose": "如何挑选出最心仪的那枚钻戒？",
-    "understand": "或许，BDD珠宝，更懂钻石心意",
-    "right": "将钻石与戒指自由搭配的权利交还于您",
-    "dream": "您用它解读爱情，它为您唤醒生活，无论柔和与坚强，都是现实的映照与梦想的笃定",
-    "summary": "BDD致 i-Smart 的您 —— 心存梦想，永赴追逐",
-    "slogan": "Dare to Dream",
-    "show": [
-      {
-        "src": "expert",
-        "tip": "钻石专家",
-        "con": "专家指导与教育"
-      },
-      {
-        "src": "performance",
-        "tip": "高性价比",
-        "con": "最优价格保证"
-      },
-      {
-        "src": "quality",
-        "tip": "品质保证",
-        "con": "熟练的工艺和GIA等级"
-      },
-      {
-        "src": "matching",
-        "tip": "搭配定制",
-        "con": "自我表达升级的生活方式"
-      }
-    ]
-  },
-  "common": {
-    "addCartSuccess": "加入购物车成功",
-    "addCartFail": "加入购物车是失败",
-    "addWishSuccess": "加入心愿单成功",
-    "addWishFail": "加入心愿单失败",
-    "addComparedSuccess": "加入钻石对比成功",
-    "addCompareFail": "加入钻石对比失败",
-    "removeWishSuccess": "移除心愿单成功",
-    "removeWishFail": "移除心愿单失败",
-    "removeComparedSuccess": "移除钻石对比成功",
-    "removeCompareFail": "移除钻石对比失败",
-    "getMore": "加载更多...",
-    "error": "页面出错了",
-    "soleOut": "商品已售罄"
-  },
-  "order": {
-    "firstLogin":"请先登录或注册！",
-    "success":"添加成功！",
-    "tooInp": "输入/选择优惠码",
-    "tooInpShort": "输入优惠码",
-    "ConfirmOrder": "购物车",
-    "finishOrder": "完善您的订单讯息",
-    "orderPay": "订单支付",
-    "finishPay": "完成支付",
-    "finishePay": "确认订单",
-    "login": "登入",
-    "balbala": "账户的以加速结算或是",
-    "Registration": "登记",
-    "balabalabala": "新账户的，随时随地管理订单！",
-    "darling": "亲爱的",
-    "seeMore": "查看更多",
-    "seeLess": "收起",
-    "get": "收",
-    "change": "更改",
-    "address": "收货地址",
-    "mustInput": "带*为必填",
-    "lastName": "姓",
-    "firstName": "名",
-    "wrongInput": "输入有误",
-    "telephone": "电话",
-    "email": "邮箱",
-    "checkEmail": "确认电邮地址",
-    "wrongInputAgain": "两次输入不一致",
-    "country": "国家/地区",
-    "province": "省份/州",
-    "city": "城市/区域",
-    "longAddress": "详细地址",
-    "zipCode": "邮政编码",
-    "sure": "确认",
-    "add": "添加",
-    "edit": "修改",
-    "addAddress": "添加收货地址",
-    "info": "商品讯息",
-    "number": "数量",
-    "price": "金额",
-    "option": "操作",
-    "customMade": "定制",
-    "deliveryInformation": "发货讯息",
-    "sendTogether": "货物到齐一起送货",
-    "chatBor": "未选择将会被拆成多个包裹送货",
-    "sendTime": "预计送达时间",
-    "checkDeliveryPolicy": "查看我们的送货政策",
-    "goSingKei": "天",
-    "showHouEmail": "请填写接收售后凭证的电邮地址",
-    "sameTongAddress": "同收货邮箱一致",
-    "remark": "发货备注",
-    "coupon": "优惠券",
-    "exchange": "使用",
-    "die": "优惠码不可使用 / 优惠码无效",
-    "gay1": "1、优惠码兑换条件仅适用于选购指定商品，兑换后，在结帐时显示优惠金额；",
-    "gay2": "2、优惠码不能与任何其他优惠或折扣编号同时使用，亦不能追溯使用于以往订单；",
-    "gay3": "3、优惠条款及条件可随时更改而无需事先通知，可能受其他限制所约束。",
-    "sc": "刪除",
-    "kouMaiInfo": "您的购买详情",
-    "goodsNum": "商品件数",
-    "goodsNumNum": "商品总额",
-    "expressMoney": "运费",
-    "expressSay": "运费是根据您的送货地址，收取运费，点击查看免费送递服务",
-    "tex": "税费",
-    "texSay": "税费是根据您的送货地址，收取税费，点击查看国际政策",
-    "insurance": "保险费",
-    "insuranceSay": "保险费是根据您的商品总额，收取保险费",
-    "totalMoney": "订单总额",
-    "beiQin": "确认支付",
-    "msgTitle1": "提示!",
-    "msgContent1": "是否删除该地址讯息？",
-    "msg1": "请确认添加地址后再选择优惠券讯息！",
-    "coupon1": "请选择",
-    "coupon2": "出错了，出错位置：计算优惠券金额",
-    "list1": "商品讯息获取失败",
-    "wip1": "姓名讯息输入有误",
-    "wip2": "电话讯息输入有误",
-    "wip3": "电邮讯息输入有误",
-    "wip4": "请选择国家／地区讯",
-    "wip5": "地址讯息输入有误",
-    "msg2": "创建失败",
-    "wip6": "姓氏输入有误",
-    "wip7": "姓氏最长20个字符！",
-    "wip8": "名字输入有误",
-    "wip9": "名字最长20个字符！",
-    "msg3": "修改成功",
-    "msg4": "请先添加收货地址！",
-    "msg5": "接收售后凭证的电邮地址输入有误，请重新输入！",
-    "msg6": "备注字数已满",
-    "msg7": "出错了，出错位置：下订单跳转支付",
-    "msg8": "数据获取失败，请返回购物车重试！",
-    "msg9":"请选择支付方式!"
-  },
-  "invoice":{
-    "personal":"个人",
-    "company":"企业",
-    "Submitted":"提交成功",
-    "email":"电子邮箱",
-    "default":"默认不开发票",
-    "Invoicing":"开发票",
-    "Invoicings":"开具发票",
-    "PaperInvoice":"纸质发票",
-    "ElectronicInvoice":"电子发票",
-    "InvoiceDetails":"发票详情",
-    "HeaderType":"抬头类型",
-    "InvoiceType":"发票类型",
-    "BusinessUnit":"企业单位",
-    "UnBusinessUnit":"个人",
-    "Invoice":"发票抬头",
-    "TaxID":"发票税号",
-    "holder1":"填写发票抬头",
-    "holder2":"填写纳税人识别号",
-    "totalAmount":"总金额",
-    "tips":"*稍后纸质发票会随订单商品一起快递给您,请注意查收！",
-    "confirm":"确认提交",
-    "carryOut":"完成",
-    "hint1":"抬头类型不能为空",
-    "hint2":"发票抬头不能为空",
-    "hint3":"税号不能为空",
-    "hint4":"邮箱不能为空",
-    "hint5":"请输入正确的邮箱"
-  }
+			"engagementRings": "订婚戒指",
+			"weddingRings": "结婚戒指"
+		},
+		"ring": {
+			"size": {
+				"header": "找出您的戒指尺寸",
+				"define": "BDD Co.了解您可能不知道自己或者对方的戒指尺寸。因此，我们为您提供了一个可列印的戒指尺寸指南，当中包含戒指尺寸测量条，戒指大小对照图和国际尺寸对照表，以帮助您找出正确的戒指尺寸。在你列印出来前，请先下载以下的PDF，并不要以浏览器开启，确保于“页面大小调整和处理”项中设定为“实际大小”或“无”。",
+				"guide": "戒指尺寸指南",
+				"cnPage": "中文版本",
+				"enPage": "英文版本",
+				"measure": "手指尺寸测量",
+				"tip1": "对于一个舒适的戒指戴在手指上，不会脱落，但同时可轻松滑过您的手指关节。",
+				"tip2": "*注意: 手指大小会因温度，天气，和一天内的时间而出现变化。因此:",
+				"tip3": "请选择温度较温暖或温度平稳的时候进行测量，例如晚上手比较温暖的时候。",
+				"tip4": "请分开各自进行3至4次测量，以免出现错误的测量和误读测量条。",
+				"tip5": "避免使用绳子或重复使用同一张纸进行测量，这些材质会因多次重复使用而出现扭曲和延伸，从而令测量结果出现偏差。",
+				"adjust": "免费调整尺寸",
+				"con1": "对于我们的钻石订婚戒指，若在生产商推荐的可调整尺寸范围内，BDD Co.会在前6个月内为您提供免费的戒指尺寸调整。请注意，我们部分的戒指由于款式的原因是无法调整尺寸的。请电邮至",
+				"con2": "与我们的钻饰珠宝顾问联络，以安排您的免费尺寸调整服务。根据我们的",
+				"link": "退货政策",
+				"con3": "，您需要承担退还商品的费用。对于结婚戒指，您可以在购买后的30天内更换另一个尺寸的戒指。请注意，如果您选择更换其它尺寸，新的戒指可能包含较少或者较多钻石，其贵金属重量可能会减少或增加，这些都有可能导致价格上升或下降。"
+			},
+			"engagementRing": {
+				"header": "订婚戒指",
+				"define": "购买订婚戒指最重要的步骤之一是确定您的戒指类型。 BDD提供各种订婚戒指款式，从经典纸牌到现代张力戒指。无论您是寻找一个温和的传统戒指还是更闪亮的东西，BDD都有适合您的戒指型。",
+				"list": [{
+						"src": "ring-6",
+						"tip": "主石戒",
+						"con": "主石戒~ 戒扥款式可多变, 一伙真心总不骗, 高贵气质石长存."
+					},
+					{
+						"src": "ring-7",
+						"tip": "密钉戒",
+						"con": "密钉戒~ 戒指上的璀璨闪碎能映照出 , 夜空中的繁星闪烁 !主石旁潻夜空闪烁让您看到 , 群星中的皎洁明月"
+					},
+					{
+						"src": "ring-8",
+						"tip": "迫镶戒",
+						"con": "迫镶管道式镶嵌,特显工艺上微妙, 除了设计上独特, 工艺亦是同重要."
+					},
+					{
+						"src": "ring-9",
+						"tip": "古典戒",
+						"con": "要形造古朴优雅的特性,可经手中闪烁的钻戒,好让您从回惜日的时光."
+					},
+					{
+						"src": "ring-10",
+						"tip": "外围镶嵌戒",
+						"con": "天上闪烁璀璨的光环, 落在外围镶嵌的指环."
+					},
+					{
+						"src": "ring-11",
+						"tip": "开口戒",
+						"con": "开口戒~首饰界中魔法师, 相隔对岸的法变, 竟能做出此效果."
+					},
+					{
+						"src": "ring-12",
+						"tip": "三主石戒",
+						"con": "三个不能共存的时空 ( 过去 , 现在, 将来 ) , 三者亦能互连之感觉 ( 回忆, 感恩 , 希望 ) , 三石戒可见一生中的写照. "
+					}
+				]
+			},
+			"weddingRing": {
+				"header": "结婚戒指",
+				"define": "选购订婚和结婚戒指不应成为难题。我们努力简化购买流程，授权和培育我们的客户，最终帮助他们购买一款他们能珍藏一生的首饰。了解所有您需要知道的，为您找寻最合适的戒指。",
+				"list": [{
+						"src": "ring-1",
+						"tip": "女士婚戒",
+						"con": "愿作此生相依的应允 , 愿为此今刻决定往后."
+					},
+					{
+						"src": "ring-2",
+						"tip": "周年纪念戒",
+						"con": "想必爱情故事的背后 , 总有相遇互勉之时候 , 当中会有一点深深的安慰 , 怎样才能留下更深的诺印."
+					},
+					{
+						"src": "ring-3",
+						"tip": "浑身镶嵌戒",
+						"con": "永恒不灭的闪烁引领光彩生活的延续, 浑身钻戒的璀璨带来四周身旁的目光."
+					},
+					{
+						"src": "ring-4",
+						"tip": "男士婚戒",
+						"con": "一双赋予真摰爱情的信物, 双相许下永伴终生的承诺."
+					},
+					{
+						"src": "ring-5",
+						"tip": "立体浮雕戒.",
+						"con": "立体活现形态的设计 , 特显不爱平凡的您 . 深深刻画的纹理, 更可印证久经考验的爱侣."
+					}
+				]
+			}
+		},
+		"diamonds": {
+			"carat": {
+				"header": "钻石克拉",
+				"define": "钻石的克拉重量不一定能完全准确地反映出一颗钻石的大小，就如同样体重可以搭配不同的高度。 BDD Co. 建议除了克拉重量，还要考虑另外两个相关特征：钻石冠部（顶部）的直径（以毫米为量度单位）和钻石的切工等级。",
+				"choose": "选购窍门",
+				"important": "我们看到钻石戒指时，最直接的就是看到钻石的顶部，所以这部分很重要。",
+				"rate": "切割良好的钻石有适当的比例，能把大部分的光线从其顶部反射出来，散发出的光芒从而令其看来更大。另外，切割不良的钻石，还有可能底部太深，把很多重量集中在下面，令钻石看来比其实际克拉重量要小。因此，一颗克拉重量较低但切工等级较高的钻石，可能比一颗克拉重量较高但切工不良的钻石，看起来更大。",
+				"desc": "克拉是指钻石的重量，与其大小成正比。使用滑块或输入值以查找您有兴趣浏览的范围。",
+				"tip1": "0.3克拉钻石",
+				"tip2": "0.5克拉钻石",
+				"tip3": "0.7克拉钻石",
+				"tip4": "1克拉钻石",
+				"tip5": "1.5克拉钻石",
+				"tip6": "2克拉钻石",
+				"tip7": "3克拉钻石",
+				"tip8": "5克拉钻石",
+				"remind": "请记住，随着克拉重量的增长，钻石价格将呈指数增长，因为克拉越大，钻石越罕见。",
+				"list": [{
+						"src": "radiant",
+						"con": "八角雷射形"
+					},
+					{
+						"src": "round",
+						"con": "圆形"
+					},
+					{
+						"src": "cushion",
+						"con": "枕形"
+					},
+					{
+						"src": "pincess",
+						"con": "公主方形"
+					},
+					{
+						"src": "pear",
+						"con": "水滴形"
+					},
+					{
+						"src": "oval",
+						"con": "椭圆形"
+					},
+					{
+						"src": "marquise",
+						"con": "榄尖形"
+					},
+					{
+						"src": "heart",
+						"con": "心形"
+					},
+					{
+						"src": "emerald",
+						"con": "八角梯形"
+					},
+					{
+						"src": "asscher",
+						"con": "雷射方形"
+					}
+				],
+				"tip": "TIPS:挑选克拉重量的方法",
+				"tips": "在购买钻石前预算的衡量非常重要，以下是给你挑选钻石大小的建议:",
+				"tips1": "1.参考多数人挑选一颗钻石的预算，约占[一个月~二个月的薪资]，这是你值得为她投资的。",
+				"tips2": "2.假设要购买的一克拉钻石超出您的预算，您可以在颜色(color)、切割(cut)、净度(clarity)上稍微减低标准，一样可以挑选到满足她的钻戒。",
+				"tips3": "3.请留意您另一伴手指细度，假如一克拉钻戒与她的手型不搭配时，可考虑一克拉以下的重量。",
+				"tips4": "4.同样大小的钻石放在各种款式及各类镶法的底座上，视觉效果会不同，请发挥创意为您的她挑选一枚专属钻戒。"
+			},
+			"cut": {
+				"header": "钻石切割",
+				"define": "钻石切割是选购钻石时至应考量的因素。切割是影响闪烁度和火彩的最重要的因素，未达到高级别切割水平的钻石即使质量上乘，看起来仍然可能黯淡无光。切割过深的钻石可能导致视觉效果低于实际尺寸。我们提供选购技巧、钻石切割分级表和对照表以及其他专业技巧说明，供您选出预算范围内至上乘的切割。",
+				"choose": "根据 GIA 净度评级标尺确定的钻石类型",
+				"rate": "1953年，Richard T.Liddicoat及其同事创立了美国宝石学院(GIA)钻石评级系统和净度标尺。 GIA钻石评级标尺分为6个类别和11个钻石净度等级。在钻石净度标尺（也常被成为钻石评级表）上，关于钻石评级类别和净度等级的详细列表如下：",
+				"tit1": "精准比例、抛光与对称度，让钻石反射最多光线。世界上仅有不到 1% 的钻石达到这样的标准。",
+				"tit2": "最高切割分级。它的切割比例在钻石中形成了火光和亮光的完美平衡。",
+				"tit3": "可测得的火光或亮光虽比理想型切割钻石略少，但价格却更实惠。",
+				"tit4": "价格比非常好切割的钻石要低，但对精打细算的顾客来说仍不失为一颗美丽的钻石。",
+				"tit5": "通常显得暗哑无光或呈玻璃状。 BDD 不提供低等级商品。",
+				"tips": "购买前参考事项",
+				"tip1": "• 良好的切割所反射出来的亮光能令钻石看起来比实际克拉重量的大小更大。",
+				"tip2": "• 钻石切割不等同于钻石的形状，钻石形状是指钻石的外形，例如：圆形、椭圆形；而切割等级是代表其光线折射表现，即我们一般称为的亮光特性。",
+				"tip3": "• 切割影响钻石整体的美观，BDD Co. 建议选择在您的预算内最高切割等级的钻石。",
+				"tip4": "• 拥有高级别切割的钻石需要精湛技艺和经验丰富的切割师傅以长时间创制，所以较为珍稀和昂贵。",
+				"tip5": "• 在一定的预算内想一并拥有美观和价值的钻石，良好或非常好的切割等级是不错的选择。"
+			},
+			"color": {
+				"header": "钻石颜色",
+				"define": "除了钻石切割，颜色是选择钻石时应考量的第二大特性。品质上乘的钻石呈无色状态，质量较次的则有可察觉的色彩，体现为淡黄色。",
+				"rate": "美国宝石学院(GIA)按照一个从D（无色）到Z（淡黄色或棕色）的衡量标尺对钻石成色进行分级。 D-Z钻石也被称为白色钻石，但其实大部分钻石（包括H和G级成色钻石）都有不同程度的色彩。",
+				"tit1": "钻石成色表钻石色彩一览",
+				"remind": "GIA 钻石成色标尺是行业公认的钻石成色评级标准。在该标尺被确定为标准之前，其他成色评级系统会使用 A、B 和 C 级别，因此为了避免混淆，GIA 从 D 开始评级。 GIA 钻石表分为六大类，钻石级别也从完全无色到淡色不等。被评为 D 的钻石完全无色，非常稀有，而 G 级和 H 级成色钻石近乎无色，但因为定价较低，所以性价比非常高。成色表越往下，色彩级别越低，淡黄成色也易察觉。",
+				"level": "级成色钻石",
+				"con1": "镶嵌于铂金或白金中最受青睐的最高级的完全「无色」分级。格外罕见。",
+				"con2": "镶嵌于铂金或白金中最受青睐的「无色」分级。即使是受过训练的人也很难察觉到的极微量的颜色。",
+				"con3": "镶嵌于铂金或白金中最受青睐的「无色」分级。经过训练的宝石鉴定家可察觉到的微量颜色。",
+				"con4": "最高等级的「近乎无色」分级。当与更高等级的「无色」分级比对时才可能察觉到颜色的不同。价值极佳。",
+				"con5": "「近乎无色」分级，只有当 与更高等级的颜色比对时才能察觉到颜色。价值极佳。",
+				"con6": "近距离仔细观察时，肉眼或能略微察觉其成色。价值非凡。",
+				"con7": "最后一级「近乎无色」的钻石，尤其是特殊形状或超过 1 克拉的钻石，肉眼可能会略微察觉到颜色。",
+				"con8": "颜色由明显微弱到无需仔细观察已可见。 BDD 不承销此等成色分级的钻石。",
+				"tips": "购买前参考事项",
+				"tip1": "• 人的眼睛一般会先对亮光有感应，其次就是颜色。所以，在选购钻石的时候，颜色一般会被认为是第二重要特征。",
+				"tip2": "• 钻石越大，其颜色会愈加明显，尤其是两克拉或以上的钻石。",
+				"tip3": "• 钻石在相距一个颜色等级的分别不大，例如：D 和 E 的分别，F 和 G 的分别，很难只以肉眼去分辨单中微妙的差别。但是它们的价格差距有时却可以很大。",
+				"tip4": "• 镶嵌钻石的金属种类可以衬托钻石的颜色。铂金和白金最衬托 D 至 H 颜色等级的钻石，而 I 和 J 可以搭配黄金。"
+			},
+			"clarity": {
+				"header": "钻石净度",
+				"define": "钻石净度，是指其无内含物和表面特征的程度,几乎全部的钻石都有不同数量和大小的细小瑕疵。 BDD Co. 只挑选SI2等级以上的钻石，很多细微瑕疵并不会影响钻石的美丽。天然的钻石几乎每颗都具有细小﹑天然瑕疵，在内部的我们称之为“内含物”， 在表面的则称为“表面特征”。",
+				"rate": "在十倍放大镜底下，评鉴钻石净度的准则，当中包括了上述特征的大小、数量、位置、本质、明显度与对钻石整体外观的影响程度。而钻石瑕疵会影响光线折射，将光线阻挡或造成偏向，从而降低其光泽、明亮度和火彩。因此，钻石的净度也是评量一颗钻石的重要特征。瑕疵数量越少和越小的钻石，它净度分级就越高。一般而言，钻石的净度越高，价值越高。",
+				"con1": "完美无瑕，没有内部或外部特征。内无瑕：可能只有外部瑕疵。两者都极为罕见。",
+				"con2": "极轻微瑕，特征微细，即使是受过训练的人，在 10 倍放大之下也很难看到。",
+				"con3": "轻微瑕，在 10 倍放大之下介于不易看到 (VS1) 和比较容易看到 (VS2) 之间的微小内含物。",
+				"con4": "微瑕，在 10 倍放大之下内含物可见。如果肉眼无瑕疵就具最佳价值。敏锐的肉眼可能察觉到 SI2 内含物。",
+				"con5": "瑕疵，可能还有更多明显或可见的内含物。 BDD 并不承销净度分级达I1/I 2/ I3 的钻石。",
+				"times": "10倍放大",
+				"tips": "购买前参考事项",
+				"tip1": "• 很多瑕疵都不能以肉眼察看到。",
+				"tip2": "• 肉眼下无瑕疵的钻石具备好价值，但比起 FL 或 IF 净度级别的钻石便宜，FL 和 IF 钻石极之罕有，因而价格也相对高很多。",
+				"tip3": "• 钻石越大，刻面的面积也越大越清晰，较高的净度分级也越加重要。"
+			},
+			"shape": {
+				"header": "钻石形狀",
+				"define": "BDD对所有钻石形状均采取同样的高品质标准。我们拥有一系列精美无比的传统圆形钻，也提供品质上乘的非圆形（或称“异形”）钻石。我们的所有认证钻石形状均由 GIA 或 AGSL 评级，达到 FL-SI2 净度、D-J 成色，并拥有理想、非常好或良好等多个切割等级。 BDD 钻石经过专业切割，达到无以伦比的闪烁度和光效应，足以吸引室内每一寸眼光。",
+				"choose": "选择您的钻石形状",
+				"list": [{
+						"tip": "圆形",
+						"src": "iconyuanxin"
+					},
+					{
+						"tip": "公主方形",
+						"src": "iconfangxing"
+					},
+					{
+						"tip": "八角梯形",
+						"src": "iconfushe"
+					},
+					{
+						"tip": "枕形",
+						"src": "icondianzi"
+					},
+					{
+						"tip": "椭圆形",
+						"src": "icontuoyuan"
+					},
+					{
+						"tip": "榄尖形",
+						"src": "iconhoujue"
+					},
+					{
+						"tip": "心形",
+						"src": "iconaixin"
+					},
+					{
+						"tip": "雷射方形",
+						"src": "iconaqies"
+					},
+					{
+						"tip": "水滴形",
+						"src": "iconli"
+					},
+					{
+						"tip": "八角雷射形",
+						"src": "iconcui"
+					}
+				],
+				"show": [{
+						"src": "round",
+						"tip": "圆形",
+						"con": "圆形钻石是当今最受欢迎以及获得最多研究的钻石形状。近100年来，钻石切割师利用先进的光习性理论以及精确的数学计算，优化圆形钻的火光及光华。除了是最受欢迎以及获得最多研究的形状，圆形钻石切割在平衡切割﹑成色及净度上一般都有较高的灵活性，而且仍然具备您希望达到的火光和光华。要将传统圆形钻的闪烁发挥至极限，从以下两种最高切割分级，即理想或非常好切割选择其一，然后选择理想﹑优异或非常好的抛光及对称度分级。若要选择绽放卓越亮光的圆钻，请考虑BDD钻石。"
+					},
+					{
+						"src": "pincess",
+						"tip": "公主方形",
+						"con": "这是我们最受欢迎的非圆形钻石。其美丽的光华及独特的切割，让公主方形切割钻石成为订婚戒指的热门选择。公主形呈尖角，传统多为方形。选择成色分级的时候，要考虑到 J 成色非圆形钻石的价格固然吸引人，然而在角落的位置则可能略有颜色。此外，公主方形钻石在成正方形或长方形的程度上可以有很大的差别。"
+					},
+					{
+						"src": "emerald",
+						"tip": "八角梯形",
+						"con": "八角梯形钻石形状的不同之处是它的亭部，其切割成长方形的刻面，形成独特的光学视觉外观。这形状的桌面较大而敞开，因而突显钻石的净度。如果您选择绿宝石形切割而净度分级较低的钻石，例如微瑕 （SI），请谨记查阅钻石证书上的净度绘图。此外，八角梯形切割钻石在成长方形的程度上可以有很大的差别。如果您喜欢八角梯形切割而轮廓成正方形的钻石，可寻找雷射方形钻石。"
+					},
+					{
+						"src": "cushion",
+						"tip": "枕形",
+						"con": "这独一无二的形状已流行了超过一个世纪。枕形切割钻石的角呈圆形，刻面较大，完美突显钻石光华。这些较大的刻面突出了钻石的净度，如果您挑选微瑕净度分级，请谨记查阅钻石证书上的净度绘图。枕形切割钻石有不同形状，由正方形至长方形不等。若要寻找您想要的枕形钻石，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定钻石的轮廓，亦即从上方观看时的模样。"
+					},
+					{
+						"src": "oval",
+						"tip": "椭圆形",
+						"con": "椭圆形钻石具有美丽的光华，与圆形钻相似。椭圆形钻石同样非常受欢迎，原因是其长度能突显出手指的细长纤幼。若要寻找您想要的椭圆形尺寸，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定椭圆形钻石的轮廓，亦即从上方观看时的模样。"
+					},
+					{
+						"src": "marquise",
+						"tip": "榄尖形",
+						"con": "榄尖形钻石的形状可将克拉重量提升到最高，令钻石在外观上显得更大。将这种明亮形切割的钻石配搭圆形或梨形辅石，更显美观大方，而榄尖形钻石的长度令手指看来更细长纤幼。若要寻找您想要的榄尖形尺寸，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定钻石的轮廓，亦即从上方观看时的模样"
+					},
+					{
+						"src": "heart",
+						"tip": "心形",
+						"con": "心是爱情的最佳象征。心形钻石独一无二的外型， 令其成为不同类型钻石首饰的独特选择。选择成色分级的时候，要考虑到尽管 J成色心形钻石的价格固然吸引人，然而在角落的位置则可能略有颜色。若要找寻您想要的心形尺寸，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定心形钻石的轮廓，亦即从上方观看时的模样。"
+					},
+					{
+						"src": "asscher",
+						"tip": "雷射方形",
+						"con": "这个漂亮而独特的形状几乎与八角梯形切割相同，唯一的分别在于其为正方形。此外，雷射方形切割钻石的亭部切割成长方形刻面，与八角梯形切割一样。这个形状会突显钻石的净度，因此，如果您选择微瑕 （SI） 净度，请谨记查阅钻石证书上的净度绘图。选择成色分级的时候，要考虑到 J 成色非圆形钻石的价格固然吸引人，然而在角落的位置则可能略有颜色。"
+					},
+					{
+						"src": "pear",
+						"tip": "水滴形",
+						"con": "这种明亮形切割钻石有单一尖端及圆形底部，因而亦称为泪滴形。水滴形的独特外观，令其成为不同类型钻石首饰的热门选择。如果您选择修长的水滴形，钻石的长度会巧妙地形成手指修长的效果。"
+					},
+					{
+						"src": "radiant",
+						"tip": "八角雷射形",
+						"con": "修齐的角位是这款钻石的特征，令八角雷射形切割成为珠宝中热门及多用途的选择。八角雷射形切割钻石配衬长方形或圆形辅石，同样漂亮动人。八角雷射形切割钻石在长方形度方面可以有很大的差别。若要寻找您想要的八角雷射形尺寸，请在我们的互动式钻石搜寻中以及每款钻石的详细资料页中参看长宽比率。长宽比率决定钻石的轮廓，亦即从上方观看时的模样。"
+					}
+				]
+			},
+			"certification": {
+				"header": "证书证明",
+				"title": "钻石鉴定证书的重要性",
+				"define": "客户选购钻石的时候，应审阅其证书，以确保钻石经过专业及公正的评级鉴定。",
+				"choose": "鉴定证书",
+				"rate": "鉴定证书是一份由宝石鉴定师团队对钻石进行完整的评估后才发放的鉴定证书。该钻石会经过经训练人士的肉眼、小型放大镜、显微镜及其它专业工具来量度、评定及检验。鉴定证书中包括钻石形状、净度、成色、切割、克拉重量、比例和修饰等的科学鉴定资料。",
+				"characteristic": "BDD Co. 的钻石鉴定报告",
+				"report": "BDD Co. 售卖的每颗裸钻都经由美国宝石研究院(GIA) 鉴定与评级，并附带该学院发放的鉴定报告“Diamond Grading Report” （一克拉以上）或特征汇总报告“Diamond Dossier”（一克拉以下）。 GIA 创立了当今业内公认的评级系统：称为 4C 标准，包括了：切割(Cut)、成色(Color)、净度(Clarity) 和克拉重量(Carat)。这 4C 标准对钻石的鉴定、估值和定价是最为关键的特征。该研究院是全世界最具公信力与认可的钻石分析和分级实验室，并以精确及公正的钻石分级制度见称，严格苛求的程度不是任何国家鉴定机构所能比拟的。每份报告不仅是钻石天然的证明，同时也是钻石品质、美观与价值的保证; 是全世界钻石商所依据买卖的标准; 也是钻石市场上最广受认定的鉴定证书。",
+				"certificate": "购买前请查看鉴定证书",
+				"remind": "在BDD Co.购买任何一颗经认证的裸钻前，您可以在我们的网站查看其证书，我们提供的分级报告书及档大致有3种：",
+				"gia1": "GIA 钻石鉴定证书",
+				"gia2": "GIA 钻石鉴定精简版证书",
+				"gia3": "BDD Co.鉴定",
+				"mail1": "若未能检视其证书，可透过电邮",
+				"mail2": "联络我们"
+			},
+			"maintenance": {
+				"header": "钻石护理",
+				"define": "钻石保养小贴士",
+				"con1": "1.当您在故家务时及使用化妆品时，尽量不要佩戴戒指，漂白剂和化妆品虽不会损坏钻石，但是会​​使镶托褪色或变色。",
+				"con2": "2.洗碗或做粗活时不要佩戴钻石，钻石虽然坚硬，但是若依其纹理方向受到重击可能会有损伤。",
+				"con3": "3.在准备泡温泉、游泳或前往健身房享受桑拿浴时，尽量不要佩戴戒指。低的水温和桑拿浴的热蒸汽都可能导致手指收缩，戒指也更容易滑落。",
+				"con4": "4.每年将您的钻石首饰拿到正规珠宝店检查-次，查看镶托是否松脱与磨损，重新给它加固定和进行免费翻新。",
+				"con5": "5.应将您的银首饰分开存放在珠宝箱或布袋内，以免碰撞刮花及其他损坏。也应避免接触家居化学品如漂白剂、氨水，或加氯消毒的游泳池水。",
+				"con6": "6.应注意防止银锈积聚，当银与空气中的硫或硫化氢接触，就会自然形成银锈，令表面失去光泽、暗哑无光。经常配戴您的银首饰，以及在佩戴银饰后，将饰物密封于胶袋中，这些都是防止银锈积聚的好方法。",
+				"con7": "7.定期清洗银器将可防止银锈及保持银器明亮有光泽。银锈在出现初期时最容易去除，可以以暖水及不含氯的清洁液洗擦表面，再以软布抹干，最后以抹银布轻擦表面。您也可以使用专门去锈配方的亮光剂、溶剂来除去银锈。"
+			}
+		}
+	},
+	"brandStory": {
+		"header": "BDD品牌故事",
+		"found": "我们致力于网购平台，提供高品质而价格优惠的GIA评级钻石首饰除了可供灵活配搭的钻石及婚嫁戒指，BDD同时提供时尚珠宝首饰。",
+		"prove": "它，见证求婚、订婚的人生重要时刻",
+		"with": "它，更与您每日相伴",
+		"moment": "每一分光泽与火彩，都是源自内心的性情表达一颗称心如意的钻石，会将生活的每一刻，都变成重要时刻",
+		"diffent": "不想流俗于平庸的设计之中，更不想承担虚高的品牌溢价",
+		"choose": "如何挑选出最心仪的那枚钻戒？",
+		"understand": "或许，BDD珠宝，更懂钻石心意",
+		"right": "将钻石与戒指自由搭配的权利交还于您",
+		"dream": "您用它解读爱情，它为您唤醒生活，无论柔和与坚强，都是现实的映照与梦想的笃定",
+		"summary": "BDD致 i-Smart 的您 —— 心存梦想，永赴追逐",
+		"slogan": "Dare to Dream",
+		"show": [{
+				"src": "expert",
+				"tip": "钻石专家",
+				"con": "专家指导与教育"
+			},
+			{
+				"src": "performance",
+				"tip": "高性价比",
+				"con": "最优价格保证"
+			},
+			{
+				"src": "quality",
+				"tip": "品质保证",
+				"con": "熟练的工艺和GIA等级"
+			},
+			{
+				"src": "matching",
+				"tip": "搭配定制",
+				"con": "自我表达升级的生活方式"
+			}
+		]
+	},
+	"common": {
+		"addCartSuccess": "加入购物车成功",
+		"addCartFail": "加入购物车是失败",
+		"addWishSuccess": "加入心愿单成功",
+		"addWishFail": "加入心愿单失败",
+		"addComparedSuccess": "加入钻石对比成功",
+		"addCompareFail": "加入钻石对比失败",
+		"removeWishSuccess": "移除心愿单成功",
+		"removeWishFail": "移除心愿单失败",
+		"removeComparedSuccess": "移除钻石对比成功",
+		"removeCompareFail": "移除钻石对比失败",
+		"getMore": "加载更多...",
+		"error": "页面出错了",
+		"soleOut": "商品已售罄"
+	},
+	"order": {
+		"firstLogin": "请先登录或注册！",
+		"success": "添加成功！",
+		"tooInp": "输入/选择优惠码",
+		"tooInpShort": "输入优惠码",
+		"ConfirmOrder": "购物车",
+		"finishOrder": "完善您的订单讯息",
+		"orderPay": "订单支付",
+		"finishPay": "完成支付",
+		"finishePay": "确认订单",
+		"login": "登入",
+		"balbala": "账户的以加速结算或是",
+		"Registration": "登记",
+		"balabalabala": "新账户的，随时随地管理订单！",
+		"darling": "亲爱的",
+		"seeMore": "查看更多",
+		"seeLess": "收起",
+		"get": "收",
+		"change": "更改",
+		"address": "收货地址",
+		"mustInput": "带*为必填",
+		"lastName": "姓",
+		"firstName": "名",
+		"wrongInput": "输入有误",
+		"telephone": "电话",
+		"email": "邮箱",
+		"checkEmail": "确认电邮地址",
+		"wrongInputAgain": "两次输入不一致",
+		"country": "国家/地区",
+		"province": "省份/州",
+		"city": "城市/区域",
+		"longAddress": "详细地址",
+		"zipCode": "邮政编码",
+		"sure": "确认",
+		"add": "添加",
+		"edit": "修改",
+		"addAddress": "添加收货地址",
+		"info": "商品讯息",
+		"number": "数量",
+		"price": "金额",
+		"option": "操作",
+		"customMade": "定制",
+		"deliveryInformation": "发货讯息",
+		"sendTogether": "货物到齐一起送货",
+		"chatBor": "未选择将会被拆成多个包裹送货",
+		"sendTime": "预计送达时间",
+		"checkDeliveryPolicy": "查看我们的送货政策",
+		"goSingKei": "天",
+		"showHouEmail": "请填写接收售后凭证的电邮地址",
+		"sameTongAddress": "同收货邮箱一致",
+		"remark": "发货备注",
+		"coupon": "优惠券",
+		"exchange": "使用",
+		"die": "优惠码不可使用 / 优惠码无效",
+		"gay1": "1、优惠码兑换条件仅适用于选购指定商品，兑换后，在结帐时显示优惠金额；",
+		"gay2": "2、优惠码不能与任何其他优惠或折扣编号同时使用，亦不能追溯使用于以往订单；",
+		"gay3": "3、优惠条款及条件可随时更改而无需事先通知，可能受其他限制所约束。",
+		"sc": "刪除",
+		"kouMaiInfo": "您的购买详情",
+		"goodsNum": "商品件数",
+		"goodsNumNum": "商品总额",
+		"expressMoney": "运费",
+		"expressSay": "运费是根据您的送货地址，收取运费，点击查看免费送递服务",
+		"tex": "税费",
+		"texSay": "税费是根据您的送货地址，收取税费，点击查看国际政策",
+		"insurance": "保险费",
+		"insuranceSay": "保险费是根据您的商品总额，收取保险费",
+		"totalMoney": "订单总额",
+		"beiQin": "确认支付",
+		"msgTitle1": "提示!",
+		"msgContent1": "是否删除该地址讯息？",
+		"msg1": "请确认添加地址后再选择优惠券讯息！",
+		"coupon1": "请选择",
+		"coupon2": "出错了，出错位置：计算优惠券金额",
+		"list1": "商品讯息获取失败",
+		"wip1": "姓名讯息输入有误",
+		"wip2": "电话讯息输入有误",
+		"wip3": "电邮讯息输入有误",
+		"wip4": "请选择国家／地区讯",
+		"wip5": "地址讯息输入有误",
+		"msg2": "创建失败",
+		"wip6": "姓氏输入有误",
+		"wip7": "姓氏最长20个字符！",
+		"wip8": "名字输入有误",
+		"wip9": "名字最长20个字符！",
+		"msg3": "修改成功",
+		"msg4": "请先添加收货地址！",
+		"msg5": "接收售后凭证的电邮地址输入有误，请重新输入！",
+		"msg6": "备注字数已满",
+		"msg7": "出错了，出错位置：下订单跳转支付",
+		"msg8": "数据获取失败，请返回购物车重试！",
+		"msg9": "请选择支付方式!",
+		"useShoppingCard": "使用购物卡",
+		"editOrUnbound": "编辑/解绑购物卡",
+		"shoppingCard": "购物卡",
+    "msg10": "购物车不能为空，请重新添加商品",
+    "msg11": "需登录购物"
+	},
+	"invoice": {
+		"personal": "个人",
+		"company": "企业",
+		"Submitted": "提交成功",
+		"email": "电子邮箱",
+		"default": "默认不开发票",
+		"Invoicing": "开发票",
+		"Invoicings": "开具发票",
+		"PaperInvoice": "纸质发票",
+		"ElectronicInvoice": "电子发票",
+		"InvoiceDetails": "发票详情",
+		"HeaderType": "抬头类型",
+		"InvoiceType": "发票类型",
+		"BusinessUnit": "企业单位",
+		"UnBusinessUnit": "个人",
+		"Invoice": "发票抬头",
+		"TaxID": "发票税号",
+		"holder1": "填写发票抬头",
+		"holder2": "填写纳税人识别号",
+		"totalAmount": "总金额",
+		"tips": "*稍后纸质发票会随订单商品一起快递给您,请注意查收！",
+		"confirm": "确认提交",
+		"carryOut": "完成",
+		"hint1": "抬头类型不能为空",
+		"hint2": "发票抬头不能为空",
+		"hint3": "税号不能为空",
+		"hint4": "邮箱不能为空",
+		"hint5": "请输入正确的邮箱",
+		"shoppingCard": "购物卡",
+		"ultimatelyPay": "实付金额",
+		"NeedPay": "需付金額",
+		"submitSuccessfully": "订单提交成功!",
+		"PleaseLogin": "请先登录，才能使用购物卡！"
+	},
+	"shoppingCard": {
+		"title": "添加购物卡信息",
+		"cardNumber": "卡号",
+		"cardPassword": "兑换码",
+		"addCard": "添加购物卡",
+		"chooseAll": "全选",
+		"annotation": "*注：多张购物卡，可依次添加验证",
+		"cancle": "取消",
+		"confirm": "确定",
+		"clickVerify": "点击验证",
+		"verifySucceed": "验证成功",
+		"verifyFailing": "验证失败",
+		"balance": "余额：",
+		"eliminateCard": "消除此卡",
+		"unbound": "解除绑定",
+    "removeCard": "移除",
+		"confirmUnbinding": "是否确认解除绑定？",
+		"verifyValid": "购物卡验证有效！",
+		"alreadyAdd": "已添加",
+		"verifyInvalid": "卡号或验证码输入有误!",
+		"invalidCards": "无效购物卡",
+		"anewAdd": "重新添加",
+		"msg1": "购物卡号或兑换码不能为空！",
+		"msg2": "此卡需要验证成功才能使用",
+		"msg3": "验证失败，请重新填写",
+		"msg4": "有未验证或验证失败的卡！",
+		"msg5": "不能重复添加！",
+		"msg6": "此卡余额为0，不可使用！",
+		"msg7": "仅限：",
+		"msg8": "使用",
+		"msg9": "请添加/勾选有效购物卡！",
+		"msg10": "购物卡添加成功！",
+		"msg11": "解除绑定成功！",
+		"msg12": "此卡还未到使用时间！",
+		"msg13": "此卡已超过使用时间！"
+	}
 }
