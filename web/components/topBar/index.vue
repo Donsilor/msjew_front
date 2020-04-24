@@ -305,6 +305,12 @@ export default {
           }
         },
         {
+          name: '购物券卡包',
+          to: {
+            path: '/account/coupon'
+          }
+        },
+        {
           name: this.$t(`${lang}.loginOut`),
           action: this.logout
         }
