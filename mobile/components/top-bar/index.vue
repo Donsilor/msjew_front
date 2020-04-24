@@ -4,18 +4,36 @@
       <div class="icon" @click="showMenu">
         <i class="iconfont iconcebianlan"></i>
       </div>
-      <!--      <div class="icon" @click="toSiteSwitch">-->
-      <!--        <i class="iconfont iconweizhiyuyan"></i>-->
-      <!--      </div>-->
+      <div class="site-info" @click="toSiteSwitch">
+          <div class="flag">
+            <img v-show="hkIcon" src="/hongkong-round.png" />
+            <img v-show="cnIcon" src="/china-round.png" />
+            <img v-show="enIcon" src="/USA-round.png" />
+          </div>
+          <div class="language">
+            <span>{{language}}</span>
+            <!-- <span >|</span>
+            <span>cny</span> -->
+          </div>
+          <!-- <span class="gap-line"></span> 简/繁/EN
+          <div class="coin">
+            {{ coinInfo.content }}
+          </div> -->
+        </div>
+      
     </div>
     <div class="center">
-      <img src="/logo.png" class="logo" @click="toIndex" />
+      <img src="/logo1.png" class="logo" @click="toIndex" />
     </div>
     <div class="right">
-      <div class="icon" @click="toPersonal">
+      <div class="icon search" @click="toPage('search')">
+        <!-- <i class="iconfont iconweizhiyuyan"></i> -->
+        <i class="iconfont iconicon-sousuo btn-icon" ></i>
+      </div>
+      <!-- <div class="icon" @click="toPersonal">
         <i class="iconfont icongerenzhongxin" v-show="showa"></i>
         <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
-      </div>
+      </div> -->
       <div class="icon" @click="toCart">
         <i class="iconfont icongouwuche"></i>
         <span v-if="cartAmount > 0" class="cart-amount">{{ cartAmount }}</span>
@@ -23,6 +41,7 @@
     </div>
 
     <left-menu ref="left-menu"></left-menu>
+    <site-switch ref="site-switch"></site-switch>
   </div>
 </template>
 
@@ -45,6 +64,10 @@ export default {
       showa:true,
       showb:false,
       url:'',
+      language:'简',
+      cnIcon:true,
+      enIcon:false,
+      hkIcon:false 
     }
   },
   computed: {
@@ -61,6 +84,25 @@ export default {
       // this.isActive=true
       // this.show=true
     }
+    if(this.$store.state.language == 'zh_CN'){
+      this.language = '简'
+      this.cnIcon = true
+      this.enIcon = false
+      this.hkIcon = false
+    }
+    if(this.$store.state.language == 'zh_TW'){
+      this.language = '繁'
+      this.hkIcon = true
+      this.enIcon = false
+      this.cnIcon = false
+    }
+    if(this.$store.state.language == 'en_US'){
+      this.language = 'EN'
+      this.enIcon = true
+      this.cnIcon = false
+      this.hkIcon = false
+    }
+    // console.log("language",this.$store.state.language)
   },
   methods: {
     ...mapActions(['getCartAmount']),
@@ -68,12 +110,13 @@ export default {
       this.$refs['left-menu'].show()
     },
     toSiteSwitch() {
-      this.$router.push({
-        name: 'site-switch',
-        query: {
-          redirectUri: window.location.href
-        }
-      })
+      this.$refs['site-switch'].show()
+      // this.$router.push({
+      //   name: 'site-switch',
+      //   query: {
+      //     redirectUri: window.location.href
+      //   }
+      // })
     },
     toIndex() {
       this.$router.push({
@@ -106,19 +149,83 @@ export default {
       this.$router.push({
         name: 'cart'
       })
-    }
+    },
+    toPage(routerName = '', query = {}) {
+      if (!routerName) {
+        return
+      }
+      // this.hide()
+      this.$router.push({
+        name: routerName,
+        query: query
+      })
+    },
   }
 }
 </script>
 <style >
 .coloricon .icongerenzhongxin:before{
-  color:#f29b87;
+  color:#A2C2D2;
 }
 </style>
 <style scoped> 
 /* .active{
   color:#f29b87;
 } */
+/*站点信息*/
+.site-info {
+  border-radius: 20px;
+  padding: 1px 6px 1px 1px;
+  background-color: #a2c2d2;
+  width: 47px;
+  /* flex-grow: 0;
+  flex-shrink: 0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-left: 5px; */
+}
+.site-info .flag {
+  flex-grow: 0;
+  flex-shrink: 0;
+  line-height: 0;
+  margin-right: 6px;
+}
+.site-info .flag img {
+  height: 16px;
+}
+.site-info .language {
+  display: inline-block;
+  width: 18px;
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-top: 3px;
+  /* height: 22px;
+  line-height: 20px; */
+  font-size: 13px;
+  font-weight: 400;
+  /* color: rgba(102, 102, 102, 1); */
+  color:#fff;
+  text-align: center;
+  box-sizing: border-box;
+}
+.site-info .gap-line {
+  margin: 0 13px;
+  width: 1px;
+  height: 16px;
+  background: rgba(221, 221, 221, 1);
+}
+.site-info .coin {
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 22px;
+  line-height: 20px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(102, 102, 102, 1);
+  text-align: center;
+  box-sizing: border-box;
+}
 
 .top-bar {
   position: relative;
@@ -138,16 +245,19 @@ export default {
 .left,
 .right {
   position: relative;
-  flex-basis: 50px;
+  /* flex-basis: 50px; */
   flex-grow: 1;
   flex-shrink: 1;
   /*background-color: #3b5998;*/
   display: flex;
   align-items: center;
 }
-.left {
+.left{
   justify-content: flex-start;
 }
+.left .iconfont{
+    color:#a2c2d2;
+  }
 .right {
   justify-content: flex-end;
 }
@@ -175,6 +285,9 @@ export default {
 .icon {
   position: relative;
 }
+.search{
+  font-weight: 700;
+}
 .left .icon:nth-of-type(1) {
   margin-right: 25px;
 }
@@ -193,6 +306,6 @@ export default {
   color: #ffffff;
   font-size: 9px;
   font-weight: 400;
-  background-color: #f29b87;
+  background-color: #A2C2D2;
 }
 </style>

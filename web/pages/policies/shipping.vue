@@ -11,15 +11,15 @@
         <dt>{{ $t(`${lang}.tit1`) }}</dt>
         <dd>
           {{ $t(`${lang}.con1`) }}
-          <span @click="go('freeShipping')">{{ $t(`${lang}.link1`) }}</span>
+          <span @click="go('free-shipping')">{{ $t(`${lang}.link1`) }}</span>
           {{ $t(`${lang}.con2`) }}
-          <span @click="go('freeShipping')">{{ $t(`${lang}.link2`) }}</span>
+          <span @click="go('free-shipping')">{{ $t(`${lang}.link2`) }}</span>
           {{ $t(`${lang}.con3`) }}
         </dd>
         <dt>{{ $t(`${lang}.tit2`) }}</dt>
         <dd>
           {{ $t(`${lang}.con4`) }}
-          <span @click="go('internationalPolicy')">{{
+          <span @click="go('international')">{{
             $t(`${lang}.link3`)
           }}</span>
         </dd>

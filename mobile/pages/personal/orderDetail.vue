@@ -196,9 +196,9 @@
           <template v-if="invoice.invoiceType == 1">
             <li>{{ lang2.HeaderType}}：{{ lang2.company }}</li>
           </template>
-          <!-- <li>{{ lang2.email }}：{{ statusText(invoice.email) }}</li> -->
           <li>{{ lang2.Invoice }}：{{ invoice.invoiceTitle }}</li>
           <li>{{ lang2.TaxID }}：{{ invoice.taxNumber }}</li> 
+          <li v-show="invoice.isElectronic == 1">{{ lang2.email }}：{{ invoice.email }}</li>
         </ul>
       </div>
       <div class="footer">
@@ -408,6 +408,7 @@ export default {
     }
   },
   mounted() {
+    console.log("inoo",this.invoice)
     const _this = this
     _this.$nextTick(() => {
       _this.getInfo()
@@ -423,7 +424,7 @@ export default {
         40: this.lang.hadSend,
         50: this.lang.hadFinish,
       }
-    console.log("detail_stutas", map)
+    // console.log("detail_stutas", map)
       return map[status]
     },
     payChannelText(payChannel) {
@@ -637,7 +638,8 @@ export default {
             // 男女戒
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -645,7 +647,8 @@ export default {
             // 結婚戒指
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -653,7 +656,8 @@ export default {
             // 裝飾戒指
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -674,7 +678,8 @@ export default {
             // ringRouter(info.data[0].configAttrId)
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             break
           case 3:
@@ -741,7 +746,8 @@ export default {
         console.log('info====>', info)
         routerName = 'marriage-ring-pair-ring-detail'
         routerQuery = {
-          goodId: info.data[0].groupId
+          goodId: info.data[0].groupId,
+          ringType : 'pair'
         }
       }
       if ([2].indexOf(info.groupType) > -1) {
@@ -814,7 +820,7 @@ export default {
     .invoice {
         width: 355px;
         margin: 0px auto 10px;
-        padding: 10px 14px;
+        padding: 10px 18px;
         background: #fff;
         border-radius: 5px;
         font-size: 12px;

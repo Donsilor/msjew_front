@@ -122,7 +122,7 @@
           ></textarea>
         </div>
         <!-- 开具发票 -->
-        <div class="invoice">
+        <div class="invoice" v-if="this.areaId === '1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -295,16 +295,34 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/paydollar.png',
-          type: 8,
+          url: '/cart/ap.png',
+          type: 82,
           title: this.LANGUAGE.cart.pay.payType3,
           des: this.LANGUAGE.cart.pay.type3Text
+        },
+        {
+          url: '/cart/wac.png',
+          type: 83,
+          title: this.LANGUAGE.cart.pay.payType4,
+          des: this.LANGUAGE.cart.pay.type4Text
+        },
+        {
+          url: '/cart/card.png',
+          type: 81,
+          title: this.LANGUAGE.cart.pay.payType1,
+          des: this.LANGUAGE.cart.pay.type1Text
         }
+        // {
+        //   url: '/cart/paydollar.png',
+        //   type: 8,
+        //   title: this.LANGUAGE.cart.pay.payType3,
+        //   des: this.LANGUAGE.cart.pay.type3Text
+        // }
       ],
       sum: '2,120.00',
       info:'',
       price:'',
-      typeIndex:'',
+      typeIndex:0,
       // info: JSON.parse(this.$route.query.info),
       // price: JSON.parse(this.$route.query.info).orderAmount,
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
@@ -336,7 +354,8 @@ export default {
       cuponList: [],
       session: '',
       info:[],
-      totlePrice:''
+      totlePrice:'',
+      areaId: this.$store.state.areaId
     }
   },
   computed: {
@@ -489,7 +508,7 @@ export default {
         productAmount: 0, // 商品总价 ,
         safeFee: 0, // 保险金额 ,
         taxFee: 0, // 税费金额
-        planDays: `1-12`
+        planDays: ``
       }
     },
     showCouponTips() {
@@ -721,6 +740,7 @@ export default {
           // console.log("费用",res)
           this.canSubmit = true
           this.allFee = res
+          this.planDays = this.allFee.planDays
           // this.info=res.details
           // console.log("费用>>>>>>>>",this.info)
         })
@@ -728,6 +748,7 @@ export default {
           this.canSubmit = false
           this.$toast.show(err.message)
           this.allFee = this.defaultAllFeeInfo()
+          
           // console.log("ggg",this.allFee)
         })
     },
@@ -879,7 +900,7 @@ export default {
           url: `/web/member/order-tourist/create`,
           data: {
             goodsCartList:data,
-            invoice:this.$route.query.invoice,
+            invoice:this.$route.params.invoice,
             tradeType:'wap',
             coinType:this.$store.state.coin,
             returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
@@ -1371,6 +1392,7 @@ export default {
 .invoice{
   .underline{
     text-decoration: underline;
+    color:#75BEEE;
   }
   .title{
     font-size: 14px;

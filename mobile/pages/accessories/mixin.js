@@ -11,7 +11,7 @@ export default {
       type: Number,
       require: true,
       default() {
-        return 0
+        return -1
       }
     }
   },
@@ -27,15 +27,23 @@ export default {
           options: this.sendCod
         },
         {
+          type: 'eject-choose-pro',
+          key: 'style',
+          name: this.LANGUAGE.listCommons.theme,
+          checked: ``,
+          options: this.CONDITION_INFO.style.theme
+        },
+        {
           type: 'eject-choose',
           key: 'price-bar',
           name: this.LANGUAGE.listCommons.price,
           checked: (typeof this.$route.query.startPrice !== 'undefined' && typeof this.$route.query.endPrice !== 'undefined')  ? this.$route.query.startPrice + '-' + this.$route.query.endPrice:'',
-          options: (typeof this.$route.query.startPrice !== 'undefined' && typeof this.$route.query.endPrice !== 'undefined')  ? [{id:this.$route.query.startPrice,name:this.$route.query.startPrice/1000 + `K`},{id:this.$route.query.endPrice,name:this.$route.query.endPrice/1000 + `K`}]:[]
+          options: (typeof this.$route.query.startPrice !== 'undefined' && typeof this.$route.query.endPrice !== 'undefined')  ? [{id:this.$route.query.startPrice,name:Math.round(this.$route.query.startPrice/1000,2) + `K`},{id:this.$route.query.endPrice,name:Math.round(this.$route.query.endPrice/1000,2) + `K`}]:[]
         }
       ],
       conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
-      isResetProgress: false
+      isResetProgress: false,
+      category : [4,5,6,7,8,9,16,17,18]
     }
   },
   watch: {
@@ -59,11 +67,37 @@ export default {
         case 5:
           this.categoryId = 9
           break
+        case 6:
+          this.categoryId = 16
+          break
+        case 7:
+          this.categoryId = 17
+          break
+        case 8:
+          this.categoryId = 18
+          break
+        
       }
+      let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
       this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
-      this.conditions[0].checked = ``
+      this.conditions[0].checked = material.toString()
+      this.conditions[1].options = this.CONDITION_INFO.style.theme
       this.conditions[1].checked = ``
-      this.conditions[1].options = []
+      this.conditions[2].checked = ``
+      this.conditions[2].options = []
+      this.isResetProgress = true
+      this.madeUpEv()
+    },
+
+    $route(val, oldVal) {
+      let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
+      this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
+      this.conditions[0].checked = material.toString()
+      this.conditions[1].options = this.CONDITION_INFO.style.theme
+      let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
+      this.conditions[1].checked = theme.toString()
+      this.conditions[2].checked = ``
+      this.conditions[2].options = []
       this.isResetProgress = true
       this.madeUpEv()
     }
@@ -88,7 +122,23 @@ export default {
       case 5:
         this.categoryId = 9
         break
+      case 6:
+        this.categoryId = 16
+        break
+      case 7:
+        this.categoryId = 17
+        break
+      case 8:
+        this.categoryId = 18
+        break
+      case -1:
+        this.categoryId = this.category
+        break
     }
+    let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
+    this.conditions[0].checked = material.toString()
+    let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
+    this.conditions[1].checked = theme.toString()
     this.madeUpEv()
   },
   methods: {
@@ -123,6 +173,13 @@ export default {
     clearQuality(data) {
       const conditions = JSON.parse(JSON.stringify(this.conditions))
       conditions[0].checked = this.getCheckedIds(data)
+      this.conditions = conditions
+      this.madeUpEv()
+    },
+
+    clearTheme(data) {
+      const conditions = JSON.parse(JSON.stringify(this.conditions))
+      conditions[1].checked = this.getCheckedIds(data)
       this.conditions = conditions
       this.madeUpEv()
     },
@@ -161,8 +218,14 @@ export default {
       if (this.conditions[0].checked !== ``) {
         this.ev += `material=${this.conditions[0].checked}`
       }
+
+      this.ev += ``
       if (this.conditions[1].checked !== ``) {
-        this.ev += `^sale_price=${this.conditions[1].checked
+        this.ev += `^theme=${this.conditions[1].checked}`
+      }
+
+      if (this.conditions[2].checked !== ``) {
+        this.ev += `^sale_price=${this.conditions[2].checked
           .split(',')
           .join('-')}`
       }

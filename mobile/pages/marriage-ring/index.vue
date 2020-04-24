@@ -374,24 +374,26 @@ export default {
     },
     toPairRingDetail(info) {
       if (info.showType === 1) {
-        window.open(`/marriage-ring/pair-ring-detail?goodId=${info.id}`)
+        window.open(`/marriage-ring/pair-ring-detail?goodId=${info.id}&ringType=pair`)
       } else {
         this.$router.push({
           name: 'marriage-ring-pair-ring-detail',
           query: {
-            goodId: info.id
+            goodId: info.id,
+            ringType : 'pair'
           }
         })
       }
     },
     toSingleRingDetail(info) {
       if (info.showType === 1) {
-        window.open(`/marriage-ring/single-ring-detail?goodId=${info.id}`)
+        window.open(`/marriage-ring/single-ring-detail?goodId=${info.id}&ringType=single`)
       } else {
         this.$router.push({
           name: 'marriage-ring-single-ring-detail',
           query: {
-            goodId: info.id
+            goodId: info.id,
+            ringType : 'single'
           }
         })
       }

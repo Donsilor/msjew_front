@@ -199,13 +199,23 @@ export default {
     banBtn() {
       return this.tickNum === 0
     }
+    
   },
   beforeMount() {
     this.getList()
   },
-  // mounted(){
-  //  window.addEventListener('scroll', this.handleScroll, true)
-  // },
+
+  created(){
+    
+  },
+  mounted(){
+    
+    this.$nextTick(() => {
+      
+      
+    })
+  },
+
   methods: {
     // 当勾选了一个商品以后删除另一个商品时更新底部数据
     refreshData(){
@@ -242,13 +252,67 @@ export default {
             res[i].tick = false
           }
           this.good = res
-          // this.allTick()
-          // this.ticksCHeck()
-          // this.checkDelete()
+          this.defaultAll()
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    defaultAll(){
+      // console.log(this.good)
+      if(!this.$store.getters.hadLogin){
+        // console.log("全选",this.allTick)
+        if (this.allTick) {
+          for (const j in this.good) {
+            this.good[j].tick = false
+          }
+          this.allTick = !this.allTick
+          this.tickNum = 0
+          this.totalNum = 0
+          this.totalPrice = 0
+          console.log(1111111)
+        } else {
+           console.log(22222)
+          this.tickNum = 0
+          this.totalNum = 0
+          this.totalPrice = 0
+          for (const j in this.good) {
+            if(this.good[j].groupType == 1){
+              if(parseInt(this.good[j].data[0].ringsSimpleGoodsEntity.status) === 0){
+                  this.good[j].tick = false
+                  continue;
+                }
+                this.tickNum += 1
+                this.totalNum += 1
+
+            }else if(this.good[j].groupType == 2){
+                this.tickNum += 1
+                this.totalNum += 1
+
+            }else{
+                if(this.good[j].data[0].simpleGoodsEntity.goodsStatus!==2){
+                  this.good[j].tick = false
+                  continue;
+                }
+                this.tickNum += 1
+                this.totalNum += 1
+            }
+
+            this.good[j].tick = true
+            // console.log("tick",this.good[i].tick)
+          
+            // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
+            this.totalPrice +=parseFloat(this.good[j].price) 
+          }
+          // console.log("price=====2",this.good)
+          // this.tickNum = this.good.length
+          // this.totalNum = this.good.length
+          if(this.good.length !== 0){
+            this.allTick = !this.allTick
+          }
+        }
+        this.good = JSON.parse(JSON.stringify(this.good))
+      }
     },
     allTicks() {
       // console.log("全选",this.allTick)
@@ -260,7 +324,9 @@ export default {
         this.tickNum = 0
         this.totalNum = 0
         this.totalPrice = 0
+        // console.log(3333333)
       } else {
+        // console.log(44444)
         this.tickNum = 0
         this.totalNum = 0
         this.totalPrice = 0

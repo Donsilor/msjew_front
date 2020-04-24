@@ -3,14 +3,20 @@
     <div class="top-part">
       <div class="title">
         <button
-          :class="{ active: gender === 'lady' }"
-          @click="changeGender('lady')"
+          :class="{ active: gender === -1 }"
+          @click="changeGender(-1)"
+        >
+          {{lang.own}}
+        </button>
+        <button
+          :class="{ active: gender === 42 }"
+          @click="changeGender(42)"
         >
           {{ lang.lady }}
         </button>
         <button
-          :class="{ active: gender === 'gentlemen' }"
-          @click="changeGender('gentlemen')"
+          :class="{ active: gender === 41 }"
+          @click="changeGender(41)"
         >
           {{ lang.gentlemen }}
         </button>
@@ -26,16 +32,12 @@
           <div class="ow-h1">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}
           </div>
-          <!--          <div-->
-          <!--            v-show="each.checked.length > 0"-->
-          <!--            class="triangle-down triangle"-->
-          <!--          />-->
         </div>
       </div>
     </div>
     <!--    list start-->
     <div class="list-part">
-      <div class="title">
+      <div class="title" v-show="pageInfo && pageInfo.total_count">
         <div>
           {{ lang.total }}
           <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>
@@ -111,53 +113,54 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.listCommons,
-      gender: 'lady'
+      gender: 'all',
+  
     }
   },
   watch: {
     $route(val, oldVal) {
-      this.changeGender(val.query.type)
-    }
+      let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
+      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
+      this.conditions[0].checked = style.toString()
+      this.conditions[1].options = this.CONDITION_INFO.quality.rings
+      this.conditions[1].checked = ``
+      this.conditions[2].checked = ``
+      this.conditions[2].options = []
+      this.changeGender()
+
+    },
+  
+    
   },
   created() {},
   mounted() {
     const _this = this
     _this.$nextTick(() => {
-      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
-      this.categoryId = 2
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
-      let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
-      this.changeGender(this.$route.query.type,style,material)
+      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
+      this.conditions[0].checked = style.toString()
+      this.categoryId = 2
+      let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:-1
+      this.changeGender(type)
+
       // this.madeUpEv()
     })
   },
   methods: {
-    changeGender(type = 'lady',style='',material='') {
-      if (['lady', 'gentlemen'].indexOf(type) > -1) {
+    changeGender(type = -1) {
+      if ([-1,41, 42].indexOf(type) > -1) {
         this.gender = type
       }
-      this.conditions[0].options =
-        type === `lady`
-          ? this.CONDITION_INFO.style.womanRings
-          : this.CONDITION_INFO.style.manRings
-      this.conditions[0].checked = style
-      this.conditions[1].checked = material
       this.madeUpEv()
     },
     // 组装Ev
     madeUpEv() {
       this.ev = ``
-      if (this.gender === `lady`) {
-        if (this.conditions[0].checked === ``) {
+      if (this.conditions[0].checked === ``) {
           this.ev += `marry_style_wom=-1`
         } else {
           this.ev += `marry_style_wom=${this.conditions[0].checked}`
         }
-      } else if (this.conditions[0].checked === ``) {
-        this.ev += `marry_style_man=-1`
-      } else {
-        this.ev += `marry_style_man=${this.conditions[0].checked}`
-      }
 
       if (this.conditions[1].checked !== ``) {
         this.ev += `^material=${this.conditions[1].checked}`
@@ -167,6 +170,7 @@ export default {
           .split(',')
           .join('-')}`
       }
+      this.ev += `^gender=${this.gender}`
       this.research()
       console.log(this.ev)
     }
@@ -194,11 +198,11 @@ export default {
       }
       button:nth-of-type(1) {
         border-right: 0;
-        border-radius: 15px 0 0 15px;
+        // border-radius: 15px 0 0 15px;
       }
-      button:nth-of-type(2) {
+      button:nth-of-type(3) {
         border-left: 0;
-        border-radius: 0 15px 15px 0;
+        // border-radius: 0 15px 15px 0;
       }
       button.active {
         color: rgba(255, 255, 255, 1);

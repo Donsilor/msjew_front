@@ -7,7 +7,7 @@
             v-for="(s, index) in sliders"
             :key="index"
             :class="['slider-one', { active: actIndex === index }]"
-            @click="actIndex = index"
+            @click="actIndex = index;show()"
           >
             {{ s.content }}
             <div v-show="actIndex === index" class="slider-bar"></div>
@@ -16,7 +16,7 @@
       </div>
       <data-list
         ref="data-list"
-        :send-cod="sliders[actIndex].cod"
+        :send-cod="cod"
         :seo="this.seoInfo"
         :active-index="actIndex"
         @clickData="clickData"
@@ -36,6 +36,7 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.listCommons,
+      cod: this.CONDITION_INFO.quality.necklace,
       sliders: [
         {
           content: this.LANGUAGE.listCommons.sliders[0],
@@ -60,9 +61,22 @@ export default {
         {
           content: this.LANGUAGE.listCommons.sliders[5],
           cod: this.CONDITION_INFO.quality.bracelet
-        }
+        },
+        {
+          content: this.LANGUAGE.listCommons.sliders[6],
+          cod: this.CONDITION_INFO.quality.bracelet
+        },
+        {
+          content: this.LANGUAGE.listCommons.sliders[7],
+          cod: this.CONDITION_INFO.quality.bracelet
+        },
+        {
+          content: this.LANGUAGE.listCommons.sliders[8],
+          cod: this.CONDITION_INFO.quality.bracelet
+        },
+        
       ],
-      actIndex: 0
+      actIndex: -1
     }
   },
   async asyncData({ $axios, route, store, app }) {
@@ -81,7 +95,7 @@ export default {
           seoInfo,
           ad: data.advert,
           webSite: data.webSite,
-          actIndex: route.query.actIndex ? parseFloat(route.query.actIndex) : 0
+          actIndex: route.query.actIndex ? parseFloat(route.query.actIndex) : -1
         }
       })
       .catch(err => {
@@ -95,11 +109,24 @@ export default {
   // },
   mounted() {
     // console.log("this.",this.seoInfo)
-    if (this.$route.query.actIndex) {
+    if (typeof this.$route.query.actIndex !== 'undefined') {
       this.actIndex = parseFloat(this.$route.query.actIndex)
+    }
+    
+  },
+  watch: {
+    $route(to, from){
+      this.actIndex = parseFloat(this.$route.query.actIndex)
+      console.log(3333,this.actIndex)
     }
   },
   methods: {
+    show(){
+      this.$nuxt.$loading.start()
+      setTimeout(() => {
+        this.$nuxt.$loading.finish()
+      }, 1000);
+    },
     arrivalBottom() {
       this.$refs['data-list'].getNextPage()
     },
@@ -131,6 +158,7 @@ export default {
       width: max-content;
       height: 49px;
       display: flex;
+      // justify-content: space-between;
       align-items: center;
       padding: 0 15px;
       .slider-one {
@@ -139,7 +167,7 @@ export default {
         font-weight: 400;
         color: rgba(153, 153, 153, 1);
         // margin-right: 56px;
-        margin-right: 30px;
+        margin-right: 47px;
         .slider-bar {
           position: absolute;
           bottom: -12px;

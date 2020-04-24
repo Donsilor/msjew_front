@@ -7,21 +7,17 @@
           :key="n"
           :class="['choose-btn', { active: each.checked.length > 0 }]"
           @click="showChooseEject(each)"
-        >
+        > 
           <div>{{ each.name }}</div>
           <div class="ow-h1">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}
           </div>
-          <!--          <div-->
-          <!--            v-show="each.checked.length > 0"-->
-          <!--            class="triangle-down triangle"-->
-          <!--          />-->
         </div>
       </div>
     </div>
     <!--    list start-->
     <div class="list-part">
-      <div class="title">
+      <div class="title" v-show="pageInfo && pageInfo.total_count">
         <div>
           {{ lang.total }}
           <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>
@@ -72,6 +68,14 @@
       :options="conditions[0].options"
       @clear="clearQuality"
     ></choose-eject-pro>
+    <choose-eject-pro
+      ref="style-eject-choose-pro"
+      :title="lang.theme"
+      :type="'style'"
+      :required="true"
+      :options="conditions[1].options"
+      @clear="clearTheme"
+    ></choose-eject-pro>
     <!--价格选择底部弹出-->
     <progress-bar
       ref="price-bar"
@@ -104,6 +108,15 @@ export default {
   }
   .list-part {
     @listPart();
+  }
+  .choose-btn {
+    position: relative;
+    width: calc((100% - 10px) / 3)!important;
+    height: 50px;
+    background: rgba(250, 250, 250, 1);
+    border: 1px solid rgba(221, 221, 221, 1);
+    border-radius: 5px;
+    margin-bottom: 12px;
   }
 }
 .eject-choose-pro-title {

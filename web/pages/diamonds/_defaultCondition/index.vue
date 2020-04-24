@@ -12,7 +12,6 @@ import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 // 默认条件映射
 const conditionMaps = {
   all: {},
-
   // 形状
   'round-cut': {
     shape: 16

@@ -1,26 +1,32 @@
 <template>
-  <div class="page">
+  <div class="page" >
     <scroll-box @arrivalBottom="getNextPage">
       <div class="top-bar">
-        <div class="go-back-btn" @click="goBack($router)">
+        <div class="go-back-btn" @click="goBackto">
           <i class="iconfont iconfanhuiicon-"></i>
-          <span class="text">{{ lang.back }}</span>
+          <!-- <span class="text">{{ lang.back }}</span> -->
         </div>
         <div class="operating-area">
-          <i class="iconfont iconicon-sousuo"></i>
+          
           <input
-            v-model="keyword"
+            v-model.trim="keyword"
             :placeholder="lang.inputKeyword"
             @keyup.enter="searchAgain"
           />
-          <button class="search-btn" @click="searchAgain">
+          <img v-show="this.keyword !== ''" class="cha" src="/component/tip-message/cha.png" @click="clear">
+          <span class="gap-line" ></span>
+          <i class="iconfont iconicon-sousuo" @click="searchAgain"></i>
+          <!-- <button class="search-btn" @click="searchAgain">
             {{ lang.search }}
-          </button>
+          </button> -->
         </div>
+        <span class="cancel" @click="goBackto">
+          {{ lang.cancel }}
+        </span>
       </div>
-      <!--    list start-->
-      <div class="list-part">
-        <div class="title">
+      <!--    list start v-show="this.loading == false"-->
+      <div class="list-part" >
+        <div class="title" v-show="pageInfo && pageInfo.total_count">
           <div>
             {{ lang.total }}
             <span>{{ (pageInfo && pageInfo.total_count) || 0 }}</span>
@@ -73,7 +79,7 @@ export default {
       lang: this.LANGUAGE.search.result,
       // canSearchWithoutKeyword: false,
       similarGoodsId: '',
-      conditionWord: this.CONDITION_INFO.sortBy.default[0].content
+      conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
     }
   },
   computed: {
@@ -85,7 +91,11 @@ export default {
       }
     }
   },
-  mounted() {
+ created(){
+    const _this = this
+    _this.show()
+ },
+  mounted(){
     const _this = this
     _this.$nextTick(() => {
       if (_this.$route.query) {
@@ -93,14 +103,45 @@ export default {
         _this.categoryId = _this.$route.query.categoryId || ''
         _this.similarGoodsId = _this.$route.query.similarGoodsId || ''
       }
-      _this.searchAgain()
+      setTimeout(() => {
+       _this.searchAgain()
+      }, 1000);
+      // if(_this.pageInfo && _this.pageInfo.total_count){
+      //   _this.searchAgain()
+      // }
+      // _this.searchAgain()
     })
   },
   methods: {
+    show(){
+      const _this = this
+      if(_this.$route.query.keyword !== ''){
+        _this.$nuxt.$loading.start()
+        if(_this.pageInfo && _this.pageInfo.total_count){
+          _this.$nuxt.$loading.finish()
+        }
+        // setTimeout(() => {
+        //   _this.$nuxt.$loading.finish()
+        // }, 1000);
+      }
+    },
+    clear(){
+      this.keyword= ''
+    },
     showSwiperTap() {
       this.$refs.suitability.show()
     },
     searchAgain() {
+      // console.log(this.pageInfo,this.pageInfo.total_count)
+      const _this = this
+      _this.$nuxt.$loading.start()
+      if(_this.pageInfo && _this.pageInfo.total_count){
+        console.log(this.pageInfo,this.pageInfo.total_count)
+        _this.$nuxt.$loading.finish()
+      }
+      // setTimeout(() => {
+      //   _this.$nuxt.$loading.finish()
+      // }, 1000);
       // console.log('点击了重新搜索')
       this.$router.replace({
         name: 'search-result',
@@ -115,6 +156,7 @@ export default {
         this.$store.dispatch('addLocalSearchHistory', this.keyword)
       }
       this.research()
+      
     },
     toDetail(info) {
       let routerName = ''
@@ -160,28 +202,53 @@ export default {
           break
         // 对戒
         case -1:
-          routerName = 'marriage-ring-single-ring-detail'
+          routerName = 'marriage-ring-pair-ring-detail'
           break    
       }
 
-      this.$router.push({
-        name: routerName,
-        query: {
-          goodId: info.goodsId || info.id,
-        }
-      })
+      if(info.categoryId == 2){
+          this.$router.push({
+            name: routerName,
+            query: {
+              goodId: info.goodsId || info.id,
+              ringType : 'single'
+            }
+          })
+      }else if(info.categoryId == -1){
+        this.$router.push({
+          name: routerName,
+          query: {
+            goodId: info.goodsId || info.id,
+            ringType : 'pair'
+          }
+        })
+      }else{
+        this.$router.push({
+          name: routerName,
+          query: {
+            goodId: info.goodsId || info.id,
+          }
+        })
+      }
+      
     },
     getSortBy(val) {
       this.conditionWord = val.item.content
       this.sortType = val.item.sortType
       this.sortBy = val.item.sortBy
       this.searchAgain()
+    },
+    goBackto(){
+      this.$router.go(-2)
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+.loading{
+  opacity: 0.6;
+}
 .page {
   width: 100vw;
   height: 100vh;
@@ -191,10 +258,15 @@ export default {
   padding: 7px 12px 6px 15px;
   border-bottom: 1px solid rgba(221, 221, 221, 1);
   box-sizing: border-box;
-  background-color: #ffffff;
+  // background-color: #ffffff;
+  background-color: #cedee6;
   display: flex;
   align-items: center;
-
+  .cancel{
+    margin: 0 10px 0 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
   .go-back-btn {
     margin-right: 21px;
     white-space: nowrap;
@@ -211,28 +283,44 @@ export default {
       color: rgba(102, 102, 102, 1);
     }
   }
+  .cha{
+      width: 17px;
+      height: 16px;
+      font-weight: 600;
+      box-sizing: border-box;
+    }
+    .gap-line{
+      margin: 0 0px 0 10px;
+      width: 1px;
+      height: 16px;
+      font-size: 12px;
+      background-color: #a2c2d2;
+    }
   .operating-area {
     height: 32px;
     background: rgba(245, 245, 245, 1);
-    border-radius: 8px;
+    border-radius: 25px;
     flex-grow: 1;
     flex-shrink: 1;
     display: flex;
     align-items: center;
 
     .iconfont {
-      margin: 0 6px 0 12px;
-      font-size: 13px;
-      color: rgba(187, 187, 187, 1);
+       margin: 0 15px 0 10px;
+      font-size: 18px;
+      color: #333333;
+      font-weight: 600;
     }
     input {
       flex-grow: 1;
       flex-shrink: 1;
       font-size: 14px;
       font-weight: 400;
-      padding-top: 3px;
+      // padding-top: 3px;
+      padding-left: 10px;
       &::-webkit-input-placeholder {
-        color: rgba(187, 187, 187, 1);
+        // color: rgba(187, 187, 187, 1);
+         color: #cedee6;
       }
     }
     .search-btn {

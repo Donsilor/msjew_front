@@ -1,20 +1,20 @@
 <template>
-  <div class="page-content">
+  <div class="page-content" v-loading="loading">
     <section class="search-condition">
-      <!--      女士戒指-->
+      <!--      戒指款式-->
       <div class="condition-item condition-style condition-lady-style">
         <h2 class="condition-name">
-          {{ $t(`${lang}.woman`) }}
+          {{ $t(`${lang}.style`) }}
         </h2>
         <ul class="options">
           <li
-            v-for="(option, index) in ladyStyleOptions"
+            v-for="(option, index) in styleStyleOptions"
             :key="index"
             :class="[
               'option-item',
               { active: option.id === searchConditions.style }
             ]"
-            @click="changeStyle(54, option.id)"
+            @click="changeStyle(option.id)"
           >
             <div class="item-icon">
               <img :src="option.image" />
@@ -25,20 +25,20 @@
           </li>
         </ul>
       </div>
-      <!--      男士戒指-->
+      <!--      适用人群-->
       <div class="condition-item condition-style condition-man-style">
         <h2 class="condition-name">
-          {{ $t(`${lang}.man`) }}
+          {{ $t(`${lang}.forPeople`) }}
         </h2>
         <ul class="options">
           <li
-            v-for="(option, index) in manStyleOptions"
+            v-for="(option, index) in forPeopleOptions"
             :key="index"
             :class="[
               'option-item',
-              { active: option.id === searchConditions.style }
+              { active: option.id === searchConditions.forPeople }
             ]"
-            @click="changeStyle(55, option.id)"
+            @click="changeForPeople(option.id)"
           >
             <div class="item-icon">
               <img :src="option.image" />
@@ -146,7 +146,7 @@
         </div>
       </div>
     </section>
-    <section class="list-title">
+    <section class="list-title" v-show="this.loading == false">
       <h1 class="title">
         {{ $t(`${lang}.totalCountTitle`, { total_count }) }}
         <!--        {{-->
@@ -232,15 +232,24 @@
         </div>
       </div>
       <div v-show="showNextPageButton" class="more-list-data">
-        <button
+        <!-- <button
           v-loading="requestingListData"
           class="check-more"
           @click="getNextPage"
         >
           {{ $t('common.getMore') }}
-        </button>
+        </button> -->
+        <div class="block">
+          <el-pagination
+            @current-change="handleCurrentChange"
+            :current-page="currentPage4"
+            :page-size="page_size"
+            layout="total, prev, pager, next, jumper"
+            :total="totalCount">
+          </el-pagination>
+        </div>
       </div>
-      <no-more-data v-show="showingData.length == 0" :dataVal = "2"></no-more-data>
+      <no-more-data v-show="this.allData.length == 0 && this.loading == false" :dataVal = "2"></no-more-data>
       <!-- <bdd-empty v-show="noListData" type="product"></bdd-empty> -->
     </section>
   </div>
@@ -279,16 +288,29 @@ export default {
       lang,
       listUrl: '/web/goods/style/search',
       page_size: 16,
-      manStyleOptions: this.CONDITION_INFO.style.manRings,
-      ladyStyleOptions: this.CONDITION_INFO.style.womanRings,
+      forPeopleOptions: this.CONDITION_INFO.style.forPeople,
+      styleStyleOptions: this.CONDITION_INFO.style.styleRings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
-      fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
+      fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
       searchConditions: {
-        styleSex: '', // 20-女戒款式， 10-男戒款式
+        styleSex: '', // 54-款式， 26-适用人群
         style: '',
         material: '',
+        forPeople: '',
+        scenes: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
+      },
+      loading: true
+    }
+  },
+  watch: {
+    $route(val, oldVal) {
+      var priceRange_val =this.$route.query.priceRange
+      if(priceRange_val !== undefined){
+        this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
+        this.changePriceRange(this.priceRange);
+
       }
     }
   },
@@ -298,8 +320,8 @@ export default {
       const id = this.searchConditions.style
       const styleOptions = this.searchConditions.styleSex
         ? {
-            55: this.manStyleOptions,
-            54: this.ladyStyleOptions
+            26: this.forPeopleOptions,
+            54: this.styleStyleOptions
           }[this.searchConditions.styleSex]
         : []
       if (id === '') {
@@ -329,27 +351,16 @@ export default {
         }
       ]
 
-      if (!conditions.styleSex) {
+      if (conditions.styleSex) {
         params.push({
           type: 2,
+          paramId:54,
           paramName: 'engaged_style',
-          valueType: 1,
-          configValues: [-2]
-        })
-      } else {
-        const styleSexMap = {
-          55: 'marry_style_man',
-          54: 'marry_style_wom'
-        }
-        params.push({
-          type: 2,
-          paramName: styleSexMap[conditions.styleSex],
-          paramId:conditions.styleSex,
           valueType: 1,
           configValues: conditions.style === '' ? [] : [conditions.style]
         })
-      }
-
+      } 
+      
       if (conditions.material) {
         params.push({
           type: 3,
@@ -359,6 +370,25 @@ export default {
           configValues: conditions.material === '' ? [] : [conditions.material]
         })
       }
+      if (conditions.forPeople) {
+        params.push({
+          type: 2,
+          paramId:26,
+          paramName: 'for_people',
+          valueType: 1,
+          configValues: conditions.forPeople === '' ? [] : [conditions.forPeople]
+        })
+      }
+      if (conditions.scenes) {
+        params.push({
+          type: 2,
+          paramId:27,
+          paramName: 'scenes',
+          valueType: 1,
+          configValues: conditions.scenes === '' ? [] : [conditions.scenes]
+        })
+      }
+
 
       const data = {
         advertType: 2,
@@ -382,6 +412,15 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
+      console.log("加载状态",this.loading)
+      // if(this.allData.length == 0){
+      //   this.loading = true
+      //   setTimeout(() => {
+      //     this.loading = false
+      //   }, 1000);
+      // }else if(this.allData.length > 0){
+      //   this.loading = false
+      // }
       const _this = this
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
@@ -426,25 +465,38 @@ export default {
   },
   mounted() {
     const _this = this
+    var priceRange_val =this.$route.query.priceRange
+    if(priceRange_val !== undefined){
+      this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
+      this.changePriceRange(this.priceRange);
+
+    }
+
     _this.$nextTick(() => {
       _this.research()
     })
   },
   methods: {
     // 改变款式条件
-    changeStyle(sex, value) {
+    changeStyle(value) {
       const searchConditions = this.searchConditions
-      console.log('styleSex====>', searchConditions.styleSex, sex)
       console.log('style====>', searchConditions.style, value)
       if (
-        searchConditions.styleSex === sex &&
         searchConditions.style === value
       ) {
-        this.changeCondition('styleSex', '')
         this.changeCondition('style', '')
       } else {
-        this.changeCondition('styleSex', sex)
         this.changeCondition('style', value)
+      }
+    },
+
+    // 改变适用人群
+    changeForPeople(value) {
+      const searchConditions = this.searchConditions
+      if (searchConditions.forPeople === value) {
+        this.changeCondition('forPeople', '')
+      } else {
+        this.changeCondition('forPeople', value)
       }
     },
     // 改变材質条件
@@ -535,6 +587,71 @@ export default {
     .operate-area {
       width: 400px;
     }
+  }
+}
+</style>
+<style lang="less">
+
+// 修改elementUI分页组件的样式
+
+.page-content{
+  .el-pagination__sizes{
+    display: none!important;
+  }
+  .el-dialog, .el-pager li{
+    background: none;
+  }
+  .el-pagination button, .el-pagination span:not([class*=suffix]){
+    font-size:16px;
+    height: 37px!important;
+    line-height: 37px;
+  }
+  
+  .el-pager, .el-pager li{
+    font-size: 16px;
+  }
+  .el-pager {
+    height: 37px!important;
+    padding: 5px 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    list-style: none;
+    font-size: 0;
+  }
+  .el-pager li.active {
+    color: #fff;
+    border-radius: 50%;
+    cursor: default;
+    background: #c1aaa0!important;
+  }
+  .el-pager li {
+    padding: 0 4px;
+    font-size: 13px;
+    min-width: 28.5px;
+    margin: 0 5px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 20px;
+  }
+  .el-pagination__editor.el-input .el-input__inner{
+    height: 28px;
+  }
+  .el-pagination button:disabled{
+    background-color: #f4f2f3;
+  }
+  .el-pagination .btn-next, .el-pagination .btn-prev{
+    background-color: #f4f2f3;
+  }
+  .el-pager li:hover{
+    color:#c1aaa0;
+  }
+  .el-pagination .btn-next .el-icon, .el-pagination .btn-prev .el-icon{
+    font-size:20px;
+  }
+  .el-pager .active:hover{
+    color: #fff!important;
   }
 }
 </style>
