@@ -366,7 +366,7 @@
         "MothersDay": "Mother's Day",
         "birthdayPresent": "Birthday Gift",
         "ChristmasGift": "X'mas Gift",
-        "HalloweenGift": "Halloween Gift"        
+        "HalloweenGift": "Halloween Gift"
       },
       "diamondMenu": {
         "jewelry": "Jewelry",
@@ -954,7 +954,9 @@
 			"toPay": "Pay Now",
 			"toPayWait": "Processing",
 			"wireTransferGuide": "Wire Transfer Guide",
-			"orderPrice": "Total Order Amount",
+			"orderPrice": "Total Amount",
+      "ultimatelyPay": "Actual payment",
+      "NeedPay": "MoneyNeedPay",
 			"confirmReceipt": "Confirm Receipt",
 			"toEvaluate": "Review Now",
 			"checkEvaluate": "View Comments",

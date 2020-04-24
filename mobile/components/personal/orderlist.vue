@@ -74,10 +74,25 @@
         <div class="bottom">
           <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
             <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">查看订单</div>
-            <span class="title">{{ lang.orderCount }}：</span>
-            <div class="order-amount">
-              <span class="coin-type">{{ order.coinCode }}</span>
-              <span class="order-price">{{ order.orderAmount }}</span>
+            <div>
+              <div class="order-box-a">
+                <span class="title">{{ lang.orderCount }}：</span>
+                <div class="order-amount">
+                  <div>
+                    <span class="coin-type">{{ order.coinCode }}</span>
+                    <span class="order-price">{{ order.orderAmount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="order-box-a">
+                <span class="title">{{ order.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}：</span>
+                <div class="order-amount">
+                  <div>
+                    <span class="coin-type">{{ order.coinCode }}</span>
+                    <span class="order-price">{{ order.payAmount }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="btn">
@@ -318,7 +333,7 @@ export default {
     goPay(val) {
       const res = {
         coinType: val.coinCode, // 支付币种 ,
-        orderAmount: val.orderAmount, // 支付金额 ,
+        orderAmount: val.payAmount, // 支付金额 ,
         orderId: val.id // 订单ID
       }
       this.$router.push({
@@ -525,9 +540,8 @@ export default {
         .order {
           margin-left: 90px;
           display: flex;
-          align-items: flex-end;
+          align-items: center;
           .title {
-            flex-grow: 1;
             flex-shrink: 1;
             min-width: 0;
             font-size: 14px;
@@ -554,9 +568,12 @@ export default {
           }
         }
         .btn {
-          text-align: right;
+          display: flex;
+          // text-align: right;
+          margin-left: 90px;
+          font-size: 0;
           span {
-            display: inline-block;
+            // display: inline-block;
             /*width: 100px;*/
             height: 32px;
             padding: 0 21px;
@@ -565,7 +582,10 @@ export default {
             line-height: 32px;
             font-weight: 400;
             text-align: center;
-            margin: 20px 0 0 30px;
+            margin-top: 20px;
+          }
+          span:last-child{
+            margin-left: 30px;
           }
           .btn1 {
             background: #333333;
@@ -599,5 +619,13 @@ export default {
     color: #F29C88;
     border: 1px solid #F29C88;
     margin-right: 0.6rem;
+}
+
+.order-box-a{
+  display: flex;
+  align-items: center;
+}
+.order-box-a:first-child{
+  margin-bottom: 4px;
 }
 </style>

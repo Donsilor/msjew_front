@@ -894,6 +894,8 @@
       "orderNum": "訂單編號",
       "orderNumber": "訂單編號",
       "orderCount": "訂單總額",
+      "ultimatelyPay": "實付金額",
+      "NeedPay": "需付金額",
       "cancelOrder": "取消訂單",
       "toPay": "去付款",
       "confirmReceipt": "確認收貨",
@@ -1051,7 +1053,7 @@
       "擺件",
       "挂件",
       "其它"
-      
+
     ],
     "style": "款式",
     "theme": "特別禮物",

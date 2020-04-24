@@ -727,7 +727,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ $store.state.coin }} {{ ultimatelyPay }}</span>
+                      <span>{{ $store.state.coin }} {{ formatMoney(ultimatelyPay) }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
@@ -823,7 +823,7 @@
           <div class="detail-line" v-for="item in useAmount">
             <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
             <div class="hkd color-pink">
-              -{{ $store.state.coin }} {{item.useAmount}}
+              -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
             </div>
           </div>
           <div v-show="makeGay" class="detail-line">
@@ -886,7 +886,7 @@
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
-              {{orderTotalAmount}}
+              {{ formatMoney(orderTotalAmount) }}
               <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
             </div>
           </div>
@@ -897,7 +897,7 @@
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
-              {{ ultimatelyPay }}
+              {{ formatMoney(ultimatelyPay) }}
               <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
             </div>
           </div>
@@ -910,7 +910,7 @@
       >
         <span>
           {{ $store.state.coin }}
-          {{ ultimatelyPay }}
+          {{ formatMoney(ultimatelyPay) }}
           <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
         </span>
         <span>{{ $t(`${lang}.beiQin`) }}</span>
@@ -1659,7 +1659,7 @@
                 <div class="total">
                   <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
                   <div class="totle-price">
-                    <span>{{ $store.state.coin }} {{ ultimatelyPay }}</span>
+                    <span>{{ $store.state.coin }} {{ formatMoney(ultimatelyPay) }}</span>
                   </div>
                 </div>
                 <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
@@ -1754,7 +1754,7 @@
           <div class="detail-line" v-for="item in useAmount">
             <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
             <div class="hkd color-pink">
-              -{{ $store.state.coin }} {{item.useAmount}}
+              -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
             </div>
           </div>
 
@@ -1818,7 +1818,7 @@
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
-              {{orderTotalAmount}}
+              {{ formatMoney(orderTotalAmount) }}
               <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
             </div>
           </div>
@@ -1829,7 +1829,7 @@
             </div>
             <div class="hkd color-pink price-big">
               {{ $store.state.coin }}
-              {{ ultimatelyPay }}
+              {{ formatMoney(ultimatelyPay) }}
             </div>
           </div>
         </div>
@@ -1841,7 +1841,7 @@
       >
         <span>
           {{ $store.state.coin }}
-          {{ ultimatelyPay }}
+          {{ formatMoney(ultimatelyPay) }}
           <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
         </span>
         <span>{{ $t(`${lang}.beiQin`) }}</span>

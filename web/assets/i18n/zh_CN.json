@@ -973,6 +973,8 @@
 			"toPayWait": "付款中",
 			"wireTransferGuide": "电汇指引",
 			"orderPrice": "订单总额",
+      "ultimatelyPay": "实付金额",
+      "NeedPay": "需付金額",
 			"confirmReceipt": "確認收貨",
 			"toEvaluate": "去评价",
 			"checkEvaluate": "查看評價",

@@ -893,6 +893,8 @@
       "orderNum": "Order#",
       "orderNumber": "Order Number",
       "orderCount": "Total",
+      "ultimatelyPay": "Actual payment",
+      "NeedPay": "MoneyNeedPay",
       "cancelOrder": "Cancel Order",
       "toPay": "Pay Now",
       "confirmReceipt": "Confirm Receipt",
