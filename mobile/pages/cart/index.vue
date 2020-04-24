@@ -155,7 +155,6 @@ export default {
     this.$nextTick(() => {
       if (this.isLogin) {
         this.getList()
-        // console.log()
       } else {
         this.getLocalCart()
       }

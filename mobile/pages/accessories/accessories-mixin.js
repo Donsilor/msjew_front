@@ -91,18 +91,18 @@ export default {
       : ``
     this.showPi = this.goodInfo.salePrice
     this.iAmShowMaker()
-    this.$axios
-      .get(`/wap/goodsComments/getAvgLevel`, {
-        params: {
-          goodsId: this.$route.query.goodId
-        }
-      })
-      .then(res => {
-        this.starNum = res.avgLevel ? res.avgLevel : 5
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    // this.$axios
+    //   .get(`/wap/goodsComments/getAvgLevel`, {
+    //     params: {
+    //       goodsId: this.$route.query.goodId
+    //     }
+    //   })
+    //   .then(res => {
+    //     this.starNum = res.avgLevel ? res.avgLevel : 5
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
     // this.$axios
     //   .get(`/wap/goodsComments/getGoodsComments`, {
     //     params: {

@@ -113,7 +113,7 @@ export default {
   },
   mounted() {
     this.research()
-    this.getAvgLevel()
+    // this.getAvgLevel()
   },
   methods: {
     toShopping() {
@@ -121,21 +121,21 @@ export default {
         name: 'index'
       })
     },
-    getAvgLevel() {
-      this.$axios
-        .get(`/wap/goodsComments/getAvgLevel`, {
-          params: {
-            goodsId: this.$route.query.goodId,
-            groupId: this.$route.query.groupId
-          }
-        })
-        .then(res => {
-          this.avgLevel = res.avgLevel ? res.avgLevel : 5
-        })
-        .catch(err => {
-          console.log(err)
-        })
-    },
+    // getAvgLevel() {
+    //   this.$axios
+    //     .get(`/wap/goodsComments/getAvgLevel`, {
+    //       params: {
+    //         goodsId: this.$route.query.goodId,
+    //         groupId: this.$route.query.groupId
+    //       }
+    //     })
+    //     .then(res => {
+    //       this.avgLevel = res.avgLevel ? res.avgLevel : 5
+    //     })
+    //     .catch(err => {
+    //       console.log(err)
+    //     })
+    // },
     switchType(i) {
       this.type = i
       this.research()
