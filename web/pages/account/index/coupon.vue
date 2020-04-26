@@ -5,7 +5,13 @@
       <div class="title-name">优惠券卡包</div>
     </div>
     <div class="base-info">
+      <div class="coupon_box clf">
+        <div class="list fl">
 
+        </div>
+        <div class="list fl"></div>
+        <div class="list fl"></div>
+      </div>
     </div>
 
   </div>
@@ -18,7 +24,7 @@ export default {
   data() {
     return {
       lang,
-      
+
     }
   }
 }
@@ -206,5 +212,16 @@ export default {
       }
     }
   }
+}
+
+.list{
+  width: 284px;
+  height: 226px;
+  border: 1px solid rgb(205,173,118);
+  background-image: linear-gradient(left, rgba(255,255,255,0.31), rgba(219,209,209,0.31));
+  margin-right: 43px;
+}
+.list:nth-child(3n){
+  margin-right: 0;
 }
 </style>
