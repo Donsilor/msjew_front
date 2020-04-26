@@ -206,7 +206,7 @@
 					  <div>
 					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
 					  </div>
-					  <span class="color-pink">-{{ coin }} {{ item.useAmount }}</span>
+					  <span class="color-pink">-{{ coin }} {{ formatMoney(item.useAmount) }}</span>
 					</li>
           <li v-show="preferFee > 0">
             <div>
@@ -251,11 +251,11 @@
           <li class="order-pay">
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ orderTotalAmount }}</span>
+            ><span>{{ coin }} {{ formatMoney(orderTotalAmount) }}</span>
           </li>
           <li class="order-pay" style="border-top: 0;margin-top: 0;">
             <span>{{ lang.NeedPay }}</span
-            ><span>{{ coin }} {{ ultimatelyPay }}</span>
+            ><span>{{ coin }} {{ formatMoney(ultimatelyPay) }}</span>
           </li>
         </ul>
       </div>
