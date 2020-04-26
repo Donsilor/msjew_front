@@ -12,3 +12,4 @@ node_modules
 /web/.history
 /mobile/nuxt.config.js
 /mobile/.history
+/mobile/app.html
