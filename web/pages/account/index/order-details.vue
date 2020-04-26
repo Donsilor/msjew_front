@@ -328,13 +328,13 @@
             <div class="label big-label">{{ $t(`${lang}.orderTotal`) }}</div>
             <div class="ff big-ff">
               <!-- {{ data.coinCode }} {{ formatNumber(data.orderAmount) }} -->
-              {{ data.coinCode }} {{ data.orderAmount }}
+              {{ data.coinCode }} {{ formatNumber(data.orderAmount) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
             <div class="ff big-ff">
-              {{ data.coinCode }} {{ data.payAmount }}
+              {{ data.coinCode }} {{ formatNumber(data.payAmount) }}
             </div>
           </div>
         </div>

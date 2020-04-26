@@ -899,8 +899,8 @@ export default {
               this.useAmount = JSON.parse(JSON.stringify(res.cards))
             }
 
-            this.orderTotalAmount = res.orderAmount;
-            this.ultimatelyPay = res.payAmount;
+            this.orderTotalAmount = res.order_amount;
+            this.ultimatelyPay = res.order_amount;
             this.currency = res.currency;
 
             this.planDays = this.allFee.planDays
@@ -1040,7 +1040,7 @@ export default {
           }
         })
           .then(res => {
-            // console.log("总额",res)
+            console.log("总额",res)
             if(res.payStatus == 1){
               this.$toast.show(this.lang.submitSuccessfully);
               this.$router.replace({

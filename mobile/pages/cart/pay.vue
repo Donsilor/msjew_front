@@ -132,9 +132,9 @@ export default {
       ],
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
-      price: JSON.parse(this.$route.query.info).orderAmount,
+      price: JSON.parse(this.$route.query.info).payAmount,
       needtips: false,
-      typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0
+      typeIndex: JSON.parse(this.$route.query.info).payAmount === 0 ? 5 : 0
     }
   },
   created() {
@@ -152,9 +152,9 @@ export default {
       //   return
       // }
       if (ind === 5) {
-        this.price = this.info.orderAmount * 0.985
+        this.price = this.info.payAmount * 0.985
       } else {
-        this.price = this.info.orderAmount
+        this.price = this.info.payAmount
       }
     },
     goPaySuccess() {
@@ -178,7 +178,7 @@ export default {
       }else if(this.typeIndex == 5){
         pay = 7
       }
-      
+
       // if (this.typeIndex === 5) {
       //   pay = 1
       // } else if (this.typeIndex === 1 || this.typeIndex === 0) {
@@ -242,7 +242,7 @@ export default {
               name: 'complete-paySuccess-orderId-price-coinType',
               params: {
                 orderId: this.info.orderId,
-                price: this.info.orderAmount,
+                price: this.info.payAmount,
                 coinType: this.info.coinType
               }
             })
