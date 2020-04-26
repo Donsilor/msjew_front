@@ -1040,7 +1040,7 @@ export default {
           }
         })
           .then(res => {
-            // console.log("总额",res)
+            console.log("总额",res)
             if(res.payStatus == 1){
               this.$toast.show(this.lang.submitSuccessfully);
               this.$router.replace({
