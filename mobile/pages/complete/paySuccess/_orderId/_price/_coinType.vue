@@ -19,7 +19,7 @@
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
           <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ info.coinCode }}</span>
-            {{ formatMoney(info.orderAmount) }}
+            {{ formatMoney(info.payAmount) }}
           </p>
         </div>
         <div class="code">
