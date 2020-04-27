@@ -2545,5 +2545,12 @@
 		"msg11": "Unbind successfully！",
 		"msg12": "This card is not expired！",
 		"msg13": "This card has expired！"
-	}
+	},
+  "coupon": {
+    "title": "Coupon Card Package",
+    "limit1": "Full ",
+    "limit2": "To Use",
+    "use": "Click On The Use",
+    "time": "Activity Time"
+  }
 }

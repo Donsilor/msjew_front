@@ -48,14 +48,14 @@
             <i class="icon iconfont iconyou"></i>
           </div>
         </li>
-        <!-- <li @click="toNext('personal-coupon')">
+        <li @click="toNext('personal-coupon')">
           <i class="icon iconfont left-icon icongerenzhongxin-_youhuiquan"></i>
           <div class="right">
             <p>{{ lang.p6 }}</p>
             <i class="icon iconfont iconyou"></i>
             <span v-if="couponCount > 0">{{ couponCount }}</span>
           </div>
-        </li> -->
+        </li>
         <li @click="toNext('personal-password')">
           <i class="icon iconfont left-icon icongerenzhongxin-_mimaanquan"></i>
           <div class="right">

@@ -6,11 +6,26 @@
     </div>
     <div class="base-info">
       <div class="coupon_box clf">
-        <div class="list fl">
+        <!-- 优惠券列表 -->
+        <div class="list fl" v-for="(item, index) in couponList">
+           <div class="line-box">
+             <div class="point-box">
+               <i></i><i></i><i></i><i></i>
+             </div>
+           </div>
 
+           <div class="price">
+             <span class="price-icon">￥</span>
+             <span class="price-num">1</span>
+           </div>
+
+           <div class="rule">满100元使用</div>
+           <div class="btn">点击使用</div>
+           <div class="time">活动时间：2020.2.1- 2020.2.2</div>
+
+           <!-- 失效 -->
+           <div class="lose-efficacy" v-if="item.loseEfficacy">已失效</div>
         </div>
-        <div class="list fl"></div>
-        <div class="list fl"></div>
       </div>
     </div>
 
@@ -24,6 +39,29 @@ export default {
   data() {
     return {
       lang,
+      couponList: [
+        {
+          price: 5,
+          restrict: 100,
+          timeStar: '2020.2.1',
+          timeEnd: '2020.2.2',
+          loseEfficacy: true
+        },
+        {
+          price: 5,
+          restrict: 100,
+          timeStar: '2020.2.1',
+          timeEnd: '2020.2.2',
+          loseEfficacy: false
+        },
+        {
+          price: 5,
+          restrict: 100,
+          timeStar: '2020.2.1',
+          timeEnd: '2020.2.2',
+          loseEfficacy: false
+        }
+      ]
 
     }
   }
@@ -31,6 +69,11 @@ export default {
 </script>
 
 <style scoped lang="less">
+@font-face{
+  font-family: HiraginoSansGB-W6;
+  src: url('../../../assets/css/HiraginoSansGB-W6.otf');
+}
+
 .account {
   width: 100%;
   .pink-title {
@@ -215,11 +258,104 @@ export default {
 }
 
 .list{
+  position: relative;
   width: 284px;
   height: 226px;
   border: 1px solid rgb(205,173,118);
-  background-image: linear-gradient(left, rgba(255,255,255,0.31), rgba(219,209,209,0.31));
+  background-image: linear-gradient(to right, rgba(255,255,255,0.31), rgba(219,209,209,0.31));
+  border-bottom: 0;
   margin-right: 43px;
+  color: #cdad75;
+  border-radius: 5px;
+  box-shadow: 0 1px 0 #9C999C,0 2px 0 #D6D5D6,0 3px 0 #E3E1E3,0 4px 0 #D6D5D6,0 5px 0 #EDECED,0 6px 0 #F9F9F9;
+  
+  .line-box{
+    width: 258px;
+    height: 1px;
+    background-color: #A6937C;
+    margin: 30px auto 24px;
+    position: relative;
+    
+    .point-box{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      background-color: #fff;
+      background-image: linear-gradient(to right, #fcfafb, #f9f7f8);
+      
+      i{
+        width: 6px;
+        height: 6px;
+        background-color: #A6937C;
+        border-radius: 50%;
+      }
+    }
+  }
+  .price{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+    .price-icon{
+      font-size: 27px;
+    }
+    
+    .price-num{
+      font-family: HiraginoSansGB-W6;
+      font-size: 67px;
+      color: #cdad75;
+      margin: -9px 0 0 -4px;
+      padding-right: 10px;
+    }
+  }
+  .rule{
+    height: 40px;
+    line-height: 40px;
+    font-size: 13px;
+    text-align: center;
+    margin-top: -30px;
+  }
+  .btn{
+    width: 190px;
+    height: 28px;
+    margin: 0 auto;
+    background-color: #cdad75;
+    font-size: 13px;
+    color: #fff;
+    text-align: center;
+    line-height: 28px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  
+  .time{
+    font-size: 13px;
+    color: #cdad75;
+    text-align: center;
+    margin-top: 4px;
+  }
+
+  .lose-efficacy{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    background-color: #a0a0a0;
+    border-radius: 50%;
+    font-size: 25px;
+    text-align: center;
+    line-height: 120px;
+    color: #fff;
+    opacity: 0.9;
+  }
 }
 .list:nth-child(3n){
   margin-right: 0;
