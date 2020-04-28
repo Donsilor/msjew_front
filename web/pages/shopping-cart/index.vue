@@ -193,6 +193,7 @@ export default {
       Settlement1:true,
       Settlement2:false,
       scroll: '',
+      soudout:''
     }
   },
   computed: {
@@ -277,6 +278,7 @@ export default {
           this.totalNum = 0
           this.totalPrice = 0
           for (const j in this.good) {
+            this.soudout = this.good[j].data[0].simpleGoodsEntity.goodsStatus
             if(this.good[j].groupType == 1){
               if(parseInt(this.good[j].data[0].ringsSimpleGoodsEntity.status) === 0){
                   this.good[j].tick = false
@@ -309,6 +311,9 @@ export default {
           // this.totalNum = this.good.length
           if(this.good.length !== 0){
             this.allTick = !this.allTick
+          }
+          if(this.good.length == 1 && this.soudout !== 2){
+            this.allTick = false
           }
         }
         this.good = JSON.parse(JSON.stringify(this.good))

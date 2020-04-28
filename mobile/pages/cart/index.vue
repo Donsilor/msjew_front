@@ -147,7 +147,8 @@ export default {
       sumNum: 0,
       lang: this.LANGUAGE.cart.index,
       num: 0,
-      timer: null 
+      timer: null ,
+      soudout:''
     }
   },
   created() {
@@ -225,8 +226,10 @@ export default {
     defaultAll(){
       if(!this.isLogin){
         this.selectAll = !this.selectAll
-        console.log("全选", this.list)
+        console.log("全选",this.list)
         for (let i = 0; i < this.list.length; i++) {
+          this.soudout = this.list[i].goodsStatus
+          // console.log("所有",this.list[i].goodsStatus)
           if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
             //  console.log("所有")
             this.list[i].isSelect = this.selectAll
@@ -237,6 +240,9 @@ export default {
         }
         console.log(this.selectAll)
         this.getNum()
+        if(this.list.length == 1 && this.soudout !== 2){
+          this.selectAll = false
+        }
       }
     },
     // 全选与反选

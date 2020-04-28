@@ -564,7 +564,7 @@
       </div>
 
       <!--    订单信息模块-->
-      <div class="order-info">
+      <div class="order-info" v-loading="goingPay">
         <div class="left-info">
           <div class="new-address-title">
             <div class="na-line" />
@@ -1557,7 +1557,7 @@
       </div>
 
       <!--    订单信息模块-->
-      <div class="order-info">
+      <div class="order-info" v-loading="goingPay">
         <div class="left-info">
           <div class="new-address-title">
             <div class="na-line" />
@@ -2486,6 +2486,7 @@ export default {
       if(this.iconShow ){
         invoice = this.invoice
       }
+      this.goingPay = true
       this.$axios({
         method: 'post',
         url: '/web/member/order-tourist/create',

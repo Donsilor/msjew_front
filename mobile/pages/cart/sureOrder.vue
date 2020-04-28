@@ -992,6 +992,7 @@ export default {
     // 支付
     //  已登录创建订单
     createOrder() {
+      this.$nuxt.$loading.start()
       // if (!this.canSubmit) {
       //   return
       // }
