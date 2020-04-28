@@ -53,6 +53,18 @@
       </div>
 
       <div class="good-num">{{ g.data[0].goodsCount }}</div>
+
+      <!-- 原金额 -->
+      <div class="good-price old-price">
+        {{ g.coinType }}
+        {{
+          formatNumber(
+            g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+          )
+        }}
+      </div>
+
+      <!-- 优惠后金额 -->
       <div class="good-price">
         {{ g.coinType }}
         {{
@@ -154,8 +166,8 @@ export default {
             // 戒指
              routerName = '/wedding-rings/all'
           }
-          
-          
+
+
           break
         case 3:
           // 珠宝饰品
@@ -188,13 +200,13 @@ export default {
         case 12:
           routerName = '/engagement-rings/all'
           break
-          
+
       }
- 
+
       const routerJump = this.$router.resolve({
         path: routerName,
         query: {
-          
+
         }
       })
       window.open(routerJump.href, '_blank')
@@ -249,7 +261,7 @@ export default {
     }
     .good-information {
       width: 185px;
-      margin-right: 83px;
+      margin-right: 66px;
       .infos {
         width: 100%;
         display: flex;
@@ -269,7 +281,7 @@ export default {
       line-height: 20px;
       max-height: 60px;
       color: #666;
-      margin-right: 83px;
+      margin-right: 66px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -282,7 +294,7 @@ export default {
       text-align: center;
       font-size: 18px;
       color: #333;
-      margin-right: 217-60-83px;
+      margin-right: 30px;
     }
     .good-price {
       font-family: twCenMt;
@@ -290,6 +302,10 @@ export default {
       color: #f29b87;
       width: 130px;
       text-align: center;
+      margin-right: 54px;
+    }
+    .good-price.old-price{
+      // margin-right: 54px;
     }
     .good-btn {
       width: 80px;

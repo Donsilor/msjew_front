@@ -6,7 +6,8 @@
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
         ><span>{{ $t(`${lang}.number`) }}</span
-        ><span>{{ $t(`${lang}.price`) }}</span
+        ><span>原金额</span
+        ><span>优惠后金额</span
         ><span>{{ $t(`${lang}.option`) }}</span>
       </div>
       <div class="cart-goods">
@@ -84,7 +85,7 @@
               :g="g"
               :word="$t(`${lang}.customMade`)"
               @reloadList="getList"
-              @bottomData='refreshData' 
+              @bottomData='refreshData'
             ></madeUp>
           </div>
         </div>
@@ -165,7 +166,7 @@
         {{ $t(`${lang}.Settlement`) }}
       </div>
     </div>
-  </div> 
+  </div>
 </div>
 </template>
 
@@ -199,20 +200,20 @@ export default {
     banBtn() {
       return this.tickNum === 0
     }
-    
+
   },
   beforeMount() {
     this.getList()
   },
 
   created(){
-    
+
   },
   mounted(){
-    
+
     this.$nextTick(() => {
-      
-      
+
+
     })
   },
 
@@ -221,8 +222,8 @@ export default {
     refreshData(){
       this.totalNum=0
       this.totalPrice=0
-      this.allTick=false  
-      this.tickNum = 0  
+      this.allTick=false
+      this.tickNum = 0
     },
     // handleScroll(e){
     //     // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
@@ -300,9 +301,9 @@ export default {
 
             this.good[j].tick = true
             // console.log("tick",this.good[i].tick)
-          
+
             // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
-            this.totalPrice +=parseFloat(this.good[j].price) 
+            this.totalPrice +=parseFloat(this.good[j].price)
           }
           // console.log("price=====2",this.good)
           // this.tickNum = this.good.length
@@ -357,9 +358,9 @@ export default {
 
           this.good[i].tick = true
           // console.log("tick",this.good[i].tick)
-         
+
           // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
-          this.totalPrice +=parseFloat(this.good[i].price) 
+          this.totalPrice +=parseFloat(this.good[i].price)
         }
         // console.log("price=====2",this.good)
         // this.tickNum = this.good.length
@@ -377,7 +378,7 @@ export default {
          this.good[i].tick ? this.totalNum-- : this.totalNum++
       }
 
-     
+
       this.good[i].tick
         ? (this.totalPrice -=parseFloat(this.good[i].price) )
         : (this.totalPrice += parseFloat(this.good[i].price))
@@ -405,7 +406,7 @@ export default {
         .then(data => {
           this.totalNum=0
           this.totalPrice=0
-          this.allTick=false  
+          this.allTick=false
           this.$successMessage(this.$t(`${lang}.deleteSuccess`))
           this.getList()
         })
@@ -604,7 +605,7 @@ export default {
   overflow: hidden;
   margin: 0 auto;
   position: relative;
-  
+
   .cart-container{
     position: relative;
     overflow: hidden;
@@ -641,10 +642,16 @@ export default {
         width: 140+269+71+185+83px;
       }
       span:nth-child(2) {
-        width: 60+120px;
+        // width: 60+120px;
+        width: 120px;
       }
       span:nth-child(3) {
-        width: 207px;
+        // width: 207px;
+        width: 160px;
+      }
+      span:nth-child(4) {
+        // width: 207px;
+        width: 160px;
       }
     }
     .cart-goods {

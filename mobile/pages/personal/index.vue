@@ -10,6 +10,7 @@
     </div>
     <div class="content">
       <ul class="clearboth">
+        <!-- 我的订单 -->
         <li class="border-top" @click="toNext('personal-order')">
           <i class="icon iconfont left-icon icongerenzhongxin-_dingdan"></i>
           <div class="right">
@@ -39,6 +40,8 @@
             <i class="icon iconfont iconyou"></i>
           </div>
         </li> -->
+
+        <!-- 我的地址 -->
         <li class="border-top" @click="toNext('personal-address')">
           <i
             class="icon iconfont left-icon icongerenzhongxin-_shouhuodizhi"
@@ -48,14 +51,18 @@
             <i class="icon iconfont iconyou"></i>
           </div>
         </li>
-        <li @click="toNext('personal-coupon')">
+
+        <!-- 优惠码 -->
+       <!-- <li @click="toNext('personal-coupon')">
           <i class="icon iconfont left-icon icongerenzhongxin-_youhuiquan"></i>
           <div class="right">
             <p>{{ lang.p6 }}</p>
             <i class="icon iconfont iconyou"></i>
             <span v-if="couponCount > 0">{{ couponCount }}</span>
           </div>
-        </li>
+        </li> -->
+
+        <!-- 密码安全 -->
         <li @click="toNext('personal-password')">
           <i class="icon iconfont left-icon icongerenzhongxin-_mimaanquan"></i>
           <div class="right">
@@ -63,6 +70,17 @@
             <i class="icon iconfont iconyou"></i>
           </div>
         </li>
+        
+        <!-- 优惠券 -->
+        <li @click="toNext('personal-coupon')">
+           <i class="icon iconfont left-icon icongerenzhongxin-_youhuiquan"></i>
+           <div class="right">
+             <p>优惠券卡包</p>
+             <i class="icon iconfont iconyou"></i>
+             <span v-if=" 0">{{ couponCount }}</span>
+           </div>
+         </li>
+        
       </ul>
     </div>
     <div class="btn" @click="logout">{{ lang.loginOut }}</div>
