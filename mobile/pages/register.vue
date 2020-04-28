@@ -36,6 +36,8 @@
               :placeholder="`${lang.name}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('name')"
+               :maxl="maxlength"
+               @keydown="keydown('30')"
             ></bdd-input>
             <!-- <div
               :class="[
@@ -53,6 +55,8 @@
               :placeholder="`${lang.surname}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('surname')"
+              :maxl="maxlength"
+              @keydown="keydown('30')"
             ></bdd-input>
             <!-- <div
               :class="[
@@ -71,6 +75,8 @@
               :placeholder="`${lang.mobile}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('mobile')"
+              :maxl="maxlength"
+              @keydown="keydown('11')"
             ></bdd-input>
             <div
               :class="[
@@ -90,6 +96,8 @@
               :placeholder="`*${lang.email}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('email')"
+              :maxl="maxlength"
+              @keydown="keydown('60')"
             ></bdd-input>
             <div
               :class="[
@@ -112,6 +120,8 @@
                 :placeholder="`${lang.code}`"
                 :padding="'0 30% 0 3%'"
                 @blur="inputKey('code')"
+                :maxl="maxlength"
+                @keydown="keydown('15')"
               ></bdd-input>
               <div class="send-code">
                 <!-- <send-email-code
@@ -144,6 +154,8 @@
                 :placeholder="`*${lang.code}`"
                 :padding="'0 30% 0 3%'"
                 @blur="inputKey('code')"
+                :maxl="maxlength"
+                @keydown="keydown('15')"
               ></bdd-input>
               <div class="send-code">
                 <button :class="['getCode', className]" :disabled="waiting" @click="sendEmailCode">
@@ -170,6 +182,8 @@
               :placeholder="`${lang.password}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('password')"
+              :maxl="maxlength"
+              @keydown="keydown('60')"
             ></bdd-input>
             <div
               :class="[
@@ -188,6 +202,8 @@
               :placeholder="`${lang.repassword}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('repassword')"
+              :maxl="maxlength"
+              @keydown="keydown('60')"
             ></bdd-input>
             <div
               :class="[
@@ -426,7 +442,8 @@ export default {
       waiting: false,
       waitingTime: defaultTime,
       waitingText: this.LANGUAGE.components.sendEmailCode.sendCode,
-      loginType: ''
+      loginType: '',
+      maxlength: '30'
     }
   },
   computed: {
@@ -718,6 +735,9 @@ export default {
         .catch(err => {
           _this.$toast.show(err.message)
         })
+    },
+    keydown(k){
+      this.maxlength = k;
     }
   }
 }

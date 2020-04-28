@@ -16,6 +16,7 @@
       @keyup="keyupEvent"
       @keypress="keypressEvent"
       @change="changeEvent"
+      :maxlength="maxl"
     />
     <template v-if="passwordType">
       <i
@@ -40,6 +41,11 @@
 <script>
 export default {
   props: {
+	maxl: {
+		type: String,
+		required: false,
+		default: '100'
+	},
     value: {
       type: String,
       required: false,

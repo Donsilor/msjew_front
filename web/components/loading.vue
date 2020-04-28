@@ -59,6 +59,7 @@ export default {
   top: 0;
   bottom: 0;
   text-align: center;
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 9998;
 }
 .loading-component {

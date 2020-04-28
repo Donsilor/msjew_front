@@ -7,7 +7,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" />
+          <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" maxlength="11" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phoneTips`) }}
@@ -18,7 +18,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input  v-model.trim="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" />
+          <input  v-model.trim="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" maxlength="60" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.pwd`) }}
@@ -32,7 +32,7 @@
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
-            <input v-model="code"  @keyup="keyupEvent3" @keypress="keypressEvent3" type="text" v-bind:class="{active:isActive3}" :placeholder="$t(`${lang}.code`)" />
+            <input v-model="code"  @keyup="keyupEvent3" @keypress="keypressEvent3" type="text" v-bind:class="{active:isActive3}" :placeholder="$t(`${lang}.code`)" maxlength="15" />
           </div>
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
@@ -62,7 +62,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input v-model.trim="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" />
+          <input v-model.trim="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" maxlength="60" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
@@ -73,7 +73,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input v-model.trim="password"  @keyup="keyupEvent2" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" />
+          <input v-model.trim="password"  @keyup="keyupEvent2" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" maxlength="60" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
@@ -87,7 +87,7 @@
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
-            <input v-model="code"  @keyup="keyupEvent3" @keypress="keypressEvent3" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.code`)" @keydown.enter="login" />
+            <input v-model="code"  @keyup="keyupEvent3" @keypress="keypressEvent3" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.code`)" @keydown.enter="login" :maxlength="15" />
           </div>
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
@@ -139,7 +139,7 @@ export default {
       oldUrl:''
     }
   },
-  
+
   watch: {
     // mobile(){
     //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
@@ -158,7 +158,7 @@ export default {
   computed: {
     //  aa(){
     //    let result=this.$store.state.refreshCode
-    //    console.log(result) 
+    //    console.log(result)
     //  }
   },
   beforeRouteEnter (to, from, next){
@@ -173,7 +173,7 @@ export default {
     //   // 验证是否获取到了上页的url
     //   console.log(this.oldUrl)
     // })
-    
+
     // console.log("url-------",this.url)
     // if(this.mobile==''){
     //   this.isActive1=true
