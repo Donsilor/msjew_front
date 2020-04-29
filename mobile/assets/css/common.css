@@ -387,3 +387,36 @@
 .am-picker .am-box .am-head input:nth-child(3) {
   color: rgba(242, 155, 135, 1);
 }
+
+/* 优惠券 */
+.discount-icon{
+  height: 24px;
+  padding: 0 5px;
+  background: url(../../static/subject/icon_03.png) no-repeat center;
+  background-size: 100% 100%;
+  font-size: 13px;
+  color: #fff;
+  line-height: 22px;
+  float: left;
+  margin-right: 4px;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+}
+
+.discount-price{
+  padding: 0 15px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.discount-price .old-price{
+  font-size: 14px;
+  color: #b2b2b2;
+  text-decoration: line-through;
+}
+
+.discount-price .new-price{
+  font-size: 17px;
+  color: #860505;
+  margin-top: 4px;
+}

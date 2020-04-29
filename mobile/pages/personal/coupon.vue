@@ -29,10 +29,15 @@
           </div>
         </div>
 
+        <div class="limit">限用于（项链）</div>
+
         <div class="btn">点击使用</div>
       </div>
 
       <div class="list lose-efficacy ">
+        <!-- 左上角三角 -->
+        <div class="square"><span></span></div>
+
         <div class="line-box">
           <div class="point-box">
             <span></span><span></span><span></span><span></span>
@@ -50,6 +55,8 @@
             <span class="text2">2020.2.1-2020.2.2</span>
           </div>
         </div>
+        
+        <div class="limit">限用于（项链）</div>
 
         <div class="btn">点击使用</div>
       </div>
@@ -61,7 +68,7 @@
 export default {
   methods:{
     quit(){
-
+      this.$router.go(-1)
     }
   }
 }
@@ -99,7 +106,8 @@ export default {
     .icon{
       width: 26px;
       height: 22px;
-      border: 1px solid red;
+      background: url(../../static/subject/icon_01.png) no-repeat center;
+      background-size: 100% 100%;
     }
 
     span{
@@ -114,19 +122,22 @@ export default {
     margin: 40px auto;
 
     .list{
+      position: relative;
       margin-bottom: 26px;
       width: 100%;
-      background: linear-gradient(to right, rgba(255,255,255,0.31), rgba(219,209,209,0.31));
-      border: 1px solid rgba(205,173,118, 0.5);
+      // background: linear-gradient(to right, rgba(255,255,255,0.31), rgba(219,209,209,0.31));
+      // border: 1px solid rgba(205,173,118, 0.5);
+      background: url(../../static/subject/card_bg_01.png) no-repeat center;
+      background-size: 100% 100%;
       border-radius: 5px;
-      padding-bottom: 16px;
+      padding: 20px 0 30px;
 
       .line-box{
         position: relative;
         width: 208px;
         height: 1px;
         background-color: #cdad76;
-        margin: 16px auto;
+        margin: 0 auto 16px;
 
         .point-box{
           position: absolute;
@@ -182,6 +193,10 @@ export default {
 
       }
 
+      .limit{
+        color: #f00;
+      }
+
       .btn{
         width: 200px;
         height: 26px;
@@ -193,11 +208,21 @@ export default {
         border-radius: 2px;
         margin: 10px auto 0;
       }
+
+      .square{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 25px 0 25px 0;
+        border-color: #D3D3D3 0 #D3D3D3 #D3D3D3;
+      }
     }
 
     .list.lose-efficacy{
-      background: linear-gradient(to right, rgba(255,255,255,0.31), rgba(219,209,209,0.31));
-      border: 1px solid #fff;
+      background-image: url(../../static/subject/card_bg_02.png);
 
       .line-box{
         position: relative;
@@ -213,6 +238,10 @@ export default {
       }
 
       .card-mid{
+        color: #D2D2D2;
+      }
+      
+      .limit{
         color: #D2D2D2;
       }
 

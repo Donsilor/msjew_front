@@ -15,9 +15,14 @@
       </swiper>
     </div>
     <div class="title">
+      <span class="discount-icon">7.5折</span>
       {{ goodInfo.goodsName }}
     </div>
-    <div class="price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
+    <div class="price" v-if="0">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
+    <div class="discount-price" v-else>
+      <div class="old-price">原   价HKD  2,222,22</div>
+      <div class="new-price">折后价HKD  2,222,22</div>
+    </div>
     <div class="promise-box">
       <div
         v-for="(c, index) in goodInfo.goodsServicesJsons"
@@ -29,6 +34,8 @@
         </div>
         <span>{{ c.name }}</span>
       </div>
+      
+      <div>1111111</div>
     </div>
     <!--    <div v-if="goodInfo.goodsMod === 1" class="include-box">-->
     <!--      <span>{{ lang.include }}</span>-->
@@ -47,6 +54,7 @@
     <!--      &lt;!&ndash;        <i class="iconfont iconicon-zuanshi" />&ndash;&gt;-->
     <!--      &lt;!&ndash;      </div>&ndash;&gt;-->
     <!--    </div>-->
+
     <div class="select-line">
       <span>{{ lang.chooseColor }}</span>
       <span @click="showChooseEject(conditions[0])">
