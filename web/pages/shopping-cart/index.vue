@@ -204,6 +204,7 @@ export default {
   },
   beforeMount() {
     this.getList()
+    
   },
 
   created(){
@@ -212,8 +213,6 @@ export default {
   mounted(){
     
     this.$nextTick(() => {
-      
-      
     })
   },
 
@@ -225,20 +224,20 @@ export default {
       this.allTick=false  
       this.tickNum = 0  
     },
-    // handleScroll(e){
-    //     // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
-    //     const that = this
-    //     let scrollTop = e.target.scrollTop;
-    //     // console.log("scrollTop",scrollTop)
-    //     that.scrollTop = scrollTop
-    //     if (that.scrollTop > 150) {
-    //       this.Settlement1 = false
-    //       this.Settlement2 = true
-    //     } else {
-    //       this.Settlement1 = true
-    //       this.Settlement2 = false
-    //     }
-    // },
+    handleScroll(e){
+        // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
+        const that = this
+        let scrollTop = e.target.scrollTop;
+        // console.log("scrollTop",scrollTop)
+        that.scrollTop = scrollTop
+        if (that.scrollTop > 150) {
+          this.Settlement1 = false
+          this.Settlement2 = true
+        } else {
+          this.Settlement1 = true
+          this.Settlement2 = false
+        }
+    },
     // handleScroll(){
     //   console.log('滚动条发生滚动了')
     //   this.Settlement1 = false
@@ -253,6 +252,14 @@ export default {
             res[i].tick = false
           }
           this.good = res
+          if(this.good.length<=3){
+            console.log(11111111111,this.good.length)
+            this.Settlement1 = true
+            this.Settlement2 = false
+          } else {
+            console.log(2222222)
+            window.addEventListener('scroll', this.handleScroll, true)
+          }
           this.defaultAll()
         })
         .catch(err => {
