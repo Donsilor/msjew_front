@@ -40,6 +40,10 @@ export default function (content) {
             language = 'en_US'
             coin = 'USD'
             areaId = 99
+        } else {
+            language = 'zh_TW'
+            coin = 'HKD'
+            areaId = 2
         }
         if (coin) {
             resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
