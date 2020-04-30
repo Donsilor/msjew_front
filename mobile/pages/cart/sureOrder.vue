@@ -535,13 +535,8 @@ export default {
       }else if(this.typeIndex == 4){
         pay = 81
       }
-<<<<<<< HEAD
 
-      if(pay!==6){
-=======
-      
       if(pay == 81 || pay == 82 || pay == 83){
->>>>>>> b3e6f60670b2c1a8a7df1e2e3d77170372080403
         this.$toast.show(this.lang.firstLogin)
       }
       if (ind === 5) {
