@@ -59,7 +59,7 @@
       "GroupRing":"群鑲戒",
       "ThreeMainStoneRings":"三主石戒",
       "OpenMouth":"開口戒",
-    
+
       "SolitaireRingDesc": "戒扥款式可多變, 一夥真心總不變 , 高貴氣質石長存",
       "JumpRing": "開口戒",
       "JumpRingDesc": "首飾界中魔法師, 相隔對岸的法變, 竟能做出此效果",
@@ -186,7 +186,7 @@
       "ValentinesDay":"情人節",
       "birthdayPresent":"生日禮物",
       "anniversary" : "紀念日"
-      
+
     },
     "forPeople":{
       "men":"男士",
@@ -228,7 +228,7 @@
       "bracelet":"手鍊",
       "customization":"鑽戒定制",
       "theme":"主題",
-      
+
       "customerService": "客戶服務",
       "lifetimeWarranty": "終身保修",
       "freeInternationalShipping": "免費運費",
@@ -421,7 +421,7 @@
         "gotEngaged":"訂婚",
         "marry":"結婚",
         "ValentinesDay":"情人節",
-        "birthdayPresent":"生日禮物"       
+        "birthdayPresent":"生日禮物"
       },
       "themeCollectionMenu":{
         "use":"使用場景/特別禮物",
@@ -2483,7 +2483,7 @@
 		"editOrUnbound": "編輯/解綁購物卡",
 		"shoppingCard": "購物卡",
     "msg10": "購物車不能為空，請重新添加商品",
-    "msg11": "需登錄購物"
+    "msg11": "需登錄購物 / 僅供大陸使用"
 	},
 	"invoice": {
 		"personal": "個人",

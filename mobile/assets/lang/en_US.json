@@ -197,7 +197,8 @@
 		"NeedPay": "MoneyNeedPay",
 		"submitSuccessfully": "Order Submission Successful!",
 		"PleaseLogin": "Please log in first to use the gift card！",
-		"msg10": "The shopping cart cannot be empty. Please add the item again"
+		"msg10": "The shopping cart cannot be empty. Please add the item again",
+    "msg11": "Mainland China Only"
     },
     "pay": {
       "pay": "Order payment",

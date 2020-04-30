@@ -1390,7 +1390,9 @@
                 <div v-show="payWay == 82" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+
               </div>
               <!-- <div
                 :class="{ 'pay-choose': payWay === 8 }"
@@ -1425,7 +1427,8 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
               <!-- 信用卡 -->
               <div
@@ -1443,7 +1446,8 @@
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
 
               <!-- 支付宝 -->
@@ -4792,5 +4796,8 @@ div {
   color: #f00;
   font-size: 18px;
   opacity: 0.6;
+}
+.hint_pay.en{
+  top: 94px;
 }
 </style>

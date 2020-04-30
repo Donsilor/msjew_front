@@ -222,8 +222,8 @@
       "necklace":"项链",
       "bracelet":"手链",
       "customization":"钻戒定制",
-      "theme":"主题", 
-      
+      "theme":"主题",
+
       "customerService": "客户服务",
       "lifetimeWarranty": "终身保修",
       "freeInternationalShipping": "免费运费",
@@ -2494,7 +2494,7 @@
 		"editOrUnbound": "编辑/解绑购物卡",
 		"shoppingCard": "购物卡",
     "msg10": "购物车不能为空，请重新添加商品",
-    "msg11": "需登录购物"
+    "msg11": "需登录购物 / 仅供大陆使用"
 	},
 	"invoice": {
 		"personal": "个人",

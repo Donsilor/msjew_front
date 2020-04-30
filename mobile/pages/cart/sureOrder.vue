@@ -40,7 +40,7 @@
         <ul>
           <li v-for="(item, index) in list2" :key="index">
             <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
-            <div >
+            <div>
               <img :src="item.url" />
               <div class="right">
                 <span
@@ -60,6 +60,7 @@
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
+                <p class="hint-color" v-if="index != 0">({{lang.msg11}})</p>
               </div>
             </div>
           </li>
@@ -1674,7 +1675,7 @@ export default {
       img {
         width: 32px;
         height: 32px;
-        margin: 16px;
+        margin: 24px 16px 0;
         float: left;
       }
       .right {
@@ -1687,7 +1688,7 @@ export default {
           float: right;
           width: 20px;
           height: 20px;
-          margin: 12px 12px 0 0;
+          margin: 20px 12px 0 0;
           background: rgba(255, 255, 255, 1);
           border: 1px solid rgba(187, 187, 187, 1); /*no*/
           border-radius: 50%;
@@ -1781,5 +1782,9 @@ export default {
   visibility: hidden;
   clear: both;
   opacity: 0;
+}
+
+.hint-color{
+  color: #f29b87 !important;
 }
 </style>
