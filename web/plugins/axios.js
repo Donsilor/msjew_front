@@ -5,8 +5,8 @@ export default function ({
     $axios.onRequest(config => {
 
         config.headers['x-api-key'] = store.state.token || ''
-        config.headers['x-api-currency'] = store.state.coin || 'USD'
-        config.headers['x-api-language'] = store.state.language || 'en_US'
+        config.headers['x-api-currency'] = store.state.coin || ''
+        config.headers['x-api-language'] = store.state.language || ''
         config.headers['x-api-area'] = store.state.areaId || '' // 当前所属地区
         config.headers['x-api-server'] = process.server ? 1 : 0 //是否是服务器端请求
         config.headers['x-api-platform'] = 1 //1=>PC端
@@ -38,7 +38,7 @@ export default function ({
                         store.dispatch('logout')
                         window.location.href = '/login'
                     } else {
-						store.commit('setToken',accessToken)
+                        store.commit('setToken', accessToken)
                         window.location.reload()
                     }
                 }
