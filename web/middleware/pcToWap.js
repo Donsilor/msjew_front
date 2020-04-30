@@ -61,7 +61,7 @@ export default function ({ req, res, redirect, store, route }) {
                 host = 'https://wap.bddia.com';
             } else {
                 //本地
-                host = 'http://' + headerHost;
+                //host = 'http://' + headerHost;
             }
         } else if ((/^(cn|us)\.bddco\.com/).test(headerHost)) {
             //生产环境
