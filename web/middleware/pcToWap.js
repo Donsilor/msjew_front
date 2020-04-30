@@ -52,7 +52,7 @@ function queryParams (data) {
     }
   }
  
-  return _result.length ? _result.join('&') + '&' : ''
+  return _result.length ? _result.join('&') : ''
 }
 
 
