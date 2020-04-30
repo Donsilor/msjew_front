@@ -91,16 +91,21 @@ export default {
       }
     }
   },
- created(){
-    
- },
+ watch: {
+    // 每次切换路由，滚动到顶部
+    $route(val, oldVal) {
+      const _this = this
+        _this.keyword = _this.$helpers.base64Decode(
+        _this.$route.query.keyword || ''
+      )
+      _this.research()
+    }
+  },
   mounted(){
     const _this = this
     _this.$nextTick(() => {
       if (_this.$route.query) {
         _this.keyword = _this.$route.query.keyword || ''
-        _this.categoryId = _this.$route.query.categoryId || ''
-        _this.similarGoodsId = _this.$route.query.similarGoodsId || ''
       }
     
       // if(_this.pageInfo && _this.pageInfo.total_count){
@@ -110,6 +115,18 @@ export default {
     })
   },
   methods: {
+    show(){
+      const _this = this
+      if(_this.$route.query.keyword !== ''){
+        _this.$nuxt.$loading.start()
+        if(_this.pageInfo && _this.pageInfo.total_count){
+          _this.$nuxt.$loading.finish()
+        }
+        // setTimeout(() => {
+        //   _this.$nuxt.$loading.finish()
+        // }, 1000);
+      }
+    },
     clear(){
       this.keyword= ''
     },
@@ -131,9 +148,7 @@ export default {
       this.$router.replace({
         name: 'search-result',
         query: {
-          keyword: this.keyword,
-          categoryId: this.categoryId,
-          similarGoodsId: this.similarGoodsId
+          keyword: this.$helpers.base64Encode(this.keyword),
         }
       })
       if (!this.$store.getters.hadLogin) {
