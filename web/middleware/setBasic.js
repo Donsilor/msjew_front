@@ -45,13 +45,14 @@ export default function (content) {
             coin = 'HKD'
             areaId = 2
         }
-        if (coin) {
+
+        /*if (coin) {
             resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
             store.commit('setCoin', coin)
         } else {
             store.commit('setCoin', _coin)
         }
-        /*
+        
         if (language) {
             resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
             store.commit('setLanguage', language)

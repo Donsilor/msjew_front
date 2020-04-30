@@ -11,12 +11,16 @@ export default ({ req, app, store, $axios }, inject) => {
         let host = req.headers['host']
         if ((/^(cn|wap-cn)\./is).test(host)) {
             language = 'zh_CN'
+            coin = 'HKD'
         } else if ((/^(us|wap-us)\./is).test(host)) {
             language = 'en_US'
+            coin = 'USD'
         } else {
             language = 'zh_TW'
+            coin = 'HKD'
         }
         store.commit('setLanguage', language)
+        store.commit('setCoin', coin)
     } else if (store && store.state) {
         language = store.state.language
     }
