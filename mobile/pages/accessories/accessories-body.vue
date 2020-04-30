@@ -13,6 +13,10 @@
           /></nuxt-link>
         </div>
       </swiper>
+
+      <div class="activity-sign">
+        <div class="triangle">优惠券</div>
+      </div>
     </div>
     <div class="title">
       <span class="discount-icon">7.5折</span>
@@ -34,9 +38,17 @@
         </div>
         <span>{{ c.name }}</span>
       </div>
-      
-      <div>1111111</div>
+
     </div>
+      <div class="discount-activity">
+        <div class="discount-l">
+          <span class="text">优惠活动：</span>
+          <span class="discount-icon">7.5折</span>
+        </div>
+        <div class="discount-time">
+          <span>活动时间：</span><span>2020.4.9</span>
+        </div>
+      </div>
     <!--    <div v-if="goodInfo.goodsMod === 1" class="include-box">-->
     <!--      <span>{{ lang.include }}</span>-->
     <!--      <div>-->

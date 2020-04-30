@@ -388,7 +388,7 @@
   color: rgba(242, 155, 135, 1);
 }
 
-/* 优惠券 */
+/* 优惠券 · 详情页 */
 .discount-icon{
   height: 24px;
   padding: 0 5px;
@@ -419,4 +419,56 @@
   font-size: 17px;
   color: #860505;
   margin-top: 4px;
+}
+
+.discount-activity{
+  height: 40px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  background-color: #fafaf6;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 8px solid rgba(245, 245, 245, 1);
+  margin-top: -8px;
+}
+.discount-l{
+  display: flex;
+  align-items: center;
+}
+.discount-l .text{
+  font-size: 13px;
+  color: #000;
+}
+.discount-time{
+  font-size: 13px;
+  color: #b49785;
+}
+
+.activity-sign{
+  position: absolute;
+  right: -6px;
+  bottom: -8px;
+  z-index: 666;
+  width: 80px;
+  height: 85px;
+  background: url(../../static/subject/icon_04.png) no-repeat center;
+  background-size: 100% 100%;
+}
+
+.activity-sign .triangle{
+  width: 80px;
+  height: 85px;
+  transform: rotate(-45deg);
+  padding-top: 50px;
+  font-size: 18px;
+  color: #fff;
+}
+
+/* 优惠券 · 列表页 */
+.discount-2 .sign{
+   background: url(../../static/subject/icon_05.png) no-repeat center !important;
+}
+.discount-2 .discount-icon2{
+  background: url(../../static/subject/icon_03.png) no-repeat center;
 }

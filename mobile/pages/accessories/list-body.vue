@@ -1,5 +1,5 @@
 <template>
-  <div class="engagement-part">
+  <div class="engagement-part discount-2">
     <div class="top-part">
       <div class="choose-box">
         <div
@@ -7,7 +7,7 @@
           :key="n"
           :class="['choose-btn', { active: each.checked.length > 0 }]"
           @click="showChooseEject(each)"
-        > 
+        >
           <div>{{ each.name }}</div>
           <div class="ow-h1">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}
@@ -29,23 +29,36 @@
         </div>
       </div>
       <div class="list">
+        <!-- 商品列表 -->
         <div
           v-for="(each, index) in showData"
           :key="index"
           @click="clickData(each)"
+          class="list-item"
         >
           <div class="info-image">
             <img
               :src="imageStrToArray(each.goodsImages)[0]"
               @error="imageError"
             />
+
+            <div class="sign">
+              <div>9折</div>
+            </div>
           </div>
           <div class="info-title ow-h2">
+            <span class="discount-icon2">7.5折</span>
             {{ each.goodsName }}
           </div>
+
+          <div class="info-price old-price-2">
+            {{ each.coinType }} {{ formatNumber(each.salePrice) }}
+          </div>
+
           <div class="info-price">
             {{ each.coinType }} {{ formatNumber(each.salePrice) }}
           </div>
+
         </div>
       </div>
       <bdd-empty

@@ -55,7 +55,7 @@
             <span class="text2">2020.2.1-2020.2.2</span>
           </div>
         </div>
-        
+
         <div class="limit">限用于（项链）</div>
 
         <div class="btn">点击使用</div>
@@ -66,6 +66,18 @@
 
 <script>
 export default {
+  mounted(){
+    this.$axios({
+      method: 'get',
+      url: 'web/member/coupon/index'
+    })
+      .then(data => {
+        console.log(22,data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
   methods:{
     quit(){
       this.$router.go(-1)
@@ -240,7 +252,7 @@ export default {
       .card-mid{
         color: #D2D2D2;
       }
-      
+
       .limit{
         color: #D2D2D2;
       }

@@ -215,9 +215,13 @@
                 {{ item.goodsName }}
               </div>
             </div>
+
+            <div class="discount">
+              <span>7.5折</span>
+            </div>
           </div>
           <!--          广告数据-->
-          <div v-else class="ad-content">
+          <div v-else class="ad-content" style="border: 1px solid sandybrown;">
             <el-carousel height="480px">
               <el-carousel-item
                 v-for="(ad, adIndex) in item.advertImgModelList"
@@ -359,8 +363,8 @@ export default {
           valueType: 1,
           configValues: conditions.style === '' ? [] : [conditions.style]
         })
-      } 
-      
+      }
+
       if (conditions.material) {
         params.push({
           type: 3,
@@ -606,7 +610,7 @@ export default {
     height: 37px!important;
     line-height: 37px;
   }
-  
+
   .el-pager, .el-pager li{
     font-size: 16px;
   }
