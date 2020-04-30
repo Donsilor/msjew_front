@@ -92,10 +92,7 @@ export default {
     }
   },
  created(){
-    const _this = this
-    _this.$nextTick(() => {
-      _this.show()
-    })
+    
  },
   mounted(){
     const _this = this
@@ -105,28 +102,14 @@ export default {
         _this.categoryId = _this.$route.query.categoryId || ''
         _this.similarGoodsId = _this.$route.query.similarGoodsId || ''
       }
-      setTimeout(() => {
-       _this.searchAgain()
-      }, 1000);
+    
       // if(_this.pageInfo && _this.pageInfo.total_count){
       //   _this.searchAgain()
       // }
-      // _this.searchAgain()
+      _this.searchAgain()
     })
   },
   methods: {
-    show(){
-      const _this = this
-      if(_this.$route.query.keyword !== ''){
-        _this.$nuxt.$loading.start()
-        if(_this.pageInfo && _this.pageInfo.total_count){
-          _this.$nuxt.$loading.finish()
-        }
-        // setTimeout(() => {
-        //   _this.$nuxt.$loading.finish()
-        // }, 1000);
-      }
-    },
     clear(){
       this.keyword= ''
     },
@@ -137,10 +120,10 @@ export default {
       // console.log(this.pageInfo,this.pageInfo.total_count)
       const _this = this
       _this.$nuxt.$loading.start()
-      if(_this.pageInfo && _this.pageInfo.total_count){
-        console.log(this.pageInfo,this.pageInfo.total_count)
-        _this.$nuxt.$loading.finish()
-      }
+      // if(_this.pageInfo && _this.pageInfo.total_count){
+      //   console.log(this.pageInfo,this.pageInfo.total_count)
+      //   _this.$nuxt.$loading.finish()
+      // }
       // setTimeout(() => {
       //   _this.$nuxt.$loading.finish()
       // }, 1000);
