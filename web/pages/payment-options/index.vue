@@ -64,7 +64,7 @@
           @click="payWay = 61"
         >
           <div class="pay-img">
-            <img src="../../static/order/visapay.png" alt="" />
+            <img src="../../static/order/visa.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
           <div v-show="payWay === 61" class="pay-price">
