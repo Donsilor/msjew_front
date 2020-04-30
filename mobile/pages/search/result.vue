@@ -105,7 +105,9 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       if (_this.$route.query) {
-        _this.keyword = _this.$route.query.keyword || ''
+        _this.keyword = _this.$helpers.base64Decode(
+          _this.$route.query.keyword || ''
+        )
       }
     
       // if(_this.pageInfo && _this.pageInfo.total_count){
