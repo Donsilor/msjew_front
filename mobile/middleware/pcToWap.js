@@ -73,6 +73,8 @@ export default function ({ req, res, redirect, store, route }) {
             if ((/^(wap-cn|wap-us)\.bddia\.com/).test(headerHost)) {
                 //测试环境
                 host = 'https://' + headerHost.replace('wap-', '');
+            } else if (headerHost == 'wap.bddia.com') {
+                host = 'https://www.bddia.com';
             } else {
                 //本地
                 host = 'http://' + headerHost;
