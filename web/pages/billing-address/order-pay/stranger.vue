@@ -2444,6 +2444,19 @@ export default {
         })
     },
     createOrder() {
+      let pay = 0
+      if(this.payWay==6){
+        pay = 6
+      }else if(this.payWay==82){
+        pay = 82
+      }else if(this.payWay==83){
+        pay = 83
+      }else if(this.payWay==81){
+        pay = 81
+      }else if(this.payWay==61){
+        pay = 61
+      }
+    console.log("方式",pay)
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -2505,6 +2518,7 @@ export default {
           invoice:invoice,
           tradeType:'pc',
           coinType:this.$store.state.coin,
+          payType: pay,
           returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
         }
       })

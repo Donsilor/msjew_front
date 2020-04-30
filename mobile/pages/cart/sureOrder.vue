@@ -834,6 +834,20 @@ export default {
       //   return
       // }
       // console.log("aaaa",this.typeIndex)
+      let pay = 0
+      if(this.typeIndex == 0){
+        pay = 6
+      }else if(this.typeIndex == 1){
+        pay = 61
+      }else if(this.typeIndex == 2){
+        pay = 82
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 7
+      }
        if (!this.isLogin) {
           if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
@@ -914,6 +928,7 @@ export default {
             goodsCartList:data,
             invoice:this.$route.params.invoice,
             tradeType:'wap',
+            payType: pay,
             coinType:this.$store.state.coin,
             returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
           }
