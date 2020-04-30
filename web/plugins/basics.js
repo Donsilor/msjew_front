@@ -7,6 +7,7 @@ const i18n = require('@/assets/i18n/index.js').getLang
 export default ({ req, app, store, $axios }, inject) => {
     // 设置语言
     let language = 'en_US'
+    let coin = 'HKD'
     if (isServer) {
         let host = req.headers['host']
         if ((/^(cn|wap-cn)\./is).test(host)) {
