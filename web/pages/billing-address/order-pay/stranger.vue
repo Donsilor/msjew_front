@@ -389,7 +389,7 @@
                 @click="Way(61)"
               >
                 <div class="pay-img">
-                  <img src="../../../static/order/visapay1.png" alt="" />
+                  <img src="../../../static/order/visa.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay === 61" class="pay-price">
@@ -1389,7 +1389,7 @@
                 @click="Way(61)"
               >
                 <div class="pay-img">
-                  <img src="../../../static/order/visapay1.png" alt="" />
+                  <img src="../../../static/order/visa.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay === 61" class="pay-price">

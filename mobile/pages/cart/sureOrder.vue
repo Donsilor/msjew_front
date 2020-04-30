@@ -313,7 +313,7 @@ export default {
           des: this.LANGUAGE.cart.pay.type4Text
         },
         {
-          url: '/cart/card.png',
+          url: '/cart/up.png',
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
