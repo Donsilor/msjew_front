@@ -315,6 +315,12 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
+          url: '/cart/visa.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        },
+        {
           url: '/cart/ap.png',
           type: 82,
           title: this.LANGUAGE.cart.pay.payType3,
@@ -327,7 +333,7 @@ export default {
           des: this.LANGUAGE.cart.pay.type4Text
         },
         {
-          url: '/cart/card.png',
+          url: '/cart/up.png',
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
@@ -521,10 +527,21 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 2
+        pay = 61
+      }else if(this.typeIndex == 2){
+        pay = 82
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
       }
+<<<<<<< HEAD
 
       if(pay!==6){
+=======
+      
+      if(pay == 81 || pay == 82 || pay == 83){
+>>>>>>> b3e6f60670b2c1a8a7df1e2e3d77170372080403
         this.$toast.show(this.lang.firstLogin)
       }
       if (ind === 5) {
@@ -996,12 +1013,26 @@ export default {
       //   return
       // }
       // console.log("aaaa",this.typeIndex)
+      let pay = 0
+      if(this.typeIndex == 0){
+        pay = 6
+      }else if(this.typeIndex == 1){
+        pay = 61
+      }else if(this.typeIndex == 2){
+        pay = 82
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 7
+      }
        if (!this.isLogin) {
           if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
            return
          }
-         if(this.typeIndex!==0){
+         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4){
             this.$toast.show(this.lang.firstLogin)
            return
          }
@@ -1085,6 +1116,7 @@ export default {
               goodsCartList:data,
               invoice:this.$route.params.invoice,
               tradeType:'wap',
+              payType: pay,
               coinType:this.$store.state.coin,
               returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
             }

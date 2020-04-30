@@ -205,18 +205,23 @@
       "goPay": "支付",
       "payType0": "PayPal",
       "type0Text": "使用PayPal安全支付",
-      "payType1": "信用卡",
-      "type1Text": "在網上以您的信用卡快速安全地付款",
+      "payType1": "銀聯",
+      "type1Text": "使用中國銀聯銀行卡，安全支付",
       "payType2": "中國銀聯",
       "type2Text": "使用中國銀聯銀行卡安全支付",
       "payType3": "支付寶",
-      "type3Text": "使用支付寶安全支付",
+      "type3Text": "網上付款、方便、快捷",
       "payType4": "微信",
       "type4Text": "網上付款、方便、快捷",
       "payType5": "電匯",
       "type5Text": "以電匯方式付款將享有1.5%折扣優惠",
       "type5Text2": "注意，電子支票並非電匯",
-      "paytip":"由於Paydallor不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！"
+
+      "payType6": "Visa/MasterCard",
+      "type6Text": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
+      "paytip1":"由於支付寶暫不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！",
+      "paytip2":"由於微信暫不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！",
+      "paytip3":"由於信用卡暫不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！"
     },
     "paySuccess": {
       "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",

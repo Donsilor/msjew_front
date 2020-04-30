@@ -57,6 +57,23 @@
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
+        <!-- vise -->
+          <div
+          :class="{ 'pay-choose': payWay == 61 }"
+          class="pay-block"
+          @click="payWay = 61"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/visa.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
+          <div v-show="payWay === 61" class="pay-price">
+            {{ coinType }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 61" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+        </div>
         <!-- 支付宝 -->
         <div
           :class="{ 'pay-choose': payWay == 82 }"
@@ -125,7 +142,7 @@
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
-
+        
         <!-- <div
           :class="{ 'pay-choose': payWay == 1 }"
           class="pay-block"
@@ -212,6 +229,8 @@ export default {
         pay = 83
       }else if(this.payWay==81){
         pay = 81
+      }else if(this.payWay==61){
+        pay = 61
       }
     console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
