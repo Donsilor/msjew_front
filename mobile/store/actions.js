@@ -16,7 +16,7 @@ function makeCartGoodGroups (cart = []) {
     const result = []
     const localData = {}
     cart.forEach(item => {
-        item.goodsId=item.goodsDetailsId
+        item.goodsId = item.goodsDetailsId
         if (localData.hasOwnProperty(item.localSn)) {
             localData[item.localSn].data.push(item)
         } else {
@@ -73,7 +73,7 @@ export default {
         })
     },
     //根据IP缓存本地默认 地区，语言，货币
-    localAreaSetting({ $axios, state, getters, commit, dispatch }){
+    /*localAreaSetting({ $axios, state, getters, commit, dispatch }){
         let areaId = Cookie.get('areaId')
         let language = Cookie.get('language')
         let coin = Cookie.get('coin')        
@@ -113,6 +113,33 @@ export default {
             console.error(err)
         })
         
+    },*/
+    localAreaSetting ({ $axios, state, getters, commit, dispatch }) {
+        let areaId = Cookie.get('areaId')
+        //刷新时间控制
+        let refreshAreaTime = parseInt(localStorage.getItem('refreshAreaTime'));
+        let nowDate = parseInt((new Date()).getTime() / 1000)
+        let refreshOnceTime = 60  //过期后每隔多少秒刷新地区    
+        if ((nowDate - refreshAreaTime < refreshOnceTime)) {
+            return
+        }
+        this.$axios({
+            method: `get`,
+            url: `/web/site/setting`
+        }).then(data => {
+            let setFlag = false
+            if (data.area_id != areaId) {
+                setFlag = true
+                commit('setAreaId', data.area_id)
+            }
+            localStorage.setItem('refreshAreaTime', nowDate)
+            if (setFlag) {
+                location.reload();
+            }
+        }).catch(err => {
+            console.error(err)
+        })
+
     },
     nuxtServerInit ({ commit }, { req, app }) {
         // console.log('nuxtServerInit======>')
@@ -222,7 +249,7 @@ export default {
         let sendData = []
         groups.forEach(group => {
             let data = group.data || []
-            console.log("data",data)
+            console.log("data", data)
             data = data.map(good => {
                 let item = {}
                 item.createTime = group.createTime
@@ -333,13 +360,13 @@ export default {
         //console.log('goods-------->', goods)
 
         return this.$axios({
-                method: 'post',
-                url: `/web/member/cart/add`,
-                data: {
-                    // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
-                    goodsCartList: goods
-                }
-            })
+            method: 'post',
+            url: `/web/member/cart/add`,
+            data: {
+                // addType: 1, // 类别(1:普通批量添加,2:登录批量添加
+                goodsCartList: goods
+            }
+        })
             .then(data => {
                 // console.log("加入购物车", data)
                 // 重新请求购物车数量（和购物车列表）
@@ -695,9 +722,9 @@ export default {
         return this.$axios({
             method: 'post',
             url: `/web/member/cart/local`,
-            data:{
-                goodsCartList:sendData
-            } 
+            data: {
+                goodsCartList: sendData
+            }
         })
             .then(data => {
                 return makeCartGoodGroups(data)
@@ -1866,39 +1893,39 @@ export default {
 
 
     // 获取用户数据
-  getSiteSetting ({ $axios, state, commit, dispatch },type='') {
-    return this.$axios({
-        method: 'get',
-        url: '/web/site/setting'
-    })
-        .then(res => {
-            // console.log("个人",res.data)
-            if(type == 'coin'){
-                commit('setCoin', res.data.currency)
-                localStorage.setItem('coin', res.data.currency)
-                return res.data.currency
-            }else if(type == 'language'){
-                commit('setLanguage', res.data.language)
-                localStorage.setItem('language', res.data.language)
-                return res.data.language
-            }else if(type == 'area'){
-                commit('setAreaId', res.data.area_id)
-                localStorage.setItem('areaId', res.data.area_id)
-                return res.data.area_id
-            }else{
-                commit('setCoin', res.data.currency)
-                commit('setLanguage', res.data.language)
-                localStorage.setItem('coin', res.data.currency)
-                localStorage.setItem('language', res.data.language)
-                return res.data
-            }
-            
-            
-            
-            
+    getSiteSetting ({ $axios, state, commit, dispatch }, type = '') {
+        return this.$axios({
+            method: 'get',
+            url: '/web/site/setting'
         })
-        .catch(err => {
-            return Promise.reject(err)
-        })
-}
+            .then(res => {
+                // console.log("个人",res.data)
+                if (type == 'coin') {
+                    commit('setCoin', res.data.currency)
+                    localStorage.setItem('coin', res.data.currency)
+                    return res.data.currency
+                } else if (type == 'language') {
+                    commit('setLanguage', res.data.language)
+                    localStorage.setItem('language', res.data.language)
+                    return res.data.language
+                } else if (type == 'area') {
+                    commit('setAreaId', res.data.area_id)
+                    localStorage.setItem('areaId', res.data.area_id)
+                    return res.data.area_id
+                } else {
+                    commit('setCoin', res.data.currency)
+                    commit('setLanguage', res.data.language)
+                    localStorage.setItem('coin', res.data.currency)
+                    localStorage.setItem('language', res.data.language)
+                    return res.data
+                }
+
+
+
+
+            })
+            .catch(err => {
+                return Promise.reject(err)
+            })
+    }
 }
