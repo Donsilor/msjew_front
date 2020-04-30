@@ -51,12 +51,13 @@ export default function (content) {
         } else {
             store.commit('setCoin', _coin)
         }
+        /*
         if (language) {
             resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
             store.commit('setLanguage', language)
         } else {
             store.commit('setLanguage', _language)
-        }
+        }*/
         if (areaId) {
             resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
             store.commit('setAreaId', areaId)
