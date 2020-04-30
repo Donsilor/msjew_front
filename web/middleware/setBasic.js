@@ -9,72 +9,50 @@ export default function (content) {
 
     if (isServer) {
         const resetCookie = []
-        let _language = 'zh_TW' //默认语言
-        let _coin = 'HKD'  //默认货币
-        let _areaId = 2 //默认地区
-        let coin = ''
+        let _language = 'zh_TW'
+        let _coin = 'HKD'
+        let _areaId = 2
+
         let language = ''
-        let lastUrl = ''
+        let coin = ''
         let areaId = ''
+        let lastUrl = ''
         let host = req.headers['host']
-        //默认语言和默认货币
-        if ((/^(cn|wap-cn)\./is).test(host)) {
-            _language = 'zh_CN'
-            _coin = 'HKD'
-            _areaId = 1
-        } else if ((/^(us|wap-us)\./is).test(host)) {
-            _language = 'en_US'
-            _coin = 'USD'
-            _areaId = 99
-        }
 
         const expiresDate = new Date()
         expiresDate.setDate(expiresDate.getDate() + 365)
         const expires = expiresDate.toUTCString()
 
-        /*if (req.headers.cookie) {
+        if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')
             coin = cookie.coin || ''
             language = cookie.language || ''
             lastUrl = cookie.lastUrl || ''
             areaId = cookie.areaId || ''
-        }*/
+        }
 
+        //默认语言和默认货币
+        if ((/^(cn|wap-cn)\./is).test(host)) {
+            language = 'zh_CN'
+            coin = 'HKD'
+            areaId = 1
+        } else if ((/^(us|wap-us)\./is).test(host)) {
+            language = 'en_US'
+            coin = 'USD'
+            areaId = 99
+        }
         if (coin) {
-            let trueCoin = false
-            for (let n = 0, length = coinOptions.length; n < length; n++) {
-                if (coin === coinOptions[n].code) {
-                    trueCoin = true
-                    break
-                }
-            }
-            if (!trueCoin) {
-                coin = coinOptions[0].code
-            }
             resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
             store.commit('setCoin', coin)
         } else {
-            store.commit('setCoin', _coin)
+            store.commit('setCoin', _language)
         }
-
         if (language) {
-            let trueLanguage = false
-            for (let n = 0, length = languageOptions.length; n < length; n++) {
-                if (language === languageOptions[n].code) {
-                    trueLanguage = true
-                    break
-                }
-            }
-            if (!trueLanguage) {
-                language = languageOptions[0].code
-            }
-            console.log('language:Setbasic1:', language)
             resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
             store.commit('setLanguage', language)
         } else {
             store.commit('setLanguage', _language)
         }
-
         if (areaId) {
             resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
             store.commit('setAreaId', areaId)
