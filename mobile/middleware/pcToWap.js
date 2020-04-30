@@ -706,14 +706,7 @@ function queryParams (data) {
         }, 
 
  
-		   // 对戒列表
-        {
-          'mobileUrl':/^\/marriage-ring\/pair-ring\/?/,
-          'pcUrl':`/wedding-rings/classic-series`,
-		      'params':{
-            'param':'none',          
-          },
-        },
+		   
 		
 		  // 对戒 详情
         {
@@ -724,7 +717,16 @@ function queryParams (data) {
 			      'ringType':'ringType',
           },
         },
-		
+    
+        
+        // 对戒列表
+        {
+          'mobileUrl':/^\/marriage-ring\/pair-ring\/?/,
+          'pcUrl':`/wedding-rings/classic-series`,
+		      'params':{
+            'param':'none',          
+          },
+        },
 		
       // 裸钻
       {
@@ -1041,20 +1043,18 @@ function queryParams (data) {
                 if(params[key] == 'none'){
                   href.splice(1,1)
                 }				  
+               
                 if(typeof query1[key] !== 'undefined') {
-                  // query2[params[key]] = unescape(query1[key])
-                  url = url.replace('{'+key+'}',unescape(query1[key]))
+                  query2[params[key]] = unescape(query1[key])
                 }else{
-                  query2[key] = unescape(params[key])
-                }
+				           query2[key] = unescape(params[key])
+				         }
               })
-               param = queryParams(query2)
-              // href[1] = queryParams(query2)
+               href[1] = queryParams(query2)
             }
 
             if(href.length>1) {
-              url = url + '?' + param 
-              // url = url + '?' + param + href[1]
+              url = url + '?' + param + href[1]
             }
             
             redirect(url)

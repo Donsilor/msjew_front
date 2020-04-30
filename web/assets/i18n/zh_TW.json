@@ -961,6 +961,8 @@
 			"toPayWait": "付款中",
 			"wireTransferGuide": "電匯指引",
 			"orderPrice": "訂單總額",
+      "ultimatelyPay": "實付金額",
+      "NeedPay": "需付金額",
 			"confirmReceipt": "確認收貨",
 			"toEvaluate": "去評價",
 			"checkEvaluate": "查看評價",

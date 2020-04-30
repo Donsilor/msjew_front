@@ -88,7 +88,7 @@
                 {{ $t(`${lang}.cancelOrder`) }}
               </button></a
             >
-            <nuxt-link :to="goToPay(o.id, o.coinCode, o.orderAmount, o.paymentType)"
+            <nuxt-link :to="goToPay(o.id, o.coinCode, o.payAmount, o.paymentType)"
               ><div v-if="o.payChannel !== 1" class="btn-a">
               {{ $t(`${lang}.toPay`) }}
               </div>
@@ -100,6 +100,10 @@
             >
               {{ $t(`${lang}.wireTransferGuide`) }}
             </div>
+            <span
+              >{{ $t(`${lang}.NeedPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
@@ -113,6 +117,10 @@
               </button>
             </nuxt-link>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
@@ -124,6 +132,10 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
+            <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
@@ -152,8 +164,12 @@
               {{ $t(`${lang}.confirmReceipt`) }}
             </div>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatNumber(o.orderAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -165,8 +181,12 @@
               </button>
             </nuxt-link>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatNumber(o.orderAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -181,8 +201,12 @@
               {{ $t(`${lang}.toEvaluate`) }}
             </div>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatNumber(o.orderAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -197,8 +221,12 @@
             <!--              {{ $t(`${lang}.checkEvaluate`) }}-->
             <!--            </button>-->
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatNumber(o.orderAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -210,10 +238,12 @@
               </button>
             </nuxt-link>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b style="color: #333;"
-                >{{ o.coinCode }} {{ formatNumber(o.orderAmount) }}</b
-              ></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
         </div>
@@ -687,7 +717,7 @@ div {
           p:nth-child(3) {
             float: right;
             span {
-              color: #f29b87;
+              color: #f29b87 !important;
             }
           }
         }
@@ -787,7 +817,7 @@ div {
             font-size: 14px;
             line-height: 38px;
             color: #333333;
-            margin-right: 50px;
+            margin-right: 34px;
             b {
               color: #f29b87;
               font-size: 20px;

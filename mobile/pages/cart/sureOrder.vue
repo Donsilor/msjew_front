@@ -206,7 +206,7 @@
 					  <div>
 					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
 					  </div>
-					  <span class="color-pink">-{{ coin }} {{ item.useAmount }}</span>
+					  <span class="color-pink">-{{ coin }} {{ formatMoney(item.useAmount) }}</span>
 					</li>
           <li v-show="preferFee > 0">
             <div>
@@ -251,11 +251,11 @@
           <li class="order-pay">
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ orderTotalAmount }}</span>
+            ><span>{{ coin }} {{ formatMoney(orderTotalAmount) }}</span>
           </li>
           <li class="order-pay" style="border-top: 0;margin-top: 0;">
             <span>{{ lang.NeedPay }}</span
-            ><span>{{ coin }} {{ ultimatelyPay }}</span>
+            ><span>{{ coin }} {{ formatMoney(ultimatelyPay) }}</span>
           </li>
         </ul>
       </div>
@@ -899,8 +899,8 @@ export default {
               this.useAmount = JSON.parse(JSON.stringify(res.cards))
             }
 
-            this.orderTotalAmount = res.orderAmount;
-            this.ultimatelyPay = res.payAmount;
+            this.orderTotalAmount = res.order_amount;
+            this.ultimatelyPay = res.order_amount;
             this.currency = res.currency;
 
             this.planDays = this.allFee.planDays
@@ -1040,7 +1040,7 @@ export default {
           }
         })
           .then(res => {
-            // console.log("总额",res)
+            console.log("总额",res)
             if(res.payStatus == 1){
               this.$toast.show(this.lang.submitSuccessfully);
               this.$router.replace({

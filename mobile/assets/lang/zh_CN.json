@@ -895,6 +895,8 @@
         "orderNum": "订单编号",
         "orderNumber": "订单编号",
         "orderCount": "订单总额",
+        "ultimatelyPay": "实付金额",
+        "NeedPay": "需付金额",
         "cancelOrder": "取消订单",
         "toPay": "去付款",
         "toPayWait": "付款中",

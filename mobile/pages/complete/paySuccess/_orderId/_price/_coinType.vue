@@ -19,7 +19,7 @@
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
           <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ info.coinCode }}</span>
-            {{ info.orderAmount }}
+            {{ formatMoney(info.payAmount) }}
           </p>
         </div>
         <div class="code">
@@ -53,7 +53,7 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ info.coinCode }}{{ formatMoney(info.orderAmount) }}</span>
+              <span>{{ info.coinCode }}{{ formatMoney(info.payAmount) }}</span>
             </div>
           </li>
           <li>
@@ -72,7 +72,7 @@
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
           <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ orderinfo.coinCode }}</span>
-            {{ orderinfo.orderAmount }}
+            {{ formatMoney(orderinfo.orderAmount) }}
           </p>
         </div>
         <div class="code">
@@ -212,7 +212,7 @@ export default {
         })
         .then(data => {})
         .catch(err => {})
-      } else {        
+      } else {
         setTimeout(this.payVerify, 2000);
       }
   },
@@ -302,7 +302,7 @@ export default {
             }
         })
         .then(data => {
-          if(data.verification_status === 'completed') {            
+          if(data.verification_status === 'completed') {
             this.goPaySuccess()
           } else if(data.verification_status === 'failed') {
             this.goPayFailed()

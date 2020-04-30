@@ -83,7 +83,7 @@ export default {
       info2:{
         orderId:'',
         coinType:'',
-        orderAmount:''
+        payAmount:''
       },
       list:[]
     }
@@ -122,10 +122,10 @@ export default {
           orderId: this.$route.query.orderId,
         }
       })
-        .then(res => {//http://localhost:8328/cart/pay?info=%7B%22coinType%22%3A%22HKD%22,%22orderAmount%22%3A%221855.16%22,%22orderId%22%3A280%7D
+        .then(res => {//http://localhost:8328/cart/pay?info=%7B%22coinType%22%3A%22HKD%22,%22payAmount%22%3A%221855.16%22,%22orderId%22%3A280%7D
           this.infos.orderId=res.id
           this.infos.coinType=res.coinCode
-          this.infos.orderAmount=res.orderAmount
+          this.infos.payAmount=res.payAmount
           console.log(res, 'e7etry')
           this.info = res
         })
@@ -220,7 +220,7 @@ export default {
                 name: 'complete-paySuccess-orderId-price-coinType',
                 params: {
                   orderId: this.info.orderId,
-                  price: this.info.orderAmount,
+                  price: this.info.payAmount,
                   coinType: this.info.coinType
                 }
               })
