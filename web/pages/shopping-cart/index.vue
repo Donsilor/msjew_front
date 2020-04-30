@@ -223,6 +223,7 @@ export default {
       this.totalPrice=0
       this.allTick=false  
       this.tickNum = 0  
+      window.location.reload()
     },
     handleScroll(e){
         // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
@@ -483,15 +484,23 @@ export default {
 
 <style lang="less" scoped>
 .positons{
-  position: fixed!important;
-  z-index: 999;
-  bottom:0;
+//  width: 1360px;
+//  margin: 0 auto;
 }
 .cart2{
+     position: fixed!important;
+  z-index: 999;
+  bottom:0;
+   width: 100%;
+    // text-align: left;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: #ffffff;
     .cart-bot-bar {
       position: relative;
       // width: 1300px;
-      width: 100%;
+       width: 1300px;
+      margin: 0 auto;
       height: 100px;
       background-color: #ffffff;
       display: flex;
@@ -607,6 +616,40 @@ export default {
       }
       .ban {
         background: #ccc;
+      }
+    }
+    .cart-radio {
+      position: relative;
+      .free-check {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        width: 16px;
+        height: 16px;
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(187, 187, 187, 1);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .icongou {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: rgba(170, 138, 123, 1);
+        border-radius: 2px;
+        color: #fff;
+        font-size: 16px;
+        line-height: 16px;
+        cursor: pointer;
       }
     }
   }
