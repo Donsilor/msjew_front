@@ -441,7 +441,7 @@ export default {
           }
           adNum++
         } else {
-          const category = _this.getCategoryById(item.categoryId)
+          const category = _this.getCategoryById(parseInt(item.categoryId))
           const categoryName =
             category && category.qualityName ? category.qualityName : 'other'
           item.itemType = 'product'
@@ -458,7 +458,6 @@ export default {
     }
   },
   mounted() {
-    console.log(3333,this.searchConditions.categoryId,this.all_category)
     const _this = this
     var priceRange_val =this.$route.query.priceRange
     if(priceRange_val !== undefined){
