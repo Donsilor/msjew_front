@@ -162,7 +162,15 @@ export default {
       console.log("aaa",this.typeIndex)
       if(this.info.coinType === 'USD'){
         if(this.typeIndex == 1){
-          this.$toast.show(this.lang.paytip)
+          this.$toast.show(this.lang.paytip1)
+          return
+        }
+        if(this.typeIndex == 2){
+          this.$toast.show(this.lang.paytip2)
+          return
+        }
+        if(this.typeIndex == 3){
+          this.$toast.show(this.lang.paytip3)
           return
         }
       }
