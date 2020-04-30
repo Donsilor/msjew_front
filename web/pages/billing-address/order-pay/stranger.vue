@@ -449,7 +449,23 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
-
+              <!-- vise -->
+              <div
+                :class="{ 'pay-choose': payWay == 61 }"
+                class="pay-block"
+                @click="Way(61)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/visapay1.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.UnionPay`) }}</div>
+                <div v-show="payWay === 61" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 61" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
@@ -1431,7 +1447,23 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
-
+              <!-- vise -->
+              <div
+                :class="{ 'pay-choose': payWay == 61 }"
+                class="pay-block"
+                @click="Way(61)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/visapay1.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.UnionPay`) }}</div>
+                <div v-show="payWay === 61" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 61" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
