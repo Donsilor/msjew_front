@@ -295,6 +295,12 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
+          url: '/cart/visa.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        },
+        {
           url: '/cart/ap.png',
           type: 82,
           title: this.LANGUAGE.cart.pay.payType3,
@@ -488,10 +494,16 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 2
+        pay = 61
+      }else if(this.typeIndex == 2){
+        pay = 82
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
       }
       
-      if(pay!==6){
+      if(pay == 81 || pay == 82 || pay == 83){
         this.$toast.show(this.lang.firstLogin)
       }
       if (ind === 5) {
@@ -827,7 +839,7 @@ export default {
            this.$toast.show(this.lang.toast4)
            return
          }
-         if(this.typeIndex!==0){
+         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4){
             this.$toast.show(this.lang.firstLogin)
            return
          }

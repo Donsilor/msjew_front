@@ -201,6 +201,8 @@
       "type4Text": "Easier and safer online payment",
       "payType5": "Telegraphic Transfer (T/T)",
       "type5Text": "Extra 1.5% discount for T/T payment.",
+      "payType6": "Visa / MasterCard",
+      "type6Text": "Pay securely with Visa / MasterCard",
       "type5Text2": "Please note that e-Cheques are not T/T.",
       "paytip1": "Since Alipay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "paytip2": "Since WeChat Pay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
