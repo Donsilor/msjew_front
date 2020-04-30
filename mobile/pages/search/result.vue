@@ -93,7 +93,9 @@ export default {
   },
  created(){
     const _this = this
-    _this.show()
+    _this.$nextTick(() => {
+      _this.show()
+    })
  },
   mounted(){
     const _this = this
