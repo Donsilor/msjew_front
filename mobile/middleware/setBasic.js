@@ -24,8 +24,8 @@ export default function ({ req, res, app, store }) {
 
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')
-            coin = cookie.coin || ''
-            language = cookie.language || ''
+            //coin = cookie.coin || ''
+            //language = cookie.language || ''
             lastUrl = cookie.lastUrl || ''
             areaId = cookie.areaId || ''
         }
@@ -44,7 +44,7 @@ export default function ({ req, res, app, store }) {
             resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
             store.commit('setCoin', coin)
         } else {
-            store.commit('setCoin', _language)
+            store.commit('setCoin', _coin)
         }
         if (language) {
             resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
