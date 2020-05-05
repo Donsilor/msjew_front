@@ -19,12 +19,12 @@
              <span class="price-num">1</span>
            </div>
 
-           <div class="rule">满100元使用</div>
-           <div class="btn">点击使用</div>
-           <div class="time">活动时间：2020.2.1- 2020.2.2</div>
+           <div class="rule">{{ $t(`${lang}.title`) }}</div>
+           <div class="btn">{{ $t(`${lang}.use`) }}</div>
+           <div class="time">{{ $t(`${lang}.time`) }}：2020.2.1- 2020.2.2</div>
 
-           <!-- 失效 -->
-           <div class="lose-efficacy" v-if="item.loseEfficacy">已失效</div>
+           <!-- 失效 class="lose-efficacy" -->
+           <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.loseEfficacy">{{ $t(`${lang}.loseEfficacy`) }}</div>
         </div>
       </div>
     </div>
@@ -33,12 +33,13 @@
 </template>
 
 <script>
-const lang = 'personal.account'
+const lang = 'coupon'
 export default {
   name: 'Index',
   data() {
     return {
       lang,
+	  language: '',
       couponList: [
         {
           price: 5,
@@ -60,10 +61,45 @@ export default {
           timeStar: '2020.2.1',
           timeEnd: '2020.2.2',
           loseEfficacy: false
+        },
+        {
+          price: 5,
+          restrict: 100,
+          timeStar: '2020.2.1',
+          timeEnd: '2020.2.2',
+          loseEfficacy: false
+        },
+        {
+          price: 5,
+          restrict: 100,
+          timeStar: '2020.2.1',
+          timeEnd: '2020.2.2',
+          loseEfficacy: false
+        },
+        {
+          price: 5,
+          restrict: 100,
+          timeStar: '2020.2.1',
+          timeEnd: '2020.2.2',
+          loseEfficacy: false
         }
       ]
 
     }
+  },
+  mounted(){
+	  this.language = this.getCookie('language')
+  },
+  methods: {
+	  getCookie(cname) {
+	    const name = cname + '='
+	    const ca = document.cookie.split(';')
+	    for (let i = 0; i < ca.length; i++) {
+	      const c = ca[i].trim()
+	      if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+	    }
+	    return ''
+	  }
   }
 }
 </script>
@@ -268,6 +304,7 @@ export default {
   color: #cdad75;
   border-radius: 5px;
   box-shadow: 0 1px 0 #9C999C,0 2px 0 #D6D5D6,0 3px 0 #E3E1E3,0 4px 0 #D6D5D6,0 5px 0 #EDECED,0 6px 0 #F9F9F9;
+  margin-bottom: 30px;
   
   .line-box{
     width: 258px;
@@ -359,5 +396,9 @@ export default {
 }
 .list:nth-child(3n){
   margin-right: 0;
+}
+
+.list .lose-efficacy.fontSize{
+	font-size: 16px;
 }
 </style>

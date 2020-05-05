@@ -7,9 +7,9 @@
     <div class="tip clf">
       <div class="tip-list fl">
         <div class="tip-text fr">
-          <div class="status">#正在活动中#</div>
-          <div class="text1">优惠券使用规则：</div>
-          <div class="text1">仅支持指定钻饰成品使用（具体商品请看商品详情）</div>
+          <div class="status">#{{ $t(`${lang}.status`) }}#</div>
+          <div class="text1">{{ $t(`${lang}.text1`) }}</div>
+          <div class="text1">{{ $t(`${lang}.text2`) }}</div>
         </div>
       </div>
       <div class="tip-list fl">
@@ -20,9 +20,9 @@
                 <span>元</span>
               </div>
             </div>
-            <div class="text1">优惠券</div>
-            <div class="text2">满199元使用</div>
-            <div class="btn">立即领取</div>
+            <div class="text1">{{ $t(`${lang}.discountCoupon`) }}</div>
+            <div class="text2">{{ $t(`${lang}.full`) }}198{{ $t(`${lang}.use`) }}</div>
+            <div class="btn">{{ $t(`${lang}.get`) }}</div>
           </div>
 
           <div class="card-list fl">
@@ -31,9 +31,9 @@
                 <span>元</span>
               </div>
             </div>
-            <div class="text1">优惠券</div>
-            <div class="text2">满199元使用</div>
-            <div class="btn">立即领取</div>
+            <div class="text1">{{ $t(`${lang}.discountCoupon`) }}</div>
+            <div class="text2">{{ $t(`${lang}.full`) }}198{{ $t(`${lang}.use`) }}</div>
+            <div class="btn">{{ $t(`${lang}.get`) }}</div>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
         </div>
 
         <div class="sign">
-          <div class="text">优惠券</div>
+          <div class="text">{{ $t(`${lang}.discountCoupon`) }}</div>
         </div>
       </div>
     </div>
@@ -66,9 +66,11 @@
 </template>
 
 <script>
+	const lang = 'subject.favourable'
   export default{
     data(){
       return{
+				lang,
         discountsList: [
           { price: '22222', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},
           { price: '11111', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},

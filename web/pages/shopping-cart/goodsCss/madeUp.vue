@@ -37,6 +37,18 @@
             </div>
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
+		  
+		  <!-- 原金额 -->
+		  <div class="good-price old-price">
+		    {{ g.coinType }}
+		    {{
+		      formatNumber(
+		        g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+		      )
+		    }}
+		  </div>
+		  
+		  <!-- 优惠后金额 -->
           <div class="good-price">
             {{ g.coinType }}
             {{
@@ -87,6 +99,18 @@
             </span>
           </div>
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
+		  
+		  <!-- 原金额 -->
+		  <div class="good-price old-price">
+		    {{ g.coinType }}
+		    {{
+		      formatNumber(
+		        g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+		      )
+		    }}
+		  </div>
+		  
+		  <!-- 优惠后金额 -->
           <div class="good-price">
             {{ g.coinType }}
             {{
@@ -229,7 +253,7 @@ export default {
       }
       .good-information {
         width: 185px;
-        margin-right: 83px;
+        margin-right: 66px;
         .infos {
           width: 100%;
           display: flex;
@@ -249,7 +273,7 @@ export default {
         line-height: 20px;
         max-height: 60px;
         color: #666;
-        margin-right: 83px;
+        margin-right: 66px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -262,7 +286,8 @@ export default {
         text-align: center;
         font-size: 18px;
         color: #333;
-        margin-right: 217-60-83px;
+        // margin-right: 217-60-83px;
+        margin-right: 30px;
       }
       .good-price {
         font-family: twCenMt;
@@ -270,6 +295,7 @@ export default {
         color: #f29b87;
         width: 130px;
         text-align: center;
+		margin-right: 54px;
       }
     }
     .good-btn {
@@ -411,5 +437,9 @@ export default {
       cursor: pointer;
     }
   }
+}
+
+.old-price{
+	color: #747474 !important;
 }
 </style>

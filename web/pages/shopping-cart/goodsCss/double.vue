@@ -114,14 +114,26 @@
         <div class="couple-line" />
         
       </div>
-      <div class="good-price">
-            {{ g.coinType }}
-            {{
-              formatNumber(
-                g.data[0].ringsSimpleGoodsEntity.salePrice
-              )
-            }}
-          </div>
+			
+		<!-- 原金额 -->
+		<div class="good-price old-price">
+		  {{ g.coinType }}
+		  {{
+			formatNumber(
+			  g.data[0].ringsSimpleGoodsEntity.salePrice
+			)
+		  }}
+		</div>
+
+		<!-- 优惠后金额 -->
+		<div class="good-price">
+			{{ g.coinType }}
+			{{
+			  formatNumber(
+				g.data[0].ringsSimpleGoodsEntity.salePrice
+			  )
+			}}
+		</div>
       
       
       <!-- <div
@@ -334,7 +346,7 @@ export default {
         align-items: center;
         .good-information {
           width: 185px;
-          margin-right: 83px;
+          margin-right: 66px;
           .infos {
             width: 100%;
             display: flex;
@@ -354,7 +366,8 @@ export default {
           text-align: center;
           font-size: 18px;
           color: #333;
-          margin-right: 217-60-83px;
+          // margin-right: 217-60-83px;
+          margin-right: 30px;
         }
         .good-price {
           font-family: twCenMt;
@@ -380,6 +393,7 @@ export default {
           color: #f29b87;
           width: 130px;
           text-align: center;
+		  margin-right: 54px;
         }
     .good-btn {
       width: 80px;
@@ -501,5 +515,10 @@ export default {
       cursor: pointer;
     }
   }
+}
+
+
+.old-price{
+	color: #747474 !important;
 }
 </style>

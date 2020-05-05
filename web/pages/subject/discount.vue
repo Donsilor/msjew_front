@@ -7,23 +7,32 @@
     <div class="tip clf">
       <div class="tip-list fl">
         <div class="tip-text fr">
-          <div class="status">#正在活动中#</div>
-          <div class="text1">仅支持   ：此专题内商品使用  （具体请看商品详情）</div>
-          <div class="text1">活动时间：2020.2.14 - 2020.2.24    (过期恢复原价)</div>
-          <div class="text1">活动地区：中国大陆、中国香港 (其他地区暂不参与)</div>
+          <div class="status">#{{ $t(`${lang}.status`) }}#</div>
+          <div class="text1 clf">
+			  <span class="fl text1-title">{{ $t(`${lang}.text1`) }}</span>
+			  <span class="fl">: {{ $t(`${lang}.text2`) }}</span>
+		  </div>
+          <div class="text1 clf">
+			  <span class="fl text1-title">{{ $t(`${lang}.text3`) }}</span>
+			  <span class="fl">: {{ $t(`${lang}.text4`) }}</span>
+          </div>
+		  <div class="text1 clf">
+			  <span class="fl text1-title">{{ $t(`${lang}.text5`) }}</span>
+			  <span class="fl">: {{ $t(`${lang}.text6`) }}</span>
+		  </div>
         </div>
       </div>
       <div class="tip-list fl">
         <div class="tip-coupon fl clf">
           <div class="card-list fl">
-            <div class="card-left">折扣券</div>
+            <div class="card-left">{{ $t(`${lang}.discountCoupon`) }}</div>
             <div class="card-right">
               <div class="price-box">
                 <div class="price">
                   <span class="num">7.5</span>
-                  <span class="sign">折</span>
+                  <span class="sign">{{ $t(`${lang}.discount`) }}</span>
                 </div>
-                <div class="text">活动专场商品</div>
+                <div class="text">{{ $t(`${lang}.explain`) }}</div>
               </div>
             </div>
           </div>
@@ -40,22 +49,22 @@
             <img src="../../static/adt/image1564544333790.png" alt="">
           </div>
           <div class="price old-price">
-            <div class="currency"><span>原价</span>HKD</div>
+            <div class="currency"><span>{{ $t(`${lang}.oldPrice`) }}</span>HKD</div>
             <div class="num">{{ formatMoney(item.price) }}</div>
           </div>
           <div class="price">
-            <div class="currency"><span>折后加</span>HKD</div>
+            <div class="currency"><span>{{ $t(`${lang}.newPrice`) }}</span>HKD</div>
             <div class="num">{{ formatMoney(item.price) }}</div>
           </div>
 
           <div class="name">
-            <span class="icon">7.5折</span>
+            <span class="icon">7.5{{ $t(`${lang}.discount`) }}</span>
             <div class="text">{{item.text}}</div>
           </div>
         </div>
 
         <div class="sign">
-          <div class="text">7.5折</div>
+          <div class="text">7.5{{ $t(`${lang}.discount`) }}</div>
         </div>
       </div>
     </div>
@@ -63,9 +72,11 @@
 </template>
 
 <script>
+	const lang = 'subject.discount'
   export default{
     data(){
       return{
+		lang,
         discountsList: [
           { price: '22222', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},
           { price: '11111', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},
@@ -113,6 +124,10 @@
           line-height: 28px;
           padding-left: 6px;
           box-sizing: border-box;
+		  
+		  .text1-title{
+			  width: 100px;
+		  }
         }
       }
       .tip-coupon{

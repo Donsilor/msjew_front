@@ -304,9 +304,6 @@ export default {
       text-align: center;
       margin-right: 54px;
     }
-    .good-price.old-price{
-      // margin-right: 54px;
-    }
     .good-btn {
       width: 80px;
       height: 21px;
@@ -427,5 +424,9 @@ export default {
       cursor: pointer;
     }
   }
+}
+
+.old-price{
+	color: #747474 !important;
 }
 </style>

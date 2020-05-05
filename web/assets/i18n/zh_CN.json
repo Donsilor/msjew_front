@@ -2569,6 +2569,34 @@
     "limit1": "满",
     "limit2": "元使用",
     "use": "点击使用",
-    "time": "活动时间"
+    "time": "活动时间",
+	"loseEfficacy": "已失效"
+  },
+  "subject": {
+	  "discount":{
+		  "discountCoupon": "折扣券",
+		  "discount": "折",
+		  "explain": "活动专场商品",
+		  "oldPrice": "原价",
+		  "newPrice": "折后价",
+		  "": "五折起售",
+		  "": "嗨翻全场   领劵抢购",
+		  "status": "正在活动中",
+		  "text1": "仅支持",
+		  "text2": "此专题内商品使用  （具体请看商品详情）",
+		  "text3": "活动时间",
+		  "text4": "(过期恢复原价)",
+		  "text5": "活动地区",
+		  "text6": "中国大陆、中国香港 (其他地区暂不参与)"
+	  },
+	  "favourable":{
+		  "discountCoupon": "优惠券",
+		  "full": "满",
+		  "use": "元使用",
+		  "get": "立即领取",
+		  "status": "正在活动中",
+		  "text1": "优惠券使用规则：",
+		  "text2": "仅支持指定钻饰成品使用（具体商品请看商品详情）"
+	  }
   }
 }

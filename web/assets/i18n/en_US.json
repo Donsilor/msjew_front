@@ -2551,6 +2551,34 @@
     "limit1": "Full ",
     "limit2": "To Use",
     "use": "Click On The Use",
-    "time": "Activity Time"
+    "time": "Activity Time",
+	"loseEfficacy": "Lost Efficacy"
+  },
+  "subject": {
+  	  "discount":{
+  	  	  "discountCoupon": "折扣券",
+  	  	  "discount": "折",
+  	  	  "explain": "活動專場商品",
+  	  	  "oldPrice": "原價",
+  	  	  "newPrice": "折後價",
+  	  	  "": "五折起售",
+  	  	  "": "嗨翻全场   领劵抢购",
+  	  	  "status": "正在活動中",
+  	  	  "text1": "僅支持",
+  	  	  "text2": "此專題內商品使用  （具體請看商品詳情）",
+  	  	  "text3": "活動時間",
+  	  	  "text4": "(過期恢復原價)",
+  	  	  "text5": "活動地區",
+  	  	  "text6": "中國大陸、中國香港 (其他地區暫不參與)"
+  	  },
+	  "favourable":{
+		  "discountCoupon": "優惠券",
+		  "full": "滿",
+		  "use": "元使用",
+		  "get": "立即領取",
+		  "status": "正在活動中",
+		  "text1": "優惠券使用規則：",
+		  "text2": "僅支持指定鉆飾成品使用（具體商品請看商品詳情）"
+	  }
   }
 }
