@@ -98,6 +98,17 @@
             <!--        语言切换-->
             <div class="item language">
               <el-dropdown
+                v-if="this.$store.state.platform === 30"
+                type="primary"
+
+                placement="bottom"
+                @command="setLanguage"
+              >
+                <span class="row-flex align-item-center el-dropdown-link span">
+                  English
+                </span>
+              </el-dropdown>
+              <el-dropdown
                 type="primary"
 
                 placement="bottom"
