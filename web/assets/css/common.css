@@ -714,3 +714,7 @@ color-red {
   text-decoration: line-through;
   margin-right: 16px;
 }
+
+.list-discount-icon2.padding{
+  padding: 0 2px;
+}

@@ -25,6 +25,9 @@ export default function({ req, res, app, store }) {
 
   // 金額按千位逗號分隔
   Vue.prototype.formatMoney = Helpers.formatMoney
+  
+  // 打折由百分比换成小数点
+  Vue.prototype.discountConversion = Helpers.discountConversion
 
   //  公共样式顶部返回按钮的函数
   Vue.prototype.goBack = function(router) {

@@ -11,7 +11,7 @@
 		<div class="right-title">
 			<span class="discount-icon fl">7.5折</span>
 			<span class="favourable-icon fl">￥</span>
-			
+
 			<h2 class="product-name">
 			  {{ info.goodsName }}
 			</h2>
@@ -118,7 +118,7 @@
             </div>
           </li>
         </ul>
-		
+
 		<!-- 折扣活动 -->
 		<div class="discount-box">
 			<div class="discount-active">
@@ -128,13 +128,13 @@
 				</div>
 				<div class="time">活动时间：2020.4.9</div>
 			</div>
-			
+
 			<div class="discount-price">
 				<span class="old-price">原   价HKD  2,222,22</span>
 				<span class="new-price">折后价HKD  2,222,22</span>
 			</div>
 		</div>
-		
+
 		<!-- 优惠活动 -->
 		<div class="favourable-box">
 			<div class="discount-active">
@@ -145,13 +145,13 @@
 				</div>
 				<div class="time">活动时间：2020.4.9</div>
 			</div>
-			
+
 			<!-- <div class="discount-price">
 				<span class="old-price">原   价HKD  2,222,22</span>
 				<span class="new-price">折后价HKD  2,222,22</span>
 			</div> -->
 		</div>
-		
+
         <div class="product-price">
           <span class="coin">
             {{ info.coinType }}

@@ -202,6 +202,12 @@ class Helpers {
     if (type === 0 && num.split('.')[1] === '00') num = num.split('.')[0]
     return num
   }
+
+  // 折扣换算
+  discountConversion(num){
+    num = num/10
+    return num
+  }
 }
 
 export default new Helpers()
