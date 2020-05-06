@@ -667,7 +667,10 @@
       "noHotRecommend": "No hot searches",
       "history": "Search history",
       "noResult": "No search history",
-      "cleanHistory": "Reset search history"
+      "cleanHistory": "Reset search history",
+      "rings": "Rings",
+      "necklaces": "Necklaces",
+      "bracelets": "Bracelets"
     },
     "result": {
       "back": "Back",

@@ -667,7 +667,10 @@
         "noHotRecommend": "暂无热门搜索推荐",
         "history": "搜索历史",
         "noResult": "暂无搜索记录",
-        "cleanHistory": "清空搜索记录"
+        "cleanHistory": "清空搜索记录",
+        "rings":"戒指",
+        "necklaces":"项链",
+        "bracelets":"手链"
       },
       "result": {
         "back": "返回",
