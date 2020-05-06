@@ -109,6 +109,7 @@
                 </span>
               </el-dropdown>
               <el-dropdown
+              v-else
                 type="primary"
 
                 placement="bottom"
