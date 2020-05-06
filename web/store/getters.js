@@ -77,5 +77,15 @@ export default {
             host = 'http://' + host
         }
         return host
+    },
+    platform () {
+        let host = window.location.host;
+        let platform = 1 //默认 港澳台
+        if ((/^cn\./).test(host)) {
+            platform = 2 //大陆
+        } else if ((/^us\./).test(host)) {
+            platform = 3 //美国
+        }
+        return platform
     }
 }
