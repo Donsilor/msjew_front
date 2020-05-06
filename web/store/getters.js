@@ -80,11 +80,11 @@ export default {
     },
     platform () {
         let host = window.location.host;
-        let platform = 1 //默认 港澳台
+        let platform = 10 //默认 港澳台
         if ((/^cn\./).test(host)) {
-            platform = 2 //大陆
+            platform = 20 //大陆
         } else if ((/^us\./).test(host)) {
-            platform = 3 //美国
+            platform = 30 //美国
         }
         return platform
     }

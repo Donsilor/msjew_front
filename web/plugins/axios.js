@@ -9,7 +9,7 @@ export default function ({
         config.headers['x-api-language'] = store.state.language || ''
         config.headers['x-api-area'] = store.state.areaId || '' // 当前所属地区
         config.headers['x-api-server'] = process.server ? 1 : 0 //是否是服务器端请求
-        config.headers['x-api-platform'] = 1 //1=>PC端
+        config.headers['x-api-platform'] = store.state.platform || '' //10=>PC-港澳台 20=>PC-大陆 30=》PC-美国
         // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
         return config
     })

@@ -9,24 +9,29 @@ export default ({ req, app, store, $axios }, inject) => {
     let language = 'en_US'
     let coin = 'HKD'
     let areaId = 99
+    let platform = 11
     if (isServer) {
         let host = req.headers['host']
         if ((/^(cn|wap-cn)\./is).test(host)) {
             language = 'zh_CN'
             coin = 'HKD'
             areaId = 1
+            platform = 21 //移动-大陆
         } else if ((/^(us|wap-us)\./is).test(host)) {
             language = 'en_US'
             coin = 'USD'
             areaId = 99
+            platform = 31 //移动-美国
         } else {
             language = 'zh_TW'
             coin = 'HKD'
             areaId = 2
+            platform = 11 //移动-港澳台
         }
         store.commit('setLanguage', language)
         store.commit('setCoin', coin)
         store.commit('setAreaId', areaId)
+        store.commit('setPlatform', platform)
     } else if (store && store.state) {
         language = store.state.language
     }
