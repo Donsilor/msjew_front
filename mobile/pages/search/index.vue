@@ -104,7 +104,8 @@ export default {
         .then(data => {
           data = {
             searchHistory: null,
-            searchHotword: ['戒指', '项链', '手链']
+            // searchHotword: ['戒指', '项链', '手链']
+            searchHotword: [_this.lang.rings, _this.lang.necklaces, _this.lang.bracelets]
           }
           _this.hotSearch = _this.dealOnlineData(data.searchHotword)
           // if (this.$store.getters.hadLogin) {

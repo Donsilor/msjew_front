@@ -142,15 +142,15 @@
             (parseInt($route.query.step) !== 1 && $route.query.step) ||
               $route.query.isBack
           "
-          class="button-group"
+          class="button-group" 
         >
           <nuxt-link v-if="canAddCart" :to="finishDj">
             <button :class="['add-to-cart', { active: canAddCart }]">
-              确认选择
+              {{ $t(`${lang}.ConfirmTheChoice`) }}
             </button>
           </nuxt-link>
           <button v-else :class="['add-to-cart', { active: canAddCart }]">
-            确认选择
+            {{ $t(`${lang}.ConfirmTheChoice`) }}
           </button>
         </div>
        <!-- <div class="other-info">
