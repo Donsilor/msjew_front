@@ -12,6 +12,7 @@ export default function (content) {
 
         let lastUrl = ''
         let areaId = ''
+        let coin = ''
 
         const expiresDate = new Date()
         expiresDate.setDate(expiresDate.getDate() + 365)
@@ -20,13 +21,19 @@ export default function (content) {
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')
             lastUrl = cookie.lastUrl || ''
-			areaId = cookie.areaId || ''
+            areaId = cookie.areaId || ''
+            coin = cookie.coin || ''
         }
+        if (coin) {
+            resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
+            store.commit('setCoin', coin)
+        }
+
         if (areaId) {
             resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
             store.commit('setAreaId', areaId)
         }
-		
+
         if (lastUrl) {
             resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
             store.commit('setLastUrl', lastUrl)

@@ -7,11 +7,13 @@ export default function ({ req, res, app, store }) {
     const languageOptions = definition.languageOptions
 
     if (isServer) {
-        const resetCookie = []
-        let lastUrl = ''
-        let areaId = ''
 
         let host = req.headers['host']
+        let lastUrl = ''
+        let areaId = ''
+        let coin = ''
+
+        const resetCookie = []
         const expiresDate = new Date()
         expiresDate.setDate(expiresDate.getDate() + 365)
         const expires = expiresDate.toUTCString()
@@ -20,6 +22,11 @@ export default function ({ req, res, app, store }) {
             const cookie = cookieparser.parse(req.headers.cookie || '')
             lastUrl = cookie.lastUrl || ''
             areaId = cookie.areaId || ''
+            coin = cookie.coin || ''
+        }
+        if (coin) {
+            resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
+            store.commit('setCoin', coin)
         }
         if (areaId) {
             resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
