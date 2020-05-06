@@ -43,7 +43,7 @@ export default {
         Cookie && Cookie.set('areaId', val, { path: '/' })
     },
     setPlatform (state, val) {
-        state.platform = platform
+        state.platform = val
         Cookie && Cookie.set('platform', val, { path: '/' })
     },
 
