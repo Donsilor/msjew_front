@@ -928,7 +928,7 @@
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-                  <a href="/free-shipping" target="_blank"><span>?</span></a>
+                  <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -940,7 +940,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-                  <a href="/international" target="_blank"
+                  <a href="/policies/international" target="_blank"
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -1940,7 +1940,7 @@
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-                  <a href="/free-shipping" target="_blank"><span>?</span></a>
+                  <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -1952,7 +1952,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-                  <a href="/international" target="_blank"
+                  <a href="/policies/international" target="_blank"
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>

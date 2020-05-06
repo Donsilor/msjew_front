@@ -380,7 +380,7 @@
 					if(this.cardList[k].ifAllowedToUse){
 					  this.cardList[k].ifChoose = true;
 					}else{
-					  this.$toast.show(that.lang.msg7+" ("+that.cardList[that.nowIndex].usableRange+") "+that.lang.msg7);
+					  this.$toast.show(that.lang.msg7+" ("+that.cardList[that.nowIndex].usableRange+") "+that.lang.msg8);
 					}
 				  }else{
 					this.$toast.show(that.lang.msg6);

@@ -222,7 +222,9 @@
       "paytip1": "Since Alipay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "paytip2": "Since WeChat Pay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "paytip3": "Since Credit Card does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
-      "msg11": "Mainland China Only"
+      "msg11": "Mainland China Only",
+      "paytip": "Since Paydallor does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
+      "support": "Support only: mainland version"
     },
     "paySuccess": {
       "PayPending1":"The order has been submitted and the system is processing. Please wait.",
@@ -673,7 +675,10 @@
       "noHotRecommend": "No hot searches",
       "history": "Search history",
       "noResult": "No search history",
-      "cleanHistory": "Reset search history"
+      "cleanHistory": "Reset search history",
+      "rings": "RING",
+      "necklaces": "NECKLACE",
+      "bracelets": "BRACELET"
     },
     "result": {
       "back": "Back",
