@@ -28,6 +28,11 @@ export default ({ req, app, store, $axios }, inject) => {
             areaId = 2
             platform = 11 //移动-港澳台
         }
+        if (req.headers.cookie) {
+            const cookie = cookieparser.parse(req.headers.cookie || '')
+            language = cookie.language || language
+            coin = cookie.coin || coin
+        }
         store.commit('setLanguage', language)
         store.commit('setCoin', coin)
         store.commit('setAreaId', areaId)

@@ -23,6 +23,11 @@ export default function ({ req, res, app, store }) {
             lastUrl = cookie.lastUrl || ''
             areaId = cookie.areaId || ''
             coin = cookie.coin || ''
+            language = cookie.language || ''
+        }
+        if (language) {
+            resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
+            store.commit('setLanguage', language)
         }
         if (coin) {
             resetCookie.push(`coin=${coin}; Path=/; expires=${expires}`)
