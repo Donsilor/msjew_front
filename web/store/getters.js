@@ -69,6 +69,13 @@ export default {
     },
     //当前网址域名
     baseUrl () {
-        return window.location.host
+        let host = window.location.host;
+        if ((/(bddia|bddco)\.com/).test(host)) {
+            host = 'https://' + host
+        } else {
+            //测试
+            host = 'http://' + host
+        }
+        return host
     }
 }
