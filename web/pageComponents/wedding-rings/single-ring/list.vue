@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content" v-loading="loading">
+  <div class="page-content discount-list" v-loading="loading">   <!-- 折扣商品discount-list，优惠券商品favourable-list -->
     <section class="search-condition">
       <!--      戒指款式-->
       <div class="condition-item condition-style condition-lady-style">
@@ -204,20 +204,35 @@
                     @click.stop.prevent="setWish(item.id)"
                   ></i>
                 </div> -->
+
+                <div class="list-discount-icon1" v-if="0">
+                  <span>9.5折</span>
+                </div>
               </div>
             </nuxt-link>
             <div class="product-info">
               <div class="product-price">
-                <span class="coin">{{ item.coinType }}</span>
-                <span class="price">{{ formatNumber(item.salePrice) }}</span>
+               <!-- <div>
+                  <span class="coin">{{ item.coinType }}</span>
+                  <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                </div> -->
+
+                <div class="list-discount-price">
+                  <div>
+                    <span class="coin">{{ item.coinType }}</span>
+                    <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                  </div>
+                  <div>
+                    <span class="coin">{{ item.coinType }}</span>
+                    <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                  </div>
+                </div>
               </div>
               <div class="product-title">
+                <!-- <span class="list-discount-icon2">￥</span> -->
+                <span class="list-discount-icon2">9.5折扣</span>
                 {{ item.goodsName }}
               </div>
-            </div>
-
-            <div class="discount">
-              <span>7.5折</span>
             </div>
           </div>
           <!--          广告数据-->

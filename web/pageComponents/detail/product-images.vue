@@ -21,8 +21,14 @@
         </a>
       </li>
     </ul>
+    
     <div class="main-pic">
       <img :src="images[activeIndex]" />
+      
+      <!-- 活动图标 -->
+      <div class="discount-icon2" v-if="0">
+        <div class="icon">优惠券</div>
+      </div>
     </div>
   </div>
 </template>
@@ -133,7 +139,7 @@ export default {
     box-sizing: border-box;
     font-size: 0;
     line-height: 0;
-    overflow: hidden;
+    // overflow: hidden;
 
     img {
       position: absolute;
