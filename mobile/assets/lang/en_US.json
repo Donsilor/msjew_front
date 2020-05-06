@@ -668,9 +668,9 @@
       "history": "Search history",
       "noResult": "No search history",
       "cleanHistory": "Reset search history",
-      "rings": "Rings",
-      "necklaces": "Necklaces",
-      "bracelets": "Bracelets"
+      "rings": "RING",
+      "necklaces": "NECKLACE",
+      "bracelets": "BRACELET"
     },
     "result": {
       "back": "Back",
