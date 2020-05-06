@@ -63,25 +63,25 @@ export default function ({ req, res, redirect, store, route }) {
         if (isWap(u)) {
             return
         }
-        // https://www.bdd.bddia.com   https://www.bddco.com
         //头部host
         let headerHost = req.headers['host']
         //生产环境
         let host = 'https://www.bddco.com';
-        if (!(/bddco\.com/).test(headerHost)) {
-
-            if ((/^(wap-cn|wap-us)\.bddia\.com/).test(headerHost)) {
-                //测试环境
-                host = 'https://' + headerHost.replace('wap-', '');
-            } else if (headerHost == 'wap.bddia.com') {
-                host = 'https://www.bddia.com';
-            } else {
-                //本地
-                //host = 'http://' + headerHost;
-            }
-        } else if ((/^(wap-cn|wap-us)\.bddco\.com/).test(headerHost)) {
+        if ((/^(wap-cn|wap-us)\.bddco\.com/).test(headerHost)) {
             //生产环境
             host = 'https://' + headerHost.replace('wap-', '');
+        } else if ((/bddia\.com/).test(headerHost)) {
+            //测试环境
+            host = 'https://www.bddia.com';
+            if ((/^(wap-cn|wap-us)\.bddia\.com/).test(headerHost)) {
+                host = 'https://' + headerHost.replace('wap-', '');
+            }
+        } else if ((/bddtest\.com/).test(headerHost)) {
+            //本地环境
+            host = 'http://www.bddtest.com';
+            if ((/^(wap-cn|wap-us)\.bddtest\.com/).test(headerHost)) {
+                host = 'http://' + headerHost.replace('wap-', '');
+            }
         }
 
         const toWapUrl = path => {

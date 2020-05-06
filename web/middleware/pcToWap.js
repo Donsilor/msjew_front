@@ -52,20 +52,21 @@ export default function ({ req, res, redirect, store, route }) {
         let headerHost = req.headers['host']
         //生产环境
         let host = 'https://wap.bddco.com';
-        if (!(/bddco\.com/).test(headerHost)) {
-
+        if ((/^(cn|us)\.bddco\.com/).test(headerHost)) {
+            //生产环境
+            host = 'https://wap-' + headerHost;
+        } else if ((/bddia\.com/).test(headerHost)) {
+            host = 'https://wap.bddia.com'
             if ((/^(cn|us)\.bddia\.com/).test(headerHost)) {
                 //测试环境
                 host = 'https://wap-' + headerHost;
-            } else if (headerHost == 'www.bddia.com') {
-                host = 'https://wap.bddia.com';
-            } else {
-                //本地
-                //host = 'http://' + headerHost;
             }
-        } else if ((/^(cn|us)\.bddco\.com/).test(headerHost)) {
-            //生产环境
-            host = 'https://wap-' + headerHost;
+        } else if ((/bddtest\.com/).test(headerHost)) {
+            host = 'http://wap.bddtest.com'
+            if ((/^(cn|us)\.bddtest\.com/).test(headerHost)) {
+                //测试环境
+                host = 'http://wap-' + headerHost;
+            }
         }
 
         const toWapUrl = path => {
