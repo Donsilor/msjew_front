@@ -15,7 +15,8 @@
               :class="typeIndex === index ? 'icongou' : ''"
               @click="changeType(index)"
             ></span>
-            <b
+            <div
+              class="box-a"
               >{{ item.title }}
               <span
                 v-if="item.type == '5'"
@@ -23,7 +24,8 @@
                 @click="needtips = !needtips"
                 >?</span
               >
-            </b>
+              <div class="support" v-if="item.type == '1000' && isLogin">({{ lang.support }})</div>
+            </div>
 
             <p>{{ item.des }}</p>
             <p v-if="item.des2">{{ item.des2 }}</p>
@@ -140,7 +142,8 @@ export default {
       info: JSON.parse(this.$route.query.info),
       price: JSON.parse(this.$route.query.info).payAmount,
       needtips: false,
-      typeIndex: JSON.parse(this.$route.query.info).payAmount === 0 ? 5 : 0
+      typeIndex: JSON.parse(this.$route.query.info).payAmount === 0 ? 5 : 0,
+      isLogin: !!this.$store.state.token
     }
   },
   created() {
@@ -315,7 +318,16 @@ export default {
         margin-left: 64px;
         padding: 10px 0px 12px;
         border-bottom: 1px solid #dddddd; /*no*/
-        span {
+        .support{
+          position: absolute;
+          top: 48%;
+          left: 0;
+          transform: translateY(-50%);
+          margin-left: 150px;
+          font-size: 10px;
+          color: #333;
+        }
+        .icon {
           float: right;
           width: 20px;
           height: 20px;
@@ -346,7 +358,7 @@ export default {
           text-align: center;
           border: 1px solid rgba(242, 155, 135, 1); /*no*/
         }
-        b {
+        .box-a {
           font-size: 14px;
           line-height: 24px;
           font-weight: 400;

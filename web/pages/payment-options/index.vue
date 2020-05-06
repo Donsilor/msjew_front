@@ -90,6 +90,7 @@
           <div v-show="payWay == 82" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
+          <div class="support" v-if="0">(暂仅支持：大陆版)</div>
         </div>
         <!-- <div
           :class="{ 'pay-choose': payWay === 8 }"
@@ -124,7 +125,7 @@
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
-        
+
         <!-- 信用卡 -->
         <div
           :class="{ 'pay-choose': payWay == 81 }"
@@ -500,6 +501,15 @@ div {
             width: 100%;
             height: 100%;
           }
+        }
+        .support{
+          position: absolute;
+          right: 82px;
+          top: 78px;
+          font-size: 14px;
+          font-family: twCenMt;
+          line-height: 24px;
+          color: #1d1d1d;
         }
       }
       .pay-block:hover {
