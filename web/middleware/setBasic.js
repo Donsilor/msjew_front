@@ -13,6 +13,7 @@ export default function (content) {
         let lastUrl = ''
         let areaId = ''
         let coin = ''
+        let language = ''
 
         const expiresDate = new Date()
         expiresDate.setDate(expiresDate.getDate() + 365)

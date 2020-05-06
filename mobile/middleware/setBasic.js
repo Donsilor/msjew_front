@@ -12,6 +12,7 @@ export default function ({ req, res, app, store }) {
         let lastUrl = ''
         let areaId = ''
         let coin = ''
+        let language = ''
 
         const resetCookie = []
         const expiresDate = new Date()
