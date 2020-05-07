@@ -38,7 +38,10 @@ export default function ({ req, res, redirect, store, route }) {
 
         return _result.length ? _result.join('&') + '&' : ''
     }
-
+  }
+ 
+  return _result.length ? _result.join('&') : ''
+}
 
     if (process.server) {
 
@@ -841,10 +844,6 @@ export default function ({ req, res, redirect, store, route }) {
                         'endCarat': '10'
                     },
                 },
-
-
-
-
                 {
                     'pcUrl': /^\/diamonds\/round-cut$/,
                     'mobileUrl': `/diamond/list`,
@@ -852,74 +851,108 @@ export default function ({ req, res, redirect, store, route }) {
                         'shape': '16',
                     },
                 },
+				  // 珠宝首饰详情   /jewellery/all
+				{
+				  'pcUrl':/^\/jewellery\/(all|necklace|pendant|studEarring|earring|bracelet|braceletLine|decoration|widgets|others)\/\d/,
+				  'mobileUrl':`/accessories/accessories`,
+					  'params':{
+					'goodId':'goodId',
+				  },
+				},
+				// 知识
+				  //克拉
+				{
+				  'pcUrl':/^\/education\/diamonds\/carat\/?$/,
+				  'mobileUrl':`/help-pages/diamondCarat`
+				},
+					{
+				  'pcUrl':/^\/education\/diamonds\/cut\/?$/,
+				  'mobileUrl':`/help-pages/diamondCut`
+				},
+				  {
+				  'pcUrl':/^\/education\/diamonds\/color\/?$/,
+				  'mobileUrl':`/help-pages/diamondColor`
+				},
+					{
+				  'pcUrl':/^\/education\/diamonds\/clarity\/?$/,
+				  'mobileUrl':`/help-pages/diamondCleanliness`
+				},
+					{
+				  'pcUrl':/^\/education\/diamonds\/shape\/?$/,
+				  'mobileUrl':`/help-pages/diamondShape`
+				},
+					{
+				  'pcUrl':/^\/education\/diamonds\/certification\/?$/,
+				  'mobileUrl':`/help-pages/proof`
+				},
+				
+					//钻石护理
+					{
+				  'pcUrl':/^\/education\/diamonds\/maintenance\/?$/,
+				  'mobileUrl':`/help-pages/diamondCarat`
+				},
+				{
+				  'pcUrl':/^\/education\/rings\/size\/?$/,
+				  'mobileUrl':`/help-pages/sizeguide`
+				},
+				
+					{
+				  'pcUrl':/^\/policies\/payment-methods\/?$/,
+				  'mobileUrl':`/help-pages/paymentMethod`
+				},
+					{
+				  'pcUrl':/^\/policies\/quality-value\/?$/,
+				  'mobileUrl':`/help-pages/qualityValue`
+				},
+					{
+				  'pcUrl':/^\/policies\/return-refund-policy\/?$/,
+				  'mobileUrl':`/help-pages/paymentMethod`
+				},
+					{
+				  'pcUrl':/^\/policies\/free-shipping\/?$/,
+				  'mobileUrl':`/help-pages/freeShipping`
+				},
+					{
+				  'pcUrl':/^\/policies\/shipping\/?$/,
+				  'mobileUrl':`/help-pages/deliveryPolicy`
+				},
+					{
+				  'pcUrl':/^\/policies\/international\/?$/,
+				  'mobileUrl':`/help-pages/internationalPolicy`
+				},
+					{
+				  'pcUrl':/^\/policies\/privacy-policy\/?$/,
+				  'mobileUrl':`/help-pages/privacyPolicy`
+				},
+					{
+				  'pcUrl':/^\/policies\/terms-and-conditions\/?$/,
+				  'mobileUrl':`/help-pages/clause`
+				},				
+				   //搜索
+				{
+				  'pcUrl':/^\/search/,
+				  'mobileUrl':`/search/result`,
+				  'params':{
+					'keyword':'keyword'
+					
+				  },
+				},
+				
+				  //购物车
+					{
+				  'pcUrl':/^\/shopping-cart\/?$/,
+				  'mobileUrl':`/cart`,
+				  
+				},
+					//密码
+					{
+				  'pcUrl':/^\/reset-password\/?$/,
+				  'mobileUrl':`/forget`,
+				  
+				},
+				
+			  ]
 
-                {
-                    'pcUrl': /^\/diamonds\/asscher-cut$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '17',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds\/princess-cut$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '54',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds\/emerald-cut$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '55',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds\/heart-shaped$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '56',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds\/marquise-cut$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '57',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds\/cushion-cut$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '58',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds\/pear-shaped$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '59',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds\/asscher-cut$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '60',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds\/radiant-cut$/,
-                    'mobileUrl': `/diamond/list`,
-                    'params': {
-                        'shape': '61',
-                    },
-                },
-                {
-                    'pcUrl': /^\/diamonds/,
-                    'mobileUrl': `/diamond/list`
-                },
 
                 // 裸钻详情
                 {

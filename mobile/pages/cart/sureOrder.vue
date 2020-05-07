@@ -40,7 +40,7 @@
         <ul>
           <li v-for="(item, index) in list2" :key="index">
             <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
-            <div >
+            <div>
               <img :src="item.url" />
               <div class="right">
                 <span
@@ -60,6 +60,7 @@
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
+                <p class="hint-color" v-if="index != 0 && index != 1">({{lang.msg11}})</p>
               </div>
             </div>
           </li>
@@ -315,6 +316,12 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        },
+        {
           url: '/cart/ap.png',
           type: 82,
           title: this.LANGUAGE.cart.pay.payType3,
@@ -327,7 +334,7 @@ export default {
           des: this.LANGUAGE.cart.pay.type4Text
         },
         {
-          url: '/cart/card.png',
+          url: '/cart/up.png',
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
@@ -521,10 +528,16 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 2
+        pay = 61
+      }else if(this.typeIndex == 2){
+        pay = 82
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
       }
 
-      if(pay!==6){
+      if(pay == 81 || pay == 82 || pay == 83){
         this.$toast.show(this.lang.firstLogin)
       }
       if (ind === 5) {
@@ -996,12 +1009,26 @@ export default {
       //   return
       // }
       // console.log("aaaa",this.typeIndex)
+      let pay = 0
+      if(this.typeIndex == 0){
+        pay = 6
+      }else if(this.typeIndex == 1){
+        pay = 61
+      }else if(this.typeIndex == 2){
+        pay = 82
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 7
+      }
        if (!this.isLogin) {
           if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
            return
          }
-         if(this.typeIndex!==0){
+         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4){
             this.$toast.show(this.lang.firstLogin)
            return
          }
@@ -1085,6 +1112,7 @@ export default {
               goodsCartList:data,
               invoice:this.$route.params.invoice,
               tradeType:'wap',
+              payType: pay,
               coinType:this.$store.state.coin,
               returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
             }
@@ -1674,7 +1702,7 @@ export default {
       img {
         width: 32px;
         height: 32px;
-        margin: 16px;
+        margin: 24px 16px 0;
         float: left;
       }
       .right {
@@ -1687,7 +1715,7 @@ export default {
           float: right;
           width: 20px;
           height: 20px;
-          margin: 12px 12px 0 0;
+          margin: 20px 12px 0 0;
           background: rgba(255, 255, 255, 1);
           border: 1px solid rgba(187, 187, 187, 1); /*no*/
           border-radius: 50%;
@@ -1781,5 +1809,9 @@ export default {
   visibility: hidden;
   clear: both;
   opacity: 0;
+}
+
+.hint-color{
+  color: #f29b87 !important;
 }
 </style>
