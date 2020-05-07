@@ -495,6 +495,7 @@ export default {
     }
   },
   mounted() {
+    console.log(66666666,this.info)
     const _this = this
     _this.$nextTick(() => {})
   },

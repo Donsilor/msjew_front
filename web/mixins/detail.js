@@ -78,7 +78,7 @@ export default {
           goods_type:_this.simpleDetail.categoryId
         }
       ]
-      console.log(goodInfo)
+      // console.log(goodInfo)
       _this.addingCart = true
       _this.$store
         .dispatch('addCart', goodInfo)

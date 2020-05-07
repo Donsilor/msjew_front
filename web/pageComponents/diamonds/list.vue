@@ -609,6 +609,16 @@
                       </li>
                     </ul>
                   </div>
+
+                  <!-- 折扣 -->
+                  <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
+                    <span>{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                  </div>
+
+                  <!-- 优惠券 -->
+                  <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
+                    <span>优惠券</span>
+                  </div>
                 </div>
               </nuxt-link>
               <div class="product-info">
@@ -618,14 +628,34 @@
                 <div class="row-flex align-item-center">
                   <div class="left-item elastic-flex-item">
                     <div class="product-price">
-                      <span class="coin">{{ item.coinType }}</span>
-                      <span class="price">{{
-                        formatNumber(item.salePrice)
-                      }}</span>
+                      <div v-if="couponType(item.coupon) !== 'discount'">
+                         <span class="coin">{{ item.coinType }}</span>
+                         <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                       </div>
+
+                       <!-- 折扣 -->
+                       <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                         <div>
+                           <span class="coin">{{ item.coinType }}</span>
+                           <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                         </div>
+                         <div>
+                           <span class="coin">{{ item.coinType }}</span>
+                           <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                         </div>
+                       </div>
                     </div>
-                    <div class="card-info">
-                      <span class="type">{{ item.specsModels.card }}</span>
-                      <span class="number">{{ item.specsModels.cardNo }}</span>
+
+                    <div class="product-title">
+                      <!-- 优惠券 -->
+                      <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+                      <!-- 折扣 -->
+                      <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}折</span>
+
+                      <div class="card-info" style="display: inline-block;">
+                        <span class="type">{{ item.specsModels.card }}</span>
+                        <span class="number">{{ item.specsModels.cardNo }}</span>
+                      </div>
                     </div>
                   </div>
                   <div
@@ -653,6 +683,7 @@
                         @click.stop.prevent="setWish(item.id)"
                       ></i>
                     </div> -->
+
                   </div>
                 </div>
               </div>
@@ -1267,7 +1298,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("加载状态",this.loading)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -2345,7 +2376,7 @@ export default {
     height: 37px!important;
     line-height: 37px;
   }
-  
+
   .el-pager, .el-pager li{
     font-size: 16px;
   }

@@ -56,7 +56,7 @@ export default {
       //   result = result.concat(listData[n])
       // }
       result = result.concat(listData[page])
-      console.log("info",result)
+      // console.log("info",result)
       return result
     },
     requestingListData() {
@@ -163,7 +163,7 @@ export default {
           let ispeed = Math.floor(-that.scrollTop / 4)
           // topB.scrollTop = that.scrollTop + ispeed
           topB.scrollTop = 120
-          console.log(topB.scrollTop)
+          // console.log(topB.scrollTop)
           if (that.scrollTop === 0) {
             clearInterval(timer)
           }
@@ -290,7 +290,7 @@ export default {
             //   this.loading = false
             // }, 1000);
           }else {
-            console.log("有数据")
+            // console.log("有数据")
             _this.loading = false
           }
           var data = data.data
@@ -304,7 +304,6 @@ export default {
         })
         .catch(err => {
           _this.loading = false
-          console.log(2222)
           console.error(err)
           if (err instanceof Error) {
             console.log('这是一个错误')

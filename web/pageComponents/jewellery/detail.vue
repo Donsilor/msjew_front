@@ -327,10 +327,10 @@ export default {
       const info = _this.info || {}
       let result = info.salePrice
       if (_this.simpleDetail) {
-        console.log('相加')
+        // console.log('相加')
         result = _this.simpleDetail.retailMallPrice
       } else {
-        console.log('不相加')
+        // console.log('不相加')
       }
       return result
     },
@@ -367,6 +367,7 @@ export default {
     }
   },
   mounted() {
+    console.log(22222,this.info)
     const _this = this
     _this.$nextTick(() => {})
   },

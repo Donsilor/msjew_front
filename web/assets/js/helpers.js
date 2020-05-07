@@ -208,6 +208,24 @@ class Helpers {
     num = num/10
     return num
   }
+
+  // 判断折扣、优惠券对象是否为空
+  couponType(a){
+    var result;
+    if(!a){
+      result = false
+    }else{
+      if(a.hasOwnProperty('discount')){
+        result = 'discount'
+      }else if(a.hasOwnProperty('money')){
+        result = 'money'
+      }else{
+        result = ''
+      }
+    }
+
+    return result
+  }
 }
 
 export default new Helpers()

@@ -21,13 +21,17 @@
         </a>
       </li>
     </ul>
-    
+
     <div class="main-pic">
       <img :src="images[activeIndex]" />
-      
+
       <!-- 活动图标 -->
-      <div class="discount-icon2" v-if="0">
+      <div class="discount-icon2" v-if="this.coupon == 'money'">
         <div class="icon">优惠券</div>
+      </div>
+
+      <div class="discount-icon2" v-if="this.coupon !== 'money' && this.coupon != ''">
+        <div class="icon">{{discountConversion(this.coupon)}}折</div>
       </div>
     </div>
   </div>
@@ -56,6 +60,13 @@ export default {
     },
     giaNumber: {
       type: [Number, String],
+      required: false,
+      default() {
+        return ''
+      }
+    },
+    coupon: {
+      type: [Boolean, String, Number],
       required: false,
       default() {
         return ''

@@ -1,16 +1,16 @@
 <template>
-  <div class="page-content detail-page favourable-detail">  <!-- 折扣商品discount-detail，优惠券商品favourable-detail -->
+  <div class="page-content detail-page">
     <top-nav></top-nav>
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" :coupon="coupons"></product-images>
       </div>
       <!--      右侧-->
       <div class="right-detail">
 		<div class="right-title">
-			<span class="discount-icon fl">7.5折</span>
-			<span class="favourable-icon fl">￥</span>
+			<span class="discount-icon fl" v-if="info.coupon.discount">{{discountConversion(this.info.coupon.discount.discount)}}折</span>
+			<span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
 
 			<h2 class="product-name">
 			  {{ info.goodsName }}
@@ -120,11 +120,11 @@
         </ul>
 
 		<!-- 折扣活动 -->
-		<div class="discount-box">
+		<div class="discount-box" v-if="info.coupon.discount">
 			<div class="discount-active">
 				<div>
 					<span>优惠活动：</span>
-					<span class="discount-icon">7.5折</span>
+					<span class="discount-icon">{{discountConversion(this.info.coupon.discount.discount)}}折</span>
 				</div>
 				<div class="time">活动时间：2020.4.9</div>
 			</div>
@@ -136,7 +136,7 @@
 		</div>
 
 		<!-- 优惠活动 -->
-		<div class="favourable-box">
+		<div class="favourable-box" v-if="info.coupon.money">
 			<div class="discount-active">
 				<div>
 					<span>优惠券：</span>
@@ -152,7 +152,7 @@
 			</div> -->
 		</div>
 
-        <div class="product-price">
+        <div class="product-price" v-if="!info.coupon.discount">
           <span class="coin">
             {{ info.coinType }}
           </span>
@@ -219,7 +219,7 @@
       <h2 class="section-name">
         {{ $t(`${lang}.youMightAlsoLike`) }}
       </h2>
-      <recommend-data :recommends="recommends"></recommend-data>
+      <recommend-data :recommends="recommends" :coupon="coupons"></recommend-data>
     </section>
     <!--    tab切换-->
     <ul class="tab">
@@ -339,6 +339,18 @@ export default {
     }
   },
   computed: {
+    coupons() {
+      var co;
+      if(this.couponType(this.info.coupon) == 'discount'){
+        co = this.info.coupon.discount.discount;
+      }else if(this.couponType(this.info.coupon) == 'money'){
+        co = 'money'
+      }else{
+        co = ''
+      }
+
+      return co
+    },
     thumbnails() {
       return this.imageStrToArray(this.info.goodsImages || '')
     },
@@ -350,10 +362,10 @@ export default {
       const info = _this.info || {}
       let result = info.salePrice
       if (_this.simpleDetail) {
-        console.log('相加')
+        // console.log('相加')
         result = _this.simpleDetail.retailMallPrice
       } else {
-        console.log('不相加')
+        // console.log('不相加')
       }
       return result
     },

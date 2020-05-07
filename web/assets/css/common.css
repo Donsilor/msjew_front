@@ -550,20 +550,6 @@ color-red {
 .favourable-detail .detail .right-detail .services-list{
 	flex-grow: 0 !important;
 }
-.discount-detail .product-price,
-.favourable-detail .product-price{
-	display: none;
-}
-
-
-.discount-box,
-.favourable-box{
-	display: none;
-}
-.discount-detail .discount-box,
-.favourable-detail .favourable-box{
-	display: block;
-}
 
 .discount-active{
 	display: flex;
@@ -577,24 +563,18 @@ color-red {
 	font-size: 13px;
 	color: #000;
 }
+
 .discount-icon,
 .favourable-icon{
+  display: inline-block;
 	height: 26px;
 	padding: 0 6px;
 	font-size: 17px;
 	color: #fff;
-	line-height: 26px;
-	margin-left: 10px;
+	line-height: 24px;
+	margin: 0 10px;
 	background: url(../../static/subject/icon_03.png) no-repeat center;
 	background-size: 100% 100%;
-}
-.right-title .discount-icon,
-.right-title .favourable-icon{
-	display: none;
-}
-.discount-detail .right-title .discount-icon,
-.favourable-detail .right-title .favourable-icon{
-	display: block;
 }
 
 .discount-active .time{
@@ -631,7 +611,6 @@ color-red {
 	font-size: 13px;
 	color: #a15d35;
 	text-decoration: underline;
-	margin-left: 4px;
 	cursor: pointer;
 }
 
@@ -669,10 +648,6 @@ color-red {
   height: 80px;
   background: url(../../static/subject/icon_05.png) no-repeat center;
   background-size: 100% 100%;
-  display: none;
-}
-.discount-list .list-discount-icon1{
-  display: block;
 }
 
 .list-discount-icon1 span{
@@ -699,7 +674,7 @@ color-red {
   margin-right: 6px;
 }
 
-.discount-list .list-discount-icon2{
+.list-discount-icon2{
   padding: 0 6px;
 }
 

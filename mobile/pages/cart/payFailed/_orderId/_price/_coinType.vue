@@ -97,7 +97,7 @@ export default {
   },
   mounted(){
     this.list = JSON.parse(storage.get('myCartList', 0))
-    console.log("已登录",this.isLogin)
+    // console.log("已登录",this.isLogin)
     const _this = this
     _this.$nextTick(() => {
       if (this.isLogin){

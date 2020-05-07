@@ -57,7 +57,7 @@ export default function(content) {
       if (!trueLanguage) {
         language = languageOptions[0].code
       }
-      console.log('language:Setbasic1:',language)
+      // console.log('language:Setbasic1:',language)
       resetCookie.push(`language=${language}; Path=/; expires=${expires}`)
       store.commit('setLanguage', language)
     } else {
@@ -75,7 +75,7 @@ export default function(content) {
       resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
       store.commit('setLastUrl', lastUrl)
     }
-    console.log('setBasic req====>', resetCookie)
+    // console.log('setBasic req====>', resetCookie)
     res.setHeader('Set-Cookie', resetCookie)
   }
 }

@@ -156,7 +156,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("加载状态",this.loading)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {

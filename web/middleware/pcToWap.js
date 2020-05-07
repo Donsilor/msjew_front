@@ -1112,7 +1112,7 @@ function queryParams (data) {
             if(href.length>1) {
               url = url + '?' + param + href[1]
             }
-            console.log(url)
+            // console.log(url)
             redirect(url)
             return 
           }
@@ -1121,7 +1121,7 @@ function queryParams (data) {
       redirect(host)
       return 
     }
-    console.log("req.originalUrl----",req.originalUrl)
+    // console.log("req.originalUrl----",req.originalUrl)
     toWapUrl(req.originalUrl)
   }
 }

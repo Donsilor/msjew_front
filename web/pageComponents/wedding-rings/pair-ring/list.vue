@@ -180,15 +180,42 @@
                     @click.stop="setWish(item.id)"
                   ></i>
                 </div> -->
+                
+                <!-- 折扣 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
+                  <span>{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                </div>
+                
+                <!-- 优惠券 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
+                  <span>优惠券</span>
+                </div>
               </div>
             </nuxt-link>
             <div class="product-info">
-              <div class="product-price">
+              <div class="product-price" v-if="couponType(item.coupon) !== 'discount'">
                 <span class="coin">{{ item.coinType }}</span>
                 <span class="price">{{ formatNumber(item.salePrice) }}</span>
               </div>
+
+              <!-- 折扣 -->
+              <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                <div>
+                  <span class="coin">{{ item.coinType }}</span>
+                  <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                </div>
+                <div>
+                  <span class="coin">{{ item.coinType }}</span>
+                  <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                </div>
+              </div>
+
               <div class="product-title">
-                {{ item.name }}
+                <!-- 优惠券 -->
+                <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+                <!-- 折扣 -->
+                <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                {{ item.goodsName }}
               </div>
             </div>
           </div>
@@ -307,7 +334,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("加载状态",this.loading)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -361,14 +388,14 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       _this.research()
-      console.log(location)
+      // console.log(location)
     })
   },
   methods: {
     // 改变款式条件
     changeStyle(value) {
       const searchConditions = this.searchConditions
-      console.log('style====>', searchConditions.style, value)
+      // console.log('style====>', searchConditions.style, value)
       if (searchConditions.style === value) {
         this.changeCondition('styleSex', '')
         this.changeCondition('style', '')
@@ -506,7 +533,7 @@ export default {
     height: 37px!important;
     line-height: 37px;
   }
-  
+
   .el-pager, .el-pager li{
     font-size: 16px;
   }

@@ -180,18 +180,47 @@
                     @click.stop.prevent="setWish(item.id)"
                   ></i>
                 </div> -->
+
+                <!-- 折扣 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
+                  <span>{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                </div>
+
+                <!-- 优惠券 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
+                  <span>优惠券</span>
+                </div>
               </div>
             </nuxt-link>
             <div class="product-info">
-              <div class="product-price">
-                <span class="coin">{{ item.coinType }}</span>
-                <span class="price">{{ formatNumber(item.salePrice) }}</span>
-              </div>
-              <div class="product-title">
-                {{ item.goodsName }}
+                <div class="product-price">
+                 <div v-if="couponType(item.coupon) !== 'discount'">
+                    <span class="coin">{{ item.coinType }}</span>
+                    <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                  </div>
+            
+                  <!-- 折扣 -->
+                  <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                    <div>
+                      <span class="coin">{{ item.coinType }}</span>
+                      <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                    </div>
+                    <div>
+                      <span class="coin">{{ item.coinType }}</span>
+                      <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                    </div>
+                  </div>
+                </div>
+            
+                <div class="product-title">
+                  <!-- 优惠券 -->
+                  <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+                  <!-- 折扣 -->
+                  <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                  {{ item.goodsName }}
+                </div>
               </div>
             </div>
-          </div>
           <!--          广告数据-->
           <div v-else class="ad-content">
             <el-carousel height="480px">
@@ -360,7 +389,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("加载状态",this.loading)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -424,7 +453,7 @@ export default {
       return allData
     }
   },
-  
+
   mounted() {
     const _this = this
     _this.$nextTick(() => {
@@ -543,7 +572,7 @@ export default {
     height: 37px!important;
     line-height: 37px;
   }
-  
+
   .el-pager, .el-pager li{
     font-size: 16px;
   }

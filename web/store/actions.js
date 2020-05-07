@@ -29,7 +29,7 @@ function makeCartGoodGroups (cart = []) {
             }
         }
     })
-    
+
     let keys = Object.keys(localData)
     // console.log("local",keys)
     keys = keys.sort((a, b) => {
@@ -109,7 +109,7 @@ export default {
         const loginTime = parseInt(localStorage.getItem('loginTime'));
         const refreshTime = parseInt(localStorage.getItem('refreshTime'));
         let nowDate = parseInt((new Date()).getTime() / 1000)
-        let refreshOnceTime = 30 * 60  //过期后每隔多少时间刷新token    
+        let refreshOnceTime = 30 * 60  //过期后每隔多少时间刷新token
 
         const refreshToken = localStorage.getItem('refreshToken')
         if (!refreshToken || (nowDate - refreshTime < refreshOnceTime)) {
@@ -140,11 +140,11 @@ export default {
 
         let areaId = Cookie.get('areaId')
         let language = Cookie.get('language')
-        let coin = Cookie.get('coin')        
+        let coin = Cookie.get('coin')
         //刷新时间控制
         let refreshAreaTime = parseInt(localStorage.getItem('refreshAreaTime'));
         let nowDate = parseInt((new Date()).getTime() / 1000)
-        let refreshOnceTime = 60  //过期后每隔多少秒刷新地区    
+        let refreshOnceTime = 60  //过期后每隔多少秒刷新地区
         if ((language && coin) && (nowDate - refreshAreaTime < refreshOnceTime)) {
             return
         }
@@ -157,21 +157,21 @@ export default {
             if(!language) {
                 setFlag = true
                 commit('setLanguage', data.language)
-            }                    
+            }
             if(!coin) {
-                setFlag = true               
+                setFlag = true
                 commit('setCoin', data.currency)
             }
-			localStorage.setItem('refreshAreaTime',nowDate)            
-            if(data.area_id != areaId) {                
+			localStorage.setItem('refreshAreaTime',nowDate)
+            if(data.area_id != areaId) {
                 commit('setAreaId', data.area_id)
 				if(data.area_id != 99) {
                     setFlag = true
-                } 
+                }
             }
 			if(setFlag) {
 				window.location.reload();
-			}                         
+			}
 
         })
         .catch(err => {
@@ -181,7 +181,7 @@ export default {
     },
 
     nuxtServerInit ({ commit }, { req, res,app,store,$axios }) {
-                
+
     },
     // 退出登录
     logout ({ $axios, state, commit, dispatch }) {
@@ -540,7 +540,7 @@ export default {
             }
             return result
         })
-        
+
         return new Promise(async (resolve, reject) => {
             try {
                 const newCart = []
@@ -566,7 +566,7 @@ export default {
         let request = null
         if (getters.hadLogin) {
             // 已登录的操作
-            console.log('已登录的操作')
+            // console.log('已登录的操作')
             request = dispatch('getOnlineCart')
         } else {
             // 未登录的操作
@@ -610,7 +610,7 @@ export default {
         let request = null
         if (getters.hadLogin) {
             // 已登录的操作
-            console.log('已登录的操作')
+            // console.log('已登录的操作')
             request = dispatch('getOnlineCartAmount')
             // request
             //     .then(data => {
@@ -1675,6 +1675,6 @@ export default {
             .catch(err => {
                 return Promise.reject(err)
             })
-    },   
+    },
 
 }

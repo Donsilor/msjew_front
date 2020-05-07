@@ -1,5 +1,5 @@
 <template>
-  <div class="page-content discount-list" v-loading="loading">   <!-- 折扣商品discount-list，优惠券商品favourable-list -->
+  <div class="page-content" v-loading="loading">
     <section class="search-condition">
       <!--      戒指款式-->
       <div class="condition-item condition-style condition-lady-style">
@@ -206,25 +206,25 @@
                 </div> -->
 
                 <!-- 折扣 -->
-                <div class="list-discount-icon1" v-if="item.coupon.discount">
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
                   <span>{{ discountConversion(item.coupon.discount.discount) }}折</span>
                 </div>
 
                 <!-- 优惠券 -->
-                <div class="list-discount-icon1" v-if="item.coupon.money">
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
                   <span>优惠券</span>
                 </div>
               </div>
             </nuxt-link>
             <div class="product-info">
               <div class="product-price">
-               <div v-if="!item.coupon.discount">
+               <div v-if="couponType(item.coupon) !== 'discount'">
                   <span class="coin">{{ item.coinType }}</span>
                   <span class="price">{{ formatNumber(item.salePrice) }}</span>
                 </div>
 
                 <!-- 折扣 -->
-                <div class="list-discount-price" v-if="item.coupon.discount">
+                <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
                   <div>
                     <span class="coin">{{ item.coinType }}</span>
                     <span class="price">{{ formatNumber(item.salePrice) }}</span>
@@ -235,11 +235,12 @@
                   </div>
                 </div>
               </div>
+
               <div class="product-title">
                 <!-- 优惠券 -->
-                <span class="list-discount-icon2 padding" v-if="item.coupon.money">￥</span>
+                <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
                 <!-- 折扣 -->
-                <span class="list-discount-icon2" v-if="item.coupon.discount">{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}折</span>
                 {{ item.goodsName }}
               </div>
             </div>
@@ -440,7 +441,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("加载状态",this.loading)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -497,7 +498,6 @@ export default {
     if(priceRange_val !== undefined){
       this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
       this.changePriceRange(this.priceRange);
-
     }
 
     _this.$nextTick(() => {
@@ -508,7 +508,7 @@ export default {
     // 改变款式条件
     changeStyle(value) {
       const searchConditions = this.searchConditions
-      console.log('style====>', searchConditions.style, value)
+      // console.log('style====>', searchConditions.style, value)
       if (
         searchConditions.style === value
       ) {

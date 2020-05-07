@@ -360,12 +360,12 @@ export default {
       const info = _this.info || {}
       let result = info.salePrice
       if (_this.firstRingSimpleDetail && _this.secondRingSimpleDetail) {
-        console.log('相加')
+        // console.log('相加')
         result =
           _this.firstRingSimpleDetail.retailMallPrice +
           _this.secondRingSimpleDetail.retailMallPrice
       } else {
-        console.log('不相加')
+        // console.log('不相加')
       }
       return result
     },
