@@ -78,9 +78,9 @@ export default function ({ req, res, redirect, store, route }) {
                 host = 'https://wap-' + headerHost;
             }
         } else if ((/bddco.cn/).test(headerHost)) {
-            host = 'https://wap.bddco.cn'
+            host = 'http://wap.bddco.cn'
             if ((/^(cn|us)-bdd.bddco.cn/).test(headerHost)) {
-                host = 'https://wap-' + headerHost;
+                host = 'http://wap-' + headerHost;
             }
         }
 
