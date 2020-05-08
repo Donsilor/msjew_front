@@ -98,6 +98,18 @@
             <!--        语言切换-->
             <div class="item language">
               <el-dropdown
+                v-if="this.$store.state.platform === 30"
+                type="primary"
+
+                placement="bottom"
+                @command="setLanguage"
+              >
+                <span class="row-flex align-item-center el-dropdown-link span">
+                  English
+                </span>
+              </el-dropdown>
+              <el-dropdown
+              v-else
                 type="primary"
 
                 placement="bottom"
@@ -1875,6 +1887,15 @@ export default {
       let result = ''
       const coin = this.$store.state.coin
       const coinOptions = this.$bddDefinition.coinOptions
+	  // console.log(256,coin)
+	  // console.log(887,coinOptions)
+      // for (let n = 0, length = coinOptions.length; n < length; n++) {
+      //   if(coinOptions[n].code === 'CNY'){
+      //     console.log(7777,n)
+      //     coinOptions = coinOptions.splice(n, 1)
+      //   }
+      // }
+
       for (let n = 0, length = coinOptions.length; n < length; n++) {
         if (coinOptions[n].code === coin) {
           result = coinOptions[n]

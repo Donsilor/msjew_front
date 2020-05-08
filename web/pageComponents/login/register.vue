@@ -8,34 +8,36 @@
             <div class="register-input">
               <input
                 v-model="lastname"
-
+                @input="lastName"
                 @focus="focusEvent"
                 @blur="blurEvent"
                 v-bind:class="{active:isActivelast}"
                 type="text"
                 :placeholder="$t(`${lang}.surname`)"
+                maxlength="30"
               />
             </div>
-            <!-- <div class="error-tip">
+            <div v-show="lastnameShow"  class="error-tip">
               {{ $t(`${lang}.nameTips`) }}
-            </div> -->
+            </div>
           </div>
 
           <div class="relative  margin-bottom-20">
             <div class="register-input">
               <input
                 v-model="firstname"
-
+                @input="firstName"
                 @focus="focusEvents"
                 @blur="blurEvents"
                 v-bind:class="{active:isActivefisrt}"
                 type="text"
-                :placeholder="$t(`${lang}.name`)"
+                :placeholder="$t(`${lang}.nameTips`)"
+                maxlength="30"
               />
             </div>
-            <!-- <div class="error-tip">
+            <div v-show="firstnameShow" class="error-tip">
               {{ $t(`${lang}.surnameTips`) }}
-            </div> -->
+            </div>
           </div>
 
           <!-- 姓名 -->
@@ -66,6 +68,7 @@
               @blur="blurEvent2"
               v-bind:class="{active:isActivemobile}"
               :placeholder="$t(`${lang}.mailbox`)"
+              maxlength="11"
             />
           </div>
           <div v-show="mobileShow" class="error-tip">
@@ -84,6 +87,8 @@
                 v-bind:class="{active:isActivecode}"
                 type="text"
                 :placeholder="$t(`${lang}.VerificationCode`)"
+                maxlength="15"
+                @input="inputCode"
               />
             </div>
             <div class="send-email-code">
@@ -109,6 +114,7 @@
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.pwdType`)"
+              maxlength="30"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -131,6 +137,7 @@
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.repwdType`)"
+              maxlength="30"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -169,33 +176,35 @@
             <div class="register-input">
               <input
                 v-model="firstname"
-
+                @input="firstName"
                 @focus="focusEvents"
                 @blur="blurEvents"
                 v-bind:class="{active:isActivefisrt}"
                 type="text"
                 :placeholder="$t(`${lang}.name`)"
+                maxlength="30"
               />
             </div>
-            <!-- <div class="error-tip">
+            <div v-show="firstnameShow" class="error-tip">
               {{ $t(`${lang}.surnameTips`) }}
-            </div> -->
+            </div>
           </div>
           <div class="relative margin-bottom-20">
             <div class="register-input">
               <input
                 v-model="lastname"
-
+                @input="lastName"
                 @focus="focusEvent"
                 @blur="blurEvent"
                 v-bind:class="{active:isActivelast}"
                 type="text"
                 :placeholder="$t(`${lang}.surname`)"
+                maxlength="30"
               />
             </div>
-            <!-- <div class="error-tip">
+            <div v-show="lastnameShow" class="error-tip">
               {{ $t(`${lang}.nameTips`) }}
-            </div> -->
+            </div>
           </div>
         </div>
         <div class="relative margin-bottom-20">
@@ -203,11 +212,13 @@
             <input
               v-model.trim="email"
 
+              @input="inputEvent2"
               @focus="focusEvent2"
               @blur="blurEvent2"
               type="text"
               v-bind:class="{active:isActivemail}"
               :placeholder="$t(`${lang}.email`)"
+              maxlength="60"
             />
           </div>
           <div v-show="emailShow" class="error-tip">
@@ -220,11 +231,13 @@
               <input
                 v-model="code"
                 readonly onfocus="this.removeAttribute('readonly');"
+                @input="inputCode"
                 @focus="focusEvent3"
                 @blur="blurEvent3"
                 v-bind:class="{active:isActivecode}"
                 type="text"
                 :placeholder="$t(`${lang}.code`)"
+                maxlength="15"
               />
             </div>
             <div class="send-email-code">
@@ -249,6 +262,7 @@
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.password`)"
+              maxlength="30"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -270,6 +284,7 @@
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.repassword`)"
+              maxlength="30"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -358,6 +373,8 @@ export default {
       codeShow:false,
       pwdShow:false,
       repwdShow:false,
+      firstnameShow: false,
+      lastnameShow: false
     }
   },
   watch:{
@@ -370,12 +387,12 @@ export default {
       }
     },
     email(){
-      if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
-        this.emailShow=true
-      }else{
-        this.emailShow=false
-        this.isActivemail=false
-      }
+      // if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
+      //   this.emailShow=true
+      // }else{
+      //   this.emailShow=false
+      //   this.isActivemail=false
+      // }
     },
     password_repetition(){
       if(this.password_repetition!=this.password){
@@ -748,7 +765,37 @@ export default {
     // 重置倒计时
     resetCountDown() {
       this.waitingTime = 0
+    },
+    inputEvent2(){
+      var that = this;
+      if(this.email.length == 60){
+        that.emailShow = true;
+      }else{
+        this.emailShow = false;
+      }
+    },
+    firstName(){
+      if(this.firstname.length == 30){
+        this.firstnameShow = true;
+      }else{
+        this.firstnameShow = false;
+      }
+    },
+    lastName(){
+      if(this.lastname.length == 30){
+        this.lastnameShow = true;
+      }else{
+        this.lastnameShow = false;
+      }
+    },
+    inputCode(){
+      if(this.code.length == 15){
+        this.codeShow = true;
+      }else{
+        this.codeShow = false;
+      }
     }
+
   }
 }
 </script>

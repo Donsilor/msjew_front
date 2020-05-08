@@ -127,6 +127,7 @@ export default {
       this.$store
         .dispatch(`removeCart`, data)
         .then(data => {
+          this.$emit(`bottomData`)
           this.$successMessage(this.$t(`cart.deleteSuccess`))
           this.$emit(`reloadList`)
         })

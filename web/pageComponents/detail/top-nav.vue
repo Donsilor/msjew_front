@@ -1,8 +1,8 @@
 <template>
   <div class="top">
-    <span class="to-list" @click="goBack($router)">
+    <!-- <span class="to-list" @click="goBack($router)">
       << {{ $t(`${lang}.back`) }}
-    </span>
+    </span> -->
   </div>
 </template>
 

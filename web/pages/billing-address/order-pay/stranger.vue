@@ -382,6 +382,24 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
+              <!-- vise -->
+              <div
+                :class="{ 'pay-choose': payWay == 61 }"
+                class="pay-block"
+                @click="Way(61)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/visa.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
+                <div v-show="payWay === 61" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 61" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+              
               <!-- 支付宝 -->
               <div
                 :class="{ 'pay-choose': payWay == 82 }"
@@ -392,12 +410,13 @@
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 82" class="pay-price"> 
+                <div v-show="payWay == 82" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
                 <div v-show="payWay == 82" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
-                </div> 
+                </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
               <!-- <div
                 :class="{ 'pay-choose': payWay === 8 }"
@@ -414,6 +433,7 @@
                 <div v-show="payWay == 8" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay"><span>*</span>{{ $t(`${lang}.msg11`) }}</div>
               </div> -->
               <!-- 微信 -->
               <div
@@ -431,8 +451,10 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
-              <!-- 信用卡 -->
+             
+               <!-- 信用卡 -->
               <div
                 :class="{ 'pay-choose': payWay == 81 }"
                 class="pay-block"
@@ -448,8 +470,8 @@
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
-
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
@@ -467,9 +489,10 @@
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div> -->
 
-              
+
 
               <!-- <div
                 :class="{ 'pay-choose': payWay == 1 }"
@@ -486,6 +509,7 @@
                 <div v-show="payWay == 1" class="choose-tick">
                   <img src="../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div> -->
 
               <!-- <div class="pay-question" @click="answer = true">?</div> -->
@@ -662,7 +686,7 @@
             <div class="invoice-btn" v-if="this.areaId === '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
-                <span>{{ $t(`${lang3}.default`) }}</span> 
+                <span>{{ $t(`${lang3}.default`) }}</span>
               </div>
               <div v-show="iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
@@ -673,7 +697,7 @@
               <div class="msg">
                 <div class="msgbox" v-show="content">
                   <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
-                  
+
                   <p class="title">{{ $t(`${lang3}.Invoicings`) }}</p>
                   <div class="btn_type">
                     <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang3}.PaperInvoice`) }}</button>
@@ -729,7 +753,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <!-- 发票抬头 -->
                   <div class="input-line">
                     <div class="label"><span class="star">*</span>{{ $t(`${lang3}.Invoice`) }}</div>
@@ -756,7 +780,7 @@
                     {{ $t(`${lang3}.hint2`) }}
                   </div>
                   <!-- 发票税号 -->
-                  <div class="input-line">  
+                  <div class="input-line">
                     <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
                     <div
                       :class="[
@@ -868,21 +892,24 @@
               </div>
             </div>
           </div> -->
-          <div class="new-address-title">
+          <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
+            <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
               <div class="hkd">{{ good.length }}</div>
             </div>
+
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
               <div class="hkd">
                 {{ $store.state.coin }} {{ formatMoney(goodsPrice) }}
               </div>
             </div>
+
             <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
@@ -901,7 +928,7 @@
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-                  <a href="/free-shipping" target="_blank"><span>?</span></a>
+                  <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -913,7 +940,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-                  <a href="/international" target="_blank"
+                  <a href="/policies/international" target="_blank"
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -948,7 +975,7 @@
         <div class="info-line" />
         <div
           :class="['buy-btn', { disabled: !canSubmit }]"
-          @click="createOrder()"
+          @click.stop="createOrder()"
         >
           <!-- <span
             >{{ $store.state.coin }}
@@ -1055,6 +1082,7 @@
                     v-model="addressData.firstName"
                     :class="{ 'wrong-input': wrongInput.firstName }"
                     type="text"
+                    maxlength="30"
                     @focus="
                       borderChange = 1
                       wrongInput.firstName = false
@@ -1364,6 +1392,23 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
+              <!-- vise -->
+              <div
+                :class="{ 'pay-choose': payWay == 61 }"
+                class="pay-block"
+                @click="Way(61)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/visa.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
+                <div v-show="payWay === 61" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 61" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
               <!-- 支付宝 -->
               <div
                 :class="{ 'pay-choose': payWay == 82 }"
@@ -1374,12 +1419,15 @@
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 82" class="pay-price"> 
+                <div v-show="payWay == 82" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
                 <div v-show="payWay == 82" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
-                </div> 
+                </div>
+                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+
               </div>
               <!-- <div
                 :class="{ 'pay-choose': payWay === 8 }"
@@ -1396,6 +1444,7 @@
                 <div v-show="payWay == 8" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div> -->
               <!-- 微信 -->
               <div
@@ -1413,6 +1462,8 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
               <!-- 信用卡 -->
               <div
@@ -1430,8 +1481,10 @@
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
-
+              
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
@@ -1449,9 +1502,10 @@
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div> -->
 
-              
+
 
               <!-- <div
                 :class="{ 'pay-choose': payWay == 1 }"
@@ -1468,6 +1522,7 @@
                 <div v-show="payWay == 1" class="choose-tick">
                   <img src="../../static/order/tick.png" alt="" />
                 </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div> -->
 
 
@@ -1645,7 +1700,7 @@
             <div class="invoice-btn" v-if="this.areaId === '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
-                <span>{{ $t(`${lang3}.default`) }}</span> 
+                <span>{{ $t(`${lang3}.default`) }}</span>
               </div>
               <div v-show="iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/ticks.png" alt="">
@@ -1656,7 +1711,7 @@
               <div class="msg">
                 <div class="msgbox" v-show="content">
                   <div @click="close" class="cha"><i class="el-icon-circle-close "></i></div>
-                  
+
                   <p class="title">{{ $t(`${lang3}.Invoicings`) }}</p>
                   <div class="btn_type">
                     <button @click="zhizhi(0)" :class="{active:isactive}">{{ $t(`${lang3}.PaperInvoice`) }}</button>
@@ -1712,7 +1767,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                   <!-- 发票抬头 -->
                   <div class="input-line">
                     <div class="label"><span class="star">*</span>{{ $t(`${lang3}.Invoice`) }}</div>
@@ -1739,7 +1794,7 @@
                     {{ $t(`${lang3}.hint2`) }}
                   </div>
                   <!-- 发票税号 -->
-                  <div class="input-line">  
+                  <div class="input-line">
                     <div class="label"><span v-if="invoice.invoice_type==1" class="star">*</span>{{ $t(`${lang3}.TaxID`) }}</div>
                     <div
                       :class="[
@@ -1851,9 +1906,10 @@
               </div>
             </div>
           </div> -->
-          <div class="new-address-title">
+          <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
+            <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -1884,7 +1940,7 @@
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-                  <a href="/free-shipping" target="_blank"><span>?</span></a>
+                  <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -1896,7 +1952,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-                  <a href="/international" target="_blank"
+                  <a href="/policies/international" target="_blank"
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -1931,7 +1987,7 @@
         <div class="info-line" />
         <div
           :class="['buy-btn', { disabled: !canSubmit }]"
-          @click="createOrder()"
+          @click.stop="createOrder()"
         >
           <!-- <span>{{ $store.state.coin }} {{ showOrderAmount }}</span> -->
           <span>{{ $t(`${lang}.beiQin`) }}</span>
@@ -2191,16 +2247,16 @@ export default {
       if(this.invoice.invoice_type == ''){
         this.redioShow = true
         return
-      } 
+      }
       if(this.invoice.invoice_title == ''){
         this.typeShow = true
         return
-      } 
+      }
       if(this.invoice.invoice_type == 1){
         if(this.invoice.tax_number == ''){
           this.taxShow = true
           return
-        } 
+        }
       }
       if(this.invoice.is_electronic == 1){
         if(this.invoice.email == '' || !(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.invoice.email))){
@@ -2213,7 +2269,7 @@ export default {
         //   return
         // }
       }
-      
+
       this.gou = true
       this.content = false
       setTimeout(() => {
@@ -2267,7 +2323,7 @@ export default {
     Way(ways){
       this.payWay=ways
       console.log("payway",ways)
-      if(ways==6){
+      if(ways==6||ways==61){
         this.show=false
       }else{
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
@@ -2382,33 +2438,55 @@ export default {
 
         json = json.concat(item)
       }
-      this.$axios
-        .post('/web/member/order-tourist/tax', {
-            goodsCartList:json
+      if(json.length){
+        this.$axios
+          .post('/web/member/order-tourist/tax', {
+              goodsCartList:json
+            })
+          .then(res => {
+            this.canSubmit = true
+            this.tex = res.data
+            console.log("税费",this.tex)
           })
-        .then(res => {
-          this.canSubmit = true
-          this.tex = res.data
-          console.log("税费",this.tex)
-        })
-        .catch(err => {
-          this.canSubmit = false
-          this.$message.error(err.message)
-          // this.tex = {
-          //   logisticsFee: 0,
-          //   taxFee: 0,
-          //   safeFee: 0,
-          //   orderAmount: null,
-          //   planDays: '--'
-          // }
-          if (!err.response) {
+          .catch(err => {
+            this.canSubmit = false
             this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
+            // this.tex = {
+            //   logisticsFee: 0,
+            //   taxFee: 0,
+            //   safeFee: 0,
+            //   orderAmount: null,
+            //   planDays: '--'
+            // }
+            if (!err.response) {
+              this.$message.error(err.message)
+            } else {
+              // console.log(err)
+            }
+          })
+      }else{
+        this.$message.error(this.$t(`${lang}.msg10`));
+        var that = this;
+        var timer = setTimeout(function(){
+          that.$router.replace('/shopping-cart');
+          clearTimeout(timer)
+        },2000)
+      }
     },
     createOrder() {
+      let pay = 0
+      if(this.payWay==6){
+        pay = 6
+      }else if(this.payWay==82){
+        pay = 82
+      }else if(this.payWay==83){
+        pay = 83
+      }else if(this.payWay==81){
+        pay = 81
+      }else if(this.payWay==61){
+        pay = 61
+      }
+    console.log("方式",pay)
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -2422,7 +2500,7 @@ export default {
         }, 22)
         return
       }
-      if(this.payWay!==6){
+      if(this.payWay==81 || this.payWay==82 ||this.payWay==83){
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
         const topB = document.getElementsByClassName('layout-box')[0];
         const that = this
@@ -2435,21 +2513,8 @@ export default {
         }, 22)
         return
       }
-      if(this.payWay!==6){
-          this.$errorMessage(this.$t(`${lang}.firstLogin`))
-          const topB = document.getElementsByClassName('layout-box')[0];
-          const that = this
-          let timer = setInterval(() => {
-            let ispeed = Math.floor(-that.scrollTop / 5)
-            topB.scrollTop = that.scrollTop + ispeed
-            if (that.scrollTop === 0) {
-              clearInterval(timer)
-            }
-          }, 22)
-        return
-      }
 
-      let baseUrl=this.$store.getters.baseUrl      
+      let baseUrl=this.$store.getters.baseUrl
       let invoice = {}
       let json=[]
 
@@ -2471,7 +2536,6 @@ export default {
       }
       console.log(this.iconShow)
       if(this.iconShow ){
-        console.log(1111)
         invoice = this.invoice
       }
       this.$axios({
@@ -2483,6 +2547,7 @@ export default {
           invoice:invoice,
           tradeType:'pc',
           coinType:this.$store.state.coin,
+          payType: pay,
           returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
         }
       })
@@ -2518,6 +2583,21 @@ export default {
             // console.log(err)
           }
         })
+    },
+    // 添加购物卡
+    useCard(){
+      const that = this
+
+      that.$errorMessage(that.$t(`${lang3}.PleaseLogin`));
+      const topC = document.getElementsByClassName('layout-box')[0];
+
+      let timer = setInterval(() => {
+        let ispeed = Math.floor(-that.scrollTop / 5)
+        topC.scrollTop = that.scrollTop + ispeed
+        if (that.scrollTop === 0) {
+          clearInterval(timer)
+        }
+      }, 22)
     }
   }
 }
@@ -4376,7 +4456,7 @@ div {
   }
   .gou-img{
     // display: flex;
-    // justify-content: center;   
+    // justify-content: center;
     width: 455px;
     padding: 0px 180px;
     img{
@@ -4406,7 +4486,7 @@ div {
     button{
       width: 120px;
       height: 35px;
-      background: #8b766c; 
+      background: #8b766c;
       border-radius: 4px;
       color:#fff;
     }
@@ -4728,5 +4808,45 @@ div {
   .el-select{
     width: 70%;
   }
+}
+
+.shopping-card-num{
+  display: inline-block;
+  // width: 18px;
+  // height: 18px;
+  // line-height: 18px;
+  margin-left: 4px;
+  font-size: 12px;
+}
+.add-shopping-card{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 24px;
+  line-height: 22px;
+  padding: 0 14px;
+  font-size: 13px;
+  color: #f29b87;
+  border: 1px solid #f29b87;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hint_pay{
+  position: absolute;
+  right: 80px;
+  top: 84px;
+  font-family: twCenMt;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 24px;
+}
+.hint_pay span{
+  color: #f00;
+  font-size: 18px;
+  opacity: 0.6;
+}
+.hint_pay.en{
+  top: 94px;
 }
 </style>

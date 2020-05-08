@@ -22,6 +22,7 @@
             class="base-name-input"
             :placeholder="$t(`${lang}.lastName`)"
             type="text"
+            maxlength="30"
           />
 
           <input
@@ -29,6 +30,7 @@
             class="base-name-input"
             :placeholder="$t(`${lang}.firstName`)"
             type="text"
+            maxlength="30"
           />
         </div>
         <div class="base-info-line" v-else>
@@ -37,15 +39,17 @@
             class="base-name-input"
             :placeholder="$t(`${lang}.firstName`)"
             type="text"
-          /> 
+            maxlength="30"
+          />
           <input
             v-model="userInfo.lastname"
             class="base-name-input"
             :placeholder="$t(`${lang}.lastName`)"
             type="text"
+            maxlength="30"
           />
         </div>
-        
+
       </div>
       <div class="base-info-line">
         <div class="base-info-line-title">{{ $t(`${lang}.sex`) }}：</div>
