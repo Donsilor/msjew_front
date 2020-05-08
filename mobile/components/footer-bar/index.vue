@@ -120,8 +120,8 @@
       <span class="text">{{ lang.handicraftExpert }}</span>
     </section>
     <div class="copy-right">
-      <!-- <span class="text">Copyright © 2019 BDD Co.</span> -->
-      <div>{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
+      <span class="text" v-if="this.$store.state.platform === 20">Copyright © 2019 BDD Co.</span>
+      <div v-else style="font-size:9px;margin-top:20px;">{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
     </div>
   </div>
 </template>
