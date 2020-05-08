@@ -76,10 +76,9 @@ export default function ({ req, res, redirect, store, route }) {
             if ((/^(wap-cn|wap-us)\.bddia\.com/).test(headerHost)) {
                 host = 'https://' + headerHost.replace('wap-', '');
             }
-        } else if ((/bddtest\.com/).test(headerHost)) {
-            //本地环境
-            host = 'http://www.bddtest.com';
-            if ((/^(wap-cn|wap-us)\.bddtest\.com/).test(headerHost)) {
+        } else if ((/bddco\.cn/).test(headerHost)) {
+            host = 'https://www.bddco.cn';
+            if ((/^(wap-cn|wap-us)-bdd\.bddco\.cn/).test(headerHost)) {
                 host = 'http://' + headerHost.replace('wap-', '');
             }
         }

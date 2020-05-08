@@ -12,7 +12,7 @@ export default ({ req, app, store, $axios }, inject) => {
     let platform = 10
     if (isServer) {
         let host = req.headers['host']
-        if ((/^(cn|wap-cn)\./is).test(host)) {
+        if ((/^(cn|wap-cn|www\.bddco|wap\.bddco)\./is).test(host)) {
             language = 'zh_CN'
             coin = 'HKD'
             areaId = 1
