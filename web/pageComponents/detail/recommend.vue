@@ -25,22 +25,41 @@
             </div> -->
 
             <!-- 折扣 -->
-            <div class="list-discount-icon1" v-if="1">
-              <span>{{ discountConversion(62) }}折</span>
+            <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
+              <span>{{ discountConversion(item.coupon.discount.discount) }}折</span>
             </div>
 
             <!-- 优惠券 -->
-            <!-- <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
+            <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
               <span>优惠券</span>
-            </div> -->
+            </div>
           </div>
           <div class="product-info">
             <div class="product-price">
-              <span class="coin">{{ item.coinType }}</span>
-              <span class="price">{{ formatNumber(item.price) }}</span>
+             <div v-if="couponType(item.coupon) !== 'discount'">
+                <span class="coin">{{ item.coinType }}</span>
+                <span class="price">{{ formatNumber(item.salePrice) }}</span>
+              </div>
+            
+              <!-- 折扣 -->
+              <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                <div>
+                  <span class="coin">{{ item.coinType }}</span>
+                  <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                </div>
+                <div>
+                  <span class="coin">{{ item.coinType }}</span>
+                  <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                </div>
+              </div>
             </div>
+
             <div class="product-title">
-              {{ item.name }}
+              <!-- 优惠券 -->
+              <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+              <!-- 折扣 -->
+              <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}折</span>
+              {{ item.goodsName }}
             </div>
           </div>
         </div>

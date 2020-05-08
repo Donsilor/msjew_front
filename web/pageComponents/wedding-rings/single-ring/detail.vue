@@ -130,8 +130,8 @@
 			</div>
 
 			<div class="discount-price">
-				<span class="old-price">原   价HKD  2,222,22</span>
-				<span class="new-price">折后价HKD  2,222,22</span>
+				<span class="old-price">原   价HKD  {{ formatNumber(this.info.salePrice) }}</span>
+				<span class="new-price">折后价{{ formatNumber(this.info.coupon.discount.price) }}</span>
 			</div>
 		</div>
 
@@ -141,7 +141,7 @@
 				<div>
 					<span>优惠券：</span>
 					<span class="favourable-icon">￥</span>
-					<span class="get">领取优惠券></span>
+					<span class="get" @click="showCoupon = true">领取优惠券></span>
 				</div>
 				<div class="time">活动时间：2020.4.9</div>
 			</div>
@@ -255,6 +255,8 @@
     <section class="desc" v-html="info.goodsDesc"></section>
     <order-include></order-include>
     <comments ref="product-comments" :good-id="info.id"></comments>
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
   </div>
 </template>
 
@@ -335,7 +337,9 @@ export default {
       ringChecked: {
         materialIndex: 0,
         sizeIndex: 0
-      }
+      },
+      showCoupon: false,
+      moneyList: []
     }
   },
   computed: {
@@ -448,6 +452,7 @@ export default {
     }
   },
   mounted() {
+    console.log(11211,this.info)
     const _this = this
     _this.$nextTick(() => {
       // console.log(this.$helpers.base64Decode(this.$route.query.steps))
@@ -455,6 +460,7 @@ export default {
         this.checkDetail()
       }
     })
+
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {

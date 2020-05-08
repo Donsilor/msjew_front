@@ -827,6 +827,7 @@
                 -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
               </div>
             </div>
+            <div>111111111111</div>
             <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
@@ -1754,6 +1755,8 @@
                 {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
+
+            <!-- 购物卡 -->
             <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
@@ -1761,7 +1764,7 @@
               </div>
             </div>
 
-            <div v-show="makeGay" class="detail-line">
+            <!-- <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
                 <span style="color: red;">{{
@@ -1776,7 +1779,17 @@
               <div class="hkd color-pink">
                 -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
               </div>
+            </div> -->
+
+            <!-- 优惠券 -->
+            <div v-show="1" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <div class="hkd color-pink" :class="{'under-line': !coupon}" @click="showUseCoupon = true">
+                <!-- -{{ $store.state.coin }} {{ formatMoney(123) }} -->
+                {{coupon ? coupon : '选择可用优惠券'}}
+              </div>
             </div>
+
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
@@ -1877,6 +1890,8 @@
       :currencyType = "currency"
     ></shopping-card>
   </div>
+
+  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo"></use-coupon>
 </div>
 </template>
 
@@ -1969,8 +1984,8 @@ export default {
       isSameEmail: false,
       orderEmail: ``,
       remark: '',
-      coupons: [{ couponCode: '- - -', couponId: '' }],
-      coupon: { couponCode: '- - -', couponId: '' },
+      // coupons: [{ couponCode: '- - -', couponId: '' }],
+      // coupon: { couponCode: '- - -', couponId: '' },
       goodsPrice: 0,
       preferFee: 0,
       tex: {
@@ -1999,7 +2014,9 @@ export default {
       ultimatelyPay: 0,
       num: 0,
       mobileMax: 20,
-      currency: ''
+      currency: '',
+      coupon: 'CP202005085112174',
+      showUseCoupon: false
     }
   },
   computed: {
@@ -2023,7 +2040,7 @@ export default {
         .then(res => {
           this.good = res
 
-          // console.log("res",res)
+          console.log("res",res)
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
           }
@@ -2057,6 +2074,7 @@ export default {
   },
   mounted() {
     // this.getAddress();
+    console.log(668,this.good)
     this.language = this.getCookie('language')
   },
   methods: {
@@ -2789,22 +2807,33 @@ export default {
       //   })
     },
     getTex(k) {
-      const cards = k || '';
-      const arr = []
+      const cards = k || [];
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
       for (const i in this.good) {
+        arr.push({...obj})
         if (this.good[i].groupType === null) {
-          arr.push(this.good[i].data[0].id)
+          arr[i].cart_id = this.good[i].data[0].id;
         } else {
-          arr.push(this.good[i].data[0].id)
-          arr.push(this.good[i].data[1].id)
+          arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
+          arr[i+1].cart_id = this.good[i].data[1].id;
         }
       }
       // console.log("this.good",this.good)
+
+      console.log(8866,arr)
+      return
       const data = arr.join(',')
       const datas={
+
+        cards: [
+          {cart_id: '',coupon_id: ''}
+        ],
+        coupon_id: '',
         addressId: this.orderAddress.id,
-        cards: cards,
-        cartIds: data
+        cards: cards
+
       }
       this.canSubmit = false
       this.$axios
@@ -3029,6 +3058,9 @@ export default {
        }else{
          this.mobileMax = 20
        }
+     },
+     closeCo(){
+       this.showUseCoupon = false
      }
 
   }
@@ -4850,6 +4882,11 @@ div {
   color: #f29b87;
   border: 1px solid #f29b87;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.under-line{
+  text-decoration: underline;
   cursor: pointer;
 }
 </style>

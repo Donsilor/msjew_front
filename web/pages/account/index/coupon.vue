@@ -2,12 +2,12 @@
   <div class="account">
     <div class="pink-title">
       <div class="pink-line" />
-      <div class="title-name">优惠券卡包</div>
+      <div class="title-name">{{ $t(`${lang}.title`) }}</div>
     </div>
     <div class="base-info">
       <div class="coupon_box clf">
         <!-- 优惠券列表 -->
-        <div class="list fl" v-for="(item, index) in couponList">
+        <div class="list fl" v-for="(item, index) in couponList" :key="index">
            <div class="line-box">
              <div class="point-box">
                <i></i><i></i><i></i><i></i>
@@ -16,11 +16,13 @@
 
            <div class="price">
              <span class="price-icon">￥</span>
-             <span class="price-num">1</span>
+             <span class="price-num">{{item.money}}</span>
+             <span class="currency">(usd {{item.money}})</span>
            </div>
 
-           <div class="rule">{{ $t(`${lang}.title`) }}</div>
-           <div class="btn">{{ $t(`${lang}.use`) }}</div>
+           <div class="rule">满{{item.atLeast}}元使用</div>
+           <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
+           <div class="use">(限项链使用)</div>
            <div class="time">{{ $t(`${lang}.time`) }}：2020.2.1- 2020.2.2</div>
 
            <!-- 失效 class="lose-efficacy" -->
@@ -39,56 +41,24 @@ export default {
   data() {
     return {
       lang,
-	  language: '',
-      couponList: [
-        {
-          price: 5,
-          restrict: 100,
-          timeStar: '2020.2.1',
-          timeEnd: '2020.2.2',
-          loseEfficacy: true
-        },
-        {
-          price: 5,
-          restrict: 100,
-          timeStar: '2020.2.1',
-          timeEnd: '2020.2.2',
-          loseEfficacy: false
-        },
-        {
-          price: 5,
-          restrict: 100,
-          timeStar: '2020.2.1',
-          timeEnd: '2020.2.2',
-          loseEfficacy: false
-        },
-        {
-          price: 5,
-          restrict: 100,
-          timeStar: '2020.2.1',
-          timeEnd: '2020.2.2',
-          loseEfficacy: false
-        },
-        {
-          price: 5,
-          restrict: 100,
-          timeStar: '2020.2.1',
-          timeEnd: '2020.2.2',
-          loseEfficacy: false
-        },
-        {
-          price: 5,
-          restrict: 100,
-          timeStar: '2020.2.1',
-          timeEnd: '2020.2.2',
-          loseEfficacy: false
-        }
-      ]
-
+      language: '',
+      couponList: []
     }
   },
   mounted(){
 	  this.language = this.getCookie('language')
+
+    // 获取优惠券
+    this.$axios.get('web/member/coupon/index', {
+      })
+      .then(res => {
+        this.ifLoading = false;
+        this.couponList = res.data.data
+      })
+      .catch(err => {
+        this.ifLoading = false;
+        console.log('emmmm')
+      })
   },
   methods: {
 	  getCookie(cname) {
@@ -105,11 +75,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-@font-face{
-  font-family: HiraginoSansGB-W6;
-  src: url('../../../assets/css/HiraginoSansGB-W6.otf');
-}
-
 .account {
   width: 100%;
   .pink-title {
@@ -305,14 +270,14 @@ export default {
   border-radius: 5px;
   box-shadow: 0 1px 0 #9C999C,0 2px 0 #D6D5D6,0 3px 0 #E3E1E3,0 4px 0 #D6D5D6,0 5px 0 #EDECED,0 6px 0 #F9F9F9;
   margin-bottom: 30px;
-  
+
   .line-box{
     width: 258px;
     height: 1px;
     background-color: #A6937C;
     margin: 30px auto 24px;
     position: relative;
-    
+
     .point-box{
       position: absolute;
       top: 50%;
@@ -324,7 +289,7 @@ export default {
       justify-content: space-around;
       background-color: #fff;
       background-image: linear-gradient(to right, #fcfafb, #f9f7f8);
-      
+
       i{
         width: 6px;
         height: 6px;
@@ -338,17 +303,21 @@ export default {
     width: 100%;
     display: flex;
     justify-content: center;
-    
+
     .price-icon{
       font-size: 27px;
     }
-    
+
     .price-num{
-      font-family: HiraginoSansGB-W6;
       font-size: 67px;
       color: #cdad75;
       margin: -9px 0 0 -4px;
       padding-right: 10px;
+    }
+
+    .currency{
+      margin-top: 40px;
+      font-size: 12px;
     }
   }
   .rule{
@@ -370,7 +339,13 @@ export default {
     border-radius: 2px;
     cursor: pointer;
   }
-  
+  .use{
+    text-align: center;
+    color: #f00;
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
   .time{
     font-size: 13px;
     color: #cdad75;

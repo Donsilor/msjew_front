@@ -583,11 +583,11 @@ color-red {
 
 .discount-price{
 	display: flex;
-	align-items: center;
+	align-items: flex-end;
 	margin-bottom: 44px;
 }
 .old-price{
-	font-size: 13px;
+	font-size: 15px;
 	color: #b2b2b2;
 	text-decoration: line-through;
 }
