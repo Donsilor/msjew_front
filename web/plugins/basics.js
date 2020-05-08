@@ -12,12 +12,12 @@ export default ({ req, app, store, $axios }, inject) => {
     let platform = 10
     if (isServer) {
         let host = req.headers['host']
-        if ((/^(cn\.|wap-cn\.|www\.bddco\.cn|wap\.bddco\.cn)/is).test(host)) {
+        if ((/^(cn|cn-bdd|wap-cn|www\.bddco\.cn|wap\.bddco\.cn)/is).test(host)) {
             language = 'zh_CN'
             coin = 'HKD'
             areaId = 1
             platform = 20 //PC大陆
-        } else if ((/^(us|wap-us|us-bdd)\./is).test(host)) {
+        } else if ((/^(us|us-bdd|wap-us)\./is).test(host)) {
             language = 'en_US'
             coin = 'USD'
             areaId = 99
