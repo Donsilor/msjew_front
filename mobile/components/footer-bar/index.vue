@@ -120,7 +120,8 @@
       <span class="text">{{ lang.handicraftExpert }}</span>
     </section>
     <div class="copy-right">
-      <span class="text">Copyright © 2019 BDD Co.</span>
+      <!-- <span class="text">Copyright © 2019 BDD Co.</span> -->
+      <div>{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
     </div>
   </div>
 </template>
@@ -287,7 +288,9 @@ export default {
   padding-bottom: 20px;
   /*margin-bottom: 20px;*/
   background-color: #ffffff;
-
+  div,a{
+     color: rgba(202, 202, 202, 1);
+  }
   .text {
     font-size: 10px;
     font-weight: 400;

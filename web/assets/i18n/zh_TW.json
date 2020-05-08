@@ -470,7 +470,9 @@
       "getNew": "獲取我們的最新資訊",
       "footdisc": "*通過註冊，您確認已查看私隱政策，並同意BDD Co.收集並使用您的電子郵件和性別，以便通過電子郵件發送新聞，促銷和更新。您可以通過取消訂閱或通過 service@BDDCo.com 與我們聯絡，隨時撤銷您的同意。",
       "copyrightLeft": "與我們的珠寶顧問聯絡： 香港時間(GMT+8)星期一至五上午9時至晚上6時 (香港公眾假期除外)  /  +852 2165 3905  /  service@bddco.com",
-      "copyrightRight": "© 2019 BDD Co. All Rights Reserved."
+      "copyrightRight": "© 2019 BDD Co. All Rights Reserved.",
+      "copyrightRight1": "粵ICP備",
+      "copyrightRight2": "號-1/Copyright©2018-2020  www.bddco.cn   BDD Co.官网   All Rights Reserved."
     },
     "sendEmailCode": {
       "sendCode": "發送驗證碼",
