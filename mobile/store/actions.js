@@ -684,11 +684,18 @@ export default {
             goods = goods.map(good => {
                 good.updateTime = item.id
                 good.createTime = item.id
+                good.goodsDetailsId = good.goodsDetailsId
                 good.goods_id = good.goodsDetailsId
+                good.goods_type = good.goodsType
+                good.goods_num = good.goodsCount
+                good.group_id = good.groupId
+                good.group_type = good.groupType
+                good.serviceId = good.serviceId
+                good.serviceVal = good.serviceVal
                 return good
             })
             sendData = sendData.concat(goods)
-        })
+        }) 
 
         //console.log('sendData===========>', sendData)
 
