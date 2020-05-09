@@ -338,13 +338,13 @@ export default {
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+          url: '/cart/ph.png',
+          type: 84,
+          title: this.LANGUAGE.cart.pay.payType5,
+          des: this.LANGUAGE.cart.pay.type5Text
         }
-        // {
-        //   url: '/cart/paydollar.png',
-        //   type: 8,
-        //   title: this.LANGUAGE.cart.pay.payType3,
-        //   des: this.LANGUAGE.cart.pay.type3Text
-        // }
       ],
       sum: '2,120.00',
       info:'',
@@ -535,9 +535,11 @@ export default {
         pay = 83
       }else if(this.typeIndex == 4){
         pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 84
       }
 
-      if(pay == 81 || pay == 82 || pay == 83){
+      if(pay == 81 || pay == 82 || pay == 83|| pay == 84){
         this.$toast.show(this.lang.firstLogin)
       }
       if (ind === 5) {

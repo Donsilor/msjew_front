@@ -245,12 +245,23 @@
               <div class="upload">
                 <div class="up">
                   <el-upload
+                    class="upload-demo"
+                    action="https://jsonplaceholder.typicode.com/posts/"
+                    :on-preview="handlePreview"
+                    :on-remove="handleRemove"
+                    :file-list="fileList"
+                    list-type="picture">
+                    <i class="el-icon-plus"></i>
+                    <div>上传图片</div>
+                    <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
+                  </el-upload>
+                  <!-- <el-upload
                     action=""
                     list-type="picture-card"
                     :on-preview="handlePictureCardPreview"
                     :on-remove="handleRemove">
                     <i class="el-icon-plus"></i>
-                  </el-upload>
+                  </el-upload> -->
                   <!-- <span class="up-text">上传图片</span> -->
                   <el-dialog :visible.sync="dialogVisible">
                     <img width="100%" :src="dialogImageUrl" alt="">
@@ -329,7 +340,8 @@ export default {
       actionLink: '',
       goingPay: false,
       language:'',
-      transfer:true,
+      transfer:false,
+      fileList: [],
       dialogImageUrl: '',
       dialogVisible: false
     }
@@ -346,10 +358,16 @@ export default {
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url;
-      this.dialogVisible = true;
+    handlePreview(file) {
+      console.log(file);
     },
+    // handleRemove(file, fileList) {
+    //   console.log(file, fileList);
+    // },
+    // handlePictureCardPreview(file) {
+    //   this.dialogImageUrl = file.url;
+    //   this.dialogVisible = true;
+    // },
     wire(){
       this.transfer = true
     },
@@ -926,6 +944,22 @@ div {
 }
 </style>
 <style>
+.el-upload{
+  width: 80px;
+  height: 80px;
+  border: solid 1px #cdcdcd!important;
+  background-color: #ffffff;
+}
+.el-icon-plus{
+  font-size: 28px;
+  color: #8c939d;
+  width: 80px;
+  line-height: 50px;
+  text-align: center;
+}
+.el-upload-list--picture .el-upload-list__item.is-success .el-upload-list__item-name{
+  display: none;
+}
  .el-upload--picture-card{
   border: solid 1px #cdcdcd!important;
   background-color: #ffffff;

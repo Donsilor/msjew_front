@@ -475,18 +475,18 @@
 
               <!-- 电汇 -->
               <div
-                :class="{ 'pay-choose': payWay == 1 }"
+                :class="{ 'pay-choose': payWay == 84 }"
                 class="pay-block"
-                @click="payWay = 1"
+                @click="Way(84)"
               >
                 <div class="pay-img">
                   <img src="../../../static/order/epay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
-                <div v-show="payWay == 1" class="pay-price">
+                <div v-show="payWay == 84" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
                 </div>
-                <div v-show="payWay == 1" class="choose-tick">
+                <div v-show="payWay == 84" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
@@ -1506,18 +1506,18 @@
               
               <!-- 电汇 -->
               <div
-                :class="{ 'pay-choose': payWay == 1 }"
+                :class="{ 'pay-choose': payWay == 84 }"
                 class="pay-block"
-                @click="payWay = 1"
+                @click="Way(84)"
               >
                 <div class="pay-img">
                   <img src="../../../static/order/epay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
-                <div v-show="payWay == 1" class="pay-price">
+                <div v-show="payWay == 84" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
                 </div>
-                <div v-show="payWay == 1" class="choose-tick">
+                <div v-show="payWay == 84" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
