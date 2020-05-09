@@ -72,15 +72,18 @@ export default function ({ req, res, redirect, store, route }) {
             //生产环境
             host = 'https://wap-' + headerHost;
         } else if ((/bddia\.com/).test(headerHost)) {
+            //测试环境 bddia.com
             host = 'https://wap.bddia.com'
             if ((/^(cn|us)\.bddia\.com/).test(headerHost)) {
-                //测试环境
                 host = 'https://wap-' + headerHost;
             }
         } else if ((/bddco.cn/).test(headerHost)) {
-            host = 'http://wap.bddco.cn'
+            //大陆站点 bddco.cn
+            host = 'https://wap.bddco.cn'
             if ((/^(cn|us)-bdd.bddco.cn/).test(headerHost)) {
-                host = 'http://wap-' + headerHost;
+                host = 'https://wap-' + headerHost;
+            } else if (headerHost == 'www-bdd.bddco.cn') {
+                host = 'https://wap-bdd.bddco.cn'
             }
         }
 
