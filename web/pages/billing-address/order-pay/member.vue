@@ -2819,6 +2819,10 @@ export default {
           arr[i].cart_id = this.good[i].data[0].id;
           arr[i+1].cart_id = this.good[i].data[1].id;
         }
+        
+        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.good[i].data[0].coupon.discount
+        }
       }
       // console.log("this.good",this.good)
 
