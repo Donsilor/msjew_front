@@ -106,12 +106,6 @@ export default {
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-          url: '/cart/ph.png',
-          type: 84,
-          title: this.LANGUAGE.cart.pay.payType5,
-          des: this.LANGUAGE.cart.pay.type5Text
         }
         // {
         //   url: '/cart/paydollar.png',

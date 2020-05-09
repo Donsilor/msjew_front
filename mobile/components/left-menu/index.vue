@@ -180,9 +180,9 @@
 import Helpers from '@/assets/js/helpers.js'
 import Mixin from '../../pages/accessories/mixin.js'
 import List from '@/mixins/list.js'
-import GoodListProps from '@/mixins/good-list-props.js'
+// import GoodListProps from '@/mixins/good-list-props.js'
 export default {
-  mixins: [Mixin, List, GoodListProps],
+  mixins: [Mixin, List],
   data() {
     return {
       cnIcon:true,

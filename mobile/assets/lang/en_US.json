@@ -227,7 +227,7 @@
       "support": "Support only: mainland version"
     },
     "paySuccess": {
-      "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+      "PayPending1":"The order has been submitted, the system is processing ... please wait",
       "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
       "handing": "Order processing ...",
       "title": "ORDER PAID",
@@ -278,7 +278,7 @@
       "coustom": "Customize"
     },
     "payFailed": {
-      "title": "Sorry, the payment was not completed",
+      "title": "Sorry, the order payment failed! Please repay",
       "phone": "For any questions, contact customer service (852)-2165 3905",
       "orderNo": "Order#：",
       "payAgain": "PAY AGAIN",

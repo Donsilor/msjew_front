@@ -203,7 +203,7 @@
               {{ formatMoney( productAmount) }}</span
             >
           </li>
-					<li v-for="item in useAmount">
+					<li v-for="(item,index) in useAmount" :key="index">
 					  <div>
 					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
 					  </div>
@@ -338,13 +338,13 @@ export default {
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-          url: '/cart/ph.png',
-          type: 84,
-          title: this.LANGUAGE.cart.pay.payType5,
-          des: this.LANGUAGE.cart.pay.type5Text
         }
+        // {
+        //   url: '/cart/paydollar.png',
+        //   type: 8,
+        //   title: this.LANGUAGE.cart.pay.payType3,
+        //   des: this.LANGUAGE.cart.pay.type3Text
+        // }
       ],
       sum: '2,120.00',
       info:'',
@@ -535,11 +535,9 @@ export default {
         pay = 83
       }else if(this.typeIndex == 4){
         pay = 81
-      }else if(this.typeIndex == 5){
-        pay = 84
       }
 
-      if(pay == 81 || pay == 82 || pay == 83|| pay == 84){
+      if(pay == 81 || pay == 82 || pay == 83){
         this.$toast.show(this.lang.firstLogin)
       }
       if (ind === 5) {
@@ -905,6 +903,7 @@ export default {
             url: url,
             data: data
           })
+
           .then(res => {
             // console.log("费用",res)
             this.canSubmit = true
@@ -1007,6 +1006,7 @@ export default {
     // 支付
     //  已登录创建订单
     createOrder() {
+      this.$nuxt.$loading.start()
       // if (!this.canSubmit) {
       //   return
       // }
@@ -1607,7 +1607,7 @@ export default {
             color: rgba(153, 153, 153, 1);
           }
         }
-        li.order-pay, {
+        li.order-pay{
           line-height: 20px;
           margin-top: 10px;
           padding-top: 10px;
