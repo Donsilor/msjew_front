@@ -608,7 +608,7 @@
             <div class="send-left">
               <div>{{ $t(`${lang}.sendTime`) }}</div>
               <div>
-                <router-link to="/deliveryPolicy">{{
+                <router-link to="/policies/shipping">{{
                   $t(`${lang}.checkDeliveryPolicy`)
                 }}</router-link>
               </div>
@@ -1622,7 +1622,7 @@
             <div class="send-left">
               <div>{{ $t(`${lang}.sendTime`) }}</div>
               <div>
-                <router-link to="/deliveryPolicy">{{
+                <router-link to="/policies/shipping">{{
                   $t(`${lang}.checkDeliveryPolicy`)
                 }}</router-link>
               </div>
