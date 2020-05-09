@@ -181,7 +181,7 @@ export default {
       this.$router.push({
         name: 'search-result',
         query: {
-          keyword: keyword
+          keyword: this.$helpers.base64Encode(keyword)
         }
       })
     }

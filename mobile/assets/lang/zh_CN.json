@@ -198,7 +198,8 @@
         "NeedPay": "需付金額",
         "submitSuccessfully": "订单提交成功!",
         "PleaseLogin": "请先登录，才能使用购物卡！",
-        "msg10": "购物车不能为空，请重新添加商品"
+        "msg10": "购物车不能为空，请重新添加商品",
+        "msg11": "仅供大陆使用"
       },
       "pay": {
         "pay": "订单支付",
@@ -206,18 +207,25 @@
         "goPay": "支付",
         "payType0": "PayPal",
         "type0Text": "使用PayPal安全支付",
-        "payType1": "信用卡",
-        "type1Text": "在网上以您的信用卡快速安全地付款",
+        "payType1": "银联",
+        "type1Text": "使用中国银联银行卡，安全支付",
         "payType2": "中国银行",
         "type2Text": "使用中国银联银行卡安全支付",
         "payType3": "支付宝",
-        "type3Text": "使用支付宝安全支付",
+        "type3Text": "网上付款、方便、快捷",
         "payType4": "微信",
         "type4Text": "网上付款、方便、快捷",
         "payType5": "电汇",
         "type5Text": "以电汇方式付款将享有1.5%折扣优惠",
+        "payType6": "Visa/MasterCard",
+        "type6Text": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
         "type5Text2": "注意，电子支票并非电汇",
-        "paytip":"由于Paydallor不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！"
+        "paytip1":"由于支付宝暂不支持“美元”进行结算，请切换其他货币完成本次订单支付，谢谢!",
+        "paytip2":"由于微信暂不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！",
+        "paytip3":"由于信用暂卡不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！",
+        "msg11": "仅供大陆使用",
+        "paytip":"由于Paydallor不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！",
+        "support": "暂仅支持：大陆版"
       },
       "paySuccess": {
         "PayPending1":"订单已经提交，系统正在处理中,请稍等。",
@@ -825,7 +833,10 @@
         "privacyPolicy": "私隐政策",
         "termsAndConditions": "条款及细则",
         "onlineStore": "品质优越钻石网上店",
-        "handicraftExpert": "首饰专家"
+        "handicraftExpert": "首饰专家",
+        "copyrightRight": "© 2019 BDD Co. All Rights Reserved.",
+        "copyrightRight1": "粤ICP备",
+        "copyrightRight2": "号-1/Copyright©2018-2020  BDD Co.官网   All Rights Reserved."
       },
       "leftMenu": {
         "search": "搜索",
