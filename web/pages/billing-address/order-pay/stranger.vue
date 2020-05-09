@@ -2525,6 +2525,7 @@ export default {
           // })
         })
         .catch(err => {
+          this.goingPay = false
           if (!err.response) {
             this.$message.error(err.message)
           } else {

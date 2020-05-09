@@ -1057,6 +1057,7 @@ export default {
             }
           })
           .catch(err => {
+            this.$nuxt.$loading.finish()
             this.$toast.show(err.message)
           })
       } else {
@@ -1120,6 +1121,7 @@ export default {
               // })
             })
             .catch(err => {
+              this.$nuxt.$loading.finish()
               this.$toast.show(err.message)
             })
           }else{

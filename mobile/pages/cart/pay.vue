@@ -257,6 +257,7 @@ export default {
           }
         })
         .catch(err => {
+          this.$nuxt.$loading.finish()
           console.log(err)
           this.$toast.show(err.message)
           // this.$router.replace({
