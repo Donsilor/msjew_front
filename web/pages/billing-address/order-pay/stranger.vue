@@ -472,6 +472,25 @@
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
+
+              <!-- 电汇 -->
+              <div
+                :class="{ 'pay-choose': payWay == 1 }"
+                class="pay-block"
+                @click="payWay = 1"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/epay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
+                <div v-show="payWay == 1" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
+                </div>
+                <div v-show="payWay == 1" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+              </div>
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
@@ -1485,6 +1504,24 @@
         "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
               
+              <!-- 电汇 -->
+              <div
+                :class="{ 'pay-choose': payWay == 1 }"
+                class="pay-block"
+                @click="payWay = 1"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/epay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
+                <div v-show="payWay == 1" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
+                </div>
+                <div v-show="payWay == 1" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+              </div>
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
@@ -2164,6 +2201,9 @@ export default {
         result = '--'
       }
       return result
+    },
+    ttPrice() {
+      return this.goodsPrice * 0.985
     }
   },
   created() {
@@ -4374,7 +4414,8 @@ div {
           color: #f29b87;
           position: absolute;
           right: 80px;
-          top: 50px;
+          // top: 50px;
+          top: 33px;
           line-height: 24px;
         }
         .choose-tick {
@@ -4835,7 +4876,7 @@ div {
 .hint_pay{
   position: absolute;
   right: 80px;
-  top: 84px;
+  top: 94px;
   font-family: twCenMt;
   font-size: 14px;
   color: #aaa;
@@ -4846,7 +4887,7 @@ div {
   font-size: 18px;
   opacity: 0.6;
 }
-.hint_pay.en{
-  top: 94px;
-}
+// .hint_pay.en{
+//   top: 94px;
+// }
 </style>

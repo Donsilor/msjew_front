@@ -149,6 +149,23 @@
           "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
         </div>
 
+        <!-- 电汇 -->
+        <div
+          :class="{ 'pay-choose': payWay == 1 }"
+          class="pay-block"
+          @click="payWay = 1;wire()"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/epay.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
+          <div v-show="payWay == 1" class="pay-price">
+            {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
+          </div>
+          <div v-show="payWay == 1" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+        </div>
         <!-- <div
           :class="{ 'pay-choose': payWay == 1 }"
           class="pay-block"
@@ -169,6 +186,100 @@
         <!-- <div class="pay-question" @click="answer = true">?</div> -->
       </div>
       <div class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
+    </div>
+    <!-- 电汇弹窗 -->
+    <div class="wireTransfer" v-show="transfer">
+      <div class="msg">
+        <div class="msgbox" >
+          <div class="title">
+            请选择银行账户
+            <img @click="closed" class="close" src="../../static/order/closed.png" alt="">
+          </div>
+          <div class="content">
+            <div class="Amount">
+              <span>需支付金额:</span>
+              {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
+            </div>
+            <div class="account-ways">
+              <div :class="{ 'account-choose': payWay == 1 }" class="account-block" @click="payWay = 1">
+                <div class="account">
+                  <span>账户:</span>
+                  <span>星展銀行(香港)有限公司</span>
+                </div>
+                <div class="account-num">
+                  <span>户口号码:</span>
+                  <span>475522173</span>
+                </div>
+                <div class="account-name">
+                  <span>户口名称:</span>
+                  <span>BDD Co. Limited</span>
+                </div>
+                <div v-show="payWay == 1" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+
+              <div :class="{ 'account-choose': payWay == 2 }" class="account-block" @click="payWay = 2">
+                <div class="account">
+                  <span>账户:</span>
+                  <span>星展銀行(香港)有限公司</span>
+                </div>
+                <div class="account-num">
+                  <span>户口号码:</span>
+                  <span>475522173</span>
+                </div>
+                <div class="account-name">
+                  <span>户口名称:</span>
+                  <span>BDD Co. Limited</span>
+                </div>
+                <div v-show="payWay == 2" class="choose-tick">
+                  <img src="../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+            </div>
+            <div class="uploadPic">
+              <div class="text">
+                <span class="star">*</span>
+                <span>上传支付凭证:</span>
+              </div>
+              <div class="upload">
+                <div class="up">
+                  <el-upload
+                    action=""
+                    list-type="picture-card"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove">
+                    <i class="el-icon-plus"></i>
+                  </el-upload>
+                  <!-- <span class="up-text">上传图片</span> -->
+                  <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                  </el-dialog>
+                </div>
+                <div class="tip">
+                  请确保图片上清晰显示转账日期和银码以便核实款项
+                </div>
+              </div>
+            </div>
+            <div class="transactionNum">
+              <div class="text2">
+                <div class="number">支付交易号</div>
+                <div class="can-select">(可选填)</div>
+              </div>
+              <div class="num-input">
+                <input type="text">
+              </div>
+            </div>
+            <div class="btnPay">
+              <div class="cancel-pay">取消付款</div>
+              <div class="finish-pay">已完成付款</div>
+            </div>
+            <div class="prompt">
+              <p>* 注：支付完成后请选择支付的银行账户，请上传凭证</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!--    unionPayHide-->
     <div v-show="false">
@@ -217,7 +328,10 @@ export default {
       form: [],
       actionLink: '',
       goingPay: false,
-      language:''
+      language:'',
+      transfer:true,
+      dialogImageUrl: '',
+      dialogVisible: false
     }
   },
   mounted(){
@@ -229,6 +343,19 @@ export default {
     }
   },
   methods: {
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    wire(){
+      this.transfer = true
+    },
+    closed(){
+      this.transfer = false
+    },
     goPay() {
       let pay = 0
       if(this.payWay==6){
@@ -584,4 +711,259 @@ div {
 .hint_pay.en{
   top: 94px;
 }
+
+.wireTransfer{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 99999999;
+  top: 0;
+  left: 0;
+  .msg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    .msgbox{
+      // border-radius: 8px;
+      // padding: 0 30px 30px 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 980px;
+      // height: 695px;
+      // overflow-y: scroll;
+      background: rgba(255, 255, 255, 1);
+      .cha{
+        text-align: right;
+        i{
+          font-size: 30px;
+        }
+      }
+      .title{
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+        background-color: #f8f0f0;
+        position: relative;
+      }
+      .close{
+        position: absolute;
+        width: 16px;
+        top:16px;
+        right: 16px;
+      }
+      .content{
+        padding:30px;
+        .Amount{
+          color: #f29b87;
+        }
+        .account-ways{
+          display: flex;
+          justify-content: space-between;
+          padding-top: 30px;
+          .account-block {
+            transition: 0.2s linear;
+            position: relative;
+            width: 47%;
+            height: 120px;
+            background: rgba(248, 248, 248, 1);
+            border: 1px solid rgba(205, 205, 205, 1);
+            margin-bottom: 40px;
+            padding: 0 0 0 24px;
+            .account{
+              margin-left: 50px;
+              line-height: 50px;
+              font-weight: 600;
+              color: #777777;
+              font-size: 16px;
+            }
+            .account-num{
+              margin-left: 80px;
+              line-height: 28px;
+              color: #777777;
+              font-size: 14px;
+            }
+            .account-name{
+              margin-left: 80px;
+              line-height: 28px;
+              color: #777777;
+              font-size: 14px;
+            }
+          }
+          .account-choose {
+            background-color: #ffffff;
+            border: 1px solid rgba(186, 127, 140, 1);
+            box-shadow: 2px 2px 4px 0px rgba(84, 84, 84, 0.16);
+            .account{
+              color: #ba7f8c !important;
+            }
+            .account-num{
+              color: #ba7f8c !important;
+            }
+            .account-name{
+              color: #ba7f8c !important;
+            }
+          }
+          
+        }
+        .uploadPic{
+          display: flex;
+          margin-bottom: 20px;
+          .text{
+            .star{
+              color: red;
+            }
+            margin-right: 40px;
+          }
+          .upload{
+            // width: 510px;
+            border: solid 1px #cdcdcd;
+            padding: 20px;
+            background-color: #f8f8f8;
+            display: flex;
+            .up{
+              position: relative;
+            }
+            .up-text{
+              display: block;
+              position: absolute;
+              bottom: 10px;
+              left: 15px;
+              color: #777777;
+              font-size: 14px;
+            }
+            .tip{
+              width: 249px;
+              margin-left: 20px;
+              font-size: 14px;
+              line-height: 25px;
+              color: #ff6b6b;
+            }
+          }
+        }
+        .transactionNum{
+          display: flex;
+          margin-bottom: 40px;
+          .text2{
+            margin-right: 72px;
+            .number{
+              font-size: 16px;
+              line-height: 24px;
+            }
+            .can-select{
+              font-size: 16px;
+              text-align: center;
+              color: #999999;
+            }
+          }
+          .num-input{
+            width: 390px;
+            background-color: #f8f8f8;
+            border: solid 1px #cdcdcd;
+            line-height: 40px;
+            line-height: 40px;
+            padding-left: 15px;
+          }
+        }
+        .btnPay{
+          display: flex;
+          justify-content: center;
+          margin-bottom: 20px;
+          .cancel-pay{
+            width: 160px;
+            height: 40px;
+            background-color: #ffffff;
+            border: solid 1px #8b766c;
+            line-height: 40px;
+            text-align: center;
+            margin-right: 50px;
+            cursor: pointer;
+          }
+          .finish-pay{
+            width: 160px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #8b766c;
+            cursor: pointer;
+          }
+        }
+        .prompt{
+          font-size: 14px;
+          color: #f29b87;
+        }
+        .account-question {
+          position: absolute;
+          bottom: 89px;
+          right: 31px;
+          width: 22px;
+          height: 22px;
+          line-height: 22px;
+          background: rgba(220, 148, 165, 1);
+          border-radius: 50%;
+          text-align: center;
+          color: #fff;
+          cursor: pointer;
+          z-index: 29;
+        }
+        .choose-tick {
+          position: absolute;
+          right: -1px;
+          bottom: 0;
+          width: 27px;
+          height: 26px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+  
+}
+</style>
+<style>
+ .el-upload--picture-card{
+  border: solid 1px #cdcdcd!important;
+  background-color: #ffffff;
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+}
+.upload .el-upload-list--picture-card .el-upload-list__item {
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+}
+.el-upload-list__item.is-success .el-upload-list__item-status-label{
+  display: none;
+}
+  /* .avatar-uploader {
+    width: 80px;
+    height: 80px;
+    border: 1px dashed #d9d9d9;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+  .avatar-uploader-icon {
+    font-size: 28px;
+    color: #8c939d;
+    width: 80px;
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+  }
+  .avatar {
+    width: 178px;
+    height: 178px;
+    display: block;
+  } */
 </style>
