@@ -9,14 +9,34 @@
           <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           <span>{{ lang.chooseLanguageCoin }}</span>
         </h1>
-        <div class="select-line-box" @click="chooseLanguage">
-          <span>{{ languageText }}</span>
+        <div v-if="this.$store.state.platform == 31" class="select-line-box">
+          <input :value="languages" type="text" disabled/>
+        </div>
+        <div v-else class="select-line-box">
+          <input :value="language" type="text" />
+            <select name="" id="" v-model="language">
+              <option v-for="(p, index) in languageOptions" :key="index" :value="p.content">
+                {{p.content}}
+              </option>
+            </select>
           <i class="iconfont iconkuozhan"></i>
         </div>
-        <div class="select-line-box" @click="chooseCoin">
-          <span>{{ coinText }}</span>
+        <div class="select-line-box">
+          <input :value="coin" type="text" />
+          <select name="" id="" v-model="coin">
+            <option v-for="(p, index) in coinOptions" :key="index" :value="p.code">
+              {{p.content}}
+            </option>
+          </select>
+         
           <i class="iconfont iconkuozhan"></i>
         </div>
+         <!-- <select name="" id="" v-model="aa">
+            <option value="">1</option>
+            <option value="">2</option>
+            <option value="">3</option>
+            <option value="">4</option>
+          </select> -->
         <div class="button-line-box">
           <button class="full-btn determine" @click="changePage">
             <span class="btn-message">{{ lang.clear }}</span>
@@ -48,7 +68,7 @@
         </nuxt-link>
       </div>
     </div>
-    <swiper-tap
+    <!-- <swiper-tap
       ref="language-tap"
       :list="languageOptions"
       :choose-line="language"
@@ -59,7 +79,7 @@
       :list="coinOptions"
       :choose-line="coin"
       @clear="changeCoin"
-    ></swiper-tap>
+    ></swiper-tap> -->
   </div>
 </template>
 
@@ -77,11 +97,14 @@ export default {
       language: 0,
       coin: 0,
       languageOptions: this.$bddDefinition.languageOptions,
-      coinOptions: this.$bddDefinition.coinOptions
+      coinOptions: this.$bddDefinition.coinOptions,
+      aa:'',
+      languages:'English'
     }
   },
   computed: {
     languageText() {
+      // console.log("aa",this.languageOptions[this.language].content)
       return this.languageOptions[this.language].content
     },
     coinText() {
@@ -94,47 +117,62 @@ export default {
       return this.coinOptions[this.coin].code
     }
   },
+  created(){
+    // console.log("coin",this.coinOptions)
+    this.coin = this.coinOptions[0].content
+  },
   mounted() {
+    // this.language = this.languageOptions[0].content
+    // console.log(this.coinOptions[this.coin].content)
     const _this = this
     _this.$nextTick(() => {
       for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
         if (_this.languageOptions[n].code === _this.$store.state.language) {
-          _this.language = n
+          _this.language = _this.languageOptions[n].content
           break
         }
       }
 
       for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
         if (_this.coinOptions[n].code === _this.$store.state.coin) {
-          _this.coin = n
+          _this.coin = _this.coinOptions[n].code
           break
         }
       }
     })
   },
   methods: {
-    chooseLanguage() {
-      this.$refs['language-tap'].show()
+    chooseLanguage(val) {
+      
+      // this.$refs['language-tap'].show()
     },
-    changeLanguage(data) {
-      this.language = data.index
-    },
+    // changeLanguage(data) {
+    //   this.language = data.index
+    // },
     chooseCoin() {
-      this.$refs.coinTap.show()
+      // this.$refs.coinTap.show()
     },
     changeCoin(data) {
       this.coin = data.index
     },
-    changePage() {
+    changePage(lang,coin) {
       // this.$toast('根据所选切换站点货币')
       /**
        * 设置语言和货币
        */
-      this.$store.commit('setCoin', this.coinCode)
-      this.$store.commit('setLanguage', this.languageCode)
+      if(this.language == '中文简体'){
+        this.langs = 'zh_CN'
+      }
+      if(this.language == '繁體中文'){
+        this.langs = 'zh_TW'
+      }
+      if(this.language == 'English'){
+        this.langs = 'en_US'
+      }
+      this.$store.commit('setLanguage',this.langs)
+      this.$store.commit('setCoin',this.coin)
+      // this.$store.commit('setLanguage', val)
       setTimeout(() => {
-        // location.href = '/'
-        // location.reload()
         location.href = this.$route.query.redirectUri
       }, 500)
     }
@@ -172,7 +210,41 @@ export default {
     &:nth-of-type(2) {
       margin-bottom: 32px;
     }
-
+    input{
+      width: 100%;
+      height: 100%;
+      line-height: 38px;
+      text-align: left;
+      background: #f8f8f8;
+      -webkit-appearance: none;
+      border: 0;
+      padding: 0 0 0 13px;
+      margin: 0;
+      outline: 0;
+      color: #999999;
+    }
+    select{
+      color: #999999;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      font-size: inherit;
+      -webkit-appearance: none;
+      border: 0;
+      outline: 0;
+      padding: 0;
+      margin: 0;
+      resize: none;
+      border-radius: 0;
+      background: none;
+      padding-left: 12px;
+      // option{
+      //   padding-left: 10px;
+      // }
+    }
     position: relative;
     margin-bottom: 18px;
     height: 40px;

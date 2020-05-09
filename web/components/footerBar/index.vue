@@ -17,6 +17,7 @@
             </div>
           </dd>
         </dl>
+        <div class="Shadow" @click="setCoin()"></div>
       </div>
     </div>
     <div class="links">
@@ -52,7 +53,8 @@
     <footer class="copy-right">
       <div class="copy-right-content">
         <div>{{ $t(`${lang}.copyrightLeft`) }}</div>
-        <div>{{ $t(`${lang}.copyrightRight`) }}</div>
+        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRight1`) }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ $t(`${lang}.copyrightRight2`) }}</div>
+        <div v-else>{{ $t(`${lang}.copyrightRight`) }}</div>
       </div>
     </footer>
   </div>
@@ -243,7 +245,11 @@ export default {
     _this.$nextTick(() => {})
   },
   methods: {
-    ...mapMutations(['setCoin', 'setLanguage'])
+    ...mapMutations(['setCoin', 'setLanguage']),
+    setCoin() {
+      this.$store.commit('setCoin', 'CNY')
+      window.location.reload()
+    }
   }
 }
 </script>
@@ -262,7 +268,15 @@ export default {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-
+    position: relative;
+    .Shadow{
+      position: absolute;
+      // border:1px solid pink;
+      padding: 20px;
+      left: -30px;
+      bottom: 0;
+      // cursor: pointer;
+    }
     .menu-group {
       position: relative;
       flex-grow: 0;
@@ -417,6 +431,9 @@ export default {
       box-sizing: border-box;
       font-size: 12px;
       color: #fff;
+      a{
+        color: #fff;
+      }
     }
   }
 }

@@ -32,7 +32,7 @@
           <br />
           {{ $t(`${lang}.con9`) }}
           {{ $t(`${lang}.con10`) }}
-          <span @click="go('freeShipping')">{{ $t(`${lang}.link1`) }}</span>
+          <span @click="go('free-shipping')">{{ $t(`${lang}.link1`) }}</span>
         </dd>
         <dt>{{ $t(`${lang}.tit7`) }}</dt>
         <dd>{{ $t(`${lang}.con11`) }}</dd>

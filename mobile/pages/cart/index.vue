@@ -16,7 +16,7 @@
                   item.groupType !== 0
                 )
               "
-              class="mod-item" 
+              class="mod-item"
             >
 			<div @click="godetails(item, index)">
               <img :src="imageStrToArray(item.goodsImages)[0]" />
@@ -63,6 +63,7 @@
                 <div
                   class="select-icon"
                   @click.stop="isSelect(item, index)"
+                  v-if="getStatus(item, index)"
                 >
                   <i class="icon iconfont" :class="{ icongou: item.isSelect }"></i>
                 </div>
@@ -145,13 +146,14 @@ export default {
       cartList: [],
       sumNum: 0,
       lang: this.LANGUAGE.cart.index,
-      num: 0
+      num: 0,
+      timer: null 
     }
   },
-  created() {},
+  created() {
+  },
   mounted() {
     this.$nextTick(() => {
-      
       if (this.isLogin) {
         this.getList()
       } else {
@@ -159,6 +161,9 @@ export default {
       }
     })
   },
+  // beforeUpdate(){
+  //   this.getList()
+  // },
   //
   methods: {
     formatMoney: formatMoney,
@@ -562,7 +567,8 @@ export default {
             goodId: item.groupId,
             ct: this.isLogin ? item.id : item.localSn,
             dt1: item.goodsDetailsId,
-            dt2: this.list[index + 1].goodsDetailsId
+            dt2: this.list[index + 1].goodsDetailsId,
+            ringType : 'pair'
           }
         })
       }
@@ -583,7 +589,9 @@ export default {
               name: 'marriage-ring-single-ring-detail',
               query: {
                 goodId: item.goodsId,
-                cartId: this.isLogin ? item.id : item.localSn
+                cartId: this.isLogin ? item.id : item.localSn,
+                ringType : 'single'
+
               }
             })
         }else if (item.simpleGoodsEntity.categoryId === 12) {

@@ -15,7 +15,8 @@
               :class="typeIndex === index ? 'icongou' : ''"
               @click="changeType(index)"
             ></span>
-            <b
+            <div
+              class="box-a"
               >{{ item.title }}
               <span
                 v-if="item.type == '5'"
@@ -23,10 +24,12 @@
                 @click="needtips = !needtips"
                 >?</span
               >
-            </b>
+              <div class="support" v-if="item.type == '1000' && isLogin">({{ lang.support }})</div>
+            </div>
 
             <p>{{ item.des }}</p>
             <p v-if="item.des2">{{ item.des2 }}</p>
+            <p class="hint-color" v-if="index != 0 && index != 1">({{lang.msg11}})</p>
           </div>
         </div>
       </li>
@@ -81,7 +84,7 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/visa.png',
+          url: '/cart/visa_1.png',
           type: 61,
           title: this.LANGUAGE.cart.pay.payType6,
           des: this.LANGUAGE.cart.pay.type6Text
@@ -138,9 +141,10 @@ export default {
       ],
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
-      price: JSON.parse(this.$route.query.info).orderAmount,
+      price: JSON.parse(this.$route.query.info).payAmount,
       needtips: false,
-      typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0
+      typeIndex: JSON.parse(this.$route.query.info).payAmount === 0 ? 5 : 0,
+      isLogin: !!this.$store.state.token
     }
   },
   created() {
@@ -158,9 +162,9 @@ export default {
       //   return
       // }
       if (ind === 5) {
-        this.price = this.info.orderAmount * 0.985
+        this.price = this.info.payAmount * 0.985
       } else {
-        this.price = this.info.orderAmount
+        this.price = this.info.payAmount
       }
     },
     goPaySuccess() {
@@ -194,7 +198,7 @@ export default {
       }else if(this.typeIndex == 5){
         pay = 7
       }
-      
+
       // if (this.typeIndex === 5) {
       //   pay = 1
       // } else if (this.typeIndex === 1 || this.typeIndex === 0) {
@@ -258,7 +262,7 @@ export default {
               name: 'complete-paySuccess-orderId-price-coinType',
               params: {
                 orderId: this.info.orderId,
-                price: this.info.orderAmount,
+                price: this.info.payAmount,
                 coinType: this.info.coinType
               }
             })
@@ -315,7 +319,16 @@ export default {
         margin-left: 64px;
         padding: 10px 0px 12px;
         border-bottom: 1px solid #dddddd; /*no*/
-        span {
+        .support{
+          position: absolute;
+          top: 48%;
+          left: 0;
+          transform: translateY(-50%);
+          margin-left: 150px;
+          font-size: 10px;
+          color: #333;
+        }
+        .icon {
           float: right;
           width: 20px;
           height: 20px;
@@ -346,7 +359,7 @@ export default {
           text-align: center;
           border: 1px solid rgba(242, 155, 135, 1); /*no*/
         }
-        b {
+        .box-a {
           font-size: 14px;
           line-height: 24px;
           font-weight: 400;
@@ -389,5 +402,9 @@ export default {
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
   }
+}
+
+.hint-color{
+  color: #f29b87 !important;
 }
 </style>

@@ -13,6 +13,7 @@
           :placeholder="$t(`${lang}.psw5`)"
           autocomplete="new-password"
           type="password"
+          maxlength="30"
         />
       </div>
       <div class="pass-word-line">
@@ -22,6 +23,7 @@
           class="pass-word-line-input"
           :placeholder="$t(`${lang}.psw6`)"
           type="password"
+          maxlength="30"
         />
       </div>
       <div class="pass-word-line">
@@ -31,6 +33,7 @@
           class="pass-word-line-input"
           :placeholder="$t(`${lang}.psw7`)"
           type="password"
+          maxlength="30"
         />
       </div>
     </div>
@@ -56,18 +59,18 @@ export default {
   methods: {
     submit() {
       // console.log("aaaaa")
-      // if (this.oldPsw === '') {
-      //   this.$message.error(this.lang.psw5)
-      //   return
-      // }
-      // if (this.newPsw !== this.agaPsw) {
-      //   this.$message.error(this.lang.psw8)
-      //   return
-      // }
-      // if (!RegPassword.test(this.newPsw)) {
-      //   this.$message.error(this.lang.psw9)
-      //   return
-      // }
+      if (this.oldPsw === '') {
+        this.$errorMessage(this.$t(`${lang}.psw5`))
+        return
+      }
+      if (this.newPsw !== this.agaPsw) {
+        this.$errorMessage(this.$t(`${lang}.psw8`))
+        return
+      }
+      if (!RegPassword.test(this.newPsw)) {
+        this.$errorMessage(this.$t(`${lang}.psw9`))
+        return
+      }
       const data = this.$helpers.transformRequest(
         JSON.parse(
           JSON.stringify({ original_password: this.oldPsw,password: this.newPsw,password_repetition:this.agaPsw })

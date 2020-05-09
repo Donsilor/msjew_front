@@ -26,7 +26,7 @@
           {{ $t(`${lang}.con1`) }}
           <span>service@bddco.com</span>
           {{ $t(`${lang}.con2`) }}
-          <router-link to="/returnedGoods">
+          <router-link to="/policies/return-refund-policy">
             <span>{{ $t(`${lang}.link`) }}</span>
           </router-link>
           {{ $t(`${lang}.con3`) }}

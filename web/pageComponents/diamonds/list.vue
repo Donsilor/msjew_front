@@ -843,6 +843,7 @@ const defaultCaratRange = [0.1, 10]
 const defaultDepthRange = [0, 100]
 const defaultTableRange = [0, 100]
 const lang = 'diamondsList'
+
 export default {
   components: {
     ShapePopover,
@@ -881,7 +882,7 @@ export default {
 
       shapeOptions: this.CONDITION_INFO.shape,
       defaultPriceRange,
-      fastPriceRanges: [[1200, 15000], [15000, 30000], [30000, 50000]],
+      fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
       defaultCaratRange,
       fastCaratRanges: [['0.25', '0.70'], ['0.75', '1.02'], ['1.5', '3.00']],
       cutOptions: this.CONDITION_INFO.cut,
@@ -1485,9 +1486,24 @@ export default {
   },
   mounted() {
     const _this = this
+    var caratRange_val =this.$route.query.caratRange
+    if(caratRange_val !== undefined){
+      this.caratRange = JSON.parse(this.$helpers.base64Decode(caratRange_val));
+      this.changeCondition('caratRange', this.caratRange);
+
+    }
     _this.$nextTick(() => {
       _this.research()
     })
+  },
+  watch: {
+    $route(val, oldVal) {
+      var caratRange_val =this.$route.query.caratRange
+      if(caratRange_val !== undefined){
+        this.caratRange = JSON.parse(this.$helpers.base64Decode(caratRange_val));
+        this.changeCondition('caratRange', this.caratRange);
+      }
+    }
   },
   methods: {
     // 显示与隐藏更多条件

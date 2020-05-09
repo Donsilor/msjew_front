@@ -36,6 +36,11 @@ div {box-sizing:border-box;word-break: break-word;word-wrap: break-word;}
   src: url('./twCenMt.ttf');
 }
 
+@font-face {
+  font-family: SourceHanSansCN-N;
+  src: url('./SourceHanSansCN-Normal.ttf');
+}
+
 
 html, body, #__nuxt, #__layout, .layout-box {
   width: 100%;

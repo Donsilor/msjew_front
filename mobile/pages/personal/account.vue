@@ -17,6 +17,7 @@
               v-model="date.lastname"
               :placeholder="lang.surname"
               @blur="textSurname"
+              :maxl="maxlength"
             ></bdd-input>
           </div>
           <div :class="['error-message', { active: !trueSurname }]">
@@ -27,12 +28,13 @@
               v-model="date.firstname"
               :placeholder="lang.name"
               @blur="textName"
+              :maxl="maxlength"
             ></bdd-input>
           </div>
           <div :class="['error-message', { active: !trueName }]">
             {{ lang.nametips }}
           </div>
-          
+
         </div>
 
         <div v-else>
@@ -41,6 +43,7 @@
               v-model="date.firstname"
               :placeholder="lang.name"
               @blur="textName"
+              :maxl="maxlength"
             ></bdd-input>
           </div>
           <div :class="['error-message', { active: !trueName }]">
@@ -51,13 +54,14 @@
               v-model="date.lastname"
               :placeholder="lang.surname"
               @blur="textSurname"
+              :maxl="maxlength"
             ></bdd-input>
           </div>
           <div :class="['error-message', { active: !trueSurname }]">
             {{ lang.surnametips }}
           </div>
-         
-          
+
+
         </div>
 
         <Single
@@ -105,7 +109,8 @@ export default {
       trueName: true,
       date: this.$route.query,
       trueSurname: true,
-      language:''
+      language:'',
+      maxlength: '30'
     }
   },
   created() {
@@ -173,13 +178,13 @@ export default {
     },
     textSurname() {
       // console.log(this.date.lastname.length, 'dsgdf')
-      if (this.date.lastname === '' || this.date.lastname.length > 20) {
+      if (this.date.lastname === '' || this.date.lastname.length > 30) {
         this.$toast.show(this.lang.toast1)
       }
     },
     textName() {
       // console.log(this.date.lastname, 'dsgdf')
-      if (this.date.firstname === '' || this.date.firstname.length > 20) {
+      if (this.date.firstname === '' || this.date.firstname.length > 30) {
         this.$toast.show(this.lang.toast2)
       }
     },
@@ -188,7 +193,7 @@ export default {
         this.$toast.show(this.lang.toast1)
         return
       }
-      if (this.date.firstname === '' || this.date.firstname.length > 20) {
+      if (this.date.firstname === '' || this.date.firstname.length > 30) {
         this.$toast.show(this.lang.toast2)
         return
       }

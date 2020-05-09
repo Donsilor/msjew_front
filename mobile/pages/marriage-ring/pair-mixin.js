@@ -301,18 +301,18 @@ export default {
     }
   },
   mounted() {
-    this.$axios
-      .get(`/wap/goodsComments/getAvgLevel`, {
-        params: {
-          groupId: this.$route.query.goodId
-        }
-      })
-      .then(res => {
-        this.starNum = res.avgLevel ? res.avgLevel : 5
-      })
-      .catch(err => {
-        console.log(err)
-      })
+    // this.$axios
+    //   .get(`/wap/goodsComments/getAvgLevel`, {
+    //     params: {
+    //       groupId: this.$route.query.goodId
+    //     }
+    //   })
+    //   .then(res => {
+    //     this.starNum = res.avgLevel ? res.avgLevel : 5
+    //   })
+    //   .catch(err => {
+    //     console.log(err)
+    //   })
     // this.$axios
     //   .get(`/wap/goodsComments/getGoodsComments`, {
     //     params: {

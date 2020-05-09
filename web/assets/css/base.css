@@ -42,6 +42,11 @@ button {
   src: url('./twCenMt.ttf');
 }
 
+@font-face {
+  font-family: SourceHanSansCN-N;
+  src: url('./SourceHanSansCN-Normal.ttf');
+}
+
 html, body, #__nuxt, #__layout, .layout-box {
   width: 100%;
   height: 100%;

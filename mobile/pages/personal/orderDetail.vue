@@ -80,14 +80,13 @@
           </div>
         </div>
 
-
        <!--        发货信息-->
         <div v-if="info.express" class="bundle-item">
 	     <div class="bundle-info">
             <div class="bundle-status">{{ lang.hadSend }}</div>
             <div class="bundle-company">
               <span>{{ lang.logistics }}：{{ info.express.companyName }}</span>
-              
+
             </div>
             <div class="bundle-code">
               {{ lang.logisticsNumber }}：{{ info.express.expressNo }}
@@ -96,8 +95,7 @@
               {{ lang.sendTime }}：{{ info.express.delivery_time }}
             </div>
           </div>
-	    </div> 
-
+	    </div>
 
         <!--        已发货商品-->
 		<!--
@@ -179,11 +177,11 @@
         </div>
          -->
       </div>
-	 
+
       <div class="invoice" v-show="invoice && invoice.invoiceTitle">
         <!-- <p class="title">发票信息</p> -->
         <ul>
-         
+
           <template v-if="!invoice.isElectronic">
             <li>{{ lang2.InvoiceType }}：{{ lang2.PaperInvoice }}</li>
           </template>
@@ -197,7 +195,7 @@
             <li>{{ lang2.HeaderType}}：{{ lang2.company }}</li>
           </template>
           <li>{{ lang2.Invoice }}：{{ invoice.invoiceTitle }}</li>
-          <li>{{ lang2.TaxID }}：{{ invoice.taxNumber }}</li> 
+          <li>{{ lang2.TaxID }}：{{ invoice.taxNumber }}</li>
           <li v-show="invoice.isElectronic == 1">{{ lang2.email }}：{{ invoice.email }}</li>
         </ul>
       </div>
@@ -239,6 +237,14 @@
             <span>{{ lang.productsCount }}： </span
             ><span>{{ info.coinCode }} {{ productsPrice }} </span>
           </li>
+		  <li v-for="item in cardList">
+		    <span>{{ lang.shoppingCard }}：
+					<em :class="info.orderStatus == 0 ? 'card-color' : ''">
+						({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
+					</em>
+				</span>
+			<span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
+		  </li>
           <li v-if="info.preferFee" class="active">
             <span>{{ lang.offer }}： </span
             ><span>-{{ info.coinCode }} {{ info.preferFee }} </span>
@@ -264,6 +270,10 @@
             ><span
               ><em>{{ info.coinCode }} </em>{{ info.orderAmount }}
             </span>
+          </div>
+          <div class="all" style="border-top: 0;">
+            <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span
+            ><span><em>{{ info.coinCode }} </em>{{ info.payAmount }} </span>
           </div>
         </ul>
         <div class="btn">
@@ -315,7 +325,8 @@ export default {
       lang2: this.LANGUAGE.cart.invoice,
       info: {},
       paytips: false,
-      invoice:{}
+      invoice:{},
+      cardList: []
     }
   },
   computed: {
@@ -420,7 +431,7 @@ export default {
         0: this.lang.cancelOrder,
         10: this.lang.hadNotPay,
         20: this.lang.hadPay,
-        30: this.lang.waitingSend, 
+        30: this.lang.waitingSend,
         40: this.lang.hadSend,
         50: this.lang.hadFinish,
       }
@@ -549,6 +560,7 @@ export default {
             : ''
           this.info = data
           this.invoice = data.invoice
+          this.cardList = data.cards
         })
         .catch(err => {
           console.log(err)
@@ -558,7 +570,7 @@ export default {
     goPay(val) {
       const res = {
         coinType: val.coinCode, // 支付币种 ,
-        orderAmount: val.orderAmount, // 支付金额 ,
+        payAmount: val.payAmount, // 支付金额 ,
         orderId: val.id // 订单ID
       }
       this.$router.push({
@@ -638,7 +650,8 @@ export default {
             // 男女戒
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -646,7 +659,8 @@ export default {
             // 結婚戒指
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -654,7 +668,8 @@ export default {
             // 裝飾戒指
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             return
           }
@@ -675,7 +690,8 @@ export default {
             // ringRouter(info.data[0].configAttrId)
             routerName = 'marriage-ring-single-ring-detail'
             routerQuery = {
-              goodId: goodId
+              goodId: goodId,
+              ringType : 'single'
             }
             break
           case 3:
@@ -734,7 +750,7 @@ export default {
             goodId: goodId
           }
           break
-          
+
         }
       }
       if ([1].indexOf(info.groupType) > -1) {
@@ -742,7 +758,8 @@ export default {
         console.log('info====>', info)
         routerName = 'marriage-ring-pair-ring-detail'
         routerQuery = {
-          goodId: info.data[0].groupId
+          goodId: info.data[0].groupId,
+          ringType : 'pair'
         }
       }
       if ([2].indexOf(info.groupType) > -1) {
@@ -779,7 +796,11 @@ export default {
         name: routerName,
         query: routerQuery
       })
-    }
+    },
+	cardLengthDispose(num){
+	  num = num.slice(0,3)+'...'+num.slice(-3)
+	  return num;
+	}
   }
 }
 </script>
@@ -1104,7 +1125,9 @@ export default {
         }
         .all {
           border-top: 1px solid #dddddd;
-          padding-top: 15px;
+          padding-top: 6px;
+          height: 28px;
+          line-height: 24px;
           span:nth-child(1) {
             float: left;
             font-size: 12px;
@@ -1151,5 +1174,16 @@ export default {
       }
     }
   }
+}
+.all::after{
+  display: block;
+  content: '.';
+  height: 0;
+  clear: both;
+  opacity: 0;
+  visibility: hidden;
+}
+.card-color{
+	color: #999;
 }
 </style>

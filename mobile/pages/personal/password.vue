@@ -8,6 +8,7 @@
           v-model="password1"
           :placeholder="lang.password1"
           @input="checkpassword(1)"
+          :maxl="maxlength"
         ></bdd-input>
       </div>
       <div :class="['error-message', { active: !truePassword1 }]">
@@ -19,6 +20,7 @@
           :placeholder="lang.password2"
           :type="'password'"
           @input="checkpassword(2)"
+          :maxl="maxlength"
         ></bdd-input>
       </div>
       <div :class="['error-message', { active: !truePassword2 }]">
@@ -30,6 +32,7 @@
           :placeholder="lang.password3"
           :type="'password'"
           @input="checkpassword(3)"
+          :maxl="maxlength"
         ></bdd-input>
       </div>
       <div :class="['error-message', { active: !truePassword3 }]">
@@ -66,7 +69,8 @@ export default {
       truePassword1: true,
       truePassword2: true,
       truePassword3: true,
-      allTrue: false
+      allTrue: false,
+      maxlength: '30'
     }
   },
   methods: {
