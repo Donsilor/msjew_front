@@ -1005,6 +1005,7 @@ export default {
     // 支付
     //  已登录创建订单
     createOrder() {
+      this.$nuxt.$loading.start()
       // if (!this.canSubmit) {
       //   return
       // }
@@ -1083,6 +1084,7 @@ export default {
             }
           })
           .catch(err => {
+            this.$nuxt.$loading.finish()
             this.$toast.show(err.message)
           })
       } else {
@@ -1147,6 +1149,7 @@ export default {
               // })
             })
             .catch(err => {
+              this.$nuxt.$loading.finish()
               this.$toast.show(err.message)
             })
           }else{
