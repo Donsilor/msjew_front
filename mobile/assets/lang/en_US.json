@@ -221,14 +221,10 @@
       "type5Text2": "Please note that e-Cheques are not T/T.",
       "paytip1": "Since Alipay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "paytip2": "Since WeChat Pay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
-<<<<<<< HEAD
       "paytip3": "Since Credit Card does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "msg11": "Mainland China Only",
       "paytip": "Since Paydallor does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "support": "Support only: mainland version"
-=======
-      "paytip3": "Since Credit Card does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!"
->>>>>>> 84965560d427920054fbcbacbdd7ea3bbee66de6
     },
     "paySuccess": {
       "PayPending1":"The order has been submitted and the system is processing. Please wait.",
