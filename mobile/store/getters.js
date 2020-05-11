@@ -59,7 +59,7 @@ export default {
             host = 'https://' + host
         } else {
             //测试
-            host = 'http://' + host
+            host = 'https://' + host
         }
         return host
     },

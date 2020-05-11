@@ -1113,7 +1113,8 @@
     "contactPhone": "For any questions, contact customer service (852)-2165 3905！",
     "repay": "Pay again",
     "payQuestion": "Payment error",
-    "msg11": "Need to log in for shopping / Mainland China Only"
+    "msg11": "Need to log in for shopping / Mainland China Only",
+    "msg12": "Mainland China Only"
   },
   "finishPay": {
     "PayPending1":"The order has been submitted and the system is processing. Please wait.",

@@ -399,7 +399,7 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
-              
+
               <!-- 支付宝 -->
               <div
                 :class="{ 'pay-choose': payWay == 82 }"
@@ -453,7 +453,7 @@
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
-             
+
                <!-- 信用卡 -->
               <div
                 :class="{ 'pay-choose': payWay == 81 }"
@@ -608,7 +608,7 @@
             <div class="send-left">
               <div>{{ $t(`${lang}.sendTime`) }}</div>
               <div>
-                <router-link to="/deliveryPolicy">{{
+                <router-link to="/policies/shipping">{{
                   $t(`${lang}.checkDeliveryPolicy`)
                 }}</router-link>
               </div>
@@ -1425,8 +1425,7 @@
                 <div v-show="payWay == 82" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
-        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
 
               </div>
               <!-- <div
@@ -1462,8 +1461,7 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
-        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
               <!-- 信用卡 -->
               <div
@@ -1481,10 +1479,9 @@
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
-        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
-              
+
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
@@ -1622,7 +1619,7 @@
             <div class="send-left">
               <div>{{ $t(`${lang}.sendTime`) }}</div>
               <div>
-                <router-link to="/deliveryPolicy">{{
+                <router-link to="/policies/shipping">{{
                   $t(`${lang}.checkDeliveryPolicy`)
                 }}</router-link>
               </div>
@@ -2486,7 +2483,7 @@ export default {
       }else if(this.payWay==61){
         pay = 61
       }
-    console.log("方式",pay)
+    // console.log("方式",pay)
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -2534,7 +2531,7 @@ export default {
 
         json = json.concat(item)
       }
-      console.log(this.iconShow)
+      // console.log(this.iconShow)
       if(this.iconShow ){
         invoice = this.invoice
       }
@@ -4837,7 +4834,7 @@ div {
 .hint_pay{
   position: absolute;
   right: 80px;
-  top: 84px;
+  top: 94px;
   font-family: twCenMt;
   font-size: 14px;
   color: #aaa;
@@ -4847,8 +4844,5 @@ div {
   color: #f00;
   font-size: 18px;
   opacity: 0.6;
-}
-.hint_pay.en{
-  top: 94px;
 }
 </style>
