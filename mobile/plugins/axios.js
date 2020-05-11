@@ -8,13 +8,13 @@ export default function ({
         config.headers['x-api-language'] = store.state.language || ''
         config.headers['x-api-area'] = store.state.areaId || '' // 当前所属地区
         config.headers['x-api-server'] = process.server ? 1 : 0 //是否是服务器端请求
-        config.headers['x-api-platform'] = 2 //2=>移动端
+        config.headers['x-api-platform'] = store.state.platform || '' //11=>移动-港澳台 21=>移动-大陆 31=》移动-美国
         // config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
         return config
     })
     $axios.onResponse(res => {
         const data = res.data || {}
-        
+
         if (data.hasOwnProperty('code')) {
             if (data.code == 200) {
                 return Promise.resolve(![undefined].includes(data.data) ? data.data : null)
@@ -26,7 +26,7 @@ export default function ({
                         store.dispatch('logout')
                         window.location.href = '/login'
                     } else {
-                        store.commit('setToken',accessToken)
+                        store.commit('setToken', accessToken)
                         window.location.reload()
                     }
                 }

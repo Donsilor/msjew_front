@@ -9,7 +9,10 @@
           <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           <span>{{ lang.chooseLanguageCoin }}</span>
         </h1>
-        <div class="select-line-box">
+        <div v-if="this.$store.state.platform == 31" class="select-line-box">
+          <input :value="languages" type="text" disabled/>
+        </div>
+        <div v-else class="select-line-box">
           <input :value="language" type="text" />
             <select name="" id="" v-model="language">
               <option v-for="(p, index) in languageOptions" :key="index" :value="p.content">
@@ -95,7 +98,8 @@ export default {
       coin: 0,
       languageOptions: this.$bddDefinition.languageOptions,
       coinOptions: this.$bddDefinition.coinOptions,
-      aa:''
+      aa:'',
+      languages:'English'
     }
   },
   computed: {
