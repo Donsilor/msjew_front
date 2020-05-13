@@ -215,6 +215,14 @@
                     <span>{{ $t(`${lang}.AccountName`) }}</span>
                     <span>{{item.account_name}}</span>
                   </div>
+                  <div class="account-name">
+                    <span>{{ $t(`${lang}.bankAddress`) }}</span>
+                    <span>{{item.band_address}}</span>
+                  </div>
+                  <div class="account-name">
+                    <span>{{ $t(`${lang}.SwiftCode`) }}</span>
+                    <span>{{item.swift_code}}</span>
+                  </div>
                   <div v-show="accountWay === index" class="choose-tick">
                     <img src="../../static/order/tick.png" alt="" />
                   </div>
@@ -415,7 +423,7 @@ export default {
     },
     // 完成付款
     Finished(){
-      if(this.accountWay == ''){
+      if(this.accountWay == undefined && this.accountWay == ''){
         this.$message.error(this.$t(`${lang}.selectAccount`))
         return
       }
@@ -885,6 +893,7 @@ div {
         padding:30px;
         .Amount{
           color: #f29b87;
+          font-size: 24px;
         }
         .account-ways:first-child{
           padding-top: 30px;
@@ -897,16 +906,17 @@ div {
           cursor: pointer;
           padding: 0px 40px 0 0;
           .account-block {
+            padding: 5px;
             transition: 0.2s linear;
             position: relative;
             width: 435px;
-            height: 120px;
+            // height: 120px;
             background: rgba(248, 248, 248, 1);
             border: 1px solid rgba(205, 205, 205, 1);
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             // padding: 0 0 0 24px;
             .account{
-              margin-left: 50px;
+              margin-left: 40px;
               line-height: 50px;
               font-weight: 600;
               color: #777777;
@@ -995,7 +1005,7 @@ div {
             }
           }
           .num-input{
-            width: 390px;
+            width: 460px;
             background-color: #f8f8f8;
             border: solid 1px #cdcdcd;
             line-height: 40px;
@@ -1008,7 +1018,7 @@ div {
           justify-content: center;
           margin-bottom: 20px;
           .cancel-pay{
-            width: 160px;
+            width: 200px;
             height: 40px;
             background-color: #ffffff;
             border: solid 1px #8b766c;
@@ -1016,14 +1026,16 @@ div {
             text-align: center;
             margin-right: 50px;
             cursor: pointer;
+            color: #777777;
           }
           .finish-pay{
-            width: 160px;
+            width: 200px;
             height: 40px;
             line-height: 40px;
             text-align: center;
             background-color: #8b766c;
             cursor: pointer;
+            color:#fff;
           }
         }
         .prompt{

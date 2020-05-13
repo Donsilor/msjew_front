@@ -1139,7 +1139,9 @@
 	"selectAccount":"請先選擇支付的銀行賬戶！",
 	"selectVoucher":"請上傳支付憑證！",
 	"imgFomat":"上傳圖片格式不正確!",
-	"imgSize":"上傳圖片大小不能超過 2MB!"
+	"imgSize":"上傳圖片大小不能超過 2MB!",
+	"bankAddress":"銀行地址:",
+	"SwiftCode":"SWIFT CODE:"
   },
   "finishPay": {
     "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",

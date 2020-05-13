@@ -44,24 +44,37 @@
 
     <div v-if="data.details && data.details.length > 0" class="info-block">
       <div class="block-title">
-        <span v-if="data.orderStatus === '10'">{{
-          $t(`${lang_pay}.waitingPay`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '20'">{{
-          $t(`${lang_pay}.hadPay`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '30'">{{
-          $t(`${lang_pay}.waitingSend`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '40'">{{
-          $t(`${lang_pay}.hadSend`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '0'">{{
-          $t(`${lang_pay}.closed`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '50'">{{
-          $t(`${lang_pay}.hadFinish`)
-        }}</span>
+        <div v-if="wireTransferStatus == null">
+          <span v-if="data.orderStatus == '10'">{{
+            $t(`${lang_pay}.waitingPay`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '20'">{{
+            $t(`${lang_pay}.hadPay`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '30'">{{
+            $t(`${lang_pay}.waitingSend`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '40'">{{
+            $t(`${lang_pay}.hadSend`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '0'">{{
+            $t(`${lang_pay}.closed`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '50'">{{
+            $t(`${lang_pay}.hadFinish`)
+          }}</span>
+        </div>
+        <div v-else>
+          <span v-if="wireTransferStatus == '0'">{{
+            $t(`${lang_pay}.pending`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '1'">{{
+            $t(`${lang_pay}.hadPay`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '2'">{{
+            $t(`${lang_pay}.PayFailed`)
+          }}</span>
+        </div>
 
       </div>
       <div class="addr-info">
@@ -356,6 +369,7 @@ export default {
       lang_pay,
       lang_invoice,
       oid: this.$route.query.orderId,
+      wireTransferStatus:this.$route.query.wireTransferStatus,
       data: {
         address: {
           countryName: '',
@@ -363,8 +377,9 @@ export default {
           cityName: '',
           address: '',
           realName: '',
-          userMail: ''
-        }
+          userMail: '',
+        },
+        orderStatus:''
       },
       invoice:{
         email: "",
@@ -430,6 +445,7 @@ export default {
   },
   mounted() {
     this.getData()
+    console.log("data",this.data.orderStatus)
   },
   methods: {
     getStatusText(status) {
@@ -453,8 +469,9 @@ export default {
         })
         .then(res => {
           this.data = res.data
+          console.log("this.data",this.data)
           this.invoice = res.data.invoice
-
+          this.data.orderStatus = res.data.orderStatus
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
           )
