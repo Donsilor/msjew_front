@@ -4,7 +4,8 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-if="order.wireTransferStatus == null" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-else class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
         </div>
         <div class="top">
           <span>{{ order.orderNO }}</span>
@@ -97,7 +98,7 @@
           </div>
           <div class="btn">
             <span
-              v-if="(order.orderStatus) > 0 && (order.orderStatus)<20"
+              v-if="(order.orderStatus) > 0 && (order.orderStatus)<20 && order.wireTransferStatus == null"
               class="btn2"
               @click="cancelOrder(order.id)"
               >{{ lang.cancelOrder }}</span
@@ -112,7 +113,7 @@
             >
             <span
               v-if="
-                (order.orderStatus) > 0 && (order.orderStatus)<20
+                (order.orderStatus) > 0 && (order.orderStatus)<20 && order.wireTransferStatus == null
               "
               class="btn1"
               @click.stop="goPay(order)"
@@ -319,6 +320,14 @@ export default {
       }
       // console.log("status",map[status])
       return map[status]
+    },
+    getTransferStatus(transferStatus){
+      const transferStatus_value = {
+        0 : this.lang.pending,
+        1 : this.lang.paid,
+        2 : this.lang.PayFailed,
+      };
+      return transferStatus_value[transferStatus];
     },
     // 跳转到详情页
     toDetail(orderId) {

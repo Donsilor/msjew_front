@@ -981,7 +981,9 @@
       "returnApplication": "Return request",
       "returning": "Return is underway",
       "hadReturn": "Products returned",
-      "cancelTransaction": "Cancel Order"
+	  "cancelTransaction": "Cancel Order",
+	  "pending":"Pending",
+	  "PayFailed ":"Payment failed "
     },
     "wish": {
       "myWish": "Wish List",
@@ -1103,7 +1105,7 @@
     "visa": "Pay By Credit Card (VISA, Master Card, Discover Card, AMEX), Secure Payment",
     "UnionPay": "Using UnionPay cards’secure payment solution",
     "AliPay": "Easier and safer online payment",
-    "EPay": "Extra 1.5% discount for T/T payment. Please note that e-Cheques are not T/T.",
+    "EPay": "Secure bank wire-transfer payment ",
     "pay": "Check out now",
     "msgTitle1": "Notes",
     "msgContent1": "<p style='text-align: left;padding-top: 20px;text-indent: 2em;'>As each diamond is unique and our daily order quantity is substantial, for customers who have ordered our diamonds, we need to further confirm and ensure the availability of the diamonds. Your order will be retained for at most 48 business hours. Once the diamond is confirmed to be in stock, we will send you an e-mail notifying the date of shipment.</p><p style='text-align: left;padding-top: 20px;text-indent: 2em;'>If you choose payment through bank wire transfer, once the diamond is confirmed to be in stock, we will provide wire transfer instruction. To ensure no delay in delivery, please make remittance as soon as you receive the wire transfer instruction. Please note that it usually takes 24 hours for payment to arrive at our bank. The product will be shipped after we confirm the receipt of payment.</p>",
@@ -1113,7 +1115,25 @@
     "contactPhone": "For any questions, contact customer service (852)-2165 3905！",
     "repay": "Pay again",
     "payQuestion": "Payment error",
-    "msg11": "Need to log in for shopping / Mainland China Only"
+	"msg11": "Need to log in for shopping / Mainland China Only",
+	"pleaseSelectAccount":" Select bank account",
+	"paidAmount":"Total amount: ",
+	"Account":"Account:",
+	"AccountNumber":"Account number:",
+	"AccountName":"Account name:",
+	"UploadPayVoucher":"Upload payment voucher :",
+	"uploadImage":"Upload photos",
+	"Note1":"Please make sure the date of transfer and transaction number are clear for payment verification.  ",
+	"PayTransactionNumber":"Transaction Number ",
+	"Optional":"(optional)",
+	"CancelPayment":"Cancelled payment",
+	"PaymentCompleted":"Completed payment ",
+	"Note2":"* Note: Please select your payment bank account and upload payment voucher after the transaction has been completed. ",
+	"transferSuccessful":"Order has been submitted, it will be processed very soon, please stay updated！",
+	"selectAccount":"Please select payment bank account.",
+	"selectVoucher":"Please upload payment voucher.",
+	"imgFomat": "The format of the uploaded image is incorrect!",
+	"imgSize":"The uploaded image size cannot exceed 2MB!"
   },
   "finishPay": {
     "PayPending1":"The order has been submitted and the system is processing. Please wait.",

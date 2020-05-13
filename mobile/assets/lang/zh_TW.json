@@ -215,7 +215,7 @@
       "payType4": "微信",
       "type4Text": "網上付款、方便、快捷",
       "payType5": "電匯",
-      "type5Text": "以電匯方式付款將享有1.5%折扣優惠",
+      "type5Text": "使用銀行轉賬安全支付",
       "type5Text2": "注意，電子支票並非電匯",
       "payType6": "Visa/MasterCard",
       "type6Text": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
@@ -224,7 +224,26 @@
       "paytip3":"由於信用卡暫不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！",
       "msg11": "僅供大陸使用",
       "paytip":"由於Paydallor不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！",
-      "support": "暫僅支持：大陸版"
+      "support": "暫僅支持：大陸版",
+      "pleaseSelectAccount":"選擇支付電匯賬戶",
+      "paidAmount":"需支付金額:",
+      "Account":"賬戶:",
+      "AccountNumber":"戶口號碼:",
+      "AccountName":"戶口名稱:",
+      "UploadPayVoucher":"上傳支付憑證:",
+      "uploadImage":"上傳圖片",
+      "Note1":"請確保圖片上清晰顯示轉賬日期和銀碼以便核實款項",
+      "PayTransactionNumber":"支付交易號",
+      "Optional":"(可選填)",
+      "CancelPayment":"取消付款",
+      "PaymentCompleted":"已完成付款",
+      "Note2":"* 注：支付完成後請選擇支付的銀行賬戶，請上傳憑證",
+      "transferSuccessful":"訂單已經提交，運營人員會盡快處理，請及時關注訂單狀態！",
+      "back": "返回",
+      "selectAccount":"請先選擇支付的銀行賬戶！",
+      "selectVoucher":"請上傳支付憑證！",
+      "imgFomat":"上傳圖片格式不正確!",
+      "imgSize":"上傳圖片大小不能超過 2MB!"
     },
     "paySuccess": {
       "PayPending1":"訂單已提交，系統處理中…請稍等.",
@@ -937,7 +956,9 @@
       "canceled": "已取消订单",
       "paytips": "電匯指引",
       "text": "您的訂單在23小時59分鐘內未支付將被取消, 請儘快完成支付。",
-      "tips": "確認離開嗎?"
+      "tips": "確認離開嗎?",
+      "pending":"待確認",
+	    "PayFailed ":"支付失敗"
     },
     "progressBar": {
       "price": "價格",

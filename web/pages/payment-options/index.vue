@@ -151,18 +151,18 @@
 
         <!-- 电汇 -->
         <div
-          :class="{ 'pay-choose': payWay == 1 }"
+          :class="{ 'pay-choose': payWay == 84 }"
           class="pay-block"
-          @click="payWay = 1;wire()"
+          @click="payWay = 84;wire()"
         >
           <div class="pay-img">
             <img src="../../static/order/epay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
-          <div v-show="payWay == 1" class="pay-price">
+          <div v-show="payWay == 84" class="pay-price">
             {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
           </div>
-          <div v-show="payWay == 1" class="choose-tick">
+          <div v-show="payWay == 84" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
@@ -192,101 +192,79 @@
       <div class="msg">
         <div class="msgbox" >
           <div class="title">
-            请选择银行账户
+            {{ $t(`${lang}.pleaseSelectAccount`) }}
             <img @click="closed" class="close" src="../../static/order/closed.png" alt="">
           </div>
           <div class="content">
             <div class="Amount">
-              <span>需支付金额:</span>
+              <span>{{ $t(`${lang}.paidAmount`) }}</span>
               {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
             </div>
-            <div class="account-ways">
-              <div :class="{ 'account-choose': payWay == 1 }" class="account-block" @click="payWay = 1">
-                <div class="account">
-                  <span>账户:</span>
-                  <span>星展銀行(香港)有限公司</span>
-                </div>
-                <div class="account-num">
-                  <span>户口号码:</span>
-                  <span>475522173</span>
-                </div>
-                <div class="account-name">
-                  <span>户口名称:</span>
-                  <span>BDD Co. Limited</span>
-                </div>
-                <div v-show="payWay == 1" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
-                </div>
-              </div>
-
-              <div :class="{ 'account-choose': payWay == 2 }" class="account-block" @click="payWay = 2">
-                <div class="account">
-                  <span>账户:</span>
-                  <span>星展銀行(香港)有限公司</span>
-                </div>
-                <div class="account-num">
-                  <span>户口号码:</span>
-                  <span>475522173</span>
-                </div>
-                <div class="account-name">
-                  <span>户口名称:</span>
-                  <span>BDD Co. Limited</span>
-                </div>
-                <div v-show="payWay == 2" class="choose-tick">
-                  <img src="../../static/order/tick.png" alt="" />
+            <div class="accounts-block">
+              <div class="account-ways" v-for="(item, index) in accountlist" :key="index">
+                <div :class="accountWay === index ? 'account-choose' : ''" @click="changeWay(index)" class="account-block">
+                  <div class="account">
+                    <span>{{ $t(`${lang}.Account`) }}</span>
+                    <span>{{item.bank_name}}</span>
+                  </div>
+                  <div class="account-num">
+                    <span>{{ $t(`${lang}.AccountNumber`) }}</span>
+                    <span>{{item.account}}</span>
+                  </div>
+                  <div class="account-name">
+                    <span>{{ $t(`${lang}.AccountName`) }}</span>
+                    <span>{{item.account_name}}</span>
+                  </div>
+                  <div v-show="accountWay === index" class="choose-tick">
+                    <img src="../../static/order/tick.png" alt="" />
+                  </div>
                 </div>
               </div>
             </div>
             <div class="uploadPic">
               <div class="text">
                 <span class="star">*</span>
-                <span>上传支付凭证:</span>
+                <span>{{ $t(`${lang}.UploadPayVoucher`) }}</span>
               </div>
               <div class="upload">
                 <div class="up">
                   <el-upload
-                    class="upload-demo"
-                    action="https://jsonplaceholder.typicode.com/posts/"
-                    :on-preview="handlePreview"
-                    :on-remove="handleRemove"
-                    :file-list="fileList"
-                    list-type="picture">
-                    <i class="el-icon-plus"></i>
-                    <div>上传图片</div>
-                    <!-- <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div> -->
-                  </el-upload>
-                  <!-- <el-upload
-                    action=""
+                    :class="{hide:hideUpload}"
+                    action="#"
+                    :before-upload="beforeUpload"
                     list-type="picture-card"
                     :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove">
+                    :on-remove="handleRemove" 
+                    :limit="1"
+                    :on-change = "onchange"
+                    >
                     <i class="el-icon-plus"></i>
-                  </el-upload> -->
-                  <!-- <span class="up-text">上传图片</span> -->
+                    <span class="up-text">上传图片</span>
+                  </el-upload>
                   <el-dialog :visible.sync="dialogVisible">
                     <img width="100%" :src="dialogImageUrl" alt="">
                   </el-dialog>
                 </div>
                 <div class="tip">
-                  请确保图片上清晰显示转账日期和银码以便核实款项
+                  {{ $t(`${lang}.Note1`) }}
                 </div>
               </div>
             </div>
             <div class="transactionNum">
               <div class="text2">
-                <div class="number">支付交易号</div>
-                <div class="can-select">(可选填)</div>
+                <div class="number">{{ $t(`${lang}.PayTransactionNumber`) }}</div>
+                <div class="can-select">{{ $t(`${lang}.Optional`) }}</div>
               </div>
               <div class="num-input">
-                <input type="text">
+                <input type="text" v-model="number">
               </div>
             </div>
             <div class="btnPay">
-              <div class="cancel-pay">取消付款</div>
-              <div class="finish-pay">已完成付款</div>
+              <div class="cancel-pay" @click="Cancel">{{ $t(`${lang}.CancelPayment`) }}</div>
+              <div class="finish-pay" @click="Finished">{{ $t(`${lang}.PaymentCompleted`) }}</div>
             </div>
             <div class="prompt">
-              <p>* 注：支付完成后请选择支付的银行账户，请上传凭证</p>
+              <p>{{ $t(`${lang}.Note2`) }}</p>
             </div>
           </div>
         </div>
@@ -321,6 +299,7 @@
 
 <script>
 const lang = `pay`
+// const token =  this.$store.state.token 
 export default {
   data() {
     if ( parseInt(this.$route.query.payType)===7 ) {
@@ -341,37 +320,159 @@ export default {
       goingPay: false,
       language:'',
       transfer:false,
-      fileList: [],
+      fileList: {},
       dialogImageUrl: '',
-      dialogVisible: false
+      imgs:'',
+      account:'',
+      number:'',
+      dialogVisible: false,
+      hideUpload: false,
+      myHeaders: {access_token: this.$store.state.token},
+      accountlist:[],
+      accountWay:'',
+
+      // myHeaders:this.$store.state.token,
+      // imgDatas:[],
+      // formData:new FormData(),
+      // imgs: {},
+      // imgLen:0, el-upload--picture-card
     }
   },
   mounted(){
     this.language = this.getCookie('language')
+    let element = document.querySelector('.el-upload ')
+    console.log("44444",this.fileList)
+    this.getAccount()
+    // if(this.dialogImageUrl.length == 1){
+    //   console.log("44444")
+    //   element.style.display = 'none'
+    // }
   },
   computed: {
     ttPrice() {
-      return this.price * 0.985
+      // return this.price * 0.985
+      return this.price
     }
   },
   methods: {
+    // 获取账户信息
+    getAccount(){
+      this.$axios
+        .get('/web/pay/collection-account-info')
+        .then(res => {
+          this.accountlist = res.data
+          console.log("ssss",res)
+        })
+        .catch(err => {
+          this.$message.error(err.message)
+      })
+    },
+    // 选择账户
+    changeWay(ind) {
+      this.account = this.accountlist[ind].account
+      // console.log("选择",this.accountlist[ind].account)
+      this.accountWay = ind
+    },
+    // 上传图片
+    beforeUpload(file) {
+      // console.log("file2222",file)
+      const isJPG = 
+        file.type == 'image/jpeg'||
+        file.type == 'image/png'||
+        file.type == 'image/jpg'||
+        file.type == 'image/jpg'||
+        file.type == 'image/gif'||
+        file.type == 'image/gif'||
+        file.type == 'image/tif'||
+        file.type == 'image/psd'||
+        file.type == 'image/raw'||
+        file.type == 'image/bmp';
+        const isLt2M = file.size / 1024 / 1024 < 12;
+
+        if (!isJPG) {
+          this.$message.error(this.$t(`${lang}.imgFomat`));
+          return isJPG
+        }
+        if (!isLt2M) {
+          this.$message.error(this.$t(`${lang}.imgSize`));
+          return isLt2M
+        }
+        // return isJPG && isLt2M;
+        var fd = new window.FormData();
+        fd.append('file', file, file.name)
+        this.$axios.post("/web/file/images",fd)
+        .then(res => {
+          this.imgs = res.data.url
+          console.log("上传图片",this.imgs);
+          //  return res.data.url
+        });
+        // return false // 返回false不会自动上传 imgFomat
+    },
+    // 取消付款
+    Cancel(){
+      this.payWay = 6
+      this.transfer = false
+    },
+    // 完成付款
+    Finished(){
+      if(this.accountWay == ''){
+        this.$message.error(this.$t(`${lang}.selectAccount`))
+        return
+      }
+      if(this.imgs == ''){
+        this.$message.error(this.$t(`${lang}.selectVoucher`))
+        return
+      }
+      const data ={
+        order_id: this.$route.query.orderId,
+        account:this.account,
+        payment_serial_number:this.number,
+        payment_voucher:this.imgs
+      }
+      this.$axios
+        .post('/web/pay/wire-transfer',data)
+        .then(res => {
+          this.$successMessage(this.$t(`${lang}.transferSuccessful`))
+          this.transfer = false
+          setTimeout(() => {
+            this.$router.replace({
+              path: '/account/orders',
+            })
+          }, 3000)
+        })
+        .catch(err => {
+          this.$message.error(err.message)
+      })
+    },
+    // 删除图片
     handleRemove(file, fileList) {
-      console.log(file, fileList);
+      // console.log("删除了")
+      if(fileList == ''){
+        setTimeout(() => {
+          this.hideUpload = false
+        }, 500);
+      }
     },
-    handlePreview(file) {
-      console.log(file);
+    // 放大图片
+    handlePictureCardPreview(file) {
+      console.log("file",file)
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
     },
-    // handleRemove(file, fileList) {
-    //   console.log(file, fileList);
-    // },
-    // handlePictureCardPreview(file) {
-    //   this.dialogImageUrl = file.url;
-    //   this.dialogVisible = true;
-    // },
+    // 上传图片是触发的方法
+    onchange(fileList){
+      // console.log(fileList.length)
+      if(fileList !==''){
+        this.hideUpload = true
+      }
+    },
+    // 选择电汇触发打开弹窗
     wire(){
       this.transfer = true
     },
+    // 关闭提交电汇信息弹窗
     closed(){
+      this.payWay = 6
       this.transfer = false
     },
     goPay() {
@@ -484,6 +585,14 @@ export default {
 <style lang="less" scoped>
 div {
   box-sizing: border-box;
+}
+.accounts-block{
+  width: 100%;
+  display: flex;
+    flex-wrap: wrap;
+  // flex-wrap: wrap;
+  // align-items: center;
+  // justify-content: space-between;
 }
 .pay {
   width: 1360px;
@@ -734,7 +843,7 @@ div {
   width: 100vw;
   height: 100vh;
   position: fixed;
-  z-index: 99999999;
+  z-index: 2005;
   top: 0;
   left: 0;
   .msg{
@@ -777,19 +886,25 @@ div {
         .Amount{
           color: #f29b87;
         }
-        .account-ways{
-          display: flex;
-          justify-content: space-between;
+        .account-ways:first-child{
           padding-top: 30px;
+        }
+        .account-ways:nth-child(2){
+          padding-top: 30px;
+          padding-right: 0;
+        }
+        .account-ways{
+          cursor: pointer;
+          padding: 0px 40px 0 0;
           .account-block {
             transition: 0.2s linear;
             position: relative;
-            width: 47%;
+            width: 435px;
             height: 120px;
             background: rgba(248, 248, 248, 1);
             border: 1px solid rgba(205, 205, 205, 1);
-            margin-bottom: 40px;
-            padding: 0 0 0 24px;
+            margin-bottom: 20px;
+            // padding: 0 0 0 24px;
             .account{
               margin-left: 50px;
               line-height: 50px;
@@ -843,12 +958,15 @@ div {
             display: flex;
             .up{
               position: relative;
+              width: 148px;
+              height: 148px;
+              background-color: #ffffff;
             }
             .up-text{
               display: block;
               position: absolute;
-              bottom: 10px;
-              left: 15px;
+              bottom: -26px;
+              left: 47px;
               color: #777777;
               font-size: 14px;
             }
@@ -944,60 +1062,25 @@ div {
 }
 </style>
 <style>
-.el-upload{
-  width: 80px;
-  height: 80px;
-  border: solid 1px #cdcdcd!important;
-  background-color: #ffffff;
+.el-upload-list__item {
+  transition: none !important;
 }
-.el-icon-plus{
-  font-size: 28px;
-  color: #8c939d;
-  width: 80px;
-  line-height: 50px;
-  text-align: center;
+.el-message{
+  z-index: 2010!important;
+}
+.hide .el-upload--picture-card {
+    display: none;
+}
+.el-upload{
+  /* width: 200px; */
+  /* height: 80px; */
+  border: solid 0.5px #cdcdcd!important;
+  background-color: #ffffff;
 }
 .el-upload-list--picture .el-upload-list__item.is-success .el-upload-list__item-name{
   display: none;
 }
- .el-upload--picture-card{
-  border: solid 1px #cdcdcd!important;
-  background-color: #ffffff;
-  width: 80px;
-  height: 80px;
-  line-height: 80px;
-}
-.upload .el-upload-list--picture-card .el-upload-list__item {
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-}
 .el-upload-list__item.is-success .el-upload-list__item-status-label{
   display: none;
 }
-  /* .avatar-uploader {
-    width: 80px;
-    height: 80px;
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  } */
 </style>

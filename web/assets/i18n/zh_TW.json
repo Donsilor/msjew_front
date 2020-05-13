@@ -987,7 +987,9 @@
       "returnApplication": "退货申请",
       "returning": "退货中",
       "hadReturn": "已退货",
-      "cancelTransaction": "取消交易"
+	  "cancelTransaction": "取消交易",
+	  "pending":"待確認",
+	  "PayFailed ":"支付失敗"
     },
     "wish": {
       "myWish": "我的心願單",
@@ -1109,7 +1111,7 @@
     "visa": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
     "UnionPay": "使用中國銀聯銀行卡，安全支付",
     "AliPay": "網上付款，方便，快捷",
-    "EPay": "以電匯方式付款將享有1.5%折扣優惠。注意，電子支票並非電匯。",
+    "EPay": "使用銀行轉賬安全支付",
     "pay": "去結賬",
     "msgTitle1": "須知事項",
     "msgContent1": "<p style='text-align: left;padding-top: 20px;text-indent: 2em;'>由於每一枚鑽石都獨一無二和我們每日的訂單量相當龐大，對於選購了鑽石的客戶，我們需要進一步確認檢查以確保該枚鑽石确有存貨。目前階段，您的訂單將會暫獲保留最長達48個營業小時。存貨情況一但獲得確認，我們將會發送電郵通知您裝運的日期。</p><p style='text-align: left;padding-top: 20px;text-indent: 2em;'>如果您是透過銀行電匯付款，存貨情況一但獲得確認，我們將提供進一步的電匯指示。為確保運送不被延遲，請在收到電匯指示後盡快把款項匯出。請注意，款項從您匯出的銀行到達我們的銀行一般需時24個小時。貨品將在確認收到款項後發出。</p>",
@@ -1119,7 +1121,25 @@
     "contactPhone": "如有問題請聯絡客服電話：（852）-2165 3905！",
     "repay": "重新支付",
     "payQuestion": "支付遇到問題",
-    "msg11": "需登錄購物 / 僅供大陸使用"
+	"msg11": "需登錄購物 / 僅供大陸使用",
+	"pleaseSelectAccount":"請選擇銀行賬戶",
+	"paidAmount":"需支付金額:",
+	"Account":"賬戶:",
+	"AccountNumber":"戶口號碼:",
+	"AccountName":"戶口名稱:",
+	"UploadPayVoucher":"上傳支付憑證:",
+	"uploadImage":"上傳圖片",
+	"Note1":"請確保圖片上清晰顯示轉賬日期和銀碼以便核實款項",
+	"PayTransactionNumber":"支付交易號",
+	"Optional":"(可選填)",
+	"CancelPayment":"取消付款",
+	"PaymentCompleted":"已完成付款",
+	"Note2":"* 注：支付完成後請選擇支付的銀行賬戶，請上傳憑證",
+	"transferSuccessful":"訂單已經提交，運營人員會盡快處理，請及時關注訂單狀態！",
+	"selectAccount":"請先選擇支付的銀行賬戶！",
+	"selectVoucher":"請上傳支付憑證！",
+	"imgFomat":"上傳圖片格式不正確!",
+	"imgSize":"上傳圖片大小不能超過 2MB!"
   },
   "finishPay": {
     "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",

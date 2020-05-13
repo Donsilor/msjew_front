@@ -338,6 +338,12 @@ export default {
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+          url: '/cart/ph.png',
+          type: 84,
+          title: this.LANGUAGE.cart.pay.payType5,
+          des: this.LANGUAGE.cart.pay.type5Text,
         }
         // {
         //   url: '/cart/paydollar.png',
@@ -535,13 +541,15 @@ export default {
         pay = 83
       }else if(this.typeIndex == 4){
         pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 84
       }
 
-      if(pay == 81 || pay == 82 || pay == 83){
+      if(pay == 81 || pay == 82 || pay == 83 || pay == 84){
         this.$toast.show(this.lang.firstLogin)
       }
       if (ind === 5) {
-        this.price = this.info.orderAmount * 0.985
+        this.price = this.info.orderAmount 
       } else {
         this.price = this.info.orderAmount
       }
@@ -1023,15 +1031,16 @@ export default {
       }else if(this.typeIndex == 4){
         pay = 81
       }else if(this.typeIndex == 5){
-        pay = 7
+        pay = 84
       }
        if (!this.isLogin) {
           if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
            return
          }
-         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4){
+         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
             this.$toast.show(this.lang.firstLogin)
+            // this.$nuxt.$loading.finish()
            return
          }
        }
