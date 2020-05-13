@@ -2819,21 +2819,15 @@ export default {
           arr[i].cart_id = this.good[i].data[0].id;
           arr[i+1].cart_id = this.good[i].data[1].id;
         }
-        
+
         if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-          arr[i].coupon_id = this.good[i].data[0].coupon.discount
+          arr[i].coupon_id = this.good[i].data[0].coupon.discount.coupon_id
         }
       }
       // console.log("this.good",this.good)
 
-      console.log(8866,arr)
-      return
-      const data = arr.join(',')
       const datas={
-
-        cards: [
-          {cart_id: '',coupon_id: ''}
-        ],
+        carts: arr,
         coupon_id: '',
         addressId: this.orderAddress.id,
         cards: cards
