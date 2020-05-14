@@ -226,6 +226,16 @@ class Helpers {
 
     return result
   }
+
+  // getTime时间转换
+  changeTime(n){
+    console.log(999,n)
+    var year = new Date(n*1000).getFullYear();
+    var mouth = new Date(n*1000).getMonth();
+    var date = new Date(n*1000).getDay();
+
+    return year+'.'+mouth+'.'+date
+  }
 }
 
 export default new Helpers()

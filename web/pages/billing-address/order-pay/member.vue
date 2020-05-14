@@ -1784,9 +1784,9 @@
             <!-- 优惠券 -->
             <div v-show="1" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
-              <div class="hkd color-pink" :class="{'under-line': !coupon}" @click="showUseCoupon = true">
+              <div class="hkd color-pink" :class="{'under-line': !couponCodeR}" @click="showUseCoupon = true">
                 <!-- -{{ $store.state.coin }} {{ formatMoney(123) }} -->
-                {{coupon ? coupon : '选择可用优惠券'}}
+                {{couponCodeR ? couponCodeR : '选择可用优惠券'}}
               </div>
             </div>
 
@@ -1891,7 +1891,7 @@
     ></shopping-card>
   </div>
 
-  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo"></use-coupon>
+  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready"></use-coupon>
 </div>
 </template>
 
@@ -2015,8 +2015,13 @@ export default {
       num: 0,
       mobileMax: 20,
       currency: '',
-      coupon: 'CP202005085112174',
-      showUseCoupon: false
+      couponCodeR: '',
+      showUseCoupon: false,
+      // 所有可有优惠券
+      couponAll: [],
+      // 已领取优惠券
+      couponAlready: []
+
     }
   },
   computed: {
@@ -2040,7 +2045,6 @@ export default {
         .then(res => {
           this.good = res
 
-          console.log("res",res)
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
           }
@@ -2074,7 +2078,6 @@ export default {
   },
   mounted() {
     // this.getAddress();
-    console.log(668,this.good)
     this.language = this.getCookie('language')
   },
   methods: {
@@ -2828,10 +2831,9 @@ export default {
 
       const datas={
         carts: arr,
-        coupon_id: '',
+        coupon_id: this.couponCodeR,
         addressId: this.orderAddress.id,
         cards: cards
-
       }
       this.canSubmit = false
       this.$axios
@@ -2847,7 +2849,10 @@ export default {
 
           this.orderTotalAmount = res.data.orderAmount;
           this.ultimatelyPay = res.data.payAmount;
-          this.currency = res.data.currency
+          this.currency = res.data.currency;
+
+          this.couponAll = res.data.coupons;
+          this.couponAlready = res.data.myCoupons;
         })
         .catch(err => {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
@@ -2879,28 +2884,37 @@ export default {
         this.alertBox = true
         return false
       }
-      const arr = []
       let invoice = {}
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
       for (const i in this.good) {
+        arr.push({...obj})
         if (this.good[i].groupType === null) {
-          arr.push(this.good[i].data[0].id)
+          arr[i].cart_id = this.good[i].data[0].id;
         } else {
-          arr.push(this.good[i].data[0].id)
-          arr.push(this.good[i].data[1].id)
+          arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
+          arr[i+1].cart_id = this.good[i].data[1].id;
+        }
+
+        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.good[i].data[0].coupon.discount.coupon_id
         }
       }
+
       if(this.iconShow ){
         invoice = this.invoice
       }
       // console.log("arr",arr)
 
       const data = {
-        cart_ids: arr.join(','),
+        carts: arr,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
         invoice:invoice,
-        card: this.cardList
+        card: this.cardList,
+        coupon_id: this.couponCodeR
       }
       // console.log("pppp",data)
       this.$axios
@@ -2961,28 +2975,38 @@ export default {
         this.alertBox = true
         return false
       }
-      const arr = []
-      let invoice = {}
+
+      let invoice = {};
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
       for (const i in this.good) {
+        arr.push({...obj})
         if (this.good[i].groupType === null) {
-          arr.push(this.good[i].data[0].id)
+          arr[i].cart_id = this.good[i].data[0].id;
         } else {
-          arr.push(this.good[i].data[0].id)
-          arr.push(this.good[i].data[1].id)
+          arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
+          arr[i+1].cart_id = this.good[i].data[1].id;
+        }
+
+        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.good[i].data[0].coupon.discount.coupon_id
         }
       }
+
       if(this.iconShow){
         invoice = this.invoice
       }
       // console.log("arr",arr)
       const data = {
-        cart_ids: arr.join(','),
+        carts: arr,
         // allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
         invoice:invoice,
         card: this.cardList || '',
+        coupon_id: this.couponCodeR
         // afterMail: this.isSameEmail
         // ? this.orderAddress.email
         // : this.orderEmail,
@@ -2993,6 +3017,8 @@ export default {
         .post('/web/member/order/create', data)
         .then(res => {
           // console.log("创建订单",res.data.orderAmount)
+          console.log(666,res)
+          console.log(res.data.payStatus)
           if(res.data.payStatus == 1){
             that.$successMessage(that.$t(`${lang2}.submitSuccessfully`));
             that.$router.replace({
@@ -3057,8 +3083,13 @@ export default {
          this.mobileMax = 20
        }
      },
-     closeCo(){
-       this.showUseCoupon = false
+     closeCo(k){
+       this.showUseCoupon = false;
+
+       if(k){
+         this.couponCodeR = k;
+         this.getTex();
+       }
      }
 
   }

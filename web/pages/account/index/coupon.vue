@@ -17,13 +17,13 @@
            <div class="price">
              <span class="price-icon">￥</span>
              <span class="price-num">{{item.money}}</span>
-             <span class="currency">(usd {{item.money}})</span>
            </div>
 
+           <div class="rmb">(￥{{item.money_cn}})</div>
            <div class="rule">满{{item.atLeast}}元使用</div>
            <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
-           <div class="use">(限项链使用)</div>
-           <div class="time">{{ $t(`${lang}.time`) }}：2020.2.1- 2020.2.2</div>
+           <div class="use">({{item.lineType}})</div>
+           <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
 
            <!-- 失效 class="lose-efficacy" -->
            <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.loseEfficacy">{{ $t(`${lang}.loseEfficacy`) }}</div>

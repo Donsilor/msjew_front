@@ -31,6 +31,9 @@ export default function({ req, res, app, store }) {
   
   // 判断是否有打折活动
   Vue.prototype.couponType = Helpers.couponType
+  
+  // getTime 时间转换
+  Vue.prototype.changeTime = Helpers.changeTime
 
   //  公共样式顶部返回按钮的函数
   Vue.prototype.goBack = function(router) {
