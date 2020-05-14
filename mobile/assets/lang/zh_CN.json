@@ -243,8 +243,8 @@
         "selectAccount":"请先选择支付的银行账户！",
         "selectVoucher":"请上传支付凭证！",
         "transferSuccessful":"订单已经提交，运营人员会尽快处理，请及时关注订单状态！",
-        "imgFomat":"上传图片格式不正确!",
-        "imgSize":"上传图片大小不能超过 12MB!",
+        "imgFomat":"上传图片格式不正确，请重新上传!",
+        "imgSize":"图片过大，请重新上传！",
         "bankAddress":"银行地址:",
         "SwiftCode":"SWIFT CODE:",
         "uploadPhotos":"上传图片"
@@ -965,7 +965,8 @@
         "text": "您的订单在23小时59分钟内未支付将被取消, 请尽快完成支付。",
         "tips": "确认离开吗?",
         "pending":"待确认",
-	      "payfailed":"支付失败"
+        "payfailed":"支付失败",
+        "lookOrder":"查看订单"
       },
       "progressBar": {
         "price": "价格",

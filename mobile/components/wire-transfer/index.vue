@@ -46,6 +46,7 @@
                         <el-upload
                         :class="{hided:hideUpload}"
                         action="#"
+                        accept ='.jpeg,.bmp,.jpg,.png,.tif,.gif,.pcx,.tga,.exif,.fpx,.svg,.psd,.cdr,.pcd,.dxf,.ufo,.eps,.ai,.raw,.WMF,.webp'
                         :before-upload="beforeUpload"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
@@ -131,22 +132,36 @@ export default {
         beforeUpload(file) {
             console.log("file2222",file)
             const isJPG = 
-            file.type == 'image/jpeg'||
-            file.type == 'image/png'||
-            file.type == 'image/jpg'||
-            file.type == 'image/gif'||
-            file.type == 'image/tif'||
-            file.type == 'image/raw'||
-            file.type == 'image/bmp';
-            const isLt12M = file.size / 1024 / 1024 < 12;
+                file.type == 'image/jpeg'||
+                file.type == 'image/png'||
+                file.type == 'image/jpg'||
+                file.type == 'image/gif'||
+                file.type == 'image/tiff'||
+                file.type == 'image/raw'||
+                file.type == 'image/pcx'||
+                file.type == 'image/tga'||
+                file.type == 'image/exif'||
+                file.type == 'image/fpx'||
+                file.type == 'image/svg'||
+                file.type == 'image/psd'||
+                file.type == 'image/cdr'||
+                file.type == 'image/pcd'||
+                file.type == 'image/dxf'||
+                file.type == 'image/ufo'||
+                file.type == 'image/eps'||
+                file.type == 'image/ai'||
+                file.type == 'image/WMF'||
+                file.type == 'image/webp'||
+                file.type == 'image/bmp';
+            const isLt2M = file.size / 1024 / 1024 < 2;
 
             if (!isJPG) {
                 this.$toast.show(this.lang.imgFomat);
                 return isJPG
             } 
-            if (!isLt12M) {
+            if (!isLt2M) {
                 this.$toast.show(this.lang.imgSize);
-                return isLt12M
+                return isLt2M
             }
             // return isJPG && isLt2M;
             var fd = new window.FormData();

@@ -1138,8 +1138,8 @@
 	"transferSuccessful":"訂單已經提交，運營人員會盡快處理，請及時關注訂單狀態！",
 	"selectAccount":"請先選擇支付的銀行賬戶！",
 	"selectVoucher":"請上傳支付憑證！",
-	"imgFomat":"上傳圖片格式不正確!",
-	"imgSize":"上傳圖片大小不能超過 12MB!",
+	"imgFomat":"上傳圖片格式不正確，請重新上傳!",
+	"imgSize":"圖片過大，請重新上傳！",
 	"bankAddress":"銀行地址:",
 	"SwiftCode":"SWIFT CODE:",
 	"uploadPhotos":"上傳圖片"
@@ -2509,7 +2509,8 @@
 		"editOrUnbound": "編輯/解綁購物卡",
 		"shoppingCard": "購物卡",
     "msg10": "購物車不能為空，請重新添加商品",
-    "msg11": "需登錄購物 / 僅供大陸使用"
+	"msg11": "需登錄購物 / 僅供大陸使用",
+	"needlogin": "需登錄購物"
 	},
 	"invoice": {
 		"personal": "個人",

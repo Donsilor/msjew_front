@@ -74,7 +74,7 @@
         </div>
         <div class="bottom">
           <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
-            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">查看订单</div>
+            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">{{lang.lookOrder}}</div>
             <div>
               <div class="order-box-a">
                 <span class="title">{{ lang.orderCount }}：</span>
@@ -619,8 +619,9 @@ export default {
   margin-left: 0 !important;
 }
 .btn-look{
+    width: 100px;
     height: 0.853333rem;
-    padding: 0 0.56rem;
+    // padding: 0 0.56rem;
     border-radius: 0.133333rem;
     font-size: 0.373333rem;
     line-height: 0.853333rem;

@@ -451,7 +451,7 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
              
                <!-- 信用卡 -->
@@ -1481,8 +1481,8 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
-        "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay needlogin" :class="language == 'en_US' ? 'en' : ''
+        "><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
               <!-- 信用卡 -->
               <div
@@ -4886,6 +4886,15 @@ div {
   color: #f00;
   font-size: 18px;
   opacity: 0.6;
+}
+.needlogin{
+  position: absolute;
+  right: 175px;
+  top: 94px;
+  font-family: twCenMt;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 24px;
 }
 // .hint_pay.en{
 //   top: 94px;

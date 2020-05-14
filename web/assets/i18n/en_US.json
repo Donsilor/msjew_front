@@ -1132,8 +1132,8 @@
 	"transferSuccessful":"Order has been submitted, it will be processed very soon, please stay updated！",
 	"selectAccount":"Please select payment bank account.",
 	"selectVoucher":"Please upload payment voucher.",
-	"imgFomat": "The format of the uploaded image is incorrect!",
-	"imgSize":"The uploaded image size cannot exceed 12MB!",
+	"imgFomat": "The format of the uploaded image is incorrect, please upload it again!",
+	"imgSize":"Excessive size of the photo, please upload it again!",
 	"bankAddress":"Bank Address:",
 	"SwiftCode":"SWIFT CODE:",
 	"uploadPhotos":"Upload  Photos"
@@ -2502,7 +2502,8 @@
 		"editOrUnbound": "Edit/Remove Card",
 		"shoppingCard": "Shopping Card",
     "msg10": "The shopping cart cannot be empty. Please add the item again",
-    "msg11": "Need to log in for shopping / Mainland China Only"
+	"msg11": "Need to log in for shopping / Mainland China Only",
+	"needlogin": "Need to log in for shopping"
 	},
 	"invoice": {
 		"personal": "personal",

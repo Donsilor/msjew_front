@@ -242,8 +242,8 @@
       "back": "Back",
       "selectAccount":"Please select payment bank account.",
       "selectVoucher":"Please upload payment voucher.",
-      "imgFomat": "The format of the uploaded image is incorrect!",
-      "imgSize":"The uploaded image size cannot exceed 12MB!",
+      "imgFomat": "The format of the uploaded image is incorrect, please upload it again!",
+      "imgSize":"Excessive size of the photo, please upload it again!",
       "bankAddress":"Bank Address:",
       "SwiftCode":"SWIFT CODE:",
       "uploadPhotos":"Upload  Photos"
@@ -961,7 +961,8 @@
       "text": "Make payment within 23 hours and 59 minutes or your order will be canceled ",
       "tips": "Confirm to leave the checkout page ?",
       "pending":"Pending",
-      "payfailed":"Payment failed"
+      "payfailed":"Payment failed",
+      "lookOrder": "View Order"
     },
     "progressBar": {
       "price": "Price",

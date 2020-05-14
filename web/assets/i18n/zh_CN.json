@@ -1150,8 +1150,8 @@
 	"transferSuccessful":"订单已经提交，运营人员会尽快处理，请及时关注订单状态！",
 	"selectAccount":"请先选择支付的银行账户！",
 	"selectVoucher":"请上传支付凭证！",
-	"imgFomat":"上传图片格式不正确!",
-	"imgSize":"上传图片大小不能超过 12MB!",
+	"imgFomat":"上传图片格式不正确，请重新上传!",
+	"imgSize":"图片过大，请重新上传！",
 	"bankAddress":"银行地址:",
 	"SwiftCode":"SWIFT CODE:",
 	"uploadPhotos":"上传图片"
@@ -2520,7 +2520,8 @@
 		"editOrUnbound": "编辑/解绑购物卡",
 		"shoppingCard": "购物卡",
     "msg10": "购物车不能为空，请重新添加商品",
-    "msg11": "需登录购物 / 仅供大陆使用"
+	"msg11": "需登录购物 / 仅供大陆使用",
+	"needlogin": "需登录购物"
 	},
 	"invoice": {
 		"personal": "个人",

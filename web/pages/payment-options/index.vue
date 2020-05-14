@@ -125,8 +125,8 @@
           <div v-show="payWay == 83" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-          <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
-          "><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+          <!-- <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+          "><span>*</span> {{ $t(`${lang}.msg11`) }}</div> -->
         </div>
 
         <!-- 信用卡 -->
@@ -239,6 +239,7 @@
                   <el-upload
                     :class="{hide:hideUpload}"
                     action="#"
+                    accept ='.jpeg,.bmp,.jpg,.png,.tif,.gif,.pcx,.tga,.exif,.fpx,.svg,.psd,.cdr,.pcd,.dxf,.ufo,.eps,.ai,.raw,.WMF,.webp'
                     :before-upload="beforeUpload"
                     list-type="picture-card"
                     :on-preview="handlePictureCardPreview"
@@ -383,24 +384,39 @@ export default {
     },
     // 上传图片
     beforeUpload(file) {
-      // console.log("file2222",file)
+      console.log("file2222",file) 
+      // jpeg,bmp,jpg,png,tif,gif,pcx,tga,exif,fpx,svg,psd,cdr,pcd,dxf,ufo,eps,ai,raw,WMF,webp
       const isJPG = 
         file.type == 'image/jpeg'||
         file.type == 'image/png'||
         file.type == 'image/jpg'||
         file.type == 'image/gif'||
-        file.type == 'image/tif'||
+        file.type == 'image/tiff'||
         file.type == 'image/raw'||
+        file.type == 'image/pcx'||
+        file.type == 'image/tga'||
+        file.type == 'image/exif'||
+        file.type == 'image/fpx'||
+        file.type == 'image/svg'||
+        file.type == 'image/psd'||
+        file.type == 'image/cdr'||
+        file.type == 'image/pcd'||
+        file.type == 'image/dxf'||
+        file.type == 'image/ufo'||
+        file.type == 'image/eps'||
+        file.type == 'image/ai'||
+        file.type == 'image/WMF'||
+        file.type == 'image/webp'||
         file.type == 'image/bmp';
-        const isLt12M = file.size / 1024 / 1024 < 12;
+        const isLt2M = file.size / 1024 / 1024 < 2;
 
         if (!isJPG) {
           this.$message.error(this.$t(`${lang}.imgFomat`));
           return isJPG
         }
-        if (!isLt12M) {
+        if (!isLt2M) {
           this.$message.error(this.$t(`${lang}.imgSize`));
-          return isLt12M
+          return isLt2M
         }
         // return isJPG && isLt2M;
         var fd = new window.FormData();
