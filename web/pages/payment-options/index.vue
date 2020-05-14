@@ -158,7 +158,7 @@
           </div>
           <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
           <div v-show="payWay == 84" class="pay-price">
-            {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
+            {{ $store.state.coin }} {{ formatMoney(price) }}
           </div>
           <div v-show="payWay == 84" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
@@ -196,7 +196,7 @@
           <div class="content">
             <div class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
-              {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
+              {{ $store.state.coin }} {{ formatMoney(price) }}
             </div>
             <div class="accounts-block">
               <div class="account-ways" v-for="(item, index) in accountlist" :key="index">
@@ -967,10 +967,12 @@ div {
           display: flex;
           margin-bottom: 20px;
           .text{
+            width: 215px;
+            font-size: 15px;
             .star{
               color: red;
             }
-            margin-right: 40px;
+            // margin-right: 40px;
           }
           .upload{
             // width: 510px;
@@ -1007,24 +1009,27 @@ div {
           display: flex;
           margin-bottom: 40px;
           .text2{
-            margin-right: 72px;
+            width: 215px;
+            // margin-right: 72px;
             .number{
               font-size: 16px;
               line-height: 24px;
             }
             .can-select{
               font-size: 16px;
-              text-align: center;
+              // text-align: center;
               color: #999999;
             }
           }
           .num-input{
-            width: 460px;
-            background-color: #f8f8f8;
-            border: solid 1px #cdcdcd;
-            line-height: 40px;
-            line-height: 40px;
-            padding-left: 15px;
+            input{
+              width: 460px;
+              background-color: #f8f8f8;
+              border: solid 1px #cdcdcd;
+              line-height: 40px;
+              line-height: 40px;
+              padding-left: 15px;
+            }
           }
         }
         .btnPay{

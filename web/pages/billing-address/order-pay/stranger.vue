@@ -484,12 +484,12 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
                 <div v-show="payWay == 84" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
                 <div v-show="payWay == 84" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                 <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
               <!-- 支付宝 -->
               <!-- <div
@@ -1514,12 +1514,12 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
                 <div v-show="payWay == 84" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(ttPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
                 <div v-show="payWay == 84" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
               <!-- 支付宝 -->
               <!-- <div
@@ -2202,7 +2202,7 @@ export default {
       return result
     },
     ttPrice() {
-      return this.goodsPrice * 0.985
+      // return this.goodsPrice * 0.985
     }
   },
   created() {
