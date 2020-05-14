@@ -1001,7 +1001,7 @@
       "hadReturn": "已退货",
 	  "cancelTransaction": "取消交易",
 	  "pending":"待确认",
-	  "PayFailed ":"支付失败"
+	  "PayFailed":"支付失败"
     },
     "wish": {
       "myWish": "我的心愿单",

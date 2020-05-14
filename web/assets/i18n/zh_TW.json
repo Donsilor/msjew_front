@@ -989,7 +989,7 @@
       "hadReturn": "已退货",
 	  "cancelTransaction": "取消交易",
 	  "pending":"待確認",
-	  "PayFailed ":"支付失敗"
+	  "PayFailed":"支付失敗"
     },
     "wish": {
       "myWish": "我的心願單",

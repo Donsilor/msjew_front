@@ -983,7 +983,7 @@
       "hadReturn": "Products returned",
 	  "cancelTransaction": "Cancel Order",
 	  "pending":"Pending",
-	  "PayFailed ":"Payment failed "
+	  "PayFailed":"Payment failed "
     },
     "wish": {
       "myWish": "Wish List",

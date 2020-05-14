@@ -512,7 +512,7 @@ export default {
       var transferStatus_value = {
         0 : this.$t(`${lang}.pending`),
         1 : this.$t(`${lang}.hadPay`),
-        2: this.$t(`${lang}.PayFailed`),
+        10: this.$t(`${lang}.PayFailed`),
       };
       return transferStatus_value[transferStatus];
     },

@@ -388,22 +388,19 @@ export default {
         file.type == 'image/jpeg'||
         file.type == 'image/png'||
         file.type == 'image/jpg'||
-        file.type == 'image/jpg'||
-        file.type == 'image/gif'||
         file.type == 'image/gif'||
         file.type == 'image/tif'||
-        file.type == 'image/psd'||
         file.type == 'image/raw'||
         file.type == 'image/bmp';
-        const isLt2M = file.size / 1024 / 1024 < 12;
+        const isLt12M = file.size / 1024 / 1024 < 12;
 
         if (!isJPG) {
           this.$message.error(this.$t(`${lang}.imgFomat`));
           return isJPG
         }
-        if (!isLt2M) {
+        if (!isLt12M) {
           this.$message.error(this.$t(`${lang}.imgSize`));
-          return isLt2M
+          return isLt12M
         }
         // return isJPG && isLt2M;
         var fd = new window.FormData();
@@ -423,14 +420,16 @@ export default {
     },
     // 完成付款
     Finished(){
-      // if(this.accountWay == undefined && this.accountWay == ''){
-      //   this.$message.error(this.$t(`${lang}.selectAccount`))
-      //   return
-      // }
-      // if(this.imgs == ''){
-      //   this.$message.error(this.$t(`${lang}.selectVoucher`))
-      //   return
-      // }
+      console.log('a',typeof this.accountWay)
+      // return
+      if(this.accountWay === ''){
+        this.$message.error(this.$t(`${lang}.selectAccount`))
+        return
+      }
+      if(this.imgs === ''){
+        this.$message.error(this.$t(`${lang}.selectVoucher`))
+        return
+      }
       const data ={
         order_id: this.$route.query.orderId,
         account:this.account,

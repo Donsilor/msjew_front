@@ -569,7 +569,7 @@
         "ultimatelyPay": "实付金额",
         "NeedPay": "需付金額",
         "pending":"待确认",
-	      "PayFailed ":"支付失败"
+	      "payfailed":"支付失败"
       }
     },
     "custom-made": {
@@ -965,7 +965,7 @@
         "text": "您的订单在23小时59分钟内未支付将被取消, 请尽快完成支付。",
         "tips": "确认离开吗?",
         "pending":"待确认",
-	      "PayFailed ":"支付失败"
+	      "payfailed":"支付失败"
       },
       "progressBar": {
         "price": "价格",

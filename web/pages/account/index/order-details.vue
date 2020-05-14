@@ -53,7 +53,7 @@
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.hadPay`)}}
           </span>
-          <span v-else-if="data.wireTransferStatus == '2'">
+          <span v-else-if="data.wireTransferStatus == '10'">
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.PayFailed`)}}
           </span>

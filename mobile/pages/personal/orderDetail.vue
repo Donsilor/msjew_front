@@ -4,16 +4,16 @@
     <div class="content">
       <div class="top">
         <!--        <OrderHeader :list="statusSteps" :stepindex="step" />-->
-        <div v-if="wireTransferStatus == null" class="status-title">
+        <div v-if="info.wireTransferStatus == null" class="status-title">
           {{ statusText(info.orderStatus) }}
         </div>
         <div v-else class="status-title">
-          {{ getTransferStatus(wireTransferStatus) }}
+          {{ getTransferStatus(info.wireTransferStatus) }} 
         </div>
         <div class="service">
           <ul>
-            <li v-if="wireTransferStatus == null">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
-            <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(wireTransferStatus) }}</li>
+            <li v-if="info.wireTransferStatus == null">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
+            <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
             <li>{{ lang.orderTime }}：{{ info.orderTime }}</li>
             <template v-if="info.orderStatus > 20 && info.orderStatus !== 50">
@@ -289,14 +289,14 @@
             {{ lang.paytips }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && wireTransferStatus == null"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null"
             class="btn-block"
             @click="goPay(info)"
           >
             {{ lang.toPay }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && wireTransferStatus == null"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null"
             class="btn-white"
             @click="cancelOrder"
           >
@@ -327,7 +327,6 @@ export default {
     return {
       lang: this.LANGUAGE.personal.orderDetail,
       lang2: this.LANGUAGE.cart.invoice,
-      wireTransferStatus:this.$route.query.wireTransferStatus,
       info: {},
       paytips: false,
       invoice:{},
@@ -447,7 +446,7 @@ export default {
       const transferStatus_value = {
         0 : this.lang.pending,
         1 : this.lang.hadPay,
-        2 : this.lang.PayFailed,
+        10 : this.lang.payfailed
       };
       return transferStatus_value[transferStatus];
     },

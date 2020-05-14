@@ -564,12 +564,12 @@
       "received": "Received",
       "confirmCancellationOrder": "Cancel order",
       "canceled": "Order cancelled",
-	  "paytips": "WIRE TRANSFER GUIDE",
-	  "shoppingCard": "shopping card",
-	  "ultimatelyPay": "Actual payment",
-    "NeedPay": "MoneyNeedPay",
-    "pending":"Pending",
-	  "PayFailed ":"Payment failed "
+      "paytips": "WIRE TRANSFER GUIDE",
+      "shoppingCard": "shopping card",
+      "ultimatelyPay": "Actual payment",
+      "NeedPay": "MoneyNeedPay",
+      "pending":"Pending",
+      "payfailed":"Payment failed"
     }
   },
   "custom-made": {
@@ -961,7 +961,7 @@
       "text": "Make payment within 23 hours and 59 minutes or your order will be canceled ",
       "tips": "Confirm to leave the checkout page ?",
       "pending":"Pending",
-	    "PayFailed ":"Payment failed "
+      "payfailed":"Payment failed"
     },
     "progressBar": {
       "price": "Price",

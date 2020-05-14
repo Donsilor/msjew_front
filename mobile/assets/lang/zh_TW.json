@@ -563,12 +563,12 @@
       "received": "已確認收貨",
       "confirmCancellationOrder": "確認取消订单",
       "canceled": "已取消订单",
-	  "paytips": "電匯指引",
-	  "shoppingCard": "購物卡",
-	  "ultimatelyPay": "實付金額",
-    "NeedPay": "需付金額",
-    "pending":"待確認",
-	  "PayFailed ":"支付失敗"
+      "paytips": "電匯指引",
+      "shoppingCard": "購物卡",
+      "ultimatelyPay": "實付金額",
+      "NeedPay": "需付金額",
+      "pending":"待確認",
+      "payfailed":"支付失敗"
     }
   },
   "custom-made": {
@@ -963,7 +963,7 @@
       "text": "您的訂單在23小時59分鐘內未支付將被取消, 請儘快完成支付。",
       "tips": "確認離開嗎?",
       "pending":"待確認",
-	    "PayFailed ":"支付失敗"
+      "payfailed":"支付失敗"
     },
     "progressBar": {
       "price": "價格",

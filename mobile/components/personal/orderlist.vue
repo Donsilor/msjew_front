@@ -4,13 +4,13 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span v-if="order.wireTransferStatus == null" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-if="order.wireTransferStatus === null" class="order-status">{{ statusText(order.orderStatus) }}</span>
           <span v-else class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
         </div>
         <div class="top">
           <span>{{ order.orderNO }}</span>
         </div>
-        <div class="mod" @click="toDetail(order.id,order.wireTransferStatus)">
+        <div class="mod" @click="toDetail(order.id)">
           <ul>
             <li v-for="(detail, n) in order.details" :key="n">
               <img :src="detail.image" />
@@ -74,7 +74,7 @@
         </div>
         <div class="bottom">
           <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
-            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id,order.wireTransferStatus)">查看订单</div>
+            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">查看订单</div>
             <div>
               <div class="order-box-a">
                 <span class="title">{{ lang.orderCount }}：</span>
@@ -325,17 +325,16 @@ export default {
       const transferStatus_value = {
         0 : this.lang.pending,
         1 : this.lang.paid,
-        2 : this.lang.PayFailed,
+        10 : this.lang.payfailed
       };
       return transferStatus_value[transferStatus];
     },
     // 跳转到详情页
-    toDetail(orderId,wireTransferStatus) {
+    toDetail(orderId) {
       this.$router.push({
         name: 'personal-orderDetail',
         query: {
-          orderId: orderId,
-          wireTransferStatus:wireTransferStatus
+          orderId: orderId
         }
       })
     },
@@ -585,8 +584,9 @@ export default {
           span {
             // display: inline-block;
             /*width: 100px;*/
+            width: 110px;
             height: 32px;
-            padding: 0 21px;
+            // padding: 0 15px;
             border-radius: 5px;
             font-size: 14px;
             line-height: 32px;
