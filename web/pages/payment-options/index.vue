@@ -239,7 +239,6 @@
                   <el-upload
                     :class="{hide:hideUpload}"
                     action="#"
-                    accept ='.jpeg,.bmp,.jpg,.png,.tif,.gif,.pcx,.tga,.exif,.fpx,.svg,.psd,.cdr,.pcd,.dxf,.ufo,.eps,.ai,.raw,.WMF,.webp'
                     :before-upload="beforeUpload"
                     list-type="picture-card"
                     :on-preview="handlePictureCardPreview"

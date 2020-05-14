@@ -60,7 +60,7 @@
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
-                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3">({{lang.msg11}})</p>
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p> 
               </div>
             </div>
           </li>
