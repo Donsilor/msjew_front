@@ -999,7 +999,7 @@
       "returnApplication": "退货申请",
       "returning": "退货中",
       "hadReturn": "已退货",
-	  "cancelTransactionp": "取消交易",
+	  "cancelTransaction": "取消交易",
 	  "pending":"待确认",
 	  "PayFailed ":"支付失败"
     },
@@ -1151,9 +1151,10 @@
 	"selectAccount":"请先选择支付的银行账户！",
 	"selectVoucher":"请上传支付凭证！",
 	"imgFomat":"上传图片格式不正确!",
-	"imgSize":"上传图片大小不能超过 2MB!",
+	"imgSize":"上传图片大小不能超过 12MB!",
 	"bankAddress":"银行地址:",
-	"SwiftCode":"SWIFT CODE:"
+	"SwiftCode":"SWIFT CODE:",
+	"uploadPhotos":"上传图片"
   },
   "finishPay": {
     "PayPending1":"订单已经提交，系统正在处理中,请稍等。",

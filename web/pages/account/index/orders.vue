@@ -76,7 +76,7 @@
 
           <!--待付款 10-->
           <div v-if="o.orderStatus == 10" class="list-footer">
-            <nuxt-link :to="`/account/order-details?orderId=${o.id}&wireTransferStatus=${o.wireTransferStatus}`"
+            <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
               </button>

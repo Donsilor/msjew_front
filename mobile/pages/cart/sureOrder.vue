@@ -1,7 +1,7 @@
 <template>
   <div class="sure-oredr">
     <Header :title="lang.sureOrder" />
-    <div v-if="!isLogin" class="is-login">
+    <div v-if="!isLogin" class="is-login" id="loginBox">
       <i class="icon iconfont icongantanhao1"></i>
       <a @click="gologin(1)">{{ lang.login }}</a>
       <span>{{ lang.settlement }}</span>
@@ -547,6 +547,12 @@ export default {
 
       if(pay == 81 || pay == 82 || pay == 83 || pay == 84){
         this.$toast.show(this.lang.firstLogin)
+        // 点击修改滚顶到地址编辑模块
+        document.getElementById('loginBox').scrollIntoView({
+          block: 'center',
+          inline: 'nearest',
+          behavior: 'smooth'
+        })
       }
       if (ind === 5) {
         this.price = this.info.orderAmount 

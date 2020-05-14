@@ -217,7 +217,7 @@
                   </div>
                   <div class="account-name">
                     <span>{{ $t(`${lang}.bankAddress`) }}</span>
-                    <span>{{item.band_address}}</span>
+                    <span>{{item.bank_address}}</span>
                   </div>
                   <div class="account-name">
                     <span>{{ $t(`${lang}.SwiftCode`) }}</span>
@@ -247,7 +247,7 @@
                     :on-change = "onchange"
                     >
                     <i class="el-icon-plus"></i>
-                    <span class="up-text">上传图片</span>
+                    <span class="up-text">{{ $t(`${lang}.uploadPhotos`) }}</span>
                   </el-upload>
                   <el-dialog :visible.sync="dialogVisible">
                     <img width="100%" :src="dialogImageUrl" alt="">
@@ -423,14 +423,14 @@ export default {
     },
     // 完成付款
     Finished(){
-      if(this.accountWay == undefined && this.accountWay == ''){
-        this.$message.error(this.$t(`${lang}.selectAccount`))
-        return
-      }
-      if(this.imgs == ''){
-        this.$message.error(this.$t(`${lang}.selectVoucher`))
-        return
-      }
+      // if(this.accountWay == undefined && this.accountWay == ''){
+      //   this.$message.error(this.$t(`${lang}.selectAccount`))
+      //   return
+      // }
+      // if(this.imgs == ''){
+      //   this.$message.error(this.$t(`${lang}.selectVoucher`))
+      //   return
+      // }
       const data ={
         order_id: this.$route.query.orderId,
         account:this.account,
@@ -910,7 +910,7 @@ div {
             transition: 0.2s linear;
             position: relative;
             width: 435px;
-            // height: 120px;
+            min-height: 190px;
             background: rgba(248, 248, 248, 1);
             border: 1px solid rgba(205, 205, 205, 1);
             margin-bottom: 40px;
@@ -920,19 +920,19 @@ div {
               line-height: 50px;
               font-weight: 600;
               color: #777777;
-              font-size: 16px;
+              font-size: 15px;
             }
             .account-num{
               margin-left: 80px;
               line-height: 28px;
               color: #777777;
-              font-size: 14px;
+              font-size: 12px;
             }
             .account-name{
               margin-left: 80px;
               line-height: 28px;
               color: #777777;
-              font-size: 14px;
+              font-size: 12px;
             }
           }
           .account-choose {
@@ -974,9 +974,11 @@ div {
             }
             .up-text{
               display: block;
+              width: 148px;
+              text-align: center;
               position: absolute;
               bottom: -26px;
-              left: 47px;
+              // left: 28px;
               color: #777777;
               font-size: 14px;
             }

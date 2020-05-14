@@ -10,7 +10,7 @@
         <div class="top">
           <span>{{ order.orderNO }}</span>
         </div>
-        <div class="mod" @click="toDetail(order.id)">
+        <div class="mod" @click="toDetail(order.id,order.wireTransferStatus)">
           <ul>
             <li v-for="(detail, n) in order.details" :key="n">
               <img :src="detail.image" />
@@ -74,7 +74,7 @@
         </div>
         <div class="bottom">
           <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
-            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">查看订单</div>
+            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id,order.wireTransferStatus)">查看订单</div>
             <div>
               <div class="order-box-a">
                 <span class="title">{{ lang.orderCount }}：</span>
@@ -330,11 +330,12 @@ export default {
       return transferStatus_value[transferStatus];
     },
     // 跳转到详情页
-    toDetail(orderId) {
+    toDetail(orderId,wireTransferStatus) {
       this.$router.push({
         name: 'personal-orderDetail',
         query: {
-          orderId: orderId
+          orderId: orderId,
+          wireTransferStatus:wireTransferStatus
         }
       })
     },

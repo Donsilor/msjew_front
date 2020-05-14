@@ -244,7 +244,10 @@
         "selectVoucher":"请上传支付凭证！",
         "transferSuccessful":"订单已经提交，运营人员会尽快处理，请及时关注订单状态！",
         "imgFomat":"上传图片格式不正确!",
-        "imgSize":"上传图片大小不能超过 2MB!"
+        "imgSize":"上传图片大小不能超过 12MB!",
+        "bankAddress":"银行地址:",
+        "SwiftCode":"SWIFT CODE:",
+        "uploadPhotos":"上传图片"
       },
       "paySuccess": {
         "PayPending1":"订单已提交，系统处理中…请稍等.",
@@ -564,7 +567,9 @@
         "paytips": "电汇指引",
         "shoppingCard": "购物卡",
         "ultimatelyPay": "实付金额",
-        "NeedPay": "需付金額"
+        "NeedPay": "需付金額",
+        "pending":"待确认",
+	      "PayFailed ":"支付失败"
       }
     },
     "custom-made": {

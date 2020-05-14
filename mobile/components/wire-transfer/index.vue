@@ -14,16 +14,24 @@
                             <span v-show="typeIndex === index"  class="icon iconfont icongou"  ></span>
                             <div class="Account">
                                 <div class="box bank">
-                                    <span>{{lang.Account}}</span>
-                                    <span>{{ item.bank_name }}</span>
+                                    <span>{{lang.Account}} </span>
+                                    <span> {{ item.bank_name }}</span>
                                 </div>
                                 <div class="box number">
-                                    <span>{{lang.AccountNumber}}</span>
-                                    <span>{{ item.account }}</span>
+                                    <span>{{lang.AccountNumber}} </span>
+                                    <span> {{ item.account }}</span>
                                 </div>
                                 <div class="box name">
-                                    <span>{{lang.AccountName}}</span>
-                                    <span>{{ item.account_name }}</span>
+                                    <span>{{lang.AccountName}} </span>
+                                    <span> {{ item.account_name }}</span>
+                                </div>
+                                <div class="box name">
+                                    <span>{{lang.bankAddress}} </span>
+                                    <span> {{ item.bank_address }}</span>
+                                </div>
+                                <div class="box name">
+                                    <span>{{lang.SwiftCode}}</span>
+                                    <span> {{ item.swift_code }}</span>
                                 </div>
                             </div>
                         </div>
@@ -46,7 +54,7 @@
                         :on-change = "onchange"
                         >
                         <i class="el-icon-plus"></i>
-                        <span class="up-text">上传图片</span>
+                        <span class="up-text">{{lang.uploadPhotos}}</span>
                     </el-upload>
                     <el-dialog :visible.sync="dialogVisible">
                         <img width="100%" :src="dialogImageUrl" alt="">
@@ -119,46 +127,8 @@ export default {
         Cancel(){
             this.$emit('cancel', true);
         },
-        // 完成支付
-        Finished(){
-            if(this.account == ''){
-                this.$toast.show(this.lang.selectAccount)
-                return false
-            }
-            if(this.imgs == ''){
-                this.$toast.show(this.lang.selectVoucher)
-                return false
-            }
-            const data ={
-                order_id: this.orderId,
-                account:this.account,
-                payment_serial_number:this.number,
-                payment_voucher:this.imgs
-            }
-            this.$axios
-            .post('/web/pay/wire-transfer',data)
-            .then(res => {
-                this.$toast.show(this.lang.transferSuccessful)
-                this.Cancel()
-                setTimeout(() => {
-                    this.$router.replace({
-                        name: 'personal-order',
-                    })
-                }, 2000)
-            })
-            .catch(err => {
-                this.$message.error(err.message)
-            })
-        },
-        formatMoney: formatMoney,
-        // 切换账户
-        changeType(ind) {
-            this.account = this.accountlist[ind].account
-            console.log("选择",ind)
-            this.typeIndex = ind
-        },
-        // 上传图片
-            beforeUpload(file) {
+         // 上传图片
+        beforeUpload(file) {
             console.log("file2222",file)
             const isJPG = 
             file.type == 'image/jpeg'||
@@ -189,9 +159,50 @@ export default {
                 this.imgs = res.url
                 console.log("上传图片",this.imgs);
                 //  return res.data.url
+            }).catch(err => {
+                this.$toast.show(err.message)
             });
             // return false // 返回false不会自动上传
         },
+        // 完成支付
+        Finished(){
+            // if(this.account == ''){ 
+            //     this.$toast.show(this.lang.selectAccount)
+            //     return false
+            // }
+            // if(this.imgs == '' ){
+            //     this.$toast.show(this.lang.selectVoucher)
+            //     return false
+            // }
+            const data ={
+                order_id: this.orderId,
+                account:this.account,
+                payment_serial_number:this.number,
+                payment_voucher:this.imgs
+            }
+            this.$axios
+            .post('/web/pay/wire-transfer',data)
+            .then(res => {
+                this.$toast.show(this.lang.transferSuccessful)
+                this.Cancel()
+                setTimeout(() => {
+                    this.$router.replace({
+                        name: 'personal-order',
+                    })
+                }, 2000)
+            })
+            .catch(err => {
+                this.$toast.show(err.message)
+            })
+        },
+        formatMoney: formatMoney,
+        // 切换账户
+        changeType(ind) {
+            this.account = this.accountlist[ind].account
+            console.log("选择",ind)
+            this.typeIndex = ind
+        },
+       
         // 删除图片
         handleRemove(file, fileList) {
             // console.log(file, fileList);
@@ -223,11 +234,11 @@ export default {
             padding: 20px 0;
             color: #f29b87;
             .title1{
-                font-size: 14px;
+                font-size: 20px;
                 line-height: 25px;
             }
             .coin{
-                font-size: 14px;
+                font-size: 20px;
                 line-height: 25px;
             }
             .price{
@@ -236,7 +247,7 @@ export default {
             }
         }
         .account{
-            padding: 0 25px;
+            padding: 0 20px;
             background-color: #f6f6f6;
             padding-top: 20px;
            padding-bottom: 5px;
@@ -252,7 +263,7 @@ export default {
                 .bg{
                     background-color: #ffffff!important;    
                     .bank{
-                        font-size: 16px;
+                        font-size: 15px;
                         color: #ba7f8c!important;
                         font-weight: 600;
                     }
@@ -269,7 +280,7 @@ export default {
                     position: relative;
                     text-align: left;
                     // margin-left: 64px;
-                    padding: 10px 20px;
+                    padding: 10px 15px;
                     // border-bottom: 1px solid #dddddd; /*no*/
                     // background-color: #ffffff;
                     box-shadow: 0px 2px 4px 0px #dcdcdc;
@@ -278,24 +289,24 @@ export default {
                     background-color: #ececec;
                     .Account{
                         .box{
-                            display: flex;
+                            // display: flex;
                             span{
-                                display: inline-block;
-                                line-height: 30px;
+                                // display: inline-block;
+                                line-height: 20px;
                             }
                         }
                         .bank{
-                            font-size: 16px;
+                            font-size: 12px;
                             color: #999999;
-                            margin-bottom: 15px;
+                            margin-bottom: 10px;
                             font-weight: 600;
                         }
                         .number{
-                            font-size: 14px;
+                            font-size: 11px;
                             color: #999999;
                         }
                         .name{
-                            font-size: 14px;
+                            font-size: 11px;
                             color: #999999;
                         }
                     }
@@ -312,7 +323,7 @@ export default {
                             // float: right;
                             position: absolute;
                             right:20px;
-                            top: 60px;
+                            top: 45px;
                             width: 30px;
                             height: 30px; 
                             // margin: 12px 12px 0 0;
@@ -388,10 +399,12 @@ export default {
                     height: 120px;
                 }
                 .up-text{
+                    width: 235px;
+                    text-align: center;
                     display: block;
                     position: absolute;
                     bottom: -36px;
-                    left: 120px;
+                    // left: 120px;
                     color: #777777;
                     font-size: 14px;
                 }

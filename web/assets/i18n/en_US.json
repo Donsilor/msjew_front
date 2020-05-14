@@ -1118,9 +1118,9 @@
 	"msg11": "Need to log in for shopping / Mainland China Only",
 	"pleaseSelectAccount":" Select bank account",
 	"paidAmount":"Total amount: ",
-	"Account":"Account:",
-	"AccountNumber":"Account number:",
-	"AccountName":"Account name:",
+	"Account":"Bank Name:",
+	"AccountNumber":"Bank Acc No:",
+	"AccountName":"Beneficial Name:",
 	"UploadPayVoucher":"Upload payment voucher :",
 	"uploadImage":"Upload photos",
 	"Note1":"Please make sure the date of transfer and transaction number are clear for payment verification.  ",
@@ -1133,9 +1133,10 @@
 	"selectAccount":"Please select payment bank account.",
 	"selectVoucher":"Please upload payment voucher.",
 	"imgFomat": "The format of the uploaded image is incorrect!",
-	"imgSize":"The uploaded image size cannot exceed 2MB!",
-	"bankAddress":"Bank address:",
-	"SwiftCode":"SWIFT CODE:"
+	"imgSize":"The uploaded image size cannot exceed 12MB!",
+	"bankAddress":"Bank Address:",
+	"SwiftCode":"SWIFT CODE:",
+	"uploadPhotos":"Upload  Photos"
   },
   "finishPay": {
     "PayPending1":"The order has been submitted and the system is processing. Please wait.",
