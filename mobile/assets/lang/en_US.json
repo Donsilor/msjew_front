@@ -215,7 +215,7 @@
       "payType4": "WeChat Pay",
       "type4Text": "Easier and safer online payment",
       "payType5": "Telegraphic Transfer (T/T)",
-      "type5Text": "Extra 1.5% discount for T/T payment.",
+      "type5Text": "Secure bank wire-transfer payment ",
       "payType6": "Visa / MasterCard",
       "type6Text": "Pay By Credit Card (VISA, Master Card, Discover Card, AMEX)",
       "type5Text2": "Please note that e-Cheques are not T/T.",
@@ -224,10 +224,32 @@
       "paytip3": "Since Credit Card does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "msg11": "Mainland China Only",
       "paytip": "Since Paydallor does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
-      "support": "Support only: mainland version"
+      "support": "Support only: mainland version",
+      "pleaseSelectAccount":" Select bank account",
+      "paidAmount":"Total amount: ",
+      "Account":"Bank Name:",
+      "AccountNumber":"Bank Acc No:",
+      "AccountName":"Beneficial Name:",
+      "UploadPayVoucher":"Upload payment voucher :",
+      "uploadImage":"Upload photos",
+      "Note1":"Please make sure the date of transfer and transaction number are clear for payment verification.  ",
+      "PayTransactionNumber":"Transaction Number ",
+      "Optional":"(optional)",
+      "CancelPayment":"Cancelled payment",
+      "PaymentCompleted":"Completed payment ",
+      "Note2":"* Note: Please select your payment bank account and upload payment voucher after the transaction has been completed. ",
+      "transferSuccessful":"Order has been submitted, it will be processed very soon, please stay updated.",
+      "back": "Back",
+      "selectAccount":"Please select payment bank account.",
+      "selectVoucher":"Please upload payment voucher.",
+      "imgFomat": "The format of the uploaded image is incorrect, please upload it again!",
+      "imgSize":"Excessive size of the photo, please upload it again!",
+      "bankAddress":"Bank Address:",
+      "SwiftCode":"SWIFT CODE:",
+      "uploadPhotos":"Upload  Photos"
     },
     "paySuccess": {
-      "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+      "PayPending1":"The order has been submitted, the system is processing ... please wait",
       "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
       "handing": "Order processing ...",
       "title": "ORDER PAID",
@@ -278,7 +300,7 @@
       "coustom": "Customize"
     },
     "payFailed": {
-      "title": "Sorry, the payment was not completed",
+      "title": "Sorry, the order payment failed! Please repay",
       "phone": "For any questions, contact customer service (852)-2165 3905",
       "orderNo": "Order#：",
       "payAgain": "PAY AGAIN",
@@ -542,10 +564,12 @@
       "received": "Received",
       "confirmCancellationOrder": "Cancel order",
       "canceled": "Order cancelled",
-	  "paytips": "WIRE TRANSFER GUIDE",
-	  "shoppingCard": "shopping card",
-	  "ultimatelyPay": "Actual payment",
-	  "NeedPay": "MoneyNeedPay"
+      "paytips": "WIRE TRANSFER GUIDE",
+      "shoppingCard": "shopping card",
+      "ultimatelyPay": "Actual payment",
+      "NeedPay": "MoneyNeedPay",
+      "pending":"Pending",
+      "payfailed":"Payment failed"
     }
   },
   "custom-made": {
@@ -935,7 +959,10 @@
       "canceled": "Order cancelled",
       "paytips": "Wire Transfer guide",
       "text": "Make payment within 23 hours and 59 minutes or your order will be canceled ",
-      "tips": "Confirm to leave the checkout page ?"
+      "tips": "Confirm to leave the checkout page ?",
+      "pending":"Pending",
+      "payfailed":"Payment failed",
+      "lookOrder": "View Order"
     },
     "progressBar": {
       "price": "Price",

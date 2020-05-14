@@ -44,25 +44,46 @@
 
     <div v-if="data.details && data.details.length > 0" class="info-block">
       <div class="block-title">
-        <span v-if="data.orderStatus === '10'">{{
-          $t(`${lang_pay}.waitingPay`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '20'">{{
-          $t(`${lang_pay}.hadPay`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '30'">{{
-          $t(`${lang_pay}.waitingSend`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '40'">{{
-          $t(`${lang_pay}.hadSend`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '0'">{{
-          $t(`${lang_pay}.closed`)
-        }}</span>
-        <span v-else-if="data.orderStatus === '50'">{{
-          $t(`${lang_pay}.hadFinish`)
-        }}</span>
-
+        <div v-if="data.wireTransferStatus !== null" class="status">
+          <span v-if="data.wireTransferStatus == '0'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.pending`)}}
+          </span>
+          <span v-else-if="data.wireTransferStatus == '1'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.hadPay`)}}
+          </span>
+          <span v-else-if="data.wireTransferStatus == '10'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.PayFailed`)}}
+          </span>
+        </div>
+        <div v-else class="status">
+          <span v-if="data.orderStatus == '10'"> 
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.waitingPay`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '20'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{ $t(`${lang_pay}.hadPay`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '30'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.waitingSend`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '40'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.hadSend`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '0'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.cancelTransaction`)
+          }}</span>
+          <span v-else-if="data.orderStatus == '50'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.hadFinish`)
+          }}</span>
+        </div>
       </div>
       <div class="addr-info">
         <div class="addr">
@@ -363,9 +384,10 @@ export default {
           cityName: '',
           address: '',
           realName: '',
-          userMail: ''
-        }
+          userMail: '',
+        },
       },
+      orderStatus:'',
       invoice:{
         email: "",
         invoiceTitle: "",
@@ -430,6 +452,7 @@ export default {
   },
   mounted() {
     this.getData()
+    
   },
   methods: {
     getStatusText(status) {
@@ -453,8 +476,10 @@ export default {
         })
         .then(res => {
           this.data = res.data
+          console.log("this.data",this.data)
           this.invoice = res.data.invoice
-
+          this.orderStatus = res.data.orderStatus
+          console.log("data",this.orderStatus)
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
           )
@@ -549,6 +574,13 @@ export default {
 </script>
 
 <style scoped lang="less">
+.status{
+  text-align: right;
+  span{
+    margin-right: 105px;
+    font-size: 14px;
+  }
+}
 .order-details {
   width: 100%;
   text-align: left;

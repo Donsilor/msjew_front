@@ -1,7 +1,7 @@
 <template>
   <div class="sure-oredr">
     <Header :title="lang.sureOrder" />
-    <div v-if="!isLogin" class="is-login">
+    <div v-if="!isLogin" class="is-login" id="loginBox">
       <i class="icon iconfont icongantanhao1"></i>
       <a @click="gologin(1)">{{ lang.login }}</a>
       <span>{{ lang.settlement }}</span>
@@ -60,7 +60,7 @@
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
-                <p class="hint-color" v-if="index != 0 && index != 1">({{lang.msg11}})</p>
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p> 
               </div>
             </div>
           </li>
@@ -203,7 +203,7 @@
               {{ formatMoney( productAmount) }}</span
             >
           </li>
-					<li v-for="item in useAmount">
+					<li v-for="(item,index) in useAmount" :key="index">
 					  <div>
 					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
 					  </div>
@@ -338,6 +338,12 @@ export default {
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+          url: '/cart/ph.png',
+          type: 84,
+          title: this.LANGUAGE.cart.pay.payType5,
+          des: this.LANGUAGE.cart.pay.type5Text,
         }
         // {
         //   url: '/cart/paydollar.png',
@@ -535,13 +541,21 @@ export default {
         pay = 83
       }else if(this.typeIndex == 4){
         pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 84
       }
 
-      if(pay == 81 || pay == 82 || pay == 83){
+      if(pay == 81 || pay == 82 || pay == 83 || pay == 84){
         this.$toast.show(this.lang.firstLogin)
+        // 点击修改滚顶到地址编辑模块
+        document.getElementById('loginBox').scrollIntoView({
+          block: 'center',
+          inline: 'nearest',
+          behavior: 'smooth'
+        })
       }
       if (ind === 5) {
-        this.price = this.info.orderAmount * 0.985
+        this.price = this.info.orderAmount 
       } else {
         this.price = this.info.orderAmount
       }
@@ -903,6 +917,7 @@ export default {
             url: url,
             data: data
           })
+
           .then(res => {
             // console.log("费用",res)
             this.canSubmit = true
@@ -1022,15 +1037,16 @@ export default {
       }else if(this.typeIndex == 4){
         pay = 81
       }else if(this.typeIndex == 5){
-        pay = 7
+        pay = 84
       }
        if (!this.isLogin) {
           if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
            return
          }
-         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4){
+         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
             this.$toast.show(this.lang.firstLogin)
+            // this.$nuxt.$loading.finish()
            return
          }
        }
@@ -1608,7 +1624,7 @@ export default {
             color: rgba(153, 153, 153, 1);
           }
         }
-        li.order-pay, {
+        li.order-pay{
           line-height: 20px;
           margin-top: 10px;
           padding-top: 10px;

@@ -4,7 +4,8 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-if="order.wireTransferStatus === null" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-else class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
         </div>
         <div class="top">
           <span>{{ order.orderNO }}</span>
@@ -73,7 +74,7 @@
         </div>
         <div class="bottom">
           <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
-            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">查看订单</div>
+            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">{{lang.lookOrder}}</div>
             <div>
               <div class="order-box-a">
                 <span class="title">{{ lang.orderCount }}：</span>
@@ -97,7 +98,7 @@
           </div>
           <div class="btn">
             <span
-              v-if="(order.orderStatus) > 0 && (order.orderStatus)<20"
+              v-if="(order.orderStatus) > 0 && (order.orderStatus)<20 && order.wireTransferStatus == null"
               class="btn2"
               @click="cancelOrder(order.id)"
               >{{ lang.cancelOrder }}</span
@@ -112,7 +113,7 @@
             >
             <span
               v-if="
-                (order.orderStatus) > 0 && (order.orderStatus)<20
+                (order.orderStatus) > 0 && (order.orderStatus)<20 && order.wireTransferStatus == null
               "
               class="btn1"
               @click.stop="goPay(order)"
@@ -319,6 +320,14 @@ export default {
       }
       // console.log("status",map[status])
       return map[status]
+    },
+    getTransferStatus(transferStatus){
+      const transferStatus_value = {
+        0 : this.lang.pending,
+        1 : this.lang.paid,
+        10 : this.lang.payfailed
+      };
+      return transferStatus_value[transferStatus];
     },
     // 跳转到详情页
     toDetail(orderId) {
@@ -575,8 +584,9 @@ export default {
           span {
             // display: inline-block;
             /*width: 100px;*/
+            width: 110px;
             height: 32px;
-            padding: 0 21px;
+            // padding: 0 15px;
             border-radius: 5px;
             font-size: 14px;
             line-height: 32px;
@@ -609,8 +619,9 @@ export default {
   margin-left: 0 !important;
 }
 .btn-look{
+    width: 100px;
     height: 0.853333rem;
-    padding: 0 0.56rem;
+    // padding: 0 0.56rem;
     border-radius: 0.133333rem;
     font-size: 0.373333rem;
     line-height: 0.853333rem;

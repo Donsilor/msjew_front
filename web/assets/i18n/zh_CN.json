@@ -999,7 +999,9 @@
       "returnApplication": "退货申请",
       "returning": "退货中",
       "hadReturn": "已退货",
-      "cancelTransaction": "取消交易"
+	  "cancelTransaction": "取消交易",
+	  "pending":"待确认",
+	  "PayFailed":"支付失败"
     },
     "wish": {
       "myWish": "我的心愿单",
@@ -1121,7 +1123,7 @@
     "visa": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
     "UnionPay": "使用中国银联银行卡，安全支付",
     "AliPay": "网上付款，方便，快捷",
-    "EPay": "以电汇方式付款将享有1.5%折扣优惠。注意，电子支票并非电汇。",
+    "EPay": "使用银行转账安全支付",
     "pay": "去结账",
     "msgTitle1": "须知事项",
     "msgContent1": "<p style='text-align: left;padding-top: 20px;text-indent: 2em;'>由于每一枚钻石都独一无二和我们每日的订单量相当庞大，对于选购了钻石的客户，我们需要进一步确认检查以确保该枚钻石确有存货。目前阶段，您的订单将会暂获保留最长达48个营业小时。存货情况一但获得确认，我们将会发送电邮通知您装运的日期。 </p><p style='text-align: left;padding-top: 20px;text-indent: 2em;'>如果您是透过银行电汇付款，存货情况一但获得确认，我们将提供进一步的电汇指示。为确保运送不被延迟，请在收到电汇指示后尽快把款项汇出。请注意，款项从您汇出的银行到达我们的银行一般需时24个小时。货品将在确认收到款项后发出。 </p>",
@@ -1133,6 +1135,27 @@
     "payQuestion": "支付遇到问题",
     "msg11": "需登录购物 / 仅供大陆使用",
     "msg12": "仅供大陆使用"
+	"pleaseSelectAccount":"请选择银行账户",
+	"paidAmount":"需支付金额:",
+	"Account":"账户:",
+	"AccountNumber":"户口号码:",
+	"AccountName":"户口名称:",
+	"UploadPayVoucher":"上传支付凭证:",
+	"uploadImage":"上传图片",
+	"Note1":"请确保图片上清晰显示转账日期和银码以便核实款项",
+	"PayTransactionNumber":"支付交易号",
+	"Optional":"(可选填)",
+	"CancelPayment":"取消付款",
+	"PaymentCompleted":"已完成付款",
+	"Note2":"* 注：支付完成后请选择支付的银行账户，请上传凭证",
+	"transferSuccessful":"订单已经提交，运营人员会尽快处理，请及时关注订单状态！",
+	"selectAccount":"请先选择支付的银行账户！",
+	"selectVoucher":"请上传支付凭证！",
+	"imgFomat":"上传图片格式不正确，请重新上传!",
+	"imgSize":"图片过大，请重新上传！",
+	"bankAddress":"银行地址:",
+	"SwiftCode":"SWIFT CODE:",
+	"uploadPhotos":"上传图片"
   },
   "finishPay": {
     "PayPending1":"订单已经提交，系统正在处理中,请稍等。",
@@ -2498,7 +2521,8 @@
 		"editOrUnbound": "编辑/解绑购物卡",
 		"shoppingCard": "购物卡",
     "msg10": "购物车不能为空，请重新添加商品",
-    "msg11": "需登录购物 / 仅供大陆使用"
+	"msg11": "需登录购物 / 仅供大陆使用",
+	"needlogin": "需登录购物"
 	},
 	"invoice": {
 		"personal": "个人",

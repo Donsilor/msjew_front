@@ -1,74 +1,86 @@
 <template>
   <div class="pay">
-    <Header :title="lang.pay" tips="1" />
-    <div class="proce">
-      <span>{{ info.coinType }} </span>
-      {{ formatMoney(price) }}
-    </div>
-    <ul>
-      <li v-for="(item, index) in list" :key="index">
-        <div v-show="price > 0 || (price == 0 && item.type === 5)">
-          <img :src="item.url" />
-          <div class="right">
-            <span
-              class="icon iconfont"
-              :class="typeIndex === index ? 'icongou' : ''"
-              @click="changeType(index)"
-            ></span>
-            <div
-              class="box-a"
-              >{{ item.title }}
+    <div class="paylist" v-show="paylist">
+      <Header :title="lang.pay" tips="1" />
+      <div class="proce">
+        <span>{{ info.coinType }} </span>
+        {{ formatMoney(price) }}
+      </div>
+      <ul>
+        <li v-for="(item, index) in list" :key="index">
+          <div v-show="price > 0 || (price == 0 && item.type === 5)">
+            <img :src="item.url" />
+            <div class="right">
               <span
-                v-if="item.type == '5'"
-                class="ph"
-                @click="needtips = !needtips"
-                >?</span
-              >
-              <div class="support" v-if="item.type == '1000' && isLogin">({{ lang.support }})</div>
+                class="icon iconfont"
+                :class="typeIndex === index ? 'icongou' : ''"
+                @click="changeType(index)"
+              ></span>
+              <div
+                class="box-a"
+                >{{ item.title }}
+                <span
+                  v-if="item.type == '5'"
+                  class="ph"
+                  @click="needtips = !needtips"
+                  >?</span
+                >
+                <div class="support" v-if="item.type == '1000' && isLogin">({{ lang.support }})</div>
+              </div>
+
+              <p>{{ item.des }}</p>
+              <p v-if="item.des2">{{ item.des2 }}</p>
+              <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
             </div>
-
-            <p>{{ item.des }}</p>
-            <p v-if="item.des2">{{ item.des2 }}</p>
-            <p class="hint-color" v-if="index != 0 && index != 1">({{lang.msg11}})</p>
           </div>
-        </div>
-      </li>
-    </ul>
-    <div class="tips">
-      <i class="icon iconfont icongantanhao1"></i><span>{{ lang.tips }}</span>
-    </div>
-    <div class="btn" @click="goPaySuccess">
-      {{ list[typeIndex].title }}
-      {{ lang.goPay }}
-      {{ info.coinType }}
-      {{ formatMoney(price) }}
-    </div>
+        </li>
+      </ul>
+      <div class="tips">
+        <i class="icon iconfont icongantanhao1"></i><span>{{ lang.tips }}</span>
+      </div>
+      <div class="btn" @click="goPaySuccess">
+        {{ list[typeIndex].title }}
+        {{ lang.goPay }}
+        {{ info.coinType }}
+        {{ formatMoney(price) }}
+      </div>
+      
+      <!-- <Upload :multiple="true" :max=6 :list="imgList" ref="upload"></Upload> -->
+      <!--    unionPayHide-->
+      <div v-show="false">
+        <form :action="actionLink" method="post">
+          <div v-for="(f, index) in form" :key="index">
+            <label :for="f.name">{{ f.name }}</label>
+            <input v-model="f.val" :name="f.name" />
+          </div>
+          <input id="unionPay" type="submit" value="akm" />
+        </form>
+      </div>
 
-    <!--    unionPayHide-->
-    <div v-show="false">
-      <form :action="actionLink" method="post">
-        <div v-for="(f, index) in form" :key="index">
-          <label :for="f.name">{{ f.name }}</label>
-          <input v-model="f.val" :name="f.name" />
-        </div>
-        <input id="unionPay" type="submit" value="akm" />
-      </form>
+      <NeedKnow v-if="needtips" @close="needtips = !needtips" />
     </div>
-
-    <NeedKnow v-if="needtips" @close="needtips = !needtips" />
+    <div class="transfer" v-show="transfer"> 
+      <div class="transfer-header">
+        <i class="icon iconfont iconfanhuiicon-" @click="closed">{{ lang.back }}</i>
+        <h4>{{ lang.pleaseSelectAccount }}</h4>
+      </div>
+      <Upload @cancel="closed"></Upload>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from '@/components/personal/header.vue'
 import NeedKnow from '@/components/cart/needKnow.vue'
+import Upload from '@/components/wire-transfer/index.vue'
 import { formatMoney } from '@/assets/js/filterUtil.js'
 export default {
   name: 'Pay',
   layout: 'no-bar',
   components: {
     Header,
-    NeedKnow
+    NeedKnow,
+    Upload
   },
   data() {
     return {
@@ -106,6 +118,12 @@ export default {
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+          url: '/cart/ph.png',
+          type: 84,
+          title: this.LANGUAGE.cart.pay.payType5,
+          des: this.LANGUAGE.cart.pay.type5Text,
         }
         // {
         //   url: '/cart/paydollar.png',
@@ -144,14 +162,25 @@ export default {
       price: JSON.parse(this.$route.query.info).payAmount,
       needtips: false,
       typeIndex: JSON.parse(this.$route.query.info).payAmount === 0 ? 5 : 0,
-      isLogin: !!this.$store.state.token
+      isLogin: !!this.$store.state.token,
+      picList:[],
+      imgList:[],
+      paylist:true,
+      transfer:false
     }
   },
   created() {
-    // console.log('w333', JSON.parse(this.$route.query.info))
+    // console.log('w333', JSON.parse(this.$route.query.info))this.$refs.upload.list
   },
   methods: {
+    // 关闭弹窗
+    closed(){
+      this.paylist = true
+      this.transfer = false
+      this.typeIndex = 0 
+    },
     formatMoney: formatMoney,
+    // 选择支付方式
     changeType(ind) {
       console.log("选择",ind)
       this.typeIndex = ind
@@ -162,7 +191,9 @@ export default {
       //   return
       // }
       if (ind === 5) {
-        this.price = this.info.payAmount * 0.985
+        this.paylist = false
+        this.transfer = true
+        // this.price = this.info.payAmount * 0.985
       } else {
         this.price = this.info.payAmount
       }
@@ -290,6 +321,25 @@ export default {
 </script>
 
 <style scoped lang="less">
+.transfer-header{
+  width: 100%;
+  height: 44px;
+  background: #ffffff;
+  i {
+    float: left;
+    padding-left: 15px;
+    font-size: 14px;
+    color: #666666;
+    line-height: 44px;
+  }
+  h4 {
+    margin: 0 50px;
+    font-size: 16px;
+    line-height: 44px;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
+  }
+}
 .pay {
   padding-bottom: 20px;
   .proce {

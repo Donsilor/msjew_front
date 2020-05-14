@@ -4,12 +4,16 @@
     <div class="content">
       <div class="top">
         <!--        <OrderHeader :list="statusSteps" :stepindex="step" />-->
-        <div class="status-title">
+        <div v-if="info.wireTransferStatus == null" class="status-title">
           {{ statusText(info.orderStatus) }}
+        </div>
+        <div v-else class="status-title">
+          {{ getTransferStatus(info.wireTransferStatus) }} 
         </div>
         <div class="service">
           <ul>
-            <li>{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
+            <li v-if="info.wireTransferStatus == null">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
+            <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
             <li>{{ lang.orderTime }}：{{ info.orderTime }}</li>
             <template v-if="info.orderStatus > 20 && info.orderStatus !== 50">
@@ -278,21 +282,21 @@
         </ul>
         <div class="btn">
           <div
-            v-if="[1].indexOf(info.orderStatus) > -1 && info.payChannel === 1"
+            v-if="[1].indexOf(info.orderStatus) > -1 && info.payChannel === 1 "
             class="btn-block"
             @click.stop="paytips = !paytips"
           >
             {{ lang.paytips }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null"
             class="btn-block"
             @click="goPay(info)"
           >
             {{ lang.toPay }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null"
             class="btn-white"
             @click="cancelOrder"
           >
@@ -437,6 +441,14 @@ export default {
       }
     // console.log("detail_stutas", map)
       return map[status]
+    },
+    getTransferStatus(transferStatus){
+      const transferStatus_value = {
+        0 : this.lang.pending,
+        1 : this.lang.hadPay,
+        10 : this.lang.payfailed
+      };
+      return transferStatus_value[transferStatus];
     },
     payChannelText(payChannel) {
       const map = {
