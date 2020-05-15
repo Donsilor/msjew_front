@@ -222,8 +222,8 @@
       "necklace":"项链",
       "bracelet":"手链",
       "customization":"钻戒定制",
-      "theme":"主题", 
-      
+      "theme":"主题",
+
       "customerService": "客户服务",
       "lifetimeWarranty": "终身保修",
       "freeInternationalShipping": "免费运费",
@@ -231,6 +231,7 @@
       "login": "登入",
       "order": "我的订单",
       "account": "账户资料",
+      "coupon": "优惠券卡包",
       "loginOut": "登出",
       "wish": "心愿单",
       "cart": "购物车",
@@ -888,7 +889,7 @@
 			"base": "基本信息",
 			"link": "第三方账号绑定",
 			"address": "我的地址",
-			"coupon": "我的优惠码",
+			"coupon": "优惠券卡包",
 			"psw1": "修改密码",
 			"psw2": "现有密码",
 			"psw3": "新密码",
@@ -2492,7 +2493,8 @@
 		"editOrUnbound": "编辑/解绑购物卡",
 		"shoppingCard": "购物卡",
     "msg10": "购物车不能为空，请重新添加商品",
-    "msg11": "需登录购物"
+    "msg11": "需登录购物",
+    "notAvailable": "选择可用优惠券"
 	},
 	"invoice": {
 		"personal": "个人",
@@ -2566,11 +2568,16 @@
 	},
   "coupon": {
     "title": "优惠券卡包",
-    "limit1": "满",
-    "limit2": "元使用",
+    "limit1": "满 ",
+    "limit2": " 元使用",
+    "limit3": "限 ",
+    "limit4": " 使用",
     "use": "点击使用",
     "time": "活动时间",
-	"loseEfficacy": "已失效"
+    "loseEfficacy": "已失效",
+    "getCoupon": "领取优惠券",
+    "useCoupon": "使用优惠券",
+    "accomplish": "完成"
   },
   "subject": {
 	  "discount":{

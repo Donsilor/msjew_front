@@ -231,6 +231,7 @@
       "login": "Login",
       "order": "Order",
       "account": "Account",
+      "coupon": "Coupon",
       "loginOut": "Log out",
       "wish": "Wish List",
       "cart": "Cart",
@@ -366,7 +367,7 @@
         "MothersDay": "Mother's Day",
         "birthdayPresent": "Birthday Gift",
         "ChristmasGift": "X'mas Gift",
-        "HalloweenGift": "Halloween Gift"        
+        "HalloweenGift": "Halloween Gift"
       },
       "diamondMenu": {
         "jewelry": "Jewelry",
@@ -2474,7 +2475,8 @@
 		"editOrUnbound": "Edit/Remove Card",
 		"shoppingCard": "Shopping Card",
     "msg10": "The shopping cart cannot be empty. Please add the item again",
-    "msg11": "Need to log in for shopping"
+    "msg11": "Need to log in for shopping",
+    "notAvailable": "Select available coupons"
 	},
 	"invoice": {
 		"personal": "personal",
@@ -2549,10 +2551,15 @@
   "coupon": {
     "title": "Coupon Card Package",
     "limit1": "Full ",
-    "limit2": "To Use",
+    "limit2": " To Use",
+    "limit3": "limit ",
+    "limit4": " To Use",
     "use": "Click On The Use",
     "time": "Activity Time",
-	"loseEfficacy": "Lost Efficacy"
+    "loseEfficacy": "Lost Efficacy",
+    "getCoupon": "Get Coupon",
+    "useCoupon": "Use Coupon",
+    "accomplish": "Accomplish"
   },
   "subject": {
   	  "discount":{

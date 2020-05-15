@@ -19,14 +19,14 @@
              <span class="price-num">{{item.money}}</span>
            </div>
 
-           <div class="rmb">(￥{{item.money_cn}})</div>
-           <div class="rule">满{{item.atLeast}}元使用</div>
+           <div class="rmb">(￥{{item.moneyCn}})</div>
+           <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.atLeast}}{{ $t(`${lang}.limit2`) }}</div>
            <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
-           <div class="use">({{item.lineType}})</div>
+           <div class="use">{{ $t(`${lang}.limit3`) }}({{item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
            <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
 
            <!-- 失效 class="lose-efficacy" -->
-           <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.loseEfficacy">{{ $t(`${lang}.loseEfficacy`) }}</div>
+           <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">已使用</div>
         </div>
       </div>
     </div>
@@ -54,6 +54,19 @@ export default {
       .then(res => {
         this.ifLoading = false;
         this.couponList = res.data.data
+
+        for(var i in this.couponList){
+          this.couponList.ifChoose = false;
+
+          this.couponList[i].lineType = [];
+          for(var k in this.couponList[i].GoodsType){
+            this.couponList[i].lineType.push(this.couponList[i].GoodsType[k]);
+          }
+
+          this.couponList[i].lineType = this.couponList[i].lineType.join(',');
+        }
+        this.couponList = [...this.couponList]
+
       })
       .catch(err => {
         this.ifLoading = false;
@@ -261,7 +274,7 @@ export default {
 .list{
   position: relative;
   width: 284px;
-  height: 226px;
+  // height: 226px;
   border: 1px solid rgb(205,173,118);
   background-image: linear-gradient(to right, rgba(255,255,255,0.31), rgba(219,209,209,0.31));
   border-bottom: 0;
@@ -270,12 +283,13 @@ export default {
   border-radius: 5px;
   box-shadow: 0 1px 0 #9C999C,0 2px 0 #D6D5D6,0 3px 0 #E3E1E3,0 4px 0 #D6D5D6,0 5px 0 #EDECED,0 6px 0 #F9F9F9;
   margin-bottom: 30px;
+  padding: 30px 0 20px;
 
   .line-box{
     width: 258px;
     height: 1px;
     background-color: #A6937C;
-    margin: 30px auto 24px;
+    margin: 0 auto 24px;
     position: relative;
 
     .point-box{
@@ -320,12 +334,15 @@ export default {
       font-size: 12px;
     }
   }
+  .rmb{
+    text-align: center;
+    margin-top: -30px;
+  }
   .rule{
     height: 40px;
     line-height: 40px;
     font-size: 13px;
     text-align: center;
-    margin-top: -30px;
   }
   .btn{
     width: 190px;

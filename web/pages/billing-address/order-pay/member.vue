@@ -827,8 +827,17 @@
                 -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
               </div>
             </div>
-            <div>111111111111</div>
-            <div v-show="makeGay" class="detail-line">
+
+            <!-- 优惠券 -->
+            <div v-show="1" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': !couponCodeR}" @click="showUseCoupon = true">
+                <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
+                <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+           <!-- <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
                 <span style="color: red;">{{
@@ -843,7 +852,8 @@
               <div class="hkd color-pink">
                 -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
               </div>
-            </div>
+            </div> -->
+
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
@@ -1784,9 +1794,9 @@
             <!-- 优惠券 -->
             <div v-show="1" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
-              <div class="hkd color-pink" :class="{'under-line': !couponCodeR}" @click="showUseCoupon = true">
-                <!-- -{{ $store.state.coin }} {{ formatMoney(123) }} -->
-                {{couponCodeR ? couponCodeR : '选择可用优惠券'}}
+              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': !couponCodeR.couponId}" @click="showUseCoupon = true">
+                <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
+                <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
               </div>
             </div>
 
@@ -2015,13 +2025,12 @@ export default {
       num: 0,
       mobileMax: 20,
       currency: '',
-      couponCodeR: '',
+      couponCodeR: {},
       showUseCoupon: false,
       // 所有可有优惠券
       couponAll: [],
       // 已领取优惠券
       couponAlready: []
-
     }
   },
   computed: {
@@ -2914,7 +2923,7 @@ export default {
         buyer_address_id: this.orderAddress.id,
         invoice:invoice,
         card: this.cardList,
-        coupon_id: this.couponCodeR
+        coupon_id: this.couponCodeR.couponId
       }
       // console.log("pppp",data)
       this.$axios
@@ -3006,7 +3015,7 @@ export default {
         buyer_address_id: this.orderAddress.id,
         invoice:invoice,
         card: this.cardList || '',
-        coupon_id: this.couponCodeR
+        coupon_id: this.couponCodeR.couponId
         // afterMail: this.isSameEmail
         // ? this.orderAddress.email
         // : this.orderEmail,
@@ -3087,7 +3096,8 @@ export default {
        this.showUseCoupon = false;
 
        if(k){
-         this.couponCodeR = k;
+         this.couponCodeR = JSON.parse(JSON.stringify(k));
+         console.log(this.couponCodeR)
          this.getTex();
        }
      }

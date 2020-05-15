@@ -1,7 +1,7 @@
 <template>
   <div class="get-coupon">
     <div class="wrap">
-      <div class="title">使用优惠券
+      <div class="title">{{ $t(`${lang}.useCoupon`) }}
         <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
       </div>
 
@@ -21,23 +21,20 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <div class="rmb">(￥{{item.money_cn}})</div>
-              <div class="rule">满￥{{item.at_least_cn}}元使用</div>
+              <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
               <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
               <div class="text">({{item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
             <div class="get" @click="chooseCoupon(index)">
-              <span>{{!item.ifChoose ? '立即选用' : '已选用'}}</span>
+              <span>{{item.ifChoose ? '已选用' : '立即选用'}}</span>
             </div>
 
           </div>
         </div>
 
-        <div class="not-choose">
-          <span class="fl icon-box"></span>不选择优惠券
-        </div>
-        <div class="finish" @click="closeCoupon(true)">完成</div>
+        <div class="finish" @click="closeCoupon(true)">{{ $t(`${lang}.accomplish`) }}</div>
       </div>
 
     </div>
@@ -71,7 +68,7 @@
         language: '',
         couponList: [],
         ifLoading: false,
-        couponCode: ''
+        couponInfo: {couponCode: '',couponId: ''}
       }
     },
     mounted() {
@@ -114,11 +111,15 @@
         if(k){
           this.couponList.forEach((o, index) => {
             if(o.ifChoose){
-              this.couponCode = this.couponList[index].coupon_id;
+              this.couponInfo.couponCode = this.couponList[index].money;
+              this.couponInfo.couponId = this.couponList[index].coupon_id;
             }
           })
-          if(this.couponCode){
-            this.$emit('closeCoupon', this.couponCode)
+
+          if(this.couponInfo.couponId){
+            this.$emit('closeCoupon', this.couponInfo)
+          }else{
+            this.$emit('closeCoupon')
           }
 
         }else{
@@ -160,7 +161,7 @@
       .title {
         font-size: 22px;
         text-align: center;
-        padding: 20px 0;
+        padding: 40px 0 30px;
         position: relative;
 
         .iconfont {
@@ -203,6 +204,7 @@
             margin-bottom: 30px;
             flex-shrink: 0;
             flex-grow: 0;
+            height: 220px;
 
             .list-l {
               position: relative;

@@ -4,13 +4,19 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" :coupon="coupons"></product-images>
       </div>
       <!--      右侧-->
       <div class="right-detail">
-        <h2 class="product-name">
-          {{ info.goodsName }}
-        </h2>
+        <div class="right-title">
+        	<span class="discount-icon fl" v-if="info.coupon.discount">{{discountConversion(this.info.coupon.discount.discount)}}折</span>
+        	<span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
+
+        	<h2 class="product-name">
+        	  {{ info.goodsName }}
+        	</h2>
+        </div>
+
         <div class="product-code">ID:{{ info.goodsCode }}</div>
         <div class="sku">
           <div class="left-properties">
@@ -102,7 +108,42 @@
             </div>
           </li>
         </ul>
-        <div class="product-price">
+
+        <!-- 折扣活动 -->
+        <div class="discount-box" v-if="info.coupon.discount">
+        	<div class="discount-active">
+        		<div>
+        			<span>优惠活动：</span>
+        			<span class="discount-icon">{{discountConversion(this.info.coupon.discount.discount)}}折</span>
+        		</div>
+        		<div class="time">活动时间：2020.4.9</div>
+        	</div>
+
+        	<div class="discount-price">
+        		<span class="old-price">原   价HKD  {{ formatNumber(this.info.salePrice) }}</span>
+        		<span class="new-price">折后价{{ formatNumber(this.info.coupon.discount.price) }}</span>
+        	</div>
+        </div>
+
+        <!-- 优惠活动 -->
+        <div class="favourable-box" v-if="info.coupon.money">
+        	<div class="discount-active">
+        		<div>
+        			<span>优惠券：</span>
+        			<span class="favourable-icon">￥</span>
+        			<span class="get" @click="showCoupon = true">领取优惠券></span>
+        		</div>
+        		<div class="time">活动时间：2020.4.9</div>
+        	</div>
+
+        	<!-- <div class="discount-price">
+        		<span class="old-price">原   价HKD  2,222,22</span>
+        		<span class="new-price">折后价HKD  2,222,22</span>
+        	</div> -->
+        </div>
+
+
+        <div class="product-price" v-if="!info.coupon.discount">
           <span class="coin">
             {{ info.coinType }}
           </span>
@@ -184,6 +225,9 @@
     <section class="desc" v-html="info.goodsDesc"></section>
     <order-include></order-include>
     <comments ref="product-comments" :good-id="info.id"></comments>
+
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
   </div>
 </template>
 
@@ -313,9 +357,22 @@ export default {
         sizeIndex: 0
       },
       jewelleryOptions: this.CONDITION_INFO.jewellery,
+      showCoupon: false
     }
   },
   computed: {
+    coupons() {
+      var co;
+      if(this.couponType(this.info.coupon) == 'discount'){
+        co = this.info.coupon.discount.discount;
+      }else if(this.couponType(this.info.coupon) == 'money'){
+        co = 'money'
+      }else{
+        co = ''
+      }
+
+      return co
+    },
     thumbnails() {
       return this.imageStrToArray(this.info.goodsImages || '')
     },

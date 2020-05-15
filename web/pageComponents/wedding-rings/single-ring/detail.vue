@@ -460,7 +460,6 @@ export default {
         this.checkDetail()
       }
     })
-
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {

@@ -228,13 +228,16 @@ class Helpers {
   }
 
   // getTime时间转换
-  changeTime(n){
-    console.log(999,n)
-    var year = new Date(n*1000).getFullYear();
-    var mouth = new Date(n*1000).getMonth();
-    var date = new Date(n*1000).getDay();
+  changeTime(timestamp){
+    var date = new Date(timestamp * 1000),
+    Y = date.getFullYear(),
+    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1),
+    D = date.getDate(),
+    h = date.getHours() + ':',
+    m = date.getMinutes() + ':',
+    s = date.getSeconds();
 
-    return year+'.'+mouth+'.'+date
+    return Y+'.'+M+'.'+D
   }
 }
 

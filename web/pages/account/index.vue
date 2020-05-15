@@ -67,7 +67,7 @@ export default {
         {
           img: require('../../static/personal/account.png'),
           url: '/account/coupon',
-          name: '优惠券卡包'
+          name: this.$t(`${lang}.index.coupon`)
         },
         // {
         //   img: require('../../static/images/personal/comment.png'),

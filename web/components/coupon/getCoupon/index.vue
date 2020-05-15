@@ -1,7 +1,7 @@
 <template>
   <div class="get-coupon">
     <div class="wrap">
-      <div class="title">领取优惠券
+      <div class="title">{{ $t(`${lang}.getCoupon`) }}
         <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
       </div>
 
@@ -21,18 +21,20 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <div class="rmb">(￥{{item.money_cn}})</div>
-              <div class="rule">满￥{{item.at_least_cn}}元使用</div>
+              <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
               <div class="text">({{item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
             <div class="get" @click="getCoupon(index)">
-              <span>{{item.ifChoose ? '已领取' : '立即领取'}}</span>
+              <span v-if="!item.ifUse">{{item.ifChoose ? '已领取' : '立即领取'}}</span>
             </div>
+
+            <div class="already" v-if="item.ifUse">已领取</div>
           </div>
         </div>
 
-        <div class="finish" @click="closeCoupon(true)">完成</div>
+        <div class="finish" @click="closeCoupon(true)">{{ $t(`${lang}.accomplish`) }}</div>
       </div>
     </div>
 
@@ -61,7 +63,6 @@
       }
     },
     mounted() {
-      console.log(888, this.moneyInfo)
       this.language = this.getCookie('language')
 
       if(this.moneyInfo){
@@ -82,6 +83,28 @@
         }
         this.couponList = [...this.couponList]
       }
+
+      // 获取领取的优惠券
+      this.$axios.get('web/member/coupon/index', {
+        })
+        .then(res => {
+          this.ifLoading = false;
+          var couponAllList = res.data.data;
+
+          // 判断可用优惠券中哪些是已领取的优惠券
+          for(var i=0; i<this.couponList.length; i++){
+            for(var j=0; j<couponAllList.length; j++){
+              if(this.couponList[i].coupon_id == couponAllList[j].coupon_id){
+                this.couponList[i].ifUse = true;
+                console.log(12121888,this.couponList)
+              }
+            }
+          }
+        })
+        .catch(err => {
+          this.ifLoading = false;
+          console.log(err)
+        })
     },
     methods: {
       // 获取cookie
@@ -117,8 +140,20 @@
       },
       // 领取优惠券
       getCoupon(k) {
-        this.couponList[k].ifChoose = !this.couponList[k].ifChoose;
-        this.couponList = [...this.couponList]
+        // this.couponList[k].ifChoose = !this.couponList[k].ifChoose;
+        // this.couponList = [...this.couponList]
+
+        console.log(111, this.moneyInfo[k])
+        // return
+
+        this.$axios.post('web/member/coupon/fetch', {
+          coupon_id: this.couponList[k].coupon_id
+        })
+        .then(res => {
+          console.log(666,res)
+          // this.ifLoading = false;
+        })
+        .catch(err => {})
       }
     }
   }
@@ -147,7 +182,7 @@
       .title {
         font-size: 22px;
         text-align: center;
-        padding: 20px 0;
+        padding: 40px 0 30px;
         position: relative;
 
         .iconfont {
@@ -190,6 +225,9 @@
             margin-bottom: 30px;
             flex-shrink: 0;
             flex-grow: 0;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
 
             .list-l {
               position: relative;
@@ -361,5 +399,22 @@
 
   .coupon-box::-webkit-scrollbar {
     display: none
+  }
+
+  .already{
+    position: absolute;
+    right: -26px;
+    top: 60px;
+    width: 100px;
+    height: 100px;
+    background: url(../../../static/subject/icon_07.png) no-repeat center;
+    background-size: 100% 100%;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    padding-top: 36px;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    transform: rotate(-45deg);
   }
 </style>

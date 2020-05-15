@@ -305,7 +305,7 @@ export default {
           }
         },
         {
-          name: '购物券卡包',
+          name: this.$t(`${lang}.coupon`),
           to: {
             path: '/account/coupon'
           }
