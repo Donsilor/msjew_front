@@ -693,3 +693,13 @@ color-red {
 .list-discount-icon2.padding{
   padding: 0 2px;
 }
+
+/* 购物车活动 */
+.good-img .list-discount-icon1{
+    width: 50px;
+    height: 50px;
+ }
+ .good-img .list-discount-icon1 span{
+    font-size: 13px;
+    line-height: 70px;
+ }

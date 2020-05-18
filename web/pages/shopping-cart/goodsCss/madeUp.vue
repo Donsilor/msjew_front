@@ -15,6 +15,16 @@
             >
               <span>{{ $t(`cart.Invalid`) }}</span>
             </div>
+
+            <!-- 折扣 -->
+            <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
+              <span>{{ discountConversion(g.data[0].coupon.discount.discount) }}折</span>
+            </div>
+
+            <!-- 优惠券 -->
+            <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'money'">
+              <span>优惠券</span>
+            </div>
           </div>
           <div class="good-desc" @click="goDetail()">
             <div>
@@ -37,7 +47,7 @@
             </div>
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
-		  
+
 		  <!-- 原金额 -->
 		  <div class="good-price old-price">
 		    {{ g.coinType }}
@@ -47,7 +57,7 @@
 		      )
 		    }}
 		  </div>
-		  
+
 		  <!-- 优惠后金额 -->
           <div class="good-price">
             {{ g.coinType }}
@@ -71,6 +81,16 @@
               class="img-bord"
             >
               <span>{{ $t(`cart.Invalid`) }}</span>
+            </div>
+            
+            <!-- 折扣 -->
+            <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
+              <span>{{ discountConversion(g.data[0].coupon.discount.discount) }}折</span>
+            </div>
+            
+            <!-- 优惠券 -->
+            <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'money'">
+              <span>优惠券</span>
             </div>
           </div>
           <div class="good-desc" @click="goDetail()">
@@ -99,7 +119,7 @@
             </span>
           </div>
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
-		  
+
 		  <!-- 原金额 -->
 		  <div class="good-price old-price">
 		    {{ g.coinType }}
@@ -109,7 +129,7 @@
 		      )
 		    }}
 		  </div>
-		  
+
 		  <!-- 优惠后金额 -->
           <div class="good-price">
             {{ g.coinType }}

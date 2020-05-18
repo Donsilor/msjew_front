@@ -135,7 +135,7 @@
           </nuxt-link>
           <div class="t2">1</div>
           <div class="t3">
-            {{ data.coinCode }} {{ formatMoney(d.goodsPrice) }}
+            {{ data.coinCode }} {{ formatMoney(d.goodsPayPrice) }}
           </div>
         </div>
         <div class="goods-bot-bar" />
@@ -460,6 +460,7 @@ export default {
           )
           this.data.details.forEach(obj => {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
+            console.log(888,obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
           })
           if(!this.data.invoice.isElectronic){

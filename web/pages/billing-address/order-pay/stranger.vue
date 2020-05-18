@@ -376,7 +376,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
                 <div v-show="payWay == 6" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 6" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -393,7 +393,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 82" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 82" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -410,7 +410,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay == 8" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 8" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -428,7 +428,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 83" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -446,7 +446,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.UnionPay`) }}</div>
                 <div v-show="payWay === 81" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -466,7 +466,7 @@
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 2" class="pay-price"> -->
                   <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -502,7 +502,7 @@
             >
               <span
                 >{{ $store.state.coin }}
-                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+                {{ formatMoney(tex.pay_amount) }}</span
               >
               <span>{{ $t(`${lang}.beiQin`) }}</span>
 
@@ -540,6 +540,7 @@
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
         ><span>{{ $t(`${lang}.number`) }}</span
+        ><span>{{ $t(`${lang}.price`) }}</span
         ><span>{{ $t(`${lang}.price`) }}</span>
       </div>
       <div class="cart-goods">
@@ -892,7 +893,16 @@
               </div>
             </div>
 
-            <div v-show="makeGay" class="detail-line">
+            <!-- 折扣 -->
+            <div v-show="objectIfEmpty(tex.coupons)" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': 1}" @click="showUseCoupon">
+                <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
+                <div>{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+            <!-- <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
                 <span style="color: red;">{{ tooInp }}</span>
@@ -905,7 +915,7 @@
               <div class="hkd color-pink">
                 -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
               </div>
-            </div>
+            </div> -->
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
@@ -949,7 +959,7 @@
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ $store.state.coin }} {{ showOrderAmount }}
+                {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
               </div>
             </div>
           </div>
@@ -1368,7 +1378,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
                 <div v-show="payWay == 6" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 6" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1385,7 +1395,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 82" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 82" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1402,7 +1412,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay == 8" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 8" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1420,7 +1430,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 83" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1438,7 +1448,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.UnionPay`) }}</div>
                 <div v-show="payWay === 81" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1458,7 +1468,7 @@
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 2" class="pay-price"> -->
                   <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1495,7 +1505,7 @@
             >
               <span
                 >{{ $store.state.coin }}
-                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+                {{ formatMoney(tex.pay_amount) }}</span
               >
               <span>{{ $t(`${lang}.beiQin`) }}</span>
 
@@ -1883,7 +1893,17 @@
                 {{ $store.state.coin }} {{ formatMoney(goodsPrice) }}
               </div>
             </div>
-            <div v-show="makeGay" class="detail-line">
+
+            <!-- 折扣 -->
+            <div v-show="objectIfEmpty(tex.coupons)" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': 1}" @click="showUseCoupon">
+                <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
+                <div>{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+            <!-- <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
                 <span style="color: red;">{{ tooInp }}</span>
@@ -1896,7 +1916,8 @@
               <div class="hkd color-pink">
                 -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
               </div>
-            </div>
+            </div> -->
+
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
@@ -1940,7 +1961,7 @@
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ $store.state.coin }} {{ showOrderAmount }}
+                {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
               </div>
             </div>
           </div>
@@ -2125,6 +2146,17 @@ export default {
         result = '--'
       }
       return result
+    },
+    objectIfEmpty(){
+      return function(e) {
+        if(typeof(e) == 'object'){
+          for(var i in e){
+            return i
+          }
+        }else{
+          return false
+        }
+      }
     }
   },
   created() {
@@ -2380,12 +2412,17 @@ export default {
       //   })
     },
     getTex() {
-      this.canSubmit = false
-      let json=[]
-
+      this.canSubmit = false;
+      let json=[];
+      let arr = [];
       for (const i in this.good) {
         let group = this.good[i].data
         let item = group.map(item => {
+          if(item.coupon.hasOwnProperty('discount')){
+            arr[i] = item.coupon.discount.coupon_id
+          }else{
+            arr[i] = ''
+          }
           return {
             createTime: item.createTime || new Date().getTime(),
             goods_num: item.goodsCount,
@@ -2393,7 +2430,8 @@ export default {
             goods_id: item.goodsDetailsId,
             group_id: item.groupId || null,
             group_type:item.groupType,
-            goods_type: item.goodsType
+            goods_type: item.goodsType,
+            coupon_id: arr[i]
           }
         })
 
@@ -2465,10 +2503,16 @@ export default {
       let baseUrl=this.$store.getters.baseUrl
       let invoice = {}
       let json=[]
+      let arr = [];
 
       for (const i in this.good) {
         let group = this.good[i].data
         let item = group.map(item => {
+          if(item.coupon.hasOwnProperty('discount')){
+            arr[i] = item.coupon.discount.coupon_id
+          }else{
+            arr[i] = ''
+          }
           return {
             createTime: item.createTime || new Date().getTime(),
             goods_num: item.goodsCount,
@@ -2476,7 +2520,8 @@ export default {
             goods_id: item.goodsDetailsId,
             group_id: item.groupId || null,
             group_type:item.groupType,
-            goods_type: item.goodsType
+            goods_type: item.goodsType,
+            coupon_id: arr[i]
           }
         })
 
@@ -2545,6 +2590,9 @@ export default {
           clearInterval(timer)
         }
       }, 22)
+    },
+    showUseCoupon() {
+      this.$errorMessage(`请先登录，才能领取优惠券`)
     }
   }
 }
@@ -3109,6 +3157,11 @@ div {
     }
 
     span:nth-child(2) {
+      width: 70px;
+      margin-right: 110px;
+      text-align: center;
+    }
+    span:nth-child(3) {
       width: 70px;
       margin-right: 110px;
       text-align: center;

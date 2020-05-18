@@ -24,12 +24,10 @@ export default {
     showData() {
       if(this.listData.length == 0){
         this.loading = true
-        console.log(11111)
         setTimeout(() => {
           this.loading = false
         }, 1000);
       }else if(this.listData.length > 0){
-         console.log(22222)
         this.loading = false
       }
       const page_count =
@@ -200,6 +198,7 @@ export default {
         })
         .then(res => {
           if (res.data) {
+            console.log(8686,res.data)
             _this.listData[page] = JSON.parse(JSON.stringify(res.data))
           }
           // _this.listData[page] = JSON.parse(JSON.stringify(res.data || []))

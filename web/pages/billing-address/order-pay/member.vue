@@ -2858,6 +2858,7 @@ export default {
 
           this.orderTotalAmount = res.data.orderAmount;
           this.ultimatelyPay = res.data.payAmount;
+		  console.log(7787,res.data.payAmount)
           this.currency = res.data.currency;
 
           this.couponAll = res.data.coupons;

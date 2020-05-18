@@ -61,14 +61,44 @@
                     @click.stop.prevent="setWish(item.id)"
                   ></i>
                 </div> -->
+
+                <!-- 折扣 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
+                  <span>{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                </div>
+
+                <!-- 优惠券 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
+                  <span>优惠券</span>
+                </div>
+
               </div>
               </nuxt-link>
             <div class="product-info">
               <div class="product-price">
-                <span class="coin">{{ item.coinType }}</span>
-                <span class="price">{{ formatNumber(item.salePrice) }}</span>
+               <div v-if="couponType(item.coupon) !== 'discount'">
+                  <span class="coin">{{ item.coinType }}</span>
+                  <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                </div>
+
+                <!-- 折扣 -->
+                <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                  <div>
+                    <span class="coin">{{ item.coinType }}</span>
+                    <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                  </div>
+                  <div>
+                    <span class="coin">{{ item.coinType }}</span>
+                    <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                  </div>
+                </div>
               </div>
+
               <div class="product-title">
+                <!-- 优惠券 -->
+                <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+                <!-- 折扣 -->
+                <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}折</span>
                 {{ item.goodsName }}
               </div>
             </div>
@@ -289,7 +319,7 @@ export default {
           keyword: this.$helpers.base64Encode(this.keyword)
         }
       })
-      
+
     },
     // 请求当前页数据
     getPageInfo(page = this.page) {
@@ -362,7 +392,6 @@ export default {
             console.log("有数据")
             _this.loading = false
           }
-          console.log(1111)
           var data = data.data
           if (data.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(data.data))
@@ -374,7 +403,6 @@ export default {
         })
         .catch(err => {
           console.error(err)
-          console.log(2222)
           _this.loading = false
           if (err instanceof Error) {
             console.log('这是一个错误')
@@ -450,7 +478,7 @@ export default {
     height: 37px!important;
     line-height: 37px;
   }
-  
+
   .el-pager, .el-pager li{
     font-size: 16px;
   }

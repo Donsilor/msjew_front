@@ -42,10 +42,18 @@
               @error="imageError"
             />
 
-            <div class="sign">
+            <!-- 折扣 -->
+            <div class="sign" v-if="couponType(each) == 'discount'">
               <div>9折</div>
             </div>
+
+            <!-- 优惠券 -->
+            <div class="sign" v-if="couponType(each.coupon) == 'money'">
+              <div>优惠券</div>
+            </div>
           </div>
+
+          <!-- 折扣 -->
           <div class="info-title ow-h2">
             <span class="discount-icon2">7.5折</span>
             {{ each.goodsName }}
@@ -108,7 +116,7 @@ export default {
   },
   name: 'List',
   mixins: [Mixin, List, GoodListProps],
-  props:['seo'],
+  props:['seo']
 }
 </script>
 

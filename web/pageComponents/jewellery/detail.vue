@@ -131,7 +131,7 @@
         		<div>
         			<span>优惠券：</span>
         			<span class="favourable-icon">￥</span>
-        			<span class="get" @click="showCoupon = true">领取优惠券></span>
+        			<span class="get" @click="getCoupon">领取优惠券></span>
         		</div>
         		<div class="time">活动时间：2020.4.9</div>
         	</div>
@@ -511,6 +511,14 @@ export default {
         .catch(err => {
           _this.$errorMessage(`${err.message}`)
         })
+    },
+    // 领取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        this.$errorMessage(`请先登录，才能领取优惠券`)
+      }else{
+        this.showCoupon = true
+      }
     }
   }
 }

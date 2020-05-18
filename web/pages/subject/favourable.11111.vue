@@ -43,20 +43,17 @@
     <div class="goods-list clf">
       <div class="list fl" v-for="(item, index) in discountsList" :key="index">
         <div class="child">
-          <!-- <nuxt-link :to="item.to" class="goods-img" target="_blank"> -->
-          <div class="goods-img" :class="{'bg-color' : item.categoryId == 15}">
-            <img class="img-a" :src="item.goodsImages[0]" alt="">
-            <img class="img-b" :src="item.goodsImages[1] || item.goodsImages[0]" alt="">
+          <div class="goods-img">
+            <img src="../../static/adt/image1564544333790.png" alt="">
           </div>
-          <!-- </nuxt-link> -->
           <div class="price">
             <div class="currency">HKD</div>
-            <div class="num">{{ formatMoney(item.salePrice) }}</div>
+            <div class="num">{{ formatMoney(item.price) }}</div>
           </div>
 
           <div class="name">
             <span class="icon">￥</span>
-            <div class="text">{{item.goodsName}}</div>
+            <div class="text">{{item.text}}</div>
           </div>
         </div>
 
@@ -77,35 +74,42 @@
     data(){
       return{
 				lang,
-        discountsList: [],
+        discountsList: [
+          { price: '22222', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},
+          { price: '11111', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},
+          { price: '333333', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},
+          { price: '555', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},
+          { price: '6666', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'},
+          { price: '777777', text: '18K白金钻石项链(0.13克拉总重量)项链(0.13克拉总重量)项链(0.13克拉总重量)'}
+        ],
         showCoupon: false
       }
-    },
-    mounted() {
-      this.$axios({
-          method: 'get',
-          url: 'web/market/detail',
-          params: {
-            id: 13
-          }
-        })
-        .then(data => {
-          this.discountsList = data.data.recommend[0];
-
-          var len=data.data.recommend[0].length;
-          for(var i=0; i<len; i++){
-            this.discountsList[i].goodsImages = this.discountsList[i].goodsImages.split(',');
-          }
-          // this.loading = false
-        })
-        .catch(err => {
-          console.error(err)
-        })
     }
   }
 </script>
 
 <style scoped lang="less">
+  // @font-face {
+  //   font-family: ZpixEX2;
+  //   src: url('../../assets/css/ZpixEX2_EX.ttf');
+  // }
+  // @font-face {
+  //   font-family: SourceHanSansCN-E;
+  //   src: url('../../assets/css/SourceHanSansCN-ExtraLight.otf');
+  // }
+  // @font-face {
+  //   font-family: SourceHanSansCN-R;
+  //   src: url('../../assets/css/SourceHanSansCN-Regular.ttf');
+  // }
+  // @font-face {
+  //   font-family: MicrosoftYaHeiLight;
+  //   src: url('../../assets/css/MicrosoftYaHeiL.ttc');
+  // }
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
   .arrb {
     height: 540px;
     width: 100%;
@@ -243,39 +247,9 @@
         text-align: center;
 
         .goods-img{
-          position: relative;
           width: 422px;
           height: 500px;
           border: 1px solid #b99e97;
-          overflow: hidden;
-
-          .img-a{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 0;
-            max-width: 100%;
-            max-height: 100%;
-            transform: translate(-50%, -50%);
-          }
-
-          .img-b{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            z-index: 0;
-            max-width: 100%;
-            max-height: 100%;
-            transform: translate(-50%, -50%);
-            display: none;
-          }
-
-        }
-        .goods-img:hover .img-b{
-          display: block;
-        }
-        .goods-img.bg-color{
-          background-color: #EEEEF8;
         }
 
         .price{

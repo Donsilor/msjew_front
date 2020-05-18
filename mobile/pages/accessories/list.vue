@@ -74,7 +74,7 @@ export default {
           content: this.LANGUAGE.listCommons.sliders[8],
           cod: this.CONDITION_INFO.quality.bracelet
         },
-        
+
       ],
       actIndex: -1
     }
@@ -108,11 +108,12 @@ export default {
   //   }
   // },
   mounted() {
+    console.log(4444,this.webSite)
     // console.log("this.",this.seoInfo)
     if (typeof this.$route.query.actIndex !== 'undefined') {
       this.actIndex = parseFloat(this.$route.query.actIndex)
     }
-    
+
   },
   watch: {
     $route(to, from){

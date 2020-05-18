@@ -8,7 +8,7 @@
       <div class="coupon-box">
         <!-- 优惠券列表 -->
         <div class="box-r">
-          <div class="list" v-for="(item, index) in couponList" :key="index">
+          <div v-if="loadFinish" class="list" v-for="(item, index) in couponList" :key="index">
             <div class="list-l">
               <div class="line-box">
                 <div class="point-box">
@@ -59,7 +59,8 @@
         lang,
         language: '',
         couponList: [],
-        ifLoading: false
+        ifLoading: false,
+        loadFinish: false
       }
     },
     mounted() {
@@ -84,27 +85,31 @@
         this.couponList = [...this.couponList]
       }
 
-      // 获取领取的优惠券
-      this.$axios.get('web/member/coupon/index', {
-        })
-        .then(res => {
-          this.ifLoading = false;
-          var couponAllList = res.data.data;
+      if(this.couponList.length != 0){
+        this.$nuxt.$loading.start()
+        // 已领取的优惠券
+        this.$axios.get('web/member/coupon/index', {
+          })
+          .then(res => {
+            var couponAllList = res.data.data;
 
-          // 判断可用优惠券中哪些是已领取的优惠券
-          for(var i=0; i<this.couponList.length; i++){
-            for(var j=0; j<couponAllList.length; j++){
-              if(this.couponList[i].coupon_id == couponAllList[j].coupon_id){
-                this.couponList[i].ifUse = true;
-                console.log(12121888,this.couponList)
+            // 判断可用优惠券中哪些是已领取的优惠券
+            for(var i=0; i<this.couponList.length; i++){
+              for(var j=0; j<couponAllList.length; j++){
+                if(this.couponList[i].coupon_id == couponAllList[j].couponId){
+                  this.couponList[i].ifUse = true;
+                }
               }
             }
-          }
-        })
-        .catch(err => {
-          this.ifLoading = false;
-          console.log(err)
-        })
+
+            this.loadFinish = true;
+            this.$nuxt.$loading.finish()
+          })
+          .catch(err => {
+            this.ifLoading = false;
+            console.log(err)
+          })
+      }
     },
     methods: {
       // 获取cookie
@@ -126,30 +131,22 @@
               arr.push(o.coupon_id)
             }
           })
-
-          // this.$axios.post('web/member/coupon/fetch', {
-          //   coupon_id: this.moneyInfo[k].coupon_id
-          // })
-          // .then(res => {
-          //   this.ifLoading = false;
-          // })
-          // .catch(err => {})
         }
 
         this.$emit('closeCoupon', true)
       },
       // 领取优惠券
       getCoupon(k) {
-        // this.couponList[k].ifChoose = !this.couponList[k].ifChoose;
-        // this.couponList = [...this.couponList]
-
-        console.log(111, this.moneyInfo[k])
-        // return
-
+        this.$nuxt.$loading.start()
+        this.loadFinish = false;
         this.$axios.post('web/member/coupon/fetch', {
           coupon_id: this.couponList[k].coupon_id
         })
         .then(res => {
+          this.couponList[k].ifUse = true;
+          this.loadFinish = true;
+          this.$nuxt.$loading.finish()
+          this.$successMessage(`领取优惠券成功`)
           console.log(666,res)
           // this.ifLoading = false;
         })

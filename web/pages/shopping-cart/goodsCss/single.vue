@@ -10,6 +10,16 @@
           >
             <span>{{ $t(`cart.Invalid`) }}</span>
           </div>
+
+          <!-- 折扣 -->
+          <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
+            <span>{{ discountConversion(g.data[0].coupon.discount.discount) }}折</span>
+          </div>
+
+          <!-- 优惠券 -->
+          <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'money'">
+            <span>优惠券</span>
+          </div>
         </div>
       </nuxt-link>
       <nuxt-link :to="getJumpLink(g)">
@@ -55,7 +65,7 @@
       <div class="good-num">{{ g.data[0].goodsCount }}</div>
 
       <!-- 原金额 -->
-      <div class="good-price old-price">
+      <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
         {{ g.coinType }}
         {{
           formatNumber(
@@ -66,12 +76,14 @@
 
       <!-- 优惠后金额 -->
       <div class="good-price">
-        {{ g.coinType }}
-        {{
-          formatNumber(
-            g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
-          )
-        }}
+        <span v-if="couponType(g.data[0].coupon) == 'discount'">
+          {{ g.coinType }}
+          {{
+            formatNumber(
+              g.data[0].coupon.discount.price
+            )
+          }}
+        </span>
       </div>
       <div
         v-show="options"

@@ -17,6 +17,9 @@ export default function({ req, res, app, store }) {
   Vue.prototype.goBack = function(router) {
     router.go(-1)
   }
+  
+  // 判断是否有打折活动
+  Vue.prototype.couponType = Helpers.couponType
 
   Vue.prototype.resizeOSSImageStr = ''
   // '?x-oss-process=image/format,webp'

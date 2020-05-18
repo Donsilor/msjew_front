@@ -54,11 +54,22 @@
           :key="index"
           @click="clickData(each)"
         >
-          <div class="info-image">
+          <div class="info-image" style="border: 1px solid red;">
             <img
               :src="imageStrToArray(each.goodsImages)[0]"
               @error="imageError"
             />
+
+            <!-- 折扣 -->
+            <div class="list-discount-icon1" v-if="couponType(each.coupon) == 'discount'">
+              <span>{{ discountConversion(each.coupon.discount.discount) }}折</span>
+            </div>
+
+            <!-- 优惠券 -->
+            <div class="list-discount-icon1" v-if="couponType(each.coupon) == 'money'">
+              <span>优惠券</span>
+            </div>
+
           </div>
           <div class="info-title ow-h2">
             {{ each.goodsName }}
@@ -77,7 +88,7 @@
       <!--      <no-more-data v-if="noMoreListData"></no-more-data>-->
       <footer-bar v-if="noMoreListData"></footer-bar>
     </div>
-    
+
     <swiper-tap
       ref="suitability"
       :choose-line="0"
@@ -114,7 +125,7 @@ export default {
     return {
       lang: this.LANGUAGE.listCommons,
       gender: 'all',
-  
+
     }
   },
   watch: {
@@ -129,8 +140,8 @@ export default {
       this.changeGender()
 
     },
-  
-    
+
+
   },
   created() {},
   mounted() {
