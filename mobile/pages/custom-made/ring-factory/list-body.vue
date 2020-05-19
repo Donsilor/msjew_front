@@ -44,12 +44,50 @@
               :src="imageStrToArray(each.goodsImages)[0]"
               @error="imageError"
             />
+
+            <!-- 折扣 -->
+            <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'">
+              <div>{{ discountConversion(each.coupon.discount.discount) }}折</div>
+            </div>
+
+            <!-- 优惠券 -->
+            <div class="discount-a-icon" v-if="couponType(each.coupon) == 'money'">
+              <div>优惠券</div>
+            </div>
+
           </div>
-          <div class="info-title ow-h2">
+
+          <!-- 折扣 -->
+          <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'discount'">
+            <span class="discount-a-icon2">{{ discountConversion(each.coupon.discount.discount) }}折</span>
             {{ each.goodsName }}
           </div>
-          <div class="info-price">
-            {{ each.coinType }} {{ formatNumber(each.salePrice) }}
+
+          <!-- 优惠券 -->
+          <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'money'">
+            <span class="discount-b-icon2">￥</span>
+            {{ each.goodsName }}
+          </div>
+
+          <div class="product-price">
+            <div class="list-discount-price" v-if="couponType(each.coupon) !== 'discount'">
+              <div class="info-price">
+                <span class="coin">{{ each.coinType }}</span>
+                <span class="price">{{ formatNumber(each.salePrice) }}</span>
+              </div>
+            </div>
+
+            <!-- 折扣 -->
+            <div class="list-discount-price" v-if="couponType(each.coupon) == 'discount'">
+              <div class="info-price old-price-2">
+                <span class="coin">原  价{{ each.coinType }}</span>
+                <span class="price">{{ formatNumber(each.salePrice) }}</span>
+              </div>
+              <div class="info-price">
+                <span class="coin">折后加{{ each.coinType }}</span>
+                <span class="price">{{ formatNumber(each.coupon.discount.price) }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

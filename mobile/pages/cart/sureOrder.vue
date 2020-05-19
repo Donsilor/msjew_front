@@ -482,11 +482,9 @@ export default {
       this.productAmount = 0
       if(this.list != 0){
         this.list.map((item, index) => {
-          // console.log("sssss=====",item.id)
           this.idList.push(item.id)
           this.goodsListLine.push(item.simpleGoodsEntity.categoryId)
           // this.idList.push(item.localSn)
-          //  console.log("sssss",this.productAmount)
           // this.productAmount = this.productAmount + item.salePrice   localSn
           this.productAmount = parseFloat(this.productAmount + item.salePrice)
           // console.log("productAmount",this.productAmount)

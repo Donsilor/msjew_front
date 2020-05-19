@@ -26,7 +26,7 @@
           <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
           <span v-show="showb" class="pl-login">{{ replacepos(date.username, 2, 6, '***') }}</span>
         </div>
-        
+
       </div>
       <div class="content">
         <!-- <div class="search">
@@ -144,7 +144,7 @@
             <div class="item-name">
               {{ lang.callus }}
             </div>
-          </div> --> 
+          </div> -->
         </div>
         <div class="help">
           <a href="tel:+852 2165 3905">
@@ -211,7 +211,7 @@ export default {
       showb:false,
       bottom:true,
       rings:[
-        
+
         {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.engagementRing,
@@ -251,7 +251,7 @@ export default {
           // query: {
           //   style: 1
           // }
-          
+
         },
       ],
       necklaces:[
@@ -393,7 +393,6 @@ export default {
       this.cnIcon = false
       this.hkIcon = false
     }
-    // console.log("dddd",window.location.href)
     const _this = this
     if(_this.$store.getters.hadLogin){
       this.showa=false
@@ -403,7 +402,6 @@ export default {
       // this.isActive=true
       // this.show=true
     }
-    console.log("sssss",this.categoryId)
   },
   methods: {
     getinfo() {
@@ -414,7 +412,6 @@ export default {
           url: `/web/member/member/me`
         })
         .then(res => {
-          // console.log("eeee",res)
           this.date = res
           if (this.date === 1) {
             this.headImg = require('~/static/personal/men.png')
@@ -688,7 +685,7 @@ export default {
           span{
             display: inline-block;
             width: 80%;
-            text-align:center; 
+            text-align:center;
           }
         }
         .two{
@@ -979,7 +976,7 @@ export default {
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
-    align-items: left; 
+    align-items: left;
     // justify-content: center;
 
     .item {

@@ -90,7 +90,6 @@ export default {
       }
     })
       .then(data => {
-        // console.log(444444,data)
         return {
           seoInfo,
           ad: data.advert,
@@ -108,7 +107,6 @@ export default {
   //   }
   // },
   mounted() {
-    console.log(4444,this.webSite)
     // console.log("this.",this.seoInfo)
     if (typeof this.$route.query.actIndex !== 'undefined') {
       this.actIndex = parseFloat(this.$route.query.actIndex)

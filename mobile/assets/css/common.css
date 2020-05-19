@@ -402,6 +402,9 @@
   border-radius: 3px 3px 0 0;
   overflow: hidden;
 }
+.discount-icon.padding{
+  padding: 0 2px;
+}
 
 .discount-price{
   padding: 0 15px;
@@ -430,7 +433,6 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 8px solid rgba(245, 245, 245, 1);
-  margin-top: -8px;
 }
 .discount-l{
   display: flex;
@@ -444,12 +446,15 @@
   font-size: 13px;
   color: #b49785;
 }
+.discount-l .discount-icon{
+  margin-top: 2px;
+}
 
 .activity-sign{
   position: absolute;
   right: -6px;
   bottom: -8px;
-  z-index: 666;
+  z-index: 10;
   width: 80px;
   height: 85px;
   background: url(../../static/subject/icon_04.png) no-repeat center;
@@ -466,9 +471,27 @@
 }
 
 /* 优惠券 · 列表页 */
-.discount-2 .sign{
+.discount-a-icon{
    background: url(../../static/subject/icon_05.png) no-repeat center !important;
 }
-.discount-2 .discount-icon2{
-  background: url(../../static/subject/icon_03.png) no-repeat center;
+
+.discount-a-icon2,
+.discount-b-icon2{
+  background: url(../../static/subject/icon_03.png) no-repeat center !important;
+}
+
+.discount-b-box{
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.discount-b-box .discount-icon{
+  padding: 0 2px;
+}
+.discount-b-box .get{
+  font-size: 13px;
+  color: #a15d35;
+  text-decoration: underline;
+  margin-left: 2px;
 }

@@ -44,8 +44,16 @@
           /></nuxt-link>
         </div>
       </swiper>
+
+      <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+        <div class="triangle" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}折</div>
+        <div class="triangle" v-if="goodInfo.coupon.money">优惠券</div>
+      </div>
     </div>
     <div class="title">
+      <span class="discount-icon" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}折</span>
+      <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
+
       <a :href="goodInfo.goodsGiaImage" target="_blank"
         ><img
           v-show="goodInfo.goodsGiaImage"
@@ -53,9 +61,18 @@
           class="gia-certificate"
           align="right"
       /></a>
+
       {{ goodInfo.goodsName }}
     </div>
-    <div class="price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
+
+    <div class="price" v-if="!goodInfo.coupon.discount">{{ goodInfo.coinType }} {{ formatNumber(goodInfo.salePrice) }}</div>
+
+    <div class="discount-price" v-else>
+      <div class="old-price">原   价 {{ goodInfo.coinType }} {{ formatNumber(goodInfo.salePrice) }}</div>
+      <div class="new-price">折后价 {{ goodInfo.coinType }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
+    </div>
+
+    <!-- <div class="price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div> -->
     <div class="promise-box">
       <!-- <div
         v-for="(c, index) in goodInfo.goodsServicesJsons"

@@ -1,7 +1,7 @@
 <template>
   <div class="get-coupon">
     <div class="wrap">
-      <div class="title">{{ $t(`${lang}.getCoupon`) }}
+      <div class="title">领取优惠券
         <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
       </div>
 
@@ -21,20 +21,20 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <div class="rmb">(￥{{item.money_cn}})</div>
-              <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
+              <div class="rule">满￥{{item.at_least_cn}}使用</div>
               <div class="text">({{item.lineType}})</div>
-              <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
+              <div class="time">活动时间：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
             <div class="get" @click="getCoupon(index)">
-              <span v-if="!item.ifUse">{{item.ifChoose ? '已领取' : '立即领取'}}</span>
+              <span v-if="!item.ifUse">立即领取</span>
             </div>
 
             <div class="already" v-if="item.ifUse">已领取</div>
           </div>
         </div>
 
-        <div class="finish" @click="closeCoupon(true)">{{ $t(`${lang}.accomplish`) }}</div>
+        <div class="finish" @click="closeCoupon(true)">完成</div>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
       }
     },
     mounted() {
-      this.language = this.getCookie('language')
+      // this.language = this.getCookie('language')
 
       if(this.moneyInfo){
         var i=0;
@@ -86,7 +86,6 @@
       }
 
       if(this.couponList.length != 0){
-        this.$nuxt.$loading.start()
         // 已领取的优惠券
         this.$axios.get('web/member/coupon/index', {
           })
@@ -103,25 +102,24 @@
             }
 
             this.loadFinish = true;
-            this.$nuxt.$loading.finish()
           })
           .catch(err => {
-            this.ifLoading = false;
+            this.loadFinish = true;
             console.log(err)
           })
       }
     },
     methods: {
       // 获取cookie
-      getCookie(cname) {
-        const name = cname + '='
-        const ca = document.cookie.split(';')
-        for (let i = 0; i < ca.length; i++) {
-          const c = ca[i].trim()
-          if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-        }
-        return ''
-      },
+      // getCookie(cname) {
+      //   const name = cname + '='
+      //   const ca = document.cookie.split(';')
+      //   for (let i = 0; i < ca.length; i++) {
+      //     const c = ca[i].trim()
+      //     if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      //   }
+      //   return ''
+      // },
       // 关闭弹窗,获取优惠券
       closeCoupon(k) {
         if(k){
@@ -137,7 +135,7 @@
       },
       // 领取优惠券
       getCoupon(k) {
-        this.$nuxt.$loading.start()
+        // this.$nuxt.$loading.start()
         this.loadFinish = false;
         this.$axios.post('web/member/coupon/fetch', {
           coupon_id: this.couponList[k].coupon_id
@@ -145,11 +143,14 @@
         .then(res => {
           this.couponList[k].ifUse = true;
           this.loadFinish = true;
-          this.$nuxt.$loading.finish()
-          this.$successMessage(`领取优惠券成功`)
-          // this.ifLoading = false;
+          // this.$nuxt.$loading.finish()
+          this.$toast.show(`优惠券领取成功`)
         })
-        .catch(err => {})
+        .catch(err => {
+          this.loadFinish = true;
+          // this.$nuxt.$loading.finish()
+          this.$toast.show(`领取失败`)
+        })
       }
     }
   }
@@ -166,77 +167,75 @@
     background-color: rgba(0, 0, 0, 0.3);
 
     .wrap {
-      width: 1000px;
-      height: 800px;
+      width: 100%;
+      padding: 0 5%;
       background-color: #fff;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       box-sizing: border-box;
+      height: 100%;
+      overflow-y: auto;
 
       .title {
-        font-size: 22px;
+        font-size: 20px;
         text-align: center;
-        padding: 40px 0 30px;
+        padding: 20px 0;
         position: relative;
 
         .iconfont {
           position: absolute;
           right: 20px;
-          top: 60%;
+          top: 50%;
           transform: translateY(-50%);
-          width: 24px;
-          height: 24px;
+          width: 20px;
+          height: 20px;
           border: 1px solid #999;
           text-align: center;
-          line-height: 24px;
+          line-height: 22px;
           border-radius: 50%;
           font-size: 10px;
           color: #999;
-          cursor: pointer;
         }
       }
 
       .coupon-box {
-        width: 900px;
-        height: 700px;
-        margin: 10px auto;
-        overflow-y: auto;
+        width: 100%;
+        height: 100%;
 
         .box-r {
-          width: 900px;
+          width: 100%;
           min-height: 500px;
           display: flex;
           // align-items: center;
           justify-content: space-between;
           flex-wrap: wrap;
+          align-items: center;
 
           .list {
+            width: 100%;
             display: flex;
+            align-items: center;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.31), rgba(219, 209, 209, 0.31));
             box-shadow: 0 1px 0 #9C999C, 0 2px 0 #D6D5D6, 0 3px 0 #E3E1E3, 0 4px 0 #D6D5D6, 0 5px 0 #EDECED, 0 6px 0 #F9F9F9;
             border: 1px solid rgb(205, 173, 118);
             border-bottom: 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             flex-shrink: 0;
             flex-grow: 0;
-            height: 220px;
-            position: relative;
             overflow: hidden;
+            box-sizing: border-box;
+            position: relative;
 
             .list-l {
               position: relative;
-              width: 270px;
+              width: 70%;
               color: #cdad75;
               border-radius: 5px;
               padding: 20px 0;
 
               .line-box {
-                width: 200px;
+                width: 70%;
                 height: 1px;
                 background-color: #A6937C;
-                margin: 10px auto 24px;
+                margin: 4px auto 6px;
                 position: relative;
 
                 .point-box {
@@ -244,16 +243,17 @@
                   top: 50%;
                   left: 50%;
                   transform: translate(-50%, -50%);
-                  width: 80px;
+                  width: 60px;
                   display: flex;
                   align-items: center;
                   justify-content: space-around;
                   background-color: #fff;
                   background-image: linear-gradient(to right, #fcfafb, #f9f7f8);
+                  padding: 0 6px;
 
                   i {
-                    width: 6px;
-                    height: 6px;
+                    width: 4px;
+                    height: 4px;
                     background-color: #A6937C;
                     border-radius: 50%;
                   }
@@ -265,15 +265,16 @@
                 width: 100%;
                 display: flex;
                 justify-content: center;
+                margin: 10px 0;
 
                 .price-icon {
-                  font-size: 27px;
+                  font-size: 18px;
                 }
 
                 .price-num {
-                  font-size: 56px;
+                  font-size: 26px;
                   color: #cdad75;
-                  margin: -9px 0 0 -4px;
+                  margin: 0px 0 0 0px;
                   padding-right: 10px;
                 }
               }
@@ -336,15 +337,13 @@
             }
 
             .get {
-              width: 140px;
-              height: 80px;
+              width: 30%;
+              height: 70px;
               border-left: 1px solid #f00;
-              line-height: 80px;
+              line-height: 70px;
               text-align: center;
-              margin: 62px auto;
               font-size: 16px;
               color: #f00;
-              cursor: pointer;
 
               span {
                 padding: 10px;
@@ -399,18 +398,18 @@
 
   .already{
     position: absolute;
-    right: -26px;
-    top: 60px;
-    width: 100px;
-    height: 100px;
+    right: -16px;
+    top: 40%;
+    width: 80px;
+    height: 80px;
     background: url(../../../static/subject/icon_07.png) no-repeat center;
     background-size: 100% 100%;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
     color: #fff;
-    padding-top: 36px;
+    line-height: 80px;
     box-sizing: border-box;
-    letter-spacing: 1px;
-    transform: rotate(-45deg);
+    letter-spacing: 2px;
+    transform: translateY(-50%) rotate(-45deg);
   }
 </style>

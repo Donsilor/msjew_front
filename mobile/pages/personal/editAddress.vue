@@ -612,7 +612,6 @@ export default {
       this.getListThree()
     },
     showCity() {
-      console.log("99999",this.cityList.length)
       this.cityId = ''
 
       if(this.cityList.length == 0){
@@ -622,7 +621,6 @@ export default {
         this.city = this.lang.city
       }
       if (!this.provinceId) {
-        console.log("66666")
         this.$toast.show(this.lang.province2)
         return
       }

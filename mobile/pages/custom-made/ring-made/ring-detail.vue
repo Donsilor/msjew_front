@@ -1,6 +1,6 @@
 <template>
   <div>
-        <detail-body @step="doStep"></detail-body>
+    <detail-body @step="doStep"></detail-body>
     <footer-bar></footer-bar>
   </div>
 </template>

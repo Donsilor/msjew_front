@@ -18,8 +18,14 @@ export default function({ req, res, app, store }) {
     router.go(-1)
   }
   
+  // 打折由百分比换成小数点
+  Vue.prototype.discountConversion = Helpers.discountConversion
+
   // 判断是否有打折活动
   Vue.prototype.couponType = Helpers.couponType
+
+  // getTime 时间转换
+  Vue.prototype.changeTime = Helpers.changeTime
 
   Vue.prototype.resizeOSSImageStr = ''
   // '?x-oss-process=image/format,webp'

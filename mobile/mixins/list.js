@@ -198,7 +198,6 @@ export default {
         })
         .then(res => {
           if (res.data) {
-            console.log(8686,res.data)
             _this.listData[page] = JSON.parse(JSON.stringify(res.data))
           }
           // _this.listData[page] = JSON.parse(JSON.stringify(res.data || []))

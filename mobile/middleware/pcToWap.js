@@ -35,7 +35,6 @@ const getQueryFromUrl = url => {
 }
 
 function queryParams (data) {
-  // console.log("sssss",data)
   let _result = []
   for (let key in data) {
     let value = data[key]

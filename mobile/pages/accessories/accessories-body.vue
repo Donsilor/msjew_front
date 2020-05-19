@@ -14,19 +14,24 @@
         </div>
       </swiper>
 
-      <div class="activity-sign">
-        <div class="triangle">优惠券</div>
+      <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+        <div class="triangle" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}折</div>
+        <div class="triangle" v-if="goodInfo.coupon.money">优惠券</div>
       </div>
     </div>
     <div class="title">
-      <span class="discount-icon">7.5折</span>
+      <span class="discount-icon" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}折</span>
+      <span class="discount-icon" v-if="goodInfo.coupon.money">￥</span>
       {{ goodInfo.goodsName }}
     </div>
-    <div class="price" v-if="0">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
+
+    <div class="price" v-if="!goodInfo.coupon.discount">{{ goodInfo.coinType }} {{ formatNumber(goodInfo.salePrice) }}</div>
+
     <div class="discount-price" v-else>
-      <div class="old-price">原   价HKD  2,222,22</div>
-      <div class="new-price">折后价HKD  2,222,22</div>
+      <div class="old-price">原   价{{ goodInfo.coinType }} {{ formatNumber(goodInfo.salePrice) }}</div>
+      <div class="new-price">折后价{{ goodInfo.coinType }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
     </div>
+
     <div class="promise-box">
       <div
         v-for="(c, index) in goodInfo.goodsServicesJsons"
@@ -43,7 +48,15 @@
       <div class="discount-activity">
         <div class="discount-l">
           <span class="text">优惠活动：</span>
-          <span class="discount-icon">7.5折</span>
+          <div>
+            <!-- <div> -->
+              <!-- <span class="discount-icon">7.5折</span> -->
+            <!-- </div> -->
+            <div class="discount-b-box">
+              <span class="discount-icon">￥</span>
+              <span class="get" @click="ifShowCoupon = true">领取优惠券&gt;</span>
+            </div>
+          </div>
         </div>
         <div class="discount-time">
           <span>活动时间：</span><span>2020.4.9</span>
@@ -225,6 +238,8 @@
       @clear="clearQuality"
     ></choose-eject>
     <size-board ref="size-board"></size-board>
+
+    <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
   </div>
 </template>
 
@@ -258,7 +273,8 @@ export default {
         require('../../static/marriage-ring/icon-02.png'),
         require('../../static/marriage-ring/icon-03.png'),
         require('../../static/marriage-ring/icon-04.png')
-      ]
+      ],
+      ifShowCoupon: false
     }
   },
   computed: {
@@ -277,6 +293,14 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    }
+  },
+  mounted() {
+
+  },
+  methods:{
+    closeCo() {
+      this.ifShowCoupon = false
     }
   }
 }

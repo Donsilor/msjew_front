@@ -1,14 +1,14 @@
 <template>
   <div class="get-coupon">
     <div class="wrap">
-      <div class="title">{{ $t(`${lang}.getCoupon`) }}
+      <div class="title">{{ $t(`${lang}.useCoupon`) }}
         <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
       </div>
 
       <div class="coupon-box">
         <!-- 优惠券列表 -->
         <div class="box-r">
-          <div v-if="loadFinish" class="list" v-for="(item, index) in couponList" :key="index">
+          <div class="list" v-for="(item, index) in couponList" :key="index">
             <div class="list-l">
               <div class="line-box">
                 <div class="point-box">
@@ -22,20 +22,21 @@
               </div>
               <div class="rmb">(￥{{item.money_cn}})</div>
               <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
+              <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
               <div class="text">({{item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
-            <div class="get" @click="getCoupon(index)">
-              <span v-if="!item.ifUse">{{item.ifChoose ? '已领取' : '立即领取'}}</span>
+            <div class="get" @click="chooseCoupon(index)">
+              <span>{{item.ifChoose ? '已选用' : '立即选用'}}</span>
             </div>
 
-            <div class="already" v-if="item.ifUse">已领取</div>
           </div>
         </div>
 
         <div class="finish" @click="closeCoupon(true)">{{ $t(`${lang}.accomplish`) }}</div>
       </div>
+
     </div>
 
   </div>
@@ -46,11 +47,18 @@
   export default {
     name: 'Index',
     props: {
-      moneyInfo: {
+      couponAll: {
         type: [Object],
         required: false,
         default () {
           return {}
+        }
+      },
+      couponAlready: {
+        type: Array,
+        required: false,
+        default () {
+          return []
         }
       }
     },
@@ -60,56 +68,32 @@
         language: '',
         couponList: [],
         ifLoading: false,
-        loadFinish: false
+        couponInfo: {couponCode: '',couponId: ''}
       }
     },
     mounted() {
       this.language = this.getCookie('language')
 
-      if(this.moneyInfo){
-        var i=0;
-        for(var j in this.moneyInfo){
-          this.couponList[i] = this.moneyInfo[j];
-          this.couponList.ifUse = false;
-          this.couponList.ifChoose = false;
+      var i=0;
+      for(var j in this.couponAll){
+        for(var k=0; k<this.couponAlready.length; k++){
+          if(j == this.couponAlready[k]){
+            this.couponList[i] = this.couponAll[j];
+            this.couponList.ifUse = false;
+            this.couponList.ifChoose = false;
 
-          this.couponList[i].lineType = [];
-          for(var k in this.moneyInfo[j].goods_type){
-            this.couponList[i].lineType.push(this.moneyInfo[j].goods_type[k]);
-          }
-
-          this.couponList[i].lineType = this.couponList[i].lineType.join(',');
-
-          i++;
-        }
-        this.couponList = [...this.couponList]
-      }
-
-      if(this.couponList.length != 0){
-        this.$nuxt.$loading.start()
-        // 已领取的优惠券
-        this.$axios.get('web/member/coupon/index', {
-          })
-          .then(res => {
-            var couponAllList = res.data.data;
-
-            // 判断可用优惠券中哪些是已领取的优惠券
-            for(var i=0; i<this.couponList.length; i++){
-              for(var j=0; j<couponAllList.length; j++){
-                if(this.couponList[i].coupon_id == couponAllList[j].couponId){
-                  this.couponList[i].ifUse = true;
-                }
-              }
+            this.couponList[i].lineType = [];
+            for(var k in this.couponAll[j].goods_type){
+              this.couponList[i].lineType.push(this.couponAll[j].goods_type[k]);
             }
 
-            this.loadFinish = true;
-            this.$nuxt.$loading.finish()
-          })
-          .catch(err => {
-            this.ifLoading = false;
-            console.log(err)
-          })
+            this.couponList[i].lineType = this.couponList[i].lineType.join(',');
+
+            i++;
+          }
+        }
       }
+      this.couponList = [...this.couponList]
     },
     methods: {
       // 获取cookie
@@ -122,34 +106,33 @@
         }
         return ''
       },
-      // 关闭弹窗,获取优惠券
+      // 关闭弹窗
       closeCoupon(k) {
         if(k){
-          var arr = [];
-          this.couponList.forEach(o => {
+          this.couponList.forEach((o, index) => {
             if(o.ifChoose){
-              arr.push(o.coupon_id)
+              this.couponInfo.couponCode = this.couponList[index].money;
+              this.couponInfo.couponId = this.couponList[index].coupon_id;
             }
           })
-        }
 
-        this.$emit('closeCoupon', true)
+          if(this.couponInfo.couponId){
+            this.$emit('closeCoupon', this.couponInfo)
+          }else{
+            this.$emit('closeCoupon')
+          }
+
+        }else{
+            this.$emit('closeCoupon')
+        }
       },
-      // 领取优惠券
-      getCoupon(k) {
-        this.$nuxt.$loading.start()
-        this.loadFinish = false;
-        this.$axios.post('web/member/coupon/fetch', {
-          coupon_id: this.couponList[k].coupon_id
+      // 选择优惠券
+      chooseCoupon(k) {
+        this.couponList.forEach(o => {
+          o.ifChoose = false
         })
-        .then(res => {
-          this.couponList[k].ifUse = true;
-          this.loadFinish = true;
-          this.$nuxt.$loading.finish()
-          this.$successMessage(`领取优惠券成功`)
-          // this.ifLoading = false;
-        })
-        .catch(err => {})
+        this.couponList[k].ifChoose = true;
+        this.couponList = [...this.couponList]
       }
     }
   }
@@ -206,7 +189,7 @@
 
         .box-r {
           width: 900px;
-          min-height: 500px;
+          // min-height: 500px;
           display: flex;
           // align-items: center;
           justify-content: space-between;
@@ -222,8 +205,6 @@
             flex-shrink: 0;
             flex-grow: 0;
             height: 220px;
-            position: relative;
-            overflow: hidden;
 
             .list-l {
               position: relative;
@@ -395,22 +376,5 @@
 
   .coupon-box::-webkit-scrollbar {
     display: none
-  }
-
-  .already{
-    position: absolute;
-    right: -26px;
-    top: 60px;
-    width: 100px;
-    height: 100px;
-    background: url(../../../static/subject/icon_07.png) no-repeat center;
-    background-size: 100% 100%;
-    font-size: 15px;
-    text-align: center;
-    color: #fff;
-    padding-top: 36px;
-    box-sizing: border-box;
-    letter-spacing: 1px;
-    transform: rotate(-45deg);
   }
 </style>
