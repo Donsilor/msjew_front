@@ -53,7 +53,7 @@ export default {
       chooseSize: ``,
       chooseSizeId: ``,
       chooseCarats:``,
-      chooseCaratsId:this.goodInfo.carats[0].sortBy,
+      chooseCaratsId:``,
       showPi: 0,
       sendGoodsId: null,
       sendDetailsId: null,
@@ -94,6 +94,9 @@ export default {
     this.chooseCarats = this.goodInfo.carats
       ? this.goodInfo.carats[0].content
       : ``
+    this.chooseCaratsId =this.goodInfo.carats
+      ? this.goodInfo.carats[0].sortBy
+      :``
     this.showPi = this.goodInfo.salePrice
     this.iAmShowMaker()
     this.iAmShowMaker1()

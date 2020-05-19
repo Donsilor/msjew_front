@@ -46,7 +46,7 @@ export default {
       chooseSize: '',
       chooseSizeId: ``,
       chooseCarats:``,
-      chooseCaratsId:this.chooseCarats = this.goodInfo.carats[0].sortBy,
+      chooseCaratsId:``,
       showPi: this.goodInfo.salePrice,
       sendGoodsId: null,
       sendDetailsId: null,
@@ -86,6 +86,7 @@ export default {
     this.chooseSize = this.goodInfo.sizes[0].content
     if(this.goodInfo.carats !== undefined){
       this.chooseCarats = this.goodInfo.carats[0].content
+      this.chooseCaratsId = this.goodInfo.carats[0].sortBy
     }
   },
   mounted() {

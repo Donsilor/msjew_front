@@ -165,7 +165,7 @@ export default {
         this.statusList[2].num = this.list.paid.length
         this.statusList[3].num = this.list.send.length
         this.statusList[4].num = this.list.finished.length
-      console.log("tttt",this.statusList[1])
+        console.log("tttt",this.statusList[1])
     })
     .catch(err => {
       console.log(err)
