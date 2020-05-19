@@ -70,6 +70,20 @@ export default {
           }
           mcArr.push(o)
         }
+        if (infos.carats) {
+          const carats = []
+          for (const i in infos.carats) {
+            const o = {
+              content: infos.carats[i].name,
+              sortType: infos.carats[i].id,
+              sortBy: infos.carats[i].id
+              // image: app.$IMG_URL + infos.materials[i].configAttrImg
+              // image: infos.materials[i].image
+            }
+            carats.push(o)
+          }
+          infos.carats = carats
+        }
         infos.materials = mcArr
         if (res.sizes) {
           const stArr = []

@@ -40,6 +40,18 @@
         <i class="iconfont iconicon-zuanshi" />
       </div>
     </div>
+    <div class="select-line" v-if="goodInfo.carats">
+      <span>
+        <span>{{ lang.carat }}</span>
+        <!-- <span>（{{ lang['us-version'] }}）</span> -->
+        <!-- <div @click="getCarats()">!</div> -->
+      </span>
+      <span @click="showSwiperTap1()">
+        {{ chooseCarats }}
+        <i class="iconfont iconyou" />
+      </span>
+    </div>
+    <div class="bd-b" v-if="goodInfo.carats"></div>
     <div class="select-line">
       <span>{{ lang.chooseColor }}</span>
       <span @click="showChooseEject(conditions[0])">
@@ -182,12 +194,18 @@
       </template>
     </div> -->
     <footer-bar></footer-bar>
+    <swiper-tap
+      ref="caratsSuitability"
+      :list="goodInfo.carats"
+      @clear="getCarats"
+    ></swiper-tap>
 
     <swiper-tap
       ref="suitability"
       :list="goodInfo.sizes"
       @clear="getSortBy"
     ></swiper-tap>
+
     <choose-eject
       ref="quality-eject-choose-pro"
       :title="lang.fineness"
@@ -235,6 +253,7 @@ export default {
   },
   computed: {
     canAddCart() {
+      // console.log("canAddCart",this.goodInfo.details)
       const body = this.goodInfo.details
       if (this.goodInfo.totalStock > 0) {
         for (const i in body) {

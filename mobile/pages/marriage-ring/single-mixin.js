@@ -33,6 +33,7 @@ export default {
           salePrice: 0,
           details: [],
           sizes: [],
+          carats:[],
           totalStock: 0
         }
       }
@@ -44,6 +45,8 @@ export default {
       conditions: [],
       chooseSize: '',
       chooseSizeId: ``,
+      chooseCarats:``,
+      chooseCaratsId:this.chooseCarats = this.goodInfo.carats[0].sortBy,
       showPi: this.goodInfo.salePrice,
       sendGoodsId: null,
       sendDetailsId: null,
@@ -72,6 +75,7 @@ export default {
     }
   },
   created() {
+    console.log("gggg",this.goodInfo)
     this.conditions.push({
       type: 'eject-choose-pro',
       key: 'quality',
@@ -80,6 +84,9 @@ export default {
       options: this.goodInfo.materials
     })
     this.chooseSize = this.goodInfo.sizes[0].content
+    if(this.goodInfo.carats !== undefined){
+      this.chooseCarats = this.goodInfo.carats[0].content
+    }
   },
   mounted() {
     // this.$axios
@@ -142,6 +149,7 @@ export default {
       conditions[0].checked = data[0].id
       this.conditions = conditions
       this.iAmShowMaker()
+      this.iAmShowMaker1()
     },
     showSwiperTap() {
       this.$refs.suitability.show()
@@ -157,7 +165,9 @@ export default {
         this.showPi = this.goodInfo.salePrice
       } else {
         for (const i in bullShit) {
+          // console.log("iAmShowMaker1",bullShit[i].carat,this.chooseCaratsId)
           if (
+            parseInt(bullShit[i].carat) == parseInt(this.chooseCaratsId) && 
             parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
             parseInt(bullShit[i].material) ===
               parseInt(this.conditions[0].checked)
@@ -170,7 +180,34 @@ export default {
         }
       }
     },
+    showSwiperTap1(){
+      this.$refs.caratsSuitability.show()
+    },
+    getCarats(val){
+      this.chooseCarats = val.item.content
+      this.chooseCaratsId = val.item.sortType
+      this.iAmShowMaker1()
+    },
+    iAmShowMaker1() {
+      const bullShit = this.goodInfo.details
+      if (this.chooseCaratsId === ``) {
+        this.showPi = this.goodInfo.salePrice
+      } else {
+        for (const i in bullShit) {
+          if (
+            parseInt(bullShit[i].carat) === parseInt(this.chooseCaratsId) && 
+            parseInt(bullShit[i].material) ===parseInt(this.conditions[0].checked)
+          ) {
+            this.showPi = bullShit[i].retailMallPrice
+            this.sendGoodsId = bullShit[i].goodsId
+            this.sendDetailsId = bullShit[i].id
+            this.categoryId = bullShit[i].categoryId
+          }
+        }
+      }
+    },
     addCart() {
+      console.log("this.s",this.sendDetailsId)
       if (!(this.canAddCart && this.inSale)) {
         return
       }
@@ -260,6 +297,9 @@ export default {
     },
     openSize() {
       this.$refs['size-board'].show()
-    }
+    },
+    // getCarats(){
+    //   this.$refs['size-board'].show()
+    // }
   }
 }

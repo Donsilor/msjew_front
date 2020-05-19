@@ -33,6 +33,7 @@ export default {
           salePrice: 0,
           details: [],
           sizes: [],
+          carats:[],
           totalStock: 0
         }
       }
@@ -52,6 +53,8 @@ export default {
       ],
       chooseSize: this.goodInfo.sizes[0].content,
       chooseSizeId: ``,
+      chooseCarat: this.goodInfo.carats[0].content,
+      chooseCaratId:this.goodInfo.carats[0].sortBy,
       showPi: this.goodInfo.salePrice,
       sendGoodsId: null,
       sendDetailsId: null,
@@ -153,9 +156,40 @@ export default {
       } else {
         for (const i in bullShit) {
           if (
+            parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
             parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
             parseInt(bullShit[i].material) ===
               parseInt(this.conditions[0].checked)
+          ) {
+            this.showPi = bullShit[i].retailMallPrice
+            this.sendGoodsId = bullShit[i].goodsId
+            this.sendDetailsId = bullShit[i].id
+            this.categoryId = bullShit[i].categoryId
+          }
+        }
+      }
+    },
+    showSwiperTap1() {
+      this.$refs.caratsSuitability.show()
+    },
+    getCarats(val) {
+      this.chooseCarat = val.item.content
+      this.chooseCaratId = val.item.sortType
+      this.iAmShowMaker1()
+    },
+    iAmShowMaker1() {
+      const bullShit = this.goodInfo.details
+      if (this.chooseCaratId === ``) {
+        this.showPi = this.goodInfo.salePrice
+        this.sendGoodsId = ``
+        this.sendDetailsId = ``
+        this.categoryId = ``
+      } else {
+        for (const i in bullShit) {
+          if (
+            parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
+            parseInt(bullShit[i].material) ===
+              parseInt(this.conditions[0].checked[0])
           ) {
             this.showPi = bullShit[i].retailMallPrice
             this.sendGoodsId = bullShit[i].goodsId

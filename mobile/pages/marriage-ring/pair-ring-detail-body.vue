@@ -41,6 +41,16 @@
     </div>
     <div>
       <!--      第一个戒指-->
+      <!-- <div class="select-line">
+        <span>
+          {{ lang.carat }}
+        </span>
+        <span @click="showFirstRingCaratChoose">
+          {{ firstRingCaratText }}
+          <i class="iconfont iconyou" />
+        </span>
+      </div>
+      <div class="bd-b"></div> -->
       <div class="select-line">
         <span>
           <span
@@ -79,6 +89,15 @@
       </div>
       <div class="bd-b"></div>
       <!--      第二个戒指-->
+      <!-- <div class="select-line">
+        <span>
+          {{ lang.carat }}
+        </span>
+        <span @click="showSecondRingCaratChoose">
+          {{ secondRingCaratText }}
+          <i class="iconfont iconyou" />
+        </span>
+      </div> -->
       <div class="select-line">
         <span>
           <span
@@ -224,7 +243,11 @@
       </template>
     </div> -->
     <footer-bar></footer-bar>
-
+    <!-- <swiper-tap
+      ref="first-ring-carat"
+      :list="firstRing.carats"
+      @clear="firstRingClearCarat"
+    ></swiper-tap> -->
     <swiper-tap
       ref="first-ring-suitability"
       :list="firstRing.sizes"
@@ -239,6 +262,11 @@
       @clear="firstRingClearQuality"
     ></choose-eject>
 
+    <!-- <swiper-tap
+      ref="second-ring-carat"
+      :list="secondRing.carats"
+      @clear="secondRingClearCarat"
+    ></swiper-tap> -->
     <swiper-tap
       ref="second-ring-suitability"
       :list="secondRing.sizes"
@@ -313,6 +341,9 @@ export default {
         this.firstRing.goodsStatus === 2 && this.secondRing.goodsStatus === 2
       )
     }
+  },
+  mounted(){
+    console.log("ddddd",this.firstRingQualityText)
   }
 }
 </script>
