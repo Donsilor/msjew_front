@@ -151,20 +151,39 @@ export default {
     },
     iAmShowMaker() {
       const bullShit = this.goodInfo.details
-      if (this.chooseSizeId === ``) {
-        this.showPi = this.goodInfo.salePrice
+      if (this.goodInfo.carats  && this.goodInfo.sizes) {
+        if (this.chooseSizeId === `` || this.chooseCaratId === ``) {
+          this.showPi = this.goodInfo.salePrice
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
+              parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+              parseInt(bullShit[i].material) ===
+                parseInt(this.conditions[0].checked)
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+            }
+          }
+        }
       } else {
-        for (const i in bullShit) {
-          if (
-            parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
-            parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
-            parseInt(bullShit[i].material) ===
-              parseInt(this.conditions[0].checked)
-          ) {
-            this.showPi = bullShit[i].retailMallPrice
-            this.sendGoodsId = bullShit[i].goodsId
-            this.sendDetailsId = bullShit[i].id
-            this.categoryId = bullShit[i].categoryId
+        if (this.chooseSizeId === ``) {
+          this.showPi = this.goodInfo.salePrice
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+              parseInt(bullShit[i].material) ===
+                parseInt(this.conditions[0].checked)
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+            }
           }
         }
       }
@@ -179,22 +198,45 @@ export default {
     },
     iAmShowMaker1() {
       const bullShit = this.goodInfo.details
-      if (this.chooseCaratId === ``) {
-        this.showPi = this.goodInfo.salePrice
-        this.sendGoodsId = ``
-        this.sendDetailsId = ``
-        this.categoryId = ``
+      if (this.goodInfo.carats && this.goodInfo.sizes) {
+        if (this.chooseSizeId === ``|| this.chooseCaratId === ``) {
+          this.showPi = this.goodInfo.salePrice
+          this.sendGoodsId = ``
+          this.sendDetailsId = ``
+          this.categoryId = ``
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
+              parseInt(bullShit[i].material) ===
+                parseInt(this.conditions[0].checked[0])
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+            }
+          }
+        }
       } else {
-        for (const i in bullShit) {
-          if (
-            parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
-            parseInt(bullShit[i].material) ===
-              parseInt(this.conditions[0].checked[0])
-          ) {
-            this.showPi = bullShit[i].retailMallPrice
-            this.sendGoodsId = bullShit[i].goodsId
-            this.sendDetailsId = bullShit[i].id
-            this.categoryId = bullShit[i].categoryId
+        if (this.chooseSizeId === ``) {
+          this.showPi = this.goodInfo.salePrice
+          this.sendGoodsId = ``
+          this.sendDetailsId = ``
+          this.categoryId = ``
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+              parseInt(bullShit[i].material) ===
+                parseInt(this.conditions[0].checked[0])
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+            }
           }
         }
       }
