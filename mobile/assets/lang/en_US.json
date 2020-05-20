@@ -839,6 +839,7 @@
     "footerBar": {
       "custoService": "Customer Service",
       "custoServiceTime": "Monday to Friday 9 am to 6 pm",
+      "custoServiceTimeCn": "Monday to Friday 9 am to 6 pm",
       "callUs": "Tel：",
       "emailUs": "Email",
       "aboutBDD": "About BDD",

@@ -3,7 +3,7 @@
     <div class="content">
       <div class="title">{{ $t(`${lang}.header`) }}</div>
       <section class="our-info">
-        <div class="map">
+        <div class="map" v-show="this.$store.state.platform !== 10">
           <img src="/content-us/map.png" />
         </div>
         <dl class="info">
@@ -16,7 +16,10 @@
               <p class="dd-desc">
                 {{ $t(`${lang}.welcomeYourTel`) }}：（852）2165 3905
               </p>
-              <p class="dd-desc">
+              <p class="dd-desc" v-if="this.$store.state.platform === 10">
+                {{ $t(`${lang}.welcomeYourTelTipCn`) }}
+              </p>
+              <p v-else class="dd-desc">
                 {{ $t(`${lang}.welcomeYourTelTip`) }}
               </p>
             </div>
@@ -27,7 +30,12 @@
             </div>
             <div class="dd-content">
               <h2 class="dd-title">{{ $t(`${lang}.emailToUs`) }}</h2>
-              <p class="dd-desc">
+              <p class="dd-desc" v-if="this.$store.state.platform === 10">
+                <a href="mailto:service@bddco.com">e-service@bddco.com</a>；{{
+                  $t(`${lang}.allQuestionWillBeDeal`)
+                }}
+              </p>
+              <p class="dd-desc" v-else>
                 <a href="mailto:service@bddco.com">service@bddco.com</a>；{{
                   $t(`${lang}.allQuestionWillBeDeal`)
                 }}

@@ -842,6 +842,7 @@
       "footerBar": {
         "custoService": "客户服务",
         "custoServiceTime": "星期一至五上午9时至晚上6时 (香港公众假期除外)",
+        "custoServiceTimeCn": "星期一至五上午9时至晚上6时",
         "callUs": "致电我们",
         "emailUs": "电邮我们",
         "aboutBDD": "关于BDD",
@@ -849,6 +850,7 @@
         "diamondKnowledge": "钻石知识",
         "payType": "付款方式",
         "qualityAndValue": "品质与价值",
+        "aboutRefund": "退款保障条款及细则",
         "findRingSize": "找出您的戒指尺寸",
         "BDDPolicy": "BDD政策",
         "freeShipping": "免费送递服务",
