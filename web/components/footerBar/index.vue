@@ -1,7 +1,7 @@
 <template>
   <div :class="['footer-bar']">
     <div class="foot-menus">
-      <div class="menus" v-if="this.$store.state.platform === 10">
+      <div class="menus" v-if="this.$store.state.platform === 20">
         <dl v-for="(group, index) in menusCn" :key="index" class="menu-group">
           <dt class="group-name">{{ group.groupName }}</dt>
           <dd
@@ -70,7 +70,7 @@
     </div>
     <footer class="copy-right">
       <div class="copy-right-content">
-        <div v-if="this.$store.state.platform === 10">{{ $t(`${lang}.copyrightLeftCn`) }}</div>
+        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightLeftCn`) }}</div>
         <div v-else>{{ $t(`${lang}.copyrightLeft`) }}</div>
         <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRight1`) }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ $t(`${lang}.copyrightRight2`) }}</div>
         <div v-else>{{ $t(`${lang}.copyrightRight`) }}</div>

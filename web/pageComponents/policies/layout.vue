@@ -8,7 +8,7 @@
     <el-container>
       <div class="nav">
         <el-aside width="205px" class="el-aside-nav">
-          <ul class="list-top" v-if="this.$store.state.platform === 10">
+          <ul class="list-top" v-if="this.$store.state.platform === 20">
             <li v-for="(item, index) in listCn" :key="index" class="list-put">
               <h2 @click="showToggle(item)">
                 <i class="icon iconfont">&#xe66d;</i>

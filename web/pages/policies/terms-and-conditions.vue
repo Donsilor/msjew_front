@@ -9,7 +9,12 @@
           {{ $t(`${lang}.define2`) }}
         </dd>
         <dt>{{ $t(`${lang}.tit1`) }}</dt>
-        <dd>
+        <dd v-if="this.$store.state.language === 'en_US' && this.$store.state.platform === 20">
+          {{ $t(`${lang}.con1`) }}
+          <br />
+          {{ $t(`${lang}.conCn2`) }}
+        </dd>
+        <dd v-else>
           {{ $t(`${lang}.con1`) }}
           <br />
           {{ $t(`${lang}.con2`) }}
@@ -17,7 +22,8 @@
         <dt>{{ $t(`${lang}.tit2`) }}</dt>
         <dd>{{ $t(`${lang}.con3`) }}</dd>
         <dt>{{ $t(`${lang}.tit3`) }}</dt>
-        <dd>{{ $t(`${lang}.con4`) }}</dd>
+        <dd v-if="this.$store.state.platform === 20">{{ $t(`${lang}.conCn4`) }}</dd>
+        <dd v-else>{{ $t(`${lang}.con4`) }}</dd>
         <dt>{{ $t(`${lang}.tit4`) }}</dt>
         <dd>
           {{ $t(`${lang}.con5`) }}
@@ -66,7 +72,8 @@
         <dt>{{ $t(`${lang}.tit20`) }}</dt>
         <dd>{{ $t(`${lang}.con24`) }}</dd>
         <dt>{{ $t(`${lang}.tit21`) }}</dt>
-        <dd>{{ $t(`${lang}.con25`) }}</dd>
+        <dd v-if="this.$store.state.platform === 20">{{ $t(`${lang}.conCn25`) }}</dd>
+        <dd v-else>{{ $t(`${lang}.con25`) }}</dd>
       </dl>
     </div>
   </layout>

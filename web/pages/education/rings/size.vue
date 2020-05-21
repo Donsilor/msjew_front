@@ -24,7 +24,8 @@
         <dt>{{ $t(`${lang}.adjust`) }}</dt>
         <dd>
           {{ $t(`${lang}.con1`) }}
-          <span>service@bddco.com</span>
+          <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+          <span v-else>service@bddco.com</span>
           {{ $t(`${lang}.con2`) }}
           <router-link to="/policies/return-refund-policy">
             <span>{{ $t(`${lang}.link`) }}</span>

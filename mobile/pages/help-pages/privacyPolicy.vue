@@ -37,7 +37,12 @@
         <dt>{{ lang.tit6 }}</dt>
         <dd>
           {{ lang.con15 }}
-          <a class="link" href="mailto:service@bddco.com">service@bddco.com</a>
+            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:e-service@bddco.com">
+              e-service@bddco.com
+            </a>
+            <a v-else class="link" href="mailto:service@bddco.com">
+              service@bddco.com
+            </a>
           {{ lang.con16 }}
         </dd>
       </dl>
