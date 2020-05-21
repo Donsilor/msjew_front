@@ -210,11 +210,7 @@ export default {
 
     },
 
-<<<<<<< HEAD
     nuxtServerInit ({ commit }, { req, res,app,store,$axios }) {
-=======
-    nuxtServerInit ({ commit }, { req, res, app, store, $axios }) {
->>>>>>> origin/product
 
     },
     // 退出登录

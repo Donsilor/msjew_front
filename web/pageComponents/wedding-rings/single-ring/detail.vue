@@ -457,16 +457,11 @@ export default {
       },
       ringChecked: {
         materialIndex: 0,
-<<<<<<< HEAD
-        sizeIndex: 0
+        sizeIndex: 0,
+        caratIndex: 0
       },
       showCoupon: false,
       moneyList: []
-=======
-        sizeIndex: 0,
-        caratIndex: 0
-      }
->>>>>>> origin/product
     }
   },
   computed: {
@@ -583,11 +578,6 @@ export default {
     }
   },
   mounted() {
-<<<<<<< HEAD
-    console.log(11211,this.info)
-=======
-    console.log("dddd",this.productInfo)
->>>>>>> origin/product
     const _this = this
     _this.$nextTick(() => {
       // console.log(this.$helpers.base64Decode(this.$route.query.steps))

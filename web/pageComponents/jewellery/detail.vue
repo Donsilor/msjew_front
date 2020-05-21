@@ -535,11 +535,6 @@ export default {
     }
   },
   mounted() {
-<<<<<<< HEAD
-    console.log(22222,this.info)
-=======
-    console.log("dddd",this.productInfo)
->>>>>>> origin/product
     const _this = this
     _this.$nextTick(() => {})
   },

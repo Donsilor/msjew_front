@@ -814,7 +814,6 @@
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
               <div class="hkd">{{ good.length }}</div>
-<<<<<<< HEAD
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -839,22 +838,6 @@
             </div>
 
            <!-- <div v-show="makeGay" class="detail-line">
-=======
-            </div>
-            <div class="detail-line">
-              <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
-              <div class="hkd">
-                {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
-              </div>
-            </div>
-            <div class="detail-line" v-for="item in useAmount">
-              <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
-              <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
-              </div>
-            </div>
-            <div v-show="makeGay" class="detail-line">
->>>>>>> origin/product
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
                 <span style="color: red;">{{
@@ -865,29 +848,17 @@
                   @click="removeCoupon"
                   >{{ $t(`${lang}.sc`) }}</span
                 >
-<<<<<<< HEAD
               </div>
               <div class="hkd color-pink">
                 -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
               </div>
             </div> -->
 
-=======
-              </div>
-              <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
-              </div>
-            </div>
->>>>>>> origin/product
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-<<<<<<< HEAD
-                  <a href="/free-shipping" target="_blank"><span>?</span></a>
-=======
                   <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
->>>>>>> origin/product
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -899,11 +870,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-<<<<<<< HEAD
-                  <a href="/international" target="_blank"
-=======
                   <a href="/policies/international" target="_blank"
->>>>>>> origin/product
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -1457,7 +1424,6 @@
               v-show="!isAllPack"
               class="free-check"
               @click="isAllPack = !isAllPack"
-<<<<<<< HEAD
             />
             <i
               v-show="isAllPack"
@@ -1545,96 +1511,6 @@
               @blur="borderChange = 0"
             />
           </div>
-=======
-            />
-            <i
-              v-show="isAllPack"
-              class="iconfont icongou"
-              @click="isAllPack = !isAllPack"
-            />
-            <div>
-              <span>{{ $t(`${lang}.sendTogether`) }}</span
-              ><span>（{{ $t(`${lang}.chatBor`) }}）</span>
-            </div>
-          </div> -->
-          <div class="send-time">
-            <div class="send-left">
-              <div>{{ $t(`${lang}.sendTime`) }}</div>
-              <div>
-                <router-link to="/policies/shipping">{{
-                  $t(`${lang}.checkDeliveryPolicy`)
-                }}</router-link>
-              </div>
-            </div>
-            <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
-            </div>
-          </div>
-          <!-- <div class="after-sale-email">
-            <div>{{ $t(`${lang}.showHouEmail`) }}</div>
-            <div>
-              <div
-                v-show="!isSameEmail"
-                class="free-check"
-                @click="isSameEmail = !isSameEmail"
-              />
-              <i
-                v-show="isSameEmail"
-                class="iconfont icongou"
-                @click="isSameEmail = !isSameEmail"
-              />
-              <span>{{ $t(`${lang}.sameTongAddress`) }}</span>
-            </div>
-          </div> -->
-          <!-- <div
-            :class="[
-              { 'border-change': borderChange === 8 },
-              { 'border-wrong': wrongInput.odMail }
-            ]"
-            class="after-sale-email-input"
-          >
-            <input
-              v-show="!isSameEmail"
-              v-model="orderEmail"
-              :class="{ 'wrong-input': wrongInput.odMail }"
-              type="text"
-              @focus="
-                borderChange = 8
-                wrongInput.odMail = false
-              "
-              @blur="borderChange = 0"
-            />
-            <input
-              v-show="isSameEmail"
-              v-model="orderAddress.email"
-              :class="{ 'wrong-input': wrongInput.odMail }"
-              type="text"
-              @focus="
-                borderChange = 8
-                wrongInput.odMail = false
-              "
-              @blur="borderChange = 0"
-            />
-          </div> -->
-          <div class="message">
-            <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
-            <textarea
-              v-model="remark"
-              :class="[
-                { 'border-change': borderChange === 9 },
-                { 'wrong-input': wrongInput.remark },
-                { 'border-wrong': wrongInput.remark }
-              ]"
-              autocomplete="off"
-              @focus="
-                borderChange = 9
-                wrongInput.remark = false
-              "
-              @blur="borderChange = 0"
-            />
-          </div>
->>>>>>> origin/product
-
 
           <!-- 发票按钮 -->
           <div class="invoice">
@@ -1888,11 +1764,8 @@
                 {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
-<<<<<<< HEAD
 
             <!-- 购物卡 -->
-=======
->>>>>>> origin/product
             <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
@@ -1900,11 +1773,7 @@
               </div>
             </div>
 
-<<<<<<< HEAD
             <!-- <div v-show="makeGay" class="detail-line">
-=======
-            <div v-show="makeGay" class="detail-line">
->>>>>>> origin/product
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
                 <span style="color: red;">{{
@@ -1918,7 +1787,6 @@
               </div>
               <div class="hkd color-pink">
                 -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
-<<<<<<< HEAD
               </div>
             </div> -->
 
@@ -1931,19 +1799,11 @@
               </div>
             </div>
 
-=======
-              </div>
-            </div>
->>>>>>> origin/product
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-<<<<<<< HEAD
-                  <a href="/free-shipping" target="_blank"><span>?</span></a>
-=======
                   <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
->>>>>>> origin/product
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -1955,11 +1815,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-<<<<<<< HEAD
-                  <a href="/international" target="_blank"
-=======
                   <a href="/policies/international" target="_blank"
->>>>>>> origin/product
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -2199,10 +2055,6 @@ export default {
         .then(res => {
           this.good = res
 
-<<<<<<< HEAD
-=======
-          // console.log("res",res)
->>>>>>> origin/product
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
           }

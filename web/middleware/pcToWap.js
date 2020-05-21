@@ -1132,24 +1132,16 @@ export default function ({ req, res, redirect, store, route }) {
                     }
                 }
             }
-<<<<<<< HEAD
+
             // console.log(url)
             redirect(url)
             return 
           }
-=======
-            redirect(host)
-            return
->>>>>>> origin/product
         }
-        console.log("req.originalUrl----", req.originalUrl)
+        // console.log("req.originalUrl----", req.originalUrl)
         toWapUrl(req.originalUrl)
     }
-<<<<<<< HEAD
-    // console.log("req.originalUrl----",req.originalUrl)
     toWapUrl(req.originalUrl)
   }
-=======
->>>>>>> origin/product
 }
 

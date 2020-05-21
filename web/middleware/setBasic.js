@@ -39,7 +39,6 @@ export default function (content) {
             resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
             store.commit('setAreaId', areaId)
         }
-<<<<<<< HEAD
       }
       if (!trueLanguage) {
         language = languageOptions[0].code
@@ -57,20 +56,12 @@ export default function (content) {
     }else{
       store.commit('setAreaId', _areaId)
     }
-=======
->>>>>>> origin/product
 
-        if (lastUrl) {
-            resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
-            store.commit('setLastUrl', lastUrl)
-        }
-        console.log('setBasic req====>', resetCookie)
-        res.setHeader('Set-Cookie', resetCookie)
+    if (lastUrl) {
+        resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
+        store.commit('setLastUrl', lastUrl)
     }
-<<<<<<< HEAD
     // console.log('setBasic req====>', resetCookie)
     res.setHeader('Set-Cookie', resetCookie)
   }
-=======
->>>>>>> origin/product
 }

@@ -208,31 +208,13 @@ export default {
     
   },
 
-  created(){
-
-  },
-  mounted(){
-
-    this.$nextTick(() => {
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/product
-    })
-  },
-
   methods: {
     // 当勾选了一个商品以后删除另一个商品时更新底部数据
     refreshData(){
       this.totalNum=0
       this.totalPrice=0
-<<<<<<< HEAD
       this.allTick=false
       this.tickNum = 0
-=======
-      this.allTick=false  
-      this.tickNum = 0  
       window.location.reload()
     },
     handleScroll(e){
@@ -248,7 +230,6 @@ export default {
           this.Settlement1 = true
           this.Settlement2 = false
         }
->>>>>>> origin/product
     },
     // handleScroll(){
     //   console.log('滚动条发生滚动了')
@@ -265,11 +246,9 @@ export default {
           }
           this.good = res
           if(this.good.length<=3){
-            console.log(11111111111,this.good.length)
             this.Settlement1 = true
             this.Settlement2 = false
           } else {
-            console.log(2222222)
             window.addEventListener('scroll', this.handleScroll, true)
           }
           this.defaultAll()
@@ -413,14 +392,12 @@ export default {
         }else{
           (this.totalPrice -=parseFloat(this.good[i].price) )
         }
-        console.log(111,this.totalPrice)
       }else{
         if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
           (this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price) )
         }else{
           (this.totalPrice +=parseFloat(this.good[i].price) )
         }
-        console.log(222,this.totalPrice)
       }
 
 

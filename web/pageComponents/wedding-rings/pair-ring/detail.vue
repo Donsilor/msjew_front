@@ -887,12 +887,6 @@ export default {
     }
   },
   mounted() {
-<<<<<<< HEAD
-    console.log(66666666,this.info)
-=======
-    console.log("firstRing",this.firstRing)
-    console.log("secondRing",this.secondRing)
->>>>>>> origin/product
     const _this = this
     _this.$nextTick(() => {})
   },
