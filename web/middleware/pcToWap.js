@@ -1126,7 +1126,7 @@ export default function ({ req, res, redirect, store, route }) {
                         if (href.length > 1) {
                             url = url + '?' + param + href[1]
                         }
-                        console.log(url)
+                        
                         redirect(url)
                         return
                     }
@@ -1134,14 +1134,11 @@ export default function ({ req, res, redirect, store, route }) {
             }
 
             // console.log(url)
-            redirect(url)
+            redirect(host)
             return 
-          }
         }
         // console.log("req.originalUrl----", req.originalUrl)
         toWapUrl(req.originalUrl)
     }
-    toWapUrl(req.originalUrl)
-  }
 }
 

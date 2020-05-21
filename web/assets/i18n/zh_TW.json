@@ -555,46 +555,6 @@
         "waitTimes": "{second} 秒後自動返回登入頁面",
         "loginNow": "立即登入"
     },
-<<<<<<< HEAD
-    "style": {
-      "SolitaireRing": "单石戒",
-      "ClawRing":"爪鑲戒",
-      "GroupRing":"群鑲戒",
-      "ThreeMainStoneRings":"三主石戒",
-      "OpenMouth":"開口戒",
-
-      "SolitaireRingDesc": "戒扥款式可多變, 一夥真心總不變 , 高貴氣質石長存",
-      "JumpRing": "開口戒",
-      "JumpRingDesc": "首飾界中魔法師, 相隔對岸的法變, 竟能做出此效果",
-      "PaveSetRing": "密釘戒",
-      "PaveSetRingDesc": "戒指上的璀璨閃碎能映照出 , 夜空中的繁星閃爍 !主石旁潻夜空閃爍讓您看到 , 群星中的皎潔明月",
-      "ClassicalRing": "古典戒",
-      "ClassicalRingDesc": "要形造古樸優雅的特性 , 可經手中閃爍的鑽戒 . 好讓您從回惜日的時光",
-      "ChannelSetRing": "迫鑲戒",
-      "ChannelSetRingDesc": "迫鑲管道式鑲嵌,特顯工藝上微妙, 除了設計上獨特, 工藝亦是同重要",
-      "HaloSetRing": "外圍鑲嵌戒",
-      "HaloSetRingDesc": "天上閃爍璀璨的光環, 落在外圍鑲嵌的指環",
-      "ThreeStoneRing": "三主石戒",
-      "ThreeStoneRingDesc": "三個不能共存的時空 ( 過去 , 現在, 將來 ) , 三者亦能互連之感覺 ( 回憶, 感恩 , 希望 ) , 三石戒可見一生中的寫照",
-      "ClassicSeries": "經典系列",
-      "ChannelSetSeries": "排鑲系列",
-      "WeddingRing": "經典",
-      "WeddingRingDesc": "願作此生相依的應允 , 願為此今刻決定往後",
-      "ManWeddingRingDesc": "一雙賦予真摰愛情的信物, 雙相許下永伴終生的承諾",
-      "ThreeDReliefRing": "立體浮雕",
-      "ThreeDReliefRingDesc": "立體活現形態的設計 , 特顯不愛平凡的您",
-      "DiamondRing": "鑽石",
-      "DiamondRingDesc": "無論時代如何變化，每個人都渴望一生一世的真愛",
-      "ManDiamondRingDesc": "無論時代如何變化，每個人都渴望一生一世的真愛",
-      "SpecialRing": "週年紀念",
-      "SpecialRingDesc": "特色戒原素 , 打扮的態度 , 不愛同一路 ,  但求我喜好",
-      "FullyDiamondInlaidRing": "永恆",
-      "FullyDiamondInlaidRingDesc": "永恆不滅的閃爍引領光彩生活的延續, 渾身鑽戒的璀璨帶來四週身旁的目",
-      "WeddingAnniversaryRing": "週年紀念",
-      "WeddingAnniversaryRingDesc": "想必愛情故事的背後 , 總有相遇互勉之時候 ,  當中會有一點深深的安慰 ,  怎樣才能留下更深的諾印",
-      "CasualRing": "可搭配",
-      "CasualRingDesc": "一種時尚之配搭 , 只需隨意的選擇 , 沒有任何之規範 , 便有自我的風格"
-=======
     "contactUs": {
         "callToUs": "致電我們",
         "welcomeYourTel": "期待您的來電咨詢",
@@ -633,7 +593,6 @@
         "inputTelphone": "請輸入正確的電話",
         "selectTheCorrectDate": "請選擇正確的日期",
         "selectAnAppointmentTime": "請選擇預約時間"
->>>>>>> origin/product
     },
     "index": {
         "designYourEngagementRing": "設計自己的訂婚戒指",
@@ -722,67 +681,6 @@
         "totalCountTitle": "对戒戒指 ({total_count} 款)",
         "titleDesc": "無論時代如何變化，每個人都渴望一生一世的真愛",
         "sort": "排序"
-    },
-<<<<<<< HEAD
-    "ringsMenu": {
-      "designYourEngagementRing": "設計自己的訂婚鑽戒",
-      "startFromSetting": "從戒托開始",
-      "startFromDiamond": "從鑽石開始",
-      "inspiredByCustomerRings": "從客戶戒指獲取靈感",
-      "matchWithRoundDiamonds": "搭配圓形鑽石款式 !",
-      "style": "款式",
-      "solitaire": "主石戒",
-      "jump": "開口戒",
-      "paveSet": "密釘戒",
-      "classical": "古典戒",
-      "channelSet": "迫鑲戒",
-      "haloSet": "外圍鑲嵌戒",
-      "threeStone": "三主石戒",
-      "color": "成色",
-      "14KWhite": "14K白金",
-      "18KWhite": "18k白金",
-      "14KYellow": "14K黃金",
-      "18KYellow": "18K黃金",
-      "platinum": "鉑金",
-      "18KRoseGold": "18K玫瑰金",
-      "14KRoseGold": "14K玫瑰金",
-      "fineSilver": "銀",
-
-      "price":"價格",
-      "use":"使用場景",
-      "engagementRing":"訂婚戒指",
-      "weddingRing":"結婚戒指",
-      "ring":"套戒",
-      "fashionRing":"時尚戒指",
-      "coupleRing":"情侶對戒",
-      "priceRange1":"1000以內",
-      "priceRange2":"1000-1999",
-      "priceRange3":"2000-2999",
-      "priceRange4":"3000-4999",
-      "priceRange5":"5000以上",
-      "proposalRing":"求婚戒指",
-      "engagement":"訂婚",
-      "wedding":"結婚",
-      "proposal":"求婚",
-      "ValentinesDay":"情人節",
-      "birthdayPresent":"生日禮物",
-      "anniversary" : "紀念日"
-
-=======
-    "singleRingsList": {
-        "man": "男士",
-        "woman": "女士",
-        "forPeople": "適用人群",
-        "style": "款式",
-        "color": "成色",
-        "allColor": "所有成色",
-        "price": "價格",
-        "to": "至",
-        "title": "結婚戒指",
-        "totalCountTitle": "戒指 ({total_count} 款)",
-        "titleDesc": "願作此生相依的應允 , 願為此今刻決定往後",
-        "sort": "排序"
->>>>>>> origin/product
     },
     "diamonds": {
         "diamonds": "DIAMONDS",
@@ -892,41 +790,7 @@
         "moreAfterSaleInfo": "退款保障條款及細則",
         "startYourDiamondCheck": "立刻開始您的鑽石檢查"
     },
-<<<<<<< HEAD
-    "topBar": {
-      "ring": "戒指",
-      "necklace":"項鍊",
-      "bracelet":"手鍊",
-      "customization":"鑽戒定制",
-      "theme":"主題",
-
-      "customerService": "客戶服務",
-      "lifetimeWarranty": "終身保修",
-      "freeInternationalShipping": "免費運費",
-      "refundPolicy": "100% 退款保證",
-      "login": "登入",
-      "order": "我的訂單",
-      "account": "賬戶資料",
-      "coupon": "優惠券卡包",
-      "loginOut": "登出",
-      "wish": "心願單",
-      "cart": "購物車",
-      "engagementRing": "訂婚戒指",
-      "weddingRing": "結婚戒指",
-      "diamond": "鑽石",
-      "jewelleryAccessories": "珠寶飾品",
-      "buy": "购买",
-      "education": "知識",
-      "search": "搜索",
-      "ringsMenu": {
-        "designYourEngagementRing": "設計自己的訂婚鑽戒",
-        "startFromSetting": "從戒托開始",
-        "startFromDiamond": "從鑽石開始",
-        "inspiredByCustomerRings": "從客戶戒指獲取靈感",
-        "matchWithRoundDiamonds": "搭配圓形鑽石款式 !",
-=======
     "engagementRingsList": {
->>>>>>> origin/product
         "style": "款式",
         "color": "成色",
         "allColor": "所有成色",
@@ -1314,57 +1178,6 @@
         "chooseSize": "獲取我的指圈號",
         "back": "返回上一步",
         "color": "成色",
-<<<<<<< HEAD
-        "SelectDiamondFirst":"先選鑽石",
-        "DiamondRing":"先鑽戒托",
-        "SingleDiamondRing":"單鑽戒",
-        "SolitaireRing": "单石戒",
-        "ClawRing":"爪鑲戒",
-        "GroupRing":"群鑲戒",
-        "ThreeMainStoneRings":"三主石戒",
-        "OpenMouth":"開口戒",
-        "14KWhite": "14K白金",
-        "18KWhite": "18k白金",
-        "14KYellow": "14K黃金",
-        "18KYellow": "18K黃金",
-        "platinum": "鉑金",
-        "18KRoseGold": "18K玫瑰金",
-        "14KRoseGold": "14K玫瑰金",
-        "fineSilver": "銀",
-        "WeightRange1":"0.3ct以下",
-        "WeightRange2":"0.3-0.5ct",
-        "WeightRange3":"0.51ct-0.8ct",
-        "WeightRange4":"0.81ct-1ct",
-        "WeightRange5":"1ct-1.5ct",
-        "WeightRange6":"1.51ct以上",
-        "propose":"求婚",
-        "gotEngaged":"訂婚",
-        "marry":"結婚",
-        "ValentinesDay":"情人節",
-        "birthdayPresent":"生日禮物"
-      },
-      "themeCollectionMenu":{
-        "use":"使用場景/特別禮物",
-        "Promotions":"活動特惠",
-        "HolidayGift":"節日禮物",
-        "classification":"分類",
-        "BlackFriday":"黑色星期五",
-        "coupon":"優惠劵",
-        "SpecialDiscount":"特惠折扣",
-        "ValentinesDay":"情人節",
-        "MothersDay":"母親節",
-        "birthdayPresent":"生日禮物",
-        "ChristmasGift":"聖誕禮物",
-        "HalloweenGift":"萬聖節禮物",
-        "Ring":"戒指",
-        "CoupleRing":"情侶對戒",
-        "NecklaceAndPendant":"項鍊/吊墜",
-        "Bracelet":"手鍊/手鐲",
-        "EarringsAndStuds":"耳環/耳釘",
-        "DecorationAndPendant":"擺件/挂件",
-        "other":"其它"
-      }
-=======
         "size": "尺寸",
         "USEdition": "美版",
         "isUSSizeNow": "本頁顯示的為美版指圈號",
@@ -2512,7 +2325,6 @@
                 "con7": "7.定期清洗銀器將可防止銀鏽及保持銀器明亮有光澤。銀銹在出現初期時最容易去除，可以以暖水及不含氯的清潔液洗擦表面，再以軟布抹乾，最後以抹銀布輕擦表面。您也可以使用專門去鏽配方的亮光劑、溶劑來除去銀鏽。"
             }
         }
->>>>>>> origin/product
     },
     "brandStory": {
         "header": "BDD品牌故事",
@@ -2550,7 +2362,6 @@
             }
         ]
     },
-<<<<<<< HEAD
     "diyRing": "定製戒指",
     "engagementRings": "ENGAGEMENT RINGS",
     "diyNecklace": "定製項鏈",
@@ -4593,4 +4404,3 @@
         "msg13": "此卡已超過使用時間！"
     }
 }
->>>>>>> origin/product
