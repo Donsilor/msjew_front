@@ -955,6 +955,7 @@
             "hadPay": "Paid",
             "hadSend": "Shipped",
             "hadFinish": "Completed",
+            "hadClosed": "Closed",
             "hadNotComment": "Pending review",
             "hadComment": "Comment sent",
             "returnApplication": "Return request",

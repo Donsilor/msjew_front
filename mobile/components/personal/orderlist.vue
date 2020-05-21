@@ -4,7 +4,8 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span v-if="order.wireTransferStatus === null" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-if="order.wireTransferStatus === null && order.refundStatus == 0" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-else-if="order.refundStatus == 1" class="order-status">{{ refundStatusText(order.refundStatus) }}</span>
           <span v-else class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
         </div>
         <div class="top">
@@ -328,6 +329,12 @@ export default {
         10 : this.lang.payfailed
       };
       return transferStatus_value[transferStatus];
+    },
+    refundStatusText(refundStatus){
+      const refundStatus_value = {
+        1 : this.lang.hadClosed
+      };
+      return refundStatus_value[refundStatus];
     },
     // 跳转到详情页
     toDetail(orderId) {

@@ -959,6 +959,7 @@
             "hadPay": "已付款",
             "hadSend": "已發貨",
             "hadFinish": "已完成",
+            "hadClosed":"已關閉",
             "hadNotComment": "未評價",
             "hadComment": "已評價",
             "returnApplication": "退货申请",

@@ -974,6 +974,7 @@
             "hadPay": "已付款",
             "hadSend": "已发货",
             "hadFinish": "已完成",
+            "hadClosed":"已关闭",
             "hadNotComment": "未评价",
             "hadComment": "已评价",
             "returnApplication": "退货申请",

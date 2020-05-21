@@ -93,7 +93,8 @@ export default {
   created(){
     this.$axios({
       method: 'get',
-      url: `/web/member/order`
+      url: `/web/member/order`,
+      params: { orderStatus: 0, page: 1, page_size: 9999 }
     })
     .then(res => {
       this.list = {
@@ -228,27 +229,27 @@ export default {
             .tip{
               position: absolute;
               // display: block;
-              top: -56%;
-              left: 97%;
-              width: 16px;
-              height: 16px;
-              line-height: 17px;
-              border-radius: 100%;
-              text-align: center;
-              color: #ffffff;
-              font-size: 10px;
-              background-color: #f29b87;
-              box-sizing: border-box;
-              // border-radius: 15px;
-              // color: #fff;
-              // display: inline-block;
-              // font-size: 12px;
-              // height: 18px;
-              // line-height: 18px;
-              // padding: 0 6px;
+              // top: -56%;
+              // left: 97%;
+              // width: 16px;
+              // height: 16px;
+              // line-height: 17px;
+              // border-radius: 100%;
               // text-align: center;
-              // white-space: nowrap;
+              // color: #ffffff;
+              // font-size: 10px;
               // background-color: #f29b87;
+              // box-sizing: border-box;
+              border-radius: 15px;
+              color: #fff;
+              display: inline-block;
+              font-size: 12px;
+              height: 18px;
+              line-height: 18px;
+              padding: 0 6px;
+              text-align: center;
+              white-space: nowrap;
+              background-color: #f29b87;
             }
           }
           .line {

@@ -4,15 +4,19 @@
     <div class="content">
       <div class="top">
         <!--        <OrderHeader :list="statusSteps" :stepindex="step" />-->
-        <div v-if="info.wireTransferStatus == null" class="status-title">
+        <div v-if="info.wireTransferStatus == null && info.refundStatus == 0" class="status-title">
           {{ statusText(info.orderStatus) }}
+        </div>
+        <div v-else-if="info.refundStatus == 1" class="status-title">
+          {{ getRefundStatusText(info.refundStatus) }}
         </div>
         <div v-else class="status-title">
           {{ getTransferStatus(info.wireTransferStatus) }} 
         </div>
         <div class="service">
           <ul>
-            <li v-if="info.wireTransferStatus == null">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
+            <li v-if="info.wireTransferStatus == null && info.refundStatus == 0">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
+            <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
             <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
             <li>{{ lang.orderTime }}：{{ info.orderTime }}</li>
@@ -289,14 +293,14 @@
             {{ lang.paytips }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null && info.refundStatus == 0"
             class="btn-block"
             @click="goPay(info)"
           >
             {{ lang.toPay }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null && info.refundStatus == 0"
             class="btn-white"
             @click="cancelOrder"
           >
@@ -449,6 +453,12 @@ export default {
         10 : this.lang.payfailed
       };
       return transferStatus_value[transferStatus];
+    },
+    getRefundStatusText(refundStatus){
+      const refundStatus_value = {
+        1 : this.lang.hadClosed
+      };
+      return refundStatus_value[refundStatus];
     },
     payChannelText(payChannel) {
       const map = {

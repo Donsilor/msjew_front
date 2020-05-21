@@ -39,8 +39,12 @@
             <p>{{ $t(`${lang}.orderNumber`) }}：{{ o.orderNO }}</p>
             <p>
               {{ $t(`${lang}.orderStatus`) }}：
-              <span v-if="o.wireTransferStatus == null" :style="{ color: getStatusColor(o.orderStatus) }"> 
-                {{ getStatusText(o.orderStatus)
+              <span v-if="o.wireTransferStatus == null && o.refundStatus == 0" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                <!-- {{ getTransferStatus(o.wireTransferStatus)}} -->
+                {{ getStatusText(o.orderStatus)}}
+                </span>
+              <span v-else-if="o.refundStatus == 1" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getRefundStatus(o.refundStatus)
               }}</span>
               <span v-else :style="{ color: getStatusColor(o.orderStatus) }"> 
                 {{ getTransferStatus(o.wireTransferStatus)
@@ -515,6 +519,12 @@ export default {
         10: this.$t(`${lang}.PayFailed`),
       };
       return transferStatus_value[transferStatus];
+    },
+    getRefundStatus(refundStatus){
+      var refundStatus_value = {
+        1 : this.$t(`${lang}.hadClosed`)
+      };
+      return refundStatus_value[refundStatus];
     },
     cancelOrder() {
       const data = this.$helpers.transformRequest(
