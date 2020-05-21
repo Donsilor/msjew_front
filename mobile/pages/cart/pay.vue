@@ -1,71 +1,86 @@
 <template>
   <div class="pay">
-    <Header :title="lang.pay" tips="1" />
-    <div class="proce">
-      <span>{{ info.coinType }} </span>
-      {{ formatMoney(price) }}
-    </div>
-    <ul>
-      <li v-for="(item, index) in list" :key="index">
-        <div v-show="price > 0 || (price == 0 && item.type === 5)">
-          <img :src="item.url" />
-          <div class="right">
-            <span
-              class="icon iconfont"
-              :class="typeIndex === index ? 'icongou' : ''"
-              @click="changeType(index)"
-            ></span>
-            <b
-              >{{ item.title }}
+    <div class="paylist" v-show="paylist">
+      <Header :title="lang.pay" tips="1" />
+      <div class="proce">
+        <span>{{ info.coinType }} </span>
+        {{ formatMoney(price) }}
+      </div>
+      <ul>
+        <li v-for="(item, index) in list" :key="index">
+          <div v-show="price > 0 || (price == 0 && item.type === 5)">
+            <img :src="item.url" />
+            <div class="right">
               <span
-                v-if="item.type == '5'"
-                class="ph"
-                @click="needtips = !needtips"
-                >?</span
-              >
-            </b>
+                class="icon iconfont"
+                :class="typeIndex === index ? 'icongou' : ''"
+                @click="changeType(index)"
+              ></span>
+              <div
+                class="box-a"
+                >{{ item.title }}
+                <span
+                  v-if="item.type == '5'"
+                  class="ph"
+                  @click="needtips = !needtips"
+                  >?</span
+                >
+                <div class="support" v-if="item.type == '1000' && isLogin">({{ lang.support }})</div>
+              </div>
 
-            <p>{{ item.des }}</p>
-            <p v-if="item.des2">{{ item.des2 }}</p>
+              <p>{{ item.des }}</p>
+              <p v-if="item.des2">{{ item.des2 }}</p>
+              <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
+            </div>
           </div>
-        </div>
-      </li>
-    </ul>
-    <div class="tips">
-      <i class="icon iconfont icongantanhao1"></i><span>{{ lang.tips }}</span>
-    </div>
-    <div class="btn" @click="goPaySuccess">
-      {{ list[typeIndex].title }}
-      {{ lang.goPay }}
-      {{ info.coinType }}
-      {{ formatMoney(price) }}
-    </div>
+        </li>
+      </ul>
+      <div class="tips">
+        <i class="icon iconfont icongantanhao1"></i><span>{{ lang.tips }}</span>
+      </div>
+      <div class="btn" @click="goPaySuccess">
+        {{ list[typeIndex].title }}
+        {{ lang.goPay }}
+        {{ info.coinType }}
+        {{ formatMoney(price) }}
+      </div>
+      
+      <!-- <Upload :multiple="true" :max=6 :list="imgList" ref="upload"></Upload> -->
+      <!--    unionPayHide-->
+      <div v-show="false">
+        <form :action="actionLink" method="post">
+          <div v-for="(f, index) in form" :key="index">
+            <label :for="f.name">{{ f.name }}</label>
+            <input v-model="f.val" :name="f.name" />
+          </div>
+          <input id="unionPay" type="submit" value="akm" />
+        </form>
+      </div>
 
-    <!--    unionPayHide-->
-    <div v-show="false">
-      <form :action="actionLink" method="post">
-        <div v-for="(f, index) in form" :key="index">
-          <label :for="f.name">{{ f.name }}</label>
-          <input v-model="f.val" :name="f.name" />
-        </div>
-        <input id="unionPay" type="submit" value="akm" />
-      </form>
+      <NeedKnow v-if="needtips" @close="needtips = !needtips" />
     </div>
-
-    <NeedKnow v-if="needtips" @close="needtips = !needtips" />
+    <div class="transfer" v-show="transfer"> 
+      <div class="transfer-header">
+        <i class="icon iconfont iconfanhuiicon-" @click="closed">{{ lang.back }}</i>
+        <h4>{{ lang.pleaseSelectAccount }}</h4>
+      </div>
+      <Upload @cancel="closed"></Upload>
+    </div>
   </div>
 </template>
 
 <script>
 import Header from '@/components/personal/header.vue'
 import NeedKnow from '@/components/cart/needKnow.vue'
+import Upload from '@/components/wire-transfer/index.vue'
 import { formatMoney } from '@/assets/js/filterUtil.js'
 export default {
   name: 'Pay',
   layout: 'no-bar',
   components: {
     Header,
-    NeedKnow
+    NeedKnow,
+    Upload
   },
   data() {
     return {
@@ -81,6 +96,12 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        },
+        {
           url: '/cart/ap.png',
           type: 82,
           title: this.LANGUAGE.cart.pay.payType3,
@@ -93,10 +114,16 @@ export default {
           des: this.LANGUAGE.cart.pay.type4Text
         },
         {
-          url: '/cart/card.png',
+          url: '/cart/up.png',
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+          url: '/cart/ph.png',
+          type: 84,
+          title: this.LANGUAGE.cart.pay.payType5,
+          des: this.LANGUAGE.cart.pay.type5Text,
         }
         // {
         //   url: '/cart/paydollar.png',
@@ -132,16 +159,28 @@ export default {
       ],
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
-      price: JSON.parse(this.$route.query.info).orderAmount,
+      price: JSON.parse(this.$route.query.info).payAmount,
       needtips: false,
-      typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0
+      typeIndex: JSON.parse(this.$route.query.info).payAmount === 0 ? 5 : 0,
+      isLogin: !!this.$store.state.token,
+      picList:[],
+      imgList:[],
+      paylist:true,
+      transfer:false
     }
   },
   created() {
-    // console.log('w333', JSON.parse(this.$route.query.info))
+    // console.log('w333', JSON.parse(this.$route.query.info))this.$refs.upload.list
   },
   methods: {
+    // 关闭弹窗
+    closed(){
+      this.paylist = true
+      this.transfer = false
+      this.typeIndex = 0 
+    },
     formatMoney: formatMoney,
+    // 选择支付方式
     changeType(ind) {
       console.log("选择",ind)
       this.typeIndex = ind
@@ -152,17 +191,27 @@ export default {
       //   return
       // }
       if (ind === 5) {
-        this.price = this.info.orderAmount * 0.985
+        this.paylist = false
+        this.transfer = true
+        // this.price = this.info.payAmount * 0.985
       } else {
-        this.price = this.info.orderAmount
+        this.price = this.info.payAmount
       }
     },
     goPaySuccess() {
       this.isPay = true
       console.log("aaa",this.typeIndex)
       if(this.info.coinType === 'USD'){
-        if(this.typeIndex == 1){
-          this.$toast.show(this.lang.paytip)
+        if(this.typeIndex == 2){
+          this.$toast.show(this.lang.paytip1)
+          return
+        }
+        if(this.typeIndex == 3){
+          this.$toast.show(this.lang.paytip2)
+          return
+        }
+        if(this.typeIndex == 4){
+          this.$toast.show(this.lang.paytip3)
           return
         }
       }
@@ -170,15 +219,17 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 82
+        pay = 61
       }else if(this.typeIndex == 2){
-        pay = 83
+        pay = 82
       }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
         pay = 81
       }else if(this.typeIndex == 5){
         pay = 7
       }
-      
+
       // if (this.typeIndex === 5) {
       //   pay = 1
       // } else if (this.typeIndex === 1 || this.typeIndex === 0) {
@@ -242,13 +293,14 @@ export default {
               name: 'complete-paySuccess-orderId-price-coinType',
               params: {
                 orderId: this.info.orderId,
-                price: this.info.orderAmount,
+                price: this.info.payAmount,
                 coinType: this.info.coinType
               }
             })
           }
         })
         .catch(err => {
+          this.$nuxt.$loading.finish()
           console.log(err)
           this.$toast.show(err.message)
           // this.$router.replace({
@@ -269,6 +321,25 @@ export default {
 </script>
 
 <style scoped lang="less">
+.transfer-header{
+  width: 100%;
+  height: 44px;
+  background: #ffffff;
+  i {
+    float: left;
+    padding-left: 15px;
+    font-size: 14px;
+    color: #666666;
+    line-height: 44px;
+  }
+  h4 {
+    margin: 0 50px;
+    font-size: 16px;
+    line-height: 44px;
+    font-weight: 500;
+    color: rgba(51, 51, 51, 1);
+  }
+}
 .pay {
   padding-bottom: 20px;
   .proce {
@@ -299,7 +370,16 @@ export default {
         margin-left: 64px;
         padding: 10px 0px 12px;
         border-bottom: 1px solid #dddddd; /*no*/
-        span {
+        .support{
+          position: absolute;
+          top: 48%;
+          left: 0;
+          transform: translateY(-50%);
+          margin-left: 150px;
+          font-size: 10px;
+          color: #333;
+        }
+        .icon {
           float: right;
           width: 20px;
           height: 20px;
@@ -330,7 +410,7 @@ export default {
           text-align: center;
           border: 1px solid rgba(242, 155, 135, 1); /*no*/
         }
-        b {
+        .box-a {
           font-size: 14px;
           line-height: 24px;
           font-weight: 400;
@@ -373,5 +453,9 @@ export default {
     font-weight: 400;
     color: rgba(255, 255, 255, 1);
   }
+}
+
+.hint-color{
+  color: #f29b87 !important;
 }
 </style>

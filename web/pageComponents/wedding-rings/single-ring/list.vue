@@ -161,7 +161,7 @@
     <section class="sort">
       <div class="sort-type">
         <div class="using-type">
-          <span class="type-name">排序</span>
+          <span class="type-name">{{ $t(`${lang}.sort`) }}</span>
           <i class="iconfont iconxiala"></i>
         </div>
         <ul class="type-list">

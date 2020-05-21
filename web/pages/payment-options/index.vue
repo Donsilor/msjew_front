@@ -57,6 +57,23 @@
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
+        <!-- vise -->
+          <div
+          :class="{ 'pay-choose': payWay == 61 }"
+          class="pay-block"
+          @click="payWay = 61"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/visa.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
+          <div v-show="payWay === 61" class="pay-price">
+            {{ coinType }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 61" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+        </div>
         <!-- 支付宝 -->
         <div
           :class="{ 'pay-choose': payWay == 82 }"
@@ -73,6 +90,7 @@
           <div v-show="payWay == 82" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
+          <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div>
         </div>
         <!-- <div
           :class="{ 'pay-choose': payWay === 8 }"
@@ -106,8 +124,10 @@
           <div v-show="payWay == 83" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
+          <!-- <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+          "><span>*</span> {{ $t(`${lang}.msg11`) }}</div> -->
         </div>
-        
+
         <!-- 信用卡 -->
         <div
           :class="{ 'pay-choose': payWay == 81 }"
@@ -124,8 +144,26 @@
           <div v-show="payWay == 81" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
+          <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div>
         </div>
 
+        <!-- 电汇 -->
+        <div
+          :class="{ 'pay-choose': payWay == 84 }"
+          class="pay-block"
+          @click="payWay = 84;wire()"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/epay.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
+          <div v-show="payWay == 84" class="pay-price">
+            {{ $store.state.coin }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 84" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+        </div>
         <!-- <div
           :class="{ 'pay-choose': payWay == 1 }"
           class="pay-block"
@@ -146,6 +184,97 @@
         <!-- <div class="pay-question" @click="answer = true">?</div> -->
       </div>
       <div class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
+    </div>
+    <!-- 电汇弹窗 -->
+    <div class="wireTransfer" v-show="transfer">
+      <div class="msg">
+        <div class="msgbox" >
+          <div class="title">
+            {{ $t(`${lang}.pleaseSelectAccount`) }}
+            <img @click="closed" class="close" src="../../static/order/closed.png" alt="">
+          </div>
+          <div class="content">
+            <div class="Amount">
+              <span>{{ $t(`${lang}.paidAmount`) }}</span>
+              {{ $store.state.coin }} {{ formatMoney(price) }}
+            </div>
+            <div class="accounts-block">
+              <div class="account-ways" v-for="(item, index) in accountlist" :key="index">
+                <div :class="accountWay === index ? 'account-choose' : ''" @click="changeWay(index)" class="account-block">
+                  <div class="account">
+                    <span>{{ $t(`${lang}.Account`) }}</span>
+                    <span>{{item.bank_name}}</span>
+                  </div>
+                  <div class="account-num">
+                    <span>{{ $t(`${lang}.AccountNumber`) }}</span>
+                    <span>{{item.account}}</span>
+                  </div>
+                  <div class="account-name">
+                    <span>{{ $t(`${lang}.AccountName`) }}</span>
+                    <span>{{item.account_name}}</span>
+                  </div>
+                  <div class="account-name">
+                    <span>{{ $t(`${lang}.bankAddress`) }}</span>
+                    <span>{{item.bank_address}}</span>
+                  </div>
+                  <div class="account-name">
+                    <span>{{ $t(`${lang}.SwiftCode`) }}</span>
+                    <span>{{item.swift_code}}</span>
+                  </div>
+                  <div v-show="accountWay === index" class="choose-tick">
+                    <img src="../../static/order/tick.png" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="uploadPic">
+              <div class="text">
+                <span class="star">*</span>
+                <span>{{ $t(`${lang}.UploadPayVoucher`) }}</span>
+              </div>
+              <div class="upload">
+                <div class="up">
+                  <el-upload
+                    :class="{hide:hideUpload}"
+                    action="#"
+                    :before-upload="beforeUpload"
+                    list-type="picture-card"
+                    :on-preview="handlePictureCardPreview"
+                    :on-remove="handleRemove" 
+                    :limit="1"
+                    :on-change = "onchange"
+                    >
+                    <i class="el-icon-plus"></i>
+                    <span class="up-text">{{ $t(`${lang}.uploadPhotos`) }}</span>
+                  </el-upload>
+                  <el-dialog :visible.sync="dialogVisible">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                  </el-dialog>
+                </div>
+                <div class="tip">
+                  {{ $t(`${lang}.Note1`) }}
+                </div>
+              </div>
+            </div>
+            <div class="transactionNum">
+              <div class="text2">
+                <div class="number">{{ $t(`${lang}.PayTransactionNumber`) }}</div>
+                <div class="can-select">{{ $t(`${lang}.Optional`) }}</div>
+              </div>
+              <div class="num-input">
+                <input type="text" v-model="number">
+              </div>
+            </div>
+            <div class="btnPay">
+              <div class="cancel-pay" @click="Cancel">{{ $t(`${lang}.CancelPayment`) }}</div>
+              <div class="finish-pay" @click="Finished">{{ $t(`${lang}.PaymentCompleted`) }}</div>
+            </div>
+            <div class="prompt">
+              <p>{{ $t(`${lang}.Note2`) }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <!--    unionPayHide-->
     <div v-show="false">
@@ -176,6 +305,7 @@
 
 <script>
 const lang = `pay`
+// const token =  this.$store.state.token 
 export default {
   data() {
     if ( parseInt(this.$route.query.payType)===7 ) {
@@ -193,15 +323,178 @@ export default {
       coinType: this.$route.query.coinType,
       form: [],
       actionLink: '',
-      goingPay: false
+      goingPay: false,
+      language:'',
+      transfer:false,
+      fileList: {},
+      dialogImageUrl: '',
+      imgs:'',
+      account:'',
+      number:'',
+      dialogVisible: false,
+      hideUpload: false,
+      myHeaders: {access_token: this.$store.state.token},
+      accountlist:[],
+      accountWay:'',
+
+      // myHeaders:this.$store.state.token,
+      // imgDatas:[],
+      // formData:new FormData(),
+      // imgs: {},
+      // imgLen:0, el-upload--picture-card
     }
+  },
+  mounted(){
+    this.language = this.getCookie('language')
+    let element = document.querySelector('.el-upload ')
+    console.log("44444",this.fileList)
+    this.getAccount()
+    // if(this.dialogImageUrl.length == 1){
+    //   console.log("44444")
+    //   element.style.display = 'none'
+    // }
   },
   computed: {
     ttPrice() {
-      return this.price * 0.985
+      // return this.price * 0.985
+      return this.price
     }
   },
   methods: {
+    // 获取账户信息
+    getAccount(){
+      this.$axios
+        .get('/web/pay/collection-account-info')
+        .then(res => {
+          this.accountlist = res.data
+          console.log("ssss",res)
+        })
+        .catch(err => {
+          this.$message.error(err.message)
+      })
+    },
+    // 选择账户
+    changeWay(ind) {
+      this.account = this.accountlist[ind].account
+      // console.log("选择",this.accountlist[ind].account)
+      this.accountWay = ind
+    },
+    // 上传图片
+    beforeUpload(file) {
+      console.log("file2222",file) 
+      // jpeg,bmp,jpg,png,tif,gif,pcx,tga,exif,fpx,svg,psd,cdr,pcd,dxf,ufo,eps,ai,raw,WMF,webp
+      const isJPG = 
+        file.type == 'image/jpeg'||
+        file.type == 'image/png'||
+        file.type == 'image/jpg'||
+        file.type == 'image/gif'||
+        file.type == 'image/tiff'||
+        file.type == 'image/raw'||
+        file.type == 'image/pcx'||
+        file.type == 'image/tga'||
+        file.type == 'image/exif'||
+        file.type == 'image/fpx'||
+        file.type == 'image/svg'||
+        file.type == 'image/psd'||
+        file.type == 'image/cdr'||
+        file.type == 'image/pcd'||
+        file.type == 'image/dxf'||
+        file.type == 'image/ufo'||
+        file.type == 'image/eps'||
+        file.type == 'image/ai'||
+        file.type == 'image/WMF'||
+        file.type == 'image/webp'||
+        file.type == 'image/bmp';
+        const isLt2M = file.size / 1024 / 1024 < 2;
+
+        if (!isJPG) {
+          this.$message.error(this.$t(`${lang}.imgFomat`));
+          return isJPG
+        }
+        if (!isLt2M) {
+          this.$message.error(this.$t(`${lang}.imgSize`));
+          return isLt2M
+        }
+        // return isJPG && isLt2M;
+        var fd = new window.FormData();
+        fd.append('file', file, file.name)
+        this.$axios.post("/web/file/images",fd)
+        .then(res => {
+          this.imgs = res.data.url
+          console.log("上传图片",this.imgs);
+          //  return res.data.url
+        });
+        // return false // 返回false不会自动上传 imgFomat
+    },
+    // 取消付款
+    Cancel(){
+      this.payWay = 6
+      this.transfer = false
+    },
+    // 完成付款
+    Finished(){
+      console.log('a',typeof this.accountWay)
+      // return
+      if(this.accountWay === ''){
+        this.$message.error(this.$t(`${lang}.selectAccount`))
+        return
+      }
+      if(this.imgs === ''){
+        this.$message.error(this.$t(`${lang}.selectVoucher`))
+        return
+      }
+      const data ={
+        order_id: this.$route.query.orderId,
+        account:this.account,
+        payment_serial_number:this.number,
+        payment_voucher:this.imgs
+      }
+      this.$axios
+        .post('/web/pay/wire-transfer',data)
+        .then(res => {
+          this.$successMessage(this.$t(`${lang}.transferSuccessful`))
+          this.transfer = false
+          setTimeout(() => {
+            this.$router.replace({
+              path: '/account/orders',
+            })
+          }, 3000)
+        })
+        .catch(err => {
+          this.$message.error(err.message)
+      })
+    },
+    // 删除图片
+    handleRemove(file, fileList) {
+      // console.log("删除了")
+      if(fileList == ''){
+        setTimeout(() => {
+          this.hideUpload = false
+        }, 500);
+      }
+    },
+    // 放大图片
+    handlePictureCardPreview(file) {
+      console.log("file",file)
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    // 上传图片是触发的方法
+    onchange(fileList){
+      // console.log(fileList.length)
+      if(fileList !==''){
+        this.hideUpload = true
+      }
+    },
+    // 选择电汇触发打开弹窗
+    wire(){
+      this.transfer = true
+    },
+    // 关闭提交电汇信息弹窗
+    closed(){
+      this.payWay = 6
+      this.transfer = false
+    },
     goPay() {
       let pay = 0
       if(this.payWay==6){
@@ -212,6 +505,8 @@ export default {
         pay = 83
       }else if(this.payWay==81){
         pay = 81
+      }else if(this.payWay==61){
+        pay = 61
       }
     console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
@@ -292,6 +587,16 @@ export default {
             // console.log(err)
           }
         })
+    },
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
     }
   }
 }
@@ -300,6 +605,14 @@ export default {
 <style lang="less" scoped>
 div {
   box-sizing: border-box;
+}
+.accounts-block{
+  width: 100%;
+  display: flex;
+    flex-wrap: wrap;
+  // flex-wrap: wrap;
+  // align-items: center;
+  // justify-content: space-between;
 }
 .pay {
   width: 1360px;
@@ -482,6 +795,15 @@ div {
             height: 100%;
           }
         }
+        .support{
+          position: absolute;
+          right: 82px;
+          top: 78px;
+          font-size: 14px;
+          font-family: twCenMt;
+          line-height: 24px;
+          color: #1d1d1d;
+        }
       }
       .pay-block:hover {
         box-shadow: 2px 2px 4px 0px rgba(84, 84, 84, 0.16);
@@ -517,5 +839,279 @@ div {
       margin: 0 auto;
     }
   }
+}
+
+.hint_pay{
+  position: absolute;
+  right: 80px;
+  top: 94px;
+  font-family: twCenMt;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 24px;
+}
+.hint_pay span{
+  color: #f00;
+  font-size: 18px;
+  opacity: 0.6;
+}
+.hint_pay.en{
+  top: 94px;
+}
+
+.wireTransfer{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 2005;
+  top: 0;
+  left: 0;
+  .msg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    .msgbox{
+      // border-radius: 8px;
+      // padding: 0 30px 30px 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 980px;
+      // height: 695px;
+      // overflow-y: scroll;
+      background: rgba(255, 255, 255, 1);
+      .cha{
+        text-align: right;
+        i{
+          font-size: 30px;
+        }
+      }
+      .title{
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+        background-color: #f8f0f0;
+        position: relative;
+      }
+      .close{
+        position: absolute;
+        width: 16px;
+        top:16px;
+        right: 16px;
+      }
+      .content{
+        padding:30px;
+        .Amount{
+          color: #f29b87;
+          font-size: 24px;
+        }
+        .account-ways:first-child{
+          padding-top: 30px;
+        }
+        .account-ways:nth-child(2){
+          padding-top: 30px;
+          padding-right: 0;
+        }
+        .account-ways{
+          cursor: pointer;
+          padding: 0px 40px 0 0;
+          .account-block {
+            padding: 5px;
+            transition: 0.2s linear;
+            position: relative;
+            width: 435px;
+            min-height: 190px;
+            background: rgba(248, 248, 248, 1);
+            border: 1px solid rgba(205, 205, 205, 1);
+            margin-bottom: 40px;
+            // padding: 0 0 0 24px;
+            .account{
+              margin-left: 40px;
+              line-height: 50px;
+              font-weight: 600;
+              color: #777777;
+              font-size: 15px;
+            }
+            .account-num{
+              margin-left: 80px;
+              line-height: 28px;
+              color: #777777;
+              font-size: 12px;
+            }
+            .account-name{
+              margin-left: 80px;
+              line-height: 28px;
+              color: #777777;
+              font-size: 12px;
+            }
+          }
+          .account-choose {
+            background-color: #ffffff;
+            border: 1px solid rgba(186, 127, 140, 1);
+            box-shadow: 2px 2px 4px 0px rgba(84, 84, 84, 0.16);
+            .account{
+              color: #ba7f8c !important;
+            }
+            .account-num{
+              color: #ba7f8c !important;
+            }
+            .account-name{
+              color: #ba7f8c !important;
+            }
+          }
+          
+        }
+        .uploadPic{
+          display: flex;
+          margin-bottom: 20px;
+          .text{
+            width: 215px;
+            font-size: 15px;
+            .star{
+              color: red;
+            }
+            // margin-right: 40px;
+          }
+          .upload{
+            // width: 510px;
+            border: solid 1px #cdcdcd;
+            padding: 20px;
+            background-color: #f8f8f8;
+            display: flex;
+            .up{
+              position: relative;
+              width: 148px;
+              height: 148px;
+              background-color: #ffffff;
+            }
+            .up-text{
+              display: block;
+              width: 148px;
+              text-align: center;
+              position: absolute;
+              bottom: -26px;
+              // left: 28px;
+              color: #777777;
+              font-size: 14px;
+            }
+            .tip{
+              width: 249px;
+              margin-left: 20px;
+              font-size: 14px;
+              line-height: 25px;
+              color: #ff6b6b;
+            }
+          }
+        }
+        .transactionNum{
+          display: flex;
+          margin-bottom: 40px;
+          .text2{
+            width: 215px;
+            // margin-right: 72px;
+            .number{
+              font-size: 16px;
+              line-height: 24px;
+            }
+            .can-select{
+              font-size: 16px;
+              // text-align: center;
+              color: #999999;
+            }
+          }
+          .num-input{
+            input{
+              width: 460px;
+              background-color: #f8f8f8;
+              border: solid 1px #cdcdcd;
+              line-height: 40px;
+              line-height: 40px;
+              padding-left: 15px;
+            }
+          }
+        }
+        .btnPay{
+          display: flex;
+          justify-content: center;
+          margin-bottom: 20px;
+          .cancel-pay{
+            width: 200px;
+            height: 40px;
+            background-color: #ffffff;
+            border: solid 1px #8b766c;
+            line-height: 40px;
+            text-align: center;
+            margin-right: 50px;
+            cursor: pointer;
+            color: #777777;
+          }
+          .finish-pay{
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background-color: #8b766c;
+            cursor: pointer;
+            color:#fff;
+          }
+        }
+        .prompt{
+          font-size: 14px;
+          color: #f29b87;
+        }
+        .account-question {
+          position: absolute;
+          bottom: 89px;
+          right: 31px;
+          width: 22px;
+          height: 22px;
+          line-height: 22px;
+          background: rgba(220, 148, 165, 1);
+          border-radius: 50%;
+          text-align: center;
+          color: #fff;
+          cursor: pointer;
+          z-index: 29;
+        }
+        .choose-tick {
+          position: absolute;
+          right: -1px;
+          bottom: 0;
+          width: 27px;
+          height: 26px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+  
+}
+</style>
+<style>
+.el-upload-list__item {
+  transition: none !important;
+}
+.el-message{
+  z-index: 2010!important;
+}
+.hide .el-upload--picture-card {
+    display: none;
+}
+.el-upload{
+  /* width: 200px; */
+  /* height: 80px; */
+  border: solid 0.5px #cdcdcd!important;
+  background-color: #ffffff;
+}
+.el-upload-list--picture .el-upload-list__item.is-success .el-upload-list__item-name{
+  display: none;
+}
+.el-upload-list__item.is-success .el-upload-list__item-status-label{
+  display: none;
 }
 </style>

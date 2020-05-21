@@ -481,7 +481,7 @@ export default {
           }
           adNum++
         } else {
-          const category = _this.getCategoryById(item.categoryId)
+          const category = _this.getCategoryById(parseInt(item.categoryId))
           const categoryName =
             category && category.qualityName ? category.qualityName : 'other'
           item.itemType = 'product'

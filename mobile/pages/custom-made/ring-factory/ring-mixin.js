@@ -15,7 +15,10 @@ export default {
       ],
       chooseSize: ``,
       chooseSizeId: ``,
+      chooseCarat: ``,
+      chooseCaratId:``,
       sizeLine: 0,
+      caratLine: 0,
       showPi: 0,
       sendGoodsId: null,
       sendDetailsId: null,
@@ -49,7 +52,8 @@ export default {
         details: [],
         sizes: [],
         totalStock: 0,
-        coupon: {}
+        coupon: {},
+        carats:[],
       },
       starNum: 5,
       comments: {
@@ -89,7 +93,7 @@ export default {
       }
     })
       .then(res => {
-        // console.log(4444,res)
+        console.log(4444,res)
         const mcArr = []
         for (const i in res.materials) {
           const o = {
@@ -115,16 +119,30 @@ export default {
           sortType: ``,
           sortBy: ``
         })
+        if(res.carats){
+          const carats = []
+          for (const i in res.carats) {
+            const o = {
+              content: res.carats[i].name,
+              sortType: res.carats[i].id,
+              sortBy: res.carats[i].id
+            }
+            carats.push(o)
+          }
+          res.carats = carats
+        } 
         
         res.sizes = stArr
         res.materials = mcArr
         // res.goodsDesc = res.goodsDesc.includes(`<script>`) ? '' : res.goodsDesc
         this.goodInfo = res
+
         if(res.coupon){
           for(var i in res.coupon){
             this.goodInfo.coupon[i] = res.coupon[i];
           }
         }
+
         this.conditions[0].options = this.goodInfo.materials
         if (this.$route.query.isBack) {
           const melo = JSON.parse(
@@ -137,6 +155,7 @@ export default {
           for (let i = 0; i < res.details.length; i++) {
             if (res.details[i].id === thatId) {
               this.showPi = res.details[i].retailMallPrice
+              
               for (let j = 0; j < res.sizes.length; j++) {
                 if (
                   res.sizes[j].sortBy ===
@@ -155,6 +174,16 @@ export default {
                   this.conditions[0].checked = [res.materials[j].id]
                 }
               }
+              for (let j = 0; j < res.carats.length; j++) {
+                if (
+                  res.carats[j].sortBy ===
+                  res.details[i].carat
+                ) {
+                  this.chooseCarat = res.carats[j].content
+                  this.chooseCaratId = res.carats[j].sortBy
+                  this.caratLine = j
+                }
+              }
             }
           }
         } else {
@@ -163,6 +192,10 @@ export default {
             this.goodInfo.materials[0].id || ''
           ]
           this.chooseSize = this.goodInfo.sizes[0].content
+          if(this.goodInfo.carats){
+            this.chooseCaratId = this.goodInfo.carats[0].sortBy
+            this.chooseCarat = this.goodInfo.carats[0].content
+          }
         }
         this.iAmShowMaker()
       })
@@ -239,22 +272,98 @@ export default {
     },
     iAmShowMaker() {
       const bullShit = this.goodInfo.details
-      if (this.chooseSizeId === ``) {
-        this.showPi = this.goodInfo.salePrice
-        this.sendGoodsId = ``
-        this.sendDetailsId = ``
-        this.categoryId = ``
+      if (this.goodInfo.carats && this.goodInfo.sizes) {
+        if (this.chooseSizeId === `` || this.chooseCaratId === ``) {
+          this.showPi = this.goodInfo.salePrice
+          this.sendGoodsId = ``
+          this.sendDetailsId = ``
+          this.categoryId = ``
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
+              parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+              parseInt(bullShit[i].material) ===
+                parseInt(this.conditions[0].checked[0])
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+            }
+          }
+        }
       } else {
-        for (const i in bullShit) {
-          if (
-            parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
-            parseInt(bullShit[i].material) ===
-              parseInt(this.conditions[0].checked[0])
-          ) {
-            this.showPi = bullShit[i].retailMallPrice
-            this.sendGoodsId = bullShit[i].goodsId
-            this.sendDetailsId = bullShit[i].id
-            this.categoryId = bullShit[i].categoryId
+        if (this.chooseSizeId === ``) {
+          this.showPi = this.goodInfo.salePrice
+          this.sendGoodsId = ``
+          this.sendDetailsId = ``
+          this.categoryId = ``
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+              parseInt(bullShit[i].material) ===
+                parseInt(this.conditions[0].checked[0])
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+            }
+          }
+        }
+      }
+    },
+    showSwiperTap1() {
+      this.$refs.caratsSuitability.show()
+    },
+    getCarats(val) {
+      this.chooseCarat = val.item.content
+      this.chooseCaratId = val.item.sortType
+      this.iAmShowMaker1()
+    },
+    iAmShowMaker1() {
+      const bullShit = this.goodInfo.details
+      if (this.goodInfo.carats && this.goodInfo.sizes) {
+        if (this.chooseSizeId === `` || this.chooseCaratId === ``) {
+          this.showPi = this.goodInfo.salePrice
+          this.sendGoodsId = ``
+          this.sendDetailsId = ``
+          this.categoryId = ``
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
+              parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+              parseInt(bullShit[i].material) ===
+                parseInt(this.conditions[0].checked[0])
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+            }
+          }
+        }
+      } else {
+        if (this.chooseSizeId === ``) {
+          this.showPi = this.goodInfo.salePrice
+          this.sendGoodsId = ``
+          this.sendDetailsId = ``
+          this.categoryId = ``
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+              parseInt(bullShit[i].material) ===
+                parseInt(this.conditions[0].checked[0])
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+            }
           }
         }
       }

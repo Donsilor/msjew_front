@@ -6,7 +6,7 @@
       </div>
       <div class="card-box clf">
         <!-- 购物卡列表 -->
-        <div class="list" v-for="(item, index) in cardList" ref="list" @input="inputInfo(index)">
+        <div class="list" v-for="(item, index) in cardList" :key="index" ref="list" @input="inputInfo(index)">
           <div class="card-info">
             <span class="choose" :class="item.ifChoose ? 'active' : ''" @click="chooseList(index)"></span>
             <div class="list-content">
@@ -311,7 +311,6 @@
                 that.verifyLine(res.data.goodsTypeAttach, k);
 
                 var time = new Date().getTime();
-                // console.log(888,time,999,that.startTime,0,that.endTime)
                 if (time > that.startTime && time < that.endTime) {
                   that.verifyStatus = 1;
                   that.cardList[k].type = 1;
@@ -395,13 +394,16 @@
                 this.$errorMessage(that.$t(`${lang}.msg6`));
               }
             } else if (this.cardList[k].type == 2) {
+              if(this.cardList[k].verifyDefeated){
+                this.$errorMessage(that.$t(`${lang}.verifyInvalid`));
+              }else{
+                var time = new Date().getTime();
 
-              var time = new Date().getTime();
-
-              if (time < that.cardList[k].startTime) {
-                that.$errorMessage(that.$t(`${lang}.msg12`));
-              } else if (time > that.cardList[k].endTime) {
-                that.$errorMessage(that.$t(`${lang}.msg13`));
+                if (time < that.cardList[k].startTime) {
+                  that.$errorMessage(that.$t(`${lang}.msg12`));
+                } else if (time > that.cardList[k].endTime) {
+                  that.$errorMessage(that.$t(`${lang}.msg13`));
+                }
               }
             }
           }

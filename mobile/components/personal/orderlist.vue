@@ -4,7 +4,8 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-if="order.wireTransferStatus === null" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-else class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
         </div>
         <div class="top">
           <span>{{ order.orderNO }}</span>
@@ -73,16 +74,31 @@
         </div>
         <div class="bottom">
           <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
-            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">查看订单</div>
-            <span class="title">{{ lang.orderCount }}：</span>
-            <div class="order-amount">
-              <span class="coin-type">{{ order.coinCode }}</span>
-              <span class="order-price">{{ order.orderAmount }}</span>
+            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">{{lang.lookOrder}}</div>
+            <div>
+              <div class="order-box-a">
+                <span class="title">{{ lang.orderCount }}：</span>
+                <div class="order-amount">
+                  <div>
+                    <span class="coin-type">{{ order.coinCode }}</span>
+                    <span class="order-price">{{ order.orderAmount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="order-box-a">
+                <span class="title">{{ order.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}：</span>
+                <div class="order-amount">
+                  <div>
+                    <span class="coin-type">{{ order.coinCode }}</span>
+                    <span class="order-price">{{ order.payAmount }}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="btn">
             <span
-              v-if="(order.orderStatus) > 0 && (order.orderStatus)<20"
+              v-if="(order.orderStatus) > 0 && (order.orderStatus)<20 && order.wireTransferStatus == null"
               class="btn2"
               @click="cancelOrder(order.id)"
               >{{ lang.cancelOrder }}</span
@@ -97,7 +113,7 @@
             >
             <span
               v-if="
-                (order.orderStatus) > 0 && (order.orderStatus)<20
+                (order.orderStatus) > 0 && (order.orderStatus)<20 && order.wireTransferStatus == null
               "
               class="btn1"
               @click.stop="goPay(order)"
@@ -305,6 +321,14 @@ export default {
       // console.log("status",map[status])
       return map[status]
     },
+    getTransferStatus(transferStatus){
+      const transferStatus_value = {
+        0 : this.lang.pending,
+        1 : this.lang.paid,
+        10 : this.lang.payfailed
+      };
+      return transferStatus_value[transferStatus];
+    },
     // 跳转到详情页
     toDetail(orderId) {
       this.$router.push({
@@ -318,7 +342,7 @@ export default {
     goPay(val) {
       const res = {
         coinType: val.coinCode, // 支付币种 ,
-        orderAmount: val.orderAmount, // 支付金额 ,
+        payAmount: val.payAmount, // 支付金额 ,
         orderId: val.id // 订单ID
       }
       this.$router.push({
@@ -525,9 +549,8 @@ export default {
         .order {
           margin-left: 90px;
           display: flex;
-          align-items: flex-end;
+          align-items: center;
           .title {
-            flex-grow: 1;
             flex-shrink: 1;
             min-width: 0;
             font-size: 14px;
@@ -554,18 +577,25 @@ export default {
           }
         }
         .btn {
-          text-align: right;
+          display: flex;
+          // text-align: right;
+          margin-left: 90px;
+          font-size: 0;
           span {
-            display: inline-block;
+            // display: inline-block;
             /*width: 100px;*/
+            width: 110px;
             height: 32px;
-            padding: 0 21px;
+            // padding: 0 15px;
             border-radius: 5px;
             font-size: 14px;
             line-height: 32px;
             font-weight: 400;
             text-align: center;
-            margin: 20px 0 0 30px;
+            margin-top: 20px;
+          }
+          span:last-child{
+            margin-left: 30px;
           }
           .btn1 {
             background: #333333;
@@ -589,8 +619,9 @@ export default {
   margin-left: 0 !important;
 }
 .btn-look{
+    width: 100px;
     height: 0.853333rem;
-    padding: 0 0.56rem;
+    // padding: 0 0.56rem;
     border-radius: 0.133333rem;
     font-size: 0.373333rem;
     line-height: 0.853333rem;
@@ -599,5 +630,13 @@ export default {
     color: #F29C88;
     border: 1px solid #F29C88;
     margin-right: 0.6rem;
+}
+
+.order-box-a{
+  display: flex;
+  align-items: center;
+}
+.order-box-a:first-child{
+  margin-bottom: 4px;
 }
 </style>

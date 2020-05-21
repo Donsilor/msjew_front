@@ -83,7 +83,7 @@ export default {
       info2:{
         orderId:'',
         coinType:'',
-        orderAmount:''
+        payAmount:''
       },
       list:[]
     }
@@ -122,10 +122,10 @@ export default {
           orderId: this.$route.query.orderId,
         }
       })
-        .then(res => {//http://localhost:8328/cart/pay?info=%7B%22coinType%22%3A%22HKD%22,%22orderAmount%22%3A%221855.16%22,%22orderId%22%3A280%7D
+        .then(res => {//http://localhost:8328/cart/pay?info=%7B%22coinType%22%3A%22HKD%22,%22payAmount%22%3A%221855.16%22,%22orderId%22%3A280%7D
           this.infos.orderId=res.id
           this.infos.coinType=res.coinCode
-          this.infos.orderAmount=res.orderAmount
+          this.infos.payAmount=res.payAmount
           console.log(res, 'e7etry')
           this.info = res
         })
@@ -173,68 +173,75 @@ export default {
       })
     },
     returnBack2() {
-      const res = this.list
-      const data = []
-        let baseUrl=this.$store.getters.baseUrl
-        // console.log("未登录",this.list)
-        for (const i in this.list) {
-          const o = {
-            createTime: this.list[i].createTime,
-            goods_num: 1,
-            goodsDetailsId: this.list[i].goodsDetailsId,
-            goods_id: this.list[i].goodsDetailsId,
-            group_id: this.list[i].groupId,
-            goods_type: this.list[i].goodsStatus,
-            group_type:
-              this.list[i].groupType !== 0 ? this.list[i].groupType : null
-          }
-          data.push(o)
+      const res = this.orderinfo
+      this.$router.push({
+        name: 'cart-sureOrder',
+        query: {
+          info: JSON.stringify(res)
         }
-        // console.log("data",data)
-        // console.log("paytype",this.$route.query)
-        this.$axios({
-          method: 'post',
-          url: `/web/member/order-tourist/create`,
-          data: {
-            orderSn:this.$route.query.orderId,
-            goodsCartList:data,
-            tradeType:'wap',
-            coinType:this.$store.state.coin,
-            returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
-          }
-        })
-          .then(res => {
-            // console.log("返回结果",res)
-            // const arr = []
-            // this.list.map((item, index) => {
-            //   console.log(arr)
-            //   arr.push(item.localSn)
-            //   this.$store.dispatch('removeCart', arr)
-            // })
-            if (res.config) {
-              window.location.replace(res.config)
-            } else if (!res.config){
-              // console.log(88888888)
-              this.isPay = false
-              this.$router.replace({
-                name: 'complete-paySuccess-orderId-price-coinType',
-                params: {
-                  orderId: this.info.orderId,
-                  price: this.info.orderAmount,
-                  coinType: this.info.coinType
-                }
-              })
-            }
-            // this.$router.replace({
-            //   name: 'cart-pay',
-            //   query: {
-            //     info: JSON.stringify(res)
-            //   }
-            // })
-          })
-          .catch(err => {
-            this.$toast.show(err.message)
-          })
+      })
+      // const res = this.list
+      // const data = []
+      //   let baseUrl=this.$store.getters.baseUrl
+      //   // console.log("未登录",this.list)
+      //   for (const i in this.list) {
+      //     const o = {
+      //       createTime: this.list[i].createTime,
+      //       goods_num: 1,
+      //       goodsDetailsId: this.list[i].goodsDetailsId,
+      //       goods_id: this.list[i].goodsDetailsId,
+      //       group_id: this.list[i].groupId,
+      //       goods_type: this.list[i].goodsStatus,
+      //       group_type:
+      //         this.list[i].groupType !== 0 ? this.list[i].groupType : null
+      //     }
+      //     data.push(o)
+      //   }
+      //   // console.log("data",data)
+      //   // console.log("paytype",this.$route.query)
+      //   this.$axios({
+      //     method: 'post',
+      //     url: `/web/member/order-tourist/create`,
+      //     data: {
+      //       orderSn:this.$route.query.orderId,
+      //       goodsCartList:data,
+      //       tradeType:'wap',
+      //       coinType:this.$store.state.coin,
+      //       returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
+      //     }
+      //   })
+      //     .then(res => {
+      //       // console.log("返回结果",res)
+      //       // const arr = []
+      //       // this.list.map((item, index) => {
+      //       //   console.log(arr)
+      //       //   arr.push(item.localSn)
+      //       //   this.$store.dispatch('removeCart', arr)
+      //       // })
+      //       if (res.config) {
+      //         window.location.replace(res.config)
+      //       } else if (!res.config){
+      //         // console.log(88888888)
+      //         this.isPay = false
+      //         this.$router.replace({
+      //           name: 'complete-paySuccess-orderId-price-coinType',
+      //           params: {
+      //             orderId: this.info.orderId,
+      //             price: this.info.payAmount,
+      //             coinType: this.info.coinType
+      //           }
+      //         })
+      //       }
+      //       // this.$router.replace({
+      //       //   name: 'cart-pay',
+      //       //   query: {
+      //       //     info: JSON.stringify(res)
+      //       //   }
+      //       // })
+      //     })
+      //     .catch(err => {
+      //       this.$toast.show(err.message)
+      //     })
     },
     goToFail() {
       this.$router.push({

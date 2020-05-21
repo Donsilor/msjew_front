@@ -198,7 +198,8 @@
         "NeedPay": "需付金額",
         "submitSuccessfully": "订单提交成功!",
         "PleaseLogin": "请先登录，才能使用购物卡！",
-        "msg10": "购物车不能为空，请重新添加商品"
+        "msg10": "购物车不能为空，请重新添加商品",
+        "msg11": "仅供大陆使用"
       },
       "pay": {
         "pay": "订单支付",
@@ -206,21 +207,50 @@
         "goPay": "支付",
         "payType0": "PayPal",
         "type0Text": "使用PayPal安全支付",
-        "payType1": "信用卡",
-        "type1Text": "在网上以您的信用卡快速安全地付款",
+        "payType1": "银联",
+        "type1Text": "使用中国银联银行卡，安全支付",
         "payType2": "中国银行",
         "type2Text": "使用中国银联银行卡安全支付",
         "payType3": "支付宝",
-        "type3Text": "使用支付宝安全支付",
+        "type3Text": "网上付款、方便、快捷",
         "payType4": "微信",
         "type4Text": "网上付款、方便、快捷",
         "payType5": "电汇",
-        "type5Text": "以电汇方式付款将享有1.5%折扣优惠",
+        "type5Text": "使用银行转账安全支付",
+        "payType6": "Visa/MasterCard",
+        "type6Text": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
         "type5Text2": "注意，电子支票并非电汇",
-        "paytip":"由于Paydallor不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！"
+        "paytip1":"由于支付宝暂不支持“美元”进行结算，请切换其他货币完成本次订单支付，谢谢!",
+        "paytip2":"由于微信暂不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！",
+        "paytip3":"由于信用卡暂不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！",
+        "msg11": "仅供大陆使用",
+        "paytip":"由于Paydallor不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！",
+        "support": "暂仅支持：大陆版",
+        "pleaseSelectAccount":"选择支付电汇账户",
+        "paidAmount":"需支付金额:",
+        "Account":"账户:",
+        "AccountNumber":"户口号码:",
+        "AccountName":"户口名称:",
+        "UploadPayVoucher":"上传支付凭证:",
+        "uploadImage":"上传图片",
+        "Note1":"请确保图片上清晰显示转账日期和银码以便核实款项",
+        "PayTransactionNumber":"支付交易号",
+        "Optional":"(可选填)",
+        "CancelPayment":"取消付款",
+        "PaymentCompleted":"已完成付款",
+        "Note2":"* 注：支付完成后请选择支付的银行账户，请上传凭证",
+        "back": "返回",
+        "selectAccount":"请先选择支付的银行账户！",
+        "selectVoucher":"请上传支付凭证！",
+        "transferSuccessful":"订单已经提交，运营人员会尽快处理，请及时关注订单状态！",
+        "imgFomat":"上传图片格式不正确，请重新上传!",
+        "imgSize":"图片过大，请重新上传！",
+        "bankAddress":"银行地址:",
+        "SwiftCode":"SWIFT CODE:",
+        "uploadPhotos":"上传图片"
       },
       "paySuccess": {
-        "PayPending1":"订单已经提交，系统正在处理中,请稍等。",
+        "PayPending1":"订单已提交，系统处理中…请稍等.",
         "PayPending2":"您可以先关闭此页面，稍后我们将以邮件/短信方式通知您！",
         "handing":"订单处理中......",
         "title": "订单支付成功",
@@ -271,7 +301,7 @@
         "coustom": "定制"
       },
       "payFailed": {
-        "title": "很抱歉 , 订单未支付成功",
+        "title": "很抱歉，订单支付失败！请重新支付",
         "phone": "如有问题请联络客服+852 2165 3905",
         "orderNo": "订单编号：",
         "payAgain": "重新支付",
@@ -537,7 +567,9 @@
         "paytips": "电汇指引",
         "shoppingCard": "购物卡",
         "ultimatelyPay": "实付金额",
-        "NeedPay": "需付金額"
+        "NeedPay": "需付金額",
+        "pending":"待确认",
+	      "payfailed":"支付失败"
       }
     },
     "custom-made": {
@@ -667,7 +699,10 @@
         "noHotRecommend": "暂无热门搜索推荐",
         "history": "搜索历史",
         "noResult": "暂无搜索记录",
-        "cleanHistory": "清空搜索记录"
+        "cleanHistory": "清空搜索记录",
+        "rings":"戒指",
+        "necklaces":"项链",
+        "bracelets":"手链"
       },
       "result": {
         "back": "返回",
@@ -822,7 +857,10 @@
         "privacyPolicy": "私隐政策",
         "termsAndConditions": "条款及细则",
         "onlineStore": "品质优越钻石网上店",
-        "handicraftExpert": "首饰专家"
+        "handicraftExpert": "首饰专家",
+        "copyrightRight": "© 2019 BDD Co. All Rights Reserved.",
+        "copyrightRight1": "粤ICP备",
+        "copyrightRight2": "号-1/Copyright©2018-2020  BDD Co.官网   All Rights Reserved."
       },
       "leftMenu": {
         "search": "搜索",
@@ -895,6 +933,8 @@
         "orderNum": "订单编号",
         "orderNumber": "订单编号",
         "orderCount": "订单总额",
+        "ultimatelyPay": "实付金额",
+        "NeedPay": "需付金额",
         "cancelOrder": "取消订单",
         "toPay": "去付款",
         "toPayWait": "付款中",
@@ -923,7 +963,10 @@
         "canceled": "已取消订单",
         "paytips": "电汇指引",
         "text": "您的订单在23小时59分钟内未支付将被取消, 请尽快完成支付。",
-        "tips": "确认离开吗?"
+        "tips": "确认离开吗?",
+        "pending":"待确认",
+        "payfailed":"支付失败",
+        "lookOrder":"查看订单"
       },
       "progressBar": {
         "price": "价格",
@@ -1030,6 +1073,7 @@
       "getMore4c": "了解4C",
       "diamondWight": "钻重",
       "carat": "克拉",
+      "inlay":"镶口",
       "caratDiamond": "克拉钻石",
       "remember": "请记住，随着克拉重量的增长，钻石价格将呈指数增长因为克拉越大，钻石越罕见。",
       "color": "颜色",

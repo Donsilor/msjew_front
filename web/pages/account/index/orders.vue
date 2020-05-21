@@ -39,8 +39,11 @@
             <p>{{ $t(`${lang}.orderNumber`) }}：{{ o.orderNO }}</p>
             <p>
               {{ $t(`${lang}.orderStatus`) }}：
-              <span :style="{ color: getStatusColor(o.orderStatus) }">{{
-                getStatusText(o.orderStatus)
+              <span v-if="o.wireTransferStatus == null" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getStatusText(o.orderStatus)
+              }}</span>
+              <span v-else :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getTransferStatus(o.wireTransferStatus)
               }}</span>
             </p>
           </div>
@@ -80,8 +83,8 @@
             </nuxt-link>
             <a
               ><button
-                @click="
-                  cid = o.id
+                v-show="o.wireTransferStatus == null"
+                @click="cid = o.id
                   cancelOrderStatus = true
                 "
               >
@@ -89,7 +92,11 @@
               </button></a
             >
             <nuxt-link :to="goToPay(o.id, o.coinCode, o.payAmount, o.paymentType)"
+<<<<<<< HEAD
               ><div v-if="o.payChannel !== 1" class="btn-a">
+=======
+              ><div v-if="o.payChannel !== 1 && o.wireTransferStatus == null" class="btn-a">
+>>>>>>> origin/product
               {{ $t(`${lang}.toPay`) }}
               </div>
             </nuxt-link>
@@ -100,6 +107,10 @@
             >
               {{ $t(`${lang}.wireTransferGuide`) }}
             </div>
+            <span
+              >{{ $t(`${lang}.NeedPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
@@ -113,6 +124,10 @@
               </button>
             </nuxt-link>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
             >
@@ -124,6 +139,10 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
+            <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
@@ -152,8 +171,16 @@
               {{ $t(`${lang}.confirmReceipt`) }}
             </div>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
+<<<<<<< HEAD
               }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
+=======
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+>>>>>>> origin/product
             >
           </div>
 
@@ -165,8 +192,16 @@
               </button>
             </nuxt-link>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
+<<<<<<< HEAD
               }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
+=======
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+>>>>>>> origin/product
             >
           </div>
 
@@ -181,8 +216,16 @@
               {{ $t(`${lang}.toEvaluate`) }}
             </div>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
+<<<<<<< HEAD
               }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
+=======
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+>>>>>>> origin/product
             >
           </div>
 
@@ -197,8 +240,16 @@
             <!--              {{ $t(`${lang}.checkEvaluate`) }}-->
             <!--            </button>-->
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
+<<<<<<< HEAD
               }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
+=======
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+>>>>>>> origin/product
             >
           </div>
 
@@ -210,10 +261,18 @@
               </button>
             </nuxt-link>
             <span
+              >{{ $t(`${lang}.ultimatelyPay`)
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+            >
+            <span
               >{{ $t(`${lang}.orderPrice`)
+<<<<<<< HEAD
               }}<b style="color: #333;"
                 >{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b
               ></span
+=======
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+>>>>>>> origin/product
             >
           </div>
         </div>
@@ -315,6 +374,7 @@ export default {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
+          console.log("订单0",res.data)
           if(res.code != 200){
             return
           }
@@ -462,17 +522,25 @@ export default {
       //   this.$t(`${lang}.hadReturn`),
       //   this.$t(`${lang}.cancelTransaction`)
       // ][status]
-
       var status_value =  {
-          0 : this.$t(`${lang}.cancelTransaction`),
-          10: this.$t(`${lang}.hadNotPay`),
-          20: this.$t(`${lang}.waitingSend`),
-          30: this.$t(`${lang}.waitingSend`),
-          40: this.$t(`${lang}.hadSend`),
-          50: this.$t(`${lang}.hadFinish`),
-        };
-        // console.log("bbbbb",status_value[status])
+        0 : this.$t(`${lang}.cancelTransaction`),
+        10: this.$t(`${lang}.hadNotPay`),
+        20: this.$t(`${lang}.waitingSend`),
+        30: this.$t(`${lang}.waitingSend`),
+        40: this.$t(`${lang}.hadSend`),
+        50: this.$t(`${lang}.hadFinish`),
+      };
+      
+      // console.log("bbbbb",status_value[status])
       return status_value[status];
+    },
+    getTransferStatus(transferStatus){
+      var transferStatus_value = {
+        0 : this.$t(`${lang}.pending`),
+        1 : this.$t(`${lang}.hadPay`),
+        10: this.$t(`${lang}.PayFailed`),
+      };
+      return transferStatus_value[transferStatus];
     },
     cancelOrder() {
       const data = this.$helpers.transformRequest(
@@ -687,7 +755,7 @@ div {
           p:nth-child(3) {
             float: right;
             span {
-              color: #f29b87;
+              color: #f29b87 !important;
             }
           }
         }
@@ -787,7 +855,7 @@ div {
             font-size: 14px;
             line-height: 38px;
             color: #333333;
-            margin-right: 50px;
+            margin-right: 34px;
             b {
               color: #f29b87;
               font-size: 20px;

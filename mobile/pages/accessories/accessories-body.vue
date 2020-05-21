@@ -80,6 +80,15 @@
     <!--      &lt;!&ndash;      </div>&ndash;&gt;-->
     <!--    </div>-->
 
+    <div class="select-line" v-if="goodInfo.carats">
+      <span>{{ lang.carat }}</span>
+      <span @click="showSwiperTap1">
+        {{ chooseCarats }}
+        <i class="iconfont iconyou" />
+      </span>
+    </div>
+    <div class="bd-b" v-if="goodInfo.carats"></div>
+
     <div class="select-line">
       <span>{{ lang.chooseColor }}</span>
       <span @click="showChooseEject(conditions[0])">
@@ -224,6 +233,11 @@
       </template>
     </div> -->
     <footer-bar></footer-bar>
+    <swiper-tap
+      ref="caratsSuitability"
+      :list="goodInfo.carats"
+      @clear="getCarats"
+    ></swiper-tap>
     <swiper-tap
       ref="suitability"
       :list="goodInfo.sizesConfig"

@@ -22,7 +22,7 @@
 
 <script>
 import Layout from '@/pageComponents/education/layout.vue'
-const lang = 'education.ring.weddingRing'
+const lang = 'education.rings.weddingRing'
 export default {
   components: {
     Layout

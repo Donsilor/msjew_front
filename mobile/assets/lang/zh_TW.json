@@ -197,7 +197,8 @@
 		"NeedPay": "需付金額",
 		"submitSuccessfully": "訂單提交成功!",
 		"PleaseLogin": "請先登錄，才能使用購物卡！",
-		"msg10": "購物車不能為空，請重新添加商品"
+		"msg10": "購物車不能為空，請重新添加商品",
+    "msg11": "僅供大陸使用"
     },
     "pay": {
       "pay": "訂單支付",
@@ -205,21 +206,50 @@
       "goPay": "支付",
       "payType0": "PayPal",
       "type0Text": "使用PayPal安全支付",
-      "payType1": "信用卡",
-      "type1Text": "在網上以您的信用卡快速安全地付款",
+      "payType1": "銀聯",
+      "type1Text": "使用中國銀聯銀行卡，安全支付",
       "payType2": "中國銀聯",
       "type2Text": "使用中國銀聯銀行卡安全支付",
       "payType3": "支付寶",
-      "type3Text": "使用支付寶安全支付",
+      "type3Text": "網上付款、方便、快捷",
       "payType4": "微信",
       "type4Text": "網上付款、方便、快捷",
       "payType5": "電匯",
-      "type5Text": "以電匯方式付款將享有1.5%折扣優惠",
+      "type5Text": "使用銀行轉賬安全支付",
       "type5Text2": "注意，電子支票並非電匯",
-      "paytip":"由於Paydallor不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！"
+      "payType6": "Visa/MasterCard",
+      "type6Text": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
+      "paytip1":"由於支付寶暫不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！",
+      "paytip2":"由於微信暫不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！",
+      "paytip3":"由於信用卡暫不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！",
+      "msg11": "僅供大陸使用",
+      "paytip":"由於Paydallor不支持“美元”進行結算，請切換其他貨幣完成本次訂單，謝謝！",
+      "support": "暫僅支持：大陸版",
+      "pleaseSelectAccount":"選擇支付電匯賬戶",
+      "paidAmount":"需支付金額:",
+      "Account":"賬戶:",
+      "AccountNumber":"戶口號碼:",
+      "AccountName":"戶口名稱:",
+      "UploadPayVoucher":"上傳支付憑證:",
+      "uploadImage":"上傳圖片",
+      "Note1":"請確保圖片上清晰顯示轉賬日期和銀碼以便核實款項",
+      "PayTransactionNumber":"支付交易號",
+      "Optional":"(可選填)",
+      "CancelPayment":"取消付款",
+      "PaymentCompleted":"已完成付款",
+      "Note2":"* 注：支付完成後請選擇支付的銀行賬戶，請上傳憑證",
+      "transferSuccessful":"訂單已經提交，運營人員會盡快處理，請及時關注訂單狀態！",
+      "back": "返回",
+      "selectAccount":"請先選擇支付的銀行賬戶！",
+      "selectVoucher":"請上傳支付憑證！",
+      "imgFomat":"上傳圖片格式不正確，請重新上傳!",
+      "imgSize":"圖片過大，請重新上傳！",
+      "bankAddress":"銀行地址:",
+      "SwiftCode":"SWIFT CODE:",
+      "uploadPhotos":"上傳圖片"
     },
     "paySuccess": {
-      "PayPending1":"訂單已經提交，系統正在處理中,請稍等。",
+      "PayPending1":"訂單已提交，系統處理中…請稍等.",
       "PayPending2":"您可以先關閉此頁面，稍後我們將以郵件/短信方式通知您！",
       "handing":"訂單處理中.....",
       "title": "訂單支付成功",
@@ -270,7 +300,7 @@
       "coustom": "定製"
     },
     "payFailed": {
-      "title": "很抱歉 , 訂單未支付成功",
+      "title": "很抱歉，訂單支付失敗！請重新支付",
       "phone": "如有問題請聯絡客服+852 2165 3905",
       "orderNo": "訂單編號：",
       "payAgain": "重新支付",
@@ -533,10 +563,12 @@
       "received": "已確認收貨",
       "confirmCancellationOrder": "確認取消订单",
       "canceled": "已取消订单",
-	  "paytips": "電匯指引",
-	  "shoppingCard": "購物卡",
-	  "ultimatelyPay": "實付金額",
-	  "NeedPay": "需付金額"
+      "paytips": "電匯指引",
+      "shoppingCard": "購物卡",
+      "ultimatelyPay": "實付金額",
+      "NeedPay": "需付金額",
+      "pending":"待確認",
+      "payfailed":"支付失敗"
     }
   },
   "custom-made": {
@@ -666,7 +698,10 @@
       "noHotRecommend": "暫無熱門搜索推薦",
       "history": "搜索歷史",
       "noResult": "暫無搜索記錄",
-      "cleanHistory": "清空搜索記錄"
+      "cleanHistory": "清空搜索記錄",
+      "rings":"戒指",
+      "necklaces":"項鍊",
+      "bracelets":"手鍊"
     },
     "result": {
       "back": "返回",
@@ -821,7 +856,10 @@
       "privacyPolicy": "私隱政策",
       "termsAndConditions": "條款及細則",
       "onlineStore": "品質優越鑽石網上店",
-      "handicraftExpert": "首飾專家"
+      "handicraftExpert": "首飾專家",
+      "copyrightRight": "© 2019 BDD Co. All Rights Reserved.",
+      "copyrightRight1": "粵ICP備",
+      "copyrightRight2": "號-1/Copyright©2018-2020  BDD Co.官网   All Rights Reserved."
     },
     "leftMenu": {
       "search": "搜索",
@@ -894,6 +932,8 @@
       "orderNum": "訂單編號",
       "orderNumber": "訂單編號",
       "orderCount": "訂單總額",
+      "ultimatelyPay": "實付金額",
+      "NeedPay": "需付金額",
       "cancelOrder": "取消訂單",
       "toPay": "去付款",
       "confirmReceipt": "確認收貨",
@@ -921,7 +961,11 @@
       "canceled": "已取消订单",
       "paytips": "電匯指引",
       "text": "您的訂單在23小時59分鐘內未支付將被取消, 請儘快完成支付。",
-      "tips": "確認離開嗎?"
+      "tips": "確認離開嗎?",
+      "pending":"待確認",
+      "payfailed":"支付失敗",
+      "lookOrder":"查看訂單"
+      
     },
     "progressBar": {
       "price": "價格",
@@ -1028,6 +1072,7 @@
     "getMore4c": "了解4C",
     "diamondWight": "鑽重",
     "carat": "克拉",
+    "inlay":"鑲口",
     "caratDiamond": "克拉鑽石",
     "remember": "請記住，隨著克拉重量的增長，鑽石價格將呈指數增長因為克拉越大，鑽石越罕見。",
     "color": "颜色",
@@ -1051,7 +1096,7 @@
       "擺件",
       "挂件",
       "其它"
-      
+
     ],
     "style": "款式",
     "theme": "特別禮物",

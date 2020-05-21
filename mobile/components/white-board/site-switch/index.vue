@@ -8,7 +8,10 @@
           <div class="line-icon">
             <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           </div>
-          <div class="line-text">
+          <div v-if="this.$store.state.platform == 31" class="line-text">
+            <input :value="languages" type="text" disabled/>
+          </div>
+          <div v-else class="line-text">
             <!-- <span>{{ languageText }}</span> -->
             <input :value="language" type="text" />
             <select name="" id="" v-model="language">
@@ -17,7 +20,7 @@
               </option>
             </select>
           </div>
-          <div class="select-icon">
+          <div class="select-icon" v-show="this.$store.state.platform !== 31">
             <i class="iconfont iconkuozhan"></i>
           </div>
         </div>
@@ -70,7 +73,8 @@ export default {
       coin: 0,
       languageOptions: this.$bddDefinition.languageOptions,
       coinOptions: this.$bddDefinition.coinOptions,
-      langs:''
+      langs:'',
+      languages:'English'
     }
   },
   computed: {
