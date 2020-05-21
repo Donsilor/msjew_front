@@ -187,7 +187,6 @@ export default {
       }
 
       //console.log(`请求页码为：${page}`)
-
       _this
         .$axios({
           method: _this.listMethod,
@@ -202,16 +201,16 @@ export default {
             _this.listData[page] = JSON.parse(JSON.stringify(res.data))
           }
           // _this.listData[page] = JSON.parse(JSON.stringify(res.data || []))
-          delete res.data
+          // delete res.data
           _this.setPageInfo(res)
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
           console.error(err)
           if (err instanceof Error) {
-            console.log('这是一个错误')
+            // console.log('这是一个错误')
           } else {
-            console.log('这是一个错误数据')
+            // console.log('这是一个错误数据')
           }
           _this.removeRequesting(reqMark)
         })

@@ -121,7 +121,6 @@ export default {
           2
         )
       } else {
-        console.log(1111)
       }
       this.isBoard = !this.isBoard
     },

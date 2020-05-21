@@ -13,7 +13,15 @@
         <div class="mod" @click="toDetail(order.id)">
           <ul>
             <li v-for="(detail, n) in order.details" :key="n">
-              <img :src="detail.image" />
+              <div class="left-box">
+                <img :src="detail.image" />
+
+                <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
+                  <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
+                  <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
+                <!-- </div> -->
+              </div>
+
               <div v-if="detail.groupType !== 0" class="group-type">
                 {{ detail.groupTypeText }}
               </div>
@@ -472,10 +480,17 @@ export default {
             border-bottom: 1px solid #f5f5f5; /*no*/
             padding-bottom: 20px;
             margin-bottom: 20px;
-            img {
+
+            .left-box{
               float: left;
               width: 75px;
               height: 75px;
+              position: relative;
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
             }
             .group-type {
               position: absolute;

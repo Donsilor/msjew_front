@@ -212,7 +212,7 @@
               >-{{ coin }}
               {{this.couponCodeR.couponPrice}}</span
             >
-            <span v-if="!couponCodeR.couponPrice" @click="ifShowCoupon = true">领取优惠券</span>
+            <span v-if="!couponCodeR.couponPrice" @click="useCoupon">领取优惠券</span>
           </li>
 
           <!-- 购物卡 -->
@@ -603,13 +603,13 @@ export default {
         this.$toast.show(this.lang.toast1)
       }
     },
-    useCoupon() {
-      if (this.isLogin) {
-        this.getCouponAmount()
-      } else {
-        this.checkCount()
-      }
-    },
+    // useCoupon() {
+    //   if (this.isLogin) {
+    //     this.getCouponAmount()
+    //   } else {
+    //     this.checkCount()
+    //   }
+    // },
     // 查询匿名使用优惠卷时可以优惠的金额
     checkCount() {
       // const carts = []
@@ -923,25 +923,29 @@ export default {
           },2000)
         }
       } else {
-        // console.log("this.list",this.list)
         if(this.list.length){
           url = `/web/member/order-tourist/tax`
           const goodsCartList=[]
+          var coupon_discount = ''
           for (const i in this.list) {
+            if(this.list[i].coupon.discount){
+              coupon_discount = this.list[i].coupon.discount.coupon_id;
+            }
+
             const o = {
-              createTime: this.list[i].createTime,
-              goods_num: 1,
-              goodsDetailsId: this.list[i].goodsDetailsId,
               goods_id: this.list[i].goodsDetailsId,
-              group_id: this.list[i].groupId,
               goods_type: this.list[i].goodsStatus,
-              group_type:
-                this.list[i].groupType !== 0 ? this.list[i].groupType : null
+              goods_num: 1,
+              group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
+              group_id: this.list[i].groupId,
+              createTime: this.list[i].createTime,
+              coupon_id: coupon_discount
             }
             goodsCartList.push(o)
+            coupon_discount = ''
             // console.log("list........",o)
           }
-          data = {goodsCartList:goodsCartList}
+          data = {goodsCartList:goodsCartList,coupon_id: ''}
           // console.log("list........",data)
           this.$axios({
             method: 'post',
@@ -950,7 +954,7 @@ export default {
           })
 
           .then(res => {
-            // console.log("费用",res)
+            console.log("费用",res)
             this.canSubmit = true
             this.allFee = res
 
@@ -959,7 +963,7 @@ export default {
             }
 
             this.orderTotalAmount = res.order_amount;
-            this.ultimatelyPay = res.order_amount;
+            this.ultimatelyPay = res.pay_amount;
             this.currency = res.currency;
 
             this.planDays = this.allFee.planDays
@@ -1128,8 +1132,6 @@ export default {
           }
         })
           .then(res => {
-            console.log(1111,res)
-            return
             // console.log("总额",res)
             if(res.payStatus == 1){
               this.$toast.show(this.lang.submitSuccessfully);
@@ -1289,6 +1291,13 @@ export default {
       }
 
       this.getTex();
+    },
+    useCoupon() {
+      if(this.isLogin){
+        ifShowCoupon = true
+      }else{
+        this.$toast.show('登陆后才能领取优惠券');
+      }
     }
 
   },

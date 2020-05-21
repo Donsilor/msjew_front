@@ -64,7 +64,7 @@
       }
     },
     mounted() {
-      // this.language = this.getCookie('language')
+      this.language = this.getCookie('language')
 
       if(this.moneyInfo){
         var i=0;

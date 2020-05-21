@@ -8,7 +8,7 @@
           {{ statusText(info.orderStatus) }}
         </div>
         <div v-else class="status-title">
-          {{ getTransferStatus(info.wireTransferStatus) }} 
+          {{ getTransferStatus(info.wireTransferStatus) }}
         </div>
         <div class="service">
           <ul>

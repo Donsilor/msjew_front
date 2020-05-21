@@ -542,7 +542,6 @@ export default {
           }
         })
         .then(res => {
-          // console.log(11111,res);
           if(res.length == 0){
             _this.cityList = []
             this.cityId = 0
@@ -730,7 +729,6 @@ export default {
           if ((val === 7 || val === 0) && !RegMobile.test(this.phone) ) {
             this.phoneText = this.lang.phoneText2
             this.phoneTrue = true
-          console.log(11111)
             return
           }
         }

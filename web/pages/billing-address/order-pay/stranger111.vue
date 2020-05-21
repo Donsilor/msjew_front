@@ -382,6 +382,24 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
+              <!-- vise -->
+              <div
+                :class="{ 'pay-choose': payWay == 61 }"
+                class="pay-block"
+                @click="Way(61)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/visa.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
+                <div v-show="payWay === 61" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 61" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
+
               <!-- 支付宝 -->
               <div
                 :class="{ 'pay-choose': payWay == 82 }"
@@ -433,9 +451,10 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
-              <!-- 信用卡 -->
+
+               <!-- 信用卡 -->
               <div
                 :class="{ 'pay-choose': payWay == 81 }"
                 class="pay-block"
@@ -454,6 +473,24 @@
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
 
+              <!-- 电汇 -->
+              <div
+                :class="{ 'pay-choose': payWay == 84 }"
+                class="pay-block"
+                @click="Way(84)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/epay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
+                <div v-show="payWay == 84" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 84" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+                 <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
+              </div>
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
@@ -565,7 +602,7 @@
       </div>
 
       <!--    订单信息模块-->
-      <div class="order-info">
+      <div class="order-info" v-loading="goingPay">
         <div class="left-info">
           <div class="new-address-title">
             <div class="na-line" />
@@ -591,7 +628,7 @@
             <div class="send-left">
               <div>{{ $t(`${lang}.sendTime`) }}</div>
               <div>
-                <router-link to="/deliveryPolicy">{{
+                <router-link to="/policies/shipping">{{
                   $t(`${lang}.checkDeliveryPolicy`)
                 }}</router-link>
               </div>
@@ -920,7 +957,7 @@
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-                  <a href="/free-shipping" target="_blank"><span>?</span></a>
+                  <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -932,7 +969,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-                  <a href="/international" target="_blank"
+                  <a href="/policies/international" target="_blank"
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -1384,6 +1421,23 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
+              <!-- vise -->
+              <div
+                :class="{ 'pay-choose': payWay == 61 }"
+                class="pay-block"
+                @click="Way(61)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/visa.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
+                <div v-show="payWay === 61" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 61" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+              </div>
               <!-- 支付宝 -->
               <div
                 :class="{ 'pay-choose': payWay == 82 }"
@@ -1401,6 +1455,7 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+
               </div>
               <!-- <div
                 :class="{ 'pay-choose': payWay === 8 }"
@@ -1435,7 +1490,9 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay needlogin" :class="language == 'en_US' ? 'en' : ''
+        "><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
+
               </div>
               <!-- 信用卡 -->
               <div
@@ -1455,7 +1512,25 @@
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
-
+              
+              <!-- 电汇 -->
+              <div
+                :class="{ 'pay-choose': payWay == 84 }"
+                class="pay-block"
+                @click="Way(84)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/epay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
+                <div v-show="payWay == 84" class="pay-price">
+                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 84" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+                <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
+              </div>
               <!-- 支付宝 -->
               <!-- <div
                 :class="{ 'pay-choose': payWay == 2 }"
@@ -1567,7 +1642,7 @@
       </div>
 
       <!--    订单信息模块-->
-      <div class="order-info">
+      <div class="order-info" v-loading="goingPay">
         <div class="left-info">
           <div class="new-address-title">
             <div class="na-line" />
@@ -1593,7 +1668,7 @@
             <div class="send-left">
               <div>{{ $t(`${lang}.sendTime`) }}</div>
               <div>
-                <router-link to="/deliveryPolicy">{{
+                <router-link to="/policies/shipping">{{
                   $t(`${lang}.checkDeliveryPolicy`)
                 }}</router-link>
               </div>
@@ -1922,7 +1997,7 @@
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-                  <a href="/free-shipping" target="_blank"><span>?</span></a>
+                  <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -1934,7 +2009,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-                  <a href="/international" target="_blank"
+                  <a href="/policies/international" target="_blank"
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -2147,6 +2222,7 @@ export default {
       }
       return result
     },
+<<<<<<< HEAD
     objectIfEmpty(){
       return function(e) {
         if(typeof(e) == 'object'){
@@ -2157,6 +2233,10 @@ export default {
           return false
         }
       }
+=======
+    ttPrice() {
+      // return this.goodsPrice * 0.985
+>>>>>>> origin/product
     }
   },
   created() {
@@ -2316,7 +2396,7 @@ export default {
     Way(ways){
       this.payWay=ways
       console.log("payway",ways)
-      if(ways==6){
+      if(ways==6||ways==61){
         this.show=false
       }else{
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
@@ -2414,15 +2494,15 @@ export default {
     getTex() {
       this.canSubmit = false;
       let json=[];
-      let arr = [];
+      let coupon_discount = '';
       for (const i in this.good) {
         let group = this.good[i].data
         let item = group.map(item => {
-          if(item.coupon.hasOwnProperty('discount')){
-            arr[i] = item.coupon.discount.coupon_id
-          }else{
-            arr[i] = ''
-          }
+          // if(item.coupon.hasOwnProperty('discount')){
+          //   arr[i] = item.coupon.discount.coupon_id
+          // }else{
+          //   arr[i] = ''
+          // }
           return {
             createTime: item.createTime || new Date().getTime(),
             goods_num: item.goodsCount,
@@ -2430,8 +2510,8 @@ export default {
             goods_id: item.goodsDetailsId,
             group_id: item.groupId || null,
             group_type:item.groupType,
-            goods_type: item.goodsType,
-            coupon_id: arr[i]
+            goods_type: item.goodsType
+            // coupon_id: arr[i]
           }
         })
 
@@ -2473,6 +2553,19 @@ export default {
       }
     },
     createOrder() {
+      let pay = 0
+      if(this.payWay==6){
+        pay = 6
+      }else if(this.payWay==82){
+        pay = 82
+      }else if(this.payWay==83){
+        pay = 83
+      }else if(this.payWay==81){
+        pay = 81
+      }else if(this.payWay==61){
+        pay = 61
+      }
+    // console.log("方式",pay)
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -2486,7 +2579,7 @@ export default {
         }, 22)
         return
       }
-      if(this.payWay!==6){
+      if(this.payWay==81 || this.payWay==82 ||this.payWay==83){
         this.$errorMessage(this.$t(`${lang}.firstLogin`))
         const topB = document.getElementsByClassName('layout-box')[0];
         const that = this
@@ -2527,10 +2620,11 @@ export default {
 
         json = json.concat(item)
       }
-      console.log(this.iconShow)
+      // console.log(this.iconShow)
       if(this.iconShow ){
         invoice = this.invoice
       }
+      this.goingPay = true
       this.$axios({
         method: 'post',
         url: '/web/member/order-tourist/create',
@@ -2540,6 +2634,7 @@ export default {
           invoice:invoice,
           tradeType:'pc',
           coinType:this.$store.state.coin,
+          payType: pay,
           returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
         }
       })
@@ -2569,6 +2664,7 @@ export default {
           // })
         })
         .catch(err => {
+          this.goingPay = false
           if (!err.response) {
             this.$message.error(err.message)
           } else {
@@ -4374,7 +4470,8 @@ div {
           color: #f29b87;
           position: absolute;
           right: 80px;
-          top: 50px;
+          // top: 50px;
+          top: 33px;
           line-height: 24px;
         }
         .choose-tick {
@@ -4835,7 +4932,7 @@ div {
 .hint_pay{
   position: absolute;
   right: 80px;
-  top: 84px;
+  top: 94px;
   font-family: twCenMt;
   font-size: 14px;
   color: #aaa;
@@ -4846,4 +4943,18 @@ div {
   font-size: 18px;
   opacity: 0.6;
 }
+
+.needlogin{
+  position: absolute;
+  right: 175px;
+  top: 94px;
+  font-family: twCenMt;
+  font-size: 14px;
+  color: #aaa;
+  line-height: 24px;
+}
+// .hint_pay.en{
+//   top: 94px;
+// }
+
 </style>
