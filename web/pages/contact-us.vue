@@ -13,7 +13,10 @@
             </div>
             <div class="dd-content">
               <h2 class="dd-title">{{ $t(`${lang}.callToUs`) }}</h2>
-              <p class="dd-desc">
+              <p class="dd-desc" v-if="this.$store.state.platform === 20">
+                {{ $t(`${lang}.welcomeYourTel`) }}：0755 25169121
+              </p>
+              <p class="dd-desc" v-else>
                 {{ $t(`${lang}.welcomeYourTel`) }}：（852）2165 3905
               </p>
               <p class="dd-desc" v-if="this.$store.state.platform === 20">
@@ -24,6 +27,7 @@
               </p>
             </div>
           </dd>
+          <div style="height:80px" v-show="this.$store.state.platform === 20"></div>
           <dd class="item">
             <div class="dd-icon">
               <i class="iconfont iconyouxiang" />

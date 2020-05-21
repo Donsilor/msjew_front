@@ -840,7 +840,7 @@
     "footerBar": {
       "custoService": "客戶服務",
       "custoServiceTime": "星期一至五上午9時至晚上6時 (香港公眾假期除外)",
-      "custoServiceTimeCn": "星期一至五上午9時至晚上6時",
+      "custoServiceTimeCn": "星期一至五上午 9:00-18:00",
       "callUs": "致電我們",
       "emailUs": "電郵我們",
       "aboutBDD": "關於BDD",

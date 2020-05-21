@@ -1025,7 +1025,7 @@ export default {
 
 /*联系我们*/
 .contact-us {
-  padding: 18px 15px 30px 15px;
+  padding: 38px 15px 30px 15px;
   box-sizing: border-box;
 
   .title {
