@@ -40,6 +40,16 @@
       <!--        <i class="iconfont iconicon-zuanshi" />-->
       <!--      </div>-->
     </div>
+    <div class="select-line" v-if="goodInfo.carats">
+      <span>
+        <span>{{ lang.inlay }}</span>
+      </span>
+      <span @click="showSwiperTap1">
+        {{ chooseCarat }}
+        <i class="iconfont iconyou" />
+      </span>
+    </div>
+    <div class="bd-b" v-if="goodInfo.carats"></div>
     <div class="select-line">
       <span>{{ lang.chooseColor }}</span>
       <span @click="showChooseEject(conditions[0])">
@@ -208,6 +218,13 @@
         </div>
       </template>
     </div> -->
+    <swiper-tap
+      ref="caratsSuitability"
+      :list="goodInfo.carats"
+       :choose-line="caratLine"
+      @clear="getCarats"
+    ></swiper-tap>
+
     <swiper-tap
       ref="suitability"
       :list="goodInfo.sizes"

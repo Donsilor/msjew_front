@@ -74,17 +74,17 @@ export default {
       const options = {
         params: { groupId: _this.$route.query.goodId }
       }
-      _this.$store
-        .dispatch('getGoodAvgLevel', options)
-        .then(data => {
-          // console.log(data)
-          _this.averageScores = data.hasOwnProperty('avgLevel')
-            ? data.avgLevel.toString()
-            : '5.0'
-        })
-        .catch(err => {
-          console.error(err)
-        })
+      // _this.$store
+      //   .dispatch('getGoodAvgLevel', options)
+      //   .then(data => {
+      //     // console.log(data)
+      //     _this.averageScores = data.hasOwnProperty('avgLevel')
+      //       ? data.avgLevel.toString()
+      //       : '5.0'
+      //   })
+      //   .catch(err => {
+      //     console.error(err)
+      //   })
     })
   },
   methods: {
