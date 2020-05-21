@@ -1,14 +1,14 @@
 <template>
   <div class="get-coupon">
     <div class="wrap">
-      <div class="title">{{ $t(`${lang}.useCoupon`) }}
+      <div class="title">使用优惠券
         <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
       </div>
 
       <div class="coupon-box">
         <!-- 优惠券列表 -->
         <div class="box-r">
-          <div class="list" v-for="(item, index) in couponList" :key="index">
+          <div v-if="1" class="list" v-for="(item, index) in couponList" :key="index">
             <div class="list-l">
               <div class="line-box">
                 <div class="point-box">
@@ -21,22 +21,19 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <div class="rmb">(￥{{item.money_cn}})</div>
-              <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
-              <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
+              <div class="rule">满￥{{item.at_least_cn}}使用</div>
               <div class="text">({{item.lineType}})</div>
-              <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
+              <div class="time">活动时间：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
             <div class="get" @click="chooseCoupon(index)">
               <span>{{item.ifChoose ? '已选用' : '立即选用'}}</span>
             </div>
-
           </div>
         </div>
 
-        <div class="finish" @click="closeCoupon(true)">{{ $t(`${lang}.accomplish`) }}</div>
+        <div class="finish" @click="closeCoupon(true)">完成</div>
       </div>
-
     </div>
 
   </div>
@@ -79,7 +76,6 @@
         for(var k=0; k<this.couponAlready.length; k++){
           if(j == this.couponAlready[k]){
             this.couponList[i] = this.couponAll[j];
-            this.couponList.ifUse = false;
             this.couponList.ifChoose = false;
 
             this.couponList[i].lineType = [];
@@ -115,16 +111,9 @@
               this.couponInfo.couponId = this.couponList[index].coupon_id;
             }
           })
-
-          if(this.couponInfo.couponId){
-            this.$emit('closeCoupon', this.couponInfo)
-          }else{
-            this.$emit('closeCoupon')
-          }
-
-        }else{
-            this.$emit('closeCoupon')
         }
+        
+        this.$emit('closeCoupon', this.couponInfo)
       },
       // 选择优惠券
       chooseCoupon(k) {
@@ -149,75 +138,76 @@
     background-color: rgba(0, 0, 0, 0.3);
 
     .wrap {
-      width: 1000px;
-      height: 800px;
+      width: 100%;
       background-color: #fff;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       box-sizing: border-box;
+      height: 100%;
+      overflow-y: auto;
 
       .title {
-        font-size: 22px;
+        font-size: 20px;
         text-align: center;
-        padding: 40px 0 30px;
+        padding: 20px 0;
         position: relative;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 20px;
 
         .iconfont {
           position: absolute;
           right: 20px;
-          top: 60%;
+          top: 50%;
           transform: translateY(-50%);
-          width: 24px;
-          height: 24px;
+          width: 20px;
+          height: 20px;
           border: 1px solid #999;
           text-align: center;
-          line-height: 24px;
+          line-height: 22px;
           border-radius: 50%;
           font-size: 10px;
           color: #999;
-          cursor: pointer;
         }
       }
 
       .coupon-box {
-        width: 900px;
-        height: 700px;
-        margin: 10px auto;
-        overflow-y: auto;
+        width: 100%;
+        padding: 0 5%;
+        box-sizing: border-box;
 
         .box-r {
-          width: 900px;
-          // min-height: 500px;
+          width: 100%;
+          min-height: 400px;
           display: flex;
-          // align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           flex-wrap: wrap;
 
           .list {
+            width: 100%;
             display: flex;
+            align-items: center;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.31), rgba(219, 209, 209, 0.31));
             box-shadow: 0 1px 0 #9C999C, 0 2px 0 #D6D5D6, 0 3px 0 #E3E1E3, 0 4px 0 #D6D5D6, 0 5px 0 #EDECED, 0 6px 0 #F9F9F9;
             border: 1px solid rgb(205, 173, 118);
             border-bottom: 0;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             flex-shrink: 0;
             flex-grow: 0;
-            height: 220px;
+            overflow: hidden;
+            box-sizing: border-box;
+            position: relative;
 
             .list-l {
               position: relative;
-              width: 270px;
+              width: 70%;
               color: #cdad75;
               border-radius: 5px;
               padding: 20px 0;
 
               .line-box {
-                width: 200px;
+                width: 70%;
                 height: 1px;
                 background-color: #A6937C;
-                margin: 10px auto 24px;
+                margin: 4px auto 6px;
                 position: relative;
 
                 .point-box {
@@ -225,16 +215,17 @@
                   top: 50%;
                   left: 50%;
                   transform: translate(-50%, -50%);
-                  width: 80px;
+                  width: 60px;
                   display: flex;
                   align-items: center;
                   justify-content: space-around;
                   background-color: #fff;
                   background-image: linear-gradient(to right, #fcfafb, #f9f7f8);
+                  padding: 0 6px;
 
                   i {
-                    width: 6px;
-                    height: 6px;
+                    width: 4px;
+                    height: 4px;
                     background-color: #A6937C;
                     border-radius: 50%;
                   }
@@ -246,15 +237,16 @@
                 width: 100%;
                 display: flex;
                 justify-content: center;
+                margin: 10px 0;
 
                 .price-icon {
-                  font-size: 27px;
+                  font-size: 18px;
                 }
 
                 .price-num {
-                  font-size: 56px;
+                  font-size: 26px;
                   color: #cdad75;
-                  margin: -9px 0 0 -4px;
+                  margin: 0px 0 0 0px;
                   padding-right: 10px;
                 }
               }
@@ -317,15 +309,13 @@
             }
 
             .get {
-              width: 140px;
-              height: 80px;
+              width: 30%;
+              height: 70px;
               border-left: 1px solid #f00;
-              line-height: 80px;
+              line-height: 70px;
               text-align: center;
-              margin: 62px auto;
               font-size: 16px;
               color: #f00;
-              cursor: pointer;
 
               span {
                 padding: 10px;
@@ -376,5 +366,22 @@
 
   .coupon-box::-webkit-scrollbar {
     display: none
+  }
+
+  .already{
+    position: absolute;
+    right: -16px;
+    top: 46%;
+    width: 80px;
+    height: 80px;
+    background: url(../../../static/subject/icon_07.png) no-repeat center;
+    background-size: 100% 100%;
+    font-size: 14px;
+    text-align: center;
+    color: #fff;
+    line-height: 80px;
+    box-sizing: border-box;
+    letter-spacing: 2px;
+    transform: translateY(-50%) rotate(-45deg);
   }
 </style>

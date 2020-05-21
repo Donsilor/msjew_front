@@ -48,7 +48,8 @@ export default {
         salePrice: 0,
         details: [],
         sizes: [],
-        totalStock: 0
+        totalStock: 0,
+        coupon: {}
       },
       starNum: 5,
       comments: {
@@ -119,6 +120,11 @@ export default {
         res.materials = mcArr
         // res.goodsDesc = res.goodsDesc.includes(`<script>`) ? '' : res.goodsDesc
         this.goodInfo = res
+        if(res.coupon){
+          for(var i in res.coupon){
+            this.goodInfo.coupon[i] = res.coupon[i];
+          }
+        }
         this.conditions[0].options = this.goodInfo.materials
         if (this.$route.query.isBack) {
           const melo = JSON.parse(

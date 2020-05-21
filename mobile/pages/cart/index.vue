@@ -19,12 +19,22 @@
               class="mod-item"
             >
 			<div @click="godetails(item, index)">
-              <img :src="imageStrToArray(item.goodsImages)[0]" />
+              <div class="left-box" :class="{on: item.coupon.discount || item.coupon.money}">
+                <img :src="imageStrToArray(item.goodsImages)[0]" />
+
+                <div class="activity-sign" v-if="item.coupon.discount || item.coupon.money">
+                  <div class="triangle" v-if="item.coupon.discount">{{discountConversion(item.coupon.discount.discount)}}折</div>
+                  <div class="triangle" v-if="item.coupon.money">优惠券</div>
+                </div>
+              </div>
               <span v-if="!getStatus(item, index)" class="failed">
                 {{ lang.failed }}
               </span>
               <div class="right">
                 <h4 class="ow-h2">
+                  <i class="discount-icon" v-if="item.coupon.discount">{{discountConversion(item.coupon.discount.discount)}}折</i>
+                  <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
+
                   {{ item.goodsName }}
                 </h4>
                 <p>SKU：{{ item.sku }}</p>
@@ -33,7 +43,14 @@
                     getconfig(item.config, item.simpleGoodsEntity.specs)
                   }}
                 </p>
-                <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+
+                <b v-if="!item.coupon.discount">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+
+                <div class="discount-price" v-else>
+                  <div class="old-price">原   价 {{ coin }} {{ formatNumber(item.salePrice) }}</div>
+                  <b>折后价 {{ coin }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                </div>
+
                 <div v-if="item.groupType === 1" class="btn-type">
                   {{ lang.ring }}
                 </div>
@@ -42,6 +59,9 @@
                 </div>
                 <div v-if="item.groupType !== 0 && index !== list.length - 1">
                   <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                    <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{discountConversion(list[index + 1].coupon.discount.discount)}}折</i>
+                    <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
+
                     {{ list[index + 1].goodsName }}
                   </h4>
                   <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
@@ -55,7 +75,13 @@
                       )
                     }}
                   </p>
-                  <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+                  <b v-if="!list[index + 1].coupon.discount">{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+                  <div class="discount-price" v-else>
+                    <div class="old-price">原   价 {{ coin }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                    <b>折后价 {{ coin }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                  </div>
                 </div>
               </div>
 		  </div>
@@ -147,7 +173,7 @@ export default {
       sumNum: 0,
       lang: this.LANGUAGE.cart.index,
       num: 0,
-      timer: null 
+      timer: null
     }
   },
   created() {
@@ -283,7 +309,11 @@ export default {
         // 价格汇总
         if (this.list[i].isSelect) {
           // console.log(i, 'iiii')
-          newPrice = newPrice + parseFloat(this.list[i].salePrice)
+          if(this.list[i].coupon.discount){
+            newPrice = newPrice + parseFloat(this.list[i].coupon.discount.price)
+          }else{
+            newPrice = newPrice + parseFloat(this.list[i].salePrice)
+          }
           // console.log("price",newPrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
@@ -357,7 +387,7 @@ export default {
       if (list2 && list2.length > 0) {
         list2.map((item, index) => {
           if (item.configId === 196) {
-            console.log(list2, '9999', item)
+            // console.log(list2, '9999', item)
             text = text + ' /  ' + item.configAttrIVal
           }
         })
@@ -508,7 +538,9 @@ export default {
             goodsStatus:
               item.groupType === 1
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus
-                : item.simpleGoodsEntity.goodsStatus
+                : item.simpleGoodsEntity.goodsStatus,
+            coupon:
+              item.coupon ? item.coupon : {}
           }
           this.list.push(o)
         })
@@ -675,10 +707,31 @@ export default {
             padding: 34px 14px 20px;
             margin-top: 8px;
           }
-          img {
+          .left-box{
+            position: relative;
             float: left;
             width: 125px;
             height: 125px;
+
+            .activity-sign{
+              width: 60px;
+              height: 60px;
+              bottom: -6px;
+              right: -5px;
+
+              .triangle{
+                padding-top: 34px;
+                padding-left: 4px;
+                font-size: 13px;
+              }
+            }
+          }
+          .left-box.on{
+            border: 1px solid red;
+          }
+          img {
+            width: 100%;
+            height: 100%;
           }
           .failed {
             position: absolute;
@@ -726,7 +779,7 @@ export default {
             }
             .btn-type {
               position: absolute;
-              top: 174px;
+              top: 182px;
               left: 34px;
               width: 80px;
               height: 26px;
@@ -801,7 +854,7 @@ export default {
             margin-top: 15px;
             font-size: 14px;
             .similar {
-              width: 125px; 
+              width: 125px;
             }
             a{
               text-decoration: underline;
@@ -883,6 +936,19 @@ export default {
         color: rgba(255, 255, 255, 1);
       }
     }
+  }
+
+  .old-price{
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .discount-price{
+    padding: 0;
+  }
+
+  i{
+    font-style: normal;
   }
 }
 </style>

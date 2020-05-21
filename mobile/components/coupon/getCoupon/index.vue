@@ -87,10 +87,12 @@
 
       if(this.couponList.length != 0){
         // 已领取的优惠券
+        this.$nuxt.$loading.start()
         this.$axios.get('web/member/coupon/index', {
           })
           .then(res => {
-            var couponAllList = res.data.data;
+            this.$nuxt.$loading.finish()
+            var couponAllList = res.data;
 
             // 判断可用优惠券中哪些是已领取的优惠券
             for(var i=0; i<this.couponList.length; i++){
@@ -105,21 +107,22 @@
           })
           .catch(err => {
             this.loadFinish = true;
+            this.$nuxt.$loading.finish()
             console.log(err)
           })
       }
     },
     methods: {
       // 获取cookie
-      // getCookie(cname) {
-      //   const name = cname + '='
-      //   const ca = document.cookie.split(';')
-      //   for (let i = 0; i < ca.length; i++) {
-      //     const c = ca[i].trim()
-      //     if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      //   }
-      //   return ''
-      // },
+      getCookie(cname) {
+        const name = cname + '='
+        const ca = document.cookie.split(';')
+        for (let i = 0; i < ca.length; i++) {
+          const c = ca[i].trim()
+          if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+        }
+        return ''
+      },
       // 关闭弹窗,获取优惠券
       closeCoupon(k) {
         if(k){
@@ -168,7 +171,6 @@
 
     .wrap {
       width: 100%;
-      padding: 0 5%;
       background-color: #fff;
       box-sizing: border-box;
       height: 100%;
@@ -179,6 +181,8 @@
         text-align: center;
         padding: 20px 0;
         position: relative;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 20px;
 
         .iconfont {
           position: absolute;
@@ -198,16 +202,16 @@
 
       .coupon-box {
         width: 100%;
-        height: 100%;
+        padding: 0 5%;
+        box-sizing: border-box;
 
         .box-r {
           width: 100%;
-          min-height: 500px;
+          min-height: 400px;
           display: flex;
-          // align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           flex-wrap: wrap;
-          align-items: center;
 
           .list {
             width: 100%;
@@ -399,7 +403,7 @@
   .already{
     position: absolute;
     right: -16px;
-    top: 40%;
+    top: 46%;
     width: 80px;
     height: 80px;
     background: url(../../../static/subject/icon_07.png) no-repeat center;

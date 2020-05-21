@@ -10,16 +10,35 @@
               "
               class="mod-item"
             >
-              <img :src="imageStrToArray(item.goodsImages)[0]" />
+              <div class="img-box" :class="{on: item.coupon.discount || item.coupon.money}">
+                <img :src="imageStrToArray(item.goodsImages)[0]" />
+
+                <div class="activity-sign" v-if="item.coupon.discount || item.coupon.money">
+                  <div class="triangle" v-if="item.coupon.discount">{{discountConversion(item.coupon.discount.discount)}}折</div>
+                  <div class="triangle" v-if="item.coupon.money">优惠券</div>
+                </div>
+              </div>
               <div class="right">
-                <h4 class="ow-h2">{{ item.goodsName }}</h4>
+                <h4 class="ow-h2">
+                  <i class="discount-icon" v-if="item.coupon.discount">{{discountConversion(item.coupon.discount.discount)}}折</i>
+                  <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
+
+                  {{ item.goodsName }}
+                </h4>
                 <p>SKU：{{ item.sku }}</p>
                 <p class="p">
                   {{
                     getconfig(item.config, item.simpleGoodsEntity.baseConfig)
                   }}
                 </p>
-                <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+
+                <b v-if="!item.coupon.discount">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+
+                <div class="discount-price" v-else>
+                  <div class="old-price">原   价{{ item.coinType }} {{ formatNumber(item.salePrice) }}</div>
+                  <b>折后价{{ item.coinType }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                </div>
+
                 <div v-if="item.groupType === 1" class="btn-type">
                   {{ lang.ring }}
                 </div>
@@ -28,6 +47,9 @@
                 </div>
                 <div v-if="item.groupType !== 0 && index !== list.length - 1">
                   <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-10">
+                    <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{discountConversion(list[index + 1].coupon.discount.discount)}}折</i>
+                    <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
+                    
                     {{ list[index + 1].goodsName }}
                   </h4>
                   <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
@@ -41,7 +63,13 @@
                       )
                     }}
                   </p>
-                  <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+                  <b v-if="!list[index + 1].coupon.discount">{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+                  <div class="discount-price" v-else>
+                    <div class="old-price">原   价 {{ coin }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                    <b>折后价 {{ coin }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                  </div>
                 </div>
               </div>
             </div>
@@ -86,7 +114,7 @@ export default {
     formatMoney: formatMoney,
     // 属性数值转化成字符串
     getconfig(list, list2) {
-      console.log("list",list)
+      // console.log("list",list)
       let text = ''
       // if(list !== undefined){
         if (list.length > 0) {
@@ -135,10 +163,31 @@ export default {
           border-radius: 5px;
         }
         li {
-          img {
+          .img-box{
             float: left;
             width: 75px;
             height: 75px;
+            position: relative;
+
+            .activity-sign{
+              width: 40px;
+              height: 40px;
+              bottom: -4px;
+              right: -3px;
+
+              .triangle{
+                padding-top: 16px;
+                padding-left: 4px;
+                font-size: 10px;
+              }
+            }
+          }
+          .img-box.on{
+            border: 1px solid red;
+          }
+          img {
+            width: 100%;
+            height: 100%;
           }
           .right {
             margin-left: 90px;
@@ -193,6 +242,18 @@ export default {
         }
       }
     }
+  }
+  .old-price{
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .discount-price{
+    padding: 0;
+  }
+
+  i{
+    font-style: normal;
   }
 }
 </style>

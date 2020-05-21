@@ -72,6 +72,7 @@
       <div class="new-price">折后价 {{ goodInfo.coinType }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
     </div>
 
+
     <!-- <div class="price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div> -->
     <div class="promise-box">
       <!-- <div
@@ -85,6 +86,25 @@
         <span>{{ c.name }}</span>
       </div> -->
     </div>
+    
+    <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+      <div class="discount-l">
+        <span class="text">优惠活动：</span>
+        <div>
+          <div v-if="goodInfo.coupon.discount">
+            <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}折</span>
+          </div>
+          <div class="discount-b-box" v-if="goodInfo.coupon.money">
+            <span class="discount-icon">￥</span>
+            <span class="get" @click="ifShowCoupon = true">领取优惠券&gt;</span>
+          </div>
+        </div>
+      </div>
+      <div class="discount-time">
+        <span>活动时间：</span><span>2020.4.9</span>
+      </div>
+    </div>
+    
     <!--首次进入-->
     <div
       v-if="
@@ -185,6 +205,7 @@
       <div />
       <i class="iconfont iconfb" @click="$shareFacelook()" />
     </div> -->
+
     <div class="ring-details">
       <div class="details-title">
         {{ lang.goodsDetail }}
@@ -394,12 +415,20 @@
         </div>
       </div>
     </div>
+
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
   </div>
 </template>
 
 <script>
 import Mx from './diamond-mixin'
 export default {
+  data() {
+    return {
+      ifShowCoupon: false
+    }
+  },
   mixins: [Mx],
   computed: {
     canAddCart() {
@@ -407,6 +436,11 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    }
+  },
+  methods:{
+    closeCo() {
+      this.ifShowCoupon = false
     }
   }
 }

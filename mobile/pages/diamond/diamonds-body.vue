@@ -52,8 +52,8 @@
     </div>
     <div class="title">
       <span class="discount-icon" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}折</span>
-      <span class="discount-icon" v-if="goodInfo.coupon.money">￥</span>
-      
+      <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
+
       <a :href="goodInfo.goodsGiaImage" target="_blank"
         ><img
           v-show="goodInfo.goodsGiaImage"
@@ -85,6 +85,25 @@
         <span>{{ c.name }}</span>
       </div>
     </div>
+    
+    <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+      <div class="discount-l">
+        <span class="text">优惠活动：</span>
+        <div>
+          <div v-if="goodInfo.coupon.discount">
+            <span class="discount-icon">7.5折</span>
+          </div>
+          <div class="discount-b-box" v-if="goodInfo.coupon.money">
+            <span class="discount-icon">￥</span>
+            <span class="get" @click="ifShowCoupon = true">领取优惠券&gt;</span>
+          </div>
+        </div>
+      </div>
+      <div class="discount-time">
+        <span>活动时间：</span><span>2020.4.9</span>
+      </div>
+    </div>
+    
     <div v-if="inSale && canAddCart" class="custom-made-word">
       {{ lang.cmw }}
       <div class="triangle" />
@@ -293,6 +312,7 @@
           >
           <div>{{ lang.tenTimes }}</div>
         </div>
+        
         <div v-show="force.clarity" class="box-4c-clarity">
           <img
             v-for="(c, index) in CONDITION_INFO.clarity"
@@ -347,6 +367,9 @@
         </div>
       </div>
     </div>
+
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
   </div>
 </template>
 
@@ -380,7 +403,8 @@ export default {
         require('../../static/marriage-ring/icon-02.png'),
         require('../../static/marriage-ring/icon-03.png'),
         require('../../static/marriage-ring/icon-04.png')
-      ]
+      ],
+      ifShowCoupon: false
     }
   },
   computed: {
@@ -389,6 +413,11 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    }
+  },
+  methods:{
+    closeCo() {
+      this.ifShowCoupon = false
     }
   }
 }

@@ -21,7 +21,7 @@
     </div>
     <div class="title">
       <span class="discount-icon" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}折</span>
-      <span class="discount-icon" v-if="goodInfo.coupon.money">￥</span>
+      <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
       {{ goodInfo.goodsName }}
     </div>
 
@@ -45,14 +45,14 @@
       </div>
 
     </div>
-      <div class="discount-activity">
+      <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
         <div class="discount-l">
           <span class="text">优惠活动：</span>
           <div>
-            <!-- <div> -->
-              <!-- <span class="discount-icon">7.5折</span> -->
-            <!-- </div> -->
-            <div class="discount-b-box">
+            <div v-if="goodInfo.coupon.discount">
+              <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}折</span>
+            </div>
+            <div class="discount-b-box" v-if="goodInfo.coupon.money">
               <span class="discount-icon">￥</span>
               <span class="get" @click="ifShowCoupon = true">领取优惠券&gt;</span>
             </div>
@@ -239,6 +239,7 @@
     ></choose-eject>
     <size-board ref="size-board"></size-board>
 
+    <!-- 获取优惠券 -->
     <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
   </div>
 </template>
@@ -294,9 +295,6 @@ export default {
     inSale() {
       return this.goodInfo.goodsStatus === 2
     }
-  },
-  mounted() {
-
   },
   methods:{
     closeCo() {

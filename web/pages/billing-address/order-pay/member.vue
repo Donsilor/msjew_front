@@ -2025,7 +2025,9 @@ export default {
       num: 0,
       mobileMax: 20,
       currency: '',
-      couponCodeR: {},
+      couponCodeR: {
+        couponId: ''
+      },
       showUseCoupon: false,
       // 所有可有优惠券
       couponAll: [],
@@ -2840,7 +2842,7 @@ export default {
 
       const datas={
         carts: arr,
-        coupon_id: this.couponCodeR,
+        coupon_id: this.couponCodeR.couponId,
         addressId: this.orderAddress.id,
         cards: cards
       }
@@ -2858,7 +2860,6 @@ export default {
 
           this.orderTotalAmount = res.data.orderAmount;
           this.ultimatelyPay = res.data.payAmount;
-		  console.log(7787,res.data.payAmount)
           this.currency = res.data.currency;
 
           this.couponAll = res.data.coupons;

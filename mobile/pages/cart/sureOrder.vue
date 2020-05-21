@@ -202,13 +202,28 @@
               {{ formatMoney( productAmount) }}</span
             >
           </li>
+
+          <!-- 优惠券 -->
+          <li>
+            <span>优惠券： </span
+            ><span v-if="couponCodeR.couponPrice"
+             @click="ifShowCoupon = true"
+              >-{{ coin }}
+              {{this.couponCodeR.couponPrice}}</span
+            >
+            <span v-if="!couponCodeR.couponPrice" @click="ifShowCoupon = true">领取优惠券</span>
+          </li>
+
+          <!-- 购物卡 -->
 					<li v-for="item in useAmount">
 					  <div>
 					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
 					  </div>
 					  <span class="color-pink">-{{ coin }} {{ item.useAmount }}</span>
 					</li>
-          <li v-show="preferFee > 0">
+
+          <!-- 优惠码 -->
+          <!-- <li v-show="preferFee > 0">
             <div>
               <span>{{ lang.preferFee }}</span>
               <span
@@ -224,7 +239,8 @@
               >
             </div>
             <span>-{{ coin }} {{ formatMoney(preferFee) }}</span>
-          </li>
+          </li> -->
+
           <li>
             <div>
               <span>{{ lang.logisticsFee }}</span>
@@ -251,11 +267,11 @@
           <li class="order-pay">
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ orderTotalAmount }}</span>
+            ><span>{{ coin }} {{ formatMoney(orderTotalAmount) }}</span>
           </li>
           <li class="order-pay" style="border-top: 0;margin-top: 0;">
             <span>{{ lang.NeedPay }}</span
-            ><span>{{ coin }} {{ ultimatelyPay }}</span>
+            ><span>{{ coin }} {{ formatMoney(ultimatelyPay) }}</span>
           </li>
         </ul>
       </div>
@@ -275,6 +291,7 @@
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
     <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
+    <use-coupon v-if="ifShowCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready"></use-coupon>
   </div>
 </template>
 
@@ -383,11 +400,19 @@ export default {
       scrollTop: 0,
       orderTotalAmount: 0,
       ultimatelyPay: 0,
-      currency: ''
+      currency: '',
+      couponCodeR: {
+        couponId: '',
+        couponPrice: ''
+      },
+      ifShowCoupon: false,
+      // 所有可有优惠券
+      couponAll: [],
+      // 已领取优惠券
+      couponAlready: []
     }
   },
   computed: {
-
     selectedCouponInfo() {
       const _this = this
       let result = {}
@@ -436,31 +461,23 @@ export default {
       // console.log('this.allFee=====>', JSON.stringify(this.allFee))
        if (this.isLogin){
          if (this.allFee.orderAmount === null) {
-          //  console.log(11111)
            // result = this.formatMoney(this.productAmount)
            result = this.formatMoney(this.allFee.payAmount)
          } else  {
-          //  console.log(22222)
            // result = this.formatMoney(this.allFee.orderAmount)
            result = this.formatMoney(this.allFee.payAmount)
          }
        } else {
          if (this.allFee.order_amount === null) {
-          //  console.log(11111)
            result = this.formatMoney(this.goods_amount)
          } else  {
-          //  console.log(22222)
            result = this.formatMoney(this.allFee.order_amount)
          }
        }
        this.totlePrice = result
-       console.log("dddd",this.totlePrice)
+       // console.log(this.totlePrice)
       return result
     }
-  },
-  created(){
-    // console.log("aaaa",)
-    //     this.kai = this.$route.query.invoice !== ''
   },
   mounted() {
     // console.log("query",this.$route.params.invoice)
@@ -800,12 +817,23 @@ export default {
 
     // 登录下获取相关费用
     getTex(k) {
-      var cards = k || '';
+      var cards = k || [];
       var cardL = sessionStorage.getItem('cardList');
 
       if(cardL != null){
         this.cardList = JSON.parse(cardL);
         cards = JSON.parse(cardL);
+      }
+
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
+      for (const i in this.list) {
+        arr.push({...obj})
+        arr[i].cart_id = this.list[i].id;
+
+        if(this.list[i].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.list[i].coupon.discount.coupon_id
+        }
       }
 
       this.canSubmit = false
@@ -818,7 +846,9 @@ export default {
             addressId: this.address.id,
             cards: cards,
             // preferFee: this.preferFee,
-            cartIds: this.idList.join(',')
+            // cartIds: this.idList.join(',')
+            carts: arr,
+            coupon_id: this.couponCodeR.couponId
           }
 
           this.$axios({
@@ -846,6 +876,9 @@ export default {
 
             // this.info=res.details
             // console.log("费用>>>>>>>>",this.info)
+
+            this.couponAll = res.coupons
+            this.couponAlready = res.myCoupons;
           })
           .catch(err => {
             this.canSubmit = false
@@ -1018,19 +1051,32 @@ export default {
       if(this.kai == true){
         info = this.$route.params.invoice
       }
+
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
+      for (const i in this.list) {
+        arr.push({...obj})
+        arr[i].cart_id = this.list[i].id;
+
+        if(this.list[i].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.list[i].coupon.discount.coupon_id
+        }
+      }
+
       if (this.isLogin) {
         this.$axios({
           method: 'post',
           url: `/web/member/order/create`,
           data: {
-            cart_ids: this.idList.join(','),
+            carts: arr,
             // allSend: this.isSend ? 1 : 2,
             buyer_remark: this.userRemark,
             // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
             invoice: info,
-            card: this.cardList
+            card: this.cardList,
+            coupon_id: this.couponCodeR.couponId
             // afterMail: this.mailbox,
             // recvType: 1,
             // preferId: this.selectCouponId ? this.selectCouponId : null,
@@ -1038,6 +1084,8 @@ export default {
           }
         })
           .then(res => {
+            console.log(1111,res)
+            return
             // console.log("总额",res)
             if(res.payStatus == 1){
               this.$toast.show(this.lang.submitSuccessfully);
@@ -1185,6 +1233,15 @@ export default {
           }
         }, 22)
       }
+    },
+    closeCo(k) {
+      this.ifShowCoupon = false
+      if(k.couponId){
+        this.couponCodeR.couponId = k.couponId;
+        this.couponCodeR.couponPrice = k.couponCode;
+      }
+
+      this.getTex();
     }
 
   },
@@ -1780,4 +1837,5 @@ export default {
   clear: both;
   opacity: 0;
 }
+
 </style>

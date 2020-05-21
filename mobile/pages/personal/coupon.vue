@@ -1,16 +1,16 @@
 <template>
   <div class="coupon">
-    <div class="coupon-top">
-      <div class="quit" @click="quit()"></div>
-    </div>
+    <!-- <div class="coupon-top">
+    </div> -->
 
     <div class="title">
+      <div class="quit" @click="quit()"></div>
       <i class="icon"></i>
       <span>优惠券卡包</span>
     </div>
 
     <div class="card-box">
-      <div class="list">
+      <div class="list" v-for="(item, index) in couponList" :key="index">
         <div class="line-box">
           <div class="point-box">
             <span></span><span></span><span></span><span></span>
@@ -20,22 +20,22 @@
         <div class="card-mid">
           <div class="card-mid-l">
             <span class="sign">￥</span>
-            <span class="price">5</span>
+            <span class="price">{{item.moneyCn}}</span>
           </div>
           <div class="card-mid-r">
-            <span class="text1">满100元使用</span>
+            <span class="text1">满{{item.atLeast}}元使用</span>
             <span class="text2">使用时间：</span>
-            <span class="text2">2020.2.1-2020.2.2</span>
+            <span class="text2">{{changeTime(item.startTime)}}-{{changeTime(item.endTime)}}</span>
           </div>
         </div>
 
-        <div class="limit">限用于（项链）</div>
+        <div class="limit">限用于（{{item.lineType}}）</div>
 
         <div class="btn">点击使用</div>
       </div>
 
-      <div class="list lose-efficacy ">
-        <!-- 左上角三角 -->
+      <!-- <div class="list lose-efficacy ">
+        左上角三角
         <div class="square"><span></span></div>
 
         <div class="line-box">
@@ -59,20 +59,37 @@
         <div class="limit">限用于（项链）</div>
 
         <div class="btn">点击使用</div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return{
+      couponList: []
+    }
+  },
   mounted(){
     this.$axios({
       method: 'get',
       url: 'web/member/coupon/index'
     })
-      .then(data => {
-        console.log(22,data)
+      .then(res => {
+        this.couponList = res.data;
+        
+        for(var i in this.couponList){
+          this.couponList.ifChoose = false;
+        
+          this.couponList[i].lineType = [];
+          for(var k in this.couponList[i].GoodsType){
+            this.couponList[i].lineType.push(this.couponList[i].GoodsType[k]);
+          }
+        
+          this.couponList[i].lineType = this.couponList[i].lineType.join(',');
+        }
+        this.couponList = [...this.couponList]
       })
       .catch(err => {
         console.log(err)
@@ -98,7 +115,7 @@ export default {
     color: #666;
     border-bottom: 1px solid rgba(110,112,110,0.2);
   }
-  .coupon-top .quit{
+  .title .quit{
     position: absolute;
     top: 50%;
     left: 20px;
@@ -109,6 +126,7 @@ export default {
     background-size: 100% 100%;
   }
   .title{
+    position: relative;
     height: 52px;
     display: flex;
     align-items: center;
