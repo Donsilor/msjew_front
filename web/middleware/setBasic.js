@@ -40,9 +40,6 @@ export default function (content) {
             store.commit('setAreaId', areaId)
         }
       
-        if (!trueLanguage) {
-          language = languageOptions[0].code
-        }
         if (lastUrl) {
             resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
             store.commit('setLastUrl', lastUrl)

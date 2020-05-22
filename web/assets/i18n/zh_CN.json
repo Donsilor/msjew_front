@@ -229,6 +229,7 @@
             "login": "登入",
             "order": "我的订单",
             "account": "账户资料",
+	    "coupon": "优惠券卡包",
             "loginOut": "登出",
             "wish": "心愿单",
             "cart": "购物车",
@@ -870,7 +871,7 @@
             "base": "基本信息",
             "link": "第三方账号绑定",
             "address": "我的地址",
-            "coupon": "我的优惠码",
+            "coupon": "优惠券卡包",
             "psw1": "修改密码",
             "psw2": "现有密码",
             "psw3": "新密码",
@@ -2502,7 +2503,8 @@
         "shoppingCard": "购物卡",
         "msg10": "购物车不能为空，请重新添加商品",
         "msg11": "需登录购物 / 仅供大陆使用",
-        "needlogin": "需登录购物"
+        "needlogin": "需登录购物",
+        "notAvailable": "选择可用优惠券"
     },
     "invoice": {
         "personal": "个人",
@@ -2573,5 +2575,43 @@
         "msg11": "解除绑定成功！",
         "msg12": "此卡还未到使用时间！",
         "msg13": "此卡已超过使用时间！"
+    },
+    "coupon": {
+        "title": "优惠券卡包",
+        "limit1": "满 ",
+        "limit2": " 元使用",
+        "limit3": "限 ",
+        "limit4": " 使用",
+        "use": "点击使用",
+        "time": "活动时间",
+        "loseEfficacy": "已失效",
+        "getCoupon": "领取优惠券",
+        "useCoupon": "使用优惠券",
+        "accomplish": "完成"
+    },
+    "subject": {
+        "discount":{
+        "discountCoupon": "折扣券",
+        "discount": "折",
+        "explain": "活动专场商品",
+        "oldPrice": "原价",
+        "newPrice": "折后价",
+        "status": "正在活动中",
+        "text1": "仅支持",
+        "text2": "此专题内商品使用  （具体请看商品详情）",
+        "text3": "活动时间",
+        "text4": "(过期恢复原价)",
+        "text5": "活动地区",
+        "text6": "中国大陆、中国香港 (其他地区暂不参与)"
+    },
+    "favourable":{
+        "discountCoupon": "优惠券",
+        "full": "满",
+        "use": "元使用",
+        "get": "立即领取",
+        "status": "正在活动中",
+        "text1": "优惠券使用规则：",
+        "text2": "仅支持指定钻饰成品使用（具体商品请看商品详情）"
     }
+  }
 }
