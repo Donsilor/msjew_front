@@ -2819,33 +2819,26 @@ export default {
       //     }
       //   })
     },
-    getTex(k=[]) {
+    getTex(k) {
       console.log(778,this.good[0].data)
       const cards = k || [];
       const arr = [];
       var obj = {cart_id: '', coupon_id: ''};
       for (const i in this.good) {
-
+        arr.push({...obj})
         if (this.good[i].groupType === null) {
-          obj.cart_id = this.good[i].data[0].id
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
-          }
-         arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
         } else {
-          obj.cart_id = this.good[i].data[0].id
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
-          }
           arr.push({...obj})
-          obj.cart_id = this.good[i].data[1].id
-          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
-          }
-          arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
+          arr[i+1].cart_id = this.good[i].data[1].id;
         }
 
+        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.good[i].data[0].coupon.discount.coupon_id
+        }
       }
+      // console.log("this.good",this.good)
 
       const datas={
         carts: arr,
@@ -2857,7 +2850,7 @@ export default {
       this.$axios
         .post('/web/member/order/tax', datas)
         .then(res => {
-          console.log("tex",res)
+          // console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
 
@@ -2906,23 +2899,17 @@ export default {
       const arr = [];
       var obj = {cart_id: '', coupon_id: ''};
       for (const i in this.good) {
+        arr.push({...obj})
         if (this.good[i].groupType === null) {
-          obj.cart_id = this.good[i].data[0].id
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
-          }
-         arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
         } else {
-          obj.cart_id = this.good[i].data[0].id
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
-          }
           arr.push({...obj})
-          obj.cart_id = this.good[i].data[1].id
-          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
-          }
-          arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
+          arr[i+1].cart_id = this.good[i].data[1].id;
+        }
+
+        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.good[i].data[0].coupon.discount.coupon_id
         }
       }
 
@@ -3004,23 +2991,17 @@ export default {
       const arr = [];
       var obj = {cart_id: '', coupon_id: ''};
       for (const i in this.good) {
+        arr.push({...obj})
         if (this.good[i].groupType === null) {
-          obj.cart_id = this.good[i].data[0].id
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
-          }
-         arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
         } else {
-          obj.cart_id = this.good[i].data[0].id
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
-          }
           arr.push({...obj})
-          obj.cart_id = this.good[i].data[1].id
-          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
-            obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
-          }
-          arr.push({...obj})
+          arr[i].cart_id = this.good[i].data[0].id;
+          arr[i+1].cart_id = this.good[i].data[1].id;
+        }
+
+        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.good[i].data[0].coupon.discount.coupon_id
         }
       }
 

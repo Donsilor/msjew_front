@@ -112,9 +112,9 @@
           </div> -->
         </div>
         <div class="couple-line" />
-        
+
       </div>
-			
+
 		<!-- 原金额 -->
 		<div class="good-price old-price">
 		  {{ g.coinType }}
@@ -134,8 +134,8 @@
 			  )
 			}}
 		</div>
-      
-      
+
+
       <!-- <div
         v-show="options"
         v-if="
@@ -241,8 +241,8 @@ export default {
             // 戒指
              routerName = '/wedding-rings/all'
           }
-          
-          
+
+
           break
         case 3:
           // 珠宝饰品
@@ -275,13 +275,13 @@ export default {
         case 12:
           routerName = '/engagement-rings/all'
           break
-          
+
       }
- 
+
       const routerJump = this.$router.resolve({
         path: routerName,
         query: {
-          
+
         }
       })
       window.open(routerJump.href, '_blank')
@@ -377,7 +377,7 @@ export default {
           text-align: center;
         }
       }
-      
+
       .couple-line {
         position: absolute;
         top: 173px;

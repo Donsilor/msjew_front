@@ -2503,7 +2503,8 @@
         "shoppingCard": "購物卡",
         "msg10": "購物車不能為空，請重新添加商品",
         "msg11": "需登錄購物 / 僅供大陸使用",
-        "needlogin": "需登錄購物"
+        "needlogin": "需登錄購物",
+        "notAvailable": "選擇可用優惠券"
     },
     "invoice": {
         "personal": "個人",

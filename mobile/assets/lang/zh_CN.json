@@ -2518,7 +2518,8 @@
         "shoppingCard": "购物卡",
         "msg10": "购物车不能为空，请重新添加商品",
         "msg11": "需登录购物 / 仅供大陆使用",
-        "needlogin": "需登录购物"
+        "needlogin": "需登录购物",
+        "notAvailable": "选择可用优惠券"
     },
     "invoice": {
         "personal": "个人",
