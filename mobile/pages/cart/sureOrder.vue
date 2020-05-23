@@ -212,7 +212,7 @@
               >-{{ coin }}
               {{this.couponCodeR.couponPrice}}</span
             >
-            <span v-if="!couponCodeR.couponPrice" @click="useCoupon">领取优惠券</span>
+            <span v-if="!couponCodeR.couponPrice" @click="useCoupon">使用优惠券</span>
           </li>
 
           <!-- 购物卡 -->
@@ -595,21 +595,6 @@ export default {
       this.$refs[index].show()
     },
     formatMoney: formatMoney,
-    // 选择登录状态下优惠卷
-    selectCupon() {
-      if (this.cuponList.length > 0) {
-        this.$refs.cupon.show()
-      } else {
-        this.$toast.show(this.lang.toast1)
-      }
-    },
-    // useCoupon() {
-    //   if (this.isLogin) {
-    //     this.getCouponAmount()
-    //   } else {
-    //     this.checkCount()
-    //   }
-    // },
     // 查询匿名使用优惠卷时可以优惠的金额
     checkCount() {
       // const carts = []
@@ -1294,9 +1279,9 @@ export default {
     },
     useCoupon() {
       if(this.isLogin){
-        ifShowCoupon = true
+        this.ifShowCoupon = true
       }else{
-        this.$toast.show('登陆后才能领取优惠券');
+        this.$toast.show('登陆后才能使用优惠券');
       }
     }
 

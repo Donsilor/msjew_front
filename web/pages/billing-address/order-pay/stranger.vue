@@ -2592,7 +2592,7 @@ export default {
       }, 22)
     },
     showUseCoupon() {
-      this.$errorMessage(`请先登录，才能领取优惠券`)
+      this.$errorMessage(`请先登录，才能使用优惠券`)
     }
   }
 }

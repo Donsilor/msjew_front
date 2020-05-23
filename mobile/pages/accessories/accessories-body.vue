@@ -54,7 +54,7 @@
             </div>
             <div class="discount-b-box" v-if="goodInfo.coupon.money">
               <span class="discount-icon">￥</span>
-              <span class="get" @click="ifShowCoupon = true">领取优惠券&gt;</span>
+              <span class="get" @click="getCoupon">领取优惠券&gt;</span>
             </div>
           </div>
         </div>
@@ -289,6 +289,7 @@ export default {
         require('../../static/marriage-ring/icon-03.png'),
         require('../../static/marriage-ring/icon-04.png')
       ],
+      isLogin: !!this.$store.state.token,
       ifShowCoupon: false
     }
   },
@@ -313,6 +314,13 @@ export default {
   methods:{
     closeCo() {
       this.ifShowCoupon = false
+    },
+    getCoupon() {
+      if(this.isLogin){
+        this.ifShowCoupon = true
+      }else{
+        this.$toast.show('登陆后才能使用优惠券');
+      }
     }
   }
 }
