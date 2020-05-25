@@ -201,13 +201,10 @@ export default {
     banBtn() {
       return this.tickNum === 0
     }
-
   },
   beforeMount() {
     this.getList()
-    
   },
-
   methods: {
     // 当勾选了一个商品以后删除另一个商品时更新底部数据
     refreshData(){
@@ -373,20 +370,18 @@ export default {
       this.good = JSON.parse(JSON.stringify(this.good))
     },
     ticksCHeck(i) {
-      if(this.good[i].groupType == 1&&this.good[i].groupType == 2){
-          this.good[i].tick ? this.tickNum -= 1  : this.tickNum += 1
-          this.good[i].tick ? this.totalNum -= 1 : this.totalNum +=1
-      }else{
-         this.good[i].tick ? this.tickNum-- : this.tickNum++
-         this.good[i].tick ? this.totalNum-- : this.totalNum++
-      }
+      // if(this.good[i].groupType == 1 || this.good[i].groupType == 2){
+      //     this.good[i].tick ? this.tickNum -= 1  : this.tickNum += 1
+      //     this.good[i].tick ? this.totalNum -= 1 : this.totalNum +=1
+      // }else{
+      //    this.good[i].tick ? this.tickNum-- : this.tickNum++
+      //    this.good[i].tick ? this.totalNum-- : this.totalNum++
+      // }
 
-      // this.good[i].tick
-      //   ? (this.totalPrice -=parseFloat(this.good[i].price) )
-      //   : (this.totalPrice += parseFloat(this.good[i].price))
+      this.good[i].tick ? this.tickNum-- : this.tickNum++
+      this.good[i].tick ? this.totalNum-- : this.totalNum++
 
       if(this.good[i].tick){
-        console.log(this.good[i].data[0].coupon.discount)
         if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
           (this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price) )
         }else{

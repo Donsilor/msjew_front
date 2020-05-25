@@ -186,6 +186,9 @@ export default {
       }
     }
   },
+  mounted() {
+    // console.log(121,this.g)
+  },
   methods: {
     goDetail() {},
     addWish() {
