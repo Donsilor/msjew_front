@@ -3,13 +3,25 @@
     <div class="content">
       <div class="title">{{ $t(`${lang}.header`) }}</div>
       <dl>
-        <dd>
+        <dd v-if="this.$store.state.platform === 20">
+          {{ $t(`${lang}.title`) }}
+          <br />
+          {{ $t(`${lang}.defineCn`) }}
+        </dd>
+        <dd v-else>
           {{ $t(`${lang}.title`) }}
           <br />
           {{ $t(`${lang}.define`) }}
         </dd>
         <dt>{{ $t(`${lang}.tit1`) }}</dt>
-        <dd>
+        <dd v-if="this.$store.state.platform === 20">
+          {{ $t(`${lang}.con1`) }}
+          <span @click="go('free-shipping')">{{ $t(`${lang}.link1`) }}</span>
+          {{ $t(`${lang}.con2`) }}
+          <span @click="go('free-shipping')">{{ $t(`${lang}.link2`) }}</span>
+          {{ $t(`${lang}.conCn3`) }}
+        </dd>
+        <dd v-else>
           {{ $t(`${lang}.con1`) }}
           <span @click="go('free-shipping')">{{ $t(`${lang}.link1`) }}</span>
           {{ $t(`${lang}.con2`) }}

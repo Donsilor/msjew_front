@@ -12,7 +12,8 @@
           <img src="~/static/help-pages/return-goods.png" alt />
         </dt>
         <dt>{{ lang.tit2 }}</dt>
-        <dd>{{ lang.con3 }}</dd>
+        <dd v-if="this.$store.state.platform === 21">{{ lang.conCn3 }}</dd>
+        <dd v-else>{{ lang.con3 }}</dd>
         <dt>{{ lang.tit3 }}</dt>
         <dd>{{ lang.con4 }}</dd>
         <dt>{{ lang.tit4 }}</dt>
@@ -20,7 +21,8 @@
           <p>{{ lang.con5 }}</p>
           <p>{{ lang.con6 }}</p>
           <p>{{ lang.con7 }}</p>
-          <p>{{ lang.con8 }}</p>
+          <p v-if="this.$store.state.platform === 21">{{ lang.conCn8 }}</p>
+          <p v-else>{{ lang.con8 }}</p>
           <p>{{ lang.con9 }}</p>
           <p>{{ lang.con10 }}</p>
         </dd>
@@ -36,7 +38,10 @@
         <dd>
           <p>{{ lang.con15 }}</p>
           <p>
-            <a class="link" href="mailto:service@bddco.com">
+            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:e-service@bddco.com">
+              e-service@bddco.com
+            </a>
+            <a v-else class="link" href="mailto:service@bddco.com">
               service@bddco.com
             </a>
             {{ lang.con16 }}
