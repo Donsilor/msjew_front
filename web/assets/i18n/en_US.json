@@ -666,7 +666,12 @@
         "pairRingGuide": "WEDDING RING GUIDE",
         "howToChoosePairRing": "How to choose a traditional classic wedding ring, wedding couple rings?",
         "howToMatchPairRing": " How do you match your engagement ring?  ",
-        "knowMore": "LEARN MORE"
+        "knowMore": "LEARN MORE",
+        "discounts1": "优惠券",
+        "discounts2": "折",
+        "discountsActive": "优惠活动",
+        "getCoupon": "获取优惠券",
+        "activityTime": "活动时间"
     },
     "pairRingsList": {
         "style": "Style",
@@ -691,7 +696,9 @@
         "title": "WEDDING RING",
         "totalCountTitle": "RING ({total_count} Results)",
         "titleDesc": "Let us make a promise with this ring and spend the rest of our life since this moment on.",
-        "sort": "Sort By"
+        "sort": "Sort By",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "diamonds": {
         "diamonds": "DIAMONDS",
@@ -773,7 +780,9 @@
         "viewDetail": "View details",
         "clickToCheck": "View",
         "table": "Table",
-        "addCart": "Add to Cart"
+        "addCart": "Add to Cart",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "engagementRing": {
         "engagementRings": "ENGAGEMENT RINGS",
@@ -810,7 +819,9 @@
         "title": "ENGAGEMENT RING",
         "totalCountTitle": "ABSTAIN ({total_count} Results)",
         "titleDesc": "There are different ring settings optional. The solitaire ring is a symbol of true love, and its taste will last together with the solitaire.",
-        "sort": "Sort By"
+        "sort": "Sort By",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "jewelleryList": {
         "jewellery": "Jewelry",
@@ -824,7 +835,9 @@
         "stoneType": "Stone type",
         "title": "JEWELRY",
         "totalCountTitle": "JEWELRY ({total_count} Results)",
-        "titleDesc": "Choose various accessories to show your taste"
+        "titleDesc": "Choose various accessories to show your taste",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "personal": {
         "index": {
@@ -1071,7 +1084,9 @@
         "deleteSuccess": "Deleted",
         "addWishSuccess": "Added to wish list",
         "deleteWishSuccess": "Wish list deleted",
-        "searchSimilar": "search similar"
+        "searchSimilar": "search similar",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "pay": {
         "confirmOrder": "Shopping cart",
@@ -1239,7 +1254,14 @@
         "allReviews": "All reviews",
         "fiveStarReviews": "5-star review",
         "BDDReply": "BDD's Reply",
-        "loadingMore": "MORE..."
+        "loadingMore": "MORE...",
+        "discounts1": "优惠券",
+        "discounts2": "折",
+        "discountsActive": "优惠活动",
+        "getCoupon": "获取优惠券",
+        "activityTime": "活动时间",
+        "oddPrice": "原  价",
+        "newPrice": "折后价"
     },
     "policies": {
         "layout": {
@@ -2569,7 +2591,12 @@
         "loseEfficacy": "Lost Efficacy",
         "getCoupon": "Get Coupon",
         "useCoupon": "Use Coupon",
-        "accomplish": "Accomplish"
+        "accomplish": "Accomplish",
+        "alreadyApplied": "已使用",
+        "alreadyReceived": "已领取",
+        "immediatelyReceive": "立即领取",
+        "haveChoose": "已选用",
+        "immediatelyChoose": "立即选用"
     },
     "subject": {
         "discount":{

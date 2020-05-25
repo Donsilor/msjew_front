@@ -170,7 +170,13 @@
 </template>
 
 <script>
+const lang = 'cart'
 export default {
+  data() {
+    return{
+      lang,
+    }
+  },
   name: 'Double',
   props: {
     g: {

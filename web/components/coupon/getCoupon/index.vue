@@ -27,10 +27,10 @@
             </div>
 
             <div class="get" @click="getCoupon(index)">
-              <span v-if="!item.ifUse">{{item.ifChoose ? '已领取' : '立即领取'}}</span>
+              <span v-if="!item.ifUse">{{item.ifChoose}} ? {{ $t(`${lang}.alreadyReceived`) }} : {{ $t(`${lang}.immediatelyReceive`) }}</span>
             </div>
 
-            <div class="already" v-if="item.ifUse">已领取</div>
+            <div class="already" v-if="item.ifUse">{{ $t(`${lang}.alreadyReceived`) }}</div>
           </div>
         </div>
 
@@ -230,7 +230,8 @@
               width: 270px;
               color: #cdad75;
               border-radius: 5px;
-              padding: 20px 0;
+              padding: 20px;
+              box-sizing: border-box;
 
               .line-box {
                 width: 200px;

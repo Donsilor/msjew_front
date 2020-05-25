@@ -965,7 +965,7 @@
       "pending":"待確認",
       "payfailed":"支付失敗",
       "lookOrder":"查看訂單"
-      
+
     },
     "progressBar": {
       "price": "價格",
@@ -1084,7 +1084,14 @@
     "addToBracelet": "添加到手鏈",
     "lady": "女士",
     "gentlemen": "男士",
-    "general": "通用款"
+    "general": "通用款",
+    "discounts1": "優惠券",
+    "discounts2": "折",
+    "discountsActive": "優惠活動",
+    "getCoupon": "獲取優惠券",
+    "activityTime": "活動時間",
+    "oddPrice": "原  價",
+    "newPrice": "折後價"
   },
   "listCommons": {
     "sliders": [
@@ -1122,7 +1129,11 @@
     "clarity": "淨度",
     "cut": "切割",
     "luster": "光澤",
-    "symmetry": "對稱"
+    "symmetry": "對稱",
+    "discounts1": "優惠券",
+    "discounts2": "折",
+    "oddPrice": "原  價",
+    "newPrice": "折後價"
   },
   "help-pages": {
     "brandStory": {

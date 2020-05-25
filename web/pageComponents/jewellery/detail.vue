@@ -219,15 +219,15 @@
         <div class="discount-box" v-if="info.coupon.discount">
         	<div class="discount-active">
         		<div>
-        			<span>优惠活动：</span>
-        			<span class="discount-icon">{{discountConversion(this.info.coupon.discount.discount)}}折</span>
+        			<span>{{ $t(`${lang}.discountsActive`) }}：</span>
+        			<span class="discount-icon">{{discountConversion(this.info.coupon.discount.discount)}}{{ $t(`${lang}.discounts2`) }}</span>
         		</div>
-        		<div class="time">活动时间：2020.4.9</div>
+        		<div class="time">{{ $t(`${lang}.activityTime`) }}：2020.4.9</div>
         	</div>
 
         	<div class="discount-price">
-        		<span class="old-price">原   价HKD  {{ formatNumber(this.info.salePrice) }}</span>
-        		<span class="new-price">折后价{{ formatNumber(this.info.coupon.discount.price) }}</span>
+        		<span class="old-price">{{ $t(`${lang}.oddPrice`) }}HKD  {{ formatNumber(this.info.salePrice) }}</span>
+        		<span class="new-price">{{ $t(`${lang}.newPrice`) }}{{ formatNumber(this.info.coupon.discount.price) }}</span>
         	</div>
         </div>
 
@@ -235,11 +235,11 @@
         <div class="favourable-box" v-if="info.coupon.money">
         	<div class="discount-active">
         		<div>
-        			<span>优惠券：</span>
+        			<span>{{ $t(`${lang}.`) }}：</span>
         			<span class="favourable-icon">￥</span>
-        			<span class="get" @click="getCoupon">领取优惠券></span>
+        			<span class="get" @click="getCoupon">{{ $t(`${lang}.getCoupon`) }}></span>
         		</div>
-        		<div class="time">活动时间：2020.4.9</div>
+        		<div class="time">{{ $t(`${lang}.activityTime`) }}：2020.4.9</div>
         	</div>
 
         	<!-- <div class="discount-price">

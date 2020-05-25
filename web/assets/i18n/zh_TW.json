@@ -670,7 +670,12 @@
         "pairRingGuide": "結婚戒指指南",
         "howToChoosePairRing": "如何選擇傳統的經典結婚戒指、結婚對戒？",
         "howToMatchPairRing": "跟您的訂婚戒指如何搭配呢？",
-        "knowMore": "了解更多"
+        "knowMore": "了解更多",
+        "discounts1": "優惠券",
+        "discounts2": "折",
+        "discountsActive": "优惠活动",
+        "getCoupon": "获取优惠券",
+        "activityTime": "活动时间"
     },
     "pairRingsList": {
         "style": "款式",
@@ -695,7 +700,9 @@
         "title": "結婚戒指",
         "totalCountTitle": "戒指 ({total_count} 款)",
         "titleDesc": "願作此生相依的應允 , 願為此今刻決定往後",
-        "sort": "排序"
+        "sort": "排序",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "diamonds": {
         "diamonds": "DIAMONDS",
@@ -777,7 +784,9 @@
         "viewDetail": "查看詳情",
         "clickToCheck": "點擊查看",
         "table": "台面",
-        "addCart": "加入购物车"
+        "addCart": "加入购物车",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "engagementRing": {
         "engagementRings": "ENGAGEMENT RINGS",
@@ -814,7 +823,9 @@
         "title": "訂婚戒指",
         "totalCountTitle": "戒托 ({total_count} 款)",
         "titleDesc": "戒扥款式可多變, 一夥真心總不變 , 高貴氣質石長存",
-        "sort": "排序"
+        "sort": "排序",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "jewelleryList": {
         "jewellery": "飾品",
@@ -828,7 +839,9 @@
         "stoneType": "主石類型",
         "title": "配飾",
         "totalCountTitle": "配飾 ({total_count} 款)",
-        "titleDesc": "通過選擇各種配飾，來展示您所想要的配飾"
+        "titleDesc": "通過選擇各種配飾，來展示您所想要的配飾",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "personal": {
         "index": {
@@ -1075,7 +1088,9 @@
         "deleteSuccess": "移除成功",
         "addWishSuccess": "加入心願單成功",
         "deleteWishSuccess": "刪除心願單成功",
-        "searchSimilar": "找类似"
+        "searchSimilar": "找类似",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "pay": {
         "confirmOrder": "購物車",
@@ -1243,7 +1258,14 @@
         "allReviews": "全部評價",
         "fiveStarReviews": "5星評價",
         "BDDReply": "BDD回復",
-        "loadingMore": "加載更多..."
+        "loadingMore": "加載更多...",
+        "discounts1": "優惠券",
+        "discounts2": "折",
+        "discountsActive": "優惠活動",
+        "getCoupon": "獲取優惠券",
+        "activityTime": "活動時間",
+        "oddPrice": "原  價",
+        "newPrice": "折後價"
     },
     "policies": {
         "layout": {
@@ -2573,7 +2595,12 @@
         "loseEfficacy": "已失效",
         "getCoupon": "領取優惠券",
         "useCoupon": "使用優惠券",
-        "accomplish": "完成"
+        "accomplish": "完成",
+        "alreadyApplied": "已使用",
+        "alreadyReceived": "已领取",
+        "immediatelyReceive": "立即领取",
+        "haveChoose": "已选用",
+        "immediatelyChoose": "立即选用"
     },
     "subject": {
         "discount":{

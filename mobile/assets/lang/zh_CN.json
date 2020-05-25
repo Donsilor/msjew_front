@@ -138,7 +138,7 @@
         "Invoicing":"开发票",
         "invo":"发票",
         "email":"电子邮箱",
-        "InvoiceType":"发票类型",        
+        "InvoiceType":"发票类型",
         "InvoiceDetails":"发票详情",
         "HeaderType":"抬头类型",
         "PaperInvoice":"纸质发票",
@@ -1085,7 +1085,14 @@
       "addToBracelet": "添加到手链",
       "lady": "女士",
       "gentlemen": "男士",
-      "general": "通用款"
+      "general": "通用款",
+      "discounts1": "优惠券",
+      "discounts2": "折",
+      "discountsActive": "优惠活动",
+      "getCoupon": "获取优惠券",
+      "activityTime": "活动时间",
+      "oddPrice": "原  价",
+      "newPrice": "折后价"
     },
     "listCommons": {
       "sliders": [
@@ -1098,7 +1105,7 @@
         "摆件",
         "挂件",
         "其它"
-        
+
       ],
       "style": "款式",
       "fineness": "成色",
@@ -1125,7 +1132,11 @@
       "clarity": "净度",
       "cut": "切割",
       "luster": "光泽",
-      "symmetry": "对称"
+      "symmetry": "对称",
+      "discounts1": "优惠券",
+      "discounts2": "折",
+      "oddPrice": "原  价",
+      "newPrice": "折后价"
     },
     "help-pages": {
       "brandStory": {

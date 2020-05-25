@@ -13,12 +13,12 @@
 
           <!-- 折扣 -->
           <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
-            <span>{{ discountConversion(g.data[0].coupon.discount.discount) }}折</span>
+            <span>{{ discountConversion(g.data[0].coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
           </div>
 
           <!-- 优惠券 -->
           <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'money'">
-            <span>优惠券</span>
+            <span>{{ $t(`${lang}.discounts1`) }}</span>
           </div>
         </div>
       </nuxt-link>
@@ -108,7 +108,13 @@
 </template>
 
 <script>
+const lang = 'cart'
 export default {
+  data() {
+    return{
+      lang,
+    }
+  },
   name: 'Single',
   props: {
     g: {

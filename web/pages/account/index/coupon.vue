@@ -26,7 +26,7 @@
            <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
 
            <!-- 失效 class="lose-efficacy" -->
-           <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">已使用</div>
+           <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">{{ $t(`${lang}.alreadyApplied`) }}</div>
         </div>
       </div>
     </div>

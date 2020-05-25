@@ -28,7 +28,7 @@
             </div>
 
             <div class="get" @click="chooseCoupon(index)">
-              <span>{{item.ifChoose ? '已选用' : '立即选用'}}</span>
+              <span>{{item.ifChoose ? $t(`${lang}.haveChoose`) : $t(`${lang}.immediatelyChoose`) }}</span>
             </div>
 
           </div>
@@ -189,9 +189,9 @@
 
         .box-r {
           width: 900px;
-          // min-height: 500px;
+          min-height: 500px;
           display: flex;
-          // align-items: center;
+          align-items: flex-start;
           justify-content: space-between;
           flex-wrap: wrap;
 
@@ -211,7 +211,8 @@
               width: 270px;
               color: #cdad75;
               border-radius: 5px;
-              padding: 20px 0;
+              padding: 20px;
+              box-sizing: border-box;
 
               .line-box {
                 width: 200px;

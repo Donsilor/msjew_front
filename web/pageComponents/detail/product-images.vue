@@ -27,11 +27,11 @@
 
       <!-- 活动图标 -->
       <div class="discount-icon2" v-if="this.coupon == 'money'">
-        <div class="icon">优惠券</div>
+        <div class="icon">{{ $t(`${lang}.discounts1`) }}</div>
       </div>
 
       <div class="discount-icon2" v-if="this.coupon !== 'money' && this.coupon != ''">
-        <div class="icon">{{discountConversion(this.coupon)}}折</div>
+        <div class="icon">{{discountConversion(this.coupon)}}{{ $t(`${lang}.discounts2`) }}</div>
       </div>
     </div>
   </div>

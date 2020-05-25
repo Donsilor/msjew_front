@@ -26,12 +26,12 @@
 
             <!-- 折扣 -->
             <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
-              <span>{{ discountConversion(item.coupon.discount.discount) }}折</span>
+              <span>{{ discountConversion(item.coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
             </div>
 
             <!-- 优惠券 -->
             <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
-              <span>优惠券</span>
+              <span>{{ $t(`${lang}.discounts1`) }}</span>
             </div>
           </div>
           <div class="product-info">
@@ -40,7 +40,7 @@
                 <span class="coin">{{ item.coinType }}</span>
                 <span class="price">{{ formatNumber(item.salePrice) }}</span>
               </div>
-            
+
               <!-- 折扣 -->
               <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
                 <div>
@@ -58,7 +58,7 @@
               <!-- 优惠券 -->
               <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
               <!-- 折扣 -->
-              <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}折</span>
+              <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
               {{ item.goodsName }}
             </div>
           </div>
@@ -73,7 +73,13 @@
 
 <script>
 import Operate from '@/mixins/operate.js'
+const lang = 'detail'
 export default {
+  data() {
+    return{
+      lang
+    }
+  },
   mixins: [Operate],
   props: {
     recommends: {
