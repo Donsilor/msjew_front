@@ -244,17 +244,27 @@ export default {
         }
         span {
           float: right;
-          width: 20px;
-          height: 20px;
+          // width: 20px;
+          // height: 20px;
           margin-top: 15px;
-          background: rgba(242, 155, 135, 1);
-          border-radius: 10px;
-          font-size: 12px;
-          line-height: 20px;
-          text-align: center;
+          // background: rgba(242, 155, 135, 1);
+          // border-radius: 10px;
+          // font-size: 12px;
+          // line-height: 20px;
+          // text-align: center;
           font-family: SFProText-Regular;
           font-weight: 400;
-          color: rgba(255, 255, 255, 1);
+          // color: rgba(255, 255, 255, 1);
+          border-radius: 15px;
+          color: #fff;
+          display: inline-block;
+          font-size: 12px;
+          height: 18px;
+          line-height: 18px;
+          padding: 0 6px;
+          text-align: center;
+          white-space: nowrap;
+          background-color: #f29b87;
         }
         i {
           float: right;

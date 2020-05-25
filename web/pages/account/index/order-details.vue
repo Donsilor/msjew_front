@@ -44,7 +44,7 @@
 
     <div v-if="data.details && data.details.length > 0" class="info-block">
       <div class="block-title">
-        <div v-if="data.wireTransferStatus !== null" class="status">
+        <div v-if="data.wireTransferStatus !== null && data.refundStatus == 0" class="status">
           <span v-if="data.wireTransferStatus == '0'">
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.pending`)}}
@@ -56,6 +56,12 @@
           <span v-else-if="data.wireTransferStatus == '10'">
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.PayFailed`)}}
+          </span>
+        </div>
+        <div v-else-if="data.refundStatus == 1" class="status">
+          <span v-if="data.refundStatus == '1'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.hadClosed`)}}
           </span>
         </div>
         <div v-else class="status">
