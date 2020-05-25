@@ -39,8 +39,16 @@
             <p>{{ $t(`${lang}.orderNumber`) }}：{{ o.orderNO }}</p>
             <p>
               {{ $t(`${lang}.orderStatus`) }}：
-              <span v-if="o.wireTransferStatus == null && o.refundStatus == 0" :style="{ color: getStatusColor(o.orderStatus) }"> 
-                <!-- {{ getTransferStatus(o.wireTransferStatus)}} -->
+              <span v-if="o.orderStatus !== 0 && o.refundStatus == 0 && o.wireTransferStatus !== null" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getTransferStatus(o.wireTransferStatus)}}
+                </span>
+              <span v-else-if="o.refundStatus == 1" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getRefundStatus(o.refundStatus)
+              }}</span>
+              <span v-else :style="{ color: getStatusColor(o.orderStatus) }">  
+                {{ getStatusText(o.orderStatus)
+              }}</span>
+              <!-- <span v-if="o.wireTransferStatus == null && o.refundStatus == 0" :style="{ color: getStatusColor(o.orderStatus) }"> 
                 {{ getStatusText(o.orderStatus)}}
                 </span>
               <span v-else-if="o.refundStatus == 1" :style="{ color: getStatusColor(o.orderStatus) }"> 
@@ -48,7 +56,7 @@
               }}</span>
               <span v-else :style="{ color: getStatusColor(o.orderStatus) }"> 
                 {{ getTransferStatus(o.wireTransferStatus)
-              }}</span>
+              }}</span> -->
             </p>
           </div>
           <div v-for="(d, _index) in o.details" :key="_index" class="list-body">
@@ -290,7 +298,10 @@ export default {
       lang,
       activeIndex: 0,
       tabsParam: [
-        { name: this.$t(`${lang}.allOrder`), status: 0, num: 0 },
+        { 
+          name: this.$t(`${lang}.allOrder`), 
+          status: 0, num: 0 
+        },
         {
           name: this.$t(`${lang}.waitingPay`),
           status: 10,
@@ -301,16 +312,16 @@ export default {
           status: 30,
           num: 0
         },
-        {
-          name: this.$t(`${lang}.waitingReceive`),
-          status: 40,
-          num: 0
-        },
-        {
-          name: this.$t(`${lang}.hadFinish`),
-          status: 50,
-          num: 0
-        }
+        // {
+        //   name: this.$t(`${lang}.waitingReceive`),
+        //   status: 40,
+        //   num: 0
+        // },
+        // {
+        //   name: this.$t(`${lang}.hadFinish`),
+        //   status: 50,
+        //   num: 0
+        // }
       ],
       listData: [],
       list: {
@@ -393,7 +404,7 @@ export default {
               //  没给钱
               this.list.ordered.push(o)
               // console.log("777777",o)
-            } else if (res.data.data[i].orderStatus == 20||res.data.data[i].orderStatus == 30) {
+            } else if (res.data.data[i].orderStatus == 20||res.data.data[i].orderStatus == 30| res.data.data[i].wireTransferStatus == 1) {
 
               //  给了钱没发货
               this.list.paid.push(o)
@@ -424,11 +435,11 @@ export default {
             }
           }
           // console.log(this.list.ordered)
+          this.tabsParam[0].num = res.data.data.length
           this.tabsParam[1].num = this.list.ordered.length
           this.tabsParam[2].num = this.list.paid.length
-          this.tabsParam[3].num = this.list.send.length
-          this.tabsParam[4].num = this.list.finished.length
-          this.tabsParam[0].num = res.data.data.length
+          // this.tabsParam[3].num = this.list.send.length
+          // this.tabsParam[4].num = this.list.finished.length
         })
         .catch(err => {
           if (!err.response) {

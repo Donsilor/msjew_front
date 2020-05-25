@@ -4,9 +4,18 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span v-if="order.wireTransferStatus === null && order.refundStatus == 0" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-if="order.orderStatus !== 0 && order.refundStatus == 0 && order.wireTransferStatus !== null" class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
           <span v-else-if="order.refundStatus == 1" class="order-status">{{ refundStatusText(order.refundStatus) }}</span>
-          <span v-else class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
+          <span v-else class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <!-- <span v-if="order.wireTransferStatus === null && order.refundStatus == 0" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-else-if="order.refundStatus == 1" class="order-status">{{ refundStatusText(order.refundStatus) }}</span>
+          <span v-else-if="order.orderStatus !== 0" class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span> -->
+          <!-- <div v-else>
+            <span v-if="order.wireTransferStatus == '0' && order.orderStatus == '10'" class="order-status">{{ lang.pending }}</span>
+            <span v-else-if="order.wireTransferStatus == '1' && order.orderStatus == '20'" class="order-status">{{ lang.paid }}</span>
+            <span v-else-if="order.wireTransferStatus == '1' && order.orderStatus == '30'" class="order-status">{{ lang.paid }}</span>
+            <span v-else-if="order.wireTransferStatus == '10' && order.orderStatus == '0'" class="order-status">{{ lang.payfailed }}</span>
+          </div> -->
         </div>
         <div class="top">
           <span>{{ order.orderNO }}</span>
