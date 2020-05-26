@@ -137,7 +137,7 @@ export default {
             //  没给钱
             this.list.ordered.push(o)
             // console.log("777777",o)
-          } else if (res.data[i].orderStatus == 20||res.data[i].orderStatus == 30 || res.data[i].wireTransferStatus == 1) {
+          } else if (res.data[i].orderStatus == 20||res.data[i].orderStatus == 30) {
 
             //  给了钱没发货
             this.list.paid.push(o)

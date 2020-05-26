@@ -4,7 +4,16 @@
     <div class="content">
       <div class="top">
         <!--        <OrderHeader :list="statusSteps" :stepindex="step" />-->
-        <div v-if="info.wireTransferStatus == null && info.refundStatus == 0" class="status-title">
+        <div v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null" class="status-title">
+          {{ getTransferStatus(info.wireTransferStatus) }}
+        </div>
+        <div v-else-if="info.refundStatus == 1" class="status-title">
+          {{ getRefundStatusText(info.refundStatus) }}
+        </div>
+        <div v-else class="status-title">
+          {{ statusText(info.orderStatus) }} 
+        </div>
+        <!-- <div v-if="info.wireTransferStatus == null && info.refundStatus == 0" class="status-title">
           {{ statusText(info.orderStatus) }}
         </div>
         <div v-else-if="info.refundStatus == 1" class="status-title">
@@ -12,12 +21,15 @@
         </div>
         <div v-else class="status-title">
           {{ getTransferStatus(info.wireTransferStatus) }} 
-        </div>
+        </div> -->
         <div class="service">
           <ul>
-            <li v-if="info.wireTransferStatus == null && info.refundStatus == 0">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
+            <!-- <li v-if="info.wireTransferStatus == null && info.refundStatus == 0">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
-            <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
+            <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li> -->
+            <li v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null">{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
+            <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
+            <li v-else>{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
             <li>{{ lang.orderTime }}：{{ info.orderTime }}</li>
             <template v-if="info.orderStatus > 20 && info.orderStatus !== 50">
