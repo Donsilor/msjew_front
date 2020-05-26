@@ -847,6 +847,7 @@
       "aboutBDD": "關於BDD",
       "BDDStory": "BDD品牌故事",
       "diamondKnowledge": "鑽石知識",
+      "aboutCompany":"公司簡介",
       "payType": "付款方式",
       "qualityAndValue": "品質與價值",
       "aboutRefund": "退款保障條款及細則",
@@ -1861,6 +1862,7 @@
       ]
     },
     "privacyPolicy": {
+      "header1": "公司簡介",
       "header": "私隱政策",
       "define": "為了提升客戶的購物體驗和滿意度，BDD Co.（包括其附屬公司和子公司）一直致力於保護客戶的個人資料。以下訊息向您提供我們收集的訊息類型，訊息的原因和用法。在本文中，“網站”是指BDD Co.網站，移動應用程序和其他軟件。此外，本文中的“服務”包括我們的網站，客戶服務電話以及BDD公司提供的任何其他產品或購物服務。",
       "tit1": "數據采集",
