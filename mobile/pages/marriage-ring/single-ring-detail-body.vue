@@ -59,7 +59,7 @@
         </div>
       </div>
       <div class="discount-time">
-        <span>活动时间：</span><span>2020.4.9</span>
+        <!-- <span>{{ lang.activityTime }}：</span><span>2020.4.9</span> -->
       </div>
     </div>
 

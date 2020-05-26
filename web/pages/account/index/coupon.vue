@@ -15,11 +15,11 @@
            </div>
 
            <div class="price">
-             <span class="price-icon">￥</span>
+             <span class="price-icon">{{coin}}</span>
              <span class="price-num">{{item.money}}</span>
            </div>
 
-           <div class="rmb">(￥{{item.moneyCn}})</div>
+           <!-- <div class="rmb">(￥{{item.moneyCn}})</div> -->
            <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.atLeast}}{{ $t(`${lang}.limit2`) }}</div>
            <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
            <div class="use">{{ $t(`${lang}.limit3`) }}({{item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
@@ -42,11 +42,14 @@ export default {
     return {
       lang,
       language: '',
+      coin: '',
       couponList: []
     }
   },
   mounted(){
 	  this.language = this.getCookie('language')
+    this.coin = this.getCookie('coin')
+    console.log(7788,this.coin)
 
     // 获取优惠券
     this.$axios.get('web/member/coupon/index', {
@@ -283,7 +286,8 @@ export default {
   border-radius: 5px;
   box-shadow: 0 1px 0 #9C999C,0 2px 0 #D6D5D6,0 3px 0 #E3E1E3,0 4px 0 #D6D5D6,0 5px 0 #EDECED,0 6px 0 #F9F9F9;
   margin-bottom: 30px;
-  padding: 30px 0 20px;
+  padding: 30px 20px 20px;
+  box-sizing: border-box;
 
   .line-box{
     width: 258px;
@@ -313,20 +317,23 @@ export default {
     }
   }
   .price{
-    height: 100px;
     width: 100%;
+    height: 40px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-wrap: nowrap;
 
     .price-icon{
-      font-size: 27px;
+      font-size: 22px;
+      width: 54px;
+      flex-shrink: 0;
     }
 
     .price-num{
-      font-size: 67px;
+      font-size: 36px;
       color: #cdad75;
-      margin: -9px 0 0 -4px;
-      padding-right: 10px;
     }
 
     .currency{
@@ -358,9 +365,12 @@ export default {
   }
   .use{
     text-align: center;
-    color: #f00;
     font-size: 12px;
-    margin-bottom: 10px;
+    color: #bfb8b8;
+    margin-bottom: 6px;
+    height: 30px;
+    line-height: 16px;
+    overflow: hidden;
   }
 
   .time{

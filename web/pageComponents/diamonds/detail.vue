@@ -119,7 +119,7 @@
         			<span>{{ $t(`${lang}.discountsActive`) }}：</span>
         			<span class="discount-icon">{{discountConversion(this.info.coupon.discount.discount)}}{{ $t(`${lang}.discounts2`) }}</span>
         		</div>
-        		<div class="time">{{ $t(`${lang}.activityTime`) }}：2020.4.9</div>
+        		<!-- <div class="time">{{ $t(`${lang}.activityTime`) }}：2020.4.9</div> -->
         	</div>
 
         	<div class="discount-price">
@@ -136,7 +136,7 @@
         			<span class="favourable-icon">￥</span>
         			<span class="get" @click="getCoupon">{{ $t(`${lang}.getCoupon`) }}></span>
         		</div>
-        		<div class="time">123：2020.4.9</div>
+        		<!-- <div class="time">123：2020.4.9</div> -->
         	</div>
 
         	<!-- <div class="discount-price">

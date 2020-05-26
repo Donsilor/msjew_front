@@ -18,6 +18,7 @@ function makeCartGoodGroups (cart = []) {
     const localData = {}
     cart.forEach(item => {
         let groupId = item['groupId'] || item['id'] || item['createTime']
+        // console.log('groupId',groupId)
         // item.goodsId=item.goodsDetailsId
         if (localData.hasOwnProperty(groupId)) {
             localData[groupId].data.push(item)
@@ -30,6 +31,7 @@ function makeCartGoodGroups (cart = []) {
         }
     })
 
+    // console.log(88787,cart)
     let keys = Object.keys(localData)
     // console.log("local",keys)
     keys = keys.sort((a, b) => {
@@ -85,7 +87,6 @@ function makeCartGoodGroups (cart = []) {
                 parseFloat(simpleGoodsEntity.simpleGoodsDetails.retailMallPrice) +
                 parseFloat(item.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice)
         }
-        // console.log('a',item)
         return item
     })
 
@@ -185,7 +186,7 @@ export default {
         //刷新时间控制
         let refreshAreaTime = parseInt(localStorage.getItem('refreshAreaTime'));
         let nowDate = parseInt((new Date()).getTime() / 1000)
-        let refreshOnceTime = 60  //过期后每隔多少秒刷新地区    
+        let refreshOnceTime = 60  //过期后每隔多少秒刷新地区
         if ((nowDate - refreshAreaTime < refreshOnceTime)) {
             return
         }
@@ -305,7 +306,7 @@ export default {
             })
             sendData = sendData.concat(data)
         })
-        console.log("购物车", sendData)
+        // console.log("购物车", sendData)
 
         return this.$axios({
             method: 'post',
@@ -379,7 +380,7 @@ export default {
             return item
         })
 
-        console.log('goods-------->', goods)
+        // console.log('goods-------->', goods)
 
         return this.$axios({
             method: 'post',
@@ -623,7 +624,6 @@ export default {
             method: 'get',
             url: '/web/member/cart'
         }).then(res => {
-            // console.log("购物车列表",res.data)
             return makeCartGoodGroups(res.data)
         })
             .catch(err => {
@@ -677,7 +677,7 @@ export default {
             url: '/web/member/cart/count'
         })
             .then(res => {
-                // console.log('线上购物车商品总数====>', data)
+                // console.log('线上购物车商品总数====>', res)
                 if (res.code == 200) {
                     return res.data
                 } else {

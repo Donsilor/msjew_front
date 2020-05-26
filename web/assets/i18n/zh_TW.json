@@ -2600,7 +2600,9 @@
         "alreadyReceived": "已领取",
         "immediatelyReceive": "立即领取",
         "haveChoose": "已选用",
-        "immediatelyChoose": "立即选用"
+        "immediatelyChoose": "立即选用",
+        "msg1": "優惠券領取成功",
+        "msg2": "優惠券領取失敗，請重試"
     },
     "subject": {
         "discount":{

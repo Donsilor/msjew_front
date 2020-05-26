@@ -2579,10 +2579,17 @@ export default {
     // 添加购物卡
     useCard(){
       const that = this
-
       that.$errorMessage(that.$t(`${lang3}.PleaseLogin`));
+      this.goTop()
+    },
+    showUseCoupon() {
+      this.$errorMessage(`请先登录，才能使用优惠券`)
+      this.goTop()
+    },
+    goTop() {
+      const that = this;
       const topC = document.getElementsByClassName('layout-box')[0];
-
+      
       let timer = setInterval(() => {
         let ispeed = Math.floor(-that.scrollTop / 5)
         topC.scrollTop = that.scrollTop + ispeed
@@ -2590,9 +2597,6 @@ export default {
           clearInterval(timer)
         }
       }, 22)
-    },
-    showUseCoupon() {
-      this.$errorMessage(`请先登录，才能使用优惠券`)
     }
   }
 }

@@ -2614,7 +2614,9 @@
         "alreadyReceived": "已领取",
         "immediatelyReceive": "立即领取",
         "haveChoose": "已选用",
-        "immediatelyChoose": "立即选用"
+        "immediatelyChoose": "立即选用",
+        "msg1": "优惠券领取成功",
+        "msg2": "优惠券领取失败，请重试"
     },
     "subject": {
         "discount":{

@@ -59,7 +59,7 @@
           </div>
         </div>
         <div class="discount-time">
-          <span>{{ lang.activityTime }}：</span><span>2020.4.9</span>
+          <!-- <span>{{ lang.activityTime }}：</span><span>2020.4.9</span> -->
         </div>
       </div>
     <!--    <div v-if="goodInfo.goodsMod === 1" class="include-box">-->

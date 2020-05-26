@@ -470,6 +470,7 @@ export default {
 }
 
 .old-price{
-	color: #747474 !important;
+	color: #b2b2b2 !important;
+	font-size: 14px !important;
 }
 </style>

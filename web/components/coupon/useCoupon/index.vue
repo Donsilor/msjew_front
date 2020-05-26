@@ -17,10 +17,10 @@
               </div>
 
               <div class="price">
-                <span class="price-icon">￥</span>
+                <span class="price-icon">{{coin}}</span>
                 <span class="price-num">{{item.money}}</span>
               </div>
-              <div class="rmb">(￥{{item.money_cn}})</div>
+              <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
               <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
               <div class="text">({{item.lineType}})</div>
@@ -28,7 +28,13 @@
             </div>
 
             <div class="get" @click="chooseCoupon(index)">
-              <span>{{item.ifChoose ? $t(`${lang}.haveChoose`) : $t(`${lang}.immediatelyChoose`) }}</span>
+              <!-- <span>{{item.ifChoose ? $t(`${lang}.haveChoose`) : $t(`${lang}.immediatelyChoose`) }}</span> -->
+              <div v-if="item.ifChoose">
+                <img src="../../../static/order/ticks.png" alt="">
+              </div>
+              <div v-if="!item.ifChoose">
+                <img src="../../../static/order/untick.png" alt="">
+              </div>
             </div>
 
           </div>
@@ -66,6 +72,7 @@
       return {
         lang,
         language: '',
+        coin: '',
         couponList: [],
         ifLoading: false,
         couponInfo: {couponCode: '',couponId: ''}
@@ -73,6 +80,7 @@
     },
     mounted() {
       this.language = this.getCookie('language')
+      this.coin = this.getCookie('coin')
 
       var i=0;
       for(var j in this.couponAll){
@@ -243,20 +251,23 @@
               }
 
               .price {
-                // height: 100px;
                 width: 100%;
+                height: 40px;
                 display: flex;
                 justify-content: center;
+                align-items: center;
+                flex-wrap: nowrap;
+                overflow: hidden;
 
                 .price-icon {
-                  font-size: 27px;
+                  font-size: 22px;
+                  width: 54px;
+                  flex-shrink: 0;
                 }
 
                 .price-num {
-                  font-size: 56px;
+                  font-size: 40px;
                   color: #cdad75;
-                  margin: -9px 0 0 -4px;
-                  padding-right: 10px;
                 }
               }
 
@@ -270,7 +281,7 @@
                 line-height: 30px;
                 font-size: 13px;
                 text-align: center;
-                margin: 0 0 4px;
+                margin-bottom: 4px;
               }
 
               .btn {
@@ -289,8 +300,10 @@
               .text {
                 text-align: center;
                 font-size: 12px;
-                color: #f00;
-                margin-bottom: 10px;
+                color: #bfb8b8;
+                height: 38px;
+                line-height: 18px;
+                overflow: hidden;
               }
 
               .time {
@@ -326,11 +339,23 @@
               margin: 62px auto;
               font-size: 16px;
               color: #f00;
-              cursor: pointer;
+              cursor: pointer;;
 
               span {
                 padding: 10px;
                 box-sizing: border-box;
+              }
+
+              &>div{
+                width: 40px;
+                height: 40px;
+                margin: 20px auto;
+                font-size: 0;
+
+                img{
+                  width: 100%;
+                  height: 100%;
+                }
               }
             }
           }

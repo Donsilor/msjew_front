@@ -17,17 +17,17 @@
               </div>
 
               <div class="price">
-                <span class="price-icon">￥</span>
+                <span class="price-icon">{{coin}}</span>
                 <span class="price-num">{{item.money}}</span>
               </div>
-              <div class="rmb">(￥{{item.money_cn}})</div>
+              <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
               <div class="text">({{item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
             <div class="get" @click="getCoupon(index)">
-              <span v-if="!item.ifUse">{{item.ifChoose}} ? {{ $t(`${lang}.alreadyReceived`) }} : {{ $t(`${lang}.immediatelyReceive`) }}</span>
+              <span v-if="!item.ifUse">{{item.ifChoose ? $t(`${lang}.alreadyReceived`) : $t(`${lang}.immediatelyReceive`) }}</span>
             </div>
 
             <div class="already" v-if="item.ifUse">{{ $t(`${lang}.alreadyReceived`) }}</div>
@@ -65,6 +65,7 @@
     },
     mounted() {
       this.language = this.getCookie('language')
+      this.coin = this.getCookie('coin')
 
       if(this.moneyInfo){
         var i=0;
@@ -137,6 +138,7 @@
       },
       // 领取优惠券
       getCoupon(k) {
+        var that = this;
         this.$nuxt.$loading.start()
         this.loadFinish = false;
         this.$axios.post('web/member/coupon/fetch', {
@@ -146,10 +148,13 @@
           this.couponList[k].ifUse = true;
           this.loadFinish = true;
           this.$nuxt.$loading.finish()
-          this.$successMessage(`领取优惠券成功`)
-          // this.ifLoading = false;
+          this.$successMessage(that.$t(`${lang}.msg1`))
         })
-        .catch(err => {})
+        .catch(err => {
+          this.loadFinish = true;
+          this.$nuxt.$loading.finish()
+          this.$successMessage(that.$t(`${lang}.msg2`))
+        })
       }
     }
   }
@@ -262,20 +267,23 @@
               }
 
               .price {
-                // height: 100px;
                 width: 100%;
+                height: 40px;
                 display: flex;
                 justify-content: center;
+                align-items: center;
+                flex-wrap: nowrap;
+                overflow: hidden;
 
                 .price-icon {
-                  font-size: 27px;
+                  font-size: 22px;
+                  width: 54px;
+                  flex-shrink: 0;
                 }
 
                 .price-num {
-                  font-size: 56px;
+                  font-size: 40px;
                   color: #cdad75;
-                  margin: -9px 0 0 -4px;
-                  padding-right: 10px;
                 }
               }
 
@@ -289,7 +297,7 @@
                 line-height: 30px;
                 font-size: 13px;
                 text-align: center;
-                margin: 0 0 4px;
+                margin-bottom: 4px;
               }
 
               .btn {
@@ -308,8 +316,10 @@
               .text {
                 text-align: center;
                 font-size: 12px;
-                color: #f00;
-                margin-bottom: 10px;
+                color: #bfb8b8;
+                height: 38px;
+                line-height: 18px;
+                overflow: hidden;
               }
 
               .time {
@@ -339,12 +349,13 @@
             .get {
               width: 140px;
               height: 80px;
-              border-left: 1px solid #f00;
+              border-left: 1px solid #bd4444;
               line-height: 80px;
               text-align: center;
               margin: 62px auto;
               font-size: 16px;
-              color: #f00;
+              color: #bd4444;
+              font-weight: bold;
               cursor: pointer;
 
               span {

@@ -235,7 +235,7 @@
         <div class="favourable-box" v-if="info.coupon.money">
         	<div class="discount-active">
         		<div>
-        			<span>{{ $t(`${lang}.`) }}：</span>
+        			<span>{{ $t(`${lang}.discounts1`) }}：</span>
         			<span class="favourable-icon">￥</span>
         			<span class="get" @click="getCoupon">{{ $t(`${lang}.getCoupon`) }}></span>
         		</div>

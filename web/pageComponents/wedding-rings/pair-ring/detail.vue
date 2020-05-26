@@ -883,7 +883,7 @@ export default {
   },
   watch: {
     info(val, oldVal) {
-      console.log('info=======>')
+      // console.log('info=======>')
     }
   },
   mounted() {
@@ -977,7 +977,8 @@ export default {
     },
     // 加入购物车
     addCart() {
-      const _this = this
+      const _this = this;
+
       if (!_this.canAddCart) {
         return
       }
@@ -1007,7 +1008,7 @@ export default {
           goods_type:2
         }
       ]
-      console.log(goodInfo)
+      // console.log(goodInfo)
       _this.$store
         .dispatch('addCart', goodInfo)
         .then(data => {
