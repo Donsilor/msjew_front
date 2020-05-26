@@ -846,6 +846,7 @@
       "aboutBDD": "About BDD",
       "BDDStory": "BDD Brand Story",
       "diamondKnowledge": "Diamond Knowledge",
+      "aboutCompany": "Company Profile",
       "payType": "Payment methods",
       "qualityAndValue": "Quality & Value",
       "aboutRefund": "Return & Refund Policy",
@@ -1855,6 +1856,7 @@
       ]
     },
     "privacyPolicy": {
+      "header1": "Company Profile",
       "header": "Privacy Policy",
       "define": "In order to enhance customers’ shopping experience and satisfaction, BDD Co. (including its affiliates and subsidiaries) has always been committed to protect and secure customers’ personal information. The following information is provided to you of what types of information we collect, the reasons and the usages of such information. In this article, 'Website' refers to BDD Co. website, mobile apps and other software. Also, 'Service' in this article includes our site, customer service calls and any other product or shopping services that provided by BDD Co.",
       "tit1": "Data Collection",

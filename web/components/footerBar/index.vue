@@ -123,6 +123,7 @@ export default {
             //     path: '/brand-story'
             //   }
             // },
+            
             {
               icon: '',
               name: this.$t(`${lang}.diamondKnowledge`),
@@ -136,7 +137,14 @@ export default {
               to: {
                 path: '/policies/payment-methods'
               }
-            }
+            },
+            {
+              icon: '',
+              name: this.$t(`${lang}.aboutCompany`),
+              to: {
+                path: '/policies/about-company'
+              }
+            },
           ]
         },
         {
@@ -255,6 +263,13 @@ export default {
               name: this.$t(`${lang}.paymentMethods`),
               to: {
                 path: '/policies/payment-methods'
+              }
+            },
+            {
+              icon: '',
+              name: this.$t(`${lang}.aboutCompany`),
+              to: {
+                path: '/policies/about-company'
               }
             }
           ]

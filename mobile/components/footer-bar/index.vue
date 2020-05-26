@@ -54,6 +54,11 @@
           <!--            </span>-->
           <!--          </li>-->
           <li class="item">
+            <span @click="jump('/help-pages/aboutCompany')">
+              {{ lang.aboutCompany }}
+            </span>
+          </li>
+          <li class="item">
             <span @click="jump('/help-pages/knowledge')">
               {{ lang.diamondKnowledge }}
             </span>
