@@ -2,7 +2,7 @@
   <div class="pay">
     <div class="paylist" v-show="paylist">
       <Header :title="lang.pay" tips="1" />
-      <div v-if="this.$store.state.coin == 'CNY'" class="proce">
+      <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
         <span>{{ info.coinType }} </span>
         {{ formatMoney(price) }}
         <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>

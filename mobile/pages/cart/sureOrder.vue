@@ -33,7 +33,7 @@
     <div class="payways" v-if="!isLogin">
       <div class="pay">
         <!-- <Header :title="lang2.pay" tips="1" /> -->
-        <div v-if="this.$store.state.coin == 'CNY'" class="proce">
+        <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
           <span>{{ coin }} </span>
           {{ formatMoney(productAmount) }}
           <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
