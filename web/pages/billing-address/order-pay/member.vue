@@ -2893,6 +2893,7 @@ export default {
                 orderId: res.data.orderId,
                 price: that.ultimatelyPay,
                 coinType: res.data.coinType,
+                priceHKD:res.data.payAmountHKD
               }
             })
           }
@@ -2978,7 +2979,8 @@ export default {
               query: {
                 orderId: res.data.orderId,
                 price: that.ultimatelyPay,
-                coinType: res.data.coinType
+                coinType: res.data.coinType,
+                priceHKD:res.data.payAmountHKD 
               }
             })
           }

@@ -378,6 +378,9 @@
                 <div v-show="payWay == 6" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
+                <div v-show="payWay == 6 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div>
                 <div v-show="payWay == 6" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -394,6 +397,9 @@
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay === 61" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay === 61 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
                 </div>
                 <div v-show="payWay == 61" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -412,6 +418,9 @@
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 82" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 82 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
                 </div>
                 <div v-show="payWay == 82" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -448,6 +457,9 @@
                 <div v-show="payWay == 83" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
+                <div v-show="payWay == 83 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div>
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -467,6 +479,9 @@
                 <div v-show="payWay === 81" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
+                <div v-show="payWay === 81 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div>
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -485,6 +500,9 @@
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
                 <div v-show="payWay == 84" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 84 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
                 </div>
                 <div v-show="payWay == 84" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1407,6 +1425,9 @@
                 <div v-show="payWay == 6" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
+                <div v-show="payWay == 6 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div>
                 <div v-show="payWay == 6" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -1424,6 +1445,9 @@
                 <div v-show="payWay === 61" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
+                <div v-show="payWay === 61 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div>
                 <div v-show="payWay == 61" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -1440,6 +1464,9 @@
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 82" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 82 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
                 </div>
                 <div v-show="payWay == 82" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1477,6 +1504,9 @@
                 <div v-show="payWay == 83" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
+                <div v-show="payWay == 83 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div>
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -1497,6 +1527,9 @@
                 <div v-show="payWay === 81" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
                 </div>
+                <div v-show="payWay === 81 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div>
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -1515,6 +1548,9 @@
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
                 <div v-show="payWay == 84" class="pay-price">
                   {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                </div>
+                <div v-show="payWay == 84 && this.$store.state.coin == 'CNY'" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
                 </div>
                 <div v-show="payWay == 84" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -2153,8 +2189,10 @@ export default {
         taxFee: 0,
         safeFee: 0,
         orderAmount: 0,
-        planDays: ''
+        planDays: '',
+        priceHKD:0
       },
+      coinHKD:"HKD",
       die: false,
       tooInp: '',
       makeGay: false,
@@ -2485,7 +2523,8 @@ export default {
           .then(res => {
             this.canSubmit = true
             this.tex = res.data
-            console.log("税费",this.tex)
+            this.tex.priceHKD = res.data.order_amount_HKD
+            // console.log("税费",res.data)
           })
           .catch(err => {
             this.canSubmit = false
@@ -2525,7 +2564,7 @@ export default {
       }else if(this.payWay==61){
         pay = 61
       }
-    // console.log("方式",pay)
+      // console.log("方式",pay)
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -4417,6 +4456,15 @@ div {
           right: 80px;
           // top: 50px;
           top: 33px;
+          line-height: 24px;
+        }
+        .pay-price-change{
+          font-size: 15px;
+          font-family: twCenMt;
+          color: #c6bbb9;
+          position: absolute;
+          right: 80px;
+          top: 55px;
           line-height: 24px;
         }
         .choose-tick {

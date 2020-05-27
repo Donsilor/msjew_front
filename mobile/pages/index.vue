@@ -356,6 +356,9 @@ export default {
         console.error(err)
       })
   },
+  mounted(){
+    console.log("this.seoInfo",this.seoInfo)
+  },
   // mounted() {
   //   const _this = this
   //   _this.$nextTick(() => {

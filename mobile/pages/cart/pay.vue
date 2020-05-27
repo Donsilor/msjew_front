@@ -2,7 +2,12 @@
   <div class="pay">
     <div class="paylist" v-show="paylist">
       <Header :title="lang.pay" tips="1" />
-      <div class="proce">
+      <div v-if="this.$store.state.coin == 'CNY'" class="proce">
+        <span>{{ info.coinType }} </span>
+        {{ formatMoney(price) }}
+        <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
+      </div>
+      <div v-else class="proce">
         <span>{{ info.coinType }} </span>
         {{ formatMoney(price) }}
       </div>
@@ -86,6 +91,7 @@ export default {
     return {
       lang: this.LANGUAGE.cart.pay,
       coin: this.$store.state.coin,
+      coinHKD:"HKD",
       form: [],
       actionLink: '',
       list: [
@@ -160,6 +166,7 @@ export default {
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
       price: JSON.parse(this.$route.query.info).payAmount,
+      priceHKD: JSON.parse(this.$route.query.info).payAmountHKD,
       needtips: false,
       typeIndex: JSON.parse(this.$route.query.info).payAmount === 0 ? 5 : 0,
       isLogin: !!this.$store.state.token,
@@ -353,6 +360,9 @@ export default {
       font-size: 16px;
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
+    }
+    .price-hkd{
+      color: rgba(242, 155, 135, 1);
     }
   }
   ul {

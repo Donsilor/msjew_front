@@ -21,14 +21,22 @@
             </select>
           <i class="iconfont iconkuozhan"></i>
         </div>
-        <div class="select-line-box">
+        <div class="select-line-box" v-if="this.$store.state.platform === 11">
+          <input :value="coin" type="text" />
+          <select name="" id="" v-model="coin">
+            <option v-for="(p, index) in coinOptionsCn" :key="index" :value="p.code">
+              {{p.content}}
+            </option>
+          </select>
+          <i class="iconfont iconkuozhan"></i>
+        </div>
+        <div v-else class="select-line-box">
           <input :value="coin" type="text" />
           <select name="" id="" v-model="coin">
             <option v-for="(p, index) in coinOptions" :key="index" :value="p.code">
               {{p.content}}
             </option>
           </select>
-         
           <i class="iconfont iconkuozhan"></i>
         </div>
          <!-- <select name="" id="" v-model="aa">
@@ -98,6 +106,7 @@ export default {
       coin: 0,
       languageOptions: this.$bddDefinition.languageOptions,
       coinOptions: this.$bddDefinition.coinOptions,
+      coinOptionsCn: this.$bddDefinition.coinOptionsCn,
       aa:'',
       languages:'English'
     }
@@ -108,18 +117,30 @@ export default {
       return this.languageOptions[this.language].content
     },
     coinText() {
-      return this.coinOptions[this.coin].content
+      if(this.$store.state.platform === 11){
+        return this.coinOptionsCn[this.coin].content
+      } else {
+        return this.coinOptions[this.coin].content
+      }
     },
     languageCode() {
       return this.languageOptions[this.language].code
     },
     coinCode() {
-      return this.coinOptions[this.coin].code
+      if(this.$store.state.platform === 11){
+        return this.coinOptionsCn[this.coin].code
+      } else {
+        return this.coinOptions[this.coin].code
+      }
     }
   },
   created(){
     // console.log("coin",this.coinOptions)
-    this.coin = this.coinOptions[0].content
+    if(this.$store.state.platform === 11){
+      this.coin = this.coinOptionsCn[0].content
+    } else {
+      this.coin = this.coinOptions[0].content
+    }
   },
   mounted() {
     // this.language = this.languageOptions[0].content
@@ -133,10 +154,19 @@ export default {
         }
       }
 
-      for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
-        if (_this.coinOptions[n].code === _this.$store.state.coin) {
-          _this.coin = _this.coinOptions[n].code
-          break
+      if(this.$store.state.platform === 11){
+        for (let n = 0, length = _this.coinOptionsCn.length; n < length; n++) {
+          if (_this.coinOptionsCn[n].code === _this.$store.state.coin) {
+            _this.coin = _this.coinOptionsCn[n].code
+            break
+          }
+        }
+      } else {
+        for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
+          if (_this.coinOptions[n].code === _this.$store.state.coin) {
+            _this.coin = _this.coinOptions[n].code
+            break
+          }
         }
       }
     })

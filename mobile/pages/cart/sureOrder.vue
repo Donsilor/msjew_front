@@ -32,11 +32,16 @@
     <!-- 支付方式 -->
     <div class="payways" v-if="!isLogin">
       <div class="pay">
-        <!-- <Header :title="lang2.pay" tips="1" />
-        <div class="proce">
-          <span>{{ info.coinType }} </span>
-          {{ formatMoney(price) }}
-        </div> -->
+        <!-- <Header :title="lang2.pay" tips="1" /> -->
+        <div v-if="this.$store.state.coin == 'CNY'" class="proce">
+          <span>{{ coin }} </span>
+          {{ formatMoney(productAmount) }}
+          <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
+        </div>
+        <div v-else class="proce">
+          <span>{{ coin }} </span>
+          {{ formatMoney( productAmount) }}
+        </div>
         <ul>
           <li v-for="(item, index) in list2" :key="index">
             <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
@@ -374,6 +379,8 @@ export default {
       cuponName: this.LANGUAGE.cart.sureOrder.cuponName,
       preferFee: 0, // 优惠卷金额
       productAmount: 0, // 商品总金额
+      priceHKD:0, //人民币转化成港币后的价格
+      coinHKD:"HKD",
       allFee: this.defaultAllFeeInfo(),
       userRemark: '',
       isSend: true,
@@ -930,6 +937,7 @@ export default {
             this.orderTotalAmount = res.order_amount;
             this.ultimatelyPay = res.order_amount;
             this.currency = res.currency;
+            this.priceHKD = res.order_amount_HKD
 
             this.planDays = this.allFee.planDays
 
@@ -1046,7 +1054,7 @@ export default {
          }
          if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
             this.$toast.show(this.lang.firstLogin)
-            // this.$nuxt.$loading.finish()
+            this.$nuxt.$loading.finish()
            return
          }
        }
@@ -1713,6 +1721,9 @@ export default {
       font-size: 16px;
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
+    }
+    .price-hkd{
+      color: rgba(242, 155, 135, 1);
     }
   }
   ul {

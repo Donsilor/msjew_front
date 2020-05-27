@@ -350,7 +350,8 @@ export default {
       const res = {
         coinType: val.coinCode, // 支付币种 ,
         payAmount: val.payAmount, // 支付金额 ,
-        orderId: val.id // 订单ID
+        orderId: val.id, // 订单ID
+        payAmountHKD: val.payAmountHKD
       }
       this.$router.push({
         name: 'cart-pay',

@@ -24,7 +24,23 @@
             <i class="iconfont iconkuozhan"></i>
           </div>
         </div>
-        <div class="select-line" @click="chooseCoin">
+        <div v-if="this.$store.state.platform === 11" class="select-line" @click="chooseCoin">
+          <div class="line-icon">
+            <i class="iconfont iconhuobi"></i>
+          </div>
+          <div class="line-text">
+            <input :value="coin" type="text" />
+            <select name="" id="" v-model="coin">
+              <option v-for="(p, index) in coinOptionsCn" :key="index" :value="p.code">
+                {{p.content}}
+              </option>
+            </select>
+          </div>
+          <div class="select-icon">
+            <i class="iconfont iconkuozhan"></i>
+          </div>
+        </div>
+        <div v-else class="select-line" @click="chooseCoin">
           <div class="line-icon">
             <i class="iconfont iconhuobi"></i>
           </div>
@@ -73,6 +89,7 @@ export default {
       coin: 0,
       languageOptions: this.$bddDefinition.languageOptions,
       coinOptions: this.$bddDefinition.coinOptions,
+      coinOptionsCn: this.$bddDefinition.coinOptionsCn,
       langs:'',
       languages:'English'
     }
@@ -82,13 +99,21 @@ export default {
       return this.languageOptions[this.language].content
     },
     coinText() {
-      return this.coinOptions[this.coin].content
+      if(this.$store.state.platform === 11){
+        return this.coinOptionsCn[this.coin].content
+      } else {
+        return this.coinOptions[this.coin].content
+      }
     },
     languageCode() {
       return this.languageOptions[this.language].code
     },
     coinCode() {
-      return this.coinOptions[this.coin].code
+      if(this.$store.state.platform === 11){
+        return this.coinOptionsCn[this.coin].code
+      } else {
+        return this.coinOptions[this.coin].code
+      }
     }
   },
   mounted() {
@@ -101,10 +126,19 @@ export default {
         }
       }
 
-      for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
-        if (_this.coinOptions[n].code === _this.$store.state.coin) {
-          _this.coin = _this.coinOptions[n].code
-          break
+      if(this.$store.state.platform === 11){
+        for (let n = 0, length = _this.coinOptionsCn.length; n < length; n++) {
+          if (_this.coinOptionsCn[n].code === _this.$store.state.coin) {
+            _this.coin = _this.coinOptionsCn[n].code
+            break
+          }
+        }
+      } else {
+        for (let n = 0, length = _this.coinOptions.length; n < length; n++) {
+          if (_this.coinOptions[n].code === _this.$store.state.coin) {
+            _this.coin = _this.coinOptions[n].code
+            break
+          }
         }
       }
     })

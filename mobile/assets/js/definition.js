@@ -786,6 +786,21 @@ export default language => {
         code: 'USD',
         content: 'USD'
       }
+    ],
+
+    coinOptionsCn: [
+      {
+        code: 'HKD',
+        content: 'HKD'
+      },
+      {
+        code: 'CNY',
+        content: 'CNY'
+      },
+      {
+        code: 'USD',
+        content: 'USD'
+      }
     ]
   }
 }
