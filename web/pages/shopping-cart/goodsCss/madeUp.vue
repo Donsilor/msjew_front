@@ -23,7 +23,7 @@
 
             <!-- 优惠券 -->
             <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'money'">
-              <span>优惠券</span>
+              <span>{{ $t(`${lang}.discounts1`) }}</span>
             </div>
           </div>
           <div class="good-desc" @click="goDetail()">
@@ -49,7 +49,7 @@
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
 
 		  <!-- 原金额 -->
-		  <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
+		  <div class="good-price old-price">
 		    {{ g.coinType }}
 		    {{
 		      formatNumber(
@@ -61,6 +61,14 @@
 		  <!-- 优惠后金额 -->
           <div class="good-price">
             <span v-if="couponType(g.data[0].coupon) == 'discount'">
+              {{ g.coinType }}
+              {{
+                formatNumber(
+                  g.data[0].coupon.discount.price
+                )
+              }}
+            </span>
+            <span  v-if="couponType(g.data[0].coupon) !== 'discount'">
               {{ g.coinType }}
               {{
                 formatNumber(
@@ -123,7 +131,7 @@
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
 
 		  <!-- 原金额 -->
-		  <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
+		  <div class="good-price old-price">
 		    {{ g.coinType }}
 		    {{
 		      formatNumber(
@@ -138,7 +146,15 @@
               {{ g.coinType }}
               {{
                 formatNumber(
-                  g.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+                  g.data[0].coupon.discount.price
+                )
+              }}
+            </span>
+            <span  v-if="couponType(g.data[0].coupon) !== 'discount'">
+              {{ g.coinType }}
+              {{
+                formatNumber(
+                  g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
                 )
               }}
             </span>
@@ -199,6 +215,9 @@ export default {
         return true
       }
     }
+  },
+  mounted() {
+    console.log(12112,this.g)
   },
   methods: {
     goDetail() {

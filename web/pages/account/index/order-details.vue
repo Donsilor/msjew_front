@@ -59,7 +59,7 @@
           </span>
         </div>
         <div v-else class="status">
-          <span v-if="data.orderStatus == '10'"> 
+          <span v-if="data.orderStatus == '10'">
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.waitingPay`)
           }}</span>
@@ -315,8 +315,16 @@
               -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
             </div>
           </div>
-          <div class="info-line">
-            <div class="label">{{ $t(`${lang}.coupon`) }}</div>
+          <!-- 优惠金额 -->
+          <!-- <div class="info-line">
+            <div class="label">{{ $t(`${lang_invoice}.coupon`) }}</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{ formatNumber(data.preferFee) }}
+            </div>
+          </div> -->
+          <!-- 折扣金额 -->
+          <div class="info-line" v-if="data.preferFee != 0">
+            <div class="label">{{ $t(`${lang_invoice}.discountPrice`) }}</div>
             <div class="ff color-pink">
               -{{ data.coinCode }} {{ formatNumber(data.preferFee) }}
             </div>
@@ -452,7 +460,6 @@ export default {
   },
   mounted() {
     this.getData()
-    
   },
   methods: {
     getStatusText(status) {
@@ -485,7 +492,6 @@ export default {
           )
           this.data.details.forEach(obj => {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
-            console.log(888,obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
           })
           if(!this.data.invoice.isElectronic){

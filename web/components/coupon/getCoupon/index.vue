@@ -21,7 +21,7 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
-              <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
+              <div class="rule">{{ $t(`${lang}.limit1`) }}{{coin}} {{item.at_least}}{{ $t(`${lang}.limit2`) }}</div>
               <div class="text">({{item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
@@ -88,7 +88,7 @@
 
       if(this.couponList.length != 0){
         this.$nuxt.$loading.start()
-        // 已领取的优惠券
+        // 可的优惠券
         this.$axios.get('web/member/coupon/index', {
           })
           .then(res => {
@@ -96,8 +96,9 @@
 
             // 判断可用优惠券中哪些是已领取的优惠券
             for(var i=0; i<this.couponList.length; i++){
+              this.couponList[i].ifUse = false;
               for(var j=0; j<couponAllList.length; j++){
-                if(this.couponList[i].coupon_id == couponAllList[j].couponId){
+                if(this.couponList[i].coupon_id == couponAllList[j].couponId && couponAllList[j].couponStatus==1){
                   this.couponList[i].ifUse = true;
                 }
               }
@@ -138,23 +139,25 @@
       },
       // 领取优惠券
       getCoupon(k) {
-        var that = this;
-        this.$nuxt.$loading.start()
-        this.loadFinish = false;
-        this.$axios.post('web/member/coupon/fetch', {
-          coupon_id: this.couponList[k].coupon_id
-        })
-        .then(res => {
-          this.couponList[k].ifUse = true;
-          this.loadFinish = true;
-          this.$nuxt.$loading.finish()
-          this.$successMessage(that.$t(`${lang}.msg1`))
-        })
-        .catch(err => {
-          this.loadFinish = true;
-          this.$nuxt.$loading.finish()
-          this.$successMessage(that.$t(`${lang}.msg2`))
-        })
+        if(!this.couponList[k].ifUse){
+          var that = this;
+          this.$nuxt.$loading.start()
+          this.loadFinish = false;
+          this.$axios.post('web/member/coupon/fetch', {
+            coupon_id: this.couponList[k].coupon_id
+          })
+          .then(res => {
+            this.couponList[k].ifUse = true;
+            this.loadFinish = true;
+            this.$nuxt.$loading.finish()
+            this.$successMessage(that.$t(`${lang}.msg1`))
+          })
+          .catch(err => {
+            this.loadFinish = true;
+            this.$nuxt.$loading.finish()
+            this.$successMessage(that.$t(`${lang}.msg2`))
+          })
+        }
       }
     }
   }

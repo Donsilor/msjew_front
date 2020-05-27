@@ -2,16 +2,17 @@
   <div>
     <step></step>
     <DiamondDetail v-if="info" :info="info"></DiamondDetail>
-    <sole-out></sole-out>
+    <!-- <sole-out></sole-out> -->
   </div>
 </template>
 
 <script>
 import DiamondDetail from '@/pageComponents/diamonds/detail.vue'
-import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
+// import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   components: {
-    DiamondDetail
+    DiamondDetail,
+    // SoleOut
   },
   data() {
     return {

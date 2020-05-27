@@ -21,7 +21,7 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
-              <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.at_least_cn}}{{ $t(`${lang}.limit2`) }}</div>
+              <div class="rule">{{ $t(`${lang}.limit1`) }}{{coin}} {{item.at_least}}{{ $t(`${lang}.limit2`) }}</div>
               <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
               <div class="text">({{item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>

@@ -2563,7 +2563,9 @@
         "ultimatelyPay": "实付金额",
         "NeedPay": "需付金額",
         "submitSuccessfully": "订单提交成功!",
-        "PleaseLogin": "请先登录，才能使用购物卡！"
+        "PleaseLogin": "请先登录，才能使用购物卡！",
+        "coupon": "优惠券",
+        "discountPrice": "折扣金额"
     },
     "shoppingCard": {
         "title": "添加购物卡信息",

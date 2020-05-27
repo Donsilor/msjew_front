@@ -365,7 +365,7 @@ export default {
       }else if(this.couponType(this.info.coupon) == 'money'){
         co = 'money'
       }else{
-        co = ''
+        co = 0
       }
 
       return co
@@ -418,7 +418,6 @@ export default {
           break
         }
       }
-      console.log(55,result);
       return result
     },
     startDj() {
@@ -467,14 +466,14 @@ export default {
   },
   watch: {
     info(val, oldVal) {
-      console.log('info=======>')
+      // console.log('info=======>')
     }
   },
   mounted() {
-    console.log(444444,this.info)
+    console.log('this.info',this.info)
     const _this = this
     _this.$nextTick(() => {})
-    console.log(this.simpleDetail, `<=======`)
+    // console.log(this.simpleDetail, `<=======`)
   },
   methods: {
     getProductInfo() {

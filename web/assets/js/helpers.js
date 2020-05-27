@@ -3,7 +3,7 @@ import CryptoJs from 'crypto-js'
 class Helpers {
   // 测试功能
   test(str) {
-    console.log(`This is a helpers's test ===> ${str}`)
+    // console.log(`This is a helpers's test ===> ${str}`)
   }
 
   // post请求json转换 type为true时，过滤空元素，反之不过滤

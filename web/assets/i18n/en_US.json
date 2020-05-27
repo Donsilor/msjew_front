@@ -2545,7 +2545,9 @@
         "ultimatelyPay": "Actual payment",
         "NeedPay": "MoneyNeedPay",
         "submitSuccessfully": "Order Submission Successful!",
-        "PleaseLogin": "Please log in first to use the gift card！"
+        "PleaseLogin": "Please log in first to use the gift card！",
+        "coupon": "優惠券",
+        "discountPrice": "折扣金額"
     },
     "shoppingCard": {
         "title": " Add Shopping Card Information",

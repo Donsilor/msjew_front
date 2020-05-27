@@ -472,7 +472,7 @@ export default {
       }else if(this.couponType(this.info.coupon) == 'money'){
         co = 'money'
       }else{
-        co = ''
+        co = 0
       }
 
       return co

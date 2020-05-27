@@ -2549,7 +2549,9 @@
         "ultimatelyPay": "實付金額",
         "NeedPay": "需付金額",
         "submitSuccessfully": "訂單提交成功!",
-        "PleaseLogin": "請先登錄，才能使用購物卡！"
+        "PleaseLogin": "請先登錄，才能使用購物卡！",
+        "coupon": "優惠券",
+        "discountPrice": "折扣金額"
     },
     "shoppingCard": {
         "title": "添加購物卡信息",
