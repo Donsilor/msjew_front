@@ -366,7 +366,7 @@ export default {
       const coinOptions = this.$bddDefinition.coinOptions
       const coinOptionsCn = this.$bddDefinition.coinOptionsCn
 
-      if(this.$store.state.platform === 11){
+      if(this.$store.state.platform === 21){
         for (let n = 0, length = coinOptionsCn.length; n < length; n++) {
           if (coinOptionsCn[n].code === coin) {
             result = coinOptionsCn[n]

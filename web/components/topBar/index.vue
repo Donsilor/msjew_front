@@ -131,7 +131,7 @@
             </div>
 
             <!--        货币切换-->
-            <div v-if="this.$store.state.platform === 10" class="item coin">
+            <div v-if="this.$store.state.platform === 20" class="item coin">
               <el-dropdown
                 type="primary"
 
@@ -1918,7 +1918,7 @@ export default {
       //     coinOptions = coinOptions.splice(n, 1)
       //   }
       // }
-      if(this.$store.state.platform === 10){
+      if(this.$store.state.platform === 20){
         for (let n = 0, length = coinOptionsCn.length; n < length; n++) {
           if (coinOptionsCn[n].code === coin) {
             result = coinOptionsCn[n]

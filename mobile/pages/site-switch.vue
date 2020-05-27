@@ -21,7 +21,7 @@
             </select>
           <i class="iconfont iconkuozhan"></i>
         </div>
-        <div class="select-line-box" v-if="this.$store.state.platform === 11">
+        <div class="select-line-box" v-if="this.$store.state.platform === 21">
           <input :value="coin" type="text" />
           <select name="" id="" v-model="coin">
             <option v-for="(p, index) in coinOptionsCn" :key="index" :value="p.code">
@@ -117,7 +117,7 @@ export default {
       return this.languageOptions[this.language].content
     },
     coinText() {
-      if(this.$store.state.platform === 11){
+      if(this.$store.state.platform === 21){
         return this.coinOptionsCn[this.coin].content
       } else {
         return this.coinOptions[this.coin].content
@@ -127,7 +127,7 @@ export default {
       return this.languageOptions[this.language].code
     },
     coinCode() {
-      if(this.$store.state.platform === 11){
+      if(this.$store.state.platform === 21){
         return this.coinOptionsCn[this.coin].code
       } else {
         return this.coinOptions[this.coin].code
@@ -136,7 +136,7 @@ export default {
   },
   created(){
     // console.log("coin",this.coinOptions)
-    if(this.$store.state.platform === 11){
+    if(this.$store.state.platform === 21){
       this.coin = this.coinOptionsCn[0].content
     } else {
       this.coin = this.coinOptions[0].content
@@ -154,7 +154,7 @@ export default {
         }
       }
 
-      if(this.$store.state.platform === 11){
+      if(this.$store.state.platform === 21){
         for (let n = 0, length = _this.coinOptionsCn.length; n < length; n++) {
           if (_this.coinOptionsCn[n].code === _this.$store.state.coin) {
             _this.coin = _this.coinOptionsCn[n].code

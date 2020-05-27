@@ -24,7 +24,7 @@
             <i class="iconfont iconkuozhan"></i>
           </div>
         </div>
-        <div v-if="this.$store.state.platform === 11" class="select-line" @click="chooseCoin">
+        <div v-if="this.$store.state.platform === 21" class="select-line" @click="chooseCoin">
           <div class="line-icon">
             <i class="iconfont iconhuobi"></i>
           </div>
@@ -99,7 +99,7 @@ export default {
       return this.languageOptions[this.language].content
     },
     coinText() {
-      if(this.$store.state.platform === 11){
+      if(this.$store.state.platform === 21){
         return this.coinOptionsCn[this.coin].content
       } else {
         return this.coinOptions[this.coin].content
@@ -109,7 +109,7 @@ export default {
       return this.languageOptions[this.language].code
     },
     coinCode() {
-      if(this.$store.state.platform === 11){
+      if(this.$store.state.platform === 21){
         return this.coinOptionsCn[this.coin].code
       } else {
         return this.coinOptions[this.coin].code
@@ -126,7 +126,7 @@ export default {
         }
       }
 
-      if(this.$store.state.platform === 11){
+      if(this.$store.state.platform === 21){
         for (let n = 0, length = _this.coinOptionsCn.length; n < length; n++) {
           if (_this.coinOptionsCn[n].code === _this.$store.state.coin) {
             _this.coin = _this.coinOptionsCn[n].code
