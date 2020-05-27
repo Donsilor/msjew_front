@@ -2449,7 +2449,8 @@
         "addAddress": "New shipping address",
         "info": "Product Information",
         "number": "Qty",
-        "price": "Amount",
+        "oldPrice": "原金额",
+        "newPrice": "优惠后金额",
         "option": "Operation",
         "customMade": "Custom",
         "deliveryInformation": "Shipping information",
@@ -2508,7 +2509,9 @@
         "msg10": "The shopping cart cannot be empty. Please add the item again",
         "msg11": "Need to log in for shopping / Mainland China Only",
         "needlogin": "Need to log in for shopping",
-        "notAvailable": "Select available coupons"
+        "notAvailable": "Select available coupons",
+        "discountPrice": "折扣金额",
+        "needRegister": "請先登錄，才能使用優惠券"
     },
     "invoice": {
         "personal": "personal",

@@ -540,8 +540,8 @@
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
         ><span>{{ $t(`${lang}.number`) }}</span
-        ><span>{{ $t(`${lang}.price`) }}</span
-        ><span>{{ $t(`${lang}.price`) }}</span>
+        ><span>{{ $t(`${lang}.oldPrice`) }}</span
+        ><span>{{ $t(`${lang}.newPrice`) }}</span>
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
@@ -893,12 +893,20 @@
               </div>
             </div>
 
-            <!-- 折扣 -->
+            <!-- 优惠券 -->
             <div v-show="objectIfEmpty(tex.coupons)" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
               <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': 1}" @click="showUseCoupon">
                 <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
                 <div>{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+            <!-- 折扣金额 -->
+            <div v-show="tex.discount_amount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{$store.state.coin}} {{ formatMoney(tex.discount_amount) }}</div>
               </div>
             </div>
 
@@ -1543,7 +1551,8 @@
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
         ><span>{{ $t(`${lang}.number`) }}</span
-        ><span>{{ $t(`${lang}.price`) }}</span>
+        ><span>{{ $t(`${lang}.oldPrice`) }}</span
+        ><span>{{ $t(`${lang}.newPrice`) }}</span>
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
@@ -1894,12 +1903,20 @@
               </div>
             </div>
 
-            <!-- 折扣 -->
+            <!-- 优惠券 -->
             <div v-show="objectIfEmpty(tex.coupons)" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
               <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': 1}" @click="showUseCoupon">
                 <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
                 <div>{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+            <!-- 折扣金额 -->
+            <div v-show="tex.discount_amount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{$store.state.coin}} {{ formatMoney(tex.discount_amount) }}</div>
               </div>
             </div>
 
@@ -2583,13 +2600,14 @@ export default {
       this.goTop()
     },
     showUseCoupon() {
-      this.$errorMessage(`请先登录，才能使用优惠券`)
+      const that = this
+      this.$errorMessage(that.$t(`${lang}.needRegister`))
       this.goTop()
     },
     goTop() {
       const that = this;
       const topC = document.getElementsByClassName('layout-box')[0];
-      
+
       let timer = setInterval(() => {
         let ispeed = Math.floor(-that.scrollTop / 5)
         topC.scrollTop = that.scrollTop + ispeed
@@ -3157,17 +3175,21 @@ div {
     }
 
     span:nth-child(1) {
-      width: 710px;
+      width: 698px;
     }
 
     span:nth-child(2) {
       width: 70px;
-      margin-right: 110px;
+      margin-right: 56px;
       text-align: center;
     }
     span:nth-child(3) {
       width: 70px;
-      margin-right: 110px;
+      margin-right: 99px;
+      text-align: center;
+    }
+    span:nth-child(4) {
+      width: 100px;
       text-align: center;
     }
   }

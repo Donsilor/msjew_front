@@ -2453,7 +2453,8 @@
         "addAddress": "添加收貨地址",
         "info": "商品訊息",
         "number": "數量",
-        "price": "金額",
+        "oldPrice": "原金額",
+        "newPrice": "優惠後金額",
         "option": "操作",
         "customMade": "定製",
         "deliveryInformation": "發貨訊息",
@@ -2512,7 +2513,9 @@
         "msg10": "購物車不能為空，請重新添加商品",
         "msg11": "需登錄購物 / 僅供大陸使用",
         "needlogin": "需登錄購物",
-        "notAvailable": "選擇可用優惠券"
+        "notAvailable": "選擇可用優惠券",
+        "discountPrice": "折扣金額",
+        "needRegister": "請先登錄，才能使用優惠券"
     },
     "invoice": {
         "personal": "個人",

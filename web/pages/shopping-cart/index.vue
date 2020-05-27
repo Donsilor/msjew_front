@@ -695,19 +695,20 @@ export default {
         display: block;
       }
       span:nth-child(1) {
-        width: 140+269+71+185+83px;
+        // width: 140+269+71+185+83px;
+        width: 745px;
       }
       span:nth-child(2) {
         // width: 60+120px;
-        width: 120px;
+        width: 118px;
       }
       span:nth-child(3) {
         // width: 207px;
-        width: 160px;
+        width: 166px;
       }
       span:nth-child(4) {
         // width: 207px;
-        width: 160px;
+        width: 145px;
       }
     }
     .cart-goods {

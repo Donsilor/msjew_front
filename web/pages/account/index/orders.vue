@@ -111,7 +111,7 @@
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
           <!--已付款 20-->
@@ -127,7 +127,7 @@
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
           <!--待发货 30-->
@@ -143,7 +143,7 @@
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -170,11 +170,11 @@
             </div>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -187,11 +187,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -207,11 +207,11 @@
             </div>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -459,7 +459,7 @@ export default {
             })
           }
           this.listData = res.data.data
-          // console.log("订单",this.listData)
+          console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {

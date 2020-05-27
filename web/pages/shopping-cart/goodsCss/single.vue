@@ -65,7 +65,7 @@
       <div class="good-num">{{ g.data[0].goodsCount }}</div>
 
       <!-- 原金额 -->
-      <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
+      <div class="good-price old-price">
         {{ g.coinType }}
         {{
           formatNumber(
@@ -81,6 +81,14 @@
           {{
             formatNumber(
               g.data[0].coupon.discount.price
+            )
+          }}
+        </span>
+        <span  v-if="couponType(g.data[0].coupon) !== 'discount'">
+          {{ g.coinType }}
+          {{
+            formatNumber(
+              g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
             )
           }}
         </span>

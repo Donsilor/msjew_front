@@ -439,8 +439,8 @@
     <div class="cart-top-bar">
       <span>{{ $t(`${lang}.info`) }}</span
       ><span>{{ $t(`${lang}.number`) }}</span
-      ><span>{{ $t(`${lang}.price`) }}</span
-      ><span>{{ $t(`${lang}.price`) }}</span>
+      ><span>{{ $t(`${lang}.oldPrice`) }}</span
+      ><span>{{ $t(`${lang}.newPrice`) }}</span>
     </div>
     <div class="cart-goods">
       <div v-for="(g, index) in good" :key="index">
@@ -839,10 +839,10 @@
             </div>
 
             <!-- 折扣金额 -->
-            <div v-show="1" class="detail-line">
-              <div>折扣金额</div>
+            <div v-show="tex.discountAmount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
               <div class="hkd color-pink">
-                <div>- {{$store.state.coin}} 200</div>
+                <div>- {{$store.state.coin}} {{ formatMoney(tex.discountAmount) }}</div>
               </div>
             </div>
 
@@ -1397,8 +1397,8 @@
     <div class="cart-top-bar">
       <span>{{ $t(`${lang}.info`) }}</span
       ><span>{{ $t(`${lang}.number`) }}</span
-      ><span>{{ $t(`${lang}.price`) }}</span
-      ><span>{{ $t(`${lang}.price`) }}</span>
+      ><span>{{ $t(`${lang}.oldPrice`) }}</span
+      ><span>{{ $t(`${lang}.newPrice`) }}</span>
     </div>
     <div class="cart-goods">
       <div v-for="(g, index) in good" :key="index">
@@ -1810,10 +1810,10 @@
             </div>
 
             <!-- 折扣金额 -->
-            <div v-show="discountPrice" class="detail-line">
-              <div>折扣金额</div>
+            <div v-show="tex.discountAmount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
               <div class="hkd color-pink">
-                <div>- {{$store.state.coin}} {{ formatMoney(discountPrice) }}</div>
+                <div>- {{$store.state.coin}} {{ formatMoney(tex.discountAmount) }}</div>
               </div>
             </div>
 
@@ -2050,8 +2050,7 @@ export default {
       couponAll: [],
       // 已领取优惠券
       couponAlready: [],
-      ifShowCoupon: false,
-      discountPrice: 0
+      ifShowCoupon: false
     }
   },
   computed: {
@@ -2871,10 +2870,6 @@ export default {
           obj.coupon_id = '';
         }
 
-        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-          this.discountPrice += this.good[i].data[0].coupon.discount.discount
-        }
-
       }
 
       const datas={
@@ -2944,17 +2939,25 @@ export default {
             obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
           }
          arr.push({...obj})
+         obj.cart_id = '';
+         obj.coupon_id = '';
+         
         } else {
           obj.cart_id = this.good[i].data[0].id
           if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
             obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
           }
           arr.push({...obj})
+          
+          obj.cart_id = '';
+          obj.coupon_id = '';
           obj.cart_id = this.good[i].data[1].id
           if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
             obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
           }
           arr.push({...obj})
+          obj.cart_id = '';
+          obj.coupon_id = '';
         }
       }
 
@@ -3042,17 +3045,25 @@ export default {
             obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
           }
          arr.push({...obj})
+         obj.cart_id = '';
+         obj.coupon_id = '';
+         
         } else {
           obj.cart_id = this.good[i].data[0].id
           if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
             obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
           }
           arr.push({...obj})
+          obj.cart_id = '';
+          obj.coupon_id = '';
+          
           obj.cart_id = this.good[i].data[1].id
           if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
             obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
           }
           arr.push({...obj})
+          obj.cart_id = '';
+          obj.coupon_id = '';
         }
       }
 
@@ -3678,12 +3689,12 @@ div {
     }
     span:nth-child(2) {
       width: 70px;
-      margin-right: 70px;
+      margin-right: 58px;
       text-align: center;
     }
     span:nth-child(3) {
       width: 70px;
-      margin-right: 70px;
+      margin-right: 106px;
       text-align: center;
     }
   }

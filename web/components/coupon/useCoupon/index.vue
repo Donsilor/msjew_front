@@ -80,7 +80,7 @@
     },
     mounted() {
       this.language = this.getCookie('language')
-      this.coin = this.getCookie('coin')
+      this.coin = this.$store.state.coin
 
       var i=0;
       for(var j in this.couponAll){

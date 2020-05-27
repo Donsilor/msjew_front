@@ -20,7 +20,7 @@
            </div>
 
            <!-- <div class="rmb">(￥{{item.moneyCn}})</div> -->
-           <div class="rule">{{ $t(`${lang}.limit1`) }}￥{{item.atLeast}}{{ $t(`${lang}.limit2`) }}</div>
+           <div class="rule">{{ $t(`${lang}.limit1`) }}{{coin}} {{item.atLeast}}{{ $t(`${lang}.limit2`) }}</div>
            <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
            <div class="use">{{ $t(`${lang}.limit3`) }}({{item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
            <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
@@ -48,8 +48,7 @@ export default {
   },
   mounted(){
 	  this.language = this.getCookie('language')
-    this.coin = this.getCookie('coin')
-    console.log(7788,this.coin)
+    this.coin = this.$store.state.coin
 
     // 获取优惠券
     this.$axios.get('web/member/coupon/index', {

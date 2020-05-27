@@ -2467,7 +2467,8 @@
         "addAddress": "添加收货地址",
         "info": "商品讯息",
         "number": "数量",
-        "price": "金额",
+        "oldPrice": "原金额",
+        "newPrice": "优惠后金额",
         "option": "操作",
         "customMade": "定制",
         "deliveryInformation": "发货讯息",
@@ -2526,7 +2527,9 @@
         "msg10": "购物车不能为空，请重新添加商品",
         "msg11": "需登录购物 / 仅供大陆使用",
         "needlogin": "需登录购物",
-        "notAvailable": "选择可用优惠券"
+        "notAvailable": "选择可用优惠券",
+        "discountPrice": "折扣金额",
+        "needRegister": "请先登录，才能使用优惠券"
     },
     "invoice": {
         "personal": "个人",
