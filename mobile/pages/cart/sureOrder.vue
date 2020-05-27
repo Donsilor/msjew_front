@@ -34,6 +34,7 @@
       <div class="pay">
         <!-- <Header :title="lang2.pay" tips="1" /> -->
         <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+          <div class="note"><span class="star">*</span> {{ lang2.Note3 }}</div>
           <span>{{ coin }} </span>
           {{ formatMoney(productAmount) }}
           <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
@@ -1710,6 +1711,7 @@ export default {
   background: #ffffff;
   // text-align: left;
   border-radius: 5px;
+  position: relative;
   .proce {
     padding: 30px 0 20px;
     font-size: 28px;
@@ -1717,6 +1719,16 @@ export default {
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     border-bottom: 8px solid #f6f6f6;
+    .note{
+      font-size: 12px;
+      color: #cac7c7;
+      position: absolute;
+      top:10px;
+      right:25px;
+      .star{
+        color: red;
+      }
+    }
     span {
       font-size: 16px;
       font-weight: 400;

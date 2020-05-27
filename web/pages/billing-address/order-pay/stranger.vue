@@ -363,6 +363,7 @@
             <div class="new-address-title">
               <div class="na-line" />
               <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
+              <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang2}.Note3`) }}</div>
             </div>
             <div class="pay-blocks">
               <!-- paypal -->
@@ -1410,6 +1411,7 @@
             <div class="new-address-title">
               <div class="na-line" />
               <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
+              <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang2}.Note3`) }}</div>
             </div>
             <div class="pay-blocks">
               <!-- paypal -->
@@ -4401,6 +4403,14 @@ div {
       display: flex;
       align-items: flex-end;
       margin-bottom: 17px;
+      .note{
+        font-size: 12px;
+        margin-left: 230px;
+        color: #cac7c7;
+        .star{
+          color: red;
+        }
+      }
       .na-line {
         width: 4px;
         height: 20px;

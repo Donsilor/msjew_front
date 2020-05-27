@@ -38,6 +38,7 @@
       <div class="new-address-title">
         <div class="na-line" />
         <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
+        <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang}.Note3`) }}</div>
       </div>
       <div class="pay-blocks">
         <!-- paypal -->
@@ -753,6 +754,14 @@ div {
       display: flex;
       align-items: flex-end;
       margin-bottom: 17px;
+      .note{
+        font-size: 12px;
+        margin-left: 230px;
+        color: #999999;
+        .star{
+          color: red;
+        }
+      }
       .na-line {
         width: 4px;
         height: 20px;

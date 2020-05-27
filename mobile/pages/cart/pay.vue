@@ -3,6 +3,7 @@
     <div class="paylist" v-show="paylist">
       <Header :title="lang.pay" tips="1" />
       <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+        <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div>
         <span>{{ info.coinType }} </span>
         {{ formatMoney(price) }}
         <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
@@ -350,12 +351,22 @@ export default {
 .pay {
   padding-bottom: 20px;
   .proce {
-    padding: 30px 0 20px;
+    padding: 10px 0 20px;
     font-size: 28px;
     font-family: twCenMt;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     border-bottom: 8px solid #f6f6f6;
+    .note{
+      text-align: right; 
+      margin-right: 20px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: #cac7c7;
+      .star{
+        color: red;
+      }
+    }
     span {
       font-size: 16px;
       font-weight: 400;
