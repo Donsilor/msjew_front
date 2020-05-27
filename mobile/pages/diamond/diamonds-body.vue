@@ -95,7 +95,7 @@
           </div>
           <div class="discount-b-box" v-if="goodInfo.coupon.money">
             <span class="discount-icon">￥</span>
-            <span class="get" @click="ifShowCoupon = true">{{ lang.getCoupon }}&gt;</span>
+            <span class="get" @click="getCoupon">{{ lang.getCoupon }}&gt;</span>
           </div>
         </div>
       </div>
@@ -418,6 +418,14 @@ export default {
   methods:{
     closeCo() {
       this.ifShowCoupon = false
+    },
+    getCoupon() {
+      // 获取优惠券
+      if(!this.$store.getters.hadLogin) {
+        this.$toast.show(this.lang.needLogin)
+      }else{
+        this.ifShowCoupon = true
+      }
     }
   }
 }

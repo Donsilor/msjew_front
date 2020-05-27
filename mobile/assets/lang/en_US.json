@@ -1088,7 +1088,8 @@
     "getCoupon": "獲取優惠券",
     "activityTime": "活動時間",
     "oddPrice": "原  價",
-    "newPrice": "折後價"
+    "newPrice": "折後價",
+    "needLogin": "请先登录，才能领取优惠券"
   },
   "listCommons": {
     "sliders": [

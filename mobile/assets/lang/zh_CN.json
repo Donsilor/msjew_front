@@ -1092,7 +1092,8 @@
       "getCoupon": "获取优惠券",
       "activityTime": "活动时间",
       "oddPrice": "原  价",
-      "newPrice": "折后价"
+      "newPrice": "折后价",
+      "needLogin": "请先登录，才能领取优惠券"
     },
     "listCommons": {
       "sliders": [

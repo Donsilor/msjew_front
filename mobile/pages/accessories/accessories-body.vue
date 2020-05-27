@@ -316,10 +316,11 @@ export default {
       this.ifShowCoupon = false
     },
     getCoupon() {
-      if(this.isLogin){
-        this.ifShowCoupon = true
+      // 获取优惠券
+      if(!this.$store.getters.hadLogin) {
+        this.$toast.show(this.lang.needLogin)
       }else{
-        this.$toast.show('登陆后才能使用优惠券');
+        this.ifShowCoupon = true
       }
     }
   }

@@ -292,7 +292,7 @@ export default {
     width: 258px;
     height: 1px;
     background-color: #A6937C;
-    margin: 0 auto 24px;
+    margin: 0 auto 16px;
     position: relative;
 
     .point-box{

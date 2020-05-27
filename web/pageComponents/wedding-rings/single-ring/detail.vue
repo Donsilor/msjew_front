@@ -704,7 +704,7 @@ export default {
     // 领取优惠券
     getCoupon() {
       if(!this.$store.getters.hadLogin) {
-        this.$errorMessage(`请先登录，才能领取优惠券`)
+        this.$errorMessage(this.$t(`${lang}.needLogin`))
       }else{
         this.showCoupon = true
       }

@@ -249,8 +249,12 @@
 				</span>
 			<span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
 		  </li>
+          <li>
+            <span>折扣金额： </span
+            ><span>-{{ info.coinCode }} {{ info.preferFee }} </span>
+          </li>
           <li v-if="info.preferFee" class="active">
-            <span>{{ lang.offer }}： </span
+            <span>优惠券： </span
             ><span>-{{ info.coinCode }} {{ info.preferFee }} </span>
           </li>
           <li>

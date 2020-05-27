@@ -204,8 +204,18 @@
             >
           </li>
 
-          <!-- 优惠券 -->
-          <li>
+          <!-- 折扣金额 -->
+          <li v-if="allFee.discountAmount">
+            <span>折扣金额：</span
+            ><span
+              >-{{ coin }}
+              {{ formatMoney( allFee.discountAmount) }}</span
+            >
+          </li>
+
+          <!-- 优惠金额 -->
+          <!-- <li v-if="allFee.myCoupons.length != 0"> -->
+          <li v-if="1">
             <span>优惠券： </span
             ><span v-if="couponCodeR.couponPrice"
              @click="ifShowCoupon = true"

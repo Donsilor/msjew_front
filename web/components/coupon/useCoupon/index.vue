@@ -226,7 +226,7 @@
                 width: 200px;
                 height: 1px;
                 background-color: #A6937C;
-                margin: 10px auto 24px;
+                margin: 10px auto 16px;
                 position: relative;
 
                 .point-box {

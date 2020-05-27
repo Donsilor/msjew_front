@@ -45,6 +45,7 @@
       </div>
     </div>
 
+    <!-- 优惠活动 -->
     <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
       <div class="discount-l">
         <span class="text">{{ lang.discountsActive }}：</span>
@@ -54,7 +55,7 @@
           </div>
           <div class="discount-b-box" v-if="goodInfo.coupon.money">
             <span class="discount-icon">￥</span>
-            <span class="get" @click="ifShowCoupon = true">{{ lang.getCoupon }}&gt;</span>
+            <span class="get" @click="getCoupon">{{ lang.getCoupon }}&gt;</span>
           </div>
         </div>
       </div>
@@ -310,6 +311,14 @@ export default {
   methods:{
     closeCo() {
       this.ifShowCoupon = false
+    },
+    // 获取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        this.$toast.show(this.lang.needLogin)
+      }else{
+        this.ifShowCoupon = true
+      }
     }
   }
 }

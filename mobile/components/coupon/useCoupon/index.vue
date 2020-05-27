@@ -112,7 +112,7 @@
             }
           })
         }
-        
+
         this.$emit('closeCoupon', this.couponInfo)
       },
       // 选择优惠券
@@ -201,7 +201,8 @@
               width: 70%;
               color: #cdad75;
               border-radius: 5px;
-              padding: 20px 0;
+              padding: 20px 10px;
+              box-sizing: border-box;
 
               .line-box {
                 width: 70%;
@@ -280,7 +281,7 @@
               .text {
                 text-align: center;
                 font-size: 12px;
-                color: #f00;
+                color: #bfb8b8;
                 margin-bottom: 10px;
               }
 
