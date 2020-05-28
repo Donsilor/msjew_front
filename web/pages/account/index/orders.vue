@@ -71,7 +71,7 @@
 
             <div class="right">
               <span>1</span>
-              <span>{{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}</span>
+              <span :class="{'old-price': d.goodsPrice !== d.goodsPayPrice}">{{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}</span>
               <span>{{ o.coinCode }} {{ formatMoney(d.goodsPayPrice) }}</span>
             </div>
           </div>
@@ -807,6 +807,9 @@ div {
               text-align: center;
             }
             span:nth-child(2) {
+              color: #f29b87;
+            }
+            span:nth-child(2).old-price {
               color: #b2b2b2;
               text-decoration: line-through;
             }

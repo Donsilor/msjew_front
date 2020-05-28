@@ -116,7 +116,8 @@
       </div>
 
 		<!-- 原金额 -->
-		<div class="good-price old-price">
+		<!-- <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount' || couponType(g.data[0].coupon) == 'money'}"> -->
+		<div class="good-price">
 		  {{ g.coinType }}
 		  {{
 			formatNumber(

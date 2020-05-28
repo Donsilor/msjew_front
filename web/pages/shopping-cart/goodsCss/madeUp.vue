@@ -49,7 +49,7 @@
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
 
 		  <!-- 原金额 -->
-		  <div class="good-price old-price">
+		  <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
 		    {{ g.coinType }}
 		    {{
 		      formatNumber(
@@ -94,12 +94,12 @@
             </div>
 
             <!-- 折扣 -->
-            <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
-              <span>{{ discountConversion(g.data[0].coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
+            <div class="list-discount-icon1" v-if="couponType(g.data[1].coupon) == 'discount'">
+              <span>{{ discountConversion(g.data[1].coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
             </div>
 
             <!-- 优惠券 -->
-            <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'money'">
+            <div class="list-discount-icon1" v-if="couponType(g.data[1].coupon) == 'money'">
               <span>{{ $t(`${lang}.discounts1`) }}</span>
             </div>
           </div>
@@ -131,7 +131,7 @@
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
 
 		  <!-- 原金额 -->
-		  <div class="good-price old-price">
+		  <div class="good-price" :class="{'old-price': couponType(g.data[1].coupon) == 'discount'}">
 		    {{ g.coinType }}
 		    {{
 		      formatNumber(
@@ -141,12 +141,12 @@
 		  </div>
 
 		  <!-- 优惠后金额 -->
-          <div class="good-price">
+         <div class="good-price">
             <span v-if="couponType(g.data[1].coupon) == 'discount'">
               {{ g.coinType }}
               {{
                 formatNumber(
-                  g.data[0].coupon.discount.price
+                  g.data[1].coupon.discount.price
                 )
               }}
             </span>
