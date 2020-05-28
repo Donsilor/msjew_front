@@ -16,7 +16,7 @@
 
       <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
         <div class="triangle" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discount2 }}</div>
-        <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discount1 }}</div>
+        <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
       </div>
     </div>
     <div class="title">

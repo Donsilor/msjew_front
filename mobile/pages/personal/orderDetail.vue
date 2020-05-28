@@ -30,7 +30,21 @@
           class="products-item"
           @click="toDetail(detail)"
           >
-          <img :src="detail.image" />
+          <div class="img-box">
+            <img :src="detail.image" />
+
+            <!-- 折扣 -->
+            <!-- <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'"> -->
+            <div class="discount-a-icon" v-if="1">
+              <!-- <div>{{ discountConversion(each.coupon.discount.discount) }}{{ lang.discounts2 }}</div> -->
+              <!-- <div>{{ discountConversion(each.coupon.discount.discount) }}{{ lang.discounts2 }}</div> -->
+            </div>
+
+            <!-- 优惠券 -->
+            <!-- <div class="discount-a-icon" v-if="couponType(each.coupon) == 'money'">
+              <div>{{ lang.discounts1 }}</div>
+            </div> -->
+          </div>
           <div v-if="detail.groupType !== 0" class="group-type">
             {{ detail.groupTypeText }}
           </div>
@@ -249,13 +263,13 @@
 				</span>
 			<span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
 		  </li>
-          <li>
+          <li v-if="info.discountAmount != 0" class="active">
             <span>折扣金额： </span
-            ><span>-{{ info.coinCode }} {{ info.preferFee }} </span>
+            ><span>-{{ info.coinCode }} {{ info.discountAmount }} </span>
           </li>
-          <li v-if="info.preferFee" class="active">
+          <li v-if="info.couponAmount != 0" class="active">
             <span>优惠券： </span
-            ><span>-{{ info.coinCode }} {{ info.preferFee }} </span>
+            ><span>-{{ info.coinCode }} {{ info.couponAmount }} </span>
           </li>
           <li>
             <span>{{ lang.freight }}： </span
@@ -427,7 +441,7 @@ export default {
     }
   },
   mounted() {
-    console.log("inoo",this.invoice)
+    // console.log("inoo",this.invoice)
     const _this = this
     _this.$nextTick(() => {
       _this.getInfo()
@@ -535,7 +549,7 @@ export default {
 
       // 将定制的商品进行排序，钻石放在后面
       result.map(item => {
-        console.log('item====>', item)
+        // console.log('item====>', item)
         if (item.groupType === 2) {
           // 定制
           const diamond = []

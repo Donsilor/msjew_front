@@ -128,8 +128,7 @@
           <div class="addShoppingCard fr" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
         </div>
         <!-- 开具发票 -->
-        <!-- <div class="invoice" v-if="this.areaId === '1'"> -->
-        <div class="invoice" v-if="'1'">
+        <div class="invoice" v-if="this.areaId === '1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -138,6 +137,7 @@
             </div>
           </div>
         </div>
+
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
@@ -191,6 +191,7 @@
             </div>
           </div>
         </div> -->
+
         <ul class="price">
           <!-- <li v-if="isLogin" @click="selectCupon">
             <span>{{ lang.cupon }}</span
@@ -214,8 +215,7 @@
           </li>
 
           <!-- 优惠金额 -->
-          <!-- <li v-if="allFee.myCoupons.length != 0"> -->
-          <li v-if="1">
+          <li v-if="!allFee.myCoupons">
             <span>优惠券： </span
             ><span v-if="couponCodeR.couponPrice"
              @click="ifShowCoupon = true"
@@ -532,7 +532,7 @@ export default {
       }
 
       this.getData() // 获取地址
-      this.getCouponList() // 获取优惠券列表
+      // this.getCouponList() // 获取优惠券列表
 
       // 此为迫不得已而为之，不敢改动上一手的代码
       setTimeout(() => {
@@ -879,7 +879,7 @@ export default {
             data: data
           })
           .then(res => {
-            // console.log("费用",res)
+            console.log("费用",res)
             this.canSubmit = true
             this.allFee = res
 

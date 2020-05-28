@@ -142,7 +142,7 @@
 
 		  <!-- 优惠后金额 -->
           <div class="good-price">
-            <span v-if="couponType(g.data[0].coupon) == 'discount'">
+            <span v-if="couponType(g.data[1].coupon) == 'discount'">
               {{ g.coinType }}
               {{
                 formatNumber(
@@ -150,11 +150,11 @@
                 )
               }}
             </span>
-            <span  v-if="couponType(g.data[0].coupon) !== 'discount'">
+            <span  v-if="couponType(g.data[1].coupon) !== 'discount'">
               {{ g.coinType }}
               {{
                 formatNumber(
-                  g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+                  g.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
                 )
               }}
             </span>
@@ -215,9 +215,6 @@ export default {
         return true
       }
     }
-  },
-  mounted() {
-    console.log(12112,this.g)
   },
   methods: {
     goDetail() {

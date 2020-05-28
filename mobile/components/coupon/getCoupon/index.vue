@@ -87,7 +87,7 @@
       }
 
       if(this.couponList.length != 0){
-        // 已领取的优惠券
+        // 可用的优惠券
         this.$nuxt.$loading.start()
         this.$axios.get('web/member/coupon/index', {
           })
@@ -97,8 +97,9 @@
 
             // 判断可用优惠券中哪些是已领取的优惠券
             for(var i=0; i<this.couponList.length; i++){
+              this.couponList[i].ifUse = false;
               for(var j=0; j<couponAllList.length; j++){
-                if(this.couponList[i].coupon_id == couponAllList[j].couponId){
+                if(this.couponList[i].coupon_id == couponAllList[j].couponId && couponAllList[j].couponStatus==1){
                   this.couponList[i].ifUse = true;
                 }
               }
