@@ -14,7 +14,7 @@
               <span class="text">{{ item.text }}<span v-if="item.num > 0" class="tip">{{ item.num }}</span></span>
               
               
-              <span class="line"></span>
+              <span class="line"></span> 
             </li>
           </ul>
         </div>
@@ -54,16 +54,22 @@ export default {
           text: this.LANGUAGE.personal.order.waitingSend,
           num:0
         },
-        {
-          code: 40,
-          text: this.LANGUAGE.personal.order.waitingReceive,
-          num:0
-        },
-        {
-          code: 50, // 传5表示待評價的订单(后端确定的逻辑)
-          text: this.LANGUAGE.personal.order.waitingComment,
-          num:0
-        }
+        // {
+        //   // code:'' ,
+        //   // text: '',
+        //   // num:0
+        //   code: 40,
+        //   text: this.LANGUAGE.personal.order.waitingReceive,
+        //   num:0
+        // },
+        // {
+        //   // code:'' ,
+        //   // text: '',
+        //   // num:0
+        //   code: 50, // 传5表示待評價的订单(后端确定的逻辑)
+        //   text: this.LANGUAGE.personal.order.waitingComment,
+        //   num:0
+        // }
       ],
       orderStatus: 0,
       list: {
@@ -164,8 +170,8 @@ export default {
         this.statusList[0].num = res.total_count
         this.statusList[1].num = this.list.ordered.length
         this.statusList[2].num = this.list.paid.length
-        this.statusList[3].num = this.list.send.length
-        this.statusList[4].num = this.list.finished.length
+        // this.statusList[3].num = this.list.send.length
+        // this.statusList[4].num = this.list.finished.length
         console.log("tttt",this.statusList[1])
     })
     .catch(err => {

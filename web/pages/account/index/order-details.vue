@@ -44,7 +44,7 @@
 
     <div v-if="data.details && data.details.length > 0" class="info-block">
       <div class="block-title">
-        <div v-if="data.wireTransferStatus !== null && data.refundStatus == 0" class="status">
+        <div v-if="data.orderStatus !== 0 && data.wireTransferStatus !== null && data.refundStatus == 0" class="status">
           <span v-if="data.wireTransferStatus == '0'">
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.pending`)}}
