@@ -32,11 +32,17 @@
     <!-- 支付方式 -->
     <div class="payways" v-if="!isLogin">
       <div class="pay">
-        <!-- <Header :title="lang2.pay" tips="1" />
-        <div class="proce">
-          <span>{{ info.coinType }} </span>
-          {{ formatMoney(price) }}
-        </div> -->
+        <!-- <Header :title="lang2.pay" tips="1" /> -->
+        <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+          <div class="note"><span class="star">*</span> {{ lang2.Note3 }}</div>
+          <span>{{ coin }} </span>
+          {{ formatMoney(productAmount) }}
+          <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
+        </div>
+        <div v-else class="proce">
+          <span>{{ coin }} </span>
+          {{ formatMoney( productAmount) }}
+        </div>
         <ul>
           <li v-for="(item, index) in list2" :key="index">
             <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
@@ -374,6 +380,8 @@ export default {
       cuponName: this.LANGUAGE.cart.sureOrder.cuponName,
       preferFee: 0, // 优惠卷金额
       productAmount: 0, // 商品总金额
+      priceHKD:0, //人民币转化成港币后的价格
+      coinHKD:"HKD",
       allFee: this.defaultAllFeeInfo(),
       userRemark: '',
       isSend: true,
@@ -930,6 +938,7 @@ export default {
             this.orderTotalAmount = res.order_amount;
             this.ultimatelyPay = res.order_amount;
             this.currency = res.currency;
+            this.priceHKD = res.order_amount_HKD
 
             this.planDays = this.allFee.planDays
 
@@ -1046,7 +1055,7 @@ export default {
          }
          if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
             this.$toast.show(this.lang.firstLogin)
-            // this.$nuxt.$loading.finish()
+            this.$nuxt.$loading.finish()
            return
          }
        }
@@ -1702,6 +1711,7 @@ export default {
   background: #ffffff;
   // text-align: left;
   border-radius: 5px;
+  position: relative;
   .proce {
     padding: 30px 0 20px;
     font-size: 28px;
@@ -1709,10 +1719,23 @@ export default {
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     border-bottom: 8px solid #f6f6f6;
+    .note{
+      font-size: 12px;
+      color: #cac7c7;
+      position: absolute;
+      top:10px;
+      right:25px;
+      .star{
+        color: red;
+      }
+    }
     span {
       font-size: 16px;
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
+    }
+    .price-hkd{
+      color: rgba(242, 155, 135, 1);
     }
   }
   ul {

@@ -246,7 +246,8 @@
       "imgSize":"Excessive size of the photo, please upload it again!",
       "bankAddress":"Bank Address:",
       "SwiftCode":"SWIFT CODE:",
-      "uploadPhotos":"Upload  Photos"
+      "uploadPhotos":"Upload  Photos",
+      "Note3":"Note：Currency rate is as referred on BDD website."
     },
     "paySuccess": {
       "PayPending1":"The order has been submitted, the system is processing ... please wait",

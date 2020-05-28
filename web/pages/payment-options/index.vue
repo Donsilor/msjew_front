@@ -38,6 +38,7 @@
       <div class="new-address-title">
         <div class="na-line" />
         <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
+        <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang}.Note3`) }}</div>
       </div>
       <div class="pay-blocks">
         <!-- paypal -->
@@ -52,6 +53,9 @@
           <div class="pay-desc">{{ $t(`${lang}.PayPal`) }}</div>
           <div v-show="payWay == 6" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
           </div>
           <div v-show="payWay == 6" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
@@ -70,6 +74,9 @@
           <div v-show="payWay === 61" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
+          <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
+          </div>
           <div v-show="payWay == 61" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -86,6 +93,9 @@
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
           <div v-show="payWay == 82" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
           </div>
           <div v-show="payWay == 82" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
@@ -121,6 +131,9 @@
           <div v-show="payWay == 83" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
+          <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
+          </div>
           <div v-show="payWay == 83" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -141,6 +154,9 @@
           <div v-show="payWay === 81" class="pay-price">
             {{ coinType }} {{ formatMoney(price) }}
           </div>
+          <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
+          </div>
           <div v-show="payWay == 81" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -159,6 +175,9 @@
           <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
           <div v-show="payWay == 84" class="pay-price">
             {{ $store.state.coin }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
           </div>
           <div v-show="payWay == 84" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
@@ -194,7 +213,12 @@
             <img @click="closed" class="close" src="../../static/order/closed.png" alt="">
           </div>
           <div class="content">
-            <div class="Amount">
+            <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="Amount">
+              <span>{{ $t(`${lang}.paidAmount`) }}</span>
+              {{ $store.state.coin }} {{ formatMoney(price) }}
+              <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }})</span>
+            </div>
+            <div v-else class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
               {{ $store.state.coin }} {{ formatMoney(price) }}
             </div>
@@ -313,13 +337,14 @@ export default {
     }
     return {
       lang,
-      payWay: this.$route.query.payType || 6,
+      payWay: 6,
       answer: false,
       pay: false,
       isPay: false,
       noPay: false,
       failedOrder: false,
       price: this.$route.query.price,
+      priceHKD: this.$route.query.priceHKD,
       coinType: this.$route.query.coinType,
       form: [],
       actionLink: '',
@@ -336,6 +361,7 @@ export default {
       myHeaders: {access_token: this.$store.state.token},
       accountlist:[],
       accountWay:'',
+      coinHKD:'HKD'
 
       // myHeaders:this.$store.state.token,
       // imgDatas:[],
@@ -723,11 +749,23 @@ div {
     background-color: #fff;
     padding: 39px 40px 40px;
     .new-address-title {
-      width: 1300-51-36px;
+      // width: 1300-51-36px;
+       width: 48%;
       height: 20px;
       display: flex;
       align-items: flex-end;
       margin-bottom: 17px;
+      position: relative;
+      .note{
+        position: absolute;
+        font-size: 12px;
+        // left:279px;
+        right: 0;
+        color: #cac7c7;
+        .star{
+          color: red;
+        }
+      }
       .na-line {
         width: 4px;
         height: 20px;
@@ -781,7 +819,16 @@ div {
           color: #f29b87;
           position: absolute;
           right: 80px;
-          top: 50px;
+          top: 30px;
+          line-height: 24px;
+        }
+        .pay-price-change{
+          font-size: 15px;
+          font-family: twCenMt;
+          color: #c6bbb9;
+          position: absolute;
+          right: 80px;
+          top: 54px;
           line-height: 24px;
         }
         .choose-tick {
@@ -906,6 +953,14 @@ div {
         .Amount{
           color: #f29b87;
           font-size: 24px;
+          position: relative;
+          .price-hkd{
+            position: absolute;
+            top:5px;
+            left:295px;
+            color: #c6bbb9;
+            font-size: 15px;
+          }
         }
         .account-ways:first-child{
           padding-top: 30px;

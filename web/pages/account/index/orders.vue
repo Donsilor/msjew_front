@@ -103,7 +103,7 @@
                 {{ $t(`${lang}.cancelOrder`) }}
               </button></a
             >
-            <nuxt-link :to="goToPay(o.id, o.coinCode, o.payAmount, o.paymentType)"
+            <nuxt-link :to="goToPay(o.id, o.coinCode, o.payAmount, o.paymentType, o.payAmountHKD)"
               ><div v-if="o.payChannel !== 1 && o.wireTransferStatus == null" class="btn-a">
               {{ $t(`${lang}.toPay`) }}
               </div>
@@ -470,7 +470,7 @@ export default {
             })
           }
           this.listData = res.data.data
-          // console.log("订单",this.listData)
+          console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {
@@ -579,14 +579,15 @@ export default {
           }
         })
     },
-    goToPay(j, k, v, p) {
+    goToPay(j, k, v, p,u) {
       const route = {
         path: '/payment-options',
         query: {
           coinType: k,
           orderId: j,
           price: v,
-          payType: p
+          payType: p,
+          priceHKD: u
         }
       }
       return this.routeDataToUrl(route)

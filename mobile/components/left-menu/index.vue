@@ -364,13 +364,25 @@ export default {
       let result = ''
       const coin = this.$store.state.coin
       const coinOptions = this.$bddDefinition.coinOptions
-      for (let n = 0, length = coinOptions.length; n < length; n++) {
-        if (coinOptions[n].code === coin) {
-          result = coinOptions[n]
-          break
+      const coinOptionsCn = this.$bddDefinition.coinOptionsCn
+
+      if(this.$store.state.platform === 21){
+        for (let n = 0, length = coinOptionsCn.length; n < length; n++) {
+          if (coinOptionsCn[n].code === coin) {
+            result = coinOptionsCn[n]
+            break
+          }
         }
+        return result
+      } else {
+        for (let n = 0, length = coinOptions.length; n < length; n++) {
+          if (coinOptions[n].code === coin) {
+            result = coinOptions[n]
+            break
+          }
+        }
+        return result
       }
-      return result
     }
   },
   // created() {

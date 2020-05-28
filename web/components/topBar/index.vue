@@ -131,7 +131,28 @@
             </div>
 
             <!--        货币切换-->
-            <div class="item coin">
+            <div v-if="this.$store.state.platform === 20" class="item coin">
+              <el-dropdown
+                type="primary"
+
+                placement="bottom"
+                @command="setCoin"
+              >
+                <span class="row-flex align-item-center el-dropdown-link">
+                  {{ coinInfo.content }}<i class="iconfont iconkuozhan"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    v-for="(option, n) in coinOptionsCn"
+                    :key="n"
+                    :command="option.code"
+                  >
+                    {{ option.content }}
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
+            <div v-else class="item coin">
               <el-dropdown
                 type="primary"
 
@@ -303,6 +324,7 @@ export default {
       keyword: '',
       languageOptions: this.$bddDefinition.languageOptions,
       coinOptions: this.$bddDefinition.coinOptions,
+      coinOptionsCn: this.$bddDefinition.coinOptionsCn,
       userMenus: [
         {
           name: this.$t(`${lang}.order`),
@@ -1887,6 +1909,7 @@ export default {
       let result = ''
       const coin = this.$store.state.coin
       const coinOptions = this.$bddDefinition.coinOptions
+      const coinOptionsCn = this.$bddDefinition.coinOptionsCn
 	  // console.log(256,coin)
 	  // console.log(887,coinOptions)
       // for (let n = 0, length = coinOptions.length; n < length; n++) {
@@ -1895,14 +1918,23 @@ export default {
       //     coinOptions = coinOptions.splice(n, 1)
       //   }
       // }
-
-      for (let n = 0, length = coinOptions.length; n < length; n++) {
-        if (coinOptions[n].code === coin) {
-          result = coinOptions[n]
-          break
+      if(this.$store.state.platform === 20){
+        for (let n = 0, length = coinOptionsCn.length; n < length; n++) {
+          if (coinOptionsCn[n].code === coin) {
+            result = coinOptionsCn[n]
+            break
+          }
         }
+        return result
+      } else {
+        for (let n = 0, length = coinOptions.length; n < length; n++) {
+          if (coinOptions[n].code === coin) {
+            result = coinOptions[n]
+            break
+          }
+        }
+        return result
       }
-      return result
     }
   },
   mounted() {

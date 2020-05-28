@@ -247,7 +247,8 @@
         "imgSize":"图片过大，请重新上传！",
         "bankAddress":"银行地址:",
         "SwiftCode":"SWIFT CODE:",
-        "uploadPhotos":"上传图片"
+        "uploadPhotos":"上传图片",
+        "Note3":"注：此货币是按照BDD官网汇率作为参考标准."
       },
       "paySuccess": {
         "PayPending1":"订单已提交，系统处理中…请稍等.",

@@ -1127,7 +1127,8 @@
         "imgSize": "圖片過大，請重新上傳！",
         "bankAddress": "銀行地址:",
         "SwiftCode": "SWIFT CODE:",
-        "uploadPhotos": "上傳圖片"
+        "uploadPhotos": "上傳圖片",
+        "Note3":"注：此貨幣是按照BDD官網匯率作為參考標準."
     },
     "finishPay": {
         "PayPending1": "訂單已經提交，系統正在處理中,請稍等。",
