@@ -333,7 +333,7 @@
             .get {
               width: 140px;
               height: 80px;
-              border-left: 1px solid #f00;
+              border-left: 1px solid #bd4444;
               line-height: 80px;
               text-align: center;
               margin: 62px auto;

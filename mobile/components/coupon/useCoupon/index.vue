@@ -17,10 +17,10 @@
               </div>
 
               <div class="price">
-                <span class="price-icon">￥</span>
+                <span class="price-icon">{{coin}}</span>
                 <span class="price-num">{{item.money}}</span>
               </div>
-              <div class="rmb">(￥{{item.money_cn}})</div>
+              <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">满￥{{item.at_least_cn}}使用</div>
               <div class="text">({{item.lineType}})</div>
               <div class="time">活动时间：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
@@ -70,6 +70,7 @@
     },
     mounted() {
       this.language = this.getCookie('language')
+      this.coin = this.$store.state.coin
 
       var i=0;
       for(var j in this.couponAll){
@@ -238,7 +239,8 @@
                 width: 100%;
                 display: flex;
                 justify-content: center;
-                margin: 10px 0;
+                align-items: center;
+                margin-top: 10px;
 
                 .price-icon {
                   font-size: 18px;
@@ -247,8 +249,6 @@
                 .price-num {
                   font-size: 26px;
                   color: #cdad75;
-                  margin: 0px 0 0 0px;
-                  padding-right: 10px;
                 }
               }
 

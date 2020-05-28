@@ -131,7 +131,8 @@
         <div class="goods-info-title">
           <div class="t1">{{ $t(`${lang}.goodsInfo`) }}</div>
           <div class="t2">{{ $t(`${lang}.goodsNum`) }}</div>
-          <div class="t3">{{ $t(`${lang}.goodsPrice`) }}</div>
+          <div class="t3">{{ $t(`${lang}.oldPrice`) }}</div>
+          <div class="t4">{{ $t(`${lang}.newPrice`) }}</div>
         </div>
         <div
           v-for="(d, _index) in data.details"
@@ -156,6 +157,9 @@
           </nuxt-link>
           <div class="t2">1</div>
           <div class="t3">
+            {{ data.coinCode }} {{ formatMoney(d.goodsPrice) }}
+          </div>
+          <div class="t4">
             {{ data.coinCode }} {{ formatMoney(d.goodsPayPrice) }}
           </div>
         </div>
@@ -315,20 +319,22 @@
               -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
             </div>
           </div>
-          <!-- 优惠金额 -->
-          <!-- <div class="info-line">
-            <div class="label">{{ $t(`${lang_invoice}.coupon`) }}</div>
-            <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatNumber(data.preferFee) }}
-            </div>
-          </div> -->
+
           <!-- 折扣金额 -->
-          <div class="info-line" v-if="data.preferFee != 0">
+          <div class="info-line" v-if="data.discountAmount != 0">
             <div class="label">{{ $t(`${lang_invoice}.discountPrice`) }}</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatNumber(data.preferFee) }}
+              -{{ data.coinCode }} {{ formatNumber(data.discountAmount) }}
             </div>
           </div>
+          <!-- 优惠金额 -->
+          <div class="info-line" v-if="data.couponAmount != 0">
+            <div class="label">{{ $t(`${lang_invoice}.coupon`) }}</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{ formatNumber(data.couponAmount) }}
+            </div>
+          </div>
+
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.freight`) }}</div>
             <div class="ff">
@@ -830,15 +836,22 @@ export default {
         display: flex;
         padding-left: 19px;
         .t1 {
-          width: 936-250.5-163.5-20px;
+          width: 520px;
         }
         .t2 {
+          width: 130px;
           text-align: center;
-          width: 51+ (113/2)+56px;
+          margin-right: 30px;
         }
         .t3 {
+          width: 130px;
           text-align: center;
-          width: 56+ (113/2)+138px;
+          margin-right: 30px;
+        }
+        .t4 {
+          width: 130px;
+          text-align: center;
+          margin-right: 30px;
         }
       }
       .goods-details {
@@ -849,10 +862,9 @@ export default {
         border-top: 1px solid rgba(230, 230, 230, 1);
         align-items: center;
         .t1 {
-          width: 936-250.5-163.5-20px;
+          width: 510px;
           display: flex;
           align-items: center;
-          justify-content: space-between;
           .good-img {
             width: 70px;
             height: 70px;
@@ -864,10 +876,10 @@ export default {
             }
           }
           .good-desc {
-            width: 936-250.5-163.5-20-70-20px;
             height: 70px;
             color: #333;
             overflow: hidden;
+            margin: 0 30px 0 20px;
             .good-name {
               font-size: 16px;
               line-height: 16px;
@@ -899,17 +911,28 @@ export default {
           }
         }
         .t2 {
+          width: 130px;
           text-align: center;
-          width: 51+ (113/2)+56px;
-          color: #333;
           font-size: 16px;
+          color: #333;
+          margin-right: 30px;
         }
         .t3 {
-          text-align: center;
-          width: 56+ (113/2)+138px;
-          color: #333;
+          width: 130px;
+          font-size: 14px;
           font-family: twCenMt;
+          color: #b2b2b2;
+          text-align: center;
+          margin-right: 30px;
+          text-decoration: line-through;
+        }
+        .t4 {
+          width: 130px;
           font-size: 20px;
+          font-family: twCenMt;
+          color: #f29b87;
+          text-align: center;
+          margin-right: 30px;
         }
       }
       .goods-details:nth-child(2) {
