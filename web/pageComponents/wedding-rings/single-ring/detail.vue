@@ -145,11 +145,11 @@
           ">
             <nuxt-link v-if="canAddCart" :to="finishDj">
               <button :class="['add-to-cart', { active: canAddCart }]">
-                确认选择
+                {{ $t(`${lang}.ConfirmTheChoice`) }}
               </button>
             </nuxt-link>
             <button v-else :class="['add-to-cart', { active: canAddCart }]">
-              确认选择
+              {{ $t(`${lang}.ConfirmTheChoice`) }}
             </button>
           </span>
         </div>

@@ -56,6 +56,12 @@
                     }}
                   </p>
                   <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+
+                  <p v-if="item.groupType === 1">
+                    <br/>
+                    <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
+                   </p>
                 </div>
               </div>
 		  </div>
@@ -67,8 +73,8 @@
                 >
                   <i class="icon iconfont" :class="{ icongou: item.isSelect }"></i>
                 </div>
+
                 <!-- <a
->>>>>>> 0f415a25d34f948b499dd303a5a6b2d8937d9469
                   v-if="!getStatus(item, index)"
                   class="similar"
                   @click.stop="
@@ -147,7 +153,8 @@ export default {
       sumNum: 0,
       lang: this.LANGUAGE.cart.index,
       num: 0,
-      timer: null 
+      timer: null ,
+      soudout:''
     }
   },
   created() {
@@ -225,8 +232,10 @@ export default {
     defaultAll(){
       if(!this.isLogin){
         this.selectAll = !this.selectAll
-        console.log("全选", this.list)
+        console.log("全选",this.list)
         for (let i = 0; i < this.list.length; i++) {
+          this.soudout = this.list[i].goodsStatus
+          // console.log("所有",this.list[i].goodsStatus)
           if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
             //  console.log("所有")
             this.list[i].isSelect = this.selectAll
@@ -237,6 +246,9 @@ export default {
         }
         console.log(this.selectAll)
         this.getNum()
+        if(this.list.length == 1 && this.soudout !== 2){
+          this.selectAll = false
+        }
       }
     },
     // 全选与反选
@@ -283,13 +295,19 @@ export default {
         // 价格汇总
         if (this.list[i].isSelect) {
           // console.log(i, 'iiii')
-          newPrice = newPrice + parseFloat(this.list[i].salePrice)
+          if (this.list[i].groupType === 1) {
+             newPrice = newPrice + parseFloat(this.list[i].totalPrice) * 0.5 
+           //对戒
+          }else{
+              newPrice = newPrice + parseFloat(this.list[i].salePrice)
+           //对戒
+          }
           // console.log("price",newPrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
             this.sumNum = this.sumNum + 1
           } else {
-            this.sumNum = this.sumNum + 0.5
+            this.sumNum = this.sumNum + 0.5  
           }
         }
         // 反选
@@ -486,6 +504,9 @@ export default {
               item.groupType === 1
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
                     .simpleGoodsDetails.retailMallPrice
+                : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
+            totalPrice:item.groupType === 1
+                ? item.ringsSimpleGoodsEntity.salePrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
             groupType: item.groupType || 0,
             createTime:

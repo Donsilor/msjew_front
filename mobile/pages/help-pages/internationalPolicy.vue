@@ -25,7 +25,10 @@
           </p>
           <p>
             {{ lang.mail }}
-            <a class="link" href="mailto:service@bddco.com">
+            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:e-service@bddco.com">
+              e-service@bddco.com
+            </a>
+            <a v-else class="link" href="mailto:service@bddco.com">
               service@bddco.com
             </a>
             {{ lang.know }}
@@ -49,7 +52,10 @@
           {{ lang.con4 }}
         </dd>
         <dt>{{ lang.tit4 }}</dt>
-        <dd>
+        <dd v-if="this.$store.state.platform === 21">
+          {{ lang.conCn5 }}
+        </dd>
+        <dd v-else>
           {{ lang.con5 }}
         </dd>
         <dt>{{ lang.tit5 }}</dt>

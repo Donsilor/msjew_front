@@ -197,7 +197,8 @@
 		"NeedPay": "MoneyNeedPay",
 		"submitSuccessfully": "Order Submission Successful!",
 		"PleaseLogin": "Please log in first to use the gift card！",
-		"msg10": "The shopping cart cannot be empty. Please add the item again"
+		"msg10": "The shopping cart cannot be empty. Please add the item again",
+    "msg11": "Mainland China Only"
     },
     "pay": {
       "pay": "Order payment",
@@ -205,21 +206,50 @@
       "goPay": "Pay",
       "payType0": "PayPal",
       "type0Text": "Using PayPal’s secure payment solution",
-      "payType1": "Credit Card",
-      "type1Text": "Make secure and fast payment via credit card",
+      "payType1": "UnionPay",
+      "type1Text": "Using UnionPay cards’secure payment solution",
       "payType2": "China UnionPay",
       "type2Text": "Using UnionPay cards’secure payment solution",
       "payType3": "Alipay",
-      "type3Text": "Pay securely with Alipay",
+      "type3Text": "Easier and safer online payment",
       "payType4": "WeChat Pay",
       "type4Text": "Easier and safer online payment",
       "payType5": "Telegraphic Transfer (T/T)",
-      "type5Text": "Extra 1.5% discount for T/T payment.",
+      "type5Text": "Secure bank wire-transfer payment ",
+      "payType6": "Visa / MasterCard",
+      "type6Text": "Pay By Credit Card (VISA, Master Card, Discover Card, AMEX)",
       "type5Text2": "Please note that e-Cheques are not T/T.",
-      "paytip": "Since Paydallor does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!"
+      "paytip1": "Since Alipay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
+      "paytip2": "Since WeChat Pay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
+      "paytip3": "Since Credit Card does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
+      "msg11": "Mainland China Only",
+      "paytip": "Since Paydallor does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
+      "support": "Support only: mainland version",
+      "pleaseSelectAccount":" Select bank account",
+      "paidAmount":"Total amount: ",
+      "Account":"Bank Name:",
+      "AccountNumber":"Bank Acc No:",
+      "AccountName":"Beneficial Name:",
+      "UploadPayVoucher":"Upload payment voucher :",
+      "uploadImage":"Upload photos",
+      "Note1":"Please make sure the date of transfer and transaction number are clear for payment verification.  ",
+      "PayTransactionNumber":"Transaction Number ",
+      "Optional":"(optional)",
+      "CancelPayment":"Cancelled payment",
+      "PaymentCompleted":"Completed payment ",
+      "Note2":"* Note: Please select your payment bank account and upload payment voucher after the transaction has been completed. ",
+      "transferSuccessful":"Order has been submitted, it will be processed very soon, please stay updated.",
+      "back": "Back",
+      "selectAccount":"Please select payment bank account.",
+      "selectVoucher":"Please upload payment voucher.",
+      "imgFomat": "The format of the uploaded image is incorrect, please upload it again!",
+      "imgSize":"Excessive size of the photo, please upload it again!",
+      "bankAddress":"Bank Address:",
+      "SwiftCode":"SWIFT CODE:",
+      "uploadPhotos":"Upload  Photos"
     },
     "paySuccess": {
-      "PayPending1":"The order has been submitted and the system is processing. Please wait.",
+      "PayPending1":"The order has been submitted, the system is processing ... please wait",
       "PayPending2":"You can close this page first, and we will notify you by mail / SMS later!",
       "handing": "Order processing ...",
       "title": "ORDER PAID",
@@ -270,7 +300,7 @@
       "coustom": "Customize"
     },
     "payFailed": {
-      "title": "Sorry, the payment was not completed",
+      "title": "Sorry, the order payment failed! Please repay",
       "phone": "For any questions, contact customer service (852)-2165 3905",
       "orderNo": "Order#：",
       "payAgain": "PAY AGAIN",
@@ -534,10 +564,12 @@
       "received": "Received",
       "confirmCancellationOrder": "Cancel order",
       "canceled": "Order cancelled",
-	  "paytips": "WIRE TRANSFER GUIDE",
-	  "shoppingCard": "shopping card",
-	  "ultimatelyPay": "Actual payment",
-	  "NeedPay": "MoneyNeedPay"
+      "paytips": "WIRE TRANSFER GUIDE",
+      "shoppingCard": "shopping card",
+      "ultimatelyPay": "Actual payment",
+      "NeedPay": "MoneyNeedPay",
+      "pending":"Pending",
+      "payfailed":"Payment failed"
     }
   },
   "custom-made": {
@@ -667,7 +699,10 @@
       "noHotRecommend": "No hot searches",
       "history": "Search history",
       "noResult": "No search history",
-      "cleanHistory": "Reset search history"
+      "cleanHistory": "Reset search history",
+      "rings": "RING",
+      "necklaces": "NECKLACE",
+      "bracelets": "BRACELET"
     },
     "result": {
       "back": "Back",
@@ -804,6 +839,7 @@
     "footerBar": {
       "custoService": "Customer Service",
       "custoServiceTime": "Monday to Friday 9 am to 6 pm",
+      "custoServiceTimeCn": "Monday to Friday 9 am to 6 pm",
       "callUs": "Tel：",
       "emailUs": "Email",
       "aboutBDD": "About BDD",
@@ -820,7 +856,10 @@
       "privacyPolicy": "Privacy Policy",
       "termsAndConditions": "Terms And Conditions",
       "onlineStore": "Superior quality diamond online store",
-      "handicraftExpert": "Jewelry expert"
+      "handicraftExpert": "Jewelry expert",
+      "copyrightRight": "© 2019 BDD Co. All Rights Reserved.",
+      "copyrightRight1": "Canton ICP No.",
+      "copyrightRight2": "-1©2018-2020 BDD Co. All Rights Reserved."
     },
     "leftMenu": {
       "search": "Search",
@@ -921,7 +960,10 @@
       "canceled": "Order cancelled",
       "paytips": "Wire Transfer guide",
       "text": "Make payment within 23 hours and 59 minutes or your order will be canceled ",
-      "tips": "Confirm to leave the checkout page ?"
+      "tips": "Confirm to leave the checkout page ?",
+      "pending":"Pending",
+      "payfailed":"Payment failed",
+      "lookOrder": "View Order"
     },
     "progressBar": {
       "price": "Price",
@@ -1388,6 +1430,7 @@
       "con2": "Every customer purchased from BDD Co. will enjoy a 7-day right of return. Customers will only need to pay for the return shipping and insurance fee. Please note that the purchased products must remain original purchase condition, also include all the product documents, and be shipped within 7 days to qualify for return. For orders shipping to China, 7-day will start from when the customers receive the products, and 20% reservation fee is non-refundable. To get a return authorization on orders, please follow the steps below.",
       "tit2": "Before Accepting The Shipment",
       "con3": "All of your orders we ship are fully insured. It is important that if the package or product delivered to you arrives damaged or tampered, please refuse the shipment, take pictures for record and email us immediately at service@bddco.com. For damaged or missing products, please keep all the packaging materials and articles during the waiting process. Claims for damaged or lost products must be reported within 5 days after receipt the parcel. BDD Co. will not be responsible for lost or damaged returned shipments.",
+      "conCn3": "All of your orders we ship are fully insured. It is important that if the package or product delivered to you arrives damaged or tampered, please refuse the shipment, take pictures for record and email us immediately at e-service@bddco.com. For damaged or missing products, please keep all the packaging materials and articles during the waiting process. Claims for damaged or lost products must be reported within 5 days after receipt the parcel. BDD Co. will not be responsible for lost or damaged returned shipments.",
       "tit3": "International Returns",
       "con4": "If any additional costs or charges arise during the process of returning the products, BDD Co. will not be responsible for the costs or charges. BDD Co. reserves the right to charge you for any fees we incur at the time of package receipt. To avoid additional charges, we recommend sending your return via our preferred insured FedEx carrier. For your convenience and at your discretion, we can assist you to purchase the insurance at a discounted rate by shipping with FedEx International Priority® service.",
       "tit4": "Shipping Charges",
@@ -1395,6 +1438,7 @@
       "con6": "If we make a request of products recall. Depending on the situation, we may be responsible for partially or fully return shipping expenses at our discretion. However, we will not be responsible for the additional cost arising out of the unauthorized delivery services.",
       "con7": "To Prepare Returning The Products For An Exchange Or Refund：",
       "con8": "1.For all returns, please email us at service@bddco.com prior to returning the products. You need to provide your BDD Co. Order# and return code (the return code will be sent to you after we achieve mutual consent about the return issues). Please be informed that the products should be packed carefully and securely in its original packaging along with all the documents relating to the products and purchase full insurance for the products. If you cannot achieve the above requirements, return application will not be processed.",
+      "conCn8": "1.For all returns, please email us at e-service@bddco.com prior to returning the products. You need to provide your BDD Co. Order# and return code (the return code will be sent to you after we achieve mutual consent about the return issues). Please be informed that the products should be packed carefully and securely in its original packaging along with all the documents relating to the products and purchase full insurance for the products. If you cannot achieve the above requirements, return application will not be processed.",
       "con9": "2.If your product was delivered with a diamond certificate and that certificate is not returned, you will have to pay a diamond certificate replacement fee of USD250 (or equivalent amount in other currencies).",
       "con10": "During the return process, we recommend that you pack your products carefully and securely in its original packaging materials and purchase a full insurance for the products. We are not responsible for lost or stolen articles. Therefore, it is essential to purchase full insurances for the products. Customers will need to purchase full insurances for the products by themselves or contact us for insurance purchase assistance. For safety reasons, do not write 'BDD Co.', 'Diamond', 'Gold' or 'Jewelry' anywhere on the outside of the box.",
       "tit5": "After BDD Co. Received Your Return",
@@ -1654,6 +1698,7 @@
       "con1": "If pre-tax orders’ value exceeds certain amount, the orders will be offered free shipping service. The minimum pre-tax order’s value for free shipping varies from countries to countries. Please check the details in the ",
       "link1": "Free Shipping Policy",
       "con2": ". In order to deliver the parcels to you safely, BDD Co. will only accept and ship to a street address, not a P.O. Box address. BDD Co. requires customers to sign for receipt, even though in some cases our carrier may give certain exemptions. If recipients are not able to receive the parcels on Monday to Friday, we are able to rearrange the delivery on Saturday for an additional fee. For this arrangement, please contact BDD Co. customer service specialist by sending email to service@bddco.com.",
+      "conCn2": ". In order to deliver the parcels to you safely, BDD Co. will only accept and ship to a street address, not a P.O. Box address. BDD Co. requires customers to sign for receipt, even though in some cases our carrier may give certain exemptions. If recipients are not able to receive the parcels on Monday to Friday, we are able to rearrange the delivery on Saturday for an additional fee. For this arrangement, please contact BDD Co. customer service specialist by sending email to e-service@bddco.com.",
       "tit2": "International And Hong Kong Shipping",
       "con3": "For orders delivering to Hong Kong, the parcels will be delivered via DHL. For international orders, they will be delivered via FedEx International Priority®. We accept orders from 53 countries/regions. For more details, please check our ",
       "link2": "International Policy",
@@ -1902,7 +1947,8 @@
       "tit3": "Restrictions",
       "con4": "Whether the products are eligible to be shipped to the destination country or region would be depended on the local ordinances and restrictions.",
       "tit4": "Shipment",
-      "con5": "All international orders are shipped via FedEx International Priority®. Once the order exceedscertain value, customers will not need to pay for any shipping fees. If there is any question about the expected shipping time, please note that you can contact our customer service atservice@bddco.com or simply use the FedEx tracking number to check the delivery schedule onFedEx Tracking System.",
+      "con5": "All international orders are shipped via FedEx International Priority®. Once the order exceedscertain value, customers will not need to pay for any shipping fees. If there is any question about the expected shipping time, please note that you can contact our customer service at service@bddco.com or simply use the FedEx tracking number to check the delivery schedule onFedEx Tracking System.",
+      "conCn5": "All international orders are shipped via FedEx International Priority®. Once the order exceedscertain value, customers will not need to pay for any shipping fees. If there is any question about the expected shipping time, please note that you can contact our customer service at e-service@bddco.com or simply use the FedEx tracking number to check the delivery schedule onFedEx Tracking System.",
       "tit5": "Asset Protection",
       "con6": "All international orders are fully insured, which ensures that every order shipment is risk-free. Every order is insured and under protected by a premier global insurance company from the time it leaves BDD Co. to when it arrives at your door. The insurance costs are equivalent to 0.32% of the order value and will be applied during the checkout process. However, the insurance costs for orders to the UAE and China might not be the same and if the order value exceeds the limit set by the insurance company, this fee will be fine-tuned. After you complete the purchase process, the insurance agreement details and claim procedures will be sent to your e-mail. In order to strengthen the safety of the shipments, BDD Co. may require recipients to sign for receipt in order to verify the identity.",
       "tit6": "Order Payment",

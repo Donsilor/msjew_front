@@ -193,6 +193,7 @@ export default {
       Settlement1:true,
       Settlement2:false,
       scroll: '',
+      soudout:''
     }
   },
   computed: {
@@ -203,6 +204,7 @@ export default {
   },
   beforeMount() {
     this.getList()
+    
   },
 
   created(){
@@ -211,8 +213,6 @@ export default {
   mounted(){
     
     this.$nextTick(() => {
-      
-      
     })
   },
 
@@ -223,21 +223,22 @@ export default {
       this.totalPrice=0
       this.allTick=false  
       this.tickNum = 0  
+      window.location.reload()
     },
-    // handleScroll(e){
-    //     // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
-    //     const that = this
-    //     let scrollTop = e.target.scrollTop;
-    //     // console.log("scrollTop",scrollTop)
-    //     that.scrollTop = scrollTop
-    //     if (that.scrollTop > 150) {
-    //       this.Settlement1 = false
-    //       this.Settlement2 = true
-    //     } else {
-    //       this.Settlement1 = true
-    //       this.Settlement2 = false
-    //     }
-    // },
+    handleScroll(e){
+        // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
+        const that = this
+        let scrollTop = e.target.scrollTop;
+        // console.log("scrollTop",scrollTop)
+        that.scrollTop = scrollTop
+        if (that.scrollTop > 150) {
+          this.Settlement1 = false
+          this.Settlement2 = true
+        } else {
+          this.Settlement1 = true
+          this.Settlement2 = false
+        }
+    },
     // handleScroll(){
     //   console.log('滚动条发生滚动了')
     //   this.Settlement1 = false
@@ -252,6 +253,14 @@ export default {
             res[i].tick = false
           }
           this.good = res
+          if(this.good.length<=3){
+            console.log(11111111111,this.good.length)
+            this.Settlement1 = true
+            this.Settlement2 = false
+          } else {
+            console.log(2222222)
+            window.addEventListener('scroll', this.handleScroll, true)
+          }
           this.defaultAll()
         })
         .catch(err => {
@@ -277,6 +286,7 @@ export default {
           this.totalNum = 0
           this.totalPrice = 0
           for (const j in this.good) {
+            this.soudout = this.good[j].data[0].simpleGoodsEntity.goodsStatus
             if(this.good[j].groupType == 1){
               if(parseInt(this.good[j].data[0].ringsSimpleGoodsEntity.status) === 0){
                   this.good[j].tick = false
@@ -309,6 +319,9 @@ export default {
           // this.totalNum = this.good.length
           if(this.good.length !== 0){
             this.allTick = !this.allTick
+          }
+          if(this.good.length == 1 && this.soudout !== 2){
+            this.allTick = false
           }
         }
         this.good = JSON.parse(JSON.stringify(this.good))
@@ -471,15 +484,23 @@ export default {
 
 <style lang="less" scoped>
 .positons{
-  position: fixed!important;
-  z-index: 999;
-  bottom:0;
+//  width: 1360px;
+//  margin: 0 auto;
 }
 .cart2{
+     position: fixed!important;
+  z-index: 999;
+  bottom:0;
+   width: 100%;
+    // text-align: left;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: #ffffff;
     .cart-bot-bar {
       position: relative;
       // width: 1300px;
-      width: 100%;
+       width: 1300px;
+      margin: 0 auto;
       height: 100px;
       background-color: #ffffff;
       display: flex;
@@ -595,6 +616,40 @@ export default {
       }
       .ban {
         background: #ccc;
+      }
+    }
+    .cart-radio {
+      position: relative;
+      .free-check {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        width: 16px;
+        height: 16px;
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(187, 187, 187, 1);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .icongou {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        display: block;
+        width: 16px;
+        height: 16px;
+        background: rgba(170, 138, 123, 1);
+        border-radius: 2px;
+        color: #fff;
+        font-size: 16px;
+        line-height: 16px;
+        cursor: pointer;
       }
     }
   }

@@ -141,16 +141,16 @@
     </section>
     <section class="contact-us">
       <h1 class="title">{{ lang.callUs }}</h1>
-      <div class="map">
+      <div class="map" v-show="this.$store.state.platform !== 21">
         <img src="/index/map.png" />
       </div>
       <div class="info">
-        <div class="info-row">
+        <div class="info-row" v-show="this.$store.state.platform !== 21">
           <span class="line"></span>
           <span class="row-name">{{ lang.store }}</span>
           <span class="row-text">{{ lang.storeName }}</span>
         </div>
-        <div class="info-row">
+        <div class="info-row" v-show="this.$store.state.platform !== 21">
           <span class="line"></span>
           <span class="row-name">{{ lang.address }}</span>
           <span class="row-text">{{ lang.addressDetail }}</span>
@@ -159,11 +159,15 @@
           <span class="line"></span>
           <span class="row-name">{{ lang.tel }}</span>
           <span class="row-text">
-            <a href="tel:+852 2165 3905">+852 2165 3905</a>
+            <a v-if="this.$store.state.platform === 21" href="tel:+852 2165 3905">0755 25169121</a>
+            <a v-else href="tel:+852 2165 3905">+852 2165 3905</a>
           </span>
           <span class="column-line"></span>
           <span class="row-icon">
-            <a href="tel:+852 2165 3905">
+            <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+              <i class="iconfont iconphone"></i>
+            </a>
+            <a v-else href="tel:+852 2165 3905">
               <i class="iconfont iconphone"></i>
             </a>
           </span>
@@ -172,17 +176,21 @@
           <span class="line"></span>
           <span class="row-name">{{ lang.email }}</span>
           <span class="row-text">
-            <a href="mailto:service@bddco.com">service@bddco.com</a>
+            <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">e-service@bddco.com</a>
+            <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
           </span>
           <span class="column-line"></span>
           <span class="row-icon">
-            <a href="mailto:service@bddco.com">
+            <a v-if="this.$store.state.platform == 21" href="mailto:e-service@bddco.com">
+              <i class="iconfont iconyouxiang"></i>
+            </a>
+            <a v-else href="mailto:service@bddco.com">
               <i class="iconfont iconyouxiang"></i>
             </a>
           </span>
         </div>
-        <div class="info-row">
-          <nuxt-link :to="{ path: '/contact' }">
+        <div class="info-row" v-show="this.$store.state.platform !== 21">
+          <nuxt-link :to="{ path: '/contact' }" >
             <button class="contact-button">{{ lang.callUs }}</button>
           </nuxt-link>
         </div>
@@ -1017,7 +1025,7 @@ export default {
 
 /*联系我们*/
 .contact-us {
-  padding: 18px 15px 30px 15px;
+  padding: 38px 15px 30px 15px;
   box-sizing: border-box;
 
   .title {

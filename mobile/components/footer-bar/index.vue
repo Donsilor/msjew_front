@@ -7,7 +7,24 @@
           <span class="group-name">{{ lang.custoService }}</span>
           <i class="iconfont iconxiala status-icon"></i>
         </div>
-        <ul class="group-content">
+        <ul class="group-content" v-if="this.$store.state.platform === 21">
+          <li class="item">
+            <span>{{ lang.custoServiceTimeCn }}</span>
+          </li>
+          <li class="item">
+            <span>
+              {{ lang.callUs }}：
+              <a href="tel:(852) 2165 3905">0755 25169121</a>
+            </span>
+          </li>
+          <li class="item">
+            <span>
+              {{ lang.emailUs }}：
+              <a href="mailto:service@bddco.com">e-service@bddco.com</a>
+            </span>
+          </li>
+        </ul>
+        <ul class="group-content" v-else>
           <li class="item">
             <span>{{ lang.custoServiceTime }}</span>
           </li>
@@ -120,7 +137,8 @@
       <span class="text">{{ lang.handicraftExpert }}</span>
     </section>
     <div class="copy-right">
-      <span class="text">Copyright © 2019 BDD Co.</span>
+      <div v-if="this.$store.state.platform === 21" style="font-size:9px;margin-top:20px;">{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
+      <span v-else class="text" >Copyright © 2019 BDD Co.</span>
     </div>
   </div>
 </template>
@@ -287,7 +305,9 @@ export default {
   padding-bottom: 20px;
   /*margin-bottom: 20px;*/
   background-color: #ffffff;
-
+  div,a{
+     color: rgba(202, 202, 202, 1);
+  }
   .text {
     font-size: 10px;
     font-weight: 400;

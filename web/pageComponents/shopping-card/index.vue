@@ -6,7 +6,7 @@
       </div>
       <div class="card-box clf">
         <!-- 购物卡列表 -->
-        <div class="list" v-for="(item, index) in cardList" ref="list" @input="inputInfo(index)">
+        <div class="list" v-for="(item, index) in cardList" :key="index" ref="list" @input="inputInfo(index)">
           <div class="card-info">
             <span class="choose" :class="item.ifChoose ? 'active' : ''" @click="chooseList(index)"></span>
             <div class="list-content">

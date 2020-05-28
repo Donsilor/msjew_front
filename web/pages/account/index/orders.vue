@@ -39,8 +39,11 @@
             <p>{{ $t(`${lang}.orderNumber`) }}：{{ o.orderNO }}</p>
             <p>
               {{ $t(`${lang}.orderStatus`) }}：
-              <span :style="{ color: getStatusColor(o.orderStatus) }">{{
-                getStatusText(o.orderStatus)
+              <span v-if="o.wireTransferStatus == null" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getStatusText(o.orderStatus)
+              }}</span>
+              <span v-else :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getTransferStatus(o.wireTransferStatus)
               }}</span>
             </p>
           </div>
@@ -80,8 +83,8 @@
             </nuxt-link>
             <a
               ><button
-                @click="
-                  cid = o.id
+                v-show="o.wireTransferStatus == null"
+                @click="cid = o.id
                   cancelOrderStatus = true
                 "
               >
@@ -89,7 +92,7 @@
               </button></a
             >
             <nuxt-link :to="goToPay(o.id, o.coinCode, o.payAmount, o.paymentType)"
-              ><div v-if="o.payChannel !== 1" class="btn-a">
+              ><div v-if="o.payChannel !== 1 && o.wireTransferStatus == null" class="btn-a">
               {{ $t(`${lang}.toPay`) }}
               </div>
             </nuxt-link>
@@ -345,6 +348,7 @@ export default {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
+          console.log("订单0",res.data)
           if(res.code != 200){
             return
           }
@@ -492,17 +496,25 @@ export default {
       //   this.$t(`${lang}.hadReturn`),
       //   this.$t(`${lang}.cancelTransaction`)
       // ][status]
-
       var status_value =  {
-          0 : this.$t(`${lang}.cancelTransaction`),
-          10: this.$t(`${lang}.hadNotPay`),
-          20: this.$t(`${lang}.waitingSend`),
-          30: this.$t(`${lang}.waitingSend`),
-          40: this.$t(`${lang}.hadSend`),
-          50: this.$t(`${lang}.hadFinish`),
-        };
-        // console.log("bbbbb",status_value[status])
+        0 : this.$t(`${lang}.cancelTransaction`),
+        10: this.$t(`${lang}.hadNotPay`),
+        20: this.$t(`${lang}.waitingSend`),
+        30: this.$t(`${lang}.waitingSend`),
+        40: this.$t(`${lang}.hadSend`),
+        50: this.$t(`${lang}.hadFinish`),
+      };
+      
+      // console.log("bbbbb",status_value[status])
       return status_value[status];
+    },
+    getTransferStatus(transferStatus){
+      var transferStatus_value = {
+        0 : this.$t(`${lang}.pending`),
+        1 : this.$t(`${lang}.hadPay`),
+        10: this.$t(`${lang}.PayFailed`),
+      };
+      return transferStatus_value[transferStatus];
     },
     cancelOrder() {
       const data = this.$helpers.transformRequest(

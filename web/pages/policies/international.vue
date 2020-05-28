@@ -7,7 +7,8 @@
           {{ $t(`${lang}.define`) }}
           <br />
           {{ $t(`${lang}.mail`) }}
-          <span>service@bddco.com</span>
+          <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+          <span v-else>service@bddco.com</span>
           {{ $t(`${lang}.know`) }}
         </dd>
         <dt>{{ $t(`${lang}.tit1`) }}</dt>
@@ -21,7 +22,8 @@
         <dt>{{ $t(`${lang}.tit3`) }}</dt>
         <dd>{{ $t(`${lang}.con4`) }}</dd>
         <dt>{{ $t(`${lang}.tit4`) }}</dt>
-        <dd>{{ $t(`${lang}.con5`) }}</dd>
+        <dd v-if="this.$store.state.platform === 20">{{ $t(`${lang}.conCn5`) }}</dd>
+        <dd v-else>{{ $t(`${lang}.con5`) }}</dd>
         <dt>{{ $t(`${lang}.tit5`) }}</dt>
         <dd>{{ $t(`${lang}.con6`) }}</dd>
         <dt>{{ $t(`${lang}.tit6`) }}</dt>

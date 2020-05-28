@@ -12,13 +12,27 @@
         <dt>{{ $t(`${lang}.tit2`) }}</dt>
         <dd>
           {{ $t(`${lang}.con3`) }}
-          <span>service@bddco.com</span>
+          <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+          <span v-else>service@bddco.com</span>
           {{ $t(`${lang}.con4`) }}
         </dd>
         <dt>{{ $t(`${lang}.tit3`) }}</dt>
         <dd>{{ $t(`${lang}.con5`) }}</dd>
         <dt>{{ $t(`${lang}.tit4`) }}</dt>
-        <dd>
+        <dd v-if="this.$store.state.platform === 20">
+          {{ $t(`${lang}.con6`) }}
+          <br />
+          {{ $t(`${lang}.con7`) }}
+          <br />
+          {{ $t(`${lang}.con8`) }}
+          <br />
+          {{ $t(`${lang}.conCn9`) }}
+          <br />
+          {{ $t(`${lang}.con10`) }}
+          <br />
+          {{ $t(`${lang}.con11`) }}
+        </dd>
+        <dd v-else>
           {{ $t(`${lang}.con6`) }}
           <br />
           {{ $t(`${lang}.con7`) }}
@@ -44,7 +58,8 @@
         <dt>{{ $t(`${lang}.tit7`) }}</dt>
         <dd>
           {{ $t(`${lang}.con16`) }}
-          <span>service@bddco.com</span>
+         <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+          <span v-else>service@bddco.com</span>
           {{ $t(`${lang}.con17`) }}
         </dd>
         <dd>{{ $t(`${lang}.tip1`) }}</dd>

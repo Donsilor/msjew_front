@@ -20,6 +20,7 @@ export default {
       )
       melo.steps[0].goodsDetailsId = data.detailsId
       melo.steps[0].goodsId = data.goodsId
+      melo.steps[0].goodsType = data.goodsType
       if (data.type === `ring`) {
         melo.steps[1].ct = 2
         this.$router.push({

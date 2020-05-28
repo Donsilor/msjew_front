@@ -25,7 +25,10 @@
           {{ lang.con3 }}
         </dd>
         <dt>{{ lang.tit3 }}</dt>
-        <dd>
+        <dd v-if="this.$store.state.platform == 21"> 
+          {{ lang.conCn4 }}
+        </dd>
+        <dd v-else> 
           {{ lang.con4 }}
         </dd>
         <dt>{{ lang.tit4 }}</dt>
@@ -109,7 +112,11 @@
           {{ lang.con24 }}
         </dd>
         <dt>{{ lang.tit21 }}</dt>
-        <dd>
+
+        <dd v-if="this.$store.state.platform === 21">
+          {{ lang.conCn25 }}
+        </dd>
+        <dd v-else>
           {{ lang.con25 }}
         </dd>
       </dl>

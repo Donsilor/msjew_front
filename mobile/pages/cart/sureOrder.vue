@@ -1,7 +1,7 @@
 <template>
   <div class="sure-oredr">
     <Header :title="lang.sureOrder" />
-    <div v-if="!isLogin" class="is-login">
+    <div v-if="!isLogin" class="is-login" id="loginBox">
       <i class="icon iconfont icongantanhao1"></i>
       <a @click="gologin(1)">{{ lang.login }}</a>
       <span>{{ lang.settlement }}</span>
@@ -40,7 +40,7 @@
         <ul>
           <li v-for="(item, index) in list2" :key="index">
             <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
-            <div >
+            <div>
               <img :src="item.url" />
               <div class="right">
                 <span
@@ -60,6 +60,7 @@
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p> 
               </div>
             </div>
           </li>
@@ -202,7 +203,7 @@
               {{ formatMoney( productAmount) }}</span
             >
           </li>
-					<li v-for="item in useAmount">
+					<li v-for="(item,index) in useAmount" :key="index">
 					  <div>
 					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
 					  </div>
@@ -315,6 +316,12 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        },
+        {
           url: '/cart/ap.png',
           type: 82,
           title: this.LANGUAGE.cart.pay.payType3,
@@ -327,10 +334,16 @@ export default {
           des: this.LANGUAGE.cart.pay.type4Text
         },
         {
-          url: '/cart/card.png',
+          url: '/cart/up.png',
           type: 81,
           title: this.LANGUAGE.cart.pay.payType1,
           des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+          url: '/cart/ph.png',
+          type: 84,
+          title: this.LANGUAGE.cart.pay.payType5,
+          des: this.LANGUAGE.cart.pay.type5Text,
         }
         // {
         //   url: '/cart/paydollar.png',
@@ -521,14 +534,28 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 2
+        pay = 61
+      }else if(this.typeIndex == 2){
+        pay = 82
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 84
       }
 
-      if(pay!==6){
+      if(pay == 81 || pay == 82 || pay == 83 || pay == 84){
         this.$toast.show(this.lang.firstLogin)
+        // 点击修改滚顶到地址编辑模块
+        document.getElementById('loginBox').scrollIntoView({
+          block: 'center',
+          inline: 'nearest',
+          behavior: 'smooth'
+        })
       }
       if (ind === 5) {
-        this.price = this.info.orderAmount * 0.985
+        this.price = this.info.orderAmount 
       } else {
         this.price = this.info.orderAmount
       }
@@ -890,6 +917,7 @@ export default {
             url: url,
             data: data
           })
+
           .then(res => {
             // console.log("费用",res)
             this.canSubmit = true
@@ -992,17 +1020,33 @@ export default {
     // 支付
     //  已登录创建订单
     createOrder() {
+      this.$nuxt.$loading.start()
       // if (!this.canSubmit) {
       //   return
       // }
       // console.log("aaaa",this.typeIndex)
+      let pay = 0
+      if(this.typeIndex == 0){
+        pay = 6
+      }else if(this.typeIndex == 1){
+        pay = 61
+      }else if(this.typeIndex == 2){
+        pay = 82
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 84
+      }
        if (!this.isLogin) {
           if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
            return
          }
-         if(this.typeIndex!==0){
+         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
             this.$toast.show(this.lang.firstLogin)
+            // this.$nuxt.$loading.finish()
            return
          }
        }
@@ -1056,6 +1100,7 @@ export default {
             }
           })
           .catch(err => {
+            this.$nuxt.$loading.finish()
             this.$toast.show(err.message)
           })
       } else {
@@ -1085,6 +1130,7 @@ export default {
               goodsCartList:data,
               invoice:this.$route.params.invoice,
               tradeType:'wap',
+              payType: pay,
               coinType:this.$store.state.coin,
               returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
             }
@@ -1119,6 +1165,7 @@ export default {
               // })
             })
             .catch(err => {
+              this.$nuxt.$loading.finish()
               this.$toast.show(err.message)
             })
           }else{
@@ -1577,7 +1624,7 @@ export default {
             color: rgba(153, 153, 153, 1);
           }
         }
-        li.order-pay, {
+        li.order-pay{
           line-height: 20px;
           margin-top: 10px;
           padding-top: 10px;
@@ -1674,7 +1721,7 @@ export default {
       img {
         width: 32px;
         height: 32px;
-        margin: 16px;
+        margin: 24px 16px 0;
         float: left;
       }
       .right {
@@ -1687,7 +1734,7 @@ export default {
           float: right;
           width: 20px;
           height: 20px;
-          margin: 12px 12px 0 0;
+          margin: 20px 12px 0 0;
           background: rgba(255, 255, 255, 1);
           border: 1px solid rgba(187, 187, 187, 1); /*no*/
           border-radius: 50%;
@@ -1781,5 +1828,9 @@ export default {
   visibility: hidden;
   clear: both;
   opacity: 0;
+}
+
+.hint-color{
+  color: #f29b87 !important;
 }
 </style>
