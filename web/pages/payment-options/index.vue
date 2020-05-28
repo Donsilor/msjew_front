@@ -749,15 +749,19 @@ div {
     background-color: #fff;
     padding: 39px 40px 40px;
     .new-address-title {
-      width: 1300-51-36px;
+      // width: 1300-51-36px;
+       width: 48%;
       height: 20px;
       display: flex;
       align-items: flex-end;
       margin-bottom: 17px;
+      position: relative;
       .note{
+        position: absolute;
         font-size: 12px;
-        margin-left: 230px;
-        color: #999999;
+        // left:279px;
+        right: 0;
+        color: #cac7c7;
         .star{
           color: red;
         }

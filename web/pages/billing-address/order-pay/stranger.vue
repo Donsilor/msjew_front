@@ -4398,14 +4398,19 @@ div {
     padding: 39px 40px 40px;
     //  padding: 39px 40px 95px;
     .new-address-title {
-      width: 1300-51-36px;
+      // width: 1300-51-36px;
+      width: 48%;
       height: 20px;
       display: flex;
       align-items: flex-end;
       margin-bottom: 17px;
+      position: relative;
       .note{
         font-size: 12px;
-        margin-left: 230px;
+        position: absolute;
+        // left:279px;
+        right: 0;
+        // margin-left: 230px;
         color: #cac7c7;
         .star{
           color: red;
