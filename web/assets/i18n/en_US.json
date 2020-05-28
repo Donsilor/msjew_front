@@ -667,11 +667,11 @@
         "howToChoosePairRing": "How to choose a traditional classic wedding ring, wedding couple rings?",
         "howToMatchPairRing": " How do you match your engagement ring?  ",
         "knowMore": "LEARN MORE",
-        "discounts1": "优惠券",
+        "discounts1": "Coupon",
         "discounts2": "折",
         "discountsActive": "优惠活动",
         "getCoupon": "获取优惠券",
-        "activityTime": "活动时间"
+        "activityTime": "Promotion period"
     },
     "pairRingsList": {
         "style": "Style",
@@ -697,7 +697,7 @@
         "totalCountTitle": "RING ({total_count} Results)",
         "titleDesc": "Let us make a promise with this ring and spend the rest of our life since this moment on.",
         "sort": "Sort By",
-        "discounts1": "优惠券",
+        "discounts1": "Coupon",
         "discounts2": "折"
     },
     "diamonds": {
@@ -781,7 +781,7 @@
         "clickToCheck": "View",
         "table": "Table",
         "addCart": "Add to Cart",
-        "discounts1": "优惠券",
+        "discounts1": "Coupon",
         "discounts2": "折"
     },
     "engagementRing": {
@@ -820,7 +820,7 @@
         "totalCountTitle": "ABSTAIN ({total_count} Results)",
         "titleDesc": "There are different ring settings optional. The solitaire ring is a symbol of true love, and its taste will last together with the solitaire.",
         "sort": "Sort By",
-        "discounts1": "优惠券",
+        "discounts1": "Coupon",
         "discounts2": "折"
     },
     "jewelleryList": {
@@ -836,7 +836,7 @@
         "title": "JEWELRY",
         "totalCountTitle": "JEWELRY ({total_count} Results)",
         "titleDesc": "Choose various accessories to show your taste",
-        "discounts1": "优惠券",
+        "discounts1": "Coupon",
         "discounts2": "折"
     },
     "personal": {
@@ -941,8 +941,8 @@
             "orderList": "Order List",
             "productInfo": "Product Information",
             "productTotal": "Number Of Product",
-            "oldPrice": "商品原價",
-            "newPrice": "優惠後金額",
+            "oldPrice": "Original price",
+            "newPrice": "Discount price",
             "orderNumber": "Total Order Amount",
             "orderStatus": "Order Status",
             "orderDetail": "Order Details",
@@ -1021,8 +1021,8 @@
             "get": "(Recipient)",
             "goodsInfo": "Product Information",
             "goodsNum": "Qty",
-            "oldPrice": "商品原價",
-            "newPrice": "優惠後金額",
+            "oldPrice": "Original price",
+            "newPrice": "Discount price",
             "deliveryInfo": "Delivery detail",
             "expressInfo": "Logistics",
             "express": "Logistics",
@@ -1087,7 +1087,7 @@
         "addWishSuccess": "Added to wish list",
         "deleteWishSuccess": "Wish list deleted",
         "searchSimilar": "search similar",
-        "discounts1": "优惠券",
+        "discounts1": "Coupon",
         "discounts2": "折"
     },
     "pay": {
@@ -1257,14 +1257,14 @@
         "fiveStarReviews": "5-star review",
         "BDDReply": "BDD's Reply",
         "loadingMore": "MORE...",
-        "discounts1": "优惠券",
+        "discounts1": "Coupon",
         "discounts2": "折",
-        "discountsActive": "优惠活动",
+        "discountsActive": "Discount Promotion ",
         "getCoupon": "获取优惠券",
-        "activityTime": "活动时间",
-        "oddPrice": "原  价",
-        "newPrice": "折后价",
-        "needLogin": "请先登录，才能领取优惠券"
+        "activityTime": "Promotion period",
+        "oddPrice": "Original price",
+        "newPrice": "Discount price",
+        "needLogin": "Please login before redeem the coupon. "
     },
     "policies": {
         "layout": {
@@ -2513,8 +2513,8 @@
         "msg11": "Need to log in for shopping / Mainland China Only",
         "needlogin": "Need to log in for shopping",
         "notAvailable": "Select available coupons",
-        "discountPrice": "折扣金额",
-        "needRegister": "請先登錄，才能使用優惠券"
+        "discountPrice": "Discounted amount",
+        "needRegister": "Please login before redeem the coupon. "
     },
     "invoice": {
         "personal": "personal",
@@ -2549,8 +2549,8 @@
         "NeedPay": "MoneyNeedPay",
         "submitSuccessfully": "Order Submission Successful!",
         "PleaseLogin": "Please log in first to use the gift card！",
-        "coupon": "優惠券",
-        "discountPrice": "折扣金額"
+        "coupon": "Coupon",
+        "discountPrice": "Discounted amount"
     },
     "shoppingCard": {
         "title": " Add Shopping Card Information",
@@ -2600,37 +2600,37 @@
         "getCoupon": "Get Coupon",
         "useCoupon": "Use Coupon",
         "accomplish": "Accomplish",
-        "alreadyApplied": "已使用",
-        "alreadyReceived": "已领取",
-        "immediatelyReceive": "立即领取",
-        "haveChoose": "已选用",
-        "immediatelyChoose": "立即选用",
-        "msg1": "优惠券领取成功",
-        "msg2": "优惠券领取失败，请重试"
+        "alreadyApplied": "Coupon has been used",
+        "alreadyReceived": "Coupon has been claimed",
+        "immediatelyReceive": "Collect it now",
+        "haveChoose": "Already Selected",
+        "immediatelyChoose": "Select it now",
+        "msg1": "Coupon has been claimed successfully",
+        "msg2": "Something went wrong, please try it again."
     },
     "subject": {
         "discount":{
-        "discountCoupon": "折扣券",
+        "discountCoupon": "Discount coupon",
         "discount": "折",
-        "explain": "活動專場商品",
-        "oldPrice": "原價",
-        "newPrice": "折後價",
-        "status": "正在活動中",
-        "text1": "僅支持",
-        "text2": "此專題內商品使用  （具體請看商品詳情）",
-        "text3": "活動時間",
-        "text4": "(過期恢復原價)",
-        "text5": "活動地區",
-        "text6": "中國大陸、中國香港 (其他地區暫不參與)"
+        "explain": "Promoted products/Products on sale",
+        "oldPrice": "Original price",
+        "newPrice": "Discount price",
+        "status": "On sale",
+        "text1": "Only for",
+        "text2": "Only applied for selected items(more information refer to product details)",
+        "text3": "Promotion period",
+        "text4": "Back to the original price",
+        "text5": "Available areas",
+        "text6": "Mainland China and Hongkong (temporarily unavailable outside of China)"
     },
     "favourable":{
-	    "discountCoupon": "優惠券",
+	    "discountCoupon": "Coupon ",
 	    "full": "滿",
 	    "use": "元使用",
-	    "get": "立即領取",
-	    "status": "正在活動中",
-	    "text1": "優惠券使用規則：",
-	    "text2": "僅支持指定鉆飾成品使用（具體商品請看商品詳情）"
+	    "get": "Collect it now",
+	    "status": " On sale",
+	    "text1": "and conditions ：",
+	    "text2": "details)Only applied for selected diamond product(more information refer to product details)"
     }
   }
 }

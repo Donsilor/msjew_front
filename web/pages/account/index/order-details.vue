@@ -482,14 +482,14 @@ export default {
     },
     getData() {
       var that = this;
-      console.log("id",this.oid)
+      // console.log("id",this.oid)
       this.$axios
         .get('/web/member/order/detail', {
           params: { orderId: this.oid }
         })
         .then(res => {
           this.data = res.data
-          console.log("this.data",this.data)
+          // console.log("this.data",this.data)
           this.invoice = res.data.invoice
           this.orderStatus = res.data.orderStatus
           console.log("data",this.orderStatus)
@@ -525,7 +525,7 @@ export default {
         })
     },
     goToDetail(obj) {
-      console.log("issssss",obj)
+      // console.log("issssss",obj)
       let route = {
         path: '/',
         query: {}
