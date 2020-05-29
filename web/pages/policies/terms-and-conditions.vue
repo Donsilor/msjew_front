@@ -4,7 +4,9 @@
       <div class="title">{{ $t(`${lang}.header`) }}</div>
       <dl>
         <dd>
-          {{ $t(`${lang}.define1`) }}
+          <label v-if="this.$store.state.platform === 10">{{ $t(`${lang}.define1Tw`) }}</label>
+          <label v-if="this.$store.state.platform === 20">{{ $t(`${lang}.define1Cn`) }}</label>
+          <label v-if="this.$store.state.platform === 30">{{ $t(`${lang}.define1Us`) }}</label>
           <br />
           {{ $t(`${lang}.define2`) }}
         </dd>

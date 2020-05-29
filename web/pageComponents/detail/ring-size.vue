@@ -6,7 +6,7 @@
     <p class="content">
       {{ $t(`${lang}.needHelpForRingSize`) }}
     </p>
-    <nuxt-link class="to-helper" :to="{ path: '/' }">
+    <nuxt-link class="to-helper" :to="{ path: '/education/rings/size' }">
       {{ $t(`${lang}.checkMyRingSize`) }}
     </nuxt-link>
   </section>

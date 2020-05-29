@@ -1,7 +1,7 @@
 <template>
   <div class="engagementRings-component">
-    <div class="swiper-box">
-      <swiper :auto="true" :duration="5000">
+    <div class="swiper-box" style="position:relative;">
+      <swiper ref="ring-list" :auto="true" :duration="5000">
         <div v-for="(each, n) in ringBanners" :key="n">
           <nuxt-link
             :to="
@@ -13,6 +13,15 @@
           /></nuxt-link>
         </div>
       </swiper>
+
+      <div class="ring-list-bar">
+        <div class="left-button" @click="nextActiveDiamond(false)">
+          <img src="../../static/left-arrow.png" /> 
+        </div>
+        <div class="right-button" @click="nextActiveDiamond(true)">
+          <img src="../../static/left-arrow.png" /> 
+        </div>
+      </div>
     </div>
     <div class="title">
       {{ goodInfo.name }}
@@ -313,11 +322,70 @@ export default {
         this.firstRing.goodsStatus === 2 && this.secondRing.goodsStatus === 2
       )
     }
+  },
+  methods:{
+     nextActiveDiamond (type) {
+      this.$refs['ring-list'].goNext(type)
+    }
   }
 }
 </script>
 
 <style scoped lang="less">
+.ring-list-bar {
+  // padding-bottom: 119px;
+  // background-color: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .left-button{
+    position: absolute;
+    top:45%;
+    left: 5px;
+    img{
+      width: 40px!important;
+    }
+  }
+  .right-button{
+    position: absolute;
+    top:45%;
+    right: 5px;
+    img{
+      width: 40px!important;
+      transform: rotate(180deg);
+    }
+  }
+  .left-button,
+  .right-button { 
+    font-size: 0;
+    line-height: 0;
+    cursor: pointer;
+    img {
+      // width: 64px;
+    }
+  }
+
+  .active-product-info {
+    margin: 0 20px;
+    width: 473px;
+
+    .title {
+      margin-bottom: 10px;
+      font-size: 24px;
+      font-weight: 400;
+      color: #333333;
+      text-align: center;
+    }
+    .sub-title {
+      font-size: 18px;
+      font-weight: 400;
+      color: #333333;
+      text-align: center;
+    }
+  }
+}
+
 .engagementRings-component {
   .details-component(100%);
 }
