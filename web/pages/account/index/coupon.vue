@@ -43,17 +43,22 @@ export default {
       lang,
       language: '',
       coin: '',
-      couponList: []
+      couponList: [],
+      nowTime: ''
     }
   },
   mounted(){
-	  this.language = this.getCookie('language')
-    this.coin = this.$store.state.coin
+	  this.language = this.getCookie('language');
+    this.coin = this.$store.state.coin;
+    this.nowTime = new Date().getTime();
+
+    console.log(222,this.nowTime)
 
     // 获取优惠券
     this.$axios.get('web/member/coupon/index', {
       })
       .then(res => {
+        console.log(777, res)
         this.ifLoading = false;
         this.couponList = res.data.data
 
@@ -275,7 +280,7 @@ export default {
 
 .list{
   position: relative;
-  width: 284px;
+  width: 286px;
   // height: 226px;
   border: 1px solid rgb(205,173,118);
   background-image: linear-gradient(to right, rgba(255,255,255,0.31), rgba(219,209,209,0.31));

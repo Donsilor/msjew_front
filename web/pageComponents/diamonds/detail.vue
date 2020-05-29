@@ -119,7 +119,7 @@
         			<span>{{ $t(`${lang}.discountsActive`) }}：</span>
         			<span class="discount-icon">{{discountConversion(this.info.coupon.discount.discount)}}{{ $t(`${lang}.discounts2`) }}</span>
         		</div>
-        		<!-- <div class="time">{{ $t(`${lang}.activityTime`) }}：2020.4.9</div> -->
+        		<div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div>
         	</div>
 
         	<div class="discount-price">
@@ -136,7 +136,7 @@
         			<span class="favourable-icon">￥</span>
         			<span class="get" @click="getCoupon">{{ $t(`${lang}.getCoupon`) }}></span>
         		</div>
-        		<!-- <div class="time">123：2020.4.9</div> -->
+        		<!-- <div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div> -->
         	</div>
 
         	<!-- <div class="discount-price">
@@ -354,7 +354,8 @@ export default {
         materialIndex: 0,
         sizeIndex: 0
       },
-      showCoupon: false
+      showCoupon: false,
+      activeTime: ''
     }
   },
   computed: {
@@ -470,8 +471,11 @@ export default {
     }
   },
   mounted() {
-    console.log('this.info',this.info)
     const _this = this
+    if(this.info.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
+    }
+    
     _this.$nextTick(() => {})
     // console.log(this.simpleDetail, `<=======`)
   },

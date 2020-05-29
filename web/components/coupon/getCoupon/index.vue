@@ -64,7 +64,6 @@
       }
     },
     mounted() {
-      console.log(778,this.moneyInfo)
       this.language = this.getCookie('language')
       this.coin = this.$store.state.coin
 
@@ -110,6 +109,8 @@
           })
           .catch(err => {
             this.ifLoading = false;
+			this.loadFinish = true;
+			this.$nuxt.$loading.finish()
             console.log(err)
           })
       }
@@ -176,7 +177,7 @@
 
     .wrap {
       width: 1000px;
-      height: 800px;
+      height: 760px;
       background-color: #fff;
       position: absolute;
       top: 50%;
@@ -209,7 +210,7 @@
 
       .coupon-box {
         width: 900px;
-        height: 700px;
+        height: 644px;
         margin: 10px auto;
         overflow-y: auto;
 
@@ -331,6 +332,8 @@
                 color: #cdad75;
                 text-align: center;
                 margin-top: 4px;
+                height: 34px;
+                line-height: 16px;
               }
 
               .lose-efficacy {

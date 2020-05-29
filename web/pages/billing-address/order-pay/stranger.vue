@@ -1903,38 +1903,6 @@
               </div>
             </div>
 
-            <!-- 优惠券 -->
-            <div v-show="objectIfEmpty(tex.coupons)" class="detail-line">
-              <div>{{ $t(`${lang}.coupon`) }}</div>
-              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': 1}" @click="showUseCoupon">
-                <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
-                <div>{{$t(`${lang}.notAvailable`)}}</div>
-              </div>
-            </div>
-
-            <!-- 折扣金额 -->
-            <div v-show="tex.discount_amount" class="detail-line">
-              <div>{{$t(`${lang}.discountPrice`)}}</div>
-              <div class="hkd color-pink">
-                <div>- {{$store.state.coin}} {{ formatMoney(tex.discount_amount) }}</div>
-              </div>
-            </div>
-
-            <!-- <div v-show="makeGay" class="detail-line">
-              <div>
-                *{{ $t(`${lang}.coupon`) }}:
-                <span style="color: red;">{{ tooInp }}</span>
-                <span
-                  style="color: red;text-decoration: underline;cursor: pointer;"
-                  @click="removeCoupon"
-                  >{{ $t(`${lang}.sc`) }}</span
-                >
-              </div>
-              <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
-              </div>
-            </div> -->
-
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
@@ -1973,6 +1941,24 @@
                 +{{ $store.state.coin }} {{ formatMoney(tex.safeFee) }}
               </div>
             </div>
+            
+            <!-- 折扣金额 -->
+            <div v-show="tex.discount_amount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{$store.state.coin}} {{ formatMoney(tex.discount_amount) }}</div>
+              </div>
+            </div>
+            
+            <!-- 优惠券 -->
+            <div v-show="objectIfEmpty(tex.coupons)" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': 1}" @click="showUseCoupon">
+                <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
+                <div>{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+            
             <div class="detail-line">
               <div class="font-size-16 color-333">
                 {{ $t(`${lang}.totalMoney`) }}
@@ -3175,22 +3161,26 @@ div {
     }
 
     span:nth-child(1) {
-      width: 698px;
+      width: 668px;
     }
 
     span:nth-child(2) {
-      width: 70px;
-      margin-right: 56px;
+      width: 80px;
       text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
     span:nth-child(3) {
-      width: 70px;
-      margin-right: 99px;
+      width: 180px;
       text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
     span:nth-child(4) {
-      width: 100px;
+      width: 180px;
       text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
   }
 

@@ -1775,48 +1775,6 @@
               </div>
             </div>
 
-            <!-- 购物卡 -->
-            <div class="detail-line" v-for="item in useAmount">
-              <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
-              <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
-              </div>
-            </div>
-
-            <!-- <div v-show="makeGay" class="detail-line">
-              <div>
-                *{{ $t(`${lang}.coupon`) }}:
-                <span style="color: red;">{{
-                  isToo ? coupon.couponCode : tooInp
-                }}</span>
-                <span
-                  style="color: red;text-decoration: underline;cursor: pointer;"
-                  @click="removeCoupon"
-                  >{{ $t(`${lang}.sc`) }}</span
-                >
-              </div>
-              <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
-              </div>
-            </div> -->
-
-            <!-- 优惠券 -->
-            <div v-show="ifShowCoupon" class="detail-line">
-              <div>{{ $t(`${lang}.coupon`) }}</div>
-              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': !couponCodeR.couponId}" @click="showUseCoupon = true">
-                <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
-                <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
-              </div>
-            </div>
-
-            <!-- 折扣金额 -->
-            <div v-show="tex.discountAmount" class="detail-line">
-              <div>{{$t(`${lang}.discountPrice`)}}</div>
-              <div class="hkd color-pink">
-                <div>- {{$store.state.coin}} {{ formatMoney(tex.discountAmount) }}</div>
-              </div>
-            </div>
-
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
@@ -1856,18 +1814,43 @@
               </div>
             </div>
             <div class="detail-line">
-              <div class="font-size-16 color-333">
+              <div>
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
-              <div class="hkd color-pink price-big">
+              <div>
                 {{ $store.state.coin }}
                 {{ formatMoney(orderTotalAmount) }}
                 <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
               </div>
             </div>
 
+            <!-- 折扣金额 -->
+            <div v-show="tex.discountAmount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{$store.state.coin}} {{ formatMoney(tex.discountAmount) }}</div>
+              </div>
+            </div>
+
+            <!-- 优惠券 -->
+            <div v-show="ifShowCoupon" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': !couponCodeR.couponId}" @click="showUseCoupon = true">
+                <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
+                <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+            <!-- 购物卡 -->
+            <div class="detail-line" v-for="item in useAmount">
+              <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+              <div class="hkd color-pink">
+                -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
+              </div>
+            </div>
+            
             <div class="detail-line">
-              <div class="font-size-16 color-333">
+              <div class="font-size-14 color-333">
                 {{ $t(`${lang2}.NeedPay`) }}
               </div>
               <div class="hkd color-pink price-big">
@@ -2941,14 +2924,14 @@ export default {
          arr.push({...obj})
          obj.cart_id = '';
          obj.coupon_id = '';
-         
+
         } else {
           obj.cart_id = this.good[i].data[0].id
           if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
             obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
           }
           arr.push({...obj})
-          
+
           obj.cart_id = '';
           obj.coupon_id = '';
           obj.cart_id = this.good[i].data[1].id
@@ -3047,7 +3030,7 @@ export default {
          arr.push({...obj})
          obj.cart_id = '';
          obj.coupon_id = '';
-         
+
         } else {
           obj.cart_id = this.good[i].data[0].id
           if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
@@ -3056,7 +3039,7 @@ export default {
           arr.push({...obj})
           obj.cart_id = '';
           obj.coupon_id = '';
-          
+
           obj.cart_id = this.good[i].data[1].id
           if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
             obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
@@ -3685,17 +3668,25 @@ div {
       display: block;
     }
     span:nth-child(1) {
-      width: 698px;
+      width: 668px;
     }
     span:nth-child(2) {
-      width: 70px;
-      margin-right: 58px;
+      width: 80px;
       text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
     span:nth-child(3) {
-      width: 70px;
-      margin-right: 106px;
+      width: 180px;
       text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    span:nth-child(4) {
+      width: 180px;
+      text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
   }
   .cart-goods {

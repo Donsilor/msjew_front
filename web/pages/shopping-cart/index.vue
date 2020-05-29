@@ -6,8 +6,8 @@
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
         ><span>{{ $t(`${lang}.number`) }}</span
-        ><span>原金额</span
-        ><span>优惠后金额</span
+        ><span>{{ $t(`${lang}.oldPrice`) }}</span
+        ><span>{{ $t(`${lang}.newPrice`) }}</span
         ><span>{{ $t(`${lang}.option`) }}</span>
       </div>
       <div class="cart-goods">
@@ -693,22 +693,18 @@ export default {
       padding-left: 50px;
       span {
         display: block;
+        width: 180px;
+        text-align: center;
       }
       span:nth-child(1) {
-        // width: 140+269+71+185+83px;
-        width: 745px;
+        width: 694px;
+        text-align: left;
       }
-      span:nth-child(2) {
-        // width: 60+120px;
-        width: 118px;
+      span:nth-child(2){
+        width: 80px;
       }
-      span:nth-child(3) {
-        // width: 207px;
-        width: 166px;
-      }
-      span:nth-child(4) {
-        // width: 207px;
-        width: 145px;
+      span:nth-child(5) {
+        width: 100px;
       }
     }
     .cart-goods {

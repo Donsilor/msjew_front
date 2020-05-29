@@ -169,7 +169,6 @@
         "
         class="good-btn"
       >
-        <div class="wish-img"></div>
         <i class="iconfont iconlajitong" @click="deleteGood()" />
       </div>
       <div v-show="options" v-else class="lose-btn">
@@ -246,7 +245,7 @@ export default {
 .madeUp {
   .good-info {
     position: relative;
-    width: 1200px;
+    width: 1250px;
     height: 281px;
     border-bottom: 1px solid rgba(239, 239, 239, 1);
     .good-info-dotted {
@@ -282,7 +281,7 @@ export default {
       .good-desc {
         width: 269px;
         line-height: 18px;
-        margin-right: 71px;
+        margin-right: 50px;
         div:nth-child(1) {
           max-height: 18 * 3px;
           margin-bottom: 16px;
@@ -299,7 +298,7 @@ export default {
       }
       .good-information {
         width: 185px;
-        margin-right: 66px;
+        margin-right: 50px;
         .infos {
           width: 100%;
           display: flex;
@@ -319,7 +318,7 @@ export default {
         line-height: 20px;
         max-height: 60px;
         color: #666;
-        margin-right: 66px;
+        margin-right: 50px;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -328,33 +327,35 @@ export default {
         -webkit-box-orient: vertical;
       }
       .good-num {
-        width: 60px;
+        width: 80px;
         text-align: center;
         font-size: 18px;
         color: #333;
-        // margin-right: 217-60-83px;
-        margin-right: 30px;
+        padding: 0 10px;
+        box-sizing: border-box;
       }
       .good-price {
         font-family: twCenMt;
         font-size: 18px;
         color: #f29b87;
-        width: 130px;
+        width: 180px;
         text-align: center;
-		margin-right: 54px;
+        padding: 0 10px;
+        box-sizing: border-box;
       }
     }
     .good-btn {
-      width: 80px;
+      width: 100px;
       height: 21px;
       line-height: 21px;
       position: absolute;
       top: 50%;
       right: 0;
       transform: translateY(-50%);
+
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       div:nth-child(2) {
         width: 1px;
         height: 21px;
@@ -450,7 +451,7 @@ export default {
     background-color: rgba(102, 102, 102, 0.4);
   }
   .lose-btn {
-    width: 120px;
+    width: 100px;
     height: 21px;
     line-height: 21px;
     position: absolute;
@@ -460,6 +461,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 10px;
+    box-sizing: border-box;
     div:nth-child(2) {
       width: 1px;
       height: 21px;

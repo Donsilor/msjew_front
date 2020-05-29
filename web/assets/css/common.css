@@ -579,6 +579,7 @@ color-red {
 
 .discount-active .time{
 	color: #b49785;
+  margin-right: 68px;
 }
 
 .discount-price{

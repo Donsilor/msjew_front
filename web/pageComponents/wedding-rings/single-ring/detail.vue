@@ -247,7 +247,7 @@
 					<span>{{ $t(`${lang}.discountsActive`) }}：</span>
 					<span class="discount-icon">{{discountConversion(this.info.coupon.discount.discount)}}{{ $t(`${lang}.discounts2`) }}</span>
 				</div>
-				<div class="time">{{ $t(`${lang}.activityTime`) }}：2020.4.9</div>
+				<div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div>
 			</div>
 
 			<div class="discount-price">
@@ -264,7 +264,7 @@
 					<span class="favourable-icon">￥</span>
 					<span class="get" @click="getCoupon">{{ $t(`${lang}.getCoupon`) }}></span>
 				</div>
-				<div class="time">{{ $t(`${lang}.activityTime`) }}：2020.4.9</div>
+				<!-- <div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div> -->
 			</div>
 
 			<!-- <div class="discount-price">
@@ -461,7 +461,8 @@ export default {
         caratIndex: 0
       },
       showCoupon: false,
-      moneyList: []
+      moneyList: [],
+      activeTime: ''
     }
   },
   computed: {
@@ -574,11 +575,15 @@ export default {
   },
   watch: {
     info(val, oldVal) {
-      console.log('info=======>')
+      // console.log('info=======>')
     }
   },
   mounted() {
     const _this = this
+    if(this.info.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
+    }
+
     _this.$nextTick(() => {
       // console.log(this.$helpers.base64Decode(this.$route.query.steps))
       if (this.$route.query.isBack) {

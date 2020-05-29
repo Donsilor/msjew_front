@@ -233,7 +233,7 @@
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b></span
+              }}<b>{{ o.coinCode }} {{ formatNumber(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -251,7 +251,7 @@
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b style="color: #333;"
-                >{{ o.coinCode }} {{ formatNumber(o.payAmount) }}</b
+                >{{ o.coinCode }} {{ formatNumber(o.orderAmount) }}</b
               ></span
             >
           </div>

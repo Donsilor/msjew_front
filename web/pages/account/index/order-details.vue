@@ -156,7 +156,7 @@
             </div>
           </nuxt-link>
           <div class="t2">1</div>
-          <div class="t3">
+          <div class="t3" :class="{'old-price': d.goodsPrice !== d.goodsPayPrice}">
             {{ data.coinCode }} {{ formatMoney(d.goodsPrice) }}
           </div>
           <div class="t4">
@@ -313,27 +313,6 @@
               {{ data.coinCode }} {{ formatNumber(data.productAmount) }}
             </div>
           </div>
-          <div class="info-line" v-for="item in cardList">
-            <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
-            <div class="ff color-pink">
-              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
-            </div>
-          </div>
-
-          <!-- 折扣金额 -->
-          <div class="info-line" v-if="data.discountAmount != 0">
-            <div class="label">{{ $t(`${lang_invoice}.discountPrice`) }}</div>
-            <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatNumber(data.discountAmount) }}
-            </div>
-          </div>
-          <!-- 优惠金额 -->
-          <div class="info-line" v-if="data.couponAmount != 0">
-            <div class="label">{{ $t(`${lang_invoice}.coupon`) }}</div>
-            <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatNumber(data.couponAmount) }}
-            </div>
-          </div>
 
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.freight`) }}</div>
@@ -360,12 +339,37 @@
             </div>
           </div>
           <div class="info-line">
-            <div class="label big-label">{{ $t(`${lang}.orderTotal`) }}</div>
+            <div class="label">{{ $t(`${lang}.orderTotal`) }}</div>
             <div class="ff big-ff">
               <!-- {{ data.coinCode }} {{ formatNumber(data.orderAmount) }} -->
               {{ data.coinCode }} {{ formatNumber(data.orderAmount) }}
             </div>
           </div>
+
+          <!-- 折扣金额 -->
+          <div class="info-line" v-if="data.discountAmount != 0">
+            <div class="label">{{ $t(`${lang_invoice}.discountPrice`) }}</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{ formatNumber(data.discountAmount) }}
+            </div>
+          </div>
+
+          <!-- 优惠金额 -->
+          <div class="info-line" v-if="data.couponAmount != 0">
+            <div class="label">{{ $t(`${lang_invoice}.coupon`) }}</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{ formatNumber(data.couponAmount) }}
+            </div>
+          </div>
+
+          <!-- 购物卡 -->
+          <div class="info-line" v-for="item in cardList">
+            <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
+            </div>
+          </div>
+
           <div class="info-line">
             <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
             <div class="ff big-ff">
@@ -919,11 +923,15 @@ export default {
         }
         .t3 {
           width: 130px;
-          font-size: 14px;
+          font-size: 20px;
           font-family: twCenMt;
-          color: #b2b2b2;
+          color: #f29b87;
           text-align: center;
           margin-right: 30px;
+        }
+        .t3.old-price{
+          font-size: 14px;
+          color: #b2b2b2;
           text-decoration: line-through;
         }
         .t4 {

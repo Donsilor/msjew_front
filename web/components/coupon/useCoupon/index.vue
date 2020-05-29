@@ -158,7 +158,7 @@
 
     .wrap {
       width: 1000px;
-      height: 800px;
+      height: 760px;
       background-color: #fff;
       position: absolute;
       top: 50%;
@@ -191,7 +191,7 @@
 
       .coupon-box {
         width: 900px;
-        height: 700px;
+        height: 644px;
         margin: 10px auto;
         overflow-y: auto;
 
@@ -311,6 +311,8 @@
                 color: #cdad75;
                 text-align: center;
                 margin-top: 4px;
+                height: 34px;
+                line-height: 16px;
               }
 
               .lose-efficacy {
