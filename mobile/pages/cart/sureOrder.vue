@@ -205,34 +205,6 @@
             >
           </li>
 
-          <!-- 折扣金额 -->
-          <li v-if="allFee.discountAmount">
-            <span>折扣金额：</span
-            ><span
-              >-{{ coin }}
-              {{ formatMoney( allFee.discountAmount) }}</span
-            >
-          </li>
-
-          <!-- 优惠金额 -->
-          <li v-if="!allFee.myCoupons">
-            <span>优惠券： </span
-            ><span v-if="couponCodeR.couponPrice"
-             @click="ifShowCoupon = true"
-              >-{{ coin }}
-              {{this.couponCodeR.couponPrice}}</span
-            >
-            <span v-if="!couponCodeR.couponPrice" @click="useCoupon">使用优惠券</span>
-          </li>
-
-          <!-- 购物卡 -->
-					<li v-for="(item,index) in useAmount" :key="index">
-					  <div>
-					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
-					  </div>
-					  <span class="color-pink">-{{ coin }} {{ formatMoney(item.useAmount) }}</span>
-					</li>
-
           <!-- 优惠码 -->
           <!-- <li v-show="preferFee > 0">
             <div>
@@ -275,12 +247,41 @@
             </div>
             <span>+{{ coin }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
-          <li class="order-pay">
+          <li>
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
             ><span>{{ coin }} {{ formatMoney(orderTotalAmount) }}</span>
           </li>
-          <li class="order-pay" style="border-top: 0;margin-top: 0;">
+
+          <!-- 折扣金额 -->
+          <li v-if="allFee.discountAmount">
+            <span>折扣金额：</span
+            ><span
+              >-{{ coin }}
+              {{ formatMoney( allFee.discountAmount) }}</span
+            >
+          </li>
+
+          <!-- 优惠金额 -->
+          <li v-if="allFee.myCoupons && isLogin">
+            <span>优惠券： </span
+            ><span v-if="couponCodeR.couponPrice"
+             @click="ifShowCoupon = true"
+              >-{{ coin }}
+              {{this.couponCodeR.couponPrice}}</span
+            >
+            <span v-if="!couponCodeR.couponPrice" @click="useCoupon">使用优惠券</span>
+          </li>
+
+          <!-- 购物卡 -->
+          <li v-for="(item,index) in useAmount" :key="index">
+            <div>
+              <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
+            </div>
+            <span class="color-pink">-{{ coin }} {{ formatMoney(item.useAmount) }}</span>
+          </li>
+
+          <li class="order-pay">
             <span>{{ lang.NeedPay }}</span
             ><span>{{ coin }} {{ formatMoney(ultimatelyPay) }}</span>
           </li>
@@ -332,7 +333,6 @@ export default {
       url:'',
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
-      coin: this.$store.state.coin,
       form: [],
       actionLink: '',
       list2: [
@@ -432,7 +432,7 @@ export default {
       // 所有可有优惠券
       couponAll: [],
       // 已领取优惠券
-      couponAlready: []
+      couponAlready: [],
     }
   },
   computed: {
