@@ -23,7 +23,8 @@
             <!--        <div class="date">24/7</div>-->
             <div class="row-flex align-item-center service">
               <i class="iconfont iconphone"></i>
-              <span>(852) 2165 3905</span>
+              <span v-if="this.$store.state.platform === 20">0755 25169121</span>
+              <span v-else>(852) 2165 3905</span>
               <!--          <span class="gap-line"></span>-->
               <!--          <span>聯系 24/7</span>-->
             </div>
