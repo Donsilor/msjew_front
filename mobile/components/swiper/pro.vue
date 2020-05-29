@@ -1,6 +1,6 @@
 <template>
-  <div class="swiper" > <!-- @touchmove="endTouch" -->
-    <div ref="swiper-content" class="content" > <!-- @touchstart.stop="touchStart" -->
+  <div class="swiper" @touchmove="endTouch" > 
+    <div ref="swiper-content" class="content" @touchstart.stop="touchStart" > 
       <template v-if="slotFinish">
         <div
           v-for="(each, n) in showItems"
