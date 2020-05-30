@@ -654,4 +654,11 @@ export default {
 .order-box-a:first-child{
   margin-bottom: 4px;
 }
+
+.activity-sign{
+  width: 40px;
+  height: 40px;
+  right: -4px;
+  bottom: -4px;
+}
 </style>

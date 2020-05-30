@@ -171,7 +171,7 @@ export default {
         }
       })
         .then(res => {
-          // console.log(`finish's Other=======>`, res)
+          console.log(`finish's Other=======>`, res)
           this.swiperImg = res.goodsImages.split(`,`)
           res.goodsImages = res.goodsImages.split(`,`)[0] || ``
           this.info1 = res
@@ -207,6 +207,7 @@ export default {
       margin-bottom: 35px;
       .img-block {
         margin-right: 20px;
+        position: relative;
         img {
           display: block;
           width: 125px;

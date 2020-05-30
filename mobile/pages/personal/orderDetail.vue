@@ -35,10 +35,9 @@
 
             <!-- 折扣 -->
             <!-- <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'"> -->
-            <div class="discount-a-icon" v-if="1">
               <!-- <div>{{ discountConversion(each.coupon.discount.discount) }}{{ lang.discounts2 }}</div> -->
               <!-- <div>{{ discountConversion(each.coupon.discount.discount) }}{{ lang.discounts2 }}</div> -->
-            </div>
+            <!-- </div> -->
 
             <!-- 优惠券 -->
             <!-- <div class="discount-a-icon" v-if="couponType(each.coupon) == 'money'">
@@ -263,14 +262,6 @@
 				</span>
 			<span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
 		  </li>
-          <li v-if="info.discountAmount != 0" class="active">
-            <span>折扣金额： </span
-            ><span>-{{ info.coinCode }} {{ info.discountAmount }} </span>
-          </li>
-          <li v-if="info.couponAmount != 0" class="active">
-            <span>优惠券： </span
-            ><span>-{{ info.coinCode }} {{ info.couponAmount }} </span>
-          </li>
           <li>
             <span>{{ lang.freight }}： </span
             ><span>+{{ info.coinCode }} {{ info.logisticsFee }} </span>
@@ -287,13 +278,21 @@
             <span>{{ lang.transPreferFee }}： </span
             ><span>-{{ info.coinCode }} {{ info.transPreferFee }} </span>
           </li>
-          <div class="all">
+          <li>
             <span>{{ lang.orderCount }}</span
             ><span
               ><em>{{ info.coinCode }} </em>{{ info.orderAmount }}
             </span>
-          </div>
-          <div class="all" style="border-top: 0;">
+          </li>
+          <li v-if="info.discountAmount != 0" class="active">
+            <span>折扣金额： </span
+            ><span>-{{ info.coinCode }} {{ info.discountAmount }} </span>
+          </li>
+          <li v-if="info.couponAmount != 0" class="active">
+            <span>优惠券： </span
+            ><span>-{{ info.coinCode }} {{ info.couponAmount }} </span>
+          </li>
+          <div class="all">
             <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span
             ><span><em>{{ info.coinCode }} </em>{{ info.payAmount }} </span>
           </div>

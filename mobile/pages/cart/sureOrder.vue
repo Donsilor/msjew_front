@@ -261,6 +261,15 @@
               {{ formatMoney( allFee.discountAmount) }}</span
             >
           </li>
+          
+          <!-- 折扣金额 -->
+          <li v-if="allFee.discount_amount">
+            <span>折扣金额：</span
+            ><span
+              >-{{ coin }}
+              {{ formatMoney( allFee.discount_amount) }}</span
+            >
+          </li>
 
           <!-- 优惠金额 -->
           <li v-if="allFee.myCoupons && isLogin">
@@ -949,7 +958,7 @@ export default {
           })
 
           .then(res => {
-            console.log("费用",res)
+            // console.log("费用",res)
             this.canSubmit = true
             this.allFee = res
 

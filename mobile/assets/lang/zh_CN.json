@@ -2193,5 +2193,25 @@
 		"msg11": "解除绑定成功！",
 		"msg12": "此卡还未到使用时间！",
 		"msg13": "此卡已超过使用时间！"
-	}
+	},
+  "coupon": {
+      "title": "优惠券卡包",
+      "limit1": "满 ",
+      "limit2": " 元使用",
+      "limit3": "限 ",
+      "limit4": " 使用",
+      "use": "点击使用",
+      "time": "活动时间",
+      "loseEfficacy": "已失效",
+      "getCoupon": "领取优惠券",
+      "useCoupon": "使用优惠券",
+      "accomplish": "完成",
+      "alreadyApplied": "已使用",
+      "alreadyReceived": "已领取",
+      "immediatelyReceive": "立即领取",
+      "haveChoose": "已选用",
+      "immediatelyChoose": "立即选用",
+      "msg1": "优惠券领取成功",
+      "msg2": "优惠券领取失败，请重试"
+  }
 }

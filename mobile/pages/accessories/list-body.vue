@@ -76,11 +76,11 @@
             <!-- 折扣 -->
             <div class="list-discount-price" v-if="couponType(each.coupon) == 'discount'">
               <div class="info-price old-price-2">
-                <span class="coin">{{ lang.oddPrice }}{{ each.coinType }}</span>
+                <span class="coin">{{ each.coinType }}</span>
                 <span class="price">{{ formatNumber(each.salePrice) }}</span>
               </div>
               <div class="info-price">
-                <span class="coin">{{ lang.newPrice }}{{ each.coinType }}</span>
+                <span class="coin">{{ each.coinType }}</span>
                 <span class="price">{{ formatNumber(each.coupon.discount.price) }}</span>
               </div>
             </div>

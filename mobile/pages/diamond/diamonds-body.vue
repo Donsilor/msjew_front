@@ -88,19 +88,21 @@
 
     <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
       <div class="discount-l">
-        <span class="text">{{ lang.discountsActive }}：</span>
-        <div>
-          <div v-if="goodInfo.coupon.discount">
+        <div class="discoupon-d" v-if="goodInfo.coupon.discount">
+          <div class="discoupon-d-l">
+            <span class="text">{{ lang.discountsActive }}：</span>
             <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
           </div>
-          <div class="discount-b-box" v-if="goodInfo.coupon.money">
-            <span class="discount-icon">￥</span>
-            <span class="get" @click="getCoupon">{{ lang.getCoupon }}&gt;</span>
-          </div>
         </div>
-      </div>
-      <div class="discount-time">
-        <!-- <span>{{ lang.activityTime }}：</span><span>2020.4.9</span> -->
+        
+        <div class="discoupon-d" v-if="goodInfo.coupon.money">
+          <div class="discoupon-d-l">
+            <span class="text">{{ lang.discountsActive }}：</span>
+            <span class="discount-icon">￥</span>
+          </div>
+        
+          <div class="get" @click="getCoupon">{{ lang.getCoupon }} &gt;</div>
+        </div>
       </div>
     </div>
 

@@ -19,7 +19,7 @@
               class="mod-item"
             >
 			<div @click="godetails(item, index)">
-              <div class="left-box" :class="{on: item.coupon.discount || item.coupon.money}">
+              <div class="left-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]" >
                 <img :src="imageStrToArray(item.goodsImages)[0]" />
 
                 <div class="activity-sign" v-if="item.coupon.discount || item.coupon.money">
@@ -47,14 +47,14 @@
                 <b v-if="!item.coupon.discount">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
 
                 <div class="discount-price" v-else>
-                  <div class="old-price">原   价 {{ coin }} {{ formatNumber(item.salePrice) }}</div>
-                  <b>折后价 {{ coin }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                  <div class="old-price">{{ coin }} {{ formatNumber(item.salePrice) }}</div>
+                  <b>{{ coin }} {{ formatNumber(item.coupon.discount.price) }}</b>
                 </div>
 
                 <div v-if="item.groupType === 1" class="btn-type">
                   {{ lang.ring }}
                 </div>
-                <div v-if="item.groupType === 2" class="btn-type">
+                <div v-if="item.groupType === 2" class="btn-type" :class="{marginTop: item.groupType === 2}">
                   {{ lang.coustom }}
                 </div>
                 <div v-if="item.groupType !== 0 && index !== list.length - 1">
@@ -79,8 +79,8 @@
                   <b v-if="!list[index + 1].coupon.discount">{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
 
                   <div class="discount-price" v-else>
-                    <div class="old-price">原   价 {{ coin }} {{ formatNumber(list[index + 1].salePrice) }}</div>
-                    <b>折后价 {{ coin }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                    <div class="old-price">{{ coin }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                    <b>{{ coin }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
                   </div>
 
                   <!-- 合并前 -->
@@ -330,7 +330,7 @@ export default {
           }else{
             newPrice = newPrice + parseFloat(this.list[i].salePrice)
           }
-          
+
           // // 合并前,怕出问题留作参考
           // if (this.list[i].groupType === 1) {
           //    newPrice = newPrice + parseFloat(this.list[i].totalPrice) * 0.5
@@ -758,6 +758,9 @@ export default {
           .left-box.on{
             border: 1px solid red;
           }
+          .left-box.marginTop{
+            margin-top: 50px;
+          }
           img {
             width: 100%;
             height: 100%;
@@ -820,6 +823,9 @@ export default {
               line-height: 26px;
               font-weight: 400;
               color: rgba(148, 116, 101, 1);
+            }
+            .btn-type.marginTop{
+              margin-top: 60px;
             }
           }
           .domore {
@@ -898,6 +904,7 @@ export default {
       position: fixed;
       left: 0px;
       bottom: 0px;
+      z-index: 2;
       width: 100%;
       height: 50px;
       background: #ffffff;

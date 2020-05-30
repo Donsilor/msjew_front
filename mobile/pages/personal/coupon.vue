@@ -6,7 +6,7 @@
     <div class="title">
       <div class="quit" @click="quit()"></div>
       <i class="icon"></i>
-      <span>优惠券卡包</span>
+      <span>{{ lang.title }}</span>
     </div>
 
     <div class="card-box">
@@ -23,9 +23,9 @@
         </div>
 
         <div class="text1">满 {{coin}}{{item.atLeast}} 元使用</div>
-        <div class="limit">限用于（{{item.lineType}}）</div>
+        <div class="limit">{{ lang.limit3 }}（{{item.lineType}}）{{ lang.limit4 }}</div>
 
-        <div class="text2">使用时间：{{changeTime(item.startTime)}}-{{changeTime(item.endTime)}}</div>
+        <div class="text2">{{ lang.time }}：{{changeTime(item.startTime)}}-{{changeTime(item.endTime)}}</div>
 
         <!-- <div class="btn">点击使用</div> -->
 
@@ -39,6 +39,7 @@
 export default {
   data() {
     return{
+	  lang: this.LANGUAGE.coupon,
       coin: '',
       couponList: []
     }

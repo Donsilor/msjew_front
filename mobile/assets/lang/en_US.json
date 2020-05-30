@@ -2184,5 +2184,25 @@
 		"msg11": "Unbind successfully！",
 		"msg12": "This card is not expired！",
 		"msg13": "This card has expired！"
-	}
+	},
+  "coupon": {
+      "title": "Coupon Card Package",
+      "limit1": "Full ",
+      "limit2": " To Use",
+      "limit3": "limit ",
+      "limit4": " To Use",
+      "use": "Click On The Use",
+      "time": "Activity Time",
+      "loseEfficacy": "Lost Efficacy",
+      "getCoupon": "Get Coupon",
+      "useCoupon": "Use Coupon",
+      "accomplish": "Accomplish",
+      "alreadyApplied": "Coupon has been used",
+      "alreadyReceived": "Coupon has been claimed",
+      "immediatelyReceive": "Collect it now",
+      "haveChoose": "Already Selected",
+      "immediatelyChoose": "Select it now",
+      "msg1": "Coupon has been claimed successfully",
+      "msg2": "Something went wrong, please try it again."
+  }
 }
