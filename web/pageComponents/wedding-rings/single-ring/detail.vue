@@ -268,8 +268,8 @@
 			</div>
 
 			<!-- <div class="discount-price">
-				<span class="old-price">原   价HKD  2,222,22</span>
-				<span class="new-price">折后价HKD  2,222,22</span>
+				<span class="old-price">HKD  2,222,22</span>
+				<span class="new-price">HKD  2,222,22</span>
 			</div> -->
 		</div>
 

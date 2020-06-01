@@ -1,7 +1,7 @@
 <template>
   <div class="get-coupon">
     <div class="wrap">
-      <div class="title">领取优惠券
+      <div class="title">{{ lang.getCoupon }}
         <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
       </div>
 
@@ -21,20 +21,22 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
-              <div class="rule">满{{coin}} {{item.at_least}}使用</div>
-              <div class="text">({{item.lineType}})</div>
-              <div class="time">活动时间：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
+              <div class="rule">{{ lang.limit1 }}{{coin}} {{item.at_least}}{{ lang.limit2 }}</div>
+              <div class="text">{{ lang.limit3 }}( {{item.lineType}}) {{ lang.limit4 }}</div>
+              <div class="time">{{ lang.time }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
             <div class="get" @click="getCoupon(index)">
-              <span v-if="!item.ifUse">立即领取</span>
+              <div>
+                <span v-if="!item.ifUse">Collect it now</span>
+              </div>
             </div>
 
-            <div class="already" v-if="item.ifUse">已领取</div>
+            <div class="already" v-if="item.ifUse">{{ lang.alreadyReceived }}</div>
           </div>
         </div>
 
-        <div class="finish" @click="closeCoupon(true)">完成</div>
+        <div class="finish" @click="closeCoupon(true)">{{ lang.accomplish }}</div>
       </div>
     </div>
 
@@ -42,7 +44,6 @@
 </template>
 
 <script>
-  const lang = 'coupon'
   export default {
     name: 'Index',
     props: {
@@ -56,7 +57,7 @@
     },
     data() {
       return {
-        lang,
+        lang: this.LANGUAGE.coupon,
         language: '',
         couponList: [],
         ifLoading: false,
@@ -347,15 +348,25 @@
               width: 30%;
               height: 70px;
               border-left: 1px solid #f00;
-              line-height: 70px;
               text-align: center;
               font-size: 16px;
               font-weight: bold;
               color: #bd4444;
+              position: relative;
 
-              span {
-                padding: 10px;
-                box-sizing: border-box;
+              div{
+                width: 100%;
+                height: auto;
+                position: absolute;
+                top: 50%;
+                left: 0;
+                transform: translateY(-50%);
+                line-height: 16px;
+
+                span {
+                  padding: 10px;
+                  box-sizing: border-box;
+                }
               }
             }
           }

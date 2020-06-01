@@ -26,6 +26,9 @@ export default function({ req, res, app, store }) {
 
   // getTime 时间转换
   Vue.prototype.changeTime = Helpers.changeTime
+  
+  // 获取cookie
+  Vue.prototype.getCookie = Helpers.getCookie
 
   Vue.prototype.resizeOSSImageStr = ''
   // '?x-oss-process=image/format,webp'

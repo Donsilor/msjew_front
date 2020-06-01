@@ -10,17 +10,18 @@
               "
               class="mod-item"
             >
-              <div class="img-box" :class="{on: item.coupon.discount || item.coupon.money}">
+              <div class="img-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]">
                 <img :src="imageStrToArray(item.goodsImages)[0]" />
 
                 <div class="activity-sign" v-if="item.coupon.discount || item.coupon.money">
-                  <div class="triangle" v-if="item.coupon.discount">{{discountConversion(item.coupon.discount.discount)}}折</div>
-                  <div class="triangle" v-if="item.coupon.money">优惠券</div>
+                  <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                  <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
                 </div>
               </div>
+
               <div class="right">
                 <h4 class="ow-h2">
-                  <i class="discount-icon" v-if="item.coupon.discount">{{discountConversion(item.coupon.discount.discount)}}折</i>
+                  <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                   <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
 
                   {{ item.goodsName }}
@@ -35,21 +36,21 @@
                 <b v-if="!item.coupon.discount">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
 
                 <div class="discount-price" v-else>
-                  <div class="old-price">原   价{{ item.coinType }} {{ formatNumber(item.salePrice) }}</div>
-                  <b>折后价{{ item.coinType }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                  <div class="old-price">{{ coin }} {{ formatNumber(item.salePrice) }}</div>
+                  <b>{{ coin }} {{ formatNumber(item.coupon.discount.price) }}</b>
                 </div>
 
                 <div v-if="item.groupType === 1" class="btn-type">
                   {{ lang.ring }}
                 </div>
-                <div v-if="item.groupType === 2" class="btn-type">
+                <div v-if="item.groupType === 2" class="btn-type" :class="{marginTop: item.groupType === 2}">
                   {{ lang.coustom }}
                 </div>
                 <div v-if="item.groupType !== 0 && index !== list.length - 1">
                   <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-10">
-                    <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{discountConversion(list[index + 1].coupon.discount.discount)}}折</i>
+                    <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? list[index + 1].coupon.discount.discount+'%' : discountConversion(list[index + 1].coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                     <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
-                    
+
                     {{ list[index + 1].goodsName }}
                   </h4>
                   <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
@@ -67,8 +68,8 @@
                   <b v-if="!list[index + 1].coupon.discount">{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
 
                   <div class="discount-price" v-else>
-                    <div class="old-price">原   价 {{ coin }} {{ formatNumber(list[index + 1].salePrice) }}</div>
-                    <b>折后价 {{ coin }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                    <div class="old-price">{{ coin }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                    <b>{{ coin }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
                   </div>
                 </div>
               </div>
@@ -107,8 +108,12 @@ export default {
         safeFee: 0,
         orderAmount: 0
       },
-      num: 1
+      num: 1,
+      language: ''
     }
+  },
+  mounted() {
+    this.language = this.getCookie('language')
   },
   methods: {
     formatMoney: formatMoney,
@@ -139,6 +144,16 @@ export default {
     },
     back() {
       this.$router.go(-1)
+    },
+    // 获取cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
     }
   }
 }
@@ -184,6 +199,9 @@ export default {
           }
           .img-box.on{
             border: 1px solid red;
+          }
+          .img-box.marginTop{
+            margin-top: 60px;
           }
           img {
             width: 100%;
@@ -237,6 +255,11 @@ export default {
               font-weight: 400;
               color: rgba(148, 116, 101, 1);
               margin-top: 14px;
+            }
+
+            .btn-type.marginTop{
+              margin-top: 10px;
+              float: left;
             }
           }
         }

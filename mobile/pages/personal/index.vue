@@ -75,7 +75,7 @@
         <li @click="toNext('personal-coupon')">
            <i class="icon iconfont left-icon icongerenzhongxin-_youhuiquan"></i>
            <div class="right">
-             <p>优惠券卡包</p>
+             <p>{{ lang.coupon }}</p>
              <i class="icon iconfont iconyou"></i>
              <span v-if=" 0">{{ couponCount }}</span>
            </div>

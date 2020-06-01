@@ -1,7 +1,7 @@
 <template>
   <div class="get-coupon">
     <div class="wrap">
-      <div class="title">使用优惠券
+      <div class="title">{{ lang.useCoupon }}
         <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
       </div>
 
@@ -21,18 +21,20 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
-              <div class="rule">满￥{{item.at_least_cn}}使用</div>
+              <div class="rule">{{ lang.limit1 }}{{coin}}{{item.at_least_cn}}{{ lang.limit2 }}</div>
               <div class="text">({{item.lineType}})</div>
-              <div class="time">活动时间：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
+              <div class="time">{{ lang.time }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
             <div class="get" @click="chooseCoupon(index)">
-              <span>{{item.ifChoose ? '已选用' : '立即选用'}}</span>
+              <div>
+                <span>{{item.ifChoose ? lang.haveChoose : lang.immediatelyChoose}}</span>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="finish" @click="closeCoupon(true)">完成</div>
+        <div class="finish" @click="closeCoupon(true)">{{ lang.accomplish }}</div>
       </div>
     </div>
 
@@ -40,7 +42,6 @@
 </template>
 
 <script>
-  const lang = 'coupon'
   export default {
     name: 'Index',
     props: {
@@ -61,7 +62,7 @@
     },
     data() {
       return {
-        lang,
+        lang: this.LANGUAGE.coupon,
         language: '',
         couponList: [],
         ifLoading: false,
@@ -313,10 +314,21 @@
               width: 30%;
               height: 70px;
               border-left: 1px solid #f00;
-              line-height: 70px;
               text-align: center;
               font-size: 16px;
               color: #f00;
+              position: relative;
+
+              div{
+                position: absolute;
+                width: 100%;
+                left: 0;
+                top: 50%;
+                width: 100%;
+                transform: translateY(-50%);
+                line-height: 16px;
+                text-align: center;
+              }
 
               span {
                 padding: 10px;

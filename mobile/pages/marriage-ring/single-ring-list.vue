@@ -62,7 +62,7 @@
 
             <!-- 折扣 -->
             <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'">
-              <div>{{ discountConversion(each.coupon.discount.discount) }}{{ lang.discounts2 }}</div>
+              <div>{{ language == 'en_US' ? each.coupon.discount.discount+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
             </div>
 
             <!-- 优惠券 -->
@@ -74,7 +74,7 @@
 
           <!-- 折扣 -->
           <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'discount'">
-            <span class="discount-a-icon2">{{ discountConversion(each.coupon.discount.discount) }}{{ lang.discounts2 }}</span>
+            <span class="discount-a-icon2">{{ language == 'en_US' ? each.coupon.discount.discount+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             {{ each.goodsName }}
           </div>
 
@@ -91,7 +91,7 @@
                 <span class="price">{{ formatNumber(each.salePrice) }}</span>
               </div>
             </div>
-          
+
             <!-- 折扣 -->
             <div class="list-discount-price" v-if="couponType(each.coupon) == 'discount'">
               <div class="info-price old-price-2">
@@ -152,7 +152,7 @@ export default {
     return {
       lang: this.LANGUAGE.listCommons,
       gender: 'all',
-
+      language: ''
     }
   },
   watch: {
@@ -166,9 +166,7 @@ export default {
       this.conditions[2].options = []
       this.changeGender()
 
-    },
-
-
+    }
   },
   created() {},
   mounted() {
@@ -183,6 +181,8 @@ export default {
 
       // this.madeUpEv()
     })
+
+    this.language = this.getCookie('language')
   },
   methods: {
     changeGender(type = -1) {
@@ -210,7 +210,7 @@ export default {
       }
       this.ev += `^gender=${this.gender}`
       this.research()
-      console.log(this.ev)
+      // console.log(this.ev)
     }
   }
 }

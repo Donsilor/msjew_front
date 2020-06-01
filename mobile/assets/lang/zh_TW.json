@@ -128,7 +128,9 @@
       "freight": "（不含运费）",
       "goPay": "去結賬",
       "toast1": "請選擇要結賬商品",
-      "toast2": "移除成功"
+      "toast2": "移除成功",
+      "discounts1": "優惠券",
+      "discounts2": "折"
     },
     "invoice":{
       "personal":"個人",
@@ -198,7 +200,11 @@
       "submitSuccessfully": "訂單提交成功!",
       "PleaseLogin": "請先登錄，才能使用購物卡！",
       "msg10": "購物車不能為空，請重新添加商品",
-      "msg11": "僅供大陸使用"
+      "msg11": "僅供大陸使用",
+      "discountedAmount": "折扣金額",
+      "couponAmount": "優惠券",
+      "msg12": "請先登錄才能使用優惠券",
+      "useCoupons": "使用優惠券"
     },
     "pay": {
       "pay": "訂單支付",
@@ -297,7 +303,9 @@
       "transPreferFee": "電匯優惠： ",
       "orderAmount": "訂單總額",
       "ring": "對戒",
-      "coustom": "定製"
+      "coustom": "定製",
+      "discounts1": "優惠券",
+      "discounts2": "折"
     },
     "payFailed": {
       "title": "很抱歉，訂單支付失敗！請重新支付",
@@ -322,7 +330,8 @@
       "tips": "提示",
       "text": "確定退出登錄？",
       "cancel": "取消",
-      "course": "確定"
+      "course": "確定",
+      "coupon": "優惠券卡包"
     },
     "account": {
       "header": "我的賬戶",
@@ -587,7 +596,9 @@
     "cut": "切割",
     "addCart": "加入購物車",
     "addCartSuccess": "加入購物車成功",
-    "addCartFail": "加入購物車是失敗"
+    "addCartFail": "加入購物車是失敗",
+    "discounts1": "優惠券",
+    "discounts2": "折"
   },
   "diamond": {},
   "engagement": {

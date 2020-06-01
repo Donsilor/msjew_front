@@ -255,16 +255,16 @@
 
           <!-- 折扣金额 -->
           <li v-if="allFee.discountAmount">
-            <span>折扣金额：</span
+            <span>{{ lang.discountedAmount }}：</span
             ><span
               >-{{ coin }}
               {{ formatMoney( allFee.discountAmount) }}</span
             >
           </li>
-          
+
           <!-- 折扣金额 -->
           <li v-if="allFee.discount_amount">
-            <span>折扣金额：</span
+            <span>{{ lang.discountedAmount }}：</span
             ><span
               >-{{ coin }}
               {{ formatMoney( allFee.discount_amount) }}</span
@@ -272,14 +272,14 @@
           </li>
 
           <!-- 优惠金额 -->
-          <li v-if="allFee.myCoupons && isLogin">
-            <span>优惠券： </span
+          <li v-if="ifShowCouponMoney && isLogin">
+            <span>{{ lang.couponAmount }}： </span
             ><span v-if="couponCodeR.couponPrice"
              @click="ifShowCoupon = true"
               >-{{ coin }}
               {{this.couponCodeR.couponPrice}}</span
             >
-            <span v-if="!couponCodeR.couponPrice" @click="useCoupon">使用优惠券</span>
+            <span v-if="!couponCodeR.couponPrice" @click="useCoupon">{{ lang.useCoupons }}</span>
           </li>
 
           <!-- 购物卡 -->
@@ -438,10 +438,11 @@ export default {
         couponPrice: ''
       },
       ifShowCoupon: false,
+      ifShowCouponMoney: false,
       // 所有可有优惠券
       couponAll: [],
       // 已领取优惠券
-      couponAlready: [],
+      couponAlready: []
     }
   },
   computed: {
@@ -910,6 +911,13 @@ export default {
 
             this.couponAll = res.coupons
             this.couponAlready = res.myCoupons;
+            
+            if(res.myCoupons.length != 0){
+              this.ifShowCouponMoney = true
+            }else{
+              this.ifShowCouponMoney = false
+            }
+            
           })
           .catch(err => {
             this.canSubmit = false

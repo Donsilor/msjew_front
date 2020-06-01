@@ -23,8 +23,8 @@
                 <img :src="imageStrToArray(item.goodsImages)[0]" />
 
                 <div class="activity-sign" v-if="item.coupon.discount || item.coupon.money">
-                  <div class="triangle" v-if="item.coupon.discount">{{discountConversion(item.coupon.discount.discount)}}折</div>
-                  <div class="triangle" v-if="item.coupon.money">优惠券</div>
+                  <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts1 }}</div>
+                  <div class="triangle" v-if="item.coupon.money">{{ lang.discounts2 }}</div>
                 </div>
               </div>
               <span v-if="!getStatus(item, index)" class="failed">
@@ -32,7 +32,7 @@
               </span>
               <div class="right">
                 <h4 class="ow-h2">
-                  <i class="discount-icon" v-if="item.coupon.discount">{{discountConversion(item.coupon.discount.discount)}}折</i>
+                  <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts1 }}</i>
                   <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
 
                   {{ item.goodsName }}
@@ -59,7 +59,7 @@
                 </div>
                 <div v-if="item.groupType !== 0 && index !== list.length - 1">
                   <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                    <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{discountConversion(list[index + 1].coupon.discount.discount)}}折</i>
+                    <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts1 }}</i>
                     <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
 
                     {{ list[index + 1].goodsName }}
@@ -183,7 +183,8 @@ export default {
       lang: this.LANGUAGE.cart.index,
       num: 0,
       timer: null ,
-      soudout:''
+      soudout:'',
+      language: ''
     }
   },
   created() {
@@ -196,6 +197,8 @@ export default {
         this.getLocalCart()
       }
     })
+
+    this.language = this.getCookie('language')
   },
   // beforeUpdate(){
   //   this.getList()
@@ -677,7 +680,7 @@ export default {
       }
     },
     goToMade(ct1, gs1, gd1, ci1, ct2, gs2, gd2, ci2) {
-      console.log('11', ct1, gs1, gd1, ci1, ct2, gs2, gd2, ci2)
+      // console.log('11', ct1, gs1, gd1, ci1, ct2, gs2, gd2, ci2)
       const obj = {
         steps: [
           {
@@ -698,7 +701,7 @@ export default {
           }
         ]
       }
-      console.log(obj)
+      // console.log(obj)
       this.$router.push({
         name: `custom-made-${this.switchName(ct1)}-made-${this.switchName(
           ct2
@@ -709,6 +712,16 @@ export default {
           goodId: gs2
         }
       })
+    },
+    // 获取cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
     }
   }
 }
