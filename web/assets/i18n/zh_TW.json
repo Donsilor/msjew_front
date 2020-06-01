@@ -2389,7 +2389,8 @@
         "removeCompareFail": "移除鑽石對比失敗",
         "getMore": "加載更多...",
         "error": "頁面出錯了",
-        "soleOut": "商品已售罄"
+        "soleOut": "商品已售罄",
+        "pleaseSelect":"請先選擇商品參數！"
     },
     "order": {
         "firstLogin": "請先登錄或註冊！",

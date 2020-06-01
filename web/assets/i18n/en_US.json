@@ -2385,7 +2385,8 @@
         "removeCompareFail": "Failed to remove diamond from comparison",
         "getMore": "MORE",
         "error": "Page Error",
-        "soleOut": "The Goods Have Sold Out"
+        "soleOut": "The Goods Have Sold Out",
+        "pleaseSelect":"Please select product parameters"
     },
     "order": {
         "firstLogin": "Please login or register!",
