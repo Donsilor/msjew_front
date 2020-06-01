@@ -34,6 +34,9 @@ export default function({ req, res, app, store }) {
   
   // getTime 时间转换
   Vue.prototype.changeTime = Helpers.changeTime
+  
+  // 获取cookie
+  Vue.prototype.getCookie = Helpers.getCookie
 
   //  公共样式顶部返回按钮的函数
   Vue.prototype.goBack = function(router) {
