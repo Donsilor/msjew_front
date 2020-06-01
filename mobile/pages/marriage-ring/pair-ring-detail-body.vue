@@ -341,9 +341,6 @@ export default {
         this.firstRing.goodsStatus === 2 && this.secondRing.goodsStatus === 2
       )
     }
-  },
-  mounted(){
-    console.log("ddddd",this.firstRingQualityText)
   }
 }
 </script>

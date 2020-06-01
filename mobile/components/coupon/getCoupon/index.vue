@@ -17,7 +17,7 @@
               </div>
 
               <div class="price">
-                <span class="price-icon">￥</span>
+                <span class="price-icon">{{coin}}</span>
                 <span class="price-num">{{item.money}}</span>
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
@@ -150,12 +150,12 @@
           this.couponList[k].ifUse = true;
           this.loadFinish = true;
           // this.$nuxt.$loading.finish()
-          this.$toast.show(`优惠券领取成功`)
+          this.$toast.show(this.lang.msg1)
         })
         .catch(err => {
           this.loadFinish = true;
           // this.$nuxt.$loading.finish()
-          this.$toast.show(`领取失败`)
+          this.$toast.show(this.lang.msg2)
         })
       }
     }
@@ -167,7 +167,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1200;
+    z-index: 12;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);

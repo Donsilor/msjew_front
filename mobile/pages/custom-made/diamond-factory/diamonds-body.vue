@@ -447,8 +447,8 @@ export default {
     closeCo() {
       this.ifShowCoupon = false
     },
+    // 获取优惠券
     getCoupon() {
-      // 获取优惠券
       if(!this.$store.getters.hadLogin) {
         this.$toast.show(this.lang.needLogin)
       }else{

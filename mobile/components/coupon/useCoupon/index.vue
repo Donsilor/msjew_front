@@ -134,7 +134,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1200;
+    z-index: 12;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);

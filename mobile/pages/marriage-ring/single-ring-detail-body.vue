@@ -317,6 +317,14 @@ export default {
   methods:{
     closeCo() {
       this.ifShowCoupon = false
+    },
+    // 获取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        this.$toast.show(this.lang.needLogin)
+      }else{
+        this.ifShowCoupon = true
+      }
     }
   }
 }
