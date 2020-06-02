@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 简体中文忘记密码 -->
-    <div v-if="language === 'zh_CN'" class="page">
+    <div v-if="this.$store.state.language === 'zh_CN'" class="page">
       <div class="content">
         <ul class="schedule">
           <li
@@ -413,6 +413,7 @@ export default {
     next()
   },
   mounted() {
+    // console.log("语言",this.$store.state.language)
     this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {})
