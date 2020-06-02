@@ -251,8 +251,8 @@
 			</div>
 
 			<div class="discount-price">
-				<span class="old-price">{{ coin }} {{ formatNumber(this.info.salePrice) }}</span>
-				<span class="new-price">{{ coin }} {{ formatNumber(this.info.coupon.discount.price) }}</span>
+				<span class="old-price">{{ info.coinType }} {{ formatNumber(this.info.salePrice) }}</span>
+				<span class="new-price">{{ info.coinType }} {{ formatNumber(this.info.coupon.discount.price) }}</span>
 			</div>
 		</div>
 
@@ -464,7 +464,6 @@ export default {
       moneyList: [],
       activeTime: '',
       language: '',
-      coin: ''
     }
   },
   computed: {
@@ -594,7 +593,6 @@ export default {
     })
 
     this.language = this.getCookie('language')
-    this.coin = this.$store.state.coin
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {

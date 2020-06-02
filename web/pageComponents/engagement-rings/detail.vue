@@ -4,13 +4,18 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" :coupon="coupons"></product-images>
       </div>
       <!--      右侧-->
       <div class="right-detail">
-        <h2 class="product-name">
-          {{ info.goodsName }}
-        </h2>
+        <div class="right-title">
+          <span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? info.coupon.discount.discount+'%' : discountConversion(info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+          <span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
+
+          <h2 class="product-name">
+            {{ info.goodsName }}
+          </h2>
+        </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div class="sku" v-if="productInfo.carats.length == ''">
           <div class="left-properties">
@@ -233,7 +238,36 @@
             </div>
           </li>
         </ul>
-        <div class="product-price">
+
+        <!-- 折扣活动 -->
+        <div class="discount-box" v-if="info.coupon.discount">
+        	<div class="discount-active">
+        		<div>
+        			<span>{{ $t(`${lang}.discountsActive`) }}：</span>
+        			<span class="discount-icon">{{ language == 'en_US' ? this.info.coupon.discount.discount+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+        		</div>
+        		<div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div>
+        	</div>
+
+        	<div class="discount-price">
+        		<span class="old-price">{{ info.coinType }} {{ formatNumber(this.info.salePrice) }}</span>
+        		<span class="new-price">{{ info.coinType }} {{ formatNumber(this.info.coupon.discount.price) }}</span>
+        	</div>
+        </div>
+
+        <!-- 优惠活动 -->
+        <div class="favourable-box" v-if="info.coupon.money">
+        	<div class="discount-active">
+        		<div>
+        			<span>{{ $t(`${lang}.discounts1`) }}：</span>
+        			<span class="favourable-icon">￥</span>
+        			<span class="get" @click="getCoupon">{{ $t(`${lang}.getCoupon`) }}></span>
+        		</div>
+        		<!-- <div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div> -->
+        	</div>
+        </div>
+
+        <div class="product-price" v-if="!info.coupon.discount">
           <span class="coin">
             {{ info.coinType }}
           </span>
@@ -241,6 +275,7 @@
             {{ formatNumber(price) }}
           </span>
         </div>
+
         <div v-if="!$route.query.isBack" class="button-group">
           <nuxt-link
             v-if="productInfo.goodsMod === 1 && canAddCart"
@@ -263,7 +298,7 @@
             (parseInt($route.query.step) !== 1 && $route.query.step) ||
               $route.query.isBack
           "
-          class="button-group" 
+          class="button-group"
         >
           <nuxt-link v-if="canAddCart" :to="finishDj">
             <button :class="['add-to-cart', { active: canAddCart }]">
@@ -417,10 +452,23 @@ export default {
         materialIndex: 0,
         sizeIndex: 0,
         caratIndex: 0
-      }
+      },
+      language: ''
     }
   },
   computed: {
+    coupons() {
+      var co;
+      if(this.couponType(this.info.coupon) == 'discount'){
+        co = this.info.coupon.discount.discount;
+      }else if(this.couponType(this.info.coupon) == 'money'){
+        co = 'money'
+      }else{
+        co = 0
+      }
+    
+      return co
+    },
     thumbnails() {
         return this.imageStrToArray(this.info.goodsImages || '')
     },
@@ -519,7 +567,6 @@ export default {
     }
   },
   mounted() {
-    console.log(33333,this.info)
     const _this = this
     _this.$nextTick(() => {
       // console.log(this.$helpers.base64Decode(this.$route.query.steps))
@@ -527,6 +574,8 @@ export default {
         this.checkDetail()
       }
     })
+
+    this.language = this.getCookie('language')
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {

@@ -226,8 +226,8 @@
         	</div>
 
         	<div class="discount-price">
-        		<span class="old-price">{{ $t(`${lang}.oddPrice`) }}{{coin}} {{ formatNumber(this.info.salePrice) }}</span>
-        		<span class="new-price">{{ $t(`${lang}.newPrice`) }}{{coin}}{{ formatNumber(this.info.coupon.discount.price) }}</span>
+        		<span class="old-price">{{ info.coinType }} {{ formatNumber(this.info.salePrice) }}</span>
+        		<span class="new-price">{{ info.coinType }} {{ formatNumber(this.info.coupon.discount.price) }}</span>
         	</div>
         </div>
 
@@ -466,7 +466,6 @@ export default {
       jewelleryOptions: this.CONDITION_INFO.jewellery,
       showCoupon: false,
       activeTime: '',
-      coin: '',
       language: ''
     }
   },

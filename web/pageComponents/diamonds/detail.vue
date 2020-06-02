@@ -123,8 +123,8 @@
         	</div>
 
         	<div class="discount-price">
-        		<span class="old-price">{{ $t(`${lang}.oddPrice`) }}HKD  {{ formatNumber(this.info.salePrice) }}</span>
-        		<span class="new-price">{{ $t(`${lang}.newPrice`) }}{{ formatNumber(this.info.coupon.discount.price) }}</span>
+        		<span class="old-price">{{ info.coinType }} {{ formatNumber(this.info.salePrice) }}</span>
+        		<span class="new-price">{{ info.coinType }} {{ formatNumber(this.info.coupon.discount.price) }}</span>
         	</div>
         </div>
 
