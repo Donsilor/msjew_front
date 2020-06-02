@@ -409,6 +409,7 @@
 
               <!-- 支付宝 -->
               <div
+                v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 82 }"
                 class="pay-block"
                 @click="Way(82)"
@@ -447,6 +448,7 @@
               </div> -->
               <!-- 微信 -->
               <div
+                v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 83 }"
                 class="pay-block"
                 @click="Way(83)"
@@ -469,6 +471,7 @@
 
                <!-- 信用卡 -->
               <div
+                v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 81 }"
                 class="pay-block"
                 @click="Way(81)"
@@ -491,6 +494,7 @@
 
               <!-- 电汇 -->
               <div
+                v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 84 }"
                 class="pay-block"
                 @click="Way(84)"
@@ -1456,6 +1460,7 @@
               </div>
               <!-- 支付宝 -->
               <div
+                v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 82 }"
                 class="pay-block"
                 @click="Way(82)"
@@ -1495,6 +1500,7 @@
               </div> -->
               <!-- 微信 -->
               <div
+                v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 83 }"
                 class="pay-block"
                 @click="Way(83)"
@@ -1518,6 +1524,7 @@
               </div>
               <!-- 信用卡 -->
               <div
+                v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 3 }"
                 class="pay-block"
                 @click="Way(81)"
@@ -1540,6 +1547,7 @@
               
               <!-- 电汇 -->
               <div
+                v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 84 }"
                 class="pay-block"
                 @click="Way(84)"
