@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <tip-message></tip-message>
+    <!-- <tip-message></tip-message> -->
     <section class="banner">
       <template v-if="banner.length > 1">
         <swiper :indicator="true" :auto="true" :duration="5000">
@@ -256,10 +256,10 @@ export default {
           subTitle: this.LANGUAGE.index.marriageRing,
           bg: '/index/category-bg-3.png',
           image: '/index/category-image-3.png',
-          routerName: 'marriage-ring-single-ring',
-          query: {
-            type: 'lady'
-          }
+          routerName: 'marriage-ring-pair-ring',
+          // query: {
+          //   type: 'lady'
+          // }
         },
         {
           textAlign: 'left',
@@ -509,9 +509,9 @@ export default {
     },
     moreCard() {
       this.$router.push({
-            name: 'marriage-ring-single-ring',
+            name: 'accessories-list',
             query: {
-              type: 'lady'
+              actIndex: 0
             }
           })
 

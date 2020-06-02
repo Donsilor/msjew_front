@@ -1,7 +1,7 @@
 <template>
   <div class="engagementRings-component">
     <div class="swiper-box">
-      <swiper :auto="true" :duration="5000">
+      <swiper :auto="false" :duration="5000">
         <div v-for="(each, n) in goodsImages" :key="n">
           <nuxt-link
             :to="
