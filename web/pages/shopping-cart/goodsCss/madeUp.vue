@@ -18,7 +18,7 @@
 
             <!-- 折扣 -->
             <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
-              <span>{{ discountConversion(g.data[0].coupon.discount.discount) }}折</span>
+              <span>{{ language == 'en_US' ? g.data[0].coupon.discount.discount+'%' : discountConversion(g.data[0].coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
             </div>
 
             <!-- 优惠券 -->
@@ -95,7 +95,7 @@
 
             <!-- 折扣 -->
             <div class="list-discount-icon1" v-if="couponType(g.data[1].coupon) == 'discount'">
-              <span>{{ discountConversion(g.data[1].coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
+              <span>{{ language == 'en_US' ? g.data[1].coupon.discount.discount+'%' : discountConversion(g.data[1].coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
             </div>
 
             <!-- 优惠券 -->
@@ -192,6 +192,7 @@ export default {
   data() {
     return{
       lang,
+      language: ''
     }
   },
   name: 'MadeUp',
@@ -214,6 +215,9 @@ export default {
         return true
       }
     }
+  },
+  mounted() {
+    this.language = this.getCookie('language')
   },
   methods: {
     goDetail() {
