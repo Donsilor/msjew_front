@@ -168,7 +168,6 @@ export default {
 
     }
   },
-  created() {},
   mounted() {
     const _this = this
     _this.$nextTick(() => {

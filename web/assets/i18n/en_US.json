@@ -1199,7 +1199,9 @@
         "search": "Search",
         "sort": "Sort By",
         "homePage": "Homepage",
-        "result": "Search results"
+        "result": "Search results",
+        "discounts1": "Coupon",
+        "discounts2": "off"
     },
     "detail": {
         "goodsId": "Product ID",

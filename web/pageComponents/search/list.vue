@@ -64,12 +64,12 @@
 
                 <!-- 折扣 -->
                 <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
-                  <span>{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                  <span>{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                 </div>
 
                 <!-- 优惠券 -->
                 <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
-                  <span>优惠券</span>
+                  <span>{{ $t(`${lang}.discounts1`) }}</span>
                 </div>
 
               </div>
@@ -98,7 +98,7 @@
                 <!-- 优惠券 -->
                 <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
                 <!-- 折扣 -->
-                <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}折</span>
+                <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                 {{ item.goodsName }}
               </div>
             </div>
@@ -159,7 +159,8 @@ export default {
       sortTypeIndex: 0,
       page_size: 16,
       keyword: '',
-      loading: true
+      loading: true,
+      language: ''
       // noMoreListData: false
     }
   },
@@ -301,6 +302,8 @@ export default {
       )
       _this.research()
     })
+    
+    this.language = this.getCookie('language')
   },
   methods: {
     toSearch() {

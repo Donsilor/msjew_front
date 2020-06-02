@@ -183,7 +183,7 @@
 
                 <!-- 折扣 -->
                 <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
-                  <span>{{ discountConversion(item.coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
+                  <span>{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                 </div>
 
                 <!-- 优惠券 -->
@@ -216,7 +216,7 @@
                   <!-- 优惠券 -->
                   <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
                   <!-- 折扣 -->
-                  <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
+                  <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                   {{ item.goodsName }}
                 </div>
               </div>
@@ -304,7 +304,8 @@ export default {
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
       seoInfo:{},
-      loading: true
+      loading: true,
+      language: ''
     }
   },
   computed: {
@@ -459,6 +460,8 @@ export default {
     _this.$nextTick(() => {
       _this.research()
     })
+    
+    this.language = this.getCookie('language')
   },
   methods: {
     // 改变款式条件

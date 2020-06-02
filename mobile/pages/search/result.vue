@@ -7,7 +7,7 @@
           <!-- <span class="text">{{ lang.back }}</span> -->
         </div>
         <div class="operating-area">
-          
+
           <input
             v-model.trim="keyword"
             :placeholder="lang.inputKeyword"
@@ -45,13 +45,52 @@
                 :alt="each.goodsName"
                 @error="imageError"
               />
+
+              <!-- 折扣 -->
+              <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'">
+                <div>{{ language == 'en_US' ? each.coupon.discount.discount+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+              </div>
+
+              <!-- 优惠券 -->
+              <div class="discount-a-icon" v-if="couponType(each.coupon) == 'money'">
+                <div>{{ lang.discounts1 }}</div>
+              </div>
+
             </div>
-            <div class="info-title ow-h2">
+
+            <!-- 折扣 -->
+            <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'discount'">
+              <span class="discount-a-icon2">{{ language == 'en_US' ? each.coupon.discount.discount+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
               {{ each.goodsName }}
             </div>
-            <div class="info-price">
-              {{ each.coinType }} {{ formatNumber(each.salePrice) }}
+
+            <!-- 优惠券 -->
+            <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'money'">
+              <span class="discount-b-icon2">￥</span>
+              {{ each.goodsName }}
             </div>
+
+            <div class="product-price">
+              <div class="list-discount-price" v-if="couponType(each.coupon) !== 'discount'">
+                <div class="info-price">
+                  <span class="coin">{{ each.coinType }}</span>
+                  <span class="price">{{ formatNumber(each.salePrice) }}</span>
+                </div>
+              </div>
+            
+              <!-- 折扣 -->
+              <div class="list-discount-price" v-if="couponType(each.coupon) == 'discount'">
+                <div class="info-price old-price-2">
+                  <span class="coin">{{ each.coinType }}</span>
+                  <span class="price">{{ formatNumber(each.salePrice) }}</span>
+                </div>
+                <div class="info-price">
+                  <span class="coin">{{ each.coinType }}</span>
+                  <span class="price">{{ formatNumber(each.coupon.discount.price) }}</span>
+                </div>
+              </div>
+            </div>
+            
           </div>
         </div>
         <bdd-empty
@@ -80,6 +119,7 @@ export default {
       // canSearchWithoutKeyword: false,
       similarGoodsId: '',
       conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
+      language: ''
     }
   },
   computed: {
@@ -109,12 +149,14 @@ export default {
           _this.$route.query.keyword || ''
         )
       }
-    
+
       // if(_this.pageInfo && _this.pageInfo.total_count){
       //   _this.searchAgain()
       // }
       _this.searchAgain()
     })
+
+    this.language = this.getCookie('language')
   },
   methods: {
     show(){
@@ -158,7 +200,7 @@ export default {
         this.$store.dispatch('addLocalSearchHistory', this.keyword)
       }
       this.research()
-      
+
     },
     toDetail(info) {
       let routerName = ''
@@ -205,7 +247,7 @@ export default {
         // 对戒
         case -1:
           routerName = 'marriage-ring-pair-ring-detail'
-          break    
+          break
       }
 
       if(info.categoryId == 2){
@@ -232,7 +274,7 @@ export default {
           }
         })
       }
-      
+
     },
     getSortBy(val) {
       this.conditionWord = val.item.content

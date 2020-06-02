@@ -340,7 +340,6 @@ export default {
       if(priceRange_val !== undefined){
         this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
         this.changePriceRange(this.priceRange);
-
       }
     }
   },
@@ -506,7 +505,6 @@ export default {
     })
 
     this.language = this.getCookie('language')
-    console.log(this.language)
   },
   methods: {
     // 改变款式条件

@@ -722,7 +722,9 @@
       "search": "搜索",
       "total": "共",
       "goods": "貨品",
-      "suitability": "匹配度"
+      "suitability": "匹配度",
+      "discounts1": "優惠券",
+      "discounts2": "折"
     }
   },
   "comments": {

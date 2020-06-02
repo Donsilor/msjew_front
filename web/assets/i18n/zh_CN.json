@@ -1218,7 +1218,9 @@
         "search": "搜索",
         "sort": "排序",
         "homePage": "首页",
-        "result": " 搜索結果"
+        "result": " 搜索結果",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "detail": {
         "goodsId": "商品ID",

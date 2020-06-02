@@ -723,7 +723,9 @@
       "search": "Search",
       "total": "A total of",
       "goods": "products",
-      "suitability": "Match"
+      "suitability": "Match",
+      "discounts1": "Coupon",
+      "discounts2": "off"
     }
   },
   "comments": {
