@@ -247,7 +247,8 @@
       "bankAddress":"Bank Address:",
       "SwiftCode":"SWIFT CODE:",
       "uploadPhotos":"Upload  Photos",
-      "Note3":"Note：Currency rate is as referred on BDD website."
+      "Note3":"Note：Currency rate is as referred on BDD website.",
+      "NotSupportPay":"Sorry, USD is not supported by this payment method, please go back to select an available currency or change to another payment method! "
     },
     "paySuccess": {
       "PayPending1":"The order has been submitted, the system is processing ... please wait",
