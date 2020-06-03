@@ -30,9 +30,9 @@ export default {
     const getPairRing = () => {
       return $axios({
         method: 'post',
-        url: '/web/goods/ring/detail',
+        url: '/web/goods/style/detail',
         data: {
-          id: route.query.goodId || '',
+          goodsId: '594' || '',
           backend: route.query.backend || ''
         },
         transformRequest: [
@@ -57,6 +57,7 @@ export default {
         }
       })
         .then(res => {
+          console.log("dddd",res.data)
           var data =res.data;
           return {
             info: data,

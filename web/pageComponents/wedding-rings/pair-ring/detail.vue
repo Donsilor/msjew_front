@@ -11,7 +11,7 @@
         <h2 class="product-name">
           {{ info.name }}
         </h2>
-        <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.ringCode }}</div>
+        <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div class="sku" >
           <div class="left-properties" >
             <div v-if="firstRing.materials.length > 0" class="property-item">
@@ -676,19 +676,19 @@ const lang = 'detail'
 export default {
   head() {
     return {
-      title: this.info.name,
+      title: this.info.goodsName,
       meta: [
         {
           name: 'title',
-          content: this.info.name,
+          content: this.info.goodsName,
         },
         {
           name: 'description',
-          content: this.info.name,
+          content: this.info.goodsName,
         },
         {
           name: 'keywords',
-          content: this.info.name,
+          content: this.info.goodsName,
         }
       ]
     }
@@ -751,7 +751,7 @@ export default {
   },
   computed: {
     thumbnails() {
-      return this.imageStrToArray(this.info.ringImg || '')
+      return this.imageStrToArray(this.info.goodsImages || '')
     },
     firstRing() {
       return this.getRingInfo(0)
@@ -776,7 +776,7 @@ export default {
     recommends() {
       const _this = this
       const allData = JSON.parse(
-        JSON.stringify(_this.info.searchGoodsModels || [])
+        JSON.stringify(_this.info.ring || []) 
       )
       allData.forEach(item => {
         item.images = _this.imageStrToArray(item.goodsImages || '')
@@ -887,8 +887,8 @@ export default {
     }
   },
   mounted() {
-    console.log("firstRing",this.firstRing)
-    console.log("secondRing",this.secondRing)
+    console.log("firstRing",this.info)
+    console.log("secondRing",this.info.goodsServicesJsons)
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -905,8 +905,8 @@ export default {
     getRingInfo(index) {
       const _this = this
       const product =
-        _this.info && _this.info.goodsModels && _this.info.goodsModels[index]
-          ? JSON.parse(JSON.stringify(_this.info.goodsModels[index]))
+        _this.info && _this.info.ring && _this.info.ring[index]
+          ? JSON.parse(JSON.stringify(_this.info.ring[index]))
           : {}
 
       return Object.assign({}, product, {
@@ -930,7 +930,7 @@ export default {
         // carats:(() =>{
         //     const carats = product.carats || []
         //     // carats.unshift({id:'',name: this.$t(`personal.index.select`)})
-        //     return carats;
+        //     return carats;  
         // })(),
         specs: product.specs || [],
         details: product.details || [],
