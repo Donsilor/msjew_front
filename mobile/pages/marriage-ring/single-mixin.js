@@ -165,10 +165,11 @@ export default {
       if (this.goodInfo.carats && this.goodInfo.sizes) {
         if (this.chooseSizeId === `` || this.chooseCaratsId === ``) {
           this.showPi = this.goodInfo.salePrice
+          console.log(778,this.goodInfo)
         } else {
           for (const i in bullShit) {
             if (
-              parseInt(bullShit[i].carat) == parseInt(this.chooseCaratsId) && 
+              parseInt(bullShit[i].carat) == parseInt(this.chooseCaratsId) &&
               parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
               parseInt(bullShit[i].material) ===
                 parseInt(this.conditions[0].checked)
@@ -181,6 +182,8 @@ export default {
           }
         }
       } else {
+        console.log(999)
+        return
         if (this.chooseSizeId === ``) {
           this.showPi = this.goodInfo.salePrice
         } else {
@@ -215,7 +218,7 @@ export default {
         } else {
           for (const i in bullShit) {
             if (
-              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratsId) && 
+              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratsId) &&
               parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
               parseInt(bullShit[i].material) ===parseInt(this.conditions[0].checked)
             ) {
