@@ -14,7 +14,7 @@ export default {
           status: '',
           ringCode: '',
           coinType: '',
-          simpleGoodsEntityList: []
+          ring: []
         }
       }
     },
@@ -101,7 +101,7 @@ export default {
       }
     },
     ringBanners() {
-      return this.imageStrToArray(this.goodInfo.ringImg || '')
+      return this.imageStrToArray(this.goodInfo.goodsImages || '')
     },
     ringDetail() {
       let ringDesc =
@@ -116,9 +116,9 @@ export default {
     firstRing() {
       const goodInfo =
         this.goodInfo &&
-        this.goodInfo.simpleGoodsEntityList &&
-        this.goodInfo.simpleGoodsEntityList[0]
-          ? this.goodInfo.simpleGoodsEntityList[0]
+        this.goodInfo.ring &&
+        this.goodInfo.ring[0]
+          ? this.goodInfo.ring[0]
           : this.defaultGoodInfo
 
       return this.dealGoodInfo(goodInfo)
@@ -126,9 +126,9 @@ export default {
     secondRing() {
       const goodInfo =
         this.goodInfo &&
-        this.goodInfo.simpleGoodsEntityList &&
-        this.goodInfo.simpleGoodsEntityList[1]
-          ? this.goodInfo.simpleGoodsEntityList[1]
+        this.goodInfo.ring &&
+        this.goodInfo.ring[1]
+          ? this.goodInfo.ring[1]
           : this.defaultGoodInfo
 
       return this.dealGoodInfo(goodInfo)

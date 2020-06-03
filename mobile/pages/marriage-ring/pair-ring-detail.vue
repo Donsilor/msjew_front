@@ -44,12 +44,12 @@ export default {
         token: store.state.token || ''
       },
       params: {
-        ringId: route.query.goodId
+        goodsId: '594'
       }
     })
       .then(res => {
         const pair = res
-        // console.log('infos==========>', res)
+        // console.log('infos==========>', res)  route.query.goodId
         // let pair = null
         // if (process.server) {
         //   if (res.data.code === 200) {

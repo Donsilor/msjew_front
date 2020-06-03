@@ -289,7 +289,7 @@ import Mx from './pair-mixin'
 export default {
   head() {
     return {
-      title: this.goodInfo.name,
+      title: this.goodInfo.goodsName,
       meta: [
         {
           name: 'title',
