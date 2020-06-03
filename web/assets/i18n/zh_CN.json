@@ -2423,7 +2423,8 @@
         "removeCompareFail": "移除钻石对比失败",
         "getMore": "加载更多...",
         "error": "页面出错了",
-        "soleOut": "商品已售罄"
+        "soleOut": "商品已售罄",
+        "pleaseSelect":"请先选择商品参数！"
     },
     "order": {
         "firstLogin": "请先登录或注册！",
