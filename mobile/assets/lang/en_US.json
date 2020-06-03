@@ -608,7 +608,8 @@
       "code-null": "Enter verification code",
       "code-error": "Enter correct verification code",
       "password-null": "Enter password",
-      "password-not-same": "Entered passwords differ"
+      "password-not-same": "Entered passwords differ",
+      "soleOut": "The Goods Have Sold Out"
     },
     "index": {
       "forget": "Forgot password?",

@@ -837,7 +837,8 @@
       "couponMessage": "暂無優惠碼",
       "addressMessage": "暫無地址訊息",
       "chooseDiamondContrast": "選擇需要對比的鑽石",
-      "cartMessage": "您的購物車內暫無商品，去看看心儀的商品"
+      "cartMessage": "您的購物車內暫無商品，去看看心儀的商品",
+      "soleOut": "商品已售罄"
     },
     "footerBar": {
       "custoService": "客戶服務",

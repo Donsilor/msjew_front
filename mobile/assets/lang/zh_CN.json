@@ -839,7 +839,8 @@
         "couponMessage": "暂无优惠码",
         "addressMessage": "暂无地址讯息",
         "chooseDiamondContrast": "选择需要对比的钻石",
-        "cartMessage": "您的购物车内暂无商品，去看看心仪的商品"
+        "cartMessage": "您的购物车内暂无商品，去看看心仪的商品",
+        "soleOut": "商品已售罄"
       },
       "footerBar": {
         "custoService": "客户服务",
