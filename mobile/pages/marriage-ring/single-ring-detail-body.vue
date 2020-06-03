@@ -25,11 +25,11 @@
       {{ goodInfo.goodsName }}
     </div>
 
-    <div class="price" v-if="!goodInfo.coupon.discount">{{ goodInfo.coinType }} {{ formatNumber(goodInfo.salePrice) }}</div>
+    <div class="price" v-if="!goodInfo.coupon.discount">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
 
     <div class="discount-price" v-else>
-      <div class="old-price">{{ goodInfo.coinType }} {{ formatNumber(goodInfo.salePrice) }}</div>
-      <div class="new-price">{{ goodInfo.coinType }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
+      <div class="old-price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
+      <div class="new-price">{{ goodInfo.coinType }} {{ formatNumber(showP2) }}</div>
     </div>
 
     <div class="promise-box">

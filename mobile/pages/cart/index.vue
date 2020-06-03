@@ -23,16 +23,16 @@
                 <img :src="imageStrToArray(item.goodsImages)[0]" />
 
                 <div class="activity-sign" v-if="item.coupon.discount || item.coupon.money">
-                  <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts1 }}</div>
-                  <div class="triangle" v-if="item.coupon.money">{{ lang.discounts2 }}</div>
+                  <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                  <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
                 </div>
               </div>
-              <span v-if="!getStatus(item, index)" class="failed">
+              <span v-if="!getStatus(item, index)" class="failed" :class="{marginTop: item.groupType === 2}">
                 {{ lang.failed }}
               </span>
               <div class="right">
                 <h4 class="ow-h2">
-                  <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts1 }}</i>
+                  <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                   <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
 
                   {{ item.goodsName }}
@@ -59,7 +59,7 @@
                 </div>
                 <div v-if="item.groupType !== 0 && index !== list.length - 1">
                   <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                    <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts1 }}</i>
+                    <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                     <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
 
                     {{ list[index + 1].goodsName }}
@@ -780,6 +780,9 @@ export default {
             color: rgba(255, 255, 255, 1);
             line-height: 125px;
             background: rgba(51, 51, 51, 0.2);
+          }
+          .failed.marginTop {
+            margin-top: 50px;
           }
           .right {
             margin-left: 140px;

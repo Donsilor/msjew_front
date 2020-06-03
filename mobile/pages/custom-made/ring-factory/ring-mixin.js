@@ -20,6 +20,7 @@ export default {
       sizeLine: 0,
       caratLine: 0,
       showPi: 0,
+      showP2: 0,
       sendGoodsId: null,
       sendDetailsId: null,
       categoryId: null,
@@ -130,8 +131,8 @@ export default {
             carats.push(o)
           }
           res.carats = carats
-        } 
-        
+        }
+
         res.sizes = stArr
         res.materials = mcArr
         // res.goodsDesc = res.goodsDesc.includes(`<script>`) ? '' : res.goodsDesc
@@ -155,7 +156,7 @@ export default {
           for (let i = 0; i < res.details.length; i++) {
             if (res.details[i].id === thatId) {
               this.showPi = res.details[i].retailMallPrice
-              
+
               for (let j = 0; j < res.sizes.length; j++) {
                 if (
                   res.sizes[j].sortBy ===
@@ -278,6 +279,12 @@ export default {
           this.sendGoodsId = ``
           this.sendDetailsId = ``
           this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -290,6 +297,12 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+              
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
@@ -299,6 +312,12 @@ export default {
           this.sendGoodsId = ``
           this.sendDetailsId = ``
           this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -310,6 +329,12 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+              
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
@@ -331,6 +356,12 @@ export default {
           this.sendGoodsId = ``
           this.sendDetailsId = ``
           this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -343,6 +374,12 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+              
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
@@ -352,6 +389,12 @@ export default {
           this.sendGoodsId = ``
           this.sendDetailsId = ``
           this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -389,7 +432,7 @@ export default {
       if (!(this.canAddCart && this.inSale)) {
         return
       }
-      
+
       if (!this.sendDetailsId) {
         this.$toast(this.lang.specificationToast)
         return

@@ -2517,7 +2517,9 @@
         "needlogin": "Need to log in for shopping",
         "notAvailable": "Select available coupons",
         "discountPrice": "Discounted amount",
-        "needRegister": "Please login before redeem the coupon. "
+        "needRegister": "Please login before redeem the coupon. ",
+        "msgTitle2": "Submit：",
+        "msgContent2": "No product selected!"
     },
     "invoice": {
         "personal": "personal",

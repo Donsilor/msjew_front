@@ -43,8 +43,8 @@
                 <div class="price" v-if="couponType(info1.coupon) !== 'discount'">{{ c.coinType }} {{ formatNumber(c.retailMallPrice) }}</div>
 
                 <div class="discount-price" v-else>
-                  <div class="old-price">{{ c.coinType }} {{ formatNumber(info1.salePrice) }}</div>
-                  <div class="new-price">{{ c.coinType }} {{ formatNumber(info1.coupon.discount.price) }}</div>
+                  <div class="old-price">{{ info1.coinType }} {{ formatNumber(info1.salePrice) }}</div>
+                  <div class="new-price">{{ info1.coinType }} {{ formatNumber(info1.coupon.discount.price) }}</div>
                 </div>
 
                 <!-- {{ c.coinType }} {{ formatNumber(c.retailMallPrice) }} -->
@@ -88,8 +88,8 @@
             <div class="price" v-if="couponType(info2.coupon) !== 'discount'">{{ info2.details[0].coinType }} {{ formatNumber(info2.salePrice) }}</div>
 
             <div class="discount-price" v-else>
-              <div class="old-price">{{ info2.details[0].coinType }} {{ formatNumber(info2.salePrice) }}</div>
-              <div class="new-price">{{ info2.details[0].coinType }} {{ formatNumber(info2.coupon.discount.price) }}</div>
+              <div class="old-price">{{ info2.coinType }} {{ formatNumber(info2.salePrice) }}</div>
+              <div class="new-price">{{ info2.coinType }} {{ formatNumber(info2.coupon.discount.price) }}</div>
             </div>
 
             <!-- {{ info2.details[0].coinType }} -->

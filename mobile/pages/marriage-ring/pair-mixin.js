@@ -63,7 +63,9 @@ export default {
         commentsLevel: ``,
         showStatus: 1
       },
-      total_count: 0
+      total_count: 0,
+      showPi: 0,
+      showP2: 0
     }
   },
   computed: {
@@ -164,7 +166,7 @@ export default {
           this.secondRingQuality.checked.indexOf(
             details[n].material
           ) > -1 &&
-          details[n].size === this.secondRingSize.id 
+          details[n].size === this.secondRingSize.id
           // details[n].carat === this.firstRingCarat.id
         ) {
           result = details[n].retailMallPrice
@@ -265,7 +267,7 @@ export default {
           list[n].hasOwnProperty('size') &&
           // list[n].hasOwnProperty('carat') &&
           this.firstRingQuality.checked.indexOf(list[n].material) > -1 &&
-          this.firstRingSize.id === list[n].size 
+          this.firstRingSize.id === list[n].size
           // this.firstRingCarat.id === list[n].carat
         ) {
           // 同时具有选项的字段，才表示该配置选项已启用
@@ -513,11 +515,17 @@ export default {
       const bullShit = this.goodInfo.details
       if (this.chooseSizeId === ``) {
         this.showPi = this.goodInfo.salePrice
+
+        if(this.couponType(this.goodInfo.coupon) == 'discount'){
+          this.showP2 = this.goodInfo.coupon.discount.price
+        }else{
+          this.showP2 = this.goodInfo.salePrice
+        }
       } else {
         for (const i in bullShit) {
           if (
             parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
-            // parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) && 
+            // parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
             parseInt(bullShit[i].material) ===
               parseInt(this.conditions[0].checked)
           ) {
@@ -525,6 +533,12 @@ export default {
             this.sendGoodsId = bullShit[i].goodsId
             this.sendDetailsId = bullShit[i].id
             this.categoryId = bullShit[i].categoryId
+
+            if(this.couponType(bullShit[i].coupon) == 'discount'){
+              this.showP2 = bullShit[i].coupon.discount.price
+            }else{
+              this.showP2 = bullShit[i].retailMallPrice
+            }
           }
         }
       }

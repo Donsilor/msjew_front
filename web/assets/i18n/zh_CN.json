@@ -2535,7 +2535,9 @@
         "needlogin": "需登录购物",
         "notAvailable": "选择可用优惠券",
         "discountPrice": "折扣金额",
-        "needRegister": "请先登录，才能使用优惠券"
+        "needRegister": "请先登录，才能使用优惠券",
+        "msgTitle2": "提示：",
+        "msgContent2": "没有选择商品！"
     },
     "invoice": {
         "personal": "个人",

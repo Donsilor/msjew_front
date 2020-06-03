@@ -129,8 +129,8 @@
       "goPay": "CHECKOUT",
       "toast1": "Choose products before you pay",
       "toast2": "Deleted",
-      "discounts1": "off",
-      "discounts2": "Coupon"
+      "discounts1": "Coupon",
+      "discounts2": "off"
     },
     "invoice": {
       "personal":"personal",

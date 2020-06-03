@@ -2062,7 +2062,7 @@ export default {
       lang2,
       lang3,
       canSubmit: false,
-      pathTakeIds: this.$route.query.cartIds.split(','),
+      pathTakeIds: this.$route.query.cartIds,
       orderSn: this.$route.query.orderId,
       userInfo: {},
       confirmBox: false,

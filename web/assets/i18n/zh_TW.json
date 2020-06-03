@@ -2521,7 +2521,9 @@
         "needlogin": "需登錄購物",
         "notAvailable": "選擇可用優惠券",
         "discountPrice": "折扣金額",
-        "needRegister": "請先登錄，才能使用優惠券"
+        "needRegister": "請先登錄，才能使用優惠券",
+        "msgTitle2": "提示：",
+        "msgContent2": "没有選擇商品！"
     },
     "invoice": {
         "personal": "個人",

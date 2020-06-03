@@ -479,6 +479,10 @@
 /* 优惠券 · 列表页 */
 .discount-a-icon{
    background: url(../../static/subject/icon_05.png) no-repeat center !important;
+   font-size: 10px !important;
+}
+.discount-a-icon div{
+   font-size: 10px !important;
 }
 
 .discount-a-icon2,
