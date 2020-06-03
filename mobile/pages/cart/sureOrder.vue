@@ -911,13 +911,13 @@ export default {
 
             this.couponAll = res.coupons
             this.couponAlready = res.myCoupons;
-            
+
             if(res.myCoupons.length != 0){
               this.ifShowCouponMoney = true
             }else{
               this.ifShowCouponMoney = false
             }
-            
+
           })
           .catch(err => {
             this.canSubmit = false
@@ -940,7 +940,7 @@ export default {
           const goodsCartList=[]
           var coupon_discount = ''
           for (const i in this.list) {
-            if(this.list[i].coupon.discount){
+            if(this.list[i].coupon.hasOwnProperty('discount')){
               coupon_discount = this.list[i].coupon.discount.coupon_id;
             }
 
@@ -958,6 +958,7 @@ export default {
             // console.log("list........",o)
           }
           data = {goodsCartList:goodsCartList,coupon_id: ''}
+
           // console.log("list........",data)
           this.$axios({
             method: 'post',
@@ -1168,6 +1169,11 @@ export default {
         let baseUrl=this.$store.getters.baseUrl
         // console.log("未登录",this.list)
         for (const i in this.list) {
+          let coupon_discount = ""
+          if(this.list[i].coupon.hasOwnProperty('discount')){
+            coupon_discount = this.list[i].coupon.discount.coupon_id;
+          }
+
           const o = {
             createTime: this.list[i].createTime,
             goods_num: 1,
@@ -1175,11 +1181,12 @@ export default {
             goods_id: this.list[i].goodsDetailsId,
             group_id: this.list[i].groupId,
             goods_type: this.list[i].goodsStatus,
-            group_type:
-              this.list[i].groupType !== 0 ? this.list[i].groupType : null
+            group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
+            coupon_id: coupon_discount
           }
           data.push(o)
         }
+
         // console.log("data",data)
         // console.log("paytype",this.$route.query)
         if(data.length){
