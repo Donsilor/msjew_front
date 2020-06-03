@@ -208,7 +208,7 @@
             </nuxt-link>
             <div class="product-info">
               <div class="product-price">
-                <span class="coin">{{ item.coinType }}</span>
+                <span class="coin">{{ formatCoin(item.coinType) }}</span>
                 <span class="price">{{ formatNumber(item.salePrice) }}</span>
               </div>
               <div class="product-title">

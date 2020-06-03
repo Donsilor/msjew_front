@@ -107,7 +107,7 @@
         </ul>
         <div class="product-price">
           <span class="coin">
-            {{ info.coinType }}
+            {{ formatCoin(info.coinType) }}
           </span>
           <span class="price">
             {{ formatNumber(price) }}

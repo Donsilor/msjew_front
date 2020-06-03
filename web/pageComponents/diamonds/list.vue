@@ -618,7 +618,7 @@
                 <div class="row-flex align-item-center">
                   <div class="left-item elastic-flex-item">
                     <div class="product-price">
-                      <span class="coin">{{ item.coinType }}</span>
+                      <span class="coin">{{ formatCoin(item.coinType) }}</span>
                       <span class="price">{{
                         formatNumber(item.salePrice)
                       }}</span>
@@ -1267,7 +1267,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("加载状态",this.loading)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {

@@ -115,7 +115,7 @@
         
       </div>
       <div class="good-price">
-            {{ g.coinType }}
+            {{ formatCoin(g.coinType) }}
             {{
               formatNumber(
                 g.data[0].ringsSimpleGoodsEntity.salePrice
@@ -173,6 +173,9 @@ export default {
         return true
       }
     }
+  },
+  mounted(){
+    console.log("g",g)
   },
   methods: {
     goDetail() {},

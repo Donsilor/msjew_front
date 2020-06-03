@@ -77,7 +77,7 @@ export default function({ req, res, app, store }) {
   }
 
   Vue.prototype.formatNumber = str => {
-    // console.log(str)
+    // console.log("str",str)
     if (!str) {
       return 0
     }
@@ -104,6 +104,15 @@ export default function({ req, res, app, store }) {
     }
 
     return `${addComma(intStr)}.${floatStr}`
+  }
+  Vue.prototype.formatCoin = str => {
+    console.log("str",str)
+    if(str === 'CNY'){
+      let str = '￥'
+      return str
+    } else {
+      return str
+    }
   }
 
   Vue.prototype.removeFormatMoney = str => {
