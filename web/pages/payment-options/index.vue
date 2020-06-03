@@ -526,6 +526,13 @@ export default {
       this.transfer = false
     },
     goPay() {
+      if(this.$store.state.coin === 'USD'){
+        if(this.payWay == 82 || this.payWay == 83||this.payWay == 81){
+          this.$errorMessage(this.$t(`${lang}.NotSupportPay`))
+          return
+        }
+      }
+
       let pay = 0
       if(this.payWay==6){
         pay = 6

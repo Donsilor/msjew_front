@@ -248,7 +248,8 @@
         "bankAddress":"银行地址:",
         "SwiftCode":"SWIFT CODE:",
         "uploadPhotos":"上传图片",
-        "Note3":"注：此货币是按照BDD官网汇率作为参考标准."
+        "Note3":"注：此货币是按照BDD官网汇率作为参考标准.",
+        "NotSupportPay":"当前支付方式，不支持USD支付，请返回上个页面切换货币或更换其它支付方式完成支付！"
       },
       "paySuccess": {
         "PayPending1":"订单已提交，系统处理中…请稍等.",
