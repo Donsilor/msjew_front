@@ -17,7 +17,7 @@
           </div> -->
           <div
             v-if="
-              parseInt(g.data[0].ringsSimpleGoodsEntity.status) === 0
+              parseInt(g.data[0].simpleGoodsEntity.goodsStatus) === 0
             "
             class="img-bord"
           >
@@ -32,14 +32,14 @@
           </div>
           <div>
             SKU：{{
-              g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
-                .simpleGoodsDetails.goodsDetailsCode
+              g.data[0].ring[0]
+                .goods_sn
             }}
           </div>
           <div>
             SKU：{{
-              g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
-                .simpleGoodsDetails.goodsDetailsCode
+              g.data[0].ring[1]
+                .goods_sn
             }}
           </div>
         </div>
@@ -173,6 +173,9 @@ export default {
         return true
       }
     }
+  },
+  mounted(){
+    console.log("g",this.g)
   },
   methods: {
     goDetail() {},

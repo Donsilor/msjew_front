@@ -32,7 +32,7 @@ export default {
         method: 'post',
         url: '/web/goods/style/detail',
         data: {
-          goodsId: '594' || '',
+          goodsId: route.query.goodId || '',
           backend: route.query.backend || ''
         },
         transformRequest: [

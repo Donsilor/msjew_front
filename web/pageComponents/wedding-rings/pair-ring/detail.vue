@@ -746,7 +746,13 @@ export default {
         materialIndex: 0,
         sizeIndex: 0,
         // caratIndex: 0
-      }
+      },
+      coupleLadyId:'',
+      coupleMenId:'',
+      firstRingId:'',
+      secondRingId:'',
+      coupleId:'',
+      categoryId:''
     }
   },
   computed: {
@@ -787,7 +793,7 @@ export default {
       return allData
     },
     firstRingSimpleDetail() {
-      console.log("ffff",this.firstRing)
+      console.log("ffff",this.firstRing.ring)
       const _this = this
       const ring = _this.firstRing
       const details = ring.details
@@ -888,10 +894,14 @@ export default {
     }
   },
   mounted() {
-    console.log("this.firstRingSimpleDetail",this.firstRingSimpleDetail)
-    console.log("firstRing",this.info)
-    console.log("secondRing",this.info.goodsServicesJsons)
+    // console.log("this.firstRing",this.firstRing)
+    // console.log("this.secondRing",this.secondRing)
+    console.log("info",this.info)
+    // console.log("doubleRingId",this.doubleRingDetailId)
     const _this = this
+    _this.doubleRingDetailId()
+    _this.FirstRingDetailId()
+    _this.SecondRingDetailId()
     _this.$nextTick(() => {})
   },
   methods: {
@@ -905,12 +915,13 @@ export default {
       }
     },
     getRingInfo(index) {
+      
       const _this = this
       const product =
-        _this.info && _this.info.ring && _this.info.ring[index]
+        _this.info 
           ? JSON.parse(JSON.stringify(_this.info.ring[index]))
           : {}
-
+      // console.log("product",product)
       return Object.assign({}, product, {
         targetUser: (() => {
           const specs = product.specs || []
@@ -947,12 +958,37 @@ export default {
       const ringChecked = JSON.parse(JSON.stringify(_this.firstRingChecked))
       ringChecked[key] = value
       _this.firstRingChecked = ringChecked
+      console.log("_this.firstRingChecked",_this.firstRingChecked)
     },
     changeSecondRingChecked(key, value) {
       const _this = this
       const ringChecked = JSON.parse(JSON.stringify(_this.secondRingChecked))
       ringChecked[key] = value
       _this.secondRingChecked = ringChecked
+    },
+    doubleRingDetailId(){
+      const _this = this
+      this.info.details.map((item,i) => {
+        _this.coupleLadyId = item.ladyRing
+        _this.coupleMenId = item.menRing
+        _this.coupleId = item.id
+         _this.categoryId = item.categoryId
+      // console.log("coupleId",_this.coupleLadyId,_this.coupleMenId)
+      })
+    },
+    FirstRingDetailId(){
+      const _this = this
+      this.firstRing.details.map((item,i) => {
+        _this.firstRingId = item.id
+      })
+        // console.log("firstRingId",_this.firstRingId)
+    },
+    SecondRingDetailId(){
+      const _this = this
+      this.secondRing.details.map((item,i) => {
+        _this.secondRingId = item.id
+      })
+        // console.log("secondRingId", _this.secondRingId)
     },
     // 对戒独有的参数
     addWish(id) {
@@ -983,33 +1019,45 @@ export default {
     addCart() {
       
       const _this = this
-      if (!_this.canAddCart) {
-        return
-      }
+      // if (!_this.canAddCart) {
+      //   return
+      // }
       if (!_this.firstRingSimpleDetail || !_this.secondRingSimpleDetail) {
         _this.$errorMessage('请选择')
         return
       }
+      // const goodInfo = [
+      //   {
+      //     goods_num: 1,
+      //     goodsDetailsId: _this.firstRingSimpleDetail.id,
+      //     goods_id: _this.firstRingSimpleDetail.id,
+      //     group_id: _this.info.id,
+      //     group_type: 1,
+      //     serviceId: 0,
+      //     serviceVal: 'string',
+      //     goods_type:2
+      //   },
+      //   {
+      //     goods_num: 1,
+      //     goodsDetailsId: _this.secondRingSimpleDetail.id,
+      //     goods_id: _this.secondRingSimpleDetail.id,
+      //     group_id: _this.info.id,
+      //     group_type: 1,
+      //     serviceId: 0,
+      //     serviceVal: 'string',
+      //     goods_type:2
+      //   }
+      // ]
       const goodInfo = [
         {
           goods_num: 1,
-          goodsDetailsId: _this.firstRingSimpleDetail.id,
-          goods_id: _this.firstRingSimpleDetail.id,
-          group_id: _this.info.id,
-          group_type: 1,
+          goodsDetailsId: _this.coupleId,
+          goods_id: _this.coupleId,
+          group_id: null,
+          group_type: null,
           serviceId: 0,
           serviceVal: 'string',
-          goods_type:2
-        },
-        {
-          goods_num: 1,
-          goodsDetailsId: _this.secondRingSimpleDetail.id,
-          goods_id: _this.secondRingSimpleDetail.id,
-          group_id: _this.info.id,
-          group_type: 1,
-          serviceId: 0,
-          serviceVal: 'string',
-          goods_type:2
+          goods_type:_this.categoryId
         }
       ]
       console.log(goodInfo)

@@ -100,6 +100,9 @@ export default {
       }
     }
   },
+  // mounted(){
+  //   console.log("g",this.g)
+  // },
   methods: {
     goDetail() {},
     addWish() {
