@@ -32,14 +32,12 @@
           </div>
           <div>
             SKU：{{
-              g.data[0].ring[0]
-                .goods_sn
+              g.data[0].ring[0].goods_sn
             }}
           </div>
           <div>
             SKU：{{
-              g.data[0].ring[1]
-                .goods_sn
+              g.data[0].ring[1].goods_sn
             }}
           </div>
         </div>
@@ -48,8 +46,7 @@
         <div class="one-person">
           <div class="good-information">
             <div
-              v-for="(i, k) in g.data[0].ringsSimpleGoodsEntity
-                .simpleGoodsEntity.baseConfig"
+              v-for="(i, k) in g.data[0].ring[0].lang.goods_attr"
               :key="'info1=' + k"
             >
               <div v-if="i.configId === 26" class="infos">
@@ -58,13 +55,12 @@
               </div>
             </div>
             <div
-              v-for="(s, v) in g.data[0].ringsSimpleGoodsEntity
-                .simpleGoodsEntity.detailConfig"
+              v-for="(s, v) in g.data[0].ring[0].lang.goods_spec"
               :key="'info2=' + v"
               class="infos"
             >
-              <div>{{ s.configVal }}</div>
-              <div>{{ s.configAttrIVal }}</div>
+              <div>{{ s.attr_name }}</div>
+              <div>{{ s.attr_value }}</div>
             </div>
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
@@ -81,8 +77,7 @@
         <div class="one-person">
           <div class="good-information">
             <div
-              v-for="(i, j) in g.data[0].ringsSimpleGoodsEntity
-                .simpleGoodsEntity.baseConfig"
+              v-for="(i, j) in g.data[0].ring[0].lang.goods_attr"
               :key="'info3=' + j"
             >
               <div v-if="i.configId === 26" class="infos">
@@ -91,16 +86,15 @@
               </div>
             </div>
             <div
-              v-for="(i, d) in g.data[1].ringsSimpleGoodsEntity
-                .simpleGoodsEntity.detailConfig"
+              v-for="(i, d) in g.data[0].ring[0].lang.goods_spec"
               :key="'info4=' + d"
               class="infos"
             >
-              <div>{{ i.configVal }}</div>
-              <div>{{ i.configAttrIVal }}</div>
+              <div>{{ i.attr_name }}</div>
+              <div>{{ i.attr_value }}</div>
             </div>
           </div>
-          <div class="good-num">{{ g.data[1].goodsCount }}</div>
+          <div class="good-num">{{ g.data[0].goodsCount }}</div>
           <!-- <div class="good-price">
             {{ g.coinType }}
             {{
@@ -118,7 +112,7 @@
             {{ g.coinType }}
             {{
               formatNumber(
-                g.data[0].ringsSimpleGoodsEntity.salePrice
+                g.price
               )
             }}
           </div>
@@ -136,7 +130,7 @@
        <div
         v-show="options"
         v-if="
-          g.data[0].ringsSimpleGoodsEntity.status === '1'
+          g.data[0].simpleGoodsEntity.goodsStatus == 2
         "
         class="good-btn"
       >
@@ -175,7 +169,8 @@ export default {
     }
   },
   mounted(){
-    console.log("g",this.g)
+    console.log("data",this.g)
+    console.log("g",this.g.data[0])
   },
   methods: {
     goDetail() {},
@@ -332,7 +327,8 @@ export default {
     .couple-rings {
       position: relative;
       .one-person {
-        height: 174px;
+        // height: 174px;
+        height: 70px;
         display: flex;
         align-items: center;
         .good-information {
@@ -370,7 +366,8 @@ export default {
       
       .couple-line {
         position: absolute;
-        top: 173px;
+        // top: 173px;
+        top:63px;
         left: -56px;
         width: 400px;
         height: 1px;

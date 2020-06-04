@@ -573,7 +573,7 @@
             {{ info.coinType }}
           </span>
           <span class="price">
-            {{ formatNumber(price) }}
+            {{ formatNumber(info.salePrice) }}
           </span>
         </div>
         <div class="button-group">
@@ -753,7 +753,8 @@ export default {
       secondRingId:'',
       goodsId:'',
       styleId:'',
-      categoryId:''
+      categoryId:'',
+      stock:''
     }
   },
   computed: {
@@ -868,17 +869,17 @@ export default {
     // 是否在销售
     inSale() {
       return (
-        this.info.status === 1 &&
-        this.firstRing.goodsStatus === 2 &&
-        this.secondRing.goodsStatus === 2
+        this.info.goodsStatus === 2
+        //  &&
+        // this.firstRing.goodsStatus === 2 &&
+        // this.secondRing.goodsStatus === 2
       )
     },
     // 是否有存货
     hadStock() {
       try {
         if (
-          this.firstRingSimpleDetail.stock > 0 &&
-          this.secondRingSimpleDetail.stock > 0
+          this.stock > 0
         ) {
           return true
         }
@@ -893,6 +894,7 @@ export default {
     }
   },
   mounted() {
+    console.log("info",this.info)
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -984,6 +986,9 @@ export default {
           _this.goodsId = item.id
           _this.styleId = item.goodsId
           _this.categoryId = item.categoryId
+          _this.info.salePrice = item.retailMallPrice
+          _this.stock = item.stock
+          // console.log(item)
         }
       })
     },
@@ -1030,9 +1035,9 @@ export default {
     // 加入购物车
     addCart() {
       const _this = this
-      // if (!_this.canAddCart) {
-      //   return
-      // }
+      if (!_this.canAddCart) {
+        return
+      }
       if (!_this.firstRingSimpleDetail || !_this.secondRingSimpleDetail) {
         _this.$errorMessage('请选择')
         return
