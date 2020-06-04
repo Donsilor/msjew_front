@@ -262,7 +262,7 @@ export default {
   data() {
     return {
       lang,
-      listUrl: '/web/goods/ring/search',
+      listUrl: '/web/goods/style/search',
       page_size: 16,
       styleOptions: this.CONDITION_INFO.style.coupleRings,
       materialOptions: this.CONDITION_INFO.quality.rings,
@@ -283,9 +283,9 @@ export default {
       const sortInfo = this.usingSortInfo
 
       const data = {
-        advertType: 2,
+        advertType: 19,
         // 商品类别ID
-        categoryId: 2,
+        categoryId: 19,
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）
@@ -307,7 +307,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("this.allData",this.allData)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -320,6 +320,7 @@ export default {
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
       allData.forEach(item => {
+        console.log("item",item) 
         if (item.hasOwnProperty('dsName')) {
           // 广告
           item.itemType = adNum % 2 === 1 ? 'ad-short' : 'ad-long'
@@ -343,7 +344,7 @@ export default {
           adNum++
         } else {
           item.itemType = 'product'
-          item.ringImg = _this.imageStrToArray(item.ringImg || '')
+          item.ringImg = _this.imageStrToArray(item.goodsImages || '')
           item.goodsImages = item.ringImg
           item.to = {
             path: '/ring/wedding-rings/' + item.id.replace(/\//g, ''),
@@ -354,6 +355,7 @@ export default {
           }
         }
       })
+      console.log("this.allData",allData)
       return allData
     }
   },

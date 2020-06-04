@@ -787,6 +787,7 @@ export default {
       return allData
     },
     firstRingSimpleDetail() {
+      console.log("ffff",this.firstRing)
       const _this = this
       const ring = _this.firstRing
       const details = ring.details
@@ -887,6 +888,7 @@ export default {
     }
   },
   mounted() {
+    console.log("this.firstRingSimpleDetail",this.firstRingSimpleDetail)
     console.log("firstRing",this.info)
     console.log("secondRing",this.info.goodsServicesJsons)
     const _this = this
@@ -979,6 +981,7 @@ export default {
     },
     // 加入购物车
     addCart() {
+      
       const _this = this
       if (!_this.canAddCart) {
         return
