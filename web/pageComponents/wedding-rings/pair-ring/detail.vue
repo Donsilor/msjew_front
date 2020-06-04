@@ -751,7 +751,8 @@ export default {
       coupleMenId:'',
       firstRingId:'',
       secondRingId:'',
-      coupleId:'',
+      goodsId:'',
+      styleId:'',
       categoryId:''
     }
   },
@@ -782,7 +783,7 @@ export default {
     recommends() {
       const _this = this
       const allData = JSON.parse(
-        JSON.stringify(_this.info.ring || []) 
+        JSON.stringify(_this.info.ring || [])
       )
       allData.forEach(item => {
         item.images = _this.imageStrToArray(item.goodsImages || '')
@@ -793,7 +794,6 @@ export default {
       return allData
     },
     firstRingSimpleDetail() {
-      console.log("ffff",this.firstRing.ring)
       const _this = this
       const ring = _this.firstRing
       const details = ring.details
@@ -890,18 +890,10 @@ export default {
   },
   watch: {
     info(val, oldVal) {
-      console.log('info=======>')
     }
   },
   mounted() {
-    // console.log("this.firstRing",this.firstRing)
-    // console.log("this.secondRing",this.secondRing)
-    console.log("info",this.info)
-    // console.log("doubleRingId",this.doubleRingDetailId)
     const _this = this
-    _this.doubleRingDetailId()
-    _this.FirstRingDetailId()
-    _this.SecondRingDetailId()
     _this.$nextTick(() => {})
   },
   methods: {
@@ -915,10 +907,10 @@ export default {
       }
     },
     getRingInfo(index) {
-      
+
       const _this = this
       const product =
-        _this.info 
+        _this.info
           ? JSON.parse(JSON.stringify(_this.info.ring[index]))
           : {}
       // console.log("product",product)
@@ -943,7 +935,7 @@ export default {
         // carats:(() =>{
         //     const carats = product.carats || []
         //     // carats.unshift({id:'',name: this.$t(`personal.index.select`)})
-        //     return carats;  
+        //     return carats;
         // })(),
         specs: product.specs || [],
         details: product.details || [],
@@ -958,38 +950,58 @@ export default {
       const ringChecked = JSON.parse(JSON.stringify(_this.firstRingChecked))
       ringChecked[key] = value
       _this.firstRingChecked = ringChecked
-      console.log("_this.firstRingChecked",_this.firstRingChecked)
+
+      _this.changeChecked()
     },
     changeSecondRingChecked(key, value) {
       const _this = this
       const ringChecked = JSON.parse(JSON.stringify(_this.secondRingChecked))
       ringChecked[key] = value
       _this.secondRingChecked = ringChecked
+
+      _this.changeChecked()
     },
-    doubleRingDetailId(){
+
+    //下拉框更新后触发
+    changeChecked() {
       const _this = this
-      this.info.details.map((item,i) => {
-        _this.coupleLadyId = item.ladyRing
-        _this.coupleMenId = item.menRing
-        _this.coupleId = item.id
-         _this.categoryId = item.categoryId
-      // console.log("coupleId",_this.coupleLadyId,_this.coupleMenId)
+
+      const firstRing = _this.firstRingSimpleDetail
+      const secondRing = _this.secondRingSimpleDetail
+
+      if(!firstRing || !secondRing) {
+        return;
+      }
+
+      _this.doubleRingDetailId(firstRing['id'], secondRing['id']);
+    },
+    doubleRingDetailId(ladyRing, menRing) {
+      const _this = this
+      this.info.details.map((item, i) => {
+        if(ladyRing==item.ladyRing && menRing==item.menRing || menRing==item.ladyRing && ladyRing==item.menRing) {
+          _this.coupleLadyId = item.ladyRing
+          _this.coupleMenId = item.menRing
+          _this.goodsId = item.id
+          _this.styleId = item.goodsId
+          _this.categoryId = item.categoryId
+        }
       })
     },
-    FirstRingDetailId(){
-      const _this = this
-      this.firstRing.details.map((item,i) => {
-        _this.firstRingId = item.id
-      })
+    // FirstRingDetailId() {
+      // const _this = this
+      // this.firstRing.details.map((item,i) => {
+      //   _this.firstRingId = item.id
+      // })
         // console.log("firstRingId",_this.firstRingId)
-    },
-    SecondRingDetailId(){
-      const _this = this
-      this.secondRing.details.map((item,i) => {
-        _this.secondRingId = item.id
-      })
+    // },
+    // SecondRingDetailId(){
+      // console.log(3);
+      // const _this = this
+      // this.secondRing.details.map((item,i) => {
+      //   _this.secondRingId = item.id
+      // })
         // console.log("secondRingId", _this.secondRingId)
-    },
+    // },
     // 对戒独有的参数
     addWish(id) {
       const _this = this
@@ -1017,7 +1029,6 @@ export default {
     },
     // 加入购物车
     addCart() {
-      
       const _this = this
       // if (!_this.canAddCart) {
       //   return
@@ -1026,6 +1037,8 @@ export default {
         _this.$errorMessage('请选择')
         return
       }
+
+
       // const goodInfo = [
       //   {
       //     goods_num: 1,
@@ -1048,11 +1061,12 @@ export default {
       //     goods_type:2
       //   }
       // ]
+
       const goodInfo = [
         {
           goods_num: 1,
-          goodsDetailsId: _this.coupleId,
-          goods_id: _this.coupleId,
+          goodsDetailsId: _this.goodsId,
+          goods_id: _this.goodsId,
           group_id: null,
           group_type: null,
           serviceId: 0,
@@ -1060,7 +1074,7 @@ export default {
           goods_type:_this.categoryId
         }
       ]
-      console.log(goodInfo)
+
       _this.$store
         .dispatch('addCart', goodInfo)
         .then(data => {
