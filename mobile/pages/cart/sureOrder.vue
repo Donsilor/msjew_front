@@ -35,12 +35,12 @@
         <!-- <Header :title="lang2.pay" tips="1" /> -->
         <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
           <div class="note"><span class="star">*</span> {{ lang2.Note3 }}</div>
-          <span>{{ coin }} </span>
+          <span>{{ formatCoin(coin) }} </span>
           {{ formatMoney(productAmount) }}
           <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
         </div>
         <div v-else class="proce">
-          <span>{{ coin }} </span>
+          <span>{{ formatCoin(coin) }} </span>
           {{ formatMoney( productAmount) }}
         </div>
         <ul v-if="this.$store.state.platform !== 31">
@@ -233,7 +233,7 @@
           <li>
             <span>{{ lang.allFee }} </span
             ><span
-              >{{ coin }}
+              >{{ formatCoin(coin) }}
               {{ formatMoney( productAmount) }}</span
             >
           </li>
@@ -258,7 +258,7 @@
                 >{{ lang.delete }}</span
               >
             </div>
-            <span>-{{ coin }} {{ formatMoney(preferFee) }}</span>
+            <span>-{{ formatCoin(coin) }} {{ formatMoney(preferFee) }}</span>
           </li>
           <li>
             <div>
@@ -267,30 +267,30 @@
                 >!</span
               >
             </div>
-            <span>+{{ coin }} {{ formatMoney(allFee.logisticsFee) }}</span>
+            <span>+{{ formatCoin(coin) }} {{ formatMoney(allFee.logisticsFee) }}</span>
           </li>
           <li>
             <div>
               <span>{{ lang.taxFee }}</span>
               <span class="question" @click="showChoose(`orderTex`)">!</span>
             </div>
-            <span>+{{ coin }} {{ formatMoney(allFee.taxFee) }}</span>
+            <span>+{{ formatCoin(coin) }} {{ formatMoney(allFee.taxFee) }}</span>
           </li>
           <li>
             <div>
               <span>{{ lang.safeFee }}</span
               ><span class="question" @click="showChoose(`orderSafe`)">!</span>
             </div>
-            <span>+{{ coin }} {{ formatMoney(allFee.safeFee) }}</span>
+            <span>+{{ formatCoin(coin) }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
           <li class="order-pay">
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ formatMoney(orderTotalAmount) }}</span>
+            ><span>{{ formatCoin(coin) }} {{ formatMoney(orderTotalAmount) }}</span>
           </li>
           <li class="order-pay" style="border-top: 0;margin-top: 0;">
             <span>{{ lang.NeedPay }}</span
-            ><span>{{ coin }} {{ formatMoney(ultimatelyPay) }}</span>
+            ><span>{{ formatCoin(coin) }} {{ formatMoney(ultimatelyPay) }}</span>
           </li>
         </ul>
       </div>

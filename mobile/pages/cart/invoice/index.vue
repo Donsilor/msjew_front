@@ -49,7 +49,7 @@
         <div class="totle">
             <div class="title"><span>{{ lang.totalAmount }}</span></div>
             <div class="rise_select">
-                <span>{{ coin }} {{ultimatelyPay}}</span>
+                <span>{{ formatCoin(coin) }}{{ultimatelyPay}}</span>
             </div>
         </div>
         <div class="tips">

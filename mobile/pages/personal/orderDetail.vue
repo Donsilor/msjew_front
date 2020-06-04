@@ -59,7 +59,7 @@
             <span>x 1</span>
             <p>SKU：{{ detail.data[0].goodsCode }}</p>
             <p>{{ detail.data[0].detailSpecs }}</p>
-            <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b>
+            <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
           </div>
 
           <!--              对戒-->
@@ -74,7 +74,7 @@
             <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
             <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
             <b
-              >{{ info.coinCode }}
+              >{{ formatCoin(info.coinCode) }}
               {{ detail.data[1] && detail.data[1].goodsPrice }}</b
             >
           </div>
@@ -87,7 +87,7 @@
             <span>x 1</span>
             <p>SKU：{{ detail.data[0].goodsCode }}</p>
             <p>{{ detail.data[0].detailSpecs }}</p>
-            <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b>
+            <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
             <h4 class="order-ellipsis">
               {{ detail.data[1].goodsName }}
             </h4>
@@ -255,7 +255,7 @@
         <ul class="price">
           <li>
             <span>{{ lang.productsCount }}： </span
-            ><span>{{ info.coinCode }} {{ productsPrice }} </span>
+            ><span>{{ formatCoin(info.coinCode) }} {{ productsPrice }} </span>
           </li>
 		  <li v-for="item in cardList">
 		    <span>{{ lang.shoppingCard }}：
@@ -267,33 +267,33 @@
 		  </li>
           <li v-if="info.preferFee" class="active">
             <span>{{ lang.offer }}： </span
-            ><span>-{{ info.coinCode }} {{ info.preferFee }} </span>
+            ><span>-{{ formatCoin(info.coinCode) }} {{ info.preferFee }} </span>
           </li>
           <li>
             <span>{{ lang.freight }}： </span
-            ><span>+{{ info.coinCode }} {{ info.logisticsFee }} </span>
+            ><span>+{{ formatCoin(info.coinCode) }} {{ info.logisticsFee }} </span>
           </li>
           <li>
             <span>{{ lang.taxes }}： </span
-            ><span>+{{ info.coinCode }} {{ info.taxFee }} </span>
+            ><span>+{{ formatCoin(info.coinCode) }} {{ info.taxFee }} </span>
           </li>
           <li>
             <span>{{ lang.insurance }}： </span
-            ><span>+{{ info.coinCode }} {{ info.safeFee }} </span>
+            ><span>+{{ formatCoin(info.coinCode) }} {{ info.safeFee }} </span>
           </li>
           <li v-if="info.transPreferFee" class="active">
             <span>{{ lang.transPreferFee }}： </span
-            ><span>-{{ info.coinCode }} {{ info.transPreferFee }} </span>
+            ><span>-{{ formatCoin(info.coinCode) }} {{ info.transPreferFee }} </span>
           </li>
           <div class="all">
             <span>{{ lang.orderCount }}</span
             ><span
-              ><em>{{ info.coinCode }} </em>{{ info.orderAmount }}
+              ><em>{{ formatCoin(info.coinCode) }} </em>{{ info.orderAmount }}
             </span>
           </div>
           <div class="all" style="border-top: 0;">
             <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span
-            ><span><em>{{ info.coinCode }} </em>{{ info.payAmount }} </span>
+            ><span><em>{{ formatCoin(info.coinCode) }} </em>{{ info.payAmount }} </span>
           </div>
         </ul>
         <div class="btn">

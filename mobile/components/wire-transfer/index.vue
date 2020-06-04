@@ -5,12 +5,12 @@
             <div class="Amount">
                 <span class="title1">{{ lang.paidAmount}}</span>
                 <span class="price" v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform == 21">
-                  <span class="coin">{{ $store.state.coin }}</span> 
+                  <span class="coin">{{ formatCoin(coin) }}</span> 
                   <span class="price">{{ formatMoney(price) }}</span>
                   <span class="coin-hkd">({{ coinHKD }}</span> 
                   <span class="price-hkd">{{ formatMoney(priceHKD) }})</span>
                 </span>
-                <span v-else><span class="coin">{{ $store.state.coin }}</span> <span class="price">{{ formatMoney(price) }}</span></span>
+                <span v-else><span class="coin">{{ formatCoin(coin) }}</span> <span class="price">{{ formatMoney(price) }}</span></span>
             </div>
             <div class="account">
                 <ul>
@@ -112,6 +112,7 @@ export default {
             account:'',
             imgs:'',
             number:'',
+            coin:this.$store.state.coin
         }
     },
     props: [],

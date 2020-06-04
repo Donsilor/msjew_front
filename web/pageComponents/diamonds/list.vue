@@ -2258,14 +2258,15 @@ export default {
             .coin {
               flex-grow: 0;
               flex-shrink: 0;
-              margin-right: 6px;
+              font-size: 18px;
+              // margin-right: 6px;
             }
 
             .price {
               flex-grow: 1;
               flex-shrink: 1;
               min-width: 0;
-              margin-right: 6px;
+              // margin-right: 6px;
               overflow: hidden;
             }
 

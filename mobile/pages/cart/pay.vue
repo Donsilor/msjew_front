@@ -4,12 +4,12 @@
       <Header :title="lang.pay" tips="1" />
       <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
         <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div>
-        <span>{{ info.coinType }} </span>
+        <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
         <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
       </div>
       <div v-else class="proce">
-        <span>{{ info.coinType }} </span>
+        <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
       </div>
       <ul v-if="this.$store.state.platform !== 31">
@@ -76,7 +76,7 @@
       <div class="btn" @click="goPaySuccess">
         {{ list[typeIndex].title }}
         {{ lang.goPay }}
-        {{ info.coinType }}
+        {{ formatCoin(info.coinType) }}
         {{ formatMoney(price) }}
       </div>
       
