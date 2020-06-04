@@ -75,18 +75,22 @@ export default {
     }
   },
   created() {
-    console.log("gggg",this.goodInfo)
-    this.conditions.push({
-      type: 'eject-choose-pro',
-      key: 'quality',
-      name: this.lang.fineness,
-      checked: this.goodInfo.materials[0].id || '',
-      options: this.goodInfo.materials
-    })
-    this.chooseSize = this.goodInfo.sizes[0].content
-    if(this.goodInfo.carats !== undefined){
-      this.chooseCarats = this.goodInfo.carats[0].content
-      this.chooseCaratsId = this.goodInfo.carats[0].sortBy
+    // console.log("gggg",this.goodInfo)
+    // this.$nextTick(() => {
+    // })
+    if(this.goodInfo.materials){
+      this.conditions.push({
+        type: 'eject-choose-pro',
+        key: 'quality',
+        name: this.lang.fineness,
+        checked: this.goodInfo.materials[0].id || '',
+        options: this.goodInfo.materials
+      })
+      this.chooseSize = this.goodInfo.sizes[0].content
+      if(this.goodInfo.carats !== undefined){
+        this.chooseCarats = this.goodInfo.carats[0].content
+        this.chooseCaratsId = this.goodInfo.carats[0].sortBy
+      }
     }
   },
   mounted() {

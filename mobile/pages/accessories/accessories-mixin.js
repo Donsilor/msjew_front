@@ -82,24 +82,26 @@ export default {
   },
   mounted() {
     console.log("this.chooseCarats",this.goodInfo.carats)
-    this.conditions[0].checked = [
-      this.goodInfo.materials.length > 0
-        ? this.goodInfo.materials[0].id
+    if(this.goodInfo.materials){
+      this.conditions[0].checked = [
+        this.goodInfo.materials.length > 0
+          ? this.goodInfo.materials[0].id
+          : ``
+      ]
+      this.conditions[0].options = this.goodInfo.materials
+      this.chooseSize = this.goodInfo.sizes
+        ? this.goodInfo.sizes[0].content
         : ``
-    ]
-    this.conditions[0].options = this.goodInfo.materials
-    this.chooseSize = this.goodInfo.sizes
-      ? this.goodInfo.sizes[0].content
-      : ``
-    this.chooseCarats = this.goodInfo.carats
-      ? this.goodInfo.carats[0].content
-      : ``
-    this.chooseCaratsId =this.goodInfo.carats
-      ? this.goodInfo.carats[0].sortBy
-      :``
-    this.showPi = this.goodInfo.salePrice
-    this.iAmShowMaker()
-    this.iAmShowMaker1()
+      this.chooseCarats = this.goodInfo.carats
+        ? this.goodInfo.carats[0].content
+        : ``
+      this.chooseCaratsId =this.goodInfo.carats
+        ? this.goodInfo.carats[0].sortBy
+        :``
+      this.showPi = this.goodInfo.salePrice
+      this.iAmShowMaker()
+      this.iAmShowMaker1()
+    }
     // this.$axios
     //   .get(`/wap/goodsComments/getAvgLevel`, {
     //     params: {

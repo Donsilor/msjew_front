@@ -837,7 +837,8 @@
       "couponMessage": "No coupons",
       "addressMessage": "No address information",
       "chooseDiamondContrast": "Choose diamonds to compare",
-      "cartMessage": "Your cart is empty now. Go and look for your favorites."
+      "cartMessage": "Your cart is empty now. Go and look for your favorites.",
+      "soleOut": "The Goods Have Sold Out"
     },
     "footerBar": {
       "custoService": "Customer Service",

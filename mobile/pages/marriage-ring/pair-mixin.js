@@ -300,36 +300,41 @@ export default {
     }
   },
   created() {
+    console.log("11111",this.firstRing.materials)
     // if(this.firstRing.carats.length>0){
     //   this.firstRingCarat = {
     //     id: this.firstRing.carats[0].sortType,
     //     text: this.firstRing.carats[0].content
     //   }
     // }
-    this.firstRingSize = {
-      id: this.firstRing.sizes[0].sortType,
-      text: this.firstRing.sizes[0].content
+    if(this.firstRing.materials.id){
+      this.firstRingSize = {
+        id: this.firstRing.sizes[0].sortType,
+        text: this.firstRing.sizes[0].content
+      }
+      this.firstRingQuality = {
+        checked: this.firstRing.materials[0].id
+          ? [this.firstRing.materials[0].id]
+          : [],
+        options: this.firstRing.materials
+      }
     }
-    this.firstRingQuality = {
-      checked: this.firstRing.materials[0].id
-        ? [this.firstRing.materials[0].id]
-        : [],
-      options: this.firstRing.materials
-    }
-    // this.secondRingCarat = {
-    //   id: this.secondRing.carats[0].sortType,
-    //   text: this.secondRing.carats[0].content
-    // }
-    this.secondRingSize = {
-      id: this.secondRing.sizes[0].sortType,
-      text: this.secondRing.sizes[0].content
-    }
-    this.secondRingQuality = {
-      checked: this.secondRing.materials[0].id
-        ? [this.secondRing.materials[0].id]
-        : [],
-      options: this.secondRing.materials
-    }
+      // this.secondRingCarat = {
+      //   id: this.secondRing.carats[0].sortType,
+      //   text: this.secondRing.carats[0].content
+      // }
+      if(this.secondRing.materials.id){
+        this.secondRingSize = {
+          id: this.secondRing.sizes[0].sortType,
+          text: this.secondRing.sizes[0].content
+        }
+        this.secondRingQuality = {
+          checked: this.secondRing.materials[0].id
+            ? [this.secondRing.materials[0].id]
+            : [],
+          options: this.secondRing.materials
+        }
+      }
   },
   mounted() {
     // this.$axios carats
