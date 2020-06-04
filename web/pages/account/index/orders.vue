@@ -354,7 +354,7 @@ export default {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
-          console.log("订单0",res.data)
+          // console.log("订单0",res.data)
           if(res.code != 200){
             return
           }
@@ -441,7 +441,7 @@ export default {
         })
     },
     getStatusOrders(status) {
-      console.log(status)
+      // console.log(status)
       this.activeIndex = status
       this.$axios
         .get('/web/member/order', {
@@ -461,7 +461,7 @@ export default {
             })
           }
           this.listData = res.data.data
-          console.log("订单",this.listData)
+          // console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {

@@ -1938,7 +1938,7 @@ export default {
       lang,
       langs,
       lang2,
-      pathTakeIds: this.$route.query.cartIds,
+      pathTakeIds: this.$route.query.cartIds.split(','),
       canSubmit: false,
       address: [],
       addressMore: false,
@@ -2816,7 +2816,6 @@ export default {
       const cards = k || [];
       const arr = [];
       var obj = {cart_id: '', coupon_id: ''};
-
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
           obj.cart_id = this.good[i].data[0].id
@@ -2852,6 +2851,7 @@ export default {
         addressId: this.orderAddress.id,
         cards: cards
       }
+
       this.canSubmit = false
       this.$axios
         .post('/web/member/order/tax', datas)
