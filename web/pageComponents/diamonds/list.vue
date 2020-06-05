@@ -2023,7 +2023,7 @@ export default {
               .product-price {
                 margin-bottom: 5px;
                 text-align: left;
-                font-size: 20px;
+                font-size: 24px;
                 font-family: twCenMT;
                 font-weight: 400;
                 color: rgba(242, 155, 135, 1);
@@ -2248,7 +2248,7 @@ export default {
             height: 24px;
             padding: 0 12px;
             margin-bottom: 8px;
-            font-size: 20px;
+            font-size: 24px;
             font-family: twCenMT;
             font-weight: 400;
             color: rgba(242, 155, 135, 1);
