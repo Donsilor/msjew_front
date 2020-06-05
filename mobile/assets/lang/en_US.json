@@ -915,7 +915,7 @@
       "CoupleRings": "Couple Rings",
       "NecklaceAndPendant": "Necklaces/Pendants",
       "bracelets": "Bracelets/Bangles",
-      "EarringsAndStuds": "Earrings/Stads",
+      "EarringsAndStuds": "Earrings/Studs",
       "DecorationAndPendant": "Decorations/Charms",
       "others": "Others",
       "login":"Please login"
@@ -1093,7 +1093,7 @@
     "sliders": [
       "Necklace",
       "Pendant",
-      "Ear stud",
+      "Ear studs",
       "Earring",
       "Bracelet",
       "Bangle",

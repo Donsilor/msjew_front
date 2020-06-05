@@ -117,7 +117,7 @@
         "jewellery": {
             "necklaces": "Necklaces",
             "pendants": "Pendants",
-            "earStud": "Ear Stud",
+            "earStud": "Ear Studs",
             "earrings": "Earrings",
             "bracelets": "Bracelets",
             "decoration": "Decoration",
@@ -429,7 +429,7 @@
                 "CoupleRing": "Couple Rings",
                 "NecklaceAndPendant": "Necklaces/Pendants",
                 "Bracelet": "Bracelets/Bangles",
-                "EarringsAndStuds": "Earrings/Stads",
+                "EarringsAndStuds": "Earrings/Studs",
                 "DecorationAndPendant": "Decorations/Charms",
                 "other": "Others"
             }
