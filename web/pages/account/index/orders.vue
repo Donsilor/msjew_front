@@ -59,30 +59,63 @@
               }}</span> -->
             </p>
           </div>
-          <div v-for="(d, _index) in o.details" :key="_index" class="list-body">
-            <div class="left">
-              <nuxt-link :to="goDetails(d)"
-                 target="_blank"><img :src="IMG_URL + d.goodsImages"
-              /></nuxt-link>
-            </div>
-            <div class="mid">
-              <nuxt-link :to="goDetails(d)" target="_blank">
-                <h5>{{ d.goodsName }}</h5>
-                <p>SKU：{{ d.goodsCode }}</p>
-                <div
-                  v-for="(k, __index) in d.detailSpecs"
-                  :key="__index"
-                  class="desc"
-                >
-                  <span>{{ k.name }}: </span>
-                  <span>{{ k.value }} </span>
-                </div>
-              </nuxt-link>
-            </div>
+          <div v-if="o.details[0].ring == ''">
+            <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
+              <div class="left">
+                <nuxt-link :to="goDetails(d)"
+                  target="_blank"><img :src="IMG_URL + d.goodsImages"
+                /></nuxt-link>
+              </div>
+              <div class="mid">
+                <nuxt-link :to="goDetails(d)" target="_blank">
+                  <h5>{{ d.goodsName }}</h5>
+                  <p>SKU：{{ d.goodsCode }}</p>
+                  <div
+                    v-for="(k, __index) in d.detailSpecs"
+                    :key="__index"
+                    class="desc"
+                  >
+                    <span>{{ k.name }}: </span>
+                    <span>{{ k.value }} </span>
+                  </div>
+                </nuxt-link>
+              </div>
 
-            <div class="right">
-              <span>1</span>
-              {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}
+              <div class="right">
+                <span>1</span>
+                {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <div  v-for="(d, _index) in o.details[0].ring" :key="_index" class="list-body">
+              <div class="left">
+                <nuxt-link :to="goDetails(o.details[0])"
+                  target="_blank"><img :src="IMG_URL + d.goods_image"
+                /></nuxt-link>
+              </div>
+              <div class="mid">
+                <nuxt-link :to="goDetails(o.details[0])" target="_blank">
+                  <h5>{{ d.goods_name }}</h5>
+                  <p>SKU：{{ d.goods_sn }}</p>
+                  <div
+                    v-for="(k, __index) in d.lang.goods_spec"
+                    :key="__index"
+                    class="desc"
+                  >
+                    <span>{{ k.attr_name }}: </span>
+                    <span>{{ k.attr_value }} </span>
+                  </div>
+                </nuxt-link>
+              </div>
+
+              <div class="right">
+                <span>1</span>
+                <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
+              </div>
+            </div>
+            <div class="price">
+              {{ o.coinCode }} {{ formatMoney(doubleRingGoodPrice) }}
             </div>
           </div>
 
@@ -349,7 +382,8 @@ export default {
       cancelOrderStatus: false,
       receiveOrder: false,
       cid: ``,
-      rid: ``
+      rid: ``,
+      doubleRingGoodPrice:''
     }
   },
   created() {
@@ -363,7 +397,7 @@ export default {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
-          console.log("订单0",res.data)
+          // console.log("订单0",res.data)
           if(res.code != 200){
             return
           }
@@ -467,10 +501,26 @@ export default {
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
+              this.doubleRingGoodPrice = obj.goodsPrice
+              // console.log("obj",obj)
             })
           }
           this.listData = res.data.data
-          console.log("订单",this.listData)
+  //         for(let item of selected){
+  //    for(let items of product){
+  //      if(item.id==items.id){
+  //        items.checked = item.checked
+  //      }
+  //    }
+  // }
+          
+          // this.listData.forEach(( item, index ) => {
+          //   // console.log("订单",item)
+          //   item.details[0].map(j => {
+          //     console.log("订单",j)
+          //   })
+          // })
+          // console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {
@@ -597,18 +647,18 @@ export default {
       this.$refs[`eft-guide`].show()
     },
     goDetails(obj) {
-      // console.log(obj)
+      // console.log("obj",obj)
       let route = {
         path: '/',
         query: {}
       }
-
-      if (obj.groupType === 1) {
+      const ct = parseInt(obj.categoryId)
+      if (ct === 19) {
         // console.log(`对戒💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.groupId.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.goodsId.replace(/\//g, '')}`,
           query: {
-            goodId: obj.groupId,
+            goodId: obj.goodsId,
             ringType: 'pair'
           }
         }
@@ -738,6 +788,15 @@ div {
       width: 100%;
       .blocks-mark {
         margin-bottom: 40px;
+        position: relative;
+        .price{
+          position: absolute;
+          right:157px;
+          top:47%;
+          font-size: 16px;
+          color: #666666;
+          font-family: twCenMt;
+        }
         .list-head {
           background: #f8f8f8;
           height: 40px;
@@ -829,6 +888,9 @@ div {
         }
         .list-body:nth-child(2) {
           border-top: 0;
+        }
+        .listDouble{
+          display: flex; 
         }
         .list-footer {
           background: #f8f8f8;

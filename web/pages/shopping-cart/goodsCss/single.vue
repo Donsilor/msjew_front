@@ -100,9 +100,9 @@ export default {
       }
     }
   },
-  // mounted(){
-  //   console.log("g",this.g)
-  // },
+  mounted(){
+    console.log("single",this.g)
+  },
   methods: {
     goDetail() {},
     addWish() {
@@ -209,7 +209,7 @@ export default {
 
 <style scoped lang="less">
 .single {
-  // border-bottom: 1px solid rgba(239, 239, 239, 1);
+  border-bottom: 1px solid rgba(239, 239, 239, 1);
   .good-info {
     position: relative;
     width: 1200px;

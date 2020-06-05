@@ -139,31 +139,55 @@
           <div class="t2">{{ $t(`${lang}.goodsNum`) }}</div>
           <div class="t3">{{ $t(`${lang}.goodsPrice`) }}</div>
         </div>
-        <div
-          v-for="(d, _index) in data.details"
-          :key="_index"
-          class="goods-details"
-        >
-          <nuxt-link :to="goToDetail(d)" target="_blank">
-            <div class="t1">
-              <div class="good-img">
-                <img :src="IMG_URL + d.goodsImages" />
-              </div>
-              <div class="good-desc">
-                <div class="good-name">{{ d.goodsName }}</div>
-                <div class="good-sku">SKU：{{ d.goodsCode }}</div>
-                <div class="details">
-                  <span v-for="(v, k) in d.detailSpecs" :key="k"
-                    >{{ v.name }}：{{ v.value }}</span
-                  >
+        <div v-if="data.details[0].ring == ''" class="detail-info">
+          <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
+            <nuxt-link :to="goToDetail(d)" target="_blank">
+              <div class="t1">
+                <div class="good-img">
+                  <img :src="IMG_URL + d.goodsImages" />
+                </div>
+                <div class="good-desc">
+                  <div class="good-name">{{ d.goodsName }}</div>
+                  <div class="good-sku">SKU：{{ d.goodsCode }}</div>
+                  <div class="details">
+                    <span v-for="(v, k) in d.detailSpecs" :key="k"
+                      >{{ v.name }}：{{ v.value }}</span
+                    >
+                  </div>
                 </div>
               </div>
+            </nuxt-link>
+            <div class="t2">1</div>
+            <div class="t3">
+              {{ data.coinCode }} {{ formatMoney(d.goodsPrice) }}
             </div>
-          </nuxt-link>
-          <div class="t2">1</div>
-          <div class="t3">
-            {{ data.coinCode }} {{ formatMoney(d.goodsPrice) }}
           </div>
+        </div>
+        <!-- 对戒 -->
+        <div v-else class="detail-info">
+          <div v-for="(d, _index) in data.details[0].ring" :key="_index" class="goods-details">
+            <nuxt-link :to="goToDetail(data.details[0])" target="_blank">
+              <div class="t1">
+                <div class="good-img">
+                  <img :src="IMG_URL + d.goods_image" />
+                </div>
+                <div class="good-desc">
+                  <div class="good-name">{{ d.goods_name }}</div>
+                  <div class="good-sku">SKU：{{ d.goods_sn }}</div>
+                  <div class="details">
+                    <span v-for="(v, k) in d.lang.goods_spec" :key="k"
+                      >{{ v.attr_name }}：{{ v.attr_value }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </nuxt-link>
+            <div class="t2">1</div>
+          </div>
+            <div class="t3">
+              <!-- d.goodsPrice -->
+              {{ data.coinCode }} {{ formatMoney(doubleRingGoodPrice) }} 
+            </div>
         </div>
         <div class="goods-bot-bar" />
       </div>
@@ -403,7 +427,8 @@ export default {
       },
       type:'',
       headType:'',
-      cardList: []
+      cardList: [],
+      doubleRingGoodPrice:'' //对戒商品价格
     }
   },
   computed: {
@@ -485,13 +510,14 @@ export default {
           console.log("this.data",this.data)
           this.invoice = res.data.invoice
           this.orderStatus = res.data.orderStatus
-          console.log("data",this.orderStatus)
+          // console.log("data",this.orderStatus)
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
           )
           this.data.details.forEach(obj => {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
+            this.doubleRingGoodPrice = obj.goodsPrice
           })
           if(!this.data.invoice.isElectronic){
             this.type = this.$t(`${lang_invoice}.PaperInvoice`)
@@ -523,13 +549,13 @@ export default {
         path: '/',
         query: {}
       }
-
-      if (obj.groupType === 1) {
+      const ct = obj.categoryId
+      if (ct === 19) {
         // console.log(`对戒💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.groupId.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.goodsId.replace(/\//g, '')}`,
           query: {
-            goodId: obj.groupId,
+            goodId: obj.goodsId,
             ringType: 'pair'
           }
         }
@@ -818,6 +844,17 @@ export default {
       }
     }
     .goods-info {
+      .detail-info{
+        position: relative;
+        .t3{
+          position: absolute;
+          right: 144px;
+          top:43%;
+          color: #333;
+          font-family: twCenMt;
+          font-size: 20px;
+        }
+      }
       .goods-info-title {
         width: 100%;
         box-sizing: border-box;

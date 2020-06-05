@@ -77,7 +77,7 @@
         <div class="one-person">
           <div class="good-information">
             <div
-              v-for="(i, j) in g.data[0].ring[0].lang.goods_attr"
+              v-for="(i, j) in g.data[0].ring[1].lang.goods_attr"
               :key="'info3=' + j"
             >
               <div v-if="i.configId === 26" class="infos">
@@ -86,7 +86,7 @@
               </div>
             </div>
             <div
-              v-for="(i, d) in g.data[0].ring[0].lang.goods_spec"
+              v-for="(i, d) in g.data[0].ring[1].lang.goods_spec"
               :key="'info4=' + d"
               class="infos"
             >
@@ -169,8 +169,8 @@ export default {
     }
   },
   mounted(){
-    console.log("data",this.g)
-    console.log("g",this.g.data[0])
+    console.log("double",this.g)
+    // console.log("g",this.g.data[0])
   },
   methods: {
     goDetail() {},

@@ -11,7 +11,7 @@
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
-          <div v-if="g.groupType === null && g.data[0].simpleGoodsEntity.categoryId !== 19" class="finished"> 
+          <div v-if="g.groupType === null && g.data[0].goodsType !== 19" class="finished"> 
             <div
               v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
               class="cart-radio"
@@ -31,7 +31,7 @@
             <!-- :num='totalNum' :price='totalPrice' @totalprice='changePrice'-->
             <single :g="g" @reloadList="getList"   @bottomData='refreshData' ></single>
           </div>
-          <div v-if="g.data[0].simpleGoodsEntity.categoryId == 19" class="couple">
+          <div v-if="g.data[0].goodsType == '19'" class="couple">
             <!-- <div
               v-if="
                 g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
@@ -248,17 +248,16 @@ export default {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
-          console.log("1230",res)
           for (const i in res) {
             res[i].tick = false
           }
           this.good = res
           if(this.good.length<=3){
-            console.log(11111111111,this.good.length)
+            // console.log(11111111111,this.good.length)
             this.Settlement1 = true
             this.Settlement2 = false
           } else {
-            console.log(2222222)
+            // console.log(2222222)
             window.addEventListener('scroll', this.handleScroll, true)
           }
           this.defaultAll()
@@ -279,9 +278,9 @@ export default {
           this.tickNum = 0
           this.totalNum = 0
           this.totalPrice = 0
-          console.log(1111111)
+          // console.log(1111111)
         } else {
-           console.log(22222)
+          //  console.log(22222)
           this.tickNum = 0
           this.totalNum = 0
           this.totalPrice = 0

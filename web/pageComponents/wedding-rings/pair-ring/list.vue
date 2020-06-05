@@ -320,7 +320,7 @@ export default {
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
       allData.forEach(item => {
-        console.log("item",item) 
+        // console.log("item",item) 
         if (item.hasOwnProperty('dsName')) {
           // 广告
           item.itemType = adNum % 2 === 1 ? 'ad-short' : 'ad-long'
@@ -355,7 +355,7 @@ export default {
           }
         }
       })
-      console.log("this.allData",allData)
+      // console.log("this.allData",allData)
       return allData
     }
   },

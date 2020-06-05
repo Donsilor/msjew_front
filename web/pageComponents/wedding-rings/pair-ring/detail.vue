@@ -894,7 +894,7 @@ export default {
     }
   },
   mounted() {
-    console.log("info",this.info)
+    // console.log("info",this.info)
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -974,7 +974,7 @@ export default {
       if(!firstRing || !secondRing) {
         return;
       }
-
+      // console.log("firstRing",firstRing['id'],secondRing['id'])
       _this.doubleRingDetailId(firstRing['id'], secondRing['id']);
     },
     doubleRingDetailId(ladyRing, menRing) {
