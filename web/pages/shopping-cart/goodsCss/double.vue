@@ -279,6 +279,7 @@ export default {
 
 <style scoped lang="less">
 .double {
+  border-bottom: 1px solid rgba(239, 239, 239, 1);
   .good-info {
     position: relative;
     width: 1200px;
@@ -328,7 +329,7 @@ export default {
       position: relative;
       .one-person {
         // height: 174px;
-        height: 70px;
+        height: 100px;
         display: flex;
         align-items: center;
         .good-information {
@@ -367,7 +368,7 @@ export default {
       .couple-line {
         position: absolute;
         // top: 173px;
-        top:63px;
+        top:94px;
         left: -56px;
         width: 400px;
         height: 1px;

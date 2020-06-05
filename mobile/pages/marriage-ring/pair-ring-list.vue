@@ -98,7 +98,7 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.listCommons,
-      listUrl: `/wap/goods/ring/search`,
+      listUrl: `/wap/goods/style/search`,
       beginPrice: 0,
       endPrice: 100000000
     }
@@ -157,7 +157,8 @@ export default {
           orderType: _this.sortType,
           page_size: 6,
           styleValue: _this.conditions[0].checked,
-          userId: null
+          userId: null,
+          categoryId:19
         }
       }
 

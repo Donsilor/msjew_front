@@ -11,7 +11,7 @@
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
-          <div v-if="g.groupType == null && g.data[0].simpleGoodsEntity.categoryId !== '19'" class="finished"> 
+          <div v-if="g.groupType === null && g.data[0].simpleGoodsEntity.categoryId !== 19" class="finished"> 
             <div
               v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
               class="cart-radio"
@@ -31,7 +31,7 @@
             <!-- :num='totalNum' :price='totalPrice' @totalprice='changePrice'-->
             <single :g="g" @reloadList="getList"   @bottomData='refreshData' ></single>
           </div>
-          <div v-if="g.data[0].simpleGoodsEntity.categoryId === '19'" class="couple">
+          <div v-if="g.data[0].simpleGoodsEntity.categoryId == 19" class="couple">
             <!-- <div
               v-if="
                 g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
