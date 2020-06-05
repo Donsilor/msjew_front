@@ -18,7 +18,7 @@
       {{ goodInfo.name }}
     </div>
     <div class="price">
-      {{ formatCoin(goodInfo.coinType) }}{{ formatNumber(showPrice) }}
+      {{ goodInfo.coinType }}{{ formatNumber(showPrice) }}
     </div>
     <div class="promise-box">
       <div
@@ -289,7 +289,7 @@ import Mx from './pair-mixin'
 export default {
   head() {
     return {
-      title: this.goodInfo.name,
+      title: this.goodInfo.goodsName,
       meta: [
         {
           name: 'title',
@@ -343,7 +343,7 @@ export default {
     }
   },
   mounted(){
-    console.log("ddddd",this.firstRingQualityText)
+    // console.log("ddddd",this.firstRingQualityText)
   }
 }
 </script>

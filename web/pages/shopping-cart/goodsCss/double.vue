@@ -45,7 +45,7 @@
       <div class="couple-rings">
         <div class="one-person">
           <div class="good-information">
-            <div
+            <!-- <div
               v-for="(i, k) in g.data[0].ring[0].lang.goods_attr"
               :key="'info1=' + k"
             >
@@ -53,7 +53,7 @@
                 <div>{{ i.configVal }}</div>
                 <div>{{ i.configAttrIVal }}</div>
               </div>
-            </div>
+            </div> -->
             <div
               v-for="(s, v) in g.data[0].ring[0].lang.goods_spec"
               :key="'info2=' + v"
@@ -76,7 +76,7 @@
         </div>
         <div class="one-person">
           <div class="good-information">
-            <div
+            <!-- <div
               v-for="(i, j) in g.data[0].ring[1].lang.goods_attr"
               :key="'info3=' + j"
             >
@@ -84,7 +84,7 @@
                 <div>{{ i.configVal }}</div>
                 <div>{{ i.configAttrIVal }}</div>
               </div>
-            </div>
+            </div> -->
             <div
               v-for="(i, d) in g.data[0].ring[1].lang.goods_spec"
               :key="'info4=' + d"

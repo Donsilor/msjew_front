@@ -18,53 +18,104 @@
               "
               class="mod-item"
             >
-			<div @click="godetails(item, index)">
-              <img :src="imageStrToArray(item.goodsImages)[0]" />
-              <span v-if="!getStatus(item, index)" class="failed">
-                {{ lang.failed }}
-              </span>
-              <div class="right">
-                <h4 class="ow-h2">
-                  {{ item.goodsName }}
-                </h4>
-                <p>SKU：{{ item.sku }}</p>
-                <p class="p">
-                  {{
-                    getconfig(item.config, item.simpleGoodsEntity.specs)
-                  }}
-                </p>
-                <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
-                <div v-if="item.groupType === 1" class="btn-type">
-                  {{ lang.ring }}
-                </div>
-                <div v-if="item.groupType === 2" class="btn-type">
-                  {{ lang.coustom }}
-                </div>
-                <div v-if="item.groupType !== 0 && index !== list.length - 1">
-                  <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                    {{ list[index + 1].goodsName }}
-                  </h4>
-                  <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
-                    SKU：{{ list[index + 1].sku }}
-                  </p>
-                  <p>
-                    {{
-                      getconfig(
-                        list[index + 1].config,
-                        list[index + 1].simpleGoodsEntity.specs
-                      )
-                    }}
-                  </p>
-                  <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+              <div v-if="item.groupType !== 19">
+                <div @click="godetails(item, index)">
+                        <img :src="imageStrToArray(item.goodsImages)[0]" />
+                        <span v-if="!getStatus(item, index)" class="failed">
+                          {{ lang.failed }}
+                        </span>
+                        <div class="right">
+                          <h4 class="ow-h2">
+                            {{ item.goodsName }}
+                          </h4>
+                          <p>SKU：{{ item.sku }}</p>
+                          <p class="p">
+                            {{
+                              getconfig(item.config, item.simpleGoodsEntity.specs)
+                            }}
+                          </p>
+                          <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                          <div v-if="item.groupType === 1" class="btn-type">
+                            {{ lang.ring }}
+                          </div>
+                          <div v-if="item.groupType === 2" class="btn-type">
+                            {{ lang.coustom }}
+                          </div>
+                          <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                            <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                              {{ list[index + 1].goodsName }}
+                            </h4>
+                            <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                              SKU：{{ list[index + 1].sku }}
+                            </p>
+                            <p>
+                              {{
+                                getconfig(
+                                  list[index + 1].config,
+                                  list[index + 1].simpleGoodsEntity.specs
+                                )
+                              }}
+                            </p>
+                            <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
 
 
-                  <p v-if="item.groupType === 1">
-                    <br/>
-                    <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
-                   </p>
+                            <p v-if="item.groupType === 1">
+                              <br/>
+                              <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
+                            </p>
+                          </div>
+                        </div>
                 </div>
               </div>
-		  </div>
+              <div v-else>
+                <div @click="godetails(item, index)">
+                        <img :src="imageStrToArray(item.goodsImages)[0]" />
+                        <span v-if="!getStatus(item, index)" class="failed">
+                          {{ lang.failed }}
+                        </span>
+                        <div class="right">
+                          <h4 class="ow-h2">
+                            {{ item.goodsName }}
+                          </h4>
+                          <p>SKU：{{ item.sku }}</p>
+                          <p class="p">
+                            {{
+                              getconfig(item.config, item.simpleGoodsEntity.specs)
+                            }}
+                          </p>
+                          <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                          <div v-if="item.groupType === 1" class="btn-type">
+                            {{ lang.ring }}
+                          </div>
+                          <div v-if="item.groupType === 2" class="btn-type">
+                            {{ lang.coustom }}
+                          </div>
+                          <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                            <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                              {{ list[index + 1].goodsName }}
+                            </h4>
+                            <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                              SKU：{{ list[index + 1].sku }}
+                            </p>
+                            <p>
+                              {{
+                                getconfig(
+                                  list[index + 1].config,
+                                  list[index + 1].simpleGoodsEntity.specs
+                                )
+                              }}
+                            </p>
+                            <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+
+                            <p v-if="item.groupType === 1">
+                              <br/>
+                              <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
+                            </p>
+                          </div>
+                        </div>
+                </div>
+              </div>
               <div class="domore">
                 <div
                   class="select-icon"
@@ -432,10 +483,10 @@ export default {
                     : val.groupType === 2
                     ? item.id
                     : null,
-                group_type: val.groupType,
+                group_type: val.goodsType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
-              // console.log("ooooo>>>",o)
+              console.log("ooooo>>>",val)
               this.cartList.push(o)
             })
           })
@@ -482,35 +533,35 @@ export default {
           const o = {
             isSelect: false,
             goodsImages:
-              item.groupType === 1
+              item.groupType === 2
                 ? item.ringsSimpleGoodsEntity.ringImg
                 : item.simpleGoodsEntity.goodsImages,
             goodsName:
-              item.groupType === 1
+              item.groupType === 2
                 ? item.ringsSimpleGoodsEntity.name
                 : item.simpleGoodsEntity.goodsName,
             config:
-              item.groupType === 1
+              item.groupType === 2
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.detailConfig
                 : item.simpleGoodsEntity.categoryId === 1
                 ? item.simpleGoodsEntity.specs
                 : item.simpleGoodsEntity.detailConfig,
             sku:
-              item.groupType === 1
+              item.groupType === 2
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
                     .simpleGoodsDetails.goodsDetailsCode
                 : item.simpleGoodsEntity.simpleGoodsDetails.goodsDetailsCode,
             salePrice:
-              item.groupType === 1
+              item.groupType === 2
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
                     .simpleGoodsDetails.retailMallPrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
-            totalPrice:item.groupType === 1
+            totalPrice:item.groupType === 2
                 ? item.ringsSimpleGoodsEntity.salePrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
             groupType: item.groupType || 0,
             createTime:
-              item.groupType === 1
+              item.groupType === 2
                 ? item.createTime
                 : item.groupId
                 ? item.groupId
@@ -521,17 +572,18 @@ export default {
             localSn: item.localSn,
             groupId: item.groupId || null,
             simpleGoodsEntity:
-              item.groupType === 1
+              item.groupType === 2
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
                 : item.simpleGoodsEntity,
             status:
-              item.groupType === 1 ? item.ringsSimpleGoodsEntity.status : 1,
+              item.groupType === 2 ? item.ringsSimpleGoodsEntity.status : 1,
             goodsStatus:
-              item.groupType === 1
+              item.groupType === 2
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus
                 : item.simpleGoodsEntity.goodsStatus
           }
           this.list.push(o)
+          console.log("this.list",this.list)
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (

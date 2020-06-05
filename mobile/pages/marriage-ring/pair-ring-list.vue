@@ -105,15 +105,17 @@ export default {
   },
   created() {},
   mounted() {
+    // console.log(11111111111)
     const _this = this
     _this.$nextTick(() => {
       this.conditions[0].options = this.CONDITION_INFO.style.coupleRings
+      // console.log("11111111111",this.conditions[0].options)
       this.research()
     })
   },
   methods: {
     getBacks(val) {
-      console.log(val)
+      console.log("val",val)
       if (val.content.length !== 0) {
         this.conditions[2].checked = `${val.content[0].id},${val.content[1].id}`
         this.beginPrice = val.content[0].id || 0
@@ -148,7 +150,7 @@ export default {
         cancelToken: new CancelToken(cancel => {
           _this.addRequesting(reqMark, cancel)
         }),
-        data: {
+        params: {
           beginPrice: _this.beginPrice,
           endPrice: _this.endPrice,
           page: page,
@@ -158,7 +160,7 @@ export default {
           page_size: 6,
           styleValue: _this.conditions[0].checked,
           userId: null,
-          categoryId:19
+          categoryId: 19
         }
       }
 
@@ -173,6 +175,7 @@ export default {
           data: options.data || {}
         })
         .then(res => {
+          console.log("res",res)
           if (res.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(res.data))
           }

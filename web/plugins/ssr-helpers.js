@@ -180,7 +180,7 @@ export default function({ req, res, app, store }) {
       query: {}
     }
 
-    if (obj.groupType === 1) {
+    if (obj.data[0].goodsType == '19') {
       // console.log(`对戒💍`)
       route = {
         path: `/ring/wedding-rings/${obj.data[0].goodsId}`,

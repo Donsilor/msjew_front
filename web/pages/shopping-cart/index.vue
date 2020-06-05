@@ -11,7 +11,7 @@
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
-          <div v-if="g.groupType === null && g.data[0].goodsType !== 19" class="finished"> 
+          <div v-if="g.groupType === null && Number(g.data[0].goodsType) !== 19" class="finished"> 
             <div
               v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
               class="cart-radio"

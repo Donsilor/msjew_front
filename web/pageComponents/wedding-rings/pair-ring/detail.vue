@@ -782,10 +782,12 @@ export default {
       return result
     },
     recommends() {
+      // console.log("info2",this.info)
       const _this = this
       const allData = JSON.parse(
         JSON.stringify(_this.info.ring || [])
       )
+      console.log("info2",allData)
       allData.forEach(item => {
         item.images = _this.imageStrToArray(item.goodsImages || '')
         item.name = item.goodsName
@@ -974,7 +976,7 @@ export default {
       if(!firstRing || !secondRing) {
         return;
       }
-      // console.log("firstRing",firstRing['id'],secondRing['id'])
+      console.log("firstRing",firstRing,secondRing)
       _this.doubleRingDetailId(firstRing['id'], secondRing['id']);
     },
     doubleRingDetailId(ladyRing, menRing) {

@@ -44,7 +44,7 @@ export default {
         token: store.state.token || ''
       },
       params: {
-        goodsId: '594'
+        goodsId: route.query.goodId
       }
     })
       .then(res => {
@@ -63,7 +63,7 @@ export default {
         return { pair: pair, seoInfo: app.$getDetailSeoInfo(pair) }
       })
       .catch(err => {
-        return Promise.reject(err)
+        // return Promise.reject(err)
       })
 
     return request
