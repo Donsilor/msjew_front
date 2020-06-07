@@ -47,7 +47,7 @@
     name: 'Index',
     props: {
       moneyInfo: {
-        type: [Object],
+        type: Object,
         required: false,
         default () {
           return {}

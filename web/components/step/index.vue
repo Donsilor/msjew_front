@@ -236,7 +236,11 @@ export default {
                 parseInt(this.steps.steps[0].goodsDetailsId) ===
                 parseInt(data.details[i].id)
               ) {
-                this.price1 = data.details[i].retailMallPrice
+				if(data.details[i].coupon.hasOwnProperty('discount')){
+					this.price1 = data.details[i].coupon.discount.price
+				}else{
+					this.price1 = data.details[i].retailMallPrice
+				}
               }
             }
           })
@@ -267,7 +271,11 @@ export default {
                 parseInt(this.steps.steps[0].goodsDetailsId) ===
                 parseInt(data.details[i].id)
               ) {
-                this.price1 = data.details[i].retailMallPrice
+				if(data.details[i].coupon.hasOwnProperty('discount')){
+					this.price1 = data.details[i].coupon.discount.price
+				}else{
+					this.price1 = data.details[i].retailMallPrice
+				}
               }
             }
           })
@@ -288,7 +296,17 @@ export default {
                 parseInt(this.steps.steps[1].goodsDetailsId) ===
                 parseInt(data.details[i].id)
               ) {
-                this.price2 = data.details[i].retailMallPrice
+                // if(data.details[i].coupon.hasOwnProperty('discount')){
+                // 	this.price2 = data.details[i].coupon.discount.price;
+                // }else{
+                // 	this.price2 = data.details[i].retailMallPrice
+                // }
+				
+				if(data.coupon.hasOwnProperty('discount')){
+					this.price2 = data.coupon.discount.price
+				}else{
+					this.price2 = data.details[i].retailMallPrice
+				}
               }
             }
           })

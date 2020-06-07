@@ -54,10 +54,10 @@
     name: 'Index',
     props: {
       couponAll: {
-        type: Array,
+        type: Object,
         required: false,
         default () {
-          return []
+          return {}
         }
       },
       couponAlready: {

@@ -296,11 +296,26 @@ export default {
             // console.log("tick",this.good[i].tick)
 
             // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
-           if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
-             this.totalPrice +=parseFloat(this.good[j].data[0].coupon.discount.price)
-           }else{
-            this.totalPrice +=parseFloat(this.good[j].price)
-           }
+			
+			if(this.good[j].groupType == 2){
+				if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
+				  this.totalPrice -=parseFloat(this.good[j].data[0].coupon.discount.price)
+				}else{
+				  this.totalPrice -=parseFloat(this.good[j].price)
+				}
+				
+				if(this.good[j].data[1].coupon.hasOwnProperty('discount')){
+				  this.totalPrice -=parseFloat(this.good[j].data[1].coupon.discount.price)
+				}else{
+				  this.totalPrice -=parseFloat(this.good[j].price)
+				}
+			}else{
+				if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
+				  this.totalPrice -=parseFloat(this.good[j].data[0].coupon.discount.price)
+				}else{
+				  this.totalPrice -=parseFloat(this.good[j].price)
+				}
+			}
           }
           // console.log("price=====2",this.good)
           // this.tickNum = this.good.length
@@ -330,6 +345,7 @@ export default {
         this.totalNum = 0
         this.totalPrice = 0
         for (const i in this.good) {
+			console.log(888,i)
           if(this.good[i].groupType == 1){
              if(parseInt(this.good[i].data[0].ringsSimpleGoodsEntity.status) === 0){
                 this.good[i].tick = false
@@ -355,11 +371,26 @@ export default {
           // console.log("tick",this.good[i].tick)
 
           // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
-          }else{
-           this.totalPrice +=parseFloat(this.good[i].price)
-          }
+		  
+		  if(this.good[i].groupType == 2){
+		  	if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+		  	  this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+		  	}else{
+		  	  this.totalPrice -=parseFloat(this.good[i].price)
+		  	}
+		  	
+		  	if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+		  	  this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
+		  	}else{
+		  	  this.totalPrice -=parseFloat(this.good[i].price)
+		  	}
+		  }else{
+		  	if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+		  	  this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+		  	}else{
+		  	  this.totalPrice -=parseFloat(this.good[i].price)
+		  	}
+		  }
 
           // this.totalPrice +=parseFloat(this.good[i].price)
         }
@@ -382,16 +413,45 @@ export default {
       this.good[i].tick ? this.totalNum-- : this.totalNum++
 
       if(this.good[i].tick){
-        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-          (this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price) )
-        }else{
-          (this.totalPrice -=parseFloat(this.good[i].price) )
-        }
+		if(this.good[i].groupType == 2){
+			if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+			  this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+			}else{
+			  this.totalPrice -=parseFloat(this.good[i].price)
+			}
+			
+			if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+			  this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
+			}else{
+			  this.totalPrice -=parseFloat(this.good[i].price)
+			}
+		}else{
+			if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+			  this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+			}else{
+			  this.totalPrice -=parseFloat(this.good[i].price)
+			}
+		}
       }else{
-        if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-          (this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price) )
-        }else{
-          (this.totalPrice +=parseFloat(this.good[i].price) )
+		  console.log(this.good[i])
+		if(this.good[i].groupType == 2){
+			if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+			  this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
+			}else{
+			  this.totalPrice +=parseFloat(this.good[i].price)
+			}
+
+			if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+			  this.totalPrice +=parseFloat(this.good[i].data[1].coupon.discount.price)
+			}else{
+			  this.totalPrice +=parseFloat(this.good[i].price)
+			}
+		}else{
+			if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+			  this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
+			}else{
+			  this.totalPrice +=parseFloat(this.good[i].price)
+			}
         }
       }
 
