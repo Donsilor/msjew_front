@@ -75,7 +75,7 @@
                   </span>
                   <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
                     <h4 class="ow-h2">
-                      {{ item.goodsName }}
+                      {{ ring.goods_name }}
                     </h4>
                     <p>SKU：{{ ring.goods_sn }}</p>
                     <p class="p">
@@ -90,7 +90,7 @@
                     <div v-if="item.groupType == 1" class="btn-type">
                       {{ lang.coustom }}
                     </div>
-                    <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                    <!-- <div v-if="item.groupType !== 0 && index !== list.length - 1">
                       <h4 v-if="item.goodsType == 2" class="ow-h2 margin-top-20">
                         {{ list[index + 1].goodsName }}
                       </h4>
@@ -112,7 +112,7 @@
                         <br/>
                         <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
                       </p>
-                    </div>
+                    </div> -->
                   </div>
 
                   <b class="double-ring-price">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
@@ -492,14 +492,14 @@ console.log("itemlist",item)
         console.log("good_spec",item)
 
           if (index === good_spec.length - 1) {
-            text = text + item.attr_name
+            text = text + item.attr_value
           } else {
             text = text + item.attr_value + ' /  '
           }
-        })
+        }) 
       }
-      // if (list2 && list2.length > 0) {
-      //   list2.map((item, index) => {
+      // if (good_spec && good_spec.length > 0) {
+      //   good_spec.map((item, index) => {
       //     if (item.configId === 196) {
       //       console.log(list2, '9999', item)
       //       text = text + ' /  ' + item.configAttrIVal
@@ -631,8 +631,8 @@ console.log("itemlist",item)
                 ? item.simpleGoodsEntity
                     .simpleGoodsDetails.retailMallPrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
-            totalPrice:item.goodsType === 19
-                ? item.ringsSimpleGoodsEntity.salePrice
+            totalPrice:item.goodsType == 19
+                ? item.simpleGoodsEntity.salePrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
             groupType: item.groupType || 0,
             goodsType: item.simpleGoodsEntity.categoryId,
