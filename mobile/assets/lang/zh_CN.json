@@ -742,6 +742,7 @@
       "storeName": "香港 - 环贸中心",
       "address": "地址",
       "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
+      "addressDetailUs": "深圳市羅湖區東曉街道獨樹社區布心路3008號IBC商務珠寶大廈A座1306",
       "tel": "电话",
       "email": "电邮",
       "title": "BDD珠宝商城",
@@ -2147,7 +2148,8 @@
 		"store": "门店",
 		"storeName": "香港 - 环贸中心",
 		"address": "地址",
-		"addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
+    "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
+    "addressDetailUs": "深圳市羅湖區東曉街道獨樹社區布心路3008號IBC商務珠寶大廈A座1306",
 		"tel": "电话",
 		"email": "电邮",
 

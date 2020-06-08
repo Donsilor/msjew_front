@@ -742,6 +742,7 @@
     "storeName": "Hong Kong. Universal Trade Centre",
     "address": "Address",
     "addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetailUs": "Room 1306, Building A, IBC Business Jewelry Building, No. 3008, Buxin Road, Dushu Community, Dongxiao Street, Luohu District, Shenzhen",
     "tel": "Phone",
     "email": "E-mail",
     "title": "BDD Jewelry Mall",
@@ -2135,7 +2136,8 @@
 		"store": "Store",
 		"storeName": "Hong Kong. Universal Trade Centre",
 		"address": "Address",
-		"addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetailUs": "Room 1306, Building A, IBC Business Jewelry Building, No. 3008, Buxin Road, Dushu Community, Dongxiao Street, Luohu District, Shenzhen",
 		"tel": "Tel",
 		"email": "E-mail",
 
