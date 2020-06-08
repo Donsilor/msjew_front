@@ -147,7 +147,17 @@
           </div> --> 
         </div>
         <div class="help">
-          <a href="tel:+852 2165 3905">
+          <a v-if="this.$store.state.platform === 21" href="tel:0755 25169121">
+            <div class="item">
+              <div class="item-icon">
+                <i class="iconfont iconphone"></i>
+              </div>
+              <div class="item-name">
+                {{ lang.tel }}
+              </div>
+            </div>
+          </a>
+          <a v-else href="tel:+852 2165 3905">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconphone"></i>
@@ -159,7 +169,17 @@
           </a>
         </div>
         <div class="help">
-          <a href="mailto:service@bddco.com">
+          <a v-if="this.$store.state.platform === 21" href="mailto:e-service@bddco.com">
+            <div class="item">
+              <div class="item-icon">
+                <i class="iconfont iconyouxiang"></i>
+              </div>
+              <div class="item-name">
+                {{ lang.mail }}
+              </div>
+            </div>
+          </a>
+          <a v-else href="mailto:service@bddco.com">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconyouxiang"></i>
