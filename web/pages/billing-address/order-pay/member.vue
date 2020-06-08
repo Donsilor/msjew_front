@@ -868,9 +868,7 @@
               </div>
             </div>
             <div class="detail-line">
-              <div>
-                {{ $t(`${lang}.totalMoney`) }}
-              </div>
+              <div>{{ $t(`${lang}.totalMoney`) }}</div>
               <div class="hkd color-pink">
                 {{ $store.state.coin }}
                 {{ formatMoney(orderTotalAmount) }}
@@ -904,9 +902,7 @@
             </div>
 
             <div class="detail-line">
-              <div class="font-size-16 color-333">
-                {{ $t(`${lang2}.NeedPay`) }}
-              </div>
+              <div class="font-size-16 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
               <div class="hkd color-pink price-big">
                 {{ $store.state.coin }}
                 {{ formatMoney(ultimatelyPay) }}
@@ -1805,9 +1801,7 @@
               </div>
             </div>
             <div class="detail-line">
-              <div>
-                {{ $t(`${lang}.totalMoney`) }}
-              </div>
+              <div>{{ $t(`${lang}.totalMoney`) }}</div>
               <div class="hkd color-pink">
                 {{ $store.state.coin }}
                 {{ formatMoney(orderTotalAmount) }}
@@ -1827,8 +1821,8 @@
             <div v-if="ifShowCoupon" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
               <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': !couponCodeR.couponId}" @click="showUseCoupon = true">
-                <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
-                <!-- <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div> -->
+                <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
+                <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
               </div>
             </div>
 
@@ -1841,9 +1835,7 @@
             </div>
 
             <div class="detail-line">
-              <div class="font-size-14 color-333">
-                {{ $t(`${lang2}.NeedPay`) }}
-              </div>
+              <div class="font-size-14 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
               <div class="hkd color-pink price-big">
                 {{ $store.state.coin }}
                 {{ formatMoney(ultimatelyPay) }}
