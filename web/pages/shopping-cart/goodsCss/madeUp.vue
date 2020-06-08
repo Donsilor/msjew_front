@@ -3,7 +3,7 @@
     <div class="good-info">
       <nuxt-link :to="getJumpLink(g)">
         <div class="good-info-line">
-          <div class="good-img" @click="goDetail()">
+          <div class="good-img" @click="goDetail()" style="border: 2px solie saddlebrowns;">
             <img
               :src="imageStrToArray(g.data[0].simpleGoodsEntity.goodsImages)[0]"
             />

@@ -221,11 +221,11 @@ export default {
       )
       // console.log(888,ct,id1,id2);
       if (!id2) {
-        if(ct === 1){
-          var url = `/web/goods/diamond/detail`
-        }else{
+        // if(ct === 1){
+          // var url = `/web/goods/diamond/detail`
+        // }else{
           var url = `/web/goods/style/detail`
-        }
+        // }
         this.$axios
           .post(url, data1)
           .then(res => {
@@ -253,14 +253,14 @@ export default {
           })
       } else {
 
-        if(ct === 1){
-          var url1 = `/web/goods/diamond/detail`
+        // if(ct === 1){
+          // var url1 = `/web/goods/diamond/detail`
           var url2 = `/web/goods/style/detail`
-        }else{
+        // }else{
           var url1 = `/web/goods/style/detail`
-          var url2 = `/web/goods/diamond/detail`
-        }
-      
+          // var url2 = `/web/goods/diamond/detail`
+        // }
+
         await this.$axios
           .post(url1, data1)
           .then(res => {
@@ -271,11 +271,11 @@ export default {
                 parseInt(this.steps.steps[0].goodsDetailsId) ===
                 parseInt(data.details[i].id)
               ) {
-				if(data.details[i].coupon.hasOwnProperty('discount')){
-					this.price1 = data.details[i].coupon.discount.price
-				}else{
-					this.price1 = data.details[i].retailMallPrice
-				}
+                if(data.details[i].coupon.hasOwnProperty('discount')){
+                  this.price1 = data.details[i].coupon.discount.price
+                }else{
+                  this.price1 = data.details[i].retailMallPrice
+                }
               }
             }
           })
@@ -296,17 +296,11 @@ export default {
                 parseInt(this.steps.steps[1].goodsDetailsId) ===
                 parseInt(data.details[i].id)
               ) {
-                // if(data.details[i].coupon.hasOwnProperty('discount')){
-                // 	this.price2 = data.details[i].coupon.discount.price;
-                // }else{
-                // 	this.price2 = data.details[i].retailMallPrice
-                // }
-				
-				if(data.coupon.hasOwnProperty('discount')){
-					this.price2 = data.coupon.discount.price
-				}else{
-					this.price2 = data.details[i].retailMallPrice
-				}
+                if(data.details[i].coupon.hasOwnProperty('discount')){
+                  this.price2 = data.details[i].coupon.discount.price
+                }else{
+                  this.price2 = data.details[i].retailMallPrice
+                }
               }
             }
           })

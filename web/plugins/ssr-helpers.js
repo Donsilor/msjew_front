@@ -25,18 +25,25 @@ export default function({ req, res, app, store }) {
 
   // 金額按千位逗號分隔
   Vue.prototype.formatMoney = Helpers.formatMoney
-  
+
   // 打折由百分比换成小数点
   Vue.prototype.discountConversion = Helpers.discountConversion
-  
+
   // 判断是否有打折活动
   Vue.prototype.couponType = Helpers.couponType
-  
+
   // getTime 时间转换
   Vue.prototype.changeTime = Helpers.changeTime
-  
+
   // 获取cookie
   Vue.prototype.getCookie = Helpers.getCookie
+
+    // 浮点数-加
+  Vue.prototype.floatAdd = Helpers.floatAdd
+  
+  // 浮点数-减
+  Vue.prototype.floatSub = Helpers.floatSub
+
 
   //  公共样式顶部返回按钮的函数
   Vue.prototype.goBack = function(router) {

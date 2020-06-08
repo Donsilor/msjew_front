@@ -297,31 +297,25 @@ export default {
 
             // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
 
-            if(this.good[j].groupType == 2){
-              if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
-                // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
-                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[0].coupon.discount.price)
-              }else{
-                // this.totalPrice -=parseFloat(this.good[i].price)
-                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].price)
-              }
+			if(this.good[j].groupType == 2){
+				if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
+				  this.totalPrice -=parseFloat(this.good[j].data[0].coupon.discount.price)
+				}else{
+				  this.totalPrice -=parseFloat(this.good[j].price)
+				}
 
-              if(this.good[j].data[1].coupon.hasOwnProperty('discount')){
-                // this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
-                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[1].coupon.discount.price)
-              }else{
-                // this.totalPrice -=parseFloat(this.good[i].price)
-                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].price)
-              }
-            }else{
-              if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
-                // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
-                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[0].coupon.discount.price)
-              }else{
-                // this.totalPrice -=parseFloat(this.good[i].price)
-                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].price)
-              }
-            }
+				if(this.good[j].data[1].coupon.hasOwnProperty('discount')){
+				  this.totalPrice -=parseFloat(this.good[j].data[1].coupon.discount.price)
+				}else{
+				  this.totalPrice -=parseFloat(this.good[j].price)
+				}
+			}else{
+				if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
+				  this.totalPrice -=parseFloat(this.good[j].data[0].coupon.discount.price)
+				}else{
+				  this.totalPrice -=parseFloat(this.good[j].price)
+				}
+			}
           }
           // console.log("price=====2",this.good)
           // this.tickNum = this.good.length
@@ -351,6 +345,7 @@ export default {
         this.totalNum = 0
         this.totalPrice = 0
         for (const i in this.good) {
+			console.log(888,i)
           if(this.good[i].groupType == 1){
              if(parseInt(this.good[i].data[0].ringsSimpleGoodsEntity.status) === 0){
                 this.good[i].tick = false
@@ -377,31 +372,25 @@ export default {
 
           // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
 
-        if(this.good[i].groupType == 2){
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
-          }else{
-            // this.totalPrice -=parseFloat(this.good[i].price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].price)
-          }
+		  if(this.good[i].groupType == 2){
+		  	if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+		  	  this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+		  	}else{
+		  	  this.totalPrice -=parseFloat(this.good[i].price)
+		  	}
 
-          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
-            // this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].coupon.discount.price)
-          }else{
-            // this.totalPrice -=parseFloat(this.good[i].price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].price)
-          }
-        }else{
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
-          }else{
-            // this.totalPrice -=parseFloat(this.good[i].price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].price)
-          }
-        }
+		  	if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+		  	  this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
+		  	}else{
+		  	  this.totalPrice -=parseFloat(this.good[i].price)
+		  	}
+		  }else{
+		  	if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+		  	  this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+		  	}else{
+		  	  this.totalPrice -=parseFloat(this.good[i].price)
+		  	}
+		  }
 
           // this.totalPrice +=parseFloat(this.good[i].price)
         }
@@ -412,61 +401,77 @@ export default {
       this.good = JSON.parse(JSON.stringify(this.good))
     },
     ticksCHeck(i) {
-      this.good[i].tick ? this.tickNum-- : this.tickNum++
-      this.good[i].tick ? this.totalNum-- : this.totalNum++
+      this.totalPrice = 0;
 
-      if(this.good[i].tick){
-        if(this.good[i].groupType == 2){
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
-            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[0].coupon.discount.price)
-          }else{
-            // this.totalPrice -=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
-            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].simpleGoodsEntity.salePrice)
-          }
-
-          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
-            // this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
-            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[1].coupon.discount.price)
-          }else{
-            // this.totalPrice -=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
-            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].simpleGoodsEntity.salePrice)
-          }
-        }else{
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
-            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[0].coupon.discount.price)
-          }else{
-            // this.totalPrice -=parseFloat(this.good[i].price)
-            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].price)
-          }
-        }
-      }else{
-        if(this.good[i].groupType == 2){
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            // this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
-          }else{
-            this.totalPrice +=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
-          }
-
-          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
-            // this.totalPrice +=parseFloat(this.good[i].data[1].coupon.discount.price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].coupon.discount.price)
-          }else{
-            // this.totalPrice +=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].simpleGoodsEntity.salePrice)
-          }
-        }else{
-          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
-            // this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
-          }else{
-            // this.totalPrice +=parseFloat(this.good[i].price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].price)
+      const data = []
+      for (const ii in this.good) {
+        if(this.good[ii].tick) {
+          for (const iii in this.good[ii].data) {
+            const data = this.good[ii].data[iii]
+            
+            if(data.coupon.hasOwnProperty('discount')) {
+              this.totalPrice +=parseFloat(data.coupon.discount.price)
+            }
+            else {
+              this.totalPrice += parseFloat(data.price)
+            }
           }
         }
       }
+
+       //console.log("length",this.good[i])
+
+      console.log(data)
+      // if(this.good[i].groupType == 1 || this.good[i].groupType == 2){
+      //     this.good[i].tick ? this.tickNum -= 1  : this.tickNum += 1
+      //     this.good[i].tick ? this.totalNum -= 1 : this.totalNum +=1
+      // }else{
+      //    this.good[i].tick ? this.tickNum-- : this.tickNum++
+      //    this.good[i].tick ? this.totalNum-- : this.totalNum++
+      // }
+
+      // this.good[i].tick ? this.tickNum-- : this.tickNum++
+      // this.good[i].tick ? this.totalNum-- : this.totalNum++
+
+      // if(this.good[i].tick){
+      //   if(this.good[i].groupType == 2){
+      //     if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+      //       this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+      //     }else{
+      //       this.totalPrice -=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
+      //     }
+
+      //     if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+      //       this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
+      //     }else{
+      //       this.totalPrice -=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
+      //     }
+      //   }else{
+
+      //   }
+      // }
+      // else{
+      //     console.log(this.good[i])
+      //   if(this.good[i].groupType == 2){
+      //     if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+      //       this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
+      //     }else{
+      //       this.totalPrice +=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
+      //     }
+
+      //     if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+      //       this.totalPrice +=parseFloat(this.good[i].data[1].coupon.discount.price)
+      //     }else{
+      //       this.totalPrice +=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
+      //     }
+      //   }else{
+      //     if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+      //       this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
+      //     }else{
+      //       this.totalPrice +=parseFloat(this.good[i].price)
+      //     }
+      //   }
+      // }
 
 
       this.good[i].tick = !this.good[i].tick

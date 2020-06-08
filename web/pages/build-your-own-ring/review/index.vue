@@ -18,7 +18,7 @@
                   <div class="title-block-name">
 				    <span class="discount-icon fl" v-if="block1.couponType == 1">{{ language == 'en_US' ? this.block1.couponNum+'%' : discountConversion(this.block1.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
 				    <span class="favourable-icon fl" v-if="block1.couponType == 2">￥</span>
-					  
+
                     {{ block1.name }}
                   </div>
                   <div class="title-block-sku">
@@ -34,7 +34,7 @@
                   {{ formatNumber(block1.oldPrice) }}
                 </span>
               </div>
-			  
+
 			  <div class="right-info-block product-price">
 			    <span class="coin">
 				  {{ info.coinType }}
@@ -51,7 +51,7 @@
                   <div class="title-block-name">
 					<span class="discount-icon fl" v-if="block2.couponType == 1">{{ language == 'en_US' ? this.block2.couponNum+'%' : discountConversion(this.block2.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
 					<span class="favourable-icon fl" v-if="block2.couponType == 2">￥</span>
-					  
+
                     {{ block2.name }}
                   </div>
                   <div class="title-block-sku">
@@ -67,7 +67,7 @@
                   {{ formatNumber(block2.oldPrice) }}
                 </span>
               </div>
-			  
+
 			  <div class="right-info-block product-price">
 			    <span class="coin">
 			      {{ info.coinType }}
@@ -87,7 +87,7 @@
 				  {{ formatNumber(oldPrice) }}
 				</span>
 			</div>
-			
+
 			<div class="total-price">
 				<span class="coin">
 				  {{ info.coinType }}
@@ -348,7 +348,6 @@ export default {
     return getSingleRing()
   },
   mounted() {
-	  console.log(7788, this.info)
     const _this = this
     _this.$nextTick(() => {
       this.steps = JSON.parse(
@@ -356,7 +355,7 @@ export default {
       )
       this.getPrice(this.steps.steps[0].goodsId, this.steps.steps[1].goodsId,this.steps.steps[0].ct)
     })
-	
+
 	this.language = this.getCookie('language')
   },
   methods: {
@@ -399,18 +398,18 @@ export default {
         JSON.parse(JSON.stringify({ goodsId: id2 })),
         false
       )
-      if(ct === 1){
-        var url1 = `/web/goods/diamond/detail`;
-        var url2 = `/web/goods/style/detail`;
-      }else{
+      // if(ct === 1){
+        // var url1 = `/web/goods/diamond/detail`;
+        // var url2 = `/web/goods/style/detail`;
+      // }else{
         var url1 = `/web/goods/style/detail`;
-        var url2 = `/web/goods/diamond/detail`;
-      }
+        // var url2 = `/web/goods/diamond/detail`;
+      // }
       await this.$axios
         .post(url1, data1)
         .then(data => {
           var res = data.data;
-          console.log(`11111111111111`,res,this.steps.steps )
+          // console.log(`11111111111111`,res,this.steps.steps )
           this.block1.name = res.goodsName
           this.block1.sku = res.goodsCode
           this.block1.pick = res.goodsImages.split(`,`)[0] || ``
@@ -420,15 +419,15 @@ export default {
               parseInt(res.details[i].id)
             ) {
               this.block1.oldPrice = res.details[i].retailMallPrice
-			  
-			  if(res.details[i].coupon.hasOwnProperty('discount')){
-				  this.block1.newPrice = res.details[i].coupon.discount.price;
-				  this.block1.couponType = 1;
-				  this.block1.couponNum = res.details[i].coupon.discount.discount;
-			  }else{
-				  this.block1.newPrice = res.details[i].retailMallPrice;
-				  this.block1.couponType = 2;
-			  }
+
+              if(res.details[i].coupon.hasOwnProperty('discount')){
+                this.block1.newPrice = res.details[i].coupon.discount.price;
+                this.block1.couponType = 1;
+                this.block1.couponNum = res.details[i].coupon.discount.discount;
+              }else{
+                this.block1.newPrice = res.details[i].retailMallPrice;
+                this.block1.couponType = 2;
+              }
             }
           }
         })
@@ -440,10 +439,10 @@ export default {
           }
         })
       await this.$axios
-        .post(url2, data2)
+        .post(url1, data2)
         .then(data => {
           var res = data.data;
-          console.log( `2222222222222222222`,res)
+          // console.log( `2222222222222222222`,res)
           this.block2.name = res.goodsName
           this.block2.sku = res.goodsCode
           this.block2.pick = res.goodsImages.split(`,`)[0] || ``
@@ -453,22 +452,15 @@ export default {
               parseInt(res.details[i].id)
             ) {
               this.block2.oldPrice = res.details[i].retailMallPrice
-			  
-			  if(res.coupon.hasOwnProperty('discount')){
-				  this.block2.newPrice = res.coupon.discount.price;
-				  this.block2.couponType = 1;
-				  this.block2.couponNum =  res.coupon.discount.discount
-			  }else{
-				  this.block2.newPrice = res.details[i].retailMallPrice;
-				  this.block2.couponType = 2;
-			  }
-			  
-			  // 未传coupon字段
-			  // if(res.details[i].coupon.hasOwnProperty('discount')){
-			  // 	this.block2.newPrice = res.details[i].coupon.discount.price
-			  // }else{
-			  // 	this.block2.newPrice = res.details[i].retailMallPrice
-			  // }
+
+              if(res.details[i].coupon.hasOwnProperty('discount')){
+                this.block2.newPrice = res.details[i].coupon.discount.price
+                this.block2.couponType = 1;
+                this.block2.couponNum =  res.details[i].coupon.discount.discount
+              }else{
+                this.block2.newPrice = res.details[i].retailMallPrice
+                this.block2.couponType = 2;
+              }
             }
           }
         })
@@ -501,7 +493,7 @@ export default {
           group_type: 2,
           serviceId: 0,
           serviceVal: 'string',
-          
+
         },
         {
           goods_num: 1,
@@ -610,12 +602,12 @@ export default {
         font-size: 20px;
       }
     }
-	
+
 	.product-price.old-price{
 		color: #c3c3c3;
 		font-size: 14px;
 		line-height: 58px;
-		
+
 		.coin {
 		  font-size: 14px;
 		}

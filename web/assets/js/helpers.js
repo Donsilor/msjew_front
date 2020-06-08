@@ -239,7 +239,7 @@ class Helpers {
 
     return Y+'.'+M+'.'+D
   }
-  
+
   // 获取cookie
   getCookie(cname) {
     const name = cname + '='
@@ -249,6 +249,69 @@ class Helpers {
       if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
     }
     return ''
+  }
+
+  // floatAdd(a, b) {
+  //   a = a + '';
+  //   b = b + '';
+
+  //   var c = a.split('.')[0],
+  //       d = a.split('.')[1],
+  //       e = b.split('.')[0],
+  //       f = b.split('.')[1],
+  //       res = 0;
+
+  //   if(!d){
+  //     d = '0'
+  //   }
+  //   if(!f){
+  //     f = '0'
+  //   }
+
+  //   var len1 = d.length,
+  //       len2 = f.length;
+
+  //   var k;
+  //   if(len1 > len2){
+  //     k = len1
+  //   }else{
+  //     k = len2
+  //   }
+
+  //   res = (a*Math.pow(10,k)+b*Math.pow(10,k))/(Math.pow(10,k))
+
+  //   // console.log(999,res)
+
+  // }
+
+  floatAdd(a, b) {
+      var c, d, e;
+      try {
+          c = a.toString().split(".")[1].length;
+      } catch (f) {
+          c = 0;
+      }
+      try {
+          d = b.toString().split(".")[1].length;
+      } catch (f) {
+          d = 0;
+      }
+      return e = Math.pow(10, Math.max(c, d)), (a * e + b * e) / e;
+  }
+
+  floatSub(a, b) {
+      var c, d, e;
+      try {
+          c = a.toString().split(".")[1].length;
+      } catch (f) {
+          c = 0;
+      }
+      try {
+          d = b.toString().split(".")[1].length;
+      } catch (f) {
+          d = 0;
+      }
+      return e = Math.pow(10, Math.max(c, d)), (a * e - b * e) / e;
   }
 }
 

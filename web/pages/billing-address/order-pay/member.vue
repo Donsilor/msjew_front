@@ -2808,6 +2808,7 @@ export default {
       const cards = k || [];
       const arr = [];
       var obj = {cart_id: '', coupon_id: ''};
+
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
           obj.cart_id = this.good[i].data[0].id
@@ -2836,6 +2837,8 @@ export default {
         }
 
       }
+      
+      console.log(778,arr)
 
       const datas={
         carts: arr,
@@ -2848,7 +2851,7 @@ export default {
       this.$axios
         .post('/web/member/order/tax', datas)
         .then(res => {
-          // console.log("tex",res)
+          console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
 

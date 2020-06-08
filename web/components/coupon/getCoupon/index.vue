@@ -427,7 +427,7 @@
     font-size: 15px;
     text-align: center;
     color: #fff;
-    padding-top: 36px;
+    padding: 36px 20px 0;
     box-sizing: border-box;
     letter-spacing: 1px;
     transform: rotate(-45deg);
