@@ -7,7 +7,7 @@
       <div>
         <h1 class="title">
           <i class="iconfont icon_xuanzeyuyanhuobi"></i>
-          <span>{{ lang.chooseLanguageCoin }}</span>
+          <!-- <span>{{ lang.chooseLanguageCoin }}</span> -->
         </h1>
         <div v-if="this.$store.state.platform == 31" class="select-line-box">
           <input :value="languages" type="text" disabled/>

@@ -44,7 +44,7 @@
 
                 <div class="discount-price" v-else>
                   <div class="old-price">{{ info1.coinType }} {{ formatNumber(info1.salePrice) }}</div>
-                  <div class="new-price">{{ info1.coinType }} {{ formatNumber(info1.coupon.discount.price) }}</div>
+                  <div class="new-price">{{ info1.coinType }} {{ formatNumber(price1) }}</div>
                 </div>
 
                 <!-- {{ c.coinType }} {{ formatNumber(c.retailMallPrice) }} -->
@@ -89,7 +89,7 @@
 
             <div class="discount-price" v-else>
               <div class="old-price">{{ info2.coinType }} {{ formatNumber(info2.salePrice) }}</div>
-              <div class="new-price">{{ info2.coinType }} {{ formatNumber(info2.coupon.discount.price) }}</div>
+              <div class="new-price">{{ info2.coinType }} {{ formatNumber(price2) }}</div>
             </div>
 
             <!-- {{ info2.details[0].coinType }} -->
@@ -103,12 +103,7 @@
       <div v-for="(c, index) in info1.details" :key="index">
         <span v-if="parseInt(c.id) === parseInt(infoCheck)" class="price-add">
           {{ c.coinType }}
-          {{
-            formatNumber(
-              c.retailMallPrice +
-                info2.details[0].retailMallPrice
-            )
-          }}
+          {{ formatNumber(price1 + price2) }}
         </span>
       </div>
     </div>
@@ -157,6 +152,31 @@ export default {
     bdArr: function() {
       this.getThatS()
       this.lock = false
+    }
+  },
+  computed:{
+    price1() {
+      var price1=0;
+      for(var i=0; i<this.info1.details.length; i++){
+        if(parseInt(this.info1.details[i].id) === parseInt(this.infoCheck)){
+          if(this.info1.details[i].coupon.hasOwnProperty('discount') ){
+            price1 = this.info1.details[i].coupon.discount.price
+          }else{
+            price1 = this.info1.details[i].coupon.price
+          }
+        }
+      }
+      return price1
+    },
+    price2() {
+      var price2=0;
+      if(this.info2.coupon.hasOwnProperty('discount') ){
+        price2 = this.info2.coupon.discount.price
+      }else{
+        price2 = this.info2.coupon.price
+      }
+
+      return price2
     }
   },
   mounted() {
