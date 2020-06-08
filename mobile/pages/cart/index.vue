@@ -69,29 +69,80 @@
               </div>
               <div v-if="item.goodsType == '19'" class="double">
                 <div @click="godetails(item, index)">
+                  <img :src="imageStrToArray(item.goodsImages)[0]" />
+                  <span v-if="!getStatus(item, index)" class="failed">
+                    {{ lang.failed }}
+                  </span>
+                  <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
+                    <h4 class="ow-h2">
+                      {{ item.goodsName }}
+                    </h4>
+                    <p>SKU：{{ ring.goods_sn }}</p>
+                    <p class="p">
+                      {{
+                        getDubleConfig(ring.lang.goods_spec)
+                      }}
+                    </p>
+                    <!-- <div class="cut-line"></div> -->
+                    <div v-if="item.goodsType == '19'" class="btn-type">
+                      {{ lang.ring }}
+                    </div>
+                    <div v-if="item.groupType == 1" class="btn-type">
+                      {{ lang.coustom }}
+                    </div>
+                    <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                      <h4 v-if="item.goodsType == 2" class="ow-h2 margin-top-20">
+                        {{ list[index + 1].goodsName }}
+                      </h4>
+                      <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                        SKU：{{ list[index + 1].sku }}
+                      </p>
+                      <p>
+                        {{
+                          getconfig(
+                            list[index + 1].config,
+                            list[index + 1].simpleGoodsEntity.specs
+                          )
+                        }}
+                      </p>
+                      <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+
+                      <p v-if="item.groupType === 1">
+                        <br/>
+                        <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
+                      </p>
+                    </div>
+                  </div>
+
+                  <b class="double-ring-price">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                </div>
+              </div>
+              <div v-if="item.groupType === 2" class="double customization">
+                <div @click="godetails(item, index)">
                         <img :src="imageStrToArray(item.goodsImages)[0]" />
                         <span v-if="!getStatus(item, index)" class="failed">
                           {{ lang.failed }}
                         </span>
-                        <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
+                        <div class="right">
                           <h4 class="ow-h2">
                             {{ item.goodsName }}
                           </h4>
-                          <p>SKU：{{ ring.goods_sn }}</p>
+                          <p>SKU：{{ item.sku }}</p>
                           <p class="p">
                             {{
                               getconfig(item.config, item.simpleGoodsEntity.specs)
                             }}
                           </p>
-                          <!-- <div class="cut-line"></div> -->
-                          <div v-if="item.goodsType == '19'" class="btn-type">
+                          <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                          <div v-if="item.groupType === 1" class="btn-type">
                             {{ lang.ring }}
                           </div>
-                          <div v-if="item.groupType == 1" class="btn-type">
+                          <div v-if="item.groupType === 2" class="btn-type">
                             {{ lang.coustom }}
                           </div>
                           <div v-if="item.groupType !== 0 && index !== list.length - 1">
-                            <h4 v-if="item.goodsType == '19'" class="ow-h2 margin-top-20">
+                            <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
                               {{ list[index + 1].goodsName }}
                             </h4>
                             <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
@@ -415,7 +466,7 @@ export default {
       if (list.length > 0) {
         // console.log("item",list)
         list.map((item, index) => {
-
+console.log("itemlist",item)
           if (index === list.length - 1) {
             text = text + item.configAttrIVal
           } else {
@@ -431,6 +482,30 @@ export default {
           }
         })
       }
+      return text
+    },
+    // 属性数值转化成字符串
+    getDubleConfig(good_spec) {
+      let text = ''
+      if (good_spec.length > 0) {
+        good_spec.map((item, index) => {
+        console.log("good_spec",item)
+
+          if (index === good_spec.length - 1) {
+            text = text + item.attr_name
+          } else {
+            text = text + item.attr_value + ' /  '
+          }
+        })
+      }
+      // if (list2 && list2.length > 0) {
+      //   list2.map((item, index) => {
+      //     if (item.configId === 196) {
+      //       console.log(list2, '9999', item)
+      //       text = text + ' /  ' + item.configAttrIVal
+      //     }
+      //   })
+      // }
       return text
     },
 
@@ -542,7 +617,7 @@ export default {
               //   ? item.ringsSimpleGoodsEntity.name
               //   : item.simpleGoodsEntity.goodsName,
             config:
-              item.goodsType === 19
+              item.goodsType == 19
                 ? item.ring
                 : item.simpleGoodsEntity.categoryId === 1
                 ? item.simpleGoodsEntity.baseConfig
@@ -767,63 +842,131 @@ export default {
             line-height: 125px;
             background: rgba(51, 51, 51, 0.2);
           }
-          .right {
-            margin-left: 140px;
-            padding-bottom: 15px;
-            // border-bottom: 1px solid #f5f5f5;
-            text-align: left;
-            min-height: 65px;
-            .cut-line{
-              height:1px;
-              display:inline-block;
-              background:#f5f5f5;
-              width:50%;
+          .single{
+            .right {
+              margin-left: 140px;
+              padding-bottom: 24px;
+              border-bottom: 1px solid #f5f5f5;
+              text-align: left;
+              min-height: 125px;
+              .cut-line{
+                height:1px;
+                display:inline-block;
+                background:#f5f5f5;
+                width:50%;
+              }
+              h4 {
+                display: inline-block;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+              }
+              p {
+                font-size: 13px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(153, 153, 153, 1);
+              }
+              .p {
+                margin-bottom: 4px;
+              }
+              b {
+                font-size: 17px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(243, 163, 145, 1);
+                font-family: twCenMt;
+              }
+              .btn-type {
+                position: absolute;
+                top: 174px;
+                left: 34px;
+                width: 80px;
+                height: 26px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 4px;
+                font-size: 12px;
+                line-height: 26px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+              }
             }
-            h4 {
-              display: inline-block;
-              max-height: 40px;
-              font-size: 14px;
-              line-height: 20px;
-              font-family: PingFangHK-Regular;
-              font-weight: 400;
-              color: rgba(51, 51, 51, 1);
-            }
-            p {
-              font-size: 13px;
-              line-height: 20px;
-              font-weight: 400;
-              color: rgba(153, 153, 153, 1);
-            }
-            .p {
-              margin-bottom: 4px;
-            }
-            b {
+          }
+          .double{
+            .double-ring-price{
               font-size: 17px;
               line-height: 20px;
               font-weight: 400;
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
+              margin-left: 10px;
+              display: inline-block;
+              margin-top: 10px;
             }
-            .btn-type {
-              position: absolute;
-              top: 174px;
-              left: 34px;
-              width: 80px;
-              height: 26px;
-              text-align: center;
-              background: rgba(245, 240, 236, 1);
-              border: 1px solid rgba(215, 202, 196, 1);
-              border-radius: 4px;
-              font-size: 12px;
-              line-height: 26px;
-              font-weight: 400;
-              color: rgba(148, 116, 101, 1);
+            .right {
+              margin-left: 140px;
+              padding-bottom: 15px;
+              // border-bottom: 1px solid #f5f5f5;
+              text-align: left;
+              min-height: 65px; 
+              .cut-line{
+                height:1px;
+                display:inline-block;
+                background:#f5f5f5;
+                width:50%;
+              }
+              h4 {
+                display: inline-block;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+              }
+              p {
+                font-size: 13px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(153, 153, 153, 1);
+              }
+              .p {
+                margin-bottom: 4px;
+              }
+              b {
+                font-size: 17px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(243, 163, 145, 1);
+                font-family: twCenMt;
+              }
+              .btn-type {
+                position: absolute;
+                top: 174px;
+                left: 34px;
+                width: 80px;
+                height: 26px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 4px;
+                font-size: 12px;
+                line-height: 26px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+              }
+            }
+            .right:nth-child(3) {
+              // padding-bottom: 15px;
+              border-bottom: 1px solid #f5f5f5;
             }
           }
-          .right:last-child {
-            padding-bottom: 35px;
-            border-bottom: 1px solid #f5f5f5;
-          }
+          
           .domore {
             display: flex;
             justify-content: space-between;
