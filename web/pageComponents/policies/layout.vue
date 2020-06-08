@@ -8,7 +8,40 @@
     <el-container>
       <div class="nav">
         <el-aside width="205px" class="el-aside-nav">
-          <ul class="list-top">
+          <ul class="list-top" v-if="this.$store.state.platform === 20">
+            <li v-for="(item, index) in listCn" :key="index" class="list-put">
+              <h2 @click="showToggle(item)">
+                <i class="icon iconfont">&#xe66d;</i>
+                {{ item.name }}
+                <i
+                  class="icon iconfont down"
+                  v-html="item.isSubShow ? '&#xe663;' : '&#xe652;'"
+                ></i>
+              </h2>
+              <ul v-show="item.isSubShow">
+                <li
+                  v-for="(subItem, sindex) in item.subItems"
+                  :key="sindex"
+                  :class="{ active: index == parentNum && sindex == num }"
+                >
+                  <h3 @click="Jump(subItem.to, index, sindex)">
+                    <span v-if="index > 0"></span>
+                    <i v-if="index == 0 && sindex == 0" class="icon iconfont"
+                      >&#xe641;</i
+                    >
+                    <i v-if="index == 0 && sindex == 1" class="icon iconfont"
+                      >&#xe66a;</i
+                    >
+                    <i v-if="index == 0 && sindex == 2" class="icon iconfont"
+                      >&#xe66e;</i
+                    >
+                    <em>{{ subItem.name }}</em>
+                  </h3>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="list-top" v-else>
             <li v-for="(item, index) in list" :key="index" class="list-put">
               <h2 @click="showToggle(item)">
                 <i class="icon iconfont">&#xe66d;</i>
@@ -77,6 +110,116 @@ export default {
             },
             {
               name: this.$t(`${lang}.workEmail`),
+              to: {
+                path: '/contact-us'
+              }
+            }
+          ]
+        },
+        {
+          name: this.$t(`${lang}.chooseBDD`),
+          isSubShow: true,
+          subItems: [
+            {
+              name: this.$t(`${lang}.qualityAndValue`),
+              to: {
+                path: '/policies/quality-value'
+              }
+            },
+            {
+              name: this.$t(`${lang}.returnAndRefundPolicy`),
+              to: {
+                path: '/policies/return-refund-policy'
+              }
+            },
+            {
+              name: this.$t(`${lang}.findYourRingSize`),
+              to: {
+                path: '/education/rings/size'
+              }
+            }
+          ]
+        },
+        {
+          name: this.$t(`${lang}.aboutBDD`),
+          isSubShow: true,
+          subItems: [
+            // {
+            //   name: this.$t(`${lang}.BDDBrandStory`),
+            //   to: {
+            //     path: '/brand-story'
+            //   }
+            // },
+            {
+              name: this.$t(`${lang}.diamondKnowledge`),
+              to: {
+                path: '/education/diamonds/carat'
+              }
+            },
+            {
+              name: this.$t(`${lang}.paymentMethods`),
+              to: {
+                path: '/policies/payment-methods'
+              }
+            }
+          ]
+        },
+        {
+          name: this.$t(`${lang}.BDDPolicy`),
+          isSubShow: true,
+          subItems: [
+            {
+              name: this.$t(`${lang}.freeShippingService`),
+              to: {
+                path: '/policies/free-shipping'
+              }
+            },
+            {
+              name: this.$t(`${lang}.deliveryPolicy`),
+              to: {
+                path: '/policies/shipping'
+              }
+            },
+            {
+              name: this.$t(`${lang}.internationalPolicy`),
+              to: {
+                path: '/policies/international'
+              }
+            },
+            {
+              name: this.$t(`${lang}.privacyPolicy`),
+              to: {
+                path: '/policies/privacy-policy'
+              }
+            },
+            {
+              name: this.$t(`${lang}.termsAndConditions`),
+              to: {
+                path: '/policies/terms-and-conditions'
+              }
+            }
+          ]
+        }
+      ],
+      listCn: [
+        {
+          name: this.$t(`${lang}.BDDService`),
+          isSubShow: true,
+          subItems: [
+            {
+              name: this.$t(`${lang}.workTimeCn`),
+              to: {
+                path: '/contact-us'
+              }
+            },
+            {
+              name: this.$t(`${lang}.workTelCn`),
+              to: {
+                path: '/contact-us'
+              }
+            },
+            {
+              name: this.$t(`${lang}.workEmailCn`),
               to: {
                 path: '/contact-us'
               }

@@ -7,7 +7,24 @@
           <span class="group-name">{{ lang.custoService }}</span>
           <i class="iconfont iconxiala status-icon"></i>
         </div>
-        <ul class="group-content">
+        <ul class="group-content" v-if="this.$store.state.platform === 21">
+          <li class="item">
+            <span>{{ lang.custoServiceTimeCn }}</span>
+          </li>
+          <li class="item">
+            <span>
+              {{ lang.callUs }}：
+              <a href="tel:(852) 2165 3905">0755 25169121</a>
+            </span>
+          </li>
+          <li class="item">
+            <span>
+              {{ lang.emailUs }}：
+              <a href="mailto:service@bddco.com">e-service@bddco.com</a>
+            </span>
+          </li>
+        </ul>
+        <ul class="group-content" v-else>
           <li class="item">
             <span>{{ lang.custoServiceTime }}</span>
           </li>
