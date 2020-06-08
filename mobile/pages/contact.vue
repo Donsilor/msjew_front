@@ -126,10 +126,15 @@
           <span class="row-name">{{ lang.store }}</span>
           <span class="row-text">{{ lang.storeName }}</span>
         </div>
-        <div class="info-row" v-show="this.$store.state.platform !== 21">
+        <div class="info-row" v-show="this.$store.state.platform == 21">
           <span class="line"></span>
           <span class="row-name">{{ lang.address }}</span>
           <span class="row-text">{{ lang.addressDetail }}</span>
+        </div>
+        <div class="info-row" v-show="this.$store.state.platform == 31">
+          <span class="line"></span>
+          <span class="row-name">{{ lang.address }}</span>
+          <span class="row-text">{{ lang.addressDetailUs }}</span>
         </div>
         <div class="info-row">
           <span class="line"></span>
