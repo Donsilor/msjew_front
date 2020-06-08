@@ -115,7 +115,7 @@
               </div>
             </div>
             <div class="price">
-              {{ o.coinCode }} {{ formatMoney(doubleRingGoodPrice) }}
+              {{ o.coinCode }} {{ formatMoney(o.details[0].goodsPrice) }}
             </div>
           </div>
 
@@ -501,18 +501,18 @@ export default {
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
-              this.doubleRingGoodPrice = obj.goodsPrice
-              // console.log("obj",obj)
+              // this.doubleRingGoodPrice = obj.goodsPrice
+              // console.log("obj",obj.goodsPrice)
             })
           }
           this.listData = res.data.data
-  //         for(let item of selected){
-  //    for(let items of product){
-  //      if(item.id==items.id){
-  //        items.checked = item.checked
-  //      }
-  //    }
-  // }
+          // for(let item of selected){
+          //   for(let items of product){
+          //     if(item.id==items.id){
+          //       items.checked = item.checked
+          //     }
+          //   }
+          // }
           
           // this.listData.forEach(( item, index ) => {
           //   // console.log("订单",item)
@@ -520,7 +520,7 @@ export default {
           //     console.log("订单",j)
           //   })
           // })
-          // console.log("订单",this.listData)
+          console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {

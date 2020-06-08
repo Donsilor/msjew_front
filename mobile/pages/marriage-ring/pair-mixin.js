@@ -445,8 +445,9 @@ export default {
     },
     doubleRingDetailId(ladyRing, menRing) {
       const _this = this
+      console.log("goodinfo",this.goodInfo.details)
       this.goodInfo.details.map((item, i) => {
-        if(ladyRing==item.ladyRing && menRing==item.menRing || menRing==item.ladyRing && ladyRing==item.menRing) {
+        if(ladyRing == item.ladyRing && menRing == item.menRing || menRing == item.ladyRing && ladyRing == item.menRing) {
           _this.coupleLadyId = item.ladyRing
           _this.coupleMenId = item.menRing
           _this.goodsId = item.id
@@ -454,7 +455,7 @@ export default {
           _this.categoryId = item.categoryId
           _this.goodInfo.salePrice = item.retailMallPrice
           _this.stock = item.stock
-          console.log(item)
+          console.log("goodinfoitem",item)
         }
       })
     },

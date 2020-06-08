@@ -15,7 +15,7 @@
       </swiper>
     </div>
     <div class="title">
-      {{ goodInfo.name }}
+      {{ goodInfo.goodsName }}
     </div>
     <div class="price">
       {{ goodInfo.coinType }}{{ formatNumber(showPrice) }}

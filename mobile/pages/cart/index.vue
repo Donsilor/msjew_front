@@ -18,7 +18,7 @@
               "
               class="mod-item"
             >
-              <div v-if="item.groupType !== 19">
+              <div v-if="item.groupType === 0 && Number(item.goodsType) !== 19" class="single">
                 <div @click="godetails(item, index)">
                         <img :src="imageStrToArray(item.goodsImages)[0]" />
                         <span v-if="!getStatus(item, index)" class="failed">
@@ -67,31 +67,31 @@
                         </div>
                 </div>
               </div>
-              <div v-else>
+              <div v-if="item.goodsType == '19'" class="double">
                 <div @click="godetails(item, index)">
                         <img :src="imageStrToArray(item.goodsImages)[0]" />
                         <span v-if="!getStatus(item, index)" class="failed">
                           {{ lang.failed }}
                         </span>
-                        <div class="right">
+                        <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
                           <h4 class="ow-h2">
                             {{ item.goodsName }}
                           </h4>
-                          <p>SKU：{{ item.sku }}</p>
+                          <p>SKU：{{ ring.goods_sn }}</p>
                           <p class="p">
                             {{
                               getconfig(item.config, item.simpleGoodsEntity.specs)
                             }}
                           </p>
-                          <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
-                          <div v-if="item.groupType === 1" class="btn-type">
+                          <!-- <div class="cut-line"></div> -->
+                          <div v-if="item.goodsType == '19'" class="btn-type">
                             {{ lang.ring }}
                           </div>
-                          <div v-if="item.groupType === 2" class="btn-type">
+                          <div v-if="item.groupType == 1" class="btn-type">
                             {{ lang.coustom }}
                           </div>
                           <div v-if="item.groupType !== 0 && index !== list.length - 1">
-                            <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                            <h4 v-if="item.goodsType == '19'" class="ow-h2 margin-top-20">
                               {{ list[index + 1].goodsName }}
                             </h4>
                             <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
@@ -455,7 +455,7 @@ export default {
     // 获取本地local列表
     getLocalCart() {
       this.$store.dispatch('getLocalCart').then(res => {
-        // console.log("djkashdkasjdklasj",res)
+        console.log("djkashdkasjdklasj",res)
         if (res.length > 0) {
           this.noListData = false
           this.cartList = []
@@ -478,12 +478,12 @@ export default {
                 goods_id: val.goodsDetailsId,
                 goods_type:val.goodsType,
                 group_id:
-                  val.groupType === 1
-                    ? val.groupId
+                  val.goodsType === 1
+                    ? val.goodsId
                     : val.groupType === 2
                     ? item.id
                     : null,
-                group_type: val.goodsType,
+                group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
               console.log("ooooo>>>",val)
@@ -530,38 +530,39 @@ export default {
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
+          console.log("dddd",item)
           const o = {
             isSelect: false,
-            goodsImages:
-              item.groupType === 2
-                ? item.ringsSimpleGoodsEntity.ringImg
-                : item.simpleGoodsEntity.goodsImages,
-            goodsName:
-              item.groupType === 2
-                ? item.ringsSimpleGoodsEntity.name
-                : item.simpleGoodsEntity.goodsName,
+            goodsImages: item.simpleGoodsEntity.goodsImages,
+              // item.goodsType === 19
+              //   ? item.simpleGoodsEntity.goodsImages
+              //   : item.simpleGoodsEntity.goodsImages,
+            goodsName:item.simpleGoodsEntity.goodsName,
+              // item.goodsType === 19
+              //   ? item.ringsSimpleGoodsEntity.name
+              //   : item.simpleGoodsEntity.goodsName,
             config:
-              item.groupType === 2
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.detailConfig
+              item.goodsType === 19
+                ? item.ring
                 : item.simpleGoodsEntity.categoryId === 1
-                ? item.simpleGoodsEntity.specs
+                ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             sku:
-              item.groupType === 2
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
-                    .simpleGoodsDetails.goodsDetailsCode
+              item.goodsType == 19
+                ? item.ring
                 : item.simpleGoodsEntity.simpleGoodsDetails.goodsDetailsCode,
             salePrice:
-              item.groupType === 2
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
+              item.goodsType == 19
+                ? item.simpleGoodsEntity
                     .simpleGoodsDetails.retailMallPrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
-            totalPrice:item.groupType === 2
+            totalPrice:item.goodsType === 19
                 ? item.ringsSimpleGoodsEntity.salePrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
             groupType: item.groupType || 0,
+            goodsType: item.simpleGoodsEntity.categoryId,
             createTime:
-              item.groupType === 2
+              item.goodsType === 19
                 ? item.createTime
                 : item.groupId
                 ? item.groupId
@@ -572,13 +573,13 @@ export default {
             localSn: item.localSn,
             groupId: item.groupId || null,
             simpleGoodsEntity:
-              item.groupType === 2
+              item.goodsType === 19
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
                 : item.simpleGoodsEntity,
             status:
-              item.groupType === 2 ? item.ringsSimpleGoodsEntity.status : 1,
+              item.goodsType === 19 ? item.ringsSimpleGoodsEntity.status : 1,
             goodsStatus:
-              item.groupType === 2
+              item.goodsType === 19
                 ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus
                 : item.simpleGoodsEntity.goodsStatus
           }
@@ -768,10 +769,16 @@ export default {
           }
           .right {
             margin-left: 140px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #f5f5f5;
+            padding-bottom: 15px;
+            // border-bottom: 1px solid #f5f5f5;
             text-align: left;
-            min-height: 125px;
+            min-height: 65px;
+            .cut-line{
+              height:1px;
+              display:inline-block;
+              background:#f5f5f5;
+              width:50%;
+            }
             h4 {
               display: inline-block;
               max-height: 40px;
@@ -812,6 +819,10 @@ export default {
               font-weight: 400;
               color: rgba(148, 116, 101, 1);
             }
+          }
+          .right:last-child {
+            padding-bottom: 35px;
+            border-bottom: 1px solid #f5f5f5;
           }
           .domore {
             display: flex;
