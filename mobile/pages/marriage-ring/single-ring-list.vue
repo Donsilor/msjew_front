@@ -136,6 +136,7 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
+      console.log("价格",this.conditions)
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
       this.conditions[0].options = this.CONDITION_INFO.style.womanRings
       this.conditions[0].checked = style.toString()
