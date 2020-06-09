@@ -18,6 +18,7 @@
               "
               class="mod-item"
             >
+              <!-- 单品 -->
               <div v-if="item.groupType === 0 && Number(item.goodsType) !== 19" class="single">
                 <div @click="godetails(item, index)">
                         <img :src="imageStrToArray(item.goodsImages)[0]" />
@@ -67,6 +68,7 @@
                         </div>
                 </div>
               </div>
+              <!-- 对戒 -->
               <div v-if="item.goodsType == '19'" class="double">
                 <div @click="godetails(item, index)">
                   <img :src="imageStrToArray(item.goodsImages)[0]" />
@@ -75,7 +77,7 @@
                   </span>
                   <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
                     <h4 class="ow-h2">
-                      {{ ring.goods_name }}
+                      {{ item.goodsName }}
                     </h4>
                     <p>SKU：{{ ring.goods_sn }}</p>
                     <p class="p">
@@ -118,6 +120,7 @@
                   <b class="double-ring-price">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
                 </div>
               </div>
+              <!-- 定制 -->
               <div v-if="item.groupType === 2" class="double customization">
                 <div @click="godetails(item, index)">
                         <img :src="imageStrToArray(item.goodsImages)[0]" />
@@ -466,7 +469,7 @@ export default {
       if (list.length > 0) {
         // console.log("item",list)
         list.map((item, index) => {
-console.log("itemlist",item)
+// console.log("itemlist",item)
           if (index === list.length - 1) {
             text = text + item.configAttrIVal
           } else {
@@ -477,7 +480,7 @@ console.log("itemlist",item)
       if (list2 && list2.length > 0) {
         list2.map((item, index) => {
           if (item.configId === 196) {
-            console.log(list2, '9999', item)
+            // console.log(list2, '9999', item)
             text = text + ' /  ' + item.configAttrIVal
           }
         })
@@ -489,7 +492,7 @@ console.log("itemlist",item)
       let text = ''
       if (good_spec.length > 0) {
         good_spec.map((item, index) => {
-        console.log("good_spec",item)
+        // console.log("good_spec",item)
 
           if (index === good_spec.length - 1) {
             text = text + item.attr_value
@@ -550,10 +553,10 @@ console.log("itemlist",item)
                 createTime: item.createTime,
                 goods_num: val.goodsCount,
                 goodsDetailsId: val.goodsDetailsId,
-                goods_id: val.goodsDetailsId,
+                goods_id: val.goodsId,
                 goods_type:val.goodsType,
                 group_id:
-                  val.goodsType === 1
+                  val.goodsType == 19
                     ? val.goodsId
                     : val.groupType === 2
                     ? item.id
@@ -605,7 +608,7 @@ console.log("itemlist",item)
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
-          console.log("dddd",item)
+          // console.log("dddd",item)
           const o = {
             isSelect: false,
             goodsImages: item.simpleGoodsEntity.goodsImages,
@@ -626,18 +629,18 @@ console.log("itemlist",item)
               item.goodsType == 19
                 ? item.ring
                 : item.simpleGoodsEntity.simpleGoodsDetails.goodsDetailsCode,
-            salePrice:
-              item.goodsType == 19
-                ? item.simpleGoodsEntity
-                    .simpleGoodsDetails.retailMallPrice
-                : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
+            salePrice: item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
+              // item.goodsType == 19
+              //   ? item.simpleGoodsEntity
+              //       .simpleGoodsDetails.retailMallPrice
+              //   : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
             totalPrice:item.goodsType == 19
                 ? item.simpleGoodsEntity.salePrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
             groupType: item.groupType || 0,
             goodsType: item.simpleGoodsEntity.categoryId,
             createTime:
-              item.goodsType === 19
+              item.goodsType == 19
                 ? item.createTime
                 : item.groupId
                 ? item.groupId
@@ -647,19 +650,20 @@ console.log("itemlist",item)
             id: item.id,
             localSn: item.localSn,
             groupId: item.groupId || null,
-            simpleGoodsEntity:
-              item.goodsType === 19
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
-                : item.simpleGoodsEntity,
-            status:
-              item.goodsType === 19 ? item.ringsSimpleGoodsEntity.status : 1,
-            goodsStatus:
-              item.goodsType === 19
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus
-                : item.simpleGoodsEntity.goodsStatus
+             simpleGoodsEntity: item.simpleGoodsEntity,
+            // simpleGoodsEntity:
+            //   item.goodsType == 19
+            //     ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
+            //     : item.simpleGoodsEntity,
+            status:item.goodsType,
+              // item.goodsType === 19 ? item.ringsSimpleGoodsEntity.status : 1,
+            goodsStatus:item.simpleGoodsEntity.goodsStatus
+              // item.goodsType === 19
+              //   ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus
+              //   : item.simpleGoodsEntity.goodsStatus
           }
           this.list.push(o)
-          console.log("this.list",this.list)
+          // console.log("this.list",this.list)
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
@@ -691,6 +695,7 @@ console.log("itemlist",item)
       }
     },
     godetails(item, index) {
+      // console.log("itemdetail",item)
       // 去定制详情
       if (item.groupType === 2) {
         const ct1 = this.isLogin ? item.id : item.localSn
@@ -709,20 +714,20 @@ console.log("itemlist",item)
         )
       }
       // 去对戒详情
-      if (item.groupType === 1) {
+      else if (item.goodsType == '19') {
         this.$router.push({
           name: 'marriage-ring-pair-ring-detail',
           query: {
-            goodId: item.groupId,
+            goodId: item.goodsId,
             ct: this.isLogin ? item.id : item.localSn,
-            dt1: item.goodsDetailsId,
-            dt2: this.list[index + 1].goodsDetailsId,
+            // dt1: item.goodsDetailsId,
+            // dt2: this.list[index + 1].goodsDetailsId,
             ringType : 'pair'
           }
         })
       }
       // 去单品详情
-      if (item.groupType === 0) {
+      else if(item.groupType === 0) {
         if (item.simpleGoodsEntity.categoryId === 15) {
           // 是个钻石💎
           this.$router.push({
@@ -964,6 +969,9 @@ console.log("itemlist",item)
             .right:nth-child(3) {
               // padding-bottom: 15px;
               border-bottom: 1px solid #f5f5f5;
+              .ow-h2{
+                display: none;
+              }
             }
           }
           

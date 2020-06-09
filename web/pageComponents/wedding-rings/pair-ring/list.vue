@@ -188,7 +188,7 @@
                 <span class="price">{{ formatNumber(item.salePrice) }}</span>
               </div>
               <div class="product-title">
-                {{ item.name }}
+                {{ item.goodsName }}
               </div>
             </div>
           </div>
@@ -269,6 +269,7 @@ export default {
       defaultPriceRange,
       fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
       searchConditions: {
+        styleSex: '', // 54-款式， 26-适用人群
         style: '',
         material: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
@@ -281,6 +282,36 @@ export default {
     specialDatas() {
       const conditions = this.searchConditions
       const sortInfo = this.usingSortInfo
+      const params = [
+        // 价格区间
+        {
+          type: 1,
+          paramName: 'sale_price',
+          valueType: 2,
+          beginValue: conditions.priceRange[0],
+          endValue: conditions.priceRange[1]
+        }
+      ]
+
+      if (conditions.style) {
+        params.push({
+          type: 2,
+          paramId:54,
+          paramName: 'engaged_style',
+          valueType: 1,
+          configValues: conditions.style === '' ? [] : [conditions.style]
+        })
+      } 
+      
+      if (conditions.material) {
+        params.push({
+          type: 3,
+          paramId:10,
+          paramName: 'material',
+          valueType: 1,
+          configValues: conditions.material === '' ? [] : [conditions.material]
+        })
+      }
 
       const data = {
         advertType: 19,
@@ -293,10 +324,13 @@ export default {
         // 每页显示数量
         page_size: this.page_size,
 
-        beginPrice: conditions.priceRange[0],
-        endPrice: conditions.priceRange[1],
-        materialValue: conditions.material,
-        styleValue: conditions.style
+        // 参数数组
+        params
+
+        // beginPrice: conditions.priceRange[0],
+        // endPrice: conditions.priceRange[1],
+        // materialValue: conditions.material,
+        // styleValue: conditions.style
       }
 
       // 已选商品id

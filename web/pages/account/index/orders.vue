@@ -59,7 +59,7 @@
               }}</span> -->
             </p>
           </div>
-          <div v-if="o.details[0].ring == ''">
+          <div v-if="o.details[0].categoryId !== 19 && o.details.length !== 2" class="single">
             <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
               <div class="left">
                 <nuxt-link :to="goDetails(d)"
@@ -87,35 +87,69 @@
               </div>
             </div>
           </div>
-          <div v-else>
-            <div  v-for="(d, _index) in o.details[0].ring" :key="_index" class="list-body">
+          <div v-if="o.details[0].categoryId == '19'" class="double">
+            <div class="left">
+              <nuxt-link :to="goDetails(o.details[0])"
+                target="_blank"><img :src="IMG_URL + o.details[0].goodsImages"
+              /></nuxt-link>
+            </div>
+            <div>
+              <div  v-for="(d, _index) in o.details[0].ring" :key="_index" class="list-body">
+                <div class="mid">
+                <h5>{{ o.details[0].goodsName }}</h5>
+                  <nuxt-link :to="goDetails(o.details[0])" target="_blank">
+                    <!-- <h5>{{ d.goods_name }}</h5> -->
+                    <p>SKU：{{ d.goods_sn }}</p>
+                    <div
+                      v-for="(k, __index) in d.lang.goods_spec"
+                      :key="__index"
+                      class="desc"
+                    >
+                      <span>{{ k.attr_name }}: </span>
+                      <span>{{ k.attr_value }} </span>
+                    </div>
+                  </nuxt-link>
+                </div>
+
+                <div class="right">
+                  <!-- <span>1</span> -->
+                  <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
+                </div>
+              </div>
+            </div>
+            <div class="num">
+              <span>1</span>
+            </div>
+            <div class="price">
+              {{ o.coinCode }} {{ formatMoney(o.details[0].goodsPrice) }}
+            </div>
+          </div>
+          <div v-if="o.details.length == 2" class="single customization">
+            <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
               <div class="left">
-                <nuxt-link :to="goDetails(o.details[0])"
-                  target="_blank"><img :src="IMG_URL + d.goods_image"
+                <nuxt-link :to="goDetails(d)"
+                  target="_blank"><img :src="IMG_URL + d.goodsImages"
                 /></nuxt-link>
               </div>
               <div class="mid">
-                <nuxt-link :to="goDetails(o.details[0])" target="_blank">
-                  <h5>{{ d.goods_name }}</h5>
-                  <p>SKU：{{ d.goods_sn }}</p>
+                <nuxt-link :to="goDetails(d)" target="_blank">
+                  <h5>{{ d.goodsName }}</h5>
+                  <p>SKU：{{ d.goodsCode }}</p>
                   <div
-                    v-for="(k, __index) in d.lang.goods_spec"
+                    v-for="(k, __index) in d.detailSpecs"
                     :key="__index"
                     class="desc"
                   >
-                    <span>{{ k.attr_name }}: </span>
-                    <span>{{ k.attr_value }} </span>
+                    <span>{{ k.name }}: </span>
+                    <span>{{ k.value }} </span>
                   </div>
                 </nuxt-link>
               </div>
 
               <div class="right">
                 <span>1</span>
-                <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
+                {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}
               </div>
-            </div>
-            <div class="price">
-              {{ o.coinCode }} {{ formatMoney(o.details[0].goodsPrice) }}
             </div>
           </div>
 
@@ -814,6 +848,52 @@ div {
             }
           }
         }
+        .double{
+          display: flex;
+          .left{
+            width: 100%;
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+            padding-left: 20px;
+            a{
+              display: inline-block;
+              width: 70px;
+              height:70px;
+              border: 1px solid #ececec;
+            }
+            img{
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .num{
+            position: absolute;
+            right:377px;
+            top:47%;
+            font-size: 16px;
+            color: #666666;
+            font-family: twCenMt;
+          }
+          .list-body{
+            width: 40%;
+          }
+          .list-body:nth-child(1) {
+            border-top: 0;
+          }
+          .list-body:nth-child(2){
+            // border-top: 0;
+            h5{
+              display: none;
+            }
+          }
+          .list-body:nth-child(3) {
+            border-top: 0;
+          }
+        }
+        .list-body:nth-child(1) {
+          border-top: 0;
+        }
         .list-body {
           width: 100%;
           height: 110px;
@@ -886,9 +966,7 @@ div {
             }
           }
         }
-        .list-body:nth-child(2) {
-          border-top: 0;
-        }
+        
         .listDouble{
           display: flex; 
         }

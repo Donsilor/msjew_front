@@ -330,7 +330,7 @@ export default {
         }
       }
       this.firstRingId = result
-      console.log("result",this.firstRingId)
+      // console.log("result",this.firstRingId)
       return this.changeChecked()
     },
     secondRingSimpleDetail() {
@@ -352,7 +352,7 @@ export default {
         }
       }
       this.secondRingId = result
-      console.log("result2",this.secondRingId)
+      // console.log("result2",this.secondRingId)
       // this.secondRingId = result.id
       return this.changeChecked()
     },
@@ -440,12 +440,12 @@ export default {
       if(!firstRing || !secondRing) {
         return;
       }
-      console.log("firstRing",firstRing,secondRing)
+      // console.log("firstRing",firstRing,secondRing)
       _this.doubleRingDetailId(firstRing, secondRing);
     },
     doubleRingDetailId(ladyRing, menRing) {
       const _this = this
-      console.log("goodinfo",this.goodInfo.details)
+      // console.log("goodinfo",this.goodInfo.details)
       this.goodInfo.details.map((item, i) => {
         if(ladyRing == item.ladyRing && menRing == item.menRing || menRing == item.ladyRing && ladyRing == item.menRing) {
           _this.coupleLadyId = item.ladyRing
@@ -455,7 +455,7 @@ export default {
           _this.categoryId = item.categoryId
           _this.goodInfo.salePrice = item.retailMallPrice
           _this.stock = item.stock
-          console.log("goodinfoitem",item)
+          // console.log("goodinfoitem",item)
         }
       })
     },

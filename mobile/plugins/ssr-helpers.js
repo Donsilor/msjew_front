@@ -72,7 +72,7 @@ export default function({ req, res, app, store }) {
   }
 
   Vue.prototype.formatNumber = str => {
-    // console.log(str)
+    console.log(str)
     if (!str) {
       return 0
     }

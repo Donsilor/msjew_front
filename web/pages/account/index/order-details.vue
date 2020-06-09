@@ -139,7 +139,8 @@
           <div class="t2">{{ $t(`${lang}.goodsNum`) }}</div>
           <div class="t3">{{ $t(`${lang}.goodsPrice`) }}</div>
         </div>
-        <div v-if="data.details[0].ring == ''" class="detail-info">
+        <!-- 单品 -->
+        <div v-if="data.details[0].categoryId !== 19 && data.details.length !== 2" class="detail-info single">
           <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
             <nuxt-link :to="goToDetail(d)" target="_blank">
               <div class="t1">
@@ -164,7 +165,7 @@
           </div>
         </div>
         <!-- 对戒 -->
-        <div v-else class="detail-info">
+        <div v-if="data.details[0].categoryId == '19'" class="detail-info double">
           <div v-for="(d, _index) in data.details[0].ring" :key="_index" class="goods-details">
             <nuxt-link :to="goToDetail(data.details[0])" target="_blank">
               <div class="t1">
@@ -188,6 +189,31 @@
               <!-- d.goodsPrice -->
               {{ data.coinCode }} {{ formatMoney(doubleRingGoodPrice) }} 
             </div>
+        </div>
+        <!-- 定制 -->
+        <div v-if="data.details.length === 2" class="detail-info customization">
+          <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
+            <nuxt-link :to="goToDetail(d)" target="_blank">
+              <div class="t1">
+                <div class="good-img">
+                  <img :src="IMG_URL + d.goodsImages" />
+                </div>
+                <div class="good-desc">
+                  <div class="good-name">{{ d.goodsName }}</div>
+                  <div class="good-sku">SKU：{{ d.goodsCode }}</div>
+                  <div class="details">
+                    <span v-for="(v, k) in d.detailSpecs" :key="k"
+                      >{{ v.name }}：{{ v.value }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </nuxt-link>
+            <div class="t2">1</div>
+            <div class="t3">
+              {{ data.coinCode }} {{ formatMoney(d.goodsPrice) }}
+            </div>
+          </div>
         </div>
         <div class="goods-bot-bar" />
       </div>
@@ -843,8 +869,11 @@ export default {
         }
       }
     }
+    // .double{
+      
+    // }
     .goods-info {
-      .detail-info{
+      .double{
         position: relative;
         .t3{
           position: absolute;
@@ -853,6 +882,9 @@ export default {
           color: #333;
           font-family: twCenMt;
           font-size: 20px;
+        }
+        .goods-details:nth-child(2) {
+          border-top: 0;
         }
       }
       .goods-info-title {
@@ -948,9 +980,7 @@ export default {
           font-size: 20px;
         }
       }
-      .goods-details:nth-child(2) {
-        border-top: 0;
-      }
+      
     }
     .goods-bot-bar {
       width: 100%;
