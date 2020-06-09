@@ -81,6 +81,15 @@ export default {
 <style scoped lang="less">
 .coupon {
   // min-height: 300px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 21;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow: scroll;
+
   .coupon-top{
     height: 68px;
     line-height: 68px;
@@ -89,16 +98,7 @@ export default {
     font-size: 16px;
     color: #666;
     border-bottom: 1px solid rgba(110,112,110,0.2);
-  }
-  .title .quit{
-    position: absolute;
-    top: 50%;
-    left: 20px;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    background: url(../../static/addShoppingCard/back.png) no-repeat center;
-    background-size: 100% 100%;
+
   }
   .title{
     position: relative;
@@ -107,6 +107,17 @@ export default {
     align-items: center;
     justify-content: center;
     border-bottom: 1px solid rgb(210,210,210, 0.5);
+
+    .quit{
+      position: absolute;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background: url(../../static/addShoppingCard/back.png) no-repeat center;
+      background-size: 100% 100%;
+    }
 
     .icon{
       width: 26px;

@@ -1,8 +1,9 @@
 <template>
   <div class="get-coupon">
     <div class="wrap">
-      <div class="title">{{ lang.useCoupon }}
-        <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
+      <div class="title">
+        <div class="quit" @click="closeCoupon()"></div>
+        <span>{{ lang.useCoupon }}</span>
       </div>
 
       <div class="coupon-box">
@@ -134,7 +135,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 12;
+    z-index: 21;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.3);
@@ -146,33 +147,36 @@
       height: 100%;
       overflow-y: auto;
 
-      .title {
-        font-size: 20px;
-        text-align: center;
-        padding: 20px 0;
+      .title{
         position: relative;
-        border-bottom: 1px solid #ccc;
-        margin-bottom: 20px;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-bottom: 1px solid rgb(210,210,210, 0.5);
 
-        .iconfont {
+        .quit{
           position: absolute;
-          right: 20px;
           top: 50%;
+          left: 20px;
           transform: translateY(-50%);
-          width: 20px;
-          height: 20px;
-          border: 1px solid #999;
-          text-align: center;
-          line-height: 22px;
-          border-radius: 50%;
-          font-size: 10px;
-          color: #999;
+          width: 24px;
+          height: 24px;
+          background: url(../../../static/addShoppingCard/back.png) no-repeat center;
+          background-size: 100% 100%;
+        }
+
+        span{
+          font-size: 20px;
+          color: #f29b87;
+          margin-left: 10px;
         }
       }
 
       .coupon-box {
         width: 100%;
         padding: 0 5%;
+        margin-top: 20px;
         box-sizing: border-box;
 
         .box-r {
