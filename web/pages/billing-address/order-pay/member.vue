@@ -911,7 +911,7 @@
         @click.stop="createOrder()"
       >
         <span>
-          {{ currency }}
+          {{ formatCoin(coinType) }}
           {{ formatMoney(ultimatelyPay) }}
           <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
         </span>
