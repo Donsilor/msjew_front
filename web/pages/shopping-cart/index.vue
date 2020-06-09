@@ -303,7 +303,7 @@ export default {
                 this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[0].coupon.discount.price)
               }else{
                 // this.totalPrice -=parseFloat(this.good[i].price)
-                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].price)
+                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[0].simpleGoodsEntity.salePrice)
               }
 
               if(this.good[j].data[1].coupon.hasOwnProperty('discount')){
@@ -311,7 +311,7 @@ export default {
                 this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[1].coupon.discount.price)
               }else{
                 // this.totalPrice -=parseFloat(this.good[i].price)
-                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].price)
+                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[1].simpleGoodsEntity.salePrice)
               }
             }else{
               if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
@@ -383,7 +383,7 @@ export default {
             this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
           }else{
             // this.totalPrice -=parseFloat(this.good[i].price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].simpleGoodsEntity.salePrice)
           }
 
           if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
@@ -391,7 +391,7 @@ export default {
             this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].coupon.discount.price)
           }else{
             // this.totalPrice -=parseFloat(this.good[i].price)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].simpleGoodsEntity.salePrice)
           }
         }else{
           if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
@@ -422,7 +422,7 @@ export default {
             this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[0].coupon.discount.price)
           }else{
             // this.totalPrice -=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
-            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].simpleGoodsEntity.salePrice)
+            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[0].simpleGoodsEntity.salePrice)
           }
 
           if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
@@ -430,7 +430,7 @@ export default {
             this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[1].coupon.discount.price)
           }else{
             // this.totalPrice -=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
-            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].simpleGoodsEntity.salePrice)
+            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[1].simpleGoodsEntity.salePrice)
           }
         }else{
           if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
@@ -447,7 +447,7 @@ export default {
             // this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
             this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
           }else{
-            this.totalPrice +=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
+            this.totalPrice +=parseFloat(this.good[i].data[0].simpleGoodsEntity.salePrice)
           }
 
           if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
@@ -455,7 +455,7 @@ export default {
             this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].coupon.discount.price)
           }else{
             // this.totalPrice +=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
-            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].simpleGoodsEntity.salePrice)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].simpleGoodsEntity.salePrice)
           }
         }else{
           if(this.good[i].data[0].coupon.hasOwnProperty('discount')){

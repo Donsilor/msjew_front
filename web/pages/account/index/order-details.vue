@@ -156,11 +156,11 @@
             </div>
           </nuxt-link>
           <div class="t2">1</div>
-          <div class="t3" :class="{'old-price': d.goodsPrice !== d.goodsPayPrice}">
+          <div class="t3" :class="{'old-price': couponType(d.couponInfo) == 2}">
             {{ data.coinCode }} {{ formatMoney(d.goodsPrice) }}
           </div>
           <div class="t4">
-            {{ data.coinCode }} {{ formatMoney(d.goodsPayPrice) }}
+            {{ data.coinCode }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}
           </div>
         </div>
         <div class="goods-bot-bar" />
@@ -305,7 +305,7 @@
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.itemsNum`) }}</div>
-            <div class="ff">{{ formatNumber(data.productCount) }}</div>
+            <div class="ff">{{ data.productCount }}</div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.totalNum`) }}</div>
@@ -419,6 +419,18 @@ export default {
     }
   },
   computed: {
+    couponType(k) {
+      return function(k) {
+        var k_type=0;
+        if(k.hasOwnProperty('type')){
+          k_type = k.type
+        }else{
+          k_type = 0;
+        }
+
+        return k_type
+      }
+    },
     statusSteps() {
       // data.orderStatus
       const orderStatus = this.data.orderStatus
@@ -493,7 +505,7 @@ export default {
         })
         .then(res => {
           this.data = res.data
-          // console.log("this.data",this.data)
+          console.log("this.data",this.data)
           this.invoice = res.data.invoice
           this.orderStatus = res.data.orderStatus
           console.log("data",this.orderStatus)

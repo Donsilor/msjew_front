@@ -71,8 +71,8 @@
 
             <div class="right">
               <span>1</span>
-              <span :class="{'old-price': d.goodsPrice !== d.goodsPayPrice}">{{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}</span>
-              <span>{{ o.coinCode }} {{ formatMoney(d.goodsPayPrice) }}</span>
+              <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}</span>
+              <span>{{ o.coinCode }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
             </div>
           </div>
 
@@ -346,6 +346,20 @@ export default {
   created() {
     this.getList()
     this.getStatusOrders(0)
+  },
+  computed:{
+    couponType(k) {
+      return function(k) {
+        var k_type=0;
+        if(k.hasOwnProperty('type')){
+          k_type = k.type
+        }else{
+          k_type = 0;
+        }
+
+        return k_type
+      }
+    }
   },
   methods: {
     getList() {
@@ -839,15 +853,15 @@ div {
           }
           span {
             float: right;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 38px;
             color: #333333;
-            margin-right: 34px;
+            margin-right: 30px;
             b {
               color: #f29b87;
               font-size: 20px;
               font-weight: 400;
-              margin-left: 20px;
+              margin-left: 14px;
               font-family: twCenMt;
             }
           }
