@@ -205,6 +205,11 @@
             >
           </li>
 
+          <li>
+            <span>{{ lang.itemsNum }}：</span>
+            <span>{{ amount }}</span>
+          </li>
+
           <!-- 优惠码 -->
           <!-- <li v-show="preferFee > 0">
             <div>
@@ -340,6 +345,7 @@ export default {
     return {
       kai:false,
       url:'',
+      lang: this.LANGUAGE.cart.sureOrder,
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
       form: [],
@@ -396,8 +402,6 @@ export default {
       // price: JSON.parse(this.$route.query.info).orderAmount,
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
       needtips: false,
-
-      lang: this.LANGUAGE.cart.sureOrder,
       canSubmit: false,
       coin: this.$store.state.coin,
       mailbox: '',
@@ -442,7 +446,8 @@ export default {
       // 所有可有优惠券
       couponAll: [],
       // 已领取优惠券
-      couponAlready: []
+      couponAlready: [],
+      amount: 0
     }
   },
   computed: {
@@ -889,7 +894,7 @@ export default {
             data: data
           })
           .then(res => {
-            console.log("费用",res)
+            // console.log("费用",res)
             this.canSubmit = true
             this.allFee = res
 

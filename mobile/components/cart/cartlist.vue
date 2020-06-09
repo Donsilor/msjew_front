@@ -13,7 +13,7 @@
               <div class="img-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]">
                 <img :src="imageStrToArray(item.goodsImages)[0]" />
 
-                <div class="activity-sign" v-if="item.coupon.discount || item.coupon.money">
+                <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
                   <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
                   <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
                 </div>
@@ -113,6 +113,7 @@ export default {
     }
   },
   mounted() {
+    console.log(112,this.list)
     this.language = this.getCookie('language')
   },
   methods: {

@@ -18,11 +18,11 @@
               "
               class="mod-item"
             >
-			<div @click="godetails(item, index)">
+            <div @click="godetails(item, index)">
               <div class="left-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]" >
                 <img :src="imageStrToArray(item.goodsImages)[0]" />
 
-                <div class="activity-sign" v-if="item.coupon.discount || item.coupon.money">
+                <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
                   <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
                   <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
                 </div>
@@ -93,7 +93,7 @@
 
                 </div>
               </div>
-		  </div>
+            </div>
               <div class="domore">
                 <div
                   class="select-icon"
