@@ -68,7 +68,7 @@
           <div @click="openSize()">!</div>
         </span>
         <span @click="showSwiperTap">
-          {{ chooseSize }}
+          {{ chooseSize ? chooseSize : lang.stArrContent }}
           <i class="iconfont iconyou" />
         </span>
       </div>
@@ -197,12 +197,14 @@
       <footer-bar></footer-bar>
       <swiper-tap
         ref="caratsSuitability"
+        :title="lang.carat"
         :list="goodInfo.carats"
         @clear="getCarats"
       ></swiper-tap>
 
       <swiper-tap
         ref="suitability"
+        :title="lang.size"
         :list="goodInfo.sizes"
         @clear="getSortBy"
       ></swiper-tap>

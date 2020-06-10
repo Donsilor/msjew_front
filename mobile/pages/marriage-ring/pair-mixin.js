@@ -164,7 +164,7 @@ export default {
           this.secondRingQuality.checked.indexOf(
             details[n].material
           ) > -1 &&
-          details[n].size === this.secondRingSize.id 
+          details[n].size === this.secondRingSize.id
           // details[n].carat === this.firstRingCarat.id
         ) {
           result = details[n].retailMallPrice
@@ -265,7 +265,7 @@ export default {
           list[n].hasOwnProperty('size') &&
           // list[n].hasOwnProperty('carat') &&
           this.firstRingQuality.checked.indexOf(list[n].material) > -1 &&
-          this.firstRingSize.id === list[n].size 
+          this.firstRingSize.id === list[n].size
           // this.firstRingCarat.id === list[n].carat
         ) {
           // 同时具有选项的字段，才表示该配置选项已启用
@@ -307,11 +307,11 @@ export default {
     //     text: this.firstRing.carats[0].content
     //   }
     // }
-    if(this.firstRing.materials.id){
-      this.firstRingSize = {
-        id: this.firstRing.sizes[0].sortType,
-        text: this.firstRing.sizes[0].content
-      }
+    if(this.firstRing.materials[0].id){
+      // this.firstRingSize = {
+      //  id: this.firstRing.sizes[0].sortType,
+      //   text: this.firstRing.sizes[0].content
+      // }
       this.firstRingQuality = {
         checked: this.firstRing.materials[0].id
           ? [this.firstRing.materials[0].id]
@@ -323,11 +323,11 @@ export default {
       //   id: this.secondRing.carats[0].sortType,
       //   text: this.secondRing.carats[0].content
       // }
-      if(this.secondRing.materials.id){
-        this.secondRingSize = {
-          id: this.secondRing.sizes[0].sortType,
-          text: this.secondRing.sizes[0].content
-        }
+      if(this.secondRing.materials[0].id){
+        // this.secondRingSize = {
+        //   id: this.secondRing.sizes[0].sortType,
+        //   text: this.secondRing.sizes[0].content
+        // }
         this.secondRingQuality = {
           checked: this.secondRing.materials[0].id
             ? [this.secondRing.materials[0].id]
@@ -399,11 +399,11 @@ export default {
         }
         stArr.push(o)
       }
-      stArr.unshift({
-        content: this.lang.stArrContent,
-        sortType: ``,
-        sortBy: ``
-      })
+      // stArr.unshift({
+      //   content: this.lang.stArrContent,
+      //   sortType: ``,
+      //   sortBy: ``
+      // })
       // for (const i in goodInfo.carats) {
       //   const o = {
       //     content: goodInfo.carats[i].name,
@@ -522,7 +522,7 @@ export default {
         for (const i in bullShit) {
           if (
             parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
-            // parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) && 
+            // parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
             parseInt(bullShit[i].material) ===
               parseInt(this.conditions[0].checked)
           ) {

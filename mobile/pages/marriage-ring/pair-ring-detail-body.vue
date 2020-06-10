@@ -84,7 +84,7 @@
             <div @click="openSize()">!</div>
           </span>
           <span @click="showFirstRingSizeChoose">
-            {{ firstRingSizeText }}
+            {{ firstRingSizeText ? firstRingSizeText : lang.stArrContent }}
             <i class="iconfont iconyou" />
           </span>
         </div>
@@ -129,7 +129,7 @@
             <div @click="openSize()">!</div>
           </span>
           <span @click="showSecondRingSizeChoose">
-            {{ secondRingSizeText }}
+            {{ secondRingSizeText ? secondRingSizeText : lang.stArrContent }}
             <i class="iconfont iconyou" />
           </span>
         </div>
@@ -251,6 +251,7 @@
       ></swiper-tap> -->
       <swiper-tap
         ref="first-ring-suitability"
+        :title="lang.size"
         :list="firstRing.sizes"
         @clear="firstRingClearSize"
       ></swiper-tap>
@@ -270,6 +271,7 @@
       ></swiper-tap> -->
       <swiper-tap
         ref="second-ring-suitability"
+        :title="lang.size"
         :list="secondRing.sizes"
         @clear="secondRingClearSize"
       ></swiper-tap>

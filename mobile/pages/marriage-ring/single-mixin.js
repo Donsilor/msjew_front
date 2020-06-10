@@ -86,7 +86,8 @@ export default {
         checked: this.goodInfo.materials[0].id || '',
         options: this.goodInfo.materials
       })
-      this.chooseSize = this.goodInfo.sizes[0].content
+      this.chooseSize = '';
+      // this.chooseSize = this.goodInfo.sizes[0].content
       if(this.goodInfo.carats !== undefined){
         this.chooseCarats = this.goodInfo.carats[0].content
         this.chooseCaratsId = this.goodInfo.carats[0].sortBy

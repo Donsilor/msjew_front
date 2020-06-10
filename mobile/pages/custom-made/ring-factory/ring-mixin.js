@@ -113,11 +113,11 @@ export default {
           }
           stArr.push(o)
         }
-        stArr.unshift({
-          content: this.lang.stArrContent,
-          sortType: ``,
-          sortBy: ``
-        })
+        // stArr.unshift({
+        //   content: this.lang.stArrContent,
+        //   sortType: ``,
+        //   sortBy: ``
+        // })
         if(res.carats){
           const carats = []
           for (const i in res.carats) {
