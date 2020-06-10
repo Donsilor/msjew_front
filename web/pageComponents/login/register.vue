@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 简体中文 -->
-    <div v-if="language === 'zh_CN'" class="register-item">
+    <div v-if="this.$store.state.platform === 20 || language === 'zh_CN'" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
