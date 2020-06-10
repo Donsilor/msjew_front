@@ -166,19 +166,21 @@
         </div>
         <!-- 对戒 -->
         <div v-if="data.details[0].categoryId == '19'" class="detail-info double">
-          <div v-for="(d, _index) in data.details[0].ring" :key="_index" class="goods-details">
+          <div  class="goods-details">
             <nuxt-link :to="goToDetail(data.details[0])" target="_blank">
               <div class="t1">
                 <div class="good-img">
                   <img :src="IMG_URL + data.details[0].goodsImages" />
                 </div>
-                <div class="good-desc">
-                  <div class="good-name">{{ data.details[0].goodsName }}</div>
-                  <div class="good-sku">SKU：{{ d.goods_sn }}</div>
-                  <div class="details">
-                    <span v-for="(v, k) in d.lang.goods_spec" :key="k"
-                      >{{ v.attr_name }}：{{ v.attr_value }}</span
-                    >
+                <div class="good-desc"> 
+                  <div class="dec" v-for="(d, _index) in data.details[0].ring" :key="_index">
+                    <div class="good-name">{{ data.details[0].goodsName }}</div>
+                    <div class="good-sku">SKU：{{ d.goods_sn }}</div>
+                    <div class="details">
+                      <span v-for="(v, k) in d.lang.goods_spec" :key="k"
+                        >{{ v.attr_name }}：{{ v.attr_value }}</span
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
@@ -873,24 +875,7 @@ export default {
       
     // }
     .goods-info {
-      .double{
-        position: relative;
-        .t3{
-          position: absolute;
-          right: 144px;
-          top:43%;
-          color: #333;
-          font-family: twCenMt;
-          font-size: 20px;
-        }
-        .goods-details:nth-child(2) {
-          border-top: 0;
-          // .good-img{
-          //   display: none;
-          // }
-        }
-        
-      }
+     
       .goods-info-title {
         width: 100%;
         box-sizing: border-box;
@@ -984,7 +969,33 @@ export default {
           font-size: 20px;
         }
       }
-      
+      .double{
+        position: relative;
+        .t3{
+          position: absolute;
+          right: 144px;
+          top:43%;
+          color: #333;
+          font-family: twCenMt;
+          font-size: 20px;
+        }
+        .goods-details:nth-child(2) {
+          border-top: 0;
+          // .good-img{
+          //   display: none;
+          // }
+        }
+        .dec{
+          // margin-left: 250px;
+          padding: 30px 10px 30px 10px;
+        }
+        .dec:first-child{
+          border-bottom: 1px solid #ddd;
+        }
+        .good-desc{
+          height: 100%!important;
+        }
+      }
     }
     .goods-bot-bar {
       width: 100%;
