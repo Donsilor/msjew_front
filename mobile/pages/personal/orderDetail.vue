@@ -949,6 +949,7 @@ export default {
           transform: translate(-50%, 0);
         }
         .double{
+          position: relative;
           .dec{
             margin-bottom: 10px;
           }
@@ -956,6 +957,11 @@ export default {
             h4{
               display: none;
             }
+          }
+          .num{
+            position: absolute;
+            right:0;
+            top:0;
           }
         }
         .right {

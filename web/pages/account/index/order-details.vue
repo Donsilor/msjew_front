@@ -170,10 +170,10 @@
             <nuxt-link :to="goToDetail(data.details[0])" target="_blank">
               <div class="t1">
                 <div class="good-img">
-                  <img :src="IMG_URL + d.goods_image" />
+                  <img :src="IMG_URL + data.details[0].goodsImages" />
                 </div>
                 <div class="good-desc">
-                  <div class="good-name">{{ d.goods_name }}</div>
+                  <div class="good-name">{{ data.details[0].goodsName }}</div>
                   <div class="good-sku">SKU：{{ d.goods_sn }}</div>
                   <div class="details">
                     <span v-for="(v, k) in d.lang.goods_spec" :key="k"
@@ -885,7 +885,11 @@ export default {
         }
         .goods-details:nth-child(2) {
           border-top: 0;
+          // .good-img{
+          //   display: none;
+          // }
         }
+        
       }
       .goods-info-title {
         width: 100%;

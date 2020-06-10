@@ -3,11 +3,11 @@
     <div class="content">
       <div class="mod">
         <ul>
+          <!-- v-if="
+                !(index !== 0 && item.createTime === list[index - 1].createTime)
+              " -->
           <li v-for="(item, index) in list" :key="index">
             <div
-              v-if="
-                !(index !== 0 && item.createTime === list[index - 1].createTime)
-              "
               class="mod-item"
             >
               <!-- 单品 -->
@@ -51,7 +51,7 @@
               <div v-if="item.goodsType == '19'" class="double">
                 <img :src="imageStrToArray(item.goodsImages)[0]" />
                 <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
-                  <h4 class="ow-h2">{{ ring.goods_name }}</h4>
+                  <h4 class="ow-h2">{{ item.goodsName }}</h4>
                   <p>SKU：{{ ring.goods_sn }}</p>
                   <p class="p">
                     {{
@@ -399,6 +399,9 @@ export default {
             .right:nth-child(3) {
               border-bottom: 1px solid #f5f5f5;
               .btn-type{
+                display: none;
+              }
+              .ow-h2{
                 display: none;
               }
             }
