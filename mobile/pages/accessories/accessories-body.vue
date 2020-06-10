@@ -202,6 +202,7 @@
       <footer-bar></footer-bar>
       <swiper-tap
         ref="caratsSuitability"
+        :title="lang.carat"
         :list="goodInfo.carats"
         @clear="getCarats"
       ></swiper-tap>
