@@ -88,7 +88,7 @@
           </div>
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
           <div class="good-price">
-            {{ g.coinType }}
+            {{ formatCoin(g.coinType) }}
             {{
               formatNumber(
                 g.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice

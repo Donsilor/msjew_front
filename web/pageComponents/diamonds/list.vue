@@ -37,7 +37,7 @@
         <div class="operate-area">
           <div class="range">
             <div class="range-input min-range">
-              <span class="coin">{{ $store.state.coin }}</span>
+              <span class="coin">{{ formatCoin(coinType) }}</span> 
               <div class="range-text">
                 <span>{{ formatNumber(searchConditions.priceRange[0]) }}</span>
                 <input
@@ -55,7 +55,7 @@
             </div>
             <span class="to">{{ $t(`${lang}.to`) }}</span>
             <div class="range-input max-range">
-              <span class="coin">{{ $store.state.coin }}</span>
+              <span class="coin">{{ formatCoin(coinType) }}</span>
               <div class="range-text">
                 <span>{{ formatNumber(searchConditions.priceRange[1]) }}</span>
                 <input
@@ -970,7 +970,8 @@ export default {
           sortType: '',
           sortBy: ''
       },
-      loading:true
+      loading:true,
+      coinType:''
     }
   },
   computed: {
@@ -1267,7 +1268,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      // console.log("加载状态",this.loading)
+      // console.log("加载状态",this.allData)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -1402,6 +1403,7 @@ export default {
         if (item.itemType === 'product') {
           result.push(item)
         }
+        this.coinType = item.coinType
       })
       return result
     },

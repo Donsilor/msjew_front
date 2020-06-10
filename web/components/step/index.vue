@@ -75,7 +75,7 @@
               class="single-step-right-side-info"
             >
               <div class="single-step-right-side-info-price">
-                {{ $store.state.coin }} {{ formatMoney(price1, 0) }}
+                {{ formatCoin(coinType) }} {{ formatMoney(price1, 0) }}
               </div>
               <div class="single-step-right-side-info-btn">
                 <nuxt-link :to="stepBack(1)"
@@ -121,7 +121,7 @@
               class="single-step-right-side-info"
             >
               <div class="single-step-right-side-info-price">
-                {{ $store.state.coin }} {{ formatMoney(price2, 0) }}
+                {{ formatCoin(coinType) }} {{ formatMoney(price2, 0) }}
               </div>
               <div class="single-step-right-side-info-btn">
                 <nuxt-link :to="stepBack(2)"
@@ -159,7 +159,7 @@
               class="single-step-right-side-info"
             >
               <div class="single-step-right-side-info-price">
-                {{ $store.state.coin }} {{ formatMoney(price1 + price2, 0) }}
+                {{ formatCoin(coinType) }} {{ formatMoney(price1 + price2, 0) }}
               </div>
               <div class="single-step-right-side-info-btn">
                 <nuxt-link :to="toReview"
@@ -190,7 +190,8 @@ export default {
       price1: ``,
       price2: ``,
       name1: ``,
-      name2: ``
+      name2: ``,
+      coinType:``
     }
   },
   computed: {
@@ -229,6 +230,7 @@ export default {
         this.$axios
           .post(url, data1)
           .then(res => {
+            this.coinType = res.data.coinType
             let data = res.data
             this.name1 = data.goodsName
             for (const i in data.details) {
@@ -260,6 +262,7 @@ export default {
         await this.$axios
           .post(url1, data1)
           .then(res => {
+            this.coinType = res.data.coinType
             let data = res.data
             this.name1 = data.goodsName
             for (const i in data.details) {
@@ -281,6 +284,7 @@ export default {
         await this.$axios
           .post(url2, data2)
           .then(res => {
+            this.coinType = res.data.coinType
             let data = res.data
             this.name2 = data.goodsName
             for (const i in data.details) {

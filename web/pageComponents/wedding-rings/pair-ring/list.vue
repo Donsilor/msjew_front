@@ -71,7 +71,7 @@
         <div class="operate-area">
           <div class="range">
             <div class="range-input min-range">
-              <span class="coin">{{ $store.state.coin }}</span>
+              <span class="coin">{{ formatCoin(coinType) }}</span>
               <div class="range-text">
                 <span>{{ formatNumber(searchConditions.priceRange[0]) }}</span>
                 <input
@@ -87,7 +87,7 @@
               {{ $t(`${lang}.to`) }}
             </span>
             <div class="range-input max-range">
-              <span class="coin">{{ $store.state.coin }}</span>
+              <span class="coin">{{ formatCoin(coinType) }}</span>
               <div class="range-text">
                 <span>{{ formatNumber(searchConditions.priceRange[1]) }}</span>
                 <input
@@ -273,7 +273,8 @@ export default {
         material: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
-      loading: true
+      loading: true,
+      coinType:''
     }
   },
   computed: {
@@ -320,6 +321,7 @@ export default {
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
       allData.forEach(item => {
+        this.coinType = item.coinType
         if (item.hasOwnProperty('dsName')) {
           // 广告
           item.itemType = adNum % 2 === 1 ? 'ad-short' : 'ad-long'
