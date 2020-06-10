@@ -107,7 +107,7 @@ export default {
   watch: {
     $route(val, oldVal) {
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
-      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
+      this.conditions[0].options = this.CONDITION_INFO.style.coupleRings
       this.conditions[0].checked = style.toString()
       this.conditions[1].options = this.CONDITION_INFO.quality.rings
       this.conditions[1].checked = ``
@@ -151,7 +151,7 @@ export default {
     madeUpEv() {
       this.ev = ``
       if (this.conditions[0].checked !== ``) {
-        this.ev += `^sale_volume=${this.conditions[0].checked}`
+        this.ev += `^ring_style=${this.conditions[0].checked}`
       }
 
       if (this.conditions[1].checked !== ``) {

@@ -296,8 +296,8 @@ export default {
       if (conditions.style) {
         params.push({
           type: 2,
-          paramId:54,
-          paramName: 'engaged_style',
+          paramId:39,
+          paramName: 'ring_style',
           valueType: 1,
           configValues: conditions.style === '' ? [] : [conditions.style]
         })
