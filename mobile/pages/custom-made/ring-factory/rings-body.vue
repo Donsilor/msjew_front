@@ -66,7 +66,7 @@
           <div @click="openSize()">!</div>
         </span>
         <span @click="showSwiperTap">
-          {{ chooseSize }}
+          {{ chooseSize ? chooseSize : lang.stArrContent }}
           <i class="iconfont iconyou" />
         </span>
       </div>
