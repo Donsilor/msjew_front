@@ -2057,7 +2057,7 @@ export default {
       })
   },
   mounted() {
-    // console.log("platform",this.$store.state.platform)
+    console.log("platform",this.platform)
     // this.getAddress();
     this.language = this.getCookie('language')
   },

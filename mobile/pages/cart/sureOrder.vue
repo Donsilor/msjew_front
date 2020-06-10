@@ -1109,6 +1109,7 @@ export default {
           this.$nuxt.$loading.finish()
           return
         }
+        
         if(this.address.platforms.indexOf(this.platform) === -1){
           this.$toast.show(this.lang.toast5)
           this.$nuxt.$loading.finish()
