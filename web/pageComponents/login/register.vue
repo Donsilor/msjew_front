@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 手机注册 -->
-    <div v-if="regType == 1">
+    <div v-if="regType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
