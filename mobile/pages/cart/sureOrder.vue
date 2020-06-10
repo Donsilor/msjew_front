@@ -162,8 +162,7 @@
           <div class="addShoppingCard fr" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
         </div>
         <!-- 开具发票 -->
-        <!-- <div class="invoice" v-if="this.areaId === '1'"> -->
-        <div class="invoice" v-if="'1'">
+        <div class="invoice" v-if="this.areaId == '1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
