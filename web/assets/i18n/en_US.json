@@ -2502,6 +2502,7 @@
         "msg7": "Error, error location: jump to payment when placing order",
         "msg8": "Failed to acquire data, please return to cart and try again!",
         "msg9": "Please select a payment method!",
+        "msg12":"The shipping address is different from billing address ,please contact our customer service or re-select a shipping address. ",
         "useShoppingCard": "Use Shopping Card",
         "editOrUnbound": "Edit/Remove Card",
         "shoppingCard": "Shopping Card",

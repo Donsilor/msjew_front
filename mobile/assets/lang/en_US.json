@@ -186,6 +186,7 @@
       "toast2": "Please check the default address",
       "toast4": "Please select a payment method!",
       "toast3": "Incorrect e-mail for receiving after-sales voucher, please input again!",
+      "toast5":"The shipping address is different from billing address ,please contact our customer service or re-select a shipping address. ",
       "delete": "Delete",
       "inputCode": "Input Coupon Code",
       "inputOrSelectCode": "Input/select Coupon Code",
