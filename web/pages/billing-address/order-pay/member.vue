@@ -566,7 +566,7 @@
           <!-- 发票按钮 -->
             <div class="invoice">
 
-               <div class="invoice-btn" v-if="this.areaId === '1'">
+               <div class="invoice-btn" v-if="this.areaId == '1'">
                 <div v-show="!iconShow" @click="show2">
                   <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                   <span>{{ $t(`${lang2}.default`) }}</span>
@@ -1504,8 +1504,8 @@
 
           <!-- 发票按钮 -->
           <div class="invoice">
-
-            <div class="invoice-btn" v-if="this.areaId === '1'">
+            
+            <div class="invoice-btn" v-if="this.areaId == '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang2}.default`) }}</span>
@@ -2980,7 +2980,7 @@ export default {
                 orderId: res.data.orderId,
                 price: that.ultimatelyPay,
                 coinType: res.data.coinType,
-                priceHKD:res.data.payAmountHKD 
+                priceHKD:res.data.payAmountHKD
               }
             })
           }
