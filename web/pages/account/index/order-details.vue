@@ -940,6 +940,7 @@ export default {
               line-height: 12px;
               height: 12px;
               margin-bottom: 18px;
+              color:#aaa;
             }
             .details {
               font-size: 12px;
@@ -949,6 +950,7 @@ export default {
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
+              color:#aaa;
               span {
                 margin-right: 10px;
               }
@@ -985,15 +987,23 @@ export default {
           //   display: none;
           // }
         }
+        .good-name {
+          margin-bottom: 15px!important;
+        }
         .dec{
           // margin-left: 250px;
-          padding: 30px 10px 30px 10px;
+          padding: 15px 10px 15px 10px;
         }
-        .dec:first-child{
-          border-bottom: 1px solid #ddd;
+        .dec:last-child{
+          .good-name{
+            display: none;
+          }
         }
         .good-desc{
           height: 100%!important;
+        }
+        .good-sku {
+          margin-bottom: 10px!important;
         }
       }
     }
