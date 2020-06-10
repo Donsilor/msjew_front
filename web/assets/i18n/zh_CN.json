@@ -473,7 +473,7 @@
             "pleaseWait": "時間正在冷卻，請稍後再試",
             "error": "錯誤",
             "sendCodeError": "發送驗證碼失敗",
-            "hadSend": "已發送"
+            "hadSend": "已发送"
         },
         "messageBox": {
             "sure": "確定",
@@ -523,7 +523,7 @@
         "surname": "姓氏",
         "surnameTips": "请输入正确的姓",
         "name": "名称",
-        "nameTips": "請輸入正確的名稱",
+        "nameTips": "请输入正确的名称",
         "email": "电邮地址",
         "pwdType": "设置密码*",
         "tips": "同意BDD条款及细则方可注册！",
