@@ -109,7 +109,7 @@
         </button>
       </div>
 
-      <div class="margin-bottom-29" v-if="language === 'zh_CN' || (language === '' && this.$store.state.platform === 20)">
+      <div class="margin-bottom-29" v-if="ifShowBtn">
         <button v-loading="requesting" class="submit" @click="loginT('a')">
           {{ $t(`${lang}.phoneLogin`) }}
         </button>
@@ -151,7 +151,8 @@ export default {
       isActive3: false,
       oldUrl:'',
       // 手机注册1,邮箱注册2
-      loginType: 2
+      loginType: 2,
+      ifShowBtn: false
     }
   },
 
@@ -199,11 +200,13 @@ export default {
 
     // 如果中文 或 大陆站点且cookie没有语言时为手机注册
     if(this.language === 'zh_CN' || (this.language === '' && this.$store.state.platform === 20)){
-      this.loginType = 1
+      this.loginType = 1;
+      this.ifShowBtn = true;
     }
     // // 如果非中文 或 非大陆站点且cookie没有语言时为邮箱注册
     if((this.language !== 'zh_CN' && this.language !== '') || (this.language === '' && this.$store.state.platform !== 20)){
-      this.loginType = 2
+      this.loginType = 2;
+      this.ifShowBtn = false;
     }
 
     const _this = this
@@ -542,6 +545,7 @@ input::placeholder {
   }
 }
 .icon .phone{
-  width: 18px !important;
+  width: 20px !important;
+  height: 22px !important;
 }
 </style>
