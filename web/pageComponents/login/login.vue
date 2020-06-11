@@ -7,7 +7,7 @@
           <span class="icon">
             <img src="/login/phone.png" />
           </span>
-          <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" maxlength="11" />
+          <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phoneTips`) }}
@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <nuxt-link :to="{ path: '/reset-password' }">
+        <nuxt-link :to="{ path: '/reset-password',query:{type:1} }">
           {{ $t(`${lang}.forget`) }}
         </nuxt-link>
       </div>
@@ -68,7 +68,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input v-model.trim="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" maxlength="60" />
+          <input v-model.trim="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailBox`)" maxlength="60" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
@@ -86,7 +86,7 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <nuxt-link :to="{ path: '/reset-password' }">
+        <nuxt-link :to="{ path: '/reset-password',query:{type:2}}">
           {{ $t(`${lang}.forget`) }}
         </nuxt-link>
       </div>
@@ -103,13 +103,13 @@
           {{ $t(`${lang}.codeTips`) }}
         </div>
       </div>
-      <div class="margin-bottom-29">
+      <div class="margin-bottom-29" v-if="language === 'zh_CN'">
         <button v-loading="requesting" class="submit" @click="login">
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
 
-      <div class="margin-bottom-29">
+      <div class="margin-bottom-29" v-if="">
         <button v-loading="requesting" class="submit" @click="loginType = 1">
           {{ $t(`${lang}.phoneLogin`) }}
         </button>
@@ -204,8 +204,6 @@ export default {
     if((this.language !== 'zh_CN' && this.language !== '') || (this.language === '' && this.$store.state.platform !== 20)){
       this.loginType = 2
     }
-
-    console.log(123,this.loginType)
 
     const _this = this
     _this.$nextTick(() => {

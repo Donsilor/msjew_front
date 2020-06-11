@@ -504,7 +504,7 @@
         "phoneLogin": "Phone Login",
         "mailLogin": "Mail Login",
         "registration": "Register",
-        "mailbox": "Enter Email",
+        "mailBox": "Enter Email",
         "mailTips": "Enter correct email",
         "password": "Enter Password*",
         "passwordTips": "Enter login password",

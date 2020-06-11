@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- 简体中文忘记密码 -->
-    <div v-if="this.$store.state.language === 'zh_CN'" class="page">
+    <!-- 手机方式找回密码 -->
+    <div v-if="resetType == 1" class="page">
       <div class="content">
         <ul class="schedule">
           <li
@@ -152,8 +152,8 @@
         </ul>
       </div>
     </div>
-    <!-- 英文和繁体忘记密码 -->
-    <div v-else class="page">
+    <!-- 邮箱方式找回密码 -->
+    <div v-if="resetType == 2" class="page">
       <div class="content">
         <ul class="schedule">
           <li
@@ -390,7 +390,8 @@ export default {
       password_repetition: '',
       showPassword: false,
       ajaxLoading: false,
-      language: ''
+      language: '',
+      resetType: 2
     }
   },
   watch:{
@@ -417,6 +418,13 @@ export default {
     this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {})
+
+    var type = this.$route.query.type;
+    if(type){
+      this.resetType = type;
+    }
+    
+    console.log(666,type)
   },
   methods: {
     // 点击图标切换密码格式
@@ -446,7 +454,7 @@ export default {
           _this.waitingText = _this.$t(`${langcode}.sendCode`)
           _this.waitingTime = defaultTime
         } else {
-         
+
           _this.waitingText = `${_this.$t(`${langcode}.hadSend`)}(${
             _this.waitingTime
           }s)`
@@ -562,7 +570,7 @@ export default {
       if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
         throw new Error (this.$t(`${lang}.mobileTips`))
       }
-     
+
     },
     emialtip(){
       if (this.info.email=='') {
@@ -634,7 +642,7 @@ export default {
       //   _this.ajaxLoading = true
       //   switch (key) {
       //     case 1:
-            
+
       //       break
       //     case 2:
       //       try {
@@ -768,7 +776,7 @@ export default {
       const _this = this
       return new Promise((resolve, reject) => {
         if (!_this.code) {
-          reject(new Error(_this.$t(`${lang}.schedule2-codetips`))) 
+          reject(new Error(_this.$t(`${lang}.schedule2-codetips`)))
         }
         if (!_this.password) {
           reject(new Error(_this.$t(`${lang}.newPassword`)))
@@ -793,7 +801,7 @@ export default {
               resolve(res)
             // }else {
             //   throw new Error (res.message)
-            // }  
+            // }
           })
           .catch(err => {
             reject(err)
@@ -830,7 +838,7 @@ export default {
               resolve(res)
             // } else {
             //   throw new Error (res.message)
-            // }  
+            // }
           })
           .catch(err => {
             reject(err)
