@@ -423,8 +423,6 @@ export default {
     if(type){
       this.resetType = type;
     }
-    
-    console.log(666,type)
   },
   methods: {
     // 点击图标切换密码格式

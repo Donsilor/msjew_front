@@ -13,7 +13,7 @@
       </div>
       <div class="tab-content">
         <!--        登录模块-->
-        <login v-if="activeTab === 'login'"></login>
+        <login v-if="activeTab === 'login'" @typeK = "loginTy"></login>
 
         <!--        注册模块-->
         <register v-if="activeTab === 'register'"></register>
@@ -46,7 +46,9 @@ export default {
           key: 'register',
           name: this.$t(`${lang}.registration`)
         }
-      ]
+      ],
+      language: '',
+      loginType: 2
     }
   },
   computed: {},
@@ -64,16 +66,41 @@ export default {
     _this.$nextTick(() => {
       _this.activeTab = _this.$route.query.type || 'login'
     })
+
+    this.language = this.getCookie('language')
+
+    // 如果中文 或 大陆站点且cookie没有语言时为手机注册
+    if(this.language === 'zh_CN' || (this.language === '' && this.$store.state.platform === 20)){
+      this.loginType = 1
+    }
+    // // 如果非中文 或 非大陆站点且cookie没有语言时为邮箱注册
+    if((this.language !== 'zh_CN' && this.language !== '') || (this.language === '' && this.$store.state.platform !== 20)){
+      this.loginType = 2
+    }
   },
   methods: {
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     // 切换tab
     changeActiveTab(tab) {
       this.$router.replace({
         path: '/login',
         query: {
-          type: tab.key
+          type: tab.key,
+          loginType: this.loginType
         }
       })
+    },
+    loginTy(r) {
+      this.loginType = r
     }
   }
 }

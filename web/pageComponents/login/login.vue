@@ -43,13 +43,13 @@
         </div>
       </div>
       <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="loginCN">
+        <button v-loading="requesting" class="submit" @click="login">
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
 
       <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="loginType = 2">
+        <button v-loading="requesting" class="submit" @click="loginT('b')">
           {{ $t(`${lang}.mailLogin`) }}
         </button>
       </div>
@@ -103,14 +103,14 @@
           {{ $t(`${lang}.codeTips`) }}
         </div>
       </div>
-      <div class="margin-bottom-29" v-if="language === 'zh_CN'">
+      <div class="margin-bottom-29">
         <button v-loading="requesting" class="submit" @click="login">
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
 
-      <div class="margin-bottom-29" v-if="">
-        <button v-loading="requesting" class="submit" @click="loginType = 1">
+      <div class="margin-bottom-29" v-if="language === 'zh_CN'">
+        <button v-loading="requesting" class="submit" @click="loginT('a')">
           {{ $t(`${lang}.phoneLogin`) }}
         </button>
       </div>
@@ -150,6 +150,7 @@ export default {
       isActive2: false,
       isActive3: false,
       oldUrl:'',
+      // 手机注册1,邮箱注册2
       loginType: 2
     }
   },
@@ -258,149 +259,146 @@ export default {
       this.pictureCode = result.join('')
       // this.info = info
     },
-    // 中文登录
-    loginCN () {
-      const _this = this
-
+    // 登录
+    login () {
+      const _this = this;
+      
       if (_this.mobile === '') {
         _this.isActive1 = true
         _this.phoneErr = true
         return
       }
+      
       if (_this.password === '') {
         _this.isActive2 = true
         _this.passwordErr = true
         return
       }
+      
       if (_this.code === '') {
         _this.isActive3 = true
         _this.codeErr = true
         return
       }
-      this.$axios({
-        method: 'post',
-        url: '/web/site/login',
-        params: {
-        },
-        data: {
-          'username': _this.mobile,
-          'password': _this.password
-        }
-      })
-        .then(res => {
-          const data = res.data
-          localStorage.setItem("refreshToken", data.refresh_token);
-          localStorage.setItem("accessToken", data.access_token);
-          let nowDate = parseInt((new Date()).getTime() / 1000)
-          localStorage.setItem("refreshTime", nowDate);
-
-          if (_this.code !== _this.pictureCode) {
-            _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-            _this.requesting = false
-          } else {
-            _this.$successMessage(_this.$t(`${lang}.logintips`))
-            _this.$store.commit('setToken', data.access_token)
-            _this.$store.commit('setUserInfo', data.member)
-             _this.$store.dispatch('synchronizeCart')
-            // const lastUrl = _this.$store.state.lastUrl
-            const lastUrl=localStorage.getItem("url")
-            // _this.$store.commit('setLastUrl','')
-            console.log('login', lastUrl)
-
-            setTimeout(() => {
-              if (lastUrl) {
-                _this.$router.replace({
-                  path: lastUrl
-                })
-              }
-              else {
-                _this.$router.replace({
-                  path: '/'
-                })
-              }
-            }, 0)
-
+      
+      if(this.loginType == 1){
+        // 手机登录
+        this.$axios({
+          method: 'post',
+          url: '/web/site/login',
+          params: {
+          },
+          data: {
+            'username': _this.mobile,
+            'password': _this.password
           }
         })
-        .catch(err => {
-          //console.error(err)
-          _this.requesting = false
-          _this.refreshCode()
-          _this.$errorMessage(err.message)
+          .then(res => {
+            const data = res.data
+            localStorage.setItem("refreshToken", data.refresh_token);
+            localStorage.setItem("accessToken", data.access_token);
+            let nowDate = parseInt((new Date()).getTime() / 1000)
+            localStorage.setItem("refreshTime", nowDate);
+        
+            if (_this.code !== _this.pictureCode) {
+              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+              _this.requesting = false
+            } else {
+              _this.$successMessage(_this.$t(`${lang}.logintips`))
+              _this.$store.commit('setToken', data.access_token)
+              _this.$store.commit('setUserInfo', data.member)
+               _this.$store.dispatch('synchronizeCart')
+              // const lastUrl = _this.$store.state.lastUrl
+              const lastUrl=localStorage.getItem("url")
+              // _this.$store.commit('setLastUrl','')
+              console.log('login', lastUrl)
+        
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                }
+                else {
+                  _this.$router.replace({
+                    path: '/'
+                  })
+                }
+              }, 0)
+        
+            }
+          })
+          .catch(err => {
+            //console.error(err)
+            _this.requesting = false
+            _this.refreshCode()
+            _this.$errorMessage(err.message)
+          })
+      }else{
+        // 邮箱登录
+        this.$axios({
+          method: 'post',
+          url: '/web/site/login',
+          params: {
+          },
+          data: {
+            'username': _this.account,
+            'password': _this.password
+          }
         })
+          .then(res => {
+        
+            const data = res.data
+            localStorage.setItem("refreshToken", data.refresh_token);
+            localStorage.setItem("accessToken", data.access_token);
+            let nowDate = parseInt((new Date()).getTime() / 1000)
+            localStorage.setItem("refreshTime", nowDate);
+        
+            if (_this.code !== _this.pictureCode) {
+              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+              _this.requesting = false
+            } else {
+              _this.$successMessage(_this.$t(`${lang}.logintips`))
+              _this.$store.commit('setToken', data.access_token)
+              _this.$store.commit('setUserInfo', data.member);
+               _this.$store.dispatch('synchronizeCart')
+              // const lastUrl = _this.$store.state.lastUrl
+              // _this.$store.commit('setLastUrl', '')
+              const lastUrl=localStorage.getItem("url")
+              console.log('loginf', lastUrl)
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                }
+                else {
+                  _this.$router.replace({
+                    path:'/'
+                  })
+                }
+              }, 0)
+              /*setTimeout(() => {
+                window.location.reload()
+              }, 1000)*/
+        
+            }
+          })
+          .catch(err => {
+            _this.requesting = false
+            _this.refreshCode()
+            _this.$errorMessage(err.message)
+          })
+      }
     },
-    // 登录
-    login () {
-      const _this = this
-      // _this.requesting = true
-      if (_this.account === '') {
-        _this.isActive1 = true
-        _this.phoneErr = true
-        return
+    loginT(i) {
+      if(i == 'a'){
+        this.loginType = 1
+      }else if(i == 'b'){
+        this.loginType = 2
       }
-      if (_this.password === '') {
-        _this.isActive2 = true
-        _this.passwordErr = true
-        return
-      }
-      if (_this.code === '') {
-        _this.isActive3 = true
-        _this.codeErr = true
-        return
-      }
-      this.$axios({
-        method: 'post',
-        url: '/web/site/login',
-        params: {
-        },
-        data: {
-          'username': _this.account,
-          'password': _this.password
-        }
-      })
-        .then(res => {
 
-          const data = res.data
-          localStorage.setItem("refreshToken", data.refresh_token);
-          localStorage.setItem("accessToken", data.access_token);
-          let nowDate = parseInt((new Date()).getTime() / 1000)
-          localStorage.setItem("refreshTime", nowDate);
-
-          if (_this.code !== _this.pictureCode) {
-            _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-            _this.requesting = false
-          } else {
-            _this.$successMessage(_this.$t(`${lang}.logintips`))
-            _this.$store.commit('setToken', data.access_token)
-            _this.$store.commit('setUserInfo', data.member);
-             _this.$store.dispatch('synchronizeCart')
-            // const lastUrl = _this.$store.state.lastUrl
-            // _this.$store.commit('setLastUrl', '')
-            const lastUrl=localStorage.getItem("url")
-			      console.log('loginf', lastUrl)
-            setTimeout(() => {
-              if (lastUrl) {
-                _this.$router.replace({
-                  path: lastUrl
-                })
-              }
-              else {
-                _this.$router.replace({
-                  path:'/'
-                })
-              }
-            }, 0)
-            /*setTimeout(() => {
-              window.location.reload()
-            }, 1000)*/
-
-          }
-        })
-        .catch(err => {
-          _this.requesting = false
-          _this.refreshCode()
-          _this.$errorMessage(err.message)
-        })
+      this.$emit('typeK', this.loginType)
     }
   }
 }
