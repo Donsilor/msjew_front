@@ -8,9 +8,10 @@
         </div> -->
         <div class="site-info" @click="toSiteSwitch">
           <div class="flag">
-            <img v-show="hkIcon" src="/hongkong-square.png" />
+            <!-- <img v-show="hkIcon" src="/hongkong-square.png" />
             <img v-show="cnIcon" src="/china-square.png" />
-            <img v-show="enIcon" src="/USA-square.png" />
+            <img v-show="enIcon" src="/USA-square.png" /> -->
+            <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           </div>
           <!-- <div class="language">
             <span>简/繁/EN</span>
@@ -26,7 +27,7 @@
           <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
           <span v-show="showb" class="pl-login">{{ replacepos(date.username, 2, 6, '***') }}</span>
         </div>
-        
+
       </div>
       <div class="content">
         <!-- <div class="search">
@@ -144,7 +145,7 @@
             <div class="item-name">
               {{ lang.callus }}
             </div>
-          </div> --> 
+          </div> -->
         </div>
         <div class="help">
           <a v-if="this.$store.state.platform === 21" href="tel:0755 25169121">
@@ -231,7 +232,7 @@ export default {
       showb:false,
       bottom:true,
       rings:[
-        
+
         {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.engagementRing,
@@ -271,7 +272,7 @@ export default {
           // query: {
           //   style: 1
           // }
-          
+
         },
       ],
       necklaces:[
@@ -720,7 +721,7 @@ export default {
           span{
             display: inline-block;
             width: 80%;
-            text-align:center; 
+            text-align:center;
           }
         }
         .two{
@@ -876,13 +877,11 @@ export default {
   // font-size: 10px;
 }
 .site-info .flag {
-  flex-grow: 0;
-  flex-shrink: 0;
-  line-height: 0;
-  margin-right: 6px;
+  margin-right: 4px;
 }
-.site-info .flag img {
-  height: 16px;
+.site-info .flag i {
+  color: #d72923;
+  font-size: 15px;
 }
 .site-info .language {
   flex-grow: 0;
@@ -1011,7 +1010,7 @@ export default {
     margin-bottom: 10px;
     display: flex;
     flex-direction: row;
-    align-items: left; 
+    align-items: left;
     // justify-content: center;
 
     .item {
