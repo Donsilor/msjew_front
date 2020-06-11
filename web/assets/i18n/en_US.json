@@ -501,6 +501,8 @@
     },
     "login": {
         "login": "Login",
+        "phoneLogin": "Phone Login",
+        "mailLogin": "Mail Login",
         "registration": "Register",
         "mailbox": "Enter Email",
         "mailTips": "Enter correct email",

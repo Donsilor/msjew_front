@@ -504,6 +504,8 @@
     },
     "login": {
         "login": "登入",
+        "phoneLogin": "手機登錄",
+        "mailLogin": "郵箱登錄",
         "registration": "登記",
         "mailbox": "請輸入您的電郵地址*",
         "mailTips": "請正確輸入電郵地址*",

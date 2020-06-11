@@ -502,6 +502,8 @@
     },
     "login": {
         "login": "登录",
+        "phoneLogin": "手机登录",
+        "mailLogin": "邮箱登录",
         "registration": "注册",
         "mailbox": "手机号*",
         "mailTips": "请输入正确的手机号*",

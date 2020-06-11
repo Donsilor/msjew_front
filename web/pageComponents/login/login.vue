@@ -1,11 +1,11 @@
 <template>
   <div>
-    <!-- 简体中文登录模块 -->
-    <div v-if="this.$store.state.language === 'zh_CN'" class="login-item">
+    <!-- 手机登录 -->
+    <div v-if="loginType == 1" class="login-item">
       <div class="relative margin-bottom-20">
         <div class="login-input icon-input">
           <span class="icon">
-            <img src="/login/mail.png" />
+            <img src="/login/phone.png" />
           </span>
           <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" maxlength="11" />
         </div>
@@ -47,6 +47,12 @@
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
+
+      <div class="margin-bottom-29">
+        <button v-loading="requesting" class="submit" @click="loginType = 2">
+          {{ $t(`${lang}.mailLogin`) }}
+        </button>
+      </div>
       <!-- <div class="gap-line margin-bottom-28">
         <span>{{ $t(`${lang}.logins`) }}</span>
       </div>
@@ -55,8 +61,8 @@
         <img src="/login/google.png" class="oauth-type" />
       </div> -->
     </div>
-    <!-- 英文和繁体登录模块 -->
-    <div v-else class="login-item">
+    <!-- 邮箱登录 -->
+    <div v-if="loginType == 2" class="login-item">
       <div class="relative margin-bottom-20">
         <div class="login-input icon-input">
           <span class="icon">
@@ -102,6 +108,13 @@
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
+
+      <div class="margin-bottom-29">
+        <button v-loading="requesting" class="submit" @click="loginType = 1">
+          {{ $t(`${lang}.phoneLogin`) }}
+        </button>
+      </div>
+
       <!-- <div class="gap-line margin-bottom-28">
         <span>{{ $t(`${lang}.logins`) }}</span>
       </div> -->
@@ -136,7 +149,8 @@ export default {
       isActive1: false,
       isActive2: false,
       isActive3: false,
-      oldUrl:''
+      oldUrl:'',
+      loginType: 2
     }
   },
 
@@ -181,6 +195,18 @@ export default {
     //   this.phoneErr=true
     // }
     this.language = this.getCookie('language')
+
+    // 如果中文 或 大陆站点且cookie没有语言时为手机注册
+    if(this.language === 'zh_CN' || (this.language === '' && this.$store.state.platform === 20)){
+      this.loginType = 1
+    }
+    // // 如果非中文 或 非大陆站点且cookie没有语言时为邮箱注册
+    if((this.language !== 'zh_CN' && this.language !== '') || (this.language === '' && this.$store.state.platform !== 20)){
+      this.loginType = 2
+    }
+
+    console.log(123,this.loginType)
+
     const _this = this
     _this.$nextTick(() => {
        _this.refreshCode()
