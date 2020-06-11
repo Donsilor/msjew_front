@@ -156,13 +156,13 @@ export default {
                 path: '/policies/payment-methods'
               }
             },
-            // {
-            //   icon: '',
-            //   name: this.$t(`${lang}.aboutCompany`),
-            //   to: {
-            //     path: '/policies/about-company'
-            //   }
-            // },
+            {
+              icon: '',
+              name: this.$t(`${lang}.aboutCompany`),
+              to: {
+                path: '/policies/about-company'
+              }
+            },
           ]
         },
         {
@@ -284,13 +284,13 @@ export default {
                 path: '/policies/payment-methods'
               }
             },
-            // {
-            //   icon: '',
-            //   name: this.$t(`${lang}.aboutCompany`),
-            //   to: {
-            //     path: '/policies/about-company'
-            //   }
-            // },
+            {
+              icon: '',
+              name: this.$t(`${lang}.aboutCompany`),
+              to: {
+                path: '/policies/about-company'
+              }
+            },
           ]
         },
         {
@@ -418,13 +418,13 @@ export default {
                 path: '/policies/payment-methods'
               }
             },
-            // {
-            //   icon: '',
-            //   name: this.$t(`${lang}.aboutCompany`),
-            //   to: {
-            //     path: '/policies/about-company'
-            //   }
-            // }
+            {
+              icon: '',
+              name: this.$t(`${lang}.aboutCompany`),
+              to: {
+                path: '/policies/about-company'
+              }
+            }
           ]
         },
         {
