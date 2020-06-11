@@ -86,7 +86,7 @@
                 @blur="blurEvent3"
                 v-bind:class="{active:isActivecode}"
                 type="text"
-                :placeholder="$t(`${lang}.VerificationCode`)"
+                :placeholder="$t(`${lang}.code`)"
                 maxlength="15"
                 @input="inputCode"
               />
@@ -136,7 +136,7 @@
               @blur="blurEvent5"
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
-              :placeholder="$t(`${lang}.repwdType`)"
+              :placeholder="$t(`${lang}.repassword`)"
               maxlength="30"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
