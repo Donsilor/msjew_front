@@ -118,7 +118,7 @@
               />
             </div>
             <div class="product-price">
-              <span>{{ each.coinType }}</span>
+              <span>{{ formatCoin(each.coinType)}}</span> 
               <span>{{ formatNumber(each.salePrice) }}</span>
             </div>
             <div class="product-name ow-h1">{{ each.goodsName }}</div>

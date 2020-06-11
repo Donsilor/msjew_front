@@ -162,7 +162,7 @@
           </nuxt-link>
           <div class="t2">1</div>
           <div class="t3">
-            {{ data.coinCode }} {{ formatMoney(d.goodsPrice) }}
+            {{ formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
           </div>
         </div>
         <div class="goods-bot-bar" />
@@ -271,7 +271,7 @@
             <div class="info-line">
               <div class="label"> {{ $t(`${lang_invoice}.HeaderType`) }}</div>
               <div class="ff ">
-                {{ headType }}
+                {{ formatCoin(headType) }}
               </div>
             </div>
             <div class="info-line">
@@ -312,7 +312,7 @@
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.totalNum`) }}</div>
             <div class="ff">
-              {{ data.coinCode }} {{ formatNumber(data.productAmount) }}
+              {{ formatCoin(data.coinCode) }} {{ formatNumber(data.productAmount) }}
             </div>
           </div>
           <div class="info-line" v-for="item in cardList">
@@ -324,44 +324,44 @@
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.coupon`) }}</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatNumber(data.preferFee) }}
+              -{{ formatCoin(data.coinCode) }} {{ formatNumber(data.preferFee) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.freight`) }}</div>
             <div class="ff">
-              +{{ data.coinCode }} {{ formatNumber(data.logisticsFee) }}
+              +{{ formatCoin(data.coinCode) }} {{ formatNumber(data.logisticsFee) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.tex`) }}</div>
             <div class="ff">
-              +{{ data.coinCode }} {{ formatNumber(data.taxFee) }}
+              +{{ formatCoin(data.coinCode) }} {{ formatNumber(data.taxFee) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.insurance`) }}</div>
             <div class="ff">
-              +{{ data.coinCode }} {{ formatNumber(data.safeFee) }}
+              +{{ formatCoin(data.coinCode) }} {{ formatNumber(data.safeFee) }}
             </div>
           </div>
           <div v-if="data.transPreferFee" class="info-line">
             <div class="label">{{ $t(`${lang}.transPreferFee`) }}</div>
             <div class="ff">
-              +{{ data.coinCode }} {{ formatNumber(data.transPreferFee) }}
+              +{{ formatCoin(data.coinCode) }} {{ formatNumber(data.transPreferFee) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label big-label">{{ $t(`${lang}.orderTotal`) }}</div>
             <div class="ff big-ff">
               <!-- {{ data.coinCode }} {{ formatNumber(data.orderAmount) }} -->
-              {{ data.coinCode }} {{ formatNumber(data.orderAmount) }}
+              {{ formatCoin(data.coinCode) }} {{ formatNumber(data.orderAmount) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
             <div class="ff big-ff">
-              {{ data.coinCode }} {{ formatNumber(data.payAmount) }}
+              {{ formatCoin(data.coinCode) }} {{ formatNumber(data.payAmount) }}
             </div>
           </div>
         </div>

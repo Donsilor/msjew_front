@@ -37,7 +37,7 @@
         <div class="operate-area">
           <div class="range">
             <div class="range-input min-range">
-              <span class="coin">{{ $store.state.coin }}</span>
+              <span class="coin">{{ formatCoin(coinType) }}</span> 
               <div class="range-text">
                 <span>{{ formatNumber(searchConditions.priceRange[0]) }}</span>
                 <input
@@ -55,7 +55,7 @@
             </div>
             <span class="to">{{ $t(`${lang}.to`) }}</span>
             <div class="range-input max-range">
-              <span class="coin">{{ $store.state.coin }}</span>
+              <span class="coin">{{ formatCoin(coinType) }}</span>
               <div class="range-text">
                 <span>{{ formatNumber(searchConditions.priceRange[1]) }}</span>
                 <input
@@ -618,7 +618,7 @@
                 <div class="row-flex align-item-center">
                   <div class="left-item elastic-flex-item">
                     <div class="product-price">
-                      <span class="coin">{{ item.coinType }}</span>
+                      <span class="coin">{{ formatCoin(item.coinType) }}</span>
                       <span class="price">{{
                         formatNumber(item.salePrice)
                       }}</span>
@@ -970,7 +970,8 @@ export default {
           sortType: '',
           sortBy: ''
       },
-      loading:true
+      loading:true,
+      coinType:''
     }
   },
   computed: {
@@ -1267,7 +1268,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("加载状态",this.allData)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -1402,6 +1403,7 @@ export default {
         if (item.itemType === 'product') {
           result.push(item)
         }
+        this.coinType = item.coinType
       })
       return result
     },
@@ -2023,7 +2025,7 @@ export default {
               .product-price {
                 margin-bottom: 5px;
                 text-align: left;
-                font-size: 20px;
+                font-size: 24px;
                 font-family: twCenMT;
                 font-weight: 400;
                 color: rgba(242, 155, 135, 1);
@@ -2248,7 +2250,7 @@ export default {
             height: 24px;
             padding: 0 12px;
             margin-bottom: 8px;
-            font-size: 20px;
+            font-size: 24px;
             font-family: twCenMT;
             font-weight: 400;
             color: rgba(242, 155, 135, 1);
@@ -2258,14 +2260,15 @@ export default {
             .coin {
               flex-grow: 0;
               flex-shrink: 0;
-              margin-right: 6px;
+              font-size: 18px;
+              // margin-right: 6px;
             }
 
             .price {
               flex-grow: 1;
               flex-shrink: 1;
               min-width: 0;
-              margin-right: 6px;
+              // margin-right: 6px;
               overflow: hidden;
             }
 

@@ -21,7 +21,7 @@
               @blur="watchNum(`start`)"
             />
             <span v-show="opStart" @click="focusAgain(`start`)">
-              {{ coinType }} {{ outNumStart }}
+              {{  formatCoin(coinType) }} {{ outNumStart }}
             </span>
           </div>
           <div>
@@ -32,7 +32,7 @@
               @blur="watchNum(`end`)"
             />
             <span v-show="opEnd" @click="focusAgain(`end`)">
-              {{ coinType }} {{ outNumEnd }}
+              {{ formatCoin(coinType) }} {{ outNumEnd }}
             </span>
           </div>
         </div>

@@ -56,7 +56,7 @@
         /></a>
         {{ goodInfo.goodsName }}
       </div>
-      <div class="price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
+      <div class="price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
       <div class="promise-box">
         <!-- <div
           v-for="(c, index) in goodInfo.goodsServicesJsons"

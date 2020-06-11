@@ -25,7 +25,7 @@
               </div>
               <div class="right-info-block product-price">
                 <span class="coin">
-                  {{ info.coinType }}
+                  {{ formatCoin (info.coinType) }}
                 </span>
                 <span class="price">
                   {{ formatNumber(block1.price) }}
@@ -46,7 +46,7 @@
               </div>
               <div class="right-info-block product-price">
                 <span class="coin">
-                  {{ info.coinType }}
+                  {{ formatCoin (info.coinType) }}
                 </span>
                 <span class="price">
                   {{ formatNumber(block2.price) }}
@@ -56,7 +56,7 @@
           </div>
           <div class="product-price">
             <span class="coin">
-              {{ info.coinType }}
+              {{ formatCoin (info.coinType) }}
             </span>
             <span class="price">
               {{ formatNumber(price) }}

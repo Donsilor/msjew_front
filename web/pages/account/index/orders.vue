@@ -82,7 +82,7 @@
 
             <div class="right">
               <span>1</span>
-              {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}
+              {{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
             </div>
           </div>
 
@@ -117,11 +117,11 @@
             </div>
             <span
               >{{ $t(`${lang}.NeedPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
           <!--已付款 20-->
@@ -133,11 +133,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
           <!--待发货 30-->
@@ -149,11 +149,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -180,11 +180,11 @@
             </div>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -197,11 +197,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -217,11 +217,11 @@
             </div>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -237,11 +237,11 @@
             <!--            </button>-->
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -254,11 +254,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
         </div>
@@ -363,7 +363,7 @@ export default {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
-          console.log("订单0",res.data)
+          // console.log("订单0",res.data)
           if(res.code != 200){
             return
           }
@@ -470,7 +470,7 @@ export default {
             })
           }
           this.listData = res.data.data
-          console.log("订单",this.listData)
+          // console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {
