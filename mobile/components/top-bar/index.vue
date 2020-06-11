@@ -6,9 +6,10 @@
       </div>
       <div class="site-info" @click="toSiteSwitch">
           <div class="flag">
-            <img v-show="hkIcon" src="/hongkong-round.png" />
-            <img v-show="cnIcon" src="/china-round.png" />
-            <img v-show="enIcon" src="/USA-round.png" />
+            <!-- <img v-show="hkIcon" src="/hongkong-round.png" /> -->
+            <!-- <img v-show="cnIcon" src="/china-round.png" /> -->
+            <!-- <img v-show="enIcon" src="/USA-round.png" /> -->
+            <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           </div>
           <div class="language">
             <span>{{language}}</span>
@@ -20,7 +21,7 @@
             {{ coinInfo.content }}
           </div> -->
         </div>
-      
+
     </div>
     <div class="center">
       <img src="/logo1.png" class="logo" @click="toIndex" />
@@ -67,7 +68,7 @@ export default {
       language:'简',
       cnIcon:true,
       enIcon:false,
-      hkIcon:false 
+      hkIcon:false
     }
   },
   computed: {
@@ -168,16 +169,17 @@ export default {
   color:#A2C2D2;
 }
 </style>
-<style scoped> 
+<style scoped>
 /* .active{
   color:#f29b87;
 } */
 /*站点信息*/
 .site-info {
   border-radius: 20px;
-  padding: 1px 6px 1px 1px;
+  padding-right: 2px;
   background-color: #a2c2d2;
-  width: 47px;
+  width: 44px;
+  height: 18px;
   /* flex-grow: 0;
   flex-shrink: 0; */
   display: flex;
@@ -186,28 +188,16 @@ export default {
   /* margin-left: 5px; */
 }
 .site-info .flag {
-  flex-grow: 0;
-  flex-shrink: 0;
-  line-height: 0;
-  margin-right: 6px;
+  margin: 1px 4px 0 0;
 }
-.site-info .flag img {
-  height: 16px;
+.site-info .flag i {
+  color: #d72923;
+  font-size: 14px;
 }
 .site-info .language {
-  display: inline-block;
-  width: 18px;
-  flex-grow: 0;
-  flex-shrink: 0;
-  margin-top: 3px;
-  /* height: 22px;
-  line-height: 20px; */
   font-size: 13px;
   font-weight: 400;
-  /* color: rgba(102, 102, 102, 1); */
   color:#fff;
-  text-align: center;
-  box-sizing: border-box;
 }
 .site-info .gap-line {
   margin: 0 13px;
