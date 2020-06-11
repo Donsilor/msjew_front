@@ -1,5 +1,5 @@
 <template>
-  <div class="sure-oredr">
+  <div class="sure-oredr" ref="getScroll">
     <Header :title="lang.sureOrder" />
     <div v-if="!isLogin" class="is-login" id="loginBox">
       <i class="icon iconfont icongantanhao1"></i>
@@ -1106,12 +1106,30 @@ export default {
       if (this.isLogin) {
         if (!this.hasAddress) {
           this.$toast.show(this.lang.toast2)
+          const topC = document.getElementsByClassName('layout-main')[0];
+
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-this.scrollTop / 5)
+            topC.scrollTop = this.scrollTop + ispeed
+            if (this.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
           this.$nuxt.$loading.finish()
           return
         }
         
         if(this.address.platforms.indexOf(this.platform) === -1){
           this.$toast.show(this.lang.toast5)
+          const topC = document.getElementsByClassName('layout-main')[0];
+
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-this.scrollTop / 5)
+            topC.scrollTop = this.scrollTop + ispeed
+            if (this.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
           this.$nuxt.$loading.finish()
           return 
         }
