@@ -1089,7 +1089,8 @@
     "addToBracelet": "ADD TO BRACELET",
     "lady": "Women",
     "gentlemen": "Men",
-    "general": "General model"
+    "general": "General model",
+    "size": "size"
   },
   "listCommons": {
     "sliders": [

@@ -113,11 +113,11 @@ export default {
           }
           stArr.push(o)
         }
-        stArr.unshift({
-          content: this.lang.stArrContent,
-          sortType: ``,
-          sortBy: ``
-        })
+        // stArr.unshift({
+        //   content: this.lang.stArrContent,
+        //   sortType: ``,
+        //   sortBy: ``
+        // })
         if(res.carats){
           const carats = []
           for (const i in res.carats) {
@@ -184,7 +184,8 @@ export default {
           this.conditions[0].checked = [
             this.goodInfo.materials[0].id || ''
           ]
-          this.chooseSize = this.goodInfo.sizes[0].content
+          this.chooseSize = ''
+          // this.chooseSize = this.goodInfo.sizes[0].content
           if(this.goodInfo.carats){
             this.chooseCaratId = this.goodInfo.carats[0].sortBy
             this.chooseCarat = this.goodInfo.carats[0].content

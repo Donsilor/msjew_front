@@ -8,10 +8,15 @@
 <script>
 import DetailBody from '../ring-factory/rings-body'
 export default {
-  
+
   layout: `no-bar`,
   components: {
     DetailBody
+  },
+  data() {
+    return{
+      lang: this.LANGUAGE.detailCommons,
+    }
   },
   methods: {
     doStep(data = {}) {
