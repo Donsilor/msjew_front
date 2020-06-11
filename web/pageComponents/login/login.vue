@@ -5,7 +5,7 @@
       <div class="relative margin-bottom-20">
         <div class="login-input icon-input">
           <span class="icon">
-            <img src="/login/phone.png" />
+            <img class="phone" src="/login/phone.png" />
           </span>
           <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" />
         </div>
@@ -109,7 +109,7 @@
         </button>
       </div>
 
-      <div class="margin-bottom-29" v-if="language === 'zh_CN'">
+      <div class="margin-bottom-29" v-if="language === 'zh_CN' || (language === '' && this.$store.state.platform === 20)">
         <button v-loading="requesting" class="submit" @click="loginT('a')">
           {{ $t(`${lang}.phoneLogin`) }}
         </button>
@@ -262,25 +262,25 @@ export default {
     // 登录
     login () {
       const _this = this;
-      
+
       if (_this.mobile === '') {
         _this.isActive1 = true
         _this.phoneErr = true
         return
       }
-      
+
       if (_this.password === '') {
         _this.isActive2 = true
         _this.passwordErr = true
         return
       }
-      
+
       if (_this.code === '') {
         _this.isActive3 = true
         _this.codeErr = true
         return
       }
-      
+
       if(this.loginType == 1){
         // 手机登录
         this.$axios({
@@ -299,7 +299,7 @@ export default {
             localStorage.setItem("accessToken", data.access_token);
             let nowDate = parseInt((new Date()).getTime() / 1000)
             localStorage.setItem("refreshTime", nowDate);
-        
+
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
@@ -312,7 +312,7 @@ export default {
               const lastUrl=localStorage.getItem("url")
               // _this.$store.commit('setLastUrl','')
               console.log('login', lastUrl)
-        
+
               setTimeout(() => {
                 if (lastUrl) {
                   _this.$router.replace({
@@ -325,7 +325,7 @@ export default {
                   })
                 }
               }, 0)
-        
+
             }
           })
           .catch(err => {
@@ -347,13 +347,13 @@ export default {
           }
         })
           .then(res => {
-        
+
             const data = res.data
             localStorage.setItem("refreshToken", data.refresh_token);
             localStorage.setItem("accessToken", data.access_token);
             let nowDate = parseInt((new Date()).getTime() / 1000)
             localStorage.setItem("refreshTime", nowDate);
-        
+
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
@@ -381,7 +381,7 @@ export default {
               /*setTimeout(() => {
                 window.location.reload()
               }, 1000)*/
-        
+
             }
           })
           .catch(err => {
@@ -540,5 +540,8 @@ input::placeholder {
     border: 1px solid #f4a997 !important;
     border-radius: 6px;
   }
+}
+.icon .phone{
+  width: 18px !important;
 }
 </style>
