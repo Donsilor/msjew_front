@@ -268,7 +268,7 @@
                     :before-upload="beforeUpload"
                     list-type="picture-card"
                     :on-preview="handlePictureCardPreview"
-                    :on-remove="handleRemove" 
+                    :on-remove="handleRemove"
                     :limit="1"
                     :on-change = "onchange"
                     >
@@ -328,12 +328,14 @@
       type="one"
       @done="failedOrder = false"
     />
+
+    <div class="pop-layer" v-if="ifShowLayer"></div>
   </div>
 </template>
 
 <script>
 const lang = `pay`
-// const token =  this.$store.state.token 
+// const token =  this.$store.state.token
 export default {
   data() {
     if ( parseInt(this.$route.query.payType)===7 ) {
@@ -365,7 +367,8 @@ export default {
       myHeaders: {access_token: this.$store.state.token},
       accountlist:[],
       accountWay:'',
-      coinHKD:'HKD'
+      coinHKD:'HKD',
+      ifShowLayer: false
 
       // myHeaders:this.$store.state.token,
       // imgDatas:[],
@@ -377,7 +380,7 @@ export default {
   mounted(){
     this.language = this.getCookie('language')
     let element = document.querySelector('.el-upload ')
-    console.log("44444",this.fileList)
+    // console.log("44444",this.fileList)
     this.getAccount()
     // if(this.dialogImageUrl.length == 1){
     //   console.log("44444")
@@ -411,9 +414,9 @@ export default {
     },
     // 上传图片
     beforeUpload(file) {
-      console.log("file2222",file) 
+      console.log("file2222",file)
       // jpeg,bmp,jpg,png,tif,gif,pcx,tga,exif,fpx,svg,psd,cdr,pcd,dxf,ufo,eps,ai,raw,WMF,webp
-      const isJPG = 
+      const isJPG =
         file.type == 'image/jpeg'||
         file.type == 'image/png'||
         file.type == 'image/jpg'||
@@ -463,7 +466,7 @@ export default {
     },
     // 完成付款
     Finished(){
-      console.log('a',typeof this.accountWay)
+      // console.log('a',typeof this.accountWay)
       // return
       if(this.accountWay === ''){
         this.$message.error(this.$t(`${lang}.selectAccount`))
@@ -482,6 +485,7 @@ export default {
       this.$axios
         .post('/web/pay/wire-transfer',data)
         .then(res => {
+          this.ifShowLayer = true
           this.$successMessage(this.$t(`${lang}.transferSuccessful`))
           this.transfer = false
           setTimeout(() => {
@@ -1027,7 +1031,7 @@ div {
               color: #ba7f8c !important;
             }
           }
-          
+
         }
         .uploadPic{
           display: flex;
@@ -1155,7 +1159,7 @@ div {
       }
     }
   }
-  
+
 }
 </style>
 <style>
@@ -1179,5 +1183,14 @@ div {
 }
 .el-upload-list__item.is-success .el-upload-list__item-status-label{
   display: none;
+}
+.pop-layer{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1201;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 </style>
