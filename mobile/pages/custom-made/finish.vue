@@ -295,6 +295,9 @@ export default {
           font-size: 18px;
           line-height: 18px;
         }
+        .new-price{
+          color:#f29b87;
+        }
       }
     }
   }

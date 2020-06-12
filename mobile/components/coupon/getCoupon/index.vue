@@ -66,6 +66,7 @@
       }
     },
     mounted() {
+      console.log("sssss",this.couponList)
       this.language = this.getCookie('language')
       this.coin = this.$store.state.coin
 

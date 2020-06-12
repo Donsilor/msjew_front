@@ -190,6 +190,7 @@ class Helpers {
    * return	格式化後的數值字符串
    */
   formatMoney(num, type) {
+    
     if (!num) {
       return '0.00'
     }
@@ -206,6 +207,12 @@ class Helpers {
   // 折扣换算
   discountConversion(num){
     num = num/10
+    return num
+  }
+
+  // 英文折扣换算
+  discountUs(num){
+    num = 100 -(num)
     return num
   }
 

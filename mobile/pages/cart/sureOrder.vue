@@ -95,8 +95,9 @@
     <div class="footer">
       <div class="content">
         <div class="time">
-          <span>{{ lang.time }}</span
-          ><span>{{ planDays }}{{ lang.week }}</span>
+          <span>{{ lang.time }}</span>
+          <span v-if="!isLogin">{{ allFee.plan_days }}{{ lang.week }}</span>
+          <span v-else>{{ planDays }}{{ lang.week }}</span> 
         </div>
         <div v-if="productNum > 1" class="send">
           <div
@@ -284,7 +285,7 @@
               >-{{ coin }}
               {{this.couponCodeR.couponPrice}}</span
             >
-            <span v-if="!couponCodeR.couponPrice" @click="useCoupon">{{ lang.useCoupons }}</span>
+            <span class="use-coupon" v-if="!couponCodeR.couponPrice" @click="useCoupon">{{ lang.useCoupons }}</span>
           </li>
 
           <!-- 购物卡 -->
@@ -531,8 +532,8 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
-      this.planDays = this.allFee.planDays
-      // console.log("allFee",this.planDays)
+      // this.planDays = this.allFee.planDays
+      console.log("allFee",this.list)
       this.idList = []
       this.productAmount = 0
       if(this.list != 0){
@@ -972,7 +973,7 @@ export default {
           })
 
           .then(res => {
-            // console.log("费用",res)
+            console.log("费用",this.allFee)
             this.canSubmit = true
             this.allFee = res
 
@@ -1681,6 +1682,10 @@ export default {
         }
       }
       .price {
+        .use-coupon{
+          text-decoration: underline;
+          color: #75BEEE;
+        }
         li {
           display: flex;
           justify-content: space-between;

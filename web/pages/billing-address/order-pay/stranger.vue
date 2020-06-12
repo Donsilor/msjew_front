@@ -597,7 +597,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ tex.plan_days }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -820,7 +820,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                      <span>{{ $store.state.coin }} {{ formatMoney(ultimatelyPay) }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang3}.tips`) }}</p>
@@ -1608,7 +1608,7 @@
               </div>
             </div>
             <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ tex.plan_days }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -1831,7 +1831,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                      <span>{{ $store.state.coin }} {{ formatMoney(ultimatelyPay) }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang3}.tips`) }}</p>
@@ -2062,7 +2062,7 @@ export default {
       lang2,
       lang3,
       canSubmit: false,
-      pathTakeIds: this.$route.query.cartIds,
+       pathTakeIds: this.$route.query.cartIds.split(','),
       orderSn: this.$route.query.orderId,
       userInfo: {},
       confirmBox: false,
@@ -2113,6 +2113,7 @@ export default {
       scrollTop: 0,
       is_electronic:'',
       areaId : this.$store.state.areaId,
+      ultimatelyPay:''
     }
   },
   // watch:{
@@ -2448,6 +2449,7 @@ export default {
           .then(res => {
             this.canSubmit = true
             this.tex = res.data
+            this.ultimatelyPay = res.data.pay_amount;
             console.log("税费",this.tex)
           })
           .catch(err => {

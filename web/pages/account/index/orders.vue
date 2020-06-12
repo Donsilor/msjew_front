@@ -356,7 +356,6 @@ export default {
         }else{
           k_type = 0;
         }
-
         return k_type
       }
     }
@@ -475,7 +474,7 @@ export default {
             })
           }
           this.listData = res.data.data
-          // console.log("订单",this.listData)
+          console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {

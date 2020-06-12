@@ -814,7 +814,7 @@
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
-              <div class="hkd">{{ good.length }}</div>
+              <div class="hkd">{{ productCount }}</div>
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -1753,7 +1753,7 @@
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
-              <div class="hkd">{{ good.length }}</div>
+              <div class="hkd">{{ productCount }}</div>
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -2016,7 +2016,8 @@ export default {
       couponAll: [],
       // 已领取优惠券
       couponAlready: [],
-      ifShowCoupon: false
+      ifShowCoupon: false,
+      productCount:''
     }
   },
   computed: {
@@ -2039,9 +2040,14 @@ export default {
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           this.good = res
-
+          
+          this.productCount = this.good.length
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
+            if(res[i].groupType === 2){
+              this.productCount = this.productCount + 1
+             console.log("ffff", this.productCount)
+            }
           }
 
           resolve()
@@ -2072,6 +2078,7 @@ export default {
       })
   },
   mounted() {
+    // 
     // this.getAddress();
     this.language = this.getCookie('language')
   },

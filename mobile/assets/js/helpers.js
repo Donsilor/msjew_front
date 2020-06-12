@@ -169,6 +169,12 @@ class Helpers {
     return num
   }
 
+  // 英文折扣换算
+  discountUs(num){
+    num = 100 -(num)
+    return num
+  }
+
   // 判断折扣、优惠券对象是否为空
   couponType(a){
     var result;

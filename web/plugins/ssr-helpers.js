@@ -29,6 +29,9 @@ export default function({ req, res, app, store }) {
   // 打折由百分比换成小数点
   Vue.prototype.discountConversion = Helpers.discountConversion
 
+  // 英文模式下的折扣数额是减去获取的结果
+  Vue.prototype.discountUs = Helpers.discountUs
+
   // 判断是否有打折活动
   Vue.prototype.couponType = Helpers.couponType
 

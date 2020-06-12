@@ -48,7 +48,7 @@
 
               <!-- 折扣 -->
               <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'">
-                <div>{{ language == 'en_US' ? each.coupon.discount.discount+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                <div>{{ language == 'en_US' ? discountUs(each.coupon.discount.discount)+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
               </div>
 
               <!-- 优惠券 -->
@@ -60,7 +60,7 @@
 
             <!-- 折扣 -->
             <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'discount'">
-              <span class="discount-a-icon2">{{ language == 'en_US' ? each.coupon.discount.discount+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+              <span class="discount-a-icon2">{{ language == 'en_US' ? discountUs(each.coupon.discount.discount)+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
               {{ each.goodsName }}
             </div>
 

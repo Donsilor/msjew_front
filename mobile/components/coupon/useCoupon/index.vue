@@ -22,7 +22,7 @@
                 <span class="price-num">{{item.money}}</span>
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
-              <div class="rule">{{ lang.limit1 }}{{coin}}{{item.at_least_cn}}{{ lang.limit2 }}</div>
+              <div class="rule">{{ lang.limit1 }}{{coin}}{{item.at_least}}{{ lang.limit2 }}</div>
               <div class="text">({{item.lineType}})</div>
               <div class="time">{{ lang.time }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
@@ -30,6 +30,10 @@
             <div class="get" @click="chooseCoupon(index)">
               <div>
                 <span>{{item.ifChoose ? lang.haveChoose : lang.immediatelyChoose}}</span>
+                <i
+                  class="icon iconfont"
+                  :class="item.ifChoose ? 'icongou' : ''"
+                ></i>
               </div>
             </div>
           </div>
@@ -71,6 +75,7 @@
       }
     },
     mounted() {
+      console.log("sssss",this.couponList)
       this.language = this.getCookie('language')
       this.coin = this.$store.state.coin
 
@@ -337,6 +342,29 @@
               span {
                 padding: 10px;
                 box-sizing: border-box;
+                position: relative;
+              }
+              
+              i {
+                position: absolute;
+                right:28%;
+                top:20px;
+                width: 20px;
+                height: 20px;
+                margin: 20px 12px 0 0;
+                background: rgba(255, 255, 255, 1);
+                border: 1px solid rgba(187, 187, 187, 1); /*no*/
+                border-radius: 50%;
+              }
+
+              .icongou {
+                background: rgba(242, 155, 135, 1);
+                border-radius: 50%;
+                font-size: 18px;
+                line-height: 20px;
+                color: #ffffff;
+                text-align: center;
+                border: 1px solid rgba(242, 155, 135, 1); /*no*/
               }
             }
           }
