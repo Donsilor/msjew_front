@@ -2000,7 +2000,8 @@ export default {
       coinType:'',
       num: 0,
       mobileMax: 20,
-      currency: ''
+      currency: '',
+      platform: this.$store.state.platform
     }
   },
   computed: {
@@ -2057,6 +2058,7 @@ export default {
       })
   },
   mounted() {
+    console.log("platform",this.platform)
     // this.getAddress();
     this.language = this.getCookie('language')
   },
@@ -2143,7 +2145,7 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-          // console.log(res.data)
+          console.log("地址",res.data)
           this.address = res.data
           if(this.address.length != 0){
             // for (const i in res.data) {
@@ -2835,18 +2837,27 @@ export default {
         })
     },
     createOrder() {
-      var that = this;
+      // console.log("地址",this.orderAddress.platforms)
       // console.log("4444",this.address)
-      // console.log()
+      // console.log("platform",this.platform)
+      var that = this;
       // if (!this.canSubmit) {
       //   return
       // }
+      
       if (this.address.length == 0) {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
 
       }
+
+      if(this.orderAddress.platforms.indexOf(this.platform) === -1){
+        this.wrongMsg = this.$t(`${lang}.msg12`)
+        this.alertBox = true
+        return false
+      }
+
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
@@ -2917,6 +2928,12 @@ export default {
       // }
       if (this.address.length == 0) {
         this.wrongMsg = this.$t(`${lang}.msg4`)
+        this.alertBox = true
+        return false
+      }
+
+      if(this.orderAddress.platforms.indexOf(this.platform) === -1){
+        this.wrongMsg = this.$t(`${lang}.msg12`)
         this.alertBox = true
         return false
       }

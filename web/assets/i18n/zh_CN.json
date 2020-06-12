@@ -476,7 +476,7 @@
             "hadSend": "已发送"
         },
         "messageBox": {
-            "sure": "確定",
+            "sure": "确认",
             "cancel": "取消"
         },
         "noMoreData": {
@@ -2520,6 +2520,7 @@
         "msg7": "出错了，出错位置：下订单跳转支付",
         "msg8": "数据获取失败，请返回购物车重试！",
         "msg9": "请选择支付方式!",
+        "msg12":"您选择的配送地址跟当前所在地区不一致，请重新选择或联系客服处理！",
         "useShoppingCard": "使用购物卡",
         "editOrUnbound": "编辑/解绑购物卡",
         "shoppingCard": "购物卡",
