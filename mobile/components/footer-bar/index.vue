@@ -53,7 +53,7 @@
           <!--              {{ lang.BDDStory }}-->
           <!--            </span>-->
           <!--          </li>-->
-          <li class="item" v-if="this.$store.state.platform === 20">
+          <li class="item" v-if="this.$store.state.platform === 21">
             <span @click="jump('/help-pages/aboutCompany')">
               {{ lang.aboutCompany }}
             </span>
