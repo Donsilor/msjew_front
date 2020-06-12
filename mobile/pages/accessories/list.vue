@@ -117,7 +117,7 @@ export default {
   watch: {
     $route(to, from){
       this.actIndex = parseFloat(this.$route.query.actIndex)
-      console.log(3333,this.actIndex)
+      // console.log(3333,this.actIndex)
     }
   },
   methods: {
