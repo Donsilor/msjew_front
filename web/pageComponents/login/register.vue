@@ -145,7 +145,7 @@
             </div>
           </div>
           <div v-show="repwdShow" class="error-tip">
-            {{ $t(`${lang}.repasswordTips`) }}
+            {{ $t(`${lang}.passwordTips`) }}
           </div>
         </div>
         <div class="agreement row-flex align-item-start justify-center margin-bottom-10" >

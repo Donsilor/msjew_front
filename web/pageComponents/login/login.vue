@@ -7,7 +7,7 @@
           <span class="icon">
             <img class="phone" src="/login/phone.png" />
           </span>
-          <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" />
+          <input id="ipt1" v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" />
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phoneTips`) }}
@@ -21,7 +21,7 @@
           <input  v-model.trim="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" maxlength="60" />
         </div>
         <div v-show="passwordErr" class="error-tip">
-          {{ $t(`${lang}.pwd`) }}
+          {{ $t(`${lang}.passwordTips`) }}
         </div>
       </div>
       <div class="forget margin-bottom-10">
@@ -68,9 +68,9 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input v-model.trim="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailBox`)" maxlength="60" />
+          <input id="ipt2" v-model.trim="account"  @keyup="keyupEvent6" @keypress="keypressEvent6" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailBox`)" maxlength="60" />
         </div>
-        <div v-show="phoneErr" class="error-tip">
+        <div v-show="mailErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
         </div>
       </div>
@@ -149,10 +149,12 @@ export default {
       isActive1: false,
       isActive2: false,
       isActive3: false,
+      isActive6: false,
       oldUrl:'',
       // 手机注册1,邮箱注册2
       loginType: 2,
-      ifShowBtn: false
+      ifShowBtn: false,
+      autocomplete: ''
     }
   },
 
@@ -243,6 +245,14 @@ export default {
       // this.isActive3=false
       // this.passwordErr=false
     },
+    keyupEvent6 () {
+      this.isActive6 = false
+      this.mailErr = false
+    },
+    keypressEvent6 () {
+      this.isActive6 = false
+      // this.mailErr=false
+    },
     // 查询cookie
     getCookie (cname) {
       const name = cname + '='
@@ -268,13 +278,6 @@ export default {
     // 登录
     login () {
       const _this = this;
-
-      if (_this.mobile === '') {
-        _this.isActive1 = true
-        _this.phoneErr = true
-        return
-      }
-
       if (_this.password === '') {
         _this.isActive2 = true
         _this.passwordErr = true
@@ -287,8 +290,14 @@ export default {
         return
       }
 
+      // 手机登录
       if(this.loginType == 1){
-        // 手机登录
+        if (_this.mobile === '') {
+          _this.isActive1 = true
+          _this.phoneErr = true
+          return
+        }
+
         this.$axios({
           method: 'post',
           url: '/web/site/login',
@@ -338,10 +347,16 @@ export default {
             //console.error(err)
             _this.requesting = false
             _this.refreshCode()
-            _this.$errorMessage(err.message)
+            // _this.$errorMessage(err.message)
           })
+      // 邮箱登录
       }else{
-        // 邮箱登录
+        if (_this.account === '') {
+          _this.isActive6 = true
+          _this.mailErr = true
+          return
+        }
+
         this.$axios({
           method: 'post',
           url: '/web/site/login',
@@ -398,6 +413,10 @@ export default {
       }
     },
     loginT(i) {
+      this.account = '';
+      this.mobile = '';
+      this.password = '';
+
       if(i == 'a'){
         this.loginType = 1
       }else if(i == 'b'){

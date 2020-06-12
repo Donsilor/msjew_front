@@ -48,7 +48,7 @@ export default {
         }
       ],
       language: '',
-      loginType: 2
+      loginType: this.$route.query.loginType || 1
     }
   },
   computed: {},
@@ -93,6 +93,8 @@ export default {
     },
     // 切换tab
     changeActiveTab(tab) {
+      // console.log(this.loginType)
+      // return
       this.$router.replace({
         path: '/login',
         query: {
