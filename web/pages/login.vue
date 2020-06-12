@@ -69,13 +69,15 @@ export default {
 
     this.language = this.getCookie('language')
 
-    // 如果中文 或 大陆站点且cookie没有语言时为手机注册
-    if(this.language === 'zh_CN' || (this.language === '' && this.$store.state.platform === 20)){
-      this.loginType = 1
-    }
-    // // 如果非中文 或 非大陆站点且cookie没有语言时为邮箱注册
-    if((this.language !== 'zh_CN' && this.language !== '') || (this.language === '' && this.$store.state.platform !== 20)){
-      this.loginType = 2
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
+      this.loginType = 1;
+    }else{
+      if(this.language == "zh_CN"){
+        this.loginType = 1
+      }else{
+        this.loginType = 2;
+      }
     }
   },
   methods: {

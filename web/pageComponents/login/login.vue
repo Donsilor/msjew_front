@@ -48,7 +48,7 @@
         </button>
       </div>
 
-      <div class="margin-bottom-29">
+      <div class="margin-bottom-29" v-if="ifShowBtn">
         <button v-loading="requesting" class="submit" @click="loginT('b')">
           {{ $t(`${lang}.mailLogin`) }}
         </button>
@@ -198,15 +198,18 @@ export default {
     // }
     this.language = this.getCookie('language')
 
-    // 如果中文 或 大陆站点且cookie没有语言时为手机注册
-    if(this.language === 'zh_CN' || (this.language === '' && this.$store.state.platform === 20)){
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
       this.loginType = 1;
       this.ifShowBtn = true;
-    }
-    // // 如果非中文 或 非大陆站点且cookie没有语言时为邮箱注册
-    if((this.language !== 'zh_CN' && this.language !== '') || (this.language === '' && this.$store.state.platform !== 20)){
-      this.loginType = 2;
+    }else{
       this.ifShowBtn = false;
+
+      if(this.language == "zh_CN"){
+        this.loginType = 1
+      }else{
+        this.loginType = 2;
+      }
     }
 
     const _this = this
