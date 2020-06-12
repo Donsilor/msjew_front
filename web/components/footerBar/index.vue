@@ -155,14 +155,7 @@ export default {
               to: {
                 path: '/policies/payment-methods'
               }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.aboutCompany`),
-              to: {
-                path: '/policies/about-company'
-              }
-            },
+            }
           ]
         },
         {
@@ -283,14 +276,7 @@ export default {
               to: {
                 path: '/policies/payment-methods'
               }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.aboutCompany`),
-              to: {
-                path: '/policies/about-company'
-              }
-            },
+            }
           ]
         },
         {
