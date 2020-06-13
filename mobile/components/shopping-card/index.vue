@@ -291,6 +291,7 @@
               that.cardList[k].currency = res.currency;
               that.startTime = res.startTime * 1000;
               that.endTime = res.endTime * 1000;
+              that.limitedUseTime = res.limitedUseTime * 1000
 
               var c = 0, arr = [];
               for(var n in res.goodsTypes){
@@ -305,31 +306,56 @@
               var time = new Date().getTime();
               // console.log(888,time,999,that.startTime,0,that.endTime)
               if(time > that.startTime && time < that.endTime){
-                that.verifyStatus = 1;
-                that.cardList[k].type = 1;
-
-                if(that.cardList[k].balance !== 0 && that.cardList[k].ifAllowedToUse){
-                  that.cardList[k].ifChoose = true;
-                }else{
-                  that.cardList[k].ifChoose = false;
-                }
-
-                for(var i=0,len=that.cardList.length; i<len; i++){
-                  if(that.cardList[i].ifChoose != true){
-                    flag = false;
+                if(that.limitedUseTime == 0){
+                  that.verifyStatus = 1;
+                  that.cardList[k].type = 1;
+  
+                  if(that.cardList[k].balance !== 0 && that.cardList[k].ifAllowedToUse){
+                    that.cardList[k].ifChoose = true;
+                  }else{
+                    that.cardList[k].ifChoose = false;
                   }
-                }
-
-                if(flag){
-                  that.ifChooseAll = true;
+  
+                  for(var i=0,len=that.cardList.length; i<len; i++){
+                    if(that.cardList[i].ifChoose != true){
+                      flag = false;
+                    }
+                  }
+  
+                  if(flag){
+                    that.ifChooseAll = true;
+                  }
+                } else if(that.limitedUseTime !== 0 && time < that.limitedUseTime){
+                  that.verifyStatus = 1;
+                  that.cardList[k].type = 1;
+  
+                  if(that.cardList[k].balance !== 0 && that.cardList[k].ifAllowedToUse){
+                    that.cardList[k].ifChoose = true;
+                  }else{
+                    that.cardList[k].ifChoose = false;
+                  }
+  
+                  for(var i=0,len=that.cardList.length; i<len; i++){
+                    if(that.cardList[i].ifChoose != true){
+                      flag = false;
+                    }
+                  }
+  
+                  if(flag){
+                    that.ifChooseAll = true;
+                  }
+                } else if(that.limitedUseTime !== 0 && time > that.limitedUseTime){
+                  that.verifyStatus = 2;
+                  that.cardList[k].type = 2;
+                  that.$toast.show(this.lang.msg13);
                 }
               }else if(time < that.startTime){
                 that.verifyStatus = 2;
-				that.cardList[k].type = 2;
+				        that.cardList[k].type = 2;
                 that.$toast.show(this.lang.msg12);
               }else if(time > that.endTime){
                 that.verifyStatus = 2;
-				that.cardList[k].type = 2;
+				        that.cardList[k].type = 2;
                 that.$toast.show(this.lang.msg13);
               }
             })

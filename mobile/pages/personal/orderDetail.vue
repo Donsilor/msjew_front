@@ -4,16 +4,32 @@
     <div class="content">
       <div class="top">
         <!--        <OrderHeader :list="statusSteps" :stepindex="step" />-->
-        <div v-if="info.wireTransferStatus == null" class="status-title">
+        <div v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null" class="status-title">
+          {{ getTransferStatus(info.wireTransferStatus) }}
+        </div>
+        <div v-else-if="info.refundStatus == 1" class="status-title">
+          {{ getRefundStatusText(info.refundStatus) }}
+        </div>
+        <div v-else class="status-title">
+          {{ statusText(info.orderStatus) }} 
+        </div>
+        <!-- <div v-if="info.wireTransferStatus == null && info.refundStatus == 0" class="status-title">
           {{ statusText(info.orderStatus) }}
+        </div>
+        <div v-else-if="info.refundStatus == 1" class="status-title">
+          {{ getRefundStatusText(info.refundStatus) }}
         </div>
         <div v-else class="status-title">
           {{ getTransferStatus(info.wireTransferStatus) }} 
-        </div>
+        </div> -->
         <div class="service">
           <ul>
-            <li v-if="info.wireTransferStatus == null">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
-            <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
+            <!-- <li v-if="info.wireTransferStatus == null && info.refundStatus == 0">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
+            <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
+            <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li> -->
+            <li v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null">{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
+            <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
+            <li v-else>{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
             <li>{{ lang.orderTime }}：{{ info.orderTime }}</li>
             <template v-if="info.orderStatus > 20 && info.orderStatus !== 50">
@@ -43,7 +59,7 @@
             <span>x 1</span>
             <p>SKU：{{ detail.data[0].goodsCode }}</p>
             <p>{{ detail.data[0].detailSpecs }}</p>
-            <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b>
+            <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
           </div>
 
           <!--              对戒-->
@@ -58,7 +74,7 @@
             <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
             <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
             <b
-              >{{ info.coinCode }}
+              >{{ formatCoin(info.coinCode) }}
               {{ detail.data[1] && detail.data[1].goodsPrice }}</b
             >
           </div>
@@ -71,7 +87,7 @@
             <span>x 1</span>
             <p>SKU：{{ detail.data[0].goodsCode }}</p>
             <p>{{ detail.data[0].detailSpecs }}</p>
-            <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b>
+            <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
             <h4 class="order-ellipsis">
               {{ detail.data[1].goodsName }}
             </h4>
@@ -239,7 +255,7 @@
         <ul class="price">
           <li>
             <span>{{ lang.productsCount }}： </span
-            ><span>{{ info.coinCode }} {{ productsPrice }} </span>
+            ><span>{{ formatCoin(info.coinCode) }} {{ productsPrice }} </span>
           </li>
 		  <li v-for="item in cardList">
 		    <span>{{ lang.shoppingCard }}：
@@ -251,33 +267,33 @@
 		  </li>
           <li v-if="info.preferFee" class="active">
             <span>{{ lang.offer }}： </span
-            ><span>-{{ info.coinCode }} {{ info.preferFee }} </span>
+            ><span>-{{ formatCoin(info.coinCode) }} {{ info.preferFee }} </span>
           </li>
           <li>
             <span>{{ lang.freight }}： </span
-            ><span>+{{ info.coinCode }} {{ info.logisticsFee }} </span>
+            ><span>+{{ formatCoin(info.coinCode) }} {{ info.logisticsFee }} </span>
           </li>
           <li>
             <span>{{ lang.taxes }}： </span
-            ><span>+{{ info.coinCode }} {{ info.taxFee }} </span>
+            ><span>+{{ formatCoin(info.coinCode) }} {{ info.taxFee }} </span>
           </li>
           <li>
             <span>{{ lang.insurance }}： </span
-            ><span>+{{ info.coinCode }} {{ info.safeFee }} </span>
+            ><span>+{{ formatCoin(info.coinCode) }} {{ info.safeFee }} </span>
           </li>
           <li v-if="info.transPreferFee" class="active">
             <span>{{ lang.transPreferFee }}： </span
-            ><span>-{{ info.coinCode }} {{ info.transPreferFee }} </span>
+            ><span>-{{ formatCoin(info.coinCode) }} {{ info.transPreferFee }} </span>
           </li>
           <div class="all">
             <span>{{ lang.orderCount }}</span
             ><span
-              ><em>{{ info.coinCode }} </em>{{ info.orderAmount }}
+              ><em>{{ formatCoin(info.coinCode) }} </em>{{ info.orderAmount }}
             </span>
           </div>
           <div class="all" style="border-top: 0;">
             <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span
-            ><span><em>{{ info.coinCode }} </em>{{ info.payAmount }} </span>
+            ><span><em>{{ formatCoin(info.coinCode) }} </em>{{ info.payAmount }} </span>
           </div>
         </ul>
         <div class="btn">
@@ -289,14 +305,14 @@
             {{ lang.paytips }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null && info.refundStatus == 0"
             class="btn-block"
             @click="goPay(info)"
           >
             {{ lang.toPay }}
           </div>
           <div
-            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null"
+            v-if="(info.orderStatus) > 0 && (info.orderStatus)<20 && info.wireTransferStatus == null && info.refundStatus == 0"
             class="btn-white"
             @click="cancelOrder"
           >
@@ -449,6 +465,12 @@ export default {
         10 : this.lang.payfailed
       };
       return transferStatus_value[transferStatus];
+    },
+    getRefundStatusText(refundStatus){
+      const refundStatus_value = {
+        1 : this.lang.hadClosed
+      };
+      return refundStatus_value[refundStatus];
     },
     payChannelText(payChannel) {
       const map = {

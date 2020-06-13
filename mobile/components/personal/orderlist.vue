@@ -4,8 +4,18 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span v-if="order.wireTransferStatus === null" class="order-status">{{ statusText(order.orderStatus) }}</span>
-          <span v-else class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
+          <span v-if="order.orderStatus !== 0 && order.refundStatus == 0 && order.wireTransferStatus !== null" class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
+          <span v-else-if="order.refundStatus == 1" class="order-status">{{ refundStatusText(order.refundStatus) }}</span>
+          <span v-else class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <!-- <span v-if="order.wireTransferStatus === null && order.refundStatus == 0" class="order-status">{{ statusText(order.orderStatus) }}</span>
+          <span v-else-if="order.refundStatus == 1" class="order-status">{{ refundStatusText(order.refundStatus) }}</span>
+          <span v-else-if="order.orderStatus !== 0" class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span> -->
+          <!-- <div v-else>
+            <span v-if="order.wireTransferStatus == '0' && order.orderStatus == '10'" class="order-status">{{ lang.pending }}</span>
+            <span v-else-if="order.wireTransferStatus == '1' && order.orderStatus == '20'" class="order-status">{{ lang.paid }}</span>
+            <span v-else-if="order.wireTransferStatus == '1' && order.orderStatus == '30'" class="order-status">{{ lang.paid }}</span>
+            <span v-else-if="order.wireTransferStatus == '10' && order.orderStatus == '0'" class="order-status">{{ lang.payfailed }}</span>
+          </div> -->
         </div>
         <div class="top">
           <span>{{ order.orderNO }}</span>
@@ -26,7 +36,7 @@
                 <span>x 1</span>
                 <p>SKU：{{ detail.data[0].goodsCode }}</p>
                 <p>{{ detail.data[0].detailSpecs }}</p>
-                <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
+                <b>{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice}}</b>
               </div>
 
               <!--              对戒-->
@@ -43,7 +53,7 @@
                 <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
                 <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
                 <b
-                  >{{ order.coinCode }}
+                  >{{ formatCoin(order.coinCode) }}
                   {{ detail.data[1] && detail.data[1].goodsPrice }}</b
                 >
               </div>
@@ -57,7 +67,7 @@
                 <p>SKU：{{ detail.data[0].goodsCode }}</p>
                 <p>{{ detail.data[0].detailSpecs }}</p>
                 <b class="display-block margin-bottom-20"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                  >{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice }}</b
                 >
                 <h4 class="order-ellipsis ow-h2">
                   {{ detail.data[1] && detail.data[1].goodsName }}
@@ -65,7 +75,7 @@
                 <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
                 <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
                 <b
-                  >{{ order.coinCode }}
+                  >{{ formatCoin(order.coinCode) }}
                   {{ detail.data[1] && detail.data[1].goodsPrice }}</b
                 >
               </div>
@@ -80,7 +90,7 @@
                 <span class="title">{{ lang.orderCount }}：</span>
                 <div class="order-amount">
                   <div>
-                    <span class="coin-type">{{ order.coinCode }}</span>
+                    <span class="coin-type">{{ formatCoin(order.coinCode) }}</span>
                     <span class="order-price">{{ order.orderAmount }}</span>
                   </div>
                 </div>
@@ -89,7 +99,7 @@
                 <span class="title">{{ order.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}：</span>
                 <div class="order-amount">
                   <div>
-                    <span class="coin-type">{{ order.coinCode }}</span>
+                    <span class="coin-type">{{ formatCoin(order.coinCode) }}</span>
                     <span class="order-price">{{ order.payAmount }}</span>
                   </div>
                 </div>
@@ -329,6 +339,12 @@ export default {
       };
       return transferStatus_value[transferStatus];
     },
+    refundStatusText(refundStatus){
+      const refundStatus_value = {
+        1 : this.lang.hadClosed
+      };
+      return refundStatus_value[refundStatus];
+    },
     // 跳转到详情页
     toDetail(orderId) {
       this.$router.push({
@@ -343,7 +359,8 @@ export default {
       const res = {
         coinType: val.coinCode, // 支付币种 ,
         payAmount: val.payAmount, // 支付金额 ,
-        orderId: val.id // 订单ID
+        orderId: val.id, // 订单ID
+        payAmountHKD: val.payAmountHKD
       }
       this.$router.push({
         name: 'cart-pay',
@@ -564,7 +581,7 @@ export default {
             font-size: 0;
             vertical-align: bottom;
             .coin-type {
-              margin-right: 7px;
+              // margin-right: 7px;
               font-size: 12px;
               font-weight: 400;
               color: rgba(242, 155, 135, 1);

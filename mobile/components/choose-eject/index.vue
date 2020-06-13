@@ -3,17 +3,12 @@
     <div class="bg" @click="closeEmit"></div>
     <div class="eject-box">
       <div class="top">
-        <i class="iconfont iconguanbi close" @click="closeEmit"></i>
         <div class="title">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
-        <div class="button">
-          <button class="clear-btn" @click="clearChoose">
-            {{ lang.clear }}
-          </button>
-        </div>
+        <i class="iconfont iconguanbi close" @click="closeEmit"></i>
       </div>
       <div class="content">
         <quality-data
@@ -33,6 +28,11 @@
           @change="chooseOption"
         ></style-data>
       </div>
+      <div class="button">
+        <button class="clear-btn" @click="clearChoose">
+          {{ lang.clear }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -49,6 +49,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 22;
   width: 100vw;
   height: 100vh;
   visibility: hidden;
@@ -59,7 +60,7 @@ export default {
 .bg {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.6);
   transition: all 0.1s linear;
 }
 .eject.active .bg {
@@ -86,43 +87,40 @@ export default {
 
 /*顶部*/
 .top {
+  height: 40px;
+  line-height: 30px;
   padding: 0 15px;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #f6f6f6;
+  box-sizing:border-box;
+  color: #000;
 }
 .close {
-  flex-basis: 20px;
-  flex-grow: 1;
-  flex-shrink: 1;
-  text-align: left;
-  font-size: 18px;
-  line-height: 18px;
-  color: #bbbbbb;
+  position: absolute;
+  top: 6px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #d2d2d2;
 }
 .title {
-  flex-basis: 220px;
-  flex-grow: 0;
-  flex-shrink: 0;
   text-align: center;
   font-size: 16px;
-  line-height: 16px;
   color: #333333;
-}
-.button {
-  flex-basis: 30px;
-  flex-grow: 1;
-  flex-shrink: 1;
-  text-align: right;
+  box-sizing: border-box;
 }
 .clear-btn {
-  width: 65px;
-  height: 28px;
+  width: 90%;
+  height: 32px;
+  line-height: 32px;
   font-size: 16px;
   font-weight: 400;
   color: #ffffff;
-  border-radius: 4px;
+  border-radius: 16px;
   background-color: #f29b87;
 }
 
@@ -131,4 +129,5 @@ export default {
   max-height: 70vh;
   overflow: auto;
 }
+
 </style>

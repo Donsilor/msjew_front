@@ -3,8 +3,14 @@
         <!-- <Header :title="lang.pleaseSelectAccount" @back="goBack" class="detail"/> -->
         <div class="uploadMsg">
             <div class="Amount">
-              <span class="title1">{{ lang.paidAmount}}</span>
-              <span><span class="coin">{{ $store.state.coin }}</span> <span class="price">{{ formatMoney(price) }}</span></span>
+                <span class="title1">{{ lang.paidAmount}}</span>
+                <span class="price" v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform == 21">
+                  <span class="coin">{{ formatCoin(coin) }}</span> 
+                  <span class="price">{{ formatMoney(price) }}</span>
+                  <span class="coin-hkd">({{ coinHKD }}</span> 
+                  <span class="price-hkd">{{ formatMoney(priceHKD) }})</span>
+                </span>
+                <span v-else><span class="coin">{{ formatCoin(coin) }}</span> <span class="price">{{ formatMoney(price) }}</span></span>
             </div>
             <div class="account">
                 <ul>
@@ -95,6 +101,8 @@ export default {
             lang: this.LANGUAGE.cart.pay,
             price: JSON.parse(this.$route.query.info).payAmount,
             orderId: JSON.parse(this.$route.query.info).orderId,
+            priceHKD: JSON.parse(this.$route.query.info).payAmountHKD,
+            coinHKD:"HKD",
             accountlist: [],
             typeIndex:'',
             fileList: {},
@@ -104,6 +112,7 @@ export default {
             account:'',
             imgs:'',
             number:'',
+            coin:this.$store.state.coin
         }
     },
     props: [],
@@ -242,8 +251,12 @@ export default {
 .uploadContent{
     .uploadMsg{
         .Amount{
-            padding: 20px 0;
+            // padding: 20px 0;
+            padding: 10px 20px 30px 20px;
             color: #f29b87;
+            .price{
+                position: relative;
+            }
             .title1{
                 font-size: 20px;
                 line-height: 25px;
@@ -255,6 +268,22 @@ export default {
             .price{
                 font-size: 23px;
                 line-height: 25px;
+            }
+            .coin-hkd{
+                font-size: 14px;
+                color: #c6bbb9;
+                position: absolute;
+                left:30px;
+                top:30px;
+                // line-height: 25px;
+            }
+            .price-hkd{
+                position: absolute;
+                left:70px;
+                top:30px;
+                font-size: 14px;
+                color: #c6bbb9;
+                // line-height: 25px;
             }
         }
         .account{

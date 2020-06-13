@@ -2,11 +2,17 @@
   <div class="pay">
     <div class="paylist" v-show="paylist">
       <Header :title="lang.pay" tips="1" />
-      <div class="proce">
-        <span>{{ info.coinType }} </span>
+      <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+        <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div>
+        <span>{{ formatCoin(info.coinType) }} </span>
+        {{ formatMoney(price) }}
+        <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
+      </div>
+      <div v-else class="proce">
+        <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
       </div>
-      <ul>
+      <ul v-if="this.$store.state.platform !== 31">
         <li v-for="(item, index) in list" :key="index">
           <div v-show="price > 0 || (price == 0 && item.type === 5)">
             <img :src="item.url" />
@@ -35,13 +41,42 @@
           </div>
         </li>
       </ul>
+      <ul v-else>
+        <li v-for="(item, index) in listUs" :key="index">
+          <div v-show="price > 0 || (price == 0 && item.type === 5)">
+            <img :src="item.url" />
+            <div class="right">
+              <span
+                class="icon iconfont"
+                :class="typeIndex === index ? 'icongou' : ''"
+                @click="changeType(index)"
+              ></span>
+              <div
+                class="box-a"
+                >{{ item.title }}
+                <span
+                  v-if="item.type == '5'"
+                  class="ph"
+                  @click="needtips = !needtips"
+                  >?</span
+                >
+                <div class="support" v-if="item.type == '1000' && isLogin">({{ lang.support }})</div>
+              </div>
+
+              <p>{{ item.des }}</p>
+              <p v-if="item.des2">{{ item.des2 }}</p>
+              <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
+            </div>
+          </div>
+        </li>
+      </ul>
       <div class="tips">
-        <i class="icon iconfont icongantanhao1"></i><span>{{ lang.tips }}</span>
+        <i v-show="this.$store.state.platform !== 31" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform !== 31">{{ lang.tips }}</span>
       </div>
       <div class="btn" @click="goPaySuccess">
         {{ list[typeIndex].title }}
         {{ lang.goPay }}
-        {{ info.coinType }}
+        {{ formatCoin(info.coinType) }}
         {{ formatMoney(price) }}
       </div>
       
@@ -86,6 +121,7 @@ export default {
     return {
       lang: this.LANGUAGE.cart.pay,
       coin: this.$store.state.coin,
+      coinHKD:"HKD",
       form: [],
       actionLink: '',
       list: [
@@ -157,9 +193,24 @@ export default {
         //   des2: this.LANGUAGE.cart.pay.type5Text2
         // }
       ],
+      listUs: [
+        {
+          url: '/cart/pay.png',
+          type: 6,
+          title: this.LANGUAGE.cart.pay.payType0,
+          des: this.LANGUAGE.cart.pay.type0Text
+        },
+        {
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        }
+      ], 
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
       price: JSON.parse(this.$route.query.info).payAmount,
+      priceHKD: JSON.parse(this.$route.query.info).payAmountHKD,
       needtips: false,
       typeIndex: JSON.parse(this.$route.query.info).payAmount === 0 ? 5 : 0,
       isLogin: !!this.$store.state.token,
@@ -203,15 +254,15 @@ export default {
       console.log("aaa",this.typeIndex)
       if(this.info.coinType === 'USD'){
         if(this.typeIndex == 2){
-          this.$toast.show(this.lang.paytip1)
+          this.$toast.show(this.lang.NotSupportPay)
           return
         }
         if(this.typeIndex == 3){
-          this.$toast.show(this.lang.paytip2)
+          this.$toast.show(this.lang.NotSupportPay)
           return
         }
         if(this.typeIndex == 4){
-          this.$toast.show(this.lang.paytip3)
+          this.$toast.show(this.lang.NotSupportPay)
           return
         }
       }
@@ -343,16 +394,29 @@ export default {
 .pay {
   padding-bottom: 20px;
   .proce {
-    padding: 30px 0 20px;
+    padding: 10px 0 20px;
     font-size: 28px;
     font-family: twCenMt;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     border-bottom: 8px solid #f6f6f6;
+    .note{
+      text-align: right; 
+      margin-right: 20px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: #cac7c7;
+      .star{
+        color: red;
+      }
+    }
     span {
       font-size: 16px;
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
+    }
+    .price-hkd{
+      color: rgba(242, 155, 135, 1);
     }
   }
   ul {

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- 简体中文 -->
-    <div v-if="language === 'zh_CN'" class="register-item">
+    <!-- 手机注册 -->
+    <div v-if="regType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
@@ -168,8 +168,8 @@
         </div>
       </form>
     </div>
-    <!-- 英文和繁体 -->
-    <div v-else class="register-item">
+    <!-- 邮箱注册 -->
+    <div v-if="regType == 2" class="register-item">
       <form>
         <div class="row-flex">
           <div class="relative margin-right-20 margin-bottom-20">
@@ -403,7 +403,21 @@ export default {
       }
     }
   },
-  computed: {},
+  computed: {
+    regType(){
+      var res = 1;
+      // 如果中文 或 大陆站点且cookie没有语言时为手机注册
+      if(this.language === 'zh_CN' || (this.language === '' && this.$store.state.platform === 20)){
+        res = 1
+      }
+      // 如果非中文 或 非大陆站点且cookie没有语言时为邮箱注册
+      if((this.language !== 'zh_CN' && this.language !== '') || (this.language === '' && this.$store.state.platform !== 20)){
+        res = 2
+      }
+    
+      return res
+    }
+  },
   mounted() {
     this.language = this.getCookie('language')
     const _this = this

@@ -28,6 +28,10 @@ export default {
     return {
       lang: this.LANGUAGE.detailCommons,
       // 第一个戒指
+      // firstRingCarat: {
+      //   id: '',
+      //   text: ''
+      // },
       firstRingSize: {
         id: '',
         text: ''
@@ -37,6 +41,10 @@ export default {
         options: []
       },
       // 第二个戒指
+      // secondRingCarat: {
+      //   id: '',
+      //   text: ''
+      // },
       secondRingSize: {
         id: '',
         text: ''
@@ -88,6 +96,7 @@ export default {
         specs: [],
         materials: [],
         sizes: [],
+        // carats: [],
         details: []
       }
     },
@@ -133,6 +142,7 @@ export default {
             details[n].material
           ) > -1 &&
           details[n].size === this.firstRingSize.id
+          // details[n].carat === this.firstRingCarat.id
         ) {
           result = details[n].retailMallPrice
           break
@@ -155,6 +165,7 @@ export default {
             details[n].material
           ) > -1 &&
           details[n].size === this.secondRingSize.id
+          // details[n].carat === this.firstRingCarat.id
         ) {
           result = details[n].retailMallPrice
           break
@@ -227,6 +238,12 @@ export default {
       }
       return result.length === 0 ? this.lang.stArrContent : result.join(',')
     },
+    // firstRingCaratText() {
+    //   return this.firstRingCarat.text || this.lang.stArrContent
+    // },
+    // secondRingCaratText() {
+    //   return this.secondRingCarat.text || this.lang.stArrContent
+    // },
     firstRingSizeText() {
       return this.firstRingSize.text || this.lang.stArrContent
     },
@@ -246,8 +263,10 @@ export default {
         if (
           list[n].hasOwnProperty('material') &&
           list[n].hasOwnProperty('size') &&
+          // list[n].hasOwnProperty('carat') &&
           this.firstRingQuality.checked.indexOf(list[n].material) > -1 &&
           this.firstRingSize.id === list[n].size
+          // this.firstRingCarat.id === list[n].carat
         ) {
           // 同时具有选项的字段，才表示该配置选项已启用
           result = list[n]
@@ -264,8 +283,10 @@ export default {
         if (
           list[n].hasOwnProperty('material') &&
           list[n].hasOwnProperty('size') &&
+          // list[n].hasOwnProperty('carat') &&
           this.secondRingQuality.checked.indexOf(list[n].material) > -1 &&
           this.secondRingSize.id === list[n].size
+          // this.firstRingCarat.id === list[n].carat
         ) {
           // 同时具有选项的字段，才表示该配置选项已启用
           result = list[n]
@@ -279,29 +300,44 @@ export default {
     }
   },
   created() {
-    this.firstRingSize = {
-      id: this.firstRing.sizes[0].sortType,
-      text: this.firstRing.sizes[0].content
+    console.log("11111",this.firstRing.materials)
+    // if(this.firstRing.carats.length>0){
+    //   this.firstRingCarat = {
+    //     id: this.firstRing.carats[0].sortType,
+    //     text: this.firstRing.carats[0].content
+    //   }
+    // }
+    if(this.firstRing.materials[0].id){
+      // this.firstRingSize = {
+      //  id: this.firstRing.sizes[0].sortType,
+      //   text: this.firstRing.sizes[0].content
+      // }
+      this.firstRingQuality = {
+        checked: this.firstRing.materials[0].id
+          ? [this.firstRing.materials[0].id]
+          : [],
+        options: this.firstRing.materials
+      }
     }
-    this.firstRingQuality = {
-      checked: this.firstRing.materials[0].id
-        ? [this.firstRing.materials[0].id]
-        : [],
-      options: this.firstRing.materials
-    }
-    this.secondRingSize = {
-      id: this.secondRing.sizes[0].sortType,
-      text: this.secondRing.sizes[0].content
-    }
-    this.secondRingQuality = {
-      checked: this.secondRing.materials[0].id
-        ? [this.secondRing.materials[0].id]
-        : [],
-      options: this.secondRing.materials
-    }
+      // this.secondRingCarat = {
+      //   id: this.secondRing.carats[0].sortType,
+      //   text: this.secondRing.carats[0].content
+      // }
+      if(this.secondRing.materials[0].id){
+        // this.secondRingSize = {
+        //   id: this.secondRing.sizes[0].sortType,
+        //   text: this.secondRing.sizes[0].content
+        // }
+        this.secondRingQuality = {
+          checked: this.secondRing.materials[0].id
+            ? [this.secondRing.materials[0].id]
+            : [],
+          options: this.secondRing.materials
+        }
+      }
   },
   mounted() {
-    // this.$axios
+    // this.$axios carats
     //   .get(`/wap/goodsComments/getAvgLevel`, {
     //     params: {
     //       groupId: this.$route.query.goodId
@@ -353,6 +389,7 @@ export default {
         }
         mcArr.push(o)
       }
+      // const carats = []
       const stArr = []
       for (const i in goodInfo.sizes) {
         const o = {
@@ -362,11 +399,25 @@ export default {
         }
         stArr.push(o)
       }
-      stArr.unshift({
-        content: this.lang.stArrContent,
-        sortType: ``,
-        sortBy: ``
-      })
+      // stArr.unshift({
+      //   content: this.lang.stArrContent,
+      //   sortType: ``,
+      //   sortBy: ``
+      // })
+      // for (const i in goodInfo.carats) {
+      //   const o = {
+      //     content: goodInfo.carats[i].name,
+      //     sortType: goodInfo.carats[i].id,
+      //     sortBy: goodInfo.carats[i].id
+      //   }
+      //   carats.push(o)
+      // }
+      // carats.unshift({
+      //   content: this.lang.stArrContent,
+      //   sortType: ``,
+      //   sortBy: ``
+      // })
+      // goodInfo.carats = carats
       goodInfo.sizes = stArr
       goodInfo.materials = mcArr
       goodInfo.goodsDesc = goodInfo.goodsDesc.includes(`<script>`)
@@ -419,6 +470,26 @@ export default {
       this.$refs['second-ring-suitability'] &&
         this.$refs['second-ring-suitability'].show()
     },
+    // showFirstRingCaratChoose() {
+    //   this.$refs['first-ring-carat'] &&
+    //     this.$refs['first-ring-carat'].show()
+    // },
+    // showSecondRingCaratChoose() {
+    //   this.$refs['second-ring-carat'] &&
+    //     this.$refs['second-ring-carat'].show()
+    // },
+    // firstRingClearCarat(val) {
+    //   this.firstRingCarat = {
+    //     id: val.item.sortType,
+    //     text: val.item.content
+    //   }
+    // },
+    // secondRingClearCarat(val) {
+    //   this.secondRingCarat = {
+    //     id: val.item.sortType,
+    //     text: val.item.content
+    //   }
+    // },
     firstRingClearSize(val) {
       this.firstRingSize = {
         id: val.item.sortType,
@@ -451,6 +522,7 @@ export default {
         for (const i in bullShit) {
           if (
             parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
+            // parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
             parseInt(bullShit[i].material) ===
               parseInt(this.conditions[0].checked)
           ) {

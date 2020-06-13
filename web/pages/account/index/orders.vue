@@ -39,12 +39,24 @@
             <p>{{ $t(`${lang}.orderNumber`) }}：{{ o.orderNO }}</p>
             <p>
               {{ $t(`${lang}.orderStatus`) }}：
-              <span v-if="o.wireTransferStatus == null" :style="{ color: getStatusColor(o.orderStatus) }"> 
+              <span v-if="o.orderStatus !== 0 && o.refundStatus == 0 && o.wireTransferStatus !== null" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getTransferStatus(o.wireTransferStatus)}}
+                </span>
+              <span v-else-if="o.refundStatus == 1" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getRefundStatus(o.refundStatus)
+              }}</span>
+              <span v-else :style="{ color: getStatusColor(o.orderStatus) }">  
                 {{ getStatusText(o.orderStatus)
+              }}</span>
+              <!-- <span v-if="o.wireTransferStatus == null && o.refundStatus == 0" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getStatusText(o.orderStatus)}}
+                </span>
+              <span v-else-if="o.refundStatus == 1" :style="{ color: getStatusColor(o.orderStatus) }"> 
+                {{ getRefundStatus(o.refundStatus)
               }}</span>
               <span v-else :style="{ color: getStatusColor(o.orderStatus) }"> 
                 {{ getTransferStatus(o.wireTransferStatus)
-              }}</span>
+              }}</span> -->
             </p>
           </div>
           <div v-for="(d, _index) in o.details" :key="_index" class="list-body">
@@ -70,7 +82,7 @@
 
             <div class="right">
               <span>1</span>
-              {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}
+              {{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
             </div>
           </div>
 
@@ -91,7 +103,7 @@
                 {{ $t(`${lang}.cancelOrder`) }}
               </button></a
             >
-            <nuxt-link :to="goToPay(o.id, o.coinCode, o.payAmount, o.paymentType)"
+            <nuxt-link :to="goToPay(o.id, o.coinCode, o.payAmount, o.paymentType, o.payAmountHKD)"
               ><div v-if="o.payChannel !== 1 && o.wireTransferStatus == null" class="btn-a">
               {{ $t(`${lang}.toPay`) }}
               </div>
@@ -105,11 +117,11 @@
             </div>
             <span
               >{{ $t(`${lang}.NeedPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
           <!--已付款 20-->
@@ -121,11 +133,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
           <!--待发货 30-->
@@ -137,11 +149,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -168,11 +180,11 @@
             </div>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -185,11 +197,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -205,11 +217,11 @@
             </div>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -225,11 +237,11 @@
             <!--            </button>-->
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
 
@@ -242,11 +254,11 @@
             </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.payAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ o.coinCode }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
         </div>
@@ -286,7 +298,10 @@ export default {
       lang,
       activeIndex: 0,
       tabsParam: [
-        { name: this.$t(`${lang}.allOrder`), status: 0, num: 0 },
+        { 
+          name: this.$t(`${lang}.allOrder`), 
+          status: 0, num: 0 
+        },
         {
           name: this.$t(`${lang}.waitingPay`),
           status: 10,
@@ -297,16 +312,16 @@ export default {
           status: 30,
           num: 0
         },
-        {
-          name: this.$t(`${lang}.waitingReceive`),
-          status: 40,
-          num: 0
-        },
-        {
-          name: this.$t(`${lang}.hadFinish`),
-          status: 50,
-          num: 0
-        }
+        // {
+        //   name: this.$t(`${lang}.waitingReceive`),
+        //   status: 40,
+        //   num: 0
+        // },
+        // {
+        //   name: this.$t(`${lang}.hadFinish`),
+        //   status: 50,
+        //   num: 0
+        // }
       ],
       listData: [],
       list: {
@@ -348,7 +363,7 @@ export default {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
-          console.log("订单0",res.data)
+          // console.log("订单0",res.data)
           if(res.code != 200){
             return
           }
@@ -420,11 +435,11 @@ export default {
             }
           }
           // console.log(this.list.ordered)
+          this.tabsParam[0].num = res.data.data.length
           this.tabsParam[1].num = this.list.ordered.length
           this.tabsParam[2].num = this.list.paid.length
-          this.tabsParam[3].num = this.list.send.length
-          this.tabsParam[4].num = this.list.finished.length
-          this.tabsParam[0].num = res.data.data.length
+          // this.tabsParam[3].num = this.list.send.length
+          // this.tabsParam[4].num = this.list.finished.length
         })
         .catch(err => {
           if (!err.response) {
@@ -516,6 +531,12 @@ export default {
       };
       return transferStatus_value[transferStatus];
     },
+    getRefundStatus(refundStatus){
+      var refundStatus_value = {
+        1 : this.$t(`${lang}.hadClosed`)
+      };
+      return refundStatus_value[refundStatus];
+    },
     cancelOrder() {
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ orderId: this.cid })),
@@ -558,14 +579,15 @@ export default {
           }
         })
     },
-    goToPay(j, k, v, p) {
+    goToPay(j, k, v, p,u) {
       const route = {
         path: '/payment-options',
         query: {
           coinType: k,
           orderId: j,
           price: v,
-          payType: p
+          payType: p,
+          priceHKD: u
         }
       }
       return this.routeDataToUrl(route)

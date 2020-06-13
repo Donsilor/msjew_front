@@ -70,6 +70,7 @@ export default {
           }
           mcArr.push(o)
         }
+        const carats = []
         const stArr = []
         for (const i in infos.sizes) {
           const o = {
@@ -79,11 +80,22 @@ export default {
           }
           stArr.push(o)
         }
-        stArr.unshift({
-          content: lang.stArrContent,
-          sortType: ``,
-          sortBy: ``
-        })
+        // stArr.unshift({
+        //   content: lang.stArrContent,
+        //   sortType: ``,
+        //   sortBy: ``
+        // })
+        if(infos.carats){
+          for (const i in infos.carats) {
+            const o = {
+              content: infos.carats[i].name,
+              sortType: infos.carats[i].id,
+              sortBy: infos.carats[i].id
+            }
+            carats.push(o)
+          }
+          infos.carats = carats
+        }
         infos.sizes = stArr
         infos.materials = mcArr
         infos.goodsDesc = infos.goodsDesc.includes(`<script>`)

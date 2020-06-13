@@ -22,7 +22,7 @@ export default {
         const _this = this
         _this.$nextTick(async () => {
             //根据IP设置 默认地区，语言，货币
-            _this.$store.dispatch('localAreaSetting')
+            //_this.$store.dispatch('localAreaSetting')
             //语言弹窗 选择
             if (!_this.$store.state.coin || !_this.$store.state.language) {
             }
@@ -32,7 +32,7 @@ export default {
                 await _this.$store.dispatch('getUserInfo')
                 // 同步购物车
                 await _this.$store.dispatch('synchronizeCart')
-                await _this.$store.dispatch('getOnlineCartAmount')              
+                await _this.$store.dispatch('getOnlineCartAmount')
                 // 同步心愿单 暂时屏蔽2020-2-28
                 //await _this.$store.dispatch('synchronizeWish')
                 // 同步对比 暂时屏蔽2020-2-28
@@ -45,7 +45,7 @@ export default {
             _this.$store.dispatch('getCart')
             // 获取对比数据 暂时屏蔽 2020-2-28
             //_this.$store.dispatch('getCompared')            
-            
+
         })
     }
 }

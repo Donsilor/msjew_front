@@ -14,7 +14,7 @@
               <span class="text">{{ item.text }}<span v-if="item.num > 0" class="tip">{{ item.num }}</span></span>
               
               
-              <span class="line"></span>
+              <span class="line"></span> 
             </li>
           </ul>
         </div>
@@ -54,16 +54,22 @@ export default {
           text: this.LANGUAGE.personal.order.waitingSend,
           num:0
         },
-        {
-          code: 40,
-          text: this.LANGUAGE.personal.order.waitingReceive,
-          num:0
-        },
-        {
-          code: 50, // 传5表示待評價的订单(后端确定的逻辑)
-          text: this.LANGUAGE.personal.order.waitingComment,
-          num:0
-        }
+        // {
+        //   // code:'' ,
+        //   // text: '',
+        //   // num:0
+        //   code: 40,
+        //   text: this.LANGUAGE.personal.order.waitingReceive,
+        //   num:0
+        // },
+        // {
+        //   // code:'' ,
+        //   // text: '',
+        //   // num:0
+        //   code: 50, // 传5表示待評價的订单(后端确定的逻辑)
+        //   text: this.LANGUAGE.personal.order.waitingComment,
+        //   num:0
+        // }
       ],
       orderStatus: 0,
       list: {
@@ -93,7 +99,8 @@ export default {
   created(){
     this.$axios({
       method: 'get',
-      url: `/web/member/order`
+      url: `/web/member/order`,
+      params: { orderStatus: 0, page: 1, page_size: 9999 }
     })
     .then(res => {
       this.list = {
@@ -163,9 +170,9 @@ export default {
         this.statusList[0].num = res.total_count
         this.statusList[1].num = this.list.ordered.length
         this.statusList[2].num = this.list.paid.length
-        this.statusList[3].num = this.list.send.length
-        this.statusList[4].num = this.list.finished.length
-      // console.log(res)
+        // this.statusList[3].num = this.list.send.length
+        // this.statusList[4].num = this.list.finished.length
+        console.log("tttt",this.statusList[1])
     })
     .catch(err => {
       console.log(err)
@@ -228,27 +235,27 @@ export default {
             .tip{
               position: absolute;
               // display: block;
-              top: -56%;
-              left: 97%;
-              width: 16px;
-              height: 16px;
-              line-height: 17px;
-              border-radius: 100%;
-              text-align: center;
-              color: #ffffff;
-              font-size: 10px;
-              background-color: #f29b87;
-              box-sizing: border-box;
-              // border-radius: 15px;
-              // color: #fff;
-              // display: inline-block;
-              // font-size: 12px;
-              // height: 18px;
-              // line-height: 18px;
-              // padding: 0 6px;
+              // top: -56%;
+              // left: 97%;
+              // width: 16px;
+              // height: 16px;
+              // line-height: 17px;
+              // border-radius: 100%;
               // text-align: center;
-              // white-space: nowrap;
+              // color: #ffffff;
+              // font-size: 10px;
               // background-color: #f29b87;
+              // box-sizing: border-box;
+              border-radius: 15px;
+              color: #fff;
+              display: inline-block;
+              font-size: 12px;
+              height: 18px;
+              line-height: 18px;
+              padding: 0 6px;
+              text-align: center;
+              white-space: nowrap;
+              background-color: #f29b87;
             }
           }
           .line {

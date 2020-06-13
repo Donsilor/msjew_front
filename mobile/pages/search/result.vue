@@ -50,7 +50,7 @@
               {{ each.goodsName }}
             </div>
             <div class="info-price">
-              {{ each.coinType }} {{ formatNumber(each.salePrice) }}
+              {{ formatCoin(each.coinType) }}{{ formatNumber(each.salePrice) }}
             </div>
           </div>
         </div>

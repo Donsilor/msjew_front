@@ -186,6 +186,7 @@
       "toast2": "Please check the default address",
       "toast4": "Please select a payment method!",
       "toast3": "Incorrect e-mail for receiving after-sales voucher, please input again!",
+      "toast5":"The shipping address is different from billing address ,please contact our customer service or re-select a shipping address. ",
       "delete": "Delete",
       "inputCode": "Input Coupon Code",
       "inputOrSelectCode": "Input/select Coupon Code",
@@ -246,7 +247,9 @@
       "imgSize":"Excessive size of the photo, please upload it again!",
       "bankAddress":"Bank Address:",
       "SwiftCode":"SWIFT CODE:",
-      "uploadPhotos":"Upload  Photos"
+      "uploadPhotos":"Upload  Photos",
+      "Note3":"Note：Currency rate is as referred on BDD website.",
+      "NotSupportPay":"Sorry, USD is not supported by this payment method, please go back to select an available currency or change to another payment method! "
     },
     "paySuccess": {
       "PayPending1":"The order has been submitted, the system is processing ... please wait",
@@ -547,6 +550,7 @@
       "hadSend": "Shipped",
       "waitingSend": "Delivery",
       "hadFinish": "Completed",
+      "hadClosed": "Closed",
       "hadNotComment": "Review",
       "hadComment": "Comment sent",
       "returnApplication": "Return request",
@@ -579,7 +583,7 @@
     "chooseBracelet": "Bracelet",
     "chooseDiamond": "Diamond",
     "finish": "Complete",
-    "checkMade": "Check Your Customization",
+    "checkMade": "Customized Rings",
     "swiperTitle": "Design Visualiser",
     "size": "Size",
     "fineness": "Fineness",
@@ -739,6 +743,7 @@
     "storeName": "Hong Kong. Universal Trade Centre",
     "address": "Address",
     "addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetailUs": "Room 1306, Building A, IBC Business Jewelry Building, No. 3008, Buxin Road, Dushu Community, Dongxiao Street, Luohu District, Shenzhen",
     "tel": "Phone",
     "email": "E-mail",
     "title": "BDD Jewelry Mall",
@@ -834,7 +839,8 @@
       "couponMessage": "No coupons",
       "addressMessage": "No address information",
       "chooseDiamondContrast": "Choose diamonds to compare",
-      "cartMessage": "Your cart is empty now. Go and look for your favorites."
+      "cartMessage": "Your cart is empty now. Go and look for your favorites.",
+      "soleOut": "The Goods Have Sold Out"
     },
     "footerBar": {
       "custoService": "Customer Service",
@@ -845,6 +851,7 @@
       "aboutBDD": "About BDD",
       "BDDStory": "BDD Brand Story",
       "diamondKnowledge": "Diamond Knowledge",
+      "aboutCompany": "Company Profile",
       "payType": "Payment methods",
       "qualityAndValue": "Quality & Value",
       "aboutRefund": "Return & Refund Policy",
@@ -911,7 +918,7 @@
       "CoupleRings": "Couple Rings",
       "NecklaceAndPendant": "Necklaces/Pendants",
       "bracelets": "Bracelets/Bangles",
-      "EarringsAndStuds": "Earrings/Stads",
+      "EarringsAndStuds": "Earrings/Studs",
       "DecorationAndPendant": "Decorations/Charms",
       "others": "Others",
       "login":"Please login"
@@ -946,6 +953,7 @@
       "paid": "Paid",
       "shipped": "Shipped",
       "completed": "Completed",
+      "hadClosed": "Closed",
       "noComment": "Review",
       "commented": "Comment sent",
       "returnApplication": "Return request",
@@ -1070,6 +1078,7 @@
     "getMore4c": "Get To Know 4C",
     "diamondWight": "CARAT",
     "carat": "Carat",
+    "inlay":"Rabbet",
     "caratDiamond": "Carat Diamond",
     "remember": "Remember that diamond price increases exponentially with increase in carat as heavier diamonds are rarer",
     "color": "COLOR",
@@ -1081,13 +1090,14 @@
     "addToBracelet": "ADD TO BRACELET",
     "lady": "Women",
     "gentlemen": "Men",
-    "general": "General model"
+    "general": "General model",
+    "size": "size"
   },
   "listCommons": {
     "sliders": [
       "Necklace",
       "Pendant",
-      "Ear stud",
+      "Ear studs",
       "Earring",
       "Bracelet",
       "Bangle",
@@ -1852,6 +1862,7 @@
       ]
     },
     "privacyPolicy": {
+      "header1": "Company Profile",
       "header": "Privacy Policy",
       "define": "In order to enhance customers’ shopping experience and satisfaction, BDD Co. (including its affiliates and subsidiaries) has always been committed to protect and secure customers’ personal information. The following information is provided to you of what types of information we collect, the reasons and the usages of such information. In this article, 'Website' refers to BDD Co. website, mobile apps and other software. Also, 'Service' in this article includes our site, customer service calls and any other product or shopping services that provided by BDD Co.",
       "tit1": "Data Collection",
@@ -1882,7 +1893,9 @@
     },
     "clause": {
       "header": "TERMS AND CONDITIONS",
-      "define1": "All of the terms and conditions below are applicable to the BDD Co. website located at www.bddco.com, its affiliated companies and all other associated websites that link to www.bddco.com. BDD Co. website: www.bddco.com is collectively called “the website”. Please read the Terms and Conditions carefully. When you use the website, it means that you agree to be bound by these terms and conditions.",
+      "define1Cn": "All of the terms and conditions below are applicable to the BDD Co. website located at www.bddco.cn, its affiliated companies and all other associated websites that link to www.bddco.cn. BDD Co. website: www.bddco.cn is collectively called “the website”. Please read the Terms and Conditions carefully. When you use the website, it means that you agree to be bound by these terms and conditions.",
+      "define1Tw": "All of the terms and conditions below are applicable to the BDD Co. website located at www.bddco.com, its affiliated companies and all other associated websites that link to www.bddco.com. BDD Co. website: www.bddco.com is collectively called “the website”. Please read the Terms and Conditions carefully. When you use the website, it means that you agree to be bound by these terms and conditions.",
+      "define1Us": "All of the terms and conditions below are applicable to the BDD Co. website located at us.bddco.com, its affiliated companies and all other associated websites that link to us.bddco.com. BDD Co. website: us.bddco.com is collectively called “the website”. Please read the Terms and Conditions carefully. When you use the website, it means that you agree to be bound by these terms and conditions.",
       "define2": "The terms and conditions below will rule your using and purchasing on the BDD Co. website and form up an agreement between you and BDD Co. For any policies, guides, terms and conditions from the website, BDD Co. retains the right for changing or revising them at any time, and in its sole discretion. All changing or revising will become effective directly when the modifications post on the site. If you continually use the website after the site posts its changing or revising, BDD Co. will regard you as accepting the changing or revising. Therefore, the suggestion is that you should often read the Terms and Conditions of the website and all applicable policies and guides, which make you clearly understanding the terms and conditions of using the website. If you are not agreeing on the changing or revising of the terms and conditions, you must stop using the website immediately.",
       "tit1": "Product Pricing And Supply Situation",
       "con1": "Due to sometimes the website receiving large amounts of order, that we may not be able to post a notification on the website before a product goes out of stock. If this situation happens, we will directly contact you to look for a possible solution. If you are interested in a product which is in purchasing stage, please contact our customer service of the website for inquiring when the product is back in stock.",
@@ -2125,7 +2138,8 @@
 		"store": "Store",
 		"storeName": "Hong Kong. Universal Trade Centre",
 		"address": "Address",
-		"addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetailUs": "Room 1306, Building A, IBC Business Jewelry Building, No. 3008, Buxin Road, Dushu Community, Dongxiao Street, Luohu District, Shenzhen",
 		"tel": "Tel",
 		"email": "E-mail",
 

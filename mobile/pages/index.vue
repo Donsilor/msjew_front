@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <tip-message></tip-message>
+    <!-- <tip-message></tip-message> -->
     <section class="banner">
       <template v-if="banner.length > 1">
         <swiper :indicator="true" :auto="true" :duration="5000">
@@ -118,7 +118,7 @@
               />
             </div>
             <div class="product-price">
-              <span>{{ each.coinType }}</span>
+              <span>{{ formatCoin(each.coinType)}}</span> 
               <span>{{ formatNumber(each.salePrice) }}</span>
             </div>
             <div class="product-name ow-h1">{{ each.goodsName }}</div>
@@ -150,10 +150,15 @@
           <span class="row-name">{{ lang.store }}</span>
           <span class="row-text">{{ lang.storeName }}</span>
         </div>
-        <div class="info-row" v-show="this.$store.state.platform !== 21">
+        <div class="info-row" v-show="this.$store.state.platform == 21">
           <span class="line"></span>
           <span class="row-name">{{ lang.address }}</span>
           <span class="row-text">{{ lang.addressDetail }}</span>
+        </div>
+        <div class="info-row" v-show="this.$store.state.platform == 31">
+          <span class="line"></span>
+          <span class="row-name">{{ lang.address }}</span>
+          <span class="row-text">{{ lang.addressDetailUs }}</span>
         </div>
         <div class="info-row">
           <span class="line"></span>
@@ -256,10 +261,10 @@ export default {
           subTitle: this.LANGUAGE.index.marriageRing,
           bg: '/index/category-bg-3.png',
           image: '/index/category-image-3.png',
-          routerName: 'marriage-ring-single-ring',
-          query: {
-            type: 'lady'
-          }
+          routerName: 'marriage-ring-pair-ring',
+          // query: {
+          //   type: 'lady'
+          // }
         },
         {
           textAlign: 'left',
@@ -355,6 +360,9 @@ export default {
       .catch(err => {
         console.error(err)
       })
+  },
+  mounted(){
+    console.log("this.seoInfo",this.seoInfo)
   },
   // mounted() {
   //   const _this = this
@@ -506,9 +514,9 @@ export default {
     },
     moreCard() {
       this.$router.push({
-            name: 'marriage-ring-single-ring',
+            name: 'accessories-list',
             query: {
-              type: 'lady'
+              actIndex: 0
             }
           })
 

@@ -298,6 +298,7 @@
                 that.cardList[k].currency = res.data.currency;
                 that.startTime = res.data.startTime * 1000;
                 that.endTime = res.data.endTime * 1000;
+                that.limitedUseTime = res.data.limitedUseTime * 1000
 
                 var c = 0,
                   arr = [];
@@ -312,26 +313,51 @@
 
                 var time = new Date().getTime();
                 if (time > that.startTime && time < that.endTime) {
-                  that.verifyStatus = 1;
-                  that.cardList[k].type = 1;
-
-                  if (that.cardList[k].balance - 0 !== 0 && that.cardList[k].ifAllowedToUse) {
-                    that.cardList[k].ifChoose = true;
-                  }
-
-                  for (var i = 0, len = that.cardList.length; i < len; i++) {
-                    if (that.cardList[i].ifChoose != true) {
-                      flag = false;
+                  if(that.limitedUseTime == 0){
+                    that.verifyStatus = 1;
+                    that.cardList[k].type = 1;
+  
+                    if (that.cardList[k].balance - 0 !== 0 && that.cardList[k].ifAllowedToUse) {
+                      that.cardList[k].ifChoose = true;
+                    }
+  
+                    for (var i = 0, len = that.cardList.length; i < len; i++) {
+                      if (that.cardList[i].ifChoose != true) {
+                        flag = false;
+                      }
+                    }
+                    if (flag) {
+                      that.ifChooseAll = true;
+                    }
+                  }else if(that.limitedUseTime !== 0 && time < that.limitedUseTime){
+                    that.verifyStatus = 1;
+                    that.cardList[k].type = 1;
+  
+                    if (that.cardList[k].balance - 0 !== 0 && that.cardList[k].ifAllowedToUse) {
+                      that.cardList[k].ifChoose = true;
+                    }
+  
+                    for (var i = 0, len = that.cardList.length; i < len; i++) {
+                      if (that.cardList[i].ifChoose != true) {
+                        flag = false;
+                      }
+                    }
+                    if (flag) {
+                      that.ifChooseAll = true;
+                    }
+                  }else if(that.limitedUseTime !== 0 && time > that.limitedUseTime){
+                    // console.log("过期",time,that.limitedUseTime)
+                    if (time > that.limitedUseTime) {
+                      that.verifyStatus = 2;
+                      that.cardList[that.nowIndex].type = 2;
+                      that.$errorMessage(that.$t(`${lang}.msg13`));
                     }
                   }
-
-                  if (flag) {
-                    that.ifChooseAll = true;
-                  }
+                  
                 } else if (time < that.startTime) {
                   that.verifyStatus = 2;
                   that.cardList[that.nowIndex].type = 2;
-                  that.$errorMessage(that.$t(`${lang}.msg12`));
+                  that.$errorMessage(that.$t(`${lang}.msg12`)); 
                 } else if (time > that.endTime) {
                   that.verifyStatus = 2;
                   that.cardList[that.nowIndex].type = 2;

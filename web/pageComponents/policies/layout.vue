@@ -1,6 +1,11 @@
 <template>
   <div class="questions-content">
-    <div class="title">
+    <div  v-if="this.$store.state.platform === 20" class="title">
+      {{ $t(`${lang}.homepage`) }}&nbsp;>&nbsp;{{
+        $t(`${lang}.QAndA`)
+      }}&nbsp;>&nbsp;{{ listCn[parentNum].subItems[num].name }}
+    </div>
+    <div v-else class="title">
       {{ $t(`${lang}.homepage`) }}&nbsp;>&nbsp;{{
         $t(`${lang}.QAndA`)
       }}&nbsp;>&nbsp;{{ list[parentNum].subItems[num].name }}

@@ -1,5 +1,5 @@
 <template>
-  <div class="sure-oredr">
+  <div class="sure-oredr" ref="getScroll">
     <Header :title="lang.sureOrder" />
     <div v-if="!isLogin" class="is-login" id="loginBox">
       <i class="icon iconfont icongantanhao1"></i>
@@ -32,13 +32,47 @@
     <!-- 支付方式 -->
     <div class="payways" v-if="!isLogin">
       <div class="pay">
-        <!-- <Header :title="lang2.pay" tips="1" />
-        <div class="proce">
-          <span>{{ info.coinType }} </span>
-          {{ formatMoney(price) }}
-        </div> -->
-        <ul>
+        <!-- <Header :title="lang2.pay" tips="1" /> -->
+        <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+          <div class="note"><span class="star">*</span> {{ lang2.Note3 }}</div>
+          <span>{{ formatCoin(coin) }} </span>
+          {{ formatMoney(productAmount) }}
+          <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
+        </div>
+        <div v-else class="proce">
+          <span>{{ formatCoin(coin) }} </span>
+          {{ formatMoney( productAmount) }}
+        </div>
+        <ul v-if="this.$store.state.platform !== 31">
           <li v-for="(item, index) in list2" :key="index">
+            <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
+            <div>
+              <img :src="item.url" />
+              <div class="right">
+                <span
+                  class="icon iconfont"
+                  :class="typeIndex === index ? 'icongou' : ''"
+                  @click="changeType(index)"
+                ></span>
+                <b
+                  >{{ item.title }}
+                  <span
+                    v-if="item.type == ''"
+                    class="ph"
+                    @click="needtips = !needtips"
+                    >?</span
+                  >
+                </b>
+
+                <p>{{ item.des }}</p>
+                <p v-if="item.des2">{{ item.des2 }}</p>
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p> 
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ul v-else>
+          <li v-for="(item, index) in listUs" :key="index">
             <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
             <div>
               <img :src="item.url" />
@@ -128,8 +162,7 @@
           <div class="addShoppingCard fr" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
         </div>
         <!-- 开具发票 -->
-        <!-- <div class="invoice" v-if="this.areaId === '1'"> -->
-        <div class="invoice" v-if="'1'">
+        <div class="invoice" v-if="this.areaId == '1'">
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
@@ -199,7 +232,7 @@
           <li>
             <span>{{ lang.allFee }} </span
             ><span
-              >{{ coin }}
+              >{{ formatCoin(coin) }}
               {{ formatMoney( productAmount) }}</span
             >
           </li>
@@ -224,7 +257,7 @@
                 >{{ lang.delete }}</span
               >
             </div>
-            <span>-{{ coin }} {{ formatMoney(preferFee) }}</span>
+            <span>-{{ formatCoin(coin) }} {{ formatMoney(preferFee) }}</span>
           </li>
           <li>
             <div>
@@ -233,30 +266,30 @@
                 >!</span
               >
             </div>
-            <span>+{{ coin }} {{ formatMoney(allFee.logisticsFee) }}</span>
+            <span>+{{ formatCoin(coin) }} {{ formatMoney(allFee.logisticsFee) }}</span>
           </li>
           <li>
             <div>
               <span>{{ lang.taxFee }}</span>
               <span class="question" @click="showChoose(`orderTex`)">!</span>
             </div>
-            <span>+{{ coin }} {{ formatMoney(allFee.taxFee) }}</span>
+            <span>+{{ formatCoin(coin) }} {{ formatMoney(allFee.taxFee) }}</span>
           </li>
           <li>
             <div>
               <span>{{ lang.safeFee }}</span
               ><span class="question" @click="showChoose(`orderSafe`)">!</span>
             </div>
-            <span>+{{ coin }} {{ formatMoney(allFee.safeFee) }}</span>
+            <span>+{{ formatCoin(coin) }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
           <li class="order-pay">
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
-            ><span>{{ coin }} {{ formatMoney(orderTotalAmount) }}</span>
+            ><span>{{ formatCoin(coin) }} {{ formatMoney(orderTotalAmount) }}</span>
           </li>
           <li class="order-pay" style="border-top: 0;margin-top: 0;">
             <span>{{ lang.NeedPay }}</span
-            ><span>{{ coin }} {{ formatMoney(ultimatelyPay) }}</span>
+            ><span>{{ formatCoin(coin) }} {{ formatMoney(ultimatelyPay) }}</span>
           </li>
         </ul>
       </div>
@@ -352,6 +385,20 @@ export default {
         //   des: this.LANGUAGE.cart.pay.type3Text
         // }
       ],
+      listUs: [
+        {
+          url: '/cart/pay.png',
+          type: 6,
+          title: this.LANGUAGE.cart.pay.payType0,
+          des: this.LANGUAGE.cart.pay.type0Text
+        },
+        {
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        }
+      ],
       sum: '2,120.00',
       info:'',
       price:'',
@@ -374,6 +421,8 @@ export default {
       cuponName: this.LANGUAGE.cart.sureOrder.cuponName,
       preferFee: 0, // 优惠卷金额
       productAmount: 0, // 商品总金额
+      priceHKD:0, //人民币转化成港币后的价格
+      coinHKD:"HKD",
       allFee: this.defaultAllFeeInfo(),
       userRemark: '',
       isSend: true,
@@ -396,7 +445,8 @@ export default {
       scrollTop: 0,
       orderTotalAmount: 0,
       ultimatelyPay: 0,
-      currency: ''
+      currency: '',
+      platform: this.$store.state.platform
     }
   },
   computed: {
@@ -930,6 +980,7 @@ export default {
             this.orderTotalAmount = res.order_amount;
             this.ultimatelyPay = res.order_amount;
             this.currency = res.currency;
+            this.priceHKD = res.order_amount_HKD
 
             this.planDays = this.allFee.planDays
 
@@ -1024,7 +1075,7 @@ export default {
       // if (!this.canSubmit) {
       //   return
       // }
-      // console.log("aaaa",this.typeIndex)
+      console.log("this.address",this.address)
       let pay = 0
       if(this.typeIndex == 0){
         pay = 6
@@ -1042,18 +1093,44 @@ export default {
        if (!this.isLogin) {
           if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
+           this.$nuxt.$loading.finish()
            return
          }
          if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
             this.$toast.show(this.lang.firstLogin)
-            // this.$nuxt.$loading.finish()
+            this.$nuxt.$loading.finish()
            return
          }
        }
       if (this.isLogin) {
         if (!this.hasAddress) {
           this.$toast.show(this.lang.toast2)
+          const topC = document.getElementsByClassName('layout-main')[0];
+
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-this.scrollTop / 5)
+            topC.scrollTop = this.scrollTop + ispeed
+            if (this.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
+          this.$nuxt.$loading.finish()
           return
+        }
+        
+        if(this.address.platforms.indexOf(this.platform) === -1){
+          this.$toast.show(this.lang.toast5)
+          const topC = document.getElementsByClassName('layout-main')[0];
+
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-this.scrollTop / 5)
+            topC.scrollTop = this.scrollTop + ispeed
+            if (this.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
+          this.$nuxt.$loading.finish()
+          return 
         }
       }
       // if (!Email.test(this.mailbox)) {
@@ -1702,6 +1779,7 @@ export default {
   background: #ffffff;
   // text-align: left;
   border-radius: 5px;
+  position: relative;
   .proce {
     padding: 30px 0 20px;
     font-size: 28px;
@@ -1709,10 +1787,23 @@ export default {
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     border-bottom: 8px solid #f6f6f6;
+    .note{
+      font-size: 12px;
+      color: #cac7c7;
+      position: absolute;
+      top:10px;
+      right:25px;
+      .star{
+        color: red;
+      }
+    }
     span {
       font-size: 16px;
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
+    }
+    .price-hkd{
+      color: rgba(242, 155, 135, 1);
     }
   }
   ul {
