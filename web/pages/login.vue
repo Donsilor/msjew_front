@@ -70,6 +70,7 @@ export default {
     this.language = this.getCookie('language')
 
     var loginT = sessionStorage.getItem('loginT');
+    
     if(loginT){
       this.loginType = loginT
     }else{
@@ -86,6 +87,8 @@ export default {
 
       sessionStorage.setItem('loginT', this.loginType)
     }
+    
+    console.log(7878,this.log)
 
   },
   methods: {
