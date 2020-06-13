@@ -79,6 +79,8 @@ export default {
         this.loginType = 2;
       }
     }
+    
+    sessionStorage.setItem('loginT', this.loginType)
   },
   methods: {
     // 查询cookie
