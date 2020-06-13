@@ -12,6 +12,13 @@ export default {
   components: {
     DataList
   },
+  mounted(){
+    const _this = this
+  
+    _this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+    })
+  },
   methods: {
     getNextPage() {
       if (this.$refs[`data-list`].getNextPage) {

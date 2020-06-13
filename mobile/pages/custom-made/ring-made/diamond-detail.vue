@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <detail-body @step="doStep"></detail-body>
-    <footer-bar></footer-bar>
+  <div class="fix-box">
+    <div class="fix-m">
+      <detail-body @step="doStep" style="min-height: 320px;"></detail-body>
+      <footer-bar></footer-bar>
+    </div>
   </div>
 </template>
 
@@ -38,4 +40,18 @@ export default {
 .engagementRings-component {
   .details-component(100%);
 }
+
+.fix-box{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 90px;
+}
+.fix-m{
+  height: 100%;
+  overflow: auto;
+}
+
 </style>
