@@ -162,7 +162,7 @@
           </p>
         </div>
         <div class="margin-bottom-29">
-          <button v-loading="requesting" type="button" class="submit" @click="registerCN">
+          <button v-loading="requesting" type="button" class="submit" @click="register">
             {{ $t(`${lang}.registration`) }}
           </button>
         </div>
@@ -406,6 +406,25 @@ export default {
   },
   mounted() {
     this.language = this.getCookie('language')
+
+    var loginT = sessionStorage.getItem('loginT');
+    if(loginT){
+      this.loginType = loginT
+    }else{
+      // 大陆站点 登录方式为手机登录
+      if(this.$store.state.platform == 20){
+        this.loginType = 1;
+      }else{
+        if(this.language == "zh_CN"){
+          this.loginType = 1
+        }else{
+          this.loginType = 2;
+        }
+      }
+
+      sessionStorage.setItem('loginT', this.loginType)
+    }
+    
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -520,139 +539,141 @@ export default {
       // }
 
     },
-    // 简体中文注册
-    registerCN() {
-      const _this = this
-      if(!_this.agreement) {
-        _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
-        return
-      }
-      if(_this.mobile==''){
-        _this.mobileShow=true
-        return
-      }else if(!_this.code && !_this.password && !_this.password_repetition){
-        _this.isActivemobile=false;
-        _this.mobileShow=false;
-        _this.isActivecode=true;
-        _this.codeShow=true;
-        _this.isActivepwd=true;
-        _this.pwdShow=true;
-        _this.isActiverepwd=true;
-        _this.repwdShow=true;
-        return
-      }
-      // _this.requesting = true
-      this.$axios({
-          method: 'post',
-          url: '/web/site/mobile-register',
-          data: {
-            'mobile':_this.mobile,
-            'firstname':_this.firstname,
-            'lastname':_this.lastname,
-            'code':_this.code,
-            'password':_this.password,
-            'password_repetition':_this.password_repetition
-          }
-        })
-        .then(res => {
-          const data = res.data
-          _this.requesting = false
-          _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-
-		  localStorage.setItem('refreshToken',data.refresh_token);
-		  localStorage.setItem('accessToken',data.access_token);
-          _this.$store.commit('setToken', data.access_token)
-          _this.$store.commit('setUserInfo',data.member)
-            // const lastUrl = _this.$store.state.lastUrl
-            const lastUrl=localStorage.getItem("url")
-          _this.$store.dispatch('synchronizeCart')
-          // const lastUrl = _this.$store.state.lastUrl
-          // _this.$store.commit('setLastUrl', '')
-
-          setTimeout(() => {
-            if (lastUrl) {
-              _this.$router.replace({
-                path: lastUrl
-              })
-            } else {
-              _this.$router.replace({
-                path: '/'
-              })
-            }
-          }, 0)
-        })
-        .catch(err => {
-          // console.log("请求",err)
-          _this.requesting = false
-          _this.$errorMessage(err.message)
-          return
-        })
-    },
     register() {
-      const _this = this
-       if(!_this.agreement) {
-        _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
-        return
-      }
-      if(_this.email==''){
-        _this.emailShow=true
-        return false;
-      }else if(!_this.code && !_this.password && !_this.password_repetition){
-        _this.isActivemail = false;
-        _this.emailShow=false;
-        _this.isActivecode=true;
-        _this.codeShow=true;
-        _this.isActivepwd=true;
-        _this.pwdShow=true;
-        _this.isActiverepwd=true;
-        _this.repwdShow=true;
-        return
-      }
-      this.$axios({
-          method: 'post',
-          url: '/web/site/email-register',
-          data: {
-            'firstname':_this.firstname,
-            'lastname':_this.lastname,
-            'email': _this.email,
-            'code':_this.code,
-            'password':_this.password,
-            'password_repetition':_this.password_repetition
-          }
-        })
-        .then(res => {
-          const data = res.data
-
-          _this.requesting = false
-          _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-
-		  localStorage.setItem('refreshToken',data.refresh_token);
-		  localStorage.setItem('accessToken',data.access_token);
-          _this.$store.commit('setToken', data.access_token)
-          _this.$store.commit('setUserInfo',data.member)
-          // const lastUrl = _this.$store.state.lastUrl
-          // _this.$store.commit('setLastUrl', '')
-            // const lastUrl = _this.$store.state.lastUrl
-            const lastUrl=localStorage.getItem("url")
-          _this.$store.dispatch('synchronizeCart')
-          setTimeout(() => {
-            if (lastUrl) {
-              _this.$router.replace({
-                path: lastUrl
-              })
-            } else {
-              _this.$router.replace({
-                path: '/'
-              })
+      if(this.loginType == 1){
+        // 手机注册
+        const _this = this
+        if(!_this.agreement) {
+          _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
+          return
+        }
+        if(_this.mobile==''){
+          _this.mobileShow=true
+          return
+        }else if(!_this.code && !_this.password && !_this.password_repetition){
+          _this.isActivemobile=false;
+          _this.mobileShow=false;
+          _this.isActivecode=true;
+          _this.codeShow=true;
+          _this.isActivepwd=true;
+          _this.pwdShow=true;
+          _this.isActiverepwd=true;
+          _this.repwdShow=true;
+          return
+        }
+        // _this.requesting = true
+        this.$axios({
+            method: 'post',
+            url: '/web/site/mobile-register',
+            data: {
+              'mobile':_this.mobile,
+              'firstname':_this.firstname,
+              'lastname':_this.lastname,
+              'code':_this.code,
+              'password':_this.password,
+              'password_repetition':_this.password_repetition
             }
-          }, 0)
+          })
+          .then(res => {
+            const data = res.data
+            _this.requesting = false
+            _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
 
-        })
-        .catch(err => {
-          // console.log("请求",err)
-          _this.requesting = false
-          _this.$errorMessage(err.message)
-        })
+            localStorage.setItem('refreshToken',data.refresh_token);
+            localStorage.setItem('accessToken',data.access_token);
+            _this.$store.commit('setToken', data.access_token)
+            _this.$store.commit('setUserInfo',data.member)
+              // const lastUrl = _this.$store.state.lastUrl
+              const lastUrl=localStorage.getItem("url")
+            _this.$store.dispatch('synchronizeCart')
+            // const lastUrl = _this.$store.state.lastUrl
+            // _this.$store.commit('setLastUrl', '')
+
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              } else {
+                _this.$router.replace({
+                  path: '/'
+                })
+              }
+            }, 0)
+          })
+          .catch(err => {
+            // console.log("请求",err)
+            _this.requesting = false
+            _this.$errorMessage(err.message)
+            return
+          })
+      }else{
+        // 邮箱注册
+        const _this = this
+         if(!_this.agreement) {
+          _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
+          return
+        }
+        if(_this.email==''){
+          _this.emailShow=true
+          return false;
+        }else if(!_this.code && !_this.password && !_this.password_repetition){
+          _this.isActivemail = false;
+          _this.emailShow=false;
+          _this.isActivecode=true;
+          _this.codeShow=true;
+          _this.isActivepwd=true;
+          _this.pwdShow=true;
+          _this.isActiverepwd=true;
+          _this.repwdShow=true;
+          return
+        }
+        this.$axios({
+            method: 'post',
+            url: '/web/site/email-register',
+            data: {
+              'firstname':_this.firstname,
+              'lastname':_this.lastname,
+              'email': _this.email,
+              'code':_this.code,
+              'password':_this.password,
+              'password_repetition':_this.password_repetition
+            }
+          })
+          .then(res => {
+            const data = res.data
+        
+            _this.requesting = false
+            _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
+        
+            localStorage.setItem('refreshToken',data.refresh_token);
+            localStorage.setItem('accessToken',data.access_token);
+            _this.$store.commit('setToken', data.access_token)
+            _this.$store.commit('setUserInfo',data.member)
+            // const lastUrl = _this.$store.state.lastUrl
+            // _this.$store.commit('setLastUrl', '')
+              // const lastUrl = _this.$store.state.lastUrl
+              const lastUrl=localStorage.getItem("url")
+            _this.$store.dispatch('synchronizeCart')
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              } else {
+                _this.$router.replace({
+                  path: '/'
+                })
+              }
+            }, 0)
+        
+          })
+          .catch(err => {
+            // console.log("请求",err)
+            _this.requesting = false
+            _this.$errorMessage(err.message)
+          })
+      }
     },
     // 倒计时
     countDown() {

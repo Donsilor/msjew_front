@@ -182,7 +182,7 @@ export default {
   beforeRouteEnter (to, from, next){
     next(vm => {
       // 通过 `vm` 访问组件实例,将值传入oldUrl
-      console.log("ssssss",vm)
+      // console.log("ssssss",vm)
       vm.oldUrl = from.path
     })
   },
@@ -200,18 +200,28 @@ export default {
     // }
     this.language = this.getCookie('language')
 
-    // 大陆站点 登录方式为手机登录
-    if(this.$store.state.platform == 20){
-      this.loginType = 1;
-      this.ifShowBtn = true;
+    var loginT = sessionStorage.getItem('loginT');
+    if(loginT){
+      this.loginType = loginT
     }else{
-      this.ifShowBtn = false;
-
-      if(this.language == "zh_CN"){
-        this.loginType = 1
+      // 大陆站点 登录方式为手机登录
+      if(this.$store.state.platform == 20){
+        this.loginType = 1;
       }else{
-        this.loginType = 2;
+        if(this.language == "zh_CN"){
+          this.loginType = 1
+        }else{
+          this.loginType = 2;
+        }
       }
+
+      sessionStorage.setItem('loginT', this.loginType)
+    }
+
+    if(this.$store.state.platform == 20){
+      this.ifShowBtn = true
+    }else{
+      this.ifShowBtn = false
     }
 
     const _this = this

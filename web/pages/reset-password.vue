@@ -102,7 +102,7 @@
                   <i v-show="showPassword" class="iconfont iconopen"></i>
                 </div>
                 <div class="pwd-error-tip">
-                  {{ $t(`${lang}.newpwdtips`) }}
+                  {{ $t(`${lang}.newPassword`) }}
                 </div>
               </div>
               <div class="input-line relative">
@@ -118,7 +118,7 @@
                   <i v-show="showPassword" class="iconfont iconopen"></i>
                 </div>
                 <div class="pwd-error-tip">
-                  {{ $t(`${lang}.repwdtips`) }}
+                  {{ $t(`${lang}.confirmPassword`) }}
                 </div>
               </div>
               <div class="button-group">

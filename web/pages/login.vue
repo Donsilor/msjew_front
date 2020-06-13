@@ -69,18 +69,24 @@ export default {
 
     this.language = this.getCookie('language')
 
-    // 大陆站点 登录方式为手机登录
-    if(this.$store.state.platform == 20){
-      this.loginType = 1;
+    var loginT = sessionStorage.getItem('loginT');
+    if(loginT){
+      this.loginType = loginT
     }else{
-      if(this.language == "zh_CN"){
-        this.loginType = 1
+      // 大陆站点 登录方式为手机登录
+      if(this.$store.state.platform == 20){
+        this.loginType = 1;
       }else{
-        this.loginType = 2;
+        if(this.language == "zh_CN"){
+          this.loginType = 1
+        }else{
+          this.loginType = 2;
+        }
       }
+
+      sessionStorage.setItem('loginT', this.loginType)
     }
-    
-    sessionStorage.setItem('loginT', this.loginType)
+
   },
   methods: {
     // 查询cookie
@@ -106,8 +112,12 @@ export default {
       })
     },
     loginTy(r) {
-      this.loginType = r
+      this.loginType = r;
+      sessionStorage.setItem('loginT', this.loginType)
     }
+  },
+  beforeDestroy() {
+    sessionStorage.removeItem('loginT')
   }
 }
 </script>
