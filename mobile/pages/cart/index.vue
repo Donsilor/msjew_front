@@ -553,7 +553,7 @@ export default {
                 createTime: item.createTime,
                 goods_num: val.goodsCount,
                 goodsDetailsId: val.goodsDetailsId,
-                goods_id: val.goodsId,
+                goods_id: val.goodsDetailsId,
                 goods_type:val.goodsType,
                 group_id:
                   val.goodsType == 19
