@@ -271,10 +271,12 @@
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
         <h2>{{ $t(`${lang}.goodsDetails`) }}</h2>
-        <h3>{{ $t(`${lang}.goodsId`) }}：{{ info.goodsCode }}</h3>
+        <h3>{{ $t(`${lang}.goodsId`) }}：
+          <span>{{ info.goodsCode }}</span>
+        </h3>
       </div>
       <div class="attr-group">
-        <h3 class="group-name">{{ $t(`${lang}.productParameters`) }}</h3>
+        <h3 class="group-name">{{ $t(`${lang}.productParameters`) }}:</h3>
         <ul class="attr-list">
           <li
             v-for="(item, index) in productInfo.specs"

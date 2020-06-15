@@ -427,12 +427,12 @@
   .desc-top {
     padding: 60px 30px;
     box-sizing: border-box;
-    display: flex;
+    // display: flex;
 
     .section-name {
       flex-grow: 0;
       flex-shrink: 0;
-      width: 300px;
+      width: 100%;
       min-width: 0;
       overflow: hidden;
 
@@ -444,11 +444,17 @@
         color: rgba(51, 51, 51, 1);
       }
       h3 {
-        font-size: 12px;
+        font-size: 16px;
         font-family: Microsoft YaHei;
         font-weight: 400;
         color: rgba(51, 51, 51, 1);
         word-break: break-word;
+        font-weight: bold;
+        margin-bottom: 20px;
+
+        span{
+          font-weight: normal;
+        }
       }
     }
 
@@ -458,7 +464,6 @@
       flex-shrink: 0;
       min-width: 0;
       overflow: hidden;
-      margin-right: 130px;
 
       font-size: 12px;
       font-family: Microsoft YaHei;
@@ -466,7 +471,8 @@
       color: rgba(51, 51, 51, 1);
 
       .group-name {
-        margin-bottom: 30px;
+        margin-bottom: 10px;
+        font-size: 16px;
       }
       .attr-list {
         display: flex;
