@@ -7,7 +7,12 @@
         <product-images
           :images="thumbnails"
           :gia-number="productInfo.giaNumber"
+		  @getIdx="getIndex"
         ></product-images>
+				
+		<div class="magn-box">
+			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
+		</div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
@@ -310,7 +315,8 @@ export default {
       ringChecked: {
         materialIndex: 0,
         sizeIndex: 0
-      }
+      },
+	  magnifying: ''
     }
   },
   computed: {
@@ -418,6 +424,8 @@ export default {
     const _this = this
     _this.$nextTick(() => {})
     console.log(this.simpleDetail, `<=======`)
+	
+	this.magnifying = this.thumbnails[0]
   },
   methods: {
     getProductInfo() {
@@ -463,7 +471,10 @@ export default {
       const ringChecked = JSON.parse(JSON.stringify(_this.ringChecked))
       ringChecked[key] = value
       _this.ringChecked = ringChecked
-    }
+    },
+	getIndex(i) {
+		this.magnifying = this.thumbnails[i]
+	}
   }
 }
 </script>

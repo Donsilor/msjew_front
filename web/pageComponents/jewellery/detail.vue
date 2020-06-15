@@ -4,7 +4,11 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" @getIdx="getIndex"></product-images>
+		
+		<div class="magn-box">
+			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
+		</div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
@@ -420,6 +424,7 @@ export default {
         caratIndex: 0
       },
       jewelleryOptions: this.CONDITION_INFO.jewellery,
+	  magnifying: ''
     }
   },
   computed: {
@@ -481,6 +486,8 @@ export default {
     console.log("dddd",this.productInfo)
     const _this = this
     _this.$nextTick(() => {})
+	
+	this.magnifying = this.thumbnails[0]
   },
   methods: {
     getCategoryById(categoryId) {
@@ -566,7 +573,10 @@ export default {
         .catch(err => {
           _this.$errorMessage(`${err.message}`)
         })
-    }
+    },
+	getIndex(i) {
+		this.magnifying = this.thumbnails[i]
+	}
   }
 }
 </script>

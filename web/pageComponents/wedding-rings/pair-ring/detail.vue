@@ -4,7 +4,11 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" @getIdx="getIndex"></product-images>
+				
+		<div class="magn-box">
+			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
+		</div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
@@ -746,7 +750,8 @@ export default {
         materialIndex: 0,
         sizeIndex: 0,
         // caratIndex: 0
-      }
+      },
+	  magnifying: ''
     }
   },
   computed: {
@@ -891,6 +896,8 @@ export default {
     console.log("secondRing",this.info.goodsServicesJsons)
     const _this = this
     _this.$nextTick(() => {})
+		
+	this.magnifying = this.thumbnails[0]
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {
@@ -1018,7 +1025,10 @@ export default {
         .catch(err => {
           _this.$errorMessage(`${err.message}`)
         })
-    }
+    },
+	getIndex(i) {
+		this.magnifying = this.thumbnails[i]
+	}
   }
 }
 </script>

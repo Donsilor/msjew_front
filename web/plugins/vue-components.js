@@ -9,7 +9,7 @@ import NoMoreData from '@/components/no-more-data'
 // import Empty from '@/components/empty'
 import Step from '@/components/step'
 import scroll from '@/components/scroll'
-import scroll from '@/components/scroll'
+import magnifying from '@/components/magnifying'
 
 // 个人中心
 import PersonalAccount from '@/components/personal/account'
@@ -27,7 +27,7 @@ Vue.use(NoMoreData)
 // Vue.use(Empty)
 Vue.use(Step)
 Vue.use(scroll)
-Vue.use(scroll)
+Vue.use(magnifying)
 
 // 个人中心
 Vue.use(PersonalAccount)
