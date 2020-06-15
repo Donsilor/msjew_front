@@ -9,6 +9,7 @@ import NoMoreData from '@/components/no-more-data'
 // import Empty from '@/components/empty'
 import Step from '@/components/step'
 import scroll from '@/components/scroll'
+import scroll from '@/components/scroll'
 
 // 个人中心
 import PersonalAccount from '@/components/personal/account'
@@ -25,6 +26,7 @@ Vue.use(Swiper)
 Vue.use(NoMoreData)
 // Vue.use(Empty)
 Vue.use(Step)
+Vue.use(scroll)
 Vue.use(scroll)
 
 // 个人中心

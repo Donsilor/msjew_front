@@ -1,6 +1,7 @@
 <template>
   <div class="page-content detail-page">
     <top-nav></top-nav>
+    <bdd-magnifying></bdd-magnifying>
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
