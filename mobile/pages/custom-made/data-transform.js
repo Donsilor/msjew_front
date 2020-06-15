@@ -312,7 +312,7 @@ export default {
             if(res.coupon.hasOwnProperty('discount')){
               price = res.coupon.discount.price
             }else{
-              price = res.details[0].retailMallPrice;
+              price = res.details[i].retailMallPrice;
             }
 
             this.boardArr = []
@@ -342,7 +342,7 @@ export default {
           // var url2 =  `/wap/goods/diamond/detail`;
           var url3 =  `/wap/goods/style/detail`;
 
-        }else{
+        // }else{
           var url2 =  `/wap/goods/style/detail`;
           // var url3 =  `/wap/goods/diamond/detail`;
         }
@@ -412,7 +412,7 @@ export default {
             if(res.coupon.hasOwnProperty('discount')){
               price3 = res.coupon.discount.price
             }else{
-              price3 = res.details[i].retailMallPrice;
+              price3 = res.details[0].retailMallPrice;
             }
 
             const gdi = JSON.parse(
