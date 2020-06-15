@@ -40,7 +40,7 @@
                 {{ lang.size }}：{{ s.configAttrVal }}
               </div>
               <div class="content-price">
-                <div class="price" v-if="couponType(info1.coupon) !== 'discount'">{{ c.coinType }} {{ formatNumber(c.retailMallPrice) }}</div>
+                <div class="price" v-if="couponType(info1.coupon) !== 'discount'">{{ info1.coinType }} {{ formatNumber(c.retailMallPrice) }}</div>
 
                 <div class="discount-price" v-else>
                   <div class="old-price">{{ info1.coinType }} {{ formatNumber(info1.salePrice) }}</div>
@@ -85,7 +85,7 @@
             </div>
           </div>
           <div class="content-price">
-            <div class="price" v-if="couponType(info2.coupon) !== 'discount'">{{ info2.details[0].coinType }} {{ formatNumber(info2.salePrice) }}</div>
+            <div class="price" v-if="couponType(info2.coupon) !== 'discount'">{{ info2.coinType }} {{ formatNumber(info2.salePrice) }}</div>
 
             <div class="discount-price" v-else>
               <div class="old-price">{{ info2.coinType }} {{ formatNumber(info2.salePrice) }}</div>

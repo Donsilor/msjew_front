@@ -53,8 +53,8 @@ export default {
       ],
       chooseSize: this.goodInfo.sizes[0].content,
       chooseSizeId: ``,
-      chooseCarat: this.goodInfo.carats[0].content,
-      chooseCaratId:this.goodInfo.carats[0].sortBy,
+      chooseCarat: ``,
+      chooseCaratId:``,
       showPi: this.goodInfo.salePrice,
       showP2: 0,
       sendGoodsId: null,
@@ -86,6 +86,11 @@ export default {
       this.showP2 = this.goodInfo.coupon.discount.price
     }else{
       this.showP2 = this.goodInfo.salePrice
+    }
+
+    if(this.goodInfo.carats !== undefined){
+      this.chooseCarat = this.goodInfo.carats[0].content
+      this.chooseCaratId = this.goodInfo.carats[0].sortBy
     }
     // this.$axios
     //   .get(`/wap/goodsComments/getAvgLevel`, {

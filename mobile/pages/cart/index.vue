@@ -59,8 +59,11 @@
                 </div>
                 <div v-if="item.groupType !== 0 && index !== list.length - 1">
                   <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                    <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
-                    <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
+
+                    <div >
+                      <i class="discount-icon"  v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? discountUs(list[index + 1].coupon.discount.discount)+'%' : discountConversion(list[index + 1].coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                      <i class="discount-icon padding"  v-if="!list[index + 1].coupon.discount">￥</i>
+                    </div>
 
                     {{ list[index + 1].goodsName }}
                   </h4>
@@ -434,7 +437,7 @@ export default {
         }
       })
         .then(res => {
-          // console.log("res",res)
+          console.log("本地",res)
           this.doFormat(res)
           this.defaultAll()
         })
@@ -498,7 +501,7 @@ export default {
           url: `/web/member/cart`
         })
         .then(res => {
-          // console.log("线上llll",res)
+          console.log("线上llll",res)
           const result = []
           let keys = Object.keys(res)
           keys = keys.sort((a, b) => {
@@ -609,6 +612,7 @@ export default {
     godetails(item, index) {
       // 去定制详情
       if (item.groupType === 2) {
+      console.log("去定制详情",item,this.list)
         const ct1 = this.isLogin ? item.id : item.localSn
         const ct2 = this.isLogin
           ? this.list[index + 1].id
@@ -702,7 +706,7 @@ export default {
           }
         ]
       }
-      // console.log(obj)
+      console.log("obj",obj,gs2)
       this.$router.push({
         name: `custom-made-${this.switchName(ct1)}-made-${this.switchName(
           ct2

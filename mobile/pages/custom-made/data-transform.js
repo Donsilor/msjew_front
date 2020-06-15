@@ -307,12 +307,12 @@ export default {
           }
         })
           .then(res => {
-
+            console.log("fffff",res)
             var price = 0;
             if(res.coupon.hasOwnProperty('discount')){
               price = res.coupon.discount.price
             }else{
-              price = res.details[i].retailMallPrice;
+              price = res.details[0].retailMallPrice;
             }
 
             this.boardArr = []
@@ -342,7 +342,7 @@ export default {
           // var url2 =  `/wap/goods/diamond/detail`;
           var url3 =  `/wap/goods/style/detail`;
 
-        // }else{
+        }else{
           var url2 =  `/wap/goods/style/detail`;
           // var url3 =  `/wap/goods/diamond/detail`;
         }
@@ -361,7 +361,7 @@ export default {
             if(res.coupon.hasOwnProperty('discount')){
               price2 = res.coupon.discount.price
             }else{
-              price2 = res.details[i].retailMallPrice;
+              price2 = res.details[0].retailMallPrice;
             }
 
             this.boardArr = []
