@@ -8,6 +8,13 @@
               " -->
           <li v-for="(item, index) in list" :key="index">
             <div
+              v-if="
+                !(
+                  index !== 0 &&
+                  item.createTime === list[index - 1].createTime &&
+                  item.groupType !== 0
+                )
+              "
               class="mod-item"
             >
               <!-- 单品 -->
