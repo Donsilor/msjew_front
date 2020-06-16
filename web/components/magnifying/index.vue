@@ -69,13 +69,13 @@
           this.top = e.offsetY - marksHeight / 2;
           if (this.left < 0) {
             this.left = 0;
-          } else if (this.left > 198) {
-            this.left = 198;
+          } else if (this.left > 200) {
+            this.left = 200;
           }
           if (this.top < 0) {
             this.top = 0;
-          } else if (this.top > 198) {
-            this.top = 198;
+          } else if (this.top > 200) {
+            this.top = 200;
           }
 
           //大d图片除以小的图片的宽高

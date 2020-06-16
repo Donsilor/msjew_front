@@ -5,7 +5,7 @@
       <!--      左侧-->
       <div class="left-detail">
         <product-images :images="thumbnails" @getIdx="getIndex"></product-images>
-		
+
         <div class="magn-box">
           <bdd-magnifying :msg="magnifying"></bdd-magnifying>
         </div>
@@ -424,7 +424,7 @@ export default {
         caratIndex: 0
       },
       jewelleryOptions: this.CONDITION_INFO.jewellery,
-	  magnifying: ''
+      magnifying: ''
     }
   },
   computed: {
@@ -486,7 +486,7 @@ export default {
     console.log("dddd",this.productInfo)
     const _this = this
     _this.$nextTick(() => {})
-	
+
 	this.magnifying = this.thumbnails[0]
   },
   methods: {
@@ -574,9 +574,9 @@ export default {
           _this.$errorMessage(`${err.message}`)
         })
     },
-	getIndex(i) {
-		this.magnifying = this.thumbnails[i]
-	}
+    getIndex(i) {
+      this.magnifying = this.thumbnails[i]
+    }
   }
 }
 </script>
