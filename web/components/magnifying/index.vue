@@ -137,7 +137,7 @@
 
 <style scoped>
   .productLeft {
-    width: 1000px;
+    /* width: 1000px; */
     height: 500px;
     position: relative;
   }
