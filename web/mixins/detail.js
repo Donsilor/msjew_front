@@ -58,17 +58,23 @@ export default {
     },
     // 加入购物车
     addCart() {
-      // facebook 统计添加购物车-start
-      !function(f,b,e,v,n,t,s)
-      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-      n.queue=[];t=b.createElement(e);t.async=!0;
-      t.src=v;s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)}(window, document,'script',
-      'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('track', 'AddToCart');
-      // facebook统计添加购物车-end
+      // facebook 添加购物车统计-start
+      if(this.$store.state.platform == 30){
+        console.log("facebook购物车数据统计")
+
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+
+        fbq('track', 'AddToCart');
+        fbq('track', 'AddToCart');
+      }
+      // facebook 添加购物车统计-end
 
       const _this = this
       if (!_this.canAddCart) {
@@ -91,7 +97,7 @@ export default {
           goods_type:_this.simpleDetail.categoryId
         }
       ]
-      console.log(goodInfo)
+      // console.log(goodInfo)
       _this.addingCart = true
       _this.$store
         .dispatch('addCart', goodInfo)

@@ -2262,7 +2262,7 @@ export default {
         .then(res => {
           this.$store.dispatch('setLocalCartOrder',this.pathTakeIds)
           this.$store.dispatch('setLocalOrder',res)
-          console.log(`good22222======>`, res)
+          // console.log(`good22222======>`, res)
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {

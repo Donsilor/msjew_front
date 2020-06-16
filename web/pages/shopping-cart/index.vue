@@ -282,9 +282,9 @@ export default {
           this.tickNum = 0
           this.totalNum = 0
           this.totalPrice = 0
-          console.log(1111111)
+          // console.log(1111111)
         } else {
-           console.log(22222)
+          // console.log(22222)
           this.tickNum = 0
           this.totalNum = 0
           this.totalPrice = 0

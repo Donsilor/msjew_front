@@ -37,7 +37,6 @@
       const _this = this
       _this.$nextTick(() => {
         // _this.getSetting()
-        console.log(10)
         if (!_this.$store.state.coin || !_this.$store.state.language) {}
       })
     },
