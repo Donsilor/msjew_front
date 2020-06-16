@@ -71,7 +71,7 @@ export default {
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
 
-        fbq('track', 'AddToCart');
+        fbq('init', '657019281547623');
         fbq('track', 'AddToCart');
       }
       // facebook 添加购物车统计-end
