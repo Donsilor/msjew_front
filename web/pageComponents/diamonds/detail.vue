@@ -9,10 +9,10 @@
           :gia-number="productInfo.giaNumber"
           @getIdx="getIndex"
         ></product-images>
-				
-		<div class="magn-box">
-			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
-		</div>
+
+        <div class="magn-box">
+          <bdd-magnifying :msg="magnifying"></bdd-magnifying>
+        </div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
@@ -424,7 +424,7 @@ export default {
     const _this = this
     _this.$nextTick(() => {})
     console.log(this.simpleDetail, `<=======`)
-	
+
 	this.magnifying = this.thumbnails[0]
   },
   methods: {
