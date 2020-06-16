@@ -61,21 +61,21 @@
       },
       //遮罩层放大镜
       marks(e) {
-        var marksWidth = 300; //marks的宽
-        var marksHeight = 300; //marks的高
+        var marksWidth = 298; //marks的宽
+        var marksHeight = 298; //marks的高
         if (this.isPC == true) {
           //PC端
           this.left = e.offsetX - marksWidth / 2;
           this.top = e.offsetY - marksHeight / 2;
           if (this.left < 0) {
             this.left = 0;
-          } else if (this.left > 200) {
-            this.left = 200;
+          } else if (this.left > 198) {
+            this.left = 198;
           }
           if (this.top < 0) {
             this.top = 0;
-          } else if (this.top > 200) {
-            this.top = 200;
+          } else if (this.top > 198) {
+            this.top = 198;
           }
 
           //大d图片除以小的图片的宽高
@@ -150,7 +150,7 @@
     overflow: hidden;
 	visibility: hidden;
   }
-  
+
   .mdImg img{
 	  position: absolute;
 	  width: 100%;
@@ -175,7 +175,10 @@
     width: 300px;
     height: 300px;
     position: absolute;
-    background-color: rgba(220, 220, 220, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #D5C5BE;
+    box-sizing: border-box;
+
     /*top:0px;  //内联设置了动态的top，left
           left:0px;*/
   }
@@ -189,7 +192,7 @@
     z-index: 2;
     top: 0;
     left: 533px;
-    border: 1px solid #A096B4;
+    border: 1px solid #ddd;
     background-color: #fff;
     box-sizing: border-box;
   }

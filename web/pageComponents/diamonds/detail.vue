@@ -7,7 +7,7 @@
         <product-images
           :images="thumbnails"
           :gia-number="productInfo.giaNumber"
-		  @getIdx="getIndex"
+          @getIdx="getIndex"
         ></product-images>
 				
 		<div class="magn-box">

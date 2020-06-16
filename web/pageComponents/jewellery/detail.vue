@@ -6,9 +6,9 @@
       <div class="left-detail">
         <product-images :images="thumbnails" @getIdx="getIndex"></product-images>
 		
-		<div class="magn-box">
-			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
-		</div>
+        <div class="magn-box">
+          <bdd-magnifying :msg="magnifying"></bdd-magnifying>
+        </div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
