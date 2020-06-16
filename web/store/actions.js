@@ -347,13 +347,9 @@ export default {
         if (getters.hadLogin) {
             // 已登录的操作
             // console.log('已登录的操作')
-            fbq('track','AddToCart')
-            fbq('track','Purchase',{value:0.00,currency:'USD'});
             request = dispatch('addOnlineCart', data)
         } else {
             // 未登录的操作
-            fbq('track','AddToCart')
-            fbq('track','Purchase',{value:0.00,currency:'USD'});
             request = dispatch('addLocalCart', data)
             // setTimeout(() => {
             //     this.$router.push(`/login`)
