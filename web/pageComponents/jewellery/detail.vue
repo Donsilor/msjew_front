@@ -268,7 +268,7 @@
       </li>
     </ul> -->
     <!--    商品详情-->
-	<h2 class="detail-name">{{ $t(`${lang}.goodsDetails`) }}</h2>
+    <h2 class="detail-name">{{ $t(`${lang}.goodsDetails`) }}</h2>
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
         <h3>{{ $t(`${lang}.goodsId`) }}：
@@ -287,7 +287,7 @@
             <span>{{ item.configAttrVal || '--' }}</span>
           </li>
         </ul>
-		<div class="line"></div>
+        <div class="line"></div>
       </div>
     </section>
     <section class="desc" v-html="info.goodsDesc"></section>
