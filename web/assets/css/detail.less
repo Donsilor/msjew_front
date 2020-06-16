@@ -451,15 +451,9 @@
       h3 {
         font-size: 16px;
         font-family: Microsoft YaHei;
-        font-weight: 400;
         color: rgba(51, 51, 51, 1);
-        word-break: break-word;
-        font-weight: bold;
-        margin: 0 0 20px 20px;
-
-        span{
-          font-weight: normal;
-        }
+        font-weight: 400;
+        margin-bottom: 10px;
       }
     }
 
@@ -473,8 +467,7 @@
       font-family: Microsoft YaHei;
       font-weight: 400;
       color: rgba(51, 51, 51, 1);
-      margin: 0 20px;
-	  position: relative;
+      position: relative;
 
       .group-name {
         margin-bottom: 10px;
@@ -483,8 +476,8 @@
       .attr-list {
         display: flex;
         flex-wrap: wrap;
-        width: 1200px;
-        margin: 0 auto;
+        // width: 1200px;
+        // margin: 0 auto;
 
         .attr-item {
           flex-basis: 50%;
@@ -495,15 +488,27 @@
           span:nth-of-type(1) {
             width: 250px;
             overflow: hidden;
-			color: #333;
-			padding-left: 50px;
-			box-sizing: border-box;
+            color: #333;
+            box-sizing: border-box;
           }
 
           span:nth-of-type(2) {
             width: 300px;
             overflow: hidden;
-			color: #acacac;
+            color: #acacac;
+          }
+
+          li:nth-child(even) span:nth-of-type (0) {
+            width: 250px;
+            overflow: hidden;
+            color: #333;
+            padding-left: 50px;
+            box-sizing: border-box;
+          }
+          
+          li:nth-child(4n+3),
+          li:nth-child(4n+4){
+            margin-bottom: 40px;
           }
         }
       }
