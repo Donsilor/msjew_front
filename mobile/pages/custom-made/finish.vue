@@ -9,13 +9,13 @@
           <img :src="$IMG_URL + info1.goodsImages" />
 
           <div class="activity-sign" v-if="couponType(info1.coupon) == 'money' || couponType(info1.coupon) == 'discount'">
-            <div class="triangle" v-if="couponType(info1.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(this.info1.coupon.discount.discount)+'%' : discountConversion(this.info1.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+            <div class="triangle" v-if="couponType(info1.coupon) == 'discount'">{{ this.$store.state.language == 'en_US' ? discountUs(this.info1.coupon.discount.discount)+'%' : discountConversion(this.info1.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
             <div class="triangle" v-if="couponType(info1.coupon) == 'money'">{{ lang.discounts1 }}</div>
           </div>
         </div>
         <div class="content-block">
           <div class="content-title ow-h2 wordwrap">
-            <span class="discount-icon" v-if="couponType(info1.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(this.info1.coupon.discount.discount)+'%' : discountConversion(this.info1.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+            <span class="discount-icon" v-if="couponType(info1.coupon) == 'discount'">{{ this.$store.state.language == 'en_US' ? discountUs(this.info1.coupon.discount.discount)+'%' : discountConversion(this.info1.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             <span class="discount-icon padding" v-if="couponType(info1.coupon) == 'money'">￥</span>
 
             {{ info1.goodsName }}
@@ -58,13 +58,13 @@
           <img :src="$IMG_URL + info2.goodsImages" />
 
           <div class="activity-sign" v-if="couponType(info2.coupon) == 'money' || couponType(info2.coupon) == 'discount'">
-            <div class="triangle" v-if="couponType(info2.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(this.info2.coupon.discount.discount)+'%' : discountConversion(this.info2.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+            <div class="triangle" v-if="couponType(info2.coupon) == 'discount'">{{ this.$store.state.language == 'en_US' ? discountUs(this.info2.coupon.discount.discount)+'%' : discountConversion(this.info2.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
             <div class="triangle" v-if="couponType(info2.coupon) == 'money'">{{ lang.discounts1 }}</div>
           </div>
         </div>
         <div class="content-block">
           <div class="content-title ow-h2 wordwrap">
-            <span class="discount-icon" v-if="couponType(info2.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(this.info2.coupon.discount.discount)+'%' : discountConversion(this.info2.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+            <span class="discount-icon" v-if="couponType(info2.coupon) == 'discount'">{{ this.$store.state.language == 'en_US' ? discountUs(this.info2.coupon.discount.discount)+'%' : discountConversion(this.info2.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             <span class="discount-icon padding" v-if="couponType(info2.coupon) == 'money'">￥</span>
 
             {{ info2.goodsName }}
