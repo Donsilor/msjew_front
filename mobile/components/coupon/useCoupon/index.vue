@@ -144,7 +144,9 @@
           })
         }
 
-        this.$emit('closeCoupon', this.couponInfo)
+        setTimeout(() => {
+          this.$emit('closeCoupon', this.couponInfo)
+        }, 1000)   
       }
     }
   }
