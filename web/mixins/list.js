@@ -304,7 +304,7 @@ export default {
         })
         .catch(err => {
           _this.loading = false
-          console.log(2222)
+          // console.log(2222)
           console.error(err)
           if (err instanceof Error) {
             console.log('这是一个错误')
