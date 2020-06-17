@@ -16,7 +16,7 @@
                 <img :src="imageStrToArray(block1.pick)" />
                 <div class="title-block">
                   <div class="title-block-name">
-				    <span class="discount-icon fl" v-if="block1.couponType == 1">{{ language == 'en_US' ? this.block1.couponNum+'%' : discountConversion(this.block1.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
+				    <span class="discount-icon fl" v-if="block1.couponType == 1">{{ language == 'en_US' ? discountUs(this.block1.couponNum)+'%' : discountConversion(this.block1.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
 				    <span class="favourable-icon fl" v-if="block1.couponType == 2">￥</span>
 
                     {{ block1.name }}
@@ -49,7 +49,7 @@
                 <img :src="imageStrToArray(block2.pick)" />
                 <div class="title-block">
                   <div class="title-block-name">
-					<span class="discount-icon fl" v-if="block2.couponType == 1">{{ language == 'en_US' ? this.block2.couponNum+'%' : discountConversion(this.block2.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
+					<span class="discount-icon fl" v-if="block2.couponType == 1">{{ language == 'en_US' ? discountUs(this.block2.couponNum)+'%' : discountConversion(this.block2.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
 					<span class="favourable-icon fl" v-if="block2.couponType == 2">￥</span>
 
                     {{ block2.name }}

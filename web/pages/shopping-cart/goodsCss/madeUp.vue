@@ -218,6 +218,7 @@ export default {
   },
   mounted() {
     this.language = this.getCookie('language')
+    // console.log(this.g)
   },
   methods: {
     goDetail() {

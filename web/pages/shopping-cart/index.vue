@@ -237,10 +237,19 @@ export default {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
-          // console.log("1230",res)
+          console.log("1230",res)
           for (const i in res) {
             res[i].tick = false
           }
+          // const result = []
+          // let keys = Object.keys(res)
+          // keys = keys.sort((a, b) => {
+          //     return b - a
+          // })
+          // keys.forEach(item => {
+          //     result.push(res[item])
+          // })
+          // this.good = result
           this.good = res
           if(this.good.length<=3){
             this.Settlement1 = true

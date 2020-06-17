@@ -31,7 +31,7 @@
       </div>
 
       <div class="discount-icon2" v-if="this.coupon !== 'money' && this.coupon != ''">
-        <div class="icon">{{ language == 'en_US' ? this.coupon+'%' : discountConversion(this.coupon)}} {{ $t(`${lang}.discounts2`) }}</div>
+        <div class="icon">{{ language == 'en_US' ? discountUs(this.coupon)+'%' : discountConversion(this.coupon)}} {{ $t(`${lang}.discounts2`) }}</div>
       </div>
     </div>
   </div>

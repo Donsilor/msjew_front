@@ -22,7 +22,7 @@
            <!-- <div class="rmb">(￥{{item.moneyCn}})</div> -->
            <div class="rule">{{ $t(`${lang}.limit1`) }}{{coin}} {{item.atLeast}}{{ $t(`${lang}.limit2`) }}</div>
            <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
-           <div class="use">{{ $t(`${lang}.limit3`) }}({{item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
+           <div class="use" :class="{look:look}" @click="more"> {{ $t(`${lang}.limit3`) }}({{item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
            <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
 
            <!-- 失效 class="lose-efficacy" -->
@@ -44,7 +44,8 @@ export default {
       language: '',
       coin: '',
       couponList: [],
-      nowTime: ''
+      nowTime: '',
+      look:true
     }
   },
   mounted(){
@@ -81,6 +82,9 @@ export default {
       })
   },
   methods: {
+    more(){
+      this.look = false
+    },
 	  getCookie(cname) {
 	    const name = cname + '='
 	    const ca = document.cookie.split(';')
@@ -367,14 +371,30 @@ export default {
     border-radius: 2px;
     cursor: pointer;
   }
+  .left{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    right:-2px;
+    bottom: 14px;
+  }
   .use{
     text-align: center;
     font-size: 12px;
     color: #bfb8b8;
     margin-bottom: 6px;
-    height: 30px;
+    // position: relative;
+    // height: 30px;
+    // line-height: 16px;
+    // overflow: hidden;
+  }
+  
+  .look{
+    height: 20px;
     line-height: 16px;
     overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
   }
 
   .time{

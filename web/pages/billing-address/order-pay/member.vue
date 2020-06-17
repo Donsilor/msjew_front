@@ -887,7 +887,8 @@
             <!-- 优惠券 -->
             <div v-if="ifShowCoupon" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
-              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': !couponCodeR.couponId}" @click="showUseCoupon = true">
+              <!-- :class="{'under-line': !couponCodeR.couponId}" -->
+              <div class="hkd color-pink under-line" style="cursor: pointer;"  @click="showUseCoupon = true">
                 <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
                 <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
               </div>
@@ -1820,7 +1821,8 @@
             <!-- 优惠券 -->
             <div v-if="ifShowCoupon" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
-              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': !couponCodeR.couponId}" @click="showUseCoupon = true">
+              <!-- :class="{'under-line': !couponCodeR.couponId}" -->
+              <div class="hkd color-pink under-line" style="cursor: pointer;"  @click="showUseCoupon = true">
                 <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
                 <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
               </div>

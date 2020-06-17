@@ -245,7 +245,7 @@
 			<div class="discount-active">
 				<div>
 					<span>{{ $t(`${lang}.discountsActive`) }}：</span>
-					<span class="discount-icon">{{ language == 'en_US' ? this.info.coupon.discount.discount+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+					<span class="discount-icon">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
 				</div>
 				<div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div>
 			</div>

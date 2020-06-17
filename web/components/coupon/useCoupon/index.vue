@@ -23,7 +23,7 @@
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">{{ $t(`${lang}.limit1`) }}{{coin}} {{item.at_least}}{{ $t(`${lang}.limit2`) }}</div>
               <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
-              <div class="text">({{item.lineType}})</div>
+              <div class="text" :class="{look:look}" @click="more">({{item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
@@ -39,8 +39,9 @@
 
           </div>
         </div>
-
-        <div class="finish" @click="closeCoupon(true)">{{ $t(`${lang}.accomplish`) }}</div>
+        <div class="btn">
+          <div class="finish" @click="closeCoupon(true)">{{ $t(`${lang}.accomplish`) }}</div>
+        </div>
       </div>
 
     </div>
@@ -75,7 +76,8 @@
         coin: '',
         couponList: [],
         ifLoading: false,
-        couponInfo: {couponCode: '',couponId: ''}
+        couponInfo: {couponCode: '',couponId: ''},
+        look:true
       }
     },
     mounted() {
@@ -104,6 +106,9 @@
       this.couponList = [...this.couponList]
     },
     methods: {
+      more(){
+        this.look = false
+      },
       // 获取cookie
       getCookie(cname) {
         const name = cname + '='
@@ -191,7 +196,8 @@
 
       .coupon-box {
         width: 900px;
-        height: 644px;
+        // height: 644px;
+        height: 479px;
         margin: 10px auto;
         overflow-y: auto;
 
@@ -297,13 +303,21 @@
                 cursor: pointer;
               }
 
+              .look{
+                height: 20px;
+                line-height: 16px;
+                overflow: hidden;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+              }
+
               .text {
                 text-align: center;
                 font-size: 12px;
                 color: #bfb8b8;
-                height: 38px;
-                line-height: 18px;
-                overflow: hidden;
+                // height: 38px;
+                // line-height: 18px;
+                // overflow: hidden;
               }
 
               .time {
@@ -377,6 +391,12 @@
           }
         }
 
+        .btn{
+          position: fixed;
+          bottom: 0;
+          width: 90%;
+        }
+        
         .finish {
           width: 160px;
           height: 44px;

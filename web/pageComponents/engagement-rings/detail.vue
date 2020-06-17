@@ -9,7 +9,7 @@
       <!--      右侧-->
       <div class="right-detail">
         <div class="right-title">
-          <span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? info.coupon.discount.discount+'%' : discountConversion(info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+          <span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? discountUs(info.coupon.discount.discount)+'%' : discountConversion(info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
           <span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
 
           <h2 class="product-name">
@@ -244,7 +244,7 @@
         	<div class="discount-active">
         		<div>
         			<span>{{ $t(`${lang}.discountsActive`) }}：</span>
-        			<span class="discount-icon">{{ language == 'en_US' ? this.info.coupon.discount.discount+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+        			<span class="discount-icon">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
         		</div>
         		<div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div>
         	</div>
@@ -371,6 +371,8 @@
     <section class="desc" v-html="info.goodsDesc"></section>
     <order-include></order-include>
     <comments ref="product-comments" :good-id="info.id"></comments>
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
   </div>
 </template>
 
@@ -453,6 +455,9 @@ export default {
         sizeIndex: 0,
         caratIndex: 0
       },
+      showCoupon: false,
+      moneyList: [],
+      activeTime: '',
       language: ''
     }
   },
@@ -568,6 +573,9 @@ export default {
   },
   mounted() {
     const _this = this
+    if(this.info.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
+    }
     _this.$nextTick(() => {
       // console.log(this.$helpers.base64Decode(this.$route.query.steps))
       if (this.$route.query.isBack) {
@@ -685,6 +693,14 @@ export default {
         }
       }
       this.ringChecked = ringChecked
+    },
+    // 领取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        this.$errorMessage(this.$t(`${lang}.needLogin`))
+      }else{
+        this.showCoupon = true
+      }
     }
   }
 }
