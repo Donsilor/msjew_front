@@ -3,11 +3,15 @@
     <!-- 手机登录 -->
     <div v-if="loginType == 1" class="login-item">
       <div class="relative margin-bottom-20">
+		<div style="height: 0;visibility: hidden;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+		</div>
         <div class="login-input icon-input">
           <span class="icon">
             <img class="phone" src="/login/phone.png" />
           </span>
-          <input id="ipt1" v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" />
+          <input id="ipt1" v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" autocomplete="off"/>
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phoneTips`) }}
@@ -18,7 +22,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input  v-model.trim="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" maxlength="60" />
+          <input  v-model.trim="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" maxlength="60" autocomplete="off"/>
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
@@ -43,7 +47,7 @@
         </div>
       </div>
       <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="login">
+        <button v-loading="requesting" class="submit bg" @click="login">
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
@@ -64,6 +68,10 @@
     <!-- 邮箱登录 -->
     <div v-if="loginType == 2" class="login-item">
       <div class="relative margin-bottom-20">
+	    <div style="height: 0;visibility: hidden;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+	    </div>
         <div class="login-input icon-input">
           <span class="icon">
             <img src="/login/mail.png" />
@@ -104,7 +112,7 @@
         </div>
       </div>
       <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="login">
+        <button v-loading="requesting" class="submit bg" @click="login">
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
@@ -549,6 +557,11 @@ input::placeholder {
     font-size: 14px;
     font-weight: 400;
     color: #8b766c;
+  }
+	
+  .submit.bg{
+	background-color: #A88F82;
+	color: #fff;
   }
 
   .gap-line {

@@ -3,6 +3,10 @@
     <!-- 手机注册 -->
     <div v-if="loginType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
+		<div style="height: 0;visibility: hidden;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+		</div>
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
             <div class="register-input">
@@ -15,6 +19,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.surname`)"
                 maxlength="30"
+								autocomplete="off"
               />
             </div>
             <div v-show="lastnameShow"  class="error-tip">
@@ -33,6 +38,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.nameTips`)"
                 maxlength="30"
+								autocomplete="off"
               />
             </div>
             <div v-show="firstnameShow" class="error-tip">
@@ -69,6 +75,7 @@
               v-bind:class="{active:isActivemobile}"
               :placeholder="$t(`${lang}.phoneBox`)"
               maxlength="11"
+							autocomplete="off"
             />
           </div>
           <div v-show="mobileShow" class="error-tip">
@@ -89,6 +96,7 @@
                 :placeholder="$t(`${lang}.code`)"
                 maxlength="15"
                 @input="inputCode"
+								autocomplete="off"
               />
             </div>
             <div class="send-email-code">
@@ -115,6 +123,7 @@
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.pwdType`)"
               maxlength="30"
+							autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -138,6 +147,7 @@
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.repassword`)"
               maxlength="30"
+							autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
