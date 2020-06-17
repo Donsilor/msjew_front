@@ -31,7 +31,7 @@
       </div>
 
       <div class="discount-icon2" v-if="this.coupon !== 'money' && this.coupon != ''">
-        <div class="icon">{{ this.$store.state.language == 'en_US' ? discountUs(this.coupon)+'%' : discountConversion(this.coupon)}} {{ $t(`${lang}.discounts2`) }}</div>
+        <div class="icon">{{ language == 'en_US' ? discountUs(this.coupon)+'%' : discountConversion(this.coupon)}} {{ $t(`${lang}.discounts2`) }}</div>
       </div>
     </div>
   </div>
@@ -77,7 +77,7 @@ export default {
     return {
       lang,
       activeIndex: 0,
-      language: ''
+      language: this.$store.state.language
     }
   },
   computed: {
@@ -89,7 +89,7 @@ export default {
     const _this = this
     _this.$nextTick(() => {})
 
-    this.language = this.getCookie('language')
+    // this.language = this.getCookie('language')
   },
   methods: {
     changeActiveIndex(index) {

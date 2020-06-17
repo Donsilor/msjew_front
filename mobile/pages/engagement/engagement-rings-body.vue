@@ -256,11 +256,11 @@ export default {
   },
   data(){
     return {
-      language:''
+      language:this.$store.state.language
     }
   },
   mounted() {
-    this.language = this.getCookie('language')
+    // this.language = this.getCookie('language')
   },
 }
 </script>

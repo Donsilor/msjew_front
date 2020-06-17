@@ -13,7 +13,7 @@
 
           <!-- 折扣 -->
           <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
-            <span>{{ this.$store.state.language == 'en_US' ? discountUs(g.data[0].coupon.discount.discount)+'%' : discountConversion(g.data[0].coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+            <span>{{ language == 'en_US' ? discountUs(g.data[0].coupon.discount.discount)+'%' : discountConversion(g.data[0].coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
           </div>
 
           <!-- 优惠券 -->
@@ -117,7 +117,7 @@ export default {
   data() {
     return{
       lang,
-      language: ''
+      language: this.$store.state.language
     }
   },
   name: 'Single',
@@ -136,7 +136,7 @@ export default {
     }
   },
   mounted() {
-    this.language = this.getCookie('language')
+    // this.language = this.getCookie('language')
   },
   methods: {
     goDetail() {},

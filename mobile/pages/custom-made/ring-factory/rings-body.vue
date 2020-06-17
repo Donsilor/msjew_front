@@ -15,12 +15,12 @@
       </swiper>
 
       <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
-        <div class="triangle" v-if="goodInfo.coupon.discount">{{ this.$store.state.language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+        <div class="triangle" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
         <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
       </div>
     </div>
     <div class="title">
-      <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ this.$store.state.language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+      <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
       <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
       {{ goodInfo.goodsName }}
     </div>
@@ -50,7 +50,7 @@
         <div class="discoupon-d" v-if="goodInfo.coupon.discount">
           <div class="discoupon-d-l">
             <span class="text">{{ lang.discountsActive }}：</span>
-            <span class="discount-icon">{{ this.$store.state.language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+            <span class="discount-icon">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
           </div>
         </div>
 
@@ -306,7 +306,7 @@ export default {
   data() {
     return{
       ifShowCoupon: false,
-      language: ''
+      language: this.$store.state.language
     }
   },
   mixins: [Mx],
@@ -329,7 +329,7 @@ export default {
     }
   },
   mounted() {
-    this.language = this.getCookie('language')
+    // this.language = this.getCookie('language')
   },
   methods:{
     closeCo() {

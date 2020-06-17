@@ -243,7 +243,7 @@
 
                   <!-- 折扣 -->
                   <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
-                    <span>{{ this.$store.state.language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+                    <span>{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                   </div>
 
                   <!-- 优惠券 -->
@@ -276,7 +276,7 @@
                   <!-- 优惠券 -->
                   <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
                   <!-- 折扣 -->
-                  <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ this.$store.state.language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+                  <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                   {{ item.goodsName }}
                 </div>
               </div>
@@ -368,7 +368,7 @@ export default {
       },
       loading: true,
       all_category : [4,5,6,7,8,9,16,17,18],
-      language: ''
+      language: this.$store.state.language
     }
   },
   computed: {
@@ -506,7 +506,7 @@ export default {
       _this.research()
     })
 
-    this.language = this.getCookie('language')
+    // this.language = this.getCookie('language')
   },
   watch: {
     $route(val, oldVal) {

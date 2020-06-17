@@ -9,7 +9,7 @@
       <!--      右侧-->
       <div class="right-detail">
         <div class="right-title">
-        	<span class="discount-icon fl" v-if="info.coupon.discount">{{ this.$store.state.language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+        	<span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
         	<span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
 
         	<h2 class="product-name">
@@ -220,7 +220,7 @@
         	<div class="discount-active">
         		<div>
         			<span>{{ $t(`${lang}.discountsActive`) }}：</span>
-        			<span class="discount-icon">{{ this.$store.state.language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+        			<span class="discount-icon">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
         		</div>
         		<div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div>
         	</div>
@@ -466,7 +466,7 @@ export default {
       jewelleryOptions: this.CONDITION_INFO.jewellery,
       showCoupon: false,
       activeTime: '',
-      language: ''
+      language: this.$store.state.language
     }
   },
   computed: {
@@ -544,7 +544,7 @@ export default {
 
     _this.$nextTick(() => {})
 
-    this.language = this.getCookie('language')
+    // this.language = this.getCookie('language')
   },
   methods: {
     getCategoryById(categoryId) {

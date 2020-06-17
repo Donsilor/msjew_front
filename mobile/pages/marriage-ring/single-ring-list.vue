@@ -152,7 +152,7 @@ export default {
     return {
       lang: this.LANGUAGE.listCommons,
       gender: 'all',
-      language: ''
+      language: this.$store.state.language
     }
   },
   watch: {
@@ -181,7 +181,7 @@ export default {
       // this.madeUpEv()
     })
 
-    this.language = this.getCookie('language')
+    // this.language = this.getCookie('language')
   },
   methods: {
     changeGender(type = -1) {

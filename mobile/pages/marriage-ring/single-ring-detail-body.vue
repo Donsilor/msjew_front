@@ -289,7 +289,7 @@ export default {
         require('../../static/marriage-ring/icon-04.png')
       ],
       ifShowCoupon: false,
-      language: ''
+      language: this.$store.state.language
     }
   },
   computed: {
@@ -312,7 +312,7 @@ export default {
     }
   },
   mounted() {
-    this.language = this.getCookie('language')
+    // this.language = this.getCookie('language')
   },
   methods:{
     closeCo() {
