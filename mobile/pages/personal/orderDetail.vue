@@ -259,14 +259,7 @@
             <span>{{ lang.productsCount }}： </span
             ><span>{{ info.coinCode }} {{ productsPrice }} </span>
           </li>
-		  <li v-for="item in cardList">
-		    <span>{{ lang.shoppingCard }}：
-					<em :class="info.orderStatus == 0 ? 'card-color' : ''">
-						({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
-					</em>
-				</span>
-			<span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
-		  </li>
+		  
           <li>
             <span>{{ lang.freight }}： </span
             ><span>+{{ info.coinCode }} {{ info.logisticsFee }} </span>
@@ -296,6 +289,14 @@
           <li v-if="info.couponAmount != 0" class="active">
             <span>{{ lang.couponAmount }}:</span
             ><span>-{{ info.coinCode }} {{ info.couponAmount }} </span>
+          </li>
+          <li v-for="(item, i) in cardList" :key="i" >
+            <span>{{ lang.shoppingCard }}：
+              <em :class="info.orderStatus == 0 ? 'card-color' : ''">
+                ({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
+              </em>
+            </span>
+            <span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
           </li>
           <div class="all">
             <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span
