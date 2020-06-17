@@ -225,7 +225,7 @@ export default {
     },
     goPaySuccess(){
       // facebook 购买成功统计-start
-      if(this.$store.state.platform == 30){
+      if(this.$store.state.platform == 31){
         console.log("facebook购买成功数据统计")
         fbq('track','Purchase',{value:0.00,currency:'USD'});
       }

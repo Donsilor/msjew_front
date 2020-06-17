@@ -311,7 +311,7 @@ export default {
         .then(data => {
           
           // facebook 添加购物车统计-start
-          if(this.$store.state.platform == 30){
+          if(this.$store.state.platform == 31){
             console.log("facebook购物车数据统计")
             fbq('track', 'AddToCart');
           }
