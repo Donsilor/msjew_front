@@ -84,13 +84,13 @@ export default {
       _this.$store
         .dispatch('addCart', goodInfo)
         .then(data => {
-
           // facebook 添加购物车统计-start
           if(this.$store.state.platform == 30){
             console.log("facebook购物车数据统计")
             fbq('track', 'AddToCart');
           }
           // facebook 添加购物车统计-end
+          
 
           setTimeout(() => {
             _this.$successMessage(_this.$t(`common.addCartSuccess`))
