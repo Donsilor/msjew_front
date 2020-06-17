@@ -197,13 +197,13 @@
       .coupon-box {
         width: 900px;
         // height: 644px;
-        height: 479px;
+        height: 560px;
         margin: 10px auto;
         overflow-y: auto;
 
         .box-r {
           width: 900px;
-          min-height: 500px;
+          min-height: 575px;
           display: flex;
           align-items: flex-start;
           justify-content: space-between;
@@ -403,7 +403,7 @@
           text-align: center;
           line-height: 44px;
           border-radius: 3px;
-          margin: 40px auto;
+          margin: 20px auto;
           font-size: 16px;
           background-color: #ececec;
           border: 1px solid #333;
