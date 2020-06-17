@@ -284,17 +284,17 @@
             ><span>-{{ info.coinCode }} {{ info.transPreferFee }} </span>
           </li>
           <li>
-            <span>{{ lang.orderCount }}</span
+            <span>{{ lang.orderCount }}:</span
             ><span
               ><em>{{ info.coinCode }} </em>{{ info.orderAmount }}
             </span>
           </li>
           <li v-if="info.discountAmount != 0" class="active">
-            <span>折扣金额： </span
+            <span>{{ lang.discountedAmount }}:</span
             ><span>-{{ info.coinCode }} {{ info.discountAmount }} </span>
           </li>
           <li v-if="info.couponAmount != 0" class="active">
-            <span>优惠券： </span
+            <span>{{ lang.couponAmount }}:</span
             ><span>-{{ info.coinCode }} {{ info.couponAmount }} </span>
           </li>
           <div class="all">

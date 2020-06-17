@@ -280,7 +280,9 @@
           <!-- 优惠金额 -->
           <li v-if="ifShowCouponMoney && isLogin">
             <span>{{ lang.couponAmount }}： </span
-            ><span v-if="couponCodeR.couponPrice"
+            ><span
+            class="use-coupon"
+             v-if="couponCodeR.couponPrice"
              @click="ifShowCoupon = true"
               >-{{ coin }}
               {{this.couponCodeR.couponPrice}}</span
@@ -534,6 +536,7 @@ export default {
       this.list = JSON.parse(storage.get('myCartList', 0))
       // this.planDays = this.allFee.planDays
       console.log("allFee",this.list)
+      this.amount = this.list.length
       this.idList = []
       this.productAmount = 0
       if(this.list != 0){
@@ -1684,7 +1687,7 @@ export default {
       .price {
         .use-coupon{
           text-decoration: underline;
-          color: #75BEEE;
+          color: rgba(242, 156, 136, 1);
         }
         li {
           display: flex;

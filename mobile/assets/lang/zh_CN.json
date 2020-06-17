@@ -579,7 +579,9 @@
         "ultimatelyPay": "实付金额",
         "NeedPay": "需付金額",
         "pending":"待确认",
-        "payfailed":"支付失败"
+        "payfailed":"支付失败",
+        "discountedAmount": "折扣金额",
+        "couponAmount": "优惠券"
       }
     },
     "custom-made": {

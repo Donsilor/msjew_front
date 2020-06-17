@@ -579,7 +579,9 @@
       "ultimatelyPay": "Actual payment",
       "NeedPay": "MoneyNeedPay",
       "pending":"Pending",
-      "payfailed":"Payment failed"
+      "payfailed":"Payment failed",
+      "discountedAmount": "Discounted amount",
+      "couponAmount": "Coupon"
     }
   },
   "custom-made": {

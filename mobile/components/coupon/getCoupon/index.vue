@@ -23,13 +23,13 @@
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">{{ lang.limit1 }}{{coin}} {{item.at_least}}{{ lang.limit2 }}</div>
-              <div class="text">{{ lang.limit3 }}( {{item.lineType}}) {{ lang.limit4 }}</div>
+              <div class="text" :class="{look:look}" @click="more">{{ lang.limit3 }}( {{item.lineType}}) {{ lang.limit4 }}</div>
               <div class="time">{{ lang.time }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
             <div class="get" @click="getCoupon(index)">
               <div>
-                <span v-if="!item.ifUse">Collect it now</span>
+                <span v-if="!item.ifUse">{{ lang.immediatelyReceive }}</span>
               </div>
             </div>
 
@@ -62,7 +62,8 @@
         language: '',
         couponList: [],
         ifLoading: false,
-        loadFinish: false
+        loadFinish: false,
+        look: true
       }
     },
     mounted() {
@@ -118,6 +119,9 @@
       }
     },
     methods: {
+      more(){
+        this.look = false
+      },
       // 获取cookie
       getCookie(cname) {
         const name = cname + '='
@@ -325,6 +329,14 @@
                 color: #bfb8b8;
                 margin-bottom: 10px;
               }
+
+              .look{
+                height: 20px;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+
 
               .time {
                 font-size: 13px;

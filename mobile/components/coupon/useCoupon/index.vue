@@ -23,23 +23,23 @@
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">{{ lang.limit1 }}{{coin}}{{item.at_least}}{{ lang.limit2 }}</div>
-              <div class="text">({{item.lineType}})</div>
+              <div class="text" :class="{look:look}" @click="more">({{item.lineType}})</div>
               <div class="time">{{ lang.time }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
-            <div class="get" @click="chooseCoupon(index)">
-              <div>
-                <span>{{item.ifChoose ? lang.haveChoose : lang.immediatelyChoose}}</span>
+            <div class="get" @click="chooseCoupon(index,true)">
+              <!-- <div> -->
+                <!-- <span>{{item.ifChoose ? lang.haveChoose : lang.immediatelyChoose}}</span> -->
                 <i
                   class="icon iconfont"
                   :class="item.ifChoose ? 'icongou' : ''"
                 ></i>
-              </div>
+              <!-- </div> -->
             </div>
           </div>
         </div>
 
-        <div class="finish" @click="closeCoupon(true)">{{ lang.accomplish }}</div>
+        <!-- <div class="finish" @click="closeCoupon(true)">{{ lang.accomplish }}</div> -->
       </div>
     </div>
 
@@ -71,7 +71,8 @@
         language: '',
         couponList: [],
         ifLoading: false,
-        couponInfo: {couponCode: '',couponId: ''}
+        couponInfo: {couponCode: '',couponId: ''},
+        look:true
       }
     },
     mounted() {
@@ -100,6 +101,9 @@
       this.couponList = [...this.couponList]
     },
     methods: {
+      more(){
+        this.look = false
+      },
       // 获取cookie
       getCookie(cname) {
         const name = cname + '='
@@ -124,12 +128,23 @@
         this.$emit('closeCoupon', this.couponInfo)
       },
       // 选择优惠券
-      chooseCoupon(k) {
+      chooseCoupon(k,g) {
         this.couponList.forEach(o => {
           o.ifChoose = false
         })
         this.couponList[k].ifChoose = true;
         this.couponList = [...this.couponList]
+
+        if(g){
+          this.couponList.forEach((o, index) => {
+            if(o.ifChoose){
+              this.couponInfo.couponCode = this.couponList[index].money;
+              this.couponInfo.couponId = this.couponList[index].coupon_id;
+            }
+          })
+        }
+
+        this.$emit('closeCoupon', this.couponInfo)
       }
     }
   }
@@ -295,6 +310,13 @@
                 margin-bottom: 10px;
               }
 
+              .look{
+                height: 20px;
+                text-overflow:ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+              }
+
               .time {
                 font-size: 13px;
                 color: #cdad75;
@@ -347,11 +369,11 @@
               
               i {
                 position: absolute;
-                right:28%;
-                top:20px;
+                right:40%;
+                top:25px;
                 width: 20px;
                 height: 20px;
-                margin: 20px 12px 0 0;
+                // margin: 20px 12px 0 0;
                 background: rgba(255, 255, 255, 1);
                 border: 1px solid rgba(187, 187, 187, 1); /*no*/
                 border-radius: 50%;
