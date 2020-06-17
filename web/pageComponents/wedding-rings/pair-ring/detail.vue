@@ -914,7 +914,7 @@ export default {
 
       const _this = this
       const product =
-        _this.info
+        _this.info && _this.info.ring && _this.info.ring[index]
           ? JSON.parse(JSON.stringify(_this.info.ring[index]))
           : {}
       // console.log("product",product)
