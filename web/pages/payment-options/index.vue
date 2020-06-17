@@ -83,7 +83,7 @@
         </div>
         <!-- 支付宝 -->
         <div
-          v-show="this.$store.state.platform !== 30"
+          v-show="this.$store.state.platform !== 30 && this.$store.state.platform !== 10"
           :class="{ 'pay-choose': payWay == 82 }"
           class="pay-block"
           @click="payWay = 82"
@@ -103,6 +103,30 @@
           </div>
           <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div>
         </div>
+
+        <!-- 香港支付宝 -->
+        <div
+          v-show="this.$store.state.platform == 10"
+          :class="{ 'pay-choose': payWay == 84 }"
+          class="pay-block"
+          @click="payWay = 84"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/alipay.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
+          <div v-show="payWay == 84" class="pay-price">
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
+          </div>
+          <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
+          </div>
+          <div v-show="payWay == 84" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+          <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div>
+        </div>
+
         <!-- <div
           :class="{ 'pay-choose': payWay === 8 }"
           class="pay-block"
@@ -531,23 +555,25 @@ export default {
     },
     goPay() {
       if(this.$store.state.coin === 'USD'){
-        if(this.payWay == 82 || this.payWay == 83||this.payWay == 81){
+        if(this.payWay == 82 || this.payWay == 83||this.payWay == 81||this.payWay == 84){
           this.$errorMessage(this.$t(`${lang}.NotSupportPay`))
           return
         }
       }
 
-      let pay = 0
+      let pay = ""
       if(this.payWay==6){
         pay = 6
+      }else if(this.payWay==61){
+        pay = 61
+      }else if(this.payWay==81){
+        pay = 81
       }else if(this.payWay==82){
         pay = 82
       }else if(this.payWay==83){
         pay = 83
-      }else if(this.payWay==81){
-        pay = 81
-      }else if(this.payWay==61){
-        pay = 61
+      }else if(this.payWay==84){
+        pay = 84
       }
     console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
