@@ -224,6 +224,13 @@ export default {
       this.stepPayVerify = false
     },
     goPaySuccess(){
+      // facebook 购买成功统计-start
+      if(this.$store.state.platform == 30){
+        console.log("facebook购买成功数据统计")
+        fbq('track','Purchase',{value:0.00,currency:'USD'});
+      }
+      // facebook 购买成功统计-end
+      
       const arr = []
       this.list.map((item, index) => {
         arr.push(item.localSn)

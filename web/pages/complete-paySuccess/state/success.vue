@@ -359,6 +359,13 @@ export default {
       //展示成功页面信息
       this.stepPaySuccess = true
       this.stepPayPending = false
+      
+      // facebook 购买成功统计-start
+      if(this.$store.state.platform == 30){
+        console.log("facebook购买成功数据统计")
+        fbq('track','Purchase',{value:0.00,currency:'USD'});
+      }
+      // facebook 购买成功统计-end
 
       //移除本地购物车
       this.$store.dispatch('getLocalCartOrder').then(v => {
