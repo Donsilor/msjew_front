@@ -58,24 +58,6 @@ export default {
     },
     // 加入购物车
     addCart() {
-      // facebook 添加购物车统计-start
-      if(this.$store.state.platform == 30){
-        console.log("facebook购物车数据统计")
-
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-
-        fbq('init', '657019281547623');
-        fbq('track', 'AddToCart');
-      }
-      // facebook 添加购物车统计-end
-
       const _this = this
       if (!_this.canAddCart) {
         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
@@ -102,6 +84,25 @@ export default {
       _this.$store
         .dispatch('addCart', goodInfo)
         .then(data => {
+          
+          // facebook 添加购物车统计-start
+          if(this.$store.state.platform == 30){
+            console.log("facebook购物车数据统计")
+          
+            !function(f,b,e,v,n,t,s)
+            {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+          
+            fbq('init', '657019281547623');
+            fbq('track', 'AddToCart');
+          }
+          // facebook 添加购物车统计-end
+          
           setTimeout(() => {
             _this.$successMessage(_this.$t(`common.addCartSuccess`))
             _this.addingCart = false
