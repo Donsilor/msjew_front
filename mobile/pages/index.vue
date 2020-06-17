@@ -118,7 +118,7 @@
               />
             </div>
             <div class="product-price">
-              <span>{{ formatCoin(each.coinType)}}</span> 
+              <span>{{ formatCoin(each.coinType)}}</span>
               <span>{{ formatNumber(each.salePrice) }}</span>
             </div>
             <div class="product-name ow-h1">{{ each.goodsName }}</div>
@@ -155,11 +155,11 @@
           <span class="row-name">{{ lang.address }}</span>
           <span class="row-text">{{ lang.addressDetail }}</span>
         </div>
-        <div class="info-row" v-show="this.$store.state.platform == 31">
+        <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
           <span class="line"></span>
           <span class="row-name">{{ lang.address }}</span>
           <span class="row-text">{{ lang.addressDetailUs }}</span>
-        </div>
+        </div> -->
         <div class="info-row">
           <span class="line"></span>
           <span class="row-name">{{ lang.tel }}</span>
@@ -286,12 +286,12 @@ export default {
       const ad = JSON.parse(
         JSON.stringify(this.ad && this.ad[0] ? this.ad[0] : [])
       )
-     
+
 
       let result = []
       if (ad.advertImgModelList && ad.advertImgModelList.length > 0) {
         result = ad.advertImgModelList
-         
+
         for (let n = 0, length = result.length; n < length; n++) {
           result[n].openType = ad.tdOpenType
           result[n].image = this.completionImageStr(result[n].image)
@@ -304,7 +304,7 @@ export default {
           url: ''
         })
       }
-      
+
       return result
     },
     cardsInfo() {
@@ -319,7 +319,7 @@ export default {
       const cardInfo = this.cardsInfo
       const data = cardInfo.moduleGoods || []
       return data ;
-      
+
       // for (let n = 0, length = data.length; n < length; n++) {
       //   result = result.concat(data[n].goods ? data[n].goods : [])
       //   result = result.concat(data[n].ring ? data[n].ring : [])
@@ -350,7 +350,7 @@ export default {
         type: 1
       }
     })
-      .then(data => {    
+      .then(data => {
         return {
           seoInfo,
           ad: data.advert,
@@ -527,7 +527,7 @@ export default {
       // if (!card) {
       //   return
       // }
-      
+
 
       // const configAttriEntity = card.configAttriEntity
 
