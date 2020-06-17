@@ -612,7 +612,7 @@
 
                   <!-- 折扣 -->
                   <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
-                    <span>{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+                    <span>{{ language == 'en_US' ?  discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                   </div>
 
                   <!-- 优惠券 -->
@@ -650,7 +650,7 @@
                       <!-- 优惠券 -->
                       <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
                       <!-- 折扣 -->
-                      <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+                      <span class="list-discount-icon2"  v-if="couponType(item.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
 
                       <div class="card-info" style="display: inline-block;">
                         <span class="type">{{ item.specsModels.card }}</span>
