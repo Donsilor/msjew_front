@@ -3,9 +3,9 @@
     <!-- 手机注册 -->
     <div v-if="loginType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
-		<div style="height: 0;visibility: hidden;">
+		<div style="height: 0;">
 		  <input type="text" name="hidden1" style="width:0; height:0;">
-		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="password" name="hidden1" style="width:0; height:0;">
 		</div>
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
@@ -434,7 +434,7 @@ export default {
 
       sessionStorage.setItem('loginT', this.loginType)
     }
-    
+
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -652,10 +652,10 @@ export default {
           })
           .then(res => {
             const data = res.data
-        
+
             _this.requesting = false
             _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-        
+
             localStorage.setItem('refreshToken',data.refresh_token);
             localStorage.setItem('accessToken',data.access_token);
             _this.$store.commit('setToken', data.access_token)
@@ -676,7 +676,7 @@ export default {
                 })
               }
             }, 0)
-        
+
           })
           .catch(err => {
             // console.log("请求",err)

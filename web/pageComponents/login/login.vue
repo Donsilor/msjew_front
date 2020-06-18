@@ -3,9 +3,9 @@
     <!-- 手机登录 -->
     <div v-if="loginType == 1" class="login-item">
       <div class="relative margin-bottom-20">
-		<div style="height: 0;visibility: hidden;">
+		<div style="height: 0;">
 		  <input type="text" name="hidden1" style="width:0; height:0;">
-		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="password" name="hidden1" style="width:0; height:0;">
 		</div>
         <div class="login-input icon-input">
           <span class="icon">
@@ -558,7 +558,7 @@ input::placeholder {
     font-weight: 400;
     color: #8b766c;
   }
-	
+
   .submit.bg{
 	background-color: #A88F82;
 	color: #fff;
