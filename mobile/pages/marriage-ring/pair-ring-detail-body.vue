@@ -18,7 +18,7 @@
       {{ goodInfo.goodsName }}
     </div>
     <div class="price">
-      {{ goodInfo.coinType }}{{ formatNumber(showPrice) }}
+      {{ goodInfo.coinType }}{{ formatNumber(showPrice) }} 
     </div>
     <div class="promise-box">
       <div
@@ -321,12 +321,12 @@ export default {
     canAddCart() {
       if (this.firstRing.totalStock > 0 && this.secondRing.totalStock > 0) {
         if (
-          (this.firstRingSimpleDetail &&
-            this.firstRingSimpleDetail.stock &&
-            this.firstRingSimpleDetail.stock <= 0) ||
-          (this.secondRingSimpleDetail &&
-            this.secondRingSimpleDetail.stock &&
-            this.secondRingSimpleDetail.stock <= 0)
+          (this.firstRing.details[0] &&
+            this.firstRing.details[0].stock &&
+            this.firstRing.details[0].stock <= 0) ||
+          (this.secondRing.details[0] &&
+            this.secondRing.details[0].stock &&
+            this.secondRing.details[0].stock <= 0)
         ) {
           return false
         }
@@ -338,12 +338,12 @@ export default {
     },
     inSale() {
       return (
-        this.firstRing.goodsStatus === 2 && this.secondRing.goodsStatus === 2
+        this.goodInfo.goodsStatus === 2
       )
     }
   },
   mounted(){
-    // console.log("ddddd",this.firstRing,this.secondRing)
+    console.log("ddddd",this.goodInfo)
   }
 }
 </script>
