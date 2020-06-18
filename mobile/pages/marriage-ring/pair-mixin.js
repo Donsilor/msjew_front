@@ -198,25 +198,34 @@ export default {
     },
     goodsServicesJsons() {
       const result = []
-      const names = []
+      // const names = []
+      console.log("goodsServicesJsons1", this.firstRing,this.secondRing)
+      this.goodInfo && this.goodInfo.goodsServicesJsons.forEach(item => {
+        result.push(item)
+        // if (names.indexOf(item.name) === -1) {
+        //   names.push(item.name)
+        //   result.push(item)
+        // }
+      })
+      // this.firstRing &&
+      //   this.firstRing.goodsServicesJsons &&
+      //   this.firstRing.goodsServicesJsons.forEach(item => {
+      //     if (names.indexOf(item.name) === -1) {
+      //       names.push(item.name)
+      //       result.push(item)
+      //     }
+      //   })
 
-      this.firstRing &&
-        this.firstRing.goodsServicesJsons &&
-        this.firstRing.goodsServicesJsons.forEach(item => {
-          if (names.indexOf(item.name) === -1) {
-            names.push(item.name)
-            result.push(item)
-          }
-        })
-
-      this.secondRing &&
-        this.secondRing.goodsServicesJsons &&
-        this.secondRing.goodsServicesJsons.forEach(item => {
-          if (names.indexOf(item.name) === -1) {
-            names.push(item.name)
-            result.push(item)
-          }
-        })
+      // this.secondRing &&
+      //   this.secondRing.goodsServicesJsons &&
+      //   this.secondRing.goodsServicesJsons.forEach(item => {
+      //     // console.log("goodsServicesJsons2",item)
+      //     if (names.indexOf(item.name) === -1) {
+      //       names.push(item.name)
+      //       result.push(item)
+      //     }
+      //   })
+        
       return result
     },
     firstRingQualityText() {

@@ -99,22 +99,27 @@
                 <h5>{{ o.details[0].goodsName }}</h5>
                   <nuxt-link :to="goDetails(o.details[0])" target="_blank">
                     <!-- <h5>{{ d.goods_name }}</h5> -->
-                    <p>SKU：{{ d.goods_sn }}</p>
-                    <div
-                      v-for="(k, __index) in d.lang.goods_spec"
-                      :key="__index"
-                      class="desc"
-                    >
-                      <span>{{ k.attr_name }}: </span>
-                      <span>{{ k.attr_value }} </span>
+                    <p class="sku">SKU：{{ o.details[0].goodsCode }}</p>
+                    <div class="detail">
+                      <div
+                        v-for="(k, __index) in d.lang.goods_spec"
+                        :key="__index"
+                        class="desc"
+                      >
+                        <span>{{ k.attr_name }}: </span>
+                        <span>{{ k.attr_value }} </span>
+                      </div>
+                      <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
+                          ({{ a }})
+                      </span>
                     </div>
                   </nuxt-link>
                 </div>
 
-                <div class="right">
+                <!-- <div class="right"> -->
                   <!-- <span>1</span> -->
                   <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
-                </div>
+                <!-- </div> -->
               </div>
             </div>
             <div class="num">
@@ -850,17 +855,21 @@ div {
         }
         .double{
           display: flex;
+          padding: 20px;
+          .detail{
+            line-height: 20px;
+          }
           .left{
-            width: 100%;
+            // width: 15%;
             display: flex;
             // justify-content: center;
             align-items: center;
-            padding-left: 20px;
+            // padding-left: 20px;
             a{
               display: inline-block;
               width: 70px;
               height:70px;
-              border: 1px solid #ececec;
+              // border: 1px solid #ececec;
             }
             img{
               width: 100%;
@@ -875,8 +884,77 @@ div {
             color: #666666;
             font-family: twCenMt;
           }
-          .list-body{
-            width: 40%;
+          .list-body {
+            width: 100%;
+            // height: 110px;
+            // padding: 20px;
+            display: flex;
+            .left {
+              width: 70px;
+              // height: 70px;
+              padding: 0;
+              margin: 0;
+              border: 1px solid #ececec;
+              cursor: pointer;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .mid {
+              width: 480px;
+              // height: 70px;
+              padding: 0 20px;
+              margin: 0;
+              text-align: left;
+              font-size: 12px;
+              line-height: 14px;
+              color: #333333;
+              overflow: hidden;
+              cursor: pointer;
+              h5 {
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: 400;
+                height: 18px;
+                width: 100%;
+                overflow: hidden;
+                color: #666666;
+              }
+              p {
+                line-height: 14px;
+                height: 20px;
+                margin: 8px 0 0;
+                color: #999999;
+                line-height: 20px;
+              }
+              .desc {
+                height: 70-18-8-14-14px;
+                line-height: 70-18-8-14-14px;
+                display: inline;
+                margin-right: 5px;
+                color: #999999;
+              }
+            }
+            .right {
+              width: 350px;
+              height: 70px;
+              padding: 0;
+              margin: 0;
+              min-height: 70px;
+              text-align: left;
+              font-size: 16px;
+              line-height: 70px;
+              color: #666666;
+              font-family: twCenMt;
+              span {
+                text-align: center;
+                padding: 0 36px;
+                font-size: 14px;
+                margin-right: 96px;
+                color: #666666;
+              }
+            }
           }
           .list-body:nth-child(1) {
             border-top: 0;
@@ -886,87 +964,92 @@ div {
             h5{
               display: none;
             }
+            .sku{
+              display: none;
+            }
           }
           .list-body:nth-child(3) {
             border-top: 0;
           }
         }
-        .list-body:nth-child(1) {
-          border-top: 0;
-        }
-        .list-body {
-          width: 100%;
-          height: 110px;
-          padding: 20px;
-          border-top: 1px solid #e6e6e6;
-          display: flex;
-          .left {
-            width: 70px;
-            height: 70px;
-            padding: 0;
-            margin: 0;
-            border: 1px solid #ececec;
-            cursor: pointer;
-            img {
-              width: 100%;
-              height: 100%;
-            }
+        .single{
+          .list-body:nth-child(1) {
+            border-top: 0;
           }
-          .mid {
-            width: 480px;
-            height: 70px;
-            padding: 0 20px;
-            margin: 0;
-            text-align: left;
-            font-size: 12px;
-            line-height: 14px;
-            color: #333333;
-            overflow: hidden;
-            cursor: pointer;
-            h5 {
-              font-size: 14px;
-              line-height: 18px;
-              font-weight: 400;
-              height: 18px;
-              width: 100%;
-              overflow: hidden;
-              color: #666666;
+          .list-body {
+            width: 100%;
+            height: 110px;
+            padding: 20px;
+            border-top: 1px solid #e6e6e6;
+            display: flex;
+            .left {
+              width: 70px;
+              height: 70px;
+              padding: 0;
+              margin: 0;
+              border: 1px solid #ececec;
+              cursor: pointer;
+              img {
+                width: 100%;
+                height: 100%;
+              }
             }
-            p {
+            .mid {
+              width: 480px;
+              height: 70px;
+              padding: 0 20px;
+              margin: 0;
+              text-align: left;
+              font-size: 12px;
               line-height: 14px;
-              height: 14px;
-              margin: 8px 0 14px;
-              color: #999999;
+              color: #333333;
+              overflow: hidden;
+              cursor: pointer;
+              h5 {
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: 400;
+                height: 18px;
+                width: 100%;
+                overflow: hidden;
+                color: #666666;
+              }
+              p {
+                line-height: 14px;
+                height: 14px;
+                margin: 8px 0 14px;
+                color: #999999;
+              }
+              .desc {
+                height: 70-18-8-14-14px;
+                line-height: 70-18-8-14-14px;
+                display: inline;
+                margin-right: 5px;
+                color: #999999;
+              }
             }
-            .desc {
-              height: 70-18-8-14-14px;
-              line-height: 70-18-8-14-14px;
-              display: inline;
-              margin-right: 5px;
-              color: #999999;
-            }
-          }
-          .right {
-            width: 350px;
-            height: 70px;
-            padding: 0;
-            margin: 0;
-            min-height: 70px;
-            text-align: left;
-            font-size: 16px;
-            line-height: 70px;
-            color: #666666;
-            font-family: twCenMt;
-            span {
-              text-align: center;
-              padding: 0 36px;
-              font-size: 14px;
-              margin-right: 96px;
+            .right {
+              width: 350px;
+              height: 70px;
+              padding: 0;
+              margin: 0;
+              min-height: 70px;
+              text-align: left;
+              font-size: 16px;
+              line-height: 70px;
               color: #666666;
+              font-family: twCenMt;
+              span {
+                text-align: center;
+                padding: 0 36px;
+                font-size: 14px;
+                margin-right: 96px;
+                color: #666666;
+              }
             }
           }
+          
         }
-        
         .listDouble{
           display: flex; 
         }

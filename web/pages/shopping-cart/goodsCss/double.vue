@@ -32,17 +32,22 @@
           </div>
           <div>
             SKU：{{
-              g.data[0].ring[0].goods_sn
+              g.data[0].simpleGoodsEntity.goodsCode
             }}
           </div>
-          <div>
+          <!-- <div>
             SKU：{{
               g.data[0].ring[1].goods_sn
             }}
-          </div>
+          </div> -->
         </div>
       </nuxt-link>
       <div class="couple-rings">
+        <div class="gender" v-for="(a, b) in g.data[0].ring[0].lang.goods_attr[26].value" :key="'gender='+b">
+          <div>
+            {{ a }}
+          </div>
+        </div>
         <div class="one-person">
           <div class="good-information">
             <!-- <div
@@ -73,6 +78,11 @@
               )
             }}
           </div> -->
+        </div>
+        <div class="gender2" v-for="(y, z) in g.data[0].ring[1].lang.goods_attr[26].value" :key="'gender2='+z">
+          <div>
+            {{ y }}
+          </div>
         </div>
         <div class="one-person">
           <div class="good-information">
@@ -327,11 +337,24 @@ export default {
     }
     .couple-rings {
       position: relative;
+      .gender{
+        position: absolute;
+        top: 38px;
+        left: -53px;
+        color: #666;
+      }
+      .gender2{
+        position: absolute;
+        top: 125px;
+        left: -53px;
+        color: #666;
+      }
       .one-person {
         // height: 174px;
         height: 100px;
         display: flex;
         align-items: center;
+        position: relative;
         .good-information {
           width: 185px;
           margin-right: 83px;

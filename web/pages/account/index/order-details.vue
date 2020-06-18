@@ -172,16 +172,21 @@
                 <div class="good-img">
                   <img :src="IMG_URL + data.details[0].goodsImages" />
                 </div>
+                <div class="good-name">{{ data.details[0].goodsName }}</div>
                 <div class="good-desc"> 
                   <div class="dec" v-for="(d, _index) in data.details[0].ring" :key="_index">
-                    <div class="good-name">{{ data.details[0].goodsName }}</div>
-                    <div class="good-sku">SKU：{{ d.goods_sn }}</div>
+                    
+                    <div class="good-sku">SKU：{{ data.details[0].goodsCode }}</div>
                     <div class="details">
                       <span v-for="(v, k) in d.lang.goods_spec" :key="k"
                         >{{ v.attr_name }}：{{ v.attr_value }}</span
                       >
+                      <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
+                          ({{ a }})
+                      </span>
                     </div>
                   </div>
+                  
                 </div>
               </div>
             </nuxt-link>
@@ -898,77 +903,79 @@ export default {
           width: 56+ (113/2)+138px;
         }
       }
-      .goods-details {
-        width: 100%;
-        box-sizing: border-box;
-        display: flex;
-        padding: 20px 0 20px 19px;
-        border-top: 1px solid rgba(230, 230, 230, 1);
-        align-items: center;
-        .t1 {
-          width: 936-250.5-163.5-20px;
+      .single{
+        .goods-details {
+          width: 100%;
+          box-sizing: border-box;
           display: flex;
+          padding: 20px 0 20px 19px;
+          border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
-          justify-content: space-between;
-          .good-img {
-            width: 70px;
-            height: 70px;
-            border: 1px solid rgba(230, 230, 230, 1);
-            img {
-              width: 68px;
-              height: 68px;
-              display: block;
+          .t1 {
+            width: 936-250.5-163.5-20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .good-img {
+              width: 70px;
+              height: 70px;
+              border: 1px solid rgba(230, 230, 230, 1);
+              img {
+                width: 68px;
+                height: 68px;
+                display: block;
+              }
             }
-          }
-          .good-desc {
-            width: 936-250.5-163.5-20-70-20px;
-            height: 70px;
-            color: #333;
-            overflow: hidden;
-            .good-name {
-              font-size: 16px;
-              line-height: 16px;
-              height: 16px;
-              width: 100%;
+            .good-desc {
+              width: 936-250.5-163.5-20-70-20px;
+              height: 70px;
+              color: #333;
               overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              margin-bottom: 9px;
-            }
-            .good-sku {
-              font-size: 12px;
-              line-height: 12px;
-              height: 12px;
-              margin-bottom: 18px;
-              color:#aaa;
-            }
-            .details {
-              font-size: 12px;
-              line-height: 12px;
-              height: 12px;
-              width: 100%;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              color:#aaa;
-              span {
-                margin-right: 10px;
+              .good-name {
+                font-size: 16px;
+                line-height: 16px;
+                height: 16px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-bottom: 9px;
+              }
+              .good-sku {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                margin-bottom: 18px;
+                color:#aaa;
+              }
+              .details {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color:#aaa;
+                span {
+                  margin-right: 10px;
+                }
               }
             }
           }
-        }
-        .t2 {
-          text-align: center;
-          width: 51+ (113/2)+56px;
-          color: #333;
-          font-size: 16px;
-        }
-        .t3 {
-          text-align: center;
-          width: 56+ (113/2)+138px;
-          color: #333;
-          font-family: twCenMt;
-          font-size: 20px;
+          .t2 {
+            text-align: center;
+            width: 51+ (113/2)+56px;
+            color: #333;
+            font-size: 16px;
+          }
+          .t3 {
+            text-align: center;
+            width: 56+ (113/2)+138px;
+            color: #333;
+            font-family: twCenMt;
+            font-size: 20px;
+          }
         }
       }
       .double{
@@ -988,22 +995,179 @@ export default {
           // }
         }
         .good-name {
-          margin-bottom: 15px!important;
+          // margin-bottom: 15px!important;
+          position: absolute;
+          top: 10px;
+          left: 100px;
         }
         .dec{
           // margin-left: 250px;
-          padding: 15px 10px 15px 10px;
+          padding: 0px 10px 0px 10px;
         }
         .dec:last-child{
           .good-name{
             display: none;
           }
+          .good-sku {
+            display: none;
+          }
         }
-        .good-desc{
-          height: 100%!important;
-        }
+        // .good-desc{
+        //   height: 100%!important;
+        // }
         .good-sku {
           margin-bottom: 10px!important;
+          margin-top: 5px;
+        }
+        .goods-details {
+          width: 100%;
+          box-sizing: border-box;
+          display: flex;
+          padding: 30px 0 20px 19px;
+          border-top: 1px solid rgba(230, 230, 230, 1);
+          align-items: center;
+          position: relative;
+          .t1 {
+            width: 936-250.5-163.5-20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .good-img {
+              width: 70px;
+              height: 70px;
+              border: 1px solid rgba(230, 230, 230, 1);
+              img {
+                width: 68px;
+                height: 68px;
+                display: block;
+              }
+            }
+            .good-desc {
+              width: 936-250.5-163.5-20-70-20+18px;
+              height: 70px;
+              color: #333;
+              // overflow: hidden;
+              .good-name {
+                font-size: 16px;
+                line-height: 16px;
+                height: 16px;
+                width: 100%;
+                // overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                // margin-bottom: 9px;
+                
+              }
+              .good-sku {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                margin-bottom: 18px;
+                color:#aaa;
+              }
+              .details {
+                font-size: 12px;
+                line-height: 20px;
+                height: 20px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color:#aaa;
+                span {
+                  margin-right: 10px;
+                }
+              }
+            }
+          }
+          .t2 {
+            text-align: center;
+            width: 51+ (113/2)+56px;
+            color: #333;
+            font-size: 16px;
+          }
+          .t3 {
+            text-align: center;
+            width: 56+ (113/2)+138px;
+            color: #333;
+            font-family: twCenMt;
+            font-size: 20px;
+          }
+        }
+      }
+      .customization{
+        .goods-details {
+          width: 100%;
+          box-sizing: border-box;
+          display: flex;
+          padding: 20px 0 20px 19px;
+          border-top: 1px solid rgba(230, 230, 230, 1);
+          align-items: center;
+          .t1 {
+            width: 936-250.5-163.5-20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .good-img {
+              width: 70px;
+              height: 70px;
+              border: 1px solid rgba(230, 230, 230, 1);
+              img {
+                width: 68px;
+                height: 68px;
+                display: block;
+              }
+            }
+            .good-desc {
+              width: 936-250.5-163.5-20-70-20px;
+              height: 70px;
+              color: #333;
+              overflow: hidden;
+              .good-name {
+                font-size: 16px;
+                line-height: 16px;
+                height: 16px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-bottom: 9px;
+              }
+              .good-sku {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                margin-bottom: 18px;
+                color:#aaa;
+              }
+              .details {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color:#aaa;
+                span {
+                  margin-right: 10px;
+                }
+              }
+            }
+          }
+          .t2 {
+            text-align: center;
+            width: 51+ (113/2)+56px;
+            color: #333;
+            font-size: 16px;
+          }
+          .t3 {
+            text-align: center;
+            width: 56+ (113/2)+138px;
+            color: #333;
+            font-family: twCenMt;
+            font-size: 20px;
+          }
         }
       }
     }

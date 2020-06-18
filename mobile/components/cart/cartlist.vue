@@ -59,10 +59,10 @@
                 <img :src="imageStrToArray(item.goodsImages)[0]" />
                 <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
                   <h4 class="ow-h2">{{ item.goodsName }}</h4>
-                  <p>SKU：{{ ring.goods_sn }}</p>
+                  <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
                   <p class="p">
                     {{
-                      getDubleConfig(ring.lang.goods_spec)
+                      getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value)
                     }}
                   </p>
                   <!-- <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b> -->
@@ -195,7 +195,8 @@ export default {
       // }
     },
     // 对戒属性数值转化成字符串
-    getDubleConfig(good_spec) {
+    getDubleConfig(good_spec,goods_attr) {
+      console.log("list",this.list)
       let text = ''
       if (good_spec.length > 0) {
         good_spec.map((item, index) => {
@@ -207,6 +208,12 @@ export default {
             text = text + item.attr_value + ' /  '
           }
         }) 
+      }
+
+      if (goods_attr) {
+       for (let i in goods_attr) {
+          text = text + ' /  '+goods_attr[i] 
+        }
       }
       return text
     },
@@ -356,6 +363,7 @@ export default {
             .right {
               margin-left: 90px;
               text-align: left;
+              position: relative;
               h4 {
                 display: inline-block;
                 max-height: 40px;
@@ -379,7 +387,7 @@ export default {
                 color: rgba(153, 153, 153, 1);
               }
               .p {
-                margin-bottom: 4px;
+                // margin-bottom: 4px;
               }
               b {
                 font-size: 17px;
@@ -401,6 +409,10 @@ export default {
                 font-weight: 400;
                 color: rgba(148, 116, 101, 1);
                 margin-top: 14px;
+                position: absolute;
+              }
+              .sku{
+                margin-bottom: 10px;
               }
             }
             .right:nth-child(3) {
@@ -411,7 +423,14 @@ export default {
               .ow-h2{
                 display: none;
               }
+              .sku{
+                display: none;
+              }
             }
+            .double-ring-price{
+              margin-right: 45px;
+            }
+            
           }
           .customization{
             .right {

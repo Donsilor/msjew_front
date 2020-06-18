@@ -79,10 +79,10 @@
                     <h4 class="ow-h2">
                       {{ item.goodsName }}
                     </h4>
-                    <p>SKU：{{ ring.goods_sn }}</p>
+                    <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
                     <p class="p">
                       {{
-                        getDubleConfig(ring.lang.goods_spec)
+                        getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value)
                       }}
                     </p>
                     <!-- <div class="cut-line"></div> -->
@@ -488,7 +488,7 @@ export default {
       return text
     },
     // 属性数值转化成字符串
-    getDubleConfig(good_spec) {
+    getDubleConfig(good_spec,goods_attr) {
       let text = ''
       if (good_spec.length > 0) {
         good_spec.map((item, index) => {
@@ -501,14 +501,20 @@ export default {
           }
         }) 
       }
-      // if (good_spec && good_spec.length > 0) {
-      //   good_spec.map((item, index) => {
-      //     if (item.configId === 196) {
-      //       console.log(list2, '9999', item)
-      //       text = text + ' /  ' + item.configAttrIVal
-      //     }
-      //   })
-      // }
+     if (goods_attr) {
+       for (let i in goods_attr) {
+       console.log("good_spec",goods_attr[i])
+        text = text + ' /  '+goods_attr[i] 
+      }
+        // goods_attr.map((item, index) => {
+
+        //   if (index === goods_attr.length - 1) {
+        //     text = text + item
+        //   } else {
+        //     text = text + item + ' /  '
+        //   }
+        // }) 
+      }
       return text
     },
 
@@ -909,13 +915,13 @@ export default {
               font-weight: 400;
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
-              margin-left: 10px;
+              margin-left: 30px;
               display: inline-block;
               margin-top: 10px;
             }
             .right {
               margin-left: 140px;
-              padding-bottom: 15px;
+              padding-bottom: 10px;
               // border-bottom: 1px solid #f5f5f5;
               text-align: left;
               min-height: 65px; 
@@ -941,7 +947,7 @@ export default {
                 color: rgba(153, 153, 153, 1);
               }
               .p {
-                margin-bottom: 4px;
+                // margin-bottom: 4px;
               }
               b {
                 font-size: 17px;
@@ -965,11 +971,17 @@ export default {
                 font-weight: 400;
                 color: rgba(148, 116, 101, 1);
               }
+              .sku{
+                margin-bottom: 10px;
+              }
             }
             .right:nth-child(3) {
               // padding-bottom: 15px;
               border-bottom: 1px solid #f5f5f5;
               .ow-h2{
+                display: none;
+              }
+              .sku{
                 display: none;
               }
             }

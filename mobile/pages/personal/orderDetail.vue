@@ -70,8 +70,8 @@
                   {{ detail.goodsName }}
                 </h4>
                 <!-- <span>x 1</span> -->
-                <p>SKU：{{ ring.goods_sn }}</p> 
-                <p>{{ getDubleConfig(ring.lang.goods_spec) }}</p>
+                <p>SKU：{{ detail.data[0].goodsCode }}</p> 
+                <p>{{ getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value) }}</p>
                 <!-- <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b> -->
                 <!-- <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
                 <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
@@ -462,7 +462,7 @@ export default {
   },
   methods: {
     // 对戒属性数值转化成字符串
-    getDubleConfig(good_spec) {
+    getDubleConfig(good_spec,goods_attr) {
       let text = ''
       if (good_spec.length > 0) {
         good_spec.map((item, index) => {
@@ -474,6 +474,12 @@ export default {
             text = text + item.attr_value + ' /  '
           }
         }) 
+      }
+
+      if (goods_attr) {
+       for (let i in goods_attr) {
+          text = text + ' /  '+goods_attr[i] 
+        }
       }
       return text
     },
