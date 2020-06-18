@@ -101,7 +101,7 @@
           <div v-show="payWay == 82" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-          <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div>
+          <!-- <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div> -->
         </div>
 
         <!-- 香港支付宝 -->
@@ -112,7 +112,7 @@
           @click="payWay = 84"
         >
           <div class="pay-img">
-            <img src="../../static/order/alipay.png" alt="" />
+            <img src="../../static/order/alipay-HK.png" alt="" class="initial"/>
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
           <div v-show="payWay == 84" class="pay-price">
@@ -124,7 +124,7 @@
           <div v-show="payWay == 84" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-          <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div>
+          <!-- <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div> -->
         </div>
 
         <!-- <div
@@ -1219,5 +1219,9 @@ div {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.initial{
+	width: auto !important;
 }
 </style>

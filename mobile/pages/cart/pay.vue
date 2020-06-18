@@ -48,7 +48,7 @@
       <ul v-if="this.$store.state.platform == 11">
         <li v-for="(item, index) in listHk" :key="index">
           <div v-show="price > 0 || (price == 0 && item.type === 5)">
-            <img :src="item.url" />
+            <img :src="item.url" :class="{'borderRadiu': index == 2}" />
             <div class="right">
               <span
                 class="icon iconfont"
@@ -194,7 +194,7 @@ export default {
         },
         {
           url: '/cart/ph.png',
-          type: 84,
+          type: 89,
           title: this.LANGUAGE.cart.pay.payType5,
           des: this.LANGUAGE.cart.pay.type5Text,
         }
@@ -245,8 +245,8 @@ export default {
           des: this.LANGUAGE.cart.pay.type6Text
         },
         {
-          url: '/cart/ap.png',
-          type: 89,
+          url: '/cart/ap-HK.png',
+          type: 84,
           title: this.LANGUAGE.cart.pay.payType3,
           des: this.LANGUAGE.cart.pay.type3Text
         },
@@ -264,7 +264,7 @@ export default {
         },
         {
           url: '/cart/ph.png',
-          type: 84,
+          type: 89,
           title: this.LANGUAGE.cart.pay.payType5,
           des: this.LANGUAGE.cart.pay.type5Text,
         }
@@ -602,5 +602,9 @@ export default {
 
 .hint-color{
   color: #f29b87 !important;
+}
+
+.borderRadiu{
+	border-radius: 50%;
 }
 </style>
