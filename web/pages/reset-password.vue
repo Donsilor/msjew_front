@@ -3,6 +3,10 @@
     <!-- 手机方式找回密码 -->
     <div v-if="resetType == 1" class="page">
       <div class="content">
+		<div style="height: 0;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="password" name="hidden1" style="width:0; height:0;">
+		</div>
         <ul class="schedule">
           <li
             v-for="(item, index) in schedule2"
@@ -155,6 +159,10 @@
     <!-- 邮箱方式找回密码 -->
     <div v-if="resetType == 2" class="page">
       <div class="content">
+		<div style="height: 0;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="password" name="hidden1" style="width:0; height:0;">
+		</div>
         <ul class="schedule">
           <li
             v-for="(item, index) in schedule"
@@ -337,6 +345,7 @@ export default {
   },
   data() {
     return {
+	  resetType: this.$route.query.type,
       waiting: false,
       waitingTime: defaultTime,
       waitingText: this.$t(`${langcode}.sendCode`),
@@ -389,9 +398,7 @@ export default {
       password: '',
       password_repetition: '',
       showPassword: false,
-      ajaxLoading: false,
-      language: '',
-      resetType: 2
+      ajaxLoading: false
     }
   },
   watch:{
@@ -415,14 +422,10 @@ export default {
   },
   mounted() {
     // console.log("语言",this.$store.state.language)
-    this.language = this.getCookie('language')
+
     const _this = this
     _this.$nextTick(() => {})
 
-    var type = this.$route.query.type;
-    if(type){
-      this.resetType = type;
-    }
   },
   methods: {
     // 点击图标切换密码格式
@@ -430,16 +433,6 @@ export default {
       // const info = JSON.parse(JSON.stringify(this.info))
       this.showPassword = !this.showPassword
       // this.info = info
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     // 倒计时
     countDown() {

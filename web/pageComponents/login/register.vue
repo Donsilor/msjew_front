@@ -3,9 +3,9 @@
     <!-- 手机注册 -->
     <div v-if="loginType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
-		<div style="height: 0;visibility: hidden;">
+		<div style="height: 0;">
 		  <input type="text" name="hidden1" style="width:0; height:0;">
-		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="password" name="hidden1" style="width:0; height:0;">
 		</div>
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
@@ -19,7 +19,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.surname`)"
                 maxlength="30"
-								autocomplete="off"
+				autocomplete="off"
               />
             </div>
             <div v-show="lastnameShow"  class="error-tip">
@@ -38,7 +38,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.nameTips`)"
                 maxlength="30"
-								autocomplete="off"
+				autocomplete="off"
               />
             </div>
             <div v-show="firstnameShow" class="error-tip">
@@ -66,16 +66,16 @@
         <!-- 手机号 -->
         <div class="relative margin-bottom-20">
           <div class="register-input email-val-box">
-            <div class="area-code">中国 +86<i class="iconfont iconxiala"></i></div>
+            <div class="area-code">{{ $t(`${lang}.China`) }} +86<i class="iconfont iconxiala"></i></div>
             <input
               v-model.trim="mobile"
               type="text"
-              @focus="focusEvent2"
-              @blur="blurEvent2"
+			  @focus="focusEvent2"
+              @blur="verifyMobile"
               v-bind:class="{active:isActivemobile}"
               :placeholder="$t(`${lang}.phoneBox`)"
               maxlength="11"
-							autocomplete="off"
+			  autocomplete="off"
             />
           </div>
           <div v-show="mobileShow" class="error-tip">
@@ -96,7 +96,7 @@
                 :placeholder="$t(`${lang}.code`)"
                 maxlength="15"
                 @input="inputCode"
-								autocomplete="off"
+				autocomplete="off"
               />
             </div>
             <div class="send-email-code">
@@ -123,7 +123,7 @@
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.pwdType`)"
               maxlength="30"
-							autocomplete="off"
+			  autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -142,12 +142,12 @@
               readonly onfocus="this.removeAttribute('readonly');"
               v-bind:class="{active:isActiverepwd}"
               @focus="focusEvent5"
-              @blur="blurEvent5"
+              @blur="verifyPasswordRepetition"
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.repassword`)"
               maxlength="30"
-							autocomplete="off"
+			  autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -181,6 +181,10 @@
     <!-- 邮箱注册 -->
     <div v-if="loginType == 2" class="register-item">
       <form>
+		<div style="height: 0;">
+		  <input type="text" name="hidden1" style="width:0; height:0;">
+		  <input type="password" name="hidden1" style="width:0; height:0;">
+		</div>
         <div class="row-flex">
           <div class="relative margin-right-20 margin-bottom-20">
             <div class="register-input">
@@ -289,7 +293,7 @@
               v-model.trim="password_repetition"
 
               @focus="focusEvent5"
-              @blur="blurEvent5"
+              @blur="verifyPasswordRepetition"
               v-bind:class="{active:isActiverepwd}"
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
@@ -389,14 +393,6 @@ export default {
     }
   },
   watch:{
-    mobile(){
-      if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-        this.mobileShow=true
-      }else{
-        this.mobileShow=false
-        this.isActivemobile=false
-      }
-    },
     email(){
       // if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
       //   this.emailShow=true
@@ -404,14 +400,6 @@ export default {
       //   this.emailShow=false
       //   this.isActivemail=false
       // }
-    },
-    password_repetition(){
-      if(this.password_repetition!=this.password){
-        this.repwdShow=true
-      }else{
-        this.isActiverepwd=false
-        this.repwdShow=false
-      }
     }
   },
   mounted() {
@@ -439,6 +427,22 @@ export default {
     _this.$nextTick(() => {})
   },
   methods: {
+	verifyMobile(){
+		if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+		  this.mobileShow=true
+		}else{
+		  this.mobileShow=false
+		  this.isActivemobile=false
+		}
+	},
+	verifyPasswordRepetition(){
+	  if(this.password_repetition!=this.password){
+	    this.repwdShow=true
+	  }else{
+	    this.isActiverepwd=false
+	    this.repwdShow=false
+	  }
+	},
     change() {
       //动作：阻止表单数据提交
       return false;
@@ -489,6 +493,7 @@ export default {
     },
     // 手机号/邮箱
     focusEvent2(){
+	  this.mobileShow=false
       this.isActivemobile=true
       this.isActivemail=true
     },
@@ -502,6 +507,7 @@ export default {
     },
     // 确认密码
     focusEvent5(){
+	  this.repwdShow=false
       this.isActiverepwd=true
     },
     // 查询cookie
@@ -798,12 +804,12 @@ export default {
       this.waitingTime = 0
     },
     inputEvent2(){
-      var that = this;
-      if(this.email.length == 60){
-        that.emailShow = true;
-      }else{
-        this.emailShow = false;
-      }
+      // var that = this;
+      // if(this.email.length == 60){
+      //   that.emailShow = true;
+      // }else{
+      //   this.emailShow = false;
+      // }
     },
     firstName(){
       if(this.firstname.length == 30){

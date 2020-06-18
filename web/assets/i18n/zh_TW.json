@@ -503,6 +503,7 @@
         }
     },
     "login": {
+		"China": "中國",
         "login": "登入",
         "phoneLogin": "手機登錄",
         "mailLogin": "郵箱登錄",

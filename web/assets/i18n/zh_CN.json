@@ -501,6 +501,7 @@
         }
     },
     "login": {
+		"China": "中国",
         "login": "登录",
         "phoneLogin": "手机登录",
         "mailLogin": "邮箱登录",

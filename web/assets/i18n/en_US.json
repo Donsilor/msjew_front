@@ -500,6 +500,7 @@
         }
     },
     "login": {
+		"China": "China",
         "login": "Login",
         "phoneLogin": "Phone Login",
         "mailLogin": "Mail Login",
