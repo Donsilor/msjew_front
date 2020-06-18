@@ -75,17 +75,18 @@
                   <span v-if="!getStatus(item, index)" class="failed">
                     {{ lang.failed }}
                   </span>
-                  <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
-                    <h4 class="ow-h2">
+                  <h4 class="ow-h2">
                       {{ item.goodsName }}
-                    </h4>
-                    <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
+                  </h4>
+                  <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
+                  <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
+                    
                     <p class="p">
                       {{
                         getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value)
                       }}
                     </p>
-                    <!-- <div class="cut-line"></div> -->
+                    
                     <div v-if="item.goodsType == '19'" class="btn-type">
                       {{ lang.ring }}
                     </div>
@@ -116,12 +117,12 @@
                       </p>
                     </div> -->
                   </div>
-
                   <b class="double-ring-price">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                  <div class="cut-line"></div>
                 </div>
               </div>
               <!-- 定制 -->
-              <div v-if="item.groupType === 2" class="double customization">
+              <div v-if="item.groupType === 2" class="single customization">
                 <div @click="godetails(item, index)">
                         <img :src="imageStrToArray(item.goodsImages)[0]" />
                         <span v-if="!getStatus(item, index)" class="failed">
@@ -915,40 +916,57 @@ export default {
               font-weight: 400;
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
-              margin-left: 30px;
+              text-align: left;
+              margin-right: 102px;
+              // margin-left: 30px;
               display: inline-block;
               margin-top: 10px;
             }
+            .cut-line{
+              height:1px;
+              display:inline-block;
+              background:#f5f5f5;
+              width: 57%;
+              margin-left: 136px;
+            }
+            h4 {
+              // display: inline-block;
+              max-height: 40px;
+              font-size: 14px;
+              line-height: 20px;
+              font-family: PingFangHK-Regular;
+              font-weight: 400;
+              color: rgba(51, 51, 51, 1);
+              text-align: left;
+              padding-left: 15px;
+            }
+            p {
+              font-size: 13px;
+              line-height: 20px;
+              font-weight: 400;
+              color: rgba(153, 153, 153, 1);
+            }
+            .p {
+              // margin-bottom: 4px;
+            }
+            .sku{
+              margin-bottom: 10px;
+              text-align: left;
+              margin-left: 140px;
+            }
             .right {
               margin-left: 140px;
-              padding-bottom: 10px;
+              padding-bottom: 5px;
               // border-bottom: 1px solid #f5f5f5;
               text-align: left;
-              min-height: 65px; 
+              // min-height: 65px; 
               .cut-line{
                 height:1px;
                 display:inline-block;
                 background:#f5f5f5;
                 width:50%;
               }
-              h4 {
-                display: inline-block;
-                max-height: 40px;
-                font-size: 14px;
-                line-height: 20px;
-                font-family: PingFangHK-Regular;
-                font-weight: 400;
-                color: rgba(51, 51, 51, 1);
-              }
-              p {
-                font-size: 13px;
-                line-height: 20px;
-                font-weight: 400;
-                color: rgba(153, 153, 153, 1);
-              }
-              .p {
-                // margin-bottom: 4px;
-              }
+              
               b {
                 font-size: 17px;
                 line-height: 20px;
@@ -971,11 +989,9 @@ export default {
                 font-weight: 400;
                 color: rgba(148, 116, 101, 1);
               }
-              .sku{
-                margin-bottom: 10px;
-              }
+              
             }
-            .right:nth-child(3) {
+            .right:last-child {
               // padding-bottom: 15px;
               border-bottom: 1px solid #f5f5f5;
               .ow-h2{
@@ -1002,8 +1018,14 @@ export default {
               width: 40px;
               height: 40px;
               text-align: center;
-              margin: -10px 0 0 40px;
+              margin: 0px 0 0 40px;
               cursor: pointer;
+            }
+            .remove{
+              margin-top: 10px;
+            }
+            .num{
+              margin-top: 10px;
             }
               i{
                 width: 18px;
