@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 简体中文登录模块 -->
-    <div v-if="language === 'zh_CN'" class="login-item">
+    <div v-if="this.$store.state.language === 'zh_CN'" class="login-item">
       <div class="relative margin-bottom-20">
         <div class="login-input icon-input">
           <span class="icon">
@@ -169,6 +169,7 @@ export default {
     })
   },
   mounted () {
+    // console.log("语言",this.$store.state.language)
     // this.$nextTick(()=>{
     //   // 验证是否获取到了上页的url
     //   console.log(this.oldUrl)

@@ -4,8 +4,14 @@
     <div class="View">
       <dl>
         <dd>
-          <p>
-            {{ lang.define1 }}
+          <p v-if="this.$store.state.platform === 11">
+            {{ lang.define1Tw }}
+          </p>
+          <p v-if="this.$store.state.platform === 21">
+            {{ lang.define1Cn }}
+          </p>
+          <p v-if="this.$store.state.platform === 31">
+            {{ lang.define1Us }}
           </p>
           <p>
             {{ lang.define2 }}

@@ -570,7 +570,7 @@
         </ul>
         <div class="product-price">
           <span class="coin">
-            {{ info.coinType }}
+            {{ formatCoin(info.coinType) }}
           </span>
           <span class="price">
             {{ formatNumber(info.salePrice) }}
@@ -939,7 +939,7 @@ export default {
         // carats:(() =>{
         //     const carats = product.carats || []
         //     // carats.unshift({id:'',name: this.$t(`personal.index.select`)})
-        //     return carats;
+        //     return carats;  
         // })(),
         specs: product.specs || [],
         details: product.details || [],

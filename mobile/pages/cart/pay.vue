@@ -4,16 +4,45 @@
       <Header :title="lang.pay" tips="1" />
       <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
         <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div>
-        <span>{{ info.coinType }} </span>
+        <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
         <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
       </div>
       <div v-else class="proce">
-        <span>{{ info.coinType }} </span>
+        <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
       </div>
-      <ul>
+      <ul v-if="this.$store.state.platform !== 31">
         <li v-for="(item, index) in list" :key="index">
+          <div v-show="price > 0 || (price == 0 && item.type === 5)">
+            <img :src="item.url" />
+            <div class="right">
+              <span
+                class="icon iconfont"
+                :class="typeIndex === index ? 'icongou' : ''"
+                @click="changeType(index)"
+              ></span>
+              <div
+                class="box-a"
+                >{{ item.title }}
+                <span
+                  v-if="item.type == '5'"
+                  class="ph"
+                  @click="needtips = !needtips"
+                  >?</span
+                >
+                <div class="support" v-if="item.type == '1000' && isLogin">({{ lang.support }})</div>
+              </div>
+
+              <p>{{ item.des }}</p>
+              <p v-if="item.des2">{{ item.des2 }}</p>
+              <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <ul v-else>
+        <li v-for="(item, index) in listUs" :key="index">
           <div v-show="price > 0 || (price == 0 && item.type === 5)">
             <img :src="item.url" />
             <div class="right">
@@ -47,7 +76,7 @@
       <div class="btn" @click="goPaySuccess">
         {{ list[typeIndex].title }}
         {{ lang.goPay }}
-        {{ info.coinType }}
+        {{ formatCoin(info.coinType) }}
         {{ formatMoney(price) }}
       </div>
       
@@ -164,6 +193,20 @@ export default {
         //   des2: this.LANGUAGE.cart.pay.type5Text2
         // }
       ],
+      listUs: [
+        {
+          url: '/cart/pay.png',
+          type: 6,
+          title: this.LANGUAGE.cart.pay.payType0,
+          des: this.LANGUAGE.cart.pay.type0Text
+        },
+        {
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        }
+      ], 
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
       price: JSON.parse(this.$route.query.info).payAmount,

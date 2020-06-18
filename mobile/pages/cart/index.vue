@@ -35,7 +35,7 @@
                               getconfig(item.config, item.simpleGoodsEntity.specs)
                             }}
                           </p>
-                          <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                          <b>{{  formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
                           <div v-if="item.groupType === 1" class="btn-type">
                             {{ lang.ring }}
                           </div>
@@ -57,12 +57,12 @@
                                 )
                               }}
                             </p>
-                            <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                            <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
 
 
                             <p v-if="item.groupType === 1">
                               <br/>
-                              <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
+                              <b>{{ formatCoin(coin) }} {{ formatMoney(item.totalPrice) }}</b>
                             </p>
                           </div>
                         </div>
@@ -117,7 +117,7 @@
                       </p>
                     </div> -->
                   </div>
-                  <b class="double-ring-price">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                  <b class="double-ring-price">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
                   <div class="cut-line"></div>
                 </div>
               </div>
@@ -138,7 +138,7 @@
                               getconfig(item.config, item.simpleGoodsEntity.specs)
                             }}
                           </p>
-                          <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                          <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
                           <div v-if="item.groupType === 1" class="btn-type">
                             {{ lang.ring }}
                           </div>
@@ -160,12 +160,12 @@
                                 )
                               }}
                             </p>
-                            <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                            <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
 
 
                             <p v-if="item.groupType === 1">
                               <br/>
-                              <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
+                              <b>{{ formatCoin(coin) }} {{ formatMoney(item.totalPrice) }}</b>
                             </p>
                           </div>
                         </div>
@@ -222,7 +222,7 @@
           <div class="order">
             <span>{{ lang.total }}</span>
             <span class="small"
-              >{{ coin }} {{ formatMoney(sumPrice.toFixed(2)) }}</span
+              >{{ formatCoin(coin) }}{{ formatMoney(sumPrice.toFixed(2)) }}</span
             >
           </div>
           <span class="btn" @click="goPay">{{ lang.goPay }}({{ sumNum }})</span>

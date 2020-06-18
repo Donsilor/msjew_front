@@ -38,7 +38,7 @@
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
           <div class="good-price">
-            {{ g.coinType }}
+            {{ formatCoin(g.coinType) }}
             {{
               formatNumber(
                 g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
@@ -88,7 +88,7 @@
           </div>
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
           <div class="good-price">
-            {{ g.coinType }}
+            {{ formatCoin(g.coinType) }}
             {{
               formatNumber(
                 g.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice

@@ -113,7 +113,7 @@
           <span>（{{ $t(`${lang}.freeExpress`) }})</span>
         </div>
         <div class="total-price">
-          {{ $store.state.coin }} {{  formatNumber(totalPrice)  }}
+          {{ formatCoin(coinType) }} {{  formatNumber(totalPrice)  }}
         </div>
         <div v-if="!banBtn" class="go-order" @click="goOrder()">
           {{ $t(`${lang}.Settlement`) }}
@@ -156,7 +156,7 @@
         <span>({{ $t(`${lang}.freeExpress`) }})</span>
       </div>
       <div class="total-price">
-        {{ $store.state.coin }} {{  formatNumber(totalPrice)  }}
+        {{ formatCoin(coinType) }} {{  formatNumber(totalPrice)  }}
       </div>
       <div v-if="!banBtn" class="go-order" @click="goOrder()">
         {{ $t(`${lang}.Settlement`) }}
@@ -193,7 +193,8 @@ export default {
       Settlement1:true,
       Settlement2:false,
       scroll: '',
-      soudout:''
+      soudout:'',
+      coinType:''
     }
   },
   computed: {
@@ -248,8 +249,11 @@ export default {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
+          // console.log("1230",res.coinType)
           for (const i in res) {
             res[i].tick = false
+            this.coinType = res[i].coinType
+            // console.log("1230", res[i].coinType) 
           }
           this.good = res
           if(this.good.length<=3){

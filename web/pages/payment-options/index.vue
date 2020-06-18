@@ -52,7 +52,7 @@
           </div>
           <div class="pay-desc">{{ $t(`${lang}.PayPal`) }}</div>
           <div v-show="payWay == 6" class="pay-price">
-            {{ coinType }} {{ formatMoney(price) }}
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
@@ -72,7 +72,7 @@
           </div>
           <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
           <div v-show="payWay === 61" class="pay-price">
-            {{ coinType }} {{ formatMoney(price) }}
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
@@ -83,6 +83,7 @@
         </div>
         <!-- 支付宝 -->
         <div
+          v-show="this.$store.state.platform !== 30"
           :class="{ 'pay-choose': payWay == 82 }"
           class="pay-block"
           @click="payWay = 82"
@@ -92,7 +93,7 @@
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
           <div v-show="payWay == 82" class="pay-price">
-            {{ coinType }} {{ formatMoney(price) }}
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
@@ -120,6 +121,7 @@
         </div> -->
         <!-- 微信 -->
         <div
+          v-show="this.$store.state.platform !== 30"
           :class="{ 'pay-choose': payWay == 83 }"
           class="pay-block"
           @click="payWay = 83"
@@ -129,7 +131,7 @@
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
           <div v-show="payWay == 83" class="pay-price">
-            {{ coinType }} {{ formatMoney(price) }}
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
@@ -143,6 +145,7 @@
 
         <!-- 信用卡 -->
         <div
+          v-show="this.$store.state.platform !== 30"
           :class="{ 'pay-choose': payWay == 81 }"
           class="pay-block"
           @click="payWay = 81"
@@ -152,7 +155,7 @@
           </div>
           <div class="pay-desc">{{ $t(`${lang}.UnionPay`) }}</div>
           <div v-show="payWay === 81" class="pay-price">
-            {{ coinType }} {{ formatMoney(price) }}
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
@@ -165,6 +168,7 @@
 
         <!-- 电汇 -->
         <div
+           v-show="this.$store.state.platform !== 30"
           :class="{ 'pay-choose': payWay == 84 }"
           class="pay-block"
           @click="payWay = 84;wire()"
@@ -174,7 +178,7 @@
           </div>
           <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
           <div v-show="payWay == 84" class="pay-price">
-            {{ $store.state.coin }} {{ formatMoney(price) }}
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
@@ -215,12 +219,12 @@
           <div class="content">
             <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
-              {{ $store.state.coin }} {{ formatMoney(price) }}
+              {{ formatCoin(coinType) }} {{ formatMoney(price) }}
               <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }})</span>
             </div>
             <div v-else class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
-              {{ $store.state.coin }} {{ formatMoney(price) }}
+              {{ formatCoin(coinType) }} {{ formatMoney(price) }}
             </div>
             <div class="accounts-block">
               <div class="account-ways" v-for="(item, index) in accountlist" :key="index">

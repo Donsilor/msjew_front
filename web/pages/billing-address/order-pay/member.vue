@@ -728,7 +728,7 @@
                     <div class="total">
                       <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
                       <div class="totle-price">
-                        <span>{{ $store.state.coin }} {{ formatMoney(ultimatelyPay) }}</span>
+                        <span>{{ formatCoin(coinType) }} {{ formatMoney(ultimatelyPay) }}</span>
                       </div>
                     </div>
                     <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
@@ -818,13 +818,13 @@
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
               <div class="hkd">
-                {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
+                {{ formatCoin(coinType) }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
             <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
+                -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
             </div>
             <div v-show="makeGay" class="detail-line">
@@ -840,7 +840,7 @@
                 >
               </div>
               <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
+                -{{ formatCoin(coinType) }} {{ formatMoney(preferFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -852,7 +852,7 @@
                 </div>
               </div>
               <div class="hkd color-gold">
-                +{{ $store.state.coin }} {{ formatMoney(tex.logisticsFee) }}
+                +{{ formatCoin(coinType) }} {{ formatMoney(tex.logisticsFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -866,7 +866,7 @@
                 </div>
               </div>
               <div class="hkd color-gold">
-                +{{ $store.state.coin }} {{ formatMoney(tex.taxFee) }}
+                +{{ formatCoin(coinType) }} {{ formatMoney(tex.taxFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -878,7 +878,7 @@
                 </div>
               </div>
               <div class="hkd color-gold">
-                +{{ $store.state.coin }} {{ formatMoney(tex.safeFee) }}
+                +{{ currency }} {{ formatMoney(tex.safeFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -886,7 +886,7 @@
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ $store.state.coin }}
+                {{ formatCoin(coinType) }}
                 {{ formatMoney(orderTotalAmount) }}
                 <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
               </div>
@@ -897,7 +897,7 @@
                 {{ $t(`${lang2}.NeedPay`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ $store.state.coin }}
+                {{ formatCoin(coinType) }}
                 {{ formatMoney(ultimatelyPay) }}
                 <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
               </div>
@@ -911,7 +911,7 @@
         @click.stop="createOrder()"
       >
         <span>
-          {{ $store.state.coin }}
+          {{ formatCoin(coinType) }}
           {{ formatMoney(ultimatelyPay) }}
           <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
         </span>
@@ -1662,7 +1662,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang2}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ $store.state.coin }} {{ formatMoney(ultimatelyPay) }}</span>
+                      <span>{{ formatCoin(coinType) }} {{ formatMoney(ultimatelyPay) }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang2}.tips`) }}</p>
@@ -1751,13 +1751,13 @@
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
               <div class="hkd">
-                {{ $store.state.coin }} {{ formatMoney(tex.productAmount) }}
+                {{ formatCoin(coinType) }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
             <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
+                -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
             </div>
 
@@ -1774,7 +1774,7 @@
                 >
               </div>
               <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(preferFee) }}
+                -{{ formatCoin(coinType) }} {{ formatMoney(preferFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -1786,7 +1786,7 @@
                 </div>
               </div>
               <div class="hkd color-gold">
-                +{{ $store.state.coin }} {{ formatMoney(tex.logisticsFee) }}
+                +{{ formatCoin(coinType) }} {{ formatMoney(tex.logisticsFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -1800,7 +1800,7 @@
                 </div>
               </div>
               <div class="hkd color-gold">
-                +{{ $store.state.coin }} {{ formatMoney(tex.taxFee) }}
+                +{{ formatCoin(coinType) }} {{ formatMoney(tex.taxFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -1812,7 +1812,7 @@
                 </div>
               </div>
               <div class="hkd color-gold">
-                +{{ $store.state.coin }} {{ formatMoney(tex.safeFee) }}
+                +{{ formatCoin(coinType) }} {{ formatMoney(tex.safeFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -1820,7 +1820,7 @@
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ $store.state.coin }}
+                {{ formatCoin(coinType) }}
                 {{ formatMoney(orderTotalAmount) }}
                 <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
               </div>
@@ -1831,7 +1831,7 @@
                 {{ $t(`${lang2}.NeedPay`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ $store.state.coin }}
+                {{ formatCoin(coinType) }}
                 {{ formatMoney(ultimatelyPay) }}
               </div>
             </div>
@@ -1844,7 +1844,7 @@
         @click.stop="createOrder1()"
       >
         <span>
-          {{ $store.state.coin }}
+          {{ formatCoin(coinType) }}
           {{ formatMoney(ultimatelyPay) }}
           <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
         </span>
@@ -1997,6 +1997,7 @@ export default {
       goodsListLine: [],
       orderTotalAmount: 0,
       ultimatelyPay: 0,
+      coinType:'',
       num: 0,
       mobileMax: 20,
       currency: ''
@@ -2820,7 +2821,7 @@ export default {
 
           this.orderTotalAmount = res.data.orderAmount;
           this.ultimatelyPay = res.data.payAmount;
-          this.currency = res.data.currency
+          this.coinType = res.data.currency
         })
         .catch(err => {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]

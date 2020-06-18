@@ -1,7 +1,7 @@
 <template>
   <div class="engagementRings-component">
     <div class="swiper-box">
-      <swiper :auto="true" :duration="5000">
+      <swiper :auto="false" :duration="5000">
         <div v-for="(each, n) in goodsImages" :key="n">
           <nuxt-link
             :to="
@@ -17,7 +17,7 @@
     <div class="title">
       {{ goodInfo.goodsName }}
     </div>
-    <div class="price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div>
+    <div class="price">{{ formatCoin(goodInfo.coinType) }}{{ formatNumber(showPi) }}</div>
     <div class="promise-box">
       <div
         v-for="(c, index) in goodInfo.goodsServicesJsons"

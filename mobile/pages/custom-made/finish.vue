@@ -32,7 +32,7 @@
                 {{ lang.size }}：{{ s.configAttrVal }}
               </div>
               <div class="content-price">
-                {{ c.coinType }} {{ formatNumber(c.retailMallPrice) }}
+                {{ formatCoin(info1.coinType) }} {{ formatNumber(c.retailMallPrice) }}
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
             </div>
           </div>
           <div class="content-price">
-            {{ info2.details[0].coinType }}
+            {{ formatCoin(info2.coinType) }}
             {{ formatNumber(info2.details[0].retailMallPrice) }}
           </div>
         </div>
@@ -72,7 +72,7 @@
       <span>{{ lang.addCart }} </span>
       <div v-for="(c, index) in info1.details" :key="index">
         <span v-if="parseInt(c.id) === parseInt(infoCheck)" class="price-add">
-          {{ c.coinType }}
+          {{ formatCoin(info1.coinType) }}
           {{
             formatNumber(
               c.retailMallPrice +

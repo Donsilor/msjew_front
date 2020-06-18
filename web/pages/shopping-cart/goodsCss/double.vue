@@ -119,7 +119,7 @@
         
       </div>
       <div class="good-price">
-            {{ g.coinType }}
+            {{ formatCoin(g.coinType) }}
             {{
               formatNumber(
                 g.price

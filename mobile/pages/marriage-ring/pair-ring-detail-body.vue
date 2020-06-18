@@ -18,7 +18,7 @@
       {{ goodInfo.goodsName }}
     </div>
     <div class="price">
-      {{ goodInfo.coinType }}{{ formatNumber(showPrice) }}  
+      {{ formatCoin(goodInfo.coinType) }}{{ formatNumber(showPrice) }}
     </div>
     <div class="promise-box">
       <div

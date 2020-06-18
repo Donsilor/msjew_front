@@ -28,7 +28,7 @@
                       getconfig(item.config, item.simpleGoodsEntity.baseConfig)
                     }}
                   </p>
-                  <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                  <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
                   <div v-if="item.groupType === 1" class="btn-type">
                     {{ lang.ring }}
                   </div>
@@ -50,7 +50,7 @@
                         )
                       }}
                     </p>
-                    <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                    <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
                   </div>
                 </div>
               </div>
@@ -90,7 +90,7 @@
                     <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
                   </div> -->
                 </div>
-                  <b class="double-ring-price">{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                  <b class="double-ring-price">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
               </div>
               <!-- 定制 -->
               <div v-if="item.groupType === 2" class="customization">
@@ -103,7 +103,7 @@
                       getconfig(item.config, item.simpleGoodsEntity.baseConfig)
                     }}
                   </p>
-                  <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b>
+                  <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
                   <div v-if="item.groupType === 1" class="btn-type">
                     {{ lang.ring }}
                   </div>
@@ -125,7 +125,7 @@
                         )
                       }}
                     </p>
-                    <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                    <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
                   </div>
                 </div>
               </div>

@@ -37,7 +37,7 @@
                 <span>x 1</span>
                 <p>SKU：{{ detail.data[0].goodsCode }}</p>
                 <p>{{ detail.data[0].detailSpecs }}</p>
-                <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
+                <b>{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice}}</b>
               </div>
 
               <!--              对戒-->
@@ -54,7 +54,7 @@
                 <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
                 <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
                 <b
-                  >{{ order.coinCode }}
+                  >{{ formatCoin(order.coinCode) }}
                   {{ detail.data[1] && detail.data[1].goodsPrice }}</b
                 >
               </div> -->
@@ -125,7 +125,7 @@
               </div>
               <div class="price">
                 <b class="display-block"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                  >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice }}</b
                 >
               </div>
               <div class="num">
@@ -203,7 +203,7 @@
                 <p>SKU：{{ detail.data[0].goodsCode }}</p>
                 <p>{{ detail.data[0].detailSpecs }}</p>
                 <b class="display-block margin-bottom-20"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                  >{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice }}</b
                 >
                 <h4 class="order-ellipsis ow-h2">
                   {{ detail.data[1] && detail.data[1].goodsName }}
@@ -211,7 +211,7 @@
                 <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
                 <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
                 <b
-                  >{{ order.coinCode }}
+                  >{{ formatCoin(order.coinCode) }}
                   {{ detail.data[1] && detail.data[1].goodsPrice }}</b
                 >
               </div>
@@ -226,7 +226,7 @@
                 <span class="title">{{ lang.orderCount }}：</span>
                 <div class="order-amount">
                   <div>
-                    <span class="coin-type">{{ order.coinCode }}</span>
+                    <span class="coin-type">{{ formatCoin(order.coinCode) }}</span>
                     <span class="order-price">{{ order.orderAmount }}</span>
                   </div>
                 </div>
@@ -235,7 +235,7 @@
                 <span class="title">{{ order.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}：</span>
                 <div class="order-amount">
                   <div>
-                    <span class="coin-type">{{ order.coinCode }}</span>
+                    <span class="coin-type">{{ formatCoin(order.coinCode) }}</span>
                     <span class="order-price">{{ order.payAmount }}</span>
                   </div>
                 </div>
@@ -778,7 +778,7 @@ export default {
             font-size: 0;
             vertical-align: bottom;
             .coin-type {
-              margin-right: 7px;
+              // margin-right: 7px;
               font-size: 12px;
               font-weight: 400;
               color: rgba(242, 155, 135, 1);
