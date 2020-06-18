@@ -191,6 +191,11 @@ export default {
       stepPayVerify:false,//支付验证
       stepPaySuccess:false,//支付验证成功
       verifyCount:0,//支付验证次数
+      goodsInfo: {
+        value: 0,
+        currency: '',
+        contents: []
+      }
     }
   },
   computed: {
@@ -227,10 +232,10 @@ export default {
       // facebook 购买成功统计-start
       if(this.$store.state.platform == 31){
         console.log("facebook购买成功数据统计")
-        fbq('track','Purchase',{value:0.00,currency:'USD'});
+        fbq('track','Purchase',this.goodsInfo);
       }
       // facebook 购买成功统计-end
-      
+
       const arr = []
       this.list.map((item, index) => {
         arr.push(item.localSn)
@@ -272,6 +277,21 @@ export default {
       })
       .then(res => {
         this.info = res
+
+        this.goodsInfo.value = res.payAmount;
+        this.goodsInfo.currency = res.coinCode;
+
+        var details = res.details;
+
+        details.forEach((o, i) =>{
+           this.goodsInfo.contents.push({
+            'id': o.goodsId,
+            'quantity': 1
+           })
+        })
+
+        // console.log(778,this.goodsInfo)
+
         this.getChannelType(this.info.payChannel)
       })
       .catch(err => {
