@@ -618,7 +618,7 @@ color-red {
 .discount-icon2{
   position: absolute;
   top: -9px;
-  left: -8px;
+  left: -5px;
   z-index: 2;
   width: 90px;
   height: 96px;
@@ -642,8 +642,8 @@ color-red {
 /* 列表页优惠券样式 */
 .list-discount-icon1{
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: -1px;
+  bottom: 3px;
   z-index: 2;
   width: 80px;
   height: 80px;

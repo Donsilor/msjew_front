@@ -26,7 +26,7 @@
 
             <!-- 折扣 -->
             <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
-              <span>{{ discountConversion(item.coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
+              <span>{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ $t(`${lang}.discounts2`) }}</span>
             </div>
 
             <!-- 优惠券 -->
@@ -77,7 +77,8 @@ const lang = 'detail'
 export default {
   data() {
     return{
-      lang
+      lang,
+      language: this.$store.state.language
     }
   },
   mixins: [Operate],
