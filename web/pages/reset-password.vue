@@ -2,6 +2,10 @@
   <div>
     <!-- 手机方式找回密码 -->
     <div v-if="resetType == 1" class="page">
+      <div style="height: 0;">
+        <input type="text" name="hidden1" style="width:0; height:0;">
+        <input type="password" name="hidden1" style="width:0; height:0;">
+      </div>
       <div class="content">
         <ul class="schedule">
           <li
@@ -31,6 +35,7 @@
                     class="bottom-border-input"
                     :placeholder="$t(`${lang}.schedule1-phone`)"
                     @keydown.enter="changeSchedule2(2)"
+                    autocomplete="off"
                   />
                 </div>
                 <div v-show="phonetip" class="error-tip">
@@ -76,6 +81,7 @@
                     v-model="code"
                     type="text"
                     :placeholder="$t(`${lang}.schedule1-code`)"
+                    autocomplete="off"
                   />
                 </div>
                 <div class="send-email-code">
@@ -96,6 +102,7 @@
                   :type="showPassword ? 'text' : 'password'"
                   :placeholder="$t(`${lang}.newPassword`)"
                   @keydown.enter="changeSchedule2(3)"
+                  autocomplete="off"
                 />
                 <div class="password-eye" @click="changeRegisterPasswordStatus">
                   <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -112,6 +119,7 @@
                   class="bottom-border-input pwdinput"
                   :placeholder="$t(`${lang}.confirmPassword`)"
                   @keydown.enter="changeSchedule2(3)"
+                  autocomplete="off"
                 />
                 <div class="password-eye" @click="changeRegisterPasswordStatus">
                   <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -154,6 +162,10 @@
     </div>
     <!-- 邮箱方式找回密码 -->
     <div v-if="resetType == 2" class="page">
+      <div style="height: 0;">
+        <input type="text" name="hidden1" style="width:0; height:0;">
+        <input type="password" name="hidden1" style="width:0; height:0;">
+      </div>
       <div class="content">
         <ul class="schedule">
           <li
@@ -181,6 +193,7 @@
                   v-model="info.email"
                   class="bottom-border-input"
                   @keydown.enter="changeSchedule(2)"
+                  autocomplete="off"
                 />
               </div>
               <div class="button-group">
@@ -216,6 +229,7 @@
                   v-model="info.code"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.inputEmailCode`)"
+                  autocomplete="off"
                 />
               </div>
               <div class="input-line">
@@ -224,6 +238,7 @@
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.newPassword`)"
                   @keydown.enter="changeSchedule(3)"
+                  autocomplete="off"
                 />
               </div>
               <div class="input-line">
@@ -232,6 +247,7 @@
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.confirmPassword`)"
                   @keydown.enter="changeSchedule(3)"
+                  autocomplete="off"
                 />
               </div>
               <div class="button-group">

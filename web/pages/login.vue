@@ -48,7 +48,7 @@ export default {
         }
       ],
       language: '',
-      loginType: this.$route.query.loginType || 1
+      loginType: 1 || this.$route.query.loginType
     }
   },
   computed: {},
@@ -87,8 +87,6 @@ export default {
 
       sessionStorage.setItem('loginT', this.loginType)
     }
-    
-    console.log(7878,this.log)
 
   },
   methods: {

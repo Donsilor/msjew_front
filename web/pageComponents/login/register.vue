@@ -3,10 +3,10 @@
     <!-- 手机注册 -->
     <div v-if="loginType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
-		<div style="height: 0;">
-		  <input type="text" name="hidden1" style="width:0; height:0;">
-		  <input type="password" name="hidden1" style="width:0; height:0;">
-		</div>
+      <div style="height: 0;">
+        <input type="text" name="hidden1" style="width:0; height:0;">
+        <input type="password" name="hidden1" style="width:0; height:0;">
+      </div>
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
             <div class="register-input">
