@@ -3,10 +3,11 @@
     <!-- 手机注册 -->
     <div v-if="loginType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
-		<div style="height: 0;">
-		  <input type="text" name="hidden1" style="width:0; height:0;">
-		  <input type="password" name="hidden1" style="width:0; height:0;">
+		<div style="position: fixed;z-index: -999;">
+			<input type="text" name="hidden1" id="text" value="123">
+			<input type="password" name="hidden1" id="password" value="456">
 		</div>
+
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
             <div class="register-input">
@@ -181,10 +182,11 @@
     <!-- 邮箱注册 -->
     <div v-if="loginType == 2" class="register-item">
       <form>
-		<div style="height: 0;">
-		  <input type="text" name="hidden1" style="width:0; height:0;">
-		  <input type="password" name="hidden1" style="width:0; height:0;">
+		<div style="position: fixed;z-index: -999;">
+			<input type="text" name="hidden1" id="text" value="123">
+			<input type="password" name="hidden1" id="password" value="456">
 		</div>
+		
         <div class="row-flex">
           <div class="relative margin-right-20 margin-bottom-20">
             <div class="register-input">
@@ -373,7 +375,6 @@ export default {
       password_repetition:'',
       agreement: true,
       requesting: false,
-      language: '',
       isActivename:false,
       isActivefisrt:false,
       isActivelast:false,
@@ -403,26 +404,6 @@ export default {
     }
   },
   mounted() {
-    this.language = this.getCookie('language')
-
-    var loginT = sessionStorage.getItem('loginT');
-    if(loginT){
-      this.loginType = loginT
-    }else{
-      // 大陆站点 登录方式为手机登录
-      if(this.$store.state.platform == 20){
-        this.loginType = 1;
-      }else{
-        if(this.language == "zh_CN"){
-          this.loginType = 1
-        }else{
-          this.loginType = 2;
-        }
-      }
-
-      sessionStorage.setItem('loginT', this.loginType)
-    }
-    
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -509,16 +490,6 @@ export default {
     focusEvent5(){
 	  this.repwdShow=false
       this.isActiverepwd=true
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     // 点击图标切换密码类型
     changeRegisterPasswordStatus() {
@@ -658,10 +629,10 @@ export default {
           })
           .then(res => {
             const data = res.data
-        
+
             _this.requesting = false
             _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-        
+
             localStorage.setItem('refreshToken',data.refresh_token);
             localStorage.setItem('accessToken',data.access_token);
             _this.$store.commit('setToken', data.access_token)
@@ -682,7 +653,7 @@ export default {
                 })
               }
             }, 0)
-        
+
           })
           .catch(err => {
             // console.log("请求",err)

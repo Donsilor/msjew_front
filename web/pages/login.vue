@@ -48,7 +48,7 @@ export default {
         }
       ],
       language: '',
-      loginType: this.$route.query.loginType || 1
+      loginType: 1 || this.$route.query.loginType
     }
   },
   computed: {},
@@ -66,46 +66,24 @@ export default {
     _this.$nextTick(() => {
       _this.activeTab = _this.$route.query.type || 'login'
     })
-
-    this.language = this.getCookie('language')
-
-    var loginT = sessionStorage.getItem('loginT');
     
-    if(loginT){
-      this.loginType = loginT
+    this.language = this.$store.state.language;
+
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
+      this.loginType = 1;
     }else{
-      // 大陆站点 登录方式为手机登录
-      if(this.$store.state.platform == 20){
-        this.loginType = 1;
+      if(this.language == "zh_CN"){
+        this.loginType = 1
       }else{
-        if(this.language == "zh_CN"){
-          this.loginType = 1
-        }else{
-          this.loginType = 2;
-        }
+        this.loginType = 2;
       }
-
-      sessionStorage.setItem('loginT', this.loginType)
     }
-    
-    console.log(7878,this.log)
 
   },
   methods: {
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     // 切换tab
     changeActiveTab(tab) {
-      // console.log(this.loginType)
-      // return
       this.$router.replace({
         path: '/login',
         query: {
@@ -115,12 +93,8 @@ export default {
       })
     },
     loginTy(r) {
-      this.loginType = r;
-      sessionStorage.setItem('loginT', this.loginType)
+      this.loginType = r
     }
-  },
-  beforeDestroy() {
-    sessionStorage.removeItem('loginT')
   }
 }
 </script>

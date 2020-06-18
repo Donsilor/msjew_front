@@ -3,10 +3,11 @@
     <!-- 手机登录 -->
     <div v-if="loginType == 1" class="login-item">
       <div class="relative margin-bottom-20">
-		<div style="height: 0;visibility: hidden;">
-		  <input type="text" name="hidden1" style="width:0; height:0;">
-		  <input type="password" name="hidden1" style="width:0; height:0;">
+		<div style="position: fixed;z-index: -999;">
+			<input type="text" name="hidden1" id="text" value="123">
+			<input type="password" name="hidden1" id="password" value="456">
 		</div>
+
         <div class="login-input icon-input">
           <span class="icon">
             <img class="phone" src="/login/phone.png" />
@@ -68,9 +69,9 @@
     <!-- 邮箱登录 -->
     <div v-if="loginType == 2" class="login-item">
       <div class="relative margin-bottom-20">
-	    <div style="height: 0;">
-		  <input type="text" name="hidden1" style="width:0; height:0;">
-		  <input type="password" name="hidden1" style="width:0; height:0;">
+	    <div style="position: fixed;z-index: -999;">
+	    	<input type="text" name="hidden1" id="text" value="123">
+	    	<input type="password" name="hidden1" id="password" value="456">
 	    </div>
         <div class="login-input icon-input">
           <span class="icon">
@@ -206,24 +207,17 @@ export default {
     //   this.isActive1=true
     //   this.phoneErr=true
     // }
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language;
 
-    var loginT = sessionStorage.getItem('loginT');
-    if(loginT){
-      this.loginType = loginT
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
+      this.loginType = 1;
     }else{
-      // 大陆站点 登录方式为手机登录
-      if(this.$store.state.platform == 20){
-        this.loginType = 1;
+      if(this.language == "zh_CN"){
+        this.loginType = 1
       }else{
-        if(this.language == "zh_CN"){
-          this.loginType = 1
-        }else{
-          this.loginType = 2;
-        }
+        this.loginType = 2;
       }
-
-      sessionStorage.setItem('loginT', this.loginType)
     }
 
     if(this.$store.state.platform == 20){
@@ -270,16 +264,6 @@ export default {
     keypressEvent6 () {
       this.isActive6 = false
       // this.mailErr=false
-    },
-    // 查询cookie
-    getCookie (cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     // 生成驗證碼
     refreshCode () {
@@ -558,7 +542,7 @@ input::placeholder {
     font-weight: 400;
     color: #8b766c;
   }
-	
+
   .submit.bg{
 	background-color: #A88F82;
 	color: #fff;
