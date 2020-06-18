@@ -66,9 +66,8 @@ export default {
     _this.$nextTick(() => {
       _this.activeTab = _this.$route.query.type || 'login'
     })
-
-    this.language = this.$store.state('language')
-    console.log(778,this.language)
+    
+    this.language = this.$store.state.language;
 
     // 大陆站点 登录方式为手机登录
     if(this.$store.state.platform == 20){
@@ -83,20 +82,8 @@ export default {
 
   },
   methods: {
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     // 切换tab
     changeActiveTab(tab) {
-      // console.log(this.loginType)
-      // return
       this.$router.replace({
         path: '/login',
         query: {

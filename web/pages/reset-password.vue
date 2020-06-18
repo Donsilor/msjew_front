@@ -406,7 +406,6 @@ export default {
       password_repetition: '',
       showPassword: false,
       ajaxLoading: false,
-      language: '',
       resetType: 2
     }
   },
@@ -431,7 +430,6 @@ export default {
   },
   mounted() {
     // console.log("语言",this.$store.state.language)
-    this.language = this.getCookie('language')
     const _this = this
     _this.$nextTick(() => {})
 
@@ -446,16 +444,6 @@ export default {
       // const info = JSON.parse(JSON.stringify(this.info))
       this.showPassword = !this.showPassword
       // this.info = info
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     // 倒计时
     countDown() {

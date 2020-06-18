@@ -206,24 +206,18 @@ export default {
     //   this.isActive1=true
     //   this.phoneErr=true
     // }
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language;
 
-    var loginT = sessionStorage.getItem('loginT');
-    if(loginT){
-      this.loginType = loginT
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
+      this.loginType = 1;
     }else{
-      // 大陆站点 登录方式为手机登录
-      if(this.$store.state.platform == 20){
-        this.loginType = 1;
+      console.log(123,this.language)
+      if(this.language == "zh_CN"){
+        this.loginType = 1
       }else{
-        if(this.language == "zh_CN"){
-          this.loginType = 1
-        }else{
-          this.loginType = 2;
-        }
+        this.loginType = 2;
       }
-
-      sessionStorage.setItem('loginT', this.loginType)
     }
 
     if(this.$store.state.platform == 20){
@@ -270,16 +264,6 @@ export default {
     keypressEvent6 () {
       this.isActive6 = false
       // this.mailErr=false
-    },
-    // 查询cookie
-    getCookie (cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     // 生成驗證碼
     refreshCode () {

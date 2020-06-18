@@ -369,7 +369,6 @@ export default {
       password_repetition:'',
       agreement: true,
       requesting: false,
-      language: '',
       isActivename:false,
       isActivefisrt:false,
       isActivelast:false,
@@ -415,26 +414,6 @@ export default {
     }
   },
   mounted() {
-    this.language = this.getCookie('language')
-
-    var loginT = sessionStorage.getItem('loginT');
-    if(loginT){
-      this.loginType = loginT
-    }else{
-      // 大陆站点 登录方式为手机登录
-      if(this.$store.state.platform == 20){
-        this.loginType = 1;
-      }else{
-        if(this.language == "zh_CN"){
-          this.loginType = 1
-        }else{
-          this.loginType = 2;
-        }
-      }
-
-      sessionStorage.setItem('loginT', this.loginType)
-    }
-
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -503,16 +482,6 @@ export default {
     // 确认密码
     focusEvent5(){
       this.isActiverepwd=true
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     // 点击图标切换密码类型
     changeRegisterPasswordStatus() {
