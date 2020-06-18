@@ -439,6 +439,10 @@ export default {
               })
               .then(res => {
                 console.log("order_sn",res)
+
+                this.goodsInfo.value = res.data.productAmount;
+                this.goodsInfo.currency = res.data.coinCode;
+
                 this.data2 = res.data
                 // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
                 /*setTimeout(() => {

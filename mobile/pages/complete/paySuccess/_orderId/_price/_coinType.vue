@@ -310,6 +310,10 @@ export default {
       .then(res => {
         console.log("dssadas",res)
         this.orderinfo = res
+
+        this.goodsInfo.value = res.productAmount;
+        this.goodsInfo.currency = res.coinCode;
+
         this.getChannelType(this.orderinfo.payChannel)
 
       })
