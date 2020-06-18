@@ -70,7 +70,7 @@
                   {{ detail.goodsName }}
                 </h4>
                 <!-- <span>x 1</span> -->
-                <p>SKU：{{ detail.data[0].goodsCode }}</p> 
+                <p class="sku">SKU：{{ detail.data[0].goodsCode }}</p> 
                 <p>{{ getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value) }}</p>
                 <!-- <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b> -->
                 <!-- <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
@@ -957,10 +957,13 @@ export default {
         .double{
           position: relative;
           .dec{
-            margin-bottom: 10px;
+            // margin-bottom: 10px;
           }
           .dec:nth-child(2){
             h4{
+              display: none;
+            }
+            .sku{
               display: none;
             }
           }
