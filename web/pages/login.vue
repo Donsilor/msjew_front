@@ -67,25 +67,18 @@ export default {
       _this.activeTab = _this.$route.query.type || 'login'
     })
 
-    this.language = this.getCookie('language')
+    this.language = this.$store.state('language')
+    console.log(778,this.language)
 
-    var loginT = sessionStorage.getItem('loginT');
-    
-    if(loginT){
-      this.loginType = loginT
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
+      this.loginType = 1;
     }else{
-      // 大陆站点 登录方式为手机登录
-      if(this.$store.state.platform == 20){
-        this.loginType = 1;
+      if(this.language == "zh_CN"){
+        this.loginType = 1
       }else{
-        if(this.language == "zh_CN"){
-          this.loginType = 1
-        }else{
-          this.loginType = 2;
-        }
+        this.loginType = 2;
       }
-
-      sessionStorage.setItem('loginT', this.loginType)
     }
 
   },
@@ -113,12 +106,8 @@ export default {
       })
     },
     loginTy(r) {
-      this.loginType = r;
-      sessionStorage.setItem('loginT', this.loginType)
+      this.loginType = r
     }
-  },
-  beforeDestroy() {
-    sessionStorage.removeItem('loginT')
   }
 }
 </script>
