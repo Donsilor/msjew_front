@@ -504,7 +504,7 @@ export default {
       }
      if (goods_attr) {
        for (let i in goods_attr) {
-       console.log("good_spec",goods_attr[i])
+      //  console.log("good_spec",goods_attr[i])
         text = text + ' /  '+goods_attr[i] 
       }
         // goods_attr.map((item, index) => {
@@ -974,6 +974,7 @@ export default {
                 color: rgba(243, 163, 145, 1);
                 font-family: twCenMt;
               }
+              
               .btn-type {
                 position: absolute;
                 top: 174px;

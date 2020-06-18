@@ -124,7 +124,7 @@
                 </div>
               </div>
               <div class="price">
-                <b class="display-block margin-bottom-20"
+                <b class="display-block"
                   >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
                 >
               </div>
@@ -654,20 +654,25 @@ export default {
           }
         }
         .price{
-          position: absolute;
-          right:85px;
+          // position: absolute;
+          // right:145px;
+          margin-top: 10px;
           b {
             font-size: 17px;
             font-weight: 400;
             color: rgba(243, 163, 145, 1);
             font-family: twCenMt;
+            margin-right: 50px;
           }
         }
         .dec{
-          margin-bottom: 20px;
+          // margin-bottom: 20px;
         }
         .dec:nth-child(2){
           .ow-h2{
+            display: none;
+          }
+          .sku{
             display: none;
           }
         }

@@ -196,7 +196,7 @@ export default {
     },
     // 对戒属性数值转化成字符串
     getDubleConfig(good_spec,goods_attr) {
-      console.log("list",this.list)
+      // console.log("list",this.list)
       let text = ''
       if (good_spec.length > 0) {
         good_spec.map((item, index) => {
