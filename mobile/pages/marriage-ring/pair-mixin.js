@@ -199,7 +199,7 @@ export default {
     goodsServicesJsons() {
       const result = []
       // const names = []
-      console.log("goodsServicesJsons1", this.firstRing,this.secondRing)
+      // console.log("goodsServicesJsons1", this.firstRing,this.secondRing)
       this.goodInfo && this.goodInfo.goodsServicesJsons.forEach(item => {
         result.push(item)
         // if (names.indexOf(item.name) === -1) {

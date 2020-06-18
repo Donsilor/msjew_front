@@ -343,7 +343,7 @@ export default {
     }
   },
   mounted(){
-    console.log("ddddd",this.goodsServicesJsons)
+    // console.log("ddddd",this.firstRing,this.secondRing)
   }
 }
 </script>
