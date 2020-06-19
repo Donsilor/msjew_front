@@ -342,7 +342,7 @@ export default {
         for (let i = 0; i < this.list.length; i++) {
           this.soudout = this.list[i].goodsStatus
           // console.log("所有",this.list[i].goodsStatus)
-          if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
+          if (this.list[i].goodsStatus === 2) {
             //  console.log("所有")
             this.list[i].isSelect = this.selectAll
           } else {
@@ -362,7 +362,7 @@ export default {
       this.selectAll = !this.selectAll
       // console.log("全选", this.list)
       for (let i = 0; i < this.list.length; i++) {
-        if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
+        if (this.list[i].goodsStatus === 2) {
           //  console.log("所有")
           this.list[i].isSelect = this.selectAll
         } else {
@@ -417,7 +417,7 @@ export default {
           }
         }
         // 反选
-        if (this.list[i].goodsStatus === 2 && this.list[i].status === 1) {
+        if (this.list[i].goodsStatus === 2) {
           if (!this.list[i].isSelect) {
             this.selectAll = false
           }
