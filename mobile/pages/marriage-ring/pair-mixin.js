@@ -676,7 +676,7 @@ export default {
       if (!(this.canAddCart && this.inSale)) {
         return
       }
-      if (!this.firstRingId || !this.secondRingId) {
+      if (!this.goodsId) {
         this.$toast(this.lang.specificationToast)
         return
       }
