@@ -4,7 +4,11 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" @getIdx="getIndex"></product-images>
+		
+		<div class="magn-box">
+			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
+		</div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
@@ -418,7 +422,8 @@ export default {
         materialIndex: 0,
         sizeIndex: 0,
         caratIndex: 0
-      }
+      },
+	  magnifying: ''
     }
   },
   computed: {
@@ -531,6 +536,8 @@ export default {
         this.checkDetail()
       }
     })
+		
+	this.magnifying = this.thumbnails[0]
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {
@@ -646,7 +653,10 @@ export default {
         }
       }
       this.ringChecked = ringChecked
-    }
+    },
+	getIndex(i) {
+		this.magnifying = this.thumbnails[i]
+	}
   }
 }
 </script>
@@ -849,4 +859,6 @@ export default {
     }
   }
 }
+
+
 </style>
