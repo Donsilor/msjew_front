@@ -628,7 +628,7 @@
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
         <h2>{{ $t(`${lang}.pairRingDetails`) }}</h2>
-        <h3>{{ $t(`${lang}.goodsId`) }}：{{ info.ringCode }}</h3>
+        <h3>{{ $t(`${lang}.goodsId`) }}：{{ info.goodsCode }}</h3>
       </div>
       <div class="attr-group">
         <h3 class="group-name">{{ $t(`${lang}.ring01`) }}</h3>
@@ -789,7 +789,7 @@ export default {
       )
       // console.log("info2",allData)
       allData.forEach(item => {
-        // console.log("info2",item.goodsStatus)
+        console.log("info999999",item)
         item.images = _this.imageStrToArray(item.goodsImages || '')
         item.name = item.goodsName
         item.price = item.salePrice
