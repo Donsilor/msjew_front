@@ -194,7 +194,8 @@ export default {
       goodsInfo: {
         value: 0,
         currency: '',
-        contents: []
+        contents: [],
+        content_type: 'product'
       }
     }
   },
