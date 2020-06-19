@@ -77,7 +77,7 @@
 		  <li v-for="(item, index) in listHK" :key="index">
 			<!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
 			<div>
-			  <img :src="item.url" :class="{'borderRadiu': index == 2}"/>
+			  <img :src="item.url"/>
 			  <div class="right">
 				<span
 				  class="icon iconfont"
@@ -434,7 +434,7 @@ export default {
 		  {
 			url: '/cart/ap-HK.png',
 			type: 84,
-			title: this.LANGUAGE.cart.pay.payType3,
+			title: this.LANGUAGE.cart.pay.payType3+' HK',
 			des: this.LANGUAGE.cart.pay.type3Text
 		  },
 		  {
@@ -1999,9 +1999,5 @@ export default {
 
 .hint-color{
   color: #f29b87 !important;
-}
-
-.borderRadiu{
-	border-radius: 50%;
 }
 </style>
