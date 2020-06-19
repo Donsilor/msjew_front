@@ -1040,10 +1040,11 @@ export default {
     addCart() {
       const _this = this
       if (!_this.canAddCart) {
+         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
         return
       }
       if (!_this.firstRingSimpleDetail || !_this.secondRingSimpleDetail) {
-        _this.$errorMessage('请选择')
+         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
         return
       }
 
