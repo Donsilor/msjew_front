@@ -834,11 +834,12 @@ export default {
         //   "size":129
         // },
         const item = details[n]
-        if (item.material === material && item.size === size) {
+        if (item.material === material && item.size === size && item.carat === carat) {
           result = item
           break
         }
       }
+      console.log('test', result);
       return result
     },
     secondRingSimpleDetail() {
@@ -868,6 +869,7 @@ export default {
           break
         }
       }
+      console.log('test2', result);
       return result
     },
     // 是否在销售
@@ -976,13 +978,29 @@ export default {
       const secondRing = _this.secondRingSimpleDetail
 
       if(!firstRing || !secondRing) {
+        _this.coupleLadyId = ''
+        _this.coupleMenId = ''
+        _this.goodsId = ''
+        _this.styleId = ''
+        _this.categoryId = ''
+        // _this.info.salePrice = ''
+        _this.stock = ''
         return;
       }
-      console.log("firstRing",firstRing,secondRing)
+      console.log(firstRing['id'], secondRing['id']);
       _this.doubleRingDetailId(firstRing['id'], secondRing['id']);
     },
     doubleRingDetailId(ladyRing, menRing) {
       const _this = this
+
+        _this.coupleLadyId = ''
+        _this.coupleMenId = ''
+        _this.goodsId = ''
+        _this.styleId = ''
+        _this.categoryId = ''
+        // _this.info.salePrice = ''
+        _this.stock = ''
+        
       this.info.details.map((item, i) => {
         if(ladyRing==item.ladyRing && menRing==item.menRing || menRing==item.ladyRing && ladyRing==item.menRing) {
           _this.coupleLadyId = item.ladyRing
@@ -992,7 +1010,7 @@ export default {
           _this.categoryId = item.categoryId
           _this.info.salePrice = item.retailMallPrice
           _this.stock = item.stock
-          // console.log(item)
+          return;
         }
       })
     },
@@ -1039,11 +1057,14 @@ export default {
     // 加入购物车
     addCart() {
       const _this = this
+
+      _this.changeChecked()
+
       if (!_this.canAddCart) {
          _this.$errorMessage(_this.$t(`common.pleaseSelect`))
         return
       }
-      if (!_this.firstRingSimpleDetail || !_this.secondRingSimpleDetail) {
+      if (!_this.goodsId) {
          _this.$errorMessage(_this.$t(`common.pleaseSelect`))
         return
       }
