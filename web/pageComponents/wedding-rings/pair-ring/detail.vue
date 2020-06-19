@@ -614,7 +614,7 @@
       <recommend-data :recommends="recommends"></recommend-data>
     </section>
     <!--    tab切换-->
-    <ul class="tab">
+    <!-- <ul class="tab">
       <li
         v-for="(item, index) in tabs"
         :key="index"
@@ -623,17 +623,17 @@
       >
         <span>{{ item.name }}</span>
       </li>
-    </ul>
+    </ul> -->
     <!--    商品详情-->
+    <h2 class="detail-name">{{ $t(`${lang}.pairRingDetails`) }}</h2>
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
-        <h2>{{ $t(`${lang}.pairRingDetails`) }}</h2>
         <h3>{{ $t(`${lang}.goodsId`) }}：
           <span>{{ info.ringCode }}</span>
         </h3>
       </div>
       <div class="attr-group">
-        <h3 class="group-name">{{ $t(`${lang}.ring01`) }}:</h3>
+        <h3 class="group-name">（{{ $t(`${lang}.ring01`) }}）</h3>
         <ul class="attr-list">
           <li
             v-for="(item, index) in firstRing.specs"
@@ -644,9 +644,10 @@
             <span>{{ item.configAttrVal || '--' }}</span>
           </li>
         </ul>
+        <div class="line"></div>
       </div>
       <div class="attr-group">
-        <h3 class="group-name">{{ $t(`${lang}.ring02`) }}</h3>
+        <h3 class="group-name">（{{ $t(`${lang}.ring02`) }}）</h3>
         <ul class="attr-list">
           <li
             v-for="(item, index) in secondRing.specs"
@@ -657,6 +658,7 @@
             <span>{{ item.configAttrVal || '--' }}</span>
           </li>
         </ul>
+        <div class="line"></div>
       </div>
     </section>
     <section class="desc" v-html="info.ringDesc"></section>
@@ -778,7 +780,7 @@ export default {
     recommends() {
       const _this = this
       const allData = JSON.parse(
-        JSON.stringify(_this.info.searchGoodsModels || []) 
+        JSON.stringify(_this.info.searchGoodsModels || [])
       )
       allData.forEach(item => {
         item.images = _this.imageStrToArray(item.goodsImages || '')
@@ -932,7 +934,7 @@ export default {
         // carats:(() =>{
         //     const carats = product.carats || []
         //     // carats.unshift({id:'',name: this.$t(`personal.index.select`)})
-        //     return carats;  
+        //     return carats;
         // })(),
         specs: product.specs || [],
         details: product.details || [],
@@ -1046,7 +1048,7 @@ export default {
             overflow: hidden;
           }
 
-          span:nth-of-type(2) {
+          span:nth-of-type(3) {
             flex-grow: 1;
             flex-shrink: 1;
             min-width: 0;
@@ -1056,5 +1058,15 @@ export default {
       }
     }
   }
+}
+
+.detail-page .desc-top .attr-group{
+  width: 100%;
+}
+.detail-page .desc-top .attr-group:nth-of-type(3){
+  margin-top: 20px;
+}
+.detail-page .desc-top .attr-group .group-name{
+  margin: 6px 0 10px;
 }
 </style>

@@ -334,7 +334,7 @@
             <span>{{ item.configAttrVal || '--' }}</span>
           </li>
         </ul>
-		<div class="line"></div>
+        <div class="line"></div>
       </div>
     </section>
     <section class="desc" v-html="info.goodsDesc"></section>
