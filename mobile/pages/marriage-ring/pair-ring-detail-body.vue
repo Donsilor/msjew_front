@@ -41,16 +41,6 @@
     </div>
     <div>
       <!--      第一个戒指-->
-      <!-- <div class="select-line">
-        <span>
-          {{ lang.carat }}
-        </span>
-        <span @click="showFirstRingCaratChoose">
-          {{ firstRingCaratText }}
-          <i class="iconfont iconyou" />
-        </span>
-      </div>
-      <div class="bd-b"></div> -->
       <div class="select-line">
         <span>
           <span
@@ -76,6 +66,16 @@
         </span>
       </div>
       <div class="bd-b"></div>
+      <div class="select-line first" v-if="firstRing.carats.length >0">
+        <span>
+          {{ lang.carat }}
+        </span>
+        <span @click="showFirstRingCaratChoose">
+          {{ firstRingCaratText }}
+          <i class="iconfont iconyou" />
+        </span>
+      </div>
+      <div class="bd-b" v-if="firstRing.carats.length >0"></div>
       <div class="select-line">
         <span>
           <span>{{ lang.chooseSize }}</span>
@@ -89,15 +89,7 @@
       </div>
       <div class="bd-b"></div>
       <!--      第二个戒指-->
-      <!-- <div class="select-line">
-        <span>
-          {{ lang.carat }}
-        </span>
-        <span @click="showSecondRingCaratChoose">
-          {{ secondRingCaratText }}
-          <i class="iconfont iconyou" />
-        </span>
-      </div> -->
+      
       <div class="select-line">
         <span>
           <span
@@ -121,6 +113,16 @@
         </span>
       </div>
       <div class="bd-b"></div>
+      <div class="select-line second" v-if="secondRing.carats.length >0">
+        <span>
+          {{ lang.carat }}
+        </span>
+        <span @click="showSecondRingCaratChoose">
+          {{ secondRingCaratText }}
+          <i class="iconfont iconyou" />
+        </span>
+      </div>
+      <div class="bd-b" v-if="secondRing.carats.length >0"></div>
       <div class="select-line margin-bottom-10">
         <span>
           <span>{{ lang.chooseSize }}</span>
@@ -243,11 +245,11 @@
       </template>
     </div> -->
     <footer-bar></footer-bar>
-    <!-- <swiper-tap
+    <swiper-tap
       ref="first-ring-carat"
       :list="firstRing.carats"
       @clear="firstRingClearCarat"
-    ></swiper-tap> -->
+    ></swiper-tap>
     <swiper-tap
       ref="first-ring-suitability"
       :list="firstRing.sizes"
@@ -262,11 +264,11 @@
       @clear="firstRingClearQuality"
     ></choose-eject>
 
-    <!-- <swiper-tap
+    <swiper-tap
       ref="second-ring-carat"
       :list="secondRing.carats"
       @clear="secondRingClearCarat"
-    ></swiper-tap> -->
+    ></swiper-tap>
     <swiper-tap
       ref="second-ring-suitability"
       :list="secondRing.sizes"

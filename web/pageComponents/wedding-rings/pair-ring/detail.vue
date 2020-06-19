@@ -12,7 +12,167 @@
           {{ info.name }}
         </h2>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
-        <div class="sku" >
+        <!-- <div class="sku" >
+          <div class="left-properties" >
+            <div v-if="firstRing.materials.length > 0" class="property-item">
+              <span class="item-name">
+                {{ firstRing.targetUser }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <i
+                    :class="[
+                      'iconfont',
+                      'iconmaterial-big-pt',
+                      'color-icon',
+                      materialColors[
+                        firstRing.materials[firstRingChecked.materialIndex].id
+                      ]
+                    ]"
+                  ></i>
+                  <span class="name ow-h1">
+                    {{
+                      firstRing.materials[firstRingChecked.materialIndex].name
+                    }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in firstRing.materials"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: firstRingChecked.materialIndex === index }
+                    ]"
+                    @click="changeFirstRingChecked('materialIndex', index)"
+                  >
+                    <i
+                      :class="[
+                        'iconfont',
+                        'iconmaterial-big-pt',
+                        'color-icon',
+                        materialColors[item.id]
+                      ]"
+                    ></i>
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div v-if="firstRing.sizes.length > 0" class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.size`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <span class="name ow-h1">
+                    {{ firstRing.sizes[firstRingChecked.sizeIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in firstRing.sizes"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: firstRingChecked.sizeIndex === index }
+                    ]"
+                    @click="changeFirstRingChecked('sizeIndex', index)"
+                  >
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="right-properties" >
+            <div v-if="secondRing.materials.length > 0" class="property-item">
+              <span class="item-name">
+                {{ secondRing.targetUser }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <i
+                    :class="[
+                      'iconfont',
+                      'iconmaterial-big-pt',
+                      'color-icon',
+                      materialColors[
+                        secondRing.materials[secondRingChecked.materialIndex].id
+                      ]
+                    ]"
+                  ></i>
+                  <span class="name ow-h1">
+                    {{
+                      secondRing.materials[secondRingChecked.materialIndex].name
+                    }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in secondRing.materials"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: secondRingChecked.materialIndex === index }
+                    ]"
+                    @click="changeSecondRingChecked('materialIndex', index)"
+                  >
+                    <i
+                      :class="[
+                        'iconfont',
+                        'iconmaterial-big-pt',
+                        'color-icon',
+                        materialColors[item.id]
+                      ]"
+                    ></i>
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div v-if="secondRing.sizes.length > 0" class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.size`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <span class="name ow-h1">
+                    {{ secondRing.sizes[secondRingChecked.sizeIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in secondRing.sizes"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: secondRingChecked.sizeIndex === index }
+                    ]"
+                    @click="changeSecondRingChecked('sizeIndex', index)"
+                  >
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="helper-popover">
+                <span class="helper-name">
+                  {{ $t(`${lang}.USEdition`) }}
+                </span>
+                <el-popover placement="bottom" trigger="hover">
+                  <ring-size></ring-size>
+                  <b slot="reference" class="prompt-icon">!</b>
+                </el-popover>
+              </div>
+              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
+            </div>
+          </div>
+        </div> -->
+        <div class="sku" v-if="firstRing.carats.length == 0 && secondRing.carats.length == 0">
           <div class="left-properties" >
             <div v-if="firstRing.materials.length > 0" class="property-item">
               <span class="item-name">
@@ -172,167 +332,7 @@
             </div>
           </div>
         </div>
-        <!-- <div class="sku" v-if="firstRing.carats.length == 0||secondRing.carats.length == 0">
-          <div class="left-properties" >
-            <div v-if="firstRing.materials.length > 0" class="property-item">
-              <span class="item-name">
-                {{ firstRing.targetUser }}
-              </span>
-              <div class="property">
-                <div class="had-checked">
-                  <i
-                    :class="[
-                      'iconfont',
-                      'iconmaterial-big-pt',
-                      'color-icon',
-                      materialColors[
-                        firstRing.materials[firstRingChecked.materialIndex].id
-                      ]
-                    ]"
-                  ></i>
-                  <span class="name ow-h1">
-                    {{
-                      firstRing.materials[firstRingChecked.materialIndex].name
-                    }}
-                  </span>
-                  <i class="iconfont iconxiala drop-down-icon"></i>
-                </div>
-                <ul class="options">
-                  <li
-                    v-for="(item, index) in firstRing.materials"
-                    :key="index"
-                    :class="[
-                      'item',
-                      { active: firstRingChecked.materialIndex === index }
-                    ]"
-                    @click="changeFirstRingChecked('materialIndex', index)"
-                  >
-                    <i
-                      :class="[
-                        'iconfont',
-                        'iconmaterial-big-pt',
-                        'color-icon',
-                        materialColors[item.id]
-                      ]"
-                    ></i>
-                    <span class="name ow-h1">{{ item.name }}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div v-if="firstRing.sizes.length > 0" class="property-item">
-              <span class="item-name">
-                {{ $t(`${lang}.size`) }}
-              </span>
-              <div class="property">
-                <div class="had-checked">
-                  <span class="name ow-h1">
-                    {{ firstRing.sizes[firstRingChecked.sizeIndex].name }}
-                  </span>
-                  <i class="iconfont iconxiala drop-down-icon"></i>
-                </div>
-                <ul class="options">
-                  <li
-                    v-for="(item, index) in firstRing.sizes"
-                    :key="index"
-                    :class="[
-                      'item',
-                      { active: firstRingChecked.sizeIndex === index }
-                    ]"
-                    @click="changeFirstRingChecked('sizeIndex', index)"
-                  >
-                    <span class="name ow-h1">{{ item.name }}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="right-properties" >
-            <div v-if="secondRing.materials.length > 0" class="property-item">
-              <span class="item-name">
-                {{ secondRing.targetUser }}
-              </span>
-              <div class="property">
-                <div class="had-checked">
-                  <i
-                    :class="[
-                      'iconfont',
-                      'iconmaterial-big-pt',
-                      'color-icon',
-                      materialColors[
-                        secondRing.materials[secondRingChecked.materialIndex].id
-                      ]
-                    ]"
-                  ></i>
-                  <span class="name ow-h1">
-                    {{
-                      secondRing.materials[secondRingChecked.materialIndex].name
-                    }}
-                  </span>
-                  <i class="iconfont iconxiala drop-down-icon"></i>
-                </div>
-                <ul class="options">
-                  <li
-                    v-for="(item, index) in secondRing.materials"
-                    :key="index"
-                    :class="[
-                      'item',
-                      { active: secondRingChecked.materialIndex === index }
-                    ]"
-                    @click="changeSecondRingChecked('materialIndex', index)"
-                  >
-                    <i
-                      :class="[
-                        'iconfont',
-                        'iconmaterial-big-pt',
-                        'color-icon',
-                        materialColors[item.id]
-                      ]"
-                    ></i>
-                    <span class="name ow-h1">{{ item.name }}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div v-if="secondRing.sizes.length > 0" class="property-item">
-              <span class="item-name">
-                {{ $t(`${lang}.size`) }}
-              </span>
-              <div class="property">
-                <div class="had-checked">
-                  <span class="name ow-h1">
-                    {{ secondRing.sizes[secondRingChecked.sizeIndex].name }}
-                  </span>
-                  <i class="iconfont iconxiala drop-down-icon"></i>
-                </div>
-                <ul class="options">
-                  <li
-                    v-for="(item, index) in secondRing.sizes"
-                    :key="index"
-                    :class="[
-                      'item',
-                      { active: secondRingChecked.sizeIndex === index }
-                    ]"
-                    @click="changeSecondRingChecked('sizeIndex', index)"
-                  >
-                    <span class="name ow-h1">{{ item.name }}</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="helper-popover">
-                <span class="helper-name">
-                  {{ $t(`${lang}.USEdition`) }}
-                </span>
-                <el-popover placement="bottom" trigger="hover">
-                  <ring-size></ring-size>
-                  <b slot="reference" class="prompt-icon">!</b>
-                </el-popover>
-              </div>
-              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
-            </div>
-          </div>
-        </div>
-        <div class="sku" v-else>
+        <div class="sku2" v-else>
           <div class="left-properties">
             <div v-if="firstRing.materials.length > 0" class="property-item">
               <span class="item-name">
@@ -541,7 +541,7 @@
                   </li>
                 </ul>
               </div>
-              <div class="helper-popover">
+              <!-- <div class="helper-popover">
                 <span class="helper-name">
                   {{ $t(`${lang}.USEdition`) }}
                 </span>
@@ -550,10 +550,10 @@
                   <b slot="reference" class="prompt-icon">!</b>
                 </el-popover>
               </div>
-              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
+              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a> -->
             </div>
           </div>
-        </div> -->
+        </div>
         <ul class="services-list">
           <li
             v-for="(item, index) in info.goodsServicesJsons || []"
@@ -740,12 +740,12 @@ export default {
       firstRingChecked: {
         materialIndex: 0,
         sizeIndex: 0,
-        // caratIndex: 0
+        caratIndex: 0
       },
       secondRingChecked: {
         materialIndex: 0,
         sizeIndex: 0,
-        // caratIndex: 0
+        caratIndex: 0
       },
       coupleLadyId:'',
       coupleMenId:'',
@@ -787,13 +787,15 @@ export default {
       const allData = JSON.parse(
         JSON.stringify(_this.info.ring || [])
       )
-      console.log("info2",allData)
+      // console.log("info2",allData)
       allData.forEach(item => {
+        // console.log("info2",item.goodsStatus)
         item.images = _this.imageStrToArray(item.goodsImages || '')
         item.name = item.goodsName
         item.price = item.salePrice
         item.to = _this.getRecommendProductRouteInfo(item)
       })
+      
       return allData
     },
     firstRingSimpleDetail() {
@@ -810,10 +812,10 @@ export default {
         ring.sizes.length > 0 && ring.sizes[ringChecked.sizeIndex]
           ? ring.sizes[ringChecked.sizeIndex].id
           : null
-      // const carat =
-      //   ring.carats.length > 0 && ring.carats[ringChecked.caratIndex]
-      //     ? ring.carats[ringChecked.caratIndex].id
-      //     : null
+      const carat =
+        ring.carats.length > 0 && ring.carats[ringChecked.caratIndex]
+          ? ring.carats[ringChecked.caratIndex].id
+          : null
 
       let result = null
       for (let n = 0, length = details.length; n < length; n++) {
@@ -853,15 +855,15 @@ export default {
         ring.sizes.length > 0 && ring.sizes[ringChecked.sizeIndex]
           ? ring.sizes[ringChecked.sizeIndex].id
           : null
-      // const carat =
-      //   ring.carats.length > 0 && ring.carats[ringChecked.caratIndex]
-      //     ? ring.carats[ringChecked.caratIndex].id
-      //     : null
+      const carat =
+        ring.carats.length > 0 && ring.carats[ringChecked.caratIndex]
+          ? ring.carats[ringChecked.caratIndex].id
+          : null
 
       let result = null
       for (let n = 0, length = details.length; n < length; n++) {
         const item = details[n]
-        if (item.material === material && item.size === size ) {
+        if (item.material === material && item.size === size && item.carat === carat ) {
           result = item
           break
         }
@@ -896,7 +898,7 @@ export default {
     }
   },
   mounted() {
-    // console.log("info",this.info)
+    console.log("info",this.firstRing,this.secondRing)
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -936,11 +938,11 @@ export default {
             sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
             return sizes;
         })(),
-        // carats:(() =>{
-        //     const carats = product.carats || []
-        //     // carats.unshift({id:'',name: this.$t(`personal.index.select`)})
-        //     return carats;  
-        // })(),
+        carats:(() =>{
+            const carats = product.carats || []
+            // carats.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return carats;  
+        })(),
         specs: product.specs || [],
         details: product.details || [],
         goodsServicesJsons: (product.goodsServicesJsons || []).map(item => {
@@ -1126,5 +1128,199 @@ export default {
       }
     }
   }
+  .sku2 {
+  width: 720px;
+  padding: 15px 25px;
+  box-sizing: border-box;
+  background: rgba(250, 250, 246, 1);
+  display: flex;
+  // flex-wrap: wrap;
+  // justify-content: space-between;
+
+  .left-properties {
+    width: 230px;
+  }
+  .right-properties {
+    width: 420px;
+  }
+
+  .left-properties,
+  .right-properties {
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    .property-item {
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+
+      &:nth-last-of-type(1) {
+        margin-bottom: 0;
+      }
+
+      .item-name {
+        width: 50px;
+        font-size: 14px;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+      }
+      .property {
+        position: relative;
+        width: 160px;
+        height: 28px;
+        margin-right: 10px;
+        background: rgba(255, 255, 255, 1);
+        border: 1px solid rgba(187, 187, 187, 1);
+        border-radius: 4px;
+        box-sizing: border-box;
+
+        .had-checked {
+          width: 100%;
+          height: 100%;
+          padding: 5px 10px;
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          cursor: pointer;
+
+          .color-icon {
+            flex-grow: 0;
+            flex-shrink: 0;
+            min-width: 0;
+            overflow: hidden;
+            margin-right: 10px;
+            font-size: 14px;
+          }
+          .name {
+            flex-grow: 1;
+            flex-shrink: 1;
+            min-width: 0;
+            overflow: hidden;
+            margin-right: 10px;
+            font-size: 14px;
+            font-family: Microsoft YaHei;
+            font-weight: 400;
+            color: rgba(51, 51, 51, 1);
+          }
+          .drop-down-icon {
+            flex-grow: 0;
+            flex-shrink: 0;
+            min-width: 0;
+            overflow: hidden;
+
+            font-size: 12px;
+            color: #8b766c;
+            font-weight: bold;
+          }
+        }
+
+        .options {
+          list-style: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          min-width: 100%;
+          background: rgba(255, 255, 255, 1);
+          border: 1px solid rgba(187, 187, 187, 1);
+          box-sizing: border-box;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.2s linear;
+          z-index: 5;
+
+          .item {
+            width: 100%;
+            height: 36px;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.2s linear;
+
+            &:hover {
+              background-color: rgba(245, 243, 241, 1);
+              color: #8b766c;
+            }
+
+            &.active {
+              background-color: #cebeb0;
+              color: #ffffff;
+            }
+
+            .color-icon {
+              flex-grow: 0;
+              flex-shrink: 0;
+              min-width: 0;
+              overflow: hidden;
+              margin-right: 10px;
+              font-size: 14px;
+            }
+            .name {
+              flex-grow: 1;
+              flex-shrink: 1;
+              min-width: 0;
+              overflow: hidden;
+              margin-right: 10px;
+              font-size: 14px;
+              font-family: Microsoft YaHei;
+              font-weight: 400;
+              white-space: nowrap;
+            }
+          }
+        }
+
+        &:hover {
+          .options {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+  .one{
+    display: flex;
+  }
+  // .two{
+  //   display: flex;
+  //   justify-content: flex-end;
+  //   margin-top: 10px;
+    .helper-popover {
+      white-space: nowrap;
+
+      .helper-name {
+        font-size: 12px;
+        font-family: Microsoft YaHei;
+        font-weight: 400;
+        color: rgba(102, 102, 102, 1);
+        margin: 0 6px 0 10px;
+      }
+
+      .prompt-icon {
+        cursor: pointer;
+        width: 16px;
+        height: 16px;
+        font-size: 14px;
+        background: #debeab;
+        border-radius: 50%;
+        color: #fff;
+        text-align: center;
+        display: inline-block;
+        line-height: 14px;
+        margin-left: -5px;
+      }
+    }
+    .choose-size{
+      text-decoration: underline;
+      font-size: 12px;
+      color: #aa8a7b;
+      cursor: pointer;
+      margin-left: 6px;
+      line-height: 20px;
+    }
+  // }
+}
 }
 </style>
