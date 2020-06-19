@@ -92,9 +92,9 @@ export default {
         }
       })
     },
-    loginTy(r) {
-      this.loginType = r
-    }
+    // loginTy(r) {
+    //   this.loginType = r
+    // }
   }
 }
 </script>

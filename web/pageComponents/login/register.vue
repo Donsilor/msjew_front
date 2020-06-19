@@ -3,10 +3,10 @@
     <!-- 手机注册 -->
     <div v-if="loginType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
-		<div style="position: fixed;z-index: -999;">
-			<input type="text" name="hidden1" id="text" value="123">
-			<input type="password" name="hidden1" id="password" value="456">
-		</div>
+        <div style="position: fixed;z-index: -999;">
+          <input type="text" name="hidden1" id="text" value="123">
+          <input type="password" name="hidden1" id="password" value="456">
+        </div>
 
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
@@ -182,11 +182,11 @@
     <!-- 邮箱注册 -->
     <div v-if="loginType == 2" class="register-item">
       <form>
-		<div style="position: fixed;z-index: -999;">
-			<input type="text" name="hidden1" id="text" value="123">
-			<input type="password" name="hidden1" id="password" value="456">
-		</div>
-		
+        <div style="position: fixed;z-index: -999;">
+          <input type="text" name="hidden1" id="text" value="123">
+          <input type="password" name="hidden1" id="password" value="456">
+        </div>
+
         <div class="row-flex">
           <div class="relative margin-right-20 margin-bottom-20">
             <div class="register-input">
@@ -404,6 +404,7 @@ export default {
     }
   },
   mounted() {
+    console.log(777,this.$route.query.loginType)
     const _this = this
     _this.$nextTick(() => {})
   },

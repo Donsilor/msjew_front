@@ -353,7 +353,7 @@ export default {
   },
   data() {
     return {
-	  resetType: this.$route.query.type,
+      resetType: this.$route.query.type,
       waiting: false,
       waitingTime: defaultTime,
       waitingText: this.$t(`${langcode}.sendCode`),
@@ -406,8 +406,7 @@ export default {
       password: '',
       password_repetition: '',
       showPassword: false,
-      ajaxLoading: false,
-      resetType: 2
+      ajaxLoading: false
     }
   },
   watch:{

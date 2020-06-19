@@ -3,10 +3,10 @@
     <!-- 手机登录 -->
     <div v-if="loginType == 1" class="login-item">
       <div class="relative margin-bottom-20">
-		<div style="position: fixed;z-index: -999;">
-			<input type="text" name="hidden1" id="text" value="123">
-			<input type="password" name="hidden1" id="password" value="456">
-		</div>
+        <div style="position: fixed;z-index: -999;">
+          <input type="text" name="hidden1" id="text" value="123">
+          <input type="password" name="hidden1" id="password" value="456">
+        </div>
 
         <div class="login-input icon-input">
           <span class="icon">
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <nuxt-link :to="{ path: '/reset-password',query:{type:1} }">
+        <nuxt-link :to="{ path: '/reset-password',query:{type:loginType} }">
           {{ $t(`${lang}.forget`) }}
         </nuxt-link>
       </div>
@@ -95,7 +95,7 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <nuxt-link :to="{ path: '/reset-password',query:{type:2}}">
+        <nuxt-link :to="{ path: '/reset-password',query:{type:loginType}}">
           {{ $t(`${lang}.forget`) }}
         </nuxt-link>
       </div>
@@ -196,6 +196,7 @@ export default {
     })
   },
   mounted () {
+    console.log(11231)
     // console.log("语言",this.$store.state.language)
     // this.$nextTick(()=>{
     //   // 验证是否获取到了上页的url
@@ -225,6 +226,8 @@ export default {
     }else{
       this.ifShowBtn = false
     }
+
+    console.log(this.loginType)
 
     const _this = this
     _this.$nextTick(() => {
@@ -425,7 +428,7 @@ export default {
         this.loginType = 2
       }
 
-      this.$emit('typeK', this.loginType)
+      // this.$emit('typeK', this.loginType)
     }
   }
 }
