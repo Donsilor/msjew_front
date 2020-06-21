@@ -340,7 +340,7 @@ export default {
             //console.error(err)
             _this.requesting = false
             _this.refreshCode()
-            // _this.$errorMessage(err.message)
+            _this.$errorMessage(err.message)
           })
       // 邮箱登录
       }else{
