@@ -13,7 +13,7 @@
       </div>
       <div class="tab-content">
         <!--        登录模块-->
-        <login v-if="activeTab === 'login'" @typeK = "loginTy"></login>
+        <login v-if="activeTab === 'login'"></login>
 
         <!--        注册模块-->
         <register v-if="activeTab === 'register'"></register>
@@ -48,7 +48,7 @@ export default {
         }
       ],
       language: '',
-      loginType: 1 || this.$route.query.loginType
+      loginType: 2
     }
   },
   computed: {},
@@ -80,6 +80,7 @@ export default {
       }
     }
 
+	sessionStorage.setItem("loginType", this.loginType)
   },
   methods: {
     // 切换tab
@@ -87,14 +88,10 @@ export default {
       this.$router.replace({
         path: '/login',
         query: {
-          type: tab.key,
-          loginType: this.loginType
+          type: tab.key
         }
       })
-    },
-    // loginTy(r) {
-    //   this.loginType = r
-    // }
+    }
   }
 }
 </script>

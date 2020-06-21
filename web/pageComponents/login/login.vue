@@ -161,9 +161,8 @@ export default {
       isActive6: false,
       oldUrl:'',
       // 手机注册1,邮箱注册2
-      loginType: 2,
-      ifShowBtn: false,
-      autocomplete: ''
+      loginType: 0,
+      ifShowBtn: false
     }
   },
 
@@ -196,7 +195,6 @@ export default {
     })
   },
   mounted () {
-    console.log(11231)
     // console.log("语言",this.$store.state.language)
     // this.$nextTick(()=>{
     //   // 验证是否获取到了上页的url
@@ -208,18 +206,8 @@ export default {
     //   this.isActive1=true
     //   this.phoneErr=true
     // }
-    this.language = this.$store.state.language;
-
-    // 大陆站点 登录方式为手机登录
-    if(this.$store.state.platform == 20){
-      this.loginType = 1;
-    }else{
-      if(this.language == "zh_CN"){
-        this.loginType = 1
-      }else{
-        this.loginType = 2;
-      }
-    }
+    
+	this.loginType = sessionStorage.getItem("loginType")
 
     if(this.$store.state.platform == 20){
       this.ifShowBtn = true
@@ -428,7 +416,7 @@ export default {
         this.loginType = 2
       }
 
-      // this.$emit('typeK', this.loginType)
+      sessionStorage.setItem("loginType", this.loginType)
     }
   }
 }

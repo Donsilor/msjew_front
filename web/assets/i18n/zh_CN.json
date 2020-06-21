@@ -524,7 +524,7 @@
         "surnameTips": "请输入正确的姓",
         "name": "名称",
         "nameTips": "请输入正确的名称",
-        "email": "邮箱地址",
+        "email": "邮箱地址*",
         "pwdType": "设置密码*",
         "tips": "同意BDD条款及细则方可注册！",
         "repwdType": "确认密码*",

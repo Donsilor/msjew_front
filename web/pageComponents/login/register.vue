@@ -358,7 +358,7 @@ export default {
   data() {
     return {
       url:this.$route.query.url,
-      loginType:this.$route.query.loginType,
+      loginType: 0,
       lang,
       langcode,
       waitingTime: defaultTime,
@@ -404,7 +404,8 @@ export default {
     }
   },
   mounted() {
-    console.log(777,this.$route.query.loginType)
+    this.loginType = sessionStorage.getItem("loginType")
+		
     const _this = this
     _this.$nextTick(() => {})
   },

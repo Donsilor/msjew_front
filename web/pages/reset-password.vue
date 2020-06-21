@@ -7,6 +7,7 @@
 			<input type="text" name="hidden1" id="text" value="123">
 			<input type="password" name="hidden1" id="password" value="456">
 		</div>
+				
         <ul class="schedule">
           <li
             v-for="(item, index) in schedule2"
@@ -167,6 +168,7 @@
 			<input type="text" name="hidden1" id="text" value="123">
 			<input type="password" name="hidden1" id="password" value="456">
 		</div>
+				
         <ul class="schedule">
           <li
             v-for="(item, index) in schedule"
@@ -353,7 +355,7 @@ export default {
   },
   data() {
     return {
-      resetType: this.$route.query.type,
+      resetType: 0,
       waiting: false,
       waitingTime: defaultTime,
       waitingText: this.$t(`${langcode}.sendCode`),
@@ -430,6 +432,7 @@ export default {
   },
   mounted() {
     // console.log("语言",this.$store.state.language)
+	this.resetType = sessionStorage.getItem("loginType")
 
     const _this = this
     _this.$nextTick(() => {})
