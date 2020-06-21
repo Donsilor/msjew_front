@@ -50,7 +50,7 @@
         v-for="(each, n) in categories"
         :key="n"
         class="category"
-        @click="routerTo(each.routerName, each.routerQuery)"
+        @click="routerTo(each.routerName, each.routerQuery, each.ringType)"
       >
         <div class="category-image">
           <img :src="each.image" />
@@ -112,7 +112,7 @@
           <h3 class="title-line"></h3>
           <button
             class="more"
-            @click="routerTo('marriage-ring-single-ring', { type: 'lady' })"
+            @click="routerTo('marriage-ring-single-ring', { style: 160 }, 'lady')"
           >
             {{ lang['more'] }}
           </button>
@@ -121,6 +121,7 @@
       <div class="ring-list">
         <div
           v-for="(each, n) in recommendLadyRings"
+		  v-show="n == 0"
           :key="n"
           class="ring-item"
           @click="toSingleRingDetail(each)"
@@ -147,7 +148,7 @@
           <button
             class="more"
             @click="
-              routerTo('marriage-ring-single-ring', { type: 'gentlemen' })
+              routerTo('marriage-ring-single-ring', { style: 160 }, 'gentlemen')
             "
           >
             {{ lang['more'] }}
@@ -157,6 +158,7 @@
       <div class="ring-list">
         <div
           v-for="(each, n) in recommendGentlemanRings"
+		  v-show="n == 0"
           :key="n"
           class="ring-item"
           @click="toSingleRingDetail(each)"
@@ -182,23 +184,26 @@ export default {
         {
           name: this.LANGUAGE['marriage-ring'].index['marriage-ring'],
           image: '/marriage-ring/category-image-1.png',
-          routerName: 'marriage-ring-pair-ring'
+          routerName: 'marriage-ring-pair-ring',
+		  ringType: ''
         },
         {
           name: this.LANGUAGE['marriage-ring'].index['lady-ring'],
           image: '/marriage-ring/category-image-2.png',
           routerName: 'marriage-ring-single-ring',
           routerQuery: {
-            type: 'lady'
-          }
+            style: 160
+          },
+		  ringType: 'lady'
         },
         {
           name: this.LANGUAGE['marriage-ring'].index['gentlemen-ring'],
           image: '/marriage-ring/category-image-3.png',
           routerName: 'marriage-ring-single-ring',
           routerQuery: {
-            type: 'gentlemen'
-          }
+            style: 160
+          },
+		  ringType: 'gentlemen'
         }
       ],
       activePairRing: 0
@@ -398,10 +403,13 @@ export default {
         })
       }
     },
-    routerTo(name, query = {}) {
+    routerTo(name, query = {}, ringType = '') {
       if (!name) {
         return
       }
+	  if(ringType){
+		sessionStorage.setItem('ringType', ringType)
+	  }
       this.$router.push({
         name: name,
         query: query
@@ -616,7 +624,7 @@ export default {
       width: calc((100% - 15px) / 2);
       /*width: 165px;*/
       /*height: 165px;*/
-      margin-bottom: 15px;
+      margin: 0 auto 15px;
       box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
       img {

@@ -142,7 +142,15 @@ export default {
       this.categoryId = 2
       let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:-1
       this.changeGender(type)
-
+	  
+	  var ringT = sessionStorage.getItem('ringType');
+	  if(ringT){
+		  if(ringT == 'lady'){
+			  this.gender = 42
+		  }else if(ringT == 'gentlemen'){
+			  this.gender = 41
+		  }
+	  }
       // this.madeUpEv()
     })
   },
@@ -174,6 +182,9 @@ export default {
       this.research()
       console.log(this.ev)
     }
+  },
+  beforeDestroy() {
+	  sessionStorage.removeItem('ringType')
   }
 }
 </script>
