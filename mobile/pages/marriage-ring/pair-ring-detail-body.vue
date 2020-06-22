@@ -135,18 +135,18 @@
         </span>
       </div>
     </div>
+    <!-- ['btn-common', canAddCart ? 'btn-gray' : 'btn-pink'] :disabled="!canAddCart"-->
     <div
-      :class="['btn-common', canAddCart ? 'btn-pink' : 'btn-gray']"
-      :disabled="!canAddCart"
+      :class="['btn-common btn-gray', { btnActive: canAddCart }]"
+      
       @click="addCart"
     >
-      {{
-        inSale
-          ? canAddCart
-            ? lang.addCart
-            : lang.noTotalStock
-          : lang.notInSale
+     {{
+        lang.addCart
       }}
+      <!-- {{
+        inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
+      }} -->
     </div>
     <!-- <div class="wish-and-share">
       <i
@@ -332,10 +332,14 @@ export default {
         ) {
           return false
         }
-      } else {
+      } else{
         return false
       }
-      return true
+      if(this.goodsId){
+        return true
+      }
+      // console.log("this.goodsId",this.goodsId)
+      return false
       // return this.firstRing.totalStock > 0 && this.secondRing.totalStock > 0
     },
     inSale() {
@@ -345,7 +349,9 @@ export default {
     }
   },
   mounted(){
-    console.log("ddddd",this.firstRing,this.secondRing)
+    // console.log("ddddd",this.canAddCart)this.firstRingId
+      // const secondRing = _this.secondRingId
+    // console.log("ooooooooo",this.firstRingId,this.secondRingId)
   }
 }
 </script>

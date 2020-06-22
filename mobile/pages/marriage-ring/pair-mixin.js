@@ -104,7 +104,7 @@ export default {
         coupleMenId:'',
         goodsId:'',
         styleId:'',
-        stock:''
+        stock:'',
       }
     },
     ringBanners() {
@@ -318,7 +318,7 @@ export default {
     firstRingSimpleDetail() {
       const list = this.firstRing.details
       let result = null
-      console.log("ggg",this.firstRing)
+      // console.log("ggg",this.firstRing)
       // console.log(
       //   'this.firstRingQuality.checked=====>',
       //   this.firstRingQuality.checked
@@ -396,7 +396,8 @@ export default {
     },
     showAverageScores() {
       return parseInt(this.averageScores || '0')
-    }
+    },
+    
   },
   created() {
     if(this.firstRing.carats.length>0){
@@ -433,7 +434,7 @@ export default {
     }
   },
   mounted() {
-    console.log("this.goodInfo",this.goodInfo)
+    
     // this.$axios carats
     //   .get(`/wap/goodsComments/getAvgLevel`, {
     //     params: {
@@ -507,7 +508,6 @@ export default {
           _this.categoryId = item.categoryId
           _this.goodInfo.salePrice = item.retailMallPrice
           _this.stock = item.stock
-          // console.log("goodinfoitem",item)
         }
       })
     },
