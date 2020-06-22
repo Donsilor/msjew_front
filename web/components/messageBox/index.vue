@@ -139,8 +139,8 @@ export default {
         div {
           width: 370px;
           line-height: 30px;
-          color: #666;
-          font-size: 14px;
+          color: #a59c9c;
+          font-size: 16px;
           text-align: center;
         }
       }

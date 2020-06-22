@@ -46,7 +46,9 @@ export default {
           key: 'register',
           name: this.$t(`${lang}.registration`)
         }
-      ]
+      ],
+      language: '',
+      loginType: 2
     }
   },
   computed: {},
@@ -64,6 +66,21 @@ export default {
     _this.$nextTick(() => {
       _this.activeTab = _this.$route.query.type || 'login'
     })
+    
+    this.language = this.$store.state.language;
+
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
+      this.loginType = 1;
+    }else{
+      if(this.language == "zh_CN"){
+        this.loginType = 1
+      }else{
+        this.loginType = 2;
+      }
+    }
+
+	sessionStorage.setItem("loginType", this.loginType)
   },
   methods: {
     // 切换tab

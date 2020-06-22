@@ -332,7 +332,13 @@ export default {
       stepPayPending:true,//等待处理
       stepPayVerify:false,//支付验证
       stepPaySuccess:false,//支付验证成功
-      verifyCount:0  //支付验证次数
+      verifyCount:0  ,//支付验证次数
+      goodsInfo: {
+        value: 0,
+        currency: '',
+        contents: [],
+        content_type: 'product'
+      }
     }
   },
   mounted() {
@@ -359,6 +365,13 @@ export default {
       //展示成功页面信息
       this.stepPaySuccess = true
       this.stepPayPending = false
+
+      // facebook 购买成功统计-start
+      if(this.$store.state.platform == 30){
+        console.log("facebook购买成功数据统计")
+        fbq('track','Purchase',this.goodsInfo);
+      }
+      // facebook 购买成功统计-end
 
       //移除本地购物车
       this.$store.dispatch('getLocalCartOrder').then(v => {
@@ -388,12 +401,28 @@ export default {
                 }
               })
               .then(res => {
-                console.log("window",this.$route.query);
+                // console.log(7777,this.goodsInfo)
+                // console.log("window",this.$route.query);
+                // console.log('res',res.data)
                 this.data = res.data
-                /*setTimeout(() => {
-                  this.$router.push({path: "/"}); // 强制切换当前路由 path
-                }, 5000);*/
-                // console.log("wwwww",this.data)
+                // /*setTimeout(() => {
+                //   this.$router.push({path: "/"}); // 强制切换当前路由 path
+                // }, 5000);*/
+                // // console.log("wwwww",this.data)
+                this.goodsInfo.value = res.data.payAmount;
+                this.goodsInfo.currency = res.data.coinCode;
+
+                var details = res.data.details;
+
+                details.forEach((o, i) =>{
+                   this.goodsInfo.contents.push({
+                    'id': o.goodsId,
+                    'quantity': 1
+                   })
+                })
+
+                // console.log(777, this.goodsInfo)
+
               })
               .catch(err => {
                 if (!err.response) {
@@ -410,7 +439,11 @@ export default {
                 }
               })
               .then(res => {
-                // console.log("order_sn",res)
+                console.log("order_sn",res)
+
+                this.goodsInfo.value = res.data.productAmount;
+                this.goodsInfo.currency = res.data.coinCode;
+
                 this.data2 = res.data
                 // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
                 /*setTimeout(() => {

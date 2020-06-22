@@ -1,8 +1,13 @@
 <template>
   <div>
-    <!-- 简体中文 -->
-    <div v-if="language === 'zh_CN'" class="register-item">
+    <!-- 手机注册 -->
+    <div v-if="loginType == 1" class="register-item">
       <form onsubmit="return change()" id="myForm" method="POST" class="form-horizontal" role="form">
+        <div style="position: fixed;z-index: -999;">
+          <input type="text" name="hidden1" id="text" value="123">
+          <input type="password" name="hidden1" id="password" value="456">
+        </div>
+
         <div class="row-flex">
           <div class="relative margin-bottom-20 margin-right-20" >
             <div class="register-input">
@@ -15,6 +20,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.surname`)"
                 maxlength="30"
+				autocomplete="off"
               />
             </div>
             <div v-show="lastnameShow"  class="error-tip">
@@ -33,6 +39,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.nameTips`)"
                 maxlength="30"
+				autocomplete="off"
               />
             </div>
             <div v-show="firstnameShow" class="error-tip">
@@ -60,15 +67,16 @@
         <!-- 手机号 -->
         <div class="relative margin-bottom-20">
           <div class="register-input email-val-box">
-            <div class="area-code">中国 +86<i class="iconfont iconxiala"></i></div>
+            <div class="area-code">{{ $t(`${lang}.China`) }} +86<i class="iconfont iconxiala"></i></div>
             <input
               v-model.trim="mobile"
               type="text"
-              @focus="focusEvent2"
-              @blur="blurEvent2"
+			  @focus="focusEvent2"
+              @blur="verifyMobile"
               v-bind:class="{active:isActivemobile}"
-              :placeholder="$t(`${lang}.mailbox`)"
+              :placeholder="$t(`${lang}.phoneBox`)"
               maxlength="11"
+			  autocomplete="off"
             />
           </div>
           <div v-show="mobileShow" class="error-tip">
@@ -86,9 +94,10 @@
                 @blur="blurEvent3"
                 v-bind:class="{active:isActivecode}"
                 type="text"
-                :placeholder="$t(`${lang}.VerificationCode`)"
+                :placeholder="$t(`${lang}.code`)"
                 maxlength="15"
                 @input="inputCode"
+				autocomplete="off"
               />
             </div>
             <div class="send-email-code">
@@ -115,6 +124,7 @@
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.pwdType`)"
               maxlength="30"
+			  autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -133,11 +143,12 @@
               readonly onfocus="this.removeAttribute('readonly');"
               v-bind:class="{active:isActiverepwd}"
               @focus="focusEvent5"
-              @blur="blurEvent5"
+              @blur="verifyPasswordRepetition"
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
-              :placeholder="$t(`${lang}.repwdType`)"
+              :placeholder="$t(`${lang}.repassword`)"
               maxlength="30"
+			  autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -145,7 +156,7 @@
             </div>
           </div>
           <div v-show="repwdShow" class="error-tip">
-            {{ $t(`${lang}.repasswordTips`) }}
+            {{ $t(`${lang}.passwordTips`) }}
           </div>
         </div>
         <div class="agreement row-flex align-item-start justify-center margin-bottom-10" >
@@ -162,15 +173,20 @@
           </p>
         </div>
         <div class="margin-bottom-29">
-          <button v-loading="requesting" type="button" class="submit" @click="registerCN">
+          <button v-loading="requesting" type="button" class="submit" @click="register">
             {{ $t(`${lang}.registration`) }}
           </button>
         </div>
       </form>
     </div>
-    <!-- 英文和繁体 -->
-    <div v-else class="register-item">
+    <!-- 邮箱注册 -->
+    <div v-if="loginType == 2" class="register-item">
       <form>
+        <div style="position: fixed;z-index: -999;">
+          <input type="text" name="hidden1" id="text" value="123">
+          <input type="password" name="hidden1" id="password" value="456">
+        </div>
+
         <div class="row-flex">
           <div class="relative margin-right-20 margin-bottom-20">
             <div class="register-input">
@@ -279,7 +295,7 @@
               v-model.trim="password_repetition"
 
               @focus="focusEvent5"
-              @blur="blurEvent5"
+              @blur="verifyPasswordRepetition"
               v-bind:class="{active:isActiverepwd}"
               class="padding-right-30"
               :type="showPassword ? 'text' : 'password'"
@@ -292,7 +308,7 @@
             </div>
           </div>
           <div v-show="repwdShow" class="error-tip">
-            {{ $t(`${lang}.passwordTips`) }}
+            {{ $t(`${lang}.repassword`) }}
           </div>
         </div>
         <div class="agreement row-flex align-item-start justify-center margin-bottom-10">
@@ -342,6 +358,7 @@ export default {
   data() {
     return {
       url:this.$route.query.url,
+      loginType: 0,
       lang,
       langcode,
       waitingTime: defaultTime,
@@ -358,7 +375,6 @@ export default {
       password_repetition:'',
       agreement: true,
       requesting: false,
-      language: '',
       isActivename:false,
       isActivefisrt:false,
       isActivelast:false,
@@ -378,14 +394,6 @@ export default {
     }
   },
   watch:{
-    mobile(){
-      if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-        this.mobileShow=true
-      }else{
-        this.mobileShow=false
-        this.isActivemobile=false
-      }
-    },
     email(){
       // if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
       //   this.emailShow=true
@@ -393,23 +401,31 @@ export default {
       //   this.emailShow=false
       //   this.isActivemail=false
       // }
-    },
-    password_repetition(){
-      if(this.password_repetition!=this.password){
-        this.repwdShow=true
-      }else{
-        this.isActiverepwd=false
-        this.repwdShow=false
-      }
     }
   },
-  computed: {},
   mounted() {
-    this.language = this.getCookie('language')
+    this.loginType = sessionStorage.getItem("loginType")
+		
     const _this = this
     _this.$nextTick(() => {})
   },
   methods: {
+	verifyMobile(){
+		if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+		  this.mobileShow=true
+		}else{
+		  this.mobileShow=false
+		  this.isActivemobile=false
+		}
+	},
+	verifyPasswordRepetition(){
+	  if(this.password_repetition!=this.password){
+	    this.repwdShow=true
+	  }else{
+	    this.isActiverepwd=false
+	    this.repwdShow=false
+	  }
+	},
     change() {
       //动作：阻止表单数据提交
       return false;
@@ -460,6 +476,7 @@ export default {
     },
     // 手机号/邮箱
     focusEvent2(){
+	  this.mobileShow=false
       this.isActivemobile=true
       this.isActivemail=true
     },
@@ -473,17 +490,8 @@ export default {
     },
     // 确认密码
     focusEvent5(){
+	  this.repwdShow=false
       this.isActiverepwd=true
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     // 点击图标切换密码类型
     changeRegisterPasswordStatus() {
@@ -520,139 +528,141 @@ export default {
       // }
 
     },
-    // 简体中文注册
-    registerCN() {
-      const _this = this
-      if(!_this.agreement) {
-        _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
-        return
-      }
-      if(_this.mobile==''){
-        _this.mobileShow=true
-        return
-      }else if(!_this.code && !_this.password && !_this.password_repetition){
-        _this.isActivemobile=false;
-        _this.mobileShow=false;
-        _this.isActivecode=true;
-        _this.codeShow=true;
-        _this.isActivepwd=true;
-        _this.pwdShow=true;
-        _this.isActiverepwd=true;
-        _this.repwdShow=true;
-        return
-      }
-      // _this.requesting = true
-      this.$axios({
-          method: 'post',
-          url: '/web/site/mobile-register',
-          data: {
-            'mobile':_this.mobile,
-            'firstname':_this.firstname,
-            'lastname':_this.lastname,
-            'code':_this.code,
-            'password':_this.password,
-            'password_repetition':_this.password_repetition
-          }
-        })
-        .then(res => {
-          const data = res.data
-          _this.requesting = false
-          _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-
-		  localStorage.setItem('refreshToken',data.refresh_token);
-		  localStorage.setItem('accessToken',data.access_token);
-          _this.$store.commit('setToken', data.access_token)
-          _this.$store.commit('setUserInfo',data.member)
-            // const lastUrl = _this.$store.state.lastUrl
-            const lastUrl=localStorage.getItem("url")
-          _this.$store.dispatch('synchronizeCart')
-          // const lastUrl = _this.$store.state.lastUrl
-          // _this.$store.commit('setLastUrl', '')
-
-          setTimeout(() => {
-            if (lastUrl) {
-              _this.$router.replace({
-                path: lastUrl
-              })
-            } else {
-              _this.$router.replace({
-                path: '/'
-              })
-            }
-          }, 0)
-        })
-        .catch(err => {
-          // console.log("请求",err)
-          _this.requesting = false
-          _this.$errorMessage(err.message)
-          return
-        })
-    },
     register() {
-      const _this = this
-       if(!_this.agreement) {
-        _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
-        return
-      }
-      if(_this.email==''){
-        _this.emailShow=true
-        return false;
-      }else if(!_this.code && !_this.password && !_this.password_repetition){
-        _this.isActivemail = false;
-        _this.emailShow=false;
-        _this.isActivecode=true;
-        _this.codeShow=true;
-        _this.isActivepwd=true;
-        _this.pwdShow=true;
-        _this.isActiverepwd=true;
-        _this.repwdShow=true;
-        return
-      }
-      this.$axios({
-          method: 'post',
-          url: '/web/site/email-register',
-          data: {
-            'firstname':_this.firstname,
-            'lastname':_this.lastname,
-            'email': _this.email,
-            'code':_this.code,
-            'password':_this.password,
-            'password_repetition':_this.password_repetition
-          }
-        })
-        .then(res => {
-          const data = res.data
-
-          _this.requesting = false
-          _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
-
-		  localStorage.setItem('refreshToken',data.refresh_token);
-		  localStorage.setItem('accessToken',data.access_token);
-          _this.$store.commit('setToken', data.access_token)
-          _this.$store.commit('setUserInfo',data.member)
-          // const lastUrl = _this.$store.state.lastUrl
-          // _this.$store.commit('setLastUrl', '')
-            // const lastUrl = _this.$store.state.lastUrl
-            const lastUrl=localStorage.getItem("url")
-          _this.$store.dispatch('synchronizeCart')
-          setTimeout(() => {
-            if (lastUrl) {
-              _this.$router.replace({
-                path: lastUrl
-              })
-            } else {
-              _this.$router.replace({
-                path: '/'
-              })
+      if(this.loginType == 1){
+        // 手机注册
+        const _this = this
+        if(!_this.agreement) {
+          _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
+          return
+        }
+        if(_this.mobile==''){
+          _this.mobileShow=true
+          return
+        }else if(!_this.code && !_this.password && !_this.password_repetition){
+          _this.isActivemobile=false;
+          _this.mobileShow=false;
+          _this.isActivecode=true;
+          _this.codeShow=true;
+          _this.isActivepwd=true;
+          _this.pwdShow=true;
+          _this.isActiverepwd=true;
+          _this.repwdShow=true;
+          return
+        }
+        // _this.requesting = true
+        this.$axios({
+            method: 'post',
+            url: '/web/site/mobile-register',
+            data: {
+              'mobile':_this.mobile,
+              'firstname':_this.firstname,
+              'lastname':_this.lastname,
+              'code':_this.code,
+              'password':_this.password,
+              'password_repetition':_this.password_repetition
             }
-          }, 0)
+          })
+          .then(res => {
+            const data = res.data
+            _this.requesting = false
+            _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
 
-        })
-        .catch(err => {
-          // console.log("请求",err)
-          _this.requesting = false
-          _this.$errorMessage(err.message)
-        })
+            localStorage.setItem('refreshToken',data.refresh_token);
+            localStorage.setItem('accessToken',data.access_token);
+            _this.$store.commit('setToken', data.access_token)
+            _this.$store.commit('setUserInfo',data.member)
+              // const lastUrl = _this.$store.state.lastUrl
+              const lastUrl=localStorage.getItem("url")
+            _this.$store.dispatch('synchronizeCart')
+            // const lastUrl = _this.$store.state.lastUrl
+            // _this.$store.commit('setLastUrl', '')
+
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              } else {
+                _this.$router.replace({
+                  path: '/'
+                })
+              }
+            }, 0)
+          })
+          .catch(err => {
+            // console.log("请求",err)
+            _this.requesting = false
+            _this.$errorMessage(err.message)
+            return
+          })
+      }else{
+        // 邮箱注册
+        const _this = this
+         if(!_this.agreement) {
+          _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
+          return
+        }
+        if(_this.email==''){
+          _this.emailShow=true
+          return false;
+        }else if(!_this.code && !_this.password && !_this.password_repetition){
+          _this.isActivemail = false;
+          _this.emailShow=false;
+          _this.isActivecode=true;
+          _this.codeShow=true;
+          _this.isActivepwd=true;
+          _this.pwdShow=true;
+          _this.isActiverepwd=true;
+          _this.repwdShow=true;
+          return
+        }
+        this.$axios({
+            method: 'post',
+            url: '/web/site/email-register',
+            data: {
+              'firstname':_this.firstname,
+              'lastname':_this.lastname,
+              'email': _this.email,
+              'code':_this.code,
+              'password':_this.password,
+              'password_repetition':_this.password_repetition
+            }
+          })
+          .then(res => {
+            const data = res.data
+
+            _this.requesting = false
+            _this.$successMessage(_this.$t(`${lang}.registrySuccessful`))
+
+            localStorage.setItem('refreshToken',data.refresh_token);
+            localStorage.setItem('accessToken',data.access_token);
+            _this.$store.commit('setToken', data.access_token)
+            _this.$store.commit('setUserInfo',data.member)
+            // const lastUrl = _this.$store.state.lastUrl
+            // _this.$store.commit('setLastUrl', '')
+              // const lastUrl = _this.$store.state.lastUrl
+              const lastUrl=localStorage.getItem("url")
+            _this.$store.dispatch('synchronizeCart')
+            setTimeout(() => {
+              if (lastUrl) {
+                _this.$router.replace({
+                  path: lastUrl
+                })
+              } else {
+                _this.$router.replace({
+                  path: '/'
+                })
+              }
+            }, 0)
+
+          })
+          .catch(err => {
+            // console.log("请求",err)
+            _this.requesting = false
+            _this.$errorMessage(err.message)
+          })
+      }
     },
     // 倒计时
     countDown() {
@@ -767,12 +777,12 @@ export default {
       this.waitingTime = 0
     },
     inputEvent2(){
-      var that = this;
-      if(this.email.length == 60){
-        that.emailShow = true;
-      }else{
-        this.emailShow = false;
-      }
+      // var that = this;
+      // if(this.email.length == 60){
+      //   that.emailShow = true;
+      // }else{
+      //   this.emailShow = false;
+      // }
     },
     firstName(){
       if(this.firstname.length == 30){

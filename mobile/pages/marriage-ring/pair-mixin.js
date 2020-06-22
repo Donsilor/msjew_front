@@ -432,6 +432,22 @@ export default {
         : [],
       options: this.secondRing.materials
     }
+      // this.secondRingCarat = {
+      //   id: this.secondRing.carats[0].sortType,
+      //   text: this.secondRing.carats[0].content
+      // }
+      if(this.secondRing.materials[0].id){
+        // this.secondRingSize = {
+        //   id: this.secondRing.sizes[0].sortType,
+        //   text: this.secondRing.sizes[0].content
+        // }
+        this.secondRingQuality = {
+          checked: this.secondRing.materials[0].id
+            ? [this.secondRing.materials[0].id]
+            : [],
+          options: this.secondRing.materials
+        }
+      }
   },
   mounted() {
     

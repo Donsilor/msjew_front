@@ -138,7 +138,7 @@
         "Invoicing":"开发票",
         "invo":"发票",
         "email":"电子邮箱",
-        "InvoiceType":"发票类型",        
+        "InvoiceType":"发票类型",
         "InvoiceDetails":"发票详情",
         "HeaderType":"抬头类型",
         "PaperInvoice":"纸质发票",
@@ -187,6 +187,7 @@
         "toast2": "请勾选默认地址",
         "toast4":"请选择支付方式！",
         "toast3": "接收售后凭证的电邮地址输入有误，请重新输入！",
+        "toast5":"您选择的配送地址跟当前所在地区不一致，请重新选择或联系客服处理！",
         "delete": "刪除",
         "inputCode": "输入优惠码",
         "inputOrSelectCode": "输入/选择优惠码",
@@ -248,7 +249,8 @@
         "bankAddress":"银行地址:",
         "SwiftCode":"SWIFT CODE:",
         "uploadPhotos":"上传图片",
-        "Note3":"注：此货币是按照BDD官网汇率作为参考标准."
+        "Note3":"注：此货币是按照BDD官网汇率作为参考标准.",
+        "NotSupportPay":"当前支付方式，不支持USD支付，请返回上个页面切换货币或更换其它支付方式完成支付！"
       },
       "paySuccess": {
         "PayPending1":"订单已提交，系统处理中…请稍等.",
@@ -648,9 +650,9 @@
       "email": {
         "login": "登录",
         "no-account": "注册>",
-        "email": "电邮地址",
+        "email": "邮箱地址",
         "phone": "手机号*",
-        "email-error": "请输入正确的电邮地址",
+        "email-error": "请输入正确的邮箱地址",
         "phone-error": "手机号码格式不正确，仅支持：大陆手机号！",
         "password": "密码*",
         "password-error": "请输入登入密码",
@@ -741,8 +743,9 @@
       "storeName": "香港 - 环贸中心",
       "address": "地址",
       "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
+      "addressDetailUs": "深圳市羅湖區東曉街道獨樹社區布心路3008號IBC商務珠寶大廈A座1306",
       "tel": "电话",
-      "email": "电邮",
+      "email": "邮箱",
       "title": "BDD珠宝商城",
       "bddRecommend": "BDD 精选",
       "diamond": "钻石",
@@ -768,7 +771,7 @@
       "surnameError": "请输入正确的姓氏",
       "mobile": "手机号*",
       "email": "邮箱*",
-      "inputEmail": "请输入电邮地址",
+      "inputEmail": "请输入邮箱地址",
       "emailError": "请输入正确的邮箱地址",
       "phoneError": "手机号码格式不正确，仅支持：大陆手机号！",
       "inputUnder": "在下面输入发送到",
@@ -839,7 +842,8 @@
         "couponMessage": "暂无优惠码",
         "addressMessage": "暂无地址讯息",
         "chooseDiamondContrast": "选择需要对比的钻石",
-        "cartMessage": "您的购物车内暂无商品，去看看心仪的商品"
+        "cartMessage": "您的购物车内暂无商品，去看看心仪的商品",
+        "soleOut": "商品已售罄"
       },
       "footerBar": {
         "custoService": "客户服务",
@@ -1091,7 +1095,8 @@
       "addToBracelet": "添加到手链",
       "lady": "女士",
       "gentlemen": "男士",
-      "general": "通用款"
+      "general": "通用款",
+      "size": "尺寸"
     },
     "listCommons": {
       "sliders": [
@@ -1104,7 +1109,7 @@
         "摆件",
         "挂件",
         "其它"
-        
+
       ],
       "style": "款式",
       "fineness": "成色",
@@ -2145,7 +2150,8 @@
 		"store": "门店",
 		"storeName": "香港 - 环贸中心",
 		"address": "地址",
-		"addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
+    "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
+    "addressDetailUs": "深圳市羅湖區東曉街道獨樹社區布心路3008號IBC商務珠寶大廈A座1306",
 		"tel": "电话",
 		"email": "电邮",
 
@@ -2196,5 +2202,24 @@
 		"msg11": "解除绑定成功！",
 		"msg12": "此卡还未到使用时间！",
 		"msg13": "此卡已超过使用时间！"
+	},
+	"generalize": {
+		"index": {
+			"more": "更多款式",
+			"immediatelyConsult": "立即咨询",
+			"greetCall": "欢迎致电BDD专业人员",
+			"ringUp": "点击拨打",
+			"chooseHappiness": "此刻选择你的幸福",
+			"send": "立即发送",
+			"question": "有任何问题？",
+			"contact1": "联系BDD专业人员，为您解答一切困惑 致电专业人员：",
+			"onlineConsult": "在线咨询",
+			"placeHolder1": "X先生/女士",
+			"placeHolder2": "联系方式",
+			"placeHolder3": "备注信息 # 您的要求等 #",
+			"sendSuccess": "发送成功",
+			"sendFail": "发送失败",
+			"fillMessage": "请填写您的个人信息"
+		}
 	}
 }

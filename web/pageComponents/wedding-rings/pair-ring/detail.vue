@@ -4,7 +4,11 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" @getIdx="getIndex"></product-images>
+				
+		<div class="magn-box">
+			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
+		</div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
@@ -614,7 +618,7 @@
       <recommend-data :recommends="recommends"></recommend-data>
     </section>
     <!--    tab切换-->
-    <ul class="tab">
+    <!-- <ul class="tab">
       <li
         v-for="(item, index) in tabs"
         :key="index"
@@ -623,15 +627,16 @@
       >
         <span>{{ item.name }}</span>
       </li>
-    </ul>
+    </ul> -->
     <!--    商品详情-->
+    <h2 class="detail-name">{{ $t(`${lang}.pairRingDetails`) }}</h2>
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
         <h2>{{ $t(`${lang}.pairRingDetails`) }}</h2>
         <h3>{{ $t(`${lang}.goodsId`) }}：{{ info.goodsCode }}</h3>
       </div>
       <div class="attr-group">
-        <h3 class="group-name">{{ $t(`${lang}.ring01`) }}</h3>
+        <h3 class="group-name">（{{ $t(`${lang}.ring01`) }}）</h3>
         <ul class="attr-list">
           <li
             v-for="(item, index) in firstRing.specs"
@@ -642,9 +647,10 @@
             <span>{{ item.configAttrVal || '--' }}</span>
           </li>
         </ul>
+        <div class="line"></div>
       </div>
       <div class="attr-group">
-        <h3 class="group-name">{{ $t(`${lang}.ring02`) }}</h3>
+        <h3 class="group-name">（{{ $t(`${lang}.ring02`) }}）</h3>
         <ul class="attr-list">
           <li
             v-for="(item, index) in secondRing.specs"
@@ -655,6 +661,7 @@
             <span>{{ item.configAttrVal || '--' }}</span>
           </li>
         </ul>
+        <div class="line"></div>
       </div>
     </section>
     <section class="desc" v-html="info.ringDesc"></section>
@@ -903,6 +910,8 @@ export default {
     console.log("info",this.firstRing,this.secondRing)
     const _this = this
     _this.$nextTick(() => {})
+		
+	this.magnifying = this.thumbnails[0]
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {
@@ -1114,7 +1123,10 @@ export default {
         .catch(err => {
           _this.$errorMessage(`${err.message}`)
         })
-    }
+    },
+	getIndex(i) {
+		this.magnifying = this.thumbnails[i]
+	}
   }
 }
 </script>
@@ -1140,7 +1152,7 @@ export default {
             overflow: hidden;
           }
 
-          span:nth-of-type(2) {
+          span:nth-of-type(3) {
             flex-grow: 1;
             flex-shrink: 1;
             min-width: 0;
@@ -1344,5 +1356,15 @@ export default {
     }
   // }
 }
+}
+
+.detail-page .desc-top .attr-group{
+  width: 100%;
+}
+.detail-page .desc-top .attr-group:nth-of-type(3){
+  margin-top: 20px;
+}
+.detail-page .desc-top .attr-group .group-name{
+  margin: 6px 0 10px;
 }
 </style>

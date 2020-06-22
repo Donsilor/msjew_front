@@ -1,389 +1,398 @@
 <template>
   <div class="diamond-component">
-    <div class="swiper-box">
-      <div v-if="has360" class="btn360" @click="is360 = !is360">
+    <div v-if="this.goodInfo.totalStock > 0">
+      <div class="swiper-box">
+        <div v-if="has360" class="btn360" @click="is360 = !is360">
+          <i
+            :class="[
+              `iconfont`,
+              `iconicon-test3`,
+              `${is360 ? 'cpink' : 'cgary'}`
+            ]"
+          ></i>
+          <span v-show="is360" :class="`${is360 ? 'cpink' : 'cgary'}`">{{
+            lang.diamondClose360
+          }}</span>
+          <span v-show="!is360" :class="`${is360 ? 'cpink' : 'cgary'}`">{{
+            lang.diamondOpen360
+          }}</span>
+        </div>
+        <div v-show="is360" class="box360">
+          <iframe
+            v-if="has360"
+            :src="
+              'https://spins0.arqspin.com/iframe.html?spin=' +
+                goodInfo.goods3ds +
+                '&is=0.16'
+            "
+            width="100%"
+            height="100%"
+            scrolling="no"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+          ></iframe>
+        </div>
+        <swiper v-show="!is360" :auto="true" :duration="5000">
+          <div v-for="(each, n) in goodsImages" :key="n">
+            <nuxt-link
+              :to="
+                `/image-view?path=${$helpers.base64Encode(
+                  JSON.stringify(goodsImages)
+                )}`
+              "
+              ><img :src="each"
+            /></nuxt-link>
+          </div>
+        </swiper>
+      </div>
+      <div class="title">
+        <a :href="goodInfo.goodsGiaImage" target="_blank"
+          ><img
+            v-show="goodInfo.goodsGiaImage"
+            src="~/static/GIA.png"
+            class="gia-certificate"
+            align="right"
+        /></a>
+        {{ goodInfo.goodsName }}
+      </div>
+      <div class="price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
+      <div class="promise-box">
+        <!-- <div
+          v-for="(c, index) in goodInfo.goodsServicesJsons"
+          :key="index"
+          class="promise-info"
+        >
+          <div class="promise-img">
+            <img :src="$IMG_URL + c.img" alt="" />
+          </div>
+          <span>{{ c.name }}</span>
+        </div> -->
+      </div>
+      <!--首次进入-->
+      <div
+        v-if="
+          parseInt($route.query.step) === 1 &&
+            !$route.query.isBack &&
+            inSale &&
+            canAddCart
+        "
+        class="custom-made-word"
+      >
+        {{ lang.cmw }}
+        <div class="triangle" />
+      </div>
+      <div
+        v-if="
+          parseInt($route.query.step) === 1 &&
+            !$route.query.isBack &&
+            inSale &&
+            canAddCart
+        "
+        class="btn-common btn-pink"
+        @click="emitStep(`ring`)"
+      >
+        {{ lang.addToRingTuo }}
+      </div>
+      <!--    <div-->
+      <!--      v-if="-->
+      <!--        parseInt($route.query.step) === 1 &&-->
+      <!--          !$route.query.isBack &&-->
+      <!--          inSale &&-->
+      <!--          canAddCart-->
+      <!--      "-->
+      <!--      class="btn-common btn-pink"-->
+      <!--      @click="addWay = true"-->
+      <!--    >-->
+      <!--      {{ lang.addTo }} >-->
+      <!--    </div>-->
+      <div
+        v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
+        :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+        @click="addCart"
+      >
+        {{
+          inSale
+            ? canAddCart
+              ? lang.addCart
+              : lang.noTotalStock
+            : lang.notInSale
+        }}
+      </div>
+      <div
+        v-if="parseInt($route.query.step) === 2 && !$route.query.isBack"
+        :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+        @click="emitStep(2)"
+      >
+        <span>{{
+          inSale
+            ? canAddCart
+              ? lang.sureCheck
+              : lang.noTotalStock
+            : lang.notInSale
+        }}</span>
+      </div>
+      <!--步骤返回-->
+      <div
+        v-if="$route.query.isBack"
+        :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+        @click="emitStep(`hold`)"
+      >
+        <span>{{
+          inSale
+            ? canAddCart
+              ? lang.sureCheck
+              : lang.noTotalStock
+            : lang.notInSale
+        }}</span>
+      </div>
+      <!-- <div class="wish-and-share">
         <i
           :class="[
-            `iconfont`,
-            `iconicon-test3`,
-            `${is360 ? 'cpink' : 'cgary'}`
+            'iconfont',
+            { 'iconicon-xinyuandan': !inWish },
+            { 'iconxinyuandan-dianji': inWish },
+            { active: inWish }
           ]"
-        ></i>
-        <span v-show="is360" :class="`${is360 ? 'cpink' : 'cgary'}`">{{
-          lang.diamondClose360
-        }}</span>
-        <span v-show="!is360" :class="`${is360 ? 'cpink' : 'cgary'}`">{{
-          lang.diamondOpen360
-        }}</span>
-      </div>
-      <div v-show="is360" class="box360">
-        <iframe
-          v-if="has360"
-          :src="
-            'https://spins0.arqspin.com/iframe.html?spin=' +
-              goodInfo.goods3ds +
-              '&is=0.16'
-          "
-          width="100%"
-          height="100%"
-          scrolling="no"
-          frameborder="0"
-          marginheight="0"
-          marginwidth="0"
-        ></iframe>
-      </div>
-      <swiper v-show="!is360" :auto="true" :duration="5000">
-        <div v-for="(each, n) in goodsImages" :key="n">
-          <nuxt-link
-            :to="
-              `/image-view?path=${$helpers.base64Encode(
-                JSON.stringify(goodsImages)
-              )}`
-            "
-            ><img :src="each"
-          /></nuxt-link>
-        </div>
-      </swiper>
-    </div>
-    <div class="title">
-      <a :href="goodInfo.goodsGiaImage" target="_blank"
-        ><img
-          v-show="goodInfo.goodsGiaImage"
-          src="~/static/GIA.png"
-          class="gia-certificate"
-          align="right"
-      /></a>
-      {{ goodInfo.goodsName }}
-    </div>
-    <div class="price">{{ formatCoin(goodInfo.coinType) }}{{ formatNumber(showPi) }}</div>
-    <div class="promise-box">
-      <!-- <div
-        v-for="(c, index) in goodInfo.goodsServicesJsons"
-        :key="index"
-        class="promise-info"
-      >
-        <div class="promise-img">
-          <img :src="$IMG_URL + c.img" alt="" />
-        </div>
-        <span>{{ c.name }}</span>
+          @click="setWish"
+        />
+        <div />
+        <i
+          :class="[
+            'iconfont',
+            { iconduibi1: !inCompared },
+            { 'iconduibi-shi': inCompared },
+            { active: inCompared }
+          ]"
+          @click="setCompared"
+        />
+        <div />
+        <i class="iconfont iconfb" @click="$shareFacelook()" />
       </div> -->
-    </div>
-    <!--首次进入-->
-    <div
-      v-if="
-        parseInt($route.query.step) === 1 &&
-          !$route.query.isBack &&
-          inSale &&
-          canAddCart
-      "
-      class="custom-made-word"
-    >
-      {{ lang.cmw }}
-      <div class="triangle" />
-    </div>
-    <div
-      v-if="
-        parseInt($route.query.step) === 1 &&
-          !$route.query.isBack &&
-          inSale &&
-          canAddCart
-      "
-      class="btn-common btn-pink"
-      @click="emitStep(`ring`)"
-    >
-      {{ lang.addToRingTuo }}
-    </div>
-    <!--    <div-->
-    <!--      v-if="-->
-    <!--        parseInt($route.query.step) === 1 &&-->
-    <!--          !$route.query.isBack &&-->
-    <!--          inSale &&-->
-    <!--          canAddCart-->
-    <!--      "-->
-    <!--      class="btn-common btn-pink"-->
-    <!--      @click="addWay = true"-->
-    <!--    >-->
-    <!--      {{ lang.addTo }} >-->
-    <!--    </div>-->
-    <div
-      v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
-      :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
-      @click="addCart"
-    >
-      {{
-        inSale
-          ? canAddCart
-            ? lang.addCart
-            : lang.noTotalStock
-          : lang.notInSale
-      }}
-    </div>
-    <div
-      v-if="parseInt($route.query.step) === 2 && !$route.query.isBack"
-      :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
-      @click="emitStep(2)"
-    >
-      <span>{{
-        inSale
-          ? canAddCart
-            ? lang.sureCheck
-            : lang.noTotalStock
-          : lang.notInSale
-      }}</span>
-    </div>
-    <!--步骤返回-->
-    <div
-      v-if="$route.query.isBack"
-      :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
-      @click="emitStep(`hold`)"
-    >
-      <span>{{
-        inSale
-          ? canAddCart
-            ? lang.sureCheck
-            : lang.noTotalStock
-          : lang.notInSale
-      }}</span>
-    </div>
-    <!-- <div class="wish-and-share">
-      <i
-        :class="[
-          'iconfont',
-          { 'iconicon-xinyuandan': !inWish },
-          { 'iconxinyuandan-dianji': inWish },
-          { active: inWish }
-        ]"
-        @click="setWish"
-      />
-      <div />
-      <i
-        :class="[
-          'iconfont',
-          { iconduibi1: !inCompared },
-          { 'iconduibi-shi': inCompared },
-          { active: inCompared }
-        ]"
-        @click="setCompared"
-      />
-      <div />
-      <i class="iconfont iconfb" @click="$shareFacelook()" />
-    </div> -->
-    <div class="ring-details">
-      <div class="details-title">
-        {{ lang.goodsDetail }}
-      </div>
-      <div class="details-sku">
-        {{ lang.goods }}ID：{{ goodInfo.goodsCode }}
-      </div>
-      <div class="sku-table">
-        <div v-for="(b, index) in goodInfo.specs" :key="index">
-          <span>{{ b.configName }}</span>
-          <span>{{ b.configAttrVal }}</span>
+      <div class="ring-details">
+        <div class="details-title">
+          {{ lang.goodsDetail }}
         </div>
-      </div>
-    </div>
-    <div class="details">
-      <div class="details-title">
-        <div>{{ lang.now4c }}</div>
-        <div @click="goTo4C()">{{ lang.getMore4c }} ></div>
-      </div>
-      <div class="details-4c-box">
-        <!--克拉-->
-        <div v-show="force.carat" class="box-4c-title">
-          {{ lang.diamondWight }}：{{ force.carat.toFixed(2) }}-{{ lang.carat }}
+        <div class="details-sku">
+          {{ lang.goods }}ID：{{ goodInfo.goodsCode }}
         </div>
-        <div v-show="force.carat" class="box-4c-carat">
-          <div class="carat-flex">
-            <div class="carat-sao-flex">
-              <div class="radius">(4.1mm)</div>
-              <div class="carat">0.25ct</div>
-              <img src="~/static/diamond-details-carat.jpg" class="p18" />
-            </div>
-            <div class="carat-sao-flex">
-              <div class="radius">(6.4mm)</div>
-              <div class="carat">1ct</div>
-              <img src="~/static/diamond-details-carat.jpg" class="p45" />
-            </div>
-            <div class="carat-sao-flex">
-              <div class="radius">(8.1mm)</div>
-              <div class="carat">2ct</div>
-              <img src="~/static/diamond-details-carat.jpg" class="p60" />
-            </div>
-          </div>
-          <div class="carat-line-and-arrow">
-            <div class="correspondence-line" />
-            <div class="correspondence-line" />
-            <div class="correspondence-line" />
-            <div class="triangle" :style="{ left: caratLeft + '%' }" />
-          </div>
-          <div class="carat-num mcPink">
-            {{ force.carat.toFixed(2) }}{{ lang.caratDiamond }}
-          </div>
-          <div class="carat-desc cl666">
-            {{ lang.remember }}
+        <div class="sku-table">
+          <div v-for="(b, index) in goodInfo.specs" :key="index">
+            <span>{{ b.configName }}</span>
+            <span>{{ b.configAttrVal }}</span>
           </div>
         </div>
-        <!--颜色-->
-        <div v-show="force.color" class="box-4c-title">
-          {{ lang.color }}：
-          <span
-            v-for="(c, index) in CONDITION_INFO.color"
-            v-show="c.id === force.color"
-            :key="index"
-          >
-            {{ c.name }}</span
-          >
+      </div>
+      <div class="details">
+        <div class="details-title">
+          <div>{{ lang.now4c }}</div>
+          <div @click="goTo4C()">{{ lang.getMore4c }} ></div>
         </div>
-        <div v-show="force.color" class="box-4c-color">
-          <img
-            v-for="(c, index) in CONDITION_INFO.color"
-            v-show="c.id === force.color"
-            :key="index"
-            :src="c.url"
-            class="diamond-details-4c-picture"
-          />
-          <div class="triangle-letter">
-            <div class="triangle" />
-            <div class="letter">
-              <div
-                v-for="(c, index) in CONDITION_INFO.color"
-                :key="index"
-                :class="{ active: c.id === force.color }"
-              >
-                {{ c.name }}
+        <div class="details-4c-box">
+          <!--克拉-->
+          <div v-show="force.carat" class="box-4c-title">
+            {{ lang.diamondWight }}：{{ force.carat.toFixed(2) }}-{{ lang.carat }}
+          </div>
+          <div v-show="force.carat" class="box-4c-carat">
+            <div class="carat-flex">
+              <div class="carat-sao-flex">
+                <div class="radius">(4.1mm)</div>
+                <div class="carat">0.25ct</div>
+                <img src="~/static/diamond-details-carat.jpg" class="p18" />
+              </div>
+              <div class="carat-sao-flex">
+                <div class="radius">(6.4mm)</div>
+                <div class="carat">1ct</div>
+                <img src="~/static/diamond-details-carat.jpg" class="p45" />
+              </div>
+              <div class="carat-sao-flex">
+                <div class="radius">(8.1mm)</div>
+                <div class="carat">2ct</div>
+                <img src="~/static/diamond-details-carat.jpg" class="p60" />
               </div>
             </div>
+            <div class="carat-line-and-arrow">
+              <div class="correspondence-line" />
+              <div class="correspondence-line" />
+              <div class="correspondence-line" />
+              <div class="triangle" :style="{ left: caratLeft + '%' }" />
+            </div>
+            <div class="carat-num mcPink">
+              {{ force.carat.toFixed(2) }}{{ lang.caratDiamond }}
+            </div>
+            <div class="carat-desc cl666">
+              {{ lang.remember }}
+            </div>
           </div>
-          <div class="color-desc">
-            <div
+          <!--颜色-->
+          <div v-show="force.color" class="box-4c-title">
+            {{ lang.color }}：
+            <span
               v-for="(c, index) in CONDITION_INFO.color"
               v-show="c.id === force.color"
               :key="index"
             >
-              <span class="mcPink">{{ c.name }}:</span>
-              <span class="cl666">
-                {{ c.desc }}
-              </span>
-            </div>
+              {{ c.name }}</span
+            >
           </div>
-        </div>
-        <!--切割-->
-        <div v-show="force.cut" class="box-4c-title">
-          {{ lang.cut }}：
-          <span
-            v-for="(c, index) in CONDITION_INFO.cut"
-            v-show="c.id === force.cut"
-            :key="index"
-          >
-            {{ c.name }}</span
-          >
-        </div>
-        <div v-show="force.cut" class="box-4c-cut">
-          <img
-            v-for="(c, index) in CONDITION_INFO.cut"
-            v-show="c.id === force.cut"
-            :key="index"
-            :src="c.url"
-            class="diamond-details-4c-picture"
-          />
-          <div class="triangle-letter">
-            <div class="triangle" />
-            <div class="letter">
+          <div v-show="force.color" class="box-4c-color">
+            <img
+              v-for="(c, index) in CONDITION_INFO.color"
+              v-show="c.id === force.color"
+              :key="index"
+              :src="c.url"
+              class="diamond-details-4c-picture"
+            />
+            <div class="triangle-letter">
+              <div class="triangle" />
+              <div class="letter">
+                <div
+                  v-for="(c, index) in CONDITION_INFO.color"
+                  :key="index"
+                  :class="{ active: c.id === force.color }"
+                >
+                  {{ c.name }}
+                </div>
+              </div>
+            </div>
+            <div class="color-desc">
               <div
-                v-for="(c, index) in CONDITION_INFO.cut"
+                v-for="(c, index) in CONDITION_INFO.color"
+                v-show="c.id === force.color"
                 :key="index"
-                :class="{ active: c.id === force.cut }"
               >
-                {{ c.sortCut }}
+                <span class="mcPink">{{ c.name }}:</span>
+                <span class="cl666">
+                  {{ c.desc }}
+                </span>
               </div>
             </div>
           </div>
-          <div class="cut-desc">
-            <div
+          <!--切割-->
+          <div v-show="force.cut" class="box-4c-title">
+            {{ lang.cut }}：
+            <span
               v-for="(c, index) in CONDITION_INFO.cut"
               v-show="c.id === force.cut"
               :key="index"
             >
-              <span class="mcPink">{{ c.sortCut }}:</span>
-              <span class="cl666">
-                {{ c.desc }}
-              </span>
-            </div>
+              {{ c.name }}</span
+            >
           </div>
-        </div>
-        <!--净度-->
-        <div v-show="force.clarity" class="box-4c-title">
-          {{ lang.clarity }}：
-          <span
-            v-for="(c, index) in CONDITION_INFO.clarity"
-            v-show="c.id === force.clarity"
-            :key="index"
-          >
-            {{ c.name }}</span
-          >
-          <div class="goDown">{{ lang.tenTimes }}</div>
-        </div>
-        <div v-show="force.clarity" class="box-4c-clarity">
-          <img
-            v-for="(c, index) in CONDITION_INFO.clarity"
-            v-show="c.id === force.clarity"
-            :key="index"
-            :src="c.url"
-            class="diamond-details-4c-picture"
-          />
-          <div class="triangle-letter">
-            <div class="triangle" />
-            <div class="letter">
+          <div v-show="force.cut" class="box-4c-cut">
+            <img
+              v-for="(c, index) in CONDITION_INFO.cut"
+              v-show="c.id === force.cut"
+              :key="index"
+              :src="c.url"
+              class="diamond-details-4c-picture"
+            />
+            <div class="triangle-letter">
+              <div class="triangle" />
+              <div class="letter">
+                <div
+                  v-for="(c, index) in CONDITION_INFO.cut"
+                  :key="index"
+                  :class="{ active: c.id === force.cut }"
+                >
+                  {{ c.sortCut }}
+                </div>
+              </div>
+            </div>
+            <div class="cut-desc">
               <div
-                v-for="(c, index) in CONDITION_INFO.clarity"
+                v-for="(c, index) in CONDITION_INFO.cut"
+                v-show="c.id === force.cut"
                 :key="index"
-                :class="{ active: c.id === force.clarity }"
               >
-                {{ c.name }}
+                <span class="mcPink">{{ c.sortCut }}:</span>
+                <span class="cl666">
+                  {{ c.desc }}
+                </span>
               </div>
             </div>
           </div>
-          <div class="clarity-desc">
-            <div
+          <!--净度-->
+          <div v-show="force.clarity" class="box-4c-title">
+            {{ lang.clarity }}：
+            <span
               v-for="(c, index) in CONDITION_INFO.clarity"
               v-show="c.id === force.clarity"
               :key="index"
             >
-              <span class="mcPink">{{ c.name }}:</span>
-              <span class="cl666">
-                {{ c.desc }}
-              </span>
+              {{ c.name }}</span
+            >
+            <div class="goDown">{{ lang.tenTimes }}</div>
+          </div>
+          <div v-show="force.clarity" class="box-4c-clarity">
+            <img
+              v-for="(c, index) in CONDITION_INFO.clarity"
+              v-show="c.id === force.clarity"
+              :key="index"
+              :src="c.url"
+              class="diamond-details-4c-picture"
+            />
+            <div class="triangle-letter">
+              <div class="triangle" />
+              <div class="letter">
+                <div
+                  v-for="(c, index) in CONDITION_INFO.clarity"
+                  :key="index"
+                  :class="{ active: c.id === force.clarity }"
+                >
+                  {{ c.name }}
+                </div>
+              </div>
+            </div>
+            <div class="clarity-desc">
+              <div
+                v-for="(c, index) in CONDITION_INFO.clarity"
+                v-show="c.id === force.clarity"
+                :key="index"
+              >
+                <span class="mcPink">{{ c.name }}:</span>
+                <span class="cl666">
+                  {{ c.desc }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div v-show="addWay" class="addWayMask">
-      <div class="addWayBoard">
-        <i class="iconfont iconguanbi close" @click="addWay = false"></i>
-        <div class="clickLineBox">
-          <div class="clickLine" @click="emitStep(`ring`)">
-            <i class="iconfont iconstar-jt"></i>
-            <span>{{ lang.addToRing }}</span>
+      <div v-show="addWay" class="addWayMask">
+        <div class="addWayBoard">
+          <i class="iconfont iconguanbi close" @click="addWay = false"></i>
+          <div class="clickLineBox">
+            <div class="clickLine" @click="emitStep(`ring`)">
+              <i class="iconfont iconstar-jt"></i>
+              <span>{{ lang.addToRing }}</span>
+            </div>
+            <!--          <div class="clickLine" @click="emitStep(`necklace`)">-->
+            <!--            <i class="iconfont icondiamond-pendant"></i>-->
+            <!--            <span>{{ lang.addToNecklace }}</span>-->
+            <!--          </div>-->
+            <!--          <div class="clickLine" @click="emitStep(`bracelet`)">-->
+            <!--            <i class="iconfont iconJewelry-bracelet"></i>-->
+            <!--            <span>{{ lang.addToBracelet }}</span>-->
+            <!--          </div>-->
           </div>
-          <!--          <div class="clickLine" @click="emitStep(`necklace`)">-->
-          <!--            <i class="iconfont icondiamond-pendant"></i>-->
-          <!--            <span>{{ lang.addToNecklace }}</span>-->
-          <!--          </div>-->
-          <!--          <div class="clickLine" @click="emitStep(`bracelet`)">-->
-          <!--            <i class="iconfont iconJewelry-bracelet"></i>-->
-          <!--            <span>{{ lang.addToBracelet }}</span>-->
-          <!--          </div>-->
         </div>
       </div>
     </div>
+    <!-- <div v-else >
+      <soleOut></soleOut>
+    </div> -->
   </div>
 </template>
 
 <script>
 import Mx from './diamond-mixin'
+// import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
   mixins: [Mx],
+  components: {
+    // soleOut
+  },
   computed: {
     canAddCart() {
       return this.goodInfo.totalStock > 0

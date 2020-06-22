@@ -81,6 +81,12 @@ export default {
     // console.log(`12345678============?`)
     // console.log(JSON.stringify(this.$route.query.goodId))
     if (this.$route.query.goodId) {
+      this.$nextTick(() => {
+        this.$nuxt.$loading.start()
+      })
+      
+      this.showPop = true
+
       this.$axios({
         method: `post`,
         url: `/wap/goods/diamond/detail`,
@@ -89,6 +95,9 @@ export default {
         }
       })
         .then(res => {
+          this.$nuxt.$loading.finish()
+          // const _this = this
+          // _this.$nuxt.$loading.finish()
           // console.log(res)
           const mcArr = []
           for (const i in res.materials) {
@@ -169,6 +178,7 @@ export default {
             : ``
         })
         .catch(err => {
+          this.$nuxt.$loading.finish()
           console.log(err)
         })
     }
@@ -214,6 +224,13 @@ export default {
       this.$store
         .dispatch('addCart', goodInfo)
         .then(data => {
+          // facebook 添加购物车统计-start
+          if(this.$store.state.platform == 31){
+            console.log("facebook购物车数据统计")
+            fbq('track', 'AddToCart');
+          }
+          // facebook 添加购物车统计-end
+
           this.$nuxt.$loading.finish()
           this.$toast(this.lang.addCartSuccess)
         })

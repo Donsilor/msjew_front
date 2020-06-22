@@ -5,6 +5,11 @@ export default {
     Layout
   },
   props: {
+    title: {
+      type: String,
+      required: false,
+      default: ''
+    },
     list: {
       type: Array,
       require: false,
@@ -25,7 +30,9 @@ export default {
       lang: this.LANGUAGE.components.swiperTap,
       active: false,
       top: 0,
-      activeLine: 0
+      activeLine: 0,
+      nowIndex: 0,
+      startIndex: -1
     }
   },
   watch: {
@@ -46,7 +53,6 @@ export default {
         this.activeLine > 0 ? -this.activeLine * (100 / this.list.length) : 0
     }
   },
-  computed: {},
   mounted() {
     this.activeLine =
       this.chooseLine > this.list.length - 1
@@ -67,13 +73,13 @@ export default {
     },
     clear() {
       this.$emit('clear', {
-        index: this.activeLine,
-        item: this.list[this.activeLine]
+        index: this.nowIndex,
+        item: this.list[this.nowIndex]
       })
       this.hide()
     },
     //  event
-    touchStart(e) {
+    touchStart(e,k) {
       e.preventDefault()
       let startY = e.targetTouches[0].clientY
       let endY = null
@@ -82,12 +88,12 @@ export default {
         if (startY - endY >= 0 && startY - endY >= 35) {
           goUp()
           this.activeLine += 1
-          if (this.activeLine + 1 > this.list.length) {
-            this.activeLine = this.list.length - 1
+          if (this.activeLine > this.list.length - 4) {
+            this.activeLine = this.list.length - 4
           } else {
             this.top -= 100 / this.list.length
           }
-        } else if (startY - endY <= 0 && startY - endY <= 35) {
+        } else if (startY - endY <= 0 && startY - endY <= -35) {
           goDown()
           this.activeLine -= 1
           if (this.activeLine < 0) {
@@ -111,6 +117,7 @@ export default {
       }
       document.addEventListener('touchmove', touchMove)
       document.addEventListener('touchend', deleteListener)
+      this.nowIndex = k;
     }
   }
 }

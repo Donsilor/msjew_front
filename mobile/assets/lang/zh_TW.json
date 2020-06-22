@@ -186,6 +186,7 @@
       "toast2": "請勾選默認地址",
       "toast4":"請選擇支付方式！",
       "toast3": "接收售後憑證的電郵地址輸入有誤，請重新輸入！",
+      "toast5":"您選擇的配送地址跟當前所在地區不一致，請重新選擇或聯繫客服處理！",
       "delete": "刪除",
       "inputCode": "輸入優惠碼",
       "inputOrSelectCode": "輸入/選擇優惠碼",
@@ -247,7 +248,8 @@
       "bankAddress":"銀行地址:",
       "SwiftCode":"SWIFT CODE:",
       "uploadPhotos":"上傳圖片",
-      "Note3":"注：此貨幣是按照BDD官網匯率作為參考標準."
+      "Note3":"注：此貨幣是按照BDD官網匯率作為參考標準.",
+      "NotSupportPay":"當前支付方式，不支持USD支付，請返回上個頁面切換貨幣或更換其它支付方式完成支付！"
     },
     "paySuccess": {
       "PayPending1":"訂單已提交，系統處理中…請稍等.",
@@ -647,9 +649,9 @@
     "email": {
       "login": "登入",
       "no-account": "没有賬戶？在此登記>",
-      "email": "電郵地址",
+      "email": "郵箱地址",
       "phone": "手機號",
-      "email-error": "請輸入正確的電郵地址",
+      "email-error": "請輸入正確的郵箱地址",
       "phone-error": "手機號碼格式不正確，僅支持：大陸手機號！",
       "password": "密碼",
       "password-error": "請輸入登入密碼",
@@ -740,6 +742,7 @@
     "storeName": "香港 - 環貿中心",
     "address": "地址",
     "addressDetail": "香港中環亞畢諾道3號環球貿易中心2304室（*必須預約）",
+    "addressDetailUs": "深圳市羅湖區東曉街道獨樹社區布心路3008號IBC商務珠寶大廈A座1306",
     "tel": "電話",
     "email": "電郵",
     "title": "BDD珠寶商城",
@@ -765,9 +768,9 @@
     "inputSurname": "請輸入姓氏",
     "surnameError": "請輸入正確的姓氏",
     "mobile": "手機號*",
-    "email": "電郵地址",
-    "inputEmail": "請輸入電郵地址",
-    "emailError": "請輸入正確的電郵地址",
+    "email": "郵箱地址",
+    "inputEmail": "請輸入郵箱地址",
+    "emailError": "請輸入正確的郵箱地址",
     "phoneError": "手機號碼格式不正確，僅支持：大陸手機號！",
     "inputUnder": "在下面輸入發送到",
     "theEmailCode": "的驗證碼。如果沒有收到電子郵件，請查看垃圾郵件文件 夾或稍後點擊發送",
@@ -837,7 +840,8 @@
       "couponMessage": "暂無優惠碼",
       "addressMessage": "暫無地址訊息",
       "chooseDiamondContrast": "選擇需要對比的鑽石",
-      "cartMessage": "您的購物車內暫無商品，去看看心儀的商品"
+      "cartMessage": "您的購物車內暫無商品，去看看心儀的商品",
+      "soleOut": "商品已售罄"
     },
     "footerBar": {
       "custoService": "客戶服務",
@@ -1089,7 +1093,8 @@
     "addToBracelet": "添加到手鏈",
     "lady": "女士",
     "gentlemen": "男士",
-    "general": "通用款"
+    "general": "通用款",
+    "size": "尺寸"
   },
   "listCommons": {
     "sliders": [
@@ -2142,7 +2147,8 @@
 		"store": "門店",
 		"storeName": "香港 - 環貿中心",
 		"address": "地址",
-		"addressDetail": "香港中環亞畢諾道3號環球貿易中心2304室（*必須預約）",
+    "addressDetail": "香港中環亞畢諾道3號環球貿易中心2304室（*必須預約）",
+    "addressDetailUs": "深圳市羅湖區東曉街道獨樹社區布心路3008號IBC商務珠寶大廈A座1306",
 		"tel": "電話",
 		"email": "電郵",
 
@@ -2193,5 +2199,24 @@
 		"msg11": "解除綁定成功！",
 		"msg12": "此卡还未到使用時間！",
 		"msg13": "此卡已超過使用時間！"
+	},
+	"generalize": {
+		"index": {
+			"more": "更多款式",
+			"immediatelyConsult": "立即咨詢",
+			"greetCall": "歡迎致電BDD專業人員",
+			"ringUp": "點擊撥打",
+			"chooseHappiness": "此刻選擇妳的幸福",
+			"send": "立即發送",
+			"question": "有任何問題？",
+			"contact1": "聯系BDD專業人員，為您解答壹切困惑 致電專業人員：",
+			"onlineConsult": "在線咨詢",
+			"placeHolder1": "X先生/女士",
+			"placeHolder2": "聯系方式",
+			"placeHolder3": "備註信息 # 您的要求等 #",
+			"sendSuccess": "發送成功",
+			"sendFail": "發送失敗",
+			"fillMessage": "請填寫您的個人信息"
+		}
 	}
 }

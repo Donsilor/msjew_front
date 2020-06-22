@@ -725,7 +725,7 @@
           <!-- 发票按钮 -->
           <div class="invoice">
 
-            <div class="invoice-btn" v-if="this.areaId === '1'">
+            <div class="invoice-btn" v-if="this.areaId == '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang3}.default`) }}</span>
@@ -1779,7 +1779,7 @@
           <!-- 发票按钮 -->
           <div class="invoice">
 
-            <div class="invoice-btn" v-if="this.areaId === '1'">
+            <div class="invoice-btn" v-if="this.areaId == '1'">
               <div v-show="!iconShow" @click="show2">
                 <img style="width:30px;height:30px" src="../../../static/order/untick.png" alt="">
                 <span>{{ $t(`${lang3}.default`) }}</span>
@@ -2262,7 +2262,7 @@ export default {
         .then(res => {
           this.$store.dispatch('setLocalCartOrder',this.pathTakeIds)
           this.$store.dispatch('setLocalOrder',res)
-          console.log(`good22222======>`, res)
+          // console.log(`good22222======>`, res)
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {

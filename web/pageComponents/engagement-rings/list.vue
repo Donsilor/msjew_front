@@ -426,7 +426,7 @@ export default {
       return allData
     }
   },
-  
+
   mounted() {
     const _this = this
     _this.$nextTick(() => {
@@ -545,7 +545,7 @@ export default {
     height: 37px!important;
     line-height: 37px;
   }
-  
+
   .el-pager, .el-pager li{
     font-size: 16px;
   }

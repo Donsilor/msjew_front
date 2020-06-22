@@ -186,6 +186,7 @@
       "toast2": "Please check the default address",
       "toast4": "Please select a payment method!",
       "toast3": "Incorrect e-mail for receiving after-sales voucher, please input again!",
+      "toast5":"The shipping address is different from billing address ,please contact our customer service or re-select a shipping address. ",
       "delete": "Delete",
       "inputCode": "Input Coupon Code",
       "inputOrSelectCode": "Input/select Coupon Code",
@@ -247,7 +248,8 @@
       "bankAddress":"Bank Address:",
       "SwiftCode":"SWIFT CODE:",
       "uploadPhotos":"Upload  Photos",
-      "Note3":"Note：Currency rate is as referred on BDD website."
+      "Note3":"Note：Currency rate is as referred on BDD website.",
+      "NotSupportPay":"Sorry, USD is not supported by this payment method, please go back to select an available currency or change to another payment method! "
     },
     "paySuccess": {
       "PayPending1":"The order has been submitted, the system is processing ... please wait",
@@ -741,6 +743,7 @@
     "storeName": "Hong Kong. Universal Trade Centre",
     "address": "Address",
     "addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetailUs": "Room 1306, Building A, IBC Business Jewelry Building, No. 3008, Buxin Road, Dushu Community, Dongxiao Street, Luohu District, Shenzhen",
     "tel": "Phone",
     "email": "E-mail",
     "title": "BDD Jewelry Mall",
@@ -836,7 +839,8 @@
       "couponMessage": "No coupons",
       "addressMessage": "No address information",
       "chooseDiamondContrast": "Choose diamonds to compare",
-      "cartMessage": "Your cart is empty now. Go and look for your favorites."
+      "cartMessage": "Your cart is empty now. Go and look for your favorites.",
+      "soleOut": "The Goods Have Sold Out"
     },
     "footerBar": {
       "custoService": "Customer Service",
@@ -914,7 +918,7 @@
       "CoupleRings": "Couple Rings",
       "NecklaceAndPendant": "Necklaces/Pendants",
       "bracelets": "Bracelets/Bangles",
-      "EarringsAndStuds": "Earrings/Stads",
+      "EarringsAndStuds": "Earrings/Studs",
       "DecorationAndPendant": "Decorations/Charms",
       "others": "Others",
       "login":"Please login"
@@ -1086,13 +1090,14 @@
     "addToBracelet": "ADD TO BRACELET",
     "lady": "Women",
     "gentlemen": "Men",
-    "general": "General model"
+    "general": "General model",
+    "size": "size"
   },
   "listCommons": {
     "sliders": [
       "Necklace",
       "Pendant",
-      "Ear stud",
+      "Ear studs",
       "Earring",
       "Bracelet",
       "Bangle",
@@ -2133,7 +2138,8 @@
 		"store": "Store",
 		"storeName": "Hong Kong. Universal Trade Centre",
 		"address": "Address",
-		"addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetail": "Room 2304, Universal Trade Centre, 3 Arbuthnot Road, Central, Hong Kong / （*Make an appointment）",
+    "addressDetailUs": "Room 1306, Building A, IBC Business Jewelry Building, No. 3008, Buxin Road, Dushu Community, Dongxiao Street, Luohu District, Shenzhen",
 		"tel": "Tel",
 		"email": "E-mail",
 
@@ -2184,5 +2190,24 @@
 		"msg11": "Unbind successfully！",
 		"msg12": "This card is not expired！",
 		"msg13": "This card has expired！"
+	},
+	"generalize": {
+		"index": {
+			"more": "更多款式",
+			"immediatelyConsult": "立即咨詢",
+			"greetCall": "歡迎致電BDD專業人員",
+			"ringUp": "點擊撥打",
+			"chooseHappiness": "此刻選擇妳的幸福",
+			"send": "立即發送",
+			"question": "有任何問題？",
+			"contact1": "聯系BDD專業人員，為您解答壹切困惑 致電專業人員：",
+			"onlineConsult": "在線咨詢",
+			"placeHolder1": "X先生/女士",
+			"placeHolder2": "聯系方式",
+			"placeHolder3": "備註信息 # 您的要求等 #",
+			"sendSuccess": "發送成功",
+			"sendFail": "發送失敗",
+			"fillMessage": "請填寫您的個人信息"
+		}
 	}
 }

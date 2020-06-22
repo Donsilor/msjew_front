@@ -80,11 +80,11 @@ export default {
           }
           stArr.push(o)
         }
-        stArr.unshift({
-          content: lang.stArrContent,
-          sortType: ``,
-          sortBy: ``
-        })
+        // stArr.unshift({
+        //   content: lang.stArrContent,
+        //   sortType: ``,
+        //   sortBy: ``
+        // })
         if(infos.carats){
           for (const i in infos.carats) {
             const o = {
@@ -127,6 +127,13 @@ export default {
       this.$store
         .dispatch('addCart', data)
         .then(data => {
+          // facebook 添加购物车统计-start
+          if(this.$store.state.platform == 31){
+            console.log("facebook购物车数据统计")
+            fbq('track', 'AddToCart');
+          }
+          // facebook 添加购物车统计-end
+          
           this.$nuxt.$loading.finish()
           this.$toast(this.lang.addCartSuccess)
         })

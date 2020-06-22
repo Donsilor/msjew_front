@@ -4,7 +4,11 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" @getIdx="getIndex"></product-images>
+
+        <div class="magn-box">
+          <bdd-magnifying :msg="magnifying"></bdd-magnifying>
+        </div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
@@ -257,7 +261,7 @@
       <recommend-data :recommends="recommends"></recommend-data>
     </section>
     <!--    tab切换-->
-    <ul class="tab">
+   <!-- <ul class="tab">
       <li
         v-for="(item, index) in tabs"
         :key="index"
@@ -266,15 +270,17 @@
       >
         <span>{{ item.name }}</span>
       </li>
-    </ul>
+    </ul> -->
     <!--    商品详情-->
+    <h2 class="detail-name">{{ $t(`${lang}.goodsDetails`) }}</h2>
     <section ref="product-desc" class="desc-top">
       <div class="section-name">
-        <h2>{{ $t(`${lang}.goodsDetails`) }}</h2>
-        <h3>{{ $t(`${lang}.goodsId`) }}：{{ info.goodsCode }}</h3>
+        <h3>{{ $t(`${lang}.goodsId`) }}：
+          <span>{{ info.goodsCode }}</span>
+        </h3>
       </div>
       <div class="attr-group">
-        <h3 class="group-name">{{ $t(`${lang}.productParameters`) }}</h3>
+        <!-- <h3 class="group-name">{{ $t(`${lang}.productParameters`) }}:</h3> -->
         <ul class="attr-list">
           <li
             v-for="(item, index) in productInfo.specs"
@@ -285,6 +291,7 @@
             <span>{{ item.configAttrVal || '--' }}</span>
           </li>
         </ul>
+        <div class="line"></div>
       </div>
     </section>
     <section class="desc" v-html="info.goodsDesc"></section>
@@ -420,6 +427,7 @@ export default {
         caratIndex: 0
       },
       jewelleryOptions: this.CONDITION_INFO.jewellery,
+      magnifying: ''
     }
   },
   computed: {
@@ -481,6 +489,8 @@ export default {
     console.log("dddd",this.productInfo)
     const _this = this
     _this.$nextTick(() => {})
+
+	this.magnifying = this.thumbnails[0]
   },
   methods: {
     getCategoryById(categoryId) {
@@ -566,6 +576,9 @@ export default {
         .catch(err => {
           _this.$errorMessage(`${err.message}`)
         })
+    },
+    getIndex(i) {
+      this.magnifying = this.thumbnails[i]
     }
   }
 }

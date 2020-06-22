@@ -3,20 +3,20 @@
     <div class="bg" @click="closeEmit"></div>
     <div class="eject-box">
       <div class="top">
-        <i class="iconfont iconguanbi close" @click="closeEmit"></i>
         <div class="title">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
-        <div class="button">
-          <slot name="button">
-            <button>click</button>
-          </slot>
-        </div>
+        <i class="iconfont iconguanbi close" @click="closeEmit"></i>
       </div>
       <div class="content">
         <slot name="content"></slot>
+      </div>
+      <div class="button">
+        <slot name="button">
+          <button>click</button>
+        </slot>
       </div>
     </div>
   </div>
@@ -57,6 +57,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 22;
   width: 100vw;
   height: 100vh;
   visibility: hidden;
@@ -67,7 +68,7 @@ export default {
 .bg {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.6);
   transition: all 0.1s linear;
 }
 .eject.active .bg {
@@ -93,39 +94,38 @@ export default {
 }
 /*顶部*/
 .top {
+  height: 40px;
+  line-height: 30px;
   padding: 0 15px;
   box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+  border-bottom: 1px solid #f6f6f6;
+  box-sizing:border-box;
 }
 .close {
-  flex-basis: 20px;
-  flex-grow: 1;
-  flex-shrink: 1;
-  text-align: left;
-  font-size: 18px;
-  line-height: 18px;
-  color: #bbbbbb;
+  position: absolute;
+  top: 6px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  color: #d2d2d2;
 }
 .title {
-  flex-basis: 220px;
-  flex-grow: 0;
-  flex-shrink: 0;
   text-align: center;
   font-size: 16px;
-  line-height: 16px;
   color: #333333;
-}
-.button {
-  flex-basis: 30px;
-  flex-grow: 1;
-  flex-shrink: 1;
-  text-align: right;
+  box-sizing: border-box;
 }
 .button .iconfont {
   font-size: 20px;
   line-height: 20px;
   color: #bbbbbb;
+}
+
+.content .swiper-box{
+  margin: 10px 0;
 }
 </style>
