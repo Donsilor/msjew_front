@@ -138,7 +138,7 @@
         "Invoicing":"开发票",
         "invo":"发票",
         "email":"电子邮箱",
-        "InvoiceType":"发票类型",        
+        "InvoiceType":"发票类型",
         "InvoiceDetails":"发票详情",
         "HeaderType":"抬头类型",
         "PaperInvoice":"纸质发票",
@@ -650,9 +650,9 @@
       "email": {
         "login": "登录",
         "no-account": "注册>",
-        "email": "电邮地址",
+        "email": "邮箱地址",
         "phone": "手机号*",
-        "email-error": "请输入正确的电邮地址",
+        "email-error": "请输入正确的邮箱地址",
         "phone-error": "手机号码格式不正确，仅支持：大陆手机号！",
         "password": "密码*",
         "password-error": "请输入登入密码",
@@ -745,7 +745,7 @@
       "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
       "addressDetailUs": "深圳市羅湖區東曉街道獨樹社區布心路3008號IBC商務珠寶大廈A座1306",
       "tel": "电话",
-      "email": "电邮",
+      "email": "邮箱",
       "title": "BDD珠宝商城",
       "bddRecommend": "BDD 精选",
       "diamond": "钻石",
@@ -771,7 +771,7 @@
       "surnameError": "请输入正确的姓氏",
       "mobile": "手机号*",
       "email": "邮箱*",
-      "inputEmail": "请输入电邮地址",
+      "inputEmail": "请输入邮箱地址",
       "emailError": "请输入正确的邮箱地址",
       "phoneError": "手机号码格式不正确，仅支持：大陆手机号！",
       "inputUnder": "在下面输入发送到",
@@ -1109,7 +1109,7 @@
         "摆件",
         "挂件",
         "其它"
-        
+
       ],
       "style": "款式",
       "fineness": "成色",

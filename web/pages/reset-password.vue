@@ -1,8 +1,13 @@
 <template>
   <div>
-    <!-- 简体中文忘记密码 -->
-    <div v-if="this.$store.state.language === 'zh_CN'" class="page">
+    <!-- 手机方式找回密码 -->
+    <div v-if="resetType == 1" class="page">
       <div class="content">
+		<div style="position: fixed;z-index: -999;">
+			<input type="text" name="hidden1" id="text" value="123">
+			<input type="password" name="hidden1" id="password" value="456">
+		</div>
+				
         <ul class="schedule">
           <li
             v-for="(item, index) in schedule2"
@@ -31,6 +36,7 @@
                     class="bottom-border-input"
                     :placeholder="$t(`${lang}.schedule1-phone`)"
                     @keydown.enter="changeSchedule2(2)"
+                    autocomplete="off"
                   />
                 </div>
                 <div v-show="phonetip" class="error-tip">
@@ -76,6 +82,7 @@
                     v-model="code"
                     type="text"
                     :placeholder="$t(`${lang}.schedule1-code`)"
+                    autocomplete="off"
                   />
                 </div>
                 <div class="send-email-code">
@@ -96,13 +103,14 @@
                   :type="showPassword ? 'text' : 'password'"
                   :placeholder="$t(`${lang}.newPassword`)"
                   @keydown.enter="changeSchedule2(3)"
+                  autocomplete="off"
                 />
                 <div class="password-eye" @click="changeRegisterPasswordStatus">
                   <i v-show="!showPassword" class="iconfont iconcloes"></i>
                   <i v-show="showPassword" class="iconfont iconopen"></i>
                 </div>
                 <div class="pwd-error-tip">
-                  {{ $t(`${lang}.newpwdtips`) }}
+                  {{ $t(`${lang}.newPassword`) }}
                 </div>
               </div>
               <div class="input-line relative">
@@ -112,13 +120,14 @@
                   class="bottom-border-input pwdinput"
                   :placeholder="$t(`${lang}.confirmPassword`)"
                   @keydown.enter="changeSchedule2(3)"
+                  autocomplete="off"
                 />
                 <div class="password-eye" @click="changeRegisterPasswordStatus">
                   <i v-show="!showPassword" class="iconfont iconcloes"></i>
                   <i v-show="showPassword" class="iconfont iconopen"></i>
                 </div>
                 <div class="pwd-error-tip">
-                  {{ $t(`${lang}.repwdtips`) }}
+                  {{ $t(`${lang}.confirmPassword`) }}
                 </div>
               </div>
               <div class="button-group">
@@ -152,9 +161,14 @@
         </ul>
       </div>
     </div>
-    <!-- 英文和繁体忘记密码 -->
-    <div v-else class="page">
+    <!-- 邮箱方式找回密码 -->
+    <div v-if="resetType == 2" class="page">
       <div class="content">
+		<div style="position: fixed;z-index: -999;">
+			<input type="text" name="hidden1" id="text" value="123">
+			<input type="password" name="hidden1" id="password" value="456">
+		</div>
+				
         <ul class="schedule">
           <li
             v-for="(item, index) in schedule"
@@ -181,6 +195,7 @@
                   v-model="info.email"
                   class="bottom-border-input"
                   @keydown.enter="changeSchedule(2)"
+                  autocomplete="off"
                 />
               </div>
               <div class="button-group">
@@ -216,6 +231,7 @@
                   v-model="info.code"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.inputEmailCode`)"
+                  autocomplete="off"
                 />
               </div>
               <div class="input-line">
@@ -224,6 +240,7 @@
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.newPassword`)"
                   @keydown.enter="changeSchedule(3)"
+                  autocomplete="off"
                 />
               </div>
               <div class="input-line">
@@ -232,6 +249,7 @@
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.confirmPassword`)"
                   @keydown.enter="changeSchedule(3)"
+                  autocomplete="off"
                 />
               </div>
               <div class="button-group">
@@ -337,6 +355,7 @@ export default {
   },
   data() {
     return {
+      resetType: 0,
       waiting: false,
       waitingTime: defaultTime,
       waitingText: this.$t(`${langcode}.sendCode`),
@@ -389,8 +408,7 @@ export default {
       password: '',
       password_repetition: '',
       showPassword: false,
-      ajaxLoading: false,
-      language: ''
+      ajaxLoading: false
     }
   },
   watch:{
@@ -414,9 +432,11 @@ export default {
   },
   mounted() {
     // console.log("语言",this.$store.state.language)
-    this.language = this.getCookie('language')
+	this.resetType = sessionStorage.getItem("loginType")
+
     const _this = this
     _this.$nextTick(() => {})
+
   },
   methods: {
     // 点击图标切换密码格式
@@ -424,16 +444,6 @@ export default {
       // const info = JSON.parse(JSON.stringify(this.info))
       this.showPassword = !this.showPassword
       // this.info = info
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     // 倒计时
     countDown() {
@@ -446,7 +456,7 @@ export default {
           _this.waitingText = _this.$t(`${langcode}.sendCode`)
           _this.waitingTime = defaultTime
         } else {
-         
+
           _this.waitingText = `${_this.$t(`${langcode}.hadSend`)}(${
             _this.waitingTime
           }s)`
@@ -562,7 +572,7 @@ export default {
       if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
         throw new Error (this.$t(`${lang}.mobileTips`))
       }
-     
+
     },
     emialtip(){
       if (this.info.email=='') {
@@ -634,7 +644,7 @@ export default {
       //   _this.ajaxLoading = true
       //   switch (key) {
       //     case 1:
-            
+
       //       break
       //     case 2:
       //       try {
@@ -768,7 +778,7 @@ export default {
       const _this = this
       return new Promise((resolve, reject) => {
         if (!_this.code) {
-          reject(new Error(_this.$t(`${lang}.schedule2-codetips`))) 
+          reject(new Error(_this.$t(`${lang}.schedule2-codetips`)))
         }
         if (!_this.password) {
           reject(new Error(_this.$t(`${lang}.newPassword`)))
@@ -793,7 +803,7 @@ export default {
               resolve(res)
             // }else {
             //   throw new Error (res.message)
-            // }  
+            // }
           })
           .catch(err => {
             reject(err)
@@ -830,7 +840,7 @@ export default {
               resolve(res)
             // } else {
             //   throw new Error (res.message)
-            // }  
+            // }
           })
           .catch(err => {
             reject(err)

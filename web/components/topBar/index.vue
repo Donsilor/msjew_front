@@ -1990,6 +1990,20 @@ export default {
     },
     setLanguage(lang) {
       this.$store.commit('setLanguage', lang)
+	  
+	  var platform = this.$store.state.platform;
+	  var loginType = 2;
+	  if(platform == 20){
+		  loginType = 1
+	  }else{
+		  if(lang == 'zh_CN'){
+			  loginType = 1
+		  }else{
+			  loginType = 2
+		  }
+	  }
+	  
+	  sessionStorage.setItem('loginType', loginType)
       window.location.reload()
     },
     logout() {
