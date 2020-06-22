@@ -139,30 +139,87 @@
           <div class="t2">{{ $t(`${lang}.goodsNum`) }}</div>
           <div class="t3">{{ $t(`${lang}.goodsPrice`) }}</div>
         </div>
-        <div
-          v-for="(d, _index) in data.details"
-          :key="_index"
-          class="goods-details"
-        >
-          <nuxt-link :to="goToDetail(d)" target="_blank">
-            <div class="t1">
-              <div class="good-img">
-                <img :src="IMG_URL + d.goodsImages" />
-              </div>
-              <div class="good-desc">
-                <div class="good-name">{{ d.goodsName }}</div>
-                <div class="good-sku">SKU：{{ d.goodsCode }}</div>
-                <div class="details">
-                  <span v-for="(v, k) in d.detailSpecs" :key="k"
-                    >{{ v.name }}：{{ v.value }}</span
-                  >
+        <!-- 单品 -->
+        <div v-if="data.details[0].categoryId !== 19 && data.details.length !== 2" class="detail-info single">
+          <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
+            <nuxt-link :to="goToDetail(d)" target="_blank">
+              <div class="t1">
+                <div class="good-img">
+                  <img :src="IMG_URL + d.goodsImages" />
+                </div>
+                <div class="good-desc">
+                  <div class="good-name">{{ d.goodsName }}</div>
+                  <div class="good-sku">SKU：{{ d.goodsCode }}</div>
+                  <div class="details">
+                    <span v-for="(v, k) in d.detailSpecs" :key="k"
+                      >{{ v.name }}：{{ v.value }}</span
+                    >
+                  </div>
                 </div>
               </div>
+            </nuxt-link>
+            <div class="t2">1</div>
+            <div class="t3">
+              {{ formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
             </div>
-          </nuxt-link>
-          <div class="t2">1</div>
-          <div class="t3">
-            {{ formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+          </div>
+        </div>
+        <!-- 对戒 -->
+        <div v-if="data.details[0].categoryId == '19'" class="detail-info double">
+          <div  class="goods-details">
+            <nuxt-link :to="goToDetail(data.details[0])" target="_blank">
+              <div class="t1">
+                <div class="good-img">
+                  <img :src="IMG_URL + data.details[0].goodsImages" />
+                </div>
+                <div class="good-name">{{ data.details[0].goodsName }}</div>
+                <div class="good-desc"> 
+                  <div class="dec" v-for="(d, _index) in data.details[0].ring" :key="_index">
+                    
+                    <div class="good-sku">SKU：{{ data.details[0].goodsCode }}</div>
+                    <div class="details">
+                      <span v-for="(v, k) in d.lang.goods_spec" :key="k"
+                        >{{ v.attr_name }}：{{ v.attr_value }}</span
+                      >
+                      <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
+                          ({{ a }})
+                      </span>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </nuxt-link>
+            <div class="t2">1</div>
+          </div>
+            <div class="t3">
+              <!-- d.goodsPrice -->
+              {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
+            </div>
+        </div>
+        <!-- 定制 -->
+        <div v-if="data.details.length === 2" class="detail-info customization">
+          <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
+            <nuxt-link :to="goToDetail(d)" target="_blank">
+              <div class="t1">
+                <div class="good-img">
+                  <img :src="IMG_URL + d.goodsImages" />
+                </div>
+                <div class="good-desc">
+                  <div class="good-name">{{ d.goodsName }}</div>
+                  <div class="good-sku">SKU：{{ d.goodsCode }}</div>
+                  <div class="details">
+                    <span v-for="(v, k) in d.detailSpecs" :key="k"
+                      >{{ v.name }}：{{ v.value }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </nuxt-link>
+            <div class="t2">1</div>
+            <div class="t3">
+              {{  formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+            </div>
           </div>
         </div>
         <div class="goods-bot-bar" />
@@ -318,7 +375,7 @@
           <div class="info-line" v-for="item in cardList">
             <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
+              -{{ formatCoin(data.coinCode) }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
             </div>
           </div>
           <div class="info-line">
@@ -403,7 +460,8 @@ export default {
       },
       type:'',
       headType:'',
-      cardList: []
+      cardList: [],
+      doubleRingGoodPrice:'' //对戒商品价格
     }
   },
   computed: {
@@ -485,13 +543,14 @@ export default {
           console.log("this.data",this.data)
           this.invoice = res.data.invoice
           this.orderStatus = res.data.orderStatus
-          console.log("data",this.orderStatus)
+          // console.log("data",this.orderStatus)
           this.data.orderTime = moment(this.data.orderTime).format(
             'YYYY-MM-DD HH:mm:ss'
           )
           this.data.details.forEach(obj => {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
+            this.doubleRingGoodPrice = obj.goodsPrice
           })
           if(!this.data.invoice.isElectronic){
             this.type = this.$t(`${lang_invoice}.PaperInvoice`)
@@ -523,13 +582,13 @@ export default {
         path: '/',
         query: {}
       }
-
-      if (obj.groupType === 1) {
+      const ct = obj.categoryId
+      if (ct === 19) {
         // console.log(`对戒💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.groupId.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.goodsId.replace(/\//g, '')}`,
           query: {
-            goodId: obj.groupId,
+            goodId: obj.goodsId,
             ringType: 'pair'
           }
         }
@@ -817,7 +876,11 @@ export default {
         }
       }
     }
+    // .double{
+      
+    // }
     .goods-info {
+     
       .goods-info-title {
         width: 100%;
         box-sizing: border-box;
@@ -840,79 +903,272 @@ export default {
           width: 56+ (113/2)+138px;
         }
       }
-      .goods-details {
-        width: 100%;
-        box-sizing: border-box;
-        display: flex;
-        padding: 20px 0 20px 19px;
-        border-top: 1px solid rgba(230, 230, 230, 1);
-        align-items: center;
-        .t1 {
-          width: 936-250.5-163.5-20px;
+      .single{
+        .goods-details {
+          width: 100%;
+          box-sizing: border-box;
           display: flex;
+          padding: 20px 0 20px 19px;
+          border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
-          justify-content: space-between;
-          .good-img {
-            width: 70px;
-            height: 70px;
-            border: 1px solid rgba(230, 230, 230, 1);
-            img {
-              width: 68px;
-              height: 68px;
-              display: block;
+          .t1 {
+            width: 936-250.5-163.5-20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .good-img {
+              width: 70px;
+              height: 70px;
+              border: 1px solid rgba(230, 230, 230, 1);
+              img {
+                width: 68px;
+                height: 68px;
+                display: block;
+              }
             }
-          }
-          .good-desc {
-            width: 936-250.5-163.5-20-70-20px;
-            height: 70px;
-            color: #333;
-            overflow: hidden;
-            .good-name {
-              font-size: 16px;
-              line-height: 16px;
-              height: 16px;
-              width: 100%;
+            .good-desc {
+              width: 936-250.5-163.5-20-70-20px;
+              height: 70px;
+              color: #333;
               overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              margin-bottom: 9px;
-            }
-            .good-sku {
-              font-size: 12px;
-              line-height: 12px;
-              height: 12px;
-              margin-bottom: 18px;
-            }
-            .details {
-              font-size: 12px;
-              line-height: 12px;
-              height: 12px;
-              width: 100%;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              span {
-                margin-right: 10px;
+              .good-name {
+                font-size: 16px;
+                line-height: 16px;
+                height: 16px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-bottom: 9px;
+              }
+              .good-sku {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                margin-bottom: 18px;
+                color:#aaa;
+              }
+              .details {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color:#aaa;
+                span {
+                  margin-right: 10px;
+                }
               }
             }
           }
+          .t2 {
+            text-align: center;
+            width: 51+ (113/2)+56px;
+            color: #333;
+            font-size: 16px;
+          }
+          .t3 {
+            text-align: center;
+            width: 56+ (113/2)+138px;
+            color: #333;
+            font-family: twCenMt;
+            font-size: 20px;
+          }
         }
-        .t2 {
-          text-align: center;
-          width: 51+ (113/2)+56px;
-          color: #333;
-          font-size: 16px;
-        }
-        .t3 {
-          text-align: center;
-          width: 56+ (113/2)+138px;
+      }
+      .double{
+        position: relative;
+        .t3{
+          position: absolute;
+          right: 144px;
+          top:43%;
           color: #333;
           font-family: twCenMt;
           font-size: 20px;
         }
+        .goods-details:nth-child(2) {
+          border-top: 0;
+          // .good-img{
+          //   display: none;
+          // }
+        }
+        .good-name {
+          // margin-bottom: 15px!important;
+          position: absolute;
+          top: 10px;
+          left: 100px;
+        }
+        .dec{
+          // margin-left: 250px;
+          padding: 0px 10px 0px 10px;
+        }
+        .dec:last-child{
+          .good-name{
+            display: none;
+          }
+          .good-sku {
+            display: none;
+          }
+        }
+        // .good-desc{
+        //   height: 100%!important;
+        // }
+        .good-sku {
+          margin-bottom: 10px!important;
+          margin-top: 5px;
+        }
+        .goods-details {
+          width: 100%;
+          box-sizing: border-box;
+          display: flex;
+          padding: 30px 0 20px 19px;
+          border-top: 1px solid rgba(230, 230, 230, 1);
+          align-items: center;
+          position: relative;
+          .t1 {
+            width: 936-250.5-163.5-20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .good-img {
+              width: 70px;
+              height: 70px;
+              border: 1px solid rgba(230, 230, 230, 1);
+              img {
+                width: 68px;
+                height: 68px;
+                display: block;
+              }
+            }
+            .good-desc {
+              width: 936-250.5-163.5-20-70-20+18px;
+              height: 70px;
+              color: #333;
+              // overflow: hidden;
+              .good-name {
+                font-size: 16px;
+                line-height: 16px;
+                height: 16px;
+                width: 100%;
+                // overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                // margin-bottom: 9px;
+                
+              }
+              .good-sku {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                margin-bottom: 18px;
+                color:#aaa;
+              }
+              .details {
+                font-size: 12px;
+                line-height: 20px;
+                height: 20px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color:#aaa;
+                span {
+                  margin-right: 10px;
+                }
+              }
+            }
+          }
+          .t2 {
+            text-align: center;
+            width: 51+ (113/2)+56px;
+            color: #333;
+            font-size: 16px;
+          }
+          .t3 {
+            text-align: center;
+            width: 56+ (113/2)+138px;
+            color: #333;
+            font-family: twCenMt;
+            font-size: 20px;
+          }
+        }
       }
-      .goods-details:nth-child(2) {
-        border-top: 0;
+      .customization{
+        .goods-details {
+          width: 100%;
+          box-sizing: border-box;
+          display: flex;
+          padding: 20px 0 20px 19px;
+          border-top: 1px solid rgba(230, 230, 230, 1);
+          align-items: center;
+          .t1 {
+            width: 936-250.5-163.5-20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            .good-img {
+              width: 70px;
+              height: 70px;
+              border: 1px solid rgba(230, 230, 230, 1);
+              img {
+                width: 68px;
+                height: 68px;
+                display: block;
+              }
+            }
+            .good-desc {
+              width: 936-250.5-163.5-20-70-20px;
+              height: 70px;
+              color: #333;
+              overflow: hidden;
+              .good-name {
+                font-size: 16px;
+                line-height: 16px;
+                height: 16px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                margin-bottom: 9px;
+              }
+              .good-sku {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                margin-bottom: 18px;
+                color:#aaa;
+              }
+              .details {
+                font-size: 12px;
+                line-height: 12px;
+                height: 12px;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                color:#aaa;
+                span {
+                  margin-right: 10px;
+                }
+              }
+            }
+          }
+          .t2 {
+            text-align: center;
+            width: 51+ (113/2)+56px;
+            color: #333;
+            font-size: 16px;
+          }
+          .t3 {
+            text-align: center;
+            width: 56+ (113/2)+138px;
+            color: #333;
+            font-family: twCenMt;
+            font-size: 20px;
+          }
+        }
       }
     }
     .goods-bot-bar {

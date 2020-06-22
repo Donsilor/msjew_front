@@ -338,7 +338,7 @@ export default {
       url:'',
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
-      coin: this.$store.state.coin,
+      coin: this.$store.state.coin, 
       form: [],
       actionLink: '',
       list2: [

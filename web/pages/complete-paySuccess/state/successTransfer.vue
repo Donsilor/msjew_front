@@ -137,42 +137,42 @@
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.goodsPrice`) }}</div>
             <div class="ff">
-              {{ data.coinCode }} {{ formatMoney(data.productAmount) }}
+              {{ formatCoin(data.coinCode) }} {{ formatMoney(data.productAmount) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.coupon`) }}</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatMoney(data.preferFee) }}
+              -{{ formatCoin(data.coinCode) }} {{ formatMoney(data.preferFee) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.freight`) }}</div>
             <div class="ff">
-              +{{ data.coinCode }} {{ formatMoney(data.logisticsFee) }}
+              +{{ formatCoin(data.coinCode) }} {{ formatMoney(data.logisticsFee) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.tex`) }}</div>
             <div class="ff">
-              +{{ data.coinCode }} {{ formatMoney(data.taxFee) }}
+              +{{ formatCoin(data.coinCode) }} {{ formatMoney(data.taxFee) }}
             </div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.insurance`) }}</div>
             <div class="ff">
-              +{{ data.coinCode }} {{ formatMoney(data.safeFee) }}
+              +{{ formatCoin(data.coinCode) }} {{ formatMoney(data.safeFee) }}
             </div>
           </div>
           <div v-if="data.transPreferFee" class="info-line">
             <div class="label">{{ $t(`${lang}.transPreferFee`) }}</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatMoney(data.transPreferFee) }}
+              -{{ formatCoin(data.coinCode) }} {{ formatMoney(data.transPreferFee) }}
             </div>
           </div>
           <div class="big-info">
             <div>{{ $t(`${lang}.orderTotal`) }}</div>
-            <div>{{ data.coinCode }} {{ formatMoney(data.orderAmount) }}</div>
+            <div>{{ formatCoin(data.coinCode) }} {{ formatMoney(data.orderAmount) }}</div>
           </div>
         </div>
       </div>

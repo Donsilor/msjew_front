@@ -4,9 +4,10 @@
       v-for="(item, index) in recommends"
       :key="index"
       :class="['data-item', 'product']"
+      v-show="item.goodsStatus === 2"
     >
       <!--          商品数据-->
-      <nuxt-link :to="item.to || { path: '/' }">
+      <nuxt-link :to="item.to || { path: '/' }" >
         <div class="product-content">
           <div class="product-image">
             <img class="main-image" :src="item.images[0]" />
@@ -65,7 +66,10 @@ export default {
         ]
       }
     }
-  }
+  },
+  // mounted(){
+  //   console.log("recommends",this.recommends)
+  // }
 }
 </script>
 

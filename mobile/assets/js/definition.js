@@ -296,12 +296,12 @@ export default language => {
       ],
       coupleRings: [
         {
-          id: 1,
+          id: 107,
           image: `/ring-type/classic.png`,
           name: lang.style.ClassicSeries
         },
         {
-          id: 2,
+          id: 108,
           image: `/ring-type/Row.png`,
           name: lang.style.ChannelSetSeries
         }

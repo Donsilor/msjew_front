@@ -40,65 +40,79 @@
         </div>
       </div>
       <div class="details">
-        <div
-          v-for="(detail, n) in details"
-          :key="n"
-          class="products-item"
-          @click="toDetail(detail)"
-          >
-          <img :src="detail.image" />
-          <div v-if="detail.groupType !== 0" class="group-type">
-            {{ detail.groupTypeText }}
-          </div>
-
-          <!--              单品-->
-          <div v-if="detail.groupType === 0" class="right">
-            <h4>
-              {{ detail.goodsName }}
-            </h4>
-            <span>x 1</span>
-            <p>SKU：{{ detail.data[0].goodsCode }}</p>
-            <p>{{ detail.data[0].detailSpecs }}</p>
-            <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
-          </div>
-
-          <!--              对戒-->
-          <div v-if="detail.groupType === 1" class="right">
-            <h4>
-              {{ detail.goodsName }}
-            </h4>
-            <span>x 1</span>
-            <p>SKU：{{ detail.data[0].goodsCode }}</p>
-            <p>{{ detail.data[0].detailSpecs }}</p>
-            <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b>
-            <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
-            <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-            <b
-              >{{ formatCoin(info.coinCode) }}
-              {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+        <div  class="single">
+          <div
+            v-for="(detail, n) in details"
+            :key="n"
+            class="products-item"
+            @click="toDetail(detail)"
             >
-          </div>
+            <img :src="detail.image" />
+            <div v-if="detail.groupType !== 0" class="group-type">
+              {{ detail.groupTypeText }}
+            </div>
 
-          <!--              定制-->
-          <div v-if="detail.groupType === 2" class="right">
-            <h4 class="order-ellipsis">
-              {{ detail.data[0].goodsName }}
-            </h4>
-            <span>x 1</span>
-            <p>SKU：{{ detail.data[0].goodsCode }}</p>
-            <p>{{ detail.data[0].detailSpecs }}</p>
-            <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
-            <h4 class="order-ellipsis">
-              {{ detail.data[1].goodsName }}
-            </h4>
-            <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
-            <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-            <b
-              >{{ info.coinCode }}
-              {{ detail.data[1] && detail.data[1].goodsPrice }}</b
-            >
+            <!--              单品-->
+            <div v-if="detail.groupType === 0 && detail.data[0].categoryId !== 19" class="right single">
+              <h4>
+                {{ detail.goodsName }}
+              </h4>
+              <span>x 1</span>
+              <p>SKU：{{ detail.data[0].goodsCode }}</p>
+              <p>{{ detail.data[0].detailSpecs }}</p>
+              <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
+            </div>
+
+            <!--              对戒-->
+            <div v-if="detail.data[0].categoryId == '19'" class="right double">
+              <div class="dec" v-for="(ring, _n) in detail.data[0].ring" :key="_n">
+                <h4>
+                  {{ detail.goodsName }}
+                </h4>
+                <!-- <span>x 1</span> -->
+                <p class="sku">SKU：{{ detail.data[0].goodsCode }}</p> 
+                <p>{{ getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value) }}</p>
+                <!-- <b>{{ info.coinCode }} {{ detail.data[0].goodsPrice }}</b> -->
+                <!-- <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                <b
+                  >{{ info.coinCode }}
+                  {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                > -->
+              </div> 
+              <div class="num">
+                <span>x 1</span>
+              </div>
+              <div class="price">
+                <b
+                  >{{ formatCoin(info.coinCode) }}
+                  {{ detail.data[0] && detail.data[0].goodsPrice }}</b
+                >
+              </div>
+            </div>
+
+            <!--              定制-->
+            <div v-if="detail.groupType === 2" class="right customization">
+              <h4 class="order-ellipsis">
+                {{ detail.data[0].goodsName }}
+              </h4>
+              <span>x 1</span>
+              <p>SKU：{{ detail.data[0].goodsCode }}</p>
+              <p>{{ detail.data[0].detailSpecs }}</p>
+              <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
+              <h4 class="order-ellipsis">
+                {{ detail.data[1].goodsName }}
+              </h4>
+              <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+              <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+              <b
+                >{{ formatCoin(info.coinCode) }}
+                {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+              >
+            </div>
           </div>
         </div>
+        
 
        <!--        发货信息-->
         <div v-if="info.express" class="bundle-item">
@@ -263,7 +277,7 @@
 						({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
 					</em>
 				</span>
-			<span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
+			<span class="active">-{{ formatCoin(info.coinCode) }} {{ item.useAmount }} </span>
 		  </li>
           <li v-if="info.preferFee" class="active">
             <span>{{ lang.offer }}： </span
@@ -421,6 +435,7 @@ export default {
         JSON.stringify(this.info.details ? this.info.details : [])
       )
       const result = this.dealDetailsData(data)
+      console.log("detail",result)
       return result
     },
     outDetails() {
@@ -446,6 +461,28 @@ export default {
     })
   },
   methods: {
+    // 对戒属性数值转化成字符串
+    getDubleConfig(good_spec,goods_attr) {
+      let text = ''
+      if (good_spec.length > 0) {
+        good_spec.map((item, index) => {
+        // console.log("good_spec",item)
+
+          if (index === good_spec.length - 1) {
+            text = text + item.attr_value
+          } else {
+            text = text + item.attr_value + ' /  '
+          }
+        }) 
+      }
+
+      if (goods_attr) {
+       for (let i in goods_attr) {
+          text = text + ' /  '+goods_attr[i] 
+        }
+      }
+      return text
+    },
     statusText(status) {
       const map = {
         0: this.lang.cancelOrder,
@@ -571,7 +608,7 @@ export default {
         }
         return item
       })
-
+      console.log("result",result)
       return result
     },
     getInfo() {
@@ -593,6 +630,7 @@ export default {
             ? Moment(data.payTime).format('YYYY/MM/DD HH:mm:ss')
             : ''
           this.info = data
+          console.log("this.info",this.info)
           this.invoice = data.invoice
           this.cardList = data.cards
         })
@@ -831,10 +869,10 @@ export default {
         query: routerQuery
       })
     },
-	cardLengthDispose(num){
-	  num = num.slice(0,3)+'...'+num.slice(-3)
-	  return num;
-	}
+    cardLengthDispose(num){
+      num = num.slice(0,3)+'...'+num.slice(-3)
+      return num;
+    }
   }
 }
 </script>
@@ -915,6 +953,25 @@ export default {
           font-weight: 400;
           color: rgba(148, 116, 101, 1);
           transform: translate(-50%, 0);
+        }
+        .double{
+          position: relative;
+          .dec{
+            // margin-bottom: 10px;
+          }
+          .dec:nth-child(2){
+            h4{
+              display: none;
+            }
+            .sku{
+              display: none;
+            }
+          }
+          .num{
+            position: absolute;
+            right:0;
+            top:0;
+          }
         }
         .right {
           width: 230px;

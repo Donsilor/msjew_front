@@ -71,7 +71,7 @@
           <img src="@/static/cart/success.png"  />
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
           <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
-            <span class="font-size-16">{{ orderinfo.coinCode }}</span>
+            <span class="font-size-16">{{ formatCoin(orderinfo.coinCode) }}</span>
             {{ formatMoney(orderinfo.orderAmount) }}
           </p>
         </div>
