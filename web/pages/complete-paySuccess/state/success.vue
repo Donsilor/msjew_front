@@ -369,7 +369,7 @@ export default {
       // facebook 购买成功统计-start
       if(this.$store.state.platform == 30){
         console.log("facebook购买成功数据统计")
-        fbq('track','Purchase',this.goodsInfo);
+        this.fbq('track','Purchase',this.goodsInfo);
       }
       // facebook 购买成功统计-end
 
