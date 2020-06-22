@@ -1,7 +1,7 @@
 <template>
 	<div class="container">
 		<div class="box-1">
-			<img src="../../static/generalize/img_01.jpg" alt="">
+			<img src="../../../static/generalize/img_01.jpg" alt="">
 			<div class="text">
 				<span>匠心独具</span><span>为爱倾心</span>
 			</div>
@@ -15,7 +15,7 @@
 		</div>
 		<!-- <img src="../../static/generalize/img_02.jpg" alt=""> -->
 		<div class="box-3">
-			<img src="../../static/generalize/img_03.jpg" alt="">
+			<img src="../../../static/generalize/img_03.jpg" alt="">
 			<div class="text">
 				<span class="text1">莫桑石</span>
 				<span class="text2">钻石</span>
@@ -27,7 +27,7 @@
 			<span>火彩更是南非钻的2.5倍多，更显光泽明亮，火彩惊艳！</span>
 		</div>
 		<div class="box-5">
-			<img src="../../static/generalize/img_05.jpg" alt="">
+			<img src="../../../static/generalize/img_05.jpg" alt="">
 			<div class="text">
 				<div class="text1">畅销的戒指款式</div>
 				<div class="text2">精湛工艺与非凡设计见证每枚戒指的独一无二</div>
@@ -36,22 +36,22 @@
 		</div>
 		<div class="box-6">
 			<a href="https://wap.bddco.cn/marriage-ring/single-ring?style=160">
-				<img src="../../static/generalize/img_06.jpg" alt="">
+				<img src="../../../static/generalize/img_06.jpg" alt="">
 			</a>
 		</div>
 		<div class="box-7">
 			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=628&ringType=single">
-				<img src="../../static/generalize/img_07.jpg" alt="">
+				<img src="../../../static/generalize/img_07.jpg" alt="">
 			</a>
 
 			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=560&ringType=single">
-				<img src="../../static/generalize/img_08.jpg" alt="">
+				<img src="../../../static/generalize/img_08.jpg" alt="">
 			</a>
 			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=615&ringType=single">
-				<img src="../../static/generalize/img_09.jpg" alt="">
+				<img src="../../../static/generalize/img_09.jpg" alt="">
 			</a>
 			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=611&ringType=single">
-				<img src="../../static/generalize/img_10.jpg" alt="">
+				<img src="../../../static/generalize/img_10.jpg" alt="">
 			</a>
 		</div>
 		<div class="btn-box">
@@ -72,21 +72,21 @@
 		</div>
 		<!-- <img src="../../static/generalize/img_11.jpg" alt=""> -->
 		<div class="box-12">
-			<img class="margin10" src="../../static/generalize/img_12.jpg" alt="">
+			<img class="margin10" src="../../../static/generalize/img_12.jpg" alt="">
 			<div class="text-12">
 				<div class="text1">设计创新</div>
 				<div class="text2">BDD坚持创作独一无二的艺术臻品</div>
 			</div>
 		</div>
 		<div class="box-13">
-			<img class="margin10" src="../../static/generalize/img_13.jpg" alt="">
+			<img class="margin10" src="../../../static/generalize/img_13.jpg" alt="">
 			<div class="text-12">
 				<div class="text1">分拣筛选</div>
 				<div class="text2">BDD专业的分拣人员严格把控每道环节</div>
 			</div>
 		</div>
 		<div class="box-14">
-			<img class="margin10" src="../../static/generalize/img_14.jpg" alt="">
+			<img class="margin10" src="../../../static/generalize/img_14.jpg" alt="">
 			<div class="text-12">
 				<div class="text1">切割打磨</div>
 				<div class="text2">BDD工匠们精心雕琢，绽放出闪耀光彩</div>
@@ -119,7 +119,7 @@
 			</div>
 			<div class="input-box">
 				<span>*</span>
-				<input type="text" v-model="ipt2" :placeholder="lang.placeHolder2" @focus="clearPlaceholder(2)" @blur="restorePlaceholder(2)" @input="input(2)" ref="ipt2">
+				<input type="text" v-model="ipt2" :placeholder="lang.placeHolder2" @focus="clearPlaceholder(2)" @blur="restorePlaceholder(2)" @input="input(2)" ref="ipt2" maxlength="11">
 				<i v-if="ifShowDel2" class="iconfont iconguanbi" @click="del(2)"></i>
 			</div>
 			<div class="input-box">
@@ -136,35 +136,35 @@
 		</div>
 		<!-- <img src="../../static/generalize/img_16.jpg" alt=""> -->
 		<div class="box-17">
-			<img class="margin10" src="../../static/generalize/img_17.jpg" alt="">
+			<img class="margin10" src="../../../static/generalize/img_17.jpg" alt="">
 			<div class="text-17">
 				<div class="text1">证书品质</div>
 				<div class="text2">在BDD Co.购买任意一件首饰都附带相关证书说明</div>
 			</div>
 		</div>
 		<div class="box-18">
-			<img class="margin10" src="../../static/generalize/img_18.jpg" alt="">
+			<img class="margin10" src="../../../static/generalize/img_18.jpg" alt="">
 			<div class="text-17">
 				<div class="text1">讲究性价比</div>
 				<div class="text2">BDD致力提供高品质的首饰，合理的价格，给客户高质量的选择</div>
 			</div>
 		</div>
 		<div class="box-19">
-			<img class="margin10" src="../../static/generalize/img_19.jpg" alt="">
+			<img class="margin10" src="../../../static/generalize/img_19.jpg" alt="">
 			<div class="text-17">
 				<div class="text1">终身质保</div>
 				<div class="text2">BDD首饰高标准挑选制造，客户可安心购买并享有终身质保服务</div>
 			</div>
 		</div>
 		<div class="box-20">
-			<img class="margin10" src="../../static/generalize/img_20.jpg" alt="">
+			<img class="margin10" src="../../../static/generalize/img_20.jpg" alt="">
 			<div class="text-17">
 				<div class="text1">售后无忧</div>
 				<div class="text2">在可调整的指圈范围同时前六个月内提供免费的戒指尺寸调整服务</div>
 			</div>
 		</div>
 		<div class="consult">
-			<img src="../../static/generalize/img_21.jpg" alt="">
+			<img src="../../../static/generalize/img_21.jpg" alt="">
 
 			<div class="text">
 				<div class="text1">{{ lang.question }}？</div>
@@ -204,8 +204,8 @@
 				ifShowDel2: false,
 				ifShowDel3: false,
 				url: [
-					require('../../static/generalize/swiper_01.jpg'),
-					require('../../static/generalize/swiper_02.jpg')
+					require('../../../static/generalize/swiper_01.jpg'),
+					require('../../../static/generalize/swiper_02.jpg')
 				],
         info: {
           last_name: '',
@@ -213,9 +213,9 @@
           mobile_code: '+86',
           telphone: '',
           content: '',
-          book_date: '1970-01-01',
+          book_date: '',
           book_time: '1',
-          type_id: 2,
+          type_id: 4,
 
         }
 			}
@@ -267,12 +267,26 @@
         }else if(len == 4){
           this.info.first_name = this.ipt1.slice(0,2);
           this.info.last_name = this.ipt1.slice(2);;
+        }else if(len == 1){
+          this.$toast.show('请输入正确姓名')
+          return
         }else if(len > 4){
-          this.$toast.show('输入有误')
+          // this.$toast.show('请输入正确姓名')
+          // return
         }
 
-        this.info.first_name = this.ipt1;
-        this.info.last_name = this.ipt1;
+        var reg = /^1[3456789]\d{9}$/;
+        if(!reg.test(this.ipt2)){
+          this.$toast.show('请输入正确手机号')
+          return
+        }
+
+        var obj = new Date(),year,mouth,date;
+        year = obj.getFullYear(),
+        mouth = obj.getMonth()+1,
+        date = obj.getDate(),
+
+        this.info.book_date = year+'_'+mouth+'_'+date
         this.info.telphone = this.ipt2;
         this.info.content = this.ipt3;
 
@@ -342,7 +356,13 @@
 						break;
 				}
 			}
-		}
+		},
+    beforeRouteEnter(to, from, next) {
+      next(vm=>{
+        console.log(66,to)
+        console.log(77,from)
+      })
+    }
 	}
 </script>
 
@@ -681,7 +701,7 @@
 		letter-spacing: 4px;
 	}
 	.bg-2{
-		background: url(../../static/generalize/img_2a.jpg) no-repeat center;
+		background: url(../../../static/generalize/img_2a.jpg) no-repeat center;
 		background-size: 100% 100%;
 	}
 </style>
