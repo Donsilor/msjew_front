@@ -43,7 +43,7 @@
 			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=628&ringType=single">
 				<img src="../../static/generalize/img_07.jpg" alt="">
 			</a>
-			
+
 			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=560&ringType=single">
 				<img src="../../static/generalize/img_08.jpg" alt="">
 			</a>
@@ -92,7 +92,7 @@
 				<div class="text2">BDD工匠们精心雕琢，绽放出闪耀光彩</div>
 			</div>
 		</div>
-		
+
 		<div class="swiper-box">
 			<swiper auto="auto" :duration="3000">
 			  <div v-for="(each, n) in url" :key="n" class="swiper-child">
@@ -109,7 +109,7 @@
 			  class="promise-info"
 			></div>
 		</div>
-		  
+
 		<div class="contact">
 			<div class="text">{{ lang.chooseHappiness }}</div>
 			<div class="input-box">
@@ -128,7 +128,7 @@
 			</div>
 			<div class="button" @click="send">{{ lang.send }}</div>
 		</div>
-		
+
 		<div class="box-11">
 			<div class="text1">BDD服务保障</div>
 			<div class="text2">完善的政策服务保障客户的消费权益</div>
@@ -165,7 +165,7 @@
 		</div>
 		<div class="consult">
 			<img src="../../static/generalize/img_21.jpg" alt="">
-			
+
 			<div class="text">
 				<div class="text1">{{ lang.question }}？</div>
 				<div class="text2">{{ lang.contact1 }}： 0755 - 25169121</div>
@@ -181,18 +181,18 @@
 	export default{
 		head() {
 		  return {
-			title: '结婚钻戒_莫桑石_求婚戒指_订婚女戒_婚戒定制|BDD戒指',
-			meta: [
-			  {
-				name: 'description',
-				content: 'BDD莫桑石订婚戒指,让克拉钻戒不再遥远,点击查看更多畅销的结婚戒指款式,在线咨询专业的珠宝顾问',
-			  },
-			  {
-				name: 'keywords',
-				content: '钻戒,莫桑石,钻石,戒指,婚戒',
-			  }
-			]
-		  }
+        title: '结婚钻戒_莫桑石_求婚戒指_订婚女戒_婚戒定制|BDD戒指',
+        meta: [
+          {
+            name: 'description',
+            content: 'BDD莫桑石订婚戒指,让克拉钻戒不再遥远,点击查看更多畅销的结婚戒指款式,在线咨询专业的珠宝顾问',
+          },
+          {
+          name: 'keywords',
+            content: '钻戒,莫桑石,钻石,戒指,婚戒',
+          }
+        ]
+      }
 		},
 		data() {
 			return{
@@ -206,7 +206,18 @@
 				url: [
 					require('../../static/generalize/swiper_01.jpg'),
 					require('../../static/generalize/swiper_02.jpg')
-				]
+				],
+        info: {
+          last_name: '',
+          first_name: '',
+          mobile_code: '+86',
+          telphone: '',
+          content: '',
+          book_date: '1970-01-01',
+          book_time: '1',
+          type_id: 2,
+
+        }
 			}
 		},
 		methods:{
@@ -248,12 +259,40 @@
 					this.$toast.show(this.lang.fillMessage)
 					return
 				}
-				
-				if(0){
-					this.$toast.show(this.lang.sendSuccess)
-				}else{
-					this.$toast.show(this.lang.sendFail)
-				}
+
+        var len = this.ipt1.length;
+        if(len == 2 || len == 3){
+          this.info.first_name = this.ipt1.slice(0,1);
+          this.info.last_name = this.ipt1.slice(1);;
+        }else if(len == 4){
+          this.info.first_name = this.ipt1.slice(0,2);
+          this.info.last_name = this.ipt1.slice(2);;
+        }else if(len > 4){
+          this.$toast.show('输入有误')
+        }
+
+        this.info.first_name = this.ipt1;
+        this.info.last_name = this.ipt1;
+        this.info.telphone = this.ipt2;
+        this.info.content = this.ipt3;
+
+        var that = this;
+        that
+          .$axios({
+            method: 'post',
+            url: `/web/member/contact/add`,
+            data: this.info
+          })
+          .then(data => {
+            // console.log(data)
+            this.$toast.show(this.lang.sendSuccess)
+          })
+          .catch(err => {
+            this.$toast.show(this.lang.sendFail)
+          })
+
+
+
 			},
 			input(k) {
 				switch (k){
@@ -342,11 +381,11 @@
 	input:-ms-input-placeholder{
 		color: #c8c8c8;
 	}
-	
+
 	.margin10{
 		margin-bottom: 10px;
 	}
-	
+
 	.btn-box{
 		padding: 0 3%;
 		box-sizing: border-box;
@@ -379,11 +418,11 @@
 		width: auto;
 		color: #6f9eb1;
 	}
-	
+
 	.margin-top-30{
 		margin-top: 30px;
 	}
-	
+
 	.contact{
 		padding: 30px 3%;
 		background-color: #e4ecf0;
@@ -408,7 +447,7 @@
 	.contact input{
 		width: 100%;
 		height: 100%;
-		font-size: 18px;
+		font-size: 14px;
 		color: #333;
 	}
 	.contact .iconguanbi{
@@ -425,9 +464,9 @@
 		top: 50%;
 		transform: translateY(-50%);
 		color: #f00;
-		font-size: 18px;
+		font-size: 15px;
 	}
-	
+
 	.consult{
 		position: relative;
 		text-align: left;
@@ -443,7 +482,7 @@
 		padding: 50px 12% 0;
 		color: #fff;
 	}
-	
+
 	.consult .text1{
 		font-size: 18px;
 		background-color: transparent;
@@ -472,7 +511,7 @@
 	.btn-s a{
 		color: #fff;
 	}
-	
+
 	.swiper-box{
 		width: 100%;
 		height: 240px;
@@ -491,7 +530,7 @@
 		width: 100%;
 		transform: translateY(-50%);
 	}
-	
+
 	.box-1 .text{
 		position: absolute;
 		left: 0;
@@ -504,7 +543,7 @@
 	.box-1 .text span:last-child{
 		margin-left: 14px;
 	}
-	
+
 	.box-3 .text{
 		position: absolute;
 		left: 0;
@@ -539,7 +578,7 @@
 		top: 68px;
 		left: 0;
 		width: 100%;
-		
+
 	}
 	.box-5 .text1{
 		font-size: 18px;
@@ -551,7 +590,7 @@
 		margin: 10px 0 14px;
 		letter-spacing: 1px;
 	}
-	
+
 	.line{
 		width: 80px;
 		height: 1px;
@@ -559,24 +598,24 @@
 		transform: scaleY(0.5);
 		margin: 0 auto;
 	}
-	
+
 	.box-6{
 		padding: 8px 10px 0;
 		background-color: #fafafa;
 	}
-	
+
 	.box-7 {
 		width: 100;
 		padding: 0 10px;
 		background-color: #fafafa;
 		font-size: 0;
 	}
-	
+
 	.box-7 .four-img {
 		width: 49%;
 		margin-top: 2%;
 	}
-	
+
 	.box-7 .four-img:nth-child(even) {
 		margin-left: 2%;
 	}
@@ -596,7 +635,7 @@
 		margin: 10px 0 14px;
 		color: #999;
 	}
-	
+
 	.text-12{
 		position: absolute;
 		left: 0;
@@ -616,7 +655,7 @@
 		margin-top: 8px;
 		color: #fff;
 	}
-	
+
 	.text-17{
 		position: absolute;
 		left: 0;
@@ -629,7 +668,7 @@
 		font-weight: bold;
 		color: #fff;
 	}
-	
+
 	.box-11 span{
 		position: absolute;
 		top: -16px;
