@@ -674,6 +674,7 @@ export default {
     },
     addCart() {
       if (!(this.canAddCart && this.inSale)) {
+        this.$toast(this.lang.specificationToast)
         return
       }
       if (!this.goodsId) {
