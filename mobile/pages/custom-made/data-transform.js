@@ -342,7 +342,7 @@ export default {
           // var url2 =  `/wap/goods/diamond/detail`;
           var url3 =  `/wap/goods/style/detail`;
 
-        // }else{
+        }else{
           var url2 =  `/wap/goods/style/detail`;
           // var url3 =  `/wap/goods/diamond/detail`;
         }
