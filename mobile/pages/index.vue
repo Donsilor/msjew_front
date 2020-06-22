@@ -141,7 +141,7 @@
     </section>
     <section class="contact-us">
       <h1 class="title">{{ lang.callUs }}</h1>
-      <div class="map" v-show="this.$store.state.platform !== 21">
+      <div class="map" v-show="this.$store.state.platform == 11">
         <img src="/index/map.png" />
       </div>
       <div class="info">
