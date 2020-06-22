@@ -3,7 +3,7 @@
     <div class="content">
       <div class="title">{{ $t(`${lang}.header`) }}</div>
       <section class="our-info">
-        <div class="map" v-show="this.$store.state.platform !== 20">
+        <div class="map" v-show="this.$store.state.platform == 10">
           <img src="/content-us/map.png" />
         </div>
         <dl class="info">

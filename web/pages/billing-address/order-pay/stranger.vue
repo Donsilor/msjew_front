@@ -937,7 +937,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+            <div class="add-shopping-card"  v-if="this.$store.state.platform !== 30" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -1544,7 +1544,7 @@
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
-              
+
               <!-- 电汇 -->
               <div
                 v-show="this.$store.state.platform !== 30"
@@ -1991,7 +1991,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
