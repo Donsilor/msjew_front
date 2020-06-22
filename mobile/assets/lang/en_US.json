@@ -2190,5 +2190,24 @@
 		"msg11": "Unbind successfully！",
 		"msg12": "This card is not expired！",
 		"msg13": "This card has expired！"
+	},
+	"generalize": {
+		"index": {
+			"more": "更多款式",
+			"immediatelyConsult": "立即咨詢",
+			"greetCall": "歡迎致電BDD專業人員",
+			"ringUp": "點擊撥打",
+			"chooseHappiness": "此刻選擇妳的幸福",
+			"send": "立即發送",
+			"question": "有任何問題？",
+			"contact1": "聯系BDD專業人員，為您解答壹切困惑 致電專業人員：",
+			"onlineConsult": "在線咨詢",
+			"placeHolder1": "X先生/女士",
+			"placeHolder2": "聯系方式",
+			"placeHolder3": "備註信息 # 您的要求等 #",
+			"sendSuccess": "發送成功",
+			"sendFail": "發送失敗",
+			"fillMessage": "請填寫您的個人信息"
+		}
 	}
 }
