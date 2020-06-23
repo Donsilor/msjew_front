@@ -577,7 +577,7 @@ export default {
         })
     },
     goToDetail(obj) {
-      console.log("issssss",obj)
+      // console.log("issssss",obj)
       let route = {
         path: '/',
         query: {}

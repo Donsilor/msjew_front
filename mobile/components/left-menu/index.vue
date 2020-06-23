@@ -436,7 +436,7 @@ export default {
       // this.isActive=true
       // this.show=true
     }
-    console.log("sssss",this.categoryId)
+    // console.log("sssss",this.categoryId)
   },
   methods: {
     getinfo() {
