@@ -242,7 +242,6 @@ export default {
     },
     // 推荐对戒
     recommendPairRings() {
-      console.log(333,this.recommendPairRingInfo)
       const recommendInfo = this.recommendPairRingInfo
       let result = recommendInfo.moduleGoods || []
       // result = result.map(item => {
@@ -254,7 +253,6 @@ export default {
         item.ringImg = this.imageStrToArray(item.ringImg)
         return item
       })
-      console.log(3131,result)
       return result
     },
     activePairRingInfo() {
@@ -289,7 +287,6 @@ export default {
     },
     // 推荐女戒
     recommendLadyRings() {
-      console.log(444,this.recommendLadyRingInfo)
       const recommendInfo = this.recommendLadyRingInfo
       let result = recommendInfo.moduleGoods || []
       // result = result.map(item => {
@@ -302,7 +299,6 @@ export default {
         item.image = item.goodsImages[0] || ''
         return item
       })
-      console.log(4141,result)
       return result
     },
     // 推荐男戒信息
@@ -326,6 +322,7 @@ export default {
         item.image = item.goodsImages[0] || ''
         return item
       })
+      // console.log(515151,result)
       return result
     }
   },
@@ -340,7 +337,6 @@ export default {
       }
     })
       .then(data => {
-        console.log(777,data.webSite)
         return {
           seoInfo,
           ad: data.advert,
@@ -413,9 +409,10 @@ export default {
       if (!name) {
         return
       }
-	  if(ringType){
-		sessionStorage.setItem('ringType', ringType)
-	  }
+      if(ringType){
+        sessionStorage.setItem('ringType', ringType)
+      }
+
       this.$router.push({
         name: name,
         query: query
