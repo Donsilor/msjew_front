@@ -85,6 +85,7 @@
       <div class="ring-list">
         <div
           v-for="(each, n) in recommendPairRings"
+          v-show="n < 4"
           :key="n"
           :class="['ring-item', { active: activePairRing === n }]"
           @click="changeActivePairRing(n)"
@@ -121,7 +122,7 @@
       <div class="ring-list">
         <div
           v-for="(each, n) in recommendLadyRings"
-		  v-show="n == 0"
+          v-show="n < 4"
           :key="n"
           class="ring-item"
           @click="toSingleRingDetail(each)"
@@ -158,7 +159,7 @@
       <div class="ring-list">
         <div
           v-for="(each, n) in recommendGentlemanRings"
-		  v-show="n == 0"
+          v-show="n < 4"
           :key="n"
           class="ring-item"
           @click="toSingleRingDetail(each)"
@@ -286,6 +287,7 @@ export default {
     },
     // 推荐女戒
     recommendLadyRings() {
+      console.log(444,this.recommendLadyRingInfo)
       const recommendInfo = this.recommendLadyRingInfo
       let result = recommendInfo.moduleGoods || []
       // result = result.map(item => {
@@ -309,6 +311,7 @@ export default {
     },
     // 推荐男戒
     recommendGentlemanRings() {
+      console.log(555,this.recommendGentlemanRingInfo)
       const recommendInfo = this.recommendGentlemanRingInfo
       let result = recommendInfo.moduleGoods || []
       result = result.map(item => {
@@ -321,6 +324,7 @@ export default {
         item.image = item.goodsImages[0] || ''
         return item
       })
+      console.log(66666,result)
       return result
     }
   },
@@ -335,6 +339,7 @@ export default {
       }
     })
       .then(data => {
+        console.log(777,data.webSite)
         return {
           seoInfo,
           ad: data.advert,
@@ -624,7 +629,7 @@ export default {
       width: calc((100% - 15px) / 2);
       /*width: 165px;*/
       /*height: 165px;*/
-      margin: 0 auto 15px;
+      margin-bottom: 15px;
       box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
       img {
