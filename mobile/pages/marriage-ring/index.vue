@@ -242,6 +242,7 @@ export default {
     },
     // 推荐对戒
     recommendPairRings() {
+      console.log(333,this.recommendPairRingInfo)
       const recommendInfo = this.recommendPairRingInfo
       let result = recommendInfo.moduleGoods || []
       // result = result.map(item => {
@@ -253,6 +254,7 @@ export default {
         item.ringImg = this.imageStrToArray(item.ringImg)
         return item
       })
+      console.log(3131,result)
       return result
     },
     activePairRingInfo() {
@@ -300,6 +302,7 @@ export default {
         item.image = item.goodsImages[0] || ''
         return item
       })
+      console.log(4141,result)
       return result
     },
     // 推荐男戒信息
@@ -311,20 +314,18 @@ export default {
     },
     // 推荐男戒
     recommendGentlemanRings() {
-      console.log(555,this.recommendGentlemanRingInfo)
       const recommendInfo = this.recommendGentlemanRingInfo
       let result = recommendInfo.moduleGoods || []
-      result = result.map(item => {
-        item = item.goods && item.goods[0] ? item.goods[0] : {}
-        return item
-      })
+      // result = result.map(item => {
+      //   item = item.goods && item.goods[0] ? item.goods[0] : {}
+      //   return item
+      // })
       result = result.map(item => {
         item.showType = recommendInfo.showType
         item.goodsImages = this.imageStrToArray(item.goodsImages)
         item.image = item.goodsImages[0] || ''
         return item
       })
-      console.log(66666,result)
       return result
     }
   },
