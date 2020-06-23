@@ -31,8 +31,11 @@
         </div>
         <span>{{ c.name }}</span>
       </div>
-      <div class="title">
-        {{ goodInfo.name }}
+    </div>
+    <div class="include-box">
+      <span>{{ lang.include }}</span>
+      <div>
+        <i class="iconfont icontaojie" />
       </div>
       <span>{{ lang.pairRing }}*1</span>
     </div>
@@ -97,24 +100,10 @@
           >
             <i
               :class="[
-                'sex-icon',
-                ['lady', 'gentlemen', 'neutral'][firstRing.userSex]
+                'iconfont',
+                ['icon_nv', 'icon_nan', 'iconnannv'][secondRing.userSex]
               ]"
-            >
-              <!--            <i v-if="firstRing.userSex === 0" class="iconfont icon_nv" />-->
-              <!--            <i v-if="firstRing.userSex === 1" class="iconfont icon_nan" />-->
-              <i
-                :class="[
-                  'iconfont',
-                  ['icon_nv', 'icon_nan', 'iconnannv'][firstRing.userSex]
-                ]"
-              />
-            </span>
-            {{ lang.chooseColor }}
-          </span>
-          <span @click="showFirstRingQualityChoose">
-            {{ firstRingQualityText }}
-            <i class="iconfont iconyou" />
+            />
           </span>
           {{ lang.chooseColor }}
         </span>
@@ -181,135 +170,77 @@
         <div class="details-title">
           {{ firstRing.userSexText }}
         </div>
-        <div class="bd-b"></div>
-        <div class="select-line">
-          <span>
-            <span>{{ lang.chooseSize }}</span>
-            <span>（{{ lang['us-version'] }}）</span>
-            <div @click="openSize()">!</div>
-          </span>
-          <span @click="showFirstRingSizeChoose">
-            {{ firstRingSizeText ? firstRingSizeText : lang.stArrContent }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
-        <div class="bd-b"></div>
-        <!--      第二个戒指-->
-        <!-- <div class="select-line">
-          <span>
-            {{ lang.carat }}
-          </span>
-          <span @click="showSecondRingCaratChoose">
-            {{ secondRingCaratText }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div> -->
-        <div class="select-line">
-          <span>
-            <span
-              :class="[
-                'sex-icon',
-                ['lady', 'gentlemen', 'neutral'][secondRing.userSex]
-              ]"
-            >
-              <i
-                :class="[
-                  'iconfont',
-                  ['icon_nv', 'icon_nan', 'iconnannv'][secondRing.userSex]
-                ]"
-              />
-            </span>
-            {{ lang.chooseColor }}
-          </span>
-          <span @click="showSecondRingQualityChoose">
-            {{ secondRingQualityText }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
-        <div class="bd-b"></div>
-        <div class="select-line margin-bottom-10">
-          <span>
-            <span>{{ lang.chooseSize }}</span>
-            <span>（{{ lang['us-version'] }}）</span>
-            <div @click="openSize()">!</div>
-          </span>
-          <span @click="showSecondRingSizeChoose">
-            {{ secondRingSizeText ? secondRingSizeText : lang.stArrContent }}
-            <i class="iconfont iconyou" />
-          </span>
+        <div class="sku-table">
+          <div v-for="(b, index) in firstRing.specs" :key="index">
+            <span>{{ b.configName }}</span>
+            <span>{{ b.configAttrVal }}</span>
+          </div>
         </div>
       </div>
-      <div
-        :class="['btn-common', canAddCart ? 'btn-pink' : 'btn-gray']"
-        :disabled="!canAddCart"
-        @click="addCart"
-      >
-        {{
-          inSale
-            ? canAddCart
-              ? lang.addCart
-              : lang.noTotalStock
-            : lang.notInSale
-        }}
-      </div>
-      <!-- <div class="wish-and-share">
-        <i
-          :class="[
-            'iconfont',
-            { 'iconicon-xinyuandan': !inWish },
-            { 'iconxinyuandan-dianji': inWish },
-            { active: inWish }
-          ]"
-          @click="setWish"
-        />
-        <div />
-        <i class="iconfont iconfb" @click="$shareFacelook()" />
-      </div> -->
-      <div class="ring-details">
+      <div class="base-info">
         <div class="details-title">
-          {{ lang.goodsDetail }}
+          {{ secondRing.userSexText }}
         </div>
-        <div class="details-sku">{{ lang.goods }}ID：{{ goodInfo.ringCode }}</div>
-        <div class="base-info">
-          <div class="details-title">
-            {{ firstRing.userSexText }}
-          </div>
-          <div class="sku-table">
-            <div v-for="(b, index) in firstRing.specs" :key="index">
-              <span>{{ b.configName }}</span>
-              <span>{{ b.configAttrVal }}</span>
-            </div>
+        <div class="sku-table">
+          <div v-for="(b, index) in secondRing.specs" :key="index">
+            <span>{{ b.configName }}</span>
+            <span>{{ b.configAttrVal }}</span>
           </div>
         </div>
-        <div class="base-info">
-          <div class="details-title">
-            {{ secondRing.userSexText }}
-          </div>
-          <div class="sku-table">
-            <div v-for="(b, index) in secondRing.specs" :key="index">
-              <span>{{ b.configName }}</span>
-              <span>{{ b.configAttrVal }}</span>
-            </div>
-          </div>
-        </div>
-        <div class="desc-content" v-html="ringDetail"></div>
       </div>
-      <!-- <div class="comment">
-        <div class="comment-title">
-          {{ lang.clientSay }} <span>({{ total_count }})</span>
+      <div class="desc-content" v-html="ringDetail"></div>
+    </div>
+    <!-- <div class="comment">
+      <div class="comment-title">
+        {{ lang.clientSay }} <span>({{ total_count }})</span>
+      </div>
+      <div class="comment-stars">
+        <i
+          v-for="index in 5"
+          :key="index"
+          :class="[
+            `iconfont`,
+            `iconxing`,
+            { light: index <= Math.round(starNum) },
+            { dark: index > Math.round(starNum) }
+          ]"
+        ></i>
+        <span>{{ starNum.toFixed(1) }}</span>
+      </div>
+      <template v-if="total_count > 0">
+        <div class="comment-box">
+          <div class="client-user">{{ showEmail(comments.userAccount) }}</div>
+          <div class="time-and-stars">
+            <div class="about-time">
+              {{ comments.createTime }}
+            </div>
+            <div class="about-stars">
+              <i
+                v-for="index in 5"
+                :key="index"
+                :class="[
+                  `iconfont`,
+                  `iconxing`,
+                  { light: index <= Math.round(comments.commentsLevel) },
+                  { dark: index > Math.round(comments.commentsLevel) }
+                ]"
+              ></i>
+            </div>
+          </div>
+          <div class="comment-content ow-h2">
+            {{ comments.commentsDesc }}
+          </div>
         </div>
-        <div class="comment-stars">
-          <i
-            v-for="index in 5"
-            :key="index"
-            :class="[
-              `iconfont`,
-              `iconxing`,
-              { light: index <= Math.round(starNum) },
-              { dark: index > Math.round(starNum) }
-            ]"
-          ></i>
-          <span>{{ starNum.toFixed(1) }}</span>
+        <div
+          class="comment-btn"
+          @click="$router.push(`/comments?groupId=${$route.query.ringId}`)"
+        >
+          {{ lang.allComments }} >
+        </div>
+      </template>
+      <template v-else>
+        <div class="no-comment">
+          {{ lang.noComments }}
         </div>
       </template>
     </div> -->
@@ -357,7 +288,6 @@
 
 <script>
 import Mx from './pair-mixin'
-import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
   head() {
     return {
@@ -379,9 +309,6 @@ export default {
     }
   },
   mixins: [Mx],
-  components: {
-    soleOut
-  },
   data(){
     return{
       url:[

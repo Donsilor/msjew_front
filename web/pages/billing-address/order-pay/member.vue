@@ -808,7 +808,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" @click="useCard()">{{this.cardType == 1 ? '+'+$t(`${lang}.useShoppingCard`) : $t(`${lang}.editOrUnbound`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">{{this.cardType == 1 ? '+'+$t(`${lang}.useShoppingCard`) : $t(`${lang}.editOrUnbound`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -1741,7 +1741,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" @click="useCard()">{{this.cardType == 1 ? '+'+$t(`${lang}.useShoppingCard`) : $t(`${lang}.editOrUnbound`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">{{this.cardType == 1 ? '+'+$t(`${lang}.useShoppingCard`) : $t(`${lang}.editOrUnbound`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
