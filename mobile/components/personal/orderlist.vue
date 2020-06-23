@@ -20,7 +20,8 @@
         <div class="top">
           <span>{{ order.orderNO }}</span>
         </div>
-        <div class="mod" @click="toDetail(order.id)">
+        <!-- 单品 -->
+        <div v-if="order.details[0].groupType == 0 && order.details[0].data[0].categoryId !== 19" class="mod single" @click="toDetail(order.id)">
           <ul>
             <li v-for="(detail, n) in order.details" :key="n">
               <img :src="detail.image" />
@@ -40,7 +41,7 @@
               </div>
 
               <!--              对戒-->
-              <div v-if="detail.groupType === 1" class="right">
+              <!-- <div v-if="detail.groupType === 1" class="right">
                 <h4 class="ow-h2">
                   {{ detail.goodsName }}
                 </h4>
@@ -56,7 +57,142 @@
                   >{{ formatCoin(order.coinCode) }}
                   {{ detail.data[1] && detail.data[1].goodsPrice }}</b
                 >
+              </div> -->
+
+              <!--              定制-->
+              <!-- <div v-if="detail.groupType === 2" class="right">
+                <h4 class="order-ellipsis ow-h2">
+                  {{ detail.data[0] && detail.data[0].goodsName }}
+                </h4>
+                <span>x 1</span>
+                <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                <p>{{ detail.data[0].detailSpecs }}</p>
+                <b class="display-block margin-bottom-20"
+                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                >
+                <h4 class="order-ellipsis ow-h2">
+                  {{ detail.data[1] && detail.data[1].goodsName }}
+                </h4>
+                <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                <b
+                  >{{ order.coinCode }}
+                  {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                >
+              </div> -->
+            </li>
+          </ul>
+        </div>
+        <!-- 对戒 -->
+        <div v-if="order.details[0].data[0].categoryId == 19" class="mod double" @click="toDetail(order.id)">
+          <ul>
+            <li v-for="(detail, n) in order.details" :key="n">
+              <img :src="detail.image" />
+              <div v-if="detail.groupType !== 0" class="group-type">
+                {{ detail.groupTypeText }}
               </div>
+
+              <!--              单品-->
+              <!-- <div v-if="detail.groupType === 0" class="right">
+                <h4 class="ow-h2">
+                  {{ detail.goodsName }}
+                </h4>
+                <span>x 1</span>
+                <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                <p>{{ detail.data[0].detailSpecs }}</p>
+                <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
+              </div> -->
+
+              <!--              对戒-->
+              <div v-if="detail.data[0].categoryId === 19" class="right">
+                <div v-for="(ring, _n) in order.details[0].data[0].ring" :key="_n" class="dec">
+                  <h4 class="ow-h2">
+                    {{ detail.goodsName }}
+                  </h4>
+                  <!-- <span>x 1</span> -->
+                  <p class="sku">SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value) }}</p>
+                  <!-- <b class="display-block margin-bottom-20"
+                    >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                  > -->
+                  <!-- <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                  <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                  <b
+                    >{{ order.coinCode }}
+                    {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                  > -->
+                </div>
+              </div>
+              <div class="price">
+                <b class="display-block"
+                  >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice }}</b
+                >
+              </div>
+              <div class="num">
+                <span>x 1</span>
+              </div>
+              <!--              定制-->
+              <!-- <div v-if="detail.groupType === 2" class="right">
+                <h4 class="order-ellipsis ow-h2">
+                  {{ detail.data[0] && detail.data[0].goodsName }}
+                </h4>
+                <span>x 1</span>
+                <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                <p>{{ detail.data[0].detailSpecs }}</p>
+                <b class="display-block margin-bottom-20"
+                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                >
+                <h4 class="order-ellipsis ow-h2">
+                  {{ detail.data[1] && detail.data[1].goodsName }}
+                </h4>
+                <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                <b
+                  >{{ order.coinCode }}
+                  {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                >
+              </div> -->
+            </li>
+          </ul>
+        </div>
+        <!-- 定制 -->
+        <div v-if="order.details[0].groupType == 2" class="mod customization" @click="toDetail(order.id)">
+          <ul>
+            <li v-for="(detail, n) in order.details" :key="n">
+              <img :src="detail.image" />
+              <div v-if="detail.groupType !== 0" class="group-type">
+                {{ detail.groupTypeText }}
+              </div>
+
+              <!--              单品-->
+              <!-- <div v-if="detail.groupType === 0" class="right">
+                <h4 class="ow-h2">
+                  {{ detail.goodsName }}
+                </h4>
+                <span>x 1</span>
+                <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                <p>{{ detail.data[0].detailSpecs }}</p>
+                <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
+              </div> -->
+
+              <!--              对戒-->
+              <!-- <div v-if="detail.groupType === 1" class="right">
+                <h4 class="ow-h2">
+                  {{ detail.goodsName }}
+                </h4>
+                <span>x 1</span>
+                <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                <p>{{ detail.data[0].detailSpecs }}</p>
+                <b class="display-block margin-bottom-20"
+                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                >
+                <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                <b
+                  >{{ order.coinCode }}
+                  {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                >
+              </div> -->
 
               <!--              定制-->
               <div v-if="detail.groupType === 2" class="right">
@@ -271,6 +407,7 @@ export default {
         order.details = result
         return order
       })
+      console.log("showOrderList",showData)
       return showData
     },
     // 列表特定参数
@@ -292,6 +429,28 @@ export default {
     }
   },
   methods: {
+    // 属性数值转化成字符串
+    getDubleConfig(good_spec,goods_attr) {
+      let text = ''
+      if (good_spec.length > 0) {
+        good_spec.map((item, index) => {
+        // console.log("good_spec",item)
+
+          if (index === good_spec.length - 1) {
+            text = text + item.attr_value
+          } else {
+            text = text + item.attr_value + ' /  '
+          }
+        }) 
+      }
+
+      if (goods_attr) {
+       for (let i in goods_attr) {
+          text = text + ' /  '+goods_attr[i] 
+        }
+      }
+      return text
+    },
     canComment(order) {
       const details = order.details
       // console.log("order",details.length)
@@ -481,6 +640,43 @@ export default {
           white-space: nowrap;
         }
       }
+      .double{
+        position: relative;
+        .num{
+          position: absolute;
+          right:0px;
+          top:30%;
+          span {
+            // float: right;
+            font-size: 14px;
+            font-weight: 400;
+            color: rgba(102, 102, 102, 1);
+          }
+        }
+        .price{
+          // position: absolute;
+          // right:145px;
+          margin-top: 10px;
+          b {
+            font-size: 17px;
+            font-weight: 400;
+            color: rgba(243, 163, 145, 1);
+            font-family: twCenMt;
+            margin-right: 50px;
+          }
+        }
+        .dec{
+          // margin-bottom: 20px;
+        }
+        .dec:nth-child(2){
+          .ow-h2{
+            display: none;
+          }
+          .sku{
+            display: none;
+          }
+        }
+      }
       .mod {
         margin-top: 20px;
         ul {
@@ -557,6 +753,7 @@ export default {
                 color: rgba(148, 116, 101, 1);
               }
             }
+            
           }
         }
       }

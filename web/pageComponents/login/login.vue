@@ -1,13 +1,18 @@
 <template>
   <div>
-    <!-- 简体中文登录模块 -->
-    <div v-if="this.$store.state.language === 'zh_CN'" class="login-item">
+    <!-- 手机登录 -->
+    <div v-if="loginType == 1" class="login-item">
       <div class="relative margin-bottom-20">
+        <div style="position: fixed;z-index: -999;">
+          <input type="text" name="hidden1" id="text" value="123">
+          <input type="password" name="hidden1" id="password" value="456">
+        </div>
+
         <div class="login-input icon-input">
           <span class="icon">
-            <img src="/login/mail.png" />
+            <img class="phone" src="/login/phone.png" />
           </span>
-          <input  v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.mailbox`)" maxlength="11" />
+          <input id="ipt1" v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" autocomplete="off"/>
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phoneTips`) }}
@@ -18,14 +23,14 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input  v-model.trim="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" maxlength="60" />
+          <input  v-model.trim="password" @keyup="keyupEvent2" @keypress="keypressEvent2" type="password" v-bind:class="{active:isActive2}" :placeholder="$t(`${lang}.password`)" maxlength="60" autocomplete="off"/>
         </div>
         <div v-show="passwordErr" class="error-tip">
-          {{ $t(`${lang}.pwd`) }}
+          {{ $t(`${lang}.passwordTips`) }}
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <nuxt-link :to="{ path: '/reset-password' }">
+        <nuxt-link :to="{ path: '/reset-password',query:{type:loginType} }">
           {{ $t(`${lang}.forget`) }}
         </nuxt-link>
       </div>
@@ -43,8 +48,14 @@
         </div>
       </div>
       <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="loginCN">
+        <button v-loading="requesting" class="submit bg" @click="login">
           {{ $t(`${lang}.login`) }}
+        </button>
+      </div>
+
+      <div class="margin-bottom-29" v-if="ifShowBtn">
+        <button v-loading="requesting" class="submit" @click="loginT('b')">
+          {{ $t(`${lang}.mailLogin`) }}
         </button>
       </div>
       <!-- <div class="gap-line margin-bottom-28">
@@ -55,16 +66,20 @@
         <img src="/login/google.png" class="oauth-type" />
       </div> -->
     </div>
-    <!-- 英文和繁体登录模块 -->
-    <div v-else class="login-item">
+    <!-- 邮箱登录 -->
+    <div v-if="loginType == 2" class="login-item">
       <div class="relative margin-bottom-20">
+	    <div style="position: fixed;z-index: -999;">
+	    	<input type="text" name="hidden1" id="text" value="123">
+	    	<input type="password" name="hidden1" id="password" value="456">
+	    </div>
         <div class="login-input icon-input">
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input v-model.trim="account"  @keyup="keyupEvent1" @keypress="keypressEvent1" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailbox`)" maxlength="60" />
+          <input id="ipt2" v-model.trim="account"  @keyup="keyupEvent6" @keypress="keypressEvent6" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailBox`)" maxlength="60" />
         </div>
-        <div v-show="phoneErr" class="error-tip">
+        <div v-show="mailErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
         </div>
       </div>
@@ -80,7 +95,7 @@
         </div>
       </div>
       <div class="forget margin-bottom-10">
-        <nuxt-link :to="{ path: '/reset-password' }">
+        <nuxt-link :to="{ path: '/reset-password',query:{type:loginType}}">
           {{ $t(`${lang}.forget`) }}
         </nuxt-link>
       </div>
@@ -98,10 +113,17 @@
         </div>
       </div>
       <div class="margin-bottom-29">
-        <button v-loading="requesting" class="submit" @click="login">
+        <button v-loading="requesting" class="submit bg" @click="login">
           {{ $t(`${lang}.login`) }}
         </button>
       </div>
+
+      <div class="margin-bottom-29" v-if="ifShowBtn">
+        <button v-loading="requesting" class="submit" @click="loginT('a')">
+          {{ $t(`${lang}.phoneLogin`) }}
+        </button>
+      </div>
+
       <!-- <div class="gap-line margin-bottom-28">
         <span>{{ $t(`${lang}.logins`) }}</span>
       </div> -->
@@ -136,7 +158,11 @@ export default {
       isActive1: false,
       isActive2: false,
       isActive3: false,
-      oldUrl:''
+      isActive6: false,
+      oldUrl:'',
+      // 手机注册1,邮箱注册2
+      loginType: 0,
+      ifShowBtn: false
     }
   },
 
@@ -164,7 +190,7 @@ export default {
   beforeRouteEnter (to, from, next){
     next(vm => {
       // 通过 `vm` 访问组件实例,将值传入oldUrl
-      console.log("ssssss",vm)
+      // console.log("ssssss",vm)
       vm.oldUrl = from.path
     })
   },
@@ -180,7 +206,17 @@ export default {
     //   this.isActive1=true
     //   this.phoneErr=true
     // }
-    this.language = this.getCookie('language')
+    
+	this.loginType = sessionStorage.getItem("loginType")
+
+    if(this.$store.state.platform == 20){
+      this.ifShowBtn = true
+    }else{
+      this.ifShowBtn = false
+    }
+
+    console.log(this.loginType)
+
     const _this = this
     _this.$nextTick(() => {
        _this.refreshCode()
@@ -212,15 +248,13 @@ export default {
       // this.isActive3=false
       // this.passwordErr=false
     },
-    // 查询cookie
-    getCookie (cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
+    keyupEvent6 () {
+      this.isActive6 = false
+      this.mailErr = false
+    },
+    keypressEvent6 () {
+      this.isActive6 = false
+      // this.mailErr=false
     },
     // 生成驗證碼
     refreshCode () {
@@ -234,149 +268,155 @@ export default {
       this.pictureCode = result.join('')
       // this.info = info
     },
-    // 中文登录
-    loginCN () {
-      const _this = this
-
-      if (_this.mobile === '') {
-        _this.isActive1 = true
-        _this.phoneErr = true
-        return
-      }
-      if (_this.password === '') {
-        _this.isActive2 = true
-        _this.passwordErr = true
-        return
-      }
-      if (_this.code === '') {
-        _this.isActive3 = true
-        _this.codeErr = true
-        return
-      }
-      this.$axios({
-        method: 'post',
-        url: '/web/site/login',
-        params: {
-        },
-        data: {
-          'username': _this.mobile,
-          'password': _this.password
-        }
-      })
-        .then(res => {
-          const data = res.data
-          localStorage.setItem("refreshToken", data.refresh_token);
-          localStorage.setItem("accessToken", data.access_token);
-          let nowDate = parseInt((new Date()).getTime() / 1000)
-          localStorage.setItem("refreshTime", nowDate);
-
-          if (_this.code !== _this.pictureCode) {
-            _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-            _this.requesting = false
-          } else {
-            _this.$successMessage(_this.$t(`${lang}.logintips`))
-            _this.$store.commit('setToken', data.access_token)
-            _this.$store.commit('setUserInfo', data.member)
-             _this.$store.dispatch('synchronizeCart')
-            // const lastUrl = _this.$store.state.lastUrl
-            const lastUrl=localStorage.getItem("url")
-            // _this.$store.commit('setLastUrl','')
-            console.log('login', lastUrl)
-
-            setTimeout(() => {
-              if (lastUrl) {
-                _this.$router.replace({
-                  path: lastUrl
-                })
-              }
-              else {
-                _this.$router.replace({
-                  path: '/'
-                })
-              }
-            }, 0)
-
-          }
-        })
-        .catch(err => {
-          //console.error(err)
-          _this.requesting = false
-          _this.refreshCode()
-          _this.$errorMessage(err.message)
-        })
-    },
     // 登录
     login () {
-      const _this = this
-      // _this.requesting = true
-      if (_this.account === '') {
-        _this.isActive1 = true
-        _this.phoneErr = true
-        return
-      }
+      const _this = this;
       if (_this.password === '') {
         _this.isActive2 = true
         _this.passwordErr = true
         return
       }
+
       if (_this.code === '') {
         _this.isActive3 = true
         _this.codeErr = true
         return
       }
-      this.$axios({
-        method: 'post',
-        url: '/web/site/login',
-        params: {
-        },
-        data: {
-          'username': _this.account,
-          'password': _this.password
+
+      // 手机登录
+      if(this.loginType == 1){
+        if (_this.mobile === '') {
+          _this.isActive1 = true
+          _this.phoneErr = true
+          return
         }
-      })
-        .then(res => {
 
-          const data = res.data
-          localStorage.setItem("refreshToken", data.refresh_token);
-          localStorage.setItem("accessToken", data.access_token);
-          let nowDate = parseInt((new Date()).getTime() / 1000)
-          localStorage.setItem("refreshTime", nowDate);
-
-          if (_this.code !== _this.pictureCode) {
-            _this.$errorMessage(_this.$t(`${lang}.codeTips`))
-            _this.requesting = false
-          } else {
-            _this.$successMessage(_this.$t(`${lang}.logintips`))
-            _this.$store.commit('setToken', data.access_token)
-            _this.$store.commit('setUserInfo', data.member);
-             _this.$store.dispatch('synchronizeCart')
-            // const lastUrl = _this.$store.state.lastUrl
-            // _this.$store.commit('setLastUrl', '')
-            const lastUrl=localStorage.getItem("url")
-			      console.log('loginf', lastUrl)
-            setTimeout(() => {
-              if (lastUrl) {
-                _this.$router.replace({
-                  path: lastUrl
-                })
-              }
-              else {
-                _this.$router.replace({
-                  path:'/'
-                })
-              }
-            }, 0)
-            /*setTimeout(() => {
-              window.location.reload()
-            }, 1000)*/
-
+        this.$axios({
+          method: 'post',
+          url: '/web/site/login',
+          params: {
+          },
+          data: {
+            'username': _this.mobile,
+            'password': _this.password
           }
         })
-        .catch(err => {
-          _this.requesting = false
-          _this.refreshCode()
-          _this.$errorMessage(err.message)
+          .then(res => {
+            const data = res.data
+            localStorage.setItem("refreshToken", data.refresh_token);
+            localStorage.setItem("accessToken", data.access_token);
+            let nowDate = parseInt((new Date()).getTime() / 1000)
+            localStorage.setItem("refreshTime", nowDate);
+
+            if (_this.code !== _this.pictureCode) {
+              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+              _this.requesting = false
+            } else {
+              _this.$successMessage(_this.$t(`${lang}.logintips`))
+              _this.$store.commit('setToken', data.access_token)
+              _this.$store.commit('setUserInfo', data.member)
+               _this.$store.dispatch('synchronizeCart')
+              // const lastUrl = _this.$store.state.lastUrl
+              const lastUrl=localStorage.getItem("url")
+              // _this.$store.commit('setLastUrl','')
+              console.log('login', lastUrl)
+
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                }
+                else {
+                  _this.$router.replace({
+                    path: '/'
+                  })
+                }
+              }, 0)
+
+            }
+          })
+          .catch(err => {
+            //console.error(err)
+            _this.requesting = false
+            _this.refreshCode()
+            _this.$errorMessage(err.message)
+          })
+      // 邮箱登录
+      }else{
+        if (_this.account === '') {
+          _this.isActive6 = true
+          _this.mailErr = true
+          return
+        }
+
+        this.$axios({
+          method: 'post',
+          url: '/web/site/login',
+          params: {
+          },
+          data: {
+            'username': _this.account,
+            'password': _this.password
+          }
         })
+          .then(res => {
+
+            const data = res.data
+            localStorage.setItem("refreshToken", data.refresh_token);
+            localStorage.setItem("accessToken", data.access_token);
+            let nowDate = parseInt((new Date()).getTime() / 1000)
+            localStorage.setItem("refreshTime", nowDate);
+
+            if (_this.code !== _this.pictureCode) {
+              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+              _this.requesting = false
+            } else {
+              _this.$successMessage(_this.$t(`${lang}.logintips`))
+              _this.$store.commit('setToken', data.access_token)
+              _this.$store.commit('setUserInfo', data.member);
+               _this.$store.dispatch('synchronizeCart')
+              // const lastUrl = _this.$store.state.lastUrl
+              // _this.$store.commit('setLastUrl', '')
+              const lastUrl=localStorage.getItem("url")
+              console.log('loginf', lastUrl)
+              setTimeout(() => {
+                if (lastUrl) {
+                  _this.$router.replace({
+                    path: lastUrl
+                  })
+                }
+                else {
+                  _this.$router.replace({
+                    path:'/'
+                  })
+                }
+              }, 0)
+              /*setTimeout(() => {
+                window.location.reload()
+              }, 1000)*/
+
+            }
+          })
+          .catch(err => {
+            _this.requesting = false
+            _this.refreshCode()
+            _this.$errorMessage(err.message)
+          })
+      }
+    },
+    loginT(i) {
+      this.account = '';
+      this.mobile = '';
+      this.password = '';
+
+      if(i == 'a'){
+        this.loginType = 1
+      }else if(i == 'b'){
+        this.loginType = 2
+      }
+
+      sessionStorage.setItem("loginType", this.loginType)
     }
   }
 }
@@ -494,6 +534,11 @@ input::placeholder {
     color: #8b766c;
   }
 
+  .submit.bg{
+	background-color: #A88F82;
+	color: #fff;
+  }
+
   .gap-line {
     height: 8px;
     text-align: center;
@@ -518,5 +563,9 @@ input::placeholder {
     border: 1px solid #f4a997 !important;
     border-radius: 6px;
   }
+}
+.icon .phone{
+  width: 20px !important;
+  height: 22px !important;
 }
 </style>

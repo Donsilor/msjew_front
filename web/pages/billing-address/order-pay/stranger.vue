@@ -604,11 +604,11 @@
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
-          <div v-if="g.groupType === null" class="finished">
+          <div v-if="g.groupType === null && g.data[0].goodsType !== '19'" class="finished">
             <div class="cart-radio"></div>
             <single :g="g" :options="false"></single>
           </div>
-          <div v-if="g.groupType === 1" class="couple">
+          <div v-if="g.data[0].goodsType == '19'" class="couple">
             <div class="cart-radio"></div>
             <double :g="g" :options="false"></double>
           </div>
@@ -937,7 +937,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -1544,7 +1544,7 @@
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
-              
+
               <!-- 电汇 -->
               <div
                 v-show="this.$store.state.platform !== 30"
@@ -1658,11 +1658,11 @@
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
-          <div v-if="g.groupType === null" class="finished">
+          <div v-if="g.groupType === null && g.data[0].goodsType !== '19'" class="finished">
             <div class="cart-radio"></div>
             <single :g="g" :options="false"></single>
           </div>
-          <div v-if="g.groupType === 1" class="couple">
+          <div v-if="g.data[0].goodsType == '19'" class="couple">
             <div class="cart-radio"></div>
             <double :g="g" :options="false"></double>
           </div>
@@ -1991,7 +1991,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -2266,6 +2266,7 @@ export default {
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
+            console.log("fffff",res[i])
             this.goodsPrice += res[i].price
           }
           this.tex.orderAmount = this.goodsPrice

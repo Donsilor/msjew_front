@@ -18,53 +18,159 @@
               "
               class="mod-item"
             >
-			<div @click="godetails(item, index)">
-              <img :src="imageStrToArray(item.goodsImages)[0]" />
-              <span v-if="!getStatus(item, index)" class="failed">
-                {{ lang.failed }}
-              </span>
-              <div class="right">
-                <h4 class="ow-h2">
-                  {{ item.goodsName }}
-                </h4>
-                <p>SKU：{{ item.sku }}</p>
-                <p class="p">
-                  {{
-                    getconfig(item.config, item.simpleGoodsEntity.specs)
-                  }}
-                </p>
-                <b>{{ formatCoin(coin) }}{{ formatMoney(item.salePrice) }}</b>
-                <div v-if="item.groupType === 1" class="btn-type">
-                  {{ lang.ring }}
-                </div>
-                <div v-if="item.groupType === 2" class="btn-type">
-                  {{ lang.coustom }}
-                </div>
-                <div v-if="item.groupType !== 0 && index !== list.length - 1">
-                  <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                    {{ list[index + 1].goodsName }}
-                  </h4>
-                  <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
-                    SKU：{{ list[index + 1].sku }}
-                  </p>
-                  <p>
-                    {{
-                      getconfig(
-                        list[index + 1].config,
-                        list[index + 1].simpleGoodsEntity.specs
-                      )
-                    }}
-                  </p>
-                  <b>{{ formatCoin(coin) }}{{ formatMoney(list[index + 1].salePrice) }}</b>
+              <!-- 单品 -->
+              <div v-if="item.groupType === 0 && Number(item.goodsType) !== 19" class="single">
+                <div @click="godetails(item, index)">
+                        <img :src="imageStrToArray(item.goodsImages)[0]" />
+                        <span v-if="!getStatus(item, index)" class="failed">
+                          {{ lang.failed }}
+                        </span>
+                        <div class="right">
+                          <h4 class="ow-h2">
+                            {{ item.goodsName }}
+                          </h4>
+                          <p>SKU：{{ item.sku }}</p>
+                          <p class="p">
+                            {{
+                              getconfig(item.config, item.simpleGoodsEntity.specs)
+                            }}
+                          </p>
+                          <b>{{  formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                          <div v-if="item.groupType === 1" class="btn-type">
+                            {{ lang.ring }}
+                          </div>
+                          <div v-if="item.groupType === 2" class="btn-type">
+                            {{ lang.coustom }}
+                          </div>
+                          <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                            <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                              {{ list[index + 1].goodsName }}
+                            </h4>
+                            <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                              SKU：{{ list[index + 1].sku }}
+                            </p>
+                            <p>
+                              {{
+                                getconfig(
+                                  list[index + 1].config,
+                                  list[index + 1].simpleGoodsEntity.specs
+                                )
+                              }}
+                            </p>
+                            <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
 
 
-                  <p v-if="item.groupType === 1">
-                    <br/>
-                    <b>{{ formatCoin(coin) }}{{ formatMoney(item.totalPrice) }}</b>
-                   </p>
+                            <p v-if="item.groupType === 1">
+                              <br/>
+                              <b>{{ formatCoin(coin) }} {{ formatMoney(item.totalPrice) }}</b>
+                            </p>
+                          </div>
+                        </div>
                 </div>
               </div>
-		  </div>
+              <!-- 对戒 -->
+              <div v-if="item.goodsType == '19'" class="double">
+                <div @click="godetails(item, index)">
+                  <img :src="imageStrToArray(item.goodsImages)[0]" />
+                  <span v-if="!getStatus(item, index)" class="failed">
+                    {{ lang.failed }}
+                  </span>
+                  <h4 class="ow-h2">
+                      {{ item.goodsName }}
+                  </h4>
+                  <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
+                  <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
+                    
+                    <p class="p">
+                      {{
+                        getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value)
+                      }}
+                    </p>
+                    
+                    <div v-if="item.goodsType == '19'" class="btn-type">
+                      {{ lang.ring }}
+                    </div>
+                    <div v-if="item.groupType == 1" class="btn-type">
+                      {{ lang.coustom }}
+                    </div>
+                    <!-- <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                      <h4 v-if="item.goodsType == 2" class="ow-h2 margin-top-20">
+                        {{ list[index + 1].goodsName }}
+                      </h4>
+                      <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                        SKU：{{ list[index + 1].sku }}
+                      </p>
+                      <p>
+                        {{
+                          getconfig(
+                            list[index + 1].config,
+                            list[index + 1].simpleGoodsEntity.specs
+                          )
+                        }}
+                      </p>
+                      <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+
+                      <p v-if="item.groupType === 1">
+                        <br/>
+                        <b>{{ coin }} {{ formatMoney(item.totalPrice) }}</b>
+                      </p>
+                    </div> -->
+                  </div>
+                  <b class="double-ring-price">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <div class="cut-line"></div>
+                </div>
+              </div>
+              <!-- 定制 -->
+              <div v-if="item.groupType === 2" class="single customization">
+                <div @click="godetails(item, index)">
+                        <img :src="imageStrToArray(item.goodsImages)[0]" />
+                        <span v-if="!getStatus(item, index)" class="failed">
+                          {{ lang.failed }}
+                        </span>
+                        <div class="right">
+                          <h4 class="ow-h2">
+                            {{ item.goodsName }}
+                          </h4>
+                          <p>SKU：{{ item.sku }}</p>
+                          <p class="p">
+                            {{
+                              getconfig(item.config, item.simpleGoodsEntity.specs)
+                            }}
+                          </p>
+                          <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                          <div v-if="item.groupType === 1" class="btn-type">
+                            {{ lang.ring }}
+                          </div>
+                          <div v-if="item.groupType === 2" class="btn-type">
+                            {{ lang.coustom }}
+                          </div>
+                          <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                            <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                              {{ list[index + 1].goodsName }}
+                            </h4>
+                            <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                              SKU：{{ list[index + 1].sku }}
+                            </p>
+                            <p>
+                              {{
+                                getconfig(
+                                  list[index + 1].config,
+                                  list[index + 1].simpleGoodsEntity.specs
+                                )
+                              }}
+                            </p>
+                            <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+
+                            <p v-if="item.groupType === 1">
+                              <br/>
+                              <b>{{ formatCoin(coin) }} {{ formatMoney(item.totalPrice) }}</b>
+                            </p>
+                          </div>
+                        </div>
+                </div>
+              </div>
               <div class="domore">
                 <div
                   class="select-icon"
@@ -236,7 +342,7 @@ export default {
         for (let i = 0; i < this.list.length; i++) {
           this.soudout = this.list[i].goodsStatus
           // console.log("所有",this.list[i].goodsStatus)
-          if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
+          if (this.list[i].goodsStatus === 2) {
             //  console.log("所有")
             this.list[i].isSelect = this.selectAll
           } else {
@@ -256,7 +362,7 @@ export default {
       this.selectAll = !this.selectAll
       // console.log("全选", this.list)
       for (let i = 0; i < this.list.length; i++) {
-        if (this.list[i].goodsStatus === 2 && this.list[i].status == 1) {
+        if (this.list[i].goodsStatus === 2) {
           //  console.log("所有")
           this.list[i].isSelect = this.selectAll
         } else {
@@ -311,7 +417,7 @@ export default {
           }
         }
         // 反选
-        if (this.list[i].goodsStatus === 2 && this.list[i].status === 1) {
+        if (this.list[i].goodsStatus === 2) {
           if (!this.list[i].isSelect) {
             this.selectAll = false
           }
@@ -364,7 +470,7 @@ export default {
       if (list.length > 0) {
         // console.log("item",list)
         list.map((item, index) => {
-
+// console.log("itemlist",item)
           if (index === list.length - 1) {
             text = text + item.configAttrIVal
           } else {
@@ -375,10 +481,40 @@ export default {
       if (list2 && list2.length > 0) {
         list2.map((item, index) => {
           if (item.configId === 196) {
-            console.log(list2, '9999', item)
+            // console.log(list2, '9999', item)
             text = text + ' /  ' + item.configAttrIVal
           }
         })
+      }
+      return text
+    },
+    // 属性数值转化成字符串
+    getDubleConfig(good_spec,goods_attr) {
+      let text = ''
+      if (good_spec.length > 0) {
+        good_spec.map((item, index) => {
+        // console.log("good_spec",item)
+
+          if (index === good_spec.length - 1) {
+            text = text + item.attr_value
+          } else {
+            text = text + item.attr_value + ' /  '
+          }
+        }) 
+      }
+     if (goods_attr) {
+       for (let i in goods_attr) {
+      //  console.log("good_spec",goods_attr[i])
+        text = text + ' /  '+goods_attr[i] 
+      }
+        // goods_attr.map((item, index) => {
+
+        //   if (index === goods_attr.length - 1) {
+        //     text = text + item
+        //   } else {
+        //     text = text + item + ' /  '
+        //   }
+        // }) 
       }
       return text
     },
@@ -404,7 +540,7 @@ export default {
     // 获取本地local列表
     getLocalCart() {
       this.$store.dispatch('getLocalCart').then(res => {
-        // console.log("djkashdkasjdklasj",res)
+        console.log("djkashdkasjdklasj",res)
         if (res.length > 0) {
           this.noListData = false
           this.cartList = []
@@ -427,15 +563,15 @@ export default {
                 goods_id: val.goodsDetailsId,
                 goods_type:val.goodsType,
                 group_id:
-                  val.groupType === 1
-                    ? val.groupId
+                  val.goodsType == 19
+                    ? val.goodsId
                     : val.groupType === 2
                     ? item.id
                     : null,
                 group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
-              // console.log("ooooo>>>",o)
+              console.log("ooooo>>>",val)
               this.cartList.push(o)
             })
           })
@@ -479,38 +615,39 @@ export default {
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
+          // console.log("dddd",item)
           const o = {
             isSelect: false,
-            goodsImages:
-              item.groupType === 1
-                ? item.ringsSimpleGoodsEntity.ringImg
-                : item.simpleGoodsEntity.goodsImages,
-            goodsName:
-              item.groupType === 1
-                ? item.ringsSimpleGoodsEntity.name
-                : item.simpleGoodsEntity.goodsName,
+            goodsImages: item.simpleGoodsEntity.goodsImages,
+              // item.goodsType === 19
+              //   ? item.simpleGoodsEntity.goodsImages
+              //   : item.simpleGoodsEntity.goodsImages,
+            goodsName:item.simpleGoodsEntity.goodsName,
+              // item.goodsType === 19
+              //   ? item.ringsSimpleGoodsEntity.name
+              //   : item.simpleGoodsEntity.goodsName,
             config:
-              item.groupType === 1
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.detailConfig
+              item.goodsType == 19
+                ? item.ring
                 : item.simpleGoodsEntity.categoryId === 1
-                ? item.simpleGoodsEntity.specs
+                ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             sku:
-              item.groupType === 1
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
-                    .simpleGoodsDetails.goodsDetailsCode
+              item.goodsType == 19
+                ? item.ring
                 : item.simpleGoodsEntity.simpleGoodsDetails.goodsDetailsCode,
-            salePrice:
-              item.groupType === 1
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
-                    .simpleGoodsDetails.retailMallPrice
-                : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
-            totalPrice:item.groupType === 1
-                ? item.ringsSimpleGoodsEntity.salePrice
+            salePrice: item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
+              // item.goodsType == 19
+              //   ? item.simpleGoodsEntity
+              //       .simpleGoodsDetails.retailMallPrice
+              //   : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
+            totalPrice:item.goodsType == 19
+                ? item.simpleGoodsEntity.salePrice
                 : item.simpleGoodsEntity.simpleGoodsDetails.retailMallPrice,
             groupType: item.groupType || 0,
+            goodsType: item.simpleGoodsEntity.categoryId,
             createTime:
-              item.groupType === 1
+              item.goodsType == 19
                 ? item.createTime
                 : item.groupId
                 ? item.groupId
@@ -520,18 +657,20 @@ export default {
             id: item.id,
             localSn: item.localSn,
             groupId: item.groupId || null,
-            simpleGoodsEntity:
-              item.groupType === 1
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
-                : item.simpleGoodsEntity,
-            status:
-              item.groupType === 1 ? item.ringsSimpleGoodsEntity.status : 1,
-            goodsStatus:
-              item.groupType === 1
-                ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus
-                : item.simpleGoodsEntity.goodsStatus
+             simpleGoodsEntity: item.simpleGoodsEntity,
+            // simpleGoodsEntity:
+            //   item.goodsType == 19
+            //     ? item.ringsSimpleGoodsEntity.simpleGoodsEntity
+            //     : item.simpleGoodsEntity,
+            status:item.goodsType,
+              // item.goodsType === 19 ? item.ringsSimpleGoodsEntity.status : 1,
+            goodsStatus:item.simpleGoodsEntity.goodsStatus
+              // item.goodsType === 19
+              //   ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus
+              //   : item.simpleGoodsEntity.goodsStatus
           }
           this.list.push(o)
+          // console.log("this.list",this.list)
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
@@ -563,6 +702,7 @@ export default {
       }
     },
     godetails(item, index) {
+      // console.log("itemdetail",item)
       // 去定制详情
       if (item.groupType === 2) {
         const ct1 = this.isLogin ? item.id : item.localSn
@@ -581,20 +721,20 @@ export default {
         )
       }
       // 去对戒详情
-      if (item.groupType === 1) {
+      else if (item.goodsType == '19') {
         this.$router.push({
           name: 'marriage-ring-pair-ring-detail',
           query: {
-            goodId: item.groupId,
+            goodId: item.goodsId,
             ct: this.isLogin ? item.id : item.localSn,
-            dt1: item.goodsDetailsId,
-            dt2: this.list[index + 1].goodsDetailsId,
+            // dt1: item.goodsDetailsId,
+            // dt2: this.list[index + 1].goodsDetailsId,
             ringType : 'pair'
           }
         })
       }
       // 去单品详情
-      if (item.groupType === 0) {
+      else if(item.groupType === 0) {
         if (item.simpleGoodsEntity.categoryId === 15) {
           // 是个钻石💎
           this.$router.push({
@@ -714,20 +854,91 @@ export default {
             line-height: 125px;
             background: rgba(51, 51, 51, 0.2);
           }
-          .right {
-            margin-left: 140px;
-            padding-bottom: 24px;
-            border-bottom: 1px solid #f5f5f5;
-            text-align: left;
-            min-height: 125px;
-            h4 {
+          .single{
+            .right {
+              margin-left: 140px;
+              padding-bottom: 24px;
+              border-bottom: 1px solid #f5f5f5;
+              text-align: left;
+              min-height: 125px;
+              .cut-line{
+                height:1px;
+                display:inline-block;
+                background:#f5f5f5;
+                width:50%;
+              }
+              h4 {
+                display: inline-block;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+              }
+              p {
+                font-size: 13px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(153, 153, 153, 1);
+              }
+              .p {
+                margin-bottom: 4px;
+              }
+              b {
+                font-size: 17px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(243, 163, 145, 1);
+                font-family: twCenMt;
+              }
+              .btn-type {
+                position: absolute;
+                top: 174px;
+                left: 34px;
+                width: 80px;
+                height: 26px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 4px;
+                font-size: 12px;
+                line-height: 26px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+              }
+            }
+          }
+          .double{
+            .double-ring-price{
+              font-size: 17px;
+              line-height: 20px;
+              font-weight: 400;
+              color: rgba(243, 163, 145, 1);
+              font-family: twCenMt;
+              text-align: left;
+              margin-right: 102px;
+              // margin-left: 30px;
               display: inline-block;
+              margin-top: 10px;
+            }
+            .cut-line{
+              height:1px;
+              display:inline-block;
+              background:#f5f5f5;
+              width: 57%;
+              margin-left: 136px;
+            }
+            h4 {
+              // display: inline-block;
               max-height: 40px;
               font-size: 14px;
               line-height: 20px;
               font-family: PingFangHK-Regular;
               font-weight: 400;
               color: rgba(51, 51, 51, 1);
+              text-align: left;
+              padding-left: 15px;
             }
             p {
               font-size: 13px;
@@ -736,31 +947,63 @@ export default {
               color: rgba(153, 153, 153, 1);
             }
             .p {
-              margin-bottom: 4px;
+              // margin-bottom: 4px;
             }
-            b {
-              font-size: 17px;
-              line-height: 20px;
-              font-weight: 400;
-              color: rgba(243, 163, 145, 1);
-              font-family: twCenMt;
+            .sku{
+              margin-bottom: 10px;
+              text-align: left;
+              margin-left: 140px;
             }
-            .btn-type {
-              position: absolute;
-              top: 174px;
-              left: 34px;
-              width: 80px;
-              height: 26px;
-              text-align: center;
-              background: rgba(245, 240, 236, 1);
-              border: 1px solid rgba(215, 202, 196, 1);
-              border-radius: 4px;
-              font-size: 12px;
-              line-height: 26px;
-              font-weight: 400;
-              color: rgba(148, 116, 101, 1);
+            .right {
+              margin-left: 140px;
+              padding-bottom: 5px;
+              // border-bottom: 1px solid #f5f5f5;
+              text-align: left;
+              // min-height: 65px; 
+              .cut-line{
+                height:1px;
+                display:inline-block;
+                background:#f5f5f5;
+                width:50%;
+              }
+              
+              b {
+                font-size: 17px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(243, 163, 145, 1);
+                font-family: twCenMt;
+              }
+              
+              .btn-type {
+                position: absolute;
+                top: 174px;
+                left: 34px;
+                width: 80px;
+                height: 26px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 4px;
+                font-size: 12px;
+                line-height: 26px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+              }
+              
+            }
+            .right:last-child {
+              // padding-bottom: 15px;
+              border-bottom: 1px solid #f5f5f5;
+              .ow-h2{
+                display: none;
+              }
+              .sku{
+                display: none;
+              }
             }
           }
+          
           .domore {
             display: flex;
             justify-content: space-between;
@@ -776,8 +1019,14 @@ export default {
               width: 40px;
               height: 40px;
               text-align: center;
-              margin: -10px 0 0 40px;
+              margin: 0px 0 0 40px;
               cursor: pointer;
+            }
+            .remove{
+              margin-top: 10px;
+            }
+            .num{
+              margin-top: 10px;
             }
               i{
                 width: 18px;

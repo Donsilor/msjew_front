@@ -159,7 +159,7 @@
 
         <!-- 添加购物卡 -->
         <div class="clf">
-          <div class="addShoppingCard fr" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
+          <div class="addShoppingCard fr" v-if="this.$store.state.platform !== 31" @click="addCard()">+{{this.cardList.length == 0 ? lang.useShoppingCard : lang.editOrUnbound}}</div>
         </div>
         <!-- 开具发票 -->
         <div class="invoice" v-if="this.areaId == '1'">
@@ -338,7 +338,7 @@ export default {
       url:'',
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
-      coin: this.$store.state.coin,
+      coin: this.$store.state.coin, 
       form: [],
       actionLink: '',
       list2: [

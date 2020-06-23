@@ -28,10 +28,10 @@ export default {
     return {
       lang: this.LANGUAGE.detailCommons,
       // 第一个戒指
-      // firstRingCarat: {
-      //   id: '',
-      //   text: ''
-      // },
+      firstRingCarat: {
+        id: '',
+        text: ''
+      },
       firstRingSize: {
         id: '',
         text: ''
@@ -41,10 +41,10 @@ export default {
         options: []
       },
       // 第二个戒指
-      // secondRingCarat: {
-      //   id: '',
-      //   text: ''
-      // },
+      secondRingCarat: {
+        id: '',
+        text: ''
+      },
       secondRingSize: {
         id: '',
         text: ''
@@ -96,12 +96,19 @@ export default {
         specs: [],
         materials: [],
         sizes: [],
-        // carats: [],
-        details: []
+        carats: [],
+        details: [],
+        firstRingId:'',
+        secondRingId:'',
+        coupleLadyId:'',
+        coupleMenId:'',
+        goodsId:'',
+        styleId:'',
+        stock:'',
       }
     },
     ringBanners() {
-      return this.imageStrToArray(this.goodInfo.ringImg || '')
+      return this.imageStrToArray(this.goodInfo.goodsImages || '')
     },
     ringDetail() {
       let ringDesc =
@@ -116,9 +123,9 @@ export default {
     firstRing() {
       const goodInfo =
         this.goodInfo &&
-        this.goodInfo.simpleGoodsEntityList &&
-        this.goodInfo.simpleGoodsEntityList[0]
-          ? this.goodInfo.simpleGoodsEntityList[0]
+        this.goodInfo.ring &&
+        this.goodInfo.ring[0]
+          ? this.goodInfo.ring[0]
           : this.defaultGoodInfo
 
       return this.dealGoodInfo(goodInfo)
@@ -126,9 +133,9 @@ export default {
     secondRing() {
       const goodInfo =
         this.goodInfo &&
-        this.goodInfo.simpleGoodsEntityList &&
-        this.goodInfo.simpleGoodsEntityList[1]
-          ? this.goodInfo.simpleGoodsEntityList[1]
+        this.goodInfo.ring &&
+        this.goodInfo.ring[1]
+          ? this.goodInfo.ring[1]
           : this.defaultGoodInfo
 
       return this.dealGoodInfo(goodInfo)
@@ -141,8 +148,8 @@ export default {
           this.firstRingQuality.checked.indexOf(
             details[n].material
           ) > -1 &&
-          details[n].size === this.firstRingSize.id
-          // details[n].carat === this.firstRingCarat.id
+          details[n].size === this.firstRingSize.id &&
+          details[n].carat === this.firstRingCarat.id
         ) {
           result = details[n].retailMallPrice
           break
@@ -164,8 +171,8 @@ export default {
           this.secondRingQuality.checked.indexOf(
             details[n].material
           ) > -1 &&
-          details[n].size === this.secondRingSize.id
-          // details[n].carat === this.firstRingCarat.id
+          details[n].size === this.secondRingSize.id &&
+          details[n].carat === this.firstRingCarat.id
         ) {
           result = details[n].retailMallPrice
           break
@@ -184,32 +191,41 @@ export default {
         return this.goodInfo.salePrice || '--'
       }
       return (
-        this.$helpers.mathAdd(this.firstRingPrize, this.secondRingPrize) ||
+        // this.$helpers.mathAdd(this.firstRingPrize, this.secondRingPrize) ||
         this.goodInfo.salePrice ||
         '--'
       )
     },
     goodsServicesJsons() {
       const result = []
-      const names = []
+      // const names = []
+      // console.log("goodsServicesJsons1", this.firstRing,this.secondRing)
+      this.goodInfo && this.goodInfo.goodsServicesJsons.forEach(item => {
+        result.push(item)
+        // if (names.indexOf(item.name) === -1) {
+        //   names.push(item.name)
+        //   result.push(item)
+        // }
+      })
+      // this.firstRing &&
+      //   this.firstRing.goodsServicesJsons &&
+      //   this.firstRing.goodsServicesJsons.forEach(item => {
+      //     if (names.indexOf(item.name) === -1) {
+      //       names.push(item.name)
+      //       result.push(item)
+      //     }
+      //   })
 
-      this.firstRing &&
-        this.firstRing.goodsServicesJsons &&
-        this.firstRing.goodsServicesJsons.forEach(item => {
-          if (names.indexOf(item.name) === -1) {
-            names.push(item.name)
-            result.push(item)
-          }
-        })
-
-      this.secondRing &&
-        this.secondRing.goodsServicesJsons &&
-        this.secondRing.goodsServicesJsons.forEach(item => {
-          if (names.indexOf(item.name) === -1) {
-            names.push(item.name)
-            result.push(item)
-          }
-        })
+      // this.secondRing &&
+      //   this.secondRing.goodsServicesJsons &&
+      //   this.secondRing.goodsServicesJsons.forEach(item => {
+      //     // console.log("goodsServicesJsons2",item)
+      //     if (names.indexOf(item.name) === -1) {
+      //       names.push(item.name)
+      //       result.push(item)
+      //     }
+      //   })
+        
       return result
     },
     firstRingQualityText() {
@@ -238,86 +254,183 @@ export default {
       }
       return result.length === 0 ? this.lang.stArrContent : result.join(',')
     },
-    // firstRingCaratText() {
-    //   return this.firstRingCarat.text || this.lang.stArrContent
-    // },
-    // secondRingCaratText() {
-    //   return this.secondRingCarat.text || this.lang.stArrContent
-    // },
+    firstRingCaratText() {
+      return this.firstRingCarat.text
+    },
+    secondRingCaratText() {
+      return this.secondRingCarat.text
+    },
     firstRingSizeText() {
       return this.firstRingSize.text || this.lang.stArrContent
     },
     secondRingSizeText() {
       return this.secondRingSize.text || this.lang.stArrContent
     },
+    // firstRingSimpleDetail() {
+    //   const list = this.firstRing.details
+    //   let result = null
+
+    //   // console.log(
+    //   //   'this.firstRingQuality.checked=====>',
+    //   //   this.firstRingQuality.checked
+    //   // )
+
+    //   for (let n = 0, length = list.length; n < length; n++) {
+    //     if (
+    //       list[n].hasOwnProperty('material') &&
+    //       list[n].hasOwnProperty('size') &&
+    //       // list[n].hasOwnProperty('carat') &&
+    //       this.firstRingQuality.checked.indexOf(list[n].material) > -1 &&
+    //       this.firstRingSize.id === list[n].size 
+    //       // this.firstRingCarat.id === list[n].carat
+    //     ) {
+    //       // 同时具有选项的字段，才表示该配置选项已启用
+    //       result = list[n]
+    //       break
+    //     }
+    //   }
+    //   console.log("result",result)
+    //   this.firstRingId = result.id
+    //   return result
+    // },
+    // secondRingSimpleDetail() {
+    //   const list = this.secondRing.details
+    //   let result = null
+
+    //   for (let n = 0, length = list.length; n < length; n++) {
+    //     if (
+    //       list[n].hasOwnProperty('material') &&
+    //       list[n].hasOwnProperty('size') &&
+    //       // list[n].hasOwnProperty('carat') &&
+    //       this.secondRingQuality.checked.indexOf(list[n].material) > -1 &&
+    //       this.secondRingSize.id === list[n].size
+    //       // this.firstRingCarat.id === list[n].carat
+    //     ) {
+    //       // 同时具有选项的字段，才表示该配置选项已启用
+    //       result = list[n]
+    //       break
+    //     }
+    //   }
+    //   console.log("result2",result)
+    //   this.secondRingId = result.id
+    //   return result
+    // },
     firstRingSimpleDetail() {
       const list = this.firstRing.details
       let result = null
-
+      // console.log("ggg",this.firstRing)
       // console.log(
       //   'this.firstRingQuality.checked=====>',
       //   this.firstRingQuality.checked
       // )
-
-      for (let n = 0, length = list.length; n < length; n++) {
-        if (
-          list[n].hasOwnProperty('material') &&
-          list[n].hasOwnProperty('size') &&
-          // list[n].hasOwnProperty('carat') &&
-          this.firstRingQuality.checked.indexOf(list[n].material) > -1 &&
-          this.firstRingSize.id === list[n].size
-          // this.firstRingCarat.id === list[n].carat
-        ) {
-          // 同时具有选项的字段，才表示该配置选项已启用
-          result = list[n]
-          break
+      if(this.firstRing.carats.length >0){
+        for (let n = 0, length = list.length; n < length; n++) {
+          if (
+            list[n].hasOwnProperty('material') &&
+            list[n].hasOwnProperty('size') &&
+            list[n].hasOwnProperty('carat') &&
+            this.firstRingQuality.checked.indexOf(list[n].material) > -1 &&
+            this.firstRingSize.id === list[n].size &&
+            this.firstRingCarat.id === list[n].carat
+          ) {
+            // 同时具有选项的字段，才表示该配置选项已启用
+            result = list[n].id
+            break
+          }
+        }
+      } else {
+        for (let n = 0, length = list.length; n < length; n++) {
+          if (
+            list[n].hasOwnProperty('material') &&
+            list[n].hasOwnProperty('size') &&
+            this.firstRingQuality.checked.indexOf(list[n].material) > -1 &&
+            this.firstRingSize.id === list[n].size
+          ) {
+            // 同时具有选项的字段，才表示该配置选项已启用
+            result = list[n].id
+            break
+          }
         }
       }
-      return result
+      this.firstRingId = result
+      // console.log("result",this.firstRingId)
+      return this.changeChecked()
     },
     secondRingSimpleDetail() {
       const list = this.secondRing.details
       let result = null
 
-      for (let n = 0, length = list.length; n < length; n++) {
-        if (
-          list[n].hasOwnProperty('material') &&
-          list[n].hasOwnProperty('size') &&
-          // list[n].hasOwnProperty('carat') &&
-          this.secondRingQuality.checked.indexOf(list[n].material) > -1 &&
-          this.secondRingSize.id === list[n].size
-          // this.firstRingCarat.id === list[n].carat
-        ) {
-          // 同时具有选项的字段，才表示该配置选项已启用
-          result = list[n]
-          break
+      if(this.secondRing.carats.length >0){
+        for (let n = 0, length = list.length; n < length; n++) {
+          if (
+            list[n].hasOwnProperty('material') &&
+            list[n].hasOwnProperty('size') &&
+            list[n].hasOwnProperty('carat') &&
+            this.secondRingQuality.checked.indexOf(list[n].material) > -1 &&
+            this.secondRingSize.id === list[n].size &&
+            this.secondRingCarat.id === list[n].carat
+          ) {
+            // 同时具有选项的字段，才表示该配置选项已启用
+            result = list[n].id
+            break
+          }
+        }
+      } else{
+        for (let n = 0, length = list.length; n < length; n++) {
+          if (
+            list[n].hasOwnProperty('material') &&
+            list[n].hasOwnProperty('size') &&
+            this.secondRingQuality.checked.indexOf(list[n].material) > -1 &&
+            this.secondRingSize.id === list[n].size
+          ) {
+            // 同时具有选项的字段，才表示该配置选项已启用
+            result = list[n].id
+            break
+          }
         }
       }
-      return result
+      this.secondRingId = result
+      // console.log("result2",this.secondRingId)
+      // this.secondRingId = result.id
+      return this.changeChecked()
     },
     showAverageScores() {
       return parseInt(this.averageScores || '0')
-    }
+    },
+    
   },
   created() {
-    console.log("11111",this.firstRing.materials)
-    // if(this.firstRing.carats.length>0){
-    //   this.firstRingCarat = {
-    //     id: this.firstRing.carats[0].sortType,
-    //     text: this.firstRing.carats[0].content
-    //   }
-    // }
-    if(this.firstRing.materials[0].id){
-      // this.firstRingSize = {
-      //  id: this.firstRing.sizes[0].sortType,
-      //   text: this.firstRing.sizes[0].content
-      // }
-      this.firstRingQuality = {
-        checked: this.firstRing.materials[0].id
-          ? [this.firstRing.materials[0].id]
-          : [],
-        options: this.firstRing.materials
+    if(this.firstRing.carats.length>0){
+      this.firstRingCarat = {
+        id: this.firstRing.carats[0].sortType,
+        text: this.firstRing.carats[0].content
       }
+    }
+    this.firstRingSize = {
+      id: this.firstRing.sizes[0].sortType,
+      text: this.firstRing.sizes[0].content
+    }
+    this.firstRingQuality = {
+      checked: this.firstRing.materials[0].id
+        ? [this.firstRing.materials[0].id]
+        : [],
+      options: this.firstRing.materials
+    }
+    if(this.secondRing.carats.length>0){
+      this.secondRingCarat = {
+        id: this.secondRing.carats[0].sortType,
+        text: this.secondRing.carats[0].content
+      }
+    }
+    this.secondRingSize = {
+      id: this.secondRing.sizes[0].sortType,
+      text: this.secondRing.sizes[0].content
+    }
+    this.secondRingQuality = {
+      checked: this.secondRing.materials[0].id
+        ? [this.secondRing.materials[0].id]
+        : [],
+      options: this.secondRing.materials
     }
       // this.secondRingCarat = {
       //   id: this.secondRing.carats[0].sortType,
@@ -337,6 +450,7 @@ export default {
       }
   },
   mounted() {
+    
     // this.$axios carats
     //   .get(`/wap/goodsComments/getAvgLevel`, {
     //     params: {
@@ -373,6 +487,46 @@ export default {
     //   })
   },
   methods: {
+    //下拉框更新后触发
+    changeChecked() {
+      const _this = this
+
+      const firstRing = _this.firstRingId
+      const secondRing = _this.secondRingId
+
+      if(!firstRing || !secondRing) {
+        _this.coupleLadyId = ''
+        _this.coupleMenId = ''
+        _this.goodsId = ''
+        _this.styleId = ''
+        _this.categoryId = ''
+        _this.stock = ''
+        return;
+      }
+      // console.log("firstRing",firstRing,secondRing)
+      _this.doubleRingDetailId(firstRing, secondRing);
+    },
+    doubleRingDetailId(ladyRing, menRing) {
+      const _this = this
+      _this.coupleLadyId = ''
+        _this.coupleMenId = ''
+        _this.goodsId = ''
+        _this.styleId = ''
+        _this.categoryId = ''
+        _this.stock = ''
+      // console.log("goodinfo",this.goodInfo.details)
+      this.goodInfo.details.map((item, i) => {
+        if(ladyRing == item.ladyRing && menRing == item.menRing || menRing == item.ladyRing && ladyRing == item.menRing) {
+          _this.coupleLadyId = item.ladyRing
+          _this.coupleMenId = item.menRing
+          _this.goodsId = item.id
+          _this.styleId = item.goodsId
+          _this.categoryId = item.categoryId
+          _this.goodInfo.salePrice = item.retailMallPrice
+          _this.stock = item.stock
+        }
+      })
+    },
     dealGoodInfo(goodInfo) {
       goodInfo = JSON.parse(JSON.stringify(goodInfo))
       if (Object.keys(goodInfo).length === 0) {
@@ -389,7 +543,7 @@ export default {
         }
         mcArr.push(o)
       }
-      // const carats = []
+      const carats = []
       const stArr = []
       for (const i in goodInfo.sizes) {
         const o = {
@@ -399,25 +553,25 @@ export default {
         }
         stArr.push(o)
       }
-      // stArr.unshift({
-      //   content: this.lang.stArrContent,
-      //   sortType: ``,
-      //   sortBy: ``
-      // })
-      // for (const i in goodInfo.carats) {
-      //   const o = {
-      //     content: goodInfo.carats[i].name,
-      //     sortType: goodInfo.carats[i].id,
-      //     sortBy: goodInfo.carats[i].id
-      //   }
-      //   carats.push(o)
-      // }
+      stArr.unshift({
+        content: this.lang.stArrContent,
+        sortType: ``,
+        sortBy: ``
+      })
+      for (const i in goodInfo.carats) {
+        const o = {
+          content: goodInfo.carats[i].name,
+          sortType: goodInfo.carats[i].id,
+          sortBy: goodInfo.carats[i].id
+        }
+        carats.push(o)
+      }
       // carats.unshift({
-      //   content: this.lang.stArrContent,
+      //   content: ``,
       //   sortType: ``,
       //   sortBy: ``
       // })
-      // goodInfo.carats = carats
+      goodInfo.carats = carats
       goodInfo.sizes = stArr
       goodInfo.materials = mcArr
       goodInfo.goodsDesc = goodInfo.goodsDesc.includes(`<script>`)
@@ -470,26 +624,26 @@ export default {
       this.$refs['second-ring-suitability'] &&
         this.$refs['second-ring-suitability'].show()
     },
-    // showFirstRingCaratChoose() {
-    //   this.$refs['first-ring-carat'] &&
-    //     this.$refs['first-ring-carat'].show()
-    // },
-    // showSecondRingCaratChoose() {
-    //   this.$refs['second-ring-carat'] &&
-    //     this.$refs['second-ring-carat'].show()
-    // },
-    // firstRingClearCarat(val) {
-    //   this.firstRingCarat = {
-    //     id: val.item.sortType,
-    //     text: val.item.content
-    //   }
-    // },
-    // secondRingClearCarat(val) {
-    //   this.secondRingCarat = {
-    //     id: val.item.sortType,
-    //     text: val.item.content
-    //   }
-    // },
+    showFirstRingCaratChoose() {
+      this.$refs['first-ring-carat'] &&
+        this.$refs['first-ring-carat'].show()
+    },
+    showSecondRingCaratChoose() {
+      this.$refs['second-ring-carat'] &&
+        this.$refs['second-ring-carat'].show()
+    },
+    firstRingClearCarat(val) {
+      this.firstRingCarat = {
+        id: val.item.sortType,
+        text: val.item.content
+      }
+    },
+    secondRingClearCarat(val) {
+      this.secondRingCarat = {
+        id: val.item.sortType,
+        text: val.item.content
+      }
+    },
     firstRingClearSize(val) {
       this.firstRingSize = {
         id: val.item.sortType,
@@ -522,7 +676,7 @@ export default {
         for (const i in bullShit) {
           if (
             parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
-            // parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
+            parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) && 
             parseInt(bullShit[i].material) ===
               parseInt(this.conditions[0].checked)
           ) {
@@ -536,34 +690,46 @@ export default {
     },
     addCart() {
       if (!(this.canAddCart && this.inSale)) {
-        return
-      }
-      if (!this.firstRingSimpleDetail || !this.secondRingSimpleDetail) {
         this.$toast(this.lang.specificationToast)
         return
       }
-      const goodInfo = [
-        {
-          goodsCount: 1,
-          goodsDetailsId: this.firstRingSimpleDetail.id,
-          goodsId: this.firstRingSimpleDetail.goodsId,
-          groupId: this.goodInfo.id,
-          groupType: 1,
-          goodsType: this.firstRingSimpleDetail.categoryId,
-          serviceId: 0,
-          serviceVal: 'string'
-        },
-        {
-          goodsCount: 1,
-          goodsDetailsId: this.secondRingSimpleDetail.id,
-          goodsId: this.secondRingSimpleDetail.goodsId,
-          groupId: this.goodInfo.id,
-          groupType: 1,
-          goodsType: this.secondRingSimpleDetail.categoryId,
-          serviceId: 0,
-          serviceVal: 'string'
-        }
-      ]
+      if (!this.goodsId) {
+        this.$toast(this.lang.specificationToast)
+        return
+      }
+      // const goodInfo = [
+      //   {
+      //     goodsCount: 1,
+      //     goodsDetailsId: this.firstRingSimpleDetail.id,
+      //     goodsId: this.firstRingSimpleDetail.goodsId,
+      //     groupId: this.goodInfo.id,
+      //     groupType: 1,
+      //     goodsType: this.firstRingSimpleDetail.categoryId,
+      //     serviceId: 0,
+      //     serviceVal: 'string'
+      //   },
+      //   {
+      //     goodsCount: 1,
+      //     goodsDetailsId: this.secondRingSimpleDetail.id,
+      //     goodsId: this.secondRingSimpleDetail.goodsId,
+      //     groupId: this.goodInfo.id,
+      //     groupType: 1,
+      //     goodsType: this.secondRingSimpleDetail.categoryId,
+      //     serviceId: 0,
+      //     serviceVal: 'string'
+      //   }
+      // ]
+
+      const goodInfo = {
+        goodsCount: 1,
+        goodsDetailsId:  this.goodsId,
+        goodsId: this.goodsId,
+        groupId: null,
+        groupType: null,
+        goodsType: this.categoryId,
+        serviceId: 0,
+        serviceVal: 'string'
+      }
       this.$emit('addCart', goodInfo)
     },
     setWish() {

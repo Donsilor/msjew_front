@@ -3,45 +3,130 @@
     <div class="content">
       <div class="mod">
         <ul>
+          <!-- v-if="
+                !(index !== 0 && item.createTime === list[index - 1].createTime)
+              " -->
           <li v-for="(item, index) in list" :key="index">
             <div
               v-if="
-                !(index !== 0 && item.createTime === list[index - 1].createTime)
+                !(
+                  index !== 0 &&
+                  item.createTime === list[index - 1].createTime &&
+                  item.groupType !== 0
+                )
               "
               class="mod-item"
             >
-              <img :src="imageStrToArray(item.goodsImages)[0]" />
-              <div class="right">
-                <h4 class="ow-h2">{{ item.goodsName }}</h4>
-                <p>SKU：{{ item.sku }}</p>
-                <p class="p">
-                  {{
-                    getconfig(item.config, item.simpleGoodsEntity.baseConfig)
-                  }}
-                </p>
-                <b>{{ formatCoin(coin) }}{{ formatMoney(item.salePrice) }}</b>
-                <div v-if="item.groupType === 1" class="btn-type">
-                  {{ lang.ring }}
-                </div>
-                <div v-if="item.groupType === 2" class="btn-type">
-                  {{ lang.coustom }}
-                </div>
-                <div v-if="item.groupType !== 0 && index !== list.length - 1">
-                  <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-10">
-                    {{ list[index + 1].goodsName }}
-                  </h4>
-                  <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
-                    SKU：{{ list[index + 1].sku }}
-                  </p>
+              <!-- 单品 -->
+              <div v-if="item.groupType === 0 && Number(item.goodsType) !== 19" class="single">
+                <img :src="imageStrToArray(item.goodsImages)[0]" />
+                <div class="right">
+                  <h4 class="ow-h2">{{ item.goodsName }}</h4>
+                  <p>SKU：{{ item.sku }}</p>
                   <p class="p">
                     {{
-                      getconfig(
-                        list[index + 1].config,
-                        list[index + 1].simpleGoodsEntity.baseConfig
-                      )
+                      getconfig(item.config, item.simpleGoodsEntity.baseConfig)
                     }}
                   </p>
-                  <b>{{ formatCoin(coin) }}{{ formatMoney(list[index + 1].salePrice) }}</b>
+                  <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <div v-if="item.groupType === 1" class="btn-type">
+                    {{ lang.ring }}
+                  </div>
+                  <div v-if="item.groupType === 2" class="btn-type">
+                    {{ lang.coustom }}
+                  </div>
+                  <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                    <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-10">
+                      {{ list[index + 1].goodsName }}
+                    </h4>
+                    <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                      SKU：{{ list[index + 1].sku }}
+                    </p>
+                    <p class="p">
+                      {{
+                        getconfig(
+                          list[index + 1].config,
+                          list[index + 1].simpleGoodsEntity.baseConfig
+                        )
+                      }}
+                    </p>
+                    <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                  </div>
+                </div>
+              </div>
+              <!-- 对戒 -->
+              <div v-if="item.goodsType == '19'" class="double">
+                <img :src="imageStrToArray(item.goodsImages)[0]" />
+                <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
+                  <h4 class="ow-h2">{{ item.goodsName }}</h4>
+                  <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
+                  <p class="p">
+                    {{
+                      getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value)
+                    }}
+                  </p>
+                  <!-- <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b> -->
+                  <div v-if="item.goodsType == '19'" class="btn-type">
+                    {{ lang.ring }}
+                  </div>
+                  <div v-if="item.groupType == 1" class="btn-type">
+                    {{ lang.coustom }}
+                  </div>
+                  <!-- <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                    <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-10">
+                      {{ list[index + 1].goodsName }}
+                    </h4>
+                    <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                      SKU：{{ list[index + 1].sku }}
+                    </p>
+                    <p class="p">
+                      {{
+                        getconfig(
+                          list[index + 1].config,
+                          list[index + 1].simpleGoodsEntity.baseConfig
+                        )
+                      }}
+                    </p>
+                    <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                  </div> -->
+                </div>
+                  <b class="double-ring-price">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+              </div>
+              <!-- 定制 -->
+              <div v-if="item.groupType === 2" class="customization">
+                <img :src="imageStrToArray(item.goodsImages)[0]" />
+                <div class="right">
+                  <h4 class="ow-h2">{{ item.goodsName }}</h4>
+                  <p>SKU：{{ item.sku }}</p>
+                  <p class="p">
+                    {{
+                      getconfig(item.config, item.simpleGoodsEntity.baseConfig)
+                    }}
+                  </p>
+                  <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <div v-if="item.groupType === 1" class="btn-type">
+                    {{ lang.ring }}
+                  </div>
+                  <div v-if="item.groupType === 2" class="btn-type">
+                    {{ lang.coustom }}
+                  </div>
+                  <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                    <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-10">
+                      {{ list[index + 1].goodsName }}
+                    </h4>
+                    <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                      SKU：{{ list[index + 1].sku }}
+                    </p>
+                    <p class="p">
+                      {{
+                        getconfig(
+                          list[index + 1].config,
+                          list[index + 1].simpleGoodsEntity.baseConfig
+                        )
+                      }}
+                    </p>
+                    <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                  </div>
                 </div>
               </div>
             </div>
@@ -109,6 +194,29 @@ export default {
         return text
       // }
     },
+    // 对戒属性数值转化成字符串
+    getDubleConfig(good_spec,goods_attr) {
+      // console.log("list",this.list)
+      let text = ''
+      if (good_spec.length > 0) {
+        good_spec.map((item, index) => {
+        // console.log("good_spec",item)
+
+          if (index === good_spec.length - 1) {
+            text = text + item.attr_value
+          } else {
+            text = text + item.attr_value + ' /  '
+          }
+        }) 
+      }
+
+      if (goods_attr) {
+       for (let i in goods_attr) {
+          text = text + ' /  '+goods_attr[i] 
+        }
+      }
+      return text
+    },
     back() {
       this.$router.go(-1)
     }
@@ -140,55 +248,242 @@ export default {
             width: 75px;
             height: 75px;
           }
-          .right {
-            margin-left: 90px;
-            text-align: left;
-            h4 {
-              display: inline-block;
-              max-height: 40px;
-              font-size: 14px;
-              line-height: 20px;
-              font-family: PingFangHK-Regular;
-              font-weight: 400;
-              color: rgba(51, 51, 51, 1);
+           .right {
+              margin-left: 90px;
+              text-align: left;
+              h4 {
+                display: inline-block;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+              }
+              span {
+                float: right;
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(102, 102, 102, 1);
+              }
+              p {
+                font-size: 13px;
+                line-height: 22px;
+                font-weight: 400;
+                color: rgba(153, 153, 153, 1);
+              }
+              .p {
+                margin-bottom: 4px;
+              }
+              b {
+                font-size: 17px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(243, 163, 145, 1);
+                font-family: twCenMt;
+              }
+              .btn-type {
+                width: 80px;
+                height: 20px;
+                margin-left: -92px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 2px;
+                font-size: 12px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+                margin-top: 14px;
+              }
             }
-            span {
-              float: right;
-              font-size: 14px;
-              line-height: 20px;
-              font-weight: 400;
-              color: rgba(102, 102, 102, 1);
+          .signle{
+            .right {
+              margin-left: 90px;
+              text-align: left;
+              h4 {
+                display: inline-block;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+              }
+              span {
+                float: right;
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(102, 102, 102, 1);
+              }
+              p {
+                font-size: 13px;
+                line-height: 22px;
+                font-weight: 400;
+                color: rgba(153, 153, 153, 1);
+              }
+              .p {
+                margin-bottom: 4px;
+              }
+              b {
+                font-size: 17px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(243, 163, 145, 1);
+                font-family: twCenMt;
+              }
+              .btn-type {
+                width: 80px;
+                height: 20px;
+                margin-left: -92px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 2px;
+                font-size: 12px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+                margin-top: 14px;
+              }
             }
-            p {
-              font-size: 13px;
-              line-height: 22px;
-              font-weight: 400;
-              color: rgba(153, 153, 153, 1);
-            }
-            .p {
-              margin-bottom: 4px;
-            }
+          }
+          .double{
             b {
               font-size: 17px;
               line-height: 20px;
               font-weight: 400;
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
+              display: inline-block;
+              margin-top: 10px;
             }
-            .btn-type {
-              width: 80px;
-              height: 20px;
-              margin-left: -92px;
-              text-align: center;
-              background: rgba(245, 240, 236, 1);
-              border: 1px solid rgba(215, 202, 196, 1);
-              border-radius: 2px;
-              font-size: 12px;
-              line-height: 20px;
-              font-weight: 400;
-              color: rgba(148, 116, 101, 1);
-              margin-top: 14px;
+            .right {
+              margin-left: 90px;
+              text-align: left;
+              position: relative;
+              h4 {
+                display: inline-block;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+              }
+              span {
+                float: right;
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(102, 102, 102, 1);
+              }
+              p {
+                font-size: 13px;
+                line-height: 22px;
+                font-weight: 400;
+                color: rgba(153, 153, 153, 1);
+              }
+              .p {
+                // margin-bottom: 4px;
+              }
+              b {
+                font-size: 17px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(243, 163, 145, 1);
+                font-family: twCenMt;
+              }
+              .btn-type {
+                width: 80px;
+                height: 20px;
+                margin-left: -92px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 2px;
+                font-size: 12px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+                margin-top: 14px;
+                position: absolute;
+              }
+              .sku{
+                margin-bottom: 10px;
+              }
             }
+            .right:nth-child(3) {
+              border-bottom: 1px solid #f5f5f5;
+              .btn-type{
+                display: none;
+              }
+              .ow-h2{
+                display: none;
+              }
+              .sku{
+                display: none;
+              }
+            }
+            .double-ring-price{
+              margin-right: 45px;
+            }
+            
+          }
+          .customization{
+            .right {
+              margin-left: 90px;
+              text-align: left;
+              h4 {
+                display: inline-block;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+              }
+              span {
+                float: right;
+                font-size: 14px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(102, 102, 102, 1);
+              }
+              p {
+                font-size: 13px;
+                line-height: 22px;
+                font-weight: 400;
+                color: rgba(153, 153, 153, 1);
+              }
+              .p {
+                margin-bottom: 4px;
+              }
+              b {
+                font-size: 17px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(243, 163, 145, 1);
+                font-family: twCenMt;
+              }
+              .btn-type {
+                width: 80px;
+                height: 20px;
+                margin-left: -92px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 2px;
+                font-size: 12px;
+                line-height: 20px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+                margin-top: 14px;
+              }
+            }
+            
           }
         }
       }
