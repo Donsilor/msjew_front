@@ -143,7 +143,7 @@
     </section>
     <div class="copy-right">
       <div v-if="this.$store.state.platform === 21" style="font-size:9px;margin-top:20px;">{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
-      <span v-else class="text" >Copyright © 2019 BDD Co.</span>
+      <span v-else class="text" >Copyright © 2020 BDD Co.</span>
     </div>
   </div>
 </template>
