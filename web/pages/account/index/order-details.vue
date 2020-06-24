@@ -65,7 +65,7 @@
           </span>
         </div>
         <div v-else class="status">
-          <span v-if="data.orderStatus == '10'"> 
+          <span v-if="data.orderStatus == '10'">
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.waitingPay`)
           }}</span>
@@ -137,7 +137,8 @@
         <div class="goods-info-title">
           <div class="t1">{{ $t(`${lang}.goodsInfo`) }}</div>
           <div class="t2">{{ $t(`${lang}.goodsNum`) }}</div>
-          <div class="t3">{{ $t(`${lang}.goodsPrice`) }}</div>
+          <div class="t3">{{ $t(`${lang}.oldPrice`) }}</div>
+          <div class="t4">{{ $t(`${lang}.newPrice`) }}</div>
         </div>
         <!-- 单品 -->
         <div v-if="data.details[0].categoryId !== 19 && data.details.length !== 2" class="detail-info single">
@@ -159,8 +160,11 @@
               </div>
             </nuxt-link>
             <div class="t2">1</div>
-            <div class="t3">
+            <div class="t3" :class="{'old-price': couponType(d.couponInfo) == 2}">
               {{ formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+            </div>
+            <div class="t4">
+              {{ formatCoin(data.coinCode) }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}
             </div>
           </div>
         </div>
@@ -192,9 +196,14 @@
             </nuxt-link>
             <div class="t2">1</div>
           </div>
-            <div class="t3">
-              <!-- d.goodsPrice -->
+            <!-- <div class="t3">
               {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
+            </div> -->
+            <div class="t3" :class="{'old-price': couponType(data.details[0].couponInfo) == 2}">
+              {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
+            </div>
+            <div class="t4">
+              {{ formatCoin (data.coinCode) }} {{ couponType(data.details[0].couponInfo) == 2 ? formatMoney(data.details[0].goodsPayPrice) : formatMoney(data.details[0].goodsPrice) }}
             </div>
         </div>
         <!-- 定制 -->
@@ -217,10 +226,13 @@
               </div>
             </nuxt-link>
             <div class="t2">1</div>
-            <div class="t3">
-              {{  formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+              <div class="t3" :class="{'old-price': couponType(d.couponInfo) == 2}">
+                {{  formatCoin (data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+              </div>
+              <div class="t4">
+                {{ formatCoin (data.coinCode) }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}
+              </div>
             </div>
-          </div>
         </div>
         <div class="goods-bot-bar" />
       </div>
@@ -364,7 +376,7 @@
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.itemsNum`) }}</div>
-            <div class="ff">{{ formatNumber(data.productCount) }}</div>
+            <div class="ff">{{ data.productCount }}</div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.totalNum`) }}</div>
@@ -384,6 +396,7 @@
               -{{ formatCoin(data.coinCode) }} {{ formatNumber(data.preferFee) }}
             </div>
           </div>
+
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.freight`) }}</div>
             <div class="ff">
@@ -409,12 +422,37 @@
             </div>
           </div>
           <div class="info-line">
-            <div class="label big-label">{{ $t(`${lang}.orderTotal`) }}</div>
+            <div class="label">{{ $t(`${lang}.orderTotal`) }}</div>
             <div class="ff big-ff">
               <!-- {{ data.coinCode }} {{ formatNumber(data.orderAmount) }} -->
               {{ formatCoin(data.coinCode) }} {{ formatNumber(data.orderAmount) }}
             </div>
           </div>
+
+          <!-- 折扣金额 -->
+          <div class="info-line" v-if="data.discountAmount != 0">
+            <div class="label">{{ $t(`${lang_invoice}.discountPrice`) }}</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{ formatNumber(data.discountAmount) }}
+            </div>
+          </div>
+
+          <!-- 优惠金额 -->
+          <div class="info-line" v-if="data.couponAmount != 0">
+            <div class="label">{{ $t(`${lang_invoice}.coupon`) }}</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{ formatNumber(data.couponAmount) }}
+            </div>
+          </div>
+
+          <!-- 购物卡 -->
+          <div class="info-line" v-for="item in cardList">
+            <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
+            <div class="ff color-pink">
+              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
+            </div>
+          </div>
+
           <div class="info-line">
             <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
             <div class="ff big-ff">
@@ -465,6 +503,18 @@ export default {
     }
   },
   computed: {
+    couponType(k) {
+      return function(k) {
+        var k_type=0;
+        if(k.hasOwnProperty('type')){
+          k_type = k.type
+        }else{
+          k_type = 0;
+        }
+
+        return k_type
+      }
+    },
     statusSteps() {
       // data.orderStatus
       const orderStatus = this.data.orderStatus
@@ -516,7 +566,6 @@ export default {
   },
   mounted() {
     this.getData()
-    
   },
   methods: {
     getStatusText(status) {
@@ -533,7 +582,7 @@ export default {
     },
     getData() {
       var that = this;
-      console.log("id",this.oid)
+      // console.log("id",this.oid)
       this.$axios
         .get('/web/member/order/detail', {
           params: { orderId: this.oid }
@@ -577,7 +626,7 @@ export default {
         })
     },
     goToDetail(obj) {
-      console.log("issssss",obj)
+      // console.log("issssss",obj)
       let route = {
         path: '/',
         query: {}
@@ -892,15 +941,22 @@ export default {
         display: flex;
         padding-left: 19px;
         .t1 {
-          width: 936-250.5-163.5-20px;
+          width: 520px;
         }
         .t2 {
+          width: 130px;
           text-align: center;
-          width: 51+ (113/2)+56px;
+          margin-right: 30px;
         }
         .t3 {
+          width: 130px;
           text-align: center;
-          width: 56+ (113/2)+138px;
+          margin-right: 30px;
+        }
+        .t4 {
+          width: 130px;
+          text-align: center;
+          margin-right: 30px;
         }
       }
       .single{
@@ -912,10 +968,9 @@ export default {
           border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
           .t1 {
-            width: 936-250.5-163.5-20px;
+            width: 510px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             .good-img {
               width: 70px;
               height: 70px;
@@ -927,10 +982,10 @@ export default {
               }
             }
             .good-desc {
-              width: 936-250.5-163.5-20-70-20px;
               height: 70px;
               color: #333;
               overflow: hidden;
+              margin: 0 30px 0 20px;
               .good-name {
                 font-size: 16px;
                 line-height: 16px;
@@ -946,7 +1001,6 @@ export default {
                 line-height: 12px;
                 height: 12px;
                 margin-bottom: 18px;
-                color:#aaa;
               }
               .details {
                 font-size: 12px;
@@ -956,7 +1010,6 @@ export default {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
-                color:#aaa;
                 span {
                   margin-right: 10px;
                 }
@@ -964,29 +1017,66 @@ export default {
             }
           }
           .t2 {
+            width: 130px;
             text-align: center;
-            width: 51+ (113/2)+56px;
-            color: #333;
             font-size: 16px;
+            color: #333;
+            margin-right: 30px;
           }
           .t3 {
-            text-align: center;
-            width: 56+ (113/2)+138px;
-            color: #333;
-            font-family: twCenMt;
+            width: 130px;
             font-size: 20px;
+            font-family: twCenMt;
+            color: #f29b87;
+            text-align: center;
+            margin-right: 30px;
           }
+          .t3.old-price{
+            font-size: 14px;
+            color: #b2b2b2;
+            text-decoration: line-through;
+          }
+          .t4 {
+            width: 130px;
+            font-size: 20px;
+            font-family: twCenMt;
+            color: #f29b87;
+            text-align: center;
+            margin-right: 30px;
+          }
+        }
+        .goods-details:nth-child(2) {
+          border-top: 0;
         }
       }
       .double{
         position: relative;
         .t3{
           position: absolute;
-          right: 144px;
+          right: 164px;
           top:43%;
           color: #333;
           font-family: twCenMt;
+          color: #f29b87;
+          text-align: center;
+          margin-right: 30px;
           font-size: 20px;
+        }
+        .t3.old-price{
+          font-size: 14px;
+          color: #b2b2b2;
+          text-decoration: line-through;
+        }
+        .t4 {
+          position: absolute;
+          right: -6px;
+          top:43%;
+          width: 130px;
+          font-size: 20px;
+          font-family: twCenMt;
+          color: #f29b87;
+          text-align: center;
+          margin-right: 30px;
         }
         .goods-details:nth-child(2) {
           border-top: 0;
@@ -1082,7 +1172,7 @@ export default {
           }
           .t2 {
             text-align: center;
-            width: 51+ (113/2)+56px;
+            width: 51+ (113/2)+56-23px;
             color: #333;
             font-size: 16px;
           }
@@ -1093,6 +1183,7 @@ export default {
             font-family: twCenMt;
             font-size: 20px;
           }
+          
         }
       }
       .customization{
@@ -1104,10 +1195,9 @@ export default {
           border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
           .t1 {
-            width: 936-250.5-163.5-20px;
+            width: 510px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             .good-img {
               width: 70px;
               height: 70px;
@@ -1119,10 +1209,10 @@ export default {
               }
             }
             .good-desc {
-              width: 936-250.5-163.5-20-70-20px;
               height: 70px;
               color: #333;
               overflow: hidden;
+              margin: 0 30px 0 20px;
               .good-name {
                 font-size: 16px;
                 line-height: 16px;
@@ -1138,7 +1228,6 @@ export default {
                 line-height: 12px;
                 height: 12px;
                 margin-bottom: 18px;
-                color:#aaa;
               }
               .details {
                 font-size: 12px;
@@ -1148,7 +1237,6 @@ export default {
                 overflow: hidden;
                 text-overflow: ellipsis;
                 white-space: nowrap;
-                color:#aaa;
                 span {
                   margin-right: 10px;
                 }
@@ -1156,18 +1244,36 @@ export default {
             }
           }
           .t2 {
+            width: 130px;
             text-align: center;
-            width: 51+ (113/2)+56px;
-            color: #333;
             font-size: 16px;
+            color: #333;
+            margin-right: 30px;
           }
           .t3 {
-            text-align: center;
-            width: 56+ (113/2)+138px;
-            color: #333;
-            font-family: twCenMt;
+            width: 130px;
             font-size: 20px;
+            font-family: twCenMt;
+            color: #f29b87;
+            text-align: center;
+            margin-right: 30px;
           }
+          .t3.old-price{
+            font-size: 14px;
+            color: #b2b2b2;
+            text-decoration: line-through;
+          }
+          .t4 {
+            width: 130px;
+            font-size: 20px;
+            font-family: twCenMt;
+            color: #f29b87;
+            text-align: center;
+            margin-right: 30px;
+          }
+        }
+        .goods-details:nth-child(2) {
+          border-top: 0;
         }
       }
     }

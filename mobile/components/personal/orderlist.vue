@@ -24,7 +24,15 @@
         <div v-if="order.details[0].groupType == 0 && order.details[0].data[0].categoryId !== 19" class="mod single" @click="toDetail(order.id)">
           <ul>
             <li v-for="(detail, n) in order.details" :key="n">
-              <img :src="detail.image" />
+              <div class="left-box">
+                <img :src="detail.image" />
+
+                <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
+                  <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
+                  <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
+                <!-- </div> -->
+              </div>
+
               <div v-if="detail.groupType !== 0" class="group-type">
                 {{ detail.groupTypeText }}
               </div>
@@ -36,8 +44,9 @@
                 </h4>
                 <span>x 1</span>
                 <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p>
-                <b>{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice}}</b>
+                <p>{{ detail.data[0].detailSpecs }}</p> 
+                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                <b>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPayPrice}}</b>
               </div>
 
               <!--              对戒-->
@@ -48,11 +57,13 @@
                 <span>x 1</span>
                 <p>SKU：{{ detail.data[0].goodsCode }}</p>
                 <p>{{ detail.data[0].detailSpecs }}</p>
+                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
                 <b class="display-block margin-bottom-20"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                  >{{ order.coinCode }} {{ detail.data[0].goodsPayPrice }}</b
                 >
                 <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
                 <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
                 <b
                   >{{ formatCoin(order.coinCode) }}
                   {{ detail.data[1] && detail.data[1].goodsPrice }}</b
@@ -77,7 +88,7 @@
                 <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
                 <b
                   >{{ order.coinCode }}
-                  {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                  {{ detail.data[1] && detail.data[1].goodsPayPrice }}</b
                 >
               </div> -->
             </li>
@@ -87,7 +98,14 @@
         <div v-if="order.details[0].data[0].categoryId == 19" class="mod double" @click="toDetail(order.id)">
           <ul>
             <li v-for="(detail, n) in order.details" :key="n">
-              <img :src="detail.image" />
+              <div class="left-box">
+                <img :src="detail.image" />
+
+                <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
+                  <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
+                  <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
+                <!-- </div> -->
+              </div>
               <div v-if="detail.groupType !== 0" class="group-type">
                 {{ detail.groupTypeText }}
               </div>
@@ -139,17 +157,19 @@
                 <span>x 1</span>
                 <p>SKU：{{ detail.data[0].goodsCode }}</p>
                 <p>{{ detail.data[0].detailSpecs }}</p>
+                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
                 <b class="display-block margin-bottom-20"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                  >{{ order.coinCode }} {{ detail.data[0].goodsPayPrice }}</b
                 >
                 <h4 class="order-ellipsis ow-h2">
                   {{ detail.data[1] && detail.data[1].goodsName }}
                 </h4>
                 <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
                 <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
                 <b
                   >{{ order.coinCode }}
-                  {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                  {{ detail.data[1] && detail.data[1].goodsPayPrice }}</b
                 >
               </div> -->
             </li>
@@ -159,7 +179,14 @@
         <div v-if="order.details[0].groupType == 2" class="mod customization" @click="toDetail(order.id)">
           <ul>
             <li v-for="(detail, n) in order.details" :key="n">
-              <img :src="detail.image" />
+              <div class="left-box">
+                <img :src="detail.image" />
+
+                <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
+                  <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
+                  <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
+                <!-- </div> -->
+              </div>
               <div v-if="detail.groupType !== 0" class="group-type">
                 {{ detail.groupTypeText }}
               </div>
@@ -415,7 +442,7 @@ export default {
       return {
         orderStatus: this.orderStatus
       }
-    }
+    },
   },
   watch: {
     orderStatus(val, oldVal) {
@@ -685,10 +712,17 @@ export default {
             border-bottom: 1px solid #f5f5f5; /*no*/
             padding-bottom: 20px;
             margin-bottom: 20px;
-            img {
+
+            .left-box{
               float: left;
               width: 75px;
               height: 75px;
+              position: relative;
+
+              img {
+                width: 100%;
+                height: 100%;
+              }
             }
             .group-type {
               position: absolute;
@@ -711,6 +745,13 @@ export default {
               width: calc(100% - 90px);
               margin-left: 90px;
               text-align: left;
+              .old-price{
+                color: #b2b2b2;
+                text-decoration: line-through;
+                margin-bottom: 0.053333rem;
+                font-size: 12px;
+                margin-top: 10px;
+              }
               h4 {
                 position: relative;
                 /*display: inline-block;*/
@@ -852,5 +893,12 @@ export default {
 }
 .order-box-a:first-child{
   margin-bottom: 4px;
+}
+
+.activity-sign{
+  width: 40px;
+  height: 40px;
+  right: -4px;
+  bottom: -4px;
 }
 </style>

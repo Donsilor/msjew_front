@@ -129,7 +129,9 @@
         "freight": "（不含运费）",
         "goPay": "去结账",
         "toast1": "请选择要结账商品",
-        "toast2": "移除成功"
+        "toast2": "移除成功",
+        "discounts1": "优惠券",
+        "discounts2": "折"
       },
       "invoice":{
         "personal":"个人",
@@ -177,6 +179,7 @@
         "more": "可输300个字符",
         "cupon": "优惠码",
         "allFee": "商品总额：",
+        "itemsNum": "商品件数",
         "preferFee": "*优惠码：",
         "logisticsFee": "运费： ",
         "taxFee": "税费：",
@@ -196,11 +199,15 @@
         "editOrUnbound": "编辑/解绑购物卡",
         "shoppingCard": "购物卡",
         "ultimatelyPay": "实付金额",
-        "NeedPay": "需付金額",
+        "NeedPay": "需付金额",
         "submitSuccessfully": "订单提交成功!",
         "PleaseLogin": "请先登录，才能使用购物卡！",
         "msg10": "购物车不能为空，请重新添加商品",
-        "msg11": "仅供大陆使用"
+        "msg11": "仅供大陆使用",
+        "discountedAmount": "折扣金额",
+        "couponAmount": "优惠券",
+        "msg12": "请先登录才能使用优惠券",
+        "useCoupons": "使用优惠券"
       },
       "pay": {
         "pay": "订单支付",
@@ -301,7 +308,9 @@
         "transPreferFee": "电汇优惠： ",
         "orderAmount": "订单总额",
         "ring": "对戒",
-        "coustom": "定制"
+        "coustom": "定制",
+        "discounts1": "优惠券",
+        "discounts2": "折"
       },
       "payFailed": {
         "title": "很抱歉，订单支付失败！请重新支付",
@@ -326,7 +335,8 @@
         "tips": "提示",
         "text": "确定退出登录？",
         "cancel": "取消",
-        "course": "确定"
+        "course": "确定",
+        "coupon": "优惠券卡包"
       },
       "account": {
         "header": "我的账户",
@@ -573,7 +583,9 @@
         "ultimatelyPay": "实付金额",
         "NeedPay": "需付金額",
         "pending":"待确认",
-	      "payfailed":"支付失败"
+        "payfailed":"支付失败",
+        "discountedAmount": "折扣金额",
+        "couponAmount": "优惠券"
       }
     },
     "custom-made": {
@@ -592,7 +604,9 @@
       "cut": "切割",
       "addCart": "加入购物车",
       "addCartSuccess": "加入购物车成功",
-      "addCartFail": "加入购物车是失败"
+      "addCartFail": "加入购物车是失败",
+      "discounts1": "优惠券",
+      "discounts2": "折"
     },
     "diamond": {},
     "engagement": {
@@ -716,7 +730,9 @@
         "search": "搜索",
         "total": "共",
         "goods": "货品",
-        "suitability": "匹配度"
+        "suitability": "匹配度",
+        "discounts1": "优惠券",
+        "discounts2": "折"
       }
     },
     "comments": {
@@ -1096,7 +1112,15 @@
       "lady": "女士",
       "gentlemen": "男士",
       "general": "通用款",
-      "size": "尺寸"
+      "size": "尺寸",
+      "discounts1": "优惠券",
+      "discounts2": "折",
+      "discountsActive": "优惠活动",
+      "getCoupon": "获取优惠券",
+      "activityTime": "活动时间",
+      "oddPrice": "原  价",
+      "newPrice": "折后价",
+      "needLogin": "请先登录，才能领取优惠券"
     },
     "listCommons": {
       "sliders": [
@@ -1136,7 +1160,11 @@
       "clarity": "净度",
       "cut": "切割",
       "luster": "光泽",
-      "symmetry": "对称"
+      "symmetry": "对称",
+      "discounts1": "优惠券",
+      "discounts2": "折",
+      "oddPrice": "原  价",
+      "newPrice": "折后价"
     },
     "help-pages": {
       "brandStory": {
@@ -2182,7 +2210,7 @@
 		"balance": "余额：",
 		"eliminateCard": "消除此卡",
 		"unbound": "解除绑定",
-    "removeCard": "移除",
+    		"removeCard": "移除",
 		"confirmUnbinding": "是否确认解除绑定？",
 		"verifyValid": "购物卡验证有效！",
 		"alreadyAdd": "已添加",
@@ -2221,5 +2249,25 @@
 			"sendFail": "发送失败",
 			"fillMessage": "请填写您的个人信息"
 		}
-	}
+	},
+  "coupon": {
+      "title": "优惠券卡包",
+      "limit1": "满 ",
+      "limit2": " 元使用",
+      "limit3": "限 ",
+      "limit4": " 使用",
+      "use": "点击使用",
+      "time": "活动时间",
+      "loseEfficacy": "已失效",
+      "getCoupon": "领取优惠券",
+      "useCoupon": "使用优惠券",
+      "accomplish": "完成",
+      "alreadyApplied": "已使用",
+      "alreadyReceived": "已领取",
+      "immediatelyReceive": "立即领取",
+      "haveChoose": "已选用",
+      "immediatelyChoose": "立即选用",
+      "msg1": "优惠券领取成功",
+      "msg2": "优惠券领取失败，请重试"
+  }
 }

@@ -24,14 +24,43 @@
                 @click.stop.prevent="setWish(item.id)"
               ></i>
             </div> -->
+
+            <!-- 折扣 -->
+            <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
+              <span>{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ $t(`${lang}.discounts2`) }}</span>
+            </div>
+
+            <!-- 优惠券 -->
+            <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
+              <span>{{ $t(`${lang}.discounts1`) }}</span>
+            </div>
           </div>
           <div class="product-info">
             <div class="product-price">
-              <span class="coin">{{ formatCoin (item.coinType) }}</span>
-              <span class="price">{{ formatNumber(item.price) }}</span>
+             <div v-if="couponType(item.coupon) !== 'discount'">
+                <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                <span class="price">{{ formatNumber(item.salePrice) }}</span>
+              </div>
+
+              <!-- 折扣 -->
+              <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                <div>
+                  <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                  <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                </div>
+                <div>
+                  <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                  <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                </div>
+              </div>
             </div>
+
             <div class="product-title">
-              {{ item.name }}
+              <!-- 优惠券 -->
+              <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+              <!-- 折扣 -->
+              <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
+              {{ item.goodsName }}
             </div>
           </div>
         </div>
@@ -45,7 +74,14 @@
 
 <script>
 import Operate from '@/mixins/operate.js'
+const lang = 'detail'
 export default {
+  data() {
+    return{
+      lang,
+      language: this.$store.state.language
+    }
+  },
   mixins: [Operate],
   props: {
     recommends: {
@@ -65,11 +101,18 @@ export default {
           // }
         ]
       }
+    },
+    coupon: {
+      type: [Boolean, String, Number],
+      required: false,
+      default() {
+        return ''
+      }
     }
   },
-  // mounted(){
-  //   console.log("recommends",this.recommends)
-  // }
+  mounted(){
+    console.log("recommends",this.recommends)
+  }
 }
 </script>
 

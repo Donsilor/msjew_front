@@ -48,6 +48,7 @@ export default {
       chooseCarats:``,
       chooseCaratsId:``,
       showPi: this.goodInfo.salePrice,
+      showP2: 0,
       sendGoodsId: null,
       sendDetailsId: null,
       categoryId: null,
@@ -92,6 +93,12 @@ export default {
         this.chooseCarats = this.goodInfo.carats[0].content
         this.chooseCaratsId = this.goodInfo.carats[0].sortBy
       }
+    }
+
+    if(this.couponType(this.goodInfo.coupon) == 'discount'){
+      this.showP2 = this.goodInfo.coupon.discount.price
+    }else{
+      this.showP2 = this.goodInfo.salePrice
     }
   },
   mounted() {
@@ -170,10 +177,16 @@ export default {
       if (this.goodInfo.carats && this.goodInfo.sizes) {
         if (this.chooseSizeId === `` || this.chooseCaratsId === ``) {
           this.showPi = this.goodInfo.salePrice
+
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
-              parseInt(bullShit[i].carat) == parseInt(this.chooseCaratsId) && 
+              parseInt(bullShit[i].carat) == parseInt(this.chooseCaratsId) &&
               parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
               parseInt(bullShit[i].material) ===
                 parseInt(this.conditions[0].checked)
@@ -182,12 +195,24 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
       } else {
         if (this.chooseSizeId === ``) {
           this.showPi = this.goodInfo.salePrice
+
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -199,6 +224,12 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
@@ -217,10 +248,16 @@ export default {
       if (this.goodInfo.carats && this.goodInfo.sizes) {
         if (this.chooseCaratsId === ``) {
           this.showPi = this.goodInfo.salePrice
+
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
-              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratsId) && 
+              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratsId) &&
               parseInt(bullShit[i].size) === parseInt(this.chooseSizeId) &&
               parseInt(bullShit[i].material) ===parseInt(this.conditions[0].checked)
             ) {
@@ -228,12 +265,24 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
       } else {
         if (this.chooseSizeId === ``) {
           this.showPi = this.goodInfo.salePrice
+
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -244,13 +293,19 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
       }
     },
     addCart() {
-      console.log("this.s",this.sendDetailsId)
+      // console.log("this.s",this.sendDetailsId)
       if (!(this.canAddCart && this.inSale)) {
         return
       }

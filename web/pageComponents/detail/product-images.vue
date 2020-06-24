@@ -21,8 +21,18 @@
         </a>
       </li>
     </ul>
+
     <div class="main-pic">
       <img :src="images[activeIndex]" />
+
+      <!-- 活动图标 -->
+      <div class="discount-icon2" v-if="this.coupon == 'money'">
+        <div class="icon">{{ $t(`${lang}.discounts1`) }}</div>
+      </div>
+
+      <div class="discount-icon2" v-if="this.coupon !== 'money' && this.coupon != ''">
+        <div class="icon">{{ language == 'en_US' ? discountUs(this.coupon)+'%' : discountConversion(this.coupon)}} {{ $t(`${lang}.discounts2`) }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -54,12 +64,20 @@ export default {
       default() {
         return ''
       }
+    },
+    coupon: {
+      type: [Boolean, String, Number],
+      required: false,
+      default() {
+        return ''
+      }
     }
   },
   data() {
     return {
       lang,
-      activeIndex: 0
+      activeIndex: 0,
+      language: this.$store.state.language
     }
   },
   computed: {
@@ -70,6 +88,8 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {})
+
+    // this.language = this.getCookie('language')
   },
   methods: {
     changeActiveIndex(index) {
@@ -134,7 +154,7 @@ export default {
     box-sizing: border-box;
     font-size: 0;
     line-height: 0;
-    overflow: hidden;
+    // overflow: hidden;
 
     img {
       position: absolute;

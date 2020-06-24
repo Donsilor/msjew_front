@@ -25,7 +25,8 @@
         <div class="list-title">
           <span>{{ $t(`${lang}.productInfo`) }}</span>
           <span>{{ $t(`${lang}.productTotal`) }}</span>
-          <span>{{ $t(`${lang}.productPrice`) }}</span>
+          <span>{{ $t(`${lang}.oldPrice`) }}</span>
+          <span>{{ $t(`${lang}.newPrice`) }}</span>
         </div>
       </div>
 
@@ -83,7 +84,8 @@
 
               <div class="right">
                 <span>1</span>
-                {{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+                <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}</span>
+                <span>{{ o.coinCode }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
               </div>
             </div>
           </div>
@@ -126,7 +128,8 @@
               <span>1</span>
             </div>
             <div class="price">
-              {{ formatCoin(o.coinCode) }} {{ formatMoney(o.details[0].goodsPrice) }}
+              <span :class="{'old-price': couponType(o.details[0].couponInfo) == 2}">{{ o.coinCode }} {{ formatMoney(o.details[0].goodsPrice) }}</span>
+              <span>{{ o.coinCode }} {{ couponType(o.details[0].couponInfo) == 2 ? formatMoney(o.details[0].goodsPayPrice) : formatMoney(o.details[0].goodsPrice) }}</span>
             </div>
           </div>
           <div v-if="o.details.length == 2" class="single customization">
@@ -153,7 +156,8 @@
 
               <div class="right">
                 <span>1</span>
-                {{  formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+                <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}</span>
+                <span>{{ o.coinCode }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
               </div>
             </div>
           </div>
@@ -330,7 +334,7 @@
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b style="color: #333;">{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
         </div>
@@ -429,6 +433,19 @@ export default {
     this.getList()
     this.getStatusOrders(0)
   },
+  computed:{
+    couponType(k) {
+      return function(k) {
+        var k_type=0;
+        if(k.hasOwnProperty('type')){
+          k_type = k.type
+        }else{
+          k_type = 0;
+        }
+        return k_type
+      }
+    }
+  },
   methods: {
     getList() {
       this.$axios
@@ -523,7 +540,7 @@ export default {
         })
     },
     getStatusOrders(status) {
-      console.log(status)
+      // console.log(status)
       this.activeIndex = status
       this.$axios
         .get('/web/member/order', {
@@ -608,7 +625,7 @@ export default {
         40: this.$t(`${lang}.hadSend`),
         50: this.$t(`${lang}.hadFinish`),
       };
-      
+
       // console.log("bbbbb",status_value[status])
       return status_value[status];
     },
@@ -806,20 +823,16 @@ div {
         margin-bottom: 10px;
         padding-top: 0;
         span {
-          width: 500px;
+          width: 140px;
           color: #333333;
           font-size: 14px;
           line-height: 34px;
-          margin-left: 20px;
+          margin-right: 20px;
           display: inline-block;
-        }
-        span:nth-child(2) {
-          width: 150px;
           text-align: center;
         }
-        span:nth-child(3) {
-          width: 200px;
-          text-align: center;
+        span:nth-child(1) {
+          width: 477px;
         }
       }
     }
@@ -830,7 +843,7 @@ div {
         position: relative;
         .price{
           position: absolute;
-          right:157px;
+          right:30px;
           top:47%;
           font-size: 16px;
           color: #666666;
@@ -878,11 +891,32 @@ div {
           }
           .num{
             position: absolute;
-            right:377px;
+            right:420px;
             top:47%;
             font-size: 16px;
             color: #666666;
             font-family: twCenMt;
+          }
+          .price{
+              span {
+                width: 140px;
+                color: #666666;
+                font-size: 14px;
+                line-height: 34px;
+                margin-left: 20px;
+                display: inline-block;
+                text-align: center;
+              }
+              span:nth-child(1) {
+                color: #f29b87;
+              }
+              span:nth-child(1).old-price {
+                color: #b2b2b2;
+                text-decoration: line-through;
+              }
+              span:nth-child(2) {
+                color: #f29b87;
+              }
           }
           .list-body {
             width: 100%;
@@ -995,9 +1029,9 @@ div {
               }
             }
             .mid {
-              width: 480px;
+              width: 394px;
               height: 70px;
-              padding: 0 20px;
+              padding-left: 20px;
               margin: 0;
               text-align: left;
               font-size: 12px;
@@ -1029,7 +1063,6 @@ div {
               }
             }
             .right {
-              width: 350px;
               height: 70px;
               padding: 0;
               margin: 0;
@@ -1040,11 +1073,23 @@ div {
               color: #666666;
               font-family: twCenMt;
               span {
-                text-align: center;
-                padding: 0 36px;
-                font-size: 14px;
-                margin-right: 96px;
+                width: 140px;
                 color: #666666;
+                font-size: 14px;
+                line-height: 34px;
+                margin-left: 20px;
+                display: inline-block;
+                text-align: center;
+              }
+              span:nth-child(2) {
+                color: #f29b87;
+              }
+              span:nth-child(2).old-price {
+                color: #b2b2b2;
+                text-decoration: line-through;
+              }
+              span:nth-child(3) {
+                color: #f29b87;
               }
             }
           }
@@ -1071,15 +1116,15 @@ div {
           }
           span {
             float: right;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 38px;
             color: #333333;
-            margin-right: 34px;
+            margin-right: 30px;
             b {
               color: #f29b87;
               font-size: 20px;
               font-weight: 400;
-              margin-left: 20px;
+              margin-left: 14px;
               font-family: twCenMt;
             }
           }

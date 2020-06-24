@@ -42,7 +42,7 @@ export default function ({ req, res, app, store }) {
             resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
             store.commit('setLastUrl', lastUrl)
         }
-        console.log('setBasic req====>', resetCookie)
+        // console.log('setBasic req====>', resetCookie)
         res.setHeader('Set-Cookie', resetCookie)
     }
 }

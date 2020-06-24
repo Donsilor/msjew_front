@@ -229,6 +229,7 @@
             "login": "登入",
             "order": "我的订单",
             "account": "账户资料",
+	    "coupon": "优惠券卡包",
             "loginOut": "登出",
             "wish": "心愿单",
             "cart": "购物车",
@@ -690,7 +691,12 @@
         "pairRingGuide": "结婚戒指指南",
         "howToChoosePairRing": "如何选择传统的经典结婚戒指、结婚对戒？",
         "howToMatchPairRing": "跟您的订婚戒指如何搭配呢？",
-        "knowMore": "了解更多"
+        "knowMore": "了解更多",
+        "discounts1": "优惠券",
+        "discounts2": "折",
+        "discountsActive": "优惠活动",
+        "getCoupon": "获取优惠券",
+        "activityTime": "活动时间"
     },
     "pairRingsList": {
         "style": "款式",
@@ -701,7 +707,9 @@
         "title": "对戒戒指",
         "totalCountTitle": "对戒戒指 ({total_count} 款)",
         "titleDesc": "无论时代如何变化，每个人都渴望一生一世的真爱",
-        "sort": "排序"
+        "sort": "排序",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "singleRingsList": {
         "man": "男士",
@@ -715,7 +723,9 @@
         "title": "结婚戒指",
         "totalCountTitle": "戒指 ({total_count} 款)",
         "titleDesc": "愿作此生相依的应允 , 愿为此今刻决定往后",
-        "sort": "排序"
+        "sort": "排序",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "diamonds": {
         "diamonds": "DIAMONDS",
@@ -797,7 +807,9 @@
         "viewDetail": "查看详情",
         "clickToCheck": "点击查看",
         "table": "台面",
-        "addCart": "加入购物车"
+        "addCart": "加入购物车",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "engagementRing": {
         "engagementRings": "ENGAGEMENT RINGS",
@@ -834,7 +846,9 @@
         "title": "订婚戒指",
         "totalCountTitle": "戒托 ({total_count} 款)",
         "titleDesc": "戒扥款式可多变, 一伙真心总不变 , 高贵气质石长存",
-        "sort": "排序"
+        "sort": "排序",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "jewelleryList": {
         "jewellery": "饰品",
@@ -848,7 +862,9 @@
         "stoneType": "主石类型",
         "title": "配饰",
         "totalCountTitle": "配饰 ({total_count} 款)",
-        "titleDesc": "通过选择各种配饰，来展示您所想要的配饰"
+        "titleDesc": "通过选择各种配饰，来展示您所想要的配饰",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "personal": {
         "index": {
@@ -877,7 +893,7 @@
             "base": "基本信息",
             "link": "第三方账号绑定",
             "address": "我的地址",
-            "coupon": "我的优惠码",
+            "coupon": "优惠券卡包",
             "psw1": "修改密码",
             "psw2": "现有密码",
             "psw3": "新密码",
@@ -953,7 +969,8 @@
             "orderList": "订单列表",
             "productInfo": "商品讯息",
             "productTotal": "商品数量",
-            "productPrice": "商品金额",
+            "oldPrice": "商品原价",
+            "newPrice": "优惠后金额",
             "orderNumber": "订单编号",
             "orderStatus": "订单状态",
             "orderDetail": "订单详情",
@@ -1033,7 +1050,8 @@
             "get": "(收)",
             "goodsInfo": "商品讯息",
             "goodsNum": "商品数量",
-            "goodsPrice": "商品金额",
+            "oldPrice": "商品原价",
+            "newPrice": "优惠后金额",
             "deliveryInfo": "收货讯息",
             "expressInfo": "物流讯息",
             "express": "物流",
@@ -1077,7 +1095,8 @@
         "title": "购物车",
         "info": "商品讯息",
         "number": "数量",
-        "price": "金额",
+        "oldPrice": "原金额",
+        "newPrice": "优惠后金额",
         "option": "操作",
         "customMade": "定制",
         "Invalid": "已失效",
@@ -1097,7 +1116,9 @@
         "deleteSuccess": "移除成功",
         "addWishSuccess": "加入心愿单成功",
         "deleteWishSuccess": "删除心愿单成功",
-        "searchSimilar": "找类似"
+        "searchSimilar": "找类似",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "pay": {
         "confirmOrder": "购物车",
@@ -1209,7 +1230,9 @@
         "search": "搜索",
         "sort": "排序",
         "homePage": "首页",
-        "result": " 搜索結果"
+        "result": " 搜索結果",
+        "discounts1": "优惠券",
+        "discounts2": "折"
     },
     "detail": {
         "goodsId": "商品ID",
@@ -1267,7 +1290,15 @@
         "allReviews": "全部评价",
         "fiveStarReviews": "5星评价",
         "BDDReply": "BDD回复",
-        "loadingMore": "加载更多..."
+        "loadingMore": "加载更多...",
+        "discounts1": "优惠券",
+        "discounts2": "折",
+        "discountsActive": "优惠活动",
+        "getCoupon": "获取优惠券",
+        "activityTime": "活动时间",
+        "oddPrice": "原  价",
+        "newPrice": "折后价",
+        "needLogin": "请先登录，才能领取优惠券"
     },
     "policies": {
         "layout": {
@@ -2467,7 +2498,8 @@
         "addAddress": "添加收货地址",
         "info": "商品讯息",
         "number": "数量",
-        "price": "金额",
+        "oldPrice": "原金额",
+        "newPrice": "优惠后金额",
         "option": "操作",
         "customMade": "定制",
         "deliveryInformation": "发货讯息",
@@ -2526,7 +2558,12 @@
         "shoppingCard": "购物卡",
         "msg10": "购物车不能为空，请重新添加商品",
         "msg11": "需登录购物 / 仅供大陆使用",
-        "needlogin": "需登录购物"
+        "needlogin": "需登录购物",
+        "notAvailable": "选择可用优惠券",
+        "discountPrice": "折扣金额",
+        "needRegister": "请先登录，才能使用优惠券",
+        "msgTitle2": "提示：",
+        "msgContent2": "没有选择商品！"
     },
     "invoice": {
         "personal": "个人",
@@ -2560,7 +2597,9 @@
         "ultimatelyPay": "实付金额",
         "NeedPay": "需付金額",
         "submitSuccessfully": "订单提交成功!",
-        "PleaseLogin": "请先登录，才能使用购物卡！"
+        "PleaseLogin": "请先登录，才能使用购物卡！",
+        "coupon": "优惠券",
+        "discountPrice": "折扣金额"
     },
     "shoppingCard": {
         "title": "添加购物卡信息",
@@ -2597,5 +2636,50 @@
         "msg11": "解除绑定成功！",
         "msg12": "此卡还未到使用时间！",
         "msg13": "此卡已超过使用时间！"
+    },
+    "coupon": {
+        "title": "优惠券卡包",
+        "limit1": "满 ",
+        "limit2": " 元使用",
+        "limit3": "限 ",
+        "limit4": " 使用",
+        "use": "点击使用",
+        "time": "活动时间",
+        "loseEfficacy": "已失效",
+        "getCoupon": "领取优惠券",
+        "useCoupon": "使用优惠券",
+        "accomplish": "完成",
+        "alreadyApplied": "已使用",
+        "alreadyReceived": "已领取",
+        "immediatelyReceive": "立即领取",
+        "haveChoose": "已选用",
+        "immediatelyChoose": "立即选用",
+        "msg1": "优惠券领取成功",
+        "msg2": "优惠券领取失败，请重试"
+    },
+    "subject": {
+        "discount":{
+        "discountCoupon": "折扣券",
+        "discount": "折",
+        "explain": "活动专场商品",
+        "oldPrice": "原价",
+        "newPrice": "折后价",
+        "status": "正在活动中",
+        "text1": "仅支持",
+        "text2": "此专题内商品使用  （具体请看商品详情）",
+        "text3": "活动时间",
+        "text4": "(过期恢复原价)",
+        "text5": "活动地区",
+        "text6": "中国大陆、中国香港 (其他地区暂不参与)"
+    },
+    "favourable":{
+        "discountCoupon": "优惠券",
+        "full": "满",
+        "use": "元使用",
+        "get": "立即领取",
+        "status": "正在活动中",
+        "text1": "优惠券使用规则：",
+        "text2": "仅支持指定钻饰成品使用（具体商品请看商品详情）"
     }
+  }
 }

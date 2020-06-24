@@ -229,6 +229,7 @@
             "login": "Login",
             "order": "Order",
             "account": "Account",
+	    "coupon": "Coupon",
             "loginOut": "Log out",
             "wish": "Wish List",
             "cart": "Cart",
@@ -680,7 +681,12 @@
         "pairRingGuide": "WEDDING RING GUIDE",
         "howToChoosePairRing": "How to choose a traditional classic wedding ring, wedding couple rings?",
         "howToMatchPairRing": " How do you match your engagement ring?  ",
-        "knowMore": "LEARN MORE"
+        "knowMore": "LEARN MORE",
+        "discounts1": "Coupon",
+        "discounts2": "off",
+        "discountsActive": "优惠活动",
+        "getCoupon": "获取优惠券",
+        "activityTime": "Promotion period"
     },
     "pairRingsList": {
         "style": "Style",
@@ -691,7 +697,9 @@
         "title": "COUPLE RINGS",
         "totalCountTitle": "COUPLE RINGS ({total_count} Results)",
         "titleDesc": "No matter how time changes, every one of us desires the love of a lifetime",
-        "sort": "Sort By"
+        "sort": "Sort By",
+        "discounts1": "Coupon",
+        "discounts2": "off"
     },
     "singleRingsList": {
         "man": "Men",
@@ -705,7 +713,9 @@
         "title": "WEDDING RING",
         "totalCountTitle": "RING ({total_count} Results)",
         "titleDesc": "Let us make a promise with this ring and spend the rest of our life since this moment on.",
-        "sort": "Sort By"
+        "sort": "Sort By",
+        "discounts1": "Coupon",
+        "discounts2": "off"
     },
     "diamonds": {
         "diamonds": "DIAMONDS",
@@ -787,7 +797,9 @@
         "viewDetail": "View details",
         "clickToCheck": "View",
         "table": "Table",
-        "addCart": "Add to Cart"
+        "addCart": "Add to Cart",
+        "discounts1": "Coupon",
+        "discounts2": "off"
     },
     "engagementRing": {
         "engagementRings": "ENGAGEMENT RINGS",
@@ -824,7 +836,9 @@
         "title": "ENGAGEMENT RING",
         "totalCountTitle": "ABSTAIN ({total_count} Results)",
         "titleDesc": "There are different ring settings optional. The solitaire ring is a symbol of true love, and its taste will last together with the solitaire.",
-        "sort": "Sort By"
+        "sort": "Sort By",
+        "discounts1": "Coupon",
+        "discounts2": "off"
     },
     "jewelleryList": {
         "jewellery": "Jewelry",
@@ -838,7 +852,9 @@
         "stoneType": "Stone type",
         "title": "JEWELRY",
         "totalCountTitle": "JEWELRY ({total_count} Results)",
-        "titleDesc": "Choose various accessories to show your taste"
+        "titleDesc": "Choose various accessories to show your taste",
+        "discounts1": "Coupon",
+        "discounts2": "off"
     },
     "personal": {
         "index": {
@@ -942,7 +958,8 @@
             "orderList": "Order List",
             "productInfo": "Product Information",
             "productTotal": "Number Of Product",
-            "productPrice": "The Amount Of Product",
+            "oldPrice": "Original price",
+            "newPrice": "Discount price",
             "orderNumber": "Total Order Amount",
             "orderStatus": "Order Status",
             "orderDetail": "Order Details",
@@ -1022,7 +1039,8 @@
             "get": "(Recipient)",
             "goodsInfo": "Product Information",
             "goodsNum": "Qty",
-            "goodsPrice": "Amount",
+            "oldPrice": "Original price",
+            "newPrice": "Discount price",
             "deliveryInfo": "Delivery detail",
             "expressInfo": "Logistics",
             "express": "Logistics",
@@ -1066,7 +1084,8 @@
         "title": "Cart",
         "info": "Product Information",
         "number": "Qty",
-        "price": "Amount",
+        "oldPrice": "Original price",
+        "newPrice": "Discount price",
         "option": "Operation",
         "customMade": "Custom",
         "Invalid": "Expired",
@@ -1086,7 +1105,9 @@
         "deleteSuccess": "Deleted",
         "addWishSuccess": "Added to wish list",
         "deleteWishSuccess": "Wish list deleted",
-        "searchSimilar": "search similar"
+        "searchSimilar": "search similar",
+        "discounts1": "Coupon",
+        "discounts2": "off"
     },
     "pay": {
         "confirmOrder": "Shopping cart",
@@ -1198,7 +1219,9 @@
         "search": "Search",
         "sort": "Sort By",
         "homePage": "Homepage",
-        "result": "Search results"
+        "result": "Search results",
+        "discounts1": "Coupon",
+        "discounts2": "off"
     },
     "detail": {
         "goodsId": "Product ID",
@@ -1256,7 +1279,15 @@
         "allReviews": "All reviews",
         "fiveStarReviews": "5-star review",
         "BDDReply": "BDD's Reply",
-        "loadingMore": "MORE..."
+        "loadingMore": "MORE...",
+        "discounts1": "Coupon",
+        "discounts2": "off",
+        "discountsActive": "Discount Promotion",
+        "getCoupon": "Get coupon",
+        "activityTime": "Promotion period",
+        "oddPrice": "Original price",
+        "newPrice": "Discount price",
+        "needLogin": "Please login before redeem the coupon. "
     },
     "policies": {
         "layout": {
@@ -2457,7 +2488,8 @@
         "addAddress": "New shipping address",
         "info": "Product Information",
         "number": "Qty",
-        "price": "Amount",
+        "oldPrice": "Original price",
+        "newPrice": "Discount price",
         "option": "Operation",
         "customMade": "Custom",
         "deliveryInformation": "Shipping information",
@@ -2516,7 +2548,12 @@
         "shoppingCard": "Shopping Card",
         "msg10": "The shopping cart cannot be empty. Please add the item again",
         "msg11": "Need to log in for shopping / Mainland China Only",
-        "needlogin": "Need to log in for shopping"
+        "needlogin": "Need to log in for shopping",
+        "notAvailable": "Select available coupons",
+        "discountPrice": "Discounted amount",
+        "needRegister": "Please login before redeem the coupon. ",
+        "msgTitle2": "Submit：",
+        "msgContent2": "No product selected!"
     },
     "invoice": {
         "personal": "personal",
@@ -2550,7 +2587,9 @@
         "ultimatelyPay": "Actual payment",
         "NeedPay": "MoneyNeedPay",
         "submitSuccessfully": "Order Submission Successful!",
-        "PleaseLogin": "Please log in first to use the gift card！"
+        "PleaseLogin": "Please log in first to use the gift card！",
+        "coupon": "Coupon",
+        "discountPrice": "Discounted amount"
     },
     "shoppingCard": {
         "title": " Add Shopping Card Information",
@@ -2587,5 +2626,50 @@
         "msg11": "Unbind successfully！",
         "msg12": "This card is not expired！",
         "msg13": "This card has expired！"
+    },
+    "coupon": {
+        "title": "Coupon Card Package",
+        "limit1": "Full ",
+        "limit2": " To Use",
+        "limit3": "limit ",
+        "limit4": " To Use",
+        "use": "Click On The Use",
+        "time": "Promotion period",
+        "loseEfficacy": "Lost Efficacy",
+        "getCoupon": "Get Coupon",
+        "useCoupon": "Use Coupon",
+        "accomplish": "Accomplish",
+        "alreadyApplied": "Coupon has been used",
+        "alreadyReceived": "Redeemed",
+        "immediatelyReceive": "Collect it now",
+        "haveChoose": "Already Selected",
+        "immediatelyChoose": "Select it now",
+        "msg1": "Coupon has been claimed successfully",
+        "msg2": "Something went wrong, please try it again."
+    },
+    "subject": {
+        "discount":{
+        "discountCoupon": "Discount coupon",
+        "discount": "折",
+        "explain": "Promoted products/Products on sale",
+        "oldPrice": "Original price",
+        "newPrice": "Discount price",
+        "status": "On sale",
+        "text1": "Only for",
+        "text2": "Only applied for selected items(more information refer to product details)",
+        "text3": "Promotion period",
+        "text4": "Back to the original price",
+        "text5": "Available areas",
+        "text6": "Mainland China and Hongkong (temporarily unavailable outside of China)"
+    },
+    "favourable":{
+	    "discountCoupon": "Coupon ",
+	    "full": "滿",
+	    "use": "元使用",
+	    "get": "Collect it now",
+	    "status": " On sale",
+	    "text1": "and conditions ：",
+	    "text2": "details)Only applied for selected diamond product(more information refer to product details)"
     }
+  }
 }

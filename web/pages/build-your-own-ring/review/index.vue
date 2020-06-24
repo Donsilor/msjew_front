@@ -20,6 +20,9 @@
                 <img :src="imageStrToArray(block1.pick)" />
                 <div class="title-block">
                   <div class="title-block-name">
+				    <span class="discount-icon fl" v-if="block1.couponType == 1">{{ language == 'en_US' ? discountUs(this.block1.couponNum)+'%' : discountConversion(this.block1.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
+				    <span class="favourable-icon fl" v-if="block1.couponType == 2">￥</span>
+
                     {{ block1.name }}
                   </div>
                   <div class="title-block-sku">
@@ -27,20 +30,32 @@
                   </div>
                 </div>
               </div>
-              <div class="right-info-block product-price">
+              <div class="right-info-block product-price" :class="{'old-price' : block1.oldPrice !== block1.newPrice}">
                 <span class="coin">
                   {{ formatCoin (info.coinType) }}
                 </span>
                 <span class="price">
-                  {{ formatNumber(block1.price) }}
+                  {{ formatNumber(block1.oldPrice) }}
                 </span>
               </div>
+
+			  <div class="right-info-block product-price">
+			    <span class="coin">
+				  {{ info.coinType }}
+			    </span>
+			    <span class="price">
+			      {{ formatNumber(block1.newPrice) }}
+			    </span>
+			  </div>
             </div>
             <div class="info-block">
               <div class="left-info-block">
                 <img :src="imageStrToArray(block2.pick)" />
                 <div class="title-block">
                   <div class="title-block-name">
+					<span class="discount-icon fl" v-if="block2.couponType == 1">{{ language == 'en_US' ? discountUs(this.block2.couponNum)+'%' : discountConversion(this.block2.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
+					<span class="favourable-icon fl" v-if="block2.couponType == 2">￥</span>
+
                     {{ block2.name }}
                   </div>
                   <div class="title-block-sku">
@@ -48,23 +63,43 @@
                   </div>
                 </div>
               </div>
-              <div class="right-info-block product-price">
+              <div class="right-info-block product-price" :class="{'old-price' : block2.oldPrice !== block2.newPrice}">
                 <span class="coin">
                   {{ formatCoin (info.coinType) }}
                 </span>
                 <span class="price">
-                  {{ formatNumber(block2.price) }}
+                  {{ formatNumber(block2.oldPrice) }}
                 </span>
               </div>
+
+			  <div class="right-info-block product-price">
+			    <span class="coin">
+			      {{ info.coinType }}
+			    </span>
+			    <span class="price">
+			      {{ formatNumber(block2.newPrice) }}
+			    </span>
+			  </div>
             </div>
           </div>
           <div class="product-price">
-            <span class="coin">
-              {{ formatCoin (info.coinType) }}
-            </span>
-            <span class="price">
-              {{ formatNumber(price) }}
-            </span>
+			<div class="total-price" v-if="oldPrice !== newPrice" :class="{'old-price-2' : oldPrice !== newPrice}">
+				<span class="coin">
+				  {{ formatCoin (info.coinType) }}
+				</span>
+				<span class="price">
+				  {{ formatNumber(oldPrice) }}
+				</span>
+			</div>
+
+			<div class="total-price">
+				<span class="coin">
+				  {{ formatCoin (info.coinType) }}
+				</span>
+				<span class="price">
+				  {{ formatNumber(newPrice) }}
+				</span>
+			</div>
           </div>
           <div class="button-group">
             <button
@@ -149,15 +184,21 @@ export default {
         pick: ``,
         name: ``,
         sku: ``,
-        price: ``,
-        detail: ``
+        oldPrice: ``,
+		newPrice: ``,
+        detail: ``,
+		couponType: 0,
+		couponNum: 0
       },
       block2: {
         pick: ``,
         name: ``,
         sku: ``,
-        price: ``,
-        detail: ``
+        oldPrice: ``,
+		newPrice: ``,
+        detail: ``,
+		couponType: 0,
+		couponNum: 0
       },
       tabs: [
         {
@@ -182,7 +223,8 @@ export default {
         }
       ],
       activeTab: 'desc',
-      magnifying: ''
+      magnifying: '',
+	    language: this.$store.state.language
     }
   },
   computed: {
@@ -222,9 +264,12 @@ export default {
     productInfo() {
       return this.getRingInfo()
     },
-    price() {
-      return this.block1.price + this.block2.price
+    oldPrice() {
+      return this.block1.oldPrice + this.block2.oldPrice
     },
+	newPrice() {
+	  return this.block1.newPrice + this.block2.newPrice
+	},
     simpleDetail() {
       const _this = this
       const productInfo = _this.productInfo
@@ -317,6 +362,8 @@ export default {
     })
     
     this.magnifying = this.thumbnails[0]
+
+	// this.language = this.getCookie('language')
   },
   methods: {
     getRingInfo() {
@@ -358,18 +405,18 @@ export default {
         JSON.parse(JSON.stringify({ goodsId: id2 })),
         false
       )
-      if(ct === 1){
-        var url1 = `/web/goods/diamond/detail`;
-        var url2 = `/web/goods/style/detail`;
-      }else{
+      // if(ct === 1){
+        // var url1 = `/web/goods/diamond/detail`;
+        // var url2 = `/web/goods/style/detail`;
+      // }else{
         var url1 = `/web/goods/style/detail`;
-        var url2 = `/web/goods/diamond/detail`;
-      }
+        // var url2 = `/web/goods/diamond/detail`;
+      // }
       await this.$axios
         .post(url1, data1)
         .then(data => {
           var res = data.data;
-          console.log(`11111111111111`,res,this.steps.steps )
+          // console.log(`11111111111111`,res,this.steps.steps )
           this.block1.name = res.goodsName
           this.block1.sku = res.goodsCode
           this.block1.pick = res.goodsImages.split(`,`)[0] || ``
@@ -378,7 +425,16 @@ export default {
               parseInt(this.steps.steps[0].goodsDetailsId) ===
               parseInt(res.details[i].id)
             ) {
-              this.block1.price = res.details[i].retailMallPrice
+              this.block1.oldPrice = res.details[i].retailMallPrice
+
+              if(res.details[i].coupon.hasOwnProperty('discount')){
+                this.block1.newPrice = res.details[i].coupon.discount.price;
+                this.block1.couponType = 1;
+                this.block1.couponNum = res.details[i].coupon.discount.discount;
+              }else{
+                this.block1.newPrice = res.details[i].retailMallPrice;
+                this.block1.couponType = 2;
+              }
             }
           }
         })
@@ -390,10 +446,10 @@ export default {
           }
         })
       await this.$axios
-        .post(url2, data2)
+        .post(url1, data2)
         .then(data => {
           var res = data.data;
-          console.log( `2222222222222222222`,res)
+          // console.log( `2222222222222222222`,res)
           this.block2.name = res.goodsName
           this.block2.sku = res.goodsCode
           this.block2.pick = res.goodsImages.split(`,`)[0] || ``
@@ -402,7 +458,16 @@ export default {
               parseInt(this.steps.steps[1].goodsDetailsId) ===
               parseInt(res.details[i].id)
             ) {
-              this.block2.price = res.details[i].retailMallPrice
+              this.block2.oldPrice = res.details[i].retailMallPrice
+
+              if(res.details[i].coupon.hasOwnProperty('discount')){
+                this.block2.newPrice = res.details[i].coupon.discount.price
+                this.block2.couponType = 1;
+                this.block2.couponNum =  res.details[i].coupon.discount.discount
+              }else{
+                this.block2.newPrice = res.details[i].retailMallPrice
+                this.block2.couponType = 2;
+              }
             }
           }
         })
@@ -435,7 +500,7 @@ export default {
           group_type: 2,
           serviceId: 0,
           serviceVal: 'string',
-          
+
         },
         {
           goods_num: 1,
@@ -519,6 +584,8 @@ export default {
     .left-info-block {
       display: flex;
       align-items: center;
+	  width: 420px;
+	  overflow: hidden;
       .title-block-name {
         font-size: 18px;
         color: #333;
@@ -545,6 +612,29 @@ export default {
         font-size: 20px;
       }
     }
+
+	.product-price.old-price{
+		color: #c3c3c3;
+		font-size: 14px;
+		line-height: 58px;
+
+		.coin {
+		  font-size: 14px;
+		}
+		.price {
+		  font-size: 14px;
+		}
+	}
   }
+}
+
+.total-price{
+	display: inline-block;
+	margin-right: 30px;
+}
+.old-price-2{
+	font-size: 18px;
+	color: #c3c3c3;
+	text-decoration: line-through;
 }
 </style>

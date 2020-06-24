@@ -18,6 +18,7 @@ function makeCartGoodGroups (cart = []) {
     const localData = {}
     cart.forEach(item => {
         let groupId = item['groupId'] || item['id'] || item['createTime']
+        // console.log('groupId',groupId)
         // item.goodsId=item.goodsDetailsId
         if (localData.hasOwnProperty(groupId)) {
             localData[groupId].data.push(item)
@@ -30,6 +31,7 @@ function makeCartGoodGroups (cart = []) {
         }
     })
 
+    // console.log(88787,cart)
     let keys = Object.keys(localData)
     // console.log("local",keys)
     keys = keys.sort((a, b) => {
@@ -85,7 +87,6 @@ function makeCartGoodGroups (cart = []) {
                 parseFloat(simpleGoodsEntity.simpleGoodsDetails.retailMallPrice) +
                 parseFloat(item.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice)
         }
-        // console.log('a',item)
         return item
     })
 
@@ -210,7 +211,7 @@ export default {
 
     },
 
-    nuxtServerInit ({ commit }, { req, res, app, store, $axios }) {
+    nuxtServerInit ({ commit }, { req, res,app,store,$axios }) {
 
     },
     // 退出登录
@@ -305,7 +306,7 @@ export default {
             })
             sendData = sendData.concat(data)
         })
-        console.log("购物车", sendData)
+        // console.log("购物车", sendData)
 
         return this.$axios({
             method: 'post',
@@ -379,7 +380,7 @@ export default {
             return item
         })
 
-        console.log('goods-------->', goods)
+        // console.log('goods-------->', goods)
 
         return this.$axios({
             method: 'post',
@@ -596,7 +597,7 @@ export default {
         let request = null
         if (getters.hadLogin) {
             // 已登录的操作
-            console.log('已登录的操作')
+            // console.log('已登录的操作')
             request = dispatch('getOnlineCart')
         } else {
             // 未登录的操作
@@ -623,7 +624,6 @@ export default {
             method: 'get',
             url: '/web/member/cart'
         }).then(res => {
-            // console.log("购物车列表",res.data)
             return makeCartGoodGroups(res.data)
         })
             .catch(err => {
@@ -640,7 +640,7 @@ export default {
         let request = null
         if (getters.hadLogin) {
             // 已登录的操作
-            console.log('已登录的操作')
+            // console.log('已登录的操作')
             request = dispatch('getOnlineCartAmount')
             // request
             //     .then(data => {
@@ -677,7 +677,7 @@ export default {
             url: '/web/member/cart/count'
         })
             .then(res => {
-                // console.log('线上购物车商品总数====>', data)
+                // console.log('线上购物车商品总数====>', res)
                 if (res.code == 200) {
                     return res.data
                 } else {

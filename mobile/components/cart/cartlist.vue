@@ -7,6 +7,9 @@
                 !(index !== 0 && item.createTime === list[index - 1].createTime)
               " -->
           <li v-for="(item, index) in list" :key="index">
+             <!-- v-if="
+                !(index !== 0 && item.createTime === list[index - 1].createTime)
+              " -->
             <div
               v-if="
                 !(
@@ -18,25 +21,47 @@
               class="mod-item"
             >
               <!-- 单品 -->
-              <div v-if="item.groupType === 0 && Number(item.goodsType) !== 19" class="single">
-                <img :src="imageStrToArray(item.goodsImages)[0]" />
+              <div v-if="item.groupType === 0 && Number(item.goodsType) !== 19"  class="single">
+                <div class="img-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]">
+                  <img :src="imageStrToArray(item.goodsImages)[0]" />
+
+                  <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
+                    <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                    <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
+                  </div>
+                </div>
                 <div class="right">
-                  <h4 class="ow-h2">{{ item.goodsName }}</h4>
+                  <h4 class="ow-h2">
+                    <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                    <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
+
+                    {{ item.goodsName }}
+                  </h4>
                   <p>SKU：{{ item.sku }}</p>
                   <p class="p">
                     {{
                       getconfig(item.config, item.simpleGoodsEntity.baseConfig)
                     }}
                   </p>
-                  <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+
+                  <b v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  
+                  <div class="discount-price" v-else>
+                    <div class="old-price">{{ coin }} {{ formatNumber(item.salePrice) }}</div>
+                    <b>{{ coin }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                  </div>
+
                   <div v-if="item.groupType === 1" class="btn-type">
                     {{ lang.ring }}
                   </div>
-                  <div v-if="item.groupType === 2" class="btn-type">
+                  <div v-if="item.groupType === 2" class="btn-type" :class="{marginTop: item.groupType === 2}">
                     {{ lang.coustom }}
                   </div>
                   <div v-if="item.groupType !== 0 && index !== list.length - 1">
                     <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-10">
+                      <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? list[index + 1].coupon.discount.discount+'%' : discountConversion(list[index + 1].coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                      <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
+
                       {{ list[index + 1].goodsName }}
                     </h4>
                     <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
@@ -50,15 +75,34 @@
                         )
                       }}
                     </p>
-                    <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+                    <b v-if="!list[index + 1].coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+                    <div class="discount-price" v-else>
+                      <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                      <b>{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                    </div>
                   </div>
                 </div>
               </div>
               <!-- 对戒 -->
               <div v-if="item.goodsType == '19'" class="double">
-                <img :src="imageStrToArray(item.goodsImages)[0]" />
+                <div class="img-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]">
+                  <img :src="imageStrToArray(item.goodsImages)[0]" />
+
+                  <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
+                    <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                    <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
+                  </div>
+                </div>
+
                 <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
-                  <h4 class="ow-h2">{{ item.goodsName }}</h4>
+                  <h4 class="ow-h2">
+                    <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                    <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
+
+                    {{ item.goodsName }}
+                  </h4>
                   <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
                   <p class="p">
                     {{
@@ -90,28 +134,57 @@
                     <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
                   </div> -->
                 </div>
-                  <b class="double-ring-price">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+
+                  <b v-if="!item.coupon.discount" class="double-ring-price">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  
+                  <div class="discount-price" v-else>
+                    <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
+                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                  </div>
               </div>
               <!-- 定制 -->
               <div v-if="item.groupType === 2" class="customization">
-                <img :src="imageStrToArray(item.goodsImages)[0]" />
+                <div class="img-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]">
+                  <img :src="imageStrToArray(item.goodsImages)[0]" />
+
+                  <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
+                    <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                    <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
+                  </div>
+                </div>
+
                 <div class="right">
-                  <h4 class="ow-h2">{{ item.goodsName }}</h4>
+                  <h4 class="ow-h2">
+                    <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                    <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
+
+                    {{ item.goodsName }}
+                  </h4>
                   <p>SKU：{{ item.sku }}</p>
                   <p class="p">
                     {{
                       getconfig(item.config, item.simpleGoodsEntity.baseConfig)
                     }}
                   </p>
-                  <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  
+                  <b v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  
+                  <div class="discount-price" v-else>
+                    <div class="old-price">{{ coin }} {{ formatNumber(item.salePrice) }}</div>
+                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                  </div>
+
                   <div v-if="item.groupType === 1" class="btn-type">
                     {{ lang.ring }}
                   </div>
-                  <div v-if="item.groupType === 2" class="btn-type">
+                  <div v-if="item.groupType === 2" class="btn-type" :class="{marginTop: item.groupType === 2}">
                     {{ lang.coustom }}
                   </div>
                   <div v-if="item.groupType !== 0 && index !== list.length - 1">
                     <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-10">
+                      <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? list[index + 1].coupon.discount.discount+'%' : discountConversion(list[index + 1].coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                      <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
+
                       {{ list[index + 1].goodsName }}
                     </h4>
                     <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
@@ -125,7 +198,13 @@
                         )
                       }}
                     </p>
-                    <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                    
+                    <b v-if="!list[index + 1].coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                  
+                    <div class="discount-price" v-else>
+                      <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                      <b>{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -164,14 +243,18 @@ export default {
         safeFee: 0,
         orderAmount: 0
       },
-      num: 1
+      num: 1,
+      language: this.$store.state.language
     }
+  },
+  mounted() {
+    // this.language = this.getCookie('language')
   },
   methods: {
     formatMoney: formatMoney,
     // 属性数值转化成字符串
     getconfig(list, list2) {
-      console.log("list",list)
+      // console.log("list",list)
       let text = ''
       // if(list !== undefined){
         if (list.length > 0) {
@@ -243,10 +326,34 @@ export default {
           border-radius: 5px;
         }
         li {
-          img {
+          .img-box{
             float: left;
             width: 75px;
             height: 75px;
+            position: relative;
+
+            .activity-sign{
+              width: 40px;
+              height: 40px;
+              bottom: -4px;
+              right: -3px;
+
+              .triangle{
+                padding-top: 16px;
+                padding-left: 4px;
+                font-size: 10px;
+              }
+            }
+          }
+          .img-box.on{
+            border: 1px solid red;
+          }
+          .img-box.marginTop{
+            margin-top: 60px;
+          }
+          img {
+            width: 100%;
+            height: 100%;
           }
            .right {
               margin-left: 90px;
@@ -484,10 +591,27 @@ export default {
               }
             }
             
+
+            .btn-type.marginTop{
+              margin-top: 10px;
+              float: left;
+            }
           }
         }
       }
     }
+  }
+  .old-price{
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .discount-price{
+    padding: 0;
+  }
+
+  i{
+    font-style: normal;
   }
 }
 </style>

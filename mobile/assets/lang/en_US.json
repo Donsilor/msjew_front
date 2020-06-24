@@ -128,7 +128,9 @@
       "freight": "（Excluding freight）",
       "goPay": "CHECKOUT",
       "toast1": "Choose products before you pay",
-      "toast2": "Deleted"
+      "toast2": "Deleted",
+      "discounts1": "Coupon",
+      "discounts2": "off"
     },
     "invoice": {
       "personal":"personal",
@@ -176,6 +178,7 @@
       "more": "Up To 300 Characters",
       "cupon": "Coupon",
       "allFee": "Item Total：",
+      "itemsNum": "Qty of commodities",
       "preferFee": "Coupon Code：",
       "logisticsFee": "Shipping： ",
       "taxFee": "Taxes：",
@@ -192,14 +195,18 @@
       "inputOrSelectCode": "Input/select Coupon Code",
       "exchange": "Apply",
       "useShoppingCard": "Use Shopping Card",
-		"editOrUnbound": "Edit/Remove Card",
-		"shoppingCard": "Shopping Card",
-		"ultimatelyPay": "Actual payment",
-		"NeedPay": "MoneyNeedPay",
-		"submitSuccessfully": "Order Submission Successful!",
-		"PleaseLogin": "Please log in first to use the gift card！",
-		"msg10": "The shopping cart cannot be empty. Please add the item again",
-    "msg11": "Mainland China Only"
+      "editOrUnbound": "Edit/Remove Card",
+      "shoppingCard": "Shopping Card",
+      "ultimatelyPay": "Actual payment",
+      "NeedPay": "MoneyNeedPay",
+      "submitSuccessfully": "Order Submission Successful!",
+      "PleaseLogin": "Please log in first to use the gift card！",
+      "msg10": "The shopping cart cannot be empty. Please add the item again",
+      "msg11": "Mainland China Only",
+      "discountedAmount": "Discounted amount",
+      "couponAmount": "Coupon",
+      "msg12": "Please login before redeem the coupon. ",
+      "useCoupons": "Use Coupons"
     },
     "pay": {
       "pay": "Order payment",
@@ -300,7 +307,9 @@
       "transPreferFee": "Bank Wire Discount:",
       "orderAmount": "Total",
       "ring": "Couple Rings",
-      "coustom": "Customize"
+      "coustom": "Customize",
+      "discounts1": "Coupon",
+      "discounts2": "off"
     },
     "payFailed": {
       "title": "Sorry, the order payment failed! Please repay",
@@ -325,7 +334,8 @@
       "tips": "Tips",
       "text": "Log out now?",
       "cancel": "CANCEL",
-      "course": "SUBMIT"
+      "course": "SUBMIT",
+      "coupon": "Coupon card pack"
     },
     "account": {
       "header": "Account information",
@@ -573,7 +583,9 @@
       "ultimatelyPay": "Actual payment",
       "NeedPay": "MoneyNeedPay",
       "pending":"Pending",
-      "payfailed":"Payment failed"
+      "payfailed":"Payment failed",
+      "discountedAmount": "Discounted amount",
+      "couponAmount": "Coupon"
     }
   },
   "custom-made": {
@@ -593,7 +605,9 @@
     "cut": "Cut",
     "addCart": "ADD TO CART",
     "addCartSuccess": "Added to cart",
-    "addCartFail": "Failed to add to cart"
+    "addCartFail": "Failed to add to cart",
+    "discounts1": "Coupon",
+    "discounts2": "off"
   },
   "diamond": {},
   "engagement": {
@@ -716,7 +730,9 @@
       "search": "Search",
       "total": "A total of",
       "goods": "products",
-      "suitability": "Match"
+      "suitability": "Match",
+      "discounts1": "Coupon",
+      "discounts2": "off"
     }
   },
   "comments": {
@@ -1091,7 +1107,15 @@
     "lady": "Women",
     "gentlemen": "Men",
     "general": "General model",
-    "size": "size"
+    "size": "size",
+    "discounts1": "Coupon",
+    "discounts2": "off",
+    "discountsActive": "Special offer",
+    "getCoupon": "Get coupons",
+    "activityTime": "Promotion period",
+    "oddPrice": "Original price",
+    "newPrice": "Discount price",
+    "needLogin": "Please login before redeem the coupon."
   },
   "listCommons": {
     "sliders": [
@@ -1130,7 +1154,11 @@
     "clarity": "Clarity",
     "cut": "Cut",
     "luster": "Polish",
-    "symmetry": "Symmetry"
+    "symmetry": "Symmetry",
+    "discounts1": "Coupon",
+    "discounts2": "off",
+    "oddPrice": "Original price",
+    "newPrice": "Discount price"
   },
   "help-pages": {
     "brandStory": {
@@ -2209,5 +2237,25 @@
 			"sendFail": "發送失敗",
 			"fillMessage": "請填寫您的個人信息"
 		}
-	}
+	},
+  "coupon": {
+      "title": "Coupon Card Package",
+      "limit1": "Full ",
+      "limit2": " To Use",
+      "limit3": "limit ",
+      "limit4": " To Use",
+      "use": "Click On The Use",
+      "time": "Activity Time",
+      "loseEfficacy": "Lost Efficacy",
+      "getCoupon": "Get Coupon",
+      "useCoupon": "Use Coupon",
+      "accomplish": "Accomplish",
+      "alreadyApplied": "Coupon has been used",
+      "alreadyReceived": "Coupon has been claimed",
+      "immediatelyReceive": "Collect it now",
+      "haveChoose": "Already Selected",
+      "immediatelyChoose": "Select it now",
+      "msg1": "Coupon has been claimed successfully",
+      "msg2": "Something went wrong, please try it again."
+  }
 }

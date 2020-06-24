@@ -63,7 +63,9 @@ export default {
         commentsLevel: ``,
         showStatus: 1
       },
-      total_count: 0
+      total_count: 0,
+      showPi: 0,
+      showP2: 0
     }
   },
   computed: {
@@ -672,6 +674,12 @@ export default {
       const bullShit = this.goodInfo.details
       if (this.chooseSizeId === ``) {
         this.showPi = this.goodInfo.salePrice
+
+        if(this.couponType(this.goodInfo.coupon) == 'discount'){
+          this.showP2 = this.goodInfo.coupon.discount.price
+        }else{
+          this.showP2 = this.goodInfo.salePrice
+        }
       } else {
         for (const i in bullShit) {
           if (
@@ -684,6 +692,12 @@ export default {
             this.sendGoodsId = bullShit[i].goodsId
             this.sendDetailsId = bullShit[i].id
             this.categoryId = bullShit[i].categoryId
+
+            if(this.couponType(bullShit[i].coupon) == 'discount'){
+              this.showP2 = bullShit[i].coupon.discount.price
+            }else{
+              this.showP2 = bullShit[i].retailMallPrice
+            }
           }
         }
       }

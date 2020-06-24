@@ -128,7 +128,9 @@
       "freight": "（不含运费）",
       "goPay": "去結賬",
       "toast1": "請選擇要結賬商品",
-      "toast2": "移除成功"
+      "toast2": "移除成功",
+      "discounts1": "優惠券",
+      "discounts2": "折"
     },
     "invoice":{
       "personal":"個人",
@@ -176,6 +178,7 @@
       "more": "可輸300個字符",
       "cupon": "優惠碼",
       "allFee": "商品總額：",
+      "itemsNum": "商品件數",
       "preferFee": "*優惠碼：",
       "logisticsFee": "運費： ",
       "taxFee": "稅費：",
@@ -192,14 +195,18 @@
       "inputOrSelectCode": "輸入/選擇優惠碼",
       "exchange": "使用",
       "useShoppingCard": "使用購物卡",
-		"editOrUnbound": "編輯/解綁購物卡",
-		"shoppingCard": "購物卡",
-		"ultimatelyPay": "實付金額",
-		"NeedPay": "需付金額",
-		"submitSuccessfully": "訂單提交成功!",
-		"PleaseLogin": "請先登錄，才能使用購物卡！",
-		"msg10": "購物車不能為空，請重新添加商品",
-    "msg11": "僅供大陸使用"
+      "editOrUnbound": "編輯/解綁購物卡",
+      "shoppingCard": "購物卡",
+      "ultimatelyPay": "實付金額",
+      "NeedPay": "需付金額",
+      "submitSuccessfully": "訂單提交成功!",
+      "PleaseLogin": "請先登錄，才能使用購物卡！",
+      "msg10": "購物車不能為空，請重新添加商品",
+      "msg11": "僅供大陸使用",
+      "discountedAmount": "折扣金額",
+      "couponAmount": "優惠券",
+      "msg12": "請先登錄才能使用優惠券",
+      "useCoupons": "使用優惠券"
     },
     "pay": {
       "pay": "訂單支付",
@@ -300,7 +307,9 @@
       "transPreferFee": "電匯優惠： ",
       "orderAmount": "訂單總額",
       "ring": "對戒",
-      "coustom": "定製"
+      "coustom": "定製",
+      "discounts1": "優惠券",
+      "discounts2": "折"
     },
     "payFailed": {
       "title": "很抱歉，訂單支付失敗！請重新支付",
@@ -325,7 +334,8 @@
       "tips": "提示",
       "text": "確定退出登錄？",
       "cancel": "取消",
-      "course": "確定"
+      "course": "確定",
+      "coupon": "優惠券卡包"
     },
     "account": {
       "header": "我的賬戶",
@@ -572,7 +582,9 @@
       "ultimatelyPay": "實付金額",
       "NeedPay": "需付金額",
       "pending":"待確認",
-      "payfailed":"支付失敗"
+      "payfailed":"支付失敗",
+      "discountedAmount": "折扣金額",
+      "couponAmount": "優惠券"
     }
   },
   "custom-made": {
@@ -591,7 +603,9 @@
     "cut": "切割",
     "addCart": "加入購物車",
     "addCartSuccess": "加入購物車成功",
-    "addCartFail": "加入購物車是失敗"
+    "addCartFail": "加入購物車是失敗",
+    "discounts1": "優惠券",
+    "discounts2": "折"
   },
   "diamond": {},
   "engagement": {
@@ -715,7 +729,9 @@
       "search": "搜索",
       "total": "共",
       "goods": "貨品",
-      "suitability": "匹配度"
+      "suitability": "匹配度",
+      "discounts1": "優惠券",
+      "discounts2": "折"
     }
   },
   "comments": {
@@ -974,7 +990,7 @@
       "pending":"待確認",
       "payfailed":"支付失敗",
       "lookOrder":"查看訂單"
-      
+
     },
     "progressBar": {
       "price": "價格",
@@ -1094,7 +1110,15 @@
     "lady": "女士",
     "gentlemen": "男士",
     "general": "通用款",
-    "size": "尺寸"
+    "size": "尺寸",
+    "discounts1": "優惠券",
+    "discounts2": "折",
+    "discountsActive": "優惠活動",
+    "getCoupon": "獲取優惠券",
+    "activityTime": "活動時間",
+    "oddPrice": "原  價",
+    "newPrice": "折後價",
+    "needLogin": "請先登錄，才能領取優惠券"
   },
   "listCommons": {
     "sliders": [
@@ -1106,7 +1130,6 @@
       "擺件",
       "挂件",
       "其它"
-
     ],
     "style": "款式",
     "theme": "特別禮物",
@@ -1133,7 +1156,11 @@
     "clarity": "淨度",
     "cut": "切割",
     "luster": "光澤",
-    "symmetry": "對稱"
+    "symmetry": "對稱",
+    "discounts1": "優惠券",
+    "discounts2": "折",
+    "oddPrice": "原  價",
+    "newPrice": "折後價"
   },
   "help-pages": {
     "brandStory": {
@@ -2218,5 +2245,25 @@
 			"sendFail": "發送失敗",
 			"fillMessage": "請填寫您的個人信息"
 		}
-	}
+	},
+  "coupon": {
+      "title": "優惠券卡包",
+      "limit1": "滿 ",
+      "limit2": " 元使用",
+      "limit3": "限 ",
+      "limit4": " 使用",
+      "use": "點擊使用",
+      "time": "活動時間",
+      "loseEfficacy": "已失效",
+      "getCoupon": "領取優惠券",
+      "useCoupon": "使用優惠券",
+      "accomplish": "完成",
+      "alreadyApplied": "已使用",
+      "alreadyReceived": "已领取",
+      "immediatelyReceive": "立即领取",
+      "haveChoose": "已选用",
+      "immediatelyChoose": "立即选用",
+      "msg1": "優惠券領取成功",
+      "msg2": "優惠券領取失敗，請重試"
+  }
 }

@@ -20,6 +20,7 @@ export default {
       sizeLine: 0,
       caratLine: 0,
       showPi: 0,
+      showP2: 0,
       sendGoodsId: null,
       sendDetailsId: null,
       categoryId: null,
@@ -51,8 +52,9 @@ export default {
         salePrice: 0,
         details: [],
         sizes: [],
+        totalStock: 0,
+        coupon: {},
         carats:[],
-        totalStock: 0
       },
       starNum: 5,
       comments: {
@@ -141,6 +143,13 @@ export default {
         // res.goodsDesc = res.goodsDesc.includes(`<script>`) ? '' : res.goodsDesc
         this.goodInfo = res
         // console.log("res",res)
+
+        if(res.coupon){
+          for(var i in res.coupon){
+            this.goodInfo.coupon[i] = res.coupon[i];
+          }
+        }
+
         this.conditions[0].options = this.goodInfo.materials
         if (this.$route.query.isBack) {
           const melo = JSON.parse(
@@ -278,6 +287,12 @@ export default {
           this.sendGoodsId = ``
           this.sendDetailsId = ``
           this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -290,6 +305,12 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+              
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
@@ -299,6 +320,12 @@ export default {
           this.sendGoodsId = ``
           this.sendDetailsId = ``
           this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -310,6 +337,12 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+              
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
@@ -331,6 +364,12 @@ export default {
           this.sendGoodsId = ``
           this.sendDetailsId = ``
           this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -343,6 +382,12 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+              
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
@@ -352,6 +397,12 @@ export default {
           this.sendGoodsId = ``
           this.sendDetailsId = ``
           this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (

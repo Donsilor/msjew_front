@@ -39,7 +39,7 @@
             <img :src="activeRecommendInfo.goodMainImage" @error="imageError" />
           </div>
           <div class="product-price">
-            <span class="currency">{{ coinType }}</span>
+            <span class="currency">{{ formatCoin(coinType) }}</span>
             <span class="price">
               {{ formatNumber(activeRecommendInfo.salePrice) }}
             </span>
@@ -93,10 +93,10 @@
           </div>
           <div class="good-title">{{ g.goodsName }}</div>
           <div class="good-price-fake">
-            {{ coinType }} {{ formatNumber(g.salePrice) }}
+            {{ formatCoin(coinType) }} {{ formatNumber(g.salePrice) }}
           </div>
           <div class="good-price-real">
-            {{ coinType }} {{ formatNumber(g.activityPrice) }}
+            {{ formatCoin(coinType) }} {{ formatNumber(g.activityPrice) }}
           </div>
           <div class="good-buy-btn" @click="toDetail(g)">{{ lang.btn }}</div>
         </div>
@@ -125,10 +125,10 @@
           </div>
           <div class="good-title">{{ g.goodsName }}</div>
           <div class="good-price-fake">
-            {{ coinType }} {{ formatNumber(g.salePrice) }}
+            {{ formatCoin(coinType) }} {{ formatNumber(g.salePrice) }}
           </div>
           <div class="good-price-real">
-            {{ coinType }} {{ formatNumber(g.activityPrice) }}
+            {{ formatCoin(coinType) }} {{ formatNumber(g.activityPrice) }}
           </div>
           <div class="good-buy-btn">{{ lang.btn }}</div>
         </div>

@@ -7,9 +7,17 @@
       <div class="ring one-block">
         <div class="img-block">
           <img :src="$IMG_URL + info1.goodsImages" />
+
+          <div class="activity-sign" v-if="couponType(info1.coupon) == 'money' || couponType(info1.coupon) == 'discount'">
+            <div class="triangle" v-if="couponType(info1.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(this.info1.coupon.discount.discount)+'%' : discountConversion(this.info1.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+            <div class="triangle" v-if="couponType(info1.coupon) == 'money'">{{ lang.discounts1 }}</div>
+          </div>
         </div>
         <div class="content-block">
           <div class="content-title ow-h2 wordwrap">
+            <span class="discount-icon" v-if="couponType(info1.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(this.info1.coupon.discount.discount)+'%' : discountConversion(this.info1.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+            <span class="discount-icon padding" v-if="couponType(info1.coupon) == 'money'">￥</span>
+
             {{ info1.goodsName }}
           </div>
           <div class="content-desc">SKU：{{ info1.goodsCode }}</div>
@@ -32,7 +40,14 @@
                 {{ lang.size }}：{{ s.configAttrVal }}
               </div>
               <div class="content-price">
-                {{ formatCoin(info1.coinType) }} {{ formatNumber(c.retailMallPrice) }}
+                <div class="price" v-if="couponType(info1.coupon) !== 'discount'">{{ formatCoin(info1.coinType) }} {{ formatNumber(c.retailMallPrice) }}</div>
+
+                <div class="discount-price" v-else>
+                  <div class="old-price">{{ formatCoin(info1.coinType) }} {{ formatNumber(info1.salePrice) }}</div>
+                  <div class="new-price">{{ formatCoin(info1.coinType) }} {{ formatNumber(price1) }}</div>
+                </div>
+
+                <!-- {{ c.coinType }} {{ formatNumber(c.retailMallPrice) }} -->
               </div>
             </div>
           </div>
@@ -41,9 +56,17 @@
       <div class="diamond one-block">
         <div class="img-block">
           <img :src="$IMG_URL + info2.goodsImages" />
+
+          <div class="activity-sign" v-if="couponType(info2.coupon) == 'money' || couponType(info2.coupon) == 'discount'">
+            <div class="triangle" v-if="couponType(info2.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(this.info2.coupon.discount.discount)+'%' : discountConversion(this.info2.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+            <div class="triangle" v-if="couponType(info2.coupon) == 'money'">{{ lang.discounts1 }}</div>
+          </div>
         </div>
         <div class="content-block">
           <div class="content-title ow-h2 wordwrap">
+            <span class="discount-icon" v-if="couponType(info2.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(this.info2.coupon.discount.discount)+'%' : discountConversion(this.info2.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+            <span class="discount-icon padding" v-if="couponType(info2.coupon) == 'money'">￥</span>
+
             {{ info2.goodsName }}
           </div>
           <div class="content-desc">SKU：{{ info2.goodsCode }}</div>
@@ -62,8 +85,15 @@
             </div>
           </div>
           <div class="content-price">
-            {{ formatCoin(info2.coinType) }}
-            {{ formatNumber(info2.details[0].retailMallPrice) }}
+            <div class="price" v-if="couponType(info2.coupon) !== 'discount'">{{ formatCoin(info2.coinType) }} {{ formatNumber(info2.salePrice) }}</div>
+
+            <div class="discount-price" v-else>
+              <div class="old-price">{{ formatCoin(info2.coinType) }} {{ formatNumber(info2.salePrice) }}</div>
+              <div class="new-price">{{ formatCoin(info2.coinType) }} {{ formatNumber(price2) }}</div>
+            </div>
+
+            <!-- {{ info2.details[0].coinType }} -->
+            <!-- {{ formatNumber(info2.details[0].retailMallPrice) }} -->
           </div>
         </div>
       </div>
@@ -73,12 +103,7 @@
       <div v-for="(c, index) in info1.details" :key="index">
         <span v-if="parseInt(c.id) === parseInt(infoCheck)" class="price-add">
           {{ formatCoin(info1.coinType) }}
-          {{
-            formatNumber(
-              c.retailMallPrice +
-                info2.details[0].retailMallPrice
-            )
-          }}
+          {{ formatNumber(price1 + price2) }}
         </span>
       </div>
     </div>
@@ -119,7 +144,8 @@ export default {
         ]
       },
       infoCheck: 0,
-      swiperImg: []
+      swiperImg: [],
+      language: this.$store.state.language
     }
   },
   watch: {
@@ -127,6 +153,34 @@ export default {
       this.getThatS()
       this.lock = false
     }
+  },
+  computed:{
+    price1() {
+      var price1=0;
+      for(var i=0; i<this.info1.details.length; i++){
+        if(parseInt(this.info1.details[i].id) === parseInt(this.infoCheck)){
+          if(this.info1.details[i].coupon.hasOwnProperty('discount') ){
+            price1 = this.info1.details[i].coupon.discount.price
+          }else{
+            price1 = this.info1.details[i].coupon.price
+          }
+        }
+      }
+      return price1
+    },
+    price2() {
+      var price2=0;
+      if(this.info2.coupon.hasOwnProperty('discount') ){
+        price2 = this.info2.coupon.discount.price
+      }else{
+        price2 = this.info2.coupon.price
+      }
+
+      return price2
+    }
+  },
+  mounted() {
+    // this.language = this.getCookie('language')
   },
   methods: {
     getThatS() {
@@ -171,7 +225,7 @@ export default {
         }
       })
         .then(res => {
-          // console.log(`finish's Other=======>`, res)
+          console.log(`finish's Other=======>`, res)
           this.swiperImg = res.goodsImages.split(`,`)
           res.goodsImages = res.goodsImages.split(`,`)[0] || ``
           this.info1 = res
@@ -206,7 +260,10 @@ export default {
       display: flex;
       margin-bottom: 35px;
       .img-block {
+        width: 125px;
+        height: 125px;
         margin-right: 20px;
+        position: relative;
         img {
           display: block;
           width: 125px;
@@ -238,6 +295,9 @@ export default {
           font-size: 18px;
           line-height: 18px;
         }
+        .new-price{
+          color:#f29b87;
+        }
       }
     }
   }
@@ -264,8 +324,8 @@ export default {
     margin: 10px auto 20px auto;
   }
   .bot-swiper {
-    width: 345px;
-    height: 345px;
+    width: 344px;
+    height: 344px;
     margin: 0 auto 32px auto;
 
     img {
@@ -274,5 +334,21 @@ export default {
       height: 330px;
     }
   }
+}
+
+.activity-sign{
+  width: 50px;
+  height: 50px;
+  right: -4px;
+  bottom: -6px;
+}
+.activity-sign .triangle{
+  width: 50px;
+  height: 50px;
+  padding-top: 30px;
+  font-size: 12px;
+}
+.discount-price{
+  padding: 0;
 }
 </style>

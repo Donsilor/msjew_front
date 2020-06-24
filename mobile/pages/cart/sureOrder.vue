@@ -66,7 +66,7 @@
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
-                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p> 
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
               </div>
             </div>
           </li>
@@ -129,8 +129,9 @@
     <div class="footer">
       <div class="content">
         <div class="time">
-          <span>{{ lang.time }}</span
-          ><span>{{ planDays }}{{ lang.week }}</span>
+          <span>{{ lang.time }}</span>
+          <span v-if="!isLogin">{{ allFee.plan_days }}{{ lang.week }}</span>
+          <span v-else>{{ planDays }}{{ lang.week }}</span> 
         </div>
         <div v-if="productNum > 1" class="send">
           <div
@@ -171,6 +172,7 @@
             </div>
           </div>
         </div>
+
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
@@ -224,6 +226,7 @@
             </div>
           </div>
         </div> -->
+
         <ul class="price">
           <!-- <li v-if="isLogin" @click="selectCupon">
             <span>{{ lang.cupon }}</span
@@ -236,13 +239,14 @@
               {{ formatMoney( productAmount) }}</span
             >
           </li>
-					<li v-for="(item,index) in useAmount" :key="index">
-					  <div>
-					    <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
-					  </div>
-					  <span class="color-pink">-{{ coin }} {{ formatMoney(item.useAmount) }}</span>
-					</li>
-          <li v-show="preferFee > 0">
+
+          <li>
+            <span>{{ lang.itemsNum }}：</span>
+            <span>{{ amount }}</span>
+          </li>
+
+          <!-- 优惠码 -->
+          <!-- <li v-show="preferFee > 0">
             <div>
               <span>{{ lang.preferFee }}</span>
               <span
@@ -257,8 +261,9 @@
                 >{{ lang.delete }}</span
               >
             </div>
-            <span>-{{ formatCoin(coin) }} {{ formatMoney(preferFee) }}</span>
-          </li>
+            <span>-{{ coin }} {{ formatMoney(preferFee) }}</span>
+          </li> -->
+
           <li>
             <div>
               <span>{{ lang.logisticsFee }}</span>
@@ -282,12 +287,52 @@
             </div>
             <span>+{{ formatCoin(coin) }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
-          <li class="order-pay">
+          <li>
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
             ><span>{{ formatCoin(coin) }} {{ formatMoney(orderTotalAmount) }}</span>
           </li>
-          <li class="order-pay" style="border-top: 0;margin-top: 0;">
+
+          <!-- 折扣金额 -->
+          <li v-if="allFee.discountAmount">
+            <span>{{ lang.discountedAmount }}：</span
+            ><span
+              >-{{ coin }}
+              {{ formatMoney( allFee.discountAmount) }}</span
+            >
+          </li>
+
+          <!-- 折扣金额 -->
+          <li v-if="allFee.discount_amount">
+            <span>{{ lang.discountedAmount }}：</span
+            ><span
+              >-{{ coin }}
+              {{ formatMoney( allFee.discount_amount) }}</span
+            >
+          </li>
+
+          <!-- 优惠金额 -->
+          <li v-if="ifShowCouponMoney && isLogin">
+            <span>{{ lang.couponAmount }}： </span
+            ><span
+            class="use-coupon"
+             v-if="couponCodeR.couponPrice"
+             @click="ifShowCoupon = true"
+              >-{{ coin }}
+              {{this.couponCodeR.couponPrice}}</span
+            >
+            <span class="use-coupon" v-if="!couponCodeR.couponPrice" @click="useCoupon">{{ lang.useCoupons }}</span>
+          </li>
+
+          <!-- 购物卡 -->
+          <li v-for="(item,index) in useAmount" :key="index">
+            <div>
+              <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
+            </div>
+            <span class="color-pink">-{{ coin }} {{ formatMoney(item.useAmount) }}</span>
+          </li>
+
+          <li class="order-pay">
             <span>{{ lang.NeedPay }}</span
             ><span>{{ formatCoin(coin) }} {{ formatMoney(ultimatelyPay) }}</span>
           </li>
@@ -309,6 +354,7 @@
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
     <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
+    <use-coupon v-if="ifShowCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready"></use-coupon>
   </div>
 </template>
 
@@ -336,6 +382,7 @@ export default {
     return {
       kai:false,
       url:'',
+      lang: this.LANGUAGE.cart.sureOrder,
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
       coin: this.$store.state.coin, 
@@ -407,8 +454,6 @@ export default {
       // price: JSON.parse(this.$route.query.info).orderAmount,
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
       needtips: false,
-
-      lang: this.LANGUAGE.cart.sureOrder,
       canSubmit: false,
       coin: this.$store.state.coin,
       mailbox: '',
@@ -446,11 +491,21 @@ export default {
       orderTotalAmount: 0,
       ultimatelyPay: 0,
       currency: '',
-      platform: this.$store.state.platform
+      platform: this.$store.state.platform,
+      couponCodeR: {
+        couponId: '',
+        couponPrice: ''
+      },
+      ifShowCoupon: false,
+      ifShowCouponMoney: false,
+      // 所有可有优惠券
+      couponAll: [],
+      // 已领取优惠券
+      couponAlready: [],
+      amount: 0
     }
   },
   computed: {
-
     selectedCouponInfo() {
       const _this = this
       let result = {}
@@ -499,31 +554,23 @@ export default {
       // console.log('this.allFee=====>', JSON.stringify(this.allFee))
        if (this.isLogin){
          if (this.allFee.orderAmount === null) {
-          //  console.log(11111)
            // result = this.formatMoney(this.productAmount)
            result = this.formatMoney(this.allFee.payAmount)
          } else  {
-          //  console.log(22222)
            // result = this.formatMoney(this.allFee.orderAmount)
            result = this.formatMoney(this.allFee.payAmount)
          }
        } else {
          if (this.allFee.order_amount === null) {
-          //  console.log(11111)
            result = this.formatMoney(this.goods_amount)
          } else  {
-          //  console.log(22222)
            result = this.formatMoney(this.allFee.order_amount)
          }
        }
        this.totlePrice = result
-       console.log("dddd",this.totlePrice)
+       // console.log(this.totlePrice)
       return result
     }
-  },
-  created(){
-    // console.log("aaaa",)
-    //     this.kai = this.$route.query.invoice !== ''
   },
   mounted() {
     // console.log("query",this.$route.params.invoice)
@@ -539,17 +586,16 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
-      this.planDays = this.allFee.planDays
-      // console.log("allFee",this.planDays)
+      // this.planDays = this.allFee.planDays
+      console.log("allFee",this.list)
+      this.amount = this.list.length
       this.idList = []
       this.productAmount = 0
       if(this.list != 0){
         this.list.map((item, index) => {
-          // console.log("sssss=====",item.id)
           this.idList.push(item.id)
           this.goodsListLine.push(item.simpleGoodsEntity.categoryId)
           // this.idList.push(item.localSn)
-          //  console.log("sssss",this.productAmount)
           // this.productAmount = this.productAmount + item.salePrice   localSn
           this.productAmount = parseFloat(this.productAmount + item.salePrice)
           // console.log("productAmount",this.productAmount)
@@ -557,7 +603,7 @@ export default {
       }
 
       this.getData() // 获取地址
-      this.getCouponList() // 获取优惠券列表
+      // this.getCouponList() // 获取优惠券列表
 
       // 此为迫不得已而为之，不敢改动上一手的代码
       setTimeout(() => {
@@ -605,7 +651,7 @@ export default {
         })
       }
       if (ind === 5) {
-        this.price = this.info.orderAmount 
+        this.price = this.info.orderAmount
       } else {
         this.price = this.info.orderAmount
       }
@@ -630,21 +676,6 @@ export default {
       this.$refs[index].show()
     },
     formatMoney: formatMoney,
-    // 选择登录状态下优惠卷
-    selectCupon() {
-      if (this.cuponList.length > 0) {
-        this.$refs.cupon.show()
-      } else {
-        this.$toast.show(this.lang.toast1)
-      }
-    },
-    useCoupon() {
-      if (this.isLogin) {
-        this.getCouponAmount()
-      } else {
-        this.checkCount()
-      }
-    },
     // 查询匿名使用优惠卷时可以优惠的金额
     checkCount() {
       // const carts = []
@@ -879,12 +910,23 @@ export default {
 
     // 登录下获取相关费用
     getTex(k) {
-      var cards = k || '';
+      var cards = k || [];
       var cardL = sessionStorage.getItem('cardList');
 
       if(cardL != null){
         this.cardList = JSON.parse(cardL);
         cards = JSON.parse(cardL);
+      }
+
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
+      for (const i in this.list) {
+        arr.push({...obj})
+        arr[i].cart_id = this.list[i].id;
+
+        if(this.list[i].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.list[i].coupon.discount.coupon_id
+        }
       }
 
       this.canSubmit = false
@@ -897,7 +939,9 @@ export default {
             addressId: this.address.id,
             cards: cards,
             // preferFee: this.preferFee,
-            cartIds: this.idList.join(',')
+            // cartIds: this.idList.join(',')
+            carts: arr,
+            coupon_id: this.couponCodeR.couponId
           }
 
           this.$axios({
@@ -925,6 +969,16 @@ export default {
 
             // this.info=res.details
             // console.log("费用>>>>>>>>",this.info)
+
+            this.couponAll = res.coupons
+            this.couponAlready = res.myCoupons;
+
+            if(res.myCoupons.length != 0){
+              this.ifShowCouponMoney = true
+            }else{
+              this.ifShowCouponMoney = false
+            }
+
           })
           .catch(err => {
             this.canSubmit = false
@@ -942,25 +996,30 @@ export default {
           },2000)
         }
       } else {
-        // console.log("this.list",this.list)
         if(this.list.length){
           url = `/web/member/order-tourist/tax`
           const goodsCartList=[]
+          var coupon_discount = ''
           for (const i in this.list) {
+            if(this.list[i].coupon.hasOwnProperty('discount')){
+              coupon_discount = this.list[i].coupon.discount.coupon_id;
+            }
+
             const o = {
-              createTime: this.list[i].createTime,
-              goods_num: 1,
-              goodsDetailsId: this.list[i].goodsDetailsId,
               goods_id: this.list[i].goodsDetailsId,
-              group_id: this.list[i].groupId,
               goods_type: this.list[i].goodsStatus,
-              group_type:
-                this.list[i].groupType !== 0 ? this.list[i].groupType : null
+              goods_num: 1,
+              group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
+              group_id: this.list[i].groupId,
+              createTime: this.list[i].createTime,
+              coupon_id: coupon_discount
             }
             goodsCartList.push(o)
+            coupon_discount = ''
             // console.log("list........",o)
           }
-          data = {goodsCartList:goodsCartList}
+          data = {goodsCartList:goodsCartList,coupon_id: ''}
+
           // console.log("list........",data)
           this.$axios({
             method: 'post',
@@ -969,7 +1028,7 @@ export default {
           })
 
           .then(res => {
-            // console.log("费用",res)
+            console.log("费用",this.allFee)
             this.canSubmit = true
             this.allFee = res
 
@@ -978,7 +1037,7 @@ export default {
             }
 
             this.orderTotalAmount = res.order_amount;
-            this.ultimatelyPay = res.order_amount;
+            this.ultimatelyPay = res.pay_amount;
             this.currency = res.currency;
             this.priceHKD = res.order_amount_HKD
 
@@ -1141,19 +1200,32 @@ export default {
       if(this.kai == true){
         info = this.$route.params.invoice
       }
+
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
+      for (const i in this.list) {
+        arr.push({...obj})
+        arr[i].cart_id = this.list[i].id;
+
+        if(this.list[i].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.list[i].coupon.discount.coupon_id
+        }
+      }
+
       if (this.isLogin) {
         this.$axios({
           method: 'post',
           url: `/web/member/order/create`,
           data: {
-            cart_ids: this.idList.join(','),
+            carts: arr,
             // allSend: this.isSend ? 1 : 2,
             buyer_remark: this.userRemark,
             // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
             invoice: info,
-            card: this.cardList
+            card: this.cardList,
+            coupon_id: this.couponCodeR.couponId
             // afterMail: this.mailbox,
             // recvType: 1,
             // preferId: this.selectCouponId ? this.selectCouponId : null,
@@ -1161,7 +1233,7 @@ export default {
           }
         })
           .then(res => {
-            console.log("总额",res)
+            // console.log("总额",res)
             if(res.payStatus == 1){
               this.$toast.show(this.lang.submitSuccessfully);
               this.$router.replace({
@@ -1185,6 +1257,11 @@ export default {
         let baseUrl=this.$store.getters.baseUrl
         // console.log("未登录",this.list)
         for (const i in this.list) {
+          let coupon_discount = ""
+          if(this.list[i].coupon.hasOwnProperty('discount')){
+            coupon_discount = this.list[i].coupon.discount.coupon_id;
+          }
+
           const o = {
             createTime: this.list[i].createTime,
             goods_num: 1,
@@ -1192,11 +1269,12 @@ export default {
             goods_id: this.list[i].goodsDetailsId,
             group_id: this.list[i].groupId,
             goods_type: this.list[i].goodsStatus,
-            group_type:
-              this.list[i].groupType !== 0 ? this.list[i].groupType : null
+            group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
+            coupon_id: coupon_discount
           }
           data.push(o)
         }
+
         // console.log("data",data)
         // console.log("paytype",this.$route.query)
         if(data.length){
@@ -1310,6 +1388,22 @@ export default {
             clearInterval(timer)
           }
         }, 22)
+      }
+    },
+    closeCo(k) {
+      this.ifShowCoupon = false
+      if(k.couponId){
+        this.couponCodeR.couponId = k.couponId;
+        this.couponCodeR.couponPrice = k.couponCode;
+      }
+
+      this.getTex();
+    },
+    useCoupon() {
+      if(this.isLogin){
+        this.ifShowCoupon = true
+      }else{
+        this.$toast.show('登陆后才能使用优惠券');
       }
     }
 
@@ -1670,6 +1764,10 @@ export default {
         }
       }
       .price {
+        .use-coupon{
+          text-decoration: underline;
+          color: rgba(242, 156, 136, 1);
+        }
         li {
           display: flex;
           justify-content: space-between;
@@ -1924,4 +2022,5 @@ export default {
 .hint-color{
   color: #f29b87 !important;
 }
+
 </style>
