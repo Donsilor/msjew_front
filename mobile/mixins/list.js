@@ -155,7 +155,7 @@ export default {
         console.log('已到最后一页')
         return
       }
-      console.log('page=======>', page)
+      // console.log('page=======>', page)
       this.getPageInfo(page)
     },
     // 请求当前页数据

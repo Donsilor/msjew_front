@@ -77,7 +77,7 @@
       <!--      <no-more-data v-if="noMoreListData"></no-more-data>-->
       <footer-bar v-if="noMoreListData"></footer-bar>
     </div>
-    
+
     <swiper-tap
       ref="suitability"
       :choose-line="0"
@@ -114,7 +114,7 @@ export default {
     return {
       lang: this.LANGUAGE.listCommons,
       gender: 'all',
-  
+
     }
   },
   watch: {
@@ -129,8 +129,8 @@ export default {
       this.changeGender()
 
     },
-  
-    
+
+
   },
   created() {},
   mounted() {
@@ -141,9 +141,20 @@ export default {
       this.conditions[0].options = this.CONDITION_INFO.style.womanRings
       this.conditions[0].checked = style.toString()
       this.categoryId = 2
+      
+	  var ringT = sessionStorage.getItem('ringType');
+	  if(ringT){
+		  if(ringT == 'lady'){
+			  this.gender = 42
+		  }else if(ringT == 'gentlemen'){
+			  this.gender = 41
+		  }
+
+      this.changeGender(this.gender)
+	  }else{
       let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:-1
       this.changeGender(type)
-
+    }
       // this.madeUpEv()
     })
   },
@@ -175,6 +186,9 @@ export default {
       this.research()
       console.log(this.ev)
     }
+  },
+  beforeDestroy() {
+	  sessionStorage.removeItem('ringType')
   }
 }
 </script>
