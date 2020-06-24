@@ -161,7 +161,7 @@
         >
           <!--          商品数据-->
           <div v-if="item.itemType === 'product'" class="product-content">
-            <nuxt-link :to="item.to" target="_blank">
+            <nuxt-link :to="item.to" >
               <div class="product-image">
                 <img class="main-image" :src="item.goodsImages[0]" />
                 <img
@@ -188,7 +188,7 @@
                 <span class="price">{{ formatNumber(item.salePrice) }}</span>
               </div>
               <div class="product-title">
-                {{ item.name }}
+                {{ item.goodsName }}
               </div>
             </div>
           </div>
@@ -262,13 +262,14 @@ export default {
   data() {
     return {
       lang,
-      listUrl: '/web/goods/ring/search',
+      listUrl: '/web/goods/style/search',
       page_size: 16,
       styleOptions: this.CONDITION_INFO.style.coupleRings,
       materialOptions: this.CONDITION_INFO.quality.rings,
       defaultPriceRange,
       fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
       searchConditions: {
+        styleSex: '', // 54-款式， 26-适用人群
         style: '',
         material: '',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
@@ -282,11 +283,41 @@ export default {
     specialDatas() {
       const conditions = this.searchConditions
       const sortInfo = this.usingSortInfo
+      const params = [
+        // 价格区间
+        {
+          type: 1,
+          paramName: 'sale_price',
+          valueType: 2,
+          beginValue: conditions.priceRange[0],
+          endValue: conditions.priceRange[1]
+        }
+      ]
+
+      if (conditions.style) {
+        params.push({
+          type: 2,
+          paramId:39,
+          paramName: 'ring_style',
+          valueType: 1,
+          configValues: conditions.style === '' ? [] : [conditions.style]
+        })
+      } 
+      
+      if (conditions.material) {
+        params.push({
+          type: 3,
+          paramId:10,
+          paramName: 'material',
+          valueType: 1,
+          configValues: conditions.material === '' ? [] : [conditions.material]
+        })
+      }
 
       const data = {
-        advertType: 2,
+        advertType: 19,
         // 商品类别ID
-        categoryId: 2,
+        categoryId: 19,
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）
@@ -294,10 +325,13 @@ export default {
         // 每页显示数量
         page_size: this.page_size,
 
-        beginPrice: conditions.priceRange[0],
-        endPrice: conditions.priceRange[1],
-        materialValue: conditions.material,
-        styleValue: conditions.style
+        // 参数数组
+        params
+
+        // beginPrice: conditions.priceRange[0],
+        // endPrice: conditions.priceRange[1],
+        // materialValue: conditions.material,
+        // styleValue: conditions.style
       }
 
       // 已选商品id
@@ -308,7 +342,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("this.allData",this.allData)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -345,7 +379,7 @@ export default {
           adNum++
         } else {
           item.itemType = 'product'
-          item.ringImg = _this.imageStrToArray(item.ringImg || '')
+          item.ringImg = _this.imageStrToArray(item.goodsImages || '')
           item.goodsImages = item.ringImg
           item.to = {
             path: '/ring/wedding-rings/' + item.id.replace(/\//g, ''),
@@ -356,6 +390,7 @@ export default {
           }
         }
       })
+      // console.log("this.allData",allData)
       return allData
     }
   },

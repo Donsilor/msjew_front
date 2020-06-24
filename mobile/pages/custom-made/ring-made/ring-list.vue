@@ -17,7 +17,7 @@ export default {
   },
   async asyncData({ $axios, route, store, app }) {
     const seoInfo = await app.$getSeoInfo(2)
-
+    return
     return $axios({
       method: 'get',
       url: '/wap/goods/style/web-site',
@@ -36,6 +36,16 @@ export default {
       .catch(err => {
         console.error(err)
       })
+  },
+  mounted(){
+    const _this = this
+
+    _this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      setTimeout(() => {
+        this.$nuxt.$loading.finish()
+      }, 1000);
+    })
   },
   methods: {
     getNextPage() {

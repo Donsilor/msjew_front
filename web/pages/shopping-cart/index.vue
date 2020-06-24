@@ -11,7 +11,7 @@
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
-          <div v-if="g.groupType === null" class="finished">
+          <div v-if="g.groupType === null && Number(g.data[0].goodsType) !== 19" class="finished"> 
             <div
               v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
               class="cart-radio"
@@ -31,7 +31,7 @@
             <!-- :num='totalNum' :price='totalPrice' @totalprice='changePrice'-->
             <single :g="g" @reloadList="getList"   @bottomData='refreshData' ></single>
           </div>
-          <div v-if="g.groupType === 1" class="couple">
+          <div v-if="g.data[0].goodsType == '19'" class="couple">
             <!-- <div
               v-if="
                 g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
@@ -43,7 +43,7 @@
             > -->
             <div
               v-if="
-                g.data[0].ringsSimpleGoodsEntity.status === '1'"
+                g.data[0].simpleGoodsEntity.goodsStatus === 2"
               class="cart-radio"
             >
               <div
@@ -153,7 +153,7 @@
         {{ $t(`${lang}.checked`) }}
         <div class="choose-num">{{ totalNum }}</div>
         {{ $t(`${lang}.total`) }}
-        <span>（{{ $t(`${lang}.freeExpress`) }})</span>
+        <span>({{ $t(`${lang}.freeExpress`) }})</span>
       </div>
       <div class="total-price">
         {{ formatCoin(coinType) }} {{  formatNumber(totalPrice)  }}
@@ -257,11 +257,11 @@ export default {
           }
           this.good = res
           if(this.good.length<=3){
-            console.log(11111111111,this.good.length)
+            // console.log(11111111111,this.good.length)
             this.Settlement1 = true
             this.Settlement2 = false
           } else {
-            console.log(2222222)
+            // console.log(2222222)
             window.addEventListener('scroll', this.handleScroll, true)
           }
           this.defaultAll()
@@ -282,23 +282,25 @@ export default {
           this.tickNum = 0
           this.totalNum = 0
           this.totalPrice = 0
-          console.log(1111111)
+          // console.log(1111111)
         } else {
-           console.log(22222)
+          //  console.log(22222)
           this.tickNum = 0
           this.totalNum = 0
           this.totalPrice = 0
           for (const j in this.good) {
             this.soudout = this.good[j].data[0].simpleGoodsEntity.goodsStatus
-            if(this.good[j].groupType == 1){
-              if(parseInt(this.good[j].data[0].ringsSimpleGoodsEntity.status) === 0){
-                  this.good[j].tick = false
-                  continue;
-                }
-                this.tickNum += 1
-                this.totalNum += 1
+            // console.log("this.good[j]",this.good[j])
+            // if(this.good[j].groupType == 1){
+            //   if(parseInt(this.good[j].data[0].ringsSimpleGoodsEntity.status) === 0){
+            //       this.good[j].tick = false
+            //       continue;
+            //     }
+            //     this.tickNum += 1
+            //     this.totalNum += 1
 
-            }else if(this.good[j].groupType == 2){
+            // }else 
+            if(this.good[j].groupType == 2){
                 this.tickNum += 1
                 this.totalNum += 1
 
@@ -347,16 +349,17 @@ export default {
         this.totalNum = 0
         this.totalPrice = 0
         for (const i in this.good) {
-          if(this.good[i].groupType == 1){
-            // console.log(11111)
-             if(parseInt(this.good[i].data[0].ringsSimpleGoodsEntity.status) === 0){
-                this.good[i].tick = false
-                continue;
-              }
-              this.tickNum += 1
-              this.totalNum += 1
+          // if(this.good[i].groupType == 1){
+          //   // console.log(11111)
+          //    if(parseInt(this.good[i].data[0].ringsSimpleGoodsEntity.status) === 0){
+          //       this.good[i].tick = false
+          //       continue;
+          //     }
+          //     this.tickNum += 1
+          //     this.totalNum += 1
 
-          }else if(this.good[i].groupType == 2){
+          // }else 
+          if(this.good[i].groupType == 2){
             // console.log(22222)
               this.tickNum += 1
               this.totalNum += 1

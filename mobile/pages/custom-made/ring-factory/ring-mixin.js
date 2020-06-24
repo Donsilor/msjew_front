@@ -84,6 +84,10 @@ export default {
   },
   created() {},
   mounted() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+    })
+
     this.$axios({
       method: `post`,
       url: `/wap/goods/style/detail`,
@@ -92,7 +96,8 @@ export default {
       }
     })
       .then(res => {
-        console.log(4444,res)
+        this.$nuxt.$loading.finish()
+        // console.log(4444,res)
         const mcArr = []
         for (const i in res.materials) {
           const o = {
@@ -129,13 +134,13 @@ export default {
             carats.push(o)
           }
           res.carats = carats
-        } 
-        
+        }
+
         res.sizes = stArr
         res.materials = mcArr
         // res.goodsDesc = res.goodsDesc.includes(`<script>`) ? '' : res.goodsDesc
         this.goodInfo = res
-        console.log("res",res)
+        // console.log("res",res)
         this.conditions[0].options = this.goodInfo.materials
         if (this.$route.query.isBack) {
           const melo = JSON.parse(
@@ -148,7 +153,7 @@ export default {
           for (let i = 0; i < res.details.length; i++) {
             if (res.details[i].id === thatId) {
               this.showPi = res.details[i].retailMallPrice
-              
+
               for (let j = 0; j < res.sizes.length; j++) {
                 if (
                   res.sizes[j].sortBy ===
@@ -194,6 +199,7 @@ export default {
         this.iAmShowMaker()
       })
       .catch(err => {
+        this.$nuxt.$loading.finish()
         console.log(err)
       })
     // this.$axios
@@ -383,7 +389,7 @@ export default {
       if (!(this.canAddCart && this.inSale)) {
         return
       }
-      
+
       if (!this.sendDetailsId) {
         this.$toast(this.lang.specificationToast)
         return
@@ -402,6 +408,13 @@ export default {
       this.$store
         .dispatch('addCart', goodInfo)
         .then(data => {
+          // facebook 添加购物车统计-start
+          if(this.$store.state.platform == 31){
+            console.log("facebook购物车数据统计")
+            fbq('track', 'AddToCart');
+          }
+          // facebook 添加购物车统计-end
+          
           this.$nuxt.$loading.finish()
           this.$toast(this.lang.addCartSuccess)
         })

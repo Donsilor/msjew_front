@@ -244,15 +244,15 @@
       ></choose-eject>
       <size-board ref="size-board"></size-board>
     </div>
-    <div v-else >
-      <soleOut></soleOut>
-    </div>
+    <!-- <div v-else > -->
+      <!-- <soleOut></soleOut> -->
+    <!-- </div> -->
   </div>
 </template>
 
 <script>
 import Mx from './ring-mixin'
-import soleOut from '@/components/goods-sole-out/index.vue'
+// import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
   head() {
     return {
@@ -275,7 +275,7 @@ export default {
   },
   mixins: [Mx],
   components: {
-    soleOut
+    // soleOut
   },
   computed: {
     canAddCart() {

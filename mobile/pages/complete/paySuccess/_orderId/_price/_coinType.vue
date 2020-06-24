@@ -71,7 +71,7 @@
           <img src="@/static/cart/success.png"  />
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
           <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
-            <span class="font-size-16">{{ orderinfo.coinCode }}</span>
+            <span class="font-size-16">{{ formatCoin(orderinfo.coinCode) }}</span>
             {{ formatMoney(orderinfo.orderAmount) }}
           </p>
         </div>
@@ -191,6 +191,12 @@ export default {
       stepPayVerify:false,//支付验证
       stepPaySuccess:false,//支付验证成功
       verifyCount:0,//支付验证次数
+      goodsInfo: {
+        value: 0,
+        currency: '',
+        contents: [],
+        content_type: 'product'
+      }
     }
   },
   computed: {
@@ -224,6 +230,13 @@ export default {
       this.stepPayVerify = false
     },
     goPaySuccess(){
+      // facebook 购买成功统计-start
+      if(this.$store.state.platform == 31){
+        console.log("facebook购买成功数据统计")
+        this.fbq('track','Purchase',this.goodsInfo);
+      }
+      // facebook 购买成功统计-end
+
       const arr = []
       this.list.map((item, index) => {
         arr.push(item.localSn)
@@ -265,6 +278,21 @@ export default {
       })
       .then(res => {
         this.info = res
+
+        this.goodsInfo.value = res.payAmount;
+        this.goodsInfo.currency = res.coinCode;
+
+        var details = res.details;
+
+        details.forEach((o, i) =>{
+           this.goodsInfo.contents.push({
+            'id': o.goodsId,
+            'quantity': 1
+           })
+        })
+
+        // console.log(778,this.goodsInfo)
+
         this.getChannelType(this.info.payChannel)
       })
       .catch(err => {
@@ -283,6 +311,10 @@ export default {
       .then(res => {
         console.log("dssadas",res)
         this.orderinfo = res
+
+        this.goodsInfo.value = res.productAmount;
+        this.goodsInfo.currency = res.coinCode;
+
         this.getChannelType(this.orderinfo.payChannel)
 
       })

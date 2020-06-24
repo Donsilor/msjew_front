@@ -138,7 +138,7 @@
         "Invoicing":"开发票",
         "invo":"发票",
         "email":"电子邮箱",
-        "InvoiceType":"发票类型",        
+        "InvoiceType":"发票类型",
         "InvoiceDetails":"发票详情",
         "HeaderType":"抬头类型",
         "PaperInvoice":"纸质发票",
@@ -650,9 +650,9 @@
       "email": {
         "login": "登录",
         "no-account": "注册>",
-        "email": "电邮地址",
+        "email": "邮箱地址",
         "phone": "手机号*",
-        "email-error": "请输入正确的电邮地址",
+        "email-error": "请输入正确的邮箱地址",
         "phone-error": "手机号码格式不正确，仅支持：大陆手机号！",
         "password": "密码*",
         "password-error": "请输入登入密码",
@@ -745,7 +745,7 @@
       "addressDetail": "香港中环亚毕诺道3号环球贸易中心2304室（*必须预约）",
       "addressDetailUs": "深圳市羅湖區東曉街道獨樹社區布心路3008號IBC商務珠寶大廈A座1306",
       "tel": "电话",
-      "email": "电邮",
+      "email": "邮箱",
       "title": "BDD珠宝商城",
       "bddRecommend": "BDD 精选",
       "diamond": "钻石",
@@ -771,7 +771,7 @@
       "surnameError": "请输入正确的姓氏",
       "mobile": "手机号*",
       "email": "邮箱*",
-      "inputEmail": "请输入电邮地址",
+      "inputEmail": "请输入邮箱地址",
       "emailError": "请输入正确的邮箱地址",
       "phoneError": "手机号码格式不正确，仅支持：大陆手机号！",
       "inputUnder": "在下面输入发送到",
@@ -867,7 +867,7 @@
         "termsAndConditions": "条款及细则",
         "onlineStore": "品质优越钻石网上店",
         "handicraftExpert": "首饰专家",
-        "copyrightRight": "© 2019 BDD Co. All Rights Reserved.",
+        "copyrightRight": "© 2020 BDD Co. All Rights Reserved.",
         "copyrightRight1": "粤ICP备",
         "copyrightRight2": "号-1/Copyright©2018-2020  BDD Co.官网   All Rights Reserved."
       },
@@ -1109,7 +1109,7 @@
         "摆件",
         "挂件",
         "其它"
-        
+
       ],
       "style": "款式",
       "fineness": "成色",
@@ -2202,5 +2202,24 @@
 		"msg11": "解除绑定成功！",
 		"msg12": "此卡还未到使用时间！",
 		"msg13": "此卡已超过使用时间！"
+	},
+	"generalize": {
+		"index": {
+			"more": "更多款式",
+			"immediatelyConsult": "立即咨询",
+			"greetCall": "欢迎致电BDD专业人员",
+			"ringUp": "点击拨打",
+			"chooseHappiness": "此刻选择你的幸福",
+			"send": "立即发送",
+			"question": "有任何问题？",
+			"contact1": "联系BDD专业人员，为您解答一切困惑 致电专业人员：",
+			"onlineConsult": "在线咨询",
+			"placeHolder1": "X先生/女士",
+			"placeHolder2": "联系方式",
+			"placeHolder3": "备注信息 # 您的要求等 #",
+			"sendSuccess": "发送成功",
+			"sendFail": "发送失败",
+			"fillMessage": "请填写您的个人信息"
+		}
 	}
 }

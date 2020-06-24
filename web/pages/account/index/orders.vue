@@ -59,30 +59,102 @@
               }}</span> -->
             </p>
           </div>
-          <div v-for="(d, _index) in o.details" :key="_index" class="list-body">
+          <div v-if="o.details[0].categoryId !== 19 && o.details.length !== 2" class="single">
+            <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
+              <div class="left">
+                <nuxt-link :to="goDetails(d)"
+                  target="_blank"><img :src="IMG_URL + d.goodsImages"
+                /></nuxt-link>
+              </div>
+              <div class="mid">
+                <nuxt-link :to="goDetails(d)" target="_blank">
+                  <h5>{{ d.goodsName }}</h5>
+                  <p>SKU：{{ d.goodsCode }}</p>
+                  <div
+                    v-for="(k, __index) in d.detailSpecs"
+                    :key="__index"
+                    class="desc"
+                  >
+                    <span>{{ k.name }}: </span>
+                    <span>{{ k.value }} </span>
+                  </div>
+                </nuxt-link>
+              </div>
+
+              <div class="right">
+                <span>1</span>
+                {{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+              </div>
+            </div>
+          </div>
+          <div v-if="o.details[0].categoryId == '19'" class="double">
             <div class="left">
-              <nuxt-link :to="goDetails(d)"
-                 target="_blank"><img :src="IMG_URL + d.goodsImages"
+              <nuxt-link :to="goDetails(o.details[0])"
+                target="_blank"><img :src="IMG_URL + o.details[0].goodsImages"
               /></nuxt-link>
             </div>
-            <div class="mid">
-              <nuxt-link :to="goDetails(d)" target="_blank">
-                <h5>{{ d.goodsName }}</h5>
-                <p>SKU：{{ d.goodsCode }}</p>
-                <div
-                  v-for="(k, __index) in d.detailSpecs"
-                  :key="__index"
-                  class="desc"
-                >
-                  <span>{{ k.name }}: </span>
-                  <span>{{ k.value }} </span>
+            <div>
+              <div  v-for="(d, _index) in o.details[0].ring" :key="_index" class="list-body">
+                <div class="mid">
+                <h5>{{ o.details[0].goodsName }}</h5>
+                  <nuxt-link :to="goDetails(o.details[0])" target="_blank">
+                    <!-- <h5>{{ d.goods_name }}</h5> -->
+                    <p class="sku">SKU：{{ o.details[0].goodsCode }}</p>
+                    <div class="detail">
+                      <div
+                        v-for="(k, __index) in d.lang.goods_spec"
+                        :key="__index"
+                        class="desc"
+                      >
+                        <span>{{ k.attr_name }}: </span>
+                        <span>{{ k.attr_value }} </span>
+                      </div>
+                      <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
+                          ({{ a }})
+                      </span>
+                    </div>
+                  </nuxt-link>
                 </div>
-              </nuxt-link>
-            </div>
 
-            <div class="right">
+                <!-- <div class="right"> -->
+                  <!-- <span>1</span> -->
+                  <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
+                <!-- </div> -->
+              </div>
+            </div>
+            <div class="num">
               <span>1</span>
-              {{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+            </div>
+            <div class="price">
+              {{ formatCoin(o.coinCode) }} {{ formatMoney(o.details[0].goodsPrice) }}
+            </div>
+          </div>
+          <div v-if="o.details.length == 2" class="single customization">
+            <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
+              <div class="left">
+                <nuxt-link :to="goDetails(d)"
+                  target="_blank"><img :src="IMG_URL + d.goodsImages"
+                /></nuxt-link>
+              </div>
+              <div class="mid">
+                <nuxt-link :to="goDetails(d)" target="_blank">
+                  <h5>{{ d.goodsName }}</h5>
+                  <p>SKU：{{ d.goodsCode }}</p>
+                  <div
+                    v-for="(k, __index) in d.detailSpecs"
+                    :key="__index"
+                    class="desc"
+                  >
+                    <span>{{ k.name }}: </span>
+                    <span>{{ k.value }} </span>
+                  </div>
+                </nuxt-link>
+              </div>
+
+              <div class="right">
+                <span>1</span>
+                {{  formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+              </div>
             </div>
           </div>
 
@@ -349,7 +421,8 @@ export default {
       cancelOrderStatus: false,
       receiveOrder: false,
       cid: ``,
-      rid: ``
+      rid: ``,
+      doubleRingGoodPrice:''
     }
   },
   created() {
@@ -467,10 +540,26 @@ export default {
             res.data.data[i].details.map(obj => {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
+              // this.doubleRingGoodPrice = obj.goodsPrice
+              // console.log("obj",obj.goodsPrice)
             })
           }
           this.listData = res.data.data
-          // console.log("订单",this.listData)
+          // for(let item of selected){
+          //   for(let items of product){
+          //     if(item.id==items.id){
+          //       items.checked = item.checked
+          //     }
+          //   }
+          // }
+          
+          // this.listData.forEach(( item, index ) => {
+          //   // console.log("订单",item)
+          //   item.details[0].map(j => {
+          //     console.log("订单",j)
+          //   })
+          // })
+          console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {
@@ -597,18 +686,18 @@ export default {
       this.$refs[`eft-guide`].show()
     },
     goDetails(obj) {
-      // console.log(obj)
+      // console.log("obj",obj)
       let route = {
         path: '/',
         query: {}
       }
-
-      if (obj.groupType === 1) {
+      const ct = parseInt(obj.categoryId)
+      if (ct === 19) {
         // console.log(`对戒💍`)
         route = {
-          path: `/ring/wedding-rings/${obj.groupId.replace(/\//g, '')}`,
+          path: `/ring/wedding-rings/${obj.goodsId.replace(/\//g, '')}`,
           query: {
-            goodId: obj.groupId,
+            goodId: obj.goodsId,
             ringType: 'pair'
           }
         }
@@ -738,6 +827,15 @@ div {
       width: 100%;
       .blocks-mark {
         margin-bottom: 40px;
+        position: relative;
+        .price{
+          position: absolute;
+          right:157px;
+          top:47%;
+          font-size: 16px;
+          color: #666666;
+          font-family: twCenMt;
+        }
         .list-head {
           background: #f8f8f8;
           height: 40px;
@@ -755,80 +853,205 @@ div {
             }
           }
         }
-        .list-body {
-          width: 100%;
-          height: 110px;
-          padding: 20px;
-          border-top: 1px solid #e6e6e6;
+        .double{
           display: flex;
-          .left {
-            width: 70px;
-            height: 70px;
-            padding: 0;
-            margin: 0;
-            border: 1px solid #ececec;
-            cursor: pointer;
-            img {
+          padding: 20px;
+          .detail{
+            line-height: 20px;
+          }
+          .left{
+            // width: 15%;
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+            // padding-left: 20px;
+            a{
+              display: inline-block;
+              width: 70px;
+              height:70px;
+              // border: 1px solid #ececec;
+            }
+            img{
               width: 100%;
               height: 100%;
             }
           }
-          .mid {
-            width: 480px;
-            height: 70px;
-            padding: 0 20px;
-            margin: 0;
-            text-align: left;
-            font-size: 12px;
-            line-height: 14px;
-            color: #333333;
-            overflow: hidden;
-            cursor: pointer;
-            h5 {
-              font-size: 14px;
-              line-height: 18px;
-              font-weight: 400;
-              height: 18px;
-              width: 100%;
-              overflow: hidden;
-              color: #666666;
-            }
-            p {
-              line-height: 14px;
-              height: 14px;
-              margin: 8px 0 14px;
-              color: #999999;
-            }
-            .desc {
-              height: 70-18-8-14-14px;
-              line-height: 70-18-8-14-14px;
-              display: inline;
-              margin-right: 5px;
-              color: #999999;
-            }
-          }
-          .right {
-            width: 350px;
-            height: 70px;
-            padding: 0;
-            margin: 0;
-            min-height: 70px;
-            text-align: left;
+          .num{
+            position: absolute;
+            right:377px;
+            top:47%;
             font-size: 16px;
-            line-height: 70px;
             color: #666666;
             font-family: twCenMt;
-            span {
-              text-align: center;
-              padding: 0 36px;
-              font-size: 14px;
-              margin-right: 96px;
+          }
+          .list-body {
+            width: 100%;
+            // height: 110px;
+            // padding: 20px;
+            display: flex;
+            .left {
+              width: 70px;
+              // height: 70px;
+              padding: 0;
+              margin: 0;
+              border: 1px solid #ececec;
+              cursor: pointer;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .mid {
+              width: 480px;
+              // height: 70px;
+              padding: 0 20px;
+              margin: 0;
+              text-align: left;
+              font-size: 12px;
+              line-height: 14px;
+              color: #333333;
+              overflow: hidden;
+              cursor: pointer;
+              h5 {
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: 400;
+                height: 18px;
+                width: 100%;
+                overflow: hidden;
+                color: #666666;
+              }
+              p {
+                line-height: 14px;
+                height: 20px;
+                margin: 8px 0 0;
+                color: #999999;
+                line-height: 20px;
+              }
+              .desc {
+                height: 70-18-8-14-14px;
+                line-height: 70-18-8-14-14px;
+                display: inline;
+                margin-right: 5px;
+                color: #999999;
+              }
+            }
+            .right {
+              width: 350px;
+              height: 70px;
+              padding: 0;
+              margin: 0;
+              min-height: 70px;
+              text-align: left;
+              font-size: 16px;
+              line-height: 70px;
               color: #666666;
+              font-family: twCenMt;
+              span {
+                text-align: center;
+                padding: 0 36px;
+                font-size: 14px;
+                margin-right: 96px;
+                color: #666666;
+              }
             }
           }
+          .list-body:nth-child(1) {
+            border-top: 0;
+          }
+          .list-body:nth-child(2){
+            // border-top: 0;
+            h5{
+              display: none;
+            }
+            .sku{
+              display: none;
+            }
+          }
+          .list-body:nth-child(3) {
+            border-top: 0;
+          }
         }
-        .list-body:nth-child(2) {
-          border-top: 0;
+        .single{
+          .list-body:nth-child(1) {
+            border-top: 0;
+          }
+          .list-body {
+            width: 100%;
+            height: 110px;
+            padding: 20px;
+            border-top: 1px solid #e6e6e6;
+            display: flex;
+            .left {
+              width: 70px;
+              height: 70px;
+              padding: 0;
+              margin: 0;
+              border: 1px solid #ececec;
+              cursor: pointer;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .mid {
+              width: 480px;
+              height: 70px;
+              padding: 0 20px;
+              margin: 0;
+              text-align: left;
+              font-size: 12px;
+              line-height: 14px;
+              color: #333333;
+              overflow: hidden;
+              cursor: pointer;
+              h5 {
+                font-size: 14px;
+                line-height: 18px;
+                font-weight: 400;
+                height: 18px;
+                width: 100%;
+                overflow: hidden;
+                color: #666666;
+              }
+              p {
+                line-height: 14px;
+                height: 14px;
+                margin: 8px 0 14px;
+                color: #999999;
+              }
+              .desc {
+                height: 70-18-8-14-14px;
+                line-height: 70-18-8-14-14px;
+                display: inline;
+                margin-right: 5px;
+                color: #999999;
+              }
+            }
+            .right {
+              width: 350px;
+              height: 70px;
+              padding: 0;
+              margin: 0;
+              min-height: 70px;
+              text-align: left;
+              font-size: 16px;
+              line-height: 70px;
+              color: #666666;
+              font-family: twCenMt;
+              span {
+                text-align: center;
+                padding: 0 36px;
+                font-size: 14px;
+                margin-right: 96px;
+                color: #666666;
+              }
+            }
+          }
+          
+        }
+        .listDouble{
+          display: flex; 
         }
         .list-footer {
           background: #f8f8f8;

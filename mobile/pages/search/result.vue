@@ -203,7 +203,7 @@ export default {
           routerName = 'engagement-engagement-rings'
           break
         // 对戒
-        case -1:
+        case 19:
           routerName = 'marriage-ring-pair-ring-detail'
           break    
       }

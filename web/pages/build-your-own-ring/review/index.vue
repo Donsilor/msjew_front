@@ -6,7 +6,11 @@
       <section class="detail">
         <!--      左侧-->
         <div class="left-detail">
-          <product-images :images="thumbnails"></product-images>
+          <product-images :images="thumbnails" @getIdx="getIndex"></product-images>
+          
+          <div class="magn-box">
+            <bdd-magnifying :msg="magnifying"></bdd-magnifying>
+          </div>
         </div>
         <!--      右侧-->
         <div class="right-detail">
@@ -177,7 +181,8 @@ export default {
           }
         }
       ],
-      activeTab: 'desc'
+      activeTab: 'desc',
+      magnifying: ''
     }
   },
   computed: {
@@ -310,6 +315,8 @@ export default {
       )
       this.getPrice(this.steps.steps[0].goodsId, this.steps.steps[1].goodsId,this.steps.steps[0].ct)
     })
+    
+    this.magnifying = this.thumbnails[0]
   },
   methods: {
     getRingInfo() {
@@ -485,6 +492,9 @@ export default {
             // console.log(err)
           }
         })
+    },
+    getIndex(i) {
+    	this.magnifying = this.thumbnails[i]
     }
   }
 }

@@ -17,7 +17,7 @@
           </div> -->
           <div
             v-if="
-              parseInt(g.data[0].ringsSimpleGoodsEntity.status) === 0
+              parseInt(g.data[0].simpleGoodsEntity.goodsStatus) === 0
             "
             class="img-bord"
           >
@@ -32,39 +32,40 @@
           </div>
           <div>
             SKU：{{
-              g.data[0].ringsSimpleGoodsEntity.simpleGoodsEntity
-                .simpleGoodsDetails.goodsDetailsCode
+              g.data[0].simpleGoodsEntity.goodsCode
             }}
           </div>
-          <div>
+          <!-- <div>
             SKU：{{
-              g.data[1].ringsSimpleGoodsEntity.simpleGoodsEntity
-                .simpleGoodsDetails.goodsDetailsCode
+              g.data[0].ring[1].goods_sn
             }}
-          </div>
+          </div> -->
         </div>
       </nuxt-link>
       <div class="couple-rings">
+        <div class="gender" v-for="(a, b) in g.data[0].ring[0].lang.goods_attr[26].value" :key="'gender='+b">
+          <div>
+            {{ a }}
+          </div>
+        </div>
         <div class="one-person">
           <div class="good-information">
-            <div
-              v-for="(i, k) in g.data[0].ringsSimpleGoodsEntity
-                .simpleGoodsEntity.baseConfig"
+            <!-- <div
+              v-for="(i, k) in g.data[0].ring[0].lang.goods_attr"
               :key="'info1=' + k"
             >
               <div v-if="i.configId === 26" class="infos">
                 <div>{{ i.configVal }}</div>
                 <div>{{ i.configAttrIVal }}</div>
               </div>
-            </div>
+            </div> -->
             <div
-              v-for="(s, v) in g.data[0].ringsSimpleGoodsEntity
-                .simpleGoodsEntity.detailConfig"
+              v-for="(s, v) in g.data[0].ring[0].lang.goods_spec"
               :key="'info2=' + v"
               class="infos"
             >
-              <div>{{ s.configVal }}</div>
-              <div>{{ s.configAttrIVal }}</div>
+              <div>{{ s.attr_name }}</div>
+              <div>{{ s.attr_value }}</div>
             </div>
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
@@ -78,29 +79,32 @@
             }}
           </div> -->
         </div>
+        <div class="gender2" v-for="(y, z) in g.data[0].ring[1].lang.goods_attr[26].value" :key="'gender2='+z">
+          <div>
+            {{ y }}
+          </div>
+        </div>
         <div class="one-person">
           <div class="good-information">
-            <div
-              v-for="(i, j) in g.data[0].ringsSimpleGoodsEntity
-                .simpleGoodsEntity.baseConfig"
+            <!-- <div
+              v-for="(i, j) in g.data[0].ring[1].lang.goods_attr"
               :key="'info3=' + j"
             >
               <div v-if="i.configId === 26" class="infos">
                 <div>{{ i.configVal }}</div>
                 <div>{{ i.configAttrIVal }}</div>
               </div>
-            </div>
+            </div> -->
             <div
-              v-for="(i, d) in g.data[1].ringsSimpleGoodsEntity
-                .simpleGoodsEntity.detailConfig"
+              v-for="(i, d) in g.data[0].ring[1].lang.goods_spec"
               :key="'info4=' + d"
               class="infos"
             >
-              <div>{{ i.configVal }}</div>
-              <div>{{ i.configAttrIVal }}</div>
+              <div>{{ i.attr_name }}</div>
+              <div>{{ i.attr_value }}</div>
             </div>
           </div>
-          <div class="good-num">{{ g.data[1].goodsCount }}</div>
+          <div class="good-num">{{ g.data[0].goodsCount }}</div>
           <!-- <div class="good-price">
             {{ g.coinType }}
             {{
@@ -118,7 +122,7 @@
             {{ formatCoin(g.coinType) }}
             {{
               formatNumber(
-                g.data[0].ringsSimpleGoodsEntity.salePrice
+                g.price
               )
             }}
           </div>
@@ -136,7 +140,7 @@
        <div
         v-show="options"
         v-if="
-          g.data[0].ringsSimpleGoodsEntity.status === '1'
+          g.data[0].simpleGoodsEntity.goodsStatus == 2
         "
         class="good-btn"
       >
@@ -175,7 +179,8 @@ export default {
     }
   },
   mounted(){
-    console.log("g",g)
+    console.log("double",this.g)
+    // console.log("g",this.g.data[0])
   },
   methods: {
     goDetail() {},
@@ -284,6 +289,7 @@ export default {
 
 <style scoped lang="less">
 .double {
+  border-bottom: 1px solid rgba(239, 239, 239, 1);
   .good-info {
     position: relative;
     width: 1200px;
@@ -331,10 +337,24 @@ export default {
     }
     .couple-rings {
       position: relative;
+      .gender{
+        position: absolute;
+        top: 38px;
+        left: -53px;
+        color: #666;
+      }
+      .gender2{
+        position: absolute;
+        top: 125px;
+        left: -53px;
+        color: #666;
+      }
       .one-person {
-        height: 174px;
+        // height: 174px;
+        height: 100px;
         display: flex;
         align-items: center;
+        position: relative;
         .good-information {
           width: 185px;
           margin-right: 83px;
@@ -370,7 +390,8 @@ export default {
       
       .couple-line {
         position: absolute;
-        top: 173px;
+        // top: 173px;
+        top:94px;
         left: -56px;
         width: 400px;
         height: 1px;

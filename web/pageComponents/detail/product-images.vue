@@ -73,7 +73,8 @@ export default {
   },
   methods: {
     changeActiveIndex(index) {
-      this.activeIndex = index
+      this.activeIndex = index;
+	  this.$emit('getIdx',index)
     }
   }
 }

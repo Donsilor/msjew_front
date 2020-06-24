@@ -544,6 +544,17 @@ color-red {
   color: #ffb496;
 }
 
+/* 放大镜样式 */
+.left-detail{
+	position: relative;
+}
+.magn-box{
+	position: absolute;
+	left: 105px;
+	top: 0;
+	height: 500px;
+}
+
 
 
 

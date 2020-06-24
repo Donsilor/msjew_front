@@ -212,7 +212,7 @@ export default {
               }
             }
 
-          }else if(item.categoryId == -1){  //对戒
+          }else if(item.categoryId == 19){  //对戒
             item.to = {
               // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
               path: '/ring/wedding-rings/'+ item.id,

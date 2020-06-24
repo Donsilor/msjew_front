@@ -45,11 +45,11 @@ export default {
       this.$refs['data-list'].getNextPage()
     },
     clickData(data) {
-      // console.log('data===>', data)
+      console.log('data===>', data.id)
       this.$router.push({
         name: 'marriage-ring-pair-ring-detail',
         query: {
-          goodId: data.ringId,
+          goodId: data.id,
           ringType : 'pair'
         }
       })

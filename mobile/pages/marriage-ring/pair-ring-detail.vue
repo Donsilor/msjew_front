@@ -39,17 +39,17 @@ export default {
   asyncData({ $axios, route, store, app }) {
     const request = $axios({
       method: `post`,
-      url: `/wap/goods/ring/detail`,
+      url: `/wap/goods/style/detail`,
       headers: {
         token: store.state.token || ''
       },
       params: {
-        ringId: route.query.goodId
+        goodsId: route.query.goodId
       }
     })
       .then(res => {
         const pair = res
-        // console.log('infos==========>', res)
+        // console.log('infos==========>', res)  route.query.goodId
         // let pair = null
         // if (process.server) {
         //   if (res.data.code === 200) {
@@ -63,7 +63,7 @@ export default {
         return { pair: pair, seoInfo: app.$getDetailSeoInfo(pair) }
       })
       .catch(err => {
-        return Promise.reject(err)
+        // return Promise.reject(err)
       })
 
     return request
@@ -104,6 +104,13 @@ export default {
       this.$store
         .dispatch('addCart', data)
         .then(data => {
+        // facebook 添加购物车统计-start
+        if(this.$store.state.platform == 31){
+          console.log("facebook购物车数据统计")
+          fbq('track', 'AddToCart');
+        }
+        // facebook 添加购物车统计-end
+
           this.$nuxt.$loading.finish()
           this.$toast(this.lang.addCartSuccess)
         })

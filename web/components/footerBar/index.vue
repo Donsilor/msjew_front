@@ -343,13 +343,13 @@ export default {
                 path: '/contact-us'
               }
             },
-            {
-              icon: 'icondizhi',
-              name: this.$t(`${lang}.contactAddressUs`),
-              to: {
-                path: '/contact-us'
-              }
-            }
+            // {
+            //   icon: 'icondizhi',
+            //   name: this.$t(`${lang}.contactAddressUs`),
+            //   to: {
+            //     path: '/contact-us'
+            //   }
+            // }
           ]
         }
       ],

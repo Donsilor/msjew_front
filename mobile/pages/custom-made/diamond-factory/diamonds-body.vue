@@ -379,19 +379,19 @@
         </div>
       </div>
     </div>
-    <div v-else >
+    <!-- <div v-else >
       <soleOut></soleOut>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import Mx from './diamond-mixin'
-import soleOut from '@/components/goods-sole-out/index.vue'
+// import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
   mixins: [Mx],
   components: {
-    soleOut
+    // soleOut
   },
   computed: {
     canAddCart() {
