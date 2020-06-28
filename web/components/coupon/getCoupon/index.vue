@@ -22,7 +22,7 @@
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">{{ $t(`${lang}.limit1`) }}{{formatCoin(coin)}} {{item.at_least}}{{ $t(`${lang}.limit2`) }}</div>
-              <div class="text" :class="{look:look}" @click="more">({{item.lineType}})</div>
+              <div class="text" :class="{look:look}" @click="more">({{item.lineType == '' ? $t(`${lang}.specificProduct`) : item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
@@ -69,7 +69,7 @@
     mounted() {
       this.language = this.getCookie('language')
       this.coin = this.$store.state.coin
-
+      console.log("ggggg",this.moneyInfo)
       if(this.moneyInfo){
         var i=0;
         for(var j in this.moneyInfo){
@@ -95,6 +95,7 @@
         this.$axios.get('web/member/coupon/index', {
           })
           .then(res => {
+            
             var couponAllList = res.data.data;
 
             // 判断可用优惠券中哪些是已领取的优惠券

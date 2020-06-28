@@ -884,7 +884,7 @@
             "code": "优惠码：",
             "only": "指定商品",
             "unlimited": "无限制",
-            "coupon": "我的优惠码",
+            "coupon": "我的优惠劵",
             "expiredCoupon": "不可使用优惠码"
         },
         "account": {
@@ -2650,7 +2650,9 @@
         "useCoupon": "使用优惠券",
         "accomplish": "完成",
         "alreadyApplied": "已使用",
+        "alreadyExpired": "已过期",
         "alreadyReceived": "已领取",
+        "specificProduct":"特定商品",
         "immediatelyReceive": "立即领取",
         "haveChoose": "已选用",
         "immediatelyChoose": "立即选用",

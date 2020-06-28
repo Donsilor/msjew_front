@@ -2891,7 +2891,7 @@ export default {
 
       }
       
-      console.log(778,arr)
+      // console.log(778,arr)
 
       const datas={
         carts: arr,
@@ -2904,7 +2904,7 @@ export default {
       this.$axios
         .post('/web/member/order/tax', datas)
         .then(res => {
-          console.log("tex",res)
+          // console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
 
@@ -3194,13 +3194,17 @@ export default {
          this.mobileMax = 20
        }
      },
-     closeCo(k){
+     closeCo(g){
        this.showUseCoupon = false;
 
-       if(k){
-         this.couponCodeR = JSON.parse(JSON.stringify(k));
+       if(g){
+         this.couponCodeR = JSON.parse(JSON.stringify(g));
          console.log(this.couponCodeR)
-         this.getTex();
+         var k = [];
+         if(this.cardList){
+           k = this.cardList
+         }
+         this.getTex(k);
        }
      }
 

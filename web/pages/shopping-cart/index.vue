@@ -238,7 +238,7 @@ export default {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
-          // console.log("1230",res.coinType)
+          console.log("1230",res)
           for (const i in res) {
             res[i].tick = false
             this.coinType = res[i].coinType

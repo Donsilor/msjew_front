@@ -23,7 +23,7 @@
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">{{ $t(`${lang}.limit1`) }}{{formatCoin(coin)}} {{item.at_least}}{{ $t(`${lang}.limit2`) }}</div>
               <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
-              <div class="text" :class="{look:look}" @click="more">({{item.lineType}})</div>
+              <div class="text" :class="{look:look}" @click="more">({{item.lineType == '' ? $t(`${lang}.specificProduct`) : item.lineType}})</div>
               <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 

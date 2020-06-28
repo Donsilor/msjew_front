@@ -334,7 +334,7 @@
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
-              }}<b style="color: #333;">{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
+              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
             >
           </div>
         </div>
@@ -576,7 +576,7 @@ export default {
           //     console.log("订单",j)
           //   })
           // })
-          console.log("订单",this.listData)
+          // console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {

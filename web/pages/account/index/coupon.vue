@@ -15,18 +15,19 @@
            </div>
 
            <div class="price">
-             <span class="price-icon">{{coin}}</span>
+             <span class="price-icon">{{formatCoin(coin)}}</span>
              <span class="price-num">{{item.money}}</span>
            </div>
 
            <!-- <div class="rmb">(￥{{item.moneyCn}})</div> -->
-           <div class="rule">{{ $t(`${lang}.limit1`) }}{{coin}} {{item.atLeast}}{{ $t(`${lang}.limit2`) }}</div>
+           <div class="rule">{{ $t(`${lang}.limit1`) }}{{formatCoin(coin)}} {{item.atLeast}}{{ $t(`${lang}.limit2`) }}</div>
            <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
-           <div class="use" :class="{look:look}" @click="more"> {{ $t(`${lang}.limit3`) }}({{item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
+           <div class="use" :class="{look:look}" @click="more"> {{ $t(`${lang}.limit3`) }}({{item.lineType == '' ? $t(`${lang}.specificProduct`) : item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
            <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
 
            <!-- 失效 class="lose-efficacy" -->
            <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">{{ $t(`${lang}.alreadyApplied`) }}</div>
+          <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="nowTime > item.endTime">{{ $t(`${lang}.alreadyExpired`) }}</div>
         </div>
       </div>
     </div>
@@ -51,7 +52,7 @@ export default {
   mounted(){
 	  this.language = this.getCookie('language');
     this.coin = this.$store.state.coin;
-    this.nowTime = new Date().getTime();
+    this.nowTime = new Date().getTime()/1000;
 
     console.log(222,this.nowTime)
 
@@ -59,13 +60,14 @@ export default {
     this.$axios.get('web/member/coupon/index', {
       })
       .then(res => {
-        console.log(777, res)
+        console.log(777, res.data.data)
         this.ifLoading = false;
         this.couponList = res.data.data
 
         for(var i in this.couponList){
           this.couponList.ifChoose = false;
-
+          // this.isExpired = this.couponList[i].endTime
+          console.log("dddd",this.couponList)
           this.couponList[i].lineType = [];
           for(var k in this.couponList[i].GoodsType){
             this.couponList[i].lineType.push(this.couponList[i].GoodsType[k]);
