@@ -194,7 +194,7 @@ export default {
       goodsInfo: {
         value: 0,
         currency: '',
-        contents: [],
+        content_ids: [],
         content_type: 'product'
       }
     }
@@ -288,10 +288,7 @@ export default {
         var details = res.details;
 
         details.forEach((o, i) =>{
-           this.goodsInfo.contents.push({
-            'id': o.goodsId,
-            'quantity': 1
-           })
+          this.goodsInfo.content_ids[i] = o.goodsId
         })
 
         // console.log(778,this.goodsInfo)
@@ -312,7 +309,6 @@ export default {
         }
       })
       .then(res => {
-        console.log("dssadas",res)
         this.orderinfo = res
 
         this.getChannelType(this.orderinfo.payChannel)
@@ -323,10 +319,7 @@ export default {
         var details = res.details;
 
         details.forEach((o, i) =>{
-          this.goodsInfo.contents.push({
-            'id': o.goodsId,
-            'quantity': 1
-          })
+          this.goodsInfo.content_ids[i] = o.goodsId
         })
 
       })
