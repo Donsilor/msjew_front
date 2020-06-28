@@ -369,7 +369,7 @@ export default {
       // facebook 购买成功统计-start
       if(this.$store.state.platform == 30){
         console.log("facebook购买成功数据统计")
-        this.fbq('track','Purchase',this.goodsInfo);
+        fbq('track','Purchase',this.goodsInfo);
       }
       // facebook 购买成功统计-end
 
@@ -450,6 +450,20 @@ export default {
                   this.$router.push({path: "/"}); // 强制切换当前路由 path
                 }, 5000);*/
                 // console.log("wwwww",this.data)
+
+                this.goodsInfo.value = res.data.payAmount;
+                this.goodsInfo.currency = res.data.coinCode;
+
+                var details = res.data.details;
+
+                details.forEach((o, i) =>{
+                  this.goodsInfo.contents.push({
+                    'id': o.goodsId,
+                    'quantity': 1
+                  })
+                })
+
+
               })
               .catch(err => {
                 if (!err.response) {

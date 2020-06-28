@@ -219,6 +219,13 @@ export default {
         .then(data => {})
         .catch(err => {})
       } else {
+
+        if (this.isLogin) {
+          this.getOrder()
+        }else{
+          this.getTouristOrder()
+        }
+
         setTimeout(this.payVerify, 2000);
       }
   },
@@ -230,12 +237,6 @@ export default {
       this.stepPayVerify = false
     },
     goPaySuccess(){
-      // facebook 购买成功统计-start
-      if(this.$store.state.platform == 31){
-        console.log("facebook购买成功数据统计")
-        this.fbq('track','Purchase',this.goodsInfo);
-      }
-      // facebook 购买成功统计-end
 
       const arr = []
       this.list.map((item, index) => {
@@ -248,11 +249,13 @@ export default {
       this.stepPayPending = false
       this.stepPayVerify  = false
       this.stepPaySuccess = true
-      if (this.isLogin) {
-          this.getOrder()
-      }else{
-          this.getTouristOrder()
+
+      // facebook 购买成功统计-start
+      if(this.$store.state.platform == 31){
+        console.log("facebook购买成功数据统计31")
+        fbq('track','Purchase',this.goodsInfo);
       }
+      // facebook 购买成功统计-end
     },
     goPayFailed(){
         this.$router.push({
@@ -312,10 +315,19 @@ export default {
         console.log("dssadas",res)
         this.orderinfo = res
 
-        this.goodsInfo.value = res.productAmount;
+        this.getChannelType(this.orderinfo.payChannel)
+
+        this.goodsInfo.value = res.payAmount;
         this.goodsInfo.currency = res.coinCode;
 
-        this.getChannelType(this.orderinfo.payChannel)
+        var details = res.details;
+
+        details.forEach((o, i) =>{
+          this.goodsInfo.contents.push({
+            'id': o.goodsId,
+            'quantity': 1
+          })
+        })
 
       })
       .catch(err => {
