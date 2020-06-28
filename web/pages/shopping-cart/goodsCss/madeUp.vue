@@ -50,7 +50,7 @@
 
 		  <!-- 原金额 -->
 		  <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
-		    {{ g.coinType }}
+		    {{ formatCoin(g.coinType) }}
 		    {{
 		      formatNumber(
 		        g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice

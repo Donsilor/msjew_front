@@ -61,7 +61,7 @@
           </div>
 
           <div class="balance-text" v-if="item.type == 1">{{ $t(`${lang}.balance`) }}¥ {{item.balanceCny}}&nbsp;
-            <span v-if="$store.state.coin !== 'CNY'">({{item.currency}} {{item.balance}})</span>
+            <span v-if="$store.state.coin !== 'CNY'">({{formatCoin(item.currency)}} {{item.balance}})</span>
           </div>
 
           <div class="btn-box" style="max-width: 416px;margin-top: 0;" v-if="item.type == 1">

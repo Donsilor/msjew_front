@@ -879,7 +879,7 @@
                 </div>
               </div>
               <div class="hkd color-gold">
-                +{{ currency }} {{ formatMoney(tex.safeFee) }}
+                +{{ formatCoin(coinType) }} {{ formatMoney(tex.safeFee) }}
               </div>
             </div>
             <div class="detail-line">
@@ -897,7 +897,7 @@
             <div v-show="tex.discountAmount" class="detail-line">
               <div>{{$t(`${lang}.discountPrice`)}}</div>
               <div class="hkd color-pink">
-                <div>- {{$store.state.coin}} {{ formatMoney(tex.discountAmount) }}</div>
+                <div>- {{formatCoin(coinType)}} {{ formatMoney(tex.discountAmount) }}</div>
               </div>
             </div>
 
@@ -906,7 +906,7 @@
               <div>{{ $t(`${lang}.coupon`) }}</div>
               <!-- :class="{'under-line': !couponCodeR.couponId}" -->
               <div class="hkd color-pink under-line" style="cursor: pointer;"  @click="showUseCoupon = true">
-                <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
+                <div v-if="couponCodeR.couponId">- {{formatCoin(coinType)}} {{ formatMoney(couponCodeR.couponCode) }}</div>
                 <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
               </div>
             </div>
@@ -915,7 +915,7 @@
             <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
+                -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
             </div>
 
@@ -1855,7 +1855,7 @@
             <div v-show="tex.discountAmount" class="detail-line">
               <div>{{$t(`${lang}.discountPrice`)}}</div>
               <div class="hkd color-pink">
-                <div>- {{$store.state.coin}} {{ formatMoney(tex.discountAmount) }}</div>
+                <div>- {{formatCoin(coinType)}} {{ formatMoney(tex.discountAmount) }}</div>
               </div>
             </div>
 
@@ -1864,7 +1864,7 @@
               <div>{{ $t(`${lang}.coupon`) }}</div>
               <!-- :class="{'under-line': !couponCodeR.couponId}" -->
               <div class="hkd color-pink under-line" style="cursor: pointer;"  @click="showUseCoupon = true">
-                <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div>
+                <div v-if="couponCodeR.couponId">- {{formatCoin(coinType)}} {{ formatMoney(couponCodeR.couponCode) }}</div>
                 <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
               </div>
             </div>
@@ -1873,7 +1873,7 @@
             <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
-                -{{ $store.state.coin }} {{ formatMoney(item.useAmount) }}
+                -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
             </div>
 

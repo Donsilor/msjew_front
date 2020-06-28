@@ -12,7 +12,8 @@
         <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
       </div>
-      <ul v-if="this.$store.state.platform !== 31">
+      <!-- 大陆支付 -->
+      <ul v-if="this.$store.state.platform == 21">
         <li v-for="(item, index) in list" :key="index">
           <div v-show="price > 0 || (price == 0 && item.type === 5)">
             <img :src="item.url" />
@@ -36,12 +37,45 @@
 
               <p>{{ item.des }}</p>
               <p v-if="item.des2">{{ item.des2 }}</p>
-              <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
+              <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p>
             </div>
           </div>
         </li>
       </ul>
-      <ul v-else>
+
+      <!-- 香港支付 -->
+      <ul v-if="this.$store.state.platform == 11">
+        <li v-for="(item, index) in listHk" :key="index">
+          <div v-show="price > 0 || (price == 0 && item.type === 5)">
+            <img :src="item.url" />
+            <div class="right">
+              <span
+                class="icon iconfont"
+                :class="typeIndex === index ? 'icongou' : ''"
+                @click="changeType(index)"
+              ></span>
+              <div
+                class="box-a"
+                >{{ item.title }}
+                <span
+                  v-if="item.type == '5'"
+                  class="ph"
+                  @click="needtips = !needtips"
+                  >?</span
+                >
+                <div class="support" v-if="item.type == '1000' && isLogin">({{ lang.support }})</div>
+              </div>
+
+              <p>{{ item.des }}</p>
+              <p v-if="item.des2">{{ item.des2 }}</p>
+              <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p>
+            </div>
+          </div>
+        </li>
+      </ul>
+
+      <!-- 美国支付 -->
+      <ul v-if="this.$store.state.platform == 31">
         <li v-for="(item, index) in listUs" :key="index">
           <div v-show="price > 0 || (price == 0 && item.type === 5)">
             <img :src="item.url" />
@@ -124,6 +158,7 @@ export default {
       coinHKD:"HKD",
       form: [],
       actionLink: '',
+      // 大陆支付
       list: [
         {
           url: '/cart/pay.png',
@@ -157,7 +192,7 @@ export default {
         },
         {
           url: '/cart/ph.png',
-          type: 84,
+          type: 89,
           title: this.LANGUAGE.cart.pay.payType5,
           des: this.LANGUAGE.cart.pay.type5Text,
         }
@@ -193,6 +228,46 @@ export default {
         //   des2: this.LANGUAGE.cart.pay.type5Text2
         // }
       ],
+      // 香港支付
+      listHk: [
+        {
+          url: '/cart/pay.png',
+          type: 6,
+          title: this.LANGUAGE.cart.pay.payType0,
+          des: this.LANGUAGE.cart.pay.type0Text
+        },
+        {
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
+        },
+        {
+          url: '/cart/ap-HK.png',
+          type: 84,
+          title: this.LANGUAGE.cart.pay.payType3+' HK',
+          des: this.LANGUAGE.cart.pay.type3Text
+        },
+        {
+          url: '/cart/wac.png',
+          type: 83,
+          title: this.LANGUAGE.cart.pay.payType4,
+          des: this.LANGUAGE.cart.pay.type4Text
+        },
+        {
+          url: '/cart/up.png',
+          type: 81,
+          title: this.LANGUAGE.cart.pay.payType1,
+          des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+          url: '/cart/ph.png',
+          type: 89,
+          title: this.LANGUAGE.cart.pay.payType5,
+          des: this.LANGUAGE.cart.pay.type5Text,
+        }
+      ],
+      // 美国支付
       listUs: [
         {
           url: '/cart/pay.png',

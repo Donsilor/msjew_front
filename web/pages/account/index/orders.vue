@@ -84,8 +84,8 @@
 
               <div class="right">
                 <span>1</span>
-                <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}</span>
-                <span>{{ o.coinCode }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
+                <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}</span>
+                <span>{{ formatCoin(o.coinCode) }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
               </div>
             </div>
           </div>
@@ -128,8 +128,8 @@
               <span>1</span>
             </div>
             <div class="price">
-              <span :class="{'old-price': couponType(o.details[0].couponInfo) == 2}">{{ o.coinCode }} {{ formatMoney(o.details[0].goodsPrice) }}</span>
-              <span>{{ o.coinCode }} {{ couponType(o.details[0].couponInfo) == 2 ? formatMoney(o.details[0].goodsPayPrice) : formatMoney(o.details[0].goodsPrice) }}</span>
+              <span :class="{'old-price': couponType(o.details[0].couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(o.details[0].goodsPrice) }}</span>
+              <span>{{ formatCoin(o.coinCode) }} {{ couponType(o.details[0].couponInfo) == 2 ? formatMoney(o.details[0].goodsPayPrice) : formatMoney(o.details[0].goodsPrice) }}</span>
             </div>
           </div>
           <div v-if="o.details.length == 2" class="single customization">
@@ -156,8 +156,8 @@
 
               <div class="right">
                 <span>1</span>
-                <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ o.coinCode }} {{ formatMoney(d.goodsPrice) }}</span>
-                <span>{{ o.coinCode }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
+                <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}</span>
+                <span>{{ formatCoin(o.coinCode) }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
               </div>
             </div>
           </div>
