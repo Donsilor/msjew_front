@@ -589,6 +589,8 @@ export default {
                 })
               }
             }, 0)
+
+            fbq('track', 'CompleteRegistration');
           })
           .catch(err => {
             // console.log("请求",err)
@@ -655,7 +657,7 @@ export default {
                 })
               }
             }, 0)
-
+            fbq('track', 'CompleteRegistration');
           })
           .catch(err => {
             // console.log("请求",err)

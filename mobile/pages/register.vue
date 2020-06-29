@@ -647,6 +647,8 @@ export default {
           //     name: 'login-email'
           //   })
           // }, 2000)
+
+          fbq('track', 'CompleteRegistration');
         })
         .catch(err => {
           _this.$toast.show(err.message)
@@ -710,6 +712,7 @@ export default {
           //     name: 'login-email'
           //   })
           // }, 2000)
+          fbq('track', 'CompleteRegistration');
         })
         .catch(err => {
           _this.$toast.show(err.message)
