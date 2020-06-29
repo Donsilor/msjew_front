@@ -1,12 +1,25 @@
 export default {
+  data() {
+    return {
+      pair: {},
+      infos: {}
+    }
+  },
+  methods: {},
   mounted() {
 
     //facebook统计详情页
+    let infos = this.infos;
+
+    if(Object.keys(this.pair).length > 0) {
+      infos = this.pair;
+    }
+
     let fbqInfo = {
       content_type: 'product', //  固定值：pruduct
-      content_ids: this.info.id,  // 对应网站产品的 id或者Sku
-      value:this.info.salePrice,     //对应产品的价值
-      currency: this.info.coinType //对应货币类型
+      content_ids: infos.id,  // 对应网站产品的 id或者Sku
+      value:infos.salePrice,     //对应产品的价值
+      currency: infos.coinType //对应货币类型
     };
     fbq('track', 'ViewContent', fbqInfo);
   }
