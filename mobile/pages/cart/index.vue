@@ -289,7 +289,7 @@
       </div>
     </div>
     <bdd-empty
-      v-if="list.length <= 0"
+      v-if="list.length <= 0 && this.isLoading !==''"
       :type="'cart'"
       @toShopping="toShopping"
     ></bdd-empty>
@@ -320,13 +320,17 @@ export default {
       num: 0,
       timer: null ,
       soudout:'',
-      language: this.$store.state.language
+      language: this.$store.state.language,
+      isLoading:''
     }
   },
   created() {
+    
   },
   mounted() {
     this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      localStorage.setItem('loading', 'yes');
       if (this.isLogin) {
         this.getList()
       } else {
@@ -601,10 +605,15 @@ export default {
       })
         .then(res => {
           console.log("本地",res)
+          this.$nuxt.$loading.finish()
+          localStorage.removeItem('loading');
+          this.isLoading = localStorage.getItem('loading')
           this.doFormat(res)
           this.defaultAll()
         })
         .catch(err => {
+          localStorage.removeItem('loading');
+          this.$nuxt.$loading.finish()
           console.log('err:', err)
         })
     },
@@ -664,7 +673,10 @@ export default {
           url: `/web/member/cart`
         })
         .then(res => {
-          console.log("线上llll",res)
+          // console.log("线上llll",res)
+          this.$nuxt.$loading.finish()
+          localStorage.removeItem('loading');
+          this.isLoading = localStorage.getItem('loading')
           const result = []
           let keys = Object.keys(res)
           keys = keys.sort((a, b) => {
@@ -677,11 +689,14 @@ export default {
           // this.doFormat(res)
         })
         .catch(err => {
+          this.$nuxt.$loading.finish()
+          localStorage.removeItem('loading');
           console.log('err:', err)
         })
     },
     // 格式化数据列表
     doFormat(res) {
+      console.log(res)
       this.list = []
       if (res && res.length > 0) {
         this.noListData = false

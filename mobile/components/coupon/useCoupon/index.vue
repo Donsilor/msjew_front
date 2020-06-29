@@ -18,11 +18,11 @@
               </div>
 
               <div class="price">
-                <span class="price-icon">{{coin}}</span>
+                <span class="price-icon">{{formatCoin(coin)}}</span>
                 <span class="price-num">{{item.money}}</span>
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
-              <div class="rule">{{ lang.limit1 }}{{coin}}{{item.at_least}}{{ lang.limit2 }}</div>
+              <div class="rule">{{ lang.limit1 }}{{formatCoin(coin)}}{{item.at_least}}{{ lang.limit2 }}</div>
               <div class="text" :class="{look:look}" @click="more">({{item.lineType == '' ? lang.specificProduct : item.lineType}})</div>
               <div class="time">{{ lang.time }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>

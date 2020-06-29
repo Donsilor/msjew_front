@@ -198,7 +198,7 @@
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
-              <span class="underline" v-show="!kai" @click="show">{{ lang3.NotInvoiced }}</span>
+              <span class="underline" v-show="!kai" @click="show()">{{ lang3.NotInvoiced }}</span>
               <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
@@ -349,7 +349,7 @@
             class="use-coupon"
              v-if="couponCodeR.couponPrice"
              @click="ifShowCoupon = true"
-              >-{{ coin }}
+              >-{{ formatCoin(coin) }}
               {{this.couponCodeR.couponPrice}}</span
             >
             <span class="use-coupon" v-if="!couponCodeR.couponPrice" @click="useCoupon">{{ lang.useCoupons }}</span>
@@ -360,7 +360,7 @@
             <div>
               <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
             </div>
-            <span class="color-pink">-{{ coin }} {{ formatMoney(item.useAmount) }}</span>
+            <span class="color-pink">-{{ formatCoin(coin) }} {{ formatMoney(item.useAmount) }}</span>
           </li>
 
           <li class="order-pay">
@@ -384,6 +384,7 @@
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
+    <Invoice v-if="ifShowInvoice" @closeIP="closeInvoicePop" :kai="kai" :totlePrice="totlePrice" :ultimatelyPay="ultimatelyPay" ></Invoice>
     <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
     <use-coupon v-if="ifShowCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready"></use-coupon>
   </div>
@@ -392,13 +393,14 @@
 <script>
 import Header from '@/components/personal/header.vue'
 import CartList from '@/components/cart/cartlist.vue'
+import Invoice from '@/components/invoice/index'
 import OrderCouponTips from '@/components/white-board/order-coupon-tips/index.vue'
 import { Email } from '../../assets/js/require-lee'
 import { formatMoney } from '@/assets/js/filterUtil.js'
 import NeedKnow from '@/components/cart/needKnow.vue'
 import ShoppingCard from '@/components/shopping-card/index'
 const storage = process.client ? require('good-storage').default : {}
-// console.log(storage, 'storage')
+// console.log(storage, 'storage') 
 export default {
   name: 'SureOrder',
   layout: 'no-bar',
@@ -407,7 +409,8 @@ export default {
     CartList,
     OrderCouponTips,
     NeedKnow,
-    ShoppingCard
+    ShoppingCard,
+    Invoice
   },
   data() {
     return {
@@ -555,6 +558,7 @@ export default {
       totlePrice:'',
       areaId: this.$store.state.areaId,
       ifShowShoppingCard: false,
+      ifShowInvoice:false,
       cardList: [],
       useAmount: [],
       cardType: 1,
@@ -574,7 +578,8 @@ export default {
       couponAll: [],
       // 已领取优惠券
       couponAlready: [],
-      amount: 0
+      amount: 0,
+      invoices:''
     }
   },
   computed: {
@@ -645,6 +650,7 @@ export default {
     }
   },
   mounted() {
+    // console.log("InvoiceMsg",this.invoices)
     // console.log("query",this.$route.params.invoice)
     this.$nextTick(() => {
       this.kai = typeof this.$route.params.invoice !== 'undefined' && this.$route.params.invoice.invoice_title != ''
@@ -685,15 +691,38 @@ export default {
   },
   methods: {
     show(){
+      if (!this.hasAddress) {
+        this.$toast.show(this.lang.toast2)
+        const topC = document.getElementsByClassName('layout-main')[0];
+
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-this.scrollTop / 5)
+          topC.scrollTop = this.scrollTop + ispeed
+          if (this.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+        return 
+      }
       this.kai = !this.kai
-      this.$router.push({
-        name: 'cart-invoice',
-        query:{
-          price:this.totlePrice,
-          kai:this.kai,
-          ultimatelyPay: this.ultimatelyPay
-        }
-      })
+      this.ifShowInvoice = !this.ifShowInvoice
+      
+      // this.$router.push({
+      //   name: 'cart-invoice',
+      //   query:{
+      //     price:this.totlePrice,
+      //     kai:this.kai,
+      //     ultimatelyPay: this.ultimatelyPay
+      //   }
+      // })
+    },
+     // 关闭发票弹窗
+    closeInvoicePop(val){
+      this.ifShowInvoice = false
+      if(val == true){
+        this.kai = !this.kai
+      }
+      this.invoices = val
     },
     changeType(ind) {
       console.log("选择哪一个",ind)
@@ -1155,7 +1184,7 @@ export default {
             // console.log("address",res.data)
             if (res && res.length > 0) {
               res.map((item, index) => {
-                // console.log("item",item)
+                console.log("item",item)
                 if (this.$route.query.id) {
                   if (
                     this.$route.query.id === item.id ||
@@ -1206,6 +1235,7 @@ export default {
     // 支付
     //  已登录创建订单
     createOrder() {
+      console.log("this.invoices",this.invoices)
       this.$nuxt.$loading.start()
       // if (!this.canSubmit) {
       //   return
@@ -1274,7 +1304,8 @@ export default {
       // }
       let info = {}
       if(this.kai == true){
-        info = this.$route.params.invoice
+        // info = this.$route.params.invoice
+        info = this.invoices
       }
 
       const arr = [];

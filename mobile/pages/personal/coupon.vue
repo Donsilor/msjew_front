@@ -18,11 +18,11 @@
         </div>
 
         <div class="price-box">
-          <span class="sign">{{coin}}</span>
+          <span class="sign">{{formatCoin(coin)}}</span>
           <span class="price">{{item.moneyCn}}</span>
         </div>
 
-        <div class="text1">满 {{coin}}{{item.atLeast}} 元使用</div>
+        <div class="text1">满 {{formatCoin(coin)}}{{item.atLeast}} 元使用</div>
         <div class="limit">{{ lang.limit3 }}（{{item.lineType == '' ? lang.specificProduct : item.lineType}}）{{ lang.limit4 }}</div>
 
         <div class="text2">{{ lang.time }}：{{changeTime(item.startTime)}}-{{changeTime(item.endTime)}}</div>

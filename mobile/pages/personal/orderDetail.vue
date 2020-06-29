@@ -60,7 +60,12 @@
               <span>x 1</span>
               <p>SKU：{{ detail.data[0].goodsCode }}</p>
               <p>{{ detail.data[0].detailSpecs }}</p>
-              <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
+              <!-- <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b> -->
+              <div v-if="detail.data[0].couponInfo.type === 2">
+                <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPayPrice }}</b>
+              </div>
+              <b v-else>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
             </div>
 
             <!--              对戒-->
@@ -84,10 +89,11 @@
                 <span>x 1</span>
               </div>
               <div class="price">
-                <b
-                  >{{ formatCoin(info.coinCode) }}
-                  {{ detail.data[0] && detail.data[0].goodsPrice }}</b
-                >
+                <div v-if="detail.data[0].couponInfo.type === 2">
+                  <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                  <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPayPrice }}</b>
+                </div>
+                <b v-else>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
               </div>
             </div>
 
@@ -99,16 +105,21 @@
               <span>x 1</span>
               <p>SKU：{{ detail.data[0].goodsCode }}</p>
               <p>{{ detail.data[0].detailSpecs }}</p>
-              <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
+              <div v-if="detail.data[0].couponInfo.type === 2">
+                <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPayPrice }}</b>
+              </div>
+              <b v-else>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
               <h4 class="order-ellipsis">
                 {{ detail.data[1].goodsName }}
               </h4>
               <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
               <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-              <b
-                >{{ formatCoin(info.coinCode) }}
-                {{ detail.data[1] && detail.data[1].goodsPrice }}</b
-              >
+              <div v-if="detail.data[1].couponInfo.type === 2">
+                <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[1].goodsPrice}}</div>
+                <b>{{ formatCoin(info.coinCode) }} {{ detail.data[1].goodsPayPrice }}</b>
+              </div>
+              <b v-else>{{ formatCoin(info.coinCode) }} {{ detail.data[1].goodsPrice }}</b>
             </div>
           </div>
         </div>
