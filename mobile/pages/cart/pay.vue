@@ -79,7 +79,7 @@
         {{ formatCoin(info.coinType) }}
         {{ formatMoney(price) }}
       </div>
-      
+
       <!-- <Upload :multiple="true" :max=6 :list="imgList" ref="upload"></Upload> -->
       <!--    unionPayHide-->
       <div v-show="false">
@@ -94,7 +94,7 @@
 
       <NeedKnow v-if="needtips" @close="needtips = !needtips" />
     </div>
-    <div class="transfer" v-show="transfer"> 
+    <div class="transfer" v-show="transfer">
       <div class="transfer-header">
         <i class="icon iconfont iconfanhuiicon-" @click="closed">{{ lang.back }}</i>
         <h4>{{ lang.pleaseSelectAccount }}</h4>
@@ -206,7 +206,7 @@ export default {
           title: this.LANGUAGE.cart.pay.payType6,
           des: this.LANGUAGE.cart.pay.type6Text
         }
-      ], 
+      ],
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
       price: JSON.parse(this.$route.query.info).payAmount,
@@ -228,7 +228,7 @@ export default {
     closed(){
       this.paylist = true
       this.transfer = false
-      this.typeIndex = 0 
+      this.typeIndex = 0
     },
     formatMoney: formatMoney,
     // 选择支付方式
@@ -367,9 +367,11 @@ export default {
     showSelect() {
       // console.log('6767')
     }
+  },
+  mounted() {
+    fbq('track', 'InitiateCheckout');
   }
 }
-fbq('track', 'InitiateCheckout');
 </script>
 
 <style scoped lang="less">
@@ -402,7 +404,7 @@ fbq('track', 'InitiateCheckout');
     color: rgba(51, 51, 51, 1);
     border-bottom: 8px solid #f6f6f6;
     .note{
-      text-align: right; 
+      text-align: right;
       margin-right: 20px;
       margin-bottom: 20px;
       font-size: 12px;
