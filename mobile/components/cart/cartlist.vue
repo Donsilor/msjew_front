@@ -47,8 +47,8 @@
                   <b v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
                   
                   <div class="discount-price" v-else>
-                    <div class="old-price">{{ coin }} {{ formatNumber(item.salePrice) }}</div>
-                    <b>{{ coin }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                    <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
+                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
                   </div>
 
                   <div v-if="item.groupType === 1" class="btn-type">

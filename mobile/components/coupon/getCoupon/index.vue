@@ -23,7 +23,7 @@
               </div>
               <!-- <div class="rmb">(￥{{item.money_cn}})</div> -->
               <div class="rule">{{ lang.limit1 }}{{coin}} {{item.at_least}}{{ lang.limit2 }}</div>
-              <div class="text" :class="{look:look}" @click="more">{{ lang.limit3 }}( {{item.lineType}}) {{ lang.limit4 }}</div>
+              <div class="text" :class="{look:look}" @click="more">{{ lang.limit3 }}( {{item.lineType == '' ? lang.specificProduct : item.lineType}}) {{ lang.limit4 }}</div>
               <div class="time">{{ lang.time }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 

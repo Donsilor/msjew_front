@@ -2251,6 +2251,8 @@
       "useCoupon": "Use Coupon",
       "accomplish": "Accomplish",
       "alreadyApplied": "Coupon has been used",
+      "alreadyExpired": "expired",
+      "specificProduct":"Specific Products",
       "alreadyReceived": "Coupon has been claimed",
       "immediatelyReceive": "Collect it now",
       "haveChoose": "Already Selected",

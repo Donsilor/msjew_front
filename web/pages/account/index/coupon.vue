@@ -67,7 +67,7 @@ export default {
         for(var i in this.couponList){
           this.couponList.ifChoose = false;
           // this.isExpired = this.couponList[i].endTime
-          console.log("dddd",this.couponList)
+          // console.log("dddd",this.couponList)
           this.couponList[i].lineType = [];
           for(var k in this.couponList[i].GoodsType){
             this.couponList[i].lineType.push(this.couponList[i].GoodsType[k]);

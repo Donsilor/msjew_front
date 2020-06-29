@@ -2263,6 +2263,8 @@
       "useCoupon": "使用优惠券",
       "accomplish": "完成",
       "alreadyApplied": "已使用",
+      "alreadyExpired": "已过期",
+      "specificProduct":"特定商品",
       "alreadyReceived": "已领取",
       "immediatelyReceive": "立即领取",
       "haveChoose": "已选用",

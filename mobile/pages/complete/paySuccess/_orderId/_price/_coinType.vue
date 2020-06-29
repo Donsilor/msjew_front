@@ -106,7 +106,7 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.orderAmount) }}</span>
+              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
             </div>
           </li>
           <li>

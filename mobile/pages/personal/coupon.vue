@@ -23,13 +23,14 @@
         </div>
 
         <div class="text1">满 {{coin}}{{item.atLeast}} 元使用</div>
-        <div class="limit">{{ lang.limit3 }}（{{item.lineType}}）{{ lang.limit4 }}</div>
+        <div class="limit">{{ lang.limit3 }}（{{item.lineType == '' ? lang.specificProduct : item.lineType}}）{{ lang.limit4 }}</div>
 
         <div class="text2">{{ lang.time }}：{{changeTime(item.startTime)}}-{{changeTime(item.endTime)}}</div>
 
         <!-- <div class="btn">点击使用</div> -->
 
-        <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">已失效</div>
+        <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">{{ lang.alreadyApplied }}</div>
+        <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="nowTime > item.endTime">{{ lang.alreadyExpired }}</div>
       </div>
     </div>
   </div>
@@ -41,17 +42,20 @@ export default {
     return{
 	  lang: this.LANGUAGE.coupon,
       coin: '',
-      couponList: []
+      couponList: [],
+      language:this.$store.state.language,
+      nowTime: '',
     }
   },
   mounted(){
     this.coin = this.$store.state.coin
-
+    this.nowTime = new Date().getTime()/1000;
     this.$axios({
       method: 'get',
       url: 'web/member/coupon/index'
     })
       .then(res => {
+        console.log("sss",res)
         this.couponList = res.data;
 
         for(var i in this.couponList){

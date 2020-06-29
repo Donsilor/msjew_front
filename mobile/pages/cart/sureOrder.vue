@@ -328,7 +328,7 @@
           <li v-if="allFee.discountAmount">
             <span>{{ lang.discountedAmount }}：</span
             ><span
-              >-{{ coin }}
+              >-{{ formatCoin(coin) }}
               {{ formatMoney( allFee.discountAmount) }}</span
             >
           </li>
@@ -337,7 +337,7 @@
           <li v-if="allFee.discount_amount">
             <span>{{ lang.discountedAmount }}：</span
             ><span
-              >-{{ coin }}
+              >-{{ formatCoin(coin) }}
               {{ formatMoney( allFee.discount_amount) }}</span
             >
           </li>
