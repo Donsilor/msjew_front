@@ -641,6 +641,7 @@ export default {
     }
   }
 }
+fbq('track', 'InitiateCheckout');
 </script>
 
 <style lang="less" scoped>
