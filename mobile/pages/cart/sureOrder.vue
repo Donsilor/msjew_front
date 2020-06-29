@@ -1504,6 +1504,7 @@ export default {
   }
 
 }
+fbq('track', 'InitiateCheckout');
 </script>
 
 <style scoped lang="less">

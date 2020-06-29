@@ -630,6 +630,7 @@ export default {
           // _this.$store.commit('setLastUrl', '')
            _this.$store.dispatch('synchronizeCart')
           // console.log("order-lastUrL",lastUrl)
+          fbq('track', 'CompleteRegistration');
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({
@@ -693,6 +694,7 @@ export default {
           const lastUrl=localStorage.getItem("url")
           // _this.$store.commit('setLastUrl', '')
           // console.log("order-lastUrL",lastUrl)
+          fbq('track', 'CompleteRegistration');
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({
