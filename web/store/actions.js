@@ -15,9 +15,11 @@ function getTimestampUuid () {
 function makeCartGoodGroups (cart = []) {
     // console.log("cart",cart)
     const result = []
-    const localData = {}
-    cart.forEach(item => {
+    var localData = {}
+    const sort = []
+    cart.forEach((item, index) => {
         let groupId = item['groupId'] || item['id'] || item['createTime']
+        // console.log('groupId',groupId)
         // item.goodsId=item.goodsDetailsId
         if (localData.hasOwnProperty(groupId)) {
             localData[groupId].data.push(item)
@@ -25,11 +27,22 @@ function makeCartGoodGroups (cart = []) {
             localData[groupId] = {
                 id: groupId.toString(),
                 groupType: item.groupType || null,
-                data: [item]
+                data: [item],
+                sort: index
             }
+            sort.push(index)
         }
     })
 
+    var localData2 = []
+    for(var j=0; j<sort.length; j++){
+        for(var i in localData){
+           if(sort[j] == localData[i].sort){
+                localData2.push(localData[i])
+           }
+       }
+    }
+    localData = JSON.parse(JSON.stringify(localData2))
     let keys = Object.keys(localData)
     // console.log("local",keys)
     keys = keys.sort((a, b) => {
@@ -390,7 +403,7 @@ export default {
             }
         })
             .then(data => {
-                console.log("添加购物车", data)
+                // console.log("添加购物车", data)
                 // 重新请求购物车数量（和购物车列表）
                 return Promise.resolve('success')
             })
@@ -400,7 +413,7 @@ export default {
     },
     // 加入到本地购物车中
     addLocalCart ({ $axios, state, getters, commit, dispatch }, goods = []) {
-        console.log("2222", goods)
+        // console.log("2222", goods)
         const time = getTimestampUuid()
         const addInfo = {
             id: time,
@@ -447,7 +460,7 @@ export default {
 
     //保存游客订单信息 后加
     setLocalOrder ({ $axios, state, getters, commit, dispatch }, orders) {
-        console.log("orders", orders)
+        // console.log("orders", orders)
         const cartOrder = 'cartOrder'
 
         return new Promise(async (resolve, reject) => {
