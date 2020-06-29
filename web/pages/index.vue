@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <section class="banner">
-      <el-carousel trigger="click" :autoplay="true" :height="bannerHeig + 'px'">
-        <el-carousel-item v-for="(item, index) in ad" :key="index">
+      <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
+        <el-carousel-item v-for="(item, index) in ad" :key="index" class="banner-item">
           <a :href="item.addres || ''">
             <img class="banner-img" :src="item.image" alt="">
           </a>
@@ -555,7 +555,7 @@ section {
 }
 .banner {
   max-width: 1920px;
-  min-width: 1525px;
+  min-width: 1200px;
   margin: 0 auto;
 
   overflow-x: hidden;
@@ -564,9 +564,14 @@ section {
     height: 100%;
     line-height: 0;
     font-size: 0;
+    overflow: hidden;
 
     .banner-img {
-      width: 100%;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
       height: 100%;
     }
   }
@@ -1064,7 +1069,7 @@ section {
     margin-bottom: 76px;
   }
   .section-content {
-    min-width: 1360px;
+    min-width: 1200px;
     max-width: 1550px;
     margin: auto;
     display: flex;

@@ -378,7 +378,7 @@ export default {
 .step-window {
   width: 100%;
   .step {
-    min-width: 1360px;
+    min-width: 1200px;
     max-width: 1366px;
     width: 100%;
     position: relative;

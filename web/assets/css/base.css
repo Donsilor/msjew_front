@@ -53,7 +53,7 @@ html, body, #__nuxt, #__layout, .layout-box {
 }
 
 html {
-  min-width: 1366px;
+  min-width: 1200px;
 }
 
 /**::-webkit-scrollbar {*/

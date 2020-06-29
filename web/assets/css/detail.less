@@ -1,6 +1,6 @@
 
 .detail-page {
-  min-width: 1360px;
+  min-width: 1200px;
   max-width: 1366px;
   margin: auto;
 
@@ -489,40 +489,32 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-			line-height: 30px;
+            line-height: 30px;
+            display: inline-block;
           }
           span:nth-of-type(1) {
-            width: 180px;
+            width: 28%;
             color: #333;
+            box-sizing: border-box;
           }
 
           span:nth-of-type(2) {
-            width: 410px;
+            width: 60%;
             color: #acacac;
-            margin-left: 10px;
+            padding-left: 10px;
+            box-sizing: border-box;
           }
         }
-
-        li:nth-child(even) span:nth-of-type(1) {
-          width: 230px;
-          color: #333;
-          padding-left: 50px;
-          box-sizing: border-box;
-        }
-
-        li:nth-child(odd) span:nth-of-type(2) {
-          width: 440px;
-        }
       }
-	  .line{
-		  position: absolute;
-		  top: 50%;
-		  left: 50%;
-		  transform: scaleX(0.3) translate(-50%, -50%);
-		  width: 1px;
-		  height: 50%;
-		  background-color: #333;
-	  }
+      .line{
+        position: absolute;
+        top: 50%;
+        left: 47%;
+        transform: scaleX(0.3) translate(-50%, -50%);
+        width: 3px;
+        height: 50%;
+        background-color: #333;
+      }
     }
   }
 }
