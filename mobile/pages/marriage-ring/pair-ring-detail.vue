@@ -15,6 +15,7 @@
 
 <script>
 import DetailBody from './pair-ring-detail-body.vue'
+import detail from '../../mixins/detail'
 export default {
   layout: `no-footer-bar`,
   head() {
@@ -23,6 +24,7 @@ export default {
   components: {
     DetailBody
   },
+  mixins: [detail],
   data() {
     return {
       lang: this.LANGUAGE.detailCommons,
