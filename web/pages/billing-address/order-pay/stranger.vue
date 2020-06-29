@@ -2392,6 +2392,8 @@ export default {
     // console.log("rrr",this.isLogin)
     this.language = this.getCookie('language')
     window.addEventListener('scroll', this.scrollToTop);
+
+    fbq('track', 'InitiateCheckout');
   },
   destroyed() {
     window.removeEventListener('scroll', this.scrollToTop)
@@ -2821,7 +2823,6 @@ export default {
     }
   }
 }
-fbq('track', 'InitiateCheckout');
 </script>
 
 <style lang="less" scoped>

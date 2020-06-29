@@ -5,7 +5,7 @@
       @addCart="addCart"
       @addWish="addWish"
       @removeWish="removeWish"
-      
+
     ></detail-body>
     <div v-show="isHalf" class="scroll-to-top" @click="goTop()">
       <i class="iconfont iconzhiding"></i>
@@ -15,6 +15,7 @@
 
 <script>
 import DetailBody from './accessories-body'
+import detail from '../../mixins/detail'
 export default {
   layout: `no-footer-bar`,
   head() {
@@ -23,6 +24,7 @@ export default {
   components: {
     DetailBody
   },
+  mixins: [detail],
   data() {
     return {
       lang: this.LANGUAGE.detailCommons,

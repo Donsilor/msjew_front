@@ -14,6 +14,7 @@
 
 <script>
 import DetailBody from './engagement-rings-body.vue'
+import detail from '../../mixins/detail'
 export default {
   layout: `no-footer-bar`,
   head() {
@@ -22,6 +23,7 @@ export default {
   components: {
     DetailBody
   },
+  mixins: [detail],
   data() {
     return {
       lang: this.LANGUAGE.detailCommons,
@@ -126,7 +128,7 @@ export default {
             fbq('track', 'AddToCart');
           }
           // facebook 添加购物车统计-end
-          
+
           this.$nuxt.$loading.finish()
           this.$toast(this.lang.addCartSuccess)
         })
