@@ -1498,6 +1498,10 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> develop
               <!-- 大陆支付宝 -->
               <div
                 v-show="this.$store.state.platform == 20"
@@ -1543,6 +1547,7 @@
                 </div>
                 <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
+
               <!-- <div
                 :class="{ 'pay-choose': payWay === 8 }"
                 class="pay-block"
@@ -5113,5 +5118,4 @@ div {
 .initial{
 	width: auto !important;
 }
-
 </style>

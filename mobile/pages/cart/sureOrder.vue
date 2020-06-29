@@ -43,7 +43,7 @@
           <span>{{ formatCoin(coin) }} </span>
           {{ formatMoney( productAmount) }}
         </div>
-        <!-- 大陆支付 -->
+		<!-- 大陆支付 -->
         <ul v-if="this.$store.state.platform == 21">
           <li v-for="(item, index) in list2" :key="index">
             <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
@@ -72,36 +72,36 @@
             </div>
           </li>
         </ul>
-        <!-- 香港支付 -->
-        <ul v-if="this.$store.state.platform == 11">
-          <li v-for="(item, index) in listHK" :key="index">
-          <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
-          <div>
-            <img :src="item.url"/>
-            <div class="right">
-            <span
-              class="icon iconfont"
-              :class="typeIndex === index ? 'icongou' : ''"
-              @click="changeType(index)"
-            ></span>
-            <b
-              >{{ item.title }}
-              <span
-              v-if="item.type == ''"
-              class="ph"
-              @click="needtips = !needtips"
-              >?</span
-              >
-            </b>
-        
-            <p>{{ item.des }}</p>
-            <p v-if="item.des2">{{ item.des2 }}</p>
-            <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p> 
-            </div>
-          </div>
-          </li>
-        </ul>
-        <!-- 美国支付 -->
+		<!-- 香港支付 -->
+		<ul v-if="this.$store.state.platform == 11">
+		  <li v-for="(item, index) in listHK" :key="index">
+			<!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
+			<div>
+			  <img :src="item.url"/>
+			  <div class="right">
+				<span
+				  class="icon iconfont"
+				  :class="typeIndex === index ? 'icongou' : ''"
+				  @click="changeType(index)"
+				></span>
+				<b
+				  >{{ item.title }}
+				  <span
+					v-if="item.type == ''"
+					class="ph"
+					@click="needtips = !needtips"
+					>?</span
+				  >
+				</b>
+		
+				<p>{{ item.des }}</p>
+				<p v-if="item.des2">{{ item.des2 }}</p>
+				<p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p> 
+			  </div>
+			</div>
+		  </li>
+		</ul>
+		<!-- 美国支付 -->
         <ul v-if="this.$store.state.platform == 31">
           <li v-for="(item, index) in listUs" :key="index">
             <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
@@ -464,46 +464,46 @@ export default {
         //   des: this.LANGUAGE.cart.pay.type3Text
         // }
       ],
-      // 香港支付
-      listHK: [
-        {
-        url: '/cart/pay.png',
-        type: 6,
-        title: this.LANGUAGE.cart.pay.payType0,
-        des: this.LANGUAGE.cart.pay.type0Text
-        },
-        {
-        url: '/cart/visa_1.png',
-        type: 61,
-        title: this.LANGUAGE.cart.pay.payType6,
-        des: this.LANGUAGE.cart.pay.type6Text
-        },
-        {
-        url: '/cart/ap-HK.png',
-        type: 84,
-        title: this.LANGUAGE.cart.pay.payType3+' HK',
-        des: this.LANGUAGE.cart.pay.type3Text
-        },
-        {
-        url: '/cart/wac.png',
-        type: 83,
-        title: this.LANGUAGE.cart.pay.payType4,
-        des: this.LANGUAGE.cart.pay.type4Text
-        },
-        {
-        url: '/cart/up.png',
-        type: 81,
-        title: this.LANGUAGE.cart.pay.payType1,
-        des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-        url: '/cart/ph.png',
-        type: 89,
-        title: this.LANGUAGE.cart.pay.payType5,
-        des: this.LANGUAGE.cart.pay.type5Text,
-        }
-      ],
-      // 美国支付
+		// 香港支付
+		listHK: [
+		  {
+			url: '/cart/pay.png',
+			type: 6,
+			title: this.LANGUAGE.cart.pay.payType0,
+			des: this.LANGUAGE.cart.pay.type0Text
+		  },
+		  {
+			url: '/cart/visa_1.png',
+			type: 61,
+			title: this.LANGUAGE.cart.pay.payType6,
+			des: this.LANGUAGE.cart.pay.type6Text
+		  },
+		  {
+			url: '/cart/ap-HK.png',
+			type: 84,
+			title: this.LANGUAGE.cart.pay.payType3+' HK',
+			des: this.LANGUAGE.cart.pay.type3Text
+		  },
+		  {
+			url: '/cart/wac.png',
+			type: 83,
+			title: this.LANGUAGE.cart.pay.payType4,
+			des: this.LANGUAGE.cart.pay.type4Text
+		  },
+		  {
+			url: '/cart/up.png',
+			type: 81,
+			title: this.LANGUAGE.cart.pay.payType1,
+			des: this.LANGUAGE.cart.pay.type1Text
+		  },
+		  {
+			url: '/cart/ph.png',
+			type: 89,
+			title: this.LANGUAGE.cart.pay.payType5,
+			des: this.LANGUAGE.cart.pay.type5Text,
+		  }
+		],
+		// 美国支付
       listUs: [
         {
           url: '/cart/pay.png',
@@ -704,16 +704,20 @@ export default {
       }else if(this.typeIndex == 1){
         pay = 61
       }else if(this.typeIndex == 2){
-        pay = 82
+        if(this.$store.state.platform === 21){
+          pay = 82
+        }else{
+          pay = 84
+        }
       }else if(this.typeIndex == 3){
         pay = 83
       }else if(this.typeIndex == 4){
         pay = 81
       }else if(this.typeIndex == 5){
-        pay = 84
+        pay = 89
       }
 
-      if(pay == 81 || pay == 82 || pay == 83 || pay == 84){
+      if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89){
         this.$toast.show(this.lang.firstLogin)
         // 点击修改滚顶到地址编辑模块
         document.getElementById('loginBox').scrollIntoView({

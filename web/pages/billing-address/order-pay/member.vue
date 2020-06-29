@@ -912,12 +912,12 @@
             </div>
 
             <!-- 购物卡 -->
-            <div class="detail-line" v-for="item in useAmount">
+            <!-- <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
                 -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
-            </div>
+            </div> -->
 
             <div class="detail-line">
               <div class="font-size-16 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
@@ -1870,12 +1870,12 @@
             </div>
 
             <!-- 购物卡 -->
-            <div class="detail-line" v-for="item in useAmount">
+            <!-- <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
                 -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
-            </div>
+            </div> -->
 
             <div class="detail-line">
               <div class="font-size-14 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>

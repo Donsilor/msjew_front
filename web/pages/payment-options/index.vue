@@ -126,6 +126,7 @@
           </div>
           <!-- <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div> -->
         </div>
+
         <!-- <div
           :class="{ 'pay-choose': payWay === 8 }"
           class="pay-block"
@@ -1218,5 +1219,9 @@ div {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
+}
+
+.initial{
+	width: auto !important;
 }
 </style>

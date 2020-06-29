@@ -104,6 +104,7 @@
           </div>
         </li>
       </ul>
+
       <div class="tips">
         <i v-show="this.$store.state.platform !== 31" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform !== 31">{{ lang.tips }}</span>
       </div>
@@ -113,7 +114,7 @@
         {{ formatCoin(info.coinType) }}
         {{ formatMoney(price) }}
       </div>
-      
+
       <!-- <Upload :multiple="true" :max=6 :list="imgList" ref="upload"></Upload> -->
       <!--    unionPayHide-->
       <div v-show="false">
@@ -128,7 +129,7 @@
 
       <NeedKnow v-if="needtips" @close="needtips = !needtips" />
     </div>
-    <div class="transfer" v-show="transfer"> 
+    <div class="transfer" v-show="transfer">
       <div class="transfer-header">
         <i class="icon iconfont iconfanhuiicon-" @click="closed">{{ lang.back }}</i>
         <h4>{{ lang.pleaseSelectAccount }}</h4>
@@ -281,7 +282,7 @@ export default {
           title: this.LANGUAGE.cart.pay.payType6,
           des: this.LANGUAGE.cart.pay.type6Text
         }
-      ], 
+      ],
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
       price: JSON.parse(this.$route.query.info).payAmount,
@@ -303,7 +304,7 @@ export default {
     closed(){
       this.paylist = true
       this.transfer = false
-      this.typeIndex = 0 
+      this.typeIndex = 0
     },
     formatMoney: formatMoney,
     // 选择支付方式
@@ -341,13 +342,17 @@ export default {
           return
         }
       }
-      let pay = 0
+      let pay = ""
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
         pay = 61
       }else if(this.typeIndex == 2){
-        pay = 82
+        if(this.$store.state.platform === 21){
+          pay = 82
+        }else{
+          pay = 84
+        }
       }else if(this.typeIndex == 3){
         pay = 83
       }else if(this.typeIndex == 4){
@@ -476,7 +481,7 @@ export default {
     color: rgba(51, 51, 51, 1);
     border-bottom: 8px solid #f6f6f6;
     .note{
-      text-align: right; 
+      text-align: right;
       margin-right: 20px;
       margin-bottom: 20px;
       font-size: 12px;
