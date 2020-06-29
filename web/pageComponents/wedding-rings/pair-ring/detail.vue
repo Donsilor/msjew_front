@@ -700,6 +700,8 @@
     <section class="desc" v-html="info.ringDesc"></section>
     <order-include></order-include>
     <comments ref="product-comments" :group-id="info.id"></comments>
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
   </div>
 </template>
 
@@ -796,6 +798,9 @@ export default {
       categoryId:'',
       stock:'',
       magnifying:'',
+      showCoupon: false,
+      moneyList: [],
+      activeTime: '',
       language: this.$store.state.language,
     }
   },
