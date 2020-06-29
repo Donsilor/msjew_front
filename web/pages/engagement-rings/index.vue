@@ -76,17 +76,17 @@
           <div class="box swiper-no-swiping">
             <!-- <i class="icon iconfont" @click="swiperPrev(1)">&#xe663;</i> -->
             <div class="diamond-swiper-container">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <img src="/engagement-rings/design/diamond2.jpg" />
-                </div>
+              <!-- <div class="swiper-wrapper"> -->
+                <!-- <div class="swiper-slide"> -->
+                  <!-- <img src="/engagement-rings/design/diamond2.jpg" /> -->
+                <!-- </div> -->
                 <div class="swiper-slide">
                   <img src="/engagement-rings/design/diamond3.jpg" />
                 </div>
-                <div class="swiper-slide">
-                  <img src="/engagement-rings/design/diamond1.jpg" />
-                </div>
-              </div>
+                <!-- <div class="swiper-slide"> -->
+                  <!-- <img src="/engagement-rings/design/diamond1.jpg" /> -->
+                <!-- </div> -->
+              <!-- </div> -->
             </div>
             <!-- <i class="icon iconfont" @click="swiperNext(1)">&#xe652;</i> -->
           </div>
@@ -622,8 +622,7 @@ section {
         -ms-transition: all 0.3s;
         transition: all 0.3s;
       }
-      .ring-swiper-container,
-      .diamond-swiper-container {
+      .ring-swiper-container{
         height: 420px;
         overflow: hidden;
         position: relative;
@@ -661,6 +660,23 @@ section {
               transform: scale(1, 1);
             }
           }
+        }
+      }
+      .swiper-no-swiping{
+        width: 300px;
+        height: 300px;
+        margin-top: 60px;
+      }
+
+      .diamond-swiper-container {
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+
+        .swiper-slide {
+          text-align: center;
+          line-height: 400px;
         }
       }
       > div {
