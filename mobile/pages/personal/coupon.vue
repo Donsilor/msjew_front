@@ -30,7 +30,7 @@
         <!-- <div class="btn">点击使用</div> -->
 
         <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">{{ lang.alreadyApplied }}</div>
-        <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="nowTime > item.endTime">{{ lang.alreadyExpired }}</div>
+        <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="nowTime > item.endTime && item.couponStatus == 1">{{ lang.alreadyExpired }}</div>
       </div>
     </div>
   </div>
