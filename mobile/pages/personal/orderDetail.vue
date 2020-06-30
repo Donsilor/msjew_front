@@ -282,14 +282,14 @@
             <span>{{ lang.productsCount }}： </span
             ><span>{{ formatCoin(info.coinCode) }} {{ productsPrice }} </span>
           </li>
-		  <li v-for="item in cardList">
+		  <!-- <li v-for="item in cardList">
 		    <span>{{ lang.shoppingCard }}：
 					<em :class="info.orderStatus == 0 ? 'card-color' : ''">
 						({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
 					</em>
 				</span>
 			<span class="active">-{{ formatCoin(info.coinCode) }} {{ item.useAmount }} </span>
-		  </li>
+		  </li> -->
           <li v-if="info.preferFee" class="active">
             <span>{{ lang.offer }}： </span
             ><span>-{{ formatCoin(info.coinCode) }} {{ info.preferFee }} </span>
@@ -318,19 +318,19 @@
           </li>
           <li v-if="info.discountAmount != 0" class="active">
             <span>{{ lang.discountedAmount }}:</span
-            ><span>-{{ info.coinCode }} {{ info.discountAmount }} </span>
+            ><span>-{{ formatCoin(info.coinCode) }} {{ info.discountAmount }} </span>
           </li>
           <li v-if="info.couponAmount != 0" class="active">
             <span>{{ lang.couponAmount }}:</span
-            ><span>-{{ info.coinCode }} {{ info.couponAmount }} </span>
+            ><span>-{{ formatCoin(info.coinCode) }} {{ info.couponAmount }} </span>
           </li>
           <li v-for="(item, i) in cardList" :key="i" >
             <span>{{ lang.shoppingCard }}：
               <em :class="info.orderStatus == 0 ? 'card-color' : ''">
-                ({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
+                ({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">({{ lang.Untied }})</i>
               </em>
             </span>
-            <span class="active">-{{ info.coinCode }} {{ item.useAmount }} </span>
+            <span class="active">-{{ formatCoin(info.coinCode) }} {{ item.useAmount }} </span>
           </li>
           <div class="all">
             <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span

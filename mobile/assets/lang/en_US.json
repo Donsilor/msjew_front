@@ -585,6 +585,7 @@
       "pending":"Pending",
       "payfailed":"Payment failed",
       "discountedAmount": "Discounted amount",
+      "Untied":"Untied",
       "couponAmount": "Coupon"
     }
   },

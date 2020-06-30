@@ -198,6 +198,8 @@
                     </div>
                     <div v-if="item.groupType !== 0 && index !== list.length - 1">
                       <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                        <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? list[index + 1].coupon.discount.discount+'%' : discountConversion(list[index + 1].coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                        <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
                         {{ list[index + 1].goodsName }}
                       </h4>
                       <p :class="item.groupType === 2 ? '' : 'margin-top-10'">

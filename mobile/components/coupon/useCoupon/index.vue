@@ -9,7 +9,7 @@
       <div class="coupon-box">
         <!-- 优惠券列表 -->
         <div class="box-r">
-          <div v-if="1" class="list" v-for="(item, index) in couponList" :key="index">
+          <div v-if="1" class="list" v-for="(item, index) in couponList" :key="index" @click="chooseCoupon(index,true)">
             <div class="list-l">
               <div class="line-box">
                 <div class="point-box">
@@ -27,7 +27,7 @@
               <div class="time">{{ lang.time }}：{{changeTime(item.start_time)}} - {{changeTime(item.end_time)}}</div>
             </div>
 
-            <div class="get" @click="chooseCoupon(index,true)">
+            <div class="get" >
               <!-- <div> -->
                 <!-- <span>{{item.ifChoose ? lang.haveChoose : lang.immediatelyChoose}}</span> -->
                 <i
@@ -62,6 +62,13 @@
         required: false,
         default () {
           return []
+        }
+      },
+      useC: {
+        type: Object,
+        required: false,
+        default () {
+          return {}
         }
       }
     },
@@ -99,6 +106,12 @@
         }
       }
       this.couponList = [...this.couponList]
+
+      for(var l=0,len=this.couponList.length; l<len; l++){
+        if(this.useC.couponId == this.couponList[l].coupon_id){
+          this.couponList[l].ifChoose = true
+        }
+      }
     },
     methods: {
       more(){
@@ -129,10 +142,16 @@
       },
       // 选择优惠券
       chooseCoupon(k,g) {
+        let flag = this.couponList[k].ifChoose
         this.couponList.forEach(o => {
           o.ifChoose = false
         })
-        this.couponList[k].ifChoose = true;
+
+        if(flag){
+          this.couponList[k].ifChoose = false;
+        }else {
+          this.couponList[k].ifChoose = true;
+        }
         this.couponList = [...this.couponList]
 
         if(g){
@@ -142,11 +161,22 @@
               this.couponInfo.couponId = this.couponList[index].coupon_id;
             }
           })
-        }
 
-        setTimeout(() => {
-          this.$emit('closeCoupon', this.couponInfo)
-        }, 1000)   
+          if(this.couponInfo.couponId){
+            setTimeout(() => {
+              this.$emit('closeCoupon', this.couponInfo)
+            }, 1000)   
+          }else{
+            this.$emit('closeCoupon')
+          }
+
+        } else {
+          this.$emit('closeCoupon',-1)
+        }
+        // setTimeout(() => {
+        //   this.$emit('closeCoupon', this.couponInfo)
+        // }, 1000)   
+
       }
     }
   }
