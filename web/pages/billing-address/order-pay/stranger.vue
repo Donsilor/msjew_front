@@ -2343,6 +2343,8 @@ export default {
   mounted() {
     this.language = this.getCookie('language')
     window.addEventListener('scroll', this.scrollToTop);
+
+    fbq('track', 'InitiateCheckout');
   },
   destroyed() {
     window.removeEventListener('scroll', this.scrollToTop)
