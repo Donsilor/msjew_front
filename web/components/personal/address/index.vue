@@ -1077,10 +1077,10 @@ export default {
     padding: 40px 28px;
     .addr-block {
       position: relative;
-      width: 430px;
+      width: 46%;
       height: 250px;
       padding: 25px 30px 0;
-      margin: 0 30px 20px 0;
+      margin: 0 3% 20px 0;
       border: 1px solid rgba(230, 230, 230, 1);
       box-sizing: border-box;
       .addr-title {

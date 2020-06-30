@@ -83,7 +83,7 @@
 
               <div class="right">
                 <span>1</span>
-                {{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+                <span>{{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}</span>
               </div>
             </div>
           </div>
@@ -153,7 +153,7 @@
 
               <div class="right">
                 <span>1</span>
-                {{  formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+                <span>{{  formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}</span>
               </div>
             </div>
           </div>
@@ -804,22 +804,20 @@ div {
         background: #fee6e2;
         text-align: left;
         margin-bottom: 10px;
-        padding-top: 0;
+        padding: 0 2% 0;
+        font-size: 0;
         span {
-          width: 500px;
+          width: 24%;
           color: #333333;
           font-size: 14px;
           line-height: 34px;
-          margin-left: 20px;
+          // margin-left: 2%;
           display: inline-block;
-        }
-        span:nth-child(2) {
-          width: 150px;
           text-align: center;
         }
-        span:nth-child(3) {
-          width: 200px;
-          text-align: center;
+        span:nth-child(1) {
+          width: 52%;
+          text-align: left;
         }
       }
     }
@@ -902,7 +900,7 @@ div {
               }
             }
             .mid {
-              width: 480px;
+              width: calc((100% - 70px) * 0.57);
               // height: 70px;
               padding: 0 20px;
               margin: 0;
@@ -912,6 +910,7 @@ div {
               color: #333333;
               overflow: hidden;
               cursor: pointer;
+              box-sizing: border-box;
               h5 {
                 font-size: 14px;
                 line-height: 18px;
@@ -995,7 +994,7 @@ div {
               }
             }
             .mid {
-              width: 480px;
+              width: calc((100% - 70px) * 0.57);
               height: 70px;
               padding: 0 20px;
               margin: 0;
@@ -1005,6 +1004,7 @@ div {
               color: #333333;
               overflow: hidden;
               cursor: pointer;
+              box-sizing: border-box;
               h5 {
                 font-size: 14px;
                 line-height: 18px;
@@ -1029,22 +1029,26 @@ div {
               }
             }
             .right {
-              width: 350px;
+              width: calc((100% - 70px) * 0.43);
               height: 70px;
               padding: 0;
               margin: 0;
               min-height: 70px;
-              text-align: left;
-              font-size: 16px;
+              text-align: center;
+              font-size: 0;
               line-height: 70px;
               color: #666666;
               font-family: twCenMt;
-              span {
-                text-align: center;
-                padding: 0 36px;
+              span:first-child {
+                display: inline-block;
+                width: 20%;
                 font-size: 14px;
-                margin-right: 96px;
-                color: #666666;
+              }
+              span:last-child {
+                display: inline-block;
+                width: 62%;
+                font-size: 16px;
+                margin-left: 18%;
               }
             }
           }

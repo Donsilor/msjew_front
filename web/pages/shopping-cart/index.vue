@@ -494,10 +494,10 @@ export default {
 //  margin: 0 auto;
 }
 .cart2{
-     position: fixed!important;
-  z-index: 999;
-  bottom:0;
-   width: 100%;
+    position: fixed!important;
+    z-index: 999;
+    bottom:0;
+    width: 100%;
     // text-align: left;
     overflow: hidden;
     margin: 0 auto;
@@ -660,7 +660,9 @@ export default {
     }
   }
 .cart {
-  width: 1360px;
+  max-width: 1360px;
+  min-width: 1200px;
+  width: 100%;
   text-align: left;
   overflow: hidden;
   margin: 0 auto;
@@ -669,11 +671,14 @@ export default {
   .cart-container{
     position: relative;
     overflow: hidden;
-    width: 1360px;
+    max-width: 1360px;
+    min-width: 1200px;
+    width: 100%;
     color: #000;
     font-size: 14px;
     background: rgba(248, 248, 248, 1);
     padding: 82px 30px 25px;
+    box-sizing: border-box;
     .cart-title {
       height: 24px;
       line-height: 24px;
@@ -685,7 +690,7 @@ export default {
     }
     .cart-top-bar {
       box-sizing: border-box;
-      width: 1300px;
+      width: 100%;
       height: 40px;
       line-height: 40px;
       background: rgba(255, 255, 255, 1);
@@ -695,6 +700,7 @@ export default {
       font-size: 16px;
       color: #666;
       padding-left: 50px;
+      box-sizing: border-box;
       span {
         display: block;
       }
@@ -715,7 +721,7 @@ export default {
       background: rgba(255, 255, 255, 1);
       margin-bottom: 17px;
       .finished {
-        width: 1300px;
+        width: 100%;
         height: 179px;
         display: flex;
         align-items: center;

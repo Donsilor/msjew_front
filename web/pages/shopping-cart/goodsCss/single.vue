@@ -210,9 +210,9 @@ export default {
 <style scoped lang="less">
 .single {
   border-bottom: 1px solid rgba(239, 239, 239, 1);
+  width: calc(100% - 49px);
   .good-info {
     position: relative;
-    width: 1200px;
     height: 179px;
     border-bottom: 1px solid rgba(239, 239, 239, 1);
     display: flex;
@@ -227,6 +227,7 @@ export default {
       display: flex;
       align-items: center;
       margin-right: 20px;
+      box-sizing: border-box;
       img {
         display: block;
         width: 100%;
@@ -234,7 +235,7 @@ export default {
       }
     }
     .good-desc {
-      width: 269px;
+      width: calc((100% - 120px));
       line-height: 18px;
       margin-right: 71px;
       div:nth-child(1) {

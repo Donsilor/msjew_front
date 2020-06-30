@@ -125,7 +125,7 @@ export default {
       width: 100%;
       height: 583px;
       background-image: url('/policies/country.png');
-      background-size: 1018px 531px;
+      background-size: 100% 100%;
       background-position-y: 50px;
       background-repeat: no-repeat;
       border: 1px solid #d7d7d7;
