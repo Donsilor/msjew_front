@@ -2211,7 +2211,7 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-          console.log("地址",res.data)
+          // console.log("地址",res.data)
           this.address = res.data
           if(this.address.length != 0){
             // for (const i in res.data) {
@@ -2913,7 +2913,7 @@ export default {
       this.$axios
         .post('/web/member/order/tax', datas)
         .then(res => {
-          console.log("tex",res)
+          // console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
 
