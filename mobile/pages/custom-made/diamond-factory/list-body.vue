@@ -69,6 +69,10 @@
             {{ each.goodsName }}
           </div>
 
+          <div v-else class="info-title ow-h2">
+            {{ each.goodsName }}
+          </div>
+
           <div class="product-price">
             <div class="list-discount-price" v-if="couponType(each.coupon) !== 'discount'">
               <div class="info-price">

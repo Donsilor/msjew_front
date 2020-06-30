@@ -585,6 +585,7 @@
         "pending":"待确认",
         "payfailed":"支付失败",
         "discountedAmount": "折扣金额",
+        "Untied":"已解绑",
         "couponAmount": "优惠券"
       }
     },

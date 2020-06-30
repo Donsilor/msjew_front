@@ -1,65 +1,67 @@
 <template>
     <div class="invoice">
-        <div class="detail">{{ lang.InvoiceDetails }}
-            <i class="quit icon iconfont iconfanhuiicon-" @click="quit()">{{lang_header.back}}</i>
-        </div>
-        <!-- <Header :title="lang.InvoiceDetails" @click="quit()"  class="detail"/> -->
-        <div  >
-            <div class="select"> 
-                <div>
-                    <button @click="zhizhi(0)" :class="{'active':invoice.is_electronic == '0'}">{{ lang.PaperInvoice }}</button>
+        <div class="box">
+            <div class="detail">{{ lang.InvoiceDetails }}
+                <i class="quit icon iconfont iconfanhuiicon-" @click="quit()">{{lang_header.back}}</i>
+            </div>
+            <!-- <Header :title="lang.InvoiceDetails" @click="quit()"  class="detail"/> -->
+            <div>
+                <div class="select"> 
+                    <div>
+                        <button @click="zhizhi(0)" :class="{'active':invoice.is_electronic == '0'}">{{ lang.PaperInvoice }}</button>
+                    </div>
+                    <div>
+                        <button @click="zhizhi(1)" :class="{'isactive':invoice.is_electronic == '1'}">{{ lang.ElectronicInvoice }}</button>
+                    </div>
+                    
+                </div>   
+            </div>
+            <div class="type">
+                <div class="title"><span><span class="star">*</span>&nbsp;{{ lang.HeaderType }}</span></div>
+                <div class="type_select">
+                    <div>
+                        <i :class="{ icongou: select2 }" @click="selected(2)" class="icon iconfont "></i>
+                        <span>{{ lang.UnBusinessUnit }}</span>
+                    </div>
+                    <div style="margin-left:25px;">
+                        <i :class="{ icongou: select1 }" @click="selected(1)" class="icon iconfont"></i>
+                        <span>{{ lang.BusinessUnit }}</span>
+                    </div>
                 </div>
-                <div>
-                    <button @click="zhizhi(1)" :class="{'isactive':invoice.is_electronic == '1'}">{{ lang.ElectronicInvoice }}</button>
+            </div>
+            <div class="rise">
+                <div class="title"><span class="star">*</span>&nbsp;<span>{{ lang.Invoice }}</span></div>
+                <div class="rise_select">
+                    <input v-model="invoice.invoice_title" type="text" :placeholder="lang.holder1">
                 </div>
+            </div>
+            <div class="rise">
+                <div class="title"><span v-if="invoice.invoice_type == 1" class="star">*</span>&nbsp;<span>{{ lang.TaxID }}</span></div>
+                <div class="rise_select">
+                    <input v-model="invoice.tax_number" type="text" :placeholder="lang.holder2">
+                </div>
+            </div>
+            <div class="rise" v-show="invoice.is_electronic == 1">
+                <div class="title"><span class="star">*</span>&nbsp;<span>{{ lang.email }}</span></div>
+                <div class="rise_select">
+                    <input v-model="invoice.email" type="text" :placeholder="lang.holder3">
+                </div>
+            </div>
+            <div class="line">
                 
-            </div>   
-        </div>
-        <div class="type">
-            <div class="title"><span><span class="star">*</span>&nbsp;{{ lang.HeaderType }}</span></div>
-            <div class="type_select">
-                <div>
-                    <i :class="{ icongou: select2 }" @click="selected(2)" class="icon iconfont "></i>
-                    <span>{{ lang.UnBusinessUnit }}</span>
-                </div>
-                <div style="margin-left:25px;">
-                    <i :class="{ icongou: select1 }" @click="selected(1)" class="icon iconfont"></i>
-                    <span>{{ lang.BusinessUnit }}</span>
+            </div>
+            <div class="totle">
+                <div class="title"><span>{{ lang.totalAmount }}</span></div>
+                <div class="rise_select">
+                    <span>{{ formatCoin(coin) }}{{ultimatelyPay}}</span>
                 </div>
             </div>
-        </div>
-        <div class="rise">
-            <div class="title"><span class="star">*</span>&nbsp;<span>{{ lang.Invoice }}</span></div>
-            <div class="rise_select">
-                <input v-model="invoice.invoice_title" type="text" :placeholder="lang.holder1">
+            <div class="tips">
+            <p>{{ lang.tips }}</p>
             </div>
-        </div>
-        <div class="rise">
-            <div class="title"><span v-if="invoice.invoice_type == 1" class="star">*</span>&nbsp;<span>{{ lang.TaxID }}</span></div>
-            <div class="rise_select">
-                <input v-model="invoice.tax_number" type="text" :placeholder="lang.holder2">
+            <div class="btn">
+                <button @click="submit">{{ lang.confirm }}</button>
             </div>
-        </div>
-         <div class="rise" v-show="invoice.is_electronic == 1">
-            <div class="title"><span class="star">*</span>&nbsp;<span>{{ lang.email }}</span></div>
-            <div class="rise_select">
-                <input v-model="invoice.email" type="text" :placeholder="lang.holder3">
-            </div>
-        </div>
-        <div class="line">
-            
-        </div>
-        <div class="totle">
-            <div class="title"><span>{{ lang.totalAmount }}</span></div>
-            <div class="rise_select">
-                <span>{{ formatCoin(coin) }}{{ultimatelyPay}}</span>
-            </div>
-        </div>
-        <div class="tips">
-           <p>{{ lang.tips }}</p>
-        </div>
-        <div class="btn">
-            <button @click="submit">{{ lang.confirm }}</button>
         </div>
     </div>
 </template>
@@ -187,14 +189,13 @@ export default {
     background-color: #fff;
     overflow-y: scroll;
     .box{
-    background-color: #fff;
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 0 20px;
-    width: 100%;
-    box-sizing: border-box;
-  }
+        background-color: #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        box-sizing: border-box;
+    }
 //   .title{
 //     height: 50px;
 //     line-height: 50px;

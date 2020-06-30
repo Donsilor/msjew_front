@@ -4,7 +4,7 @@
         <div class="uploadMsg">
             <div class="Amount">
                 <span class="title1">{{ lang.paidAmount}}</span>
-                <span class="price" v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform == 21">
+                <span class="price" v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform == 11">
                   <span class="coin">{{ formatCoin(coin) }}</span> 
                   <span class="price">{{ formatMoney(price) }}</span>
                   <span class="coin-hkd">({{ coinHKD }}</span> 
@@ -282,6 +282,8 @@ export default {
                 top:30px;
                 font-size: 14px;
                 color: #c6bbb9;
+                width: 100%;
+                text-align: left;
                 // line-height: 25px;
             }
         }
