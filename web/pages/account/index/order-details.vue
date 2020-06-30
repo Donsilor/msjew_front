@@ -384,18 +384,18 @@
               {{ formatCoin(data.coinCode) }} {{ formatNumber(data.productAmount) }}
             </div>
           </div>
-          <div class="info-line" v-for="item in cardList">
+          <!-- <div class="info-line" v-for="item in cardList">
             <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
             <div class="ff color-pink">
               -{{ formatCoin(data.coinCode) }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
             </div>
-          </div>
-          <div class="info-line">
+          </div> -->
+          <!-- <div class="info-line">
             <div class="label">{{ $t(`${lang}.coupon`) }}</div>
             <div class="ff color-pink">
               -{{ formatCoin(data.coinCode) }} {{ formatNumber(data.preferFee) }}
             </div>
-          </div>
+          </div> -->
 
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.freight`) }}</div>
@@ -433,7 +433,7 @@
           <div class="info-line" v-if="data.discountAmount != 0">
             <div class="label">{{ $t(`${lang_invoice}.discountPrice`) }}</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatNumber(data.discountAmount) }}
+              -{{ formatCoin(data.coinCode) }} {{ formatNumber(data.discountAmount) }}
             </div>
           </div>
 
@@ -441,12 +441,12 @@
           <div class="info-line" v-if="data.couponAmount != 0">
             <div class="label">{{ $t(`${lang_invoice}.coupon`) }}</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatNumber(data.couponAmount) }}
+              -{{ formatCoin(data.coinCode) }} {{ formatNumber(data.couponAmount) }}
             </div>
           </div>
 
           <!-- 购物卡 -->
-          <div class="info-line" v-for="item in cardList">
+          <div class="info-line" v-for="(item,index) in cardList" :key="index">
             <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
             <div class="ff color-pink">
               -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>

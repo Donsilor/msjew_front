@@ -185,20 +185,20 @@ export default {
         name: ``,
         sku: ``,
         oldPrice: ``,
-		newPrice: ``,
+		    newPrice: ``,
         detail: ``,
-		couponType: 0,
-		couponNum: 0
+        couponType: 0,
+        couponNum: 0
       },
       block2: {
         pick: ``,
         name: ``,
         sku: ``,
         oldPrice: ``,
-		newPrice: ``,
+        newPrice: ``,
         detail: ``,
-		couponType: 0,
-		couponNum: 0
+        couponType: 0,
+        couponNum: 0
       },
       tabs: [
         {
@@ -353,6 +353,7 @@ export default {
     return getSingleRing()
   },
   mounted() {
+    console.log("block",this.block1,this.block2)
     const _this = this
     _this.$nextTick(() => {
       this.steps = JSON.parse(
@@ -431,9 +432,12 @@ export default {
                 this.block1.newPrice = res.details[i].coupon.discount.price;
                 this.block1.couponType = 1;
                 this.block1.couponNum = res.details[i].coupon.discount.discount;
-              }else{
+              }else if(res.details[i].coupon.hasOwnProperty('money')){
                 this.block1.newPrice = res.details[i].retailMallPrice;
                 this.block1.couponType = 2;
+              }else{
+                this.block1.newPrice = res.details[i].retailMallPrice;
+                this.block1.couponType = 0;
               }
             }
           }
