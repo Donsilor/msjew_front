@@ -1056,6 +1056,7 @@
             "itemsNum": "商品件數",
             "totalNum": "商品總額",
             "coupon": "優惠券",
+            "Untied":"已解綁",
             "freight": "運費",
             "tex": "稅費",
             "insurance": "保險費",

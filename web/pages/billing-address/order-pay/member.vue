@@ -3205,8 +3205,8 @@ export default {
      },
      closeCo(g){
        this.showUseCoupon = false;
-
-       if(g && g!=-1){
+      console.log("g",g)
+       if(g && g!==-1){
          this.couponCodeR = JSON.parse(JSON.stringify(g));
          console.log(this.couponCodeR)
          var k = [];
