@@ -822,12 +822,12 @@
                 {{ formatCoin(coinType) }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
-            <div class="detail-line" v-for="item in useAmount">
+            <!-- <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
                 -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
-            </div>
+            </div> -->
             <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
@@ -912,12 +912,12 @@
             </div>
 
             <!-- 购物卡 -->
-            <!-- <div class="detail-line" v-for="item in useAmount">
+            <div class="detail-line" v-for="(item,index) in useAmount" :key="index">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
                 -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
-            </div> -->
+            </div>
 
             <div class="detail-line">
               <div class="font-size-16 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
@@ -1779,12 +1779,12 @@
                 {{ formatCoin(coinType) }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
-            <div class="detail-line" v-for="item in useAmount">
+            <!-- <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
                 -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
-            </div>
+            </div> -->
 
             <div v-show="makeGay" class="detail-line">
               <div>
@@ -1870,12 +1870,12 @@
             </div>
 
             <!-- 购物卡 -->
-            <!-- <div class="detail-line" v-for="item in useAmount">
+            <div class="detail-line" v-for="(item,index) in useAmount" :key="index">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
                 -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
-            </div> -->
+            </div>
 
             <div class="detail-line">
               <div class="font-size-14 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
@@ -1927,7 +1927,7 @@
     ></shopping-card>
   </div>
 
-  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready"></use-coupon>
+  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR"></use-coupon>
 </div>
 </template>
 
@@ -2062,7 +2062,7 @@ export default {
       // 已领取优惠券
       couponAlready: [],
       ifShowCoupon: false,
-      productCount:''
+      productCount:'',
     }
   },
   computed: {
@@ -2226,7 +2226,12 @@ export default {
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
-            this.getTex()
+
+            var k = [];
+            if(this.cardList){
+              k = this.cardList
+            }
+            this.getTex(k)
             this.resetAddressInp()
           }
         })
@@ -2267,7 +2272,11 @@ export default {
     changeAddress(obj) {
       this.orderAddress = obj
       // console.log("aaa",this.orderAddress)
-      this.getTex()
+      var k = [];
+      if(this.cardList){
+        k = this.cardList
+      }
+      this.getTex(k)
     },
     createAddress() {
       // console.log('create')  /[^\d]/g,''
@@ -2896,15 +2905,15 @@ export default {
       const datas={
         carts: arr,
         coupon_id: this.couponCodeR.couponId,
-        addressId: this.orderAddress.id,
-        cards: cards
+        cards: cards, 
+        addressId: this.orderAddress.id
       }
 
       this.canSubmit = false
       this.$axios
         .post('/web/member/order/tax', datas)
         .then(res => {
-          // console.log("tex",res)
+          console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
 
@@ -3197,7 +3206,7 @@ export default {
      closeCo(g){
        this.showUseCoupon = false;
 
-       if(g){
+       if(g && g!=-1){
          this.couponCodeR = JSON.parse(JSON.stringify(g));
          console.log(this.couponCodeR)
          var k = [];
@@ -3205,8 +3214,10 @@ export default {
            k = this.cardList
          }
          this.getTex(k);
+       }else if(!g){
+         this.couponCodeR = {}
        }
-     }
+     } 
 
   }
 }

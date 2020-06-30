@@ -27,7 +27,7 @@
 
            <!-- 失效 class="lose-efficacy" -->
            <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">{{ $t(`${lang}.alreadyApplied`) }}</div>
-          <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="nowTime > item.endTime">{{ $t(`${lang}.alreadyExpired`) }}</div>
+          <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="nowTime > item.endTime && item.couponStatus == 1">{{ $t(`${lang}.alreadyExpired`) }}</div>
         </div>
       </div>
     </div>

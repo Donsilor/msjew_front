@@ -32,7 +32,7 @@
               <div v-if="item.ifChoose">
                 <img src="../../../static/order/ticks.png" alt="">
               </div>
-              <div v-if="!item.ifChoose">
+              <div v-else>
                 <img src="../../../static/order/untick.png" alt="">
               </div>
             </div>
@@ -67,6 +67,13 @@
         default () {
           return []
         }
+      },
+      useC: {
+        type: Object,
+        required: false,
+        default () {
+          return {}
+        }
       }
     },
     data() {
@@ -91,6 +98,7 @@
             this.couponList[i] = this.couponAll[j];
             this.couponList.ifUse = false;
             this.couponList.ifChoose = false;
+            // this.couponList.ifCh = false;
 
             this.couponList[i].lineType = [];
             for(var k in this.couponAll[j].goods_type){
@@ -104,6 +112,12 @@
         }
       }
       this.couponList = [...this.couponList]
+
+      for(var l=0,len=this.couponList.length; l<len; l++){
+        if(this.useC.couponId == this.couponList[l].coupon_id){
+          this.couponList[l].ifChoose = true
+        }
+      }
     },
     methods: {
       more(){
@@ -115,8 +129,7 @@
         const ca = document.cookie.split(';')
         for (let i = 0; i < ca.length; i++) {
           const c = ca[i].trim()
-          if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-        }
+          if (c.indexOf(name) === 0) return c.substring(name.length, c.length) }
         return ''
       },
       // 关闭弹窗
@@ -136,15 +149,22 @@
           }
 
         }else{
-            this.$emit('closeCoupon')
+            this.$emit('closeCoupon',-1)
         }
       },
       // 选择优惠券
       chooseCoupon(k) {
+        var flag = this.couponList[k].ifChoose
         this.couponList.forEach(o => {
           o.ifChoose = false
         })
-        this.couponList[k].ifChoose = true;
+
+        if(flag){
+          this.couponList[k].ifChoose = false
+        }else{
+          this.couponList[k].ifChoose = true;
+        }
+
         this.couponList = [...this.couponList]
       }
     }
