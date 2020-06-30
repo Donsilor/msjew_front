@@ -2,39 +2,45 @@
   <div :class="['footer-bar']">
     <div class="foot-menus">
       <div class="menus" v-if="this.$store.state.platform === 20">
-        <dl v-for="(group, index) in menusCn" :key="index" class="menu-group">
-          <dt class="group-name">{{ group.groupName }}</dt>
-          <dd
-            v-for="(item, itemIndex) in group.children"
-            :key="itemIndex"
-            class="item"
-          >
-            <div v-if="item.icon" class="item-icon">
-              <i :class="['iconfont', item.icon]"></i>
-            </div>
-            <div class="item-name">
-              <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
-            </div>
-          </dd>
-        </dl>
+        <div v-for="(group, index) in menusCn" :key="index" class="menu-group">
+          <dl>
+            <dt class="group-name">{{ group.groupName }}</dt>
+            <dd
+              v-for="(item, itemIndex) in group.children"
+              :key="itemIndex"
+              class="item"
+            >
+              <div v-if="item.icon" class="item-icon">
+                <i :class="['iconfont', item.icon]"></i>
+              </div>
+              <div class="item-name">
+                <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
+              </div>
+            </dd>
+          </dl>
+          <div class="foot-line" ref="menus"></div>
+        </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
       <div class="menus" v-else-if="this.$store.state.platform === 30">
-        <dl v-for="(group, index) in menusUs" :key="index" class="menu-group">
-          <dt class="group-name">{{ group.groupName }}</dt>
-          <dd
-            v-for="(item, itemIndex) in group.children"
-            :key="itemIndex"
-            class="item"
-          >
-            <div v-if="item.icon" class="item-icon">
-              <i :class="['iconfont', item.icon]"></i>
-            </div>
-            <div class="item-name">
-              <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
-            </div>
-          </dd>
-        </dl>
+        <div v-for="(group, index) in menusUs" :key="index" class="menu-group">
+          <dl>
+            <dt class="group-name">{{ group.groupName }}</dt>
+            <dd
+              v-for="(item, itemIndex) in group.children"
+              :key="itemIndex"
+              class="item"
+            >
+              <div v-if="item.icon" class="item-icon">
+                <i :class="['iconfont', item.icon]"></i>
+              </div>
+              <div class="item-name">
+                <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
+              </div>
+            </dd>
+          </dl>
+          <div class="foot-line" ref="menus"></div>
+        </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
       <div class="menus" v-else>
@@ -54,6 +60,7 @@
               </div>
             </dd>
           </dl>
+          <div class="foot-line" ref="menus"></div>
         </div>
 
         <div class="Shadow" @click="setCoin()"></div>
@@ -532,8 +539,7 @@ export default {
           href:
             'https://trustsealinfo.websecurity.norton.com/splash?form_file=fdf/splash.fdf&dn=www.bddco.com&lang=en'
         }
-      ],
-      width_r: ''
+      ]
     }
   },
   computed: {
@@ -543,11 +549,12 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
+      var child = this.$refs.menus;
+      // console.log(this.$refs.menus)
 
-      console.log(789789,this.windowWidth)
-      this.width_r = (this.windowWidth - 80)*0.2 + 'px'
-
-      console.log(7779,this.width_r)
+      for(var i=0,len=child.length; i<len; i++){
+        child[i].style.marginRight = this.lineWidth
+      }
     })
   },
   methods: {
@@ -587,8 +594,9 @@ export default {
       position: relative;
       flex-grow: 0;
       flex-shrink: 0;
-      // align-items: center;
-      // width: 18%;
+      width: 20%;
+      display: flex;
+      justify-content: space-between;
 
       .group-name {
         margin-bottom: 20px;
@@ -624,21 +632,21 @@ export default {
         }
       }
 
-      &:after {
-        content: '';
-        position: absolute;
-        top: 30px;
-        right: -100px;
-        width: 1px;
-        height: calc(100% - 60px);
-        background-color: #999999;
-      }
+      // &:after {
+      //   content: '';
+      //   position: absolute;
+      //   top: 30px;
+      //   right: -100px;
+      //   width: 1px;
+      //   height: calc(100% - 60px);
+      //   background-color: #999999;
+      // }
 
-      &:nth-last-of-type(2) {
-        &:after {
-          display: none;
-        }
-      }
+      // &:nth-last-of-type(2) {
+      //   &:after {
+      //     display: none;
+      //   }
+      // }
 
     }
 
@@ -749,5 +757,15 @@ export default {
       }
     }
   }
+}
+.foot-line{
+    width: 1px;
+    height: calc(100% - 60px);
+    background-color: #999999;
+    align-self: center;
+}
+
+.menu-group:nth-last-of-type(2) .foot-line{
+  display: none;
 }
 </style>

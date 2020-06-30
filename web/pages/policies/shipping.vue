@@ -122,7 +122,7 @@ export default {
     }
     .country {
       margin-top: 10px;
-      width: 1019px;
+      width: 100%;
       height: 583px;
       background-image: url('/policies/country.png');
       background-size: 1018px 531px;
@@ -137,9 +137,10 @@ export default {
         font-size: 16px;
         div {
           float: left;
-          width: 24%;
+          width: 25%;
           text-align: left;
           padding-left: 10px;
+          box-sizing: border-box;
         }
       }
       ul {
@@ -153,6 +154,7 @@ export default {
           padding-left: 50px;
           height: 31px;
           line-height: 32px;
+          // box-sizing: border-box;
           div {
             float: left;
             &:nth-child(1) {

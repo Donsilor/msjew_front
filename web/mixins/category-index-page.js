@@ -4,7 +4,7 @@ export default {
       ad: [],
       webSite: [],
       bannerHeight: 0,
-      windowWidth: ''
+      lineWidth: ''
     }
   },
   computed: {
@@ -66,8 +66,8 @@ export default {
             (document.body.clientWidth * image.height) / image.width
         }
       }
-
-      this.windowWidth = document.body.clientWidth
+      _this.lineWidth = (document.body.clientWidth-80)*0.04+'px'
+      console.log(_this.lineWidth)
     }
   }
 }

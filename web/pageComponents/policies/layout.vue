@@ -362,7 +362,10 @@ export default {
 
 <style lang="less" scoped>
 .questions-content {
-  width: 1360px;
+  min-width: 1200px;
+  max-width: 1360px;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0px auto 60px auto;
   .title {
     text-align: left;
@@ -372,7 +375,7 @@ export default {
     margin-bottom: 26px;
   }
   .list-content {
-    width: 1140px;
+    width: 100%;
     margin: 0;
     padding: 0;
     margin-left: 17px;
@@ -479,6 +482,12 @@ export default {
     .active {
       color: #8b766c;
     }
+  }
+}
+
+@media screen and (max-width: 1359px) {
+  .questions-content {
+    padding-right: 1%;
   }
 }
 </style>

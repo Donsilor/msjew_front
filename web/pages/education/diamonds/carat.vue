@@ -175,7 +175,8 @@ export default {
       color: #000;
     }
     .font-describe {
-      width: 1035px;
+      max-width: 1035px;
+      width: 98%;
       font-size: 14px;
       color: #999999;
       text-align: left;
@@ -184,7 +185,8 @@ export default {
       line-height: 32px;
     }
     .font-describe-1 {
-      width: 1035px;
+      max-width: 1035px;
+      width: 98%;
       font-size: 14px;
       color: #999999;
       text-align: left;
@@ -197,10 +199,10 @@ export default {
     margin-left: 63px;
     margin-bottom: 30px;
     .list-describe {
-      width: 1035px;
+      max-width: 1035px;
       overflow: hidden;
       li {
-        width: 1035px;
+        max-width: 1035px;
         height: 200px;
         .ring-pictures {
           position: relative;
@@ -220,7 +222,8 @@ export default {
           }
         }
         .ring-text {
-          width: 783px;
+          max-width: 783px;
+          width: calc(98% - 200px);
           height: 143px;
           float: right;
           text-align: left;
@@ -237,16 +240,18 @@ export default {
     }
   }
   .diamond-interval {
-    width: 1035px;
+    max-width: 1035px;
     height: 140px;
     margin-left: 63px;
     margin-top: 60px;
     position: relative;
     .img {
       display: block;
+      width: 99%;
     }
     .tab-tilte {
-      width: 1035px;
+      max-width: 1035px;
+      width: 99%;
       position: absolute;
       top: 0;
       left: 0;
@@ -263,7 +268,7 @@ export default {
       line-height: 30px;
       text-align: center;
       border-radius: 50%;
-      margin-left: 90px;
+      margin-left: 8.5%;
       font-size: 12px;
       cursor: pointer;
 
@@ -283,7 +288,8 @@ export default {
       }
     }
     .tab-content .contion-title {
-      width: 1020px;
+      // max-width: 1020px;
+      width: 99%;
       text-align: left;
       margin-top: 20px;
       padding: 20px;
@@ -292,6 +298,7 @@ export default {
         rgba(237, 200, 208, 1),
         rgba(233, 172, 186, 1)
       );
+      box-sizing: border-box;
     }
     .contion-title {
       font-size: 14px;
@@ -304,7 +311,7 @@ export default {
     }
   }
   .list-therr {
-    width: 1018px;
+    max-width: 1018px;
     height: 200px;
     // background-color: red;
     position: absolute;
@@ -322,7 +329,7 @@ export default {
     }
   }
   .diamond-show {
-    width: 1024px;
+    max-width: 1024px;
     margin: 60px 0 40px 60px;
     overflow: hidden;
     .show {
@@ -363,7 +370,7 @@ export default {
     }
     .imgs {
       img {
-        width: 984px;
+        width: 96%;
         margin: 20px;
       }
     }
