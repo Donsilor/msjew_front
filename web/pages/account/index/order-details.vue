@@ -449,7 +449,7 @@
           <div class="info-line" v-for="(item,index) in cardList" :key="index">
             <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
             <div class="ff color-pink">
-              -{{ data.coinCode }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
+              -{{ formatCoin(data.coinCode) }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">{{ $t(`${lang}.Untied`) }}</span>
             </div>
           </div>
 

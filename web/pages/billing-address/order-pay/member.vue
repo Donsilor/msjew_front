@@ -2211,7 +2211,7 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-          console.log("地址",res.data)
+          // console.log("地址",res.data)
           this.address = res.data
           if(this.address.length != 0){
             // for (const i in res.data) {
@@ -2913,7 +2913,7 @@ export default {
       this.$axios
         .post('/web/member/order/tax', datas)
         .then(res => {
-          console.log("tex",res)
+          // console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
 
@@ -3205,8 +3205,8 @@ export default {
      },
      closeCo(g){
        this.showUseCoupon = false;
-
-       if(g && g!=-1){
+      console.log("g",g)
+       if(g && g!==-1){
          this.couponCodeR = JSON.parse(JSON.stringify(g));
          console.log(this.couponCodeR)
          var k = [];

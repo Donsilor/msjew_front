@@ -1052,6 +1052,7 @@
             "itemsNum": "Qty of commodities",
             "totalNum": "Total amount",
             "coupon": "Coupon number",
+            "Untied":"Untied",
             "freight": "Freight",
             "tex": "Taxes",
             "insurance": "Insurance",
