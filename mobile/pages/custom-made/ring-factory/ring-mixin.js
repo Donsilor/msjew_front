@@ -197,6 +197,15 @@ export default {
           }
         }
         this.iAmShowMaker()
+
+        let fbqInfo = {
+          content_type: 'product', //  固定值：pruduct
+          content_ids: res.id,  // 对应网站产品的 id或者Sku
+          value:res.salePrice,     //对应产品的价值
+          currency: res.coinType //对应货币类型
+        };
+
+        fbq('track', 'ViewContent', fbqInfo);
       })
       .catch(err => {
         this.$nuxt.$loading.finish()
@@ -414,7 +423,7 @@ export default {
             fbq('track', 'AddToCart');
           }
           // facebook 添加购物车统计-end
-          
+
           this.$nuxt.$loading.finish()
           this.$toast(this.lang.addCartSuccess)
         })

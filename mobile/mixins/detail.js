@@ -1,7 +1,9 @@
 export default {
   data() {
     return {
+      data: {},
       pair: {},
+      goodInfo: {},
       infos: {}
     }
   },
@@ -9,7 +11,7 @@ export default {
   mounted() {
 
     //facebook统计详情页
-    let infos = this.infos;
+    let infos = this.data;
 
     if(Object.keys(this.pair).length > 0) {
       infos = this.pair;
