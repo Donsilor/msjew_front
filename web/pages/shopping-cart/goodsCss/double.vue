@@ -450,7 +450,7 @@ export default {
       transform: translateY(-50%);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      // justify-content: space-between;
       div:nth-child(2) {
         width: 1px;
         height: 21px;

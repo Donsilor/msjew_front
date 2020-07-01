@@ -19,7 +19,7 @@
 
         <div class="price-box">
           <span class="sign">{{formatCoin(coin)}}</span>
-          <span class="price">{{item.moneyCn}}</span>
+          <span class="price">{{item.money}}</span>
         </div>
 
         <div class="text1">满 {{formatCoin(coin)}}{{item.atLeast}} 元使用</div>

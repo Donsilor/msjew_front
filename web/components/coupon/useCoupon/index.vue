@@ -2,7 +2,7 @@
   <div class="get-coupon">
     <div class="wrap">
       <div class="title">{{ $t(`${lang}.useCoupon`) }}
-        <i class="iconfont iconguanbi" @click="closeCoupon()"></i>
+        <i class="iconfont iconguanbi" @click="closeCoupon(false)"></i>
       </div>
 
       <div class="coupon-box">
@@ -74,6 +74,13 @@
         default () {
           return {}
         }
+      },
+      currency:{
+        type: Object,
+        required: false,
+        default () {
+          return {}
+        }
       }
     },
     data() {
@@ -88,8 +95,9 @@
       }
     },
     mounted() {
+      // console.log("dss",this.currency.currency)
       this.language = this.getCookie('language')
-      this.coin = this.$store.state.coin
+      this.coin = this.currency.currency
 
       var i=0;
       for(var j in this.couponAll){
@@ -114,6 +122,8 @@
       this.couponList = [...this.couponList]
 
       for(var l=0,len=this.couponList.length; l<len; l++){
+        this.couponList[l].ifChoose = false
+
         if(this.useC.couponId == this.couponList[l].coupon_id){
           this.couponList[l].ifChoose = true
         }
@@ -137,15 +147,17 @@
         if(k){
           this.couponList.forEach((o, index) => {
             if(o.ifChoose){
-              this.couponInfo.couponCode = this.couponList[index].money;
-              this.couponInfo.couponId = this.couponList[index].coupon_id;
+              this.couponInfo.couponCode = o.money;
+              this.couponInfo.couponId = o.coupon_id;
             }
           })
+
+          console.log(666,this.couponInfo)
 
           if(this.couponInfo.couponId){
             this.$emit('closeCoupon', this.couponInfo)
           }else{
-            this.$emit('closeCoupon')
+            this.$emit('closeCoupon',0)
           }
 
         }else{

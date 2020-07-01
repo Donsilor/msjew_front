@@ -69,7 +69,7 @@
     mounted() {
       this.language = this.getCookie('language')
       this.coin = this.$store.state.coin
-      console.log("ggggg",this.moneyInfo)
+      // console.log("ggggg",this.moneyInfo)
       if(this.moneyInfo){
         var i=0;
         for(var j in this.moneyInfo){

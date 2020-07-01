@@ -422,6 +422,7 @@ export default {
           this.block1.sku = res.goodsCode
           this.block1.pick = res.goodsImages.split(`,`)[0] || ``
           for (const i in res.details) {
+            // console.log(`11111111111111`,res.details[i].coupon)
             if (
               parseInt(this.steps.steps[0].goodsDetailsId) ===
               parseInt(res.details[i].id)
@@ -453,7 +454,7 @@ export default {
         .post(url1, data2)
         .then(data => {
           var res = data.data;
-          // console.log( `2222222222222222222`,res)
+          // console.log( `2222222222222222222`,res.details[i].coupon)
           this.block2.name = res.goodsName
           this.block2.sku = res.goodsCode
           this.block2.pick = res.goodsImages.split(`,`)[0] || ``
@@ -468,9 +469,12 @@ export default {
                 this.block2.newPrice = res.details[i].coupon.discount.price
                 this.block2.couponType = 1;
                 this.block2.couponNum =  res.details[i].coupon.discount.discount
-              }else{
+              }else if(res.details[i].coupon.hasOwnProperty('money')){
                 this.block2.newPrice = res.details[i].retailMallPrice
                 this.block2.couponType = 2;
+              }else{
+                this.block2.newPrice = res.details[i].retailMallPrice;
+                this.block2.couponType = 0;
               }
             }
           }

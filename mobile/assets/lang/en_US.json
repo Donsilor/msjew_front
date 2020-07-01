@@ -256,6 +256,7 @@
       "SwiftCode":"SWIFT CODE:",
       "uploadPhotos":"Upload  Photos",
       "Note3":"Note：Currency rate is as referred on BDD website.",
+      "selectPayWays":"Choose payment method",
       "NotSupportPay":"Sorry, USD is not supported by this payment method, please go back to select an available currency or change to another payment method! "
     },
     "paySuccess": {
