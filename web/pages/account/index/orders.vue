@@ -60,104 +60,109 @@
               }}</span> -->
             </p>
           </div>
-          <div v-if="o.details[0].categoryId !== 19 && o.details.length !== 2" class="single">
-            <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
-              <div class="left">
-                <nuxt-link :to="goDetails(d)"
-                  target="_blank"><img :src="IMG_URL + d.goodsImages"
-                /></nuxt-link>
-              </div>
-              <div class="mid">
-                <nuxt-link :to="goDetails(d)" target="_blank">
-                  <h5>{{ d.goodsName }}</h5>
-                  <p>SKU：{{ d.goodsCode }}</p>
-                  <div
-                    v-for="(k, __index) in d.detailSpecs"
-                    :key="__index"
-                    class="desc"
-                  >
-                    <span>{{ k.name }}: </span>
-                    <span>{{ k.value }} </span>
-                  </div>
-                </nuxt-link>
-              </div>
-
-              <div class="right">
-                <span>1</span>
-                <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}</span>
-                <span>{{ formatCoin(o.coinCode) }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
-              </div>
-            </div>
-          </div>
-          <div v-if="o.details[0].categoryId == '19'" class="double">
-            <div class="left">
-              <nuxt-link :to="goDetails(o.details[0])"
-                target="_blank"><img :src="IMG_URL + o.details[0].goodsImages"
-              /></nuxt-link>
-            </div>
-            <div>
-              <div  v-for="(d, _index) in o.details[0].ring" :key="_index" class="list-body">
+          <div v-for="(detail, n) in o.details" :key="n">
+            <!-- 单品 -->
+            <div v-if="proCategoryId !== 19 && (detail.ring == ''|| !detail.ring)" class="single">
+              <div   class="list-body">
+                <div class="left">
+                  <nuxt-link :to="goDetails(detail)"
+                    target="_blank"><img :src="IMG_URL + detail.goodsImages"
+                  /></nuxt-link>
+                </div>
                 <div class="mid">
-                <h5>{{ o.details[0].goodsName }}</h5>
-                  <nuxt-link :to="goDetails(o.details[0])" target="_blank">
-                    <!-- <h5>{{ d.goods_name }}</h5> -->
-                    <p class="sku">SKU：{{ o.details[0].goodsCode }}</p>
-                    <div class="detail">
-                      <div
-                        v-for="(k, __index) in d.lang.goods_spec"
-                        :key="__index"
-                        class="desc"
-                      >
-                        <span>{{ k.attr_name }}: </span>
-                        <span>{{ k.attr_value }} </span>
-                      </div>
-                      <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
-                          ({{ a }})
-                      </span>
+                  <nuxt-link :to="goDetails(detail)" target="_blank">
+                    <h5>{{ detail.goodsName }}</h5>
+                    <p>SKU：{{ detail.goodsCode }}</p>
+                    <div
+                      v-for="(k, __index) in detail.detailSpecs"
+                      :key="__index"
+                      class="desc"
+                    >
+                      <span>{{ k.name }}: </span>
+                      <span>{{ k.value }} </span>
                     </div>
                   </nuxt-link>
                 </div>
 
-                <!-- <div class="right"> -->
-                  <!-- <span>1</span> -->
-                  <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
-                <!-- </div> -->
+                <div class="right">
+                  <span>1</span>
+                  <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(detail.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                  <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+                </div>
               </div>
             </div>
-            <div class="num">
-              <span>1</span>
-            </div>
-            <div class="price">
-              <span :class="{'old-price': couponType(o.details[0].couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(o.details[0].goodsPrice) }}</span>
-              <span>{{ formatCoin(o.coinCode) }} {{ couponType(o.details[0].couponInfo) == 2 ? formatMoney(o.details[0].goodsPayPrice) : formatMoney(o.details[0].goodsPrice) }}</span>
-            </div>
-          </div>
-          <div v-if="o.details.length == 2" class="single customization">
-            <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
+            <!-- 对戒 -->
+            <div v-if="detail.categoryId === 19 && o.details.length !== 2" class="double">
               <div class="left">
-                <nuxt-link :to="goDetails(d)"
-                  target="_blank"><img :src="IMG_URL + d.goodsImages"
+                <nuxt-link :to="goDetails(detail)"
+                  target="_blank"><img :src="IMG_URL + detail.goodsImages"
                 /></nuxt-link>
               </div>
-              <div class="mid">
-                <nuxt-link :to="goDetails(d)" target="_blank">
-                  <h5>{{ d.goodsName }}</h5>
-                  <p>SKU：{{ d.goodsCode }}</p>
-                  <div
-                    v-for="(k, __index) in d.detailSpecs"
-                    :key="__index"
-                    class="desc"
-                  >
-                    <span>{{ k.name }}: </span>
-                    <span>{{ k.value }} </span>
+              <div>
+                <div  v-for="(c, _index) in detail.ring" :key="_index" class="list-body">
+                  <div class="mid">
+                  <h5>{{ detail.goodsName }}</h5>
+                    <nuxt-link :to="goDetails(detail)" target="_blank">
+                      <!-- <h5>{{ d.goods_name }}</h5> -->
+                      <p class="sku">SKU：{{ detail.goodsCode }}</p>
+                      <div class="detail">
+                        <div
+                          v-for="(k, __index) in c.lang.goods_spec"
+                          :key="__index"
+                          class="desc"
+                        >
+                          <span>{{ k.attr_name }}: </span>
+                          <span>{{ k.attr_value }} </span>
+                        </div>
+                        <span class="gender" v-for="(a, b) in c.lang.goods_attr[26].value" :key="b">
+                            ({{ a }})
+                        </span>
+                      </div>
+                    </nuxt-link>
                   </div>
-                </nuxt-link>
-              </div>
 
-              <div class="right">
+                  <!-- <div class="right"> -->
+                    <!-- <span>1</span> -->
+                    <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
+                  <!-- </div> -->
+                </div>
+              </div>
+              <div class="num">
                 <span>1</span>
-                <span :class="{'old-price': couponType(d.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}</span>
-                <span>{{ formatCoin(o.coinCode) }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}</span>
+              </div>
+              <div class="price">
+                <span :class="{'old-price': couponType(o.details[0].couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(o.details[0].goodsPrice) }}</span>
+                <span>{{ formatCoin(o.coinCode) }} {{ couponType(o.details[0].couponInfo) == 2 ? formatMoney(o.details[0].goodsPayPrice) : formatMoney(o.details[0].goodsPrice) }}</span>
+              </div>
+            </div>
+            <!-- 定制 -->
+            <div v-if="o.details.length == 2" class="single customization">
+              <div  class="list-body">
+                <div class="left">
+                  <nuxt-link :to="goDetails(detail)"
+                    target="_blank"><img :src="IMG_URL + detail.goodsImages"
+                  /></nuxt-link>
+                </div>
+                <div class="mid">
+                  <nuxt-link :to="goDetails(detail)" target="_blank">
+                    <h5>{{ detail.goodsName }}</h5>
+                    <p>SKU：{{ detail.goodsCode }}</p>
+                    <div
+                      v-for="(k, __index) in detail.detailSpecs"
+                      :key="__index"
+                      class="desc"
+                    >
+                      <span>{{ k.name }}: </span>
+                      <span>{{ k.value }} </span>
+                    </div>
+                  </nuxt-link>
+                </div>
+
+                <div class="right">
+                  <span>1</span>
+                  <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                  <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -426,7 +431,8 @@ export default {
       receiveOrder: false,
       cid: ``,
       rid: ``,
-      doubleRingGoodPrice:''
+      doubleRingGoodPrice:'',
+      proCategoryId:''
     }
   },
   created() {
@@ -488,6 +494,8 @@ export default {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
               obj.link = `132`
+              this.proCategoryId = obj.categoryId
+              // console.log("proCategoryId",this.proCategoryId)
             })
             // console.log("llllll",res.data.data[i].orderStatus)
             if (res.data.data[i].orderStatus == 10) {
@@ -558,7 +566,7 @@ export default {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
               // this.doubleRingGoodPrice = obj.goodsPrice
-              // console.log("obj",obj.goodsPrice)
+              // console.log("obj",obj)
             })
           }
           this.listData = res.data.data
@@ -869,6 +877,7 @@ div {
         .double{
           display: flex;
           padding: 20px;
+          position: relative;
           .detail{
             line-height: 20px;
           }

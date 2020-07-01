@@ -140,99 +140,101 @@
           <div class="t3">{{ $t(`${lang}.oldPrice`) }}</div>
           <div class="t4">{{ $t(`${lang}.newPrice`) }}</div>
         </div>
-        <!-- 单品 -->
-        <div v-if="data.details[0].categoryId !== 19 && data.details.length !== 2" class="detail-info single">
-          <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
-            <nuxt-link :to="goToDetail(d)" target="_blank">
-              <div class="t1">
-                <div class="good-img">
-                  <img :src="IMG_URL + d.goodsImages" />
-                </div>
-                <div class="good-desc">
-                  <div class="good-name">{{ d.goodsName }}</div>
-                  <div class="good-sku">SKU：{{ d.goodsCode }}</div>
-                  <div class="details">
-                    <span v-for="(v, k) in d.detailSpecs" :key="k"
-                      >{{ v.name }}：{{ v.value }}</span
-                    >
+        <div v-for="(detail, _index) in data.details" :key="_index">
+          <!-- 单品 -->
+          <div v-if="proCategoryId !== 19 && data.details.length !== 2  && (detail.ring == ''|| !detail.ring)" class="detail-info single">
+            <div class="goods-details">
+              <nuxt-link :to="goToDetail(detail)" target="_blank">
+                <div class="t1">
+                  <div class="good-img">
+                    <img :src="IMG_URL + detail.goodsImages" />
                   </div>
-                </div>
-              </div>
-            </nuxt-link>
-            <div class="t2">1</div>
-            <div class="t3" :class="{'old-price': couponType(d.couponInfo) == 2}">
-              {{ formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
-            </div>
-            <div class="t4">
-              {{ formatCoin(data.coinCode) }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}
-            </div>
-          </div>
-        </div>
-        <!-- 对戒 -->
-        <div v-if="data.details[0].categoryId == '19'" class="detail-info double">
-          <div  class="goods-details">
-            <nuxt-link :to="goToDetail(data.details[0])" target="_blank">
-              <div class="t1">
-                <div class="good-img">
-                  <img :src="IMG_URL + data.details[0].goodsImages" />
-                </div>
-                <div class="good-name">{{ data.details[0].goodsName }}</div>
-                <div class="good-desc"> 
-                  <div class="dec" v-for="(d, _index) in data.details[0].ring" :key="_index">
-                    
-                    <div class="good-sku">SKU：{{ data.details[0].goodsCode }}</div>
+                  <div class="good-desc">
+                    <div class="good-name">{{ detail.goodsName }}</div>
+                    <div class="good-sku">SKU：{{ detail.goodsCode }}</div>
                     <div class="details">
-                      <span v-for="(v, k) in d.lang.goods_spec" :key="k"
-                        >{{ v.attr_name }}：{{ v.attr_value }}</span
+                      <span v-for="(v, k) in detail.detailSpecs" :key="k"
+                        >{{ v.name }}：{{ v.value }}</span
                       >
-                      <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
-                          ({{ a }})
-                      </span>
                     </div>
                   </div>
-                  
                 </div>
-              </div>
-            </nuxt-link>
-            <div class="t2">1</div>
-          </div>
-            <!-- <div class="t3">
-              {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
-            </div> -->
-            <div class="t3" :class="{'old-price': couponType(data.details[0].couponInfo) == 2}">
-              {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
-            </div>
-            <div class="t4">
-              {{ formatCoin (data.coinCode) }} {{ couponType(data.details[0].couponInfo) == 2 ? formatMoney(data.details[0].goodsPayPrice) : formatMoney(data.details[0].goodsPrice) }}
-            </div>
-        </div>
-        <!-- 定制 -->
-        <div v-if="data.details.length === 2" class="detail-info customization">
-          <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
-            <nuxt-link :to="goToDetail(d)" target="_blank">
-              <div class="t1">
-                <div class="good-img">
-                  <img :src="IMG_URL + d.goodsImages" />
-                </div>
-                <div class="good-desc">
-                  <div class="good-name">{{ d.goodsName }}</div>
-                  <div class="good-sku">SKU：{{ d.goodsCode }}</div>
-                  <div class="details">
-                    <span v-for="(v, k) in d.detailSpecs" :key="k"
-                      >{{ v.name }}：{{ v.value }}</span
-                    >
-                  </div>
-                </div>
-              </div>
-            </nuxt-link>
-            <div class="t2">1</div>
-              <div class="t3" :class="{'old-price': couponType(d.couponInfo) == 2}">
-                {{  formatCoin (data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+              </nuxt-link>
+              <div class="t2">1</div>
+              <div class="t3" :class="{'old-price': couponType(detail.couponInfo) == 2}">
+                {{ formatCoin(data.coinCode) }} {{ formatMoney(detail.goodsPrice) }}
               </div>
               <div class="t4">
-                {{ formatCoin (data.coinCode) }} {{ couponType(d.couponInfo) == 2 ? formatMoney(d.goodsPayPrice) : formatMoney(d.goodsPrice) }}
+                {{ formatCoin(data.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}
               </div>
             </div>
+          </div>
+          <!-- 对戒 -->
+          <div v-if="detail.categoryId == '19'" class="detail-info double">
+            <div  class="goods-details">
+              <nuxt-link :to="goToDetail(detail)" target="_blank">
+                <div class="t1">
+                  <div class="good-img">
+                    <img :src="IMG_URL + detail.goodsImages" />
+                  </div>
+                  <div class="good-name">{{ detail.goodsName }}</div>
+                  <div class="good-desc"> 
+                    <div class="dec" v-for="(d, _index) in detail.ring" :key="_index">
+                      
+                      <div class="good-sku">SKU：{{ detail.goodsCode }}</div>
+                      <div class="details">
+                        <span v-for="(v, k) in d.lang.goods_spec" :key="k"
+                          >{{ v.attr_name }}：{{ v.attr_value }}</span
+                        >
+                        <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
+                            ({{ a }})
+                        </span>
+                      </div>
+                    </div>
+                    
+                  </div>
+                </div>
+              </nuxt-link>
+              <div class="t2">1</div>
+            </div>
+              <!-- <div class="t3">
+                {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
+              </div> -->
+              <div class="t3" :class="{'old-price': couponType(detail.couponInfo) == 2}">
+                {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
+              </div>
+              <div class="t4">
+                {{ formatCoin (data.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}
+              </div>
+          </div>
+          <!-- 定制 -->
+          <div v-if="data.details.length === 2" class="detail-info customization">
+            <div class="goods-details">
+              <nuxt-link :to="goToDetail(detail)" target="_blank">
+                <div class="t1">
+                  <div class="good-img">
+                    <img :src="IMG_URL + detail.goodsImages" />
+                  </div>
+                  <div class="good-desc">
+                    <div class="good-name">{{ detail.goodsName }}</div>
+                    <div class="good-sku">SKU：{{ detail.goodsCode }}</div>
+                    <div class="details">
+                      <span v-for="(v, k) in detail.detailSpecs" :key="k"
+                        >{{ v.name }}：{{ v.value }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </nuxt-link>
+              <div class="t2">1</div>
+                <div class="t3" :class="{'old-price': couponType(detail.couponInfo) == 2}">
+                  {{  formatCoin (data.coinCode) }} {{ formatMoney(detail.goodsPrice) }}
+                </div>
+                <div class="t4">
+                  {{ formatCoin (data.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}
+                </div>
+              </div>
+          </div>
         </div>
         <div class="goods-bot-bar" />
       </div>
@@ -449,7 +451,7 @@
           <div class="info-line" v-for="(item,index) in cardList" :key="index">
             <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
             <div class="ff color-pink">
-              -{{ formatCoin(data.coinCode) }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">{{ $t(`${lang}.Untied`) }}</span>
+              -{{ formatCoin(data.coinCode) }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">({{ $t(`${lang}.Untied`) }})</span>
             </div>
           </div>
 
@@ -499,7 +501,8 @@ export default {
       type:'',
       headType:'',
       cardList: [],
-      doubleRingGoodPrice:'' //对戒商品价格
+      doubleRingGoodPrice:'', //对戒商品价格
+      proCategoryId:''
     }
   },
   computed: {
@@ -600,6 +603,7 @@ export default {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
             this.doubleRingGoodPrice = obj.goodsPrice
+            this.proCategoryId = obj.categoryId
           })
           if(!this.data.invoice.isElectronic){
             this.type = this.$t(`${lang_invoice}.PaperInvoice`)
@@ -1001,15 +1005,17 @@ export default {
                 line-height: 12px;
                 height: 12px;
                 margin-bottom: 18px;
+                color: #aaa;
               }
               .details {
                 font-size: 12px;
                 line-height: 12px;
                 height: 12px;
                 width: 100%;
-                overflow: hidden;
+                color: #aaa;
+                // overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap;
+                // white-space: nowrap;
                 span {
                   margin-right: 10px;
                 }
@@ -1045,7 +1051,7 @@ export default {
             margin-right: 30px;
           }
         }
-        .goods-details:nth-child(2) {
+        .goods-details:nth-child(1) {
           border-top: 0;
         }
       }
@@ -1088,11 +1094,12 @@ export default {
           // margin-bottom: 15px!important;
           position: absolute;
           top: 10px;
-          left: 100px;
+          left: 112px;
+          color: #333;
         }
         .dec{
           // margin-left: 250px;
-          padding: 0px 10px 0px 10px;
+          padding: 0px 10px 0px 22px;
         }
         .dec:last-child{
           .good-name{
@@ -1160,9 +1167,9 @@ export default {
                 line-height: 20px;
                 height: 20px;
                 width: 100%;
-                overflow: hidden;
+                // overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap;
+                // white-space: nowrap;
                 color:#aaa;
                 span {
                   margin-right: 10px;
@@ -1234,9 +1241,9 @@ export default {
                 line-height: 12px;
                 height: 12px;
                 width: 100%;
-                overflow: hidden;
+                // overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap;
+                // white-space: nowrap;
                 span {
                   margin-right: 10px;
                 }

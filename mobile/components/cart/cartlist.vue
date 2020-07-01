@@ -44,11 +44,11 @@
                     }}
                   </p>
 
-                  <b v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <b v-if="!item.coupon.discount">{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatMoney(item.salePrice) }}</b>
                   
                   <div class="discount-price" v-else>
-                    <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
-                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                    <div class="old-price">{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatNumber(item.salePrice) }}</div>
+                    <b>{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatNumber(item.coupon.discount.price) }}</b>
                   </div>
 
                   <div v-if="item.groupType === 1" class="btn-type">
@@ -76,11 +76,11 @@
                       }}
                     </p>
 
-                    <b v-if="!list[index + 1].coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                    <b v-if="!list[index + 1].coupon.discount">{{ formatCoin(list[index + 1].simpleGoodsEntity.coinType) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
 
                     <div class="discount-price" v-else>
-                      <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].salePrice) }}</div>
-                      <b>{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                      <div class="old-price">{{ formatCoin(list[index + 1].simpleGoodsEntity.coinType) }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                      <b>{{ formatCoin(list[index + 1].simpleGoodsEntity.coinType) }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
                     </div>
                   </div>
                 </div>
@@ -135,11 +135,11 @@
                   </div> -->
                 </div>
 
-                  <b v-if="!item.coupon.discount" class="double-ring-price">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <b v-if="!item.coupon.discount" class="double-ring-price">{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatMoney(item.salePrice) }}</b>
                   
                   <div class="discount-price" v-else>
-                    <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
-                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                    <div class="old-price">{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatNumber(item.salePrice) }}</div>
+                    <b>{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatNumber(item.coupon.discount.price) }}</b>
                   </div>
               </div>
               <!-- 定制 -->
@@ -167,11 +167,11 @@
                     }}
                   </p>
                   
-                  <b v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <b v-if="!item.coupon.discount">{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatMoney(item.salePrice) }}</b>
                   
                   <div class="discount-price" v-else>
-                    <div class="old-price">{{ coin }} {{ formatNumber(item.salePrice) }}</div>
-                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                    <div class="old-price">{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatNumber(item.salePrice) }}</div>
+                    <b>{{ formatCoin(item.simpleGoodsEntity.coinType) }} {{ formatNumber(item.coupon.discount.price) }}</b>
                   </div>
 
                   <div v-if="item.groupType === 1" class="btn-type">
@@ -199,11 +199,11 @@
                       }}
                     </p>
                     
-                    <b v-if="!list[index + 1].coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                    <b v-if="!list[index + 1].coupon.discount">{{ formatCoin(list[index + 1].simpleGoodsEntity.coinType) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
                   
                     <div class="discount-price" v-else>
-                      <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].salePrice) }}</div>
-                      <b>{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                      <div class="old-price">{{ formatCoin(list[index + 1].simpleGoodsEntity.coinType) }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                      <b>{{ formatCoin(list[index + 1].simpleGoodsEntity.coinType) }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
                     </div>
                   </div>
                 </div>

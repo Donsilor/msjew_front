@@ -20,250 +20,252 @@
         <div class="top">
           <span>{{ order.orderNO }}</span>
         </div>
-        <!-- 单品 -->
-        <div v-if="order.details[0].groupType == 0 && order.details[0].data[0].categoryId !== 19" class="mod single" @click="toDetail(order.id)">
-          <ul>
-            <li v-for="(detail, n) in order.details" :key="n">
-              <div class="left-box">
-                <img :src="detail.image" />
+        <div v-for="(detail, n) in order.details" :key="n">
+          <!-- 单品 -->
+          <div v-if="detail.groupType == 0 && detail.data[0].categoryId !== 19" class="mod single" @click="toDetail(order.id)">
+            <ul>
+              <li >
+                <div class="left-box">
+                  <img :src="detail.image" />
 
-                <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
-                  <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
-                  <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
-                <!-- </div> -->
-              </div>
-
-              <div v-if="detail.groupType !== 0" class="group-type">
-                {{ detail.groupTypeText }}
-              </div>
-
-              <!--              单品-->
-              <div v-if="detail.groupType === 0" class="right">
-                <h4 class="ow-h2">
-                  {{ detail.goodsName }}
-                </h4>
-                <span>x 1</span>
-                <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p> 
-                <div v-if="detail.data[0].couponInfo.type === 2">
-                  <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
-                  <b>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPayPrice}}</b>
+                  <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
+                    <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
+                    <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
+                  <!-- </div> -->
                 </div>
-                <b v-else>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</b>
-              </div>
 
-              <!--              对戒-->
-              <!-- <div v-if="detail.groupType === 1" class="right">
-                <h4 class="ow-h2">
-                  {{ detail.goodsName }}
-                </h4>
-                <span>x 1</span>
-                <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p>
-                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
-                <b class="display-block margin-bottom-20"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPayPrice }}</b
-                >
-                <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
-                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
-                <b
-                  >{{ formatCoin(order.coinCode) }}
-                  {{ detail.data[1] && detail.data[1].goodsPrice }}</b
-                >
-              </div> -->
+                <div v-if="detail.groupType !== 0" class="group-type">
+                  {{ detail.groupTypeText }}
+                </div>
 
-              <!--              定制-->
-              <!-- <div v-if="detail.groupType === 2" class="right">
-                <h4 class="order-ellipsis ow-h2">
-                  {{ detail.data[0] && detail.data[0].goodsName }}
-                </h4>
-                <span>x 1</span>
-                <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p>
-                <b class="display-block margin-bottom-20"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
-                >
-                <h4 class="order-ellipsis ow-h2">
-                  {{ detail.data[1] && detail.data[1].goodsName }}
-                </h4>
-                <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
-                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-                <b
-                  >{{ order.coinCode }}
-                  {{ detail.data[1] && detail.data[1].goodsPayPrice }}</b
-                >
-              </div> -->
-            </li>
-          </ul>
-        </div>
-        <!-- 对戒 -->
-        <div v-if="order.details[0].data[0].categoryId == 19" class="mod double" @click="toDetail(order.id)">
-          <ul>
-            <li v-for="(detail, n) in order.details" :key="n">
-              <div class="left-box">
-                <img :src="detail.image" />
-
-                <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
-                  <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
-                  <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
-                <!-- </div> -->
-              </div>
-              <div v-if="detail.groupType !== 0" class="group-type">
-                {{ detail.groupTypeText }}
-              </div>
-
-              <!--              单品-->
-              <!-- <div v-if="detail.groupType === 0" class="right">
-                <h4 class="ow-h2">
-                  {{ detail.goodsName }}
-                </h4>
-                <span>x 1</span>
-                <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p>
-                <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
-              </div> -->
-
-              <!--              对戒-->
-              <div v-if="detail.data[0].categoryId === 19" class="right">
-                <div v-for="(ring, _n) in order.details[0].data[0].ring" :key="_n" class="dec">
+                <!--              单品-->
+                <div v-if="detail.groupType === 0" class="right">
                   <h4 class="ow-h2">
                     {{ detail.goodsName }}
                   </h4>
-                  <!-- <span>x 1</span> -->
-                  <p class="sku">SKU：{{ detail.data[0].goodsCode }}</p>
-                  <p>{{ getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value) }}</p>
-                  <!-- <b class="display-block margin-bottom-20"
+                  <span>x 1</span>
+                  <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ detail.data[0].detailSpecs }}</p> 
+                  <div v-if="detail.data[0].couponInfo.type === 2">
+                    <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                    <b>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPayPrice}}</b>
+                  </div>
+                  <b v-else>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</b>
+                </div>
+
+                <!--              对戒-->
+                <!-- <div v-if="detail.groupType === 1" class="right">
+                  <h4 class="ow-h2">
+                    {{ detail.goodsName }}
+                  </h4>
+                  <span>x 1</span>
+                  <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ detail.data[0].detailSpecs }}</p>
+                  <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
+                  <b class="display-block margin-bottom-20"
+                    >{{ order.coinCode }} {{ detail.data[0].goodsPayPrice }}</b
+                  >
+                  <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                  <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                  <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
+                  <b
+                    >{{ formatCoin(order.coinCode) }}
+                    {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                  >
+                </div> -->
+
+                <!--              定制-->
+                <!-- <div v-if="detail.groupType === 2" class="right">
+                  <h4 class="order-ellipsis ow-h2">
+                    {{ detail.data[0] && detail.data[0].goodsName }}
+                  </h4>
+                  <span>x 1</span>
+                  <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ detail.data[0].detailSpecs }}</p>
+                  <b class="display-block margin-bottom-20"
                     >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
-                  > -->
-                  <!-- <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                  >
+                  <h4 class="order-ellipsis ow-h2">
+                    {{ detail.data[1] && detail.data[1].goodsName }}
+                  </h4>
+                  <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                  <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                  <b
+                    >{{ order.coinCode }}
+                    {{ detail.data[1] && detail.data[1].goodsPayPrice }}</b
+                  >
+                </div> -->
+              </li>
+            </ul>
+          </div>
+          <!-- 对戒 -->
+          <div v-if="detail.data[0].categoryId == 19" class="mod double" @click="toDetail(order.id)">
+            <ul>
+              <li>
+                <div class="left-box">
+                  <img :src="detail.image" />
+
+                  <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
+                    <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
+                    <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
+                  <!-- </div> -->
+                </div>
+                <div v-if="detail.groupType !== 0" class="group-type">
+                  {{ detail.groupTypeText }}
+                </div>
+
+                <!--              单品-->
+                <!-- <div v-if="detail.groupType === 0" class="right">
+                  <h4 class="ow-h2">
+                    {{ detail.goodsName }}
+                  </h4>
+                  <span>x 1</span>
+                  <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ detail.data[0].detailSpecs }}</p>
+                  <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
+                </div> -->
+
+                <!--              对戒-->
+                <div v-if="detail.data[0].categoryId === 19" class="right">
+                  <div v-for="(ring, _n) in detail.data[0].ring" :key="_n" class="dec">
+                    <h4 class="ow-h2">
+                      {{ detail.goodsName }}
+                    </h4>
+                    <!-- <span>x 1</span> -->
+                    <p class="sku">SKU：{{ detail.data[0].goodsCode }}</p>
+                    <p>{{ getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value) }}</p>
+                    <!-- <b class="display-block margin-bottom-20"
+                      >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                    > -->
+                    <!-- <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                    <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                    <b
+                      >{{ order.coinCode }}
+                      {{ detail.data[1] && detail.data[1].goodsPrice }}</b
+                    > -->
+                  </div>
+                </div>
+                <div class="price">
+                  <!-- <b class="display-block">{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice }}</b> -->
+                  <div v-if="detail.data[0].couponInfo.type === 2">
+                    <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                    <b>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPayPrice}}</b>
+                  </div>
+                  <b v-else class="display-block">{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
+                </div>
+                <div class="num">
+                  <span>x 1</span>
+                </div>
+                <!--              定制-->
+                <!-- <div v-if="detail.groupType === 2" class="right">
+                  <h4 class="order-ellipsis ow-h2">
+                    {{ detail.data[0] && detail.data[0].goodsName }}
+                  </h4>
+                  <span>x 1</span>
+                  <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ detail.data[0].detailSpecs }}</p>
+                  <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
+                  <b class="display-block margin-bottom-20"
+                    >{{ order.coinCode }} {{ detail.data[0].goodsPayPrice }}</b
+                  >
+                  <h4 class="order-ellipsis ow-h2">
+                    {{ detail.data[1] && detail.data[1].goodsName }}
+                  </h4>
+                  <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                  <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                  <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
+                  <b
+                    >{{ order.coinCode }}
+                    {{ detail.data[1] && detail.data[1].goodsPayPrice }}</b
+                  >
+                </div> -->
+              </li>
+            </ul>
+          </div>
+          <!-- 定制 -->
+          <div v-if="detail.groupType == 2" class="mod customization" @click="toDetail(order.id)">
+            <ul>
+              <li >
+                <div class="left-box">
+                  <img :src="detail.image" />
+
+                  <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
+                    <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
+                    <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
+                  <!-- </div> -->
+                </div>
+                <div v-if="detail.groupType !== 0" class="group-type">
+                  {{ detail.groupTypeText }}
+                </div>
+
+                <!--              单品-->
+                <!-- <div v-if="detail.groupType === 0" class="right">
+                  <h4 class="ow-h2">
+                    {{ detail.goodsName }}
+                  </h4>
+                  <span>x 1</span>
+                  <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ detail.data[0].detailSpecs }}</p>
+                  <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
+                </div> -->
+
+                <!--              对戒-->
+                <!-- <div v-if="detail.groupType === 1" class="right">
+                  <h4 class="ow-h2">
+                    {{ detail.goodsName }}
+                  </h4>
+                  <span>x 1</span>
+                  <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ detail.data[0].detailSpecs }}</p>
+                  <b class="display-block margin-bottom-20"
+                    >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
+                  >
+                  <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
                   <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
                   <b
                     >{{ order.coinCode }}
                     {{ detail.data[1] && detail.data[1].goodsPrice }}</b
-                  > -->
-                </div>
-              </div>
-              <div class="price">
-                <!-- <b class="display-block">{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice }}</b> -->
-                <div v-if="detail.data[0].couponInfo.type === 2">
-                  <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
-                  <b>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPayPrice}}</b>
-                </div>
-                <b v-else class="display-block">{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
-              </div>
-              <div class="num">
-                <span>x 1</span>
-              </div>
-              <!--              定制-->
-              <!-- <div v-if="detail.groupType === 2" class="right">
-                <h4 class="order-ellipsis ow-h2">
-                  {{ detail.data[0] && detail.data[0].goodsName }}
-                </h4>
-                <span>x 1</span>
-                <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p>
-                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
-                <b class="display-block margin-bottom-20"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPayPrice }}</b
-                >
-                <h4 class="order-ellipsis ow-h2">
-                  {{ detail.data[1] && detail.data[1].goodsName }}
-                </h4>
-                <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
-                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-                <div class="old-price" v-if="detail.data[0].couponInfo.type === 2">{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</div>
-                <b
-                  >{{ order.coinCode }}
-                  {{ detail.data[1] && detail.data[1].goodsPayPrice }}</b
-                >
-              </div> -->
-            </li>
-          </ul>
-        </div>
-        <!-- 定制 -->
-        <div v-if="order.details[0].groupType == 2" class="mod customization" @click="toDetail(order.id)">
-          <ul>
-            <li v-for="(detail, n) in order.details" :key="n">
-              <div class="left-box">
-                <img :src="detail.image" />
+                  >
+                </div> -->
 
-                <!-- <div class="activity-sign" v-if="detail.coupon.discount || detail.coupon.money"> -->
-                  <!-- <div class="triangle" v-if="detail.coupon.discount">{{discountConversion(detail.coupon.discount.discount)}}折</div> -->
-                  <!-- <div class="triangle" v-if="detail.coupon.money">优惠券</div> -->
-                <!-- </div> -->
-              </div>
-              <div v-if="detail.groupType !== 0" class="group-type">
-                {{ detail.groupTypeText }}
-              </div>
-
-              <!--              单品-->
-              <!-- <div v-if="detail.groupType === 0" class="right">
-                <h4 class="ow-h2">
-                  {{ detail.goodsName }}
-                </h4>
-                <span>x 1</span>
-                <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p>
-                <b>{{ order.coinCode }} {{ detail.data[0].goodsPrice}}</b>
-              </div> -->
-
-              <!--              对戒-->
-              <!-- <div v-if="detail.groupType === 1" class="right">
-                <h4 class="ow-h2">
-                  {{ detail.goodsName }}
-                </h4>
-                <span>x 1</span>
-                <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p>
-                <b class="display-block margin-bottom-20"
-                  >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
-                >
-                <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
-                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-                <b
-                  >{{ order.coinCode }}
-                  {{ detail.data[1] && detail.data[1].goodsPrice }}</b
-                >
-              </div> -->
-
-              <!--              定制-->
-              <div v-if="detail.groupType === 2" class="right">
-                <h4 class="order-ellipsis ow-h2">
-                  {{ detail.data[0] && detail.data[0].goodsName }}
-                </h4>
-                <span>x 1</span>
-                <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                <p>{{ detail.data[0].detailSpecs }}</p>
-                <b class="display-block margin-bottom-20"
-                  >{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice }}</b
-                >
-                <div v-if="detail.data[0].couponInfo.type === 2">
-                  <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                <!--              定制-->
+                <div v-if="detail.groupType === 2" class="right">
+                  <h4 class="order-ellipsis ow-h2">
+                    {{ detail.data[0] && detail.data[0].goodsName }}
+                  </h4>
+                  <span>x 1</span>
+                  <p>SKU：{{ detail.data[0].goodsCode }}</p>
+                  <p>{{ detail.data[0].detailSpecs }}</p>
                   <b class="display-block margin-bottom-20"
-                  >{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPayPrice }}</b
-                >
+                    >{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice }}</b
+                  >
+                  <div v-if="detail.data[0].couponInfo.type === 2">
+                    <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                    <b class="display-block margin-bottom-20"
+                    >{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPayPrice }}</b
+                  >
+                  </div>
+                  <b v-else class="display-block margin-bottom-20"
+                    >{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice }}</b
+                  >
+                  <h4 class="order-ellipsis ow-h2">
+                    {{ detail.data[1] && detail.data[1].goodsName }}
+                  </h4>
+                  <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
+                  <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
+                  <div v-if="detail.data[1].couponInfo.type === 2">
+                    <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[1].goodsPrice}}</div>
+                    <b class="display-block margin-bottom-20"
+                    >{{ formatCoin(order.coinCode) }}{{ detail.data[1].goodsPayPrice }}</b
+                  >
+                  </div>
+                  <b v-else class="display-block margin-bottom-20"
+                    >{{ formatCoin(order.coinCode) }}{{ detail.data[1].goodsPrice }}</b
+                  >
                 </div>
-                <b v-else class="display-block margin-bottom-20"
-                  >{{ formatCoin(order.coinCode) }}{{ detail.data[0].goodsPrice }}</b
-                >
-                <h4 class="order-ellipsis ow-h2">
-                  {{ detail.data[1] && detail.data[1].goodsName }}
-                </h4>
-                <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
-                <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-                 <div v-if="detail.data[1].couponInfo.type === 2">
-                  <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[1].goodsPrice}}</div>
-                  <b class="display-block margin-bottom-20"
-                  >{{ formatCoin(order.coinCode) }}{{ detail.data[1].goodsPayPrice }}</b
-                >
-                </div>
-                <b v-else class="display-block margin-bottom-20"
-                  >{{ formatCoin(order.coinCode) }}{{ detail.data[1].goodsPrice }}</b
-                >
-              </div>
-            </li>
-          </ul>
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="bottom">
           <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
@@ -454,7 +456,7 @@ export default {
         order.details = result
         return order
       })
-      // console.log("showOrderList",showData)
+      console.log("showOrderList",showData)
       return showData
     },
     // 列表特定参数
@@ -709,7 +711,9 @@ export default {
             font-weight: 400;
             color: rgba(243, 163, 145, 1);
             font-family: twCenMt;
-            margin-right: 50px;
+            // margin-right: 50px;
+            text-align: left;
+            margin-left: 88px;
           }
         }
         .dec{

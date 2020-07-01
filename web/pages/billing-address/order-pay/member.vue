@@ -1927,7 +1927,7 @@
     ></shopping-card>
   </div>
 
-  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR"></use-coupon>
+  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR" :currency="currency"></use-coupon>
 </div>
 </template>
 
@@ -2063,6 +2063,9 @@ export default {
       couponAlready: [],
       ifShowCoupon: false,
       productCount:'',
+      currency:{
+        currency:''
+      }
     }
   },
   computed: {
@@ -2123,12 +2126,17 @@ export default {
       })
   },
   mounted() {
-    console.log("platform",this.platform)
+    // console.log("platform",this.couponCodeR.couponId)
+    // console.log("platform",this.platform)
     // 
     // this.getAddress();
     this.language = this.getCookie('language')
   },
   methods: {
+    // setCoupon(){
+    //   console.log("platform",this.couponCodeR.couponId)
+    //   // console.log("platform",this.couponCodeR)
+    // },
     zhizhi(or){
       // console.log("纸质",or)
       this.invoice.is_electronic = or;
@@ -2926,7 +2934,7 @@ export default {
           this.orderTotalAmount = res.data.orderAmount;
           this.ultimatelyPay = res.data.payAmount;
           this.coinType = res.data.currency
-          this.currency = res.data.currency;
+          this.currency.currency = res.data.currency;
 
           this.couponAll = res.data.coupons;
           this.couponAlready = res.data.myCoupons;

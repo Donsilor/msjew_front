@@ -33,15 +33,16 @@
     <div class="payways" v-if="!isLogin">
       <div class="pay">
         <!-- <Header :title="lang2.pay" tips="1" /> -->
-        <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+        <!-- <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
           <div class="note"><span class="star">*</span> {{ lang2.Note3 }}</div>
           <span>{{ formatCoin(coin) }} </span>
           {{ formatMoney(productAmount) }}
           <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
-        </div>
-        <div v-else class="proce">
-          <span>{{ formatCoin(coin) }} </span>
-          {{ formatMoney( productAmount) }}
+        </div> -->
+        <div class="proce select-proce">
+          {{lang2.selectPayWays}}
+          <!-- <span>{{ formatCoin(coin) }} </span>
+          {{ formatMoney( productAmount) }} -->
         </div>
 		<!-- 大陆支付 -->
         <ul v-if="this.$store.state.platform == 21">
@@ -1151,9 +1152,10 @@ export default {
           })
 
           .then(res => {
-            console.log("费用",this.allFee)
             this.canSubmit = true
             this.allFee = res
+            this.coin = res.currency
+            // console.log("费用",this.allFee)
 
             if(res.cards !== undefined){
               this.useAmount = JSON.parse(JSON.stringify(res.cards))
@@ -2032,6 +2034,10 @@ export default {
     .price-hkd{
       color: rgba(242, 155, 135, 1);
     }
+  }
+  .select-proce{
+    font-size: 21px;
+    padding: 8px 0 20px;
   }
   ul {
     li {
