@@ -3567,17 +3567,15 @@ div {
     align-items: center;
     font-size: 16px;
     color: #666;
-    padding-left: 77px;
-    span {
-      display: block;
-    }
+    padding-left: 50px;
+    text-align: center;
     span:nth-child(1) {
-      width: 710px;
+      width: 818px;
+      text-align: left;
     }
-    span:nth-child(2) {
-      width: 70px;
-      margin-right: 110px;
-      text-align: center;
+    span:nth-child(2),
+    span:nth-child(3) {
+      width: 134px;
     }
   }
   .cart-goods {

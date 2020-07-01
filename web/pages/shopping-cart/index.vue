@@ -701,21 +701,24 @@ export default {
       color: #666;
       padding-left: 50px;
       box-sizing: border-box;
-      span {
-        display: block;
-      }
+      text-align: center;
+
       span:nth-child(1) {
-        width: 140+269+71+185+83px;
+        text-align: left;
+        width: 65%;
       }
       span:nth-child(2) {
-        width: 60+120px;
+        width: 11%;
       }
       span:nth-child(3) {
-        width: 207px;
+        width: 11%;
+      }
+      span:nth-child(4) {
+        width: 13%;
       }
     }
     .cart-goods {
-      width: 1300px;
+      width: 100%;
       position: relative;
       overflow: hidden;
       background: rgba(255, 255, 255, 1);
@@ -733,7 +736,6 @@ export default {
         }
       }
       .couple {
-        width: 1300px;
         height: 174 * 2+2px;
         display: flex;
         align-items: center;
@@ -745,7 +747,6 @@ export default {
         }
       }
       .customization {
-        width: 1300px;
         height: 282px;
         display: flex;
         align-items: center;

@@ -1,14 +1,14 @@
 <template>
   <div class="order-details">
     <div class="od-top">
-      <nuxt-link to="/account/orders"
-        ><div>
+      <nuxt-link to="/account/orders" class="crumbs">
+        <div>
           <span>{{ $t(`${lang}.title`) }}</span> >>
           {{ $t(`${lang}.orderTitle`) }}
-        </div></nuxt-link
-      >
-      <div>
-        <p v-for="(step, ns) in statusSteps" :key="ns">
+        </div>
+      </nuxt-link>
+      <div class="step-box">
+        <p v-for="(step, ns) in statusSteps" :key="ns" class="step-p" style="border: 1px solid red">
           <span
             :style="{
               'background-color': step.active
@@ -22,7 +22,8 @@
             >{{ step.title }}</span
           >
         </p>
-        <div
+
+        <!-- <div
           v-for="(step, index) in statusSteps"
           :key="index + 'what'"
           class="top-line"
@@ -38,7 +39,7 @@
             }"
             class="top-line-line"
           ></div>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -142,7 +143,7 @@
         <!-- 单品 -->
         <div v-if="data.details[0].categoryId !== 19 && data.details.length !== 2" class="detail-info single">
           <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
-            <nuxt-link :to="goToDetail(d)" target="_blank">
+            <nuxt-link :to="goToDetail(d)" target="_blank" class="t1-wrap">
               <div class="t1">
                 <div class="good-img">
                   <img :src="IMG_URL + d.goodsImages" />
@@ -167,7 +168,7 @@
         <!-- 对戒 -->
         <div v-if="data.details[0].categoryId == '19'" class="detail-info double">
           <div  class="goods-details">
-            <nuxt-link :to="goToDetail(data.details[0])" target="_blank">
+            <nuxt-link :to="goToDetail(data.details[0])" target="_blank" class="t1-wrap">
               <div class="t1">
                 <div class="good-img">
                   <img :src="IMG_URL + data.details[0].goodsImages" />
@@ -200,7 +201,7 @@
         <!-- 定制 -->
         <div v-if="data.details.length === 2" class="detail-info customization">
           <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
-            <nuxt-link :to="goToDetail(d)" target="_blank">
+            <nuxt-link :to="goToDetail(d)" target="_blank" class="t1-wrap">
               <div class="t1">
                 <div class="good-img">
                   <img :src="IMG_URL + d.goodsImages" />
@@ -662,7 +663,8 @@ export default {
       color: rgba(242, 155, 135, 1);
     }
     div:nth-child(2) {
-      width: 424+25+48+53+100px;
+      width: calc(100% - 226px);
+      margin-left: 40px;
       display: flex;
       justify-content: space-between;
       position: relative;
@@ -892,15 +894,16 @@ export default {
         display: flex;
         padding-left: 19px;
         .t1 {
-          width: 936-250.5-163.5-20px;
+          width: 60%;
         }
         .t2 {
           text-align: center;
-          width: 51+ (113/2)+56px;
+          width: 16%;
         }
         .t3 {
           text-align: center;
-          width: 56+ (113/2)+138px;
+          width: 22%;
+          margin-right: 2%;
         }
       }
       .single{
@@ -912,7 +915,7 @@ export default {
           border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
           .t1 {
-            width: 936-250.5-163.5-20px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -927,9 +930,10 @@ export default {
               }
             }
             .good-desc {
-              width: 936-250.5-163.5-20-70-20px;
+              width: calc(100% - 90px);
               height: 70px;
               color: #333;
+              margin-left: 20px;
               overflow: hidden;
               .good-name {
                 font-size: 16px;
@@ -965,16 +969,17 @@ export default {
           }
           .t2 {
             text-align: center;
-            width: 51+ (113/2)+56px;
+            width: 16%;
             color: #333;
             font-size: 16px;
           }
           .t3 {
             text-align: center;
-            width: 56+ (113/2)+138px;
+            width: 22%;
             color: #333;
             font-family: twCenMt;
             font-size: 20px;
+            margin-right: 2%;
           }
         }
       }
@@ -1028,7 +1033,7 @@ export default {
           align-items: center;
           position: relative;
           .t1 {
-            width: 936-250.5-163.5-20px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1082,16 +1087,17 @@ export default {
           }
           .t2 {
             text-align: center;
-            width: 51+ (113/2)+56px;
+            width: 16%;
             color: #333;
             font-size: 16px;
           }
           .t3 {
             text-align: center;
-            width: 56+ (113/2)+138px;
+            width: 22%;
             color: #333;
             font-family: twCenMt;
             font-size: 20px;
+            margin-right: 2%;
           }
         }
       }
@@ -1104,7 +1110,7 @@ export default {
           border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
           .t1 {
-            width: 936-250.5-163.5-20px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1157,16 +1163,17 @@ export default {
           }
           .t2 {
             text-align: center;
-            width: 51+ (113/2)+56px;
+            width: 16%;
             color: #333;
             font-size: 16px;
           }
           .t3 {
             text-align: center;
-            width: 56+ (113/2)+138px;
+            width: 22%;
             color: #333;
             font-family: twCenMt;
             font-size: 20px;
+            margin-right: 2%;
           }
         }
       }
@@ -1374,6 +1381,13 @@ export default {
       }
     }
   }
+}
+.step-p{
+  width: 120px;
+}
+
+.t1-wrap{
+  width: 60%;
 }
 
 .fontSize{
