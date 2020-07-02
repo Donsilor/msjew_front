@@ -45,34 +45,34 @@
           {{ formatMoney( productAmount) }} -->
         </div>
 		<!-- 大陆支付 -->
-        <ul v-if="this.$store.state.platform == 21">
-          <li v-for="(item, index) in list2" :key="index">
-            <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
-            <div>
-              <img :src="item.url" />
-              <div class="right">
-                <span
-                  class="icon iconfont"
-                  :class="typeIndex === index ? 'icongou' : ''"
-                  @click="changeType(index)"
-                ></span>
-                <b
-                  >{{ item.title }}
-                  <span
-                    v-if="item.type == ''"
-                    class="ph"
-                    @click="needtips = !needtips"
-                    >?</span
-                  >
-                </b>
+    <ul v-if="this.$store.state.platform == 21">
+      <li v-for="(item, index) in list2" :key="index">
+        <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
+        <div>
+          <img :src="item.url" />
+          <div class="right">
+            <span
+              class="icon iconfont"
+              :class="typeIndex === index ? 'icongou' : ''"
+              @click="changeType(index)"
+            ></span>
+            <b
+              >{{ item.title }}
+              <span
+                v-if="item.type == ''"
+                class="ph"
+                @click="needtips = !needtips"
+                >?</span
+              >
+            </b>
 
-                <p>{{ item.des }}</p>
-                <p v-if="item.des2">{{ item.des2 }}</p>
-                <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p> 
-              </div>
-            </div>
-          </li>
-        </ul>
+            <p>{{ item.des }}</p>
+            <p v-if="item.des2">{{ item.des2 }}</p>
+            <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p> 
+          </div>
+        </div>
+      </li>
+    </ul>
 		<!-- 香港支付 -->
 		<ul v-if="this.$store.state.platform == 11">
 		  <li v-for="(item, index) in listHK" :key="index">
@@ -103,34 +103,34 @@
 		  </li>
 		</ul>
 		<!-- 美国支付 -->
-        <ul v-if="this.$store.state.platform == 31">
-          <li v-for="(item, index) in listUs" :key="index">
-            <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
-            <div>
-              <img :src="item.url" />
-              <div class="right">
-                <span
-                  class="icon iconfont"
-                  :class="typeIndex === index ? 'icongou' : ''"
-                  @click="changeType(index)"
-                ></span>
-                <b
-                  >{{ item.title }}
-                  <span
-                    v-if="item.type == ''"
-                    class="ph"
-                    @click="needtips = !needtips"
-                    >?</span
-                  >
-                </b>
+    <ul v-if="this.$store.state.platform == 31">
+      <li v-for="(item, index) in listUs" :key="index">
+        <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
+        <div>
+          <img :src="item.url" />
+          <div class="right">
+            <span
+              class="icon iconfont"
+              :class="typeIndex === index ? 'icongou' : ''"
+              @click="changeType(index)"
+            ></span>
+            <b
+              >{{ item.title }}
+              <span
+                v-if="item.type == ''"
+                class="ph"
+                @click="needtips = !needtips"
+                >?</span
+              >
+            </b>
 
-                <p>{{ item.des }}</p>
-                <p v-if="item.des2">{{ item.des2 }}</p>
-                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p> 
-              </div>
-            </div>
-          </li>
-        </ul>
+            <p>{{ item.des }}</p>
+            <p v-if="item.des2">{{ item.des2 }}</p>
+            <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p> 
+          </div>
+        </div>
+      </li>
+    </ul>
         <!-- <div class="tips">
           <i class="icon iconfont icongantanhao1"></i><span>{{ lang2.tips }}</span>
         </div> -->
@@ -266,17 +266,18 @@
             <span>{{ lang.cupon }}</span
             ><span>{{ cuponName }}</span>
           </li> -->
+          
+          <li>
+            <span>{{ lang.itemsNum }}：</span> 
+            <span>{{ amount }}</span>
+          </li>
+
           <li>
             <span>{{ lang.allFee }} </span
             ><span
               >{{ formatCoin(coin) }}
               {{ formatMoney( productAmount) }}</span
             >
-          </li>
-
-          <li>
-            <span>{{ lang.itemsNum }}：</span>
-            <span>{{ amount }}</span>
           </li>
 
           <!-- 优惠码 -->

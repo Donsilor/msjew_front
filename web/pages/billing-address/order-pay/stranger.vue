@@ -984,13 +984,7 @@
               </div>
             </div>
 
-            <!-- 折扣金额 -->
-            <div v-show="tex.discount_amount" class="detail-line">
-              <div>{{$t(`${lang}.discountPrice`)}}</div>
-              <div class="hkd color-pink">
-                <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
-              </div>
-            </div>
+            
 
             <!-- <div v-show="makeGay" class="detail-line">
               <div>
@@ -1049,7 +1043,22 @@
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
+                {{ formatCoin(tex.coinType) }} {{ formatMoney(goodsPrice) }}
+              </div>
+            </div>
+            <!-- 折扣金额 -->
+            <div v-show="tex.discount_amount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
+              </div>
+            </div>
+            <div class="detail-line">
+              <div class="font-size-16 color-333">{{ $t(`${lang3}.NeedPay`) }}</div>
+              <div class="hkd color-pink price-big">
+                {{ formatCoin(tex.coinType) }}
+                {{ formatMoney(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
               </div>
             </div>
           </div>

@@ -75,7 +75,7 @@
           return {}
         }
       },
-      currency:{
+      coinTypes:{
         type: Object,
         required: false,
         default () {
@@ -97,7 +97,7 @@
     mounted() {
       // console.log("dss",this.currency.currency)
       this.language = this.getCookie('language')
-      this.coin = this.currency.currency
+      this.coin = this.coinTypes.coin
 
       var i=0;
       for(var j in this.couponAll){

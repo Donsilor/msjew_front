@@ -198,6 +198,17 @@ export default {
         '--'
       )
     },
+    showPrice2() {
+      // console.log("this.goodInfo",this.goodInfo)
+      if (!this.$helpers) {
+        return this.goodInfo.coupon.discount.price || '--'
+      }
+      return (
+        // this.$helpers.mathAdd(this.firstRingPrize, this.secondRingPrize) ||
+        this.goodInfo.coupon.discount.price ||
+        '--'
+      )
+    },
     goodsServicesJsons() {
       const result = []
       // const names = []
@@ -519,12 +530,14 @@ export default {
       // console.log("goodinfo",this.goodInfo.details)
       this.goodInfo.details.map((item, i) => {
         if(ladyRing == item.ladyRing && menRing == item.menRing || menRing == item.ladyRing && ladyRing == item.menRing) {
+          console.log("item",item)
           _this.coupleLadyId = item.ladyRing
           _this.coupleMenId = item.menRing
           _this.goodsId = item.id
           _this.styleId = item.goodsId
           _this.categoryId = item.categoryId
           _this.goodInfo.salePrice = item.retailMallPrice
+          _this.goodInfo.coupon.discount.price = item.coupon.discount.price
           _this.stock = item.stock
         }
       })

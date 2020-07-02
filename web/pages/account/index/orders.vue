@@ -62,7 +62,7 @@
           </div>
           <div v-for="(detail, n) in o.details" :key="n">
             <!-- 单品 -->
-            <div v-if="proCategoryId !== 19 && (detail.ring == ''|| !detail.ring)" class="single">
+            <div v-if="detail.categoryId !== 19 && o.details.length !== 2 && (detail.ring == ''|| !detail.ring)" class="single">
               <div   class="list-body">
                 <div class="left">
                   <nuxt-link :to="goDetails(detail)"
@@ -131,8 +131,8 @@
                 <span>1</span>
               </div>
               <div class="price">
-                <span :class="{'old-price': couponType(o.details[0].couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(o.details[0].goodsPrice) }}</span>
-                <span>{{ formatCoin(o.coinCode) }} {{ couponType(o.details[0].couponInfo) == 2 ? formatMoney(o.details[0].goodsPayPrice) : formatMoney(o.details[0].goodsPrice) }}</span>
+                <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
               </div>
             </div>
             <!-- 定制 -->

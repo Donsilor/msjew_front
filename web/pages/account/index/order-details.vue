@@ -142,7 +142,7 @@
         </div>
         <div v-for="(detail, _index) in data.details" :key="_index">
           <!-- 单品 -->
-          <div v-if="proCategoryId !== 19 && data.details.length !== 2  && (detail.ring == ''|| !detail.ring)" class="detail-info single">
+          <div v-if="detail.categoryId !== 19 && data.details.length !== 2 && (detail.ring == ''|| !detail.ring)" class="detail-info single">
             <div class="goods-details">
               <nuxt-link :to="goToDetail(detail)" target="_blank">
                 <div class="t1">
@@ -170,7 +170,7 @@
             </div>
           </div>
           <!-- 对戒 -->
-          <div v-if="detail.categoryId == '19'" class="detail-info double">
+          <div v-if="detail.categoryId === 19" class="detail-info double">
             <div  class="goods-details">
               <nuxt-link :to="goToDetail(detail)" target="_blank">
                 <div class="t1">
