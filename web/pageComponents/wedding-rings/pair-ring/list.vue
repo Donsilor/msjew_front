@@ -193,20 +193,22 @@
               </div>
             </nuxt-link>
             <div class="product-info">
-              <div class="product-price" v-if="couponType(item.coupon) !== 'discount'">
-                <span class="coin">{{ formatCoin(item.coinType) }}</span>
-                <span class="price">{{ formatNumber(item.salePrice) }}</span>
-              </div>
-
-              <!-- 折扣 -->
-              <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
-                <div>
+              <div  class="product-price">
+                <div v-if="couponType(item.coupon) !== 'discount'">
                   <span class="coin">{{ formatCoin(item.coinType) }}</span>
                   <span class="price">{{ formatNumber(item.salePrice) }}</span>
                 </div>
-                <div>
-                  <span class="coin">{{ formatCoin(item.coinType) }}</span>
-                  <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+
+                <!-- 折扣 -->
+                <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                  <div>
+                    <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                    <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                  </div>
+                  <div>
+                    <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                    <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                  </div>
                 </div>
               </div>
 

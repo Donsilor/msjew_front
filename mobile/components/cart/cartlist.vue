@@ -458,14 +458,32 @@ export default {
             }
           }
           .double{
+            .discount-price{
+               margin-top: 10px;
+            }
+            .old-price{
+              margin-left: 90px;
+              text-align: left;
+            }
+            // b{
+            //   font-size: 17px;
+            //   line-height: 20px;
+            //   font-weight: 400;
+            //   color: rgba(243, 163, 145, 1);
+            //   font-family: twCenMt;
+            //   margin-left: 15px;
+            // }
             b {
+              width: 60%;
+              text-align: left;
               font-size: 17px;
               line-height: 20px;
               font-weight: 400;
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
               display: inline-block;
-              margin-top: 10px;
+              // margin-top: 10px;
+              margin-left: 89px;
             }
             .right {
               margin-left: 90px;

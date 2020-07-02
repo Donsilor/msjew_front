@@ -30,8 +30,8 @@
       </div>
 
       <div class="discount-price" v-else>
-        <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
-        <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showP2) }}</div>
+        <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPrice) }}</div>
+        <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPrice2) }}</div>
       </div>
       <div class="promise-box">
         <div
@@ -200,7 +200,7 @@
       <div class="details-title">
         {{ lang.goodsDetail }}
       </div>
-      <div class="details-sku">{{ lang.goods }}ID：{{ goodInfo.ringCode }}</div>
+      <div class="details-sku">{{ lang.goods }}ID：{{ goodInfo.goodsCode }}</div>
       <div class="base-info">
         <div class="details-title">
           {{ firstRing.userSexText }}

@@ -606,7 +606,7 @@
           </div> -->
         </div>
 
-        <div class="product-price">
+        <div class="product-price" v-if="!info.coupon.discount">
           <span class="coin">
             {{ formatCoin(info.coinType) }}
           </span>
@@ -961,6 +961,9 @@ export default {
   mounted() {
     console.log("info",this.firstRing,this.secondRing)
     const _this = this
+    if(this.info.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
+    }
     _this.$nextTick(() => {})
 		
 	this.magnifying = this.thumbnails[0]

@@ -131,8 +131,7 @@
       </div>
 
 		<!-- 原金额 -->
-		<!-- <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount' || couponType(g.data[0].coupon) == 'money'}"> -->
-		<div class="good-price">
+		<div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount' || couponType(g.data[0].coupon) == 'money'}">
 		  {{ formatCoin(g.coinType) }}
 		  {{
 			formatNumber(
@@ -143,13 +142,23 @@
 
 		<!-- 优惠后金额 -->
 		<div class="good-price">
-			{{ formatCoin(g.coinType) }}
-			{{
-			  formatNumber(
-				g.price
-			  )
-			}}
-		</div>
+        <span v-if="couponType(g.data[0].coupon) == 'discount'">
+          {{ formatCoin(g.coinType) }}
+          {{
+            formatNumber(
+              g.data[0].coupon.discount.price
+            )
+          }}
+        </span>
+        <span  v-if="couponType(g.data[0].coupon) !== 'discount'">
+          {{ formatCoin(g.coinType) }}
+          {{
+            formatNumber(
+              g.price
+            )
+          }}
+        </span>
+      </div>
 
 
       <!-- <div
@@ -191,6 +200,7 @@ export default {
   data() {
     return{
       lang,
+      language: this.$store.state.language
     }
   },
   name: 'Double',

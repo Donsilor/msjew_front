@@ -1927,7 +1927,7 @@
     ></shopping-card>
   </div>
 
-  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR" :currency="currency"></use-coupon>
+  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR" :coinTypes="coin"></use-coupon>
 </div>
 </template>
 
@@ -2063,8 +2063,8 @@ export default {
       couponAlready: [],
       ifShowCoupon: false,
       productCount:'',
-      currency:{
-        currency:''
+      coinTypes:{
+        coin:''
       }
     }
   },
@@ -2934,7 +2934,8 @@ export default {
           this.orderTotalAmount = res.data.orderAmount;
           this.ultimatelyPay = res.data.payAmount;
           this.coinType = res.data.currency
-          this.currency.currency = res.data.currency;
+          this.coinTypes.coin = res.data.currency;
+          this.currency = res.data.currency
 
           this.couponAll = res.data.coupons;
           this.couponAlready = res.data.myCoupons;

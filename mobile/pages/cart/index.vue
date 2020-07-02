@@ -703,7 +703,8 @@ export default {
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
-          // console.log("dddd",item)
+          console.log("dddd",item)
+          this.coin = item.simpleGoodsEntity.coinType
           const o = {
             isSelect: false,
             goodsImages: item.simpleGoodsEntity.goodsImages,
@@ -1025,6 +1026,18 @@ export default {
             }
           }
           .double{
+            .old-price{
+              margin-left: 140px;
+              text-align: left;
+            }
+            b{
+              font-size: 17px;
+              line-height: 20px;
+              font-weight: 400;
+              color: rgba(243, 163, 145, 1);
+              font-family: twCenMt;
+              margin-left: 15px;
+            }
             .double-ring-price{
               font-size: 17px;
               line-height: 20px;
@@ -1045,15 +1058,25 @@ export default {
               margin-left: 136px;
             }
             h4 {
-              // display: inline-block;
-              max-height: 40px;
-              font-size: 14px;
-              line-height: 20px;
-              font-family: PingFangHK-Regular;
-              font-weight: 400;
-              color: rgba(51, 51, 51, 1);
+              display: inline-block;
+              width: 60%;
               text-align: left;
-              padding-left: 15px;
+              padding-left: 10px;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+                // margin-right: 100px;
+              // max-height: 40px;
+              // font-size: 14px;
+              // line-height: 20px;
+              // font-family: PingFangHK-Regular;
+              // font-weight: 400;
+              // color: rgba(51, 51, 51, 1);
+              // text-align: left;
+              // padding-left: 15px;
             }
             p {
               font-size: 13px;

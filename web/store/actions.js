@@ -731,17 +731,18 @@ export default {
         let sendData = []
         data.forEach(item => {
             let goods = item.data
-            // console.log('goods----------->', item)
+            console.log('goods----------->', item)
             goods = goods.map(good => {
                 good.updateTime = item.id
                 good.createTime = item.id
                 good.goods_id = good.goodsDetailsId
+                good.group_id = item.id
                 return good
             })
             sendData = sendData.concat(goods)
         })
 
-        //console.log('sendData===========>', sendData)
+        console.log('sendData===========>', sendData)
 
         return this.$axios({
             method: 'post',
