@@ -170,7 +170,7 @@
             </div>
           </div>
           <!-- 对戒 -->
-          <div v-else-if="detail.categoryId === 19" class="detail-info double">
+          <div v-else-if="detail.categoryId === 19 && detail.ring !== ''" class="detail-info double">
             <div  class="goods-details">
               <nuxt-link :to="goToDetail(detail)" target="_blank">
                 <div class="t1">
