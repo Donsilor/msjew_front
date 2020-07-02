@@ -691,6 +691,15 @@ export default {
       }
       .double{
         position: relative;
+        .old-price{
+          margin-left: 90px;
+          text-align: left;
+          color: #b2b2b2;
+          text-decoration: line-through;
+          margin-bottom: 0.053333rem;
+          font-size: 0.32rem;
+          margin-top: 0.266667rem;
+        }
         .num{
           position: absolute;
           right:0px;
@@ -707,13 +716,15 @@ export default {
           // right:145px;
           margin-top: 10px;
           b {
+            display: inline-block; 
+            width: 45%;
             font-size: 17px;
             font-weight: 400;
             color: rgba(243, 163, 145, 1);
             font-family: twCenMt;
             // margin-right: 50px;
             text-align: left;
-            margin-left: 88px;
+            // margin-left: 88px;
           }
         }
         .dec{

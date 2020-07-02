@@ -959,7 +959,7 @@ export default {
     }
   },
   mounted() {
-    console.log("info",this.firstRing,this.secondRing)
+    console.log("info",this.info)
     const _this = this
     if(this.info.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
@@ -1067,12 +1067,14 @@ export default {
         
       this.info.details.map((item, i) => {
         if(ladyRing==item.ladyRing && menRing==item.menRing || menRing==item.ladyRing && ladyRing==item.menRing) {
+          console.log("dddd",item)
           _this.coupleLadyId = item.ladyRing
           _this.coupleMenId = item.menRing
           _this.goodsId = item.id
           _this.styleId = item.goodsId
           _this.categoryId = item.categoryId
           _this.info.salePrice = item.retailMallPrice
+          _this.info.coupon.discount.price = item.coupon.discount.price
           _this.stock = item.stock
           return;
         }
