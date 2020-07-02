@@ -62,7 +62,7 @@
           </div>
           <div v-for="(detail, n) in o.details" :key="n">
             <!-- 单品 -->
-            <div v-if="detail.categoryId !== 19 && o.details.length !== 2 && (detail.ring == ''|| !detail.ring)" class="single">
+            <div v-if="detail.categoryId !== 19  && (detail.ring == ''|| !detail.ring)" class="single">
               <div   class="list-body">
                 <div class="left">
                   <nuxt-link :to="goDetails(detail)"
@@ -92,7 +92,7 @@
               </div>
             </div>
             <!-- 对戒 -->
-            <div v-if="detail.categoryId === 19 && o.details.length !== 2" class="double">
+            <div v-else-if="detail.categoryId === 19 && detail.ring !== ''" class="double">
               <div class="left">
                 <nuxt-link :to="goDetails(detail)"
                   target="_blank"><img :src="IMG_URL + detail.goodsImages"
@@ -136,7 +136,7 @@
               </div>
             </div>
             <!-- 定制 -->
-            <div v-if="o.details.length == 2" class="single customization">
+            <div v-else class="single customization">
               <div  class="list-body">
                 <div class="left">
                   <nuxt-link :to="goDetails(detail)"
