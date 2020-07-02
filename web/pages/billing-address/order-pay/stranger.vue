@@ -1507,10 +1507,6 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> develop
               <!-- 大陆支付宝 -->
               <div
                 v-show="this.$store.state.platform == 20"
