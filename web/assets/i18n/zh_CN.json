@@ -963,7 +963,7 @@
             "wireTransferGuide": "电汇指引",
             "orderPrice": "订单总额",
             "ultimatelyPay": "实付金额",
-            "NeedPay": "需付金額",
+            "NeedPay": "需付金额",
             "confirmReceipt": "確認收貨",
             "toEvaluate": "去评价",
             "checkEvaluate": "查看評價",
@@ -1086,7 +1086,7 @@
         "cleanInvalidBaby": "清除失效商品",
         "checked": "件数",
         "total": "商品总额",
-        "freeExpress": "合計",
+        "freeExpress": "合计",
         "Settlement": "结算",
         "msgTitle1": "提示：",
         "msgContent1": "请选择要结算的商品！",
@@ -2360,7 +2360,7 @@
                 "gia1": "GIA 钻石鉴定证书",
                 "gia2": "GIA 钻石鉴定精简版证书",
                 "gia3": "BDD Co.鉴定",
-                "mail1": "若未能检视其证书，可透过电邮",
+                "mail1": "若未能检视其证书，可通过电邮",
                 "mail2": "联络我们"
             },
             "maintenance": {
@@ -2558,7 +2558,7 @@
         "hint5": "请输入正确的邮箱",
         "shoppingCard": "购物卡",
         "ultimatelyPay": "实付金额",
-        "NeedPay": "需付金額",
+        "NeedPay": "需付金额",
         "submitSuccessfully": "订单提交成功!",
         "PleaseLogin": "请先登录，才能使用购物卡！"
     },
