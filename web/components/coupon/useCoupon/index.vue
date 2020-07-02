@@ -95,7 +95,7 @@
       }
     },
     mounted() {
-      // console.log("dss",this.currency.currency)
+      console.log("dss",this.coinTypes.coin)
       this.language = this.getCookie('language')
       this.coin = this.coinTypes.coin
 

@@ -622,7 +622,7 @@ export default {
     // 获取本地local列表
     getLocalCart() {
       this.$store.dispatch('getLocalCart').then(res => {
-        console.log("djkashdkasjdklasj",res)
+        // console.log("djkashdkasjdklasj",res)
         if (res.length > 0) {
           this.noListData = false
           this.cartList = []
@@ -653,7 +653,7 @@ export default {
                 group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
-              console.log("ooooo>>>",val)
+              // console.log("ooooo>>>",val)
               this.cartList.push(o)
             })
           })
@@ -703,7 +703,7 @@ export default {
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
-          console.log("dddd",item)
+          // console.log("dddd",item)
           this.coin = item.simpleGoodsEntity.coinType
           const o = {
             isSelect: false,
@@ -796,7 +796,7 @@ export default {
       // console.log("itemdetail",item)
       // 去定制详情
       if (item.groupType === 2) {
-      console.log("去定制详情",item,this.list)
+      // console.log("去定制详情",item,this.list)
         const ct1 = this.isLogin ? item.id : item.localSn
         const ct2 = this.isLogin
           ? this.list[index + 1].id
@@ -890,7 +890,7 @@ export default {
           }
         ]
       }
-      console.log("obj",obj,gs2)
+      // console.log("obj",obj,gs2)
       this.$router.push({
         name: `custom-made-${this.switchName(ct1)}-made-${this.switchName(
           ct2

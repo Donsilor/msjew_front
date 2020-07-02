@@ -690,7 +690,7 @@
         "discounts2": "折",
         "discountsActive": "优惠活动",
         "getCoupon": "获取优惠券",
-        "activityTime": "活动时间"
+        "activityTime": "活動截止時間"
     },
     "pairRingsList": {
         "style": "款式",
@@ -1289,7 +1289,7 @@
         "discounts2": "折",
         "discountsActive": "優惠活動",
         "getCoupon": "獲取優惠券",
-        "activityTime": "活動時間",
+        "activityTime": "活動截止時間",
         "oddPrice": "原  價",
         "newPrice": "折後價",
         "needLogin": "請先登錄，才能領取優惠券"
@@ -2634,7 +2634,7 @@
     "coupon": {
         "title": "優惠券卡包",
         "limit1": "滿 ",
-        "limit2": " 元使用",
+        "limit2": " 使用",
         "limit3": "限 ",
         "limit4": " 使用",
         "use": "點擊使用",

@@ -1927,7 +1927,7 @@
     ></shopping-card>
   </div>
 
-  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR" :coinTypes="coin"></use-coupon>
+  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR" :coinTypes="coinTypes"></use-coupon>
 </div>
 </template>
 

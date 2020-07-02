@@ -686,7 +686,7 @@
         "discounts2": "off",
         "discountsActive": "优惠活动",
         "getCoupon": "获取优惠券",
-        "activityTime": "Promotion period"
+        "activityTime": "Sales end on"
     },
     "pairRingsList": {
         "style": "Style",
@@ -1285,7 +1285,7 @@
         "discounts2": "off",
         "discountsActive": "Discount Promotion",
         "getCoupon": "Get coupon",
-        "activityTime": "Promotion period",
+        "activityTime": "Sales end on",
         "oddPrice": "Original price",
         "newPrice": "Discount price",
         "needLogin": "Please login before redeem the coupon. "
