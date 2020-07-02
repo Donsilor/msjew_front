@@ -60,8 +60,12 @@
           </div>
 
           <!-- 优惠券 -->
-          <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'money'">
+          <div class="info-title ow-h2" v-else-if="couponType(each.coupon) == 'money'">
             <span class="discount-b-icon2">￥</span>
+            {{ each.goodsName }}
+          </div>
+
+          <div v-else class="info-title ow-h2">
             {{ each.goodsName }}
           </div>
 
