@@ -230,8 +230,8 @@
         	</div>
 
         	<div class="discount-price">
-        		<span class="old-price">{{ formatCoin(info.coinType) }} {{ formatNumber(this.info.salePrice) }}</span>
-        		<span class="new-price">{{ formatCoin(info.coinType) }} {{ formatNumber(this.info.coupon.discount.price) }}</span>
+        		<span class="old-price">{{ formatCoin(info.coinType) }} {{ formatNumber(price) }}</span>
+        		<span class="new-price">{{ formatCoin(info.coinType) }} {{ formatNumber(price2) }}</span>
         	</div>
         </div>
 
@@ -508,6 +508,18 @@ export default {
       }
       return result
     },
+    price2() {
+      const _this = this
+      const info = _this.info || {}
+      let result = info.coupon.discount.price
+      if (_this.simpleDetail) {
+        // console.log('相加')
+        result = _this.simpleDetail.coupon.discount.price
+      } else {
+        // console.log('不相加')
+      }
+      return result
+    },
     simpleDetail() {
       const _this = this
       const productInfo = _this.productInfo
@@ -536,6 +548,7 @@ export default {
           break
         }
       }
+      console.log("result",result)
       return result
     }
   },
@@ -545,6 +558,7 @@ export default {
     }
   },
   mounted() {
+    console.log("ddddd",this.info)
     const _this = this
     if(this.info.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
