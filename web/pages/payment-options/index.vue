@@ -406,6 +406,8 @@ export default {
     let element = document.querySelector('.el-upload ')
     // console.log("44444",this.fileList)
     this.getAccount()
+
+    fbq('track', 'InitiateCheckout');
     // if(this.dialogImageUrl.length == 1){
     //   console.log("44444")
     //   element.style.display = 'none'

@@ -66,13 +66,13 @@
               >
             </b>
 
-            <p>{{ item.des }}</p>
-            <p v-if="item.des2">{{ item.des2 }}</p>
-            <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p> 
-          </div>
-        </div>
-      </li>
-    </ul>
+                <p>{{ item.des }}</p>
+                <p v-if="item.des2">{{ item.des2 }}</p>
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
+              </div>
+            </div>
+          </li>
+        </ul>
 		<!-- 香港支付 -->
 		<ul v-if="this.$store.state.platform == 11">
 		  <li v-for="(item, index) in listHK" :key="index">
@@ -124,13 +124,13 @@
               >
             </b>
 
-            <p>{{ item.des }}</p>
-            <p v-if="item.des2">{{ item.des2 }}</p>
-            <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p> 
-          </div>
-        </div>
-      </li>
-    </ul>
+                <p>{{ item.des }}</p>
+                <p v-if="item.des2">{{ item.des2 }}</p>
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
+              </div>
+            </div>
+          </li>
+        </ul>
         <!-- <div class="tips">
           <i class="icon iconfont icongantanhao1"></i><span>{{ lang2.tips }}</span>
         </div> -->
@@ -425,7 +425,7 @@ export default {
       lang: this.LANGUAGE.cart.sureOrder,
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
-      coin: this.$store.state.coin, 
+      coin: this.$store.state.coin,
       form: [],
       actionLink: '',
       // 大陆支付
@@ -691,6 +691,8 @@ export default {
 
       this.getData() // 获取地址
       // this.getCouponList() // 获取优惠券列表
+
+      fbq('track', 'InitiateCheckout');
 
       // 此为迫不得已而为之，不敢改动上一手的代码
       setTimeout(() => {
@@ -1301,7 +1303,7 @@ export default {
           this.$nuxt.$loading.finish()
           return
         }
-        
+
         if(this.address.platforms.indexOf(this.platform) === -1){
           this.$toast.show(this.lang.toast5)
           const topC = document.getElementsByClassName('layout-main')[0];
@@ -1314,7 +1316,7 @@ export default {
             }
           }, 22)
           this.$nuxt.$loading.finish()
-          return 
+          return
         }
       }
       // if (!Email.test(this.mailbox)) {
@@ -1557,7 +1559,6 @@ export default {
     }
     next()
   }
-
 }
 </script>
 

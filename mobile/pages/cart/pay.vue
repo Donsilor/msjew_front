@@ -447,6 +447,9 @@ export default {
     showSelect() {
       // console.log('6767')
     }
+  },
+  mounted() {
+    fbq('track', 'InitiateCheckout');
   }
 }
 </script>
