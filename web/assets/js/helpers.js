@@ -3,7 +3,7 @@ import CryptoJs from 'crypto-js'
 class Helpers {
   // 测试功能
   test(str) {
-    console.log(`This is a helpers's test ===> ${str}`)
+    // console.log(`This is a helpers's test ===> ${str}`)
   }
 
   // post请求json转换 type为true时，过滤空元素，反之不过滤
@@ -190,6 +190,7 @@ class Helpers {
    * return	格式化後的數值字符串
    */
   formatMoney(num, type) {
+    
     if (!num) {
       return '0.00'
     }
@@ -201,6 +202,123 @@ class Helpers {
     num = num.replace(/,(\d\d)$/, '.$1')
     if (type === 0 && num.split('.')[1] === '00') num = num.split('.')[0]
     return num
+  }
+
+  // 折扣换算
+  discountConversion(num){
+    num = num/10
+    return num
+  }
+
+  // 英文折扣换算
+  discountUs(num){
+    num = 100 -(num)
+    return num
+  }
+
+  // 判断折扣、优惠券对象是否为空
+  couponType(a){
+    var result;
+    if(!a){
+      result = false
+    }else{
+      if(a.hasOwnProperty('discount')){
+        result = 'discount'
+      }else if(a.hasOwnProperty('money')){
+        result = 'money'
+      }else{
+        result = ''
+      }
+    }
+
+    return result
+  }
+
+  // getTime时间转换
+  changeTime(timestamp){
+    var date = new Date(timestamp * 1000),
+    Y = date.getFullYear(),
+    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1),
+    D = date.getDate(),
+    h = date.getHours() + ':',
+    m = date.getMinutes() + ':',
+    s = date.getSeconds();
+
+    return Y+'.'+M+'.'+D
+  }
+
+  // 获取cookie
+  getCookie(cname) {
+    const name = cname + '='
+    const ca = document.cookie.split(';')
+    for (let i = 0; i < ca.length; i++) {
+      const c = ca[i].trim()
+      if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+    }
+    return ''
+  }
+
+  // floatAdd(a, b) {
+  //   a = a + '';
+  //   b = b + '';
+
+  //   var c = a.split('.')[0],
+  //       d = a.split('.')[1],
+  //       e = b.split('.')[0],
+  //       f = b.split('.')[1],
+  //       res = 0;
+
+  //   if(!d){
+  //     d = '0'
+  //   }
+  //   if(!f){
+  //     f = '0'
+  //   }
+
+  //   var len1 = d.length,
+  //       len2 = f.length;
+
+  //   var k;
+  //   if(len1 > len2){
+  //     k = len1
+  //   }else{
+  //     k = len2
+  //   }
+
+  //   res = (a*Math.pow(10,k)+b*Math.pow(10,k))/(Math.pow(10,k))
+
+  //   // console.log(999,res)
+
+  // }
+
+  floatAdd(a, b) {
+      var c, d, e;
+      try {
+          c = a.toString().split(".")[1].length;
+      } catch (f) {
+          c = 0;
+      }
+      try {
+          d = b.toString().split(".")[1].length;
+      } catch (f) {
+          d = 0;
+      }
+      return e = Math.pow(10, Math.max(c, d)), (a * e + b * e) / e;
+  }
+
+  floatSub(a, b) {
+      var c, d, e;
+      try {
+          c = a.toString().split(".")[1].length;
+      } catch (f) {
+          c = 0;
+      }
+      try {
+          d = b.toString().split(".")[1].length;
+      } catch (f) {
+          d = 0;
+      }
+      return e = Math.pow(10, Math.max(c, d)), (a * e - b * e) / e;
   }
 }
 

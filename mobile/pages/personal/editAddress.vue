@@ -542,7 +542,6 @@ export default {
           }
         })
         .then(res => {
-          // console.log(11111,res);
           if(res.length == 0){
             _this.cityList = []
             this.cityId = 0
@@ -612,7 +611,6 @@ export default {
       this.getListThree()
     },
     showCity() {
-      console.log("99999",this.cityList.length)
       this.cityId = ''
 
       if(this.cityList.length == 0){
@@ -622,7 +620,6 @@ export default {
         this.city = this.lang.city
       }
       if (!this.provinceId) {
-        console.log("66666")
         this.$toast.show(this.lang.province2)
         return
       }
@@ -732,7 +729,6 @@ export default {
           if ((val === 7 || val === 0) && !RegMobile.test(this.phone) ) {
             this.phoneText = this.lang.phoneText2
             this.phoneTrue = true
-          console.log(11111)
             return
           }
         }

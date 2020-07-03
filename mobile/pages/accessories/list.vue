@@ -74,7 +74,7 @@ export default {
           content: this.LANGUAGE.listCommons.sliders[8],
           cod: this.CONDITION_INFO.quality.bracelet
         },
-        
+
       ],
       actIndex: -1
     }
@@ -90,7 +90,6 @@ export default {
       }
     })
       .then(data => {
-        // console.log(444444,data)
         return {
           seoInfo,
           ad: data.advert,
@@ -112,7 +111,7 @@ export default {
     if (typeof this.$route.query.actIndex !== 'undefined') {
       this.actIndex = parseFloat(this.$route.query.actIndex)
     }
-    
+
   },
   watch: {
     $route(to, from){

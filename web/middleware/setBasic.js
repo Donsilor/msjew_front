@@ -39,12 +39,12 @@ export default function (content) {
             resetCookie.push(`areaId=${areaId}; Path=/; expires=${expires}`)
             store.commit('setAreaId', areaId)
         }
-
+      
         if (lastUrl) {
             resetCookie.push(`lastUrl=${lastUrl}; Path=/; expires=${expires}`)
             store.commit('setLastUrl', lastUrl)
         }
-        console.log('setBasic req====>', resetCookie)
+        // console.log('setBasic req====>', resetCookie)
         res.setHeader('Set-Cookie', resetCookie)
     }
 }

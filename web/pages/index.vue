@@ -1,8 +1,8 @@
 <template>
   <div class="page">
     <section class="banner">
-      <el-carousel trigger="click" :autoplay="true" :height="bannerHeig + 'px'">
-        <el-carousel-item v-for="(item, index) in ad" :key="index">
+      <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
+        <el-carousel-item v-for="(item, index) in banner" :key="index">
           <a :href="item.addres || ''">
             <img class="banner-img" :src="item.image" alt="">
           </a>

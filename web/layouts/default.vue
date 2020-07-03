@@ -3,9 +3,11 @@
     <div class="layout-header">
       <top-bar ref="top-bar"></top-bar>
     </div>
+    
     <div class="layout-page-content">
       <nuxt />
     </div>
+    
     <div class="layout-footer">
       <footer-bar></footer-bar>
     </div>
@@ -23,7 +25,7 @@
     // provide () {
     //   return {
     //     reload: this.reload,
-      
+
     //   }
     // },
     data() {
@@ -44,7 +46,7 @@
       // reload () {
       //   this.isRouterAlive = false
       //   this.$nextTick(function () {
-        
+
       //     this.isRouterAlive = true
       //   })
       // },
@@ -110,6 +112,6 @@
 </style>
 <style>
 .el-message{
-    top:250px!important;  
+    top:250px!important;
 }
 </style>

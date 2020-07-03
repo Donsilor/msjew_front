@@ -62,6 +62,7 @@ export default {
   },
   methods: {
     judgeStep(index) {
+      return
       const l = this.boardArr.length
       switch (index) {
         case 1:
@@ -87,6 +88,7 @@ export default {
               this.boardDesc = this.boardArr[1]
             }, 0)
           }
+          console.log(this.boardArr[1])
           break
         case 3:
           // console.log(this.$route.query.melo)
@@ -121,7 +123,6 @@ export default {
           2
         )
       } else {
-        console.log(1111)
       }
       this.isBoard = !this.isBoard
     },
@@ -288,14 +289,14 @@ export default {
       //   `diamond=========>`,
       //   JSON.parse(this.$helpers.base64Decode(this.$route.query.melo))
       // )
-      
-      
+
+
       if (!this.$route.query.isBack && parseInt(this.$route.query.step) === 2) {
-        if(this.diamondTag == 2){
+        // if(this.diamondTag == 2){
           var url1 =  `/wap/goods/style/detail`;
-        }else{
-          var url1 =  `/wap/goods/diamond/detail`; 
-        }
+        // }else{
+          // var url1 =  `/wap/goods/diamond/detail`;
+        // }
         this.$axios({
           method: `post`,
           url: url1,
@@ -306,6 +307,14 @@ export default {
           }
         })
           .then(res => {
+            console.log("fffff",res)
+            var price = 0;
+            if(res.coupon.hasOwnProperty('discount')){
+              price = res.coupon.discount.price
+            }else{
+              price = res.details[i].retailMallPrice;
+            }
+
             this.boardArr = []
             const gdi = JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
@@ -315,9 +324,7 @@ export default {
                 const o = {
                   url: `${this.$IMG_URL}${res.goodsImages.split(',')[0]}`,
                   title: `${res.goodsName}`,
-                  price: `${res.coinType} ${
-                    res.details[i].retailMallPrice
-                  }`,
+                  price: `${res.coinType} ${price}`,
                   step: 1
                 }
                 this.boardArr.push(o)
@@ -331,14 +338,13 @@ export default {
         this.$route.query.isBack ||
         parseInt(this.$route.query.step) === 3
       ) {
-        // console.log(444444)
         if(this.diamondTag == 1){
-          var url2 =  `/wap/goods/diamond/detail`;
+          // var url2 =  `/wap/goods/diamond/detail`;
           var url3 =  `/wap/goods/style/detail`;
-          
+
         }else{
           var url2 =  `/wap/goods/style/detail`;
-          var url3 =  `/wap/goods/diamond/detail`;
+          // var url3 =  `/wap/goods/diamond/detail`;
         }
 
         await this.$axios({
@@ -351,6 +357,13 @@ export default {
           }
         })
           .then(res => {
+            var price2 = 0;
+            if(res.coupon.hasOwnProperty('discount')){
+              price2 = res.coupon.discount.price
+            }else{
+              price2 = res.details[0].retailMallPrice;
+            }
+
             this.boardArr = []
             const gdi = JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
@@ -360,9 +373,7 @@ export default {
                 const o = {
                   url: `${this.$IMG_URL}${res.goodsImages.split(',')[0]}`,
                   title: `${res.goodsName}`,
-                  price: `${res.coinType} ${
-                    res.details[i].retailMallPrice
-                  }`,
+                  price: `${res.coinType} ${price2}`,
                   step: 1
                 }
                 this.boardArr.push(o)
@@ -382,6 +393,28 @@ export default {
           }
         })
           .then(res => {
+            // for (const i in res) {
+            //   if (
+            //     parseInt(res[1].Id) ===
+            //     parseInt(data.details[i].id)
+            //   ) {
+            //     if(data.details[i].coupon.hasOwnProperty('discount')){
+            //       this.price2 = data.details[i].coupon.discount.price
+            //     }else{
+            //       this.price2 = data.details[i].retailMallPrice
+            //     }
+            //   }
+            // }
+            console.log(666,this.data)
+
+            console.log(777,res)
+            var price3 = 0;
+            if(res.coupon.hasOwnProperty('discount')){
+              price3 = res.coupon.discount.price
+            }else{
+              price3 = res.details[0].retailMallPrice;
+            }
+
             const gdi = JSON.parse(
               this.$helpers.base64Decode(this.$route.query.melo)
             ).steps[1].goodsDetailsId
@@ -390,9 +423,7 @@ export default {
                 const o = {
                   url: `${this.$IMG_URL}${res.goodsImages.split(',')[0]}`,
                   title: `${res.goodsName}`,
-                  price: `${res.coinType} ${
-                    res.details[i].retailMallPrice
-                  }`,
+                  price: `${res.coinType} ${price3}`,
                   step: 2
                 }
                 this.boardArr.push(o)
@@ -534,10 +565,7 @@ export default {
           .dispatch('addCart', goodInfo)
           .then(data => {
             // facebook 添加购物车统计-start
-            if(this.$store.state.platform == 31){
-              console.log("facebook购物车数据统计")
-              fbq('track', 'AddToCart');
-            }
+            fbq('track', 'AddToCart');
             // facebook 添加购物车统计-end
             
             this.$nuxt.$loading.finish()

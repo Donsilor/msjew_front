@@ -1,46 +1,81 @@
 <template>
   <div class="engagementRings-component">
-    <div class="swiper-box">
-      <swiper :auto="true" :duration="5000">
-        <div v-for="(each, n) in ringBanners" :key="n">
-          <nuxt-link
-            :to="
-              `/image-view?path=${$helpers.base64Encode(
-                JSON.stringify(ringBanners)
-              )}`
-            "
-            ><img :src="each"
-          /></nuxt-link>
+    <div v-if="this.goodInfo.goodsStatus === 2">
+      <div class="swiper-box">
+        <swiper :auto="true" :duration="5000">
+          <div v-for="(each, n) in ringBanners" :key="n">
+            <nuxt-link
+              :to="
+                `/image-view?path=${$helpers.base64Encode(
+                  JSON.stringify(ringBanners)
+                )}`
+              "
+              ><img :src="each"
+            /></nuxt-link>
+          </div>
+        </swiper>
+
+        <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+          <div class="triangle" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+          <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
         </div>
-      </swiper>
-    </div>
-    <div class="title">
-      {{ goodInfo.goodsName }}
-    </div>
-    <div class="price">
-      {{ formatCoin(goodInfo.coinType) }}{{ formatNumber(showPrice) }}
-    </div>
-    <div class="promise-box">
-      <div
-        v-for="(c, index) in goodsServicesJsons"
-        :key="index"
-        class="promise-info"
-      >
-        <div class="promise-img">
-          <img :src= url[index] alt="" />
+      </div>
+      <div class="title">
+        <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+        <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
+        {{ goodInfo.goodsName }}
+      </div>
+      <div class="price" v-if="!goodInfo.coupon.discount">
+        {{ formatCoin(goodInfo.coinType) }}{{ formatNumber(showPrice) }}
+      </div>
+
+      <div class="discount-price" v-else>
+        <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPrice) }}</div>
+        <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPrice2) }}</div>
+      </div>
+      <div class="promise-box">
+        <div
+          v-for="(c, index) in goodsServicesJsons"
+          :key="index"
+          class="promise-info"
+        >
+          <div class="promise-img">
+            <img :src= url[index] alt="" />
+          </div>
+          <span>{{ c.name }}</span>
         </div>
-        <span>{{ c.name }}</span>
       </div>
-    </div>
-    <div class="include-box">
-      <span>{{ lang.include }}</span>
-      <div>
-        <i class="iconfont icontaojie" />
+
+      <!-- 优惠活动 -->
+      <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+        <div class="discount-l">
+          <div class="discoupon-d" v-if="goodInfo.coupon.discount">
+            <div class="discoupon-d-l">
+              <span class="text">{{ lang.discountsActive }}：</span>
+              <span class="discount-icon">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+            </div>
+          </div>
+
+          <div class="discoupon-d" v-if="goodInfo.coupon.money">
+            <div class="discoupon-d-l">
+              <span class="text">{{ lang.discountsActive }}：</span>
+              <span class="discount-icon">￥</span>
+            </div>
+
+            <div class="get" @click="getCoupon">{{ lang.getCoupon }} &gt;</div>
+          </div>
+        </div>
       </div>
-      <span>{{ lang.pairRing }}*1</span>
-    </div>
+
+      <div class="include-box">
+        <span>{{ lang.include }}</span>
+        <div>
+          <i class="iconfont icontaojie" />
+        </div>
+        <span>{{ lang.pairRing }}*1</span>
+      </div>
     <div>
-      <!--      第一个戒指-->
+          <!--      第一个戒指-->
       <div class="select-line">
         <span>
           <span
@@ -99,12 +134,12 @@
             ]"
           >
             <i
-              :class="[
-                'iconfont',
-                ['icon_nv', 'icon_nan', 'iconnannv'][secondRing.userSex]
-              ]"
-            />
-          </span>
+                :class="[
+                  'iconfont',
+                  ['icon_nv', 'icon_nan', 'iconnannv'][firstRing.userSex]
+                ]"
+              />
+            </span>
           {{ lang.chooseColor }}
         </span>
         <span @click="showSecondRingQualityChoose">
@@ -165,7 +200,7 @@
       <div class="details-title">
         {{ lang.goodsDetail }}
       </div>
-      <div class="details-sku">{{ lang.goods }}ID：{{ goodInfo.ringCode }}</div>
+      <div class="details-sku">{{ lang.goods }}ID：{{ goodInfo.goodsCode }}</div>
       <div class="base-info">
         <div class="details-title">
           {{ firstRing.userSexText }}
@@ -283,11 +318,18 @@
       @clear="secondRingClearQuality"
     ></choose-eject>
     <size-board ref="size-board"></size-board>
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
+    </div>
+    <div v-else >
+      <soleOut></soleOut>
+    </div>
   </div>
 </template>
 
 <script>
 import Mx from './pair-mixin'
+import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
   head() {
     return {
@@ -309,6 +351,9 @@ export default {
     }
   },
   mixins: [Mx],
+  components: {
+    soleOut
+  },
   data(){
     return{
       url:[
@@ -316,7 +361,9 @@ export default {
         require('../../static/marriage-ring/icon-02.png'),
         require('../../static/marriage-ring/icon-03.png'),
         require('../../static/marriage-ring/icon-04.png')
-      ]
+      ],
+      ifShowCoupon: false,
+      language: this.$store.state.language
     }
   },
   computed: {
@@ -352,6 +399,19 @@ export default {
     // console.log("ddddd",this.canAddCart)this.firstRingId
       // const secondRing = _this.secondRingId
     // console.log("ooooooooo",this.firstRingId,this.secondRingId)
+  },
+  methods:{
+    closeCo() {
+      this.ifShowCoupon = false
+    },
+    // 获取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        this.$toast.show(this.lang.needLogin)
+      }else{
+        this.ifShowCoupon = true
+      }
+    }
   }
 }
 </script>

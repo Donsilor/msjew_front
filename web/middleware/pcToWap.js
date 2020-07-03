@@ -1126,16 +1126,18 @@ export default function ({ req, res, redirect, store, route }) {
                         if (href.length > 1) {
                             url = url + '?' + param + href[1]
                         }
-                        console.log(url)
+                        
                         redirect(url)
                         return
                     }
                 }
             }
+
+            // console.log(url)
             redirect(host)
-            return
+            return 
         }
-        console.log("req.originalUrl----", req.originalUrl)
+        // console.log("req.originalUrl----", req.originalUrl)
         toWapUrl(req.originalUrl)
     }
 }

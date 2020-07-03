@@ -17,7 +17,6 @@ export default {
   },
   async asyncData({ $axios, route, store, app }) {
     const seoInfo = await app.$getSeoInfo(3)
-    console.log(33);
     return $axios({
       method: 'get',
       url: '/web/goods/style/web-site',

@@ -405,7 +405,7 @@ export default {
   },
   mounted() {
     this.loginType = sessionStorage.getItem("loginType")
-		
+
     const _this = this
     _this.$nextTick(() => {})
   },
@@ -577,7 +577,7 @@ export default {
             _this.$store.dispatch('synchronizeCart')
             // const lastUrl = _this.$store.state.lastUrl
             // _this.$store.commit('setLastUrl', '')
-
+            fbq('track', 'CompleteRegistration');
             setTimeout(() => {
               if (lastUrl) {
                 _this.$router.replace({
@@ -644,6 +644,7 @@ export default {
               // const lastUrl = _this.$store.state.lastUrl
               const lastUrl=localStorage.getItem("url")
             _this.$store.dispatch('synchronizeCart')
+            fbq('track', 'CompleteRegistration');
             setTimeout(() => {
               if (lastUrl) {
                 _this.$router.replace({
@@ -655,7 +656,6 @@ export default {
                 })
               }
             }, 0)
-
           })
           .catch(err => {
             // console.log("请求",err)

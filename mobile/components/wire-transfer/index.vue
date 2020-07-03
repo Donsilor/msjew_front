@@ -4,7 +4,7 @@
         <div class="uploadMsg">
             <div class="Amount">
                 <span class="title1">{{ lang.paidAmount}}</span>
-                <span class="price" v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform == 21">
+                <span class="price" v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform == 11">
                   <span class="coin">{{ formatCoin(coin) }}</span> 
                   <span class="price">{{ formatMoney(price) }}</span>
                   <span class="coin-hkd">({{ coinHKD }}</span> 
@@ -55,7 +55,7 @@
                         :before-upload="beforeUpload"
                         list-type="picture-card"
                         :on-preview="handlePictureCardPreview"
-                        :on-remove="handleRemove" 
+                        :on-remove="handleRemove"
                         :limit="1"
                         :on-change = "onchange"
                         >
@@ -78,7 +78,7 @@
             </div>
             <div class="btn">
                 <div class="btn-white" @click="Cancel">
-                    {{ lang.CancelPayment }} 
+                    {{ lang.CancelPayment }}
                 </div>
                 <div class="btn-block" @click.stop="Finished" >
                     {{ lang.PaymentCompleted }}
@@ -126,7 +126,6 @@ export default {
                 .get('/web/pay/collection-account-info')
                 .then(res => {
                     this.accountlist = res
-                    console.log("ssss",res)
                 })
                 .catch(err => {
                 this.$message.error(err.message)
@@ -138,8 +137,8 @@ export default {
         },
          // 上传图片
         beforeUpload(file) {
-            console.log("file2222",file)
-            const isJPG = 
+            // console.log("file2222",file)
+            const isJPG =
                 file.type == 'image/jpeg'||
                 file.type == 'image/png'||
                 file.type == 'image/jpg'||
@@ -166,7 +165,7 @@ export default {
             if (!isJPG) {
                 this.$toast.show(this.lang.imgFomat);
                 return isJPG
-            } 
+            }
             if (!isLt2M) {
                 this.$toast.show(this.lang.imgSize);
                 return isLt2M
@@ -186,7 +185,7 @@ export default {
         },
         // 完成支付
         Finished(){
-            if(this.account === ''){ 
+            if(this.account === ''){
                 this.$toast.show(this.lang.selectAccount)
                 return false
             }
@@ -222,7 +221,7 @@ export default {
             console.log("选择",ind)
             this.typeIndex = ind
         },
-       
+
         // 删除图片
         handleRemove(file, fileList) {
             // console.log(file, fileList);
@@ -283,6 +282,8 @@ export default {
                 top:30px;
                 font-size: 14px;
                 color: #c6bbb9;
+                width: 100%;
+                text-align: left;
                 // line-height: 25px;
             }
         }
@@ -301,7 +302,7 @@ export default {
                     float: left;
                 }
                 .bg{
-                    background-color: #ffffff!important;    
+                    background-color: #ffffff!important;
                     .bank{
                         font-size: 15px;
                         color: #ba7f8c!important;
@@ -365,7 +366,7 @@ export default {
                             right:20px;
                             top: 45px;
                             width: 30px;
-                            height: 30px; 
+                            height: 30px;
                             // margin: 12px 12px 0 0;
                             background: rgba(255, 255, 255, 1);
                             border: 1px solid rgba(187, 187, 187, 1); /*no*/
@@ -412,7 +413,7 @@ export default {
                         }
                     }
                 }
-            } 
+            }
         }
         .uploadImg{
             padding: 30px 20px 0 20px;
@@ -430,7 +431,7 @@ export default {
                 // height: 148px;
                 position: relative;
                 display: flex;
-                justify-content: center; 
+                justify-content: center;
                 // height: 140px;
                 // background-color: #f6f6f6;
                 // border-radius: 10px;

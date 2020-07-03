@@ -21,62 +21,94 @@
               <!-- 单品 -->
               <div v-if="item.groupType === 0 && Number(item.goodsType) !== 19" class="single">
                 <div @click="godetails(item, index)">
-                        <img :src="imageStrToArray(item.goodsImages)[0]" />
-                        <span v-if="!getStatus(item, index)" class="failed">
-                          {{ lang.failed }}
-                        </span>
-                        <div class="right">
-                          <h4 class="ow-h2">
-                            {{ item.goodsName }}
-                          </h4>
-                          <p>SKU：{{ item.sku }}</p>
-                          <p class="p">
-                            {{
-                              getconfig(item.config, item.simpleGoodsEntity.specs)
-                            }}
-                          </p>
-                          <b>{{  formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
-                          <div v-if="item.groupType === 1" class="btn-type">
-                            {{ lang.ring }}
-                          </div>
-                          <div v-if="item.groupType === 2" class="btn-type">
-                            {{ lang.coustom }}
-                          </div>
-                          <div v-if="item.groupType !== 0 && index !== list.length - 1">
-                            <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                              {{ list[index + 1].goodsName }}
-                            </h4>
-                            <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
-                              SKU：{{ list[index + 1].sku }}
-                            </p>
-                            <p>
-                              {{
-                                getconfig(
-                                  list[index + 1].config,
-                                  list[index + 1].simpleGoodsEntity.specs
-                                )
-                              }}
-                            </p>
-                            <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                  <div class="left-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]" >
+                    <img :src="imageStrToArray(item.goodsImages)[0]" />
 
+                    <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
+                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                      <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
+                    </div>
+                  </div>
+                  <span v-if="!getStatus(item, index)" class="failed">
+                    {{ lang.failed }}
+                  </span>
+                  <div class="right">
+                    <h4 class="ow-h2">
+                      <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                      <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
 
-                            <p v-if="item.groupType === 1">
-                              <br/>
-                              <b>{{ formatCoin(coin) }} {{ formatMoney(item.totalPrice) }}</b>
-                            </p>
-                          </div>
-                        </div>
+                      {{ item.goodsName }}
+                    </h4>
+                    <p>SKU：{{ item.sku }}</p>
+                    <p class="p">
+                      {{
+                        getconfig(item.config, item.simpleGoodsEntity.specs)
+                      }}
+                    </p>
+                    <b v-if="!item.coupon.discount">{{  formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                    <div class="discount-price" v-else>
+                      <div class="old-price">{{formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
+                      <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                    </div>
+                    
+                    <div v-if="item.groupType === 1" class="btn-type">
+                      {{ lang.ring }}
+                    </div>
+                    <div v-if="item.groupType === 2" class="btn-type" :class="{marginTop: item.groupType === 2}">
+                      {{ lang.coustom }}
+                    </div>
+                    <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                      <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                        <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                        <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
+
+                        {{ list[index + 1].goodsName }}
+                      </h4>
+                      <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                        SKU：{{ list[index + 1].sku }}
+                      </p>
+                      <p>
+                        {{
+                          getconfig(
+                            list[index + 1].config,
+                            list[index + 1].simpleGoodsEntity.specs
+                          )
+                        }}
+                      </p>
+                      <b v-if="!list[index + 1].coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                      
+                      <div class="discount-price" v-else>
+                        <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                        <b>{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                      </div>
+
+                      <!-- <p v-if="item.groupType === 1">
+                        <br/>
+                        <b>{{ formatCoin(coin) }} {{ formatMoney(item.totalPrice) }}</b>
+                      </p> -->
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- 对戒 -->
               <div v-if="item.goodsType == '19'" class="double">
                 <div @click="godetails(item, index)">
-                  <img :src="imageStrToArray(item.goodsImages)[0]" />
+                  <div class="left-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]" >
+                    <img :src="imageStrToArray(item.goodsImages)[0]" />
+
+                    <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
+                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                      <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
+                    </div>
+                  </div>
                   <span v-if="!getStatus(item, index)" class="failed">
                     {{ lang.failed }}
                   </span>
                   <h4 class="ow-h2">
-                      {{ item.goodsName }}
+                    <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                    <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
+
+                    {{ item.goodsName }}
                   </h4>
                   <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
                   <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
@@ -117,58 +149,87 @@
                       </p>
                     </div> -->
                   </div>
-                  <b class="double-ring-price">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <b class="double-ring-price" v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <div class="discount-price" v-else>
+                    <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
+                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                  </div>
                   <div class="cut-line"></div>
                 </div>
               </div>
               <!-- 定制 -->
               <div v-if="item.groupType === 2" class="single customization">
                 <div @click="godetails(item, index)">
-                        <img :src="imageStrToArray(item.goodsImages)[0]" />
-                        <span v-if="!getStatus(item, index)" class="failed">
-                          {{ lang.failed }}
-                        </span>
-                        <div class="right">
-                          <h4 class="ow-h2">
-                            {{ item.goodsName }}
-                          </h4>
-                          <p>SKU：{{ item.sku }}</p>
-                          <p class="p">
-                            {{
-                              getconfig(item.config, item.simpleGoodsEntity.specs)
-                            }}
-                          </p>
-                          <b>{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
-                          <div v-if="item.groupType === 1" class="btn-type">
-                            {{ lang.ring }}
-                          </div>
-                          <div v-if="item.groupType === 2" class="btn-type">
-                            {{ lang.coustom }}
-                          </div>
-                          <div v-if="item.groupType !== 0 && index !== list.length - 1">
-                            <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                              {{ list[index + 1].goodsName }}
-                            </h4>
-                            <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
-                              SKU：{{ list[index + 1].sku }}
-                            </p>
-                            <p>
-                              {{
-                                getconfig(
-                                  list[index + 1].config,
-                                  list[index + 1].simpleGoodsEntity.specs
-                                )
-                              }}
-                            </p>
-                            <b>{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+                  <div class="left-box" :class="[{on: item.coupon.discount || item.coupon.money},{marginTop: item.groupType === 2}]" >
+                    <img :src="imageStrToArray(item.goodsImages)[0]" />
 
+                    <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
+                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                      <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
+                    </div>
+                  </div>
+                  <span v-if="!getStatus(item, index)" class="failed">
+                    {{ lang.failed }}
+                  </span>
+                  <div class="right">
+                    <h4 class="ow-h2">
+                      <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                      <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
 
-                            <p v-if="item.groupType === 1">
-                              <br/>
-                              <b>{{ formatCoin(coin) }} {{ formatMoney(item.totalPrice) }}</b>
-                            </p>
-                          </div>
-                        </div>
+                      {{ item.goodsName }}
+                    </h4>
+                    <p>SKU：{{ item.sku }}</p>
+                    <p class="p">
+                      {{
+                        getconfig(item.config, item.simpleGoodsEntity.specs)
+                      }}
+                    </p>
+                    <b v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                    <div class="discount-price" v-else>
+                      <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
+                      <b>{{ formatCoin(coin)}} {{ formatNumber(item.coupon.discount.price) }}</b>
+                    </div>
+
+                    <div v-if="item.groupType === 1" class="btn-type">
+                      {{ lang.ring }}
+                    </div>
+                    <div v-if="item.groupType === 2" class="btn-type">
+                      {{ lang.coustom }}
+                    </div>
+                    <div v-if="item.groupType !== 0 && index !== list.length - 1">
+                      <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
+                        <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? list[index + 1].coupon.discount.discount+'%' : discountConversion(list[index + 1].coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                        <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
+                        {{ list[index + 1].goodsName }}
+                      </h4>
+                      <p :class="item.groupType === 2 ? '' : 'margin-top-10'">
+                        SKU：{{ list[index + 1].sku }}
+                      </p>
+                      <p>
+                        {{
+                          getconfig(
+                            list[index + 1].config,
+                            list[index + 1].simpleGoodsEntity.specs
+                          )
+                        }}
+                      </p>
+
+                      <b v-if="!list[index + 1].coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+                      <div class="discount-price" v-else>
+                        <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].salePrice) }}</div>
+                        <b>{{ formatCoin(coin) }} {{ formatNumber(list[index + 1].coupon.discount.price) }}</b>
+                      </div>
+
+                      <!-- 合并前 -->
+                      <!-- <b>{{ coin }} {{ formatMoney(list[index + 1].salePrice) }}</b>
+
+                      <p v-if="item.groupType === 1">
+                        <br/>
+                        <b>{{ formatCoin(coin) }} {{ formatMoney(item.totalPrice) }}</b>
+                      </p> -->
+                    </div> 
+                  </div>
                 </div>
               </div>
               <div class="domore">
@@ -230,7 +291,7 @@
       </div>
     </div>
     <bdd-empty
-      v-if="list.length <= 0"
+      v-if="list.length <= 0 && this.isLoading !==''"
       :type="'cart'"
       @toShopping="toShopping"
     ></bdd-empty>
@@ -260,19 +321,26 @@ export default {
       lang: this.LANGUAGE.cart.index,
       num: 0,
       timer: null ,
-      soudout:''
+      soudout:'',
+      language: this.$store.state.language,
+      isLoading:''
     }
   },
   created() {
+    
   },
   mounted() {
     this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+      localStorage.setItem('loading', 'yes');
       if (this.isLogin) {
         this.getList()
       } else {
         this.getLocalCart()
       }
     })
+
+    // this.language = this.getCookie('language')
   },
   // beforeUpdate(){
   //   this.getList()
@@ -401,19 +469,28 @@ export default {
         // 价格汇总
         if (this.list[i].isSelect) {
           // console.log(i, 'iiii')
-          if (this.list[i].groupType === 1) {
-             newPrice = newPrice + parseFloat(this.list[i].totalPrice) * 0.5 
-           //对戒
+
+          if(this.list[i].coupon.discount){
+            newPrice = newPrice + parseFloat(this.list[i].coupon.discount.price)
           }else{
-              newPrice = newPrice + parseFloat(this.list[i].salePrice)
-           //对戒
+            newPrice = newPrice + parseFloat(this.list[i].salePrice)
           }
+
+          // // 合并前,怕出问题留作参考
+          // if (this.list[i].groupType === 1) {
+          //    newPrice = newPrice + parseFloat(this.list[i].totalPrice) * 0.5
+          //  //对戒
+          // }else{
+          //     newPrice = newPrice + parseFloat(this.list[i].salePrice)
+          //  //对戒
+          // }
+
           // console.log("price",newPrice)
           // 数量汇总
           if (this.list[i].groupType === 0) {
             this.sumNum = this.sumNum + 1
           } else {
-            this.sumNum = this.sumNum + 0.5  
+            this.sumNum = this.sumNum + 0.5
           }
         }
         // 反选
@@ -529,18 +606,23 @@ export default {
         }
       })
         .then(res => {
-          // console.log("res",res)
+          console.log("本地",res)
+          this.$nuxt.$loading.finish()
+          localStorage.removeItem('loading');
+          this.isLoading = localStorage.getItem('loading')
           this.doFormat(res)
           this.defaultAll()
         })
         .catch(err => {
+          localStorage.removeItem('loading');
+          this.$nuxt.$loading.finish()
           console.log('err:', err)
         })
     },
     // 获取本地local列表
     getLocalCart() {
       this.$store.dispatch('getLocalCart').then(res => {
-        console.log("djkashdkasjdklasj",res)
+        // console.log("djkashdkasjdklasj",res)
         if (res.length > 0) {
           this.noListData = false
           this.cartList = []
@@ -571,7 +653,7 @@ export default {
                 group_type: val.groupType,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
-              console.log("ooooo>>>",val)
+              // console.log("ooooo>>>",val)
               this.cartList.push(o)
             })
           })
@@ -594,6 +676,9 @@ export default {
         })
         .then(res => {
           // console.log("线上llll",res)
+          this.$nuxt.$loading.finish()
+          localStorage.removeItem('loading');
+          this.isLoading = localStorage.getItem('loading')
           const result = []
           let keys = Object.keys(res)
           keys = keys.sort((a, b) => {
@@ -606,16 +691,20 @@ export default {
           // this.doFormat(res)
         })
         .catch(err => {
+          this.$nuxt.$loading.finish()
+          localStorage.removeItem('loading');
           console.log('err:', err)
         })
     },
     // 格式化数据列表
     doFormat(res) {
+      console.log(res)
       this.list = []
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
           // console.log("dddd",item)
+          this.coin = item.simpleGoodsEntity.coinType
           const o = {
             isSelect: false,
             goodsImages: item.simpleGoodsEntity.goodsImages,
@@ -664,10 +753,12 @@ export default {
             //     : item.simpleGoodsEntity,
             status:item.goodsType,
               // item.goodsType === 19 ? item.ringsSimpleGoodsEntity.status : 1,
-            goodsStatus:item.simpleGoodsEntity.goodsStatus
+            goodsStatus:item.simpleGoodsEntity.goodsStatus,
               // item.goodsType === 19
               //   ? item.ringsSimpleGoodsEntity.simpleGoodsEntity.goodsStatus
               //   : item.simpleGoodsEntity.goodsStatus
+            coupon:
+            item.coupon ? item.coupon : {}
           }
           this.list.push(o)
           // console.log("this.list",this.list)
@@ -705,6 +796,7 @@ export default {
       // console.log("itemdetail",item)
       // 去定制详情
       if (item.groupType === 2) {
+      // console.log("去定制详情",item,this.list)
         const ct1 = this.isLogin ? item.id : item.localSn
         const ct2 = this.isLogin
           ? this.list[index + 1].id
@@ -777,7 +869,7 @@ export default {
       }
     },
     goToMade(ct1, gs1, gd1, ci1, ct2, gs2, gd2, ci2) {
-      console.log('11', ct1, gs1, gd1, ci1, ct2, gs2, gd2, ci2)
+      // console.log('11', ct1, gs1, gd1, ci1, ct2, gs2, gd2, ci2)
       const obj = {
         steps: [
           {
@@ -798,7 +890,7 @@ export default {
           }
         ]
       }
-      console.log(obj)
+      // console.log("obj",obj,gs2)
       this.$router.push({
         name: `custom-made-${this.switchName(ct1)}-made-${this.switchName(
           ct2
@@ -836,10 +928,34 @@ export default {
             padding: 34px 14px 20px;
             margin-top: 8px;
           }
-          img {
+          .left-box{
+            position: relative;
             float: left;
             width: 125px;
             height: 125px;
+
+            .activity-sign{
+              width: 60px;
+              height: 60px;
+              bottom: -5px;
+              right: -3px;
+
+              .triangle{
+                padding-top: 34px;
+                padding-left: 4px;
+                font-size: 13px;
+              }
+            }
+          }
+          .left-box.on{
+            border: 1px solid red;
+          }
+          .left-box.marginTop{
+            margin-top: 50px;
+          }
+          img {
+            width: 100%;
+            height: 100%;
           }
           .failed {
             position: absolute;
@@ -894,7 +1010,7 @@ export default {
               }
               .btn-type {
                 position: absolute;
-                top: 174px;
+                top: 230px;
                 left: 34px;
                 width: 80px;
                 height: 26px;
@@ -910,6 +1026,18 @@ export default {
             }
           }
           .double{
+            .old-price{
+              margin-left: 140px;
+              text-align: left;
+            }
+            b{
+              font-size: 17px;
+              line-height: 20px;
+              font-weight: 400;
+              color: rgba(243, 163, 145, 1);
+              font-family: twCenMt;
+              margin-left: 15px;
+            }
             .double-ring-price{
               font-size: 17px;
               line-height: 20px;
@@ -930,15 +1058,25 @@ export default {
               margin-left: 136px;
             }
             h4 {
-              // display: inline-block;
-              max-height: 40px;
-              font-size: 14px;
-              line-height: 20px;
-              font-family: PingFangHK-Regular;
-              font-weight: 400;
-              color: rgba(51, 51, 51, 1);
+              display: inline-block;
+              width: 60%;
               text-align: left;
-              padding-left: 15px;
+              padding-left: 10px;
+                max-height: 40px;
+                font-size: 14px;
+                line-height: 20px;
+                font-family: PingFangHK-Regular;
+                font-weight: 400;
+                color: rgba(51, 51, 51, 1);
+                // margin-right: 100px;
+              // max-height: 40px;
+              // font-size: 14px;
+              // line-height: 20px;
+              // font-family: PingFangHK-Regular;
+              // font-weight: 400;
+              // color: rgba(51, 51, 51, 1);
+              // text-align: left;
+              // padding-left: 15px;
             }
             p {
               font-size: 13px;
@@ -1000,6 +1138,32 @@ export default {
               }
               .sku{
                 display: none;
+              }
+            }
+            .btn-type.marginTop{
+              margin-top: 60px;
+            }
+          }
+
+          .customization{
+            .left-box.marginTop{
+              margin-top: 30px;
+            }
+            .right{
+              .btn-type {
+                position: absolute;
+                top: 210px;
+                left: 34px;
+                width: 80px;
+                height: 26px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 4px;
+                font-size: 12px;
+                line-height: 26px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
               }
             }
           }
@@ -1071,7 +1235,7 @@ export default {
             margin-top: 15px;
             font-size: 14px;
             .similar {
-              width: 125px; 
+              width: 125px;
             }
             a{
               text-decoration: underline;
@@ -1086,6 +1250,7 @@ export default {
       position: fixed;
       left: 0px;
       bottom: 0px;
+      z-index: 2;
       width: 100%;
       height: 50px;
       background: #ffffff;
@@ -1153,6 +1318,19 @@ export default {
         color: rgba(255, 255, 255, 1);
       }
     }
+  }
+
+  .old-price{
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .discount-price{
+    padding: 0;
+  }
+
+  i{
+    font-style: normal;
   }
 }
 </style>

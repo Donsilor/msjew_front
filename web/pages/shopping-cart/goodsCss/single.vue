@@ -10,6 +10,16 @@
           >
             <span>{{ $t(`cart.Invalid`) }}</span>
           </div>
+
+          <!-- 折扣 -->
+          <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
+            <span>{{ language == 'en_US' ? discountUs(g.data[0].coupon.discount.discount)+'%' : discountConversion(g.data[0].coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+          </div>
+
+          <!-- 优惠券 -->
+          <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'money'">
+            <span>{{ $t(`${lang}.discounts1`) }}</span>
+          </div>
         </div>
       </nuxt-link>
       <nuxt-link :to="getJumpLink(g)">
@@ -53,7 +63,9 @@
       </div>
 
       <div class="good-num">{{ g.data[0].goodsCount }}</div>
-      <div class="good-price">
+
+      <!-- 原金额 -->
+      <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
         {{ formatCoin(g.coinType) }}
         {{
           formatNumber(
@@ -61,15 +73,31 @@
           )
         }}
       </div>
+
+      <!-- 优惠后金额 -->
+      <div class="good-price">
+        <span v-if="couponType(g.data[0].coupon) == 'discount'">
+          {{ formatCoin(g.coinType) }}
+          {{
+            formatNumber(
+              g.data[0].coupon.discount.price
+            )
+          }}
+        </span>
+        <span  v-if="couponType(g.data[0].coupon) !== 'discount'">
+          {{ formatCoin(g.coinType) }}
+          {{
+            formatNumber(
+              g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+            )
+          }}
+        </span>
+      </div>
       <div
         v-show="options"
         v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
         class="good-btn"
       >
-        <!-- <div class="wish-img">
-          <i class="iconfont" @click="addWish(g)">&#xe645;</i>
-        </div> -->
-        <div />
         <i class="iconfont iconlajitong" @click="deleteGood()" />
       </div>
       <div v-show="options" v-else class="lose-btn">
@@ -84,7 +112,14 @@
 </template>
 
 <script>
+const lang = 'cart'
 export default {
+  data() {
+    return{
+      lang,
+      language: this.$store.state.language
+    }
+  },
   name: 'Single',
   props: {
     g: {
@@ -101,7 +136,7 @@ export default {
     }
   },
   mounted(){
-    console.log("single",this.g)
+    // console.log("single",this.g)
   },
   methods: {
     goDetail() {},
@@ -157,8 +192,8 @@ export default {
             // 戒指
              routerName = '/wedding-rings/all'
           }
-          
-          
+
+
           break
         case 3:
           // 珠宝饰品
@@ -191,13 +226,13 @@ export default {
         case 12:
           routerName = '/engagement-rings/all'
           break
-          
+
       }
- 
+
       const routerJump = this.$router.resolve({
         path: routerName,
         query: {
-          
+
         }
       })
       window.open(routerJump.href, '_blank')
@@ -212,7 +247,7 @@ export default {
   border-bottom: 1px solid rgba(239, 239, 239, 1);
   .good-info {
     position: relative;
-    width: 1200px;
+    width: 1250px;
     height: 179px;
     border-bottom: 1px solid rgba(239, 239, 239, 1);
     display: flex;
@@ -236,7 +271,7 @@ export default {
     .good-desc {
       width: 269px;
       line-height: 18px;
-      margin-right: 71px;
+      margin-right: 50px;
       div:nth-child(1) {
         max-height: 18 * 3px;
         margin-bottom: 16px;
@@ -253,7 +288,7 @@ export default {
     }
     .good-information {
       width: 185px;
-      margin-right: 83px;
+      margin-right: 50px;
       .infos {
         width: 100%;
         display: flex;
@@ -271,9 +306,9 @@ export default {
     .good-description {
       width: 185px;
       line-height: 20px;
-      max-height: 60px;
+      max-height: 50px;
       color: #666;
-      margin-right: 83px;
+      margin-right: 48px;
       overflow: hidden;
       text-overflow: ellipsis;
       display: -webkit-box;
@@ -282,21 +317,24 @@ export default {
       -webkit-box-orient: vertical;
     }
     .good-num {
-      width: 60px;
+      width: 80px;
       text-align: center;
       font-size: 18px;
       color: #333;
-      margin-right: 217-60-83px;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
     .good-price {
       font-family: twCenMt;
       font-size: 18px;
       color: #f29b87;
-      width: 130px;
+      width: 180px;
       text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
     .good-btn {
-      width: 80px;
+      width: 100px;
       height: 21px;
       line-height: 21px;
       position: absolute;
@@ -305,7 +343,7 @@ export default {
       transform: translateY(-50%);
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       div:nth-child(2) {
         width: 1px;
         height: 21px;
@@ -381,7 +419,8 @@ export default {
     background-color: rgba(102, 102, 102, 0.4);
   }
   .lose-btn {
-    width: 120px;
+    display: block;
+    width: 100px;
     height: 21px;
     line-height: 21px;
     position: absolute;
@@ -391,6 +430,8 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 10px;
+    box-sizing: border-box;
     div:nth-child(2) {
       width: 1px;
       height: 21px;
@@ -414,5 +455,10 @@ export default {
       cursor: pointer;
     }
   }
+}
+
+.old-price{
+	color: #b2b2b2 !important;
+	font-size: 14px !important;
 }
 </style>

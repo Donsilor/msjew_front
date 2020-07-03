@@ -72,7 +72,7 @@
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
           <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ formatCoin(orderinfo.coinCode) }}</span>
-            {{ formatMoney(orderinfo.orderAmount) }}
+            {{ formatMoney(orderinfo.payAmount) }}
           </p>
         </div>
         <div class="code">
@@ -106,7 +106,7 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.orderAmount) }}</span>
+              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
             </div>
           </li>
           <li>
@@ -194,7 +194,7 @@ export default {
       goodsInfo: {
         value: 0,
         currency: '',
-        contents: [],
+        content_ids: [],
         content_type: 'product'
       }
     }
@@ -219,6 +219,13 @@ export default {
         .then(data => {})
         .catch(err => {})
       } else {
+
+        if (this.isLogin) {
+          this.getOrder()
+        }else{
+          this.getTouristOrder()
+        }
+
         setTimeout(this.payVerify, 2000);
       }
   },
@@ -230,12 +237,6 @@ export default {
       this.stepPayVerify = false
     },
     goPaySuccess(){
-      // facebook 购买成功统计-start
-      if(this.$store.state.platform == 31){
-        console.log("facebook购买成功数据统计")
-        this.fbq('track','Purchase',this.goodsInfo);
-      }
-      // facebook 购买成功统计-end
 
       const arr = []
       this.list.map((item, index) => {
@@ -248,11 +249,10 @@ export default {
       this.stepPayPending = false
       this.stepPayVerify  = false
       this.stepPaySuccess = true
-      if (this.isLogin) {
-          this.getOrder()
-      }else{
-          this.getTouristOrder()
-      }
+
+      // facebook 购买成功统计-start
+      fbq('track','Purchase',this.goodsInfo);
+      // facebook 购买成功统计-end
     },
     goPayFailed(){
         this.$router.push({
@@ -285,10 +285,7 @@ export default {
         var details = res.details;
 
         details.forEach((o, i) =>{
-           this.goodsInfo.contents.push({
-            'id': o.goodsId,
-            'quantity': 1
-           })
+          this.goodsInfo.content_ids[i] = o.goodsId
         })
 
         // console.log(778,this.goodsInfo)
@@ -309,13 +306,18 @@ export default {
         }
       })
       .then(res => {
-        console.log("dssadas",res)
         this.orderinfo = res
 
-        this.goodsInfo.value = res.productAmount;
+        this.getChannelType(this.orderinfo.payChannel)
+
+        this.goodsInfo.value = res.payAmount;
         this.goodsInfo.currency = res.coinCode;
 
-        this.getChannelType(this.orderinfo.payChannel)
+        var details = res.details;
+
+        details.forEach((o, i) =>{
+          this.goodsInfo.content_ids[i] = o.goodsId
+        })
 
       })
       .catch(err => {

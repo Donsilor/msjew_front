@@ -25,7 +25,8 @@
         <div class="list-title">
           <span>{{ $t(`${lang}.productInfo`) }}</span>
           <span>{{ $t(`${lang}.productTotal`) }}</span>
-          <span>{{ $t(`${lang}.productPrice`) }}</span>
+          <span>{{ $t(`${lang}.oldPrice`) }}</span>
+          <span>{{ $t(`${lang}.newPrice`) }}</span>
         </div>
       </div>
 
@@ -59,101 +60,109 @@
               }}</span> -->
             </p>
           </div>
-          <div v-if="o.details[0].categoryId !== 19 && o.details.length !== 2" class="single">
-            <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
-              <div class="left">
-                <nuxt-link :to="goDetails(d)"
-                  target="_blank"><img :src="IMG_URL + d.goodsImages"
-                /></nuxt-link>
-              </div>
-              <div class="mid">
-                <nuxt-link :to="goDetails(d)" target="_blank">
-                  <h5>{{ d.goodsName }}</h5>
-                  <p>SKU：{{ d.goodsCode }}</p>
-                  <div
-                    v-for="(k, __index) in d.detailSpecs"
-                    :key="__index"
-                    class="desc"
-                  >
-                    <span>{{ k.name }}: </span>
-                    <span>{{ k.value }} </span>
-                  </div>
-                </nuxt-link>
-              </div>
-
-              <div class="right">
-                <span>1</span>
-                {{ formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
-              </div>
-            </div>
-          </div>
-          <div v-if="o.details[0].categoryId == '19'" class="double">
-            <div class="left">
-              <nuxt-link :to="goDetails(o.details[0])"
-                target="_blank"><img :src="IMG_URL + o.details[0].goodsImages"
-              /></nuxt-link>
-            </div>
-            <div>
-              <div  v-for="(d, _index) in o.details[0].ring" :key="_index" class="list-body">
+          <div v-for="(detail, n) in o.details" :key="n">
+            <!-- 单品 -->
+            <div v-if="detail.categoryId !== 19  && (detail.ring == ''|| !detail.ring)" class="single">
+              <div   class="list-body">
+                <div class="left">
+                  <nuxt-link :to="goDetails(detail)"
+                    target="_blank"><img :src="IMG_URL + detail.goodsImages"
+                  /></nuxt-link>
+                </div>
                 <div class="mid">
-                <h5>{{ o.details[0].goodsName }}</h5>
-                  <nuxt-link :to="goDetails(o.details[0])" target="_blank">
-                    <!-- <h5>{{ d.goods_name }}</h5> -->
-                    <p class="sku">SKU：{{ o.details[0].goodsCode }}</p>
-                    <div class="detail">
-                      <div
-                        v-for="(k, __index) in d.lang.goods_spec"
-                        :key="__index"
-                        class="desc"
-                      >
-                        <span>{{ k.attr_name }}: </span>
-                        <span>{{ k.attr_value }} </span>
-                      </div>
-                      <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
-                          ({{ a }})
-                      </span>
+                  <nuxt-link :to="goDetails(detail)" target="_blank">
+                    <h5>{{ detail.goodsName }}</h5>
+                    <p>SKU：{{ detail.goodsCode }}</p>
+                    <div
+                      v-for="(k, __index) in detail.detailSpecs"
+                      :key="__index"
+                      class="desc"
+                    >
+                      <span>{{ k.name }}: </span>
+                      <span>{{ k.value }} </span>
                     </div>
                   </nuxt-link>
                 </div>
 
-                <!-- <div class="right"> -->
-                  <!-- <span>1</span> -->
-                  <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
-                <!-- </div> -->
+                <div class="right">
+                  <span>1</span>
+                  <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(detail.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                  <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+                </div>
               </div>
             </div>
-            <div class="num">
-              <span>1</span>
-            </div>
-            <div class="price">
-              {{ formatCoin(o.coinCode) }} {{ formatMoney(o.details[0].goodsPrice) }}
-            </div>
-          </div>
-          <div v-if="o.details.length == 2" class="single customization">
-            <div  v-for="(d, _index) in o.details" :key="_index" class="list-body">
+            <!-- 对戒 -->
+            <div v-else-if="detail.categoryId === 19 && detail.ring !== ''" class="double">
               <div class="left">
-                <nuxt-link :to="goDetails(d)"
-                  target="_blank"><img :src="IMG_URL + d.goodsImages"
+                <nuxt-link :to="goDetails(detail)"
+                  target="_blank"><img :src="IMG_URL + detail.goodsImages"
                 /></nuxt-link>
               </div>
-              <div class="mid">
-                <nuxt-link :to="goDetails(d)" target="_blank">
-                  <h5>{{ d.goodsName }}</h5>
-                  <p>SKU：{{ d.goodsCode }}</p>
-                  <div
-                    v-for="(k, __index) in d.detailSpecs"
-                    :key="__index"
-                    class="desc"
-                  >
-                    <span>{{ k.name }}: </span>
-                    <span>{{ k.value }} </span>
+              <div>
+                <div  v-for="(c, _index) in detail.ring" :key="_index" class="list-body">
+                  <div class="mid">
+                  <h5>{{ detail.goodsName }}</h5>
+                    <nuxt-link :to="goDetails(detail)" target="_blank">
+                      <!-- <h5>{{ d.goods_name }}</h5> -->
+                      <p class="sku">SKU：{{ detail.goodsCode }}</p>
+                      <div class="detail">
+                        <div
+                          v-for="(k, __index) in c.lang.goods_spec"
+                          :key="__index"
+                          class="desc"
+                        >
+                          <span>{{ k.attr_name }}: </span>
+                          <span>{{ k.attr_value }} </span>
+                        </div>
+                        <span class="gender" v-for="(a, b) in c.lang.goods_attr[26].value" :key="b">
+                            ({{ a }})
+                        </span>
+                      </div>
+                    </nuxt-link>
                   </div>
-                </nuxt-link>
-              </div>
 
-              <div class="right">
+                  <!-- <div class="right"> -->
+                    <!-- <span>1</span> -->
+                    <!-- {{ o.coinCode }} {{ formatMoney(d.goodsPrice) }} -->
+                  <!-- </div> -->
+                </div>
+              </div>
+              <div class="num">
                 <span>1</span>
-                {{  formatCoin(o.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+              </div>
+              <div class="price">
+                <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+              </div>
+            </div>
+            <!-- 定制 -->
+            <div v-else class="single customization">
+              <div  class="list-body">
+                <div class="left">
+                  <nuxt-link :to="goDetails(detail)"
+                    target="_blank"><img :src="IMG_URL + detail.goodsImages"
+                  /></nuxt-link>
+                </div>
+                <div class="mid">
+                  <nuxt-link :to="goDetails(detail)" target="_blank">
+                    <h5>{{ detail.goodsName }}</h5>
+                    <p>SKU：{{ detail.goodsCode }}</p>
+                    <div
+                      v-for="(k, __index) in detail.detailSpecs"
+                      :key="__index"
+                      class="desc"
+                    >
+                      <span>{{ k.name }}: </span>
+                      <span>{{ k.value }} </span>
+                    </div>
+                  </nuxt-link>
+                </div>
+
+                <div class="right">
+                  <span>1</span>
+                  <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                  <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -422,12 +431,26 @@ export default {
       receiveOrder: false,
       cid: ``,
       rid: ``,
-      doubleRingGoodPrice:''
+      doubleRingGoodPrice:'',
+      proCategoryId:''
     }
   },
   created() {
     this.getList()
     this.getStatusOrders(0)
+  },
+  computed:{
+    couponType(k) {
+      return function(k) {
+        var k_type=0;
+        if(k.hasOwnProperty('type')){
+          k_type = k.type
+        }else{
+          k_type = 0;
+        }
+        return k_type
+      }
+    }
   },
   methods: {
     getList() {
@@ -471,6 +494,8 @@ export default {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
               obj.link = `132`
+              this.proCategoryId = obj.categoryId
+              // console.log("proCategoryId",this.proCategoryId)
             })
             // console.log("llllll",res.data.data[i].orderStatus)
             if (res.data.data[i].orderStatus == 10) {
@@ -523,7 +548,7 @@ export default {
         })
     },
     getStatusOrders(status) {
-      console.log(status)
+      // console.log(status)
       this.activeIndex = status
       this.$axios
         .get('/web/member/order', {
@@ -541,7 +566,7 @@ export default {
               obj.goodsImages = obj.goodsImages.split(',')[0]
               obj.detailSpecs = JSON.parse(obj.detailSpecs)
               // this.doubleRingGoodPrice = obj.goodsPrice
-              // console.log("obj",obj.goodsPrice)
+              // console.log("obj",obj)
             })
           }
           this.listData = res.data.data
@@ -559,7 +584,7 @@ export default {
           //     console.log("订单",j)
           //   })
           // })
-          console.log("订单",this.listData)
+          // console.log("订单",this.listData)
         })
         .catch(err => {
           if (!err.response) {
@@ -608,7 +633,7 @@ export default {
         40: this.$t(`${lang}.hadSend`),
         50: this.$t(`${lang}.hadFinish`),
       };
-      
+
       // console.log("bbbbb",status_value[status])
       return status_value[status];
     },
@@ -806,20 +831,16 @@ div {
         margin-bottom: 10px;
         padding-top: 0;
         span {
-          width: 500px;
+          width: 140px;
           color: #333333;
           font-size: 14px;
           line-height: 34px;
-          margin-left: 20px;
+          margin-right: 20px;
           display: inline-block;
-        }
-        span:nth-child(2) {
-          width: 150px;
           text-align: center;
         }
-        span:nth-child(3) {
-          width: 200px;
-          text-align: center;
+        span:nth-child(1) {
+          width: 477px;
         }
       }
     }
@@ -830,7 +851,7 @@ div {
         position: relative;
         .price{
           position: absolute;
-          right:157px;
+          right:30px;
           top:47%;
           font-size: 16px;
           color: #666666;
@@ -856,6 +877,7 @@ div {
         .double{
           display: flex;
           padding: 20px;
+          position: relative;
           .detail{
             line-height: 20px;
           }
@@ -878,11 +900,32 @@ div {
           }
           .num{
             position: absolute;
-            right:377px;
+            right:420px;
             top:47%;
             font-size: 16px;
             color: #666666;
             font-family: twCenMt;
+          }
+          .price{
+              span {
+                width: 140px;
+                color: #666666;
+                font-size: 14px;
+                line-height: 34px;
+                margin-left: 20px;
+                display: inline-block;
+                text-align: center;
+              }
+              span:nth-child(1) {
+                color: #f29b87;
+              }
+              span:nth-child(1).old-price {
+                color: #b2b2b2;
+                text-decoration: line-through;
+              }
+              span:nth-child(2) {
+                color: #f29b87;
+              }
           }
           .list-body {
             width: 100%;
@@ -995,9 +1038,9 @@ div {
               }
             }
             .mid {
-              width: 480px;
+              width: 394px;
               height: 70px;
-              padding: 0 20px;
+              padding-left: 20px;
               margin: 0;
               text-align: left;
               font-size: 12px;
@@ -1029,7 +1072,6 @@ div {
               }
             }
             .right {
-              width: 350px;
               height: 70px;
               padding: 0;
               margin: 0;
@@ -1040,11 +1082,23 @@ div {
               color: #666666;
               font-family: twCenMt;
               span {
-                text-align: center;
-                padding: 0 36px;
-                font-size: 14px;
-                margin-right: 96px;
+                width: 140px;
                 color: #666666;
+                font-size: 14px;
+                line-height: 34px;
+                margin-left: 20px;
+                display: inline-block;
+                text-align: center;
+              }
+              span:nth-child(2) {
+                color: #f29b87;
+              }
+              span:nth-child(2).old-price {
+                color: #b2b2b2;
+                text-decoration: line-through;
+              }
+              span:nth-child(3) {
+                color: #f29b87;
               }
             }
           }
@@ -1071,15 +1125,15 @@ div {
           }
           span {
             float: right;
-            font-size: 14px;
+            font-size: 13px;
             line-height: 38px;
             color: #333333;
-            margin-right: 34px;
+            margin-right: 30px;
             b {
               color: #f29b87;
               font-size: 20px;
               font-weight: 400;
-              margin-left: 20px;
+              margin-left: 14px;
               font-family: twCenMt;
             }
           }

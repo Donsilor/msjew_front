@@ -336,7 +336,7 @@ export default {
       goodsInfo: {
         value: 0,
         currency: '',
-        contents: [],
+        content_ids: [],
         content_type: 'product'
       }
     }
@@ -367,10 +367,7 @@ export default {
       this.stepPayPending = false
 
       // facebook 购买成功统计-start
-      if(this.$store.state.platform == 30){
-        console.log("facebook购买成功数据统计")
-        this.fbq('track','Purchase',this.goodsInfo);
-      }
+      fbq('track','Purchase',this.goodsInfo);
       // facebook 购买成功统计-end
 
       //移除本地购物车
@@ -415,10 +412,7 @@ export default {
                 var details = res.data.details;
 
                 details.forEach((o, i) =>{
-                   this.goodsInfo.contents.push({
-                    'id': o.goodsId,
-                    'quantity': 1
-                   })
+                   this.goodsInfo.content_ids[i] = o.goodsId
                 })
 
                 // console.log(777, this.goodsInfo)
@@ -439,17 +433,23 @@ export default {
                 }
               })
               .then(res => {
-                console.log("order_sn",res)
-
-                this.goodsInfo.value = res.data.productAmount;
-                this.goodsInfo.currency = res.data.coinCode;
-
                 this.data2 = res.data
                 // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
                 /*setTimeout(() => {
                   this.$router.push({path: "/"}); // 强制切换当前路由 path
                 }, 5000);*/
                 // console.log("wwwww",this.data)
+
+                this.goodsInfo.value = res.data.payAmount;
+                this.goodsInfo.currency = res.data.coinCode;
+
+                var details = res.data.details;
+
+                details.forEach((o, i) => {
+                  this.goodsInfo.content_ids[i] = o.goodsId
+                })
+
+
               })
               .catch(err => {
                 if (!err.response) {

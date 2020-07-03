@@ -6,7 +6,8 @@
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
         ><span>{{ $t(`${lang}.number`) }}</span
-        ><span>{{ $t(`${lang}.price`) }}</span
+        ><span>{{ $t(`${lang}.oldPrice`) }}</span
+        ><span>{{ $t(`${lang}.newPrice`) }}</span
         ><span>{{ $t(`${lang}.option`) }}</span>
       </div>
       <div class="cart-goods">
@@ -84,7 +85,7 @@
               :g="g"
               :word="$t(`${lang}.customMade`)"
               @reloadList="getList"
-              @bottomData='refreshData' 
+              @bottomData='refreshData'
             ></madeUp>
           </div>
         </div>
@@ -165,7 +166,7 @@
         {{ $t(`${lang}.Settlement`) }}
       </div>
     </div>
-  </div> 
+  </div>
 </div>
 </template>
 
@@ -201,29 +202,17 @@ export default {
     banBtn() {
       return this.tickNum === 0
     }
-    
   },
   beforeMount() {
     this.getList()
-    
   },
-
-  created(){
-    
-  },
-  mounted(){
-    
-    this.$nextTick(() => {
-    })
-  },
-
   methods: {
     // 当勾选了一个商品以后删除另一个商品时更新底部数据
     refreshData(){
       this.totalNum=0
       this.totalPrice=0
-      this.allTick=false  
-      this.tickNum = 0  
+      this.allTick=false
+      this.tickNum = 0
       window.location.reload()
     },
     handleScroll(e){
@@ -249,12 +238,21 @@ export default {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
-          // console.log("1230",res.coinType)
+          // console.log("1230",res)
           for (const i in res) {
             res[i].tick = false
             this.coinType = res[i].coinType
             // console.log("1230", res[i].coinType) 
           }
+          // const result = []
+          // let keys = Object.keys(res)
+          // keys = keys.sort((a, b) => {
+          //     return b - a
+          // })
+          // keys.forEach(item => {
+          //     result.push(res[item])
+          // })
+          // this.good = result
           this.good = res
           if(this.good.length<=3){
             // console.log(11111111111,this.good.length)
@@ -271,7 +269,6 @@ export default {
         })
     },
     defaultAll(){
-      // console.log(this.good)
       if(!this.$store.getters.hadLogin){
         // console.log("全选",this.allTick)
         if (this.allTick) {
@@ -315,9 +312,34 @@ export default {
 
             this.good[j].tick = true
             // console.log("tick",this.good[i].tick)
-          
+
             // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
-            this.totalPrice +=parseFloat(this.good[j].price) 
+
+            if(this.good[j].groupType == 2){
+              if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
+                // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[0].coupon.discount.price)
+              }else{
+                // this.totalPrice -=parseFloat(this.good[i].price)
+                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[0].simpleGoodsEntity.salePrice)
+              }
+
+              if(this.good[j].data[1].coupon.hasOwnProperty('discount')){
+                // this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
+                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[1].coupon.discount.price)
+              }else{
+                // this.totalPrice -=parseFloat(this.good[i].price)
+                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[1].simpleGoodsEntity.salePrice)
+              }
+            }else{
+              if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
+                // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].data[0].coupon.discount.price)
+              }else{
+                // this.totalPrice -=parseFloat(this.good[i].price)
+                this.totalPrice = this.floatAdd(this.totalPrice, this.good[j].price)
+              }
+            }
           }
           // console.log("price=====2",this.good)
           // this.tickNum = this.good.length
@@ -342,9 +364,7 @@ export default {
         this.tickNum = 0
         this.totalNum = 0
         this.totalPrice = 0
-        // console.log(3333333)
       } else {
-        // console.log(44444)
         this.tickNum = 0
         this.totalNum = 0
         this.totalPrice = 0
@@ -365,7 +385,6 @@ export default {
               this.totalNum += 1
 
           }else{
-            // console.log(333333)
               if(this.good[i].data[0].simpleGoodsEntity.goodsStatus!==2){
                 this.good[i].tick = false
                 continue;
@@ -376,11 +395,37 @@ export default {
 
           this.good[i].tick = true
           // console.log("tick",this.good[i].tick)
-         
+
           // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
-          this.totalPrice +=parseFloat(this.good[i].price) 
+
+        if(this.good[i].groupType == 2){
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
+          }else{
+            // this.totalPrice -=parseFloat(this.good[i].price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].simpleGoodsEntity.salePrice)
+          }
+
+          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+            // this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].coupon.discount.price)
+          }else{
+            // this.totalPrice -=parseFloat(this.good[i].price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].simpleGoodsEntity.salePrice)
+          }
+        }else{
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
+          }else{
+            // this.totalPrice -=parseFloat(this.good[i].price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].price)
+          }
         }
-        // console.log("price=====2",this.good)
+
+          // this.totalPrice +=parseFloat(this.good[i].price)
+        }
         // this.tickNum = this.good.length
         // this.totalNum = this.good.length
         this.allTick = !this.allTick
@@ -388,18 +433,63 @@ export default {
       this.good = JSON.parse(JSON.stringify(this.good))
     },
     ticksCHeck(i) {
-      if(this.good[i].groupType == 1&&this.good[i].groupType == 2){
-          this.good[i].tick ? this.tickNum -= 1  : this.tickNum += 1
-          this.good[i].tick ? this.totalNum -= 1 : this.totalNum +=1
+      this.good[i].tick ? this.tickNum-- : this.tickNum++
+      this.good[i].tick ? this.totalNum-- : this.totalNum++
+
+      if(this.good[i].tick){
+        if(this.good[i].groupType == 2){
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[0].coupon.discount.price)
+          }else{
+            // this.totalPrice -=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
+            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[0].simpleGoodsEntity.salePrice)
+          }
+
+          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+            // this.totalPrice -=parseFloat(this.good[i].data[1].coupon.discount.price)
+            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[1].coupon.discount.price)
+          }else{
+            // this.totalPrice -=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
+            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[1].simpleGoodsEntity.salePrice)
+          }
+        }else{
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            // this.totalPrice -=parseFloat(this.good[i].data[0].coupon.discount.price)
+            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].data[0].coupon.discount.price)
+          }else{
+            // this.totalPrice -=parseFloat(this.good[i].price)
+            this.totalPrice = this.floatSub(this.totalPrice, this.good[i].price)
+          }
+        }
       }else{
-         this.good[i].tick ? this.tickNum-- : this.tickNum++
-         this.good[i].tick ? this.totalNum-- : this.totalNum++
+        if(this.good[i].groupType == 2){
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            // this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
+          }else{
+            this.totalPrice +=parseFloat(this.good[i].data[0].simpleGoodsEntity.salePrice)
+          }
+
+          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+            // this.totalPrice +=parseFloat(this.good[i].data[1].coupon.discount.price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].coupon.discount.price)
+          }else{
+            // this.totalPrice +=parseFloat(this.good[i].simpleGoodsEntity.salePrice)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[1].simpleGoodsEntity.salePrice)
+          }
+        }else{
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            // this.totalPrice +=parseFloat(this.good[i].data[0].coupon.discount.price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].data[0].coupon.discount.price)
+          }else{
+            // this.totalPrice +=parseFloat(this.good[i].price)
+            this.totalPrice = this.floatAdd(this.totalPrice, this.good[i].price)
+          }
+        }
       }
 
-     
-      this.good[i].tick
-        ? (this.totalPrice -=parseFloat(this.good[i].price) )
-        : (this.totalPrice += parseFloat(this.good[i].price))
+
       this.good[i].tick = !this.good[i].tick
       this.good = JSON.parse(JSON.stringify(this.good))
       if (this.tickNum == this.good.length) {
@@ -424,7 +514,7 @@ export default {
         .then(data => {
           this.totalNum=0
           this.totalPrice=0
-          this.allTick=false  
+          this.allTick=false
           this.$successMessage(this.$t(`${lang}.deleteSuccess`))
           this.getList()
         })
@@ -665,7 +755,7 @@ export default {
   overflow: hidden;
   margin: 0 auto;
   position: relative;
-  
+
   .cart-container{
     position: relative;
     overflow: hidden;
@@ -697,15 +787,18 @@ export default {
       padding-left: 50px;
       span {
         display: block;
+        width: 180px;
+        text-align: center;
       }
       span:nth-child(1) {
-        width: 140+269+71+185+83px;
+        width: 694px;
+        text-align: left;
       }
-      span:nth-child(2) {
-        width: 60+120px;
+      span:nth-child(2){
+        width: 80px;
       }
-      span:nth-child(3) {
-        width: 207px;
+      span:nth-child(5) {
+        width: 100px;
       }
     }
     .cart-goods {

@@ -50,7 +50,7 @@
         v-for="(each, n) in categories"
         :key="n"
         class="category"
-        @click="routerTo(each.routerName, each.routerQuery)"
+        @click="routerTo(each.routerName, each.routerQuery, each.ringType)"
       >
         <div class="category-image">
           <img :src="each.image" />
@@ -72,7 +72,7 @@
             <img :src="activePairRingInfo.image" @error="imageError" />
           </div>
           <div class="product-price">
-            <span class="currency">{{ activePairRingInfo.coinType }}</span>
+            <span class="currency">{{ formatCoin(activePairRingInfo.coinType) }}</span>
             <span class="price">
               {{ formatNumber(activePairRingInfo.salePrice) }}
             </span>
@@ -85,6 +85,7 @@
       <div class="ring-list">
         <div
           v-for="(each, n) in recommendPairRings"
+          v-show="n < 4"
           :key="n"
           :class="['ring-item', { active: activePairRing === n }]"
           @click="changeActivePairRing(n)"
@@ -112,7 +113,7 @@
           <h3 class="title-line"></h3>
           <button
             class="more"
-            @click="routerTo('marriage-ring-single-ring', { type: 'lady' })"
+            @click="routerTo('marriage-ring-single-ring', { style: 160 }, 'lady')"
           >
             {{ lang['more'] }}
           </button>
@@ -121,6 +122,7 @@
       <div class="ring-list">
         <div
           v-for="(each, n) in recommendLadyRings"
+          v-show="n < 4"
           :key="n"
           class="ring-item"
           @click="toSingleRingDetail(each)"
@@ -147,7 +149,7 @@
           <button
             class="more"
             @click="
-              routerTo('marriage-ring-single-ring', { type: 'gentlemen' })
+              routerTo('marriage-ring-single-ring', { style: 160 }, 'gentlemen')
             "
           >
             {{ lang['more'] }}
@@ -157,6 +159,7 @@
       <div class="ring-list">
         <div
           v-for="(each, n) in recommendGentlemanRings"
+          v-show="n < 4"
           :key="n"
           class="ring-item"
           @click="toSingleRingDetail(each)"
@@ -182,23 +185,26 @@ export default {
         {
           name: this.LANGUAGE['marriage-ring'].index['marriage-ring'],
           image: '/marriage-ring/category-image-1.png',
-          routerName: 'marriage-ring-pair-ring'
+          routerName: 'marriage-ring-pair-ring',
+		  ringType: ''
         },
         {
           name: this.LANGUAGE['marriage-ring'].index['lady-ring'],
           image: '/marriage-ring/category-image-2.png',
           routerName: 'marriage-ring-single-ring',
           routerQuery: {
-            type: 'lady'
-          }
+            style: 160
+          },
+		  ringType: 'lady'
         },
         {
           name: this.LANGUAGE['marriage-ring'].index['gentlemen-ring'],
           image: '/marriage-ring/category-image-3.png',
           routerName: 'marriage-ring-single-ring',
           routerQuery: {
-            type: 'gentlemen'
-          }
+            style: 160
+          },
+		  ringType: 'gentlemen'
         }
       ],
       activePairRing: 0
@@ -306,16 +312,17 @@ export default {
     recommendGentlemanRings() {
       const recommendInfo = this.recommendGentlemanRingInfo
       let result = recommendInfo.moduleGoods || []
-      result = result.map(item => {
-        item = item.goods && item.goods[0] ? item.goods[0] : {}
-        return item
-      })
+      // result = result.map(item => {
+      //   item = item.goods && item.goods[0] ? item.goods[0] : {}
+      //   return item
+      // })
       result = result.map(item => {
         item.showType = recommendInfo.showType
         item.goodsImages = this.imageStrToArray(item.goodsImages)
         item.image = item.goodsImages[0] || ''
         return item
       })
+      // console.log(515151,result)
       return result
     }
   },
@@ -398,10 +405,14 @@ export default {
         })
       }
     },
-    routerTo(name, query = {}) {
+    routerTo(name, query = {}, ringType = '') {
       if (!name) {
         return
       }
+      if(ringType){
+        sessionStorage.setItem('ringType', ringType)
+      }
+
       this.$router.push({
         name: name,
         query: query
