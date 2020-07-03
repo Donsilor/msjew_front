@@ -88,3 +88,18 @@ html {
 ol, ul {
   list-style: none;
 }
+
+.clf::after{
+  display: block;
+  content: ' ';
+  opacity: 0;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+}
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}

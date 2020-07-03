@@ -256,7 +256,7 @@ export default {
           const product = item
           // product.showType = webSite.showType
           product.goodsImages = this.imageStrToArray(product.goodsImages || '')
-          
+
           // 删除后端无故增加的一层嵌套
           // product.configAttriEntity = product.configAttriEntity[product.id]
           product.to = {
@@ -276,7 +276,6 @@ export default {
   },
   async asyncData({ $axios, route, store, app }) {
     const seoInfo = await app.$getSeoInfo(2)
-    console.log(33);
     return $axios({
       method: 'get',
       url: '/web/goods/style/web-site',
@@ -297,7 +296,6 @@ export default {
       })
   },
   mounted() {
-    
     const _this = this
     _this.$nextTick(() => {
       const Swiper = require('swiper/dist/js/swiper.js')

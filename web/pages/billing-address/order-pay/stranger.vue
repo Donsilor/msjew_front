@@ -377,7 +377,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
                 <div v-show="payWay == 6" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -397,7 +397,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay === 61" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -418,8 +418,8 @@
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 82" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                <div v-show="payWay == 82" class="pay-price"> 
+                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -442,7 +442,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 84" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -462,7 +462,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay == 8" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 8" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -481,7 +481,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 83" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -491,8 +491,7 @@
                 </div>
                 <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
-
-               <!-- 信用卡 -->
+              <!-- 信用卡 -->
               <div
                 v-show="this.$store.state.platform !== 30"
                 :class="{ 'pay-choose': payWay == 81 }"
@@ -504,7 +503,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.UnionPay`) }}</div>
                 <div v-show="payWay === 81" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -512,7 +511,7 @@
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
 
               <!-- 电汇 -->
@@ -527,7 +526,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
                 <div v-show="payWay == 89" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 89 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -549,7 +548,7 @@
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 2" class="pay-price"> -->
                   <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -585,7 +584,7 @@
             >
               <span
                 >{{ $store.state.coin }}
-                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+                {{ formatMoney(tex.pay_amount) }}</span
               >
               <span>{{ $t(`${lang}.beiQin`) }}</span>
 
@@ -623,7 +622,8 @@
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
         ><span>{{ $t(`${lang}.number`) }}</span
-        ><span>{{ $t(`${lang}.price`) }}</span>
+        ><span>{{ $t(`${lang}.oldPrice`) }}</span
+        ><span>{{ $t(`${lang}.newPrice`) }}</span>
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
@@ -647,7 +647,7 @@
       </div>
 
       <!--    订单信息模块-->
-      <div class="order-info" v-loading="goingPay">
+      <div class="order-info">
         <div class="left-info">
           <div class="new-address-title">
             <div class="na-line" />
@@ -673,13 +673,13 @@
             <div class="send-left">
               <div>{{ $t(`${lang}.sendTime`) }}</div>
               <div>
-                <router-link to="/policies/shipping">{{
+                <router-link to="/deliveryPolicy">{{
                   $t(`${lang}.checkDeliveryPolicy`)
                 }}</router-link>
               </div>
             </div>
             <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ tex.plan_days }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -902,7 +902,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                      <span>{{ formatCoin(tex.coinType) }} {{ formatMoney(ultimatelyPay) }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang3}.tips`) }}</p>
@@ -975,7 +975,18 @@
               </div>
             </div>
 
-            <div v-show="makeGay" class="detail-line">
+            <!-- 优惠券 -->
+            <div v-show="objectIfEmpty(tex.coupons) && isLogin" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': 1}" @click="showUseCoupon">
+                <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
+                <div>{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+            
+
+            <!-- <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
                 <span style="color: red;">{{ tooInp }}</span>
@@ -988,12 +999,12 @@
               <div class="hkd color-pink">
                 -{{ formatCoin(tex.coinType) }} {{ formatMoney(preferFee) }}
               </div>
-            </div>
+            </div> -->
             <div class="detail-line">
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-                  <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
+                  <a href="/free-shipping" target="_blank"><span>?</span></a>
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -1005,7 +1016,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-                  <a href="/policies/international" target="_blank"
+                  <a href="/international" target="_blank"
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -1032,7 +1043,22 @@
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ formatCoin(tex.coinType) }} {{ showOrderAmount }}
+                {{ formatCoin(tex.coinType) }} {{ formatMoney(goodsPrice) }}
+              </div>
+            </div>
+            <!-- 折扣金额 -->
+            <div v-show="tex.discount_amount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
+              </div>
+            </div>
+            <div class="detail-line">
+              <div class="font-size-16 color-333">{{ $t(`${lang3}.NeedPay`) }}</div>
+              <div class="hkd color-pink price-big">
+                {{ formatCoin(tex.coinType) }}
+                {{ formatMoney(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
               </div>
             </div>
           </div>
@@ -1452,7 +1478,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
                 <div v-show="payWay == 6" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -1472,7 +1498,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay === 61" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -1481,7 +1507,6 @@
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
-
               <!-- 大陆支付宝 -->
               <div
                 v-show="this.$store.state.platform == 20"
@@ -1493,8 +1518,8 @@
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 82" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                <div v-show="payWay == 82" class="pay-price"> 
+                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -1517,7 +1542,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 84" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -1538,7 +1563,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
                 <div v-show="payWay == 8" class="pay-price">
-                  {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 8" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1557,7 +1582,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 83" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -1565,9 +1590,7 @@
                 <div v-show="payWay == 83" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay needlogin" :class="language == 'en_US' ? 'en' : ''
-        "><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
-
+               <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
               <!-- 信用卡 -->
               <div
@@ -1581,7 +1604,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.UnionPay`) }}</div>
                 <div v-show="payWay === 81" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -1589,7 +1612,7 @@
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
-                <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
+                <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div>
 
               <!-- 电汇 -->
@@ -1604,7 +1627,7 @@
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
                 <div v-show="payWay == 89" class="pay-price">
-                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 89 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
@@ -1626,7 +1649,7 @@
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
                 <div v-show="payWay == 2" class="pay-price"> -->
                   <!-- {{ coinType }} {{ formatMoney(price) }} -->
-                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.orderAmount || goodsPrice) }}
+                  <!-- {{ $store.state.coin }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
@@ -1663,7 +1686,7 @@
             >
               <span
                 >{{ $store.state.coin }}
-                {{ formatMoney(tex.orderAmount || goodsPrice) }}</span
+                {{ formatMoney(tex.pay_amount) }}</span
               >
               <span>{{ $t(`${lang}.beiQin`) }}</span>
 
@@ -1701,7 +1724,8 @@
       <div class="cart-top-bar">
         <span>{{ $t(`${lang}.info`) }}</span
         ><span>{{ $t(`${lang}.number`) }}</span
-        ><span>{{ $t(`${lang}.price`) }}</span>
+        ><span>{{ $t(`${lang}.oldPrice`) }}</span
+        ><span>{{ $t(`${lang}.newPrice`) }}</span>
       </div>
       <div class="cart-goods">
         <div v-for="(g, index) in good" :key="index">
@@ -1725,7 +1749,7 @@
       </div>
 
       <!--    订单信息模块-->
-      <div class="order-info" v-loading="goingPay">
+      <div class="order-info">
         <div class="left-info">
           <div class="new-address-title">
             <div class="na-line" />
@@ -1751,13 +1775,13 @@
             <div class="send-left">
               <div>{{ $t(`${lang}.sendTime`) }}</div>
               <div>
-                <router-link to="/policies/shipping">{{
+                <router-link to="/deliveryPolicy">{{
                   $t(`${lang}.checkDeliveryPolicy`)
                 }}</router-link>
               </div>
             </div>
             <div class="send-right">
-              {{ tex.planDays }}{{ $t(`${lang}.goSingKei`) }}
+              {{ tex.plan_days }}{{ $t(`${lang}.goSingKei`) }}
             </div>
           </div>
           <!-- <div class="after-sale-email">
@@ -1980,7 +2004,7 @@
                   <div class="total">
                     <div class="label"><span class="star"></span>{{ $t(`${lang3}.totalAmount`) }}</div>
                     <div class="totle-price">
-                      <span>{{ formatCoin(tex.coinType) }} {{ formatMoney(tex.orderAmount || goodsPrice) }}</span>
+                      <span>{{ formatCoin(tex.coinType) }} {{ formatMoney(ultimatelyPay) }}</span>
                     </div>
                   </div>
                   <p class="tips">{{ $t(`${lang3}.tips`) }}</p>
@@ -2069,7 +2093,7 @@
               <div>
                 <span>{{ $t(`${lang}.expressMoney`) }}</span>
                 <div class="question">
-                  <a href="/policies/free-shipping" target="_blank"><span>?</span></a>
+                  <a href="/free-shipping" target="_blank"><span>?</span></a>
                   <div class="answer">{{ $t(`${lang}.expressSay`) }}</div>
                 </div>
               </div>
@@ -2081,7 +2105,7 @@
               <div>
                 <span>{{ $t(`${lang}.tex`) }}</span>
                 <div class="question">
-                  <a href="/policies/international" target="_blank"
+                  <a href="/international" target="_blank"
                     ><span>?</span></a
                   >
                   <div class="answer">{{ $t(`${lang}.texSay`) }}</div>
@@ -2103,12 +2127,30 @@
                 +{{ formatCoin(tex.coinType) }} {{ formatMoney(tex.safeFee) }}
               </div>
             </div>
+            
+            <!-- 折扣金额 -->
+            <div v-show="tex.discount_amount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
+              </div>
+            </div>
+            
+            <!-- 优惠券 -->
+            <div v-show="objectIfEmpty(tex.coupons) && isLogin" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <div class="hkd color-pink" style="cursor: pointer;" :class="{'under-line': 1}" @click="showUseCoupon">
+                <!-- <div v-if="couponCodeR.couponId">- {{$store.state.coin}} {{ formatMoney(couponCodeR.couponCode) }}</div> -->
+                <div>{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+            
             <div class="detail-line">
               <div class="font-size-16 color-333">
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ formatCoin(tex.coinType) }} {{ showOrderAmount }}
+                {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
               </div>
             </div>
           </div>
@@ -2206,7 +2248,7 @@ export default {
       lang2,
       lang3,
       canSubmit: false,
-      pathTakeIds: this.$route.query.cartIds.split(','),
+       pathTakeIds: this.$route.query.cartIds.split(','),
       orderSn: this.$route.query.orderId,
       userInfo: {},
       confirmBox: false,
@@ -2260,6 +2302,8 @@ export default {
       scrollTop: 0,
       is_electronic:'',
       areaId : this.$store.state.areaId,
+      ultimatelyPay:'',
+      isLogin:this.$store.getters.hadLogin
     }
   },
   // watch:{
@@ -2297,11 +2341,20 @@ export default {
       }
       return result
     },
-    ttPrice() {
-      // return this.goodsPrice * 0.985
+    objectIfEmpty(){
+      return function(e) {
+        if(typeof(e) == 'object'){
+          for(var i in e){
+            return i
+          }
+        }else{
+          return false
+        }
+      }
     }
   },
   created() {
+    
     // console.log("planDays",this.tex.planDays)
     const promise = new Promise((resolve, reject) => {
       this.$store
@@ -2341,6 +2394,7 @@ export default {
       })
   },
   mounted() {
+    // console.log("rrr",this.isLogin)
     this.language = this.getCookie('language')
     window.addEventListener('scroll', this.scrollToTop);
 
@@ -2557,12 +2611,17 @@ export default {
       //   })
     },
     getTex() {
-      this.canSubmit = false
-      let json=[]
-
+      this.canSubmit = false;
+      let json=[];
+      let arr = [];
       for (const i in this.good) {
         let group = this.good[i].data
         let item = group.map(item => {
+          if(item.coupon.hasOwnProperty('discount')){
+            arr[i] = item.coupon.discount.coupon_id
+          }else{
+            arr[i] = ''
+          }
           return {
             createTime: item.createTime || new Date().getTime(),
             goods_num: item.goodsCount,
@@ -2570,7 +2629,8 @@ export default {
             goods_id: item.goodsDetailsId,
             group_id: item.groupId || null,
             group_type:item.groupType,
-            goods_type: item.goodsType
+            goods_type: item.goodsType,
+            coupon_id: arr[i]
           }
         })
 
@@ -2587,6 +2647,8 @@ export default {
             this.tex.priceHKD = res.data.order_amount_HKD
             this.tex.coinType = res.data.currency
             // console.log("税费",res.data)
+            this.ultimatelyPay = res.data.pay_amount;
+            console.log("税费",this.tex)
           })
           .catch(err => {
             this.canSubmit = false
@@ -2614,7 +2676,7 @@ export default {
       }
     },
     createOrder() {
-      let pay = 0
+     let pay = 0
       if(this.payWay==6){
         pay = 6
       }else if(this.payWay==61){
@@ -2628,7 +2690,7 @@ export default {
       }else if(this.payWay==84){
         pay = 84
       }
-      // console.log("方式",pay)
+      console.log("方式",this.payWay)
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -2643,7 +2705,7 @@ export default {
         return
       }
       if(this.payWay==81 || this.payWay==82 ||this.payWay==83){
-        this.$errorMessage(this.$t(`${lang}.firstLogin`))
+        // this.$errorMessage(this.$t(`${lang}.firstLogin`))
         const topB = document.getElementsByClassName('layout-box')[0];
         const that = this
         let timer = setInterval(() => {
@@ -2659,10 +2721,16 @@ export default {
       let baseUrl=this.$store.getters.baseUrl
       let invoice = {}
       let json=[]
+      let arr = [];
 
       for (const i in this.good) {
         let group = this.good[i].data
         let item = group.map(item => {
+          if(item.coupon.hasOwnProperty('discount')){
+            arr[i] = item.coupon.discount.coupon_id
+          }else{
+            arr[i] = ''
+          }
           return {
             createTime: item.createTime || new Date().getTime(),
             goods_num: item.goodsCount,
@@ -2670,17 +2738,17 @@ export default {
             goods_id: item.goodsDetailsId,
             group_id: item.groupId || null,
             group_type:item.groupType,
-            goods_type: item.goodsType
+            goods_type: item.goodsType,
+            coupon_id: arr[i]
           }
         })
 
         json = json.concat(item)
       }
-      // console.log(this.iconShow)
+      console.log(this.iconShow)
       if(this.iconShow ){
         invoice = this.invoice
       }
-      this.goingPay = true
       this.$axios({
         method: 'post',
         url: '/web/member/order-tourist/create',
@@ -2690,7 +2758,6 @@ export default {
           invoice:invoice,
           tradeType:'pc',
           coinType:this.$store.state.coin,
-          payType: pay,
           returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
         }
       })
@@ -2720,7 +2787,6 @@ export default {
           // })
         })
         .catch(err => {
-          this.goingPay = false
           if (!err.response) {
             this.$message.error(err.message)
           } else {
@@ -2733,6 +2799,23 @@ export default {
       const that = this
 
       that.$errorMessage(that.$t(`${lang3}.PleaseLogin`));
+      const topC = document.getElementsByClassName('layout-box')[0];
+
+      let timer = setInterval(() => {
+        let ispeed = Math.floor(-that.scrollTop / 5)
+        topC.scrollTop = that.scrollTop + ispeed
+        if (that.scrollTop === 0) {
+          clearInterval(timer)
+        }
+      }, 22)
+    },
+    showUseCoupon() {
+      const that = this
+      this.$errorMessage(that.$t(`${lang}.needRegister`))
+      this.goTop()
+    },
+    goTop() {
+      const that = this;
       const topC = document.getElementsByClassName('layout-box')[0];
 
       let timer = setInterval(() => {
@@ -3302,13 +3385,26 @@ div {
     }
 
     span:nth-child(1) {
-      width: 710px;
+      width: 668px;
     }
 
     span:nth-child(2) {
-      width: 70px;
-      margin-right: 110px;
+      width: 80px;
       text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    span:nth-child(3) {
+      width: 180px;
+      text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    span:nth-child(4) {
+      width: 180px;
+      text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
     }
   }
 
@@ -4531,7 +4627,6 @@ div {
           color: #f29b87;
           position: absolute;
           right: 80px;
-          // top: 50px;
           top: 33px;
           line-height: 24px;
         }
@@ -5002,7 +5097,7 @@ div {
 .hint_pay{
   position: absolute;
   right: 80px;
-  top: 94px;
+  top: 84px;
   font-family: twCenMt;
   font-size: 14px;
   color: #aaa;

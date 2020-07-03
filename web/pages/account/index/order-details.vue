@@ -65,7 +65,7 @@
           </span>
         </div>
         <div v-else class="status">
-          <span v-if="data.orderStatus == '10'"> 
+          <span v-if="data.orderStatus == '10'">
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.waitingPay`)
           }}</span>
@@ -137,89 +137,103 @@
         <div class="goods-info-title">
           <div class="t1">{{ $t(`${lang}.goodsInfo`) }}</div>
           <div class="t2">{{ $t(`${lang}.goodsNum`) }}</div>
-          <div class="t3">{{ $t(`${lang}.goodsPrice`) }}</div>
+          <div class="t3">{{ $t(`${lang}.oldPrice`) }}</div>
+          <div class="t4">{{ $t(`${lang}.newPrice`) }}</div>
         </div>
-        <!-- 单品 -->
-        <div v-if="data.details[0].categoryId !== 19 && data.details.length !== 2" class="detail-info single">
-          <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
-            <nuxt-link :to="goToDetail(d)" target="_blank">
-              <div class="t1">
-                <div class="good-img">
-                  <img :src="IMG_URL + d.goodsImages" />
-                </div>
-                <div class="good-desc">
-                  <div class="good-name">{{ d.goodsName }}</div>
-                  <div class="good-sku">SKU：{{ d.goodsCode }}</div>
-                  <div class="details">
-                    <span v-for="(v, k) in d.detailSpecs" :key="k"
-                      >{{ v.name }}：{{ v.value }}</span
-                    >
+        <div v-for="(detail, _index) in data.details" :key="_index">
+          <!-- 单品 -->
+          <div v-if="detail.categoryId !== 19 && (detail.ring == ''|| !detail.ring)" class="detail-info single">
+            <div class="goods-details">
+              <nuxt-link :to="goToDetail(detail)" target="_blank">
+                <div class="t1">
+                  <div class="good-img">
+                    <img :src="IMG_URL + detail.goodsImages" />
                   </div>
-                </div>
-              </div>
-            </nuxt-link>
-            <div class="t2">1</div>
-            <div class="t3">
-              {{ formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
-            </div>
-          </div>
-        </div>
-        <!-- 对戒 -->
-        <div v-if="data.details[0].categoryId == '19'" class="detail-info double">
-          <div  class="goods-details">
-            <nuxt-link :to="goToDetail(data.details[0])" target="_blank">
-              <div class="t1">
-                <div class="good-img">
-                  <img :src="IMG_URL + data.details[0].goodsImages" />
-                </div>
-                <div class="good-name">{{ data.details[0].goodsName }}</div>
-                <div class="good-desc"> 
-                  <div class="dec" v-for="(d, _index) in data.details[0].ring" :key="_index">
-                    
-                    <div class="good-sku">SKU：{{ data.details[0].goodsCode }}</div>
+                  <div class="good-desc">
+                    <div class="good-name">{{ detail.goodsName }}</div>
+                    <div class="good-sku">SKU：{{ detail.goodsCode }}</div>
                     <div class="details">
-                      <span v-for="(v, k) in d.lang.goods_spec" :key="k"
-                        >{{ v.attr_name }}：{{ v.attr_value }}</span
+                      <span v-for="(v, k) in detail.detailSpecs" :key="k"
+                        >{{ v.name }}：{{ v.value }}</span
                       >
-                      <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
-                          ({{ a }})
-                      </span>
                     </div>
                   </div>
-                  
                 </div>
+              </nuxt-link>
+              <div class="t2">1</div>
+              <div class="t3" :class="{'old-price': couponType(detail.couponInfo) == 2}">
+                {{ formatCoin(data.coinCode) }} {{ formatMoney(detail.goodsPrice) }}
               </div>
-            </nuxt-link>
-            <div class="t2">1</div>
-          </div>
-            <div class="t3">
-              <!-- d.goodsPrice -->
-              {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
+              <div class="t4">
+                {{ formatCoin(data.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}
+              </div>
             </div>
-        </div>
-        <!-- 定制 -->
-        <div v-if="data.details.length === 2" class="detail-info customization">
-          <div v-for="(d, _index) in data.details" :key="_index" class="goods-details">
-            <nuxt-link :to="goToDetail(d)" target="_blank">
-              <div class="t1">
-                <div class="good-img">
-                  <img :src="IMG_URL + d.goodsImages" />
-                </div>
-                <div class="good-desc">
-                  <div class="good-name">{{ d.goodsName }}</div>
-                  <div class="good-sku">SKU：{{ d.goodsCode }}</div>
-                  <div class="details">
-                    <span v-for="(v, k) in d.detailSpecs" :key="k"
-                      >{{ v.name }}：{{ v.value }}</span
-                    >
+          </div>
+          <!-- 对戒 -->
+          <div v-else-if="detail.categoryId === 19 && detail.ring !== ''" class="detail-info double">
+            <div  class="goods-details">
+              <nuxt-link :to="goToDetail(detail)" target="_blank">
+                <div class="t1">
+                  <div class="good-img">
+                    <img :src="IMG_URL + detail.goodsImages" />
+                  </div>
+                  <div class="good-name">{{ detail.goodsName }}</div>
+                  <div class="good-desc"> 
+                    <div class="dec" v-for="(d, _index) in detail.ring" :key="_index">
+                      
+                      <div class="good-sku">SKU：{{ detail.goodsCode }}</div>
+                      <div class="details">
+                        <span v-for="(v, k) in d.lang.goods_spec" :key="k"
+                          >{{ v.attr_name }}：{{ v.attr_value }}</span
+                        >
+                        <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
+                            ({{ a }})
+                        </span>
+                      </div>
+                    </div>
+                    
                   </div>
                 </div>
-              </div>
-            </nuxt-link>
-            <div class="t2">1</div>
-            <div class="t3">
-              {{  formatCoin(data.coinCode) }} {{ formatMoney(d.goodsPrice) }}
+              </nuxt-link>
+              <div class="t2">1</div>
             </div>
+              <!-- <div class="t3">
+                {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
+              </div> -->
+              <div class="t3" :class="{'old-price': couponType(detail.couponInfo) == 2}">
+                {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
+              </div>
+              <div class="t4">
+                {{ formatCoin (data.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}
+              </div>
+          </div>
+          <!-- 定制 -->
+          <div v-else class="detail-info customization">
+            <div class="goods-details">
+              <nuxt-link :to="goToDetail(detail)" target="_blank">
+                <div class="t1">
+                  <div class="good-img">
+                    <img :src="IMG_URL + detail.goodsImages" />
+                  </div>
+                  <div class="good-desc">
+                    <div class="good-name">{{ detail.goodsName }}</div>
+                    <div class="good-sku">SKU：{{ detail.goodsCode }}</div>
+                    <div class="details">
+                      <span v-for="(v, k) in detail.detailSpecs" :key="k"
+                        >{{ v.name }}：{{ v.value }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </nuxt-link>
+              <div class="t2">1</div>
+                <div class="t3" :class="{'old-price': couponType(detail.couponInfo) == 2}">
+                  {{  formatCoin (data.coinCode) }} {{ formatMoney(detail.goodsPrice) }}
+                </div>
+                <div class="t4">
+                  {{ formatCoin (data.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}
+                </div>
+              </div>
           </div>
         </div>
         <div class="goods-bot-bar" />
@@ -364,7 +378,7 @@
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.itemsNum`) }}</div>
-            <div class="ff">{{ formatNumber(data.productCount) }}</div>
+            <div class="ff">{{ data.productCount }}</div>
           </div>
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.totalNum`) }}</div>
@@ -372,18 +386,19 @@
               {{ formatCoin(data.coinCode) }} {{ formatNumber(data.productAmount) }}
             </div>
           </div>
-          <div class="info-line" v-for="item in cardList">
+          <!-- <div class="info-line" v-for="item in cardList">
             <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
             <div class="ff color-pink">
               -{{ formatCoin(data.coinCode) }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">(已解绑)</span>
             </div>
-          </div>
-          <div class="info-line">
+          </div> -->
+          <!-- <div class="info-line">
             <div class="label">{{ $t(`${lang}.coupon`) }}</div>
             <div class="ff color-pink">
               -{{ formatCoin(data.coinCode) }} {{ formatNumber(data.preferFee) }}
             </div>
-          </div>
+          </div> -->
+
           <div class="info-line">
             <div class="label">{{ $t(`${lang}.freight`) }}</div>
             <div class="ff">
@@ -409,12 +424,37 @@
             </div>
           </div>
           <div class="info-line">
-            <div class="label big-label">{{ $t(`${lang}.orderTotal`) }}</div>
+            <div class="label">{{ $t(`${lang}.orderTotal`) }}</div>
             <div class="ff big-ff">
               <!-- {{ data.coinCode }} {{ formatNumber(data.orderAmount) }} -->
               {{ formatCoin(data.coinCode) }} {{ formatNumber(data.orderAmount) }}
             </div>
           </div>
+
+          <!-- 折扣金额 -->
+          <div class="info-line" v-if="data.discountAmount != 0">
+            <div class="label">{{ $t(`${lang_invoice}.discountPrice`) }}</div>
+            <div class="ff color-pink">
+              -{{ formatCoin(data.coinCode) }} {{ formatNumber(data.discountAmount) }}
+            </div>
+          </div>
+
+          <!-- 优惠金额 -->
+          <div class="info-line" v-if="data.couponAmount != 0">
+            <div class="label">{{ $t(`${lang_invoice}.coupon`) }}</div>
+            <div class="ff color-pink">
+              -{{ formatCoin(data.coinCode) }} {{ formatNumber(data.couponAmount) }}
+            </div>
+          </div>
+
+          <!-- 购物卡 -->
+          <div class="info-line" v-for="(item,index) in cardList" :key="index">
+            <div class="label">{{ $t(`${lang_invoice}.shoppingCard`) }} （<span class="fontSize">{{ item.sn }}</span>)</div>
+            <div class="ff color-pink">
+              -{{ formatCoin(data.coinCode) }} {{item.useAmount}} <span class="fontSize" v-if="data.orderStatus == 0">({{ $t(`${lang}.Untied`) }})</span>
+            </div>
+          </div>
+
           <div class="info-line">
             <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
             <div class="ff big-ff">
@@ -461,10 +501,23 @@ export default {
       type:'',
       headType:'',
       cardList: [],
-      doubleRingGoodPrice:'' //对戒商品价格
+      doubleRingGoodPrice:'', //对戒商品价格
+      proCategoryId:''
     }
   },
   computed: {
+    couponType(k) {
+      return function(k) {
+        var k_type=0;
+        if(k.hasOwnProperty('type')){
+          k_type = k.type
+        }else{
+          k_type = 0;
+        }
+
+        return k_type
+      }
+    },
     statusSteps() {
       // data.orderStatus
       const orderStatus = this.data.orderStatus
@@ -516,7 +569,6 @@ export default {
   },
   mounted() {
     this.getData()
-    
   },
   methods: {
     getStatusText(status) {
@@ -533,14 +585,14 @@ export default {
     },
     getData() {
       var that = this;
-      console.log("id",this.oid)
+      // console.log("id",this.oid)
       this.$axios
         .get('/web/member/order/detail', {
           params: { orderId: this.oid }
         })
         .then(res => {
           this.data = res.data
-          console.log("this.data",this.data)
+          // console.log("this.data",this.data)
           this.invoice = res.data.invoice
           this.orderStatus = res.data.orderStatus
           // console.log("data",this.orderStatus)
@@ -551,6 +603,7 @@ export default {
             obj.detailSpecs = JSON.parse(obj.detailSpecs)
             obj.goodsImages = obj.goodsImages.split(',')[0]
             this.doubleRingGoodPrice = obj.goodsPrice
+            this.proCategoryId = obj.categoryId
           })
           if(!this.data.invoice.isElectronic){
             this.type = this.$t(`${lang_invoice}.PaperInvoice`)
@@ -892,15 +945,22 @@ export default {
         display: flex;
         padding-left: 19px;
         .t1 {
-          width: 936-250.5-163.5-20px;
+          width: 520px;
         }
         .t2 {
+          width: 130px;
           text-align: center;
-          width: 51+ (113/2)+56px;
+          margin-right: 30px;
         }
         .t3 {
+          width: 130px;
           text-align: center;
-          width: 56+ (113/2)+138px;
+          margin-right: 30px;
+        }
+        .t4 {
+          width: 130px;
+          text-align: center;
+          margin-right: 30px;
         }
       }
       .single{
@@ -912,10 +972,9 @@ export default {
           border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
           .t1 {
-            width: 936-250.5-163.5-20px;
+            width: 510px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             .good-img {
               width: 70px;
               height: 70px;
@@ -927,10 +986,10 @@ export default {
               }
             }
             .good-desc {
-              width: 936-250.5-163.5-20-70-20px;
               height: 70px;
               color: #333;
               overflow: hidden;
+              margin: 0 30px 0 20px;
               .good-name {
                 font-size: 16px;
                 line-height: 16px;
@@ -946,17 +1005,17 @@ export default {
                 line-height: 12px;
                 height: 12px;
                 margin-bottom: 18px;
-                color:#aaa;
+                color: #aaa;
               }
               .details {
                 font-size: 12px;
                 line-height: 12px;
                 height: 12px;
                 width: 100%;
-                overflow: hidden;
+                color: #aaa;
+                // overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap;
-                color:#aaa;
+                // white-space: nowrap;
                 span {
                   margin-right: 10px;
                 }
@@ -964,29 +1023,66 @@ export default {
             }
           }
           .t2 {
+            width: 130px;
             text-align: center;
-            width: 51+ (113/2)+56px;
-            color: #333;
             font-size: 16px;
+            color: #333;
+            margin-right: 30px;
           }
           .t3 {
-            text-align: center;
-            width: 56+ (113/2)+138px;
-            color: #333;
-            font-family: twCenMt;
+            width: 130px;
             font-size: 20px;
+            font-family: twCenMt;
+            color: #f29b87;
+            text-align: center;
+            margin-right: 30px;
           }
+          .t3.old-price{
+            font-size: 14px;
+            color: #b2b2b2;
+            text-decoration: line-through;
+          }
+          .t4 {
+            width: 130px;
+            font-size: 20px;
+            font-family: twCenMt;
+            color: #f29b87;
+            text-align: center;
+            margin-right: 30px;
+          }
+        }
+        .goods-details:nth-child(1) {
+          border-top: 0;
         }
       }
       .double{
         position: relative;
         .t3{
           position: absolute;
-          right: 144px;
+          right: 164px;
           top:43%;
           color: #333;
           font-family: twCenMt;
+          color: #f29b87;
+          text-align: center;
+          margin-right: 30px;
           font-size: 20px;
+        }
+        .t3.old-price{
+          font-size: 14px;
+          color: #b2b2b2;
+          text-decoration: line-through;
+        }
+        .t4 {
+          position: absolute;
+          right: -6px;
+          top:43%;
+          width: 130px;
+          font-size: 20px;
+          font-family: twCenMt;
+          color: #f29b87;
+          text-align: center;
+          margin-right: 30px;
         }
         .goods-details:nth-child(2) {
           border-top: 0;
@@ -998,11 +1094,12 @@ export default {
           // margin-bottom: 15px!important;
           position: absolute;
           top: 10px;
-          left: 100px;
+          left: 112px;
+          color: #333;
         }
         .dec{
           // margin-left: 250px;
-          padding: 0px 10px 0px 10px;
+          padding: 0px 10px 0px 22px;
         }
         .dec:last-child{
           .good-name{
@@ -1070,9 +1167,9 @@ export default {
                 line-height: 20px;
                 height: 20px;
                 width: 100%;
-                overflow: hidden;
+                // overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap;
+                // white-space: nowrap;
                 color:#aaa;
                 span {
                   margin-right: 10px;
@@ -1082,7 +1179,7 @@ export default {
           }
           .t2 {
             text-align: center;
-            width: 51+ (113/2)+56px;
+            width: 51+ (113/2)+56-23px;
             color: #333;
             font-size: 16px;
           }
@@ -1093,6 +1190,7 @@ export default {
             font-family: twCenMt;
             font-size: 20px;
           }
+          
         }
       }
       .customization{
@@ -1104,10 +1202,9 @@ export default {
           border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
           .t1 {
-            width: 936-250.5-163.5-20px;
+            width: 510px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
             .good-img {
               width: 70px;
               height: 70px;
@@ -1119,10 +1216,10 @@ export default {
               }
             }
             .good-desc {
-              width: 936-250.5-163.5-20-70-20px;
               height: 70px;
               color: #333;
               overflow: hidden;
+              margin: 0 30px 0 20px;
               .good-name {
                 font-size: 16px;
                 line-height: 16px;
@@ -1138,17 +1235,15 @@ export default {
                 line-height: 12px;
                 height: 12px;
                 margin-bottom: 18px;
-                color:#aaa;
               }
               .details {
                 font-size: 12px;
                 line-height: 12px;
                 height: 12px;
                 width: 100%;
-                overflow: hidden;
+                // overflow: hidden;
                 text-overflow: ellipsis;
-                white-space: nowrap;
-                color:#aaa;
+                // white-space: nowrap;
                 span {
                   margin-right: 10px;
                 }
@@ -1156,18 +1251,36 @@ export default {
             }
           }
           .t2 {
+            width: 130px;
             text-align: center;
-            width: 51+ (113/2)+56px;
-            color: #333;
             font-size: 16px;
+            color: #333;
+            margin-right: 30px;
           }
           .t3 {
-            text-align: center;
-            width: 56+ (113/2)+138px;
-            color: #333;
-            font-family: twCenMt;
+            width: 130px;
             font-size: 20px;
+            font-family: twCenMt;
+            color: #f29b87;
+            text-align: center;
+            margin-right: 30px;
           }
+          .t3.old-price{
+            font-size: 14px;
+            color: #b2b2b2;
+            text-decoration: line-through;
+          }
+          .t4 {
+            width: 130px;
+            font-size: 20px;
+            font-family: twCenMt;
+            color: #f29b87;
+            text-align: center;
+            margin-right: 30px;
+          }
+        }
+        .goods-details:nth-child(2) {
+          border-top: 0;
         }
       }
     }

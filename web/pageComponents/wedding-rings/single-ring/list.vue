@@ -204,20 +204,49 @@
                     @click.stop.prevent="setWish(item.id)"
                   ></i>
                 </div> -->
+
+                <!-- 折扣 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
+                  <span>{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+                </div>
+
+                <!-- 优惠券 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
+                  <span>{{ $t(`${lang}.discounts1`) }}</span>
+                </div>
               </div>
             </nuxt-link>
             <div class="product-info">
               <div class="product-price">
-                <span class="coin">{{ formatCoin(item.coinType) }}</span>
-                <span class="price">{{ formatNumber(item.salePrice) }}</span>
+               <div v-if="couponType(item.coupon) !== 'discount'">
+                  <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                  <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                </div>
+
+                <!-- 折扣 -->
+                <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                  <div>
+                    <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                    <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                  </div>
+                  <div>
+                    <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                    <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                  </div>
+                </div>
               </div>
+
               <div class="product-title">
+                <!-- 优惠券 -->
+                <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+                <!-- 折扣 -->
+                <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                 {{ item.goodsName }}
               </div>
             </div>
           </div>
           <!--          广告数据-->
-          <div v-else class="ad-content">
+          <div v-else class="ad-content" style="border: 1px solid sandybrown;">
             <el-carousel height="480px">
               <el-carousel-item
                 v-for="(ad, adIndex) in item.advertImgModelList"
@@ -302,7 +331,8 @@ export default {
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
       loading: true,
-      coinType:''
+      coinType:'',
+      language: this.$store.state.language
     }
   },
   watch: {
@@ -311,7 +341,6 @@ export default {
       if(priceRange_val !== undefined){
         this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
         this.changePriceRange(this.priceRange);
-
       }
     }
   },
@@ -360,8 +389,8 @@ export default {
           valueType: 1,
           configValues: conditions.style === '' ? [] : [conditions.style]
         })
-      } 
-      
+      }
+
       if (conditions.material) {
         params.push({
           type: 3,
@@ -413,7 +442,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
-      console.log("加载状态",this.loading)
+      // console.log("加载状态",this.loading)
       // if(this.allData.length == 0){
       //   this.loading = true
       //   setTimeout(() => {
@@ -471,18 +500,19 @@ export default {
     if(priceRange_val !== undefined){
       this.priceRange = JSON.parse(this.$helpers.base64Decode(priceRange_val));
       this.changePriceRange(this.priceRange);
-
     }
 
     _this.$nextTick(() => {
       _this.research()
     })
+
+    // this.language = this.getCookie('language')
   },
   methods: {
     // 改变款式条件
     changeStyle(value) {
       const searchConditions = this.searchConditions
-      console.log('style====>', searchConditions.style, value)
+      // console.log('style====>', searchConditions.style, value)
       if (
         searchConditions.style === value
       ) {
@@ -608,7 +638,7 @@ export default {
     height: 37px!important;
     line-height: 37px;
   }
-  
+
   .el-pager, .el-pager li{
     font-size: 16px;
   }

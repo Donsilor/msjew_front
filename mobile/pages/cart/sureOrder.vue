@@ -12,7 +12,7 @@
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
           <span>{{ address.firstname }} {{ address.lastname }}</span
-          ><span v-if="!$route.query.id">{{ lang.default }}</span>
+          ><span v-if="!this.queryId">{{ lang.default }}</span>
         </div>
         <p>{{ address.mobile_code }} {{ address.mobile }}</p>
         <p class="p ow-h2">
@@ -33,37 +33,38 @@
     <div class="payways" v-if="!isLogin">
       <div class="pay">
         <!-- <Header :title="lang2.pay" tips="1" /> -->
-        <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+        <!-- <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
           <div class="note"><span class="star">*</span> {{ lang2.Note3 }}</div>
           <span>{{ formatCoin(coin) }} </span>
           {{ formatMoney(productAmount) }}
           <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
-        </div>
-        <div v-else class="proce">
-          <span>{{ formatCoin(coin) }} </span>
-          {{ formatMoney( productAmount) }}
+        </div> -->
+        <div class="proce select-proce">
+          {{lang2.selectPayWays}}
+          <!-- <span>{{ formatCoin(coin) }} </span>
+          {{ formatMoney( productAmount) }} -->
         </div>
 		<!-- 大陆支付 -->
-        <ul v-if="this.$store.state.platform == 21">
-          <li v-for="(item, index) in list2" :key="index">
-            <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
-            <div>
-              <img :src="item.url" />
-              <div class="right">
-                <span
-                  class="icon iconfont"
-                  :class="typeIndex === index ? 'icongou' : ''"
-                  @click="changeType(index)"
-                ></span>
-                <b
-                  >{{ item.title }}
-                  <span
-                    v-if="item.type == ''"
-                    class="ph"
-                    @click="needtips = !needtips"
-                    >?</span
-                  >
-                </b>
+    <ul v-if="this.$store.state.platform == 21">
+      <li v-for="(item, index) in list2" :key="index">
+        <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
+        <div>
+          <img :src="item.url" />
+          <div class="right">
+            <span
+              class="icon iconfont"
+              :class="typeIndex === index ? 'icongou' : ''"
+              @click="changeType(index)"
+            ></span>
+            <b
+              >{{ item.title }}
+              <span
+                v-if="item.type == ''"
+                class="ph"
+                @click="needtips = !needtips"
+                >?</span
+              >
+            </b>
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
@@ -102,26 +103,26 @@
 		  </li>
 		</ul>
 		<!-- 美国支付 -->
-        <ul v-if="this.$store.state.platform == 31">
-          <li v-for="(item, index) in listUs" :key="index">
-            <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
-            <div>
-              <img :src="item.url" />
-              <div class="right">
-                <span
-                  class="icon iconfont"
-                  :class="typeIndex === index ? 'icongou' : ''"
-                  @click="changeType(index)"
-                ></span>
-                <b
-                  >{{ item.title }}
-                  <span
-                    v-if="item.type == ''"
-                    class="ph"
-                    @click="needtips = !needtips"
-                    >?</span
-                  >
-                </b>
+    <ul v-if="this.$store.state.platform == 31">
+      <li v-for="(item, index) in listUs" :key="index">
+        <!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
+        <div>
+          <img :src="item.url" />
+          <div class="right">
+            <span
+              class="icon iconfont"
+              :class="typeIndex === index ? 'icongou' : ''"
+              @click="changeType(index)"
+            ></span>
+            <b
+              >{{ item.title }}
+              <span
+                v-if="item.type == ''"
+                class="ph"
+                @click="needtips = !needtips"
+                >?</span
+              >
+            </b>
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
@@ -156,12 +157,15 @@
       </div>
     </div>
 
+    <Address v-if="ifShowAddress" :id="id" :queryId="queryId" @closeAP="closeAddressPop" ></Address>
+
     <CartList :list="list" />
     <div class="footer">
       <div class="content">
         <div class="time">
-          <span>{{ lang.time }}</span
-          ><span>{{ planDays }}{{ lang.week }}</span>
+          <span>{{ lang.time }}</span>
+          <span v-if="!isLogin">{{ allFee.plan_days }}{{ lang.week }}</span>
+          <span v-else>{{ planDays }}{{ lang.week }}</span> 
         </div>
         <div v-if="productNum > 1" class="send">
           <div
@@ -197,11 +201,12 @@
           <div class="title">
             <span>{{ lang3.invo }}</span>
             <div>
-              <span class="underline" v-show="!kai" @click="show">{{ lang3.NotInvoiced }}</span>
+              <span class="underline" v-show="!kai" @click="show()">{{ lang3.NotInvoiced }}</span>
               <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
         </div>
+
         <!-- <div v-show="!(sureCoupon && usingCouponInfo.couponCode)" class="coupon" >
           <div class="operate">
             <div class="choose">
@@ -255,11 +260,18 @@
             </div>
           </div>
         </div> -->
+
         <ul class="price">
           <!-- <li v-if="isLogin" @click="selectCupon">
             <span>{{ lang.cupon }}</span
             ><span>{{ cuponName }}</span>
           </li> -->
+          
+          <li>
+            <span>{{ lang.itemsNum }}：</span> 
+            <span>{{ amount }}</span>
+          </li>
+
           <li>
             <span>{{ lang.allFee }} </span
             ><span
@@ -267,13 +279,9 @@
               {{ formatMoney( productAmount) }}</span
             >
           </li>
-			<li v-for="(item,index) in useAmount" :key="index">
-			  <div>
-				<span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
-			  </div>
-			  <span class="color-pink">-{{ coin }} {{ formatMoney(item.useAmount) }}</span>
-			</li>
-          <li v-show="preferFee > 0">
+
+          <!-- 优惠码 -->
+          <!-- <li v-show="preferFee > 0">
             <div>
               <span>{{ lang.preferFee }}</span>
               <span
@@ -288,8 +296,9 @@
                 >{{ lang.delete }}</span
               >
             </div>
-            <span>-{{ formatCoin(coin) }} {{ formatMoney(preferFee) }}</span>
-          </li>
+            <span>-{{ coin }} {{ formatMoney(preferFee) }}</span>
+          </li> -->
+
           <li>
             <div>
               <span>{{ lang.logisticsFee }}</span>
@@ -313,12 +322,52 @@
             </div>
             <span>+{{ formatCoin(coin) }} {{ formatMoney(allFee.safeFee) }}</span>
           </li>
-          <li class="order-pay">
+          <li>
             <!-- formatMoney(allFee.productAmount || productAmount) -->
             <span>{{ lang.orderAmount }}</span
             ><span>{{ formatCoin(coin) }} {{ formatMoney(orderTotalAmount) }}</span>
           </li>
-          <li class="order-pay" style="border-top: 0;margin-top: 0;">
+
+          <!-- 折扣金额 -->
+          <li v-if="allFee.discountAmount">
+            <span>{{ lang.discountedAmount }}：</span
+            ><span
+              >-{{ formatCoin(coin) }}
+              {{ formatMoney( allFee.discountAmount) }}</span
+            >
+          </li>
+
+          <!-- 折扣金额 -->
+          <li v-if="allFee.discount_amount">
+            <span>{{ lang.discountedAmount }}：</span
+            ><span
+              >-{{ formatCoin(coin) }}
+              {{ formatMoney( allFee.discount_amount) }}</span
+            >
+          </li>
+
+          <!-- 优惠金额 -->
+          <li v-if="ifShowCouponMoney && isLogin">
+            <span>{{ lang.couponAmount }}： </span
+            ><span
+            class="use-coupon"
+             v-if="couponCodeR.couponPrice"
+             @click="ifShowCoupon = true"
+              >-{{ formatCoin(coin) }}
+              {{this.couponCodeR.couponPrice}}</span
+            >
+            <span class="use-coupon" v-if="!couponCodeR.couponPrice" @click="useCoupon">{{ lang.useCoupons }}</span>
+          </li>
+
+          <!-- 购物卡 -->
+          <li v-for="(item,index) in useAmount" :key="index">
+            <div>
+              <span>{{ lang.shoppingCard }}</span> <span>({{item.sn}})</span>
+            </div>
+            <span class="color-pink">-{{ formatCoin(coin) }} {{ formatMoney(item.useAmount) }}</span>
+          </li>
+
+          <li class="order-pay">
             <span>{{ lang.NeedPay }}</span
             ><span>{{ formatCoin(coin) }} {{ formatMoney(ultimatelyPay) }}</span>
           </li>
@@ -339,20 +388,24 @@
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
+    <Invoice v-if="ifShowInvoice" @closeIP="closeInvoicePop" :kai="kai" :totlePrice="totlePrice" :ultimatelyPay="ultimatelyPay" ></Invoice>
     <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
+    <use-coupon v-if="ifShowCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR"></use-coupon>
   </div>
 </template>
 
 <script>
 import Header from '@/components/personal/header.vue'
+import Address from '@/components/address/address.vue'
 import CartList from '@/components/cart/cartlist.vue'
+import Invoice from '@/components/invoice/index'
 import OrderCouponTips from '@/components/white-board/order-coupon-tips/index.vue'
 import { Email } from '../../assets/js/require-lee'
 import { formatMoney } from '@/assets/js/filterUtil.js'
 import NeedKnow from '@/components/cart/needKnow.vue'
 import ShoppingCard from '@/components/shopping-card/index'
 const storage = process.client ? require('good-storage').default : {}
-// console.log(storage, 'storage')
+// console.log(storage, 'storage') 
 export default {
   name: 'SureOrder',
   layout: 'no-bar',
@@ -361,18 +414,21 @@ export default {
     CartList,
     OrderCouponTips,
     NeedKnow,
-    ShoppingCard
+    ShoppingCard,
+    Invoice,
+    Address
   },
   data() {
     return {
       kai:false,
       url:'',
+      lang: this.LANGUAGE.cart.sureOrder,
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
       coin: this.$store.state.coin,
       form: [],
       actionLink: '',
-		// 大陆支付
+      // 大陆支付
       list2: [
         {
           url: '/cart/pay.png',
@@ -417,46 +473,46 @@ export default {
         //   des: this.LANGUAGE.cart.pay.type3Text
         // }
       ],
-		// 香港支付
-		listHK: [
-		  {
-			url: '/cart/pay.png',
-			type: 6,
-			title: this.LANGUAGE.cart.pay.payType0,
-			des: this.LANGUAGE.cart.pay.type0Text
-		  },
-		  {
-			url: '/cart/visa_1.png',
-			type: 61,
-			title: this.LANGUAGE.cart.pay.payType6,
-			des: this.LANGUAGE.cart.pay.type6Text
-		  },
-		  {
-			url: '/cart/ap-HK.png',
-			type: 84,
-			title: this.LANGUAGE.cart.pay.payType3+' HK',
-			des: this.LANGUAGE.cart.pay.type3Text
-		  },
-		  {
-			url: '/cart/wac.png',
-			type: 83,
-			title: this.LANGUAGE.cart.pay.payType4,
-			des: this.LANGUAGE.cart.pay.type4Text
-		  },
-		  {
-			url: '/cart/up.png',
-			type: 81,
-			title: this.LANGUAGE.cart.pay.payType1,
-			des: this.LANGUAGE.cart.pay.type1Text
-		  },
-		  {
-			url: '/cart/ph.png',
-			type: 89,
-			title: this.LANGUAGE.cart.pay.payType5,
-			des: this.LANGUAGE.cart.pay.type5Text,
-		  }
-		],
-		// 美国支付
+      // 香港支付
+      listHK: [
+        {
+        url: '/cart/pay.png',
+        type: 6,
+        title: this.LANGUAGE.cart.pay.payType0,
+        des: this.LANGUAGE.cart.pay.type0Text
+        },
+        {
+        url: '/cart/visa_1.png',
+        type: 61,
+        title: this.LANGUAGE.cart.pay.payType6,
+        des: this.LANGUAGE.cart.pay.type6Text
+        },
+        {
+        url: '/cart/ap-HK.png',
+        type: 84,
+        title: this.LANGUAGE.cart.pay.payType3+' HK',
+        des: this.LANGUAGE.cart.pay.type3Text
+        },
+        {
+        url: '/cart/wac.png',
+        type: 83,
+        title: this.LANGUAGE.cart.pay.payType4,
+        des: this.LANGUAGE.cart.pay.type4Text
+        },
+        {
+        url: '/cart/up.png',
+        type: 81,
+        title: this.LANGUAGE.cart.pay.payType1,
+        des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+        url: '/cart/ph.png',
+        type: 89,
+        title: this.LANGUAGE.cart.pay.payType5,
+        des: this.LANGUAGE.cart.pay.type5Text,
+        }
+      ],
+      // 美国支付
       listUs: [
         {
           url: '/cart/pay.png',
@@ -479,8 +535,6 @@ export default {
       // price: JSON.parse(this.$route.query.info).orderAmount,
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
       needtips: false,
-
-      lang: this.LANGUAGE.cart.sureOrder,
       canSubmit: false,
       coin: this.$store.state.coin,
       mailbox: '',
@@ -510,6 +564,7 @@ export default {
       totlePrice:'',
       areaId: this.$store.state.areaId,
       ifShowShoppingCard: false,
+      ifShowInvoice:false,
       cardList: [],
       useAmount: [],
       cardType: 1,
@@ -518,11 +573,25 @@ export default {
       orderTotalAmount: 0,
       ultimatelyPay: 0,
       currency: '',
-      platform: this.$store.state.platform
+      platform: this.$store.state.platform,
+      couponCodeR: {
+        couponId: '',
+        couponPrice: ''
+      },
+      ifShowCoupon: false,
+      ifShowCouponMoney: false,
+      // 所有可有优惠券
+      couponAll: [],
+      // 已领取优惠券
+      couponAlready: [],
+      amount: 0,
+      invoices:'',
+      ifShowAddress: false,
+      id:'',
+      queryId:''
     }
   },
   computed: {
-
     selectedCouponInfo() {
       const _this = this
       let result = {}
@@ -571,36 +640,29 @@ export default {
       // console.log('this.allFee=====>', JSON.stringify(this.allFee))
        if (this.isLogin){
          if (this.allFee.orderAmount === null) {
-          //  console.log(11111)
            // result = this.formatMoney(this.productAmount)
            result = this.formatMoney(this.allFee.payAmount)
          } else  {
-          //  console.log(22222)
            // result = this.formatMoney(this.allFee.orderAmount)
            result = this.formatMoney(this.allFee.payAmount)
          }
        } else {
          if (this.allFee.order_amount === null) {
-          //  console.log(11111)
            result = this.formatMoney(this.goods_amount)
          } else  {
-          //  console.log(22222)
            result = this.formatMoney(this.allFee.order_amount)
          }
        }
        this.totlePrice = result
-       console.log("dddd",this.totlePrice)
+       // console.log(this.totlePrice)
       return result
     }
   },
-  created(){
-    // console.log("aaaa",)
-    //     this.kai = this.$route.query.invoice !== ''
-  },
   mounted() {
+    // console.log("InvoiceMsg",this.invoices)
     // console.log("query",this.$route.params.invoice)
     this.$nextTick(() => {
-      this.kai = typeof this.$route.params.invoice !== 'undefined' && this.$route.params.invoice.invoice_title != ''
+      // this.kai = typeof this.invoices !== 'undefined' && this.invoices.invoice_title != ''
       // console.log(this.kai)
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
@@ -611,17 +673,16 @@ export default {
       }
 
       this.list = JSON.parse(storage.get('myCartList', 0))
-      this.planDays = this.allFee.planDays
-      // console.log("allFee",this.planDays)
+      // this.planDays = this.allFee.planDays
+      // console.log("allFee",this.list)
+      this.amount = this.list.length
       this.idList = []
       this.productAmount = 0
       if(this.list != 0){
         this.list.map((item, index) => {
-          // console.log("sssss=====",item.id)
           this.idList.push(item.id)
           this.goodsListLine.push(item.simpleGoodsEntity.categoryId)
           // this.idList.push(item.localSn)
-          //  console.log("sssss",this.productAmount)
           // this.productAmount = this.productAmount + item.salePrice   localSn
           this.productAmount = parseFloat(this.productAmount + item.salePrice)
           // console.log("productAmount",this.productAmount)
@@ -629,7 +690,7 @@ export default {
       }
 
       this.getData() // 获取地址
-      this.getCouponList() // 获取优惠券列表
+      // this.getCouponList() // 获取优惠券列表
 
       fbq('track', 'InitiateCheckout');
 
@@ -641,15 +702,40 @@ export default {
   },
   methods: {
     show(){
-      this.kai = !this.kai
-      this.$router.push({
-        name: 'cart-invoice',
-        query:{
-          price:this.totlePrice,
-          kai:this.kai,
-          ultimatelyPay: this.ultimatelyPay
+      if (!this.hasAddress) {
+        if(this.isLogin){
+          this.$toast.show(this.lang.toast2)
+          const topC = document.getElementsByClassName('layout-main')[0];
+  
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-this.scrollTop / 5)
+            topC.scrollTop = this.scrollTop + ispeed
+            if (this.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
+          return 
         }
-      })
+      }
+      this.kai = !this.kai
+      this.ifShowInvoice = !this.ifShowInvoice
+      
+      // this.$router.push({
+      //   name: 'cart-invoice',
+      //   query:{
+      //     price:this.totlePrice,
+      //     kai:this.kai,
+      //     ultimatelyPay: this.ultimatelyPay
+      //   }
+      // })
+    },
+     // 关闭发票弹窗
+    closeInvoicePop(val){
+      this.ifShowInvoice = false
+      if(val == true){
+        this.kai = !this.kai
+      }
+      this.invoices = val
     },
     changeType(ind) {
       console.log("选择哪一个",ind)
@@ -673,7 +759,7 @@ export default {
         pay = 89
       }
 
-      if(pay == 81 || pay == 82 || pay == 83 || pay == 84){
+      if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89){
         this.$toast.show(this.lang.firstLogin)
         // 点击修改滚顶到地址编辑模块
         document.getElementById('loginBox').scrollIntoView({
@@ -708,21 +794,6 @@ export default {
       this.$refs[index].show()
     },
     formatMoney: formatMoney,
-    // 选择登录状态下优惠卷
-    selectCupon() {
-      if (this.cuponList.length > 0) {
-        this.$refs.cupon.show()
-      } else {
-        this.$toast.show(this.lang.toast1)
-      }
-    },
-    useCoupon() {
-      if (this.isLogin) {
-        this.getCouponAmount()
-      } else {
-        this.checkCount()
-      }
-    },
     // 查询匿名使用优惠卷时可以优惠的金额
     checkCount() {
       // const carts = []
@@ -877,16 +948,23 @@ export default {
     },
     // 去选择地址
     goAddress() {
-      const name = this.isLogin ? 'personal-address' : 'personal-editAddress'
-      const id = this.isLogin ? '1' : null
-      this.$router.push({
-        name: name,
-        query: {
-          id: id
-        }
-      })
+      this.ifShowAddress = true
+      this.id = this.isLogin ? '1' : null
+      // const name = this.isLogin ? 'personal-address' : 'personal-editAddress'
+      // const id = this.isLogin ? '1' : null
+      // this.$router.push({
+      //   name: name,
+      //   query: {
+      //     id: id
+      //   }
+      // })
     },
-
+    closeAddressPop(id){
+      this.ifShowAddress = false
+      this.queryId = id
+      this.getData()
+      console.log("ssss",this.queryId)
+    },
     // // 登录下获取相关费用
     // getTex(k) {
     //   const cards = k || '';
@@ -957,12 +1035,23 @@ export default {
 
     // 登录下获取相关费用
     getTex(k) {
-      var cards = k || '';
+      var cards = k || [];
       var cardL = sessionStorage.getItem('cardList');
 
       if(cardL != null){
         this.cardList = JSON.parse(cardL);
         cards = JSON.parse(cardL);
+      }
+
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
+      for (const i in this.list) {
+        arr.push({...obj})
+        arr[i].cart_id = this.list[i].id;
+
+        if(this.list[i].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.list[i].coupon.discount.coupon_id
+        }
       }
 
       this.canSubmit = false
@@ -975,7 +1064,9 @@ export default {
             addressId: this.address.id,
             cards: cards,
             // preferFee: this.preferFee,
-            cartIds: this.idList.join(',')
+            // cartIds: this.idList.join(',')
+            carts: arr,
+            coupon_id: this.couponCodeR.couponId
           }
 
           this.$axios({
@@ -1003,6 +1094,16 @@ export default {
 
             // this.info=res.details
             // console.log("费用>>>>>>>>",this.info)
+
+            this.couponAll = res.coupons
+            this.couponAlready = res.myCoupons;
+
+            if(res.myCoupons.length != 0){
+              this.ifShowCouponMoney = true
+            }else{
+              this.ifShowCouponMoney = false
+            }
+
           })
           .catch(err => {
             this.canSubmit = false
@@ -1020,25 +1121,30 @@ export default {
           },2000)
         }
       } else {
-        // console.log("this.list",this.list)
         if(this.list.length){
           url = `/web/member/order-tourist/tax`
           const goodsCartList=[]
+          var coupon_discount = ''
           for (const i in this.list) {
+            if(this.list[i].coupon.hasOwnProperty('discount')){
+              coupon_discount = this.list[i].coupon.discount.coupon_id;
+            }
+
             const o = {
-              createTime: this.list[i].createTime,
-              goods_num: 1,
-              goodsDetailsId: this.list[i].goodsDetailsId,
               goods_id: this.list[i].goodsDetailsId,
-              group_id: this.list[i].groupId,
               goods_type: this.list[i].goodsStatus,
-              group_type:
-                this.list[i].groupType !== 0 ? this.list[i].groupType : null
+              goods_num: 1,
+              group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
+              group_id: this.list[i].groupId,
+              createTime: this.list[i].createTime,
+              coupon_id: coupon_discount
             }
             goodsCartList.push(o)
+            coupon_discount = ''
             // console.log("list........",o)
           }
-          data = {goodsCartList:goodsCartList}
+          data = {goodsCartList:goodsCartList,coupon_id: ''}
+
           // console.log("list........",data)
           this.$axios({
             method: 'post',
@@ -1047,16 +1153,17 @@ export default {
           })
 
           .then(res => {
-            // console.log("费用",res)
             this.canSubmit = true
             this.allFee = res
+            this.coin = res.currency
+            // console.log("费用",this.allFee)
 
             if(res.cards !== undefined){
               this.useAmount = JSON.parse(JSON.stringify(res.cards))
             }
 
             this.orderTotalAmount = res.order_amount;
-            this.ultimatelyPay = res.order_amount;
+            this.ultimatelyPay = res.pay_amount;
             this.currency = res.currency;
             this.priceHKD = res.order_amount_HKD
 
@@ -1098,16 +1205,16 @@ export default {
             // console.log("address",res.data)
             if (res && res.length > 0) {
               res.map((item, index) => {
-                // console.log("item",item)
-                if (this.$route.query.id) {
+                console.log("item",this.queryId)
+                if (this.queryId) {
                   if (
-                    this.$route.query.id === item.id ||
-                    this.$route.query.id === JSON.stringify(item.id)
+                    this.queryId === item.id ||
+                    this.queryId === JSON.stringify(item.id)
                   ) {
                     _this.address = item
                     _this.hasAddress = true
                   }
-                } else if (!this.$route.query.id && item.is_default === 1) {
+                } else if (!this.queryId && item.is_default === 1) {
                   _this.address = item
                   _this.hasAddress = true
                 }
@@ -1149,6 +1256,7 @@ export default {
     // 支付
     //  已登录创建订单
     createOrder() {
+      console.log("this.invoices",this.invoices)
       this.$nuxt.$loading.start()
       // if (!this.canSubmit) {
       //   return
@@ -1217,21 +1325,35 @@ export default {
       // }
       let info = {}
       if(this.kai == true){
-        info = this.$route.params.invoice
+        // info = this.$route.params.invoice
+        info = this.invoices
       }
+
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
+      for (const i in this.list) {
+        arr.push({...obj})
+        arr[i].cart_id = this.list[i].id;
+
+        if(this.list[i].coupon.hasOwnProperty('discount')){
+          arr[i].coupon_id = this.list[i].coupon.discount.coupon_id
+        }
+      }
+
       if (this.isLogin) {
         this.$axios({
           method: 'post',
           url: `/web/member/order/create`,
           data: {
-            cart_ids: this.idList.join(','),
+            carts: arr,
             // allSend: this.isSend ? 1 : 2,
             buyer_remark: this.userRemark,
             // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
             invoice: info,
-            card: this.cardList
+            card: this.cardList,
+            coupon_id: this.couponCodeR.couponId
             // afterMail: this.mailbox,
             // recvType: 1,
             // preferId: this.selectCouponId ? this.selectCouponId : null,
@@ -1239,7 +1361,7 @@ export default {
           }
         })
           .then(res => {
-            console.log("总额",res)
+            // console.log("总额",res)
             if(res.payStatus == 1){
               this.$toast.show(this.lang.submitSuccessfully);
               this.$router.replace({
@@ -1263,6 +1385,11 @@ export default {
         let baseUrl=this.$store.getters.baseUrl
         // console.log("未登录",this.list)
         for (const i in this.list) {
+          let coupon_discount = ""
+          if(this.list[i].coupon.hasOwnProperty('discount')){
+            coupon_discount = this.list[i].coupon.discount.coupon_id;
+          }
+
           const o = {
             createTime: this.list[i].createTime,
             goods_num: 1,
@@ -1270,11 +1397,12 @@ export default {
             goods_id: this.list[i].goodsDetailsId,
             group_id: this.list[i].groupId,
             goods_type: this.list[i].goodsStatus,
-            group_type:
-              this.list[i].groupType !== 0 ? this.list[i].groupType : null
+            group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
+            coupon_id: coupon_discount
           }
           data.push(o)
         }
+
         // console.log("data",data)
         // console.log("paytype",this.$route.query)
         if(data.length){
@@ -1388,6 +1516,27 @@ export default {
             clearInterval(timer)
           }
         }, 22)
+      }
+    },
+    closeCo(k) {
+      this.ifShowCoupon = false
+      if(k && k!=-1){
+        if(k.couponId){
+          this.couponCodeR.couponId = k.couponId;
+          this.couponCodeR.couponPrice = k.couponCode;
+        }
+  
+        this.getTex();
+      } else if(!k){
+        this.couponCodeR.couponId = '';
+        this.couponCodeR.couponPrice = '';
+      }
+    },
+    useCoupon() {
+      if(this.isLogin){
+        this.ifShowCoupon = true
+      }else{
+        this.$toast.show('登陆后才能使用优惠券');
       }
     }
 
@@ -1747,6 +1896,10 @@ export default {
         }
       }
       .price {
+        .use-coupon{
+          text-decoration: underline;
+          color: rgba(242, 156, 136, 1);
+        }
         li {
           display: flex;
           justify-content: space-between;
@@ -1883,6 +2036,10 @@ export default {
       color: rgba(242, 155, 135, 1);
     }
   }
+  .select-proce{
+    font-size: 21px;
+    padding: 8px 0 20px;
+  }
   ul {
     li {
       width: 100%;
@@ -2001,4 +2158,5 @@ export default {
 .hint-color{
   color: #f29b87 !important;
 }
+
 </style>

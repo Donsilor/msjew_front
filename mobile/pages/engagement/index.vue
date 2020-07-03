@@ -77,7 +77,7 @@
             <img :src="activeRecommendInfo.image" @error="imageError" />
           </div>
           <div class="product-price">
-            <span class="currency">{{ activeRecommendInfo.coinType }}</span>
+            <span class="currency">{{ formatCoin(activeRecommendInfo.coinType) }}</span>
             <span class="price">
               {{ formatNumber(activeRecommendInfo.salePrice) }}
             </span>

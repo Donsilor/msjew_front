@@ -42,7 +42,8 @@ export default {
         salePrice: 0,
         details: [],
         sizes: [],
-        totalStock: 0
+        totalStock: 0,
+        coupon: {}
       },
       is360: false,
       has360: false
@@ -157,6 +158,7 @@ export default {
           this.sendGoodsId = this.goodInfo.details[0].goodsId
           this.sendDetailsId = this.goodInfo.details[0].id
           this.categoryId = this.goodInfo.details[0].categoryId
+
           if (this.goodInfo.goods3ds) {
             this.is360 = true
             this.has360 = true
@@ -185,6 +187,11 @@ export default {
           };
 
           fbq('track', 'ViewContent', fbqInfo);
+          if(res.coupon){
+            for(var i in res.coupon){
+              this.goodInfo.coupon[i] = res.coupon[i];
+            }
+          }
         })
         .catch(err => {
           this.$nuxt.$loading.finish()

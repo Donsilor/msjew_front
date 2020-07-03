@@ -370,8 +370,9 @@
   color: rgba(255, 255, 255, 1);
 }
 .btn-white {
+  background: rgba(242, 155, 135, 1);
   border: 1px solid rgba(221, 221, 221, 1); /*no*/
-  color: #333;
+  color: rgba(255, 255, 255, 1);
 }
 /* .btn-gray {
   background:rgba(250,250,250,1);
@@ -393,4 +394,144 @@
 }
 .am-picker .am-box .am-head input:nth-child(3) {
   color: rgba(242, 155, 135, 1);
+}
+
+/* 优惠券 · 详情页 */
+.discount-icon{
+  height: 24px;
+  padding: 0 5px;
+  background: url(../../static/subject/icon_03.png) no-repeat center;
+  background-size: 100% 100%;
+  font-size: 13px;
+  color: #fff;
+  line-height: 22px;
+  float: left;
+  margin-right: 6px;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+}
+.discount-icon.padding{
+  padding: 0 2px;
+}
+
+.title .discount-icon{
+  margin-bottom: 12px;
+}
+
+.discount-price{
+  padding: 0 15px;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.discount-price .old-price{
+  font-size: 14px;
+  color: #b2b2b2;
+  text-decoration: line-through;
+}
+
+.discount-price .new-price{
+  font-size: 17px;
+  /* color: #860505; */
+  color: #F29B87;
+  margin-top: 4px;
+}
+
+.discount-activity{
+  height: 40px;
+  padding: 0 15px;
+  box-sizing: border-box;
+  background-color: #fafaf6;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
+  border-bottom: 8px solid rgba(245, 245, 245, 1);
+}
+.discount-l{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.discount-l .text{
+  font-size: 13px;
+  color: #000;
+}
+.discount-time{
+  font-size: 13px;
+  color: #b49785;
+}
+.discount-l .discount-icon{
+  margin-top: 2px;
+}
+
+.activity-sign{
+  position: absolute;
+  right: -4px;
+  bottom: -6px;
+  z-index: 1;
+  width: 80px;
+  height: 85px;
+  background: url(../../static/subject/icon_04.png) no-repeat center;
+  background-size: 100% 100%;
+}
+
+.activity-sign .triangle{
+  width: 80px;
+  height: 85px;
+  transform: rotate(-45deg);
+  padding-top: 50px;
+  font-size: 18px;
+  color: #fff;
+}
+
+/* 优惠券 · 列表页 */
+.discount-a-icon{
+   background: url(../../static/subject/icon_05.png) no-repeat center !important;
+   font-size: 10px !important;
+}
+.discount-a-icon div{
+   font-size: 10px !important;
+}
+
+.discount-a-icon2,
+.discount-b-icon2{
+  background: url(../../static/subject/icon_03.png) no-repeat center !important;
+}
+
+.discount-b-box{
+  display: flex;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.discount-b-box .discount-icon{
+  padding: 0 2px;
+}
+.discount-b-box .get{
+  font-size: 13px;
+  color: #a15d35;
+  text-decoration: underline;
+  margin-left: 2px;
+}
+
+.discoupon-d{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.discoupon-d .discount-icon{
+  padding: 0 2px;
+  float: initial;
+}
+.discoupon-d-l{
+  display: flex;
+  align-items: center;
+}
+
+.discoupon-d .get{
+  font-size: 13px;
+  color: #a15d35;
+  text-decoration: underline;
 }

@@ -180,14 +180,43 @@
                     @click.stop="setWish(item.id)"
                   ></i>
                 </div> -->
+                
+                <!-- 折扣 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'discount'">
+                  <span>{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+                </div>
+                
+                <!-- 优惠券 -->
+                <div class="list-discount-icon1" v-if="couponType(item.coupon) == 'money'">
+                  <span>{{ $t(`${lang}.discounts1`) }}</span>
+                </div>
               </div>
             </nuxt-link>
             <div class="product-info">
-              <div class="product-price">
-                <span class="coin">{{ formatCoin(item.coinType) }}</span>
-                <span class="price">{{ formatNumber(item.salePrice) }}</span>
+              <div  class="product-price">
+                <div v-if="couponType(item.coupon) !== 'discount'">
+                  <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                  <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                </div>
+
+                <!-- 折扣 -->
+                <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+                  <div>
+                    <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                    <span class="price">{{ formatNumber(item.salePrice) }}</span>
+                  </div>
+                  <div>
+                    <span class="coin">{{ formatCoin(item.coinType) }}</span>
+                    <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
+                  </div>
+                </div>
               </div>
+
               <div class="product-title">
+                <!-- 优惠券 -->
+                <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+                <!-- 折扣 -->
+                <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
                 {{ item.goodsName }}
               </div>
             </div>
@@ -275,7 +304,8 @@ export default {
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
       loading: true,
-      coinType:''
+      coinType:'',
+	    language: this.$store.state.language
     }
   },
   computed: {
@@ -398,14 +428,16 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       _this.research()
-      console.log(location)
+      // console.log(location)
     })
+	
+	// this.language = this.getCookie('language')
   },
   methods: {
     // 改变款式条件
     changeStyle(value) {
       const searchConditions = this.searchConditions
-      console.log('style====>', searchConditions.style, value)
+      // console.log('style====>', searchConditions.style, value)
       if (searchConditions.style === value) {
         this.changeCondition('styleSex', '')
         this.changeCondition('style', '')
@@ -462,6 +494,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.product-price{
+  .coin {
+    // margin-right: 6px;
+    line-height: 51px!important;
+    font-size: 18px;
+    margin-right: 6px;
+  }
+}
 .page-content {
   min-width: 1360px;
   max-width: 1366px;
@@ -543,7 +583,7 @@ export default {
     height: 37px!important;
     line-height: 37px;
   }
-  
+
   .el-pager, .el-pager li{
     font-size: 16px;
   }
