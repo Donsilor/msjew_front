@@ -2074,7 +2074,7 @@ export default {
       currency: '',
       platform: this.$store.state.platform,
       addressIdx: -1,
-      delIdx: -2，
+      delIdx: -2,
       couponCodeR: {
         couponId: ''
       },
@@ -2148,17 +2148,10 @@ export default {
       })
   },
   mounted() {
-    // console.log("platform",this.couponCodeR.couponId)
-    // console.log("platform",this.platform)
-    // 
     // this.getAddress();
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language
   },
   methods: {
-    // setCoupon(){
-    //   console.log("platform",this.couponCodeR.couponId)
-    //   // console.log("platform",this.couponCodeR)
-    // },
     zhizhi(or){
       // console.log("纸质",or)
       this.invoice.is_electronic = or;
@@ -2227,15 +2220,6 @@ export default {
       this.invoiceBox = false
       // this.iconShow = false
     },
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     // 获取地址
     getAddress() {
       this.$axios
@@ -2251,9 +2235,6 @@ export default {
             //     this.address.push(res.data[i])
             //   }
             // }
-            if(this.address[0].is_default != 1 && this.addressIdx == -1){
-              this.addressIdx = 0
-            }
 
             this.newAddress = false
             this.isEdit = false
@@ -2266,7 +2247,6 @@ export default {
             this.getTex(k)
             this.resetAddressInp()
           }else{
-            this.ultimatelyPay = 0
             this.wrongMsg = '请添加收获地址'
             this.alertBox = true
           }
@@ -2328,11 +2308,12 @@ export default {
       this.$axios
         .post('/web/member/address/edit',data)
         .then(res => {
+          this.addressIdx = 0
           // console.log("设置默认地址",res)
           this.getAddress()
           this.resetAddressInp()
           this.$message({
-            message: this.$t(`默认地址设置成功`),
+            message: this.$t(`${lang}.setSuccess`),
             type: 'success'
           })
         })
@@ -2407,20 +2388,23 @@ export default {
         return false
       }
       const data = {
-            firstname: this.addressData.firstname,
-            lastname: this.addressData.lastname,
-            mobile_code: this.phoneNum.phone_code,
-            mobile: this.addressData.mobile,
-            email: this.addressData.email,
-            country_id: this.country.areaId,
-            province_id: this.province.areaId,
-            city_id: this.city.areaId,
-            address_details: this.addressData.address_details,
-            zip_code: this.addressData.zip_code
-          }
-      //   false
-      // )
-      // console.log("电话",data)
+        firstname: this.addressData.firstname,
+        lastname: this.addressData.lastname,
+        mobile_code: this.phoneNum.phone_code,
+        mobile: this.addressData.mobile,
+        email: this.addressData.email,
+        country_id: this.country.areaId,
+        province_id: this.province.areaId,
+        city_id: this.city.areaId,
+        address_details: this.addressData.address_details,
+        zip_code: this.addressData.zip_code,
+        is_default: 0
+      }
+
+      if(!this.address){
+        data.is_default = 1
+      }
+
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
@@ -2428,6 +2412,13 @@ export default {
             message: this.$t(`${lang}.success`),
             type: 'success'
           })
+
+          if(this.address.length > 1){
+            this.addressIdx = 1
+          }else{
+            this.addressIdx = 0
+          }
+
           this.getAddress()
           this.resetAddressInp()
         })
@@ -2507,20 +2498,23 @@ export default {
         return false
       }
       const data = {
-            firstname: this.addressData.firstname,
-            lastname: this.addressData.lastname,
-            mobile_code: this.phoneNum.phone_code,
-            mobile: this.addressData.mobile,
-            email: this.addressData.email,
-            country_id: this.country.areaId,
-            province_id: this.province.areaId,
-            city_id: this.city.areaId,
-            address_details: this.addressData.address_details,
-            zip_code: this.addressData.zip_code
-          }
-      //   false
-      // )
-      // console.log("电话",data)
+        firstname: this.addressData.firstname,
+        lastname: this.addressData.lastname,
+        mobile_code: this.phoneNum.phone_code,
+        mobile: this.addressData.mobile,
+        email: this.addressData.email,
+        country_id: this.country.areaId,
+        province_id: this.province.areaId,
+        city_id: this.city.areaId,
+        address_details: this.addressData.address_details,
+        zip_code: this.addressData.zip_code,
+        is_default: 0
+      }
+
+      if(!this.address){
+        data.is_default = 1
+      }
+
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
@@ -2529,6 +2523,13 @@ export default {
             message: this.$t(`${lang}.success`),
             type: 'success'
           })
+
+          if(this.address.length > 1){
+            this.addressIdx = 1
+          }else{
+            this.addressIdx = 0
+          }
+
           this.getAddress()
           this.resetAddressInp()
         })
@@ -2667,12 +2668,6 @@ export default {
         .post('/web/member/address/edit',data)
         .then(res => {
           // console.log("修改地址",res)
-          if(this.address[0].is_default == 1){
-            this.addressIdx = 1
-          }else{
-            this.addressIdx = 0
-          }
-
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -2780,12 +2775,6 @@ export default {
         .post('/web/member/address/edit', data)
         .then(res => {
           // console.log("修改地址",res)
-          if(this.address[0].is_default == 1){
-            this.addressIdx = 1
-          }else{
-            this.addressIdx = 0
-          }
-
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -2813,19 +2802,13 @@ export default {
         .then(res => {
           // console.log("删除地址",res)
 
-          if(this.addressIdx != 0 && this.addressIdx != -1){
-            if(this.address[0].is_default == 1){
-              if(this.delIdx == this.addressIdx){
-                this.addressIdx = -1
-              }else if(this.delIdx < this.addressIdx){
-                this.addressIdx -= 1
-              }
-            }else{
-              if(this.delIdx == this.addressIdx){
-                this.addressIdx = 0
-              }else if(this.delIdx < this.addressIdx){
-                this.addressIdx -= 1
-              }
+          if(this.delIdx == 0){
+            this.setDefaultAddr(this.address[this.address.length-1])
+          }else{
+            if(this.delIdx == this.addressIdx){
+              this.addressIdx = 0
+            }else if(this.delIdx < this.addressIdx){
+              this.addressIdx -= 1
             }
           }
 

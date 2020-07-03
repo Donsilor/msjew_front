@@ -2554,7 +2554,9 @@
         "discountPrice": "Discounted amount",
         "needRegister": "Please login before redeem the coupon. ",
         "msgTitle2": "Submit：",
-        "msgContent2": "No product selected!"
+        "msgContent2": "No product selected!",
+        "setDefaultAddr": "设置默认地址",
+        "setSuccess": "默認地址設置成功"
     },
     "invoice": {
         "personal": "personal",
