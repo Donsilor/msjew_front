@@ -66,13 +66,13 @@
               >
             </b>
 
-            <p>{{ item.des }}</p>
-            <p v-if="item.des2">{{ item.des2 }}</p>
-            <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p> 
-          </div>
-        </div>
-      </li>
-    </ul>
+                <p>{{ item.des }}</p>
+                <p v-if="item.des2">{{ item.des2 }}</p>
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p>
+              </div>
+            </div>
+          </li>
+        </ul>
 		<!-- 香港支付 -->
 		<ul v-if="this.$store.state.platform == 11">
 		  <li v-for="(item, index) in listHK" :key="index">

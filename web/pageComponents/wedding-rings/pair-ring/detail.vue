@@ -584,8 +584,8 @@
           </div>
 
           <div class="discount-price">
-            <span class="old-price">{{ formatCoin(info.coinType) }} {{ formatNumber(this.info.salePrice) }}</span>
-            <span class="new-price">{{ formatCoin(info.coinType) }} {{ formatNumber(this.info.coupon.discount.price) }}</span>
+            <span class="old-price">{{ formatCoin(info.coinType) }} {{ formatNumber(price) }}</span>
+            <span class="new-price">{{ formatCoin(info.coinType) }} {{ formatNumber(price2) }}</span>
           </div>
         </div>
 
@@ -840,6 +840,12 @@ export default {
       // }
       return result
     },
+    price2() {
+      const _this = this
+      const info = _this.info || {}
+      let result = info.coupon.discount.price
+      return result
+    },
     recommends() {
       // console.log("info2",this.info)
       const _this = this
@@ -1074,7 +1080,9 @@ export default {
           _this.styleId = item.goodsId
           _this.categoryId = item.categoryId
           _this.info.salePrice = item.retailMallPrice
-          _this.info.coupon.discount.price = item.coupon.discount.price
+          if(_this.info.coupon.discount){
+            _this.info.coupon.discount.price = item.coupon.discount.price
+          }
           _this.stock = item.stock
           return;
         }

@@ -199,7 +199,7 @@ export default {
       )
     },
     showPrice2() {
-      // console.log("this.goodInfo",this.goodInfo)
+      console.log("this.goodInfo",this.goodInfo)
       if (!this.$helpers) {
         return this.goodInfo.coupon.discount.price || '--'
       }
@@ -537,7 +537,9 @@ export default {
           _this.styleId = item.goodsId
           _this.categoryId = item.categoryId
           _this.goodInfo.salePrice = item.retailMallPrice
-          _this.goodInfo.coupon.discount.price = item.coupon.discount.price
+          if(_this.goodInfo.coupon.discount){
+            _this.goodInfo.coupon.discount.price = item.coupon.discount.price
+          }
           _this.stock = item.stock
         }
       })
