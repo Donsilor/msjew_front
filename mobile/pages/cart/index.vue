@@ -1144,6 +1144,29 @@ export default {
               margin-top: 60px;
             }
           }
+
+          .customization{
+            .left-box.marginTop{
+              margin-top: 30px;
+            }
+            .right{
+              .btn-type {
+                position: absolute;
+                top: 210px;
+                left: 34px;
+                width: 80px;
+                height: 26px;
+                text-align: center;
+                background: rgba(245, 240, 236, 1);
+                border: 1px solid rgba(215, 202, 196, 1);
+                border-radius: 4px;
+                font-size: 12px;
+                line-height: 26px;
+                font-weight: 400;
+                color: rgba(148, 116, 101, 1);
+              }
+            }
+          }
           
           .domore {
             display: flex;
