@@ -251,10 +251,7 @@ export default {
       this.stepPaySuccess = true
 
       // facebook 购买成功统计-start
-      if(this.$store.state.platform == 31){
-        console.log("facebook购买成功数据统计31")
-        fbq('track','Purchase',this.goodsInfo);
-      }
+      fbq('track','Purchase',this.goodsInfo);
       // facebook 购买成功统计-end
     },
     goPayFailed(){

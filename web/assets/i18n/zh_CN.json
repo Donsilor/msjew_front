@@ -554,8 +554,6 @@
         "setpwd": "设置密码*",
         "confirmpwd": "确认密码*",
         "ConfirmReset": "重置",
-        "schedule3": "重设密码",
-        "schedule4": "完成",
         "forgetPassword": "找回密码",
         "address": "请输入您的BDD账户邮箱地址*",
         "phone": "请输入您的手机号*",
@@ -2392,7 +2390,7 @@
                 "gia1": "GIA 钻石鉴定证书",
                 "gia2": "GIA 钻石鉴定精简版证书",
                 "gia3": "BDD Co.鉴定",
-                "mail1": "若未能检视其证书，可透过电邮",
+                "mail1": "若未能检视其证书，可通过电邮",
                 "mail2": "联络我们"
             },
             "maintenance": {
