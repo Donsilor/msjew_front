@@ -4,13 +4,18 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails"></product-images>
+        <product-images :images="thumbnails" :coupon="coupons"></product-images>
       </div>
       <!--      右侧-->
       <div class="right-detail">
-        <h2 class="product-name">
-          {{ info.goodsName }}
-        </h2>
+        <div class="right-title">
+          <span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? discountUs(info.coupon.discount.discount)+'%' : discountConversion(info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+          <span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
+
+          <h2 class="product-name">
+            {{ info.goodsName }}
+          </h2>
+        </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div class="sku" v-if="productInfo.carats.length == ''">
           <div class="left-properties">
@@ -233,7 +238,36 @@
             </div>
           </li>
         </ul>
-        <div class="product-price">
+
+        <!-- 折扣活动 -->
+        <div class="discount-box" v-if="info.coupon.discount">
+        	<div class="discount-active">
+        		<div>
+        			<span>{{ $t(`${lang}.discountsActive`) }}：</span>
+        			<span class="discount-icon">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+        		</div>
+        		<div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div>
+        	</div>
+
+        	<div class="discount-price">
+        		<span class="old-price">{{ formatCoin(info.coinType) }} {{ formatNumber(price) }}</span>
+        		<span class="new-price">{{ formatCoin(info.coinType) }} {{ formatNumber(price2) }}</span>
+        	</div>
+        </div>
+
+        <!-- 优惠活动 -->
+        <div class="favourable-box" v-if="info.coupon.money">
+        	<div class="discount-active">
+        		<div>
+        			<span>{{ $t(`${lang}.discounts1`) }}：</span>
+        			<span class="favourable-icon">￥</span>
+        			<span class="get" @click="getCoupon">{{ $t(`${lang}.getCoupon`) }}></span>
+        		</div>
+        		<!-- <div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div> -->
+        	</div>
+        </div>
+
+        <div class="product-price" v-if="!info.coupon.discount">
           <span class="coin">
             {{ formatCoin(info.coinType) }}
           </span>
@@ -241,6 +275,7 @@
             {{ formatNumber(price) }}
           </span>
         </div>
+
         <div v-if="!$route.query.isBack" class="button-group">
           <nuxt-link
             v-if="productInfo.goodsMod === 1 && canAddCart"
@@ -263,7 +298,7 @@
             (parseInt($route.query.step) !== 1 && $route.query.step) ||
               $route.query.isBack
           "
-          class="button-group" 
+          class="button-group"
         >
           <nuxt-link v-if="canAddCart" :to="finishDj">
             <button :class="['add-to-cart', { active: canAddCart }]">
@@ -336,6 +371,8 @@
     <section class="desc" v-html="info.goodsDesc"></section>
     <order-include></order-include>
     <comments ref="product-comments" :good-id="info.id"></comments>
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
   </div>
 </template>
 
@@ -417,10 +454,26 @@ export default {
         materialIndex: 0,
         sizeIndex: 0,
         caratIndex: 0
-      }
+      },
+      showCoupon: false,
+      moneyList: [],
+      activeTime: '',
+      language: this.$store.state.language
     }
   },
   computed: {
+    coupons() {
+      var co;
+      if(this.couponType(this.info.coupon) == 'discount'){
+        co = this.info.coupon.discount.discount;
+      }else if(this.couponType(this.info.coupon) == 'money'){
+        co = 'money'
+      }else{
+        co = 0
+      }
+    
+      return co
+    },
     thumbnails() {
         return this.imageStrToArray(this.info.goodsImages || '')
     },
@@ -432,10 +485,22 @@ export default {
       const info = _this.info || {}
       let result = info.salePrice
       if (_this.simpleDetail) {
-        console.log('相加')
+        // console.log('相加')
         result = _this.simpleDetail.retailMallPrice
       } else {
-        console.log('不相加')
+        // console.log('不相加')
+      }
+      return result
+    },
+    price2() {
+      const _this = this
+      const info = _this.info || {}
+      let result = info.coupon.discount.price
+      if (_this.simpleDetail) {
+        // console.log('相加')
+        result = _this.simpleDetail.coupon.discount.price
+      } else {
+        // console.log('不相加')
       }
       return result
     },
@@ -520,12 +585,17 @@ export default {
   },
   mounted() {
     const _this = this
+    if(this.info.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
+    }
     _this.$nextTick(() => {
       // console.log(this.$helpers.base64Decode(this.$route.query.steps))
       if (this.$route.query.isBack) {
         this.checkDetail()
       }
     })
+
+    // this.language = this.getCookie('language')
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {
@@ -635,6 +705,14 @@ export default {
         }
       }
       this.ringChecked = ringChecked
+    },
+    // 领取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        this.$errorMessage(this.$t(`${lang}.needLogin`))
+      }else{
+        this.showCoupon = true
+      }
     }
   }
 }

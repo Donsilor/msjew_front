@@ -14,6 +14,7 @@
 
 <script>
 import DetailBody from './single-ring-detail-body.vue'
+import detail from '../../mixins/detail'
 
 export default {
   layout: `no-footer-bar`,
@@ -23,6 +24,7 @@ export default {
   components: {
     DetailBody
   },
+  mixins: [detail],
   data() {
     return {
       lang: this.LANGUAGE.detailCommons,
@@ -128,12 +130,9 @@ export default {
         .dispatch('addCart', data)
         .then(data => {
           // facebook 添加购物车统计-start
-          if(this.$store.state.platform == 31){
-            console.log("facebook购物车数据统计")
-            fbq('track', 'AddToCart');
-          }
+          fbq('track', 'AddToCart');
           // facebook 添加购物车统计-end
-          
+
           this.$nuxt.$loading.finish()
           this.$toast(this.lang.addCartSuccess)
         })

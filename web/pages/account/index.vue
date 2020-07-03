@@ -64,6 +64,11 @@ export default {
           url: '/account/settings',
           name: this.$t(`${lang}.index.account`)
         },
+        {
+          img: require('../../static/personal/account.png'),
+          url: '/account/coupon',
+          name: this.$t(`${lang}.index.coupon`)
+        },
         // {
         //   img: require('../../static/images/personal/comment.png'),
         //   url: '/account/comment',
@@ -140,7 +145,7 @@ export default {
     // }
   },
   methods: {
-   
+
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='

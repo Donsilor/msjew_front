@@ -23,6 +23,17 @@
           >
             <span>{{ $t(`cart.Invalid`) }}</span>
           </div>
+
+          <!-- 折扣 -->
+          <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'discount'">
+            <span>{{ language == 'en_US' ? discountUs(g.data[0].coupon.discount.discount)+'%' : discountConversion(g.data[0].coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+          </div>
+
+          <!-- 优惠券 -->
+          <div class="list-discount-icon1" v-if="couponType(g.data[0].coupon) == 'money'">
+            <span>{{ $t(`${lang}.discounts1`) }}</span>
+          </div>
+
         </div>
       </nuxt-link>
       <nuxt-link :to="getJumpLink(g)" class="good-desc-wrap">
@@ -116,18 +127,40 @@
           </div> -->
         </div>
         <div class="couple-line" />
-        
+
       </div>
-      <div class="good-price">
-            {{ formatCoin(g.coinType) }}
-            {{
-              formatNumber(
-                g.price
-              )
-            }}
-          </div>
-      
-      
+
+		<!-- 原金额 -->
+		<div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount' || couponType(g.data[0].coupon) == 'money'}">
+		  {{ formatCoin(g.coinType) }}
+		  {{
+			formatNumber(
+			  g.price
+			)
+		  }}
+		</div>
+
+		<!-- 优惠后金额 -->
+		<div class="good-price">
+        <span v-if="couponType(g.data[0].coupon) == 'discount'">
+          {{ formatCoin(g.coinType) }}
+          {{
+            formatNumber(
+              g.data[0].coupon.discount.price
+            )
+          }}
+        </span>
+        <span  v-if="couponType(g.data[0].coupon) !== 'discount'">
+          {{ formatCoin(g.coinType) }}
+          {{
+            formatNumber(
+              g.price
+            )
+          }}
+        </span>
+      </div>
+
+
       <!-- <div
         v-show="options"
         v-if="
@@ -162,7 +195,14 @@
 </template>
 
 <script>
+const lang = 'cart'
 export default {
+  data() {
+    return{
+      lang,
+      language: this.$store.state.language
+    }
+  },
   name: 'Double',
   props: {
     g: {
@@ -179,7 +219,7 @@ export default {
     }
   },
   mounted(){
-    console.log("double",this.g)
+    // console.log("double",this.g)
     // console.log("g",this.g.data[0])
   },
   methods: {
@@ -237,8 +277,8 @@ export default {
             // 戒指
              routerName = '/wedding-rings/all'
           }
-          
-          
+
+
           break
         case 3:
           // 珠宝饰品
@@ -271,13 +311,13 @@ export default {
         case 12:
           routerName = '/engagement-rings/all'
           break
-          
+
       }
- 
+
       const routerJump = this.$router.resolve({
         path: routerName,
         query: {
-          
+
         }
       })
       window.open(routerJump.href, '_blank')
@@ -394,7 +434,7 @@ export default {
           box-sizing: border-box;
         }
       }
-      
+
       .couple-line {
         position: absolute;
         // top: 173px;
@@ -483,7 +523,7 @@ export default {
     background-color: rgba(102, 102, 102, 0.4);
   }
   .lose-btn {
-    width: 120px;
+    width: 100px;
     height: 21px;
     line-height: 21px;
     display: flex;
@@ -524,5 +564,10 @@ export default {
 
 .btn-box{
   width: calc((100% - 140px) * 0.14);
+}
+
+.old-price{
+	color: #b2b2b2 !important;
+  font-size: 14px !important;
 }
 </style>

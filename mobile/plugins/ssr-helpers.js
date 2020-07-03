@@ -17,6 +17,21 @@ export default function({ req, res, app, store }) {
   Vue.prototype.goBack = function(router) {
     router.go(-1)
   }
+  
+  // 打折由百分比换成小数点
+  Vue.prototype.discountConversion = Helpers.discountConversion
+
+  // 英文模式下的折扣数额是减去获取的结果
+  Vue.prototype.discountUs = Helpers.discountUs
+
+  // 判断是否有打折活动
+  Vue.prototype.couponType = Helpers.couponType
+
+  // getTime 时间转换
+  Vue.prototype.changeTime = Helpers.changeTime
+  
+  // 获取cookie
+  Vue.prototype.getCookie = Helpers.getCookie
 
   Vue.prototype.resizeOSSImageStr = ''
   // '?x-oss-process=image/format,webp'

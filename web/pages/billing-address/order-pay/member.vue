@@ -439,7 +439,8 @@
     <div class="cart-top-bar">
       <span>{{ $t(`${lang}.info`) }}</span
       ><span>{{ $t(`${lang}.number`) }}</span
-      ><span>{{ $t(`${lang}.price`) }}</span>
+      ><span>{{ $t(`${lang}.oldPrice`) }}</span
+      ><span>{{ $t(`${lang}.newPrice`) }}</span>
     </div>
     <div class="cart-goods">
       <div v-for="(g, index) in good" :key="index">
@@ -813,7 +814,7 @@
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
-              <div class="hkd">{{ good.length }}</div>
+              <div class="hkd">{{ productCount }}</div>
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -821,12 +822,12 @@
                 {{ formatCoin(coinType) }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
-            <div class="detail-line" v-for="item in useAmount">
+            <!-- <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
                 -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
-            </div>
+            </div> -->
             <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
@@ -878,24 +879,48 @@
                 </div>
               </div>
               <div class="hkd color-gold">
-                +{{ currency }} {{ formatMoney(tex.safeFee) }}
+                +{{ formatCoin(coinType) }} {{ formatMoney(tex.safeFee) }}
               </div>
             </div>
             <div class="detail-line">
               <div class="font-size-16 color-333">
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
-              <div class="hkd color-pink price-big">
+              <div class="hkd color-pink">
                 {{ formatCoin(coinType) }}
                 {{ formatMoney(orderTotalAmount) }}
                 <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
               </div>
             </div>
 
-            <div class="detail-line">
-              <div class="font-size-16 color-333">
-                {{ $t(`${lang2}.NeedPay`) }}
+            <!-- 折扣金额 -->
+            <div v-show="tex.discountAmount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{formatCoin(coinType)}} {{ formatMoney(tex.discountAmount) }}</div>
               </div>
+            </div>
+
+            <!-- 优惠券 -->
+            <div v-if="ifShowCoupon" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <!-- :class="{'under-line': !couponCodeR.couponId}" -->
+              <div class="hkd color-pink under-line" style="cursor: pointer;"  @click="showUseCoupon = true">
+                <div v-if="couponCodeR.couponId">- {{formatCoin(coinType)}} {{ formatMoney(couponCodeR.couponCode) }}</div>
+                <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+            <!-- 购物卡 -->
+            <div class="detail-line" v-for="(item,index) in useAmount" :key="index">
+              <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+              <div class="hkd color-pink">
+                -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
+              </div>
+            </div>
+
+            <div class="detail-line">
+              <div class="font-size-16 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
               <div class="hkd color-pink price-big">
                 {{ formatCoin(coinType) }}
                 {{ formatMoney(ultimatelyPay) }}
@@ -1377,7 +1402,8 @@
     <div class="cart-top-bar">
       <span>{{ $t(`${lang}.info`) }}</span
       ><span>{{ $t(`${lang}.number`) }}</span
-      ><span>{{ $t(`${lang}.price`) }}</span>
+      ><span>{{ $t(`${lang}.oldPrice`) }}</span
+      ><span>{{ $t(`${lang}.newPrice`) }}</span>
     </div>
     <div class="cart-goods">
       <div v-for="(g, index) in good" :key="index">
@@ -1500,7 +1526,6 @@
               @blur="borderChange = 0"
             />
           </div>
-
 
           <!-- 发票按钮 -->
           <div class="invoice">
@@ -1746,7 +1771,7 @@
           <div class="price-detail">
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNum`) }}</div>
-              <div class="hkd">{{ good.length }}</div>
+              <div class="hkd">{{ productCount }}</div>
             </div>
             <div class="detail-line">
               <div>{{ $t(`${lang}.goodsNumNum`) }}</div>
@@ -1754,12 +1779,12 @@
                 {{ formatCoin(coinType) }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
-            <div class="detail-line" v-for="item in useAmount">
+            <!-- <div class="detail-line" v-for="item in useAmount">
               <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
               <div class="hkd color-pink">
                 -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
               </div>
-            </div>
+            </div> -->
 
             <div v-show="makeGay" class="detail-line">
               <div>
@@ -1819,17 +1844,41 @@
               <div class="font-size-16 color-333">
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
-              <div class="hkd color-pink price-big">
+              <div class="hkd color-pink">
                 {{ formatCoin(coinType) }}
                 {{ formatMoney(orderTotalAmount) }}
                 <!-- {{ formatMoney(tex.orderAmount || goodsPrice) }} -->
               </div>
             </div>
 
-            <div class="detail-line">
-              <div class="font-size-16 color-333">
-                {{ $t(`${lang2}.NeedPay`) }}
+            <!-- 折扣金额 -->
+            <div v-show="tex.discountAmount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{formatCoin(coinType)}} {{ formatMoney(tex.discountAmount) }}</div>
               </div>
+            </div>
+
+            <!-- 优惠券 -->
+            <div v-if="ifShowCoupon" class="detail-line">
+              <div>{{ $t(`${lang}.coupon`) }}</div>
+              <!-- :class="{'under-line': !couponCodeR.couponId}" -->
+              <div class="hkd color-pink under-line" style="cursor: pointer;"  @click="showUseCoupon = true">
+                <div v-if="couponCodeR.couponId">- {{formatCoin(coinType)}} {{ formatMoney(couponCodeR.couponCode) }}</div>
+                <div v-if="!couponCodeR.couponId">{{$t(`${lang}.notAvailable`)}}</div>
+              </div>
+            </div>
+
+            <!-- 购物卡 -->
+            <div class="detail-line" v-for="(item,index) in useAmount" :key="index">
+              <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+              <div class="hkd color-pink">
+                -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
+              </div>
+            </div>
+
+            <div class="detail-line">
+              <div class="font-size-14 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
               <div class="hkd color-pink price-big">
                 {{ formatCoin(coinType) }}
                 {{ formatMoney(ultimatelyPay) }}
@@ -1877,6 +1926,8 @@
       :currencyType = "currency"
     ></shopping-card>
   </div>
+
+  <use-coupon v-if="showUseCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR" :coinTypes="coinTypes"></use-coupon>
 </div>
 </template>
 
@@ -1969,8 +2020,8 @@ export default {
       isSameEmail: false,
       orderEmail: ``,
       remark: '',
-      coupons: [{ couponCode: '- - -', couponId: '' }],
-      coupon: { couponCode: '- - -', couponId: '' },
+      // coupons: [{ couponCode: '- - -', couponId: '' }],
+      // coupon: { couponCode: '- - -', couponId: '' },
       goodsPrice: 0,
       preferFee: 0,
       tex: {
@@ -2001,7 +2052,20 @@ export default {
       num: 0,
       mobileMax: 20,
       currency: '',
-      platform: this.$store.state.platform
+      platform: this.$store.state.platform,
+      couponCodeR: {
+        couponId: ''
+      },
+      showUseCoupon: false,
+      // 所有可有优惠券
+      couponAll: [],
+      // 已领取优惠券
+      couponAlready: [],
+      ifShowCoupon: false,
+      productCount:'',
+      coinTypes:{
+        coin:''
+      }
     }
   },
   computed: {
@@ -2024,10 +2088,14 @@ export default {
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           this.good = res
-
-          // console.log("res",res)
+          
+          this.productCount = this.good.length
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
+            if(res[i].groupType === 2){
+              this.productCount = this.productCount + 1
+             console.log("ffff", this.productCount)
+            }
           }
 
           resolve()
@@ -2058,11 +2126,17 @@ export default {
       })
   },
   mounted() {
-    console.log("platform",this.platform)
+    // console.log("platform",this.couponCodeR.couponId)
+    // console.log("platform",this.platform)
+    // 
     // this.getAddress();
     this.language = this.getCookie('language')
   },
   methods: {
+    // setCoupon(){
+    //   console.log("platform",this.couponCodeR.couponId)
+    //   // console.log("platform",this.couponCodeR)
+    // },
     zhizhi(or){
       // console.log("纸质",or)
       this.invoice.is_electronic = or;
@@ -2145,7 +2219,7 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-          console.log("地址",res.data)
+          // console.log("地址",res.data)
           this.address = res.data
           if(this.address.length != 0){
             // for (const i in res.data) {
@@ -2160,7 +2234,12 @@ export default {
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
-            this.getTex()
+
+            var k = [];
+            if(this.cardList){
+              k = this.cardList
+            }
+            this.getTex(k)
             this.resetAddressInp()
           }
         })
@@ -2201,7 +2280,11 @@ export default {
     changeAddress(obj) {
       this.orderAddress = obj
       // console.log("aaa",this.orderAddress)
-      this.getTex()
+      var k = [];
+      if(this.cardList){
+        k = this.cardList
+      }
+      this.getTex(k)
     },
     createAddress() {
       // console.log('create')  /[^\d]/g,''
@@ -2791,24 +2874,49 @@ export default {
       //     }
       //   })
     },
-    getTex(k) {
-      const cards = k || '';
-      const arr = []
+    getTex(k=[]) {
+      const cards = k || [];
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
+
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
-          arr.push(this.good[i].data[0].id)
+          obj.cart_id = this.good[i].data[0].id
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
+          }
+         arr.push({...obj})
+         obj.cart_id = '';
+         obj.coupon_id = '';
         } else {
-          arr.push(this.good[i].data[0].id)
-          arr.push(this.good[i].data[1].id)
+          obj.cart_id = this.good[i].data[0].id
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
+          }
+          arr.push({...obj})
+          obj.cart_id = '';
+          obj.coupon_id = '';
+
+          obj.cart_id = this.good[i].data[1].id
+          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
+          }
+          arr.push({...obj})
+          obj.cart_id = '';
+          obj.coupon_id = '';
         }
+
       }
-      // console.log("this.good",this.good)
-      const data = arr.join(',')
+      
+      // console.log(778,arr)
+
       const datas={
-        addressId: this.orderAddress.id,
-        cards: cards,
-        cartIds: data
+        carts: arr,
+        coupon_id: this.couponCodeR.couponId,
+        cards: cards, 
+        addressId: this.orderAddress.id
       }
+
       this.canSubmit = false
       this.$axios
         .post('/web/member/order/tax', datas)
@@ -2821,9 +2929,16 @@ export default {
             this.useAmount = JSON.parse(JSON.stringify(res.data.cards));
           }
 
+          this.ifShowCoupon = !!res.data.myCoupons.length
+
           this.orderTotalAmount = res.data.orderAmount;
           this.ultimatelyPay = res.data.payAmount;
           this.coinType = res.data.currency
+          this.coinTypes.coin = res.data.currency;
+          this.currency = res.data.currency
+
+          this.couponAll = res.data.coupons;
+          this.couponAlready = res.data.myCoupons;
         })
         .catch(err => {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
@@ -2864,28 +2979,51 @@ export default {
         this.alertBox = true
         return false
       }
-      const arr = []
       let invoice = {}
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
-          arr.push(this.good[i].data[0].id)
+          obj.cart_id = this.good[i].data[0].id
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
+          }
+         arr.push({...obj})
+         obj.cart_id = '';
+         obj.coupon_id = '';
+
         } else {
-          arr.push(this.good[i].data[0].id)
-          arr.push(this.good[i].data[1].id)
+          obj.cart_id = this.good[i].data[0].id
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
+          }
+          arr.push({...obj})
+
+          obj.cart_id = '';
+          obj.coupon_id = '';
+          obj.cart_id = this.good[i].data[1].id
+          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
+          }
+          arr.push({...obj})
+          obj.cart_id = '';
+          obj.coupon_id = '';
         }
       }
+
       if(this.iconShow ){
         invoice = this.invoice
       }
       // console.log("arr",arr)
 
       const data = {
-        cart_ids: arr.join(','),
+        carts: arr,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
         invoice:invoice,
-        card: this.cardList
+        card: this.cardList,
+        coupon_id: this.couponCodeR.couponId
       }
       // console.log("pppp",data)
       this.$axios
@@ -2953,28 +3091,52 @@ export default {
         this.alertBox = true
         return false
       }
-      const arr = []
-      let invoice = {}
+
+      let invoice = {};
+      const arr = [];
+      var obj = {cart_id: '', coupon_id: ''};
       for (const i in this.good) {
         if (this.good[i].groupType === null) {
-          arr.push(this.good[i].data[0].id)
+          obj.cart_id = this.good[i].data[0].id
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
+          }
+         arr.push({...obj})
+         obj.cart_id = '';
+         obj.coupon_id = '';
+
         } else {
-          arr.push(this.good[i].data[0].id)
-          arr.push(this.good[i].data[1].id)
+          obj.cart_id = this.good[i].data[0].id
+          if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[0].coupon.discount.coupon_id
+          }
+          arr.push({...obj})
+          obj.cart_id = '';
+          obj.coupon_id = '';
+
+          obj.cart_id = this.good[i].data[1].id
+          if(this.good[i].data[1].coupon.hasOwnProperty('discount')){
+            obj.coupon_id = this.good[i].data[1].coupon.discount.coupon_id
+          }
+          arr.push({...obj})
+          obj.cart_id = '';
+          obj.coupon_id = '';
         }
       }
+
       if(this.iconShow){
         invoice = this.invoice
       }
       // console.log("arr",arr)
       const data = {
-        cart_ids: arr.join(','),
+        carts: arr,
         // allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: this.orderAddress.id,
         invoice:invoice,
         card: this.cardList || '',
+        coupon_id: this.couponCodeR.couponId
         // afterMail: this.isSameEmail
         // ? this.orderAddress.email
         // : this.orderEmail,
@@ -3049,7 +3211,22 @@ export default {
        }else{
          this.mobileMax = 20
        }
-     }
+     },
+     closeCo(g){
+       this.showUseCoupon = false;
+      console.log("g",g)
+       if(g && g!==-1){
+         this.couponCodeR = JSON.parse(JSON.stringify(g));
+         console.log(this.couponCodeR)
+         var k = [];
+         if(this.cardList){
+           k = this.cardList
+         }
+         this.getTex(k);
+       }else if(!g){
+         this.couponCodeR = {}
+       }
+     } 
 
   }
 }
@@ -4868,6 +5045,11 @@ div {
   color: #f29b87;
   border: 1px solid #f29b87;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.under-line{
+  text-decoration: underline;
   cursor: pointer;
 }
 </style>

@@ -59,12 +59,54 @@
               :src="imageStrToArray(each.goodsImages)[0]"
               @error="imageError"
             />
+
+            <!-- 折扣 -->
+            <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'">
+              <div>{{ this.$store.state.language == 'en_US' ? discountUs(each.coupon.discount.discount)+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+            </div>
+
+            <!-- 优惠券 -->
+            <div class="discount-a-icon" v-if="couponType(each.coupon) == 'money'">
+              <div>{{ lang.discounts1 }}</div>
+            </div>
+
           </div>
-          <div class="info-title ow-h2">
+
+          <!-- 折扣 -->
+          <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'discount'">
+            <span class="discount-a-icon2">{{ this.$store.state.language == 'en_US' ? discountUs(each.coupon.discount.discount)+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             {{ each.goodsName }}
           </div>
-          <div class="info-price">
-            {{ formatCoin(each.coinType) }}{{ formatNumber(each.salePrice) }}
+
+          <!-- 优惠券 -->
+          <div class="info-title ow-h2" v-else-if="couponType(each.coupon) == 'money'">
+            <span class="discount-b-icon2">￥</span>
+            {{ each.goodsName }}
+          </div>
+
+          <div v-else class="info-title ow-h2">
+            {{ each.goodsName }}
+          </div>
+
+          <div class="product-price">
+            <div class="list-discount-price" v-if="couponType(each.coupon) !== 'discount'">
+              <div class="info-price">
+                <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                <span class="price">{{ formatNumber(each.salePrice) }}</span>
+              </div>
+            </div>
+
+            <!-- 折扣 -->
+            <div class="list-discount-price" v-if="couponType(each.coupon) == 'discount'">
+              <div class="info-price old-price-2">
+                <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                <span class="price">{{ formatNumber(each.salePrice) }}</span>
+              </div>
+              <div class="info-price">
+                <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                <span class="price">{{ formatNumber(each.coupon.discount.price) }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -114,7 +156,7 @@ export default {
     return {
       lang: this.LANGUAGE.listCommons,
       gender: 'all',
-
+      language: this.$store.state.language
     }
   },
   watch: {
@@ -132,7 +174,6 @@ export default {
 
 
   },
-  created() {},
   mounted() {
     const _this = this
     _this.$nextTick(() => {
@@ -157,6 +198,8 @@ export default {
     }
       // this.madeUpEv()
     })
+
+    // this.language = this.getCookie('language')
   },
   methods: {
     changeGender(type = -1) {
@@ -184,7 +227,7 @@ export default {
       }
       this.ev += `^gender=${this.gender}`
       this.research()
-      console.log(this.ev)
+      // console.log(this.ev)
     }
   },
   beforeDestroy() {

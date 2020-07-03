@@ -340,6 +340,12 @@ export default {
           }
         },
         {
+          name: this.$t(`${lang}.coupon`),
+          to: {
+            path: '/account/coupon'
+          }
+        },
+        {
           name: this.$t(`${lang}.loginOut`),
           action: this.logout
         }

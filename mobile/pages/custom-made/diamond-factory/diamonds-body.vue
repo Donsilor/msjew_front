@@ -45,8 +45,16 @@
             /></nuxt-link>
           </div>
         </swiper>
+
+        <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+          <div class="triangle" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+          <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
+        </div>
       </div>
       <div class="title">
+        <span class="discount-icon" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+        <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
+
         <a :href="goodInfo.goodsGiaImage" target="_blank"
           ><img
             v-show="goodInfo.goodsGiaImage"
@@ -56,7 +64,13 @@
         /></a>
         {{ goodInfo.goodsName }}
       </div>
-      <div class="price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
+
+      <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
+
+      <div class="discount-price" v-else>
+        <div class="old-price">{{ lang.oddPrice }} {{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
+        <div class="new-price">{{ lang.newPrice }} {{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
+      </div>
       <div class="promise-box">
         <!-- <div
           v-for="(c, index) in goodInfo.goodsServicesJsons"
@@ -69,6 +83,27 @@
           <span>{{ c.name }}</span>
         </div> -->
       </div>
+
+      <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+        <div class="discount-l">
+          <div class="discoupon-d" v-if="goodInfo.coupon.discount">
+            <div class="discoupon-d-l">
+              <span class="text">{{ lang.discountsActive }}：</span>
+              <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+            </div>
+          </div>
+          
+          <div class="discoupon-d" v-if="goodInfo.coupon.money">
+            <div class="discoupon-d-l">
+              <span class="text">{{ lang.discountsActive }}：</span>
+              <span class="discount-icon">￥</span>
+            </div>
+          
+            <div class="get" @click="getCoupon">{{ lang.getCoupon }} &gt;</div>
+          </div>
+        </div>
+      </div>
+
       <!--首次进入-->
       <div
         v-if="
@@ -378,6 +413,8 @@
           </div>
         </div>
       </div>
+      <!-- 获取优惠券 -->
+      <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
     </div>
     <!-- <div v-else >
       <soleOut></soleOut>
@@ -389,6 +426,12 @@
 import Mx from './diamond-mixin'
 // import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
+  data() {
+    return {
+      ifShowCoupon: false,
+      language: this.$store.state.language
+    }
+  },
   mixins: [Mx],
   components: {
     // soleOut
@@ -399,6 +442,22 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    }
+  },
+  mounted() {
+    // this.language = this.getCookie('language')
+  },
+  methods:{
+    closeCo() {
+      this.ifShowCoupon = false
+    },
+    // 获取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        this.$toast.show(this.lang.needLogin)
+      }else{
+        this.ifShowCoupon = true
+      }
     }
   }
 }

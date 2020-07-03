@@ -12,7 +12,7 @@ import SingleRingDetail from '@/pageComponents/wedding-rings/single-ring/detail.
 import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   head() {
-    return this.seoInfo 
+    return this.seoInfo
   },
   components: {
     PairRingDetail,

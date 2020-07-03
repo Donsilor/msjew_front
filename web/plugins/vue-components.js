@@ -10,6 +10,8 @@ import NoMoreData from '@/components/no-more-data'
 import Step from '@/components/step'
 import scroll from '@/components/scroll'
 import magnifying from '@/components/magnifying'
+import GetCoupon from '@/components/coupon/getCoupon/index'
+import UseCoupon from '@/components/coupon/useCoupon/index'
 
 // 个人中心
 import PersonalAccount from '@/components/personal/account'
@@ -28,6 +30,8 @@ Vue.use(NoMoreData)
 Vue.use(Step)
 Vue.use(scroll)
 Vue.use(magnifying)
+Vue.use(GetCoupon)
+Vue.use(UseCoupon)
 
 // 个人中心
 Vue.use(PersonalAccount)

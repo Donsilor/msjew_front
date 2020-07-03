@@ -556,34 +556,170 @@ color-red {
 }
 
 
+/* 商品详情页折扣/优惠券 */
+.discount-detail .detail .right-detail .services-list,
+.favourable-detail .detail .right-detail .services-list{
+	flex-grow: 0 !important;
+}
 
+.discount-active{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 40px;
+	background-color: #fafaf6;
+	margin: 30px 0;
+	padding: 0 20px;
+	box-sizing: border-box;
+	font-size: 13px;
+	color: #000;
+}
 
+.discount-icon,
+.favourable-icon{
+  display: inline-block;
+	height: 26px;
+	padding: 0 6px;
+	font-size: 17px;
+	color: #fff;
+	line-height: 24px;
+	margin: 0 10px;
+	background: url(../../static/subject/icon_03.png) no-repeat center;
+	background-size: 100% 100%;
+}
 
+.discount-active .time{
+	color: #b49785;
+  margin-right: 68px;
+}
 
+.discount-price{
+	display: flex;
+	align-items: flex-end;
+	margin-bottom: 44px;
+}
+.old-price{
+	font-size: 15px;
+	color: #b2b2b2;
+	text-decoration: line-through;
+}
+.new-price{
+	font-size: 23px;
+	color: #f49b87;
+	margin-left: 26px;
+}
 
+.right-title .favourable-icon{
+  padding: 0 3px;
+  margin-right: 10px;
+  font-size: 13px;
+}
+.favourable-box .favourable-icon{
+	padding: 0 3px;
+	font-size: 13px;
+  display: inline-block;
+}
+.favourable-box .get{
+	font-size: 13px;
+	color: #a15d35;
+	text-decoration: underline;
+	cursor: pointer;
+}
 
+.discount-icon2{
+  position: absolute;
+  top: -9px;
+  left: -5px;
+  z-index: 2;
+  width: 90px;
+  height: 96px;
+  background: url(../../static/subject/icon_01.png) no-repeat center;
+  background-size: 100% 100%;
+}
+.discount-icon2 .icon{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-45deg);
+  font-size: 20px;
+  color: #fff;
+  text-align: center;
+  padding-top: 26px;
+  box-sizing: border-box;
+}
 
+/* 列表页优惠券样式 */
+.list-discount-icon1{
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  z-index: 2;
+  width: 80px;
+  height: 80px;
+  background: url(../../static/subject/icon_05.png) no-repeat center;
+  background-size: 100% 100%;
+}
 
+.list-discount-icon1 span{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-45deg);
+  font-size: 18px;
+  color: #fff;
+  text-align: center;
+  line-height: 110px;
+}
 
+.list-discount-icon2{
+  display: inline-block;
+  height: 24px;
+  padding: 0 2px;
+  background: url(../../static/subject/icon_03.png) no-repeat center;
+  background-size: 100% 100%;
+  color: #fff;
+  line-height: 22px;
+  margin-right: 6px;
+}
 
+.list-discount-icon2{
+  padding: 0 6px;
+}
 
+.product-price{
+  height: 50px;
+  line-height: 50px;
+}
+.list-discount-price{
+  height: 100%;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.list-discount-price div:first-child{
+  /* font-size: 18px; */
+  font-size: 15px;
+  color: #c3c3c3;
+  text-decoration: line-through;
+  margin-right: 16px;
+  margin-top: 5px;
+}
 
+.list-discount-icon2.padding{
+  padding: 0 2px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* 购物车活动 */
+.good-img .list-discount-icon1{
+    width: 50px;
+    height: 50px;
+ }
+ .good-img .list-discount-icon1 span{
+    font-size: 13px;
+    line-height: 70px;
+ }

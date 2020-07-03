@@ -623,7 +623,6 @@ export default {
           data: this.info
         })
         .then(data => {
-          // console.log("11111",)
           _this.$toast.show(_this.lang.registerSuccess)
           _this.$store.commit('setToken', data.access_token)
           _this.$store.commit('setUserInfo', data.member);
@@ -631,6 +630,7 @@ export default {
           // _this.$store.commit('setLastUrl', '')
            _this.$store.dispatch('synchronizeCart')
           // console.log("order-lastUrL",lastUrl)
+          fbq('track', 'CompleteRegistration');
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({
@@ -694,6 +694,7 @@ export default {
           const lastUrl=localStorage.getItem("url")
           // _this.$store.commit('setLastUrl', '')
           // console.log("order-lastUrL",lastUrl)
+          fbq('track', 'CompleteRegistration');
           setTimeout(() => {
             if (lastUrl) {
               _this.$router.replace({

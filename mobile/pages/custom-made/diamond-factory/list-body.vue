@@ -44,12 +44,54 @@
               :src="imageStrToArray(each.goodsImages)[0]"
               @error="imageError"
             />
+
+            <!-- 折扣 -->
+            <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'">
+              <div>{{ language == 'en_US' ? discountUs(each.coupon.discount.discount)+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+            </div>
+
+            <!-- 优惠券 -->
+            <div class="discount-a-icon" v-if="couponType(each.coupon) == 'money'">
+              <div>{{ lang.discounts1 }}</div>
+            </div>
+
           </div>
-          <div class="info-title ow-h2">
+
+          <!-- 折扣 -->
+          <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'discount'">
+            <span class="discount-a-icon2">{{ language == 'en_US' ? discountUs(each.coupon.discount.discount)+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             {{ each.goodsName }}
           </div>
-          <div class="info-price">
-            {{ formatCoin(each.coinType) }}{{ formatNumber(each.salePrice) }}
+
+          <!-- 优惠券 -->
+          <div class="info-title ow-h2" v-else-if="couponType(each.coupon) == 'money'">
+            <span class="discount-b-icon2">￥</span>
+            {{ each.goodsName }}
+          </div>
+
+          <div v-else class="info-title ow-h2">
+            {{ each.goodsName }}
+          </div>
+
+          <div class="product-price">
+            <div class="list-discount-price" v-if="couponType(each.coupon) !== 'discount'">
+              <div class="info-price">
+                <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                <span class="price">{{ formatNumber(each.salePrice) }}</span>
+              </div>
+            </div>
+
+            <!-- 折扣 -->
+            <div class="list-discount-price" v-if="couponType(each.coupon) == 'discount'">
+              <div class="info-price old-price-2">
+                <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                <span class="price">{{ formatNumber(each.salePrice) }}</span>
+              </div>
+              <div class="info-price">
+                <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                <span class="price">{{ formatNumber(each.coupon.discount.price) }}</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -133,7 +175,15 @@ import List from '@/mixins/list.js'
 import GoodListProps from '@/mixins/good-diamond-list-props.js'
 export default {
   name: 'List',
-  mixins: [Mixin, List, GoodListProps]
+  mixins: [Mixin, List, GoodListProps],
+  data() {
+    return {
+      language: this.$store.state.language
+    }
+  },
+  mounted() {
+    // this.language = this.getCookie('language')
+  }
 }
 </script>
 

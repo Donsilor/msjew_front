@@ -60,7 +60,12 @@
               <span>x 1</span>
               <p>SKU：{{ detail.data[0].goodsCode }}</p>
               <p>{{ detail.data[0].detailSpecs }}</p>
-              <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
+              <!-- <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b> -->
+              <div v-if="detail.data[0].couponInfo.type === 2">
+                <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPayPrice }}</b>
+              </div>
+              <b v-else>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
             </div>
 
             <!--              对戒-->
@@ -84,10 +89,11 @@
                 <span>x 1</span>
               </div>
               <div class="price">
-                <b
-                  >{{ formatCoin(info.coinCode) }}
-                  {{ detail.data[0] && detail.data[0].goodsPrice }}</b
-                >
+                <div v-if="detail.data[0].couponInfo.type === 2">
+                  <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                  <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPayPrice }}</b>
+                </div>
+                <b v-else>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
               </div>
             </div>
 
@@ -99,16 +105,21 @@
               <span>x 1</span>
               <p>SKU：{{ detail.data[0].goodsCode }}</p>
               <p>{{ detail.data[0].detailSpecs }}</p>
-              <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
+              <div v-if="detail.data[0].couponInfo.type === 2">
+                <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
+                <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPayPrice }}</b>
+              </div>
+              <b v-else>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b>
               <h4 class="order-ellipsis">
                 {{ detail.data[1].goodsName }}
               </h4>
               <p>SKU：{{ detail.data[1] && detail.data[1].goodsCode }}</p>
               <p>{{ detail.data[1] && detail.data[1].detailSpecs }}</p>
-              <b
-                >{{ formatCoin(info.coinCode) }}
-                {{ detail.data[1] && detail.data[1].goodsPrice }}</b
-              >
+              <div v-if="detail.data[1].couponInfo.type === 2">
+                <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[1].goodsPrice}}</div>
+                <b>{{ formatCoin(info.coinCode) }} {{ detail.data[1].goodsPayPrice }}</b>
+              </div>
+              <b v-else>{{ formatCoin(info.coinCode) }} {{ detail.data[1].goodsPrice }}</b>
             </div>
           </div>
         </div>
@@ -271,14 +282,14 @@
             <span>{{ lang.productsCount }}： </span
             ><span>{{ formatCoin(info.coinCode) }} {{ productsPrice }} </span>
           </li>
-		  <li v-for="item in cardList">
+		  <!-- <li v-for="item in cardList">
 		    <span>{{ lang.shoppingCard }}：
 					<em :class="info.orderStatus == 0 ? 'card-color' : ''">
 						({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">(已解绑)</i>
 					</em>
 				</span>
 			<span class="active">-{{ formatCoin(info.coinCode) }} {{ item.useAmount }} </span>
-		  </li>
+		  </li> -->
           <li v-if="info.preferFee" class="active">
             <span>{{ lang.offer }}： </span
             ><span>-{{ formatCoin(info.coinCode) }} {{ info.preferFee }} </span>
@@ -299,13 +310,29 @@
             <span>{{ lang.transPreferFee }}： </span
             ><span>-{{ formatCoin(info.coinCode) }} {{ info.transPreferFee }} </span>
           </li>
-          <div class="all">
-            <span>{{ lang.orderCount }}</span
+          <li>
+            <span>{{ lang.orderCount }}:</span
             ><span
               ><em>{{ formatCoin(info.coinCode) }} </em>{{ info.orderAmount }}
             </span>
-          </div>
-          <div class="all" style="border-top: 0;">
+          </li>
+          <li v-if="info.discountAmount != 0" class="active">
+            <span>{{ lang.discountedAmount }}:</span
+            ><span>-{{ formatCoin(info.coinCode) }} {{ info.discountAmount }} </span>
+          </li>
+          <li v-if="info.couponAmount != 0" class="active">
+            <span>{{ lang.couponAmount }}:</span
+            ><span>-{{ formatCoin(info.coinCode) }} {{ info.couponAmount }} </span>
+          </li>
+          <li v-for="(item, i) in cardList" :key="i" >
+            <span>{{ lang.shoppingCard }}：
+              <em :class="info.orderStatus == 0 ? 'card-color' : ''">
+                ({{ cardLengthDispose(item.sn) }})&nbsp;&nbsp;<i v-if="info.orderStatus == 0" style="font-style: normal;">({{ lang.Untied }})</i>
+              </em>
+            </span>
+            <span class="active">-{{ formatCoin(info.coinCode) }} {{ item.useAmount }} </span>
+          </li>
+          <div class="all">
             <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span
             ><span><em>{{ formatCoin(info.coinCode) }} </em>{{ info.payAmount }} </span>
           </div>
@@ -454,7 +481,7 @@ export default {
     }
   },
   mounted() {
-    console.log("inoo",this.invoice)
+    // console.log("inoo",this.invoice)
     const _this = this
     _this.$nextTick(() => {
       _this.getInfo()
@@ -590,7 +617,7 @@ export default {
 
       // 将定制的商品进行排序，钻石放在后面
       result.map(item => {
-        console.log('item====>', item)
+        // console.log('item====>', item)
         if (item.groupType === 2) {
           // 定制
           const diamond = []
@@ -977,6 +1004,13 @@ export default {
           width: 230px;
           margin-left: 90px;
           text-align: left;
+          .old-price{
+            color: #b2b2b2;
+            text-decoration: line-through;
+            margin-bottom: 0.053333rem;
+            font-size: 12px;
+            margin-top: 10px;
+          }
           h4 {
             position: relative;
             display: inline-block;

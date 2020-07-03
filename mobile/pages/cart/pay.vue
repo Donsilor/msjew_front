@@ -12,7 +12,6 @@
         <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
       </div>
-
       <!-- 大陆支付 -->
       <ul v-if="this.$store.state.platform == 21">
         <li v-for="(item, index) in list" :key="index">
@@ -448,6 +447,9 @@ export default {
     showSelect() {
       // console.log('6767')
     }
+  },
+  mounted() {
+    fbq('track', 'InitiateCheckout');
   }
 }
 </script>

@@ -609,7 +609,7 @@ export default {
     this.getData()
   },
   mounted(){
-    console.log("ffff",this.phoneNum.phone_code)
+    // console.log("ffff",this.phoneNum.phone_code)
     this.language = this.$store.state.language
   },
   methods: {

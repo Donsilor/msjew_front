@@ -232,6 +232,7 @@
             "login": "登入",
             "order": "我的訂單",
             "account": "賬戶資料",
+            "coupon": "優惠券卡包",
             "loginOut": "登出",
             "wish": "心願單",
             "cart": "購物車",
@@ -684,7 +685,12 @@
         "pairRingGuide": "結婚戒指指南",
         "howToChoosePairRing": "如何選擇傳統的經典結婚戒指、結婚對戒？",
         "howToMatchPairRing": "跟您的訂婚戒指如何搭配呢？",
-        "knowMore": "了解更多"
+        "knowMore": "了解更多",
+        "discounts1": "優惠券",
+        "discounts2": "折",
+        "discountsActive": "优惠活动",
+        "getCoupon": "获取优惠券",
+        "activityTime": "活動截止時間"
     },
     "pairRingsList": {
         "style": "款式",
@@ -695,7 +701,9 @@
         "title": "对戒戒指",
         "totalCountTitle": "对戒戒指 ({total_count} 款)",
         "titleDesc": "無論時代如何變化，每個人都渴望一生一世的真愛",
-        "sort": "排序"
+        "sort": "排序",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "singleRingsList": {
         "man": "男士",
@@ -709,7 +717,9 @@
         "title": "結婚戒指",
         "totalCountTitle": "戒指 ({total_count} 款)",
         "titleDesc": "願作此生相依的應允 , 願為此今刻決定往後",
-        "sort": "排序"
+        "sort": "排序",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "diamonds": {
         "diamonds": "DIAMONDS",
@@ -791,7 +801,9 @@
         "viewDetail": "查看詳情",
         "clickToCheck": "點擊查看",
         "table": "台面",
-        "addCart": "加入购物车"
+        "addCart": "加入购物车",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "engagementRing": {
         "engagementRings": "ENGAGEMENT RINGS",
@@ -828,7 +840,9 @@
         "title": "訂婚戒指",
         "totalCountTitle": "戒托 ({total_count} 款)",
         "titleDesc": "戒扥款式可多變, 一夥真心總不變 , 高貴氣質石長存",
-        "sort": "排序"
+        "sort": "排序",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "jewelleryList": {
         "jewellery": "飾品",
@@ -842,7 +856,9 @@
         "stoneType": "主石類型",
         "title": "配飾",
         "totalCountTitle": "配飾 ({total_count} 款)",
-        "titleDesc": "通過選擇各種配飾，來展示您所想要的配飾"
+        "titleDesc": "通過選擇各種配飾，來展示您所想要的配飾",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "personal": {
         "index": {
@@ -862,7 +878,7 @@
             "code": "優惠碼：",
             "only": "指定商品",
             "unlimited": "無限制",
-            "coupon": "我的優惠碼",
+            "coupon": "優惠券卡包",
             "expiredCoupon": "不可使用優惠碼"
         },
         "account": {
@@ -871,7 +887,7 @@
             "base": "基本訊息",
             "link": "第三方賬號綁定",
             "address": "我的地址",
-            "coupon": "我的優惠碼",
+            "coupon": "我的優惠劵",
             "psw1": "修改密碼",
             "psw2": "現有密碼",
             "psw3": "新密碼",
@@ -946,7 +962,8 @@
             "orderList": "訂單列表",
             "productInfo": "商品訊息",
             "productTotal": "商品數量",
-            "productPrice": "商品金額",
+            "oldPrice": "商品原價",
+            "newPrice": "優惠後金額",
             "orderNumber": "訂單編號",
             "orderStatus": "訂單狀態",
             "orderDetail": "訂單詳情",
@@ -1026,7 +1043,8 @@
             "get": "(收)",
             "goodsInfo": "商品訊息",
             "goodsNum": "商品數量",
-            "goodsPrice": "商品金額",
+            "oldPrice": "商品原價",
+            "newPrice": "優惠後金額",
             "deliveryInfo": "收貨訊息",
             "expressInfo": "物流訊息",
             "express": "物流",
@@ -1038,6 +1056,7 @@
             "itemsNum": "商品件數",
             "totalNum": "商品總額",
             "coupon": "優惠券",
+            "Untied":"已解綁",
             "freight": "運費",
             "tex": "稅費",
             "insurance": "保險費",
@@ -1070,7 +1089,8 @@
         "title": "購物車",
         "info": "商品訊息",
         "number": "數量",
-        "price": "金額",
+        "oldPrice": "原金額",
+        "newPrice": "優惠後金額",
         "option": "操作",
         "customMade": "定製",
         "Invalid": "已失效",
@@ -1090,7 +1110,9 @@
         "deleteSuccess": "移除成功",
         "addWishSuccess": "加入心願單成功",
         "deleteWishSuccess": "刪除心願單成功",
-        "searchSimilar": "找类似"
+        "searchSimilar": "找类似",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "pay": {
         "confirmOrder": "購物車",
@@ -1202,7 +1224,9 @@
         "search": "搜索",
         "sort": "排序",
         "homePage": "首页",
-        "result": " 搜索結果"
+        "result": " 搜索結果",
+        "discounts1": "優惠券",
+        "discounts2": "折"
     },
     "detail": {
         "goodsId": "商品ID",
@@ -1260,7 +1284,15 @@
         "allReviews": "全部評價",
         "fiveStarReviews": "5星評價",
         "BDDReply": "BDD回復",
-        "loadingMore": "加載更多..."
+        "loadingMore": "加載更多...",
+        "discounts1": "優惠券",
+        "discounts2": "折",
+        "discountsActive": "優惠活動",
+        "getCoupon": "獲取優惠券",
+        "activityTime": "活動截止時間",
+        "oddPrice": "原  價",
+        "newPrice": "折後價",
+        "needLogin": "請先登錄，才能領取優惠券"
     },
     "policies": {
         "layout": {
@@ -2460,7 +2492,8 @@
         "addAddress": "添加收貨地址",
         "info": "商品訊息",
         "number": "數量",
-        "price": "金額",
+        "oldPrice": "原金額",
+        "newPrice": "優惠後金額",
         "option": "操作",
         "customMade": "定製",
         "deliveryInformation": "發貨訊息",
@@ -2519,7 +2552,12 @@
         "shoppingCard": "購物卡",
         "msg10": "購物車不能為空，請重新添加商品",
         "msg11": "需登錄購物 / 僅供大陸使用",
-        "needlogin": "需登錄購物"
+        "needlogin": "需登錄購物",
+        "notAvailable": "選擇可用優惠券",
+        "discountPrice": "折扣金額",
+        "needRegister": "請先登錄，才能使用優惠券",
+        "msgTitle2": "提示：",
+        "msgContent2": "没有選擇商品！"
     },
     "invoice": {
         "personal": "個人",
@@ -2553,7 +2591,9 @@
         "ultimatelyPay": "實付金額",
         "NeedPay": "需付金額",
         "submitSuccessfully": "訂單提交成功!",
-        "PleaseLogin": "請先登錄，才能使用購物卡！"
+        "PleaseLogin": "請先登錄，才能使用購物卡！",
+        "coupon": "優惠券",
+        "discountPrice": "折扣金額"
     },
     "shoppingCard": {
         "title": "添加購物卡信息",
@@ -2590,5 +2630,52 @@
         "msg11": "解除綁定成功！",
         "msg12": "此卡还未到使用時間！",
         "msg13": "此卡已超過使用時間！"
+    },
+    "coupon": {
+        "title": "優惠券卡包",
+        "limit1": "滿 ",
+        "limit2": " 使用",
+        "limit3": "限 ",
+        "limit4": " 使用",
+        "use": "點擊使用",
+        "time": "活動時間",
+        "loseEfficacy": "已失效",
+        "getCoupon": "領取優惠券",
+        "useCoupon": "使用優惠券",
+        "accomplish": "完成",
+        "alreadyApplied": "已使用",
+        "alreadyExpired": "已過期",
+        "alreadyReceived": "已领取",
+        "specificProduct":"特定商品",
+        "immediatelyReceive": "立即领取",
+        "haveChoose": "已选用",
+        "immediatelyChoose": "立即选用",
+        "msg1": "優惠券領取成功",
+        "msg2": "優惠券領取失敗，請重試"
+    },
+    "subject": {
+        "discount":{
+        "discountCoupon": "折扣券",
+        "discount": "折",
+        "explain": "活動專場商品",
+        "oldPrice": "原價",
+        "newPrice": "折後價",
+        "status": "正在活動中",
+        "text1": "僅支持",
+        "text2": "此專題內商品使用  （具體請看商品詳情）",
+        "text3": "活动时间",
+        "text4": "(過期恢復原價)",
+        "text5": "活動地區",
+        "text6": "中國大陸、中國香港 (其他地區暫不參與)"
+    },
+    "favourable":{
+        "discountCoupon": "優惠券",
+        "full": "滿",
+        "use": "元使用",
+        "get": "立即領取",
+        "status": "正在活動中",
+        "text1": "優惠券使用規則：",
+        "text2": "僅支持指定鉆飾成品使用（具體商品請看商品詳情）"
     }
+  }
 }

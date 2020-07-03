@@ -72,7 +72,7 @@
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
           <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ formatCoin(orderinfo.coinCode) }}</span>
-            {{ formatMoney(orderinfo.orderAmount) }}
+            {{ formatMoney(orderinfo.payAmount) }}
           </p>
         </div>
         <div class="code">
@@ -106,7 +106,7 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.orderAmount) }}</span>
+              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
             </div>
           </li>
           <li>
@@ -251,10 +251,7 @@ export default {
       this.stepPaySuccess = true
 
       // facebook 购买成功统计-start
-      if(this.$store.state.platform == 31){
-        console.log("facebook购买成功数据统计31")
-        fbq('track','Purchase',this.goodsInfo);
-      }
+      fbq('track','Purchase',this.goodsInfo);
       // facebook 购买成功统计-end
     },
     goPayFailed(){

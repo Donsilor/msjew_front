@@ -17,6 +17,7 @@
 
 <script>
 import DetailBody from './diamonds-body'
+import detail from '../../mixins/detail'
 export default {
   layout: `no-footer-bar`,
   head() {
@@ -25,6 +26,7 @@ export default {
   components: {
     DetailBody
   },
+  mixins: [detail],
   data() {
     return {
       data: {},
@@ -61,7 +63,7 @@ export default {
         // } else {
         //   infos = res
         // }
-        
+
         if (!infos) return { data: {} }
         const mcArr = []
         for (const i in infos.materials) {
@@ -87,7 +89,7 @@ export default {
           sortType: ``,
           sortBy: ``
         })
-        
+
         infos.sizes = stArr
         infos.materials = mcArr
         infos.goodsDesc = infos.goodsDesc
@@ -100,11 +102,11 @@ export default {
             gay = true
           }
         })
-         
+
         infos.goodsGiaImage = gay
           ? `https://www.gia.edu/report-check?reportno=${gayNum}`
           : ``
-        
+
         return { data: infos, seoInfo: app.$getDetailSeoInfo(infos) }
       })
       .catch(err => {
@@ -129,12 +131,9 @@ export default {
         .dispatch('addCart', data)
         .then(data => {
           // facebook 添加购物车统计-start
-          if(this.$store.state.platform == 31){
-            console.log("facebook购物车数据统计")
-            fbq('track', 'AddToCart');
-          }
+          fbq('track', 'AddToCart');
           // facebook 添加购物车统计-end
-          
+
           this.$nuxt.$loading.finish()
           this.$toast(this.lang.addCartSuccess)
         })

@@ -5,7 +5,7 @@
       @addCart="addCart"
       @addWish="addWish"
       @removeWish="removeWish"
-      
+
     ></detail-body>
     <div v-show="isHalf" class="scroll-to-top" @click="goTop()">
       <i class="iconfont iconzhiding"></i>
@@ -15,6 +15,7 @@
 
 <script>
 import DetailBody from './accessories-body'
+import detail from '../../mixins/detail'
 export default {
   layout: `no-footer-bar`,
   head() {
@@ -23,6 +24,7 @@ export default {
   components: {
     DetailBody
   },
+  mixins: [detail],
   data() {
     return {
       lang: this.LANGUAGE.detailCommons,
@@ -132,10 +134,7 @@ export default {
         .dispatch('addCart', data)
         .then(data => {
           // facebook 添加购物车统计-start
-          if(this.$store.state.platform == 31){
-            console.log("facebook购物车数据统计")
-            fbq('track', 'AddToCart');
-          }
+          fbq('track', 'AddToCart');
           // facebook 添加购物车统计-end
           
           this.$nuxt.$loading.finish()

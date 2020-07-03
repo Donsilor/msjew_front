@@ -9,7 +9,6 @@ export default function ({ req, res, redirect, store, route }) {
         //     u.indexOf('Presto') > -1 ||                             //opera内核
         //     u.indexOf('AppleWebKit') > -1||                         //苹果、谷歌内核
         //     u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1 ||    //火狐内核
-
         //     !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)||              //ios终端
         //     u.indexOf('Android') > -1 || u.indexOf('Linux') > -1||//android终端或者uc浏览器
         //     u.indexOf('iPhone') > -1||                              //是否为iPhone或者QQHD浏览器
@@ -1078,7 +1077,7 @@ export default function ({ req, res, redirect, store, route }) {
             redirect(host)
             return
         }
-        console.log("req.originalUrl", req.originalUrl)
+        // console.log("req.originalUrl", req.originalUrl)
         toWapUrl(req.originalUrl)
     }
 }
