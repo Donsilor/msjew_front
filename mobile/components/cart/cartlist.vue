@@ -541,7 +541,7 @@ export default {
               }
             }
             .right:nth-child(3) {
-              border-bottom: 1px solid #f5f5f5;
+              // border-bottom: 1px solid #f5f5f5;
               .btn-type{
                 display: none;
               }
@@ -558,6 +558,9 @@ export default {
             
           }
           .customization{
+            .img-box.marginTop{
+              margin-top: 30px;
+            }
             .right {
               margin-left: 90px;
               text-align: left;
@@ -611,7 +614,7 @@ export default {
             
 
             .btn-type.marginTop{
-              margin-top: 70px;
+              margin-top: 50px;
               float: left;
             }
           }
