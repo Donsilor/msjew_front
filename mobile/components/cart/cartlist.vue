@@ -611,7 +611,7 @@ export default {
             
 
             .btn-type.marginTop{
-              margin-top: 10px;
+              margin-top: 70px;
               float: left;
             }
           }

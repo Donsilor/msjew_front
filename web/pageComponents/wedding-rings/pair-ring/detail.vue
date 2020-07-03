@@ -1080,7 +1080,9 @@ export default {
           _this.styleId = item.goodsId
           _this.categoryId = item.categoryId
           _this.info.salePrice = item.retailMallPrice
-          _this.info.coupon.discount.price = item.coupon.discount.price
+          if(_this.info.coupon.discount){
+            _this.info.coupon.discount.price = item.coupon.discount.price
+          }
           _this.stock = item.stock
           return;
         }
