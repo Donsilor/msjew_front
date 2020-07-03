@@ -179,6 +179,14 @@ export default {
             ? `https://www.gia.edu/report-check?reportno=${gayNum}`
             : ``
 
+          let fbqInfo = {
+            content_type: 'product', //  固定值：pruduct
+            content_ids: res.id,  // 对应网站产品的 id或者Sku
+            value:res.salePrice,     //对应产品的价值
+            currency: res.coinType //对应货币类型
+          };
+
+          fbq('track', 'ViewContent', fbqInfo);
           if(res.coupon){
             for(var i in res.coupon){
               this.goodInfo.coupon[i] = res.coupon[i];
