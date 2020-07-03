@@ -69,7 +69,7 @@
         <div
           v-for="(a, index) in address"
           :key="index"
-          :class="{ 'addr-active': a === orderAddress }"
+          :class="{ 'addr-active': addressIdx == index }"
           class="addr-block"
         >
           <div class="addr-title">
@@ -90,20 +90,30 @@
           </div>
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
-          <div class="addr-board" @click="changeAddress(a)" />
+          <div class="addr-board" @click="changeAddress(index)" />
+          <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
           <i
             class="iconfont iconlajitong"
             @click="
               deleteAddressId = a.id
+              delIdx = index
               confirmBox = true
             "
           />
           <div
-            v-if="a === orderAddress"
+            v-if="a.is_default == 1"
             class="font-size-14 mrAdd"
             style="color: #f29b87; margin-top: 6px;"
           >
             {{ $t(`${langs}.mrAddress`) }}
+          </div>
+          <div
+            v-if="a.is_default != 1 && addressIdx == index"
+            class="font-size-14 mrAdd"
+            style="color: #f29b87; margin-top: 6px;"
+            @click="setDefaultAddr(a)"
+          >
+            {{ $t(`${lang}.setDefaultAddr`) }}
           </div>
           <div
             class="addr-btn"
@@ -115,7 +125,7 @@
             {{ $t(`${lang}.change`) }}
           </div>
           <img
-            v-show="a === orderAddress"
+            v-show="a.is_default == 1"
             src="../../../static/personal/account/address-bar.png"
           />
         </div>
@@ -1029,7 +1039,7 @@
         <div
           v-for="(a, index) in address"
           :key="index"
-          :class="{ 'addr-active': a === orderAddress }"
+          :class="{ 'addr-active': addressIdx == index }"
           class="addr-block"
         >
           <div class="addr-title">
@@ -1051,20 +1061,30 @@
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
 
-          <div class="addr-board" @click="changeAddress(a)" />
+          <div class="addr-board" @click="changeAddress(index)" />
+		      <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
           <i
             class="iconfont iconlajitong"
             @click="
               deleteAddressId = a.id
+	      delIdx = index
               confirmBox = true
             "
           />
           <div
-            v-if="a === orderAddress"
+            v-if="a.is_default == 1"
             class="font-size-14 mrAdd"
             style="color: #f29b87; margin-top: 6px;"
           >
             {{ $t(`${langs}.mrAddress`) }}
+          </div>
+          <div
+            v-if="a.is_default != 1 && addressIdx == index"
+            class="font-size-14 mrAdd"
+            style="color: #f29b87; margin-top: 6px;"
+          @click="setDefaultAddr(a)"
+          >
+          {{ $t(`${lang}.setDefaultAddr`) }}
           </div>
           <div
             class="addr-btn"
@@ -1076,7 +1096,7 @@
             {{ $t(`${lang}.change`) }}
           </div>
           <img
-            v-show="a === orderAddress"
+            v-show="a.is_default == 1"
             src="../../../static/personal/account/address-bar.png"
           />
         </div>
@@ -2053,6 +2073,8 @@ export default {
       mobileMax: 20,
       currency: '',
       platform: this.$store.state.platform,
+      addressIdx: -1,
+      delIdx: -2，
       couponCodeR: {
         couponId: ''
       },
@@ -2229,8 +2251,10 @@ export default {
             //     this.address.push(res.data[i])
             //   }
             // }
-            this.orderAddress = this.address[0]
-            // console.log("地址",this.orderAddress)
+            if(this.address[0].is_default != 1 && this.addressIdx == -1){
+              this.addressIdx = 0
+            }
+
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
@@ -2241,6 +2265,10 @@ export default {
             }
             this.getTex(k)
             this.resetAddressInp()
+          }else{
+            this.ultimatelyPay = 0
+            this.wrongMsg = '请添加收获地址'
+            this.alertBox = true
           }
         })
         .catch(err => {
@@ -2277,14 +2305,46 @@ export default {
       }
       this.resetAddress()
     },
-    changeAddress(obj) {
-      this.orderAddress = obj
-      // console.log("aaa",this.orderAddress)
+    changeAddress(l) {
+      this.addressIdx = l;
+      
       var k = [];
       if(this.cardList){
         k = this.cardList
       }
       this.getTex(k)
+    },
+    setDefaultAddr(obj) {
+      const setDefaultData = this.$helpers.cloneObject(obj)
+      const data = this.$helpers.transformRequest(
+        JSON.parse(
+          JSON.stringify({
+            id: setDefaultData.id,
+            is_default: 1
+          })
+        ),
+        false
+      )
+      this.$axios
+        .post('/web/member/address/edit',data)
+        .then(res => {
+          // console.log("设置默认地址",res)
+          this.getAddress()
+          this.resetAddressInp()
+          this.$message({
+            message: this.$t(`默认地址设置成功`),
+            type: 'success'
+          })
+        })
+        .catch(err => {
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
+        })
+
+
     },
     createAddress() {
       // console.log('create')  /[^\d]/g,''
@@ -2607,6 +2667,12 @@ export default {
         .post('/web/member/address/edit',data)
         .then(res => {
           // console.log("修改地址",res)
+          if(this.address[0].is_default == 1){
+            this.addressIdx = 1
+          }else{
+            this.addressIdx = 0
+          }
+
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -2714,6 +2780,12 @@ export default {
         .post('/web/member/address/edit', data)
         .then(res => {
           // console.log("修改地址",res)
+          if(this.address[0].is_default == 1){
+            this.addressIdx = 1
+          }else{
+            this.addressIdx = 0
+          }
+
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -2730,11 +2802,8 @@ export default {
         })
     },
     deleteAddress() {
-      // console.log('delete')
       this.confirmBox = false
-      if (this.orderAddress.id === this.deleteAddressId) {
-        this.orderAddress = {}
-      }
+
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ id: this.deleteAddressId })),
         false
@@ -2743,6 +2812,23 @@ export default {
         .post('/web/member/address/del', data)
         .then(res => {
           // console.log("删除地址",res)
+
+          if(this.addressIdx != 0 && this.addressIdx != -1){
+            if(this.address[0].is_default == 1){
+              if(this.delIdx == this.addressIdx){
+                this.addressIdx = -1
+              }else if(this.delIdx < this.addressIdx){
+                this.addressIdx -= 1
+              }
+            }else{
+              if(this.delIdx == this.addressIdx){
+                this.addressIdx = 0
+              }else if(this.delIdx < this.addressIdx){
+                this.addressIdx -= 1
+              }
+            }
+          }
+
           this.getAddress()
         })
         .catch(err => {
@@ -2914,7 +3000,13 @@ export default {
         carts: arr,
         coupon_id: this.couponCodeR.couponId,
         cards: cards, 
-        addressId: this.orderAddress.id
+        addressId: ''
+      }
+      
+      if(this.addressIdx != -1){
+        datas.addressId = this.address[this.addressIdx].id
+      }else{
+        datas.addressId = this.address[0].id
       }
 
       this.canSubmit = false
@@ -2952,14 +3044,8 @@ export default {
         })
     },
     createOrder() {
-      // console.log("地址",this.orderAddress.platforms)
-      // console.log("4444",this.address)
-      // console.log("platform",this.platform)
       var that = this;
-      // if (!this.canSubmit) {
-      //   return
-      // }
-      
+
       if (this.address.length == 0) {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
@@ -2967,7 +3053,14 @@ export default {
 
       }
 
-      if(this.orderAddress.platforms.indexOf(this.platform) === -1){
+      var address = {};
+      if(this.addressIdx != -1){
+        address = this.address[this.addressIdx]
+      }else{
+        address = this.address[0]
+      }
+
+      if(address.platforms[0] != this.platform){
         this.wrongMsg = this.$t(`${lang}.msg12`)
         this.alertBox = true
         return false
@@ -3020,7 +3113,7 @@ export default {
         carts: arr,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
-        buyer_address_id: this.orderAddress.id,
+        buyer_address_id: address.id,
         invoice:invoice,
         card: this.cardList,
         coupon_id: this.couponCodeR.couponId
@@ -3059,22 +3152,26 @@ export default {
     },
     createOrder1() {
       var that = this;
-      // console.log("tttttt",this.orderAddress)
-      // console.log()
-      // if (!this.canSubmit) {
-      //   return
-      // }
+
       if (this.address.length == 0) {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
       }
 
-      if(this.orderAddress.platforms.indexOf(this.platform) === -1){
+      var address = {};
+      if(this.addressIdx != -1){
+        address = this.address[this.addressIdx]
+      }else{
+        address = this.address[0]
+      }
+
+      if(address.platforms[0] != this.platform){
         this.wrongMsg = this.$t(`${lang}.msg12`)
         this.alertBox = true
         return false
       }
+
       // if (
       //   !Email.test(
       //     this.isSameEmail ? this.orderAddress.email : this.orderEmail
@@ -3085,6 +3182,7 @@ export default {
       //   this.alertBox = true
       //   return false
       // }
+
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
@@ -3133,7 +3231,7 @@ export default {
         // allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
-        buyer_address_id: this.orderAddress.id,
+        buyer_address_id: address.id,
         invoice:invoice,
         card: this.cardList || '',
         coupon_id: this.couponCodeR.couponId
@@ -5066,5 +5164,23 @@ div {
 .under-line{
   text-decoration: underline;
   cursor: pointer;
+}
+
+.ifChoose{
+  position: absolute;
+  top: 80px;
+  right: 28px;
+  font-size: 21px;
+  color: #999;
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: url(../../../static/addShoppingCard/icon-1.png) no-repeat center;
+  background-size: 100% 100%;
+}
+
+.ifChoose.on{
+  background-image: url(../../../static/addShoppingCard/success.png);
 }
 </style>
