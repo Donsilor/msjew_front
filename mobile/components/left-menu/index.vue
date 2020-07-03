@@ -426,7 +426,6 @@ export default {
       this.cnIcon = false
       this.hkIcon = false
     }
-    // console.log("dddd",window.location.href)
     const _this = this
     if(_this.$store.getters.hadLogin){
       this.showa=false
@@ -447,7 +446,6 @@ export default {
           url: `/web/member/member/me`
         })
         .then(res => {
-          // console.log("eeee",res)
           this.date = res
           if (this.date === 1) {
             this.headImg = require('~/static/personal/men.png')

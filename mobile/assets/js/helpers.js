@@ -53,7 +53,7 @@ class Helpers {
     return CryptoJs.enc.Utf8.stringify(CryptoJs.enc.Base64.parse(base64))
   }
 
-  // 判断email格式 /^[0-9a-zA-Z]+[@][0-9a-zA-Z]+[.][0-9a-zA-Z]+/ 
+  // 判断email格式 /^[0-9a-zA-Z]+[@][0-9a-zA-Z]+[.][0-9a-zA-Z]+/
   trueEmail(str = '') {
     const regExp = new RegExp(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)
     return regExp.test(str)
@@ -161,6 +161,60 @@ class Helpers {
     const c = Number(a.toString().replace('.', ''))
     const d = Number(b.toString().replace('.', ''))
     return this.mathMul(c / d, Math.pow(10, f - e))
+  }
+
+  // 折扣换算
+  discountConversion(num){
+    num = num/10
+    return num
+  }
+
+  // 英文折扣换算
+  discountUs(num){
+    num = 100 -(num)
+    return num
+  }
+
+  // 判断折扣、优惠券对象是否为空
+  couponType(a){
+    var result;
+    if(!a){
+      result = false
+    }else{
+      if(a.hasOwnProperty('discount')){
+        result = 'discount'
+      }else if(a.hasOwnProperty('money')){
+        result = 'money'
+      }else{
+        result = ''
+      }
+    }
+
+    return result
+  }
+  
+  // getTime时间转换
+  changeTime(timestamp){
+    var date = new Date(timestamp * 1000),
+    Y = date.getFullYear(),
+    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1),
+    D = date.getDate(),
+    h = date.getHours() + ':',
+    m = date.getMinutes() + ':',
+    s = date.getSeconds();
+  
+    return Y+'.'+M+'.'+D
+  }
+  
+  // 获取cookie
+  getCookie(cname) {
+    const name = cname + '='
+    const ca = document.cookie.split(';')
+    for (let i = 0; i < ca.length; i++) {
+      const c = ca[i].trim()
+      if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+    }
+    return ''
   }
 }
 

@@ -47,7 +47,7 @@
           <li>
             <span>{{ lang.allFee }} </span
             ><span
-              >{{ info.coinType }}{{ formatMoney(info.productAmount) }}</span
+              >{{ formatCoin(info.coinType) }}{{ formatMoney(info.productAmount) }}</span
             >
           </li>
           <!--          <li v-if="info.taxFee">-->
@@ -59,27 +59,27 @@
           <li>
             <span>{{ lang.logisticsFee }}</span
             ><span
-              >+{{ info.coinType }}{{ formatMoney(info.logisticsFee) }}</span
+              >+{{ formatCoin(info.coinType) }}{{ formatMoney(info.logisticsFee) }}</span
             >
           </li>
           <li>
             <span>{{ lang.taxFee }} </span
-            ><span>+{{ info.coinType }}{{ formatMoney(info.taxFee) }}</span>
+            ><span>+{{ formatCoin(info.coinType) }}{{ formatMoney(info.taxFee) }}</span>
           </li>
           <li>
             <span>{{ lang.safeFee }}</span
-            ><span>+{{ info.coinType }}{{ formatMoney(info.safeFee) }}</span>
+            ><span>+{{ formatCoin(info.coinType) }}{{ formatMoney(info.safeFee) }}</span>
           </li>
           <li>
             <span>{{ lang.transPreferFee }}</span
             ><span class="active"
-              >-{{ info.coinType }}{{ formatMoney(info.transPreferFee) }}</span
+              >-{{ formatCoin(info.coinType) }}{{ formatMoney(info.transPreferFee) }}</span
             >
           </li>
           <div class="all">
             <span>{{ lang.orderAmount }}</span
             ><span
-              ><em>+{{ info.coinType }} </em>{{ formatMoney(info.orderAmount) }}
+              ><em>+{{ formatCoin(info.coinType) }} </em>{{ formatMoney(info.orderAmount) }}
             </span>
           </div>
         </ul>

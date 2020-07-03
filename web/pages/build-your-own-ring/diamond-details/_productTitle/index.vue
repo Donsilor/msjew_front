@@ -11,7 +11,8 @@ import DiamondDetail from '@/pageComponents/diamonds/detail.vue'
 // import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 export default {
   components: {
-    DiamondDetail
+    DiamondDetail,
+    // SoleOut
   },
   data() {
     return {

@@ -15,9 +15,11 @@ function getTimestampUuid () {
 function makeCartGoodGroups (cart = []) {
     // console.log("cart",cart)
     const result = []
-    const localData = {}
-    cart.forEach(item => {
+    var localData = {}
+    const sort = []
+    cart.forEach((item, index) => {
         let groupId = item['groupId'] || item['id'] || item['createTime']
+        // console.log('groupId',groupId)
         // item.goodsId=item.goodsDetailsId
         if (localData.hasOwnProperty(groupId)) {
             localData[groupId].data.push(item)
@@ -25,11 +27,23 @@ function makeCartGoodGroups (cart = []) {
             localData[groupId] = {
                 id: groupId.toString(),
                 groupType: item.groupType || null,
-                data: [item]
+                data: [item],
+                sort: index
             }
+            sort.push(index)
         }
     })
 
+    // console.log(88787,cart)
+    var localData2 = []
+    for(var j=0; j<sort.length; j++){
+        for(var i in localData){
+           if(sort[j] == localData[i].sort){
+                localData2.push(localData[i])
+           }
+       }
+    }
+    localData = JSON.parse(JSON.stringify(localData2))
     let keys = Object.keys(localData)
     // console.log("local",keys)
     keys = keys.sort((a, b) => {
@@ -85,7 +99,6 @@ function makeCartGoodGroups (cart = []) {
                 parseFloat(simpleGoodsEntity.simpleGoodsDetails.retailMallPrice) +
                 parseFloat(item.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice)
         }
-        // console.log('a',item)
         return item
     })
 
@@ -210,7 +223,7 @@ export default {
 
     },
 
-    nuxtServerInit ({ commit }, { req, res, app, store, $axios }) {
+    nuxtServerInit ({ commit }, { req, res,app,store,$axios }) {
 
     },
     // 退出登录
@@ -305,7 +318,7 @@ export default {
             })
             sendData = sendData.concat(data)
         })
-        console.log("购物车", sendData)
+        // console.log("购物车", sendData)
 
         return this.$axios({
             method: 'post',
@@ -379,7 +392,7 @@ export default {
             return item
         })
 
-        console.log('goods-------->', goods)
+        // console.log('goods-------->', goods)
 
         return this.$axios({
             method: 'post',
@@ -390,7 +403,7 @@ export default {
             }
         })
             .then(data => {
-                console.log("添加购物车", data)
+                // console.log("添加购物车", data)
                 // 重新请求购物车数量（和购物车列表）
                 return Promise.resolve('success')
             })
@@ -400,7 +413,7 @@ export default {
     },
     // 加入到本地购物车中
     addLocalCart ({ $axios, state, getters, commit, dispatch }, goods = []) {
-        console.log("2222", goods)
+        // console.log("2222", goods)
         const time = getTimestampUuid()
         const addInfo = {
             id: time,
@@ -447,7 +460,7 @@ export default {
 
     //保存游客订单信息 后加
     setLocalOrder ({ $axios, state, getters, commit, dispatch }, orders) {
-        console.log("orders", orders)
+        // console.log("orders", orders)
         const cartOrder = 'cartOrder'
 
         return new Promise(async (resolve, reject) => {
@@ -596,7 +609,7 @@ export default {
         let request = null
         if (getters.hadLogin) {
             // 已登录的操作
-            console.log('已登录的操作')
+            // console.log('已登录的操作')
             request = dispatch('getOnlineCart')
         } else {
             // 未登录的操作
@@ -623,7 +636,6 @@ export default {
             method: 'get',
             url: '/web/member/cart'
         }).then(res => {
-            // console.log("购物车列表",res.data)
             return makeCartGoodGroups(res.data)
         })
             .catch(err => {
@@ -640,7 +652,7 @@ export default {
         let request = null
         if (getters.hadLogin) {
             // 已登录的操作
-            console.log('已登录的操作')
+            // console.log('已登录的操作')
             request = dispatch('getOnlineCartAmount')
             // request
             //     .then(data => {
@@ -677,7 +689,7 @@ export default {
             url: '/web/member/cart/count'
         })
             .then(res => {
-                // console.log('线上购物车商品总数====>', data)
+                // console.log('线上购物车商品总数====>', res)
                 if (res.code == 200) {
                     return res.data
                 } else {
@@ -720,17 +732,18 @@ export default {
         let sendData = []
         data.forEach(item => {
             let goods = item.data
-            // console.log('goods----------->', item)
+            console.log('goods----------->', item)
             goods = goods.map(good => {
                 good.updateTime = item.id
                 good.createTime = item.id
                 good.goods_id = good.goodsDetailsId
+                good.group_id = item.id
                 return good
             })
             sendData = sendData.concat(goods)
         })
 
-        //console.log('sendData===========>', sendData)
+        console.log('sendData===========>', sendData)
 
         return this.$axios({
             method: 'post',

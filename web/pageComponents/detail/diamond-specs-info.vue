@@ -217,7 +217,7 @@ export default {
           showingSpecs.clarityIndex = item.configAttrId
         }
       })
-      console.log(showingSpecs)
+
       return showingSpecs
     },
     caratArrowLeft() {

@@ -623,7 +623,6 @@ export default {
           data: this.info
         })
         .then(data => {
-          // console.log("11111",)
           _this.$toast.show(_this.lang.registerSuccess)
           _this.$store.commit('setToken', data.access_token)
           _this.$store.commit('setUserInfo', data.member);

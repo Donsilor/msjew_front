@@ -72,7 +72,7 @@
             <img :src="activePairRingInfo.image" @error="imageError" />
           </div>
           <div class="product-price">
-            <span class="currency">{{ activePairRingInfo.coinType }}</span>
+            <span class="currency">{{ formatCoin(activePairRingInfo.coinType) }}</span>
             <span class="price">
               {{ formatNumber(activePairRingInfo.salePrice) }}
             </span>

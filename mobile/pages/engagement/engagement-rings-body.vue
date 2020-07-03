@@ -13,11 +13,26 @@
           /></nuxt-link>
         </div>
       </swiper>
+
+      <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+        <div class="triangle" v-if="goodInfo.coupon.discount">{{ this.$store.state.language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+        <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
+      </div>
+
     </div>
     <div class="title">
+      <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ this.$store.state.language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+      <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
       {{ goodInfo.goodsName }}
     </div>
-    <div class="price">{{ formatCoin(goodInfo.coinType) }}{{ formatNumber(showPi) }}</div>
+
+    <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
+
+    <div class="discount-price" v-else>
+      <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
+      <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showP2) }}</div>
+    </div>
+    
     <div class="promise-box">
       <div
         v-for="(c, index) in goodInfo.goodsServicesJsons"
@@ -238,7 +253,15 @@ export default {
     inSale() {
       return this.goodInfo.goodsStatus === 2
     }
-  }
+  },
+  data(){
+    return {
+      language:this.$store.state.language
+    }
+  },
+  mounted() {
+    // this.language = this.getCookie('language')
+  },
 }
 </script>
 

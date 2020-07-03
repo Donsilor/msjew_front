@@ -34,6 +34,8 @@ import Requesting from '@/components/requesting'
 import NoMoreData from '@/components/no-more-data'
 import LiveChat from '@/components/live-chat'
 import TipMessage from '@/components/tip-message'
+import GetCoupon from '@/components/coupon/getCoupon'
+import UseCoupon from '@/components/coupon/useCoupon'
 
 Vue.use(Input)
 Vue.use(ConfirmBox)
@@ -84,3 +86,6 @@ Vue.use(OrderSafe)
 
 Vue.use(LiveChat)
 Vue.use(TipMessage)
+
+Vue.use(GetCoupon)
+Vue.use(UseCoupon)

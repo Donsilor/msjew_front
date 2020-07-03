@@ -53,9 +53,10 @@ export default {
       ],
       chooseSize: this.goodInfo.sizes[0].content,
       chooseSizeId: ``,
-      chooseCarat: this.goodInfo.carats[0].content,
-      chooseCaratId:this.goodInfo.carats[0].sortBy,
+      chooseCarat: ``,
+      chooseCaratId:``,
       showPi: this.goodInfo.salePrice,
+      showP2: 0,
       sendGoodsId: null,
       sendDetailsId: null,
       categoryId: null,
@@ -81,6 +82,16 @@ export default {
     }
   },
   mounted() {
+    if(this.couponType(this.goodInfo.coupon) == 'discount'){
+      this.showP2 = this.goodInfo.coupon.discount.price
+    }else{
+      this.showP2 = this.goodInfo.salePrice
+    }
+
+    if(this.goodInfo.carats !== undefined){
+      this.chooseCarat = this.goodInfo.carats[0].content
+      this.chooseCaratId = this.goodInfo.carats[0].sortBy
+    }
     // this.$axios
     //   .get(`/wap/goodsComments/getAvgLevel`, {
     //     params: {
@@ -154,6 +165,12 @@ export default {
       if (this.goodInfo.carats  && this.goodInfo.sizes) {
         if (this.chooseSizeId === `` || this.chooseCaratId === ``) {
           this.showPi = this.goodInfo.salePrice
+
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -166,12 +183,24 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }
       } else {
         if (this.chooseSizeId === ``) {
           this.showPi = this.goodInfo.salePrice
+
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
         } else {
           for (const i in bullShit) {
             if (
@@ -183,6 +212,12 @@ export default {
               this.sendGoodsId = bullShit[i].goodsId
               this.sendDetailsId = bullShit[i].id
               this.categoryId = bullShit[i].categoryId
+
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
             }
           }
         }

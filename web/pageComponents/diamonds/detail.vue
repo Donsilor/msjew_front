@@ -8,6 +8,7 @@
           :images="thumbnails"
           :gia-number="productInfo.giaNumber"
           @getIdx="getIndex"
+          :coupon="coupons"
         ></product-images>
 
         <div class="magn-box">
@@ -16,9 +17,14 @@
       </div>
       <!--      右侧-->
       <div class="right-detail">
-        <h2 class="product-name">
-          {{ info.goodsName }}
-        </h2>
+       <div class="right-title">
+       	<span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? discountUs(info.coupon.discount.discount)+'%' : discountConversion(info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+       	<span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
+
+       	<h2 class="product-name">
+       	  {{ info.goodsName }}
+       	</h2>
+       </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div v-if="showSkuBox" class="sku">
           <div class="left-properties">
@@ -110,7 +116,41 @@
             </div>
           </li>
         </ul>
-        <div class="product-price">
+
+        <!-- 折扣活动 -->
+        <div class="discount-box" v-if="info.coupon.discount">
+        	<div class="discount-active">
+        		<div>
+        			<span>{{ $t(`${lang}.discountsActive`) }}：</span>
+        			<span class="discount-icon">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+        		</div>
+        		<div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div>
+        	</div>
+
+        	<div class="discount-price">
+        		<span class="old-price">{{ formatCoin(info.coinType) }} {{ formatNumber(this.info.salePrice) }}</span>
+        		<span class="new-price">{{ formatCoin(info.coinType) }} {{ formatNumber(this.info.coupon.discount.price) }}</span>
+        	</div>
+        </div>
+
+        <!-- 优惠活动 -->
+        <div class="favourable-box" v-if="info.coupon.money">
+        	<div class="discount-active">
+        		<div>
+        			<span>{{ $t(`${lang}.discounts1`) }}：</span>
+        			<span class="favourable-icon">￥</span>
+        			<span class="get" @click="getCoupon">{{ $t(`${lang}.getCoupon`) }}></span>
+        		</div>
+        		<!-- <div class="time">{{ $t(`${lang}.activityTime`) }}：{{activeTime}}</div> -->
+        	</div>
+
+        	<!-- <div class="discount-price">
+        		<span class="old-price">HKD  2,222,22</span>
+        		<span class="new-price">HKD  2,222,22</span>
+        	</div> -->
+        </div>
+
+        <div class="product-price" v-if="!info.coupon.discount">
           <span class="coin">
             {{ formatCoin(info.coinType) }}
           </span>
@@ -239,6 +279,9 @@
       ref="diamonds-four-c"
       :specs="productInfo.specs"
     ></diamond-specs-info>
+
+    <!-- 获取优惠券 -->
+    <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
   </div>
 </template>
 
@@ -319,10 +362,25 @@ export default {
         materialIndex: 0,
         sizeIndex: 0
       },
-	  magnifying: ''
+	    magnifying: '',
+      showCoupon: false,
+      activeTime: '',
+      language: this.$store.state.language
     }
   },
   computed: {
+    coupons() {
+      var co;
+      if(this.couponType(this.info.coupon) == 'discount'){
+        co = this.info.coupon.discount.discount;
+      }else if(this.couponType(this.info.coupon) == 'money'){
+        co = 'money'
+      }else{
+        co = 0
+      }
+
+      return co
+    },
     showSkuBox() {
       return (
         this.productInfo.materials.length > 0 &&
@@ -340,10 +398,10 @@ export default {
       const info = _this.info || {}
       let result = info.salePrice
       if (_this.simpleDetail) {
-        console.log('相加')
+        // console.log('相加')
         result = _this.simpleDetail.retailMallPrice
       } else {
-        console.log('不相加')
+        // console.log('不相加')
       }
       return result
     },
@@ -371,7 +429,6 @@ export default {
           break
         }
       }
-      console.log(55,result);
       return result
     },
     startDj() {
@@ -420,11 +477,15 @@ export default {
   },
   watch: {
     info(val, oldVal) {
-      console.log('info=======>')
+      // console.log('info=======>')
     }
   },
   mounted() {
     const _this = this
+    if(this.info.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
+    }
+
     _this.$nextTick(() => {})
     console.log(this.simpleDetail, `<=======`)
 
@@ -475,9 +536,17 @@ export default {
       ringChecked[key] = value
       _this.ringChecked = ringChecked
     },
-	getIndex(i) {
-		this.magnifying = this.thumbnails[i]
-	}
+    getIndex(i) {
+      this.magnifying = this.thumbnails[i]
+    },
+    // 领取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        this.$errorMessage(this.$t(`${lang}.needLogin`))
+      }else{
+        this.showCoupon = true
+      }
+    }
   }
 }
 </script>
