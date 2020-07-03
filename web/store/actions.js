@@ -34,6 +34,7 @@ function makeCartGoodGroups (cart = []) {
         }
     })
 
+    // console.log(88787,cart)
     var localData2 = []
     for(var j=0; j<sort.length; j++){
         for(var i in localData){

@@ -3,10 +3,10 @@
     <!-- 手机方式找回密码 -->
     <div v-if="resetType == 1" class="page">
       <div class="content">
-		<div style="position: fixed;z-index: -999;">
-			<input type="text" name="hidden1" id="text" value="123">
-			<input type="password" name="hidden1" id="password" value="456">
-		</div>
+        <div style="position: fixed;z-index: -999;">
+          <input type="text" name="hidden1" id="text" value="123">
+          <input type="password" name="hidden1" id="password" value="456">
+        </div>
 				
         <ul class="schedule">
           <li
@@ -164,10 +164,10 @@
     <!-- 邮箱方式找回密码 -->
     <div v-if="resetType == 2" class="page">
       <div class="content">
-		<div style="position: fixed;z-index: -999;">
-			<input type="text" name="hidden1" id="text" value="123">
-			<input type="password" name="hidden1" id="password" value="456">
-		</div>
+      <div style="position: fixed;z-index: -999;">
+        <input type="text" name="hidden1" id="text" value="123">
+        <input type="password" name="hidden1" id="password" value="456">
+      </div>
 				
         <ul class="schedule">
           <li
@@ -217,11 +217,11 @@
               </div>
               <h2 class="tip">
                 {{ $t(`${lang}.hadSendEmailCode1`) }}
-                <span>{{ info.email }}</span>
+                <span>{{ info.email }}</span> <br/>
                 {{ $t(`${lang}.hadSendEmailCode2`) }}
               </h2>
               <div class="wrong-email">
-                <span>{{ $t(`${lang}.wrongEmail`) }}</span>
+                <!-- <span>{{ $t(`${lang}.wrongEmail`) }}</span> -->
                 <span class="rewrite" @click="changeSchedule(1)">
                   {{ $t(`${lang}.changeEmail`) }}
                 </span>
@@ -1100,8 +1100,7 @@ input{
               width: 370px;
               margin: 0 auto 30px auto;
               display: flex;
-              align-items: center;
-              justify-content: space-between;
+              justify-content: flex-end;
 
               font-size: 16px;
               font-family: Microsoft YaHei;
@@ -1114,6 +1113,7 @@ input{
                 font-weight: 400;
                 text-decoration: underline;
                 color: rgba(168, 143, 130, 1);
+                cursor: pointer;
               }
             }
 
@@ -1123,7 +1123,7 @@ input{
 
               input {
                 width: 100%;
-                text-align: center;
+                // text-align: center;
               }
             }
           }
