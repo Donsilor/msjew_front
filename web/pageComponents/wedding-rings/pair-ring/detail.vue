@@ -5,7 +5,7 @@
       <!--      左侧-->
       <div class="left-detail">
         <product-images :images="thumbnails" @getIdx="getIndex" :coupon="coupons"></product-images>
-				
+
 		<div class="magn-box">
 			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
 		</div>
@@ -860,7 +860,7 @@ export default {
         item.price = item.salePrice
         item.to = _this.getRecommendProductRouteInfo(item)
       })
-      
+
       return allData
     },
     firstRingSimpleDetail() {
@@ -971,7 +971,7 @@ export default {
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
     }
     _this.$nextTick(() => {})
-		
+
 	this.magnifying = this.thumbnails[0]
   },
   methods: {
@@ -1013,7 +1013,7 @@ export default {
         carats:(() =>{
             const carats = product.carats || []
             // carats.unshift({id:'',name: this.$t(`personal.index.select`)})
-            return carats;  
+            return carats;
         })(),
         specs: product.specs || [],
         details: product.details || [],
@@ -1070,7 +1070,7 @@ export default {
         _this.categoryId = ''
         // _this.info.salePrice = ''
         _this.stock = ''
-        
+
       this.info.details.map((item, i) => {
         if(ladyRing==item.ladyRing && menRing==item.menRing || menRing==item.ladyRing && ladyRing==item.menRing) {
           console.log("dddd",item)
@@ -1182,6 +1182,7 @@ export default {
       _this.$store
         .dispatch('addCart', goodInfo)
         .then(data => {
+          fbq('track', 'AddToCart')
           _this.$successMessage(_this.$t(`common.addCartSuccess`))
         })
         .catch(err => {
