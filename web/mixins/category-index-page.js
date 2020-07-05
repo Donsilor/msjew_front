@@ -66,8 +66,8 @@ export default {
             (document.body.clientWidth * image.height) / image.width
         }
       }
-      _this.lineWidth = (document.body.clientWidth-80)*0.04+'px'
-      console.log(_this.lineWidth)
+      _this.lineWidth = Math.round((document.body.clientWidth-80)*0.04)+'px'
+      // console.log(_this.lineWidth)
     }
   }
 }

@@ -8,7 +8,7 @@
         </div>
       </nuxt-link>
       <div class="step-box">
-        <p v-for="(step, ns) in statusSteps" :key="ns" class="step-p" style="border: 1px solid red">
+        <p v-for="(step, ns) in statusSteps" :key="ns" class="step-p">
           <span
             :style="{
               'background-color': step.active

@@ -588,14 +588,14 @@ export default {
     z-index: 999;
     bottom:0;
     width: 100%;
+    min-width: 1200px;
     // text-align: left;
     overflow: hidden;
     margin: 0 auto;
     background-color: #ffffff;
     .cart-bot-bar {
       position: relative;
-      // width: 1300px;
-       width: 1300px;
+      max-width: 1300px;
       margin: 0 auto;
       height: 100px;
       background-color: #ffffff;
@@ -795,16 +795,19 @@ export default {
 
       span:nth-child(1) {
         text-align: left;
-        width: 65%;
+        width: 60%;
       }
       span:nth-child(2) {
-        width: 11%;
+        width: 6.7%;
       }
       span:nth-child(3) {
         width: 11%;
       }
       span:nth-child(4) {
-        width: 13%;
+        width: 11%;
+      }
+      span:nth-child(5) {
+        width: 11.3%;
       }
     }
     .cart-goods {
@@ -850,32 +853,35 @@ export default {
     }
     .cart-bot-bar {
       position: relative;
-      width: 1300px;
+      max-width: 1300px;
       height: 100px;
       background-color: #ffffff;
       display: flex;
       align-items: center;
+      padding: 0 2%;
+      box-sizing: border-box;
       .cart-radio {
-        width: 40px;
+        width: 3%;
         height: 100px;
       }
       .full-radio {
+        width: 4%;
         font-size: 14px;
         color: #666;
-        margin-right: 68px;
+        margin-right: 3%;
         cursor: pointer;
       }
       .delete {
         position: relative;
         font-size: 14px;
         color: #666;
-        margin-right: 55px;
+        width: 6%;
+        padding-left: 2%;
+        box-sizing: border-box;
         cursor: pointer;
         i {
-          display: block;
           position: absolute;
-          left: -9px;
-          transform: translateX(-100%);
+          left: 0;
           font-size: 20px;
           width: 18px;
           height: 21px;
@@ -907,37 +913,39 @@ export default {
         width: 1px;
         height: 20px;
         background: rgba(221, 221, 221, 1);
-        margin-right: 49px;
+        margin: 0 3%;
       }
       .clean-useless {
         position: relative;
         font-size: 14px;
         color: #666;
         cursor: pointer;
-        margin-right: 156px;
+        width: 12%;
+        padding-left: 2%;
+        box-sizing: border-box;
+        margin-right: 8%;
         i {
           display: block;
           position: absolute;
-          left: -9px;
-          transform: translateX(-100%);
+          top: 0;
+          left: 0;
           font-size: 16px;
           width: 16px;
           height: 16px;
           line-height: 16px;
-          top: 0;
           color: #999;
         }
       }
       .already-choose {
-        width: 61+92+117px;
+        width: 20%;
         display: flex;
         font-size: 16px;
         height: 16px;
         line-height: 16px;
         color: #666666;
-        margin-right: 24px;
+        margin-right: 2%;
         .choose-num {
-          width: 72px;
+          width: 24%;
           color: #666666;
           font-size: 16px;
           text-align: center;
@@ -947,6 +955,7 @@ export default {
         }
       }
       .total-price {
+        max-width: 20%;
         font-family: twCenMt;
         font-size: 22px;
         color: #f29b87;

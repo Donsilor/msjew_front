@@ -473,11 +473,11 @@ export default {
 }
 
 .mid-box{
-  width: calc(100% * 0.875);
+  width: calc(100% * 0.892);
 }
 
 .btn-box{
-  width: calc(100% * 0.125);
+  width: calc(100% * 0.108);
   display: flex;
   align-items: center;
 }
