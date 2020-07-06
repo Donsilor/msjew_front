@@ -2401,7 +2401,7 @@ export default {
         is_default: 0
       }
 
-      if(!this.address){
+      if(this.address.length == 0){
         data.is_default = 1
       }
 
@@ -2413,7 +2413,7 @@ export default {
             type: 'success'
           })
 
-          if(this.address.length > 1){
+          if(this.address.length > 0){
             this.addressIdx = 1
           }else{
             this.addressIdx = 0
@@ -2511,7 +2511,7 @@ export default {
         is_default: 0
       }
 
-      if(!this.address){
+      if(this.address.length == 0){
         data.is_default = 1
       }
 
@@ -2524,7 +2524,7 @@ export default {
             type: 'success'
           })
 
-          if(this.address.length > 1){
+          if(this.address.length > 0){
             this.addressIdx = 1
           }else{
             this.addressIdx = 0
@@ -2565,7 +2565,8 @@ export default {
         province_id: data.province_id,
         city_id: data.city_id,
         address_details: data.address_details,
-        zip_code: data.zip_code
+        zip_code: data.zip_code,
+        is_default: data.is_default
       }
       // console.log("code",this.addressData)
       const code = data.mobile_code.split('+').reverse()
@@ -2659,7 +2660,8 @@ export default {
             province_id: this.province.areaId,
             city_id: this.city.areaId,
             address_details: this.addressData.address_details,
-            zip_code: this.addressData.zip_code
+            zip_code: this.addressData.zip_code,
+            is_default: this.addressData.is_default
           })
         ),
         false
@@ -2766,7 +2768,8 @@ export default {
             province_id: this.province.areaId,
             city_id: this.city.areaId,
             address_details: this.addressData.address_details,
-            zip_code: this.addressData.zip_code
+            zip_code: this.addressData.zip_code,
+            is_default: this.addressData.is_default
           })
         ),
         false
