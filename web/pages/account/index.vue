@@ -183,7 +183,7 @@ export default {
 }
 .personal {
   max-width: 1360px;
-  min-width: 1000px;
+  min-width: 1200px;
   width: 100%;
   min-height: 540px;
   margin: 0 auto;

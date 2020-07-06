@@ -5,9 +5,9 @@
       <div class="title-name">{{ $t(`${lang}.title`) }}</div>
     </div>
     <div class="base-info">
-      <div class="coupon_box clf">
+      <div class="coupon_box">
         <!-- 优惠券列表 -->
-        <div class="list fl" v-for="(item, index) in couponList" :key="index">
+        <div class="list" v-for="(item, index) in couponList" :key="index">
            <div class="line-box">
              <div class="point-box">
                <i></i><i></i><i></i><i></i>
@@ -215,6 +215,12 @@ export default {
         }
       }
     }
+    .coupon_box{
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
   }
   .base-btn {
     width: 190px;
@@ -291,7 +297,6 @@ export default {
   border: 1px solid rgb(205,173,118);
   background-image: linear-gradient(to right, rgba(255,255,255,0.31), rgba(219,209,209,0.31));
   border-bottom: 0;
-  margin-right: 43px;
   color: #cdad75;
   border-radius: 5px;
   box-shadow: 0 1px 0 #9C999C,0 2px 0 #D6D5D6,0 3px 0 #E3E1E3,0 4px 0 #D6D5D6,0 5px 0 #EDECED,0 6px 0 #F9F9F9;
@@ -422,10 +427,6 @@ export default {
     opacity: 0.9;
   }
 }
-.list:nth-child(3n){
-  margin-right: 0;
-}
-
 .list .lose-efficacy.fontSize{
 	font-size: 16px;
 }

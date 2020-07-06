@@ -3778,7 +3778,8 @@ div {
     background: rgba(255, 255, 255, 1);
     margin-bottom: 17px;
     .finished {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       height: 179px;
       display: flex;
       align-items: center;

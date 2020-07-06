@@ -3389,17 +3389,18 @@ div {
     color: #666;
     padding-left: 77px;
     margin-top: 20px;
+    text-align: center;
 
     span:nth-child(1) {
-      width: 60%;
+      width: 59%;
       text-align: left;
     }
     span:nth-child(2){
-      width: 6.7%;
+      width: 6.8%;
     }
     span:nth-child(3),
     span:nth-child(4) {
-      width: 11.5%;
+      width: 11.8%;
     }
   }
 
