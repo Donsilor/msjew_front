@@ -17,7 +17,7 @@
                 {{ $t(`${lang}.welcomeYourTel`) }}：0755 25169121
               </p>
               <p class="dd-desc" v-else>
-                {{ $t(`${lang}.welcomeYourTel`) }}：（852）2165 3905
+                {{ $t(`${lang}.welcomeYourTel`) }}：（852）2165 3908
               </p>
               <p class="dd-desc" v-if="this.$store.state.platform === 20">
                 {{ $t(`${lang}.welcomeYourTelTipCn`) }}
