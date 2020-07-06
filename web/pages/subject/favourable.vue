@@ -6,6 +6,7 @@
     </div>
     <div class="tip clf">
       <div class="content">
+        <!-- 活动文字说明 -->
         <div class="tip-list fl">
           <div class="tip-text fr">
             <div class="status">#{{ $t(`${lang}.status`) }}#</div>
@@ -14,6 +15,7 @@
           </div>
         </div>
 
+        <!-- 优惠券列表 -->
         <div class="tip-list fl">
           <div class="tip-coupon fl clf">
             <div class="card-list fl">
@@ -238,27 +240,28 @@
     max-width: 1360px;
     min-width: 1200px;
     min-height: 600px;
-    margin: 20px auto 0;
+    margin: 40px auto 0;
     box-sizing: border-box;
     overflow: hidden;
-    border: 1px solid red;
 
     .list{
       position: relative;
-      width: 24%;
+      width: 23%;
       margin-bottom: 20px;
-      border: 1px solid red;
 
       .child{
-        margin: 8px 0 0 6px;
+        margin: 5px 0 0 4px;
         text-align: center;
 
         .goods-img{
           position: relative;
-          width: 422px;
-          height: 500px;
+          height: 300px;
           border: 1px solid #b99e97;
           overflow: hidden;
+          img{
+            width: 80%;
+            height: 80%;
+          }
 
           .img-a{
             position: absolute;
@@ -340,28 +343,28 @@
         position: absolute;
         left: 0;
         top: 0;
-        width: 90px;
-        height: 90px;
+        width: 70px;
+        height: 70px;
         background: url(../../static/subject/icon_01.png) no-repeat center;
         background-size: 100% 100%;
 
         .text{
           // font-family: MicrosoftYaHeiLight;
           position: absolute;
-          top: 5%;
-          left: 5%;
+          top: 3%;
+          left: 3%;
           width: 90%;
           height: 90%;
           transform: rotate(-45deg);
           text-align: center;
-          font-size: 20px;
+          font-size: 14px;
           color: #fff;
-          line-height: 38px;
+          line-height: 30px;
         }
       }
     }
     .list:not(:nth-child(4n)){
-      margin-right: 1%;
+      margin-right: 2.6%;
     }
   }
 
