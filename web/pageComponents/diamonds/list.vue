@@ -1636,7 +1636,7 @@ export default {
 
 <style lang="less" scoped>
 .page-content {
-  min-width: 1360px;
+  min-width: 1200px;
   max-width: 1366px;
   margin: 0 auto;
   padding: 40px 0;
@@ -2200,7 +2200,7 @@ export default {
   min-height: 500px;
 
   .compare-data {
-    min-width: 1360px;
+    min-width: 1200px;
     max-width: 1366px;
     margin: 0 auto;
     padding: 15px 0;
