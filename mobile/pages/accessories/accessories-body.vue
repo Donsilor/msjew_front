@@ -25,7 +25,7 @@
         <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
         {{ goodInfo.goodsName }}
       </div>
-      <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
+      <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
       
       <div class="discount-price" v-else>
         <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
