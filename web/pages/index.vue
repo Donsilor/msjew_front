@@ -4,43 +4,11 @@
     <div v-if="platform == 30" class="us-page">
       <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
-          <el-carousel-item v-for="(item, index) in banner" :key="index">
-            <a :href="item.addres || ''">
-              <img class="banner-img" :src="item.image" alt="">
-            </a>
+          <el-carousel-item v-for="(item, index) in usBanner" :key="index">
+            <!-- <a :href="item.addres || ''"> -->
+              <img class="banner-img" :src="item.url" alt="">
+            <!-- </a> -->
           </el-carousel-item>
-
-          <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
-                    有链接地址，且是外部链接
-            <a
-              v-if="item.openType === 1 && item.url"
-              :href="item.url"
-              target="_blank"
-            >
-              <div class="banner-item">
-                <img :src="item.image" />
-              </div>
-            </a>
-                    有链接地址，且不是外部链接
-            <nuxt-link
-              v-else-if="item.url && !item.isOutUrl"
-              :to="{ path: item.url }"
-            >
-              <div class="banner-item">
-                <img :src="item.image" />
-              </div>
-            </nuxt-link>
-                    有链接地址，且是外部链接
-            <a v-else-if="item.url && item.isOutUrl" :href="item.url">
-              <div class="banner-item">
-                <img :src="item.image" />
-              </div>
-            </a>
-                    没有链接地址
-            <div v-else-if="!item.url" class="banner-item">
-              <img :src="item.image" />
-            </div>
-          </el-carousel-item> -->
         </el-carousel>
       </section>
 
@@ -53,13 +21,13 @@
           <div class="section-title-line"></div>
 
           <div class="us-host-box">
-            <div class="us-host-list">
-              <swiper ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2">
+            <div class="us-host-list" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
+              <swiper ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
                   <!-- <nuxt-link :to="diamond.to"> -->
                     <a href="">
                       
-                      <div class="product-image">
+                      <div class="product-image" :height="sImgHeight + 'px'">
                         <img class="product-image" :src="hot.url" />
                       </div>
                     
@@ -71,12 +39,11 @@
               </swiper>
             </div>
 
-            <div class="host-list-bar">
-              <div class="left-button" @click="nextHotSale(false)"></div>
-              <div class="right-button" @click="nextHotSale(true)"></div>
+            <div class="host-list-bar" :class="{'opacaty': opacaty1 == true}" @mouseover="mouseover(1)" @mouseout="mouseout()">
+              <div class="left-button" :class="{'effects': ifEffects == 1}" @click="nextHotSale(false, 1)" :style="{top:arrowsTop + 'px'}"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 2}" @click="nextHotSale(true, 2)" :style="{top:arrowsTop + 'px'}"></div>
             </div>
           </div>
-          
         </section>
 
         <section class="recommend-category">
@@ -100,29 +67,32 @@
           </div>
         </section>
 
-        <section class="design" style="border: 1px solid red">
+        <section class="design">
           <h1 class="section-title">
-            HOT SALE
+            NEW PRODUCTS
             <!-- {{ $t(`${lang}.designYourEngagementRing`) }} -->
           </h1>
           <div class="section-title-line"></div>
 
           <div class="new-products-box">
-            <div class="new-products">
-              <swiper ref="new-products" :item-width="25" :indicator="false" :swiper-type="2">
-                <div v-for="(diamond, n) in diamonds" :key="n" class="host-item">
-                  <nuxt-link :to="diamond.to">
+            <div class="new-products" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
+              <swiper ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+                <div v-for="(item, n) in newProducts" :key="n" class="host-item">
+                  <!-- <nuxt-link :to="diamond.to"> -->
+                  <a href="">
+
                     <div class="product-image">
-                      <img class="product-image" :src="diamond.img" />
+                      <img class="product-image" :src="item.url" />
                     </div>
-                  </nuxt-link>
+                  </a>
+                  <!-- </nuxt-link> -->
                 </div>
               </swiper>
             </div>
 
-            <div class="host-list-bar">
-              <div class="left-button" @click="nextNewProducts(false)"></div>
-              <div class="right-button" @click="nextNewProducts(true)"></div>
+            <div class="host-list-bar" :class="{'opacaty': opacaty2 == true}" @mouseover="mouseover(2)" @mouseout="mouseout()">
+              <div class="left-button" :class="{'effects': ifEffects == 3}" @click="nextNewProducts(false, 3)" :style="{top:arrowsTop + 'px'}"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 4}" @click="nextNewProducts(true, 4)" :style="{top:arrowsTop + 'px'}"></div>
             </div>
           </div>
           
@@ -489,25 +459,26 @@ export default {
       lang,
       recommendCategories: [
         {
-          title: this.$t(`${lang}.engagementRings`),
+          // title: this.$t(`${lang}.engagementRings`),
+          title: 'Proposal and engagement',
           subTitle: '',
-          bgImage: '/index/recommend-category-1.png',
+          bgImage: '/index-us/img-251.png',
           to: {
             path: '/engagement-rings'
           }
         },
         {
-          title: this.$t(`${lang}.weddingAnd`),
-          subTitle: this.$t(`${lang}.anniversary`),
-          bgImage: '/index/recommend-category-2.png',
+          title: 'Weddings and anniversaries',
+          subTitle: '',
+          bgImage: '/index-us/img-252.png',
           to: {
             path: '/wedding-rings'
           }
         },
         {
-          title: this.$t(`${lang}.fineJewelry`),
+          title: 'Fashion jewelry',
           subTitle: '',
-          bgImage: '/index/recommend-category-3.png',
+          bgImage: '/index-us/img-253.png',
           to: {
             path: '/jewellery/all'
           }
@@ -611,24 +582,58 @@ export default {
       diamondItemWidth: 0,
       activeDiamondIndex: 0,
       platform: 10,
+      usBanner:[
+        {
+          'url': require('../static/index-us/banner.png')
+        },
+      ],
       hotImgUrl: [
         {
-          "url": require('../static/index-us/ring-201.png'),
-          'id': 2
+          'url': require('../static/index-us/ring-201.png'),
+          'id': 2,
+          'link': ''
         },
         {
-          "url": require('../static/index-us/ring-202.png'),
-          'id': 2
+          'url': require('../static/index-us/ring-202.png'),
+          'id': 2,
+          'link': ''
         },
         {
-          "url": require('../static/index-us/ring-203.png'),
-          'id': 2
+          'url': require('../static/index-us/ring-203.png'),
+          'id': 2,
+          'link': ''
         },
         {
-          "url": require('../static/index-us/ring-204.png'),
-          'id': 2
+          'url': require('../static/index-us/ring-204.png'),
+          'id': 2,
+          'link': ''
         }
-      ]
+      ],
+      newProducts: [
+        {
+          'url': require('../static/index-us/ring-301.png'),
+          'id': 2,
+          'link': ''
+        },
+        {
+          'url': require('../static/index-us/ring-302.png'),
+          'id': 2,
+          'link': ''
+        },
+        {
+          'url': require('../static/index-us/ring-303.png'),
+          'id': 2,
+          'link': ''
+        },
+        {
+          'url': require('../static/index-us/ring-304.png'),
+          'id': 2,
+          'link': ''
+        }
+      ],
+      opacaty1: false,
+      opacaty2: false,
+      ifEffects: 0
     }
   },
   computed: {
@@ -727,11 +732,32 @@ export default {
     nextActiveDiamond (type) {
       this.$refs['diamond-list'].goNext(type)
     },
-    nextHotSale (type) {
+    nextHotSale (type, k) {
+      this.addEffcts(k)
       this.$refs['us-host-list'].goNext(type)
     },
-    nextNewProducts (type) {
+    nextNewProducts (type, k) {
+      this.addEffcts(k)
       this.$refs['new-products'].goNext(type)
+    },
+    addEffcts(k) {
+      this.ifEffects = k;
+      setTimeout(() => {
+        this.ifEffects = 0
+      },200)
+    },
+    mouseover(a) {
+      if(a == 1){
+        this.opacaty1 = true
+        this.opacaty2 = false
+      }else if(a == 2){
+        this.opacaty1 = false
+        this.opacaty2 = true
+      }
+    },
+    mouseout() {
+      this.opacaty1 = false
+      this.opacaty2 = false
     }
   }
 }
@@ -1393,6 +1419,7 @@ section {
   .design,
   .recommend-category{
     background: none;
+    overflow: hidden;
   }
   .section-title-line{
     margin-bottom: 76px;
@@ -1401,6 +1428,7 @@ section {
   .new-products-box{
     max-width: 1360px;
     min-width: 1000px;
+    width: 80%;
     margin: 0 auto;
     position: relative;
     z-index: 2;
@@ -1408,8 +1436,7 @@ section {
   .us-host-list,
   .new-products{
     max-width: 1360px;
-    min-width: 1000px; 
-    height: 300px;
+    min-width: 1000px;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
@@ -1425,20 +1452,17 @@ section {
 
       .product-image{
         width: 100%;
-        height: 200px;
         overflow: hidden;
-        border: 1px solid red;
         box-sizing: border-box;
       }
 
       .price{
-        font-size: 16px;
-        line-height: 40px;
+        font-size: 18px;
+        line-height: 50px;
       }
     }
   }
 
-  
   .host-list-bar{
     position: absolute;
     top: 0;
@@ -1446,6 +1470,7 @@ section {
     width: 110%;
     height: 100%;
     z-index: -1;
+    opacity: 0.2;
 
     .left-button{
       position: absolute;
@@ -1454,7 +1479,7 @@ section {
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
-      background: #c9bdbf url('/index/icon-left.png') no-repeat 48% 48%;
+      background: #cebeb0 url('/index/icon-left.png') no-repeat 48% 48%;
       background-size: 90% 90%;
       border-radius: 2px;
     }
@@ -1466,10 +1491,14 @@ section {
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
-      background: #c9bdbf url('/index/icon-right.png') no-repeat 48% 48%;
+      background: #cebeb0 url('/index/icon-right.png') no-repeat 48% 48%;
       background-size: 90% 90%;
       border-radius: 2px;
     }
+  }
+
+  .host-list-bar.opacaty{
+    opacity: 1;
   }
 
   .sweet{
@@ -1482,6 +1511,10 @@ section {
     }
   }
 
-  
+  .effects{
+    transform: scale(0.96) translateY(-50%) !important;
+    background-color: #c9bdbf !important;
+    border-radius: 3px !important;
+  }
 }
 </style>

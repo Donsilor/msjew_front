@@ -3,7 +3,9 @@ export default {
     return {
       ad: [],
       webSite: [],
-      bannerHeight: 0
+      bannerHeight: 0,
+      sImgHeight: 0,
+      arrowsTop: 0
     }
   },
   computed: {
@@ -55,7 +57,15 @@ export default {
     },
     // 重新计算banner高度
     resetBannerSize() {
-      const _this = this
+      const _this = this;
+      var bWidth = document.body.clientWidth;
+      if(bWidth < 1000){
+        bWidth = 1000
+      }
+
+      this.sImgHeight = Math.round(bWidth * 0.2) + 70;
+      this.arrowsTop = Math.round(bWidth * 0.1) - 20;
+
       if (_this.banner[0] && _this.banner[0].image) {
         const image = new Image()
         image.src = _this.banner[0].image
