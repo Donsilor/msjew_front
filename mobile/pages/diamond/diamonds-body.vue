@@ -80,7 +80,7 @@
       >
         <div class="promise-img">
           <!-- <img :src="$IMG_URL + c.img" alt="" /> -->
-          <img :src= url[index] alt="" />
+          <img :src="$IMG_URL + c.img" alt="" />
         </div>
         <span>{{ c.name }}</span>
       </div>
