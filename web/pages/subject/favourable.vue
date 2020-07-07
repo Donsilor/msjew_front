@@ -83,7 +83,8 @@
       return{
 				lang,
         discountsList: [],
-        showCoupon: false
+        showCoupon: false,
+        coupons: {16:123, 17:564, 20:153}
       }
     },
     mounted() {
@@ -97,9 +98,20 @@
         .then(data => {
           this.discountsList = data.data.recommend[0];
 
-          var len=data.data.recommend[0].length;
+          var len = data.data.recommend[0].length,
+              datas = data.data.recommend[0];
+
           for(var i=0; i<len; i++){
             this.discountsList[i].goodsImages = this.discountsList[i].goodsImages.split(',');
+
+            if(datas[i].coupon.hasOwnProperty('money')){
+              var couponList = datas[i].coupon.money;
+              for(var j in couponList){
+                for(var k in this.coupons){
+                  console.log(999,k)
+                }
+              }
+            }
           }
           // this.loading = false
         })

@@ -68,6 +68,7 @@
     },
     mounted() {
       this.language = this.getCookie('language')
+      console.log(778,this.moneyInfo)
       this.coin = this.$store.state.coin
       // console.log("ggggg",this.moneyInfo)
       if(this.moneyInfo){
