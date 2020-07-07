@@ -107,8 +107,9 @@
             if(datas[i].coupon.hasOwnProperty('money')){
               var couponList = datas[i].coupon.money;
               for(var j in couponList){
+                var flag = true; 
                 for(var k in this.coupons){
-                  console.log(999,k)
+                  if(j != k){}
                 }
               }
             }
