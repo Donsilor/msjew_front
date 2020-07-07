@@ -2456,7 +2456,8 @@
         "getMore": "加载更多...",
         "error": "页面出错了",
         "soleOut": "商品已售罄",
-        "pleaseSelect":"请先选择商品参数！"
+        "pleaseSelect":"请先选择商品参数！",
+        "doubleRingTip":"您未选择参数或已选择的参数已售罄，请重新选择！"
     },
     "order": {
         "firstLogin": "请先登录或注册！",

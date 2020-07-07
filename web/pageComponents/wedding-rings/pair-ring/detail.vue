@@ -1135,11 +1135,11 @@ export default {
       _this.changeChecked()
 
       if (!_this.canAddCart) {
-         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+         _this.$errorMessage(_this.$t(`common.doubleRingTip`))
         return
       }
       if (!_this.goodsId) {
-         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+         _this.$errorMessage(_this.$t(`common.doubleRingTip`))
         return
       }
 
