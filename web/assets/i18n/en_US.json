@@ -2448,7 +2448,8 @@
         "getMore": "MORE",
         "error": "Page Error",
         "soleOut": "The Goods Have Sold Out",
-        "pleaseSelect":"Please select product parameters"
+        "pleaseSelect":"Please select product parameters",
+        "doubleRingTip":"Please select from the available colour and size options"
     },
     "order": {
         "firstLogin": "Please login or register!",
