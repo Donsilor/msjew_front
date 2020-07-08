@@ -2557,7 +2557,9 @@
         "discountPrice": "折扣金額",
         "needRegister": "請先登錄，才能使用優惠券",
         "msgTitle2": "提示：",
-        "msgContent2": "没有選擇商品！"
+        "msgContent2": "没有選擇商品！",
+        "setDefaultAddr": "設置默認地址",
+        "setSuccess": "默認地址設置成功"
     },
     "invoice": {
         "personal": "個人",
