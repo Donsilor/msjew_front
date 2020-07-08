@@ -219,7 +219,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(5)
+    const seoInfo = await app.$getSeoInfo('Jewellery')
     return {
       seoInfo
     }

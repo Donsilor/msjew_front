@@ -175,8 +175,32 @@ import Mixin from './mixin.js'
 import List from '@/mixins/list.js'
 import GoodListProps from '@/mixins/good-diamond-list-props.js'
 export default {
+  head() {
+    return this.seoInfo || {}
+  },
   name: 'List',
-  mixins: [Mixin, List, GoodListProps]
+  mixins: [Mixin, List, GoodListProps],
+  async asyncData({ $axios, route, store, app }) {
+    const seoInfo = await app.$getSeoInfo('Diamond')
+
+    return $axios({
+      method: 'get',
+      url: '/wap/goods/ring/web-site',
+      params: {
+        // type: 3
+      }
+    })
+      .then(data => {
+        return {
+          seoInfo,
+          ad: data.advert,
+          webSite: data.webSite
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  },
 }
 </script>
 
