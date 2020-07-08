@@ -1,281 +1,475 @@
 <template>
   <div class="page">
-    <section class="banner">
-      <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
-        <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
-          <a :href="item.addres || ''">
-            <img class="banner-img" :src="item.image" alt="">
-          </a>
-        </el-carousel-item>
+    <!-- 美国站点 -->
+    <div v-if="platform == 30" class="us-page">
+      <section class="banner">
+        <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
+          <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
+            <a :href="item.addres || ''" target="_blank">
+              <img class="banner-img" :src="item.image" alt="">
+            </a>
+          </el-carousel-item>
+        </el-carousel>
+      </section>
 
-        <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
-                   有链接地址，且是外部链接
-          <a
-            v-if="item.openType === 1 && item.url"
-            :href="item.url"
-            target="_blank"
-          >
-            <div class="banner-item">
-              <img :src="item.image" />
+      <div class="bg-color"> 
+        <section class="design">
+          <h1 class="section-title">
+            HOT SALE
+            <!-- {{ $t(`${lang}.designYourEngagementRing`) }} -->
+          </h1>
+          <div class="section-title-line"></div>
+
+          <div class="us-host-box">
+            <div class="us-host-list" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
+              <swiper ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+                <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
+                  <a :href="hot.link">
+                    <div class="product-image" :height="sImgHeight + 'px'">
+                      <img class="product-image" :src="hot.url"/>
+                    </div>
+                  
+                    <div class="price">USD {{hot.price}}</div>
+                  </a>
+                </div>
+              </swiper>
             </div>
-          </a>
-                   有链接地址，且不是外部链接
-          <nuxt-link
-            v-else-if="item.url && !item.isOutUrl"
-            :to="{ path: item.url }"
-          >
-            <div class="banner-item">
-              <img :src="item.image" />
+
+            <div class="host-list-bar" :class="{'opacaty': opacaty1 == true}" @mouseover="mouseover(1)" @mouseout="mouseout()">
+              <div class="left-button" :class="{'effects': ifEffects == 1}" @click="nextHotSale(false, 1)" :style="{top:arrowsTop + 'px'}"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 2}" @click="nextHotSale(true, 2)" :style="{top:arrowsTop + 'px'}"></div>
             </div>
-          </nuxt-link>
-                   有链接地址，且是外部链接
-          <a v-else-if="item.url && item.isOutUrl" :href="item.url">
-            <div class="banner-item">
-              <img :src="item.image" />
-            </div>
-          </a>
-                   没有链接地址
-          <div v-else-if="!item.url" class="banner-item">
-            <img :src="item.image" />
           </div>
-        </el-carousel-item> -->
-      </el-carousel>
-    </section>
-    <section class="design">
-      <h1 class="section-title">
-        {{ $t(`${lang}.designYourEngagementRing`) }}
-      </h1>
-      <h2 class="section-sub-title">{{ $t(`${lang}.startFromDiamond`) }}</h2>
-      <interactive></interactive>
-    </section>
-    <section class="recommend-category">
-      <div class="categories">
-        <div v-for="(category, index) in recommendCategories" :key="index" class="category-item">
-          <nuxt-link :to="category.to">
-            <div class="bg">
-              <img :src="category.bgImage" />
-              <div class="hover-cover"></div>
+        </section>
+
+        <section class="recommend-category">
+          <div class="categories">
+            <div v-for="(category, index) in usRecommendCategories" :key="index" class="category-item">
+              <a :href="category.to">
+                <div class="bg">
+                  <img :src="category.bgImage" />
+                  <div class="hover-cover"></div>
+                </div>
+                <div class="info">
+                  <h1 class="title" :style="{'fontSize': fontSize + 'px'}">{{ category.title }}</h1>
+                  <h2 class="sub-title" :style="{'fontSize': fontSize + 'px'}">{{ category.subTitle }}</h2>
+                  <div class="info-border-line border-t"></div>
+                  <div class="info-border-line border-r"></div>
+                  <div class="info-border-line border-b"></div>
+                  <div class="info-border-line border-l"></div>
+                </div>
+              </a>
             </div>
-            <div class="info">
-              <h1 class="title">{{ category.title }}</h1>
-              <h2 class="sub-title">{{ category.subTitle }}</h2>
-              <div class="info-border-line border-t"></div>
-              <div class="info-border-line border-r"></div>
-              <div class="info-border-line border-b"></div>
-              <div class="info-border-line border-l"></div>
+          </div>
+        </section>
+
+        <section class="design">
+          <h1 class="section-title">
+            NEW PRODUCTS
+            <!-- {{ $t(`${lang}.designYourEngagementRing`) }} -->
+          </h1>
+          <div class="section-title-line"></div>
+
+          <div class="new-products-box">
+            <div class="new-products" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
+              <swiper ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+                <div v-for="(item, n) in newProducts" :key="n" class="host-item">
+                  <a :href="item.link">
+                    <div class="product-image">
+                      <img class="product-image" :src="item.url" />
+                    </div>
+
+                    <div class="price">USD {{item.price}}</div>
+                  </a>
+                </div>
+              </swiper>
             </div>
-          </nuxt-link>
-        </div>
+
+            <div class="host-list-bar" :class="{'opacaty': opacaty2 == true}" @mouseover="mouseover(2)" @mouseout="mouseout()">
+              <div class="left-button" :class="{'effects': ifEffects == 3}" @click="nextNewProducts(false, 3)" :style="{top:arrowsTop + 'px'}"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 4}" @click="nextNewProducts(true, 4)" :style="{top:arrowsTop + 'px'}"></div>
+            </div>
+          </div>
+          
+        </section>
       </div>
-    </section>
 
-    <!--    首頁商品推薦模塊-->
-    <section class="hot">
-      <h1 class="section-title">
-        {{ hotProductInfo.title }}
-      </h1>
-      <div class="section-title-line"></div>
-      <div class="hot-list" :style="{ height: hotProductItemWidth + 'px' }">
-        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveHotProduct">
+      <section class="sweet">
+        <h1 class="section-title">
+          SWEET SHOW
+          <!-- {{ $t(`${lang}.designYourEngagementRing`) }} -->
+        </h1>
+        <div class="section-title-line"></div>
 
-          <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
-            <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
-              <div class="product-image">
-                <img class="product-image" :src="product.goodsImages[0]" />
+        <div class="sweet-img" :style="{'height': sweetHeight + 'px'}">
+          <div class="img-l sweet-img-box">
+            <img src="../static/index-us/sweet-401.png" alt="" class="img-a">
+            <div class="mask-layer"></div>
+          </div>
+
+          <div class="img-m">
+            <div class="img-m-t">
+              <div class="img-m-t-l sweet-img-box">
+                <img src="../static/index-us/sweet-402.png" alt="" class="img-a">
+                <div class="mask-layer"></div>
+              </div>
+              <div class="img-m-t-r sweet-img-box">
+                <img src="../static/index-us/sweet-403.png" alt="" class="img-a">
+                <div class="mask-layer"></div>
+              </div>
+            </div>
+            <div class="img-m-b">
+              <div class="img-m-b-l sweet-img-box">
+                <img src="../static/index-us/sweet-404.png" alt="" class="img-a">
+                <div class="mask-layer"></div>
+              </div>
+              <div class="img-m-b-r sweet-img-box">
+                <img src="../static/index-us/sweet-405.png" alt="" class="img-a">
+                <div class="mask-layer"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="img-r">
+            <div class="img-r-t sweet-img-box">
+              <img src="../static/index-us/sweet-406.png" alt="" class="img-b">
+              <div class="mask-layer"></div>
+            </div>
+            <div class="img-r-b sweet-img-box">
+              <img src="../static/index-us/sweet-407.png" alt="" class="img-a">
+              <div class="mask-layer"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="waiting-you">
+        <h1 class="section-title">
+          YOUR DIAMOND IS WAITING HEAR...
+          <!-- {{ $t(`${lang}.yourDiamondWaiting`) }} -->
+        </h1>
+        <div class="section-title-line"></div>
+        <div class="section-content">
+          <div class="item left-item">
+            <div class="picture">
+              <img src="/index/shop-left.png" />
+            </div>
+            <div class="content">
+              <h2 class="sub-title">{{ $t(`${lang}.understand`) }}</h2>
+              <h1 class="title">{{ $t(`${lang}.brandStory`) }}</h1>
+              <p class="desc">
+                {{ $t(`${lang}.witnessContentFirstLine`) }}<br />
+                {{ $t(`${lang}.witnessContentSecondLine`) }}<br />
+                {{ $t(`${lang}.witnessContentThirdLine`) }}
+              </p>
+              <div class="button-group">
+                <nuxt-link :to="{ path: '/policies/quality-value' }">
+                  <button>{{ $t(`${lang}.scheduleAppointment`) }}</button>
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+          <div class="item right-item">
+            <div class="content">
+              <h2 class="sub-title">{{ $t(`${lang}.expertLevel`) }}</h2>
+              <h1 class="title">{{ $t(`${lang}.customerService`) }}</h1>
+              <p class="desc">
+                {{ $t(`${lang}.customerServiceInfo`) }}
+              </p>
+              <div class="button-group">
+                <nuxt-link :to="{ path: '/contact-us' }">
+                  <button>{{ $t(`${lang}.contactUs`) }}</button>
+                </nuxt-link>
+              </div>
+            </div>
+            <div class="picture">
+              <img src="/index/shop-right.png" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- 非美国站点 -->
+    <div v-else>
+      <section class="banner">
+        <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
+          <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
+            <a :href="item.addres || ''">
+              <img class="banner-img" :src="item.image" alt="">
+            </a>
+          </el-carousel-item>
+
+          <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
+                    有链接地址，且是外部链接
+            <a
+              v-if="item.openType === 1 && item.url"
+              :href="item.url"
+              target="_blank"
+            >
+              <div class="banner-item">
+                <img :src="item.image" />
               </div>
             </a>
-            <nuxt-link v-else :to="product.to">
-              <div class="product-image">
-                <img class="product-image" :src="product.goodsImages[0]" />
+                    有链接地址，且不是外部链接
+            <nuxt-link
+              v-else-if="item.url && !item.isOutUrl"
+              :to="{ path: item.url }"
+            >
+              <div class="banner-item">
+                <img :src="item.image" />
               </div>
             </nuxt-link>
-          </div>
-        </swiper>
-      </div>
-      <div class="hot-list-bar">
-        <div class="left-button" @click="nextActiveHotProduct(false)">
-          <img src="/index/arrow-left.png" />
-        </div>
-        <div class="active-product-info">
-          <h1 class="title ow-h1">{{ activeHotProductInfo.goodsName }}</h1>
-        </div>
-        <div class="right-button" @click="nextActiveHotProduct(true)">
-          <img src="/index/arrow-right.png" />
-        </div>
-      </div>
-    </section>
-    <section class="diamond-gia">
-      <div class="bg">
-        <img src="/index/middle-gia.png" />
-      </div>
-      <div class="content">
-        <h1 class="title">
-          {{ $t(`${lang}.haveProfessionalCertificate`) }}
-        </h1>
-        <p class="description">
-          {{ $t(`${lang}.professionalCertificateInfo`) }}
-        </p>
-        <div class="button-group">
-          <nuxt-link :to="{ path: '/education/diamonds/certification' }">
-            <button class="check-now">
-              {{ $t(`${lang}.startYourDiamondCheck`) }}
-            </button>
-          </nuxt-link>
-        </div>
-      </div>
-    </section>
-
-    <!--    钻石类型-->
-    <section class="diamond">
-      <h1 class="section-title">
-        {{ $t(`${lang}.chooseYourDiamond`) }}
-      </h1>
-      <div class="section-title-line"></div>
-      <h2 class="section-sub-title">
-        {{ $t(`${lang}.360DiamondInfo`) }}
-      </h2>
-      <div class="diamond-list" :style="{ height: diamondItemWidth + 'px' }">
-        <swiper ref="diamond-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveDiamond">
-          <div v-for="(diamond, n) in diamonds" :key="n" class="product-item">
-            <nuxt-link :to="diamond.to">
-              <div class="product-image">
-                <img class="product-image" :src="diamond.img" />
+                    有链接地址，且是外部链接
+            <a v-else-if="item.url && item.isOutUrl" :href="item.url">
+              <div class="banner-item">
+                <img :src="item.image" />
               </div>
-            </nuxt-link>
-          </div>
-        </swiper>
-      </div>
-      <div class="diamond-list-bar">
-        <div class="left-button" @click="nextActiveDiamond(false)">
-          <img src="/index/arrow-left.png" />
-        </div>
-        <div class="active-product-info">
-          <h1 class="title ow-h1">{{ activeDiamondInfo.name }}</h1>
-          <h2 class="sub-title ow-h1">{{ activeDiamondInfo.desc }}</h2>
-        </div>
-        <div class="right-button" @click="nextActiveDiamond(true)">
-          <img src="/index/arrow-right.png" />
-        </div>
-      </div>
-    </section>
-    <section class="jewellery">
-      <h1 class="jewellery-section-top">
-        {{ $t(`${lang}.findYourSparkle`) }}
-      </h1>
-      <div class="section-content">
+            </a>
+                    没有链接地址
+            <div v-else-if="!item.url" class="banner-item">
+              <img :src="item.image" />
+            </div>
+          </el-carousel-item> -->
+        </el-carousel>
+      </section>
+      <section class="design">
         <h1 class="section-title">
-          {{ $t(`${lang}.jewelry`) }}
+          {{ $t(`${lang}.designYourEngagementRing`) }}
+        </h1>
+        <h2 class="section-sub-title">{{ $t(`${lang}.startFromDiamond`) }}</h2>
+        <interactive></interactive>
+      </section>
+      <section class="recommend-category">
+        <div class="categories">
+          <div v-for="(category, index) in recommendCategories" :key="index" class="category-item">
+            <nuxt-link :to="category.to">
+              <div class="bg">
+                <img :src="category.bgImage" />
+                <div class="hover-cover"></div>
+              </div>
+              <div class="info">
+                <h1 class="title">{{ category.title }}</h1>
+                <h2 class="sub-title">{{ category.subTitle }}</h2>
+                <div class="info-border-line border-t"></div>
+                <div class="info-border-line border-r"></div>
+                <div class="info-border-line border-b"></div>
+                <div class="info-border-line border-l"></div>
+              </div>
+            </nuxt-link>
+          </div>
+        </div>
+      </section>
+
+      <!--    首頁商品推薦模塊-->
+      <section class="hot">
+        <h1 class="section-title">
+          {{ hotProductInfo.title }}
+        </h1>
+        <div class="section-title-line"></div>
+        <div class="hot-list" :style="{ height: hotProductItemWidth + 'px' }">
+          <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveHotProduct">
+
+            <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
+              <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
+                <div class="product-image">
+                  <img class="product-image" :src="product.goodsImages[0]" />
+                </div>
+              </a>
+              <nuxt-link v-else :to="product.to">
+                <div class="product-image">
+                  <img class="product-image" :src="product.goodsImages[0]" />
+                </div>
+              </nuxt-link>
+            </div>
+          </swiper>
+        </div>
+        <div class="hot-list-bar">
+          <div class="left-button" @click="nextActiveHotProduct(false)">
+            <img src="/index/arrow-left.png" />
+          </div>
+          <div class="active-product-info">
+            <h1 class="title ow-h1">{{ activeHotProductInfo.goodsName }}</h1>
+          </div>
+          <div class="right-button" @click="nextActiveHotProduct(true)">
+            <img src="/index/arrow-right.png" />
+          </div>
+        </div>
+      </section>
+      <section class="diamond-gia">
+        <div class="bg">
+          <img src="/index/middle-gia.png" />
+        </div>
+        <div class="content">
+          <h1 class="title">
+            {{ $t(`${lang}.haveProfessionalCertificate`) }}
+          </h1>
+          <p class="description">
+            {{ $t(`${lang}.professionalCertificateInfo`) }}
+          </p>
+          <div class="button-group">
+            <nuxt-link :to="{ path: '/education/diamonds/certification' }">
+              <button class="check-now">
+                {{ $t(`${lang}.startYourDiamondCheck`) }}
+              </button>
+            </nuxt-link>
+          </div>
+        </div>
+      </section>
+
+      <!--    钻石类型-->
+      <section class="diamond">
+        <h1 class="section-title">
+          {{ $t(`${lang}.chooseYourDiamond`) }}
         </h1>
         <div class="section-title-line"></div>
         <h2 class="section-sub-title">
-          {{ $t(`${lang}.goodForYouEverywhere`) }}
+          {{ $t(`${lang}.360DiamondInfo`) }}
         </h2>
-        <ul class="categories">
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.eternityRingsSlow`) }}
-            </div>
-            <div class="category">
-              <div class="bg">
-                <img src="/index/jewelry-1.png" />
-              </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.eternalRing`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.eternityRingsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: '/engagement-rings/all' }">
-                    <button>{{ $t(`${lang}.explore`) }}</button>
-                  </nuxt-link>
+        <div class="diamond-list" :style="{ height: diamondItemWidth + 'px' }">
+          <swiper ref="diamond-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveDiamond">
+            <div v-for="(diamond, n) in diamonds" :key="n" class="product-item">
+              <nuxt-link :to="diamond.to">
+                <div class="product-image">
+                  <img class="product-image" :src="diamond.img" />
                 </div>
-              </div>
-            </div>
-          </li>
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.menWedding`) }}
-            </div>
-            <div class="category">
-              <div class="bg">
-                <img src="/index/jewelry-2.png" />
-              </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.menWeddingRings`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.menWeddingRingsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: '/wedding-rings/mens-classic' }">
-                    <button>{{ $t(`${lang}.discover`) }}</button>
-                  </nuxt-link>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.diamondStuds`) }}
-            </div>
-            <div class="category">
-              <div class="bg">
-                <img src="/index/jewelry-3.png" />
-              </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.diamondStudEarrings`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.diamondStudsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: 'jewellery/ear-stud' }">
-                    <button>{{ $t(`${lang}.browse`) }}</button>
-                  </nuxt-link>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section class="waiting-you">
-      <h1 class="section-title">
-        {{ $t(`${lang}.yourDiamondWaiting`) }}
-      </h1>
-      <div class="section-title-line"></div>
-      <div class="section-content">
-        <div class="item left-item">
-          <div class="picture">
-            <img src="/index/shop-left.png" />
-          </div>
-          <div class="content">
-            <h2 class="sub-title">{{ $t(`${lang}.understand`) }}</h2>
-            <h1 class="title">{{ $t(`${lang}.brandStory`) }}</h1>
-            <p class="desc">
-              {{ $t(`${lang}.witnessContentFirstLine`) }}<br />
-              {{ $t(`${lang}.witnessContentSecondLine`) }}<br />
-              {{ $t(`${lang}.witnessContentThirdLine`) }}
-            </p>
-            <div class="button-group">
-              <nuxt-link :to="{ path: '/policies/quality-value' }">
-                <button>{{ $t(`${lang}.scheduleAppointment`) }}</button>
               </nuxt-link>
+            </div>
+          </swiper>
+        </div>
+        <div class="diamond-list-bar">
+          <div class="left-button" @click="nextActiveDiamond(false)">
+            <img src="/index/arrow-left.png" />
+          </div>
+          <div class="active-product-info">
+            <h1 class="title ow-h1">{{ activeDiamondInfo.name }}</h1>
+            <h2 class="sub-title ow-h1">{{ activeDiamondInfo.desc }}</h2>
+          </div>
+          <div class="right-button" @click="nextActiveDiamond(true)">
+            <img src="/index/arrow-right.png" />
+          </div>
+        </div>
+      </section>
+      <section class="jewellery">
+        <h1 class="jewellery-section-top">
+          {{ $t(`${lang}.findYourSparkle`) }}
+        </h1>
+        <div class="section-content">
+          <h1 class="section-title">
+            {{ $t(`${lang}.jewelry`) }}
+          </h1>
+          <div class="section-title-line"></div>
+          <h2 class="section-sub-title">
+            {{ $t(`${lang}.goodForYouEverywhere`) }}
+          </h2>
+          <ul class="categories">
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.eternityRingsSlow`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-1.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.eternalRing`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.eternityRingsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: '/engagement-rings/all' }">
+                      <button>{{ $t(`${lang}.explore`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.menWedding`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-2.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.menWeddingRings`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.menWeddingRingsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: '/wedding-rings/mens-classic' }">
+                      <button>{{ $t(`${lang}.discover`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.diamondStuds`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-3.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.diamondStudEarrings`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.diamondStudsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: 'jewellery/ear-stud' }">
+                      <button>{{ $t(`${lang}.browse`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="waiting-you">
+        <h1 class="section-title">
+          {{ $t(`${lang}.yourDiamondWaiting`) }}
+        </h1>
+        <div class="section-title-line"></div>
+        <div class="section-content">
+          <div class="item left-item">
+            <div class="picture">
+              <img src="/index/shop-left.png" />
+            </div>
+            <div class="content">
+              <h2 class="sub-title">{{ $t(`${lang}.understand`) }}</h2>
+              <h1 class="title">{{ $t(`${lang}.brandStory`) }}</h1>
+              <p class="desc">
+                {{ $t(`${lang}.witnessContentFirstLine`) }}<br />
+                {{ $t(`${lang}.witnessContentSecondLine`) }}<br />
+                {{ $t(`${lang}.witnessContentThirdLine`) }}
+              </p>
+              <div class="button-group">
+                <nuxt-link :to="{ path: '/policies/quality-value' }">
+                  <button>{{ $t(`${lang}.scheduleAppointment`) }}</button>
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+          <div class="item right-item">
+            <div class="content">
+              <h2 class="sub-title">{{ $t(`${lang}.expertLevel`) }}</h2>
+              <h1 class="title">{{ $t(`${lang}.customerService`) }}</h1>
+              <p class="desc">
+                {{ $t(`${lang}.customerServiceInfo`) }}
+              </p>
+              <div class="button-group">
+                <nuxt-link :to="{ path: '/contact-us' }">
+                  <button>{{ $t(`${lang}.contactUs`) }}</button>
+                </nuxt-link>
+              </div>
+            </div>
+            <div class="picture">
+              <img src="/index/shop-right.png" />
             </div>
           </div>
         </div>
-        <div class="item right-item">
-          <div class="content">
-            <h2 class="sub-title">{{ $t(`${lang}.expertLevel`) }}</h2>
-            <h1 class="title">{{ $t(`${lang}.customerService`) }}</h1>
-            <p class="desc">
-              {{ $t(`${lang}.customerServiceInfo`) }}
-            </p>
-            <div class="button-group">
-              <nuxt-link :to="{ path: '/contact-us' }">
-                <button>{{ $t(`${lang}.contactUs`) }}</button>
-              </nuxt-link>
-            </div>
-          </div>
-          <div class="picture">
-            <img src="/index/shop-right.png" />
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
+  
 </template>
 
 <script>
@@ -284,9 +478,7 @@ import Interactive from '@/pageComponents/index/interactive.vue'
 const lang = 'index'
 export default {
   head () {
-    return this.seoInfo || {
-      
-    }
+    return this.seoInfo || {}
   },
   components: {
     Interactive
@@ -320,6 +512,27 @@ export default {
           to: {
             path: '/jewellery/all'
           }
+        }
+      ],
+      usRecommendCategories: [
+        {
+          // title: this.$t(`${lang}.engagementRings`),
+          title: 'Proposal and engagement',
+          subTitle: '',
+          bgImage: '/index-us/img-251.png',
+          to: 'https://us.bddco.com/wedding-rings/all'
+        },
+        {
+          title: 'Weddings and anniversaries',
+          subTitle: '',
+          bgImage: '/index-us/img-252.png',
+          to: 'https://us.bddco.com/wedding-rings/engagement-ring'
+        },
+        {
+          title: 'Fashion jewelry',
+          subTitle: '',
+          bgImage: '/index-us/img-253.png',
+          to: 'https://us.bddco.com/jewellery/earrings-stud'
         }
       ],
       hotProductItemWidth: 0,
@@ -418,7 +631,200 @@ export default {
         }
       ],
       diamondItemWidth: 0,
-      activeDiamondIndex: 0
+      activeDiamondIndex: 0,
+      platform: 10,
+      usBanner:[
+        {
+          'url': require('../static/index-us/banner.png')
+        },
+      ],
+      hotImgUrl: [
+        {
+          'url': require('../static/index-us/ring-202.png'),
+          'id': 134,
+          'link': 'https://us.bddco.com/ring/wedding-rings/682?goodId=682&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-203.png'),
+          'id': 679,
+          'link': 'https://us.bddco.com/ring/wedding-rings/679?goodId=679&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-204.png'),
+          'id': 684,
+          'link': 'https://us.bddco.com/ring/wedding-rings/684?goodId=684&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-205.png'),
+          'id': 230,
+          'link': 'https://us.bddco.com/ring/wedding-rings/230?goodId=230&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-206.png'),
+          'id': 147,
+          'link': 'https://us.bddco.com/ring/wedding-rings/147?goodId=147&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-207.png'),
+          'id': 231,
+          'link': 'https://us.bddco.com/ring/wedding-rings/231?goodId=231&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-208.png'),
+          'id': 126,
+          'link': 'https://us.bddco.com/ring/wedding-rings/126?goodId=126&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-209.png'),
+          'id': 128,
+          'link': 'https://us.bddco.com/ring/wedding-rings/128?goodId=128&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-210.png'),
+          'id': 150,
+          'link': 'https://us.bddco.com/ring/wedding-rings/150?goodId=150&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-211.png'),
+          'id': 134,
+          'link': 'https://us.bddco.com/ring/wedding-rings/134?goodId=134&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-212.png'),
+          'id': 118,
+          'link': 'https://us.bddco.com/ring/wedding-rings/118?goodId=118&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-213.png'),
+          'id': 145,
+          'link': 'https://us.bddco.com/ring/wedding-rings/145?goodId=145&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-214.png'),
+          'id': 120,
+          'link': 'https://us.bddco.com/ring/wedding-rings/120?goodId=120&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-215.png'),
+          'id': 145,
+          'link': 'https://us.bddco.com/ring/wedding-rings/145?goodId=145&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-216.png'),
+          'id': 233,
+          'link': 'https://us.bddco.com/ring/wedding-rings/233?goodId=233&ringType=single',
+          'price': 0
+        }
+      ],
+      newProducts: [
+        {
+          'url': require('../static/index-us/ring-301.png'),
+          'id': 217,
+          'link': 'https://us.bddco.com/ring/wedding-rings/217?goodId=217&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-302.png'),
+          'id': 212,
+          'link': 'https://us.bddco.com/ring/wedding-rings/212?goodId=212&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-303.png'),
+          'id': 657,
+          'link': 'https://us.bddco.com/ring/wedding-rings/657?goodId=657&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-304.png'),
+          'id': 614,
+          'link': 'https://us.bddco.com/ring/wedding-rings/614?goodId=614&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-305.png'),
+          'id': 149,
+          'link': 'https://us.bddco.com/ring/wedding-rings/149?goodId=149&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-306.png'),
+          'id': 137,
+          'link': 'https://us.bddco.com/ring/wedding-rings/137?goodId=137&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-307.png'),
+          'id': 124,
+          'link': 'https://us.bddco.com/ring/wedding-rings/124?goodId=124&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-309.png'),
+          'id': 139,
+          'link': 'https://us.bddco.com/ring/wedding-rings/139?goodId=139&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-310.png'),
+          'id': 122,
+          'link': 'https://us.bddco.com/ring/wedding-rings/122?goodId=122&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-311.png'),
+          'id': 234,
+          'link': 'https://us.bddco.com/ring/wedding-rings/234?goodId=234&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-312.png'),
+          'id': 138,
+          'link': 'https://us.bddco.com/ring/wedding-rings/138?goodId=138&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-313.png'),
+          'id': 123,
+          'link': 'https://us.bddco.com/ring/wedding-rings/123?goodId=123&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-314.png'),
+          'id': 151,
+          'link': 'https://us.bddco.com/ring/wedding-rings/151?goodId=151&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-315.png'),
+          'id': 125,
+          'link': 'https://us.bddco.com/ring/wedding-rings/125?goodId=125&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-316.png'),
+          'id': 213,
+          'link': 'https://us.bddco.com/ring/wedding-rings/213?goodId=213&ringType=single',
+          'price': 0
+        }
+      ],
+      opacaty1: false,
+      opacaty2: false,
+      ifEffects: 0
     }
   },
   computed: {
@@ -469,7 +875,6 @@ export default {
     const seoInfo = await app.$getSeoInfo('index')
     // console.log(seoInfo)
 
-
     return $axios({
       method: 'get',
       url: '/web/home/index/web-site',
@@ -490,11 +895,63 @@ export default {
         console.error(err)
       })
   },
+  created() {
+    var that = this;
+    var hot = [];
+    that.hotImgUrl.forEach((o, i) => {
+      hot[i] = o.id
+    })
+
+    this.$axios
+      .post('/web/goods/style/search', {
+        styleId: hot
+      })
+      .then(res => {
+        var data = res.data.data;
+
+        data.forEach((o, i) => {
+          that.hotImgUrl.forEach((p, j) => {
+            if(o.id == p.id){
+              that.hotImgUrl[j].price = o.salePrice
+            }
+          })
+        })
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    var product = [];
+    that.newProducts.forEach((o, i) => {
+      product[i] = o.id
+    })
+
+    this.$axios
+      .post('/web/goods/style/search', {
+        styleId: product
+      })
+      .then(res => {
+        var data = res.data.data;
+
+        data.forEach((o, i) => {
+          that.newProducts.forEach((p, j) => {
+            if(o.id == p.id){
+              that.newProducts[j].price = o.salePrice
+            }
+          })
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  },
   mounted () {
     const _this = this
     _this.$nextTick(() => {
       
     })
+    this.platform = this.$store.state.platform
   },
   methods: {
     // 页面尺寸改变时触发重新计算
@@ -515,6 +972,33 @@ export default {
     },
     nextActiveDiamond (type) {
       this.$refs['diamond-list'].goNext(type)
+    },
+    nextHotSale (type, k) {
+      this.addEffcts(k)
+      this.$refs['us-host-list'].goNext(type)
+    },
+    nextNewProducts (type, k) {
+      this.addEffcts(k)
+      this.$refs['new-products'].goNext(type)
+    },
+    addEffcts(k) {
+      this.ifEffects = k;
+      setTimeout(() => {
+        this.ifEffects = 0
+      },200)
+    },
+    mouseover(a) {
+      if(a == 1){
+        this.opacaty1 = true
+        this.opacaty2 = false
+      }else if(a == 2){
+        this.opacaty1 = false
+        this.opacaty2 = true
+      }
+    },
+    mouseout() {
+      this.opacaty1 = false
+      this.opacaty2 = false
     }
   }
 }
@@ -1170,6 +1654,251 @@ section {
         }
       }
     }
+  }
+}
+
+// 美国站点
+.us-page{
+  .bg-color{
+    background-color: #f6f1eb;
+  }
+
+  .banner-item{
+    a{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  .design,
+  .recommend-category{
+    background: none;
+    overflow: hidden;
+  }
+  .section-title-line{
+    margin-bottom: 76px;
+  }
+  .us-host-box,
+  .new-products-box{
+    max-width: 1360px;
+    min-width: 1000px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .us-host-list,
+  .new-products{
+    max-width: 1360px;
+    min-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+  .host-item{
+    width: 100%;
+    font-size: 0;
+    text-align: center;
+
+    a{
+      display: inline-block;
+      width: 80%;
+
+      .product-image{
+        width: 100%;
+        overflow: hidden;
+
+        img{
+          width: 90%;
+          height: 90%;
+          margin: 5% 0;
+        }
+      }
+      .product-image:hover img{
+        transform: scale(1.11);
+      }
+
+      .price{
+        font-size: 18px;
+        line-height: 50px;
+      }
+    }
+  }
+
+  .host-list-bar{
+    position: absolute;
+    top: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.2;
+
+    .left-button{
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #cebeb0 url('/index/icon-left.png') no-repeat 48% 48%;
+      background-size: 90% 90%;
+      border-radius: 2px;
+    }
+
+    .right-button{
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #cebeb0 url('/index/icon-right.png') no-repeat 48% 48%;
+      background-size: 90% 90%;
+      border-radius: 2px;
+    }
+  }
+
+  .host-list-bar.opacaty{
+    opacity: 1;
+  }
+
+  .sweet{
+    padding: 100px 0;
+    box-sizing: border-box;
+    background-color: #fbf8f3;
+
+    .sweet-img{
+      max-width: 1520px;
+      width: 80%;
+      height: 700px;
+      margin: 0 auto;
+      display: flex;
+      div{
+        overflow: hidden;
+      }
+
+      .img-l{
+        width: calc((100% - 40px) * 0.18);
+        height: 100%;
+        position: relative;
+      }
+      .img-m{
+        width: calc((100% - 40px) * 0.46);
+        margin: 0 20px;
+        display: flex;
+        flex-direction: column;
+
+        .img-m-t{
+          height: 54%;
+          margin-bottom: 20px;
+          width: 100%;
+          flex-shrink: 0;
+          display: flex;
+
+          .img-m-t-l{
+            width: 50%;
+            height: 100%;
+            margin-right: 20px;
+            position: relative;
+          }
+          .img-m-t-r{
+            width: 50%;
+            height: 100%;
+            position: relative;
+          }
+        }
+
+        .img-m-b{
+          width: 100%;
+          height: 20%;
+          display: flex;
+          flex-grow: 1;
+
+          .img-m-b-l{
+            width: 54%;
+            height: 100%;
+            margin-right: 20px;
+            position: relative;
+            flex-shrink: 0;
+          }
+          .img-m-b-r{
+            width: 50%;
+            height: 100%;
+            position: relative;
+          }
+        }
+      }
+      .img-r{
+        width: calc((100% - 40px) * 0.36);
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .img-r-t{
+          width: 100%;
+          height: 40%;
+          position: relative;
+          margin-bottom: 20px;
+          flex-shrink: 0;
+        }
+        .img-r-b{
+          width: 100%;
+          height: 60%;
+          position: relative;
+        }
+      }
+      
+
+      .img-a{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100%;
+        width: auto;
+      }
+      .img-b{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: auto;
+      }
+    }
+    .sweet-img::before{
+      display: block;
+      content: '.';
+      height: 0;
+      opacity: 0;
+      visibility: hidden;
+      clear: both;
+    }
+
+    .mask-layer{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      // display: none;
+    }
+
+    .mask-layer:hover{
+      background-color: rgba(0, 0, 0, 0.3);
+      transition: background-color 0.4s ease-in;
+    }
+  }
+
+  .effects{
+    transform: scale(0.96) translateY(-50%) !important;
+    background-color: #e5d5c7 !important;
+    border-radius: 3px !important;
   }
 }
 </style>
