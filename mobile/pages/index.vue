@@ -341,7 +341,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(1)
+    const seoInfo = await app.$getSeoInfo('index')
 
     return $axios({
       method: 'get',
