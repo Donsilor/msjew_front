@@ -2555,8 +2555,8 @@
         "needRegister": "Please login before redeem the coupon. ",
         "msgTitle2": "Submit：",
         "msgContent2": "No product selected!",
-        "setDefaultAddr": "设置默认地址",
-        "setSuccess": "默認地址設置成功"
+        "setDefaultAddr": "Set The Default Address",
+        "setSuccess": "The default address setting was successful!"
     },
     "invoice": {
         "personal": "personal",
