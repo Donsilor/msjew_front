@@ -4,7 +4,7 @@
     <div v-if="platform == 30" class="us-page">
       <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
-          <el-carousel-item v-for="(item, index) in banner" :key="index">
+          <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
             <!-- <a :href="item.addres || ''"> -->
               <img class="banner-img" :src="item.image" alt="">
             <!-- </a> -->
@@ -33,6 +33,13 @@
                     
                       <div class="price"> USD 1531.00</div>
                     </a>
+
+                    <!-- <div class="info">
+                      <div class="info-border-line border-t"></div>
+                      <div class="info-border-line border-r"></div>
+                      <div class="info-border-line border-b"></div>
+                      <div class="info-border-line border-l"></div>
+                    </div> -->
 
                   <!-- </nuxt-link> -->
                 </div>
@@ -106,17 +113,28 @@
         </h1>
         <div class="section-title-line"></div>
 
-        <div class="sweet-img">
+        <div class="sweet-img" :style="{'height': sweetHeight + 'px'}">
           <div class="img-l">
             <img src="../static/index-us/sweet-401.png" alt="" class="img-a">
           </div>
 
           <div class="img-m">
             <div class="img-m-t">
-              <div class="img-m-t-l"></div>
-              <div class="img-m-t-r"></div>
+              <div class="img-m-t-l">
+                <img src="../static/index-us/sweet-402.png" alt="" class="img-a">
+              </div>
+              <div class="img-m-t-r">
+                <img src="../static/index-us/sweet-403.png" alt="" class="img-a">
+              </div>
             </div>
-            <div class="img-m-b"></div>
+            <div class="img-m-b">
+              <div class="img-m-b-l">
+                <img src="../static/index-us/sweet-404.png" alt="" class="img-a">
+              </div>
+              <div class="img-m-b-r">
+                <img src="../static/index-us/sweet-405.png" alt="" class="img-a">
+              </div>
+            </div>
           </div>
 
           <div class="img-r">
@@ -124,7 +142,7 @@
               <img src="../static/index-us/sweet-406.png" alt="" class="img-b">
             </div>
             <div class="img-r-b">
-              <img src="../static/index-us/sweet-407.png" alt="" class="img-b">
+              <img src="../static/index-us/sweet-407.png" alt="" class="img-a">
             </div>
           </div>
         </div>
@@ -180,8 +198,8 @@
     <!-- 非美国站点 -->
     <div v-else>
       <section class="banner">
-        <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
-          <el-carousel-item v-for="(item, index) in banner" :key="index">
+        <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
+          <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
             <a :href="item.addres || ''">
               <img class="banner-img" :src="item.image" alt="">
             </a>
@@ -817,17 +835,32 @@ section {
   max-width: 1920px;
   min-width: 1525px;
   margin: 0 auto;
+  width: 100%;
+  // border: 2px solid red;
 
-  overflow-x: hidden;
-  .banner-item {
+  // overflow-x: hidden;
+
+  .banner-box{
     width: 100%;
     height: 100%;
-    line-height: 0;
-    font-size: 0;
+    // border: 3px solid blue;
+  }
+  .banner-item {
+    // width: 100%;
+    // height: 100%;
+    // line-height: 0;
+    // font-size: 0;
+    // position: relative;
+    // overflow: hidden;
+    //  border: 3px solid red;
 
     .banner-img {
-      width: 100%;
-      height: 100%;
+      // position: absolute;
+      // top: 50%;
+      // left: 50%;
+      // height: 100%;
+      // width: auto;
+      // transform: translate(-50%, 50%);
     }
   }
 }
@@ -1527,12 +1560,10 @@ section {
       max-width: 1520px;
       width: 80%;
       height: 700px;
-      border: 1px solid red;
       margin: 0 auto;
       display: flex;
       div{
         overflow: hidden;
-        border: 1px solid red;
       }
 
       .img-l{
@@ -1550,22 +1581,58 @@ section {
           height: 54%;
           margin-bottom: 20px;
           width: 100%;
-          flex-grow: 0;
+          flex-shrink: 0;
+          display: flex;
+
+          .img-m-t-l{
+            width: 50%;
+            height: 100%;
+            margin-right: 20px;
+            position: relative;
+          }
+          .img-m-t-r{
+            width: 50%;
+            height: 100%;
+            position: relative;
+          }
         }
 
         .img-m-b{
           width: 100%;
           height: 20%;
+          display: flex;
           flex-grow: 1;
+
+          .img-m-b-l{
+            width: 54%;
+            height: 100%;
+            margin-right: 20px;
+            position: relative;
+            flex-shrink: 0;
+          }
+          .img-m-b-r{
+            width: 50%;
+            height: 100%;
+            position: relative;
+          }
         }
       }
       .img-r{
         width: calc((100% - 40px) * 0.36);
         height: 100%;
+        display: flex;
+        flex-direction: column;
 
-        div{
+        .img-r-t{
           width: 100%;
-          height: 50%;
+          height: 40%;
+          position: relative;
+          margin-bottom: 20px;
+          flex-shrink: 0;
+        }
+        .img-r-b{
+          width: 100%;
+          height: 60%;
           position: relative;
         }
       }

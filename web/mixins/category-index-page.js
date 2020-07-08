@@ -5,7 +5,8 @@ export default {
       webSite: [],
       bannerHeight: 0,
       sImgHeight: 0,
-      arrowsTop: 0
+      arrowsTop: 0,
+      sweetHeight: 0
     }
   },
   computed: {
@@ -65,6 +66,7 @@ export default {
 
       this.sImgHeight = Math.round(bWidth * 0.2) + 70;
       this.arrowsTop = Math.round(bWidth * 0.1) - 20;
+      this.sweetHeight = Math.round((bWidth / 1520) * 710);
 
       if (_this.banner[0] && _this.banner[0].image) {
         const image = new Image()
