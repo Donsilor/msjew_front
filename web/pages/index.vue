@@ -5,9 +5,9 @@
       <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
-            <!-- <a :href="item.addres || ''"> -->
+            <a :href="item.addres || ''" target="_blank">
               <img class="banner-img" :src="item.image" alt="">
-            <!-- </a> -->
+            </a>
           </el-carousel-item>
         </el-carousel>
       </section>
@@ -24,24 +24,13 @@
             <div class="us-host-list" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
               <swiper ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
-                  <!-- <nuxt-link :to="diamond.to"> -->
-                    <a href="">
-                      
-                      <div class="product-image" :height="sImgHeight + 'px'">
-                        <img class="product-image" :src="hot.url" />
-                      </div>
-                    
-                      <div class="price"> USD 1531.00</div>
-                    </a>
-
-                    <!-- <div class="info">
-                      <div class="info-border-line border-t"></div>
-                      <div class="info-border-line border-r"></div>
-                      <div class="info-border-line border-b"></div>
-                      <div class="info-border-line border-l"></div>
-                    </div> -->
-
-                  <!-- </nuxt-link> -->
+                  <a :href="hot.link">
+                    <div class="product-image" :height="sImgHeight + 'px'">
+                      <img class="product-image" :src="hot.url"/>
+                    </div>
+                  
+                    <div class="price">USD {{hot.price}}</div>
+                  </a>
                 </div>
               </swiper>
             </div>
@@ -55,21 +44,21 @@
 
         <section class="recommend-category">
           <div class="categories">
-            <div v-for="(category, index) in recommendCategories" :key="index" class="category-item">
-              <nuxt-link :to="category.to">
+            <div v-for="(category, index) in usRecommendCategories" :key="index" class="category-item">
+              <a :href="category.to">
                 <div class="bg">
                   <img :src="category.bgImage" />
                   <div class="hover-cover"></div>
                 </div>
                 <div class="info">
-                  <h1 class="title">{{ category.title }}</h1>
-                  <h2 class="sub-title">{{ category.subTitle }}</h2>
+                  <h1 class="title" :style="{'fontSize': fontSize + 'px'}">{{ category.title }}</h1>
+                  <h2 class="sub-title" :style="{'fontSize': fontSize + 'px'}">{{ category.subTitle }}</h2>
                   <div class="info-border-line border-t"></div>
                   <div class="info-border-line border-r"></div>
                   <div class="info-border-line border-b"></div>
                   <div class="info-border-line border-l"></div>
                 </div>
-              </nuxt-link>
+              </a>
             </div>
           </div>
         </section>
@@ -85,14 +74,13 @@
             <div class="new-products" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
               <swiper ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(item, n) in newProducts" :key="n" class="host-item">
-                  <!-- <nuxt-link :to="diamond.to"> -->
-                  <a href="">
-
+                  <a :href="item.link">
                     <div class="product-image">
                       <img class="product-image" :src="item.url" />
                     </div>
+
+                    <div class="price">USD {{item.price}}</div>
                   </a>
-                  <!-- </nuxt-link> -->
                 </div>
               </swiper>
             </div>
@@ -114,35 +102,42 @@
         <div class="section-title-line"></div>
 
         <div class="sweet-img" :style="{'height': sweetHeight + 'px'}">
-          <div class="img-l">
+          <div class="img-l sweet-img-box">
             <img src="../static/index-us/sweet-401.png" alt="" class="img-a">
+            <div class="mask-layer"></div>
           </div>
 
           <div class="img-m">
             <div class="img-m-t">
-              <div class="img-m-t-l">
+              <div class="img-m-t-l sweet-img-box">
                 <img src="../static/index-us/sweet-402.png" alt="" class="img-a">
+                <div class="mask-layer"></div>
               </div>
-              <div class="img-m-t-r">
+              <div class="img-m-t-r sweet-img-box">
                 <img src="../static/index-us/sweet-403.png" alt="" class="img-a">
+                <div class="mask-layer"></div>
               </div>
             </div>
             <div class="img-m-b">
-              <div class="img-m-b-l">
+              <div class="img-m-b-l sweet-img-box">
                 <img src="../static/index-us/sweet-404.png" alt="" class="img-a">
+                <div class="mask-layer"></div>
               </div>
-              <div class="img-m-b-r">
+              <div class="img-m-b-r sweet-img-box">
                 <img src="../static/index-us/sweet-405.png" alt="" class="img-a">
+                <div class="mask-layer"></div>
               </div>
             </div>
           </div>
 
           <div class="img-r">
-            <div class="img-r-t">
+            <div class="img-r-t sweet-img-box">
               <img src="../static/index-us/sweet-406.png" alt="" class="img-b">
+              <div class="mask-layer"></div>
             </div>
-            <div class="img-r-b">
+            <div class="img-r-b sweet-img-box">
               <img src="../static/index-us/sweet-407.png" alt="" class="img-a">
+              <div class="mask-layer"></div>
             </div>
           </div>
         </div>
@@ -495,29 +490,49 @@ export default {
       lang,
       recommendCategories: [
         {
-          // title: this.$t(`${lang}.engagementRings`),
-          title: 'Proposal and engagement',
+          title: this.$t(`${lang}.engagementRings`),
           subTitle: '',
-          bgImage: '/index-us/img-251.png',
+          bgImage: '/index/recommend-category-1.png',
           to: {
             path: '/engagement-rings'
           }
         },
         {
-          title: 'Weddings and anniversaries',
-          subTitle: '',
-          bgImage: '/index-us/img-252.png',
+          title: this.$t(`${lang}.weddingAnd`),
+          subTitle: this.$t(`${lang}.anniversary`),
+          bgImage: '/index/recommend-category-2.png',
           to: {
             path: '/wedding-rings'
           }
         },
         {
-          title: 'Fashion jewelry',
+          title: this.$t(`${lang}.fineJewelry`),
           subTitle: '',
-          bgImage: '/index-us/img-253.png',
+          bgImage: '/index/recommend-category-3.png',
           to: {
             path: '/jewellery/all'
           }
+        }
+      ],
+      usRecommendCategories: [
+        {
+          // title: this.$t(`${lang}.engagementRings`),
+          title: 'Proposal and engagement',
+          subTitle: '',
+          bgImage: '/index-us/img-251.png',
+          to: 'https://us.bddco.com/wedding-rings/all'
+        },
+        {
+          title: 'Weddings and anniversaries',
+          subTitle: '',
+          bgImage: '/index-us/img-252.png',
+          to: 'https://us.bddco.com/wedding-rings/engagement-ring'
+        },
+        {
+          title: 'Fashion jewelry',
+          subTitle: '',
+          bgImage: '/index-us/img-253.png',
+          to: 'https://us.bddco.com/jewellery/earrings-stud'
         }
       ],
       hotProductItemWidth: 0,
@@ -625,46 +640,186 @@ export default {
       ],
       hotImgUrl: [
         {
-          'url': require('../static/index-us/ring-201.png'),
-          'id': 2,
-          'link': ''
-        },
-        {
           'url': require('../static/index-us/ring-202.png'),
-          'id': 2,
-          'link': ''
+          'id': 134,
+          'link': 'https://us.bddco.com/ring/wedding-rings/682?goodId=682&ringType=single',
+          'price': 0
         },
         {
           'url': require('../static/index-us/ring-203.png'),
-          'id': 2,
-          'link': ''
+          'id': 679,
+          'link': 'https://us.bddco.com/ring/wedding-rings/679?goodId=679&ringType=single',
+          'price': 0
         },
         {
           'url': require('../static/index-us/ring-204.png'),
-          'id': 2,
-          'link': ''
+          'id': 684,
+          'link': 'https://us.bddco.com/ring/wedding-rings/684?goodId=684&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-205.png'),
+          'id': 230,
+          'link': 'https://us.bddco.com/ring/wedding-rings/230?goodId=230&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-206.png'),
+          'id': 147,
+          'link': 'https://us.bddco.com/ring/wedding-rings/147?goodId=147&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-207.png'),
+          'id': 231,
+          'link': 'https://us.bddco.com/ring/wedding-rings/231?goodId=231&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-208.png'),
+          'id': 126,
+          'link': 'https://us.bddco.com/ring/wedding-rings/126?goodId=126&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-209.png'),
+          'id': 128,
+          'link': 'https://us.bddco.com/ring/wedding-rings/128?goodId=128&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-210.png'),
+          'id': 150,
+          'link': 'https://us.bddco.com/ring/wedding-rings/150?goodId=150&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-211.png'),
+          'id': 134,
+          'link': 'https://us.bddco.com/ring/wedding-rings/134?goodId=134&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-212.png'),
+          'id': 118,
+          'link': 'https://us.bddco.com/ring/wedding-rings/118?goodId=118&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-213.png'),
+          'id': 145,
+          'link': 'https://us.bddco.com/ring/wedding-rings/145?goodId=145&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-214.png'),
+          'id': 120,
+          'link': 'https://us.bddco.com/ring/wedding-rings/120?goodId=120&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-215.png'),
+          'id': 145,
+          'link': 'https://us.bddco.com/ring/wedding-rings/145?goodId=145&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-216.png'),
+          'id': 233,
+          'link': 'https://us.bddco.com/ring/wedding-rings/233?goodId=233&ringType=single',
+          'price': 0
         }
       ],
       newProducts: [
         {
           'url': require('../static/index-us/ring-301.png'),
-          'id': 2,
-          'link': ''
+          'id': 217,
+          'link': 'https://us.bddco.com/ring/wedding-rings/217?goodId=217&ringType=single',
+          'price': 0
         },
         {
           'url': require('../static/index-us/ring-302.png'),
-          'id': 2,
-          'link': ''
+          'id': 212,
+          'link': 'https://us.bddco.com/ring/wedding-rings/212?goodId=212&ringType=single',
+          'price': 0
         },
         {
           'url': require('../static/index-us/ring-303.png'),
-          'id': 2,
-          'link': ''
+          'id': 657,
+          'link': 'https://us.bddco.com/ring/wedding-rings/657?goodId=657&ringType=single',
+          'price': 0
         },
         {
           'url': require('../static/index-us/ring-304.png'),
-          'id': 2,
-          'link': ''
+          'id': 614,
+          'link': 'https://us.bddco.com/ring/wedding-rings/614?goodId=614&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-305.png'),
+          'id': 149,
+          'link': 'https://us.bddco.com/ring/wedding-rings/149?goodId=149&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-306.png'),
+          'id': 137,
+          'link': 'https://us.bddco.com/ring/wedding-rings/137?goodId=137&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-307.png'),
+          'id': 124,
+          'link': 'https://us.bddco.com/ring/wedding-rings/124?goodId=124&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-309.png'),
+          'id': 139,
+          'link': 'https://us.bddco.com/ring/wedding-rings/139?goodId=139&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-310.png'),
+          'id': 122,
+          'link': 'https://us.bddco.com/ring/wedding-rings/122?goodId=122&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-311.png'),
+          'id': 234,
+          'link': 'https://us.bddco.com/ring/wedding-rings/234?goodId=234&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-312.png'),
+          'id': 138,
+          'link': 'https://us.bddco.com/ring/wedding-rings/138?goodId=138&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-313.png'),
+          'id': 123,
+          'link': 'https://us.bddco.com/ring/wedding-rings/123?goodId=123&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-314.png'),
+          'id': 151,
+          'link': 'https://us.bddco.com/ring/wedding-rings/151?goodId=151&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-315.png'),
+          'id': 125,
+          'link': 'https://us.bddco.com/ring/wedding-rings/125?goodId=125&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/ring-316.png'),
+          'id': 213,
+          'link': 'https://us.bddco.com/ring/wedding-rings/213?goodId=213&ringType=single',
+          'price': 0
         }
       ],
       opacaty1: false,
@@ -738,6 +893,57 @@ export default {
       })
       .catch(err => {
         console.error(err)
+      })
+  },
+  created() {
+    var that = this;
+    var hot = [];
+    that.hotImgUrl.forEach((o, i) => {
+      hot[i] = o.id
+    })
+
+    this.$axios
+      .post('/web/goods/style/search', {
+        styleId: hot
+      })
+      .then(res => {
+        var data = res.data.data;
+
+        data.forEach((o, i) => {
+          that.hotImgUrl.forEach((p, j) => {
+            if(o.id == p.id){
+              that.hotImgUrl[j].price = o.salePrice
+            }
+          })
+        })
+        
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
+    var product = [];
+    that.newProducts.forEach((o, i) => {
+      product[i] = o.id
+    })
+
+    this.$axios
+      .post('/web/goods/style/search', {
+        styleId: product
+      })
+      .then(res => {
+        var data = res.data.data;
+
+        data.forEach((o, i) => {
+          that.newProducts.forEach((p, j) => {
+            if(o.id == p.id){
+              that.newProducts[j].price = o.salePrice
+            }
+          })
+        })
+      })
+      .catch(err => {
+        console.log(err)
       })
   },
   mounted () {
@@ -1503,7 +1709,15 @@ section {
       .product-image{
         width: 100%;
         overflow: hidden;
-        box-sizing: border-box;
+
+        img{
+          width: 90%;
+          height: 90%;
+          margin: 5% 0;
+        }
+      }
+      .product-image:hover img{
+        transform: scale(1.11);
       }
 
       .price{
@@ -1662,6 +1876,21 @@ section {
       opacity: 0;
       visibility: hidden;
       clear: both;
+    }
+
+    .mask-layer{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      // display: none;
+    }
+
+    .mask-layer:hover{
+      background-color: rgba(0, 0, 0, 0.3);
+      transition: background-color 0.4s ease-in;
     }
   }
 

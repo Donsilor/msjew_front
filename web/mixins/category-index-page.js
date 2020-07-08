@@ -6,7 +6,8 @@ export default {
       bannerHeight: 0,
       sImgHeight: 0,
       arrowsTop: 0,
-      sweetHeight: 0
+      sweetHeight: 0,
+      fontSize: 0
     }
   },
   computed: {
@@ -60,13 +61,17 @@ export default {
     resetBannerSize() {
       const _this = this;
       var bWidth = document.body.clientWidth;
-      if(bWidth < 1000){
-        bWidth = 1000
+      if(bWidth < 1366){
+        bWidth = 1366
       }
 
       this.sImgHeight = Math.round(bWidth * 0.2) + 70;
       this.arrowsTop = Math.round(bWidth * 0.1) - 20;
       this.sweetHeight = Math.round((bWidth / 1520) * 710);
+      this.fontSize = Math.round((bWidth / 1366) * 38);
+      if(this.fontSize > 48){
+        this.fontSize = 48
+      }
 
       if (_this.banner[0] && _this.banner[0].image) {
         const image = new Image()
