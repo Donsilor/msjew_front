@@ -4,9 +4,9 @@
     <div v-if="platform == 30" class="us-page">
       <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
-          <el-carousel-item v-for="(item, index) in usBanner" :key="index">
+          <el-carousel-item v-for="(item, index) in banner" :key="index">
             <!-- <a :href="item.addres || ''"> -->
-              <img class="banner-img" :src="item.url" alt="">
+              <img class="banner-img" :src="item.image" alt="">
             <!-- </a> -->
           </el-carousel-item>
         </el-carousel>
@@ -107,13 +107,33 @@
         <div class="section-title-line"></div>
 
         <div class="sweet-img">
-          <img src="" alt="">
+          <div class="img-l">
+            <img src="../static/index-us/sweet-401.png" alt="" class="img-a">
+          </div>
+
+          <div class="img-m">
+            <div class="img-m-t">
+              <div class="img-m-t-l"></div>
+              <div class="img-m-t-r"></div>
+            </div>
+            <div class="img-m-b"></div>
+          </div>
+
+          <div class="img-r">
+            <div class="img-r-t">
+              <img src="../static/index-us/sweet-406.png" alt="" class="img-b">
+            </div>
+            <div class="img-r-b">
+              <img src="../static/index-us/sweet-407.png" alt="" class="img-b">
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="waiting-you">
         <h1 class="section-title">
-          {{ $t(`${lang}.yourDiamondWaiting`) }}
+          YOUR DIAMOND IS WAITING HEAR...
+          <!-- {{ $t(`${lang}.yourDiamondWaiting`) }} -->
         </h1>
         <div class="section-title-line"></div>
         <div class="section-content">
@@ -445,9 +465,7 @@ import Interactive from '@/pageComponents/index/interactive.vue'
 const lang = 'index'
 export default {
   head () {
-    return this.seoInfo || {
-      
-    }
+    return this.seoInfo || {}
   },
   components: {
     Interactive
@@ -683,7 +701,6 @@ export default {
   async asyncData ({ $axios, route, store, app }) {
     const seoInfo = await app.$getSeoInfo(1)
     // console.log(seoInfo)
-
 
     return $axios({
       method: 'get',
@@ -1508,12 +1525,82 @@ section {
 
     .sweet-img{
       max-width: 1520px;
+      width: 80%;
+      height: 700px;
+      border: 1px solid red;
+      margin: 0 auto;
+      display: flex;
+      div{
+        overflow: hidden;
+        border: 1px solid red;
+      }
+
+      .img-l{
+        width: calc((100% - 40px) * 0.18);
+        height: 100%;
+        position: relative;
+      }
+      .img-m{
+        width: calc((100% - 40px) * 0.46);
+        margin: 0 20px;
+        display: flex;
+        flex-direction: column;
+
+        .img-m-t{
+          height: 54%;
+          margin-bottom: 20px;
+          width: 100%;
+          flex-grow: 0;
+        }
+
+        .img-m-b{
+          width: 100%;
+          height: 20%;
+          flex-grow: 1;
+        }
+      }
+      .img-r{
+        width: calc((100% - 40px) * 0.36);
+        height: 100%;
+
+        div{
+          width: 100%;
+          height: 50%;
+          position: relative;
+        }
+      }
+      
+
+      .img-a{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 100%;
+        width: auto;
+      }
+      .img-b{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        height: auto;
+      }
+    }
+    .sweet-img::before{
+      display: block;
+      content: '.';
+      height: 0;
+      opacity: 0;
+      visibility: hidden;
+      clear: both;
     }
   }
 
   .effects{
     transform: scale(0.96) translateY(-50%) !important;
-    background-color: #c9bdbf !important;
+    background-color: #e5d5c7 !important;
     border-radius: 3px !important;
   }
 }
