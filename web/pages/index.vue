@@ -1039,34 +1039,24 @@ section {
 }
 .banner {
   max-width: 1920px;
-  min-width: 1525px;
+  min-width: 1200px;
   margin: 0 auto;
-  width: 100%;
-  // border: 2px solid red;
 
-  // overflow-x: hidden;
-
-  .banner-box{
+  overflow-x: hidden;
+  .banner-item {
     width: 100%;
     height: 100%;
-    // border: 3px solid blue;
-  }
-  .banner-item {
-    // width: 100%;
-    // height: 100%;
-    // line-height: 0;
-    // font-size: 0;
-    // position: relative;
-    // overflow: hidden;
-    //  border: 3px solid red;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
 
     .banner-img {
-      // position: absolute;
-      // top: 50%;
-      // left: 50%;
-      // height: 100%;
-      // width: auto;
-      // transform: translate(-50%, 50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: 100%;
     }
   }
 }
@@ -1672,6 +1662,17 @@ section {
   .bg-color{
     background-color: #f6f1eb;
   }
+
+  .banner-item{
+    a{
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+  }
+
   .design,
   .recommend-category{
     background: none;
