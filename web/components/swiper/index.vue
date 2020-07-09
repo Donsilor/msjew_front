@@ -220,7 +220,7 @@ export default {
 
       if (this.swiperType == 2) {
         e.stopPropagation()
-        e.preventDefault()
+        // e.preventDefault()
       }
     },
     resetSlot() {

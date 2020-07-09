@@ -63,6 +63,8 @@ export default {
       var bWidth = document.body.clientWidth;
       if(bWidth < 1366){
         bWidth = 1366
+      }else if(bWidth > 1520){
+        bWidth = 1520
       }
 
       this.sImgHeight = Math.round(bWidth * 0.2) + 70;
