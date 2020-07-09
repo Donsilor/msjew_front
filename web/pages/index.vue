@@ -2,7 +2,7 @@
   <div class="page">
     <!-- 美国站点 -->
     <div v-if="platform == 30" class="us-page">
-      <section class="banner">
+      <section class="banner" :height="bannerHeight + 'px'">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
             <a :href="item.addres || ''" target="_blank">
@@ -21,23 +21,23 @@
           <div class="section-title-line"></div>
 
           <div class="us-host-box">
-            <div class="us-host-list" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
+            <div class="us-host-list" :style="{height:sImgHeight + 'px'}">
               <swiper ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
-                  <a :href="hot.link">
+                  <a :href="hot.link" target="_blank">
                     <div class="product-image" :height="sImgHeight + 'px'">
                       <img class="product-image" :src="hot.url"/>
                     </div>
                   
-                    <div class="price">USD {{hot.price}}</div>
+                    <div class="price">USD {{ formatMoney(hot.price) }}</div>
                   </a>
                 </div>
               </swiper>
             </div>
 
-            <div class="host-list-bar" :class="{'opacaty': opacaty1 == true}" @mouseover="mouseover(1)" @mouseout="mouseout()">
-              <div class="left-button" :class="{'effects': ifEffects == 1}" @click="nextHotSale(false, 1)" :style="{top:arrowsTop + 'px'}"></div>
-              <div class="right-button" :class="{'effects': ifEffects == 2}" @click="nextHotSale(true, 2)" :style="{top:arrowsTop + 'px'}"></div>
+            <div class="host-list-bar">
+              <div class="left-button" :class="{'effects': ifEffects == 1}" :style="{'top': arrowsTop + 'px'}" @click="nextHotSale(false, 1)"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 2}" :style="{'top': arrowsTop + 'px'}" @click="nextHotSale(true, 2)"></div>
             </div>
           </div>
         </section>
@@ -45,7 +45,7 @@
         <section class="recommend-category">
           <div class="categories">
             <div v-for="(category, index) in usRecommendCategories" :key="index" class="category-item">
-              <a :href="category.to">
+              <a :href="category.to" target="_blank">
                 <div class="bg">
                   <img :src="category.bgImage" />
                   <div class="hover-cover"></div>
@@ -71,23 +71,23 @@
           <div class="section-title-line"></div>
 
           <div class="new-products-box">
-            <div class="new-products" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
+            <div class="new-products" :style="{height:sImgHeight + 'px'}">
               <swiper ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(item, n) in newProducts" :key="n" class="host-item">
-                  <a :href="item.link">
+                  <a :href="item.link" target="_blank">
                     <div class="product-image">
                       <img class="product-image" :src="item.url" />
                     </div>
 
-                    <div class="price">USD {{item.price}}</div>
+                    <div class="price">USD {{ formatMoney(item.price) }}</div>
                   </a>
                 </div>
               </swiper>
             </div>
 
-            <div class="host-list-bar" :class="{'opacaty': opacaty2 == true}" @mouseover="mouseover(2)" @mouseout="mouseout()">
-              <div class="left-button" :class="{'effects': ifEffects == 3}" @click="nextNewProducts(false, 3)" :style="{top:arrowsTop + 'px'}"></div>
-              <div class="right-button" :class="{'effects': ifEffects == 4}" @click="nextNewProducts(true, 4)" :style="{top:arrowsTop + 'px'}"></div>
+            <div class="host-list-bar">
+              <div class="left-button" :class="{'effects': ifEffects == 3}" :style="{top:arrowsTop + 'px'}" @click="nextNewProducts(false, 3)"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 4}" :style="{top:arrowsTop + 'px'}" @click="nextNewProducts(true, 4)"></div>
             </div>
           </div>
           
@@ -101,7 +101,7 @@
         </h1>
         <div class="section-title-line"></div>
 
-        <div class="sweet-img" :style="{'height': sweetHeight + 'px'}">
+        <div class="sweet-img">
           <div class="img-l sweet-img-box">
             <img src="../static/index-us/sweet-401.png" alt="" class="img-a">
             <div class="mask-layer"></div>
@@ -120,11 +120,11 @@
             </div>
             <div class="img-m-b">
               <div class="img-m-b-l sweet-img-box">
-                <img src="../static/index-us/sweet-404.png" alt="" class="img-a">
+                <img src="../static/index-us/sweet-405.png" alt="" class="img-a">
                 <div class="mask-layer"></div>
               </div>
               <div class="img-m-b-r sweet-img-box">
-                <img src="../static/index-us/sweet-405.png" alt="" class="img-a">
+                <img src="../static/index-us/sweet-406.png" alt="" class="img-a">
                 <div class="mask-layer"></div>
               </div>
             </div>
@@ -132,7 +132,7 @@
 
           <div class="img-r">
             <div class="img-r-t sweet-img-box">
-              <img src="../static/index-us/sweet-406.png" alt="" class="img-b">
+              <img src="../static/index-us/sweet-404.png" alt="" class="img-b">
               <div class="mask-layer"></div>
             </div>
             <div class="img-r-b sweet-img-box">
@@ -191,7 +191,7 @@
     </div>
 
     <!-- 非美国站点 -->
-    <div v-else>
+    <div v-if="platform == 10 || platform == 20">
       <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
@@ -632,7 +632,7 @@ export default {
       ],
       diamondItemWidth: 0,
       activeDiamondIndex: 0,
-      platform: 10,
+      platform: 0,
       usBanner:[
         {
           'url': require('../static/index-us/banner.png')
@@ -822,8 +822,6 @@ export default {
           'price': 0
         }
       ],
-      opacaty1: false,
-      opacaty2: false,
       ifEffects: 0
     }
   },
@@ -987,19 +985,6 @@ export default {
       setTimeout(() => {
         this.ifEffects = 0
       },200)
-    },
-    mouseover(a) {
-      if(a == 1){
-        this.opacaty1 = true
-        this.opacaty2 = false
-      }else if(a == 2){
-        this.opacaty1 = false
-        this.opacaty2 = true
-      }
-    },
-    mouseout() {
-      this.opacaty1 = false
-      this.opacaty2 = false
     }
   }
 }
@@ -1664,13 +1649,17 @@ section {
     background-color: #f6f1eb;
   }
 
-  .banner-item{
-    a{
-      display: inline-block;
-      width: 100%;
-      height: 100%;
-      position: relative;
-      z-index: 2;
+  .banner{
+    height: 640px;
+    
+    .banner-item{
+      a{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        z-index: 2;
+      }
     }
   }
 
@@ -1736,12 +1725,12 @@ section {
     width: 110%;
     height: 100%;
     z-index: -1;
-    opacity: 0.2;
+    box-sizing: border-box;
 
     .left-button{
       position: absolute;
       left: 0;
-      top: 50%;
+      top: 30%;
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
@@ -1753,7 +1742,7 @@ section {
     .right-button{
       position: absolute;
       right: 0;
-      top: 50%;
+      top: 30%;
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
@@ -1763,125 +1752,192 @@ section {
     }
   }
 
-  .host-list-bar.opacaty{
-    opacity: 1;
-  }
-
   .sweet{
     padding: 100px 0;
     box-sizing: border-box;
     background-color: #fbf8f3;
 
+    // .sweet-img{
+    //   max-width: 1520px;
+    //   width: 80%;
+    //   height: 700px;
+    //   margin: 0 auto;
+    //   display: flex;
+    //   div{
+    //     overflow: hidden;
+    //   }
+
+    //   .img-l{
+    //     width: calc((100% - 40px) * 0.18);
+    //     height: 100%;
+    //     position: relative;
+    //   }
+
+    //   .img-m{
+    //     width: calc((100% - 40px) * 0.46);
+    //     margin: 0 20px;
+    //     display: flex;
+    //     flex-direction: column;
+
+    //     .img-m-t{
+    //       height: 54%;
+    //       margin-bottom: 20px;
+    //       width: 100%;
+    //       flex-shrink: 0;
+    //       display: flex;
+
+    //       .img-m-t-l{
+    //         width: 50%;
+    //         height: 100%;
+    //         margin-right: 20px;
+    //         position: relative;
+    //       }
+    //       .img-m-t-r{
+    //         width: 50%;
+    //         height: 100%;
+    //         position: relative;
+    //       }
+    //     }
+
+    //     .img-m-b{
+    //       width: 100%;
+    //       height: 20%;
+    //       display: flex;
+    //       flex-grow: 1;
+
+    //       .img-m-b-l{
+    //         width: 54%;
+    //         height: 100%;
+    //         margin-right: 20px;
+    //         position: relative;
+    //         flex-shrink: 0;
+    //       }
+    //       .img-m-b-r{
+    //         width: 50%;
+    //         height: 100%;
+    //         position: relative;
+    //       }
+    //     }
+    //   }
+    //   .img-r{
+    //     width: calc((100% - 40px) * 0.36);
+    //     height: 100%;
+    //     display: flex;
+    //     flex-direction: column;
+
+    //     .img-r-t{
+    //       width: 100%;
+    //       height: 40%;
+    //       position: relative;
+    //       margin-bottom: 20px;
+    //       flex-shrink: 0;
+    //     }
+    //     .img-r-b{
+    //       width: 100%;
+    //       height: 60%;
+    //       position: relative;
+    //     }
+    //   }
+      
+
+    //   .img-a{
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     height: 100%;
+    //     width: auto;
+    //   }
+    //   .img-b{
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     width: 100%;
+    //     height: auto;
+    //   }
+    // }
+
     .sweet-img{
-      max-width: 1520px;
-      width: 80%;
-      height: 700px;
-      margin: 0 auto;
       display: flex;
+      width: 1520px;
+      height: 706px;
+      margin: 0 auto;
+
       div{
         overflow: hidden;
+        position: relative;
       }
 
       .img-l{
-        width: calc((100% - 40px) * 0.18);
+        width: 276px;
         height: 100%;
-        position: relative;
       }
+
       .img-m{
-        width: calc((100% - 40px) * 0.46);
-        margin: 0 20px;
         display: flex;
         flex-direction: column;
+        width: 674px;
+        height: 100%;
+        margin: 0 20px;
+
 
         .img-m-t{
-          height: 54%;
-          margin-bottom: 20px;
-          width: 100%;
-          flex-shrink: 0;
           display: flex;
+          height: 378px;
+          margin-bottom: 20px;
 
           .img-m-t-l{
-            width: 50%;
+            width: 330px;
             height: 100%;
             margin-right: 20px;
-            position: relative;
           }
           .img-m-t-r{
-            width: 50%;
+            width: 324px;
             height: 100%;
-            position: relative;
           }
         }
-
         .img-m-b{
-          width: 100%;
-          height: 20%;
           display: flex;
-          flex-grow: 1;
+          height: 308px;
 
           .img-m-b-l{
-            width: 54%;
+            width: 357px;
             height: 100%;
             margin-right: 20px;
-            position: relative;
-            flex-shrink: 0;
           }
           .img-m-b-r{
-            width: 50%;
+            width: 297px;
             height: 100%;
-            position: relative;
           }
         }
+
       }
+
       .img-r{
-        width: calc((100% - 40px) * 0.36);
+        width: 530px;
         height: 100%;
         display: flex;
         flex-direction: column;
 
         .img-r-t{
-          width: 100%;
-          height: 40%;
-          position: relative;
+          height: 280px;
           margin-bottom: 20px;
-          flex-shrink: 0;
         }
-        .img-r-b{
-          width: 100%;
-          height: 60%;
-          position: relative;
-        }
-      }
-      
 
-      .img-a{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        height: 100%;
-        width: auto;
+        .img-r-b{
+          height: 406px;
+        }
       }
-      .img-b{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+
+      img{
         width: 100%;
-        height: auto;
+        height: 100%;
       }
-    }
-    .sweet-img::before{
-      display: block;
-      content: '.';
-      height: 0;
-      opacity: 0;
-      visibility: hidden;
-      clear: both;
     }
 
     .mask-layer{
-      position: absolute;
+      position: absolute !important;
       top: 0;
       left: 0;
       width: 100%;
@@ -1892,7 +1948,7 @@ section {
 
     .mask-layer:hover{
       background-color: rgba(0, 0, 0, 0.3);
-      transition: background-color 0.4s ease-in;
+      transition: background-color 0.3s ease-in;
     }
   }
 
