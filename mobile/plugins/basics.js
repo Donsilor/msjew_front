@@ -18,7 +18,7 @@ export default ({ req, app, store, $axios }, inject) => {
             coin = 'CNY'
             areaId = 1
             platform = 21 //移动-大陆
-        } else if ((/^(us|us-bdd|wap-us)\./is).test(host)) {
+        } else if ((/^(us|us-bdd|wap-us|wap-us-bdd)\./is).test(host)) {
             language = 'en_US'
             coin = 'USD'
             areaId = 99
@@ -60,7 +60,7 @@ export default ({ req, app, store, $axios }, inject) => {
             }
         })
             .then(data => {
-                console.log("tdk",data)
+                // console.log("tdk",data)
                 if(data){
                     return {
                         title: data.meta_title,
