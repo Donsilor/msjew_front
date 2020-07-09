@@ -12,7 +12,13 @@ export default {
     list
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo('Diamond')
+    // console.log("sssss",route)
+    let seoInfo = await app.$getSeoInfo('diamond')
+    if(route.query.step == 1){
+      seoInfo = await app.$getSeoInfo('diamond')
+    }
+    
+
     return $axios({
       method: 'get',
       url: '/web/goods/style/web-site',

@@ -219,7 +219,20 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo('Jewellery')
+    let seoInfo = await app.$getSeoInfo('Jewellery')
+    if(route.params.defaultCondition == 'necklaces'){
+      seoInfo = await app.$getSeoInfo('necklaces')
+    }
+    if(route.params.defaultCondition =='pendants'){
+      seoInfo = await app.$getSeoInfo('pendants')
+    }
+    if(route.params.defaultCondition =='bracelets'){
+      seoInfo = await app.$getSeoInfo('bracelets')
+    }
+    if(route.params.defaultCondition =='bangles'){
+      seoInfo = await app.$getSeoInfo('bangles')
+    }
+    // console.log("sssss",route)
     return {
       seoInfo
     }

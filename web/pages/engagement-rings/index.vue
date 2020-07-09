@@ -259,7 +259,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo('EngagementRing')
+    const seoInfo = await app.$getSeoInfo('engagementRing')
     return $axios({
       method: 'get',
       url: '/web/goods/style/web-site',

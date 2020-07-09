@@ -514,7 +514,8 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo('Diamond')
+    // console.log("sssss",route)
+    const seoInfo = await app.$getSeoInfo('diamond')
 
     return $axios({
       method: 'get',
