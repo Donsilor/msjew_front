@@ -22,17 +22,17 @@
 
           <div class="us-host-box">
             <div class="us-host-list" :style="{height:sImgHeight + 'px'}">
-              <swiper ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+              <swiper2 ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
-                  <div class="item-box">
+                  <a :href="hot.link" target="_blank" class="item-box">
                     <div class="product-image" :height="sImgHeight + 'px'">
                       <img class="product-image" :src="hot.url"/>
                     </div>
                   
                     <div class="price">USD {{ formatMoney(hot.price) }}</div>
-                  </div>
+                  </a>
                 </div>
-              </swiper>
+              </swiper2>
             </div>
 
             <div class="host-list-bar">
@@ -72,9 +72,9 @@
 
           <div class="new-products-box">
             <div class="new-products" :style="{height:sImgHeight + 'px'}">
-              <swiper ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+              <swiper2 ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(item, n) in newProducts" :key="n" class="host-item">
-                  <a class="item-box" :href="item.link" target="_blank">
+                  <a :href="item.link" target="_blank" class="item-box">
                     <div class="product-image">
                       <img class="product-image" :src="item.url" />
                     </div>
@@ -82,7 +82,7 @@
                     <div class="price">USD {{ formatMoney(item.price) }}</div>
                   </a>
                 </div>
-              </swiper>
+              </swiper2>
             </div>
 
             <div class="host-list-bar">
@@ -984,6 +984,9 @@ export default {
       setTimeout(() => {
         this.ifEffects = 0
       },200)
+    },
+    openPage(w) {
+      console.log(w)
     }
   }
 }

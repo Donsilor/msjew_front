@@ -3,9 +3,6 @@
     <div
       ref="swiper-content"
       class="content"
-      @touchstart.capture.prevent.stop="touchStart"
-      @mousedown.capture.prevent.stop="mouseDown"
-      @click.capture="emitClick"
     >
       <template v-if="slotFinish">
         <div
@@ -16,7 +13,7 @@
             { 'active-swiper-content-item': active === n }
           ]"
           :style="getPosition(n)"
-          @click="setActive(n)"
+          @click="setActive(n,$event)"
         >
           <!--          <span>{{ n }}</span>-->
           <slot :name="`content-${n}`">
@@ -213,10 +210,21 @@ export default {
   },
   methods: {
     emitClick(e) {
+      // e = window.event || e
+      // if(this.swiperType == 2){
+      //   if(window){
+      //     e.cancelBubble = false
+      //     console.log(7788)
+      //   }else{
+      //     e.stopPropagation()
+      //   }
+      // }
+
       if (this.isDragging) {
         e.stopPropagation()
         e.preventDefault()
       }
+
     },
     resetSlot() {
       const _this = this
@@ -240,12 +248,20 @@ export default {
       const _this = this
       clearInterval(_this.autoInterval)
     },
-    setActive(num) {
+    setActive(num,k) {
       const _this = this
       if (_this.active === num) {
         return
       }
-      _this.active = num
+      
+      if(this.swiperType !== 2){
+        _this.active = num
+      }else{
+        if(!k){
+          _this.active = num
+        }
+      }
+
       _this.changeEmit()
     },
     goNext(type) {
@@ -481,10 +497,10 @@ export default {
       return int
     },
     changeEmit() {
-      this.$emit('change', {
-        index: this.activeIndex,
-        swiperIndex: this.active
-      })
+      // this.$emit('change', {
+        // index: this.activeIndex,
+        // swiperIndex: this.active
+      // })
     }
   }
 }
