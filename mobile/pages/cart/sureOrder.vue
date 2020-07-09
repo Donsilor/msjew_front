@@ -1411,7 +1411,7 @@ export default {
             url: `/web/member/order-tourist/create`,
             data: {
               goodsCartList:data,
-              invoice:this.$route.params.invoice,
+              invoice: info,
               tradeType:'wap',
               payType: pay,
               coinType:this.$store.state.coin,
