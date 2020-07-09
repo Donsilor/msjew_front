@@ -68,8 +68,8 @@
       <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
 
       <div class="discount-price" v-else>
-        <div class="old-price">{{ lang.oddPrice }} {{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
-        <div class="new-price">{{ lang.newPrice }} {{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
+        <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
+        <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
       </div>
       <div class="promise-box">
         <!-- <div
@@ -91,6 +91,8 @@
               <span class="text">{{ lang.discountsActive }}：</span>
               <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             </div>
+
+            <div class="time">{{ lang.activityTime}}：{{activeTime}}</div>
           </div>
           
           <div class="discoupon-d" v-if="goodInfo.coupon.money">
@@ -429,7 +431,7 @@ export default {
   data() {
     return {
       ifShowCoupon: false,
-      language: this.$store.state.language
+      language: this.$store.state.language,
     }
   },
   mixins: [Mx],
@@ -442,6 +444,11 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    },
+    activeTime(){
+      if(this.goodInfo.coupon.hasOwnProperty('discount')){
+        return this.changeTime(this.goodInfo.coupon.discount.end_time) 
+      }
     }
   },
   mounted() {
@@ -466,6 +473,9 @@ export default {
 <style scoped lang="less">
 .diamond-component {
   position: relative;
+  .time {
+    color: #b49785;
+  }
   .details-component(100%, 63px);
   .title {
     .gia-certificate {

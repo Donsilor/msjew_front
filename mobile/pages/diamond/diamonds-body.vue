@@ -68,8 +68,8 @@
     <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
 
     <div class="discount-price" v-else>
-      <div class="old-price">{{ lang.oddPrice }} {{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
-      <div class="new-price">{{ lang.newPrice }} {{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
+      <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
+      <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
     </div>
     <!-- <div class="price">{{ goodInfo.coinType }} {{ formatNumber(showPi) }}</div> -->
     <div class="promise-box">
@@ -93,6 +93,8 @@
             <span class="text">{{ lang.discountsActive }}：</span>
             <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
           </div>
+
+          <div class="time">{{ lang.activityTime}}：{{this.goodInfo.coupon.discount.discount.end_time}}</div>
         </div>
         
         <div class="discoupon-d" v-if="goodInfo.coupon.money">
@@ -406,7 +408,8 @@ export default {
         require('../../static/marriage-ring/icon-03.png'),
         require('../../static/marriage-ring/icon-04.png')
       ],
-      ifShowCoupon: false
+      ifShowCoupon: false,
+      activeTime:''
     }
   },
   computed: {
@@ -415,6 +418,13 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    }
+  },
+  mounted(){
+    console.log(888888888,this.goodInfo)
+    const _this = this
+    if(this.goodInfo.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)
     }
   },
   methods:{
@@ -436,6 +446,9 @@ export default {
 <style scoped lang="less">
 .diamond-component {
   position: relative;
+  .time {
+    color: #b49785;
+  }
   .details-component(100%, 63px);
   .title {
     .gia-certificate {
