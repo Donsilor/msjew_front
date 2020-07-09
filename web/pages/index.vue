@@ -872,6 +872,7 @@ export default {
     }
   },
   async asyncData ({ $axios, route, store, app }) {
+    // console.log("sssss",route)
     const seoInfo = await app.$getSeoInfo('index')
     // console.log(seoInfo)
 

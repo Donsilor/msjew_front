@@ -16,6 +16,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
+    // console.log("sssss",route)
     const seoInfo = await app.$getSeoInfo('Rings')
     return $axios({
       method: 'get',

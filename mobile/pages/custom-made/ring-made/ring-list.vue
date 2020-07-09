@@ -16,7 +16,7 @@ export default {
     DataList
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo('Rings')
+    const seoInfo = await app.$getSeoInfo('settingRings')
     // return
     return $axios({
       method: 'get',

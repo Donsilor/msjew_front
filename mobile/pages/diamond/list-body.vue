@@ -181,7 +181,7 @@ export default {
   name: 'List',
   mixins: [Mixin, List, GoodListProps],
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo('Diamond')
+    const seoInfo = await app.$getSeoInfo('diamond')
 
     return $axios({
       method: 'get',
