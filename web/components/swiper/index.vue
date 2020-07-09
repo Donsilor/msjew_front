@@ -217,6 +217,11 @@ export default {
         e.stopPropagation()
         e.preventDefault()
       }
+
+      if (this.swiperType == 2) {
+        e.stopPropagation()
+        e.preventDefault()
+      }
     },
     resetSlot() {
       const _this = this
@@ -241,6 +246,9 @@ export default {
       clearInterval(_this.autoInterval)
     },
     setActive(num) {
+      // if(!num && this.swiperType == 2){
+      //   return
+      // }
       const _this = this
       if (_this.active === num) {
         return
