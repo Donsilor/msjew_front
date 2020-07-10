@@ -115,18 +115,18 @@ export default {
   async asyncData({ $axios, route, store, app }) {
     //  console.log("sssss",route)
     let seoInfo = await app.$getSeoInfo('Rings')
-    if(route.params.defaultCondition == 'engagement-ring'){
-      seoInfo = await app.$getSeoInfo('engagementRingList')
-    }
-    if(route.params.defaultCondition =='wedding-ring'){
-      seoInfo = await app.$getSeoInfo('weddingRingList')
-    }
-    if(route.params.defaultCondition =='ring'){
-      seoInfo = await app.$getSeoInfo('ringList')
-    }
-    if(route.params.defaultCondition =='fashion-ring'){
-      seoInfo = await app.$getSeoInfo('fashionRingList')
-    }
+    // if(route.params.defaultCondition == 'engagement-ring'){
+    //   seoInfo = await app.$getSeoInfo('engagementRingList')
+    // }
+    // if(route.params.defaultCondition =='wedding-ring'){
+    //   seoInfo = await app.$getSeoInfo('weddingRingList')
+    // }
+    // if(route.params.defaultCondition =='ring'){
+    //   seoInfo = await app.$getSeoInfo('ringList')
+    // }
+    // if(route.params.defaultCondition =='fashion-ring'){
+    //   seoInfo = await app.$getSeoInfo('fashionRingList')
+    // }
     
     return $axios({
       method: 'get',
