@@ -1,9 +1,31 @@
 <template>
   <div class="page">
-    <!-- <tip-message></tip-message> -->
-    <section class="banner">
-      <template v-if="banner.length > 1">
-        <swiper :indicator="true" :auto="true" :duration="5000">
+    <!-- 美国站点 -->
+    <div v-if="platform == 31" class="us-page">
+      <section class="banner">
+        <template v-if="banner.length > 1">
+          <swiper :indicator="true" :auto="true" :duration="5000">
+            <template v-for="(each, n) in banner">
+              <template v-if="each.url">
+                <a
+                  :key="n"
+                  :href="each.url"
+                  :target="each.openType === 1 ? '_blank' : '_self'"
+                >
+                  <div :key="n" class="swiper-item">
+                    <img :src="each.image" @error="imageError" />
+                  </div>
+                </a>
+              </template>
+              <template v-else>
+                <div :key="n" class="swiper-item">
+                  <img :src="each.image" @error="imageError" />
+                </div>
+              </template>
+            </template>
+          </swiper>
+        </template>
+        <template v-else>
           <template v-for="(each, n) in banner">
             <template v-if="each.url">
               <a
@@ -22,138 +44,201 @@
               </div>
             </template>
           </template>
-        </swiper>
-      </template>
-      <template v-else>
-        <template v-for="(each, n) in banner">
-          <template v-if="each.url">
-            <a
-              :key="n"
-              :href="each.url"
-              :target="each.openType === 1 ? '_blank' : '_self'"
-            >
+        </template>
+      </section>
+
+      <div class="bg">
+        <section class="hot" style="height:200px;border:1px solid red">
+        </section>
+
+        <section class="show-box">
+          <a href="">
+            <img src="../static/index-us/img-01.png" alt="">
+          </a>
+          <a href="">
+            <img src="../static/index-us/img-02.png" alt="">
+          </a>
+          <a href="">
+            <img src="../static/index-us/img-03.png" alt="">
+          </a>
+        </section>
+
+        <section class="new-products">
+
+        </section>
+
+      </div>
+
+      <section class="sweet-show">
+        <div class="tit-box">SWEET SHOW
+          <div class="line"></div>
+        </div>
+
+        <div class="sweet-box">
+          <div class="sweet-l">
+            <img src="../static/index-us/img-1005.png" alt="">
+          </div>
+          <div class="sweet-r">
+            <div class="sweet-r-t">
+              <div class="sweet-r-t-l">
+                <img src="../static/index-us/img-1006.png" alt="">
+              </div>
+              <div class="sweet-r-t-r">
+                <img src="../static/index-us/img-1007.png" alt="">
+              </div>
+            </div>
+            <div class="sweet-r-b">
+              <div class="sweet-r-b-l">
+                <img src="../static/index-us/img-1008.png" alt="">
+              </div>
+              <div class="sweet-r-b-r">
+                <img src="../static/index-us/img-1009.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sweet-6">
+          <img src="../static/index-us/img-1010.png" alt="">
+        </div>
+      </section>
+    </div>
+
+    <!-- 非美国站点 -->
+    <div v-else>
+      <!-- <tip-message></tip-message> -->
+      <section class="banner">
+        <template v-if="banner.length > 1">
+          <swiper :indicator="true" :auto="true" :duration="5000">
+            <template v-for="(each, n) in banner">
+              <template v-if="each.url">
+                <a
+                  :key="n"
+                  :href="each.url"
+                  :target="each.openType === 1 ? '_blank' : '_self'"
+                >
+                  <div :key="n" class="swiper-item">
+                    <img :src="each.image" @error="imageError" />
+                  </div>
+                </a>
+              </template>
+              <template v-else>
+                <div :key="n" class="swiper-item">
+                  <img :src="each.image" @error="imageError" />
+                </div>
+              </template>
+            </template>
+          </swiper>
+        </template>
+        <template v-else>
+          <template v-for="(each, n) in banner">
+            <template v-if="each.url">
+              <a
+                :key="n"
+                :href="each.url"
+                :target="each.openType === 1 ? '_blank' : '_self'"
+              >
+                <div :key="n" class="swiper-item">
+                  <img :src="each.image" @error="imageError" />
+                </div>
+              </a>
+            </template>
+            <template v-else>
               <div :key="n" class="swiper-item">
                 <img :src="each.image" @error="imageError" />
               </div>
-            </a>
-          </template>
-          <template v-else>
-            <div :key="n" class="swiper-item">
-              <img :src="each.image" @error="imageError" />
-            </div>
+            </template>
           </template>
         </template>
-      </template>
-    </section>
-    <section class="customize">
-      <h1 class="title margin-bottom-40">{{ lang.diySubTitle }}</h1>
-      <!--      <h2 class="sub-title">{{ lang.diySubTitle }}</h2>-->
-      <div class="exhibition">
-        <img
-          v-show="exhibitionImageStatus"
-          ref="exhibition-image"
-          src="/index/exhibition.png"
-          @click="clickVideoCover"
-        />
-        <video
-          v-show="!exhibitionImageStatus"
-          ref="exhibition-video"
-          src="/index/exhibition.mp4"
-          webkit-playsinline
-          playsinline
-          x5-playsinline
-          @click="clickVideo"
-          @ended="videoEnded"
-        ></video>
-      </div>
-      <div class="button-group">
-        <button @click="goToMade(2)">{{ lang.startFromRing }}</button>
-        <span>OR</span>
-        <button @click="goToMade(1)">{{ lang.startFromDiamond }}</button>
-      </div>
-      <!--      <div class="tips">-->
-      <!--        <h2>{{ lang.syiwo }}</h2>-->
-      <!--        <h3 @click="goToMade(2)">{{ lang.ig }}</h3>-->
-      <!--      </div>-->
-    </section>
-    <section class="categories">
-      <div
-        v-for="(each, n) in categories"
-        :key="n"
-        :class="['category', `${each.textAlign}-title`]"
-        @click="routerTo(each.routerName, each.query)"
-      >
-        <img class="category-bg" :src="each.bg" />
-        <img class="category-image" :src="each.image" />
-        <div class="info">
-          <div class="title">{{ each.title }}</div>
-          <div class="sub-title">{{ each.subTitle }}</div>
+      </section>
+      <section class="customize">
+        <h1 class="title margin-bottom-40">{{ lang.diySubTitle }}</h1>
+        <!--      <h2 class="sub-title">{{ lang.diySubTitle }}</h2>-->
+        <div class="exhibition">
+          <img
+            v-show="exhibitionImageStatus"
+            ref="exhibition-image"
+            src="/index/exhibition.png"
+            @click="clickVideoCover"
+          />
+          <video
+            v-show="!exhibitionImageStatus"
+            ref="exhibition-video"
+            src="/index/exhibition.mp4"
+            webkit-playsinline
+            playsinline
+            x5-playsinline
+            @click="clickVideo"
+            @ended="videoEnded"
+          ></video>
         </div>
-      </div>
-    </section>
-    <section class="recommend">
-      <h1 class="title">{{ cardsInfo.moduleTitle }}</h1>
-      <!--      <h1 class="title">{{ lang.fineJewelry }}</h1>-->
-      <!--      <h2 class="sub-title">{{ lang.recommend }}</h2>-->
-      <h3 class="title-line"></h3>
-      <div class="cards">
-        <swiper
-          :item-width="77.3"
-          :indicator="false"
-          :scale="true"
-          :auto="true"
-          :duration="5000"
-          @change="changeCard"
+        <div class="button-group">
+          <button @click="goToMade(2)">{{ lang.startFromRing }}</button>
+          <span>OR</span>
+          <button @click="goToMade(1)">{{ lang.startFromDiamond }}</button>
+        </div>
+        <!--      <div class="tips">-->
+        <!--        <h2>{{ lang.syiwo }}</h2>-->
+        <!--        <h3 @click="goToMade(2)">{{ lang.ig }}</h3>-->
+        <!--      </div>-->
+      </section>
+      <section class="categories">
+        <div
+          v-for="(each, n) in categories"
+          :key="n"
+          :class="['category', `${each.textAlign}-title`]"
+          @click="routerTo(each.routerName, each.query)"
         >
-          <div
+          <img class="category-bg" :src="each.bg" />
+          <img class="category-image" :src="each.image" />
+          <div class="info">
+            <div class="title">{{ each.title }}</div>
+            <div class="sub-title">{{ each.subTitle }}</div>
+          </div>
+        </div>
+      </section>
+      <section class="recommend">
+        <h1 class="title">{{ cardsInfo.moduleTitle }}</h1>
+        <!--      <h1 class="title">{{ lang.fineJewelry }}</h1>-->
+        <!--      <h2 class="sub-title">{{ lang.recommend }}</h2>-->
+        <h3 class="title-line"></h3>
+        <div class="cards">
+          <swiper
+            :item-width="77.3"
+            :indicator="false"
+            :scale="true"
+            :auto="true"
+            :duration="5000"
+            @change="changeCard"
+          >
+            <div
+              v-for="(each, n) in cards"
+              :key="n"
+              class="recommend-item"
+              @click="toCardDetail(each)"
+            >
+              <div class="product-image">
+                <img
+                  :src="imageStrToArray(each.goodsImages)[0]"
+                  @error="imageError"
+                />
+              </div>
+              <div class="product-price">
+                <span>{{ formatCoin(each.coinType)}}</span>
+                <span>{{ formatNumber(each.salePrice) }}</span>
+              </div>
+              <div class="product-name ow-h1">{{ each.goodsName }}</div>
+              <div class="more">
+                <span>{{ lang.checkDetail }}</span>
+              </div>
+            </div>
+          </swiper>
+        </div>
+        <div class="indicator">
+          <span
             v-for="(each, n) in cards"
             :key="n"
-            class="recommend-item"
-            @click="toCardDetail(each)"
-          >
-            <div class="product-image">
-              <img
-                :src="imageStrToArray(each.goodsImages)[0]"
-                @error="imageError"
-              />
-            </div>
-            <div class="product-price">
-              <span>{{ formatCoin(each.coinType)}}</span>
-              <span>{{ formatNumber(each.salePrice) }}</span>
-            </div>
-            <div class="product-name ow-h1">{{ each.goodsName }}</div>
-            <div class="more">
-              <span>{{ lang.checkDetail }}</span>
-            </div>
-          </div>
-        </swiper>
-      </div>
-      <div class="indicator">
-        <span
-          v-for="(each, n) in cards"
-          :key="n"
-          :class="['indicator-item', { active: activeCard === n }]"
-        ></span>
-      </div>
-      <div class="others">
-        <button class="see-more" @click="moreCard">{{ lang.seeMore }}</button>
-      </div>
-    </section>
-    <section class="contact-us">
-      <h1 class="title">{{ lang.callUs }}</h1>
-      <div class="map" v-show="this.$store.state.platform == 11">
-        <img src="/index/map.png" />
-      </div>
-      <div class="info">
-        <div class="info-row" v-show="this.$store.state.platform !== 21">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.store }}</span>
-          <span class="row-text">{{ lang.storeName }}</span>
-        </div>
-        <div class="info-row" v-show="this.$store.state.platform == 21">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.address }}</span>
-          <span class="row-text">{{ lang.addressDetail }}</span>
+            :class="['indicator-item', { active: activeCard === n }]"
+          ></span>
         </div>
         <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
           <span class="line"></span>
@@ -177,31 +262,72 @@
             </a>
           </span>
         </div>
-        <div class="info-row">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.email }}</span>
-          <span class="row-text">
-            <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">e-service@bddco.com</a>
-            <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
-          </span>
-          <span class="column-line"></span>
-          <span class="row-icon">
-            <a v-if="this.$store.state.platform == 21" href="mailto:e-service@bddco.com">
-              <i class="iconfont iconyouxiang"></i>
-            </a>
-            <a v-else href="mailto:service@bddco.com">
-              <i class="iconfont iconyouxiang"></i>
-            </a>
-          </span>
+      </section>
+      <section class="contact-us">
+        <h1 class="title">{{ lang.callUs }}</h1>
+        <div class="map" v-show="this.$store.state.platform == 11">
+          <img src="/index/map.png" />
         </div>
-        <div class="info-row" v-show="this.$store.state.platform !== 21">
-          <nuxt-link :to="{ path: '/contact' }" >
-            <button class="contact-button">{{ lang.callUs }}</button>
-          </nuxt-link>
+        <div class="info">
+          <div class="info-row" v-show="this.$store.state.platform !== 21">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.store }}</span>
+            <span class="row-text">{{ lang.storeName }}</span>
+          </div>
+          <div class="info-row" v-show="this.$store.state.platform == 21">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.address }}</span>
+            <span class="row-text">{{ lang.addressDetail }}</span>
+          </div>
+          <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.address }}</span>
+            <span class="row-text">{{ lang.addressDetailUs }}</span>
+          </div> -->
+          <div class="info-row">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.tel }}</span>
+            <span class="row-text">
+              <a v-if="this.$store.state.platform === 21" href="tel:+852 2165 3905">0755 25169121</a>
+              <a v-else href="tel:+852 2165 3905">+852 2165 3905</a>
+            </span>
+            <span class="column-line"></span>
+            <span class="row-icon">
+              <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+                <i class="iconfont iconphone"></i>
+              </a>
+              <a v-else href="tel:+852 2165 3905">
+                <i class="iconfont iconphone"></i>
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.email }}</span>
+            <span class="row-text">
+              <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">e-service@bddco.com</a>
+              <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
+            </span>
+            <span class="column-line"></span>
+            <span class="row-icon">
+              <a v-if="this.$store.state.platform == 21" href="mailto:e-service@bddco.com">
+                <i class="iconfont iconyouxiang"></i>
+              </a>
+              <a v-else href="mailto:service@bddco.com">
+                <i class="iconfont iconyouxiang"></i>
+              </a>
+            </span>
+          </div>
+          <div class="info-row" v-show="this.$store.state.platform !== 21">
+            <nuxt-link :to="{ path: '/contact' }" >
+              <button class="contact-button">{{ lang.callUs }}</button>
+            </nuxt-link>
+          </div>
         </div>
-      </div>
-    </section>
-    <!--    <site-switch ref="site-switch"></site-switch>-->
+      </section>
+      <!--    <site-switch ref="site-switch"></site-switch>-->
+
+    </div>
   </div>
 </template>
 
@@ -278,7 +404,8 @@ export default {
       activeCard: 0,
       webSite: null,
 
-      exhibitionImageStatus: true
+      exhibitionImageStatus: true,
+      platform: 0
     }
   },
   computed: {
@@ -351,6 +478,7 @@ export default {
       }
     })
       .then(data => {
+        console.log(777,data.advert)
         return {
           seoInfo,
           ad: data.advert,
@@ -363,6 +491,8 @@ export default {
   },
   mounted(){
     console.log("this.seoInfo",this.seoInfo)
+
+    this.platform = this.$store.state.platform
   },
   // mounted() {
   //   const _this = this
@@ -1141,5 +1271,104 @@ export default {
       /*border-bottom: 1px solid rgba(190, 190, 190, 1); !*no*!*/
     }
   }
+}
+
+// 美国站点
+.us-page{
+  .bg{
+    background-color: #f6f1eb;
+
+
+    .show-box a{
+      width: 100%;
+      margin-bottom: 20px;
+
+        img{
+          width: 100%;
+        }
+    } 
+  }
+
+  .tit-box{
+    height: 100px;
+    padding-top: 40px;
+    box-sizing: border-box;
+    position: relative;
+    font-size: 24px;
+    color: #333;
+
+    .line{
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 56px;
+      height: 1px;
+      background-color: #333;
+      transform: scaleY(0.5) translateX(-50%);
+    }
+  }
+
+  .sweet-show{
+      background-color: #fbf8f3;
+      padding: 0 10px;
+      box-sizing: border-box;
+
+      .sweet-box{
+        display: flex;
+        width: 100%;
+        height: 250px;
+        margin: 30px 0 10px;
+
+        div{
+          overflow: hidden;
+        }
+
+        .sweet-l{
+          width: calc((100% - 10px) * 0.29);
+          height: 100%;
+          flex-shrink: 0;
+          margin-right: 10px;
+        }
+        .sweet-r{
+          flex-grow: 1;
+          display: flex;
+          flex-direction: column;
+
+          .sweet-r-t{
+            display: flex;
+            height: calc((100% - 10px) * 0.54);
+            margin-bottom: 10px;
+
+            .sweet-r-t-l{
+              width: calc((100% - 10px) * 0.49);
+              margin-right: 10px;
+              flex-shrink: 0;
+            }
+            .sweet-r-t-r{
+              flex-flow: 1;
+            }
+          }
+
+          .sweet-r-b{
+            flex-grow: 1;
+            display: flex;
+
+            .sweet-r-b-l{
+              width: calc((100% - 10px) * 0.4);
+              margin-right: 10px;
+              flex-shrink: 0;
+            }
+            .sweet-r-b-r{
+              flex-flow: 1;
+            }
+          }
+        }
+      }
+
+      img{
+        width: 100%;
+        height: 100%;
+      }
+    }
 }
 </style>

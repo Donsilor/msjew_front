@@ -22,9 +22,9 @@
 
           <div class="us-host-box">
             <div class="us-host-list" :style="{height:sImgHeight + 'px'}">
-              <swiper ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+              <swiper2 ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
-                  <a :href="hot.link" target="_blank">
+                  <a :href="hot.link" target="_blank" class="item-box">
                     <div class="product-image" :height="sImgHeight + 'px'">
                       <img class="product-image" :src="hot.url"/>
                     </div>
@@ -32,7 +32,7 @@
                     <div class="price">USD {{ formatMoney(hot.price) }}</div>
                   </a>
                 </div>
-              </swiper>
+              </swiper2>
             </div>
 
             <div class="host-list-bar">
@@ -72,9 +72,9 @@
 
           <div class="new-products-box">
             <div class="new-products" :style="{height:sImgHeight + 'px'}">
-              <swiper ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+              <swiper2 ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(item, n) in newProducts" :key="n" class="host-item">
-                  <a :href="item.link" target="_blank">
+                  <a :href="item.link" target="_blank" class="item-box">
                     <div class="product-image">
                       <img class="product-image" :src="item.url" />
                     </div>
@@ -82,7 +82,7 @@
                     <div class="price">USD {{ formatMoney(item.price) }}</div>
                   </a>
                 </div>
-              </swiper>
+              </swiper2>
             </div>
 
             <div class="host-list-bar">
@@ -985,6 +985,9 @@ export default {
       setTimeout(() => {
         this.ifEffects = 0
       },200)
+    },
+    openPage(w) {
+      console.log(w)
     }
   }
 }
@@ -1644,16 +1647,16 @@ section {
 }
 
 // 美国站点
-.us-page{
-  .bg-color{
+.us-page {
+  .bg-color {
     background-color: #f6f1eb;
   }
 
-  .banner{
+  .banner {
     height: 640px;
     
-    .banner-item{
-      a{
+    .banner-item {
+      a {
         display: inline-block;
         width: 100%;
         height: 100%;
@@ -1664,15 +1667,15 @@ section {
   }
 
   .design,
-  .recommend-category{
+  .recommend-category {
     background: none;
     overflow: hidden;
   }
-  .section-title-line{
+  .section-title-line {
     margin-bottom: 76px;
   }
   .us-host-box,
-  .new-products-box{
+  .new-products-box {
     max-width: 1360px;
     min-width: 1000px;
     width: 80%;
@@ -1681,44 +1684,44 @@ section {
     z-index: 2;
   }
   .us-host-list,
-  .new-products{
+  .new-products {
     max-width: 1360px;
     min-width: 1000px;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
   }
-  .host-item{
+  .host-item {
     width: 100%;
     font-size: 0;
     text-align: center;
 
-    a{
+    .item-box {
       display: inline-block;
       width: 80%;
 
-      .product-image{
+      .product-image {
         width: 100%;
         overflow: hidden;
 
-        img{
+        img {
           width: 90%;
           height: 90%;
           margin: 5% 0;
         }
       }
-      .product-image:hover img{
+      .product-image:hover img {
         transform: scale(1.11);
       }
 
-      .price{
+      .price {
         font-size: 18px;
         line-height: 50px;
       }
     }
   }
 
-  .host-list-bar{
+  .host-list-bar {
     position: absolute;
     top: 0;
     left: -5%;
@@ -1727,7 +1730,7 @@ section {
     z-index: -1;
     box-sizing: border-box;
 
-    .left-button{
+    .left-button {
       position: absolute;
       left: 0;
       top: 30%;
@@ -1739,7 +1742,7 @@ section {
       border-radius: 2px;
     }
 
-    .right-button{
+    .right-button {
       position: absolute;
       right: 0;
       top: 30%;
@@ -1752,7 +1755,7 @@ section {
     }
   }
 
-  .sweet{
+  .sweet {
     padding: 100px 0;
     box-sizing: border-box;
     background-color: #fbf8f3;
@@ -1858,23 +1861,23 @@ section {
     //   }
     // }
 
-    .sweet-img{
+    .sweet-img {
       display: flex;
       width: 1520px;
       height: 706px;
       margin: 0 auto;
 
-      div{
+      div {
         overflow: hidden;
         position: relative;
       }
 
-      .img-l{
+      .img-l {
         width: 276px;
         height: 100%;
       }
 
-      .img-m{
+      .img-m {
         display: flex;
         flex-direction: column;
         width: 674px;
@@ -1882,31 +1885,31 @@ section {
         margin: 0 20px;
 
 
-        .img-m-t{
+        .img-m-t {
           display: flex;
           height: 378px;
           margin-bottom: 20px;
 
-          .img-m-t-l{
+          .img-m-t-l {
             width: 330px;
             height: 100%;
             margin-right: 20px;
           }
-          .img-m-t-r{
+          .img-m-t-r {
             width: 324px;
             height: 100%;
           }
         }
-        .img-m-b{
+        .img-m-b {
           display: flex;
           height: 308px;
 
-          .img-m-b-l{
+          .img-m-b-l {
             width: 357px;
             height: 100%;
             margin-right: 20px;
           }
-          .img-m-b-r{
+          .img-m-b-r {
             width: 297px;
             height: 100%;
           }
@@ -1914,29 +1917,29 @@ section {
 
       }
 
-      .img-r{
+      .img-r {
         width: 530px;
         height: 100%;
         display: flex;
         flex-direction: column;
 
-        .img-r-t{
+        .img-r-t {
           height: 280px;
           margin-bottom: 20px;
         }
 
-        .img-r-b{
+        .img-r-b {
           height: 406px;
         }
       }
 
-      img{
+      img {
         width: 100%;
         height: 100%;
       }
     }
 
-    .mask-layer{
+    .mask-layer {
       position: absolute !important;
       top: 0;
       left: 0;
@@ -1946,13 +1949,13 @@ section {
       // display: none;
     }
 
-    .mask-layer:hover{
+    .mask-layer:hover {
       background-color: rgba(0, 0, 0, 0.3);
       transition: background-color 0.3s ease-in;
     }
   }
 
-  .effects{
+  .effects {
     transform: scale(0.96) translateY(-50%) !important;
     background-color: #e5d5c7 !important;
     border-radius: 3px !important;
