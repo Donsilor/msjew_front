@@ -1297,7 +1297,8 @@
         "activityTime": "活动截止时间",
         "oddPrice": "原  价",
         "newPrice": "折后价",
-        "needLogin": "请先登录，才能领取优惠券"
+        "needLogin": "请先登录，才能领取优惠券",
+        "buyNow":"立即购买"
     },
     "policies": {
         "layout": {

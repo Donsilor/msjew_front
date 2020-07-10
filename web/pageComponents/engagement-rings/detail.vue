@@ -292,6 +292,14 @@
           >
             {{ $t(`${lang}.addCart`) }}
           </button>
+
+          <button
+              v-loading="addingCart"
+              :class="['add-to-cart', { active: canAddCart }]"
+              @click="orderNow"
+            >
+              {{ $t(`${lang}.buyNow`) }}
+            </button>
         </div>
         <div
           v-if="

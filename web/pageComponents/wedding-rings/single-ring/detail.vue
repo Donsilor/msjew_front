@@ -302,8 +302,20 @@
             >
               {{ $t(`${lang}.addCart`) }}
             </button>
+
+            <button
+            v-if="
+            !(parseInt($route.query.step) !== 1 && $route.query.step) ||
+              $route.query.isBack
+          "
+              v-loading="orderingNow"
+              :class="['add-to-cart', { active: canAddCart }]"
+              @click="orderNow"
+            >
+              {{ $t(`${lang}.buyNow`) }}
+            </button>
           </span>
-          <span v-if="
+          <span class="custom-made" v-if="
             (parseInt($route.query.step) !== 1 && $route.query.step) ||
               $route.query.isBack
           ">
@@ -747,6 +759,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// .custom-made{
+//   .add-to-cart{
+//     margin-top: 10px;
+//     width: 88.5%!important;
+//   }
+// }
 .detail-page {
   margin: auto;
 }

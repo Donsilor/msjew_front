@@ -2354,7 +2354,7 @@ export default {
     }
   },
   created() {
-    
+    // console.log('this.pathTakeIds',this.pathTakeIds)
     // console.log("planDays",this.tex.planDays)
     const promise = new Promise((resolve, reject) => {
       this.$store
@@ -2366,7 +2366,7 @@ export default {
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
-            console.log("fffff",res[i])
+            // console.log("fffff",res[i])
             this.goodsPrice += res[i].price
           }
           this.tex.orderAmount = this.goodsPrice

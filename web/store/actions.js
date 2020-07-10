@@ -732,7 +732,7 @@ export default {
         let sendData = []
         data.forEach(item => {
             let goods = item.data
-            console.log('goods----------->', item)
+            // console.log('goods----------->', item)
             goods = goods.map(good => {
                 good.updateTime = item.id
                 good.createTime = item.id

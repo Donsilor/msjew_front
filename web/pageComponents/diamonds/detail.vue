@@ -178,6 +178,15 @@
 
             {{ $t(`${lang}.addCart`) }}
           </button>
+
+          <button
+            class="buy-now"
+            v-loading="addingCart"
+            :class="['add-to-cart', { active: canAddCart }]"
+            @click="orderNow"
+          >
+            {{ $t(`${lang}.buyNow`) }}
+          </button>
         </div>
         <div
           v-if="
@@ -554,7 +563,10 @@ export default {
 <style lang="less" scoped>
 .detail-page {
   margin: auto;
-
+  .buy-now{
+    margin-top: 10px;
+    width: 578px!important;
+  }
   .four-c {
     padding: 40px;
     .p-title {
