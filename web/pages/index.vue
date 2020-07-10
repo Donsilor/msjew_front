@@ -486,7 +486,6 @@ export default {
   mixins: [CategoryIndexPage],
   data () {
     return {
-      bannerHeig: 640,
       lang,
       recommendCategories: [
         {
@@ -535,7 +534,6 @@ export default {
           to: 'https://us.bddco.com/jewellery/earrings-stud'
         }
       ],
-      hotProductItemWidth: 0,
       activeHotProductIndex: 0,
 
       diamonds: [
@@ -630,7 +628,6 @@ export default {
           }
         }
       ],
-      diamondItemWidth: 0,
       activeDiamondIndex: 0,
       platform: 0,
       usBanner:[
@@ -952,13 +949,6 @@ export default {
     this.platform = this.$store.state.platform
   },
   methods: {
-    // 页面尺寸改变时触发重新计算
-    screenResize () {
-      const _this = this
-      _this.resetBannerSize()
-      _this.hotProductItemWidth = document.body.clientWidth / 5
-      _this.diamondItemWidth = document.body.clientWidth / 5
-    },
     changeActiveHotProduct (data) {
       this.activeHotProductIndex = data.index
     },
@@ -984,9 +974,6 @@ export default {
       setTimeout(() => {
         this.ifEffects = 0
       },200)
-    },
-    openPage(w) {
-      console.log(w)
     }
   }
 }

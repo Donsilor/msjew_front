@@ -7,7 +7,9 @@ export default {
       sImgHeight: 0,
       arrowsTop: 0,
       sweetHeight: 0,
-      fontSize: 0
+      fontSize: 0,
+      hotProductItemWidth: 0,
+      diamondItemWidth: 0
     }
   },
   computed: {
@@ -67,6 +69,8 @@ export default {
         bWidth = 1520
       }
 
+      this.hotProductItemWidth = document.body.clientWidth / 5;
+      this.diamondItemWidth = document.body.clientWidth / 5;
       this.sImgHeight = Math.round(bWidth * 0.2) + 70;
       this.arrowsTop = Math.round(bWidth * 0.1) - 20;
       this.sweetHeight = Math.round((bWidth / 1520) * 710);
