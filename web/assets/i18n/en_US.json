@@ -1288,7 +1288,8 @@
         "activityTime": "Sales end on",
         "oddPrice": "Original price",
         "newPrice": "Discount price",
-        "needLogin": "Please login before redeem the coupon. "
+        "needLogin": "Please login before redeem the coupon. ",
+        "buyNow":"Order Now"
     },
     "policies": {
         "layout": {

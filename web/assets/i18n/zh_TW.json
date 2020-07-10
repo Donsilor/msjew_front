@@ -1292,7 +1292,8 @@
         "activityTime": "活動截止時間",
         "oddPrice": "原  價",
         "newPrice": "折後價",
-        "needLogin": "請先登錄，才能領取優惠券"
+        "needLogin": "請先登錄，才能領取優惠券",
+        "buyNow":"立即購買"
     },
     "policies": {
         "layout": {

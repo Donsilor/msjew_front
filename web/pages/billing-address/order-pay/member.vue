@@ -2110,7 +2110,8 @@ export default {
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           this.good = res
-          
+          // console.log("this.good",this.good)
+          // console.log("this.pathTakeIds", this.pathTakeIds)
           this.productCount = this.good.length
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)

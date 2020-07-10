@@ -2354,7 +2354,7 @@ export default {
     }
   },
   created() {
-    
+    // console.log('this.pathTakeIds',this.pathTakeIds)
     // console.log("planDays",this.tex.planDays)
     const promise = new Promise((resolve, reject) => {
       this.$store
