@@ -240,8 +240,27 @@
             :class="['indicator-item', { active: activeCard === n }]"
           ></span>
         </div>
-        <div class="others">
-          <button class="see-more" @click="moreCard">{{ lang.seeMore }}</button>
+        <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
+          <span class="line"></span>
+          <span class="row-name">{{ lang.address }}</span>
+          <span class="row-text">{{ lang.addressDetailUs }}</span>
+        </div> -->
+        <div class="info-row">
+          <span class="line"></span>
+          <span class="row-name">{{ lang.tel }}</span>
+          <span class="row-text">
+            <a v-if="this.$store.state.platform === 21" href="tel:+852 2165 3908">0755 25169121</a>
+            <a v-else href="tel:+852 2165 3908">+852 2165 3908</a>
+          </span>
+          <span class="column-line"></span>
+          <span class="row-icon">
+            <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+              <i class="iconfont iconphone"></i>
+            </a>
+            <a v-else href="tel:+852 2165 3908">
+              <i class="iconfont iconphone"></i>
+            </a>
+          </span>
         </div>
       </section>
       <section class="contact-us">
@@ -449,7 +468,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(1)
+    const seoInfo = await app.$getSeoInfo('index')
 
     return $axios({
       method: 'get',

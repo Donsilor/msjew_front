@@ -4,10 +4,12 @@ export default {
       ad: [],
       webSite: [],
       bannerHeight: 0,
+      lineWidth: '',
       sImgHeight: 0,
       arrowsTop: 0,
       sweetHeight: 0,
       fontSize: 0
+
     }
   },
   computed: {
@@ -84,6 +86,8 @@ export default {
             (document.body.clientWidth * image.height) / image.width
         }
       }
+      _this.lineWidth = Math.round((document.body.clientWidth-80)*0.04)+'px'
+      // console.log(_this.lineWidth)
     }
   }
 }

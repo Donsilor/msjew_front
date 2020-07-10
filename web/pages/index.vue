@@ -870,7 +870,8 @@ export default {
     }
   },
   async asyncData ({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(1)
+    // console.log("sssss",route)
+    const seoInfo = await app.$getSeoInfo('index')
     // console.log(seoInfo)
 
     return $axios({
@@ -1040,8 +1041,8 @@ section {
 
     .banner-img {
       position: absolute;
-      top: 50%;
       left: 50%;
+      top: 50%;
       transform: translate(-50%, -50%);
       width: auto;
       height: 100%;
@@ -1541,7 +1542,7 @@ section {
     margin-bottom: 76px;
   }
   .section-content {
-    min-width: 1360px;
+    min-width: 1200px;
     max-width: 1550px;
     margin: auto;
     display: flex;

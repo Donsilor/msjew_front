@@ -101,7 +101,7 @@
 
     .layout-page-content {
       flex-grow: 1;
-      flex-shrink: 0;
+      // flex-shrink: 0;
     }
 
     .layout-footer {

@@ -16,7 +16,11 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(3)
+    // console.log("sssss",route)
+    let seoInfo = await app.$getSeoInfo('Rings')
+    if(route.name  =='wedding-rings-classic-series'){
+      seoInfo = await app.$getSeoInfo('classicSeriesList')
+    }
     return $axios({
       method: 'get',
       url: '/web/goods/style/web-site',

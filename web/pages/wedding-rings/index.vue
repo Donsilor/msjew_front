@@ -335,7 +335,11 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(3)
+    // console.log("sssss",route)
+    let seoInfo = await app.$getSeoInfo('Rings')
+    if(route.params.defaultCondition == 'all'){
+      seoInfo = await app.$getSeoInfo('weddingRing')
+    }
 
     return $axios({
       method: 'get',
