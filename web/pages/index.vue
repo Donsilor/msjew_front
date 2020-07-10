@@ -2,7 +2,7 @@
   <div class="page">
     <!-- 美国站点 -->
     <div v-if="platform == 30" class="us-page">
-      <section class="banner" :height="bannerHeight + 'px'">
+      <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
             <a :href="item.addres || ''" target="_blank">
@@ -475,6 +475,7 @@
 <script>
 import CategoryIndexPage from '@/mixins/category-index-page.js'
 import Interactive from '@/pageComponents/index/interactive.vue'
+import Bus from '../assets/js/bus.js'
 const lang = 'index'
 export default {
   head () {
@@ -486,7 +487,6 @@ export default {
   mixins: [CategoryIndexPage],
   data () {
     return {
-      bannerHeig: 640,
       lang,
       recommendCategories: [
         {
@@ -535,7 +535,6 @@ export default {
           to: 'https://us.bddco.com/jewellery/earrings-stud'
         }
       ],
-      hotProductItemWidth: 0,
       activeHotProductIndex: 0,
 
       diamonds: [
@@ -630,7 +629,6 @@ export default {
           }
         }
       ],
-      diamondItemWidth: 0,
       activeDiamondIndex: 0,
       platform: 0,
       usBanner:[
@@ -822,7 +820,15 @@ export default {
           'price': 0
         }
       ],
-      ifEffects: 0
+      ifEffects: 0,
+      bannerHeight: 0,
+      lineWidth: '',
+      sImgHeight: 0,
+      arrowsTop: 0,
+      sweetHeight: 0,
+      fontSize: 0,
+      hotProductItemWidth: 0,
+      diamondItemWidth: 0
     }
   },
   computed: {
@@ -870,8 +876,7 @@ export default {
     }
   },
   async asyncData ({ $axios, route, store, app }) {
-    // console.log("sssss",route)
-    const seoInfo = await app.$getSeoInfo('index')
+    const seoInfo = await app.$getSeoInfo(1)
     // console.log(seoInfo)
 
     return $axios({
@@ -948,18 +953,16 @@ export default {
   mounted () {
     const _this = this
     _this.$nextTick(() => {
-      
+      _this.onResize()
     })
+
+    Bus.$on('resizeFn', (val) => {
+      _this.onResize()
+    })
+
     this.platform = this.$store.state.platform
   },
   methods: {
-    // 页面尺寸改变时触发重新计算
-    screenResize () {
-      const _this = this
-      _this.resetBannerSize()
-      _this.hotProductItemWidth = document.body.clientWidth / 5
-      _this.diamondItemWidth = document.body.clientWidth / 5
-    },
     changeActiveHotProduct (data) {
       this.activeHotProductIndex = data.index
     },
@@ -986,8 +989,41 @@ export default {
         this.ifEffects = 0
       },200)
     },
-    openPage(w) {
-      console.log(w)
+    onResize() {
+      var that = this;
+      var bWidth = document.body.clientWidth;
+
+      if(bWidth < 1366){
+        bWidth = 1366
+      }else if(bWidth > 1520){
+        bWidth = 1520
+      }
+
+      that.sImgHeight = Math.round(bWidth * 0.2) + 70;
+      that.arrowsTop = Math.round(bWidth * 0.1) - 20;
+      that.sweetHeight = Math.round((bWidth / 1520) * 710);
+      that.fontSize = Math.round((bWidth / 1366) * 38);
+      if(that.fontSize > 48){
+        that.fontSize = 48
+      }
+
+      if (that.banner[0] && that.banner[0].image) {
+        const image = new Image()
+        var width = 0, height = 0;
+        image.src = that.banner[0].image
+        image.onload = result => {
+          width = image.width;
+          height = image.height;
+        }
+
+        if(width && height){
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * image.height) / image.width)
+        }else{
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * 640) / 1920)
+        }
+      }
     }
   }
 }
@@ -1041,8 +1077,8 @@ section {
 
     .banner-img {
       position: absolute;
-      left: 50%;
       top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
       width: auto;
       height: 100%;
@@ -1542,7 +1578,7 @@ section {
     margin-bottom: 76px;
   }
   .section-content {
-    min-width: 1200px;
+    min-width: 1360px;
     max-width: 1550px;
     margin: auto;
     display: flex;
@@ -1652,17 +1688,13 @@ section {
     background-color: #f6f1eb;
   }
 
-  .banner {
-    height: 640px;
-    
-    .banner-item {
-      a {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        position: relative;
-        z-index: 2;
-      }
+  .banner-item {
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
     }
   }
 

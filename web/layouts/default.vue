@@ -20,14 +20,9 @@
 
 <script>
   import Mixin from './mixins'
+  import Bus from '../assets/js/bus.js'
   export default {
     mixins: [Mixin],
-    // provide () {
-    //   return {
-    //     reload: this.reload,
-
-    //   }
-    // },
     data() {
       return {
         scrollTop: 0,
@@ -40,7 +35,9 @@
       _this.$nextTick(() => {
         // _this.getSetting()
         if (!_this.$store.state.coin || !_this.$store.state.language) {}
+        window.onresize = _this.onresizeFn
       })
+
     },
     methods: {
       // reload () {
@@ -50,6 +47,9 @@
       //     this.isRouterAlive = true
       //   })
       // },
+      onresizeFn() {
+        Bus.$emit('resizeFn', 1)
+      },
       goTo(){
         const topB = document.getElementsByClassName('layout-box')[0];
 

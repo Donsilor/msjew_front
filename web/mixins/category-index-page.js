@@ -1,15 +1,7 @@
 export default {
   data() {
     return {
-      ad: [],
-      webSite: [],
-      bannerHeight: 0,
-      lineWidth: '',
-      sImgHeight: 0,
-      arrowsTop: 0,
-      sweetHeight: 0,
-      fontSize: 0
-
+      ad: []
     }
   },
   computed: {
@@ -42,52 +34,6 @@ export default {
       }
 
       return result
-    }
-  },
-  mounted() {
-    const _this = this
-    _this.$nextTick(() => {
-      _this.screenResize()
-      window.onresize = _this.screenResize
-    })
-  },
-  beforeDestroy() {
-    window.onresize = () => {}
-  },
-  methods: {
-    // 页面尺寸改变时触发重新计算
-    screenResize() {
-      this.resetBannerSize()
-    },
-    // 重新计算banner高度
-    resetBannerSize() {
-      const _this = this;
-      var bWidth = document.body.clientWidth;
-      if(bWidth < 1366){
-        bWidth = 1366
-      }else if(bWidth > 1520){
-        bWidth = 1520
-      }
-
-      this.sImgHeight = Math.round(bWidth * 0.2) + 70;
-      this.arrowsTop = Math.round(bWidth * 0.1) - 20;
-      this.sweetHeight = Math.round((bWidth / 1520) * 710);
-      this.fontSize = Math.round((bWidth / 1366) * 38);
-      if(this.fontSize > 48){
-        this.fontSize = 48
-      }
-
-      if (_this.banner[0] && _this.banner[0].image) {
-        const image = new Image()
-        image.src = _this.banner[0].image
-        image.onload = result => {
-          // console.log(image.width, image.height)
-          _this.bannerHeight =
-            (document.body.clientWidth * image.height) / image.width
-        }
-      }
-      _this.lineWidth = Math.round((document.body.clientWidth-80)*0.04)+'px'
-      // console.log(_this.lineWidth)
     }
   }
 }

@@ -109,11 +109,10 @@
 
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
-import CategoryIndexPage from '@/mixins/category-index-page.js'
+import Bus from '../../assets/js/bus.js'
 
 const lang = 'components.footerBar'
 export default {
-  mixins: [CategoryIndexPage],
   data() {
     return {
       lang,
@@ -549,12 +548,9 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
-      var child = this.$refs.menus;
-      // console.log(this.$refs.menus)
-
-      for(var i=0,len=child.length; i<len; i++){
-        child[i].style.marginRight = this.lineWidth
-      }
+      Bus.$on('resizeFn', (val) => {
+        _this.onResize()
+      })
     })
   },
   methods: {
@@ -562,6 +558,23 @@ export default {
     setCoin() {
       this.$store.commit('setCoin', 'CNY')
       window.location.reload()
+    },
+    onResize() {
+      var that = this;
+      var bWidth = document.body.clientWidth;
+
+      if(bWidth < 1366){
+        bWidth = 1366
+      }else if(bWidth > 1520){
+        bWidth = 1520
+      }
+
+      that.lineWidth = Math.round((bWidth - 80) * 0.05);
+
+      var child = this.$refs.menus;
+      for(var i=0,len=child.length; i<len; i++){
+        child[i].style.marginRight = that.lineWidth
+      }
     }
   }
 }

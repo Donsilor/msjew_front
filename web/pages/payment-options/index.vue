@@ -426,7 +426,7 @@ export default {
         .get('/web/pay/collection-account-info')
         .then(res => {
           this.accountlist = res.data
-          console.log("ssss",res)
+          // console.log("ssss",res)
         })
         .catch(err => {
           this.$message.error(err.message)
