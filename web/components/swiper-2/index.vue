@@ -3,6 +3,8 @@
     <div
       ref="swiper-content"
       class="content"
+      @touchstart.capture.prevent.stop="touchStart"
+      @mousedown.capture.prevent.stop="mouseDown"
     >
       <template v-if="slotFinish">
         <div
@@ -210,16 +212,6 @@ export default {
   },
   methods: {
     emitClick(e) {
-      // e = window.event || e
-      // if(this.swiperType == 2){
-      //   if(window){
-      //     e.cancelBubble = false
-      //     console.log(7788)
-      //   }else{
-      //     e.stopPropagation()
-      //   }
-      // }
-
       if (this.isDragging) {
         e.stopPropagation()
         e.preventDefault()
