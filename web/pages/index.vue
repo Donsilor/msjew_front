@@ -2,7 +2,7 @@
   <div class="page">
     <!-- 美国站点 -->
     <div v-if="platform == 30" class="us-page">
-      <section class="banner" :height="bannerHeight + 'px'">
+      <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
             <a :href="item.addres || ''" target="_blank">
@@ -475,6 +475,7 @@
 <script>
 import CategoryIndexPage from '@/mixins/category-index-page.js'
 import Interactive from '@/pageComponents/index/interactive.vue'
+import Bus from '../assets/js/bus.js'
 const lang = 'index'
 export default {
   head () {
@@ -819,7 +820,15 @@ export default {
           'price': 0
         }
       ],
-      ifEffects: 0
+      ifEffects: 0,
+      bannerHeight: 0,
+      lineWidth: '',
+      sImgHeight: 0,
+      arrowsTop: 0,
+      sweetHeight: 0,
+      fontSize: 0,
+      hotProductItemWidth: 0,
+      diamondItemWidth: 0
     }
   },
   computed: {
@@ -944,8 +953,13 @@ export default {
   mounted () {
     const _this = this
     _this.$nextTick(() => {
-      
+      _this.onResize()
     })
+
+    Bus.$on('resizeFn', (val) => {
+      _this.onResize()
+    })
+
     this.platform = this.$store.state.platform
   },
   methods: {
@@ -974,6 +988,42 @@ export default {
       setTimeout(() => {
         this.ifEffects = 0
       },200)
+    },
+    onResize() {
+      var that = this;
+      var bWidth = document.body.clientWidth;
+
+      if(bWidth < 1366){
+        bWidth = 1366
+      }else if(bWidth > 1520){
+        bWidth = 1520
+      }
+
+      that.sImgHeight = Math.round(bWidth * 0.2) + 70;
+      that.arrowsTop = Math.round(bWidth * 0.1) - 20;
+      that.sweetHeight = Math.round((bWidth / 1520) * 710);
+      that.fontSize = Math.round((bWidth / 1366) * 38);
+      if(that.fontSize > 48){
+        that.fontSize = 48
+      }
+
+      if (that.banner[0] && that.banner[0].image) {
+        const image = new Image()
+        var width = 0, height = 0;
+        image.src = that.banner[0].image
+        image.onload = result => {
+          width = image.width;
+          height = image.height;
+        }
+
+        if(width && height){
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * image.height) / image.width)
+        }else{
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * 640) / 1920)
+        }
+      }
     }
   }
 }
@@ -1638,17 +1688,13 @@ section {
     background-color: #f6f1eb;
   }
 
-  .banner {
-    height: 640px;
-    
-    .banner-item {
-      a {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
-        position: relative;
-        z-index: 2;
-      }
+  .banner-item {
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
     }
   }
 
