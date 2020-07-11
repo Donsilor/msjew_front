@@ -20,7 +20,7 @@ export default {
     return {}
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(3)
+    const seoInfo = await app.$getSeoInfo('classicSeriesList')
 
     return $axios({
       method: 'get',

@@ -2,57 +2,67 @@
   <div :class="['footer-bar']">
     <div class="foot-menus">
       <div class="menus" v-if="this.$store.state.platform === 20">
-        <dl v-for="(group, index) in menusCn" :key="index" class="menu-group">
-          <dt class="group-name">{{ group.groupName }}</dt>
-          <dd
-            v-for="(item, itemIndex) in group.children"
-            :key="itemIndex"
-            class="item"
-          >
-            <div v-if="item.icon" class="item-icon">
-              <i :class="['iconfont', item.icon]"></i>
-            </div>
-            <div class="item-name">
-              <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
-            </div>
-          </dd>
-        </dl>
+        <div v-for="(group, index) in menusCn" :key="index" class="menu-group">
+          <dl>
+            <dt class="group-name">{{ group.groupName }}</dt>
+            <dd
+              v-for="(item, itemIndex) in group.children"
+              :key="itemIndex"
+              class="item"
+            >
+              <div v-if="item.icon" class="item-icon">
+                <i :class="['iconfont', item.icon]"></i>
+              </div>
+              <div class="item-name">
+                <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
+              </div>
+            </dd>
+          </dl>
+          <div class="foot-line" ref="menus"></div>
+        </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
       <div class="menus" v-else-if="this.$store.state.platform === 30">
-        <dl v-for="(group, index) in menusUs" :key="index" class="menu-group">
-          <dt class="group-name">{{ group.groupName }}</dt>
-          <dd
-            v-for="(item, itemIndex) in group.children"
-            :key="itemIndex"
-            class="item"
-          >
-            <div v-if="item.icon" class="item-icon">
-              <i :class="['iconfont', item.icon]"></i>
-            </div>
-            <div class="item-name">
-              <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
-            </div>
-          </dd>
-        </dl>
+        <div v-for="(group, index) in menusUs" :key="index" class="menu-group">
+          <dl>
+            <dt class="group-name">{{ group.groupName }}</dt>
+            <dd
+              v-for="(item, itemIndex) in group.children"
+              :key="itemIndex"
+              class="item"
+            >
+              <div v-if="item.icon" class="item-icon">
+                <i :class="['iconfont', item.icon]"></i>
+              </div>
+              <div class="item-name">
+                <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
+              </div>
+            </dd>
+          </dl>
+          <div class="foot-line" ref="menus"></div>
+        </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
       <div class="menus" v-else>
-        <dl v-for="(group, index) in menus" :key="index" class="menu-group">
-          <dt class="group-name">{{ group.groupName }}</dt>
-          <dd
-            v-for="(item, itemIndex) in group.children"
-            :key="itemIndex"
-            class="item"
-          >
-            <div v-if="item.icon" class="item-icon">
-              <i :class="['iconfont', item.icon]"></i>
-            </div>
-            <div class="item-name">
-              <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
-            </div>
-          </dd>
-        </dl>
+        <div v-for="(group, index) in menus" :key="index" class="menu-group">
+          <dl>
+            <dt class="group-name">{{ group.groupName }}</dt>
+            <dd
+              v-for="(item, itemIndex) in group.children"
+              :key="itemIndex"
+              class="item"
+            >
+              <div v-if="item.icon" class="item-icon">
+                <i :class="['iconfont', item.icon]"></i>
+              </div>
+              <div class="item-name">
+                <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
+              </div>
+            </dd>
+          </dl>
+          <div class="foot-line" ref="menus"></div>
+        </div>
+
         <div class="Shadow" @click="setCoin()"></div>
       </div>
     </div>
@@ -99,6 +109,8 @@
 
 <script>
 import { mapState, mapGetters, mapMutations } from 'vuex'
+import Bus from '../../assets/js/bus.js'
+
 const lang = 'components.footerBar'
 export default {
   data() {
@@ -535,13 +547,34 @@ export default {
   },
   mounted() {
     const _this = this
-    _this.$nextTick(() => {})
+    _this.$nextTick(() => {
+      Bus.$on('resizeFn', (val) => {
+        _this.onResize()
+      })
+    })
   },
   methods: {
     ...mapMutations(['setCoin', 'setLanguage']),
     setCoin() {
       this.$store.commit('setCoin', 'CNY')
       window.location.reload()
+    },
+    onResize() {
+      var that = this;
+      var bWidth = document.body.clientWidth;
+
+      if(bWidth < 1366){
+        bWidth = 1366
+      }else if(bWidth > 1520){
+        bWidth = 1520
+      }
+
+      that.lineWidth = Math.round((bWidth - 80) * 0.05);
+
+      var child = this.$refs.menus;
+      for(var i=0,len=child.length; i<len; i++){
+        child[i].style.marginRight = that.lineWidth
+      }
     }
   }
 }
@@ -553,7 +586,7 @@ export default {
     background-color: #ececec;
   }
   .menus {
-    min-width: 1360px;
+    min-width: 1160px;
     max-width: 1366px;
     margin: 0 auto;
     padding: 40px;
@@ -574,6 +607,9 @@ export default {
       position: relative;
       flex-grow: 0;
       flex-shrink: 0;
+      width: 20%;
+      display: flex;
+      justify-content: space-between;
 
       .group-name {
         margin-bottom: 20px;
@@ -609,22 +645,24 @@ export default {
         }
       }
 
-      &:after {
-        content: '';
-        position: absolute;
-        top: 30px;
-        right: -100px;
-        width: 1px;
-        height: calc(100% - 60px);
-        background-color: #999999;
-      }
+      // &:after {
+      //   content: '';
+      //   position: absolute;
+      //   top: 30px;
+      //   right: -100px;
+      //   width: 1px;
+      //   height: calc(100% - 60px);
+      //   background-color: #999999;
+      // }
 
-      &:nth-last-of-type(1) {
-        &:after {
-          display: none;
-        }
-      }
+      // &:nth-last-of-type(2) {
+      //   &:after {
+      //     display: none;
+      //   }
+      // }
+
     }
+
     .menu-group:nth-child(4){
       width: 460px;
     }
@@ -732,5 +770,15 @@ export default {
       }
     }
   }
+}
+.foot-line{
+    width: 1px;
+    height: calc(100% - 60px);
+    background-color: #999999;
+    align-self: center;
+}
+
+.menu-group:nth-last-of-type(2) .foot-line{
+  display: none;
 }
 </style>

@@ -197,12 +197,21 @@
             @click="clickVideo"
             @ended="videoEnded"
           ></video>
+<<<<<<< HEAD
         </div>
         <div class="button-group">
           <button @click="goToMade(2)">{{ lang.startFromRing }}</button>
           <span>OR</span>
           <button @click="goToMade(1)">{{ lang.startFromDiamond }}</button>
         </div>
+=======
+        </div>
+        <div class="button-group">
+          <button @click="goToMade(2)">{{ lang.startFromRing }}</button>
+          <span>OR</span>
+          <button @click="goToMade(1)">{{ lang.startFromDiamond }}</button>
+        </div>
+>>>>>>> 34c908b1aa96930b1e69b53d7737bd4f2a23c248
         <!--      <div class="tips">-->
         <!--        <h2>{{ lang.syiwo }}</h2>-->
         <!--        <h3 @click="goToMade(2)">{{ lang.ig }}</h3>-->
@@ -568,7 +577,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(1)
+    const seoInfo = await app.$getSeoInfo('index')
 
     return $axios({
       method: 'get',
@@ -578,6 +587,7 @@ export default {
       }
     })
       .then(data => {
+        console.log(777,data.advert)
         return {
           seoInfo,
           ad: data.advert,

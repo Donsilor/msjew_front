@@ -21,23 +21,23 @@
           <div class="section-title-line"></div>
 
           <div class="us-host-box">
-            <div class="us-host-list" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
-              <swiper ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+            <div class="us-host-list" :style="{height:sImgHeight + 'px'}">
+              <swiper2 ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
-                  <a :href="hot.link">
+                  <a :href="hot.link" target="_blank" class="item-box">
                     <div class="product-image" :height="sImgHeight + 'px'">
                       <img class="product-image" :src="hot.url"/>
                     </div>
                   
-                    <div class="price">USD {{hot.price}}</div>
+                    <div class="price">USD {{ formatMoney(hot.price) }}</div>
                   </a>
                 </div>
-              </swiper>
+              </swiper2>
             </div>
 
-            <div class="host-list-bar" :class="{'opacaty': opacaty1 == true}" @mouseover="mouseover(1)" @mouseout="mouseout()">
-              <div class="left-button" :class="{'effects': ifEffects == 1}" @click="nextHotSale(false, 1)" :style="{top:arrowsTop + 'px'}"></div>
-              <div class="right-button" :class="{'effects': ifEffects == 2}" @click="nextHotSale(true, 2)" :style="{top:arrowsTop + 'px'}"></div>
+            <div class="host-list-bar">
+              <div class="left-button" :class="{'effects': ifEffects == 1}" :style="{'top': arrowsTop + 'px'}" @click="nextHotSale(false, 1)"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 2}" :style="{'top': arrowsTop + 'px'}" @click="nextHotSale(true, 2)"></div>
             </div>
           </div>
         </section>
@@ -45,7 +45,7 @@
         <section class="recommend-category">
           <div class="categories">
             <div v-for="(category, index) in usRecommendCategories" :key="index" class="category-item">
-              <a :href="category.to">
+              <a :href="category.to" target="_blank">
                 <div class="bg">
                   <img :src="category.bgImage" />
                   <div class="hover-cover"></div>
@@ -71,23 +71,23 @@
           <div class="section-title-line"></div>
 
           <div class="new-products-box">
-            <div class="new-products" :style="{height:sImgHeight + 'px'}" @mouseover="mouseover(1)" @mouseout="mouseout()">
-              <swiper ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+            <div class="new-products" :style="{height:sImgHeight + 'px'}">
+              <swiper2 ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
                 <div v-for="(item, n) in newProducts" :key="n" class="host-item">
-                  <a :href="item.link">
+                  <a :href="item.link" target="_blank" class="item-box">
                     <div class="product-image">
                       <img class="product-image" :src="item.url" />
                     </div>
 
-                    <div class="price">USD {{item.price}}</div>
+                    <div class="price">USD {{ formatMoney(item.price) }}</div>
                   </a>
                 </div>
-              </swiper>
+              </swiper2>
             </div>
 
-            <div class="host-list-bar" :class="{'opacaty': opacaty2 == true}" @mouseover="mouseover(2)" @mouseout="mouseout()">
-              <div class="left-button" :class="{'effects': ifEffects == 3}" @click="nextNewProducts(false, 3)" :style="{top:arrowsTop + 'px'}"></div>
-              <div class="right-button" :class="{'effects': ifEffects == 4}" @click="nextNewProducts(true, 4)" :style="{top:arrowsTop + 'px'}"></div>
+            <div class="host-list-bar">
+              <div class="left-button" :class="{'effects': ifEffects == 3}" :style="{top:arrowsTop + 'px'}" @click="nextNewProducts(false, 3)"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 4}" :style="{top:arrowsTop + 'px'}" @click="nextNewProducts(true, 4)"></div>
             </div>
           </div>
           
@@ -101,7 +101,7 @@
         </h1>
         <div class="section-title-line"></div>
 
-        <div class="sweet-img" :style="{'height': sweetHeight + 'px'}">
+        <div class="sweet-img">
           <div class="img-l sweet-img-box">
             <img src="../static/index-us/sweet-401.png" alt="" class="img-a">
             <div class="mask-layer"></div>
@@ -120,11 +120,11 @@
             </div>
             <div class="img-m-b">
               <div class="img-m-b-l sweet-img-box">
-                <img src="../static/index-us/sweet-404.png" alt="" class="img-a">
+                <img src="../static/index-us/sweet-405.png" alt="" class="img-a">
                 <div class="mask-layer"></div>
               </div>
               <div class="img-m-b-r sweet-img-box">
-                <img src="../static/index-us/sweet-405.png" alt="" class="img-a">
+                <img src="../static/index-us/sweet-406.png" alt="" class="img-a">
                 <div class="mask-layer"></div>
               </div>
             </div>
@@ -132,7 +132,7 @@
 
           <div class="img-r">
             <div class="img-r-t sweet-img-box">
-              <img src="../static/index-us/sweet-406.png" alt="" class="img-b">
+              <img src="../static/index-us/sweet-404.png" alt="" class="img-b">
               <div class="mask-layer"></div>
             </div>
             <div class="img-r-b sweet-img-box">
@@ -191,7 +191,7 @@
     </div>
 
     <!-- 非美国站点 -->
-    <div v-else>
+    <div v-if="platform == 10 || platform == 20">
       <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
@@ -475,6 +475,7 @@
 <script>
 import CategoryIndexPage from '@/mixins/category-index-page.js'
 import Interactive from '@/pageComponents/index/interactive.vue'
+import Bus from '../assets/js/bus.js'
 const lang = 'index'
 export default {
   head () {
@@ -486,7 +487,6 @@ export default {
   mixins: [CategoryIndexPage],
   data () {
     return {
-      bannerHeig: 640,
       lang,
       recommendCategories: [
         {
@@ -535,7 +535,6 @@ export default {
           to: 'https://us.bddco.com/jewellery/earrings-stud'
         }
       ],
-      hotProductItemWidth: 0,
       activeHotProductIndex: 0,
 
       diamonds: [
@@ -630,9 +629,8 @@ export default {
           }
         }
       ],
-      diamondItemWidth: 0,
       activeDiamondIndex: 0,
-      platform: 10,
+      platform: 0,
       usBanner:[
         {
           'url': require('../static/index-us/banner.png')
@@ -822,9 +820,15 @@ export default {
           'price': 0
         }
       ],
-      opacaty1: false,
-      opacaty2: false,
-      ifEffects: 0
+      ifEffects: 0,
+      bannerHeight: 0,
+      lineWidth: '',
+      sImgHeight: 0,
+      arrowsTop: 0,
+      sweetHeight: 0,
+      fontSize: 0,
+      hotProductItemWidth: 0,
+      diamondItemWidth: 0
     }
   },
   computed: {
@@ -949,18 +953,16 @@ export default {
   mounted () {
     const _this = this
     _this.$nextTick(() => {
-      
+      _this.onResize()
     })
+
+    Bus.$on('resizeFn', (val) => {
+      _this.onResize()
+    })
+
     this.platform = this.$store.state.platform
   },
   methods: {
-    // 页面尺寸改变时触发重新计算
-    screenResize () {
-      const _this = this
-      _this.resetBannerSize()
-      _this.hotProductItemWidth = document.body.clientWidth / 5
-      _this.diamondItemWidth = document.body.clientWidth / 5
-    },
     changeActiveHotProduct (data) {
       this.activeHotProductIndex = data.index
     },
@@ -987,18 +989,41 @@ export default {
         this.ifEffects = 0
       },200)
     },
-    mouseover(a) {
-      if(a == 1){
-        this.opacaty1 = true
-        this.opacaty2 = false
-      }else if(a == 2){
-        this.opacaty1 = false
-        this.opacaty2 = true
+    onResize() {
+      var that = this;
+      var bWidth = document.body.clientWidth;
+
+      if(bWidth < 1366){
+        bWidth = 1366
+      }else if(bWidth > 1520){
+        bWidth = 1520
       }
-    },
-    mouseout() {
-      this.opacaty1 = false
-      this.opacaty2 = false
+
+      that.sImgHeight = Math.round(bWidth * 0.2) + 70;
+      that.arrowsTop = Math.round(bWidth * 0.1) - 20;
+      that.sweetHeight = Math.round((bWidth / 1520) * 710);
+      that.fontSize = Math.round((bWidth / 1366) * 38);
+      if(that.fontSize > 48){
+        that.fontSize = 48
+      }
+
+      if (that.banner[0] && that.banner[0].image) {
+        const image = new Image()
+        var width = 0, height = 0;
+        image.src = that.banner[0].image
+        image.onload = result => {
+          width = image.width;
+          height = image.height;
+        }
+
+        if(width && height){
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * image.height) / image.width)
+        }else{
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * 640) / 1920)
+        }
+      }
     }
   }
 }
@@ -1658,13 +1683,13 @@ section {
 }
 
 // 美国站点
-.us-page{
-  .bg-color{
+.us-page {
+  .bg-color {
     background-color: #f6f1eb;
   }
 
-  .banner-item{
-    a{
+  .banner-item {
+    a {
       display: inline-block;
       width: 100%;
       height: 100%;
@@ -1674,15 +1699,15 @@ section {
   }
 
   .design,
-  .recommend-category{
+  .recommend-category {
     background: none;
     overflow: hidden;
   }
-  .section-title-line{
+  .section-title-line {
     margin-bottom: 76px;
   }
   .us-host-box,
-  .new-products-box{
+  .new-products-box {
     max-width: 1360px;
     min-width: 1000px;
     width: 80%;
@@ -1691,56 +1716,56 @@ section {
     z-index: 2;
   }
   .us-host-list,
-  .new-products{
+  .new-products {
     max-width: 1360px;
     min-width: 1000px;
     margin: 0 auto;
     overflow: hidden;
     position: relative;
   }
-  .host-item{
+  .host-item {
     width: 100%;
     font-size: 0;
     text-align: center;
 
-    a{
+    .item-box {
       display: inline-block;
       width: 80%;
 
-      .product-image{
+      .product-image {
         width: 100%;
         overflow: hidden;
 
-        img{
+        img {
           width: 90%;
           height: 90%;
           margin: 5% 0;
         }
       }
-      .product-image:hover img{
+      .product-image:hover img {
         transform: scale(1.11);
       }
 
-      .price{
+      .price {
         font-size: 18px;
         line-height: 50px;
       }
     }
   }
 
-  .host-list-bar{
+  .host-list-bar {
     position: absolute;
     top: 0;
     left: -5%;
     width: 110%;
     height: 100%;
     z-index: -1;
-    opacity: 0.2;
+    box-sizing: border-box;
 
-    .left-button{
+    .left-button {
       position: absolute;
       left: 0;
-      top: 50%;
+      top: 30%;
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
@@ -1749,10 +1774,10 @@ section {
       border-radius: 2px;
     }
 
-    .right-button{
+    .right-button {
       position: absolute;
       right: 0;
-      top: 50%;
+      top: 30%;
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
@@ -1762,125 +1787,192 @@ section {
     }
   }
 
-  .host-list-bar.opacaty{
-    opacity: 1;
-  }
-
-  .sweet{
+  .sweet {
     padding: 100px 0;
     box-sizing: border-box;
     background-color: #fbf8f3;
 
-    .sweet-img{
-      max-width: 1520px;
-      width: 80%;
-      height: 700px;
-      margin: 0 auto;
-      display: flex;
-      div{
-        overflow: hidden;
-      }
+    // .sweet-img{
+    //   max-width: 1520px;
+    //   width: 80%;
+    //   height: 700px;
+    //   margin: 0 auto;
+    //   display: flex;
+    //   div{
+    //     overflow: hidden;
+    //   }
 
-      .img-l{
-        width: calc((100% - 40px) * 0.18);
-        height: 100%;
-        position: relative;
-      }
-      .img-m{
-        width: calc((100% - 40px) * 0.46);
-        margin: 0 20px;
-        display: flex;
-        flex-direction: column;
+    //   .img-l{
+    //     width: calc((100% - 40px) * 0.18);
+    //     height: 100%;
+    //     position: relative;
+    //   }
 
-        .img-m-t{
-          height: 54%;
-          margin-bottom: 20px;
-          width: 100%;
-          flex-shrink: 0;
-          display: flex;
+    //   .img-m{
+    //     width: calc((100% - 40px) * 0.46);
+    //     margin: 0 20px;
+    //     display: flex;
+    //     flex-direction: column;
 
-          .img-m-t-l{
-            width: 50%;
-            height: 100%;
-            margin-right: 20px;
-            position: relative;
-          }
-          .img-m-t-r{
-            width: 50%;
-            height: 100%;
-            position: relative;
-          }
-        }
+    //     .img-m-t{
+    //       height: 54%;
+    //       margin-bottom: 20px;
+    //       width: 100%;
+    //       flex-shrink: 0;
+    //       display: flex;
 
-        .img-m-b{
-          width: 100%;
-          height: 20%;
-          display: flex;
-          flex-grow: 1;
+    //       .img-m-t-l{
+    //         width: 50%;
+    //         height: 100%;
+    //         margin-right: 20px;
+    //         position: relative;
+    //       }
+    //       .img-m-t-r{
+    //         width: 50%;
+    //         height: 100%;
+    //         position: relative;
+    //       }
+    //     }
 
-          .img-m-b-l{
-            width: 54%;
-            height: 100%;
-            margin-right: 20px;
-            position: relative;
-            flex-shrink: 0;
-          }
-          .img-m-b-r{
-            width: 50%;
-            height: 100%;
-            position: relative;
-          }
-        }
-      }
-      .img-r{
-        width: calc((100% - 40px) * 0.36);
-        height: 100%;
-        display: flex;
-        flex-direction: column;
+    //     .img-m-b{
+    //       width: 100%;
+    //       height: 20%;
+    //       display: flex;
+    //       flex-grow: 1;
 
-        .img-r-t{
-          width: 100%;
-          height: 40%;
-          position: relative;
-          margin-bottom: 20px;
-          flex-shrink: 0;
-        }
-        .img-r-b{
-          width: 100%;
-          height: 60%;
-          position: relative;
-        }
-      }
+    //       .img-m-b-l{
+    //         width: 54%;
+    //         height: 100%;
+    //         margin-right: 20px;
+    //         position: relative;
+    //         flex-shrink: 0;
+    //       }
+    //       .img-m-b-r{
+    //         width: 50%;
+    //         height: 100%;
+    //         position: relative;
+    //       }
+    //     }
+    //   }
+    //   .img-r{
+    //     width: calc((100% - 40px) * 0.36);
+    //     height: 100%;
+    //     display: flex;
+    //     flex-direction: column;
+
+    //     .img-r-t{
+    //       width: 100%;
+    //       height: 40%;
+    //       position: relative;
+    //       margin-bottom: 20px;
+    //       flex-shrink: 0;
+    //     }
+    //     .img-r-b{
+    //       width: 100%;
+    //       height: 60%;
+    //       position: relative;
+    //     }
+    //   }
       
 
-      .img-a{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    //   .img-a{
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     height: 100%;
+    //     width: auto;
+    //   }
+    //   .img-b{
+    //     position: absolute;
+    //     top: 50%;
+    //     left: 50%;
+    //     transform: translate(-50%, -50%);
+    //     width: 100%;
+    //     height: auto;
+    //   }
+    // }
+
+    .sweet-img {
+      display: flex;
+      width: 1520px;
+      height: 706px;
+      margin: 0 auto;
+
+      div {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .img-l {
+        width: 276px;
         height: 100%;
-        width: auto;
       }
-      .img-b{
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+
+      .img-m {
+        display: flex;
+        flex-direction: column;
+        width: 674px;
+        height: 100%;
+        margin: 0 20px;
+
+
+        .img-m-t {
+          display: flex;
+          height: 378px;
+          margin-bottom: 20px;
+
+          .img-m-t-l {
+            width: 330px;
+            height: 100%;
+            margin-right: 20px;
+          }
+          .img-m-t-r {
+            width: 324px;
+            height: 100%;
+          }
+        }
+        .img-m-b {
+          display: flex;
+          height: 308px;
+
+          .img-m-b-l {
+            width: 357px;
+            height: 100%;
+            margin-right: 20px;
+          }
+          .img-m-b-r {
+            width: 297px;
+            height: 100%;
+          }
+        }
+
+      }
+
+      .img-r {
+        width: 530px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .img-r-t {
+          height: 280px;
+          margin-bottom: 20px;
+        }
+
+        .img-r-b {
+          height: 406px;
+        }
+      }
+
+      img {
         width: 100%;
-        height: auto;
+        height: 100%;
       }
-    }
-    .sweet-img::before{
-      display: block;
-      content: '.';
-      height: 0;
-      opacity: 0;
-      visibility: hidden;
-      clear: both;
     }
 
-    .mask-layer{
-      position: absolute;
+    .mask-layer {
+      position: absolute !important;
       top: 0;
       left: 0;
       width: 100%;
@@ -1889,13 +1981,13 @@ section {
       // display: none;
     }
 
-    .mask-layer:hover{
+    .mask-layer:hover {
       background-color: rgba(0, 0, 0, 0.3);
-      transition: background-color 0.4s ease-in;
+      transition: background-color 0.3s ease-in;
     }
   }
 
-  .effects{
+  .effects {
     transform: scale(0.96) translateY(-50%) !important;
     background-color: #e5d5c7 !important;
     border-radius: 3px !important;

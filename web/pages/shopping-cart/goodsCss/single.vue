@@ -22,7 +22,7 @@
           </div>
         </div>
       </nuxt-link>
-      <nuxt-link :to="getJumpLink(g)">
+      <nuxt-link :to="getJumpLink(g)" class="good-desc-wrap">
         <div class="good-desc" @click="goDetail()">
           <div>
             {{ g.goodsName }}
@@ -93,19 +93,19 @@
           }}
         </span>
       </div>
-      <div
-        v-show="options"
-        v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
-        class="good-btn"
-      >
-        <i class="iconfont iconlajitong" @click="deleteGood()" />
-      </div>
-      <div v-show="options" v-else class="lose-btn">
-        <div @click="searchSimilar(g.data[0])">
-          {{ $t(`cart.searchSimilar`) }}
+
+      <div class="btn-box">
+        <div
+          v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
+          class="good-btn"
+        >
+          <i class="iconfont iconlajitong" @click="deleteGood()" />
         </div>
-        <div />
-        <i class="iconfont iconlajitong" @click="deleteGood()" />
+        <div v-else class="lose-btn">
+          <div @click="searchSimilar(g.data[0])">
+            {{ $t(`cart.searchSimilar`) }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -245,9 +245,9 @@ export default {
 <style scoped lang="less">
 .single {
   border-bottom: 1px solid rgba(239, 239, 239, 1);
+  width: calc(100% - 49px);
   .good-info {
     position: relative;
-    width: 1250px;
     height: 179px;
     border-bottom: 1px solid rgba(239, 239, 239, 1);
     display: flex;
@@ -262,6 +262,7 @@ export default {
       display: flex;
       align-items: center;
       margin-right: 20px;
+      box-sizing: border-box;
       img {
         display: block;
         width: 100%;
@@ -269,9 +270,7 @@ export default {
       }
     }
     .good-desc {
-      width: 269px;
       line-height: 18px;
-      margin-right: 50px;
       div:nth-child(1) {
         max-height: 18 * 3px;
         margin-bottom: 16px;
@@ -287,8 +286,9 @@ export default {
       }
     }
     .good-information {
-      width: 185px;
-      margin-right: 50px;
+      width: calc((100% - 140px) * 0.3);
+      padding-right: 20px;
+      box-sizing: border-box;
       .infos {
         width: 100%;
         display: flex;
@@ -317,7 +317,7 @@ export default {
       -webkit-box-orient: vertical;
     }
     .good-num {
-      width: 80px;
+      width: calc((100% - 140px) * 0.1);
       text-align: center;
       font-size: 18px;
       color: #333;
@@ -325,48 +325,30 @@ export default {
       box-sizing: border-box;
     }
     .good-price {
+      width: calc((100% - 140px) * 0.14);
       font-family: twCenMt;
       font-size: 18px;
       color: #f29b87;
-      width: 180px;
       text-align: center;
       padding: 0 10px;
       box-sizing: border-box;
     }
     .good-btn {
-      width: 100px;
       height: 21px;
       line-height: 21px;
-      position: absolute;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
       display: flex;
       align-items: center;
-      justify-content: center;
-      div:nth-child(2) {
-        width: 1px;
-        height: 21px;
-        background-color: rgba(166, 166, 166, 1);
-      }
+      justify-content: space-between;
+
       i {
-        width: 18px;
         display: block;
+        width: 18px;
         height: 21px;
         line-height: 21px;
         color: #999999;
         font-size: 20px;
         cursor: pointer;
-      }
-      div:nth-child(1) {
-        cursor: pointer;
-        width: 22px;
-        height: 21px;
-        img {
-          display: block;
-          width: 100%;
-          height: 100%;
-        }
+        margin: 0 auto;
       }
     }
   }
@@ -423,15 +405,19 @@ export default {
     width: 100px;
     height: 21px;
     line-height: 21px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10px;
-    box-sizing: border-box;
+    margin: 0 auto;
+
+    div:nth-child(1) {
+      /*width: 43px;*/
+      height: 15px;
+      line-height: 15px;
+      font-size: 14px;
+      color: #aa8a7b;
+      cursor: pointer;
+    }
     div:nth-child(2) {
       width: 1px;
       height: 21px;
@@ -446,15 +432,17 @@ export default {
       font-size: 20px;
       cursor: pointer;
     }
-    div:nth-child(1) {
-      /*width: 43px;*/
-      height: 15px;
-      line-height: 15px;
-      font-size: 14px;
-      color: #aa8a7b;
-      cursor: pointer;
-    }
   }
+}
+
+.good-desc-wrap{
+  width: calc((100% - 140px) * 0.32);
+  padding-right: 20px;
+  box-sizing: border-box;
+}
+
+.btn-box{
+  width: calc((100% - 140px) * 0.14);
 }
 
 .old-price{
