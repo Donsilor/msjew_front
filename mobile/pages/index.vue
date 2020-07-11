@@ -1,9 +1,31 @@
 <template>
   <div class="page">
-    <!-- <tip-message></tip-message> -->
-    <section class="banner">
-      <template v-if="banner.length > 1">
-        <swiper :indicator="true" :auto="true" :duration="5000">
+    <!-- 美国站点 -->
+    <div v-if="platform == 31" class="us-page">
+      <section class="banner">
+        <template v-if="banner.length > 1">
+          <swiper :indicator="true" :auto="true" :duration="5000">
+            <template v-for="(each, n) in banner">
+              <template v-if="each.url">
+                <a
+                  :key="n"
+                  :href="each.url"
+                  :target="each.openType === 1 ? '_blank' : '_self'"
+                >
+                  <div :key="n" class="swiper-item">
+                    <img :src="each.image" @error="imageError" />
+                  </div>
+                </a>
+              </template>
+              <template v-else>
+                <div :key="n" class="swiper-item">
+                  <img :src="each.image" @error="imageError" />
+                </div>
+              </template>
+            </template>
+          </swiper>
+        </template>
+        <template v-else>
           <template v-for="(each, n) in banner">
             <template v-if="each.url">
               <a
@@ -22,186 +44,297 @@
               </div>
             </template>
           </template>
+        </template>
+      </section>
+
+      <section class="hot">
+        <div class="tit-box">HOT SALE
+          <div class="line"></div>
+        </div>
+        <swiper ref="us-host-list" :item-width="40" :indicator="false" :style="{height:sImgHeight + 'px'}">
+          <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
+            <a :href="hot.link">
+              <div class="product-image" :height="sImgHeight + 'px'">
+                <img class="product-image" :src="hot.url"/>
+              </div>
+            
+              <div class="price">USD {{hot.price}}</div>
+            </a>
+          </div>
+
+          <div class="instructions">
+      <span class="instructions-item active"></span>
+      <span class="instructions-item"></span>
+      <span class="instructions-item"></span>
+    </div>
         </swiper>
-      </template>
-      <template v-else>
-        <template v-for="(each, n) in banner">
-          <template v-if="each.url">
-            <a
-              :key="n"
-              :href="each.url"
-              :target="each.openType === 1 ? '_blank' : '_self'"
-            >
+      </section>
+
+      <section class="show-box">
+        <a href="">
+          <img src="../static/index-us/img-01.png" alt="">
+        </a>
+        <a href="">
+          <img src="../static/index-us/img-02.png" alt="">
+        </a>
+        <a href="">
+          <img src="../static/index-us/img-03.png" alt="">
+        </a>
+      </section>
+
+      <section class="hot">
+        <div class="tit-box">NEW PRODUCTS
+          <div class="line"></div>
+        </div>
+        <swiper ref="us-host-list" :item-width="25" :indicator="false" :style="{height:sImgHeight + 'px'}">
+          <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
+            <a :href="hot.link">
+              <div class="product-image" :height="sImgHeight + 'px'">
+                <img class="product-image" :src="hot.url"/>
+              </div>
+            
+              <div class="price">USD {{hot.price}}</div>
+            </a>
+          </div>
+        </swiper>
+      </section>
+
+      <section class="sweet">
+        <div class="tit-box">SWEET SHOW
+          <div class="line"></div>
+        </div>
+
+        <div class="sweet-img-box">
+          <div class="img-l">
+            <img src="../static/index-us/sweet-1005.png" alt="">
+          </div>
+          <div class="img-r">
+            <div class="img-r-t">
+              <div class="img-r-t-l">
+                <img src="../static/index-us/sweet-1006.png" alt="">
+              </div>
+              <div class="img-r-t-r">
+                <img src="../static/index-us/sweet-1007.png" alt="">
+              </div>
+            </div>
+
+            <div class="img-r-b">
+              <div class="img-r-b-l">
+                <img src="../static/index-us/sweet-1008.png" alt="">
+              </div>
+              <div class="img-r-b-r">
+                <img src="../static/index-us/sweet-1009.png" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- 非美国站点 -->
+    <div v-if="platform == 11 || platform == 21">
+      <!-- <tip-message></tip-message> -->
+      <section class="banner">
+        <template v-if="banner.length > 1">
+          <swiper :indicator="true" :auto="true" :duration="5000">
+            <template v-for="(each, n) in banner">
+              <template v-if="each.url">
+                <a
+                  :key="n"
+                  :href="each.url"
+                  :target="each.openType === 1 ? '_blank' : '_self'"
+                >
+                  <div :key="n" class="swiper-item">
+                    <img :src="each.image" @error="imageError" />
+                  </div>
+                </a>
+              </template>
+              <template v-else>
+                <div :key="n" class="swiper-item">
+                  <img :src="each.image" @error="imageError" />
+                </div>
+              </template>
+            </template>
+          </swiper>
+        </template>
+        <template v-else>
+          <template v-for="(each, n) in banner">
+            <template v-if="each.url">
+              <a
+                :key="n"
+                :href="each.url"
+                :target="each.openType === 1 ? '_blank' : '_self'"
+              >
+                <div :key="n" class="swiper-item">
+                  <img :src="each.image" @error="imageError" />
+                </div>
+              </a>
+            </template>
+            <template v-else>
               <div :key="n" class="swiper-item">
                 <img :src="each.image" @error="imageError" />
               </div>
-            </a>
-          </template>
-          <template v-else>
-            <div :key="n" class="swiper-item">
-              <img :src="each.image" @error="imageError" />
-            </div>
+            </template>
           </template>
         </template>
-      </template>
-    </section>
-    <section class="customize">
-      <h1 class="title margin-bottom-40">{{ lang.diySubTitle }}</h1>
-      <!--      <h2 class="sub-title">{{ lang.diySubTitle }}</h2>-->
-      <div class="exhibition">
-        <img
-          v-show="exhibitionImageStatus"
-          ref="exhibition-image"
-          src="/index/exhibition.png"
-          @click="clickVideoCover"
-        />
-        <video
-          v-show="!exhibitionImageStatus"
-          ref="exhibition-video"
-          src="/index/exhibition.mp4"
-          webkit-playsinline
-          playsinline
-          x5-playsinline
-          @click="clickVideo"
-          @ended="videoEnded"
-        ></video>
-      </div>
-      <div class="button-group">
-        <button @click="goToMade(2)">{{ lang.startFromRing }}</button>
-        <span>OR</span>
-        <button @click="goToMade(1)">{{ lang.startFromDiamond }}</button>
-      </div>
-      <!--      <div class="tips">-->
-      <!--        <h2>{{ lang.syiwo }}</h2>-->
-      <!--        <h3 @click="goToMade(2)">{{ lang.ig }}</h3>-->
-      <!--      </div>-->
-    </section>
-    <section class="categories">
-      <div
-        v-for="(each, n) in categories"
-        :key="n"
-        :class="['category', `${each.textAlign}-title`]"
-        @click="routerTo(each.routerName, each.query)"
-      >
-        <img class="category-bg" :src="each.bg" />
-        <img class="category-image" :src="each.image" />
-        <div class="info">
-          <div class="title">{{ each.title }}</div>
-          <div class="sub-title">{{ each.subTitle }}</div>
+      </section>
+      <section class="customize">
+        <h1 class="title margin-bottom-40">{{ lang.diySubTitle }}</h1>
+        <!--      <h2 class="sub-title">{{ lang.diySubTitle }}</h2>-->
+        <div class="exhibition">
+          <img
+            v-show="exhibitionImageStatus"
+            ref="exhibition-image"
+            src="/index/exhibition.png"
+            @click="clickVideoCover"
+          />
+          <video
+            v-show="!exhibitionImageStatus"
+            ref="exhibition-video"
+            src="/index/exhibition.mp4"
+            webkit-playsinline
+            playsinline
+            x5-playsinline
+            @click="clickVideo"
+            @ended="videoEnded"
+          ></video>
         </div>
-      </div>
-    </section>
-    <section class="recommend">
-      <h1 class="title">{{ cardsInfo.moduleTitle }}</h1>
-      <!--      <h1 class="title">{{ lang.fineJewelry }}</h1>-->
-      <!--      <h2 class="sub-title">{{ lang.recommend }}</h2>-->
-      <h3 class="title-line"></h3>
-      <div class="cards">
-        <swiper
-          :item-width="77.3"
-          :indicator="false"
-          :scale="true"
-          :auto="true"
-          :duration="5000"
-          @change="changeCard"
+        <div class="button-group">
+          <button @click="goToMade(2)">{{ lang.startFromRing }}</button>
+          <span>OR</span>
+          <button @click="goToMade(1)">{{ lang.startFromDiamond }}</button>
+        </div>
+        <!--      <div class="tips">-->
+        <!--        <h2>{{ lang.syiwo }}</h2>-->
+        <!--        <h3 @click="goToMade(2)">{{ lang.ig }}</h3>-->
+        <!--      </div>-->
+      </section>
+      <section class="categories">
+        <div
+          v-for="(each, n) in categories"
+          :key="n"
+          :class="['category', `${each.textAlign}-title`]"
+          @click="routerTo(each.routerName, each.query)"
         >
-          <div
+          <img class="category-bg" :src="each.bg" />
+          <img class="category-image" :src="each.image" />
+          <div class="info">
+            <div class="title">{{ each.title }}</div>
+            <div class="sub-title">{{ each.subTitle }}</div>
+          </div>
+        </div>
+      </section>
+      <section class="recommend">
+        <h1 class="title">{{ cardsInfo.moduleTitle }}</h1>
+        <!--      <h1 class="title">{{ lang.fineJewelry }}</h1>-->
+        <!--      <h2 class="sub-title">{{ lang.recommend }}</h2>-->
+        <h3 class="title-line"></h3>
+        <div class="cards">
+          <swiper
+            :item-width="77.3"
+            :indicator="false"
+            :scale="true"
+            :auto="true"
+            :duration="5000"
+            @change="changeCard"
+          >
+            <div
+              v-for="(each, n) in cards"
+              :key="n"
+              class="recommend-item"
+              @click="toCardDetail(each)"
+            >
+              <div class="product-image">
+                <img
+                  :src="imageStrToArray(each.goodsImages)[0]"
+                  @error="imageError"
+                />
+              </div>
+              <div class="product-price">
+                <span>{{ formatCoin(each.coinType)}}</span>
+                <span>{{ formatNumber(each.salePrice) }}</span>
+              </div>
+              <div class="product-name ow-h1">{{ each.goodsName }}</div>
+              <div class="more">
+                <span>{{ lang.checkDetail }}</span>
+              </div>
+            </div>
+          </swiper>
+        </div>
+        <div class="indicator">
+          <span
             v-for="(each, n) in cards"
             :key="n"
-            class="recommend-item"
-            @click="toCardDetail(each)"
-          >
-            <div class="product-image">
-              <img
-                :src="imageStrToArray(each.goodsImages)[0]"
-                @error="imageError"
-              />
-            </div>
-            <div class="product-price">
-              <span>{{ formatCoin(each.coinType)}}</span>
-              <span>{{ formatNumber(each.salePrice) }}</span>
-            </div>
-            <div class="product-name ow-h1">{{ each.goodsName }}</div>
-            <div class="more">
-              <span>{{ lang.checkDetail }}</span>
-            </div>
+            :class="['indicator-item', { active: activeCard === n }]"
+          ></span>
+        </div>
+        <div class="others">
+          <button class="see-more" @click="moreCard">{{ lang.seeMore }}</button>
+        </div>
+      </section>
+      <section class="contact-us">
+        <h1 class="title">{{ lang.callUs }}</h1>
+        <div class="map" v-show="this.$store.state.platform == 11">
+          <img src="/index/map.png" />
+        </div>
+        <div class="info">
+          <div class="info-row" v-show="this.$store.state.platform !== 21">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.store }}</span>
+            <span class="row-text">{{ lang.storeName }}</span>
           </div>
-        </swiper>
-      </div>
-      <div class="indicator">
-        <span
-          v-for="(each, n) in cards"
-          :key="n"
-          :class="['indicator-item', { active: activeCard === n }]"
-        ></span>
-      </div>
-      <div class="others">
-        <button class="see-more" @click="moreCard">{{ lang.seeMore }}</button>
-      </div>
-    </section>
-    <section class="contact-us">
-      <h1 class="title">{{ lang.callUs }}</h1>
-      <div class="map" v-show="this.$store.state.platform == 11">
-        <img src="/index/map.png" />
-      </div>
-      <div class="info">
-        <div class="info-row" v-show="this.$store.state.platform !== 21">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.store }}</span>
-          <span class="row-text">{{ lang.storeName }}</span>
+          <div class="info-row" v-show="this.$store.state.platform == 21">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.address }}</span>
+            <span class="row-text">{{ lang.addressDetail }}</span>
+          </div>
+          <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.address }}</span>
+            <span class="row-text">{{ lang.addressDetailUs }}</span>
+          </div> -->
+          <div class="info-row">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.tel }}</span>
+            <span class="row-text">
+              <a v-if="this.$store.state.platform === 21" href="tel:+852 2165 3905">0755 25169121</a>
+              <a v-else href="tel:+852 2165 3905">+852 2165 3905</a>
+            </span>
+            <span class="column-line"></span>
+            <span class="row-icon">
+              <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+                <i class="iconfont iconphone"></i>
+              </a>
+              <a v-else href="tel:+852 2165 3905">
+                <i class="iconfont iconphone"></i>
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.email }}</span>
+            <span class="row-text">
+              <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">e-service@bddco.com</a>
+              <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
+            </span>
+            <span class="column-line"></span>
+            <span class="row-icon">
+              <a v-if="this.$store.state.platform == 21" href="mailto:e-service@bddco.com">
+                <i class="iconfont iconyouxiang"></i>
+              </a>
+              <a v-else href="mailto:service@bddco.com">
+                <i class="iconfont iconyouxiang"></i>
+              </a>
+            </span>
+          </div>
+          <div class="info-row" v-show="this.$store.state.platform !== 21">
+            <nuxt-link :to="{ path: '/contact' }" >
+              <button class="contact-button">{{ lang.callUs }}</button>
+            </nuxt-link>
+          </div>
         </div>
-        <div class="info-row" v-show="this.$store.state.platform == 21">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.address }}</span>
-          <span class="row-text">{{ lang.addressDetail }}</span>
-        </div>
-        <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.address }}</span>
-          <span class="row-text">{{ lang.addressDetailUs }}</span>
-        </div> -->
-        <div class="info-row">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.tel }}</span>
-          <span class="row-text">
-            <a v-if="this.$store.state.platform === 21" href="tel:+852 2165 3905">0755 25169121</a>
-            <a v-else href="tel:+852 2165 3905">+852 2165 3905</a>
-          </span>
-          <span class="column-line"></span>
-          <span class="row-icon">
-            <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
-              <i class="iconfont iconphone"></i>
-            </a>
-            <a v-else href="tel:+852 2165 3905">
-              <i class="iconfont iconphone"></i>
-            </a>
-          </span>
-        </div>
-        <div class="info-row">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.email }}</span>
-          <span class="row-text">
-            <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">e-service@bddco.com</a>
-            <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
-          </span>
-          <span class="column-line"></span>
-          <span class="row-icon">
-            <a v-if="this.$store.state.platform == 21" href="mailto:e-service@bddco.com">
-              <i class="iconfont iconyouxiang"></i>
-            </a>
-            <a v-else href="mailto:service@bddco.com">
-              <i class="iconfont iconyouxiang"></i>
-            </a>
-          </span>
-        </div>
-        <div class="info-row" v-show="this.$store.state.platform !== 21">
-          <nuxt-link :to="{ path: '/contact' }" >
-            <button class="contact-button">{{ lang.callUs }}</button>
-          </nuxt-link>
-        </div>
-      </div>
-    </section>
-    <!--    <site-switch ref="site-switch"></site-switch>-->
+      </section>
+      <!--    <site-switch ref="site-switch"></site-switch>-->
+    </div>
   </div>
 </template>
 
@@ -277,8 +410,102 @@ export default {
       ],
       activeCard: 0,
       webSite: null,
-
-      exhibitionImageStatus: true
+      exhibitionImageStatus: true,
+      platform: 0,
+      sImgHeight: 100,
+      hotImgUrl: [
+        {
+          'url': require('../static/index-us/hot-202.png'),
+          'id': 134,
+          'link': 'https://us.bddco.com/ring/wedding-rings/682?goodId=682&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-203.png'),
+          'id': 679,
+          'link': 'https://us.bddco.com/ring/wedding-rings/679?goodId=679&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-204.png'),
+          'id': 684,
+          'link': 'https://us.bddco.com/ring/wedding-rings/684?goodId=684&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-205.png'),
+          'id': 230,
+          'link': 'https://us.bddco.com/ring/wedding-rings/230?goodId=230&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-206.png'),
+          'id': 147,
+          'link': 'https://us.bddco.com/ring/wedding-rings/147?goodId=147&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-207.png'),
+          'id': 231,
+          'link': 'https://us.bddco.com/ring/wedding-rings/231?goodId=231&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-208.png'),
+          'id': 126,
+          'link': 'https://us.bddco.com/ring/wedding-rings/126?goodId=126&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-209.png'),
+          'id': 128,
+          'link': 'https://us.bddco.com/ring/wedding-rings/128?goodId=128&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-210.png'),
+          'id': 150,
+          'link': 'https://us.bddco.com/ring/wedding-rings/150?goodId=150&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-211.png'),
+          'id': 134,
+          'link': 'https://us.bddco.com/ring/wedding-rings/134?goodId=134&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-212.png'),
+          'id': 118,
+          'link': 'https://us.bddco.com/ring/wedding-rings/118?goodId=118&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-213.png'),
+          'id': 145,
+          'link': 'https://us.bddco.com/ring/wedding-rings/145?goodId=145&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-214.png'),
+          'id': 120,
+          'link': 'https://us.bddco.com/ring/wedding-rings/120?goodId=120&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-215.png'),
+          'id': 145,
+          'link': 'https://us.bddco.com/ring/wedding-rings/145?goodId=145&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-216.png'),
+          'id': 233,
+          'link': 'https://us.bddco.com/ring/wedding-rings/233?goodId=233&ringType=single',
+          'price': 0
+        }
+      ],
+      
     }
   },
   computed: {
@@ -363,6 +590,7 @@ export default {
   },
   mounted(){
     console.log("this.seoInfo",this.seoInfo)
+    this.platform = this.$store.state.platform
   },
   // mounted() {
   //   const _this = this
@@ -1139,6 +1367,123 @@ export default {
     .info-row:nth-of-type(1) {
       border-bottom: 0;
       /*border-bottom: 1px solid rgba(190, 190, 190, 1); !*no*!*/
+    }
+  }
+}
+
+.us-page{
+  .hot{
+    background-color: #f6f1eb;
+    height: 300px;
+
+    .host-item{
+      margin: 0 15%;
+    }
+  }
+
+  .tit-box{
+    position: relative;
+    height: 100px;
+    line-height: 110px;
+    text-align: center;
+    font-size: 24px;
+    color: #444;
+    margin-bottom: 20px;
+
+    .line{
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: scaleY(0.5) translateX(-50%);
+      width: 15%;
+      height: 1px;
+      background-color: #999;
+    }
+  }
+
+  .show-box{
+    a{
+      width: 100%;
+      margin-bottom: 12px;
+
+      img{
+        width: 100%;
+      }
+    }
+  }
+
+  .sweet-img-box{
+    padding: 0 10px;
+    box-sizing: border-box;
+    display: flex;
+    height: 250px;
+
+    div{
+      position: relative;
+    }
+
+    img{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, -50%);
+    }
+
+    .img-l{
+      width: calc((100% - 10px) * 0.29);
+      height: 100%;
+      margin-right: 10px;
+      flex-shrink: 0;
+      flex-grow: 0;
+    }
+
+    .img-r{
+      display: flex;
+      flex-direction: column;
+      width: calc((100% - 10px) * 0.71);
+      height: 100%;
+      flex-grow: 1;
+
+      .img-r-t{
+        display: flex;
+        width: 100%;
+        height: calc((100% - 10px) * 0.54);
+        margin-bottom: 10px;
+        flex-shrink: 0;
+        flex-grow: 0;
+
+        .img-r-t-l{
+          width: calc((100% - 10px) * 0.51);
+          margin-right: 10px;
+          flex-shrink: 0;
+          flex-grow: 0;
+        }
+
+        .img-r-t-r{
+          width: calc((100% - 10px) * 0.49);
+          flex-grow: 1;
+        }
+      }
+
+      .img-r-b{
+        display: flex;
+        width: 100%;
+        height: calc((100% - 10px) * 0.46);
+        flex-grow: 1;
+
+        .img-r-b-l{
+          width: calc((100% - 10px) * 0.426);
+          margin-right: 10px;
+          flex-shrink: 0;
+          flex-grow: 0;
+        }
+
+        .img-r-b-r{
+          width: calc((100% - 10px) * 0.574);
+          flex-grow: 1;
+        }
+      }
     }
   }
 }
