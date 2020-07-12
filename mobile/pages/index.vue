@@ -51,7 +51,7 @@
         <div class="tit-box">HOT SALE
           <div class="line"></div>
         </div>
-        <swiper ref="us-host-list" :item-width="40" :indicator="false" :style="{height:sImgHeight + 'px'}">
+        <swiper2 ref="us-host-list" :item-width="40" :indicator="false" :style="{height:sImgHeight + 'px'}">
           <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
             <a :href="hot.link">
               <div class="product-image" :height="sImgHeight + 'px'">
@@ -61,13 +61,7 @@
               <div class="price">USD {{hot.price}}</div>
             </a>
           </div>
-
-          <div class="instructions">
-      <span class="instructions-item active"></span>
-      <span class="instructions-item"></span>
-      <span class="instructions-item"></span>
-    </div>
-        </swiper>
+        </swiper2>
       </section>
 
       <section class="show-box">

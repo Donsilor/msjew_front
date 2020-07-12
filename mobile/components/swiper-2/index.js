@@ -11,6 +11,6 @@ import Component from './pro.vue'
 // console.log('modules=======>', modules)
 export default {
   install(Vue) {
-    Vue.component('swiper', Component)
+    Vue.component('swiper2', Component)
   }
 }
