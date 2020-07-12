@@ -244,4 +244,8 @@ export default {
 .instructions-item.active {
   background-color: rgba(255, 255, 255, 1);
 }
+
+.active{
+  border: 1px solid red
+}
 </style>

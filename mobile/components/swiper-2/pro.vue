@@ -7,6 +7,7 @@
           :key="n"
           class="content-item"
           :style="getPosition(n)"
+          :class="{ active: activeIndex === n }"
         >
           <!--          <span>{{ n }}</span>-->
           <slot :name="`content-${n}`">
@@ -263,7 +264,7 @@ export default {
       if (start < ready) {
         // 左边
         zIndex = ready - start
-        left = zIndex * -101
+        left = zIndex * -100 - 20
       } else if (start === ready) {
         // 中间
         zIndex = 0
@@ -271,7 +272,7 @@ export default {
       } else {
         // 右边
         zIndex = start - ready
-        left = zIndex * 101
+        left = zIndex * 100 + 20
       }
       left += this.getTouchMoveProprotion
 
@@ -279,7 +280,7 @@ export default {
       if (index === this.active) {
         opacity = 1
       } else if (zIndex >= -2 && zIndex <= 2) {
-        opacity = this.opacity ? 0.6 : 1
+        opacity = 0.5
       } else {
         opacity = 0
       }
@@ -292,8 +293,8 @@ export default {
 
       const style = {
         width: `${this.itemWidth}%`,
+        transform: `translate(${left}%, ${left == 0 ? 17.4 : 0}%) ${scale} translateZ(0)`,
         left: `${(100 - this.itemWidth) / 2}%`,
-        transform: `translate(${left}%, 0) ${scale} translateZ(0)`,
         zIndex: zIndex,
         opacity: opacity
       }
@@ -480,4 +481,5 @@ export default {
 .instructions-item.active {
   background-color: rgba(255, 255, 255, 1);
 }
+
 </style>
