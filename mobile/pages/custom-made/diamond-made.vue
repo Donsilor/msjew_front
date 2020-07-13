@@ -60,6 +60,7 @@
         v-if="active === 3"
         :bd-arr="boardArr"
         @addCart="addCart"
+        @orderNow="orderNow" 
       ></finish>
     </scroll-box>
   </div>

@@ -107,6 +107,15 @@
         </span>
       </div>
     </div>
+    <div class="add-cart-btn" @click="orderNow">
+      <span>{{ lang.buyNow}} </span>
+      <div v-for="(c, index) in info1.details" :key="index">
+        <span v-if="parseInt(c.id) === parseInt(infoCheck)" class="price-add">
+          {{ formatCoin(info1.coinType) }}
+          {{ formatNumber(price1 + price2) }}
+        </span>
+      </div>
+    </div>
     <div class="swiper-title">{{ lang.swiperTitle }}</div>
     <div class="bot-swiper">
       <swiper :auto="true" :duration="5000">
@@ -240,6 +249,9 @@ export default {
       //   return
       // }
       this.$emit(`addCart`)
+    },
+    orderNow() {
+      this.$emit(`orderNow`)
     }
   }
 }

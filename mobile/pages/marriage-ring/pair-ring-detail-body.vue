@@ -183,6 +183,18 @@
         inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
       }} -->
     </div>
+    <div
+      :class="['btn-common btn-gray', { btnActive: canAddCart }]"
+      
+      @click="orderNow"
+    >
+     {{
+        lang.buyNow
+      }}
+      <!-- {{
+        inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
+      }} -->
+    </div>
     <!-- <div class="wish-and-share">
       <i
         :class="[

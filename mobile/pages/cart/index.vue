@@ -110,7 +110,7 @@
 
                     {{ item.goodsName }}
                   </h4>
-                  <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
+                  <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p> 
                   <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
                     
                     <p class="p">
@@ -331,7 +331,9 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.$nuxt.$loading.start()
+      if(this.list.length > 0){
+        this.$nuxt.$loading.start()
+      }
       localStorage.setItem('loading', 'yes');
       if (this.isLogin) {
         this.getList()
@@ -375,6 +377,7 @@ export default {
       if (arr.length <= 0) {
         this.$toast.show(this.lang.toast1)
       } else if (arr.length > 0) {
+        console.log("arr",arr)
         storage && storage.set('myCartList', JSON.stringify(arr))
         this.$router.push({
           name: 'cart-sureOrder'
@@ -406,7 +409,7 @@ export default {
     defaultAll(){
       if(!this.isLogin){
         this.selectAll = !this.selectAll
-        console.log("全选",this.list)
+        // console.log("全选",this.list)
         for (let i = 0; i < this.list.length; i++) {
           this.soudout = this.list[i].goodsStatus
           // console.log("所有",this.list[i].goodsStatus)
@@ -547,7 +550,7 @@ export default {
       if (list.length > 0) {
         // console.log("item",list)
         list.map((item, index) => {
-// console.log("itemlist",item)
+        // console.log("itemlist",item)
           if (index === list.length - 1) {
             text = text + item.configAttrIVal
           } else {
@@ -606,7 +609,7 @@ export default {
         }
       })
         .then(res => {
-          console.log("本地",res)
+          // console.log("本地",res)
           this.$nuxt.$loading.finish()
           localStorage.removeItem('loading');
           this.isLoading = localStorage.getItem('loading')

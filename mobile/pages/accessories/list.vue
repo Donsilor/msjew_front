@@ -121,6 +121,14 @@ export default {
   },
   methods: {
     show(){
+      // let query = this.$route.query.actIndex;
+      // let path = this.$router.history.path;
+      //对象的拷贝
+      // let newQuery = JSON.parse(JSON.stringify(query));
+      // newQuery.pid = pid;
+      // this.$router.push({ path, actIndex: newQuery });
+      // console.log("active",this.actIndex,this.$route.query.actIndex)
+      // this.$route.query.actIndex = this.actIndex
       this.$nuxt.$loading.start()
       setTimeout(() => {
         this.$nuxt.$loading.finish()
