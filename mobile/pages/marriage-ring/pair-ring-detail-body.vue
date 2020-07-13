@@ -16,12 +16,12 @@
         </swiper>
 
         <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
-          <div class="triangle" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+          <div class="triangle" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
           <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
         </div>
       </div>
       <div class="title">
-        <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+        <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
         <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
         {{ goodInfo.goodsName }}
       </div>
@@ -52,8 +52,10 @@
           <div class="discoupon-d" v-if="goodInfo.coupon.discount">
             <div class="discoupon-d-l">
               <span class="text">{{ lang.discountsActive }}：</span>
-              <span class="discount-icon">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+              <span class="discount-icon">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             </div>
+
+            <div class="time">{{ lang.activityTime}}：{{activeTime}}</div>
           </div>
 
           <div class="discoupon-d" v-if="goodInfo.coupon.money">
@@ -363,7 +365,8 @@ export default {
         require('../../static/marriage-ring/icon-04.png')
       ],
       ifShowCoupon: false,
-      language: this.$store.state.language
+      language: this.$store.state.language,
+      activeTime:''
     }
   },
   computed: {
@@ -396,6 +399,10 @@ export default {
     }
   },
   mounted(){
+    const _this = this
+    if(this.goodInfo.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)
+    }
     // console.log("ddddd",this.canAddCart)this.firstRingId
       // const secondRing = _this.secondRingId
     // console.log("ooooooooo",this.firstRingId,this.secondRingId)
@@ -419,6 +426,9 @@ export default {
 <style scoped lang="less">
 .engagementRings-component {
   .details-component(100%);
+}
+.time {
+  color: #b49785;
 }
 </style>
 <style scoped>
