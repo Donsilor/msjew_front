@@ -7,7 +7,7 @@
           {{ lang.title }}
         </h4>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
-          {{ lang.phone }}
+          {{ platform == 21 ? lang.phoneCn : lang.phone }}
         </p>
       </div>
       <div class="code">
@@ -37,7 +37,7 @@
           {{ lang.title }}
         </h4>
         <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
-          {{ lang.phone }}
+          {{ platform == 21 ? lang.phoneCn : lang.phone }}
         </p>
       </div>
       <div class="code">
@@ -85,7 +85,8 @@ export default {
         coinType:'',
         payAmount:''
       },
-      list:[]
+      list:[],
+      platform: 11
     }
   },
   computed: {
@@ -96,6 +97,7 @@ export default {
   created() {
   },
   mounted(){
+    this.platform = this.$store.state.platform;
     this.list = JSON.parse(storage.get('myCartList', 0))
     // console.log("已登录",this.isLogin)
     const _this = this

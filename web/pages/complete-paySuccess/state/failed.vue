@@ -42,7 +42,7 @@
             <div>{{ $t(`${lang}.payFail`) }}</div>
           </div>
           <div class="tel">
-            {{ $t(`${lang}.contactPhone`) }}
+            {{ platform == 20 ? $t(`${lang}.contactPhoneCh`) : $t(`${lang}.contactPhone`) }}
           </div>
           <div class="btn-two">
             <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
