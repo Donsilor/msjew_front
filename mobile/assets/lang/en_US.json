@@ -314,7 +314,8 @@
     },
     "payFailed": {
       "title": "Sorry, the order payment failed! Please repay",
-      "phone": "For any questions, contact customer service (852)-2165 3905",
+      "phone": "For any questions, contact customer service (852)-2165 3908",
+      "phoneCn": "For any questions, contact customer service 0755 25169121",
       "orderNo": "Order#：",
       "payAgain": "PAY AGAIN",
       "continue": "CONTINUE",
