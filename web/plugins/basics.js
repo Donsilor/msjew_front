@@ -22,11 +22,16 @@ export default ({ req, app, store, $axios }, inject) => {
             coin = 'USD'
             areaId = 99
             platform = 30 //PC美国
+        } else if ((/^(tw|tw-bdd|wap-tw)\./is).test(host)) {
+            language = 'zh_TW'
+            coin = 'HKD'
+            areaId = 3
+            platform = 40 //PC台湾
         } else {
             language = 'zh_TW'
             coin = 'HKD'
             areaId = 2
-            platform = 10 //PC港澳台
+            platform = 10 //PC香港
         }
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')

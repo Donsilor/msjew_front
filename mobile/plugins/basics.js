@@ -22,6 +22,11 @@ export default ({ req, app, store, $axios }, inject) => {
             coin = 'USD'
             areaId = 99
             platform = 31 //移动-美国
+        } else if ((/^(tw|tw-bdd|wap-tw)\./is).test(host)) {
+            language = 'zh_TW'
+            coin = 'HKD'
+            areaId = 3
+            platform = 41 //移动-台湾
         } else {
             language = 'zh_TW'
             coin = 'HKD'
