@@ -18,7 +18,6 @@
               </div>
             </dd>
           </dl>
-          <div class="foot-line" ref="menus"></div>
         </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
@@ -39,7 +38,6 @@
               </div>
             </dd>
           </dl>
-          <div class="foot-line" ref="menus"></div>
         </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
@@ -60,7 +58,6 @@
               </div>
             </dd>
           </dl>
-          <div class="foot-line" ref="menus"></div>
         </div>
 
         <div class="Shadow" @click="setCoin()"></div>
@@ -143,6 +140,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.aboutBDD`),
           children: [
@@ -170,6 +168,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.BDDPolicy`),
           children: [
@@ -210,6 +209,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.contact`),
           children: [
@@ -264,6 +264,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.aboutBDD`),
           children: [
@@ -291,6 +292,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.BDDPolicy`),
           children: [
@@ -331,6 +333,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.contact`),
           children: [
@@ -392,6 +395,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.aboutBDD`),
           children: [
@@ -425,6 +429,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.BDDPolicy`),
           children: [
@@ -465,6 +470,7 @@ export default {
             }
           ]
         },
+        {},
         {
           groupName: this.$t(`${lang}.contact`),
           children: [
@@ -545,36 +551,11 @@ export default {
     ...mapState(['cartAmount', 'wishAmount']),
     ...mapGetters(['userInfo', 'hadLogin'])
   },
-  mounted() {
-    const _this = this
-    _this.$nextTick(() => {
-      Bus.$on('resizeFn', (val) => {
-        _this.onResize()
-      })
-    })
-  },
   methods: {
     ...mapMutations(['setCoin', 'setLanguage']),
     setCoin() {
       this.$store.commit('setCoin', 'CNY')
       window.location.reload()
-    },
-    onResize() {
-      var that = this;
-      var bWidth = document.body.clientWidth;
-
-      if(bWidth < 1366){
-        bWidth = 1366
-      }else if(bWidth > 1520){
-        bWidth = 1520
-      }
-
-      that.lineWidth = Math.round((bWidth - 80) * 0.05);
-
-      var child = this.$refs.menus;
-      for(var i=0,len=child.length; i<len; i++){
-        child[i].style.marginRight = that.lineWidth
-      }
     }
   }
 }
@@ -607,7 +588,6 @@ export default {
       position: relative;
       flex-grow: 0;
       flex-shrink: 0;
-      width: 20%;
       display: flex;
       justify-content: space-between;
 
@@ -663,7 +643,13 @@ export default {
 
     }
 
-    .menu-group:nth-child(4){
+    .menu-group:nth-child(even){
+      width: 1px;
+      height: 80px;
+      background-color: #444;
+      align-self: center;
+    }
+    .menu-group:last-child{
       width: 460px;
     }
   }
@@ -771,14 +757,5 @@ export default {
     }
   }
 }
-.foot-line{
-    width: 1px;
-    height: calc(100% - 60px);
-    background-color: #999999;
-    align-self: center;
-}
 
-.menu-group:nth-last-of-type(2) .foot-line{
-  display: none;
-}
 </style>

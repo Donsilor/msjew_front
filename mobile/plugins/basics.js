@@ -11,7 +11,6 @@ export default ({ req, app, store, $axios }, inject) => {
     let areaId = 99
     let platform = 11
     if (isServer) {
-        console.log(1111111111)
         let host = req.headers['host']
         if ((/^(cn|cn-bdd|wap-cn|www\.bddco\.cn|wap\.bddco\.cn)/is).test(host)) {
             language = 'zh_CN'
@@ -24,11 +23,10 @@ export default ({ req, app, store, $axios }, inject) => {
             areaId = 99
             platform = 31 //移动-美国
         } else {
-            console.log(22222222222)
             language = 'zh_TW'
             coin = 'HKD'
             areaId = 2
-            platform = 31 //移动-港澳台
+            platform = 11 //移动-港澳台
         }
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')

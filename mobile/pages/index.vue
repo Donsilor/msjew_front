@@ -47,64 +47,106 @@
         </template>
       </section>
 
-      <div class="bg">
-        <section class="hot" style="height:200px;border:1px solid red">
-        </section>
+      <section class="hot">
+        <div class="tit-box">HOT SALE
+          <div class="line"></div>
+        </div>
 
-        <section class="show-box">
-          <a href="">
-            <img src="../static/index-us/img-01.png" alt="">
-          </a>
-          <a href="">
-            <img src="../static/index-us/img-02.png" alt="">
-          </a>
-          <a href="">
-            <img src="../static/index-us/img-03.png" alt="">
-          </a>
-        </section>
+        <div class="swiper-box">
+          <swiper2 ref="us-host-list" :item-width="40" :indicator="false" :style="{height:hotHeight * 1.7 + 'px'}">
+            <div v-for="(hot, n) in hotUrl" :key="n" class="host-item">
+              <a :href="hot.link">
+                <div class="img-box" :style="{height:hotHeight + 'px'}">
+                  <img class="product-image" :src="hot.url"/>
+                </div>
+              </a>
+              
+                <div class="price">USD {{ formatMoney(hot.price) }}</div>
+            </div>
+          </swiper2>
 
-        <section class="new-products">
+          <div class="host-bar">
+            <div class="left-button" :class="{'effects': ifEffects == 1}" @touchstart="nextHotSale(false, 1)"></div>
+            <div class="right-button" :class="{'effects': ifEffects == 2}" @touchstart="nextHotSale(true, 2)"></div>
+          </div>
+        </div>
+      </section>
 
-        </section>
+      <section class="show-box">
+        <a href="https://wap-us.bddco.com/marriage-ring/single-ring">
+          <img src="../static/index-us/img-01.png" alt="">
+        </a>
+        <a href="https://wap-us.bddco.com/marriage-ring/single-ring?style=160">
+          <img src="../static/index-us/img-02.png" alt="">
+        </a>
+        <a href="https://wap-us.bddco.com/accessories/list?actIndex=3">
+          <img src="../static/index-us/img-03.png" alt="">
+        </a>
+      </section>
 
-      </div>
+      <section class="hot">
+        <div class="tit-box">NEW PRODUCTS
+          <div class="line"></div>
+        </div>
 
-      <section class="sweet-show">
+        <div class="swiper-box">
+          <swiper2 ref="new-products" :item-width="40" :indicator="false" :style="{height:hotHeight * 1.7 + 'px'}">
+            <div v-for="(hot, n) in newProducts" :key="n" class="host-item">
+              <a :href="hot.link">
+                <div class="img-box" :style="{height:hotHeight + 'px'}">
+                  <img class="product-image" :src="hot.url"/>
+                </div>
+              </a>
+              
+                <div class="price">USD {{ formatMoney(hot.price) }}</div>
+            </div>
+          </swiper2>
+
+          <div class="host-bar">
+            <div class="left-button" :class="{'effects': ifEffects == 1}" @touchstart="nextNewProduct(false, 3)"></div>
+            <div class="right-button" :class="{'effects': ifEffects == 2}" @touchstart="nextNewProduct(true, 4)"></div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="sweet">
         <div class="tit-box">SWEET SHOW
           <div class="line"></div>
         </div>
 
-        <div class="sweet-box">
-          <div class="sweet-l">
-            <img src="../static/index-us/img-1005.png" alt="">
+        <div class="sweet-img-box">
+          <div class="img-l">
+            <img src="../static/index-us/sweet-1005.png" alt="">
           </div>
-          <div class="sweet-r">
-            <div class="sweet-r-t">
-              <div class="sweet-r-t-l">
-                <img src="../static/index-us/img-1006.png" alt="">
+          <div class="img-r">
+            <div class="img-r-t">
+              <div class="img-r-t-l">
+                <img src="../static/index-us/sweet-1006.png" alt="">
               </div>
-              <div class="sweet-r-t-r">
-                <img src="../static/index-us/img-1007.png" alt="">
+              <div class="img-r-t-r">
+                <img src="../static/index-us/sweet-1007.png" alt="">
               </div>
             </div>
-            <div class="sweet-r-b">
-              <div class="sweet-r-b-l">
-                <img src="../static/index-us/img-1008.png" alt="">
+
+            <div class="img-r-b">
+              <div class="img-r-b-l">
+                <img src="../static/index-us/sweet-1008.png" alt="">
               </div>
-              <div class="sweet-r-b-r">
-                <img src="../static/index-us/img-1009.png" alt="">
+              <div class="img-r-b-r">
+                <img src="../static/index-us/sweet-1009.png" alt="">
               </div>
             </div>
           </div>
         </div>
-        <div class="sweet-6">
-          <img src="../static/index-us/img-1010.png" alt="">
+
+        <div class="sweet2">
+          <img src="../static/index-us/sweet-1010.png" alt="">
         </div>
       </section>
     </div>
-
     <!-- 非美国站点 -->
-    <div v-else>
+    <div v-if="platform == 11 || platform == 21">
       <!-- <tip-message></tip-message> -->
       <section class="banner">
         <template v-if="banner.length > 1">
@@ -240,27 +282,8 @@
             :class="['indicator-item', { active: activeCard === n }]"
           ></span>
         </div>
-        <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.address }}</span>
-          <span class="row-text">{{ lang.addressDetailUs }}</span>
-        </div> -->
-        <div class="info-row">
-          <span class="line"></span>
-          <span class="row-name">{{ lang.tel }}</span>
-          <span class="row-text">
-            <a v-if="this.$store.state.platform === 21" href="tel:+852 2165 3908">0755 25169121</a>
-            <a v-else href="tel:+852 2165 3908">+852 2165 3908</a>
-          </span>
-          <span class="column-line"></span>
-          <span class="row-icon">
-            <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
-              <i class="iconfont iconphone"></i>
-            </a>
-            <a v-else href="tel:+852 2165 3908">
-              <i class="iconfont iconphone"></i>
-            </a>
-          </span>
+        <div class="others">
+          <button class="see-more" @click="moreCard">{{ lang.seeMore }}</button>
         </div>
       </section>
       <section class="contact-us">
@@ -326,13 +349,14 @@
         </div>
       </section>
       <!--    <site-switch ref="site-switch"></site-switch>-->
-
     </div>
   </div>
 </template>
 
 <script>
 import Helpers from '@/assets/js/helpers.js'
+import { formatMoney } from '@/assets/js/filterUtil.js'
+
 export default {
   head() {
     return this.seoInfo || {}
@@ -403,9 +427,194 @@ export default {
       ],
       activeCard: 0,
       webSite: null,
-
       exhibitionImageStatus: true,
-      platform: 0
+      platform: 0,
+      hotUrl: [
+        {
+          'url': require('../static/index-us/hot-202.png'),
+          'id': 134,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=682&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-203.png'),
+          'id': 679,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=679&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-204.png'),
+          'id': 684,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=684&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-205.png'),
+          'id': 230,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=230&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-206.png'),
+          'id': 147,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=147&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-207.png'),
+          'id': 231,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=231&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-208.png'),
+          'id': 126,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=126&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-209.png'),
+          'id': 128,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=128&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-210.png'),
+          'id': 150,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=150&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-211.png'),
+          'id': 134,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=134&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-212.png'),
+          'id': 118,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=118&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-213.png'),
+          'id': 145,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=145&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-214.png'),
+          'id': 120,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=120&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-215.png'),
+          'id': 145,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=145&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/hot-216.png'),
+          'id': 233,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=233&ringType=single',
+          'price': 0
+        }
+      ],
+      newProducts: [
+        {
+          'url': require('../static/index-us/newProduct-301.png'),
+          'id': 217,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=217&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-302.png'),
+          'id': 212,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=212&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-303.png'),
+          'id': 657,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=657&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-304.png'),
+          'id': 614,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=614&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-305.png'),
+          'id': 149,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=149&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-306.png'),
+          'id': 137,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=137&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-307.png'),
+          'id': 124,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=124&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-309.png'),
+          'id': 139,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=139&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-310.png'),
+          'id': 122,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=122&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-311.png'),
+          'id': 234,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=234&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-312.png'),
+          'id': 138,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=138&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-313.png'),
+          'id': 123,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=123&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-314.png'),
+          'id': 151,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=151&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-315.png'),
+          'id': 125,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=125&ringType=single',
+          'price': 0
+        },
+        {
+          'url': require('../static/index-us/newProduct-316.png'),
+          'id': 213,
+          'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=213&ringType=single',
+          'price': 0
+        }
+      ],
+      hotHeight: 0,
+      ifEffects: 0
     }
   },
   computed: {
@@ -478,7 +687,6 @@ export default {
       }
     })
       .then(data => {
-        console.log(777,data.advert)
         return {
           seoInfo,
           ad: data.advert,
@@ -489,10 +697,16 @@ export default {
         console.error(err)
       })
   },
+  created() {
+    var that = this;
+    that.getPrice(that.hotUrl)
+    that.getPrice(that.newProducts)
+  },
   mounted(){
     console.log("this.seoInfo",this.seoInfo)
-
     this.platform = this.$store.state.platform
+
+    this.getImgHeight()
   },
   // mounted() {
   //   const _this = this
@@ -504,6 +718,7 @@ export default {
   //   })
   // },
   methods: {
+    formatMoney: formatMoney,
     getSetting() {
       const _this = this
       _this
@@ -849,6 +1064,63 @@ export default {
       } else if (de.webkitCancelFullScreen) {
         de.webkitCancelFullScreen()
       }
+    },
+    getImgHeight() {
+      const image = new Image()
+      var that = this, width = 0, height = 0, res = 0;
+      image.src = '../static/index-us/hot-202.png'
+      image.onload = result => {
+        width = image.width;
+        height = image.height;
+      }
+
+      if(width && height){
+        this.hotHeight =
+          Math.round((document.body.clientWidth * image.height) / image.width)
+      }else{
+        this.hotHeight =
+          Math.round(document.body.clientWidth * 0.4)
+      }
+    },
+    nextHotSale(type, k) {
+      this.addEffcts(k)
+      this.$refs['us-host-list'].goNext(type)
+    },
+    nextNewProduct(type, k) {
+      this.addEffcts(k)
+      this.$refs['new-products'].goNext(type)
+    },
+    addEffcts(k) {
+      this.ifEffects = k;
+      setTimeout(() => {
+        this.ifEffects = 0
+      },200)
+    },
+    getPrice(url) {
+      var that = this, hot = [];
+      url.forEach((o, i) => {
+        hot[i] = o.id
+      })
+
+      this.$axios
+        .post('/web/goods/style/search', {
+          styleId: hot
+        })
+        .then(res => {
+          var data = res.data;
+
+          data.forEach((o, i) => {
+            url.forEach((p, j) => {
+              if(o.id == p.id){
+                url[j].price = o.salePrice
+              }
+            })
+          })
+          
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   }
 }
@@ -1273,102 +1545,191 @@ export default {
   }
 }
 
-// 美国站点
 .us-page{
-  .bg{
+  .hot{
     background-color: #f6f1eb;
+    padding-bottom: 30px;
 
-
-    .show-box a{
-      width: 100%;
-      margin-bottom: 20px;
-
-        img{
-          width: 100%;
+    .swiper-box{
+      position: relative;
+      
+      .host-item{
+        .product-image{
+          height: 100%;
+          width: 100%
         }
+
+        .price{
+          height: 60px;
+          line-height: 60px;
+          text-align: center;
+          font-size: 15px;
+          color: #444;
+        }
+      }
+
     } 
   }
 
   .tit-box{
-    height: 100px;
-    padding-top: 40px;
-    box-sizing: border-box;
     position: relative;
+    height: 100px;
+    line-height: 110px;
+    text-align: center;
     font-size: 24px;
-    color: #333;
+    color: #444;
 
     .line{
       position: absolute;
       bottom: 0;
       left: 50%;
-      width: 56px;
+      transform: translateX(-50%);
+      width: 15%;
       height: 1px;
-      background-color: #333;
-      transform: scaleY(0.5) translateX(-50%);
+      background-color: #999;
     }
   }
 
-  .sweet-show{
-      background-color: #fbf8f3;
-      padding: 0 10px;
-      box-sizing: border-box;
+  .show-box{
+    font-size: 0;
 
-      .sweet-box{
-        display: flex;
-        width: 100%;
-        height: 250px;
-        margin: 30px 0 10px;
-
-        div{
-          overflow: hidden;
-        }
-
-        .sweet-l{
-          width: calc((100% - 10px) * 0.29);
-          height: 100%;
-          flex-shrink: 0;
-          margin-right: 10px;
-        }
-        .sweet-r{
-          flex-grow: 1;
-          display: flex;
-          flex-direction: column;
-
-          .sweet-r-t{
-            display: flex;
-            height: calc((100% - 10px) * 0.54);
-            margin-bottom: 10px;
-
-            .sweet-r-t-l{
-              width: calc((100% - 10px) * 0.49);
-              margin-right: 10px;
-              flex-shrink: 0;
-            }
-            .sweet-r-t-r{
-              flex-flow: 1;
-            }
-          }
-
-          .sweet-r-b{
-            flex-grow: 1;
-            display: flex;
-
-            .sweet-r-b-l{
-              width: calc((100% - 10px) * 0.4);
-              margin-right: 10px;
-              flex-shrink: 0;
-            }
-            .sweet-r-b-r{
-              flex-flow: 1;
-            }
-          }
-        }
-      }
+    a{
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 6px;
 
       img{
         width: 100%;
-        height: 100%;
       }
+    }
+    a:last-child{
+      margin-bottom: 0;
+    }
+  }
+
+  .sweet{
+    background-color: #fbf8f3;
+
+    .sweet-img-box{
+      padding: 0 10px;
+      box-sizing: border-box;
+      display: flex;
+      height: 250px;
+      margin-top: 30px;
+
+      div{
+        position: relative;
+      }
+
+      img{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%, -50%);
+      }
+
+      .img-l{
+        width: calc((100% - 10px) * 0.29);
+        height: 100%;
+        margin-right: 10px;
+        flex-shrink: 0;
+        flex-grow: 0;
+      }
+
+      .img-r{
+        display: flex;
+        flex-direction: column;
+        width: calc((100% - 10px) * 0.71);
+        height: 100%;
+        flex-grow: 1;
+
+        .img-r-t{
+          display: flex;
+          width: 100%;
+          height: calc((100% - 10px) * 0.54);
+          margin-bottom: 10px;
+          flex-shrink: 0;
+          flex-grow: 0;
+
+          .img-r-t-l{
+            width: calc((100% - 10px) * 0.51);
+            margin-right: 10px;
+            flex-shrink: 0;
+            flex-grow: 0;
+          }
+
+          .img-r-t-r{
+            width: calc((100% - 10px) * 0.49);
+            flex-grow: 1;
+          }
+        }
+
+        .img-r-b{
+          display: flex;
+          width: 100%;
+          height: calc((100% - 10px) * 0.46);
+          flex-grow: 1;
+
+          .img-r-b-l{
+            width: calc((100% - 10px) * 0.426);
+            margin-right: 10px;
+            flex-shrink: 0;
+            flex-grow: 0;
+          }
+
+          .img-r-b-r{
+            width: calc((100% - 10px) * 0.574);
+            flex-grow: 1;
+          }
+        }
+      }
+    }
+
+    .sweet2{
+      margin: 10px;
+
+      img{
+        width: 100%;
+      }
+    }
+  }
+
+  .host-bar{
+      position: absolute;
+      bottom: 20px;
+      left: 0px;
+      width: 100%;
+      height: 20px;
+
+      .left-button{
+        width: 30px;
+        height: 30px;
+        background: #c9bdbf url('../static/index-us/icon-left.png') center;
+        background-size: 80% 80%;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        transform: translateY(-50%);
+      }
+      .right-button{
+        width: 30px;
+        height: 30px;
+        background: #c9bdbf url('../static/index-us/icon-right.png') center;
+        background-size: 80% 80%;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        right: 20%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .effects {
+      border-radius: 50%;
+      transform: scale(0.94) translateY(-50%) !important;
+      background-color: #e5d5c7 !important;
     }
 }
 </style>

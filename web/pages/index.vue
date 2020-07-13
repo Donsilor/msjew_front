@@ -1769,7 +1769,7 @@ section {
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
-      background: #cebeb0 url('/index/icon-left.png') no-repeat 48% 48%;
+      background: #cebeb0 url('/index-us/icon-left.png') no-repeat 48% 48%;
       background-size: 90% 90%;
       border-radius: 2px;
     }
@@ -1781,7 +1781,7 @@ section {
       transform: translateY(-50%);
       width: 40px;
       height: 40px;
-      background: #cebeb0 url('/index/icon-right.png') no-repeat 48% 48%;
+      background: #cebeb0 url('/index-us/icon-right.png') no-repeat 48% 48%;
       background-size: 90% 90%;
       border-radius: 2px;
     }
