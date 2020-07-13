@@ -81,11 +81,46 @@
           method: 'get',
           url: 'web/market/detail',
           params: {
-            id: 13
+            id: 16
           }
         })
         .then(data => {
           this.discountsList = data.data.recommend[0];
+          console.log(777,this.discountsList)
+          var href = '', a = 0;
+          switch (a) {
+            case 2: href = '/ring/wedding-rings/'
+              break;
+            case 4: href = '/jewellery/necklace/'
+              break;
+            case 5: href = '/jewellery/pendant/'
+              break;
+            case 6: href = '/jewellery/studEarring/'
+              break;
+            case 7: href = '/jewellery/earring/'
+              break;
+            case 8: href = '/jewellery/braceletLine/'
+              break;
+            case 9: href = '/jewellery/bracelet/'
+              break;
+            case 12: href = '/build-your-own-ring/setting-details/'
+              break;
+            case 15: href = '/build-your-own-ring/diamond-details/'
+              break;
+            case 16: href = ''
+              break;
+            case 17: href = ''
+              break;
+            case 19: href = '/wedding-rings/classic-series'
+              break;
+            default: href = '/other/'
+              break;
+          }
+
+          a = 12
+            console.log(111,a)
+            console.log(222,href)
+            debugger
 
           var len = data.data.recommend[0].length,
               datas = data.data.recommend[0];
@@ -109,8 +144,15 @@
               }
             }
 
+            a = datas[i].categoryId
+            console.log(111,a)
+            console.log(222,href)
+            debugger
+
+            this.discountsList[i].to = href + datas[i].id
+            this.discountsList = [...this.discountsList]
           }
-            console.log(44,this.coupons)
+            console.log(44,this.discountsList)
           // this.loading = false
         })
         .catch(err => {
