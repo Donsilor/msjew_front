@@ -451,7 +451,7 @@ export default {
   /*background-color: darkcyan;*/
   overflow: hidden;
   opacity: 0.7;
-  transition: all 0.4s linear;
+  transition: all 0.2s linear;
 }
 /*.content-item span {*/
 /*  position: absolute;*/
@@ -476,7 +476,7 @@ export default {
   border-radius: 50%;
   margin: 0 5px;
   background-color: rgba(255, 255, 255, 0.5);
-  transition: all 0.5s linear;
+  transition: all 0.2s linear;
 }
 .instructions-item.active {
   background-color: rgba(255, 255, 255, 1);
@@ -485,7 +485,7 @@ export default {
 .active{
   .price{
     opacity: 1 !important;
-    transition: all 0.5s linear;
+    transition: all 0.2s linear;
   }
 }
 
