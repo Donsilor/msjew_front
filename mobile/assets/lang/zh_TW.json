@@ -608,7 +608,8 @@
     "addCartSuccess": "加入購物車成功",
     "addCartFail": "加入購物車是失敗",
     "discounts1": "優惠券",
-    "discounts2": "折"
+    "discounts2": "折",
+    "buyNow":"立即購買"
   },
   "diamond": {},
   "engagement": {
@@ -1122,7 +1123,8 @@
     "activityTime": "活動截止時間",
     "oddPrice": "原  價",
     "newPrice": "折後價",
-    "needLogin": "請先登錄，才能領取優惠券"
+    "needLogin": "請先登錄，才能領取優惠券",
+    "buyNow":"立即購買"
   },
   "listCommons": {
     "sliders": [
