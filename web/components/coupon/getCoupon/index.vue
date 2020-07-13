@@ -225,7 +225,6 @@
 
         .box-r {
           width: 900px;
-          min-height: 575px;
           display: flex;
           // align-items: center;
           justify-content: space-between;

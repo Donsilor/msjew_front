@@ -49,10 +49,10 @@
       <div class="list fl" v-for="(item, index) in discountsList" :key="index">
         <div class="child">
           <!-- <nuxt-link :to="item.to" class="goods-img" target="_blank"> -->
-          <div class="goods-img" :class="{'bg-color' : item.categoryId == 15}">
-            <img class="img-a" :src="item.goodsImages[0]" alt="">
-            <img class="img-b" :src="item.goodsImages[1] || item.goodsImages[0]" alt="">
-          </div>
+            <div class="goods-img" :class="{'bg-color' : item.categoryId == 15}">
+              <img class="img-a" :src="item.goodsImages[0]" alt="">
+              <img class="img-b" :src="item.goodsImages[1] || item.goodsImages[0]" alt="">
+            </div>
           <!-- </nuxt-link> -->
           <div class="price">
             <div class="currency">HKD</div>
@@ -72,7 +72,7 @@
     </div>
 
     <!-- 获取优惠券 -->
-    <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false"></get-coupon>
+    <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="coupons"></get-coupon>
   </div>
 </template>
 
@@ -84,7 +84,7 @@
 				lang,
         discountsList: [],
         showCoupon: false,
-        coupons: {16:123, 17:564, 20:153}
+        coupons: {}
       }
     },
     mounted() {
@@ -96,7 +96,7 @@
           }
         })
         .then(data => {
-          console.log(222,data)
+          console.log(222,data.data)
           this.discountsList = data.data.recommend[0];
 
           var len = data.data.recommend[0].length,
@@ -110,11 +110,19 @@
               for(var j in couponList){
                 var flag = true; 
                 for(var k in this.coupons){
-                  if(j != k){}
+                  if(j == k){
+                    flag = false;
+                  }
+                }
+
+                if(flag){
+                  this.coupons[j] = couponList[j]
                 }
               }
             }
+
           }
+            console.log(44,this.coupons)
           // this.loading = false
         })
         .catch(err => {
