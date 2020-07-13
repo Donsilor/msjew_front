@@ -74,13 +74,13 @@
 
       <section class="show-box">
         <a href="https://wap-us.bddco.com/marriage-ring/single-ring">
-          <img src="../static/index-us/img-01.png" alt="">
+          <img src="../static/index-us/img-01.jpg" alt="">
         </a>
         <a href="https://wap-us.bddco.com/marriage-ring/single-ring?style=160">
-          <img src="../static/index-us/img-02.png" alt="">
+          <img src="../static/index-us/img-02.jpg" alt="">
         </a>
         <a href="https://wap-us.bddco.com/accessories/list?actIndex=3">
-          <img src="../static/index-us/img-03.png" alt="">
+          <img src="../static/index-us/img-03.jpg" alt="">
         </a>
       </section>
 
