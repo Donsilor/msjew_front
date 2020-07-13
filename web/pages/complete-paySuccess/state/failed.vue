@@ -92,7 +92,7 @@
           <div>{{ $t(`${lang}.payFail`) }}</div>
         </div>
         <div class="tel">
-          {{ $t(`${lang}.contactPhone`) }}
+          {{ platform == 20 ? $t(`${lang}.contactPhoneCh`) : $t(`${lang}.contactPhone`) }}
         </div>
         <div class="btn-two">
           <div @click="returnBack2()">{{ $t(`${lang}.repay`) }}</div>
@@ -117,6 +117,7 @@ export default {
         coinType:'',
         orderAmount:''
       },
+      platform: 10
     }
   },
   created(){
@@ -130,6 +131,8 @@ export default {
     //   this.good = res
     //   console.log("vres",res)
     // })
+    this.platform = this.$store.state.platform;
+    
     if(this.$store.getters.hadLogin){
       this.$axios
         .get('/web/member/order/detail', {
