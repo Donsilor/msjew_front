@@ -96,6 +96,7 @@
           }
         })
         .then(data => {
+          console.log(222,data)
           this.discountsList = data.data.recommend[0];
 
           var len = data.data.recommend[0].length,
