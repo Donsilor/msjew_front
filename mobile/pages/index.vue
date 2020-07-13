@@ -103,8 +103,8 @@
           </swiper2>
 
           <div class="host-bar">
-            <div class="left-button" :class="{'effects': ifEffects == 1}" @touchstart="nextNewProduct(false, 3)"></div>
-            <div class="right-button" :class="{'effects': ifEffects == 2}" @touchstart="nextNewProduct(true, 4)"></div>
+            <div class="left-button" :class="{'effects': ifEffects == 3}" @touchstart="nextNewProduct(false, 3)"></div>
+            <div class="right-button" :class="{'effects': ifEffects == 4}" @touchstart="nextNewProduct(true, 4)"></div>
           </div>
         </div>
       </section>
