@@ -103,7 +103,7 @@
                   :type="showPassword ? 'text' : 'password'"
                   :placeholder="$t(`${lang}.newPassword`)"
                   @keydown.enter="changeSchedule2(3)"
-                  autocomplete="off"
+                  autompleocte="off"
                 />
                 <div class="password-eye" @click="changeRegisterPasswordStatus">
                   <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -226,31 +226,46 @@
                   {{ $t(`${lang}.changeEmail`) }}
                 </span>
               </div>
-              <div class="input-line">
+              <div class="input-line flex">
                 <input
                   v-model="info.code"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.inputEmailCode`)"
                   autocomplete="off"
                 />
+                <div class="send-email-code">
+                  <button  :class="['getCode', className]" :disabled="waiting" @click="sendCode">
+                    {{ waitingText }}
+                  </button>
+                </div>
               </div>
-              <div class="input-line">
+              <div class="input-line position">
                 <input
                   v-model="info.password"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.newPassword`)"
+                  :type="showPassword ? 'text' : 'password'"
                   @keydown.enter="changeSchedule(3)"
                   autocomplete="off"
                 />
+                <div class="password-eye" @click="changeRegisterPasswordStatus">
+                  <i v-show="!showPassword" class="iconfont iconcloes"></i>
+                  <i v-show="showPassword" class="iconfont iconopen"></i>
+                </div>
               </div>
-              <div class="input-line">
+              <div class="input-line position">
                 <input
                   v-model="info.password_repetition"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.confirmPassword`)"
+                  :type="showPassword ? 'text' : 'password'"
                   @keydown.enter="changeSchedule(3)"
                   autocomplete="off"
                 />
+                <div class="password-eye" @click="changeRegisterPasswordStatus">
+                  <i v-show="!showPassword" class="iconfont iconcloes"></i>
+                  <i v-show="showPassword" class="iconfont iconopen"></i>
+                </div>
               </div>
               <div class="button-group">
                 <button
@@ -542,7 +557,8 @@ export default {
     sendCode() {
         const _this = this
         return new Promise((resolve, reject) => {
-         _this
+        _this.setWait()
+        _this
         .$axios({
             method: 'post',
             url: '/web/site/email-code',
@@ -1266,17 +1282,6 @@ input{
   .code-main {
     justify-content: center;
   }
-  .password-eye {
-    position: absolute;
-    top: 45%;
-    right: 5px;
-    transform: translate(0, -50%);
-
-    .iconfont {
-      font-size: 20px;
-      color: #d2d2d2;
-    }
-  }
 }
 .pwdinput{
   text-align: left !important;
@@ -1292,5 +1297,38 @@ input{
   font-weight: 400;
   color: rgba(242, 155, 135, 1);
   display: none;
+}
+
+.password-eye {
+  position: absolute;
+  top: 45%;
+  right: 5px;
+  transform: translate(0, -50%);
+
+  .iconfont {
+    font-size: 20px;
+    color: #d2d2d2;
+  }
+}
+
+.position{
+  position: relative;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+
+  input{
+    width: 280px;
+    margin-right: 26px;
+  }
+
+  button{
+    padding: 10px;
+    height: 34px;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
 }
 </style>
