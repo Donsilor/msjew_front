@@ -482,4 +482,11 @@ export default {
   background-color: rgba(255, 255, 255, 1);
 }
 
+.active{
+  .price{
+    opacity: 1 !important;
+    transition: all 0.5s linear;
+  }
+}
+
 </style>

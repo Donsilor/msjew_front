@@ -61,7 +61,7 @@
                 </div>
               </a>
               
-                <div class="price">USD {{ formatMoney(hot.price) }}</div>
+              <div class="price">USD {{ formatMoney(hot.price) }}</div>
             </div>
           </swiper2>
 
@@ -109,7 +109,6 @@
         </div>
       </section>
 
-
       <section class="sweet">
         <div class="tit-box">SWEET SHOW
           <div class="line"></div>
@@ -142,6 +141,71 @@
 
         <div class="sweet2">
           <img src="../static/index-us/sweet-1010.png" alt="">
+        </div>
+      </section>
+
+      <section class="bg-color"></section>
+
+      <section class="contact-us">
+        <h1 class="title">{{ lang.callUs }}</h1>
+        <div class="map" v-show="this.$store.state.platform == 11">
+          <img src="/index/map.png" />
+        </div>
+        <div class="info">
+          <div class="info-row" v-show="this.$store.state.platform !== 21">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.store }}</span>
+            <span class="row-text">{{ lang.storeName }}</span>
+          </div>
+          <div class="info-row" v-show="this.$store.state.platform == 21">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.address }}</span>
+            <span class="row-text">{{ lang.addressDetail }}</span>
+          </div>
+          <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.address }}</span>
+            <span class="row-text">{{ lang.addressDetailUs }}</span>
+          </div> -->
+          <div class="info-row">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.tel }}</span>
+            <span class="row-text">
+              <a v-if="this.$store.state.platform === 21" href="tel:+852 2165 3905">0755 25169121</a>
+              <a v-else href="tel:+852 2165 3905">+852 2165 3905</a>
+            </span>
+            <span class="column-line"></span>
+            <span class="row-icon">
+              <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+                <i class="iconfont iconphone"></i>
+              </a>
+              <a v-else href="tel:+852 2165 3905">
+                <i class="iconfont iconphone"></i>
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="line"></span>
+            <span class="row-name">{{ lang.email }}</span>
+            <span class="row-text">
+              <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">e-service@bddco.com</a>
+              <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
+            </span>
+            <span class="column-line"></span>
+            <span class="row-icon">
+              <a v-if="this.$store.state.platform == 21" href="mailto:e-service@bddco.com">
+                <i class="iconfont iconyouxiang"></i>
+              </a>
+              <a v-else href="mailto:service@bddco.com">
+                <i class="iconfont iconyouxiang"></i>
+              </a>
+            </span>
+          </div>
+          <div class="info-row" v-show="this.$store.state.platform !== 21">
+            <nuxt-link :to="{ path: '/contact' }" >
+              <button class="contact-button">{{ lang.callUs }}</button>
+            </nuxt-link>
+          </div>
         </div>
       </section>
     </div>
@@ -703,7 +767,7 @@ export default {
     that.getPrice(that.newProducts)
   },
   mounted(){
-    console.log("this.seoInfo",this.seoInfo)
+    // console.log("this.seoInfo",this.seoInfo)
     this.platform = this.$store.state.platform
 
     this.getImgHeight()
@@ -1565,6 +1629,7 @@ export default {
           text-align: center;
           font-size: 15px;
           color: #444;
+          opacity: 0;
         }
       }
 
@@ -1687,7 +1752,7 @@ export default {
     }
 
     .sweet2{
-      margin: 10px;
+      margin: 10px 10px 20px;
 
       img{
         width: 100%;
@@ -1730,6 +1795,11 @@ export default {
       border-radius: 50%;
       transform: scale(0.94) translateY(-50%) !important;
       background-color: #e5d5c7 !important;
+    }
+
+    .bg-color{
+      height: 8px;
+      background-color: #f5f5f5;
     }
 }
 </style>
