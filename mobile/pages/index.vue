@@ -767,12 +767,11 @@ export default {
     that.getPrice(that.newProducts)
   },
   mounted(){
-    // console.log("this.seoInfo",this.seoInfo)
+
     this.platform = this.$store.state.platform
 
     this.getImgHeight()
-  },
-  // mounted() {
+
   //   const _this = this
   //   _this.$nextTick(() => {
   //     // _this.getSetting()
@@ -780,7 +779,8 @@ export default {
   //       _this.$refs['site-switch'].show()
   //     }
   //   })
-  // },
+
+  },
   methods: {
     formatMoney: formatMoney,
     getSetting() {

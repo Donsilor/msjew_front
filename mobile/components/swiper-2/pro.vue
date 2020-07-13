@@ -1,5 +1,5 @@
 <template>
-  <div class="swiper" @touchmove="endTouch" > 
+  <div class="swiper"> 
     <div ref="swiper-content" class="content" @touchstart.stop="touchStart" > 
       <template v-if="slotFinish">
         <div
@@ -168,8 +168,8 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
-      // document.addEventListener('touchmove', _this.stopEvent, true)
-
+      // document.addEventListener('touchmove', this.stopEvent, true)
+      
       _this.resetSlot()
       _this.slotFinish = true
 
@@ -307,6 +307,12 @@ export default {
       }
     },
     touchStart(e) {
+      document.addEventListener('touchmove',eventDefault,false);
+
+      function eventDefault(event) {
+        event.preventDefault();
+      }
+      
       const _this = this
       const startX = Math.floor(e.targetTouches[0].clientX)
       const startY = Math.floor(e.targetTouches[0].clientY)
@@ -314,7 +320,7 @@ export default {
       let endX = null
       let endY = null
       let isEnd = false
-      const startTime = new Date().getTime()
+      // const startTime = new Date().getTime()
 
       moveType = null
 
@@ -369,22 +375,22 @@ export default {
           _this.autoChange()
         }
 
-        const endTime = new Date().getTime()
+        // const endTime = new Date().getTime()
 
-        if (endTime - startTime < 300) {
+        // if (endTime - startTime < 300) {
           // if (_this.touchDistance > -130 && _this.touchDistance < -80) {
-          if (_this.touchDistance < -30) {
+          if (_this.touchDistance < 0) {
             _this.goNext(true)
             _this.touchDistance = null
             return
           }
           // if (_this.touchDistance < 130 && _this.touchDistance > 80) {
-          if (_this.touchDistance > 30) {
+          if (_this.touchDistance > 0) {
             _this.goNext(false)
             _this.touchDistance = null
             return
           }
-        }
+        // }
 
         _this.setActive(
           _this.getItemIndexByNum(_this.computeActiveByDistance())
