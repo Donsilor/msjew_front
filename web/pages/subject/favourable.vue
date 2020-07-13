@@ -18,19 +18,8 @@
         <!-- 优惠券列表 -->
         <div class="tip-list fl">
           <div class="tip-coupon fl clf">
-            <div class="card-list fl">
-              <div class="price">10
-                <div class="coin">
-                  <span>元</span>
-                </div>
-              </div>
-              <div class="text1">{{ $t(`${lang}.discountCoupon`) }}</div>
-              <div class="text2">{{ $t(`${lang}.full`) }}198{{ $t(`${lang}.use`) }}</div>
-              <div class="btn">{{ $t(`${lang}.get`) }}</div>
-            </div>
-
-            <div class="card-list fl">
-              <div class="price">10
+            <div class="card-list fl" v-for="(item, index) in coupons" :key="index">
+              <div class="price">{{item.money_cn}}
                 <div class="coin">
                   <span>元</span>
                 </div>
@@ -96,7 +85,6 @@
           }
         })
         .then(data => {
-          console.log(222,data.data)
           this.discountsList = data.data.recommend[0];
 
           var len = data.data.recommend[0].length,
@@ -208,7 +196,7 @@
               top: 0;
               width: 20px;
               height: 20px;
-              transform: scale(0.5) translateX(-8px);
+              transform: scale(0.6) translateX(-8px);
 
               span{
                 position: absolute;
@@ -223,7 +211,7 @@
                 font-size: 12px;
                 color: #730303;
                 text-align: center;
-                line-height: 20px;
+                line-height: 15px;
               }
             }
           }
