@@ -337,20 +337,20 @@ export default {
         {
           groupName: this.$t(`${lang}.contact`),
           children: [
-            {
-              icon: 'iconicon-xiaoxi',
-              name: this.$t(`${lang}.contactTime`),
-              to: {
-                path: '/contact-us'
-              }
-            },
-            {
-              icon: 'iconphone',
-              name: this.$t(`${lang}.contactTel`),
-              to: {
-                path: '/contact-us'
-              }
-            },
+            // {
+            //   icon: 'iconicon-xiaoxi',
+            //   name: this.$t(`${lang}.contactTime`),
+            //   to: {
+            //     path: '/contact-us'
+            //   }
+            // },
+            // {
+            //   icon: 'iconphone',
+            //   name: this.$t(`${lang}.contactTel`),
+            //   to: {
+            //     path: '/contact-us'
+            //   }
+            // },
             {
               icon: 'iconyouxiang',
               name: this.$t(`${lang}.contactEmail`),

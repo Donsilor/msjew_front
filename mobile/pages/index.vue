@@ -74,13 +74,13 @@
 
       <section class="show-box">
         <a href="https://wap-us.bddco.com/marriage-ring/single-ring">
-          <img src="../static/index-us/img-01.jpg" alt="">
+          <img src="../static/index-us/img-01.png" alt="">
         </a>
         <a href="https://wap-us.bddco.com/marriage-ring/single-ring?style=160">
-          <img src="../static/index-us/img-02.jpg" alt="">
+          <img src="../static/index-us/img-02.png" alt="">
         </a>
-        <a href="https://wap-us.bddco.com/accessories/list?actIndex=3">
-          <img src="../static/index-us/img-03.jpg" alt="">
+        <a href="https://wap-us.bddco.com/accessories/list?actIndex=2">
+          <img src="../static/index-us/img-03.png" alt="">
         </a>
       </section>
 
@@ -148,11 +148,8 @@
 
       <section class="contact-us">
         <h1 class="title">{{ lang.callUs }}</h1>
-        <div class="map" v-show="this.$store.state.platform == 11">
-          <img src="/index/map.png" />
-        </div>
         <div class="info">
-          <div class="info-row" v-show="this.$store.state.platform !== 21">
+          <!-- <div class="info-row" v-show="this.$store.state.platform !== 21">
             <span class="line"></span>
             <span class="row-name">{{ lang.store }}</span>
             <span class="row-text">{{ lang.storeName }}</span>
@@ -161,13 +158,13 @@
             <span class="line"></span>
             <span class="row-name">{{ lang.address }}</span>
             <span class="row-text">{{ lang.addressDetail }}</span>
-          </div>
+          </div> -->
           <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
             <span class="line"></span>
             <span class="row-name">{{ lang.address }}</span>
             <span class="row-text">{{ lang.addressDetailUs }}</span>
           </div> -->
-          <div class="info-row">
+          <!-- <div class="info-row">
             <span class="line"></span>
             <span class="row-name">{{ lang.tel }}</span>
             <span class="row-text">
@@ -183,7 +180,7 @@
                 <i class="iconfont iconphone"></i>
               </a>
             </span>
-          </div>
+          </div> -->
           <div class="info-row">
             <span class="line"></span>
             <span class="row-name">{{ lang.email }}</span>
@@ -210,7 +207,7 @@
       </section>
     </div>
     <!-- 非美国站点 -->
-    <div v-if="platform == 11 || platform == 21">
+    <div v-if="platform == 11 || platform == 21 || platform == 41">
       <!-- <tip-message></tip-message> -->
       <section class="banner">
         <template v-if="banner.length > 1">
