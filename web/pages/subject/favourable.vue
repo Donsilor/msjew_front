@@ -90,39 +90,39 @@
           var goodsline = function(a) {
             if(a == 2) {
               path = '/ring/wedding-rings/';
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id + '&ringType=single';
               return
             }else if(a == 4){
               path = '/jewellery/necklace/';
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else if(a == 5){
               path = '/jewellery/pendant/';
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else if(a == 6){
               path = '/jewellery/studEarring/'
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else if(a == 7){
               path = '/jewellery/earring/'
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else if(a == 8){
               path = '/jewellery/braceletLine/'
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else if(a == 9){
               path = '/jewellery/bracelet/'
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else if(a == 12){
               path = '/build-your-own-ring/setting-details/'
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else if(a == 15){
               path = '/build-your-own-ring/diamond-details/'
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else if(a == 16){
 
@@ -130,11 +130,11 @@
               
             }else if(a == 19){
               path = '/wedding-rings/classic-series'
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }else{
               path = '/other/'
-              href = path + '?'+ id + '/single';
+              href = path + id + '?goodId=' + id;
               return
             }
           }
@@ -162,9 +162,10 @@
             }
 
             a = datas[i].categoryId;
+            id = datas[i].id;
             goodsline(a)
 
-            this.discountsList[i].to = href + datas[i].id
+            this.discountsList[i].to = href;
             this.discountsList = [...this.discountsList]
           }
           // this.loading = false
