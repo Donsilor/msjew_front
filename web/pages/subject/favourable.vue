@@ -37,12 +37,12 @@
     <div class="goods-list clf">
       <div class="list fl" v-for="(item, index) in discountsList" :key="index">
         <div class="child">
-          <!-- <nuxt-link :to="item.to" class="goods-img" target="_blank"> -->
+          <nuxt-link :to="item.to" target="_blank">
             <div class="goods-img" :class="{'bg-color' : item.categoryId == 15}">
               <img class="img-a" :src="item.goodsImages[0]" alt="">
               <img class="img-b" :src="item.goodsImages[1] || item.goodsImages[0]" alt="">
             </div>
-          <!-- </nuxt-link> -->
+          </nuxt-link>
           <div class="price">
             <div class="currency">HKD</div>
             <div class="num">{{ formatMoney(item.salePrice) }}</div>
@@ -86,46 +86,63 @@
         })
         .then(data => {
           this.discountsList = data.data.recommend[0];
-          console.log(777,this.discountsList)
-          var href = '', a = 0;
-          switch (a) {
-            case 2: href = '/ring/wedding-rings/'
-              break;
-            case 4: href = '/jewellery/necklace/'
-              break;
-            case 5: href = '/jewellery/pendant/'
-              break;
-            case 6: href = '/jewellery/studEarring/'
-              break;
-            case 7: href = '/jewellery/earring/'
-              break;
-            case 8: href = '/jewellery/braceletLine/'
-              break;
-            case 9: href = '/jewellery/bracelet/'
-              break;
-            case 12: href = '/build-your-own-ring/setting-details/'
-              break;
-            case 15: href = '/build-your-own-ring/diamond-details/'
-              break;
-            case 16: href = ''
-              break;
-            case 17: href = ''
-              break;
-            case 19: href = '/wedding-rings/classic-series'
-              break;
-            default: href = '/other/'
-              break;
-          }
+          var path = '', href = '', a = 0, id = 0;
+          var goodsline = function(a) {
+            if(a == 2) {
+              path = '/ring/wedding-rings/';
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 4){
+              path = '/jewellery/necklace/';
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 5){
+              path = '/jewellery/pendant/';
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 6){
+              path = '/jewellery/studEarring/'
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 7){
+              path = '/jewellery/earring/'
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 8){
+              path = '/jewellery/braceletLine/'
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 9){
+              path = '/jewellery/bracelet/'
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 12){
+              path = '/build-your-own-ring/setting-details/'
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 15){
+              path = '/build-your-own-ring/diamond-details/'
+              href = path + '?'+ id + '/single';
+              return
+            }else if(a == 16){
 
-          a = 12
-            console.log(111,a)
-            console.log(222,href)
-            debugger
+            }else if(a == 17){
+              
+            }else if(a == 19){
+              path = '/wedding-rings/classic-series'
+              href = path + '?'+ id + '/single';
+              return
+            }else{
+              path = '/other/'
+              href = path + '?'+ id + '/single';
+              return
+            }
+          }
 
           var len = data.data.recommend[0].length,
               datas = data.data.recommend[0];
 
-          for(var i=0; i<len; i++){
+          for(let i=0; i<len; i++){
             this.discountsList[i].goodsImages = this.discountsList[i].goodsImages.split(',');
 
             if(datas[i].coupon.hasOwnProperty('money')){
@@ -144,15 +161,12 @@
               }
             }
 
-            a = datas[i].categoryId
-            console.log(111,a)
-            console.log(222,href)
-            debugger
+            a = datas[i].categoryId;
+            goodsline(a)
 
             this.discountsList[i].to = href + datas[i].id
             this.discountsList = [...this.discountsList]
           }
-            console.log(44,this.discountsList)
           // this.loading = false
         })
         .catch(err => {
