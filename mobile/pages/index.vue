@@ -61,7 +61,7 @@
                 </div>
               </a>
               
-              <div class="price">USD {{ formatMoney(hot.price) }}</div>
+              <div class="price">{{ coin }} {{ formatMoney(hot.price) }}</div>
             </div>
           </swiper2>
 
@@ -98,7 +98,7 @@
                 </div>
               </a>
               
-                <div class="price">USD {{ formatMoney(hot.price) }}</div>
+                <div class="price">{{ coin }} {{ formatMoney(hot.price) }}</div>
             </div>
           </swiper2>
 
@@ -425,6 +425,8 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.index,
+      coin: '',
+      platform: 0,
       ad: null,
       categories: [
         {
@@ -489,11 +491,10 @@ export default {
       activeCard: 0,
       webSite: null,
       exhibitionImageStatus: true,
-      platform: 0,
       hotUrl: [
         {
           'url': '/index-us/hot-202.png',
-          'id': 134,
+          'id': 682,
           'link': 'https://wap-us.bddco.com/marriage-ring/single-ring-detail?goodId=682&ringType=single',
           'price': 0
         },
@@ -766,6 +767,7 @@ export default {
   mounted(){
 
     this.platform = this.$store.state.platform
+    this.coin = this.$store.state.coin
 
     this.getImgHeight()
 

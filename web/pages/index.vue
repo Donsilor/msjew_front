@@ -29,7 +29,7 @@
                       <img class="product-image" :src="hot.url"/>
                     </div>
                   
-                    <div class="price">USD {{ formatMoney(hot.price) }}</div>
+                    <div class="price">{{ coin }} {{ formatMoney(hot.price) }}</div>
                   </a>
                 </div>
               </swiper2>
@@ -79,7 +79,7 @@
                       <img class="product-image" :src="item.url" />
                     </div>
 
-                    <div class="price">USD {{ formatMoney(item.price) }}</div>
+                    <div class="price">{{ coin }} {{ formatMoney(item.price) }}</div>
                   </a>
                 </div>
               </swiper2>
@@ -488,6 +488,8 @@ export default {
   data () {
     return {
       lang,
+      coin: '',
+      platform: 0,
       recommendCategories: [
         {
           title: this.$t(`${lang}.engagementRings`),
@@ -630,7 +632,6 @@ export default {
         }
       ],
       activeDiamondIndex: 0,
-      platform: 0,
       usBanner:[
         {
           'url': '/index-us/banner.png'
@@ -639,7 +640,7 @@ export default {
       hotImgUrl: [
         {
           'url': '/index-us/ring-202.png',
-          'id': 134,
+          'id': 682,
           'link': 'https://us.bddco.com/ring/wedding-rings/682?goodId=682&ringType=single',
           'price': 0
         },
@@ -961,6 +962,7 @@ export default {
     })
 
     this.platform = this.$store.state.platform
+    this.coin = this.$store.state.coin
   },
   methods: {
     changeActiveHotProduct (data) {
