@@ -191,7 +191,7 @@
     </div>
 
     <!-- 非美国站点 -->
-    <div v-if="platform == 10 || platform == 20">
+    <div v-if="platform == 10 || platform == 20 || platform == 40">
       <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
