@@ -23,7 +23,7 @@
           <div class="us-host-box">
             <div class="us-host-list" :style="{height:sImgHeight + 'px'}">
               <swiper2 ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
-                <div v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
+                <div v-if="hot.ifShow" v-for="(hot, n) in hotImgUrl" :key="n" class="host-item">
                   <a :href="hot.link" target="_blank" class="item-box">
                     <div class="product-image" :height="sImgHeight + 'px'">
                       <img class="product-image" :src="hot.url"/>
@@ -73,7 +73,7 @@
           <div class="new-products-box">
             <div class="new-products" :style="{height:sImgHeight + 'px'}">
               <swiper2 ref="new-products" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
-                <div v-for="(item, n) in newProducts" :key="n" class="host-item">
+                <div v-if="item.ifShow" v-for="(item, n) in newProducts" :key="n" class="host-item">
                   <a :href="item.link" target="_blank" class="item-box">
                     <div class="product-image">
                       <img class="product-image" :src="item.url" />
@@ -642,91 +642,106 @@ export default {
           'url': '/index-us/ring-202.png',
           'id': 682,
           'link': 'https://us.bddco.com/ring/wedding-rings/682?goodId=682&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-203.png',
           'id': 679,
           'link': 'https://us.bddco.com/ring/wedding-rings/679?goodId=679&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-204.png',
           'id': 684,
           'link': 'https://us.bddco.com/ring/wedding-rings/684?goodId=684&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-205.png',
           'id': 230,
           'link': 'https://us.bddco.com/ring/wedding-rings/230?goodId=230&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-206.png',
           'id': 147,
           'link': 'https://us.bddco.com/ring/wedding-rings/147?goodId=147&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-207.png',
           'id': 231,
           'link': 'https://us.bddco.com/ring/wedding-rings/231?goodId=231&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-208.png',
           'id': 126,
           'link': 'https://us.bddco.com/ring/wedding-rings/126?goodId=126&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-209.png',
           'id': 128,
           'link': 'https://us.bddco.com/ring/wedding-rings/128?goodId=128&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-210.png',
           'id': 150,
           'link': 'https://us.bddco.com/ring/wedding-rings/150?goodId=150&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-211.png',
           'id': 134,
           'link': 'https://us.bddco.com/ring/wedding-rings/134?goodId=134&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-212.png',
           'id': 118,
           'link': 'https://us.bddco.com/ring/wedding-rings/118?goodId=118&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-213.png',
           'id': 145,
           'link': 'https://us.bddco.com/ring/wedding-rings/145?goodId=145&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-214.png',
           'id': 120,
           'link': 'https://us.bddco.com/ring/wedding-rings/120?goodId=120&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-215.png',
           'id': 145,
           'link': 'https://us.bddco.com/ring/wedding-rings/145?goodId=145&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-216.png',
           'id': 233,
           'link': 'https://us.bddco.com/ring/wedding-rings/233?goodId=233&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         }
       ],
       newProducts: [
@@ -734,91 +749,106 @@ export default {
           'url': '/index-us/ring-301.png',
           'id': 217,
           'link': 'https://us.bddco.com/ring/wedding-rings/217?goodId=217&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-302.png',
           'id': 212,
           'link': 'https://us.bddco.com/ring/wedding-rings/212?goodId=212&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-303.png',
           'id': 657,
           'link': 'https://us.bddco.com/ring/wedding-rings/657?goodId=657&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-304.png',
           'id': 614,
           'link': 'https://us.bddco.com/ring/wedding-rings/614?goodId=614&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-305.png',
           'id': 149,
           'link': 'https://us.bddco.com/ring/wedding-rings/149?goodId=149&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-306.png',
           'id': 137,
           'link': 'https://us.bddco.com/ring/wedding-rings/137?goodId=137&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-307.png',
           'id': 124,
           'link': 'https://us.bddco.com/ring/wedding-rings/124?goodId=124&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-309.png',
           'id': 139,
           'link': 'https://us.bddco.com/ring/wedding-rings/139?goodId=139&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-310.png',
           'id': 122,
           'link': 'https://us.bddco.com/ring/wedding-rings/122?goodId=122&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-311.png',
           'id': 234,
           'link': 'https://us.bddco.com/ring/wedding-rings/234?goodId=234&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-312.png',
           'id': 138,
           'link': 'https://us.bddco.com/ring/wedding-rings/138?goodId=138&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-313.png',
           'id': 123,
           'link': 'https://us.bddco.com/ring/wedding-rings/123?goodId=123&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-314.png',
           'id': 151,
           'link': 'https://us.bddco.com/ring/wedding-rings/151?goodId=151&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-315.png',
           'id': 125,
           'link': 'https://us.bddco.com/ring/wedding-rings/125?goodId=125&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         },
         {
           'url': '/index-us/ring-316.png',
           'id': 213,
           'link': 'https://us.bddco.com/ring/wedding-rings/213?goodId=213&ringType=single',
-          'price': 0
+          'price': 0,
+          'ifShow': false
         }
       ],
       ifEffects: 0,
@@ -918,6 +948,7 @@ export default {
           that.hotImgUrl.forEach((p, j) => {
             if(o.id == p.id){
               that.hotImgUrl[j].price = o.salePrice
+              that.hotImgUrl[j].ifShow = true;
             }
           })
         })
@@ -942,7 +973,8 @@ export default {
         data.forEach((o, i) => {
           that.newProducts.forEach((p, j) => {
             if(o.id == p.id){
-              that.newProducts[j].price = o.salePrice
+              that.newProducts[j].price = o.salePrice;
+              that.newProducts[j].ifShow = true;
             }
           })
         })
