@@ -1,5 +1,5 @@
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;box-sizing:border-box;}
-html{color:#000;overflow-y:scroll;overflow:-moz-scrollbars-vertical}
+html{color:#000;overflow-y:scroll;overflow:-moz-scrollbars-vertical;touch-action:none;touch-action:pan-y;}
 body,button,input,select,textarea{font-size:12px;font-family:'PingFangHK-Regular','微软雅黑','Microsoft YaHeiarial','Hiragino Sans GB','Microsoft Yahei','宋体',\5b8b\4f53,Tahoma,Arial,Helvetica,STHeiti}
 h1,h2,h3,h4,h5,h6{font-size:100%}
 address, cite, dfn, em, var{font-style:normal}

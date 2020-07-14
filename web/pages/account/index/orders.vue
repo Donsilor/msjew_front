@@ -86,8 +86,10 @@
 
                 <div class="right">
                   <span>1</span>
-                  <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(detail.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
-                  <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+                  <div class="single-price">
+                    <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(detail.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                    <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -98,9 +100,9 @@
                   target="_blank"><img :src="IMG_URL + detail.goodsImages"
                 /></nuxt-link>
               </div>
-              <div>
+              <div class="mid">
                 <div  v-for="(c, _index) in detail.ring" :key="_index" class="list-body">
-                  <div class="mid">
+                  <div>
                   <h5>{{ detail.goodsName }}</h5>
                     <nuxt-link :to="goDetails(detail)" target="_blank">
                       <!-- <h5>{{ d.goods_name }}</h5> -->
@@ -127,12 +129,12 @@
                   <!-- </div> -->
                 </div>
               </div>
-              <div class="num">
-                <span>1</span>
-              </div>
-              <div class="price">
-                <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
-                <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+              <div class="right">
+                <div class="num">1</div>
+                <div class="price">
+                  <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                  <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
+                </div>
               </div>
             </div>
             <!-- 定制 -->
@@ -829,18 +831,28 @@ div {
         background: #fee6e2;
         text-align: left;
         margin-bottom: 10px;
-        padding-top: 0;
+        padding: 0 2% 0;
+        font-size: 0;
         span {
-          width: 140px;
-          color: #333333;
+          width: 24%;
+          color: #333;
           font-size: 14px;
           line-height: 34px;
-          margin-right: 20px;
           display: inline-block;
           text-align: center;
         }
         span:nth-child(1) {
-          width: 477px;
+          width: 59.2%;
+          text-align: left;
+        }
+        span:nth-child(2) {
+          width: 10%;
+        }
+        span:nth-child(3) {
+          width: 14%;
+        }
+        span:nth-child(4) {
+          width: 16.8%;
         }
       }
     }
@@ -850,12 +862,12 @@ div {
         margin-bottom: 40px;
         position: relative;
         .price{
-          position: absolute;
-          right:30px;
-          top:47%;
-          font-size: 16px;
-          color: #666666;
-          font-family: twCenMt;
+          // position: absolute;
+          // right:30px;
+          // top:47%;
+          // font-size: 16px;
+          // color: #666666;
+          // font-family: twCenMt;
         }
         .list-head {
           background: #f8f8f8;
@@ -898,34 +910,63 @@ div {
               height: 100%;
             }
           }
-          .num{
-            position: absolute;
-            right:420px;
-            top:47%;
-            font-size: 16px;
+          .mid {
+            width: calc((100% - 70px) * 0.57);
+            // height: 70px;
+            padding: 0 20px;
+            margin: 0;
+            text-align: left;
+            font-size: 12px;
+            line-height: 14px;
+            color: #333333;
+            overflow: hidden;
+            cursor: pointer;
+            box-sizing: border-box;
+            h5 {
+              font-size: 14px;
+              line-height: 18px;
+              font-weight: 400;
+              height: 18px;
+              width: 100%;
+              overflow: hidden;
+              color: #666666;
+            }
+            p {
+              line-height: 14px;
+              height: 20px;
+              margin: 8px 0 0;
+              color: #999999;
+              line-height: 20px;
+            }
+            .desc {
+              height: 70-18-8-14-14px;
+              line-height: 70-18-8-14-14px;
+              display: inline;
+              margin-right: 5px;
+              color: #999999;
+            }
+          }
+          .right {
+            width: calc((100% - 70px) * 0.43);
+            height: 70px;
+            padding: 0;
+            margin: 0;
+            min-height: 70px;
+            text-align: center;
+            font-size: 0;
+            line-height: 70px;
             color: #666666;
             font-family: twCenMt;
-          }
-          .price{
-              span {
-                width: 140px;
-                color: #666666;
-                font-size: 14px;
-                line-height: 34px;
-                margin-left: 20px;
-                display: inline-block;
-                text-align: center;
-              }
-              span:nth-child(1) {
-                color: #f29b87;
-              }
-              span:nth-child(1).old-price {
-                color: #b2b2b2;
-                text-decoration: line-through;
-              }
-              span:nth-child(2) {
-                color: #f29b87;
-              }
+            div:first-child {
+              display: inline-block;
+              width: 20%;
+              font-size: 14px;
+            }
+            div:last-child {
+              display: inline-block;
+              width: 80%;
+              font-size: 16px;
+            }
           }
           .list-body {
             width: 100%;
@@ -944,41 +985,7 @@ div {
                 height: 100%;
               }
             }
-            .mid {
-              width: 480px;
-              // height: 70px;
-              padding: 0 20px;
-              margin: 0;
-              text-align: left;
-              font-size: 12px;
-              line-height: 14px;
-              color: #333333;
-              overflow: hidden;
-              cursor: pointer;
-              h5 {
-                font-size: 14px;
-                line-height: 18px;
-                font-weight: 400;
-                height: 18px;
-                width: 100%;
-                overflow: hidden;
-                color: #666666;
-              }
-              p {
-                line-height: 14px;
-                height: 20px;
-                margin: 8px 0 0;
-                color: #999999;
-                line-height: 20px;
-              }
-              .desc {
-                height: 70-18-8-14-14px;
-                line-height: 70-18-8-14-14px;
-                display: inline;
-                margin-right: 5px;
-                color: #999999;
-              }
-            }
+            
             .right {
               width: 350px;
               height: 70px;
@@ -1038,7 +1045,7 @@ div {
               }
             }
             .mid {
-              width: 394px;
+              width: calc((100% - 70px) * 0.57);
               height: 70px;
               padding-left: 20px;
               margin: 0;
@@ -1048,6 +1055,7 @@ div {
               color: #333333;
               overflow: hidden;
               cursor: pointer;
+              box-sizing: border-box;
               h5 {
                 font-size: 14px;
                 line-height: 18px;
@@ -1072,33 +1080,39 @@ div {
               }
             }
             .right {
+              width: calc((100% - 70px) * 0.43);
               height: 70px;
               padding: 0;
               margin: 0;
               min-height: 70px;
-              text-align: left;
-              font-size: 16px;
+              text-align: center;
+              font-size: 0;
               line-height: 70px;
               color: #666666;
               font-family: twCenMt;
-              span {
-                width: 140px;
-                color: #666666;
-                font-size: 14px;
-                line-height: 34px;
-                margin-left: 20px;
+              &>span{
                 display: inline-block;
-                text-align: center;
+                width: 20%;
+                font-size: 14px;
               }
-              span:nth-child(2) {
-                color: #f29b87;
-              }
-              span:nth-child(2).old-price {
-                color: #b2b2b2;
-                text-decoration: line-through;
-              }
-              span:nth-child(3) {
-                color: #f29b87;
+              .single-price{
+                display: inline-block;
+                width: 80%;
+                font-size: 16px;
+
+                span{
+                  display: inline-block;
+                  width: 48%;
+                  padding: 0 2px;
+                  box-sizing: border-box;
+                  color: #f29b87;
+                }
+                span:first-child{
+                  color: #e6e6e6;
+                }
+                .old-price{
+                  text-decoration: line-through;
+                }
               }
             }
           }
@@ -1161,6 +1175,25 @@ div {
         }
       }
     }
+  }
+}
+
+.price{
+  padding: 0 2%;
+  font-size: 0;
+  box-sizing: border-box;
+  span{
+    display: inline-block;
+    width: 48%;
+    padding: 0 2px;
+    box-sizing: border-box;
+    color: #f29b87;
+  }
+  span:first-child{
+    color: #e6e6e6;
+  }
+  .old-price{
+    text-decoration: line-through;
   }
 }
 </style>

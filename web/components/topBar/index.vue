@@ -2053,7 +2053,7 @@ export default {
   .header {
     position: absolute;
     width: 100%;
-    min-width: 1360px;
+    min-width: 1200px;
     background-color: #ffffff;
     z-index: 1200;
 
