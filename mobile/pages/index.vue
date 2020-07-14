@@ -74,13 +74,13 @@
 
       <section class="show-box">
         <a href="https://wap-us.bddco.com/marriage-ring/single-ring">
-          <img src="../static/index-us/img-01.png" alt="">
+          <img src="../static/index-us/img-01.jpg" alt="">
         </a>
         <a href="https://wap-us.bddco.com/marriage-ring/single-ring?style=160">
-          <img src="../static/index-us/img-02.png" alt="">
+          <img src="../static/index-us/img-02.jpg" alt="">
         </a>
         <a href="https://wap-us.bddco.com/accessories/list?actIndex=3">
-          <img src="../static/index-us/img-03.png" alt="">
+          <img src="../static/index-us/img-03.jpg" alt="">
         </a>
       </section>
 
@@ -767,12 +767,11 @@ export default {
     that.getPrice(that.newProducts)
   },
   mounted(){
-    // console.log("this.seoInfo",this.seoInfo)
+
     this.platform = this.$store.state.platform
 
     this.getImgHeight()
-  },
-  // mounted() {
+
   //   const _this = this
   //   _this.$nextTick(() => {
   //     // _this.getSetting()
@@ -780,7 +779,8 @@ export default {
   //       _this.$refs['site-switch'].show()
   //     }
   //   })
-  // },
+
+  },
   methods: {
     formatMoney: formatMoney,
     getSetting() {
@@ -1766,27 +1766,28 @@ export default {
       left: 0px;
       width: 100%;
       height: 20px;
+      z-index: 6;
 
       .left-button{
-        width: 30px;
-        height: 30px;
+        width: 36px;
+        height: 36px;
         background: #c9bdbf url('../static/index-us/icon-left.png') center;
         background-size: 80% 80%;
         border-radius: 50%;
         position: absolute;
         top: 50%;
-        left: 20%;
+        left: 14%;
         transform: translateY(-50%);
       }
       .right-button{
-        width: 30px;
-        height: 30px;
+        width: 36px;
+        height: 36px;
         background: #c9bdbf url('../static/index-us/icon-right.png') center;
         background-size: 80% 80%;
         border-radius: 50%;
         position: absolute;
         top: 50%;
-        right: 20%;
+        right: 14%;
         transform: translateY(-50%);
       }
     }
