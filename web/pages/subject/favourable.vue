@@ -129,8 +129,8 @@
             }else if(a == 17){
               
             }else if(a == 19){
-              path = '/wedding-rings/classic-series'
-              href = path + id + '?goodId=' + id;
+              path = '/ring/wedding-rings/'
+              href = path + id + '?goodId=' + id + '&ringType=pair';
               return
             }else{
               path = '/other/'
@@ -165,8 +165,7 @@
             id = datas[i].id;
             goodsline(a)
 
-            this.discountsList[i].to = href;
-            this.discountsList = [...this.discountsList]
+            this.discountsList[i].to = href
           }
           // this.loading = false
         })
