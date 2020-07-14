@@ -74,13 +74,13 @@
 
       <section class="show-box">
         <a href="https://wap-us.bddco.com/marriage-ring/single-ring">
-          <img src="../static/index-us/img-01.png" alt="">
+          <img src="/index-us/img-01.png" alt="">
         </a>
         <a href="https://wap-us.bddco.com/marriage-ring/single-ring?style=160">
-          <img src="../static/index-us/img-02.png" alt="">
+          <img src="/index-us/img-02.png" alt="">
         </a>
         <a href="https://wap-us.bddco.com/accessories/list?actIndex=2">
-          <img src="../static/index-us/img-03.png" alt="">
+          <img src="/index-us/img-03.png" alt="">
         </a>
       </section>
 
@@ -116,31 +116,31 @@
 
         <div class="sweet-img-box">
           <div class="img-l">
-            <img src="../static/index-us/sweet-1005.png" alt="">
+            <img src="/index-us/sweet-1005.png" alt="">
           </div>
           <div class="img-r">
             <div class="img-r-t">
               <div class="img-r-t-l">
-                <img src="../static/index-us/sweet-1006.png" alt="">
+                <img src="/index-us/sweet-1006.png" alt="">
               </div>
               <div class="img-r-t-r">
-                <img src="../static/index-us/sweet-1007.png" alt="">
+                <img src="/index-us/sweet-1007.png" alt="">
               </div>
             </div>
 
             <div class="img-r-b">
               <div class="img-r-b-l">
-                <img src="../static/index-us/sweet-1008.png" alt="">
+                <img src="/index-us/sweet-1008.png" alt="">
               </div>
               <div class="img-r-b-r">
-                <img src="../static/index-us/sweet-1009.png" alt="">
+                <img src="/index-us/sweet-1009.png" alt="">
               </div>
             </div>
           </div>
         </div>
 
         <div class="sweet2">
-          <img src="../static/index-us/sweet-1010.png" alt="">
+          <img src="/index-us/sweet-1010.png" alt="">
         </div>
       </section>
 
@@ -1129,7 +1129,7 @@ export default {
     getImgHeight() {
       const image = new Image()
       var that = this, width = 0, height = 0, res = 0;
-      image.src = '../static/index-us/hot-202.png'
+      image.src = '/index-us/hot-202.png'
       image.onload = result => {
         width = image.width;
         height = image.height;
@@ -1768,7 +1768,7 @@ export default {
       .left-button{
         width: 36px;
         height: 36px;
-        background: #c9bdbf url('../static/index-us/icon-left.png') center;
+        background: #c9bdbf url('/index-us/icon-left.png') center;
         background-size: 80% 80%;
         border-radius: 50%;
         position: absolute;
@@ -1779,7 +1779,7 @@ export default {
       .right-button{
         width: 36px;
         height: 36px;
-        background: #c9bdbf url('../static/index-us/icon-right.png') center;
+        background: #c9bdbf url('/index-us/icon-right.png') center;
         background-size: 80% 80%;
         border-radius: 50%;
         position: absolute;
