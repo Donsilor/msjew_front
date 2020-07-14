@@ -103,28 +103,28 @@
 
         <div class="sweet-img">
           <div class="img-l sweet-img-box">
-            <img src="../static/index-us/sweet-401.png" alt="" class="img-a">
+            <img src="/index-us/sweet-401.png" alt="" class="img-a">
             <div class="mask-layer"></div>
           </div>
 
           <div class="img-m">
             <div class="img-m-t">
               <div class="img-m-t-l sweet-img-box">
-                <img src="../static/index-us/sweet-402.png" alt="" class="img-a">
+                <img src="/index-us/sweet-402.png" alt="" class="img-a">
                 <div class="mask-layer"></div>
               </div>
               <div class="img-m-t-r sweet-img-box">
-                <img src="../static/index-us/sweet-403.png" alt="" class="img-a">
+                <img src="/index-us/sweet-403.png" alt="" class="img-a">
                 <div class="mask-layer"></div>
               </div>
             </div>
             <div class="img-m-b">
               <div class="img-m-b-l sweet-img-box">
-                <img src="../static/index-us/sweet-405.png" alt="" class="img-a">
+                <img src="/index-us/sweet-405.png" alt="" class="img-a">
                 <div class="mask-layer"></div>
               </div>
               <div class="img-m-b-r sweet-img-box">
-                <img src="../static/index-us/sweet-406.png" alt="" class="img-a">
+                <img src="/index-us/sweet-406.png" alt="" class="img-a">
                 <div class="mask-layer"></div>
               </div>
             </div>
@@ -132,11 +132,11 @@
 
           <div class="img-r">
             <div class="img-r-t sweet-img-box">
-              <img src="../static/index-us/sweet-404.png" alt="" class="img-b">
+              <img src="/index-us/sweet-404.png" alt="" class="img-b">
               <div class="mask-layer"></div>
             </div>
             <div class="img-r-b sweet-img-box">
-              <img src="../static/index-us/sweet-407.png" alt="" class="img-a">
+              <img src="/index-us/sweet-407.png" alt="" class="img-a">
               <div class="mask-layer"></div>
             </div>
           </div>
