@@ -109,6 +109,14 @@
             >
               {{ $t(`${lang}.addCart`) }}
             </button>
+
+            <button
+              v-loading="addingCart"
+              :class="['add-to-cart', { active: true }]"
+              @click="orderNow"
+            >
+              {{ $t(`${lang}.buyNow`) }}
+            </button>
           </div>
         </div>
       </section>
@@ -224,7 +232,8 @@ export default {
       ],
       activeTab: 'desc',
       magnifying: '',
-	    language: this.$store.state.language
+      language: this.$store.state.language,
+      isLogin:this.$store.getters.hadLogin
     }
   },
   computed: {
@@ -267,9 +276,9 @@ export default {
     oldPrice() {
       return this.block1.oldPrice + this.block2.oldPrice
     },
-	newPrice() {
-	  return this.block1.newPrice + this.block2.newPrice
-	},
+    newPrice() {
+      return this.block1.newPrice + this.block2.newPrice
+    },
     simpleDetail() {
       const _this = this
       const productInfo = _this.productInfo
@@ -295,6 +304,9 @@ export default {
         }
       }
       return result
+    },
+    getTimestampUuid () {
+      return new Date().getTime().toString()
     }
   },
   watch: {
@@ -565,6 +577,174 @@ export default {
             // console.log(err)
           }
         })
+    },
+    async orderNow() {
+      const timeSock = new Date().getTime()
+      const time = this.getTimestampUuid
+      let goodInfo = [
+        {
+          goods_num: 1,
+          goodsDetailsId:
+            this.steps.steps[0].ct === 1
+              ? this.steps.steps[0].goodsDetailsId
+              : this.steps.steps[1].goodsDetailsId,
+          goods_id:
+            this.steps.steps[0].ct === 1
+              ? this.steps.steps[0].goodsDetailsId
+              : this.steps.steps[1].goodsDetailsId,
+          goods_type:
+            this.steps.steps[0].ct === 1
+              ? this.steps.steps[0].categoryId
+              : this.steps.steps[1].categoryId,
+          group_id: timeSock,
+          group_type: 2,
+          serviceId: 0,
+          serviceVal: 'string',
+
+        },
+        {
+          goods_num: 1,
+          goodsDetailsId:
+            this.steps.steps[0].ct === 1
+              ? this.steps.steps[1].goodsDetailsId
+              : this.steps.steps[0].goodsDetailsId,
+          goods_id:
+            this.steps.steps[0].ct === 1
+              ? this.steps.steps[1].goodsDetailsId
+              : this.steps.steps[0].goodsDetailsId,
+          goods_type:
+            this.steps.steps[0].ct === 1
+              ? this.steps.steps[1].categoryId
+              : this.steps.steps[0].categoryId,
+          group_id: timeSock,
+          group_type: 2,
+          serviceId: 0,
+          serviceVal: 'string'
+        }
+      ]
+
+      goodInfo = goodInfo.map(item => {
+        item.createTime = time
+        item.updateTime = time
+        return item
+      })
+
+      console.log("goodInfo",goodInfo)
+      let smoothly = true
+      if (this.steps.steps[0].cartId || this.steps.steps[1].cartId) {
+        await this.$store
+          .dispatch('removeCart', [
+            this.steps.steps[0].cartId,
+            this.steps.steps[1].cartId
+          ])
+          .then(data => {
+            smoothly = true
+          })
+          .catch(err => {
+            smoothly = false
+            if (!err.response) {
+              this.$message.error(err.message)
+            } else {
+              // console.log(err)
+            }
+          })
+      }
+      if (!smoothly) return
+      if(this.isLogin){
+        await this.$axios({
+          method: 'post',
+          url: 'web/member/cart/add',
+          data: {
+              goodsCartList: goodInfo
+          }
+        })
+        .then(data => {
+          const dataId = []
+          dataId.push(data.data[0].group_id)
+          console.log("dddd",data)
+          const cartIds = dataId.join(',')
+            setTimeout(() => {
+            this.$router.push({
+              path: `/billing-address`,
+              query: { cartIds }
+            })
+          }, 500)
+        })
+        .catch(err => {
+            // return Promise.reject(err)
+        })
+      } else {
+        const CART = 'cart'
+        let goodInfo = [
+          {
+            goods_num: 1,
+            goodsDetailsId:
+              this.steps.steps[0].ct === 1
+                ? this.steps.steps[0].goodsDetailsId
+                : this.steps.steps[1].goodsDetailsId,
+            goods_id:
+              this.steps.steps[0].ct === 1
+                ? this.steps.steps[0].goodsId
+                : this.steps.steps[1].goodsId,
+            goods_type:
+              this.steps.steps[0].ct === 1
+                ? this.steps.steps[0].categoryId
+                : this.steps.steps[1].categoryId,
+            group_id: timeSock,
+            group_type: 2,
+            serviceId: 0,
+            serviceVal: 'string',
+
+          },
+          {
+            goods_num: 1,
+            goodsDetailsId:
+              this.steps.steps[0].ct === 1
+                ? this.steps.steps[1].goodsDetailsId
+                : this.steps.steps[0].goodsDetailsId,
+            goods_id:
+              this.steps.steps[0].ct === 1
+                ? this.steps.steps[1].goodsId
+                : this.steps.steps[0].goodsId,
+            goods_type:
+              this.steps.steps[0].ct === 1
+                ? this.steps.steps[1].categoryId
+                : this.steps.steps[0].categoryId,
+            group_id: timeSock,
+            group_type: 2,
+            serviceId: 0,
+            serviceVal: 'string'
+          }
+        ]
+        const addInfo = {
+          id: time,
+          createTime: time,
+          updateTime: time,
+          data: goodInfo
+        }
+        return new Promise(async (resolve, reject) => {
+            try {
+                let cart = JSON.parse(localStorage.getItem(CART) || '[]')
+                cart = cart.concat(addInfo)
+                if (cart.length > 30) {
+                    return reject(new Error(lang.cartIsFull))
+                }
+                const dataId = []
+                dataId.push(addInfo.id)
+                console.log("dddd",addInfo)
+                const cartIds = dataId.join(',')
+                this.$router.push({
+                  path: `/billing-address`,
+                  query: { cartIds }
+                })
+                // 本地加入购物车数据
+                localStorage.setItem(CART, JSON.stringify(cart))
+                return resolve()
+            } catch (e) {
+                return reject(e)
+            }
+        })
+      }
     },
     getIndex(i) {
     	this.magnifying = this.thumbnails[i]

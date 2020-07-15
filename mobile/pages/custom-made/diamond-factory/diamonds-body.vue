@@ -157,6 +157,19 @@
         }}
       </div>
       <div
+        v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
+        :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+        @click="orderNow"
+      >
+        {{
+          inSale
+            ? canAddCart
+              ? lang.buyNow
+              : lang.noTotalStock
+            : lang.notInSale
+        }}
+      </div>
+      <div
         v-if="parseInt($route.query.step) === 2 && !$route.query.isBack"
         :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
         @click="emitStep(2)"
@@ -428,6 +441,25 @@
 import Mx from './diamond-mixin'
 // import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
+   head() {
+    return {
+      title: this.goodInfo.goodsName,
+      meta: [
+        {
+          name: 'title',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.goodInfo.goodsName,
+        }
+      ]
+    }
+  },
   data() {
     return {
       ifShowCoupon: false,

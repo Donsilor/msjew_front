@@ -674,7 +674,7 @@ export default {
 
       this.list = JSON.parse(storage.get('myCartList', 0))
       // this.planDays = this.allFee.planDays
-      // console.log("allFee",this.list)
+      console.log("allFee",this.list)
       this.amount = this.list.length
       this.idList = []
       this.productAmount = 0
@@ -963,7 +963,7 @@ export default {
       this.ifShowAddress = false
       this.queryId = id
       this.getData()
-      console.log("ssss",this.queryId)
+      // console.log("ssss",this.queryId)
     },
     // // 登录下获取相关费用
     // getTex(k) {
@@ -1088,6 +1088,7 @@ export default {
 
             this.orderTotalAmount = res.orderAmount;
             this.ultimatelyPay = res.payAmount;
+            this.coin = res.currency
             this.currency = res.currency;
 
             this.planDays = this.allFee.planDays
@@ -1205,7 +1206,7 @@ export default {
             // console.log("address",res.data)
             if (res && res.length > 0) {
               res.map((item, index) => {
-                console.log("item",this.queryId)
+                // console.log("item",this.queryId)
                 if (this.queryId) {
                   if (
                     this.queryId === item.id ||

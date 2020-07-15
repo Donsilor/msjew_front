@@ -4,7 +4,7 @@
       <div class="pink-line" />
       <div class="title-name">{{ $t(`${lang}.address`) }}</div>
     </div>
-    <div class="addr-blocks">
+    <div class="addr-blocks" :class="{'en': language == 'en_US'}">
       <div
         v-for="(a, index) in address"
         :key="index"
@@ -610,7 +610,7 @@ export default {
   },
   mounted(){
     // console.log("ffff",this.phoneNum.phone_code)
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language
   },
   methods: {
     // 查询cookie
@@ -1077,19 +1077,23 @@ export default {
     padding: 40px 28px;
     .addr-block {
       position: relative;
-      width: 430px;
+      width: 46%;
       height: 250px;
       padding: 25px 30px 0;
-      margin: 0 30px 20px 0;
+      margin: 0 3% 20px 0;
       border: 1px solid rgba(230, 230, 230, 1);
       box-sizing: border-box;
       .addr-title {
         display: flex;
         align-items: flex-end;
         margin-bottom: 10px;
+        width: 80%;
         div {
           font-size: 20px;
           color: #333;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
         div:nth-child(2) {
           font-size: 14px;
@@ -1354,5 +1358,17 @@ export default {
       transform: translateY(-50%);
     }
   }
+}
+
+.en .addr-title>div{
+  font-size: 16px !important;
+}
+
+.en .addr-user>div{
+  font-size: 16px !important;
+}
+
+.en .addr-btn{
+  font-size: 13px !important;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">       <!-- 优惠券 -->
+  <div class="container">           <!-- 优惠券 -->
     <!-- 顶部广告图 -->
     <div class="arrb">
       <img src="../../static/subject/subject_1.png" alt="">
@@ -44,7 +44,7 @@
             </div>
           </nuxt-link>
           <div class="price">
-            <div class="currency">HKD</div>
+            <div class="currency">{{ coin }}</div>
             <div class="num">{{ formatMoney(item.salePrice) }}</div>
           </div>
 
@@ -70,18 +70,21 @@
   export default{
     data(){
       return{
-				lang,
+        lang,
+        coin: '',
         discountsList: [],
         showCoupon: false,
         coupons: {}
       }
     },
     mounted() {
+      this.coin = this.$store.state.coin;
+
       this.$axios({
           method: 'get',
           url: 'web/market/detail',
           params: {
-            id: 13
+            id: 16
           }
         })
         .then(data => {

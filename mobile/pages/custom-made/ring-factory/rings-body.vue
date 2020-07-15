@@ -145,6 +145,19 @@
         }}
       </div>
       <div
+        v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
+        :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+        @click="orderNow"
+      >
+        {{
+          inSale
+            ? canAddCart
+              ? lang.buyNow
+              : lang.noTotalStock
+            : lang.notInSale
+        }}
+      </div>
+      <div
         v-if="parseInt($route.query.step) === 2 && !$route.query.isBack"
         :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
         @click="emitStep(2)"
