@@ -205,9 +205,9 @@ const conditionMaps = {
 }
 
 export default {
-  head() {
-    return this.seoInfo || {}
-  },
+  // head() {
+  //   return this.seoInfo || {}
+  // },
   components: {
     ListContent,
     SoleOut
