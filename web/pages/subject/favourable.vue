@@ -1,5 +1,5 @@
 <template>
-  <div class="container">       <!-- 优惠券 -->
+  <div class="container">           <!-- 优惠券 -->
     <!-- 顶部广告图 -->
     <div class="arrb">
       <img src="../../static/subject/subject_1.png" alt="">
