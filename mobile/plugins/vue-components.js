@@ -22,6 +22,7 @@ import OrderExpress from '@/components/white-board/order-express'
 import OrderTex from '@/components/white-board/order-tex'
 import OrderSafe from '@/components/white-board/order-safe'
 import Swiper from '@/components/swiper'
+import Swiper2 from '@/components/swiper-2'
 import SwiperTap from '@/components/swiper-tap'
 import SliderVerify from '@/components/slider-verify'
 import SendEmailCode from '@/components/send-email-code'
@@ -44,6 +45,7 @@ Vue.use(Toast)
 Vue.use(ChooseEject)
 
 Vue.use(Swiper)
+Vue.use(Swiper2)
 
 Vue.use(SliderVerify)
 Vue.use(SendEmailCode)
