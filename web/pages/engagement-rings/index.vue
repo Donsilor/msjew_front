@@ -283,6 +283,7 @@ export default {
   },
   mounted() {
     const _this = this
+
     _this.$nextTick(() => {
       _this.onResize()
 
