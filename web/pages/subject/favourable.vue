@@ -44,7 +44,7 @@
             </div>
           </nuxt-link>
           <div class="price">
-            <div class="currency">HKD</div>
+            <div class="currency">{{ coin }}</div>
             <div class="num">{{ formatMoney(item.salePrice) }}</div>
           </div>
 
@@ -70,13 +70,16 @@
   export default{
     data(){
       return{
-				lang,
+        lang,
+        coin: '',
         discountsList: [],
         showCoupon: false,
         coupons: {}
       }
     },
     mounted() {
+      this.coin = this.$store.state.coin;
+
       this.$axios({
           method: 'get',
           url: 'web/market/detail',

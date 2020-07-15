@@ -204,6 +204,7 @@
 
 <script>
 import CategoryIndexPage from '@/mixins/category-index-page.js'
+import Bus from '../../assets/js/bus.js'
 const lang = 'engagementRing'
 export default {
   mixins: [CategoryIndexPage],
@@ -213,6 +214,7 @@ export default {
   data() {
     return {
       lang,
+      bannerHeight: 0,
       ringSwiper: null,
       diamondSwiper: null,
       certifySwiper: null,
@@ -282,6 +284,8 @@ export default {
   mounted() {
     const _this = this
     _this.$nextTick(() => {
+      _this.onResize()
+
       const Swiper = require('swiper/dist/js/swiper.js')
       _this.ringSwiper = new Swiper('.ring-swiper-container', {
         direction: 'vertical',
@@ -296,6 +300,10 @@ export default {
             _this.addmeile = _this.addmeiles[index]
           }, 100)
         }
+      })
+
+      Bus.$on('resizeFn', (val) => {
+        _this.onResize()
       })
 
       _this.diamondSwiper = new Swiper('.diamond-swiper-container', {
@@ -428,6 +436,27 @@ export default {
       this.$router.push({
         path: '/engagement-rings/all'
       })
+    },
+    onResize() {
+      var that = this;
+
+      if (that.banner[0] && that.banner[0].image) {
+        const image = new Image()
+        var width = 0, height = 0;
+        image.src = that.banner[0].image
+        image.onload = result => {
+          width = image.width;
+          height = image.height;
+        }
+
+        if(width && height){
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * image.height) / image.width)
+        }else{
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * 640) / 1920)
+        }
+      }
     }
   }
 }

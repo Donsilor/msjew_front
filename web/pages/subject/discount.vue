@@ -54,11 +54,11 @@
           </nuxt-link>
 
           <div class="price old-price">
-            <div class="currency"><span>{{ $t(`${lang}.oldPrice`) }} </span>HKD</div>
+            <div class="currency"><span>{{ $t(`${lang}.oldPrice`) }} </span>{{ coin }}</div>
             <div class="num">{{ formatMoney(item.salePrice) }}</div>
           </div>
           <div class="price">
-            <div class="currency"><span>{{ $t(`${lang}.newPrice`) }} </span>HKD</div>
+            <div class="currency"><span>{{ $t(`${lang}.newPrice`) }} </span>{{ coin }}</div>
             <div class="num">{{ formatMoney(item.coupon.discount.price) }}</div>
           </div>
 
@@ -82,6 +82,7 @@
     data(){
       return{
         lang,
+        coin: '',
         language: '',
         discountsList: [],
         showCoupon: false,
@@ -90,6 +91,7 @@
     },
     mounted() {
       this.language = this.$store.state.language;
+      this.coin = this.$store.state.coin;
 
       this.$axios({
           method: 'get',
