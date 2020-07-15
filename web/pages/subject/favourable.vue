@@ -84,7 +84,7 @@
           method: 'get',
           url: 'web/market/detail',
           params: {
-            id: 16
+            id: 17
           }
         })
         .then(data => {
