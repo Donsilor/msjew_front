@@ -24,7 +24,7 @@
             <div class="row-flex align-item-center service">
               <i class="iconfont iconphone"></i>
               <span v-if="this.$store.state.platform === 20">0755 25169121</span>
-              <span v-else>(852) 2165 3905</span>
+              <span v-else>(852) 2165 3908</span>
               <!--          <span class="gap-line"></span>-->
               <!--          <span>聯系 24/7</span>-->
             </div>
@@ -2053,7 +2053,7 @@ export default {
   .header {
     position: absolute;
     width: 100%;
-    min-width: 1360px;
+    min-width: 1200px;
     background-color: #ffffff;
     z-index: 1200;
 
