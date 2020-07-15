@@ -127,7 +127,7 @@ export default {
     // if(route.params.defaultCondition =='fashion-ring'){
     //   seoInfo = await app.$getSeoInfo('fashionRingList')
     // }
-    
+    console.log("sssss",seoInfo)
     return $axios({
       method: 'get',
       url: '/web/goods/ring/web-site',
