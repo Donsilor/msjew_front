@@ -209,6 +209,7 @@
 
 <script>
 import CategoryIndexPage from '@/mixins/category-index-page.js'
+import Bus from '../../assets/js/bus.js'
 const lang = 'weddingRings'
 export default {
   mixins: [CategoryIndexPage],
@@ -233,7 +234,8 @@ export default {
   },
   data() {
     return {
-      lang
+      lang,
+      bannerHeight: 0
     }
   },
   computed: {
@@ -359,6 +361,39 @@ export default {
       .catch(err => {
         console.error(err)
       })
+  },
+  mounted() {
+    const _this = this
+    _this.$nextTick(() => {
+      _this.onResize()
+    })
+
+    Bus.$on('resizeFn', (val) => {
+      _this.onResize()
+    })
+  },
+  methods: {
+    onResize() {
+      var that = this;
+
+      if (that.banner[0] && that.banner[0].image) {
+        const image = new Image()
+        var width = 0, height = 0;
+        image.src = that.banner[0].image
+        image.onload = result => {
+          width = image.width;
+          height = image.height;
+        }
+
+        if(width && height){
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * image.height) / image.width)
+        }else{
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * 640) / 1920)
+        }
+      }
+    }
   }
 }
 </script>
