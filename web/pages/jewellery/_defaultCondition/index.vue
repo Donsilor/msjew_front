@@ -219,25 +219,59 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    let seoInfo = await app.$getSeoInfo('Jewellery')
-    if(route.params.defaultCondition == 'necklaces'){
-      seoInfo = await app.$getSeoInfo('necklaces')
-    }
-    if(route.params.defaultCondition =='pendants'){
-      seoInfo = await app.$getSeoInfo('pendants')
-    }
-    if(route.params.defaultCondition =='bracelets'){
-      seoInfo = await app.$getSeoInfo('bracelets')
-    }
-    if(route.params.defaultCondition =='bangles'){
-      seoInfo = await app.$getSeoInfo('bangles')
-    }
     // console.log("sssss",route)
-    return {
-      seoInfo
-    }
+    let seoInfo = {}
+     if(route.params.defaultCondition == 'necklaces'){
+       seoInfo = await app.$getSeoInfo('necklaces')
+     }else if(route.params.defaultCondition =='pendants'){
+       seoInfo = await app.$getSeoInfo('pendants')
+     }else if(route.params.defaultCondition =='bracelets'){
+       seoInfo = await app.$getSeoInfo('bracelets')
+     }else if(route.params.defaultCondition =='bangles'){
+       seoInfo = await app.$getSeoInfo('bangles')
+     }else{
+       seoInfo = await app.$getSeoInfo('Jewellery')
+     }
+    return $axios({
+      method: 'get',
+      url: '/web/goods/style/web-site',
+      params: {
+        // type: 2
+      }
+    })
+      .then(res => {
+        var data = res.data;
+        return {
+          seoInfo,
+          ad: data.advert,
+          webSite: data.webSite
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
+//   async asyncData({ $axios, route, store, app }) {
+//     let seoInfo = await app.$getSeoInfo('necklaces')
+//     // let seoInfo = {}
+//     // if(route.params.defaultCondition == 'necklaces'){
+//     //   seoInfo = await app.$getSeoInfo('necklaces')
+//     // }else if(route.params.defaultCondition =='pendants'){
+//     //   seoInfo = await app.$getSeoInfo('pendants')
+//     // }else if(route.params.defaultCondition =='bracelets'){
+//     //   seoInfo = await app.$getSeoInfo('bracelets')
+//     // }else if(route.params.defaultCondition =='bangles'){
+//     //   seoInfo = await app.$getSeoInfo('bangles')
+//     // }else{
+//     //   seoInfo = await app.$getSeoInfo('Jewellery')
+//     // }
+//     console.log("sssss",seoInfo)
+//     return {
+//       seoInfo
+//     }
+//   }
+// }
 </script>
 
 <style lang="less" scoped></style>

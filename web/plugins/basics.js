@@ -58,7 +58,7 @@ export default ({ req, app, store, $axios }, inject) => {
             }
         })
             .then(res => {
-                console.log("sss",res.data)
+                // console.log("sss",res.data)
                 if(res.data){
                     var data = res.data
                     return {
