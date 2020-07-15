@@ -101,7 +101,6 @@
           }
         })
         .then(data => {
-          console.log(222,data.data.recommend[0])
           this.discountsList = data.data.recommend[0];
           this.discount = data.data.recommend[0][0].coupon.discount.discount;
           var path = '', href = '', a = 0, id = 0;
