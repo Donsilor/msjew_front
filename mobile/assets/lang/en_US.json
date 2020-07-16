@@ -600,9 +600,9 @@
       "noexpress":"Tracking information is unavailable ",
       "toast1": "Copied",
       "toast2": "This browser does not support Auto Copy",
-      "Shipping":"Order delivery",
-      "ShippingAddress":"Shipping address",
-      "ContactMerchant":"Contact merchant"
+      "Shipping":"Delivering",
+      "ShippingAddress":"Shipping Address",
+      "ContactMerchant":"Contact Us"
     }
   },
   "custom-made": {
