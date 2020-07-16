@@ -2324,6 +2324,8 @@ export default {
             }
 
             .search-box {
+              // width: 162px;
+
               input {
                 width: 135px;
                 padding: 3px 6px;
