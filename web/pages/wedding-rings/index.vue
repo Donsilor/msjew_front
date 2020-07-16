@@ -745,6 +745,6 @@ section {
 
 .banner-item-content.us{
   left: initial !important;
-  right: 6%;
+  right: 17%;
 }
 </style>
