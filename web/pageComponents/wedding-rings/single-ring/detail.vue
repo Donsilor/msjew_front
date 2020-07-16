@@ -625,7 +625,9 @@ export default {
       }
     })
 		
-	this.magnifying = this.thumbnails[0]
+    this.magnifying = this.thumbnails[0]
+    
+    console.log(777,this.recommends)
 
     // this.language = this.getCookie('language')
   },
