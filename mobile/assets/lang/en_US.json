@@ -588,6 +588,35 @@
       "discountedAmount": "Discounted amount",
       "Untied":"Untied",
       "couponAmount": "Coupon"
+    },
+    "logisticInfo":{
+      "title": "Order",
+      "logistic":"Tracking Information",
+      "received":"received",
+      "intransit":"In Transit",
+      "WaitingPackage":"Waiting for pickup",
+      "noexpress":"Tracking information is unavailable ",
+      "toast1": "Copied",
+      "toast2": "This browser does not support Auto Copy",
+      "result": [
+          "Place order",
+          "Paid",
+          "Shipped",
+          "Confirm receipt",
+          "Review"
+      ],
+      "status": [
+          "Pending payment",
+          "Paid",
+          "Shipped",
+          "Completed",
+          "Pending review",
+          "Comment sent",
+          "Return request",
+          "Return is underway",
+          "Products returned",
+          "Cancel order"
+      ]
     }
   },
   "custom-made": {
@@ -989,7 +1018,8 @@
       "tips": "Confirm to leave the checkout page ?",
       "pending":"Pending",
       "payfailed":"Payment failed",
-      "lookOrder": "View Order"
+      "lookOrder": "View Order",
+      "logisticsDetails":"物流详情"
     },
     "progressBar": {
       "price": "Price",

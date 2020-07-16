@@ -587,6 +587,35 @@
       "discountedAmount": "折扣金額",
       "Untied":"已解綁",
       "couponAmount": "優惠券"
+    },
+    "logisticInfo":{
+      "title": "我的订单",
+      "logistic":"物流信息",
+      "received":"已签收",
+      "intransit":"運輸中",
+      "WaitingPackage":"等待揽件",
+      "noexpress":"暂无物流信息",
+      "toast1": "複製成功",
+      "toast2": "该浏览器不支持自动复製",
+      "result": [
+          "等待揽件",
+          "运输中",
+          "已签收",
+          "确认收货",
+          "评价"
+      ],
+      "status": [
+          "未付款",
+          "已付款",
+          "已发货",
+          "已完成",
+          "未评价",
+          "已评价",
+          "退货申请",
+          "退货中",
+          "已退货",
+          "取消交易"
+      ]
     }
   },
   "custom-made": {
@@ -991,8 +1020,8 @@
       "tips": "確認離開嗎?",
       "pending":"待確認",
       "payfailed":"支付失敗",
-      "lookOrder":"查看訂單"
-
+      "lookOrder":"查看訂單",
+      "logisticsDetails":"物流详情"
     },
     "progressBar": {
       "price": "價格",

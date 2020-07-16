@@ -963,6 +963,7 @@
             "orderNumber": "Total Order Amount",
             "orderStatus": "Order Status",
             "orderDetail": "Order Details",
+            "logisticsDetails":"Logistics Details",
             "cancelOrder": "Cancel Order",
             "toPay": "Pay Now",
             "toPayWait": "Processing",
@@ -980,6 +981,7 @@
             "waitingPay": "Payment",
             "waitingSend": "Delivery",
             "waitingReceive": "Receipt",
+            "shipped":"Shipped",
             "waitingComment": "Review",
             "sumbit": "SUBMIT",
             "hadReceive": "Received",
@@ -1079,6 +1081,19 @@
             ],
             "copySuccess": "Copy successful!",
             "copyFail": "Copy failed, please copy order number manually!"
+        },
+        "logisticInfo":{
+            "title": "Order",
+            "logistic":"Tracking Information",
+            "received":"received",
+            "intransit":"In Transit",
+            "WaitingPackage":"Waiting for pickup",
+            "noexpress":"Tracking information is unavailable ",
+            "result": [
+                "Place order",
+                "Paid",
+                "Shipped"
+            ]
         }
     },
     "cart": {
