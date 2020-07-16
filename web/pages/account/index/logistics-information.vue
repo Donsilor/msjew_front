@@ -502,7 +502,7 @@ export default {
        margin: 50px 30px 30px 50px; 
     }
     .follow{
-        padding-bottom: 0.5rem;
+        padding-bottom: 16px;
     }
     .follow-list{
         width: 92%; 
@@ -513,11 +513,11 @@ export default {
     }
     .message-text{
         font-family: MicrosoftYaHei;
-        font-size: 1rem;
+        font-size: 16px;
         font-weight: normal;
         font-stretch: normal;
-        line-height: 3rem;
-        letter-spacing: 0rem;
+        line-height: 35px;
+        letter-spacing: 0px;
         color: #333333;
         width: 50%;
     }
@@ -525,8 +525,8 @@ export default {
         color:#999999
     }
     .img2{
-        width: .81rem;
-        height: .8rem;
+        width: 12px;
+        height: 12px;
         float: right;
     }
     .addressshow2{
@@ -540,7 +540,7 @@ export default {
         white-space: normal;
         word-wrap: break-word;
         word-break: break-all;
-        font-size: 1rem;
+        font-size: 16px;
     }
     .addressshow1{
         height: auto;
@@ -553,10 +553,10 @@ export default {
         white-space: normal;
         word-wrap: break-word;
         word-break: break-all;
-        font-size: 1rem;
+        font-size: 16px;
     }
     .orderTitle{
-        font-size: 1rem;
+        font-size: 16px;
         color: #333333;
         height: auto;
         overflow: hidden;
@@ -567,10 +567,10 @@ export default {
         white-space: normal;
         word-wrap: break-word;
         word-break: break-all;
-        height: 2.5rem;
+        height: 35px;
     }
     .orderDetail{
-        font-size: 0.8rem;
+        font-size: 14px;
         color: #666666;
         text-align:left;
     }
@@ -581,7 +581,7 @@ export default {
     }
     .pay-button{
         width: 88%;
-        height: 2.6rem;
+        height: 35px;
         position:relative;
         background-color: red;
         color: white;
@@ -589,18 +589,18 @@ export default {
     }
     ul li{
         list-style:none;
-        font-size: 1rem;
+        font-size: 16px;
     }
     ul {
-        padding-left: 1.5rem
+        padding-left: 65px;
     }
     .track-list{
         position:relative;
     }
     .track-list li{
         position:relative;
-        padding:0px 0 1.5rem 25px;
-        line-height:1rem;
+        padding:0px 0 20px 25px;
+        line-height:16px;
         border-left:1px solid #d9d9d9;
         color: #999;
     }
@@ -614,22 +614,22 @@ export default {
     .track-list li .node-icon{
         position: absolute;
         left: -4.5px;
-        border-radius: 0.25rem;
-        width: 0.5rem;
-        height: 0.5rem;
+        border-radius: 50%;
+        width: 8px;
+        height: 8px;
         top:4px;
         background-color: #999999;
     }
     .track-list li.first .node-icon{
         background-position:0-72px;
         background-color: green;
-        width: 1rem;
+        width: 16px;
         z-index: 2;
-        height: 1rem;
+        height: 16px;
         position: absolute;
-        left: -9px;
+        left: -8px;
         top: 0;
-        border-radius: 0.5rem;
+        border-radius: 50%;
     }
     .track-list li .time{
         margin-right:20px;
@@ -663,7 +663,7 @@ export default {
     }
     .track-list li.finall{
         position:relative;
-        padding:0px 0 1.5rem 25px;
+        padding:0px 0 20px 25px;
         line-height:18px;
         border-color: white;
         border-left:1px solid #ffffff;
@@ -672,9 +672,8 @@ export default {
     .track-list li.finall .div-spilander{
         width: 1px;
         position: absolute;
-        position: absolute;
-        left: -1.5px;
-        height: 0.5rem;
+        left: -0.5px;
+        height: 8px;
         background-color: #d9d9d9;
     }
 }
