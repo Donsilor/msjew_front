@@ -522,7 +522,8 @@
       "waitingPay": "Payment",
       "waitingSend": "Delivery",
       "waitingReceive": "Receipt",
-      "waitingComment": "Review"
+      "waitingComment": "Review",
+      "Shipped":"Shipped"
     },
     "orderDetail": {
       "orderDetail": "Order Information",
@@ -598,25 +599,9 @@
       "noexpress":"Tracking information is unavailable ",
       "toast1": "Copied",
       "toast2": "This browser does not support Auto Copy",
-      "result": [
-          "Place order",
-          "Paid",
-          "Shipped",
-          "Confirm receipt",
-          "Review"
-      ],
-      "status": [
-          "Pending payment",
-          "Paid",
-          "Shipped",
-          "Completed",
-          "Pending review",
-          "Comment sent",
-          "Return request",
-          "Return is underway",
-          "Products returned",
-          "Cancel order"
-      ]
+      "Shipping":"Order delivery",
+      "ShippingAddress":"Shipping address",
+      "ContactMerchant":"Contact merchant"
     }
   },
   "custom-made": {
@@ -1019,7 +1004,7 @@
       "pending":"Pending",
       "payfailed":"Payment failed",
       "lookOrder": "View Order",
-      "logisticsDetails":"物流详情"
+      "logisticsDetails":"View Logistics"
     },
     "progressBar": {
       "price": "Price",

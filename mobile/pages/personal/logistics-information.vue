@@ -1,12 +1,12 @@
 <template>
     <div class="logistic-info">
         <Header :title="lang.logistic" />
-        <div class="logistic" v-if="express.logistics">
+        <div class="logistic" v-if="data.express.logistics !== null">
             <div class="schedule">
                 <div class="left">
-                    <div class="title">订单配送中</div>
+                    <div class="title">{{lang.Shipping}}</div>
                     <div class="address">
-                        <span>收货地址：</span>
+                        <span>{{lang.ShippingAddress}}:</span>
                         <span>
                             {{data.address.countryName}}
                             {{data.address.provinceName}}
@@ -15,7 +15,7 @@
                         </span>
                     </div>
                     <div class="deliveryNo">
-                        <span>顺丰快递：</span>
+                        <span>{{data.express.companyName}}:</span>
                         <span>{{data.express.expressNo}}</span>
                         <i class="icon iconfont iconcopy copy-btn" :data-clipboard-text="data.express.expressNo" @click="copy"></i>
                     </div>
@@ -23,7 +23,7 @@
                 <div class="right">
                     <div>
                         <img src="../../static/personal/user.png" alt=""> 
-                        <p>联系商家</p>
+                        <p>{{lang.ContactMerchant}}</p>
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 </div>
             </div> -->
 
-            <div class="track-content" >
+            <div class="track-content">
                 <!-- <div class="content"></div> -->
                 <!--物流跟踪-->
                 <div class="follow">
@@ -131,23 +131,30 @@ export default {
         oid: this.$route.query.orderId, 
         data: {
             address: {
-            countryName: '',
-            provinceName: '',
-            cityName: '',
-            address: '',
-            realName: '',
-            userMail: '',
+                countryName: '',
+                provinceName: '',
+                cityName: '',
+                address: '',
+                realName: '',
+                userMail: '',
             },
+            express:{
+                companyName:'',
+                delivery_time:'',
+                expressNo:'',
+                logistics:{}
+            }
         },
         express:{},
         list:[],
     }
   },
   mounted(){
-    const _this = this
-    _this.$nextTick(() => {
-      _this.getData()
-    })
+      this.getData()
+    // const _this = this
+    // _this.$nextTick(() => {
+    //   _this.getData()
+    // })
   },
   methods: {
     getData() {
@@ -161,7 +168,9 @@ export default {
         .then(data => {
         console.log("this.data",data)
           this.data = data
-          this.express = data.express
+          if(data.express){
+            this.express = data.express
+          }
           if(data.express.logistics){
             this.list = data.express.logistics.list
             this.expStatus = data.express.logistics.abstract_status
@@ -391,8 +400,8 @@ export default {
     }
     .empy-express{
         text-align: center;
-        padding: 50px;
-        font-size: 24px;
+        padding: 120px 40px;
+        font-size: 20px;
         color: #999999;
     }
 }

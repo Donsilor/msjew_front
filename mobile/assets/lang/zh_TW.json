@@ -522,7 +522,8 @@
       "waitingPay": "待付款",
       "waitingSend": "待發貨",
       "waitingReceive": "待收貨",
-      "waitingComment": "待評價"
+      "waitingComment": "待評價",
+      "Shipped":"已發貨"
     },
     "orderDetail": {
       "orderDetail": "訂單详情",
@@ -597,25 +598,9 @@
       "noexpress":"暂无物流信息",
       "toast1": "複製成功",
       "toast2": "该浏览器不支持自动复製",
-      "result": [
-          "等待揽件",
-          "运输中",
-          "已签收",
-          "确认收货",
-          "评价"
-      ],
-      "status": [
-          "未付款",
-          "已付款",
-          "已发货",
-          "已完成",
-          "未评价",
-          "已评价",
-          "退货申请",
-          "退货中",
-          "已退货",
-          "取消交易"
-      ]
+      "Shipping":"訂單配送中",
+      "ShippingAddress":"收貨地址",
+      "ContactMerchant":"聯繫商家"
     }
   },
   "custom-made": {

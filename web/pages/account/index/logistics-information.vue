@@ -8,7 +8,7 @@
                 </div>
             </nuxt-link>
         </div>
-        <div class="logistic" v-if="express||express.logistics">
+        <div class="logistic" v-if="express.logistics !== null">
             <div class="schedule">
                 <p v-for="(step, ns) in StepStatus" :key="ns">
                     <span :style="{'background-color': step.active? 'rgba(242,155,135,1)': '#E6E6E6'}">{{ ns + 1 }}</span>
@@ -213,17 +213,6 @@ export default {
           title: this.$t(`${lang}.result`)[2],
           active: false
         }
-        // ,
-        // {
-        //   id: 3,
-        //   title: this.$t(`${lang}.result`)[3],
-        //   active: false
-        // },
-        // {
-        //   id: 4,
-        //   title: this.$t(`${lang}.result`)[4],
-        //   active: false
-        // }
       ]
       // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
       if(expStatus.has_active == true){
