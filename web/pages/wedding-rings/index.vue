@@ -7,12 +7,14 @@
         :autoplay="false"
         :height="bannerHeight + 'px'"
       >
-        <el-carousel-item v-for="(item, index) in banner" :key="index">
+        <!-- <el-carousel-item v-for="(item, index) in banner" :key="index"> -->
+        <el-carousel-item>
           <div class="banner-item">
             <div class="banner-item-bg">
-              <img :src="item.image" />
+              <img src="/adt/image1566979883784.png" v-if="platform != 30" />
+              <img src="/adt/banner-2.png" v-else />
             </div>
-            <div class="banner-item-content">
+            <div class="banner-item-content" :class="{'us': platform == 30}">
               <div class="content-title">
                 <span>{{ $t(`${lang}.weddingRings`) }}</span>
               </div>
@@ -235,6 +237,7 @@ export default {
   data() {
     return {
       lang,
+      platform: 0,
       bannerHeight: 0
     }
   },
@@ -354,6 +357,7 @@ export default {
     })
       .then(res => {
         var data = res.data
+        console.log(44444,data)
         return {
           seoInfo,
           ad: data.advert,
@@ -365,7 +369,9 @@ export default {
       })
   },
   mounted() {
-    const _this = this
+    const _this = this;
+    this.platform = this.$store.state.platform;
+    
     _this.$nextTick(() => {
       _this.onResize()
     })
@@ -741,5 +747,10 @@ section {
 }
 .page{
   margin-bottom: 50px;
+}
+
+.banner-item-content.us{
+  left: initial !important;
+  right: 6%;
 }
 </style>
