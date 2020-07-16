@@ -214,6 +214,11 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
+            <nuxt-link :to="`/account/logistics-information?orderId=${o.id}`"
+              ><button>
+                {{ $t(`${lang}.logisticsDetails`) }}
+              </button>
+            </nuxt-link>
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
@@ -228,6 +233,11 @@
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.orderDetail`) }}
+              </button>
+            </nuxt-link>
+            <nuxt-link :to="`/account/logistics-information?orderId=${o.id}`"
+              ><button>
+                {{ $t(`${lang}.logisticsDetails`) }}
               </button>
             </nuxt-link>
             <span
@@ -252,7 +262,12 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
-            <div
+            <nuxt-link :to="`/account/logistics-information?orderId=${o.id}`"
+              ><button>
+                {{ $t(`${lang}.logisticsDetails`) }}
+              </button>
+            </nuxt-link>
+            <!-- <div
               class="fakeA"
               @click="
                 receiveOrder = true
@@ -260,7 +275,7 @@
               "
             >
               {{ $t(`${lang}.confirmReceipt`) }}
-            </div>
+            </div> -->
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
@@ -395,11 +410,11 @@ export default {
           status: 30,
           num: 0
         },
-        // {
-        //   name: this.$t(`${lang}.waitingReceive`),
-        //   status: 40,
-        //   num: 0
-        // },
+        {
+          name: this.$t(`${lang}.shipped`),
+          status: 40,
+          num: 0
+        },
         // {
         //   name: this.$t(`${lang}.hadFinish`),
         //   status: 50,
@@ -538,7 +553,7 @@ export default {
           this.tabsParam[0].num = res.data.data.length
           this.tabsParam[1].num = this.list.ordered.length
           this.tabsParam[2].num = this.list.paid.length
-          // this.tabsParam[3].num = this.list.send.length
+          this.tabsParam[3].num = this.list.send.length
           // this.tabsParam[4].num = this.list.finished.length
         })
         .catch(err => {
