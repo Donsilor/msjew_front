@@ -68,7 +68,7 @@ export default function ({ req, res, redirect, store, route }) {
         let headerHost = req.headers['host']
         //生产环境
         let host = 'https://wap.bddco.com';
-        if ((/^(cn|us)\.bddco\.com/).test(headerHost)) {
+        if ((/^(cn|us|tw)\.bddco\.com/).test(headerHost)) {
             //生产环境
             host = 'https://wap-' + headerHost;
         } else if ((/bddia\.com/).test(headerHost)) {
@@ -80,7 +80,7 @@ export default function ({ req, res, redirect, store, route }) {
         } else if ((/bddco.cn/).test(headerHost)) {
             //大陆站点 bddco.cn
             host = 'https://wap.bddco.cn'
-            if ((/^(cn|us)-bdd.bddco.cn/).test(headerHost)) {
+            if ((/^(cn|us|tw)-bdd.bddco.cn/).test(headerHost)) {
                 host = 'https://wap-' + headerHost;
             } else if (headerHost == 'www-bdd.bddco.cn') {
                 host = 'https://wap-bdd.bddco.cn'
@@ -1126,7 +1126,7 @@ export default function ({ req, res, redirect, store, route }) {
                         if (href.length > 1) {
                             url = url + '?' + param + href[1]
                         }
-                        
+
                         redirect(url)
                         return
                     }
@@ -1135,7 +1135,7 @@ export default function ({ req, res, redirect, store, route }) {
 
             // console.log(url)
             redirect(host)
-            return 
+            return
         }
         // console.log("req.originalUrl----", req.originalUrl)
         toWapUrl(req.originalUrl)
