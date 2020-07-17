@@ -39,6 +39,19 @@ export default {
   },
   asyncData({ app, $axios, route, store }) {
     const lang = app.$bddLanguage.detailCommons
+    var path = route.fullPath,id = 0;
+    if(route.query.goodId){
+      id = route.query.goodId
+    }else{
+      if(path.indexOf('goodId=') != -1){
+        id = path.split('goodId=')[1]
+
+        if(path.indexOf('&') != -1){
+          id = path.split('&')[1]
+        }
+      }
+    }
+
     return $axios({
       method: `post`,
       url: `/wap/goods/style/detail`,
@@ -46,11 +59,12 @@ export default {
         token: store.state.token || ''
       },
       params: {
-        goodsId: route.query.goodId
+        goodsId: id
       }
     })
       .then(res => {
         const infos = res
+        
         // let infos = null
         // if (process.server) {
         //   if (res.data.code === 200) {
@@ -103,6 +117,7 @@ export default {
         infos.goodsDesc = infos.goodsDesc.includes(`<script>`)
           ? ''
           : infos.goodsDesc
+
         return { data: infos, seoInfo: app.$getDetailSeoInfo(infos) }
       })
       .catch(err => {

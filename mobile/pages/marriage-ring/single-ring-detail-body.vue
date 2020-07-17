@@ -310,9 +310,9 @@ export default {
       const body = this.goodInfo.details
       if (this.goodInfo.totalStock > 0) {
         for (const i in body) {
-          if (parseInt(this.sendDetailsId) === body[i].id) {
+          // if (parseInt(this.sendDetailsId) === body[i].id) {
             return body[i].stock > 0
-          }
+          // }
         }
       } else {
         return false
@@ -324,6 +324,8 @@ export default {
     }
   },
   mounted() {
+    console.log(779,this.goodInfo)
+    return
     const _this = this
     if(this.goodInfo.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)
