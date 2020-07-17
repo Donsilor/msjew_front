@@ -2758,6 +2758,7 @@ export default {
           invoice:invoice,
           tradeType:'pc',
           coinType:this.$store.state.coin,
+          payType: pay,
           returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
         }
       })

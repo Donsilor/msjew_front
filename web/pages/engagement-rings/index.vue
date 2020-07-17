@@ -34,12 +34,12 @@
                 </span>
               </div>
               <div class="button-group">
-                <nuxt-link :to="{ path: $startDj(2) }">
+                <nuxt-link target="_blank" :to="{ path: $startDj(2) }">
                   <button class="margin-bottom-30">
                     {{ $t(`${lang}.choiceFirst`) }}
                   </button>
                 </nuxt-link>
-                <nuxt-link :to="{ path: $startDj(1) }">
+                <nuxt-link target="_blank" :to="{ path: $startDj(1) }">
                   <button>{{ $t(`${lang}.diamondFirst`) }}</button>
                 </nuxt-link>
               </div>
@@ -73,26 +73,26 @@
             <i class="icon iconfont" @click="swiperNext(0)">&#xe652;</i>
           </div>
           <span>&</span>
-          <div class="box">
-            <i class="icon iconfont" @click="swiperPrev(1)">&#xe663;</i>
+          <div class="box swiper-no-swiping">
+            <!-- <i class="icon iconfont" @click="swiperPrev(1)">&#xe663;</i> -->
             <div class="diamond-swiper-container">
-              <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                  <img src="/engagement-rings/design/diamond1.jpg" />
-                </div>
-                <div class="swiper-slide">
-                  <img src="/engagement-rings/design/diamond2.jpg" />
-                </div>
+              <!-- <div class="swiper-wrapper"> -->
+                <!-- <div class="swiper-slide"> -->
+                  <!-- <img src="/engagement-rings/design/diamond2.jpg" /> -->
+                <!-- </div> -->
                 <div class="swiper-slide">
                   <img src="/engagement-rings/design/diamond3.jpg" />
                 </div>
-              </div>
+                <!-- <div class="swiper-slide"> -->
+                  <!-- <img src="/engagement-rings/design/diamond1.jpg" /> -->
+                <!-- </div> -->
+              <!-- </div> -->
             </div>
-            <i class="icon iconfont" @click="swiperNext(1)">&#xe652;</i>
+            <!-- <i class="icon iconfont" @click="swiperNext(1)">&#xe652;</i> -->
           </div>
           <span>=</span>
           <div class="box">
-            <nuxt-link :to="{ path: '/engagement-rings/all' }">
+            <nuxt-link target="_blank" :to="{ path: '/engagement-rings/all' }">
               <img :src="addmeile" />
             </nuxt-link>
           </div>
@@ -105,7 +105,7 @@
       </h1>
       <div class="section-title-line"></div>
       <div class="section-content">
-        <div class="certify">
+        <div class="certify" >
           <div class="certify-swiper-container">
             <div class="swiper-wrapper">
               <div
@@ -126,7 +126,7 @@
           </div>
         </div>
         <div class="more">
-          <nuxt-link :to="{ path: '/engagement-rings/all' }">
+          <nuxt-link target="_blank" :to="{ path: '/engagement-rings/all' }">
             <button>{{ $t(`${lang}.more`) }}</button>
             <img src="/wedding-rings/arrow-right.png" />
           </nuxt-link>
@@ -148,7 +148,7 @@
               <h2 class="name">{{ $t(`${lang}.profession`) }}</h2>
               <p class="desc">{{ $t(`${lang}.professionDesc`) }}</p>
               <div class="other">
-                <nuxt-link :to="{ path: '/education/diamonds/carat' }">
+                <nuxt-link target="_blank" :to="{ path: '/education/diamonds/carat' }">
                   {{ $t(`${lang}.moreProfessionInfo`) }}
                 </nuxt-link>
               </div>
@@ -162,7 +162,7 @@
               <h2 class="name">{{ $t(`${lang}.valueForMoney`) }}</h2>
               <p class="desc">{{ $t(`${lang}.valueForMoneyDesc`) }}</p>
               <div class="other">
-                <nuxt-link :to="{ path: '/contact-us' }">
+                <nuxt-link target="_blank" :to="{ path: '/contact-us' }">
                   {{ $t(`${lang}.moreValueForMoneyInfo`) }}
                 </nuxt-link>
               </div>
@@ -176,7 +176,7 @@
               <h2 class="name">{{ $t(`${lang}.warranty`) }}</h2>
               <p class="desc">{{ $t(`${lang}.warrantyDesc`) }}</p>
               <div class="other">
-                <nuxt-link :to="{ path: '/policies/quality-value' }">
+                <nuxt-link target="_blank" :to="{ path: '/policies/quality-value' }">
                   {{ $t(`${lang}.moreWarrantyInfo`) }}
                 </nuxt-link>
               </div>
@@ -190,7 +190,7 @@
               <h2 class="name">{{ $t(`${lang}.afterSale`) }}</h2>
               <p class="desc">{{ $t(`${lang}.afterSaleDesc`) }}</p>
               <div class="other">
-                <nuxt-link :to="{ path: '/policies/return-refund-policy' }">
+                <nuxt-link target="_blank" :to="{ path: '/policies/return-refund-policy' }">
                   {{ $t(`${lang}.moreAfterSaleInfo`) }}
                 </nuxt-link>
               </div>
@@ -204,6 +204,7 @@
 
 <script>
 import CategoryIndexPage from '@/mixins/category-index-page.js'
+import Bus from '../../assets/js/bus.js'
 const lang = 'engagementRing'
 export default {
   mixins: [CategoryIndexPage],
@@ -229,6 +230,7 @@ export default {
   data() {
     return {
       lang,
+      bannerHeight: 0,
       ringSwiper: null,
       diamondSwiper: null,
       certifySwiper: null,
@@ -297,7 +299,10 @@ export default {
   },
   mounted() {
     const _this = this
+
     _this.$nextTick(() => {
+      _this.onResize()
+
       const Swiper = require('swiper/dist/js/swiper.js')
       _this.ringSwiper = new Swiper('.ring-swiper-container', {
         direction: 'vertical',
@@ -314,17 +319,21 @@ export default {
         }
       })
 
+      Bus.$on('resizeFn', (val) => {
+        _this.onResize()
+      })
+
       _this.diamondSwiper = new Swiper('.diamond-swiper-container', {
         direction: 'vertical',
-        mousewheelControl: true,
-        mousewheelInvert: true,
+        // mousewheelControl: true,
+        // mousewheelInvert: true,
         slidesPerView: 3,
-        loop: true,
-        onSetTransition: () => {
-          setTimeout(() => {
-            // const swiper = _this.ringSwiper
-          }, 100)
-        }
+        // loop: true,
+        // onSetTransition: () => {
+        //   setTimeout(() => {
+        //     // const swiper = _this.ringSwiper
+        //   }, 100)
+        // }
       })
 
       _this.certifySwiper = new Swiper('.certify-swiper-container', {
@@ -412,11 +421,11 @@ export default {
           if (!product) {
             return
           }
-          if (product.showType === 1) {
+          // if (product.showType === 1) {
             window.open(_this.routeDataToUrl(product.to))
-          } else {
-            _this.$router.push(product.to)
-          }
+          // } else {
+            // _this.$router.push(product.to)
+          // }
         }
       })
 
@@ -444,6 +453,27 @@ export default {
       this.$router.push({
         path: '/engagement-rings/all'
       })
+    },
+    onResize() {
+      var that = this;
+
+      if (that.banner[0] && that.banner[0].image) {
+        const image = new Image()
+        var width = 0, height = 0;
+        image.src = that.banner[0].image
+        image.onload = result => {
+          width = image.width;
+          height = image.height;
+        }
+
+        if(width && height){
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * image.height) / image.width)
+        }else{
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * 640) / 1920)
+        }
+      }
     }
   }
 }
@@ -622,8 +652,7 @@ section {
         -ms-transition: all 0.3s;
         transition: all 0.3s;
       }
-      .ring-swiper-container,
-      .diamond-swiper-container {
+      .ring-swiper-container{
         height: 420px;
         overflow: hidden;
         position: relative;
@@ -661,6 +690,23 @@ section {
               transform: scale(1, 1);
             }
           }
+        }
+      }
+      .swiper-no-swiping{
+        width: 300px;
+        height: 300px;
+        margin-top: 60px;
+      }
+
+      .diamond-swiper-container {
+        height: 300px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+
+        .swiper-slide {
+          text-align: center;
+          line-height: 400px;
         }
       }
       > div {

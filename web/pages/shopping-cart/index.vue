@@ -535,6 +535,7 @@ export default {
         ) {
           data.push(this.good[i].id)
         } else if (
+          this.good[i].groupType === 2 &&
           this.good[i].data[0].simpleGoodsEntity.goodsStatus !== 2 &&
           this.good[i].data[1].simpleGoodsEntity.goodsStatus !== 2
         ) {

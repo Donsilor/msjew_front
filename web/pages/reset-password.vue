@@ -3,10 +3,10 @@
     <!-- 手机方式找回密码 -->
     <div v-if="resetType == 1" class="page">
       <div class="content">
-		<div style="position: fixed;z-index: -999;">
-			<input type="text" name="hidden1" id="text" value="123">
-			<input type="password" name="hidden1" id="password" value="456">
-		</div>
+        <div style="position: fixed;z-index: -999;">
+          <input type="text" name="hidden1" id="text" value="123">
+          <input type="password" name="hidden1" id="password" value="456">
+        </div>
 				
         <ul class="schedule">
           <li
@@ -103,7 +103,7 @@
                   :type="showPassword ? 'text' : 'password'"
                   :placeholder="$t(`${lang}.newPassword`)"
                   @keydown.enter="changeSchedule2(3)"
-                  autocomplete="off"
+                  autompleocte="off"
                 />
                 <div class="password-eye" @click="changeRegisterPasswordStatus">
                   <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -164,10 +164,10 @@
     <!-- 邮箱方式找回密码 -->
     <div v-if="resetType == 2" class="page">
       <div class="content">
-		<div style="position: fixed;z-index: -999;">
-			<input type="text" name="hidden1" id="text" value="123">
-			<input type="password" name="hidden1" id="password" value="456">
-		</div>
+      <div style="position: fixed;z-index: -999;">
+        <input type="text" name="hidden1" id="text" value="123">
+        <input type="password" name="hidden1" id="password" value="456">
+      </div>
 				
         <ul class="schedule">
           <li
@@ -217,40 +217,55 @@
               </div>
               <h2 class="tip">
                 {{ $t(`${lang}.hadSendEmailCode1`) }}
-                <span>{{ info.email }}</span>
+                <span>{{ info.email }}</span> <br/>
                 {{ $t(`${lang}.hadSendEmailCode2`) }}
               </h2>
               <div class="wrong-email">
-                <span>{{ $t(`${lang}.wrongEmail`) }}</span>
+                <!-- <span>{{ $t(`${lang}.wrongEmail`) }}</span> -->
                 <span class="rewrite" @click="changeSchedule(1)">
                   {{ $t(`${lang}.changeEmail`) }}
                 </span>
               </div>
-              <div class="input-line">
+              <div class="input-line flex">
                 <input
                   v-model="info.code"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.inputEmailCode`)"
                   autocomplete="off"
                 />
+                <div class="send-email-code">
+                  <button  :class="['getCode', className]" :disabled="waiting" @click="sendCode">
+                    {{ waitingText }}
+                  </button>
+                </div>
               </div>
-              <div class="input-line">
+              <div class="input-line position">
                 <input
                   v-model="info.password"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.newPassword`)"
+                  :type="showPassword ? 'text' : 'password'"
                   @keydown.enter="changeSchedule(3)"
                   autocomplete="off"
                 />
+                <div class="password-eye" @click="changeRegisterPasswordStatus">
+                  <i v-show="!showPassword" class="iconfont iconcloes"></i>
+                  <i v-show="showPassword" class="iconfont iconopen"></i>
+                </div>
               </div>
-              <div class="input-line">
+              <div class="input-line position">
                 <input
                   v-model="info.password_repetition"
                   class="bottom-border-input"
                   :placeholder="$t(`${lang}.confirmPassword`)"
+                  :type="showPassword ? 'text' : 'password'"
                   @keydown.enter="changeSchedule(3)"
                   autocomplete="off"
                 />
+                <div class="password-eye" @click="changeRegisterPasswordStatus">
+                  <i v-show="!showPassword" class="iconfont iconcloes"></i>
+                  <i v-show="showPassword" class="iconfont iconopen"></i>
+                </div>
               </div>
               <div class="button-group">
                 <button
@@ -542,7 +557,8 @@ export default {
     sendCode() {
         const _this = this
         return new Promise((resolve, reject) => {
-         _this
+        _this.setWait()
+        _this
         .$axios({
             method: 'post',
             url: '/web/site/email-code',
@@ -1100,8 +1116,7 @@ input{
               width: 370px;
               margin: 0 auto 30px auto;
               display: flex;
-              align-items: center;
-              justify-content: space-between;
+              justify-content: flex-end;
 
               font-size: 16px;
               font-family: Microsoft YaHei;
@@ -1114,6 +1129,7 @@ input{
                 font-weight: 400;
                 text-decoration: underline;
                 color: rgba(168, 143, 130, 1);
+                cursor: pointer;
               }
             }
 
@@ -1123,7 +1139,7 @@ input{
 
               input {
                 width: 100%;
-                text-align: center;
+                // text-align: center;
               }
             }
           }
@@ -1266,17 +1282,6 @@ input{
   .code-main {
     justify-content: center;
   }
-  .password-eye {
-    position: absolute;
-    top: 45%;
-    right: 5px;
-    transform: translate(0, -50%);
-
-    .iconfont {
-      font-size: 20px;
-      color: #d2d2d2;
-    }
-  }
 }
 .pwdinput{
   text-align: left !important;
@@ -1292,5 +1297,38 @@ input{
   font-weight: 400;
   color: rgba(242, 155, 135, 1);
   display: none;
+}
+
+.password-eye {
+  position: absolute;
+  top: 45%;
+  right: 5px;
+  transform: translate(0, -50%);
+
+  .iconfont {
+    font-size: 20px;
+    color: #d2d2d2;
+  }
+}
+
+.position{
+  position: relative;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-between;
+
+  input{
+    width: 280px;
+    margin-right: 26px;
+  }
+
+  button{
+    padding: 10px;
+    height: 34px;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
 }
 </style>

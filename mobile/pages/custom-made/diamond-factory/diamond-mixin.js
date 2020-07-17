@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted() {
-    // console.log(`12345678============?`)
+    console.log(`12345678============?`,this.goodInfo.sizes)
     // console.log(JSON.stringify(this.$route.query.goodId))
     if (this.$route.query.goodId) {
       this.$nextTick(() => {
@@ -130,6 +130,8 @@ export default {
               : res.goodsDesc
           }
           this.goodInfo = res
+          this.goodInfo.coupon = res.coupon
+          // console.log("99999999",)
           this.showPi = this.goodInfo.salePrice
           for (let i = 0; i < this.goodInfo.specs.length; i++) {
             if (this.goodInfo.specs[i].configId === 4) {
@@ -179,6 +181,14 @@ export default {
             ? `https://www.gia.edu/report-check?reportno=${gayNum}`
             : ``
 
+          let fbqInfo = {
+            content_type: 'product', //  固定值：pruduct
+            content_ids: res.id,  // 对应网站产品的 id或者Sku
+            value:res.salePrice,     //对应产品的价值
+            currency: res.coinType //对应货币类型
+          };
+
+          fbq('track', 'ViewContent', fbqInfo);
           if(res.coupon){
             for(var i in res.coupon){
               this.goodInfo.coupon[i] = res.coupon[i];

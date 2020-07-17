@@ -68,7 +68,7 @@
 
                 <p>{{ item.des }}</p>
                 <p v-if="item.des2">{{ item.des2 }}</p>
-                <p class="hint-color" v-if="index != 0 && index != 1 && index != 3 && index != 5">({{lang.msg11}})</p>
+                <p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p>
               </div>
             </div>
           </li>
@@ -1411,7 +1411,7 @@ export default {
             url: `/web/member/order-tourist/create`,
             data: {
               goodsCartList:data,
-              invoice:this.$route.params.invoice,
+              invoice: info,
               tradeType:'wap',
               payType: pay,
               coinType:this.$store.state.coin,
