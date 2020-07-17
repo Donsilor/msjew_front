@@ -76,7 +76,7 @@ export default {
     }
   },
   created() {
-    console.log("gggg",this.goodInfo)
+    // console.log("gggg",this.goodInfo)
     // this.$nextTick(() => {
     // })
     if(this.goodInfo.materials){

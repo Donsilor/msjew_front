@@ -39,18 +39,6 @@ export default {
   },
   asyncData({ app, $axios, route, store }) {
     const lang = app.$bddLanguage.detailCommons
-    var path = route.fullPath,id = 0;
-    if(route.query.goodId){
-      id = route.query.goodId
-    }else{
-      if(path.indexOf('goodId=') != -1){
-        id = path.split('goodId=')[1]
-
-        if(path.indexOf('&') != -1){
-          id = path.split('&')[1]
-        }
-      }
-    }
 
     return $axios({
       method: `post`,
@@ -59,7 +47,7 @@ export default {
         token: store.state.token || ''
       },
       params: {
-        goodsId: id
+        goodsId: route.query.goodId || ''
       }
     })
       .then(res => {

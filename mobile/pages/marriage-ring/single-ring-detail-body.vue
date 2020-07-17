@@ -293,12 +293,6 @@ export default {
   },
   data(){
     return {
-      url:[
-        require('../../static/marriage-ring/icon-01.png'),
-        require('../../static/marriage-ring/icon-02.png'),
-        require('../../static/marriage-ring/icon-03.png'),
-        require('../../static/marriage-ring/icon-04.png')
-      ],
       ifShowCoupon: false,
       language: this.$store.state.language,
       activeTime:''
@@ -324,8 +318,6 @@ export default {
     }
   },
   mounted() {
-    console.log(779,this.goodInfo)
-    return
     const _this = this
     if(this.goodInfo.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)
