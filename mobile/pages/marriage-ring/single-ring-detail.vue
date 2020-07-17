@@ -64,7 +64,7 @@ export default {
     })
       .then(res => {
         const infos = res
-        
+
         // let infos = null
         // if (process.server) {
         //   if (res.data.code === 200) {
@@ -117,7 +117,6 @@ export default {
         infos.goodsDesc = infos.goodsDesc.includes(`<script>`)
           ? ''
           : infos.goodsDesc
-
         return { data: infos, seoInfo: app.$getDetailSeoInfo(infos) }
       })
       .catch(err => {

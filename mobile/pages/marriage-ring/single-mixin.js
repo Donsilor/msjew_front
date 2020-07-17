@@ -76,15 +76,20 @@ export default {
     }
   },
   created() {
-    // console.log("gggg",this.goodInfo)
+    console.log("gggg",this.goodInfo)
     // this.$nextTick(() => {
     // })
     if(this.goodInfo.materials){
+      var id = '';
+      if(this.goodInfo.materials.length > 0){
+        id = this.goodInfo.materials[0].id
+      }
+
       this.conditions.push({
         type: 'eject-choose-pro',
         key: 'quality',
         name: this.lang.fineness,
-        checked: this.goodInfo.materials[0].id || '',
+        checked: id,
         options: this.goodInfo.materials
       })
       this.chooseSize = '';

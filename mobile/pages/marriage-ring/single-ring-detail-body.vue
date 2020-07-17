@@ -310,9 +310,9 @@ export default {
       const body = this.goodInfo.details
       if (this.goodInfo.totalStock > 0) {
         for (const i in body) {
-          // if (parseInt(this.sendDetailsId) === body[i].id) {
+          if (parseInt(this.sendDetailsId) === body[i].id) {
             return body[i].stock > 0
-          // }
+          }
         }
       } else {
         return false
