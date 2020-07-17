@@ -110,7 +110,6 @@ import Bus from '../../assets/js/bus.js'
 
 const lang = 'components.footerBar'
 export default {
-  mixins: [CategoryIndexPage],
   data() {
     return {
       lang,
