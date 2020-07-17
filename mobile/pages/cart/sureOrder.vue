@@ -1416,7 +1416,8 @@ export default {
               tradeType:'wap',
               payType: pay,
               coinType:this.$store.state.coin,
-              returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
+              returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}', //http://localhost:8328
+              buyer_remark: this.userRemark,
             }
           })
             .then(res => {
