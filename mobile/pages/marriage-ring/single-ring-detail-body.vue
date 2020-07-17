@@ -325,7 +325,6 @@ export default {
   },
   mounted() {
     const _this = this
-    return
     if(this.goodInfo.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)
     }

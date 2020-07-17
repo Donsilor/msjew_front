@@ -1,11 +1,11 @@
 <template>
   <div ref="getScroll" class="akm" @scroll="showScroll">
-    <!-- <detail-body
+    <detail-body
       :good-info="data"
       @addCart="addCart"
       @addWish="addWish"
       @removeWish="removeWish"
-    ></detail-body> -->
+    ></detail-body>
     <div v-show="isHalf" class="scroll-to-top" @click="goTop()">
       <i class="iconfont iconzhiding"></i>
     </div>
