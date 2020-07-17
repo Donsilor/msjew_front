@@ -592,7 +592,7 @@ export default {
         })
         .then(res => {
           this.data = res.data
-          // console.log("this.data",this.data)
+          console.log("this.data",this.data)
           this.invoice = res.data.invoice
           this.orderStatus = res.data.orderStatus
           // console.log("data",this.orderStatus)

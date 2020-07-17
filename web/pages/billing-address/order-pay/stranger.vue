@@ -2739,7 +2739,7 @@ export default {
             group_id: item.groupId || null,
             group_type:item.groupType,
             goods_type: item.goodsType,
-            coupon_id: arr[i]
+            coupon_id: arr[i],
           }
         })
 
@@ -2759,7 +2759,8 @@ export default {
           tradeType:'pc',
           coinType:this.$store.state.coin,
           payType: pay,
-          returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
+          returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}',  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
+          buyer_remark: this.remark,
         }
       })
         .then(res => {
