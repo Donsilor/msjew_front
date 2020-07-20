@@ -117,7 +117,7 @@
                   <img :src="item.goodsImages[0]" />
                 </div>
                 <div class="price">
-                  {{ item.coinType }}
+                  {{ formatCoin(item.coinType) }}
                   {{ formatMoney(item.salePrice) }}
                 </div>
                 <div class="name">{{ item.goodsName }}</div>
@@ -126,11 +126,13 @@
           </div>
         </div>
         <div class="more">
-          <nuxt-link target="_blank" :to="{ path: '/engagement-rings/all' }">
+          <nuxt-link target="_blank" :to="{ path: '/wedding-rings/engagement-ring' }">
             <button>{{ $t(`${lang}.more`) }}</button>
             <img src="/wedding-rings/arrow-right.png" />
           </nuxt-link>
         </div>
+
+        <div class="sliding-browsing"><span>*</span>{{ $t(`${lang}.slidingBrowsing`) }}</div>
       </div>
     </section>
     <section class="believe-us">
@@ -788,7 +790,7 @@ section {
           color: #f29b87;
           font-size: 24px;
           font-weight: 300;
-          margin-bottom: 15px;
+          margin: 10px 0;
           font-family: twCenMt;
           -webkit-transition: all 0.2s ease-in-out;
           -moz-transition: all 0.2s ease-in-out;
@@ -928,6 +930,25 @@ section {
         }
       }
     }
+  }
+}
+
+.sliding-browsing{
+  position: absolute;
+  bottom: -36px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #bbb;
+  height: 20px;
+
+  span{
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 2px;
+    height: 20px;
+    vertical-align: middle;
   }
 }
 </style>
