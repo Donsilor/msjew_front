@@ -5,6 +5,7 @@ import MessageBox from '@/components/messageBox'
 import PictureVerificationCode from '@/components/pictureVerificationCode'
 import SendEmailCode from '@/components/sendEmailCode'
 import Swiper from '@/components/swiper'
+import Swiper2 from '@/components/swiper-2'
 import NoMoreData from '@/components/no-more-data'
 // import Empty from '@/components/empty'
 import Step from '@/components/step'
@@ -25,6 +26,7 @@ Vue.use(MessageBox)
 Vue.use(PictureVerificationCode)
 Vue.use(SendEmailCode)
 Vue.use(Swiper)
+Vue.use(Swiper2)
 Vue.use(NoMoreData)
 // Vue.use(Empty)
 Vue.use(Step)

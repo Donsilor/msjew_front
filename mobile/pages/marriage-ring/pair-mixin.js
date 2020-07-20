@@ -733,11 +733,11 @@ export default {
     },
     addCart() {
       if (!(this.canAddCart && this.inSale)) {
-        this.$toast(this.lang.specificationToast)
+        this.$toast(this.lang.doubleRingTip)
         return
       }
       if (!this.goodsId) {
-        this.$toast(this.lang.specificationToast)
+        this.$toast(this.lang.doubleRingTip)
         return
       }
       // const goodInfo = [

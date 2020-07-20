@@ -14,7 +14,7 @@
           <li class="item">
             <span>
               {{ lang.callUs }}：
-              <a href="tel:(852) 2165 3905">0755 25169121</a>
+              <a href="tel:(852) 2165 3908">0755 25169121</a>
             </span>
           </li>
           <li class="item">
@@ -31,7 +31,7 @@
           <li class="item">
             <span>
               {{ lang.callUs }}：
-              <a href="tel:(852) 2165 3905">(852) 2165 3905</a>
+              <a href="tel:(852) 2165 3908">(852) 2165 3908</a>
             </span>
           </li>
           <li class="item">

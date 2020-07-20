@@ -66,19 +66,19 @@ export default function ({ req, res, redirect, store, route }) {
         let headerHost = req.headers['host']
         //生产环境
         let host = 'https://www.bddco.com';
-        if ((/^(wap-cn|wap-us)\.bddco\.com/).test(headerHost)) {
+        if ((/^(wap-cn|wap-us|wap-tw)\.bddco\.com/).test(headerHost)) {
             //生产环境
             host = 'https://' + headerHost.replace('wap-', '');
         } else if ((/bddia\.com/).test(headerHost)) {
             //测试环境bddia.com
             host = 'https://www.bddia.com';
-            if ((/^(wap-cn|wap-us)\.bddia\.com/).test(headerHost)) {
+            if ((/^(wap-cn|wap-us|wap-tw)\.bddia\.com/).test(headerHost)) {
                 host = 'https://' + headerHost.replace('wap-', '');
             }
         } else if ((/bddco\.cn/).test(headerHost)) {
             //大陆站点bddco.cn
             host = 'https://www.bddco.cn';
-            if ((/^(wap-cn|wap-us)-bdd\.bddco\.cn/).test(headerHost)) {
+            if ((/^(wap-cn|wap-us|wap-tw)-bdd\.bddco\.cn/).test(headerHost)) {
                 host = 'https://' + headerHost.replace('wap-', '');
             } else if (headerHost == 'wap-bdd.bddco.cn') {
                 host = 'https://www-bdd.bddco.cn'

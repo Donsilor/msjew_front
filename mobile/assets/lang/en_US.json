@@ -314,7 +314,8 @@
     },
     "payFailed": {
       "title": "Sorry, the order payment failed! Please repay",
-      "phone": "For any questions, contact customer service (852)-2165 3905",
+      "phone": "For any questions, contact customer service (852)-2165 3908",
+      "phoneCn": "For any questions, contact customer service 0755 25169121",
       "orderNo": "Order#：",
       "payAgain": "PAY AGAIN",
       "continue": "CONTINUE",
@@ -522,7 +523,8 @@
       "waitingPay": "Payment",
       "waitingSend": "Delivery",
       "waitingReceive": "Receipt",
-      "waitingComment": "Review"
+      "waitingComment": "Review",
+      "Shipped":"Shipped"
     },
     "orderDetail": {
       "orderDetail": "Order Information",
@@ -588,6 +590,19 @@
       "discountedAmount": "Discounted amount",
       "Untied":"Untied",
       "couponAmount": "Coupon"
+    },
+    "logisticInfo":{
+      "title": "Order",
+      "logistic":"Tracking Information",
+      "received":"received",
+      "intransit":"In Transit",
+      "WaitingPackage":"Waiting for pickup",
+      "noexpress":"Tracking information is unavailable ",
+      "toast1": "Copied",
+      "toast2": "This browser does not support Auto Copy",
+      "Shipping":"Delivering",
+      "ShippingAddress":"Shipping Address",
+      "ContactMerchant":"Contact Us"
     }
   },
   "custom-made": {
@@ -758,6 +773,7 @@
     "checkDetail": "View details",
     "seeMore": "MORE",
     "callUs": "Contact",
+    "contactUs": "Contact Us",
     "store": "Store",
     "storeName": "Hong Kong. Universal Trade Centre",
     "address": "Address",
@@ -990,7 +1006,8 @@
       "tips": "Confirm to leave the checkout page ?",
       "pending":"Pending",
       "payfailed":"Payment failed",
-      "lookOrder": "View Order"
+      "lookOrder": "View Order",
+      "logisticsDetails":"View Logistics"
     },
     "progressBar": {
       "price": "Price",
@@ -1076,6 +1093,7 @@
     "noComments": "No Reviews",
     "fineness": "Metal",
     "specificationToast": "Please choose size",
+    "doubleRingTip":"Please select from the available colour and size options",
     "stArrContent": "Select",
     "chooseRingSizeToast": "Please choose size",
     "addCartSuccess": "Added to cart",

@@ -454,14 +454,14 @@
             "contact": "Contact Our Jewelry Consultant",
             "contactTime": "Monday to Friday 9 am to 6 pm (except Hong Kong public holidays)",
             "contactTimeCn": "Monday to Friday 9 am to 6 pm",
-            "contactTel": "+852 2165 3905",
+            "contactTel": "+852 2165 3908",
             "contactTelCn": "0755 25169121",
             "contactEmail": "service@bddco.com",
             "contactEmailCn": "e-service@bddco.com",
             "contactAddressUs": "Room 1306, Building A, IBC Business Jewelry Building, No. 3008, Buxin Road,Dushu Community, Dongxiao Street, Luohu District, Shenzhen",
             "getNew": "Get our latest information",
             "footdisc": "*通過註冊，您確認已閱讀隱私政策，並同意BDD Co.收集並使用您的電子郵件和性別，以便通過電子郵件發送新聞，促銷和更新。您可以通過取消訂閱或通過 service@BDDCo.com 與我們聯系，隨時撤銷您的同意。",
-            "copyrightLeft": "Contact our jewelry consultant： Mon - Fri: 9AM - 6PM  /  +852 21653905  /  service@bddco.com",
+            "copyrightLeft": "Contact our jewelry consultant： Mon - Fri: 9AM - 6PM  /  +852 21653908  /  service@bddco.com",
             "copyrightLeftCn": "Contact our jewelry consultant： Mon - Fri: 9AM - 6PM  /  0755 25169121  /  e-service@bddco.com ",
             "copyrightRight": "© 2020 BDD Co. All Rights Reserved.",
             "copyrightRight1": "Canton ICP No.",
@@ -530,7 +530,7 @@
         "rule": "BDD Terms And Conditions",
         "submitRegistry": "REGISTER",
         "agreePlease": "Tick the BDD terms",
-        "callUs": "Contact Our Jewelry Consultant： 7*24*365 Customer Service / 852-2165 3905 / Email Us",
+        "callUs": "Contact Our Jewelry Consultant： 7*24*365 Customer Service / 852-2165 3908 / Email Us",
         "copyRight": "© 2020 BDD Co. All Rights Reserved.",
         "nameTooLong": "Last name and first name have maximum 20 characters!",
         "registrySuccessful": "Registered"
@@ -825,7 +825,8 @@
         "afterSale": "Quality After-Sales Service",
         "afterSaleDesc": "BDD Co. will provide you with a free ring size adjustment within the first 6 months of purchase if the size falls within the adjustable range.",
         "moreAfterSaleInfo": "Refund Terms And Conditions",
-        "startYourDiamondCheck": "START YOUR DIAMOND INSPECTION NOW"
+        "startYourDiamondCheck": "START YOUR DIAMOND INSPECTION NOW",
+        "slidingBrowsing": "Click to view images"
     },
     "engagementRingsList": {
         "style": "Style",
@@ -957,12 +958,13 @@
             "myOrder": "Order",
             "orderList": "Order List",
             "productInfo": "Product Information",
-            "productTotal": "Number Of Product",
+            "productTotal": "Number",
             "oldPrice": "Original price",
             "newPrice": "Discount price",
             "orderNumber": "Total Order Amount",
             "orderStatus": "Order Status",
             "orderDetail": "Order Details",
+            "logisticsDetails":"Logistics Details",
             "cancelOrder": "Cancel Order",
             "toPay": "Pay Now",
             "toPayWait": "Processing",
@@ -980,6 +982,7 @@
             "waitingPay": "Payment",
             "waitingSend": "Delivery",
             "waitingReceive": "Receipt",
+            "shipped":"Shipped",
             "waitingComment": "Review",
             "sumbit": "SUBMIT",
             "hadReceive": "Received",
@@ -1079,6 +1082,19 @@
             ],
             "copySuccess": "Copy successful!",
             "copyFail": "Copy failed, please copy order number manually!"
+        },
+        "logisticInfo":{
+            "title": "Order",
+            "logistic":"Tracking Information",
+            "received":"received",
+            "intransit":"In Transit",
+            "WaitingPackage":"Waiting for pickup",
+            "noexpress":"Tracking information is unavailable ",
+            "result": [
+                "Place order",
+                "Paid",
+                "Shipped"
+            ]
         }
     },
     "cart": {
@@ -1129,7 +1145,8 @@
         "msgTitle2": "Prompts",
         "msgContent2": "Order submission failed, please try again!",
         "payFail": "Sorry, the payment was not completed",
-        "contactPhone": "For any questions, contact customer service (852)-2165 3905！",
+        "contactPhone": "For any questions, contact customer service (852)-2165 3908！",
+        "contactPhoneCh": "For any questions, contact customer service 0755 25169121！",
         "repay": "Pay again",
         "payQuestion": "Payment error",
         "msg11": "Need to log in for shopping / Mainland China Only",
@@ -1298,7 +1315,7 @@
             "BDDService": "BDD Service",
             "workTime": "Mon - Fri: 9AM - 6PM",
             "workTimeCn": "Mon - Fri: 9AM - 6PM",
-            "workTel": "+852 21653905",
+            "workTel": "+852 21653908",
             "workTelCn": "0755 25169121",
             "workEmail": "service@bddco.com",
             "workEmailCn": "e-service@bddco.com",
@@ -2449,7 +2466,8 @@
         "getMore": "MORE",
         "error": "Page Error",
         "soleOut": "The Goods Have Sold Out",
-        "pleaseSelect":"Please select product parameters"
+        "pleaseSelect":"Please select product parameters",
+        "doubleRingTip":"Please select from the available colour and size options"
     },
     "order": {
         "firstLogin": "Please login or register!",
@@ -2555,7 +2573,9 @@
         "discountPrice": "Discounted amount",
         "needRegister": "Please login before redeem the coupon. ",
         "msgTitle2": "Submit：",
-        "msgContent2": "No product selected!"
+        "msgContent2": "No product selected!",
+        "setDefaultAddr": "Set The Default Address",
+        "setSuccess": "The default address setting was successful!"
     },
     "invoice": {
         "personal": "personal",

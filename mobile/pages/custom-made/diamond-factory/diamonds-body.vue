@@ -68,8 +68,8 @@
       <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
 
       <div class="discount-price" v-else>
-        <div class="old-price">{{ lang.oddPrice }} {{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
-        <div class="new-price">{{ lang.newPrice }} {{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
+        <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
+        <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
       </div>
       <div class="promise-box">
         <!-- <div
@@ -91,6 +91,8 @@
               <span class="text">{{ lang.discountsActive }}：</span>
               <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             </div>
+
+            <div class="time">{{ lang.activityTime}}：{{activeTime}}</div>
           </div>
           
           <div class="discoupon-d" v-if="goodInfo.coupon.money">
@@ -441,10 +443,29 @@
 import Mx from './diamond-mixin'
 // import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
+   head() {
+    return {
+      title: this.goodInfo.goodsName,
+      meta: [
+        {
+          name: 'title',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.goodInfo.goodsName,
+        }
+      ]
+    }
+  },
   data() {
     return {
       ifShowCoupon: false,
-      language: this.$store.state.language
+      language: this.$store.state.language,
     }
   },
   mixins: [Mx],
@@ -457,6 +478,11 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    },
+    activeTime(){
+      if(this.goodInfo.coupon.hasOwnProperty('discount')){
+        return this.changeTime(this.goodInfo.coupon.discount.end_time) 
+      }
     }
   },
   mounted() {
@@ -496,6 +522,9 @@ export default {
       width: 49%;
       margin: 0;
     }
+  }
+  .time {
+    color: #b49785;
   }
   .details-component(100%, 63px);
   .title {

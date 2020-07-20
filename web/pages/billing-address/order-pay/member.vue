@@ -69,7 +69,7 @@
         <div
           v-for="(a, index) in address"
           :key="index"
-          :class="{ 'addr-active': a === orderAddress }"
+          :class="{ 'addr-active': addressIdx == index }"
           class="addr-block"
         >
           <div class="addr-title">
@@ -90,20 +90,30 @@
           </div>
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
-          <div class="addr-board" @click="changeAddress(a)" />
+          <div class="addr-board" @click="changeAddress(index)" />
+          <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
           <i
             class="iconfont iconlajitong"
             @click="
               deleteAddressId = a.id
+              delIdx = index
               confirmBox = true
             "
           />
           <div
-            v-if="a === orderAddress"
+            v-if="a.is_default == 1"
             class="font-size-14 mrAdd"
             style="color: #f29b87; margin-top: 6px;"
           >
             {{ $t(`${langs}.mrAddress`) }}
+          </div>
+          <div
+            v-if="a.is_default != 1 && addressIdx == index"
+            class="font-size-14 mrAdd"
+            style="color: #f29b87; margin-top: 6px;"
+            @click="setDefaultAddr(a)"
+          >
+            {{ $t(`${lang}.setDefaultAddr`) }}
           </div>
           <div
             class="addr-btn"
@@ -115,7 +125,7 @@
             {{ $t(`${lang}.change`) }}
           </div>
           <img
-            v-show="a === orderAddress"
+            v-show="a.is_default == 1"
             src="../../../static/personal/account/address-bar.png"
           />
         </div>
@@ -1029,7 +1039,7 @@
         <div
           v-for="(a, index) in address"
           :key="index"
-          :class="{ 'addr-active': a === orderAddress }"
+          :class="{ 'addr-active': addressIdx == index }"
           class="addr-block"
         >
           <div class="addr-title">
@@ -1051,20 +1061,30 @@
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
 
-          <div class="addr-board" @click="changeAddress(a)" />
+          <div class="addr-board" @click="changeAddress(index)" />
+		      <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
           <i
             class="iconfont iconlajitong"
             @click="
               deleteAddressId = a.id
+	      delIdx = index
               confirmBox = true
             "
           />
           <div
-            v-if="a === orderAddress"
+            v-if="a.is_default == 1"
             class="font-size-14 mrAdd"
             style="color: #f29b87; margin-top: 6px;"
           >
             {{ $t(`${langs}.mrAddress`) }}
+          </div>
+          <div
+            v-if="a.is_default != 1 && addressIdx == index"
+            class="font-size-14 mrAdd"
+            style="color: #f29b87; margin-top: 6px;"
+          @click="setDefaultAddr(a)"
+          >
+          {{ $t(`${lang}.setDefaultAddr`) }}
           </div>
           <div
             class="addr-btn"
@@ -1076,7 +1096,7 @@
             {{ $t(`${lang}.change`) }}
           </div>
           <img
-            v-show="a === orderAddress"
+            v-show="a.is_default == 1"
             src="../../../static/personal/account/address-bar.png"
           />
         </div>
@@ -2053,6 +2073,8 @@ export default {
       mobileMax: 20,
       currency: '',
       platform: this.$store.state.platform,
+      addressIdx: -1,
+      delIdx: -2,
       couponCodeR: {
         couponId: ''
       },
@@ -2127,17 +2149,10 @@ export default {
       })
   },
   mounted() {
-    // console.log("platform",this.couponCodeR.couponId)
-    // console.log("platform",this.platform)
-    // 
     // this.getAddress();
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language
   },
   methods: {
-    // setCoupon(){
-    //   console.log("platform",this.couponCodeR.couponId)
-    //   // console.log("platform",this.couponCodeR)
-    // },
     zhizhi(or){
       // console.log("纸质",or)
       this.invoice.is_electronic = or;
@@ -2206,15 +2221,6 @@ export default {
       this.invoiceBox = false
       // this.iconShow = false
     },
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     // 获取地址
     getAddress() {
       this.$axios
@@ -2230,8 +2236,7 @@ export default {
             //     this.address.push(res.data[i])
             //   }
             // }
-            this.orderAddress = this.address[0]
-            // console.log("地址",this.orderAddress)
+
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
@@ -2242,6 +2247,9 @@ export default {
             }
             this.getTex(k)
             this.resetAddressInp()
+          }else{
+            this.wrongMsg = '请添加收获地址'
+            this.alertBox = true
           }
         })
         .catch(err => {
@@ -2278,14 +2286,47 @@ export default {
       }
       this.resetAddress()
     },
-    changeAddress(obj) {
-      this.orderAddress = obj
-      // console.log("aaa",this.orderAddress)
+    changeAddress(l) {
+      this.addressIdx = l;
+      
       var k = [];
       if(this.cardList){
         k = this.cardList
       }
       this.getTex(k)
+    },
+    setDefaultAddr(obj) {
+      const setDefaultData = this.$helpers.cloneObject(obj)
+      const data = this.$helpers.transformRequest(
+        JSON.parse(
+          JSON.stringify({
+            id: setDefaultData.id,
+            is_default: 1
+          })
+        ),
+        false
+      )
+      this.$axios
+        .post('/web/member/address/edit',data)
+        .then(res => {
+          this.addressIdx = 0
+          // console.log("设置默认地址",res)
+          this.getAddress()
+          this.resetAddressInp()
+          this.$message({
+            message: this.$t(`${lang}.setSuccess`),
+            type: 'success'
+          })
+        })
+        .catch(err => {
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
+        })
+
+
     },
     createAddress() {
       // console.log('create')  /[^\d]/g,''
@@ -2348,20 +2389,23 @@ export default {
         return false
       }
       const data = {
-            firstname: this.addressData.firstname,
-            lastname: this.addressData.lastname,
-            mobile_code: this.phoneNum.phone_code,
-            mobile: this.addressData.mobile,
-            email: this.addressData.email,
-            country_id: this.country.areaId,
-            province_id: this.province.areaId,
-            city_id: this.city.areaId,
-            address_details: this.addressData.address_details,
-            zip_code: this.addressData.zip_code
-          }
-      //   false
-      // )
-      // console.log("电话",data)
+        firstname: this.addressData.firstname,
+        lastname: this.addressData.lastname,
+        mobile_code: this.phoneNum.phone_code,
+        mobile: this.addressData.mobile,
+        email: this.addressData.email,
+        country_id: this.country.areaId,
+        province_id: this.province.areaId,
+        city_id: this.city.areaId,
+        address_details: this.addressData.address_details,
+        zip_code: this.addressData.zip_code,
+        is_default: 0
+      }
+
+      if(this.address.length == 0){
+        data.is_default = 1
+      }
+
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
@@ -2369,6 +2413,13 @@ export default {
             message: this.$t(`${lang}.success`),
             type: 'success'
           })
+
+          if(this.address.length > 0){
+            this.addressIdx = 1
+          }else{
+            this.addressIdx = 0
+          }
+
           this.getAddress()
           this.resetAddressInp()
         })
@@ -2448,20 +2499,23 @@ export default {
         return false
       }
       const data = {
-            firstname: this.addressData.firstname,
-            lastname: this.addressData.lastname,
-            mobile_code: this.phoneNum.phone_code,
-            mobile: this.addressData.mobile,
-            email: this.addressData.email,
-            country_id: this.country.areaId,
-            province_id: this.province.areaId,
-            city_id: this.city.areaId,
-            address_details: this.addressData.address_details,
-            zip_code: this.addressData.zip_code
-          }
-      //   false
-      // )
-      // console.log("电话",data)
+        firstname: this.addressData.firstname,
+        lastname: this.addressData.lastname,
+        mobile_code: this.phoneNum.phone_code,
+        mobile: this.addressData.mobile,
+        email: this.addressData.email,
+        country_id: this.country.areaId,
+        province_id: this.province.areaId,
+        city_id: this.city.areaId,
+        address_details: this.addressData.address_details,
+        zip_code: this.addressData.zip_code,
+        is_default: 0
+      }
+
+      if(this.address.length == 0){
+        data.is_default = 1
+      }
+
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
@@ -2470,6 +2524,13 @@ export default {
             message: this.$t(`${lang}.success`),
             type: 'success'
           })
+
+          if(this.address.length > 0){
+            this.addressIdx = 1
+          }else{
+            this.addressIdx = 0
+          }
+
           this.getAddress()
           this.resetAddressInp()
         })
@@ -2505,7 +2566,8 @@ export default {
         province_id: data.province_id,
         city_id: data.city_id,
         address_details: data.address_details,
-        zip_code: data.zip_code
+        zip_code: data.zip_code,
+        is_default: data.is_default
       }
       // console.log("code",this.addressData)
       const code = data.mobile_code.split('+').reverse()
@@ -2599,7 +2661,8 @@ export default {
             province_id: this.province.areaId,
             city_id: this.city.areaId,
             address_details: this.addressData.address_details,
-            zip_code: this.addressData.zip_code
+            zip_code: this.addressData.zip_code,
+            is_default: this.addressData.is_default
           })
         ),
         false
@@ -2706,7 +2769,8 @@ export default {
             province_id: this.province.areaId,
             city_id: this.city.areaId,
             address_details: this.addressData.address_details,
-            zip_code: this.addressData.zip_code
+            zip_code: this.addressData.zip_code,
+            is_default: this.addressData.is_default
           })
         ),
         false
@@ -2731,11 +2795,8 @@ export default {
         })
     },
     deleteAddress() {
-      // console.log('delete')
       this.confirmBox = false
-      if (this.orderAddress.id === this.deleteAddressId) {
-        this.orderAddress = {}
-      }
+
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ id: this.deleteAddressId })),
         false
@@ -2744,6 +2805,17 @@ export default {
         .post('/web/member/address/del', data)
         .then(res => {
           // console.log("删除地址",res)
+
+          if(this.delIdx == 0){
+            this.setDefaultAddr(this.address[this.address.length-1])
+          }else{
+            if(this.delIdx == this.addressIdx){
+              this.addressIdx = 0
+            }else if(this.delIdx < this.addressIdx){
+              this.addressIdx -= 1
+            }
+          }
+
           this.getAddress()
         })
         .catch(err => {
@@ -2915,7 +2987,13 @@ export default {
         carts: arr,
         coupon_id: this.couponCodeR.couponId,
         cards: cards, 
-        addressId: this.orderAddress.id
+        addressId: ''
+      }
+      
+      if(this.addressIdx != -1){
+        datas.addressId = this.address[this.addressIdx].id
+      }else{
+        datas.addressId = this.address[0].id
       }
 
       this.canSubmit = false
@@ -2953,14 +3031,8 @@ export default {
         })
     },
     createOrder() {
-      // console.log("地址",this.orderAddress.platforms)
-      // console.log("4444",this.address)
-      // console.log("platform",this.platform)
       var that = this;
-      // if (!this.canSubmit) {
-      //   return
-      // }
-      
+
       if (this.address.length == 0) {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
@@ -2968,7 +3040,14 @@ export default {
 
       }
 
-      if(this.orderAddress.platforms.indexOf(this.platform) === -1){
+      var address = {};
+      if(this.addressIdx != -1){
+        address = this.address[this.addressIdx]
+      }else{
+        address = this.address[0]
+      }
+
+      if(address.platforms[0] != this.platform){
         this.wrongMsg = this.$t(`${lang}.msg12`)
         this.alertBox = true
         return false
@@ -3021,7 +3100,7 @@ export default {
         carts: arr,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
-        buyer_address_id: this.orderAddress.id,
+        buyer_address_id: address.id,
         invoice:invoice,
         card: this.cardList,
         coupon_id: this.couponCodeR.couponId
@@ -3060,22 +3139,26 @@ export default {
     },
     createOrder1() {
       var that = this;
-      // console.log("tttttt",this.orderAddress)
-      // console.log()
-      // if (!this.canSubmit) {
-      //   return
-      // }
+
       if (this.address.length == 0) {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
       }
 
-      if(this.orderAddress.platforms.indexOf(this.platform) === -1){
+      var address = {};
+      if(this.addressIdx != -1){
+        address = this.address[this.addressIdx]
+      }else{
+        address = this.address[0]
+      }
+
+      if(address.platforms[0] != this.platform){
         this.wrongMsg = this.$t(`${lang}.msg12`)
         this.alertBox = true
         return false
       }
+
       // if (
       //   !Email.test(
       //     this.isSameEmail ? this.orderAddress.email : this.orderEmail
@@ -3086,6 +3169,7 @@ export default {
       //   this.alertBox = true
       //   return false
       // }
+
       if (this.remark.length >= 300) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
@@ -3134,7 +3218,7 @@ export default {
         // allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
-        buyer_address_id: this.orderAddress.id,
+        buyer_address_id: address.id,
         invoice:invoice,
         card: this.cardList || '',
         coupon_id: this.couponCodeR.couponId
@@ -3249,15 +3333,18 @@ div {
   box-sizing: border-box;
 }
 .order {
-  width: 1360px;
+  max-width: 1360px;
+  min-width: 1200px;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
   background: rgba(248, 248, 248, 1);
   padding: 33px 30px 60px;
+  box-sizing: border-box;
   .order-step {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     height: 182px;
     background: rgba(255, 255, 255, 1);
     display: flex;
@@ -3358,13 +3445,15 @@ div {
   }
   .address-box {
     position: relative;
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     overflow: hidden;
     transition: 0.3s linear;
     margin-bottom: 22px;
     box-sizing: border-box;
     .addr-blocks {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -3372,14 +3461,16 @@ div {
       box-sizing: border-box;
       .addr-block {
         position: relative;
-        width: 635px;
+        width: 49%;
         height: 250px;
         padding: 25px 30px 0;
+        box-sizing: border-box;
         margin-bottom: 20px;
         border: 1px solid rgba(230, 230, 230, 1);
         background-color: #ffffff;
         box-sizing: border-box;
         .addr-title {
+          max-width: 82%;
           display: flex;
           align-items: flex-end;
           margin-bottom: 10px;
@@ -3393,6 +3484,7 @@ div {
           }
         }
         .addr-user {
+          max-width: 82%;
           display: flex;
           font-size: 22px;
           align-items: center;
@@ -3414,6 +3506,7 @@ div {
           }
         }
         .addr-address {
+          max-width: 82%;
           color: #333;
           font-size: 14px;
           /*width: 220px;*/
@@ -3429,6 +3522,7 @@ div {
           margin-bottom: 10px;
         }
         .addr-user-phone {
+          max-width: 82%;
           display: flex;
           align-items: flex-end;
           font-family: twCenMt;
@@ -3499,7 +3593,8 @@ div {
     }
   }
   .new-address {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     background-color: #ffffff;
     position: relative;
     margin: 0 0 22px;
@@ -3507,7 +3602,6 @@ div {
     transition: 0.3s linear;
     box-sizing: border-box;
     .new-address-title {
-      width: 1300-51-36px;
       height: 20px;
       display: flex;
       align-items: flex-end;
@@ -3532,34 +3626,35 @@ div {
       }
     }
     .new-address-input {
-      width: 1300-51-36px;
+      // width: 1300-51-36px;
       display: flex;
       justify-content: space-between;
       .left-side,
       .right-side {
-        width: 545px;
+        width: 44%;
         height: 176+80px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
       }
       .input-line {
-        width: 545px;
+        // width: 545px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         .label {
+          width: 20%;
           font-size: 14px;
           color: #333;
         }
         .input-box {
-          width: 420px;
+          width: 80%;
           border: 1px solid rgba(221, 221, 221, 1);
           border-radius: 4px;
           position: relative;
           color: #111;
           input[type='text'] {
-            width: 418px;
+            width: 100%;
             height: 38px;
             line-height: 38px;
             display: block;
@@ -3569,9 +3664,10 @@ div {
             outline: 0;
             font-size: 16px;
             padding: 0 13px;
+            box-sizing: border-box;
           }
           textarea {
-            width: 418px;
+            width: 100%;
             height: 58px;
             line-height: 29px;
             display: block;
@@ -3584,7 +3680,7 @@ div {
             resize: none;
           }
           input[type='address'] {
-            width: 418px;
+            width: 100%;
             height: 32px;
             line-height: 32px;
             display: block;
@@ -3613,7 +3709,7 @@ div {
             line-height: 12px;
             display: block;
             color: #aa8a7b;
-            left: 379px;
+            right: 5%;
             top: 50%;
             transform: translateY(-50%);
           }
@@ -3638,15 +3734,15 @@ div {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          width: 420px;
+          width: 80%;
           .tel {
-            width: 290px;
+            width: 65%;
             input[type='text'] {
               width: 288px;
             }
           }
           .tel-area {
-            width: 120px;
+            width: 30%;
             height: 40px;
             background: rgba(248, 248, 248, 1);
             border: 1px solid rgba(221, 221, 221, 1);
@@ -3661,7 +3757,8 @@ div {
               background: rgba(248, 248, 248, 1);
               -webkit-appearance: none;
               border: 0;
-              padding: 0 0 0 13px;
+              padding: 0 28px 0 14px;
+              box-sizing: border-box;
               margin: 0;
               outline: 0;
             }
@@ -3736,7 +3833,7 @@ div {
     cursor: pointer;
   }
   .cart-top-bar {
-    width: 1300px;
+    min-width: 1200px;
     height: 40px;
     line-height: 40px;
     background: rgba(255, 255, 255, 1);
@@ -3745,40 +3842,29 @@ div {
     align-items: center;
     font-size: 16px;
     color: #666;
-    padding-left: 77px;
-    span {
-      display: block;
-    }
+    padding-left: 50px;
+    text-align: center;
     span:nth-child(1) {
-      width: 668px;
+      width: 60%;
+      text-align: left;
     }
-    span:nth-child(2) {
-      width: 80px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
+    span:nth-child(2){
+      width: 6.7%;
     }
-    span:nth-child(3) {
-      width: 180px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
-    }
+    span:nth-child(3),
     span:nth-child(4) {
-      width: 180px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
+      width: 11.5%;
     }
   }
   .cart-goods {
-    width: 1300px;
+    min-width: 1200px;
     position: relative;
     overflow: hidden;
     background: rgba(255, 255, 255, 1);
     margin-bottom: 17px;
     .finished {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       height: 179px;
       display: flex;
       align-items: center;
@@ -3788,7 +3874,7 @@ div {
       }
       .good-info {
         position: relative;
-        width: 1200px;
+        min-width: 1200px;
         height: 179px;
         border-bottom: 1px solid rgba(239, 239, 239, 1);
         display: flex;
@@ -3910,7 +3996,8 @@ div {
       }
     }
     .customization {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       height: 282px;
       display: flex;
       align-items: center;
@@ -3921,7 +4008,7 @@ div {
       }
       .good-info {
         position: relative;
-        width: 1200px;
+        min-width: 1200px;
         height: 281px;
         border-bottom: 1px solid rgba(239, 239, 239, 1);
         .good-info-dotted {
@@ -3934,7 +4021,7 @@ div {
           border-bottom: 1px dotted rgba(221, 221, 221, 1);
         }
         .good-info-line {
-          width: 1200px;
+          min-width: 1200px;
           height: 140px;
           display: flex;
           align-items: center;
@@ -4075,7 +4162,7 @@ div {
       }
     }
     .couple {
-      width: 1300px;
+      // width: 1300px;
       height: 174 * 2+2px;
       display: flex;
       align-items: center;
@@ -4261,17 +4348,17 @@ div {
   }
   .order-info {
     position: relative;
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     min-height: 544px;
     background: rgba(255, 255, 255, 1);
     padding: 30px 50px 80px 35px;
-    // display: flex;
-    // justify-content: space-between;
+    box-sizing: border-box;
+
     .left-info {
       float: left;
-      width: 550px;
+      width: 48%;
       .new-address-title {
-        width: 1300-51-36px;
         height: 20px;
         display: flex;
         align-items: flex-end;
@@ -4390,7 +4477,7 @@ div {
         font-size: 14px;
         color: #333333;
         textarea {
-          width: 540px;
+          width: 100%;
           height: 80px;
           padding: 0 12px;
           color: #111;
@@ -4432,7 +4519,7 @@ div {
     }
     .right-info {
       float: right;
-      width: 66+348+120+12+4px;
+      width: 48%;
       .coupon {
         /*background: pink;*/
         width: 100%;
@@ -4542,7 +4629,6 @@ div {
         }
       }
       .new-address-title {
-        width: 1300-51-36px;
         height: 20px;
         display: flex;
         align-items: flex-end;
@@ -4872,157 +4958,157 @@ div {
     }
   .input-line {
     padding: 10px 0;
-    //  margin-bottom: 20px;
-        width: 455px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .label {
-          font-size: 14px;
-          color: #333;
-        }
-        .input-box {
-          width: 315px;
-          border: 1px solid rgba(221, 221, 221, 1);
-          border-radius: 4px;
-          position: relative;
-          color: #111;
-          input[type='text'] {
-            width: 314px;
-            height: 38px;
-            line-height: 38px;
-            display: block;
-            -webkit-appearance: none;
-            border-radius: 4px;
-            border: 0;
-            outline: 0;
-            font-size: 16px;
-            padding: 0 13px;
-          }
-          textarea {
-            width: 315px;
-            height: 58px;
-            line-height: 29px;
-            display: block;
-            -webkit-appearance: none;
-            border-radius: 4px;
-            border: 0;
-            outline: 0;
-            font-size: 16px;
-            padding: 0 13px;
-            resize: none;
-          }
-          input[type='address'] {
-            width: 315px;
-            height: 32px;
-            line-height: 32px;
-            display: block;
-            -webkit-appearance: none;
-            border-radius: 4px;
-            border: 0;
-            outline: 0;
-            font-size: 14px;
-            padding: 0 13px;
-            background: rgba(249, 249, 249, 1);
-          }
-          select {
-            position: absolute;
-            z-index: 9;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-          }
-          .iconxiala {
-            position: absolute;
-            font-size: 12px;
-            width: 12px;
-            height: 12px;
-            line-height: 12px;
-            display: block;
-            color: #aa8a7b;
-            left: 379px;
-            top: 50%;
-            transform: translateY(-50%);
-          }
-          .wrong-input {
-            color: #d9423e;
-          }
-          .wrong-alert {
-            position: absolute;
-            width: 109+7px;
-            height: 23px;
-            line-height: 23px;
-            text-align: center;
-            color: #d9423e;
-            background-image: url('../../../static/order/wrong-input.png');
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            top: 9px;
-            right: 19px;
-          }
-        }
-        .tel-special {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 420px;
-          .tel {
-            width: 290px;
-            input[type='text'] {
-              width: 288px;
-            }
-          }
-          .tel-area {
-            width: 120px;
-            height: 40px;
-            background: rgba(248, 248, 248, 1);
-            border: 1px solid rgba(221, 221, 221, 1);
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-            input {
-              width: 100%;
-              height: 100%;
-              line-height: 38px;
-              text-align: left;
-              background: rgba(248, 248, 248, 1);
-              -webkit-appearance: none;
-              border: 0;
-              padding: 0 0 0 13px;
-              margin: 0;
-              outline: 0;
-            }
-            select {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              opacity: 0;
-            }
-            .iconxiala {
-              position: absolute;
-              font-size: 12px;
-              width: 12px;
-              height: 12px;
-              line-height: 12px;
-              display: block;
-              color: #aa8a7b;
-              right: 12px;
-              top: 50%;
-              transform: translateY(-50%);
-            }
-          }
-        }
-        .border-change {
-          border: 1px solid rgba(170, 138, 123, 1);
-        }
-        .border-wrong {
-          border: 1px solid #d9423e;
+    width: 455px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    .label {
+      font-size: 14px;
+      color: #333;
+    }
+    .input-box {
+      width: 315px;
+      border: 1px solid rgba(221, 221, 221, 1);
+      border-radius: 4px;
+      position: relative;
+      color: #111;
+      input[type='text'] {
+        width: 314px;
+        height: 38px;
+        line-height: 38px;
+        display: block;
+        -webkit-appearance: none;
+        border-radius: 4px;
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        padding: 0 13px;
+      }
+      textarea {
+        width: 315px;
+        height: 58px;
+        line-height: 29px;
+        display: block;
+        -webkit-appearance: none;
+        border-radius: 4px;
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        padding: 0 13px;
+        resize: none;
+      }
+      input[type='address'] {
+        width: 315px;
+        height: 32px;
+        line-height: 32px;
+        display: block;
+        -webkit-appearance: none;
+        border-radius: 4px;
+        border: 0;
+        outline: 0;
+        font-size: 14px;
+        padding: 0 13px;
+        background: rgba(249, 249, 249, 1);
+      }
+      select {
+        position: absolute;
+        z-index: 9;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+      .iconxiala {
+        position: absolute;
+        font-size: 12px;
+        width: 12px;
+        height: 12px;
+        line-height: 12px;
+        display: block;
+        color: #aa8a7b;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .wrong-input {
+        color: #d9423e;
+      }
+      .wrong-alert {
+        position: absolute;
+        width: 109+7px;
+        height: 23px;
+        line-height: 23px;
+        text-align: center;
+        color: #d9423e;
+        background-image: url('../../../static/order/wrong-input.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        top: 9px;
+        right: 19px;
+      }
+    }
+    .tel-special {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 420px;
+      .tel {
+        width: 290px;
+        input[type='text'] {
+          width: 288px;
         }
       }
+      .tel-area {
+        width: 120px;
+        height: 40px;
+        background: rgba(248, 248, 248, 1);
+        border: 1px solid rgba(221, 221, 221, 1);
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+        input {
+          width: 100%;
+          height: 100%;
+          line-height: 38px;
+          text-align: left;
+          background: rgba(248, 248, 248, 1);
+          -webkit-appearance: none;
+          border: 0;
+          padding: 0 0 0 13px;
+          margin: 0;
+          outline: 0;
+        }
+        select {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+        }
+        .iconxiala {
+          position: absolute;
+          font-size: 12px;
+          width: 12px;
+          height: 12px;
+          line-height: 12px;
+          display: block;
+          color: #aa8a7b;
+          right: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    .border-change {
+      border: 1px solid rgba(170, 138, 123, 1);
+    }
+    .border-wrong {
+      border: 1px solid #d9423e;
+    }
+  }
 }
 </style>
 <style lang="less">
@@ -5067,5 +5153,23 @@ div {
 .under-line{
   text-decoration: underline;
   cursor: pointer;
+}
+
+.ifChoose{
+  position: absolute;
+  top: 80px;
+  right: 28px;
+  font-size: 21px;
+  color: #999;
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  background: url(../../../static/addShoppingCard/icon-1.png) no-repeat center;
+  background-size: 100% 100%;
+}
+
+.ifChoose.on{
+  background-image: url(../../../static/addShoppingCard/success.png);
 }
 </style>

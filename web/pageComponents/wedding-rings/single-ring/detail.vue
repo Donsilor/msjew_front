@@ -6,20 +6,20 @@
       <div class="left-detail">
         <product-images :images="thumbnails" @getIdx="getIndex" :coupon="coupons"></product-images>
 		
-		<div class="magn-box">
-			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
-		</div>
+        <div class="magn-box">
+          <bdd-magnifying :msg="magnifying"></bdd-magnifying>
+        </div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
-		<div class="right-title">
-			<span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
-			<span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
+        <div class="right-title">
+          <span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+          <span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
 
-			<h2 class="product-name">
-			  {{ info.goodsName }}
-			</h2>
-		</div>
+          <h2 class="product-name">
+            {{ info.goodsName }}
+          </h2>
+        </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}: {{ info.goodsCode }}</div>
         <div class="sku" v-if="productInfo.carats.length == ''">
           <div class="left-properties" v-if="productInfo.materials.length > 0">
@@ -213,21 +213,22 @@
                     </li>
                   </ul>
                 </div>
+
+                <div class="helper-popover">
+                  <span class="helper-name">
+                    {{ $t(`${lang}.USEdition`) }}
+                  </span>
+                  <el-popover placement="bottom" trigger="hover">
+                    <ring-size></ring-size>
+                    <b slot="reference" class="prompt-icon">!</b>
+                  </el-popover>
+                </div>
+                <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
+
               </div>
             </div>
           </div>
-          <div class="two">
-            <div class="helper-popover">
-              <span class="helper-name">
-                {{ $t(`${lang}.USEdition`) }}
-              </span>
-              <el-popover placement="bottom" trigger="hover">
-                <ring-size></ring-size>
-                <b slot="reference" class="prompt-icon">!</b>
-              </el-popover>
-            </div>
-            <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
-          </div>
+
         </div>
         <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
           <li
@@ -656,7 +657,9 @@ export default {
       }
     })
 		
-	this.magnifying = this.thumbnails[0]
+    this.magnifying = this.thumbnails[0]
+    
+    console.log(777,this.recommends)
 
     // this.language = this.getCookie('language')
   },
@@ -816,7 +819,8 @@ export default {
   margin: auto;
 }
 .sku2 {
-  width: 720px;
+  // width: 720px;
+  width: 99%;
   padding: 15px 25px;
   box-sizing: border-box;
   background: rgba(250, 250, 246, 1);
@@ -833,8 +837,9 @@ export default {
 
   .left-properties,
   .right-properties {
-    flex-grow: 0;
-    flex-shrink: 0;
+    // flex-grow: 0;
+    // flex-shrink: 0;
+    margin: 5px 0;
 
     .property-item {
       margin-bottom: 12px;
@@ -969,11 +974,12 @@ export default {
   }
   .one{
     display: flex;
+    flex-wrap: wrap;
   }
-  .two{
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+  // .two{
+    // display: flex;
+    // justify-content: flex-end;
+    // margin-top: 10px;
     .helper-popover {
       white-space: nowrap;
 
@@ -1008,7 +1014,7 @@ export default {
       line-height: 20px;
     }
   }
-}
+// }
 
 
 </style>

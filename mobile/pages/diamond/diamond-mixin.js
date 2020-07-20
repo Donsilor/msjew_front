@@ -80,7 +80,7 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.goodInfo)
+    console.log(this.goodInfo)
     for (let i = 0; i < this.goodInfo.specs.length; i++) {
       if (this.goodInfo.specs[i].configId === 4) {
         this.force.cut = this.goodInfo.specs[i].configAttrId

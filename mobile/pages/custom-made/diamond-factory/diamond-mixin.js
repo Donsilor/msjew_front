@@ -87,7 +87,7 @@ export default {
     }
   },
   mounted() {
-    // console.log(`12345678============?`)
+    console.log(`12345678============?`,this.goodInfo.sizes)
     // console.log(JSON.stringify(this.$route.query.goodId))
     if (this.$route.query.goodId) {
       this.$nextTick(() => {
@@ -138,6 +138,8 @@ export default {
               : res.goodsDesc
           }
           this.goodInfo = res
+          this.goodInfo.coupon = res.coupon
+          // console.log("99999999",)
           this.showPi = this.goodInfo.salePrice
           for (let i = 0; i < this.goodInfo.specs.length; i++) {
             if (this.goodInfo.specs[i].configId === 4) {
