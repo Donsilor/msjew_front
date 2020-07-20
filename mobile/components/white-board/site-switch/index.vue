@@ -40,6 +40,22 @@
             <i class="iconfont iconkuozhan"></i>
           </div>
         </div>
+        <div v-else-if="this.$store.state.platform === 41" class="select-line" @click="chooseCoin">
+          <div class="line-icon">
+            <i class="iconfont iconhuobi"></i>
+          </div>
+          <div class="line-text">
+            <input :value="coin" type="text" />
+            <select name="" id="" v-model="coin">
+              <option v-for="(p, index) in coinOptionsTw" :key="index" :value="p.code">
+                {{p.content}}
+              </option>
+            </select>
+          </div>
+          <div class="select-icon">
+            <i class="iconfont iconkuozhan"></i>
+          </div>
+        </div>
         <div v-else class="select-line" @click="chooseCoin">
           <div class="line-icon">
             <i class="iconfont iconhuobi"></i>
@@ -90,6 +106,7 @@ export default {
       languageOptions: this.$bddDefinition.languageOptions,
       coinOptions: this.$bddDefinition.coinOptions,
       coinOptionsCn: this.$bddDefinition.coinOptionsCn,
+      coinOptionsTw: this.$bddDefinition.coinOptionsTw,
       langs:'',
       languages:'English'
     }
@@ -101,6 +118,8 @@ export default {
     coinText() {
       if(this.$store.state.platform === 21){
         return this.coinOptionsCn[this.coin].content
+      }else if(this.$store.state.platform === 41){
+        return this.coinOptionsTw[this.coin].content
       } else {
         return this.coinOptions[this.coin].content
       }
@@ -111,6 +130,8 @@ export default {
     coinCode() {
       if(this.$store.state.platform === 21){
         return this.coinOptionsCn[this.coin].code
+      } else if(this.$store.state.platform === 41){
+        return this.coinOptionsTw[this.coin].code
       } else {
         return this.coinOptions[this.coin].code
       }
@@ -130,6 +151,13 @@ export default {
         for (let n = 0, length = _this.coinOptionsCn.length; n < length; n++) {
           if (_this.coinOptionsCn[n].code === _this.$store.state.coin) {
             _this.coin = _this.coinOptionsCn[n].code
+            break
+          }
+        }
+      } else if(this.$store.state.platform === 41){
+        for (let n = 0, length = _this.coinOptionsTw.length; n < length; n++) {
+          if (_this.coinOptionsTw[n].code === _this.$store.state.coin) {
+            _this.coin = _this.coinOptionsTw[n].code
             break
           }
         }
