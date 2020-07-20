@@ -972,6 +972,13 @@ export default language => {
         code: 'USD',
         content: 'USD'
       }
+    ],
+
+    coinOptionsTw: [
+      {
+        code: 'TWD',
+        content: 'TWD'
+      }
     ]
   }
 }

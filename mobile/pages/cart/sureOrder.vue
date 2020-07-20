@@ -102,6 +102,35 @@
 			</div>
 		  </li>
 		</ul>
+    <!-- 台湾支付 -->
+		<ul v-if="this.$store.state.platform == 41">
+		  <li v-for="(item, index) in listTw" :key="index">
+			<!-- v-show="price > 0 || (price == 0 && item.type === 5)" -->
+			<div>
+			  <img :src="item.url"/>
+			  <div class="right">
+				<span
+				  class="icon iconfont"
+				  :class="typeIndex === index ? 'icongou' : ''"
+				  @click="changeType(index)"
+				></span>
+				<b
+				  >{{ item.title }}
+				  <span
+					v-if="item.type == ''"
+					class="ph"
+					@click="needtips = !needtips"
+					>?</span
+				  >
+				</b>
+		
+				<p>{{ item.des }}</p>
+				<p v-if="item.des2">{{ item.des2 }}</p>
+				<p class="hint-color" v-if="index != 0 && index != 1 && index != 2 && index != 3 && index != 5">({{lang.msg11}})</p> 
+			  </div>
+			</div>
+		  </li>
+		</ul>
 		<!-- 美国支付 -->
     <ul v-if="this.$store.state.platform == 31">
       <li v-for="(item, index) in listUs" :key="index">
@@ -512,6 +541,27 @@ export default {
         des: this.LANGUAGE.cart.pay.type5Text,
         }
       ],
+      // 台湾支付
+      listTw: [
+        {
+          url: '/cart/pay.png',
+          type: 6,
+          title: this.LANGUAGE.cart.pay.payType0,
+          des: this.LANGUAGE.cart.pay.type0Text
+        },
+        {
+          url: '/cart/up.png',
+          type: 81,
+          title: this.LANGUAGE.cart.pay.payType1,
+          des: this.LANGUAGE.cart.pay.type1Text
+        },
+        {
+          url: '/cart/ph.png',
+          type: 89,
+          title: this.LANGUAGE.cart.pay.payType5,
+          des: this.LANGUAGE.cart.pay.type5Text,
+        }
+      ],
       // 美国支付
       listUs: [
         {
@@ -744,10 +794,16 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        pay = 61
+        if(this.$store.state.platform === 41){
+          pay = 81
+        }else{
+          pay = 61
+        }
       }else if(this.typeIndex == 2){
         if(this.$store.state.platform === 21){
           pay = 82
+        }else if(this.$store.state.platform === 41){
+          pay = 89
         }else{
           pay = 84
         }

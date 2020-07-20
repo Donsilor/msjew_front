@@ -63,6 +63,7 @@
         </div>
         <!-- vise -->
           <div
+          v-show="this.$store.state.platform !== 40"
           :class="{ 'pay-choose': payWay == 61 }"
           class="pay-block"
           @click="payWay = 61"
@@ -145,7 +146,7 @@
         </div> -->
         <!-- 微信 -->
         <div
-          v-show="this.$store.state.platform !== 30"
+          v-show="this.$store.state.platform == 10 || this.$store.state.platform == 20"
           :class="{ 'pay-choose': payWay == 83 }"
           class="pay-block"
           @click="payWay = 83"
