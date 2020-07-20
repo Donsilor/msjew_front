@@ -177,8 +177,8 @@
           </div>
         </div> -->
         <div class="sku" v-if="firstRing.carats.length == 0 && secondRing.carats.length == 0">
-          <div class="left-properties" >
-            <div v-if="firstRing.materials.length > 0" class="property-item">
+          <div class="left-properties" v-if="firstRing.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ firstRing.targetUser }}
               </span>
@@ -251,8 +251,8 @@
               </div>
             </div>
           </div>
-          <div class="right-properties" >
-            <div v-if="secondRing.materials.length > 0" class="property-item">
+          <div class="right-properties" v-if="secondRing.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ secondRing.targetUser }}
               </span>
@@ -337,8 +337,8 @@
           </div>
         </div>
         <div class="sku2" v-else>
-          <div class="left-properties">
-            <div v-if="firstRing.materials.length > 0" class="property-item">
+          <div class="left-properties" v-if="firstRing.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ firstRing.targetUser }}
               </span>
@@ -437,8 +437,8 @@
               </div>
             </div>
           </div>
-          <div class="right-properties">
-            <div v-if="secondRing.materials.length > 0" class="property-item">
+          <div class="right-properties" v-if="secondRing.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ secondRing.targetUser }}
               </span>
@@ -558,7 +558,7 @@
             </div>
           </div>
         </div>
-        <ul class="services-list">
+        <ul class="services-list" v-if=" info.goodsServicesJsons.length > 0">
           <li
             v-for="(item, index) in info.goodsServicesJsons || []"
             :key="index"
@@ -616,19 +616,20 @@
         </div>
         <div class="button-group">
           <button
+            v-loading="orderingNow"
+            :class="['add-to-cart', { actived: canAddCart }]"
+            @click="orderNow"
+          >
+            {{ $t(`${lang}.buyNow`) }}
+          </button>
+          <button
             v-loading="addingCart"
             :class="['add-to-cart', { active: canAddCart }]"
             @click="addCart"
           >
             {{ $t(`${lang}.addCart`) }}
           </button>
-          <button
-            v-loading="orderingNow"
-            :class="['add-to-cart', { active: canAddCart }]"
-            @click="orderNow"
-          >
-            {{ $t(`${lang}.buyNow`) }}
-          </button>
+          
         </div>
        <!-- <div class="other-info">
           <ul class="operates">

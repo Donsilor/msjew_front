@@ -218,13 +218,15 @@ export default {
       const result = []
       // const names = []
       // console.log("goodsServicesJsons1", this.firstRing,this.secondRing)
-      this.goodInfo && this.goodInfo.goodsServicesJsons.forEach(item => {
-        result.push(item)
-        // if (names.indexOf(item.name) === -1) {
-        //   names.push(item.name)
-        //   result.push(item)
-        // }
-      })
+      if(this.goodInfo && this.goodInfo.goodsServicesJsons){
+        this.goodInfo && this.goodInfo.goodsServicesJsons.forEach(item => {
+          result.push(item)
+          // if (names.indexOf(item.name) === -1) {
+          //   names.push(item.name)
+          //   result.push(item)
+          // }
+        })
+      }
       // this.firstRing &&
       //   this.firstRing.goodsServicesJsons &&
       //   this.firstRing.goodsServicesJsons.forEach(item => {
@@ -431,11 +433,13 @@ export default {
       id: this.firstRing.sizes[0].sortType,
       text: this.firstRing.sizes[0].content
     }
-    this.firstRingQuality = {
-      checked: this.firstRing.materials[0].id
-        ? [this.firstRing.materials[0].id]
-        : [],
-      options: this.firstRing.materials
+    if(this.firstRing.materials.length>0){
+      this.firstRingQuality = {
+        checked: this.firstRing.materials[0].id
+          ? [this.firstRing.materials[0].id]
+          : [],
+        options: this.firstRing.materials
+      }
     }
     if(this.secondRing.carats.length>0){
       this.secondRingCarat = {
@@ -447,12 +451,13 @@ export default {
       id: this.secondRing.sizes[0].sortType,
       text: this.secondRing.sizes[0].content
     }
-    this.secondRingQuality = {
-      checked: this.secondRing.materials[0].id
-        ? [this.secondRing.materials[0].id]
-        : [],
-      options: this.secondRing.materials
-    }
+    if(this.secondRing.materials.length>0){
+      this.secondRingQuality = {
+        checked: this.secondRing.materials[0].id
+          ? [this.secondRing.materials[0].id]
+          : [],
+        options: this.secondRing.materials
+      }
       // this.secondRingCarat = {
       //   id: this.secondRing.carats[0].sortType,
       //   text: this.secondRing.carats[0].content
@@ -469,6 +474,7 @@ export default {
           options: this.secondRing.materials
         }
       }
+    }
   },
   mounted() {
 

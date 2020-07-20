@@ -126,7 +126,7 @@
       <!--    </div>-->
       <div
         v-if="goodInfo.goodsMod === 1"
-        :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+        :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
         @click="addCart"
       >
         {{
@@ -139,6 +139,18 @@
       </div>
       <div v-else>
         <div
+          :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+          @click="orderNow"
+        >
+          {{
+            inSale
+              ? canAddCart
+                ? lang.buyNow
+                : lang.noTotalStock
+              : lang.notInSale
+          }}
+        </div>
+        <div
           :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
           @click="addCart"
         >
@@ -150,18 +162,7 @@
               : lang.notInSale
           }}
         </div>
-        <div
-          :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
-          @click="orderNow"
-        >
-          {{
-            inSale
-              ? canAddCart
-                ? lang.buyNow
-                : lang.noTotalStock
-              : lang.notInSale
-          }}
-        </div>
+        
       </div>
       <!-- <div class="wish-and-share">
         <i
@@ -364,6 +365,9 @@ export default {
 <style scoped lang="less">
 .accessories-component {
   .details-component(100%);
+  .btn-white{
+    border:none!important;
+  }
 }
 .time {
   color: #b49785;

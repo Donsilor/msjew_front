@@ -202,9 +202,11 @@ export default {
           }
         } else {
           this.showPi = this.goodInfo.salePrice
-          this.conditions[0].checked = [
-            this.goodInfo.materials[0].id || ''
-          ]
+          if(this.goodInfo.materials){
+            this.conditions[0].checked = [
+              this.goodInfo.materials[0].id || ''
+            ]
+          }
           this.chooseSize = ''
           // this.chooseSize = this.goodInfo.sizes[0].content
           if(this.goodInfo.carats){

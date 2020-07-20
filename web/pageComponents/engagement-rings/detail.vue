@@ -18,8 +18,8 @@
         </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div class="sku" v-if="productInfo.carats.length == ''">
-          <div class="left-properties">
-            <div v-if="productInfo.materials.length > 0" class="property-item">
+          <div class="left-properties"  v-if="productInfo.materials.length > 0">
+            <div class="property-item">
               <span class="item-name">
                 {{ $t(`${lang}.color`) }}
               </span>
@@ -64,8 +64,8 @@
               </div>
             </div>
           </div>
-          <div class="right-properties">
-            <div v-if="productInfo.sizes.length > 0" class="property-item">
+          <div class="right-properties"  v-if="productInfo.sizes.length > 0">
+            <div class="property-item">
               <span class="item-name">
                 {{ $t(`${lang}.size`) }}
               </span>
@@ -105,8 +105,8 @@
         </div>
         <div class="sku2" v-else>
            <div class="one">
-             <div class="left-properties">
-              <div v-if="productInfo.carats.length > 0" class="property-item">
+             <div class="left-properties" v-if="productInfo.carats.length > 0">
+              <div  class="property-item">
                 <span v-if="productInfo.categoryId == 12" class="item-name">
                   {{ $t(`${lang}.inlay`) }}
                 </span>
@@ -136,8 +136,8 @@
                 </div>
               </div>
             </div>
-            <div class="left-properties">
-              <div v-if="productInfo.materials.length > 0" class="property-item">
+            <div class="left-properties"  v-if="productInfo.materials.length > 0">
+              <div class="property-item">
                 <span class="item-name">
                   {{ $t(`${lang}.color`) }}
                 </span>
@@ -182,8 +182,8 @@
                 </div>
               </div>
             </div>
-            <div class="right-properties">
-              <div v-if="productInfo.sizes.length > 0" class="property-item">
+            <div class="right-properties"  v-if="productInfo.sizes.length > 0">
+              <div class="property-item">
                 <span class="item-name">
                   {{ $t(`${lang}.size`) }}
                 </span>
@@ -224,7 +224,7 @@
               <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
            </div>
         </div>
-        <ul class="services-list">
+        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
@@ -277,14 +277,24 @@
         </div>
 
         <div v-if="!$route.query.isBack" class="button-group">
+          <button
+            v-loading="addingCart"
+            :class="['add-to-cart', { actived: canAddCart }]"
+            @click="orderNow"
+          >
+            {{ $t(`${lang}.buyNow`) }}
+          </button>
           <nuxt-link
             v-if="productInfo.goodsMod === 1 && canAddCart"
             :to="startDj"
           >
+          
             <button class="start-dj">
               {{ $t(`${lang}.ConfirmTheChoice`) }}
             </button>
           </nuxt-link>
+          
+
           <button
             v-loading="addingCart"
             :class="['add-to-cart', { active: canAddCart }]"
@@ -293,13 +303,6 @@
             {{ $t(`${lang}.addCart`) }}
           </button>
 
-          <button
-              v-loading="addingCart"
-              :class="['add-to-cart', { active: canAddCart }]"
-              @click="orderNow"
-            >
-              {{ $t(`${lang}.buyNow`) }}
-            </button>
         </div>
         <div
           v-if="
