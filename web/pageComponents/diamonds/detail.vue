@@ -27,8 +27,8 @@
        </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div v-if="showSkuBox" class="sku">
-          <div class="left-properties">
-            <div v-if="productInfo.materials.length > 0" class="property-item">
+          <div class="left-properties"  v-if="productInfo.materials.length > 0">
+            <div class="property-item">
               <span class="item-name">
                 {{ $t(`${lang}.color`) }}
               </span>
@@ -73,8 +73,8 @@
               </div>
             </div>
           </div>
-          <div class="right-properties">
-            <div v-if="productInfo.sizes.length > 0" class="property-item">
+          <div class="right-properties"  v-if="productInfo.sizes.length > 0">
+            <div class="property-item">
               <span class="item-name">
                 {{ $t(`${lang}.size`) }}
               </span>
@@ -102,7 +102,7 @@
             </div>
           </div>
         </div>
-        <ul class="services-list">
+        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
@@ -171,21 +171,22 @@
             </button>
           </nuxt-link>
           <button
+            class="buy-now"
+            v-loading="addingCart"
+            :class="['add-to-cart', { actived: canAddCart }]"
+            @click="orderNow"
+          >
+            {{ $t(`${lang}.buyNow`) }}
+          </button>
+
+          <button
+            class="add-cart"
             v-loading="addingCart"
             :class="['add-to-cart', { active: canAddCart }]"
             @click="addCart"
           >
 
             {{ $t(`${lang}.addCart`) }}
-          </button>
-
-          <button
-            class="buy-now"
-            v-loading="addingCart"
-            :class="['add-to-cart', { active: canAddCart }]"
-            @click="orderNow"
-          >
-            {{ $t(`${lang}.buyNow`) }}
           </button>
         </div>
         <div
@@ -563,10 +564,17 @@ export default {
 <style lang="less" scoped>
 .detail-page {
   margin: auto;
-  .buy-now{
+  .add-cart{
     margin-top: 10px;
-    width: 578px!important;
+    width: 659px!important;
   }
+  .start-dj{
+    width: 320px!important;
+  }
+  // .buy-now{
+  //   margin-top: 10px;
+  //   width: 659px!important;
+  // }
   .four-c {
     padding: 40px;
     .p-title {

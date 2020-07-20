@@ -104,19 +104,20 @@
           <div class="button-group">
             <button
               v-loading="addingCart"
+              :class="['add-to-cart', { actived: true }]"
+              @click="orderNow"
+            >
+              {{ $t(`${lang}.buyNow`) }}
+            </button>
+
+            <button
+              v-loading="addingCart"
               :class="['add-to-cart', { active: true }]"
               @click="addCart"
             >
               {{ $t(`${lang}.addCart`) }}
             </button>
 
-            <button
-              v-loading="addingCart"
-              :class="['add-to-cart', { active: true }]"
-              @click="orderNow"
-            >
-              {{ $t(`${lang}.buyNow`) }}
-            </button>
           </div>
         </div>
       </section>
@@ -782,6 +783,7 @@ export default {
       .title-block-sku {
         font-size: 14px;
         color: #999;
+        margin-left: 40px;
       }
     }
     img {
