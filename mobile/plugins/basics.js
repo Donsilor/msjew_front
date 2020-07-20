@@ -28,7 +28,7 @@ export default ({ req, app, store, $axios }, inject) => {
             areaId = 3
             platform = 41 //移动-台湾
         } else {
-            language = 'en_US'
+            language = 'zh_TW'
             coin = 'HKD'
             areaId = 2
             platform = 11 //移动-港澳台
