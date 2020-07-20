@@ -268,7 +268,7 @@
           </div>
         </div>
         <div class="bottom">
-          <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
+          <div class="order" :class="order.orderStatus != 10 || order.paymentType == 11? 'no-margin' : '0'">
             <div>
               <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">{{lang.lookOrder}}</div>
               <div class="btn-look btn-express" v-if="order.orderStatus != 10 && order.orderStatus != 0"  @click="toLogistic(order.id)">{{lang.logisticsDetails}}</div>
@@ -468,6 +468,19 @@ export default {
         orderStatus: this.orderStatus
       }
     },
+    ifShow(order) {
+      return function(order) {
+        if(order.paymentType == 11){
+          return true
+        }else{
+          if(order.orderStatus != 10){
+            return true
+          }else{
+            return false
+          }
+        }
+      }
+    }
   },
   watch: {
     orderStatus(val, oldVal) {
