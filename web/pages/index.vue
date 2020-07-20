@@ -267,8 +267,8 @@
         {{ hotProductInfo.title }}
       </h1>
       <div class="section-title-line"></div>
-      <div class="hot-list" :style="{ height: hotProductItemWidth + 'px' }">
-        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveHotProduct">
+      <div class="hot-list" :style="{ height: hotHeight + 'px', padding: hotPadding + 'px' + ' 0' }">
+        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.2" :indicator="false" @change="changeActiveHotProduct">
 
           <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
             <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
@@ -326,7 +326,7 @@
       <h2 class="section-sub-title">
         {{ $t(`${lang}.360DiamondInfo`) }}
       </h2>
-      <div class="diamond-list" :style="{ height: diamondItemWidth + 'px' }">
+      <div class="diamond-list" :style="{ height: hotHeight + 'px', padding: diamondsPadding + 'px' + ' 0' }">
         <swiper ref="diamond-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveDiamond">
           <div v-for="(diamond, n) in diamonds" :key="n" class="product-item">
             <nuxt-link :to="diamond.to">
@@ -852,8 +852,9 @@ export default {
       arrowsTop: 0,
       sweetHeight: 0,
       fontSize: 0,
-      hotProductItemWidth: 0,
-      diamondItemWidth: 0
+      hotHeight: 0,
+      hotPadding: 0,
+      diamondsPadding: 0
     }
   },
   computed: {
@@ -1027,10 +1028,18 @@ export default {
         bWidth = 1520
       }
 
+      var cWidth = document.body.clientWidth;
+      if(cWidth < 1200){
+        cWidth = 1200
+      }
+
       that.sImgHeight = Math.round(bWidth * 0.2) + 70;
       that.arrowsTop = Math.round(bWidth * 0.1) - 20;
       that.sweetHeight = Math.round((bWidth / 1520) * 710);
       that.fontSize = Math.round((bWidth / 1366) * 38);
+      that.hotHeight = Math.round(cWidth * 0.18);
+      that.hotPadding = Math.round(cWidth * 0.04 + 40);
+      that.diamondsPadding = Math.round(cWidth * 0.05);
       if(that.fontSize > 48){
         that.fontSize = 48
       }
@@ -1066,8 +1075,7 @@ section {
     /*font-weight: bold;*/
     color: rgba(51, 51, 51, 1);
     text-align: center;
-    padding-top: 30px;
-    padding-bottom: 50px;
+    padding: 30px 0;
     z-index: 2;
   }
   .section-sub-title {
@@ -1264,16 +1272,23 @@ section {
   .hot-list {
     width: 100%;
     background-color: #ffffff;
-    margin-top: -15px;
-    padding: 6% 0 6% 0;
 
     .product-item {
+      height: 100%;
       .product-image {
+        height: 100%;
         font-size: 0;
         line-height: 0;
+        position: relative;
+        overflow: hidden;
 
         .product-image {
+          position: absolute;
           width: 100%;
+          height: auto;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
         }
       }
     }
@@ -1364,7 +1379,7 @@ section {
 }
 
 .diamond {
-  padding-top: 41px;
+  padding: 40px 0 60px;
   background-color: #ffffff;
   overflow-x: hidden;
 
@@ -1374,23 +1389,30 @@ section {
 
   .diamond-list {
     width: 100%;
-    padding: 3% 0 5% 0;
     box-sizing: content-box;
     background-color: #ffffff;
 
     .product-item {
+      height: 100%;
       .product-image {
+        height: 100%;
         font-size: 0;
         line-height: 0;
+        position: relative;
+        overflow: hidden;
 
         .product-image {
+          position: absolute;
           width: 100%;
+          height: auto;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
         }
       }
     }
   }
   .diamond-list-bar {
-    padding-bottom: 119px;
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
