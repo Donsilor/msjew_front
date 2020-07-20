@@ -10,7 +10,9 @@ export default {
   },
   data() {
     return {
-      addingCart: false
+      addingCart: false,
+      orderingNow:false,
+      isLogin:this.$store.getters.hadLogin
     }
   },
   computed: {
@@ -48,6 +50,9 @@ export default {
     canAddCart() {
       // console.log(11,this.inSale,22,this.hadStock)
       return this.inSale && this.hadStock
+    },
+    getTimestampUuid () {
+      return new Date().getTime().toString()
     }
   },
   methods: {
@@ -100,7 +105,111 @@ export default {
             _this.addingCart = false
           }, 1000)
         })
-    }
+    },
+    // 立即购买
+    orderNow(){
+      const _this = this
+
+      if (!_this.canAddCart) {
+        _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
+      }
+      if (!_this.simpleDetail) {
+        _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
+      } 
+
+      const time = this.getTimestampUuid
+
+      let goodInfo = [
+        {
+          goods_num: 1,
+          goodsDetailsId: _this.simpleDetail.id,
+          goods_id: _this.simpleDetail.id,
+          group_id: null,
+          group_type: null,
+          serviceId: 0,
+          serviceVal: 'string',
+          goods_type:_this.simpleDetail.categoryId
+        }
+      ]
+
+      goodInfo = goodInfo.map(item => {
+            item.createTime = time
+            item.updateTime = time
+            return item
+        })
+      _this.orderingNow = true
+        // console.log("goodInfo",goodInfo)
+      if(this.isLogin){
+        this.$axios({
+          method: 'post',
+          url: 'web/member/cart/add',
+          data: {
+            goodsCartList: goodInfo
+          }
+        })
+        .then(data => {
+          _this.orderingNow = false
+          const dataId = []
+          dataId.push(data.data[0].id)
+          // console.log("dddd",data)
+          const cartIds = dataId.join(',')
+          this.$router.push({
+            path: `/billing-address`,
+            query: { cartIds }
+          })
+        })
+        .catch(err => {
+          _this.orderingNow = false
+            // return Promise.reject(err)
+        })
+      } else {
+        const CART = 'cart'
+        let goodInfo = [
+          {
+            goods_num: 1,
+            goodsDetailsId: _this.simpleDetail.id,
+            goods_id: _this.simpleDetail.id,
+            group_id: null,
+            group_type: null,
+            serviceId: 0,
+            serviceVal: 'string',
+            goods_type:_this.simpleDetail.categoryId
+          }
+        ]
+        const addInfo = {
+          id: time,
+          createTime: time,
+          updateTime: time,
+          data: goodInfo
+        }
+        return new Promise(async (resolve, reject) => {
+            try {
+                let cart = JSON.parse(localStorage.getItem(CART) || '[]')
+                cart = cart.concat(addInfo)
+                if (cart.length > 30) {
+                    return reject(new Error(lang.cartIsFull))
+                }
+                const dataId = []
+                dataId.push(addInfo.id)
+                // console.log("dddd",addInfo)
+                _this.orderingNow = false
+                const cartIds = dataId.join(',')
+                this.$router.push({
+                  path: `/billing-address`,
+                  query: { cartIds }
+                })
+                // 本地加入购物车数据
+                localStorage.setItem(CART, JSON.stringify(cart))
+                return resolve()
+            } catch (e) {
+                _this.orderingNow = false
+                return reject(e)
+            }
+        })
+      }
+    },
   },
   mounted() {
 

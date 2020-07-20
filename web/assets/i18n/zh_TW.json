@@ -968,6 +968,7 @@
             "orderNumber": "訂單編號",
             "orderStatus": "訂單狀態",
             "orderDetail": "訂單詳情",
+            "logisticsDetails":"物流詳情",
             "cancelOrder": "取消訂單",
             "toPay": "去付款",
             "toPayWait": "付款中",
@@ -985,6 +986,7 @@
             "waitingPay": "待付款",
             "waitingSend": "待發貨",
             "waitingReceive": "待收貨",
+            "shipped":"已發貨",
             "waitingComment": "待評價",
             "sumbit": "提交",
             "hadReceive": "已收貨",
@@ -1084,6 +1086,19 @@
             ],
             "copySuccess": "复製成功！",
             "copyFail": "复製失败，请手动复製订单号！"
+        },
+        "logisticInfo":{
+            "title": "我的訂單",
+            "logistic":"物流信息",
+            "received":"已簽收",
+            "intransit":"運輸中",
+            "WaitingPackage":"等待攬件",
+            "noexpress":"暫無物流信息",
+            "result": [
+                "等待攬件",
+                "運輸中",
+                "已簽收"
+            ]
         }
     },
     "cart": {
@@ -1294,7 +1309,8 @@
         "activityTime": "活動截止時間",
         "oddPrice": "原  價",
         "newPrice": "折後價",
-        "needLogin": "請先登錄，才能領取優惠券"
+        "needLogin": "請先登錄，才能領取優惠券",
+        "buyNow":"立即購買"
     },
     "policies": {
         "layout": {

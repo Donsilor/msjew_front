@@ -523,7 +523,8 @@
       "waitingPay": "Payment",
       "waitingSend": "Delivery",
       "waitingReceive": "Receipt",
-      "waitingComment": "Review"
+      "waitingComment": "Review",
+      "Shipped":"Shipped"
     },
     "orderDetail": {
       "orderDetail": "Order Information",
@@ -589,6 +590,19 @@
       "discountedAmount": "Discounted amount",
       "Untied":"Untied",
       "couponAmount": "Coupon"
+    },
+    "logisticInfo":{
+      "title": "Order",
+      "logistic":"Tracking Information",
+      "received":"received",
+      "intransit":"In Transit",
+      "WaitingPackage":"Waiting for pickup",
+      "noexpress":"Tracking information is unavailable ",
+      "toast1": "Copied",
+      "toast2": "This browser does not support Auto Copy",
+      "Shipping":"Delivering",
+      "ShippingAddress":"Shipping Address",
+      "ContactMerchant":"Contact Us"
     }
   },
   "custom-made": {
@@ -610,7 +624,8 @@
     "addCartSuccess": "Added to cart",
     "addCartFail": "Failed to add to cart",
     "discounts1": "Coupon",
-    "discounts2": "off"
+    "discounts2": "off",
+    "buyNow":"Order Now"
   },
   "diamond": {},
   "engagement": {
@@ -991,7 +1006,8 @@
       "tips": "Confirm to leave the checkout page ?",
       "pending":"Pending",
       "payfailed":"Payment failed",
-      "lookOrder": "View Order"
+      "lookOrder": "View Order",
+      "logisticsDetails":"View Logistics"
     },
     "progressBar": {
       "price": "Price",
@@ -1120,7 +1136,8 @@
     "activityTime": "Sales end on",
     "oddPrice": "Original price",
     "newPrice": "Discount price",
-    "needLogin": "Please login before redeem the coupon."
+    "needLogin": "Please login before redeem the coupon.",
+    "buyNow":"Order Now"
   },
   "listCommons": {
     "sliders": [

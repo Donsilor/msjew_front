@@ -119,27 +119,43 @@
         {{ lang.cmw }}
         <div class="triangle" />
       </div>
-      <div
-        v-if="
-          parseInt($route.query.step) === 1 &&
-            !$route.query.isBack &&
-            inSale &&
-            canAddCart
-        "
-        class="btn-common btn-pink"
-        @click="emitStep(1)"
-      >
-        <span>{{ lang.startDJ }}</span>
+      <div class="submit-btn">
+
+        <div
+          v-if="
+            parseInt($route.query.step) === 1 &&
+              !$route.query.isBack &&
+              inSale &&
+              canAddCart
+          "
+          class="btn-common btn-pink"
+          @click="emitStep(1)"
+        >
+          <span>{{ lang.startDJ }}</span>
+        </div>
+        <div
+          v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
+          :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+          @click="addCart"
+        >
+          {{
+            inSale
+              ? canAddCart
+                ? lang.addCart
+                : lang.noTotalStock
+              : lang.notInSale
+          }}
+        </div>
       </div>
       <div
         v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
         :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
-        @click="addCart"
+        @click="orderNow"
       >
         {{
           inSale
             ? canAddCart
-              ? lang.addCart
+              ? lang.buyNow
               : lang.noTotalStock
             : lang.notInSale
         }}
@@ -365,8 +381,25 @@ export default {
 </script>
 
 <style scoped lang="less">
+
 .engagementRings-component {
   .details-component(100%);
+  .submit-btn{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px 20px;
+    .btn-pink{
+      width: 48%;
+      margin: 0;
+    }
+    .btn-white{
+      width: 48%;
+      margin: 0;
+    }
+  }
+  .btn-white{
+    border:none!important;
+  }
 }
 .ring-made-component{
   position: relative;

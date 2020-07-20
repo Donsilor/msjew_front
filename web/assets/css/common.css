@@ -579,7 +579,7 @@ color-red {
 .favourable-icon{
   display: inline-block;
 	height: 26px;
-	padding: 0 6px;
+	padding: 0 1px;
 	font-size: 17px;
 	color: #fff;
 	line-height: 24px;

@@ -149,6 +149,10 @@ import Operate from '@/mixins/operate.js'
 const CancelToken = Axios.CancelToken
 const lang = 'search'
 export default {
+  head() {
+    return this.seo || {}
+  },
+  props:['seo'],
   mixins: [List, Operate],
   data() {
     return {
@@ -455,7 +459,7 @@ export default {
   }
 }
 .page-content {
-  min-width: 1360px;
+  min-width: 1200px;
   max-width: 1366px;
   margin: 0 auto;
   padding: 40px 0;
