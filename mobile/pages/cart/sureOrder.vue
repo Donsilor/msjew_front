@@ -1019,7 +1019,6 @@ export default {
       this.ifShowAddress = false
       this.queryId = id
       this.getData()
-      // console.log("ssss",this.queryId)
     },
     // // 登录下获取相关费用
     // getTex(k) {
@@ -1271,7 +1270,7 @@ export default {
                     _this.address = item
                     _this.hasAddress = true
                   }
-                } else if (!this.queryId && item.is_default === 1) {
+                } else if (!this.queryId && item.is_default == 1) {
                   _this.address = item
                   _this.hasAddress = true
                 }

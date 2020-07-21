@@ -399,7 +399,8 @@
         "setDefault": "设为默认",
         "remove": "删除",
         "add": "新增收货地址",
-        "toast": "删除成功"
+        "toast": "删除成功",
+        "setSuccess": "默认地址设置成功"
       },
       "coupon": {
         "header": "我的优惠码",

@@ -398,7 +398,8 @@
       "setDefault": "Set As Default",
       "remove": "Delete",
       "add": "NEW ADDRESS",
-      "toast": "Deleted"
+      "toast": "Deleted",
+      "setSuccess": "The default address setting was successful!"
     },
     "coupon": {
       "header": "Coupon",
