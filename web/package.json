@@ -5,7 +5,7 @@
   "author": "516458780@qq.com",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development RUNNING_ENV=dev nodemon server/index.js --watch server",
+    "dev": "cross-env NODE_ENV=development RUNNING_ENV=dev nodemon -max_old_space_size=4096 server/index.js --watch server",
     "test": "cross-env NODE_ENV=development RUNNING_ENV=test nodemon server/index.js --watch server",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production node server/index.js"

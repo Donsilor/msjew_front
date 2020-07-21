@@ -42,7 +42,7 @@
             <div>{{ $t(`${lang}.payFail`) }}</div>
           </div>
           <div class="tel">
-            {{ $t(`${lang}.contactPhone`) }}
+            {{ platform == 20 ? $t(`${lang}.contactPhoneCh`) : $t(`${lang}.contactPhone`) }}
           </div>
           <div class="btn-two">
             <div @click="returnBack()">{{ $t(`${lang}.repay`) }}</div>
@@ -92,7 +92,7 @@
           <div>{{ $t(`${lang}.payFail`) }}</div>
         </div>
         <div class="tel">
-          {{ $t(`${lang}.contactPhone`) }}
+          {{ platform == 20 ? $t(`${lang}.contactPhoneCh`) : $t(`${lang}.contactPhone`) }}
         </div>
         <div class="btn-two">
           <div @click="returnBack2()">{{ $t(`${lang}.repay`) }}</div>
@@ -117,6 +117,7 @@ export default {
         coinType:'',
         orderAmount:''
       },
+      platform: 10
     }
   },
   created(){
@@ -130,6 +131,8 @@ export default {
     //   this.good = res
     //   console.log("vres",res)
     // })
+    this.platform = this.$store.state.platform;
+    
     if(this.$store.getters.hadLogin){
       this.$axios
         .get('/web/member/order/detail', {
@@ -216,15 +219,16 @@ div {
   box-sizing: border-box;
 }
 .failed {
-  width: 1360px;
+  max-width: 1360px;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
   background: rgba(248, 248, 248, 1);
   padding: 33px 30px 38px;
+  box-sizing: border-box;
   .order-step {
-    width: 1300px;
+    max-width: 1300px;
     height: 182px;
     background: rgba(255, 255, 255, 1);
     display: flex;
@@ -320,7 +324,7 @@ div {
     }
   }
   .info-box {
-    width: 1300px;
+    max-width: 1300px;
     height: 658px;
     background: rgba(255, 255, 255, 1);
     text-align: center;
@@ -353,7 +357,7 @@ div {
       margin-bottom: 40px;
     }
     .btn-two {
-      width: 180+28+180px;
+      // width: 180+28+180px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -368,6 +372,7 @@ div {
         color: #fff;
         background: rgba(139, 118, 108, 1);
         font-size: 14px;
+        margin: 0 auto;
       }
       div:nth-child(2) {
         background-color: #ffffff;

@@ -16,6 +16,7 @@
             :class="moveIndex === index && move ? 'moveActive' : 'moveNo'"
           >
             <div class="left" @click="selectAddress(item)">
+            <!-- <div class="left"> -->
               <p class="p1 ow-h1">{{ item.firstname }} {{ item.lastname }}</p>
               <p class="p2">{{ item.mobile_code }} {{ item.mobile }}</p>
               <p class="p3">{{ item.email }}</p>
@@ -30,7 +31,7 @@
               <span
                 v-else
                 class="btn btn-no"
-                @click.stop="changeDefaultAddress(item.id)"
+                @click.stop="setDefaultAddress(item.id)"
                 >{{ lang.setDefault }}</span
               >
               <i
@@ -51,7 +52,7 @@
           {{ lang.add }}
         </div>
       </div>
-      <AditAddress v-if="ifShowAditAddress" @closeADP="closeAditAddressPop" :editVal="editVal"  :addVal="addVal" @updataAddress="getData"></AditAddress>
+      <AditAddress v-if="ifShowAditAddress" @closeADP="closeAditAddressPop" :editVal="editVal"  :addVal="addVal"></AditAddress>
     </div>
   </div>
 </template>
@@ -98,39 +99,10 @@ export default {
           url: `/web/member/address`
         })
         .then(res => {
-          // console.log("address",res)
-          _this.address = []
-          if (res && res.length > 0 && res.length !== 1) {
-            res.map((item, index) => {
-              if (item.is_default === 0) {
-                _this.address.unshift(item)
-              } else {
-                _this.address.push(item)
-              }
-            })
-          }
-          // console.log("ad", _this.address)
+          _this.address = res
 
-          if (res && res.length === 1) {
-            _this.address.unshift(res[0]);
-            _this.address[0].is_default = 1;
-
-            _this
-              .$axios({
-                method: 'post',
-                url: `/web/member/address/edit`,
-                data: {
-                  id:res[0].id,
-                  is_default:1
-                }
-              })
-              .then(res => {
-                console.log(res)
-              })
-              .catch(err => {
-                console.log(err)
-              })
-
+          if(res[0].is_default !=1){
+            this.setDefaultAddress(res[res.length-1].id)
           }
         })
         .catch(err => {
@@ -152,9 +124,8 @@ export default {
       this.move = false
       this.moveIndex = -1
     },
-    // 設為默認
-    changeDefaultAddress(id) {
-      // console.log("id",id)
+    // 設值默認地址
+    setDefaultAddress(id) {
       const _this = this
       _this
         .$axios({
@@ -166,22 +137,9 @@ export default {
           }
         })
         .then(res => {
-          // console.log("address",_this.address)
-          // let addressarr = []
-          // let i = 0;
-          // for(i;i < _this.address.length;i++){
-          //   addressarr.push(_this.address[i+index])
-          //   if(i+index >= _this.address.length-1){
-          //     index = 0-(i+1);
-          //   }
-          // }
-          // console.log(addressarr)
-          // return addressarr;
-          console.log("rtttretw",id)
-          if (this.id == '1') {
-            this.$emit('closeAP',id); 
-          }
+          this.$toast.show(this.lang.setSuccess)
           this.getData()
+          
           // this.$router.go(-1)
         })
         .catch(err => {
@@ -208,39 +166,22 @@ export default {
         })
     },
     selectAddress(val) {
-      console.log("ffff",this.id)
-      if (this.id == '1') {
+      // if (this.id == '1') {
         this.$emit('closeAP',val.id); 
-        // this.$router.push({
-        //   name: 'cart-sureOrder',
-        //   query: {
-        //     id: val.id
-        //   }
-        // })
-      }
+      // }
     },
     editAddress(val) {
-      console.log(val, '444')
       if (val) {
         this.ifShowAditAddress = true
         this.editVal = val
-        // this.$router.push({
-        //   name: 'personal-editAddress',
-        //   query: val
-        // })
       } else if (val === null){
         this.ifShowAditAddress = true
         this.addVal = 'add'
-        // this.$router.push({
-        //   name: 'personal-editAddress',
-        //   query: {
-        //     type: 'add'
-        //   }
-        // })
       }
     },
     closeAditAddressPop(){
       this.ifShowAditAddress = false
+      this.getData()
     },
     // 返回
     quit(){

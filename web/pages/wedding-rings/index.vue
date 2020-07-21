@@ -7,12 +7,14 @@
         :autoplay="false"
         :height="bannerHeight + 'px'"
       >
-        <el-carousel-item v-for="(item, index) in banner" :key="index">
+        <!-- <el-carousel-item v-for="(item, index) in banner" :key="index"> -->
+        <el-carousel-item>
           <div class="banner-item">
             <div class="banner-item-bg">
-              <img :src="item.image" />
+              <img src="/adt/image1566979883784.png" v-if="platform != 30" />
+              <img src="/adt/banner-2.png" v-else />
             </div>
-            <div class="banner-item-content">
+            <div class="banner-item-content" :class="{'us': platform == 30}">
               <div class="content-title">
                 <span>{{ $t(`${lang}.weddingRings`) }}</span>
               </div>
@@ -209,6 +211,7 @@
 
 <script>
 import CategoryIndexPage from '@/mixins/category-index-page.js'
+import Bus from '../../assets/js/bus.js'
 const lang = 'weddingRings'
 export default {
   mixins: [CategoryIndexPage],
@@ -233,7 +236,9 @@ export default {
   },
   data() {
     return {
-      lang
+      lang,
+      platform: 0,
+      bannerHeight: 0
     }
   },
   computed: {
@@ -335,7 +340,13 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(3)
+    console.log("sssss",route)
+    let seoInfo = {}
+    if(route.name == 'wedding-rings'){
+      seoInfo = await app.$getSeoInfo('weddingRing')
+    }else {
+      seoInfo = await app.$getSeoInfo('Rings')
+    }
 
     return $axios({
       method: 'get',
@@ -346,6 +357,7 @@ export default {
     })
       .then(res => {
         var data = res.data
+        console.log(44444,data)
         return {
           seoInfo,
           ad: data.advert,
@@ -355,6 +367,41 @@ export default {
       .catch(err => {
         console.error(err)
       })
+  },
+  mounted() {
+    const _this = this;
+    this.platform = this.$store.state.platform;
+    
+    _this.$nextTick(() => {
+      _this.onResize()
+    })
+
+    Bus.$on('resizeFn', (val) => {
+      _this.onResize()
+    })
+  },
+  methods: {
+    onResize() {
+      var that = this;
+
+      if (that.banner[0] && that.banner[0].image) {
+        const image = new Image()
+        var width = 0, height = 0;
+        image.src = that.banner[0].image
+        image.onload = result => {
+          width = image.width;
+          height = image.height;
+        }
+
+        if(width && height){
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * image.height) / image.width)
+        }else{
+          that.bannerHeight =
+            Math.round((document.body.clientWidth * 640) / 1920)
+        }
+      }
+    }
   }
 }
 </script>
@@ -700,5 +747,10 @@ section {
 }
 .page{
   margin-bottom: 50px;
+}
+
+.banner-item-content.us{
+  left: initial !important;
+  right: 14%;
 }
 </style>

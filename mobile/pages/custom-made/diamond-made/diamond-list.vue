@@ -1,16 +1,41 @@
 <template>
   <div class="list-page">
-    <data-list ref="data-list" @clickData="clickData"></data-list>
+    <data-list ref="data-list" @clickData="clickData" :seo = "seoInfo"></data-list>
   </div>
 </template>
 
 <script>
 import DataList from '../diamond-factory/list-body.vue'
 export default {
+  head() {
+    return this.seoInfo || {}
+  },
   name: 'List',
   layout: `no-bar`,
   components: {
     DataList
+  },
+  async asyncData({ $axios, route, store, app }) {
+    const seoInfo = await app.$getSeoInfo('diamond')
+    // return
+    return $axios({
+      method: 'get',
+      url: '/wap/goods/style/web-site',
+      params: {
+        type: 2
+      }
+    })
+      .then(data => {
+        // console.log(444444,data)
+        return {
+          seoInfo,
+          ad: data.advert,
+          webSite: data.webSite
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
   },
   mounted(){
     const _this = this

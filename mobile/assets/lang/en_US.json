@@ -315,6 +315,7 @@
     "payFailed": {
       "title": "Sorry, the order payment failed! Please repay",
       "phone": "For any questions, contact customer service (852)-2165 3908",
+      "phoneCn": "For any questions, contact customer service 0755 25169121",
       "orderNo": "Order#：",
       "payAgain": "PAY AGAIN",
       "continue": "CONTINUE",
@@ -397,7 +398,8 @@
       "setDefault": "Set As Default",
       "remove": "Delete",
       "add": "NEW ADDRESS",
-      "toast": "Deleted"
+      "toast": "Deleted",
+      "setSuccess": "The default address setting was successful!"
     },
     "coupon": {
       "header": "Coupon",
@@ -634,7 +636,8 @@
     "addCartSuccess": "Added to cart",
     "addCartFail": "Failed to add to cart",
     "discounts1": "Coupon",
-    "discounts2": "off"
+    "discounts2": "off",
+    "buyNow":"Order Now"
   },
   "diamond": {},
   "engagement": {
@@ -782,6 +785,7 @@
     "checkDetail": "View details",
     "seeMore": "MORE",
     "callUs": "Contact",
+    "contactUs": "Contact Us",
     "store": "Store",
     "storeName": "Hong Kong. Universal Trade Centre",
     "address": "Address",
@@ -1144,7 +1148,8 @@
     "activityTime": "Sales end on",
     "oddPrice": "Original price",
     "newPrice": "Discount price",
-    "needLogin": "Please login before redeem the coupon."
+    "needLogin": "Please login before redeem the coupon.",
+    "buyNow":"Order Now"
   },
   "listCommons": {
     "sliders": [

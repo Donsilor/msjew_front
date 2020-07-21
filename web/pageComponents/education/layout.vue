@@ -147,7 +147,9 @@ export default {
 
 <style lang="less" scoped>
 .knowledge-content {
-  width: 1360px;
+  min-width: 1200px;
+  max-width: 1360px;
+  width: 100%;
   margin: 0px auto 60px auto;
   .title {
     text-align: left;
@@ -280,4 +282,10 @@ export default {
 /*.active {*/
 /*  color: #8b766c;*/
 /*}*/
+
+@media screen and (max-width: 1359px) {
+  .knowledge-content {
+    padding-right: 1%;
+  }
+}
 </style>

@@ -503,7 +503,7 @@ export default {
   }
 }
 .page-content {
-  min-width: 1360px;
+  min-width: 1200px;
   max-width: 1366px;
   margin: 0 auto;
   padding: 40px 0;

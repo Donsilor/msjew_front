@@ -833,7 +833,8 @@
         "afterSale": "售后无忧",
         "afterSaleDesc": "若在可调整尺寸范围内，BDD Co. 会在前6个月内为您提供免费的戒指尺寸调整。",
         "moreAfterSaleInfo": "退款保障条款及细则",
-        "startYourDiamondCheck": "立刻开始您的钻石检查"
+        "startYourDiamondCheck": "立刻开始您的钻石检查",
+        "slidingBrowsing": "拖动鼠标浏览"
     },
     "engagementRingsList": {
         "style": "款式",
@@ -1158,6 +1159,7 @@
         "msgContent2": "订单提交失败，请重试！",
         "payFail": "很抱歉，您的订单未支付成功！",
         "contactPhone": "如有问题请联络客服电话：（852）-2165 3908！",
+        "contactPhoneCh": "如有问题请联络客服电话：0755 25169121！",
         "repay": "重新支付",
         "payQuestion": "支付遇到问题",
         "msg11": "需登录购物 / 仅供大陆使用",
@@ -1316,7 +1318,8 @@
         "activityTime": "活动截止时间",
         "oddPrice": "原  价",
         "newPrice": "折后价",
-        "needLogin": "请先登录，才能领取优惠券"
+        "needLogin": "请先登录，才能领取优惠券",
+        "buyNow":"立即购买"
     },
     "policies": {
         "layout": {
