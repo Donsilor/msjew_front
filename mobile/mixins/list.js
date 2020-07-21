@@ -207,7 +207,7 @@ export default {
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
-          console.error(err)
+          // console.error(err)
           if (err instanceof Error) {
             // console.log('这是一个错误')
           } else {
