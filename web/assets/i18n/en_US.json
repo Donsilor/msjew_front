@@ -1089,10 +1089,14 @@
             "intransit":"In Transit",
             "WaitingPackage":"Waiting for pickup",
             "noexpress":"Tracking information is unavailable ",
+            "toast1": "Copied",
+            "toast2": "This browser does not support Auto Copy",
+            "ShippingAddress":"Shipping Address",
+            "ContactMerchant":"Contact Us",
             "result": [
-                "Place order",
-                "Paid",
-                "Shipped"
+                "Waiting for pickup",
+                "In Transit",
+                "received"
             ]
         }
     },
