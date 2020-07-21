@@ -41,8 +41,9 @@
             <p>
               {{ $t(`${lang}.orderStatus`) }}：
               <span v-if="o.orderStatus !== 0 && o.refundStatus == 0 && o.wireTransferStatus !== null" :style="{ color: getStatusColor(o.orderStatus) }"> 
-                {{ getTransferStatus(o.wireTransferStatus)}}
-                </span>
+                <span v-if="o.orderStatus == 40">{{ getStatusText(o.orderStatus) }}</span>
+                <span v-else>{{ getTransferStatus(o.wireTransferStatus) }}</span>
+              </span>
               <span v-else-if="o.refundStatus == 1" :style="{ color: getStatusColor(o.orderStatus) }"> 
                 {{ getRefundStatus(o.refundStatus)
               }}</span>
@@ -214,11 +215,11 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
-            <nuxt-link :to="`/account/logistics-information?orderId=${o.id}`"
+            <!-- <nuxt-link :to="`/account/logistics-information?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.logisticsDetails`) }}
               </button>
-            </nuxt-link>
+            </nuxt-link> -->
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
@@ -235,11 +236,11 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
-            <nuxt-link :to="`/account/logistics-information?orderId=${o.id}`"
+            <!-- <nuxt-link :to="`/account/logistics-information?orderId=${o.id}`"
               ><button>
                 {{ $t(`${lang}.logisticsDetails`) }}
               </button>
-            </nuxt-link>
+            </nuxt-link> -->
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
@@ -550,7 +551,7 @@ export default {
             }
           }
           // console.log(this.list.ordered)
-          this.tabsParam[0].num = res.data.data.length
+          this.tabsParam[0].num = res.data.data.length 
           this.tabsParam[1].num = this.list.ordered.length
           this.tabsParam[2].num = this.list.paid.length
           this.tabsParam[3].num = this.list.send.length

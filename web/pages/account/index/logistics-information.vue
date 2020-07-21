@@ -8,98 +8,133 @@
                 </div>
             </nuxt-link>
         </div>
-        <div class="logistic" v-if="express.logistics !== null">
-            <div class="schedule">
-                <p v-for="(step, ns) in StepStatus" :key="ns">
-                    <span :style="{'background-color': step.active? 'rgba(242,155,135,1)': '#E6E6E6'}">{{ ns + 1 }}</span>
-                    <span :style="{ color: step.active ? 'rgba(242,155,135,1)' : '#999' }">{{ step.title }}</span>
-                </p>
-                <div v-for="(step, index) in StepStatus" :key="index + 'what'" class="top-line" >
-                    <div :style="{ 'background-color':step.active && StepStatus[index] && StepStatus[index].active ? 'rgba(242,155,135,1)' : '#E6E6E6' }" class="top-line-line" ></div>
+        <div  v-if="express.logistics !== null">
+            <div class="logistic-msg">
+                <div class="left">
+                    <div class="title">
+                        <span v-if="expStatus.has_active == true && expStatus.has_signed == false ">{{ $t(`${lang}.WaitingPackage`) }}</span>
+                        <span v-else-if="expStatus.has_active == true && expStatus.has_ended == false">{{ $t(`${lang}.intransit`) }}</span>
+                        <span v-else-if="expStatus.has_signed == true && expStatus.has_ended == true">{{ $t(`${lang}.received`) }}</span>
+                    </div>
+                    <div class="address">
+                        <span>{{$t(`${lang}.ShippingAddress`)}}:</span>
+                        <span>
+                            {{data.address.countryName}}-
+                            {{data.address.provinceName}}-
+                            {{data.address.cityName}}
+                            {{data.address.address}}
+                        </span>
+                    </div>
+                    <div class="deliveryNo">
+                        <span>{{data.express.companyName}}:</span>
+                        <span>{{data.express.expressNo}}</span>
+                        <i class="icon iconfont iconcopy copy-btn" :data-clipboard-text="data.express.expressNo" @click="copy"></i>
+                    </div>
                 </div>
+                <!-- <div class="right">
+                    <div>
+                        <img src="../../../static/personal/user.png" alt=""> 
+                        <p>{{ $t(`${lang}.ContactMerchant`) }}</p>
+                    </div>
+                </div> -->
             </div>
-            <!-- <div class="track" >
-                <div class="track-list">
-                    <ul>
-                        <div v-for="(a,_a) in list" :key="_a">
-                            <li class="start" v-if="_a === 0">
-                                <div>
-                                    <i><img src="../../../static/order/finished.png" alt=""></i>
-                                </div>
-                                <div>
-                                    <span class="time">{{a.datetime}}</span>
-                                </div>
-                                <div>
-                                    <span class="statustxt">{{$t(`${lang}.received`)}}</span>
-                                    <span class="txt">{{a.remark}}</span>
-                                </div>
-                            </li>
-                            
-                            <li class="node-icon" v-if="_a > 0 && _a !== list.length-1">
-                                <div>
-                                    <i></i>
-                                </div>
-                                <div>
-                                    <span class="time">{{a.datetime}}</span>
-                                </div>
-                                <div>
-                                    <span class="statustxt">{{$t(`${lang}.intransit`)}}</span>
-                                    <span class="txt">{{a.remark}}</span>
-                                </div>
-                            </li>
-                            <li v-if="_a === list.length-1" class="finall">
-                                <div>
-                                    <i><img src="../../../static/order/diamondgary.png" alt=""></i>
-                                </div>
-                                <div>
-                                    <span class="time">{{a.datetime}}</span>
-                                </div>
-                                <div>
-                                    <span class="statustxt">{{$t(`${lang}.WaitingPackage`)}}</span>
-                                    <span class="txt">{{a.remark}}</span>
-                                </div>
-                            </li>
-                            
-                        </div>
-                    </ul>
+            <div class="logistic">
+                <div class="schedule">
+                    <p v-for="(step, ns) in StepStatus" :key="ns">
+                        <span :style="{'background-color': step.active? 'rgba(242,155,135,1)': '#E6E6E6'}">{{ ns + 1 }}</span>
+                        <span :style="{ color: step.active ? 'rgba(242,155,135,1)' : '#999' }">{{ step.title }}</span>
+                    </p>
+                    <div v-for="(step, index) in StepStatus" :key="index + 'what'" class="top-line" >
+                        <div :style="{ 'background-color':step.active && StepStatus[index] && StepStatus[index].active ? 'rgba(242,155,135,1)' : '#E6E6E6' }" class="top-line-line" ></div>
+                    </div>
                 </div>
-            </div> -->
-            <div class="track-content" >
-                <div class="content"></div>
-                <!--物流跟踪-->
-                <div class="follow">
-                    <div class="follow-list">
-                        <div>
-                        <div class="track-rcol">
-                            <div class="track-list">
-                            <ul>
-                            <div v-for="(item,index) in list" :key="index">
-                                <li class="first" v-if="index===0">
-                                <div></div>
-                                <i class="node-icon"></i>
-                                <span class="txt">{{item.remark}}</span>
-                                <span class="time">{{item.datetime}}</span>
+                <!-- <div class="track" >
+                    <div class="track-list">
+                        <ul>
+                            <div v-for="(a,_a) in list" :key="_a">
+                                <li class="start" v-if="_a === 0">
+                                    <div>
+                                        <i><img src="../../../static/order/finished.png" alt=""></i>
+                                    </div>
+                                    <div>
+                                        <span class="time">{{a.datetime}}</span>
+                                    </div>
+                                    <div>
+                                        <span class="statustxt">{{$t(`${lang}.received`)}}</span>
+                                        <span class="txt">{{a.remark}}</span>
+                                    </div>
                                 </li>
-                                <li v-if="index > 0 && index !== list.length-1">
-                                <i class="node-icon"></i>
-                                <span class="txt">{{item.remark}}</span>
-                                <span class="time">{{item.datetime}}</span>
+                                
+                                <li class="node-icon" v-if="_a > 0 && _a !== list.length-1">
+                                    <div>
+                                        <i></i>
+                                    </div>
+                                    <div>
+                                        <span class="time">{{a.datetime}}</span>
+                                    </div>
+                                    <div>
+                                        <span class="statustxt">{{$t(`${lang}.intransit`)}}</span>
+                                        <span class="txt">{{a.remark}}</span>
+                                    </div>
                                 </li>
-                                <li v-if="index === list.length-1" class="finall">
-                                <i class="div-spilander"></i>
-                                <i class="node-icon"></i>
-                                <span class="txt">{{item.remark}}</span>
-                                <span class="time">{{item.datetime}}</span>
+                                <li v-if="_a === list.length-1" class="finall">
+                                    <div>
+                                        <i><img src="../../../static/order/diamondgary.png" alt=""></i>
+                                    </div>
+                                    <div>
+                                        <span class="time">{{a.datetime}}</span>
+                                    </div>
+                                    <div>
+                                        <span class="statustxt">{{$t(`${lang}.WaitingPackage`)}}</span>
+                                        <span class="txt">{{a.remark}}</span>
+                                    </div>
                                 </li>
+                                
                             </div>
-                            </ul>
+                        </ul>
+                    </div>
+                </div> -->
+                <div class="track-content" >
+                    <div class="content"></div>
+                    <!--物流跟踪-->
+                    <div class="follow">
+                        <div class="follow-list">
+                            <div>
+                            <div class="track-rcol">
+                                <div class="track-list">
+                                <ul>
+                                <div v-for="(item,index) in list" :key="index">
+                                    <li class="first" v-if="index === 0 && list.length > 0">
+                                        <div></div>
+                                        <i class="node-icon"></i>
+                                        <span class="txt">{{item.remark}}</span>
+                                        <span class="time">{{item.datetime}}</span>
+                                    </li>
+                                    <li v-if="index > 0 && index !== list.length-1">
+                                        <i class="node-icon"></i>
+                                        <span class="txt">{{item.remark}}</span>
+                                        <span class="time">{{item.datetime}}</span>
+                                    </li>
+                                    <li v-if="index === list.length-1 && list.length >1" class="finall">
+                                        <i class="div-spilander"></i>
+                                        <i class="node-icon"></i>
+                                        <span class="txt">{{item.remark}}</span>
+                                        <span class="time">{{item.datetime}}</span>
+                                    </li>
+                                    <li v-if="index === list.length-1 && list.length == 1" class="finall">
+                                        <i class="div-spilander"></i>
+                                        <i class="node-icon"></i>
+                                    </li>
+                                </div>
+                                </ul>
+                                </div>
                             </div>
-                        </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>    
+            </div>    
+        </div>
         <div v-else>
             <div class="empy-express">{{$t(`${lang}.noexpress`)}}</div>
         </div>
@@ -142,6 +177,7 @@
 </template>
 <script>
 const lang = 'personal.logisticInfo'
+import Clipboard from 'clipboard'
 export default {
   name: 'Logic',
   data () {
@@ -149,52 +185,28 @@ export default {
         lang,
         expStatus:{},
         oid: this.$route.query.orderId,
-        logisticsList: [
-            {
-            message: '1包裹已签收，感谢您使用顺丰快递服务，期待下次继续为您服务！',
-            messageDate: '2016-03-10 18:07:15'
-            },
-            {
-            message: '2包裹已签收，感谢您使用顺丰快递服务，期待下次继续为您服务！',
-            messageDate: '2016-03-10 18:07:15'
-            },
-            {
-            message: '3包裹已签收，感谢您使用顺丰快递服务，期待下次继续为您服务！',
-            messageDate: '2016-03-10 18:07:15'
-            },
-            {
-            message: '4包裹已签收，感谢您使用顺丰快递服务，期待下次继续为您服务！',
-            messageDate: '2016-03-10 18:07:15'
-            },
-            {
-            message: '5包裹已签收，感谢您使用顺丰快递服务，期待下次继续为您服务！',
-            messageDate: '2016-03-10 18:07:15'
-            },
-            {
-            message: '6包裹已签收，感谢您使用顺丰快递服务，期待下次继续为您服务！',
-            messageDate: '2016-03-10 18:07:15'
-            },
-            {
-            message: '7包裹已签收，感谢您使用顺丰快递服务，期待下次继续为您服务！',
-            messageDate: '2016-03-10 18:07:15'
-            }
-        ],
         data: {
             address: {
-            countryName: '',
-            provinceName: '',
-            cityName: '',
-            address: '',
-            realName: '',
-            userMail: '',
+                countryName: '',
+                provinceName: '',
+                cityName: '',
+                address: '',
+                realName: '',
+                userMail: '',
             },
+            express:{
+                companyName:'',
+                delivery_time:'',
+                expressNo:'',
+                logistics:{}
+            }
         },
         express:{},
         list:[]
     }
   },
   computed:{
-      StepStatus() {
+    StepStatus() {
       // data.orderStatus
       const expStatus = this.expStatus
       const result = [
@@ -216,16 +228,13 @@ export default {
       ]
       // 1-未付款,2-已付款,3-已发货,4-已完成,5-未评论,6-已评论,7-退货申请,8-退货中,9-已退货,10-取消交易
       if(expStatus.has_active == true){
-          console.log(11111111)
         result[0].active = true
       }
       if(expStatus.has_active == true && expStatus.has_signed == true){
-          console.log(22222222)
         result[0].active = true
         result[1].active = true
       }
       if(expStatus.has_signed == true){
-          console.log(33333333)
         result[0].active = true
         result[1].active = true
         result[2].active = true
@@ -254,10 +263,6 @@ export default {
             this.list = res.data.express.logistics.list
             this.expStatus = res.data.express.logistics.abstract_status
           }
-        //   console.log("this.data",this.data)
-        //   this.invoice = res.data.invoice
-        //   console.log("data", res.data.express.logistics.abstract_status)
-
         })
         .catch(err => {
           if (!err.response) {
@@ -266,6 +271,17 @@ export default {
             // console.log(err)
           }
         })
+    },
+    copy() {
+      const clipboard = new Clipboard('.copy-btn')
+      clipboard.on('success', e => {
+        this.$successMessage(this.$t(`${lang}.toast1`))
+        clipboard.destroy()
+      })
+      clipboard.on('error', e => {
+        this.$errorMessage(this.$t(`${lang}.toast2`))
+        clipboard.destroy()
+      })
     },
   }
 }
@@ -286,6 +302,49 @@ export default {
             line-height: 17px;
             font-size: 16px;
             color: rgba(242, 155, 135, 1);
+        }
+    }
+    .logistic-msg{
+        padding: 18px 34px;
+        margin-top: 12px;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 20px;
+        // border:1px solid #ddd;
+        margin: 25px 83px 25px 100px;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        color:#947465;
+        background-color:#f8f4f1;
+        .left{
+            .title{
+                font-size: 22px;
+                font-weight: 700;
+                // color: #666666;
+                padding: 10px 0;
+            }
+            .address{
+                font-size: 14px;
+                // padding: 5px 0;
+                // color: #999999;
+            }
+            .deliveryNo{
+                font-size: 14px;
+                padding: 5px 0;
+                // color: #999999;
+            }
+        }
+        .right{
+            width: 28%;
+            text-align: right;
+            div{
+                text-align: center;
+            }
+            p{
+                text-align: center;
+                color:#947465;
+            }
         }
     }
     .schedule{

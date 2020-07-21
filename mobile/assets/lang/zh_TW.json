@@ -575,6 +575,12 @@
       "defaultPairRing": "BDD珠寶商城精選對戒",
       "diy": "定製",
       "cableTransfer": "電匯",
+      "paypal":"Paypal",
+      "wechat":"微信",
+      "alipay":"支付寶",
+      "alipayhk":"支付寶HK",
+      "visa":"visa",
+      "UnionPay":"銀聯",
       "caveat": "警告",
       "cancel": "取消",
       "clear": "確定",
@@ -602,7 +608,12 @@
       "toast2": "该浏览器不支持自动复製",
       "Shipping":"訂單配送中",
       "ShippingAddress":"收貨地址",
-      "ContactMerchant":"聯繫商家"
+      "ContactMerchant":"聯繫商家",
+      "result": [
+          "等待攬件",
+          "運輸中",
+          "已簽收"
+      ]
     }
   },
   "custom-made": {
