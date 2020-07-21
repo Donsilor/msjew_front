@@ -509,15 +509,16 @@ div {
   box-sizing: border-box;
 }
 .success {
-  width: 1360px;
+  max-width: 1360px;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
   background: rgba(248, 248, 248, 1);
   padding: 33px 30px 38px;
+  box-sizing: border-box;
   .order-step {
-    width: 1300px;
+    max-width: 1300px;
     height: 182px;
     background: rgba(255, 255, 255, 1);
     display: flex;
@@ -603,7 +604,7 @@ div {
     }
   }
   .success-info-in {
-    width: 1300px;
+    max-width: 1300px;
     height: 340px;
     background: rgba(255, 255, 255, 1);
     padding-top: 59px;

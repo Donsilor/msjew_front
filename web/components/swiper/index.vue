@@ -83,7 +83,12 @@ export default {
       type: Number,
       required: false,
       default: 3000
-    }
+    },
+    swiperType: {
+      type: Number,
+      required: false,
+      default: 1
+    },
   },
   data() {
     return {
@@ -289,19 +294,37 @@ export default {
       let zIndex = 0
       let left = 0
       let opacity = 0
-      if (start < ready) {
-        // 左边
-        zIndex = ready - start
-        left = zIndex * -100 - 10
-      } else if (start === ready) {
-        // 中间
-        zIndex = 0
-        left = 0
-      } else {
-        // 右边
-        zIndex = start - ready
-        left = zIndex * 100 + 10
+
+      if(this.swiperType == 2){
+        if (start < ready) {
+          // 左边
+          zIndex = ready - start
+          left = zIndex * -100
+        } else if (start === ready) {
+          // 中间
+          zIndex = 0
+          left = 0
+        } else {
+          // 右边
+          zIndex = start - ready
+          left = zIndex * 100
+        }
+      }else{
+        if (start < ready) {
+          // 左边
+          zIndex = ready - start
+          left = zIndex * -100 - 10
+        } else if (start === ready) {
+          // 中间
+          zIndex = 0
+          left = 0
+        } else {
+          // 右边
+          zIndex = start - ready
+          left = zIndex * 100 + 10
+        }
       }
+      
       left += this.getTouchMoveProprotion
 
       if (this.isMoving) {
@@ -316,6 +339,8 @@ export default {
         opacity = 0
       }
 
+      
+
       const scale = this.scale
         ? left === 0
           ? `scale(${this.scaleMultiple}, ${this.scaleMultiple})`
@@ -329,6 +354,10 @@ export default {
         zIndex,
         opacity,
         display
+      }
+
+      if(this.swiperType == 2){
+        style.left = 0
       }
 
       return style
