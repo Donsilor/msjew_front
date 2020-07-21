@@ -11,8 +11,8 @@
     <div class="address">
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
-          <span>{{ address.firstname }} {{ address.lastname }}</span
-          ><span v-if="!this.queryId">{{ lang.default }}</span>
+          <span>{{ address.firstname }} {{ address.lastname }}</span>
+          <!-- <span v-if="!this.queryId">{{ lang.default }}</span> -->
         </div>
         <p>{{ address.mobile_code }} {{ address.mobile }}</p>
         <p class="p ow-h2">
