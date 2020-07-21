@@ -6,7 +6,7 @@
         <dd>
           {{ $t(`${lang}.define`) }}
           <div class="country">
-            <div class="head">
+            <div class="head" :class="{'font-size': language == 'en_US'}">
               <div>{{ $t(`${lang}.country`) }}</div>
               <div>{{ $t(`${lang}.value`) }}</div>
               <div>{{ $t(`${lang}.country`) }}</div>
@@ -40,8 +40,12 @@ export default {
   },
   data() {
     return {
-      lang
+      lang,
+      language: ''
     }
+  },
+  mounted(){
+    this.language = this.$store.state.language
   },
   methods: {
     go(url) {
@@ -83,7 +87,7 @@ export default {
     }
     .country {
       margin-top: 10px;
-      width: 1019px;
+      width: 100%;
       border: 1px solid #d7d7d7;
       .head {
         height: 52px;
@@ -96,6 +100,7 @@ export default {
           width: 25%;
           text-align: left;
           padding-left: 10px;
+          box-sizing: border-box;
         }
       }
       ul {
@@ -121,6 +126,12 @@ export default {
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1359px) {
+  .font-size>div {
+    font-size: 12px;
   }
 }
 </style>
