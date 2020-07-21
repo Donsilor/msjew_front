@@ -5,7 +5,6 @@
       class="content"
       @touchstart.capture.prevent.stop="touchStart"
       @mousedown.capture.prevent.stop="mouseDown"
-      @click.capture="emitClick"
     >
       <template v-if="slotFinish">
         <div
@@ -16,7 +15,7 @@
             { 'active-swiper-content-item': active === n }
           ]"
           :style="getPosition(n)"
-          @click="setActive(n)"
+          @click="setActive(n,$event)"
         >
           <!--          <span>{{ n }}</span>-->
           <slot :name="`content-${n}`">
@@ -235,12 +234,16 @@ export default {
       const _this = this
       clearInterval(_this.autoInterval)
     },
-    setActive(num) {
+    setActive(num,k) {
       const _this = this
       if (_this.active === num) {
         return
       }
-      _this.active = num
+
+      if(!k){
+        _this.active = num
+      }
+
       _this.changeEmit()
     },
     goNext(type) {

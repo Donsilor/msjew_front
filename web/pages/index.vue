@@ -268,8 +268,7 @@
       </h1>
       <div class="section-title-line"></div>
       <div class="hot-list" :style="{ height: hotHeight + 'px', padding: hotPadding + 'px' + ' 0' }">
-        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.2" :indicator="false" @change="changeActiveHotProduct">
-
+        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.2" :indicator="false">
           <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
             <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
               <div class="product-image">
@@ -1037,7 +1036,7 @@ export default {
       that.arrowsTop = Math.round(bWidth * 0.1) - 20;
       that.sweetHeight = Math.round((bWidth / 1520) * 710);
       that.fontSize = Math.round((bWidth / 1366) * 38);
-      that.hotHeight = Math.round(cWidth * 0.18);
+      that.hotHeight = Math.round(cWidth * 0.144);
       that.hotPadding = Math.round(cWidth * 0.04 + 40);
       that.diamondsPadding = Math.round(cWidth * 0.05);
       if(that.fontSize > 48){
@@ -1266,6 +1265,8 @@ section {
 
 .hot {
   // padding-top: 53px;
+  width: 80%;
+  margin: 0 auto;
   background-color: #fbf8f3;
   overflow-x: hidden;
 
@@ -1379,6 +1380,8 @@ section {
 }
 
 .diamond {
+  width: 80%;
+  margin: 0 auto;
   padding: 40px 0 60px;
   background-color: #ffffff;
   overflow-x: hidden;
