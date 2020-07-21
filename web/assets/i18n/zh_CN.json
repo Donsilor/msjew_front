@@ -833,7 +833,8 @@
         "afterSale": "售后无忧",
         "afterSaleDesc": "若在可调整尺寸范围内，BDD Co. 会在前6个月内为您提供免费的戒指尺寸调整。",
         "moreAfterSaleInfo": "退款保障条款及细则",
-        "startYourDiamondCheck": "立刻开始您的钻石检查"
+        "startYourDiamondCheck": "立刻开始您的钻石检查",
+        "slidingBrowsing": "拖动鼠标浏览"
     },
     "engagementRingsList": {
         "style": "款式",
@@ -972,6 +973,7 @@
             "orderNumber": "订单编号",
             "orderStatus": "订单状态",
             "orderDetail": "订单详情",
+            "logisticsDetails":"物流详情",
             "cancelOrder": "取消订单",
             "toPay": "去付款",
             "toPayWait": "付款中",
@@ -989,6 +991,7 @@
             "waitingPay": "待付款",
             "waitingSend": "待发货",
             "waitingReceive": "待收货",
+            "shipped":"已发货",
             "waitingComment": "待评价",
             "sumbit": "提交",
             "hadReceive": "已收货",
@@ -1088,6 +1091,19 @@
             ],
             "copySuccess": "复制成功！",
             "copyFail": "复制失败，请手动复制订单号！"
+        },
+        "logisticInfo":{
+            "title": "我的订单",
+            "logistic":"物流信息",
+            "received":"已签收",
+            "intransit":"运输中",
+            "WaitingPackage":"等待揽件",
+            "noexpress":"暂无物流信息",
+            "result": [
+                "等待揽件",
+                "运输中",
+                "已签收"
+            ]
         }
     },
     "cart": {
@@ -1298,7 +1314,8 @@
         "activityTime": "活动截止时间",
         "oddPrice": "原  价",
         "newPrice": "折后价",
-        "needLogin": "请先登录，才能领取优惠券"
+        "needLogin": "请先登录，才能领取优惠券",
+        "buyNow":"立即购买"
     },
     "policies": {
         "layout": {

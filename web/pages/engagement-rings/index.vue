@@ -117,7 +117,7 @@
                   <img :src="item.goodsImages[0]" />
                 </div>
                 <div class="price">
-                  {{ item.coinType }}
+                  {{ formatCoin(item.coinType) }}
                   {{ formatMoney(item.salePrice) }}
                 </div>
                 <div class="name">{{ item.goodsName }}</div>
@@ -126,11 +126,13 @@
           </div>
         </div>
         <div class="more">
-          <nuxt-link target="_blank" :to="{ path: '/engagement-rings/all' }">
+          <nuxt-link target="_blank" :to="{ path: '/wedding-rings/engagement-ring' }">
             <button>{{ $t(`${lang}.more`) }}</button>
             <img src="/wedding-rings/arrow-right.png" />
           </nuxt-link>
         </div>
+
+        <div class="sliding-browsing"><span>*</span>{{ $t(`${lang}.slidingBrowsing`) }}</div>
       </div>
     </section>
     <section class="believe-us">
@@ -209,23 +211,7 @@ const lang = 'engagementRing'
 export default {
   mixins: [CategoryIndexPage],
   head() {
-    return this.seoInfo || {
-      title: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網',
-      meta: [
-        {
-          name: 'title',
-          content: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網'
-        },
-        {
-          name: 'description',
-          content: 'BDD官網商品列表推出手鍊, 手鐲, 白金, 耳環, 戒指等鉆石珠寶和K金首飾圖片，裸鉆價格、鉑金價格以及K金價格介紹。'
-        },
-        {
-          name: 'keywords',
-          content: '手鍊, 手鐲, 白金, 耳環, 戒指, k金, 項鍊, 黃金, 鉑金, 鉆石'
-        }
-      ]
-    }
+    return this.seoInfo || {}
   },
   data() {
     return {
@@ -277,7 +263,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(2)
+    const seoInfo = await app.$getSeoInfo('engagementRing')
     return $axios({
       method: 'get',
       url: '/web/goods/style/web-site',
@@ -788,7 +774,7 @@ section {
           color: #f29b87;
           font-size: 24px;
           font-weight: 300;
-          margin-bottom: 15px;
+          margin: 10px 0;
           font-family: twCenMt;
           -webkit-transition: all 0.2s ease-in-out;
           -moz-transition: all 0.2s ease-in-out;
@@ -928,6 +914,25 @@ section {
         }
       }
     }
+  }
+}
+
+.sliding-browsing{
+  position: absolute;
+  bottom: -36px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: #bbb;
+  height: 20px;
+
+  span{
+    font-size: 18px;
+    display: inline-block;
+    margin-right: 2px;
+    height: 20px;
+    vertical-align: middle;
   }
 }
 </style>

@@ -200,275 +200,275 @@
             </a>
           </el-carousel-item>
 
-        <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
-                   有链接地址，且是外部链接
-          <a
-            v-if="item.openType === 1 && item.url"
-            :href="item.url"
-            target="_blank"
-          >
-            <div class="banner-item">
-              <img :src="item.image" />
-            </div>
-          </a>
-                   有链接地址，且不是外部链接
-          <nuxt-link
-            v-else-if="item.url && !item.isOutUrl"
-            :to="{ path: item.url }"
-          >
-            <div class="banner-item">
-              <img :src="item.image" />
-            </div>
-          </nuxt-link>
-                   有链接地址，且是外部链接
-          <a v-else-if="item.url && item.isOutUrl" :href="item.url">
-            <div class="banner-item">
-              <img :src="item.image" />
-            </div>
-          </a>
-                   没有链接地址
-          <div v-else-if="!item.url" class="banner-item">
-            <img :src="item.image" />
-          </div>
-        </el-carousel-item> -->
-      </el-carousel>
-    </section>
-    <section class="design">
-      <h1 class="section-title">
-        {{ $t(`${lang}.designYourEngagementRing`) }}
-      </h1>
-      <h2 class="section-sub-title">{{ $t(`${lang}.startFromDiamond`) }}</h2>
-      <interactive></interactive>
-    </section>
-    <section class="recommend-category">
-      <div class="categories">
-        <div v-for="(category, index) in recommendCategories" :key="index" class="category-item">
-          <nuxt-link :to="category.to">
-            <div class="bg">
-              <img :src="category.bgImage" />
-              <div class="hover-cover"></div>
-            </div>
-            <div class="info">
-              <h1 class="title">{{ category.title }}</h1>
-              <h2 class="sub-title">{{ category.subTitle }}</h2>
-              <div class="info-border-line border-t"></div>
-              <div class="info-border-line border-r"></div>
-              <div class="info-border-line border-b"></div>
-              <div class="info-border-line border-l"></div>
-            </div>
-          </nuxt-link>
-        </div>
-      </div>
-    </section>
-
-    <!--    首頁商品推薦模塊-->
-    <section class="hot">
-      <h1 class="section-title">
-        {{ hotProductInfo.title }}
-      </h1>
-      <div class="section-title-line"></div>
-      <div class="hot-list" :style="{ height: hotProductItemWidth + 'px' }">
-        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveHotProduct">
-
-          <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
-            <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
-              <div class="product-image">
-                <img class="product-image" :src="product.goodsImages[0]" />
+          <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
+                    有链接地址，且是外部链接
+            <a
+              v-if="item.openType === 1 && item.url"
+              :href="item.url"
+              target="_blank"
+            >
+              <div class="banner-item">
+                <img :src="item.image" />
               </div>
             </a>
-            <nuxt-link v-else :to="product.to">
-              <div class="product-image">
-                <img class="product-image" :src="product.goodsImages[0]" />
+                    有链接地址，且不是外部链接
+            <nuxt-link
+              v-else-if="item.url && !item.isOutUrl"
+              :to="{ path: item.url }"
+            >
+              <div class="banner-item">
+                <img :src="item.image" />
               </div>
             </nuxt-link>
-          </div>
-        </swiper>
-      </div>
-      <div class="hot-list-bar">
-        <div class="left-button" @click="nextActiveHotProduct(false)">
-          <img src="/index/arrow-left.png" />
-        </div>
-        <div class="active-product-info">
-          <h1 class="title ow-h1">{{ activeHotProductInfo.goodsName }}</h1>
-        </div>
-        <div class="right-button" @click="nextActiveHotProduct(true)">
-          <img src="/index/arrow-right.png" />
-        </div>
-      </div>
-    </section>
-    <section class="diamond-gia">
-      <div class="bg">
-        <img src="/index/middle-gia.png" />
-      </div>
-      <div class="content">
-        <h1 class="title">
-          {{ $t(`${lang}.haveProfessionalCertificate`) }}
-        </h1>
-        <p class="description">
-          {{ $t(`${lang}.professionalCertificateInfo`) }}
-        </p>
-        <div class="button-group">
-          <nuxt-link :to="{ path: '/education/diamonds/certification' }">
-            <button class="check-now">
-              {{ $t(`${lang}.startYourDiamondCheck`) }}
-            </button>
-          </nuxt-link>
-        </div>
-      </div>
-    </section>
-
-    <!--    钻石类型-->
-    <section class="diamond">
-      <h1 class="section-title">
-        {{ $t(`${lang}.chooseYourDiamond`) }}
-      </h1>
-      <div class="section-title-line"></div>
-      <h2 class="section-sub-title">
-        {{ $t(`${lang}.360DiamondInfo`) }}
-      </h2>
-      <div class="diamond-list" :style="{ height: diamondItemWidth + 'px' }">
-        <swiper ref="diamond-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveDiamond">
-          <div v-for="(diamond, n) in diamonds" :key="n" class="product-item">
-            <nuxt-link :to="diamond.to">
-              <div class="product-image">
-                <img class="product-image" :src="diamond.img" />
+                    有链接地址，且是外部链接
+            <a v-else-if="item.url && item.isOutUrl" :href="item.url">
+              <div class="banner-item">
+                <img :src="item.image" />
               </div>
-            </nuxt-link>
-          </div>
-        </swiper>
-      </div>
-      <div class="diamond-list-bar">
-        <div class="left-button" @click="nextActiveDiamond(false)">
-          <img src="/index/arrow-left.png" />
-        </div>
-        <div class="active-product-info">
-          <h1 class="title ow-h1">{{ activeDiamondInfo.name }}</h1>
-          <h2 class="sub-title ow-h1">{{ activeDiamondInfo.desc }}</h2>
-        </div>
-        <div class="right-button" @click="nextActiveDiamond(true)">
-          <img src="/index/arrow-right.png" />
-        </div>
-      </div>
-    </section>
-    <section class="jewellery">
-      <h1 class="jewellery-section-top">
-        {{ $t(`${lang}.findYourSparkle`) }}
-      </h1>
-      <div class="section-content">
+            </a>
+                    没有链接地址
+            <div v-else-if="!item.url" class="banner-item">
+              <img :src="item.image" />
+            </div>
+          </el-carousel-item> -->
+        </el-carousel>
+      </section>
+      <section class="design">
         <h1 class="section-title">
-          {{ $t(`${lang}.jewelry`) }}
+          {{ $t(`${lang}.designYourEngagementRing`) }}
+        </h1>
+        <h2 class="section-sub-title">{{ $t(`${lang}.startFromDiamond`) }}</h2>
+        <interactive></interactive>
+      </section>
+      <section class="recommend-category">
+        <div class="categories">
+          <div v-for="(category, index) in recommendCategories" :key="index" class="category-item">
+            <nuxt-link :to="category.to">
+              <div class="bg">
+                <img :src="category.bgImage" />
+                <div class="hover-cover"></div>
+              </div>
+              <div class="info">
+                <h1 class="title">{{ category.title }}</h1>
+                <h2 class="sub-title">{{ category.subTitle }}</h2>
+                <div class="info-border-line border-t"></div>
+                <div class="info-border-line border-r"></div>
+                <div class="info-border-line border-b"></div>
+                <div class="info-border-line border-l"></div>
+              </div>
+            </nuxt-link>
+          </div>
+        </div>
+      </section>
+
+      <!--    首頁商品推薦模塊-->
+      <section class="hot">
+        <h1 class="section-title">
+          {{ hotProductInfo.title }}
+        </h1>
+        <div class="section-title-line"></div>
+         <div class="hot-list" :style="{ height: hotHeight + 'px', padding: hotPadding + 'px' + ' 0' }">
+         <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.2" :indicator="false" @change="changeActiveHotProduct">
+            <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
+              <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
+                <div class="product-image">
+                  <img class="product-image" :src="product.goodsImages[0]" />
+                </div>
+              </a>
+              <nuxt-link v-else :to="product.to">
+                <div class="product-image">
+                  <img class="product-image" :src="product.goodsImages[0]" />
+                </div>
+              </nuxt-link>
+            </div>
+          </swiper>
+        </div>
+        <div class="hot-list-bar">
+          <div class="left-button" @click="nextActiveHotProduct(false)">
+            <img src="/index/arrow-left.png" />
+          </div>
+          <div class="active-product-info">
+            <h1 class="title ow-h1">{{ activeHotProductInfo.goodsName }}</h1>
+          </div>
+          <div class="right-button" @click="nextActiveHotProduct(true)">
+            <img src="/index/arrow-right.png" />
+          </div>
+        </div>
+      </section>
+      <section class="diamond-gia">
+        <div class="bg">
+          <img src="/index/middle-gia.png" />
+        </div>
+        <div class="content">
+          <h1 class="title">
+            {{ $t(`${lang}.haveProfessionalCertificate`) }}
+          </h1>
+          <p class="description">
+            {{ $t(`${lang}.professionalCertificateInfo`) }}
+          </p>
+          <div class="button-group">
+            <nuxt-link :to="{ path: '/education/diamonds/certification' }">
+              <button class="check-now">
+                {{ $t(`${lang}.startYourDiamondCheck`) }}
+              </button>
+            </nuxt-link>
+          </div>
+        </div>
+      </section>
+
+      <!--    钻石类型-->
+      <section class="diamond">
+        <h1 class="section-title">
+          {{ $t(`${lang}.chooseYourDiamond`) }}
         </h1>
         <div class="section-title-line"></div>
         <h2 class="section-sub-title">
-          {{ $t(`${lang}.goodForYouEverywhere`) }}
+          {{ $t(`${lang}.360DiamondInfo`) }}
         </h2>
-        <ul class="categories">
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.eternityRingsSlow`) }}
-            </div>
-            <div class="category">
-              <div class="bg">
-                <img src="/index/jewelry-1.png" />
-              </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.eternalRing`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.eternityRingsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: '/engagement-rings/all' }">
-                    <button>{{ $t(`${lang}.explore`) }}</button>
-                  </nuxt-link>
+        <div class="diamond-list" :style="{ height: hotHeight + 'px', padding: diamondsPadding + 'px' + ' 0' }">
+          <swiper ref="diamond-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveDiamond">
+            <div v-for="(diamond, n) in diamonds" :key="n" class="product-item">
+              <nuxt-link :to="diamond.to">
+                <div class="product-image">
+                  <img class="product-image" :src="diamond.img" />
                 </div>
-              </div>
-            </div>
-          </li>
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.menWedding`) }}
-            </div>
-            <div class="category">
-              <div class="bg">
-                <img src="/index/jewelry-2.png" />
-              </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.menWeddingRings`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.menWeddingRingsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: '/wedding-rings/mens-classic' }">
-                    <button>{{ $t(`${lang}.discover`) }}</button>
-                  </nuxt-link>
-                </div>
-              </div>
-            </div>
-          </li>
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.diamondStuds`) }}
-            </div>
-            <div class="category">
-              <div class="bg">
-                <img src="/index/jewelry-3.png" />
-              </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.diamondStudEarrings`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.diamondStudsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: 'jewellery/ear-stud' }">
-                    <button>{{ $t(`${lang}.browse`) }}</button>
-                  </nuxt-link>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-    <section class="waiting-you">
-      <h1 class="section-title">
-        {{ $t(`${lang}.yourDiamondWaiting`) }}
-      </h1>
-      <div class="section-title-line"></div>
-      <div class="section-content">
-        <div class="item left-item">
-          <div class="picture">
-            <img src="/index/shop-left.png" />
-          </div>
-          <div class="content">
-            <h2 class="sub-title">{{ $t(`${lang}.understand`) }}</h2>
-            <h1 class="title">{{ $t(`${lang}.brandStory`) }}</h1>
-            <p class="desc">
-              {{ $t(`${lang}.witnessContentFirstLine`) }}<br />
-              {{ $t(`${lang}.witnessContentSecondLine`) }}<br />
-              {{ $t(`${lang}.witnessContentThirdLine`) }}
-            </p>
-            <div class="button-group">
-              <nuxt-link :to="{ path: '/policies/quality-value' }">
-                <button>{{ $t(`${lang}.scheduleAppointment`) }}</button>
               </nuxt-link>
+            </div>
+          </swiper>
+        </div>
+        <div class="diamond-list-bar">
+          <div class="left-button" @click="nextActiveDiamond(false)">
+            <img src="/index/arrow-left.png" />
+          </div>
+          <div class="active-product-info">
+            <h1 class="title ow-h1">{{ activeDiamondInfo.name }}</h1>
+            <h2 class="sub-title ow-h1">{{ activeDiamondInfo.desc }}</h2>
+          </div>
+          <div class="right-button" @click="nextActiveDiamond(true)">
+            <img src="/index/arrow-right.png" />
+          </div>
+        </div>
+      </section>
+      <section class="jewellery">
+        <h1 class="jewellery-section-top">
+          {{ $t(`${lang}.findYourSparkle`) }}
+        </h1>
+        <div class="section-content">
+          <h1 class="section-title">
+            {{ $t(`${lang}.jewelry`) }}
+          </h1>
+          <div class="section-title-line"></div>
+          <h2 class="section-sub-title">
+            {{ $t(`${lang}.goodForYouEverywhere`) }}
+          </h2>
+          <ul class="categories">
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.eternityRingsSlow`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-1.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.eternalRing`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.eternityRingsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: '/engagement-rings/all' }">
+                      <button>{{ $t(`${lang}.explore`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.menWedding`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-2.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.menWeddingRings`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.menWeddingRingsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: '/wedding-rings/mens-classic' }">
+                      <button>{{ $t(`${lang}.discover`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.diamondStuds`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-3.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.diamondStudEarrings`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.diamondStudsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: 'jewellery/ear-stud' }">
+                      <button>{{ $t(`${lang}.browse`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="waiting-you">
+        <h1 class="section-title">
+          {{ $t(`${lang}.yourDiamondWaiting`) }}
+        </h1>
+        <div class="section-title-line"></div>
+        <div class="section-content">
+          <div class="item left-item">
+            <div class="picture">
+              <img src="/index/shop-left.png" />
+            </div>
+            <div class="content">
+              <h2 class="sub-title">{{ $t(`${lang}.understand`) }}</h2>
+              <h1 class="title">{{ $t(`${lang}.brandStory`) }}</h1>
+              <p class="desc">
+                {{ $t(`${lang}.witnessContentFirstLine`) }}<br />
+                {{ $t(`${lang}.witnessContentSecondLine`) }}<br />
+                {{ $t(`${lang}.witnessContentThirdLine`) }}
+              </p>
+              <div class="button-group">
+                <nuxt-link :to="{ path: '/policies/quality-value' }">
+                  <button>{{ $t(`${lang}.scheduleAppointment`) }}</button>
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+          <div class="item right-item">
+            <div class="content">
+              <h2 class="sub-title">{{ $t(`${lang}.expertLevel`) }}</h2>
+              <h1 class="title">{{ $t(`${lang}.customerService`) }}</h1>
+              <p class="desc">
+                {{ $t(`${lang}.customerServiceInfo`) }}
+              </p>
+              <div class="button-group">
+                <nuxt-link :to="{ path: '/contact-us' }">
+                  <button>{{ $t(`${lang}.contactUs`) }}</button>
+                </nuxt-link>
+              </div>
+            </div>
+            <div class="picture">
+              <img src="/index/shop-right.png" />
             </div>
           </div>
         </div>
-        <div class="item right-item">
-          <div class="content">
-            <h2 class="sub-title">{{ $t(`${lang}.expertLevel`) }}</h2>
-            <h1 class="title">{{ $t(`${lang}.customerService`) }}</h1>
-            <p class="desc">
-              {{ $t(`${lang}.customerServiceInfo`) }}
-            </p>
-            <div class="button-group">
-              <nuxt-link :to="{ path: '/contact-us' }">
-                <button>{{ $t(`${lang}.contactUs`) }}</button>
-              </nuxt-link>
-            </div>
-          </div>
-          <div class="picture">
-            <img src="/index/shop-right.png" />
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
-  </div>
+  
 </template>
 
 <script>
@@ -852,8 +852,9 @@ export default {
       arrowsTop: 0,
       sweetHeight: 0,
       fontSize: 0,
-      hotProductItemWidth: 0,
-      diamondItemWidth: 0
+      hotHeight: 0,
+      hotPadding: 0,
+      diamondsPadding: 0
     }
   },
   computed: {
@@ -1027,10 +1028,18 @@ export default {
         bWidth = 1520
       }
 
+      var cWidth = document.body.clientWidth;
+      if(cWidth < 1200){
+        cWidth = 1200
+      }
+
       that.sImgHeight = Math.round(bWidth * 0.2) + 70;
       that.arrowsTop = Math.round(bWidth * 0.1) - 20;
       that.sweetHeight = Math.round((bWidth / 1520) * 710);
       that.fontSize = Math.round((bWidth / 1366) * 38);
+      that.hotHeight = Math.round(cWidth * 0.18);
+      that.hotPadding = Math.round(cWidth * 0.04 + 40);
+      that.diamondsPadding = Math.round(cWidth * 0.05);
       if(that.fontSize > 48){
         that.fontSize = 48
       }
@@ -1066,8 +1075,7 @@ section {
     /*font-weight: bold;*/
     color: rgba(51, 51, 51, 1);
     text-align: center;
-    padding-top: 30px;
-    padding-bottom: 50px;
+    padding: 30px 0;
     z-index: 2;
   }
   .section-sub-title {
@@ -1264,16 +1272,23 @@ section {
   .hot-list {
     width: 100%;
     background-color: #ffffff;
-    margin-top: -15px;
-    padding: 6% 0 6% 0;
 
     .product-item {
+      height: 100%;
       .product-image {
+        height: 100%;
         font-size: 0;
         line-height: 0;
+        position: relative;
+        overflow: hidden;
 
         .product-image {
+          position: absolute;
           width: 100%;
+          height: auto;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
         }
       }
     }
@@ -1364,7 +1379,7 @@ section {
 }
 
 .diamond {
-  padding-top: 41px;
+  padding: 40px 0 60px;
   background-color: #ffffff;
   overflow-x: hidden;
 
@@ -1374,23 +1389,30 @@ section {
 
   .diamond-list {
     width: 100%;
-    padding: 3% 0 5% 0;
     box-sizing: content-box;
     background-color: #ffffff;
 
     .product-item {
+      height: 100%;
       .product-image {
+        height: 100%;
         font-size: 0;
         line-height: 0;
+        position: relative;
+        overflow: hidden;
 
         .product-image {
+          position: absolute;
           width: 100%;
+          height: auto;
+          top: 50%;
+          left: 0;
+          transform: translateY(-50%);
         }
       }
     }
   }
   .diamond-list-bar {
-    padding-bottom: 119px;
     background-color: #ffffff;
     display: flex;
     flex-direction: row;

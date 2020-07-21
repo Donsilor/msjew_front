@@ -115,8 +115,33 @@
 import List from '@/mixins/list.js'
 import GoodListProps from '@/mixins/good-search-list-props.js'
 export default {
+  head() {
+    return this.seoInfo || {}
+  },
   layout: 'no-bar',
   mixins: [List, GoodListProps],
+  async asyncData({ $axios, route, store, app }) {
+    const seoInfo = await app.$getSeoInfo('Jewellery')
+
+    return $axios({
+      method: 'get',
+      url: '/wap/goods/style/web-site',
+      params: {
+        type: 2
+      }
+    })
+      .then(data => {
+        return {
+          seoInfo,
+          ad: data.advert,
+          webSite: data.webSite,
+          actIndex: route.query.actIndex ? parseFloat(route.query.actIndex) : -1
+        }
+      })
+      .catch(err => {
+        console.error(err)
+      })
+  },
   data() {
     return {
       lang: this.LANGUAGE.search.result,
