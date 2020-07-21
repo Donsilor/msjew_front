@@ -428,6 +428,25 @@
 import Mx from './diamond-mixin'
 // import soleOut from '@/components/goods-sole-out/index.vue'
 export default {
+   head() {
+    return {
+      title: this.goodInfo.goodsName,
+      meta: [
+        {
+          name: 'title',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'description',
+          content: this.goodInfo.goodsName,
+        },
+        {
+          name: 'keywords',
+          content: this.goodInfo.goodsName,
+        }
+      ]
+    }
+  },
   data() {
     return {
       ifShowCoupon: false,

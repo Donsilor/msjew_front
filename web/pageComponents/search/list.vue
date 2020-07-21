@@ -149,6 +149,10 @@ import Operate from '@/mixins/operate.js'
 const CancelToken = Axios.CancelToken
 const lang = 'search'
 export default {
+  head() {
+    return this.seo || {}
+  },
+  props:['seo'],
   mixins: [List, Operate],
   data() {
     return {

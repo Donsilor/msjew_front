@@ -63,23 +63,26 @@ export default ({ req, app, store, $axios }, inject) => {
             }
         })
             .then(res => {
-                var data = res.data
-                return {
-                    title: data.meta_title,
-                    meta: [
-                        {
-                            name: 'title',
-                            content: data.meta_title
-                        },
-                        {
-                            name: 'description',
-                            content: data.meta_desc
-                        },
-                        {
-                            name: 'keywords',
-                            content: data.meta_word
-                        }
-                    ]
+                // console.log("sss",res.data)
+                if(res.data){
+                    var data = res.data
+                    return {
+                        title: data.meta_title,
+                        meta: [
+                            {
+                                name: 'title',
+                                content: data.meta_title
+                            },
+                            {
+                                name: 'description',
+                                content: data.meta_desc
+                            },
+                            {
+                                name: 'keywords',
+                                content: data.meta_word
+                            }
+                        ]
+                    }
                 }
             })
             .catch(err => {
