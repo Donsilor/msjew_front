@@ -388,7 +388,6 @@
               </div>
               <!-- vise -->
               <div
-                v-show="this.$store.state.platform !== 40"
                 :class="{ 'pay-choose': payWay == 61 }"
                 class="pay-block"
                 @click="Way(61)"
@@ -494,7 +493,7 @@
               </div>
               <!-- 信用卡 -->
               <div
-                v-show="this.$store.state.platform !== 30"
+                v-show="this.$store.state.platform == 10 || this.$store.state.platform == 20"
                 :class="{ 'pay-choose': payWay == 81 }"
                 class="pay-block"
                 @click="Way(81)"
@@ -1573,7 +1572,7 @@
               </div> -->
               <!-- 微信 -->
               <div
-                v-show="this.$store.state.platform !== 30"
+                v-show="this.$store.state.platform == 10 || this.$store.state.platform == 20"
                 :class="{ 'pay-choose': payWay == 83 }"
                 class="pay-block"
                 @click="Way(83)"
@@ -1595,7 +1594,7 @@
               </div>
               <!-- 信用卡 -->
               <div
-                v-show="this.$store.state.platform !== 30"
+                v-show="this.$store.state.platform == 10 || this.$store.state.platform == 20"
                 :class="{ 'pay-choose': payWay == 3 }"
                 class="pay-block"
                 @click="Way(81)"

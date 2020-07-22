@@ -149,7 +149,9 @@
                       </p>
                     </div> -->
                   </div>
-                  <b class="double-ring-price" v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <div class="double-ring-price" v-if="!item.coupon.discount">
+                    <b  >{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  </div>
                   <div class="discount-price" v-else>
                     <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
                     <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
@@ -1036,7 +1038,7 @@ export default {
               font-weight: 400;
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
-              margin-left: 15px;
+              // margin-left: 15px;
             }
             .double-ring-price{
               font-size: 17px;
@@ -1045,9 +1047,9 @@ export default {
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
               text-align: left;
-              margin-right: 102px;
-              // margin-left: 30px;
-              display: inline-block;
+              margin-left: 140px;
+              // margin-right:20px;
+              // margin-left: 65px;
               margin-top: 10px;
             }
             .cut-line{

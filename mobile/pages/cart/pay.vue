@@ -308,10 +308,10 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
         },
         {
           url: '/cart/ph.png',
@@ -408,11 +408,7 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        if(this.$store.state.platform === 41){
-          pay = 81
-        }else{
           pay = 61
-        }
       }else if(this.typeIndex == 2){
         if(this.$store.state.platform === 21){
           pay = 82

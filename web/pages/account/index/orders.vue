@@ -86,7 +86,7 @@
 
                 <div class="right">
                   <span>1</span>
-                  <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(detail.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                  <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
                   <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
                 </div>
               </div>
@@ -917,7 +917,7 @@ div {
                 text-align: center;
               }
               span:nth-child(1) {
-                color: #f29b87;
+                color: #b9b4b4;
               }
               span:nth-child(1).old-price {
                 color: #b2b2b2;
@@ -1091,7 +1091,7 @@ div {
                 text-align: center;
               }
               span:nth-child(2) {
-                color: #f29b87;
+                color: #b9b4b4;
               }
               span:nth-child(2).old-price {
                 color: #b2b2b2;
