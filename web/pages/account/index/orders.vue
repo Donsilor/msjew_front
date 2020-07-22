@@ -917,7 +917,7 @@ div {
                 text-align: center;
               }
               span:nth-child(1) {
-                color: #b9b4b4;
+                color: #f29b87;
               }
               span:nth-child(1).old-price {
                 color: #b2b2b2;
@@ -1091,7 +1091,7 @@ div {
                 text-align: center;
               }
               span:nth-child(2) {
-                color: #b9b4b4;
+                color: #f29b87;
               }
               span:nth-child(2).old-price {
                 color: #b2b2b2;
