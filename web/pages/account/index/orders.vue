@@ -250,7 +250,7 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
-            <div
+            <!-- <div
               class="fakeA"
               @click="
                 receiveOrder = true
@@ -258,7 +258,7 @@
               "
             >
               {{ $t(`${lang}.confirmReceipt`) }}
-            </div>
+            </div> -->
             <span
               >{{ $t(`${lang}.ultimatelyPay`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
