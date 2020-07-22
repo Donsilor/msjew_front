@@ -92,18 +92,18 @@
                                     <div></div>
                                     <i class="node-icon"></i>
                                     <span class="txt" :class="{more:more}">{{item.remark}}</span>
-                                    <span class="time">{{item.datetime}}</span>
+                                    <span class="time">{{item.datetime.slice(5,16)}}</span>
                                 </li>
                                 <li v-if="index > 0 && index !== list.length-1">
                                     <i class="node-icon"></i>
                                     <span class="txt" :class="{more:more}">{{item.remark}}</span>
-                                    <span class="time">{{item.datetime}}</span>
+                                    <span class="time">{{item.datetime.slice(5,16)}}</span>
                                 </li>
                                 <li v-if="index === list.length-1 && list.length >1" class="finall">
                                     <i class="div-spilander"></i>
                                     <i class="node-icon"></i>
                                     <span class="txt" :class="{more:more}">{{item.remark}}</span>
-                                    <span class="time">{{item.datetime}}</span>
+                                    <span class="time">{{item.datetime.slice(5,16)}}</span>
                                 </li>
                                 <li v-if="index === list.length-1 && list.length == 1" class="finall">
                                     <i class="div-spilander"></i>
@@ -245,7 +245,14 @@ export default {
                 padding: 10px 0;
             }
             .address{
+                /*! autoprefixer: off */
+                width: 260px;
                 font-size: 12px;
+                overflow:hidden;
+                text-overflow: ellipsis;
+                display:-webkit-box;
+                -webkit-line-clamp:2;
+                -webkit-box-orient:vertical;
                 // padding: 5px 0;
                 // color: #999999;
             }
@@ -529,7 +536,7 @@ export default {
         font-size: 13px;
     }
     ul {
-        padding-left: 80px
+        padding-left: 40px
     }
     .track-list{
         position:relative;
@@ -573,8 +580,8 @@ export default {
         // margin-right:20px;
         line-height: 20px;
         position: absolute;
-        width: 34%;
-        left:-85px;
+        width: 15%;
+        left:-50px;
         top: 0; 
         // top:-10px;
         display:inline-block;
@@ -589,16 +596,16 @@ export default {
         display:inline-block;
         vertical-align:top;
         color: #999;
-        width: 200px;
+        width: 245px;
         line-height: 25px;
         font-size: 13px;
     }
     .more{
-        overflow: hidden;
-        text-overflow:ellipsis;
-        word-wrap: break-word;
-        word-break: break-all;
-        white-space: nowrap; 
+        // overflow: hidden;
+        // text-overflow:ellipsis;
+        // word-wrap: break-word;
+        // word-break: break-all;
+        // white-space: nowrap; 
     }
     .track-list li.first .time{
         text-align: left;
