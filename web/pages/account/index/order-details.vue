@@ -1,14 +1,14 @@
 <template>
   <div class="order-details">
     <div class="od-top">
-      <nuxt-link to="/account/orders"
-        ><div>
+      <nuxt-link to="/account/orders" class="crumbs">
+        <div>
           <span>{{ $t(`${lang}.title`) }}</span> >>
           {{ $t(`${lang}.orderTitle`) }}
-        </div></nuxt-link
-      >
-      <div>
-        <p v-for="(step, ns) in statusSteps" :key="ns">
+        </div>
+      </nuxt-link>
+      <div class="step-box">
+        <p v-for="(step, ns) in statusSteps" :key="ns" class="step-p">
           <span
             :style="{
               'background-color': step.active
@@ -22,7 +22,10 @@
             >{{ step.title }}</span
           >
         </p>
-        <div
+
+        <div class="line"></div>
+
+        <!-- <div
           v-for="(step, index) in statusSteps"
           :key="index + 'what'"
           class="top-line"
@@ -38,7 +41,7 @@
             }"
             class="top-line-line"
           ></div>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -196,7 +199,6 @@
                 </div>
               </nuxt-link>
               <div class="t2">1</div>
-            </div>
               <!-- <div class="t3">
                 {{ formatCoin(data.coinCode) }} {{ formatMoney(doubleRingGoodPrice) }} 
               </div> -->
@@ -206,6 +208,7 @@
               <div class="t4">
                 {{ formatCoin (data.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}
               </div>
+            </div>
           </div>
           <!-- 定制 -->
           <div v-else class="detail-info customization">
@@ -592,7 +595,7 @@ export default {
         })
         .then(res => {
           this.data = res.data
-          // console.log("this.data",this.data)
+          console.log("this.data",this.data)
           this.invoice = res.data.invoice
           this.orderStatus = res.data.orderStatus
           // console.log("data",this.orderStatus)
@@ -709,23 +712,25 @@ export default {
     align-items: flex-start;
     margin-bottom: 50px;
     div:nth-child(1) {
-      height: 17px;
-      line-height: 17px;
+      height: 18px;
+      line-height: 18px;
       font-size: 16px;
       color: rgba(242, 155, 135, 1);
     }
     div:nth-child(2) {
-      width: 424+25+48+53+100px;
+      width: calc(100% - 226px);
+      margin-left: 40px;
       display: flex;
       justify-content: space-between;
       position: relative;
+      z-index: 2;
       p {
         // width: 80px;
         text-align: center;
         span:nth-child(1) {
           display: block;
-          width: 35px;
-          height: 35px;
+          width: 36px;
+          height: 36px;
           background: rgba(242, 155, 135, 1);
           border-radius: 50%;
           color: #ffffff;
@@ -752,17 +757,28 @@ export default {
           border-radius: 1px;
         }
       }
+      .line{
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        z-index: -1;
+        transform: translate(-50%, -50%);
+        height: 2px;
+        width: calc(100% - 120px);
+        background-color: #e6e6e6;
+        border-radius: 1px;
+      }
       .top-line:nth-child(7) {
         // left: 40+80+30+22+40+6px;
-        left:201px
+        // left:201px
       }
       .top-line:nth-child(8) {
         // left: 40+80+30+80+35+35+56+12px;
-        left:350px
+        // left:350px
       }
       .top-line:nth-child(9) {
         // left: 40+80+30+80+30+80+40+45+75+23px;
-        left:502px;
+        // left:502px;
         background-color: #e6e6e6;
       }
     }
@@ -929,11 +945,7 @@ export default {
         }
       }
     }
-    // .double{
-      
-    // }
     .goods-info {
-     
       .goods-info-title {
         width: 100%;
         box-sizing: border-box;
@@ -944,23 +956,21 @@ export default {
         font-size: 14px;
         display: flex;
         padding-left: 19px;
+        text-align: center;
         .t1 {
-          width: 520px;
+          width: 50%;
+          text-align: left;
         }
         .t2 {
-          width: 130px;
-          text-align: center;
-          margin-right: 30px;
+          width: 9%;
+          margin-right: 3%;
         }
         .t3 {
-          width: 130px;
-          text-align: center;
-          margin-right: 30px;
+          width: 15%;
+          margin-right: 6%;
         }
         .t4 {
-          width: 130px;
-          text-align: center;
-          margin-right: 30px;
+          width: 15%;
         }
       }
       .single{
@@ -971,8 +981,10 @@ export default {
           padding: 20px 0 20px 19px;
           border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
+          a{
+            width: 50%;
+          }
           .t1 {
-            width: 510px;
             display: flex;
             align-items: center;
             .good-img {
@@ -986,8 +998,10 @@ export default {
               }
             }
             .good-desc {
+              width: calc(100% - 90px);
               height: 70px;
               color: #333;
+              margin-left: 20px;
               overflow: hidden;
               margin: 0 30px 0 20px;
               .good-name {
@@ -1023,32 +1037,35 @@ export default {
             }
           }
           .t2 {
-            width: 130px;
+            width: 9%;
             text-align: center;
+            color: #333;
             font-size: 16px;
             color: #333;
-            margin-right: 30px;
+            margin-right: 3%;
           }
           .t3 {
-            width: 130px;
-            font-size: 20px;
-            font-family: twCenMt;
-            color: #f29b87;
             text-align: center;
-            margin-right: 30px;
+            width: 15%;
+            font-family: twCenMt;
+            color: #b2b2b2;
+            text-align: center;
+            margin-right: 6%;
           }
           .t3.old-price{
+            width: 15%;
+            font-family: twCenMt;
             font-size: 14px;
             color: #b2b2b2;
             text-decoration: line-through;
+            margin-right: 6%;
           }
           .t4 {
-            width: 130px;
-            font-size: 20px;
             font-family: twCenMt;
+            width: 15%;
+            font-size: 20px;
             color: #f29b87;
             text-align: center;
-            margin-right: 30px;
           }
         }
         .goods-details:nth-child(1) {
@@ -1056,16 +1073,24 @@ export default {
         }
       }
       .double{
-        position: relative;
+        .goods-details {
+          width: 100%;
+          box-sizing: border-box;
+          display: flex;
+          padding: 20px 0 20px 19px;
+          border-top: 1px solid rgba(230, 230, 230, 1);
+          align-items: center;
+        }
+        a{
+          width: 50%;
+        }
         .t3{
-          position: absolute;
-          right: 164px;
-          top:43%;
+          width: 15%;
           color: #333;
           font-family: twCenMt;
-          color: #f29b87;
+          color: #333;
           text-align: center;
-          margin-right: 30px;
+          margin-right: 3%;
           font-size: 20px;
         }
         .t3.old-price{
@@ -1074,15 +1099,11 @@ export default {
           text-decoration: line-through;
         }
         .t4 {
-          position: absolute;
-          right: -6px;
-          top:43%;
-          width: 130px;
+          width: 15%;
           font-size: 20px;
           font-family: twCenMt;
           color: #f29b87;
           text-align: center;
-          margin-right: 30px;
         }
         .goods-details:nth-child(2) {
           border-top: 0;
@@ -1125,7 +1146,7 @@ export default {
           align-items: center;
           position: relative;
           .t1 {
-            width: 936-250.5-163.5-20px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -1179,16 +1200,18 @@ export default {
           }
           .t2 {
             text-align: center;
-            width: 51+ (113/2)+56-23px;
+            width: 9%;
             color: #333;
             font-size: 16px;
+            margin-right: 3%;
           }
           .t3 {
             text-align: center;
-            width: 56+ (113/2)+138px;
-            color: #333;
+            width: 15%;
+            color: #b2b2b2;
             font-family: twCenMt;
-            font-size: 20px;
+            font-size: 14px;
+            margin-right: 6%;
           }
           
         }
@@ -1202,7 +1225,7 @@ export default {
           border-top: 1px solid rgba(230, 230, 230, 1);
           align-items: center;
           .t1 {
-            width: 510px;
+            width: 100%;
             display: flex;
             align-items: center;
             .good-img {
@@ -1253,13 +1276,16 @@ export default {
           .t2 {
             width: 130px;
             text-align: center;
+            width: 16%;
+            color: #333;
             font-size: 16px;
             color: #333;
             margin-right: 30px;
           }
           .t3 {
-            width: 130px;
-            font-size: 20px;
+            text-align: center;
+            width: 22%;
+            color: #b2b2b2;
             font-family: twCenMt;
             color: #f29b87;
             text-align: center;
@@ -1273,10 +1299,7 @@ export default {
           .t4 {
             width: 130px;
             font-size: 20px;
-            font-family: twCenMt;
-            color: #f29b87;
-            text-align: center;
-            margin-right: 30px;
+            margin-right: 2%;
           }
         }
         .goods-details:nth-child(2) {
@@ -1302,7 +1325,7 @@ export default {
     }
   }
   .bot-info {
-    width: 936px;
+    // width: 936px;
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
@@ -1337,6 +1360,7 @@ export default {
           justify-content: space-between;
           align-items: center;
           padding: 0 20px;
+          box-sizing: border-box;
           input {
             text-align: right;
             width: 230px;
@@ -1487,6 +1511,13 @@ export default {
       }
     }
   }
+}
+.step-p{
+  width: 120px;
+}
+
+.t1-wrap{
+  width: 60%;
 }
 
 .fontSize{

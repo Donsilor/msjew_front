@@ -2110,13 +2110,14 @@ export default {
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           this.good = res
-          
+          // console.log("this.good",this.good)
+          // console.log("this.pathTakeIds", this.pathTakeIds)
           this.productCount = this.good.length
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
             if(res[i].groupType === 2){
               this.productCount = this.productCount + 1
-             console.log("ffff", this.productCount)
+            //  console.log("ffff", this.productCount)
             }
           }
 
@@ -3332,15 +3333,18 @@ div {
   box-sizing: border-box;
 }
 .order {
-  width: 1360px;
+  max-width: 1360px;
+  min-width: 1200px;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
   background: rgba(248, 248, 248, 1);
   padding: 33px 30px 60px;
+  box-sizing: border-box;
   .order-step {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     height: 182px;
     background: rgba(255, 255, 255, 1);
     display: flex;
@@ -3441,13 +3445,15 @@ div {
   }
   .address-box {
     position: relative;
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     overflow: hidden;
     transition: 0.3s linear;
     margin-bottom: 22px;
     box-sizing: border-box;
     .addr-blocks {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -3455,14 +3461,16 @@ div {
       box-sizing: border-box;
       .addr-block {
         position: relative;
-        width: 635px;
+        width: 49%;
         height: 250px;
         padding: 25px 30px 0;
+        box-sizing: border-box;
         margin-bottom: 20px;
         border: 1px solid rgba(230, 230, 230, 1);
         background-color: #ffffff;
         box-sizing: border-box;
         .addr-title {
+          max-width: 82%;
           display: flex;
           align-items: flex-end;
           margin-bottom: 10px;
@@ -3476,6 +3484,7 @@ div {
           }
         }
         .addr-user {
+          max-width: 82%;
           display: flex;
           font-size: 22px;
           align-items: center;
@@ -3497,6 +3506,7 @@ div {
           }
         }
         .addr-address {
+          max-width: 82%;
           color: #333;
           font-size: 14px;
           /*width: 220px;*/
@@ -3512,6 +3522,7 @@ div {
           margin-bottom: 10px;
         }
         .addr-user-phone {
+          max-width: 82%;
           display: flex;
           align-items: flex-end;
           font-family: twCenMt;
@@ -3582,7 +3593,8 @@ div {
     }
   }
   .new-address {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     background-color: #ffffff;
     position: relative;
     margin: 0 0 22px;
@@ -3590,7 +3602,6 @@ div {
     transition: 0.3s linear;
     box-sizing: border-box;
     .new-address-title {
-      width: 1300-51-36px;
       height: 20px;
       display: flex;
       align-items: flex-end;
@@ -3615,34 +3626,35 @@ div {
       }
     }
     .new-address-input {
-      width: 1300-51-36px;
+      // width: 1300-51-36px;
       display: flex;
       justify-content: space-between;
       .left-side,
       .right-side {
-        width: 545px;
+        width: 44%;
         height: 176+80px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
       }
       .input-line {
-        width: 545px;
+        // width: 545px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         .label {
+          width: 20%;
           font-size: 14px;
           color: #333;
         }
         .input-box {
-          width: 420px;
+          width: 80%;
           border: 1px solid rgba(221, 221, 221, 1);
           border-radius: 4px;
           position: relative;
           color: #111;
           input[type='text'] {
-            width: 418px;
+            width: 100%;
             height: 38px;
             line-height: 38px;
             display: block;
@@ -3652,9 +3664,10 @@ div {
             outline: 0;
             font-size: 16px;
             padding: 0 13px;
+            box-sizing: border-box;
           }
           textarea {
-            width: 418px;
+            width: 100%;
             height: 58px;
             line-height: 29px;
             display: block;
@@ -3667,7 +3680,7 @@ div {
             resize: none;
           }
           input[type='address'] {
-            width: 418px;
+            width: 100%;
             height: 32px;
             line-height: 32px;
             display: block;
@@ -3696,7 +3709,7 @@ div {
             line-height: 12px;
             display: block;
             color: #aa8a7b;
-            left: 379px;
+            right: 5%;
             top: 50%;
             transform: translateY(-50%);
           }
@@ -3721,15 +3734,15 @@ div {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          width: 420px;
+          width: 80%;
           .tel {
-            width: 290px;
+            width: 65%;
             input[type='text'] {
               width: 288px;
             }
           }
           .tel-area {
-            width: 120px;
+            width: 30%;
             height: 40px;
             background: rgba(248, 248, 248, 1);
             border: 1px solid rgba(221, 221, 221, 1);
@@ -3744,7 +3757,8 @@ div {
               background: rgba(248, 248, 248, 1);
               -webkit-appearance: none;
               border: 0;
-              padding: 0 0 0 13px;
+              padding: 0 28px 0 14px;
+              box-sizing: border-box;
               margin: 0;
               outline: 0;
             }
@@ -3819,7 +3833,7 @@ div {
     cursor: pointer;
   }
   .cart-top-bar {
-    width: 1300px;
+    min-width: 1200px;
     height: 40px;
     line-height: 40px;
     background: rgba(255, 255, 255, 1);
@@ -3828,40 +3842,29 @@ div {
     align-items: center;
     font-size: 16px;
     color: #666;
-    padding-left: 77px;
-    span {
-      display: block;
-    }
+    padding-left: 50px;
+    text-align: center;
     span:nth-child(1) {
-      width: 668px;
+      width: 60%;
+      text-align: left;
     }
-    span:nth-child(2) {
-      width: 80px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
+    span:nth-child(2){
+      width: 6.7%;
     }
-    span:nth-child(3) {
-      width: 180px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
-    }
+    span:nth-child(3),
     span:nth-child(4) {
-      width: 180px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
+      width: 11.5%;
     }
   }
   .cart-goods {
-    width: 1300px;
+    min-width: 1200px;
     position: relative;
     overflow: hidden;
     background: rgba(255, 255, 255, 1);
     margin-bottom: 17px;
     .finished {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       height: 179px;
       display: flex;
       align-items: center;
@@ -3871,7 +3874,7 @@ div {
       }
       .good-info {
         position: relative;
-        width: 1200px;
+        min-width: 1200px;
         height: 179px;
         border-bottom: 1px solid rgba(239, 239, 239, 1);
         display: flex;
@@ -3993,7 +3996,8 @@ div {
       }
     }
     .customization {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       height: 282px;
       display: flex;
       align-items: center;
@@ -4004,7 +4008,7 @@ div {
       }
       .good-info {
         position: relative;
-        width: 1200px;
+        min-width: 1200px;
         height: 281px;
         border-bottom: 1px solid rgba(239, 239, 239, 1);
         .good-info-dotted {
@@ -4017,7 +4021,7 @@ div {
           border-bottom: 1px dotted rgba(221, 221, 221, 1);
         }
         .good-info-line {
-          width: 1200px;
+          min-width: 1200px;
           height: 140px;
           display: flex;
           align-items: center;
@@ -4158,7 +4162,7 @@ div {
       }
     }
     .couple {
-      width: 1300px;
+      // width: 1300px;
       height: 174 * 2+2px;
       display: flex;
       align-items: center;
@@ -4344,17 +4348,17 @@ div {
   }
   .order-info {
     position: relative;
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     min-height: 544px;
     background: rgba(255, 255, 255, 1);
     padding: 30px 50px 80px 35px;
-    // display: flex;
-    // justify-content: space-between;
+    box-sizing: border-box;
+
     .left-info {
       float: left;
-      width: 550px;
+      width: 48%;
       .new-address-title {
-        width: 1300-51-36px;
         height: 20px;
         display: flex;
         align-items: flex-end;
@@ -4473,7 +4477,7 @@ div {
         font-size: 14px;
         color: #333333;
         textarea {
-          width: 540px;
+          width: 100%;
           height: 80px;
           padding: 0 12px;
           color: #111;
@@ -4515,7 +4519,7 @@ div {
     }
     .right-info {
       float: right;
-      width: 66+348+120+12+4px;
+      width: 48%;
       .coupon {
         /*background: pink;*/
         width: 100%;
@@ -4625,7 +4629,6 @@ div {
         }
       }
       .new-address-title {
-        width: 1300-51-36px;
         height: 20px;
         display: flex;
         align-items: flex-end;
@@ -4955,157 +4958,157 @@ div {
     }
   .input-line {
     padding: 10px 0;
-    //  margin-bottom: 20px;
-        width: 455px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .label {
-          font-size: 14px;
-          color: #333;
-        }
-        .input-box {
-          width: 315px;
-          border: 1px solid rgba(221, 221, 221, 1);
-          border-radius: 4px;
-          position: relative;
-          color: #111;
-          input[type='text'] {
-            width: 314px;
-            height: 38px;
-            line-height: 38px;
-            display: block;
-            -webkit-appearance: none;
-            border-radius: 4px;
-            border: 0;
-            outline: 0;
-            font-size: 16px;
-            padding: 0 13px;
-          }
-          textarea {
-            width: 315px;
-            height: 58px;
-            line-height: 29px;
-            display: block;
-            -webkit-appearance: none;
-            border-radius: 4px;
-            border: 0;
-            outline: 0;
-            font-size: 16px;
-            padding: 0 13px;
-            resize: none;
-          }
-          input[type='address'] {
-            width: 315px;
-            height: 32px;
-            line-height: 32px;
-            display: block;
-            -webkit-appearance: none;
-            border-radius: 4px;
-            border: 0;
-            outline: 0;
-            font-size: 14px;
-            padding: 0 13px;
-            background: rgba(249, 249, 249, 1);
-          }
-          select {
-            position: absolute;
-            z-index: 9;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-          }
-          .iconxiala {
-            position: absolute;
-            font-size: 12px;
-            width: 12px;
-            height: 12px;
-            line-height: 12px;
-            display: block;
-            color: #aa8a7b;
-            left: 379px;
-            top: 50%;
-            transform: translateY(-50%);
-          }
-          .wrong-input {
-            color: #d9423e;
-          }
-          .wrong-alert {
-            position: absolute;
-            width: 109+7px;
-            height: 23px;
-            line-height: 23px;
-            text-align: center;
-            color: #d9423e;
-            background-image: url('../../../static/order/wrong-input.png');
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            top: 9px;
-            right: 19px;
-          }
-        }
-        .tel-special {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 420px;
-          .tel {
-            width: 290px;
-            input[type='text'] {
-              width: 288px;
-            }
-          }
-          .tel-area {
-            width: 120px;
-            height: 40px;
-            background: rgba(248, 248, 248, 1);
-            border: 1px solid rgba(221, 221, 221, 1);
-            border-radius: 4px;
-            position: relative;
-            overflow: hidden;
-            input {
-              width: 100%;
-              height: 100%;
-              line-height: 38px;
-              text-align: left;
-              background: rgba(248, 248, 248, 1);
-              -webkit-appearance: none;
-              border: 0;
-              padding: 0 0 0 13px;
-              margin: 0;
-              outline: 0;
-            }
-            select {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              opacity: 0;
-            }
-            .iconxiala {
-              position: absolute;
-              font-size: 12px;
-              width: 12px;
-              height: 12px;
-              line-height: 12px;
-              display: block;
-              color: #aa8a7b;
-              right: 12px;
-              top: 50%;
-              transform: translateY(-50%);
-            }
-          }
-        }
-        .border-change {
-          border: 1px solid rgba(170, 138, 123, 1);
-        }
-        .border-wrong {
-          border: 1px solid #d9423e;
+    width: 455px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    .label {
+      font-size: 14px;
+      color: #333;
+    }
+    .input-box {
+      width: 315px;
+      border: 1px solid rgba(221, 221, 221, 1);
+      border-radius: 4px;
+      position: relative;
+      color: #111;
+      input[type='text'] {
+        width: 314px;
+        height: 38px;
+        line-height: 38px;
+        display: block;
+        -webkit-appearance: none;
+        border-radius: 4px;
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        padding: 0 13px;
+      }
+      textarea {
+        width: 315px;
+        height: 58px;
+        line-height: 29px;
+        display: block;
+        -webkit-appearance: none;
+        border-radius: 4px;
+        border: 0;
+        outline: 0;
+        font-size: 16px;
+        padding: 0 13px;
+        resize: none;
+      }
+      input[type='address'] {
+        width: 315px;
+        height: 32px;
+        line-height: 32px;
+        display: block;
+        -webkit-appearance: none;
+        border-radius: 4px;
+        border: 0;
+        outline: 0;
+        font-size: 14px;
+        padding: 0 13px;
+        background: rgba(249, 249, 249, 1);
+      }
+      select {
+        position: absolute;
+        z-index: 9;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+      .iconxiala {
+        position: absolute;
+        font-size: 12px;
+        width: 12px;
+        height: 12px;
+        line-height: 12px;
+        display: block;
+        color: #aa8a7b;
+        right: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      .wrong-input {
+        color: #d9423e;
+      }
+      .wrong-alert {
+        position: absolute;
+        width: 109+7px;
+        height: 23px;
+        line-height: 23px;
+        text-align: center;
+        color: #d9423e;
+        background-image: url('../../../static/order/wrong-input.png');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        top: 9px;
+        right: 19px;
+      }
+    }
+    .tel-special {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 420px;
+      .tel {
+        width: 290px;
+        input[type='text'] {
+          width: 288px;
         }
       }
+      .tel-area {
+        width: 120px;
+        height: 40px;
+        background: rgba(248, 248, 248, 1);
+        border: 1px solid rgba(221, 221, 221, 1);
+        border-radius: 4px;
+        position: relative;
+        overflow: hidden;
+        input {
+          width: 100%;
+          height: 100%;
+          line-height: 38px;
+          text-align: left;
+          background: rgba(248, 248, 248, 1);
+          -webkit-appearance: none;
+          border: 0;
+          padding: 0 0 0 13px;
+          margin: 0;
+          outline: 0;
+        }
+        select {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+        }
+        .iconxiala {
+          position: absolute;
+          font-size: 12px;
+          width: 12px;
+          height: 12px;
+          line-height: 12px;
+          display: block;
+          color: #aa8a7b;
+          right: 12px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    .border-change {
+      border: 1px solid rgba(170, 138, 123, 1);
+    }
+    .border-wrong {
+      border: 1px solid #d9423e;
+    }
+  }
 }
 </style>
 <style lang="less">

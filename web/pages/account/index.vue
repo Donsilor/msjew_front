@@ -182,11 +182,14 @@ export default {
   color: #f29b87;
 }
 .personal {
-  width: 1360px;
+  max-width: 1360px;
+  min-width: 1200px;
+  width: 100%;
   min-height: 540px;
   margin: 0 auto;
   padding: 20px 40px;
   background: #f5f3f1;
+  box-sizing: border-box;
   /*border-top: 1px solid #000000;*/
   .container {
     width: 100%;
@@ -258,11 +261,12 @@ export default {
       }
     }
     .right-box {
-      width: 1000px;
+      width: calc(100% - 264px);
       padding: 40px 30px 0;
       min-height: 500px;
       background: #ffffff;
       margin-left: 16px;
+      box-sizing: border-box;
     }
   }
 }

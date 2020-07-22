@@ -153,6 +153,27 @@
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
+            <div v-else-if="this.$store.state.platform === 40" class="item coin">
+              <el-dropdown
+                type="primary"
+
+                placement="bottom"
+                @command="setCoin"
+              >
+                <span class="row-flex align-item-center el-dropdown-link">
+                  {{ coinInfo.content }}<i class="iconfont iconkuozhan"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    v-for="(option, n) in coinOptionsTw"
+                    :key="n"
+                    :command="option.code"
+                  >
+                    {{ option.content }}
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
             <div v-else class="item coin">
               <el-dropdown
                 type="primary"
@@ -326,6 +347,7 @@ export default {
       languageOptions: this.$bddDefinition.languageOptions,
       coinOptions: this.$bddDefinition.coinOptions,
       coinOptionsCn: this.$bddDefinition.coinOptionsCn,
+      coinOptionsTw: this.$bddDefinition.coinOptionsTw,
       userMenus: [
         {
           name: this.$t(`${lang}.order`),
@@ -1917,6 +1939,7 @@ export default {
       const coin = this.$store.state.coin
       const coinOptions = this.$bddDefinition.coinOptions
       const coinOptionsCn = this.$bddDefinition.coinOptionsCn
+      const coinOptionsTw = this.$bddDefinition.coinOptionsTw
 	  // console.log(256,coin)
 	  // console.log(887,coinOptions)
       // for (let n = 0, length = coinOptions.length; n < length; n++) {
@@ -1929,6 +1952,14 @@ export default {
         for (let n = 0, length = coinOptionsCn.length; n < length; n++) {
           if (coinOptionsCn[n].code === coin) {
             result = coinOptionsCn[n]
+            break
+          }
+        }
+        return result
+      }else if(this.$store.state.platform === 40){
+        for (let n = 0, length = coinOptionsTw.length; n < length; n++) {
+          if (coinOptionsTw[n].code === coin) {
+            result = coinOptionsTw[n]
             break
           }
         }
@@ -2053,7 +2084,7 @@ export default {
   .header {
     position: absolute;
     width: 100%;
-    min-width: 1360px;
+    min-width: 1200px;
     background-color: #ffffff;
     z-index: 1200;
 

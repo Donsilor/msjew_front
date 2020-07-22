@@ -34,7 +34,7 @@
             <div :class="['error-message', { active: surnameTrue }]">
               {{ surnameText }}
             </div>
-            <div v-if="language==='zh_CN'" class="input-mod" @click="showSelect">
+            <div v-if="language==='zh_CN'" class="input-mod">
               <bdd-input
                 v-model="mailbox"
                 :placeholder="lang.mailbox"
@@ -43,7 +43,7 @@
                 @focus="focusFn(3)"
               ></bdd-input>
             </div>
-            <div v-else class="input-mod" @click="showSelect">
+            <div v-else class="input-mod">
               <bdd-input
                 v-model="mailbox"
                 :placeholder="lang.mailbox"
@@ -330,23 +330,20 @@ export default {
   },
   // beforeMount(){
   //   if(this.language === 'zh_CN'){
-  //     console.log(444444)
   //     this.countryList=[{ id:'7',content: '中国'}]
   //     this.getListOne()
   //   }
 
   // },
   created() {
-    console.log("dddd",this.area)
     this.getinfo()
     this.getListOne()
     this.getArealist()
   },
   mounted() {
-
     this.loginType=localStorage.getItem('loginType')
-    this.language = this.getCookie('language')
-    console.log("cookie",this.language)
+    this.language = this.$store.state.language
+
     if(this.language === 'zh_CN'){
       this.userTelCode='+86'
       this.area=this.lang.areaCN   //"中国 +86"
@@ -386,7 +383,7 @@ export default {
               {
                 text: this.lang.cancel,
                 callback: () => {
-                  console.log('点击了取消')
+                  // console.log('点击了取消')
                 }
               },
               {
@@ -423,7 +420,7 @@ export default {
       }
     },
     sureArea(val) {
-      console.log("val",val)
+      // console.log("val",val)
       this.userTelCode = this.arealist[val.index].phone_code
       this.area =
         this.arealist[val.index].content +
@@ -437,7 +434,7 @@ export default {
       }
       this.title = this.lang.header1
       const address = storage.get('myAdders', 0)
-      console.log("地址",this.editVal)
+      // console.log("地址",this.editVal)
       if (this.editVal.id) {
         this.title = this.lang.header2
         this.id = this.editVal.id
@@ -483,7 +480,6 @@ export default {
           url: `/web/common/area`
         })
         .then(res => {
-          // console.log("area",res.data)
           _this.countryList = []
           for (let i = 0; i < res.length; i++) {
             const o = {
@@ -629,7 +625,6 @@ export default {
       }
       this.$refs.city.show()
       // if (this.cityList.length > 1) {
-      //   console.log("4444")
       //   this.$refs.city.show()
       // }
     },
@@ -647,8 +642,6 @@ export default {
         .then(res => {
           this.$toast.show(this.lang.toast1)
           setTimeout(() => {
-            this.$emit('updataAddress');
-            // _this.$router.go(-1) updataAddress
             this.$emit('closeADP',true);
           }, 2000)
         })
@@ -739,7 +732,7 @@ export default {
           }
         }
       }
-      // console.log(this.area)
+
       if ((val === 5 || val === 0) && this.details === '') {
         this.detailsText = this.lang.detailsText
         this.detailsTrue = true
@@ -778,7 +771,7 @@ export default {
           zip_code: this.postal
         }
         const data = JSON.parse(JSON.stringify(json))
-        // console.log("json")
+
         if (this.isLogin&&this.addVal!=="add") {
           const _this = this
           _this
@@ -809,10 +802,6 @@ export default {
               data: data
             })
             .then(res => {
-              // if (!res.length==0) {
-
-              // }
-              console.log("aaaa",res)
               this.$toast.show(this.lang.toast2)
               setTimeout(() => {
                 this.$emit('closeADP',true);
@@ -910,7 +899,6 @@ export default {
               data: data
             })
             .then(res => {
-              console.log("aaaa",res)
               this.$toast.show(this.lang.toast2)
               setTimeout(() => {
                 // this.$router.go(-1)
@@ -949,9 +937,6 @@ export default {
           }, 1500)
         }
       }
-    },
-    showSelect() {
-      console.log('6767')
     },
     focusFn(k){
       switch (k){

@@ -68,6 +68,7 @@
     },
     mounted() {
       this.language = this.getCookie('language')
+      console.log(778,this.moneyInfo)
       this.coin = this.$store.state.coin
       // console.log("ggggg",this.moneyInfo)
       if(this.moneyInfo){
@@ -113,8 +114,8 @@
           })
           .catch(err => {
             this.ifLoading = false;
-			this.loadFinish = true;
-			this.$nuxt.$loading.finish()
+			      this.loadFinish = true;
+			      this.$nuxt.$loading.finish()
             console.log(err)
           })
       }
@@ -224,7 +225,6 @@
 
         .box-r {
           width: 900px;
-          min-height: 575px;
           display: flex;
           // align-items: center;
           justify-content: space-between;

@@ -172,9 +172,21 @@
         </span>
       </div>
     </div>
-    <!-- ['btn-common', canAddCart ? 'btn-gray' : 'btn-pink'] :disabled="!canAddCart"-->
     <div
       :class="['btn-common btn-gray', { btnActive: canAddCart }]"
+      
+      @click="orderNow"
+    >
+     {{
+        lang.buyNow
+      }}
+      <!-- {{
+        inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
+      }} -->
+    </div>
+    <!-- ['btn-common', canAddCart ? 'btn-gray' : 'btn-pink'] :disabled="!canAddCart"-->
+    <div
+      :class="['btn-common btn-gray', { btnActivePink: canAddCart }]"
       
       @click="addCart"
     >
@@ -185,6 +197,7 @@
         inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
       }} -->
     </div>
+    
     <!-- <div class="wish-and-share">
       <i
         :class="[

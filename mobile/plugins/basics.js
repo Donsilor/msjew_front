@@ -11,7 +11,6 @@ export default ({ req, app, store, $axios }, inject) => {
     let areaId = 99
     let platform = 11
     if (isServer) {
-        console.log(1111111111)
         let host = req.headers['host']
         if ((/^(cn|cn-bdd|wap-cn|www\.bddco\.cn|wap\.bddco\.cn)/is).test(host)) {
             language = 'zh_CN'
@@ -25,11 +24,10 @@ export default ({ req, app, store, $axios }, inject) => {
             platform = 31 //移动-美国
         } else if ((/^(tw|tw-bdd|wap-tw|wap-tw-bdd)\./is).test(host)) {
             language = 'zh_TW'
-            coin = 'HKD'
+            coin = 'TWD'
             areaId = 3
             platform = 41 //移动-台湾
         } else {
-            console.log(22222222222)
             language = 'zh_TW'
             coin = 'HKD'
             areaId = 2
@@ -65,25 +63,22 @@ export default ({ req, app, store, $axios }, inject) => {
             }
         })
             .then(data => {
-                // console.log("tdk",data)
-                if(data){
-                    return {
-                        title: data.meta_title,
-                        meta: [
-                            {
-                                name: 'title',
-                                content: data.meta_title
-                            },
-                            {
-                                name: 'description',
-                                content: data.meta_desc
-                            },
-                            {
-                                name: 'keywords',
-                                content: data.meta_word
-                            }
-                        ]
-                    }
+                return {
+                    title: data.meta_title,
+                    meta: [
+                        {
+                            name: 'title',
+                            content: data.meta_title
+                        },
+                        {
+                            name: 'description',
+                            content: data.meta_desc
+                        },
+                        {
+                            name: 'keywords',
+                            content: data.meta_word
+                        }
+                    ]
                 }
             })
             .catch(err => {

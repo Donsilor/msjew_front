@@ -119,17 +119,32 @@
         {{ lang.cmw }}
         <div class="triangle" />
       </div>
-      <div
-        v-if="
-          parseInt($route.query.step) === 1 &&
-            !$route.query.isBack &&
-            inSale &&
-            canAddCart
-        "
-        class="btn-common btn-pink"
-        @click="emitStep(`ring`)"
-      >
-        {{ lang.addToRingTuo }}
+      <div class="submit-btn">
+        <div
+          v-if="
+            parseInt($route.query.step) === 1 &&
+              !$route.query.isBack &&
+              inSale &&
+              canAddCart
+          "
+          class="btn-common btn-pink"
+          @click="emitStep(`ring`)"
+        >
+          {{ lang.addToRingTuo }}
+        </div>
+        <div
+          v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
+          :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+          @click="addCart"
+        >
+          {{
+            inSale
+              ? canAddCart
+                ? lang.addCart
+                : lang.noTotalStock
+              : lang.notInSale
+          }}
+        </div>
       </div>
       <!--    <div-->
       <!--      v-if="-->
@@ -146,12 +161,12 @@
       <div
         v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
         :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
-        @click="addCart"
+        @click="orderNow"
       >
         {{
           inSale
             ? canAddCart
-              ? lang.addCart
+              ? lang.buyNow
               : lang.noTotalStock
             : lang.notInSale
         }}
@@ -492,6 +507,22 @@ export default {
 <style scoped lang="less">
 .diamond-component {
   position: relative;
+  .btn-white{
+    border:none!important;
+  }
+  .submit-btn{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px 20px;
+    .btn-pink{
+      width: 49%;
+      margin: 0;
+    }
+    .btn-white{
+      width: 49%;
+      margin: 0;
+    }
+  }
   .time {
     color: #b49785;
   }
