@@ -6,24 +6,24 @@
       <div class="left-detail">
         <product-images :images="thumbnails" @getIdx="getIndex" :coupon="coupons"></product-images>
 		
-		<div class="magn-box">
-			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
-		</div>
+        <div class="magn-box">
+          <bdd-magnifying :msg="magnifying"></bdd-magnifying>
+        </div>
       </div>
       <!--      右侧-->
       <div class="right-detail">
-		<div class="right-title">
-			<span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
-			<span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
+        <div class="right-title">
+          <span class="discount-icon fl" v-if="info.coupon.discount">{{ language == 'en_US' ? discountUs(this.info.coupon.discount.discount)+'%' : discountConversion(this.info.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
+          <span class="favourable-icon fl" v-if="info.coupon.money">￥</span>
 
-			<h2 class="product-name">
-			  {{ info.goodsName }}
-			</h2>
-		</div>
+          <h2 class="product-name">
+            {{ info.goodsName }}
+          </h2>
+        </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}: {{ info.goodsCode }}</div>
         <div class="sku" v-if="productInfo.carats.length == ''">
-          <div class="left-properties">
-            <div v-if="productInfo.materials.length > 0" class="property-item">
+          <div class="left-properties" v-if="productInfo.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ $t(`${lang}.color`) }}
               </span>
@@ -68,8 +68,8 @@
               </div>
             </div>
           </div>
-          <div class="right-properties">
-            <div v-if="productInfo.sizes.length > 0" class="property-item">
+          <div class="right-properties" v-if="productInfo.sizes.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ $t(`${lang}.size`) }}
               </span>
@@ -110,8 +110,8 @@
         </div>
         <div class="sku2" v-else>
           <div class="one">
-            <div class="left-properties">
-              <div v-if="productInfo.carats.length > 0" class="property-item">
+            <div class="left-properties" v-if="productInfo.carats.length > 0">
+              <div  class="property-item">
                 <span v-if="productInfo.categoryId == 12" class="item-name">
                   {{ $t(`${lang}.inlay`) }}
                 </span>
@@ -141,8 +141,8 @@
                 </div>
               </div>
             </div>
-            <div class="left-properties">
-              <div v-if="productInfo.materials.length > 0" class="property-item">
+            <div class="left-properties" v-if="productInfo.materials.length > 0">
+              <div  class="property-item">
                 <span class="item-name">
                   {{ $t(`${lang}.color`) }}
                 </span>
@@ -187,8 +187,8 @@
                 </div>
               </div>
             </div>
-            <div class="right-properties">
-              <div v-if="productInfo.sizes.length > 0" class="property-item">
+            <div class="right-properties" v-if="productInfo.sizes.length > 0">
+              <div  class="property-item">
                 <span class="item-name">
                   {{ $t(`${lang}.size`) }}
                 </span>
@@ -213,23 +213,24 @@
                     </li>
                   </ul>
                 </div>
+
+                <div class="helper-popover">
+                  <span class="helper-name">
+                    {{ $t(`${lang}.USEdition`) }}
+                  </span>
+                  <el-popover placement="bottom" trigger="hover">
+                    <ring-size></ring-size>
+                    <b slot="reference" class="prompt-icon">!</b>
+                  </el-popover>
+                </div>
+                <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
+
               </div>
             </div>
           </div>
-          <div class="two">
-            <div class="helper-popover">
-              <span class="helper-name">
-                {{ $t(`${lang}.USEdition`) }}
-              </span>
-              <el-popover placement="bottom" trigger="hover">
-                <ring-size></ring-size>
-                <b slot="reference" class="prompt-icon">!</b>
-              </el-popover>
-            </div>
-            <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
-          </div>
+
         </div>
-        <ul class="services-list">
+        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
@@ -286,24 +287,7 @@
           </span>
         </div>
         <div class="button-group">
-          <span v-if="!$route.query.isBack">
-            <nuxt-link
-              v-if="productInfo.goodsMod === 1 && (parseInt($route.query.step) !== 2 && $route.query.step) && canAddCart"
-              :to="startDj"
-            >
-              <button class="start-dj">
-                {{ $t(`${lang}.ConfirmTheChoice`) }}
-              </button>
-            </nuxt-link>
-            <button
-              v-loading="addingCart"
-              :class="['add-to-cart', { active: canAddCart }]"
-              @click="addCart"
-            >
-              {{ $t(`${lang}.addCart`) }}
-            </button>
-          </span>
-          <span v-if="
+          <span class="custom-made" v-if="
             (parseInt($route.query.step) !== 1 && $route.query.step) ||
               $route.query.isBack
           ">
@@ -315,7 +299,68 @@
             <button v-else :class="['add-to-cart', { active: canAddCart }]">
               {{ $t(`${lang}.ConfirmTheChoice`) }}
             </button>
+            <button
+              v-loading="orderingNow"
+              :class="['add-to-cart', { actived: canAddCart }]"
+              @click="orderNow"
+            >
+              {{ $t(`${lang}.buyNow`) }}
+            </button>
+             <button
+              class="add-cart"
+              v-loading="addingCart"
+              :class="['add-to-cart', { active: canAddCart }]"
+              @click="addCart"
+            >
+              {{ $t(`${lang}.addCart`) }}
+            </button>
           </span>
+          <!-- v-if="!$route.query.isBack" -->
+          <span class="normal" v-else>
+            <nuxt-link
+              v-if="productInfo.goodsMod === 1 && (parseInt($route.query.step) !== 2 && $route.query.step) && canAddCart"
+              :to="startDj"
+            >
+            <div class="dz">
+              <button class="start-dj">
+                {{ $t(`${lang}.ConfirmTheChoice`) }}
+              </button>
+              <button
+                v-loading="orderingNow"
+                :class="['add-to-cart', { actived: canAddCart }]"
+                @click="orderNow"
+              >
+                {{ $t(`${lang}.buyNow`) }}
+              </button>
+              <button
+                class="add-cart"
+                v-loading="addingCart"
+                :class="['add-to-cart', { active: canAddCart }]"
+                @click="addCart"
+              >
+                {{ $t(`${lang}.addCart`) }}
+              </button>
+            </div>
+            </nuxt-link>
+            <div v-else>
+              <button
+                  v-loading="orderingNow"
+                  :class="['add-to-cart', { actived: canAddCart }]"
+                  @click="orderNow"
+                >
+                  {{ $t(`${lang}.buyNow`) }}
+                </button>
+                <button
+                  class="add-cart"
+                  v-loading="addingCart"
+                  :class="['add-to-cart', { active: canAddCart }]"
+                  @click="addCart"
+                >
+                  {{ $t(`${lang}.addCart`) }}
+                </button>
+            </div>
+          </span>
+          
         </div>
 
         <!-- <div class="other-info">
@@ -612,7 +657,9 @@ export default {
       }
     })
 		
-	this.magnifying = this.thumbnails[0]
+    this.magnifying = this.thumbnails[0]
+    
+    console.log(777,this.recommends)
 
     // this.language = this.getCookie('language')
   },
@@ -747,11 +794,33 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// .custom-made{
+//   .add-to-cart{
+//     margin-top: 10px;
+//     width: 88.5%!important;
+//   }
+// }
+.start-dj{
+  width: 320px!important;
+}
+.custom-made{
+  .add-cart{
+    width: 645px!important;
+    // margin-top: 10px;
+  }
+}
+.dz{
+  .active{
+    width: 320px!important;
+    // margin-top: 10px;
+  }
+}
 .detail-page {
   margin: auto;
 }
 .sku2 {
-  width: 720px;
+  // width: 720px;
+  width: 99%;
   padding: 15px 25px;
   box-sizing: border-box;
   background: rgba(250, 250, 246, 1);
@@ -768,8 +837,9 @@ export default {
 
   .left-properties,
   .right-properties {
-    flex-grow: 0;
-    flex-shrink: 0;
+    // flex-grow: 0;
+    // flex-shrink: 0;
+    margin: 5px 0;
 
     .property-item {
       margin-bottom: 12px;
@@ -904,11 +974,12 @@ export default {
   }
   .one{
     display: flex;
+    flex-wrap: wrap;
   }
-  .two{
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
+  // .two{
+    // display: flex;
+    // justify-content: flex-end;
+    // margin-top: 10px;
     .helper-popover {
       white-space: nowrap;
 
@@ -943,7 +1014,7 @@ export default {
       line-height: 20px;
     }
   }
-}
+// }
 
 
 </style>

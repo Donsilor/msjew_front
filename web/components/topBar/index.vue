@@ -199,6 +199,7 @@
           </div>
         </div>
       </div>
+      
       <nav class="nav">
         <div class="nav-box">
           <div class="row-flex nav-content">
@@ -218,16 +219,13 @@
                   @mouseover="changeActiveNavMenu(nav.key)"
                   @mouseout="changeActiveNavMenu('')"
                 >
-                  <nuxt-link v-if="nav.to" :to="nav.to" target="_blank">
-                    <div
-                      :class="[
-                        'nav-item-name',
-                        { active: activeNavMenu === nav.key }
-                      ]"
-                    >
-                      {{ nav.name }}
-                    </div>
+                  <nuxt-link
+                    v-if="nav.to"
+                    :class="['nav-item-name',{ active: activeNavMenu === nav.key }]"
+                    :to="nav.to" target="_blank">
+                    {{ nav.name }}
                   </nuxt-link>
+
                   <div
                     v-else
                     :class="[
@@ -262,7 +260,9 @@
                   :placeholder="$t(`${lang}.search`)"
                   @keyup.enter="toSearch"
                 />
-                <i class="iconfont iconicon-sousuo" @click="toSearch"></i>
+                <span class="icon">
+                  <i class="iconfont iconicon-sousuo" @click="toSearch"></i>
+                </span>
               </div>
               <div v-show="fixedStatus" class="icon-group">
                 <nuxt-link
@@ -2085,7 +2085,7 @@ export default {
   .header {
     position: absolute;
     width: 100%;
-    min-width: 1360px;
+    min-width: 1200px;
     background-color: #ffffff;
     z-index: 1200;
 
@@ -2258,16 +2258,18 @@ export default {
       z-index: 1200;
       position: relative;
       background-color: #ffffff;
-
       .nav-box {
         border-bottom: 1px solid rgba(236, 236, 236, 1);
-        .nav-content {
+
+        .nav-content {  
           max-width: 1366px;
           margin: auto;
           height: 75px;
           box-sizing: content-box;
+          justify-content: space-between;
 
           .left-item {
+            height: 100%;
             flex-grow: 0;
             flex-shrink: 0;
 
@@ -2282,36 +2284,30 @@ export default {
           }
 
           .right-item {
-            flex-grow: 1;
-            flex-shrink: 1;
+            height: 100%;
 
             .nav-list {
               width: 560px;
               height: 100%;
               list-style: none;
               display: flex;
-              align-items: stretch;
               justify-content: space-between;
 
               .nav-item {
-                flex-grow: 1;
-                flex-shrink: 1;
+                height: 100%;
                 text-align: center;
                 cursor: pointer;
-                /*margin-right: 90px;*/
-
-                &:nth-last-of-type(1) {
-                  margin-right: 0;
-                }
+                display: flex;
+                flex-grow: 1;
+                justify-content: center;
 
                 .nav-item-name {
-                  display: inline-block;
-                  position: relative;
                   height: 100%;
                   line-height: 75px;
                   font-size: 14px;
                   font-weight: 400;
                   color: rgba(99, 99, 99, 1);
+                  position: relative;
 
                   &.active {
                     color: #9b745c;
@@ -2356,8 +2352,13 @@ export default {
             }
 
             .search-box {
+              width: 162px;
+              height: 28px;
+              display: flex;
+
               input {
                 width: 135px;
+                height: 28px;
                 padding: 3px 6px;
                 border-bottom: 1px solid #adadad;
                 font-size: 14px;
@@ -2367,10 +2368,17 @@ export default {
               input::-webkit-input-placeholder {
                 color: #636363;
               }
-              .iconfont {
-                color: #666666;
-                font-size: 23px;
-                cursor: pointer;
+              .icon{
+                width: 30px;
+                height: 30px;
+                display: flex;
+                align-items: center;
+
+                .iconfont {
+                  color: #666666;
+                  font-size: 23px;
+                  cursor: pointer;
+                }
               }
             }
 

@@ -2354,7 +2354,7 @@ export default {
     }
   },
   created() {
-    
+    // console.log('this.pathTakeIds',this.pathTakeIds)
     // console.log("planDays",this.tex.planDays)
     const promise = new Promise((resolve, reject) => {
       this.$store
@@ -2366,7 +2366,7 @@ export default {
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
-            console.log("fffff",res[i])
+            // console.log("fffff",res[i])
             this.goodsPrice += res[i].price
           }
           this.tex.orderAmount = this.goodsPrice
@@ -2739,7 +2739,7 @@ export default {
             group_id: item.groupId || null,
             group_type:item.groupType,
             goods_type: item.goodsType,
-            coupon_id: arr[i]
+            coupon_id: arr[i],
           }
         })
 
@@ -2759,7 +2759,8 @@ export default {
           tradeType:'pc',
           coinType:this.$store.state.coin,
           payType: pay,
-          returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}'  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
+          returnUrl:baseUrl+'/complete-paySuccess?order_sn={order_sn}',  //http://localhost:8318  http://www.bdd.bddia.com  https://www.bddco.com/complete-paySuccess
+          buyer_remark: this.remark,
         }
       })
         .then(res => {
@@ -2841,16 +2842,19 @@ div {
   box-sizing: border-box;
 }
 .order {
-  width: 1360px;
+  max-width: 1360px;
+  min-width: 1200px;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
   background: rgba(248, 248, 248, 1);
   padding: 33px 30px 60px;
+  box-sizing: ;
 
   .order-step {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     height: 182px;
     background: rgba(255, 255, 255, 1);
     display: flex;
@@ -2974,13 +2978,15 @@ div {
 
   .address-box {
     position: relative;
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     overflow: hidden;
     transition: 0.3s linear;
     margin-bottom: 22px;
 
     .addr-blocks {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       display: flex;
       align-items: center;
       flex-wrap: wrap;
@@ -2988,14 +2994,16 @@ div {
 
       .addr-block {
         position: relative;
-        width: 635px;
+        width: 49%;
         height: 250px;
         padding: 25px 30px 0;
         margin-bottom: 20px;
         border: 1px solid rgba(230, 230, 230, 1);
         background-color: #ffffff;
+        box-sizing: border-box;
 
         .addr-title {
+          max-width: 82%;
           display: flex;
           align-items: flex-end;
           margin-bottom: 10px;
@@ -3012,6 +3020,7 @@ div {
         }
 
         .addr-user {
+          max-width: 82%;
           display: flex;
           font-size: 22px;
           align-items: center;
@@ -3024,9 +3033,9 @@ div {
         }
 
         .addr-address {
+          max-width: 82%;
           color: #333;
           font-size: 14px;
-          /*width: 220px;*/
           height: 16 * 3px;
           line-height: 16px;
           overflow: hidden;
@@ -3039,6 +3048,7 @@ div {
         }
 
         .addr-user-phone {
+          max-width: 82%;
           display: flex;
           align-items: flex-end;
           font-family: twCenMt;
@@ -3107,7 +3117,8 @@ div {
   }
 
   .new-address {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     height: 360px;
     background-color: #ffffff;
     position: relative;
@@ -3117,7 +3128,6 @@ div {
     transition: 0.3s linear;
 
     .new-address-title {
-      width: 1300-51-36px;
       height: 20px;
       display: flex;
       align-items: flex-end;
@@ -3146,7 +3156,6 @@ div {
     }
 
     .new-address-input {
-      width: 1300-51-36px;
       display: flex;
       justify-content: space-between;
 
@@ -3370,7 +3379,8 @@ div {
   }
 
   .cart-top-bar {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     height: 40px;
     line-height: 40px;
     background: rgba(255, 255, 255, 1);
@@ -3381,43 +3391,32 @@ div {
     color: #666;
     padding-left: 77px;
     margin-top: 20px;
-    span {
-      display: block;
-    }
+    text-align: center;
 
     span:nth-child(1) {
-      width: 668px;
+      width: 59%;
+      text-align: left;
     }
-
-    span:nth-child(2) {
-      width: 80px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
+    span:nth-child(2){
+      width: 6.8%;
     }
-    span:nth-child(3) {
-      width: 180px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
-    }
+    span:nth-child(3),
     span:nth-child(4) {
-      width: 180px;
-      text-align: center;
-      padding: 0 10px;
-      box-sizing: border-box;
+      width: 11.8%;
     }
   }
 
   .cart-goods {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     position: relative;
     overflow: hidden;
     background: rgba(255, 255, 255, 1);
     margin-bottom: 17px;
 
     .finished {
-      width: 1300px;
+      max-width: 1300px;
+      min-width: 1200px;
       height: 179px;
       display: flex;
       align-items: center;
@@ -3972,7 +3971,8 @@ div {
 
   .order-info {
     position: relative;
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     height: 544px;
     // height: 314px;
     background: rgba(255, 255, 255, 1);
@@ -3981,10 +3981,9 @@ div {
     justify-content: space-between;
 
     .left-info {
-      width: 550px;
+      width: 48%;
 
       .new-address-title {
-        width: 1300-51-36px;
         height: 20px;
         display: flex;
         align-items: flex-end;
@@ -4123,7 +4122,7 @@ div {
         color: #333333;
 
         textarea {
-          width: 540px;
+          width: 100%;
           height: 80px;
           padding: 0 12px;
           color: #111;
@@ -4173,7 +4172,7 @@ div {
     }
 
     .right-info {
-      width: 66+348+120+12+4px;
+      width: 48%;
 
       .coupon {
         /*background: pink;*/
@@ -4431,13 +4430,15 @@ div {
 //   top:300px;
 // }
 .pay {
-  width: 1360px;
+  max-width: 1360px;
+  min-width: 1200px;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
   background: rgba(248, 248, 248, 1);
   padding: 33px 0px 38px;
+  box-sizing: border-box;
   .buy-btn {
       position: absolute;
       bottom: 60px;
@@ -4552,12 +4553,13 @@ div {
     }
   }
   .pay-ways {
-    width: 1300px;
+    max-width: 1300px;
+    min-width: 1200px;
     background-color: #fff;
     padding: 39px 40px 40px;
-    //  padding: 39px 40px 95px;
+    box-sizing: border-box;
+
     .new-address-title {
-      // width: 1300-51-36px;
       width: 48%;
       height: 20px;
       display: flex;
@@ -4599,13 +4601,14 @@ div {
       .pay-block {
         transition: 0.2s linear;
         position: relative;
-        width: 590px;
+        width: 49%;
         height: 120px;
         background: rgba(248, 248, 248, 1);
         border: 1px solid rgba(205, 205, 205, 1);
         margin-bottom: 40px;
         cursor: pointer;
         padding: 17px 0 0 53px;
+        box-sizing: border-box;
         .pay-img {
           width: 189px;
           height: 56px;

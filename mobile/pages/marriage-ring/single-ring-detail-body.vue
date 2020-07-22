@@ -124,19 +124,6 @@
       </div>
       <div
         v-if="goodInfo.goodsMod === 1"
-        :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
-        @click="addCart"
-      >
-        {{
-          inSale
-            ? canAddCart
-              ? lang.addCart
-              : lang.noTotalStock
-            : lang.notInSale
-        }}
-      </div>
-      <div
-        v-else
         :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
         @click="addCart"
       >
@@ -147,6 +134,33 @@
               : lang.noTotalStock
             : lang.notInSale
         }}
+      </div>
+      <div v-else>
+        <div
+          :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+          @click="orderNow"
+        >
+          {{
+            inSale
+              ? canAddCart
+                ? lang.buyNow
+                : lang.noTotalStock
+              : lang.notInSale
+          }}
+        </div>
+        <div
+          :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+          @click="addCart"
+        >
+          {{
+            inSale
+              ? canAddCart
+                ? lang.addCart
+                : lang.noTotalStock
+              : lang.notInSale
+          }}
+        </div>
+        
       </div>
       <!-- <div class="wish-and-share">
         <i
@@ -293,12 +307,6 @@ export default {
   },
   data(){
     return {
-      url:[
-        require('../../static/marriage-ring/icon-01.png'),
-        require('../../static/marriage-ring/icon-02.png'),
-        require('../../static/marriage-ring/icon-03.png'),
-        require('../../static/marriage-ring/icon-04.png')
-      ],
       ifShowCoupon: false,
       language: this.$store.state.language,
       activeTime:''
@@ -349,6 +357,9 @@ export default {
 <style scoped lang="less">
 .engagementRings-component {
   .details-component(100%);
+  .btn-white{
+    border:none!important;
+  }
 }
 .time {
   color: #b49785;

@@ -426,7 +426,7 @@ export default {
         .get('/web/pay/collection-account-info')
         .then(res => {
           this.accountlist = res.data
-          console.log("ssss",res)
+          // console.log("ssss",res)
         })
         .catch(err => {
           this.$message.error(err.message)
@@ -684,15 +684,16 @@ div {
   // justify-content: space-between;
 }
 .pay {
-  width: 1360px;
+  max-width: 1360px;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
   background: rgba(248, 248, 248, 1);
   padding: 33px 30px 38px;
+  box-sizing: border-box;
   .order-step {
-    width: 1300px;
+    max-width: 1300px;
     height: 182px;
     background: rgba(255, 255, 255, 1);
     display: flex;
@@ -788,9 +789,10 @@ div {
     }
   }
   .pay-ways {
-    width: 1300px;
+    max-width: 1300px;
     background-color: #fff;
     padding: 39px 40px 40px;
+    box-sizing: border-box;
     .new-address-title {
       // width: 1300-51-36px;
        width: 48%;
@@ -833,13 +835,14 @@ div {
       .pay-block {
         transition: 0.2s linear;
         position: relative;
-        width: 590px;
+        width: 48%;
         height: 120px;
         background: rgba(248, 248, 248, 1);
         border: 1px solid rgba(205, 205, 205, 1);
         margin-bottom: 40px;
         cursor: pointer;
-        padding: 17px 0 0 53px;
+        padding: 17px 3% 0 6%;
+        box-sizing: border-box;
         .pay-img {
           width: 189px;
           height: 56px;

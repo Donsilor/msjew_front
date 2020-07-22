@@ -825,7 +825,8 @@
         "afterSale": "Quality After-Sales Service",
         "afterSaleDesc": "BDD Co. will provide you with a free ring size adjustment within the first 6 months of purchase if the size falls within the adjustable range.",
         "moreAfterSaleInfo": "Refund Terms And Conditions",
-        "startYourDiamondCheck": "START YOUR DIAMOND INSPECTION NOW"
+        "startYourDiamondCheck": "START YOUR DIAMOND INSPECTION NOW",
+        "slidingBrowsing": "Click to view images"
     },
     "engagementRingsList": {
         "style": "Style",
@@ -957,12 +958,13 @@
             "myOrder": "Order",
             "orderList": "Order List",
             "productInfo": "Product Information",
-            "productTotal": "Number Of Product",
+            "productTotal": "Number",
             "oldPrice": "Original price",
             "newPrice": "Discount price",
             "orderNumber": "Total Order Amount",
             "orderStatus": "Order Status",
             "orderDetail": "Order Details",
+            "logisticsDetails":"Logistics Details",
             "cancelOrder": "Cancel Order",
             "toPay": "Pay Now",
             "toPayWait": "Processing",
@@ -980,6 +982,7 @@
             "waitingPay": "Payment",
             "waitingSend": "Delivery",
             "waitingReceive": "Receipt",
+            "shipped":"Shipped",
             "waitingComment": "Review",
             "sumbit": "SUBMIT",
             "hadReceive": "Received",
@@ -1079,6 +1082,23 @@
             ],
             "copySuccess": "Copy successful!",
             "copyFail": "Copy failed, please copy order number manually!"
+        },
+        "logisticInfo":{
+            "title": "Order",
+            "logistic":"Tracking Information",
+            "received":"received",
+            "intransit":"In Transit",
+            "WaitingPackage":"Waiting for pickup",
+            "noexpress":"Tracking information is unavailable ",
+            "toast1": "Copied",
+            "toast2": "This browser does not support Auto Copy",
+            "ShippingAddress":"Shipping Address",
+            "ContactMerchant":"Contact Us",
+            "result": [
+                "Waiting for pickup",
+                "In Transit",
+                "received"
+            ]
         }
     },
     "cart": {
@@ -1130,6 +1150,7 @@
         "msgContent2": "Order submission failed, please try again!",
         "payFail": "Sorry, the payment was not completed",
         "contactPhone": "For any questions, contact customer service (852)-2165 3908！",
+        "contactPhoneCh": "For any questions, contact customer service 0755 25169121！",
         "repay": "Pay again",
         "payQuestion": "Payment error",
         "msg11": "Need to log in for shopping / Mainland China Only",
@@ -1288,7 +1309,8 @@
         "activityTime": "Sales end on",
         "oddPrice": "Original price",
         "newPrice": "Discount price",
-        "needLogin": "Please login before redeem the coupon. "
+        "needLogin": "Please login before redeem the coupon. ",
+        "buyNow":"Order Now"
     },
     "policies": {
         "layout": {

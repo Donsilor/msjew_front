@@ -11,8 +11,8 @@
     <div class="address">
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
-          <span>{{ address.firstname }} {{ address.lastname }}</span
-          ><span v-if="!this.queryId">{{ lang.default }}</span>
+          <span>{{ address.firstname }} {{ address.lastname }}</span>
+          <!-- <span v-if="!this.queryId">{{ lang.default }}</span> -->
         </div>
         <p>{{ address.mobile_code }} {{ address.mobile }}</p>
         <p class="p ow-h2">
@@ -724,7 +724,7 @@ export default {
 
       this.list = JSON.parse(storage.get('myCartList', 0))
       // this.planDays = this.allFee.planDays
-      // console.log("allFee",this.list)
+      console.log("allFee",this.list)
       this.amount = this.list.length
       this.idList = []
       this.productAmount = 0
@@ -1015,7 +1015,6 @@ export default {
       this.ifShowAddress = false
       this.queryId = id
       this.getData()
-      console.log("ssss",this.queryId)
     },
     // // 登录下获取相关费用
     // getTex(k) {
@@ -1140,6 +1139,7 @@ export default {
 
             this.orderTotalAmount = res.orderAmount;
             this.ultimatelyPay = res.payAmount;
+            this.coin = res.currency
             this.currency = res.currency;
 
             this.planDays = this.allFee.planDays
@@ -1257,7 +1257,7 @@ export default {
             // console.log("address",res.data)
             if (res && res.length > 0) {
               res.map((item, index) => {
-                console.log("item",this.queryId)
+                // console.log("item",this.queryId)
                 if (this.queryId) {
                   if (
                     this.queryId === item.id ||
@@ -1266,7 +1266,7 @@ export default {
                     _this.address = item
                     _this.hasAddress = true
                   }
-                } else if (!this.queryId && item.is_default === 1) {
+                } else if (!this.queryId && item.is_default == 1) {
                   _this.address = item
                   _this.hasAddress = true
                 }
@@ -1467,7 +1467,8 @@ export default {
               tradeType:'wap',
               payType: pay,
               coinType:this.$store.state.coin,
-              returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}' //http://localhost:8328
+              returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}', //http://localhost:8328
+              buyer_remark: this.userRemark,
             }
           })
             .then(res => {

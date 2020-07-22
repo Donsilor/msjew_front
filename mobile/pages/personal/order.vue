@@ -54,14 +54,14 @@ export default {
           text: this.LANGUAGE.personal.order.waitingSend,
           num:0
         },
-        // {
-        //   // code:'' ,
-        //   // text: '',
-        //   // num:0
-        //   code: 40,
-        //   text: this.LANGUAGE.personal.order.waitingReceive,
-        //   num:0
-        // },
+        {
+          // code:'' ,
+          // text: '',
+          // num:0
+          code: 40,
+          text: this.LANGUAGE.personal.order.waitingReceive,
+          num:0
+        },
         // {
         //   // code:'' ,
         //   // text: '',
@@ -170,9 +170,9 @@ export default {
         this.statusList[0].num = res.total_count
         this.statusList[1].num = this.list.ordered.length
         this.statusList[2].num = this.list.paid.length
-        // this.statusList[3].num = this.list.send.length
+        this.statusList[3].num = this.list.send.length
         // this.statusList[4].num = this.list.finished.length
-        console.log("tttt",this.statusList[1])
+        // console.log("tttt",this.statusList[1])
     })
     .catch(err => {
       console.log(err)

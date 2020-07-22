@@ -122,12 +122,8 @@ export default {
     }
     .country {
       margin-top: 10px;
-      width: 1019px;
+      width: 100%;
       height: 583px;
-      background-image: url('/policies/country.png');
-      background-size: 1018px 531px;
-      background-position-y: 50px;
-      background-repeat: no-repeat;
       border: 1px solid #d7d7d7;
       .head {
         height: 52px;
@@ -137,13 +133,17 @@ export default {
         font-size: 16px;
         div {
           float: left;
-          width: 24%;
+          width: 25%;
           text-align: left;
           padding-left: 10px;
+          box-sizing: border-box;
         }
       }
       ul {
-        height: 531px;
+        background-image: url('/policies/country.png');
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        height: 528px;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
@@ -153,6 +153,7 @@ export default {
           padding-left: 50px;
           height: 31px;
           line-height: 32px;
+          // box-sizing: border-box;
           div {
             float: left;
             &:nth-child(1) {

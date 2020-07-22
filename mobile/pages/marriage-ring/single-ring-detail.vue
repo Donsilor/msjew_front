@@ -39,6 +39,7 @@ export default {
   },
   asyncData({ app, $axios, route, store }) {
     const lang = app.$bddLanguage.detailCommons
+
     return $axios({
       method: `post`,
       url: `/wap/goods/style/detail`,
@@ -46,11 +47,12 @@ export default {
         token: store.state.token || ''
       },
       params: {
-        goodsId: route.query.goodId
+        goodsId: route.query.goodId || ''
       }
     })
       .then(res => {
         const infos = res
+
         // let infos = null
         // if (process.server) {
         //   if (res.data.code === 200) {
