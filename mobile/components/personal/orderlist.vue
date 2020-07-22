@@ -314,12 +314,12 @@
               @click.stop="goPay(order)"
               >{{ lang.toPay }}</span
             >
-            <span
+            <!-- <span
               v-if="(order.orderStatus) > 30"
               class="btn1"
               @click="orderSigning(order.id)"
               >{{ lang.confirmReceipt }}</span
-            >
+            > -->
             <span
               v-if="canComment(order)"
               class="btn2"
