@@ -135,9 +135,9 @@
             <div>{{ $t(`${lang}.WaybillNumber`) }}：{{ data.express.expressNo }}</div>
             <div>&nbsp;</div>
           </div>
-          <div class="express-time">
+          <!-- <div class="express-time">
             <div>{{ $t(`${lang}.expressTime`) }}：{{ data.express.delivery_time }}</div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="goods-info">

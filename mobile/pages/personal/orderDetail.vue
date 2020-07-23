@@ -140,9 +140,9 @@
             <div class="bundle-code">
               {{ lang.logisticsNumber }}：{{ info.express.expressNo }}
             </div>
-            <div class="bundle-time">
+            <!-- <div class="bundle-time">
               {{ lang.sendTime }}：{{ info.express.delivery_time }}
-            </div>
+            </div> -->
           </div>
 	    </div>
 
