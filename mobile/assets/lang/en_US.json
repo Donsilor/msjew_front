@@ -957,7 +957,13 @@
       "EarringsAndStuds": "Earrings/Studs",
       "DecorationAndPendant": "Decorations/Charms",
       "others": "Others",
-      "login":"Please login"
+      "login":"Please login",
+      "personalCenter":"Personal Center",
+      "logout":"Log Out",
+      "tips": "Tips",
+      "text": "Log out now?",
+      "cancel": "CANCEL",
+      "course": "SUBMIT"
     },
     "noMoreData": {
       "noMore": "No more"

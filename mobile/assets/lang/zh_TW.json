@@ -957,7 +957,13 @@
       "EarringsAndStuds":"耳環/耳釘",
       "DecorationAndPendant":"擺件/挂件",
       "others":"其它",
-      "login":"請登入"
+      "login":"請登入",
+      "personalCenter":"個人中心",
+      "logout":"退出",
+      "tips": "提示",
+      "text": "確定退出登錄？",
+      "cancel": "取消",
+      "course": "確定"
     },
     "noMoreData": {
       "noMore": "暫無更多"
