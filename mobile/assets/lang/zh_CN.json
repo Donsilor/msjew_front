@@ -590,7 +590,15 @@
         "payfailed":"支付失败",
         "discountedAmount": "折扣金额",
         "Untied":"已解绑",
-        "couponAmount": "优惠券"
+        "couponAmount": "优惠券",
+        "payType1": "Paypal",
+        "payType2": "Paypal Card",
+        "payType3": "银联",
+        "payType4": "支付宝",
+        "payType5": "微信",
+        "payType6": "支付宝HK",
+        "payType7": "电汇",
+        "payType8": "OFFLINE"
       },
       "logisticInfo":{
         "title": "我的订单",

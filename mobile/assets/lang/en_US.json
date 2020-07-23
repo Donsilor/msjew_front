@@ -562,7 +562,6 @@
       "hadNotPay": "Payment",
       "hadPay": "Paid",
       "hadSend": "Shipped",
-      "waitingSend": "Delivery",
       "hadFinish": "Completed",
       "hadClosed": "Closed",
       "hadNotComment": "Review",
@@ -590,7 +589,15 @@
       "payfailed":"Payment failed",
       "discountedAmount": "Discounted amount",
       "Untied":"Untied",
-      "couponAmount": "Coupon"
+      "couponAmount": "Coupon",
+      "payType1": "Paypal",
+      "payType2": "Paypal Card",
+      "payType3": "UnionPay",
+      "payType4": "Alipay",
+      "payType5": "Wechat",
+      "payType6": "Alipay HK",
+      "payType7": "WireTransfer",
+      "payType8": "OFFLINE"
     },
     "logisticInfo":{
       "title": "Order",
