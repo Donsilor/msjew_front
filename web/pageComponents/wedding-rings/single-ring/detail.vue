@@ -805,7 +805,7 @@ export default {
 }
 .custom-made{
   .add-cart{
-    width: 645px!important;
+    width: 320px!important;
     // margin-top: 10px;
   }
 }
