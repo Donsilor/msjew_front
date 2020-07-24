@@ -114,8 +114,8 @@
           })
           .catch(err => {
             this.ifLoading = false;
-			      this.loadFinish = true;
-			      this.$nuxt.$loading.finish()
+	    this.loadFinish = true;
+	    this.$nuxt.$loading.finish()
             console.log(err)
           })
       }

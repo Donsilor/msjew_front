@@ -1048,17 +1048,13 @@ export default {
             text-align: center;
             width: 15%;
             font-family: twCenMt;
-            color: #b2b2b2;
+            color: #99999991;
             text-align: center;
             margin-right: 6%;
+            font-size: 20px;
           }
           .t3.old-price{
-            width: 15%;
-            font-family: twCenMt;
-            font-size: 14px;
-            color: #b2b2b2;
             text-decoration: line-through;
-            margin-right: 6%;
           }
           .t4 {
             font-family: twCenMt;

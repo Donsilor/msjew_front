@@ -22,12 +22,13 @@
            <!-- <div class="rmb">(￥{{item.moneyCn}})</div> -->
            <div class="rule">{{ $t(`${lang}.limit1`) }}{{formatCoin(coin)}} {{item.atLeast}}{{ $t(`${lang}.limit2`) }}</div>
            <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
+           <div class="usable-range"> {{ $t(`${lang}.limit3`) }}（{{ usableRange(item.areaAttach) }}）{{ $t(`${lang}.limit5`) }}</div>
            <div class="use" :class="{look:look}" @click="more"> {{ $t(`${lang}.limit3`) }}({{item.lineType == '' ? $t(`${lang}.specificProduct`) : item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
            <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
 
            <!-- 失效 class="lose-efficacy" -->
            <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">{{ $t(`${lang}.alreadyApplied`) }}</div>
-          <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="nowTime > item.endTime && item.couponStatus == 1">{{ $t(`${lang}.alreadyExpired`) }}</div>
+          <div class="lose-efficacy" v-if="nowTime > item.endTime && item.couponStatus == 1">{{ $t(`${lang}.alreadyExpired`) }}</div>
         </div>
       </div>
     </div>
@@ -47,6 +48,33 @@ export default {
       couponList: [],
       nowTime: '',
       look:true
+    }
+  },
+  computed: {
+    usableRange(r) {
+      return function(r) {
+        var ranges = '', a = '';
+        r.forEach(o => {
+          switch (o) {
+            case '1': a = 'platform1';
+              break;
+            case '2': a = 'platform2';
+              break;
+            case '3': a = 'platform3';
+              break;
+            case '4': a = 'platform4';
+              break;
+            case '99': a = 'platform5';
+              break;
+            default:
+              break;
+          }
+
+          ranges += this.$t(`${lang}.${a}`) + '，'
+        });
+
+        return ranges.slice(0, -1)
+      }
     }
   },
   mounted(){
@@ -121,7 +149,7 @@ export default {
     }
   }
   .base-info {
-    padding: 40px 28px;
+    padding: 40px 10px;
     .base-info-line {
       display: flex;
       font-size: 14px;
@@ -300,12 +328,12 @@ export default {
   color: #cdad75;
   border-radius: 5px;
   box-shadow: 0 1px 0 #9C999C,0 2px 0 #D6D5D6,0 3px 0 #E3E1E3,0 4px 0 #D6D5D6,0 5px 0 #EDECED,0 6px 0 #F9F9F9;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
   padding: 30px 20px 20px;
   box-sizing: border-box;
 
   .line-box{
-    width: 258px;
+    width: 214px;
     height: 1px;
     background-color: #A6937C;
     margin: 0 auto 16px;
@@ -359,6 +387,16 @@ export default {
   .rmb{
     text-align: center;
     margin-top: -30px;
+  }
+  .usable-range{
+    height: 30px;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
   }
   .rule{
     height: 40px;
@@ -425,9 +463,17 @@ export default {
     line-height: 120px;
     color: #fff;
     opacity: 0.9;
+    overflow: hidden;
   }
 }
+.list:nth-child(3n){
+  margin-right: 0;
+}
+
 .list .lose-efficacy.fontSize{
-	font-size: 16px;
+  font-size: 22px;
+  box-sizing: border-box;
+  padding-top: 26px;
+  line-height: 30px;
 }
 </style>

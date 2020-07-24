@@ -22,7 +22,8 @@
           <span class="price">{{item.money}}</span>
         </div>
 
-        <div class="text1">满 {{formatCoin(coin)}}{{item.atLeast}} 元使用</div>
+        <div class="text1">{{ lang.limit1 }} {{formatCoin(coin)}}{{item.atLeast}} {{ lang.limit2 }}</div>
+        <div class="usable-range"> {{ lang.limit3 }}（{{ usableRange(item.areaAttach) }}）{{ lang.limit5 }}</div>
         <div class="limit">{{ lang.limit3 }}（{{item.lineType == '' ? lang.specificProduct : item.lineType}}）{{ lang.limit4 }}</div>
 
         <div class="text2">{{ lang.time }}：{{changeTime(item.startTime)}}-{{changeTime(item.endTime)}}</div>
@@ -30,7 +31,7 @@
         <!-- <div class="btn">点击使用</div> -->
 
         <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">{{ lang.alreadyApplied }}</div>
-        <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="nowTime > item.endTime && item.couponStatus == 1">{{ lang.alreadyExpired }}</div>
+        <div class="lose-efficacy" v-if="nowTime > item.endTime && item.couponStatus == 1">{{ lang.alreadyExpired }}</div>
       </div>
     </div>
   </div>
@@ -45,6 +46,33 @@ export default {
       couponList: [],
       language:this.$store.state.language,
       nowTime: '',
+    }
+  },
+  computed: {
+    usableRange(r) {
+      return function(r) {
+        var ranges = '', a = '';
+        r.forEach(o => {
+          switch (o) {
+            case '1': a = 'platform1';
+              break;
+            case '2': a = 'platform2';
+              break;
+            case '3': a = 'platform3';
+              break;
+            case '4': a = 'platform4';
+              break;
+            case '99': a = 'platform5';
+              break;
+            default:
+              break;
+          }
+
+          ranges += this.lang[a] + '，'
+        })
+
+        return ranges.slice(0, -1)
+      }
     }
   },
   mounted(){
@@ -201,10 +229,27 @@ export default {
         line-height: 20px;
       }
 
+      .usable-range{
+        height: 30px;
+        font-size: 13px;
+        text-align: center;
+        margin-bottom: 10px;
+        display: -webkit-box;
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+      }
+
       .limit{
         color: #bfb8b8;
         font-size: 13px;
-        height: 34px;
+        height: 30px;
+        display: -webkit-box;
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
       }
 
       .btn{
@@ -232,9 +277,16 @@ export default {
     border-radius: 50%;
     font-size: 20px;
     text-align: center;
-    line-height: 80px;
+    line-height: 90px;
     color: #fff;
     opacity: 0.9;
+    overflow: hidden;
   }
+}
+
+.lose-efficacy.fontSize{
+  font-size: 18px;
+  padding-top: 18px;
+  line-height: 26px;
 }
 </style>

@@ -1123,7 +1123,7 @@ div {
                   color: #f29b87;
                 }
                 span:first-child{
-                  color: #e6e6e6;
+                  color: #99999991;
                 }
                 .old-price{
                   text-decoration: line-through;
@@ -1205,7 +1205,7 @@ div {
     color: #f29b87;
   }
   span:first-child{
-    color: #e6e6e6;
+    color: #99999991;
   }
   .old-price{
     text-decoration: line-through;
