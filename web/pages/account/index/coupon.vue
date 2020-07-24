@@ -16,7 +16,7 @@
 
            <div class="price">
              <span class="price-icon">{{formatCoin(coin)}}</span>
-             <span class="price-num">{{item.money}}</span>
+             <span class="price-num">{{ formatMoney(item.money)}}</span>
            </div>
 
            <!-- <div class="rmb">(￥{{item.moneyCn}})</div> -->
@@ -370,7 +370,6 @@ export default {
 
     .price-icon{
       font-size: 22px;
-      width: 54px;
       flex-shrink: 0;
     }
 
