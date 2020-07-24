@@ -26,7 +26,7 @@
         <div class="usable-range"> {{ lang.limit3 }}（{{ usableRange(item.areaAttach) }}）{{ lang.limit5 }}</div>
         <div class="limit">{{ lang.limit3 }}（{{item.lineType == '' ? lang.specificProduct : item.lineType}}）{{ lang.limit4 }}</div>
 
-        <div class="text2">{{ lang.time }}：{{changeTime(item.startTime)}}-{{changeTime(item.endTime)}}</div>
+        <div class="text2">{{changeTime(item.startTime)}}-{{changeTime(item.endTime)}}</div>
 
         <!-- <div class="btn">点击使用</div> -->
 

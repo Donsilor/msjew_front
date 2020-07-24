@@ -24,7 +24,7 @@
            <!-- <div class="btn">{{ $t(`${lang}.use`) }}</div> -->
            <div class="usable-range"> {{ $t(`${lang}.limit3`) }}（{{ usableRange(item.areaAttach) }}）{{ $t(`${lang}.limit5`) }}</div>
            <div class="use" :class="{look:look}" @click="more"> {{ $t(`${lang}.limit3`) }}({{item.lineType == '' ? $t(`${lang}.specificProduct`) : item.lineType}}){{ $t(`${lang}.limit4`) }}</div>
-           <div class="time">{{ $t(`${lang}.time`) }}：{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
+           <div class="time">{{changeTime(item.startTime)}} - {{changeTime(item.endTime)}}</div>
 
            <!-- 失效 class="lose-efficacy" -->
            <div :class="['lose-efficacy', {fontSize: language === 'en_US'}]" v-if="item.couponStatus == 2">{{ $t(`${lang}.alreadyApplied`) }}</div>
@@ -435,11 +435,12 @@ export default {
   }
   
   .look{
-    height: 20px;
+    height: 32px;
     line-height: 16px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
-    text-overflow:ellipsis;
-    white-space: nowrap;
   }
 
   .time{
