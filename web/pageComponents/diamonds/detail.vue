@@ -102,7 +102,7 @@
             </div>
           </div>
         </div>
-        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
+        <ul class="services-list">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
@@ -565,8 +565,8 @@ export default {
 .detail-page {
   margin: auto;
   .add-cart{
-    margin-top: 10px;
-    width: 659px!important;
+    // margin-top: 10px;
+    width: 320px!important;
   }
   .start-dj{
     width: 320px!important;
