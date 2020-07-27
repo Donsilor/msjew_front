@@ -1133,7 +1133,8 @@
         "deleteWishSuccess": "删除心愿单成功",
         "searchSimilar": "找类似",
         "discounts1": "优惠券",
-        "discounts2": "折"
+        "discounts2": "折",
+        "firstLogin": "请先登录或注册！"
     },
     "pay": {
         "confirmOrder": "购物车",

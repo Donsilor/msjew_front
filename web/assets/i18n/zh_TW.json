@@ -1128,7 +1128,8 @@
         "deleteWishSuccess": "刪除心願單成功",
         "searchSimilar": "找类似",
         "discounts1": "優惠券",
-        "discounts2": "折"
+        "discounts2": "折",
+        "firstLogin": "請先登錄或註冊！"
     },
     "pay": {
         "confirmOrder": "購物車",

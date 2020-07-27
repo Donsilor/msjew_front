@@ -789,18 +789,18 @@ export default language => {
     ],
 
     coinOptionsCn: [
-      {
-        code: 'HKD',
-        content: 'HKD'
-      },
+      // {
+      //   code: 'HKD',
+      //   content: 'HKD'
+      // },
       {
         code: 'CNY',
         content: 'CNY'
       },
-      {
-        code: 'USD',
-        content: 'USD'
-      }
+      // {
+      //   code: 'USD',
+      //   content: 'USD'
+      // }
     ],
 
     coinOptionsTw: [

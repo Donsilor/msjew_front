@@ -459,18 +459,18 @@ export default {
       actionLink: '',
       // 大陆支付
       list2: [
-        {
-          url: '/cart/pay.png',
-          type: 6,
-          title: this.LANGUAGE.cart.pay.payType0,
-          des: this.LANGUAGE.cart.pay.type0Text
-        },
-        {
-          url: '/cart/visa_1.png',
-          type: 61,
-          title: this.LANGUAGE.cart.pay.payType6,
-          des: this.LANGUAGE.cart.pay.type6Text
-        },
+        // {
+        //   url: '/cart/pay.png',
+        //   type: 6,
+        //   title: this.LANGUAGE.cart.pay.payType0,
+        //   des: this.LANGUAGE.cart.pay.type0Text
+        // },
+        // {
+        //   url: '/cart/visa_1.png',
+        //   type: 61,
+        //   title: this.LANGUAGE.cart.pay.payType6,
+        //   des: this.LANGUAGE.cart.pay.type6Text
+        // },
         {
           url: '/cart/ap.png',
           type: 82,
@@ -483,18 +483,18 @@ export default {
           title: this.LANGUAGE.cart.pay.payType4,
           des: this.LANGUAGE.cart.pay.type4Text
         },
-        {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-          url: '/cart/ph.png',
-          type: 89,
-          title: this.LANGUAGE.cart.pay.payType5,
-          des: this.LANGUAGE.cart.pay.type5Text,
-        }
+        // {
+        //   url: '/cart/up.png',
+        //   type: 81,
+        //   title: this.LANGUAGE.cart.pay.payType1,
+        //   des: this.LANGUAGE.cart.pay.type1Text
+        // },
+        // {
+        //   url: '/cart/ph.png',
+        //   type: 89,
+        //   title: this.LANGUAGE.cart.pay.payType5,
+        //   des: this.LANGUAGE.cart.pay.type5Text,
+        // }
         // {
         //   url: '/cart/paydollar.png',
         //   type: 8,
@@ -792,20 +792,22 @@ export default {
       this.typeIndex = ind
       let pay = 0
       if(this.typeIndex == 0){
-        pay = 6
+        if(this.$store.state.platform === 21){
+          pay = 82
+        } else {
+          pay = 6
+        }
       }else if(this.typeIndex == 1){
-        if(this.$store.state.platform === 41){
-          pay = 81
+        if(this.$store.state.platform === 21){
+          pay = 83
         }else{
           pay = 61
         }
       }else if(this.typeIndex == 2){
-        if(this.$store.state.platform === 21){
-          pay = 82
+        if(this.$store.state.platform === 11){
+          pay = 84
         }else if(this.$store.state.platform === 41){
           pay = 89
-        }else{
-          pay = 84
         }
       }else if(this.typeIndex == 3){
         pay = 83

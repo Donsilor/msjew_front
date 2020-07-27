@@ -38,11 +38,12 @@
       <div class="new-address-title">
         <div class="na-line" />
         <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
-        <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang}.Note3`) }}</div>
+        <!-- <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang}.Note3`) }}</div> -->
       </div>
       <div class="pay-blocks">
         <!-- paypal -->
         <div
+          v-show="this.$store.state.platform !== 20"
           :class="{ 'pay-choose': payWay == 6 }"
           class="pay-block"
           @click="payWay = 6"
@@ -54,16 +55,16 @@
           <div v-show="payWay == 6" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 6" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
         <!-- vise -->
           <div
-          v-show="this.$store.state.platform !== 40"
+          v-show="this.$store.state.platform !== 20"
           :class="{ 'pay-choose': payWay == 61 }"
           class="pay-block"
           @click="payWay = 61"
@@ -75,9 +76,9 @@
           <div v-show="payWay === 61" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 61" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -85,21 +86,21 @@
         <!-- 支付宝 -->
         <div
           v-show="this.$store.state.platform == 20"
-          :class="{ 'pay-choose': payWay == 82 }"
+          :class="{ 'pay-choose': payWay == 2 }"
           class="pay-block"
-          @click="payWay = 82"
+          @click="payWay = 2"
         >
           <div class="pay-img">
             <img src="../../static/order/alipay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay == 82" class="pay-price">
+          <div v-show="payWay == 2" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
-          <div v-show="payWay == 82" class="choose-tick">
+          </div> -->
+          <div v-show="payWay == 2" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
           <!-- <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div> -->
@@ -119,9 +120,9 @@
           <div v-show="payWay == 84" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 84" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -146,7 +147,7 @@
         </div> -->
         <!-- 微信 -->
         <div
-          v-show="this.$store.state.platform == 10 || this.$store.state.platform == 20"
+          v-show="this.$store.state.platform == 10"
           :class="{ 'pay-choose': payWay == 83 }"
           class="pay-block"
           @click="payWay = 83"
@@ -158,10 +159,34 @@
           <div v-show="payWay == 83" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 83" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+          <!-- <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+          "><span>*</span> {{ $t(`${lang}.msg11`) }}</div> -->
+        </div>
+
+        <!-- 微信（大陆） -->
+        <div
+          v-show="this.$store.state.platform == 20"
+          :class="{ 'pay-choose': payWay == 1 }"
+          class="pay-block"
+          @click="payWay = 1"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/wechatpay.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
+          <div v-show="payWay == 1" class="pay-price">
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
+          </div>
+          <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
+          </div> -->
+          <div v-show="payWay == 1" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
           <!-- <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
@@ -170,7 +195,7 @@
 
         <!-- 信用卡 -->
         <div
-          v-show="this.$store.state.platform !== 30"
+          v-show="this.$store.state.platform == 10"
           :class="{ 'pay-choose': payWay == 81 }"
           class="pay-block"
           @click="payWay = 81"
@@ -182,9 +207,9 @@
           <div v-show="payWay === 81" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 81" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -193,7 +218,7 @@
 
         <!-- 电汇 -->
         <div
-           v-show="this.$store.state.platform !== 30"
+           v-show="this.$store.state.platform == 10 || this.$store.state.platform == 40"
           :class="{ 'pay-choose': payWay == 88 }"
           class="pay-block"
           @click="payWay = 88;wire()"
@@ -205,9 +230,9 @@
           <div v-show="payWay == 88" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 88 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 88 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 88" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -245,7 +270,7 @@
             <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
               {{ formatCoin(coinType) }} {{ formatMoney(price) }}
-              <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }})</span>
+              <!-- <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }})</span> -->
             </div>
             <div v-else class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
@@ -558,7 +583,7 @@ export default {
     },
     goPay() {
       if(this.$store.state.coin === 'USD'){
-        if(this.payWay == 82 || this.payWay == 83||this.payWay == 81||this.payWay == 84){
+        if(this.payWay == 2 || this.payWay == 83|| this.payWay == 1||this.payWay == 81||this.payWay == 84){
           this.$errorMessage(this.$t(`${lang}.NotSupportPay`))
           return
         }
@@ -571,10 +596,12 @@ export default {
         pay = 61
       }else if(this.payWay==81){
         pay = 81
-      }else if(this.payWay==82){
-        pay = 82
+      }else if(this.payWay==2){
+        pay = 2
       }else if(this.payWay==83){
         pay = 83
+      }else if(this.payWay==1){
+        pay = 1
       }else if(this.payWay==84){
         pay = 84
       }

@@ -3,10 +3,10 @@
     <div class="paylist" v-show="paylist">
       <Header :title="lang.pay" tips="1" />
       <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
-        <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div>
+        <!-- <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div> -->
         <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
-        <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
+        <!-- <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span> -->
       </div>
       <div v-else class="proce">
         <span>{{ formatCoin(info.coinType) }} </span>
@@ -192,42 +192,42 @@ export default {
       actionLink: '',
       // 大陆支付
       list: [
-        {
-          url: '/cart/pay.png',
-          type: 6,
-          title: this.LANGUAGE.cart.pay.payType0,
-          des: this.LANGUAGE.cart.pay.type0Text
-        },
-        {
-          url: '/cart/visa_1.png',
-          type: 61,
-          title: this.LANGUAGE.cart.pay.payType6,
-          des: this.LANGUAGE.cart.pay.type6Text
-        },
+        // {
+        //   url: '/cart/pay.png',
+        //   type: 6,
+        //   title: this.LANGUAGE.cart.pay.payType0,
+        //   des: this.LANGUAGE.cart.pay.type0Text
+        // },
+        // {
+        //   url: '/cart/visa_1.png',
+        //   type: 61,
+        //   title: this.LANGUAGE.cart.pay.payType6,
+        //   des: this.LANGUAGE.cart.pay.type6Text
+        // },
         {
           url: '/cart/ap.png',
-          type: 82,
+          type: 2,
           title: this.LANGUAGE.cart.pay.payType3,
           des: this.LANGUAGE.cart.pay.type3Text
         },
         {
           url: '/cart/wac.png',
-          type: 83,
+          type: 1,
           title: this.LANGUAGE.cart.pay.payType4,
           des: this.LANGUAGE.cart.pay.type4Text
         },
-        {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-          url: '/cart/ph.png',
-          type: 89,
-          title: this.LANGUAGE.cart.pay.payType5,
-          des: this.LANGUAGE.cart.pay.type5Text,
-        }
+        // {
+        //   url: '/cart/up.png',
+        //   type: 81,
+        //   title: this.LANGUAGE.cart.pay.payType1,
+        //   des: this.LANGUAGE.cart.pay.type1Text
+        // },
+        // {
+        //   url: '/cart/ph.png',
+        //   type: 89,
+        //   title: this.LANGUAGE.cart.pay.payType5,
+        //   des: this.LANGUAGE.cart.pay.type5Text,
+        // }
         // {
         //   url: '/cart/paydollar.png',
         //   type: 8,
@@ -277,7 +277,7 @@ export default {
         {
           url: '/cart/ap-HK.png',
           type: 84,
-          title: this.LANGUAGE.cart.pay.payType3+' HK',
+          title: this.LANGUAGE.cart.pay.payType3+'  ',
           des: this.LANGUAGE.cart.pay.type3Text
         },
         {
@@ -406,27 +406,29 @@ export default {
       }
       let pay = ""
       if(this.typeIndex == 0){
-        pay = 6
+        if(this.$store.state.platform === 21){
+          pay = 2
+        } else {
+          pay = 6
+        }
       }else if(this.typeIndex == 1){
-        if(this.$store.state.platform === 41){
-          pay = 81
-        }else{
+        if(this.$store.state.platform === 21){
+          pay = 1
+        } else{
           pay = 61
         }
       }else if(this.typeIndex == 2){
-        if(this.$store.state.platform === 21){
-          pay = 82
+        if(this.$store.state.platform === 11){
+          pay = 84
         }else if(this.$store.state.platform === 41){
           pay = 89
-        }else{
-          pay = 84
         }
       }else if(this.typeIndex == 3){
         pay = 83
       }else if(this.typeIndex == 4){
         pay = 81
       }else if(this.typeIndex == 5){
-        pay = 7
+        pay = 89
       }
 
       // if (this.typeIndex === 5) {

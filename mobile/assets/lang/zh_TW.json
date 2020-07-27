@@ -130,7 +130,8 @@
       "toast1": "請選擇要結賬商品",
       "toast2": "移除成功",
       "discounts1": "優惠券",
-      "discounts2": "折"
+      "discounts2": "折",
+      "firstLogin":"請先登錄或註冊！"
     },
     "invoice":{
       "personal":"個人",

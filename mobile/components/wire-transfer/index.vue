@@ -7,8 +7,8 @@
                 <span class="price" v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform == 11">
                   <span class="coin">{{ formatCoin(coin) }}</span> 
                   <span class="price">{{ formatMoney(price) }}</span>
-                  <span class="coin-hkd">({{ coinHKD }}</span> 
-                  <span class="price-hkd">{{ formatMoney(priceHKD) }})</span>
+                  <!-- <span class="coin-hkd">({{ coinHKD }}</span> 
+                  <span class="price-hkd">{{ formatMoney(priceHKD) }})</span> -->
                 </span>
                 <span v-else><span class="coin">{{ formatCoin(coin) }}</span> <span class="price">{{ formatMoney(price) }}</span></span>
             </div>

@@ -1124,7 +1124,8 @@
         "deleteWishSuccess": "Wish list deleted",
         "searchSimilar": "search similar",
         "discounts1": "Coupon",
-        "discounts2": "off"
+        "discounts2": "off",
+        "firstLogin": "Please login or register!"
     },
     "pay": {
         "confirmOrder": "Shopping cart",
