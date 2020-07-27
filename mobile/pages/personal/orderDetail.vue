@@ -32,10 +32,10 @@
             <li v-else>{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
             <li>{{ lang.orderTime }}：{{ info.orderTime }}</li>
-            <template v-if="info.orderStatus > 20 && info.orderStatus !== 50">
-              <li>{{ lang.payType }}：{{ info.payChannelText }}</li>
-              <li>{{ lang.payTime }}：{{ info.payTime }}</li>
-            </template>
+            <li v-if="info.orderStatus !== 0">{{ lang.payType }}：{{ payType(info.payChannelText) }}</li>
+            <!-- <template v-if="info.orderStatus > 20 && info.orderStatus !== 50"> -->
+              <!-- <li>{{ lang.payTime }}：{{ info.payTime }}</li> -->
+            <!-- </template> -->
           </ul>
         </div>
       </div>
@@ -478,6 +478,11 @@ export default {
         return item
       })
       return data
+    },
+    payType(n) {
+      return function(n) {
+        return this.lang[n]
+      }
     }
   },
   mounted() {
@@ -538,13 +543,15 @@ export default {
     },
     payChannelText(payChannel) {
       const map = {
-        1: '電匯',
-        2: 'paypal',
-        3: '微信',
-        4: '支付宝',
-        5: 'visa/Mastercard',
-        6: '銀聯',
-        7: 'paydollar'
+        6: 'payType1',     // Paypal
+        61: 'payType2',    // Paypal Card
+        81: 'payType3',    // 银联
+        82: 'payType4',    // 支付宝
+        83: 'payTtype5',    // 微信
+        84: 'payType6',    // 支付宝HK
+        11: 'payType7',    // WireTransfer(电汇)
+        100: 'payType8'    // OFFLINE
+        
       }
       return map[payChannel]
     },
