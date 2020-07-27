@@ -967,7 +967,13 @@
         "EarringsAndStuds":"耳环/耳钉",
         "DecorationAndPendant":"摆件/挂件",
         "others":"其它",
-        "login":"请登入"
+        "login":"请登入",
+        "personalCenter":"个人中心",
+        "logout":"退出",
+        "tips": "提示",
+        "text": "确定退出登录？",
+        "cancel": "取消",
+        "course": "确定"
       },
       "noMoreData": {
         "noMore": "暂无更多"
