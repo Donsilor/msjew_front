@@ -532,7 +532,7 @@
         "orderDetail": "订单详情",
         "orderStatus": "订单状态",
         "orderNumber": "订单编号",
-        "orderTime": "订单编号",
+        "orderTime": "下单时间",
         "payType": "付款方式",
         "payTime": "付款时间",
         "logistics": "物流",
