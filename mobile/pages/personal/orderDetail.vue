@@ -547,7 +547,7 @@ export default {
         61: 'payType2',    // Paypal Card
         81: 'payType3',    // 银联
         82: 'payType4',    // 支付宝
-        83: 'payTtype5',    // 微信
+        83: 'payType5',    // 微信
         84: 'payType6',    // 支付宝HK
         11: 'payType7',    // WireTransfer(电汇)
         100: 'payType8'    // OFFLINE
