@@ -140,7 +140,10 @@
         <i v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21">{{ lang.tips }}</span>
       </div>
       <div class="btn" @click="goPaySuccess">
-        {{ list[typeIndex].title }}
+        <span v-if="this.$store.state.platform == 21">{{ list[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 11">{{ listHk[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
         {{ formatCoin(info.coinType) }}
         {{ formatMoney(price) }}
