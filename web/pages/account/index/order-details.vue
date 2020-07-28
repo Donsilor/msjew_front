@@ -52,6 +52,10 @@
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.pending`)}}
           </span>
+          <span v-else-if="data.wireTransferStatus == '1' && data.orderStatus == '40'">
+            {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
+            {{$t(`${lang_pay}.hadSend`)
+          }}</span>
           <span v-else-if="data.wireTransferStatus == '1'">
             {{$t(`${lang_pay}.orderStatus`)}}:&nbsp;&nbsp;
             {{$t(`${lang_pay}.hadPay`)}}
@@ -131,9 +135,9 @@
             <div>{{ $t(`${lang}.WaybillNumber`) }}：{{ data.express.expressNo }}</div>
             <div>&nbsp;</div>
           </div>
-          <div class="express-time">
+          <!-- <div class="express-time">
             <div>{{ $t(`${lang}.expressTime`) }}：{{ data.express.delivery_time }}</div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="goods-info">

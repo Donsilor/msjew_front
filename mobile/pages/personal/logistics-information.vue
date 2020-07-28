@@ -4,12 +4,16 @@
         <div class="logistic" v-if="data.express.logistics !== null">
             <div class="schedule">
                 <div class="left">
-                    <div class="title">{{lang.Shipping}}</div>
+                    <div class="title">
+                        <span v-if="expStatus.has_active == true && expStatus.has_signed == false ">{{lang.WaitingPackage}}</span>
+                        <span v-else-if="expStatus.has_active == true && expStatus.has_ended == false">{{lang.intransit}}</span>
+                        <span v-else-if="expStatus.has_signed == true && expStatus.has_ended == true">{{lang.received}}</span>
+                    </div>
                     <div class="address">
                         <span>{{lang.ShippingAddress}}:</span>
                         <span>
-                            {{data.address.countryName}}
-                            {{data.address.provinceName}}
+                            {{data.address.countryName}}-
+                            {{data.address.provinceName}}-
                             {{data.address.cityName}}
                             {{data.address.address}}
                         </span>
@@ -20,12 +24,12 @@
                         <i class="icon iconfont iconcopy copy-btn" :data-clipboard-text="data.express.expressNo" @click="copy"></i>
                     </div>
                 </div>
-                <div class="right">
+                <!-- <div class="right">
                     <div>
                         <img src="../../static/personal/user.png" alt=""> 
                         <p>{{lang.ContactMerchant}}</p>
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- <div class="track" >
                 <div class="track-list">
@@ -84,22 +88,26 @@
                             <div class="track-list">
                             <ul>
                             <div v-for="(item,index) in list" :key="index">
-                                <li class="first" v-if="index===0">
-                                <div></div>
-                                <i class="node-icon"></i>
-                                <span class="txt">{{item.remark}}</span>
-                                <span class="time">{{item.datetime}}</span>
+                                <li class="first" v-if="index === 0 && list.length > 0">
+                                    <div></div>
+                                    <i class="node-icon"></i>
+                                    <span class="txt" :class="{more:more}">{{item.remark}}</span>
+                                    <span class="time">{{item.datetime.slice(5,16)}}</span>
                                 </li>
                                 <li v-if="index > 0 && index !== list.length-1">
-                                <i class="node-icon"></i>
-                                <span class="txt">{{item.remark}}</span>
-                                <span class="time">{{item.datetime}}</span>
+                                    <i class="node-icon"></i>
+                                    <span class="txt" :class="{more:more}">{{item.remark}}</span>
+                                    <span class="time">{{item.datetime.slice(5,16)}}</span>
                                 </li>
-                                <li v-if="index === list.length-1" class="finall">
-                                <i class="div-spilander"></i>
-                                <i class="node-icon"></i>
-                                <span class="txt">{{item.remark}}</span>
-                                <span class="time">{{item.datetime}}</span>
+                                <li v-if="index === list.length-1 && list.length >1" class="finall">
+                                    <i class="div-spilander"></i>
+                                    <i class="node-icon"></i>
+                                    <span class="txt" :class="{more:more}">{{item.remark}}</span>
+                                    <span class="time">{{item.datetime.slice(5,16)}}</span>
+                                </li>
+                                <li v-if="index === list.length-1 && list.length == 1" class="finall">
+                                    <i class="div-spilander"></i>
+                                    <i class="node-icon"></i>
                                 </li>
                             </div>
                             </ul>
@@ -147,6 +155,7 @@ export default {
         },
         express:{},
         list:[],
+        more:true
     }
   },
   mounted(){
@@ -191,6 +200,9 @@ export default {
         clipboard.destroy()
       })
     },
+    open(){
+        this.more = false
+    }
   }
 }
 </script>
@@ -210,10 +222,18 @@ export default {
         }
     }
     .schedule{
-        border-radius: 6px;
+        padding: 18px 12px;
+        margin-top: 12px;
+        background: rgba(248, 244, 241, 1);
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgba(148, 116, 101, 1);
+        line-height: 20px;
+        // border-radius: 6px;
         border:1px solid #ddd;
         margin: 15px;
-        padding: 10px 0 10px 10px;
+        // padding: 10px 0 10px 10px;
         text-align: left;
         display: flex;
         justify-content: space-between;
@@ -221,18 +241,25 @@ export default {
             .title{
                 font-size: 16px;
                 font-weight: 700;
-                color: #666666;
+                // color: #666666;
                 padding: 10px 0;
             }
             .address{
-                font-size: 14px;
-                padding: 5px 0;
-                color: #999999;
+                /*! autoprefixer: off */
+                width: 260px;
+                font-size: 12px;
+                overflow:hidden;
+                text-overflow: ellipsis;
+                display:-webkit-box;
+                -webkit-line-clamp:2;
+                -webkit-box-orient:vertical;
+                // padding: 5px 0;
+                // color: #999999;
             }
             .deliveryNo{
-                font-size: 14px;
+                font-size: 12px;
                 padding: 5px 0;
-                color: #999999;
+                // color: #999999;
             }
         }
         .right{
@@ -509,7 +536,7 @@ export default {
         font-size: 13px;
     }
     ul {
-        padding-left: 80px
+        padding-left: 40px
     }
     .track-list{
         position:relative;
@@ -553,8 +580,8 @@ export default {
         // margin-right:20px;
         line-height: 20px;
         position: absolute;
-        width: 34%;
-        left:-85px;
+        width: 15%;
+        left:-50px;
         top: 0; 
         // top:-10px;
         display:inline-block;
@@ -569,8 +596,16 @@ export default {
         display:inline-block;
         vertical-align:top;
         color: #999;
+        width: 245px;
         line-height: 25px;
         font-size: 13px;
+    }
+    .more{
+        // overflow: hidden;
+        // text-overflow:ellipsis;
+        // word-wrap: break-word;
+        // word-break: break-all;
+        // white-space: nowrap; 
     }
     .track-list li.first .time{
         text-align: left;

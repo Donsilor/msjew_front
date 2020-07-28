@@ -4,7 +4,10 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span v-if="order.orderStatus !== 0 && order.refundStatus == 0 && order.wireTransferStatus !== null" class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
+          <span v-if="order.orderStatus !== 0 && order.refundStatus == 0 && order.wireTransferStatus !== null" class="order-status">
+            <span class="order-status" v-if="order.orderStatus == 40">{{ statusText(order.orderStatus) }}</span>
+            <span class="order-status" v-else>{{ getTransferStatus(order.wireTransferStatus) }}</span>
+          </span>
           <span v-else-if="order.refundStatus == 1" class="order-status">{{ refundStatusText(order.refundStatus) }}</span>
           <span v-else class="order-status">{{ statusText(order.orderStatus) }}</span>
           <!-- <span v-if="order.wireTransferStatus === null && order.refundStatus == 0" class="order-status">{{ statusText(order.orderStatus) }}</span>
@@ -271,7 +274,7 @@
           <div class="order" :class="order.orderStatus != 10 || order.paymentType == 11? 'no-margin' : '0'">
             <div>
               <div class="btn-look" v-if="ifShow(order)"  @click="toDetail(order.id)">{{lang.lookOrder}}</div>
-              <div class="btn-look btn-express" v-if="order.orderStatus != 10 && order.orderStatus != 0"  @click="toLogistic(order.id)">{{lang.logisticsDetails}}</div>
+              <div class="btn-look btn-express" v-if="order.orderStatus == 40"  @click="toLogistic(order.id)">{{lang.logisticsDetails}}</div>
             </div>
             <div>
               <div class="order-box-a">
@@ -459,7 +462,7 @@ export default {
         order.details = result
         return order
       })
-      console.log("showOrderList",showData)
+      // console.log("showOrderList",showData)
       return showData
     },
     // 列表特定参数

@@ -1099,6 +1099,10 @@
             "intransit":"运输中",
             "WaitingPackage":"等待揽件",
             "noexpress":"暂无物流信息",
+            "ShippingAddress":"收货地址",
+            "toast1": "复制成功",
+            "toast2": "该浏览器不支持自动复制",
+            "ContactMerchant":"联系商家",
             "result": [
                 "等待揽件",
                 "运输中",

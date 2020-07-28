@@ -576,6 +576,12 @@
         "defaultPairRing": "BDD珠宝商城精选对戒",
         "diy": "定制",
         "cableTransfer": "电汇",
+        "paypal":"Paypal",
+        "wechat":"微信",
+        "alipay":"支付宝",
+        "alipayhk":"支付宝HK",
+        "visa":"visa",
+        "UnionPay":"银联",
         "caveat": "警告",
         "cancel": "取消",
         "clear": "确定",
@@ -611,7 +617,12 @@
         "toast2": "该浏览器不支持自动复制",
         "Shipping":"订单配送中",
         "ShippingAddress":"收货地址",
-        "ContactMerchant":"联系商家"
+        "ContactMerchant":"联系商家",
+        "result": [
+            "等待揽件",
+            "运输中",
+            "已签收"
+        ]
       }
     },
     "custom-made": {
