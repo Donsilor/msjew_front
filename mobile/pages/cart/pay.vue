@@ -137,7 +137,7 @@
       </ul>
 
       <div class="tips">
-        <i v-show="this.$store.state.platform !== 31" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform !== 31">{{ lang.tips }}</span>
+        <i v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21">{{ lang.tips }}</span>
       </div>
       <div class="btn" @click="goPaySuccess">
         {{ list[typeIndex].title }}
