@@ -116,7 +116,7 @@ export default {
       }
       if (!_this.simpleDetail) {
         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
-        return
+        return 
       } 
 
       const time = this.getTimestampUuid
