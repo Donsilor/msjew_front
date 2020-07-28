@@ -626,7 +626,8 @@
       "addCartFail": "加入购物车是失败",
       "discounts1": "优惠券",
       "discounts2": "折",
-      "buyNow":"立即购买"
+      "buyNow":"立即购买",
+      "firstLogin":"请先登录或注册！"
     },
     "diamond": {},
     "engagement": {
@@ -1143,7 +1144,8 @@
       "oddPrice": "原  价",
       "newPrice": "折后价",
       "needLogin": "请先登录，才能领取优惠券",
-      "buyNow":"立即购买"
+      "buyNow":"立即购买",
+      "firstLogin":"请先登录或注册！"
     },
     "listCommons": {
       "sliders": [

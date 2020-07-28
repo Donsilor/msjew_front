@@ -580,6 +580,10 @@ export default {
         })
     },
     async orderNow() {
+      if(!this.isLogin && this.$store.state.platform == 20){
+        this.$errorMessage(this.$t(`${lang}.firstLogin`))
+        return
+      }
       const timeSock = new Date().getTime()
       const time = this.getTimestampUuid
       let goodInfo = [

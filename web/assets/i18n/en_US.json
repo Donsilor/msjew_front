@@ -1307,7 +1307,8 @@
         "oddPrice": "Original price",
         "newPrice": "Discount price",
         "needLogin": "Please login before redeem the coupon. ",
-        "buyNow":"Order Now"
+        "buyNow":"Order Now",
+        "firstLogin": "Please login or register!"
     },
     "policies": {
         "layout": {
@@ -2468,7 +2469,8 @@
         "error": "Page Error",
         "soleOut": "The Goods Have Sold Out",
         "pleaseSelect":"Please select product parameters",
-        "doubleRingTip":"Please select from the available colour and size options"
+        "doubleRingTip":"Please select from the available colour and size options",
+        "firstLogin": "Please login or register!"
     },
     "order": {
         "firstLogin": "Please login or register!",

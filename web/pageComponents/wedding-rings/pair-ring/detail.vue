@@ -1205,6 +1205,10 @@ export default {
     // 立即购买
     orderNow(){
       const _this = this
+      if(!this.isLogin && this.$store.state.platform == 20){
+        _this.$errorMessage(_this.$t(`common.firstLogin`))
+        return
+      }
 
       _this.changeChecked()
 

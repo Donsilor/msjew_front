@@ -1316,7 +1316,8 @@
         "oddPrice": "原  价",
         "newPrice": "折后价",
         "needLogin": "请先登录，才能领取优惠券",
-        "buyNow":"立即购买"
+        "buyNow":"立即购买",
+        "firstLogin": "请先登录或注册！"
     },
     "policies": {
         "layout": {
@@ -2476,7 +2477,8 @@
         "error": "页面出错了",
         "soleOut": "商品已售罄",
         "pleaseSelect":"请先选择商品参数！",
-        "doubleRingTip":"您未选择参数或已选择的参数已售罄，请重新选择！"
+        "doubleRingTip":"您未选择参数或已选择的参数已售罄，请重新选择！",
+        "firstLogin": "请先登录或注册！"
     },
     "order": {
         "firstLogin": "请先登录或注册！",

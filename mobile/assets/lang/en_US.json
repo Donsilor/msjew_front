@@ -627,7 +627,8 @@
     "addCartFail": "Failed to add to cart",
     "discounts1": "Coupon",
     "discounts2": "off",
-    "buyNow":"Order Now"
+    "buyNow":"Order Now",
+    "firstLogin": "Please login or register!"
   },
   "diamond": {},
   "engagement": {
@@ -1139,7 +1140,8 @@
     "oddPrice": "Original price",
     "newPrice": "Discount price",
     "needLogin": "Please login before redeem the coupon.",
-    "buyNow":"Order Now"
+    "buyNow":"Order Now",
+    "firstLogin": "Please login or register!"
   },
   "listCommons": {
     "sliders": [
