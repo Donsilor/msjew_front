@@ -5,7 +5,8 @@
       <div class="top">
         <!--        <OrderHeader :list="statusSteps" :stepindex="step" />-->
         <div v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null" class="status-title">
-          {{ getTransferStatus(info.wireTransferStatus) }}
+          <span class="order-status" v-if="info.orderStatus == 40">{{ statusText(info.orderStatus) }} </span>
+          <span class="order-status" v-else>{{ getTransferStatus(info.wireTransferStatus) }}</span>
         </div>
         <div v-else-if="info.refundStatus == 1" class="status-title">
           {{ getRefundStatusText(info.refundStatus) }}
@@ -27,7 +28,10 @@
             <!-- <li v-if="info.wireTransferStatus == null && info.refundStatus == 0">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
             <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li> -->
-            <li v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null">{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
+            <li v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null">
+              <span class="order-status" v-if="info.orderStatus == 40">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</span>
+              <span class="order-status" v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</span>
+            </li>
             <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
             <li v-else>{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
@@ -136,9 +140,9 @@
             <div class="bundle-code">
               {{ lang.logisticsNumber }}：{{ info.express.expressNo }}
             </div>
-            <div class="bundle-time">
+            <!-- <div class="bundle-time">
               {{ lang.sendTime }}：{{ info.express.delivery_time }}
-            </div>
+            </div> -->
           </div>
 	    </div>
 

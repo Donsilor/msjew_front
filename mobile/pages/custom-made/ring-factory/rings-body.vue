@@ -16,12 +16,12 @@
         </swiper>
 
         <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
-          <div class="triangle" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+          <div class="triangle" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
           <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
         </div>
       </div>
       <div class="title">
-        <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+        <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
         <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
         {{ goodInfo.goodsName }}
       </div>
@@ -50,8 +50,10 @@
           <div class="discoupon-d" v-if="goodInfo.coupon.discount">
             <div class="discoupon-d-l">
               <span class="text">{{ lang.discountsActive }}：</span>
-              <span class="discount-icon">{{ language == 'en_US' ? this.goodInfo.coupon.discount.discount+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+              <span class="discount-icon">{{ language == 'en_US' ? discountUs(this.goodInfo.coupon.discount.discount)+'%' : discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
             </div>
+
+            <div class="time">{{ lang.activityTime}}：{{activeTime}}</div>
           </div>
 
           <div class="discoupon-d" v-if="goodInfo.coupon.money">
@@ -117,27 +119,43 @@
         {{ lang.cmw }}
         <div class="triangle" />
       </div>
-      <div
-        v-if="
-          parseInt($route.query.step) === 1 &&
-            !$route.query.isBack &&
-            inSale &&
-            canAddCart
-        "
-        class="btn-common btn-pink"
-        @click="emitStep(1)"
-      >
-        <span>{{ lang.startDJ }}</span>
+      <div class="submit-btn">
+
+        <div
+          v-if="
+            parseInt($route.query.step) === 1 &&
+              !$route.query.isBack &&
+              inSale &&
+              canAddCart
+          "
+          class="btn-common btn-pink"
+          @click="emitStep(1)"
+        >
+          <span>{{ lang.startDJ }}</span>
+        </div>
+        <div
+          v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
+          :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+          @click="addCart"
+        >
+          {{
+            inSale
+              ? canAddCart
+                ? lang.addCart
+                : lang.noTotalStock
+              : lang.notInSale
+          }}
+        </div>
       </div>
       <div
         v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
         :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
-        @click="addCart"
+        @click="orderNow"
       >
         {{
           inSale
             ? canAddCart
-              ? lang.addCart
+              ? lang.buyNow
               : lang.noTotalStock
             : lang.notInSale
         }}
@@ -313,7 +331,8 @@ export default {
   data() {
     return{
       ifShowCoupon: false,
-      language: this.$store.state.language
+      language: this.$store.state.language,
+      activeTime:''
     }
   },
   mixins: [Mx],
@@ -339,6 +358,10 @@ export default {
     }
   },
   mounted() {
+    const _this = this
+    if(this.goodInfo.coupon.hasOwnProperty('discount')){
+      this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)
+    }
     // this.language = this.getCookie('language')
   },
   methods:{
@@ -358,11 +381,31 @@ export default {
 </script>
 
 <style scoped lang="less">
+
 .engagementRings-component {
   .details-component(100%);
+  .submit-btn{
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px 20px;
+    .btn-pink{
+      width: 48%;
+      margin: 0;
+    }
+    .btn-white{
+      width: 48%;
+      margin: 0;
+    }
+  }
+  .btn-white{
+    border:none!important;
+  }
 }
 .ring-made-component{
   position: relative;
+}
+.time {
+  color: #b49785;
 }
 </style>
 <style scoped>

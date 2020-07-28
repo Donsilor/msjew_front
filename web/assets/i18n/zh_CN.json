@@ -454,14 +454,14 @@
             "contact": "与我们的珠宝顾问联络",
             "contactTime": "香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外)",
             "contactTimeCn": "星期一至五 9:00-18:00",
-            "contactTel": "+852 2165 3905",
+            "contactTel": "+852 2165 3908",
             "contactTelCn": "0755 25169121",
             "contactEmail": "service@bddco.com",
             "contactEmailCn": "e-service@bddco.com",
             "contactAddressUs": "深圳市罗湖区东晓街道独树社区布心路3008号IBC商务珠宝大厦A座1306",
             "getNew": "获取我們的最新资讯",
             "footdisc": "*通过注册，您确认已查看私隐政策，并同意BDD Co.收集并使用您的电子邮件和性別，以便通过电子邮件发送新闻，促销和更新。您可以通过取消訂閱或通過 service@BDDCo.com 與我們聯絡，隨時撤銷您的同意。",
-            "copyrightLeft": "与我们的珠宝顾问联络：香港时间（GMT + 8）星期一至五上午9时至晚上6时（香港公众假期除外）/ +852 2165 3905 / service@bddco.com",
+            "copyrightLeft": "与我们的珠宝顾问联络：香港时间（GMT + 8）星期一至五上午9时至晚上6时（香港公众假期除外）/ +852 2165 3908 / service@bddco.com",
             "copyrightLeftCn": "与我们的珠宝顾问联络：星期一至五上午9：00-18：00/0755 25169121 / e-service@bddco.com",
             "copyrightRight": "© 2020 BDD Co. All Rights Reserved.",
             "copyrightRight1": "粤ICP备",
@@ -533,7 +533,7 @@
         "rule": "BDD条款及细则",
         "submitRegistry": "注册",
         "agreePlease": "请勾选BDD条款",
-        "callUs": "与我们的珠宝顾问联络： 香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外) / +852 2165 3905 / 电邮我们",
+        "callUs": "与我们的珠宝顾问联络： 香港时间(GMT+8)星期一至五上午9时至晚上6时 (香港公众假期除外) / +852 2165 3908 / 电邮我们",
         "copyRight": "© 2020 BDD Co. All Rights Reserved.",
         "nameTooLong": "姓氏和名字最长20个字符!",
         "registrySuccessful": "注册成功"
@@ -833,7 +833,8 @@
         "afterSale": "售后无忧",
         "afterSaleDesc": "若在可调整尺寸范围内，BDD Co. 会在前6个月内为您提供免费的戒指尺寸调整。",
         "moreAfterSaleInfo": "退款保障条款及细则",
-        "startYourDiamondCheck": "立刻开始您的钻石检查"
+        "startYourDiamondCheck": "立刻开始您的钻石检查",
+        "slidingBrowsing": "拖动鼠标浏览"
     },
     "engagementRingsList": {
         "style": "款式",
@@ -972,6 +973,7 @@
             "orderNumber": "订单编号",
             "orderStatus": "订单状态",
             "orderDetail": "订单详情",
+            "logisticsDetails":"物流详情",
             "cancelOrder": "取消订单",
             "toPay": "去付款",
             "toPayWait": "付款中",
@@ -989,6 +991,7 @@
             "waitingPay": "待付款",
             "waitingSend": "待发货",
             "waitingReceive": "待收货",
+            "shipped":"已发货",
             "waitingComment": "待评价",
             "sumbit": "提交",
             "hadReceive": "已收货",
@@ -1088,6 +1091,23 @@
             ],
             "copySuccess": "复制成功！",
             "copyFail": "复制失败，请手动复制订单号！"
+        },
+        "logisticInfo":{
+            "title": "我的订单",
+            "logistic":"物流信息",
+            "received":"已签收",
+            "intransit":"运输中",
+            "WaitingPackage":"等待揽件",
+            "noexpress":"暂无物流信息",
+            "ShippingAddress":"收货地址",
+            "toast1": "复制成功",
+            "toast2": "该浏览器不支持自动复制",
+            "ContactMerchant":"联系商家",
+            "result": [
+                "等待揽件",
+                "运输中",
+                "已签收"
+            ]
         }
     },
     "cart": {
@@ -1134,11 +1154,12 @@
         "EPay": "使用银行转账安全支付",
         "pay": "去结账",
         "msgTitle1": "须知事项",
-        "msgContent1": "<p style='text-align: left;padding-top: 20px;text-indent: 2em;'>由于每一枚钻石都独一无二和我们每日的订单量相当庞大，对于选购了钻石的客户，我们需要进一步确认检查以确保该枚钻石确有存货。目前阶段，您的订单将会暂获保留最长达48个营业小时。存货情况一但获得确认，我们将会发送电邮通知您装运的日期。 </p><p style='text-align: left;padding-top: 20px;text-indent: 2em;'>如果您是透过银行电汇付款，存货情况一但获得确认，我们将提供进一步的电汇指示。为确保运送不被延迟，请在收到电汇指示后尽快把款项汇出。请注意，款项从您汇出的银行到达我们的银行一般需时24个小时。货品将在确认收到款项后发出。 </p>",
+        "msgContent1": "<p style='text-align: left;padding-top: 20px;text-indent: 2em;'>由于每一枚钻石都独一无二和我们每日的订单量相当庞大，对于选购了钻石的客户，我们需要进一步确认检查以确保该枚钻石确有存货。目前阶段，您的订单将会暂获保留最长达48个营业小时。存货情况一但获得确认，我们将会发送电邮通知您装运的日期。 </p><p style='text-align: left;padding-top: 20px;text-indent: 2em;'>如果您是通过银行电汇付款，存货情况一但获得确认，我们将提供进一步的电汇指示。为确保运送不被延迟，请在收到电汇指示后尽快把款项汇出。请注意，款项从您汇出的银行到达我们的银行一般需时24个小时。货品将在确认收到款项后发出。 </p>",
         "msgTitle2": "提示",
         "msgContent2": "订单提交失败，请重试！",
         "payFail": "很抱歉，您的订单未支付成功！",
-        "contactPhone": "如有问题请联络客服电话：（852）-2165 3905！",
+        "contactPhone": "如有问题请联络客服电话：（852）-2165 3908！",
+        "contactPhoneCh": "如有问题请联络客服电话：0755 25169121！",
         "repay": "重新支付",
         "payQuestion": "支付遇到问题",
         "msg11": "需登录购物 / 仅供大陆使用",
@@ -1297,7 +1318,8 @@
         "activityTime": "活动截止时间",
         "oddPrice": "原  价",
         "newPrice": "折后价",
-        "needLogin": "请先登录，才能领取优惠券"
+        "needLogin": "请先登录，才能领取优惠券",
+        "buyNow":"立即购买"
     },
     "policies": {
         "layout": {
@@ -1306,7 +1328,7 @@
             "BDDService": "BDD服务",
             "workTime": "香港时间(GMT+8)星期一至五上午9时至晚上6时",
             "workTimeCn": "星期一至五 9:00-18:00",
-            "workTel": "+852 21653905",
+            "workTel": "+852 21653908",
             "workTelCn": "0755 25169121",
             "workEmail": "service@bddco.com",
             "workEmailCn": "e-service@bddco.com",
@@ -2031,7 +2053,7 @@
             "con3": "我们发货的所有订单都是全额保险。重要的是，如果送到您的包裹或物品损坏或被篡改，请拒绝收货，拍照留下记录，并立即发送电子邮件至",
             "con4": "。对于损坏或丢失的物品，请在等待过程中保留所有包装材料和物品。必须在收到包裹后5天内报告损坏或遗失物品的索赔。 BDD Co.对退回的货物丢失或损坏概不负责。",
             "tit3": "国际退货",
-            "con5": "如果在退回商品的过程中产生任何额外费用，BDD Co.将保留权利向阁下收取该额外费用。为避免产生额外费用，我们建议您透过我们选择的投保FedEx承运商进行运送退回商品。为了方便您，我们可协助您通过FedEx国际优先分送速递®服务以优惠价购买保险。",
+            "con5": "如果在退回商品的过程中产生任何额外费用，BDD Co.将保留权利向阁下收取该额外费用。为避免产生额外费用，我们建议您通过我们选择的投保FedEx承运商进行运送退回商品。为了方便您，我们可协助您通过FedEx国际优先分送速递®服务以优惠价购买保险。",
             "tit4": "运费",
             "con6": "在退货的运费方面，BDD Co.对未经许可授权的运送费用或任何其他相关的额外费用一概不作补偿。请阁下不要使用货到付款的形式进行退货。请保留FedEx收件和/或查验的所有运送材料。",
             "con7": "若我们要求阁下将货品退回，我们可能会根据情况赔偿您部分或全部退货运费。但不会对于阁下自行决定使用的特殊运送服务作任何补偿。",
@@ -2456,7 +2478,8 @@
         "getMore": "加载更多...",
         "error": "页面出错了",
         "soleOut": "商品已售罄",
-        "pleaseSelect":"请先选择商品参数！"
+        "pleaseSelect":"请先选择商品参数！",
+        "doubleRingTip":"您未选择参数或已选择的参数已售罄，请重新选择！"
     },
     "order": {
         "firstLogin": "请先登录或注册！",
@@ -2562,7 +2585,9 @@
         "discountPrice": "折扣金额",
         "needRegister": "请先登录，才能使用优惠券",
         "msgTitle2": "提示：",
-        "msgContent2": "没有选择商品！"
+        "msgContent2": "没有选择商品！",
+        "setDefaultAddr": "设置默认地址",
+        "setSuccess": "默认地址设置成功"
     },
     "invoice": {
         "personal": "个人",

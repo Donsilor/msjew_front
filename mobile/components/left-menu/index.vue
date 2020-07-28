@@ -158,7 +158,7 @@
               </div>
             </div>
           </a>
-          <a v-else href="tel:+852 2165 3905">
+          <a v-else href="tel:+852 2165 3908">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconphone"></i>
@@ -386,11 +386,20 @@ export default {
       const coin = this.$store.state.coin
       const coinOptions = this.$bddDefinition.coinOptions
       const coinOptionsCn = this.$bddDefinition.coinOptionsCn
+      const coinOptionsTw = this.$bddDefinition.coinOptionsTw
 
       if(this.$store.state.platform === 21){
         for (let n = 0, length = coinOptionsCn.length; n < length; n++) {
           if (coinOptionsCn[n].code === coin) {
             result = coinOptionsCn[n]
+            break
+          }
+        }
+        return result
+      } else if(this.$store.state.platform === 41){
+        for (let n = 0, length = coinOptionsTw.length; n < length; n++) {
+          if (coinOptionsTw[n].code === coin) {
+            result = coinOptionsTw[n]
             break
           }
         }

@@ -25,7 +25,7 @@
                     <img :src="imageStrToArray(item.goodsImages)[0]" />
 
                     <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
-                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
                       <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
                     </div>
                   </div>
@@ -34,7 +34,7 @@
                   </span>
                   <div class="right">
                     <h4 class="ow-h2">
-                      <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                      <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                       <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
 
                       {{ item.goodsName }}
@@ -59,7 +59,7 @@
                     </div>
                     <div v-if="item.groupType !== 0 && index !== list.length - 1">
                       <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                        <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                        <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                         <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
 
                         {{ list[index + 1].goodsName }}
@@ -97,7 +97,7 @@
                     <img :src="imageStrToArray(item.goodsImages)[0]" />
 
                     <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
-                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
                       <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
                     </div>
                   </div>
@@ -105,12 +105,12 @@
                     {{ lang.failed }}
                   </span>
                   <h4 class="ow-h2">
-                    <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                    <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                     <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
 
                     {{ item.goodsName }}
                   </h4>
-                  <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
+                  <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p> 
                   <div class="right" v-for="(ring, _index) in item.sku" :key="_index">
                     
                     <p class="p">
@@ -164,7 +164,7 @@
                     <img :src="imageStrToArray(item.goodsImages)[0]" />
 
                     <div class="activity-sign" v-if="(item.coupon.discount || item.coupon.money) && item.groupType != 2">
-                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                      <div class="triangle" v-if="item.coupon.discount">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
                       <div class="triangle" v-if="item.coupon.money">{{ lang.discounts1 }}</div>
                     </div>
                   </div>
@@ -173,7 +173,7 @@
                   </span>
                   <div class="right">
                     <h4 class="ow-h2">
-                      <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? item.coupon.discount.discount+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                      <i class="discount-icon" v-if="item.coupon.discount">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                       <i class="discount-icon padding" v-if="item.coupon.money">￥</i>
 
                       {{ item.goodsName }}
@@ -198,7 +198,7 @@
                     </div>
                     <div v-if="item.groupType !== 0 && index !== list.length - 1">
                       <h4 v-if="item.groupType === 2" class="ow-h2 margin-top-20">
-                        <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? list[index + 1].coupon.discount.discount+'%' : discountConversion(list[index + 1].coupon.discount.discount)}}{{ lang.discounts2 }}</i>
+                        <i class="discount-icon" v-if="list[index + 1].coupon.discount">{{ language == 'en_US' ? discountUs(list[index + 1].coupon.discount.discount)+'%' : discountConversion(list[index + 1].coupon.discount.discount)}}{{ lang.discounts2 }}</i>
                         <i class="discount-icon padding" v-if="list[index + 1].coupon.money">￥</i>
                         {{ list[index + 1].goodsName }}
                       </h4>
@@ -331,7 +331,9 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.$nuxt.$loading.start()
+      if(this.list.length > 0){
+        this.$nuxt.$loading.start()
+      }
       localStorage.setItem('loading', 'yes');
       if (this.isLogin) {
         this.getList()
@@ -375,6 +377,7 @@ export default {
       if (arr.length <= 0) {
         this.$toast.show(this.lang.toast1)
       } else if (arr.length > 0) {
+        console.log("arr",arr)
         storage && storage.set('myCartList', JSON.stringify(arr))
         this.$router.push({
           name: 'cart-sureOrder'
@@ -406,7 +409,7 @@ export default {
     defaultAll(){
       if(!this.isLogin){
         this.selectAll = !this.selectAll
-        console.log("全选",this.list)
+        // console.log("全选",this.list)
         for (let i = 0; i < this.list.length; i++) {
           this.soudout = this.list[i].goodsStatus
           // console.log("所有",this.list[i].goodsStatus)
@@ -547,7 +550,7 @@ export default {
       if (list.length > 0) {
         // console.log("item",list)
         list.map((item, index) => {
-// console.log("itemlist",item)
+        // console.log("itemlist",item)
           if (index === list.length - 1) {
             text = text + item.configAttrIVal
           } else {
@@ -606,7 +609,7 @@ export default {
         }
       })
         .then(res => {
-          console.log("本地",res)
+          // console.log("本地",res)
           this.$nuxt.$loading.finish()
           localStorage.removeItem('loading');
           this.isLoading = localStorage.getItem('loading')

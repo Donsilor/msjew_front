@@ -4,7 +4,6 @@
       v-for="(item, index) in recommends"
       :key="index"
       :class="['data-item', 'product']"
-      v-show="item.goodsStatus === 2"
     >
       <!--          商品数据-->
       <nuxt-link :to="item.to || { path: '/' }" >

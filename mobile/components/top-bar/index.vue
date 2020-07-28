@@ -65,7 +65,7 @@ export default {
       showa:true,
       showb:false,
       url:'',
-      language:'简',
+      language: '',
       cnIcon:true,
       enIcon:false,
       hkIcon:false
@@ -178,17 +178,14 @@ export default {
   border-radius: 20px;
   padding-right: 2px;
   background-color: #a2c2d2;
-  width: 44px;
+  padding: 0 2px 0 4px;
   height: 18px;
-  /* flex-grow: 0;
-  flex-shrink: 0; */
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-left: 5px; */
 }
 .site-info .flag {
-  margin: 1px 4px 0 0;
+  margin: 1px 0 0 0;
 }
 .site-info .flag i {
   color: #d72923;
@@ -198,6 +195,7 @@ export default {
   font-size: 13px;
   font-weight: 400;
   color:#fff;
+  width: 26px;
 }
 .site-info .gap-line {
   margin: 0 13px;

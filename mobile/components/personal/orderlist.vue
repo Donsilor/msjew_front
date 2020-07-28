@@ -4,7 +4,10 @@
       <li v-for="(order, index) in showOrderList" :key="index" class="item">
         <div class="top">
           <span>{{ lang.orderNumber }}：</span>
-          <span v-if="order.orderStatus !== 0 && order.refundStatus == 0 && order.wireTransferStatus !== null" class="order-status">{{ getTransferStatus(order.wireTransferStatus) }}</span>
+          <span v-if="order.orderStatus !== 0 && order.refundStatus == 0 && order.wireTransferStatus !== null" class="order-status">
+            <span class="order-status" v-if="order.orderStatus == 40">{{ statusText(order.orderStatus) }}</span>
+            <span class="order-status" v-else>{{ getTransferStatus(order.wireTransferStatus) }}</span>
+          </span>
           <span v-else-if="order.refundStatus == 1" class="order-status">{{ refundStatusText(order.refundStatus) }}</span>
           <span v-else class="order-status">{{ statusText(order.orderStatus) }}</span>
           <!-- <span v-if="order.wireTransferStatus === null && order.refundStatus == 0" class="order-status">{{ statusText(order.orderStatus) }}</span>
@@ -268,8 +271,11 @@
           </div>
         </div>
         <div class="bottom">
-          <div class="order" :class="order.orderStatus != 10? 'no-margin' : '0'">
-            <div class="btn-look" v-if="order.orderStatus != 10"  @click="toDetail(order.id)">{{lang.lookOrder}}</div>
+          <div class="order" :class="order.orderStatus != 10 || order.paymentType == 11? 'no-margin' : '0'">
+            <div>
+              <div class="btn-look" v-if="ifShow(order)"  @click="toDetail(order.id)">{{lang.lookOrder}}</div>
+              <div class="btn-look btn-express" v-if="order.orderStatus == 40"  @click="toLogistic(order.id)">{{lang.logisticsDetails}}</div>
+            </div>
             <div>
               <div class="order-box-a">
                 <span class="title">{{ lang.orderCount }}：</span>
@@ -314,12 +320,12 @@
               @click.stop="goPay(order)"
               >{{ lang.toPay }}</span
             >
-            <span
+            <!-- <span
               v-if="(order.orderStatus) > 30"
               class="btn1"
               @click="orderSigning(order.id)"
               >{{ lang.confirmReceipt }}</span
-            >
+            > -->
             <span
               v-if="canComment(order)"
               class="btn2"
@@ -456,7 +462,7 @@ export default {
         order.details = result
         return order
       })
-      console.log("showOrderList",showData)
+      // console.log("showOrderList",showData)
       return showData
     },
     // 列表特定参数
@@ -465,6 +471,19 @@ export default {
         orderStatus: this.orderStatus
       }
     },
+    ifShow(order) {
+      return function(order) {
+        if(order.paymentType == 11){
+          return true
+        }else{
+          if(order.orderStatus != 10){
+            return true
+          }else{
+            return false
+          }
+        }
+      }
+    }
   },
   watch: {
     orderStatus(val, oldVal) {
@@ -557,6 +576,15 @@ export default {
     toDetail(orderId) {
       this.$router.push({
         name: 'personal-orderDetail',
+        query: {
+          orderId: orderId
+        }
+      })
+    },
+    // 跳转到物流详情
+    toLogistic(orderId){
+      this.$router.push({
+        name: 'personal-logistics-information',
         query: {
           orderId: orderId
         }
@@ -921,7 +949,9 @@ export default {
     border: 1px solid #F29C88;
     margin-right: 0.6rem;
 }
-
+.btn-express{
+  margin-top: 10px;
+}
 .order-box-a{
   display: flex;
   align-items: center;

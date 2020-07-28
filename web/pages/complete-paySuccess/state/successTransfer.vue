@@ -265,15 +265,16 @@ div {
   box-sizing: border-box;
 }
 .successTransfer {
-  width: 1360px;
+  max-width: 1360px;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
   text-align: left;
   background: rgba(248, 248, 248, 1);
   padding: 33px 30px 38px;
+  box-sizing: border-box;
   .order-step {
-    width: 1300px;
+    max-width: 1300px;
     height: 182px;
     background: rgba(255, 255, 255, 1);
     display: flex;
@@ -488,7 +489,7 @@ div {
     font-size: 16px;
     color: #fff;
     text-align: center;
-    width: 1300px;
+    width: 100%;
     height: 30px;
     background: linear-gradient(
       270deg,
@@ -510,21 +511,20 @@ div {
     }
   }
   .order-info {
-    width: 1300px;
+    max-width: 1300px;
     display: flex;
     justify-content: space-between;
     .left-info {
-      width: 635px;
+      width: 49%;
       height: 520px;
       .address-info {
-        width: 635px;
         height: 230px;
         background: rgba(255, 255, 255, 1);
         margin-bottom: 22px;
         padding: 26px 53px 0 50px;
+        box-sizing: border-box;
         position: relative;
         .new-address-title {
-          width: 1300-51-36px;
           height: 20px;
           display: flex;
           align-items: flex-end;
@@ -606,12 +606,11 @@ div {
         }
       }
       .send-info {
-        width: 635px;
         height: 280px;
         background: rgba(255, 255, 255, 1);
         padding: 25px 50px;
+        box-sizing: border-box;
         .new-address-title {
-          width: 1300-51-36px;
           height: 20px;
           display: flex;
           align-items: flex-end;
@@ -643,12 +642,12 @@ div {
       }
     }
     .right-info {
-      width: 635px;
+      width: 49%;
       height: 432px;
       background: rgba(255, 255, 255, 1);
       padding: 23px 40px 0 35px;
+      box-sizing: border-box;
       .new-address-title {
-        width: 1300-51-36px;
         height: 20px;
         display: flex;
         align-items: flex-end;

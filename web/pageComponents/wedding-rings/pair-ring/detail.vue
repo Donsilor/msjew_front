@@ -5,7 +5,7 @@
       <!--      左侧-->
       <div class="left-detail">
         <product-images :images="thumbnails" @getIdx="getIndex" :coupon="coupons"></product-images>
-				
+
 		<div class="magn-box">
 			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
 		</div>
@@ -177,8 +177,8 @@
           </div>
         </div> -->
         <div class="sku" v-if="firstRing.carats.length == 0 && secondRing.carats.length == 0">
-          <div class="left-properties" >
-            <div v-if="firstRing.materials.length > 0" class="property-item">
+          <div class="left-properties" v-if="firstRing.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ firstRing.targetUser }}
               </span>
@@ -251,8 +251,8 @@
               </div>
             </div>
           </div>
-          <div class="right-properties" >
-            <div v-if="secondRing.materials.length > 0" class="property-item">
+          <div class="right-properties" v-if="secondRing.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ secondRing.targetUser }}
               </span>
@@ -337,8 +337,8 @@
           </div>
         </div>
         <div class="sku2" v-else>
-          <div class="left-properties">
-            <div v-if="firstRing.materials.length > 0" class="property-item">
+          <div class="left-properties" v-if="firstRing.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ firstRing.targetUser }}
               </span>
@@ -437,8 +437,8 @@
               </div>
             </div>
           </div>
-          <div class="right-properties">
-            <div v-if="secondRing.materials.length > 0" class="property-item">
+          <div class="right-properties" v-if="secondRing.materials.length > 0">
+            <div  class="property-item">
               <span class="item-name">
                 {{ secondRing.targetUser }}
               </span>
@@ -558,7 +558,7 @@
             </div>
           </div>
         </div>
-        <ul class="services-list">
+        <ul class="services-list" v-if=" info.goodsServicesJsons.length > 0">
           <li
             v-for="(item, index) in info.goodsServicesJsons || []"
             :key="index"
@@ -616,12 +616,20 @@
         </div>
         <div class="button-group">
           <button
+            v-loading="orderingNow"
+            :class="['add-to-cart', { actived: canAddCart }]"
+            @click="orderNow"
+          >
+            {{ $t(`${lang}.buyNow`) }}
+          </button>
+          <button
             v-loading="addingCart"
             :class="['add-to-cart', { active: canAddCart }]"
             @click="addCart"
           >
             {{ $t(`${lang}.addCart`) }}
           </button>
+          
         </div>
        <!-- <div class="other-info">
           <ul class="operates">
@@ -802,6 +810,7 @@ export default {
       moneyList: [],
       activeTime: '',
       language: this.$store.state.language,
+      isLogin:this.$store.getters.hadLogin
     }
   },
   computed: {
@@ -854,13 +863,13 @@ export default {
       )
       // console.log("info2",allData)
       allData.forEach(item => {
-        console.log("info999999",item)
+        // console.log("info999999",item)
         item.images = _this.imageStrToArray(item.goodsImages || '')
         item.name = item.goodsName
         item.price = item.salePrice
         item.to = _this.getRecommendProductRouteInfo(item)
       })
-      
+
       return allData
     },
     firstRingSimpleDetail() {
@@ -958,21 +967,24 @@ export default {
       } catch (e) {
         return false
       }
-    }
+    },
+    getTimestampUuid () {
+      return new Date().getTime().toString()
+    },
   },
   watch: {
     info(val, oldVal) {
     }
   },
   mounted() {
-    console.log("info",this.info)
+    // console.log("info",this.info)
     const _this = this
     if(this.info.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
     }
     _this.$nextTick(() => {})
-		
-	this.magnifying = this.thumbnails[0]
+
+  this.magnifying = this.thumbnails[0]
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {
@@ -1013,7 +1025,7 @@ export default {
         carats:(() =>{
             const carats = product.carats || []
             // carats.unshift({id:'',name: this.$t(`personal.index.select`)})
-            return carats;  
+            return carats;
         })(),
         specs: product.specs || [],
         details: product.details || [],
@@ -1070,10 +1082,10 @@ export default {
         _this.categoryId = ''
         // _this.info.salePrice = ''
         _this.stock = ''
-        
+
       this.info.details.map((item, i) => {
         if(ladyRing==item.ladyRing && menRing==item.menRing || menRing==item.ladyRing && ladyRing==item.menRing) {
-          console.log("dddd",item)
+          // console.log("dddd",item)
           _this.coupleLadyId = item.ladyRing
           _this.coupleMenId = item.menRing
           _this.goodsId = item.id
@@ -1135,11 +1147,11 @@ export default {
       _this.changeChecked()
 
       if (!_this.canAddCart) {
-         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+         _this.$errorMessage(_this.$t(`common.doubleRingTip`))
         return
       }
       if (!_this.goodsId) {
-         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+         _this.$errorMessage(_this.$t(`common.doubleRingTip`))
         return
       }
 
@@ -1182,11 +1194,115 @@ export default {
       _this.$store
         .dispatch('addCart', goodInfo)
         .then(data => {
+          // this.getList()
+          fbq('track', 'AddToCart')
           _this.$successMessage(_this.$t(`common.addCartSuccess`))
         })
         .catch(err => {
           _this.$errorMessage(`${err.message}`)
         })
+    },
+    // 立即购买
+    orderNow(){
+      const _this = this
+
+      _this.changeChecked()
+
+      if (!_this.canAddCart) {
+         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
+      }
+      if (!_this.goodsId) {
+         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
+      }
+
+      const time = this.getTimestampUuid
+      console.log("time",time)
+
+      let goodInfo = [
+        {
+          goods_num: 1,
+          goodsDetailsId: _this.goodsId,
+          goods_id: _this.goodsId,
+          group_id: null,
+          group_type: null,
+          serviceId: 0,
+          serviceVal: 'string',
+          goods_type:_this.categoryId
+        }
+      ]
+
+      goodInfo = goodInfo.map(item => {
+            item.createTime = time
+            item.updateTime = time
+            return item
+        })
+        // console.log("goodInfo",goodInfo)
+      if(this.isLogin){
+        this.$axios({
+          method: 'post',
+          url: 'web/member/cart/add',
+          data: {
+              goodsCartList: goodInfo
+          }
+        })
+        .then(data => {
+          const dataId = []
+          dataId.push(data.data[0].id)
+          // console.log("dddd",data)
+          const cartIds = dataId.join(',')
+          this.$router.push({
+            path: `/billing-address`,
+            query: { cartIds }
+          })
+        })
+        .catch(err => {
+            // return Promise.reject(err)
+        })
+      } else {
+        const CART = 'cart'
+        let goodInfo = [
+          {
+            goods_num: 1,
+            goodsDetailsId: _this.goodsId,
+            goods_id: _this.goodsId,
+            group_id: null,
+            group_type: null,
+            serviceId: 0,
+            serviceVal: 'string',
+            goods_type:_this.categoryId
+          }
+        ]
+        const addInfo = {
+          id: time,
+          createTime: time,
+          updateTime: time,
+          data: goodInfo
+        }
+        return new Promise(async (resolve, reject) => {
+            try {
+                let cart = JSON.parse(localStorage.getItem(CART) || '[]')
+                cart = cart.concat(addInfo)
+                if (cart.length > 30) {
+                    return reject(new Error(lang.cartIsFull))
+                }
+                const dataId = []
+                dataId.push(addInfo.id)
+                // console.log("dddd",cart[0])
+                const cartIds = dataId.join(',')
+                this.$router.push({
+                  path: `/billing-address`,
+                  query: { cartIds }
+                })
+                // 本地加入购物车数据
+                localStorage.setItem(CART, JSON.stringify(cart))
+                return resolve()
+            } catch (e) {
+                return reject(e)
+            }
+        })
+      }
     },
     getIndex(i) {
       this.magnifying = this.thumbnails[i]
