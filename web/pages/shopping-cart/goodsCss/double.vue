@@ -141,7 +141,7 @@
 		</div>
 
 		<!-- 优惠后金额 -->
-		<div class="good-price">
+		<div class="now-price">
         <span v-if="couponType(g.data[0].coupon) == 'discount'">
           {{ formatCoin(g.coinType) }}
           {{
@@ -428,6 +428,15 @@ export default {
           font-family: twCenMt;
           width: calc((100% - 140px) * 0.14);
           font-size: 18px;
+          color: #99999991;
+          text-align: center;
+          padding: 0 10px;
+          box-sizing: border-box;
+        }
+        .now-price {
+          font-family: twCenMt;
+          width: calc((100% - 140px) * 0.14);
+          font-size: 18px;
           color: #f29b87;
           text-align: center;
           padding: 0 10px;
@@ -446,6 +455,15 @@ export default {
       }
     }
     .good-price {
+      font-family: twCenMt;
+      width: calc((100% - 140px) * 0.14);
+      font-size: 18px;
+      color: #99999991;
+      text-align: center;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    .now-price {
       font-family: twCenMt;
       width: calc((100% - 140px) * 0.14);
       font-size: 18px;
@@ -567,7 +585,6 @@ export default {
 }
 
 .old-price{
-	color: #b2b2b2 !important;
-  font-size: 14px !important;
+	text-decoration: line-through;
 }
 </style>

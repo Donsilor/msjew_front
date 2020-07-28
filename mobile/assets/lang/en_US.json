@@ -2280,13 +2280,13 @@
       "limit2": " To Use",
       "limit3": "limit ",
       "limit4": " To Use",
+      "limit5": "Site Use",
       "use": "Click On The Use",
-      "time": "Activity Time",
       "loseEfficacy": "Lost Efficacy",
       "getCoupon": "Get Coupon",
       "useCoupon": "Use Coupon",
       "accomplish": "Accomplish",
-      "alreadyApplied": "Coupon has been used",
+      "alreadyApplied": "Invalid Coupon",
       "alreadyExpired": "expired",
       "specificProduct":"Specific Products",
       "alreadyReceived": "Coupon has been claimed",
@@ -2294,6 +2294,11 @@
       "haveChoose": "Already Selected",
       "immediatelyChoose": "Select it now",
       "msg1": "Coupon has been claimed successfully",
-      "msg2": "Something went wrong, please try it again."
+      "msg2": "Something went wrong, please try it again.",
+      "platform1": "China",
+      "platform2": "Hong Kong",
+      "platform3": "Macao",
+      "platform4": "Taiwan",
+      "platform5": "Foreign"
   }
 }

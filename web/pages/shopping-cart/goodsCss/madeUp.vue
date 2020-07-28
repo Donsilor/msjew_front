@@ -48,18 +48,18 @@
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
 
-		  <!-- 原金额 -->
-		  <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
-		    {{ formatCoin(g.coinType) }}
-		    {{
-		      formatNumber(
-		        g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
-		      )
-		    }}
-		  </div>
+          <!-- 原金额 -->
+          <div class="good-price" :class="{'old-price': couponType(g.data[0].coupon) == 'discount'}">
+            {{ formatCoin(g.coinType) }}
+            {{
+              formatNumber(
+                g.data[0].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+              )
+            }}
+          </div>
 
-		  <!-- 优惠后金额 -->
-          <div class="good-price">
+		      <!-- 优惠后金额 -->
+          <div class="now-price">
             <span v-if="couponType(g.data[0].coupon) == 'discount'">
               {{ formatCoin(g.coinType) }}
               {{
@@ -130,18 +130,18 @@
           </div>
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
 
-		  <!-- 原金额 -->
-		  <div class="good-price" :class="{'old-price': couponType(g.data[1].coupon) == 'discount'}">
-		    {{formatCoin(g.coinType) }}
-		    {{
-		      formatNumber(
-		        g.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
-		      )
-		    }}
-		  </div>
+          <!-- 原金额 -->
+          <div class="good-price" :class="{'old-price': couponType(g.data[1].coupon) == 'discount'}">
+            {{formatCoin(g.coinType) }}
+            {{
+              formatNumber(
+                g.data[1].simpleGoodsEntity.simpleGoodsDetails.retailMallPrice
+              )
+            }}
+          </div>
 
-		  <!-- 优惠后金额 -->
-         <div class="good-price">
+          <!-- 优惠后金额 -->
+         <div class="now-price">
             <span v-if="couponType(g.data[1].coupon) == 'discount'">
               {{ formatCoin(g.coinType) }}
               {{
@@ -346,6 +346,15 @@ export default {
         width: calc((100% - 140px) * 0.16);
         font-family: twCenMt;
         font-size: 18px;
+        color: #99999991;
+        text-align: center;
+        padding: 0 10px;
+        box-sizing: border-box;
+      }
+      .now-price {
+        width: calc((100% - 140px) * 0.16);
+        font-family: twCenMt;
+        font-size: 18px;
         color: #f29b87;
         text-align: center;
         padding: 0 10px;
@@ -480,10 +489,5 @@ export default {
   width: calc(100% * 0.108);
   display: flex;
   align-items: center;
-}
-
-.old-price{
-	color: #b2b2b2 !important;
-	font-size: 14px !important;
 }
 </style>
