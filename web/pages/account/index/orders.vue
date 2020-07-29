@@ -88,7 +88,7 @@
                 <div class="right">
                   <span>1</span>
                   <div class="single-price">
-                    <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(detail.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
+                    <span :class="{'old-price': couponType(detail.couponInfo) == 2}">{{ formatCoin(o.coinCode) }} {{ formatMoney(detail.goodsPrice) }}</span>
                     <span>{{ formatCoin(o.coinCode) }} {{ couponType(detail.couponInfo) == 2 ? formatMoney(detail.goodsPayPrice) : formatMoney(detail.goodsPrice) }}</span>
                   </div>
                 </div>

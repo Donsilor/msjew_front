@@ -137,10 +137,13 @@
       </ul>
 
       <div class="tips">
-        <i v-show="this.$store.state.platform !== 31" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform !== 31">{{ lang.tips }}</span>
+        <i v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21">{{ lang.tips }}</span>
       </div>
       <div class="btn" @click="goPaySuccess">
-        {{ list[typeIndex].title }}
+        <span v-if="this.$store.state.platform == 21">{{ list[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 11">{{ listHk[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
         {{ formatCoin(info.coinType) }}
         {{ formatMoney(price) }}
@@ -308,10 +311,10 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
         },
         {
           url: '/cart/ph.png',
@@ -408,11 +411,7 @@ export default {
       if(this.typeIndex == 0){
         pay = 6
       }else if(this.typeIndex == 1){
-        if(this.$store.state.platform === 41){
-          pay = 81
-        }else{
           pay = 61
-        }
       }else if(this.typeIndex == 2){
         if(this.$store.state.platform === 21){
           pay = 82

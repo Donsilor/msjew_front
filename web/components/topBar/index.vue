@@ -161,7 +161,8 @@
                 @command="setCoin"
               >
                 <span class="row-flex align-item-center el-dropdown-link">
-                  {{ coinInfo.content }}<i class="iconfont iconkuozhan"></i>
+                  {{ coinInfo.content }}
+                  <!-- <i class="iconfont iconkuozhan"></i> -->
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item

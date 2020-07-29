@@ -30,7 +30,7 @@
                   </div>
                 </div>
               </div>
-              <div class="right-info-block product-price" :class="{'old-price' : block1.oldPrice !== block1.newPrice}">
+              <div class="right-info-block product-price original-price" :class="{'old-price' : block1.oldPrice !== block1.newPrice}">
                 <span class="coin">
                   {{ formatCoin (info.coinType) }}
                 </span>
@@ -63,7 +63,7 @@
                   </div>
                 </div>
               </div>
-              <div class="right-info-block product-price" :class="{'old-price' : block2.oldPrice !== block2.newPrice}">
+              <div class="right-info-block product-price original-price" :class="{'old-price' : block2.oldPrice !== block2.newPrice}">
                 <span class="coin">
                   {{ formatCoin (info.coinType) }}
                 </span>
@@ -776,7 +776,7 @@ export default {
     .left-info-block {
       display: flex;
       align-items: center;
-	  width: 420px;
+	  width: 320px;
 	  overflow: hidden;
       .title-block-name {
         font-size: 18px;
@@ -830,4 +830,7 @@ export default {
 	color: #c3c3c3;
 	text-decoration: line-through;
 }
+ .original-price{
+      color: #999999!important;
+    }
 </style>
