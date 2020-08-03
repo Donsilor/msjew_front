@@ -1182,7 +1182,8 @@
         "SwiftCode": "SWIFT CODE:",
         "uploadPhotos": "上傳圖片",
         "Note3":"注：此貨幣是按照BDD官網匯率作為參考標準.",
-        "NotSupportPay":"當前支付方式，不支持USD支付，請返回上個頁面切換貨幣或更換其它支付方式完成支付！"
+        "NotSupportPay":"當前支付方式，不支持USD支付，請返回上個頁面切換貨幣或更換其它支付方式完成支付！",
+        "ScanCode":"微信掃碼付款"
     },
     "finishPay": {
         "PayPending1": "訂單已經提交，系統正在處理中,請稍等。",

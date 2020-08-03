@@ -587,7 +587,7 @@ export default {
         if(isWeiXin()){
           tradeType = 'js'
         } else {
-          tradeType = 'mwap'
+          tradeType = 'mweb'
         }
       }else {
         tradeType = 'wap'

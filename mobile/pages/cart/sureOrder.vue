@@ -1319,14 +1319,15 @@ export default {
       // console.log("url",this.code)
       var appid = 'wxdac61ce65e15cfc4' 
       this.code = this.getUrlCode().code // 截取code
-      //  let wxCode =  localStorage.getItem('WeiXin_Code') 
+      let wxid =  localStorage.getItem('openid') 
+      // localStorage.setItem('WeiXin_Code',this.code)
+     if(wxid == null || wxid == '' || wxid == undefined){
       if (this.code == null || this.code === '') { // 如果没有code，则去请求
         window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(local)}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
       } 
-      // localStorage.setItem('WeiXin_Code',this.code)
-     
-      console.log("code",this.code)  
-      this.getOpenId (this.code)
+       console.log("openId",wxid)  
+       this.getOpenId (this.code)
+     }
     },
     getUrlCode() { // 截取url中的code方法
       var url = location.search
@@ -1341,7 +1342,7 @@ export default {
       }
       return theRequest
     },
-    getOpenId (code) { // 通过code获取 openId等用户信息，/api/user/wechat/login 为后台接口
+    getOpenId (code) { // 通过code获取 openId等用户信息
         let _this = this 
         this.$axios({ 
         method: 'get',

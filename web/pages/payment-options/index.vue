@@ -381,11 +381,12 @@
     />
 
     <div class="pop-layer" v-if="ifShowLayer"></div>
+    <!-- 微信二维码弹窗 -->
     <div v-show="showEwm" class="qr_wrap">
       <div class="msg">
         <div class="msgbox">
           <div class="qrcode-box">
-            <p class="mainTextColor">微信扫码付款</p>
+            <p class="mainTextColor">{{lang.ScanCode}}</p>
             <div  id="qrcode"></div>
           </div>
         </div>
@@ -432,7 +433,7 @@ export default {
       ifShowLayer: false,
       qrcodeObj: {}, // 二维码配置
       ewm:'',
-      showEwm:false
+      showEwm:false //是否显示二维码弹窗
 
       // myHeaders:this.$store.state.token,
       // imgDatas:[],
@@ -442,7 +443,7 @@ export default {
     }
   },
   mounted(){
-    console.log("二维码url",this.code)
+    // console.log("二维码url",this.code)
     // const code = this.ewm
     
 
