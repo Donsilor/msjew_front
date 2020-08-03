@@ -13,7 +13,7 @@
       <!--      右侧-->
       <div class="right-detail">
         <h2 class="product-name">
-          {{ info.name }}
+          {{ info.goodsName }}
         </h2>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <!-- <div class="sku" >

@@ -254,9 +254,10 @@
           </div>
         </div> -->
 
-        <!-- <div class="pay-question" @click="answer = true">?</div> -->
+        <!-- <div class="pay-question" @click="answer = true">?</div> mainland -->
       </div>
-      <div class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
+      <div v-if="this.$store.state.platform === 20" class="pay-btn" @click="mainLandPay()">{{ $t(`${lang}.pay`) }}</div>
+      <div v-else class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
     </div>
     <!-- 电汇弹窗 -->
     <div class="wireTransfer" v-show="transfer">
@@ -380,6 +381,16 @@
     />
 
     <div class="pop-layer" v-if="ifShowLayer"></div>
+    <div v-show="showEwm" class="qr_wrap">
+      <div class="msg">
+        <div class="msgbox">
+          <div class="qrcode-box">
+            <p class="mainTextColor">微信扫码付款</p>
+            <div  id="qrcode"></div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -418,7 +429,10 @@ export default {
       accountlist:[],
       accountWay:'',
       coinHKD:'HKD',
-      ifShowLayer: false
+      ifShowLayer: false,
+      qrcodeObj: {}, // 二维码配置
+      ewm:'',
+      showEwm:false
 
       // myHeaders:this.$store.state.token,
       // imgDatas:[],
@@ -428,6 +442,10 @@ export default {
     }
   },
   mounted(){
+    console.log("二维码url",this.code)
+    // const code = this.ewm
+    
+
     this.language = this.getCookie('language')
     let element = document.querySelector('.el-upload ')
     // console.log("44444",this.fileList)
@@ -443,6 +461,9 @@ export default {
     ttPrice() {
       // return this.price * 0.985
       return this.price
+    },
+    code(){
+      return this.ewm
     }
   },
   methods: {
@@ -605,7 +626,7 @@ export default {
       }else if(this.payWay==84){
         pay = 84
       }
-    console.log("方式",pay)
+      console.log("方式",pay)
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(
       //     JSON.stringify({
@@ -685,6 +706,125 @@ export default {
           }
         })
     },
+    // 大陆支付
+    mainLandPay(){
+      if(this.$store.state.coin === 'USD'){
+        if(this.payWay == 2 || this.payWay == 83|| this.payWay == 1||this.payWay == 81||this.payWay == 84){
+          this.$errorMessage(this.$t(`${lang}.NotSupportPay`))
+          return
+        }
+      }
+
+      let pay = ""
+      if(this.payWay==6){
+        pay = 6
+      }else if(this.payWay==61){
+        pay = 61
+      }else if(this.payWay==81){
+        pay = 81
+      }else if(this.payWay==2){
+        pay = 2
+      }else if(this.payWay==83){
+        pay = 83
+      }else if(this.payWay==1){
+        pay = 1
+      }else if(this.payWay==84){
+        pay = 84
+      }
+      console.log("方式",pay)
+
+      let baseUrl=this.$store.getters.baseUrl
+
+      let tradeType = ''
+      let data = {}
+      if(pay == 1){
+        data ={
+          orderId: this.$route.query.orderId,
+          coinType: this.$route.query.coinType,
+          payType: pay,
+          tradeType:"native",
+          returnUrl:baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
+        }
+      } else{
+        data ={
+          orderId: this.$route.query.orderId,
+          coinType: this.$route.query.coinType,
+          payType: pay,
+          tradeType:"pc",
+          returnUrl:baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
+        }
+      }
+      this.goingPay = true
+      this.$axios
+        .post('/web/pay/create', data)
+        .then(res => {
+          this.ewm = res.data
+          this.getEwm()
+          console.log("url",this.ewm)
+          if (res.data.config) {
+            if (pay !== 7) {
+              window.location.replace(res.data.config)
+            } else {
+              const promise = new Promise((resolve, reject) => {
+                this.form = []
+                const obj = JSON.parse(res.data.config)
+                const objKey = Object.keys(obj)
+                for (const i in objKey) {
+                  if (objKey[i] === 'url') {
+                    this.actionLink = obj[objKey[i]]
+                    continue
+                  }
+                  const o = {
+                    name: objKey[i],
+                    val: obj[objKey[i]]
+                  }
+                  this.form.push(o)
+                }
+                resolve()
+              })
+              promise.then(() => {
+                setTimeout(() => {
+                  this.isPay = false
+                  document.getElementById('unionPay').click()
+                }, 2000)
+              })
+            }
+          } else {
+            this.showEwm = true
+            this.goingPay = false
+            // this.$router.replace({
+            //   path: '/complete-paySuccess',
+            //   query: {
+            //     orderId: this.$route.query.orderId,
+            //     price: this.$route.query.price,
+            //     coinType: this.$route.query.coinType,
+            //     type: `success`
+            //   }
+            // })
+          }
+        })
+        .catch(err => {
+          this.goingPay = false
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
+    },
+    // 获取支付二维码
+    getEwm(){
+      console.log("二维码url",this.ewm)
+      const code = this.ewm
+      this.qrcodeObj = new QRCode('qrcode', {
+        text: code,    
+        width: 200,
+        height: 200,
+        colorDark : '#000', // 0f0绿色 30AB37
+        colorLight : '#fff',
+        correctLevel : QRCode.CorrectLevel.H
+      });
+    },
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='
@@ -700,6 +840,57 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.qr_wrap{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 99999999;
+  top: 0;
+  left: 0;
+  .msg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    .msgbox{
+      border-radius: 8px;
+      padding: 30px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 520px;
+      height: 430px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // height: 80%;
+      // height: 695px;
+      // overflow-y: scroll;
+      background: rgba(255, 255, 255, 1);
+      .cha{
+        text-align: right;
+        i{
+          font-size: 30px;
+        }
+      }
+    }
+  }
+  img{
+    width: 100%;
+    height: 100%;
+  }
+  .qrcode-box{
+    // width: 300px;
+    // height: 300px;
+  }
+  .mainTextColor{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    // color:green
+  }
+}
 div {
   box-sizing: border-box;
 }

@@ -277,13 +277,6 @@
         </div>
 
         <div v-if="!$route.query.isBack" class="button-group">
-          <button
-            v-loading="addingCart"
-            :class="['add-to-cart', { actived: canAddCart }]"
-            @click="orderNow"
-          >
-            {{ $t(`${lang}.buyNow`) }}
-          </button>
           <nuxt-link
             v-if="productInfo.goodsMod === 1 && canAddCart"
             :to="startDj"
@@ -294,6 +287,13 @@
             </button>
           </nuxt-link>
           
+          <button
+            v-loading="addingCart"
+            :class="['add-to-cart', { actived: canAddCart }]"
+            @click="orderNow"
+          >
+            {{ $t(`${lang}.buyNow`) }}
+          </button>
 
           <button
             v-loading="addingCart"
@@ -929,5 +929,8 @@ export default {
       line-height: 20px;
     }
   }
+}
+.start-dj{
+  width: 320px!important;
 }
 </style>
