@@ -38,9 +38,7 @@
       <div class="user-info">
         <i class="iconfont iconrentou" />
         <div class="login-line">
-          <nuxt-link to="/login"
-            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
-          >
+          <span @click="login()">{{ $t(`${lang}.login`) }}</span>
           <span>{{ $t(`${lang}.balbala`) }}</span>
           <nuxt-link to="/login"
             ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
@@ -2476,23 +2474,26 @@ export default {
     },
     // 点击登入获取上页url
     login(){
-      let oldurl=window.location.pathname
-      let params=window.location.search
+      // let oldurl=window.location.pathname
+      // let params=window.location.search
       //如果是订单确认页面，返回到购物车
-      if((/^\/billing-address/).test(oldurl)){
-          oldurl = '/shopping-cart'
-          params = ''
-      }
-      console.log(oldurl);
-      const url=oldurl+params
-      localStorage.setItem('url',url)
-      setTimeout(() => {
-        this.$router.push({
-            path: `/login`,
+      // if((/^\/billing-address/).test(oldurl)){
+          // oldurl = '/shopping-cart'
+          // params = ''
+      // }
+      // console.log(oldurl);
+      // const url=oldurl+params
+      // localStorage.setItem('url',url)
+      // setTimeout(() => {
+        // this.$router.push({
+            // path: `/login`,
             // query: {url}
-        })
-      },0)
+        // })
+      // },0)
       // console.log("oldurl",url)
+
+      console.log(123)
+      this.$emit('login', true)
     },
     register(){
       let oldurl=window.location.pathname

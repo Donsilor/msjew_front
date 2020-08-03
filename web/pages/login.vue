@@ -80,7 +80,7 @@ export default {
       }
     }
 
-	sessionStorage.setItem("loginType", this.loginType)
+	  sessionStorage.setItem("loginType", this.loginType)
   },
   methods: {
     // 切换tab
@@ -140,9 +140,6 @@ export default {
           border-bottom: 2px solid #a88f82;
         }
       }
-    }
-
-    .tab-content {
     }
   }
 }

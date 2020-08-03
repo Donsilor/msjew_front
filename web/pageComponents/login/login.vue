@@ -207,7 +207,7 @@ export default {
     //   this.phoneErr=true
     // }
     
-	this.loginType = sessionStorage.getItem("loginType")
+	  this.loginType = sessionStorage.getItem("loginType")
 
     if(this.$store.state.platform == 20){
       this.ifShowBtn = true
@@ -361,7 +361,6 @@ export default {
           }
         })
           .then(res => {
-
             const data = res.data
             localStorage.setItem("refreshToken", data.refresh_token);
             localStorage.setItem("accessToken", data.access_token);
