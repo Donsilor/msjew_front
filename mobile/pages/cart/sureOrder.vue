@@ -550,10 +550,10 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
         },
         {
           url: '/cart/ph.png',
@@ -638,7 +638,8 @@ export default {
       invoices:'',
       ifShowAddress: false,
       id:'',
-      queryId:''
+      queryId:'',
+      code:''
     }
   },
   computed: {
@@ -741,7 +742,8 @@ export default {
 
       this.getData() // 获取地址
       // this.getCouponList() // 获取优惠券列表
-
+      this.getCode()
+      // this.getOpenId()
       fbq('track', 'InitiateCheckout');
 
       // 此为迫不得已而为之，不敢改动上一手的代码
@@ -749,6 +751,7 @@ export default {
         this.productNum = document.getElementsByClassName('mod-item').length
       }, 1000)
     })
+    
   },
   methods: {
     show(){
@@ -1311,6 +1314,51 @@ export default {
         // }
       }
     },
+    getCode() { // 静默授权
+      var local = window.location.href // 获取页面url
+      // console.log("url",this.code)
+      var appid = 'wxdac61ce65e15cfc4' 
+      this.code = this.getUrlCode().code // 截取code
+      //  let wxCode =  localStorage.getItem('WeiXin_Code') 
+      if (this.code == null || this.code === '') { // 如果没有code，则去请求
+        window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(local)}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
+      } 
+      // localStorage.setItem('WeiXin_Code',this.code)
+     
+      console.log("code",this.code)  
+      this.getOpenId (this.code)
+    },
+    getUrlCode() { // 截取url中的code方法
+      var url = location.search
+      this.winUrl = url
+      var theRequest = new Object()
+      if (url.indexOf("?") != -1) {
+          var str = url.substr(1)
+          var strs = str.split("&")
+          for(var i = 0; i < strs.length; i ++) {
+              theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1])
+          }
+      }
+      return theRequest
+    },
+    getOpenId (code) { // 通过code获取 openId等用户信息，/api/user/wechat/login 为后台接口
+        let _this = this 
+        this.$axios({ 
+        method: 'get',
+        url: `/web/member/wechat/user-info`,
+        params: {
+          code: code
+        }
+      })
+      .then(res => {
+        localStorage.setItem('openid',res.openid) 
+        // this.openId = res.data
+        console.log("openid",res.openid)
+      })
+      .catch(err => {
+        this.$toast.show(err.message)
+      })
+    },
     // 支付
     //  已登录创建订单
     createOrder() {
@@ -1429,7 +1477,8 @@ export default {
               this.$router.replace({
                 name: 'cart-pay',
                 query: {
-                  info: JSON.stringify(res)
+                  info: JSON.stringify(res),
+                  code: JSON.stringify(this.code)
                 }
               })
             }

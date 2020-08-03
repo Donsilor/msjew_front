@@ -137,10 +137,23 @@
       </ul>
 
       <div class="tips">
-        <i v-show="this.$store.state.platform !== 31" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform !== 31">{{ lang.tips }}</span>
+        <i v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21">{{ lang.tips }}</span>
       </div>
-      <div class="btn" @click="goPaySuccess">
-        {{ list[typeIndex].title }}
+      <div class="btn" @click="PayWechat" v-if="this.$store.state.platform == 21">
+        <span v-if="this.$store.state.platform == 21">{{ list[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 11">{{ listHk[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
+        {{ lang.goPay }}
+        {{ formatCoin(info.coinType) }}
+        {{ formatMoney(price) }}
+      </div>
+
+      <div v-else class="btn" @click="goPaySuccess">
+        <span v-if="this.$store.state.platform == 21">{{ list[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 11">{{ listHk[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
         {{ formatCoin(info.coinType) }}
         {{ formatMoney(price) }}
@@ -308,10 +321,10 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
+          url: '/cart/visa_1.png',
+          type: 61,
+          title: this.LANGUAGE.cart.pay.payType6,
+          des: this.LANGUAGE.cart.pay.type6Text
         },
         {
           url: '/cart/ph.png',
@@ -345,13 +358,17 @@ export default {
       picList:[],
       imgList:[],
       paylist:true,
-      transfer:false
+      transfer:false,
+      code:this.$route.query.code,
+      openId:''
     }
   },
   created() {
+    console.log("aaaa",this.code)
     // console.log('w333', JSON.parse(this.$route.query.info))this.$refs.upload.list
   },
   methods: {
+    
     // 关闭弹窗
     closed(){
       this.paylist = true
@@ -514,11 +531,135 @@ export default {
           // })
         })
     },
+    // 大陆微信支付
+    PayWechat() {
+      console.log("openid",this.openId )
+      this.isPay = true
+      console.log("aaa",this.typeIndex)
+      if(this.info.coinType === 'USD'){
+        if(this.typeIndex == 2){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+        if(this.typeIndex == 3){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+        if(this.typeIndex == 4){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+      }
+      let pay = ""
+      if(this.typeIndex == 0){
+        if(this.$store.state.platform === 21){
+          pay = 2
+        } else {
+          pay = 6
+        }
+      }else if(this.typeIndex == 1){
+        if(this.$store.state.platform === 21){
+          pay = 1
+        } else{
+          pay = 61
+        }
+      }else if(this.typeIndex == 2){
+        if(this.$store.state.platform === 11){
+          pay = 84
+        }else if(this.$store.state.platform === 41){
+          pay = 89
+        }
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 89
+      }
+
+      let baseUrl=this.$store.getters.baseUrl
+
+      let tradeType = ''
+      let isWeiXin = ()=>{
+        return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
+      }
+      if(pay == 1){
+        if(isWeiXin()){
+          tradeType = 'js'
+        } else {
+          tradeType = 'mwap'
+        }
+      }else {
+        tradeType = 'wap'
+      }
+      // this.getCode()
+      // console.log("code",this.code) 
+      const openid = localStorage.getItem('openid')
+      this.$axios({ 
+        method: 'post',
+        url: `/web/pay/create`,
+        data: {
+          openid: openid,
+          orderId: this.info.orderId,
+          coinType: this.info.coinType,
+          payType: pay,
+          tradeType: tradeType,
+          returnUrl: baseUrl+'/complete/paySuccess?orderId='+this.info.orderId
+        }
+      })
+      .then(res => {
+        if (res.config) {
+          if (pay !== 7) {
+            window.location.replace(res.config)
+          } else {
+            const promise = new Promise((resolve, reject) => {
+              this.form = []
+              const obj = JSON.parse(res.config)
+              const objKey = Object.keys(obj)
+              for (const i in objKey) {
+                if (objKey[i] === 'url') {
+                  this.actionLink = obj[objKey[i]]
+                  continue
+                }
+                const o = {
+                  name: objKey[i],
+                  val: obj[objKey[i]]
+                }
+                this.form.push(o)
+              }
+              resolve()
+            })
+            promise.then(() => {
+              setTimeout(() => {
+                this.isPay = false
+                document.getElementById('unionPay').click()
+              }, 2000)
+            })
+          }
+        } else if (!res.config){
+          // this.isPay = false
+          // this.$router.replace({
+          //   name: 'complete-paySuccess-orderId-price-coinType',
+          //   params: {
+          //     orderId: this.info.orderId,
+          //     price: this.info.payAmount,
+          //     coinType: this.info.coinType
+          //   }
+          // })
+        }
+      })
+      .catch(err => {
+        this.$nuxt.$loading.finish()
+        console.log(err)
+        this.$toast.show(err.message)
+      })
+    },
     showSelect() {
       // console.log('6767')
     }
   },
   mounted() {
+    // this.getOpenId()
     fbq('track', 'InitiateCheckout');
   }
 }

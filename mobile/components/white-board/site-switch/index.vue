@@ -53,7 +53,7 @@
             </select>
           </div>
           <div class="select-icon">
-            <i class="iconfont iconkuozhan"></i>
+            <!-- <i class="iconfont iconkuozhan"></i> -->
           </div>
         </div>
         <div v-else class="select-line" @click="chooseCoin">

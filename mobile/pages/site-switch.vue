@@ -37,7 +37,7 @@
               {{p.content}}
             </option>
           </select>
-          <i class="iconfont iconkuozhan"></i>
+          <!-- <i class="iconfont iconkuozhan"></i> -->
         </div>
         <div v-else class="select-line-box">
           <input :value="coin" type="text" />

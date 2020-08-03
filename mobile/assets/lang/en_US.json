@@ -577,6 +577,12 @@
       "defaultPairRing": "Selected couple rings on BDD Jewelry Mall",
       "diy": "Customize",
       "cableTransfer": "Wire Transfer",
+      "paypal":"Paypal",
+      "wechat":"WeChat",
+      "alipay":"Alipay",
+      "alipayhk":"Alipay-HK",
+      "visa":"visa",
+      "UnionPay":"UnionPay",
       "caveat": "Warning",
       "cancel": "Cancel",
       "clear": "SUBMIT",
@@ -604,7 +610,12 @@
       "toast2": "This browser does not support Auto Copy",
       "Shipping":"Delivering",
       "ShippingAddress":"Shipping Address",
-      "ContactMerchant":"Contact Us"
+      "ContactMerchant":"Contact Us",
+      "result": [
+          "Waiting for pickup",
+          "In Transit",
+          "received"
+      ]
     }
   },
   "custom-made": {
