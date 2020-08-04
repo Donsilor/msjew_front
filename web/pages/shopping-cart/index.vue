@@ -204,8 +204,13 @@ export default {
     }
   },
   beforeMount() {
-    console.log(66)
-    console.log(7777,this.$route)
+    if(JSON.stringify(this.$route.params) != "{}"){
+      var data = this.$route.params.token.data;
+      this.$store.commit('setToken', data.access_token)
+      this.$store.commit('setUserInfo', data.member)
+      this.$store.dispatch('synchronizeCart')
+    }
+
     this.getList()
   },
   methods: {
@@ -231,20 +236,13 @@ export default {
           this.Settlement2 = false
         }
     },
-    // handleScroll(){
-    //   console.log('滚动条发生滚动了')
-    //   this.Settlement1 = false
-    //   this.Settlement2 = true
-    // },
     getList() {
       this.$store
         .dispatch(`getCart`)
         .then(res => {
-          // console.log("1230",res)
           for (const i in res) {
             res[i].tick = false
             this.coinType = res[i].coinType
-            // console.log("1230", res[i].coinType) 
           }
           // const result = []
           // let keys = Object.keys(res)
@@ -257,11 +255,9 @@ export default {
           // this.good = result
           this.good = res
           if(this.good.length<=3){
-            // console.log(11111111111,this.good.length)
             this.Settlement1 = true
             this.Settlement2 = false
           } else {
-            // console.log(2222222)
             window.addEventListener('scroll', this.handleScroll, true)
           }
           this.defaultAll()
@@ -272,7 +268,6 @@ export default {
     },
     defaultAll(){
       if(!this.$store.getters.hadLogin){
-        // console.log("全选",this.allTick)
         if (this.allTick) {
           for (const j in this.good) {
             this.good[j].tick = false
@@ -281,15 +276,12 @@ export default {
           this.tickNum = 0
           this.totalNum = 0
           this.totalPrice = 0
-          // console.log(1111111)
         } else {
-          //  console.log(22222)
           this.tickNum = 0
           this.totalNum = 0
           this.totalPrice = 0
           for (const j in this.good) {
             this.soudout = this.good[j].data[0].simpleGoodsEntity.goodsStatus
-            // console.log("this.good[j]",this.good[j])
             // if(this.good[j].groupType == 1){
             //   if(parseInt(this.good[j].data[0].ringsSimpleGoodsEntity.status) === 0){
             //       this.good[j].tick = false
@@ -313,9 +305,6 @@ export default {
             }
 
             this.good[j].tick = true
-            // console.log("tick",this.good[i].tick)
-
-            // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
 
             if(this.good[j].groupType == 2){
               if(this.good[j].data[0].coupon.hasOwnProperty('discount')){
@@ -343,7 +332,7 @@ export default {
               }
             }
           }
-          // console.log("price=====2",this.good)
+
           // this.tickNum = this.good.length
           // this.totalNum = this.good.length
           if(this.good.length !== 0){
@@ -357,7 +346,6 @@ export default {
       }
     },
     allTicks() {
-      // console.log("全选",this.allTick)
       if (this.allTick) {
         for (const i in this.good) {
           this.good[i].tick = false
@@ -382,7 +370,6 @@ export default {
 
           // }else 
           if(this.good[i].groupType == 2){
-            // console.log(22222)
               this.tickNum += 1
               this.totalNum += 1
 
@@ -396,9 +383,6 @@ export default {
           }
 
           this.good[i].tick = true
-          // console.log("tick",this.good[i].tick)
-
-          // console.log("price=====1",this.good[i].data[0].simpleGoodsEntity.goodsStatus)
 
         if(this.good[i].groupType == 2){
           if(this.good[i].data[0].coupon.hasOwnProperty('discount')){
@@ -491,7 +475,6 @@ export default {
         }
       }
 
-
       this.good[i].tick = !this.good[i].tick
       this.good = JSON.parse(JSON.stringify(this.good))
       if (this.tickNum == this.good.length) {
@@ -544,7 +527,7 @@ export default {
           data.push(this.good[i].id)
         }
       }
-      // console.log("下架", this.good[i].data[0].simpleGoodsEntity.goodsStatus)
+
       if (data.length === 0) return
       this.$store
         .dispatch(`removeCart`, data)
@@ -566,10 +549,8 @@ export default {
         if (this.good[i].tick) {
           data.push(this.good[i].id)
         }
-      // console.log("length",this.good[i].tick)
       }
-      //  console.log("length333",this.tickNum)
-      //  console.log("data.length",data.length,this.tickNum)
+
       if (data.length !== this.tickNum) return
       const cartIds = data.join(',')
       this.$router.push({
@@ -582,17 +563,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.positons{
-//  width: 1360px;
-//  margin: 0 auto;
-}
 .cart2{
     position: fixed!important;
     z-index: 999;
     bottom:0;
     width: 100%;
     min-width: 1200px;
-    // text-align: left;
     overflow: hidden;
     margin: 0 auto;
     background-color: #ffffff;

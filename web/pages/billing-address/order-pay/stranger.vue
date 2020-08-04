@@ -40,9 +40,7 @@
         <div class="login-line">
           <span @click="login()">{{ $t(`${lang}.login`) }}</span>
           <span>{{ $t(`${lang}.balbala`) }}</span>
-          <nuxt-link to="/login"
-            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-          >
+          <span @click="register()">{{ $t(`${lang}.Registration`) }}</span>
           <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
       </div>
@@ -958,7 +956,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="login()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -1136,13 +1134,9 @@
       <div class="user-info">
         <i class="iconfont iconrentou" />
         <div class="login-line">
-          <nuxt-link to="/login"
-            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
-          >
+          <span @click="login()">{{ $t(`${lang}.login`) }}</span>
           <span>{{ $t(`${lang}.balbala`) }}</span>
-          <nuxt-link to="/login"
-            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-          >
+          <span @click="register()">{{ $t(`${lang}.Registration`) }}</span>
           <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
       </div>
@@ -2060,7 +2054,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="login()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -2301,7 +2295,8 @@ export default {
       is_electronic:'',
       areaId : this.$store.state.areaId,
       ultimatelyPay:'',
-      isLogin:this.$store.getters.hadLogin
+      isLogin:this.$store.getters.hadLogin,
+      loginType: 2
     }
   },
   // watch:{
@@ -2393,8 +2388,19 @@ export default {
   },
   mounted() {
     // console.log("rrr",this.isLogin)
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language
     window.addEventListener('scroll', this.scrollToTop);
+
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
+      this.loginType = 1;
+    }else{
+      if(this.language == "zh_CN"){
+        this.loginType = 1
+      }else{
+        this.loginType = 2;
+      }
+    }
 
     fbq('track', 'InitiateCheckout');
   },
@@ -2403,19 +2409,17 @@ export default {
   },
   methods: {
     zhizhi(or){
-      // console.log("纸质",or)
       this.invoice.is_electronic = or;
       this.isactive = true
       this.Active = false
     },
     dianzi(or){
-      console.log("电子",or)
       this.invoice.is_electronic = or;
       this.isactive = false
       this.Active = true
     },
     handle(){
-      console.log("取到的值是"+this.radio);
+      // console.log("取到的值是"+this.radio);
     },
     close(){
       this.invoiceBox = false
@@ -2424,7 +2428,7 @@ export default {
     show2(){
       this.iconShow=!this.iconShow
       this.invoice.is_electronic = 0
-      console.log("dddd",this.invoice.is_electronic)
+
       if(this.iconShow == true){
         this.invoiceBox = true
         this.content = true
@@ -2453,11 +2457,6 @@ export default {
           this.mailShow = true
           return
         }
-        // if(){
-        //   this.mailShow=true
-        //   this.emailShow = false
-        //   return
-        // }
       }
 
       this.gou = true
@@ -2470,29 +2469,8 @@ export default {
     },
     complete(){
       this.invoiceBox = false
-      // this.iconShow = false
     },
-    // 点击登入获取上页url
     login(){
-      // let oldurl=window.location.pathname
-      // let params=window.location.search
-      //如果是订单确认页面，返回到购物车
-      // if((/^\/billing-address/).test(oldurl)){
-          // oldurl = '/shopping-cart'
-          // params = ''
-      // }
-      // console.log(oldurl);
-      // const url=oldurl+params
-      // localStorage.setItem('url',url)
-      // setTimeout(() => {
-        // this.$router.push({
-            // path: `/login`,
-            // query: {url}
-        // })
-      // },0)
-      // console.log("oldurl",url)
-
-      console.log(123)
       this.$emit('login', true)
     },
     register(){
@@ -2506,6 +2484,7 @@ export default {
       console.log(oldurl);
       const url=oldurl+params
       localStorage.setItem('url',url)
+      sessionStorage.setItem("loginType", this.loginType)
       setTimeout(() => {
         this.$router.push({
             path: `/login?type=register`,
@@ -2519,44 +2498,8 @@ export default {
       if(ways==6||ways==61){
         this.show=false
       }else{
-        this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        // const url=window.location.href
-        // setTimeout(() => {
-        //   this.$router.push({
-        //     path: `/login`,
-        //     query: {url}
-        //   })
-        //   // this.$router.push(`/login`)
-        // }, 2000)
-        // this.wrongMsg = this.$t(`${lang}.wip5`)
-        // this.alertBox = true
-        // alert('请添加地址并登陆后支付！')
-        // this.show=true
-        // if (this.orderAddress.id === '') {
-          const topB = document.getElementsByClassName('layout-box')[0];
-          const that = this
-          let timer = setInterval(() => {
-            let ispeed = Math.floor(-that.scrollTop / 5)
-            topB.scrollTop = that.scrollTop + ispeed
-            if (that.scrollTop === 0) {
-              clearInterval(timer)
-            }
-          }, 22)
-          //  console.log("qeqweqweqw",this.scrollTop)
-          // this.newAddress = true
-          // this.isEdit = false
-        // }
+        this.login()
       }
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     fuckYouM() {
       if (this.tooInp.trim() === '') {
@@ -2569,7 +2512,6 @@ export default {
       this.tooInp = ''
       this.makeGay = false
       this.preferFee = 0
-      // this.getTex()
       this.fuckYou = false
     },
     checkCount() {
@@ -2647,9 +2589,7 @@ export default {
             this.tex = res.data
             this.tex.priceHKD = res.data.order_amount_HKD
             this.tex.coinType = res.data.currency
-            // console.log("税费",res.data)
             this.ultimatelyPay = res.data.pay_amount;
-            console.log("税费",this.tex)
           })
           .catch(err => {
             this.canSubmit = false
@@ -2691,7 +2631,7 @@ export default {
       }else if(this.payWay==84){
         pay = 84
       }
-      console.log("方式",this.payWay)
+
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -2765,8 +2705,6 @@ export default {
         }
       })
         .then(res => {
-          // console.log('od===>', res)
-          // this.$store.dispatch('removeCart', this.pathTakeIds)
           if(res.data.config){
             window.location.replace(res.data.config)
           }else {

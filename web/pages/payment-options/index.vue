@@ -402,9 +402,10 @@ export default {
     }
   },
   mounted(){
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language
+
     let element = document.querySelector('.el-upload ')
-    // console.log("44444",this.fileList)
+
     this.getAccount()
 
     fbq('track', 'InitiateCheckout');
@@ -577,7 +578,7 @@ export default {
       }else if(this.payWay==84){
         pay = 84
       }
-    console.log("方式",pay)
+
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(
       //     JSON.stringify({
@@ -656,16 +657,6 @@ export default {
             // console.log(err)
           }
         })
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     }
   }
 }
