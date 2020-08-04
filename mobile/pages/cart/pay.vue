@@ -609,7 +609,7 @@ export default {
       })
       .then(res => {
         if(tradeType == 'mweb'){
-          window.location.replace(encodeURIComponent(res))
+          window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId))
         }
         if (res.config) {
           if (pay !== 7) {
