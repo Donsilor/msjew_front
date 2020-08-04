@@ -130,27 +130,27 @@
       </div>
       <div class="btn">
         <div
-          v-if="info.payChannel === 1"
+          v-if="info.payChannel === 11"
           class="btn-common btn-black"
           @click="paytips = !paytips"
         >
           {{ lang.paytips }}
         </div>
         <div
-          v-if="info.payChannel !== 1&&hadLogin"
+          v-if="info.payChannel !== 11&&hadLogin"
           class="btn-common btn-black"
           @click="goDetails"
         >
           {{ lang.lookBill }}
         </div>
         <div
-          v-if="info.payChannel !== 1"
+          v-if="info.payChannel !== 11"
           class="btn-common btn-gray btn-black"
           @click="goIndex"
         >
           {{ lang.continue }}
         </div>
-        <div v-if="info.payChannel === 1" class="btn-more">
+        <div v-if="info.payChannel === 11" class="btn-more">
           <span class="btn-common btn-gray" @click="goDetails">{{
             lang.orderDetails
           }}</span>
