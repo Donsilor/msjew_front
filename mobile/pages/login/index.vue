@@ -1,56 +1,11 @@
 <template>
 <div>
-  <!-- <div v-if="language === 'zh_CN'"> -->
-  <!--  <section>
-      <div class="title-bar">
-        <span class="title">
-          {{ lang['login'] }}
-        </span>
-        <span class="register" @click="toRegister">
-          {{ lang['no-account'] }}
-        </span>
-      </div>
-      <div class="line-box">
-        <button class="full-btn phone" @click="toEmailLogin">
-          <img src="/email.svg" class="btn-icon" />
-          <span class="btn-message">
-            {{ lang['email-login'] }}
-          </span>
-        </button>
-      </div> -->
-
-      <!--    <div class="tip">-->
-      <!--      <span class="tip-message">-->
-      <!--        {{ lang['oauth-login'] }}-->
-      <!--      </span>-->
-      <!--    </div>-->
-      <!-- <div class="line-box">
-        <button class="full-btn facebook" @click="oauthLogin('facebook')">
-          <img src="/facebook.svg" class="btn-icon" />
-          <span class="btn-message">
-            {{ lang['facebook-login'] }}
-          </span>
-        </button>
-      </div>
-      <div class="line-box">
-        <button class="full-btn google" @click="oauthLogin('google')">
-          <img src="/google.svg" class="btn-icon" />
-          <span class="btn-message">
-            {{ lang['google-login'] }}&nbsp;&nbsp;&nbsp;
-          </span>
-        </button>
-      </div> -->
-    <!-- </section> -->
-  <!-- </div> -->
   <div>
     <section>
       <div class="title-bar">
         <span class="title">
           {{ lang['login'] }}
         </span>
-        <!-- <span class="register" @click="toRegister">
-          {{ lang['no-account'] }}
-        </span> -->
       </div>
       <div class="line-box">
         <button class="full-btn phone" @click="toPhoneLogoin">
@@ -69,30 +24,6 @@
           </span>
         </button>
       </div>   
-
-      <!--    <div class="tip">-->
-      <!--      <span class="tip-message">-->
-      <!--        {{ lang['oauth-login'] }}-->
-      <!--      </span>-->
-      <!--    </div>-->
-      <!-- <div class="line-box">
-        <button class="full-btn facebook" @click="oauthLogin('facebook')">
-          <img src="/facebook.svg" class="btn-icon" />
-          <span class="btn-message">
-            {{ lang['facebook-login'] }}
-          </span>
-        </button>
-      </div>
-      <div class="line-box">
-        <button class="full-btn google" @click="oauthLogin('google')">
-          <img src="/google.svg" class="btn-icon" />
-          <span class="btn-message">
-            {{ lang['google-login'] }}&nbsp;&nbsp;&nbsp;
-          </span>
-        </button>
-      </div> -->
-
-
     </section>
   </div>
 </div>

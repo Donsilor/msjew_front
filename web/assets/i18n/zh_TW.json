@@ -568,7 +568,9 @@
         "reset": "確認重置",
         "hadReset": "您的密碼已經重新設置，請以新密碼登入",
         "waitTimes": "{second} 秒後自動返回登入頁面",
-        "loginNow": "立即登入"
+        "loginNow": "立即登入",
+        "code": "請輸入驗證碼*",
+        "codeTips": "請輸入正確驗證碼"
     },
     "contactUs": {
         "callToUs": "致電我們",

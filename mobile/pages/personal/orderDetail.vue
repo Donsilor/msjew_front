@@ -547,22 +547,14 @@ export default {
     },
     payChannelText(payChannel) {
       const map = {
-        0: '待支付',       // 待支付
-        1: 'payType1',     // 微信
-        2: 'payType2',     // 支付宝
-        3: 'payType3',     // 银联
-        4: 'payType4',     // 小程序
-        5: 'payType5',     // 余额
-        6: 'payType6',     // Paypal
-        61: 'payType7',    // Paypal Card
-        7:  'payType8',    // 支付宝国际版
-        81: 'payType9',    // Paydollor 银联
-        82: 'payType10',   // Paydollor 支付宝
-        83: 'payType11',   // Paydollor 微信
-        84: 'payType12',   // Paydollor 支付宝HK
-        10: 'payType13',   // CARD
-        11: 'payType14',   // WireTransfer(电汇)
-        100: 'payType15'   // OFFLINE(线下)
+        6: 'payType1',     // Paypal
+        61: 'payType2',    // Paypal Card
+        81: 'payType3',    // 银联
+        82: 'payType4',    // 支付宝
+        83: 'payType5',    // 微信
+        84: 'payType6',    // 支付宝HK
+        11: 'payType7',    // WireTransfer(电汇)
+        100: 'payType8'    // OFFLINE
         
       }
       return map[payChannel]

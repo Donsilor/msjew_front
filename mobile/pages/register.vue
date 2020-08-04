@@ -3,7 +3,7 @@
     <div class="operate-bar">
       <i class="icon iconfont iconguanbi close" @click="goBack($router)"></i>
     </div>
-    <!-- 中文简体 -->
+
     <div >
       <section  class="page-content">
         <div class="title-bar">
@@ -11,24 +11,7 @@
           <span class="login" @click="toLogin">{{ lang.hadRegister }}></span>
         </div>
 
-        <!-- <div class="oauth">
-          <div class="line-box">
-            <button class="full-btn facebook" @click="oauthLogin('facebook')">
-              <img src="/facebook.svg" class="btn-icon" />
-              <span class="btn-message">{{ lang.facebook }}</span>
-            </button>
-          </div>
-          <div class="line-box">
-            <button class="full-btn google" @click="oauthLogin('google')">
-              <img src="/google.svg" class="btn-icon" />
-              <span class="btn-message">{{ lang.google }}&nbsp;&nbsp;&nbsp;</span>
-            </button>
-          </div>
-        </div> -->
-
         <div class="info">
-          <div class="title" v-if="loginType == 2 ">{{ lang.RegisterTitle }}</div>
-          <div class="title" v-else>{{ lang.inputInfo }}</div>
           <!-- 名称 -->
           <div class="line-box input-line">
             <bdd-input
@@ -36,8 +19,8 @@
               :placeholder="`${lang.name}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('name')"
-               :maxl="maxlength"
-               @keydown="keydown('30')"
+              @keydown="keydown('30')"
+              :maxl="maxlength"
             ></bdd-input>
             <!-- <div
               :class="[
@@ -109,6 +92,22 @@
             </div>
           </div>
 
+          <!-- 图片验证码 -->
+          <div class="line-box input-line">
+            <div class="code">
+              <bdd-input v-model="code" :placeholder="lang['Code']" @focus="ifShowErr = false" @blur="inputImgKey" :maxl="maxlength" @input="keydown('4','code')"></bdd-input>
+              <div class="code-picture" @click="refreshCode">
+                <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
+              </div>
+            </div>
+            <div :class="[
+              'error-message',
+              { active: ifShowErr }
+            ]">
+              {{ lang['code-error'] }}
+            </div>
+          </div>
+
           <!-- 验证码 -->
           <div class="line-box input-line" v-if="loginType == 2">
             <div v-show="showCodeMessage" class="message">
@@ -139,7 +138,7 @@
                 { active: hadInput('code') && !trueCode }
               ]"
             >
-              {{ lang.codeError }}
+              {{ lang['code-error'] }}
             </div>
           </div>
 
@@ -154,7 +153,7 @@
                 :placeholder="`*${lang.code}`"
                 :padding="'0 30% 0 3%'"
                 @blur="inputKey('code')"
-                :maxl="maxlength"
+                :maxl="maxCode"
                 @keydown="keydown('15')"
               ></bdd-input>
               <div class="send-code">
@@ -169,7 +168,7 @@
                 { active: hadInput('code') && !trueCode }
               ]"
             >
-              {{ lang.codeError }}
+              {{ lang['code-error'] }}
             </div>
           </div>
 
@@ -238,163 +237,6 @@
         </div>
       </section>
     </div>
-    <!-- 繁体中文 -->
-    <!-- <div v-else>
-      <section class="page-content">
-        <div class="title-bar">
-          <span class="title" style="opacity: 0">{{ lang.oauthRegister }}</span>
-          <span class="login" @click="toLogin">{{ lang.hadRegister }}></span>
-        </div> -->
-
-        <!-- <div class="oauth">
-          <div class="line-box">
-            <button class="full-btn facebook" @click="oauthLogin('facebook')">
-              <img src="/facebook.svg" class="btn-icon" />
-              <span class="btn-message">{{ lang.facebook }}</span>
-            </button>
-          </div>
-          <div class="line-box">
-            <button class="full-btn google" @click="oauthLogin('google')">
-              <img src="/google.svg" class="btn-icon" />
-              <span class="btn-message">{{ lang.google }}&nbsp;&nbsp;&nbsp;</span>
-            </button>
-          </div>
-        </div> -->
-
-        <!-- <div class="info">
-          <div class="title">{{ lang.inputInfo }}</div>
-
-          <div class="line-box input-line">
-            <bdd-input
-              v-model="info.name"
-              :placeholder="`${lang.name}`"
-              :padding="'0 3% 0 3%'"
-              @blur="inputKey('name')"
-            ></bdd-input>
-            <div
-              :class="[
-                'error-message',
-                { active: hadInput('name') && !info.name }
-              ]"
-            >
-              {{ lang.nameError }}
-            </div>
-          </div>
-          <div class="line-box input-line">
-            <bdd-input
-              v-model="info.surname"
-              :placeholder="`${lang.surname}`"
-              :padding="'0 3% 0 3%'"
-              @blur="inputKey('surname')"
-            ></bdd-input>
-            <div
-              :class="[
-                'error-message',
-                { active: hadInput('surname') && !info.surname }
-              ]"
-            >
-              {{ lang.surnameError }}
-            </div>
-          </div>
-
-          <div class="line-box input-line b" >
-            <bdd-input
-              v-model="info.email"
-              :placeholder="`*${lang.email}`"
-              :padding="'0 3% 0 3%'"
-              @blur="inputKey('email')"
-            ></bdd-input>
-            <div
-              :class="[
-                'error-message',
-                { active: hadInput('email') && !trueEmail }
-              ]"
-            >
-              {{ lang.emailError }}
-            </div>
-          </div>
-
-          <div class="line-box input-line">
-            <div v-show="showCodeMessage" class="message">
-              {{ lang.inputUnder }} {{ info.email }} {{ lang.theEmailCode }}
-            </div>
-            <div style="position: relative;">
-              <bdd-input
-                v-model="info.code"
-                :placeholder="`*${lang.code}`"
-                :padding="'0 30% 0 3%'"
-                @blur="inputKey('code')"
-              ></bdd-input>
-              <div class="send-code">
-                <button :class="['getCode', className]" :disabled="waiting" @click="sendEmailCode">
-                  {{ waitingText }}
-                </button>
-              </div>
-            </div>
-            <div
-              :class="[
-                'error-message',
-                { active: hadInput('code') && !trueCode }
-              ]"
-            >
-              {{ lang.codeError }}
-            </div>
-          </div>
-
-          <div class="line-box input-line">
-            <bdd-input
-              v-model="info.password"
-              :type="'password'"
-              :placeholder="`*${lang.password}`"
-              :padding="'0 3% 0 3%'"
-              @blur="inputKey('password')"
-            ></bdd-input>
-            <div
-              :class="[
-                'error-message',
-                { active: hadInput('password') && !truePassword }
-              ]"
-            >
-              {{ lang.passwordError }}
-            </div>
-          </div>
-
-          <div class="line-box input-line">
-            <bdd-input
-              v-model="info.repassword"
-              :type="'password'"
-              :placeholder="`*${lang.repassword}`"
-              :padding="'0 3% 0 3%'"
-              @blur="inputKey('repassword')"
-            ></bdd-input>
-            <div
-              :class="[
-                'error-message',
-                { active: hadInput('repassword') && !trueRepassword }
-              ]"
-            >
-              {{ lang.repasswordError }}
-            </div>
-          </div>
-        </div>
-
-        <div class="protocol">
-          <span class="checked-box" @click="agreeIt">
-            <i :class="['iconfont', 'icongou', { agree: agree }]"></i>
-          </span>
-          <div class="protocol-info">
-            {{ lang.agree }}
-            <nuxt-link to="/help-pages/clause">{{ lang.bddClause }}</nuxt-link>
-          </div>
-        </div>
-
-        <div class="line-box">
-          <button class="full-btn to-register" @click="register">
-            <span class="btn-message">{{ lang.register }}</span>
-          </button>
-        </div>
-      </section>
-    </div> -->
   </div>
 </template>
 
@@ -443,7 +285,11 @@ export default {
       waitingTime: defaultTime,
       waitingText: this.LANGUAGE.components.sendEmailCode.sendCode,
       loginType: '',
-      maxlength: '30'
+      maxlength: '30',
+      maxCode: '4',
+      pictureCode: '',
+      code: '',
+      ifShowErr: false
     }
   },
   computed: {
@@ -477,22 +323,14 @@ export default {
   },
   mounted() {
     this.loginType=localStorage.getItem('loginType')
-    // console.log("ttttt",this.loginType)
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language;
+
     const _this = this
-    _this.$nextTick(() => {})
+    _this.$nextTick(() => {
+      _this.refreshCode()
+    })
   },
   methods: {
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     toLogin() {
       this.$router.replace({
         name: 'login'
@@ -500,9 +338,29 @@ export default {
     },
     // 发送手机验证码
     sendMbileCode(){
-      this.hadSendCode = true
       const _this = this
-       _this.setWait()
+      if(!this.info.mobile){
+        _this.$toast.show(_this.lang['inputPhone'])
+        return
+      }
+
+      if(!_this.trueMobile){
+        _this.$toast.show(_this.lang['phoneError'])
+        return
+      }
+
+      if(!this.code){
+        _this.$toast.show(_this.lang['inputCode'])
+        return
+      }
+
+      if(this.code != this.pictureCode){
+        _this.$toast.show(_this.lang['codeError'])
+        return
+      }
+
+      this.hadSendCode = true
+      _this.setWait()
       this.$axios({
         method: "post",
         url: "/web/site/sms-code",
@@ -527,8 +385,13 @@ export default {
     },
     // 发送邮箱验证码
     sendEmailCode() {
-      this.hadSendCode = true
       const _this = this
+      if(this.code != this.pictureCode){
+        _this.$toast.show(_this.lang['code-error'])
+        return
+      }
+
+      this.hadSendCode = true
       _this.setWait()
        this.$axios({
         method: "post",
@@ -591,14 +454,7 @@ export default {
     },
     registerCN() {
       const _this = this
-      // if (!_this.trueName) {
-      //   _this.$toast(_this.lang.inputName)
-      //   return
-      // }
-      // if (!_this.trueSurname) {
-      //   _this.$toast(_this.lang.inputSurname)
-      //   return
-      // }
+
       if (!_this.trueMobile) {
         _this.$toast(_this.lang.phoneError)
         return
@@ -651,6 +507,18 @@ export default {
         .catch(err => {
           _this.$toast.show(err.message)
         })
+    },
+    // 生成驗證碼
+    refreshCode () {
+      // const info = JSON.parse(JSON.stringify(this.info))
+      const result = []
+      const library = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+      this.identifyCode = ''
+      for (let i = 0; i < 4; i++) {
+        result.push(library[Math.floor(Math.random() * 9)])
+      }
+      this.pictureCode = result.join('')
+      // this.info = info
     },
     register() {
       const _this = this
@@ -739,6 +607,9 @@ export default {
     },
     keydown(k){
       this.maxlength = k;
+    },
+    inputImgKey() {
+      this.ifShowErr = this.code ? false : true
     }
   }
 }
@@ -949,5 +820,19 @@ export default {
 .area-code .iconxiala{
   margin: 6px 0 0 8%;
   font-size: 14px;
+}
+
+.code-picture {
+  width: 109px;
+  height: 40px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+.code {
+  display: flex;
+  justify-content: space-between;
 }
 </style>
