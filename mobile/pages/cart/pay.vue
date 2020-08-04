@@ -579,6 +579,8 @@ export default {
 
       let baseUrl=this.$store.getters.baseUrl
 
+      let orderId = this.info.orderId
+
       let tradeType = ''
       let isWeiXin = ()=>{
         return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
@@ -671,7 +673,7 @@ export default {
                       //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
                   }
                 }
-            }(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId)); 
+            }(baseUrl+'/complete/paySuccess?orderId='+orderId)); 
           }
           if (typeof WeixinJSBridge == "undefined"){
             if( document.addEventListener ){
