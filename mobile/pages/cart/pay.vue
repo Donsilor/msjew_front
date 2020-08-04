@@ -368,6 +368,17 @@ export default {
     // console.log('w333', JSON.parse(this.$route.query.info))this.$refs.upload.list
   },
   methods: {
+    weixin(res){
+      let baseUrl=this.$store.getters.baseUrl
+      alert(res.err_msg)
+      if(res.err_msg == "get_brand_wcpay_request:ok" ){
+        alert(11111111111)
+        alert(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId)
+          window.location.replace(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId)
+      // 使用以上方式判断前端返回,微信团队郑重提示：
+            //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+      } 
+    },
     
     // 关闭弹窗
     closed(){
@@ -652,15 +663,18 @@ export default {
                   "signType":res.signType,         //微信签名方式：     
                   "paySign":res.paySign //微信签名 
                 },
-                function(res){
-                  alert(res.err_msg)
-                if(res.err_msg == "get_brand_wcpay_request:ok" ){
-                  alert(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId)
-                   window.location.replace(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId)
-                // 使用以上方式判断前端返回,微信团队郑重提示：
-                      //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
-                } 
-            }); 
+                this.weixin
+            //     function(res){
+            //       alert(res.err_msg)
+            //     if(res.err_msg == "get_brand_wcpay_request:ok" ){
+            //       alert(11111111111)
+            //       alert(baseUrl+'/complete/paySuccess?orderId='+_this.info.orderId)
+            //        window.location.replace(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId)
+            //     // 使用以上方式判断前端返回,微信团队郑重提示：
+            //           //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+            //     } 
+            // }
+            ); 
           }
           if (typeof WeixinJSBridge == "undefined"){
             if( document.addEventListener ){
