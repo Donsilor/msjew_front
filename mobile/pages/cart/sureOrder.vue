@@ -742,7 +742,12 @@ export default {
 
       this.getData() // 获取地址
       // this.getCouponList() // 获取优惠券列表
-      this.getCode()
+      let isWeiXin = ()=>{
+        return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
+      }
+      if(isWeiXin()){
+        this.getCode()
+      }
       // this.getOpenId()
       fbq('track', 'InitiateCheckout');
 
