@@ -108,9 +108,9 @@
             </div>
           </div>
 
-          <!-- 验证码 -->
+          <!-- 手机验证码 -->
           <div class="line-box input-line" v-if="loginType == 2">
-            <div v-show="showCodeMessage" class="message">
+            <div v-show="showCodeMessageM" class="message">
               {{ lang.inputUnder }} {{ info.mobile }} {{ lang.theMobileCode }}
             </div>
             <div style="position: relative;">
@@ -142,9 +142,9 @@
             </div>
           </div>
 
-          <!-- 繁体验证码 -->
+          <!-- 邮件验证码 -->
           <div class="line-box input-line" v-else>
-            <div v-show="showCodeMessage" class="message">
+            <div v-show="showCodeMessageE" class="message">
               {{ lang.inputUnder }} {{ info.email }} {{ lang.theEmailCode }}
             </div>
             <div style="position: relative;">
@@ -311,10 +311,10 @@ export default {
     truePassword() {
       return this.info.password && this.info.password.length > 5
     },
-    showCodeMessage() {
+    showCodeMessageE() {
       return this.hadSendCode && this.hadInput('email') && this.trueEmail
     },
-    showCodeMessage() {
+    showCodeMessageM() {
       return this.hadSendCode && this.hadInput('mobile') && this.trueMobile
     },
     trueRepassword(){
@@ -386,8 +386,23 @@ export default {
     // 发送邮箱验证码
     sendEmailCode() {
       const _this = this
+      if(!this.info.email){
+        _this.$toast.show(_this.lang['inputEmail'])
+        return
+      }
+
+      if(!_this.trueEmail){
+        _this.$toast.show(_this.lang['emailError'])
+        return
+      }
+
+      if(!this.code){
+        _this.$toast.show(_this.lang['inputCode'])
+        return
+      }
+
       if(this.code != this.pictureCode){
-        _this.$toast.show(_this.lang['code-error'])
+        _this.$toast.show(_this.lang['codeError'])
         return
       }
 
