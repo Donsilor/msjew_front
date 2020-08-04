@@ -532,7 +532,7 @@
         "orderDetail": "订单详情",
         "orderStatus": "订单状态",
         "orderNumber": "订单编号",
-        "orderTime": "订单编号",
+        "orderTime": "下单时间",
         "payType": "付款方式",
         "payTime": "付款时间",
         "logistics": "物流",
@@ -576,6 +576,12 @@
         "defaultPairRing": "BDD珠宝商城精选对戒",
         "diy": "定制",
         "cableTransfer": "电汇",
+        "paypal":"Paypal",
+        "wechat":"微信",
+        "alipay":"支付宝",
+        "alipayhk":"支付宝HK",
+        "visa":"visa",
+        "UnionPay":"银联",
         "caveat": "警告",
         "cancel": "取消",
         "clear": "确定",
@@ -590,7 +596,21 @@
         "payfailed":"支付失败",
         "discountedAmount": "折扣金额",
         "Untied":"已解绑",
-        "couponAmount": "优惠券"
+        "couponAmount": "优惠券",
+        "payType1": "微信",
+        "payType2": "支付宝",
+        "payType3": "银联",
+        "payType4": "小程序",
+        "payType5": "余额",
+        "payType6": "Paypal",
+        "payType7": "Paypal Card",
+        "payType8": "支付宝国际版",
+        "payType9": "银联",
+        "payType10": "支付宝",
+        "payType11": "微信",
+        "payType12": "支付宝HK",
+        "payType13": "CARD",
+        "payType14": "电汇"
       },
       "logisticInfo":{
         "title": "我的订单",
@@ -603,7 +623,12 @@
         "toast2": "该浏览器不支持自动复制",
         "Shipping":"订单配送中",
         "ShippingAddress":"收货地址",
-        "ContactMerchant":"联系商家"
+        "ContactMerchant":"联系商家",
+        "result": [
+            "等待揽件",
+            "运输中",
+            "已签收"
+        ]
       }
     },
     "custom-made": {
@@ -959,7 +984,13 @@
         "EarringsAndStuds":"耳环/耳钉",
         "DecorationAndPendant":"摆件/挂件",
         "others":"其它",
-        "login":"请登入"
+        "login":"请登入",
+        "personalCenter":"个人中心",
+        "logout":"退出",
+        "tips": "提示",
+        "text": "确定退出登录？",
+        "cancel": "取消",
+        "course": "确定"
       },
       "noMoreData": {
         "noMore": "暂无更多"
@@ -2251,7 +2282,7 @@
 		"msg10": "购物卡添加成功！",
 		"msg11": "解除绑定成功！",
 		"msg12": "此卡还未到使用时间！",
-		"msg13": "此卡已超��使用时间！"
+		"msg13": "此卡已超过使用时间！"
 	},
 	"generalize": {
 		"index": {
@@ -2278,8 +2309,8 @@
       "limit2": " 元使用",
       "limit3": "限 ",
       "limit4": " 使用",
+      "limit5": "站点使用",
       "use": "点击使用",
-      "time": "活动时间",
       "loseEfficacy": "已失效",
       "getCoupon": "领取优惠券",
       "useCoupon": "使用优惠券",
@@ -2292,6 +2323,11 @@
       "haveChoose": "已选用",
       "immediatelyChoose": "立即选用",
       "msg1": "优惠券领取成功",
-      "msg2": "优惠券领取失败，请重试"
+      "msg2": "优惠券领取失败，请重试",
+      "platform1": "中国",
+      "platform2": "香港",
+      "platform3": "澳门",
+      "platform4": "台湾",
+      "platform5": "国外"
   }
 }

@@ -805,14 +805,14 @@ export default {
 }
 .custom-made{
   .add-cart{
-    width: 645px!important;
-    margin-top: 10px;
+    width: 320px!important;
+    // margin-top: 10px;
   }
 }
 .dz{
   .active{
-    width: 659px!important;
-    margin-top: 10px;
+    width: 320px!important;
+    // margin-top: 10px;
   }
 }
 .detail-page {

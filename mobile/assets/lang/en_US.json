@@ -562,7 +562,6 @@
       "hadNotPay": "Payment",
       "hadPay": "Paid",
       "hadSend": "Shipped",
-      "waitingSend": "Delivery",
       "hadFinish": "Completed",
       "hadClosed": "Closed",
       "hadNotComment": "Review",
@@ -576,6 +575,12 @@
       "defaultPairRing": "Selected couple rings on BDD Jewelry Mall",
       "diy": "Customize",
       "cableTransfer": "Wire Transfer",
+      "paypal":"Paypal",
+      "wechat":"WeChat",
+      "alipay":"Alipay",
+      "alipayhk":"Alipay-HK",
+      "visa":"visa",
+      "UnionPay":"UnionPay",
       "caveat": "Warning",
       "cancel": "Cancel",
       "clear": "SUBMIT",
@@ -590,7 +595,21 @@
       "payfailed":"Payment failed",
       "discountedAmount": "Discounted amount",
       "Untied":"Untied",
-      "couponAmount": "Coupon"
+      "couponAmount": "Coupon",
+      "payType1": "Wechat",
+      "payType2": "Alipay",
+      "payType3": "UnionPay",
+      "payType4": "小程序",
+      "payType5": "余额",
+      "payType6": "Paypal",
+      "payType7": "Paypal Card",
+      "payType8": "支付宝国际版",
+      "payType9": "UnionPay",
+      "payType10": "Alipay",
+      "payType11": "Wechat",
+      "payType12": "Alipay HK",
+      "payType13": "CARD",
+      "payType14": "WireTransfer"
     },
     "logisticInfo":{
       "title": "Order",
@@ -603,7 +622,12 @@
       "toast2": "This browser does not support Auto Copy",
       "Shipping":"Delivering",
       "ShippingAddress":"Shipping Address",
-      "ContactMerchant":"Contact Us"
+      "ContactMerchant":"Contact Us",
+      "result": [
+          "Waiting for pickup",
+          "In Transit",
+          "received"
+      ]
     }
   },
   "custom-made": {
@@ -957,7 +981,13 @@
       "EarringsAndStuds": "Earrings/Studs",
       "DecorationAndPendant": "Decorations/Charms",
       "others": "Others",
-      "login":"Please login"
+      "login":"Please login",
+      "personalCenter":"Personal Center",
+      "logout":"Log Out",
+      "tips": "Tips",
+      "text": "Log out now?",
+      "cancel": "CANCEL",
+      "course": "SUBMIT"
     },
     "noMoreData": {
       "noMore": "No more"
@@ -2267,13 +2297,13 @@
       "limit2": " To Use",
       "limit3": "limit ",
       "limit4": " To Use",
+      "limit5": "Site Use",
       "use": "Click On The Use",
-      "time": "Activity Time",
       "loseEfficacy": "Lost Efficacy",
       "getCoupon": "Get Coupon",
       "useCoupon": "Use Coupon",
       "accomplish": "Accomplish",
-      "alreadyApplied": "Coupon has been used",
+      "alreadyApplied": "Invalid Coupon",
       "alreadyExpired": "expired",
       "specificProduct":"Specific Products",
       "alreadyReceived": "Coupon has been claimed",
@@ -2281,6 +2311,11 @@
       "haveChoose": "Already Selected",
       "immediatelyChoose": "Select it now",
       "msg1": "Coupon has been claimed successfully",
-      "msg2": "Something went wrong, please try it again."
+      "msg2": "Something went wrong, please try it again.",
+      "platform1": "China",
+      "platform2": "Hong Kong",
+      "platform3": "Macao",
+      "platform4": "Taiwan",
+      "platform5": "Foreign"
   }
 }

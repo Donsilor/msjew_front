@@ -5,7 +5,8 @@
       <div class="top">
         <!--        <OrderHeader :list="statusSteps" :stepindex="step" />-->
         <div v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null" class="status-title">
-          {{ getTransferStatus(info.wireTransferStatus) }}
+          <span class="order-status" v-if="info.orderStatus == 40">{{ statusText(info.orderStatus) }} </span>
+          <span class="order-status" v-else>{{ getTransferStatus(info.wireTransferStatus) }}</span>
         </div>
         <div v-else-if="info.refundStatus == 1" class="status-title">
           {{ getRefundStatusText(info.refundStatus) }}
@@ -27,15 +28,18 @@
             <!-- <li v-if="info.wireTransferStatus == null && info.refundStatus == 0">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
             <li v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li> -->
-            <li v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null">{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</li>
+            <li v-if="info.orderStatus !== 0 && info.refundStatus == 0 && info.wireTransferStatus !== null">
+              <span class="order-status" v-if="info.orderStatus == 40">{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</span>
+              <span class="order-status" v-else>{{ lang.orderStatus }}：{{ getTransferStatus(info.wireTransferStatus) }}</span>
+            </li>
             <li v-else-if="info.refundStatus == 1">{{ lang.orderStatus }}：{{ getRefundStatusText(info.refundStatus) }}</li>
             <li v-else>{{ lang.orderStatus }}：{{ statusText(info.orderStatus) }}</li>
             <li>{{ lang.orderNumber }}：{{ info.orderNo }}</li>
             <li>{{ lang.orderTime }}：{{ info.orderTime }}</li>
-            <template v-if="info.orderStatus > 20 && info.orderStatus !== 50">
-              <li>{{ lang.payType }}：{{ info.payChannelText }}</li>
-              <li>{{ lang.payTime }}：{{ info.payTime }}</li>
-            </template>
+            <li v-if="info.orderStatus !== 0">{{ lang.payType }}：{{ payType(info.payChannelText) }}</li>
+            <!-- <template v-if="info.orderStatus > 20 && info.orderStatus !== 50"> -->
+              <!-- <li>{{ lang.payTime }}：{{ info.payTime }}</li> -->
+            <!-- </template> -->
           </ul>
         </div>
       </div>
@@ -136,9 +140,9 @@
             <div class="bundle-code">
               {{ lang.logisticsNumber }}：{{ info.express.expressNo }}
             </div>
-            <div class="bundle-time">
+            <!-- <div class="bundle-time">
               {{ lang.sendTime }}：{{ info.express.delivery_time }}
-            </div>
+            </div> -->
           </div>
 	    </div>
 
@@ -478,6 +482,11 @@ export default {
         return item
       })
       return data
+    },
+    payType(n) {
+      return function(n) {
+        return this.lang[n]
+      }
     }
   },
   mounted() {
@@ -538,13 +547,23 @@ export default {
     },
     payChannelText(payChannel) {
       const map = {
-        1: '電匯',
-        2: 'paypal',
-        3: '微信',
-        4: '支付宝',
-        5: 'visa/Mastercard',
-        6: '銀聯',
-        7: 'paydollar'
+        0: '待支付',       // 待支付
+        1: 'payType1',     // 微信
+        2: 'payType2',     // 支付宝
+        3: 'payType3',     // 银联
+        4: 'payType4',     // 小程序
+        5: 'payType5',     // 余额
+        6: 'payType6',     // Paypal
+        61: 'payType7',    // Paypal Card
+        7:  'payType8',    // 支付宝国际版
+        81: 'payType9',    // Paydollor 银联
+        82: 'payType10',   // Paydollor 支付宝
+        83: 'payType11',   // Paydollor 微信
+        84: 'payType12',   // Paydollor 支付宝HK
+        10: 'payType13',   // CARD
+        11: 'payType14',   // WireTransfer(电汇)
+        100: 'payType15'   // OFFLINE(线下)
+        
       }
       return map[payChannel]
     },

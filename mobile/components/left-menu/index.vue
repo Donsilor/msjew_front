@@ -191,6 +191,22 @@
             </div>
           </a>
         </div>
+
+        <div class="help" @click="toPersonal">
+          <div class="item">
+            <div class="item-icon">
+              <i class="iconfont icongerenzhongxin"></i>
+            </div>
+            <div class="item-name">{{ lang.personalCenter }}</div>
+          </div>
+        </div>
+
+        <div class="help" v-if="isLogin" @click="logout">
+          <div class="item">
+            <div class="item-icon quit"></div>
+            <div class="item-name">{{ lang.logout }}</div>
+          </div>
+        </div>
       </div>
       <site-switch ref="site-switch"></site-switch>
     </div>
@@ -231,6 +247,7 @@ export default {
       showa:true,
       showb:false,
       bottom:true,
+      isLogin: !!this.$store.state.token,
       rings:[
 
         {
@@ -657,6 +674,28 @@ export default {
           redirectUri: window.location.href
         }
       })
+    },
+    logout() {
+      const _this = this
+      _this.$ConfirmBox({
+        title: this.lang.tips,
+        message: this.lang.text,
+        buttons: [
+          {
+            text: this.lang.cancel,
+            callback: () => {
+              console.log('点击了取消')
+            }
+          },
+          {
+            text: this.lang.course,
+            callback: () => {
+              _this.$store.dispatch('logout')
+              window.location.href = '/'
+            }
+          }
+        ]
+      })
     }
   }
 }
@@ -673,9 +712,7 @@ export default {
 .content{
   overflow: hidden;
   .groups{
-    height: 120%;
     position: relative;
-    // overflow: hidden;
     .status-icon {
       flex-grow: 0;
       flex-shrink: 0;
@@ -685,22 +722,11 @@ export default {
       transform: rotate(270deg);
       display: inline-block;
     }
-    // .login-border{
-    //   display: inline-block;
-    //   height: 2px;
-    //   width: 100%;
-    //   background-image: linear-gradient(90deg,#fff,#e4ecf0,#fff);
-    // }
+
     .menus-one{
-      font-size: 14px;
       display: flex;
       justify-content: space-between;
-      padding: 18px 0;
-      // height: 50px;
-      padding-left:20px;
-      // border-bottom:2px solid #fff;
-      // background-color: #e4ecf0;
-      // z-index: 99;
+      padding: 16px 0 16px 20px;
       color: rgb(15, 14, 14);
       >span:hover{
         color: #6f9eb1;
@@ -719,7 +745,6 @@ export default {
           margin: 0 10px;
           text-align: left;
           padding: 18px 0px;
-          // background-color: #e4ecf0;
           border-bottom:1px solid #A9C6D5;
           .status-icon{
             margin-left: 5px;
@@ -738,8 +763,6 @@ export default {
           >span:hover{
             color: #6f9eb1;
           }
-          // height: 60px;
-          // padding: 0 20px;
         }
       }
       .actives{
@@ -749,11 +772,7 @@ export default {
         width: 270px;
         height: 100%;
         box-sizing: border-box;
-        // background-color: #ffffff;
         background-color: #F5F5F5;
-        // transition: right .3s ease-in-out;
-        // box-shadow: 0 6px 21px 1px rgba(153, 153, 153, 0.35); /*no*/
-        // transform: translate(50%, 0);
         transform: translate(0, 0);
         transition: all 0.3s linear;
         display: flex;
@@ -764,11 +783,6 @@ export default {
 }
 
 
-
-
-
-
-
 .left-menu {
   position: fixed;
   width: 100%;
@@ -777,24 +791,19 @@ export default {
   left: 0;
   visibility: hidden;
   z-index: 100;
-  // overflow-y: scroll;
 }
 .left-menu.active {
   visibility: visible;
   background: rgba(0,0,0,0.8);
-  // height: 100vh;
   opacity: 0;
   pointer-events: none;
   position: fixed;
   top: 0;
   transition: opacity 0.3s ease-in-out;
   width: 100vw;
-  z-index: -1;
   opacity: 1;
   pointer-events: all;
   z-index: 0;
-  // overflow-y: scroll;
-  height: 100%;
 }
 .bg {
   position: relative;
@@ -802,16 +811,13 @@ export default {
   height: 100%;
   background-color: rgba(0, 0, 0, 0);
 }
-.bg:before,.bg:after {
-  background: #fff;
-  right: 10vw;
-}
 .bg::before,.bg:after{
   background: #fff;
   content: "";
   height: 2px;
   position: absolute;
   top: 30px;
+  right: 10vw;
   transform: rotate(45deg);
   width: 25px;
 }
@@ -831,6 +837,7 @@ export default {
   transition: all 0.2s linear;
   display: flex;
   flex-direction: column;
+  font-size: 14px;
 }
 .active .menu {
   transform: translate(0, 0);
@@ -846,16 +853,12 @@ export default {
   padding-left:15px;
   border-top:4px solid #a2c2d2;
   background-color: #e4ecf0;
-  // margin-bottom: 10px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 .top .icon {
-  // flex-grow: 1;
-  // flex-shrink: 1;
-  // color: #A2C2D2;
   display: flex;
   text-align: right;
   margin-right: 3px;
@@ -881,7 +884,6 @@ export default {
   display: flex;
   align-items: center;
   margin-left: 5px;
-  // font-size: 10px;
 }
 .site-info .flag {
   margin-right: 4px;
@@ -907,7 +909,6 @@ export default {
   height: 16px;
   font-size: 12px;
   background-color: #a2c2d2;
-  // background: rgba(221, 221, 221, 1);
 }
 .site-info .coin {
   flex-grow: 0;
@@ -923,11 +924,8 @@ export default {
 
 /*菜单内容*/
 .content {
-  // flex-grow: 1;
   flex-shrink: 1;
-  // padding: 0 20px;
   box-sizing: border-box;
-  // overflow: auto;
 }
 
 /*搜索栏*/
@@ -945,9 +943,6 @@ export default {
 }
 
 /*分组*/
-.groups {
-  // margin-bottom: 25px;
-}
 .group {
   padding: 10px 0;
   border-bottom: 1px solid rgba(221, 221, 221, 0.8); /*no*/
@@ -958,11 +953,9 @@ export default {
 .group .item {
   padding: 10px 0;
   font-weight: 400;
-  font-size: 13px;
   color: rgba(102, 102, 102, 1);
 }
 .group .item.stress {
-  font-size: 14px;
   color: rgba(220, 165, 152, 1);
 }
 .group .item.small-gap {
@@ -975,39 +968,25 @@ export default {
   flex-shrink: 0;
   padding: 0 15px;
   .call-us {
-    font-size: 14px;
     font-weight: 400;
-    // color: rgba(153, 153, 153, 1);
-    // height: 34px;
     text-align: left;
     margin-bottom: 10px;
     .item {
-      // margin: 0 30px;
       display: flex;
       .item-icon {
         margin-bottom: 3px;
-        // width: 30px;
-        // height: 30px;
         line-height: 30px;
-        // background: rgba(179, 179, 179, 1);
-        // border-radius: 50%;
-
         .iconfont {
           font-weight: 500;
           font-size: 20px;
-          // color: rgb(15, 14, 14);
-          // color: rgba(153, 153, 153, 1);
         }
       }
       .item-name {
         text-align: center;
         margin-left: 10px;
-        font-size: 14px;
         line-height: 29px;
         font-weight: 400;
         color: rgb(15, 14, 14);
-        // color: rgba(153, 153, 153, 1);
-        // color: 000;
       }
     }
   }
@@ -1018,36 +997,33 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: left;
-    // justify-content: center;
 
     .item {
-      // margin: 0 30px;
       display: flex;
+      align-items: center;
       .item-icon {
         margin-bottom: 3px;
-        // width: 30px;
-        // height: 30px;
         line-height: 30px;
-        // background: rgba(179, 179, 179, 1);
-        // border-radius: 50%;
 
         .iconfont {
-          // font-weight: 600;
           font-size: 20px;
           color: rgb(15, 14, 14);
-          // color:rgba(153, 153, 153, 1);
         }
       }
       .item-name {
         text-align: center;
         margin-left: 10px;
-        font-size: 14px;
         line-height: 29px;
         font-weight: 400;
         color: rgb(15, 14, 14);
-        // color: rgba(153, 153, 153, 1);
-        // color: #000;
       }
+    }
+
+    .quit{
+      width: 20px;
+      height: 20px;
+      background: url('/icon/quit.png') no-repeat center;
+      background-size: 100% 100%;
     }
   }
 }

@@ -1094,6 +1094,10 @@
             "intransit":"運輸中",
             "WaitingPackage":"等待攬件",
             "noexpress":"暫無物流信息",
+            "ShippingAddress":"收貨地址",
+            "toast1": "複製成功",
+            "toast2": "该浏览器不支持自动复製",
+            "ContactMerchant":"聯繫商家",
             "result": [
                 "等待攬件",
                 "運輸中",
@@ -2658,8 +2662,8 @@
         "limit2": " 使用",
         "limit3": "限 ",
         "limit4": " 使用",
+        "limit5": "站點使用",
         "use": "點擊使用",
-        "time": "活動時間",
         "loseEfficacy": "已失效",
         "getCoupon": "領取優惠券",
         "useCoupon": "使用優惠券",
@@ -2672,7 +2676,12 @@
         "haveChoose": "已选用",
         "immediatelyChoose": "立即选用",
         "msg1": "優惠券領取成功",
-        "msg2": "優惠券領取失敗，請重試"
+        "msg2": "優惠券領取失敗，請重試",
+        "platform1": "中國",
+        "platform2": "香港",
+        "platform3": "澳門",
+        "platform4": "臺灣",
+        "platform5": "國外"
     },
     "subject": {
         "discount":{

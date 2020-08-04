@@ -575,6 +575,12 @@
       "defaultPairRing": "BDD珠寶商城精選對戒",
       "diy": "定製",
       "cableTransfer": "電匯",
+      "paypal":"Paypal",
+      "wechat":"微信",
+      "alipay":"支付寶",
+      "alipayhk":"支付寶HK",
+      "visa":"visa",
+      "UnionPay":"銀聯",
       "caveat": "警告",
       "cancel": "取消",
       "clear": "確定",
@@ -589,7 +595,21 @@
       "payfailed":"支付失敗",
       "discountedAmount": "折扣金額",
       "Untied":"已解綁",
-      "couponAmount": "優惠券"
+      "couponAmount": "優惠券",
+      "payType1": "微信",
+      "payType2": "支付寶",
+      "payType3": "銀聯",
+      "payType4": "小程序",
+      "payType5": "余額",
+      "payType6": "Paypal",
+      "payType7": "Paypal Card",
+      "payType8": "支付寶國際版",
+      "payType9": "銀聯",
+      "payType10": "支付寶",
+      "payType11": "微信",
+      "payType12": "支付寶HK",
+      "payType13": "CARD",
+      "payType14": "電匯"
     },
     "logisticInfo":{
       "title": "我的订单",
@@ -602,7 +622,12 @@
       "toast2": "该浏览器不支持自动复製",
       "Shipping":"訂單配送中",
       "ShippingAddress":"收貨地址",
-      "ContactMerchant":"聯繫商家"
+      "ContactMerchant":"聯繫商家",
+      "result": [
+          "等待攬件",
+          "運輸中",
+          "已簽收"
+      ]
     }
   },
   "custom-made": {
@@ -957,7 +982,13 @@
       "EarringsAndStuds":"耳環/耳釘",
       "DecorationAndPendant":"擺件/挂件",
       "others":"其它",
-      "login":"請登入"
+      "login":"請登入",
+      "personalCenter":"個人中心",
+      "logout":"退出",
+      "tips": "提示",
+      "text": "確定退出登錄？",
+      "cancel": "取消",
+      "course": "確定"
     },
     "noMoreData": {
       "noMore": "暫無更多"
@@ -2273,8 +2304,8 @@
       "limit2": " 元使用",
       "limit3": "限 ",
       "limit4": " 使用",
+      "limit5": "站點使用",
       "use": "點擊使用",
-      "time": "活動時間",
       "loseEfficacy": "已失效",
       "getCoupon": "領取優惠券",
       "useCoupon": "使用優惠券",
@@ -2287,6 +2318,11 @@
       "haveChoose": "已选用",
       "immediatelyChoose": "立即选用",
       "msg1": "優惠券領取成功",
-      "msg2": "優惠券領取失敗，請重試"
+      "msg2": "優惠券領取失敗，請重試",
+      "platform1": "中國",
+      "platform2": "香港",
+      "platform3": "澳門",
+      "platform4": "臺灣",
+      "platform5": "國外"
   }
 }
