@@ -671,7 +671,7 @@ export default {
                       //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
                   }
                 }
-            }(baseUrl+'/complete/paySuccess?orderId='+_this.info.orderId)); 
+            }(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId)); 
           }
           if (typeof WeixinJSBridge == "undefined"){
             if( document.addEventListener ){
