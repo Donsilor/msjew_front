@@ -385,9 +385,12 @@
     <div v-show="showEwm" class="qr_wrap">
       <div class="msg">
         <div class="msgbox">
-          <div class="qrcode-box">
-            <p class="mainTextColor">{{$t(`${lang}.ScanCode`)}}</p>
-            <div  id="qrcode"></div>
+          <div class="content">
+            <!-- <div class="close" @click="shut"><i class="el-icon-close"></i></div> -->
+            <div class="qrcode-box">
+              <p class="mainTextColor">{{$t(`${lang}.ScanCode`)}}</p>
+              <div  id="qrcode"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -707,6 +710,10 @@ export default {
           }
         })
     },
+    // 关闭二维码弹窗
+    // shut(){
+    //   this.showEwm = false
+    // },
     // 大陆支付
     mainLandPay(){
       if(this.$store.state.coin === 'USD'){
@@ -859,7 +866,7 @@ export default {
     background-color: rgba(0, 0, 0, 0.6);
     .msgbox{
       border-radius: 8px;
-      padding: 30px;
+      padding: 20px;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -873,6 +880,22 @@ export default {
       // height: 695px;
       // overflow-y: scroll;
       background: rgba(255, 255, 255, 1);
+      .content{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .close{
+          position: absolute;
+          right:0px;
+          top:0px;
+          font-size: 24px;
+          cursor: pointer;
+          color:#B5B5B5;
+        }
+      }
       .cha{
         text-align: right;
         i{
