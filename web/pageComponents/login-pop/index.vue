@@ -302,11 +302,19 @@ export default {
       let params=window.location.search
       // 如果是订单确认页面，返回到购物车
       if((/^\/billing-address/).test(oldurl)){
-          oldurl = '/shopping-cart'
+          oldurl = 'shopping-cart'
           params = ''
       }
       console.log(oldurl);
       const url=oldurl+params
+
+      if (url) {
+                    _this.$router.replace({
+                        name: url,
+                        params: {'token': 123}
+                    })
+                  }
+                  return
 
       if (_this.password === '') {
         _this.isActive2 = true
@@ -349,6 +357,20 @@ export default {
                 _this.$errorMessage(_this.$t(`${lang}.codeTips`))
                 _this.requesting = false
               } else {
+                setTimeout(() => {
+                  if (url) {
+                    _this.$router.replace({
+                        name: url,
+                        params: {token: res}
+                    })
+                  }
+                  else {
+                    _this.$router.replace({
+                        path: '/'
+                    })
+                  }
+                }, 0)
+
                 _this.$successMessage(_this.$t(`${lang}.logintips`))
                 _this.$store.commit('setToken', data.access_token)
                 _this.$store.commit('setUserInfo', data.member)
@@ -405,22 +427,27 @@ export default {
                 _this.requesting = false
               } else {
                 _this.$successMessage(_this.$t(`${lang}.logintips`))
-                _this.$store.commit('setToken', data.access_token)
-                _this.$store.commit('setUserInfo', data.member);
-                _this.$store.dispatch('synchronizeCart')
 
                 setTimeout(() => {
                   if (url) {
-                  _this.$router.replace({
-                      path: url
-                  })
+                    _this.$router.replace({
+                      path: url,
+                      query: 123
+                    })
                   }
                   else {
-                  _this.$router.replace({
+                    _this.$router.replace({
                       path:'/'
-                  })
+                    })
                   }
                 }, 0)
+
+                return
+
+                _this.$store.commit('setToken', data.access_token)
+                _this.$store.commit('setUserInfo', data.member);
+                _this.$store.dispatch('synchronizeCart')
+                
               }
           })
           .catch(err => {

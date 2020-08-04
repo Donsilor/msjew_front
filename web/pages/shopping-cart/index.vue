@@ -204,6 +204,8 @@ export default {
     }
   },
   beforeMount() {
+    console.log(66)
+    console.log(7777,this.$route)
     this.getList()
   },
   methods: {
