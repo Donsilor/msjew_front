@@ -1179,7 +1179,7 @@
         "uploadPhotos": "Upload  Photos",
         "Note3":"Note：Currency rate is as referred on BDD website.",
         "NotSupportPay":"Sorry, USD is not supported by this payment method, please go back to select an available currency or change to another payment method! ",
-        "ScanCode":"WeChat scan code payment"
+        "ScanCode":"Please use WeChat to scan the QR code"
     },
     "finishPay": {
         "PayPending1": "The order has been submitted and the system is processing. Please wait.",

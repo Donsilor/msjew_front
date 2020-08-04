@@ -386,7 +386,7 @@
       <div class="msg">
         <div class="msgbox">
           <div class="qrcode-box">
-            <p class="mainTextColor">{{lang.ScanCode}}</p>
+            <p class="mainTextColor">{{$t(`${lang}.ScanCode`)}}</p>
             <div  id="qrcode"></div>
           </div>
         </div>
@@ -848,6 +848,10 @@ export default {
   z-index: 99999999;
   top: 0;
   left: 0;
+  #qrcode{
+    display: flex;
+    justify-content: center;
+  }
   .msg{
     position: relative;
     width: 100%;
@@ -888,7 +892,7 @@ export default {
   .mainTextColor{
     text-align: center;
     margin-bottom: 20px;
-    font-size: 24px;
+    // font-size: 24px;
     // color:green
   }
 }
