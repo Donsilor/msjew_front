@@ -547,7 +547,7 @@ export default {
         })
     },
     goOrder() {
-      if(this.$store.state.platform == 20 && !isLogin){
+      if(this.$store.state.platform == 20 && !this.isLogin){
         this.ifShowLoginPop = true
         return
       }
