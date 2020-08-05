@@ -71,7 +71,7 @@
             <input
               v-model.trim="mobile"
               type="text"
-			        @focus="focusEvent2"
+			        @focus="mobileShow = false"
               @blur="verifyMobile"
               v-bind:class="{active:isActivemobile}"
               :placeholder="$t(`${lang}.phoneBox`)"
@@ -241,7 +241,7 @@
           <div class="register-input">
             <input
               v-model.trim="email"
-              @focus="focusEvent2"
+              @focus="emailShow = false"
               @blur="verifyEmail"
               type="text"
               v-bind:class="{active:isActivemail}"
@@ -424,16 +424,6 @@ export default {
       lastnameShow: false
     }
   },
-  watch:{
-    email(){
-      // if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
-      //   this.emailShow=true
-      // }else{
-      //   this.emailShow=false
-      //   this.isActivemail=false
-      // }
-    }
-  },
   mounted() {
     this.loginType = sessionStorage.getItem("loginType")
 
@@ -516,14 +506,6 @@ export default {
     // 姓名
     focusEvent1(){
       this.isActivename=true;
-    },
-    // 手机号/邮箱
-    focusEvent2(){
-      if(!this.emailShow || !this.mobile){
-        this.mobileShow=false
-        this.isActivemobile=false
-        this.isActivemail=false
-      }
     },
     // 验证码
     focusEvent3(){
@@ -856,11 +838,6 @@ export default {
       }else{
         this.codeErr = false
       }
-    },
-    focusEvent2Email() {
-      // if(!this.emailShow){
-        this.emailShow = false
-      // }
     }
 
   }
