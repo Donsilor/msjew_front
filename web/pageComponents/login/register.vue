@@ -122,7 +122,7 @@
             </div>
           </div>
           <div v-show="codeShow" class="error-tip">
-            {{ $t(`${lang}.codeTips`) }}
+            {{ $t(`${lang}.code`) }}
           </div>
         </div>
         <!-- 设置密码 -->
@@ -241,10 +241,8 @@
           <div class="register-input">
             <input
               v-model.trim="email"
-
-              @input="inputEvent2"
               @focus="focusEvent2"
-              @blur="blurEvent2"
+              @blur="verifyEmail"
               type="text"
               v-bind:class="{active:isActivemail}"
               :placeholder="$t(`${lang}.email`)"
@@ -259,8 +257,8 @@
         <!-- 图形验证码 -->
         <div class="relative margin-bottom-30">
           <div class="row-flex align-item-stretch">
-            <div class="login-input verification-code-input" :class="{border: codeErr}">
-              <input v-model="imgCode" @focus="codeErr = false" @blur="" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="4" />
+            <div class="login-input verification-code-input"  :class="{border: codeErr}">
+              <input v-model="imgCode" @focus="codeErr = false" @blur="verifyCode" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="4" />
             </div>
             <div class="code-picture" @click="refreshCode">
               <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
@@ -294,7 +292,7 @@
             </div>
           </div>
           <div v-show="codeShow" class="error-tip">
-            {{ $t(`${lang}.codeTips`) }}
+            {{ $t(`${lang}.code`) }}
           </div>
         </div>
         <div class="relative margin-bottom-20">
@@ -453,6 +451,14 @@ export default {
         this.isActivemobile=false
       }
     },
+    verifyEmail(){
+      if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.email))){
+        this.emailShow=true
+      }else{
+        this.emailShow=false
+        this.isActivemail=false
+      }
+    },
     verifyPasswordRepetition(){
       if(this.password_repetition!=this.password){
         this.repwdShow=true
@@ -477,29 +483,31 @@ export default {
     blurEvent1(){
       this.isActivename=false;
     },
-    // 手机号/邮箱
-    blurEvent2(){
-      this.isActivemobile=false
-      this.isActivemail=false
-    },
     // 验证码
     blurEvent3(){
-      this.isActivecode=false
-      this.codeShow=false
+      if(!this.code){
+        this.isActivecode=true
+        this.codeShow=true
+      }
     },
     // 密码
     blurEvent4(){
-      this.isActivepwd=false
-      this.pwdShow=false
+      if(!this.password){
+        this.isActivepwd=true
+        this.pwdShow=true
+      }
     },
     // 确认密码
     blurEvent5(){
-      this.isActiverepwd=false
+      if(!password_repetition){
+        this.isActiverepwd=true
+	      this.repwdShow=true
+      }
     },
     // 姓
     focusEvents(){
       // console.log("aa")
-      this.isActivefisrt=true
+      this.isActivefisrt=false
     },
     // 名
     focusEvent(){
@@ -511,22 +519,26 @@ export default {
     },
     // 手机号/邮箱
     focusEvent2(){
-	  this.mobileShow=false
-      this.isActivemobile=true
-      this.isActivemail=true
+      if(!this.emailShow || !this.mobile){
+        this.mobileShow=false
+        this.isActivemobile=false
+        this.isActivemail=false
+      }
     },
     // 验证码
     focusEvent3(){
-      this.isActivecode=true
+      this.isActivecode=false
+      this.codeShow = false
     },
     // 密码
     focusEvent4(){
-      this.isActivepwd=true
+      this.isActivepwd=false
+      this.pwdShow=false
     },
     // 确认密码
     focusEvent5(){
-	  this.repwdShow=false
-      this.isActiverepwd=true
+      this.repwdShow=false
+      this.isActiverepwd=false
     },
     // 点击图标切换密码类型
     changeRegisterPasswordStatus() {
@@ -555,6 +567,7 @@ export default {
           _this.codeErr=true;
           return
         }
+
         // _this.requesting = true
         this.$axios({
             method: 'post',
@@ -604,7 +617,7 @@ export default {
       }else{
         // 邮箱注册
         const _this = this
-         if(!_this.agreement) {
+        if(!_this.agreement) {
           _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
           return
         }
@@ -711,15 +724,16 @@ export default {
         return
       }
 
+      if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.email))){
+        this.$errorMessage(_this.$t(`${lang}.mailTips`))
+        return
+      }
+
       if(_this.imgCode != _this.pictureCode){
         this.$errorMessage(_this.$t(`${lang}.codeTips`))
         return
       }
 
-      // if (_this.waiting) {
-      //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-      //   return
-      // }
       _this.setWait()
       this.$axios({
         method: "post",
@@ -770,12 +784,6 @@ export default {
         return
       }
 
-      
-      // if (_this.waiting) {
-        //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-      //   return
-      // }
-
       _this.setWait()
       this.$axios({
         method: "post",
@@ -808,14 +816,6 @@ export default {
     // 重置倒计时
     resetCountDown() {
       this.waitingTime = 0
-    },
-    inputEvent2(){
-      // var that = this;
-      // if(this.email.length == 60){
-      //   that.emailShow = true;
-      // }else{
-      //   this.emailShow = false;
-      // }
     },
     firstName(){
       if(this.firstname.length == 30){
