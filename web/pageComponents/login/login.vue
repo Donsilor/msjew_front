@@ -12,7 +12,7 @@
           <span class="icon">
             <img class="phone" src="/login/phone.png" />
           </span>
-          <input id="ipt1" v-model.trim="mobile" @keyup="keyupEvent1" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" autocomplete="off"/>
+          <input id="ipt1" v-model.trim="mobile" @keypress="keypressEvent1" type="text" v-bind:class="{active:isActive1}" :placeholder="$t(`${lang}.phoneBox`)" maxlength="11" autocomplete="off"/>
         </div>
         <div v-show="phoneErr" class="error-tip">
           {{ $t(`${lang}.phoneTips`) }}
@@ -24,7 +24,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input v-model.trim="password" @keyup="keyupEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" maxlength="60" autocomplete="off"/>
+          <input v-model.trim="password" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" maxlength="60" autocomplete="off"/>
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
@@ -40,7 +40,7 @@
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
-            <input v-model="code"  @focus="codeErr = false" type="text" :class="{border:codeErr}" :placeholder="$t(`${lang}.code`)" maxlength="4" />
+            <input v-model="code" @keypress="codeErr = false" type="text" :class="{border:codeErr}" :placeholder="$t(`${lang}.code`)" maxlength="4" />
           </div>
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
@@ -82,7 +82,7 @@
           <span class="icon">
             <img src="/login/mail.png" />
           </span>
-          <input id="ipt2" v-model.trim="account"  @keyup="keyupEvent6" @keypress="keypressEvent6" v-bind:class="{active:isActive1}" type="text" :placeholder="$t(`${lang}.mailBox`)" maxlength="60" />
+          <input id="ipt2" v-model.trim="account" @keypress="keypressEvent3" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.mailBox`)" maxlength="60" />
         </div>
         <div v-show="mailErr" class="error-tip">
           {{ $t(`${lang}.mailTips`) }}
@@ -94,7 +94,7 @@
           <span class="icon">
             <img src="/login/lock.png" />
           </span>
-          <input v-model.trim="password" @keyup="keyupEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" maxlength="60" />
+          <input v-model.trim="password" @keypress="keypressEvent2" v-bind:class="{active:isActive2}" type="password" :placeholder="$t(`${lang}.password`)" maxlength="60" />
         </div>
         <div v-show="passwordErr" class="error-tip">
           {{ $t(`${lang}.passwordTips`) }}
@@ -110,7 +110,7 @@
       <div class="relative margin-bottom-30">
         <div class="row-flex align-item-stretch">
           <div class="login-input verification-code-input">
-            <input v-model="code"  @focus="codeErr = false" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.code`)" @keydown.enter="login" :maxlength="15" />
+            <input v-model="code" @keypress="codeErr = false" v-bind:class="{active:codeErr}" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="4" />
           </div>
           <div class="code-picture" @click="refreshCode">
             <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
@@ -166,34 +166,11 @@ export default {
       isActive1: false,
       isActive2: false,
       isActive3: false,
-      isActive6: false,
       oldUrl:'',
       // 手机注册1,邮箱注册2
       loginType: 0,
       ifShowBtn: false
     }
-  },
-
-  watch: {
-    // mobile(){
-    //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-    //     this.$errorMessage("请输入手机号")
-    //   }else{
-    //     this.mobileShow=false
-    //     this.isActivemobile=false
-    //   }
-    // }
-  },
-  // mixins: [],
-  // vuex: {
-  //  actions: {fetchCertificates},
-  // },
-
-  computed: {
-    //  aa(){
-    //    let result=this.$store.state.refreshCode
-    //    console.log(result)
-    //  }
   },
   beforeRouteEnter (to, from, next){
     next(vm => {
@@ -219,32 +196,17 @@ export default {
     })
   },
   methods: {
-    keyupEvent1 () {
+    keypressEvent1 () {
       this.isActive1 = false
       this.phoneErr = false
     },
-    keypressEvent1 () {
-      this.isActive1 = false
-      // this.phoneErr=false
-    },
-    keyupEvent2 () {
+    keypressEvent2 () {
       this.isActive2 = false
       this.passwordErr = false
     },
-    keyupEvent3 () {
-      if (this.code == this.pictureCode) {
-        this.isActive3 = false
-        this.codeErr = false
-      }
-    },
-
-    keyupEvent6 () {
-      this.isActive6 = false
-      this.mailErr = false
-    },
-    keypressEvent6 () {
-      this.isActive6 = false
-      // this.mailErr=false
+    keypressEvent3 () {
+      this.isActive3 = false
+      this.mailErr=false
     },
     // 生成驗證碼
     refreshCode () {
@@ -261,23 +223,22 @@ export default {
     // 登录
     login () {
       const _this = this;
-      if (_this.password === '') {
-        _this.isActive2 = true
-        _this.passwordErr = true
-        return
-      }
-
-      if (_this.code === '') {
-        _this.isActive3 = true
-        _this.codeErr = true
-        return
-      }
-
       // 手机登录
       if(this.loginType == 1){
         if (_this.mobile === '') {
           _this.isActive1 = true
           _this.phoneErr = true
+          return
+        }
+
+        if (_this.password === '') {
+          _this.isActive2 = true
+          _this.passwordErr = true
+          return
+        }
+
+        if (_this.code === '') {
+          _this.codeErr = true
           return
         }
 
@@ -332,8 +293,19 @@ export default {
       // 邮箱登录
       }else{
         if (_this.account === '') {
-          _this.isActive6 = true
+          _this.isActive3 = true
           _this.mailErr = true
+          return
+        }
+
+        if (_this.password === '') {
+          _this.isActive2 = true
+          _this.passwordErr = true
+          return
+        }
+
+        if (_this.code === '') {
+          _this.codeErr = true
           return
         }
 
