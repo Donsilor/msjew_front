@@ -436,7 +436,8 @@ export default {
       ifShowLayer: false,
       qrcodeObj: {}, // 二维码配置
       ewm:'',
-      showEwm:false //是否显示二维码弹窗
+      showEwm:false, //是否显示二维码弹窗
+      interval:null
 
       // myHeaders:this.$store.state.token,
       // imgDatas:[],
@@ -445,11 +446,22 @@ export default {
       // imgLen:0, el-upload--picture-card
     }
   },
+  created(){
+    if(this.payWay == 1){
+        //实现轮询
+        this.interval = window.setInterval(() => {
+          setTimeout(this.payVerify(), 0);
+        }, 3000);
+    }
+  },
+  beforeDestroy() {
+    if(this.payWay == 1){
+      //清除轮询   
+      clearInterval(this.interval)
+      this.interval = null
+    }
+  },
   mounted(){
-    // console.log("二维码url",this.code)
-    // const code = this.ewm
-    
-
     this.language = this.getCookie('language')
     let element = document.querySelector('.el-upload ')
     // console.log("44444",this.fileList)
@@ -766,7 +778,9 @@ export default {
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {
-          this.ewm = res.data
+          if(this.ewm == ''){
+            this.ewm = res.data
+          }
           this.getEwm()
           console.log("url",this.ewm)
           if (res.data.config) {
@@ -823,6 +837,7 @@ export default {
     // 获取支付二维码
     getEwm(){
       console.log("二维码url",this.ewm)
+      document.getElementById("qrcode").innerHTML = "";
       const code = this.ewm
       this.qrcodeObj = new QRCode('qrcode', {
         text: code,    
@@ -832,7 +847,71 @@ export default {
         colorLight : '#fff',
         correctLevel : QRCode.CorrectLevel.H
       });
+
+      if(this.payWay == 1){
+        //实现轮询
+        this.interval = window.setInterval(() => {
+          setTimeout(this.payVerify(), 0);
+        }, 3000);
+      }
     },
+    // 验证
+    payVerify() {
+      this.$axios({
+          url: '/web/pay/verify',
+          method: 'post',
+          data: {
+            return_url: window.location.href
+          }
+        }).then(res => {
+          const data = res.data
+          this.showEwm = true
+          setTimeout(() => {
+            this.showEwm = false
+            clearInterval(this.interval)
+            this.interval = null
+          }, 1000 * 60);
+          if (data.verification_status === 'completed') {
+            console.log("成功")
+            this.showEwm = false
+            // window.location.replace(baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId)
+            this.$router.replace({
+              path: '/complete-paySuccess',
+              query: {
+                orderId: this.$route.query.orderId,
+                type: `success`
+              }
+            })
+            clearInterval(this.interval)
+            this.interval = null
+          } else if (data.verification_status === 'failed') {
+              // setTimeout(() => {
+              //   this.showEwm = false
+              //   clearInterval(this.interval)
+              //   this.interval = null
+              // }, 1000 * 10);
+            // this.$router.replace({
+            //   path: '/complete-paySuccess/state/failed',
+            //   query: {
+            //     orderId: this.$route.query.orderId || this.$route.query.order_sn,
+            //   }
+            // })
+            // clearInterval(this.interval)
+            // this.interval = null
+          }
+        })
+        .catch(err => {
+          clearInterval(this.interval)
+          this.interval = null
+        })
+    },
+    // clearTimer() {   //清除最近的100个定时器，如果只清除最后一个，会出现bug
+    //   let end = this.timerIdEnd;
+    //   let start = end - 100 > 0 ? end - 100 : 0;
+    //   for (let i = start; i <= end; i++) {
+    //     clearTimeout(i);
+    //   }
+    // },
     // 查询cookie
     getCookie(cname) {
       const name = cname + '='
