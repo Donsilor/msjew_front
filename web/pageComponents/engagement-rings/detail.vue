@@ -695,7 +695,7 @@ export default {
         queryStep.steps[0].ct === 1
           ? queryStep.steps[1].goodsDetailsId
           : queryStep.steps[0].goodsDetailsId
-      // console.log(queryId, `qid==============`, queryStep)
+      console.log(queryId, `qid==============`, queryStep)
       const ringChecked = JSON.parse(JSON.stringify(this.ringChecked))
       const productInfo = this.productInfo
       const details = productInfo.details
@@ -703,7 +703,7 @@ export default {
       for (let n = 0, length = details.length; n < length; n++) {
         const detailItem = details[n]
         if (detailItem.id === queryId) {
-          // console.log(`fuck`)
+          console.log(`fuck`)
           productInfo.materials.forEach((item, index) => {
             if (item.id === detailItem.material) {
               ringChecked.materialIndex = index
