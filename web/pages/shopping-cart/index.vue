@@ -197,6 +197,7 @@ export default {
       scroll: '',
       soudout:'',
       coinType:'',
+      isLogin:this.$store.getters.hadLogin,
       ifShowLoginPop: false
     }
   },
@@ -546,7 +547,7 @@ export default {
         })
     },
     goOrder() {
-      if(this.$store.state.platform == 20 && !this.$store.getters.hadLogin){
+      if(this.$store.state.platform == 20 && !isLogin){
         this.ifShowLoginPop = true
         return
       }
