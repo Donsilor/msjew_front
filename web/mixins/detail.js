@@ -109,12 +109,12 @@ export default {
     },
     // 立即购买
     orderNow(){
-      const _this = this
-
       if(this.$store.state.platform == 20 && !this.isLogin){
         this.ifShowLoginPop = true
         return
       }
+      
+      const _this = this
 
       if (!_this.canAddCart) {
         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
