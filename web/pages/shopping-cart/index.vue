@@ -208,7 +208,7 @@ export default {
   },
   beforeMount() {
     if(JSON.stringify(this.$route.params) != "{}"){
-      var data = this.$route.params.token.data;
+      var data = this.$route.params.token;
       this.$store.commit('setToken', data.access_token)
       this.$store.commit('setUserInfo', data.member)
       this.$store.dispatch('synchronizeCart')
@@ -547,7 +547,7 @@ export default {
         })
     },
     goOrder() {
-      if(this.$store.state.platform == 20 && !this.isLogin){
+      if(this.$store.state.platform == 20 && !this.$store.state.token){
         this.ifShowLoginPop = true
         return
       }

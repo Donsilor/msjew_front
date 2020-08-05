@@ -331,7 +331,7 @@ export default {
                 setTimeout(() => {
                   _this.$router.replace({
                     name: url,
-                    params: { token: res }
+                    params: { token: res.data }
                   })
                 }, 0)
 
@@ -340,18 +340,12 @@ export default {
                 _this.$store.commit('setToken', data.access_token)
                 _this.$store.commit('setUserInfo', data.member)
                 _this.$store.dispatch('synchronizeCart')
-
+  
                 setTimeout(() => {
-                  if(url == '/shopping-cart'){
+                  if(url){
                     location.reload()
                     return
-                  }
-
-                  if (url) {
-                    _this.$router.replace({
-                      path: url
-                    })
-                  } else {
+                  }else{
                     _this.$router.replace({
                       path: '/'
                     })
@@ -368,7 +362,7 @@ export default {
             _this.refreshCode()
             _this.$errorMessage(err.message)
           })
-        // 邮箱登录
+      // 邮箱登录
       } else {
         if (_this.account === '') {
           _this.isActive6 = true
@@ -402,7 +396,7 @@ export default {
                 setTimeout(() => {
                   _this.$router.replace({
                     name: url,
-                    params: { token: res }
+                    params: { token: res.data }
                   })
                 }, 0)
 
@@ -413,16 +407,10 @@ export default {
                 _this.$store.dispatch('synchronizeCart')
 
                 setTimeout(() => {
-                  if(url == '/shopping-cart'){
+                  if(url){
                     location.reload()
                     return
-                  }
-
-                  if (url) {
-                    _this.$router.replace({
-                      path: url
-                    })
-                  } else {
+                  }else{
                     _this.$router.replace({
                       path: '/'
                     })

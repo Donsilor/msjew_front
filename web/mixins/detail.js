@@ -11,8 +11,8 @@ export default {
   data() {
     return {
       addingCart: false,
-      orderingNow:false,
-      isLogin:this.$store.getters.hadLogin,
+      orderingNow: false,
+      isLogin: this.$store.getters.hadLogin,
       ifShowLoginPop: false
     }
   },
@@ -109,7 +109,7 @@ export default {
     },
     // 立即购买
     orderNow(){
-      if(this.$store.state.platform == 20 && !this.isLogin){
+      if(this.$store.state.platform == 20 && !this.$store.state.token){
         this.ifShowLoginPop = true
         return
       }
@@ -141,10 +141,10 @@ export default {
       ]
 
       goodInfo = goodInfo.map(item => {
-            item.createTime = time
-            item.updateTime = time
-            return item
-        })
+          item.createTime = time
+          item.updateTime = time
+          return item
+      })
       _this.orderingNow = true
         // console.log("goodInfo",goodInfo)
       if(this.isLogin){
@@ -218,7 +218,7 @@ export default {
     },
     // 领取优惠券
     getCoupon() {
-      if(!this.$store.getters.hadLogin) {
+      if(!this.$store.state.token) {
         // this.$errorMessage(this.$t(`${lang}.needLogin`))
         this.ifShowLoginPop = true
       }else{
@@ -235,7 +235,6 @@ export default {
     }
   },
   mounted() {
-
     //facebook统计详情页
     let fbqInfo = {
       content_type: 'product', //  固定值：pruduct
