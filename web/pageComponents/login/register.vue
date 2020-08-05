@@ -701,13 +701,13 @@ export default {
         return
       }
 
-      if(!_this.imgCode){
-        _this.codeErr = true
+      if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.email))){
+        this.$errorMessage(_this.$t(`${lang}.mailTips`))
         return
       }
 
-      if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.email))){
-        this.$errorMessage(_this.$t(`${lang}.mailTips`))
+      if(!_this.imgCode){
+        _this.codeErr = true
         return
       }
 
@@ -751,8 +751,8 @@ export default {
         return
       }
 
-      if(!_this.imgCode){
-        _this.codeErr = true
+      if(!_this.mobile && !(/^1[3456789]\d{9}$/.test(this.mobile))){
+        this.$errorMessage(_this.$t(`${lang}.phoneTips`))
         return
       }
 
