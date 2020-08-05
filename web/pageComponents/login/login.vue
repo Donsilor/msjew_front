@@ -117,7 +117,7 @@
           </div>
         </div>
         <div v-show="codeErr" class="error-tip">
-          {{ $t(`${lang}.codeTips`) }}
+          {{ $t(`${lang}.code`) }}
         </div>
       </div>
       <div class="margin-bottom-29">

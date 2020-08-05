@@ -168,8 +168,12 @@ export default {
         _this.$toast.show(_this.lang['input-password'])
         return
       }
-      if (_this.code !== _this.pictureCode) {
+      if (!_this.code) {
         _this.$toast.show(_this.lang['input-code'])
+        return
+      }
+      if (_this.code !== _this.pictureCode) {
+        _this.$toast.show(_this.lang['codeError'])
         return
       }
 
@@ -230,9 +234,12 @@ export default {
         _this.$toast.show(_this.lang['input-password'])
         return
       }
-
-      if (_this.code !== _this.pictureCode) {
+      if (!_this.code) {
         _this.$toast.show(_this.lang['input-code'])
+        return
+      }
+      if (_this.code !== _this.pictureCode) {
+        _this.$toast.show(_this.lang['codeError'])
         return
       }
 

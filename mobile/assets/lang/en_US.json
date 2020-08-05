@@ -714,6 +714,7 @@
       "forget": "FORGOT PASSWORD?",
       "Code": "Enter verification code",
       "code-error": "Verification Code Error",
+      "codeError": "Enter correct verification code",
       "slider-verify-first": "Complete verification to unlock",
       "slider-verify": "Complete verification to unlock",
       "input-password": "Enter login password",

@@ -714,6 +714,7 @@
       "forget": "忘記密碼？",
       "Code": "輸入驗證碼",
       "code-error": "驗證碼錯誤",
+      "codeError": "請輸入正確的驗證碼",
       "slider-verify-first": "請先完成驗證",
       "slider-verify": "請完成驗證解鎖",
       "input-password": "請輸入登入密碼",

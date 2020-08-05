@@ -719,6 +719,7 @@
         "slider-verify": "请完成验证解锁",
         "input-password": "请输入登入密码",
         "input-code": "请输入验证码",
+        "codeError": "请输入正确的验证码",
         "login-error": "用户或密码错误！",
         "login-success": "登录成功",
         "area-code": "中国"
