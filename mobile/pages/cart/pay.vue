@@ -602,16 +602,16 @@ export default {
         url: `/web/pay/create`,
         data: {
           openid: openid,
-          orderId: this.info.orderId,
+          orderId: orderId,
           coinType: this.info.coinType,
           payType: pay,
           tradeType: tradeType,
-          returnUrl: baseUrl+'/complete/paySuccess?orderId='+this.info.orderId
+          returnUrl: baseUrl+'/complete/paySuccess?orderId='+orderId
         }
       })
       .then(res => {
         if(tradeType == 'mweb'){
-          window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId))
+          window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
         }
         if (res.config) {
           if (pay !== 7) {
