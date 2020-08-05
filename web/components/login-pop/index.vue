@@ -6,7 +6,6 @@
       </span>
       <div class="login-tab">
         <div class="tab-item active">{{ $t(`${lang}.login`) }}</div>
-        <div class="tab-item opacity">注册</div>
       </div>
       <!-- 手机登录 -->
       <div v-if="loginType == 1" class="login-item">
@@ -197,7 +196,8 @@ export default {
       oldUrl: '',
       // 手机注册1,邮箱注册2
       loginType: 0,
-      ifShowBtn: false
+      ifShowBtn: false,
+      loginPopType: 1  //登录弹窗状态，/billing-address为2，其他为1
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -278,6 +278,9 @@ export default {
       if (/^\/billing-address/.test(oldurl)) {
         oldurl = 'shopping-cart'
         params = ''
+        this.loginPopType = 2
+      }else{
+        this.loginPopType = 1
       }
 
       const url = oldurl + params
@@ -318,29 +321,45 @@ export default {
             let nowDate = parseInt(new Date().getTime() / 1000)
             localStorage.setItem('refreshTime', nowDate)
             _this.$successMessage(_this.$t(`${lang}.logintips`))
+            _this.closeLoginPop()
 
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
             } else {
-              setTimeout(() => {
-                if (url) {
+              if(this.loginPopType == 2){
+                setTimeout(() => {
                   _this.$router.replace({
                     name: url,
                     params: { token: res }
                   })
-                } else {
-                  _this.$router.replace({
-                    path: '/'
-                  })
-                }
-              }, 0)
+                }, 0)
 
-              return
+                return
+              }else{
+                _this.$store.commit('setToken', data.access_token)
+                _this.$store.commit('setUserInfo', data.member)
+                _this.$store.dispatch('synchronizeCart')
 
-              _this.$store.commit('setToken', data.access_token)
-              _this.$store.commit('setUserInfo', data.member)
-              _this.$store.dispatch('synchronizeCart')
+                setTimeout(() => {
+                  if(url == '/shopping-cart'){
+                    location.reload()
+                    return
+                  }
+
+                  if (url) {
+                    _this.$router.replace({
+                      path: url
+                    })
+                  } else {
+                    _this.$router.replace({
+                      path: '/'
+                    })
+                  }
+                }, 0)
+
+                return
+              }
             }
           })
           .catch(err => {
@@ -372,31 +391,46 @@ export default {
             localStorage.setItem('accessToken', data.access_token)
             let nowDate = parseInt(new Date().getTime() / 1000)
             localStorage.setItem('refreshTime', nowDate)
+            _this.$successMessage(_this.$t(`${lang}.logintips`))
+            _this.closeLoginPop()
 
             if (_this.code !== _this.pictureCode) {
               _this.$errorMessage(_this.$t(`${lang}.codeTips`))
               _this.requesting = false
             } else {
-              _this.$successMessage(_this.$t(`${lang}.logintips`))
-
-              setTimeout(() => {
-                if (url) {
+              if(this.loginPopType == 2){
+                setTimeout(() => {
                   _this.$router.replace({
                     name: url,
                     params: { token: res }
                   })
-                } else {
-                  _this.$router.replace({
-                    path: '/'
-                  })
-                }
-              }, 0)
+                }, 0)
 
-              return
+                return
+              }else{
+                _this.$store.commit('setToken', data.access_token)
+                _this.$store.commit('setUserInfo', data.member)
+                _this.$store.dispatch('synchronizeCart')
 
-              _this.$store.commit('setToken', data.access_token)
-              _this.$store.commit('setUserInfo', data.member)
-              _this.$store.dispatch('synchronizeCart')
+                setTimeout(() => {
+                  if(url == '/shopping-cart'){
+                    location.reload()
+                    return
+                  }
+
+                  if (url) {
+                    _this.$router.replace({
+                      path: url
+                    })
+                  } else {
+                    _this.$router.replace({
+                      path: '/'
+                    })
+                  }
+                }, 0)
+
+                return
+              }
             }
           })
           .catch(err => {
@@ -466,20 +500,16 @@ export default {
   border-bottom: 1px solid #ececec;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 }
 .tab-item {
   // cursor: pointer;
   padding: 0 9px;
   font-size: 16px;
   font-weight: 400;
-  color: #666;
+  color: #a88f82;
   line-height: 45px;
   box-sizing: border-box;
-}
-.tab-item.active {
-  color: #a88f82;
-  border-bottom: 2px solid #a88f82;
 }
 
 .opacity {

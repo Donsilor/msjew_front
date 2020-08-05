@@ -9,12 +9,10 @@
 <script>
 import stranger from './order-pay/stranger'
 import member from './order-pay/member'
-import loginPop from '../../pageComponents/login-pop/index'
 export default {
   components: {
     stranger,
-    member,
-    loginPop
+    member
   },
   data() {
     return{

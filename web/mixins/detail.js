@@ -12,7 +12,8 @@ export default {
     return {
       addingCart: false,
       orderingNow:false,
-      isLogin:this.$store.getters.hadLogin
+      isLogin:this.$store.getters.hadLogin,
+      ifShowLoginPop: false
     }
   },
   computed: {
@@ -109,6 +110,11 @@ export default {
     // 立即购买
     orderNow(){
       const _this = this
+
+      if(this.$store.state.platform == 20 && !this.isLogin){
+        this.ifShowLoginPop = true
+        return
+      }
 
       if (!_this.canAddCart) {
         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
@@ -210,6 +216,23 @@ export default {
         })
       }
     },
+    // 领取优惠券
+    getCoupon() {
+      if(!this.$store.getters.hadLogin) {
+        // this.$errorMessage(this.$t(`${lang}.needLogin`))
+        this.ifShowLoginPop = true
+      }else{
+        this.showCoupon = true
+      }
+    },
+    // 弹窗登录
+    toLogin() {
+      this.ifShowLoginPop = true
+    },
+    // 关闭弹窗登录
+    closeLogin() {
+      this.ifShowLoginPop = false
+    }
   },
   mounted() {
 

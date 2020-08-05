@@ -167,6 +167,7 @@
       </div>
     </div>
   </div>
+  <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
 </div>
 </template>
 
@@ -195,7 +196,8 @@ export default {
       Settlement2:false,
       scroll: '',
       soudout:'',
-      coinType:''
+      coinType:'',
+      ifShowLoginPop: false
     }
   },
   computed: {
@@ -544,6 +546,11 @@ export default {
         })
     },
     goOrder() {
+      if(this.$store.state.platform == 20 && !this.$store.getters.hadLogin){
+        this.ifShowLoginPop = true
+        return
+      }
+
       const data = []
       for (const i in this.good) {
         if (this.good[i].tick) {
@@ -553,10 +560,16 @@ export default {
 
       if (data.length !== this.tickNum) return
       const cartIds = data.join(',')
+
+      console.log(778,cartIds)
+      // return
       this.$router.push({
         path: `/billing-address`,
         query: { cartIds }
       })
+    },
+    closeLogin() {
+      this.ifShowLoginPop = false
     }
   }
 }
