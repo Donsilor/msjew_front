@@ -561,8 +561,6 @@ export default {
       if (data.length !== this.tickNum) return
       const cartIds = data.join(',')
 
-      console.log(778,cartIds)
-      // return
       this.$router.push({
         path: `/billing-address`,
         query: { cartIds }
