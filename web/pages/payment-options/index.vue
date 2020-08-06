@@ -866,11 +866,11 @@ export default {
         }).then(res => {
           const data = res.data
           this.showEwm = true
-          setTimeout(() => {
-            this.showEwm = false
-            clearInterval(this.interval)
-            this.interval = null
-          }, 1000 * 60);
+          // setTimeout(() => {
+          //   this.showEwm = false
+          //   clearInterval(this.interval)
+          //   this.interval = null
+          // }, 1000 * 60);
           if (data.verification_status === 'completed') {
             console.log("成功")
             this.showEwm = false
@@ -884,7 +884,18 @@ export default {
             })
             clearInterval(this.interval)
             this.interval = null
-          } else if (data.verification_status === 'failed') {
+          } 
+          // setTimeout(() => {
+          //   if(data.verification_status === 'failed'){
+          //     this.$router.replace({
+          //       path: '/complete-paySuccess/state/failed',
+          //       query: {
+          //         orderId: this.$route.query.orderId || this.$route.query.order_sn,
+          //       }
+          //     })
+          //   }
+          // }, 1000 * 10);
+          // else if (data.verification_status === 'failed') {
               // setTimeout(() => {
               //   this.showEwm = false
               //   clearInterval(this.interval)
@@ -898,7 +909,7 @@ export default {
             // })
             // clearInterval(this.interval)
             // this.interval = null
-          }
+          // }
         })
         .catch(err => {
           clearInterval(this.interval)

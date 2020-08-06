@@ -193,7 +193,7 @@
               </div>
             </nuxt-link>
             <div
-              v-if="o.payChannel == 1"
+              v-if="o.payChannel == 11"
               class="btn-a"
               @click="showEftGuide()"
             >
