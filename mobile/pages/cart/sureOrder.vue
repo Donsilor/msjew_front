@@ -743,7 +743,7 @@ export default {
       this.getData() // 获取地址
       // this.getCouponList() // 获取优惠券列表
       let ua = window.navigator.userAgent.toLowerCase();
-      if((ua.match(/MicroMessenger/i) == 'micromessenger') && !(ua.match(/wxwork/i) == 'wxwork') ){
+      if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){
         this.getCode()
       }
       // let isWeiXin = ()=>{

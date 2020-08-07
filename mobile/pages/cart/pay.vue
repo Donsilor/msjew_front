@@ -587,7 +587,7 @@ export default {
       // }
       if(pay == 1){
         let ua = window.navigator.userAgent.toLowerCase();
-        if((ua.match(/MicroMessenger/i) == 'micromessenger') && !(ua.match(/wxwork/i) == 'wxwork') ){  //企业微信客户端
+        if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){  //企业微信客户端
           tradeType = 'js'
         }else{
           tradeType = 'mweb'
