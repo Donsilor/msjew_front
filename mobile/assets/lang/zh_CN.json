@@ -597,7 +597,21 @@
         "payfailed":"支付失败",
         "discountedAmount": "折扣金额",
         "Untied":"已解绑",
-        "couponAmount": "优惠券"
+        "couponAmount": "优惠券",
+        "payType1": "微信",
+        "payType2": "支付宝",
+        "payType3": "银联",
+        "payType4": "小程序",
+        "payType5": "余额",
+        "payType6": "Paypal",
+        "payType7": "Paypal Card",
+        "payType8": "支付宝国际版",
+        "payType9": "银联",
+        "payType10": "支付宝",
+        "payType11": "微信",
+        "payType12": "支付宝HK",
+        "payType13": "CARD",
+        "payType14": "电汇"
       },
       "logisticInfo":{
         "title": "我的订单",

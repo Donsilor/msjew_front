@@ -597,7 +597,21 @@
       "payfailed":"Payment failed",
       "discountedAmount": "Discounted amount",
       "Untied":"Untied",
-      "couponAmount": "Coupon"
+      "couponAmount": "Coupon",
+      "payType1": "Wechat",
+      "payType2": "Alipay",
+      "payType3": "UnionPay",
+      "payType4": "小程序",
+      "payType5": "余额",
+      "payType6": "Paypal",
+      "payType7": "Paypal Card",
+      "payType8": "支付宝国际版",
+      "payType9": "UnionPay",
+      "payType10": "Alipay",
+      "payType11": "Wechat",
+      "payType12": "Alipay HK",
+      "payType13": "CARD",
+      "payType14": "WireTransfer"
     },
     "logisticInfo":{
       "title": "Order",

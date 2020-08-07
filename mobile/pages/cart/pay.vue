@@ -580,15 +580,16 @@ export default {
       let baseUrl=this.$store.getters.baseUrl
 
       let orderId = this.info.orderId
-
+     
       let tradeType = ''
-      let isWeiXin = ()=>{
-        return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
-      }
+      // let isWeiXin = ()=>{
+      //   return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
+      // }
       if(pay == 1){
-        if(isWeiXin()){
+        let ua = window.navigator.userAgent.toLowerCase();
+        if((ua.match(/MicroMessenger/i) == 'micromessenger') && !(ua.match(/wxwork/i) == 'wxwork') ){  //企业微信客户端
           tradeType = 'js'
-        } else {
+        }else{
           tradeType = 'mweb'
         }
       }else {
