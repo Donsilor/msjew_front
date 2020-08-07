@@ -386,9 +386,11 @@
       <div class="msg">
         <div class="msgbox">
           <div class="content">
-            <!-- <div class="close" @click="shut"><i class="el-icon-close"></i></div> -->
+            <img class="wx" src="../../static/common/wchat.jpg" alt="">
+            <div class="close" @click="shut"><i class="el-icon-close"></i></div>
             <div class="qrcode-box">
               <p class="mainTextColor">{{$t(`${lang}.ScanCode`)}}</p>
+              <p class="money">{{ formatCoin(coinType) }} {{ formatMoney(price) }}</p>
               <div  id="qrcode"></div>
             </div>
           </div>
@@ -723,9 +725,9 @@ export default {
         })
     },
     // 关闭二维码弹窗
-    // shut(){
-    //   this.showEwm = false
-    // },
+    shut(){
+      this.showEwm = false
+    },
     // 大陆支付
     mainLandPay(){
       if(this.$store.state.coin === 'USD'){
@@ -865,7 +867,7 @@ export default {
           }
         }).then(res => {
           const data = res.data
-          this.showEwm = true
+          // this.showEwm = true
           // setTimeout(() => {
           //   this.showEwm = false
           //   clearInterval(this.interval)
@@ -986,6 +988,13 @@ export default {
           color:#B5B5B5;
         }
       }
+      .wx{
+        position: absolute;
+        right:380px;
+        top:0px;
+        height: 41px;
+        width: 100px;
+      }
       .cha{
         text-align: right;
         i{
@@ -1004,9 +1013,17 @@ export default {
   }
   .mainTextColor{
     text-align: center;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
+    font-size: 18px;
+    color:#333;
     // font-size: 24px;
     // color:green
+  }
+  .money{
+    text-align: center;
+    margin: 15px 0;
+    font-size: 16px;
+    color:#333;
   }
 }
 div {

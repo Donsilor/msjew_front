@@ -614,35 +614,6 @@ export default {
         if(tradeType == 'mweb'){
           window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
         }
-        if (res.config) {
-          if (pay !== 7) {
-            window.location.replace(res.config)
-          } else {
-            const promise = new Promise((resolve, reject) => {
-              this.form = []
-              const obj = JSON.parse(res.config)
-              const objKey = Object.keys(obj)
-              for (const i in objKey) {
-                if (objKey[i] === 'url') {
-                  this.actionLink = obj[objKey[i]]
-                  continue
-                }
-                const o = {
-                  name: objKey[i],
-                  val: obj[objKey[i]]
-                }
-                this.form.push(o)
-              }
-              resolve()
-            })
-            promise.then(() => {
-              setTimeout(() => {
-                this.isPay = false
-                document.getElementById('unionPay').click()
-              }, 2000)
-            })
-          }
-        } 
         if(tradeType == 'js'){
           function onBridgeReady(){
             WeixinJSBridge.invoke(
@@ -695,6 +666,36 @@ export default {
           //   }
           // })
         }
+        if (res.config) {
+          if (pay !== 7) {
+            window.location.replace(res.config)
+          } else {
+            const promise = new Promise((resolve, reject) => {
+              this.form = []
+              const obj = JSON.parse(res.config)
+              const objKey = Object.keys(obj)
+              for (const i in objKey) {
+                if (objKey[i] === 'url') {
+                  this.actionLink = obj[objKey[i]]
+                  continue
+                }
+                const o = {
+                  name: objKey[i],
+                  val: obj[objKey[i]]
+                }
+                this.form.push(o)
+              }
+              resolve()
+            })
+            promise.then(() => {
+              setTimeout(() => {
+                this.isPay = false
+                document.getElementById('unionPay').click()
+              }, 2000)
+            })
+          }
+        } 
+        
       })
       .catch(err => {
         this.$nuxt.$loading.finish()
