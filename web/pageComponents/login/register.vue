@@ -84,7 +84,7 @@
           </div>
         </div>
         <!-- 图形验证码 -->
-        <div class="relative margin-bottom-30">
+        <div class="relative margin-bottom-20">
           <div class="row-flex align-item-stretch">
             <div class="login-input verification-code-input" :class="{border: codeErr}">
               <input v-model="imgCode" @focus="codeErr = false" @blur="verifyCode" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="4" />
@@ -255,7 +255,7 @@
         </div>
 
         <!-- 图形验证码 -->
-        <div class="relative margin-bottom-30">
+        <div class="relative margin-bottom-20">
           <div class="row-flex align-item-stretch">
             <div class="login-input verification-code-input"  :class="{border: codeErr}">
               <input v-model="imgCode" @focus="codeErr = false" @blur="verifyCode" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="4" />
@@ -866,9 +866,6 @@ input::placeholder{
   box-sizing: border-box;
 }
 
-.getCode:disabled {
-  // background-color: #999999;
-}
 .margin-bottom-29 {
   margin-bottom: 29px;
 }
@@ -989,8 +986,8 @@ input::placeholder{
 
 .verification-code-input{
   width: 161px;
-  height: 48px;
-  line-height: 48px;
+  height: 36px;
+  line-height: 36px;
   padding: 0 20px;
   border: 1px solid #e6e6e6;
   border-radius: 4px;
@@ -1003,7 +1000,7 @@ input::placeholder{
 
 .code-picture {
   width: 109px;
-  height: 48px;
+  height: 36px;
 
   img{
     width: 100%;

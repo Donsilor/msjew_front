@@ -111,7 +111,7 @@
           <!-- 手机验证码 -->
           <div class="line-box input-line" v-if="loginType == 2">
             <div v-show="showCodeMessageM" class="message">
-              {{ lang.inputUnder }} {{ info.mobile }} {{ lang.theMobileCode }}
+              {{ lang.inputUnder }} {{ info.mobile }} {{ lang.thePhoneCode }}
             </div>
             <div style="position: relative;">
               <bdd-input

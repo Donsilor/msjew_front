@@ -833,6 +833,7 @@
     "phoneError": "Your mobile phone number format is not correct, only support the mainland mobile phone number!",
     "inputUnder": "Enter the verification code sent to",
     "theEmailCode": "Check the spam folder or click on send if you fail to receive the e-mail",
+    "thePhoneCode": "if you do not receive the SMS, please pay attention to whether it is blocked or click send later",
     "code": "Verification Code",
     "inputCode": "Enter verification code",
     "codeError": "Enter correct verification code",
