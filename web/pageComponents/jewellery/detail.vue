@@ -263,7 +263,7 @@
         </div>
         <div class="button-group">
           <button
-            v-loading="addingCart"
+            v-loading="orderingNow"
             :class="['add-to-cart', { actived: canAddCart }]"
             @click="orderNow"
           >
