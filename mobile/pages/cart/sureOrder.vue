@@ -1333,9 +1333,10 @@ export default {
      if(wxid == null || wxid == '' || wxid == undefined){
       if (this.code == null || this.code === '') { // 如果没有code，则去请求
         window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(local)}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
-      } 
-       console.log("openId",wxid)  
-       this.getOpenId (this.code)
+      } else {
+        console.log("openId",wxid)  
+        this.getOpenId (this.code)
+      }
      }
     },
     getUrlCode() { // 截取url中的code方法

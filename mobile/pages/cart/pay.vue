@@ -642,9 +642,8 @@ export default {
               }, 2000)
             })
           }
-        } else if (!res.config){
-          let myDate = parseInt((new Date()).getTime() / 1000);
-          console.log("mydate",myDate)
+        } 
+        if(tradeType == 'js'){
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
