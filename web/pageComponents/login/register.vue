@@ -20,7 +20,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.surname`)"
                 maxlength="30"
-				autocomplete="off"
+				        autocomplete="off"
               />
             </div>
             <div v-show="lastnameShow"  class="error-tip">
@@ -39,7 +39,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.nameTips`)"
                 maxlength="30"
-				autocomplete="off"
+				        autocomplete="off"
               />
             </div>
             <div v-show="firstnameShow" class="error-tip">
@@ -71,12 +71,12 @@
             <input
               v-model.trim="mobile"
               type="text"
-			  @focus="focusEvent2"
+			        @focus="focusEvent2"
               @blur="verifyMobile"
               v-bind:class="{active:isActivemobile}"
               :placeholder="$t(`${lang}.phoneBox`)"
               maxlength="11"
-			  autocomplete="off"
+			        autocomplete="off"
             />
           </div>
           <div v-show="mobileShow" class="error-tip">
@@ -97,7 +97,7 @@
                 :placeholder="$t(`${lang}.code`)"
                 maxlength="15"
                 @input="inputCode"
-				autocomplete="off"
+				        autocomplete="off"
               />
             </div>
             <div class="send-email-code">
@@ -124,7 +124,7 @@
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.pwdType`)"
               maxlength="30"
-			  autocomplete="off"
+			        autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -136,7 +136,7 @@
           </div>
         </div>
         <!-- 确认密码 -->
-        <div class="relative margin-bottom-40">
+        <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
               v-model.trim=" password_repetition"
@@ -148,7 +148,7 @@
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.repassword`)"
               maxlength="30"
-			  autocomplete="off"
+			        autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>

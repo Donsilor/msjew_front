@@ -10,7 +10,8 @@
       <!-- 手机登录 -->
       <div v-if="loginType == 1" class="login-item">
         <div class="relative margin-bottom-20">
-          <div style="position: fixed;z-index: -999;visibility:hidden">
+          <div style="position: absolute;z-index: -99; opacity: 0"
+          >
             <input type="text" name="hidden1" id="text" value="123" />
             <input type="password" name="hidden1" id="password" value="456" />
           </div>
@@ -45,7 +46,6 @@
           </nuxt-link>
         </div>
 
-
         <!-- 验证码 -->
         <div class="relative margin-bottom-30">
           <div class="row-flex align-item-stretch">
@@ -75,7 +75,7 @@
       <!-- 邮箱登录 -->
       <div v-if="loginType == 2" class="login-item">
         <div class="relative margin-bottom-20">
-          <div style="position: fixed;z-index: -999;visibility:hidden">
+          <div style="position: absolute; z-index: -99; opacity: 0">
             <input type="text" name="hidden1" id="text" value="123" />
             <input type="password" name="hidden1" id="password" value="456" />
           </div>
@@ -462,22 +462,21 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 360px;
+  width: 530px;
   background-color: #fff;
-  padding: 12px 40px 0;
+  padding: 30px 40px 0;
   box-sizing: border-box;
 }
 .login-tab {
-  height: 45px;
-  border-bottom: 1px solid #ececec;
+  height: 60px;
+  // border-bottom: 1px solid #ececec;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .tab-item {
-  // cursor: pointer;
   padding: 0 9px;
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 400;
   color: #a88f82;
   line-height: 45px;
@@ -511,9 +510,11 @@ input::placeholder {
 }
 
 .login-item {
-  height: 425px;
+  width: 300px;
+  height: 380px;
   padding-top: 20px;
   padding-bottom: 23px;
+  margin: 0 auto;
 
   .login-input {
     position: relative;
@@ -521,8 +522,8 @@ input::placeholder {
     & {
       input {
         width: 100%;
-        height: 48px;
-        line-height: 48px;
+        height: 40px;
+        line-height: 40px;
         padding: 0 20px;
         border: 1px solid rgba(230, 230, 230, 1);
         border-radius: 4px;
@@ -573,7 +574,7 @@ input::placeholder {
 
   .code-picture {
     width: 109px;
-    height: 48px;
+    height: 40px;
   }
 
   .forget {
@@ -590,7 +591,7 @@ input::placeholder {
 
   .submit {
     width: 100%;
-    height: 48px;
+    height: 40px;
     background: #ffffff;
     border: 1px solid #8b766c;
     font-size: 14px;
