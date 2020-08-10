@@ -727,6 +727,8 @@ export default {
     // 关闭二维码弹窗
     shut(){
       this.showEwm = false
+      clearInterval(this.interval)
+      this.interval = null
     },
     // 大陆支付
     mainLandPay(){
@@ -856,6 +858,10 @@ export default {
           setTimeout(this.payVerify(), 0);
         }, 3000);
       }
+      // if(this.showEwm == false){
+      //   clearInterval(this.interval)
+      //   this.interval = null
+      // }
     },
     // 验证
     payVerify() {
@@ -876,6 +882,8 @@ export default {
           if (data.verification_status === 'completed') {
             console.log("成功")
             this.showEwm = false
+            clearInterval(this.interval)
+            this.interval = null
             // window.location.replace(baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId)
             this.$router.replace({
               path: '/complete-paySuccess',
@@ -884,8 +892,7 @@ export default {
                 type: `success`
               }
             })
-            clearInterval(this.interval)
-            this.interval = null
+            
           } 
           // setTimeout(() => {
           //   if(data.verification_status === 'failed'){
