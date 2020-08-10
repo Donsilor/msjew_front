@@ -109,7 +109,7 @@ export default {
           : infos.goodsDesc
         return {
           data: infos,
-          seoInfo: app.$getDetailSeoInfo(infos)
+          seoInfo: app.$getDetailSeoInfo('Jewellery')
         }
       })
       .catch(err => {
