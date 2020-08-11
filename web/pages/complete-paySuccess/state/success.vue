@@ -51,11 +51,18 @@
           <!-- <i class="iconfont iconzuoshangjiantou" /> -->
         </div>
         <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
-        <div class="order-num">
+        <div v-if="$store.getters.hadLogin" class="order-num">
           {{ $t(`${lang}.orderCode`) }}
             <nuxt-link :to="`/account/order-details?orderId=${this.oid}`">
               <span class="underline" >{{ data.orderNo }}</span>
             </nuxt-link>
+        </div>
+        <div v-else class="order-num">
+          {{ $t(`${lang}.orderCode`) }}
+            <!-- <nuxt-link :to="`/account/order-details?orderId=${this.oid}`"> -->
+              <span>{{ data.orderNo }}</span>
+              <i class="icon iconfont iconcopy copy-btn" :data-clipboard-text="data.orderNo" @click="copy"></i>
+            <!-- </nuxt-link> -->
         </div>
         <nuxt-link :to="{name: '/order-details'}"></nuxt-link>
         <!-- <div class="order-num">
@@ -233,6 +240,7 @@
 <script>
 
 const lang = `finishPay`
+import Clipboard from 'clipboard'
 // console.log("aa",$t(`${lang}.hangding`))
 export default {
   name: 'Success',
@@ -358,6 +366,17 @@ export default {
       }
   },
   methods: {
+    copy() {
+      const clipboard = new Clipboard('.copy-btn')
+      clipboard.on('success', e => {
+        this.$successMessage(this.$t(`${lang}.toast1`))
+        clipboard.destroy()
+      })
+      clipboard.on('error', e => {
+        this.$errorMessage(this.$t(`${lang}.toast2`))
+        clipboard.destroy()
+      })
+    },
     toLogin() {
       this.$router.push(`/login`)
     },
@@ -1089,5 +1108,9 @@ div {
 }
 .underline{
   text-decoration:underline
+}
+
+.copy-btn{
+  cursor: pointer;
 }
 </style>
