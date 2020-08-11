@@ -286,7 +286,7 @@ export default {
       waitingText: this.LANGUAGE.components.sendEmailCode.sendCode,
       loginType: '',
       maxlength: '30',
-      maxCode: '4',
+      maxCode: '5',
       pictureCode: '',
       code: '',
       ifShowErr: false
