@@ -369,21 +369,25 @@ export default {
     },
     goPay() {
       // console.log("id",this.list)
-      const arr = []
-      for (let i = 0; i < this.list.length; i++) {
-        if (this.list[i].isSelect) {
-          arr.push(this.list[i])
+      if(!this.isLogin && this.$store.state.platform == 21){
+        this.$toast.show(this.lang.firstLogin)
+      } else {
+        const arr = []
+        for (let i = 0; i < this.list.length; i++) {
+          if (this.list[i].isSelect) {
+            arr.push(this.list[i])
+          }
         }
-      }
-
-      if (arr.length <= 0) {
-        this.$toast.show(this.lang.toast1)
-      } else if (arr.length > 0) {
-        console.log("arr",arr)
-        storage && storage.set('myCartList', JSON.stringify(arr))
-        this.$router.push({
-          name: 'cart-sureOrder'
-        })
+  
+        if (arr.length <= 0) {
+          this.$toast.show(this.lang.toast1)
+        } else if (arr.length > 0) {
+          console.log("arr",arr)
+          storage && storage.set('myCartList', JSON.stringify(arr))
+          this.$router.push({
+            name: 'cart-sureOrder'
+          })
+        }
       }
     },
     // 判断是否失效

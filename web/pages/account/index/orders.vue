@@ -188,12 +188,12 @@
               </button></a
             >
             <nuxt-link :to="goToPay(o.id, o.coinCode, o.payAmount, o.paymentType, o.payAmountHKD)"
-              ><div v-if="o.payChannel !== 1 && o.wireTransferStatus == null" class="btn-a">
+              ><div v-if="o.payChannel !== 11 && o.wireTransferStatus == null" class="btn-a">
               {{ $t(`${lang}.toPay`) }}
               </div>
             </nuxt-link>
             <div
-              v-if="o.payChannel == 1"
+              v-if="o.payChannel == 11"
               class="btn-a"
               @click="showEftGuide()"
             >

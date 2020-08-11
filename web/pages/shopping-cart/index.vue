@@ -195,7 +195,8 @@ export default {
       Settlement2:false,
       scroll: '',
       soudout:'',
-      coinType:''
+      coinType:'',
+      isLogin:this.$store.getters.hadLogin
     }
   },
   computed: {
@@ -559,21 +560,26 @@ export default {
         })
     },
     goOrder() {
-      const data = []
-      for (const i in this.good) {
-        if (this.good[i].tick) {
-          data.push(this.good[i].id)
+
+      if(!this.isLogin && this.$store.state.platform == 20){
+        this.$errorMessage(this.$t(`${lang}.firstLogin`))
+      }else {
+        const data = []
+        for (const i in this.good) {
+          if (this.good[i].tick) {
+            data.push(this.good[i].id)
+          }
+        // console.log("length",this.good[i].tick)
         }
-      // console.log("length",this.good[i].tick)
+        //  console.log("length333",this.tickNum)
+        //  console.log("data.length",data.length,this.tickNum)
+        if (data.length !== this.tickNum) return
+        const cartIds = data.join(',')
+        this.$router.push({
+          path: `/billing-address`,
+          query: { cartIds }
+        })
       }
-      //  console.log("length333",this.tickNum)
-      //  console.log("data.length",data.length,this.tickNum)
-      if (data.length !== this.tickNum) return
-      const cartIds = data.join(',')
-      this.$router.push({
-        path: `/billing-address`,
-        query: { cartIds }
-      })
     }
   }
 }

@@ -498,6 +498,10 @@ export default {
     },
     // 立即购买
     orderNow(){
+      if(!this.isLogin && this.$store.state.platform == 21){
+        this.$toast(this.lang.firstLogin)
+        return
+      }
       if (!(this.canAddCart && this.inSale)) {
         return
       }

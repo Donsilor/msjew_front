@@ -131,7 +131,8 @@
         "toast1": "请选择要结账商品",
         "toast2": "移除成功",
         "discounts1": "优惠券",
-        "discounts2": "折"
+        "discounts2": "折",
+        "firstLogin":"请先登录或注册！"
       },
       "invoice":{
         "personal":"个人",
@@ -597,14 +598,20 @@
         "discountedAmount": "折扣金额",
         "Untied":"已解绑",
         "couponAmount": "优惠券",
-        "payType1": "Paypal",
-        "payType2": "Paypal Card",
+        "payType1": "微信",
+        "payType2": "支付宝",
         "payType3": "银联",
-        "payType4": "支付宝",
-        "payType5": "微信",
-        "payType6": "支付宝HK",
-        "payType7": "电汇",
-        "payType8": "OFFLINE"
+        "payType4": "小程序",
+        "payType5": "余额",
+        "payType6": "Paypal",
+        "payType7": "Paypal Card",
+        "payType8": "支付宝国际版",
+        "payType9": "银联",
+        "payType10": "支付宝",
+        "payType11": "微信",
+        "payType12": "支付宝HK",
+        "payType13": "CARD",
+        "payType14": "电汇"
       },
       "logisticInfo":{
         "title": "我的订单",
@@ -644,7 +651,8 @@
       "addCartFail": "加入购物车是失败",
       "discounts1": "优惠券",
       "discounts2": "折",
-      "buyNow":"立即购买"
+      "buyNow":"立即购买",
+      "firstLogin":"请先登录或注册！"
     },
     "diamond": {},
     "engagement": {
@@ -1175,7 +1183,8 @@
       "oddPrice": "原  价",
       "newPrice": "折后价",
       "needLogin": "请先登录，才能领取优惠券",
-      "buyNow":"立即购买"
+      "buyNow":"立即购买",
+      "firstLogin":"请先登录或注册！"
     },
     "listCommons": {
       "sliders": [

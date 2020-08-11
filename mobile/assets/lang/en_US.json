@@ -130,7 +130,8 @@
       "toast1": "Choose products before you pay",
       "toast2": "Deleted",
       "discounts1": "Coupon",
-      "discounts2": "off"
+      "discounts2": "off",
+      "firstLogin": "Please login or register!"
     },
     "invoice": {
       "personal":"personal",
@@ -596,14 +597,20 @@
       "discountedAmount": "Discounted amount",
       "Untied":"Untied",
       "couponAmount": "Coupon",
-      "payType1": "Paypal",
-      "payType2": "Paypal Card",
+      "payType1": "Wechat",
+      "payType2": "Alipay",
       "payType3": "UnionPay",
-      "payType4": "Alipay",
-      "payType5": "Wechat",
-      "payType6": "Alipay HK",
-      "payType7": "WireTransfer",
-      "payType8": "OFFLINE"
+      "payType4": "小程序",
+      "payType5": "余额",
+      "payType6": "Paypal",
+      "payType7": "Paypal Card",
+      "payType8": "支付宝国际版",
+      "payType9": "UnionPay",
+      "payType10": "Alipay",
+      "payType11": "Wechat",
+      "payType12": "Alipay HK",
+      "payType13": "CARD",
+      "payType14": "WireTransfer"
     },
     "logisticInfo":{
       "title": "Order",
@@ -644,7 +651,8 @@
     "addCartFail": "Failed to add to cart",
     "discounts1": "Coupon",
     "discounts2": "off",
-    "buyNow":"Order Now"
+    "buyNow":"Order Now",
+    "firstLogin": "Please login or register!"
   },
   "diamond": {},
   "engagement": {
@@ -1170,7 +1178,8 @@
     "oddPrice": "Original price",
     "newPrice": "Discount price",
     "needLogin": "Please login before redeem the coupon.",
-    "buyNow":"Order Now"
+    "buyNow":"Order Now",
+    "firstLogin": "Please login or register!"
   },
   "listCommons": {
     "sliders": [
