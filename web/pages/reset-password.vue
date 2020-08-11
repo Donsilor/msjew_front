@@ -37,31 +37,36 @@
                     :placeholder="$t(`${lang}.schedule1-phone`)"
                     @keydown.enter="changeSchedule2(2)"
                     autocomplete="off"
+                    @focus="focusEvent"
+                    @blur="blurEvent3"
+                    maxlength="11"
                   />
                 </div>
-                <div v-show="phonetip" class="error-tip">
+                <!-- <div v-show="phonetip" class="error-tip">
                   {{ $t(`${lang}.schedule1-phonetips`) }}
+                </div> -->
+              </div>
+
+              <div class="tip-box">
+                <span v-if="ifShowMobile">{{ verifyMobile }}</span>
+              </div>
+
+              <!-- 图形验证码 -->
+              <div class="relative">
+                <div class="code-box">
+                  <div class="login-input verification-code-input" :class="{border: ifShowCode}">
+                    <input v-model="imgCode" @blur="blurEvent2" @focus="focusEvent2" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="15" />
+                  </div>
+                  <div class="code-picture" @click="refreshCode">
+                    <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
+                  </div>
                 </div>
               </div>
-              <!-- <div class="relative margin-bottom-20 code margin-top-30">
-                <div class="row-flex code-main">
-                  <div class="register-input margin-right-20">
-                    <input
-                      v-model="code"
-                      type="text"
-                      :placeholder="$t(`${lang}.schedule1-code`)"
-                    />
-                  </div>
-                  <div class="send-email-code">
-                    <button  :class="['getCode', className]" :disabled="waiting" @click="sendPhoneCode">
-                      {{ waitingText }}
-                    </button>
-                  </div>
-                </div>
-                <div v-show="codetip" class="error-tip">
-                  {{ $t(`${lang}.schedule2-codetips`) }}
-                </div>
-              </div> -->
+
+              <div class="tip-box">
+                <span v-if="ifShowCode">{{ $t(`${lang}.code`) }}</span>
+              </div>
+
               <div class="button-group">
                 <button
                   v-loading="ajaxLoading"
@@ -196,8 +201,31 @@
                   class="bottom-border-input"
                   @keydown.enter="changeSchedule(2)"
                   autocomplete="off"
+                  @focus="focusEvent"
+                  @blur="blurEvent"
                 />
               </div>
+
+              <div class="tip-box">
+                <span v-if="ifShowEmail">{{ verifyEmpty }}</span>
+              </div>
+
+               <!-- 图形验证码 -->
+              <div class="relative margin-bottom-30">
+                <div class="code-box">
+                  <div class="login-input verification-code-input" :class="{border: ifShowCode}">
+                    <input v-model="imgCode" @blur="blurEvent2" @focus="focusEvent2" v-bind:class="{active:isActive3}" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="15" />
+                  </div>
+                  <div class="code-picture" @click="refreshCode">
+                    <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
+                  </div>
+                </div>
+
+                <div class="tip-box">
+                  <span v-if="ifShowCode">{{ $t(`${lang}.code`) }}</span>
+                </div>
+              </div>
+
               <div class="button-group">
                 <button
                   v-loading="ajaxLoading"
@@ -423,7 +451,14 @@ export default {
       password: '',
       password_repetition: '',
       showPassword: false,
-      ajaxLoading: false
+      ajaxLoading: false,
+      pictureCode: '',
+      isActive3: false,
+      codeErr: false,
+      imgCode: '',
+      ifShowEmail: false,
+      ifShowCode: false,
+      ifShowMobile: false
     }
   },
   watch:{
@@ -440,6 +475,22 @@ export default {
       return {
         transform: `translate(-${(this.activeScheduleKey - 1) * 100}%, 0)`
       }
+    },
+    verifyEmpty() {
+      if (this.info.email=='') {
+        return this.$t(`${lang}.emptyEmail`)
+      }
+      if (!((/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/).test(this.info.email))) {
+        return this.$t(`${lang}.emailTips`)
+      }
+    },
+    verifyMobile() {
+      if (this.mobile=='') {
+        return this.$t(`${lang}.emptyMobile`)
+      }
+      if (!(/^1[3456789]\d{9}$/.test(this.mobile))) {
+        return this.$t(`${lang}.mobileTips`)
+      }
     }
   },
   beforeRouteUpdate(to, from, next) {
@@ -450,7 +501,9 @@ export default {
 	this.resetType = sessionStorage.getItem("loginType")
 
     const _this = this
-    _this.$nextTick(() => {})
+    _this.$nextTick(() => {
+       _this.refreshCode()
+    })
 
   },
   methods: {
@@ -614,7 +667,30 @@ export default {
           break
         case 2:
           try {
-            await _this.emialtip()
+            var verifyRes = false
+            if(this.info.email=='' || !((/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/).test(this.info.email))){
+              this.ifShowEmail = true
+              verifyRes = true
+             _this.ajaxLoading = false
+            }
+
+            if(this.imgCode == ''){
+              this.ifShowCode = true
+              verifyRes = true
+              _this.ajaxLoading = false
+            }
+
+            if(verifyRes){
+              return
+            }
+
+            if(this.imgCode != this.pictureCode){
+              _this.ajaxLoading = false
+              _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+              return
+            }
+
+            // await _this.emialtip()
             await _this.sendCode()
           } catch (e) {
             _this.$errorMessage(e.message)
@@ -701,7 +777,30 @@ export default {
             break;
           case 2:
             try {
-              await _this.mobiletip()
+              var verifyRes = false
+
+              if(this.mobile=='' || !(/^1[3456789]\d{9}$/.test(this.mobile))){
+                this.ifShowMobile = true
+                verifyRes = true
+              _this.ajaxLoading = false
+              }
+
+              if(this.imgCode == ''){
+                this.ifShowCode = true
+                verifyRes = true
+                _this.ajaxLoading = false
+              }
+
+              if(verifyRes){
+                return
+              }
+
+              if(this.imgCode != this.pictureCode){
+                _this.ajaxLoading = false
+                _this.$errorMessage(_this.$t(`${lang}.codeTips`))
+                return
+              }
+
               await _this.sendPhoneCode()
             } catch (e) {
               _this.$errorMessage(e.message)
@@ -879,6 +978,46 @@ export default {
       _this.$router.push({
         path: '/login'
       })
+    },
+    keyupEvent3 () {
+      if (this.code == this.pictureCode) {
+        this.isActive3 = false
+        this.codeErr = false
+      }
+    },
+    // 生成驗證碼
+    refreshCode () {
+      // const info = JSON.parse(JSON.stringify(this.info))
+      const result = []
+      const library = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+      this.identifyCode = ''
+      for (let i = 0; i < 4; i++) {
+        result.push(library[Math.floor(Math.random() * 9)])
+      }
+      this.pictureCode = result.join('')
+      // this.info = info
+    },
+    blurEvent() {
+      if (this.info.email=='' || !((/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/).test(this.info.email))) {
+        this.ifShowEmail = true
+      }
+    },
+    focusEvent() {
+      this.ifShowEmail = false
+      this.ifShowMobile = false
+    },
+    blurEvent2() {
+      if (this.imgCode=='') {
+        this.ifShowCode = true
+      }
+    },
+    focusEvent2() {
+      this.ifShowCode = false
+    },
+    blurEvent3() {
+      if (this.mobile=='' || !(/^1[3456789]\d{9}$/.test(this.mobile))) {
+        this.ifShowMobile = true
+      }
     }
   }
 }
@@ -1330,5 +1469,53 @@ input{
     white-space: nowrap;
     box-sizing: border-box;
   }
+}
+
+.code-box{
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+}
+
+.verification-code-input{
+  width: 146px;
+  margin-right: 20px;
+}
+.verification-code-input{
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 400;
+  color: #999999;
+}
+
+.code-picture {
+  width: 110px;
+  height: 48px;
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.tip-box{
+  width: 400px;
+  margin: 0 auto;
+  height: 30px;
+  line-height: 30px;
+  font-size: 12px;
+  color: #f29b87;
+}
+
+.border{
+  border: 1px solid #F3A18E!important;
 }
 </style>

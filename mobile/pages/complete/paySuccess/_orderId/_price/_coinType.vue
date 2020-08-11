@@ -205,10 +205,7 @@ export default {
     }
   },
   mounted() {
-      var url = window.location.href;
-      sessionStorage.setItem('returnUrl', url)
       if (this.$route.query.success === "false") {
-        var returnUrl = sessionStorage.getItem('returnUrl');
         this.goPayFailed()
         //失败后，继续调用验证api，写入支付日志
         this.$axios({
@@ -216,7 +213,7 @@ export default {
             method: 'post',
             timeout:3000,
             data: {
-                return_url: returnUrl
+                return_url: window.location.href
             }
         })
         .then(data => {})
@@ -240,7 +237,7 @@ export default {
       this.stepPayVerify = false
     },
     goPaySuccess(){
-      sessionStorage.removeItem('returnUrl')
+
       const arr = []
       this.list.map((item, index) => {
         arr.push(item.localSn)
@@ -258,7 +255,6 @@ export default {
       // facebook 购买成功统计-end
     },
     goPayFailed(){
-        sessionStorage.removeItem('returnUrl')
         this.$router.push({
             name: 'cart-payFailed-orderId-price-coinType',
             query: {
@@ -330,14 +326,13 @@ export default {
     },
     //支付校验
     payVerify(){
-      var returnUrl = sessionStorage.getItem('returnUrl');
       this.verifyCount ++
       this.$axios({
             url: '/web/pay/verify',
             method: 'post',
             timeout:8000,
             data: {
-                return_url: returnUrl
+                return_url: window.location.href
             }
         })
         .then(data => {

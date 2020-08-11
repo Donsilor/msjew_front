@@ -596,20 +596,14 @@
       "discountedAmount": "折扣金額",
       "Untied":"已解綁",
       "couponAmount": "優惠券",
-      "payType1": "微信",
-      "payType2": "支付寶",
-      "payType3": "銀聯",
-      "payType4": "小程序",
-      "payType5": "余額",
-      "payType6": "Paypal",
-      "payType7": "Paypal Card",
-      "payType8": "支付寶國際版",
-      "payType9": "銀聯",
-      "payType10": "支付寶",
-      "payType11": "微信",
-      "payType12": "支付寶HK",
-      "payType13": "CARD",
-      "payType14": "電匯"
+      "payType1": "Paypal",
+      "payType2": "Paypal Card",
+      "payType3": "银联",
+      "payType4": "支付宝",
+      "payType5": "微信",
+      "payType6": "支付宝HK",
+      "payType7": "电汇",
+      "payType8": "OFFLINE"
     },
     "logisticInfo":{
       "title": "我的订单",
@@ -666,7 +660,9 @@
       "code-null": "驗證碼不能為空",
       "code-error": "驗證碼錯誤",
       "password-null": "密碼不能為空",
-      "password-not-same": "密碼不一致"
+      "password-not-same": "密碼不一致",
+      "code": "輸入驗證碼*",
+      "codeError": "請輸入正確的驗證碼"
     },
     "index": {
       "forget": "忘記密碼",
@@ -675,7 +671,8 @@
       "email-error": "郵箱格式錯誤",
       "mobile-error": "電話格式錯誤",
       "next": "下一步",
-      "code": "輸入驗證碼*"
+      "code": "輸入驗證碼*",
+      "codeError": "請輸入正確的驗證碼"
     },
     "new-password": {
       "code": "驗證碼",
@@ -717,6 +714,7 @@
       "forget": "忘記密碼？",
       "Code": "輸入驗證碼",
       "code-error": "驗證碼錯誤",
+      "codeError": "請輸入正確的驗證碼",
       "slider-verify-first": "請先完成驗證",
       "slider-verify": "請完成驗證解鎖",
       "input-password": "請輸入登入密碼",
@@ -833,7 +831,8 @@
     "emailError": "請輸入正確的郵箱地址",
     "phoneError": "手機號碼格式不正確，僅支持：大陸手機號！",
     "inputUnder": "在下面輸入發送到",
-    "theEmailCode": "的驗證碼。如果沒有收到電子郵件，請查看垃圾郵件文件 夾或稍後點擊發送",
+    "theEmailCode": "的驗證碼。如果沒有收到電子郵件，請查看垃圾郵件文件夾或稍後點擊發送",
+    "thePhoneCode": "的驗證碼。如果沒有收到短信，請留意是否被攔截或稍後點擊發送",
     "code": "驗證碼",
     "inputCode": "請輸入驗證碼",
     "codeError": "請輸入正確的驗證碼",
@@ -846,7 +845,10 @@
     "register": "登記",
     "registerSuccess": "登記成功",
     "tickTheBDDTerms": "請查看並同意BDD條款及細則及私隱政策",
-    "area-code": "中國"
+    "area-code": "中國",
+    "Code": "輸入驗證碼",
+    "code-error": "驗證碼錯誤",
+    "inputPhone": "請輸入手機號"
   },
   "site-switch": {
     "chooseLanguageCoin": "請選擇您語言與結算貨幣",

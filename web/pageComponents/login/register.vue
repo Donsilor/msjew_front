@@ -20,7 +20,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.surname`)"
                 maxlength="30"
-				autocomplete="off"
+				        autocomplete="off"
               />
             </div>
             <div v-show="lastnameShow"  class="error-tip">
@@ -39,7 +39,7 @@
                 type="text"
                 :placeholder="$t(`${lang}.nameTips`)"
                 maxlength="30"
-				autocomplete="off"
+				        autocomplete="off"
               />
             </div>
             <div v-show="firstnameShow" class="error-tip">
@@ -71,16 +71,30 @@
             <input
               v-model.trim="mobile"
               type="text"
-			  @focus="focusEvent2"
+			        @focus="mobileShow = false"
               @blur="verifyMobile"
               v-bind:class="{active:isActivemobile}"
               :placeholder="$t(`${lang}.phoneBox`)"
               maxlength="11"
-			  autocomplete="off"
+			        autocomplete="off"
             />
           </div>
           <div v-show="mobileShow" class="error-tip">
             {{ $t(`${lang}.phoneTips`) }}
+          </div>
+        </div>
+        <!-- 图形验证码 -->
+        <div class="relative margin-bottom-20">
+          <div class="row-flex align-item-stretch">
+            <div class="login-input verification-code-input" :class="{border: codeErr}">
+              <input v-model="imgCode" @focus="codeErr = false" @blur="verifyCode" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="4" />
+            </div>
+            <div class="code-picture" @click="refreshCode">
+              <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
+            </div>
+          </div>
+          <div v-show="codeErr" class="error-tip">
+            {{ $t(`${lang}.code`) }}
           </div>
         </div>
         <!-- 输入验证码 -->
@@ -97,7 +111,7 @@
                 :placeholder="$t(`${lang}.code`)"
                 maxlength="15"
                 @input="inputCode"
-				autocomplete="off"
+				        autocomplete="off"
               />
             </div>
             <div class="send-email-code">
@@ -108,7 +122,7 @@
             </div>
           </div>
           <div v-show="codeShow" class="error-tip">
-            {{ $t(`${lang}.codeTips`) }}
+            {{ $t(`${lang}.code`) }}
           </div>
         </div>
         <!-- 设置密码 -->
@@ -124,7 +138,7 @@
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.pwdType`)"
               maxlength="30"
-			  autocomplete="off"
+			        autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -148,7 +162,7 @@
               :type="showPassword ? 'text' : 'password'"
               :placeholder="$t(`${lang}.repassword`)"
               maxlength="30"
-			  autocomplete="off"
+			        autocomplete="off"
             />
             <div class="password-eye" @click="changeRegisterPasswordStatus">
               <i v-show="!showPassword" class="iconfont iconcloes"></i>
@@ -227,10 +241,8 @@
           <div class="register-input">
             <input
               v-model.trim="email"
-
-              @input="inputEvent2"
-              @focus="focusEvent2"
-              @blur="blurEvent2"
+              @focus="emailShow = false"
+              @blur="verifyEmail"
               type="text"
               v-bind:class="{active:isActivemail}"
               :placeholder="$t(`${lang}.email`)"
@@ -241,6 +253,22 @@
             {{ $t(`${lang}.mailTips`) }}
           </div>
         </div>
+
+        <!-- 图形验证码 -->
+        <div class="relative margin-bottom-20">
+          <div class="row-flex align-item-stretch">
+            <div class="login-input verification-code-input"  :class="{border: codeErr}">
+              <input v-model="imgCode" @focus="codeErr = false" @blur="verifyCode" type="text" :placeholder="$t(`${lang}.code`)" :maxlength="4" />
+            </div>
+            <div class="code-picture" @click="refreshCode">
+              <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
+            </div>
+          </div>
+          <div v-show="codeErr" class="error-tip">
+            {{ $t(`${lang}.code`) }}
+          </div>
+        </div>
+
         <div class="relative margin-bottom-20">
           <div class="row-flex">
             <div class="register-input margin-right-20">
@@ -264,7 +292,7 @@
             </div>
           </div>
           <div v-show="codeShow" class="error-tip">
-            {{ $t(`${lang}.codeTips`) }}
+            {{ $t(`${lang}.code`) }}
           </div>
         </div>
         <div class="relative margin-bottom-20">
@@ -369,6 +397,9 @@ export default {
       name: '',
       mobile: '',
       email: '',
+      pictureCode: '',
+      imgCode: '',
+      codeErr: false,
       code: '',
       password: '',
       showPassword: false,
@@ -393,39 +424,39 @@ export default {
       lastnameShow: false
     }
   },
-  watch:{
-    email(){
-      // if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
-      //   this.emailShow=true
-      // }else{
-      //   this.emailShow=false
-      //   this.isActivemail=false
-      // }
-    }
-  },
   mounted() {
     this.loginType = sessionStorage.getItem("loginType")
 
     const _this = this
-    _this.$nextTick(() => {})
+    _this.$nextTick(() => {
+       _this.refreshCode()
+    })
   },
   methods: {
-	verifyMobile(){
-		if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-		  this.mobileShow=true
-		}else{
-		  this.mobileShow=false
-		  this.isActivemobile=false
-		}
-	},
-	verifyPasswordRepetition(){
-	  if(this.password_repetition!=this.password){
-	    this.repwdShow=true
-	  }else{
-	    this.isActiverepwd=false
-	    this.repwdShow=false
-	  }
-	},
+    verifyMobile(){
+      if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
+        this.mobileShow=true
+      }else{
+        this.mobileShow=false
+        this.isActivemobile=false
+      }
+    },
+    verifyEmail(){
+      if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.email))){
+        this.emailShow=true
+      }else{
+        this.emailShow=false
+        this.isActivemail=false
+      }
+    },
+    verifyPasswordRepetition(){
+      if(this.password_repetition!=this.password){
+        this.repwdShow=true
+      }else{
+        this.isActiverepwd=false
+        this.repwdShow=false
+      }
+    },
     change() {
       //动作：阻止表单数据提交
       return false;
@@ -442,29 +473,31 @@ export default {
     blurEvent1(){
       this.isActivename=false;
     },
-    // 手机号/邮箱
-    blurEvent2(){
-      this.isActivemobile=false
-      this.isActivemail=false
-    },
     // 验证码
     blurEvent3(){
-      this.isActivecode=false
-      this.codeShow=false
+      if(!this.code){
+        this.isActivecode=true
+        this.codeShow=true
+      }
     },
     // 密码
     blurEvent4(){
-      this.isActivepwd=false
-      this.pwdShow=false
+      if(!this.password){
+        this.isActivepwd=true
+        this.pwdShow=true
+      }
     },
     // 确认密码
     blurEvent5(){
-      this.isActiverepwd=false
+      if(!password_repetition){
+        this.isActiverepwd=true
+	      this.repwdShow=true
+      }
     },
     // 姓
     focusEvents(){
       // console.log("aa")
-      this.isActivefisrt=true
+      this.isActivefisrt=false
     },
     // 名
     focusEvent(){
@@ -474,59 +507,24 @@ export default {
     focusEvent1(){
       this.isActivename=true;
     },
-    // 手机号/邮箱
-    focusEvent2(){
-	  this.mobileShow=false
-      this.isActivemobile=true
-      this.isActivemail=true
-    },
     // 验证码
     focusEvent3(){
-      this.isActivecode=true
+      this.isActivecode=false
+      this.codeShow = false
     },
     // 密码
     focusEvent4(){
-      this.isActivepwd=true
+      this.isActivepwd=false
+      this.pwdShow=false
     },
     // 确认密码
     focusEvent5(){
-	  this.repwdShow=false
-      this.isActiverepwd=true
+      this.repwdShow=false
+      this.isActiverepwd=false
     },
     // 点击图标切换密码类型
     changeRegisterPasswordStatus() {
-      // const info = JSON.parse(JSON.stringify(this.info))
       this.showPassword = !this.showPassword
-      // this.info = info
-    },
-    // 输入框
-    input(){
-      // if (!(/^1[3456789]\d{9}$/.test(this.mobile))){
-      //   this.isActivemobile=true;
-      //   this.mobileShow=true;
-      // }else if (!this.code){
-      //   this.isActivemobile=false;
-      //   this.mobileShow=false;
-      //   this.isActivecode=true;
-      //   this.codeShow=true;
-      // }else if (!this.password){
-      //   this.isActivecode=false;
-      //   this.codeShow=false;
-      //   this.isActivepwd=true;
-      //   this.pwdShow=true;
-      // }else if (!this.password_repetition) {
-      //   this.isActiverepwd=true;
-      //   this.repwdShow=true;
-      //   this.isActivepwd=false;
-      //   this.pwdShow=false;
-      // }else if(this.password !==this.password_repetition){
-      //   this.isActiverepwd=true;
-      //   this.repwdShow=true;
-      // }else{
-      //   this.isActiverepwd=false;
-      //   this.repwdShow=false;
-      // }
-
     },
     register() {
       if(this.loginType == 1){
@@ -539,7 +537,7 @@ export default {
         if(_this.mobile==''){
           _this.mobileShow=true
           return
-        }else if(!_this.code && !_this.password && !_this.password_repetition){
+        }else if(!_this.code && !_this.password && !_this.password_repetition && !_this.imgCode){
           _this.isActivemobile=false;
           _this.mobileShow=false;
           _this.isActivecode=true;
@@ -548,8 +546,10 @@ export default {
           _this.pwdShow=true;
           _this.isActiverepwd=true;
           _this.repwdShow=true;
+          _this.codeErr=true;
           return
         }
+
         // _this.requesting = true
         this.$axios({
             method: 'post',
@@ -599,14 +599,14 @@ export default {
       }else{
         // 邮箱注册
         const _this = this
-         if(!_this.agreement) {
+        if(!_this.agreement) {
           _this.$errorMessage(_this.$t(`${lang}.agreePlease`))
           return
         }
         if(_this.email==''){
           _this.emailShow=true
           return false;
-        }else if(!_this.code && !_this.password && !_this.password_repetition){
+        }else if(!_this.code && !_this.password && !_this.password_repetition && !_this.imgCode){
           _this.isActivemail = false;
           _this.emailShow=false;
           _this.isActivecode=true;
@@ -615,6 +615,7 @@ export default {
           _this.pwdShow=true;
           _this.isActiverepwd=true;
           _this.repwdShow=true;
+          _this.codeErr = true;
           return
         }
         this.$axios({
@@ -699,12 +700,24 @@ export default {
         _this.emailShow=true
         return
       }
-      // if (_this.waiting) {
-      //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-      //   return
-      // }
+
+      if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(this.email))){
+        this.$errorMessage(_this.$t(`${lang}.mailTips`))
+        return
+      }
+
+      if(!_this.imgCode){
+        _this.codeErr = true
+        return
+      }
+
+      if(_this.imgCode != _this.pictureCode){
+        this.$errorMessage(_this.$t(`${lang}.codeTips`))
+        return
+      }
+
       _this.setWait()
-       this.$axios({
+      this.$axios({
         method: "post",
         url: '/web/site/email-code',
         data:{
@@ -736,15 +749,25 @@ export default {
       if (_this.mobile.length === 0) {
         _this.mobileShow=true
         return
-      }else{
-        _this.setWait()
       }
-      // if (_this.waiting) {
-      //   this.$errorMessage(_this.$t(`${langcode}.pleaseWait`))
-      //   return
-      // }
 
-       this.$axios({
+      if(!_this.mobile && !(/^1[3456789]\d{9}$/.test(this.mobile))){
+        this.$errorMessage(_this.$t(`${lang}.phoneTips`))
+        return
+      }
+
+      if(!_this.imgCode){
+        _this.codeErr = true
+        return
+      }
+
+      if(_this.imgCode != _this.pictureCode){
+        this.$errorMessage(_this.$t(`${lang}.codeTips`))
+        return
+      }
+
+      _this.setWait()
+      this.$axios({
         method: "post",
         url: '/web/site/sms-code',
         data:{
@@ -776,14 +799,6 @@ export default {
     resetCountDown() {
       this.waitingTime = 0
     },
-    inputEvent2(){
-      // var that = this;
-      // if(this.email.length == 60){
-      //   that.emailShow = true;
-      // }else{
-      //   this.emailShow = false;
-      // }
-    },
     firstName(){
       if(this.firstname.length == 30){
         this.firstnameShow = true;
@@ -804,6 +819,25 @@ export default {
       }else{
         this.codeShow = false;
       }
+    },
+    // 生成驗證碼
+    refreshCode () {
+      // const info = JSON.parse(JSON.stringify(this.info))
+      const result = []
+      const library = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+      this.identifyCode = ''
+      for (let i = 0; i < 4; i++) {
+        result.push(library[Math.floor(Math.random() * 9)])
+      }
+      this.pictureCode = result.join('')
+      // this.info = info
+    },
+    verifyCode() {
+      if(this.imgCode == ''){
+        this.codeErr = true
+      }else{
+        this.codeErr = false
+      }
     }
 
   }
@@ -815,7 +849,10 @@ input::placeholder{
   color:#C0C4CC;
 }
 .active{
-  border-bottom: 1px solid #F3A18E!important;
+  // border-bottom: 1px solid #F3A18E!important;
+}
+.border{
+  border: 1px solid #F3A18E!important;
 }
 .getCode {
   width: 100%;
@@ -829,9 +866,6 @@ input::placeholder{
   box-sizing: border-box;
 }
 
-.getCode:disabled {
-  // background-color: #999999;
-}
 .margin-bottom-29 {
   margin-bottom: 29px;
 }
@@ -948,5 +982,36 @@ input::placeholder{
 .area-code .iconxiala{
   margin: 2px 0 0 8%;
   font-size: 14px;
+}
+
+.verification-code-input{
+  width: 161px;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 20px;
+  border: 1px solid #e6e6e6;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 400;
+  color: #999999;
+  margin-right: 10px;
+}
+
+.code-picture {
+  width: 109px;
+  height: 36px;
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.margin-bottom-20{
+  margin-bottom: 18px !important;
+}
+.margin-bottom-26{
+  margin-bottom: 26px;
 }
 </style>

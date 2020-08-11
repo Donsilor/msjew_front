@@ -565,7 +565,9 @@
         "reset": "SUBMIT",
         "hadReset": "Successful Password Reset. Log In With Your New Password",
         "waitTimes": "Wait For {second} Seconds To Jump To Login Page.",
-        "loginNow": "SINN IN NOW"
+        "loginNow": "SINN IN NOW",
+        "code": "Verification*",
+        "codeTips": "Enter correct verification code"
     },
     "contactUs": {
         "callToUs": "Call us",
