@@ -585,7 +585,7 @@ export default {
         })
     },
     async orderNow() {
-      if(this.$store.state.platform == 20 && !this.$store.state.token){
+      if(!this.isLogin && this.$store.state.platform == 20){
         this.ifShowLoginPop = true
         return
       }
