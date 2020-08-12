@@ -558,7 +558,7 @@
             </div>
           </div>
         </div>
-        <ul class="services-list" v-if=" info.goodsServicesJsons.length > 0">
+        <ul class="services-list">
           <li
             v-for="(item, index) in info.goodsServicesJsons || []"
             :key="index"

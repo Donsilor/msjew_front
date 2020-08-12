@@ -224,7 +224,7 @@
               <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
            </div>
         </div>
-        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
+        <ul class="services-list">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
