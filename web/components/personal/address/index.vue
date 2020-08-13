@@ -8,49 +8,53 @@
       <div
         v-for="(a, index) in address"
         :key="index"
-        :class="{ 'addr-active': a.is_default === 1 }"
+        :class="{ 'addr-active': a.is_default == 1 }"
         class="addr-block"
       >
-        <div class="addr-title">
-          <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
+        <div class="box-left">
+          <div class="addr-title">
+            <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
+          </div>
+          <div class="addr-user">
+            <div>{{ a.realname }}</div>
+            <div>{{ $t(`${lang}.get`) }}</div>
+          </div>
+          <div class="addr-address">
+            <!-- {{ a.address_name }}{{ a.address_details }} -->
+            {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
+            }}{{ a.address_details }}
+          </div>
+          <div class="addr-user-phone">
+            <div>{{ a.mobile_code }}</div>
+            <div>{{ a.mobile }}</div>
+          </div>
+          <div class="font-size-14 color-333">{{ a.zip_code }}</div>
+          <div class="font-size-14 color-333">{{ a.email }}</div>
+          <div
+            v-if="a.is_default == 1"
+            class="font-size-14"
+            style="color: #f29b87; margin-top: 6px;"
+          >
+            {{ $t(`${lang}.mrAddress`) }}
+          </div>
+          <div class="addr-board" @click="changeDefaultAddress(a.id)" />
+          <i
+            class="iconfont iconlajitong"
+            @click="
+              isDel = true
+              delId = a.id
+            "
+          />
+          <div class="addr-btn" @click="changeAddress(a)">
+            {{ $t(`${lang}.change`) }}
+          </div>
+          <img
+            v-show="a.is_default == 1"
+            src="../../../static/personal/account/address-bar.png"
+          />
         </div>
-        <div class="addr-user">
-          <div>{{ a.realname }}</div>
-          <div>{{ $t(`${lang}.get`) }}</div>
-        </div>
-        <div class="addr-address">
-          <!-- {{ a.address_name }}{{ a.address_details }} -->
-           {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
-          }}{{ a.address_details }}
-        </div>
-        <div class="addr-user-phone">
-          <div>{{ a.mobile_code }}</div>
-          <div>{{ a.mobile }}</div>
-        </div>
-        <div class="font-size-14 color-333">{{ a.zip_code }}</div>
-        <div class="font-size-14 color-333">{{ a.email }}</div>
-        <div
-          v-if="a.is_default === 1"
-          class="font-size-14"
-          style="color: #f29b87; margin-top: 6px;"
-        >
-          {{ $t(`${lang}.mrAddress`) }}
-        </div>
-        <div class="addr-board" @click="changeDefaultAddress(a.id)" />
-        <i
-          class="iconfont iconlajitong"
-          @click="
-            isDel = true
-            delId = a.id
-          "
-        />
-        <div class="addr-btn" @click="changeAddress(a)">
-          {{ $t(`${lang}.change`) }}
-        </div>
-        <img
-          v-show="a.is_default === 1"
-          src="../../../static/personal/account/address-bar.png"
-        />
+
+        <div>123</div>
       </div>
     </div>
     <div class="addr-mid dle-btn" id="addbox">
@@ -609,9 +613,20 @@ export default {
     this.getData()
   },
   mounted(){
+    // console.log("ffff",this.phoneNum.phone_code)
     this.language = this.$store.state.language
   },
   methods: {
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
     // 获取地址
     getData() {
       this.$axios
@@ -1072,6 +1087,7 @@ export default {
       margin: 0 3% 20px 0;
       border: 1px solid rgba(230, 230, 230, 1);
       box-sizing: border-box;
+      display: flex;
       .addr-title {
         display: flex;
         align-items: flex-end;
@@ -1182,7 +1198,7 @@ export default {
       }
     }
     .addr-active {
-      border: 1px solid rgba(212, 196, 188, 1);
+      border-color: #d4c4bc;
     }
   }
   .addr-middle-btn {
