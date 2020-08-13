@@ -572,7 +572,9 @@
         "reset": "确认重置",
         "hadReset": "您的密码已经重新设置，请以新密码登入",
         "waitTimes": "{second} 秒后自动返回登入页面",
-        "loginNow": "立即登入"
+        "loginNow": "立即登入",
+        "code": "请输入验证码*",
+        "codeTips": "请输入正确验证码"
     },
     "contactUs": {
         "callToUs": "致电我们",
@@ -1137,7 +1139,8 @@
         "deleteWishSuccess": "删除心愿单成功",
         "searchSimilar": "找类似",
         "discounts1": "优惠券",
-        "discounts2": "折"
+        "discounts2": "折",
+        "firstLogin": "请先登录或注册！"
     },
     "pay": {
         "confirmOrder": "购物车",
@@ -1186,7 +1189,8 @@
         "SwiftCode": "SWIFT CODE:",
         "uploadPhotos": "上传图片",
         "Note3":"注：此货币是按照BDD官网汇率作为参考标准.",
-        "NotSupportPay":"当前支付方式，不支持USD支付，请返回上个页面切换货币或更换其它支付方式完成支付！"
+        "NotSupportPay":"当前支付方式，不支持USD支付，请返回上个页面切换货币或更换其它支付方式完成支付！",
+        "ScanCode":"请使用微信扫描二维码"
     },
     "finishPay": {
         "PayPending1": "订单已经提交，系统正在处理中,请稍等。",
@@ -1319,7 +1323,8 @@
         "oddPrice": "原  价",
         "newPrice": "折后价",
         "needLogin": "请先登录，才能领取优惠券",
-        "buyNow":"立即购买"
+        "buyNow":"立即购买",
+        "firstLogin": "请先登录或注册！"
     },
     "policies": {
         "layout": {
@@ -2479,7 +2484,8 @@
         "error": "页面出错了",
         "soleOut": "商品已售罄",
         "pleaseSelect":"请先选择商品参数！",
-        "doubleRingTip":"您未选择参数或已选择的参数已售罄，请重新选择！"
+        "doubleRingTip":"您未选择参数或已选择的参数已售罄，请重新选择！",
+        "firstLogin": "请先登录或注册！"
     },
     "order": {
         "firstLogin": "请先登录或注册！",

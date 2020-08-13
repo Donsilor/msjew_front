@@ -37,7 +37,7 @@
       <div class="step-line" />
     </div>
     <div
-      :style="[{ width: $store.getters.hadLogin ? '100%' : '50%' }]"
+      :style="[{ width: $store.getters.hadLogin ? '100%' : '100%' }]"
       class="success-info pull-left"
     >
       <div class="diamond-img">
@@ -58,18 +58,18 @@
       </div>
       <eftGuide ref="eft-guide" />
     </div>
-    <div v-if="!$store.getters.hadLogin" class="success-login pull-left">
+    <!-- <div v-if="!$store.getters.hadLogin" class="success-login pull-left">
       <h4>{{ $t(`${lang}.registered`) }}</h4>
       <p>{{ $t(`${lang}.balabalabalaAgain`) }}</p>
       <span @click="gologin">{{ $t(`${lang}.registered`) }}</span>
-    </div>
-    <div class="middle-bar">
+    </div> -->
+    <!-- <div class="middle-bar">
       <i class="iconfont icongantanhao" /><span>{{
         $t(`${lang}.balabalaAgain`)
       }}</span>
-    </div>
+    </div> -->
     <div class="order-info">
-      <div class="left-info">
+      <!-- <div class="left-info">
         <div class="address-info">
           <div class="new-address-title">
             <div class="na-line" />
@@ -79,9 +79,9 @@
             <div class="user-name">
               {{ data.orderAddress.lastName }}{{ data.orderAddress.firstName
               }}<span>{{ $t(`${lang}.get`) }}</span>
-            </div>
+            </div> -->
             <!--            <div class="user-phone"><span>{{ data.orderAddress.userTelCode }}</span>{{ data.orderAddress.userTel }}</div>-->
-          </div>
+          <!-- </div>
           <div class="user-address">
             {{ data.orderAddress.countryName }}-{{
               data.orderAddress.provinceName
@@ -92,16 +92,16 @@
             <div>{{ data.orderAddress.userTel }}</div>
           </div>
           <div class="post-num">{{ data.orderAddress.zipCode }}</div>
-          <div class="email-address">{{ data.orderAddress.userMail }}</div>
+          <div class="email-address">{{ data.orderAddress.userMail }}</div> -->
           <!--          <div class="country-code">CHN</div>-->
-          <div class="line">
+          <!-- <div class="line">
             <img
               src="../../../static/personal/account/address-bar.png"
               alt=""
             />
           </div>
-        </div>
-        <div class="send-info">
+        </div> -->
+        <!-- <div class="send-info">
           <div class="new-address-title">
             <div class="na-line" />
             <div class="na-title">{{ lang['fa-fo-info'] }}</div>
@@ -116,9 +116,9 @@
               <dd>{{ $t(`${lang}.newinfo6`) }}</dd>
             </dl>
           </div>
-        </div>
-      </div>
-      <div class="right-info">
+        </div> -->
+      <!-- </div> -->
+      <!-- <div class="right-info">
         <div class="new-address-title">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
@@ -175,7 +175,7 @@
             <div>{{ formatCoin(data.coinCode) }} {{ formatMoney(data.orderAmount) }}</div>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>

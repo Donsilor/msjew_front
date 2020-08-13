@@ -592,6 +592,10 @@ export default {
     
     // 立即购买
     async orderNow() {
+      if(!this.isLogin && this.$store.state.platform == 21){
+        this.$toast(this.lang.firstLogin)
+        return
+      }
       console.log(`in!!!!!`)
       const melo = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.melo)

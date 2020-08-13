@@ -3,88 +3,56 @@
     <div class="title-bar">
       <span class="title">{{ lang.forget }}</span>
     </div>
-    <!-- 中文简体 -->
-    <!-- <div v-if="language==='zh_CN'"> -->
-      <!-- <div class="line-box input-line">
-        <bdd-input
-          v-model="mobile"
-          :placeholder="lang.mobile"
-          @blur="inputKey('mobile')"
-        ></bdd-input>
-        <div
-          :class="['error-message', { active: !trueMobile && hadInput('mobile') }]"
-        >
-          {{ lang['email-error'] }}
-        </div>
-      </div>
 
-      <div class="line-box input-line">
-        <div v-show="showCodeMessage" class="message">
-          {{ lang.inputUnder }} {{ mobile }} {{ lang.theEmailCode }}
-        </div>
-        <div style="position: relative;">
-          <bdd-input
-            v-model="code"
-            :placeholder="`${lang.code}`"
-            :padding="'0 30% 0 3%'"
-            @blur="inputKey('code')"
-          ></bdd-input>
-          <div class="send-code">
+    <div class="line-box input-line" v-if="loginType == 2">
+      <bdd-input
+        v-model="mobile"
+        :placeholder="lang.mobile"
+        @blur="inputKey('mobile')"
+      ></bdd-input>
+      <div
+        :class="['error-message', { active: !trueMobile && hadInput('mobile') }]"
+      >
+        {{ lang['mobile-error'] }}
+      </div>
+    </div>
 
-            <button :class="['getCode', className]" :disabled="waiting" @click="sendMobileCode">
-              {{ waitingText }}
-            </button>
-          </div>
-        </div>
-        <div
-          :class="[
-            'error-message',
-            { active: hadInput('code') && !trueCode }
-          ]"
-        >
-          {{ lang.codeError }}
-        </div>
-      </div> -->
-      <div class="line-box input-line" v-if="loginType == 2">
-        <bdd-input
-          v-model="mobile"
-          :placeholder="lang.mobile"
-          @blur="inputKey('mobile')"
-        ></bdd-input>
-        <div
-          :class="['error-message', { active: !trueMobile && hadInput('mobile') }]"
-        >
-          {{ lang['mobile-error'] }}
-        </div>
+    <div class="line-box input-line" v-else>
+      <bdd-input
+        v-model="email"
+        :placeholder="lang.email"
+        @blur="inputKey('email')"
+      ></bdd-input>
+      <div
+        :class="['error-message', { active: !trueEmail && hadInput('email') }]"
+      >
+        {{ lang['email-error'] }}
       </div>
+    </div>
 
-      <div class="line-box input-line" v-else>
-        <bdd-input
-          v-model="email"
-          :placeholder="lang.email"
-          @blur="inputKey('email')"
-        ></bdd-input>
-        <div
-          :class="['error-message', { active: !trueEmail && hadInput('email') }]"
-        >
-          {{ lang['email-error'] }}
+    <!-- 图片验证码 -->
+    <div class="line-box input-line">
+      <div class="code">
+        <bdd-input v-model="code2" :placeholder="lang['code']" @focus="ifShowErr = false" @blur="inputImgKey" :maxl="maxlength"></bdd-input>
+        <div class="code-picture" @click="refreshCode">
+          <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
         </div>
       </div>
+      <div :class="['error-message',{ active: ifShowErr }]">
+        {{ lang['code'] }}
+      </div>
+    </div>
 
-      <div class="line-box" v-if="loginType == 2">
-        <button class="full-btn to-next" @click="toNextCN">
-          <span class="btn-message">{{ lang.next }}</span>
-        </button>
-      </div>
-    <!-- </div> -->
-    <!-- 繁体 -->
-    <!-- <div v-else > -->
-      <div class="line-box" v-else>
-        <button class="full-btn to-next" @click="toNext">
-          <span class="btn-message">{{ lang.next }}</span>
-        </button>
-      </div>
-    <!-- </div> -->
+    <div class="line-box" v-if="loginType == 2">
+      <button class="full-btn to-next" @click="toNextCN">
+        <span class="btn-message">{{ lang.next }}</span>
+      </button>
+    </div>
+    <div class="line-box" v-else>
+      <button class="full-btn to-next" @click="toNext">
+        <span class="btn-message">{{ lang.next }}</span>
+      </button>
+    </div>
 
   </section>
 </template>
@@ -122,7 +90,11 @@ export default {
       waiting: false,
       waitingTime: defaultTime,
       waitingText: this.LANGUAGE.components.sendEmailCode.sendCode,
-      loginType:''
+      loginType:'',
+      maxlength: '30',
+      pictureCode: '',
+      code2: '',
+      ifShowErr: false
     }
   },
   computed: {
@@ -142,6 +114,7 @@ export default {
   mounted(){
     this.loginType=localStorage.getItem('loginType')
     this.language = this.getCookie('language')
+    this.refreshCode()
   },
   methods: {
     // 查询cookie
@@ -158,7 +131,7 @@ export default {
     sendMobileCode(){
       this.hadSendCode = true
       const _this = this
-       _this.setWait()
+      _this.setWait()
       this.$axios({
         method: "post",
         url: "/web/site/sms-code",
@@ -211,34 +184,27 @@ export default {
       }
     },
     toNextCN() {
-      this.emitEvent2()
+      var res = {mobile: this.mobile, code: this.code2, pictureCode: this.pictureCode};
+      this.$emit('mobileFinish', res)
     },
     toNext() {
-      // this.$router.push({
-      //   name: 'new-password'
-      // })
-      // if (!this.email) {
-      //   this.$toast('郵箱不能为空')
-      //   return
-      // }
-      // if (!this.trueEmail) {
-      //   this.$toast('郵箱格式錯誤')
-      //   return
-      // }
-      this.emitEvent()
+      var res = {email: this.email, code: this.code2, pictureCode: this.pictureCode};
+      this.$emit('emailFinish', res)
     },
-    emitEvent() {
-      this.$emit('emailFinish', this.email)
-      // console.log('emitEvent')
-      // if(this.language==='zh_CN'){
-      //   this.$emit('mobileFinish',this.mobile)
-      // }else{
-      //   this.$emit('emailFinish', this.email)
-      // }
+    // 生成驗證碼
+    refreshCode () {
+      // const info = JSON.parse(JSON.stringify(this.info))
+      const result = []
+      const library = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+      this.identifyCode = ''
+      for (let i = 0; i < 4; i++) {
+        result.push(library[Math.floor(Math.random() * 9)])
+      }
+      this.pictureCode = result.join('')
+      // this.info = info
     },
-    emitEvent2() {
-      // console.log('emitEvent2')
-      this.$emit('mobileFinish',this.mobile)
+    inputImgKey() {
+      this.ifShowErr = this.code2 ? false : true
     }
   }
 }
@@ -338,5 +304,18 @@ export default {
     height: 20px;
     line-height: 26px;
     opacity: 1;
+  }
+  
+  .code-picture {
+    width: 109px;
+    height: 40px;
+  }
+  .code-picture img {
+      width: 100% !important;
+      height: 100% !important;
+  }
+  .code {
+    display: flex;
+    justify-content: space-between;
   }
 </style>

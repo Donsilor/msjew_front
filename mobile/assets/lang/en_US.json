@@ -130,7 +130,8 @@
       "toast1": "Choose products before you pay",
       "toast2": "Deleted",
       "discounts1": "Coupon",
-      "discounts2": "off"
+      "discounts2": "off",
+      "firstLogin": "Please login or register!"
     },
     "invoice": {
       "personal":"personal",
@@ -596,14 +597,20 @@
       "discountedAmount": "Discounted amount",
       "Untied":"Untied",
       "couponAmount": "Coupon",
-      "payType1": "Paypal",
-      "payType2": "Paypal Card",
+      "payType1": "Wechat",
+      "payType2": "Alipay",
       "payType3": "UnionPay",
-      "payType4": "Alipay",
-      "payType5": "Wechat",
-      "payType6": "Alipay HK",
-      "payType7": "WireTransfer",
-      "payType8": "OFFLINE"
+      "payType4": "小程序",
+      "payType5": "余额",
+      "payType6": "Paypal",
+      "payType7": "Paypal Card",
+      "payType8": "支付宝国际版",
+      "payType9": "UnionPay",
+      "payType10": "Alipay",
+      "payType11": "Wechat",
+      "payType12": "Alipay HK",
+      "payType13": "CARD",
+      "payType14": "WireTransfer"
     },
     "logisticInfo":{
       "title": "Order",
@@ -644,7 +651,8 @@
     "addCartFail": "Failed to add to cart",
     "discounts1": "Coupon",
     "discounts2": "off",
-    "buyNow":"Order Now"
+    "buyNow":"Order Now",
+    "firstLogin": "Please login or register!"
   },
   "diamond": {},
   "engagement": {
@@ -661,7 +669,9 @@
       "code-null": "Enter verification code",
       "code-error": "Enter correct verification code",
       "password-null": "Enter password",
-      "password-not-same": "Entered passwords differ"
+      "password-not-same": "Entered passwords differ",
+      "code": "Enter verification code *",
+      "codeError": "Enter correct verification code"
     },
     "index": {
       "forget": "Forgot password?",
@@ -670,7 +680,8 @@
       "email-error": "Enter correct email",
       "mobile-error": "Wrong phone format",
       "next": "Next",
-      "code": "Enter verification code *"
+      "code": "Enter verification code *",
+      "codeError": "Enter correct verification code"
     },
     "new-password": {
       "code": "Verification Code",
@@ -711,6 +722,7 @@
       "forget": "FORGOT PASSWORD?",
       "Code": "Enter verification code",
       "code-error": "Verification Code Error",
+      "codeError": "Enter correct verification code",
       "slider-verify-first": "Complete verification to unlock",
       "slider-verify": "Complete verification to unlock",
       "input-password": "Enter login password",
@@ -829,6 +841,7 @@
     "phoneError": "Your mobile phone number format is not correct, only support the mainland mobile phone number!",
     "inputUnder": "Enter the verification code sent to",
     "theEmailCode": "Check the spam folder or click on send if you fail to receive the e-mail",
+    "thePhoneCode": "if you do not receive the SMS, please pay attention to whether it is blocked or click send later",
     "code": "Verification Code",
     "inputCode": "Enter verification code",
     "codeError": "Enter correct verification code",
@@ -839,7 +852,10 @@
     "register": "REGISTER",
     "registerSuccess": "Registered",
     "tickTheBDDTerms": "Please read and agree to the BDD Terms & Conditions and Privacy Policy",
-    "area-code": "China"
+    "area-code": "China",
+    "Code": "Enter verification code",
+    "code-error": "Verification Code Error",
+    "inputPhone": "Enter correct mobile number"
   },
   "site-switch": {
     "chooseLanguageCoin": "choose language & currency",
@@ -1162,7 +1178,8 @@
     "oddPrice": "Original price",
     "newPrice": "Discount price",
     "needLogin": "Please login before redeem the coupon.",
-    "buyNow":"Order Now"
+    "buyNow":"Order Now",
+    "firstLogin": "Please login or register!"
   },
   "listCommons": {
     "sliders": [

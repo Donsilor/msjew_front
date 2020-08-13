@@ -5,9 +5,7 @@
         <span class="title">
           {{ lang['login'] }}
         </span>
-        <!-- <span v-if="loginType == 1"  class="register" @click="toEmailRegister">
-          {{ lang['no-account'] }}
-        </span> -->
+
         <span  class="register" @click="toRegister">
           {{ lang['no-account'] }}
         </span>
@@ -44,7 +42,7 @@
           {{ lang['password-error'] }}
         </div>
       </div>
-      <div class="line-box input-line" v-if="loginType == 2">
+      <div class="line-box input-line">
         <div class="code">
           <bdd-input v-model="code" :placeholder="lang['Code']" @blur="inputKey('code')" :maxl="maxlength" @input="keydown('15','code')"></bdd-input>
           <div class="code-picture" @click="refreshCode">
@@ -58,21 +56,6 @@
           {{ lang['code-error'] }}
         </div>
       </div>
-
-      <!-- <div v-show="needSliderVerify" class="line-box verify-line">
-      <slider-verify
-        ref="slider-verify"
-        @finish="sliderVerifyFinish"
-      ></slider-verify>
-      <div
-        :class="[
-          'error-message',
-          { active: needSliderVerify && !sliderVerify }
-        ]"
-      >
-        {{ lang['slider-verify-first'] }}
-      </div>
-    </div> -->
 
       <div class="line-box button-line" v-if="loginType == 2">
         <button class="full-btn login zh" @click="loginCN">
@@ -140,7 +123,8 @@ export default {
   mounted () {
     this.refreshCode()
     this.loginType=localStorage.getItem('loginType')
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language;
+
     const _this = this
     _this.$nextTick(() => {
       // _this.getVerifyStatus()
@@ -148,16 +132,6 @@ export default {
     this.loginType = localStorage.getItem('loginType')
   },
   methods: {
-    // 查询cookie
-    getCookie (cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     // 生成驗證碼
     refreshCode () {
       // const info = JSON.parse(JSON.stringify(this.info))
@@ -168,16 +142,8 @@ export default {
         result.push(library[Math.floor(Math.random() * 9)])
       }
       this.pictureCode = result.join('')
-      // this.info = info
     },
-    // toEmailRegister () {
-    //   localStorage.setItem('registerType','1')
-    //   this.$router.push({
-    //     name: 'register'
-    //   })
-    // },
     toRegister () {
-      // localStorage.setItem('registerType','2')
       this.$router.push({
         name: 'register'
       })
@@ -188,29 +154,6 @@ export default {
         name: 'forget'
       })
     },
-    // getVerifyStatus() {
-    //   const _this = this
-    //   _this
-    //     .$axios({
-    //       method: 'get',
-    //       url: `/wap/login/getIdentifyCodeStatus`
-    //     })
-    //     .then(data => {
-    //       _this.verifyStatus = data
-    //       _this.resetSliderVerify()
-    //     })
-    //     .catch(err => {
-    //       _this.$toast.show(err.message)
-    //     })
-    // },
-    // sliderVerifyFinish() {
-    //   console.log('验证完成')
-    //   this.sliderVerify = true
-    // },
-    // resetSliderVerify() {
-    //   this.sliderVerify = false
-    //   this.$refs['slider-verify'].reset()
-    // },
     loginCN () {
       const _this = this
       if (_this.needSliderVerify && !_this.sliderVerify) {
@@ -225,8 +168,12 @@ export default {
         _this.$toast.show(_this.lang['input-password'])
         return
       }
-      if (_this.code !== _this.pictureCode) {
+      if (!_this.code) {
         _this.$toast.show(_this.lang['input-code'])
+        return
+      }
+      if (_this.code !== _this.pictureCode) {
+        _this.$toast.show(_this.lang['codeError'])
         return
       }
 
@@ -285,6 +232,14 @@ export default {
       }
       if (!_this.truePassword) {
         _this.$toast.show(_this.lang['input-password'])
+        return
+      }
+      if (!_this.code) {
+        _this.$toast.show(_this.lang['input-code'])
+        return
+      }
+      if (_this.code !== _this.pictureCode) {
+        _this.$toast.show(_this.lang['codeError'])
         return
       }
 

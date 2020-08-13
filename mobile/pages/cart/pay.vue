@@ -3,10 +3,10 @@
     <div class="paylist" v-show="paylist">
       <Header :title="lang.pay" tips="1" />
       <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
-        <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div>
+        <!-- <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div> -->
         <span>{{ formatCoin(info.coinType) }} </span>
         {{ formatMoney(price) }}
-        <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span>
+        <!-- <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span> -->
       </div>
       <div v-else class="proce">
         <span>{{ formatCoin(info.coinType) }} </span>
@@ -139,7 +139,17 @@
       <div class="tips">
         <i v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21">{{ lang.tips }}</span>
       </div>
-      <div class="btn" @click="goPaySuccess">
+      <div class="btn" @click="PayWechat" v-if="this.$store.state.platform == 21">
+        <span v-if="this.$store.state.platform == 21">{{ list[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 11">{{ listHk[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
+        <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
+        {{ lang.goPay }}
+        {{ formatCoin(info.coinType) }}
+        {{ formatMoney(price) }}
+      </div>
+
+      <div v-else class="btn" @click="goPaySuccess">
         <span v-if="this.$store.state.platform == 21">{{ list[typeIndex].title }}</span>
         <span v-if="this.$store.state.platform == 11">{{ listHk[typeIndex].title }}</span>
         <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
@@ -195,42 +205,42 @@ export default {
       actionLink: '',
       // 大陆支付
       list: [
-        {
-          url: '/cart/pay.png',
-          type: 6,
-          title: this.LANGUAGE.cart.pay.payType0,
-          des: this.LANGUAGE.cart.pay.type0Text
-        },
-        {
-          url: '/cart/visa_1.png',
-          type: 61,
-          title: this.LANGUAGE.cart.pay.payType6,
-          des: this.LANGUAGE.cart.pay.type6Text
-        },
+        // {
+        //   url: '/cart/pay.png',
+        //   type: 6,
+        //   title: this.LANGUAGE.cart.pay.payType0,
+        //   des: this.LANGUAGE.cart.pay.type0Text
+        // },
+        // {
+        //   url: '/cart/visa_1.png',
+        //   type: 61,
+        //   title: this.LANGUAGE.cart.pay.payType6,
+        //   des: this.LANGUAGE.cart.pay.type6Text
+        // },
         {
           url: '/cart/ap.png',
-          type: 82,
+          type: 2,
           title: this.LANGUAGE.cart.pay.payType3,
           des: this.LANGUAGE.cart.pay.type3Text
         },
         {
           url: '/cart/wac.png',
-          type: 83,
+          type: 1,
           title: this.LANGUAGE.cart.pay.payType4,
           des: this.LANGUAGE.cart.pay.type4Text
         },
-        {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-          url: '/cart/ph.png',
-          type: 89,
-          title: this.LANGUAGE.cart.pay.payType5,
-          des: this.LANGUAGE.cart.pay.type5Text,
-        }
+        // {
+        //   url: '/cart/up.png',
+        //   type: 81,
+        //   title: this.LANGUAGE.cart.pay.payType1,
+        //   des: this.LANGUAGE.cart.pay.type1Text
+        // },
+        // {
+        //   url: '/cart/ph.png',
+        //   type: 89,
+        //   title: this.LANGUAGE.cart.pay.payType5,
+        //   des: this.LANGUAGE.cart.pay.type5Text,
+        // }
         // {
         //   url: '/cart/paydollar.png',
         //   type: 8,
@@ -280,7 +290,7 @@ export default {
         {
           url: '/cart/ap-HK.png',
           type: 84,
-          title: this.LANGUAGE.cart.pay.payType3+' HK',
+          title: this.LANGUAGE.cart.pay.payType3+'  ',
           des: this.LANGUAGE.cart.pay.type3Text
         },
         {
@@ -348,13 +358,17 @@ export default {
       picList:[],
       imgList:[],
       paylist:true,
-      transfer:false
+      transfer:false,
+      code:this.$route.query.code,
+      openId:''
     }
   },
   created() {
+    console.log("aaaa",this.code)
     // console.log('w333', JSON.parse(this.$route.query.info))this.$refs.upload.list
   },
   methods: {
+    
     // 关闭弹窗
     closed(){
       this.paylist = true
@@ -409,23 +423,29 @@ export default {
       }
       let pay = ""
       if(this.typeIndex == 0){
-        pay = 6
-      }else if(this.typeIndex == 1){
-          pay = 61
-      }else if(this.typeIndex == 2){
         if(this.$store.state.platform === 21){
-          pay = 82
+          pay = 2
+        } else {
+          pay = 6
+        }
+      }else if(this.typeIndex == 1){
+        if(this.$store.state.platform === 21){
+          pay = 1
+        } else{
+          pay = 61
+        }
+      }else if(this.typeIndex == 2){
+        if(this.$store.state.platform === 11){
+          pay = 84
         }else if(this.$store.state.platform === 41){
           pay = 89
-        }else{
-          pay = 84
         }
       }else if(this.typeIndex == 3){
         pay = 83
       }else if(this.typeIndex == 4){
         pay = 81
       }else if(this.typeIndex == 5){
-        pay = 7
+        pay = 89
       }
 
       // if (this.typeIndex === 5) {
@@ -511,11 +531,184 @@ export default {
           // })
         })
     },
+    // 大陆微信支付
+    PayWechat() {
+      console.log("openid",this.openId )
+      this.isPay = true
+      console.log("aaa",this.typeIndex)
+      if(this.info.coinType === 'USD'){
+        if(this.typeIndex == 2){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+        if(this.typeIndex == 3){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+        if(this.typeIndex == 4){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+      }
+      let pay = ""
+      if(this.typeIndex == 0){
+        if(this.$store.state.platform === 21){
+          pay = 2
+        } else {
+          pay = 6
+        }
+      }else if(this.typeIndex == 1){
+        if(this.$store.state.platform === 21){
+          pay = 1
+        } else{
+          pay = 61
+        }
+      }else if(this.typeIndex == 2){
+        if(this.$store.state.platform === 11){
+          pay = 84
+        }else if(this.$store.state.platform === 41){
+          pay = 89
+        }
+      }else if(this.typeIndex == 3){
+        pay = 83
+      }else if(this.typeIndex == 4){
+        pay = 81
+      }else if(this.typeIndex == 5){
+        pay = 89
+      }
+
+      let baseUrl=this.$store.getters.baseUrl
+
+      let orderId = this.info.orderId
+     
+      let tradeType = ''
+      // let isWeiXin = ()=>{
+      //   return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
+      // }
+      if(pay == 1){
+        let ua = window.navigator.userAgent.toLowerCase();
+        if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){  //企业微信客户端
+          tradeType = 'js'
+        }else{
+          tradeType = 'mweb'
+        }
+      }else {
+        tradeType = 'wap'
+      }
+      // this.getCode()
+      // console.log("code",this.code) 
+      const openid = localStorage.getItem('openid')
+      this.$axios({ 
+        method: 'post',
+        url: `/web/pay/create`,
+        data: {
+          openid: openid,
+          orderId: orderId,
+          coinType: this.info.coinType,
+          payType: pay,
+          tradeType: tradeType,
+          returnUrl: baseUrl+'/complete/paySuccess?orderId='+orderId
+        }
+      })
+      .then(res => {
+        if(tradeType == 'mweb'){
+          window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
+        }
+        if(tradeType == 'js'){
+          function onBridgeReady(){
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {
+                  "appId":res.appId,     //公众号名称，由商户传入     
+                  "timeStamp":res.timeStamp,         //时间戳，自1970年以来的秒数     
+                  "nonceStr":res.nonceStr, //随机串     
+                  "package":res.package,     
+                  "signType":res.signType,         //微信签名方式：     
+                  "paySign":res.paySign //微信签名 
+                },
+                function(url){
+                  // alert(url)
+                  // alert(res.err_msg)
+                  // if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                  //   alert(11111111111)
+                  //   alert(baseUrl+'/complete/paySuccess?orderId='+_this.info.orderId)
+                  //    window.location.replace(baseUrl+'/complete/paySuccess?orderId='+this.info.orderId)
+                  // // 使用以上方式判断前端返回,微信团队郑重提示：
+                  //       //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                  // }
+                  return function(res) {
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                      // alert(11111111111)
+                      // alert(url)
+                      window.location.replace(url)
+                      // 使用以上方式判断前端返回,微信团队郑重提示：
+                      //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                  }
+                }
+            }(baseUrl+'/complete/paySuccess?orderId='+orderId)); 
+          }
+          if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+          }else{
+            onBridgeReady();
+          }
+          // this.isPay = false
+          // this.$router.replace({
+          //   name: 'complete-paySuccess-orderId-price-coinType',
+          //   params: {
+          //     orderId: this.info.orderId,
+          //     price: this.info.payAmount,
+          //     coinType: this.info.coinType
+          //   }
+          // })
+        }
+        if (res.config) {
+          if (pay !== 7) {
+            window.location.replace(res.config)
+          } else {
+            const promise = new Promise((resolve, reject) => {
+              this.form = []
+              const obj = JSON.parse(res.config)
+              const objKey = Object.keys(obj)
+              for (const i in objKey) {
+                if (objKey[i] === 'url') {
+                  this.actionLink = obj[objKey[i]]
+                  continue
+                }
+                const o = {
+                  name: objKey[i],
+                  val: obj[objKey[i]]
+                }
+                this.form.push(o)
+              }
+              resolve()
+            })
+            promise.then(() => {
+              setTimeout(() => {
+                this.isPay = false
+                document.getElementById('unionPay').click()
+              }, 2000)
+            })
+          }
+        } 
+        
+      })
+      .catch(err => {
+        this.$nuxt.$loading.finish()
+        console.log(err)
+        this.$toast.show(err.message)
+      })
+    },
     showSelect() {
       // console.log('6767')
     }
   },
   mounted() {
+    // this.getOpenId()
     fbq('track', 'InitiateCheckout');
   }
 }

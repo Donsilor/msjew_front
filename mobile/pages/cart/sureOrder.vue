@@ -459,18 +459,18 @@ export default {
       actionLink: '',
       // 大陆支付
       list2: [
-        {
-          url: '/cart/pay.png',
-          type: 6,
-          title: this.LANGUAGE.cart.pay.payType0,
-          des: this.LANGUAGE.cart.pay.type0Text
-        },
-        {
-          url: '/cart/visa_1.png',
-          type: 61,
-          title: this.LANGUAGE.cart.pay.payType6,
-          des: this.LANGUAGE.cart.pay.type6Text
-        },
+        // {
+        //   url: '/cart/pay.png',
+        //   type: 6,
+        //   title: this.LANGUAGE.cart.pay.payType0,
+        //   des: this.LANGUAGE.cart.pay.type0Text
+        // },
+        // {
+        //   url: '/cart/visa_1.png',
+        //   type: 61,
+        //   title: this.LANGUAGE.cart.pay.payType6,
+        //   des: this.LANGUAGE.cart.pay.type6Text
+        // },
         {
           url: '/cart/ap.png',
           type: 82,
@@ -483,18 +483,18 @@ export default {
           title: this.LANGUAGE.cart.pay.payType4,
           des: this.LANGUAGE.cart.pay.type4Text
         },
-        {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-          url: '/cart/ph.png',
-          type: 89,
-          title: this.LANGUAGE.cart.pay.payType5,
-          des: this.LANGUAGE.cart.pay.type5Text,
-        }
+        // {
+        //   url: '/cart/up.png',
+        //   type: 81,
+        //   title: this.LANGUAGE.cart.pay.payType1,
+        //   des: this.LANGUAGE.cart.pay.type1Text
+        // },
+        // {
+        //   url: '/cart/ph.png',
+        //   type: 89,
+        //   title: this.LANGUAGE.cart.pay.payType5,
+        //   des: this.LANGUAGE.cart.pay.type5Text,
+        // }
         // {
         //   url: '/cart/paydollar.png',
         //   type: 8,
@@ -638,7 +638,8 @@ export default {
       invoices:'',
       ifShowAddress: false,
       id:'',
-      queryId:''
+      queryId:'',
+      code:''
     }
   },
   computed: {
@@ -741,7 +742,19 @@ export default {
 
       this.getData() // 获取地址
       // this.getCouponList() // 获取优惠券列表
-
+      if(this.isLogin){
+        let ua = window.navigator.userAgent.toLowerCase();
+        if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){
+          this.getCode()
+        }
+      }
+      // let isWeiXin = ()=>{
+      //   return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
+      // }
+      // if(isWeiXin()){
+      //   this.getCode()
+      // }
+      // this.getOpenId()
       fbq('track', 'InitiateCheckout');
 
       // 此为迫不得已而为之，不敢改动上一手的代码
@@ -749,6 +762,7 @@ export default {
         this.productNum = document.getElementsByClassName('mod-item').length
       }, 1000)
     })
+    
   },
   methods: {
     show(){
@@ -792,16 +806,22 @@ export default {
       this.typeIndex = ind
       let pay = 0
       if(this.typeIndex == 0){
-        pay = 6
-      }else if(this.typeIndex == 1){
-          pay = 61
-      }else if(this.typeIndex == 2){
         if(this.$store.state.platform === 21){
           pay = 82
+        } else {
+          pay = 6
+        }
+      }else if(this.typeIndex == 1){
+        if(this.$store.state.platform === 21){
+          pay = 83
+        }else{
+          pay = 61
+        }
+      }else if(this.typeIndex == 2){
+        if(this.$store.state.platform === 11){
+          pay = 84
         }else if(this.$store.state.platform === 41){
           pay = 89
-        }else{
-          pay = 84
         }
       }else if(this.typeIndex == 3){
         pay = 83
@@ -1305,6 +1325,53 @@ export default {
         // }
       }
     },
+    getCode() { // 静默授权
+      var local = window.location.href // 获取页面url
+      // console.log("url",this.code)
+      var appid = 'wxdac61ce65e15cfc4' 
+      this.code = this.getUrlCode().code // 截取code
+      let wxid =  localStorage.getItem('openid') 
+      // localStorage.setItem('WeiXin_Code',this.code)
+     if(wxid == null || wxid == '' || wxid == undefined){
+      if (this.code == null || this.code === '') { // 如果没有code，则去请求
+        window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid}&redirect_uri=${encodeURIComponent(local)}&response_type=code&scope=snsapi_base&state=123#wechat_redirect`
+      } else {
+        console.log("openId",wxid)  
+        this.getOpenId (this.code)
+      }
+     }
+    },
+    getUrlCode() { // 截取url中的code方法
+      var url = location.search
+      this.winUrl = url
+      var theRequest = new Object()
+      if (url.indexOf("?") != -1) {
+          var str = url.substr(1)
+          var strs = str.split("&")
+          for(var i = 0; i < strs.length; i ++) {
+              theRequest[strs[i].split("=")[0]]=(strs[i].split("=")[1])
+          }
+      }
+      return theRequest
+    },
+    getOpenId (code) { // 通过code获取 openId等用户信息
+        let _this = this 
+        this.$axios({ 
+        method: 'get',
+        url: `/web/member/wechat/user-info`,
+        params: {
+          code: code
+        }
+      })
+      .then(res => {
+        localStorage.setItem('openid',res.openid) 
+        // this.openId = res.data
+        console.log("openid",res.openid)
+      })
+      .catch(err => {
+        this.$toast.show(err.message)
+      })
+    },
     // 支付
     //  已登录创建订单
     createOrder() {
@@ -1423,7 +1490,8 @@ export default {
               this.$router.replace({
                 name: 'cart-pay',
                 query: {
-                  info: JSON.stringify(res)
+                  info: JSON.stringify(res),
+                  code: JSON.stringify(this.code)
                 }
               })
             }

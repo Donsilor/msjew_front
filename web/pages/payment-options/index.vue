@@ -38,11 +38,12 @@
       <div class="new-address-title">
         <div class="na-line" />
         <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
-        <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang}.Note3`) }}</div>
+        <!-- <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang}.Note3`) }}</div> -->
       </div>
       <div class="pay-blocks">
         <!-- paypal -->
         <div
+          v-show="this.$store.state.platform !== 20"
           :class="{ 'pay-choose': payWay == 6 }"
           class="pay-block"
           @click="payWay = 6"
@@ -54,15 +55,16 @@
           <div v-show="payWay == 6" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 6" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
         <!-- vise -->
           <div
+          v-show="this.$store.state.platform !== 20"
           :class="{ 'pay-choose': payWay == 61 }"
           class="pay-block"
           @click="payWay = 61"
@@ -74,9 +76,9 @@
           <div v-show="payWay === 61" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 61" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -84,21 +86,21 @@
         <!-- 支付宝 -->
         <div
           v-show="this.$store.state.platform == 20"
-          :class="{ 'pay-choose': payWay == 82 }"
+          :class="{ 'pay-choose': payWay == 2 }"
           class="pay-block"
-          @click="payWay = 82"
+          @click="payWay = 2"
         >
           <div class="pay-img">
             <img src="../../static/order/alipay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay == 82" class="pay-price">
+          <div v-show="payWay == 2" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
-          <div v-show="payWay == 82" class="choose-tick">
+          </div> -->
+          <div v-show="payWay == 2" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
           <!-- <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div> -->
@@ -118,9 +120,9 @@
           <div v-show="payWay == 84" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 84" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -145,7 +147,7 @@
         </div> -->
         <!-- 微信 -->
         <div
-          v-show="this.$store.state.platform == 10 || this.$store.state.platform == 20"
+          v-show="this.$store.state.platform == 10"
           :class="{ 'pay-choose': payWay == 83 }"
           class="pay-block"
           @click="payWay = 83"
@@ -157,10 +159,34 @@
           <div v-show="payWay == 83" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 83" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+          <!-- <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
+          "><span>*</span> {{ $t(`${lang}.msg11`) }}</div> -->
+        </div>
+
+        <!-- 微信（大陆） -->
+        <div
+          v-show="this.$store.state.platform == 20"
+          :class="{ 'pay-choose': payWay == 1 }"
+          class="pay-block"
+          @click="payWay = 1"
+        >
+          <div class="pay-img">
+            <img src="../../static/order/wechatpay.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
+          <div v-show="payWay == 1" class="pay-price">
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
+          </div>
+          <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
+          </div> -->
+          <div v-show="payWay == 1" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
           <!-- <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
@@ -169,7 +195,7 @@
 
         <!-- 信用卡 -->
         <div
-          v-show="this.$store.state.platform == 10 || this.$store.state.platform == 20"
+          v-show="this.$store.state.platform == 10"
           :class="{ 'pay-choose': payWay == 81 }"
           class="pay-block"
           @click="payWay = 81"
@@ -181,9 +207,9 @@
           <div v-show="payWay === 81" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 81" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -192,7 +218,7 @@
 
         <!-- 电汇 -->
         <div
-           v-show="this.$store.state.platform !== 30"
+           v-show="this.$store.state.platform == 10 || this.$store.state.platform == 40"
           :class="{ 'pay-choose': payWay == 88 }"
           class="pay-block"
           @click="payWay = 88;wire()"
@@ -204,9 +230,9 @@
           <div v-show="payWay == 88" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <div v-show="payWay == 88 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+          <!-- <div v-show="payWay == 88 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div>
+          </div> -->
           <div v-show="payWay == 88" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
@@ -228,9 +254,10 @@
           </div>
         </div> -->
 
-        <!-- <div class="pay-question" @click="answer = true">?</div> -->
+        <!-- <div class="pay-question" @click="answer = true">?</div> mainland -->
       </div>
-      <div class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
+      <div v-if="this.$store.state.platform === 20" class="pay-btn" @click="mainLandPay()">{{ $t(`${lang}.pay`) }}</div>
+      <div v-else class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
     </div>
     <!-- 电汇弹窗 -->
     <div class="wireTransfer" v-show="transfer">
@@ -244,7 +271,7 @@
             <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
               {{ formatCoin(coinType) }} {{ formatMoney(price) }}
-              <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }})</span>
+              <!-- <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }})</span> -->
             </div>
             <div v-else class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
@@ -354,6 +381,22 @@
     />
 
     <div class="pop-layer" v-if="ifShowLayer"></div>
+    <!-- 微信二维码弹窗 -->
+    <div v-show="showEwm" class="qr_wrap">
+      <div class="msg">
+        <div class="msgbox">
+          <div class="content">
+            <img class="wx" src="../../static/common/wchat.jpg" alt="">
+            <div class="close" @click="shut"><i class="el-icon-close"></i></div>
+            <div class="qrcode-box">
+              <p class="mainTextColor">{{$t(`${lang}.ScanCode`)}}</p>
+              <p class="money">{{ formatCoin(coinType) }} {{ formatMoney(price) }}</p>
+              <div  id="qrcode"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -392,13 +435,32 @@ export default {
       accountlist:[],
       accountWay:'',
       coinHKD:'HKD',
-      ifShowLayer: false
+      ifShowLayer: false,
+      qrcodeObj: {}, // 二维码配置
+      ewm:'',
+      showEwm:false, //是否显示二维码弹窗
+      interval:null
 
       // myHeaders:this.$store.state.token,
       // imgDatas:[],
       // formData:new FormData(),
       // imgs: {},
       // imgLen:0, el-upload--picture-card
+    }
+  },
+  created(){
+    if(this.payWay == 1){
+        //实现轮询
+        this.interval = window.setInterval(() => {
+          setTimeout(this.payVerify(), 0);
+        }, 3000);
+    }
+  },
+  beforeDestroy() {
+    if(this.payWay == 1){
+      //清除轮询   
+      clearInterval(this.interval)
+      this.interval = null
     }
   },
   mounted(){
@@ -418,6 +480,9 @@ export default {
     ttPrice() {
       // return this.price * 0.985
       return this.price
+    },
+    code(){
+      return this.ewm
     }
   },
   methods: {
@@ -558,7 +623,7 @@ export default {
     },
     goPay() {
       if(this.$store.state.coin === 'USD'){
-        if(this.payWay == 82 || this.payWay == 83||this.payWay == 81||this.payWay == 84){
+        if(this.payWay == 2 || this.payWay == 83|| this.payWay == 1||this.payWay == 81||this.payWay == 84){
           this.$errorMessage(this.$t(`${lang}.NotSupportPay`))
           return
         }
@@ -571,10 +636,12 @@ export default {
         pay = 61
       }else if(this.payWay==81){
         pay = 81
-      }else if(this.payWay==82){
-        pay = 82
+      }else if(this.payWay==2){
+        pay = 2
       }else if(this.payWay==83){
         pay = 83
+      }else if(this.payWay==1){
+        pay = 1
       }else if(this.payWay==84){
         pay = 84
       }
@@ -657,12 +724,316 @@ export default {
             // console.log(err)
           }
         })
+    },
+    // 关闭二维码弹窗
+    shut(){
+      this.showEwm = false
+      clearInterval(this.interval)
+      this.interval = null
+    },
+    // 大陆支付
+    mainLandPay(){
+      if(this.$store.state.coin === 'USD'){
+        if(this.payWay == 2 || this.payWay == 83|| this.payWay == 1||this.payWay == 81||this.payWay == 84){
+          this.$errorMessage(this.$t(`${lang}.NotSupportPay`))
+          return
+        }
+      }
+
+      let pay = ""
+      if(this.payWay==6){
+        pay = 6
+      }else if(this.payWay==61){
+        pay = 61
+      }else if(this.payWay==81){
+        pay = 81
+      }else if(this.payWay==2){
+        pay = 2
+      }else if(this.payWay==83){
+        pay = 83
+      }else if(this.payWay==1){
+        pay = 1
+      }else if(this.payWay==84){
+        pay = 84
+      }
+      console.log("方式",pay)
+
+      let baseUrl=this.$store.getters.baseUrl
+
+      let tradeType = ''
+      let data = {}
+      if(pay == 1){
+        data ={
+          orderId: this.$route.query.orderId,
+          coinType: this.$route.query.coinType,
+          payType: pay,
+          tradeType:"native",
+          returnUrl:baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
+        }
+      } else{
+        data ={
+          orderId: this.$route.query.orderId,
+          coinType: this.$route.query.coinType,
+          payType: pay,
+          tradeType:"pc",
+          returnUrl:baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
+        }
+      }
+      this.goingPay = true
+      this.$axios
+        .post('/web/pay/create', data)
+        .then(res => {
+          if(this.ewm == ''){
+            this.ewm = res.data
+          }
+          this.getEwm()
+          console.log("url",this.ewm)
+          if (res.data.config) {
+            if (pay !== 7) {
+              window.location.replace(res.data.config)
+            } else {
+              const promise = new Promise((resolve, reject) => {
+                this.form = []
+                const obj = JSON.parse(res.data.config)
+                const objKey = Object.keys(obj)
+                for (const i in objKey) {
+                  if (objKey[i] === 'url') {
+                    this.actionLink = obj[objKey[i]]
+                    continue
+                  }
+                  const o = {
+                    name: objKey[i],
+                    val: obj[objKey[i]]
+                  }
+                  this.form.push(o)
+                }
+                resolve()
+              })
+              promise.then(() => {
+                setTimeout(() => {
+                  this.isPay = false
+                  document.getElementById('unionPay').click()
+                }, 2000)
+              })
+            }
+          } else {
+            this.showEwm = true
+            this.goingPay = false
+            // this.$router.replace({
+            //   path: '/complete-paySuccess',
+            //   query: {
+            //     orderId: this.$route.query.orderId,
+            //     price: this.$route.query.price,
+            //     coinType: this.$route.query.coinType,
+            //     type: `success`
+            //   }
+            // })
+          }
+        })
+        .catch(err => {
+          this.goingPay = false
+          if (!err.response) {
+            this.$message.error(err.message)
+          } else {
+            // console.log(err)
+          }
+        })
+    },
+    // 获取支付二维码
+    getEwm(){
+      console.log("二维码url",this.ewm)
+      document.getElementById("qrcode").innerHTML = "";
+      const code = this.ewm
+      this.qrcodeObj = new QRCode('qrcode', {
+        text: code,    
+        width: 200,
+        height: 200,
+        colorDark : '#000', // 0f0绿色 30AB37
+        colorLight : '#fff',
+        correctLevel : QRCode.CorrectLevel.H
+      });
+
+      if(this.payWay == 1){
+        //实现轮询
+        this.interval = window.setInterval(() => {
+          setTimeout(this.payVerify(), 0);
+        }, 3000);
+      }
+      // if(this.showEwm == false){
+      //   clearInterval(this.interval)
+      //   this.interval = null
+      // }
+    },
+    // 验证
+    payVerify() {
+      this.$axios({
+          url: '/web/pay/verify',
+          method: 'post',
+          data: {
+            return_url: window.location.href
+          }
+        }).then(res => {
+          const data = res.data
+          // this.showEwm = true
+          // setTimeout(() => {
+          //   this.showEwm = false
+          //   clearInterval(this.interval)
+          //   this.interval = null
+          // }, 1000 * 60);
+          if (data.verification_status === 'completed') {
+            console.log("成功")
+            this.showEwm = false
+            clearInterval(this.interval)
+            this.interval = null
+            // window.location.replace(baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId)
+            this.$router.replace({
+              path: '/complete-paySuccess',
+              query: {
+                orderId: this.$route.query.orderId,
+                type: `success`
+              }
+            })
+            
+          } 
+          // setTimeout(() => {
+          //   if(data.verification_status === 'failed'){
+          //     this.$router.replace({
+          //       path: '/complete-paySuccess/state/failed',
+          //       query: {
+          //         orderId: this.$route.query.orderId || this.$route.query.order_sn,
+          //       }
+          //     })
+          //   }
+          // }, 1000 * 10);
+          // else if (data.verification_status === 'failed') {
+              // setTimeout(() => {
+              //   this.showEwm = false
+              //   clearInterval(this.interval)
+              //   this.interval = null
+              // }, 1000 * 10);
+            // this.$router.replace({
+            //   path: '/complete-paySuccess/state/failed',
+            //   query: {
+            //     orderId: this.$route.query.orderId || this.$route.query.order_sn,
+            //   }
+            // })
+            // clearInterval(this.interval)
+            // this.interval = null
+          // }
+        })
+        .catch(err => {
+          clearInterval(this.interval)
+          this.interval = null
+        })
+    },
+    // clearTimer() {   //清除最近的100个定时器，如果只清除最后一个，会出现bug
+    //   let end = this.timerIdEnd;
+    //   let start = end - 100 > 0 ? end - 100 : 0;
+    //   for (let i = start; i <= end; i++) {
+    //     clearTimeout(i);
+    //   }
+    // },
+    // 查询cookie
+    getCookie(cname) {
+      const name = cname + '='
+      const ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        const c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+.qr_wrap{
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  z-index: 99999999;
+  top: 0;
+  left: 0;
+  #qrcode{
+    display: flex;
+    justify-content: center;
+  }
+  .msg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    .msgbox{
+      border-radius: 8px;
+      padding: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      width: 520px;
+      height: 430px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // height: 80%;
+      // height: 695px;
+      // overflow-y: scroll;
+      background: rgba(255, 255, 255, 1);
+      .content{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .close{
+          position: absolute;
+          right:0px;
+          top:0px;
+          font-size: 24px;
+          cursor: pointer;
+          color:#B5B5B5;
+        }
+      }
+      .wx{
+        position: absolute;
+        right:380px;
+        top:0px;
+        height: 41px;
+        width: 100px;
+      }
+      .cha{
+        text-align: right;
+        i{
+          font-size: 30px;
+        }
+      }
+    }
+  }
+  img{
+    width: 100%;
+    height: 100%;
+  }
+  .qrcode-box{
+    // width: 300px;
+    // height: 300px;
+  }
+  .mainTextColor{
+    text-align: center;
+    // margin-bottom: 20px;
+    font-size: 18px;
+    color:#333;
+    // font-size: 24px;
+    // color:green
+  }
+  .money{
+    text-align: center;
+    margin: 15px 0;
+    font-size: 16px;
+    color:#333;
+  }
+}
 div {
   box-sizing: border-box;
 }
