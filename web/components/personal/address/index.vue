@@ -30,13 +30,7 @@
           </div>
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
-          <div
-            v-if="a.is_default == 1"
-            class="font-size-14"
-            style="color: #f29b87; margin-top: 6px;"
-          >
-            {{ $t(`${lang}.mrAddress`) }}
-          </div>
+          
           <div class="addr-board" @click="changeDefaultAddress(a.id)" />
           <i
             class="iconfont iconlajitong"
@@ -54,10 +48,18 @@
           />
         </div>
 
-        <div>123</div>
+        <div class="box-right">
+          <div
+            v-if="a.is_default == 1"
+            class="font-size-14"
+            style="color: #f29b87; margin-top: 6px;"
+          >
+            {{ $t(`${lang}.mrAddress`) }}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="addr-mid dle-btn" id="addbox">
+    <div class="addr-mid dle-btn" id="addbox" style="border:1px solid red">
       <div v-show="!isShow" style="cursor: pointer;" class="middle-btn-show" @click="newAddress()">
         + {{ $t(`${lang}.newAddress`) }}
       </div>
@@ -1088,11 +1090,22 @@ export default {
       border: 1px solid rgba(230, 230, 230, 1);
       box-sizing: border-box;
       display: flex;
+      justify-content: space-between;
+      
+      .box-left{
+        width: 70%;
+        border: 1px solid red;
+      }
+      .box-right{
+        width: 25%;
+        border: 1px solid blue;
+      }
+
       .addr-title {
         display: flex;
         align-items: flex-end;
         margin-bottom: 10px;
-        width: 80%;
+
         div {
           font-size: 20px;
           color: #333;
