@@ -2698,18 +2698,23 @@ export default {
         }, 22)
         return
       }
+
       if(this.payWay==81 || this.payWay==2 ||this.payWay==83||this.payWay==1){
-        // this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        const topB = document.getElementsByClassName('layout-box')[0];
-        const that = this
-        let timer = setInterval(() => {
-          let ispeed = Math.floor(-that.scrollTop / 5)
-          topB.scrollTop = that.scrollTop + ispeed
-          if (that.scrollTop === 0) {
-            clearInterval(timer)
-          }
-        }, 22)
+        this.$emit('login', true)
         return
+        
+        // this.$errorMessage(this.$t(`${lang}.firstLogin`))
+
+        // const topB = document.getElementsByClassName('layout-box')[0];
+        // const that = this
+        // let timer = setInterval(() => {
+        //   let ispeed = Math.floor(-that.scrollTop / 5)
+        //   topB.scrollTop = that.scrollTop + ispeed
+        //   if (that.scrollTop === 0) {
+        //     clearInterval(timer)
+        //   }
+        // }, 22)
+        // return
       }
 
       let baseUrl=this.$store.getters.baseUrl

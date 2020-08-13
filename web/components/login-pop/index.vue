@@ -50,7 +50,7 @@
         <div class="relative margin-bottom-30">
           <div class="row-flex align-item-stretch">
             <div class="login-input verification-code-input">
-              <input v-model="code" @keypress="codeErr = false" type="text" :class="{border:codeErr}" :placeholder="$t(`${lang}.code`)" maxlength="4" />
+              <input v-model="code" @keypress="codeErr = false" type="text" :class="{active:codeErr}" :placeholder="$t(`${lang}.code`)" maxlength="4" />
             </div>
             <div class="code-picture" @click="refreshCode">
               <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
