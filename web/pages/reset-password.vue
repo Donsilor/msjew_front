@@ -237,6 +237,7 @@
               </div>
             </div>
           </li>
+          
           <li class="item item-2" :style="scheduleContentStyle">
             <h3 class="item-title">{{ $t(`${lang}.forgetPassword`) }}</h3>
             <div class="item-content">
@@ -489,7 +490,7 @@ export default {
   },
   mounted() {
     // console.log("语言",this.$store.state.language)
-	this.resetType = sessionStorage.getItem("loginType")
+	// this.resetType = sessionStorage.getItem("loginType")
 
     const _this = this
     _this.$nextTick(() => {
@@ -1039,8 +1040,8 @@ input{
 
         &.pass,
         &.active {
-          border: 1px solid rgba(185, 127, 139, 1);
-          box-shadow: 0px 5px 0px 0px rgba(238, 187, 194, 0.35);
+          // border: 1px solid rgba(185, 127, 139, 1);
+          // box-shadow: 0px 5px 0px 0px rgba(238, 187, 194, 0.35);
 
           .item-number {
             background-color: #ddb0aa;

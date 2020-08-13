@@ -71,7 +71,7 @@
             <input
               v-model.trim="mobile"
               type="text"
-			        @focus="focusEvent2"
+			        @focus="mobileShow = false"
               @blur="verifyMobile"
               v-bind:class="{active:isActivemobile}"
               :placeholder="$t(`${lang}.phoneBox`)"
