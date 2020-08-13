@@ -170,16 +170,16 @@
 				{{ $t(`${lang}.addToRing`) }}
             </button>
           </nuxt-link>
-          <button
+          <!-- <button
             class="buy-now"
             v-loading="addingCart"
             :class="['add-to-cart', { actived: canAddCart }]"
             @click="orderNow"
           >
             {{ $t(`${lang}.buyNow`) }}
-          </button>
+          </button> -->
 
-          <button
+          <!-- <button
             class="add-cart"
             v-loading="addingCart"
             :class="['add-to-cart', { active: canAddCart }]"
@@ -187,7 +187,7 @@
           >
 
             {{ $t(`${lang}.addCart`) }}
-          </button>
+          </button> -->
         </div>
         <div
           v-if="
@@ -563,6 +563,8 @@ export default {
   }
   .start-dj{
     width: 320px!important;
+    background: #aa8a7b!important;
+    color:#fff!important;
   }
   // .buy-now{
   //   margin-top: 10px;

@@ -287,7 +287,7 @@
             </button>
           </nuxt-link>
           
-          <button
+          <!-- <button
             v-loading="addingCart"
             :class="['add-to-cart', { actived: canAddCart }]"
             @click="orderNow"
@@ -301,7 +301,7 @@
             @click="addCart"
           >
             {{ $t(`${lang}.addCart`) }}
-          </button>
+          </button> -->
 
         </div>
         <div
@@ -925,5 +925,7 @@ export default {
 }
 .start-dj{
   width: 320px!important;
+  background: #aa8a7b!important;
+  color:#fff!important;
 }
 </style>

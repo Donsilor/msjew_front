@@ -299,7 +299,7 @@
             <button v-else :class="['add-to-cart', { active: canAddCart }]">
               {{ $t(`${lang}.ConfirmTheChoice`) }}
             </button>
-            <button
+            <!-- <button
               v-loading="orderingNow"
               :class="['add-to-cart', { actived: canAddCart }]"
               @click="orderNow"
@@ -313,7 +313,7 @@
               @click="addCart"
             >
               {{ $t(`${lang}.addCart`) }}
-            </button>
+            </button> -->
           </span>
           <!-- v-if="!$route.query.isBack" -->
           <span class="normal" v-else>
@@ -325,7 +325,7 @@
               <button class="start-dj">
                 {{ $t(`${lang}.ConfirmTheChoice`) }}
               </button>
-              <button
+              <!-- <button
                 v-loading="orderingNow"
                 :class="['add-to-cart', { actived: canAddCart }]"
                 @click="orderNow"
@@ -339,11 +339,14 @@
                 @click="addCart"
               >
                 {{ $t(`${lang}.addCart`) }}
-              </button>
+              </button> -->
             </div>
             </nuxt-link>
             <div v-else>
-              <button
+              <button  :class="['add-to-cart', { active: canAddCart }]">
+                {{ $t(`${lang}.ConfirmTheChoice`) }}
+              </button>
+              <!-- <button
                   v-loading="orderingNow"
                   :class="['add-to-cart', { actived: canAddCart }]"
                   @click="orderNow"
@@ -357,7 +360,7 @@
                   @click="addCart"
                 >
                   {{ $t(`${lang}.addCart`) }}
-                </button>
+                </button> -->
             </div>
           </span>
           
@@ -789,11 +792,17 @@ export default {
 <style lang="less" scoped>
 .start-dj{
   width: 320px!important;
+  background: #aa8a7b!important;
+  color:#fff!important;
 }
 .custom-made{
   .add-cart{
     width: 320px!important;
     // margin-top: 10px;
+  }
+  .active{
+    background: #aa8a7b!important;
+    color:#fff!important;
   }
 }
 .dz{
