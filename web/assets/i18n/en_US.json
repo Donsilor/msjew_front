@@ -1238,7 +1238,9 @@
         "newinfo3": "Please note:",
         "newinfo4": "- In-stock products: The transfer will take around 2-3 working days.",
         "newinfo5": "- Made-to-order products: If order-make is required, our CS Team will contact you asap to confirm the order details and pick-up time.",
-        "newinfo6": "- Special Arrangements During Festivals/Holidays: In case of public holidays, transfer and orders will be delayed. Our CS Team will confirm with you the details. Thanks for your understanding."
+        "newinfo6": "- Special Arrangements During Festivals/Holidays: In case of public holidays, transfer and orders will be delayed. Our CS Team will confirm with you the details. Thanks for your understanding.",
+        "toast1": "Copied",
+        "toast2": "This browser does not support Auto Copy"
     },
     "search": {
         "keywordPlaceholder": "Keyword",
