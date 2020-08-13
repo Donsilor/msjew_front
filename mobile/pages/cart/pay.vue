@@ -475,10 +475,22 @@ export default {
       })
         .then(res => {
           // console.log("config",res)
-          if (res.config) {
-            window.location.replace(res.config)
-          } else if (!res.config){
-            // console.log(88888888)
+          if(res){
+            if (res.config) {
+              window.location.replace(res.config)
+            } else {
+              // console.log(88888888)
+              this.isPay = false
+              this.$router.replace({
+                name: 'complete-paySuccess-orderId-price-coinType',
+                params: {
+                  orderId: this.info.orderId,
+                  price: this.info.payAmount,
+                  coinType: this.info.coinType
+                }
+              })
+            }
+          }else  if(!res){
             this.isPay = false
             this.$router.replace({
               name: 'complete-paySuccess-orderId-price-coinType',
@@ -488,20 +500,20 @@ export default {
                 coinType: this.info.coinType
               }
             })
-          }
+          } 
         })
         .catch(err => {
           this.$nuxt.$loading.finish()
           console.log(err)
           this.$toast.show(err.message)
-          // this.$router.replace({
-          //   name: 'cart-payFailed-orderId-price-coinType',
-          //   params: {
-          //     orderId: this.info.orderId,
-          //     price: this.info.orderAmount,
-          //     coinType: this.info.coinType
-          //   }
-          // })
+          this.$router.replace({
+            name: 'cart-paySuccess-orderId-price-coinType',
+            params: {
+              orderId: this.info.orderId,
+              price: this.info.orderAmount,
+              coinType: this.info.coinType
+            }
+          })
         })
     },
     // 大陆微信支付
