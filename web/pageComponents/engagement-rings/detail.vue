@@ -387,6 +387,7 @@
     <comments ref="product-comments" :good-id="info.id"></comments>
     <!-- 获取优惠券 -->
     <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
+    <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
   </div>
 </template>
 
@@ -719,14 +720,6 @@ export default {
         }
       }
       this.ringChecked = ringChecked
-    },
-    // 领取优惠券
-    getCoupon() {
-      if(!this.$store.getters.hadLogin) {
-        this.$errorMessage(this.$t(`${lang}.needLogin`))
-      }else{
-        this.showCoupon = true
-      }
     }
   }
 }

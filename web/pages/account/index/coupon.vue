@@ -78,11 +78,9 @@ export default {
     }
   },
   mounted(){
-	  this.language = this.getCookie('language');
+	  this.language = this.$store.state.language
     this.coin = this.$store.state.coin;
     this.nowTime = new Date().getTime()/1000;
-
-    console.log(222,this.nowTime)
 
     // 获取优惠券
     this.$axios.get('web/member/coupon/index', {
@@ -114,16 +112,7 @@ export default {
   methods: {
     more(){
       this.look = false
-    },
-	  getCookie(cname) {
-	    const name = cname + '='
-	    const ca = document.cookie.split(';')
-	    for (let i = 0; i < ca.length; i++) {
-	      const c = ca[i].trim()
-	      if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-	    }
-	    return ''
-	  }
+    }
   }
 }
 </script>

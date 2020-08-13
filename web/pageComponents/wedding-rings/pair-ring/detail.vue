@@ -710,6 +710,7 @@
     <comments ref="product-comments" :group-id="info.id"></comments>
     <!-- 获取优惠券 -->
     <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
+    <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
   </div>
 </template>
 
@@ -1210,6 +1211,11 @@ export default {
         return
       }
 
+      if(this.$store.state.platform == 20 && !this.isLogin){
+        this.ifShowLoginPop = true
+        return
+      }
+
       _this.changeChecked()
 
       if (!_this.canAddCart) {
@@ -1310,14 +1316,6 @@ export default {
     },
     getIndex(i) {
       this.magnifying = this.thumbnails[i]
-    },
-    // 领取优惠券
-    getCoupon() {
-      if(!this.$store.getters.hadLogin) {
-        this.$errorMessage(this.$t(`${lang}.needLogin`))
-      }else{
-        this.showCoupon = true
-      }
     }
   }
 }

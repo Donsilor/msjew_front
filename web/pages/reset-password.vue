@@ -398,7 +398,7 @@ export default {
   },
   data() {
     return {
-      resetType: 0,
+      resetType: this.$route.query.type,
       waiting: false,
       waitingTime: defaultTime,
       waitingText: this.$t(`${langcode}.sendCode`),
@@ -461,15 +461,6 @@ export default {
       ifShowMobile: false
     }
   },
-  watch:{
-    // mobile(){
-    //   if(!(/^1[3456789]\d{9}$/.test(this.mobile))){
-    //     this.phonetip=true
-    //   }else{
-    //     this.phonetip=false
-    //   }
-    // }
-  },
   computed: {
     scheduleContentStyle() {
       return {
@@ -509,9 +500,7 @@ export default {
   methods: {
     // 点击图标切换密码格式
     changeRegisterPasswordStatus() {
-      // const info = JSON.parse(JSON.stringify(this.info))
       this.showPassword = !this.showPassword
-      // this.info = info
     },
     // 倒计时
     countDown() {
@@ -532,19 +521,6 @@ export default {
         }
       }, 1000)
     },
-    // countDown10() {
-    //   console.log(this.waitSecond)
-    //   const _this = this
-    //   const countDownStart = setInterval(function() {
-    //     if (_this.waitSecond === 0) {
-    //       clearInterval(countDownStart)
-    //       _this.setWait()
-    //       _this.waitSecond = 10
-    //     } else {
-    //       _this.waitSecond--
-    //     }
-    //   }, 1000)
-    // },
      // 设置为倒计时状态
     setWait() {
       if (this.waiting) {
@@ -582,31 +558,7 @@ export default {
             // _this.$errorMessage(err.message)
           })
       })
-      // Helpers.requestServer(options)
     },
-    // 发送邮箱验证码
-    // sendCode() {
-      //   const _this = this
-      //   return new Promise((resolve, reject) => {
-      //     _this
-      //       .$axios({
-      //         method: 'post',
-      //         url: '/web/site/email-code',
-      //         data: {
-      //           'email': _this.info.email,
-      //           'usage': 'up-pwd'
-      //         }
-      //       })
-      //       .then(res => {
-      //         console.log("啦啦啦",res)
-      //         resolve(res)
-      //       })
-      //       .catch(err => {
-      //         console.log(err)
-      //         reject(err)
-      //       })
-      //   })
-    // },
     sendCode() {
         const _this = this
         return new Promise((resolve, reject) => {
@@ -729,44 +681,6 @@ export default {
       _this.ajaxLoading = false
       _this.activeScheduleKey = nextScheduleKey
     },
-    // 中文
-    // async changeSchedule2(key) {
-      //   const _this = this
-      //   const nextScheduleKey = key
-      //   _this.ajaxLoading = true
-      //   switch (key) {
-      //     case 1:
-
-      //       break
-      //     case 2:
-      //       try {
-      //         await _this.sendPhoneCode()
-      //       } catch (e) {
-      //         _this.$errorMessage(e.message)
-      //         _this.ajaxLoading = false
-      //         return
-      //       }
-      //       break
-      //     case 3:
-      //       try {
-      //         await _this.resetMobilePassword()
-      //       } catch (e) {
-      //         _this.$errorMessage(e.message)
-      //         _this.ajaxLoading = false
-      //         return
-      //       }
-      //       _this.waitTimeout = setTimeout(() => {
-      //         clearTimeout(_this.waitTimeout)
-      //         _this.toLogin()
-      //       }, _this.waitSecond * 1000)
-      //       break
-      //     default:
-      //       _this.ajaxLoading = false
-      //       return
-      //   }
-      //   _this.ajaxLoading = false
-      //   _this.activeScheduleKey = nextScheduleKey
-    // },
     // 中文步骤条
     async changeSchedule2(key) {
         const _this = this
@@ -1042,9 +956,6 @@ input{
   box-sizing: border-box;
 }
 
-.getCode:disabled {
-  // background-color: #999999;
-}
 .bottom-border-input {
   height: 37px;
   border-bottom: 1px solid #999999;

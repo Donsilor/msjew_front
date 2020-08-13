@@ -67,10 +67,9 @@
       }
     },
     mounted() {
-      this.language = this.getCookie('language')
-      console.log(778,this.moneyInfo)
+      this.language = this.$store.state.language
       this.coin = this.$store.state.coin
-      // console.log("ggggg",this.moneyInfo)
+
       if(this.moneyInfo){
         var i=0;
         for(var j in this.moneyInfo){
@@ -123,16 +122,6 @@
     methods: {
       more(){
         this.look = false
-      },
-      // 获取cookie
-      getCookie(cname) {
-        const name = cname + '='
-        const ca = document.cookie.split(';')
-        for (let i = 0; i < ca.length; i++) {
-          const c = ca[i].trim()
-          if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-        }
-        return ''
       },
       // 关闭弹窗,获取优惠券
       closeCoupon(k) {

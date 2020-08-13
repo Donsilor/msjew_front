@@ -20,8 +20,8 @@
                 <img :src="imageStrToArray(block1.pick)" />
                 <div class="title-block">
                   <div class="title-block-name">
-				    <span class="discount-icon fl" v-if="block1.couponType == 1">{{ language == 'en_US' ? discountUs(this.block1.couponNum)+'%' : discountConversion(this.block1.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
-				    <span class="favourable-icon fl" v-if="block1.couponType == 2">￥</span>
+				            <span class="discount-icon fl" v-if="block1.couponType == 1">{{ language == 'en_US' ? discountUs(this.block1.couponNum)+'%' : discountConversion(this.block1.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
+				            <span class="favourable-icon fl" v-if="block1.couponType == 2">￥</span>
 
                     {{ block1.name }}
                   </div>
@@ -165,6 +165,7 @@
       <section class="desc" v-html="info.goodsDesc"></section>
       <order-include></order-include>
       <comments ref="product-comments" :good-id="info.id"></comments>
+      <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
     </div>
   </div>
 </template>
@@ -237,7 +238,8 @@ export default {
       activeTab: 'desc',
       magnifying: '',
       language: this.$store.state.language,
-      isLogin:this.$store.getters.hadLogin
+      isLogin:this.$store.getters.hadLogin,
+      ifShowLoginPop: false
     }
   },
   computed: {
@@ -584,7 +586,7 @@ export default {
     },
     async orderNow() {
       if(!this.isLogin && this.$store.state.platform == 20){
-        this.$errorMessage(this.$t(`${lang}.firstLogin`))
+        this.ifShowLoginPop = true
         return
       }
       const timeSock = new Date().getTime()
@@ -756,6 +758,9 @@ export default {
     },
     getIndex(i) {
     	this.magnifying = this.thumbnails[i]
+    },
+    closeLogin() {
+      this.ifShowLoginPop = false
     }
   }
 }

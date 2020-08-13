@@ -95,8 +95,7 @@
       }
     },
     mounted() {
-      console.log("dss",this.coinTypes.coin)
-      this.language = this.getCookie('language')
+      this.language = this.$store.state.language
       this.coin = this.coinTypes.coin
 
       var i=0;
@@ -133,15 +132,6 @@
       more(){
         this.look = false
       },
-      // 获取cookie
-      getCookie(cname) {
-        const name = cname + '='
-        const ca = document.cookie.split(';')
-        for (let i = 0; i < ca.length; i++) {
-          const c = ca[i].trim()
-          if (c.indexOf(name) === 0) return c.substring(name.length, c.length) }
-        return ''
-      },
       // 关闭弹窗
       closeCoupon(k) {
         if(k){
@@ -151,8 +141,6 @@
               this.couponInfo.couponId = o.coupon_id;
             }
           })
-
-          console.log(666,this.couponInfo)
 
           if(this.couponInfo.couponId){
             this.$emit('closeCoupon', this.couponInfo)

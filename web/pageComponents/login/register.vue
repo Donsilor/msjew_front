@@ -71,7 +71,7 @@
             <input
               v-model.trim="mobile"
               type="text"
-			        @focus="mobileShow = false"
+			        @focus="focusEvent2"
               @blur="verifyMobile"
               v-bind:class="{active:isActivemobile}"
               :placeholder="$t(`${lang}.phoneBox`)"
@@ -150,7 +150,7 @@
           </div>
         </div>
         <!-- 确认密码 -->
-        <div class="relative margin-bottom-40">
+        <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
               v-model.trim=" password_repetition"
