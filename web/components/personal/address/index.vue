@@ -32,16 +32,7 @@
           <div class="font-size-14 color-333">{{ a.email }}</div>
           
           <div class="addr-board" @click="changeDefaultAddress(a.id)" />
-          <i
-            class="iconfont iconlajitong"
-            @click="
-              isDel = true
-              delId = a.id
-            "
-          />
-          <div class="addr-btn" @click="changeAddress(a)">
-            {{ $t(`${lang}.change`) }}
-          </div>
+                    
           <img
             v-show="a.is_default == 1"
             src="../../../static/personal/account/address-bar.png"
@@ -56,6 +47,18 @@
           >
             {{ $t(`${lang}.mrAddress`) }}
           </div>
+
+          <div class="addr-btn" @click="changeAddress(a)">
+            {{ $t(`${lang}.change`) }}
+          </div>
+
+          <i
+            class="iconfont iconlajitong"
+            @click="
+              isDel = true
+              delId = a.id
+            "
+          />
         </div>
       </div>
     </div>
