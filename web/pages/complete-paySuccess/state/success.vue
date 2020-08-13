@@ -86,12 +86,12 @@
             </div>
             <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
             <div class="order-num">
-              {{ $t(`${lang}.orderCode`) }}
-              <nuxt-link :to="`/account/order-details?order_sn=${this.oid}`">
-                <span class="underline" >{{ data2.orderNo }}</span>
-              </nuxt-link>
-              <!-- <span class="underline">{{ data.orderNo }}</span> -->
-            </div>
+            {{ $t(`${lang}.orderCode`) }}
+              <!-- <nuxt-link :to="`/account/order-details?orderId=${this.oid}`"> -->
+                <span>{{ data2.orderNo }}</span>
+                <i class="icon iconfont iconcopy copy-btn" :data-clipboard-text="data2.orderNo" @click="copy"></i>
+              <!-- </nuxt-link> -->
+          </div>
           </div>
           <div v-show="stepPayVerify">
             <p class="handing">{{ $t(`${lang}.handing`) }}</p>
