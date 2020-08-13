@@ -465,7 +465,6 @@ export default {
   },
   mounted(){
     this.language = this.$store.state.language
-
     let element = document.querySelector('.el-upload ')
 
     this.getAccount()

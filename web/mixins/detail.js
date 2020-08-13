@@ -115,10 +115,6 @@ export default {
       }
       
       const _this = this
-      if(!this.isLogin && this.$store.state.platform == 20){
-        _this.$errorMessage(_this.$t(`common.firstLogin`))
-        return
-      }
 
       if (!_this.canAddCart) {
         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
