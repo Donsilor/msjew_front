@@ -1,7 +1,8 @@
 <template>
   <div>
     <member v-if="$store.getters.hadLogin"></member>
-    <stranger v-else></stranger>
+    <stranger v-else @login="toLogin"></stranger>
+    <login-pop v-if="ifLogin" @closeLogin="closeLogin"></login-pop>
   </div>
 </template>
 
@@ -12,6 +13,19 @@ export default {
   components: {
     stranger,
     member
+  },
+  data() {
+    return{
+      ifLogin: false
+    }
+  },
+  methods: {
+    toLogin() {
+      this.ifLogin = true
+    },
+    closeLogin() {
+      this.ifLogin = false
+    }
   }
 }
 </script>

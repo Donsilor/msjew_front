@@ -464,9 +464,9 @@ export default {
     }
   },
   mounted(){
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language
     let element = document.querySelector('.el-upload ')
-    // console.log("44444",this.fileList)
+
     this.getAccount()
 
     fbq('track', 'InitiateCheckout');
@@ -644,7 +644,7 @@ export default {
       }else if(this.payWay==84){
         pay = 84
       }
-      console.log("方式",pay)
+
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(
       //     JSON.stringify({

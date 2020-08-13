@@ -234,6 +234,7 @@
 <script>
 
 const lang = `finishPay`
+import Clipboard from 'clipboard'
 // console.log("aa",$t(`${lang}.hangding`))
 export default {
   name: 'Success',
@@ -359,6 +360,17 @@ export default {
       }
   },
   methods: {
+    copy() {
+      const clipboard = new Clipboard('.copy-btn')
+      clipboard.on('success', e => {
+        this.$successMessage(this.$t(`${lang}.toast1`))
+        clipboard.destroy()
+      })
+      clipboard.on('error', e => {
+        this.$errorMessage(this.$t(`${lang}.toast2`))
+        clipboard.destroy()
+      })
+    },
     toLogin() {
       this.$router.push(`/login`)
     },
@@ -1090,5 +1102,9 @@ div {
 }
 .underline{
   text-decoration:underline
+}
+
+.copy-btn{
+  cursor: pointer;
 }
 </style>

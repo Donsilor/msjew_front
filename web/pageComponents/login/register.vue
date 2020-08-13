@@ -150,7 +150,7 @@
           </div>
         </div>
         <!-- 确认密码 -->
-        <div class="relative margin-bottom-40">
+        <div class="relative margin-bottom-20">
           <div class="register-input">
             <input
               v-model.trim=" password_repetition"
