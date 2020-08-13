@@ -474,36 +474,9 @@ export default {
         }
       })
         .then(res => {
-
           // console.log("config",res)
           if (res.config) {
-            if (pay !== 7) {
-              window.location.replace(res.config)
-            } else {
-              const promise = new Promise((resolve, reject) => {
-                this.form = []
-                const obj = JSON.parse(res.config)
-                const objKey = Object.keys(obj)
-                for (const i in objKey) {
-                  if (objKey[i] === 'url') {
-                    this.actionLink = obj[objKey[i]]
-                    continue
-                  }
-                  const o = {
-                    name: objKey[i],
-                    val: obj[objKey[i]]
-                  }
-                  this.form.push(o)
-                }
-                resolve()
-              })
-              promise.then(() => {
-                setTimeout(() => {
-                  this.isPay = false
-                  document.getElementById('unionPay').click()
-                }, 2000)
-              })
-            }
+            window.location.replace(res.config)
           } else if (!res.config){
             // console.log(88888888)
             this.isPay = false
@@ -613,8 +586,7 @@ export default {
       .then(res => {
         if(tradeType == 'mweb'){
           window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
-        }
-        if(tradeType == 'js'){
+        }else if(tradeType == 'js'){
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
@@ -665,35 +637,18 @@ export default {
           //     coinType: this.info.coinType
           //   }
           // })
-        }
-        if (res.config) {
-          if (pay !== 7) {
-            window.location.replace(res.config)
-          } else {
-            const promise = new Promise((resolve, reject) => {
-              this.form = []
-              const obj = JSON.parse(res.config)
-              const objKey = Object.keys(obj)
-              for (const i in objKey) {
-                if (objKey[i] === 'url') {
-                  this.actionLink = obj[objKey[i]]
-                  continue
-                }
-                const o = {
-                  name: objKey[i],
-                  val: obj[objKey[i]]
-                }
-                this.form.push(o)
-              }
-              resolve()
-            })
-            promise.then(() => {
-              setTimeout(() => {
-                this.isPay = false
-                document.getElementById('unionPay').click()
-              }, 2000)
-            })
-          }
+        }else if (res.config) {
+          window.location.replace(res.config)
+        }else {
+          this.isPay = false
+          this.$router.replace({
+            name: 'complete-paySuccess-orderId-price-coinType',
+            params: {
+              orderId: this.info.orderId,
+              price: this.info.payAmount,
+              coinType: this.info.coinType
+            }
+          })
         } 
         
       })
