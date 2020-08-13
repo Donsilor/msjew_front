@@ -2699,7 +2699,7 @@ export default {
         return
       }
 
-      if(this.payWay==81 || this.payWay==2 ||this.payWay==83||this.payWay==1){
+      if(this.payWay !=6 && this.payWay != 61){
         this.$emit('login', true)
         return
         
