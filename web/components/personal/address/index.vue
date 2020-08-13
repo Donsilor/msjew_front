@@ -31,7 +31,7 @@
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
           <div class="font-size-14 color-333">{{ a.email }}</div>
           
-          <div class="addr-board" @click="changeDefaultAddress(a.id)" />
+          <!-- <div class="addr-board" @click="changeDefaultAddress(a.id)" /> -->
                     
           <img
             v-show="a.is_default == 1"
@@ -42,10 +42,16 @@
         <div class="box-right">
           <div
             v-if="a.is_default == 1"
-            class="font-size-14"
-            style="color: #f29b87; margin-top: 6px;"
+            class="default-address active"
           >
             {{ $t(`${lang}.mrAddress`) }}
+          </div>
+          <div
+            v-else
+            class="default-address"
+            @click="changeDefaultAddress(a.id)"
+          >
+            {{ $t(`${lang}.setDefaultAddress`) }}
           </div>
 
           <div class="addr-btn" @click="changeAddress(a)">
@@ -62,7 +68,7 @@
         </div>
       </div>
     </div>
-    <div class="addr-mid dle-btn" id="addbox" style="border:1px solid red">
+    <div class="addr-mid dle-btn" id="addbox">
       <div v-show="!isShow" style="cursor: pointer;" class="middle-btn-show" @click="newAddress()">
         + {{ $t(`${lang}.newAddress`) }}
       </div>
@@ -702,6 +708,12 @@ export default {
         .then(res => {
           // if(res.code==200){
             // console.log("修改默认地址成功",res)
+            
+            this.$message({
+              message: this.$t(`${lang}.setSuccess`),
+              type: 'success'
+            })
+
             this.getData()
           // }else {
           //   throw new Error (res.message)
@@ -1088,7 +1100,7 @@ export default {
       position: relative;
       width: 46%;
       height: 250px;
-      padding: 25px 30px 0;
+      padding: 25px 20px 0;
       margin: 0 3% 20px 0;
       border: 1px solid rgba(230, 230, 230, 1);
       box-sizing: border-box;
@@ -1096,12 +1108,47 @@ export default {
       justify-content: space-between;
       
       .box-left{
-        width: 70%;
-        border: 1px solid red;
+        width: 68%;
       }
       .box-right{
-        width: 25%;
-        border: 1px solid blue;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 27%;
+        text-align: right;
+
+        .default-address{
+          font-size: 14px;
+          color: #f29b87;
+          margin-top: 6px;
+          cursor: pointer;
+        }
+
+        .default-address.active{
+          cursor: initial;
+        }
+
+        .addr-btn {
+          width: 50px;
+          height: 22px;
+          line-height: 20px;
+          border: 1px solid #aa8a7b;
+          border-radius: 4px;
+          background: rgba(251, 247, 245, 1);
+          color: #aa8a7b;
+          text-align: center;
+          cursor: pointer;
+          margin-top: 20px;
+        }
+
+        .iconlajitong {
+          display: block;
+          font-size: 21px;
+          color: #999;
+          z-index: 39;
+          cursor: pointer;
+          margin: 90px 4px 0 0;
+        }
       }
 
       .addr-title {
@@ -1179,31 +1226,6 @@ export default {
         left: 0;
         cursor: pointer;
         z-index: 10;
-      }
-      .iconlajitong {
-        position: absolute;
-        bottom: 36px;
-        right: 28px;
-        display: block;
-        font-size: 21px;
-        color: #999;
-        z-index: 39;
-        cursor: pointer;
-      }
-      .addr-btn {
-        position: absolute;
-        width: 50px;
-        height: 22px;
-        line-height: 20px;
-        border: 1px solid #aa8a7b;
-        border-radius: 4px;
-        background: rgba(251, 247, 245, 1);
-        color: #aa8a7b;
-        text-align: center;
-        cursor: pointer;
-        top: 30px;
-        right: 28px;
-        z-index: 40;
       }
       img {
         display: block;
