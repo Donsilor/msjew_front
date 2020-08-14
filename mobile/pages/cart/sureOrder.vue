@@ -397,8 +397,12 @@
           </li>
 
           <li class="order-pay">
-            <span>{{ lang.NeedPay }}</span
-            ><span>{{ formatCoin(coin) }} {{ formatMoney(ultimatelyPay) }}</span>
+            <span>{{ lang.NeedPay }}</span>
+            <span v-if="this.$store.state.platform == 41">{{ formatCoin(coin) }} {{ formatAmount(ultimatelyPay) }}</span>
+            <span v-else>{{ formatCoin(coin) }} {{ formatMoney(ultimatelyPay) }}</span>
+          </li>
+          <li>
+            <p class="point" v-show="this.$store.state.platform == 41 && floatStr(ultimatelyPay)>0">({{lang.point }})</p>
           </li>
         </ul>
       </div>
@@ -1684,6 +1688,12 @@ export default {
 </script>
 
 <style scoped lang="less">
+.point{
+  width: 100%;
+  text-align: right;
+  color:#999;
+  font-size: 12px;
+}
 .sure-oredr {
   .is-login {
     width: 100%;

@@ -207,7 +207,8 @@
       "discountedAmount": "Discounted amount",
       "couponAmount": "Coupon",
       "msg12": "Please login before redeem the coupon. ",
-      "useCoupons": "Use Coupons"
+      "useCoupons": "Use Coupons",
+      "point":"*Note：The Order Amount has been rounded "
     },
     "pay": {
       "pay": "Order payment",

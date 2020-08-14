@@ -208,7 +208,8 @@
         "discountedAmount": "折扣金额",
         "couponAmount": "优惠券",
         "msg12": "请先登录才能使用优惠券",
-        "useCoupons": "使用优惠券"
+        "useCoupons": "使用优惠券",
+        "point":"*注：订单金额已做抹零处理"
       },
       "pay": {
         "pay": "订单支付",

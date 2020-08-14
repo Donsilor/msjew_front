@@ -137,6 +137,60 @@ export default function({ req, res, app, store }) {
     }
   }
 
+  // 价格抹零
+  Vue.prototype.formatAmount = str => {
+    
+    if (!str) {
+      return 0
+    }
+    str = str.toString()
+
+    function addComma(str) {
+      if (str.length <= 3) {
+        return str
+      } else {
+        return (
+          addComma(str.substr(0, str.length - 3)) +
+          ',' +
+          str.substr(str.length - 3)
+        )
+      }
+    }
+    // console.log('sssss',str.split('.')[1])
+    const intStr = str.split('.')[0]
+    let floatStr = str.split('.')[1] ? `${str.split('.')[1]}` : '00'
+    if (floatStr > 0) {
+      floatStr = `00`
+    }
+
+    // console.log("str",floatStr)
+    return `${addComma(intStr)}.${floatStr}`
+  }
+
+  // 获取小数点以后的数值
+  Vue.prototype.floatStr = str => {
+    
+    if (!str) {
+      return 0
+    }
+    str = str.toString()
+
+    function addComma(str) {
+      if (str.length <= 3) {
+        return str
+      } else {
+        return (
+          addComma(str.substr(0, str.length - 3)) +
+          ',' +
+          str.substr(str.length - 3)
+        )
+      }
+    }
+    let floatStr = str.split('.')[1]
+    // console.log('sssss',floatStr)
+    return floatStr
+  }
+
   Vue.prototype.removeFormatMoney = str => {
     return parseFloat(str.replace(/[^\d.-]/g, ''))
   }

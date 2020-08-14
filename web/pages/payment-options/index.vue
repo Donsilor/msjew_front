@@ -52,7 +52,10 @@
             <img src="../../static/order/paypalpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.PayPal`) }}</div>
-          <div v-show="payWay == 6" class="pay-price">
+          <div v-if="this.$store.state.platform == 40" v-show="payWay == 6" class="pay-price">
+            {{ formatCoin(coinType) }} {{ formatAmount(price) }}
+          </div>
+          <div v-else v-show="payWay == 6" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -73,7 +76,10 @@
             <img src="../../static/order/visa.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.visa`) }}</div>
-          <div v-show="payWay === 61" class="pay-price">
+          <div v-if="this.$store.state.platform == 40" v-show="payWay === 61" class="pay-price">
+            {{ formatCoin(coinType) }} {{ formatAmount(price) }}
+          </div>
+          <div v-else v-show="payWay === 61" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <!-- <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -227,7 +233,10 @@
             <img src="../../static/order/epay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.EPay`) }}</div>
-          <div v-show="payWay == 88" class="pay-price">
+          <div v-if="this.$store.state.platform == 40" v-show="payWay == 88" class="pay-price">
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
+          </div>
+          <div v-else v-show="payWay == 88" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <!-- <div v-show="payWay == 88 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -268,9 +277,9 @@
             <img @click="closed" class="close" src="../../static/order/closed.png" alt="">
           </div>
           <div class="content">
-            <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="Amount">
+            <div v-if="this.$store.state.platform === 40" class="Amount">
               <span>{{ $t(`${lang}.paidAmount`) }}</span>
-              {{ formatCoin(coinType) }} {{ formatMoney(price) }}
+              {{ formatCoin(coinType) }} {{ formatAmount(price) }}
               <!-- <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }})</span> -->
             </div>
             <div v-else class="Amount">
