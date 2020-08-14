@@ -63,6 +63,7 @@
             @click="
               isDel = true
               delId = a.id
+              delIdx = index
             "
           />
         </div>
@@ -574,6 +575,7 @@ export default {
       address: [],
       isDel: false,
       delId: ``,
+      delIdx: -1,
       isEdit: false,
       isNew: true,
       isShow: false,
@@ -624,35 +626,15 @@ export default {
     this.getData()
   },
   mounted(){
-    // console.log("ffff",this.phoneNum.phone_code)
     this.language = this.$store.state.language
   },
   methods: {
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     // 获取地址
     getData() {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-          // if(res.code==200){
-            // console.log('获取地址成功', res)
             this.address = res.data
-          // }
-          // else {
-          //   throw new Error (res.message)
-          // }
-          // console.log("地址",this.address)
-          // this.isShow = false
-          // this.isDel = false
         })
         .catch(err => {
           if (!err.response) {
@@ -669,55 +651,38 @@ export default {
         inline: 'nearest',
         behavior: 'smooth'
       })
-      // console.log("ddasdas",obj)
       this.resetAddress()
       this.clone = this.$helpers.cloneObject(obj)
       this.checkEmail = obj.email
-      // console.log("email",this.checkEmail)
+
       const code = obj.mobile_code.split('+').reverse()
       JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
         if (o.phone_code === '+' + code[0]) this.phoneNum = o
       })
-      // if(this.language==='zh_CN'){
-      //   this.email=obj.email
-      // }else{
-      //   this.checkEmail = obj.email
-      //   const code = obj.userTelCode.split('+').reverse()
-      //   JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
-      //     if (o.phone_code === '+' + code[0]) this.phoneNum = o
-      //   })
-      // }
+
       this.setAddress(obj).then(res => {
         if (!res) {
           this.isShow = !this.isShow
           this.isNew = false
           this.isEdit = true
         }
-        // this.checkEmail = res.userMail;
       })
     },
     // 修改默认地址
     changeDefaultAddress(id) {
-      // console.log("aaa",id)
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ id:id,is_default: 1 })),
         false
       )
       this.$axios
         .post('/web/member/address/edit',data)
-        .then(res => {
-          // if(res.code==200){
-            // console.log("修改默认地址成功",res)
-            
+        .then(res => {      
             this.$message({
               message: this.$t(`${lang}.setSuccess`),
               type: 'success'
             })
 
             this.getData()
-          // }else {
-          //   throw new Error (res.message)
-          // }
         })
         .catch(err => {
           if (!err.response) {
@@ -767,7 +732,6 @@ export default {
     },
     // 新建地址
     createAddress() {
-      // console.log("this.u",this.using)
       if (this.using.firstname === '') {
         this.$message.error(this.$t(`${lang}.wip1`))
         return
@@ -819,6 +783,12 @@ export default {
         this.$message.error(this.$t(`${lang}.wip11`))
         return
       }
+
+      var isDefault = 0;
+      if(!this.address.length){
+        isDefault = 1
+      }
+
       const json = {
         firstname: this.using.firstname,
         lastname: this.using.lastname,
@@ -829,7 +799,8 @@ export default {
         province_id: this.province.areaId,
         city_id: this.city.areaId,
         address_details: this.using.address_details,
-        zip_code: this.using.zip_code
+        zip_code: this.using.zip_code,
+        is_default: isDefault
       }
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(JSON.stringify(json)),
@@ -903,6 +874,12 @@ export default {
         this.$message.error(this.$t(`${lang}.wip11`))
         return
       }
+
+      var isDefault = 0;
+      if(!this.address.length){
+        isDefault = 1
+      }
+
       const json = {
         firstname: this.using.firstname,
         lastname: this.using.lastname,
@@ -913,7 +890,8 @@ export default {
         province_id: this.province.areaId,
         city_id: this.city.areaId,
         address_details: this.using.address_details,
-        zip_code: this.using.zip_code
+        zip_code: this.using.zip_code,
+        is_default: isDefault
       }
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(JSON.stringify(json)),
@@ -1034,7 +1012,14 @@ export default {
         .then(res => {
           if(res.code==200){
             this.isDel = false
-            this.getData()
+
+            if(this.address.length > 1 && this.delIdx == 0){
+              this.changeDefaultAddress(this.address[this.address.length-1].id)
+            }else{
+              this.getData()
+            }
+
+            return
             this.resetAddress()
             // console.log("删除",res)
           }else {
