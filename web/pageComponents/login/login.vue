@@ -188,8 +188,6 @@ export default {
       this.ifShowBtn = false
     }
 
-    console.log(this.loginType)
-
     const _this = this
     _this.$nextTick(() => {
        _this.refreshCode()
@@ -268,7 +266,7 @@ export default {
             _this.$successMessage(_this.$t(`${lang}.logintips`))
             _this.$store.commit('setToken', data.access_token)
             _this.$store.commit('setUserInfo', data.member)
-              _this.$store.dispatch('synchronizeCart')
+            _this.$store.dispatch('synchronizeCart')
 
             const lastUrl=localStorage.getItem("url")
             setTimeout(() => {

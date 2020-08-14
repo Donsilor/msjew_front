@@ -177,6 +177,17 @@ export default {
   mounted() {
     this.language = this.$store.state.language
 
+    let oldurl=window.location.pathname
+    let params=window.location.search
+    //如果是订单确认页面，返回到购物车
+    if((/^\/billing-address/).test(oldurl)){
+        oldurl = '/shopping-cart'
+        params = ''
+    }
+
+    const url=oldurl+params
+    localStorage.setItem('url',url)
+
     // 大陆站点 登录方式为手机登录
     if (this.$store.state.platform == 20) {
       this.loginType = 1
