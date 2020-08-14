@@ -342,11 +342,11 @@
               </button> -->
             </div>
             </nuxt-link>
-            <div v-else>
-              <button  :class="['add-to-cart', { active: canAddCart }]">
+            <div v-else-if="($route.query.ringType == 'single')"> 
+              <!-- <button  :class="['add-to-cart', { active: canAddCart }]">
                 {{ $t(`${lang}.ConfirmTheChoice`) }}
-              </button>
-              <!-- <button
+              </button> -->
+              <button
                   v-loading="orderingNow"
                   :class="['add-to-cart', { actived: canAddCart }]"
                   @click="orderNow"
@@ -360,7 +360,13 @@
                   @click="addCart"
                 >
                   {{ $t(`${lang}.addCart`) }}
-                </button> -->
+                </button>
+            </div>
+            <div v-else> 
+              <button  :class="['add-to-cart', { active: canAddCart }]">
+                {{ $t(`${lang}.ConfirmTheChoice`) }}
+              </button>
+              
             </div>
           </span>
           
