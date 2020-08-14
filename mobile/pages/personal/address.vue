@@ -87,7 +87,7 @@ export default {
         .then(res => {
           // console.log("address",res)
           _this.address = []
-          if (res && res.length > 0 && res.length !== 1) {
+          if (res && res.length > 0) {
             res.map((item, index) => {
               if (item.is_default === 0) {
                 _this.address.unshift(item)
@@ -98,8 +98,7 @@ export default {
           }
           // console.log("ad", _this.address)
 
-          if (res && res.length === 1) {
-            _this.address.unshift(res[0]);
+          if (res && res[0].is_default != 1) {
             _this.address[0].is_default = 1;
 
             _this
@@ -164,8 +163,9 @@ export default {
           // }
           // console.log(addressarr)
           // return addressarr;
+          this.$toast.show(this.lang.setSuccess)
           this.getData()
-          this.$router.go(-1)
+          // this.$router.go(-1)
         })
         .catch(err => {
           console.log(err)
