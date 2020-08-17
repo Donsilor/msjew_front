@@ -57,7 +57,8 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ info.coinCode }}{{ formatMoney(info.payAmount) }}</span>
+              <span v-if="this.$store.state.platform == 41">{{ info.coinCode }}{{ formatAmount(info.payAmount) }}</span>
+              <span v-else>{{ info.coinCode }}{{ formatMoney(info.payAmount) }}</span>
             </div>
           </li>
           <li>
@@ -114,7 +115,8 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
+              <span v-if="this.$store.state.platform == 41">{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
+              <span v-else>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
             </div>
           </li>
           <li>
