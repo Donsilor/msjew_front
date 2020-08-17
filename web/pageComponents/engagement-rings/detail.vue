@@ -277,13 +277,6 @@
         </div>
 
         <div v-if="!$route.query.isBack" class="button-group">
-          <button
-            v-loading="addingCart"
-            :class="['add-to-cart', { actived: canAddCart }]"
-            @click="orderNow"
-          >
-            {{ $t(`${lang}.buyNow`) }}
-          </button>
           <nuxt-link
             v-if="productInfo.goodsMod === 1 && canAddCart"
             :to="startDj"
@@ -294,6 +287,13 @@
             </button>
           </nuxt-link>
           
+          <button
+            v-loading="addingCart"
+            :class="['add-to-cart', { actived: canAddCart }]"
+            @click="orderNow"
+          >
+            {{ $t(`${lang}.buyNow`) }}
+          </button>
 
           <button
             v-loading="addingCart"
@@ -387,6 +387,7 @@
     <comments ref="product-comments" :good-id="info.id"></comments>
     <!-- 获取优惠券 -->
     <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
+    <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
   </div>
 </template>
 
@@ -719,14 +720,6 @@ export default {
         }
       }
       this.ringChecked = ringChecked
-    },
-    // 领取优惠券
-    getCoupon() {
-      if(!this.$store.getters.hadLogin) {
-        this.$errorMessage(this.$t(`${lang}.needLogin`))
-      }else{
-        this.showCoupon = true
-      }
     }
   }
 }
@@ -929,5 +922,8 @@ export default {
       line-height: 20px;
     }
   }
+}
+.start-dj{
+  width: 320px!important;
 }
 </style>

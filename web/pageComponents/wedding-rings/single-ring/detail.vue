@@ -430,6 +430,7 @@
     <comments ref="product-comments" :good-id="info.id"></comments>
     <!-- 获取优惠券 -->
     <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
+    <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
   </div>
 </template>
 
@@ -516,7 +517,7 @@ export default {
       showCoupon: false,
       moneyList: [],
       activeTime: '',
-      language: this.$store.state.language,
+      language: this.$store.state.language
     }
   },
   computed: {
@@ -780,39 +781,25 @@ export default {
     },
     getIndex(i) {
       this.magnifying = this.thumbnails[i]
-    },
-    // 领取优惠券
-    getCoupon() {
-      if(!this.$store.getters.hadLogin) {
-        this.$errorMessage(this.$t(`${lang}.needLogin`))
-      }else{
-        this.showCoupon = true
-      }
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
-// .custom-made{
-//   .add-to-cart{
-//     margin-top: 10px;
-//     width: 88.5%!important;
-//   }
-// }
 .start-dj{
   width: 320px!important;
 }
 .custom-made{
   .add-cart{
-    width: 645px!important;
-    margin-top: 10px;
+    width: 320px!important;
+    // margin-top: 10px;
   }
 }
 .dz{
   .active{
-    width: 659px!important;
-    margin-top: 10px;
+    width: 320px!important;
+    // margin-top: 10px;
   }
 }
 .detail-page {

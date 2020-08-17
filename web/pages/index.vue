@@ -268,7 +268,7 @@
       </h1>
       <div class="section-title-line"></div>
       <div class="hot-list" :style="{ height: hotHeight + 'px', padding: hotPadding + 'px' + ' 0' }">
-        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.2" :indicator="false">
+        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.2" :indicator="false" @change="changeActiveHotProduct">
           <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
             <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
               <div class="product-image">
@@ -901,7 +901,7 @@ export default {
     }
   },
   async asyncData ({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo(1)
+    const seoInfo = await app.$getSeoInfo('index')
     // console.log(seoInfo)
 
     return $axios({

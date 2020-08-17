@@ -464,7 +464,10 @@
 
           <div class="info-line">
             <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
-            <div class="ff big-ff">
+            <div v-if="this.$store.state.platform == 40 && data.coinCode == 'TWD'" class="ff big-ff">
+              {{ formatCoin(data.coinCode) }} {{ formatAmount(data.payAmount) }}
+            </div>
+            <div v-else class="ff big-ff">
               {{ formatCoin(data.coinCode) }} {{ formatNumber(data.payAmount) }}
             </div>
           </div>
@@ -1052,17 +1055,13 @@ export default {
             text-align: center;
             width: 15%;
             font-family: twCenMt;
-            color: #b2b2b2;
+            color: #99999991;
             text-align: center;
             margin-right: 6%;
+            font-size: 20px;
           }
           .t3.old-price{
-            width: 15%;
-            font-family: twCenMt;
-            font-size: 14px;
-            color: #b2b2b2;
             text-decoration: line-through;
-            margin-right: 6%;
           }
           .t4 {
             font-family: twCenMt;

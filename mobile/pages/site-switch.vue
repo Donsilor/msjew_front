@@ -28,7 +28,7 @@
               {{p.content}}
             </option>
           </select>
-          <i class="iconfont iconkuozhan"></i>
+          <!-- <i class="iconfont iconkuozhan"></i> -->
         </div>
         <div class="select-line-box" v-else-if="this.$store.state.platform === 41">
           <input :value="coin" type="text" />
@@ -37,7 +37,7 @@
               {{p.content}}
             </option>
           </select>
-          <i class="iconfont iconkuozhan"></i>
+          <!-- <i class="iconfont iconkuozhan"></i> -->
         </div>
         <div v-else class="select-line-box">
           <input :value="coin" type="text" />

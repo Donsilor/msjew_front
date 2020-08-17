@@ -38,13 +38,9 @@
       <div class="user-info">
         <i class="iconfont iconrentou" />
         <div class="login-line">
-          <nuxt-link to="/login"
-            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
-          >
+          <span @click="login()">{{ $t(`${lang}.login`) }}</span>
           <span>{{ $t(`${lang}.balbala`) }}</span>
-          <nuxt-link to="/login"
-            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-          >
+          <span @click="register()">{{ $t(`${lang}.Registration`) }}</span>
           <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
       </div>
@@ -363,11 +359,12 @@
             <div class="new-address-title">
               <div class="na-line" />
               <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
-              <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang2}.Note3`) }}</div>
+              <!-- <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang2}.Note3`) }}</div> -->
             </div>
             <div class="pay-blocks">
               <!-- paypal -->
               <div
+                v-show="this.$store.state.platform !== 20"
                 :class="{ 'pay-choose': payWay == 6 }"
                 class="pay-block"
                 @click="Way(6)"
@@ -376,19 +373,22 @@
                   <img src="../../../static/order/paypalpay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
-                <div v-show="payWay == 6" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay == 6" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay == 6" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 6" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
               <!-- vise -->
               <div
-                v-show="this.$store.state.platform !== 40"
+                v-show="this.$store.state.platform !== 20"
                 :class="{ 'pay-choose': payWay == 61 }"
                 class="pay-block"
                 @click="Way(61)"
@@ -397,12 +397,15 @@
                   <img src="../../../static/order/visa.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
-                <div v-show="payWay === 61" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay === 61" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay === 61" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 61" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -411,25 +414,26 @@
               <!-- 大陆支付宝 -->
               <div
                 v-show="this.$store.state.platform == 20"
-                :class="{ 'pay-choose': payWay == 82 }"
+                :class="{ 'pay-choose': payWay == 2 }"
                 class="pay-block"
-                @click="Way(82)"
+                @click="Way(2)"
               >
                 <div class="pay-img">
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 82" class="pay-price"> 
+                <div v-show="payWay == 2" class="pay-price"> 
                    {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
-                <div v-show="payWay == 82" class="choose-tick">
+                </div> -->
+                <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
                 <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
+              
 
               <!-- 香港支付宝 -->
               <div
@@ -445,9 +449,9 @@
                 <div v-show="payWay == 84" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 84" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -470,9 +474,9 @@
                 </div>
                 <div class="hint_pay"><span>*</span>{{ $t(`${lang}.msg11`) }}</div>
               </div> -->
-              <!-- 微信 -->
+              <!-- 微信（香港） -->
               <div
-                v-show="this.$store.state.platform == 10 || this.$store.state.platform == 20"
+                v-show="this.$store.state.platform == 10"
                 :class="{ 'pay-choose': payWay == 83 }"
                 class="pay-block"
                 @click="Way(83)"
@@ -484,17 +488,40 @@
                 <div v-show="payWay == 83" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 83" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+                <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
+              </div>
+
+              <!-- 微信（大陆） -->
+              <div
+                v-show="this.$store.state.platform == 20"
+                :class="{ 'pay-choose': payWay == 1 }"
+                class="pay-block"
+                @click="Way(1)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/wechatpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
+                <div v-show="payWay == 1" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
+                </div>
+                <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div> -->
+                <div v-show="payWay == 1" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
                 <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
               <!-- 信用卡 -->
               <div
-                v-show="this.$store.state.platform !== 30"
+                v-show="this.$store.state.platform == 10"
                 :class="{ 'pay-choose': payWay == 81 }"
                 class="pay-block"
                 @click="Way(81)"
@@ -506,9 +533,9 @@
                 <div v-show="payWay === 81" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -517,7 +544,7 @@
 
               <!-- 电汇 -->
               <div
-                v-show="this.$store.state.platform !== 30"
+                v-show="this.$store.state.platform == 10 || this.$store.state.platform == 40"
                 :class="{ 'pay-choose': payWay == 89 }"
                 class="pay-block"
                 @click="Way(89)"
@@ -526,12 +553,15 @@
                   <img src="../../../static/order/epay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
-                <div v-show="payWay == 89" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay == 89" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay == 89" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 89 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 89 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 89" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -961,7 +991,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="login()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -1054,14 +1084,20 @@
                 <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
               </div>
             </div>
-            <div class="detail-line">
+            <div class="detail-line amount">
               <div class="font-size-16 color-333">{{ $t(`${lang3}.NeedPay`) }}</div>
-              <div class="hkd color-pink price-big">
+              <div v-if="this.$store.state.platform == 40" class="hkd color-pink price-big">
+                {{ formatCoin(tex.coinType) }}
+                {{ formatAmount(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
+              </div>
+              <div v-else class="hkd color-pink price-big">
                 {{ formatCoin(tex.coinType) }}
                 {{ formatMoney(ultimatelyPay) }}
                 <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
               </div>
             </div>
+            <p class="point" v-show="this.$store.state.platform == 40 && floatStr(ultimatelyPay)>0">({{ $t(`${lang}.point`) }})</p>
           </div>
         </div>
         <div class="info-line" />
@@ -1139,13 +1175,9 @@
       <div class="user-info">
         <i class="iconfont iconrentou" />
         <div class="login-line">
-          <nuxt-link to="/login"
-            ><span @click="login()">{{ $t(`${lang}.login`) }}</span></nuxt-link
-          >
+          <span @click="login()">{{ $t(`${lang}.login`) }}</span>
           <span>{{ $t(`${lang}.balbala`) }}</span>
-          <nuxt-link to="/login"
-            ><span @click="register()">{{ $t(`${lang}.Registration`) }}</span></nuxt-link
-          >
+          <span @click="register()">{{ $t(`${lang}.Registration`) }}</span>
           <span>{{ $t(`${lang}.balabalabala`) }}</span>
         </div>
       </div>
@@ -1465,11 +1497,12 @@
             <div class="new-address-title">
               <div class="na-line" />
               <div class="na-title">{{ $t(`${lang2}.orderInfo`) }}</div>
-              <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang2}.Note3`) }}</div>
+              <!-- <div class="note" v-show="this.$store.state.coin == 'CNY' && this.$store.state.platform === 20"><span class="star">*</span> {{ $t(`${lang2}.Note3`) }}</div> -->
             </div>
             <div class="pay-blocks">
               <!-- paypal -->
               <div
+                v-show="this.$store.state.platform !== 20"
                 :class="{ 'pay-choose': payWay == 6 }"
                 class="pay-block"
                 @click="Way(6)"
@@ -1478,18 +1511,22 @@
                   <img src="../../../static/order/paypalpay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
-                <div v-show="payWay == 6" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay == 6" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay == 6" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 6" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
               </div>
               <!-- vise -->
               <div
+                v-show="this.$store.state.platform !== 20"
                 :class="{ 'pay-choose': payWay == 61 }"
                 class="pay-block"
                 @click="Way(61)"
@@ -1498,12 +1535,15 @@
                   <img src="../../../static/order/visa.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
-                <div v-show="payWay === 61" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay === 61" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay === 61" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 61" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -1511,21 +1551,21 @@
               <!-- 大陆支付宝 -->
               <div
                 v-show="this.$store.state.platform == 20"
-                :class="{ 'pay-choose': payWay == 82 }"
+                :class="{ 'pay-choose': payWay == 2 }"
                 class="pay-block"
-                @click="Way(82)"
+                @click="Way(2)"
               >
                 <div class="pay-img">
                   <img src="../../../static/order/alipay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
-                <div v-show="payWay == 82" class="pay-price"> 
+                <div v-show="payWay == 2" class="pay-price"> 
                    {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
-                <div v-show="payWay == 82" class="choose-tick">
+                </div> -->
+                <div v-show="payWay == 2" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
                 <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
@@ -1545,9 +1585,9 @@
                 <div v-show="payWay == 84" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 84" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -1571,9 +1611,9 @@
                 </div>
                 <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg11`) }}</div>
               </div> -->
-              <!-- 微信 -->
+              <!-- 微信（香港） -->
               <div
-                v-show="this.$store.state.platform !== 30"
+                v-show="this.$store.state.platform == 10"
                 :class="{ 'pay-choose': payWay == 83 }"
                 class="pay-block"
                 @click="Way(83)"
@@ -1585,17 +1625,40 @@
                 <div v-show="payWay == 83" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 83" class="choose-tick">
+                  <img src="../../../static/order/tick.png" alt="" />
+                </div>
+               <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
+              </div>
+
+              <!-- 微信（大陆） -->
+              <div
+                v-show="this.$store.state.platform == 20"
+                :class="{ 'pay-choose': payWay == 1 }"
+                class="pay-block"
+                @click="Way(1)"
+              >
+                <div class="pay-img">
+                  <img src="../../../static/order/wechatpay.png" alt="" />
+                </div>
+                <div class="pay-desc">{{ $t(`${lang2}.AliPay`) }}</div>
+                <div v-show="payWay == 1" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
+                </div>
+                <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                  ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
+                </div> -->
+                <div v-show="payWay == 1" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
                <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div>
               </div>
               <!-- 信用卡 -->
               <div
-                v-show="this.$store.state.platform !== 30"
+                v-show="this.$store.state.platform == 10"
                 :class="{ 'pay-choose': payWay == 3 }"
                 class="pay-block"
                 @click="Way(81)"
@@ -1607,9 +1670,9 @@
                 <div v-show="payWay === 81" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 81" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -1618,7 +1681,7 @@
 
               <!-- 电汇 -->
               <div
-                v-show="this.$store.state.platform !== 30"
+                v-show="this.$store.state.platform == 10 || this.$store.state.platform == 40"
                 :class="{ 'pay-choose': payWay == 89 }"
                 class="pay-block"
                 @click="Way(89)"
@@ -1627,12 +1690,15 @@
                   <img src="../../../static/order/epay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
-                <div v-show="payWay == 89" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay == 89" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay == 89" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
-                <div v-show="payWay == 89 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+                <!-- <div v-show="payWay == 89 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
                   ({{ coinHKD }} {{ formatMoney(tex.priceHKD) }})
-                </div>
+                </div> -->
                 <div v-show="payWay == 89" class="choose-tick">
                   <img src="../../../static/order/tick.png" alt="" />
                 </div>
@@ -2063,7 +2129,7 @@
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
-            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="useCard()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
+            <div class="add-shopping-card" v-if="this.$store.state.platform !== 30" @click="login()">+{{ $t(`${lang}.useShoppingCard`) }}</div>
           </div>
           <div class="price-detail">
             <div class="detail-line">
@@ -2129,14 +2195,7 @@
               </div>
             </div>
             
-            <!-- 折扣金额 -->
-            <div v-show="tex.discount_amount" class="detail-line">
-              <div>{{$t(`${lang}.discountPrice`)}}</div>
-              <div class="hkd color-pink">
-                <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
-              </div>
-            </div>
-            
+           
             <!-- 优惠券 -->
             <div v-show="objectIfEmpty(tex.coupons) && isLogin" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
@@ -2154,6 +2213,30 @@
                 {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
               </div>
             </div>
+
+             <!-- 折扣金额 -->
+            <div v-show="tex.discount_amount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
+              </div>
+            </div>
+            
+
+            <div class="detail-line amount">
+              <div class="font-size-16 color-333">{{ $t(`${lang3}.NeedPay`) }}</div>
+              <div v-if="this.$store.state.platform == 40" class="hkd color-pink price-big">
+                {{ formatCoin(tex.coinType) }}
+                {{ formatAmount(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span --> 
+              </div>
+              <div v-else class="hkd color-pink price-big">
+                {{ formatCoin(tex.coinType) }}
+                {{ formatMoney(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
+              </div>
+            </div>
+            <p class="point" v-show="this.$store.state.platform == 40 && floatStr(ultimatelyPay)>0">({{ $t(`${lang}.point`) }})</p>
           </div>
         </div>
         <div class="info-line" />
@@ -2304,7 +2387,8 @@ export default {
       is_electronic:'',
       areaId : this.$store.state.areaId,
       ultimatelyPay:'',
-      isLogin:this.$store.getters.hadLogin
+      isLogin:this.$store.getters.hadLogin,
+      loginType: 2
     }
   },
   // watch:{
@@ -2396,8 +2480,19 @@ export default {
   },
   mounted() {
     // console.log("rrr",this.isLogin)
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language
     window.addEventListener('scroll', this.scrollToTop);
+
+    // 大陆站点 登录方式为手机登录
+    if(this.$store.state.platform == 20){
+      this.loginType = 1;
+    }else{
+      if(this.language == "zh_CN"){
+        this.loginType = 1
+      }else{
+        this.loginType = 2;
+      }
+    }
 
     fbq('track', 'InitiateCheckout');
   },
@@ -2406,19 +2501,17 @@ export default {
   },
   methods: {
     zhizhi(or){
-      // console.log("纸质",or)
       this.invoice.is_electronic = or;
       this.isactive = true
       this.Active = false
     },
     dianzi(or){
-      console.log("电子",or)
       this.invoice.is_electronic = or;
       this.isactive = false
       this.Active = true
     },
     handle(){
-      console.log("取到的值是"+this.radio);
+      // console.log("取到的值是"+this.radio);
     },
     close(){
       this.invoiceBox = false
@@ -2427,7 +2520,7 @@ export default {
     show2(){
       this.iconShow=!this.iconShow
       this.invoice.is_electronic = 0
-      console.log("dddd",this.invoice.is_electronic)
+
       if(this.iconShow == true){
         this.invoiceBox = true
         this.content = true
@@ -2456,11 +2549,6 @@ export default {
           this.mailShow = true
           return
         }
-        // if(){
-        //   this.mailShow=true
-        //   this.emailShow = false
-        //   return
-        // }
       }
 
       this.gou = true
@@ -2473,27 +2561,9 @@ export default {
     },
     complete(){
       this.invoiceBox = false
-      // this.iconShow = false
     },
-    // 点击登入获取上页url
     login(){
-      let oldurl=window.location.pathname
-      let params=window.location.search
-      //如果是订单确认页面，返回到购物车
-      if((/^\/billing-address/).test(oldurl)){
-          oldurl = '/shopping-cart'
-          params = ''
-      }
-      console.log(oldurl);
-      const url=oldurl+params
-      localStorage.setItem('url',url)
-      setTimeout(() => {
-        this.$router.push({
-            path: `/login`,
-            // query: {url}
-        })
-      },0)
-      // console.log("oldurl",url)
+      this.$emit('login', true)
     },
     register(){
       let oldurl=window.location.pathname
@@ -2506,6 +2576,7 @@ export default {
       console.log(oldurl);
       const url=oldurl+params
       localStorage.setItem('url',url)
+      sessionStorage.setItem("loginType", this.loginType)
       setTimeout(() => {
         this.$router.push({
             path: `/login?type=register`,
@@ -2519,44 +2590,8 @@ export default {
       if(ways==6||ways==61){
         this.show=false
       }else{
-        this.$errorMessage(this.$t(`${lang}.firstLogin`))
-        // const url=window.location.href
-        // setTimeout(() => {
-        //   this.$router.push({
-        //     path: `/login`,
-        //     query: {url}
-        //   })
-        //   // this.$router.push(`/login`)
-        // }, 2000)
-        // this.wrongMsg = this.$t(`${lang}.wip5`)
-        // this.alertBox = true
-        // alert('请添加地址并登陆后支付！')
-        // this.show=true
-        // if (this.orderAddress.id === '') {
-          const topB = document.getElementsByClassName('layout-box')[0];
-          const that = this
-          let timer = setInterval(() => {
-            let ispeed = Math.floor(-that.scrollTop / 5)
-            topB.scrollTop = that.scrollTop + ispeed
-            if (that.scrollTop === 0) {
-              clearInterval(timer)
-            }
-          }, 22)
-          //  console.log("qeqweqweqw",this.scrollTop)
-          // this.newAddress = true
-          // this.isEdit = false
-        // }
+        this.login()
       }
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     fuckYouM() {
       if (this.tooInp.trim() === '') {
@@ -2569,7 +2604,6 @@ export default {
       this.tooInp = ''
       this.makeGay = false
       this.preferFee = 0
-      // this.getTex()
       this.fuckYou = false
     },
     checkCount() {
@@ -2647,9 +2681,7 @@ export default {
             this.tex = res.data
             this.tex.priceHKD = res.data.order_amount_HKD
             this.tex.coinType = res.data.currency
-            // console.log("税费",res.data)
             this.ultimatelyPay = res.data.pay_amount;
-            console.log("税费",this.tex)
           })
           .catch(err => {
             this.canSubmit = false
@@ -2684,14 +2716,16 @@ export default {
         pay = 61
       }else if(this.payWay==81){
         pay = 81
-      }else if(this.payWay==82){
-        pay = 82
+      }else if(this.payWay==2){
+        pay = 2
       }else if(this.payWay==83){
         pay = 83
+      }else if(this.payWay==1){
+        pay = 1
       }else if(this.payWay==84){
         pay = 84
       }
-      console.log("方式",this.payWay)
+
       if(this.payWay==''){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         const topB = document.getElementsByClassName('layout-box')[0];
@@ -2705,7 +2739,7 @@ export default {
         }, 22)
         return
       }
-      if(this.payWay==81 || this.payWay==82 ||this.payWay==83){
+      if(this.payWay==81 || this.payWay==2 ||this.payWay==83||this.payWay==1){
         // this.$errorMessage(this.$t(`${lang}.firstLogin`))
         const topB = document.getElementsByClassName('layout-box')[0];
         const that = this
@@ -2765,8 +2799,6 @@ export default {
         }
       })
         .then(res => {
-          // console.log('od===>', res)
-          // this.$store.dispatch('removeCart', this.pathTakeIds)
           if(res.data.config){
             window.location.replace(res.data.config)
           }else {
@@ -2834,6 +2866,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.amount{
+    margin-bottom: 8px!important;
+}
+.point{
+  text-align: right;
+  margin-bottom: 8px;
+  color:999;
+}
 .star{
   color: #c28c8c;
   display: inline-block;

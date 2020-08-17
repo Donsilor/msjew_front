@@ -131,7 +131,8 @@
         "toast1": "请选择要结账商品",
         "toast2": "移除成功",
         "discounts1": "优惠券",
-        "discounts2": "折"
+        "discounts2": "折",
+        "firstLogin":"请先登录或注册！"
       },
       "invoice":{
         "personal":"个人",
@@ -207,7 +208,8 @@
         "discountedAmount": "折扣金额",
         "couponAmount": "优惠券",
         "msg12": "请先登录才能使用优惠券",
-        "useCoupons": "使用优惠券"
+        "useCoupons": "使用优惠券",
+        "point":"*注：订单金额已做抹零处理"
       },
       "pay": {
         "pay": "订单支付",
@@ -596,7 +598,21 @@
         "payfailed":"支付失败",
         "discountedAmount": "折扣金额",
         "Untied":"已解绑",
-        "couponAmount": "优惠券"
+        "couponAmount": "优惠券",
+        "payType1": "微信",
+        "payType2": "支付宝",
+        "payType3": "银联",
+        "payType4": "小程序",
+        "payType5": "余额",
+        "payType6": "Paypal",
+        "payType7": "Paypal Card",
+        "payType8": "支付宝国际版",
+        "payType9": "银联",
+        "payType10": "支付宝",
+        "payType11": "微信",
+        "payType12": "支付宝HK",
+        "payType13": "CARD",
+        "payType14": "电汇"
       },
       "logisticInfo":{
         "title": "我的订单",
@@ -636,7 +652,8 @@
       "addCartFail": "加入购物车是失败",
       "discounts1": "优惠券",
       "discounts2": "折",
-      "buyNow":"立即购买"
+      "buyNow":"立即购买",
+      "firstLogin":"请先登录或注册！"
     },
     "diamond": {},
     "engagement": {
@@ -653,7 +670,9 @@
         "code-null": "验证码不能为空",
         "code-error": "验证码错误",
         "password-null": "密码不能为空",
-        "password-not-same": "密码不一致"
+        "password-not-same": "密码不一致",
+        "code": "输入验证码*",
+        "codeError": "请输入正确的验证码"
       },
       "index": {
         "forget": "找回密码",
@@ -662,7 +681,8 @@
         "email-error": "邮箱格式错误",
         "mobile-error": "电话格式错误",
         "next": "下一步",
-        "code": "输入验证码*"
+        "code": "输入验证码*",
+        "codeError": "请输入正确的验证码"
       },
       "new-password": {
         "code": "验证码",
@@ -708,6 +728,7 @@
         "slider-verify": "请完成验证解锁",
         "input-password": "请输入登入密码",
         "input-code": "请输入验证码",
+        "codeError": "请输入正确的验证码",
         "login-error": "用户或密码错误！",
         "login-success": "登录成功",
         "area-code": "中国"
@@ -821,8 +842,9 @@
       "emailError": "请输入正确的邮箱地址",
       "phoneError": "手机号码格式不正确，仅支持：大陆手机号！",
       "inputUnder": "在下面输入发送到",
-      "theEmailCode": "的验证码。如果没有收到电子邮件，请查看垃圾邮件文件 夹或稍后点击发送",
-      "code": "输入验证码*",
+      "theEmailCode": "的验证码。如果没有收到电子邮件，请查看垃圾邮件文件夹或稍后点击发送",
+      "thePhoneCode": "的验证码。如果没有收到短信，请留意是否被拦截或稍后点击发送",
+      "code": "验证码",
       "inputCode": "请输入验证码",
       "codeError": "请输入正确的验证码",
       "password": "设置密码*",
@@ -834,7 +856,10 @@
       "register": "注册",
       "registerSuccess": "登记成功",
       "tickTheBDDTerms": "请查看并同意BDD条款及细则及私隐政策",
-      "area-code": "中国"
+      "area-code": "中国",
+      "Code": "输入验证码",
+      "code-error": "验证码错误",
+      "inputPhone": "请输入手机号"
     },
     "site-switch": {
       "chooseLanguageCoin": "请选择您语言与结算货币",
@@ -970,7 +995,13 @@
         "EarringsAndStuds":"耳环/耳钉",
         "DecorationAndPendant":"摆件/挂件",
         "others":"其它",
-        "login":"请登入"
+        "login":"请登入",
+        "personalCenter":"个人中心",
+        "logout":"退出",
+        "tips": "提示",
+        "text": "确定退出登录？",
+        "cancel": "取消",
+        "course": "确定"
       },
       "noMoreData": {
         "noMore": "暂无更多"
@@ -1153,7 +1184,8 @@
       "oddPrice": "原  价",
       "newPrice": "折后价",
       "needLogin": "请先登录，才能领取优惠券",
-      "buyNow":"立即购买"
+      "buyNow":"立即购买",
+      "firstLogin":"请先登录或注册！"
     },
     "listCommons": {
       "sliders": [
@@ -2262,7 +2294,7 @@
 		"msg10": "购物卡添加成功！",
 		"msg11": "解除绑定成功！",
 		"msg12": "此卡还未到使用时间！",
-		"msg13": "此卡已超��使用时间！"
+		"msg13": "此卡已超过使用时间！"
 	},
 	"generalize": {
 		"index": {
@@ -2289,8 +2321,8 @@
       "limit2": " 元使用",
       "limit3": "限 ",
       "limit4": " 使用",
+      "limit5": "站点使用",
       "use": "点击使用",
-      "time": "活动时间",
       "loseEfficacy": "已失效",
       "getCoupon": "领取优惠券",
       "useCoupon": "使用优惠券",
@@ -2303,6 +2335,11 @@
       "haveChoose": "已选用",
       "immediatelyChoose": "立即选用",
       "msg1": "优惠券领取成功",
-      "msg2": "优惠券领取失败，请重试"
+      "msg2": "优惠券领取失败，请重试",
+      "platform1": "中国",
+      "platform2": "香港",
+      "platform3": "澳门",
+      "platform4": "台湾",
+      "platform5": "国外"
   }
 }

@@ -509,14 +509,14 @@
         "phoneBox": "Phone*",
         "phoneTips": "Enter correct phone*",
         "mailBox": "Enter Email*",
-        "mailTips": "Enter correct email",
+        "mailTips": "Enter correct email*",
         "password": "Enter Password*",
-        "passwordTips": "Enter login password",
+        "passwordTips": "Enter login password*",
         "logintips": "login successful",
         "repassword": "Confirm Password *",
         "forget": "Forget Password?",
         "code": "Verification*",
-        "codeTips": "Enter correct verification code",
+        "codeTips": "Enter correct verification code*",
         "getCode": "Send Verification",
         "num": "Sent",
         "logins": "OR",
@@ -565,7 +565,9 @@
         "reset": "SUBMIT",
         "hadReset": "Successful Password Reset. Log In With Your New Password",
         "waitTimes": "Wait For {second} Seconds To Jump To Login Page.",
-        "loginNow": "SINN IN NOW"
+        "loginNow": "SINN IN NOW",
+        "code": "Verification*",
+        "codeTips": "Enter correct verification code"
     },
     "contactUs": {
         "callToUs": "Call us",
@@ -1128,7 +1130,8 @@
         "deleteWishSuccess": "Wish list deleted",
         "searchSimilar": "search similar",
         "discounts1": "Coupon",
-        "discounts2": "off"
+        "discounts2": "off",
+        "firstLogin": "Please login or register!"
     },
     "pay": {
         "confirmOrder": "Shopping cart",
@@ -1177,7 +1180,8 @@
         "SwiftCode": "SWIFT CODE:",
         "uploadPhotos": "Upload  Photos",
         "Note3":"Note：Currency rate is as referred on BDD website.",
-        "NotSupportPay":"Sorry, USD is not supported by this payment method, please go back to select an available currency or change to another payment method! "
+        "NotSupportPay":"Sorry, USD is not supported by this payment method, please go back to select an available currency or change to another payment method! ",
+        "ScanCode":"Please use WeChat to scan the QR code"
     },
     "finishPay": {
         "PayPending1": "The order has been submitted and the system is processing. Please wait.",
@@ -1234,7 +1238,9 @@
         "newinfo3": "Please note:",
         "newinfo4": "- In-stock products: The transfer will take around 2-3 working days.",
         "newinfo5": "- Made-to-order products: If order-make is required, our CS Team will contact you asap to confirm the order details and pick-up time.",
-        "newinfo6": "- Special Arrangements During Festivals/Holidays: In case of public holidays, transfer and orders will be delayed. Our CS Team will confirm with you the details. Thanks for your understanding."
+        "newinfo6": "- Special Arrangements During Festivals/Holidays: In case of public holidays, transfer and orders will be delayed. Our CS Team will confirm with you the details. Thanks for your understanding.",
+        "toast1": "Copied",
+        "toast2": "This browser does not support Auto Copy"
     },
     "search": {
         "keywordPlaceholder": "Keyword",
@@ -1310,7 +1316,8 @@
         "oddPrice": "Original price",
         "newPrice": "Discount price",
         "needLogin": "Please login before redeem the coupon. ",
-        "buyNow":"Order Now"
+        "buyNow":"Order Now",
+        "firstLogin": "Please login or register!"
     },
     "policies": {
         "layout": {
@@ -2471,7 +2478,8 @@
         "error": "Page Error",
         "soleOut": "The Goods Have Sold Out",
         "pleaseSelect":"Please select product parameters",
-        "doubleRingTip":"Please select from the available colour and size options"
+        "doubleRingTip":"Please select from the available colour and size options",
+        "firstLogin": "Please login or register!"
     },
     "order": {
         "firstLogin": "Please login or register!",
@@ -2579,7 +2587,8 @@
         "msgTitle2": "Submit：",
         "msgContent2": "No product selected!",
         "setDefaultAddr": "Set The Default Address",
-        "setSuccess": "The default address setting was successful!"
+        "setSuccess": "The default address setting was successful!",
+        "point":"*Note：The Order Amount has been rounded "
     },
     "invoice": {
         "personal": "personal",
@@ -2659,21 +2668,26 @@
         "limit2": " To Use",
         "limit3": "limit ",
         "limit4": " To Use",
+        "limit5": "Site Use",
         "use": "Click On The Use",
-        "time": "Promotion period",
         "loseEfficacy": "Lost Efficacy",
         "getCoupon": "Get Coupon",
         "useCoupon": "Use Coupon",
         "accomplish": "Accomplish",
-        "alreadyApplied": "Coupon has been used",
-        "alreadyExpired": "expired",
+        "alreadyApplied": "Invalid Coupon",
+        "alreadyExpired": "Expired",
         "alreadyReceived": "Redeemed",
         "specificProduct":"Specific Products",
         "immediatelyReceive": "Collect it now",
         "haveChoose": "Already Selected",
         "immediatelyChoose": "Select it now",
         "msg1": "Coupon has been claimed successfully",
-        "msg2": "Something went wrong, please try it again."
+        "msg2": "Something went wrong, please try it again.",
+        "platform1": "China",
+        "platform2": "Hong Kong",
+        "platform3": "Macao",
+        "platform4": "Taiwan",
+        "platform5": "Foreign"
     },
     "subject": {
         "discount":{

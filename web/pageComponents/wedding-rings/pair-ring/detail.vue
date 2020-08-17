@@ -13,7 +13,7 @@
       <!--      右侧-->
       <div class="right-detail">
         <h2 class="product-name">
-          {{ info.name }}
+          {{ info.goodsName }}
         </h2>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <!-- <div class="sku" >
@@ -710,6 +710,7 @@
     <comments ref="product-comments" :group-id="info.id"></comments>
     <!-- 获取优惠券 -->
     <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
+    <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
   </div>
 </template>
 
@@ -1205,6 +1206,15 @@ export default {
     // 立即购买
     orderNow(){
       const _this = this
+      if(!this.isLogin && this.$store.state.platform == 20){
+        _this.$errorMessage(_this.$t(`common.firstLogin`))
+        return
+      }
+
+      if(this.$store.state.platform == 20 && !this.isLogin){
+        this.ifShowLoginPop = true
+        return
+      }
 
       _this.changeChecked()
 
@@ -1306,14 +1316,6 @@ export default {
     },
     getIndex(i) {
       this.magnifying = this.thumbnails[i]
-    },
-    // 领取优惠券
-    getCoupon() {
-      if(!this.$store.getters.hadLogin) {
-        this.$errorMessage(this.$t(`${lang}.needLogin`))
-      }else{
-        this.showCoupon = true
-      }
     }
   }
 }

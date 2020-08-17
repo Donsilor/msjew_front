@@ -17,7 +17,11 @@
         <div class="top">
           <img src="@/static/cart/success.png" />
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
-          <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+          <p v-if="this.$store.state.platform == 41" class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+            <span class="font-size-16">{{ info.coinCode }}</span>
+            {{ formatAmount(info.payAmount) }}
+          </p>
+          <p v-else class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ info.coinCode }}</span>
             {{ formatMoney(info.payAmount) }}
           </p>
@@ -53,7 +57,8 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ info.coinCode }}{{ formatMoney(info.payAmount) }}</span>
+              <span v-if="this.$store.state.platform == 41">{{ info.coinCode }}{{ formatAmount(info.payAmount) }}</span>
+              <span v-else>{{ info.coinCode }}{{ formatMoney(info.payAmount) }}</span>
             </div>
           </li>
           <li>
@@ -70,7 +75,11 @@
         <div class="top" >
           <img src="@/static/cart/success.png"  />
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
-          <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+          <p v-if="this.$store.state.platform == 41" class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+            <span class="font-size-16">{{ formatCoin(orderinfo.coinCode) }}</span>
+            {{ formatAmount(orderinfo.payAmount) }}
+          </p>
+          <p v-else class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ formatCoin(orderinfo.coinCode) }}</span>
             {{ formatMoney(orderinfo.payAmount) }}
           </p>
@@ -106,7 +115,8 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
+              <span v-if="this.$store.state.platform == 41">{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
+              <span v-else>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
             </div>
           </li>
           <li>
@@ -130,27 +140,27 @@
       </div>
       <div class="btn">
         <div
-          v-if="info.payChannel === 1"
+          v-if="info.payChannel === 11"
           class="btn-common btn-black"
           @click="paytips = !paytips"
         >
           {{ lang.paytips }}
         </div>
         <div
-          v-if="info.payChannel !== 1&&hadLogin"
+          v-if="info.payChannel !== 11&&hadLogin"
           class="btn-common btn-black"
           @click="goDetails"
         >
           {{ lang.lookBill }}
         </div>
         <div
-          v-if="info.payChannel !== 1"
+          v-if="info.payChannel !== 11"
           class="btn-common btn-gray btn-black"
           @click="goIndex"
         >
           {{ lang.continue }}
         </div>
-        <div v-if="info.payChannel === 1" class="btn-more">
+        <div v-if="info.payChannel === 11" class="btn-more">
           <span class="btn-common btn-gray" @click="goDetails">{{
             lang.orderDetails
           }}</span>
@@ -355,21 +365,27 @@ export default {
 
     },
     getChannelType(type) {
-      // 订单支付渠道(1-电汇,2-paypal,3-微信,4-支付宝,5-visa/Mastercard,6-銀聯,7-paydollar)
+      // 订单支付渠道(11-电汇,6-paypal,1-大陆微信,83-国际微信,2-大陆支付宝,82-国际支付宝,61-visa/Mastercard,6-銀聯,81-信用卡,7-paydollar)
       switch (type) {
-        case 1:
+        case 11:
           this.text = this.lang.text1
           break
         case 6:
           this.text = this.lang.text2
           break
-        case 3:
+        case 1:
           this.text = this.lang.text3
           break
-        case 4:
+        case 83:
+          this.text = this.lang.text3
+          break
+        case 2:
           this.text = this.lang.text4
           break
-        case 5:
+        case 82:
+          this.text = this.lang.text4
+          break
+        case 61:
           this.text = this.lang.text5
           break
         // case 6:

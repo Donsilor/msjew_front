@@ -34,7 +34,8 @@ export default {
         email: '',
         code: '',
         password: '',
-        password_repetition: ''
+        password_repetition: '',
+        pictureCode: ''
       }
     }
   },
@@ -42,11 +43,14 @@ export default {
     this.$nextTick(() => {})
   },
   methods: {
-    mobileFinish(mobile = '') {
+    mobileFinish(res) {
       // console.log('mobileFinish===>',mobile)
       const _this = this
+
       const info = JSON.parse(JSON.stringify(_this.info))
-      info.mobile = mobile
+      info.mobile = res.mobile
+      info.code = res.code
+      info.pictureCode = res.pictureCode
       _this.info = info
 
       if (!info.mobile) {
@@ -58,15 +62,27 @@ export default {
         return
       }
 
+      if(!info.code){
+        _this.$toast(_this.lang['code'])
+        return
+      }
+
+      if(info.code != info.pictureCode){
+        _this.$toast(_this.lang['codeError'])
+        return
+      }
+
       _this.$router.push({
         name: 'forget-new-password'
       })
     },
-    emailFinish(email = '') {
+    emailFinish(res) {
       // console.log('emailFinish===>', email)
       const _this = this
       const info = JSON.parse(JSON.stringify(_this.info))
-      info.email = email
+      info.email = res.email
+      info.code = res.code
+      info.pictureCode = res.pictureCode
       _this.info = info
 
       if (!info.email) {
@@ -75,6 +91,16 @@ export default {
       }
       if (!_this.$helpers.trueEmail(info.email)) {
         _this.$toast(_this.lang['email-error'])
+        return
+      }
+
+      if(!info.code){
+        _this.$toast(_this.lang['code'])
+        return
+      }
+
+      if(info.code != info.pictureCode){
+        _this.$toast(_this.lang['codeError'])
         return
       }
 

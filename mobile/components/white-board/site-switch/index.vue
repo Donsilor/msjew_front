@@ -36,9 +36,9 @@
               </option>
             </select>
           </div>
-          <div class="select-icon">
+          <!-- <div class="select-icon">
             <i class="iconfont iconkuozhan"></i>
-          </div>
+          </div> -->
         </div>
         <div v-else-if="this.$store.state.platform === 41" class="select-line" @click="chooseCoin">
           <div class="line-icon">
@@ -53,7 +53,7 @@
             </select>
           </div>
           <div class="select-icon">
-            <i class="iconfont iconkuozhan"></i>
+            <!-- <i class="iconfont iconkuozhan"></i> -->
           </div>
         </div>
         <div v-else class="select-line" @click="chooseCoin">

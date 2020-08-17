@@ -20,8 +20,8 @@
                 <img :src="imageStrToArray(block1.pick)" />
                 <div class="title-block">
                   <div class="title-block-name">
-				    <span class="discount-icon fl" v-if="block1.couponType == 1">{{ language == 'en_US' ? discountUs(this.block1.couponNum)+'%' : discountConversion(this.block1.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
-				    <span class="favourable-icon fl" v-if="block1.couponType == 2">￥</span>
+				            <span class="discount-icon fl" v-if="block1.couponType == 1">{{ language == 'en_US' ? discountUs(this.block1.couponNum)+'%' : discountConversion(this.block1.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
+				            <span class="favourable-icon fl" v-if="block1.couponType == 2">￥</span>
 
                     {{ block1.name }}
                   </div>
@@ -30,7 +30,7 @@
                   </div>
                 </div>
               </div>
-              <div class="right-info-block product-price" :class="{'old-price' : block1.oldPrice !== block1.newPrice}">
+              <div class="right-info-block product-price original-price" :class="{'old-price' : block1.oldPrice !== block1.newPrice}">
                 <span class="coin">
                   {{ formatCoin (info.coinType) }}
                 </span>
@@ -53,8 +53,8 @@
                 <img :src="imageStrToArray(block2.pick)" />
                 <div class="title-block">
                   <div class="title-block-name">
-					<span class="discount-icon fl" v-if="block2.couponType == 1">{{ language == 'en_US' ? discountUs(this.block2.couponNum)+'%' : discountConversion(this.block2.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
-					<span class="favourable-icon fl" v-if="block2.couponType == 2">￥</span>
+					          <span class="discount-icon fl" v-if="block2.couponType == 1">{{ language == 'en_US' ? discountUs(this.block2.couponNum)+'%' : discountConversion(this.block2.couponNum)}} {{ $t(`${lang}.discounts2`) }}</span>
+					          <span class="favourable-icon fl" v-if="block2.couponType == 2">￥</span>
 
                     {{ block2.name }}
                   </div>
@@ -63,7 +63,7 @@
                   </div>
                 </div>
               </div>
-              <div class="right-info-block product-price" :class="{'old-price' : block2.oldPrice !== block2.newPrice}">
+              <div class="right-info-block product-price original-price" :class="{'old-price' : block2.oldPrice !== block2.newPrice}">
                 <span class="coin">
                   {{ formatCoin (info.coinType) }}
                 </span>
@@ -129,7 +129,7 @@
         <recommend-data :recommends="recommends"></recommend-data>
       </section>
       <!--    tab切换-->
-      <ul class="tab">
+      <!-- <ul class="tab">
         <li
           v-for="(item, index) in tabs"
           :key="index"
@@ -138,15 +138,17 @@
         >
           <span>{{ item.name }}</span>
         </li>
-      </ul>
+      </ul> -->
       <!--    商品详情-->
+      <h2 class="detail-name">{{ $t(`${lang}.goodsDetails`) }}</h2>
       <section ref="product-desc" class="desc-top">
         <div class="section-name">
-          <h2>{{ $t(`${lang}.goodsDetails`) }}</h2>
-          <h3>ID：{{ info.goodsCode }}</h3>
+          <h3>{{ $t(`${lang}.goodsId`) }}：
+            <span>{{ info.goodsCode }}</span>
+          </h3>
         </div>
         <div class="attr-group">
-          <h3 class="group-name">{{ $t(`${lang}.productParameters`) }}</h3>
+          <!-- <h3 class="group-name">{{ $t(`${lang}.productParameters`) }}</h3> -->
           <ul class="attr-list">
             <li
               v-for="(item, index) in productInfo.specs"
@@ -157,11 +159,13 @@
               <span>{{ item.configAttrVal || '--' }}</span>
             </li>
           </ul>
+          <div class="line"></div>
         </div>
       </section>
       <section class="desc" v-html="info.goodsDesc"></section>
       <order-include></order-include>
       <comments ref="product-comments" :good-id="info.id"></comments>
+      <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
     </div>
   </div>
 </template>
@@ -234,7 +238,8 @@ export default {
       activeTab: 'desc',
       magnifying: '',
       language: this.$store.state.language,
-      isLogin:this.$store.getters.hadLogin
+      isLogin:this.$store.getters.hadLogin,
+      ifShowLoginPop: false
     }
   },
   computed: {
@@ -580,6 +585,10 @@ export default {
         })
     },
     async orderNow() {
+      if(!this.isLogin && this.$store.state.platform == 20){
+        this.ifShowLoginPop = true
+        return
+      }
       const timeSock = new Date().getTime()
       const time = this.getTimestampUuid
       let goodInfo = [
@@ -749,6 +758,9 @@ export default {
     },
     getIndex(i) {
     	this.magnifying = this.thumbnails[i]
+    },
+    closeLogin() {
+      this.ifShowLoginPop = false
     }
   }
 }
@@ -773,7 +785,7 @@ export default {
     .left-info-block {
       display: flex;
       align-items: center;
-	  width: 420px;
+	  width: 320px;
 	  overflow: hidden;
       .title-block-name {
         font-size: 18px;
@@ -827,4 +839,7 @@ export default {
 	color: #c3c3c3;
 	text-decoration: line-through;
 }
+ .original-price{
+      color: #999999!important;
+    }
 </style>

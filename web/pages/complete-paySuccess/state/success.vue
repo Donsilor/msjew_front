@@ -87,10 +87,10 @@
           <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
           <div class="order-num">
             {{ $t(`${lang}.orderCode`) }}
-            <nuxt-link :to="`/account/order-details?order_sn=${this.oid}`">
-              <span class="underline" >{{ data2.orderNo }}</span>
-            </nuxt-link>
-            <!-- <span class="underline">{{ data.orderNo }}</span> -->
+              <!-- <nuxt-link :to="`/account/order-details?orderId=${this.oid}`"> -->
+                <span>{{ data2.orderNo }}</span>
+                <i class="icon iconfont iconcopy copy-btn" :data-clipboard-text="data2.orderNo" @click="copy"></i>
+              <!-- </nuxt-link> -->
           </div>
         </div>
         <div v-show="stepPayVerify">
@@ -233,6 +233,7 @@
 <script>
 
 const lang = `finishPay`
+import Clipboard from 'clipboard'
 // console.log("aa",$t(`${lang}.hangding`))
 export default {
   name: 'Success',
@@ -358,6 +359,17 @@ export default {
       }
   },
   methods: {
+    copy() {
+      const clipboard = new Clipboard('.copy-btn')
+      clipboard.on('success', e => {
+        this.$successMessage(this.$t(`${lang}.toast1`))
+        clipboard.destroy()
+      })
+      clipboard.on('error', e => {
+        this.$errorMessage(this.$t(`${lang}.toast2`))
+        clipboard.destroy()
+      })
+    },
     toLogin() {
       this.$router.push(`/login`)
     },
@@ -1089,5 +1101,9 @@ div {
 }
 .underline{
   text-decoration:underline
+}
+
+.copy-btn{
+  cursor: pointer;
 }
 </style>

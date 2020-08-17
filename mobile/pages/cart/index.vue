@@ -149,7 +149,9 @@
                       </p>
                     </div> -->
                   </div>
-                  <b class="double-ring-price" v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  <div class="double-ring-price" v-if="!item.coupon.discount">
+                    <b  >{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
+                  </div>
                   <div class="discount-price" v-else>
                     <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
                     <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
@@ -367,21 +369,25 @@ export default {
     },
     goPay() {
       // console.log("id",this.list)
-      const arr = []
-      for (let i = 0; i < this.list.length; i++) {
-        if (this.list[i].isSelect) {
-          arr.push(this.list[i])
+      if(!this.isLogin && this.$store.state.platform == 21){
+        this.$toast.show(this.lang.firstLogin)
+      } else {
+        const arr = []
+        for (let i = 0; i < this.list.length; i++) {
+          if (this.list[i].isSelect) {
+            arr.push(this.list[i])
+          }
         }
-      }
-
-      if (arr.length <= 0) {
-        this.$toast.show(this.lang.toast1)
-      } else if (arr.length > 0) {
-        console.log("arr",arr)
-        storage && storage.set('myCartList', JSON.stringify(arr))
-        this.$router.push({
-          name: 'cart-sureOrder'
-        })
+  
+        if (arr.length <= 0) {
+          this.$toast.show(this.lang.toast1)
+        } else if (arr.length > 0) {
+          console.log("arr",arr)
+          storage && storage.set('myCartList', JSON.stringify(arr))
+          this.$router.push({
+            name: 'cart-sureOrder'
+          })
+        }
       }
     },
     // 判断是否失效
@@ -1039,7 +1045,7 @@ export default {
               font-weight: 400;
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
-              margin-left: 15px;
+              // margin-left: 15px;
             }
             .double-ring-price{
               font-size: 17px;
@@ -1048,9 +1054,9 @@ export default {
               color: rgba(243, 163, 145, 1);
               font-family: twCenMt;
               text-align: left;
-              margin-right: 102px;
-              // margin-left: 30px;
-              display: inline-block;
+              margin-left: 140px;
+              // margin-right:20px;
+              // margin-left: 65px;
               margin-top: 10px;
             }
             .cut-line{

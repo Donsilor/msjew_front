@@ -102,7 +102,7 @@
             </div>
           </div>
         </div>
-        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
+        <ul class="services-list">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
@@ -292,6 +292,7 @@
 
     <!-- 获取优惠券 -->
     <get-coupon v-if="showCoupon" @closeCoupon="showCoupon = false" :moneyInfo="info.coupon.money"></get-coupon>
+    <login-pop v-if="ifShowLoginPop" @closeLogin="closeLogin"></login-pop>
   </div>
 </template>
 
@@ -548,14 +549,6 @@ export default {
     },
     getIndex(i) {
       this.magnifying = this.thumbnails[i]
-    },
-    // 领取优惠券
-    getCoupon() {
-      if(!this.$store.getters.hadLogin) {
-        this.$errorMessage(this.$t(`${lang}.needLogin`))
-      }else{
-        this.showCoupon = true
-      }
     }
   }
 }
@@ -565,8 +558,8 @@ export default {
 .detail-page {
   margin: auto;
   .add-cart{
-    margin-top: 10px;
-    width: 659px!important;
+    // margin-top: 10px;
+    width: 320px!important;
   }
   .start-dj{
     width: 320px!important;

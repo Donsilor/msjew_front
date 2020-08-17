@@ -71,7 +71,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    const seoInfo = await app.$getSeoInfo('Rings')
+    const seoInfo = await app.$getSeoInfo('settingRings')
     return $axios({
       method: 'get',
       url: '/web/goods/style/web-site',

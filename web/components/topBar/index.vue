@@ -140,7 +140,8 @@
                 @command="setCoin"
               >
                 <span class="row-flex align-item-center el-dropdown-link">
-                  {{ coinInfo.content }}<i class="iconfont iconkuozhan"></i>
+                  {{ coinInfo.content }}
+                  <!-- <i class="iconfont iconkuozhan"></i> -->
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item
@@ -161,7 +162,8 @@
                 @command="setCoin"
               >
                 <span class="row-flex align-item-center el-dropdown-link">
-                  {{ coinInfo.content }}<i class="iconfont iconkuozhan"></i>
+                  {{ coinInfo.content }}
+                  <!-- <i class="iconfont iconkuozhan"></i> -->
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item
@@ -1976,12 +1978,9 @@ export default {
     }
   },
   mounted() {
-    // console.log("dangqiandizhi",window.location.href)
-    // console.log("oldurl==========",window.location)
-    this.language = this.getCookie('language')
-    // console.log("kkkkkkk",this.$store.state.language)
-    const _this = this
-    _this.$nextTick(() => {})
+    this.language = this.$store.state.language
+
+    this.$nextTick(() => {})
   },
   methods: {
     // 点击登入获取上页url
@@ -2003,16 +2002,6 @@ export default {
         })
       },0)
       // console.log("oldurl",url)
-    },
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
     },
     ...mapMutations(['setCoin', 'setLanguage']),
     fixed(status) {

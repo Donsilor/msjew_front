@@ -929,14 +929,20 @@
               </div>
             </div>
 
-            <div class="detail-line">
+            <div class="detail-line amount">
               <div class="font-size-16 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
-              <div class="hkd color-pink price-big">
+              <div v-if="this.$store.state.platform == 40" class="hkd color-pink price-big" >
+                {{ formatCoin(coinType) }}
+                {{ formatAmount(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
+              </div>
+              <div v-else class="hkd color-pink price-big">
                 {{ formatCoin(coinType) }}
                 {{ formatMoney(ultimatelyPay) }}
                 <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
               </div>
             </div>
+            <p class="point" v-show="this.$store.state.platform == 40 && floatStr(ultimatelyPay)>0">({{ $t(`${lang}.point`) }})</p>
           </div>
         </div>
       </div>
@@ -945,7 +951,12 @@
         :class="['buy-btn', { disabled: !canSubmit }]"
         @click.stop="createOrder()"
       >
-        <span>
+        <span v-if="this.$store.state.platform == 40">
+          {{ formatCoin(coinType) }}
+          {{ formatAmount(ultimatelyPay) }}
+          <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
+        </span>
+        <span v-else>
           {{ formatCoin(coinType) }}
           {{ formatMoney(ultimatelyPay) }}
           <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
@@ -1897,13 +1908,18 @@
               </div>
             </div>
 
-            <div class="detail-line">
+            <div class="detail-line amount"> 
               <div class="font-size-14 color-333">{{ $t(`${lang2}.NeedPay`) }}</div>
-              <div class="hkd color-pink price-big">
+              <div v-if="this.$store.state.platform == 40" class="hkd color-pink price-big">
+                {{ formatCoin(coinType) }}
+                {{ formatAmount(ultimatelyPay) }}
+              </div>
+              <div v-else class="hkd color-pink price-big">
                 {{ formatCoin(coinType) }}
                 {{ formatMoney(ultimatelyPay) }}
               </div>
             </div>
+            <p class="point" v-show="this.$store.state.platform == 40 && floatStr(ultimatelyPay)>0">({{ $t(`${lang}.point`) }})</p>
           </div>
         </div>
       </div>
@@ -1912,7 +1928,12 @@
         :class="['buy-btn', { disabled: !canSubmit }]"
         @click.stop="createOrder1()"
       >
-        <span>
+        <span v-if="this.$store.state.platform == 40">
+          {{ formatCoin(coinType) }}
+          {{ formatAmount(ultimatelyPay) }}
+          <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
+        </span>
+        <span v-else>
           {{ formatCoin(coinType) }}
           {{ formatMoney(ultimatelyPay) }}
           <!-- {{ formatMoney(tex.payAmount || goodsPrice) }} -->
@@ -3318,6 +3339,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.amount{
+  margin-bottom: 8px!important;
+}
+.point{
+  text-align: right;
+  margin-bottom: 8px;
+  color:#999;
+}
 .star{
   color: #c28c8c;
 }
@@ -4673,7 +4702,7 @@ div {
             color: #aa8a7b;
           }
           .price-big {
-            font-size: 20px;
+            font-size: 16px;
           }
           .question {
             position: absolute;

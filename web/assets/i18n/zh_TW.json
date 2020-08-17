@@ -515,11 +515,11 @@
         "mailTips": "請輸入正確郵箱地址*",
         "password": "設置密碼*",
         "repassword": "確認密碼*",
-        "passwordTips": "請輸入正確密碼",
+        "passwordTips": "請輸入正確密碼*",
         "logintips": "登入成功",
         "forget": "忘記密碼？",
         "code": "請輸入驗證碼*",
-        "codeTips": "請輸入正確驗證碼",
+        "codeTips": "請輸入正確的驗證碼*",
         "getCode": "獲取驗證碼",
         "num": "S 後重新獲取",
         "logins": "其他登入方式",
@@ -568,7 +568,9 @@
         "reset": "確認重置",
         "hadReset": "您的密碼已經重新設置，請以新密碼登入",
         "waitTimes": "{second} 秒後自動返回登入頁面",
-        "loginNow": "立即登入"
+        "loginNow": "立即登入",
+        "code": "請輸入驗證碼*",
+        "codeTips": "請輸入正確驗證碼"
     },
     "contactUs": {
         "callToUs": "致電我們",
@@ -1132,7 +1134,8 @@
         "deleteWishSuccess": "刪除心願單成功",
         "searchSimilar": "找类似",
         "discounts1": "優惠券",
-        "discounts2": "折"
+        "discounts2": "折",
+        "firstLogin": "請先登錄或註冊！"
     },
     "pay": {
         "confirmOrder": "購物車",
@@ -1181,7 +1184,8 @@
         "SwiftCode": "SWIFT CODE:",
         "uploadPhotos": "上傳圖片",
         "Note3":"注：此貨幣是按照BDD官網匯率作為參考標準.",
-        "NotSupportPay":"當前支付方式，不支持USD支付，請返回上個頁面切換貨幣或更換其它支付方式完成支付！"
+        "NotSupportPay":"當前支付方式，不支持USD支付，請返回上個頁面切換貨幣或更換其它支付方式完成支付！",
+        "ScanCode":"請使用微信掃描二維碼"
     },
     "finishPay": {
         "PayPending1": "訂單已經提交，系統正在處理中,請稍等。",
@@ -1238,7 +1242,9 @@
         "newinfo3": "請注意：",
         "newinfo4": "- 現貨商品: 現有庫存商品大約需要2-3個工作日安排發貨。",
         "newinfo5": "- 全新訂造貨品：如貨品需訂造，顧客服務團隊將會聯絡您確認訂造詳情及取貨時間。",
-        "newinfo6": "- 節日/假期特別安排：如遇公眾假期休息及訂貨日期將會延遲，實際日期將以顧客服務團隊回覆作實，敬請見諒。"
+        "newinfo6": "- 節日/假期特別安排：如遇公眾假期休息及訂貨日期將會延遲，實際日期將以顧客服務團隊回覆作實，敬請見諒。",
+        "toast1": "複製成功",
+        "toast2": "该浏览器不支持自动复製"
     },
     "search": {
         "keywordPlaceholder": "請輸入關鍵字搜索",
@@ -1314,7 +1320,8 @@
         "oddPrice": "原  價",
         "newPrice": "折後價",
         "needLogin": "請先登錄，才能領取優惠券",
-        "buyNow":"立即購買"
+        "buyNow":"立即購買",
+        "firstLogin": "請先登錄或註冊！"
     },
     "policies": {
         "layout": {
@@ -2474,7 +2481,8 @@
         "error": "頁面出錯了",
         "soleOut": "商品已售罄",
         "pleaseSelect":"請先選擇商品參數！",
-        "doubleRingTip":"您未選擇參數或已選擇的參數已售罄，請重新選擇！"
+        "doubleRingTip":"您未選擇參數或已選擇的參數已售罄，請重新選擇！",
+        "firstLogin": "請先登錄或註冊！"
     },
     "order": {
         "firstLogin": "請先登錄或註冊！",
@@ -2582,7 +2590,8 @@
         "msgTitle2": "提示：",
         "msgContent2": "没有選擇商品！",
         "setDefaultAddr": "設置默認地址",
-        "setSuccess": "默認地址設置成功"
+        "setSuccess": "默認地址設置成功",
+        "point":"*註：訂單金額已做抹零處理"
     },
     "invoice": {
         "personal": "個人",
@@ -2662,8 +2671,8 @@
         "limit2": " 使用",
         "limit3": "限 ",
         "limit4": " 使用",
+        "limit5": "站點使用",
         "use": "點擊使用",
-        "time": "活動時間",
         "loseEfficacy": "已失效",
         "getCoupon": "領取優惠券",
         "useCoupon": "使用優惠券",
@@ -2676,7 +2685,12 @@
         "haveChoose": "已选用",
         "immediatelyChoose": "立即选用",
         "msg1": "優惠券領取成功",
-        "msg2": "優惠券領取失敗，請重試"
+        "msg2": "優惠券領取失敗，請重試",
+        "platform1": "中國",
+        "platform2": "香港",
+        "platform3": "澳門",
+        "platform4": "臺灣",
+        "platform5": "國外"
     },
     "subject": {
         "discount":{
