@@ -119,7 +119,19 @@
         {{ lang.cmw }}
         <div class="triangle" />
       </div>
-      <div class="submit-btn">
+      <div
+          v-if="
+            parseInt($route.query.step) === 1 &&
+              !$route.query.isBack &&
+              inSale &&
+              canAddCart
+          "
+          class="btn-common btn-white"
+          @click="emitStep(`ring`)"
+        >
+          {{ lang.addToRingTuo }}
+      </div>
+      <!-- <div class="submit-btn">
         <div
           v-if="
             parseInt($route.query.step) === 1 &&
@@ -145,7 +157,7 @@
               : lang.notInSale
           }}
         </div>
-      </div>
+      </div> -->
       <!--    <div-->
       <!--      v-if="-->
       <!--        parseInt($route.query.step) === 1 &&-->
@@ -158,7 +170,7 @@
       <!--    >-->
       <!--      {{ lang.addTo }} >-->
       <!--    </div>-->
-      <div
+      <!-- <div
         v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
         :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
         @click="orderNow"
@@ -170,10 +182,10 @@
               : lang.noTotalStock
             : lang.notInSale
         }}
-      </div>
+      </div> -->
       <div
         v-if="parseInt($route.query.step) === 2 && !$route.query.isBack"
-        :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+        :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
         @click="emitStep(2)"
       >
         <span>{{
