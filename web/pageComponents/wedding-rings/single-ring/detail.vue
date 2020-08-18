@@ -296,7 +296,7 @@
                 {{ $t(`${lang}.ConfirmTheChoice`) }}
               </button>
             </nuxt-link>
-            <button v-else :class="['add-to-cart', { active: canAddCart }]">
+            <button v-else @click="Confirm" :class="['add-to-cart', { active: canAddCart }]">
               {{ $t(`${lang}.ConfirmTheChoice`) }}
             </button>
             <!-- <button
@@ -363,7 +363,7 @@
                 </button>
             </div>
             <div v-else> 
-              <button  :class="['add-to-cart', { active: canAddCart }]">
+              <button @click="Confirm"  :class="['add-to-cart', { active: canAddCart }]">
                 {{ $t(`${lang}.ConfirmTheChoice`) }}
               </button>
               

@@ -62,6 +62,17 @@ export default {
         path: '/'
       }
     },
+    Confirm(){
+      const _this = this
+      if (!_this.canAddCart) {
+        _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
+      }
+      if (!_this.simpleDetail) {
+        _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
+      }
+    },
     // 加入购物车
     addCart() {
       const _this = this
