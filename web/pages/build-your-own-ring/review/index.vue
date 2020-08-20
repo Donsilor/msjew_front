@@ -767,6 +767,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.recommend{
+  margin: 110px 0; 
+}
 .detail-page {
   margin: auto;
 }
