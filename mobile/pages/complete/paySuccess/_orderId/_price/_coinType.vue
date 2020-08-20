@@ -115,7 +115,7 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span v-if="this.$store.state.platform == 41">{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
+              <span v-if="this.$store.state.platform == 41">{{ orderinfo.coinCode }}{{ formatAmount(orderinfo.payAmount) }}</span>
               <span v-else>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
             </div>
           </li>
