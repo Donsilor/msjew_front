@@ -13,10 +13,6 @@
           <div class="ow-h1">
             {{ each.checked.length > 0 ? conditionText(each) : lang.all }}
           </div>
-          <!--          <div-->
-          <!--            v-show="each.checked.length > 0"-->
-          <!--            class="triangle-down triangle"-->
-          <!--          />-->
         </div>
       </div>
     </div>
@@ -96,7 +92,7 @@
         </div>
       </div>
       <bdd-empty
-        v-if="noListData"
+        v-if="noListData && ifLoadFinish"
         :type="'list'"
         @searchAgain="research"
       ></bdd-empty>
@@ -159,19 +155,16 @@ export default {
       this.madeUpEv()
     },
   },
-  created() {},
   mounted() {
-    // console.log(11111111111)
     const _this = this
     _this.$nextTick(() => {
-      // this.conditions[0].options = this.CONDITION_INFO.style.coupleRings
-      // console.log("价格",this.conditions)
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
       this.conditions[0].options = this.CONDITION_INFO.style.coupleRings
       this.conditions[0].checked = style.toString()
       this.categoryId = 19
       let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:-1
       // this.changeGender(type)
+      _this.$nuxt.$loading.start()
       this.madeUpEv()
     })
   },

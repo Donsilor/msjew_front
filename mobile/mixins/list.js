@@ -16,7 +16,8 @@ export default {
       pageInfo: null,
 
       requestings: {}, // 正在请求的页码
-      listData: {}
+      listData: {},
+      ifLoadFinish: true
     }
   },
   computed: {
@@ -207,6 +208,7 @@ export default {
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
+          this.ifLoadFinish = false
           // console.error(err)
           if (err instanceof Error) {
             // console.log('这是一个错误')

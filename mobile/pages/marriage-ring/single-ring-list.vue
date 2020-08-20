@@ -111,7 +111,7 @@
         </div>
       </div>
       <bdd-empty
-        v-if="noListData"
+        v-if="noListData && ifLoadFinish"
         :type="'list'"
         @searchAgain="research"
       ></bdd-empty>
@@ -183,19 +183,21 @@ export default {
       this.conditions[0].checked = style.toString()
       this.categoryId = 2
       
-	  var ringT = sessionStorage.getItem('ringType');
-	  if(ringT){
-		  if(ringT == 'lady'){
-			  this.gender = 42
-		  }else if(ringT == 'gentlemen'){
-			  this.gender = 41
-		  }
+      var ringT = sessionStorage.getItem('ringType');
+      if(ringT){
+        if(ringT == 'lady'){
+          this.gender = 42
+        }else if(ringT == 'gentlemen'){
+          this.gender = 41
+        }
 
-      this.changeGender(this.gender)
-	  }else{
-      let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:-1
-      this.changeGender(type)
-    }
+        this.changeGender(this.gender)
+      }else{
+        let type = typeof this.$route.query.type !== 'undefined' ? this.$route.query.type:-1
+        this.changeGender(type)
+      }
+
+      _this.$nuxt.$loading.start()
       // this.madeUpEv()
     })
 

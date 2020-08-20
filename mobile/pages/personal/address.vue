@@ -39,7 +39,7 @@
           </div>
         </li>
       </ul>
-      <bdd-empty v-if="address.length == 0" :type="'address'"></bdd-empty>
+      <bdd-empty v-if="address.length == 0 && ifLoadFinish" :type="'address'"></bdd-empty>
     </div>
     <div class="btn-fixed">
       <div class="btn-common btn-pink" @click="editAddress(null)">
@@ -66,7 +66,8 @@ export default {
       move: false,
       name: '',
       isLogin: !!this.$store.state.token,
-      address: []
+      address: [],
+      ifLoadFinish: true
     }
   },
   mounted() {
@@ -79,12 +80,14 @@ export default {
     },
     getData() {
       const _this = this
+      this.$nuxt.$loading.start()
       _this
         .$axios({
           method: 'get',
           url: `/web/member/address`
         })
         .then(res => {
+          this.$nuxt.$loading.finish()
           // console.log("address",res)
           _this.address = []
           if (res && res.length > 0 && res.length !== 1) {
@@ -121,6 +124,7 @@ export default {
           }
         })
         .catch(err => {
+          this.ifLoadFinish = false
           console.log(err)
         })
     },

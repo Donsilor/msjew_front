@@ -96,7 +96,7 @@
         </div>
       </div>
       <bdd-empty
-        v-if="noListData"
+        v-if="noListData && ifLoadFinish"
         :type="'list'"
         @searchAgain="research"
       ></bdd-empty>
