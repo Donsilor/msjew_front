@@ -3,14 +3,14 @@
     <div class="bg" @click="closeEmit"></div>
     <div class="eject-box">
       <div class="top">
-        <i class="iconfont iconguanbi close" @click="closeEmit"></i>
+        <i class="iconfont iconzhongzhi" @click="resetChoose"></i>
         <div class="title">
           <slot name="title">
             {{ title }}
           </slot>
         </div>
         <div class="button">
-          <i class="iconfont iconzhongzhi" @click="resetChoose"></i>
+          <i class="iconfont iconguanbi close" @click="closeEmit"></i> 
         </div>
       </div>
       <div class="content">
@@ -118,6 +118,11 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.top .iconfont {
+  font-size: 20px;
+  line-height: 20px;
+  color: #bbbbbb;
 }
 .close {
   flex-basis: 20px;

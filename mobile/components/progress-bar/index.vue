@@ -4,13 +4,16 @@
       <div class="eject-choose-pro-title">
         <div>{{ lang.price }}</div>
       </div>
-    </template>
-    <template slot="button">
+    </template> 
+    <!-- <template slot="button">
       <div class="button">
         <i class="iconfont iconzhongzhi" @click="resetChoose"></i>
       </div>
-    </template>
+    </template> -->
     <template slot="content">
+      <div class="button">
+        <i class="iconfont iconzhongzhi" @click="resetChoose"></i>
+      </div>
       <div class="middle">
         <div class="middle-input">
           <div>
@@ -82,6 +85,15 @@ export default {
 </script>
 
 <style scoped lang="less">
+.eject-choose-pro-title{
+  position: relative;
+}
+.button{
+  position: absolute;
+  top:20px; 
+  left:15px;
+}
+
 .clear-btn {
   width: 345px;
   height: 40px;

@@ -13,11 +13,11 @@
       <div class="content">
         <slot name="content"></slot>
       </div>
-      <div class="button">
+      <!-- <div class="button">
         <slot name="button">
           <button>click</button>
         </slot>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
