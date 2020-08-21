@@ -67,7 +67,7 @@ export default {
       name: '',
       isLogin: !!this.$store.state.token,
       address: [],
-      ifLoadFinish: true
+      ifLoadFinish: false
     }
   },
   mounted() {
@@ -88,6 +88,7 @@ export default {
         })
         .then(res => {
           this.$nuxt.$loading.finish()
+          this.ifLoadFinish = true;
           // console.log("address",res)
           _this.address = []
           if (res && res.length > 0 && res.length !== 1) {
@@ -124,7 +125,6 @@ export default {
           }
         })
         .catch(err => {
-          this.ifLoadFinish = false
           console.log(err)
         })
     },

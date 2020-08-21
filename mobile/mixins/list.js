@@ -68,7 +68,7 @@ export default {
     noListData() {
       return (
         this.pageInfo &&
-        this.pageInfo.total_count === 0 &&
+        this.pageInfo.total_count == 0 &&
         !this.requestingListData
       )
     },
