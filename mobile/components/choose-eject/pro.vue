@@ -134,7 +134,7 @@ export default {
   color: #bbbbbb;
 }
 .title {
-  flex-basis: 220px;
+  flex-basis: 300px;
   flex-grow: 0;
   flex-shrink: 0;
   text-align: center;

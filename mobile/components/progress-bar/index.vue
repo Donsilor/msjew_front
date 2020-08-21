@@ -90,7 +90,7 @@ export default {
 }
 .button{
   position: absolute;
-  top:20px; 
+  top:18px; 
   left:15px;
 }
 
@@ -237,7 +237,7 @@ export default {
   justify-content: center;
   div:nth-child(1) {
     font-size: 16px;
-    line-height: 16px;
+    line-height: 30px;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     margin-right: 3px;
