@@ -206,6 +206,7 @@ export default {
   },
   mounted() {
       if (this.$route.query.success === "false") {
+        alert(111111111111)
         this.goPayFailed()
         //失败后，继续调用验证api，写入支付日志
         this.$axios({
@@ -219,7 +220,7 @@ export default {
         .then(data => {})
         .catch(err => {})
       } else {
-
+        alert(222222222222222)
         if (this.isLogin) {
           this.getOrder()
         }else{
@@ -337,10 +338,13 @@ export default {
         })
         .then(data => {
           if(data.verification_status === 'completed') {
+            alert(333333333)
             this.goPaySuccess()
           } else if(data.verification_status === 'failed') {
+            alert(44444444444)
             this.goPayFailed()
           } else {
+            alert(55555555555)
             if(this.verifyCount < 2) {
               setTimeout(this.payVerify, 15000)
             }
