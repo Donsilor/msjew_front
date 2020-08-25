@@ -249,7 +249,7 @@
             <span>{{ b.configAttrVal }}</span>
           </div>
 
-          <div v-if="goodInfo.specs.length > 4" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
+          <div v-if="specsLength" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
         </div>
       </div>
       <div class="details">
@@ -501,6 +501,13 @@ export default {
     activeTime(){
       if(this.goodInfo.coupon.hasOwnProperty('discount')){
         return this.changeTime(this.goodInfo.coupon.discount.end_time) 
+      }
+    },
+    specsLength() {
+      if(this.goodInfo && this.goodInfo.specs && this.goodInfo.specs.length > 4){
+        return true
+      }else{
+        return false
       }
     }
   },

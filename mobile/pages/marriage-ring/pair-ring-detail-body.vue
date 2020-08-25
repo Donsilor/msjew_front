@@ -231,7 +231,7 @@
             <span>{{ b.configAttrVal }}</span>
           </div>
 
-          <div v-if="firstRing.specs.length > 4" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
+          <div v-if="specsLength" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
         </div>
       </div>
       <div class="base-info">
@@ -244,7 +244,7 @@
             <span>{{ b.configAttrVal }}</span>
           </div>
 
-          <div v-if="secondRing.specs.length > 4" :class="['icon',{'reverse': ifShowMoreT}]" @click="showMoreT"></div>
+          <div v-if="specsLengthT" :class="['icon',{'reverse': ifShowMoreT}]" @click="showMoreT"></div>
         </div>
       </div>
       <div class="desc-content" v-html="ringDetail"></div>
@@ -422,6 +422,20 @@ export default {
       return (
         this.goodInfo.goodsStatus === 2
       )
+    },
+    specsLength() {
+      if(this.firstRing && this.firstRing.specs && this.firstRing.specs.length > 4){
+        return true
+      }else{
+        return false
+      }
+    },
+    specsLengthT() {
+      if(this.secondRing && this.secondRing.specs && this.secondRing.specs.length > 4){
+        return true
+      }else{
+        return false
+      }
     }
   },
   mounted(){

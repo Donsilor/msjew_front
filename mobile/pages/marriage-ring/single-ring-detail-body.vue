@@ -191,7 +191,7 @@
             <span>{{ b.configAttrVal }}</span>
           </div>
 
-          <div v-if="goodInfo.specs.length > 4" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
+          <div v-if="specsLength" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
         </div>
         <div class="desc-content" v-html="goodInfo.goodsDesc"></div>
       </div>
@@ -336,6 +336,13 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    },
+    specsLength() {
+      if(this.goodInfo && this.goodInfo.specs && this.goodInfo.specs.length > 4){
+        return true
+      }else{
+        return false
+      }
     }
   },
   mounted() {
