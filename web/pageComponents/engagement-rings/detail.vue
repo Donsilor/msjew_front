@@ -287,6 +287,11 @@
             </button>
           </nuxt-link>
           
+          <div v-else>
+              <button @click="Confirm"  :class="['add-to-cart', { active: canAddCart }]">
+                {{ $t(`${lang}.ConfirmTheChoice`) }}
+              </button>
+          </div>
           <!-- <button
             v-loading="addingCart"
             :class="['add-to-cart', { actived: canAddCart }]"
