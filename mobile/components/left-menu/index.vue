@@ -33,7 +33,7 @@
         </div>
 
       </div>
-      <div class="content">
+      <div :class="['content', {'height': !bottom}]">
         <!-- <div class="search">
           <button class="search-btn" @click="toPage('search')">
             <i class="iconfont iconicon-sousuo btn-icon"></i>
@@ -1043,5 +1043,9 @@ export default {
       background-size: 100% 100%;
     }
   }
+}
+
+.height{
+  height: 100%;
 }
 </style>
