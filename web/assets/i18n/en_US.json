@@ -932,6 +932,8 @@
             "useAnyway": "Available for the whole mall",
             "get": "（Recipient）",
             "mrAddress": "Default Address",
+            "setDefaultAddress": "Set Default Address",
+            "setSuccess": "The default address setting was successful!",
             "change": "Change",
             "newAddress": "Add Shipping Address",
             "editAddress": "Edit Eelivery Address",

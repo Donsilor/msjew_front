@@ -936,6 +936,8 @@
             "useAnyway": "所有金额可用",
             "get": "（收）",
             "mrAddress": "默認地址",
+            "setDefaultAddress": "設置默認地址",
+            "setSuccess": "默認地址設置成功",
             "change": "更改",
             "newAddress": "新增收貨地址",
             "editAddress": "编辑收貨地址",
