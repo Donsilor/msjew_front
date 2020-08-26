@@ -171,7 +171,7 @@
           {{ formatMoney(price) }}
         </div> -->
 
-        <!--    unionPayHide-->
+        <!--  unionPayHide  -->
         <div v-show="false">
           <form :action="actionLink" method="post">
             <div v-for="(f, index) in form" :key="index">
@@ -1651,6 +1651,7 @@ export default {
       } else if(!k){
         this.couponCodeR.couponId = '';
         this.couponCodeR.couponPrice = '';
+        this.getTex();
       }
     },
     useCoupon() {
