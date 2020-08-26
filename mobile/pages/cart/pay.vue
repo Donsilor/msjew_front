@@ -596,9 +596,12 @@ export default {
         }
       })
       .then(res => {
+        // alert('11111',res)
         if(tradeType == 'mweb'){
+          // alert('22222',res)
           window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
-        }else if(tradeType == 'js'){
+        }
+        if(tradeType == 'js'){
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
@@ -649,19 +652,21 @@ export default {
           //     coinType: this.info.coinType
           //   }
           // })
-        }else if (res.config) {
+        }
+        if (res.config) {
           window.location.replace(res.config)
-        }else {
-          this.isPay = false
-          this.$router.replace({
-            name: 'complete-paySuccess-orderId-price-coinType',
-            params: {
-              orderId: this.info.orderId,
-              price: this.info.payAmount,
-              coinType: this.info.coinType
-            }
-          })
-        } 
+        }
+        // else {
+        //   this.isPay = false
+        //   this.$router.replace({
+        //     name: 'complete-paySuccess-orderId-price-coinType',
+        //     params: {
+        //       orderId: this.info.orderId,
+        //       price: this.info.payAmount,
+        //       coinType: this.info.coinType
+        //     }
+        //   })
+        // } 
         
       })
       .catch(err => {

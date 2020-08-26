@@ -219,7 +219,6 @@ export default {
         .then(data => {})
         .catch(err => {})
       } else {
-
         if (this.isLogin) {
           this.getOrder()
         }else{
