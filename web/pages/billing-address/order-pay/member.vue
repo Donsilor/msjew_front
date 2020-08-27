@@ -3331,6 +3331,7 @@ export default {
          this.getTex(k);
        }else if(!g){
          this.couponCodeR = {}
+         this.getTex();
        }
      } 
 
