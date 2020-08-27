@@ -207,7 +207,8 @@
       "discountedAmount": "折扣金額",
       "couponAmount": "優惠券",
       "msg12": "請先登錄才能使用優惠券",
-      "useCoupons": "使用優惠券"
+      "useCoupons": "使用優惠券",
+      "point":"*註：訂單金額已做抹零處理"
     },
     "pay": {
       "pay": "訂單支付",

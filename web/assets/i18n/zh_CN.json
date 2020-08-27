@@ -2597,7 +2597,8 @@
         "msgTitle2": "提示：",
         "msgContent2": "没有选择商品！",
         "setDefaultAddr": "设置默认地址",
-        "setSuccess": "默认地址设置成功"
+        "setSuccess": "默认地址设置成功",
+        "point":"*注：订单金额已做抹零处理"
     },
     "invoice": {
         "personal": "个人",

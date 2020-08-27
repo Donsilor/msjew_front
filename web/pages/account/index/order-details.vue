@@ -464,7 +464,10 @@
 
           <div class="info-line">
             <div class="label big-label">{{data.orderStatus == 0 || data.orderStatus == 10 ? $t(`${lang_invoice}.NeedPay`) : $t(`${lang_invoice}.ultimatelyPay`) }}</div>
-            <div class="ff big-ff">
+            <div v-if="this.$store.state.platform == 40 && data.coinCode == 'TWD'" class="ff big-ff">
+              {{ formatCoin(data.coinCode) }} {{ formatAmount(data.payAmount) }}
+            </div>
+            <div v-else class="ff big-ff">
               {{ formatCoin(data.coinCode) }} {{ formatNumber(data.payAmount) }}
             </div>
           </div>

@@ -17,7 +17,11 @@
         <div class="top">
           <img src="@/static/cart/success.png" />
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
-          <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+          <p v-if="this.$store.state.platform == 41" class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+            <span class="font-size-16">{{ info.coinCode }}</span>
+            {{ formatAmount(info.payAmount) }}
+          </p>
+          <p v-else class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ info.coinCode }}</span>
             {{ formatMoney(info.payAmount) }}
           </p>
@@ -53,7 +57,8 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ info.coinCode }}{{ formatMoney(info.payAmount) }}</span>
+              <span v-if="this.$store.state.platform == 41">{{ info.coinCode }}{{ formatAmount(info.payAmount) }}</span>
+              <span v-else>{{ info.coinCode }}{{ formatMoney(info.payAmount) }}</span>
             </div>
           </li>
           <li>
@@ -70,7 +75,11 @@
         <div class="top" >
           <img src="@/static/cart/success.png"  />
           <p  class="color-333 font-size-14 margin-top-10 ">{{ lang.title }}</p>
-          <p class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+          <p v-if="this.$store.state.platform == 41" class="color-333 font-size-28 margin-top-10 margin-bottom-30">
+            <span class="font-size-16">{{ formatCoin(orderinfo.coinCode) }}</span>
+            {{ formatAmount(orderinfo.payAmount) }}
+          </p>
+          <p v-else class="color-333 font-size-28 margin-top-10 margin-bottom-30">
             <span class="font-size-16">{{ formatCoin(orderinfo.coinCode) }}</span>
             {{ formatMoney(orderinfo.payAmount) }}
           </p>
@@ -106,7 +115,8 @@
             </div>
             <div class="info">
               <span>{{ text }}{{ lang.pay }}</span>
-              <span>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
+              <span v-if="this.$store.state.platform == 41">{{ orderinfo.coinCode }}{{ formatAmount(orderinfo.payAmount) }}</span>
+              <span v-else>{{ orderinfo.coinCode }}{{ formatMoney(orderinfo.payAmount) }}</span>
             </div>
           </li>
           <li>

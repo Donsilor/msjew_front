@@ -2589,7 +2589,8 @@
         "msgTitle2": "Submit：",
         "msgContent2": "No product selected!",
         "setDefaultAddr": "Set The Default Address",
-        "setSuccess": "The default address setting was successful!"
+        "setSuccess": "The default address setting was successful!",
+        "point":"*Note：The Order Amount has been rounded "
     },
     "invoice": {
         "personal": "personal",

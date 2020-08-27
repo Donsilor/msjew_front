@@ -2,10 +2,10 @@
   <div class="pay">
     <div class="paylist" v-show="paylist">
       <Header :title="lang.pay" tips="1" />
-      <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+      <div v-if="this.$store.state.platform === 41" class="proce">
         <!-- <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div> -->
         <span>{{ formatCoin(info.coinType) }} </span>
-        {{ formatMoney(price) }}
+        {{ formatAmount(price) }}
         <!-- <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span> -->
       </div>
       <div v-else class="proce">
@@ -155,8 +155,8 @@
         <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
         <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
-        {{ formatCoin(info.coinType) }}
-        {{ formatMoney(price) }}
+        <span v-if="this.$store.state.platform === 41"> {{ formatCoin(info.coinType) }}{{ formatAmount(price) }}</span>
+        <span v-else> {{ formatCoin(info.coinType) }}{{ formatMoney(price) }}</span>
       </div>
 
       <!-- <Upload :multiple="true" :max=6 :list="imgList" ref="upload"></Upload> -->

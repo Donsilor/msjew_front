@@ -209,6 +209,25 @@ export default {
             }
           }
         }
+      } else if(this.goodInfo.carats){
+        for (const i in bullShit) {
+          if (
+            parseInt(bullShit[i].carat) === parseInt(this.chooseCaratsId) &&
+            parseInt(bullShit[i].material) ===
+            parseInt(this.conditions[0].checked)
+          ) {
+            this.showPi = bullShit[i].retailMallPrice
+            this.sendGoodsId = bullShit[i].goodsId
+            this.sendDetailsId = bullShit[i].id
+            this.categoryId = bullShit[i].categoryId
+            
+            if(this.couponType(bullShit[i].coupon) == 'discount'){
+              this.showP2 = bullShit[i].coupon.discount.price
+            }else{
+              this.showP2 = bullShit[i].retailMallPrice
+            }
+          }
+        }
       } else {
         for (const i in bullShit) {
           if (
