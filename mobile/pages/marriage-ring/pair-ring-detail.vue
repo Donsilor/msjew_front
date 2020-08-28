@@ -51,6 +51,7 @@ export default {
     })
       .then(res => {
         const pair = res
+        // console.log('infos==========>', res) 
         // console.log('infos==========>', res)  route.query.goodId
         // let pair = null
         // if (process.server) {

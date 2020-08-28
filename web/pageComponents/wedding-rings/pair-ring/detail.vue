@@ -250,6 +250,33 @@
                 </ul>
               </div>
             </div>
+            <!-- 色彩 -->
+            <div v-if="firstRingColorDetail.length > 0" class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.shade`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <span class="name ow-h1">
+                    {{ firstRingColorDetail[firstRingChecked.colorIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in firstRingColorDetail"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: firstRingChecked.colorIndex === index }
+                    ]"
+                    @click="changeFirstRingChecked('colorIndex', index)"
+                  >
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="right-properties" v-if="secondRing.materials.length > 0">
             <div  class="property-item">
@@ -333,6 +360,43 @@
                 </el-popover>
               </div>
               <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
+            </div>
+            <!-- 色彩 -->
+            <div v-if="secondRingColorDetail.length > 0" class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.shade`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <span class="name ow-h1">
+                    {{ secondRingColorDetail[secondRingChecked.colorIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in secondRingColorDetail"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: secondRingChecked.colorIndex === index }
+                    ]"
+                    @click="changeSecondRingChecked('colorIndex', index)"
+                  >
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="helper-popover">
+                <span class="helper-name">
+                  {{ $t(`${lang}.USEdition`) }}
+                </span>
+                <el-popover placement="bottom" trigger="hover">
+                  <ring-size></ring-size>
+                  <b slot="reference" class="prompt-icon">!</b>
+                </el-popover>
+              </div>
+              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a> -->
             </div>
           </div>
         </div>
@@ -430,6 +494,33 @@
                       { active: firstRingChecked.caratIndex === index }
                     ]"
                     @click="changeFirstRingChecked('caratIndex', index)"
+                  >
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- 色彩 -->
+            <div v-if="firstRingColorDetail.length > 0" class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.shade`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <span class="name ow-h1">
+                    {{ firstRingColorDetail[firstRingChecked.colorIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in firstRingColorDetail"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: firstRingChecked.colorIndex === index }
+                    ]"
+                    @click="changeFirstRingChecked('colorIndex', index)"
                   >
                     <span class="name ow-h1">{{ item.name }}</span>
                   </li>
@@ -540,6 +631,43 @@
                       { active: secondRingChecked.caratIndex === index }
                     ]"
                     @click="changeSecondRingChecked('caratIndex', index)"
+                  >
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+              <!-- <div class="helper-popover">
+                <span class="helper-name">
+                  {{ $t(`${lang}.USEdition`) }}
+                </span>
+                <el-popover placement="bottom" trigger="hover">
+                  <ring-size></ring-size>
+                  <b slot="reference" class="prompt-icon">!</b>
+                </el-popover>
+              </div>
+              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a> -->
+            </div>
+            <!-- 色彩 -->
+            <div v-if="secondRingColorDetail.length > 0" class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.shade`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <span class="name ow-h1">
+                    {{ secondRingColorDetail[secondRingChecked.colorIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in secondRingColorDetail"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: secondRingChecked.colorIndex === index }
+                    ]"
+                    @click="changeSecondRingChecked('colorIndex', index)"
                   >
                     <span class="name ow-h1">{{ item.name }}</span>
                   </li>
@@ -791,12 +919,14 @@ export default {
       firstRingChecked: {
         materialIndex: 0,
         sizeIndex: 0,
-        caratIndex: 0
+        caratIndex: 0,
+        colorIndex: 0
       },
       secondRingChecked: {
         materialIndex: 0,
         sizeIndex: 0,
-        caratIndex: 0
+        caratIndex: 0,
+        colorIndex: 0
       },
       coupleLadyId:'',
       coupleMenId:'',
@@ -811,10 +941,120 @@ export default {
       moneyList: [],
       activeTime: '',
       language: this.$store.state.language,
-      isLogin:this.$store.getters.hadLogin
+      isLogin:this.$store.getters.hadLogin,
+      firstRingColorAttrs:[
+        {
+          goods_id:'',
+          config_id:'',
+          config_attr_id:''
+        }
+      ],
+      secondRingColorAttrs:[
+        {
+          goods_id:'',
+          config_id:'',
+          config_attr_id:''
+        }
+      ],
+      doubleRingColorAttrs:[]
     }
   },
   computed: {
+    // 色彩  start
+    firstRingColorDetail(){
+      const Spec = this.firstRing.specs
+      let colors = []
+      let colorSpec = ''
+      let colorId = ''
+      Spec.forEach(item => {
+        if (item.configId === '63') {
+          colorSpec = item.configAttrVal
+          colorId = item.configAttrId
+          this.configId = item.configId
+        }
+        if((colorId && colorSpec)!== ""){
+          let ids = colorId.split("|")
+          let specs = colorSpec.split("|")
+          if((ids && specs) !== ''){
+            colors = ids.map((id,i) => ({
+              id, 
+              name: specs[i]
+            }));
+          }
+        }
+      })
+      return colors
+    },
+    secondRingColorDetail(){
+      const Spec = this.secondRing.specs
+      let colors = []
+      let colorSpec = ''
+      let colorId = ''
+      Spec.forEach(item => {
+        if (item.configId === '63') {
+          colorSpec = item.configAttrVal
+          colorId = item.configAttrId
+          this.configId = item.configId
+        }
+        if((colorId && colorSpec)!== ""){
+          let ids = colorId.split("|")
+          let specs = colorSpec.split("|")
+          if((ids && specs) !== ''){
+            colors = ids.map((id,i) => ({
+              id, 
+              name: specs[i]
+            }));
+          }
+        }
+      })
+      return colors
+    },
+    // firstRingGoodsId(){
+    //     // console.log('rrrrrrrrrrrr1',this.firstRingId)
+    //     return this.firstRingId
+    // },
+    // secondRingGoodsId(){
+    //   // console.log('rrrrrrrrrrrr2',this.secondRingId)
+    //     return this.secondRingId
+    // },
+    firstRingGoodsAttrs(){
+      const _this = this
+      const ringChecked = _this.firstRingChecked
+      const firstRingColorDetail = _this.firstRingColorDetail
+
+      const color =
+        firstRingColorDetail.length > 0 && firstRingColorDetail[ringChecked.colorIndex]
+          ? firstRingColorDetail[ringChecked.colorIndex].id
+          : null
+
+      // _this.firstRingColorAttrs[0].goods_id = _this.firstRingGoodsId
+      _this.firstRingColorAttrs[0].config_id = _this.configId
+      _this.firstRingColorAttrs[0].config_attr_id = color
+      // console.log('rrrrrrrrrrrr1',_this.firstRingColorAttrs)
+      return _this.firstRingColorAttrs
+    },
+    secondRingGoodsAttrs(){
+      const _this = this
+      const ringChecked = _this.secondRingChecked
+      const secondRingColorDetail = _this.secondRingColorDetail
+
+      const color =
+        secondRingColorDetail.length > 0 && secondRingColorDetail[ringChecked.colorIndex]
+          ? secondRingColorDetail[ringChecked.colorIndex].id
+          : null
+      // _this.secondRingColorAttrs[0].goods_id = _this.secondRingGoodsId
+      _this.secondRingColorAttrs[0].config_id = _this.configId
+      _this.secondRingColorAttrs[0].config_attr_id = color
+      // console.log('rrrrrrrrrrrr2',_this.secondRingColorAttrs)
+      return _this.secondRingColorAttrs
+    },
+    doubleRingGoodsAttrs(){
+      this.doubleRingColorAttrs = this.firstRingGoodsAttrs.concat(this.secondRingGoodsAttrs)
+      let arr = this.doubleRingColorAttrs.filter(item=>item.goods_id !== null&&item.config_id !== null&&item.config_attr_id !== null)
+      // console.log('mmmmm',arr)
+      return arr
+    },
+    // 色彩  end
     coupons() {
       var co;
       if(this.couponType(this.info.coupon) == 'discount'){
@@ -915,11 +1155,13 @@ export default {
         }
       }
       console.log('test', result);
+
       return result
     },
     secondRingSimpleDetail() {
       const _this = this
       const ring = _this.secondRing
+      // console.log(8888,_this.secondRing)
       const details = ring.details
       const ringChecked = _this.secondRingChecked
 
@@ -978,7 +1220,7 @@ export default {
     }
   },
   mounted() {
-    // console.log("info",this.info)
+    // console.log("info",this.doubleRingGoodsAttrs)
     const _this = this
     if(this.info.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
@@ -1042,6 +1284,9 @@ export default {
       ringChecked[key] = value
       _this.firstRingChecked = ringChecked
 
+      _this.firstRingColorAttrs = this.firstRingGoodsAttrs    //色彩
+      _this.doubleRingColorAttrs = this.doubleRingGoodsAttrs  //色彩
+
       _this.changeChecked()
     },
     changeSecondRingChecked(key, value) {
@@ -1049,6 +1294,9 @@ export default {
       const ringChecked = JSON.parse(JSON.stringify(_this.secondRingChecked))
       ringChecked[key] = value
       _this.secondRingChecked = ringChecked
+
+      _this.secondRingColorAttrs = this.secondRingGoodsAttrs  //色彩
+      _this.doubleRingColorAttrs = this.doubleRingGoodsAttrs  //色彩
 
       _this.changeChecked()
     },
@@ -1059,6 +1307,7 @@ export default {
 
       const firstRing = _this.firstRingSimpleDetail
       const secondRing = _this.secondRingSimpleDetail
+      
 
       if(!firstRing || !secondRing) {
         _this.coupleLadyId = ''
@@ -1070,8 +1319,14 @@ export default {
         _this.stock = ''
         return;
       }
-      console.log(firstRing['id'], secondRing['id']);
+      this.firstRingId = _this.firstRingSimpleDetail.id     //色彩
+      this.secondRingId = _this.secondRingSimpleDetail.id   //色彩
+      this.firstRingColorAttrs[0].goods_id = _this.firstRingSimpleDetail.id    //色彩
+      this.secondRingColorAttrs[0].goods_id = _this.secondRingSimpleDetail.id  //色彩
+
+      // console.log("iiiiiiii",this.firstRingId,this.secondRingId);
       _this.doubleRingDetailId(firstRing['id'], secondRing['id']);
+
     },
     doubleRingDetailId(ladyRing, menRing) {
       const _this = this
@@ -1189,7 +1444,8 @@ export default {
           group_type: null,
           serviceId: 0,
           serviceVal: 'string',
-          goods_type:_this.categoryId
+          goods_type:_this.categoryId,
+          goods_attr: _this.doubleRingGoodsAttrs  //色彩
         }
       ]
       _this.$store
@@ -1234,7 +1490,8 @@ export default {
           group_type: null,
           serviceId: 0,
           serviceVal: 'string',
-          goods_type:_this.categoryId
+          goods_type:_this.categoryId,
+          goods_attr: _this.doubleRingGoodsAttrs   //色彩
         }
       ]
 
@@ -1276,7 +1533,8 @@ export default {
             group_type: null,
             serviceId: 0,
             serviceVal: 'string',
-            goods_type:_this.categoryId
+            goods_type:_this.categoryId,
+          goods_attr: _this.doubleRingGoodsAttrs   //色彩
           }
         ]
         const addInfo = {

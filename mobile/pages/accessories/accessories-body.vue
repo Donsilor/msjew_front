@@ -110,6 +110,19 @@
           <i class="iconfont iconyou" />
         </span>
       </div>
+      <div class="bd-b" v-if="goodInfo.colors.length > 0"></div>
+      <!-- 色彩 -->
+      <div class="select-line" v-if="goodInfo.colors.length > 0">
+        <span>
+          <span>{{ lang.shade }}</span>
+          <!-- <span>（{{ lang['us-version'] }}）</span> -->
+          <!-- <div @click="getCarats()">!</div> -->
+        </span>
+        <span @click="showSwiperTapColor()">
+          {{ chooseColors }}
+          <i class="iconfont iconyou" />
+        </span>
+      </div>
       <!--    <div-->
       <!--      v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"-->
       <!--      class="custom-made-word"-->
@@ -255,11 +268,20 @@
         :list="goodInfo.carats"
         @clear="getCarats"
       ></swiper-tap>
+
       <swiper-tap
         ref="suitability"
         :list="goodInfo.sizesConfig"
         @clear="getSortBy"
       ></swiper-tap>
+
+      <swiper-tap
+        ref="colorsSuitability"
+        :title="lang.shade"
+        :list="goodInfo.colors"
+        @clear="getColors"
+      ></swiper-tap>
+
       <choose-eject
         ref="quality-eject-choose"
         :title="lang.fineness"
@@ -340,6 +362,7 @@ export default {
     }
   },
   mounted() {
+    console.log("uuuu")
     const _this = this
     if(this.goodInfo.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)
