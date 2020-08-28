@@ -76,7 +76,7 @@ export default {
         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
         return
       }
-      let colorArr = this.goodsAttrs.filter(item=>item.config_id !== ''&&item.config_attr_id !== '')   //筛选色彩中为空的对象
+      let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null && item.config_attr_id !== null)   //筛选色彩中为空的对象
       const goodInfo = [
         {
           goods_num: 1,
@@ -131,7 +131,7 @@ export default {
       } 
 
       const time = this.getTimestampUuid
-      let colorArr = this.goodsAttrs.filter(item=>item.config_id !== ''&&item.config_attr_id !== '')  //筛选色彩中为空的对象
+      let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null&&item.config_attr_id !== null)  //筛选色彩中为空的对象
       let goodInfo = [
         {
           goods_num: 1,
@@ -178,7 +178,7 @@ export default {
         })
       } else {
         const CART = 'cart'
-        let colorArr = this.goodsAttrs.filter(item=>item.config_id !== ''&&item.config_attr_id !== '')  //筛选色彩中为空的对象
+        let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null&&item.config_attr_id !== null)  //筛选色彩中为空的对象
         let goodInfo = [
           {
             goods_num: 1,

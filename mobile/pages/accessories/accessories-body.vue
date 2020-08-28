@@ -84,7 +84,7 @@
       </div>
 
       <div class="select-line" v-if="goodInfo.carats">
-        <span>{{ lang.carat }}</span>
+        <span>{{ lang.chooseCarat }}</span>
         <span @click="showSwiperTap1">
           {{ chooseCarats }}
           <i class="iconfont iconyou" />
@@ -110,11 +110,11 @@
           <i class="iconfont iconyou" />
         </span>
       </div>
+      <!-- 色彩 start -->
       <div class="bd-b" v-if="goodInfo.colors.length > 0"></div>
-      <!-- 色彩 -->
       <div class="select-line" v-if="goodInfo.colors.length > 0">
         <span>
-          <span>{{ lang.shade }}</span>
+          <span>{{ lang.chooseShade }}</span>
           <!-- <span>（{{ lang['us-version'] }}）</span> -->
           <!-- <div @click="getCarats()">!</div> -->
         </span>
@@ -123,6 +123,7 @@
           <i class="iconfont iconyou" />
         </span>
       </div>
+      <!-- 色彩 end -->
       <!--    <div-->
       <!--      v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"-->
       <!--      class="custom-made-word"-->
