@@ -1317,6 +1317,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.recommend{
+  margin: 110px 0; 
+}
 .detail-page {
   .desc-top {
     .attr-group {

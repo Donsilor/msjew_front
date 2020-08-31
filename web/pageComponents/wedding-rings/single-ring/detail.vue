@@ -796,6 +796,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.recommend{
+  margin: 110px 0; 
+}
 .start-dj{
   width: 320px!important;
   background: #aa8a7b!important;
