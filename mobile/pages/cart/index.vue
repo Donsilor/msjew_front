@@ -42,7 +42,7 @@
                     <p>SKU：{{ item.sku }}</p>
                     <p class="p">
                       {{
-                        getconfig(item.config, item.simpleGoodsEntity.specs)
+                        getconfig(item.config, item.simpleGoodsEntity.specs,item.goodsAttr)
                       }}
                     </p>
                     <b v-if="!item.coupon.discount">{{  formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
@@ -115,7 +115,7 @@
                     
                     <p class="p">
                       {{
-                        getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value)
+                        getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value,ring,item.goodsAttr)
                       }}
                     </p>
                     
@@ -551,20 +551,32 @@ export default {
       }
     },
     // 属性数值转化成字符串
-    getconfig(list, list2) {
+    getconfig(list, list2, attr) {
+      // console.log("item",list)
+      let config = list.concat(attr)
       let text = ''
-      if (list.length > 0) {
-        // console.log("item",list)
-        list.map((item, index) => {
-        // console.log("itemlist",item)
-          if (index === list.length - 1) {
-            text = text + item.configAttrIVal
-          } else {
-            text = text + item.configAttrIVal + ' /  '
-          }
-        })
+      if(this.isLogin){
+        if (list.length > 0) {
+          list.map((item, index) => {
+            if (index === list.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }else {
+        if (config.length > 0) {
+          config.map((item, index) => {
+            if (index === config.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
       }
-      if (list2 && list2.length > 0) {
+      if (list2 &&  list2.length > 0) {
         list2.map((item, index) => {
           if (item.configId === 196) {
             // console.log(list2, '9999', item)
@@ -572,16 +584,30 @@ export default {
           }
         })
       }
+      
       return text
     },
     // 属性数值转化成字符串
-    getDubleConfig(good_spec,goods_attr) {
+    getDubleConfig(good_spec,goods_attr,ring,attr) {
+      // console.log('9999',ring.id)
+      let attrs = []
+     
+      ring.lang.goods_spec.forEach((item,a) => {
+        attrs.push(item)
+      })
+      attr.forEach((i,a) => {
+        // console.log('9999',ring.id,i)
+        if (ring.id == i.goodsId) {
+          // i.attr_name = i.configVal
+          i.attr_value = i.configAttrIVal
+          attrs.push(i)
+        }
+      })
       let text = ''
-      if (good_spec.length > 0) {
-        good_spec.map((item, index) => {
-        // console.log("good_spec",item)
+      if (attrs.length > 0) {
+        attrs.map((item, index) => {
 
-          if (index === good_spec.length - 1) {
+          if (index === attrs.length - 1) {
             text = text + item.attr_value
           } else {
             text = text + item.attr_value + ' /  '
@@ -602,6 +628,7 @@ export default {
         //   }
         // }) 
       }
+      //  console.log("good_spec",text)
       return text
     },
 
@@ -660,6 +687,7 @@ export default {
                     ? item.id
                     : null,
                 group_type: val.groupType,
+                goods_attr:val.goods_attr,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
               // console.log("ooooo>>>",val)
@@ -712,7 +740,7 @@ export default {
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
-          // console.log("dddd",item)
+          // console.log("dddd",item) 
           this.coin = item.simpleGoodsEntity.coinType
           const o = {
             isSelect: false,
@@ -730,6 +758,7 @@ export default {
                 : item.simpleGoodsEntity.categoryId === 1
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
+            goodsAttr:item.goodsAttr,
             sku:
               item.goodsType == 19
                 ? item.ring

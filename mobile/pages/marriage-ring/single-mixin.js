@@ -456,6 +456,7 @@ export default {
             })
           })
           this.cartList.reverse()
+          console.log("yyyyy",this.cartList)
           this.getLocalList(this.cartList,val)
         } else {
           this.num = 0
