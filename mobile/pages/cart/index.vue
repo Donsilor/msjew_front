@@ -552,30 +552,22 @@ export default {
     },
     // 属性数值转化成字符串
     getconfig(list, list2, attr) {
-      // console.log("item",list)
-      let config = list.concat(attr)
-      let text = ''
-      if(this.isLogin){
-        if (list.length > 0) {
-          list.map((item, index) => {
-            if (index === list.length - 1) {
-              text = text + item.configAttrIVal
-            } else {
-              text = text + item.configAttrIVal + ' /  '
-            }
-          })
-        }
-      }else {
-        if (config.length > 0) {
-          config.map((item, index) => {
-            if (index === config.length - 1) {
-              text = text + item.configAttrIVal
-            } else {
-              text = text + item.configAttrIVal + ' /  '
-            }
-          })
-        }
+      let config = []
+      if(attr){
+        config = list.concat(attr)
       }
+      let text = ''
+      
+      if (config.length > 0) {
+        config.map((item, index) => {
+          if (index === config.length - 1) {
+            text = text + item.configAttrIVal
+          } else {
+            text = text + item.configAttrIVal + ' /  '
+          }
+        })
+      }
+
       if (list2 &&  list2.length > 0) {
         list2.map((item, index) => {
           if (item.configId === 196) {
@@ -695,7 +687,7 @@ export default {
             })
           })
           this.cartList.reverse()
-          // console.log("this.cartList",this.cartList)
+          console.log("this.cartList",this.cartList)
           this.getLocalList(this.cartList)
         } else {
           this.num = 0
@@ -712,7 +704,7 @@ export default {
           url: `/web/member/cart`
         })
         .then(res => {
-          // console.log("线上llll",res)
+          console.log("线上llll",res)
           this.$nuxt.$loading.finish()
           localStorage.removeItem('loading');
           this.isLoading = localStorage.getItem('loading')
@@ -724,6 +716,7 @@ export default {
           keys.forEach(item => {
             result.push(res[item])
           })
+          console.log("线上llll",result)
           this.doFormat(result)
           // this.doFormat(res)
         })
@@ -740,7 +733,7 @@ export default {
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
-          // console.log("dddd",item) 
+          // console.log("dddd",item.goodsAttr) 
           this.coin = item.simpleGoodsEntity.coinType
           const o = {
             isSelect: false,

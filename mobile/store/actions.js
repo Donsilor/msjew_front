@@ -260,6 +260,7 @@ export default {
                 item.group_type = good.groupType
                 item.group_id = good.groupId
                 item.goodsDetailsId = good.goodsDetailsId
+                item.goods_attr = good.goods_attr
                 return item
             })
             sendData = sendData.concat(data)
