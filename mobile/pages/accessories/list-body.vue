@@ -93,7 +93,7 @@
         </div>
       </div>
       <bdd-empty
-        v-if="noListData"
+        v-if="noListData && ifLoadFinish"
         :type="'list'"
         @searchAgain="research"
       ></bdd-empty>
@@ -147,7 +147,10 @@ export default {
   mixins: [Mixin, List, GoodListProps],
   props:['seo'],
   mounted() {
-    // this.language = this.getCookie('language')
+    var _this = this;
+    _this.$nextTick(() => {
+      _this.$nuxt.$loading.start()
+    })
   }
 }
 </script>
