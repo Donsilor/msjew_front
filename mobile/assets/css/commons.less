@@ -220,6 +220,10 @@
       height: 100%;
     }
   }
+  .border-bottom{
+    border-bottom: 8px solid rgba(245, 245, 245, 1);
+    padding-bottom: 10px;
+  }
   .title {
     width: @title-width;
     padding: 0 15px;
@@ -439,7 +443,7 @@
     width: 100%;
     padding: 30px 15px;
     text-align: left;
-    border-bottom: 8px solid rgba(245, 245, 245, 1);
+    // border-bottom: 8px solid rgba(245, 245, 245, 1);
     .base-info {
       margin-bottom: 24px;
 
@@ -482,6 +486,20 @@
       }
       div:nth-child(2n-1) {
         background: rgba(247, 247, 247, 1);
+      }
+
+      div.icon{
+        height: 30px;
+        width: 30px;
+        margin: 30px auto 0;
+        background-color: initial;
+        background-image: url(/icon/more.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+      }
+      div.icon.reverse{
+        transform: rotate(180deg);
       }
     }
     .desc-content {

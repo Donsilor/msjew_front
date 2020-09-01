@@ -20,137 +20,114 @@
           <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
         </div>
       </div>
-      <div class="title">
-        <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(goodInfo.coupon.discount.discount)+'%' : discountConversion(goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
-        <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
-        {{ goodInfo.goodsName }}
-      </div>
-      <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
-      
-      <div class="discount-price" v-else>
-        <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
-        <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showP2) }}</div>
-      </div>
 
-      <div class="promise-box">
-        <div
-          v-for="(c, index) in goodInfo.goodsServicesJsons"
-          :key="index"
-          class="promise-info"
-        >
-          <div class="promise-img">
-            <img :src="$IMG_URL + c.img" alt="" />
-          </div>
-          <span>{{ c.name }}</span>
+      <div class="border-bottom">
+        <div class="title">
+          <span class="discount-icon" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(goodInfo.coupon.discount.discount)+'%' : discountConversion(goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+          <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
+          {{ goodInfo.goodsName }}
         </div>
-      </div>
-      <!--    <div v-if="goodInfo.goodsMod === 1" class="include-box">-->
-      <!--      <span>{{ lang.include }}</span>-->
-      <!--      <div>-->
-      <!--        &lt;!&ndash;        <i class="iconfont iconstar-jt" />&ndash;&gt;-->
-      <!--        <i-->
-      <!--          :class="[-->
-      <!--            'iconfont',-->
-      <!--            { 'iconJewelry-necklace': parseInt(goodInfo.categoryId) === 4 },-->
-      <!--            { 'iconJewelry-bracelet': parseInt(goodInfo.categoryId) === 8 }-->
-      <!--          ]"-->
-      <!--        />-->
-      <!--      </div>-->
-      <!--      &lt;!&ndash;      <span>+</span>&ndash;&gt;-->
-      <!--      &lt;!&ndash;      <div>&ndash;&gt;-->
-      <!--      &lt;!&ndash;        <i class="iconfont iconicon-zuanshi" />&ndash;&gt;-->
-      <!--      &lt;!&ndash;      </div>&ndash;&gt;-->
-      <!--    </div>-->
+        <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
+        
+        <div class="discount-price" v-else>
+          <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
+          <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showP2) }}</div>
+        </div>
 
-      <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
-        <div class="discount-l">
-          <div class="discoupon-d" v-if="goodInfo.coupon.discount">
-            <div class="discoupon-d-l">
-              <span class="text">{{ lang.discountsActive }}：</span>
-              <span class="discount-icon">{{ language == 'en_US' ? discountUs(goodInfo.coupon.discount.discount)+'%' : discountConversion(goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+        <div class="promise-box">
+          <div
+            v-for="(c, index) in goodInfo.goodsServicesJsons"
+            :key="index"
+            class="promise-info"
+          >
+            <div class="promise-img">
+              <img :src="$IMG_URL + c.img" alt="" />
             </div>
-            <div class="time">{{ lang.activityTime}}：{{activeTime}}</div>
+            <span>{{ c.name }}</span>
           </div>
+        </div>
+        <!--    <div v-if="goodInfo.goodsMod === 1" class="include-box">-->
+        <!--      <span>{{ lang.include }}</span>-->
+        <!--      <div>-->
+        <!--        &lt;!&ndash;        <i class="iconfont iconstar-jt" />&ndash;&gt;-->
+        <!--        <i-->
+        <!--          :class="[-->
+        <!--            'iconfont',-->
+        <!--            { 'iconJewelry-necklace': parseInt(goodInfo.categoryId) === 4 },-->
+        <!--            { 'iconJewelry-bracelet': parseInt(goodInfo.categoryId) === 8 }-->
+        <!--          ]"-->
+        <!--        />-->
+        <!--      </div>-->
+        <!--      &lt;!&ndash;      <span>+</span>&ndash;&gt;-->
+        <!--      &lt;!&ndash;      <div>&ndash;&gt;-->
+        <!--      &lt;!&ndash;        <i class="iconfont iconicon-zuanshi" />&ndash;&gt;-->
+        <!--      &lt;!&ndash;      </div>&ndash;&gt;-->
+        <!--    </div>-->
 
-          <div class="discoupon-d" v-if="goodInfo.coupon.money">
-            <div class="discoupon-d-l">
-              <span class="text">{{ lang.discountsActive }}：</span>
-              <span class="discount-icon">￥</span>
+        <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+          <div class="discount-l">
+            <div class="discoupon-d" v-if="goodInfo.coupon.discount">
+              <div class="discoupon-d-l">
+                <span class="text">{{ lang.discountsActive }}：</span>
+                <span class="discount-icon">{{ language == 'en_US' ? discountUs(goodInfo.coupon.discount.discount)+'%' : discountConversion(goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+              </div>
+              <div class="time">{{ lang.activityTime}}：{{activeTime}}</div>
             </div>
 
-            <div class="get" @click="getCoupon">{{ lang.getCoupon }} &gt;</div>
+            <div class="discoupon-d" v-if="goodInfo.coupon.money">
+              <div class="discoupon-d-l">
+                <span class="text">{{ lang.discountsActive }}：</span>
+                <span class="discount-icon">￥</span>
+              </div>
+
+              <div class="get" @click="getCoupon">{{ lang.getCoupon }} &gt;</div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="select-line" v-if="goodInfo.carats">
-        <span>{{ lang.carat }}</span>
-        <span @click="showSwiperTap1">
-          {{ chooseCarats }}
-          <i class="iconfont iconyou" />
-        </span>
-      </div>
-      <div class="bd-b" v-if="goodInfo.carats"></div>
-      <div class="select-line">
-        <span>{{ lang.chooseColor }}</span>
-        <span @click="showChooseEject(conditions[0])">
-          {{ conditionText() }}
-          <i class="iconfont iconyou" />
-        </span>
-      </div>
-      <div v-if="goodInfo.sizesConfig" class="bd-b"></div>
-      <div v-if="goodInfo.sizesConfig" class="select-line margin-bottom-10">
-        <span>
-          <span>{{ lang.chooseSize }}</span>
-          <!--        <span>（{{ lang['us-version'] }}）</span>-->
-          <!--        <div @click="openSize()">?</div>-->
-        </span>
-        <span @click="showSwiperTap">
-          {{ chooseSize }}
-          <i class="iconfont iconyou" />
-        </span>
-      </div>
-      <!--    <div-->
-      <!--      v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"-->
-      <!--      class="custom-made-word"-->
-      <!--    >-->
-      <!--      {{ lang.cmw }}-->
-      <!--      <div class="triangle" />-->
-      <!--    </div>-->
-      <!--    <div-->
-      <!--      v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"-->
-      <!--      class="btn-common btn-pink"-->
-      <!--      @click="startCustomMade"-->
-      <!--    >-->
-      <!--      {{ lang.startDJ }}-->
-      <!--    </div>-->
-      <div
-        v-if="goodInfo.goodsMod === 1"
-        :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
-        @click="addCart"
-      >
-        {{
-          inSale
-            ? canAddCart
-              ? lang.addCart
-              : lang.noTotalStock
-            : lang.notInSale
-        }}
-      </div>
-      <div v-else>
-        <div
-          :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
-          @click="orderNow"
-        >
-          {{
-            inSale
-              ? canAddCart
-                ? lang.buyNow
-                : lang.noTotalStock
-              : lang.notInSale
-          }}
+        <div class="select-line" v-if="goodInfo.carats">
+          <span>{{ lang.carat }}</span>
+          <span @click="showSwiperTap1">
+            {{ chooseCarats }}
+            <i class="iconfont iconyou" />
+          </span>
         </div>
+        <div class="bd-b" v-if="goodInfo.carats"></div>
+        <div class="select-line">
+          <span>{{ lang.chooseColor }}</span>
+          <span @click="showChooseEject(conditions[0])">
+            {{ conditionText() }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <div v-if="goodInfo.sizesConfig" class="bd-b"></div>
+        <div v-if="goodInfo.sizesConfig" class="select-line margin-bottom-10">
+          <span>
+            <span>{{ lang.chooseSize }}</span>
+            <!--        <span>（{{ lang['us-version'] }}）</span>-->
+            <!--        <div @click="openSize()">?</div>-->
+          </span>
+          <span @click="showSwiperTap">
+            {{ chooseSize }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <!--    <div-->
+        <!--      v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"-->
+        <!--      class="custom-made-word"-->
+        <!--    >-->
+        <!--      {{ lang.cmw }}-->
+        <!--      <div class="triangle" />-->
+        <!--    </div>-->
+        <!--    <div-->
+        <!--      v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"-->
+        <!--      class="btn-common btn-pink"-->
+        <!--      @click="startCustomMade"-->
+        <!--    >-->
+        <!--      {{ lang.startDJ }}-->
+        <!--    </div>-->
         <div
+          v-if="goodInfo.goodsMod === 1"
           :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
           @click="addCart"
         >
@@ -162,7 +139,33 @@
               : lang.notInSale
           }}
         </div>
-        
+        <div v-else>
+          <div
+            :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+            @click="orderNow"
+          >
+            {{
+              inSale
+                ? canAddCart
+                  ? lang.buyNow
+                  : lang.noTotalStock
+                : lang.notInSale
+            }}
+          </div>
+          <div
+            :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+            @click="addCart"
+          >
+            {{
+              inSale
+                ? canAddCart
+                  ? lang.addCart
+                  : lang.noTotalStock
+                : lang.notInSale
+            }}
+          </div>
+          
+        </div>
       </div>
       <!-- <div class="wish-and-share">
         <i
@@ -185,10 +188,12 @@
           {{ lang.goods }}ID：{{ goodInfo.goodsCode }}
         </div>
         <div class="sku-table">
-          <div v-for="(b, index) in goodInfo.specs" :key="index">
+          <div v-if="index < detailNum" v-for="(b, index) in goodInfo.specs" :key="index">
             <span>{{ b.configName }}</span>
             <span>{{ b.configAttrVal }}</span>
           </div>
+
+          <div v-if="specsLength" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
         </div>
         <div class="desc-content" v-html="goodInfo.goodsDesc"></div>
       </div>
@@ -318,7 +323,9 @@ export default {
       isLogin: !!this.$store.state.token,
       ifShowCoupon: false,
       language: this.$store.state.language,
-      activeTime:''
+      activeTime:'',
+      ifShowMore: false,
+      detailNum: 4
     }
   },
   computed: {
@@ -337,6 +344,13 @@ export default {
     },
     inSale() {
       return this.goodInfo.goodsStatus === 2
+    },
+    specsLength() {
+      if(this.goodInfo && this.goodInfo.specs && this.goodInfo.specs.length > 4){
+        return true
+      }else{
+        return false
+      }
     }
   },
   mounted() {
@@ -357,6 +371,10 @@ export default {
       }else{
         this.ifShowCoupon = true
       }
+    },
+    showMore(){
+      this.ifShowMore = !this.ifShowMore
+      this.detailNum = this.detailNum == 4 ? 100 : 4
     }
   }
 }
