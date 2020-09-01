@@ -198,7 +198,7 @@ export default {
           data: Object.assign(options.data || {}, _this.specialDatas)
         })
         .then(res => {
-          this.ifLoadFinish = true
+          _this.ifLoadFinish = true;
           _this.$nuxt.$loading.finish()
           if (res.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(res.data))
