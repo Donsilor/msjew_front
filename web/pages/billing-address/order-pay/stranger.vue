@@ -2210,7 +2210,7 @@
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
+                {{ formatCoin(tex.coinType) }} {{ formatMoney(goodsPrice) }}
               </div>
             </div>
 
