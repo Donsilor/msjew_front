@@ -330,9 +330,6 @@ export default {
       ifShowPop: false
     }
   },
-  created() {
-    
-  },
   mounted() {
     this.$nextTick(() => {
       if(this.list.length > 0){
@@ -345,13 +342,7 @@ export default {
         this.getLocalCart()
       }
     })
-
-    // this.language = this.getCookie('language')
   },
-  // beforeUpdate(){
-  //   this.getList()
-  // },
-  //
   methods: {
     formatMoney: formatMoney,
     toShopping() {
