@@ -42,6 +42,9 @@ export default {
 
     _this.$nextTick(() => {
       this.$nuxt.$loading.start()
+      setTimeout(() => {
+        this.$nuxt.$loading.finish()
+      }, 1000);
     })
   },
   methods: {

@@ -125,27 +125,9 @@ export default {
     }
   },
   mounted() {
-    this.language = this.getCookie('language')
-    const _this = this
-    _this.$nextTick(() => {
-      // if (!_this.email) {
-      //   _this.$router.replace({
-      //     name: 'forget'
-      //   })
-      // }
-    })
+    this.language = this.$store.state.language
   },
   methods: {
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     toNext() {
       this.emitEvent()
     },
