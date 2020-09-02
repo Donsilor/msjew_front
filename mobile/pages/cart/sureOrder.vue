@@ -3,7 +3,7 @@
     <Header :title="lang.sureOrder" />
     <div v-if="!isLogin" class="is-login" id="loginBox">
       <i class="icon iconfont icongantanhao1"></i>
-      <a @click="gologin(1)">{{ lang.login }}</a>
+      <a @click="gologin">{{ lang.login }}</a>
       <span>{{ lang.settlement }}</span>
       <a @click="gologin">{{ lang.accont }}</a>
       <span>{{ lang.any }}</span>
@@ -424,6 +424,7 @@
     <Invoice v-if="ifShowInvoice" @closeIP="closeInvoicePop" :kai="kai" :totlePrice="totlePrice" :ultimatelyPay="ultimatelyPay" ></Invoice>
     <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
     <use-coupon v-if="ifShowCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR"></use-coupon>
+    <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
   </div>
 </template>
 
@@ -643,7 +644,8 @@ export default {
       ifShowAddress: false,
       id:'',
       queryId:'',
-      code:''
+      code:'',
+      ifShowPop: false
     }
   },
   computed: {
@@ -836,6 +838,9 @@ export default {
       }
 
       if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89){
+        this.ifShowPop = true
+        return
+        
         this.$toast.show(this.lang.firstLogin)
         // 点击修改滚顶到地址编辑模块
         document.getElementById('loginBox').scrollIntoView({
@@ -1379,6 +1384,10 @@ export default {
     // 支付
     //  已登录创建订单
     createOrder() {
+      if(this.typeIndex != 0 && this.typeIndex != 1){
+        this.ifShowPop = true
+        return
+      }
       console.log("this.invoices",this.invoices)
       this.$nuxt.$loading.start()
       // if (!this.canSubmit) {
@@ -1408,7 +1417,7 @@ export default {
          if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
             this.$toast.show(this.lang.firstLogin)
             this.$nuxt.$loading.finish()
-           return
+            return
          }
        }
       if (this.isLogin) {
@@ -1554,7 +1563,6 @@ export default {
               if (res.config) {
                 window.location.replace(res.config)
               } else if (!res.config){
-                // console.log(88888888)
                 this.isPay = false
                 this.$router.replace({
                   name: 'complete-paySuccess-orderId-price-coinType',
@@ -1581,31 +1589,8 @@ export default {
           }
       }
     },
-    gologin(type) {
-      // 点击登入获取上页url
-      let oldurl=window.location.pathname
-      let params=window.location.search
-      //如果是订单确认页面，返回到购物车
-      if((/^\/cart\/sureOrder/).test(oldurl)){
-          oldurl = '/cart'
-          params = ''
-      }
-      console.log(oldurl);
-      const url=oldurl+params
-      localStorage.setItem('url',url)
-      // setTimeout(() => {
-      //   this.$router.push({
-      //       path: `/login`,
-      //       // query: {url}
-      //   })
-      // },0)
-      let name = 'register'
-      if (type === 1) {
-        name = 'login'
-      }
-      this.$router.replace({
-        name: name
-      })
+    gologin() {
+      this.ifShowPop = true
     },
     // 关闭弹窗
     closeCardPop(k){
@@ -1629,18 +1614,7 @@ export default {
       if(this.isLogin){
         this.ifShowShoppingCard = true
       }else{
-        var that = this;
-        this.$toast.show(that.lang.PleaseLogin);
-
-        const topC = document.getElementsByClassName('layout-main')[0];
-
-        let timer = setInterval(() => {
-          let ispeed = Math.floor(-that.scrollTop / 5)
-          topC.scrollTop = that.scrollTop + ispeed
-          if (that.scrollTop === 0) {
-            clearInterval(timer)
-          }
-        }, 22)
+        this.ifShowPop = true
       }
     },
     closeCo(k) {
@@ -1664,21 +1638,12 @@ export default {
       }else{
         this.$toast.show('登陆后才能使用优惠券');
       }
+    },
+    closePop() {
+      this.ifShowPop = false
     }
 
   },
-
-  // watch:{
-  //    $route: {
-  //       handler: function(val, oldVal){
-  //         console.log(val);
-  //         sessionStorage.removeItem('cardList');
-  //       },
-  //       // 深度观察监听
-  //       deep: true
-  //     }
-  // }
-
   beforeRouteLeave(to, from, next){
     if(to.path !== '/cart/invoice'){
       sessionStorage.removeItem('cardList')

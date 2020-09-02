@@ -130,8 +130,7 @@
       "toast1": "Choose products before you pay",
       "toast2": "Deleted",
       "discounts1": "Coupon",
-      "discounts2": "off",
-      "firstLogin": "Please login or register!"
+      "discounts2": "off"
     },
     "invoice": {
       "personal":"personal",
@@ -652,8 +651,7 @@
     "addCartFail": "Failed to add to cart",
     "discounts1": "Coupon",
     "discounts2": "off",
-    "buyNow":"Order Now",
-    "firstLogin": "Please login or register!"
+    "buyNow":"Order Now"
   },
   "diamond": {},
   "engagement": {
@@ -1179,8 +1177,7 @@
     "oddPrice": "Original price",
     "newPrice": "Discount price",
     "needLogin": "Please login before redeem the coupon.",
-    "buyNow":"Order Now",
-    "firstLogin": "Please login or register!"
+    "buyNow":"Order Now"
   },
   "listCommons": {
     "sliders": [
