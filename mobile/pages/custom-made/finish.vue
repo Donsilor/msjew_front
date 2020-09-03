@@ -168,7 +168,7 @@ export default {
       swiperImg: [],
       language: this.$store.state.language,
       materialId:'',
-      sizeId:''
+      sizeId:'',
       ifShowPop: false,
       isLogin: !!this.$store.state.token
     }
