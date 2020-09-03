@@ -21,6 +21,16 @@
             {{ info1.goodsName }}
           </div>
           <div class="content-desc">SKU：{{ info1.goodsCode }}</div>
+          <div v-for="d in info1.materials" :key="d.id">
+            <div v-if="parseInt(d.id) === materialId" class="content-desc">
+              {{ lang.fineness }}：{{ d.name }}
+            </div>
+          </div>
+          <div v-for="d in info1.sizes" :key="d.id">
+            <div v-if="parseInt(d.id) === sizeId" class="content-desc">
+              {{ lang.size }}：{{ d.name }}
+            </div>
+          </div>
           <div v-for="(c, index) in info1.details" :key="index">
             <div v-if="parseInt(c.id) === parseInt(infoCheck)">
               <div
@@ -71,16 +81,16 @@
           </div>
           <div class="content-desc">SKU：{{ info2.goodsCode }}</div>
           <div v-for="d in info2.specs" :key="d.configId">
-            <div v-if="parseInt(d.configId) === 31" class="content-desc">
+            <div v-if="parseInt(d.configId) === 5" class="content-desc">
               {{ lang.carat }}：{{ d.configAttrVal }}
             </div>
-            <div v-if="parseInt(d.configId) === 34" class="content-desc">
+            <div v-if="parseInt(d.configId) === 7" class="content-desc">
               {{ lang.color }}：{{ d.configAttrVal }}
             </div>
-            <div v-if="parseInt(d.configId) === 33" class="content-desc">
+            <div v-if="parseInt(d.configId) === 4" class="content-desc">
               {{ lang.cut }}：{{ d.configAttrVal }}
             </div>
-            <div v-if="parseInt(d.configId) === 35" class="content-desc">
+            <div v-if="parseInt(d.configId) === 2" class="content-desc">
               {{ lang.clarity }}：{{ d.configAttrVal }}
             </div>
           </div>
@@ -147,16 +157,18 @@ export default {
       lock: false,
       info1: {},
       info2: {
-        details: [
-          {
-            coinType: `HKD`,
-            retailMallPrice: 0
-          }
-        ]
+        // details: [
+        //   {
+        //     coinType: `HKD`,
+        //     retailMallPrice: 0
+        //   }
+        // ]
       },
       infoCheck: 0,
       swiperImg: [],
       language: this.$store.state.language,
+      materialId:'',
+      sizeId:''
       ifShowPop: false,
       isLogin: !!this.$store.state.token
     }
@@ -192,6 +204,9 @@ export default {
       return price2
     }
   },
+  mounted() { 
+    // this.language = this.getCookie('language')
+  },
   methods: {
     getThatS() {
       // if (this.lock || this.bdArr.length < 2) return
@@ -221,6 +236,22 @@ export default {
           // console.log(`finish's Diamond=======>`, res)
           res.goodsImages = res.goodsImages.split(`,`)[0] || ``
           this.info2 = res
+          // 获取戒托所选的参数Id
+          const melo = JSON.parse(
+            this.$helpers.base64Decode(this.$route.query.melo)
+          )
+          let detailId = ''
+          melo.steps.forEach((a, i) =>{
+            detailId = a.goodsDetailsId
+            this.info2.details.forEach((o, i) =>{
+              if(detailId == o.id){
+                if(o.material && o.size !== null){
+                  this.materialId = o.material
+                  this.sizeId = o.size
+                }
+              }
+            })
+          })
         })
         .catch(err => {
           console.log(err)
@@ -235,10 +266,26 @@ export default {
         }
       })
         .then(res => {
-          console.log(`finish's Other=======>`, res)
+          // console.log(`finish's Other=======>`, res)
           this.swiperImg = res.goodsImages.split(`,`)
           res.goodsImages = res.goodsImages.split(`,`)[0] || ``
           this.info1 = res
+          // 获取戒托所选的参数Id
+          const melo = JSON.parse(
+            this.$helpers.base64Decode(this.$route.query.melo)
+          )
+          let detailId = ''
+          melo.steps.forEach((a, i) =>{
+            detailId = a.goodsDetailsId
+            this.info1.details.forEach((o, i) =>{
+              if(detailId == o.id){
+                if(o.material && o.size !== null){
+                  this.materialId = o.material
+                  this.sizeId = o.size
+                }
+              }
+            })
+          })
         })
         .catch(err => {
           console.log(err)

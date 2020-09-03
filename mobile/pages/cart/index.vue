@@ -285,7 +285,7 @@
           <div class="order">
             <span>{{ lang.total }}</span>
             <span class="small"
-              >{{ formatCoin(coin) }}{{ formatMoney(sumPrice.toFixed(2)) }}</span
+              >{{ formatCoin(coin) }} {{ formatMoney(sumPrice.toFixed(2)) }}</span
             >
           </div>
           <span class="btn" @click="goPay">{{ lang.goPay }}({{ sumNum }})</span>
