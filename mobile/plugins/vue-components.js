@@ -37,6 +37,7 @@ import LiveChat from '@/components/live-chat'
 import TipMessage from '@/components/tip-message'
 import GetCoupon from '@/components/coupon/getCoupon'
 import UseCoupon from '@/components/coupon/useCoupon'
+import LoginPop from '@/components/login-pop'
 
 Vue.use(Input)
 Vue.use(ConfirmBox)
@@ -52,6 +53,7 @@ Vue.use(SendEmailCode)
 Vue.use(pictureVerificationCode)
 Vue.use(TopBar)
 Vue.use(FooterBar)
+Vue.use(LoginPop)
 
 //  列表滑动到底加载
 Vue.use(ScrollBox)

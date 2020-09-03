@@ -113,20 +113,10 @@ export default {
   },
   mounted(){
     this.loginType=localStorage.getItem('loginType')
-    this.language = this.getCookie('language')
+    this.language = this.$store.state.language
     this.refreshCode()
   },
   methods: {
-    // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     // 发送手机验证码
     sendMobileCode(){
       this.hadSendCode = true

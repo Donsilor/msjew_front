@@ -136,6 +136,7 @@
       </swiper>
     </div>
     <footer-bar></footer-bar>
+    <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
   </div>
 </template>
 
@@ -168,6 +169,8 @@ export default {
       language: this.$store.state.language,
       materialId:'',
       sizeId:''
+      ifShowPop: false,
+      isLogin: !!this.$store.state.token
     }
   },
   watch: {
@@ -289,14 +292,18 @@ export default {
         })
     },
     addCart() {
-      // console.log(this.canAddCart)
-      // if (!this.canAddCart) {
-      //   return
-      // }
       this.$emit(`addCart`)
     },
     orderNow() {
+      if(!this.isLogin && this.$store.state.platform == 21){
+        this.ifShowPop = true
+        return
+      }
+
       this.$emit(`orderNow`)
+    },
+    closePop() {
+      this.ifShowPop = false
     }
   }
 }

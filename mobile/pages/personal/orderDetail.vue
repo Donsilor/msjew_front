@@ -564,7 +564,7 @@ export default {
         10: 'payType13',   // CARD
         11: 'payType14',   // WireTransfer(电汇)
         100: 'payType15'   // OFFLINE(线下)
-     
+        
       }
       return map[payChannel]
     },

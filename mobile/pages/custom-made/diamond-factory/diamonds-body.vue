@@ -449,6 +449,7 @@
       </div>
       <!-- 获取优惠券 -->
       <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
+      <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
     </div>
     <!-- <div v-else >
       <soleOut></soleOut>
@@ -484,7 +485,8 @@ export default {
       ifShowCoupon: false,
       language: this.$store.state.language,
       ifShowMore: false,
-      detailNum: 4
+      detailNum: 4,
+      ifShowPop: false
     }
   },
   mixins: [Mx],
@@ -521,7 +523,8 @@ export default {
     // 获取优惠券
     getCoupon() {
       if(!this.$store.getters.hadLogin) {
-        this.$toast.show(this.lang.needLogin)
+        this.ifShowPop = true
+        // this.$toast.show(this.lang.needLogin)
       }else{
         this.ifShowCoupon = true
       }
@@ -529,6 +532,9 @@ export default {
     showMore(){
       this.ifShowMore = !this.ifShowMore
       this.detailNum = this.detailNum == 4 ? 100 : 4
+    },
+    closePop() {
+      this.ifShowPop = false
     }
   }
 }

@@ -593,15 +593,15 @@ export default {
     // 立即购买
     async orderNow() {
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast(this.lang.firstLogin)
+        this.ifShowPop = true
         return
       }
-      console.log(`in!!!!!`)
+      // console.log(`in!!!!!`)
       const melo = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.melo)
       )
       if (melo.steps.length === 1000) {
-        console.log(1)
+        // console.log(1)
       } else if (melo.steps[0].goodsDetailsId && melo.steps[1].goodsDetailsId) {
         const timeSock = new Date().getTime()
         const time = this.getTimestampUuid
