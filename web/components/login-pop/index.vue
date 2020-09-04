@@ -521,7 +521,7 @@ input::placeholder {
 }
 
 .login-item {
-  width: 300px;
+  width: 390px;
   height: 380px;
   padding-top: 20px;
   padding-bottom: 23px;
@@ -533,8 +533,8 @@ input::placeholder {
     & {
       input {
         width: 100%;
-        height: 40px;
-        line-height: 40px;
+        height: 45px;
+        line-height: 45px;
         padding: 0 20px;
         border: 1px solid rgba(230, 230, 230, 1);
         border-radius: 4px;
@@ -585,7 +585,7 @@ input::placeholder {
 
   .code-picture {
     width: 109px;
-    height: 40px;
+    height: 45px;
   }
 
   .forget {
