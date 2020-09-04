@@ -148,7 +148,8 @@ export default {
       // canSearchWithoutKeyword: false,
       similarGoodsId: '',
       conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
-      language: this.$store.state.language
+      language: this.$store.state.language,
+      key:'a'
     }
   },
   computed: {
@@ -167,7 +168,7 @@ export default {
         _this.keyword = _this.$helpers.base64Decode(
         _this.$route.query.keyword || ''
       )
-      _this.research()
+      _this.research(this.key)
     }
   },
   mounted(){
@@ -228,7 +229,7 @@ export default {
         // console.log('this.keyword=====>', this.keyword)
         this.$store.dispatch('addLocalSearchHistory', this.keyword)
       }
-      this.research()
+      this.research(this.key)
 
     },
     toDetail(info) {
