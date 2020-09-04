@@ -8,49 +8,65 @@
       <div
         v-for="(a, index) in address"
         :key="index"
-        :class="{ 'addr-active': a.is_default === 1 }"
+        :class="{ 'addr-active': a.is_default == 1 }"
         class="addr-block"
       >
-        <div class="addr-title">
-          <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
+        <div class="box-left">
+          <div class="addr-title">
+            <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
+          </div>
+          <div class="addr-user">
+            <div>{{ a.realname }}</div>
+            <div>{{ $t(`${lang}.get`) }}</div>
+          </div>
+          <div class="addr-address">
+            <!-- {{ a.address_name }}{{ a.address_details }} -->
+            {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
+            }}{{ a.address_details }}
+          </div>
+          <div class="addr-user-phone">
+            <div>{{ a.mobile_code }}</div>
+            <div>{{ a.mobile }}</div>
+          </div>
+          <div class="font-size-14 color-333">{{ a.zip_code }}</div>
+          <div class="font-size-14 color-333">{{ a.email }}</div>
+          
+          <!-- <div class="addr-board" @click="changeDefaultAddress(a.id)" /> -->
+                    
+          <img
+            v-show="a.is_default == 1"
+            src="../../../static/personal/account/address-bar.png"
+          />
         </div>
-        <div class="addr-user">
-          <div>{{ a.realname }}</div>
-          <div>{{ $t(`${lang}.get`) }}</div>
+
+        <div class="box-right">
+          <div
+            v-if="a.is_default == 1"
+            class="default-address active"
+          >
+            {{ $t(`${lang}.mrAddress`) }}
+          </div>
+          <div
+            v-else
+            class="default-address"
+            @click="changeDefaultAddress(a.id)"
+          >
+            {{ $t(`${lang}.setDefaultAddress`) }}
+          </div>
+
+          <div class="addr-btn" @click="changeAddress(a)">
+            {{ $t(`${lang}.change`) }}
+          </div>
+
+          <i
+            class="iconfont iconlajitong"
+            @click="
+              isDel = true
+              delId = a.id
+              delIdx = index
+            "
+          />
         </div>
-        <div class="addr-address">
-          <!-- {{ a.address_name }}{{ a.address_details }} -->
-           {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
-          }}{{ a.address_details }}
-        </div>
-        <div class="addr-user-phone">
-          <div>{{ a.mobile_code }}</div>
-          <div>{{ a.mobile }}</div>
-        </div>
-        <div class="font-size-14 color-333">{{ a.zip_code }}</div>
-        <div class="font-size-14 color-333">{{ a.email }}</div>
-        <div
-          v-if="a.is_default === 1"
-          class="font-size-14"
-          style="color: #f29b87; margin-top: 6px;"
-        >
-          {{ $t(`${lang}.mrAddress`) }}
-        </div>
-        <div class="addr-board" @click="changeDefaultAddress(a.id)" />
-        <i
-          class="iconfont iconlajitong"
-          @click="
-            isDel = true
-            delId = a.id
-          "
-        />
-        <div class="addr-btn" @click="changeAddress(a)">
-          {{ $t(`${lang}.change`) }}
-        </div>
-        <img
-          v-show="a.is_default === 1"
-          src="../../../static/personal/account/address-bar.png"
-        />
       </div>
     </div>
     <div class="addr-mid dle-btn" id="addbox">
@@ -559,6 +575,7 @@ export default {
       address: [],
       isDel: false,
       delId: ``,
+      delIdx: -1,
       isEdit: false,
       isNew: true,
       isShow: false,
@@ -617,16 +634,7 @@ export default {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-          // if(res.code==200){
-            // console.log('获取地址成功', res)
             this.address = res.data
-          // }
-          // else {
-          //   throw new Error (res.message)
-          // }
-          // console.log("地址",this.address)
-          // this.isShow = false
-          // this.isDel = false
         })
         .catch(err => {
           if (!err.response) {
@@ -643,49 +651,38 @@ export default {
         inline: 'nearest',
         behavior: 'smooth'
       })
-      // console.log("ddasdas",obj)
       this.resetAddress()
       this.clone = this.$helpers.cloneObject(obj)
       this.checkEmail = obj.email
-      // console.log("email",this.checkEmail)
+
       const code = obj.mobile_code.split('+').reverse()
       JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
         if (o.phone_code === '+' + code[0]) this.phoneNum = o
       })
-      // if(this.language==='zh_CN'){
-      //   this.email=obj.email
-      // }else{
-      //   this.checkEmail = obj.email
-      //   const code = obj.userTelCode.split('+').reverse()
-      //   JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
-      //     if (o.phone_code === '+' + code[0]) this.phoneNum = o
-      //   })
-      // }
+
       this.setAddress(obj).then(res => {
         if (!res) {
           this.isShow = !this.isShow
           this.isNew = false
           this.isEdit = true
         }
-        // this.checkEmail = res.userMail;
       })
     },
     // 修改默认地址
     changeDefaultAddress(id) {
-      // console.log("aaa",id)
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ id:id,is_default: 1 })),
         false
       )
       this.$axios
         .post('/web/member/address/edit',data)
-        .then(res => {
-          // if(res.code==200){
-            // console.log("修改默认地址成功",res)
+        .then(res => {      
+            this.$message({
+              message: this.$t(`${lang}.setSuccess`),
+              type: 'success'
+            })
+
             this.getData()
-          // }else {
-          //   throw new Error (res.message)
-          // }
         })
         .catch(err => {
           if (!err.response) {
@@ -735,7 +732,6 @@ export default {
     },
     // 新建地址
     createAddress() {
-      // console.log("this.u",this.using)
       if (this.using.firstname === '') {
         this.$message.error(this.$t(`${lang}.wip1`))
         return
@@ -787,6 +783,12 @@ export default {
         this.$message.error(this.$t(`${lang}.wip11`))
         return
       }
+
+      var isDefault = 0;
+      if(!this.address.length){
+        isDefault = 1
+      }
+
       const json = {
         firstname: this.using.firstname,
         lastname: this.using.lastname,
@@ -797,7 +799,8 @@ export default {
         province_id: this.province.areaId,
         city_id: this.city.areaId,
         address_details: this.using.address_details,
-        zip_code: this.using.zip_code
+        zip_code: this.using.zip_code,
+        is_default: isDefault
       }
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(JSON.stringify(json)),
@@ -871,6 +874,12 @@ export default {
         this.$message.error(this.$t(`${lang}.wip11`))
         return
       }
+
+      var isDefault = 0;
+      if(!this.address.length){
+        isDefault = 1
+      }
+
       const json = {
         firstname: this.using.firstname,
         lastname: this.using.lastname,
@@ -881,7 +890,8 @@ export default {
         province_id: this.province.areaId,
         city_id: this.city.areaId,
         address_details: this.using.address_details,
-        zip_code: this.using.zip_code
+        zip_code: this.using.zip_code,
+        is_default: isDefault
       }
       // const data = this.$helpers.transformRequest(
       //   JSON.parse(JSON.stringify(json)),
@@ -1002,7 +1012,14 @@ export default {
         .then(res => {
           if(res.code==200){
             this.isDel = false
-            this.getData()
+
+            if(this.address.length > 1 && this.delIdx == 0){
+              this.changeDefaultAddress(this.address[this.address.length-1].id)
+            }else{
+              this.getData()
+            }
+
+            return
             this.resetAddress()
             // console.log("删除",res)
           }else {
@@ -1068,15 +1085,62 @@ export default {
       position: relative;
       width: 46%;
       height: 250px;
-      padding: 25px 30px 0;
+      padding: 25px 20px 0;
       margin: 0 3% 20px 0;
       border: 1px solid rgba(230, 230, 230, 1);
       box-sizing: border-box;
+      display: flex;
+      justify-content: space-between;
+      
+      .box-left{
+        width: 68%;
+      }
+      .box-right{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        width: 27%;
+        text-align: right;
+
+        .default-address{
+          font-size: 14px;
+          color: #f29b87;
+          margin-top: 6px;
+          cursor: pointer;
+        }
+
+        .default-address.active{
+          cursor: initial;
+        }
+
+        .addr-btn {
+          width: 50px;
+          height: 22px;
+          line-height: 20px;
+          border: 1px solid #aa8a7b;
+          border-radius: 4px;
+          background: rgba(251, 247, 245, 1);
+          color: #aa8a7b;
+          text-align: center;
+          cursor: pointer;
+          margin-top: 20px;
+        }
+
+        .iconlajitong {
+          display: block;
+          font-size: 21px;
+          color: #999;
+          z-index: 39;
+          cursor: pointer;
+          margin: 90px 4px 0 0;
+        }
+      }
+
       .addr-title {
         display: flex;
         align-items: flex-end;
         margin-bottom: 10px;
-        width: 80%;
+
         div {
           font-size: 20px;
           color: #333;
@@ -1148,31 +1212,6 @@ export default {
         cursor: pointer;
         z-index: 10;
       }
-      .iconlajitong {
-        position: absolute;
-        bottom: 36px;
-        right: 28px;
-        display: block;
-        font-size: 21px;
-        color: #999;
-        z-index: 39;
-        cursor: pointer;
-      }
-      .addr-btn {
-        position: absolute;
-        width: 50px;
-        height: 22px;
-        line-height: 20px;
-        border: 1px solid #aa8a7b;
-        border-radius: 4px;
-        background: rgba(251, 247, 245, 1);
-        color: #aa8a7b;
-        text-align: center;
-        cursor: pointer;
-        top: 30px;
-        right: 28px;
-        z-index: 40;
-      }
       img {
         display: block;
         width: 100%;
@@ -1182,7 +1221,7 @@ export default {
       }
     }
     .addr-active {
-      border: 1px solid rgba(212, 196, 188, 1);
+      border-color: #d4c4bc;
     }
   }
   .addr-middle-btn {

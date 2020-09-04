@@ -1,7 +1,7 @@
 <template>
   <div class="page-content" v-loading="loading">
     <section class="crumbs">{{ $t(`${lang}.homePage`) }} > {{ $t(`${lang}.result`) }}</section>
-    <section class="search-keyword">
+    <!-- <section class="search-keyword">
       <input
         v-model.trim="keyword"
         class="keyword-input"
@@ -12,7 +12,7 @@
       <button class="search-btn" @click="toSearch">
         {{ $t(`${lang}.search`) }}
       </button>
-    </section>
+    </section> -->
     <section class="sort">
       <div class="sort-type">
         <div class="using-type">

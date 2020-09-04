@@ -131,8 +131,7 @@
         "toast1": "请选择要结账商品",
         "toast2": "移除成功",
         "discounts1": "优惠券",
-        "discounts2": "折",
-        "firstLogin":"请先登录或注册！"
+        "discounts2": "折"
       },
       "invoice":{
         "personal":"个人",
@@ -208,7 +207,8 @@
         "discountedAmount": "折扣金额",
         "couponAmount": "优惠券",
         "msg12": "请先登录才能使用优惠券",
-        "useCoupons": "使用优惠券"
+        "useCoupons": "使用优惠券",
+        "point":"*注：订单金额已做抹零处理"
       },
       "pay": {
         "pay": "订单支付",
@@ -651,8 +651,7 @@
       "addCartFail": "加入购物车是失败",
       "discounts1": "优惠券",
       "discounts2": "折",
-      "buyNow":"立即购买",
-      "firstLogin":"请先登录或注册！"
+      "buyNow":"立即购买"
     },
     "diamond": {},
     "engagement": {
@@ -1126,7 +1125,7 @@
       "chooseColor": "选择成色",
       "chooseSize": "选择尺寸",
       "chooseCarat": "选择克拉",
-      "chooseShade": "选择色彩",
+      "chooseShade": "选择主石色彩",
       "us-version": "美版",
       "cmw": "只有您知道什么是最能表达您的爱。从我们的系列中选择一些东西，或者钻石及款式，来创造您独特的作品。",
       "addCart": "加入购物车",
@@ -1186,8 +1185,7 @@
       "oddPrice": "原  价",
       "newPrice": "折后价",
       "needLogin": "请先登录，才能领取优惠券",
-      "buyNow":"立即购买",
-      "firstLogin":"请先登录或注册！"
+      "buyNow":"立即购买"
     },
     "listCommons": {
       "sliders": [

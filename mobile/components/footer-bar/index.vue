@@ -119,7 +119,7 @@
         </ul>
       </div>
     </section>
-    <section class="social-media" style="height: 10px !important;">
+    <section class="social-media" style="height: 7px !important;">
       <!--      <div class="item">-->
       <!--        <i class="iconfont icon_weibo"></i>-->
       <!--      </div>-->

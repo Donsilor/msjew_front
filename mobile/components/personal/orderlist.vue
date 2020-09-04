@@ -289,7 +289,11 @@
               <div class="order-box-a">
                 <span class="title">{{ order.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}：</span>
                 <div class="order-amount">
-                  <div>
+                  <div v-if="$store.state.platform == 41 && order.coinCode == 'TWD'">
+                    <span class="coin-type">{{ formatCoin(order.coinCode) }}</span>
+                    <span class="order-price">{{ formatAmount(order.payAmount) }}</span> 
+                  </div>
+                  <div v-else>
                     <span class="coin-type">{{ formatCoin(order.coinCode) }}</span>
                     <span class="order-price">{{ order.payAmount }}</span>
                   </div>

@@ -294,7 +294,7 @@
             </div>
           </div>
         </div>
-        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
+        <ul class="services-list">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
@@ -812,6 +812,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.recommend{
+  margin: 110px 0; 
+}
 .detail-page {
   margin: auto;
 }

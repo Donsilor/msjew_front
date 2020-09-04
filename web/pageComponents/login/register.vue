@@ -572,11 +572,10 @@ export default {
             localStorage.setItem('accessToken',data.access_token);
             _this.$store.commit('setToken', data.access_token)
             _this.$store.commit('setUserInfo',data.member)
-              // const lastUrl = _this.$store.state.lastUrl
-              const lastUrl=localStorage.getItem("url")
+
+            const lastUrl=localStorage.getItem("url")
             _this.$store.dispatch('synchronizeCart')
-            // const lastUrl = _this.$store.state.lastUrl
-            // _this.$store.commit('setLastUrl', '')
+
             fbq('track', 'CompleteRegistration');
             setTimeout(() => {
               if (lastUrl) {
@@ -640,10 +639,8 @@ export default {
             localStorage.setItem('accessToken',data.access_token);
             _this.$store.commit('setToken', data.access_token)
             _this.$store.commit('setUserInfo',data.member)
-            // const lastUrl = _this.$store.state.lastUrl
-            // _this.$store.commit('setLastUrl', '')
-              // const lastUrl = _this.$store.state.lastUrl
-              const lastUrl=localStorage.getItem("url")
+
+            const lastUrl=localStorage.getItem("url")
             _this.$store.dispatch('synchronizeCart')
             fbq('track', 'CompleteRegistration');
             setTimeout(() => {

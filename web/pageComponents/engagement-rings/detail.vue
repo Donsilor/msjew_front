@@ -224,7 +224,7 @@
               <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
            </div>
         </div>
-        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
+        <ul class="services-list">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
@@ -287,6 +287,11 @@
             </button>
           </nuxt-link>
           
+          <div v-else>
+              <button @click="Confirm"  :class="['add-to-cart', { active: canAddCart }]">
+                {{ $t(`${lang}.ConfirmTheChoice`) }}
+              </button>
+          </div>
           <!-- <button
             v-loading="addingCart"
             :class="['add-to-cart', { actived: canAddCart }]"
@@ -726,6 +731,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.recommend{
+  margin: 110px 0; 
+}
 .detail-page {
   margin: auto;
 }

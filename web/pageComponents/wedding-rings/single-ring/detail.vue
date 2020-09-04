@@ -325,7 +325,7 @@
           </div>
 
         </div>
-        <ul class="services-list" v-if="productInfo.goodsServicesJsons.length > 0">
+        <ul class="services-list">
           <li
             v-for="(item, index) in productInfo.goodsServicesJsons || []"
             :key="index"
@@ -391,7 +391,7 @@
                 {{ $t(`${lang}.ConfirmTheChoice`) }}
               </button>
             </nuxt-link>
-            <button v-else :class="['add-to-cart', { active: canAddCart }]">
+            <button v-else @click="Confirm" :class="['add-to-cart', { active: canAddCart }]">
               {{ $t(`${lang}.ConfirmTheChoice`) }}
             </button>
             <!-- <button
@@ -458,7 +458,7 @@
                 </button>
             </div>
             <div v-else> 
-              <button  :class="['add-to-cart', { active: canAddCart }]">
+              <button @click="Confirm"  :class="['add-to-cart', { active: canAddCart }]">
                 {{ $t(`${lang}.ConfirmTheChoice`) }}
               </button>
               
@@ -946,6 +946,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.recommend{
+  margin: 110px 0; 
+}
 .start-dj{
   width: 320px!important;
   background: #aa8a7b!important;

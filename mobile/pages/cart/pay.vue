@@ -2,10 +2,10 @@
   <div class="pay">
     <div class="paylist" v-show="paylist">
       <Header :title="lang.pay" tips="1" />
-      <div v-if="this.$store.state.coin == 'CNY' && this.$store.state.platform === 21" class="proce">
+      <div v-if="this.$store.state.platform === 41" class="proce">
         <!-- <div class="note"><span class="star">*</span> {{ lang.Note3 }}</div> -->
         <span>{{ formatCoin(info.coinType) }} </span>
-        {{ formatMoney(price) }}
+        {{ formatAmount(price) }}
         <!-- <span class="price-hkd">({{ coinHKD }} {{ formatMoney(priceHKD) }}) </span> -->
       </div>
       <div v-else class="proce">
@@ -155,8 +155,8 @@
         <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
         <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
-        {{ formatCoin(info.coinType) }}
-        {{ formatMoney(price) }}
+        <span v-if="this.$store.state.platform === 41"> {{ formatCoin(info.coinType) }}{{ formatAmount(price) }}</span>
+        <span v-else> {{ formatCoin(info.coinType) }}{{ formatMoney(price) }}</span>
       </div>
 
       <!-- <Upload :multiple="true" :max=6 :list="imgList" ref="upload"></Upload> -->
@@ -596,9 +596,12 @@ export default {
         }
       })
       .then(res => {
+        // alert('11111',res)
         if(tradeType == 'mweb'){
+          // alert('22222',res)
           window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
-        }else if(tradeType == 'js'){
+        }
+        if(tradeType == 'js'){
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
@@ -649,19 +652,21 @@ export default {
           //     coinType: this.info.coinType
           //   }
           // })
-        }else if (res.config) {
+        }
+        if (res.config) {
           window.location.replace(res.config)
-        }else {
-          this.isPay = false
-          this.$router.replace({
-            name: 'complete-paySuccess-orderId-price-coinType',
-            params: {
-              orderId: this.info.orderId,
-              price: this.info.payAmount,
-              coinType: this.info.coinType
-            }
-          })
-        } 
+        }
+        // else {
+        //   this.isPay = false
+        //   this.$router.replace({
+        //     name: 'complete-paySuccess-orderId-price-coinType',
+        //     params: {
+        //       orderId: this.info.orderId,
+        //       price: this.info.payAmount,
+        //       coinType: this.info.coinType
+        //     }
+        //   })
+        // } 
         
       })
       .catch(err => {

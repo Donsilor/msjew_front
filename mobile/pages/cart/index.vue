@@ -285,7 +285,7 @@
           <div class="order">
             <span>{{ lang.total }}</span>
             <span class="small"
-              >{{ formatCoin(coin) }}{{ formatMoney(sumPrice.toFixed(2)) }}</span
+              >{{ formatCoin(coin) }} {{ formatMoney(sumPrice.toFixed(2)) }}</span
             >
           </div>
           <span class="btn" @click="goPay">{{ lang.goPay }}({{ sumNum }})</span>
@@ -297,6 +297,7 @@
       :type="'cart'"
       @toShopping="toShopping"
     ></bdd-empty>
+    <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
   </div>
 </template>
 
@@ -325,11 +326,9 @@ export default {
       timer: null ,
       soudout:'',
       language: this.$store.state.language,
-      isLoading:''
+      isLoading:'',
+      ifShowPop: false
     }
-  },
-  created() {
-    
   },
   mounted() {
     this.$nextTick(() => {
@@ -343,13 +342,7 @@ export default {
         this.getLocalCart()
       }
     })
-
-    // this.language = this.getCookie('language')
   },
-  // beforeUpdate(){
-  //   this.getList()
-  // },
-  //
   methods: {
     formatMoney: formatMoney,
     toShopping() {
@@ -368,26 +361,26 @@ export default {
       })
     },
     goPay() {
-      // console.log("id",this.list)
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast.show(this.lang.firstLogin)
-      } else {
-        const arr = []
-        for (let i = 0; i < this.list.length; i++) {
-          if (this.list[i].isSelect) {
-            arr.push(this.list[i])
-          }
+        this.ifShowPop = true
+        return
+      }
+
+      const arr = []
+      for (let i = 0; i < this.list.length; i++) {
+        if (this.list[i].isSelect) {
+          arr.push(this.list[i])
         }
-  
-        if (arr.length <= 0) {
-          this.$toast.show(this.lang.toast1)
-        } else if (arr.length > 0) {
-          console.log("arr",arr)
-          storage && storage.set('myCartList', JSON.stringify(arr))
-          this.$router.push({
-            name: 'cart-sureOrder'
-          })
-        }
+      }
+
+      if (arr.length <= 0) {
+        this.$toast.show(this.lang.toast1)
+      } else if (arr.length > 0) {
+        // console.log("arr",arr)
+        storage && storage.set('myCartList', JSON.stringify(arr))
+        this.$router.push({
+          name: 'cart-sureOrder'
+        })
       }
     },
     // 判断是否失效
@@ -427,7 +420,7 @@ export default {
             this.list[i].isSelect = false
           }
         }
-        console.log(this.selectAll)
+        // console.log(this.selectAll)
         this.getNum()
         if(this.list.length == 1 && this.soudout !== 2){
           this.selectAll = false
@@ -728,7 +721,7 @@ export default {
     },
     // 格式化数据列表
     doFormat(res) {
-      console.log(res)
+      // console.log(res)
       this.list = []
       if (res && res.length > 0) {
         this.noListData = false
@@ -868,7 +861,7 @@ export default {
             }
           })
         } else if (item.simpleGoodsEntity.categoryId === 2) {
-           console.log('还是个結婚戒指💍')
+          //  console.log('还是个結婚戒指💍')
             this.$router.push({
               name: 'marriage-ring-single-ring-detail',
               query: {
@@ -879,7 +872,7 @@ export default {
               }
             })
         }else if (item.simpleGoodsEntity.categoryId === 12) {
-          console.log('还是个訂婚戒指💍')
+          // console.log('还是个訂婚戒指💍')
             this.$router.push({
               name: 'engagement-engagement-rings',
               query: {
@@ -932,6 +925,9 @@ export default {
           goodId: gs2
         }
       })
+    },
+    closePop() {
+      this.ifShowPop = false
     }
   }
 }

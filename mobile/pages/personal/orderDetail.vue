@@ -337,8 +337,9 @@
             <span class="active">-{{ formatCoin(info.coinCode) }} {{ item.useAmount }} </span>
           </li>
           <div class="all">
-            <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span
-            ><span><em>{{ formatCoin(info.coinCode) }} </em>{{ info.payAmount }} </span>
+            <span>{{info.orderStatus == 0 || info.orderStatus == 10 ? lang.NeedPay : lang.ultimatelyPay }}： </span>
+            <span v-if="this.$store.state.platform == 41 && info.coinCode == 'TWD'"><em>{{ formatCoin(info.coinCode) }} </em>{{ formatAmount(info.payAmount) }} </span>
+            <span v-else><em>{{ formatCoin(info.coinCode) }} </em>{{ info.payAmount }} </span>
           </div>
         </ul>
         <div class="btn">
@@ -589,7 +590,7 @@ export default {
         10: 'payType13',   // CARD
         11: 'payType14',   // WireTransfer(电汇)
         100: 'payType15'   // OFFLINE(线下)
-     
+        
       }
       return map[payChannel]
     },

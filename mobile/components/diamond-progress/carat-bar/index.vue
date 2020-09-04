@@ -6,12 +6,15 @@
         <div @click="showHelp">?</div>
       </div>
     </template>
-    <template slot="button">
+    <!-- <template slot="button">
       <div class="button">
         <i class="iconfont iconzhongzhi" @click="resetChoose"></i>
       </div>
-    </template>
+    </template> -->
     <template slot="content">
+      <div class="button">
+        <i class="iconfont iconzhongzhi" @click="resetChoose"></i>
+      </div>
       <div class="middle">
         <div class="middle-input">
           <div>
@@ -85,6 +88,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+.eject-choose-pro-title{
+  position: relative;
+}
+.button{
+  position: absolute;
+  top:18px; 
+  left:15px;
+}
 .clear-btn {
   width: 345px;
   height: 40px;
@@ -244,7 +255,7 @@ export default {
   justify-content: center;
   div:nth-child(1) {
     font-size: 16px;
-    line-height: 16px;
+    line-height: 30px;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
     margin-right: 3px;

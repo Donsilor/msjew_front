@@ -205,10 +205,11 @@
             >
               {{ $t(`${lang}.wireTransferGuide`) }}
             </div>
-            <span
-              >{{ $t(`${lang}.NeedPay`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
-            >
+            <span>
+              {{ $t(`${lang}.NeedPay`)}}
+              <b v-if="$store.state.platform == 40 && o.coinCode == 'TWD'">{{ formatCoin(o.coinCode) }} {{ formatAmount(o.payAmount) }}</b>
+              <b v-else>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b>
+            </span>
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
@@ -226,10 +227,11 @@
                 {{ $t(`${lang}.logisticsDetails`) }}
               </button>
             </nuxt-link> -->
-            <span
-              >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
-            >
+            <span>
+              {{ $t(`${lang}.ultimatelyPay`)}}
+              <b v-if="$store.state.platform == 40 && o.coinCode == 'TWD'">{{ formatCoin(o.coinCode) }} {{ formatAmount(o.payAmount) }}</b>
+              <b v-else>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b>
+            </span>
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
@@ -247,9 +249,11 @@
                 {{ $t(`${lang}.logisticsDetails`) }}
               </button>
             </nuxt-link> -->
-            <span
-              >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
+            <span>
+              {{ $t(`${lang}.ultimatelyPay`)}}
+              <b v-if="$store.state.platform == 40 && o.coinCode == 'TWD'">{{ formatCoin(o.coinCode) }} {{ formatAmount(o.payAmount) }}</b>
+              <b v-else>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b>
+            </span
             >
             <span
               >{{ $t(`${lang}.orderPrice`)
@@ -283,10 +287,11 @@
             >
               {{ $t(`${lang}.confirmReceipt`) }}
             </div> -->
-            <span
-              >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
-            >
+            <span>
+              {{ $t(`${lang}.ultimatelyPay`)}}
+              <b v-if="$store.state.platform == 40 && o.coinCode == 'TWD'">{{ formatCoin(o.coinCode) }} {{ formatAmount(o.payAmount) }}</b>
+              <b v-else>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b>
+            </span>
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
@@ -300,10 +305,11 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
-            <span
-              >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
-            >
+            <span>
+              {{ $t(`${lang}.ultimatelyPay`)}}
+              <b v-if="$store.state.platform == 40 && o.coinCode == 'TWD'">{{ formatCoin(o.coinCode) }} {{ formatAmount(o.payAmount) }}</b>
+              <b v-else>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b>
+            </span>
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
@@ -320,10 +326,11 @@
             <div class="btn-a" @click="goToComment(o.id)">
               {{ $t(`${lang}.toEvaluate`) }}
             </div>
-            <span
-              >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
-            >
+            <span>
+              {{ $t(`${lang}.ultimatelyPay`)}}
+              <b v-if="$store.state.platform == 40 && o.coinCode == 'TWD'">{{ formatCoin(o.coinCode) }} {{ formatAmount(o.payAmount) }}</b>
+              <b v-else>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b>
+            </span>
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
@@ -340,10 +347,11 @@
             <!--            <button @click="goSeeComment()">-->
             <!--              {{ $t(`${lang}.checkEvaluate`) }}-->
             <!--            </button>-->
-            <span
-              >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
-            >
+            <span>
+              {{ $t(`${lang}.ultimatelyPay`)}}
+              <b v-if="$store.state.platform == 40 && o.coinCode == 'TWD'">{{ formatCoin(o.coinCode) }} {{ formatAmount(o.payAmount) }}</b>
+              <b v-else>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b>
+            </span>
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span
@@ -357,10 +365,11 @@
                 {{ $t(`${lang}.orderDetail`) }}
               </button>
             </nuxt-link>
-            <span
-              >{{ $t(`${lang}.ultimatelyPay`)
-              }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b></span
-            >
+            <span>
+              {{ $t(`${lang}.ultimatelyPay`)}}
+              <b v-if="$store.state.platform == 40 && o.coinCode == 'TWD'">{{ formatCoin(o.coinCode) }} {{ formatAmount(o.payAmount) }}</b>
+              <b v-else>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.payAmount) }}</b>
+              </span>
             <span
               >{{ $t(`${lang}.orderPrice`)
               }}<b>{{ formatCoin(o.coinCode) }} {{ formatMoney(o.orderAmount) }}</b></span

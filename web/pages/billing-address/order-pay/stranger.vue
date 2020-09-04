@@ -373,7 +373,10 @@
                   <img src="../../../static/order/paypalpay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
-                <div v-show="payWay == 6" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay == 6" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay == 6" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -394,7 +397,10 @@
                   <img src="../../../static/order/visa.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
-                <div v-show="payWay === 61" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay === 61" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay === 61" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <!-- <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -547,7 +553,10 @@
                   <img src="../../../static/order/epay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
-                <div v-show="payWay == 89" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay == 89" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay == 89" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <!-- <div v-show="payWay == 89 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -1075,14 +1084,20 @@
                 <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
               </div>
             </div>
-            <div class="detail-line">
+            <div class="detail-line amount">
               <div class="font-size-16 color-333">{{ $t(`${lang3}.NeedPay`) }}</div>
-              <div class="hkd color-pink price-big">
+              <div v-if="this.$store.state.platform == 40" class="hkd color-pink price-big">
+                {{ formatCoin(tex.coinType) }}
+                {{ formatAmount(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
+              </div>
+              <div v-else class="hkd color-pink price-big">
                 {{ formatCoin(tex.coinType) }}
                 {{ formatMoney(ultimatelyPay) }}
                 <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
               </div>
             </div>
+            <p class="point" v-show="this.$store.state.platform == 40 && floatStr(ultimatelyPay)>0">({{ $t(`${lang}.point`) }})</p>
           </div>
         </div>
         <div class="info-line" />
@@ -1496,7 +1511,10 @@
                   <img src="../../../static/order/paypalpay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.PayPal`) }}</div>
-                <div v-show="payWay == 6" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay == 6" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay == 6" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -1517,7 +1535,10 @@
                   <img src="../../../static/order/visa.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.visa`) }}</div>
-                <div v-show="payWay === 61" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay === 61" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay === 61" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <!-- <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -1669,7 +1690,10 @@
                   <img src="../../../static/order/epay.png" alt="" />
                 </div>
                 <div class="pay-desc">{{ $t(`${lang2}.EPay`) }}</div>
-                <div v-show="payWay == 89" class="pay-price">
+                <div v-if="this.$store.state.platform == 40" v-show="payWay == 89" class="pay-price">
+                  {{ formatCoin(tex.coinType) }} {{ formatAmount(tex.pay_amount) }}
+                </div>
+                <div v-else v-show="payWay == 89" class="pay-price">
                   {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
                 </div>
                 <!-- <div v-show="payWay == 89 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
@@ -2171,14 +2195,7 @@
               </div>
             </div>
             
-            <!-- 折扣金额 -->
-            <div v-show="tex.discount_amount" class="detail-line">
-              <div>{{$t(`${lang}.discountPrice`)}}</div>
-              <div class="hkd color-pink">
-                <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
-              </div>
-            </div>
-            
+           
             <!-- 优惠券 -->
             <div v-show="objectIfEmpty(tex.coupons) && isLogin" class="detail-line">
               <div>{{ $t(`${lang}.coupon`) }}</div>
@@ -2193,9 +2210,33 @@
                 {{ $t(`${lang}.totalMoney`) }}
               </div>
               <div class="hkd color-pink price-big">
-                {{ formatCoin(tex.coinType) }} {{ formatMoney(tex.pay_amount) }}
+                {{ formatCoin(tex.coinType) }} {{ formatMoney(goodsPrice) }}
               </div>
             </div>
+
+             <!-- 折扣金额 -->
+            <div v-show="tex.discount_amount" class="detail-line">
+              <div>{{$t(`${lang}.discountPrice`)}}</div>
+              <div class="hkd color-pink">
+                <div>- {{formatCoin(tex.coinType)}} {{ formatMoney(tex.discount_amount) }}</div>
+              </div>
+            </div>
+            
+
+            <div class="detail-line amount">
+              <div class="font-size-16 color-333">{{ $t(`${lang3}.NeedPay`) }}</div>
+              <div v-if="this.$store.state.platform == 40" class="hkd color-pink price-big">
+                {{ formatCoin(tex.coinType) }}
+                {{ formatAmount(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span --> 
+              </div>
+              <div v-else class="hkd color-pink price-big">
+                {{ formatCoin(tex.coinType) }}
+                {{ formatMoney(ultimatelyPay) }}
+                <!-- {{ formatMoney(tex.payAmount || goodsPrice) }}</span -->
+              </div>
+            </div>
+            <p class="point" v-show="this.$store.state.platform == 40 && floatStr(ultimatelyPay)>0">({{ $t(`${lang}.point`) }})</p>
           </div>
         </div>
         <div class="info-line" />
@@ -2830,6 +2871,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.amount{
+    margin-bottom: 8px!important;
+}
+.point{
+  text-align: right;
+  margin-bottom: 8px;
+  color:999;
+}
 .star{
   color: #c28c8c;
   display: inline-block;
