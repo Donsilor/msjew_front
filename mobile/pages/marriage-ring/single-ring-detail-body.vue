@@ -97,7 +97,7 @@
         </span>
       </div>
       <div class="bd-b"></div>
-      <div class="select-line margin-bottom-10">
+      <div class="select-line">
         <span>
           <span>{{ lang.chooseSize }}</span>
           <span>（{{ lang['us-version'] }}）</span>

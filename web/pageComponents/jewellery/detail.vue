@@ -69,6 +69,51 @@
               </div>
             </div>
           </div>
+          <!-- 色彩 -->
+          <div class="left-properties" v-if="colorDetail.length > 0">
+            <div  class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.shade`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <!-- <i
+                    :class="[
+                      'iconfont',
+                      'iconmaterial-big-pt',
+                      'color-icon',
+                        colorDetail[ringChecked.colorIndex].id
+                    ]"
+                  ></i> -->
+                  <span class="name ow-h1">
+                    {{ colorDetail[ringChecked.colorIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in colorDetail"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: ringChecked.colorIndex === index }
+                    ]"
+                    @click="changeRingChecked('colorIndex', index)"
+                  >
+                    <!-- <i
+                      :class="[
+                        'iconfont',
+                        'iconmaterial-big-pt',
+                        'color-icon',
+                        colorDetail[item.id]
+                      ]"
+                    ></i> -->
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="right-properties" v-if="productInfo.sizes.length > 0">
             <div  class="property-item">
               <span class="item-name">
@@ -801,7 +846,7 @@ export default {
       }
 
       .item-name {
-        width: 50px;
+        width: 65px;
         font-size: 14px;
         font-family: Microsoft YaHei;
         font-weight: 400;

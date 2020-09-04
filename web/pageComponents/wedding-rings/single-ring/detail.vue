@@ -98,7 +98,7 @@
                       'item',
                       { active: ringChecked.colorIndex === index }
                     ]"
-                    @click="changeRingChecked('colorIndex', item.id)"
+                    @click="changeRingChecked('colorIndex', index)"
                   >
                     <!-- <i
                       :class="[
@@ -657,6 +657,7 @@ export default {
           }
         }
       })
+      console.log("dddd",colors)
       return colors
     },
     goodsAttrs(){
@@ -1002,7 +1003,7 @@ export default {
       }
 
       .item-name {
-        width: 50px;
+        width: 65px;
         font-size: 14px;
         font-family: Microsoft YaHei;
         font-weight: 400;

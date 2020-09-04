@@ -40,9 +40,9 @@
           :key="index"
           :class="['data-item', item.itemType]"
         >
-          <!--          商品数据-->
+          <!--    target="_blank"      商品数据-->
           <div v-if="item.itemType === 'product'" class="product-content">
-            <nuxt-link :to="item.to" target="_blank">
+            <nuxt-link :to="item.to" >
               <div class="product-image">
                 <img class="main-image" :src="item.goodsImages[0]" />
                 <img
