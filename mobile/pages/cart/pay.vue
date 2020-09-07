@@ -145,8 +145,7 @@
         <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
         <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
-        {{ formatCoin(info.coinType) }}
-        {{ formatMoney(price) }}
+        {{ formatCoin(info.coinType) }} {{ formatMoney(price) }}
       </div>
 
       <div v-else class="btn" @click="goPaySuccess">
@@ -155,8 +154,8 @@
         <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
         <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
-        <span v-if="this.$store.state.platform === 41"> {{ formatCoin(info.coinType) }}{{ formatAmount(price) }}</span>
-        <span v-else> {{ formatCoin(info.coinType) }}{{ formatMoney(price) }}</span>
+        <span v-if="this.$store.state.platform === 41"> {{ formatCoin(info.coinType) }} {{ formatAmount(price) }}</span>
+        <span v-else> {{ formatCoin(info.coinType) }} {{ formatMoney(price) }}</span>
       </div>
 
       <!-- <Upload :multiple="true" :max=6 :list="imgList" ref="upload"></Upload> -->
