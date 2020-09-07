@@ -167,6 +167,7 @@ export default {
         this.firstRingColorAttrs[0].goods_id = this.firstRingId
         this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
         this.firstRingColorAttrs[0].config_attr_id = this.firstRingColor.id
+        console.log()
         return this.firstRingColorAttrs
       },
       set(){
@@ -494,7 +495,7 @@ export default {
         }
       }
       this.secondRingId = result
-      // console.log("result2",this.secondRingId)
+      // console.log("result2",result)
       // this.secondRingId = result.id
       return this.changeChecked()
     },
@@ -623,6 +624,9 @@ export default {
 
       const firstRing = _this.firstRingId
       const secondRing = _this.secondRingId
+      
+      _this.firstRingColorAttrs[0].goods_id = firstRing
+      _this.secondRingColorAttrs[0].goods_id = secondRing
 
       if(!firstRing || !secondRing) {
         _this.coupleLadyId = ''
@@ -1012,6 +1016,7 @@ export default {
                     ? item.id
                     : null,
                 group_type: val.groupType,
+                goods_attr:val.goods_attr,
                 updateTime: item.id 
               }
               this.cartList.push(o)
@@ -1031,6 +1036,7 @@ export default {
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
+          // console.log(item)
           const o = {
             isSelect: false,
             goodsImages: item.simpleGoodsEntity.goodsImages,
@@ -1041,6 +1047,7 @@ export default {
                 : item.simpleGoodsEntity.categoryId === 1
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
+            goodsAttr:item.goodsAttr,
             sku:
               item.goodsType == 19
                 ? item.ring
@@ -1133,9 +1140,10 @@ export default {
         groupType: null,
         goodsType: this.categoryId,
         serviceId: 0,
-        serviceVal: 'string'
+        serviceVal: 'string',
+        goods_attr: this.doubleRingGoodsAttrs
       }] 
-
+      
       goodInfo = goodInfo.map(function (item) {
         item.createTime = time
         item.updateTime = time
@@ -1150,10 +1158,10 @@ export default {
           serviceId: 0,
           serviceVal: 'string',
           goods_type: item.goodsType,
-          goods_attr: this.doubleRingGoodsAttrs
+          goods_attr: item.goods_attr
         }
       });
-
+      // console.log("goodInfogggggggggg",goodInfo)
       if(this.isLogin){
         this.$axios({
           method: 'post',
@@ -1193,6 +1201,7 @@ export default {
           updateTime: time,
           data: goodInfo
         }
+        // console.log("goodInfoggggggggggffffffff",goodInfo)
         return new Promise(async (resolve, reject) => {
           try {
               let cart = JSON.parse(localStorage.getItem(CART) || '[]')
