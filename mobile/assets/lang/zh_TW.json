@@ -1221,7 +1221,8 @@
     "discounts1": "優惠券",
     "discounts2": "折",
     "oddPrice": "原  價",
-    "newPrice": "折後價"
+    "newPrice": "折後價",
+    "load":"數據加載中"
   },
   "help-pages": {
     "brandStory": {

@@ -17,7 +17,8 @@ export default {
 
       requestings: {}, // 正在请求的页码
       listData: {},
-      ifLoadFinish: true
+      ifLoadFinish: true,
+      load:false
     }
   },
   computed: {
@@ -126,6 +127,7 @@ export default {
     },
     // 重新搜索
     research() {
+      this.load = true
       this.setPageInfo(this.defaultPageInfo())
       this.listData = {}
 
@@ -159,6 +161,7 @@ export default {
     },
     // 请求当前页数据
     getPageInfo(page = 1) {
+      this.load = true
       const _this = this
       const keyword = _this.keyword
 
@@ -198,6 +201,7 @@ export default {
           data: Object.assign(options.data || {}, _this.specialDatas)
         })
         .then(res => {
+          _this.load = false
           _this.ifLoadFinish = true;
           _this.$nuxt.$loading.finish()
           if (res.data) {

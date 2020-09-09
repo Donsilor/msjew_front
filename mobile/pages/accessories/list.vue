@@ -129,10 +129,10 @@ export default {
       // this.$router.push({ path, actIndex: newQuery });
       // console.log("active",this.actIndex,this.$route.query.actIndex)
       // this.$route.query.actIndex = this.actIndex
-      this.$nuxt.$loading.start()
-      setTimeout(() => {
-        this.$nuxt.$loading.finish()
-      }, 1000);
+      // this.$nuxt.$loading.start()
+      // setTimeout(() => {
+      //   this.$nuxt.$loading.finish()
+      // }, 1000);
     },
     arrivalBottom() {
       this.$refs['data-list'].getNextPage()
