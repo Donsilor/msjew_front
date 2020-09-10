@@ -2,7 +2,8 @@
   <div class="diamond-component">
     <div v-if="this.goodInfo.totalStock > 0">
       <div class="swiper-box">
-        <div v-if="has360" class="btn360" @click="is360 = !is360">
+        <!-- @click="is360 = !is360" -->
+        <div v-if="has360" class="btn360" >
           <i
             :class="[
               `iconfont`,
@@ -20,11 +21,7 @@
         <div v-show="is360" class="box360">
           <iframe
             v-if="has360"
-            :src="
-              'https://spins0.arqspin.com/iframe.html?spin=' +
-                goodInfo.goods3ds +
-                '&is=0.16'
-            "
+            :src="'https://spins0.arqspin.com/iframe.html?spin=' + goodInfo.goods3ds +'&is=0.16'"
             width="100%"
             height="100%"
             scrolling="no"
