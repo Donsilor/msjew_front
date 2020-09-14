@@ -1220,7 +1220,8 @@
     "discounts1": "Coupon",
     "discounts2": "off",
     "oddPrice": "Original price",
-    "newPrice": "Discount price"
+    "newPrice": "Discount price",
+    "load":"loading"
   },
   "help-pages": {
     "brandStory": {

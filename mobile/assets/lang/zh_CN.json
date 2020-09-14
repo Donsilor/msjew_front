@@ -1226,7 +1226,8 @@
       "discounts1": "优惠券",
       "discounts2": "折",
       "oddPrice": "原  价",
-      "newPrice": "折后价"
+      "newPrice": "折后价",
+      "load":"数据加载中"
     },
     "help-pages": {
       "brandStory": {
