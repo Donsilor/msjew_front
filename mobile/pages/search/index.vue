@@ -8,7 +8,7 @@
       <div class="operating-area">
         
         <input
-          v-model="keyword"
+          v-model.trim="keyword"
           :placeholder="lang.inputKeyword"
           @keyup.enter="search(keyword)"
         />

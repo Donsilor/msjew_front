@@ -125,7 +125,10 @@ export default {
       this.requestings = requestings
     },
     // 重新搜索
-    research() {
+    research(key) {
+      if(key == 'a'){
+        this.$nuxt.$loading.start()
+      }
       this.setPageInfo(this.defaultPageInfo())
       this.listData = {}
 
