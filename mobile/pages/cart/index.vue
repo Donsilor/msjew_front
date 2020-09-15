@@ -154,7 +154,10 @@
                   </div>
                   <div class="discount-price" v-else>
                     <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
-                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                    <div class="now-price">
+                      {{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}
+                    </div>
+                    <!-- <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b> -->
                   </div>
                   <div class="cut-line"></div>
                 </div>
@@ -1076,6 +1079,14 @@ export default {
               // margin-right:20px;
               // margin-left: 65px;
               margin-top: 10px;
+            }
+            .now-price{
+              font-size: 17px;
+              line-height: 20px;
+              font-weight: 400;
+              color: rgba(243, 163, 145, 1);
+              font-family: twCenMt;
+              margin-left: 140px;
             }
             .cut-line{
               height:1px;

@@ -438,6 +438,7 @@ export default {
                     ? item.id
                     : null,
                 group_type: val.groupType,
+                goods_attr:val.goods_attr,
                 updateTime: item.id 
               }
               this.cartList.push(o)
@@ -467,6 +468,7 @@ export default {
                 : item.simpleGoodsEntity.categoryId === 1
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
+            goodsAttr:item.goodsAttr,
             sku:
               item.goodsType == 19
                 ? item.ring
