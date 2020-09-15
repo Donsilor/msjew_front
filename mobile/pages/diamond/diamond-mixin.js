@@ -110,7 +110,7 @@ export default {
     this.iAmShowMaker()
     if (this.goodInfo.goods3ds) {
       this.is360 = false
-      this.has360 = true
+      this.has360 = false
     } else {
       this.is360 = false
       this.has360 = false
