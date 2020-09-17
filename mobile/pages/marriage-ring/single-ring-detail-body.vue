@@ -112,8 +112,8 @@
         </div>
 
         <!-- 色彩 start -->
-        <div class="bd-b" v-if="goodInfo.colors"></div>
-        <div class="select-line" v-if="goodInfo.colors">
+        <div class="bd-b" v-if="goodInfo.colors.length > 0"></div>
+        <div class="select-line" v-if="goodInfo.colors.length > 0">
           <span>
             <span>{{ lang.shade }}</span>
             <!-- <span>（{{ lang['us-version'] }}）</span> -->
