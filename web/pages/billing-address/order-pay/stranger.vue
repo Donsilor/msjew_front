@@ -2447,7 +2447,7 @@ export default {
         .then(res => {
           this.$store.dispatch('setLocalCartOrder',this.pathTakeIds)
           this.$store.dispatch('setLocalOrder',res)
-          // console.log(`good22222======>`, res)
+          console.log(`good22222======>`, res)
           this.good = res
           this.goodsPrice = 0
           for (const i in res) {
@@ -2771,6 +2771,29 @@ export default {
           }else{
             arr[i] = ''
           }
+          for(var i in item.goodsAttr){
+            for(var j in item.goodsAttr[i]){
+              if(j == 'goodsId'){
+                item.goodsAttr[i]['goods_id'] = item.goodsAttr[i][j]//修改属性名为“title”
+                delete item.goodsAttr[i]['goodsId']//删除“name”
+              }
+              if(j == 'configId'){
+                item.goodsAttr[i]['config_id'] = item.goodsAttr[i][j]//修改属性名为“title”
+                delete item.goodsAttr[i]['configId']//删除“name”
+              }
+              if(j == 'configAttrId'){
+                item.goodsAttr[i]['config_attr_id'] = item.goodsAttr[i][j]//修改属性名为“title”
+                delete item.goodsAttr[i]['configAttrId']//删除“name”
+              }
+              if( item.goodsAttr[i]['goods_id'] == null){
+                delete item.goodsAttr[i]['goods_id']
+              }
+              delete item.goodsAttr[i]['configVal']
+              delete item.goodsAttr[i]['configAttrIVal']
+             
+            }
+          }
+          // console.log("item",item.goodsAttr)
           return {
             createTime: item.createTime || new Date().getTime(),
             goods_num: item.goodsCount,
@@ -2780,6 +2803,7 @@ export default {
             group_type:item.groupType,
             goods_type: item.goodsType,
             coupon_id: arr[i],
+            goods_attr:item.goodsAttr
           }
         })
 
