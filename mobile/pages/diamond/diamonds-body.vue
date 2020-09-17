@@ -1,7 +1,8 @@
 <template>
   <div class="diamond-component">
     <div class="swiper-box">
-      <div v-if="has360" class="btn360" @click="is360 = !is360">
+      <!-- @click="is360 = !is360" -->
+      <div v-if="has360" class="btn360" >
         <i
           :class="[
             `iconfont`,

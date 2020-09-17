@@ -170,8 +170,8 @@ export default {
           this.categoryId = this.goodInfo.details[0].categoryId
 
           if (this.goodInfo.goods3ds) {
-            this.is360 = true
-            this.has360 = true
+            this.is360 = false
+            this.has360 = false
           } else {
             this.is360 = false
             this.has360 = false

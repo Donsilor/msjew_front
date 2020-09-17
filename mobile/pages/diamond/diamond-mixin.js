@@ -109,8 +109,8 @@ export default {
     // console.log(this.force.carat, this.caratLeft)
     this.iAmShowMaker()
     if (this.goodInfo.goods3ds) {
-      this.is360 = true
-      this.has360 = true
+      this.is360 = false
+      this.has360 = false
     } else {
       this.is360 = false
       this.has360 = false
