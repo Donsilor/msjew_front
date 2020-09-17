@@ -215,6 +215,10 @@ export default {
     }
   },
   mounted() {
+      this.$nextTick(() => {
+        localStorage.setItem("back_url",window.location.href)
+        const back_url = localStorage.getItem("back_url")
+      })
       if (this.$route.query.success === "false") {
         this.goPayFailed()
         //失败后，继续调用验证api，写入支付日志
@@ -223,7 +227,7 @@ export default {
             method: 'post',
             timeout:3000,
             data: {
-                return_url: window.location.href
+                return_url: back_url
             }
         })
         .then(data => {})
@@ -246,7 +250,6 @@ export default {
       this.stepPayVerify = false
     },
     goPaySuccess(){
-
       const arr = []
       this.list.map((item, index) => {
         arr.push(item.localSn)
@@ -254,6 +257,11 @@ export default {
       })
       this.list = JSON.parse(storage.get('myCartList', 0))
       sessionStorage.removeItem('cardList');
+      const back_Url = localStorage.getItem("back_url")
+      let nowUrl = window.location.href
+      if(nowUrl !== back_Url ){
+        window.location.href = back_Url
+      }
 
       this.stepPayPending = false
       this.stepPayVerify  = false
@@ -335,13 +343,15 @@ export default {
     },
     //支付校验
     payVerify(){
+      const backUrl = localStorage.getItem("back_url")
+      // console.log("backUrl",backUrl)
       this.verifyCount ++
       this.$axios({
             url: '/web/pay/verify',
             method: 'post',
             timeout:8000,
             data: {
-                return_url: window.location.href
+                return_url: backUrl
             }
         })
         .then(data => {
