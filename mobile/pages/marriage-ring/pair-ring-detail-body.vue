@@ -174,7 +174,7 @@
           </span>
         </div>
         <div class="bd-b" v-if="secondRing.carats.length >0"></div>
-        <div class="select-line margin-bottom-10">
+        <div class="select-line">
           <span>
             <span>{{ lang.chooseSize }}</span>
             <span>（{{ lang['us-version'] }}）</span>
@@ -223,18 +223,7 @@
           inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
         }} -->
       </div>
-      <!-- 色彩 start -->
-      <div class="bd-b" v-if="secondRing.colors.length >0"></div>
-      <div class="select-line second" v-if="secondRing.colors.length >0">
-        <span>
-          {{ lang.chooseShade }}
-        </span>
-        <span @click="showSecondRingColorChoose">
-          {{ secondRingColorText }}
-          <i class="iconfont iconyou" />
-        </span>
-      </div>
-      <!-- 色彩 end -->
+      
     </div>
       
     <!-- <div class="wish-and-share">
