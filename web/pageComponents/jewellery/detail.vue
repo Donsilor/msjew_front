@@ -69,6 +69,51 @@
               </div>
             </div>
           </div>
+          <!-- 色彩 -->
+          <div class="left-properties" v-if="colorDetail.length > 0">
+            <div  class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.shade`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <!-- <i
+                    :class="[
+                      'iconfont',
+                      'iconmaterial-big-pt',
+                      'color-icon',
+                        colorDetail[ringChecked.colorIndex].id
+                    ]"
+                  ></i> -->
+                  <span class="name ow-h1">
+                    {{ colorDetail[ringChecked.colorIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in colorDetail"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: ringChecked.colorIndex === index }
+                    ]"
+                    @click="changeRingChecked('colorIndex', index)"
+                  >
+                    <!-- <i
+                      :class="[
+                        'iconfont',
+                        'iconmaterial-big-pt',
+                        'color-icon',
+                        colorDetail[item.id]
+                      ]"
+                    ></i> -->
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="right-properties" v-if="productInfo.sizes.length > 0">
             <div  class="property-item">
               <span class="item-name">
@@ -168,6 +213,51 @@
                           materialColors[item.id]
                         ]"
                       ></i>
+                      <span class="name ow-h1">{{ item.name }}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <!-- 色彩 -->
+            <div class="left-properties" v-if="colorDetail.length > 0">
+              <div  class="property-item">
+                <span class="item-name">
+                  {{ $t(`${lang}.shade`) }}
+                </span>
+                <div class="property">
+                  <div class="had-checked">
+                    <!-- <i
+                      :class="[
+                        'iconfont',
+                        'iconmaterial-big-pt',
+                        'color-icon',
+                          colorDetail[ringChecked.colorIndex].id
+                      ]"
+                    ></i> -->
+                    <span class="name ow-h1">
+                      {{ colorDetail[ringChecked.colorIndex].name }}
+                    </span>
+                    <i class="iconfont iconxiala drop-down-icon"></i>
+                  </div>
+                  <ul class="options">
+                    <li
+                      v-for="(item, index) in colorDetail"
+                      :key="index"
+                      :class="[
+                        'item',
+                        { active: ringChecked.colorIndex === index }
+                      ]"
+                      @click="changeRingChecked('colorIndex', index)"
+                    >
+                      <!-- <i
+                        :class="[
+                          'iconfont',
+                          'iconmaterial-big-pt',
+                          'color-icon',
+                          colorDetail[item.id]
+                        ]"
+                      ></i> -->
                       <span class="name ow-h1">{{ item.name }}</span>
                     </li>
                   </ul>
@@ -478,16 +568,64 @@ export default {
       ringChecked: {
         materialIndex: 0,
         sizeIndex: 0,
-        caratIndex: 0
+        caratIndex: 0,
+        colorIndex: 0   //色彩
       },
       jewelleryOptions: this.CONDITION_INFO.jewellery,
       magnifying: '',
       showCoupon: false,
       activeTime: '',
-      language: this.$store.state.language
+      language: this.$store.state.language,
+      colorAttrs:[
+        {
+          config_id:'',
+          config_attr_id:''
+        }
+      ]    //色彩
     }
   },
   computed: {
+    //色彩  start
+    colorDetail(){
+      const Spec = this.productInfo.specs
+      let colors = []
+      let colorSpec = ''
+      let colorId = ''
+      Spec.forEach(item => {
+        if (item.configId === '63') {
+          colorSpec = item.configAttrVal
+          colorId = item.configAttrId
+          this.configId = item.configId
+        }
+        if((colorId && colorSpec)!== ""){
+          let ids = colorId.split("|")
+          let specs = colorSpec.split("|")
+          if((ids && specs) !== ''){
+            colors = ids.map((id,i) => ({
+              id, 
+              name: specs[i]
+            }));
+          }
+        }
+      })
+      // console.log(9999999,colors)
+      return colors
+    },
+    goodsAttrs(){
+      const _this = this
+      const ringChecked = _this.ringChecked
+      const colorDetail = _this.colorDetail
+
+      const color =
+        colorDetail.length > 0 && colorDetail[ringChecked.colorIndex]
+          ? colorDetail[ringChecked.colorIndex].id
+          : null
+      _this.colorAttrs[0].config_id = _this.configId
+      _this.colorAttrs[0].config_attr_id = color
+      // console.log('rrrrrrrrrrrr',color)
+      return _this.colorAttrs
+    },
+    //色彩  end
     coupons() {
       var co;
       if(this.couponType(this.info.coupon) == 'discount'){
@@ -638,6 +776,8 @@ export default {
       const ringChecked = JSON.parse(JSON.stringify(_this.ringChecked))
       ringChecked[key] = value
       _this.ringChecked = ringChecked
+
+      _this.colorAttrs = this.goodsAttrs
     },
     // 对戒独有的参数
     addWish(id) {
@@ -709,7 +849,7 @@ export default {
       }
 
       .item-name {
-        width: 50px;
+        width: 65px;
         font-size: 14px;
         font-family: Microsoft YaHei;
         font-weight: 400;

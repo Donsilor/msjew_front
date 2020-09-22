@@ -1522,7 +1522,29 @@ export default {
           if(this.list[i].coupon.hasOwnProperty('discount')){
             coupon_discount = this.list[i].coupon.discount.coupon_id;
           }
-
+          for(var k in this.list[i].goodsAttr){
+            for(var j in this.list[i].goodsAttr[k]){
+              if(j == 'goodsId'){
+                this.list[i].goodsAttr[k]['goods_id'] = this.list[i].goodsAttr[k][j]
+                delete this.list[i].goodsAttr[k]['goodsId']
+              }
+              if(j == 'configId'){
+                this.list[i].goodsAttr[k]['config_id'] = this.list[i].goodsAttr[k][j]
+                delete  this.list[i].goodsAttr[k]['configId']
+              }
+              if(j == 'configAttrId'){
+                this.list[i].goodsAttr[k]['config_attr_id'] = this.list[i].goodsAttr[k][j]
+                delete  this.list[i].goodsAttr[k]['configAttrId']
+              }
+              if( this.list[i].goodsAttr[k]['goods_id'] == null){
+                delete this.list[i].goodsAttr[k]['goods_id']
+              }
+              delete this.list[i].goodsAttr[k]['configVal']
+              delete this.list[i].goodsAttr[k]['configAttrIVal']
+             
+            }
+          }
+          // console.log("ddddd",this.list[i].goodsAttr)
           const o = {
             createTime: this.list[i].createTime,
             goods_num: 1,
@@ -1531,7 +1553,8 @@ export default {
             group_id: this.list[i].groupId,
             goods_type: this.list[i].goodsStatus,
             group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
-            coupon_id: coupon_discount
+            coupon_id: coupon_discount,
+            goods_attr:this.list[i].goodsAttr
           }
           data.push(o)
         }

@@ -260,6 +260,7 @@ export default {
                 item.group_type = good.groupType
                 item.group_id = good.groupId
                 item.goodsDetailsId = good.goodsDetailsId
+                item.goods_attr = good.goods_attr
                 return item
             })
             sendData = sendData.concat(data)
@@ -338,7 +339,7 @@ export default {
         commit,
         dispatch
     }, goods = []) {
-        // console.log('addOnlineCart=====>')
+        console.log('addOnlineCart=====>',goods)
         const time = getTimestampUuid()
         goods = goods.map(function (item) {
             item.createTime = time
@@ -353,7 +354,8 @@ export default {
                 group_type: parseInt(item.groupType),
                 serviceId: 0,
                 serviceVal: 'string',
-                goods_type: item.goodsType
+                goods_type: item.goodsType,
+                goods_attr: item.goods_attr
             }
         });
 

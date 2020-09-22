@@ -1269,6 +1269,7 @@
         "back": "返回上一步",
         "color": "成色",
         "size": "尺寸",
+        "shade":"主石色彩",
         "USEdition": "美版",
         "isUSSizeNow": "本页显示的为美版指圈号",
         "needHelpForRingSize": "如果您是其他区域的客户，请联络客服告知指圈号版本，可以是欧版、中国大陆版本。",

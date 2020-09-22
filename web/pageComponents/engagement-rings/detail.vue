@@ -768,7 +768,7 @@ export default {
       }
 
       .item-name {
-        width: 50px;
+        width: 65px;
         font-size: 14px;
         font-family: Microsoft YaHei;
         font-weight: 400;

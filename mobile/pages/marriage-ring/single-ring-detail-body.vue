@@ -81,7 +81,7 @@
         </div>
         <div class="select-line" v-if="goodInfo.carats">
           <span>
-            <span>{{ lang.carat }}</span>
+            <span>{{ lang.chooseCarat }}</span>
             <!-- <span>（{{ lang['us-version'] }}）</span> -->
             <!-- <div @click="getCarats()">!</div> -->
           </span>
@@ -99,7 +99,7 @@
           </span>
         </div>
         <div class="bd-b"></div>
-        <div class="select-line margin-bottom-10">
+        <div class="select-line">
           <span>
             <span>{{ lang.chooseSize }}</span>
             <span>（{{ lang['us-version'] }}）</span>
@@ -110,6 +110,21 @@
             <i class="iconfont iconyou" />
           </span>
         </div>
+
+        <!-- 色彩 start -->
+        <div class="bd-b" v-if="goodInfo.colors.length > 0"></div>
+        <div class="select-line" v-if="goodInfo.colors.length > 0">
+          <span>
+            <span>{{ lang.shade }}</span>
+            <!-- <span>（{{ lang['us-version'] }}）</span> -->
+            <!-- <div @click="getCarats()">!</div> -->
+          </span>
+          <span @click="showSwiperTapColor()">
+            {{ chooseColors }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <!-- 色彩 end -->
         <div
           v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"
           class="custom-made-word"
@@ -264,6 +279,13 @@
         @clear="getSortBy"
       ></swiper-tap>
 
+      <swiper-tap
+        ref="colorsSuitability"
+        :title="lang.shade"
+        :list="goodInfo.colors"
+        @clear="getColors"
+      ></swiper-tap>
+
       <choose-eject
         ref="quality-eject-choose-pro"
         :title="lang.fineness"
@@ -323,7 +345,7 @@ export default {
   },
   computed: {
     canAddCart() {
-      // console.log("canAddCart",this.goodInfo.details)
+      // console.log("canAddCart",this.goodInfo.colors)
       const body = this.goodInfo.details
       if (this.goodInfo.totalStock > 0) {
         for (const i in body) {
@@ -348,6 +370,7 @@ export default {
     }
   },
   mounted() {
+    // console.log("good777777",this.goodInfo.colors)
     const _this = this
     if(this.goodInfo.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)

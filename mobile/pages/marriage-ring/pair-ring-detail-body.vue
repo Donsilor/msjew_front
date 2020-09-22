@@ -107,7 +107,7 @@
         <div class="bd-b"></div>
         <div class="select-line first" v-if="firstRing.carats.length >0">
           <span>
-            {{ lang.carat }}
+            {{ lang.chooseCarat }}
           </span>
           <span @click="showFirstRingCaratChoose">
             {{ firstRingCaratText }}
@@ -127,6 +127,18 @@
           </span>
         </div>
         <div class="bd-b"></div>
+        <!-- 色彩 start -->
+        <div class="select-line first" v-if="firstRing.colors.length >0">
+          <span>
+            {{ lang.chooseShade }}
+          </span>
+          <span @click="showFirstRingColorChoose">
+            {{ firstRingColorText }}
+            <i class="iconfont iconyou" /> 
+          </span>
+        </div>
+        <div class="bd-b" v-if="firstRing.colors.length >0"></div>
+        <!-- 色彩 end -->
         <!--      第二个戒指-->
         
         <div class="select-line">
@@ -154,7 +166,7 @@
         <div class="bd-b"></div>
         <div class="select-line second" v-if="secondRing.carats.length >0">
           <span>
-            {{ lang.carat }}
+            {{ lang.chooseCarat }}
           </span>
           <span @click="showSecondRingCaratChoose">
             {{ secondRingCaratText }}
@@ -173,6 +185,18 @@
             <i class="iconfont iconyou" />
           </span>
         </div>
+        <!-- 色彩 start -->
+        <div class="bd-b" v-if="secondRing.colors.length >0"></div>
+        <div class="select-line second" v-if="secondRing.colors.length >0">
+          <span>
+            {{ lang.chooseShade }}
+          </span>
+          <span @click="showSecondRingColorChoose">
+            {{ secondRingColorText }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <!-- 色彩 end -->
       </div>
       <div
         :class="['btn-common btn-gray', { btnActive: canAddCart }]"
@@ -199,6 +223,18 @@
           inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
         }} -->
       </div>
+      <!-- 色彩 start -->
+      <div class="bd-b" v-if="secondRing.colors.length >0"></div>
+      <div class="select-line second" v-if="secondRing.colors.length >0">
+        <span>
+          {{ lang.chooseShade }}
+        </span>
+        <span @click="showSecondRingColorChoose">
+          {{ secondRingColorText }}
+          <i class="iconfont iconyou" />
+        </span>
+      </div>
+      <!-- 色彩 end -->
     </div>
       
     <!-- <div class="wish-and-share">
@@ -306,6 +342,7 @@
     <footer-bar></footer-bar>
     <swiper-tap
       ref="first-ring-carat"
+      :title="`${lang.carat}`"
       :list="firstRing.carats"
       @clear="firstRingClearCarat"
     ></swiper-tap>
@@ -313,6 +350,12 @@
       ref="first-ring-suitability"
       :list="firstRing.sizes"
       @clear="firstRingClearSize"
+    ></swiper-tap>
+    <swiper-tap
+      ref="first-ring-color"
+      :title="`${lang.shade}`"
+      :list="firstRing.colors"
+      @clear="firstRingClearColor"
     ></swiper-tap>
     <choose-eject
       ref="first-ring-quality-choose"
@@ -325,6 +368,7 @@
 
     <swiper-tap
       ref="second-ring-carat"
+      :title="`${lang.carat}`"
       :list="secondRing.carats"
       @clear="secondRingClearCarat"
     ></swiper-tap>
@@ -332,6 +376,12 @@
       ref="second-ring-suitability"
       :list="secondRing.sizes"
       @clear="secondRingClearSize"
+    ></swiper-tap>
+    <swiper-tap
+      ref="second-ring-color"
+      :title="`${lang.shade}`"
+      :list="secondRing.colors"
+      @clear="secondRingClearColor"
     ></swiper-tap>
     <choose-eject
       ref="second-ring-quality-choose"
@@ -447,7 +497,7 @@ export default {
     }
     // console.log("ddddd",this.canAddCart)this.firstRingId
       // const secondRing = _this.secondRingId
-    // console.log("ooooooooo",this.firstRingId,this.secondRingId)
+    // console.log("ooooooooo",this.secondRing)
   },
   methods:{
     closeCo() {

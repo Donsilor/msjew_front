@@ -1260,6 +1260,7 @@
         "back": "Back",
         "color": "Metal",
         "size": "size",
+        "shade":"Color",
         "USEdition": "US Units",
         "isUSSizeNow": "All rings on BDD Mall are in US units.",
         "needHelpForRingSize": "Contact customer service for the units of measurement, such as SI or Chinese units of measurement if you are from other regions.",
