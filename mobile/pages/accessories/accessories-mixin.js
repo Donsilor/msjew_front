@@ -121,7 +121,7 @@ export default {
     }
   },
   mounted() {
-    console.log("this.chooseCarats",this.goodInfo.carats)
+    // console.log("this.chooseCarats",this.goodInfo.carats)
     if(this.goodInfo.materials){
       this.conditions[0].checked = [
         this.goodInfo.materials.length > 0

@@ -86,7 +86,11 @@ export default {
       if (!_this.simpleDetail) {
         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
         return
+      } else if(!_this.simpleDetail.id){
+        _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
       }
+      
       let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null && item.config_attr_id !== null)   //筛选色彩中为空的对象
       const goodInfo = [
         {
