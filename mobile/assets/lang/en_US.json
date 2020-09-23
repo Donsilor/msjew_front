@@ -728,7 +728,8 @@
       "login-error": "Wrong account or password",
       "login-success": "Logged in",
       "input-code": "Please enter a verification code",
-      "area-code": "China"
+      "area-code": "China",
+      "codeTips": "Enter correct verification code"
     },
     "index": {
       "login": "Account Login",

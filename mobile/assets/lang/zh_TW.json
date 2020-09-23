@@ -728,7 +728,8 @@
       "login-error": "用戶或密碼錯誤！",
       "login-success": "登錄成功",
       "input-code": "請輸入驗證碼",
-      "area-code": "中國"
+      "area-code": "中國",
+      "codeTips": "請輸入正確驗證碼"
     },
     "index": {
       "login": "會員登入",
