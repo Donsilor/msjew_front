@@ -1,5 +1,5 @@
-// facebook,GA代码统计
 // <!-- Facebook Pixel Code -->
+//<script>
 !function(f,b,e,v,n,t,s)
 {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -8,11 +8,8 @@ n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];
 s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1026397204360675');
+fbq('init', '245831676849552');
 fbq('track', 'PageView');
-/*
-<noscript>< img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1026397204360675&ev=PageView&noscript=1"
-/></noscript>
-*/
-// <!-- End Facebook Pixel Code -->
+//</script>
+//<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=245831676849552&ev=PageView&noscript=1"/></noscript>
+//<!-- End Facebook Pixel Code -->
