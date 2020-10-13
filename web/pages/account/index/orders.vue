@@ -82,6 +82,12 @@
                       <span>{{ k.name }}: </span>
                       <span>{{ k.value }} </span>
                     </div>
+
+                    <!-- 色彩 -->
+                    <div class="color" v-for="(i, k) in detail.goodsAttr" :key="'color='+k">
+                      <span>{{ i.configVal }}</span>
+                      <span>{{ i.configAttrIVal }}</span>
+                    </div>
                   </nuxt-link>
                 </div>
 
@@ -110,7 +116,7 @@
                       <p class="sku">SKU：{{ detail.goodsCode }}</p>
                       <div class="detail">
                         <div
-                          v-for="(k, __index) in c.lang.goods_spec"
+                          v-for="(k, __index) in goodsAttrs(c,detail.goodsAttr) "
                           :key="__index"
                           class="desc"
                         >
@@ -480,6 +486,23 @@ export default {
     }
   },
   methods: {
+    //色彩
+    goodsAttrs(item,attr){
+      let Obj = []
+      item.lang.goods_spec.forEach((item,c) => {
+        Obj.push(item)
+      })
+      // console.log("sssss",item,attr)
+      attr.forEach((i,a) => {
+        if (item.id === i.goodsId) {
+          i.attr_name = i.configVal
+          i.attr_value = i.configAttrIVal
+          Obj.push(i)
+          // console.log("sssss",Obj)
+        }
+      })
+      return Obj 
+    },
     getList() {
       this.$axios
         .get('/web/member/order', {
@@ -1099,6 +1122,13 @@ div {
               .desc {
                 height: 70-18-8-14-14px;
                 line-height: 70-18-8-14-14px;
+                display: inline;
+                margin-right: 5px;
+                color: #999999;
+              }
+              .color{
+                height: 16px;
+                line-height: 16px;
                 display: inline;
                 margin-right: 5px;
                 color: #999999;

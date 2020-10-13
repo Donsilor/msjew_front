@@ -334,16 +334,14 @@ export default {
 
   // },
   created() {
-    console.log("dddd",this.area)
     this.getinfo()
     this.getListOne()
     this.getArealist()
   },
   mounted() {
-
     this.loginType=localStorage.getItem('loginType')
-    this.language = this.getCookie('language')
-    console.log("cookie",this.language)
+    this.language = this.$store.state.language
+
     if(this.language === 'zh_CN'){
       this.userTelCode='+86'
       this.area=this.lang.areaCN   //"中国 +86"
@@ -354,16 +352,6 @@ export default {
     }
   },
   methods: {
-     // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     goBack() {
       if (this.$route.query.type === 'add') {
         if (
@@ -382,7 +370,7 @@ export default {
               {
                 text: this.lang.cancel,
                 callback: () => {
-                  console.log('点击了取消')
+                  // console.log('点击了取消')
                 }
               },
               {

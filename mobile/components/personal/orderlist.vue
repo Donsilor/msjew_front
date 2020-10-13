@@ -48,7 +48,7 @@
                   </h4>
                   <span>x 1</span>
                   <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                  <p>{{ detail.data[0].detailSpecs }}</p> 
+                  <p>{{ getconfig(detail.data[0].detailSpecs,detail.data[0].goodsAttr) }}</p> 
                   <div v-if="detail.data[0].couponInfo.type === 2">
                     <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
                     <b>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPayPrice}}</b>
@@ -136,7 +136,7 @@
                     </h4>
                     <!-- <span>x 1</span> -->
                     <p class="sku">SKU：{{ detail.data[0].goodsCode }}</p>
-                    <p>{{ getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value) }}</p>
+                    <p>{{ getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value,ring,detail.data[0].goodsAttr) }}</p>
                     <!-- <b class="display-block margin-bottom-20"
                       >{{ order.coinCode }} {{ detail.data[0].goodsPrice }}</b
                     > -->
@@ -466,7 +466,7 @@ export default {
         order.details = result
         return order
       })
-      // console.log("showOrderList",showData)
+      console.log("showOrderList",showData)
       return showData
     },
     // 列表特定参数
@@ -501,14 +501,40 @@ export default {
     }
   },
   methods: {
-    // 属性数值转化成字符串
-    getDubleConfig(good_spec,goods_attr) {
+    getconfig(detailSpecs,attr){
+      // console.log("fffffff",attr)
       let text = ''
-      if (good_spec.length > 0) {
-        good_spec.map((item, index) => {
-        // console.log("good_spec",item)
-
-          if (index === good_spec.length - 1) {
+      if (attr.length > 0) {
+        attr.map((item, index) => {
+          if (index === attr.length - 1) {
+            text = text + item.configAttrIVal
+          } else {
+            text = text + item.configAttrIVal + ' /  '
+          }
+        })
+        text = detailSpecs + ' /  '+ text 
+      }else {
+        text = detailSpecs
+      }
+      // console.log("fffffff",text)
+      return text
+    },
+    // 属性数值转化成字符串
+    getDubleConfig(good_spec,goods_attr,ring,attr) {
+      let attrs = []
+      ring.lang.goods_spec.forEach((item,a) => {
+        attrs.push(item)
+      })
+      attr.forEach((i,a) => {
+        if (ring.id == i.goodsId) {
+          i.attr_value = i.configAttrIVal
+          attrs.push(i)
+        }
+      })
+      let text = ''
+      if (attrs.length > 0) {
+        attrs.map((item, index) => {
+          if (index === attrs.length - 1) {
             text = text + item.attr_value
           } else {
             text = text + item.attr_value + ' /  '

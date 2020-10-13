@@ -46,6 +46,11 @@
           <div>{{ i.configVal }}</div>
           <div>{{ i.configAttrIVal }}</div>
         </div>
+        <!-- 色彩 -->
+        <div class="infos" v-for="(i, k) in g.data[0].goodsAttr" :key="'color='+k">
+          <div>{{ i.configVal }}</div>
+          <div>{{ i.configAttrIVal }}</div>
+        </div>
       </div>
       <div
         v-if="g.data[0].simpleGoodsEntity.categoryId === 1"

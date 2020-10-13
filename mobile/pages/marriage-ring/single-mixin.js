@@ -35,6 +35,7 @@ export default {
           details: [],
           sizes: [],
           carats:[],
+          colors:[],
           totalStock: 0
         }
       }
@@ -48,6 +49,8 @@ export default {
       chooseSizeId: ``,
       chooseCarats:``,
       chooseCaratsId:``,
+      chooseColors:``,
+      chooseColorId:``,
       showPi: this.goodInfo.salePrice,
       showP2: 0,
       sendGoodsId: null,
@@ -67,9 +70,38 @@ export default {
       list:[],
       cartList:[],
       isLogin: !!this.$store.state.token,
+      configId:'',
+      colorAttrs:[
+        {
+          config_id:'',
+          config_attr_id:''
+        }
+      ]
     }
   },
   computed: {
+    colorDetail(){
+      const Spec = this.goodInfo.specs
+      let configId = ''
+      if(Spec){
+        Spec.forEach(item => {
+          if (item.configId === '63') {
+            configId = item.configId
+          }
+        })
+      }
+      return configId
+    },
+    goodsAttrs:{
+      get(){
+        this.colorAttrs[0].config_id = this.colorDetail
+        this.colorAttrs[0].config_attr_id = this.chooseColorId
+        return this.colorAttrs
+      },
+      set(){
+        
+      }
+    },
     goodsImages() {
       return this.imageStrToArray(this.goodInfo.goodsImages || '')
     },
@@ -84,6 +116,7 @@ export default {
     }
   },
   created() {
+    // console.log("9999",this.colorDetail)
     // console.log("gggg",this.goodInfo)
     // this.$nextTick(() => {
     // })
@@ -105,6 +138,12 @@ export default {
       if(this.goodInfo.carats !== undefined){
         this.chooseCarats = this.goodInfo.carats[0].content
         this.chooseCaratsId = this.goodInfo.carats[0].sortBy
+      }
+      if(this.goodInfo.colors !== undefined && this.goodInfo.colors.length >0){
+        this.chooseColors = this.goodInfo.colors[0].content
+        this.chooseColorId = this.goodInfo.colors[0].sortBy
+        this.colorAttrs[0].config_id = this.colorDetail
+        this.colorAttrs[0].config_attr_id = this.chooseColorId
       }
     }
 
@@ -317,6 +356,17 @@ export default {
         }
       }
     },
+    getColors(val){
+      this.chooseColors = val.item.content
+      this.chooseColorsId = val.item.sortType
+      this.colorAttrs[0].config_id = this.colorDetail
+      this.colorAttrs[0].config_attr_id = val.item.sortType
+      this.goodsAttrs = this.colorAttrs
+      // console.log('color',this.colorAttrs)
+    },
+    showSwiperTapColor(){
+      this.$refs.colorsSuitability.show()
+    },
     addCart() {
       // console.log("this.s",this.sendDetailsId)
       if (!(this.canAddCart && this.inSale)) {
@@ -326,6 +376,7 @@ export default {
         this.$toast(this.lang.specificationToast)
         return
       }
+      let colorArr = this.colorAttrs.filter(item=>item.config_id !== ''&&item.config_attr_id !== '')
       const goodInfo = {
         goodsCount: 1,
         goodsDetailsId: this.sendDetailsId,
@@ -334,7 +385,8 @@ export default {
         groupType: null,
         goodsType: this.categoryId,
         serviceId: 0,
-        serviceVal: 'string'
+        serviceVal: 'string',
+        goods_attr: colorArr
       }
       this.$emit('addCart', goodInfo)
     },
@@ -398,12 +450,14 @@ export default {
                     ? item.id
                     : null,
                 group_type: val.groupType,
+                goods_attr:val.goods_attr,
                 updateTime: item.id 
               }
               this.cartList.push(o)
             })
           })
           this.cartList.reverse()
+          console.log("yyyyy",this.cartList)
           this.getLocalList(this.cartList,val)
         } else {
           this.num = 0
@@ -427,6 +481,7 @@ export default {
                 : item.simpleGoodsEntity.categoryId === 1
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
+            goodsAttr:item.goodsAttr,
             sku:
               item.goodsType == 19
                 ? item.ring
@@ -499,9 +554,10 @@ export default {
     // 立即购买
     orderNow(){
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast(this.lang.firstLogin)
+        this.ifShowPop = true
         return
       }
+      
       if (!(this.canAddCart && this.inSale)) {
         return
       }
@@ -521,6 +577,7 @@ export default {
         serviceVal: 'string'
       }] 
 
+      let colorArr = this.colorAttrs.filter(item=>item.config_id !== ''&&item.config_attr_id !== '')
       goodInfo = goodInfo.map(function (item) {
         item.createTime = time
         item.updateTime = time
@@ -534,7 +591,8 @@ export default {
           group_type: parseInt(item.groupType),
           serviceId: 0,
           serviceVal: 'string',
-          goods_type: item.goodsType
+          goods_type: item.goodsType,
+          goods_attr: colorArr
         }
       });
 
@@ -558,6 +616,7 @@ export default {
         })
       } else {
         const CART = 'cart'
+        let colorArr = this.colorAttrs.filter(item=>item.config_id !== ''&&item.config_attr_id !== '')
         let goodInfo = [
           {
             goodsCount: 1,
@@ -567,7 +626,8 @@ export default {
             groupType: null,
             goodsType: this.categoryId,
             serviceId: 0,
-            serviceVal: 'string'
+            serviceVal: 'string',
+            goods_attr: colorArr
           }
         ]
         const addInfo = {

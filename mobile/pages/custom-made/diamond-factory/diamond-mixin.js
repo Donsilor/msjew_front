@@ -170,8 +170,8 @@ export default {
           this.categoryId = this.goodInfo.details[0].categoryId
 
           if (this.goodInfo.goods3ds) {
-            this.is360 = true
-            this.has360 = true
+            this.is360 = false
+            this.has360 = false
           } else {
             this.is360 = false
             this.has360 = false
@@ -423,9 +423,10 @@ export default {
     //立即购买
     orderNow(){
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast(this.lang.firstLogin)
+        this.ifShowPop = true
         return
       }
+      
       if (!(this.canAddCart && this.inSale)) {
         return
       }

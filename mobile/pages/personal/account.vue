@@ -117,21 +117,9 @@ export default {
     this.getinfo()
   },
   mounted() {
-    console.log("ddddd",this.date)
-    this.language = this.getCookie('language')
-    this.$nextTick(() => {})
+    this.language = this.$store.state.language
   },
   methods: {
-     // 查询cookie
-    getCookie(cname) {
-      const name = cname + '='
-      const ca = document.cookie.split(';')
-      for (let i = 0; i < ca.length; i++) {
-        const c = ca[i].trim()
-        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-      }
-      return ''
-    },
     test() {
       if (window.Mdate && !this.date.birthday) {
         new window.Mdate('time', {

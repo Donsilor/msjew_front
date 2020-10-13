@@ -42,6 +42,10 @@ export default {
         checked: [],
         options: []
       },
+      firstRingColor: {
+        id: '',
+        text: ''
+      },
       // 第二个戒指
       secondRingCarat: {
         id: '',
@@ -55,7 +59,10 @@ export default {
         checked: [],
         options: []
       },
-
+      secondRingColor: {
+        id: '',
+        text: ''
+      },
       // 评论相关
       starNum: 5,
       comments: {
@@ -71,6 +78,21 @@ export default {
       list:[],
       cartList:[],
       isLogin: !!this.$store.state.token,
+      firstRingColorAttrs:[
+        {
+          goods_id:'',
+          config_id:'',
+          config_attr_id:''
+        }
+      ],
+      secondRingColorAttrs:[
+        {
+          goods_id:'',
+          config_id:'',
+          config_attr_id:''
+        }
+      ],
+      doubleRingColorAttrs:[]
     }
   },
   computed: {
@@ -104,6 +126,7 @@ export default {
         materials: [],
         sizes: [],
         carats: [],
+        colors: [],
         details: [],
         firstRingId:'',
         secondRingId:'',
@@ -114,6 +137,61 @@ export default {
         stock:'',
       }
     },
+    // 色彩  start
+    firstRingColorDetail(){
+      const Spec = this.firstRing.specs
+      let configId = ''
+      if(Spec){
+        Spec.forEach(item => {
+          if (item.configId === '63') {
+            configId = item.configId
+          }
+        })
+      }
+      return configId
+    },
+    secondRingColorDetail(){
+      const Spec = this.secondRing.specs
+      let configId = ''
+      if(Spec){
+        Spec.forEach(item => {
+          if (item.configId === '63') {
+            configId = item.configId
+          }
+        })
+      }
+      return configId
+    },
+    firstRingGoodsAttrs:{
+      get(){
+        this.firstRingColorAttrs[0].goods_id = this.firstRingId
+        this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
+        this.firstRingColorAttrs[0].config_attr_id = this.firstRingColor.id
+        console.log()
+        return this.firstRingColorAttrs
+      },
+      set(){
+        
+      }
+    },
+    secondRingGoodsAttrs:{
+      get(){
+        this.secondRingColorAttrs[0].goods_id = this.secondRingId
+        this.secondRingColorAttrs[0].config_id = this.secondRingColorDetail
+        this.secondRingColorAttrs[0].config_attr_id = this.secondRingColor.id
+        return this.secondRingColorAttrs
+      },
+      set(){
+        
+      }
+    },
+    doubleRingGoodsAttrs(){
+      this.doubleRingColorAttrs = this.firstRingGoodsAttrs.concat(this.secondRingGoodsAttrs)
+      let arr = this.doubleRingColorAttrs.filter(item=>item.goods_id !== ''&&item.config_id !== ''&&item.config_attr_id !== '')
+      // console.log('mmmmm',arr)
+      return arr
+    },
+    // 色彩  end
     ringBanners() {
       return this.imageStrToArray(this.goodInfo.goodsImages || '')
     },
@@ -134,6 +212,7 @@ export default {
         this.goodInfo.ring[0]
           ? this.goodInfo.ring[0]
           : this.defaultGoodInfo
+        
 
       return this.dealGoodInfo(goodInfo)
     },
@@ -280,6 +359,12 @@ export default {
     secondRingCaratText() {
       return this.secondRingCarat.text
     },
+    firstRingColorText() {
+      return this.firstRingColor.text
+    },
+    secondRingColorText() {
+      return this.secondRingColor.text
+    },
     firstRingSizeText() {
       return this.firstRingSize.text || this.lang.stArrContent
     },
@@ -410,7 +495,7 @@ export default {
         }
       }
       this.secondRingId = result
-      // console.log("result2",this.secondRingId)
+      // console.log("result2",result)
       // this.secondRingId = result.id
       return this.changeChecked()
     },
@@ -423,11 +508,21 @@ export default {
     }
   },
   created() {
+    // console.log('vvvvv',this.doubleRingGoodsAttrs) 
     if(this.firstRing.carats.length>0){
       this.firstRingCarat = {
         id: this.firstRing.carats[0].sortType,
         text: this.firstRing.carats[0].content
       }
+    }
+    // 色彩
+    if(this.firstRing.colors.length>0){
+      this.firstRingColor = {
+        id: this.firstRing.colors[0].sortType,
+        text: this.firstRing.colors[0].content
+      }
+      this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
+      this.firstRingColorAttrs[0].config_attr_id = this.firstRingColor.id
     }
     this.firstRingSize = {
       id: this.firstRing.sizes[0].sortType,
@@ -446,6 +541,15 @@ export default {
         id: this.secondRing.carats[0].sortType,
         text: this.secondRing.carats[0].content
       }
+    }
+    // 色彩
+    if(this.secondRing.colors.length>0){
+      this.secondRingColor = {
+        id: this.secondRing.colors[0].sortType,
+        text: this.secondRing.colors[0].content
+      }
+      this.secondRingColorAttrs[0].config_id = this.secondRingColorDetail
+      this.secondRingColorAttrs[0].config_attr_id = this.secondRingColor.id
     }
     this.secondRingSize = {
       id: this.secondRing.sizes[0].sortType,
@@ -520,6 +624,9 @@ export default {
 
       const firstRing = _this.firstRingId
       const secondRing = _this.secondRingId
+      
+      _this.firstRingColorAttrs[0].goods_id = firstRing
+      _this.secondRingColorAttrs[0].goods_id = secondRing
 
       if(!firstRing || !secondRing) {
         _this.coupleLadyId = ''
@@ -530,7 +637,7 @@ export default {
         _this.stock = ''
         return;
       }
-      // console.log("firstRing",firstRing,secondRing)
+      console.log("firstRing",firstRing,secondRing)
       _this.doubleRingDetailId(firstRing, secondRing);
     },
     doubleRingDetailId(ladyRing, menRing) {
@@ -563,7 +670,38 @@ export default {
       if (Object.keys(goodInfo).length === 0) {
         return goodInfo
       }
-
+      
+      const Spec = goodInfo.specs
+      let colors = []
+      let colorSpec = ''
+      let colorId = ''
+      let configId = ''
+      if(Spec){
+        Spec.forEach(item => {
+          if (item.configId === '63') {
+            colorSpec = item.configAttrVal
+            colorId = item.configAttrId
+            configId = item.configId
+          }
+          if((colorId && colorSpec)!== ""){
+            let ids = colorId.split("|")
+            let specs = colorSpec.split("|")
+            if((ids && specs) !== ''){
+              colors = ids.map((id,i) => ({
+                id, 
+                image: null,
+                name: specs[i]
+              }));
+            }
+          }
+        })
+      }
+      let info = {colors:[]}
+      info = goodInfo
+      info.colors = colors
+      goodInfo = info
+      // console.log("yyygoodinfo",goodInfo) 
+      
       const mcArr = []
       for (const i in goodInfo.materials) {
         const o = {
@@ -602,7 +740,17 @@ export default {
       //   sortType: ``,
       //   sortBy: ``
       // })
+      const clArr = []
+      for (const i in goodInfo.colors) {
+        const o = {
+          content: goodInfo.colors[i].name,
+          sortType: goodInfo.colors[i].id,
+          sortBy: goodInfo.colors[i].id
+        }
+        clArr.push(o)
+      }
       goodInfo.carats = carats
+      goodInfo.colors = clArr
       goodInfo.sizes = stArr
       goodInfo.materials = mcArr
       goodInfo.goodsDesc = goodInfo.goodsDesc.includes(`<script>`)
@@ -663,6 +811,15 @@ export default {
       this.$refs['second-ring-carat'] &&
         this.$refs['second-ring-carat'].show()
     },
+    // 色彩
+    showFirstRingColorChoose() {
+      this.$refs['first-ring-color'] &&
+        this.$refs['first-ring-color'].show()
+    },
+    showSecondRingColorChoose() {
+      this.$refs['second-ring-color'] &&
+        this.$refs['second-ring-color'].show()
+    },
     firstRingClearCarat(val) {
       this.firstRingCarat = {
         id: val.item.sortType,
@@ -674,6 +831,29 @@ export default {
         id: val.item.sortType,
         text: val.item.content
       }
+    },
+    // 色彩
+    firstRingClearColor(val) {
+      this.firstRingColor = {
+        id: val.item.sortType,
+        text: val.item.content
+      }
+      this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
+      this.firstRingColorAttrs[0].config_attr_id = val.item.sortType
+      this.firstRingGoodsAttrs = this.firstRingColorAttrs
+      this.doubleRingColorAttrs = this.doubleRingGoodsAttrs
+      console.log("firstRingClearColor",this.firstRingColor.id) 
+    },
+    secondRingClearColor(val) {
+      this.secondRingColor = {
+        id: val.item.sortType,
+        text: val.item.content
+      }
+      this.secondRingColorAttrs[0].config_id = this.secondRingColorDetail
+      this.secondRingColorAttrs[0].config_attr_id = val.item.sortType
+      this.secondRingGoodsAttrs = this.secondRingColorAttrs
+      this.doubleRingColorAttrs = this.doubleRingGoodsAttrs
+      console.log("secondRingClearColor",this.secondRingColor.id)
     },
     firstRingClearSize(val) {
       this.firstRingSize = {
@@ -762,7 +942,7 @@ export default {
       //     serviceVal: 'string'
       //   }
       // ]
-
+      
       const goodInfo = {
         goodsCount: 1,
         goodsDetailsId:  this.goodsId,
@@ -771,7 +951,8 @@ export default {
         groupType: null,
         goodsType: this.categoryId,
         serviceId: 0,
-        serviceVal: 'string'
+        serviceVal: 'string',
+        goods_attr: this.doubleRingGoodsAttrs
       }
       this.$emit('addCart', goodInfo)
     },
@@ -835,6 +1016,7 @@ export default {
                     ? item.id
                     : null,
                 group_type: val.groupType,
+                goods_attr:val.goods_attr,
                 updateTime: item.id 
               }
               this.cartList.push(o)
@@ -854,6 +1036,7 @@ export default {
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
+          // console.log(item)
           const o = {
             isSelect: false,
             goodsImages: item.simpleGoodsEntity.goodsImages,
@@ -864,6 +1047,7 @@ export default {
                 : item.simpleGoodsEntity.categoryId === 1
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
+            goodsAttr:item.goodsAttr,
             sku:
               item.goodsType == 19
                 ? item.ring
@@ -935,9 +1119,10 @@ export default {
     // 立即购买
     orderNow(){
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast(this.lang.firstLogin)
+        this.ifShowPop = true
         return
       }
+      
       if (!(this.canAddCart && this.inSale)) {
         this.$toast(this.lang.specificationToast)
         return
@@ -955,9 +1140,10 @@ export default {
         groupType: null,
         goodsType: this.categoryId,
         serviceId: 0,
-        serviceVal: 'string'
+        serviceVal: 'string',
+        goods_attr: this.doubleRingGoodsAttrs
       }] 
-
+      
       goodInfo = goodInfo.map(function (item) {
         item.createTime = time
         item.updateTime = time
@@ -971,10 +1157,11 @@ export default {
           group_type: parseInt(item.groupType),
           serviceId: 0,
           serviceVal: 'string',
-          goods_type: item.goodsType
+          goods_type: item.goodsType,
+          goods_attr: item.goods_attr
         }
       });
-
+      // console.log("goodInfogggggggggg",goodInfo)
       if(this.isLogin){
         this.$axios({
           method: 'post',
@@ -1004,7 +1191,8 @@ export default {
             groupType: null,
             goodsType: this.categoryId,
             serviceId: 0,
-            serviceVal: 'string'
+            serviceVal: 'string',
+            goods_attr: this.doubleRingGoodsAttrs
           }
         ]
         const addInfo = {
@@ -1013,6 +1201,7 @@ export default {
           updateTime: time,
           data: goodInfo
         }
+        // console.log("goodInfoggggggggggffffffff",goodInfo)
         return new Promise(async (resolve, reject) => {
           try {
               let cart = JSON.parse(localStorage.getItem(CART) || '[]')

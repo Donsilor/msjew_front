@@ -6,7 +6,7 @@
       :class="['data-item', 'product']"
     >
       <!--          商品数据-->
-      <nuxt-link :to="item.to || { path: '/' }" >
+      <nuxt-link :to="item.to || { path: '/' }" target="_blank">
         <div class="product-content">
           <div class="product-image">
             <img class="main-image" :src="item.images[0]" />
@@ -34,15 +34,15 @@
               <span>{{ $t(`${lang}.discounts1`) }}</span>
             </div>
           </div>
-          <div class="product-info">
+          <!-- <div class="product-info">
             <div class="product-price">
              <div v-if="couponType(item.coupon) !== 'discount'">
                 <span class="coin">{{ formatCoin(item.coinType) }}</span>
                 <span class="price">{{ formatNumber(item.salePrice) }}</span>
-              </div>
+              </div> -->
 
               <!-- 折扣 -->
-              <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
+              <!-- <div class="list-discount-price" v-if="couponType(item.coupon) == 'discount'">
                 <div>
                   <span class="coin">{{ formatCoin(item.coinType) }}</span>
                   <span class="price">{{ formatNumber(item.salePrice) }}</span>
@@ -52,16 +52,16 @@
                   <span class="price">{{ formatNumber(item.coupon.discount.price) }}</span>
                 </div>
               </div>
-            </div>
+            </div> -->
 
-            <div class="product-title">
+            <!-- <div class="product-title"> -->
               <!-- 优惠券 -->
-              <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span>
+              <!-- <span class="list-discount-icon2 padding" v-if="couponType(item.coupon) == 'money'">￥</span> -->
               <!-- 折扣 -->
-              <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
+              <!-- <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ discountConversion(item.coupon.discount.discount) }}{{ $t(`${lang}.discounts2`) }}</span>
               {{ item.goodsName }}
-            </div>
-          </div>
+            </div> -->
+          <!-- </div> -->
         </div>
       </nuxt-link>
     </div>

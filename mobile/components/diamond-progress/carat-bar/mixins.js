@@ -223,10 +223,10 @@ export default {
       this.$emit(`help`)
     },
     backOption() {
-      this.$nuxt.$loading.start()
-      setTimeout(() => {
-        this.$nuxt.$loading.finish()
-      }, 1000);
+      // this.$nuxt.$loading.start()
+      // setTimeout(() => {
+      //   this.$nuxt.$loading.finish()
+      // }, 1000);
       let jsonBack = {}
       if (this.inNumStart === 0.1 && this.inNumEnd === 10) {
         jsonBack = {

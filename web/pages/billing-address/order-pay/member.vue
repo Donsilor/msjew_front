@@ -3,7 +3,7 @@
   <!-- 中文简体 -->
   <div v-if="language === 'zh_CN'" class="order">
     <!--    步骤模块-->
-    <div class="order-step">
+    <div class="order-step" id="step">
       <div class="one-step">
         <div class="step-img">
           <img src="../../../static/order/step.png" alt="" />
@@ -978,13 +978,13 @@
       :message="wrongMsg"
       :title="$t(`${lang}.msgTitle1`)"
       type="one"
-      @done="alertBox = false"
+      @done="alertTipBox"
     />
   </div>
   <!-- 繁体 -->
   <div v-else class="order">
     <!--    步骤模块-->
-    <div class="order-step">
+    <div class="order-step" id="step">
       <div class="one-step">
         <div class="step-img">
           <img src="../../../static/order/step.png" alt="" />
@@ -1955,7 +1955,7 @@
       :message="wrongMsg"
       :title="$t(`${lang}.msgTitle1`)"
       type="one"
-      @done="alertBox = false"
+      @done="alertTipBox"
     />
   </div>
 
@@ -2174,6 +2174,16 @@ export default {
     this.language = this.$store.state.language
   },
   methods: {
+    // 点击提示修改地址确认按钮触发
+    alertTipBox(){
+      this.alertBox = false
+      // 点击修改滚顶到地址选择模块
+      document.getElementById('step').scrollIntoView({
+        block: 'center',
+        inline: 'nearest',
+        behavior: 'smooth'
+      })
+    },
     zhizhi(or){
       // console.log("纸质",or)
       this.invoice.is_electronic = or;
@@ -3331,6 +3341,7 @@ export default {
          this.getTex(k);
        }else if(!g){
          this.couponCodeR = {}
+         this.getTex();
        }
      } 
 
