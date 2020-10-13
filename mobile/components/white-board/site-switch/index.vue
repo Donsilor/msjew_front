@@ -8,23 +8,28 @@
           <div class="line-icon">
             <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           </div>
-          <div v-if="this.$store.state.platform == 31" class="line-text">
+          <!-- old start -->
+          <!-- <div v-if="this.$store.state.platform == 31" class="line-text">
             <input :value="languages" type="text" disabled/>
           </div>
           <div v-else class="line-text">
-            <!-- <span>{{ languageText }}</span> -->
             <input :value="language" type="text" />
             <select name="" id="" v-model="language">
               <option v-for="(p, index) in languageOptions" :key="index" :value="p.content">
                 {{p.content}}
               </option>
             </select>
-          </div>
-          <div class="select-icon" v-show="this.$store.state.platform !== 31">
+          </div> -->
+          <!-- <div class="select-icon" v-show="this.$store.state.platform !== 31">
             <i class="iconfont iconkuozhan"></i>
+          </div> -->
+          <!-- old end -->
+          <div class="line-text">
+            <input :value="languageCn" type="text" disabled/>
           </div>
         </div>
-        <div v-if="this.$store.state.platform === 21" class="select-line" @click="chooseCoin">
+        <!-- old start -->
+        <!-- <div v-if="this.$store.state.platform === 21" class="select-line" @click="chooseCoin">
           <div class="line-icon">
             <i class="iconfont iconhuobi"></i>
           </div>
@@ -36,9 +41,6 @@
               </option>
             </select>
           </div>
-          <!-- <div class="select-icon">
-            <i class="iconfont iconkuozhan"></i>
-          </div> -->
         </div>
         <div v-else-if="this.$store.state.platform === 41" class="select-line" @click="chooseCoin">
           <div class="line-icon">
@@ -53,7 +55,6 @@
             </select>
           </div>
           <div class="select-icon">
-            <!-- <i class="iconfont iconkuozhan"></i> -->
           </div>
         </div>
         <div v-else class="select-line" @click="chooseCoin">
@@ -70,6 +71,15 @@
           </div>
           <div class="select-icon">
             <i class="iconfont iconkuozhan"></i>
+          </div>
+        </div> -->
+        <!-- old end -->
+        <div class="select-line" @click="chooseCoin">
+          <div class="line-icon">
+            <i class="iconfont iconhuobi"></i>
+          </div>
+          <div class="line-text">
+            <input :value="coinCn" type="text" disabled/>
           </div>
         </div>
         <button class="clear-btn" @click="changePage">
@@ -108,7 +118,9 @@ export default {
       coinOptionsCn: this.$bddDefinition.coinOptionsCn,
       coinOptionsTw: this.$bddDefinition.coinOptionsTw,
       langs:'',
-      languages:'English'
+      languages:'English',
+      languageCn:'中文简体',
+      coinCn:'CNY'
     }
   },
   computed: {
