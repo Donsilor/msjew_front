@@ -65,7 +65,7 @@ export default function ({ req, res, redirect, store, route }) {
         //头部host
         let headerHost = req.headers['host']
         //生产环境
-        let host = 'https://wap.bddco.com';
+        let host = 'https://www.msjew.com';
         if ((/^(wap-cn|wap-us|wap-tw)\.bddco\.com/).test(headerHost)) {
             //生产环境
             host = 'https://' + headerHost.replace('wap-', '');
@@ -77,11 +77,10 @@ export default function ({ req, res, redirect, store, route }) {
             }
         } else if ((/bddco\.cn/).test(headerHost)) {
             //大陆站点bddco.cn
-            host = 'https://www.bddco.cn';
             if ((/^(wap-cn|wap-us|wap-tw)-bdd\.bddco\.cn/).test(headerHost)) {
                 host = 'https://' + headerHost.replace('wap-', '');
-            } else if (headerHost == 'wap-bdd.bddco.cn') {
-                host = 'https://www-bdd.bddco.cn'
+            } else if (headerHost == 'wap-msjew.bddco.cn') {
+                host = 'https://www-msjew.bddco.cn'
             }
         } else if ((/msjew\.bddco/).test(headerHost)) {
             //猫闪测试站环境

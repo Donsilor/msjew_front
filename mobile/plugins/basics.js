@@ -6,10 +6,10 @@ const i18n = require('@/assets/lang/index.js').getLang
 
 export default ({ req, app, store, $axios }, inject) => {
     // 设置语言
-    let language = 'en_US'
-    let coin = 'HKD'
-    let areaId = 99
-    let platform = 11
+    let language = 'zh_CN'
+    let coin = 'CNY'
+    let areaId = 1
+    let platform = 21
     if (isServer) {
         let host = req.headers['host']
         if ((/^(cn|cn-bdd|wap-cn|www\.bddco\.cn|wap\.bddco\.cn)/is).test(host)) {
@@ -28,10 +28,10 @@ export default ({ req, app, store, $axios }, inject) => {
             areaId = 3
             platform = 41 //移动-台湾
         } else {
-            language = 'zh_TW'
-            coin = 'HKD'
-            areaId = 2
-            platform = 11 //移动-港澳台
+            language = 'zh_CN'
+            coin = 'CNY'
+            areaId = 1
+            platform = 21 //移动-港澳台
         }
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')

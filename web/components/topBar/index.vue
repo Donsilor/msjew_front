@@ -98,7 +98,17 @@
 
             <!--        语言切换-->
             <div class="item language">
-              <el-dropdown
+              <!-- <el-dropdown
+                type="primary"
+
+                placement="bottom"
+                @command="setLanguage"
+              > -->
+                <span class="row-flex align-item-center el-dropdown-link gray">
+                  中文简体
+                </span>
+              <!-- </el-dropdown> -->
+              <!-- <el-dropdown
                 v-if="this.$store.state.platform === 30"
                 type="primary"
 
@@ -128,11 +138,32 @@
                     {{ option.content }}
                   </el-dropdown-item>
                 </el-dropdown-menu>
-              </el-dropdown>
+              </el-dropdown> -->
             </div>
 
             <!--        货币切换-->
-            <div v-if="this.$store.state.platform === 20" class="item coin">
+            <div  class="item coin">
+              <!-- <el-dropdown
+                type="primary"
+
+                placement="bottom"
+                @command="setCoin"
+              > -->
+                <span class="row-flex align-item-center el-dropdown-link gray">
+                  CNY
+                </span>
+                <!-- <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    v-for="(option, n) in coinOptions"
+                    :key="n"
+                    :command="option.code"
+                  >
+                    {{ option.content }}
+                  </el-dropdown-item>
+                </el-dropdown-menu> -->
+              <!-- </el-dropdown> -->
+            </div>
+            <!-- <div v-if="this.$store.state.platform === 20" class="item coin">
               <el-dropdown
                 type="primary"
 
@@ -141,7 +172,6 @@
               >
                 <span class="row-flex align-item-center el-dropdown-link">
                   {{ coinInfo.content }}
-                  <!-- <i class="iconfont iconkuozhan"></i> -->
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item
@@ -163,7 +193,6 @@
               >
                 <span class="row-flex align-item-center el-dropdown-link">
                   {{ coinInfo.content }}
-                  <!-- <i class="iconfont iconkuozhan"></i> -->
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item
@@ -176,7 +205,7 @@
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
-            <div v-else class="item coin">
+            <div  class="item coin">
               <el-dropdown
                 type="primary"
 
@@ -196,7 +225,7 @@
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -1301,26 +1330,26 @@ export default {
       let result = ''
       const coin = this.$store.state.coin
       const coinOptions = this.$bddDefinition.coinOptions
-      const coinOptionsCn = this.$bddDefinition.coinOptionsCn
-      const coinOptionsTw = this.$bddDefinition.coinOptionsTw
+      // const coinOptionsCn = this.$bddDefinition.coinOptionsCn
+      // const coinOptionsTw = this.$bddDefinition.coinOptionsTw
 
-      if(this.$store.state.platform === 20){
-        for (let n = 0, length = coinOptionsCn.length; n < length; n++) {
-          if (coinOptionsCn[n].code === coin) {
-            result = coinOptionsCn[n]
-            break
-          }
-        }
-        return result
-      }else if(this.$store.state.platform === 40){
-        for (let n = 0, length = coinOptionsTw.length; n < length; n++) {
-          if (coinOptionsTw[n].code === coin) {
-            result = coinOptionsTw[n]
-            break
-          }
-        }
-        return result
-      } else {
+      // if(this.$store.state.platform === 20){
+      //   for (let n = 0, length = coinOptionsCn.length; n < length; n++) {
+      //     if (coinOptionsCn[n].code === coin) {
+      //       result = coinOptionsCn[n]
+      //       break
+      //     }
+      //   }
+      //   return result
+      // }else if(this.$store.state.platform === 40){
+      //   for (let n = 0, length = coinOptionsTw.length; n < length; n++) {
+      //     if (coinOptionsTw[n].code === coin) {
+      //       result = coinOptionsTw[n]
+      //       break
+      //     }
+      //   }
+      //   return result
+      // } else {
         for (let n = 0, length = coinOptions.length; n < length; n++) {
           if (coinOptions[n].code === coin) {
             result = coinOptions[n]
@@ -1328,7 +1357,7 @@ export default {
           }
         }
         return result
-      }
+      // }
     }
   },
   mounted() {
@@ -1420,6 +1449,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.gray{
+  color: #717171;
+}
 .top-bar {
   height: 150px;
   transition: all 0.3s linear;
