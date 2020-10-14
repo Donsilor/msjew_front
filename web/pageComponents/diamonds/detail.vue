@@ -76,7 +76,7 @@
           <div class="right-properties"  v-if="productInfo.clarity.length > 0">
             <div class="property-item">
               <span class="item-name">
-                {{ $t(`${lang}.size`) }}
+                {{ $t(`${lang}.clarity`) }}
               </span>
               <div class="property">
                 <div class="had-checked">
