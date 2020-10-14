@@ -4,6 +4,7 @@ export default {
     return {
       lang: this.LANGUAGE.detailCommons,
       showPi: 0,
+      showP2: 0,
       force: {
         cut: 0,
         carat: 0,
@@ -15,6 +16,15 @@ export default {
       sendDetailsId: null,
       categoryId: null,
       addWay: false,
+      chooseColor: ``,
+      chooseColorId: ``,
+      chooseCarat: ``,
+      chooseCaratId:``,
+      chooseClarity: ``,
+      chooseClarityId:``,
+      colorLine: 0,
+      caratLine: 0,
+      clarityLine: 0,
       goodInfo: {
         specs: [],
         carveStatus: 0,
@@ -43,6 +53,9 @@ export default {
         salePrice: 0,
         details: [],
         sizes: [],
+        color:[],
+        carats:[],
+        clarity:[],
         totalStock: 0,
         coupon: {}
       },
@@ -87,8 +100,7 @@ export default {
     }
   },
   mounted() {
-    console.log(`12345678============?`,this.goodInfo.sizes)
-    // console.log(JSON.stringify(this.$route.query.goodId))
+    // console.log(`12345678============?`,this.goodInfo)
     if (this.$route.query.goodId) {
       this.$nextTick(() => {
         this.$nuxt.$loading.start()
@@ -98,7 +110,7 @@ export default {
 
       this.$axios({
         method: `post`,
-        url: `/wap/goods/diamond/detail`,
+        url: `/wap/goods/style/detail`,
         params: {
           goodsId: this.$route.query.goodId
         }
@@ -107,40 +119,117 @@ export default {
           this.$nuxt.$loading.finish()
           // const _this = this
           // _this.$nuxt.$loading.finish()
-          // console.log(res)
+          console.log("res",res)
           const mcArr = []
-          for (const i in res.materials) {
+          for (const i in res.color) {
             const o = {
-              id: res.materials[i].id,
-              name: res.materials[i].name,
-              // image: this.$IMG_URL + res.materials[i].configAttrImg
-              image: res.materials[i].image
+              content: res.color[i].name,
+              sortType: res.color[i].id,
+              sortBy: res.color[i].id
             }
             mcArr.push(o)
-            const stArr = []
-            for (const i in res.sizes) {
-              const o = {
-                content: res.sizes[i].name,
-                sortType: res.sizes[i].id,
-                sortBy: res.sizes[i].id
-              }
-              stArr.push(o)
-            }
-            stArr.unshift({
-              content: this.lang.stArrContent,
-              sortType: ``,
-              sortBy: ``
-            })
-            res.sizes = stArr
-            res.materials = mcArr
-            res.goodsDesc = res.goodsDesc.includes(`<script>`)
-              ? ''
-              : res.goodsDesc
           }
+          
+          const stArr = []
+          for (const i in res.clarity) {
+            const o = {
+              content: res.clarity[i].name,
+              sortType: res.clarity[i].id,
+              sortBy: res.clarity[i].id
+            }
+            stArr.push(o)
+          }
+
+          const carats = []
+          for (const i in res.carats) {
+            const o = {
+              content: res.carats[i].name,
+              sortType: res.carats[i].id,
+              sortBy: res.carats[i].id
+            }
+            carats.push(o)
+          }
+
+          res.color = mcArr
+          res.clarity = stArr
+          res.carats = carats
+          res.goodsDesc = res.goodsDesc.includes(`<script>`)
+            ? ''
+            : res.goodsDesc
+          // }
           this.goodInfo = res
-          this.goodInfo.coupon = res.coupon
-          // console.log("99999999",)
-          this.showPi = this.goodInfo.salePrice
+          // this.goodInfo.coupon = res.coupon
+          if(res.coupon){
+            for(var i in res.coupon){
+              this.goodInfo.coupon[i] = res.coupon[i];
+            }
+          }
+
+          if (this.$route.query.isBack) {
+            const melo = JSON.parse(
+              this.$helpers.base64Decode(this.$route.query.melo)
+            )
+            const thatId =
+              melo.steps[0].ct === 1
+                ? melo.steps[1].goodsDetailsId
+                : melo.steps[0].goodsDetailsId
+            for (let i = 0; i < res.details.length; i++) {
+              console.log(11111111)
+              if (res.details[i].id === thatId) {
+                this.showPi = res.details[i].retailMallPrice
+  
+                for (let j = 0; j < res.color.length; j++) {
+                  if (
+                    res.color[j].sortBy ===
+                    res.details[i].color
+                  ) {
+                    this.chooseColor = res.color[j].content
+                    this.chooseColorId = res.color[j].sortBy
+                    this.colorLine = j
+                  }
+                }
+                for (let j = 0; j < res.clarity.length; j++) {
+                  if (
+                    res.clarity[j].id ===
+                    res.details[i].clarity
+                  ) {
+                    this.chooseClarity = res.clarity[j].content
+                    this.chooseClarityId = res.clarity[j].sortBy
+                    this.clarityLine = j
+                  }
+                }
+                for (let j = 0; j < res.carats.length; j++) {
+                  if (
+                    res.carats[j].sortBy ===
+                    res.details[i].carat
+                  ) {
+                    this.chooseCarat = res.carats[j].content
+                    this.chooseCaratId = res.carats[j].sortBy
+                    this.caratLine = j
+                  }
+                }
+              }
+            }
+          } else {
+            this.showPi = this.goodInfo.salePrice
+            if(this.goodInfo.color.length > 0){
+              this.chooseColorId = this.goodInfo.color[0].sortBy
+              this.chooseColor = this.goodInfo.color[0].content
+            }
+
+            if(this.goodInfo.clarity.length > 0){
+              this.chooseClarityId = this.goodInfo.clarity[0].sortBy
+              this.chooseClarity = this.goodInfo.clarity[0].content
+            }
+
+            if(this.goodInfo.carats.length > 0){
+              this.chooseCaratId = this.goodInfo.carats[0].sortBy
+              this.chooseCarat = this.goodInfo.carats[0].content
+            }
+          }
+
+          this.iAmShowMaker()
+
           for (let i = 0; i < this.goodInfo.specs.length; i++) {
             if (this.goodInfo.specs[i].configId === 4) {
               this.force.cut = this.goodInfo.specs[i].configAttrId
@@ -170,8 +259,8 @@ export default {
           this.categoryId = this.goodInfo.details[0].categoryId
 
           if (this.goodInfo.goods3ds) {
-            this.is360 = true
-            this.has360 = true
+            this.is360 = false
+            this.has360 = false
           } else {
             this.is360 = false
             this.has360 = false
@@ -189,6 +278,7 @@ export default {
             ? `https://www.gia.edu/report-check?reportno=${gayNum}`
             : ``
 
+
           let fbqInfo = {
             content_type: 'product', //  固定值：pruduct
             content_ids: res.id,  // 对应网站产品的 id或者Sku
@@ -197,11 +287,7 @@ export default {
           };
 
           fbq('track', 'ViewContent', fbqInfo);
-          if(res.coupon){
-            for(var i in res.coupon){
-              this.goodInfo.coupon[i] = res.coupon[i];
-            }
-          }
+          
         })
         .catch(err => {
           this.$nuxt.$loading.finish()
@@ -227,6 +313,97 @@ export default {
         goodsType: this.categoryId,
         type: type
       })
+    },
+    showSwiperTapClarity() {
+      this.$refs.claritysuitability.show()
+    },
+    showSwiperTapColor() {
+      this.$refs.colorsuitability.show()
+    },
+    showSwiperTapCarats() {
+      this.$refs.caratsSuitability.show()
+    },
+    getSortByColor(val) {
+      this.chooseColor = val.item.content
+      this.chooseColorId = val.item.sortType
+      this.iAmShowMaker()
+    },
+    getSortByClarity(val){
+      this.chooseClarity = val.item.content
+      this.chooseClarityId = val.item.sortType
+      this.iAmShowMaker()
+    },
+    getCarats(val) {
+      this.chooseCarat = val.item.content
+      this.chooseCaratId = val.item.sortType
+      this.iAmShowMaker()
+    },
+    iAmShowMaker() {
+      const bullShit = this.goodInfo.details
+      if (this.goodInfo.color.length >0 && this.goodInfo.clarity.length >0 &&  this.goodInfo.carats.length >0) {
+        if (this.chooseColorId === `` || this.chooseCaratId === `` || this.chooseClarityId === ``) {
+          this.showPi = this.goodInfo.salePrice
+          this.sendGoodsId = ``
+          this.sendDetailsId = ``
+          this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].color) === parseInt(this.chooseColorId) &&
+              parseInt(bullShit[i].carat) === parseInt(this.chooseCaratId) &&
+              parseInt(bullShit[i].clarity) === parseInt(this.chooseClarityId)
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+              
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
+            }
+          }
+        }
+      } else {
+        if (this.chooseClarityId === ``) {
+          this.showPi = this.goodInfo.salePrice
+          this.sendGoodsId = ``
+          this.sendDetailsId = ``
+          this.categoryId = ``
+          
+          if(this.couponType(this.goodInfo.coupon) == 'discount'){
+            this.showP2 = this.goodInfo.coupon.discount.price
+          }else{
+            this.showP2 = this.goodInfo.salePrice
+          }
+        } else {
+          for (const i in bullShit) {
+            if (
+              parseInt(bullShit[i].clarity) === parseInt(this.chooseClarityId) &&
+              parseInt(bullShit[i].color) === parseInt(this.chooseColorId)
+            ) {
+              this.showPi = bullShit[i].retailMallPrice
+              this.sendGoodsId = bullShit[i].goodsId
+              this.sendDetailsId = bullShit[i].id
+              this.categoryId = bullShit[i].categoryId
+              
+              if(this.couponType(bullShit[i].coupon) == 'discount'){
+                this.showP2 = bullShit[i].coupon.discount.price
+              }else{
+                this.showP2 = bullShit[i].retailMallPrice
+              }
+            }
+          }
+        }
+      }
     },
     addCart() {
       if (!(this.canAddCart && this.inSale)) {
@@ -348,7 +525,7 @@ export default {
             config:
               item.goodsType == 19
                 ? item.ring
-                : item.simpleGoodsEntity.categoryId === 1
+                : item.simpleGoodsEntity.categoryId === 20
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             sku:
@@ -407,7 +584,7 @@ export default {
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
-            this.list[i].simpleGoodsEntity.categoryId === 1 &&
+            this.list[i].simpleGoodsEntity.categoryId === 20 &&
             this.list[i].createTime === this.list[i + 1].createTime
           ) {
             const tamp = this.list[i]
@@ -423,9 +600,10 @@ export default {
     //立即购买
     orderNow(){
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast(this.lang.firstLogin)
+        this.ifShowPop = true
         return
       }
+      
       if (!(this.canAddCart && this.inSale)) {
         return
       }

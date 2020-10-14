@@ -50,7 +50,35 @@ export default {
       }
     })
       .then(res => {
-        const infos = res
+        const Spec = res.specs
+        let colors = []
+        let colorSpec = ''
+        let colorId = ''
+        let configId = ''
+        if(Spec){
+          Spec.forEach(item => {
+            if (item.configId === '63') {
+              colorSpec = item.configAttrVal
+              colorId = item.configAttrId
+              configId = item.configId
+            }
+            if((colorId && colorSpec)!== ""){
+              let ids = colorId.split("|")
+              let specs = colorSpec.split("|")
+              if((ids && specs) !== ''){
+                colors = ids.map((id,i) => ({
+                  id, 
+                  image: null,
+                  name: specs[i]
+                }));
+              }
+            }
+          })
+        }
+        let info = {colors:[]}
+        info = res
+        info.colors = colors
+        const infos = info
         // let infos = null
         // if (process.server) {
         //   if (res.data.code === 200) {
@@ -85,6 +113,19 @@ export default {
             carats.push(o)
           }
           infos.carats = carats
+        }
+        const clArr = [] 
+        if(infos.colors){
+          for (const i in infos.colors) {
+            const o = {
+              content: infos.colors[i].name,
+              sortType: infos.colors[i].id,
+              sortBy: infos.colors[i].id
+            }
+            clArr.push(o)
+          }
+          infos.colors = clArr
+          // console.log('ggggg',clArr) 
         }
         infos.materials = mcArr
         if (res.sizes) {

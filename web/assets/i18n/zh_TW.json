@@ -468,7 +468,7 @@
             "copyrightLeftCn": "與我們的珠寶顧問聯絡： 星期一至五 9:00-18:00  /  0755 25169121  /  e-service@bddco.com ",
             "copyrightRight": "© 2020 BDD Co. All Rights Reserved.",
             "copyrightRight1": "粵ICP備",
-            "copyrightRight2": "號-1/Copyright©2018-2020 BDD Co.官网   All Rights Reserved."
+            "copyrightRight2": "號/Copyright©2018-2020 BDD Co.官网   All Rights Reserved."
         },
         "sendEmailCode": {
             "sendCode": "發送驗證碼",
@@ -936,6 +936,8 @@
             "useAnyway": "所有金额可用",
             "get": "（收）",
             "mrAddress": "默認地址",
+            "setDefaultAddress": "設置默認地址",
+            "setSuccess": "默認地址設置成功",
             "change": "更改",
             "newAddress": "新增收貨地址",
             "editAddress": "编辑收貨地址",
@@ -1261,7 +1263,9 @@
         "chooseSize": "獲取我的指圈號",
         "back": "返回上一步",
         "color": "成色",
+        "colour":"顏色",
         "size": "尺寸",
+        "shade":"主石色彩",
         "USEdition": "美版",
         "isUSSizeNow": "本頁顯示的為美版指圈號",
         "needHelpForRingSize": "如果您是其他區域的客戶，請聯絡客服告知指圈號版本，可以是歐版、中國大陸版本。",

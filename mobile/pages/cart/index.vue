@@ -42,7 +42,7 @@
                     <p>SKU：{{ item.sku }}</p>
                     <p class="p">
                       {{
-                        getconfig(item.config, item.simpleGoodsEntity.specs)
+                        getconfig(item.config, item.simpleGoodsEntity.specs,item.goodsAttr)
                       }}
                     </p>
                     <b v-if="!item.coupon.discount">{{  formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
@@ -115,7 +115,7 @@
                     
                     <p class="p">
                       {{
-                        getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value)
+                        getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value,ring,item.goodsAttr)
                       }}
                     </p>
                     
@@ -154,7 +154,10 @@
                   </div>
                   <div class="discount-price" v-else>
                     <div class="old-price">{{ formatCoin(coin) }} {{ formatNumber(item.salePrice) }}</div>
-                    <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b>
+                    <div class="now-price">
+                      {{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}
+                    </div>
+                    <!-- <b>{{ formatCoin(coin) }} {{ formatNumber(item.coupon.discount.price) }}</b> -->
                   </div>
                   <div class="cut-line"></div>
                 </div>
@@ -183,7 +186,7 @@
                     <p>SKU：{{ item.sku }}</p>
                     <p class="p">
                       {{
-                        getconfig(item.config, item.simpleGoodsEntity.specs)
+                        getMadeConfig(item.config, item.simpleGoodsEntity.detailConfig)
                       }}
                     </p>
                     <b v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
@@ -209,9 +212,9 @@
                       </p>
                       <p>
                         {{
-                          getconfig(
+                          getMadeConfig(
                             list[index + 1].config,
-                            list[index + 1].simpleGoodsEntity.specs
+                            list[index + 1].simpleGoodsEntity.detailConfig
                           )
                         }}
                       </p>
@@ -285,7 +288,7 @@
           <div class="order">
             <span>{{ lang.total }}</span>
             <span class="small"
-              >{{ formatCoin(coin) }}{{ formatMoney(sumPrice.toFixed(2)) }}</span
+              >{{ formatCoin(coin) }} {{ formatMoney(sumPrice.toFixed(2)) }}</span
             >
           </div>
           <span class="btn" @click="goPay">{{ lang.goPay }}({{ sumNum }})</span>
@@ -297,6 +300,7 @@
       :type="'cart'"
       @toShopping="toShopping"
     ></bdd-empty>
+    <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
   </div>
 </template>
 
@@ -325,11 +329,9 @@ export default {
       timer: null ,
       soudout:'',
       language: this.$store.state.language,
-      isLoading:''
+      isLoading:'',
+      ifShowPop: false
     }
-  },
-  created() {
-    
   },
   mounted() {
     this.$nextTick(() => {
@@ -343,13 +345,7 @@ export default {
         this.getLocalCart()
       }
     })
-
-    // this.language = this.getCookie('language')
   },
-  // beforeUpdate(){
-  //   this.getList()
-  // },
-  //
   methods: {
     formatMoney: formatMoney,
     toShopping() {
@@ -368,26 +364,26 @@ export default {
       })
     },
     goPay() {
-      // console.log("id",this.list)
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast.show(this.lang.firstLogin)
-      } else {
-        const arr = []
-        for (let i = 0; i < this.list.length; i++) {
-          if (this.list[i].isSelect) {
-            arr.push(this.list[i])
-          }
+        this.ifShowPop = true
+        return
+      }
+
+      const arr = []
+      for (let i = 0; i < this.list.length; i++) {
+        if (this.list[i].isSelect) {
+          arr.push(this.list[i])
         }
-  
-        if (arr.length <= 0) {
-          this.$toast.show(this.lang.toast1)
-        } else if (arr.length > 0) {
-          console.log("arr",arr)
-          storage && storage.set('myCartList', JSON.stringify(arr))
-          this.$router.push({
-            name: 'cart-sureOrder'
-          })
-        }
+      }
+
+      if (arr.length <= 0) {
+        this.$toast.show(this.lang.toast1)
+      } else if (arr.length > 0) {
+        // console.log("arr",arr)
+        storage && storage.set('myCartList', JSON.stringify(arr))
+        this.$router.push({
+          name: 'cart-sureOrder'
+        })
       }
     },
     // 判断是否失效
@@ -427,7 +423,7 @@ export default {
             this.list[i].isSelect = false
           }
         }
-        console.log(this.selectAll)
+        // console.log(this.selectAll)
         this.getNum()
         if(this.list.length == 1 && this.soudout !== 2){
           this.selectAll = false
@@ -551,20 +547,24 @@ export default {
       }
     },
     // 属性数值转化成字符串
-    getconfig(list, list2) {
+    getconfig(list, list2, attr) {
+      let config = []
+      if(attr){
+        config = list.concat(attr)
+      }
       let text = ''
-      if (list.length > 0) {
-        // console.log("item",list)
-        list.map((item, index) => {
-        // console.log("itemlist",item)
-          if (index === list.length - 1) {
+      
+      if (config.length > 0) {
+        config.map((item, index) => {
+          if (index === config.length - 1) {
             text = text + item.configAttrIVal
           } else {
             text = text + item.configAttrIVal + ' /  '
           }
         })
       }
-      if (list2 && list2.length > 0) {
+
+      if (list2 &&  list2.length > 0) {
         list2.map((item, index) => {
           if (item.configId === 196) {
             // console.log(list2, '9999', item)
@@ -572,16 +572,57 @@ export default {
           }
         })
       }
+      
+      return text
+    },
+    getMadeConfig(list,list2,attr){
+      let text = ''
+      if(this.isLogin){
+        if (list2.length > 0) {
+          list2.map((item, index) => {
+            // console.log("itemlist2",item)
+            if (index === list2.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }else {
+        if (list2.length > 0) {
+          list2.map((item, index) => {
+             console.log("itemlist2",item)
+            if (index === list2.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }
       return text
     },
     // 属性数值转化成字符串
-    getDubleConfig(good_spec,goods_attr) {
+    getDubleConfig(good_spec,goods_attr,ring,attr) {
+      // console.log('9999',ring.id)
+      let attrs = []
+     
+      ring.lang.goods_spec.forEach((item,a) => {
+        attrs.push(item)
+      })
+      attr.forEach((i,a) => {
+        // console.log('9999',ring.id,i)
+        if (ring.id == i.goodsId) {
+          // i.attr_name = i.configVal
+          i.attr_value = i.configAttrIVal
+          attrs.push(i)
+        }
+      })
       let text = ''
-      if (good_spec.length > 0) {
-        good_spec.map((item, index) => {
-        // console.log("good_spec",item)
+      if (attrs.length > 0) {
+        attrs.map((item, index) => {
 
-          if (index === good_spec.length - 1) {
+          if (index === attrs.length - 1) {
             text = text + item.attr_value
           } else {
             text = text + item.attr_value + ' /  '
@@ -602,6 +643,7 @@ export default {
         //   }
         // }) 
       }
+      //  console.log("good_spec",text)
       return text
     },
 
@@ -636,7 +678,7 @@ export default {
           this.noListData = false
           this.cartList = []
           res.map((item, index) => {
-            // console.log("item",item)
+            console.log("item",item)
             item.data.map((val, ind) => {
               // Status 商品状态(1-仓库,2-上架,3-下架,4-删除)   goods_id  goods_type  goods_num  group_type  group_id  createTime
               // 定制
@@ -660,6 +702,7 @@ export default {
                     ? item.id
                     : null,
                 group_type: val.groupType,
+                goods_attr:val.goods_attr,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
               // console.log("ooooo>>>",val)
@@ -667,7 +710,7 @@ export default {
             })
           })
           this.cartList.reverse()
-          // console.log("this.cartList",this.cartList)
+          console.log("this.cartList",this.cartList)
           this.getLocalList(this.cartList)
         } else {
           this.num = 0
@@ -696,6 +739,7 @@ export default {
           keys.forEach(item => {
             result.push(res[item])
           })
+          console.log("线上llll",result)
           this.doFormat(result)
           // this.doFormat(res)
         })
@@ -707,12 +751,12 @@ export default {
     },
     // 格式化数据列表
     doFormat(res) {
-      console.log(res)
+      // console.log("res",res)
       this.list = []
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
-          // console.log("dddd",item)
+          // console.log("dddd",item) 
           this.coin = item.simpleGoodsEntity.coinType
           const o = {
             isSelect: false,
@@ -727,9 +771,10 @@ export default {
             config:
               item.goodsType == 19
                 ? item.ring
-                : item.simpleGoodsEntity.categoryId === 1
-                ? item.simpleGoodsEntity.baseConfig
+                : item.simpleGoodsEntity.categoryId === 20
+                ? item.simpleGoodsEntity.detailConfig
                 : item.simpleGoodsEntity.detailConfig,
+            goodsAttr:item.goodsAttr,
             sku:
               item.goodsType == 19
                 ? item.ring
@@ -774,7 +819,7 @@ export default {
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
-            this.list[i].simpleGoodsEntity.categoryId === 1 &&
+            this.list[i].simpleGoodsEntity.categoryId === 20 &&
             this.list[i].createTime === this.list[i + 1].createTime
           ) {
             const tamp = this.list[i]
@@ -836,7 +881,7 @@ export default {
       }
       // 去单品详情
       else if(item.groupType === 0) {
-        if (item.simpleGoodsEntity.categoryId === 15) {
+        if (item.simpleGoodsEntity.categoryId === 20) {
           // 是个钻石💎
           this.$router.push({
             name: 'diamond-diamonds',
@@ -846,7 +891,7 @@ export default {
             }
           })
         } else if (item.simpleGoodsEntity.categoryId === 2) {
-           console.log('还是个結婚戒指💍')
+          //  console.log('还是个結婚戒指💍')
             this.$router.push({
               name: 'marriage-ring-single-ring-detail',
               query: {
@@ -857,7 +902,7 @@ export default {
               }
             })
         }else if (item.simpleGoodsEntity.categoryId === 12) {
-          console.log('还是个訂婚戒指💍')
+          // console.log('还是个訂婚戒指💍')
             this.$router.push({
               name: 'engagement-engagement-rings',
               query: {
@@ -910,6 +955,9 @@ export default {
           goodId: gs2
         }
       })
+    },
+    closePop() {
+      this.ifShowPop = false
     }
   }
 }
@@ -1058,6 +1106,14 @@ export default {
               // margin-right:20px;
               // margin-left: 65px;
               margin-top: 10px;
+            }
+            .now-price{
+              font-size: 17px;
+              line-height: 20px;
+              font-weight: 400;
+              color: rgba(243, 163, 145, 1);
+              font-family: twCenMt;
+              margin-left: 140px;
             }
             .cut-line{
               height:1px;

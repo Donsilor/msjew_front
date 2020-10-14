@@ -15,7 +15,7 @@
       </div>
       <div class="button">
         <slot name="button">
-          <button>click</button>
+          <!-- <button>click</button> -->
         </slot>
       </div>
     </div>

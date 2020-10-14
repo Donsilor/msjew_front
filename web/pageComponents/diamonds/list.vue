@@ -586,9 +586,9 @@
             :key="index"
             :class="['data-item', item.itemType]"
           >
-            <!--          商品数据-->
+            <!--    target="_blank"      商品数据-->
             <div v-if="item.itemType === 'product'" class="product-content">
-              <nuxt-link :to="item.to" target="_blank">
+              <nuxt-link :to="item.to" >
                 <div class="product-image">
                   <img class="main-image" :src="item.goodsImages[0]" />
                   <img class="sub-image" :src="item.goodsImages[0]" />
@@ -652,7 +652,7 @@
                       <!-- 折扣 -->
                       <span class="list-discount-icon2" v-if="couponType(item.coupon) == 'discount'">{{ language == 'en_US' ? discountUs(item.coupon.discount.discount)+'%' : discountConversion(item.coupon.discount.discount)}} {{ $t(`${lang}.discounts2`) }}</span>
 
-                      <div class="card-info" style="display: inline-block;">
+                      <div v-if="item.specsModels" class="card-info" style="display: inline-block;">
                         <span class="type">{{ item.specsModels.card }}</span>
                         <span class="number">{{ item.specsModels.cardNo }}</span>
                       </div>
@@ -907,7 +907,7 @@ export default {
   data() {
     return {
       lang,
-      listUrl: '/web/goods/diamond/search',
+      listUrl: '/web/goods/style/search',
       page_size: 16,
       showMoreCondition: false,
 
@@ -1280,15 +1280,16 @@ export default {
       })
 
       const data = {
+        // advertType:2,
         // 商品类别ID
-        categoryId: 15,
+        categoryId: 20,
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）
         orderType: sortInfo.sortType,
         // 每页显示数量
         page_size: this.page_size,
-        // 参数数组
+        // 参数数组  dealParams
         params: dealParams
       }
 
@@ -1300,6 +1301,7 @@ export default {
     },
     // 处理用于显示的数据
     showingData() {
+      // console.log("ddddd",this.showingData) 
       // console.log("加载状态",this.loading)
       // if(this.allData.length == 0){
       //   this.loading = true

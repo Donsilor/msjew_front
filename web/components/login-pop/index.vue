@@ -50,7 +50,7 @@
         <div class="relative margin-bottom-30">
           <div class="row-flex align-item-stretch">
             <div class="login-input verification-code-input">
-              <input v-model="code" @keypress="codeErr = false" type="text" :class="{border:codeErr}" :placeholder="$t(`${lang}.code`)" maxlength="4" />
+              <input v-model="code" @keypress="codeErr = false" type="text" :class="{active:codeErr}" :placeholder="$t(`${lang}.code`)" maxlength="4" />
             </div>
             <div class="code-picture" @click="refreshCode">
               <picture-verification-code ref="picture-verification-code" :identify-code="pictureCode"></picture-verification-code>
@@ -176,6 +176,17 @@ export default {
   },
   mounted() {
     this.language = this.$store.state.language
+
+    let oldurl=window.location.pathname
+    let params=window.location.search
+    //如果是订单确认页面，返回到购物车
+    if((/^\/billing-address/).test(oldurl)){
+        oldurl = '/shopping-cart'
+        params = ''
+    }
+
+    const url=oldurl+params
+    localStorage.setItem('url',url)
 
     // 大陆站点 登录方式为手机登录
     if (this.$store.state.platform == 20) {
@@ -510,7 +521,7 @@ input::placeholder {
 }
 
 .login-item {
-  width: 300px;
+  width: 390px;
   height: 380px;
   padding-top: 20px;
   padding-bottom: 23px;
@@ -522,8 +533,8 @@ input::placeholder {
     & {
       input {
         width: 100%;
-        height: 40px;
-        line-height: 40px;
+        height: 45px;
+        line-height: 45px;
         padding: 0 20px;
         border: 1px solid rgba(230, 230, 230, 1);
         border-radius: 4px;
@@ -574,7 +585,7 @@ input::placeholder {
 
   .code-picture {
     width: 109px;
-    height: 40px;
+    height: 45px;
   }
 
   .forget {

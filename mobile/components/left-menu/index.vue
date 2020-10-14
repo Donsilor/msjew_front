@@ -21,15 +21,19 @@
           </div>
           <span class="gap-line"></span>
         </div>
-        <div class="icon" @click="toPersonal">
-          <i class="iconfont icongerenzhongxin" v-show="showa"></i>
-          <span v-show="showa" class="pl-login">{{lang.login}}</span>
-          <span class="coloricon" v-show="showb"><i class="iconfont icongerenzhongxin" ></i></span>
-          <span v-show="showb" class="pl-login">{{ replacepos(date.username, 2, 6, '***') }}</span>
+        <div class="icon" >
+          <div class="log-in" @click="menu" v-show="showa">
+            <i class="iconfont icongerenzhongxin" ></i>
+            <span class="pl-login">{{lang.login}}</span>
+          </div>
+          <div class="logined" v-show="showb" @click="toPersonal">
+            <span class="coloricon" ><i class="iconfont icongerenzhongxin" ></i></span>
+            <span class="pl-login">{{ replacepos(date.username, 2, 6, '***') }}</span>
+          </div>
         </div>
 
       </div>
-      <div class="content">
+      <div :class="['content', {'height': !bottom}]">
         <!-- <div class="search">
           <button class="search-btn" @click="toPage('search')">
             <i class="iconfont iconicon-sousuo btn-icon"></i>
@@ -493,7 +497,7 @@ export default {
         return mystr
       }
     },
-    toPersonal() {
+    menu(){
       this.hide()
       // 点击登入获取上页url
       let oldurl=window.location.pathname
@@ -512,6 +516,12 @@ export default {
       //       // query: {url}
       //   })
       // },0)
+      this.$router.push({
+        name: 'login'
+      })
+    },
+    toPersonal() {
+     this.hide()
       this.$router.push({
         name: 'personal'
       })
@@ -706,6 +716,13 @@ export default {
 }
 </style>
 <style lang="less" scoped>
+.log-in{
+  display:flex;
+}
+.logined{
+  display:flex;
+  width: 100%;
+}
 .changeColor{
   color: #6f9eb1;
 }
@@ -1026,5 +1043,9 @@ export default {
       background-size: 100% 100%;
     }
   }
+}
+
+.height{
+  height: 100%;
 }
 </style>

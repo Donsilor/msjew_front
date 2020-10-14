@@ -163,6 +163,12 @@
                       <span v-for="(v, k) in detail.detailSpecs" :key="k"
                         >{{ v.name }}：{{ v.value }}</span
                       >
+                    <!-- 色彩 -->
+                    <div class="color">
+                      <span v-for="(v, k) in detail.goodsAttr" :key="'color='+k">
+                        {{ v.configVal }}：{{ v.configAttrIVal }}
+                      </span>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -190,7 +196,7 @@
                       
                       <div class="good-sku">SKU：{{ detail.goodsCode }}</div>
                       <div class="details">
-                        <span v-for="(v, k) in d.lang.goods_spec" :key="k"
+                        <span v-for="(v, k) in goodsAttrs(d,detail.goodsAttr)" :key="k"
                           >{{ v.attr_name }}：{{ v.attr_value }}</span
                         >
                         <span class="gender" v-for="(a, b) in d.lang.goods_attr[26].value" :key="b">
@@ -581,6 +587,23 @@ export default {
     this.getData()
   },
   methods: {
+    //色彩
+    goodsAttrs(item,attr){
+      let Obj = []
+      item.lang.goods_spec.forEach((item,c) => {
+        Obj.push(item)
+      })
+      // console.log("sssss",item,attr)
+      attr.forEach((i,a) => {
+        if (item.id === i.goodsId) {
+          i.attr_name = i.configVal
+          i.attr_value = i.configAttrIVal
+          Obj.push(i)
+          // console.log("sssss",Obj)
+        }
+      })
+      return Obj 
+    },
     getStatusText(status) {
 
       var status_value =  {
@@ -1006,7 +1029,7 @@ export default {
             }
             .good-desc {
               width: calc(100% - 90px);
-              height: 70px;
+              // height: 70px;
               color: #333;
               margin-left: 20px;
               overflow: hidden;
@@ -1025,21 +1048,27 @@ export default {
                 font-size: 12px;
                 line-height: 12px;
                 height: 12px;
-                margin-bottom: 18px;
+                margin-bottom: 13px;
                 color: #aaa;
               }
               .details {
                 font-size: 12px;
-                line-height: 12px;
-                height: 12px;
+                // line-height: 12px;
+                // height: 12px;
                 width: 100%;
                 color: #aaa;
                 // overflow: hidden;
-                text-overflow: ellipsis;
+                // text-overflow: ellipsis;
                 // white-space: nowrap;
                 span {
                   margin-right: 10px;
                 }
+              }
+              .color{
+                font-size: 12px;
+                width: 100%;
+                color: #aaa;
+                display: inline;
               }
             }
           }
@@ -1165,7 +1194,7 @@ export default {
             }
             .good-desc {
               width: 936-250.5-163.5-20-70-20+18px;
-              height: 70px;
+              // height: 70px;
               color: #333;
               // overflow: hidden;
               .good-name {
@@ -1188,15 +1217,20 @@ export default {
               }
               .details {
                 font-size: 12px;
-                line-height: 20px;
-                height: 20px;
+                // line-height: 20px;
+                // height: 20px;
                 width: 100%;
                 // overflow: hidden;
-                text-overflow: ellipsis;
+                // text-overflow: ellipsis;
                 // white-space: nowrap;
                 color:#aaa;
                 span {
                   margin-right: 10px;
+                }
+              }
+              .dec:first-child{
+                .details{
+                  margin-bottom: 5px;
                 }
               }
             }

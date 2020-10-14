@@ -40,7 +40,7 @@
                   <p>SKU：{{ item.sku }}</p>
                   <p class="p">
                     {{
-                      getconfig(item.config, item.simpleGoodsEntity.baseConfig)
+                      getconfig(item.config, item.simpleGoodsEntity.baseConfig,item.goodsAttr)
                     }}
                   </p>
 
@@ -106,7 +106,7 @@
                   <p class="sku">SKU：{{ item.simpleGoodsEntity.goodsCode }}</p>
                   <p class="p">
                     {{
-                      getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value)
+                      getDubleConfig(ring.lang.goods_spec,ring.lang.goods_attr[26].value,ring,item.goodsAttr)
                     }}
                   </p>
                   <!-- <b>{{ coin }} {{ formatMoney(item.salePrice) }}</b> -->
@@ -163,7 +163,7 @@
                   <p>SKU：{{ item.sku }}</p>
                   <p class="p">
                     {{
-                      getconfig(item.config, item.simpleGoodsEntity.baseConfig)
+                      getMadeConfig(item.config,item.simpleGoodsEntity.detailConfig,item.goodsAttr)
                     }}
                   </p>
                   
@@ -192,9 +192,10 @@
                     </p>
                     <p class="p">
                       {{
-                        getconfig(
+                        getMadeConfig(
                           list[index + 1].config,
-                          list[index + 1].simpleGoodsEntity.baseConfig
+                          list[index + 1].simpleGoodsEntity.detailConfig,
+                          list[index + 1].goodsAttr
                         )
                       }}
                     </p>
@@ -248,15 +249,17 @@ export default {
     }
   },
   mounted() {
+    
     // this.language = this.getCookie('language')
   },
   methods: {
     formatMoney: formatMoney,
     // 属性数值转化成字符串
-    getconfig(list, list2) {
-      // console.log("list",list)
+    getconfig(list, list2, attr) {
+      // console.log("itemlist2",list2)
+      let config = list.concat(attr)
       let text = ''
-      // if(list !== undefined){
+      if(this.isLogin){
         if (list.length > 0) {
           list.map((item, index) => {
             if (index === list.length - 1) {
@@ -266,38 +269,98 @@ export default {
             }
           })
         }
-        if (list2 && list2.length > 0) {
-          list2.map((item, index) => {
-            if (item.configId === 196) {
-              // console.log(list2, '9999', item)
-              text = text + ' /  ' + item.configAttrIVal
+      }else {
+        console.log("config",config)
+        if (config.length > 0) {
+          config.map((item, index) => {
+            if (index === config.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
             }
           })
         }
-        return text
-      // }
+      }
+      if (list2 &&  list2.length > 0) {
+        list2.map((item, index) => {
+          if (item.configId === 196) {
+            // console.log(list2, '9999', item)
+            text = text + ' /  ' + item.configAttrIVal
+          }
+        })
+      }
+      
+      return text
     },
-    // 对戒属性数值转化成字符串
-    getDubleConfig(good_spec,goods_attr) {
-      // console.log("list",this.list)
+    getMadeConfig(list,list2,attr){
       let text = ''
-      if (good_spec.length > 0) {
-        good_spec.map((item, index) => {
-        // console.log("good_spec",item)
+      if(this.isLogin){
+        if (list2.length > 0) {
+          list2.map((item, index) => {
+            console.log("itemlist2",item)
+            if (index === list2.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }else {
+        if (list2.length > 0) {
+          list2.map((item, index) => {
+             console.log("itemlist2",item)
+            if (index === list2.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }
+      return text
+    },
+    // 属性数值转化成字符串
+    getDubleConfig(good_spec,goods_attr,ring,attr) {
+      // console.log('9999',ring.id)
+      let attrs = []
+     
+      ring.lang.goods_spec.forEach((item,a) => {
+        attrs.push(item)
+      })
+      attr.forEach((i,a) => {
+        // console.log('9999',ring.id,i)
+        if (ring.id == i.goodsId) {
+          // i.attr_name = i.configVal
+          i.attr_value = i.configAttrIVal
+          attrs.push(i)
+        }
+      })
+      let text = ''
+      if (attrs.length > 0) {
+        attrs.map((item, index) => {
 
-          if (index === good_spec.length - 1) {
+          if (index === attrs.length - 1) {
             text = text + item.attr_value
           } else {
             text = text + item.attr_value + ' /  '
           }
         }) 
       }
-
-      if (goods_attr) {
+     if (goods_attr) {
        for (let i in goods_attr) {
-          text = text + ' /  '+goods_attr[i] 
-        }
+      //  console.log("good_spec",goods_attr[i])
+        text = text + ' /  '+goods_attr[i] 
       }
+        // goods_attr.map((item, index) => {
+
+        //   if (index === goods_attr.length - 1) {
+        //     text = text + item
+        //   } else {
+        //     text = text + item + ' /  '
+        //   }
+        // }) 
+      }
+      //  console.log("good_spec",text)
       return text
     },
     back() {

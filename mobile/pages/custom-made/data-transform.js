@@ -319,7 +319,7 @@ export default {
             if(res.coupon.hasOwnProperty('discount')){
               price = res.coupon.discount.price
             }else{
-              price = res.details[i].retailMallPrice;
+              price = res.details[0].retailMallPrice;
             }
 
             this.boardArr = []
@@ -412,8 +412,6 @@ export default {
             //     }
             //   }
             // }
-            console.log(666,this.data)
-
             console.log(777,res)
             var price3 = 0;
             if(res.coupon.hasOwnProperty('discount')){
@@ -593,15 +591,15 @@ export default {
     // 立即购买
     async orderNow() {
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast(this.lang.firstLogin)
+        this.ifShowPop = true
         return
       }
-      console.log(`in!!!!!`)
+      // console.log(`in!!!!!`)
       const melo = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.melo)
       )
       if (melo.steps.length === 1000) {
-        console.log(1)
+        // console.log(1)
       } else if (melo.steps[0].goodsDetailsId && melo.steps[1].goodsDetailsId) {
         const timeSock = new Date().getTime()
         const time = this.getTimestampUuid
@@ -864,7 +862,7 @@ export default {
             config:
               item.goodsType == 19
                 ? item.ring
-                : item.simpleGoodsEntity.categoryId === 1
+                : item.simpleGoodsEntity.categoryId === 20
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             sku:
@@ -929,7 +927,7 @@ export default {
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
-            this.list[i].simpleGoodsEntity.categoryId === 1 &&
+            this.list[i].simpleGoodsEntity.categoryId === 20 &&
             this.list[i].createTime === this.list[i + 1].createTime
           ) {
             const tamp = this.list[i]

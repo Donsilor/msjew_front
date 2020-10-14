@@ -382,7 +382,7 @@ export default {
             config:
               item.goodsType == 19
                 ? item.ring
-                : item.simpleGoodsEntity.categoryId === 1
+                : item.simpleGoodsEntity.categoryId === 20
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             sku:
@@ -441,7 +441,7 @@ export default {
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
-            this.list[i].simpleGoodsEntity.categoryId === 1 &&
+            this.list[i].simpleGoodsEntity.categoryId === 20 &&
             this.list[i].createTime === this.list[i + 1].createTime
           ) {
             const tamp = this.list[i]
@@ -457,7 +457,7 @@ export default {
     // 立即购买
     orderNow(){
       if(!this.isLogin && this.$store.state.platform == 21){
-        this.$toast(this.lang.firstLogin)
+        this.ifShowPop = true
         return
       }
       if (!(this.canAddCart && this.inSale)) {

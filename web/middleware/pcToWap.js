@@ -85,6 +85,9 @@ export default function ({ req, res, redirect, store, route }) {
             } else if (headerHost == 'www-bdd.bddco.cn') {
                 host = 'https://wap-bdd.bddco.cn'
             }
+        } else if ((/msjew\.bddco/).test(headerHost)) {
+            //猫闪测试站环境
+            host = 'https://wap-msjew.bddco.cn'
         }
 
         const toWapUrl = path => {

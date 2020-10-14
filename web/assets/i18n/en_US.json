@@ -465,7 +465,7 @@
             "copyrightLeftCn": "Contact our jewelry consultant： Mon - Fri: 9AM - 6PM  /  0755 25169121  /  e-service@bddco.com ",
             "copyrightRight": "© 2020 BDD Co. All Rights Reserved.",
             "copyrightRight1": "Canton ICP No.",
-            "copyrightRight2": "-1©2018-2020 BDD Co. All Rights Reserved."
+            "copyrightRight2": "©2018-2020 BDD Co. All Rights Reserved."
         },
         "sendEmailCode": {
             "sendCode": "Verification",
@@ -932,6 +932,8 @@
             "useAnyway": "Available for the whole mall",
             "get": "（Recipient）",
             "mrAddress": "Default Address",
+            "setDefaultAddress": "Set Default Address",
+            "setSuccess": "The default address setting was successful!",
             "change": "Change",
             "newAddress": "Add Shipping Address",
             "editAddress": "Edit Eelivery Address",
@@ -1257,7 +1259,9 @@
         "chooseSize": "Get my finger size",
         "back": "Back",
         "color": "Metal",
+        "colour":"Color",
         "size": "size",
+        "shade":"Color",
         "USEdition": "US Units",
         "isUSSizeNow": "All rings on BDD Mall are in US units.",
         "needHelpForRingSize": "Contact customer service for the units of measurement, such as SI or Chinese units of measurement if you are from other regions.",

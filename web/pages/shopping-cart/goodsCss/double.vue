@@ -71,13 +71,19 @@
               </div>
             </div> -->
             <div
-              v-for="(s, v) in g.data[0].ring[0].lang.goods_spec"
+              v-for="(s, v) in goodsAttrs( g.data[0].ring[0])"
               :key="'info2=' + v"
               class="infos"
             >
               <div>{{ s.attr_name }}</div>
               <div>{{ s.attr_value }}</div>
             </div>
+
+            <!-- 色彩 -->
+            <!-- <div class="infos color" v-for="(i, k) in g.data[0].goodsAttr[0]" :key="'color='+k">
+              <div>{{ i.configVal }}</div>
+              <div>{{ i.configAttrIVal }}</div>
+            </div> -->
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
           <!-- <div class="good-price">
@@ -107,13 +113,19 @@
               </div>
             </div> -->
             <div
-              v-for="(i, d) in g.data[0].ring[1].lang.goods_spec"
+              v-for="(i, d) in goodsAttrs( g.data[0].ring[1])"
               :key="'info4=' + d"
               class="infos"
             >
               <div>{{ i.attr_name }}</div>
               <div>{{ i.attr_value }}</div>
             </div>
+
+            <!-- 色彩 -->
+            <!-- <div class="infos color" v-for="(i, k) in g.data[0].goodsAttr[1]" :key="'color='+k">
+              <div>{{ i.configVal }}</div>
+              <div>{{ i.configAttrIVal }}</div>
+            </div> -->
           </div>
           <div class="good-num">{{ g.data[0].goodsCount }}</div>
           <!-- <div class="good-price">
@@ -200,7 +212,8 @@ export default {
   data() {
     return{
       lang,
-      language: this.$store.state.language
+      language: this.$store.state.language,
+      attr:[]
     }
   },
   name: 'Double',
@@ -218,11 +231,31 @@ export default {
       }
     }
   },
+  computed:{
+   
+  },
   mounted(){
-    // console.log("double",this.g)
+    // console.log("double",this.goodsAttr)
     // console.log("g",this.g.data[0])
   },
   methods: {
+    // 色彩
+    goodsAttrs(item){
+      let Obj = []
+     
+      item.lang.goods_spec.forEach((item,a) => {
+        Obj.push(item)
+      })
+      this.g.data[0].goodsAttr.forEach((i,a) => {
+        if (item.id === i.goodsId) {
+          i.attr_name = i.configVal
+            i.attr_value = i.configAttrIVal
+          Obj.push(i)
+        }
+      })
+      // console.log("sssss",Obj)
+      return Obj 
+    },
     goDetail() {},
     addWish() {
       const data = {
@@ -402,10 +435,11 @@ export default {
           width: 78%;    
           padding-right: 20px;
           box-sizing: border-box;
+          font-size: 14px;
           .infos {
             width: 100%;
             display: flex;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             div:nth-child(1) {
               width: 50%;
               color: #666;

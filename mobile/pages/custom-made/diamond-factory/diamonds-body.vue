@@ -2,7 +2,8 @@
   <div class="diamond-component">
     <div v-if="this.goodInfo.totalStock > 0">
       <div class="swiper-box">
-        <div v-if="has360" class="btn360" @click="is360 = !is360">
+        <!-- @click="is360 = !is360" -->
+        <div v-if="has360" class="btn360" >
           <i
             :class="[
               `iconfont`,
@@ -20,11 +21,7 @@
         <div v-show="is360" class="box360">
           <iframe
             v-if="has360"
-            :src="
-              'https://spins0.arqspin.com/iframe.html?spin=' +
-                goodInfo.goods3ds +
-                '&is=0.16'
-            "
+            :src="'https://spins0.arqspin.com/iframe.html?spin=' + goodInfo.goods3ds +'&is=0.16'"
             width="100%"
             height="100%"
             scrolling="no"
@@ -51,75 +48,96 @@
           <div class="triangle" v-if="goodInfo.coupon.money">{{ lang.discounts1 }}</div>
         </div>
       </div>
-      <div class="title">
-        <span class="discount-icon" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
-        <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
 
-        <a :href="goodInfo.goodsGiaImage" target="_blank"
-          ><img
-            v-show="goodInfo.goodsGiaImage"
-            src="~/static/GIA.png"
-            class="gia-certificate"
-            align="right"
-        /></a>
-        {{ goodInfo.goodsName }}
-      </div>
+      <div class="border-bottom">
+        <div class="title">
+          <span class="discount-icon" v-if="goodInfo.coupon.discount">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+          <span class="discount-icon padding" v-if="goodInfo.coupon.money">￥</span>
 
-      <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
+          <a :href="goodInfo.goodsGiaImage" target="_blank"
+            ><img
+              v-show="goodInfo.goodsGiaImage"
+              src="~/static/GIA.png"
+              class="gia-certificate"
+              align="right"
+          /></a>
+          {{ goodInfo.goodsName }}
+        </div>
 
-      <div class="discount-price" v-else>
-        <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
-        <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
-      </div>
-      <div class="promise-box">
-        <!-- <div
-          v-for="(c, index) in goodInfo.goodsServicesJsons"
-          :key="index"
-          class="promise-info"
-        >
-          <div class="promise-img">
-            <img :src="$IMG_URL + c.img" alt="" />
-          </div>
-          <span>{{ c.name }}</span>
-        </div> -->
-      </div>
+        <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
 
-      <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
-        <div class="discount-l">
-          <div class="discoupon-d" v-if="goodInfo.coupon.discount">
-            <div class="discoupon-d-l">
-              <span class="text">{{ lang.discountsActive }}：</span>
-              <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+        <div class="discount-price" v-else>
+          <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
+          <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showP2) }}</div>
+        </div>
+        <div class="promise-box">
+          <div
+            v-for="(c, index) in goodInfo.goodsServicesJsons"
+            :key="index"
+            class="promise-info"
+          >
+            <div class="promise-img">
+              <img :src="$IMG_URL + c.img" alt="" />
             </div>
-
-            <div class="time">{{ lang.activityTime}}：{{activeTime}}</div>
-          </div>
-          
-          <div class="discoupon-d" v-if="goodInfo.coupon.money">
-            <div class="discoupon-d-l">
-              <span class="text">{{ lang.discountsActive }}：</span>
-              <span class="discount-icon">￥</span>
-            </div>
-          
-            <div class="get" @click="getCoupon">{{ lang.getCoupon }} &gt;</div>
+            <span>{{ c.name }}</span>
           </div>
         </div>
-      </div>
 
-      <!--首次进入-->
-      <div
-        v-if="
-          parseInt($route.query.step) === 1 &&
-            !$route.query.isBack &&
-            inSale &&
-            canAddCart
-        "
-        class="custom-made-word"
-      >
-        {{ lang.cmw }}
-        <div class="triangle" />
-      </div>
-      <div class="submit-btn">
+        <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
+          <div class="discount-l">
+            <div class="discoupon-d" v-if="goodInfo.coupon.discount">
+              <div class="discoupon-d-l">
+                <span class="text">{{ lang.discountsActive }}：</span>
+                <span class="discount-icon">{{discountConversion(this.goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+              </div>
+
+              <div class="time">{{ lang.activityTime}}：{{activeTime}}</div>
+            </div>
+            
+            <div class="discoupon-d" v-if="goodInfo.coupon.money">
+              <div class="discoupon-d-l">
+                <span class="text">{{ lang.discountsActive }}：</span>
+                <span class="discount-icon">￥</span>
+              </div>
+            
+              <div class="get" @click="getCoupon">{{ lang.getCoupon }} &gt;</div>
+            </div>
+          </div>
+        </div>
+        <!-- 选择颜色 -->
+        <div class="select-line" v-if="goodInfo.color.length > 0">
+          <span>
+            <span>{{ lang.chooseColour }}</span>
+          </span>
+          <span @click="showSwiperTapColor">
+            {{ chooseColor }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <div class="bd-b" v-if="goodInfo.color.length > 0"></div>
+        <!-- 选择净度 -->
+        <div class="select-line" v-if="goodInfo.clarity.length > 0">
+          <span>
+            <span>{{ lang.chooseClarity }}</span>
+          </span>
+          <span @click="showSwiperTapClarity">
+            {{ chooseClarity }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <div class="bd-b" v-if="goodInfo.carats.length > 0"></div>
+        <!-- 选择主石大小 -->
+        <div class="select-line" v-if="goodInfo.carats.length > 0">
+          <span>
+            <span>{{ lang.chooseCarat }}</span>
+          </span>
+          <span @click="showSwiperTapCarats">
+            {{ chooseCarat }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+
+        <!--首次进入-->
         <div
           v-if="
             parseInt($route.query.step) === 1 &&
@@ -127,76 +145,102 @@
               inSale &&
               canAddCart
           "
-          class="btn-common btn-pink"
-          @click="emitStep(`ring`)"
+          class="custom-made-word"
         >
-          {{ lang.addToRingTuo }}
+          {{ lang.cmw }}
+          <div class="triangle" />
         </div>
         <div
+            v-if="
+              parseInt($route.query.step) === 1 &&
+                !$route.query.isBack &&
+                inSale &&
+                canAddCart
+            "
+            class="btn-common btn-white"
+            @click="emitStep(`ring`)"
+          >
+            {{ lang.addToRingTuo }}
+        </div>
+        <!-- <div class="submit-btn">
+          <div
+            v-if="
+              parseInt($route.query.step) === 1 &&
+                !$route.query.isBack &&
+                inSale &&
+                canAddCart
+            "
+            class="btn-common btn-pink"
+            @click="emitStep(`ring`)"
+          >
+            {{ lang.addToRingTuo }}
+          </div>
+          <div
+            v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
+            :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+            @click="addCart"
+          >
+            {{
+              inSale
+                ? canAddCart
+                  ? lang.addCart
+                  : lang.noTotalStock
+                : lang.notInSale
+            }}
+          </div>
+        </div> -->
+        <!--    <div-->
+        <!--      v-if="-->
+        <!--        parseInt($route.query.step) === 1 &&-->
+        <!--          !$route.query.isBack &&-->
+        <!--          inSale &&-->
+        <!--          canAddCart-->
+        <!--      "-->
+        <!--      class="btn-common btn-pink"-->
+        <!--      @click="addWay = true"-->
+        <!--    >-->
+        <!--      {{ lang.addTo }} >-->
+        <!--    </div>-->
+        <!-- <div
           v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
-          :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
-          @click="addCart"
+          :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+          @click="orderNow"
         >
           {{
             inSale
               ? canAddCart
-                ? lang.addCart
+                ? lang.buyNow
                 : lang.noTotalStock
               : lang.notInSale
           }}
+        </div> -->
+        <div
+          v-if="parseInt($route.query.step) === 2 && !$route.query.isBack"
+          :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+          @click="emitStep(2)"
+        >
+          <span>{{
+            inSale
+              ? canAddCart
+                ? lang.sureCheck
+                : lang.noTotalStock
+              : lang.notInSale
+          }}</span>
         </div>
-      </div>
-      <!--    <div-->
-      <!--      v-if="-->
-      <!--        parseInt($route.query.step) === 1 &&-->
-      <!--          !$route.query.isBack &&-->
-      <!--          inSale &&-->
-      <!--          canAddCart-->
-      <!--      "-->
-      <!--      class="btn-common btn-pink"-->
-      <!--      @click="addWay = true"-->
-      <!--    >-->
-      <!--      {{ lang.addTo }} >-->
-      <!--    </div>-->
-      <div
-        v-if="parseInt($route.query.step) === 1 && !$route.query.isBack"
-        :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
-        @click="orderNow"
-      >
-        {{
-          inSale
-            ? canAddCart
-              ? lang.buyNow
-              : lang.noTotalStock
-            : lang.notInSale
-        }}
-      </div>
-      <div
-        v-if="parseInt($route.query.step) === 2 && !$route.query.isBack"
-        :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
-        @click="emitStep(2)"
-      >
-        <span>{{
-          inSale
-            ? canAddCart
-              ? lang.sureCheck
-              : lang.noTotalStock
-            : lang.notInSale
-        }}</span>
-      </div>
-      <!--步骤返回-->
-      <div
-        v-if="$route.query.isBack"
-        :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
-        @click="emitStep(`hold`)"
-      >
-        <span>{{
-          inSale
-            ? canAddCart
-              ? lang.sureCheck
-              : lang.noTotalStock
-            : lang.notInSale
-        }}</span>
+        <!--步骤返回-->
+        <div
+          v-if="$route.query.isBack"
+          :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+          @click="emitStep(`hold`)"
+        >
+          <span>{{
+            inSale
+              ? canAddCart
+                ? lang.sureCheck
+                : lang.noTotalStock
+              : lang.notInSale
+          }}</span>
+        </div>
       </div>
       <!-- <div class="wish-and-share">
         <i
@@ -229,10 +273,12 @@
           {{ lang.goods }}ID：{{ goodInfo.goodsCode }}
         </div>
         <div class="sku-table">
-          <div v-for="(b, index) in goodInfo.specs" :key="index">
+          <div v-if="index < detailNum" v-for="(b, index) in goodInfo.specs" :key="index">
             <span>{{ b.configName }}</span>
             <span>{{ b.configAttrVal }}</span>
           </div>
+
+          <div v-if="specsLength" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
         </div>
       </div>
       <div class="details">
@@ -430,8 +476,42 @@
           </div>
         </div>
       </div>
+       <swiper-tap
+        ref="colorsuitability"
+        :title="lang.color"
+        :list="goodInfo.color"
+        :choose-line="colorLine"
+        @clear="getSortByColor"
+      ></swiper-tap>
+
+       <swiper-tap
+        ref="claritysuitability"
+        :title="lang.clarity"
+        :list="goodInfo.clarity"
+        :choose-line="clarityLine"
+        @clear="getSortByClarity"
+      ></swiper-tap>
+
+      <swiper-tap
+        ref="caratsSuitability"
+        :title="lang.inlay"
+        :list="goodInfo.carats"
+        :choose-line="caratLine"
+        @clear="getCarats"
+      ></swiper-tap>
+
+     
+      <!-- <choose-eject
+        ref="quality-eject-choose-pro"
+        :title="lang.fineness"
+        :type="'quality'"
+        :required="true"
+        :options="conditions[0].options"
+        @clear="clearQuality"
+      ></choose-eject> -->
       <!-- 获取优惠券 -->
       <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
+      <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
     </div>
     <!-- <div v-else >
       <soleOut></soleOut>
@@ -466,6 +546,9 @@ export default {
     return {
       ifShowCoupon: false,
       language: this.$store.state.language,
+      ifShowMore: false,
+      detailNum: 4,
+      ifShowPop: false
     }
   },
   mixins: [Mx],
@@ -483,10 +566,18 @@ export default {
       if(this.goodInfo.coupon.hasOwnProperty('discount')){
         return this.changeTime(this.goodInfo.coupon.discount.end_time) 
       }
+    },
+    specsLength() {
+      if(this.goodInfo && this.goodInfo.specs && this.goodInfo.specs.length > 4){
+        return true
+      }else{
+        return false
+      }
     }
   },
   mounted() {
-    // this.language = this.getCookie('language')
+    console.log("莫桑石",this.goodInfo)
+    // this.language = this.getCookie('languaage')
   },
   methods:{
     closeCo() {
@@ -495,10 +586,18 @@ export default {
     // 获取优惠券
     getCoupon() {
       if(!this.$store.getters.hadLogin) {
-        this.$toast.show(this.lang.needLogin)
+        this.ifShowPop = true
+        // this.$toast.show(this.lang.needLogin)
       }else{
         this.ifShowCoupon = true
       }
+    },
+    showMore(){
+      this.ifShowMore = !this.ifShowMore
+      this.detailNum = this.detailNum == 4 ? 100 : 4
+    },
+    closePop() {
+      this.ifShowPop = false
     }
   }
 }

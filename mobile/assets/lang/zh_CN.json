@@ -131,8 +131,7 @@
         "toast1": "请选择要结账商品",
         "toast2": "移除成功",
         "discounts1": "优惠券",
-        "discounts2": "折",
-        "firstLogin":"请先登录或注册！"
+        "discounts2": "折"
       },
       "invoice":{
         "personal":"个人",
@@ -652,8 +651,7 @@
       "addCartFail": "加入购物车是失败",
       "discounts1": "优惠券",
       "discounts2": "折",
-      "buyNow":"立即购买",
-      "firstLogin":"请先登录或注册！"
+      "buyNow":"立即购买"
     },
     "diamond": {},
     "engagement": {
@@ -731,7 +729,8 @@
         "codeError": "请输入正确的验证码",
         "login-error": "用户或密码错误！",
         "login-success": "登录成功",
-        "area-code": "中国"
+        "area-code": "中国",
+        "codeTips": "请输入正确验证码"
       },
       "index": {
         "login": "会员登入",
@@ -940,7 +939,7 @@
         "handicraftExpert": "首饰专家",
         "copyrightRight": "© 2020 BDD Co. All Rights Reserved.",
         "copyrightRight1": "粤ICP备",
-        "copyrightRight2": "号-1/Copyright©2018-2020  BDD Co.官网   All Rights Reserved."
+        "copyrightRight2": "号/Copyright©2018-2020  BDD Co.官网   All Rights Reserved."
       },
       "leftMenu": {
         "search": "搜索",
@@ -1125,7 +1124,11 @@
     "detailCommons": {
       "include": "此物品包含",
       "chooseColor": "选择成色",
+      "chooseColour":"选择颜色",
+      "chooseClarity":"选择净度",
       "chooseSize": "选择尺寸",
+      "chooseCarat": "选择克拉",
+      "chooseShade": "选择主石色彩",
       "us-version": "美版",
       "cmw": "只有您知道什么是最能表达您的爱。从我们的系列中选择一些东西，或者钻石及款式，来创造您独特的作品。",
       "addCart": "加入购物车",
@@ -1166,6 +1169,7 @@
       "caratDiamond": "克拉钻石",
       "remember": "请记住，随着克拉重量的增长，钻石价格将呈指数增长因为克拉越大，钻石越罕见。",
       "color": "颜色",
+      "shade":"主石色彩",
       "cut": "切割",
       "clarity": "净度",
       "tenTimes": "10倍放大",
@@ -1184,8 +1188,7 @@
       "oddPrice": "原  价",
       "newPrice": "折后价",
       "needLogin": "请先登录，才能领取优惠券",
-      "buyNow":"立即购买",
-      "firstLogin":"请先登录或注册！"
+      "buyNow":"立即购买"
     },
     "listCommons": {
       "sliders": [
@@ -1229,7 +1232,8 @@
       "discounts1": "优惠券",
       "discounts2": "折",
       "oddPrice": "原  价",
-      "newPrice": "折后价"
+      "newPrice": "折后价",
+      "load":"数据加载中"
     },
     "help-pages": {
       "brandStory": {

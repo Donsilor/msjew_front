@@ -32,6 +32,9 @@ export default {
     simpleDetail() {
       return null
     },
+    goodsAttrs(){
+      return null
+    },
     // 是否在销售
     inSale() {
       return this.info.goodsStatus === 2
@@ -62,6 +65,17 @@ export default {
         path: '/'
       }
     },
+    Confirm(){
+      const _this = this
+      if (!_this.canAddCart) {
+        _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
+      }
+      if (!_this.simpleDetail) {
+        _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
+      }
+    },
     // 加入购物车
     addCart() {
       const _this = this
@@ -72,7 +86,12 @@ export default {
       if (!_this.simpleDetail) {
         _this.$errorMessage(_this.$t(`common.pleaseSelect`))
         return
+      } else if(!_this.simpleDetail.id){
+        _this.$errorMessage(_this.$t(`common.pleaseSelect`))
+        return
       }
+      
+      let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null && item.config_attr_id !== null)   //筛选色彩中为空的对象
       const goodInfo = [
         {
           goods_num: 1,
@@ -82,7 +101,8 @@ export default {
           group_type: null,
           serviceId: 0,
           serviceVal: 'string',
-          goods_type:_this.simpleDetail.categoryId
+          goods_type:_this.simpleDetail.categoryId,
+          goods_attr: colorArr   //色彩
         }
       ]
       // console.log(goodInfo)
@@ -126,7 +146,7 @@ export default {
       } 
 
       const time = this.getTimestampUuid
-
+      let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null&&item.config_attr_id !== null)  //筛选色彩中为空的对象
       let goodInfo = [
         {
           goods_num: 1,
@@ -136,7 +156,8 @@ export default {
           group_type: null,
           serviceId: 0,
           serviceVal: 'string',
-          goods_type:_this.simpleDetail.categoryId
+          goods_type:_this.simpleDetail.categoryId,
+          goods_attr: colorArr  // 色彩
         }
       ]
 
@@ -172,6 +193,7 @@ export default {
         })
       } else {
         const CART = 'cart'
+        let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null&&item.config_attr_id !== null)  //筛选色彩中为空的对象
         let goodInfo = [
           {
             goods_num: 1,
@@ -181,7 +203,8 @@ export default {
             group_type: null,
             serviceId: 0,
             serviceVal: 'string',
-            goods_type:_this.simpleDetail.categoryId
+            goods_type:_this.simpleDetail.categoryId,
+            goods_attr: colorArr  //色彩
           }
         ]
         const addInfo = {

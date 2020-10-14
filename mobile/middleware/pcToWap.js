@@ -65,7 +65,7 @@ export default function ({ req, res, redirect, store, route }) {
         //头部host
         let headerHost = req.headers['host']
         //生产环境
-        let host = 'https://www.bddco.com';
+        let host = 'https://wap.bddco.com';
         if ((/^(wap-cn|wap-us|wap-tw)\.bddco\.com/).test(headerHost)) {
             //生产环境
             host = 'https://' + headerHost.replace('wap-', '');
@@ -83,6 +83,9 @@ export default function ({ req, res, redirect, store, route }) {
             } else if (headerHost == 'wap-bdd.bddco.cn') {
                 host = 'https://www-bdd.bddco.cn'
             }
+        } else if ((/msjew\.bddco/).test(headerHost)) {
+            //猫闪测试站环境
+            host = 'https://www-msjew.bddco.cn'
         }
 
         const toWapUrl = path => {

@@ -36,62 +36,31 @@
       </div>
       <div class="step-line" />
     </div>
-
-    <!--登陆的中间信息-->
-    <div v-if="$store.getters.hadLogin" class="success-info-in">
-      <div v-show="stepPaySuccess">
-        <div class="diamond-img">
-          <img src="../../../static/order/diamond.png" alt="" />
-          <div><i class="iconfont icongou" /></div>
-        </div>
-        <div class="order-email">
-          <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span
-          ><span>{{ data.afterMail }}</span
-          > -->
-          <!-- <i class="iconfont iconzuoshangjiantou" /> -->
-        </div>
-        <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
-        <div class="order-num">
-          {{ $t(`${lang}.orderCode`) }}
-            <nuxt-link :to="`/account/order-details?orderId=${this.oid}`">
-              <span class="underline" >{{ data.orderNo }}</span>
-            </nuxt-link>
-        </div>
-        <nuxt-link :to="{name: '/order-details'}"></nuxt-link>
-        <!-- <div class="order-num">
-          <nuxt-link :to="{name: '/account/orders'}">{{ $t(`${lang}.comeBack`) }}</nuxt-link>
-        </div> -->
-      </div>
-      <div v-show="stepPayVerify">
-        <p class="handing">{{ $t(`${lang}.handing`) }}</p>
-      </div>
-      <div v-show="stepPayPending">
-        <p class="pending1">{{ $t(`${lang}.PayPending1`) }}</p>
-        <p class="pending2">{{ $t(`${lang}.PayPending2`) }}</p>
-      </div>
-    </div>
-
-    <!--未登陆的中间信息-->
-    <div v-else class="success-info-out">
-      <div class="left-side">
+    <no-ssr>
+      <!--登陆的中间信息-->
+      <div v-if="$store.getters.hadLogin" class="success-info-in">
         <div v-show="stepPaySuccess">
           <div class="diamond-img">
             <img src="../../../static/order/diamond.png" alt="" />
             <div><i class="iconfont icongou" /></div>
           </div>
           <div class="order-email">
-            <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span>
-            <span>{{ data.afterMail }}</span> -->
+            <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span
+            ><span>{{ data.afterMail }}</span
+            > -->
             <!-- <i class="iconfont iconzuoshangjiantou" /> -->
           </div>
           <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
           <div class="order-num">
             {{ $t(`${lang}.orderCode`) }}
-              <!-- <nuxt-link :to="`/account/order-details?orderId=${this.oid}`"> -->
-                <span>{{ data2.orderNo }}</span>
-                <i class="icon iconfont iconcopy copy-btn" :data-clipboard-text="data2.orderNo" @click="copy"></i>
-              <!-- </nuxt-link> -->
+              <nuxt-link :to="`/account/order-details?orderId=${this.oid}`">
+                <span class="underline" >{{ data.orderNo }}</span>
+              </nuxt-link>
           </div>
+          <nuxt-link :to="{name: '/order-details'}"></nuxt-link>
+          <!-- <div class="order-num">
+            <nuxt-link :to="{name: '/account/orders'}">{{ $t(`${lang}.comeBack`) }}</nuxt-link>
+          </div> -->
         </div>
         <div v-show="stepPayVerify">
           <p class="handing">{{ $t(`${lang}.handing`) }}</p>
@@ -101,132 +70,164 @@
           <p class="pending2">{{ $t(`${lang}.PayPending2`) }}</p>
         </div>
       </div>
-      <!-- <div class="right-side">
-        <div class="new-address-title">
-          <div class="na-line" />
-          <div class="na-title">{{ $t(`${lang}.registered`) }}</div>
+
+      <!--未登陆的中间信息-->
+      <div v-else class="success-info-out">
+        <div class="left-side">
+          <div v-show="stepPaySuccess">
+            <div class="diamond-img">
+              <img src="../../../static/order/diamond.png" alt="" />
+              <div><i class="iconfont icongou" /></div>
+            </div>
+            <div class="order-email">
+              <!-- <span>{{ $t(`${lang}.weWillSendTo`) }}</span>
+              <span>{{ data.afterMail }}</span> -->
+              <!-- <i class="iconfont iconzuoshangjiantou" /> -->
+            </div>
+            <div class="order-send">{{ $t(`${lang}.daysGone`) }}</div>
+            <div class="order-num">
+            {{ $t(`${lang}.orderCode`) }}
+              <!-- <nuxt-link :to="`/account/order-details?orderId=${this.oid}`"> -->
+                <span>{{ data2.orderNo }}</span>
+                <i class="icon iconfont iconcopy copy-btn" :data-clipboard-text="data2.orderNo" @click="copy"></i>
+              <!-- </nuxt-link> -->
+          </div>
+          </div>
+          <div v-show="stepPayVerify">
+            <p class="handing">{{ $t(`${lang}.handing`) }}</p>
+          </div>
+          <div v-show="stepPayPending">
+            <p class="pending1">{{ $t(`${lang}.PayPending1`) }}</p>
+            <p class="pending2">{{ $t(`${lang}.PayPending2`) }}</p>
+          </div>
         </div>
-        <div class="login-word">
-          {{ $t(`${lang}.balabalabalaAgain`) }}
-        </div>
-        <div class="login-btn" @click="toLogin">
-          {{ $t(`${lang}.registered`) }}
-        </div>
-      </div> -->
-    </div>
-    <!-- <div class="middle-bar">
-      <i class="iconfont icongantanhao" /><span>{{
-        $t(`${lang}.balabalaAgain`)
-      }}</span>
-    </div> -->
-    <div class="order-info">
-      <!-- <div class="left-info">
-        <div class="address-info">
+        <!-- <div class="right-side">
           <div class="new-address-title">
             <div class="na-line" />
-            <div class="na-title">{{ $t(`${lang}.address`) }}</div>
+            <div class="na-title">{{ $t(`${lang}.registered`) }}</div>
           </div>
-          <div class="user-info">
-            <div class="user-name">
-              {{ data.address.lastName }}{{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
+          <div class="login-word">
+            {{ $t(`${lang}.balabalabalaAgain`) }}
+          </div>
+          <div class="login-btn" @click="toLogin">
+            {{ $t(`${lang}.registered`) }}
+          </div>
+        </div> -->
+      </div>
+      <!-- <div class="middle-bar">
+        <i class="iconfont icongantanhao" /><span>{{
+          $t(`${lang}.balabalaAgain`)
+        }}</span>
+      </div> -->
+      <div class="order-info">
+        <!-- <div class="left-info">
+          <div class="address-info">
+            <div class="new-address-title">
+              <div class="na-line" />
+              <div class="na-title">{{ $t(`${lang}.address`) }}</div>
             </div>
-            <div class="user-phone"><span>{{ data.orderAddress.userTelCode }}</span>{{ data.orderAddress.userTel }}</div>
+            <div class="user-info">
+              <div class="user-name">
+                {{ data.address.lastName }}{{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
+              </div>
+              <div class="user-phone"><span>{{ data.orderAddress.userTelCode }}</span>{{ data.orderAddress.userTel }}</div>
+            </div>
+            <div class="user-address">
+              {{ data.address.countryName }}-{{
+              data.address.provinceName
+              }}{{data.address.cityName }}{{ data.address.address }}
+            </div>
+            <div class="user-phone">
+              <div>{{data.address.userTelCode }}</div>
+              <div>{{ data.address.userTel }}</div>
+            </div>
+            <div class="post-num">{{ data.address.zipCode }}</div>
+            <div class="email-address">{{ data.address.userMail }}</div>
+            <div class="country-code">CHN</div>
+            <div class="line">
+              <img
+                src="../../../static/personal/account/address-bar.png"
+                alt=""
+              />
+            </div>
           </div>
-          <div class="user-address">
-            {{ data.address.countryName }}-{{
-             data.address.provinceName
-            }}{{data.address.cityName }}{{ data.address.address }}
+          <div class="send-info">
+            <div class="new-address-title">
+              <div class="na-line" />
+              <div class="na-title">{{ $t(`${lang}.faFoInfo`) }}</div>
+            </div>
+            <div class="send-infos">
+              <div>{{ $t(`${lang}.newinfo1`) }}</div>
+              <div>{{ $t(`${lang}.newinfo2`) }} {{ data.afterMail }}</div>
+              <dl>
+                <dt>{{ $t(`${lang}.newinfo3`) }}</dt>
+                <dd>{{ $t(`${lang}.newinfo4`) }}</dd>
+                <dd>{{ $t(`${lang}.newinfo5`) }}</dd>
+                <dd>{{ $t(`${lang}.newinfo6`) }}</dd>
+              </dl>
+            </div>
           </div>
-          <div class="user-phone">
-            <div>{{data.address.userTelCode }}</div>
-            <div>{{ data.address.userTel }}</div>
-          </div>
-          <div class="post-num">{{ data.address.zipCode }}</div>
-          <div class="email-address">{{ data.address.userMail }}</div>
-          <div class="country-code">CHN</div>
-           <div class="line">
-            <img
-              src="../../../static/personal/account/address-bar.png"
-              alt=""
-            />
-          </div>
-        </div>
-        <div class="send-info">
+        </div> -->
+        <!-- <div class="right-info">
           <div class="new-address-title">
             <div class="na-line" />
-            <div class="na-title">{{ $t(`${lang}.faFoInfo`) }}</div>
+            <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
           </div>
-          <div class="send-infos">
-            <div>{{ $t(`${lang}.newinfo1`) }}</div>
-            <div>{{ $t(`${lang}.newinfo2`) }} {{ data.afterMail }}</div>
-            <dl>
-              <dt>{{ $t(`${lang}.newinfo3`) }}</dt>
-              <dd>{{ $t(`${lang}.newinfo4`) }}</dd>
-              <dd>{{ $t(`${lang}.newinfo5`) }}</dd>
-              <dd>{{ $t(`${lang}.newinfo6`) }}</dd>
-            </dl>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="right-info">
-        <div class="new-address-title">
-          <div class="na-line" />
-          <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
-        </div>
-        <div class="order-infos">
-          <div class="info-line">
-            <div class="label">{{ $t(`${lang}.orderNum`) }}</div>
-            <div class="clearboth">
-              {{ data.orderNo }}
+          <div class="order-infos">
+            <div class="info-line">
+              <div class="label">{{ $t(`${lang}.orderNum`) }}</div>
+              <div class="clearboth">
+                {{ data.orderNo }}
+              </div>
+            </div>
+            <div class="info-line">
+              <div class="label">{{ $t(`${lang}.goodsNum`) }}</div>
+              <div class="ff">{{ formatMoney(data.productCount, 0) }}</div>
+            </div>
+            <div class="info-line">
+              <div class="label">{{ $t(`${lang}.goodsPrice`) }}</div>
+              <div class="ff">
+                {{ data.coinCode }} {{ formatMoney(data.productAmount) }}
+              </div>
+            </div>
+            <div class="info-line">
+              <div class="label">{{ $t(`${lang}.coupon`) }}</div>
+              <div class="ff color-pink">
+                -{{ data.coinCode }} {{ formatMoney(data.preferFee) }}
+              </div>
+            </div>
+            <div class="info-line">
+              <div class="label">{{ $t(`${lang}.freight`) }}</div>
+              <div class="ff">
+                +{{ data.coinCode }} {{ formatMoney(data.logisticsFee) }}
+              </div>
+            </div>
+            <div class="info-line">
+              <div class="label">{{ $t(`${lang}.tex`) }}</div>
+              <div class="ff">
+                +{{ data.coinCode }} {{ formatMoney(data.taxFee) }}
+              </div>
+            </div>
+            <div class="info-line">
+              <div class="label">{{ $t(`${lang}.insurance`) }}</div>
+              <div class="ff">
+                +{{ data.coinCode }} {{ formatMoney(data.safeFee) }}
+              </div>
+            </div>
+            <div v-if="data.transPreferFee" class="info-line">
+              <div class="label">{{ $t(`${lang}.transPreferFee`) }}</div>
+              <div class="ff color-pink">
+                -{{ data.coinCode }} {{ formatMoney(data.transPreferFee) }}
+              </div>
+            </div>
+            <div class="big-info">
+              <div>{{ $t(`${lang}.orderTotal`) }}</div>
+              <div>{{ data.coinCode }} {{ formatMoney(data.orderAmount) }}</div>
             </div>
           </div>
-          <div class="info-line">
-            <div class="label">{{ $t(`${lang}.goodsNum`) }}</div>
-            <div class="ff">{{ formatMoney(data.productCount, 0) }}</div>
-          </div>
-          <div class="info-line">
-            <div class="label">{{ $t(`${lang}.goodsPrice`) }}</div>
-            <div class="ff">
-              {{ data.coinCode }} {{ formatMoney(data.productAmount) }}
-            </div>
-          </div>
-          <div class="info-line">
-            <div class="label">{{ $t(`${lang}.coupon`) }}</div>
-            <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatMoney(data.preferFee) }}
-            </div>
-          </div>
-          <div class="info-line">
-            <div class="label">{{ $t(`${lang}.freight`) }}</div>
-            <div class="ff">
-              +{{ data.coinCode }} {{ formatMoney(data.logisticsFee) }}
-            </div>
-          </div>
-           <div class="info-line">
-            <div class="label">{{ $t(`${lang}.tex`) }}</div>
-            <div class="ff">
-              +{{ data.coinCode }} {{ formatMoney(data.taxFee) }}
-            </div>
-          </div>
-          <div class="info-line">
-            <div class="label">{{ $t(`${lang}.insurance`) }}</div>
-            <div class="ff">
-              +{{ data.coinCode }} {{ formatMoney(data.safeFee) }}
-            </div>
-          </div>
-          <div v-if="data.transPreferFee" class="info-line">
-            <div class="label">{{ $t(`${lang}.transPreferFee`) }}</div>
-            <div class="ff color-pink">
-              -{{ data.coinCode }} {{ formatMoney(data.transPreferFee) }}
-            </div>
-          </div>
-          <div class="big-info">
-            <div>{{ $t(`${lang}.orderTotal`) }}</div>
-            <div>{{ data.coinCode }} {{ formatMoney(data.orderAmount) }}</div>
-          </div>
-        </div>
-      </div> -->
-    </div>
+        </div> -->
+      </div>
+    </no-ssr>
   </div>
 </template>
 

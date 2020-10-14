@@ -113,8 +113,16 @@
               }}
             </div>
           </div>
-          <div class="good-description">
-            <span
+          <div class="good-information">
+            <div
+              v-for="(i, k) in g.data[1].simpleGoodsEntity.detailConfig"
+              :key="k"
+              class="infos"
+            >
+              <div>{{ i.configVal }}</div>
+              <div>{{ i.configAttrIVal }}</div>
+            </div>
+            <!-- <span
               v-for="(i, k) in g.data[1].simpleGoodsEntity.baseConfig"
               :key="k"
             >
@@ -126,7 +134,7 @@
                 v-if="k === g.data[1].simpleGoodsEntity.baseConfig.length - 1"
                 >{{ i.configAttrIVal }}</span
               >
-            </span>
+            </span> -->
           </div>
           <div class="good-num">{{ g.data[1].goodsCount }}</div>
 

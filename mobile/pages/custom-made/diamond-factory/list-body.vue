@@ -95,8 +95,14 @@
           </div>
         </div>
       </div>
+      <div class="mask" v-show="load">
+        <div class="box" >
+          <img src="../../../static/icon/load.gif" alt="">
+          <p>{{ lang.load }}</p>
+        </div> 
+      </div>
       <bdd-empty
-        v-if="noListData"
+        v-if="noListData && ifLoadFinish"
         :type="'list'"
         @searchAgain="research"
       ></bdd-empty>
@@ -178,7 +184,8 @@ export default {
   mixins: [Mixin, List, GoodListProps],
   data() {
     return {
-      language: this.$store.state.language
+      language: this.$store.state.language,
+      load:false
     }
   },
   mounted() {
@@ -188,6 +195,39 @@ export default {
 </script>
 
 <style scoped lang="less">
+.mask {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+   z-index: 99999;
+}
+.box{
+  position: fixed;
+  bottom: 28%;
+  left: 50%; 
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+  box-sizing: border-box;
+  z-index: 99999;
+  width: 120px;
+  height: 120px;
+  border-radius: 6px;
+  background: rgba(0,0,0,.7);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  color: #fff;
+  img{
+    width: 40px;
+    height:40px;
+  }
+  p{
+    color:#fff;
+    margin-top: 15px;
+  }
+}
 .diamond-part {
   position: relative;
   .top-part {

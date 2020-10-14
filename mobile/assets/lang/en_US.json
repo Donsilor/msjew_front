@@ -130,8 +130,7 @@
       "toast1": "Choose products before you pay",
       "toast2": "Deleted",
       "discounts1": "Coupon",
-      "discounts2": "off",
-      "firstLogin": "Please login or register!"
+      "discounts2": "off"
     },
     "invoice": {
       "personal":"personal",
@@ -652,8 +651,7 @@
     "addCartFail": "Failed to add to cart",
     "discounts1": "Coupon",
     "discounts2": "off",
-    "buyNow":"Order Now",
-    "firstLogin": "Please login or register!"
+    "buyNow":"Order Now"
   },
   "diamond": {},
   "engagement": {
@@ -730,7 +728,8 @@
       "login-error": "Wrong account or password",
       "login-success": "Logged in",
       "input-code": "Please enter a verification code",
-      "area-code": "China"
+      "area-code": "China",
+      "codeTips": "Enter correct verification code"
     },
     "index": {
       "login": "Account Login",
@@ -937,7 +936,7 @@
       "handicraftExpert": "Jewelry expert",
       "copyrightRight": "© 2020 BDD Co. All Rights Reserved.",
       "copyrightRight1": "Canton ICP No.",
-      "copyrightRight2": "-1©2018-2020 BDD Co. All Rights Reserved."
+      "copyrightRight2": "©2018-2020 BDD Co. All Rights Reserved."
     },
     "leftMenu": {
       "search": "Search",
@@ -1120,7 +1119,11 @@
   "detailCommons": {
     "include": "This Product Includes",
     "chooseColor": "Metal",
+    "chooseColour":"Color",
+    "chooseClarity":"Clarity",
     "chooseSize": "Size",
+    "chooseCarat": "Carat",
+    "chooseShade": "Color",
     "us-version": "US",
     "cmw": "You know the most suitable Product to express your love. Select from our series, like diamonds and styles to create your unique work.",
     "addCart": "ADD TO CART",
@@ -1161,6 +1164,7 @@
     "caratDiamond": "Carat Diamond",
     "remember": "Remember that diamond price increases exponentially with increase in carat as heavier diamonds are rarer",
     "color": "COLOR",
+    "shade":"Color",
     "cut": "CUT",
     "clarity": "CLARITY",
     "tenTimes": "10X magnification",
@@ -1179,8 +1183,7 @@
     "oddPrice": "Original price",
     "newPrice": "Discount price",
     "needLogin": "Please login before redeem the coupon.",
-    "buyNow":"Order Now",
-    "firstLogin": "Please login or register!"
+    "buyNow":"Order Now"
   },
   "listCommons": {
     "sliders": [
@@ -1223,7 +1226,8 @@
     "discounts1": "Coupon",
     "discounts2": "off",
     "oddPrice": "Original price",
-    "newPrice": "Discount price"
+    "newPrice": "Discount price",
+    "load":"loading"
   },
   "help-pages": {
     "brandStory": {

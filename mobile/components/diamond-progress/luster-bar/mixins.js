@@ -191,10 +191,10 @@ export default {
       }
     },
     backOption() {
-      this.$nuxt.$loading.start()
-      setTimeout(() => {
-        this.$nuxt.$loading.finish()
-      }, 1000);
+      // this.$nuxt.$loading.start()
+      // setTimeout(() => {
+      //   this.$nuxt.$loading.finish()
+      // }, 1000);
       const jsonBack = {
         name: `luster-bar`,
         content: []

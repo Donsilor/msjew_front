@@ -83,8 +83,7 @@
       }
     },
     mounted() {
-      console.log("sssss",this.couponList)
-      this.language = this.getCookie('language')
+      this.language = this.$store.state.language
       this.coin = this.$store.state.coin
 
       var i=0;
@@ -116,16 +115,6 @@
     methods: {
       more(){
         this.look = false
-      },
-      // 获取cookie
-      getCookie(cname) {
-        const name = cname + '='
-        const ca = document.cookie.split(';')
-        for (let i = 0; i < ca.length; i++) {
-          const c = ca[i].trim()
-          if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
-        }
-        return ''
       },
       // 关闭弹窗
       closeCoupon(k) {

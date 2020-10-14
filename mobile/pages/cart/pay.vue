@@ -145,8 +145,7 @@
         <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
         <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
-        {{ formatCoin(info.coinType) }}
-        {{ formatMoney(price) }}
+        {{ formatCoin(info.coinType) }} {{ formatMoney(price) }}
       </div>
 
       <div v-else class="btn" @click="goPaySuccess">
@@ -155,8 +154,8 @@
         <span v-if="this.$store.state.platform == 31">{{ listUs[typeIndex].title }}</span>
         <span v-if="this.$store.state.platform == 41">{{ listTw[typeIndex].title }}</span>
         {{ lang.goPay }}
-        <span v-if="this.$store.state.platform === 41"> {{ formatCoin(info.coinType) }}{{ formatAmount(price) }}</span>
-        <span v-else> {{ formatCoin(info.coinType) }}{{ formatMoney(price) }}</span>
+        <span v-if="this.$store.state.platform === 41"> {{ formatCoin(info.coinType) }} {{ formatAmount(price) }}</span>
+        <span v-else> {{ formatCoin(info.coinType) }} {{ formatMoney(price) }}</span>
       </div>
 
       <!-- <Upload :multiple="true" :max=6 :list="imgList" ref="upload"></Upload> -->
@@ -474,38 +473,23 @@ export default {
         }
       })
         .then(res => {
-
           // console.log("config",res)
-          if (res.config) {
-            if (pay !== 7) {
+          if(res){
+            if (res.config) {
               window.location.replace(res.config)
             } else {
-              const promise = new Promise((resolve, reject) => {
-                this.form = []
-                const obj = JSON.parse(res.config)
-                const objKey = Object.keys(obj)
-                for (const i in objKey) {
-                  if (objKey[i] === 'url') {
-                    this.actionLink = obj[objKey[i]]
-                    continue
-                  }
-                  const o = {
-                    name: objKey[i],
-                    val: obj[objKey[i]]
-                  }
-                  this.form.push(o)
+              // console.log(88888888)
+              this.isPay = false
+              this.$router.replace({
+                name: 'complete-paySuccess-orderId-price-coinType',
+                params: {
+                  orderId: this.info.orderId,
+                  price: this.info.payAmount,
+                  coinType: this.info.coinType
                 }
-                resolve()
-              })
-              promise.then(() => {
-                setTimeout(() => {
-                  this.isPay = false
-                  document.getElementById('unionPay').click()
-                }, 2000)
               })
             }
-          } else if (!res.config){
-            // console.log(88888888)
+          }else  if(!res){
             this.isPay = false
             this.$router.replace({
               name: 'complete-paySuccess-orderId-price-coinType',
@@ -515,20 +499,20 @@ export default {
                 coinType: this.info.coinType
               }
             })
-          }
+          } 
         })
         .catch(err => {
           this.$nuxt.$loading.finish()
           console.log(err)
           this.$toast.show(err.message)
-          // this.$router.replace({
-          //   name: 'cart-payFailed-orderId-price-coinType',
-          //   params: {
-          //     orderId: this.info.orderId,
-          //     price: this.info.orderAmount,
-          //     coinType: this.info.coinType
-          //   }
-          // })
+          this.$router.replace({
+            name: 'cart-paySuccess-orderId-price-coinType',
+            params: {
+              orderId: this.info.orderId,
+              price: this.info.orderAmount,
+              coinType: this.info.coinType
+            }
+          })
         })
     },
     // 大陆微信支付
@@ -611,7 +595,9 @@ export default {
         }
       })
       .then(res => {
+        // alert('11111',res)
         if(tradeType == 'mweb'){
+          // alert('22222',res)
           window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
         }
         if(tradeType == 'js'){
@@ -667,34 +653,19 @@ export default {
           // })
         }
         if (res.config) {
-          if (pay !== 7) {
-            window.location.replace(res.config)
-          } else {
-            const promise = new Promise((resolve, reject) => {
-              this.form = []
-              const obj = JSON.parse(res.config)
-              const objKey = Object.keys(obj)
-              for (const i in objKey) {
-                if (objKey[i] === 'url') {
-                  this.actionLink = obj[objKey[i]]
-                  continue
-                }
-                const o = {
-                  name: objKey[i],
-                  val: obj[objKey[i]]
-                }
-                this.form.push(o)
-              }
-              resolve()
-            })
-            promise.then(() => {
-              setTimeout(() => {
-                this.isPay = false
-                document.getElementById('unionPay').click()
-              }, 2000)
-            })
-          }
-        } 
+          window.location.replace(res.config)
+        }
+        // else {
+        //   this.isPay = false
+        //   this.$router.replace({
+        //     name: 'complete-paySuccess-orderId-price-coinType',
+        //     params: {
+        //       orderId: this.info.orderId,
+        //       price: this.info.payAmount,
+        //       coinType: this.info.coinType
+        //     }
+        //   })
+        // } 
         
       })
       .catch(err => {

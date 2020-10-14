@@ -16,7 +16,9 @@ export default {
       pageInfo: null,
 
       requestings: {}, // 正在请求的页码
-      listData: {}
+      listData: {},
+      ifLoadFinish: true,
+      load:false
     }
   },
   computed: {
@@ -67,7 +69,7 @@ export default {
     noListData() {
       return (
         this.pageInfo &&
-        this.pageInfo.total_count === 0 &&
+        this.pageInfo.total_count == 0 &&
         !this.requestingListData
       )
     },
@@ -124,7 +126,11 @@ export default {
       this.requestings = requestings
     },
     // 重新搜索
-    research() {
+    research(key) {		
+      if(key == 'a'){
+        this.$nuxt.$loading.start()
+      }
+	  this.load = true
       this.setPageInfo(this.defaultPageInfo())
       this.listData = {}
 
@@ -158,6 +164,7 @@ export default {
     },
     // 请求当前页数据
     getPageInfo(page = 1) {
+      this.load = true
       const _this = this
       const keyword = _this.keyword
 
@@ -197,6 +204,8 @@ export default {
           data: Object.assign(options.data || {}, _this.specialDatas)
         })
         .then(res => {
+          _this.load = false
+          _this.ifLoadFinish = true;
           _this.$nuxt.$loading.finish()
           if (res.data) {
             _this.listData[page] = JSON.parse(JSON.stringify(res.data))
@@ -207,6 +216,7 @@ export default {
           _this.removeRequesting(reqMark)
         })
         .catch(err => {
+          this.ifLoadFinish = false
           // console.error(err)
           if (err instanceof Error) {
             // console.log('这是一个错误')

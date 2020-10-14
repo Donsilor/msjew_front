@@ -40,9 +40,9 @@ export default {
   mounted(){
     const _this = this
 
-    _this.$nextTick(() => {
-      this.$nuxt.$loading.start()
-    })
+    // _this.$nextTick(() => {
+    //   this.$nuxt.$loading.start()
+    // })
   },
   methods: {
     getNextPage() {

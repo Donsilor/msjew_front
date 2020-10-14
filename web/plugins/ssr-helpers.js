@@ -281,14 +281,14 @@ export default function({ req, res, app, store }) {
           {
             goodsId: obj.data[0].goodsId,
             goodsDetailsId: obj.data[0].goodsDetailsId,
-            ct: obj.data[0].simpleGoodsEntity.categoryId === 15 ? 1 : 2,
+            ct: obj.data[0].simpleGoodsEntity.categoryId === 20 ? 1 : 2,
             cartId: obj.id,
             page: `detail`
           },
           {
             goodsId: obj.data[1].goodsId,
             goodsDetailsId: obj.data[1].goodsDetailsId,
-            ct: obj.data[1].simpleGoodsEntity.categoryId === 15 ? 1 : 2,
+            ct: obj.data[1].simpleGoodsEntity.categoryId === 20 ? 1 : 2,
             cartId: obj.id,
             page: `detail`
           }
