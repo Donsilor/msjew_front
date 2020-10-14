@@ -65,7 +65,7 @@ export default function ({ req, res, redirect, store, route }) {
         //头部host
         let headerHost = req.headers['host']
         //生产环境
-        let host = 'https://www-msjew.bddco.cn';
+        let host = 'https://wap.bddco.com';
         if ((/^(wap-cn|wap-us|wap-tw)\.bddco\.com/).test(headerHost)) {
             //生产环境
             host = 'https://' + headerHost.replace('wap-', '');
