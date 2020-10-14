@@ -245,7 +245,7 @@ export default {
       for (let n = keys.length - 1; n >= 0; n--) {
         if (
           [null, 0, '0'].indexOf(result[n].groupType) > -1 &&
-          result[n].data[0].categoryId === 1
+          result[n].data[0].categoryId === 20
         ) {
           // 单品钻石
           result.splice(n, 1)
@@ -260,7 +260,7 @@ export default {
           const diamond = []
           const pedestal = []
           item.data.forEach(detail => {
-            if (detail.categoryId === 1) {
+            if (detail.categoryId === 20) {
               diamond.push(detail)
             } else {
               pedestal.push(detail)

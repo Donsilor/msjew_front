@@ -38,7 +38,7 @@
       <div class="list fl" v-for="(item, index) in discountsList" :key="index">
         <div class="child">
           <nuxt-link :to="item.to" target="_blank">
-            <div class="goods-img" :class="{'bg-color' : item.categoryId == 15}">
+            <div class="goods-img" :class="{'bg-color' : item.categoryId == 20}">
               <img class="img-a" :src="item.goodsImages[0]" alt="">
               <img class="img-b" :src="item.goodsImages[1] || item.goodsImages[0]" alt="">
             </div>

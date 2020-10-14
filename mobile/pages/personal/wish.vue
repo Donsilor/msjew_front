@@ -139,7 +139,7 @@ export default {
         })
       } else {
         console.log('无组🆔😂')
-        if (obj.simpleGoodsEntity.categoryId === 1) {
+        if (obj.simpleGoodsEntity.categoryId === 20) {
           console.log('是个钻石💎')
           this.$router.push({
             name: 'diamond-diamonds',

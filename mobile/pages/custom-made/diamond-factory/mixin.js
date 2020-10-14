@@ -64,7 +64,7 @@ export default {
     }
   },
   mounted() {
-    this.categoryId = 15
+    this.categoryId = 20
     if (parseInt(this.$route.query.step) === 2) {
       this.selectGoodsId = JSON.parse(
         this.$helpers.base64Decode(this.$route.query.melo)
