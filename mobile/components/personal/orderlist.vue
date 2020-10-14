@@ -450,7 +450,7 @@ export default {
             const diamond = []
             const pedestal = []
             item.data.forEach(detail => {
-              if (detail.categoryId === 1) {
+              if (detail.categoryId === 20) {
                 diamond.push(detail)
               } else {
                 pedestal.push(detail)
@@ -556,7 +556,7 @@ export default {
       for (let n = 0, length = details.length; n < length; n++) {
         if (
           [null, 0, '0'].indexOf(details[n].groupType) > -1 &&
-          details[n].data[0].categoryId === 1
+          details[n].data[0].categoryId === 20
         ) {
           num++
         }

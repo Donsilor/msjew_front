@@ -64,14 +64,14 @@
           {{ goodInfo.goodsName }}
         </div>
 
-        <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
+        <div class="price" v-if="!goodInfo.coupon.discount">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
 
         <div class="discount-price" v-else>
-          <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.salePrice) }}</div>
-          <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(goodInfo.coupon.discount.price) }}</div>
+          <div class="old-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showPi) }}</div>
+          <div class="new-price">{{ formatCoin(goodInfo.coinType) }} {{ formatNumber(showP2) }}</div>
         </div>
         <div class="promise-box">
-          <!-- <div
+          <div
             v-for="(c, index) in goodInfo.goodsServicesJsons"
             :key="index"
             class="promise-info"
@@ -80,7 +80,7 @@
               <img :src="$IMG_URL + c.img" alt="" />
             </div>
             <span>{{ c.name }}</span>
-          </div> -->
+          </div>
         </div>
 
         <div class="discount-activity" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
@@ -103,6 +103,38 @@
               <div class="get" @click="getCoupon">{{ lang.getCoupon }} &gt;</div>
             </div>
           </div>
+        </div>
+        <!-- 选择颜色 -->
+        <div class="select-line" v-if="goodInfo.color.length > 0">
+          <span>
+            <span>{{ lang.chooseColour }}</span>
+          </span>
+          <span @click="showSwiperTapColor">
+            {{ chooseColor }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <div class="bd-b" v-if="goodInfo.color.length > 0"></div>
+        <!-- 选择净度 -->
+        <div class="select-line" v-if="goodInfo.clarity.length > 0">
+          <span>
+            <span>{{ lang.chooseClarity }}</span>
+          </span>
+          <span @click="showSwiperTapClarity">
+            {{ chooseClarity }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <div class="bd-b" v-if="goodInfo.carats.length > 0"></div>
+        <!-- 选择主石大小 -->
+        <div class="select-line" v-if="goodInfo.carats.length > 0">
+          <span>
+            <span>{{ lang.chooseCarat }}</span>
+          </span>
+          <span @click="showSwiperTapCarats">
+            {{ chooseCarat }}
+            <i class="iconfont iconyou" />
+          </span>
         </div>
 
         <!--首次进入-->
@@ -444,6 +476,39 @@
           </div>
         </div>
       </div>
+       <swiper-tap
+        ref="colorsuitability"
+        :title="lang.color"
+        :list="goodInfo.color"
+        :choose-line="colorLine"
+        @clear="getSortByColor"
+      ></swiper-tap>
+
+       <swiper-tap
+        ref="claritysuitability"
+        :title="lang.clarity"
+        :list="goodInfo.clarity"
+        :choose-line="clarityLine"
+        @clear="getSortByClarity"
+      ></swiper-tap>
+
+      <swiper-tap
+        ref="caratsSuitability"
+        :title="lang.inlay"
+        :list="goodInfo.carats"
+        :choose-line="caratLine"
+        @clear="getCarats"
+      ></swiper-tap>
+
+     
+      <!-- <choose-eject
+        ref="quality-eject-choose-pro"
+        :title="lang.fineness"
+        :type="'quality'"
+        :required="true"
+        :options="conditions[0].options"
+        @clear="clearQuality"
+      ></choose-eject> -->
       <!-- 获取优惠券 -->
       <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
       <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
@@ -511,7 +576,8 @@ export default {
     }
   },
   mounted() {
-    // this.language = this.getCookie('language')
+    console.log("莫桑石",this.goodInfo)
+    // this.language = this.getCookie('languaage')
   },
   methods:{
     closeCo() {

@@ -159,6 +159,7 @@ export default {
 
         this.conditions[0].options = this.goodInfo.materials
         if (this.$route.query.isBack) {
+          console.log(11111111)
           const melo = JSON.parse(
             this.$helpers.base64Decode(this.$route.query.melo)
           )
@@ -575,7 +576,7 @@ export default {
             config:
               item.goodsType == 19
                 ? item.ring
-                : item.simpleGoodsEntity.categoryId === 1
+                : item.simpleGoodsEntity.categoryId === 20
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             sku:
@@ -634,7 +635,7 @@ export default {
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
-            this.list[i].simpleGoodsEntity.categoryId === 1 &&
+            this.list[i].simpleGoodsEntity.categoryId === 20 &&
             this.list[i].createTime === this.list[i + 1].createTime
           ) {
             const tamp = this.list[i]

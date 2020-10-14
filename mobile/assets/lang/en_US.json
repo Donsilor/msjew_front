@@ -1119,6 +1119,8 @@
   "detailCommons": {
     "include": "This Product Includes",
     "chooseColor": "Metal",
+    "chooseColour":"Color",
+    "chooseClarity":"Clarity",
     "chooseSize": "Size",
     "chooseCarat": "Carat",
     "chooseShade": "Color",

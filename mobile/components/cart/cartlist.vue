@@ -163,7 +163,7 @@
                   <p>SKU：{{ item.sku }}</p>
                   <p class="p">
                     {{
-                      getconfig(item.config, item.simpleGoodsEntity.baseConfig)
+                      getMadeConfig(item.config,item.simpleGoodsEntity.detailConfig,item.goodsAttr)
                     }}
                   </p>
                   
@@ -192,9 +192,10 @@
                     </p>
                     <p class="p">
                       {{
-                        getconfig(
+                        getMadeConfig(
                           list[index + 1].config,
-                          list[index + 1].simpleGoodsEntity.baseConfig
+                          list[index + 1].simpleGoodsEntity.detailConfig,
+                          list[index + 1].goodsAttr
                         )
                       }}
                     </p>
@@ -248,13 +249,14 @@ export default {
     }
   },
   mounted() {
+    
     // this.language = this.getCookie('language')
   },
   methods: {
     formatMoney: formatMoney,
     // 属性数值转化成字符串
     getconfig(list, list2, attr) {
-      // console.log("item",list)
+      // console.log("itemlist2",list2)
       let config = list.concat(attr)
       let text = ''
       if(this.isLogin){
@@ -268,6 +270,7 @@ export default {
           })
         }
       }else {
+        console.log("config",config)
         if (config.length > 0) {
           config.map((item, index) => {
             if (index === config.length - 1) {
@@ -287,6 +290,33 @@ export default {
         })
       }
       
+      return text
+    },
+    getMadeConfig(list,list2,attr){
+      let text = ''
+      if(this.isLogin){
+        if (list2.length > 0) {
+          list2.map((item, index) => {
+            console.log("itemlist2",item)
+            if (index === list2.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }else {
+        if (list2.length > 0) {
+          list2.map((item, index) => {
+             console.log("itemlist2",item)
+            if (index === list2.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }
       return text
     },
     // 属性数值转化成字符串

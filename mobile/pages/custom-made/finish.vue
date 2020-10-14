@@ -80,6 +80,21 @@
             {{ info2.goodsName }}
           </div>
           <div class="content-desc">SKU：{{ info2.goodsCode }}</div>
+          <div v-for="e in info2.color" :key="e.id+ 'e'">
+            <div v-if="parseInt(e.id) == colorId" class="content-desc">
+              {{ lang.color }}：{{ e.name }}
+            </div>
+          </div>
+          <div v-for="f in info2.clarity" :key="f.id+ 'f'">
+            <div v-if="parseInt(f.id) == clarityId" class="content-desc">
+              {{ lang.clarity }}：{{ f.name }}
+            </div>
+          </div>
+          <div v-for="g in info2.carats" :key="g.id+ 'g'">
+            <div v-if="parseInt(g.id) == caratsId" class="content-desc">
+              {{ lang.carat }}：{{ g.name }}
+            </div>
+          </div>
           <div v-for="d in info2.specs" :key="d.configId">
             <div v-if="parseInt(d.configId) === 5" class="content-desc">
               {{ lang.carat }}：{{ d.configAttrVal }}
@@ -168,6 +183,9 @@ export default {
       swiperImg: [],
       language: this.$store.state.language,
       materialId:'',
+      colorId:'',
+      clarityId:'',
+      caratsId:'',
       sizeId:'',
       ifShowPop: false,
       isLogin: !!this.$store.state.token
@@ -195,10 +213,12 @@ export default {
     },
     price2() {
       var price2=0;
-      if(this.info2.coupon.hasOwnProperty('discount') ){
-        price2 = this.info2.coupon.discount.price
-      }else{
-        price2 = this.info2.coupon.price
+      if(this.info2.coupon){
+        if(this.info2.coupon.hasOwnProperty('discount') ){
+          price2 = this.info2.coupon.discount.price
+        }else{
+          price2 = this.info2.coupon.price
+        }
       }
 
       return price2
@@ -227,7 +247,7 @@ export default {
     makeDiamond(i) {
       this.$axios({
         method: `post`,
-        url: `/wap/goods/diamond/detail`,
+        url: `/wap/goods/style/detail`,
         params: {
           goodsId: i
         }
@@ -236,6 +256,7 @@ export default {
           // console.log(`finish's Diamond=======>`, res)
           res.goodsImages = res.goodsImages.split(`,`)[0] || ``
           this.info2 = res
+          console.log("info2",this.info2)
           // 获取戒托所选的参数Id
           const melo = JSON.parse(
             this.$helpers.base64Decode(this.$route.query.melo)
@@ -245,9 +266,16 @@ export default {
             detailId = a.goodsDetailsId
             this.info2.details.forEach((o, i) =>{
               if(detailId == o.id){
+                // console.log("o",o.color)
                 if(o.material && o.size !== null){
                   this.materialId = o.material
                   this.sizeId = o.size
+                }
+                if(o.color || o.clarity || o.carats !== null){
+                  // console.log("o",o.color, o.clarity,o.carat)
+                  this.colorId = o.color
+                  this.clarityId = o.clarity
+                  this.caratsId = o.carat
                 }
               }
             })
@@ -270,6 +298,7 @@ export default {
           this.swiperImg = res.goodsImages.split(`,`)
           res.goodsImages = res.goodsImages.split(`,`)[0] || ``
           this.info1 = res
+          console.log("info1",this.info1)
           // 获取戒托所选的参数Id
           const melo = JSON.parse(
             this.$helpers.base64Decode(this.$route.query.melo)
@@ -282,6 +311,12 @@ export default {
                 if(o.material && o.size !== null){
                   this.materialId = o.material
                   this.sizeId = o.size
+                }
+                if(o.color && o.clarity && o.carats !== null){
+                  // console.log("o",o.color, o.clarity,o.carat)
+                  this.colorId = o.color
+                  this.clarityId = o.clarity
+                  this.caratsId = o.carat
                 }
               }
             })
@@ -341,8 +376,8 @@ export default {
           font-size: 14px;
           font-weight: 400;
           color: rgba(51, 51, 51, 1);
-          line-height: 20px;
-          height: 20 * 2px;
+          // line-height: 20px;
+          // height: 20 * 2px;
           margin-bottom: 15px;
         }
         .content-desc {

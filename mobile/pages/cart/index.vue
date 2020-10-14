@@ -186,7 +186,7 @@
                     <p>SKU：{{ item.sku }}</p>
                     <p class="p">
                       {{
-                        getconfig(item.config, item.simpleGoodsEntity.specs)
+                        getMadeConfig(item.config, item.simpleGoodsEntity.detailConfig)
                       }}
                     </p>
                     <b v-if="!item.coupon.discount">{{ formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
@@ -212,9 +212,9 @@
                       </p>
                       <p>
                         {{
-                          getconfig(
+                          getMadeConfig(
                             list[index + 1].config,
-                            list[index + 1].simpleGoodsEntity.specs
+                            list[index + 1].simpleGoodsEntity.detailConfig
                           )
                         }}
                       </p>
@@ -575,6 +575,33 @@ export default {
       
       return text
     },
+    getMadeConfig(list,list2,attr){
+      let text = ''
+      if(this.isLogin){
+        if (list2.length > 0) {
+          list2.map((item, index) => {
+            // console.log("itemlist2",item)
+            if (index === list2.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }else {
+        if (list2.length > 0) {
+          list2.map((item, index) => {
+             console.log("itemlist2",item)
+            if (index === list2.length - 1) {
+              text = text + item.configAttrIVal
+            } else {
+              text = text + item.configAttrIVal + ' /  '
+            }
+          })
+        }
+      }
+      return text
+    },
     // 属性数值转化成字符串
     getDubleConfig(good_spec,goods_attr,ring,attr) {
       // console.log('9999',ring.id)
@@ -651,7 +678,7 @@ export default {
           this.noListData = false
           this.cartList = []
           res.map((item, index) => {
-            // console.log("item",item)
+            console.log("item",item)
             item.data.map((val, ind) => {
               // Status 商品状态(1-仓库,2-上架,3-下架,4-删除)   goods_id  goods_type  goods_num  group_type  group_id  createTime
               // 定制
@@ -700,7 +727,7 @@ export default {
           url: `/web/member/cart`
         })
         .then(res => {
-          console.log("线上llll",res)
+          // console.log("线上llll",res)
           this.$nuxt.$loading.finish()
           localStorage.removeItem('loading');
           this.isLoading = localStorage.getItem('loading')
@@ -724,12 +751,12 @@ export default {
     },
     // 格式化数据列表
     doFormat(res) {
-      // console.log(res)
+      // console.log("res",res)
       this.list = []
       if (res && res.length > 0) {
         this.noListData = false
         res.map((item, index) => {
-          // console.log("dddd",item.goodsAttr) 
+          // console.log("dddd",item) 
           this.coin = item.simpleGoodsEntity.coinType
           const o = {
             isSelect: false,
@@ -744,8 +771,8 @@ export default {
             config:
               item.goodsType == 19
                 ? item.ring
-                : item.simpleGoodsEntity.categoryId === 1
-                ? item.simpleGoodsEntity.baseConfig
+                : item.simpleGoodsEntity.categoryId === 20
+                ? item.simpleGoodsEntity.detailConfig
                 : item.simpleGoodsEntity.detailConfig,
             goodsAttr:item.goodsAttr,
             sku:
@@ -792,7 +819,7 @@ export default {
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
-            this.list[i].simpleGoodsEntity.categoryId === 1 &&
+            this.list[i].simpleGoodsEntity.categoryId === 20 &&
             this.list[i].createTime === this.list[i + 1].createTime
           ) {
             const tamp = this.list[i]
@@ -854,7 +881,7 @@ export default {
       }
       // 去单品详情
       else if(item.groupType === 0) {
-        if (item.simpleGoodsEntity.categoryId === 15) {
+        if (item.simpleGoodsEntity.categoryId === 20) {
           // 是个钻石💎
           this.$router.push({
             name: 'diamond-diamonds',

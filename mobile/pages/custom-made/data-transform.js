@@ -319,7 +319,7 @@ export default {
             if(res.coupon.hasOwnProperty('discount')){
               price = res.coupon.discount.price
             }else{
-              price = res.details[i].retailMallPrice;
+              price = res.details[0].retailMallPrice;
             }
 
             this.boardArr = []
@@ -412,8 +412,6 @@ export default {
             //     }
             //   }
             // }
-            console.log(666,this.data)
-
             console.log(777,res)
             var price3 = 0;
             if(res.coupon.hasOwnProperty('discount')){
@@ -864,7 +862,7 @@ export default {
             config:
               item.goodsType == 19
                 ? item.ring
-                : item.simpleGoodsEntity.categoryId === 1
+                : item.simpleGoodsEntity.categoryId === 20
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             sku:
@@ -929,7 +927,7 @@ export default {
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
-            this.list[i].simpleGoodsEntity.categoryId === 1 &&
+            this.list[i].simpleGoodsEntity.categoryId === 20 &&
             this.list[i].createTime === this.list[i + 1].createTime
           ) {
             const tamp = this.list[i]

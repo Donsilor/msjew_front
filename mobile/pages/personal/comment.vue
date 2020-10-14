@@ -226,7 +226,7 @@ export default {
           const diamond = []
           const pedestal = []
           item.data.forEach(detail => {
-            if (detail.purposeEntiy.categoryId === 1) {
+            if (detail.purposeEntiy.categoryId === 20) {
               diamond.push(detail)
             } else {
               pedestal.push(detail)

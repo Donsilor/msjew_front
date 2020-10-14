@@ -1121,6 +1121,8 @@
   "detailCommons": {
     "include": "此物品包含",
     "chooseColor": "選擇成色",
+    "chooseColour":"選擇顏色",
+    "chooseClarity":"選擇淨度",
     "chooseSize": "選擇尺寸",
     "chooseCarat": "選擇克拉",
     "chooseShade": "選擇主石色彩",
