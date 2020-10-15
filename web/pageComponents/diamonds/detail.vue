@@ -27,6 +27,34 @@
        </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div v-if="showSkuBox" class="sku">
+          <div class="right-properties"  v-if="productInfo.carats.length > 0">
+            <div class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.carat`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <span class="name ow-h1">
+                    {{ productInfo.carats[ringChecked.caratIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in productInfo.carats"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: ringChecked.caratIndex === index }
+                    ]"
+                    @click="changeRingChecked('caratIndex', index)"
+                  >
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <div class="left-properties"  v-if="productInfo.color.length > 0">
             <div class="property-item">
               <span class="item-name">
@@ -101,34 +129,7 @@
               </div>
             </div>
           </div>
-          <div class="right-properties"  v-if="productInfo.carats.length > 0">
-            <div class="property-item">
-              <span class="item-name">
-                {{ $t(`${lang}.carat`) }}
-              </span>
-              <div class="property">
-                <div class="had-checked">
-                  <span class="name ow-h1">
-                    {{ productInfo.carats[ringChecked.caratIndex].name }}
-                  </span>
-                  <i class="iconfont iconxiala drop-down-icon"></i>
-                </div>
-                <ul class="options">
-                  <li
-                    v-for="(item, index) in productInfo.carats"
-                    :key="index"
-                    :class="[
-                      'item',
-                      { active: ringChecked.caratIndex === index }
-                    ]"
-                    @click="changeRingChecked('caratIndex', index)"
-                  >
-                    <span class="name ow-h1">{{ item.name }}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          
         </div>
         <ul class="services-list">
           <li

@@ -110,7 +110,7 @@
             </div>
           </div>
           <div class="content-price">
-            <div class="price" v-if="couponType(info2.coupon) !== 'discount'">{{ formatCoin(info2.coinType) }} {{ formatNumber(info2.salePrice) }}</div>
+            <div class="price" v-if="couponType(info2.coupon) !== 'discount'">{{ formatCoin(info2.coinType) }} {{ formatNumber(info2.retailMallPrice) }}</div>
 
             <div class="discount-price" v-else>
               <div class="old-price">{{ formatCoin(info2.coinType) }} {{ formatNumber(info2.salePrice) }}</div>
@@ -199,12 +199,13 @@ export default {
   },
   computed:{
     price1() {
-      var price1=0;
+      var price1=this.info1.retailMallPrice;
       for(var i=0; i<this.info1.details.length; i++){
         if(parseInt(this.info1.details[i].id) === parseInt(this.infoCheck)){
           if(this.info1.details[i].coupon.hasOwnProperty('discount') ){
             price1 = this.info1.details[i].coupon.discount.price
-          }else{
+          }
+          else{
             price1 = this.info1.details[i].coupon.price
           }
         }
@@ -212,13 +213,14 @@ export default {
       return price1
     },
     price2() {
-      var price2=0;
+      var price2=this.info2.retailMallPrice;
       if(this.info2.coupon){
         if(this.info2.coupon.hasOwnProperty('discount') ){
           price2 = this.info2.coupon.discount.price
-        }else{
-          price2 = this.info2.coupon.price
         }
+        // else{
+        //   price2 = this.info2.coupon.price
+        // }
       }
 
       return price2
@@ -266,7 +268,8 @@ export default {
             detailId = a.goodsDetailsId
             this.info2.details.forEach((o, i) =>{
               if(detailId == o.id){
-                // console.log("o",o.color)
+                this.info2.retailMallPrice = o.retailMallPrice
+              console.log("o",o)
                 if(o.material && o.size !== null){
                   this.materialId = o.material
                   this.sizeId = o.size
@@ -308,6 +311,7 @@ export default {
             detailId = a.goodsDetailsId
             this.info1.details.forEach((o, i) =>{
               if(detailId == o.id){
+                this.info1.retailMallPrice = o.retailMallPrice
                 if(o.material && o.size !== null){
                   this.materialId = o.material
                   this.sizeId = o.size

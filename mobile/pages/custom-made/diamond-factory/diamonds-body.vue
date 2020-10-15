@@ -104,6 +104,18 @@
             </div>
           </div>
         </div>
+        
+        <!-- 选择主石大小 -->
+        <div class="select-line" v-if="goodInfo.carats.length > 0">
+          <span>
+            <span>{{ lang.chooseCarat }}</span>
+          </span>
+          <span @click="showSwiperTapCarats">
+            {{ chooseCarat }}
+            <i class="iconfont iconyou" />
+          </span>
+        </div>
+        <div class="bd-b" v-if="goodInfo.carats.length > 0"></div>
         <!-- 选择颜色 -->
         <div class="select-line" v-if="goodInfo.color.length > 0">
           <span>
@@ -125,17 +137,7 @@
             <i class="iconfont iconyou" />
           </span>
         </div>
-        <div class="bd-b" v-if="goodInfo.carats.length > 0"></div>
-        <!-- 选择主石大小 -->
-        <div class="select-line" v-if="goodInfo.carats.length > 0">
-          <span>
-            <span>{{ lang.chooseCarat }}</span>
-          </span>
-          <span @click="showSwiperTapCarats">
-            {{ chooseCarat }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
+        
 
         <!--首次进入-->
         <div
