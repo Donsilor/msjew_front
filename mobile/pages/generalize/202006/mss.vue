@@ -18,12 +18,12 @@
 			<img src="../../../static/generalize/img_03.jpg" alt="">
 			<div class="text">
 				<span class="text1">莫桑石</span>
-				<span class="text2">钻石</span>
+				<span class="text2">莫桑石</span>
 			</div>
 		</div>
 		<!-- <img src="../../static/generalize/img_04.jpg" alt=""> -->
 		<div class="box-4">
-			<span>莫桑石拥有比钻石更高的折射度和光泽度，</span><br />
+			<span>莫桑石拥有比莫桑石更高的折射度和光泽度，</span><br />
 			<span>火彩更是南非钻的2.5倍多，更显光泽明亮，火彩惊艳！</span>
 		</div>
 		<div class="box-5">
@@ -62,7 +62,7 @@
 				<a href="http://pwt.zoosnet.net/LR/Chatpre.aspx?id=PWT48608987&lng=cn">{{ lang.immediatelyConsult }}</a>
 			</div>
 			<div class="text">
-				{{ lang.greetCall }}： <a href="tel:0755-25169121">0755 - 25169121</a>（{{ lang.ringUp }}）
+				{{ lang.greetCall }}： <a href="tel:19925412336">19925412336</a>（{{ lang.ringUp }}）
 			</div>
 		</div>
 		<div class="box-11">
@@ -168,7 +168,7 @@
 
 			<div class="text">
 				<div class="text1">{{ lang.question }}？</div>
-				<div class="text2">{{ lang.contact1 }}： 0755 - 25169121</div>
+				<div class="text2">{{ lang.contact1 }}： 19925412336</div>
 				<div class="btn-s">
 					<a href="http://pwt.zoosnet.net/LR/Chatpre.aspx?id=PWT48608987&lng=cn">{{ lang.onlineConsult }}</a>
 				</div>
@@ -189,7 +189,7 @@
           },
           {
           name: 'keywords',
-            content: '钻戒,莫桑石,钻石,戒指,婚戒',
+            content: '钻戒,莫桑石,莫桑石,戒指,婚戒',
           }
         ]
       }

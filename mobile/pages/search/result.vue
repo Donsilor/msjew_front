@@ -236,7 +236,7 @@ export default {
       let routerName = ''
       switch (info.categoryId) {
         case 15:
-          // 钻石
+          // 莫桑石
           routerName = 'diamond-diamonds'
           break
         case 2:

@@ -53,7 +53,7 @@ function makeCartGoodGroups (cart = []) {
         result.push(localData[item])
     })
     // console.log("iiiii", result)
-    // 将定制的商品进行排序，钻石放在后面
+    // 将定制的商品进行排序，莫桑石放在后面
     result.map(item => {
         // console.log('a',item)
         if (item.groupType === null) {

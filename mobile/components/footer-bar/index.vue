@@ -14,7 +14,7 @@
           <li class="item">
             <span>
               {{ lang.callUs }}：
-              <a href="tel:(852) 2165 3908">0755 25169121</a>
+              <a href="tel:(852) 2165 3908">19925412336</a>
             </span>
           </li>
           <li class="item">

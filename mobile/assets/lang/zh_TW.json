@@ -316,7 +316,7 @@
     "payFailed": {
       "title": "很抱歉，訂單支付失敗！請重新支付",
       "phone": "如有問題請聯絡客服+852 2165 3908",
-      "phoneCn": "如有問題請聯絡客服 0755 25169121",
+      "phoneCn": "如有問題請聯絡客服 19925412336",
       "orderNo": "訂單編號：",
       "payAgain": "重新支付",
       "continue": "繼續購物",
@@ -2220,7 +2220,7 @@
     "somethingError": "應用發生錯誤異常",
     "cartIsFull": "购物车已满",
     "wishListIsFull": "心愿单已满",
-    "comparedListIsFull": "钻石对比单已满"
+    "comparedListIsFull": "莫桑石对比单已满"
   },
   "callUs": {
     "holiday": "香港時間(GMT+8)星期一至五上午9時至晚上6時",

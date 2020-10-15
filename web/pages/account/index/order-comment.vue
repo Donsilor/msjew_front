@@ -192,18 +192,18 @@ export default {
         result.push(groups[item])
       })
 
-      // 删除钻石单品（钻石单品不能评论）
+      // 删除莫桑石单品（莫桑石单品不能评论）
       for (let n = keys.length - 1; n >= 0; n--) {
         if (
           [null, 0, '0'].includes(result[n].groupType) &&
           result[n].data[0].categoryId === 1
         ) {
-          // 单品钻石
+          // 单品莫桑石
           result.splice(n, 1)
         }
       }
 
-      // 将定制的商品进行排序，钻石放在后面
+      // 将定制的商品进行排序，莫桑石放在后面
       result.map(item => {
         console.log('item====>', item)
         if (item.groupType === 2) {

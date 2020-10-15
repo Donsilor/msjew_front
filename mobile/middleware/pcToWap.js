@@ -742,7 +742,7 @@ export default function ({ req, res, redirect, store, route }) {
                     },
                 },
 
-                // 裸钻
+                // 裸石
                 {
                     'mobileUrl': /^\/diamond\/list\?startCarat=0&endCarat=0.29/,
                     'pcUrl': `/diamonds/all`,
@@ -864,7 +864,7 @@ export default function ({ req, res, redirect, store, route }) {
                     'pcUrl': `/diamonds/list`
                 },
 
-                // 裸钻详情
+                // 裸石详情
                 {
                     'mobileUrl': /^\/diamond\/diamond/,
                     'pcUrl': `/diamond-details`,
@@ -907,7 +907,7 @@ export default function ({ req, res, redirect, store, route }) {
                     },
                 },
 
-                // 选择钻石 build-your-own-ring/diamonds
+                // 选择莫桑石 build-your-own-ring/diamonds
                 {
                     'mobileUrl': /^\/custom-made\/diamond-made\/diamond-list/,
                     'pcUrl': `/build-your-own-ring/diamonds`,
@@ -917,7 +917,7 @@ export default function ({ req, res, redirect, store, route }) {
                     },
                 },
 
-                // 选择钻石钻石详情
+                // 选择莫桑石莫桑石详情
                 {
                     'mobileUrl': /^\/custom-made\/diamond-made\/diamond-detail/,
                     'pcUrl': `/build-your-own-ring/diamond-details`,

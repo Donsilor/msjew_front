@@ -316,7 +316,7 @@
       </div>
     </section>
 
-    <!--    钻石类型-->
+    <!--    莫桑石类型-->
     <section class="diamond">
       <h1 class="section-title">
         {{ $t(`${lang}.chooseYourDiamond`) }}
