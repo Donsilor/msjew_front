@@ -85,4 +85,3 @@ sw.*
 nuxt.config.js
 package.json
 package-lock.json
-/app.html
