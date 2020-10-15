@@ -299,7 +299,7 @@ export default {
       let routerName = ''
       switch (info.goodsType) {
         case 15:
-          // 钻石
+          // 莫桑石
           routerName = '/diamonds/round-cut'
           break
         case 2:

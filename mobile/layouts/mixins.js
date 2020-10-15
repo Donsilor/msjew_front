@@ -1,7 +1,7 @@
 export default {
     data () {
         return {
-            title: `BDD Co.`
+            title: `MORESHINE`
         }
     },
     computed: {

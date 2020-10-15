@@ -219,7 +219,7 @@ export default {
         result.push(groups[item])
       })
 
-      // 将定制的商品进行排序，钻石放在后面
+      // 将定制的商品进行排序，莫桑石放在后面
       result.map(item => {
         if (item.groupType === 2) {
           // 定制
@@ -336,7 +336,7 @@ export default {
 
         switch (info.data[0].purposeEntiy.categoryId) {
           case 1:
-            // 钻石
+            // 莫桑石
             routerName = 'diamond-diamonds'
             routerQuery = {
               goodId: goodId

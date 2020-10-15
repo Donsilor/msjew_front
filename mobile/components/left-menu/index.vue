@@ -152,7 +152,7 @@
           </div> -->
         </div>
         <div class="help">
-          <a v-if="this.$store.state.platform === 21" href="tel:0755 25169121">
+          <a v-if="this.$store.state.platform === 21" href="tel:19925412336">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconphone"></i>

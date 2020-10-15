@@ -58,7 +58,7 @@ Vue.use(LoginPop)
 //  列表滑动到底加载
 Vue.use(ScrollBox)
 
-//  钻石列表筛选点问号的弹窗
+//  莫桑石列表筛选点问号的弹窗
 Vue.use(WhiteBoard)
 Vue.use(SiteSwitch)
 Vue.use(DiamondChoose)

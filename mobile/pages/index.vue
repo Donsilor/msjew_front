@@ -168,12 +168,12 @@
             <span class="line"></span>
             <span class="row-name">{{ lang.tel }}</span>
             <span class="row-text">
-              <a v-if="this.$store.state.platform === 21" href="tel:0755 25169121">0755 25169121</a>
+              <a v-if="this.$store.state.platform === 21" href="tel:19925412336">19925412336</a>
               <a v-else href="tel:+852 2165 3908">+852 2165 3908</a>
             </span>
             <span class="column-line"></span>
             <span class="row-icon">
-              <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+              <a v-if="this.$store.state.platform == 21" href="tel:19925412336">
                 <i class="iconfont iconphone"></i>
               </a>
               <a v-else href="tel:+852 2165 3908">
@@ -372,12 +372,12 @@
             <span class="line"></span>
             <span class="row-name">{{ lang.tel }}</span>
             <span class="row-text">
-              <a v-if="this.$store.state.platform === 21" href="tel:0755 25169121">0755 25169121</a>
+              <a v-if="this.$store.state.platform === 21" href="tel:19925412336">19925412336</a>
               <a v-else href="tel:+852 2165 3908">+852 2165 3908</a>
             </span>
             <span class="column-line"></span>
             <span class="row-icon">
-              <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+              <a v-if="this.$store.state.platform == 21" href="tel:19925412336">
                 <i class="iconfont iconphone"></i>
               </a>
               <a v-else href="tel:+852 2165 3908">
@@ -902,7 +902,7 @@ export default {
       // }
       // switch (card.categoryId) {
       //   case 1:
-      //     // 钻石
+      //     // 莫桑石
       //     routerUrl = '/diamond/diamonds'
       //     break
       //   case 2:
@@ -1017,7 +1017,7 @@ export default {
 
       // switch (card.categoryId) {
       //   case 1:
-      //     // 钻石
+      //     // 莫桑石
       //     routerName = 'diamond-list'
       //     break
       //   case 2:

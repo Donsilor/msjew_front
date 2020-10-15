@@ -115,7 +115,7 @@ export default {
       lang,
       menus: [
         {
-          groupName: this.$t(`${lang}.chooseBDD`),
+          groupName: this.$t(`${lang}.chooseMORESHINE`),
           children: [
             {
               icon: '',
@@ -142,11 +142,11 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.aboutBDD`),
+          groupName: this.$t(`${lang}.aboutMORESHINE`),
           children: [
             // {
             //   icon: '',
-            //   name: this.$t(`${lang}.BDDBrandStory`),
+            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
             //   to: {
             //     path: '/brand-story'
             //   }
@@ -170,7 +170,7 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.BDDPolicy`),
+          groupName: this.$t(`${lang}.MORESHINEPolicy`),
           children: [
             {
               icon: '',
@@ -239,7 +239,7 @@ export default {
       ],
       menusUs: [
         {
-          groupName: this.$t(`${lang}.chooseBDD`),
+          groupName: this.$t(`${lang}.chooseMORESHINE`),
           children: [
             {
               icon: '',
@@ -266,11 +266,11 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.aboutBDD`),
+          groupName: this.$t(`${lang}.aboutMORESHINE`),
           children: [
             // {
             //   icon: '',
-            //   name: this.$t(`${lang}.BDDBrandStory`),
+            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
             //   to: {
             //     path: '/brand-story'
             //   }
@@ -294,7 +294,7 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.BDDPolicy`),
+          groupName: this.$t(`${lang}.MORESHINEPolicy`),
           children: [
             {
               icon: '',
@@ -370,7 +370,7 @@ export default {
       ],
       menusCn: [
         {
-          groupName: this.$t(`${lang}.chooseBDD`),
+          groupName: this.$t(`${lang}.chooseMORESHINE`),
           children: [
             {
               icon: '',
@@ -397,11 +397,11 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.aboutBDD`),
+          groupName: this.$t(`${lang}.aboutMORESHINE`),
           children: [
             // {
             //   icon: '',
-            //   name: this.$t(`${lang}.BDDBrandStory`),
+            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
             //   to: {
             //     path: '/brand-story'
             //   }
@@ -431,7 +431,7 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.BDDPolicy`),
+          groupName: this.$t(`${lang}.MORESHINEPolicy`),
           children: [
             {
               icon: '',

@@ -298,7 +298,7 @@
             >
           </div>
 
-          <!--已完成单独钻石不可评论和查看评论的-->
+          <!--已完成单独莫桑石不可评论和查看评论的-->
           <div v-if="o.orderStatus == 4" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>
@@ -337,7 +337,7 @@
             >
           </div>
 
-          <!--已完成，評價完成的非单独钻石的订单-->
+          <!--已完成，評價完成的非单独莫桑石的订单-->
           <div v-if="o.orderStatus == 50" class="list-footer">
             <nuxt-link :to="`/account/order-details?orderId=${o.id}`"
               ><button>

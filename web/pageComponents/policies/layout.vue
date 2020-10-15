@@ -98,7 +98,7 @@ export default {
       num: 0,
       list: [
         {
-          name: this.$t(`${lang}.BDDService`),
+          name: this.$t(`${lang}.MORESHINEService`),
           isSubShow: true,
           subItems: [
             {
@@ -122,7 +122,7 @@ export default {
           ]
         },
         {
-          name: this.$t(`${lang}.chooseBDD`),
+          name: this.$t(`${lang}.chooseMORESHINE`),
           isSubShow: true,
           subItems: [
             {
@@ -146,11 +146,11 @@ export default {
           ]
         },
         {
-          name: this.$t(`${lang}.aboutBDD`),
+          name: this.$t(`${lang}.aboutMORESHINE`),
           isSubShow: true,
           subItems: [
             // {
-            //   name: this.$t(`${lang}.BDDBrandStory`),
+            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
             //   to: {
             //     path: '/brand-story'
             //   }
@@ -170,7 +170,7 @@ export default {
           ]
         },
         {
-          name: this.$t(`${lang}.BDDPolicy`),
+          name: this.$t(`${lang}.MORESHINEPolicy`),
           isSubShow: true,
           subItems: [
             {
@@ -208,7 +208,7 @@ export default {
       ],
       listCn: [
         {
-          name: this.$t(`${lang}.BDDService`),
+          name: this.$t(`${lang}.MORESHINEService`),
           isSubShow: true,
           subItems: [
             {
@@ -232,7 +232,7 @@ export default {
           ]
         },
         {
-          name: this.$t(`${lang}.chooseBDD`),
+          name: this.$t(`${lang}.chooseMORESHINE`),
           isSubShow: true,
           subItems: [
             {
@@ -256,11 +256,11 @@ export default {
           ]
         },
         {
-          name: this.$t(`${lang}.aboutBDD`),
+          name: this.$t(`${lang}.aboutMORESHINE`),
           isSubShow: true,
           subItems: [
             // {
-            //   name: this.$t(`${lang}.BDDBrandStory`),
+            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
             //   to: {
             //     path: '/brand-story'
             //   }
@@ -280,7 +280,7 @@ export default {
           ]
         },
         {
-          name: this.$t(`${lang}.BDDPolicy`),
+          name: this.$t(`${lang}.MORESHINEPolicy`),
           isSubShow: true,
           subItems: [
             {

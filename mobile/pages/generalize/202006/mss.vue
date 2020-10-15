@@ -18,12 +18,12 @@
 			<img src="../../../static/generalize/img_03.jpg" alt="">
 			<div class="text">
 				<span class="text1">莫桑石</span>
-				<span class="text2">钻石</span>
+				<span class="text2">莫桑石</span>
 			</div>
 		</div>
 		<!-- <img src="../../static/generalize/img_04.jpg" alt=""> -->
 		<div class="box-4">
-			<span>莫桑石拥有比钻石更高的折射度和光泽度，</span><br />
+			<span>莫桑石拥有比莫桑石更高的折射度和光泽度，</span><br />
 			<span>火彩更是南非钻的2.5倍多，更显光泽明亮，火彩惊艳！</span>
 		</div>
 		<div class="box-5">
@@ -35,39 +35,39 @@
 			</div>
 		</div>
 		<div class="box-6">
-			<a href="https://wap.bddco.cn/marriage-ring/single-ring?style=160">
+			<a href="http://wap.msjew.com/marriage-ring/single-ring?style=160">
 				<img src="../../../static/generalize/img_06.jpg" alt="">
 			</a>
 		</div>
 		<div class="box-7">
-			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=628&ringType=single">
+			<a class="four-img" href="http://wap.msjew.com/marriage-ring/single-ring-detail?goodId=628&ringType=single">
 				<img src="../../../static/generalize/img_07.jpg" alt="">
 			</a>
 
-			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=560&ringType=single">
+			<a class="four-img" href="http://wap.msjew.com/marriage-ring/single-ring-detail?goodId=560&ringType=single">
 				<img src="../../../static/generalize/img_08.jpg" alt="">
 			</a>
-			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=615&ringType=single">
+			<a class="four-img" href="http://wap.msjew.com/marriage-ring/single-ring-detail?goodId=615&ringType=single">
 				<img src="../../../static/generalize/img_09.jpg" alt="">
 			</a>
-			<a class="four-img" href="https://wap.bddco.cn/marriage-ring/single-ring-detail?goodId=611&ringType=single">
+			<a class="four-img" href="http://wap.msjew.com/marriage-ring/single-ring-detail?goodId=611&ringType=single">
 				<img src="../../../static/generalize/img_10.jpg" alt="">
 			</a>
 		</div>
 		<div class="btn-box">
 			<div class="button">
-				<a href="https://wap.bddco.cn/marriage-ring/single-ring?style=160">{{ lang.more }}</a>
+				<a href="http://wap.msjew.com/marriage-ring/single-ring?style=160">{{ lang.more }}</a>
 			</div>
 			<div class="button bt2">
 				<a href="http://pwt.zoosnet.net/LR/Chatpre.aspx?id=PWT48608987&lng=cn">{{ lang.immediatelyConsult }}</a>
 			</div>
 			<div class="text">
-				{{ lang.greetCall }}： <a href="tel:0755-25169121">0755 - 25169121</a>（{{ lang.ringUp }}）
+				{{ lang.greetCall }}： <a href="tel:19925412336">19925412336</a>（{{ lang.ringUp }}）
 			</div>
 		</div>
 		<div class="box-11">
 			<div class="text1">更是一件艺术品</div>
-			<div class="text2">BDD坚持打造有温度有生命的首饰</div>
+			<div class="text2">MORESHINE坚持打造有温度有生命的首饰</div>
 			<div class="line"></div>
 		</div>
 		<!-- <img src="../../static/generalize/img_11.jpg" alt=""> -->
@@ -75,21 +75,21 @@
 			<img class="margin10" src="../../../static/generalize/img_12.jpg" alt="">
 			<div class="text-12">
 				<div class="text1">设计创新</div>
-				<div class="text2">BDD坚持创作独一无二的艺术臻品</div>
+				<div class="text2">MORESHINE坚持创作独一无二的艺术臻品</div>
 			</div>
 		</div>
 		<div class="box-13">
 			<img class="margin10" src="../../../static/generalize/img_13.jpg" alt="">
 			<div class="text-12">
 				<div class="text1">分拣筛选</div>
-				<div class="text2">BDD专业的分拣人员严格把控每道环节</div>
+				<div class="text2">MORESHINE专业的分拣人员严格把控每道环节</div>
 			</div>
 		</div>
 		<div class="box-14">
 			<img class="margin10" src="../../../static/generalize/img_14.jpg" alt="">
 			<div class="text-12">
 				<div class="text1">切割打磨</div>
-				<div class="text2">BDD工匠们精心雕琢，绽放出闪耀光彩</div>
+				<div class="text2">MORESHINE工匠们精心雕琢，绽放出闪耀光彩</div>
 			</div>
 		</div>
 
@@ -130,7 +130,7 @@
 		</div>
 
 		<div class="box-11">
-			<div class="text1">BDD服务保障</div>
+			<div class="text1">MORESHINE服务保障</div>
 			<div class="text2">完善的政策服务保障客户的消费权益</div>
 			<div class="line"></div>
 		</div>
@@ -139,21 +139,21 @@
 			<img class="margin10" src="../../../static/generalize/img_17.jpg" alt="">
 			<div class="text-17">
 				<div class="text1">证书品质</div>
-				<div class="text2">在BDD Co.购买任意一件首饰都附带相关证书说明</div>
+				<div class="text2">在MORESHINE购买任意一件首饰都附带相关证书说明</div>
 			</div>
 		</div>
 		<div class="box-18">
 			<img class="margin10" src="../../../static/generalize/img_18.jpg" alt="">
 			<div class="text-17">
 				<div class="text1">讲究性价比</div>
-				<div class="text2">BDD致力提供高品质的首饰，合理的价格，给客户高质量的选择</div>
+				<div class="text2">MORESHINE致力提供高品质的首饰，合理的价格，给客户高质量的选择</div>
 			</div>
 		</div>
 		<div class="box-19">
 			<img class="margin10" src="../../../static/generalize/img_19.jpg" alt="">
 			<div class="text-17">
 				<div class="text1">终身质保</div>
-				<div class="text2">BDD首饰高标准挑选制造，客户可安心购买并享有终身质保服务</div>
+				<div class="text2">MORESHINE首饰高标准挑选制造，客户可安心购买并享有终身质保服务</div>
 			</div>
 		</div>
 		<div class="box-20">
@@ -168,7 +168,7 @@
 
 			<div class="text">
 				<div class="text1">{{ lang.question }}？</div>
-				<div class="text2">{{ lang.contact1 }}： 0755 - 25169121</div>
+				<div class="text2">{{ lang.contact1 }}： 19925412336</div>
 				<div class="btn-s">
 					<a href="http://pwt.zoosnet.net/LR/Chatpre.aspx?id=PWT48608987&lng=cn">{{ lang.onlineConsult }}</a>
 				</div>
@@ -181,15 +181,15 @@
 	export default{
 		head() {
 		  return {
-        title: '结婚钻戒_莫桑石_求婚戒指_订婚女戒_婚戒定制|BDD戒指',
+        title: '结婚钻戒_莫桑石_求婚戒指_订婚女戒_婚戒定制|MORESHINE戒指',
         meta: [
           {
             name: 'description',
-            content: 'BDD莫桑石订婚戒指,让克拉钻戒不再遥远,点击查看更多畅销的结婚戒指款式,在线咨询专业的珠宝顾问',
+            content: 'MORESHINE莫桑石订婚戒指,让克拉钻戒不再遥远,点击查看更多畅销的结婚戒指款式,在线咨询专业的珠宝顾问',
           },
           {
           name: 'keywords',
-            content: '钻戒,莫桑石,钻石,戒指,婚戒',
+            content: '钻戒,莫桑石,莫桑石,戒指,婚戒',
           }
         ]
       }

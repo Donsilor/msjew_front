@@ -140,12 +140,12 @@
           <span class="line"></span>
           <span class="row-name">{{ lang.tel }}</span>
           <span class="row-text">
-            <a v-if="this.$store.state.platform == 21" href="tel:+852 2165 3908">0755 25169121</a>
+            <a v-if="this.$store.state.platform == 21" href="tel:+852 2165 3908">19925412336</a>
             <a v-else href="tel:+852 2165 3908">+852 2165 3908</a>
           </span>
           <span class="column-line"></span>
           <span class="row-icon">
-            <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+            <a v-if="this.$store.state.platform == 21" href="tel:19925412336">
               <i class="iconfont iconphone"></i>
             </a>
             <a v-else href="tel:+852 2165 3908">

@@ -882,7 +882,7 @@ export default {
       // 去单品详情
       else if(item.groupType === 0) {
         if (item.simpleGoodsEntity.categoryId === 20) {
-          // 是个钻石💎
+          // 是个莫桑石💎
           this.$router.push({
             name: 'diamond-diamonds',
             query: {
