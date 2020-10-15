@@ -29,7 +29,7 @@
           <p class="comment-desc">{{ item.commentsDesc }}</p>
           <p class="comment-time">{{ item.createTime }}</p>
           <p v-if="item.commentsReplyDesc" class="comment-reply">
-            {{ $t(`${lang}.BDDReply`) }}：{{ item.commentsReplyDesc }}
+            {{ $t(`${lang}.MORESHINEReply`) }}：{{ item.commentsReplyDesc }}
           </p>
         </div>
         <div class="right-info">

@@ -1182,7 +1182,7 @@ export default {
 
         return this.$axios({
             method: 'post',
-            url: `/web/goodsCart/postBDD`,
+            url: `/web/goodsCart/postMORESHINE`,
             data
         })
             .then(data => {

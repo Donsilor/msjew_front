@@ -14,7 +14,7 @@
           <li class="item">
             <span>
               {{ lang.callUs }}：
-              <a href="tel:(852) 2165 3908">19925412336</a>
+              <a href="tel:19925412336">19925412336</a>
             </span>
           </li>
           <li class="item">
@@ -42,15 +42,15 @@
           </li>
         </ul>
       </div>
-      <div :class="['group', { active: isActive(lang.aboutBDD) }]">
-        <div class="group-top" @click="changeStatus(lang.aboutBDD)">
-          <span class="group-name">{{ lang.aboutBDD }}</span>
+      <div :class="['group', { active: isActive(lang.aboutMORESHINE) }]">
+        <div class="group-top" @click="changeStatus(lang.aboutMORESHINE)">
+          <span class="group-name">{{ lang.aboutMORESHINE }}</span>
           <i class="iconfont iconxiala status-icon"></i>
         </div>
         <ul class="group-content">
           <!--          <li class="item">-->
           <!--            <span @click="jump('/help-pages/brandStory')">-->
-          <!--              {{ lang.BDDStory }}-->
+          <!--              {{ lang.MORESHINEStory }}-->
           <!--            </span>-->
           <!--          </li>-->
           <li class="item" v-if="this.$store.state.platform === 21">
@@ -85,9 +85,9 @@
           </li>
         </ul>
       </div>
-      <div :class="['group', { active: isActive(lang.BDDPolicy) }]">
-        <div class="group-top" @click="changeStatus(lang.BDDPolicy)">
-          <span class="group-name">{{ lang.BDDPolicy }}</span>
+      <div :class="['group', { active: isActive(lang.MORESHINEPolicy) }]">
+        <div class="group-top" @click="changeStatus(lang.MORESHINEPolicy)">
+          <span class="group-name">{{ lang.MORESHINEPolicy }}</span>
           <i class="iconfont iconxiala status-icon"></i>
         </div>
         <ul class="group-content">
@@ -143,7 +143,7 @@
     </section>
     <div class="copy-right">
       <div v-if="this.$store.state.platform === 21" style="font-size:9px;margin-top:20px;">{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
-      <span v-else class="text" >Copyright © 2020 BDD Co.</span>
+      <span v-else class="text" >Copyright © 2020 MORESHINE</span>
     </div>
   </div>
 </template>

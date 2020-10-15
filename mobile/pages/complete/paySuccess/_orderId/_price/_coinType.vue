@@ -64,7 +64,7 @@
           <li>
             <div class="title">
               <span>{{ lang.beneficiary }}</span>
-              <span>BDD.Co.</span>
+              <span>MORESHINE.Co.</span>
             </div>
           </li>
         </ul>
@@ -122,7 +122,7 @@
           <li>
             <div class="title">
               <span>{{ lang.beneficiary }}</span>
-              <span>BDD.Co.</span>
+              <span>MORESHINE.Co.</span>
             </div>
           </li>
         </ul>
@@ -189,7 +189,7 @@ export default {
     return {
       lang: this.LANGUAGE.cart.paySuccess,
       // orderId: this.$route.params.orderId,
-      codeNum: 'BDDOR7712794',
+      codeNum: 'MORESHINEOR7712794',
       paytips: false,
       info: '',
       text: '',

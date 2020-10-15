@@ -246,7 +246,7 @@ export default {
       // data: {
       //   address: {
       //     countryName: '',  http://localhost:8318/complete-payment    http://localhost:8328/cart/paySuccess
-      //     provinceName: '',  https://bdd.bddia.com/api/index.php/api/web/member/order-tourist/detail?order_sn=BDD202003098114447
+      //     provinceName: '',  https://bdd.bddia.com/api/index.php/api/web/member/order-tourist/detail?order_sn=MORESHINE202003098114447
       //     cityName: '',
       //     address: '',
       //     firstName: '',
@@ -447,7 +447,7 @@ export default {
               })
               .then(res => {
                 this.data2 = res.data
-                // http://localhost:8318/complete-payment?order_sn=BDD202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
+                // http://localhost:8318/complete-payment?order_sn=MORESHINE202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
                 /*setTimeout(() => {
                   this.$router.push({path: "/"}); // 强制切换当前路由 path
                 }, 5000);*/
