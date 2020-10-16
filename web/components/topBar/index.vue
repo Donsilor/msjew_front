@@ -452,13 +452,13 @@ export default {
         }
       ],
       otherNavList: [
-        {
-          key: 'education',
-          name: this.$t(`${lang}.education`),
-          to: {
-            path: '/education/diamonds/carat'
-          }
-        }
+        // {
+        //   key: 'education',
+        //   name: this.$t(`${lang}.education`),
+        //   to: {
+        //     path: '/education/diamonds/carat'
+        //   }
+        // }
       ],
       menus: {
         'ring': {

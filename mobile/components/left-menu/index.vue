@@ -133,10 +133,9 @@
                 </div>
               </div>
             </div>
-            <div class="menus-one" @click="goKnowledge" >
-              <!-- <nuxt-link :to="{ name: 'help-pages-knowledge' }"></nuxt-link> -->
+            <!-- <div class="menus-one" @click="goKnowledge" >
               <span :class="{changeColor:changeColor7}">{{lang.knowledge}}</span>
-            </div>
+            </div> -->
           </section>
         </div>
       </div>

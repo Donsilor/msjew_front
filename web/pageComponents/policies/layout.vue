@@ -125,12 +125,12 @@ export default {
           name: this.$t(`${lang}.chooseMORESHINE`),
           isSubShow: true,
           subItems: [
-            {
-              name: this.$t(`${lang}.qualityAndValue`),
-              to: {
-                path: '/policies/quality-value'
-              }
-            },
+            // {
+            //   name: this.$t(`${lang}.qualityAndValue`),
+            //   to: {
+            //     path: '/policies/quality-value'
+            //   }
+            // },
             {
               name: this.$t(`${lang}.returnAndRefundPolicy`),
               to: {
@@ -145,30 +145,30 @@ export default {
             }
           ]
         },
-        {
-          name: this.$t(`${lang}.aboutMORESHINE`),
-          isSubShow: true,
-          subItems: [
-            // {
-            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
-            //   to: {
-            //     path: '/brand-story'
-            //   }
-            // },
-            {
-              name: this.$t(`${lang}.diamondKnowledge`),
-              to: {
-                path: '/education/diamonds/carat'
-              }
-            },
-            {
-              name: this.$t(`${lang}.paymentMethods`),
-              to: {
-                path: '/policies/payment-methods'
-              }
-            }
-          ]
-        },
+        // {
+        //   name: this.$t(`${lang}.aboutMORESHINE`),
+        //   isSubShow: true,
+        //   subItems: [
+        //     // {
+        //     //   name: this.$t(`${lang}.MORESHINEBrandStory`),
+        //     //   to: {
+        //     //     path: '/brand-story'
+        //     //   }
+        //     // },
+        //     {
+        //       name: this.$t(`${lang}.diamondKnowledge`),
+        //       to: {
+        //         path: '/education/diamonds/carat'
+        //       }
+        //     },
+        //     {
+        //       name: this.$t(`${lang}.paymentMethods`),
+        //       to: {
+        //         path: '/policies/payment-methods'
+        //       }
+        //     }
+        //   ]
+        // },
         {
           name: this.$t(`${lang}.MORESHINEPolicy`),
           isSubShow: true,
@@ -197,12 +197,12 @@ export default {
                 path: '/policies/privacy-policy'
               }
             },
-            {
-              name: this.$t(`${lang}.termsAndConditions`),
-              to: {
-                path: '/policies/terms-and-conditions'
-              }
-            }
+            // {
+            //   name: this.$t(`${lang}.termsAndConditions`),
+            //   to: {
+            //     path: '/policies/terms-and-conditions'
+            //   }
+            // }
           ]
         }
       ],
@@ -235,12 +235,12 @@ export default {
           name: this.$t(`${lang}.chooseMORESHINE`),
           isSubShow: true,
           subItems: [
-            {
-              name: this.$t(`${lang}.qualityAndValue`),
-              to: {
-                path: '/policies/quality-value'
-              }
-            },
+            // {
+            //   name: this.$t(`${lang}.qualityAndValue`),
+            //   to: {
+            //     path: '/policies/quality-value'
+            //   }
+            // },
             {
               name: this.$t(`${lang}.returnAndRefundPolicy`),
               to: {
@@ -255,30 +255,30 @@ export default {
             }
           ]
         },
-        {
-          name: this.$t(`${lang}.aboutMORESHINE`),
-          isSubShow: true,
-          subItems: [
-            // {
-            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
-            //   to: {
-            //     path: '/brand-story'
-            //   }
-            // },
-            {
-              name: this.$t(`${lang}.diamondKnowledge`),
-              to: {
-                path: '/education/diamonds/carat'
-              }
-            },
-            {
-              name: this.$t(`${lang}.paymentMethods`),
-              to: {
-                path: '/policies/payment-methods'
-              }
-            }
-          ]
-        },
+        // {
+        //   name: this.$t(`${lang}.aboutMORESHINE`),
+        //   isSubShow: true,
+        //   subItems: [
+        //     // {
+        //     //   name: this.$t(`${lang}.MORESHINEBrandStory`),
+        //     //   to: {
+        //     //     path: '/brand-story'
+        //     //   }
+        //     // },
+        //     {
+        //       name: this.$t(`${lang}.diamondKnowledge`),
+        //       to: {
+        //         path: '/education/diamonds/carat'
+        //       }
+        //     },
+        //     {
+        //       name: this.$t(`${lang}.paymentMethods`),
+        //       to: {
+        //         path: '/policies/payment-methods'
+        //       }
+        //     }
+        //   ]
+        // },
         {
           name: this.$t(`${lang}.MORESHINEPolicy`),
           isSubShow: true,
@@ -307,12 +307,12 @@ export default {
                 path: '/policies/privacy-policy'
               }
             },
-            {
-              name: this.$t(`${lang}.termsAndConditions`),
-              to: {
-                path: '/policies/terms-and-conditions'
-              }
-            }
+            // {
+            //   name: this.$t(`${lang}.termsAndConditions`),
+            //   to: {
+            //     path: '/policies/terms-and-conditions'
+            //   }
+            // }
           ]
         }
       ]

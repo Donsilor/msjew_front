@@ -117,13 +117,13 @@ export default {
         {
           groupName: this.$t(`${lang}.chooseMORESHINE`),
           children: [
-            {
-              icon: '',
-              name: this.$t(`${lang}.qualityAndValue`),
-              to: {
-                path: '/policies/quality-value'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.qualityAndValue`),
+            //   to: {
+            //     path: '/policies/quality-value'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.returnAndRefundPolicy`),
@@ -152,13 +152,13 @@ export default {
             //   }
             // },
             
-            {
-              icon: '',
-              name: this.$t(`${lang}.diamondKnowledge`),
-              to: {
-                path: '/education/diamonds/carat'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.diamondKnowledge`),
+            //   to: {
+            //     path: '/education/diamonds/carat'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.paymentMethods`),
@@ -200,13 +200,13 @@ export default {
                 path: '/policies/privacy-policy'
               }
             },
-            {
-              icon: '',
-              name: this.$t(`${lang}.termsAndConditions`),
-              to: {
-                path: '/policies/terms-and-conditions'
-              }
-            }
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.termsAndConditions`),
+            //   to: {
+            //     path: '/policies/terms-and-conditions'
+            //   }
+            // }
           ]
         },
         {},
@@ -241,13 +241,13 @@ export default {
         {
           groupName: this.$t(`${lang}.chooseMORESHINE`),
           children: [
-            {
-              icon: '',
-              name: this.$t(`${lang}.qualityAndValue`),
-              to: {
-                path: '/policies/quality-value'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.qualityAndValue`),
+            //   to: {
+            //     path: '/policies/quality-value'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.returnAndRefundPolicy`),
@@ -276,13 +276,13 @@ export default {
             //   }
             // },
             
-            {
-              icon: '',
-              name: this.$t(`${lang}.diamondKnowledge`),
-              to: {
-                path: '/education/diamonds/carat'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.diamondKnowledge`),
+            //   to: {
+            //     path: '/education/diamonds/carat'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.paymentMethods`),
@@ -324,13 +324,13 @@ export default {
                 path: '/policies/privacy-policy'
               }
             },
-            {
-              icon: '',
-              name: this.$t(`${lang}.termsAndConditions`),
-              to: {
-                path: '/policies/terms-and-conditions'
-              }
-            }
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.termsAndConditions`),
+            //   to: {
+            //     path: '/policies/terms-and-conditions'
+            //   }
+            // }
           ]
         },
         {},
@@ -372,13 +372,13 @@ export default {
         {
           groupName: this.$t(`${lang}.chooseMORESHINE`),
           children: [
-            {
-              icon: '',
-              name: this.$t(`${lang}.qualityAndValue`),
-              to: {
-                path: '/policies/quality-value'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.qualityAndValue`),
+            //   to: {
+            //     path: '/policies/quality-value'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.returnAndRefundPolicy`),
@@ -406,20 +406,20 @@ export default {
             //     path: '/brand-story'
             //   }
             // },
-            {
-              icon: '',
-              name: this.$t(`${lang}.diamondKnowledge`),
-              to: {
-                path: '/education/diamonds/carat'
-              }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.paymentMethods`),
-              to: {
-                path: '/policies/payment-methods'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.diamondKnowledge`),
+            //   to: {
+            //     path: '/education/diamonds/carat'
+            //   }
+            // },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.paymentMethods`),
+            //   to: {
+            //     path: '/policies/payment-methods'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.aboutCompany`),
@@ -461,13 +461,13 @@ export default {
                 path: '/policies/privacy-policy'
               }
             },
-            {
-              icon: '',
-              name: this.$t(`${lang}.termsAndConditions`),
-              to: {
-                path: '/policies/terms-and-conditions'
-              }
-            }
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.termsAndConditions`),
+            //   to: {
+            //     path: '/policies/terms-and-conditions'
+            //   }
+            // }
           ]
         },
         {},

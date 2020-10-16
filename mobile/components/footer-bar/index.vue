@@ -58,21 +58,21 @@
               {{ lang.aboutCompany }}
             </span>
           </li>
-          <li class="item">
+          <!-- <li class="item">
             <span @click="jump('/help-pages/knowledge')">
               {{ lang.diamondKnowledge }}
             </span>
-          </li>
-          <li class="item">
+          </li> -->
+          <!-- <li class="item">
             <span @click="jump('/help-pages/paymentMethod')">
               {{ lang.payType }}
             </span>
-          </li>
-          <li class="item">
+          </li> -->
+          <!-- <li class="item">
             <span @click="jump('/help-pages/qualityValue')">
               {{ lang.qualityAndValue }}
             </span>
-          </li>
+          </li> -->
           <li class="item">
             <span @click="jump('/help-pages/returnedGoods')">
               {{ lang.aboutRefund }}
@@ -111,11 +111,11 @@
               {{ lang.privacyPolicy }}
             </span>
           </li>
-          <li class="item">
+          <!-- <li class="item">
             <span @click="jump('/help-pages/clause')">
               {{ lang.termsAndConditions }}
             </span>
-          </li>
+          </li> -->
         </ul>
       </div>
     </section>
