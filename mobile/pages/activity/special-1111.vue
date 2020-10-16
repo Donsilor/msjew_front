@@ -180,7 +180,7 @@ export default {
           salePrice: 4555,
           goodsName: {
             en_US: 'Micro Pave Diamond Engagement Ring Setting (0.176 ct. tw.)',
-            zh_TW: '經典密釘鑽石訂婚戒托（0.176 克拉總重量)'
+            zh_TW: '經典密釘莫桑石訂婚戒托（0.176 克拉總重量)'
           }[this.$store.state.language],
           to: {
             name: 'engagement-engagement-rings',
@@ -210,7 +210,7 @@ export default {
           goodsName: {
             en_US:
               '14K White Gold Petal Diamond Engagement Ring Setting (0.145 ct. tw.)',
-            zh_TW: '14K白金花瓣鑽石訂婚戒托（0.145 克拉總重量）'
+            zh_TW: '14K白金花瓣莫桑石訂婚戒托（0.145 克拉總重量）'
           }[this.$store.state.language],
           to: {
             name: 'engagement-engagement-rings',
@@ -244,7 +244,7 @@ export default {
           activityPrice: 1111,
           goodsName: {
             en_US: '18K White Gold Diamond Necklace',
-            zh_TW: '18K白金鑽石項鍊'
+            zh_TW: '18K白金莫桑石項鍊'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -259,7 +259,7 @@ export default {
           activityPrice: 1111,
           goodsName: {
             en_US: '18K White Gold Diamond Necklace',
-            zh_TW: '18K白金鑽石項鍊'
+            zh_TW: '18K白金莫桑石項鍊'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -274,7 +274,7 @@ export default {
           activityPrice: 1111,
           goodsName: {
             en_US: '18K White Gold Diamond Necklace',
-            zh_TW: '18K白金鑽石項鍊'
+            zh_TW: '18K白金莫桑石項鍊'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -289,7 +289,7 @@ export default {
           activityPrice: 1111,
           goodsName: {
             en_US: '18K White Gold Diamond Necklace',
-            zh_TW: '18K白金鑽石項鍊'
+            zh_TW: '18K白金莫桑石項鍊'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -304,7 +304,7 @@ export default {
           activityPrice: 1111,
           goodsName: {
             en_US: '18K White Gold Diamond Bracelet',
-            zh_TW: '18K白金鑽石手鍊'
+            zh_TW: '18K白金莫桑石手鍊'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -319,7 +319,7 @@ export default {
           activityPrice: 1111,
           goodsName: {
             en_US: '18K White Gold Diamond Bracelet',
-            zh_TW: '18K白金鑽石手鍊'
+            zh_TW: '18K白金莫桑石手鍊'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -337,7 +337,7 @@ export default {
           activityPrice: 16980,
           goodsName: {
             en_US: '18K White Gold Diamond Bangle',
-            zh_TW: '18K白金密鑲鑽石手鐲'
+            zh_TW: '18K白金密鑲莫桑石手鐲'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -353,7 +353,7 @@ export default {
           activityPrice: 12000,
           goodsName: {
             en_US: '14K Rose Gold Diamond Bangle',
-            zh_TW: '14K玫瑰金密鑲鑽石手鐲'
+            zh_TW: '14K玫瑰金密鑲莫桑石手鐲'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -369,7 +369,7 @@ export default {
           activityPrice: 4670,
           goodsName: {
             en_US: '18K White Gold Diamond  Bracelet',
-            zh_TW: '18K白金鑽石手鍊'
+            zh_TW: '18K白金莫桑石手鍊'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',
@@ -385,7 +385,7 @@ export default {
           activityPrice: 6390,
           goodsName: {
             en_US: '18K White Gold Diamond  Bracelet',
-            zh_TW: '18K白金鑽石手鍊'
+            zh_TW: '18K白金莫桑石手鍊'
           }[this.$store.state.language],
           to: {
             name: 'accessories-accessories',

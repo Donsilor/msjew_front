@@ -62,7 +62,7 @@
 				<a href="http://pwt.zoosnet.net/LR/Chatpre.aspx?id=PWT48608987&lng=cn">{{ lang.immediatelyConsult }}</a>
 			</div>
 			<div class="text">
-				{{ lang.greetCall }}： <a href="tel:19925412336">19925412336</a>（{{ lang.ringUp }}）
+				{{ lang.greetCall }}： <a href="tel:0755-25160872-8005">0755-25160872-8005</a>（{{ lang.ringUp }}）
 			</div>
 		</div>
 		<div class="box-11">
@@ -168,7 +168,7 @@
 
 			<div class="text">
 				<div class="text1">{{ lang.question }}？</div>
-				<div class="text2">{{ lang.contact1 }}： 19925412336</div>
+				<div class="text2">{{ lang.contact1 }}： 0755-25160872-8005</div>
 				<div class="btn-s">
 					<a href="http://pwt.zoosnet.net/LR/Chatpre.aspx?id=PWT48608987&lng=cn">{{ lang.onlineConsult }}</a>
 				</div>

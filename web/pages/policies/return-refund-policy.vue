@@ -12,7 +12,7 @@
         <dt>{{ $t(`${lang}.tit2`) }}</dt>
         <dd>
           {{ $t(`${lang}.con3`) }}
-          <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+          <span v-if="this.$store.state.platform === 20">service@bddco.com</span>
           <span v-else>service@bddco.com</span>
           {{ $t(`${lang}.con4`) }}
         </dd>
@@ -58,7 +58,7 @@
         <dt>{{ $t(`${lang}.tit7`) }}</dt>
         <dd>
           {{ $t(`${lang}.con16`) }}
-         <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+         <span v-if="this.$store.state.platform === 20">service@bddco.com</span>
           <span v-else>service@bddco.com</span>
           {{ $t(`${lang}.con17`) }}
         </dd>

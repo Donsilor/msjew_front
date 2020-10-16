@@ -14,13 +14,13 @@
           <li class="item">
             <span>
               {{ lang.callUs }}：
-              <a href="tel:19925412336">19925412336</a>
+              <a href="tel:0755-25160872-8005">0755-25160872-8005</a>
             </span>
           </li>
           <li class="item">
             <span>
               {{ lang.emailUs }}：
-              <a href="mailto:service@bddco.com">e-service@bddco.com</a>
+              <a href="mailto:service@bddco.com">service@bddco.com</a>
             </span>
           </li>
         </ul>

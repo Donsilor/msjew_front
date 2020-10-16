@@ -926,6 +926,19 @@ export default language => {
       ]
     },
 
+    languageOptionsCn: [
+      {
+        code: 'zh_CN',
+        content: '简体中文',
+        shortCut: '简'
+      },
+      {
+        code: 'zh_TW',
+        content: '繁體中文',
+        shortCut: '繁'
+      }
+    ],
+
     languageOptions: [
       {
         code: 'zh_TW',

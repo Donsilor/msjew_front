@@ -23,7 +23,7 @@
             <!--        <div class="date">24/7</div>-->
             <div class="row-flex align-item-center service">
               <i class="iconfont iconphone"></i>
-              <span v-if="this.$store.state.platform === 20">19925412336</span>
+              <span v-if="this.$store.state.platform === 20">0755-25160872-8005</span>
               <span v-else>(852) 2165 3908</span>
               <!--          <span class="gap-line"></span>-->
               <!--          <span>聯系 24/7</span>-->
@@ -98,16 +98,25 @@
 
             <!--        语言切换-->
             <div class="item language">
-              <!-- <el-dropdown
+              <el-dropdown
                 type="primary"
 
                 placement="bottom"
                 @command="setLanguage"
-              > -->
-                <span class="row-flex align-item-center el-dropdown-link gray">
-                  中文简体
+              >
+                <span class="row-flex align-item-center el-dropdown-link span">
+                  {{ languageInfo.content }}<i class="iconfont iconkuozhan"></i>
                 </span>
-              <!-- </el-dropdown> -->
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item
+                    v-for="(option, n) in languageOptionsCn"
+                    :key="n"
+                    :command="option.code"
+                  >
+                    {{ option.content }}
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
               <!-- <el-dropdown
                 v-if="this.$store.state.platform === 30"
                 type="primary"
@@ -376,6 +385,7 @@ export default {
       lang,
       keyword: '',
       languageOptions: this.$bddDefinition.languageOptions,
+      languageOptionsCn: this.$bddDefinition.languageOptionsCn,
       coinOptions: this.$bddDefinition.coinOptions,
       coinOptionsCn: this.$bddDefinition.coinOptionsCn,
       coinOptionsTw: this.$bddDefinition.coinOptionsTw,
@@ -1318,9 +1328,10 @@ export default {
       let result = ''
       const language = this.$store.state.language
       const languageOptions = this.$bddDefinition.languageOptions
-      for (let n = 0, length = languageOptions.length; n < length; n++) {
-        if (languageOptions[n].code === language) {
-          result = languageOptions[n]
+      const languageOptionsCn = this.$bddDefinition.languageOptionsCn
+      for (let n = 0, length = languageOptionsCn.length; n < length; n++) {
+        if (languageOptionsCn[n].code === language) {
+          result = languageOptionsCn[n]
           break
         }
       }

@@ -152,7 +152,7 @@
           </div> -->
         </div>
         <div class="help">
-          <a v-if="this.$store.state.platform === 21" href="tel:19925412336">
+          <a v-if="this.$store.state.platform === 21" href="tel:0755-25160872-8005">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconphone"></i>
@@ -174,7 +174,7 @@
           </a>
         </div>
         <div class="help">
-          <a v-if="this.$store.state.platform === 21" href="mailto:e-service@bddco.com">
+          <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconyouxiang"></i>
