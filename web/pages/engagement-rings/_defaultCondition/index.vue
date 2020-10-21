@@ -58,6 +58,26 @@ const conditionMaps = {
   'channel-set': {
     material: 35
   },
+
+  // 材质
+  'alloy': {
+    material: 204
+  },
+  '925-silver': {
+    material: 35
+  },
+  '14k-gold': {
+    material: 273
+  },
+  '18k-gold': {
+    material: 274
+  },
+
+  // 送礼对象
+
+  'ring-Romantic-lady':{
+    
+  }
 }
 
 export default {

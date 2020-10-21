@@ -99,7 +99,57 @@ const conditionMaps = {
     scenes: 47
   },
   
+  // 系列
+  'ring-letter-series': {
+    series:288
+  },
 
+  // 材质
+  'alloy': {
+    material: 204
+  },
+  '925-silver': {
+    material: 35
+  },
+  '9k-silver': {
+    material: 272
+  },
+  '14k-gold': {
+    material: 273
+  },
+  '18k-gold': {
+    material: 274
+  },
+
+  // 送礼对象
+  'ring-Romantic-lady':{
+    object:42
+  },
+  'ring-distinguished-man':{
+    object:41
+  },
+
+  // 镶嵌方式
+  'ring-group-setting':{
+    mosaic:275
+  },
+  'ring-single-drill':{
+    mosaic:276
+  },
+
+  // 风格
+  'ring-modern-simplicity':{
+    manner:277
+  },
+  'ring-classic-retro':{
+    manner:278
+  },
+  'ring-fun-with-personality':{
+    manner:279
+  },
+  'ring-fashion-limited':{
+    manner:280
+  },
 }
 
 export default {

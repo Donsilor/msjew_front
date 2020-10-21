@@ -2,6 +2,7 @@ body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fo
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: twCenMt;
 }
 
 a {
@@ -39,13 +40,14 @@ button {
 
 @font-face {
   font-family: twCenMt;
-  src: url('./twCenMt.ttf');
+  src: url('./ALIBABA-PUHUITI-BOLD.TTF');
 }
 
 @font-face {
   font-family: SourceHanSansCN-N;
   src: url('./SourceHanSansCN-Normal.ttf');
 }
+
 
 html, body, #__nuxt, #__layout, .layout-box {
   width: 100%;

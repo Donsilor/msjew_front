@@ -12,7 +12,7 @@
             :key="index"
             :class="[
               'option-item',
-              { active: option.id === searchConditions.style }
+              { active: option.id === searchConditions.manner }
             ]"
             @click="changeStyle(option.id)"
           >
@@ -52,7 +52,7 @@
       <!--      材質条件-->
       <div class="condition-item condition-material">
         <h2 class="condition-name">
-          {{ $t(`${lang}.color`) }}
+          {{ $t(`${lang}.material`) }}
         </h2>
         <ul class="options">
           <li
@@ -66,7 +66,7 @@
               <img src="/ring-material/all.png" />
             </div>
             <div class="item-name">
-              {{ $t(`${lang}.allColor`) }}
+              {{ $t(`${lang}.allMaterial`) }}
             </div>
           </li>
           <li
@@ -317,17 +317,20 @@ export default {
       lang,
       listUrl: '/web/goods/style/search',
       page_size: 16,
-      forPeopleOptions: this.CONDITION_INFO.style.forPeople,
-      styleStyleOptions: this.CONDITION_INFO.style.styleRings,
-      materialOptions: this.CONDITION_INFO.quality.rings,
+      forPeopleOptions: this.CONDITION_INFO.style.MsForPeople,
+      styleStyleOptions: this.CONDITION_INFO.style.styleMsRings,
+      materialOptions: this.CONDITION_INFO.material.rings,
       defaultPriceRange,
-      fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
+      fastPriceRanges: [[500, 1000], [1000, 5000], [5000, 10000]],
       searchConditions: {
         styleSex: '', // 54-款式， 26-适用人群
         style: '',
         material: '',
         forPeople: '',
         scenes: '',
+        object:'',
+        mosaic:'',
+        manner:'',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
       loading: true,
@@ -391,6 +394,15 @@ export default {
         })
       }
 
+      if (conditions.series) {
+        params.push({
+          type: 1,
+          paramId:65,
+          paramName: 'series',
+          valueType: 1,
+          configValues: conditions.series === '' ? [] : [conditions.series]
+        })
+      }
       if (conditions.material) {
         params.push({
           type: 3,
@@ -398,6 +410,33 @@ export default {
           paramName: 'material',
           valueType: 1,
           configValues: conditions.material === '' ? [] : [conditions.material]
+        })
+      }
+      if (conditions.object) {
+        params.push({
+          type: 3,
+          paramId:26,
+          paramName: 'object',
+          valueType: 1,
+          configValues: conditions.object === '' ? [] : [conditions.object]
+        })
+      }
+      if (conditions.mosaic) {
+        params.push({
+          type: 3,
+          paramId:66,
+          paramName: 'mosaic',
+          valueType: 1,
+          configValues: conditions.mosaic === '' ? [] : [conditions.mosaic]
+        })
+      }
+      if (conditions.manner) {
+        params.push({
+          type: 3,
+          paramId:67,
+          paramName: 'manner',
+          valueType: 1,
+          configValues: conditions.manner === '' ? [] : [conditions.manner]
         })
       }
       if (conditions.forPeople) {
@@ -455,6 +494,7 @@ export default {
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
       allData.forEach(item => {
+        // console.log("item",item)
         this.coinType = item.coinType
         if (item.hasOwnProperty('dsName')) {
           // 广告
@@ -514,11 +554,11 @@ export default {
       const searchConditions = this.searchConditions
       // console.log('style====>', searchConditions.style, value)
       if (
-        searchConditions.style === value
+        searchConditions.manner === value
       ) {
-        this.changeCondition('style', '')
+        this.changeCondition('manner', '')
       } else {
-        this.changeCondition('style', value)
+        this.changeCondition('manner', value)
       }
     },
 

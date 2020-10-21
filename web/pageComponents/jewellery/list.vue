@@ -40,10 +40,10 @@
             </li>
           </ul>
         </div>
-        <!--      成色-->
+        <!--      材质-->
         <div class="condition-item condition-material">
           <h2 class="condition-name" style="margin-right: 70px;">
-            {{ $t(`${lang}.color`) }}
+            {{ $t(`${lang}.material`) }}
           </h2>
           <ul class="options">
             <li
@@ -57,7 +57,7 @@
                 <img src="/ring-material/all.png" />
               </div>
               <div class="item-name">
-                {{ $t(`${lang}.colors`) }}
+                {{ $t(`${lang}.allMaterial`) }}
               </div>
             </li>
             <li
@@ -145,7 +145,7 @@
 
 
         <!--      主石类型-->
-        <div class="condition-item condition-material">
+        <!-- <div class="condition-item condition-material">
           <h2 class="condition-name">
             {{ $t(`${lang}.stoneType`) }}
           </h2>
@@ -181,7 +181,7 @@
               </div>
             </li>
           </ul>
-        </div>
+        </div> -->
       </section>
       <section class="list-title" v-show="this.loading == false">
         <h1 class="title">
@@ -339,10 +339,10 @@ export default {
       listUrl: '/web/goods/style/search',
       page_size: 16,
       jewelleryOptions: this.CONDITION_INFO.jewellery,
-      quality: this.CONDITION_INFO.quality,
+      quality: this.CONDITION_INFO.material,
       stoneType: this.CONDITION_INFO.stoneType,
       defaultPriceRange,
-      fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
+      fastPriceRanges: [[500, 1000], [1000, 5000], [5000, 10000]],
       searchConditions: {
         categoryId: '',
         typeId: 4,
@@ -377,6 +377,16 @@ export default {
         }
       ]
 
+      if (conditions.series) {
+        params.push({
+          type: 3,
+          paramId:65,
+          paramName: 'series',
+          valueType: 1,
+          configValues: conditions.series === '' ? [] : [conditions.series]
+        })
+      }
+
       if (conditions.materialIndex !== "") {
         params.push({
           type: 3,
@@ -384,6 +394,46 @@ export default {
           paramName: 'material',
           valueType: 1,
           configValues: [this.materialOptions[conditions.materialIndex].id]
+        })
+      }
+
+      if (conditions.object) {
+        params.push({
+          type: 2,
+          paramId:26,
+          paramName: 'object',
+          valueType: 1,
+          configValues: conditions.object === '' ? [] : [conditions.object]
+        })
+      }
+
+      if (conditions.mosaic) {
+        params.push({
+          type: 2,
+          paramId:66,
+          paramName: 'mosaic',
+          valueType: 1,
+          configValues: conditions.mosaic === '' ? [] : [conditions.mosaic]
+        })
+      }
+
+      if (conditions.style1) {
+        params.push({
+          type: 2,
+          paramId:67,
+          paramName: 'style1',
+          valueType: 1,
+          configValues: conditions.style1 === '' ? [] : [conditions.style1]
+        })
+      }
+
+       if (conditions.style2) {
+        params.push({
+          type: 2,
+          paramId:68,
+          paramName: 'style2',
+          valueType: 1,
+          configValues: conditions.style2 === '' ? [] : [conditions.style2]
         })
       }
 
