@@ -110,22 +110,47 @@
     <!--匹配度select-->
     <swiper-tap ref="suitability" @clear="getSortBy"></swiper-tap>
     <!--成色-->
+    
+    <!-- <choose-eject-pro
+      ref="series-eject-choose-pro"
+      :title="lang.series"
+      :type="'series'"
+      :required="true"
+      :options="conditions[0].options"
+      @clear="clearSeries"
+    ></choose-eject-pro> -->
+    <!-- <choose-eject-pro
+      ref="series-eject-choose-pro"
+      :title="lang.styles"
+      :type="'style'"
+      :required="true"
+      :options="conditions[1].options"
+      @clear="clearStyle"
+    ></choose-eject-pro> -->
     <choose-eject-pro
       ref="quality-eject-choose-pro"
-      :title="lang.fineness"
+      :title="lang.material"
       :type="'quality'"
       :required="true"
       :options="conditions[0].options"
       @clear="clearQuality"
     ></choose-eject-pro>
+    <!-- <choose-eject-pro
+      ref="style-eject-choose-pro"
+      :title="lang.mosaic"
+      :type="'mosaic'"
+      :required="true"
+      :options="conditions[2].options" 
+      @clear="clearMosaic"
+    ></choose-eject-pro>
     <choose-eject-pro
       ref="style-eject-choose-pro"
-      :title="lang.theme"
-      :type="'style'"
+      :title="lang.object   "
+      :type="'object'"
       :required="true"
-      :options="conditions[1].options"
-      @clear="clearTheme"
-    ></choose-eject-pro>
+      :options="conditions[3].options" 
+      @clear="clearObject"
+    ></choose-eject-pro> -->
     <!--价格选择底部弹出-->
     <progress-bar
       ref="price-bar"
@@ -207,7 +232,7 @@ export default {
   }
   .choose-btn {
     position: relative;
-    width: calc((100% - 10px) / 3)!important;
+    width: calc((100% - 10px) / 2)!important;
     height: 50px;
     background: rgba(250, 250, 250, 1);
     border: 1px solid rgba(221, 221, 221, 1);

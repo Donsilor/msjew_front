@@ -48,23 +48,23 @@ export default {
         },
         {
           content: this.LANGUAGE.listCommons.sliders[2],
-          cod: this.CONDITION_INFO.quality.studEarring
+          cod: this.CONDITION_INFO.quality.Bracelet
         },
         {
           content: this.LANGUAGE.listCommons.sliders[3],
-          cod: this.CONDITION_INFO.quality.earring
+          cod: this.CONDITION_INFO.quality.Bangle
         },
         {
           content: this.LANGUAGE.listCommons.sliders[4],
-          cod: this.CONDITION_INFO.quality.BraceletLine
+          cod: this.CONDITION_INFO.quality.studEarring
         },
         {
           content: this.LANGUAGE.listCommons.sliders[5],
-          cod: this.CONDITION_INFO.quality.bracelet
+          cod: this.CONDITION_INFO.quality.earring
         },
         {
           content: this.LANGUAGE.listCommons.sliders[6],
-          cod: this.CONDITION_INFO.quality.bracelet
+          cod: this.CONDITION_INFO.quality.BraceletLine
         },
         {
           content: this.LANGUAGE.listCommons.sliders[7],
@@ -74,6 +74,14 @@ export default {
           content: this.LANGUAGE.listCommons.sliders[8],
           cod: this.CONDITION_INFO.quality.bracelet
         },
+        // {
+        //   content: this.LANGUAGE.listCommons.sliders[7],
+        //   cod: this.CONDITION_INFO.quality.bracelet
+        // },
+        // {
+        //   content: this.LANGUAGE.listCommons.sliders[8],
+        //   cod: this.CONDITION_INFO.quality.bracelet
+        // },
 
       ],
       actIndex: -1

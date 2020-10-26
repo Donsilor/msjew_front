@@ -24,6 +24,7 @@ export default {
   computed: {
     // 所有已请求的页码的数据集合
     showData() {
+      
       if(this.listData.length == 0){
         this.loading = true
         setTimeout(() => {
@@ -46,6 +47,7 @@ export default {
         }
         result = result.concat(listData[n])
       }
+      // console.log("Dddd",result)
       return result
     },
     requestingListData() {

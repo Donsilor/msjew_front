@@ -111,6 +111,584 @@ export default function ({ req, res, redirect, store, route }) {
                 },
 
 
+                // 猫闪start
+
+                // MS戒指系列-字母系列
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?series=288/,
+                    'pcUrl': `/wedding-rings/ring-letter-series`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指材质-合金
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?material=204/,
+                    'pcUrl': `/wedding-rings/alloy`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指材质-925银
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?material=35/,
+                    'pcUrl': `/wedding-rings/925-silver`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指材质-9k金
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?material=272/,
+                    'pcUrl': `/wedding-rings/9k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指材质-14k金
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?material=273/,
+                    'pcUrl': `/wedding-rings/14k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指材质-18k金
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?material=274/,
+                    'pcUrl': `/wedding-rings/18k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指风格-现代简约
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?style=277/,
+                    'pcUrl': `/wedding-rings/ring-modern-simplicity`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指风格-经典复古
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?style=278/,
+                    'pcUrl': `/wedding-rings/ring-classic-retro`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指风格-个性玩趣
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?style=279/,
+                    'pcUrl': `/wedding-rings/ring-fun-with-personality`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS戒指风格-时尚限定
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?style=280/,
+                    'pcUrl': `/wedding-rings/ring-fashion-limited`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS戒指-价格(0-500)
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?startPrice=0&endPrice=500/,
+                    'pcUrl': `/wedding-rings/all`,
+                    'params': {
+                        'priceRange': 'WzAsNTAwXQ%3D%3D',
+                    },
+                },
+
+                //MS戒指-价格(500-1000)
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?startPrice=500&endPrice=1000/,
+                    'pcUrl': `/wedding-rings/all`,
+                    'params': {
+                        'priceRange': 'WzUwMCwxMDAwXQ%3D%3D',
+                    },
+                },
+
+                //MS戒指-价格(1000-5000)
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?startPrice=1000&endPrice=5000/,
+                    'pcUrl': `/wedding-rings/all`,
+                    'params': {
+                        'priceRange': 'WzEwMDAsNTAwMF0%3D',
+                    },
+                },
+
+                //MS戒指-价格(5000-10000)
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?startPrice=5000&endPrice=10000/,
+                    'pcUrl': `/wedding-rings/all`,
+                    'params': {
+                        'priceRange': 'WzUwMDAsMTAwMDBd',
+                    },
+                },
+
+                //MS戒指-价格(10000以上)
+                {
+                    'mobileUrl': /^\/marriage-ring\/single-ring\?startPrice=10000&endPrice=300000/,
+                    'pcUrl': `/wedding-rings/all`,
+                    'params': {
+                        'priceRange': 'WzEwMDAwLDMwMDAwMF0%3D',
+                    },
+                },
+
+                //MS项链-项链
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=0$/,
+                    'pcUrl': `/jewellery/necklaces`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS项链材质-合金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=0&material=204/,
+                    'pcUrl': `/jewellery/necklace-alloy`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS项链材质-925银
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=0&material=35/,
+                    'pcUrl': `/jewellery/necklace-925-silver`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS项链材质-9k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=0&material=272/,
+                    'pcUrl': `/jewellery/necklace-9k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS项链材质-14k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=0&material=273/,
+                    'pcUrl': `/jewellery/necklace-14k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS项链材质-18k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=0&material=274/,
+                    'pcUrl': `/jewellery/necklace-18k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS项链-吊坠
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=1$/,
+                    'pcUrl': `/jewellery/pendants`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS吊坠材质-合金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=1&material=204/,
+                    'pcUrl': `/jewellery/pendants-alloy`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS吊坠材质-925银
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=1&material=35/,
+                    'pcUrl': `/jewellery/pendants-925-silver`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS吊坠材质-9k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=1&material=272/,
+                    'pcUrl': `/jewellery/pendants-9k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS吊坠材质-14k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=1&material=273/,
+                    'pcUrl': `/jewellery/pendants-14k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS吊坠材质-18k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=1&material=274/,
+                    'pcUrl': `/jewellery/pendants-18k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS手链-手链
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=2$/,
+                    'pcUrl': `/jewellery/bracelets`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-合金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=2&material=204/,
+                    'pcUrl': `/jewellery/necklace-alloy`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-925银
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=2&material=35/,
+                    'pcUrl': `/jewellery/necklace-925-silver`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-9k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=2&material=272/,
+                    'pcUrl': `/jewellery/necklace-9k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-14k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=2&material=273/,
+                    'pcUrl': `/jewellery/necklace-14k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-18k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=2&material=274/,
+                    'pcUrl': `/jewellery/necklace-18k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS手链-手镯
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=3$/,
+                    'pcUrl': `/jewellery/bangles`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-合金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=3&material=204/,
+                    'pcUrl': `/jewellery/bangles-alloy`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-925银
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=3&material=35/,
+                    'pcUrl': `/jewellery/bangles-925-silver`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-9k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=3&material=272/,
+                    'pcUrl': `/jewellery/bangles-9k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-14k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=3&material=273/,
+                    'pcUrl': `/jewellery/bangles-14k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS手链材质-18k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=3&material=274/,
+                    'pcUrl': `/jewellery/bangles-18k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS耳饰类别-耳环
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=5$/,
+                    'pcUrl': `/jewellery/Earrings`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS耳饰类别-耳钉
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=6$/,
+                    'pcUrl': `/jewellery/earStud`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS耳饰类别-耳线
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=7$/,
+                    'pcUrl': `/jewellery/EarLine`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS耳饰类别-耳坠
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=8$/,
+                    'pcUrl': `/jewellery/EarDrop`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS耳饰材质-合金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&material=204/,
+                    'pcUrl': `/jewellery/earring-alloy`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS耳饰材质-925银
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&material=35/,
+                    'pcUrl': `/jewellery/earring-925-silver`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS耳饰材质-9k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&material=272/,
+                    'pcUrl': `/jewellery/earring-9k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS耳饰材质-14k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&material=273/,
+                    'pcUrl': `/jewellery/earring-14k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS耳饰材质-18k金
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&material=274/,
+                    'pcUrl': `/jewellery/earring-18k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS耳饰-价格(0-500)
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&startPrice=0&endPrice=500/,
+                    'pcUrl': `/jewellery/Earring`,
+                    'params': {
+                        'priceRange': 'WzAsNTAwXQ%3D%3D',
+                    },
+                },
+
+                //MS耳饰-价格(500-1000)
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&startPrice=500&endPrice=1000/,
+                    'pcUrl': `/jewellery/Earring`,
+                    'params': {
+                        'priceRange': 'WzUwMCwxMDAwXQ%3D%3D',
+                    },
+                },
+
+                //MS耳饰-价格(1000-5000)
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&startPrice=1000&endPrice=5000/,
+                    'pcUrl': `/jewellery/Earring`,
+                    'params': {
+                        'priceRange': 'WzEwMDAsNTAwMF0%3D',
+                    },
+                },
+
+                //MS耳饰-价格(5000-10000)
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&startPrice=5000&endPrice=10000/,
+                    'pcUrl': `/jewellery/Earring`,
+                    'params': {
+                        'priceRange': 'WzUwMDAsMTAwMDBd',
+                    },
+                },
+
+                //MS耳饰-价格(10000以上)
+                {
+                    'mobileUrl': /^\/accessories\/list\?actIndex=4&startPrice=10000&endPrice=300000/,
+                    'pcUrl': `/jewellery/Earring`,
+                    'params': {
+                        'priceRange': 'WzEwMDAwLDMwMDAwMF0%3D',
+                    },
+                },
+
+
+                // MS设计师系列-字母系列
+                {
+                    'mobileUrl': /^\/designers\/list\?series=288/,
+                    'pcUrl': `/designer/designer-letter-series`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS设计师系列风格-现代简约
+                {
+                    'mobileUrl': /^\/designers\/list\?style=277/,
+                    'pcUrl': `/designer/designer-modern-simplicity`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS设计师系列风格-经典复古
+                {
+                    'mobileUrl': /^\/designers\/list\?style=278/,
+                    'pcUrl': `/designer/designer-classic-retro`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS设计师系列风格-个性玩趣
+                {
+                    'mobileUrl': /^\/designers\/list\?style=279/,
+                    'pcUrl': `/designer/designer-fun-with-personality`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                // MS设计师系列风格-时尚限定
+                {
+                    'mobileUrl': /^\/designers\/list\?style=280/,
+                    'pcUrl': `/designer/designer-fashion-limited`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS设计师系列-合金
+                {
+                    'mobileUrl': /^\/designers\/list\?material=204/,
+                    'pcUrl': `/designer/designer-alloy`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS设计师系列-925银
+                {
+                    'mobileUrl': /^\/designers\/list\?material=35/,
+                    'pcUrl': `/designer/designer-925-silver`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS设计师系列-9K金
+                {
+                    'mobileUrl': /^\/designers\/list\?material=272/,
+                    'pcUrl': `/designer/designer-9k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS设计师系列-14K金
+                {
+                    'mobileUrl': /^\/designers\/list\?material=273/,
+                    'pcUrl': `/designer/designer-14k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                //MS设计师系列-18K金
+                {
+                    'mobileUrl': /^\/designers\/list\?material=274/,
+                    'pcUrl': `/designer/designer-18k-gold`,
+                    'params': {
+                        'param': 'none',
+                    },
+                },
+
+                
+
+
+
+                // 猫闪end
+
+
+
                 //戒指
                 {
                     'mobileUrl': /^\/marriage-ring\/?$/,

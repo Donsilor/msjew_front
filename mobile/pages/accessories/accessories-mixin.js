@@ -122,16 +122,19 @@ export default {
   },
   mounted() {
     // console.log("this.chooseCarats",this.goodInfo.carats)
-    if(this.goodInfo.materials){
+    if(this.goodInfo.materials||this.goodInfo.sizes){
       this.conditions[0].checked = [
         this.goodInfo.materials.length > 0
           ? this.goodInfo.materials[0].id
           : ``
       ]
       this.conditions[0].options = this.goodInfo.materials
-      this.chooseSize = this.goodInfo.sizes
-        ? this.goodInfo.sizes[0].content
-        : ``
+      // this.chooseSize = this.goodInfo.sizes
+      //   ? this.goodInfo.sizes[0].content
+      //   : ``
+      // this.chooseSizeId =this.goodInfo.sizes
+      //   ? this.goodInfo.sizes[0].sortBy
+      //   :``
       this.chooseCarats = this.goodInfo.carats
         ? this.goodInfo.carats[0].content
         : ``

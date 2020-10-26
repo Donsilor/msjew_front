@@ -209,7 +209,7 @@
     <!-- 非美国站点 -->
     <div v-if="platform == 11 || platform == 21 || platform == 41">
       <!-- <tip-message></tip-message> -->
-      <section class="banner">
+      <section class="ms-banner">
         <template v-if="banner.length > 1">
           <swiper :indicator="true" :auto="true" :duration="5000">
             <template v-for="(each, n) in banner">
@@ -253,162 +253,105 @@
           </template>
         </template>
       </section>
-      <section class="customize">
-        <h1 class="title margin-bottom-40">{{ lang.diySubTitle }}</h1>
-        <!--      <h2 class="sub-title">{{ lang.diySubTitle }}</h2>-->
-        <div class="exhibition">
-          <img
-            v-show="exhibitionImageStatus"
-            ref="exhibition-image"
-            src="/index/exhibition.png"
-            @click="clickVideoCover"
-          />
-          <video
-            v-show="!exhibitionImageStatus"
-            ref="exhibition-video"
-            src="/index/exhibition.mp4"
-            webkit-playsinline
-            playsinline
-            x5-playsinline
-            @click="clickVideo"
-            @ended="videoEnded"
-          ></video>
-        </div>
-        <div class="button-group">
-          <button @click="goToMade(2)">{{ lang.startFromRing }}</button>
-          <span>OR</span>
-          <button @click="goToMade(1)">{{ lang.startFromDiamond }}</button>
-        </div>
-        <!--      <div class="tips">-->
-        <!--        <h2>{{ lang.syiwo }}</h2>-->
-        <!--        <h3 @click="goToMade(2)">{{ lang.ig }}</h3>-->
-        <!--      </div>-->
+      <section class="article">
+        <p class="headline">{{ lang.headline1 }}</p>
+        <p class="subtitle">{{ lang.subtitle1 }}</p>
       </section>
-      <section class="categories">
-        <div
-          v-for="(each, n) in categories"
-          :key="n"
-          :class="['category', `${each.textAlign}-title`]"
-          @click="routerTo(each.routerName, each.query)"
-        >
-          <img class="category-bg" :src="each.bg" />
-          <img class="category-image" :src="each.image" />
-          <div class="info">
-            <div class="title">{{ each.title }}</div>
-            <div class="sub-title">{{ each.subTitle }}</div>
-          </div>
+      <!-- 热卖 -->
+      <section class="hot-sale">
+        <div>
+          <p class="headline">Hot sale</p>
+          <p class="subtitle">{{ lang.headline2 }}</p>
         </div>
-      </section>
-      <section class="recommend">
-        <h1 class="title">{{ cardsInfo.moduleTitle }}</h1>
-        <!--      <h1 class="title">{{ lang.fineJewelry }}</h1>-->
-        <!--      <h2 class="sub-title">{{ lang.recommend }}</h2>-->
-        <h3 class="title-line"></h3>
-        <div class="cards">
-          <swiper
-            :item-width="77.3"
-            :indicator="false"
-            :scale="true"
-            :auto="true"
-            :duration="5000"
-            @change="changeCard"
-          >
-            <div
-              v-for="(each, n) in cards"
-              :key="n"
-              class="recommend-item"
-              @click="toCardDetail(each)"
-            >
-              <div class="product-image">
-                <img
-                  :src="imageStrToArray(each.goodsImages)[0]"
-                  @error="imageError"
-                />
-              </div>
-              <div class="product-price">
-                <span>{{ formatCoin(each.coinType)}}</span>
-                <span>{{ formatNumber(each.salePrice) }}</span>
-              </div>
-              <div class="product-name ow-h1">{{ each.goodsName }}</div>
-              <div class="more">
-                <span>{{ lang.checkDetail }}</span>
+        <div class="swiper-box">
+          <div class="img-box-more"> 
+            <div v-swiper:myssSwiper="swiperOptionHot">  
+              <div class="swiper-wrapper">
+                <div class="swiper-slide" v-for="(hot, n) in hotProducts" :key="n">
+                  <a :href="hot.link">
+                    <img :src="hot.url">
+                  </a>
+                  <i class="iconfont icongouwuche icon-cart"></i>
+                </div>
               </div>
             </div>
-          </swiper>
-        </div>
-        <div class="indicator">
-          <span
-            v-for="(each, n) in cards"
-            :key="n"
-            :class="['indicator-item', { active: activeCard === n }]"
-          ></span>
-        </div>
-        <div class="others">
-          <button class="see-more" @click="moreCard">{{ lang.seeMore }}</button>
+          </div>
         </div>
       </section>
-      <section class="contact-us">
-        <h1 class="title">{{ lang.callUs }}</h1>
-        <div class="map" v-show="this.$store.state.platform == 11">
-          <img src="/index/map.png" />
+      <!-- 广告图 -->
+      <section class="ads-pictures">
+        <div class="ad-img">
+          <img src="/index-ms/ad1.png" alt="">
         </div>
-        <div class="info">
-          <div class="info-row" v-show="this.$store.state.platform !== 21">
-            <span class="line"></span>
-            <span class="row-name">{{ lang.store }}</span>
-            <span class="row-text">{{ lang.storeName }}</span>
+      </section>
+      <!-- 分类 -->
+      <section class="product-categories">
+        <div class="part1">
+          <p class="headline">{{ lang.headline3 }}</p>
+        </div>
+        <div class="part2">
+          <div class="ring">
+            <nuxt-link :to="{ path: '/marriage-ring/single-ring' }" >
+              <img src="/index-ms/rings.png" alt="">
+              <p class="title">{{ lang.ringTitle }}</p>
+            </nuxt-link>
           </div>
-          <div class="info-row" v-show="this.$store.state.platform == 21">
-            <span class="line"></span>
-            <span class="row-name">{{ lang.address }}</span>
-            <span class="row-text">{{ lang.addressDetail }}</span>
+          <div class="necklace">
+            <nuxt-link :to="{ path: '/accessories/list?actIndex=0' }" >
+              <img src="/index-ms/necklace.png" alt="">
+              <p class="title">{{ lang.necklaceTitle }}</p>
+            </nuxt-link>
           </div>
-          <!-- <div class="info-row" v-show="this.$store.state.platform == 31">
-            <span class="line"></span>
-            <span class="row-name">{{ lang.address }}</span>
-            <span class="row-text">{{ lang.addressDetailUs }}</span>
-          </div> -->
-          <div class="info-row">
-            <span class="line"></span>
-            <span class="row-name">{{ lang.tel }}</span>
-            <span class="row-text">
-              <a v-if="this.$store.state.platform === 21" href="tel:0755-25160872-8005">0755-25160872-8005</a>
-              <a v-else href="tel:+852 2165 3908">+852 2165 3908</a>
-            </span>
-            <span class="column-line"></span>
-            <span class="row-icon">
-              <a v-if="this.$store.state.platform == 21" href="tel:0755-25160872-8005">
-                <i class="iconfont iconphone"></i>
-              </a>
-              <a v-else href="tel:+852 2165 3908">
-                <i class="iconfont iconphone"></i>
-              </a>
-            </span>
+        </div>
+        <div class="part3">
+          <div class="ad-img">
+            <img src="/index-ms/ad2.png" alt="">
           </div>
-          <div class="info-row">
-            <span class="line"></span>
-            <span class="row-name">{{ lang.email }}</span>
-            <span class="row-text">
-              <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">service@bddco.com</a>
-              <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
-            </span>
-            <span class="column-line"></span>
-            <span class="row-icon">
-              <a v-if="this.$store.state.platform == 21" href="mailto:service@bddco.com">
-                <i class="iconfont iconyouxiang"></i>
-              </a>
-              <a v-else href="mailto:service@bddco.com">
-                <i class="iconfont iconyouxiang"></i>
-              </a>
-            </span>
+        </div>
+        <div class="part4">
+          <div class="bracelet">
+            <nuxt-link :to="{ path: '/accessories/list?actIndex=2' }" >
+              <img src="/index-ms/bracelet.png" alt="">
+              <p class="title">{{ lang.braceletTitle }}</p>
+            </nuxt-link>
           </div>
-          <div class="info-row" v-show="this.$store.state.platform !== 21">
-            <nuxt-link :to="{ path: '/contact' }" >
-              <button class="contact-button">{{ lang.callUs }}</button>
+          <div class="earring">
+            <nuxt-link :to="{ path: '/accessories/list?actIndex=4' }" >
+              <img src="/index-ms/earring.png" alt="">
+              <p class="title">{{ lang.earringTitle }}</p>
             </nuxt-link>
           </div>
         </div>
       </section>
+      <!-- 定制广告图 -->
+      <section class="customized-ads-image">
+        <div class="ad-img">
+          <img src="/index-ms/ad3.png" alt="">
+        </div>
+        <div class="ad-dec">
+          <p class="headline">{{ lang.headline4 }}</p>
+          <p class="subtitle">{{ lang.subtitle2 }}</p>
+          <p class="subtitle">{{ lang.subtitle2 }}</p>
+        </div>
+      </section>
+      <section class="learn-more">
+        <div class="swiper-box">
+          <div class="img-box-more"> 
+            <swiper :options="swiperOptionMore">
+          　　<swiper-slide v-for="(more, n) in More" :key="n">
+          　　　　<img :src="more.url">
+                <div class="descrip">
+                  <p class="tip1">{{more.title}}</p>
+                  <p class="tip2">{{more.dec}}</p>
+                  <!-- <p class="tip3">{{more.learnMore}}</p> -->
+                </div>
+          　　</swiper-slide>
+          　　<div class="swiper-pagination" slot="pagination"></div>
+            </swiper>
+          </div>
+        </div>
+      </section>
+
       <!--    <site-switch ref="site-switch"></site-switch>-->
     </div>
   </div>
@@ -705,8 +648,94 @@ export default {
           'ifShow': false
         }
       ],
+      hotProducts:[
+        {
+          'url': '/index-ms/Hot1.png',
+          'id': 694,
+          'link': '/marriage-ring/single-ring-detail?goodId=694&ringType=single',
+          'price': 0,
+          'ifShow': false
+        },
+        {
+          'url': '/index-ms/Hot2.png',
+          'id': 670,
+          'link': '/marriage-ring/single-ring-detail?goodId=670&ringType=single',
+          'price': 0,
+          'ifShow': false
+        },
+        {
+          'url': '/index-ms/Hot3.png',
+          'id': 679,
+          'link': '/marriage-ring/single-ring-detail?goodId=679&ringType=single',
+          'price': 0,
+          'ifShow': false
+        },
+        {
+          'url': '/index-ms/Hot4.png',
+          'id': 684,
+          'link': '/marriage-ring/single-ring-detail?goodId=684&ringType=single',
+          'price': 0,
+          'ifShow': false
+        }
+      ],
+      More:[
+        {
+          'url': '/index-ms/more3.png',
+          'title': this.LANGUAGE.index.tip3,
+          'dec': this.LANGUAGE.index.tip3To1,
+          'learnMore': this.LANGUAGE.index.tip,
+        },
+        {
+          'url': '/index-ms/more2.png',
+          'title': this.LANGUAGE.index.tip2,
+          'dec': this.LANGUAGE.index.tip2To1,
+          'learnMore': this.LANGUAGE.index.tip,
+        },
+        {
+          'url': '/index-ms/more1.png',
+          'title': this.LANGUAGE.index.tip1,
+          'dec': this.LANGUAGE.index.tip1To1,
+          'learnMore': this.LANGUAGE.index.tip,
+        }
+      ],
       hotHeight: 0,
-      ifEffects: 0
+      ifEffects: 0,
+      swiperOptionHot: {
+        loop: false,
+        slidesPerView: 'auto',
+        spaceBetween: 2.5,
+        navigation: {
+          nextEl: '.swiper-button-next'
+        },
+        on: {
+          slideChange() {
+            // console.log('onSlideChangeEnd', this);
+          },
+          tap() {
+            // console.log('onTap', this);
+          }
+        }
+      },
+      swiperOptionMore: {
+        loop: false,
+        slidesPerView: 'auto',
+        spaceBetween: 1,
+        navigation: {
+          nextEl: '.swiper-button-next'
+        }, 
+        pagination: {
+          el: '.swiper-pagination',
+          clickable:true
+        },
+        on: {
+          slideChange() {
+            // console.log('onSlideChangeEnd', this);
+          },
+          tap() {
+            // console.log('onTap', this);
+          }
+        }
+      },
     }
   },
   computed: {
@@ -1220,6 +1249,344 @@ export default {
 </script>
 
 <style scoped lang="less">
+
+// 猫闪
+/*轮播区域*/
+.ms-banner {
+  width: 100%;
+  height: 420px;
+  background-color: #f7e3dc;
+}
+
+// 文字区域
+.article{
+  padding: 20px 18px 30px 18px;
+  .headline{
+    font-family: SimSun;
+    font-size: 22px;
+    color: #000;
+    padding-bottom: 20px;
+  }
+  .subtitle{
+    font-size: 12px;
+    line-height: 25px;
+    color: #000;
+  }
+}
+
+// 热卖区域
+.hot-sale{
+  margin-top: 10px;
+  .headline{
+    font-size: 22px;
+    color: #000;
+    padding-bottom: 5px;
+    font-family: SimSun;
+  }
+  .subtitle{
+    font-size: 18px;
+    line-height: 25px;
+    color: #000;
+    font-family: SimSun;
+  }
+  .swiper-box{
+    position: relative;
+    
+    .host-item{
+      .product-image{
+        height: 100%;
+        width: 100%
+      }
+
+      .price{
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        font-size: 15px;
+        color: #444;
+        opacity: 0;
+      }
+    }
+
+  } 
+  .img-box-more {
+    width: 90%;
+    // height: 13.1rem;
+    overflow-x: scroll;
+    margin: 20px 0px 20px 18px;
+  }
+
+  .img-box-more .swiper-slide {
+    width: 144px;
+    height: 140px;
+    margin-right: 10px!important;
+    position: relative;
+    .icon-cart{
+      position: absolute;
+      right:10px;
+      bottom: 5px;
+    }
+  }
+
+  .img-box-more .swiper-button-next {
+    width: 2rem;
+    height: 3rem;
+    // background: url(../../static/index/icon/right.png) no-repeat center;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 6.1rem;
+    right: 5%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+  .swiper-slide img{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// 广告图区域
+.ads-pictures{
+  box-sizing: border-box;
+  margin-top: 70px;
+  .ad-img{
+    position: relative;
+    overflow: hidden;
+    img{
+      position: relative;
+      width: 100%;
+    }
+  }
+}
+
+// 产品分类区域
+.product-categories{
+  margin: 30px 20px;
+  .part1{
+    .headline{
+      font-size: 26px;
+      font-family: SimSun;
+      color: #000000;
+      text-align: center;
+    }
+  }
+  .part2{
+    margin-top: 30px;
+    position: relative;
+    padding: 120px 0;
+    .title{
+      font-size: 16px;
+      color: #000;
+      font-family: SimSun;
+      line-height: 35px;
+    }
+    .ring{
+      width: 160px;
+      height: 160px;
+      position: absolute;
+      top:0px;
+      left:0px;
+      img{
+        position: relative;
+        width: 100%;
+      }
+    }
+    .necklace{
+      width: 160px;
+      height: 160px;
+      position: absolute;
+      top:40px;
+      right: 0px;
+      img{
+        position: relative;
+        width: 100%;
+      }
+    }
+  }
+  .part3{
+    box-sizing: border-box;
+    margin-top: 20px;
+    .ad-img{
+      position: relative;
+      overflow: hidden;
+      img{
+        position: relative;
+        width: 100%;
+      }
+    }
+  }
+  .part4{
+    margin-top: 30px;
+    position: relative;
+    padding: 120px 0;
+    .title{
+      font-size: 16px;
+      color: #000;
+      font-family: SimSun;
+      line-height: 35px;
+    }
+    .bracelet{
+      width: 160px;
+      height: 160px;
+      position: absolute;
+      top:40px;
+      left:0px;
+      img{
+        position: relative;
+        width: 100%;
+      }
+    }
+    .earring{
+      width: 160px;
+      height: 160px;
+      position: absolute;
+      top:0px;
+      right: 0px;
+      img{
+        position: relative;
+        width: 100%;
+      }
+    }
+  }
+}
+
+// 定制广告图区域
+.customized-ads-image{
+  box-sizing: border-box;
+  margin-top: 50px;
+  .ad-img{
+    position: relative;
+    overflow: hidden;
+    img{
+      position: relative;
+      width: 100%;
+    }
+  }
+  .ad-dec{
+    margin-bottom: 50px;
+    .headline{
+      font-size: 26px;
+      color: #000;
+      line-height: 60px;
+      font-family: SimSun;
+    }
+    .subtitle{
+      font-size: 13px;
+      color: #000; 
+      line-height: 25px;
+    }
+  }
+}
+
+// 了解更多区域
+.learn-more{
+  .swiper-box{
+    position: relative;
+    
+    .host-item{
+      .product-image{
+        height: 100%;
+        width: 100%
+      }
+
+      .price{
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        font-size: 15px;
+        color: #444;
+        opacity: 0;
+      }
+    }
+
+  } 
+  .img-box-more {
+    width: 95%;
+    // height: 300px;
+    overflow-x: scroll;
+    margin: 20px 0px 20px 10px;
+  }
+
+  .img-box-more .swiper-slide {
+    width: 305px;
+    // height: 150px;
+    margin-right: 15px!important;
+    position: relative;
+    .icon-cart{
+      position: absolute;
+      right:10px;
+      bottom: 5px;
+    }
+    .descrip{
+      padding: 20px 0;
+      background-color: #f8f8f8;
+      .tip1{
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .tip2{
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #000000;
+        padding: 20px 0;
+      }
+      .tip3{
+        font-size: 14px;
+        font-weight: normal;
+        font-stretch: normal;
+        letter-spacing: 0px;
+        color: #000000;
+        padding-top: 10px;
+      }
+    }
+  }
+
+  .img-box-more .swiper-button-next {
+    width: 2rem;
+    height: 3rem;
+    // background: url(../../static/index/icon/right.png) no-repeat center;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 6.1rem;
+    right: 5%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+  .swiper-slide img{
+    width: 100%;
+    height: 100%;
+  }
+   /* 分页器容器 */
+  .img-box-more /deep/ .swiper-pagination {
+    position: inherit;
+    margin-top: 30px;
+  }
+
+  /* 分页器 */
+  .img-box-more /deep/ .swiper-pagination-bullet {
+    width: 6px;
+    height: 6px;
+    background-color: #fff;
+    border-radius: 12px;
+    opacity: 1;
+    border: 1px solid #b0b0b0;
+    margin: 0 0.5rem;
+  }
+
+  /* 分页器选中 */
+  .img-box-more /deep/ .swiper-pagination-bullet-active {
+    background-color: #b0b0b0 !important;
+  }
+
+  .swiper-button-next:focus {
+    outline: none;
+  }
+}
+
+
+
 /*轮播区域*/
 .banner {
   width: 100%;

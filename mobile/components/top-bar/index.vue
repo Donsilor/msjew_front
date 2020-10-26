@@ -4,27 +4,27 @@
       <div class="icon" @click="showMenu">
         <i class="iconfont iconcebianlan"></i>
       </div>
-      <div class="site-info" @click="toSiteSwitch">
-          <div class="flag">
+      <!-- <div class="site-info" @click="toSiteSwitch"> -->
+          <!-- <div class="flag"> -->
             <!-- <img v-show="hkIcon" src="/hongkong-round.png" /> -->
             <!-- <img v-show="cnIcon" src="/china-round.png" /> -->
             <!-- <img v-show="enIcon" src="/USA-round.png" /> -->
-            <i class="iconfont icon_xuanzeyuyanhuobi"></i>
+            <!-- <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           </div>
           <div class="language">
-            <span>{{language}}</span>
+            <span>{{language}}</span> -->
             <!-- <span >|</span>
             <span>cny</span> -->
-          </div>
+          <!-- </div> -->
           <!-- <span class="gap-line"></span> 简/繁/EN
           <div class="coin">
             {{ coinInfo.content }}
           </div> -->
-        </div>
+        <!-- </div> --> 
 
     </div>
     <div class="center">
-      <img src="/logo1.png" class="logo" @click="toIndex" />
+      <img src="/ms-logo.png" class="logo" @click="toIndex" />
     </div>
     <div class="right">
       <div class="icon search" @click="toPage('search')">
@@ -262,7 +262,7 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 111px;
+  width: 45px;
   max-width: 100%;
   max-height: 100%;
 }

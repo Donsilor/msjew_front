@@ -2,7 +2,7 @@
   <div class="accessories-component">
     <div v-if="this.goodInfo.totalStock > 0">
       <div class="swiper-box">
-        <swiper :auto="true" :duration="5000">
+        <swiper1 :auto="true" :duration="5000">
           <div v-for="(each, n) in goodsImages" :key="n">
             <nuxt-link
               :to="
@@ -13,7 +13,7 @@
               ><img :src="each"
             /></nuxt-link>
           </div>
-        </swiper>
+        </swiper1>
 
         <div class="activity-sign" v-if="goodInfo.coupon.discount || goodInfo.coupon.money">
           <div class="triangle" v-if="goodInfo.coupon.discount">{{ language == 'en_US' ? discountUs(goodInfo.coupon.discount.discount)+'%' : discountConversion(goodInfo.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
