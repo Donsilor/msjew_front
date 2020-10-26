@@ -211,7 +211,7 @@
       <!-- <tip-message></tip-message> -->
       <section class="ms-banner">
         <template v-if="banner.length > 1">
-          <swiper :indicator="true" :auto="true" :duration="5000">
+          <swiper1 :indicator="true" :auto="true" :duration="5000">
             <template v-for="(each, n) in banner">
               <template v-if="each.url">
                 <a
@@ -230,7 +230,7 @@
                 </div>
               </template>
             </template>
-          </swiper>
+          </swiper1>
         </template>
         <template v-else>
           <template v-for="(each, n) in banner">
@@ -265,7 +265,15 @@
         </div>
         <div class="swiper-box">
           <div class="img-box-more"> 
-            <div v-swiper:myssSwiper="swiperOptionHot">  
+            <swiper :options="swiperOptionHot">
+          　　<swiper-slide v-for="(hot, n) in hotProducts" :key="n">
+          　　　　<a :href="hot.link">
+                    <img :src="hot.url">
+                  </a>
+                  <i class="iconfont icongouwuche icon-cart"></i>
+          　　</swiper-slide>
+            </swiper>
+            <!-- <div v-swiper:myssSwiper="swiperOptionHot">  
               <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(hot, n) in hotProducts" :key="n">
                   <a :href="hot.link">
@@ -274,7 +282,7 @@
                   <i class="iconfont icongouwuche icon-cart"></i>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </section>
