@@ -1862,7 +1862,7 @@ export default {
 
           .menu-item-content {
             width: 100%;
-            max-width: 1366px;
+            max-width: 1243px;
             margin: auto;
             display: flex;
             flex-direction: row;
