@@ -192,17 +192,19 @@
             "ValentinesDay": "情人節",
             "birthdayPresent": "生日禮物",
             "anniversary": "紀念日",
-            "ModernSimplicity":"现代简约",
-            "ClassicRetro":"经典复古",
-            "PersonalityFun":"个性玩趣",
-            "FashionLimit":"时尚限定",
+            "ModernSimplicity":"現代簡約",
+            "ClassicRetro":"經典復古",
+            "PersonalityFun":"個性玩趣",
+            "FashionLimit":"時尚限定",
             "RomanticLady":"浪漫女士",
-            "DistinguishedMan":"尊贵男士"
+            "DistinguishedMan":"尊貴男士"
         },
         "forPeople": {
             "men": "男士",
             "women": "女士",
-            "universal": "通用款"
+            "universal": "通用款",
+            "RomanticLady":"浪漫女士",
+            "DistinguishedMan":"尊貴男士" 
         },
         "designer": {
             "letterSeries": "字母系列"
@@ -426,7 +428,30 @@
                 "MothersDay": "母親節",
                 "birthdayPresent": "生日禮物",
                 "ChristmasGift": "聖誕禮物",
-                "HalloweenGift": "萬聖節禮物"
+                "HalloweenGift": "萬聖節禮物",
+                "series":"按系列查看",
+                "material":"按材质查看",
+                "target":"按送礼对象",
+                "inlay":"按镶嵌方式",
+                "styles":"按风格查看",
+                "prices": "按价格区间",
+                "Alphabetic":"字母系列",
+                "alloy":"合金",
+                "925KSilver":"925银",
+                "9KGold":"9K金",
+                "14KGold":"14K金",
+                "18KGold":"18K金",
+                "RomanticLady":"浪漫女士",
+                "DistinguishedMan":"尊贵男士",
+                "GroupInlay":"群镶",
+                "SingleDrill":"单钻",
+                "ModernSimplicity":"现代简约",
+                "ClassicRetro":"经典复古",
+                "WorkplaceCommuting":"职场通勤",
+                "PersonalityFun":"个性玩趣",
+                "FashionLimit":"时尚限定",
+                "SimpleStylish":"简约时尚",
+                "TrendClassic":"潮流经典"
             },
             "earringMenu":{
                 "priceRange1": "￥500以下",
@@ -595,13 +620,16 @@
             "copyrightRight": "© 2020 MORESHINE All Rights Reserved.",
             "copyrightRight1": "粵ICP備",
             "copyrightRight2": "號/Copyright©2018-2020 MORESHINE官网   All Rights Reserved.",
-            "copyrightRightMs": "粵ICP備20035106 號/Copyright©2018-2020 BDD Co.官網 All Rights Reserved.",
+            "copyrightRightMs": "粵ICP備20035106 號/Copyright©2018-2020 MORESHINE官網 All Rights Reserved.",
             "helpCenter":"幫助中心",
             "contactUs":"與我們珠寶顧問聯絡",
             "ShoppingGuide":"購物指南",
             "MemberCentre":"會員中心",
             "WorryFreeAfterSales":"無憂售後",
-            "ConvenientDelivery":"便捷配送"
+            "ConvenientDelivery":"便捷配送",
+            "Address":"地址：广东省深圳市罗湖区布心路3008号IBC中心A座1306室",
+            "Call":"电话：0755 - 25160872 - 8005",
+            "Email":"邮箱：service@bddco.com"
         },
         "sendEmailCode": {
             "sendCode": "發送驗證碼",
@@ -806,7 +834,14 @@
         "customerService": "客戶服務",
         "customerServiceInfo": "MORESHINE團隊中經過認真的莫桑石專家將為您提供細緻而又專業的服務。通過在線聊天、電話和電子郵件幫助您選擇合適您的產品。",
         "contactUs": "CONTACT US",
-        "hotSale":"熱賣推薦"
+        "hotSale":"熱賣推薦",
+        "tip1":"珠宝知识",
+        "tip2":"关于我们",
+        "tip3":"珠宝保养",
+        "tip1To1":"了解最前沿的莫桑石世界。",
+        "tip2To1":"为勇于追寻真爱的人们缔造专属的浪漫风格。",
+        "tip3To1":"让每一份爱都恒久璀璨。",
+        "tip":"了解更多 ＞"
     },
     "weddingRings": {
         "belongOurRing": "懂您的心 成雙成對",
@@ -1015,7 +1050,7 @@
         "sort": "排序",
         "stoneType": "主石类型",
         "title": "配饰",
-        "totalCountTitle": "配饰 ({total_count} 款)",
+        "totalCountTitle": "設計師系列 ({total_count} 款)",
         "titleDesc": "通过选择各种配饰，来展示您所想要的配饰",
         "discounts1": "优惠券",
         "discounts2": "折"

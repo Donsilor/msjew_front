@@ -11,10 +11,7 @@ import SoleOut from '@/pageComponents/goods-sole-out/sole-out.vue'
 
 // 默认条件映射
 const conditionMaps = {
-  all: {
-    typeId:4,
-    categoryId:''
-  },
+  all: {},
   necklaces: {
     typeId:4,
     categoryId: 4
@@ -235,20 +232,30 @@ const conditionMaps = {
   },
 
   // 设计师材质
-  'alloy': {
-    material: 204
+  'designer-alloy': {
+    material: 204,
+    series:288,
+    materialIndex : 0
   },
-  '925-silver': {
-    material: 35
+  'designer-925-silver': {
+    material: 35,
+    series:288,
+    materialIndex : 1
   },
-  '9k-silver': {
-    material: 272
+  'designer-9k-gold': {
+    material: 272,
+    series:288,
+    materialIndex : 2
   },
-  '14k-gold': {
-    material: 273
+  'designer-14k-gold': {
+    material: 273,
+    series:288,
+    materialIndex : 3
   },
-  '18k-gold': {
-    material: 274
+  'designer-18k-gold': {
+    material: 274,
+    series:288,
+    materialIndex : 4
   },
 
 
@@ -263,7 +270,7 @@ const conditionMaps = {
     categoryId:[4],
     materialIndex : 1
   },
-  'necklace-9k-silver': {
+  'necklace-9k-gold': {
     typeId:4,
     categoryId:[4],
     materialIndex : 2
@@ -290,7 +297,7 @@ const conditionMaps = {
     categoryId:[8],
     materialIndex : 1
   },
-  'bracelet-9k-silver':{
+  'bracelet-9k-gold':{
     typeId:4,
     categoryId:[8],
     materialIndex : 2
@@ -317,7 +324,7 @@ const conditionMaps = {
     categoryId:[6],
     materialIndex : 1
   },
-  'earring-9k-silver':{
+  'earring-9k-gold':{
     typeId:4,
     categoryId:[6],
     materialIndex : 2
@@ -473,16 +480,20 @@ const conditionMaps = {
 
   // 设计师风格
   'designer-modern-simplicity':{
-    manner:277
+    manner:277,
+    series:288
   },
   'designer-classic-retro':{
-    manner:278
+    manner:278,
+    series:288
   },
   'designer-fun-with-personality':{
-    manner:279
+    manner:279,
+    series:288
   },
   'designer-fashion-limited':{
-    manner:280
+    manner:280,
+    series:288
   },
 }
 

@@ -26,7 +26,7 @@
         </ul>
       </div>
       <!--      适用人群-->
-      <div class="condition-item condition-style condition-man-style">
+      <div class="condition-item condition-style condition-man-style forpeople">
         <h2 class="condition-name">
           {{ $t(`${lang}.forPeople`) }}
         </h2>
@@ -185,7 +185,7 @@
         >
           <!--          商品数据-->
           <div v-if="item.itemType === 'product'" class="product-content">
-            <nuxt-link :to="item.to" >
+            <nuxt-link :to="item.to" target="_blank">
               <div class="product-image">
                 <img class="main-image" :src="item.goodsImages[0]" />
                 <img
@@ -462,7 +462,7 @@ export default {
       const data = {
         advertType: 2,
         // 商品类别ID
-        categoryId: 2,
+        categoryId: [2,19],
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）
@@ -518,15 +518,28 @@ export default {
           }
           adNum++
         } else {
-          item.itemType = 'product'
-          item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
-
-          item.to = {
-            // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
-            path: '/ring/wedding-rings/'+ item.id,
-            query: {
-              goodId: item.id,
-              ringType: 'single'
+          if(item.categoryId == 19){
+            item.itemType = 'product'
+            item.ringImg = _this.imageStrToArray(item.goodsImages || '')
+            item.goodsImages = item.ringImg
+            item.to = {
+              path: '/ring/wedding-rings/' + item.id.replace(/\//g, ''),
+              query: {
+                goodId: item.id,
+                ringType: 'pair'
+              }
+            }
+          } else {
+            item.itemType = 'product'
+            item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
+  
+            item.to = {
+              // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+              path: '/ring/wedding-rings/'+ item.id,
+              query: {
+                goodId: item.id,
+                ringType: 'single'
+              }
             }
           }
         }
@@ -600,6 +613,11 @@ export default {
   max-width: 1366px;
   margin: 0 auto;
   padding: 40px 0;
+}
+.forpeople{
+  .options{
+    width: 40%!important;
+  }
 }
 .search-condition {
   .condition-style {

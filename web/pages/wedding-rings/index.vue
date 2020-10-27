@@ -340,7 +340,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    console.log("sssss",route)
+    // console.log("sssss",route)
     let seoInfo = {}
     if(route.name == 'wedding-rings'){
       seoInfo = await app.$getSeoInfo('weddingRing')

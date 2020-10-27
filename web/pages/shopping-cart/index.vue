@@ -231,13 +231,13 @@ export default {
         let scrollTop = e.target.scrollTop;
         // console.log("scrollTop",scrollTop)
         that.scrollTop = scrollTop
-        if (that.scrollTop > 150) {
-          this.Settlement1 = false
-          this.Settlement2 = true
-        } else {
-          this.Settlement1 = true
-          this.Settlement2 = false
-        }
+        // if (that.scrollTop > 150) {
+        //   this.Settlement1 = false
+        //   this.Settlement2 = true
+        // } else {
+        //   this.Settlement1 = true
+        //   this.Settlement2 = false
+        // }
     },
     getList() {
       this.$store

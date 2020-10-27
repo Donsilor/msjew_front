@@ -119,6 +119,855 @@ export default function ({ req, res, redirect, store, route }) {
                 },
 
 
+                // 猫闪start
+
+                // MS戒指系列-字母系列
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-letter-series$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'series': '288',
+                    },
+                },
+
+                // MS戒指材质-合金
+                {
+                    'pcUrl': /^\/wedding-rings\/alloy$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'material': '204',
+                    },
+                },
+
+                // MS戒指材质-925银
+                {
+                    'pcUrl': /^\/wedding-rings\/925-silver$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'material': '35',
+                    },
+                },
+
+                // MS戒指材质-9k金
+                {
+                    'pcUrl': /^\/wedding-rings\/9k-gold$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'material': '272',
+                    },
+                },
+
+                // MS戒指材质-14k金
+                {
+                    'pcUrl': /^\/wedding-rings\/14k-gold$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'material': '273',
+                    },
+                },
+
+                // MS戒指材质-18k金
+                {
+                    'pcUrl': /^\/wedding-rings\/18k-gold$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'material': '274',
+                    },
+                },
+
+                // MS戒指人群-浪漫女士
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-Romantic-lady$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    // 'params': {
+                    //     'style': '277',
+                    // },
+                },
+
+                // MS戒指人群-尊贵男士
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-distinguished-man$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    // 'params': {
+                    //     'style': '277',
+                    // },
+                },
+
+                // MS戒指镶嵌-群镶
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-group-setting$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    // 'params': {
+                    //     'style': '277',
+                    // },
+                },
+
+                // MS戒指镶嵌-单钻
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-single-drill$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    // 'params': {
+                    //     'style': '277',
+                    // },
+                },
+
+                // MS戒指风格-现代简约
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-modern-simplicity$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'style': '277',
+                    },
+                },
+
+                // MS戒指风格-经典复古
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-classic-retro$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'style': '278',
+                    },
+                },
+
+                // MS戒指风格-个性玩趣
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-fun-with-personality$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'style': '279',
+                    },
+                },
+
+                // MS戒指风格-时尚限定
+                {
+                    'pcUrl': /^\/wedding-rings\/ring-fashion-limited$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'style': '280',
+                    },
+                },
+
+                //MS戒指-价格(0-500)
+                {
+                    'pcUrl': /^\/wedding-rings\/all\?priceRange=WzAsOTk5XQ%3D%3D$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'startPrice': '0',
+                        'endPrice': '500'
+                    },
+                },
+
+                //MS戒指-价格(500-1000)
+                {
+                    'pcUrl': /^\/wedding-rings\/all\?priceRange=WzUwMCwxMDAwXQ%3D%3D$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'startPrice': '500',
+                        'endPrice': '1000'
+                    },
+                },
+
+                //MS戒指-价格(1000-5000)
+                {
+                    'pcUrl': /^\/wedding-rings\/all\?priceRange=WzEwMDAsNTAwMF0%3D$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'startPrice': '1000',
+                        'endPrice': '5000'
+                    },
+                },
+
+                //MS戒指-价格(5000-10000)
+                {
+                    'pcUrl': /^\/wedding-rings\/all\?priceRange=WzUwMDAsMTAwMDBd$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'startPrice': '5000',
+                        'endPrice': '10000'
+                    },
+                },
+
+                //MS戒指-价格(10000以上)
+                {
+                    'pcUrl': /^\/wedding-rings\/all\?priceRange=WzEwMDAwLDMwMDAwMF0%3D$/,
+                    'mobileUrl': `/marriage-ring/single-ring`,
+                    'params': {
+                        'startPrice': '10000',
+                        'endPrice': '300000'
+                    },
+                },
+                
+                //MS项链-字母系列
+                {
+                    'pcUrl': /^\/jewellery\/necklace-letter-series$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'series': '288'
+                    },
+                },
+
+                //MS项链-合金
+                {
+                    'pcUrl': /^\/jewellery\/necklace-alloy$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'material': '204'
+                    },
+                },
+
+                //MS项链-925银
+                {
+                    'pcUrl': /^\/jewellery\/necklace-925-silver$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'material': '35'
+                    },
+                },
+
+                //MS项链-9K金
+                {
+                    'pcUrl': /^\/jewellery\/necklace-9k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'material': '272'
+                    },
+                },
+
+                //MS项链-14K金
+                {
+                    'pcUrl': /^\/jewellery\/necklace-14k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'material': '273'
+                    },
+                },
+
+                //MS项链-18K金
+                {
+                    'pcUrl': /^\/jewellery\/necklace-18k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'material': '274'
+                    },
+                },
+
+                // MS项链人群-浪漫女士
+                {
+                    'pcUrl': /^\/jewellery\/necklace-Romantic-lady$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0'
+                    },
+                },
+
+                // MS项链人群-尊贵男士
+                {
+                    'pcUrl': /^\/jewellery\/necklace-distinguished-man$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0'
+                    },
+                },
+
+                // MS项链镶嵌-群镶
+                {
+                    'pcUrl': /^\/jewellery\/necklace-group-setting$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0'
+                    },
+                },
+
+                // MS项链镶嵌-单钻
+                {
+                    'pcUrl': /^\/jewellery\/necklace-single-drill$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0'
+                    },
+                },
+
+                // MS项链风格-现代简约
+                {
+                    'pcUrl': /^\/jewellery\/necklace-modern-simplicity$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS项链风格-经典复古
+                {
+                    'pcUrl': /^\/jewellery\/necklace-classic-retro$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS项链风格-个性玩趣
+                {
+                    'pcUrl': /^\/jewellery\/necklace-fun-with-personality$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS项链风格-时尚限定
+                {
+                    'pcUrl': /^\/jewellery\/necklace-fashion-limited$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS项链-价格(0-500)
+                {
+                    'pcUrl': /^\/jewellery\/necklaces\?priceRange=WzAsNTAwXQ%3D%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'startPrice': '0',
+                        'endPrice': '500'
+                    },
+                },
+
+                // MS项链-价格(500-1000)
+                {
+                    'pcUrl': /^\/jewellery\/necklaces\?priceRange=WzUwMCwxMDAwXQ%3D%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'startPrice': '500',
+                        'endPrice': '1000'
+                    },
+                },
+
+                // MS项链-价格(1000-5000)
+                {
+                    'pcUrl': /^\/jewellery\/necklaces\?priceRange=WzEwMDAsNTAwMF0%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'startPrice': '1000',
+                        'endPrice': '5000'
+                    },
+                },
+
+                // MS项链-价格(5000-10000)
+                {
+                    'pcUrl': /^\/jewellery\/necklaces\?priceRange=WzUwMDAsMTAwMDBd$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'startPrice': '5000',
+                        'endPrice': '10000'
+                    },
+                },
+
+                // MS项链-价格(10000以上)
+                {
+                    'pcUrl': /^\/jewellery\/necklaces\?priceRange=WzEwMDAwLDMwMDAwMF0%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '0',
+                        'startPrice': '10000',
+                        'endPrice': '300000'
+                    },
+                },
+
+                //MS手链-字母系列
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-letter-series$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'series': '288'
+                    },
+                },
+
+                //MS手链-合金
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-alloy$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'material': '204'
+                    },
+                },
+
+                //MS手链-925银
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-925-silver$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'material': '35'
+                    },
+                },
+
+                //MS手链-9K金
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-9k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'material': '272'
+                    },
+                },
+
+                //MS手链-14K金
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-14k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'material': '273'
+                    },
+                },
+
+                //MS手链-18K金
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-18k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'material': '274'
+                    },
+                },
+
+                // MS手链人群-浪漫女士
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-Romantic-lady$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2'
+                    },
+                },
+
+                // MS手链人群-尊贵男士
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-distinguished-man$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2'
+                    },
+                },
+
+                // MS手链镶嵌-群镶
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-group-setting$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2'
+                    },
+                },
+
+                // MS手链镶嵌-单钻
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-single-drill$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2'
+                    },
+                },
+
+                // MS手链风格-简约时尚
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-Simple-and-stylish$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS手链风格-职场通勤
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-workplace-commute$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS手链风格-个性玩趣
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-fun-with-personality$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS手链风格-潮流经典
+                {
+                    'pcUrl': /^\/jewellery\/bracelet-Trend-classic$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS手链-价格(0-500)
+                {
+                    'pcUrl': /^\/jewellery\/bracelets\?priceRange=WzAsNTAwXQ%3D%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'startPrice': '0',
+                        'endPrice': '500'
+                    },
+                },
+
+                // MS手链-价格(500-1000)
+                {
+                    'pcUrl': /^\/jewellery\/bracelets\?priceRange=WzUwMCwxMDAwXQ%3D%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'startPrice': '500',
+                        'endPrice': '1000'
+                    },
+                },
+
+                // MS手链-价格(1000-5000)
+                {
+                    'pcUrl': /^\/jewellery\/bracelets\?priceRange=WzEwMDAsNTAwMF0%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'startPrice': '1000',
+                        'endPrice': '5000'
+                    },
+                },
+
+                // MS手链-价格(5000-10000)
+                {
+                    'pcUrl': /^\/jewellery\/bracelets\?priceRange=WzUwMDAsMTAwMDBd$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'startPrice': '5000',
+                        'endPrice': '10000'
+                    },
+                },
+
+                // MS手链-价格(10000以上)
+                {
+                    'pcUrl': /^\/jewellery\/bracelets\?priceRange=WzEwMDAwLDMwMDAwMF0%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '2',
+                        'startPrice': '10000',
+                        'endPrice': '300000'
+                    },
+                },
+
+                //MS耳饰-字母系列
+                {
+                    'pcUrl': /^\/jewellery\/earring-letter-series$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'series': '288'
+                    },
+                },
+
+                //MS耳饰-合金
+                {
+                    'pcUrl': /^\/jewellery\/earring-alloy$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'material': '204'
+                    },
+                },
+
+                //MS耳饰-925银
+                {
+                    'pcUrl': /^\/jewellery\/earring-925-silver$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'material': '35'
+                    },
+                },
+
+                //MS耳饰-9K金
+                {
+                    'pcUrl': /^\/jewellery\/earring-9k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'material': '272'
+                    },
+                },
+
+                //MS耳饰-14K金
+                {
+                    'pcUrl': /^\/jewellery\/earring-14k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'material': '273'
+                    },
+                },
+
+                //MS类别-耳环
+                {
+                    'pcUrl': /^\/jewellery\/Earrings$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '5'
+                    },
+                },
+
+                //MS类别-耳钉
+                {
+                    'pcUrl': /^\/jewellery\/earStud$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '6'
+                    },
+                },
+
+                //MS类别-耳线
+                {
+                    'pcUrl': /^\/jewellery\/EarLine$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '7'
+                    },
+                },
+
+                //MS类别-耳坠
+                {
+                    'pcUrl': /^\/jewellery\/EarDrop$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '8'
+                    },
+                },
+
+
+                //MS耳饰-18K金
+                {
+                    'pcUrl': /^\/jewellery\/earring-18k-gold$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'material': '274'
+                    },
+                },
+
+                // MS耳饰风格-简约时尚
+                {
+                    'pcUrl': /^\/jewellery\/earring-Simple-and-stylish$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS耳饰风格-职场通勤
+                {
+                    'pcUrl': /^\/jewellery\/earring-workplace-commute$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS耳饰风格-个性玩趣
+                {
+                    'pcUrl': /^\/jewellery\/earring-fun-with-personality$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS耳饰风格-潮流经典
+                {
+                    'pcUrl': /^\/jewellery\/earring-Trend-classic$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        // 'style': '277'
+                    },
+                },
+
+                // MS耳饰-价格(0-500)
+                {
+                    'pcUrl': /^\/jewellery\/Earring\?priceRange=WzAsNTAwXQ%3D%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'startPrice': '0',
+                        'endPrice': '500'
+                    },
+                },
+
+                // MS耳饰-价格(500-1000)
+                {
+                    'pcUrl': /^\/jewellery\/Earring\?priceRange=WzUwMCwxMDAwXQ%3D%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'startPrice': '500',
+                        'endPrice': '1000'
+                    },
+                },
+
+                // MS耳饰-价格(1000-5000)
+                {
+                    'pcUrl': /^\/jewellery\/Earring\?priceRange=WzEwMDAsNTAwMF0%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'startPrice': '1000',
+                        'endPrice': '5000'
+                    },
+                },
+
+                // MS耳饰-价格(5000-10000)
+                {
+                    'pcUrl': /^\/jewellery\/Earring\?priceRange=WzUwMDAsMTAwMDBd$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'startPrice': '5000',
+                        'endPrice': '10000'
+                    },
+                },
+
+                // MS耳饰-价格(10000以上)
+                {
+                    'pcUrl': /^\/jewellery\/Earring\?priceRange=WzEwMDAwLDMwMDAwMF0%3D$/,
+                    'mobileUrl': `/accessories/list`,
+                    'params': {
+                        'actIndex': '4',
+                        'startPrice': '10000',
+                        'endPrice': '300000'
+                    },
+                },
+
+                //MS设计师系列-字母系列
+                {
+                    'pcUrl': /^\/designer\/designer-letter-series$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'series': '288'
+                    },
+                },
+
+                //MS设计师系列-合金
+                {
+                    'pcUrl': /^\/designer\/bracelet-alloy$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'material': '204'
+                    },
+                },
+
+                //MS设计师系列-925银
+                {
+                    'pcUrl': /^\/designer\/bracelet-925-silver$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'material': '35'
+                    },
+                },
+
+                //MS设计师系列-9K金
+                {
+                    'pcUrl': /^\/designer\/bracelet-9k-gold$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'material': '272'
+                    },
+                },
+
+                //MS设计师系列-14K金
+                {
+                    'pcUrl': /^\/designer\/bracelet-14k-gold$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'material': '273'
+                    },
+                },
+
+                //MS设计师系列-18K金
+                {
+                    'pcUrl': /^\/designer\/bracelet-18k-gold$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'material': '274'
+                    },
+                },
+
+                // MS设计师系列风格-现代简约
+                {
+                    'pcUrl': /^\/designer\/designer-modern-simplicity$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'style': '277'
+                    },
+                },
+
+                // MS设计师系列风格-经典复古
+                {
+                    'pcUrl': /^\/designer\/designer-classic-retro$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'style': '278'
+                    },
+                },
+
+                // MS设计师系列风格-个性玩趣
+                {
+                    'pcUrl': /^\/designer\/designer-fun-with-personality$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'style': '279'
+                    },
+                },
+
+                // MS设计师系列风格-时尚限定
+                {
+                    'pcUrl': /^\/designer\/designer-fashion-limited$/,
+                    'mobileUrl': `/designers/list`,
+                    'params': {
+                        'style': '280'
+                    },
+                },
+
+                
+
+                // 猫闪end
+
+
+
+
 
 
                 // 戒指专题页   ring/wedding-rings

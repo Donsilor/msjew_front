@@ -956,13 +956,13 @@ export default language => {
         iconfont: 'iconJewelry-necklace',
         qualityName: 'necklace'
       },
-      // {
-      //   id: 207,
-      //   categoryId: 5,
-      //   name: lang.jewellery.pendants,
-      //   iconfont: 'icondiamond-pendant',
-      //   qualityName: 'pendant'
-      // },
+      {
+        id: 207,
+        categoryId: 5,
+        name: lang.jewellery.pendants,
+        iconfont: 'icondiamond-pendant',
+        qualityName: 'pendant'
+      },
       // {
       //   id: 208,
       //   categoryId: 6,
@@ -985,8 +985,15 @@ export default language => {
         qualityName: 'braceletLine'
       },
       {
+        id: 211,
+        categoryId: 9,
+        name: lang.jewellery.bangles,
+        iconfont: 'iconshouhuan',
+        qualityName: 'bracelet'
+      },
+      {
         id: 210,
-        categoryId: 6,
+        categoryId: 21,
         name: lang.jewellery.earring,
         iconfont: 'iconfont iconsp-dz1',
         qualityName: 'earring'
@@ -1000,7 +1007,7 @@ export default language => {
       },
       {
         id: 210,
-        categoryId: 21,
+        categoryId: 6,
         name: lang.jewellery.earStud,
         iconfont: 'iconfont icondiamond-earring',
         qualityName: 'earStud'

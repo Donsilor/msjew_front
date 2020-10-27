@@ -367,7 +367,7 @@ export default {
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
       loading: true,
-      all_category : [2,4,5,6,7,8,9,16,17,18],
+      all_category : [2,19,4,5,6,7,8,9,16,17,18],
       coinType:'',
       language: this.$store.state.language
     }
@@ -403,15 +403,25 @@ export default {
         })
       }
 
-      if (conditions.materialIndex !== "") {
+      if (conditions.material) {
         params.push({
           type: 3,
           paramId:10,
           paramName: 'material',
           valueType: 1,
-          configValues: [this.materialOptions[conditions.materialIndex].id]
+          configValues: conditions.material === '' ? [] : [conditions.material]
         })
       }
+
+      // if (conditions.materialIndex !== "") {
+      //   params.push({
+      //     type: 3,
+      //     paramId:10,
+      //     paramName: 'material',
+      //     valueType: 1,
+      //     configValues: [this.materialOptions[conditions.materialIndex].id]
+      //   })
+      // }
 
       if (conditions.object) {
         params.push({
@@ -430,6 +440,16 @@ export default {
           paramName: 'mosaic',
           valueType: 1,
           configValues: conditions.mosaic === '' ? [] : [conditions.mosaic]
+        })
+      }
+
+      if (conditions.manner) {
+        params.push({
+          type: 3,
+          paramId:67,
+          paramName: 'manner',
+          valueType: 1,
+          configValues: conditions.manner === '' ? [] : [conditions.manner]
         })
       }
 
@@ -530,15 +550,41 @@ export default {
           }
           adNum++
         } else {
-          const category = _this.getCategoryById(parseInt(item.categoryId))
-          const categoryName =
-            category && category.qualityName ? category.qualityName : 'other'
-          item.itemType = 'product'
-          item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
-          item.to = {
-            path: `/jewellery/${categoryName}/${item.id}`,
-            query: {
-              goodId: item.id
+          // console.log("categoryId",item)
+          if(item.categoryId == 19){
+            item.itemType = 'product'
+            item.ringImg = _this.imageStrToArray(item.goodsImages || '')
+            item.goodsImages = item.ringImg
+            item.to = {
+              path: '/ring/wedding-rings/' + item.id.replace(/\//g, ''),
+              query: {
+                goodId: item.id,
+                ringType: 'pair'
+              }
+            }
+          }else if(item.categoryId == 2){
+            item.itemType = 'product'
+            item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
+
+            item.to = {
+              // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+              path: '/ring/wedding-rings/'+ item.id,
+              query: {
+                goodId: item.id,
+                ringType: 'single'
+              }
+            }
+          } else {
+            const category = _this.getCategoryById(parseInt(item.categoryId))
+            const categoryName =
+              category && category.qualityName ? category.qualityName : 'other'
+            item.itemType = 'product'
+            item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
+            item.to = {
+              path: `/jewellery/${categoryName}/${item.id}`,
+              query: {
+                goodId: item.id
+              }
             }
           }
         }
@@ -587,11 +633,11 @@ export default {
       const searchConditions = this.searchConditions
       // console.log('style====>', searchConditions.style, value)
       if (
-        searchConditions.manner === value
+        searchConditions.series === value
       ) {
-        this.changeCondition('manner', '')
+        this.changeCondition('series', '')
       } else {
-        this.changeCondition('manner', value)
+        this.changeCondition('series', value)
       }
     },
     getCategoryById(categoryId) {
@@ -611,7 +657,7 @@ export default {
     },
     // 改变材質条件
     changeMaterial(index) {
-      this.changeCondition('materialIndex', index)
+      this.changeCondition('material', index)
     },
 
     // 改变主石类型条件

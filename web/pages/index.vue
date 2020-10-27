@@ -348,9 +348,9 @@
             <img src="/index-ms/more1.png" />
           </div>
           <div class="content">
-            <p class="title1">珠宝知识</p>
-            <p class="title2">了解最前沿的莫桑石世界。</p>
-            <!-- <p class="title3">了解更多 ＞</p> -->
+            <p class="title1">{{$t(`${lang}.tip1`)}}</p>
+            <p class="title2">{{$t(`${lang}.tip1To1`)}}</p>
+            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
           </div>
         </div>
         <div class="item center-item">
@@ -358,9 +358,9 @@
             <img src="/index-ms/more2.png" />
           </div>
           <div class="content">
-            <p class="title1">关于我们</p>
-            <p class="title2">为勇于追寻真爱的人们缔造专属的浪漫风格。</p>
-            <!-- <p class="title3">了解更多 ＞</p> -->
+            <p class="title1">{{$t(`${lang}.tip2`)}}</p>
+            <p class="title2">{{$t(`${lang}.tip2To1`)}}</p>
+            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
           </div>
         </div>
         <div class="item right-item">
@@ -368,9 +368,9 @@
             <img src="/index-ms/more3.png" />
           </div>
           <div class="content">
-            <p class="title1">珠宝保养</p>
-            <p class="title2">让每一份爱都恒久璀璨。</p>
-            <!-- <p class="title3">了解更多 ＞</p> -->
+            <p class="title1">{{$t(`${lang}.tip3`)}}</p>
+            <p class="title2">{{$t(`${lang}.tip3To1`)}}</p>
+            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
           </div>
         </div>
       </div>
@@ -886,7 +886,7 @@ export default {
       })
       .then(res => {
         var data = res.data.data;
-        console.log("datya",data)
+        // console.log("datya",data)
         data.forEach((o, i) => {
           that.hotImgUrl.forEach((p, j) => {
             if(o.id == p.id){
@@ -1650,7 +1650,7 @@ section {
 }
 
 .waiting-you {
-  padding: 74px 0 60px 0;
+  padding: 140px 0 60px 0;
   min-width: 1200px;
   max-width: 1366px;
   margin: 0 auto;
@@ -1697,7 +1697,7 @@ section {
         // border: 1px solid #ffffff;
         box-sizing: border-box;
         // padding: 5% 3.7% 5.5% 3.7%;
-        padding: 50px 0 100px 0;
+        padding: 50px 0 50px 0;
 
         display: flex;
         flex-direction: column;
@@ -1743,11 +1743,12 @@ section {
       }
 
       &.left-item {
-        background-color: #f8f8f8;
+        // background-color: #f8f8f8;
         // background-color: #f0e2da;
 
         .content {
-          margin-right: 20px;
+          // margin-right: 20px;
+          background-color: #f8f8f8;
           border-left: 0;
           text-align: center;
           .title1{
@@ -1764,7 +1765,8 @@ section {
             font-stretch: normal;
             letter-spacing: 0px;
             color: #666666;
-            padding: 20px 0;
+            padding-top: 20px;
+            // padding: 20px 0;
           }
           .title3{
             font-size: 14px;
@@ -1781,7 +1783,7 @@ section {
         // background-color: #f0e2da;
 
         .content {
-          margin-right: 20px;
+          // margin-right: 20px;
           border-left: 0;
           text-align: center;
           .title1{
@@ -1798,7 +1800,8 @@ section {
             font-stretch: normal;
             letter-spacing: 0px;
             color: #666666;
-            padding: 20px 0;
+            padding-top: 20px;
+            // padding: 20px 0;
           }
           .title3{
             font-size: 14px;
@@ -1815,7 +1818,7 @@ section {
         // background-color: #f4eade;
 
         .content {
-          margin-left: 20px;
+          // margin-left: 20px;
           border-right: 0;
           text-align: center;
           .title1{
@@ -1832,7 +1835,8 @@ section {
             font-stretch: normal;
             letter-spacing: 0px;
             color: #666666;
-            padding: 20px 0;
+            padding-top: 20px;
+            // padding: 20px 0;
           }
           .title3{
             font-size: 14px;
@@ -2171,6 +2175,9 @@ section {
   }
   .categories{
     padding-top: 370px;
+    .bg img:hover{
+      border:1px solid #c8c8c8;
+    }
   }
   .item{
     position: relative;
@@ -2218,7 +2225,7 @@ section {
     padding: 10px 0;
     display: flex;
     flex-wrap: wrap;
-    height: 300px;
+    height: 341px;
 
     .us-host-list {
       flex-grow: 0;
@@ -2325,7 +2332,7 @@ section {
 
     .item-box {
       display: inline-block;
-      width: 80%;
+      width: 90%;
 
       .product-image {
         width: 100%;

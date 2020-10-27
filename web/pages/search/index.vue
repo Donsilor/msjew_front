@@ -15,7 +15,7 @@ export default {
   },
   async asyncData({ $axios, route, store, app }) {
     let seoInfo = await app.$getSeoInfo('Jewellery')
-    console.log("sssss",seoInfo)
+    // console.log("sssss",seoInfo)
     return {
       seoInfo
     }

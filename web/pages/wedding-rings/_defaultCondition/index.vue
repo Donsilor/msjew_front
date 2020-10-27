@@ -111,7 +111,7 @@ const conditionMaps = {
   '925-silver': {
     material: 35
   },
-  '9k-silver': {
+  '9k-gold': {
     material: 272
   },
   '14k-gold': {
@@ -177,7 +177,7 @@ export default {
     // if(route.params.defaultCondition =='fashion-ring'){
     //   seoInfo = await app.$getSeoInfo('fashionRingList')
     // }
-    console.log("sssss",seoInfo)
+    // console.log("sssss",seoInfo)
     return $axios({
       method: 'get',
       url: '/web/goods/ring/web-site',
