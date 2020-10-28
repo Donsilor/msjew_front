@@ -24,7 +24,7 @@
 
     </div>
     <div class="center">
-      <img src="/ms-logo.png" class="logo" @click="toIndex" />
+      <img src="/logo-ms.png" class="logo" @click="toIndex" />
     </div>
     <div class="right">
       <div class="icon search" @click="toPage('search')">
@@ -233,7 +233,7 @@ export default {
 .left,
 .right {
   position: relative;
-  /* flex-basis: 50px; */
+  flex-basis: 50px;
   flex-grow: 1;
   flex-shrink: 1;
   /*background-color: #3b5998;*/
@@ -251,7 +251,7 @@ export default {
 }
 .center {
   position: relative;
-  flex-basis: 150px;
+  flex-basis: 40px; 
   flex-grow: 0;
   flex-shrink: 0;
   /*background-color: #f29b88;*/

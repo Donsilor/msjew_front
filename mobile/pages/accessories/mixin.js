@@ -38,7 +38,7 @@ export default {
           key: 'quality',
           name: this.LANGUAGE.listCommons.material,
           checked: ``,
-          options: this.CONDITION_INFO.material.rings
+          options: this.sendCod
         },
         // {
         //   type: 'eject-choose-pro',
@@ -118,7 +118,14 @@ export default {
     },
 
     $route(val, oldVal) {
+      
       let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
+      let species = typeof this.$route.query.category !== 'undefined' ? this.$route.query.category:''
+      console.log("this.0000000",typeof species,typeof [4,5])
+      if(species == [4,5]){
+        this.category = [4,5]
+        console.log(9999999999999)
+      }
       this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
       this.conditions[0].checked = material.toString()
       // this.conditions[1].options = this.CONDITION_INFO.style.theme

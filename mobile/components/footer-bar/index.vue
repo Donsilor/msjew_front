@@ -32,31 +32,32 @@
           <i class="iconfont iconxiala status-icon"></i>
         </div>
         <ul class="group-content">
-          <li class="item">
-            <span class="cont">{{ lang.AddressTile }}<span >{{ lang.Address }}</span></span>
+          <li >
+            <div class="item">
+              <span class="cont">{{ lang.AddressTile }}</span>
+              <div >{{ lang.Address }}</div> 
+            </div>
           </li>
-          <li class="item">
-            <span class="cont">
-              {{ lang.CallTile }}
-              <span >{{ lang.Call }}</span>
-              <!-- <a href="tel:0755-25160872-8005">0755-25160872-8005</a> -->
-            </span>
+          <li >
+            <div class="item">
+              <span >{{ lang.CallTile }}</span>
+              <div >{{ lang.Call }}</div>
+            </div>
           </li>
-          <li class="item">
-            <span class="cont">
-              {{ lang.EmailTile }}
-              <span >{{ lang.Email }}</span>
-              <!-- <a href="mailto:service@bddco.com">service@bddco.com</a> -->
-            </span>
+          <li >
+            <div class="item">
+              <span >{{ lang.EmailTile }} </span>
+              <div >{{ lang.Email }}</div>
+            </div>
           </li>
         </ul>
       </div>
     </section>
-    <section class="social-media" style="height: 2px !important;">
+    <section class="social-media" style="height: 1px !important;"> 
     </section>
     <!-- 备案号 -->
     <div class="copy-right">
-      <div style="font-size:9px;margin-top:20px;">{{ lang.copyrightRightMs }}</div>
+      <div class="record-number">{{ lang.copyrightRightMs }}</div>
       <!-- <div v-if="this.$store.state.platform === 21" style="font-size:9px;margin-top:20px;">{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
       <span v-else class="text" >Copyright © 2020 MORESHINE</span> -->
     </div>
@@ -150,9 +151,7 @@ export default {
   height: 8px;
   background-color: #d4e8ec;
 }
-.cont{
-  text-align: left;
-}
+
 .help-center{
   padding: 40px 0 0 20px;
   .menu-group {
@@ -173,13 +172,13 @@ export default {
     }
     .item {
       margin-left: 30px;
-      padding: 6px 0;
+      padding: 6px 0; 
       height: 36px;
       font-size: 14px;
       font-family: CTHeiTiSF;
       font-weight: 400;
       color: #000;
-      // color: rgba(102, 102, 102, 1);
+      color: rgba(102, 102, 102, 1);
 
       display: flex;
       align-items: center;
@@ -261,12 +260,22 @@ export default {
     transition: all 0.5s linear;
 
     .item {
-      height: 36px;
+      margin-bottom: 20px;
       font-size: 14px;
       font-weight: 400;
       color: #000;
       display: flex;
-      align-items: center;
+      span{
+        
+        text-align: left;
+      }
+      .cont{
+        width: 15%;
+      }
+      div{
+        text-align: left;
+        margin-left: 8px;
+      }
     }
   }
 }
@@ -348,6 +357,11 @@ export default {
     font-size: 10px;
     font-weight: 400;
     color: rgba(202, 202, 202, 1);
+  }
+  .record-number{
+    font-size:9px;
+    margin-top:20px;
+    padding: 0 10px;
   }
 }
 </style>

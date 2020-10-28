@@ -164,7 +164,7 @@ export default {
       }
     },
     touchStart(e) {
-      e.preventDefault()
+      // e.preventDefault()
       const beginLeft = e.target.offsetParent.offsetLeft
       const beginRight =
         this.$refs.ballRight.offsetLeft + this.$refs.ballRight.offsetWidth
@@ -188,9 +188,10 @@ export default {
       }
       document.addEventListener('touchmove', touchMove)
       document.addEventListener('touchend', deleteListener)
+      // e.preventDefault()
     },
     touchEnd(e) {
-      e.preventDefault()
+      // e.preventDefault()
       const beginLeft =
         e.target.offsetParent.offsetLeft + this.$refs.ballRight.offsetWidth
       const stopLeft = this.$refs.ballLeft.offsetLeft
@@ -216,6 +217,8 @@ export default {
       }
       document.addEventListener('touchmove', touchMove)
       document.addEventListener('touchend', deleteListener)
+      // e.preventDefault()
+      
     },
     touchLine(e) {
       const clickPosition = e.offsetX / e.target.offsetWidth

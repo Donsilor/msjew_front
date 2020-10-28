@@ -107,6 +107,7 @@ export default {
   background-color: #ffffff;
   transform: translate(0, 100%);
   transition: all 0.2s linear;
+  z-index: 999;
 }
 .eject.active .eject-box {
   transform: translate(0, 0);

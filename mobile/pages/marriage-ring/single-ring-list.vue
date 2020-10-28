@@ -181,7 +181,7 @@ export default {
       // this.conditions[0].checked = series.toString()
       this.conditions[0].options = this.CONDITION_INFO.style.ringStyles
       this.conditions[0].checked = style.toString()
-      this.conditions[1].options = this.CONDITION_INFO.material.rings
+      this.conditions[1].options = this.CONDITION_INFO.quality.rings
       this.conditions[1].checked = ``
       this.conditions[2].checked = ``
       this.conditions[2].options = []

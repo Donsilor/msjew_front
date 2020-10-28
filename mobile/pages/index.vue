@@ -230,7 +230,7 @@
                 </div>
               </template>
             </template>
-          </swiper1>
+          </swiper1> 
         </template>
         <template v-else>
           <template v-for="(each, n) in banner">
@@ -241,13 +241,17 @@
                 :target="each.openType === 1 ? '_blank' : '_self'"
               >
                 <div :key="n" class="swiper-item">
-                  <img :src="each.image" @error="imageError" />
+                  <img src="/index-ms/banner01.png" @error="imageError"> 
+                  <img src="/index-ms/banner02.png" @error="imageError"> 
+                  <!-- <img :src="each.image" @error="imageError" /> -->
                 </div>
               </a>
             </template>
             <template v-else>
               <div :key="n" class="swiper-item">
-                <img :src="each.image" @error="imageError" />
+                <img src="/index-ms/banner01.png" @error="imageError"> 
+                <img src="/index-ms/banner02.png" @error="imageError"> 
+                <!-- <img :src="each.image" @error="imageError" /> -->
               </div>
             </template>
           </template>
@@ -339,13 +343,13 @@
         <div class="ad-dec">
           <p class="headline">{{ lang.headline4 }}</p>
           <p class="subtitle">{{ lang.subtitle2 }}</p>
-          <p class="subtitle">{{ lang.subtitle2 }}</p>
+          <p class="subtitle">{{ lang.subtitle3 }}</p>
         </div>
       </section>
       <section class="learn-more">
         <div class="swiper-box">
           <div class="img-box-more"> 
-            <swiper :options="swiperOptionMore">
+            <swiper :options="swiperOptionMore" ref="mySwiper" :indicator="true">
           　　<swiper-slide v-for="(more, n) in More" :key="n">
           　　　　<img :src="more.url">
                 <div class="descrip">
@@ -666,31 +670,31 @@ export default {
         },
         {
           'url': '/index-ms/Hot2.png',
-          'id': 670,
-          'link': '/marriage-ring/single-ring-detail?goodId=670&ringType=single',
-          'price': 0,
-          'ifShow': false
-        },
-        {
-          'url': '/index-ms/Hot3.png',
           'id': 679,
           'link': '/marriage-ring/single-ring-detail?goodId=679&ringType=single',
           'price': 0,
           'ifShow': false
         },
         {
-          'url': '/index-ms/Hot4.png',
+          'url': '/index-ms/Hot3.png',
           'id': 684,
           'link': '/marriage-ring/single-ring-detail?goodId=684&ringType=single',
+          'price': 0,
+          'ifShow': false
+        },
+        {
+          'url': '/index-ms/Hot4.png',
+          'id': 670,
+          'link': '/marriage-ring/single-ring-detail?goodId=670&ringType=single',
           'price': 0,
           'ifShow': false
         }
       ],
       More:[
         {
-          'url': '/index-ms/more3.png',
-          'title': this.LANGUAGE.index.tip3,
-          'dec': this.LANGUAGE.index.tip3To1,
+          'url': '/index-ms/more1.png',
+          'title': this.LANGUAGE.index.tip1,
+          'dec': this.LANGUAGE.index.tip1To1,
           'learnMore': this.LANGUAGE.index.tip,
         },
         {
@@ -700,9 +704,9 @@ export default {
           'learnMore': this.LANGUAGE.index.tip,
         },
         {
-          'url': '/index-ms/more1.png',
-          'title': this.LANGUAGE.index.tip1,
-          'dec': this.LANGUAGE.index.tip1To1,
+          'url': '/index-ms/more3.png',
+          'title': this.LANGUAGE.index.tip3,
+          'dec': this.LANGUAGE.index.tip3To1,
           'learnMore': this.LANGUAGE.index.tip,
         }
       ],
@@ -1263,7 +1267,22 @@ export default {
 .ms-banner {
   width: 100%;
   height: 420px;
-  background-color: #f7e3dc;
+  // background-color: #f7e3dc;
+  .swiper-item > img {
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .swiper-item > img:first-child {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+  }
+  .swiper-item > img:last-child {
+    position: absolute;
+    top: 74.8%;
+    left: 50%;
+  }
 }
 
 // 文字区域
@@ -1613,14 +1632,14 @@ export default {
   font-size: 0;
   overflow: hidden;
 }
-.swiper-item > img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /*max-width: 100%;*/
-  max-height: 100%;
-}
+// .swiper-item > img {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   /*max-width: 100%;*/
+//   max-height: 100%;
+// }
 
 /*定制区域*/
 .customize {

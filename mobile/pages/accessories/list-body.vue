@@ -178,12 +178,13 @@ export default {
   name: 'List',
   mixins: [Mixin, List, GoodListProps],
   props:['seo'],
-  // mounted() {
-  //   var _this = this;
-  //   _this.$nextTick(() => {
-  //     _this.$nuxt.$loading.start()
-  //   })
-  // }
+  mounted() {
+    console.log("conditions",this.conditions)
+    var _this = this;
+    _this.$nextTick(() => {
+      _this.$nuxt.$loading.start()
+    })
+  }
 }
 </script>
 

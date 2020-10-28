@@ -31,6 +31,10 @@
             <span class="pl-login">{{ replacepos(date.username, 2, 6, '***') }}</span>
           </div>
         </div>
+        <div class="quit-item" v-if="isLogin" @click="logout">
+          <div class="item-icon quit"></div>
+          <div class="item-name">{{ lang.logout }}</div>
+        </div>
 
       </div>
       <div :class="['content', {'height': !bottom}]">
@@ -213,12 +217,12 @@
           </div>
         </div>
 
-        <div class="help" v-if="isLogin" @click="logout">
+        <!-- <div class="help" v-if="isLogin" @click="logout">
           <div class="item">
             <div class="item-icon quit"></div>
             <div class="item-name">{{ lang.logout }}</div>
           </div>
-        </div>
+        </div> -->
       </div>
       <site-switch ref="site-switch"></site-switch>
     </div>
@@ -262,6 +266,11 @@ export default {
       bottom:true,
       isLogin: !!this.$store.state.token,
       rings:[
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.all,
+          routerName: 'marriage-ring-single-ring'
+        },
         {
           stress: true,
           name: this.LANGUAGE.components.leftMenu.ModernSimplicity,
@@ -329,9 +338,17 @@ export default {
       ],
       earrings:[
         {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.all,
+          routerName: 'accessories-list',
+          query:  {
+            actIndex: 4
+          },
+        },
+        {
           name: this.LANGUAGE.components.leftMenu.Earrings,
           routerName: 'accessories-list',
-           query:  {
+          query:  {
             actIndex: 5
           },
         },
@@ -1093,7 +1110,20 @@ export default {
     }
   }
 }
+.quit-item{
+  display: flex;
+  color: #6f9eb1;
+  position: relative;
+  left:50px;
+  line-height: 18px;
 
+  .quit{
+    width: 20px;
+    height: 20px;
+    background: url('/icon/quit2.png') no-repeat center;
+    background-size: 100% 100%;
+  }
+}
 .height{
   height: 100%;
 }

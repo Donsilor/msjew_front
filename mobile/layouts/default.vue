@@ -33,6 +33,6 @@ export default {
 .layout-main {
   flex-grow: 1;
   flex-shrink: 1;
-  overflow: auto;
+  /* overflow: auto; */
 }
 </style>

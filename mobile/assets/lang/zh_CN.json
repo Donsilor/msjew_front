@@ -970,16 +970,16 @@
         "copyrightRight": "© 2020 MORESHINE All Rights Reserved.",
         "copyrightRight1": "粤ICP备",
         "copyrightRight2": "号/Copyright©2018-2020  MORESHINE官网   All Rights Reserved.",
-        "copyrightRightMs": "粤ICP备20035106 号/Copyright©2018-2020 BDD Co.官网 All Rights Reserved.",
+        "copyrightRightMs": "粤ICP备20035106 号/Copyright©2018-2020 BMORESHINE官网 All Rights Reserved.",
         "helpCenter":"帮助中心",
         "ShoppingGuide":"购物指南",
         "MemberCentre":"会员中心",
         "WorryFreeAfterSales":"无忧售后",
         "ConvenientDelivery":"便捷配送",
         "contactUs":"与我们珠宝顾问联络",
-        "AddressTile":"地址：",
-        "CallTile":"电话：",
-        "EmailTile":"邮箱：",
+        "AddressTile":"地址:",
+        "CallTile":"电话:",
+        "EmailTile":"邮箱:",
         "Address":"广东省深圳市罗湖区布心路3008号IBC中心A座1306室",
         "Call":"0755 - 25160872 - 8005",
         "Email":"service@bddco.com"
@@ -1061,7 +1061,8 @@
         "Alphabetic":"字母系列",
         "WorkplaceCommuting":"职场通勤",
         "SimpleStylish":"简约时尚",
-        "TrendClassic":"潮流经典"
+        "TrendClassic":"潮流经典",
+        "all":"全部"
       },
       "noMoreData": {
         "noMore": "暂无更多"
