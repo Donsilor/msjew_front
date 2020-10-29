@@ -183,9 +183,11 @@ export default {
       const options = info.options
 
       for (let n = 0, length = options.length; n < length; n++) {
-        if (checked.indexOf(options[n].id) > -1) {
+        // if (checked.indexOf(options[n].id) > -1) {
+        if (checked == options[n].id) {
           result.push(options[n].name)
         }
+        // console.log("dddd",options[n].id,options[n].name)
       }
       return result.join('-')
     },

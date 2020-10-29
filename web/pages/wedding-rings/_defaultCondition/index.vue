@@ -106,19 +106,24 @@ const conditionMaps = {
 
   // 材质
   'alloy': {
-    material: 204
+    // material: [204] ,
+    materialIndex:0
   },
   '925-silver': {
-    material: 35
+    // material: [35],
+    materialIndex:1
   },
   '9k-gold': {
-    material: 272
+    // material: [289,290,291],
+    materialIndex:2
   },
   '14k-gold': {
-    material: 273
+    // material: [31,32,33],
+    materialIndex:3
   },
   '18k-gold': {
-    material: 274
+    // material: [28,29,30],
+    materialIndex:4
   },
 
   // 送礼对象

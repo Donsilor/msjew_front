@@ -30,4 +30,9 @@ export default {
   width: 70px;
   height: 82px;
 }
+.option-cover {
+  width: calc(100% / 4);
+  margin-bottom: 8px;
+  text-align: center;
+}
 </style>

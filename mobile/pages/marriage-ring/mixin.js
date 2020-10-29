@@ -50,7 +50,8 @@ export default {
       const options = info.options
       // console.log("this.CONDITION_INFO.quality.rings",info)
       for (let n = 0, length = options.length; n < length; n++) {
-        if (checked.indexOf(options[n].id) > -1) {
+        // if (checked.indexOf(options[n].id) > -1) {
+        if (checked == options[n].id) {
           result.push(options[n].name)
         }
       }

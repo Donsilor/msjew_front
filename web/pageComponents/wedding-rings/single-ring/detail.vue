@@ -21,137 +21,139 @@
           </h2>
         </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}: {{ info.goodsCode }}</div>
-        <div class="sku" v-if="productInfo.carats.length == ''">
-          <!-- 成色 -->
-          <div class="left-properties" v-if="productInfo.materials.length > 0">
-            <div  class="property-item">
-              <span class="item-name">
-                {{ $t(`${lang}.color`) }}
-              </span>
-              <div class="property">
-                <div class="had-checked">
-                  <i
-                    :class="[
-                      'iconfont',
-                      'iconmaterial-big-pt',
-                      'color-icon',
-                      materialColors[
-                        productInfo.materials[ringChecked.materialIndex].id
-                      ]
-                    ]"
-                  ></i>
-                  <span class="name ow-h1">
-                    {{ productInfo.materials[ringChecked.materialIndex].name }}
-                  </span>
-                  <i class="iconfont iconxiala drop-down-icon"></i>
-                </div>
-                <ul class="options">
-                  <li
-                    v-for="(item, index) in productInfo.materials"
-                    :key="index"
-                    :class="[
-                      'item',
-                      { active: ringChecked.materialIndex === index }
-                    ]"
-                    @click="changeRingChecked('materialIndex', index)"
-                  >
+        <div v-if="productInfo.carats.length == ''">
+          <div class="sku" v-if="productInfo.materials.length > 0 ||colorDetail.length > 0 || productInfo.sizes.length > 1">
+            <!-- 成色 -->
+            <div class="left-properties" v-if="productInfo.materials.length > 0">
+              <div  class="property-item">
+                <span class="item-name">
+                  {{ $t(`${lang}.color`) }}
+                </span>
+                <div class="property">
+                  <div class="had-checked">
                     <i
                       :class="[
                         'iconfont',
                         'iconmaterial-big-pt',
                         'color-icon',
-                        materialColors[item.id]
+                        materialColors[
+                          productInfo.materials[ringChecked.materialIndex].id
+                        ]
                       ]"
                     ></i>
-                    <span class="name ow-h1">{{ item.name }}</span>
-                  </li>
-                </ul>
+                    <span class="name ow-h1">
+                      {{ productInfo.materials[ringChecked.materialIndex].name }}
+                    </span>
+                    <i class="iconfont iconxiala drop-down-icon"></i>
+                  </div>
+                  <ul class="options">
+                    <li
+                      v-for="(item, index) in productInfo.materials"
+                      :key="index"
+                      :class="[
+                        'item',
+                        { active: ringChecked.materialIndex === index }
+                      ]"
+                      @click="changeRingChecked('materialIndex', index)"
+                    >
+                      <i
+                        :class="[
+                          'iconfont',
+                          'iconmaterial-big-pt',
+                          'color-icon',
+                          materialColors[item.id]
+                        ]"
+                      ></i>
+                      <span class="name ow-h1">{{ item.name }}</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- 色彩 -->
-          <div class="left-properties" v-if="colorDetail.length > 0">
-            <div  class="property-item">
-              <span class="item-name">
-                {{ $t(`${lang}.shade`) }}
-              </span>
-              <div class="property">
-                <div class="had-checked">
-                  <!-- <i
-                    :class="[
-                      'iconfont',
-                      'iconmaterial-big-pt',
-                      'color-icon',
-                        colorDetail[ringChecked.colorIndex].id
-                    ]"
-                  ></i> -->
-                  <span class="name ow-h1">
-                    {{ colorDetail[ringChecked.colorIndex].name }}
-                  </span>
-                  <i class="iconfont iconxiala drop-down-icon"></i>
-                </div>
-                <ul class="options">
-                  <li
-                    v-for="(item, index) in colorDetail"
-                    :key="index"
-                    :class="[
-                      'item',
-                      { active: ringChecked.colorIndex === index }
-                    ]"
-                    @click="changeRingChecked('colorIndex', index)"
-                  >
+            <!-- 色彩 -->
+            <div class="left-properties" v-if="colorDetail.length > 0">
+              <div  class="property-item">
+                <span class="item-name">
+                  {{ $t(`${lang}.shade`) }}
+                </span>
+                <div class="property">
+                  <div class="had-checked">
                     <!-- <i
                       :class="[
                         'iconfont',
                         'iconmaterial-big-pt',
                         'color-icon',
-                        colorDetail[item.id]
+                          colorDetail[ringChecked.colorIndex].id
                       ]"
                     ></i> -->
-                    <span class="name ow-h1">{{ item.name }}</span>
-                  </li>
-                </ul>
+                    <span class="name ow-h1">
+                      {{ colorDetail[ringChecked.colorIndex].name }}
+                    </span>
+                    <i class="iconfont iconxiala drop-down-icon"></i>
+                  </div>
+                  <ul class="options">
+                    <li
+                      v-for="(item, index) in colorDetail"
+                      :key="index"
+                      :class="[
+                        'item',
+                        { active: ringChecked.colorIndex === index }
+                      ]"
+                      @click="changeRingChecked('colorIndex', index)"
+                    >
+                      <!-- <i
+                        :class="[
+                          'iconfont',
+                          'iconmaterial-big-pt',
+                          'color-icon',
+                          colorDetail[item.id]
+                        ]"
+                      ></i> -->
+                      <span class="name ow-h1">{{ item.name }}</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-          <!-- 尺寸 -->
-          <div class="right-properties" v-if="productInfo.sizes.length > 0">
-            <div  class="property-item">
-              <span class="item-name">
-                {{ $t(`${lang}.size`) }}
-              </span>
-              <div class="property">
-                <div class="had-checked">
-                  <span class="name ow-h1">
-                    {{ productInfo.sizes[ringChecked.sizeIndex].name }}
-                  </span>
-                  <i class="iconfont iconxiala drop-down-icon"></i>
-                </div>
-                <ul class="options">
-                  <li
-                    v-for="(item, index) in productInfo.sizes"
-                    :key="index"
-                    :class="[
-                      'item',
-                      { active: ringChecked.sizeIndex === index }
-                    ]"
-                    @click="changeRingChecked('sizeIndex', index)"
-                  >
-                    <span class="name ow-h1">{{ item.name }}</span>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="helper-popover">
-                <span class="helper-name">
-                  {{ $t(`${lang}.USEdition`) }}
+            <!-- 尺寸 -->
+            <div class="right-properties" v-if="productInfo.sizes.length > 1">
+              <div  class="property-item">
+                <span class="item-name">
+                  {{ $t(`${lang}.size`) }}
                 </span>
-                <el-popover placement="bottom" trigger="hover">
-                  <ring-size></ring-size>
-                  <b slot="reference" class="prompt-icon">!</b>
-                </el-popover>
+                <div class="property">
+                  <div class="had-checked">
+                    <span class="name ow-h1">
+                      {{ productInfo.sizes[ringChecked.sizeIndex].name }}
+                    </span>
+                    <i class="iconfont iconxiala drop-down-icon"></i>
+                  </div>
+                  <ul class="options">
+                    <li
+                      v-for="(item, index) in productInfo.sizes"
+                      :key="index"
+                      :class="[
+                        'item',
+                        { active: ringChecked.sizeIndex === index }
+                      ]"
+                      @click="changeRingChecked('sizeIndex', index)"
+                    >
+                      <span class="name ow-h1">{{ item.name }}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="helper-popover">
+                  <span class="helper-name">
+                    {{ $t(`${lang}.USEdition`) }}
+                  </span>
+                  <el-popover placement="bottom" trigger="hover">
+                    <ring-size></ring-size>
+                    <b slot="reference" class="prompt-icon">!</b>
+                  </el-popover>
+                </div>
+                <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
               </div>
-              <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
             </div>
           </div>
         </div>
@@ -282,7 +284,7 @@
               </div>
             </div>
             <!-- 尺寸 -->
-            <div class="right-properties" v-if="productInfo.sizes.length > 0">
+            <div class="right-properties" v-if="productInfo.sizes.length > 1"> 
               <div  class="property-item">
                 <span class="item-name">
                   {{ $t(`${lang}.size`) }}
@@ -801,7 +803,7 @@ export default {
     }
   },
   mounted() {
-    // console.log("ppppppp",this.colorDetail[this.ringChecked.colorIndex].id)
+    console.log("ppppppp",this.productInfo)
     const _this = this
     if(this.info.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)

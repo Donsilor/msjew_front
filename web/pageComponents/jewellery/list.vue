@@ -393,7 +393,7 @@ export default {
           paramId:10,
           paramName: 'material',
           valueType: 1,
-          configValues: [this.materialOptions[conditions.materialIndex].id]
+          configValues: this.materialOptions[conditions.materialIndex].id
         })
       }
 
