@@ -60,7 +60,7 @@
             <li
               :class="[
                 'option-item',
-                { active: '' === searchConditions.material }
+                { active: '' === searchConditions.materialIndex }
               ]"
               @click="changeMaterial('')"
             >
@@ -76,9 +76,9 @@
               :key="index"
               :class="[
                 'option-item',
-                { active: option.id === searchConditions.material }
+                { active: index === searchConditions.materialIndex }
               ]"
-              @click="changeMaterial(option.id)"
+              @click="changeMaterial(index)"
             >
               <div class="item-icon">
                 <img :src="option.image" />
@@ -361,6 +361,7 @@ export default {
         typeId: 4,
         stoneTypeId:'',
         materialIndex: '',
+        material:[],
         manner:'',
         style1:'',
         style2:'',
@@ -403,25 +404,25 @@ export default {
         })
       }
 
-      if (conditions.material) {
-        params.push({
-          type: 3,
-          paramId:10,
-          paramName: 'material',
-          valueType: 1,
-          configValues: conditions.material === '' ? [] : [conditions.material]
-        })
-      }
-
-      // if (conditions.materialIndex !== "") {
+      // if (conditions.material) {
       //   params.push({
       //     type: 3,
       //     paramId:10,
       //     paramName: 'material',
       //     valueType: 1,
-      //     configValues: [this.materialOptions[conditions.materialIndex].id]
+      //     configValues: conditions.material === '' ? [] : conditions.material
       //   })
       // }
+
+      if (conditions.materialIndex !== "") {
+        params.push({
+          type: 3,
+          paramId:10,
+          paramName: 'material',
+          valueType: 1,
+          configValues: this.materialOptions[conditions.materialIndex].id
+        })
+      }
 
       if (conditions.object) {
         params.push({
@@ -657,7 +658,7 @@ export default {
     },
     // 改变材質条件
     changeMaterial(index) {
-      this.changeCondition('material', index)
+      this.changeCondition('materialIndex', index)
     },
 
     // 改变主石类型条件

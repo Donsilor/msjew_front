@@ -111,7 +111,7 @@
                   ></span
                 >
                 <span class="text"
-                  >{{ $t(`${lang}.cart`) }}({{ cartAmount }})</span
+                  >({{ cartAmount }})</span
                 >
               </div>
             </nuxt-link>

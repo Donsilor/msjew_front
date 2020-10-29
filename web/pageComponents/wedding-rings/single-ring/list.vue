@@ -58,7 +58,7 @@
           <li
             :class="[
               'option-item',
-              { active: '' === searchConditions.material }
+              { active: '' === searchConditions.materialIndex }
             ]"
             @click="changeMaterial('')"
           >
@@ -74,9 +74,9 @@
             :key="index"
             :class="[
               'option-item',
-              { active: option.id === searchConditions.material }
+              { active: index === searchConditions.materialIndex }
             ]"
-            @click="changeMaterial(option.id)"
+            @click="changeMaterial(index)"
           >
             <div class="item-icon">
               <img :src="option.image" />
@@ -325,7 +325,7 @@ export default {
       searchConditions: {
         styleSex: '', // 54-款式， 26-适用人群
         style: '',
-        material: '',
+        materialIndex: '',
         forPeople: '',
         scenes: '',
         object:'',
@@ -403,13 +403,22 @@ export default {
           configValues: conditions.series === '' ? [] : [conditions.series]
         })
       }
-      if (conditions.material) {
+      // if (conditions.material) {
+      //   params.push({
+      //     type: 3,
+      //     paramId:10,
+      //     paramName: 'material',
+      //     valueType: 1,
+      //     configValues: conditions.material === '' ? [] : conditions.material
+      //   })
+      // }
+      if (conditions.materialIndex !== "") {
         params.push({
           type: 3,
           paramId:10,
           paramName: 'material',
           valueType: 1,
-          configValues: conditions.material === '' ? [] : [conditions.material]
+          configValues: this.materialOptions[conditions.materialIndex].id
         })
       }
       if (conditions.object) {
@@ -548,6 +557,7 @@ export default {
     }
   },
   mounted() {
+    console.log("searchConditions",this.searchConditions,this.materialOptions)
     const _this = this
     var priceRange_val =this.$route.query.priceRange
     if(priceRange_val !== undefined){
@@ -585,14 +595,17 @@ export default {
       }
     },
     // 改变材質条件
-    changeMaterial(value) {
-      const searchConditions = this.searchConditions
-      if (searchConditions.material === value) {
-        this.changeCondition('material', '')
-      } else {
-        this.changeCondition('material', value)
-      }
+    changeMaterial(index) {
+      this.changeCondition('materialIndex', index)
     },
+    // changeMaterial(value) {
+    //   const searchConditions = this.searchConditions
+    //   if (searchConditions.material === value) {
+    //     this.changeCondition('material', [])
+    //   } else {
+    //     this.changeCondition('material', value)
+    //   }
+    // },
     // 改变价格条件
     changePriceRange(value) {
       this.changeCondition('priceRange', value)

@@ -729,189 +729,216 @@ export default language => {
     material: {
       rings: [
         {
-          id: 204,
+          id: [204],
           name: lang.quality.alloy,
           image: '/ring-material/6.png'
         },
         {
-          id: 35,
+          id: [35],
           name: lang.quality.silver925,
           image: '/ring-material/5.png'
         },
         {
-          id: 272,
+          id: [289,290,291],
           name: lang.quality.gold9k,
           image: '/ring-material/5.png'
         },
         {
-          id: 273,
+          id: [31,32,33],
           name: lang.quality.gold14k,
           image: '/ring-material/2.png'
         },
         {
-          id: 274,
+          id: [28,29,30],
           name: lang.quality.gold18k,
           image: '/ring-material/4.png'
         }
       ],
       necklace: [
         {
-          id: 204,
+          id: [204],
           name: lang.quality.alloy,
           image: '/ring-material/6.png'
         },
         {
-          id: 35,
+          id: [35],
           name: lang.quality.silver925,
           image: '/ring-material/5.png'
         },
         {
-          id: 272,
+          id: [289,290,291],
           name: lang.quality.gold9k,
           image: '/ring-material/5.png'
         },
         {
-          id: 273,
+          id: [31,32,33],
           name: lang.quality.gold14k,
           image: '/ring-material/2.png'
         },
         {
-          id: 274,
+          id: [28,29,30],
           name: lang.quality.gold18k,
           image: '/ring-material/4.png'
         }
       ],
       pendant: [
         {
-          id: 204,
+          id: [204],
           name: lang.quality.alloy,
           image: '/ring-material/6.png'
         },
         {
-          id: 35,
+          id: [35],
           name: lang.quality.silver925,
           image: '/ring-material/5.png'
         },
         {
-          id: 272,
+          id: [289,290,291],
           name: lang.quality.gold9k,
           image: '/ring-material/5.png'
         },
         {
-          id: 273,
+          id: [31,32,33],
           name: lang.quality.gold14k,
           image: '/ring-material/2.png'
         },
         {
-          id: 274,
+          id: [28,29,30],
           name: lang.quality.gold18k,
           image: '/ring-material/4.png'
         }
       ],
       studEarring: [
         {
-          id: 204,
+          id: [204],
           name: lang.quality.alloy,
           image: '/ring-material/6.png'
         },
         {
-          id: 35,
+          id: [35],
           name: lang.quality.silver925,
           image: '/ring-material/5.png'
         },
         {
-          id: 272,
+          id: [289,290,291],
           name: lang.quality.gold9k,
           image: '/ring-material/5.png'
         },
         {
-          id: 273,
+          id: [31,32,33],
           name: lang.quality.gold14k,
           image: '/ring-material/2.png'
         },
         {
-          id: 274,
+          id: [28,29,30],
           name: lang.quality.gold18k,
           image: '/ring-material/4.png'
         }
       ],
       earring: [
         {
-          id: 204,
+          id: [204],
           name: lang.quality.alloy,
           image: '/ring-material/6.png'
         },
         {
-          id: 35,
+          id: [35],
           name: lang.quality.silver925,
           image: '/ring-material/5.png'
         },
         {
-          id: 272,
+          id: [289,290,291],
           name: lang.quality.gold9k,
           image: '/ring-material/5.png'
         },
         {
-          id: 273,
+          id: [31,32,33],
           name: lang.quality.gold14k,
           image: '/ring-material/2.png'
         },
         {
-          id: 274,
+          id: [28,29,30],
           name: lang.quality.gold18k,
           image: '/ring-material/4.png'
         }
       ],
       braceletLine: [
         {
-          id: 204,
+          id: [204],
           name: lang.quality.alloy,
           image: '/ring-material/6.png'
         },
         {
-          id: 35,
+          id: [35],
           name: lang.quality.silver925,
           image: '/ring-material/5.png'
         },
         {
-          id: 272,
+          id: [289,290,291],
           name: lang.quality.gold9k,
           image: '/ring-material/5.png'
         },
         {
-          id: 273,
+          id: [31,32,33],
           name: lang.quality.gold14k,
           image: '/ring-material/2.png'
         },
         {
-          id: 274,
+          id: [28,29,30],
           name: lang.quality.gold18k,
           image: '/ring-material/4.png'
         }
       ],
       bracelet: [
         {
-          id: 204,
+          id: [204],
           name: lang.quality.alloy,
           image: '/ring-material/6.png'
         },
         {
-          id: 35,
+          id: [35],
           name: lang.quality.silver925,
           image: '/ring-material/5.png'
         },
         {
-          id: 272,
+          id: [289,290,291],
           name: lang.quality.gold9k,
           image: '/ring-material/5.png'
         },
         {
-          id: 273,
+          id: [31,32,33],
           name: lang.quality.gold14k,
           image: '/ring-material/2.png'
         },
         {
-          id: 274,
+          id: [28,29,30],
+          name: lang.quality.gold18k,
+          image: '/ring-material/4.png'
+        }
+      ],
+      designer: [
+        {
+          id: [204],
+          name: lang.quality.alloy,
+          image: '/ring-material/6.png'
+        },
+        {
+          id: [35],
+          name: lang.quality.silver925,
+          image: '/ring-material/5.png'
+        },
+        {
+          id: [289,290,291],
+          name: lang.quality.gold9k,
+          image: '/ring-material/5.png'
+        },
+        {
+          id: [31,32,33],
+          name: lang.quality.gold14k,
+          image: '/ring-material/2.png'
+        },
+        {
+          id: [28,29,30],
           name: lang.quality.gold18k,
           image: '/ring-material/4.png'
         }

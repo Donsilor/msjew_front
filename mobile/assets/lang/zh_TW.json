@@ -86,10 +86,13 @@
       "TrendClassic":"潮流经典"
     },
     "quality": {
+      "platinum9K": "9K白金",
       "platinum14K": "14K白金",
       "platinum18K": "18K白金",
+      "gold9K": "9K黄金",
       "gold14K": "14K黄金",
       "gold18K": "18K黄金",
+      "roseGold9K": "9K玫瑰金",
       "roseGold14K": "14K玫瑰金",
       "roseGold18K": "18K玫瑰金",
       "platinum": "鉑金",
@@ -969,7 +972,7 @@
       "copyrightRight": "© 2020 MORESHINE All Rights Reserved.",
       "copyrightRight1": "粵ICP備",
       "copyrightRight2": "號/Copyright©2018-2020  MORESHINE官网   All Rights Reserved.",
-      "copyrightRightMs": "粵ICP備20035106 號/Copyright©2018-2020 BMORESHINE官網 All Rights Reserved.",
+      "copyrightRightMs": "粵ICP備20035106 號/Copyright©2018-2020 MORESHINE官網 All Rights Reserved.",
       "helpCenter":"幫助中心",
       "ShoppingGuide":"購物指南",
       "MemberCentre":"會員中心",
