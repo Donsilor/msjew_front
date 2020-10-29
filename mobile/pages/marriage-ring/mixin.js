@@ -2,19 +2,26 @@ export default {
   data() {
     return {
       conditions: [
+        // {
+        //   type: 'eject-choose-pro',
+        //   key: 'series',
+        //   name: this.LANGUAGE.listCommons.series,
+        //   checked: typeof this.$route.query.series !== 'undefined' ? this.$route.query.series:'',
+        //   options: []
+        // },
         {
           type: 'eject-choose-pro',
           key: 'style',
-          name: this.LANGUAGE.listCommons.style,
+          name: this.LANGUAGE.listCommons.styles,
           checked: typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:'',
           options: []
         },
         {
           type: 'eject-choose-pro',
           key: 'quality',
-          name: this.LANGUAGE.listCommons.fineness,
+          name: this.LANGUAGE.listCommons.material,
           checked: typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:'',
-          options: this.CONDITION_INFO.quality.rings
+          options: this.CONDITION_INFO.material.rings
         },
         {
           type: 'eject-choose',
@@ -41,7 +48,7 @@ export default {
       const result = []
       const checked = info.checked
       const options = info.options
-
+      // console.log("this.CONDITION_INFO.quality.rings",info)
       for (let n = 0, length = options.length; n < length; n++) {
         if (checked.indexOf(options[n].id) > -1) {
           result.push(options[n].name)
@@ -66,6 +73,12 @@ export default {
       }
       return result.join(',')
     },
+    // clearSeries(data) {
+    //   const conditions = JSON.parse(JSON.stringify(this.conditions))
+    //   conditions[0].checked = this.getCheckedIds(data)
+    //   this.conditions = conditions
+    //   this.madeUpEv()
+    // },
     clearStyle(data) {
       const conditions = JSON.parse(JSON.stringify(this.conditions))
       conditions[0].checked = this.getCheckedIds(data)

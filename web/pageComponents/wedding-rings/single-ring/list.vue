@@ -12,7 +12,7 @@
             :key="index"
             :class="[
               'option-item',
-              { active: option.id === searchConditions.style }
+              { active: option.id === searchConditions.manner }
             ]"
             @click="changeStyle(option.id)"
           >
@@ -26,7 +26,7 @@
         </ul>
       </div>
       <!--      适用人群-->
-      <div class="condition-item condition-style condition-man-style">
+      <div class="condition-item condition-style condition-man-style forpeople">
         <h2 class="condition-name">
           {{ $t(`${lang}.forPeople`) }}
         </h2>
@@ -52,7 +52,7 @@
       <!--      材質条件-->
       <div class="condition-item condition-material">
         <h2 class="condition-name">
-          {{ $t(`${lang}.color`) }}
+          {{ $t(`${lang}.material`) }}
         </h2>
         <ul class="options">
           <li
@@ -66,7 +66,7 @@
               <img src="/ring-material/all.png" />
             </div>
             <div class="item-name">
-              {{ $t(`${lang}.allColor`) }}
+              {{ $t(`${lang}.allMaterial`) }}
             </div>
           </li>
           <li
@@ -185,7 +185,7 @@
         >
           <!--          商品数据-->
           <div v-if="item.itemType === 'product'" class="product-content">
-            <nuxt-link :to="item.to" >
+            <nuxt-link :to="item.to" target="_blank">
               <div class="product-image">
                 <img class="main-image" :src="item.goodsImages[0]" />
                 <img
@@ -294,15 +294,15 @@ export default {
   mixins: [List, ListPage, Operate],
   head() {
     return this.seo || {
-      title: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網',
+      title: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|MORESHINE官網',
       meta: [
         {
           name: 'title',
-          content: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網'
+          content: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|MORESHINE官網'
         },
         {
           name: 'description',
-          content: 'BDD官網商品列表推出手鍊, 手鐲, 白金, 耳環, 戒指等鉆石珠寶和K金首飾圖片，裸鉆價格、鉑金價格以及K金價格介紹。'
+          content: 'MORESHINE官網商品列表推出手鍊, 手鐲, 白金, 耳環, 戒指等鉆石珠寶和K金首飾圖片，裸鉆價格、鉑金價格以及K金價格介紹。'
         },
         {
           name: 'keywords',
@@ -317,17 +317,20 @@ export default {
       lang,
       listUrl: '/web/goods/style/search',
       page_size: 16,
-      forPeopleOptions: this.CONDITION_INFO.style.forPeople,
-      styleStyleOptions: this.CONDITION_INFO.style.styleRings,
-      materialOptions: this.CONDITION_INFO.quality.rings,
+      forPeopleOptions: this.CONDITION_INFO.style.MsForPeople,
+      styleStyleOptions: this.CONDITION_INFO.style.styleMsRings,
+      materialOptions: this.CONDITION_INFO.material.rings,
       defaultPriceRange,
-      fastPriceRanges: [[1000, 3000], [3000, 5000], [5000, 300000]],
+      fastPriceRanges: [[500, 1000], [1000, 5000], [5000, 10000]],
       searchConditions: {
         styleSex: '', // 54-款式， 26-适用人群
         style: '',
         material: '',
         forPeople: '',
         scenes: '',
+        object:'',
+        mosaic:'',
+        manner:'',
         priceRange: JSON.parse(JSON.stringify(defaultPriceRange))
       },
       loading: true,
@@ -391,6 +394,15 @@ export default {
         })
       }
 
+      if (conditions.series) {
+        params.push({
+          type: 1,
+          paramId:65,
+          paramName: 'series',
+          valueType: 1,
+          configValues: conditions.series === '' ? [] : [conditions.series]
+        })
+      }
       if (conditions.material) {
         params.push({
           type: 3,
@@ -398,6 +410,33 @@ export default {
           paramName: 'material',
           valueType: 1,
           configValues: conditions.material === '' ? [] : [conditions.material]
+        })
+      }
+      if (conditions.object) {
+        params.push({
+          type: 3,
+          paramId:26,
+          paramName: 'object',
+          valueType: 1,
+          configValues: conditions.object === '' ? [] : [conditions.object]
+        })
+      }
+      if (conditions.mosaic) {
+        params.push({
+          type: 3,
+          paramId:66,
+          paramName: 'mosaic',
+          valueType: 1,
+          configValues: conditions.mosaic === '' ? [] : [conditions.mosaic]
+        })
+      }
+      if (conditions.manner) {
+        params.push({
+          type: 3,
+          paramId:67,
+          paramName: 'manner',
+          valueType: 1,
+          configValues: conditions.manner === '' ? [] : [conditions.manner]
         })
       }
       if (conditions.forPeople) {
@@ -423,7 +462,7 @@ export default {
       const data = {
         advertType: 2,
         // 商品类别ID
-        categoryId: 2,
+        categoryId: [2,19],
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）
@@ -455,6 +494,7 @@ export default {
       const allData = JSON.parse(JSON.stringify(_this.allData))
       let adNum = 1
       allData.forEach(item => {
+        // console.log("item",item)
         this.coinType = item.coinType
         if (item.hasOwnProperty('dsName')) {
           // 广告
@@ -478,15 +518,28 @@ export default {
           }
           adNum++
         } else {
-          item.itemType = 'product'
-          item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
-
-          item.to = {
-            // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
-            path: '/ring/wedding-rings/'+ item.id,
-            query: {
-              goodId: item.id,
-              ringType: 'single'
+          if(item.categoryId == 19){
+            item.itemType = 'product'
+            item.ringImg = _this.imageStrToArray(item.goodsImages || '')
+            item.goodsImages = item.ringImg
+            item.to = {
+              path: '/ring/wedding-rings/' + item.id.replace(/\//g, ''),
+              query: {
+                goodId: item.id,
+                ringType: 'pair'
+              }
+            }
+          } else {
+            item.itemType = 'product'
+            item.goodsImages = _this.imageStrToArray(item.goodsImages || '')
+  
+            item.to = {
+              // path: '/ring/wedding-rings/' + item.goodsName.replace(/\//g, ''),
+              path: '/ring/wedding-rings/'+ item.id,
+              query: {
+                goodId: item.id,
+                ringType: 'single'
+              }
             }
           }
         }
@@ -514,11 +567,11 @@ export default {
       const searchConditions = this.searchConditions
       // console.log('style====>', searchConditions.style, value)
       if (
-        searchConditions.style === value
+        searchConditions.manner === value
       ) {
-        this.changeCondition('style', '')
+        this.changeCondition('manner', '')
       } else {
-        this.changeCondition('style', value)
+        this.changeCondition('manner', value)
       }
     },
 
@@ -560,6 +613,11 @@ export default {
   max-width: 1366px;
   margin: 0 auto;
   padding: 40px 0;
+}
+.forpeople{
+  .options{
+    width: 40%!important;
+  }
 }
 .search-condition {
   .condition-style {

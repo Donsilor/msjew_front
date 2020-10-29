@@ -123,7 +123,7 @@ export default {
     _this.$nextTick(() => {
       // 读取路径上的参数cut：{{
       //   $route.params.productTitle
-      // }}，且引入钻石商品详情页面文件，使用query中的id调用接口获取商品数据
+      // }}，且引入莫桑石商品详情页面文件，使用query中的id调用接口获取商品数据
     })
 
   }

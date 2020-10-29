@@ -14,7 +14,7 @@
             <div class="dd-content">
               <h2 class="dd-title">{{ $t(`${lang}.callToUs`) }}</h2>
               <p class="dd-desc" v-if="this.$store.state.platform === 20">
-                {{ $t(`${lang}.welcomeYourTel`) }}：0755 25169121
+                {{ $t(`${lang}.welcomeYourTel`) }}：0755-25160872-8005
               </p>
               <p class="dd-desc" v-else>
                 {{ $t(`${lang}.welcomeYourTel`) }}：（852）2165 3908
@@ -35,7 +35,7 @@
             <div class="dd-content">
               <h2 class="dd-title">{{ $t(`${lang}.emailToUs`) }}</h2>
               <p class="dd-desc" v-if="this.$store.state.platform === 20">
-                <a href="mailto:service@bddco.com">e-service@bddco.com</a>；{{
+                <a href="mailto:service@bddco.com">service@bddco.com</a>；{{
                   $t(`${lang}.allQuestionWillBeDeal`)
                 }}
               </p>

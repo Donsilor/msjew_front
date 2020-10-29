@@ -21,6 +21,13 @@
           :options="options"
           @change="chooseOption"
         ></quality-data>
+        <series-data
+          v-if="type === 'series'"
+          ref="data-options"
+          :multiple="multiple"
+          :options="options"
+          @change="chooseOption"
+        ></series-data>
         <style-data
           v-if="type === 'style'"
           ref="data-options"
@@ -28,6 +35,20 @@
           :options="options"
           @change="chooseOption"
         ></style-data>
+        <mosaic-data
+          v-if="type === 'mosaic'"
+          ref="data-options"
+          :multiple="multiple"
+          :options="options"
+          @change="chooseOption"
+        ></mosaic-data>
+        <object-data
+          v-if="type === 'object'" 
+          ref="data-options"
+          :multiple="multiple"
+          :options="options"
+          @change="chooseOption"
+        ></object-data>
         <shape-data
           v-if="type === 'shape'"
           ref="data-options"
@@ -86,6 +107,7 @@ export default {
   background-color: #ffffff;
   transform: translate(0, 100%);
   transition: all 0.2s linear;
+  z-index: 999;
 }
 .eject.active .eject-box {
   transform: translate(0, 0);

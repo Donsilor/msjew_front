@@ -23,7 +23,7 @@ export default {
     const getSingleRing = () => {
       return $axios({
         method: 'post',
-        url: '/web/goods/diamond/detail',
+        url: '/web/goods/style/detail',
         data: {
            goodsId: route.query.goodId || '',
            backend: route.query.backend || ''
@@ -71,7 +71,7 @@ export default {
     _this.$nextTick(() => {
       // 读取路径上的参数cut：{{
       //   $route.params.productTitle
-      // }}，且引入钻石商品详情页面文件，使用query中的id调用接口获取商品数据
+      // }}，且引入莫桑石商品详情页面文件，使用query中的id调用接口获取商品数据
     })
   }
 }

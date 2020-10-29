@@ -191,14 +191,19 @@
     </div>
 
     <!-- 非美国站点 -->
-    <div v-if="platform == 10 || platform == 20 || platform == 40">
+    <div v-if="platform == 10 || platform == 20 || platform == 40" class="ms-page">
       <section class="banner">
-        <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
+        <div :height="bannerHeight + 'px'" class="banner-box">
+          <div><img style="width:100%;" class="banner-img" src="../static/index/banner1.png" alt=""></div>
+          <div><img style="width:100%;margin-top: -4px" class="banner-img" src="../static/index/banner2.png" alt=""></div>
+          <div><img style="width:100%;margin-top: -4px" class="banner-img" src="../static/index/banner3.png" alt=""></div>
+        </div>
+        <!-- <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
             <a :href="item.addres || ''">
               <img class="banner-img" :src="item.image" alt="">
             </a>
-          </el-carousel-item>
+          </el-carousel-item> -->
 
         <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
                    有链接地址，且是外部链接
@@ -231,237 +236,141 @@
             <img :src="item.image" />
           </div>
         </el-carousel-item> -->
-      </el-carousel>
-    </section>
-    <section class="design">
-      <h1 class="section-title">
-        {{ $t(`${lang}.designYourEngagementRing`) }}
-      </h1>
-      <h2 class="section-sub-title">{{ $t(`${lang}.startFromDiamond`) }}</h2>
-      <interactive></interactive>
-    </section>
-    <section class="recommend-category">
-      <div class="categories">
-        <div v-for="(category, index) in recommendCategories" :key="index" class="category-item">
-          <nuxt-link :to="category.to">
-            <div class="bg">
-              <img :src="category.bgImage" />
-              <div class="hover-cover"></div>
-            </div>
-            <div class="info">
-              <h1 class="title">{{ category.title }}</h1>
-              <h2 class="sub-title">{{ category.subTitle }}</h2>
-              <div class="info-border-line border-t"></div>
-              <div class="info-border-line border-r"></div>
-              <div class="info-border-line border-b"></div>
-              <div class="info-border-line border-l"></div>
-            </div>
-          </nuxt-link>
-        </div>
-      </div>
+      <!-- </el-carousel> -->
     </section>
 
     <!--    首頁商品推薦模塊-->
-    <section class="hot">
-      <h1 class="section-title">
-        {{ hotProductInfo.title }}
-      </h1>
-      <div class="section-title-line"></div>
-      <div class="hot-list" :style="{ height: hotHeight + 'px', padding: hotPadding + 'px' + ' 0' }">
-        <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.2" :indicator="false" @change="changeActiveHotProduct">
-          <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
-            <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
-              <div class="product-image">
-                <img class="product-image" :src="product.goodsImages[0]" />
-              </div>
-            </a>
-            <nuxt-link v-else :to="product.to">
-              <div class="product-image">
-                <img class="product-image" :src="product.goodsImages[0]" />
-              </div>
-            </nuxt-link>
+     <div class="bg-color"> 
+        <section class="design">
+          <p class="section-title-en">
+            Hot sale
+          </p>
+          <p class="section-title-cn">
+            {{ $t(`${lang}.hotSale`) }}
+          </p>
+
+          <div class="us-host-box">
+            <div class="us-host-list" :style="{height:sImgHeight + 'px'}">
+              <swiper2 ref="us-host-list" :item-width="25" :indicator="false" :swiper-type="2" :style="{height:sImgHeight + 'px'}">
+                <div v-show="hot.ifShow" v-for="(hot, n) in msHotImgUrl" :key="n" class="host-item">
+                  <a :href="hot.link" target="_blank" class="item-box">
+                    <div class="product-image" :height="sImgHeight + 'px'">
+                      <img class="main-image" :src="hot.url[0]"/>
+                      <img class="sub-image" :src="hot.url[1] || hot.url[0]"/>
+                      <!-- <i class="iconfont icongouwuche cart-icon"></i> -->
+                    </div>
+                    <!-- <div class="price">{{ coin }} {{ formatMoney(hot.price) }}</div> -->
+                  </a>
+                </div>
+              </swiper2>
+            </div>
+
+            <!-- <div class="host-list-bar">
+              <div class="left-button" :class="{'effects': ifEffects == 1}" :style="{'top': arrowsTop + 'px'}" @click="nextHotSale(false, 1)"></div>
+              <div class="right-button" :class="{'effects': ifEffects == 2}" :style="{'top': arrowsTop + 'px'}" @click="nextHotSale(true, 2)"></div>
+            </div> -->
           </div>
-        </swiper>
+        </section>
+
       </div>
-      <div class="hot-list-bar">
-        <div class="left-button" @click="nextActiveHotProduct(false)">
-          <img src="/index/arrow-left.png" />
-        </div>
-        <div class="active-product-info">
-          <h1 class="title ow-h1">{{ activeHotProductInfo.goodsName }}</h1>
-        </div>
-        <div class="right-button" @click="nextActiveHotProduct(true)">
-          <img src="/index/arrow-right.png" />
-        </div>
-      </div>
-    </section>
+
     <section class="diamond-gia">
       <div class="bg">
-        <img src="/index/middle-gia.png" />
-      </div>
-      <div class="content">
-        <h1 class="title">
-          {{ $t(`${lang}.haveProfessionalCertificate`) }}
-        </h1>
-        <p class="description">
-          {{ $t(`${lang}.professionalCertificateInfo`) }}
-        </p>
-        <div class="button-group">
-          <nuxt-link :to="{ path: '/education/diamonds/certification' }">
-            <button class="check-now">
-              {{ $t(`${lang}.startYourDiamondCheck`) }}
-            </button>
-          </nuxt-link>
-        </div>
+        <img src="/index-ms/ad1.png" />
+        <img src="/index-ms/ad2.png" />
+        <img src="/index-ms/ad3.png" />
       </div>
     </section>
 
-    <!--    钻石类型-->
-    <section class="diamond">
-      <h1 class="section-title">
-        {{ $t(`${lang}.chooseYourDiamond`) }}
-      </h1>
-      <div class="section-title-line"></div>
-      <h2 class="section-sub-title">
-        {{ $t(`${lang}.360DiamondInfo`) }}
-      </h2>
-      <div class="diamond-list" :style="{ height: hotHeight + 'px', padding: diamondsPadding + 'px' + ' 0' }">
-        <swiper ref="diamond-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveDiamond">
-          <div v-for="(diamond, n) in diamonds" :key="n" class="product-item">
-            <nuxt-link :to="diamond.to">
-              <div class="product-image">
-                <img class="product-image" :src="diamond.img" />
-              </div>
-            </nuxt-link>
-          </div>
-        </swiper>
-      </div>
-      <div class="diamond-list-bar">
-        <div class="left-button" @click="nextActiveDiamond(false)">
-          <img src="/index/arrow-left.png" />
-        </div>
-        <div class="active-product-info">
-          <h1 class="title ow-h1">{{ activeDiamondInfo.name }}</h1>
-          <h2 class="sub-title ow-h1">{{ activeDiamondInfo.desc }}</h2>
-        </div>
-        <div class="right-button" @click="nextActiveDiamond(true)">
-          <img src="/index/arrow-right.png" />
-        </div>
-      </div>
-    </section>
     <section class="jewellery">
-      <h1 class="jewellery-section-top">
-        {{ $t(`${lang}.findYourSparkle`) }}
-      </h1>
       <div class="section-content">
-        <h1 class="section-title">
-          {{ $t(`${lang}.jewelry`) }}
-        </h1>
-        <div class="section-title-line"></div>
-        <h2 class="section-sub-title">
-          {{ $t(`${lang}.goodForYouEverywhere`) }}
-        </h2>
         <ul class="categories">
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.eternityRingsSlow`) }}
-            </div>
+          <li class="item sort1">
+            <img src="/index-ms/sort1.png" alt="">
             <div class="category">
               <div class="bg">
-                <img src="/index/jewelry-1.png" />
-              </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.eternalRing`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.eternityRingsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: '/engagement-rings/all' }">
-                    <button>{{ $t(`${lang}.explore`) }}</button>
-                  </nuxt-link>
-                </div>
+                <nuxt-link to="/wedding-rings/all">
+                  <img src="/index-ms/rings.png" />
+                </nuxt-link>
               </div>
             </div>
           </li>
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.menWedding`) }}
-            </div>
+          <li class="item sort2">
+            <img style="margin-top:-3px;" src="/index-ms/sort2.png" alt="">
             <div class="category">
               <div class="bg">
-                <img src="/index/jewelry-2.png" />
-              </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.menWeddingRings`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.menWeddingRingsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: '/wedding-rings/mens-classic' }">
-                    <button>{{ $t(`${lang}.discover`) }}</button>
-                  </nuxt-link>
-                </div>
+                <nuxt-link to="/jewellery/necklaces">
+                  <img src="/index-ms/necklace.png" />
+                </nuxt-link>
               </div>
             </div>
           </li>
-          <li class="item">
-            <div class="bg-text">
-              {{ $t(`${lang}.diamondStuds`) }}
-            </div>
+          <li class="item sort3">
+           <img style="margin-top:-3px;" src="/index-ms/sort3.png" alt="">
+             
+          </li>
+           <li class="item">
+           <img style="margin-top:-3px;" src="/index-ms/sort4.png" alt="">
             <div class="category">
               <div class="bg">
-                <img src="/index/jewelry-3.png" />
+                <nuxt-link to="/jewellery/earrings-stud">
+                  <img src="/index-ms/earring.png" />
+                </nuxt-link>
               </div>
-              <div class="info">
-                <h3 class="name">{{ $t(`${lang}.diamondStudEarrings`) }}</h3>
-                <p class="desc">{{ $t(`${lang}.diamondStudsInfo`) }}</p>
-                <div class="button-group">
-                  <nuxt-link :to="{ path: 'jewellery/ear-stud' }">
-                    <button>{{ $t(`${lang}.browse`) }}</button>
-                  </nuxt-link>
-                </div>
+            </div>
+          </li>
+           <li class="item">
+           <img style="margin-top:-3px;" src="/index-ms/sort5.png" alt="">
+            <div class="category">
+              <div class="bg">
+                <nuxt-link to="/jewellery/bracelets">
+                  <img src="/index-ms/bracelet.png" />
+                </nuxt-link>
               </div>
             </div>
           </li>
         </ul>
       </div>
     </section>
+
+    <section class="made-gia">
+      <div class="bg">
+        <img src="/index-ms/made1.png" />
+        <img src="/index-ms/made2.png" />
+        <img src="/index-ms/made3.png" />
+      </div>
+    </section>
+
     <section class="waiting-you">
-      <h1 class="section-title">
-        {{ $t(`${lang}.yourDiamondWaiting`) }}
-      </h1>
-      <div class="section-title-line"></div>
       <div class="section-content">
         <div class="item left-item">
           <div class="picture">
-            <img src="/index/shop-left.png" />
+            <img src="/index-ms/more1.png" />
           </div>
           <div class="content">
-            <h2 class="sub-title">{{ $t(`${lang}.understand`) }}</h2>
-            <h1 class="title">{{ $t(`${lang}.brandStory`) }}</h1>
-            <p class="desc">
-              {{ $t(`${lang}.witnessContentFirstLine`) }}<br />
-              {{ $t(`${lang}.witnessContentSecondLine`) }}<br />
-              {{ $t(`${lang}.witnessContentThirdLine`) }}
-            </p>
-            <div class="button-group">
-              <nuxt-link :to="{ path: '/policies/quality-value' }">
-                <button>{{ $t(`${lang}.scheduleAppointment`) }}</button>
-              </nuxt-link>
-            </div>
+            <p class="title1">{{$t(`${lang}.tip1`)}}</p>
+            <p class="title2">{{$t(`${lang}.tip1To1`)}}</p>
+            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
+          </div>
+        </div>
+        <div class="item center-item">
+          <div class="picture">
+            <img src="/index-ms/more2.png" />
+          </div>
+          <div class="content">
+            <p class="title1">{{$t(`${lang}.tip2`)}}</p>
+            <p class="title2">{{$t(`${lang}.tip2To1`)}}</p>
+            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
           </div>
         </div>
         <div class="item right-item">
-          <div class="content">
-            <h2 class="sub-title">{{ $t(`${lang}.expertLevel`) }}</h2>
-            <h1 class="title">{{ $t(`${lang}.customerService`) }}</h1>
-            <p class="desc">
-              {{ $t(`${lang}.customerServiceInfo`) }}
-            </p>
-            <div class="button-group">
-              <nuxt-link :to="{ path: '/contact-us' }">
-                <button>{{ $t(`${lang}.contactUs`) }}</button>
-              </nuxt-link>
-            </div>
-          </div>
           <div class="picture">
-            <img src="/index/shop-right.png" />
+            <img src="/index-ms/more3.png" />
+          </div>
+          <div class="content">
+            <p class="title1">{{$t(`${lang}.tip3`)}}</p>
+            <p class="title2">{{$t(`${lang}.tip3To1`)}}</p>
+            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
           </div>
         </div>
       </div>
@@ -844,6 +753,41 @@ export default {
           'ifShow': false
         }
       ],
+      msHotImgUrl:[
+        {
+          // 'url': '/index-ms/1.png',
+          'url':['/index-ms/1.png','/index-ms/1-1.png'],
+          'id': 694,
+          'link': '/ring/wedding-rings/694?goodId=694&ringType=single',
+          'price': 0,
+          'ifShow': false
+        },
+        {
+          // 'url': '/index-ms/2.png',
+          'url': ['/index-ms/2.png','/index-ms/2-2.png'],
+          'id': 670,
+          'link': '/ring/wedding-rings/670?goodId=670&ringType=single',
+          'price': 0,
+          'ifShow': false
+        },
+        {
+          // 'url': '/index-ms/3.png',
+          'url': ['/index-ms/3.png','/index-ms/3-3.png'],
+          'id': 679,
+          'link': '/ring/wedding-rings/679?goodId=679&ringType=single',
+          'price': 0,
+          'ifShow': false
+        },
+        {
+          // 'url': '/index-ms/4.png',
+          'url': ['/index-ms/4.png','/index-ms/4-4.png'],
+          'id': 684,
+          'link': '/ring/wedding-rings/684?goodId=684&ringType=single',
+          'price': 0,
+          'ifShow': false
+        }
+      ],
+
       ifEffects: 0,
       bannerHeight: 0,
       lineWidth: '',
@@ -931,18 +875,30 @@ export default {
       hot[i] = o.id
     })
 
+    // let mshot = [];
+    that.msHotImgUrl.forEach((o, i) => {
+      hot[i] = o.id
+    })
+
     this.$axios
       .post('/web/goods/style/search', {
         styleId: hot
       })
       .then(res => {
         var data = res.data.data;
-
+        // console.log("datya",data)
         data.forEach((o, i) => {
           that.hotImgUrl.forEach((p, j) => {
             if(o.id == p.id){
               that.hotImgUrl[j].price = o.salePrice
               that.hotImgUrl[j].ifShow = true;
+            }
+          })
+
+          that.msHotImgUrl.forEach((p, j) => {
+            if(o.id == p.id){
+              that.msHotImgUrl[j].price = o.salePrice
+              that.msHotImgUrl[j].ifShow = true;
             }
           })
         })
@@ -1267,8 +1223,9 @@ section {
   // padding-top: 53px;
   width: 80%;
   margin: 0 auto;
-  background-color: #fbf8f3;
+  // background-color: #fbf8f3;
   overflow-x: hidden;
+  position: relative;
 
   .hot-list {
     width: 100%;
@@ -1295,22 +1252,35 @@ section {
     }
   }
   .hot-list-bar {
-    padding-bottom: 119px;
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    .left-button,
-    .right-button {
-      font-size: 0;
-      line-height: 0;
-      cursor: pointer;
-      img {
-        width: 64px;
-      }
+    position: absolute;
+    top: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+    z-index: -1;
+    box-sizing: border-box;
+    .arrow{
+      font-size: 30px;
     }
+
+    .left-button{
+      position: absolute;
+      left: 0;
+    }
+    .right-button{
+      position: absolute;
+      right: 0;
+      top:117px
+    }
+    // .left-button,
+    // .right-button {
+    //   font-size: 0;
+    //   line-height: 0;
+    //   cursor: pointer;
+    //   img {
+    //     width: 64px;
+    //   }
+    // }
 
     .active-product-info {
       margin: 0 20px;
@@ -1328,6 +1298,61 @@ section {
 .diamond-gia {
   overflow-x: hidden;
   position: relative;
+
+  .bg {
+    font-size: 0;
+    line-height: 0;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 33%;
+    transform: translate(0, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .title {
+      flex-grow: 93;
+      margin-bottom: 50px;
+      font-size: 36px;
+      font-weight: 400;
+      color: #000000;
+    }
+    .description {
+      flex-grow: 258;
+      margin-bottom: 40px;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+      line-height: 30px;
+    }
+    .button-group {
+      flex-grow: 43;
+      .check-now {
+        width: 361px;
+        height: 43px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #ffffff;
+        background: rgba(207, 195, 189, 1);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.made-gia {
+  overflow-x: hidden;
+  position: relative;
+  margin-top: 50px;
 
   .bg {
     font-size: 0;
@@ -1625,7 +1650,10 @@ section {
 }
 
 .waiting-you {
-  padding: 74px 0 60px 0;
+  padding: 140px 0 60px 0;
+  min-width: 1200px;
+  max-width: 1366px;
+  margin: 0 auto;
 
   .section-title-line {
     margin-bottom: 76px;
@@ -1640,9 +1668,9 @@ section {
     .item {
       width: 48%;
       margin-right: 30px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+      // display: flex;
+      // flex-direction: row;
+      // align-items: center;
 
       &:nth-last-of-type(1) {
         margin-right: 0;
@@ -1651,23 +1679,25 @@ section {
       .picture {
         flex-grow: 0;
         flex-shrink: 0;
-        width: 42.9%;
-        height: 100%;
+        width: 100%;
+        // height: 100%;
         font-size: 0;
         line-height: 0;
 
         img {
           width: 100%;
-          height: 100%;
+          height: 237px;
         }
       }
       .content {
         flex-grow: 1;
         flex-shrink: 1;
-        height: calc(100% - 150px);
-        border: 1px solid #ffffff;
+        // height: 236px;
+        // height: calc(100% - 150px);
+        // border: 1px solid #ffffff;
         box-sizing: border-box;
-        padding: 5% 3.7% 5.5% 3.7%;
+        // padding: 5% 3.7% 5.5% 3.7%;
+        padding: 50px 0 50px 0;
 
         display: flex;
         flex-direction: column;
@@ -1713,22 +1743,108 @@ section {
       }
 
       &.left-item {
-        background-color: #f0e2da;
+        // background-color: #f8f8f8;
+        // background-color: #f0e2da;
 
         .content {
-          margin-right: 20px;
+          // margin-right: 20px;
+          background-color: #f8f8f8;
           border-left: 0;
-          text-align: right;
+          text-align: center;
+          .title1{
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+            font-weight: bold;
+          }
+          .title2{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #666666;
+            padding-top: 20px;
+            // padding: 20px 0;
+          }
+          .title3{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+          }
+        }
+      }
+
+      &.center-item {
+        background-color: #f8f8f8;
+        // background-color: #f0e2da;
+
+        .content {
+          // margin-right: 20px;
+          border-left: 0;
+          text-align: center;
+          .title1{
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+            font-weight: bold;
+          }
+          .title2{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #666666;
+            padding-top: 20px;
+            // padding: 20px 0;
+          }
+          .title3{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+          }
         }
       }
 
       &.right-item {
-        background-color: #f4eade;
+        background-color: #f8f8f8;
+        // background-color: #f4eade;
 
         .content {
-          margin-left: 20px;
+          // margin-left: 20px;
           border-right: 0;
-          text-align: left;
+          text-align: center;
+          .title1{
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+            font-weight: bold;
+          }
+          .title2{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #666666;
+            padding-top: 20px;
+            // padding: 20px 0;
+          }
+          .title3{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+          }
         }
       }
     }
@@ -1945,6 +2061,338 @@ section {
     //     height: auto;
     //   }
     // }
+
+    .sweet-img {
+      display: flex;
+      width: 1520px;
+      height: 706px;
+      margin: 0 auto;
+
+      div {
+        overflow: hidden;
+        position: relative;
+      }
+
+      .img-l {
+        width: 276px;
+        height: 100%;
+      }
+
+      .img-m {
+        display: flex;
+        flex-direction: column;
+        width: 674px;
+        height: 100%;
+        margin: 0 20px;
+
+
+        .img-m-t {
+          display: flex;
+          height: 378px;
+          margin-bottom: 20px;
+
+          .img-m-t-l {
+            width: 330px;
+            height: 100%;
+            margin-right: 20px;
+          }
+          .img-m-t-r {
+            width: 324px;
+            height: 100%;
+          }
+        }
+        .img-m-b {
+          display: flex;
+          height: 308px;
+
+          .img-m-b-l {
+            width: 357px;
+            height: 100%;
+            margin-right: 20px;
+          }
+          .img-m-b-r {
+            width: 297px;
+            height: 100%;
+          }
+        }
+
+      }
+
+      .img-r {
+        width: 530px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+
+        .img-r-t {
+          height: 280px;
+          margin-bottom: 20px;
+        }
+
+        .img-r-b {
+          height: 406px;
+        }
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .mask-layer {
+      position: absolute !important;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0);
+      // display: none;
+    }
+
+    .mask-layer:hover {
+      background-color: rgba(0, 0, 0, 0.3);
+      transition: background-color 0.3s ease-in;
+    }
+  }
+
+  .effects {
+    transform: scale(0.96) translateY(-50%) !important;
+    background-color: #e5d5c7 !important;
+    border-radius: 3px !important;
+  }
+}
+
+
+// ms
+.ms-page {
+  .section-content{
+    padding-top: 0px;
+    background-color: #fff;
+    img{
+      width: 100%;
+    }
+  }
+  .categories{
+    padding-top: 370px;
+    .bg img:hover{
+      border:1px solid #c8c8c8;
+    }
+  }
+  .item{
+    position: relative;
+  }
+  .item .category{
+    width: 27% !important;
+    margin-left:0!important;
+  }
+  // .item:nth-of-type(1) .category{
+  //   width: 27% !important;
+  // }
+  .item:nth-of-type(1) .category{
+    position: absolute!important;
+    z-index: 9;
+    left:22%;
+    top:-83%;
+  }
+  .item:nth-of-type(2) .category{
+    position: absolute!important;
+    z-index: 9;
+    left:50%;
+    top:-123%;
+  }
+  .item:nth-of-type(4) .category{
+    position: absolute!important;
+    z-index: 9;
+    left:50%;
+    top:-55%;
+  }
+  .item:nth-of-type(5) .category{
+    position: absolute!important;
+    z-index: 9;
+    left:22%;
+    top:-45%;
+  }
+  // .sort1{
+  //   height: 100%;
+  //   background: url(../static/index-ms/sort1.png) no-repeat;
+  // }
+  .design {
+  .us-host-box {
+    min-width: 1200px;
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    height: 341px;
+
+    .us-host-list {
+      flex-grow: 0;
+      flex-shrink: 0;
+      width: 90%;
+      margin-bottom: 3px;
+      box-sizing: border-box;
+      transition: all 0.2s linear;
+      .host-item {
+        position: relative;
+        .product-image {
+          position: relative;
+          overflow: hidden;
+          .cart-icon{
+            position: absolute;
+            bottom: 25px;
+            right:20px;
+            font-size: 20px;
+          }
+          .main-image,
+          .sub-image {
+            width: 100%;
+            // height: 200px;
+            display: inline-block;
+          }
+          .sub-image {
+            display: none;
+          }
+        }
+      }
+      .host-item:hover {
+        .product-image {
+          .main-image {
+            display: none;
+          }
+          .sub-image {
+            display: inline-block;
+          }
+          .wish-state {
+            opacity: 1;
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+  
+}
+  .section-title-en{
+    padding-bottom: 5px;
+    font-size: 26px;
+    text-align: center;
+    font-family: SimSun;
+  }
+  .section-title-cn{
+    font-size: 24px;
+    text-align: center;
+    padding-bottom: 60px;
+    font-family: SimSun;
+  }
+  .design{
+    padding-top: 60px;
+  }
+
+  .banner-item {
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 2;
+    }
+  }
+
+  .design,
+  .recommend-category {
+    background: none;
+    overflow: hidden;
+  }
+  .section-title-line {
+    margin-bottom: 76px;
+  }
+  .us-host-box,
+  .new-products-box {
+    max-width: 1360px;
+    min-width: 1000px;
+    width: 80%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+  .us-host-list,
+  .new-products {
+    max-width: 1360px;
+    min-width: 1000px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+  }
+  .host-item {
+    width: 100%;
+    font-size: 0;
+    text-align: center;
+
+    .item-box {
+      display: inline-block;
+      width: 90%;
+
+      .product-image {
+        width: 100%;
+        overflow: hidden;
+
+        img {
+          width: 90%;
+          height: 90%;
+          margin: 5% 0;
+        }
+      }
+      // .product-image:hover img {
+      //   transform: scale(1.11);
+      // }
+
+      .price {
+        font-size: 18px;
+        line-height: 50px;
+      }
+    }
+  }
+
+  .host-list-bar {
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    box-sizing: border-box;
+
+    .left-button {
+      position: absolute;
+      left: 0;
+      top: 100px;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #cebeb0 url('/index-us/icon-left.png') no-repeat 48% 48%;
+      background-size: 90% 90%;
+      border-radius: 2px;
+    }
+
+    .right-button {
+      position: absolute;
+      right: 0;
+      top: 30%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: #cebeb0 url('/index-us/icon-right.png') no-repeat 48% 48%;
+      background-size: 90% 90%;
+      border-radius: 2px;
+    }
+  }
+
+  .sweet {
+    padding: 100px 0;
+    box-sizing: border-box;
+    background-color: #fbf8f3;
 
     .sweet-img {
       display: flex;

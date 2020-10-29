@@ -483,7 +483,7 @@ export default {
         return
       }
       if (!_this.agree) {
-        _this.$toast(_this.lang.tickTheBDDTerms)
+        _this.$toast(_this.lang.tickTheMORESHINETerms)
         return
       }
 
@@ -558,7 +558,7 @@ export default {
         return
       }
       if (!_this.agree) {
-        _this.$toast(_this.lang.tickTheBDDTerms)
+        _this.$toast(_this.lang.tickTheMORESHINETerms)
         return
       }
 

@@ -59,7 +59,7 @@ export default {
         })
     },
     /*
-    钻石对比相关
+    莫桑石对比相关
      */
     inCompared(id) {
       return this.$store.getters.inCompared(id)
@@ -73,7 +73,7 @@ export default {
     },
     /**
      * 加入对比
-     * @param id为钻石的goodId
+     * @param id为莫桑石的goodId
      */
     addCompared(id) {
       const _this = this
@@ -100,8 +100,8 @@ export default {
         })
     },
     /**
-     * 删除钻石对比
-     * @param id为钻石的goodId
+     * 删除莫桑石对比
+     * @param id为莫桑石的goodId
      */
     removeCompared(id) {
       const _this = this

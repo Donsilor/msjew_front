@@ -53,8 +53,8 @@
 <style>
   .to-top {
     position: absolute;
-    bottom: 20px;
-    right: 10px;
+    bottom: 100px;
+    right: 26px;
     z-index: 666;
     z-index: 9999;
     width: 42px;

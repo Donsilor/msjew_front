@@ -27,73 +27,101 @@
        </div>
         <div class="product-code">{{ $t(`${lang}.goodsId`) }}:{{ info.goodsCode }}</div>
         <div v-if="showSkuBox" class="sku">
-          <div class="left-properties"  v-if="productInfo.materials.length > 0">
+          <div class="right-properties"  v-if="productInfo.carats.length > 0">
             <div class="property-item">
               <span class="item-name">
-                {{ $t(`${lang}.color`) }}
+                {{ $t(`${lang}.carat`) }}
               </span>
               <div class="property">
                 <div class="had-checked">
-                  <i
-                    :class="[
-                      'iconfont',
-                      'iconmaterial-big-pt',
-                      'color-icon',
-                      materialColors[
-                        productInfo.materials[ringChecked.materialIndex].id
-                      ]
-                    ]"
-                  ></i>
                   <span class="name ow-h1">
-                    {{ productInfo.materials[ringChecked.materialIndex].name }}
+                    {{ productInfo.carats[ringChecked.caratIndex].name }}
                   </span>
                   <i class="iconfont iconxiala drop-down-icon"></i>
                 </div>
                 <ul class="options">
                   <li
-                    v-for="(item, index) in productInfo.materials"
+                    v-for="(item, index) in productInfo.carats"
                     :key="index"
                     :class="[
                       'item',
-                      { active: ringChecked.materialIndex === index }
+                      { active: ringChecked.caratIndex === index }
                     ]"
-                    @click="changeRingChecked('materialIndex', index)"
+                    @click="changeRingChecked('caratIndex', index)"
                   >
-                    <i
+                    <span class="name ow-h1">{{ item.name }}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="left-properties"  v-if="productInfo.color.length > 0">
+            <div class="property-item">
+              <span class="item-name">
+                {{ $t(`${lang}.colour`) }}
+              </span>
+              <div class="property">
+                <div class="had-checked">
+                  <!-- <i
+                    :class="[
+                      'iconfont',
+                      'iconmaterial-big-pt',
+                      'color-icon',
+                      materialColors[
+                        productInfo.color[ringChecked.colorIndex].id
+                      ]
+                    ]"
+                  ></i> -->
+                  <span class="name ow-h1">
+                    {{ productInfo.color[ringChecked.colorIndex].name }}
+                  </span>
+                  <i class="iconfont iconxiala drop-down-icon"></i>
+                </div>
+                <ul class="options">
+                  <li
+                    v-for="(item, index) in productInfo.color"
+                    :key="index"
+                    :class="[
+                      'item',
+                      { active: ringChecked.colorIndex === index }
+                    ]"
+                    @click="changeRingChecked('colorIndex', index)"
+                  >
+                    <!-- <i
                       :class="[
                         'iconfont',
                         'iconmaterial-big-pt',
                         'color-icon',
                         materialColors[item.id]
                       ]"
-                    ></i>
+                    ></i> -->
                     <span class="name ow-h1">{{ item.name }}</span>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div class="right-properties"  v-if="productInfo.sizes.length > 0">
+          <div class="right-properties"  v-if="productInfo.clarity.length > 0">
             <div class="property-item">
               <span class="item-name">
-                {{ $t(`${lang}.size`) }}
+                {{ $t(`${lang}.clarity`) }}
               </span>
               <div class="property">
                 <div class="had-checked">
                   <span class="name ow-h1">
-                    {{ productInfo.sizes[ringChecked.sizeIndex].name }}
+                    {{ productInfo.clarity[ringChecked.clarityIndex].name }}
                   </span>
                   <i class="iconfont iconxiala drop-down-icon"></i>
                 </div>
                 <ul class="options">
                   <li
-                    v-for="(item, index) in productInfo.sizes"
+                    v-for="(item, index) in productInfo.clarity"
                     :key="index"
                     :class="[
                       'item',
-                      { active: ringChecked.sizeIndex === index }
+                      { active: ringChecked.clarityeIndex === index }
                     ]"
-                    @click="changeRingChecked('sizeIndex', index)"
+                    @click="changeRingChecked('clarityIndex', index)"
                   >
                     <span class="name ow-h1">{{ item.name }}</span>
                   </li>
@@ -101,6 +129,7 @@
               </div>
             </div>
           </div>
+          
         </div>
         <ul class="services-list">
           <li
@@ -370,8 +399,9 @@ export default {
         30: 'color-18k-rose-gold'
       },
       ringChecked: {
-        materialIndex: 0,
-        sizeIndex: 0
+        colorIndex: 0,
+        clarityIndex: 0,
+        caratIndex: 0
       },
 	    magnifying: '',
       showCoupon: false,
@@ -394,8 +424,9 @@ export default {
     },
     showSkuBox() {
       return (
-        this.productInfo.materials.length > 0 &&
-        this.productInfo.sizes.length > 0
+        this.productInfo.color.length > 0 ||
+        this.productInfo.clarity.length > 0 ||
+        this.productInfo.carats.length > 0
       )
     },
     thumbnails() {
@@ -422,20 +453,24 @@ export default {
       const details = productInfo.details
       const ringChecked = _this.ringChecked
 
-      const material =
-        productInfo.materials.length > 0 &&
-        productInfo.materials[ringChecked.materialIndex]
-          ? productInfo.materials[ringChecked.materialIndex].id
+      const color =
+        productInfo.color.length > 0 &&
+        productInfo.color[ringChecked.colorIndex]
+          ? productInfo.color[ringChecked.colorIndex].id
           : null
-      const size =
-        productInfo.sizes.length > 0 && productInfo.sizes[ringChecked.sizeIndex]
-          ? productInfo.sizes[ringChecked.sizeIndex].id
+      const clarity =
+        productInfo.clarity.length > 0 && productInfo.clarity[ringChecked.clarityIndex]
+          ? productInfo.clarity[ringChecked.clarityIndex].id
+          : null
+      const carat =
+        productInfo.carats.length > 0 && productInfo.carats[ringChecked.caratIndex]
+          ? productInfo.carats[ringChecked.caratIndex].id
           : null
 
       let result = null
       for (let n = 0, length = details.length; n < length; n++) {
         const item = details[n]
-        if (item.material === material && item.size === size) {
+        if (item.color === color && item.clarity === clarity&& item.carat === carat) {
           result = item
           break
         }
@@ -492,6 +527,7 @@ export default {
     }
   },
   mounted() {
+    console.log("this.productInfo",this.price)
     const _this = this
     if(this.info.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
@@ -519,8 +555,9 @@ export default {
           })
           return result
         })(),
-        materials: product.materials || [],
-        sizes: product.sizes || [],
+        color: product.color || [],
+        clarity: product.clarity || [],
+        carats: product.carats || [],
         specs,
         details: product.details || [],
         goodsServicesJsons: (product.goodsServicesJsons || []).map(item => {

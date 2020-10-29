@@ -1,4 +1,4 @@
-# bdd-mobile
+# msjew_front
 
 > My stellar Nuxt.js project
 

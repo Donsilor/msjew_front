@@ -42,7 +42,7 @@
         {{ $t(`${lang}.slogan`) }}
       </div>
     </div>
-    <div class="title">BDD的4大優勢</div>
+    <div class="title">MORESHINE的4大優勢</div>
     <ul class="advantage">
       <li v-for="(item, index) in $t(`${lang}.show`)" :key="index">
         <img :src="'/brandStory/' + item.src + '.png'" alt />

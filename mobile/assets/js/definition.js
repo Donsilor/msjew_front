@@ -261,7 +261,7 @@ export default language => {
         {
           id: 109,
           name: lang.style.SolitaireRing,
-          image: '/ring-type/1.png'
+          image: '/ring-type/1.png' 
         },
         {
           id: 110,
@@ -403,276 +403,617 @@ export default language => {
           name: lang.style.HalloweenGift
         }
       ],
+
+      // 戒指风格
+      ringStyles:[
+        {
+          id: 277,
+          image: `/ring-type/woman/1.png`,
+          name: lang.style.ModernSimplicity
+        },
+        {
+          id: 278,
+          image: `/ring-type/woman/2.png`,
+          name: lang.style.ClassicRetro
+        },
+        
+        {
+          id: 279,
+          image: `/ring-type/woman/4.png`,
+          name: lang.style.PersonalityFun
+        },
+        {
+          id: 280,
+          image: `/ring-type/woman/5.png`,
+          name: lang.style.FashionLimit
+        }
+      ],
+
+      // 戒指风格
+      ringStyles:[
+        {
+          id: 277,
+          image: `/ring-type/woman/1.png`,
+          name: lang.style.ModernSimplicity
+        },
+        {
+          id: 278,
+          image: `/ring-type/woman/2.png`,
+          name: lang.style.ClassicRetro
+        },
+        
+        {
+          id: 279,
+          image: `/ring-type/woman/4.png`,
+          name: lang.style.PersonalityFun
+        },
+        {
+          id: 280,
+          image: `/ring-type/woman/5.png`,
+          name: lang.style.FashionLimit
+        }
+      ],
+      
     },
 
+    // 成色
     quality: {
-      rings: [
-        // {
-        //   id: 31,
-        //   name: lang.quality.platinum14K,
-        //   image: '/ring-color/1.png'
-        // },
+      rings:[
         {
-          id: 28,
-          name: lang.quality.platinum18K,
-          image: '/ring-color/2.png'
-        },
-        // {
-        //   id: 32,
-        //   name: lang.quality.gold14K,
-        //   image: '/ring-color/3.png'
-        // },
-        {
-          id: 29,
-          name: lang.quality.gold18K,
-          image: '/ring-color/4.png'
-        },
-        {
-          id: 30,
-          name: lang.quality.roseGold18K,
+          id: 204,
+          name: lang.quality.alloy,
           image: '/ring-color/6.png'
         },
         {
-          id: 34,
-          name: lang.quality.platinum,
-          image: '/ring-color/5.png'
-        },
-        
-        {
           id: 35,
-          name: lang.quality.fineSilver925,
+          name: lang.quality.silver925,
           image: '/ring-color/5.png'
         },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
       ],
-      necklace: [
-        // {
-        //   id: 31,
-        //   name: lang.quality.platinum14K,
-        //   image: '/ring-color/1.png'
-        // },
+      necklaces:[
         {
-          id: 28,
-          name: lang.quality.platinum18K,
-          image: '/ring-color/2.png'
-        },
-        // {
-        //   id: 32,
-        //   name: lang.quality.gold14K,
-        //   image: '/ring-color/3.png'
-        // },
-        {
-          id: 29,
-          name: lang.quality.gold18K,
-          image: '/ring-color/4.png'
-        },
-        {
-          id: 30,
-          name: lang.quality.roseGold18K,
+          id: 204,
+          name: lang.quality.alloy,
           image: '/ring-color/6.png'
         },
         {
-          id: 34,
-          name: lang.quality.platinum,
-          image: '/ring-color/5.png'
-        },
-        
-        {
           id: 35,
-          name: lang.quality.fineSilver925,
+          name: lang.quality.silver925,
           image: '/ring-color/5.png'
         },
-
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
       ],
-      pendant: [
-        // {
-        //   id: 31,
-        //   name: lang.quality.platinum14K,
-        //   image: '/ring-color/1.png'
-        // },
+      pendant:[
         {
-          id: 28,
-          name: lang.quality.platinum18K,
-          image: '/ring-color/2.png'
-        },
-        // {
-        //   id: 32,
-        //   name: lang.quality.gold14K,
-        //   image: '/ring-color/3.png'
-        // },
-        {
-          id: 29,
-          name: lang.quality.gold18K,
-          image: '/ring-color/4.png'
-        },
-        {
-          id: 30,
-          name: lang.quality.roseGold18K,
+          id: 204,
+          name: lang.quality.alloy,
           image: '/ring-color/6.png'
         },
         {
-          id: 34,
-          name: lang.quality.platinum,
-          image: '/ring-color/5.png'
-        },
-        
-        {
           id: 35,
-          name: lang.quality.fineSilver925,
+          name: lang.quality.silver925,
           image: '/ring-color/5.png'
         },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
       ],
-      studEarring: [
-        // {
-        //   id: 31,
-        //   name: lang.quality.platinum14K,
-        //   image: '/ring-color/1.png'
-        // },
+      bracelets:[
         {
-          id: 28,
-          name: lang.quality.platinum18K,
-          image: '/ring-color/2.png'
-        },
-        // {
-        //   id: 32,
-        //   name: lang.quality.gold14K,
-        //   image: '/ring-color/3.png'
-        // },
-        {
-          id: 29,
-          name: lang.quality.gold18K,
-          image: '/ring-color/4.png'
-        },
-        {
-          id: 30,
-          name: lang.quality.roseGold18K,
+          id: 204,
+          name: lang.quality.alloy,
           image: '/ring-color/6.png'
         },
         {
-          id: 34,
-          name: lang.quality.platinum,
-          image: '/ring-color/5.png'
-        },
-        
-        {
           id: 35,
-          name: lang.quality.fineSilver925,
+          name: lang.quality.silver925,
           image: '/ring-color/5.png'
         },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
       ],
-      earring: [
-        // {
-        //   id: 31,
-        //   name: lang.quality.platinum14K,
-        //   image: '/ring-color/1.png'
-        // },
+      Bangle:[
         {
-          id: 28,
-          name: lang.quality.platinum18K,
-          image: '/ring-color/2.png'
-        },
-        // {
-        //   id: 32,
-        //   name: lang.quality.gold14K,
-        //   image: '/ring-color/3.png'
-        // },
-        {
-          id: 29,
-          name: lang.quality.gold18K,
-          image: '/ring-color/4.png'
-        },
-        {
-          id: 30,
-          name: lang.quality.roseGold18K,
+          id: 204,
+          name: lang.quality.alloy,
           image: '/ring-color/6.png'
         },
         {
-          id: 34,
-          name: lang.quality.platinum,
-          image: '/ring-color/5.png'
-        },
-        
-        {
           id: 35,
-          name: lang.quality.fineSilver925,
+          name: lang.quality.silver925,
           image: '/ring-color/5.png'
         },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
       ],
-      BraceletLine: [
-        // {
-        //   id: 31,
-        //   name: lang.quality.platinum14K,
-        //   image: '/ring-color/1.png'
-        // },
+      earrings:[
         {
-          id: 28,
-          name: lang.quality.platinum18K,
-          image: '/ring-color/2.png'
-        },
-        // {
-        //   id: 32,
-        //   name: lang.quality.gold14K,
-        //   image: '/ring-color/3.png'
-        // },
-        {
-          id: 29,
-          name: lang.quality.gold18K,
-          image: '/ring-color/4.png'
-        },
-        {
-          id: 30,
-          name: lang.quality.roseGold18K,
+          id: 204,
+          name: lang.quality.alloy,
           image: '/ring-color/6.png'
         },
         {
-          id: 34,
-          name: lang.quality.platinum,
-          image: '/ring-color/5.png'
-        },
-        
-        {
           id: 35,
-          name: lang.quality.fineSilver925,
+          name: lang.quality.silver925,
           image: '/ring-color/5.png'
         },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
       ],
-      bracelet: [
-        // {
-        //   id: 31,
-        //   name: lang.quality.platinum14K,
-        //   image: '/ring-color/1.png'
-        // },
+      danglers:[
         {
-          id: 28,
-          name: lang.quality.platinum18K,
-          image: '/ring-color/2.png'
-        },
-        // {
-        //   id: 32,
-        //   name: lang.quality.gold14K,
-        //   image: '/ring-color/3.png'
-        // },
-        {
-          id: 29,
-          name: lang.quality.gold18K,
-          image: '/ring-color/4.png'
-        },
-        {
-          id: 30,
-          name: lang.quality.roseGold18K,
+          id: 204,
+          name: lang.quality.alloy,
           image: '/ring-color/6.png'
         },
         {
-          id: 34,
-          name: lang.quality.platinum,
+          id: 35,
+          name: lang.quality.silver925,
           image: '/ring-color/5.png'
         },
-        
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      earStuds:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
         {
           id: 35,
-          name: lang.quality.fineSilver925,
+          name: lang.quality.silver925,
           image: '/ring-color/5.png'
         },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      earline:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      eardrop:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
       ]
+    },
+
+    // 材质
+    material:{
+      rings:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      necklaces:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      pendant:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      bracelets:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      Bangle:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      earrings:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      danglers:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      earStuds:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      earline:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ],
+      eardrop:[
+        {
+          id: 204,
+          name: lang.quality.alloy,
+          image: '/ring-color/6.png'
+        },
+        {
+          id: 35,
+          name: lang.quality.silver925,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 272,
+          name: lang.quality.gold9k,
+          image: '/ring-color/5.png'
+        },
+        {
+          id: 273,
+          name: lang.quality.gold14k,
+          image: '/ring-color/2.png'
+        },
+        {
+          id: 274,
+          name: lang.quality.gold18k,
+          image: '/ring-color/4.png'
+        }
+      ]
+    },
+
+    // 系列
+    series:{
+      // 戒指系列
+      ringSeries:[
+        {
+          id: 288,
+          image: `/ring-type/woman/1.png`,
+          name: lang.style.Alphabetic
+        }
+      ],
     },
 
     
@@ -753,6 +1094,19 @@ export default language => {
         // }
       ]
     },
+
+    languageOptionsCn: [
+      {
+        code: 'zh_CN',
+        content: '中文简体',
+        shortCut: '简'
+      },
+      {
+        code: 'zh_TW',
+        content: '繁體中文',
+        shortCut: '繁'
+      }
+    ],
 
     languageOptions: [
       {

@@ -54,7 +54,7 @@
         <dt>{{ $t(`${lang}.tit6`) }}</dt>
         <dd>
           {{ $t(`${lang}.con15`) }}
-          <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+          <span v-if="this.$store.state.platform === 20">service@bddco.com</span>
           <span v-else>service@bddco.com</span>
           {{ $t(`${lang}.con16`) }}
         </dd>

@@ -47,7 +47,7 @@
         <dt>{{ $t(`${lang}.use`) }}</dt>
         <dd>
           {{ $t(`${lang}.check`) }}
-          <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+          <span v-if="this.$store.state.platform === 20">service@bddco.com</span>
           <span v-else>service@bddco.com</span>
         </dd>
       </dl>

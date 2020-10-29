@@ -140,12 +140,12 @@
           <span class="line"></span>
           <span class="row-name">{{ lang.tel }}</span>
           <span class="row-text">
-            <a v-if="this.$store.state.platform == 21" href="tel:+852 2165 3908">0755 25169121</a>
+            <a v-if="this.$store.state.platform == 21" href="tel:+852 2165 3908">0755-25160872-8005</a>
             <a v-else href="tel:+852 2165 3908">+852 2165 3908</a>
           </span>
           <span class="column-line"></span>
           <span class="row-icon">
-            <a v-if="this.$store.state.platform == 21" href="tel:0755 25169121">
+            <a v-if="this.$store.state.platform == 21" href="tel:0755-25160872-8005">
               <i class="iconfont iconphone"></i>
             </a>
             <a v-else href="tel:+852 2165 3908">
@@ -157,12 +157,12 @@
           <span class="line"></span>
           <span class="row-name">{{ lang.email }}</span>
           <span class="row-text">
-            <a v-if="this.$store.state.platform == 21" href="mailto:service@bddco.com">e-service@bddco.com</a>
+            <a v-if="this.$store.state.platform == 21" href="mailto:service@bddco.com">service@bddco.com</a>
             <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
           </span>
           <span class="column-line"></span>
           <span class="row-icon">
-            <a v-if="this.$store.state.platform == 21" href="mailto:e-service@bddco.com">
+            <a v-if="this.$store.state.platform == 21" href="mailto:service@bddco.com">
               <i class="iconfont iconyouxiang"></i>
             </a>
             <a v-else href="mailto:service@bddco.com">

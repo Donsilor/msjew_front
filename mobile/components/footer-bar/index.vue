@@ -1,149 +1,65 @@
 <template>
   <div class="footer-bar">
+    <div class="slogan">
+      MORESHINE
+    </div>
     <section class="gap"></section>
+    <!-- 帮助中心 -->
+    <section class="help-center">
+      <div v-for="(group, index) in menusCn" :key="index" class="menu-group">
+        <dl>
+          <dt class="group-name">{{ group.groupName }}</dt>
+          <dd
+            v-for="(item, itemIndex) in group.children"
+            :key="itemIndex"
+            class="item"
+          >
+            <div v-if="item.icon" class="item-icon">
+              <i :class="['iconfont', item.icon]"></i>
+            </div>
+            <div class="item-name">
+              <nuxt-link :to="item.to" style="color:#000;">{{ item.name }}</nuxt-link>
+            </div>
+          </dd>
+        </dl>
+      </div>
+    </section>
+    <!-- 联系我们 -->
     <section class="groups">
-      <div :class="['group', { active: isActive(lang.custoService) }]">
-        <div class="group-top" @click="changeStatus(lang.custoService)">
-          <span class="group-name">{{ lang.custoService }}</span>
-          <i class="iconfont iconxiala status-icon"></i>
-        </div>
-        <ul class="group-content" v-if="this.$store.state.platform === 21">
-          <li class="item">
-            <span>{{ lang.custoServiceTimeCn }}</span>
-          </li>
-          <li class="item">
-            <span>
-              {{ lang.callUs }}：
-              <a href="tel:(852) 2165 3908">0755 25169121</a>
-            </span>
-          </li>
-          <li class="item">
-            <span>
-              {{ lang.emailUs }}：
-              <a href="mailto:service@bddco.com">e-service@bddco.com</a>
-            </span>
-          </li>
-        </ul>
-        <ul class="group-content" v-else>
-          <li class="item">
-            <span>{{ lang.custoServiceTime }}</span>
-          </li>
-          <li class="item">
-            <span>
-              {{ lang.callUs }}：
-              <a href="tel:(852) 2165 3908">(852) 2165 3908</a>
-            </span>
-          </li>
-          <li class="item">
-            <span>
-              {{ lang.emailUs }}：
-              <a href="mailto:service@bddco.com">service@bddco.com</a>
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div :class="['group', { active: isActive(lang.aboutBDD) }]">
-        <div class="group-top" @click="changeStatus(lang.aboutBDD)">
-          <span class="group-name">{{ lang.aboutBDD }}</span>
+      <div  :class="['group', { active: isActive(lang.contactUs) }]"> 
+        <div class="group-top" @click="changeStatus(lang.contactUs)">
+          <span class="group-name">{{ lang.contactUs }}</span>
           <i class="iconfont iconxiala status-icon"></i>
         </div>
         <ul class="group-content">
-          <!--          <li class="item">-->
-          <!--            <span @click="jump('/help-pages/brandStory')">-->
-          <!--              {{ lang.BDDStory }}-->
-          <!--            </span>-->
-          <!--          </li>-->
-          <li class="item" v-if="this.$store.state.platform === 21">
-            <span @click="jump('/help-pages/aboutCompany')">
-              {{ lang.aboutCompany }}
-            </span>
+          <li >
+            <div class="item">
+              <span class="cont">{{ lang.AddressTile }}</span>
+              <div >{{ lang.Address }}</div> 
+            </div>
           </li>
-          <li class="item">
-            <span @click="jump('/help-pages/knowledge')">
-              {{ lang.diamondKnowledge }}
-            </span>
+          <li >
+            <div class="item">
+              <span >{{ lang.CallTile }}</span>
+              <div >{{ lang.Call }}</div>
+            </div>
           </li>
-          <li class="item">
-            <span @click="jump('/help-pages/paymentMethod')">
-              {{ lang.payType }}
-            </span>
-          </li>
-          <li class="item">
-            <span @click="jump('/help-pages/qualityValue')">
-              {{ lang.qualityAndValue }}
-            </span>
-          </li>
-          <li class="item">
-            <span @click="jump('/help-pages/returnedGoods')">
-              {{ lang.aboutRefund }}
-            </span>
-          </li>
-          <li class="item">
-            <span @click="jump('/help-pages/sizeguide')">
-              {{ lang.findRingSize }}
-            </span>
-          </li>
-        </ul>
-      </div>
-      <div :class="['group', { active: isActive(lang.BDDPolicy) }]">
-        <div class="group-top" @click="changeStatus(lang.BDDPolicy)">
-          <span class="group-name">{{ lang.BDDPolicy }}</span>
-          <i class="iconfont iconxiala status-icon"></i>
-        </div>
-        <ul class="group-content">
-          <li class="item">
-            <span @click="jump('/help-pages/freeShipping')">
-              {{ lang.freeShipping }}
-            </span>
-          </li>
-          <li class="item">
-            <span @click="jump('/help-pages/deliveryPolicy')">
-              {{ lang.shippingPolicy }}
-            </span>
-          </li>
-          <li class="item">
-            <span @click="jump('/help-pages/internationalPolicy')">
-              {{ lang.internationalPolicy }}
-            </span>
-          </li>
-          <li class="item">
-            <span @click="jump('/help-pages/privacyPolicy')">
-              {{ lang.privacyPolicy }}
-            </span>
-          </li>
-          <li class="item">
-            <span @click="jump('/help-pages/clause')">
-              {{ lang.termsAndConditions }}
-            </span>
+          <li >
+            <div class="item">
+              <span >{{ lang.EmailTile }} </span>
+              <div >{{ lang.Email }}</div>
+            </div>
           </li>
         </ul>
       </div>
     </section>
-    <section class="social-media" style="height: 7px !important;">
-      <!--      <div class="item">-->
-      <!--        <i class="iconfont icon_weibo"></i>-->
-      <!--      </div>-->
-      <!--      <div class="item">-->
-      <!--        <i class="iconfont icon_Twitter"></i>-->
-      <!--      </div>-->
-      <!--      <a href="https://www.instagram.com/bddco_jewelry" class="item">
-        <span>Instagram</span>
-        <i class="iconfont icon_ins"></i>
-      </a>-->
-      <!--      <div class="line-item"></div> -->
-      <!--      <a href="https://www.facebook.com/bddco.hk" class="item">
-        <span>Facebook</span>
-        <i class="iconfont icon_fb"></i>
-      </a> -->
+    <section class="social-media" style="height: 1px !important;"> 
     </section>
-    <section class="page-info">
-      <span class="text">{{ lang.onlineStore }}</span>
-      <span class="column-line"></span>
-      <span class="text">{{ lang.handicraftExpert }}</span>
-    </section>
+    <!-- 备案号 -->
     <div class="copy-right">
-      <div v-if="this.$store.state.platform === 21" style="font-size:9px;margin-top:20px;">{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
-      <span v-else class="text" >Copyright © 2020 BDD Co.</span>
+      <div class="record-number">{{ lang.copyrightRightMs }}</div>
+      <!-- <div v-if="this.$store.state.platform === 21" style="font-size:9px;margin-top:20px;">{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
+      <span v-else class="text" >Copyright © 2020 MORESHINE</span> -->
     </div>
   </div>
 </template>
@@ -153,12 +69,50 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.components.footerBar,
-      activeGroups: []
+      activeGroups: [],
+      menusCn: [
+        {
+          groupName: this.LANGUAGE.components.footerBar.helpCenter,
+          children: [
+            {
+              name: this.LANGUAGE.components.footerBar.ShoppingGuide,
+              to: {
+                // path: '/policies/return-refund-policy'
+              }
+            },
+            {
+              name: this.LANGUAGE.components.footerBar.MemberCentre,
+              to: {
+                // path: '/education/rings/size'
+              }
+            },
+            {
+              name: this.LANGUAGE.components.footerBar.WorryFreeAfterSales,
+              to: {
+                // path: '/education/rings/size'
+              }
+            },
+            {
+              name: this.LANGUAGE.components.footerBar.ConvenientDelivery,
+              to: {
+                // path: '/education/rings/size'
+              }
+            }
+          ]
+        }
+      ],
     }
   },
   methods: {
     isActive(groupName = '') {
-      return this.activeGroups.indexOf(groupName) > -1
+      let active = 0
+      if( this.activeGroups.indexOf(groupName) > -1){
+        active = false
+      } else {
+        active = true
+      }
+      // console.log(active)
+      return active
     },
     changeStatus(groupName = '') {
       const activeGroups = JSON.parse(JSON.stringify(this.activeGroups))
@@ -184,10 +138,86 @@ export default {
 .footer-bar {
   position: relative;
   width: 100%;
+  background: #fff;
+}
+.slogan{
+  border-top: 2px solid #d4e8ec;
+  padding: 20px 0;
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
 }
 .gap {
   height: 8px;
-  background-color: #f5f5f5;
+  background-color: #d4e8ec;
+}
+
+.help-center{
+  padding: 40px 0 0 20px;
+  .menu-group {
+    position: relative;
+    flex-grow: 0;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+
+    .group-name {
+      font-size: 16px;
+      color: #000;
+      font-weight: 700;
+      font-family: CTHeiTiSF;
+    }
+    .item:nth-of-type(1){
+      margin-top: 15px;
+    }
+    .item {
+      margin-left: 30px;
+      padding: 6px 0; 
+      height: 36px;
+      font-size: 14px;
+      font-family: CTHeiTiSF;
+      font-weight: 400;
+      color: #000;
+      color: rgba(102, 102, 102, 1);
+
+      display: flex;
+      align-items: center;
+
+      .item-icon {
+        width: 50px;
+        flex-grow: 0;
+        flex-shrink: 0;
+        min-width: 0;
+
+        .iconfont {
+          font-size: 23px;
+        }
+      }
+      .item-name {
+        flex-grow: 1;
+        flex-shrink: 1;
+        min-width: 0;
+        font-size: 14px;
+        color: #000;
+        a:visited, a:hover, a:active, a:focus{
+          color: #000;
+        }
+      }
+    }
+  }
+
+  .menu-group:nth-child(even){
+    width: 1px;
+    height: 80px;
+    // background-color: #444;
+    align-self: center;
+  }
+  .menu-group:last-child{
+    width: 460px;
+  }
+}
+.groups{
+  margin: 15px 0;
 }
 .group {
   border-bottom: 1px solid rgba(221, 221, 221, 1);
@@ -198,7 +228,7 @@ export default {
   }
   .group-top {
     height: 44px;
-    padding: 0 20px 0 15px;
+    padding: 0 20px 0 25px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -207,10 +237,10 @@ export default {
       flex-grow: 1;
       flex-shrink: 1;
       height: 14px;
-      font-size: 14px;
-      font-weight: 400;
+      font-size: 16px;
+      color: #000;
+      font-weight: 700;
       text-align: left;
-      color: #666666;
       transition: all 0.2s linear;
     }
     .status-icon {
@@ -219,35 +249,45 @@ export default {
       font-size: 11px;
       color: #666666;
       transition: all 0.2s linear;
-      transform: rotateZ(0);
+      transform: rotateZ(180deg);
     }
   }
   .group-content {
-    padding: 0 29px;
+    padding: 10px 29px 0 50px;
     box-sizing: border-box;
     max-height: 0;
     overflow: hidden;
     transition: all 0.5s linear;
 
     .item {
-      height: 36px;
+      margin-bottom: 20px;
       font-size: 14px;
       font-weight: 400;
-      color: rgba(102, 102, 102, 1);
+      color: #000;
       display: flex;
-      align-items: center;
+      span{
+        
+        text-align: left;
+      }
+      .cont{
+        width: 15%;
+      }
+      div{
+        text-align: left;
+        margin-left: 8px;
+      }
     }
   }
 }
 .group.active {
-  .group-name {
-    color: rgba(242, 155, 135, 1);
-  }
+  // .group-name {
+  //   color: rgba(242, 155, 135, 1);
+  // }
   .status-icon {
-    transform: rotateZ(180deg);
+    transform: rotateZ(0);
   }
   .group-content {
-    padding: 0 29px 10px 29px;
+    padding: 10px 29px 10px 50px;
     max-height: 300px;
   }
 }
@@ -257,7 +297,7 @@ export default {
   height: 50px;
   padding: 0 20px;
   box-sizing: border-box;
-  background-color: #f3f3f3;
+  background-color: #000000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -311,12 +351,17 @@ export default {
   /*margin-bottom: 20px;*/
   background-color: #ffffff;
   div,a{
-     color: rgba(202, 202, 202, 1);
+     color: #000000;
   }
   .text {
     font-size: 10px;
     font-weight: 400;
     color: rgba(202, 202, 202, 1);
+  }
+  .record-number{
+    font-size:9px;
+    margin-top:20px;
+    padding: 0 10px;
   }
 }
 </style>

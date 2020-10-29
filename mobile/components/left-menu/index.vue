@@ -6,21 +6,21 @@
         <!-- <div class="icon" @click="hide">
           <i class="iconfont iconcebianlan"></i>
         </div> -->
-        <div class="site-info" @click="toSiteSwitch">
-          <div class="flag">
+        <!-- <div class="site-info" @click="toSiteSwitch">
+          <div class="flag"> -->
             <!-- <img v-show="hkIcon" src="/hongkong-square.png" />
             <img v-show="cnIcon" src="/china-square.png" />
             <img v-show="enIcon" src="/USA-square.png" /> -->
-            <i class="iconfont icon_xuanzeyuyanhuobi"></i>
-          </div>
+            <!-- <i class="iconfont icon_xuanzeyuyanhuobi"></i>
+          </div> -->
           <!-- <div class="language">
             <span>简/繁/EN</span>
           </div> -->
-          <div class="coin">
+          <!-- <div class="coin">
             {{ coinInfo.content }}
           </div>
           <span class="gap-line"></span>
-        </div>
+        </div> -->
         <div class="icon" >
           <div class="log-in" @click="menu" v-show="showa">
             <i class="iconfont icongerenzhongxin" ></i>
@@ -30,6 +30,10 @@
             <span class="coloricon" ><i class="iconfont icongerenzhongxin" ></i></span>
             <span class="pl-login">{{ replacepos(date.username, 2, 6, '***') }}</span>
           </div>
+        </div>
+        <div class="quit-item" v-if="isLogin" @click="logout">
+          <div class="item-icon quit"></div>
+          <div class="item-name">{{ lang.logout }}</div>
         </div>
 
       </div>
@@ -44,7 +48,6 @@
           <section  class="group">
             <div class="menus-one"  @click="one(1)">
               <span :class="{changeColor:changeColor1}">{{lang.Rings}}</span>
-              <!-- <i class="iconfont iconxiala status-icon"></i> -->
               <div class="menus-two" :class="{ actives: actives1 == true }">
                 <div class="goback" @click.stop="goback(1)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -60,7 +63,6 @@
             </div>
             <div class="menus-one" @click="one(2)">
               <span :class="{changeColor:changeColor2}">{{lang.necklaces}}</span>
-              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives2 }">
                 <div class="goback" @click.stop="goback(2)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -75,7 +77,6 @@
             </div>
             <div class="menus-one" @click="one(3)">
               <span :class="{changeColor:changeColor3}">{{lang.Bracelets}}</span>
-              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
               <div class="menus-two" :class="{ actives: actives3 }">
                 <div class="goback" @click.stop="goback(3)">
                   <i class="iconfont iconxiala status-icon" ></i>
@@ -89,39 +90,36 @@
               </div>
             </div>
             <div class="menus-one" @click="one(4)">
-              <span :class="{changeColor:changeColor4}">{{lang.DesignDiamondRing}}</span>
-              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
+              <span :class="{changeColor:changeColor4}">{{lang.earring}}</span>
               <div class="menus-two" :class="{ actives: actives4 }">
                 <div class="goback" @click.stop="goback(4)">
                   <i class="iconfont iconxiala status-icon" ></i>
-                  <span>{{lang.DesignDiamondRing}}</span>
+                  <span>{{lang.earring}}</span>
                 </div>
-                <div class="two" @click.stop="goToMade(1)">
-                  <span :class="{changeColor:change1}">{{lang.SelectDiamondFirst}}</span>
-                </div>
-                <div class="two" @click.stop="goToMade(2)">
-                  <span :class="{changeColor:change2}">{{lang.DiamondRing}}</span>
-                </div>
-              </div>
-            </div>
-            <!-- <div class="menus-one" @click="one(5)">
-              <span :class="{changeColor:changeColor5}">{{lang.activity}}</span>
-              <div class="menus-two" :class="{ actives: actives5 }">
-                <div class="goback" @click.stop="goback(5)">
-                  <i class="iconfont iconxiala status-icon" ></i>
-                  <span>{{lang.activity}}</span>
-                </div>
-                <div v-for="(activity, a) in activity" :key="a" @click="toPage(activity.routerName, activity.query,a)" :class='{changeColor:a==isactive}'>
+                <div v-for="(earring, b) in earrings" :key="b" @click="toPage(earring.routerName, earring.query,b)" :class='{changeColor:b==isactive}'>
                   <div class="two" >
-                    <span>{{activity.name}}</span>
+                    <span>{{earring.name}}</span>
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
+            <div class="menus-one" @click="one(5)">
+              <span :class="{changeColor:changeColor5}">{{lang.Designer}}</span>
+              <div class="menus-two" :class="{ actives: actives5 }">
+                <div class="goback" @click.stop="goback(5)">
+                  <i class="iconfont iconxiala status-icon" ></i>
+                  <span>{{lang.Designer}}</span>
+                </div>
+                <div v-for="(designer, a) in Designers" :key="a" @click="toPage(designer.routerName, designer.query,a)" :class='{changeColor:a==isactive}'>
+                  <div class="two" >
+                    <span>{{designer.name}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="menus-one" @click="one(6)">
-              <span :class="{changeColor:changeColor6}">{{lang.theme}}</span>
-              <!-- <i class="iconfont iconxiala status-icon" ></i> -->
-              <div class="menus-two" :class="{ actives: actives6 }">
+              <span :class="{changeColor:changeColor6}">{{lang.NewProducts}}</span>
+              <!-- <div class="menus-two" :class="{ actives: actives6 }">
                 <div class="goback" @click.stop="goback(6)">
                   <i class="iconfont iconxiala status-icon" ></i>
                   <span>{{lang.theme}}</span>
@@ -131,12 +129,26 @@
                     <span>{{theme.name}}</span>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
-            <div class="menus-one" @click="goKnowledge" >
-              <!-- <nuxt-link :to="{ name: 'help-pages-knowledge' }"></nuxt-link> -->
+
+            <div class="menus-one" @click="one(7)">
+              <span :class="{changeColor:changeColor7}">{{lang.moreShineWorld}}</span>
+              <!-- <div class="menus-two" :class="{ actives: actives7 }"> 
+                <div class="goback" @click.stop="goback(7)">
+                  <i class="iconfont iconxiala status-icon" ></i>
+                  <span>{{lang.theme}}</span>
+                </div>
+                <div v-for="(theme, t) in themes" :key="t" @click="toPage(theme.routerName, theme.query,t)" :class='{changeColor:t==isactive}'>
+                  <div class="two" >
+                    <span>{{theme.name}}</span>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            <!-- <div class="menus-one" @click="goKnowledge" >
               <span :class="{changeColor:changeColor7}">{{lang.knowledge}}</span>
-            </div>
+            </div> -->
           </section>
         </div>
       </div>
@@ -152,7 +164,7 @@
           </div> -->
         </div>
         <div class="help">
-          <a v-if="this.$store.state.platform === 21" href="tel:0755 25169121">
+          <a v-if="this.$store.state.platform === 21" href="tel:0755-25160872-8005">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconphone"></i>
@@ -174,7 +186,7 @@
           </a>
         </div>
         <div class="help">
-          <a v-if="this.$store.state.platform === 21" href="mailto:e-service@bddco.com">
+          <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconyouxiang"></i>
@@ -205,12 +217,12 @@
           </div>
         </div>
 
-        <div class="help" v-if="isLogin" @click="logout">
+        <!-- <div class="help" v-if="isLogin" @click="logout">
           <div class="item">
             <div class="item-icon quit"></div>
             <div class="item-name">{{ lang.logout }}</div>
           </div>
-        </div>
+        </div> -->
       </div>
       <site-switch ref="site-switch"></site-switch>
     </div>
@@ -248,56 +260,52 @@ export default {
       actives4: false,
       actives5: false,
       actives6: false,
+      actives7: false,
       showa:true,
       showb:false,
       bottom:true,
       isLogin: !!this.$store.state.token,
       rings:[
-
         {
           stress: true,
-          name: this.LANGUAGE.components.leftMenu.engagementRing,
+          name: this.LANGUAGE.components.leftMenu.all,
+          routerName: 'marriage-ring-single-ring'
+        },
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.ModernSimplicity,
           routerName: 'marriage-ring-single-ring',
           query: {
-            style: 160
+            style: 277 
           }
         },
         {
           stress: true,
-          name: this.LANGUAGE.components.leftMenu.marriageRing,
+          name: this.LANGUAGE.components.leftMenu.ClassicRetro,
           routerName: 'marriage-ring-single-ring',
           query: {
-            style: 161
+            style: 278 
           }
         },
         {
           stress: true,
-          name: this.LANGUAGE.components.leftMenu.Ring,
+          name: this.LANGUAGE.components.leftMenu.PersonalityFun,
           routerName: 'marriage-ring-single-ring',
           query: {
-            style: 164
+            style: 279 
           }
         },
         {
           stress: true,
-          name: this.LANGUAGE.components.leftMenu.FashionRing,
+          name: this.LANGUAGE.components.leftMenu.FashionLimit,
           routerName: 'marriage-ring-single-ring',
           query: {
-            style: 163
+            style: 280 
           }
-        },
-        {
-          stress: true,
-          name: this.LANGUAGE.components.leftMenu.CoupleRing,
-          routerName: 'marriage-ring-pair-ring',
-          // query: {
-          //   style: 1
-          // }
-
-        },
+        }
       ],
       necklaces:[
-        {
+         {
           name: this.LANGUAGE.components.leftMenu.necklace,
           routerName: 'accessories-list',
           query:  {
@@ -317,15 +325,62 @@ export default {
           name: this.LANGUAGE.components.leftMenu.Bracelet,
           routerName: 'accessories-list',
            query:  {
-            actIndex: 4
+            actIndex: 2
           },
         },
         {
           name: this.LANGUAGE.components.leftMenu.bracelet,
           routerName: 'accessories-list',
            query:  {
+            actIndex: 3
+          },
+        }
+      ],
+      earrings:[
+        {
+          stress: true,
+          name: this.LANGUAGE.components.leftMenu.all,
+          routerName: 'accessories-list',
+          query:  {
+            actIndex: 4
+          },
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.Earrings,
+          routerName: 'accessories-list',
+          query:  {
             actIndex: 5
           },
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.EarStuds,
+          routerName: 'accessories-list',
+           query:  {
+            actIndex: 6
+          },
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.EarLine,
+          routerName: 'accessories-list',
+           query:  {
+            actIndex: 7
+          },
+        },
+        {
+          name: this.LANGUAGE.components.leftMenu.EarDrop,
+          routerName: 'accessories-list',
+           query:  {
+            actIndex: 8
+          },
+        }
+      ],
+      Designers:[
+        {
+          name: this.LANGUAGE.components.leftMenu.Alphabetic,
+          routerName: 'designers-list',  
+          query: { 
+            series: 288
+          }
         }
       ],
       activity:[
@@ -588,6 +643,16 @@ export default {
         this.changeColor7 = false
         this.changeColor6 = true
       }
+      if(id == 7){
+        this.actives7 = true
+        this.changeColor1 = false
+        this.changeColor3 = false
+        this.changeColor4 = false
+        this.changeColor5 = false
+        this.changeColor2 = false
+        this.changeColor7 = true
+        this.changeColor6 = false
+      }
     },
     goback(id){
       this.bottom = true
@@ -597,6 +662,7 @@ export default {
       this.actives4 = false
       this.actives5 = false
       this.actives6 = false
+      this.actives7 = false
     },
     goToMade(i) {
       this.hide()
@@ -1044,7 +1110,20 @@ export default {
     }
   }
 }
+.quit-item{
+  display: flex;
+  color: #6f9eb1;
+  position: relative;
+  left:50px;
+  line-height: 18px;
 
+  .quit{
+    width: 20px;
+    height: 20px;
+    background: url('/icon/quit2.png') no-repeat center;
+    background-size: 100% 100%;
+  }
+}
 .height{
   height: 100%;
 }

@@ -39,7 +39,7 @@ export default {
         }
     },
 
-    // 钻石对比所有id
+    // 莫桑石对比所有id
     comparedGoodIds (state) {
         const result = []
         const compared = state.compared || []
@@ -53,7 +53,7 @@ export default {
         return result
     },
 
-    // 是否在钻石对比中
+    // 是否在莫桑石对比中
     inCompared (state, getters) {
         return goodId => {
             // console.log('goodId==============>', goodId)
@@ -70,7 +70,7 @@ export default {
     //当前网址域名
     baseUrl () {
         let host = window.location.host;
-        if ((/(bddia|bddco)\.com/).test(host)) {
+        if ((/(msjew)\.com/).test(host)) {
             host = 'https://' + host
         } else {
             //测试

@@ -1226,7 +1226,7 @@ export default {
 
         return this.$axios({
             method: 'post',
-            url: `/wap/goodsCart/postBDD`,
+            url: `/wap/goodsCart/postMORESHINE`,
             data: data
         })
             .then(data => {
@@ -1757,7 +1757,7 @@ export default {
 
         return this.$axios({
             method: 'post',
-            url: `/wap/goodsCart/postBDD`,
+            url: `/wap/goodsCart/postMORESHINE`,
             data: data
         })
             .then(data => {

@@ -122,16 +122,19 @@ export default {
   },
   mounted() {
     // console.log("this.chooseCarats",this.goodInfo.carats)
-    if(this.goodInfo.materials){
+    if(this.goodInfo.materials||this.goodInfo.sizes){
       this.conditions[0].checked = [
         this.goodInfo.materials.length > 0
           ? this.goodInfo.materials[0].id
           : ``
       ]
       this.conditions[0].options = this.goodInfo.materials
-      this.chooseSize = this.goodInfo.sizes
-        ? this.goodInfo.sizes[0].content
-        : ``
+      // this.chooseSize = this.goodInfo.sizes
+      //   ? this.goodInfo.sizes[0].content
+      //   : ``
+      // this.chooseSizeId =this.goodInfo.sizes
+      //   ? this.goodInfo.sizes[0].sortBy
+      //   :``
       this.chooseCarats = this.goodInfo.carats
         ? this.goodInfo.carats[0].content
         : ``
@@ -465,7 +468,7 @@ export default {
             config:
               item.goodsType == 19
                 ? item.ring
-                : item.simpleGoodsEntity.categoryId === 1
+                : item.simpleGoodsEntity.categoryId === 20
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             goodsAttr:item.goodsAttr,
@@ -525,7 +528,7 @@ export default {
         })
         for (let i = 0; i < this.list.length - 1; i++) {
           if (
-            this.list[i].simpleGoodsEntity.categoryId === 1 &&
+            this.list[i].simpleGoodsEntity.categoryId === 20 &&
             this.list[i].createTime === this.list[i + 1].createTime
           ) {
             const tamp = this.list[i]

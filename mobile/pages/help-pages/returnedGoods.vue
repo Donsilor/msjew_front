@@ -38,8 +38,8 @@
         <dd>
           <p>{{ lang.con15 }}</p>
           <p>
-            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:e-service@bddco.com">
-              e-service@bddco.com
+            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:service@bddco.com">
+              service@bddco.com
             </a>
             <a v-else class="link" href="mailto:service@bddco.com">
               service@bddco.com

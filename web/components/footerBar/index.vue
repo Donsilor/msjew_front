@@ -1,23 +1,33 @@
 <template>
   <div :class="['footer-bar']">
     <div class="foot-menus">
+      <div class="slogan">
+        <!-- <div class="line"></div> -->
+        MORESHINE
+        <!-- <div class="line"></div> -->
+      </div>
       <div class="menus" v-if="this.$store.state.platform === 20">
-        <div v-for="(group, index) in menusCn" :key="index" class="menu-group">
-          <dl>
-            <dt class="group-name">{{ group.groupName }}</dt>
-            <dd
-              v-for="(item, itemIndex) in group.children"
-              :key="itemIndex"
-              class="item"
-            >
-              <div v-if="item.icon" class="item-icon">
-                <i :class="['iconfont', item.icon]"></i>
-              </div>
-              <div class="item-name">
-                <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
-              </div>
-            </dd>
-          </dl>
+         <div class="left-item">
+          <div v-for="(group, index) in menusCn" :key="index" class="menu-group">
+            <dl>
+              <dt class="group-name">{{ group.groupName }}</dt>
+              <dd
+                v-for="(item, itemIndex) in group.children"
+                :key="itemIndex"
+                class="item"
+              >
+                <div v-if="item.icon" class="item-icon">
+                  <i :class="['iconfont', item.icon]"></i>
+                </div>
+                <div class="item-name">
+                  <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+        <div class="right-item">
+          <div class="code"><img src="/index-ms/ewm.png" alt=""></div>
         </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
@@ -63,8 +73,8 @@
         <div class="Shadow" @click="setCoin()"></div>
       </div>
     </div>
-    <div class="links">
-      <!-- <ul class="social-links">
+    <!--<div class="links">
+       <ul class="social-links">
         <li v-for="(item, index) in socials" :key="index" class="item">
           <a :href="item.href" target="_blank">
             <div class="item-image">
@@ -91,14 +101,14 @@
             </div>
           </a>
         </li>
-      </ul> -->
-    </div>
+      </ul> 
+    </div>-->
     <footer class="copy-right">
       <div class="copy-right-content">
-        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightLeftCn`) }}</div>
+        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRightMs`) }}</div>
         <div v-else>{{ $t(`${lang}.copyrightLeft`) }}</div>
-        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRight1`) }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ $t(`${lang}.copyrightRight2`) }}</div>
-        <div v-else>{{ $t(`${lang}.copyrightRight`) }}</div>
+        <!-- <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRight1`) }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ $t(`${lang}.copyrightRight2`) }}</div>
+        <div v-else>{{ $t(`${lang}.copyrightRight`) }}</div> -->
       </div>
     </footer>
   </div>
@@ -115,15 +125,15 @@ export default {
       lang,
       menus: [
         {
-          groupName: this.$t(`${lang}.chooseBDD`),
+          groupName: this.$t(`${lang}.chooseMORESHINE`),
           children: [
-            {
-              icon: '',
-              name: this.$t(`${lang}.qualityAndValue`),
-              to: {
-                path: '/policies/quality-value'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.qualityAndValue`),
+            //   to: {
+            //     path: '/policies/quality-value'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.returnAndRefundPolicy`),
@@ -142,23 +152,23 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.aboutBDD`),
+          groupName: this.$t(`${lang}.aboutMORESHINE`),
           children: [
             // {
             //   icon: '',
-            //   name: this.$t(`${lang}.BDDBrandStory`),
+            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
             //   to: {
             //     path: '/brand-story'
             //   }
             // },
             
-            {
-              icon: '',
-              name: this.$t(`${lang}.diamondKnowledge`),
-              to: {
-                path: '/education/diamonds/carat'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.diamondKnowledge`),
+            //   to: {
+            //     path: '/education/diamonds/carat'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.paymentMethods`),
@@ -170,7 +180,7 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.BDDPolicy`),
+          groupName: this.$t(`${lang}.MORESHINEPolicy`),
           children: [
             {
               icon: '',
@@ -200,13 +210,13 @@ export default {
                 path: '/policies/privacy-policy'
               }
             },
-            {
-              icon: '',
-              name: this.$t(`${lang}.termsAndConditions`),
-              to: {
-                path: '/policies/terms-and-conditions'
-              }
-            }
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.termsAndConditions`),
+            //   to: {
+            //     path: '/policies/terms-and-conditions'
+            //   }
+            // }
           ]
         },
         {},
@@ -239,15 +249,15 @@ export default {
       ],
       menusUs: [
         {
-          groupName: this.$t(`${lang}.chooseBDD`),
+          groupName: this.$t(`${lang}.chooseMORESHINE`),
           children: [
-            {
-              icon: '',
-              name: this.$t(`${lang}.qualityAndValue`),
-              to: {
-                path: '/policies/quality-value'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.qualityAndValue`),
+            //   to: {
+            //     path: '/policies/quality-value'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.returnAndRefundPolicy`),
@@ -266,23 +276,23 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.aboutBDD`),
+          groupName: this.$t(`${lang}.aboutMORESHINE`),
           children: [
             // {
             //   icon: '',
-            //   name: this.$t(`${lang}.BDDBrandStory`),
+            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
             //   to: {
             //     path: '/brand-story'
             //   }
             // },
             
-            {
-              icon: '',
-              name: this.$t(`${lang}.diamondKnowledge`),
-              to: {
-                path: '/education/diamonds/carat'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.diamondKnowledge`),
+            //   to: {
+            //     path: '/education/diamonds/carat'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.paymentMethods`),
@@ -294,7 +304,7 @@ export default {
         },
         {},
         {
-          groupName: this.$t(`${lang}.BDDPolicy`),
+          groupName: this.$t(`${lang}.MORESHINEPolicy`),
           children: [
             {
               icon: '',
@@ -324,13 +334,13 @@ export default {
                 path: '/policies/privacy-policy'
               }
             },
-            {
-              icon: '',
-              name: this.$t(`${lang}.termsAndConditions`),
-              to: {
-                path: '/policies/terms-and-conditions'
-              }
-            }
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.termsAndConditions`),
+            //   to: {
+            //     path: '/policies/terms-and-conditions'
+            //   }
+            // }
           ]
         },
         {},
@@ -370,129 +380,61 @@ export default {
       ],
       menusCn: [
         {
-          groupName: this.$t(`${lang}.chooseBDD`),
+          groupName: this.$t(`${lang}.helpCenter`),
           children: [
             {
               icon: '',
-              name: this.$t(`${lang}.qualityAndValue`),
+              name: this.$t(`${lang}.ShoppingGuide`),
               to: {
-                path: '/policies/quality-value'
+                // path: '/policies/quality-value'
               }
             },
             {
               icon: '',
-              name: this.$t(`${lang}.returnAndRefundPolicy`),
+              name: this.$t(`${lang}.MemberCentre`),
               to: {
-                path: '/policies/return-refund-policy'
+                // path: '/policies/return-refund-policy'
               }
             },
             {
               icon: '',
-              name: this.$t(`${lang}.findYourRingSize`),
+              name: this.$t(`${lang}.WorryFreeAfterSales`),
               to: {
-                path: '/education/rings/size'
+                // path: '/education/rings/size'
+              }
+            },
+            {
+              icon: '',
+              name: this.$t(`${lang}.ConvenientDelivery`),
+              to: {
+                // path: '/education/rings/size'
               }
             }
           ]
         },
         {},
         {
-          groupName: this.$t(`${lang}.aboutBDD`),
-          children: [
-            // {
-            //   icon: '',
-            //   name: this.$t(`${lang}.BDDBrandStory`),
-            //   to: {
-            //     path: '/brand-story'
-            //   }
-            // },
-            {
-              icon: '',
-              name: this.$t(`${lang}.diamondKnowledge`),
-              to: {
-                path: '/education/diamonds/carat'
-              }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.paymentMethods`),
-              to: {
-                path: '/policies/payment-methods'
-              }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.aboutCompany`),
-              to: {
-                path: '/policies/about-company'
-              }
-            }
-          ]
-        },
-        {},
-        {
-          groupName: this.$t(`${lang}.BDDPolicy`),
+          groupName: this.$t(`${lang}.contactUs`),
           children: [
             {
               icon: '',
-              name: this.$t(`${lang}.freeShippingService`),
+              name: this.$t(`${lang}.Address`),
               to: {
-                path: '/policies/free-shipping'
+                // path: '/brand-story'
               }
             },
             {
               icon: '',
-              name: this.$t(`${lang}.deliveryPolicy`),
+              name: this.$t(`${lang}.Call`),
               to: {
-                path: '/policies/shipping'
+                // path: '/education/diamonds/carat'
               }
             },
             {
               icon: '',
-              name: this.$t(`${lang}.internationalPolicy`),
+              name: this.$t(`${lang}.Email`),
               to: {
-                path: '/policies/international'
-              }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.privacyPolicy`),
-              to: {
-                path: '/policies/privacy-policy'
-              }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.termsAndConditions`),
-              to: {
-                path: '/policies/terms-and-conditions'
-              }
-            }
-          ]
-        },
-        {},
-        {
-          groupName: this.$t(`${lang}.contact`),
-          children: [
-            {
-              icon: 'iconicon-xiaoxi',
-              name: this.$t(`${lang}.contactTimeCn`),
-              to: {
-                path: '/contact-us'
-              }
-            },
-            {
-              icon: 'iconphone',
-              name: this.$t(`${lang}.contactTelCn`),
-              to: {
-                path: '/contact-us'
-              }
-            },
-            {
-              icon: 'iconyouxiang',
-              name: this.$t(`${lang}.contactEmailCn`),
-              to: {
-                path: '/contact-us'
+                // path: '/policies/payment-methods'
               }
             }
           ]
@@ -563,8 +505,30 @@ export default {
 
 <style lang="less" scoped>
 .footer-bar {
+  margin-top: 40px;
+  .slogan{
+    border-top:5px solid #d4e8ec;
+    border-bottom:5px solid #d4e8ec;
+    padding: 18px 0;
+    text-align: center;
+    font-weight: bold;
+    // .line{
+    //   height: 5px;
+    //   background: #d4e8ec;
+    // }
+  }
+  .left-item{
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 60%;
+  }
+  .right-item{
+    width: 35%;
+    text-align: center;
+  }
   .foot-menus {
-    background-color: #ececec;
+    // background-color: #ececec;
   }
   .menus {
     min-width: 1160px;
@@ -593,8 +557,8 @@ export default {
 
       .group-name {
         margin-bottom: 20px;
-        font-size: 14px;
-        color: #333;
+        font-size: 16px;
+        color: #000;
         font-weight: 700;
         font-family: CTHeiTiSF;
       }
@@ -603,7 +567,8 @@ export default {
         font-size: 12px;
         font-family: CTHeiTiSF;
         font-weight: 400;
-        color: rgba(102, 102, 102, 1);
+        color: #000;
+        // color: rgba(102, 102, 102, 1);
 
         display: flex;
         align-items: center;
@@ -622,6 +587,11 @@ export default {
           flex-grow: 1;
           flex-shrink: 1;
           min-width: 0;
+          font-size: 12px;
+          color: #000;
+          a:visited, a:hover, a:active, a:focus{
+            color: #000;
+          }
         }
       }
 
@@ -646,7 +616,7 @@ export default {
     .menu-group:nth-child(even){
       width: 1px;
       height: 80px;
-      background-color: #444;
+      // background-color: #444;
       align-self: center;
     }
     .menu-group:last-child{
@@ -736,7 +706,8 @@ export default {
     }
   }
   .copy-right {
-    background: #666;
+    // background: #666;
+    border-top:1px solid #636466;
 
     .copy-right-content {
       display: flex;
@@ -750,9 +721,9 @@ export default {
       height: 52px;
       box-sizing: border-box;
       font-size: 12px;
-      color: #fff;
+      color: #666666;
       a{
-        color: #fff;
+        color: #666666;
       }
     }
   }

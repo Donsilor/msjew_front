@@ -7,7 +7,7 @@
           {{ $t(`${lang}.define`) }}
           <br />
           {{ $t(`${lang}.mail`) }}
-          <span v-if="this.$store.state.platform === 20">e-service@bddco.com</span>
+          <span v-if="this.$store.state.platform === 20">service@bddco.com</span>
           <span v-else>service@bddco.com</span>
           {{ $t(`${lang}.know`) }}
         </dd>
@@ -47,8 +47,8 @@
           {{ $t(`${lang}.con14`) }}
           <br />
           {{ $t(`${lang}.con15`) }}
-          <!-- <br/> 具體內容參照BDD網站：
-          <a href='https://www.bddco.com/en/policy/international/' target="_blank"><span>https://www.bddco.com/en/policy/international/</span></a>-->
+          <!-- <br/> 具體內容參照MORESHINE網站：
+          <a href='https://www.msjew.com/en/policy/international/' target="_blank"><span>https://www.msjew.com/en/policy/international/</span></a>-->
         </dd>
       </dl>
       <div class="country-name">{{ $t(`${lang}.table1`).country }}</div>

@@ -5,44 +5,44 @@
       <div class="article-content">
         <div class="list active">
           <a href="/news/news-detail">
-            <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+            <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
             <div class="release-time">2323.26.52</div>
           </a>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购钻石百科黄金应该怎样选购钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购莫桑石百科黄金应该怎样选购莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
         <div class="list">
-          <div class="list-text">(文章标题)钻石百科黄金应该怎样选购？</div>
+          <div class="list-text">(文章标题)莫桑石百科黄金应该怎样选购？</div>
           <div class="release-time">2323.26.52</div>
         </div>
       </div>

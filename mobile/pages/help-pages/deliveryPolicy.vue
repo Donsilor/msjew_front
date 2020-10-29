@@ -7,8 +7,8 @@
           <p>{{ lang.title }}</p>
           <p>
             {{ lang.define }}
-            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:e-service@bddco.com">
-              e-service@bddco.com
+            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:service@bddco.com">
+              service@bddco.com
             </a>
             <a v-else class="link" href="mailto:service@bddco.com">
               service@bddco.com
@@ -41,8 +41,8 @@
         <dt>{{ lang.tit4 }}</dt>
         <dd>
           {{ lang.con5 }}
-            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:e-service@bddco.com">
-              e-service@bddco.com
+            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:service@bddco.com">
+              service@bddco.com
             </a>
             <a v-else class="link" href="mailto:service@bddco.com">
               service@bddco.com

@@ -217,15 +217,15 @@ export default {
   mixins: [CategoryIndexPage],
   head() {
     return this.seoInfo || {
-      title: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網',
+      title: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|MORESHINE官網',
       meta: [
         {
           name: 'title',
-          content: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|BDD官網'
+          content: '鉆戒對戒_吊墜項鏈__男戒女戒_鉆石鉑金K金首飾_手鏈手鐲_耳釘耳飾|MORESHINE官網'
         },
         {
           name: 'description',
-          content: 'BDD官網商品列表推出手鍊, 手鐲, 白金, 耳環, 戒指等鉆石珠寶和K金首飾圖片，裸鉆價格、鉑金價格以及K金價格介紹。'
+          content: 'MORESHINE官網商品列表推出手鍊, 手鐲, 白金, 耳環, 戒指等鉆石珠寶和K金首飾圖片，裸鉆價格、鉑金價格以及K金價格介紹。'
         },
         {
           name: 'keywords',
@@ -340,7 +340,7 @@ export default {
     }
   },
   async asyncData({ $axios, route, store, app }) {
-    console.log("sssss",route)
+    // console.log("sssss",route)
     let seoInfo = {}
     if(route.name == 'wedding-rings'){
       seoInfo = await app.$getSeoInfo('weddingRing')

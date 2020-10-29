@@ -21,7 +21,7 @@ import CutChoose from '@/components/white-board/cut-choose'
 import OrderExpress from '@/components/white-board/order-express'
 import OrderTex from '@/components/white-board/order-tex'
 import OrderSafe from '@/components/white-board/order-safe'
-import Swiper from '@/components/swiper'
+import Swiper1 from '@/components/swiper1'
 import Swiper2 from '@/components/swiper-2'
 import SwiperTap from '@/components/swiper-tap'
 import SliderVerify from '@/components/slider-verify'
@@ -45,7 +45,7 @@ Vue.use(Toast)
 
 Vue.use(ChooseEject)
 
-Vue.use(Swiper)
+Vue.use(Swiper1)
 Vue.use(Swiper2)
 
 Vue.use(SliderVerify)
@@ -58,7 +58,7 @@ Vue.use(LoginPop)
 //  列表滑动到底加载
 Vue.use(ScrollBox)
 
-//  钻石列表筛选点问号的弹窗
+//  莫桑石列表筛选点问号的弹窗
 Vue.use(WhiteBoard)
 Vue.use(SiteSwitch)
 Vue.use(DiamondChoose)

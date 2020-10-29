@@ -19,20 +19,48 @@ export default {
     return {
       lang: this.LANGUAGE.listCommons,
       conditions: [
+        // {
+        //   type: 'eject-choose-pro',
+        //   key: 'series',
+        //   name: this.LANGUAGE.listCommons.series,
+        //   checked: ``,
+        //   options: []     //this.sendCod
+        // },
+        // {
+        //   type: 'eject-choose-pro',
+        //   key: 'style',
+        //   name: this.LANGUAGE.listCommons.styles,
+        //   checked: ``,
+        //   options: this.CONDITION_INFO.style.ringStyles
+        // },
         {
           type: 'eject-choose-pro',
           key: 'quality',
-          name: this.LANGUAGE.listCommons.fineness,
+          name: this.LANGUAGE.listCommons.material,
           checked: ``,
           options: this.sendCod
         },
-        {
-          type: 'eject-choose-pro',
-          key: 'style',
-          name: this.LANGUAGE.listCommons.theme,
-          checked: ``,
-          options: this.CONDITION_INFO.style.theme
-        },
+        // {
+        //   type: 'eject-choose-pro',
+        //   key: 'mosaic',
+        //   name: this.LANGUAGE.listCommons.mosaic,
+        //   checked: ``,
+        //   options: this.CONDITION_INFO.style.ringStyles
+        // },
+        // {
+        //   type: 'eject-choose-pro',
+        //   key: 'object',
+        //   name: this.LANGUAGE.listCommons.object,
+        //   checked: ``,
+        //   options: this.CONDITION_INFO.style.ringStyles
+        // },
+        // {
+        //   type: 'eject-choose-pro',
+        //   key: 'style',
+        //   name: this.LANGUAGE.listCommons.theme,
+        //   checked: ``,
+        //   options: this.CONDITION_INFO.style.theme
+        // },
         {
           type: 'eject-choose',
           key: 'price-bar',
@@ -56,48 +84,55 @@ export default {
           this.categoryId = 5
           break
         case 2:
-          this.categoryId = 6
-          break
-        case 3:
-          this.categoryId = 7
-          break
-        case 4:
           this.categoryId = 8
           break
-        case 5:
+        case 3:
           this.categoryId = 9
           break
+        case 4:
+          this.categoryId = [6,22,23,24]
+          break
+        case 5:
+          this.categoryId = 22
+          break
         case 6:
-          this.categoryId = 16
+          this.categoryId = 6
           break
         case 7:
-          this.categoryId = 17
+          this.categoryId = 23
           break
         case 8:
-          this.categoryId = 18
+          this.categoryId = 24
           break
         
       }
       let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
       this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
       this.conditions[0].checked = material.toString()
-      this.conditions[1].options = this.CONDITION_INFO.style.theme
+      // this.conditions[1].options = this.CONDITION_INFO.style.theme
+      // this.conditions[1].checked = ``
       this.conditions[1].checked = ``
-      this.conditions[2].checked = ``
-      this.conditions[2].options = []
+      this.conditions[1].options = []
       this.isResetProgress = true
       this.madeUpEv()
     },
 
     $route(val, oldVal) {
+      
       let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
+      let species = typeof this.$route.query.category !== 'undefined' ? this.$route.query.category:''
+      console.log("this.0000000",typeof species,typeof [4,5])
+      if(species == [4,5]){
+        this.category = [4,5]
+        console.log(9999999999999)
+      }
       this.conditions[0].options = JSON.parse(JSON.stringify(this.sendCod))
       this.conditions[0].checked = material.toString()
-      this.conditions[1].options = this.CONDITION_INFO.style.theme
-      let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
-      this.conditions[1].checked = theme.toString()
-      this.conditions[2].checked = ``
-      this.conditions[2].options = []
+      // this.conditions[1].options = this.CONDITION_INFO.style.theme
+      // let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
+      // this.conditions[1].checked = theme.toString()
+      this.conditions[1].checked = ``
+      this.conditions[1].options = []
       this.isResetProgress = true
       this.madeUpEv()
     }
@@ -111,25 +146,25 @@ export default {
         this.categoryId = 5
         break
       case 2:
-        this.categoryId = 6
-        break
-      case 3:
-        this.categoryId = 7
-        break
-      case 4:
         this.categoryId = 8
         break
-      case 5:
+      case 3:
         this.categoryId = 9
         break
+      case 4:
+        this.categoryId = [6,22,23,24]
+        break
+      case 5:
+        this.categoryId = 22
+        break
       case 6:
-        this.categoryId = 16
+        this.categoryId = 6
         break
       case 7:
-        this.categoryId = 17
+        this.categoryId = 23
         break
       case 8:
-        this.categoryId = 18
+        this.categoryId = 24
         break
       case -1:
         this.categoryId = this.category
@@ -137,8 +172,8 @@ export default {
     }
     let material = typeof this.$route.query.material !== 'undefined' ? this.$route.query.material:''
     this.conditions[0].checked = material.toString()
-    let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
-    this.conditions[1].checked = theme.toString()
+    // let theme = typeof this.$route.query.theme !== 'undefined' ? this.$route.query.theme:''
+    // this.conditions[1].checked = theme.toString()
     this.madeUpEv()
   },
   methods: {
@@ -170,19 +205,50 @@ export default {
       }
       return result.join(',')
     },
+   
+    // 系列
+    // clearSeries(data) {
+    //   const conditions = JSON.parse(JSON.stringify(this.conditions))
+    //   conditions[0].checked = this.getCheckedIds(data)
+    //   this.conditions = conditions
+    //   this.madeUpEv()
+    // },
+
+    // 风格
+    // clearStyle(data) {
+    //   const conditions = JSON.parse(JSON.stringify(this.conditions))
+    //   conditions[1].checked = this.getCheckedIds(data)
+    //   this.conditions = conditions
+    //   this.madeUpEv()
+    // },
+    // 材质
     clearQuality(data) {
       const conditions = JSON.parse(JSON.stringify(this.conditions))
       conditions[0].checked = this.getCheckedIds(data)
       this.conditions = conditions
       this.madeUpEv()
     },
+    // 镶嵌方式
+    // clearMosaic(data) {
+    //   const conditions = JSON.parse(JSON.stringify(this.conditions))
+    //   conditions[3].checked = this.getCheckedIds(data)
+    //   this.conditions = conditions
+    //   this.madeUpEv()
+    // },
+    // 送礼对象
+    // clearObject(data) {
+    //   const conditions = JSON.parse(JSON.stringify(this.conditions))
+    //   conditions[4].checked = this.getCheckedIds(data)
+    //   this.conditions = conditions
+    //   this.madeUpEv()
+    // },
 
-    clearTheme(data) {
-      const conditions = JSON.parse(JSON.stringify(this.conditions))
-      conditions[1].checked = this.getCheckedIds(data)
-      this.conditions = conditions
-      this.madeUpEv()
-    },
+    // clearTheme(data) {
+    //   const conditions = JSON.parse(JSON.stringify(this.conditions))
+    //   conditions[1].checked = this.getCheckedIds(data)
+    //   this.conditions = conditions
+    //   this.madeUpEv()
+    // },
     showSwiperTap() {
       this.$refs.suitability.show()
     },
@@ -219,13 +285,13 @@ export default {
         this.ev += `material=${this.conditions[0].checked}`
       }
 
-      this.ev += ``
-      if (this.conditions[1].checked !== ``) {
-        this.ev += `^theme=${this.conditions[1].checked}`
-      }
+      // this.ev += ``
+      // if (this.conditions[1].checked !== ``) {
+      //   this.ev += `^theme=${this.conditions[1].checked}`
+      // }
 
-      if (this.conditions[2].checked !== ``) {
-        this.ev += `^sale_price=${this.conditions[2].checked
+      if (this.conditions[1].checked !== ``) {
+        this.ev += `^sale_price=${this.conditions[1].checked
           .split(',')
           .join('-')}`
       }

@@ -433,7 +433,7 @@ export default {
 
   .login-page2{
     position: absolute;
-    top: 46%;
+    top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: calc(100% - 40px);
@@ -444,10 +444,10 @@ export default {
     box-sizing: border-box;
 
     .operate-bar {
-      height: 40px;
+      height: 30px;
       text-align: right;
-      line-height: 40px;
-      margin-bottom: 30px;
+      line-height: 30px;
+      margin-bottom: 15px;
     }
     .operate-bar .close {
       font-size: 17px;

@@ -1,7 +1,7 @@
-# bdd_front
+# msjew_front
 
 #### Description
-BDD官网 web和wap
+MORESHINE官网 web和wap
 
 #### Software Architecture
 Software architecture description

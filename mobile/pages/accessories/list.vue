@@ -36,47 +36,64 @@ export default {
   data() {
     return {
       lang: this.LANGUAGE.listCommons,
-      cod: this.CONDITION_INFO.quality.necklace,
+      cod: this.CONDITION_INFO.quality.necklaces,
       sliders: [
         {
+          id:0,
           content: this.LANGUAGE.listCommons.sliders[0],
-          cod: this.CONDITION_INFO.quality.necklace
+          cod: this.CONDITION_INFO.quality.necklaces
         },
         {
+          id:1,
           content: this.LANGUAGE.listCommons.sliders[1],
           cod: this.CONDITION_INFO.quality.pendant
         },
         {
+          id:2,
           content: this.LANGUAGE.listCommons.sliders[2],
-          cod: this.CONDITION_INFO.quality.studEarring
+          cod: this.CONDITION_INFO.quality.bracelets
         },
         {
+          id:3,
           content: this.LANGUAGE.listCommons.sliders[3],
-          cod: this.CONDITION_INFO.quality.earring
+          cod: this.CONDITION_INFO.quality.Bangle
         },
         {
+          id:4,
           content: this.LANGUAGE.listCommons.sliders[4],
-          cod: this.CONDITION_INFO.quality.BraceletLine
+          cod: this.CONDITION_INFO.quality.earrings
         },
         {
+          id:5,
           content: this.LANGUAGE.listCommons.sliders[5],
-          cod: this.CONDITION_INFO.quality.bracelet
+          cod: this.CONDITION_INFO.quality.danglers
         },
         {
+          id:6,
           content: this.LANGUAGE.listCommons.sliders[6],
-          cod: this.CONDITION_INFO.quality.bracelet
+          cod: this.CONDITION_INFO.quality.earStuds
         },
         {
+          id:7,
           content: this.LANGUAGE.listCommons.sliders[7],
-          cod: this.CONDITION_INFO.quality.bracelet
+          cod: this.CONDITION_INFO.quality.earline
         },
         {
+          id:8,
           content: this.LANGUAGE.listCommons.sliders[8],
-          cod: this.CONDITION_INFO.quality.bracelet
+          cod: this.CONDITION_INFO.quality.eardrop
         },
+        // {
+        //   content: this.LANGUAGE.listCommons.sliders[7],
+        //   cod: this.CONDITION_INFO.quality.bracelet
+        // },
+        // {
+        //   content: this.LANGUAGE.listCommons.sliders[8],
+        //   cod: this.CONDITION_INFO.quality.bracelet
+        // },
 
       ],
-      actIndex: -1
+      actIndex: []
     }
   },
   async asyncData({ $axios, route, store, app }) {
@@ -107,7 +124,10 @@ export default {
   //   }
   // },
   mounted() {
-    // console.log("this.",this.seoInfo)
+    console.log("this.",this.$route.query.category)
+    if(this.$route.query.category == [4,5]){
+      this.actIndex = 1
+    }
     if (typeof this.$route.query.actIndex !== 'undefined') {
       this.actIndex = parseFloat(this.$route.query.actIndex)
     }

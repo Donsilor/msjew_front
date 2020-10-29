@@ -12,13 +12,13 @@
           :class="{ active: gender === 42 }"
           @click="changeGender(42)"
         >
-          {{ lang.lady }}
+          {{ lang.RomanticLady }}
         </button>
         <button
           :class="{ active: gender === 41 }"
           @click="changeGender(41)"
         >
-          {{ lang.gentlemen }}
+          {{ lang.DistinguishedMan }}
         </button>
       </div>
       <div class="choose-box">
@@ -131,9 +131,17 @@
       :choose-line="0"
       @clear="getSortBy"
     ></swiper-tap>
+    <!-- <choose-eject-pro
+      ref="series-eject-choose-pro"
+      :title="lang.series"
+      :type="'series'"
+      :required="true"
+      :options="conditions[0].options"
+      @clear="clearSeries"
+    ></choose-eject-pro> -->
     <choose-eject-pro
       ref="style-eject-choose-pro"
-      :title="lang.style"
+      :title="lang.styles"
       :type="'style'"
       :required="true"
       :options="conditions[0].options"
@@ -141,7 +149,7 @@
     ></choose-eject-pro>
     <choose-eject-pro
       ref="quality-eject-choose-pro"
-      :title="lang.fineness"
+      :title="lang.material"
       :type="'quality'"
       :required="true"
       :options="conditions[1].options"
@@ -169,7 +177,9 @@ export default {
   watch: {
     $route(val, oldVal) {
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
-      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
+      // this.conditions[0].options = this.CONDITION_INFO.series.ringSeries
+      // this.conditions[0].checked = series.toString()
+      this.conditions[0].options = this.CONDITION_INFO.style.ringStyles
       this.conditions[0].checked = style.toString()
       this.conditions[1].options = this.CONDITION_INFO.quality.rings
       this.conditions[1].checked = ``
@@ -185,10 +195,14 @@ export default {
     const _this = this
     _this.$nextTick(() => {
       console.log("价格",this.conditions)
+      // let series = typeof this.$route.query.series !== 'undefined' ? this.$route.query.series:''
+      // this.conditions[0].options = this.CONDITION_INFO.series.ringSeries
+      // this.conditions[0].checked = series.toString()
       let style = typeof this.$route.query.style !== 'undefined' ? this.$route.query.style:''
-      this.conditions[0].options = this.CONDITION_INFO.style.womanRings
+      this.conditions[0].options = this.CONDITION_INFO.style.ringStyles
       this.conditions[0].checked = style.toString()
-      this.categoryId = 2
+      this.categoryId = [2,19] 
+
       
       var ringT = sessionStorage.getItem('ringType');
       if(ringT){
@@ -221,11 +235,14 @@ export default {
     madeUpEv() {
       this.ev = ``
       if (this.conditions[0].checked === ``) {
-          this.ev += `marry_style_wom=-1`
+          this.ev += `67=-1`
         } else {
-          this.ev += `marry_style_wom=${this.conditions[0].checked}`
+          this.ev += `67=${this.conditions[0].checked}`
         }
 
+      // if (this.conditions[1].checked !== ``) {
+      //   this.ev += `^67=${this.conditions[1].checked}`
+      // }
       if (this.conditions[1].checked !== ``) {
         this.ev += `^material=${this.conditions[1].checked}`
       }
@@ -246,6 +263,15 @@ export default {
 </script>
 
 <style scoped lang="less">
+.choose-btn{
+  // position: relative;
+  // width: calc((100% - 0.266667rem) / 4)!important;
+  // height: 1.333333rem;
+  // background: #fafafa;
+  // border: 0.026667rem solid #dddddd;
+  // border-radius: 0.133333rem;
+  // margin-bottom: 0.32rem;
+}
 .mask {
   width: 100vw;
   height: 100vh;
