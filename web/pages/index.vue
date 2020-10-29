@@ -194,9 +194,9 @@
     <div v-if="platform == 10 || platform == 20 || platform == 40" class="ms-page">
       <section class="banner">
         <div :height="bannerHeight + 'px'" class="banner-box">
-          <div><img style="width:100%;" class="banner-img" src="../static/index/banner1.png" alt=""></div>
-          <div><img style="width:100%;margin-top: -4px" class="banner-img" src="../static/index/banner2.png" alt=""></div>
-          <div><img style="width:100%;margin-top: -4px" class="banner-img" src="../static/index/banner3.png" alt=""></div>
+          <div><img style="width:100%;" class="banner-img" src="../static/index/banner1.jpg" alt=""></div>
+          <div><img style="width:100%;margin-top: -4px" class="banner-img" src="../static/index/banner2.jpg" alt=""></div>
+          <div><img style="width:100%;margin-top: -3px" class="banner-img" src="../static/index/banner3.jpg" alt=""></div>
         </div>
         <!-- <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
@@ -276,9 +276,9 @@
 
     <section class="diamond-gia">
       <div class="bg">
-        <img src="/index-ms/ad1.png" />
-        <img src="/index-ms/ad2.png" />
-        <img src="/index-ms/ad3.png" />
+        <img src="/index-ms/ad1.jpg" />
+        <img src="/index-ms/ad2.jpg" />
+        <img src="/index-ms/ad3.jpg" />
       </div>
     </section>
 
@@ -296,7 +296,7 @@
             </div>
           </li>
           <li class="item sort2">
-            <img style="margin-top:-3px;" src="/index-ms/sort2.png" alt="">
+            <img style="margin-top:-3px;" src="/index-ms/sort2.jpg" alt="">
             <div class="category">
               <div class="bg">
                 <nuxt-link to="/jewellery/necklaces">
@@ -306,11 +306,11 @@
             </div>
           </li>
           <li class="item sort3">
-           <img style="margin-top:-3px;" src="/index-ms/sort3.png" alt="">
+           <img style="margin-top:-3px;" src="/index-ms/sort3.jpg" alt="">
              
           </li>
            <li class="item">
-           <img style="margin-top:-3px;" src="/index-ms/sort4.png" alt="">
+           <img style="margin-top:-3px;" src="/index-ms/sort4.jpg" alt="">
             <div class="category">
               <div class="bg">
                 <nuxt-link to="/jewellery/earrings-stud">
@@ -320,7 +320,7 @@
             </div>
           </li>
            <li class="item">
-           <img style="margin-top:-3px;" src="/index-ms/sort5.png" alt="">
+           <img style="margin-top:-3px;" src="/index-ms/sort5.jpg" alt="">
             <div class="category">
               <div class="bg">
                 <nuxt-link to="/jewellery/bracelets">
@@ -335,9 +335,9 @@
 
     <section class="made-gia">
       <div class="bg">
-        <img src="/index-ms/made1.png" />
-        <img src="/index-ms/made2.png" />
-        <img src="/index-ms/made3.png" />
+        <img src="/index-ms/made1.jpg" />
+        <img src="/index-ms/made2.jpg" />
+        <img src="/index-ms/made3.jpg" />
       </div>
     </section>
 
