@@ -37,6 +37,7 @@ import LiveChat from '@/components/live-chat'
 import TipMessage from '@/components/tip-message'
 import GetCoupon from '@/components/coupon/getCoupon'
 import UseCoupon from '@/components/coupon/useCoupon'
+import vrTryOn from '@/components/vr-try-on'
 import LoginPop from '@/components/login-pop'
 
 Vue.use(Input)
@@ -93,3 +94,5 @@ Vue.use(TipMessage)
 
 Vue.use(GetCoupon)
 Vue.use(UseCoupon)
+
+Vue.use(vrTryOn)

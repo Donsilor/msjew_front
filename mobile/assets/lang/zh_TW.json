@@ -1195,6 +1195,7 @@
     "us-version": "美版",
     "cmw": "只有您知道什麼是最能表達您的愛。從我們的系列中選擇一些東西，或者莫桑石及款式，來創造您獨特的作品。",
     "addCart": "加入購物車",
+    "vr":"VR試戴",
     "noTotalStock": "暫無存貨",
     "notInSale": "已下架",
     "startDJ": "開始定製",
@@ -2414,5 +2415,18 @@
       "platform3": "澳門",
       "platform4": "臺灣",
       "platform5": "國外"
+  },
+  "vr":{
+    "openHand":"請先打開手掌拍照",
+    "photoTip":"戴了戒指的需先脫下",
+    "openCamera":"打開攝像頭試戴",
+    "changeStyle":"換款",
+    "quit":"退出AR",
+    "enterLong":"用手指長按圖片以保存圖像",
+    "again":"重拍",
+    "save":"保存",
+    "operating":"戒指可旋轉,移動和縮放",
+    "load":"加載中",
+    "Retry":"請重試"
   }
 }

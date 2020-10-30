@@ -457,9 +457,13 @@ export default {
         })
       }
 
+      let categoryIdType = conditions.categoryId
+      if(conditions.categoryId == 21){
+        categoryIdType = [6,22,23,24]
+      }
       const data = {
         // 商品类别ID
-        categoryId: conditions.categoryId == '' ? this.all_category:conditions.categoryId,
+        categoryId: conditions.categoryId == '' ? this.all_category:categoryIdType,
         // 排序字段名
         orderParam: sortInfo.sortBy,
         // 排序类型（1:升 2:降）

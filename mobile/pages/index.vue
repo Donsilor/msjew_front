@@ -241,16 +241,18 @@
                 :target="each.openType === 1 ? '_blank' : '_self'"
               >
                 <div :key="n" class="swiper-item">
-                  <img src="/index-ms/banner01.png" @error="imageError"> 
-                  <img src="/index-ms/banner02.png" @error="imageError"> 
+                  <img src="/index-ms/banner.jpg" @error="imageError">
+                  <!-- <img src="/index-ms/banner01.png" @error="imageError"> 
+                  <img src="/index-ms/banner02.png" @error="imageError">  -->
                   <!-- <img :src="each.image" @error="imageError" /> -->
                 </div>
               </a>
             </template>
             <template v-else>
               <div :key="n" class="swiper-item">
-                <img src="/index-ms/banner01.png" @error="imageError"> 
-                <img src="/index-ms/banner02.png" @error="imageError"> 
+                <img src="/index-ms/banner.jpg" @error="imageError">
+                <!-- <img src="/index-ms/banner01.png" @error="imageError"> 
+                <img src="/index-ms/banner02.png" @error="imageError">  -->
                 <!-- <img :src="each.image" @error="imageError" /> -->
               </div>
             </template>
@@ -293,7 +295,7 @@
       <!-- 广告图 -->
       <section class="ads-pictures">
         <div class="ad-img">
-          <img src="/index-ms/ad1.png" alt="">
+          <img src="/index-ms/bg1.jpg" alt="">
         </div>
       </section>
       <!-- 分类 -->
@@ -317,7 +319,7 @@
         </div>
         <div class="part3">
           <div class="ad-img">
-            <img src="/index-ms/ad2.png" alt="">
+            <img src="/index-ms/bg2.jpg" alt="">
           </div>
         </div>
         <div class="part4">
@@ -338,7 +340,7 @@
       <!-- 定制广告图 -->
       <section class="customized-ads-image">
         <div class="ad-img">
-          <img src="/index-ms/ad3.png" alt="">
+          <img src="/index-ms/bg3.jpg" alt="">
         </div>
         <div class="ad-dec">
           <p class="headline">{{ lang.headline4 }}</p>
@@ -704,7 +706,7 @@ export default {
           'learnMore': this.LANGUAGE.index.tip,
         },
         {
-          'url': '/index-ms/more3.png',
+          'url': '/index-ms/more3.jpg',
           'title': this.LANGUAGE.index.tip3,
           'dec': this.LANGUAGE.index.tip3To1,
           'learnMore': this.LANGUAGE.index.tip,
@@ -1269,20 +1271,23 @@ export default {
   height: 420px;
   // background-color: #f7e3dc;
   .swiper-item > img {
+    position: absolute;
     transform: translate(-50%, -50%);
     max-width: 100%;
     max-height: 100%;
-  }
-  .swiper-item > img:first-child {
-    position: absolute;
-    top: 25%;
+    top: 50%;
     left: 50%;
   }
-  .swiper-item > img:last-child {
-    position: absolute;
-    top: 74.8%;
-    left: 50%;
-  }
+  // .swiper-item > img:first-child {
+  //   position: absolute;
+  //   top: 25%;
+  //   left: 50%;
+  // }
+  // .swiper-item > img:last-child {
+  //   position: absolute;
+  //   top: 74.8%;
+  //   left: 50%;
+  // }
 }
 
 // 文字区域
@@ -1391,7 +1396,7 @@ export default {
   margin: 30px 20px;
   .part1{
     .headline{
-      font-size: 26px;
+      font-size: 22px;
       font-family: SimSun;
       color: #000000;
       text-align: center;
@@ -1402,7 +1407,7 @@ export default {
     position: relative;
     padding: 120px 0;
     .title{
-      font-size: 16px;
+      font-size: 12px;
       color: #000;
       font-family: SimSun;
       line-height: 35px;
@@ -1447,7 +1452,7 @@ export default {
     position: relative;
     padding: 120px 0;
     .title{
-      font-size: 16px;
+      font-size: 12px;
       color: #000;
       font-family: SimSun;
       line-height: 35px;
@@ -1492,7 +1497,7 @@ export default {
   .ad-dec{
     margin-bottom: 50px;
     .headline{
-      font-size: 26px;
+      font-size: 22px;
       color: #000;
       line-height: 60px;
       font-family: SimSun;

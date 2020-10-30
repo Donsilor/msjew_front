@@ -419,7 +419,7 @@ export default {
     }
     return {
       lang,
-      payWay: 6,
+      payWay: 0,
       answer: false,
       pay: false,
       isPay: false,
@@ -770,6 +770,10 @@ export default {
 
       let tradeType = ''
       let data = {}
+      if(pay == ''){
+        this.$errorMessage(this.$t(`${lang}.msg9`))
+        return 
+      }
       if(pay == 1){
         data ={
           orderId: this.$route.query.orderId,

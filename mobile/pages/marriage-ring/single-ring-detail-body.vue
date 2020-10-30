@@ -153,31 +153,87 @@
           }}
         </div>
         <div v-else>
-          <div
-            :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
-            @click="orderNow"
-          >
-            {{
-              inSale
-                ? canAddCart
-                  ? lang.buyNow
-                  : lang.noTotalStock
-                : lang.notInSale
-            }}
+          <div v-if="img">
+            <div class="box">
+              <div
+                :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+                @click="orderNow"
+              >
+                {{
+                  inSale
+                    ? canAddCart
+                      ? lang.buyNow
+                      : lang.noTotalStock
+                    : lang.notInSale
+                }}
+              </div>
+              <div
+                :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+                @click="addCart"
+              >
+                {{
+                  inSale
+                    ? canAddCart
+                      ? lang.addCart
+                      : lang.noTotalStock
+                    : lang.notInSale
+                }}
+              </div>
+            </div>
+            <div
+              v-show="img"
+              :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+              @click="VRTryOn"
+            >
+              {{
+                inSale
+                  ? canAddCart
+                    ? lang.vr
+                    : lang.noTotalStock
+                  : lang.notInSale
+              }}
+            </div>
           </div>
-          <div
-            :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
-            @click="addCart"
-          >
-            {{
-              inSale
-                ? canAddCart
-                  ? lang.addCart
-                  : lang.noTotalStock
-                : lang.notInSale
-            }}
+          <div v-else>
+            <div
+              :class="['btn-common', inSale && canAddCart ? 'btn-white' : 'btn-gray']"
+              @click="orderNow"
+            >
+              {{
+                inSale
+                  ? canAddCart
+                    ? lang.buyNow
+                    : lang.noTotalStock
+                  : lang.notInSale
+              }}
+            </div>
+            <div
+              :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+              @click="addCart"
+            >
+              {{
+                inSale
+                  ? canAddCart
+                    ? lang.addCart
+                    : lang.noTotalStock
+                  : lang.notInSale
+              }}
+            </div>
+
+            <div
+              v-show="img"
+              :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
+              @click="VRTryOn"
+            >
+              {{
+                inSale
+                  ? canAddCart
+                    ? lang.vr
+                    : lang.noTotalStock
+                  : lang.notInSale
+              }}
+            </div>
           </div>
-          
         </div>
       </div>
       <!-- <div class="wish-and-share">
@@ -191,7 +247,7 @@
           @click="setWish"
         />
         <div />
-        <i class="iconfont iconfb" @click="$shareFacelook()" />
+        <i class="iconfont iconfb" @click="$shareFacelook()" /> 
       </div> -->
       <div class="ring-details">
         <div class="details-title">
@@ -298,6 +354,9 @@
       
       <!-- 获取优惠券 -->
       <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
+      <!-- VR试戴 -->
+      <vr-tryOn v-show="ifShowVR" @closeVR="closeV()"  :goodName="this.goodInfo.goodsName" :showImg="img"></vr-tryOn>
+
       <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
     </div>
     <div v-else>
@@ -338,6 +397,7 @@ export default {
       ifShowCoupon: false,
       language: this.$store.state.language,
       activeTime:'',
+      ifShowVR: false,
       ifShowMore: false,
       detailNum: 4,
       ifShowPop: false
@@ -361,6 +421,9 @@ export default {
     inSale() {
       return this.goodInfo.goodsStatus === 2
     },
+    img(){
+      return this.goodInfo.arImage
+    },
     specsLength() {
       if(this.goodInfo && this.goodInfo.specs && this.goodInfo.specs.length > 4){
         return true
@@ -381,6 +444,10 @@ export default {
     closeCo() {
       this.ifShowCoupon = false
     },
+    // 关闭VR弹窗
+    closeV() {
+      this.ifShowVR = false
+    },
     // 获取优惠券
     getCoupon() {
       if(!this.$store.getters.hadLogin) {
@@ -389,6 +456,11 @@ export default {
       }else{
         this.ifShowCoupon = true
       }
+    },
+    VRTryOn(){
+      // this.baseUrl = this.$store.getters.baseUrl
+      // console.log("baseUrl",this.baseUrl)
+      this.ifShowVR = true
     },
     showMore(){
       this.ifShowMore = !this.ifShowMore
@@ -402,10 +474,20 @@ export default {
 </script>
 
 <style scoped lang="less">
+.box{
+  display: flex;
+  margin: 0 15px;
+  .btn-common{
+    width: 49%!important;
+  }
+}
 .engagementRings-component {
   .details-component(100%);
   .btn-white{
     border:none!important;
+  }
+  .btn-black{
+    background: #303030;
   }
 }
 .time {

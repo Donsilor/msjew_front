@@ -1388,7 +1388,8 @@
         "uploadPhotos": "上传图片",
         "Note3":"注：此货币是按照MORESHINE官网汇率作为参考标准.",
         "NotSupportPay":"当前支付方式，不支持USD支付，请返回上个页面切换货币或更换其它支付方式完成支付！",
-        "ScanCode":"请使用微信扫描二维码"
+        "ScanCode":"请使用微信扫描二维码",
+        "msg9": "请选择支付方式!"
     },
     "finishPay": {
         "PayPending1": "订单已经提交，系统正在处理中,请稍等。",
