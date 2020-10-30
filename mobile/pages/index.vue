@@ -295,7 +295,7 @@
       <!-- 广告图 -->
       <section class="ads-pictures">
         <div class="ad-img">
-          <img src="/index-ms/ad1.jpg" alt="">
+          <img src="/index-ms/bg1.jpg" alt="">
         </div>
       </section>
       <!-- 分类 -->
@@ -319,7 +319,7 @@
         </div>
         <div class="part3">
           <div class="ad-img">
-            <img src="/index-ms/ad2.jpg" alt="">
+            <img src="/index-ms/bg2.jpg" alt="">
           </div>
         </div>
         <div class="part4">
@@ -340,7 +340,7 @@
       <!-- 定制广告图 -->
       <section class="customized-ads-image">
         <div class="ad-img">
-          <img src="/index-ms/ad3.jpg" alt="">
+          <img src="/index-ms/bg3.jpg" alt="">
         </div>
         <div class="ad-dec">
           <p class="headline">{{ lang.headline4 }}</p>

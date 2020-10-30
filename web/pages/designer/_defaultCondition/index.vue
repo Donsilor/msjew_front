@@ -14,7 +14,7 @@ const conditionMaps = {
   all: {},
   necklaces: {
     typeId:4,
-    categoryId: 4
+    categoryId: [4,5]
   },
   pendants: {
     typeId:4,
@@ -30,7 +30,7 @@ const conditionMaps = {
   },
   bracelets: {
     typeId:4,
-    categoryId: 8
+    categoryId: [8,9]
   },
   bangles: {
     typeId:4,
@@ -48,6 +48,7 @@ const conditionMaps = {
     typeId:4,
     categoryId: 18
   },
+  
    //导航
 
   'necklace-pendant':{
@@ -60,7 +61,7 @@ const conditionMaps = {
   },
   'earrings-stud':{
     typeId:4,
-    categoryId:[6,7]
+    categoryId:[21]
   },
   'decoration-widgets':{
     typeId:4,

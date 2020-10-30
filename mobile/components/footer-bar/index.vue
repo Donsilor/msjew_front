@@ -139,6 +139,7 @@ export default {
   position: relative;
   width: 100%;
   background: #fff;
+  margin-top: 20px;
 }
 .slogan{
   border-top: 2px solid #d4e8ec;

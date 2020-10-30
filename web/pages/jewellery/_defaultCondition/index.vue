@@ -18,7 +18,7 @@ const conditionMaps = {
   // 项链
   necklaces: {
     typeId:4,
-    categoryId: 4
+    categoryId: [4,5]
   },
   // 吊坠
   pendants: {
@@ -38,7 +38,7 @@ const conditionMaps = {
   // 饰品-手链
   bracelets: {
     typeId:4,
-    categoryId: 8
+    categoryId: [8,9]
   },
   // 饰品-手镯
   bangles: {
@@ -64,7 +64,7 @@ const conditionMaps = {
   Earring: {
     typeId:4,
     // categoryId: [21]
-    categoryId: [6,21,22,23,24]
+    categoryId: [21]
   },
   // 耳饰-耳环
   Earrings: {
@@ -92,7 +92,7 @@ const conditionMaps = {
   },
   'earrings-stud':{
     typeId:4,
-    categoryId:[6,7]
+    categoryId:[21]
   },
   'decoration-widgets':{
     typeId:4,
@@ -252,7 +252,7 @@ const conditionMaps = {
   // 耳饰-系列
   'earring-letter-series': {
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     series:288
   },
 
@@ -314,27 +314,27 @@ const conditionMaps = {
   //耳饰-材质
   'earring-alloy':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     materialIndex : 0
   },
   'earring-925-silver':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     materialIndex : 1
   },
   'earring-9k-gold':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     materialIndex : 2
   },
   'earring-14k-gold':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     materialIndex : 3
   },
   'earring-18k-gold':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     materialIndex : 4
   },
 
@@ -455,12 +455,12 @@ const conditionMaps = {
   // 耳饰镶嵌方式
   'earring-group-setting':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     mosaic:275
   },
   'earring-single-drill':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     mosaic:276
   },
 
@@ -511,22 +511,22 @@ const conditionMaps = {
   // 耳饰风格
   'earring-Simple-and-stylish':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     style2:284
   },
   'earring-workplace-commute':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     style2:285
   },
   'earring-fun-with-personality':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     style2:286
   },
   'earring-Trend-classic':{
     typeId:4,
-    categoryId:[6],
+    categoryId:[21],
     style2:287
   }
 }

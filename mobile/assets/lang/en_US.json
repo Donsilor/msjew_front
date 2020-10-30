@@ -1193,6 +1193,7 @@
     "us-version": "US",
     "cmw": "You know the most suitable Product to express your love. Select from our series, like diamonds and styles to create your unique work.",
     "addCart": "ADD TO CART",
+    "vr":"VR Try-On",
     "noTotalStock": "NO STOCK",
     "notInSale": "SOLD OUT",
     "startDJ": "START CUSTOMIZING",
@@ -2406,5 +2407,18 @@
       "platform3": "Macao",
       "platform4": "Taiwan",
       "platform5": "Foreign"
+  },
+  "vr":{
+    "openHand":"Please open your palm first",
+    "photoTip":"Those who wear the ring need to take it off first",
+    "openCamera":"Open the camera for a try",
+    "changeStyle":"Exchange style",
+    "quit":"Exit AR",
+    "enterLong":"Long press the picture with your finger to save the image",
+    "again":"Remake",
+    "save":"Save",
+    "operating":"The ring can be rotated, moved and zoomed",
+    "load":"loading",
+    "Retry":"Please try again"
   }
 }
