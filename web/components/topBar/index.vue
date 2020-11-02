@@ -24,9 +24,9 @@
             <!--        <div class="date">24/7</div>-->
             <div class="row-flex align-item-center service">
               <div class="ms-logo">
-                <a href="https://www.bddco.cn/" target="_blank">
+                <!-- <a href="https://www.bddco.cn/" target="_blank">
                   <img src="/components/topBar/bdd-logo.png" />
-                </a>
+                </a> -->
               </div>
               <!-- <i class="iconfont iconphone"></i>
               <span v-if="this.$store.state.platform === 20">0755-25160872-8005</span>

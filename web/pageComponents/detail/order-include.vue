@@ -1,7 +1,7 @@
 <template>
   <section class="order-include">
     <div class="bg">
-      <img src="/common/pack.png" />
+      <img src="/common/pack.jpg" />
     </div>
     <div class="content">
       <h1>{{ $t(`${lang}.yourOrderIncludes`) }}</h1>
