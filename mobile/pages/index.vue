@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <!-- 美国站点 -->
-    <div v-if="platform == 31" class="us-page">
+    <div v-if="platform == 41" class="us-page"> 
       <section class="banner">
         <template v-if="banner.length > 1">
           <swiper :indicator="true" :auto="true" :duration="5000">
@@ -207,7 +207,7 @@
       </section>
     </div>
     <!-- 非美国站点 -->
-    <div v-if="platform == 11 || platform == 21 || platform == 41">
+    <div v-if="platform == 11 || platform == 21 || platform == 31">
       <!-- <tip-message></tip-message> -->
       <section class="ms-banner">
         <template v-if="banner.length > 1">
@@ -267,7 +267,7 @@
       <section class="hot-sale">
         <div>
           <p class="headline">Hot sale</p>
-          <p class="subtitle">{{ lang.headline2 }}</p>
+          <p class="subtitle" v-if="this.$store.state.language !== 'en_US'">{{ lang.headline2 }}</p>
         </div>
         <div class="swiper-box">
           <div class="img-box-more"> 
@@ -1393,8 +1393,9 @@ export default {
 
 // 产品分类区域
 .product-categories{
-  margin: 30px 20px;
+  // margin: 30px 20px;
   .part1{
+    margin: 30px 20px;
     .headline{
       font-size: 22px;
       font-family: SimSun;
@@ -1406,6 +1407,7 @@ export default {
     margin-top: 30px;
     position: relative;
     padding: 120px 0;
+    margin: 30px 15px;
     .title{
       font-size: 12px;
       color: #000;
@@ -1413,8 +1415,8 @@ export default {
       line-height: 35px;
     }
     .ring{
-      width: 160px;
-      height: 160px;
+      width: 165px;
+      height: 165px;
       position: absolute;
       top:0px;
       left:0px;
@@ -1451,6 +1453,7 @@ export default {
     margin-top: 30px;
     position: relative;
     padding: 120px 0;
+    margin: 30px 15px;
     .title{
       font-size: 12px;
       color: #000;
@@ -1458,8 +1461,8 @@ export default {
       line-height: 35px;
     }
     .bracelet{
-      width: 160px;
-      height: 160px;
+      width: 165px;
+      height: 165px;
       position: absolute;
       top:40px;
       left:0px;
@@ -1550,6 +1553,7 @@ export default {
       bottom: 5px;
     }
     .descrip{
+      min-height: 130px;
       padding: 20px 0;
       background-color: #f8f8f8;
       .tip1{

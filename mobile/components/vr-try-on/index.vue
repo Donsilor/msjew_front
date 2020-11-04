@@ -326,34 +326,36 @@ export default {
                 document.getElementById('fileToUpload2').addEventListener('change', function (e) {
                     toSelFileImage(this);
                     $('.load').show();
-                    $('#showload').show();
-                    $('#retry').hide(); 
+                    $('#showload').show();//加载中开启
+                    $('#retry').hide(); //请重试关闭
                     setTimeout(function(){
-                        $('#showload').hide();
-                        $('#retry').show();
+                        $('#showload').hide();//加载中关闭
+                        $('#retry').show();//请重试开启
                     },5000);
                 }, false);
     
                 function toSelFileImage(obj) {
                     // tryonStat('b');
-                    $('.load').show();            
-                    setTimeout(function(){
-                        $('#showload').hide();
-                        $('#retry').show();
-                    },5000);
+                    $('.load').show(); 
+                    $('#showload').show();
+                    // setTimeout(function(){
+                    //     $('#showload').hide();//加载中关闭
+                    //     $('#retry').show();//请重试开启
+                    // },5000);
                     
                     selectFileImage(obj, { w: 0, h: 0 }, null, function (base64) { 
                         trywearControl.init('#imgid', '#imgboxid', '#imgbgdivid');
                         if (!$('#tryontips').is(':hidden')) {
                             $('#tryontips').css({top: (($(window).height() - 45) / 2)+'px'});
                         }
-                        $('#showload').show();
-                        $('#retry').hide(); 
                         $('#mhanddiv').show();
                         $('#yourhand').prop('src', base64);
                         $('#handdiv').hide();
+                        $('#showload').hide();//加载中开启
+                        $('#retry').hide(); //请重试关闭
                         $('.load').hide();
-                    }); 
+                    });          
+                    
                 };
                 
     
@@ -383,8 +385,8 @@ export default {
                 });
     
                 $('#mergeImg').click(function(){
-                    $('#retry').hide(); 
-                    $('#showload').show();
+                    $('#retry').hide(); //请重试关闭
+                    $('#showload').show();//加载中开启
                     $('.load').show();            
                     setTimeout(function(){
                         // $('#showload').hide();

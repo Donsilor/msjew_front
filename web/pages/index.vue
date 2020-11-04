@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <!-- 美国站点 -->
-    <div v-if="platform == 30" class="us-page">
+    <div v-if="platform == 40" class="us-page">
       <section class="banner">
         <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'">
           <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
@@ -190,12 +190,18 @@
       </section>
     </div>
 
-    <!-- 非美国站点 -->
-    <div v-if="platform == 10 || platform == 20 || platform == 40" class="ms-page">
+    <!-- 大陆站点 -->
+    <div v-if="platform == 20 || platform == 10 || platform == 30" class="ms-page">
       <section class="banner">
         <div :height="bannerHeight + 'px'" class="banner-box">
           <div><img style="width:100%;" class="banner-img" src="../static/index/banner1.jpg" alt=""></div>
-          <div><img style="width:100%;margin-top: -4px" class="banner-img" src="../static/index/banner2.jpg" alt=""></div>
+          <div class="img-center">
+            <img style="width:100%;margin-top: -4px" class="banner-img" src="../static/index/banner2.jpg" alt="">
+            <div class="info">
+              <p class="p1">{{$t(`${lang}.headline1`)}}</p>
+              <p class="p2">{{$t(`${lang}.subtitle1`)}}</p>
+            </div>
+          </div>
           <div><img style="width:100%;margin-top: -3px" class="banner-img" src="../static/index/banner3.jpg" alt=""></div>
         </div>
         <!-- <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
@@ -237,15 +243,15 @@
           </div>
         </el-carousel-item> -->
       <!-- </el-carousel> -->
-    </section>
+      </section>
 
-    <!--    首頁商品推薦模塊-->
-     <div class="bg-color"> 
+      <!--    首頁商品推薦模塊-->
+      <div class="bg-color"> 
         <section class="design">
           <p class="section-title-en">
             Hot sale
           </p>
-          <p class="section-title-cn">
+          <p class="section-title-cn" v-if="this.$store.state.language !== 'en_US'">
             {{ $t(`${lang}.hotSale`) }}
           </p>
 
@@ -274,108 +280,410 @@
 
       </div>
 
-    <section class="diamond-gia">
-      <div class="bg">
-        <img src="/index-ms/ad1.jpg" />
-        <img src="/index-ms/ad2.jpg" />
-        <img src="/index-ms/ad3.jpg" />
-      </div>
-    </section>
-
-    <section class="jewellery">
-      <div class="section-content">
-        <ul class="categories">
-          <li class="item sort1">
-            <img src="/index-ms/sort1.png" alt="">
-            <div class="category">
-              <div class="bg">
-                <nuxt-link to="/wedding-rings/all">
-                  <img src="/index-ms/rings.png" />
-                </nuxt-link>
-              </div>
+      <section class="diamond-gia">
+        <div class="bg">
+          <div><img src="/index-ms/ad1.jpg" /></div>
+          <div class="img-center">
+            <img src="/index-ms/ad2.jpg" />
+            <div class="info">
+              <p class="p1">{{$t(`${lang}.headline3`)}}</p>
             </div>
-          </li>
-          <li class="item sort2">
-            <img style="margin-top:-3px;" src="/index-ms/sort2.jpg" alt="">
-            <div class="category">
-              <div class="bg">
-                <nuxt-link to="/jewellery/necklaces">
-                  <img src="/index-ms/necklace.png" />
-                </nuxt-link>
-              </div>
-            </div>
-          </li>
-          <li class="item sort3">
-           <img style="margin-top:-3px;" src="/index-ms/sort3.jpg" alt="">
-             
-          </li>
-           <li class="item">
-           <img style="margin-top:-3px;" src="/index-ms/sort4.jpg" alt="">
-            <div class="category">
-              <div class="bg">
-                <nuxt-link to="/jewellery/earrings-stud">
-                  <img src="/index-ms/earring.png" />
-                </nuxt-link>
-              </div>
-            </div>
-          </li>
-           <li class="item">
-           <img style="margin-top:-3px;" src="/index-ms/sort5.jpg" alt="">
-            <div class="category">
-              <div class="bg">
-                <nuxt-link to="/jewellery/bracelets">
-                  <img src="/index-ms/bracelet.png" />
-                </nuxt-link>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="made-gia">
-      <div class="bg">
-        <img src="/index-ms/made1.jpg" />
-        <img src="/index-ms/made2.jpg" />
-        <img src="/index-ms/made3.jpg" />
-      </div>
-    </section>
-
-    <section class="waiting-you">
-      <div class="section-content">
-        <div class="item left-item">
-          <div class="picture">
-            <img src="/index-ms/more1.png" />
           </div>
-          <div class="content">
-            <p class="title1">{{$t(`${lang}.tip1`)}}</p>
-            <p class="title2">{{$t(`${lang}.tip1To1`)}}</p>
-            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
+          <div><img src="/index-ms/ad3.jpg" /></div>
+        </div>
+      </section>
+
+      <section class="jewellery">
+        <div class="section-content">
+          <ul class="categories">
+            <li class="item sort1">
+              <img src="/index-ms/sort1.png" alt="">
+              <div class="category">
+                <div class="bg">
+                  <nuxt-link to="/wedding-rings/all">
+                    <img src="/index-ms/rings.jpg" />
+                  </nuxt-link>
+                </div>
+                <div class="info">
+                  <p class="p1">{{$t(`${lang}.ringTitle`)}}</p>
+                </div>
+              </div>
+            </li>
+            <li class="item sort2">
+              <img style="margin-top:-3px;" src="/index-ms/sort2.jpg" alt="">
+              <div class="category">
+                <div class="bg">
+                  <nuxt-link to="/jewellery/necklaces">
+                    <img src="/index-ms/necklace.jpg" />
+                  </nuxt-link>
+                </div>
+                <div class="info">
+                  <p class="p1">{{$t(`${lang}.necklaceTitle`)}}</p>
+                </div>
+              </div>
+            </li>
+            <li class="item sort3">
+            <img style="margin-top:-3px;" src="/index-ms/sort3.jpg" alt="">
+              
+            </li>
+            <li class="item">
+            <img style="margin-top:-3px;" src="/index-ms/sort4.jpg" alt="">
+              <div class="category">
+                <div class="bg">
+                  <nuxt-link to="/jewellery/earrings-stud">
+                    <img src="/index-ms/earring.jpg" />
+                  </nuxt-link>
+                </div>
+                <div class="info">
+                  <p class="p1">{{$t(`${lang}.earringTitle`)}}</p>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+            <img style="margin-top:-3px;" src="/index-ms/sort5.jpg" alt="">
+              <div class="category">
+                <div class="bg">
+                  <nuxt-link to="/jewellery/bracelets">
+                    <img src="/index-ms/bracelet.jpg" />
+                  </nuxt-link>
+                </div>
+                <div class="info">
+                  <p class="p1">{{$t(`${lang}.braceletTitle`)}}</p>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="made-gia">
+        <div class="bg">
+          <div><img src="/index-ms/made1.jpg" /></div>
+          <div class="img-center">
+            <img src="/index-ms/made2.jpg" />
+            <div class="info">
+              <p class="p1">{{$t(`${lang}.headline4`)}}</p>
+              <p class="p2">{{$t(`${lang}.subtitle2`)}}</p>
+              <p class="p2">{{$t(`${lang}.subtitle3`)}}</p>
+            </div>
+          </div>
+          <div><img src="/index-ms/made3.jpg" /></div>
+        </div>
+      </section>
+
+      <section class="waiting-you">
+        <div class="section-content">
+          <div class="item left-item">
+            <div class="picture">
+              <img src="/index-ms/more1.png" />
+            </div>
+            <div class="content">
+              <p class="title1">{{$t(`${lang}.tip1`)}}</p>
+              <p class="title2">{{$t(`${lang}.tip1To1`)}}</p>
+              <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
+            </div>
+          </div>
+          <div class="item center-item">
+            <div class="picture">
+              <img src="/index-ms/more2.png" />
+            </div>
+            <div class="content">
+              <p class="title1">{{$t(`${lang}.tip2`)}}</p>
+              <p class="title2">{{$t(`${lang}.tip2To1`)}}</p>
+              <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
+            </div>
+          </div>
+          <div class="item right-item">
+            <div class="picture">
+              <img src="/index-ms/more3.png" />
+            </div>
+            <div class="content">
+              <p class="title1">{{$t(`${lang}.tip3`)}}</p>
+              <p class="title2">{{$t(`${lang}.tip3To1`)}}</p>
+              <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
+            </div>
           </div>
         </div>
-        <div class="item center-item">
-          <div class="picture">
-            <img src="/index-ms/more2.png" />
+      </section>
+    </div>
+
+    <!-- 香港站点 -->
+    <div v-if="platform == 40" class="hk-page">
+      <section class="banner">
+        <el-carousel trigger="click" :autoplay="true" :height="bannerHeight + 'px'" class="banner-box">
+          <el-carousel-item v-for="(item, index) in banner" :key="index" class="banner-item">
+            <a :href="item.addres || ''">
+              <img class="banner-img" :src="item.image" alt="">
+            </a>
+          </el-carousel-item>
+
+        <!-- <el-carousel-item v-for="(item, index) in banner" :key="index">
+                   有链接地址，且是外部链接
+          <a
+            v-if="item.openType === 1 && item.url"
+            :href="item.url"
+            target="_blank"
+          >
+            <div class="banner-item">
+              <img :src="item.image" />
+            </div>
+          </a>
+                   有链接地址，且不是外部链接
+          <nuxt-link
+            v-else-if="item.url && !item.isOutUrl"
+            :to="{ path: item.url }"
+          >
+            <div class="banner-item">
+              <img :src="item.image" />
+            </div>
+          </nuxt-link>
+                   有链接地址，且是外部链接
+          <a v-else-if="item.url && item.isOutUrl" :href="item.url">
+            <div class="banner-item">
+              <img :src="item.image" />
+            </div>
+          </a>
+                   没有链接地址
+          <div v-else-if="!item.url" class="banner-item">
+            <img :src="item.image" />
           </div>
-          <div class="content">
-            <p class="title1">{{$t(`${lang}.tip2`)}}</p>
-            <p class="title2">{{$t(`${lang}.tip2To1`)}}</p>
-            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
+        </el-carousel-item> -->
+      </el-carousel>
+      </section>
+      <section class="design">
+        <h1 class="section-title">
+          {{ $t(`${lang}.designYourEngagementRing`) }}
+        </h1>
+        <h2 class="section-sub-title">{{ $t(`${lang}.startFromDiamond`) }}</h2>
+        <interactive></interactive>
+      </section>
+      <section class="recommend-category">
+        <div class="categories">
+          <div v-for="(category, index) in recommendCategories" :key="index" class="category-item">
+            <nuxt-link :to="category.to">
+              <div class="bg">
+                <img :src="category.bgImage" />
+                <div class="hover-cover"></div>
+              </div>
+              <div class="info">
+                <h1 class="title">{{ category.title }}</h1>
+                <h2 class="sub-title">{{ category.subTitle }}</h2>
+                <div class="info-border-line border-t"></div>
+                <div class="info-border-line border-r"></div>
+                <div class="info-border-line border-b"></div>
+                <div class="info-border-line border-l"></div>
+              </div>
+            </nuxt-link>
           </div>
         </div>
-        <div class="item right-item">
-          <div class="picture">
-            <img src="/index-ms/more3.png" />
+      </section>
+
+      <!--    首頁商品推薦模塊-->
+      <section class="hot">
+        <h1 class="section-title">
+          {{ hotProductInfo.title }}
+        </h1>
+        <div class="section-title-line"></div>
+        <div class="hot-list" :style="{ height: hotHeight + 'px', padding: hotPadding + 'px' + ' 0' }">
+          <swiper ref="hot-product-list" :item-width="20" :scale="true" :scale-multiple="1.2" :indicator="false" @change="changeActiveHotProduct">
+            <div v-for="(product, n) in hotProductInfo.products" :key="n" class="product-item">
+              <a v-if="product.showType === 1" :href="routeDataToUrl(product.to)" target="_blank">
+                <div class="product-image">
+                  <img class="product-image" :src="product.goodsImages[0]" />
+                </div>
+              </a>
+              <nuxt-link v-else :to="product.to">
+                <div class="product-image">
+                  <img class="product-image" :src="product.goodsImages[0]" />
+                </div>
+              </nuxt-link>
+            </div>
+          </swiper>
+        </div>
+        <div class="hot-list-bar">
+          <div class="left-button" @click="nextActiveHotProduct(false)">
+            <img src="/index/arrow-left.png" />
           </div>
-          <div class="content">
-            <p class="title1">{{$t(`${lang}.tip3`)}}</p>
-            <p class="title2">{{$t(`${lang}.tip3To1`)}}</p>
-            <!-- <p class="title3">{{$t(`${lang}.tip`)}}</p> -->
+          <div class="active-product-info">
+            <h1 class="title ow-h1">{{ activeHotProductInfo.goodsName }}</h1>
+          </div>
+          <div class="right-button" @click="nextActiveHotProduct(true)">
+            <img src="/index/arrow-right.png" />
           </div>
         </div>
-      </div>
-    </section>
-  </div>
+      </section>
+      <section class="diamond-gia">
+        <div class="bg">
+          <img src="/index/middle-gia.png" />
+        </div>
+        <div class="content">
+          <h1 class="title">
+            {{ $t(`${lang}.haveProfessionalCertificate`) }}
+          </h1>
+          <p class="description">
+            {{ $t(`${lang}.professionalCertificateInfo`) }}
+          </p>
+          <div class="button-group">
+            <nuxt-link :to="{ path: '/education/diamonds/certification' }">
+              <button class="check-now">
+                {{ $t(`${lang}.startYourDiamondCheck`) }}
+              </button>
+            </nuxt-link>
+          </div>
+        </div>
+      </section>
+
+      <!--    钻石类型-->
+      <section class="diamond">
+        <h1 class="section-title">
+          {{ $t(`${lang}.chooseYourDiamond`) }}
+        </h1>
+        <div class="section-title-line"></div>
+        <h2 class="section-sub-title">
+          {{ $t(`${lang}.360DiamondInfo`) }}
+        </h2>
+        <div class="diamond-list" :style="{ height: hotHeight + 'px', padding: diamondsPadding + 'px' + ' 0' }">
+          <swiper ref="diamond-list" :item-width="20" :scale="true" :scale-multiple="1.5" :indicator="false" @change="changeActiveDiamond">
+            <div v-for="(diamond, n) in diamonds" :key="n" class="product-item">
+              <nuxt-link :to="diamond.to">
+                <div class="product-image">
+                  <img class="product-image" :src="diamond.img" />
+                </div>
+              </nuxt-link>
+            </div>
+          </swiper>
+        </div>
+        <div class="diamond-list-bar">
+          <div class="left-button" @click="nextActiveDiamond(false)">
+            <img src="/index/arrow-left.png" />
+          </div>
+          <div class="active-product-info">
+            <h1 class="title ow-h1">{{ activeDiamondInfo.name }}</h1>
+            <h2 class="sub-title ow-h1">{{ activeDiamondInfo.desc }}</h2>
+          </div>
+          <div class="right-button" @click="nextActiveDiamond(true)">
+            <img src="/index/arrow-right.png" />
+          </div>
+        </div>
+      </section>
+      <section class="jewellery">
+        <h1 class="jewellery-section-top">
+          {{ $t(`${lang}.findYourSparkle`) }}
+        </h1>
+        <div class="section-content">
+          <h1 class="section-title">
+            {{ $t(`${lang}.jewelry`) }}
+          </h1>
+          <div class="section-title-line"></div>
+          <h2 class="section-sub-title">
+            {{ $t(`${lang}.goodForYouEverywhere`) }}
+          </h2>
+          <ul class="categories">
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.eternityRingsSlow`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-1.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.eternalRing`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.eternityRingsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: '/engagement-rings/all' }">
+                      <button>{{ $t(`${lang}.explore`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.menWedding`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-2.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.menWeddingRings`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.menWeddingRingsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: '/wedding-rings/mens-classic' }">
+                      <button>{{ $t(`${lang}.discover`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="item">
+              <div class="bg-text">
+                {{ $t(`${lang}.diamondStuds`) }}
+              </div>
+              <div class="category">
+                <div class="bg">
+                  <img src="/index/jewelry-3.png" />
+                </div>
+                <div class="info">
+                  <h3 class="name">{{ $t(`${lang}.diamondStudEarrings`) }}</h3>
+                  <p class="desc">{{ $t(`${lang}.diamondStudsInfo`) }}</p>
+                  <div class="button-group">
+                    <nuxt-link :to="{ path: 'jewellery/ear-stud' }">
+                      <button>{{ $t(`${lang}.browse`) }}</button>
+                    </nuxt-link>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+      <section class="waiting-you">
+        <h1 class="section-title">
+          {{ $t(`${lang}.yourDiamondWaiting`) }}
+        </h1>
+        <div class="section-title-line"></div>
+        <div class="section-content">
+          <div class="item left-item">
+            <div class="picture">
+              <img src="/index/shop-left.png" />
+            </div>
+            <div class="content">
+              <h2 class="sub-title">{{ $t(`${lang}.understand`) }}</h2>
+              <h1 class="title">{{ $t(`${lang}.brandStory`) }}</h1>
+              <p class="desc">
+                {{ $t(`${lang}.witnessContentFirstLine`) }}<br />
+                {{ $t(`${lang}.witnessContentSecondLine`) }}<br />
+                {{ $t(`${lang}.witnessContentThirdLine`) }}
+              </p>
+              <div class="button-group">
+                <nuxt-link :to="{ path: '/policies/quality-value' }">
+                  <button>{{ $t(`${lang}.scheduleAppointment`) }}</button>
+                </nuxt-link>
+              </div>
+            </div>
+          </div>
+          <div class="item right-item">
+            <div class="content">
+              <h2 class="sub-title">{{ $t(`${lang}.expertLevel`) }}</h2>
+              <h1 class="title">{{ $t(`${lang}.customerService`) }}</h1>
+              <p class="desc">
+                {{ $t(`${lang}.customerServiceInfo`) }}
+              </p>
+              <div class="button-group">
+                <nuxt-link :to="{ path: '/contact-us' }">
+                  <button>{{ $t(`${lang}.contactUs`) }}</button>
+                </nuxt-link>
+              </div>
+            </div>
+            <div class="picture">
+              <img src="/index/shop-right.png" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -1022,828 +1330,671 @@ export default {
 </script>
 
 <style scoped lang="less">
-section {
-  .section-title {
-    position: relative;
-    font-size: 30px;
-    font-weight: 400;
-    /*font-weight: bold;*/
-    color: rgba(51, 51, 51, 1);
-    text-align: center;
-    padding: 30px 0;
-    z-index: 2;
-  }
-  .section-sub-title {
-    position: relative;
-    font-size: 20px;
-    font-weight: bold;
-    color: rgba(102, 102, 102, 1);
-    text-align: center;
-    z-index: 2;
-  }
-  .section-title-line {
-    position: relative;
-    width: 100px;
-    height: 1px;
-    margin: 0 auto;
-    background-color: #999999;
-    z-index: 2;
-  }
-}
-.el-carousel--horizontal {
-  overflow: hidden;
-}
-.banner {
-  max-width: 1920px;
-  min-width: 1200px;
-  margin: 0 auto;
-
-  overflow-x: hidden;
-  .banner-item {
-    width: 100%;
-    height: 100%;
-    line-height: 0;
-    font-size: 0;
-    overflow: hidden;
-
-    .banner-img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: auto;
-      height: 100%;
+// 香港站点
+.hk-page{
+  section {
+    .section-title {
+      position: relative;
+      font-size: 30px;
+      font-weight: 400;
+      /*font-weight: bold;*/
+      color: rgba(51, 51, 51, 1);
+      text-align: center;
+      padding: 30px 0;
+      z-index: 2;
+    }
+    .section-sub-title {
+      position: relative;
+      font-size: 20px;
+      font-weight: bold;
+      color: rgba(102, 102, 102, 1);
+      text-align: center;
+      z-index: 2;
+    }
+    .section-title-line {
+      position: relative;
+      width: 100px;
+      height: 1px;
+      margin: 0 auto;
+      background-color: #999999;
+      z-index: 2;
     }
   }
-}
-
-.design {
-  padding-top: 87px;
-  background: rgba(255, 252, 247, 1);
-  overflow-x: hidden;
-
-  .section-title {
-    font-size: 36px;
-    font-weight: 400;
-    color: #666666;
+  .el-carousel--horizontal {
+    overflow: hidden;
   }
-
-  .section-sub-title {
-    font-size: 14px;
-    font-weight: 400;
-    color: #666666;
-  }
-}
-
-.recommend-category {
-  width: 100%;
-  padding: 56px 0 59px 0;
-  background: #ffffff;
-  overflow-x: hidden;
-
-  .categories {
-    width: 80%;
+  .banner {
+    max-width: 1920px;
+    min-width: 1200px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-
-    .category-item {
-      flex-grow: 1;
-      flex-shrink: 1;
-      position: relative;
-      margin-right: 30px;
-
-      &:nth-last-of-type(1) {
-        margin-right: 0;
-      }
-
-      .bg {
-        position: relative;
-        font-size: 0;
-        line-height: 0;
-
-        img {
-          width: 100%;
-        }
-        .hover-cover {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-color: #000000;
-          opacity: 0;
-          transition: opacity 0.3s linear;
-        }
-      }
-      .info {
+  
+    overflow-x: hidden;
+    .banner-item {
+      width: 100%;
+      height: 100%;
+      line-height: 0;
+      font-size: 0;
+      overflow: hidden;
+  
+      .banner-img {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: 90%;
-        height: 37%;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: center;
-
-        .title {
-          font-size: 48px;
-          font-weight: bold;
-          color: #ffffff;
-          text-align: center;
-          cursor: pointer;
-        }
-        .sub-title {
-          font-size: 48px;
-          font-weight: bold;
-          color: #ffffff;
-          text-align: center;
-          cursor: pointer;
-        }
-        .info-border-line {
-          position: absolute;
-          background: #ffffff;
-          transition: all 0.3s ease-in;
-        }
-        .border-t {
-          top: 0;
-          right: 0;
-          width: 0;
-          height: 1px;
-        }
-        .border-r {
-          bottom: 0;
-          right: 0;
-          width: 1px;
-          height: 0;
-        }
-        .border-b {
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 1px;
-        }
-        .border-l {
-          top: 0;
-          left: 0;
-          width: 1px;
-          height: 0;
-        }
+        width: auto;
+        height: 100%;
       }
-
-      &:hover {
+    }
+  }
+  
+  .design {
+    padding-top: 87px;
+    background: rgba(255, 252, 247, 1);
+    overflow-x: hidden;
+  
+    .section-title {
+      font-size: 36px;
+      font-weight: 400;
+      color: #666666;
+    }
+  
+    .section-sub-title {
+      font-size: 14px;
+      font-weight: 400;
+      color: #666666;
+    }
+  }
+  
+  .recommend-category {
+    width: 100%;
+    padding: 56px 0 59px 0;
+    background: #ffffff;
+    overflow-x: hidden;
+  
+    .categories {
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  
+      .category-item {
+        flex-grow: 1;
+        flex-shrink: 1;
+        position: relative;
+        margin-right: 30px;
+  
+        &:nth-last-of-type(1) {
+          margin-right: 0;
+        }
+  
         .bg {
+          position: relative;
+          font-size: 0;
+          line-height: 0;
+  
+          img {
+            width: 100%;
+          }
           .hover-cover {
-            opacity: 0.18;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            opacity: 0;
+            transition: opacity 0.3s linear;
           }
         }
         .info {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 90%;
+          height: 37%;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          justify-content: center;
+  
+          .title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+          }
+          .sub-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffffff;
+            text-align: center;
+            cursor: pointer;
+          }
+          .info-border-line {
+            position: absolute;
+            background: #ffffff;
+            transition: all 0.3s ease-in;
+          }
           .border-t {
-            width: 100%;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 1px;
           }
           .border-r {
-            height: 100%;
+            bottom: 0;
+            right: 0;
+            width: 1px;
+            height: 0;
           }
           .border-b {
-            width: 100%;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
           }
           .border-l {
-            height: 100%;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 0;
           }
         }
-      }
-    }
-  }
-}
-
-.hot {
-  // padding-top: 53px;
-  width: 80%;
-  margin: 0 auto;
-  // background-color: #fbf8f3;
-  overflow-x: hidden;
-  position: relative;
-
-  .hot-list {
-    width: 100%;
-    background-color: #ffffff;
-
-    .product-item {
-      height: 100%;
-      .product-image {
-        height: 100%;
-        font-size: 0;
-        line-height: 0;
-        position: relative;
-        overflow: hidden;
-
-        .product-image {
-          position: absolute;
-          width: 100%;
-          height: auto;
-          top: 50%;
-          left: 0;
-          transform: translateY(-50%);
-        }
-      }
-    }
-  }
-  .hot-list-bar {
-    position: absolute;
-    top: 0;
-    left: -5%;
-    width: 110%;
-    height: 100%;
-    z-index: -1;
-    box-sizing: border-box;
-    .arrow{
-      font-size: 30px;
-    }
-
-    .left-button{
-      position: absolute;
-      left: 0;
-    }
-    .right-button{
-      position: absolute;
-      right: 0;
-      top:117px
-    }
-    // .left-button,
-    // .right-button {
-    //   font-size: 0;
-    //   line-height: 0;
-    //   cursor: pointer;
-    //   img {
-    //     width: 64px;
-    //   }
-    // }
-
-    .active-product-info {
-      margin: 0 20px;
-      width: 473px;
-
-      .title {
-        font-size: 24px;
-        font-weight: 400;
-        color: #333333;
-        text-align: center;
-      }
-    }
-  }
-}
-.diamond-gia {
-  overflow-x: hidden;
-  position: relative;
-
-  .bg {
-    font-size: 0;
-    line-height: 0;
-
-    img {
-      width: 100%;
-    }
-  }
-
-  .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 33%;
-    transform: translate(0, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-
-    .title {
-      flex-grow: 93;
-      margin-bottom: 50px;
-      font-size: 36px;
-      font-weight: 400;
-      color: #000000;
-    }
-    .description {
-      flex-grow: 258;
-      margin-bottom: 40px;
-      font-size: 16px;
-      font-weight: 400;
-      color: rgba(51, 51, 51, 1);
-      line-height: 30px;
-    }
-    .button-group {
-      flex-grow: 43;
-      .check-now {
-        width: 361px;
-        height: 43px;
-        font-size: 14px;
-        font-weight: 400;
-        color: #ffffff;
-        background: rgba(207, 195, 189, 1);
-        cursor: pointer;
-      }
-    }
-  }
-}
-
-.made-gia {
-  overflow-x: hidden;
-  position: relative;
-  margin-top: 50px;
-
-  .bg {
-    font-size: 0;
-    line-height: 0;
-
-    img {
-      width: 100%;
-    }
-  }
-
-  .content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 33%;
-    transform: translate(0, -50%);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
-
-    .title {
-      flex-grow: 93;
-      margin-bottom: 50px;
-      font-size: 36px;
-      font-weight: 400;
-      color: #000000;
-    }
-    .description {
-      flex-grow: 258;
-      margin-bottom: 40px;
-      font-size: 16px;
-      font-weight: 400;
-      color: rgba(51, 51, 51, 1);
-      line-height: 30px;
-    }
-    .button-group {
-      flex-grow: 43;
-      .check-now {
-        width: 361px;
-        height: 43px;
-        font-size: 14px;
-        font-weight: 400;
-        color: #ffffff;
-        background: rgba(207, 195, 189, 1);
-        cursor: pointer;
-      }
-    }
-  }
-}
-
-.diamond {
-  width: 80%;
-  margin: 0 auto;
-  padding: 40px 0 60px;
-  background-color: #ffffff;
-  overflow-x: hidden;
-
-  .section-title-line {
-    margin-bottom: 20px;
-  }
-
-  .diamond-list {
-    width: 100%;
-    box-sizing: content-box;
-    background-color: #ffffff;
-
-    .product-item {
-      height: 100%;
-      .product-image {
-        height: 100%;
-        font-size: 0;
-        line-height: 0;
-        position: relative;
-        overflow: hidden;
-
-        .product-image {
-          position: absolute;
-          width: 100%;
-          height: auto;
-          top: 50%;
-          left: 0;
-          transform: translateY(-50%);
-        }
-      }
-    }
-  }
-  .diamond-list-bar {
-    background-color: #ffffff;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    .left-button,
-    .right-button {
-      font-size: 0;
-      line-height: 0;
-      cursor: pointer;
-      img {
-        width: 64px;
-      }
-    }
-
-    .active-product-info {
-      margin: 0 20px;
-      width: 473px;
-
-      .title {
-        margin-bottom: 10px;
-        font-size: 24px;
-        font-weight: 400;
-        color: #333333;
-        text-align: center;
-      }
-      .sub-title {
-        font-size: 18px;
-        font-weight: 400;
-        color: #333333;
-        text-align: center;
-      }
-    }
-  }
-}
-
-.jewellery {
-  overflow-x: hidden;
-
-  .jewellery-section-top {
-    height: 172px;
-    font-size: 180px;
-    font-weight: bold;
-    color: #fbf8f3;
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .section-content {
-    margin-top: -37px;
-    padding-top: 92px;
-    padding-bottom: 105px;
-    background-color: #fbf8f3;
-
-    .section-title {
-      margin-bottom: 20px;
-    }
-    .section-title-line {
-      margin-bottom: 20px;
-    }
-    .section-sub-title {
-      width: 550px;
-      margin: auto;
-      padding-bottom: 130px;
-      font-size: 18px;
-      font-weight: 400;
-      color: #333333;
-      line-height: 28px;
-    }
-    .categories {
-      list-style: none;
-
-      .item {
-        position: relative;
-
-        .bg-text {
-          position: absolute;
-          font-size: 130px;
-          font-weight: 400;
-          font-family: SimSun;
-          color: #f4eeea;
-          white-space: nowrap;
-          line-height: 1;
-        }
-        .category {
-          position: relative;
-
+  
+        &:hover {
           .bg {
-            width: 100%;
-            font-size: 0;
-            line-height: 0;
-
-            img {
+            .hover-cover {
+              opacity: 0.18;
+            }
+          }
+          .info {
+            .border-t {
               width: 100%;
             }
-          }
-
-          .info {
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
-            box-sizing: border-box;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 7.6% 7.2% 3.8% 12.4%;
-
-            .name {
-              font-size: 24px;
-              font-weight: 400;
-              color: #333333;
+            .border-r {
+              height: 100%;
             }
-            .desc {
-              font-size: 14px;
-              font-weight: 400;
-              color: #333333;
-              line-height: 29px;
+            .border-b {
+              width: 100%;
             }
-            .button-group {
-              button {
-                height: 42px;
-                padding: 0 20px;
-                font-size: 16px;
-                font-weight: bold;
-                color: #ffffff;
-                background: #d4bfb5;
-                cursor: pointer;
-              }
-            }
-          }
-        }
-
-        &:nth-of-type(1) {
-          .bg-text {
-            left: 0;
-            bottom: 23.3%;
-          }
-          .category {
-            width: 35.2%;
-            margin-left: 20.3%;
-
-            .info {
-              /*top: 10.2%;*/
-              left: -28.6%;
-              width: 65.2%;
-              /*height: 75.7%;*/
-
-              .name {
-                margin-bottom: 9%;
-              }
-              .desc {
-                margin-bottom: 26.1%;
-              }
-            }
-          }
-        }
-        &:nth-of-type(2) {
-          .bg-text {
-            left: 64.6%;
-            bottom: -15.2%;
-          }
-          .category {
-            width: 34.1%;
-            margin-left: 55.5%;
-
-            .info {
-              /*top: 10.2%;*/
-              left: -28.6%;
-              width: 65.2%;
-              /*height: 75.7%;*/
-
-              .name {
-                margin-bottom: 9%;
-              }
-              .desc {
-                margin-bottom: 26.1%;
-              }
-            }
-          }
-        }
-        &:nth-of-type(3) {
-          .bg-text {
-            left: 3.3%;
-            bottom: 0;
-          }
-          .category {
-            width: 35.2%;
-            margin-left: 20.3%;
-
-            .info {
-              /*top: 10.2%;*/
-              left: -28.6%;
-              width: 65.2%;
-              /*height: 75.7%;*/
-
-              .name {
-                margin-bottom: 9%;
-              }
-              .desc {
-                margin-bottom: 26.1%;
-              }
+            .border-l {
+              height: 100%;
             }
           }
         }
       }
     }
   }
-}
-
-.waiting-you {
-  padding: 140px 0 60px 0;
-  min-width: 1200px;
-  max-width: 1366px;
-  margin: 0 auto;
-
-  .section-title-line {
-    margin-bottom: 76px;
-  }
-  .section-content {
-    min-width: 1360px;
-    max-width: 1550px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-
-    .item {
-      width: 48%;
-      margin-right: 30px;
-      // display: flex;
-      // flex-direction: row;
-      // align-items: center;
-
-      &:nth-last-of-type(1) {
-        margin-right: 0;
-      }
-
-      .picture {
-        flex-grow: 0;
-        flex-shrink: 0;
-        width: 100%;
-        // height: 100%;
-        font-size: 0;
-        line-height: 0;
-
-        img {
-          width: 100%;
-          height: 237px;
+  
+  .hot {
+    // padding-top: 53px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #fbf8f3;
+    overflow-x: hidden;
+  
+    .hot-list {
+      width: 100%;
+      background-color: #ffffff;
+  
+      .product-item {
+        height: 100%;
+        .product-image {
+          height: 100%;
+          font-size: 0;
+          line-height: 0;
+          position: relative;
+          overflow: hidden;
+  
+          .product-image {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+          }
         }
       }
-      .content {
-        flex-grow: 1;
-        flex-shrink: 1;
-        // height: 236px;
-        // height: calc(100% - 150px);
-        // border: 1px solid #ffffff;
-        box-sizing: border-box;
-        // padding: 5% 3.7% 5.5% 3.7%;
-        padding: 50px 0 50px 0;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-
-        .sub-title {
-          flex-grow: 0;
-          flex-shrink: 0;
+    }
+    .hot-list-bar {
+      padding-bottom: 119px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+  
+      .left-button,
+      .right-button {
+        font-size: 0;
+        line-height: 0;
+        cursor: pointer;
+        img {
+          width: 64px;
+        }
+      }
+  
+      .active-product-info {
+        margin: 0 20px;
+        width: 473px;
+  
+        .title {
           font-size: 24px;
           font-weight: 400;
           color: #333333;
-          margin-bottom: 5px;
+          text-align: center;
         }
-        .title {
-          flex-grow: 0;
-          flex-shrink: 0;
-          font-size: 29px;
-          font-weight: 400;
-          color: #333333;
-          margin-bottom: 15px;
-        }
-        .desc {
-          flex-grow: 1;
-          flex-shrink: 1;
+      }
+    }
+  }
+  .diamond-gia {
+    overflow-x: hidden;
+    position: relative;
+  
+    .bg {
+      font-size: 0;
+      line-height: 0;
+  
+      img {
+        width: 100%;
+      }
+    }
+  
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 33%;
+      transform: translate(0, -50%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-between;
+  
+      .title {
+        flex-grow: 93;
+        margin-bottom: 50px;
+        font-size: 36px;
+        font-weight: 400;
+        color: #000000;
+      }
+      .description {
+        flex-grow: 258;
+        margin-bottom: 40px;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgba(51, 51, 51, 1);
+        line-height: 30px;
+      }
+      .button-group {
+        flex-grow: 43;
+        .check-now {
+          width: 361px;
+          height: 43px;
           font-size: 14px;
           font-weight: 400;
-          color: #333333;
-          line-height: 24px;
+          color: #ffffff;
+          background: #ff6900;
+          cursor: pointer;
         }
-        .button-group {
+      }
+    }
+  }
+  
+  .diamond {
+    width: 80%;
+    margin: 0 auto;
+    padding: 40px 0 60px;
+    background-color: #ffffff;
+    overflow-x: hidden;
+  
+    .section-title-line {
+      margin-bottom: 20px;
+    }
+  
+    .diamond-list {
+      width: 100%;
+      box-sizing: content-box;
+      background-color: #ffffff;
+  
+      .product-item {
+        height: 100%;
+        .product-image {
+          height: 100%;
+          font-size: 0;
+          line-height: 0;
+          position: relative;
+          overflow: hidden;
+  
+          .product-image {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+          }
+        }
+      }
+    }
+    .diamond-list-bar {
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+  
+      .left-button,
+      .right-button {
+        font-size: 0;
+        line-height: 0;
+        cursor: pointer;
+        img {
+          width: 64px;
+        }
+      }
+  
+      .active-product-info {
+        margin: 0 20px;
+        width: 473px;
+  
+        .title {
+          margin-bottom: 10px;
+          font-size: 24px;
+          font-weight: 400;
+          color: #333333;
+          text-align: center;
+        }
+        .sub-title {
+          font-size: 18px;
+          font-weight: 400;
+          color: #333333;
+          text-align: center;
+        }
+      }
+    }
+  }
+  
+  .jewellery {
+    overflow-x: hidden;
+  
+    .jewellery-section-top {
+      height: 172px;
+      font-size: 180px;
+      font-weight: bold;
+      color: #fbf8f3;
+      text-align: center;
+      white-space: nowrap;
+    }
+  
+    .section-content {
+      margin-top: -37px;
+      padding-top: 92px;
+      padding-bottom: 105px;
+      background-color: #fbf8f3;
+  
+      .section-title {
+        margin-bottom: 20px;
+      }
+      .section-title-line {
+        margin-bottom: 20px;
+      }
+      .section-sub-title {
+        width: 550px;
+        margin: auto;
+        padding-bottom: 130px;
+        font-size: 18px;
+        font-weight: 400;
+        color: #333333;
+        line-height: 28px;
+      }
+      .categories {
+        list-style: none;
+  
+        .item {
+          position: relative;
+  
+          .bg-text {
+            position: absolute;
+            font-size: 130px;
+            font-weight: 400;
+            font-family: SimSun;
+            color: #f4eeea;
+            white-space: nowrap;
+            line-height: 1;
+          }
+          .category {
+            position: relative;
+  
+            .bg {
+              width: 100%;
+              font-size: 0;
+              line-height: 0;
+  
+              img {
+                width: 100%;
+              }
+            }
+  
+            .info {
+              position: absolute;
+              top: 50%;
+              transform: translate(0, -50%);
+              box-sizing: border-box;
+              background: rgba(255, 255, 255, 0.8);
+              padding: 7.6% 7.2% 3.8% 12.4%;
+  
+              .name {
+                font-size: 24px;
+                font-weight: 400;
+                color: #333333;
+              }
+              .desc {
+                font-size: 14px;
+                font-weight: 400;
+                color: #333333;
+                line-height: 29px;
+              }
+              .button-group {
+                button {
+                  height: 42px;
+                  padding: 0 20px;
+                  font-size: 16px;
+                  font-weight: bold;
+                  color: #ffffff;
+                  background: #ff6900;
+                  cursor: pointer;
+                }
+              }
+            }
+          }
+  
+          &:nth-of-type(1) {
+            .bg-text {
+              left: 0;
+              bottom: 23.3%;
+            }
+            .category {
+              width: 35.2%;
+              margin-left: 20.3%;
+  
+              .info {
+                /*top: 10.2%;*/
+                left: -28.6%;
+                width: 65.2%;
+                /*height: 75.7%;*/
+  
+                .name {
+                  margin-bottom: 9%;
+                }
+                .desc {
+                  margin-bottom: 26.1%;
+                }
+              }
+            }
+          }
+          &:nth-of-type(2) {
+            .bg-text {
+              left: 64.6%;
+              bottom: -15.2%;
+            }
+            .category {
+              width: 34.1%;
+              margin-left: 55.5%;
+  
+              .info {
+                /*top: 10.2%;*/
+                left: -28.6%;
+                width: 65.2%;
+                /*height: 75.7%;*/
+  
+                .name {
+                  margin-bottom: 9%;
+                }
+                .desc {
+                  margin-bottom: 26.1%;
+                }
+              }
+            }
+          }
+          &:nth-of-type(3) {
+            .bg-text {
+              left: 3.3%;
+              bottom: 0;
+            }
+            .category {
+              width: 35.2%;
+              margin-left: 20.3%;
+  
+              .info {
+                /*top: 10.2%;*/
+                left: -28.6%;
+                width: 65.2%;
+                /*height: 75.7%;*/
+  
+                .name {
+                  margin-bottom: 9%;
+                }
+                .desc {
+                  margin-bottom: 26.1%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  .waiting-you {
+    padding: 74px 0 60px 0;
+  
+    .section-title-line {
+      margin-bottom: 76px;
+    }
+    .section-content {
+      min-width: 1360px;
+      max-width: 1550px;
+      margin: auto;
+      display: flex;
+      justify-content: center;
+  
+      .item {
+        width: 48%;
+        margin-right: 30px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+  
+        &:nth-last-of-type(1) {
+          margin-right: 0;
+        }
+  
+        .picture {
           flex-grow: 0;
           flex-shrink: 0;
-          button {
-            height: 42px;
-            padding: 0 20px;
-            background: #d4b5b5;
-            font-size: 12px;
+          width: 42.9%;
+          height: 100%;
+          font-size: 0;
+          line-height: 0;
+  
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        .content {
+          flex-grow: 1;
+          flex-shrink: 1;
+          height: calc(100% - 150px);
+          border: 1px solid #ffffff;
+          box-sizing: border-box;
+          padding: 5% 3.7% 5.5% 3.7%;
+  
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+  
+          .sub-title {
+            flex-grow: 0;
+            flex-shrink: 0;
+            font-size: 24px;
             font-weight: 400;
-            color: #ffffff;
-            cursor: pointer;
+            color: #333333;
+            margin-bottom: 5px;
+          }
+          .title {
+            flex-grow: 0;
+            flex-shrink: 0;
+            font-size: 29px;
+            font-weight: 400;
+            color: #333333;
+            margin-bottom: 15px;
+          }
+          .desc {
+            flex-grow: 1;
+            flex-shrink: 1;
+            font-size: 14px;
+            font-weight: 400;
+            color: #333333;
+            line-height: 24px;
+          }
+          .button-group {
+            flex-grow: 0;
+            flex-shrink: 0;
+            button {
+              height: 42px;
+              padding: 0 20px;
+              background: #ff6900;
+              font-size: 12px;
+              font-weight: 400;
+              color: #ffffff;
+              cursor: pointer;
+            }
           }
         }
-      }
-
-      &.left-item {
-        // background-color: #f8f8f8;
-        // background-color: #f0e2da;
-
-        .content {
-          // margin-right: 20px;
-          background-color: #f8f8f8;
-          border-left: 0;
-          text-align: center;
-          .title1{
-            font-size: 18px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #000000;
-            font-weight: bold;
-          }
-          .title2{
-            font-size: 14px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #666666;
-            padding-top: 20px;
-            // padding: 20px 0;
-          }
-          .title3{
-            font-size: 14px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #000000;
+  
+        &.left-item {
+          background-color: #f0e2da;
+  
+          .content {
+            margin-right: 20px;
+            border-left: 0;
+            text-align: right;
           }
         }
-      }
-
-      &.center-item {
-        background-color: #f8f8f8;
-        // background-color: #f0e2da;
-
-        .content {
-          // margin-right: 20px;
-          border-left: 0;
-          text-align: center;
-          .title1{
-            font-size: 18px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #000000;
-            font-weight: bold;
-          }
-          .title2{
-            font-size: 14px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #666666;
-            padding-top: 20px;
-            // padding: 20px 0;
-          }
-          .title3{
-            font-size: 14px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #000000;
-          }
-        }
-      }
-
-      &.right-item {
-        background-color: #f8f8f8;
-        // background-color: #f4eade;
-
-        .content {
-          // margin-left: 20px;
-          border-right: 0;
-          text-align: center;
-          .title1{
-            font-size: 18px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #000000;
-            font-weight: bold;
-          }
-          .title2{
-            font-size: 14px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #666666;
-            padding-top: 20px;
-            // padding: 20px 0;
-          }
-          .title3{
-            font-size: 14px;
-            font-weight: normal;
-            font-stretch: normal;
-            letter-spacing: 0px;
-            color: #000000;
+  
+        &.right-item {
+          background-color: #f4eade;
+  
+          .content {
+            margin-left: 20px;
+            border-right: 0;
+            text-align: left;
           }
         }
       }
@@ -2164,8 +2315,782 @@ section {
 }
 
 
-// ms
+// ms-大陆
 .ms-page {
+  section {
+  .section-title {
+    position: relative;
+    font-size: 30px;
+    font-weight: 400;
+    /*font-weight: bold;*/
+    color: rgba(51, 51, 51, 1);
+    text-align: center;
+    padding: 30px 0;
+    z-index: 2;
+  }
+  .section-sub-title {
+    position: relative;
+    font-size: 20px;
+    font-weight: bold;
+    color: rgba(102, 102, 102, 1);
+    text-align: center;
+    z-index: 2;
+  }
+  .section-title-line {
+    position: relative;
+    width: 100px;
+    height: 1px;
+    margin: 0 auto;
+    background-color: #999999;
+    z-index: 2;
+  }
+}
+.el-carousel--horizontal {
+  overflow: hidden;
+}
+.banner {
+  max-width: 1920px;
+  min-width: 1200px;
+  margin: 0 auto;
+
+  overflow-x: hidden;
+  .banner-item {
+    width: 100%;
+    height: 100%;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
+
+    .banner-img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: auto;
+      height: 100%;
+    }
+  }
+  .img-center{
+    position: relative;
+    .info{
+      width: 370px;
+      position: absolute;
+      left:15.5%;
+      top:14%;
+      .p1{
+        font-size: 22px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-family: SimSun;
+        letter-spacing: 0px;
+        color: #000000;
+        margin-bottom: 25px;
+        font-weight: bold;
+      }
+      .p2{
+        font-size: 13px;
+        font-weight: normal;
+        font-stretch: normal;
+        line-height: 22px;
+        letter-spacing: 0px;
+        color: #666666;
+      }
+    }
+  }
+}
+
+.design {
+  padding-top: 87px;
+  background: rgba(255, 252, 247, 1);
+  overflow-x: hidden;
+
+  .section-title {
+    font-size: 36px;
+    font-weight: 400;
+    color: #666666;
+  }
+
+  .section-sub-title {
+    font-size: 14px;
+    font-weight: 400;
+    color: #666666;
+  }
+}
+
+.recommend-category {
+  width: 100%;
+  padding: 56px 0 59px 0;
+  background: #ffffff;
+  overflow-x: hidden;
+
+  .categories {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .category-item {
+      flex-grow: 1;
+      flex-shrink: 1;
+      position: relative;
+      margin-right: 30px;
+
+      &:nth-last-of-type(1) {
+        margin-right: 0;
+      }
+
+      .bg {
+        position: relative;
+        font-size: 0;
+        line-height: 0;
+
+        img {
+          width: 100%;
+        }
+        .hover-cover {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #000000;
+          opacity: 0;
+          transition: opacity 0.3s linear;
+        }
+      }
+      .info {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        height: 37%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: center;
+
+        .title {
+          font-size: 48px;
+          font-weight: bold;
+          color: #ffffff;
+          text-align: center;
+          cursor: pointer;
+        }
+        .sub-title {
+          font-size: 48px;
+          font-weight: bold;
+          color: #ffffff;
+          text-align: center;
+          cursor: pointer;
+        }
+        .info-border-line {
+          position: absolute;
+          background: #ffffff;
+          transition: all 0.3s ease-in;
+        }
+        .border-t {
+          top: 0;
+          right: 0;
+          width: 0;
+          height: 1px;
+        }
+        .border-r {
+          bottom: 0;
+          right: 0;
+          width: 1px;
+          height: 0;
+        }
+        .border-b {
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 1px;
+        }
+        .border-l {
+          top: 0;
+          left: 0;
+          width: 1px;
+          height: 0;
+        }
+      }
+
+      &:hover {
+        .bg {
+          .hover-cover {
+            opacity: 0.18;
+          }
+        }
+        .info {
+          .border-t {
+            width: 100%;
+          }
+          .border-r {
+            height: 100%;
+          }
+          .border-b {
+            width: 100%;
+          }
+          .border-l {
+            height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.diamond-gia {
+  overflow-x: hidden;
+  position: relative;
+
+  .bg {
+    font-size: 0;
+    // line-height: 0;
+
+    img {
+      width: 100%;
+    }
+    .img-center{
+      position: relative;
+      .info{
+        width: 260px;
+        position: absolute;
+        left:15.5%;
+        top:50%;
+        .p1{
+          font-size: 22px;
+          font-weight: normal;
+          font-stretch: normal;
+          font-family: SimSun;
+          letter-spacing: 0px;
+          color: #000000;
+          margin-bottom: 25px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 33%;
+    transform: translate(0, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .title {
+      flex-grow: 93;
+      margin-bottom: 50px;
+      font-size: 36px;
+      font-weight: 400;
+      color: #000000;
+    }
+    .description {
+      flex-grow: 258;
+      margin-bottom: 40px;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+      line-height: 30px;
+    }
+    .button-group {
+      flex-grow: 43;
+      .check-now {
+        width: 361px;
+        height: 43px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #ffffff;
+        background: rgba(207, 195, 189, 1);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.made-gia {
+  overflow-x: hidden;
+  position: relative;
+  margin-top: 50px;
+
+  .bg {
+    font-size: 0;
+    // line-height: 0;
+
+    img {
+      width: 100%;
+    }
+    .img-center{
+      position: relative;
+      .info{
+        width: 330px;
+        position: absolute;
+        right:10%;
+        top:40%;
+        .p1{
+          font-size: 22px;
+          font-weight: normal;
+          font-stretch: normal;
+          font-family: SimSun;
+          letter-spacing: 0px;
+          color: #000000;
+          margin-bottom: 37px;
+          font-weight: bold;
+        }
+        .p2{
+          font-size: 14px;
+          font-weight: normal;
+          font-stretch: normal;
+          line-height: 24px;
+          letter-spacing: 0px;
+          color: #333333;
+        }
+      }
+    } 
+  }
+
+  .content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 33%;
+    transform: translate(0, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .title {
+      flex-grow: 93;
+      margin-bottom: 50px;
+      font-size: 36px;
+      font-weight: 400;
+      color: #000000;
+    }
+    .description {
+      flex-grow: 258;
+      margin-bottom: 40px;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+      line-height: 30px;
+    }
+    .button-group {
+      flex-grow: 43;
+      .check-now {
+        width: 361px;
+        height: 43px;
+        font-size: 14px;
+        font-weight: 400;
+        color: #ffffff;
+        background: rgba(207, 195, 189, 1);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+
+.jewellery {
+  overflow-x: hidden;
+
+  .jewellery-section-top {
+    height: 172px;
+    font-size: 180px;
+    font-weight: bold;
+    color: #fbf8f3;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .section-content {
+    margin-top: -37px;
+    padding-top: 92px;
+    padding-bottom: 105px;
+    background-color: #fbf8f3;
+
+    .section-title {
+      margin-bottom: 20px;
+    }
+    .section-title-line {
+      margin-bottom: 20px;
+    }
+    .section-sub-title {
+      width: 550px;
+      margin: auto;
+      padding-bottom: 130px;
+      font-size: 18px;
+      font-weight: 400;
+      color: #333333;
+      line-height: 28px;
+    }
+    .categories {
+      list-style: none;
+
+      .item {
+        position: relative;
+
+        .bg-text {
+          position: absolute;
+          font-size: 130px;
+          font-weight: 400;
+          font-family: SimSun;
+          color: #f4eeea;
+          white-space: nowrap;
+          line-height: 1;
+        }
+        .category {
+          position: relative;
+
+          .bg {
+            width: 100%;
+            font-size: 0;
+            line-height: 0;
+
+            img {
+              width: 100%;
+            }
+          }
+
+          .info {
+            position: absolute;
+            box-sizing: border-box;
+            font-family: SimSun;
+            font-size: 15px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+            display: flex;
+            justify-content: center;
+            transform: translate(-50%, -50%);
+
+            .name {
+              font-size: 24px;
+              font-weight: 400;
+              color: #333333;
+            }
+            .desc {
+              font-size: 14px;
+              font-weight: 400;
+              color: #333333;
+              line-height: 29px;
+            }
+            .button-group {
+              button {
+                height: 42px;
+                padding: 0 20px;
+                font-size: 16px;
+                font-weight: bold;
+                color: #ffffff;
+                background: #d4bfb5;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        &:nth-of-type(1) {
+          .bg-text {
+            left: 0;
+            bottom: 23.3%;
+          }
+          .category {
+            width: 35.2%;
+            margin-left: 20.3%;
+
+            .info {
+              left: 50%;
+              bottom: 7%;
+
+              .name {
+                margin-bottom: 9%;
+              }
+              .desc {
+                margin-bottom: 26.1%;
+              }
+            }
+          }
+        }
+        &:nth-of-type(2) {
+          .bg-text {
+            left: 64.6%;
+            bottom: -15.2%;
+          }
+          .category {
+            width: 34.1%;
+            margin-left: 55.5%;
+
+            .info {
+              left: 50%;
+              bottom: 7%;
+
+              .name {
+                margin-bottom: 9%;
+              }
+              .desc {
+                margin-bottom: 26.1%;
+              }
+            }
+          }
+        }
+        &:nth-of-type(4) {
+          .bg-text {
+            left: 3.3%;
+            bottom: 0;
+          }
+          .category {
+            width: 35.2%;
+            margin-left: 20.3%;
+
+            .info {
+              left: 50%;
+              bottom: 7%; 
+
+              .name {
+                margin-bottom: 9%;
+              }
+              .desc {
+                margin-bottom: 26.1%;
+              }
+            }
+          }
+        }
+        &:nth-of-type(5) {
+          .bg-text {
+            left: 3.3%;
+            bottom: 0;
+          }
+          .category {
+            width: 35.2%;
+            margin-left: 20.3%;
+
+            .info {
+              left: 50%;
+              bottom: 7%;
+
+              .name {
+                margin-bottom: 9%;
+              }
+              .desc {
+                margin-bottom: 26.1%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.waiting-you {
+  padding: 140px 0 60px 0;
+  min-width: 1200px;
+  max-width: 1366px;
+  margin: 0 auto;
+
+  .section-title-line {
+    margin-bottom: 76px;
+  }
+  .section-content {
+    min-width: 1360px;
+    max-width: 1550px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+
+    .item {
+      width: 48%;
+      margin-right: 30px;
+      // display: flex;
+      // flex-direction: row;
+      // align-items: center;
+
+      &:nth-last-of-type(1) {
+        margin-right: 0;
+      }
+
+      .picture {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 100%;
+        // height: 100%;
+        font-size: 0;
+        line-height: 0;
+
+        img {
+          width: 100%;
+          height: 237px;
+        }
+      }
+      .content {
+        flex-grow: 1;
+        flex-shrink: 1;
+        // height: 236px;
+        // height: calc(100% - 150px);
+        // border: 1px solid #ffffff;
+        box-sizing: border-box;
+        // padding: 5% 3.7% 5.5% 3.7%;
+        padding: 50px 0 50px 0;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .sub-title {
+          flex-grow: 0;
+          flex-shrink: 0;
+          font-size: 24px;
+          font-weight: 400;
+          color: #333333;
+          margin-bottom: 5px;
+        }
+        .title {
+          flex-grow: 0;
+          flex-shrink: 0;
+          font-size: 29px;
+          font-weight: 400;
+          color: #333333;
+          margin-bottom: 15px;
+        }
+        .desc {
+          flex-grow: 1;
+          flex-shrink: 1;
+          font-size: 14px;
+          font-weight: 400;
+          color: #333333;
+          line-height: 24px;
+        }
+        .button-group {
+          flex-grow: 0;
+          flex-shrink: 0;
+          button {
+            height: 42px;
+            padding: 0 20px;
+            background: #d4b5b5;
+            font-size: 12px;
+            font-weight: 400;
+            color: #ffffff;
+            cursor: pointer;
+          }
+        }
+      }
+
+      &.left-item {
+        // background-color: #f8f8f8;
+        // background-color: #f0e2da;
+
+        .content {
+          // margin-right: 20px;
+          background-color: #f8f8f8;
+          border-left: 0;
+          text-align: center;
+          .title1{
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+            font-weight: bold;
+          }
+          .title2{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #666666;
+            padding-top: 20px;
+            // padding: 20px 0;
+          }
+          .title3{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+          }
+        }
+      }
+
+      &.center-item {
+        background-color: #f8f8f8;
+        // background-color: #f0e2da;
+
+        .content {
+          // margin-right: 20px;
+          border-left: 0;
+          text-align: center;
+          .title1{
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+            font-weight: bold;
+          }
+          .title2{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #666666;
+            padding-top: 20px;
+            // padding: 20px 0;
+          }
+          .title3{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+          }
+        }
+      }
+
+      &.right-item {
+        background-color: #f8f8f8;
+        // background-color: #f4eade;
+
+        .content {
+          // margin-left: 20px;
+          border-right: 0;
+          text-align: center;
+          .title1{
+            font-size: 18px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+            font-weight: bold;
+          }
+          .title2{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #666666;
+            padding-top: 20px;
+            // padding: 20px 0;
+          }
+          .title3{
+            font-size: 14px;
+            font-weight: normal;
+            font-stretch: normal;
+            letter-spacing: 0px;
+            color: #000000;
+          }
+        }
+      }
+    }
+  }
+}
   .section-content{
     padding-top: 0px;
     background-color: #fff;
@@ -2218,62 +3143,61 @@ section {
   //   background: url(../static/index-ms/sort1.png) no-repeat;
   // }
   .design {
-  .us-host-box {
-    min-width: 1200px;
-    max-width: 1366px;
-    margin: 0 auto;
-    padding: 10px 0;
-    display: flex;
-    flex-wrap: wrap;
-    height: 341px;
+    .us-host-box {
+      min-width: 1200px;
+      max-width: 1366px;
+      margin: 0 auto;
+      padding: 10px 0;
+      display: flex;
+      flex-wrap: wrap;
+      height: 341px;
 
-    .us-host-list {
-      flex-grow: 0;
-      flex-shrink: 0;
-      width: 90%;
-      margin-bottom: 3px;
-      box-sizing: border-box;
-      transition: all 0.2s linear;
-      .host-item {
-        position: relative;
-        .product-image {
+      .us-host-list {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 90%;
+        margin-bottom: 3px;
+        box-sizing: border-box;
+        transition: all 0.2s linear;
+        .host-item {
           position: relative;
-          overflow: hidden;
-          .cart-icon{
-            position: absolute;
-            bottom: 25px;
-            right:20px;
-            font-size: 20px;
-          }
-          .main-image,
-          .sub-image {
-            width: 100%;
-            // height: 200px;
-            display: inline-block;
-          }
-          .sub-image {
-            display: none;
+          .product-image {
+            position: relative;
+            overflow: hidden;
+            .cart-icon{
+              position: absolute;
+              bottom: 25px;
+              right:20px;
+              font-size: 20px;
+            }
+            .main-image,
+            .sub-image {
+              width: 100%;
+              // height: 200px;
+              display: inline-block;
+            }
+            .sub-image {
+              display: none;
+            }
           }
         }
-      }
-      .host-item:hover {
-        .product-image {
-          .main-image {
-            display: none;
-          }
-          .sub-image {
-            display: inline-block;
-          }
-          .wish-state {
-            opacity: 1;
-            visibility: visible;
+        .host-item:hover {
+          .product-image {
+            .main-image {
+              display: none;
+            }
+            .sub-image {
+              display: inline-block;
+            }
+            .wish-state {
+              opacity: 1;
+              visibility: visible;
+            }
           }
         }
       }
     }
   }
-  
-}
   .section-title-en{
     padding-bottom: 5px;
     font-size: 26px;
