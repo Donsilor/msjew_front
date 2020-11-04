@@ -4,23 +4,23 @@
       <div class="icon" @click="showMenu">
         <i class="iconfont iconcebianlan"></i>
       </div>
-      <!-- <div class="site-info" @click="toSiteSwitch"> -->
-          <!-- <div class="flag"> -->
+      <div class="site-info" @click="toSiteSwitch" v-if="this.$store.state.platform == 11 ||this.$store.state.platform == 31">
+          <div class="flag">
             <!-- <img v-show="hkIcon" src="/hongkong-round.png" /> -->
             <!-- <img v-show="cnIcon" src="/china-round.png" /> -->
             <!-- <img v-show="enIcon" src="/USA-round.png" /> -->
-            <!-- <i class="iconfont icon_xuanzeyuyanhuobi"></i>
+            <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           </div>
           <div class="language">
-            <span>{{language}}</span> -->
+            <span>{{language}}</span>
             <!-- <span >|</span>
             <span>cny</span> -->
-          <!-- </div> -->
+          </div>
           <!-- <span class="gap-line"></span> 简/繁/EN
           <div class="coin">
             {{ coinInfo.content }}
           </div> -->
-        <!-- </div> --> 
+        </div> 
 
     </div>
     <div class="center">

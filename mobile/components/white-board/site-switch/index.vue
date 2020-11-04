@@ -3,28 +3,29 @@
   <layout :show="active" @onClose="close">
     <template slot="content">
       <div class="content-box">
-        <h2 class="title">{{ lang.chooseLanguageCoin }}</h2>
-        <div class="select-line" @click="chooseLanguage">
+        <h2 v-if="this.$store.state.platform == 11" class="title">{{ lang.chooseLanguageCoin }}</h2>
+        <h2 v-if="this.$store.state.platform == 31" class="title">{{ lang.chooseCoin }}</h2>
+        <div class="select-line" @click="chooseLanguage" v-if="this.$store.state.platform == 11">
           <div class="line-icon">
             <i class="iconfont icon_xuanzeyuyanhuobi"></i>
           </div>
           <!-- old start -->
           <!-- <div v-if="this.$store.state.platform == 31" class="line-text">
             <input :value="languages" type="text" disabled/>
-          </div>
-          <div v-else class="line-text">
+          </div> -->
+          <div  class="line-text">
             <input :value="language" type="text" />
             <select name="" id="" v-model="language">
               <option v-for="(p, index) in languageOptions" :key="index" :value="p.content">
                 {{p.content}}
               </option>
             </select>
-          </div> -->
-          <!-- <div class="select-icon" v-show="this.$store.state.platform !== 31">
+          </div>
+          <div class="select-icon" v-show="this.$store.state.platform !== 31">
             <i class="iconfont iconkuozhan"></i>
-          </div> -->
+          </div>
           <!-- old end -->
-          <div class="line-text">
+          <!-- <div class="line-text">
             <input :value="language" type="text" />
             <select name="" id="" v-model="language">
               <option v-for="(p, index) in languageOptionsCn" :key="index" :value="p.content">
@@ -34,13 +35,13 @@
           </div>
           <div class="select-icon" >
             <i class="iconfont iconkuozhan"></i>
-          </div>
+          </div> -->
           <!-- <div class="line-text">
             <input :value="languageCn" type="text" disabled/>
           </div> -->
         </div>
         <!-- old start -->
-        <!-- <div v-if="this.$store.state.platform === 21" class="select-line" @click="chooseCoin">
+        <div v-if="this.$store.state.platform === 21" class="select-line" @click="chooseCoin">
           <div class="line-icon">
             <i class="iconfont iconhuobi"></i>
           </div>
@@ -83,16 +84,16 @@
           <div class="select-icon">
             <i class="iconfont iconkuozhan"></i>
           </div>
-        </div> -->
+        </div>
         <!-- old end -->
-        <div class="select-line" @click="chooseCoin">
+        <!-- <div class="select-line" @click="chooseCoin">
           <div class="line-icon">
             <i class="iconfont iconhuobi"></i>
           </div>
           <div class="line-text">
             <input :value="coinCn" type="text" disabled/>
           </div>
-        </div>
+        </div> -->
         <button class="clear-btn" @click="changePage">
           {{ lang.clear }}
         </button>
@@ -137,7 +138,7 @@ export default {
   },
   computed: {
     languageText() {
-      return this.languageOptionsCn[this.language].content
+      return this.languageOptions[this.language].content
     },
     coinText() {
       if(this.$store.state.platform === 21){
@@ -149,7 +150,7 @@ export default {
       }
     },
     languageCode() {
-      return this.languageOptionsCn[this.language].code
+      return this.languageOptions[this.language].code
     },
     coinCode() {
       if(this.$store.state.platform === 21){
@@ -164,9 +165,9 @@ export default {
   mounted() {
     const _this = this 
     _this.$nextTick(() => {
-      for (let n = 0, length = _this.languageOptionsCn.length; n < length; n++) {
-        if (_this.languageOptionsCn[n].code === _this.$store.state.language) {
-          _this.language = _this.languageOptionsCn[n].content
+      for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
+        if (_this.languageOptions[n].code === _this.$store.state.language) {
+          _this.language = _this.languageOptions[n].content
           break
         }
       }

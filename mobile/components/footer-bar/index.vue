@@ -34,7 +34,7 @@
         <ul class="group-content">
           <li >
             <div class="item">
-              <span class="cont">{{ lang.AddressTile }}</span>
+              <span :class="['cont',{'cont-us':this.$store.state.language == 'en_US'}]">{{ lang.AddressTile }}</span>
               <div >{{ lang.Address }}</div> 
             </div>
           </li>
@@ -167,6 +167,7 @@ export default {
       color: #000;
       font-weight: 700;
       font-family: CTHeiTiSF;
+      text-align: left;
     }
     .item:nth-of-type(1){
       margin-top: 15px;
@@ -200,6 +201,7 @@ export default {
         min-width: 0;
         font-size: 14px;
         color: #000;
+        text-align: left;
         a:visited, a:hover, a:active, a:focus{
           color: #000;
         }
@@ -229,7 +231,7 @@ export default {
   }
   .group-top {
     height: 44px;
-    padding: 0 20px 0 25px;
+    padding: 0 20px 0 20px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
@@ -272,6 +274,9 @@ export default {
       }
       .cont{
         width: 15%;
+      }
+      .cont-us{
+        width: 57%!important;
       }
       div{
         text-align: left;
