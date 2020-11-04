@@ -12,12 +12,12 @@ export default ({ req, app, store, $axios }, inject) => {
     let platform = 20
     if (isServer) {
         let host = req.headers['host']
-        if ((/^(cn|cn-bdd|wap-cn|www\.bddco\.cn|wap\.bddco\.cn)/is).test(host)) {
-            language = 'zh_CN'
-            coin = 'CNY'
-            areaId = 1
-            platform = 20 //PC大陆
-        } else if ((/^(us|us-bdd|wap-us)\./is).test(host)) {
+        if ((/^(hk|hk-msjew|wap-hk)/is).test(host)) {
+            language = 'zh_TW'
+            coin = 'HKD'
+            areaId = 2
+            platform = 10 //PC香港
+        } else if ((/^(us|us-msjew|wap-us)\./is).test(host)) {
             language = 'en_US'
             coin = 'USD'
             areaId = 99
@@ -31,7 +31,7 @@ export default ({ req, app, store, $axios }, inject) => {
             language = 'zh_CN'
             coin = 'CNY'
             areaId = 1
-            platform = 20 //PC香港
+            platform = 20 //PC大陆
         }
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')

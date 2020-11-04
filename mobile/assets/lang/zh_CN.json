@@ -895,6 +895,7 @@
     },
     "site-switch": {
       "chooseLanguageCoin": "请选择您语言与结算货币",
+      "chooseCoin": "请选择您的结算货币",
       "clear": "确定",
       "ourShippingPolicy": "我们的送货政策",
       "ourPayType": "我们的付款方式"
@@ -1166,6 +1167,7 @@
         "octagonalLaser": "八角雷射形",
         "octagonalLaserDesc": "八角雷射形切割莫桑石呈正方形或长方形，四角有斜边。八角雷射形莫桑石通常会看起来较大。",
         "chooseLanguageCoin": "选择语言与货币",
+        "chooseCoin": "选择货币",
         "clear": "确定",
         "sizeTop": "MORESHINE商城所有戒指均使用美版尺寸，如果您是其他区域的客户，请联络客服告知尺寸版本，可以是欧版，中国大陆版本。",
         "sizeBot": "如何测量我的戒指尺寸？",

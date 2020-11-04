@@ -7,21 +7,13 @@
       <div>
         <h1 class="title">
           <i class="iconfont icon_xuanzeyuyanhuobi"></i>
-          <span>{{ lang.chooseLanguageCoin }}</span>
+          <span v-if="this.$store.state.platform == 11">{{ lang.chooseLanguageCoin }}</span>
+          <span v-if="this.$store.state.platform == 31">{{ lang.chooseCoin }}</span>
         </h1>
         <!-- <div v-if="this.$store.state.platform == 31" class="select-line-box">
           <input :value="languages" type="text" disabled/>
-        </div>
-        <div v-else class="select-line-box">
-          <input :value="language" type="text" />
-            <select name="" id="" v-model="language">
-              <option v-for="(p, index) in languageOptions" :key="index" :value="p.content">
-                {{p.content}}
-              </option>
-            </select>
-          <i class="iconfont iconkuozhan"></i>
         </div> -->
-        <div class="select-line-box">
+        <!-- <div v-else-if="this.$store.state.platform == 21" class="select-line-box">
           <input :value="language" type="text" />
             <select name="" id="" v-model="language">
               <option v-for="(p, index) in languageOptionsCn" :key="index" :value="p.content">
@@ -29,10 +21,16 @@
               </option>
             </select>
           <i class="iconfont iconkuozhan"></i>
-        </div>
-        <!-- <div class="select-line-box">
-          <input :value="languageCn" type="text" disabled/>
         </div> -->
+        <div v-if="this.$store.state.platform == 11" class="select-line-box">
+          <input :value="language" type="text" />
+            <select name="" id="" v-model="language">
+              <option v-for="(p, index) in languageOptions" :key="index" :value="p.content">
+                {{p.content}}
+              </option>
+            </select>
+          <i class="iconfont iconkuozhan"></i>
+        </div>
         <!-- <div class="select-line-box" v-if="this.$store.state.platform === 21">
           <input :value="coin" type="text" />
           <select name="" id="" v-model="coin">
@@ -40,16 +38,8 @@
               {{p.content}}
             </option>
           </select>
-        </div>
-        <div class="select-line-box" v-else-if="this.$store.state.platform === 41">
-          <input :value="coin" type="text" />
-          <select name="" id="" v-model="coin">
-            <option v-for="(p, index) in coinOptionsTw" :key="index" :value="p.code">
-              {{p.content}}
-            </option>
-          </select>
-        </div>
-        <div v-else class="select-line-box">
+        </div> -->
+        <div class="select-line-box" v-if="this.$store.state.platform === 11">
           <input :value="coin" type="text" />
           <select name="" id="" v-model="coin">
             <option v-for="(p, index) in coinOptions" :key="index" :value="p.code">
@@ -57,10 +47,19 @@
             </option>
           </select>
           <i class="iconfont iconkuozhan"></i>
-        </div> -->
-        <div class="select-line-box">
-          <input :value="coinCn" type="text" disabled/>
         </div>
+        <div v-if="this.$store.state.platform === 31" class="select-line-box">
+          <input :value="coin" type="text" />
+          <select name="" id="" v-model="coin">
+            <option v-for="(p, index) in coinOptions" :key="index" :value="p.code">
+              {{p.content}}
+            </option>
+          </select>
+          <i class="iconfont iconkuozhan"></i>
+        </div>
+        <!-- <div class="select-line-box">
+          <input :value="coinCn" type="text" disabled/>
+        </div> -->
          <!-- <select name="" id="" v-model="aa">
             <option value="">1</option>
             <option value="">2</option>
@@ -140,7 +139,7 @@ export default {
   computed: {
     languageText() {
       // console.log("aa",this.languageOptions[this.language].content)
-      return this.languageOptionsCn[this.language].content
+      return this.languageOptions[this.language].content
     },
     coinText() {
       if(this.$store.state.platform === 21){
@@ -179,10 +178,19 @@ export default {
     // console.log(this.coinOptions[this.coin].content)
     const _this = this
     _this.$nextTick(() => {
-      for (let n = 0, length = _this.languageOptionsCn.length; n < length; n++) {
-        if (_this.languageOptionsCn[n].code === _this.$store.state.language) {
-          _this.language = _this.languageOptionsCn[n].content
-          break
+      if(this.$store.state.platform === 21){
+        for (let n = 0, length = _this.languageOptionsCn.length; n < length; n++) {
+          if (_this.languageOptionsCn[n].code === _this.$store.state.language) {
+            _this.language = _this.languageOptionsCn[n].content
+            break
+          }
+        }
+      }else {
+        for (let n = 0, length = _this.languageOptions.length; n < length; n++) {
+          if (_this.languageOptions[n].code === _this.$store.state.language) {
+            _this.language = _this.languageOptions[n].content
+            break
+          }
         }
       }
 
