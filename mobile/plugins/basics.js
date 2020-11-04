@@ -12,7 +12,7 @@ export default ({ req, app, store, $axios }, inject) => {
     let platform = 21
     if (isServer) {
         let host = req.headers['host']
-        if ((/^(hk|hk-msjew|wap-hk|wap-hk-msjew)/is).test(host)) {
+        if ((/^(hk|hk-msjew|wap-hk|wap-hk-msjew)\./is).test(host)) {
             language = 'zh_TW'
             coin = 'HKD'
             areaId = 2
@@ -22,7 +22,7 @@ export default ({ req, app, store, $axios }, inject) => {
             coin = 'USD'
             areaId = 99
             platform = 31 //移动-美国
-        } else if ((/^(tw|tw-bdd|wap-tw|wap-tw-bdd)\./is).test(host)) {
+        } else if ((/^(tw|tw-msjew|wap-tw|wap-tw-msjew)\./is).test(host)) {
             language = 'zh_TW'
             coin = 'TWD'
             areaId = 3
