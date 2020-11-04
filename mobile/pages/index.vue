@@ -185,15 +185,15 @@
             <span class="line"></span>
             <span class="row-name">{{ lang.email }}</span>
             <span class="row-text">
-              <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">service@bddco.com</a>
-              <a v-else href="mailto:service@bddco.com">service@bddco.com</a>
+              <a v-if="this.$store.state.platform === 21" href="mailto:service@msjew.com">service@msjew.com</a>
+              <a v-else href="mailto:service@msjew.comm">service@msjew.com</a>
             </span>
             <span class="column-line"></span>
             <span class="row-icon">
-              <a v-if="this.$store.state.platform == 21" href="mailto:service@bddco.com">
+              <a v-if="this.$store.state.platform == 21" href="mailto:service@msjew.com">
                 <i class="iconfont iconyouxiang"></i>
               </a>
-              <a v-else href="mailto:service@bddco.com">
+              <a v-else href="mailto:service@msjew.com">
                 <i class="iconfont iconyouxiang"></i>
               </a>
             </span>

@@ -85,11 +85,11 @@ MORESHINE 的简奢主义
         <!-- <dt>{{ lang.tit6 }}</dt>
         <dd>
           {{ lang.con15 }}
-            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:e-service@bddco.com">
-              e-service@bddco.com
+            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:e-service@msjew.com">
+              e-service@msjew.com
             </a>
-            <a v-else class="link" href="mailto:service@bddco.com">
-              service@bddco.com
+            <a v-else class="link" href="mailto:service@msjew.com">
+              service@msjew.com
             </a>
           {{ lang.con16 }}
         </dd> -->

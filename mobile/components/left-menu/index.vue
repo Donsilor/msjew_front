@@ -186,7 +186,7 @@
           </a>
         </div>
         <div class="help">
-          <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">
+          <a v-if="this.$store.state.platform === 21" href="mailto:service@msjew.com">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconyouxiang"></i>
@@ -196,7 +196,7 @@
               </div>
             </div>
           </a>
-          <a v-else href="mailto:service@bddco.com">
+          <a v-else href="mailto:service@msjew.com">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconyouxiang"></i>

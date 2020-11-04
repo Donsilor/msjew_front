@@ -37,8 +37,8 @@
         <dd>
           <p>
             {{ lang.mail1 }}
-            <a class="link" href="mailto:service@bddco.com">
-              service@bddco.com
+            <a class="link" href="mailto:service@msjew.com">
+              service@msjew.com
             </a>
             {{ lang.mail2 }}
           </p>

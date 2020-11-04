@@ -26,7 +26,7 @@
       <div class="diamond-analysis">
         <p>
           {{ $t(`${lang}.mail1`) }}
-          <span class="link">service@bddco.com</span>
+          <span class="link">service@msjew.com</span>
           {{ $t(`${lang}.mail2`) }}
         </p>
       </div>

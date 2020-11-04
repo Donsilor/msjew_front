@@ -45,11 +45,11 @@
           <p>{{ lang.con1 }}</p>
           <p>
             {{ lang.con2 }}
-            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:service@bddco.com">
-              service@bddco.com
+            <a v-if="this.$store.state.platform === 21" class="link" href="mailto:service@msjew.com">
+              service@msjew.com
             </a>
-            <a v-else class="link" href="mailto:service@bddco.com">
-              service@bddco.com
+            <a v-else class="link" href="mailto:service@msjew.com">
+              service@msjew.com
             </a>
             {{ lang.con3 }}
           </p>
