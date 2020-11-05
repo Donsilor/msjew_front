@@ -12,17 +12,17 @@ export default ({ req, app, store, $axios }, inject) => {
     let platform = 21
     if (isServer) {
         let host = req.headers['host']
-        if ((/^(cn|cn-bdd|wap-cn|www\.bddco\.cn|wap\.bddco\.cn)/is).test(host)) {
-            language = 'zh_CN'
-            coin = 'CNY'
-            areaId = 1
-            platform = 21 //移动-大陆
-        } else if ((/^(us|us-bdd|wap-us|wap-us-bdd)\./is).test(host)) {
+        if ((/^(hk|hk-msjew|wap-hk|wap-hk-msjew)\./is).test(host)) {
+            language = 'zh_TW'
+            coin = 'HKD'
+            areaId = 2
+            platform = 11 //移动-香港
+        } else if ((/^(us|us-msjew|wap-us|wap-us-msjew)\./is).test(host)) {
             language = 'en_US'
             coin = 'USD'
             areaId = 99
             platform = 31 //移动-美国
-        } else if ((/^(tw|tw-bdd|wap-tw|wap-tw-bdd)\./is).test(host)) {
+        } else if ((/^(tw|tw-msjew|wap-tw|wap-tw-msjew)\./is).test(host)) {
             language = 'zh_TW'
             coin = 'TWD'
             areaId = 3
@@ -31,7 +31,7 @@ export default ({ req, app, store, $axios }, inject) => {
             language = 'zh_CN'
             coin = 'CNY'
             areaId = 1
-            platform = 21 //移动-港澳台
+            platform = 21 //移动-大陆
         }
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')

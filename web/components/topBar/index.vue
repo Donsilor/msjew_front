@@ -24,9 +24,9 @@
             <!--        <div class="date">24/7</div>-->
             <div class="row-flex align-item-center service">
               <div class="ms-logo">
-                <a href="https://www.bddco.cn/" target="_blank">
+                <!-- <a href="https://www.bddco.cn/" target="_blank">
                   <img src="/components/topBar/bdd-logo.png" />
-                </a>
+                </a> -->
               </div>
               <!-- <i class="iconfont iconphone"></i>
               <span v-if="this.$store.state.platform === 20">0755-25160872-8005</span>
@@ -117,8 +117,8 @@
             </nuxt-link>
 
             <!--        语言切换-->
-            <!-- <div class="item language">
-              <el-dropdown
+            <div v-if="this.$store.state.platform === 10" class="item language">
+               <!--<el-dropdown
                 type="primary"
 
                 placement="bottom"
@@ -147,9 +147,9 @@
                 <span class="row-flex align-item-center el-dropdown-link span">
                   English
                 </span>
-              </el-dropdown>
+              </el-dropdown> -->
               <el-dropdown
-              v-else
+                
                 type="primary"
 
                 placement="bottom"
@@ -167,21 +167,21 @@
                     {{ option.content }}
                   </el-dropdown-item>
                 </el-dropdown-menu>
-              </el-dropdown> -->
-            <!-- </div> -->
+              </el-dropdown>
+            </div>
 
             <!--        货币切换-->
-            <!-- <div  class="item coin"> -->
-              <!-- <el-dropdown
+            <div v-if="this.$store.state.platform === 10 || this.$store.state.platform === 30" class="item coin">
+              <el-dropdown
                 type="primary"
 
                 placement="bottom"
                 @command="setCoin"
-              > -->
-                <!-- <span class="row-flex align-item-center el-dropdown-link gray">
-                  CNY
-                </span> -->
-                <!-- <el-dropdown-menu slot="dropdown">
+              >
+                <span class="row-flex align-item-center el-dropdown-link gray">
+                  {{ coinInfo.content }}<i class="iconfont iconkuozhan"></i>
+                </span>
+                <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item
                     v-for="(option, n) in coinOptions"
                     :key="n"
@@ -189,9 +189,9 @@
                   >
                     {{ option.content }}
                   </el-dropdown-item>
-                </el-dropdown-menu> -->
-              <!-- </el-dropdown> -->
-            <!-- </div> -->
+                </el-dropdown-menu>
+              </el-dropdown>
+            </div>
             <!-- <div v-if="this.$store.state.platform === 20" class="item coin">
               <el-dropdown
                 type="primary"
@@ -360,7 +360,7 @@
                 :key="groupIndex"
                 :class="[
                   'platoon-item',
-                  { 'dotted-right-line': groupIndex < menu.groups.length - 1 }
+                  { 'dotted-right-line': groupIndex < menu.groups.length - 1,'dotted-margin-right':language == 'en_US' }
                 ]"
               >
                 <dl
@@ -1313,13 +1313,24 @@ export default {
       const language = this.$store.state.language
       const languageOptions = this.$bddDefinition.languageOptions
       const languageOptionsCn = this.$bddDefinition.languageOptionsCn
-      for (let n = 0, length = languageOptionsCn.length; n < length; n++) {
-        if (languageOptionsCn[n].code === language) {
-          result = languageOptionsCn[n]
-          break
+      if(this.$store.state.platform === 10){
+        for (let n = 0, length = languageOptions.length; n < length; n++) {
+          if (languageOptions[n].code === language) {
+            result = languageOptions[n]
+            break
+          }
         }
+        return result
+      } else {
+        for (let n = 0, length = languageOptionsCn.length; n < length; n++) {
+          if (languageOptionsCn[n].code === language) {
+            result = languageOptionsCn[n]
+            break
+          }
+        }
+        return result
+        
       }
-      return result
     },
     coinInfo() {
       let result = ''
@@ -1586,6 +1597,7 @@ export default {
           width: 45%;
           flex-grow: 1;
           flex-shrink: 1;
+          margin-right: 55px;
           
 
           .item {
@@ -1643,7 +1655,7 @@ export default {
             }
           }
           .cart {
-            margin-right: 55px;
+            // margin-right: 16px;
 
             .icongouwuche {
               font-size: 22px;
@@ -1651,7 +1663,8 @@ export default {
             }
           }
           .language {
-            margin-right: 50px;
+            // margin-right: 16px;
+            margin-left: 16px;
 
             .iconkuozhan {
               font-size: 6px;
@@ -1661,7 +1674,7 @@ export default {
             }
           }
           .coin {
-            margin-right: 30px;
+            margin-left: 16px;
 
             .iconkuozhan {
               font-size: 6px;
@@ -1936,7 +1949,7 @@ export default {
                       color: #999999;
                     }
                     .item-name span{
-                      text-transform: uppercase;
+                      // text-transform: uppercase; 
                       position: relative;
                       text-decoration: none;
                       padding: 2px;
@@ -1984,6 +1997,9 @@ export default {
               }
             }
 
+            .dotted-margin-right{
+              margin-right: 80px!important;
+            }
             .dotted-right-line {
               margin-right: 140px;
               // border-right: 1px dashed #bbbbbd;

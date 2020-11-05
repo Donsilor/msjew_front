@@ -7,8 +7,8 @@
           {{ $t(`${lang}.define`) }}
           <br />
           {{ $t(`${lang}.mail`) }}
-          <span v-if="this.$store.state.platform === 20">service@bddco.com</span>
-          <span v-else>service@bddco.com</span>
+          <span v-if="this.$store.state.platform === 20">service@msjew.com</span>
+          <span v-else>service@msjew.com</span>
           {{ $t(`${lang}.know`) }}
         </dd>
         <dt>{{ $t(`${lang}.tit1`) }}</dt>

@@ -28,7 +28,7 @@
           {{ $t(`${lang}.con10`) }}
           <br />
           {{ $t(`${lang}.con11`) }}
-          <span>service@bddco.com</span>
+          <span>service@msjew.com</span>
           {{ $t(`${lang}.con12`) }}
           <span>888.884.2424</span>。
         </dd>

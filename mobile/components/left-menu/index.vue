@@ -6,21 +6,21 @@
         <!-- <div class="icon" @click="hide">
           <i class="iconfont iconcebianlan"></i>
         </div> -->
-        <!-- <div class="site-info" @click="toSiteSwitch">
-          <div class="flag"> -->
+        <div class="site-info" @click="toSiteSwitch" v-if="this.$store.state.platform !== 21">
+          <div class="flag">
             <!-- <img v-show="hkIcon" src="/hongkong-square.png" />
             <img v-show="cnIcon" src="/china-square.png" />
             <img v-show="enIcon" src="/USA-square.png" /> -->
-            <!-- <i class="iconfont icon_xuanzeyuyanhuobi"></i>
-          </div> -->
+            <i class="iconfont icon_xuanzeyuyanhuobi"></i>
+          </div>
           <!-- <div class="language">
             <span>简/繁/EN</span>
           </div> -->
-          <!-- <div class="coin">
+          <div class="coin">
             {{ coinInfo.content }}
           </div>
           <span class="gap-line"></span>
-        </div> -->
+        </div>
         <div class="icon" >
           <div class="log-in" @click="menu" v-show="showa">
             <i class="iconfont icongerenzhongxin" ></i>
@@ -31,7 +31,7 @@
             <span class="pl-login">{{ replacepos(date.username, 2, 6, '***') }}</span>
           </div>
         </div>
-        <div class="quit-item" v-if="isLogin" @click="logout">
+        <div class="quit-item" v-if="isLogin && this.$store.state.platform === 21" @click="logout">
           <div class="item-icon quit"></div>
           <div class="item-name">{{ lang.logout }}</div>
         </div>
@@ -186,7 +186,7 @@
           </a>
         </div>
         <div class="help">
-          <a v-if="this.$store.state.platform === 21" href="mailto:service@bddco.com">
+          <a v-if="this.$store.state.platform === 21" href="mailto:service@msjew.com">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconyouxiang"></i>
@@ -196,7 +196,7 @@
               </div>
             </div>
           </a>
-          <a v-else href="mailto:service@bddco.com">
+          <a v-else href="mailto:service@msjew.com">
             <div class="item">
               <div class="item-icon">
                 <i class="iconfont iconyouxiang"></i>
@@ -217,12 +217,12 @@
           </div>
         </div>
 
-        <!-- <div class="help" v-if="isLogin" @click="logout">
+        <div class="help" v-if="isLogin && this.$store.state.platform !== 21" @click="logout">
           <div class="item">
             <div class="item-icon quit"></div>
             <div class="item-name">{{ lang.logout }}</div>
           </div>
-        </div> -->
+        </div>
       </div>
       <site-switch ref="site-switch"></site-switch>
     </div>

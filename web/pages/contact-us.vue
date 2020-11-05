@@ -35,12 +35,12 @@
             <div class="dd-content">
               <h2 class="dd-title">{{ $t(`${lang}.emailToUs`) }}</h2>
               <p class="dd-desc" v-if="this.$store.state.platform === 20">
-                <a href="mailto:service@bddco.com">service@bddco.com</a>；{{
+                <a href="mailto:service@msjew.com">service@msjew.com</a>；{{
                   $t(`${lang}.allQuestionWillBeDeal`)
                 }}
               </p>
               <p class="dd-desc" v-else>
-                <a href="mailto:service@bddco.com">service@bddco.com</a>；{{
+                <a href="mailto:service@msjew.com">service@msjew.com</a>；{{
                   $t(`${lang}.allQuestionWillBeDeal`)
                 }}
               </p>

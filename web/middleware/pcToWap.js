@@ -68,27 +68,16 @@ export default function ({ req, res, redirect, store, route }) {
         let headerHost = req.headers['host']
         //生产环境
         let host = 'https://wap.msjew.com';
-        if ((/^(cn|us|tw)\.bddco\.com/).test(headerHost)) {
+        if ((/^(hk|us|tw)\.msjew\.com/).test(headerHost)) {
             //生产环境
             host = 'https://wap-' + headerHost;
-        } else if ((/bddia\.com/).test(headerHost)) {
-            //测试环境 bddia.com
-            host = 'https://wap.bddia.com'
-            if ((/^(cn|us)\.bddia\.com/).test(headerHost)) {
-                host = 'https://wap-' + headerHost;
-            }
         } else if ((/bddco.cn/).test(headerHost)) {
-            //大陆站点 bddco.cn
-            if ((/^(cn|us|tw)-bdd.bddco.cn/).test(headerHost)) {
+            
+            if ((/^(hk|us|tw)-msjew.bddco.cn/).test(headerHost)) {
                 host = 'https://wap-' + headerHost;
-            } else if (headerHost == 'www-bdd.bddco.cn') {
-                host = 'https://wap-bdd.bddco.cn'
-            }else if (headerHost == 'www-msjew.bddco.cn') {
+            } else if (headerHost == 'www-msjew.bddco.cn') {
                 host = 'https://wap-msjew.bddco.cn'
             }
-        } else if ((/msjew\.bddco/).test(headerHost)) {
-            //猫闪测试站环境
-            host = 'https://wap-msjew.bddco.cn'
         }
 
         const toWapUrl = path => {

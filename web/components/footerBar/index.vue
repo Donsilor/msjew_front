@@ -6,7 +6,7 @@
         MORESHINE
         <!-- <div class="line"></div> -->
       </div>
-      <div class="menus" v-if="this.$store.state.platform === 20">
+      <div class="menus">
          <div class="left-item">
           <div v-for="(group, index) in menusCn" :key="index" class="menu-group">
             <dl>
@@ -31,7 +31,7 @@
         </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
-      <div class="menus" v-else-if="this.$store.state.platform === 30">
+      <!-- <div class="menus" v-else-if="this.$store.state.platform === 30">
         <div v-for="(group, index) in menusUs" :key="index" class="menu-group">
           <dl>
             <dt class="group-name">{{ group.groupName }}</dt>
@@ -71,7 +71,7 @@
         </div>
 
         <div class="Shadow" @click="setCoin()"></div>
-      </div>
+      </div> -->
     </div>
     <!--<div class="links">
        <ul class="social-links">
@@ -105,8 +105,8 @@
     </div>-->
     <footer class="copy-right">
       <div class="copy-right-content">
-        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRightMs`) }}</div>
-        <div v-else>{{ $t(`${lang}.copyrightLeft`) }}</div>
+        <div >{{ $t(`${lang}.copyrightRightMs`) }}</div>
+        <!-- <div v-else>{{ $t(`${lang}.copyrightLeft`) }}</div> -->
         <!-- <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRight1`) }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ $t(`${lang}.copyrightRight2`) }}</div>
         <div v-else>{{ $t(`${lang}.copyrightRight`) }}</div> -->
       </div>
