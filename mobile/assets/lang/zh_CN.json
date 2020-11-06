@@ -243,6 +243,8 @@
         "type5Text": "使用银行转账安全支付",
         "payType6": "Visa/MasterCard",
         "type6Text": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
+        "payType9": "Stripe",
+        "type9Text": "使用Stripe安全支付",
         "type5Text2": "注意，电子支票并非电汇",
         "paytip1":"由于支付宝暂不支持“美元”进行结算，请切换其他货币完成本次订单支付，谢谢!",
         "paytip2":"由于微信暂不支持“美元”进行结算，请切换其他货币完成本次订单，谢谢！",
@@ -626,7 +628,8 @@
         "payType11": "微信",
         "payType12": "支付宝HK",
         "payType13": "CARD",
-        "payType14": "电汇"
+        "payType14": "电汇",
+        "payType16": "Stripe"
       },
       "logisticInfo":{
         "title": "我的订单",

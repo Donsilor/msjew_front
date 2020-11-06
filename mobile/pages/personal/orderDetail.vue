@@ -581,6 +581,7 @@ export default {
         4: 'payType4',     // 小程序
         5: 'payType5',     // 余额
         6: 'payType6',     // Paypal
+        9: 'payType16',     // Stripe
         61: 'payType7',    // Paypal Card
         7:  'payType8',    // 支付宝国际版
         81: 'payType9',    // Paydollor 银联
