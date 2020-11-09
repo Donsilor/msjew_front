@@ -64,7 +64,7 @@
           <li>
             <div class="title">
               <span>{{ lang.beneficiary }}</span>
-              <span>MORESHINE.Co.</span>
+              <span>MORESHINE</span>
             </div>
           </li>
         </ul>
@@ -122,7 +122,7 @@
           <li>
             <div class="title">
               <span>{{ lang.beneficiary }}</span>
-              <span>MORESHINE.Co.</span>
+              <span>MORESHINE</span>
             </div>
           </li>
         </ul>
@@ -286,11 +286,12 @@ export default {
     },
     //登录用户订单
     getOrder() {
+      console.log(778,this.$route.query.orderId)
       this.$axios({
         url: '/web/member/order/detail',
         method: 'get',
         params: {
-          orderId: this.$route.query.orderId
+          orderId: this.$route.query.orderId || this.$route.query.order_sn
         }
       })
       .then(res => {

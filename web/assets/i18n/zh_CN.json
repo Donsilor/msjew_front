@@ -1360,6 +1360,7 @@
         "payWay": "选择支付方式",
         "orderInfo": "订单详情",
         "PayPal": "使用PayPal安全支付",
+        "Stripe": "使用Stripe安全支付",
         "visa": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
         "UnionPay": "使用中国银联银行卡，安全支付",
         "AliPay": "网上付款，方便，快捷",

@@ -243,6 +243,8 @@
       "type5Text": "Secure bank wire-transfer payment ",
       "payType6": "Visa / MasterCard",
       "type6Text": "Pay By Credit Card (VISA, Master Card, Discover Card, AMEX)",
+      "payType9": "Stripe",
+      "type9Text": "Using Stripe’s secure payment solution",
       "type5Text2": "Please note that e-Cheques are not T/T.",
       "paytip1": "Since Alipay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "paytip2": "Since WeChat Pay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
@@ -626,7 +628,8 @@
       "payType11": "Wechat",
       "payType12": "Alipay HK",
       "payType13": "CARD",
-      "payType14": "WireTransfer"
+      "payType14": "WireTransfer",
+      "payType16": "Stripe"
     },
     "logisticInfo":{
       "title": "Order",

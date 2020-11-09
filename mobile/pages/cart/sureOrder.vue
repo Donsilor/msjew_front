@@ -464,18 +464,6 @@ export default {
       actionLink: '',
       // 大陆支付
       list2: [
-        // {
-        //   url: '/cart/pay.png',
-        //   type: 6,
-        //   title: this.LANGUAGE.cart.pay.payType0,
-        //   des: this.LANGUAGE.cart.pay.type0Text
-        // },
-        // {
-        //   url: '/cart/visa_1.png',
-        //   type: 61,
-        //   title: this.LANGUAGE.cart.pay.payType6,
-        //   des: this.LANGUAGE.cart.pay.type6Text
-        // },
         {
           url: '/cart/ap.png',
           type: 82,
@@ -488,62 +476,20 @@ export default {
           title: this.LANGUAGE.cart.pay.payType4,
           des: this.LANGUAGE.cart.pay.type4Text
         },
-        // {
-        //   url: '/cart/up.png',
-        //   type: 81,
-        //   title: this.LANGUAGE.cart.pay.payType1,
-        //   des: this.LANGUAGE.cart.pay.type1Text
-        // },
-        // {
-        //   url: '/cart/ph.png',
-        //   type: 89,
-        //   title: this.LANGUAGE.cart.pay.payType5,
-        //   des: this.LANGUAGE.cart.pay.type5Text,
-        // }
-        // {
-        //   url: '/cart/paydollar.png',
-        //   type: 8,
-        //   title: this.LANGUAGE.cart.pay.payType3,
-        //   des: this.LANGUAGE.cart.pay.type3Text
-        // }
       ],
       // 香港支付
       listHK: [
         {
-        url: '/cart/pay.png',
-        type: 6,
-        title: this.LANGUAGE.cart.pay.payType0,
-        des: this.LANGUAGE.cart.pay.type0Text
+          url: '/cart/pay.png',
+          type: 6,
+          title: this.LANGUAGE.cart.pay.payType0,
+          des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-        url: '/cart/visa_1.png',
-        type: 61,
-        title: this.LANGUAGE.cart.pay.payType6,
-        des: this.LANGUAGE.cart.pay.type6Text
-        },
-        {
-        url: '/cart/ap-HK.png',
-        type: 84,
-        title: this.LANGUAGE.cart.pay.payType3+' HK',
-        des: this.LANGUAGE.cart.pay.type3Text
-        },
-        {
-        url: '/cart/wac.png',
-        type: 83,
-        title: this.LANGUAGE.cart.pay.payType4,
-        des: this.LANGUAGE.cart.pay.type4Text
-        },
-        {
-        url: '/cart/up.png',
-        type: 81,
-        title: this.LANGUAGE.cart.pay.payType1,
-        des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-        url: '/cart/ph.png',
-        type: 89,
-        title: this.LANGUAGE.cart.pay.payType5,
-        des: this.LANGUAGE.cart.pay.type5Text,
+          url: '/cart/Stripe.png',
+          type: 9,
+          title: this.LANGUAGE.cart.pay.payType9,
+          des: this.LANGUAGE.cart.pay.type9Text
         }
       ],
       // 台湾支付
@@ -576,10 +522,10 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/visa_1.png',
-          type: 61,
-          title: this.LANGUAGE.cart.pay.payType6,
-          des: this.LANGUAGE.cart.pay.type6Text
+          url: '/cart/Stripe.png',
+          type: 9,
+          title: this.LANGUAGE.cart.pay.payType9,
+          des: this.LANGUAGE.cart.pay.type9Text
         }
       ],
       sum: '2,120.00',
@@ -821,7 +767,7 @@ export default {
         if(this.$store.state.platform === 21){
           pay = 83
         }else{
-          pay = 61
+          pay = 9
         }
       }else if(this.typeIndex == 2){
         if(this.$store.state.platform === 11){
@@ -837,7 +783,7 @@ export default {
         pay = 89
       }
 
-      if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89){
+      if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89 || pay == 9){
         this.ifShowPop = true
         return
         
@@ -875,124 +821,6 @@ export default {
       this.$refs[index].show()
     },
     formatMoney: formatMoney,
-    // 查询匿名使用优惠卷时可以优惠的金额
-    checkCount() {
-      // const carts = []
-      // const goodList = this.list
-      // for (const i in goodList) {
-      //   const o = {
-      //     createTime: goodList[i].createTime || new Date().getTime(),
-      //     goodsCount: 1,
-      //     goodsDetailsId: goodList[i].goodsDetailsId,
-      //     goodsId: goodList[i].goodsId,
-      //     groupId: goodList[i].groupId,
-      //     groupType: goodList[i].groupType
-      //   }
-      //   carts.push(o)
-      // }
-      // this.$axios({
-      //   method: 'post',
-      //   url: '/wap/order/getAnonymousCouponAmount',
-      //   data: {
-      //     couponCode: this.inputCouponCode.trim(),
-      //     carts: carts,
-      //     session: this.session
-      //   }
-      // })
-      //   .then(data => {
-      //     console.log(data)
-      //     if (!(data > 0)) {
-      //       return
-      //     }
-      //     // 优惠金额
-      //     console.log('优惠金额====>', data)
-      //     this.sureCoupon = true
-      //     this.preferFee = data
-      //     this.inputCouponInfo = {
-      //       couponCode: this.inputCouponCode.trim(),
-      //       discountAmount: data
-      //     }
-      //     this.getTex()
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //     this.$toast(err.message)
-      //     this.cleanAllCoupon()
-      //   })
-    },
-    // 获取优惠券金额
-    getCouponAmount() {
-      // this.$axios({
-      //   method: 'get',
-      //   url: `/wap/order/getCouponAmount`,
-      //   params: {
-      //     couponCode: this.inputCouponCode,
-      //     couponId: this.selectCouponId,
-      //     cartIds: this.idList.join(',')
-      //   }
-      // })
-      //   .then(data => {
-      //     if (!(data > 0)) {
-      //       return
-      //     }
-      //     this.sureCoupon = true
-      //     this.preferFee = data
-      //     if (this.hasAddress) {
-      //       this.getTex()
-      //     }
-      //   })
-      //   .catch(err => {
-      //     console.log(err)
-      //     this.$toast(err.message)
-      //     this.cleanAllCoupon()
-      //   })
-    },
-    // 获取登录状态下优惠卷列表
-    getCouponList() {
-      // if (this.isLogin && this.list.length > 0) {
-      //   this.$axios({
-      //     method: 'post',
-      //     url: `/wap/order/getCoupons`,
-      //     params: {
-      //       cartIds: this.idList.join(',')
-      //     }
-      //   })
-      //     .then(res => {
-      //       if (res && res.length > 0) {
-      //         // [
-      //         //   {
-      //         //     "couponCode": "string",
-      //         //     "couponId": 0,
-      //         //     "discountAmount": 0,
-      //         //     "discountType": 0
-      //         //   }
-      //         // ]
-      //         res.map(item => {
-      //           const map = {
-      //             1: `${item.discountAmount}% OFF`,
-      //             2: `-HKD ${item.discountAmount}`
-      //           }
-      //           item.desc = `${item.couponCode}  ${map[item.discountType]}`
-      //           return item
-      //         })
-      //         this.cuponList = res
-      //       } else {
-      //         this.cuponList = [
-      //           {
-      //             couponCode: '',
-      //             couponId: 0,
-      //             discountAmount: 0,
-      //             discountType: 0,
-      //             desc: '暫無可使用優惠碼'
-      //           }
-      //         ]
-      //       }
-      //     })
-      //     .catch(err => {
-      //       console.log(err)
-      //     })
-      // }
-    },
     // 输入优惠码
     onInputCouponCode() {
       this.cleanSelectedCoupon()
@@ -1045,74 +873,6 @@ export default {
       this.queryId = id
       this.getData()
     },
-    // // 登录下获取相关费用
-    // getTex(k) {
-    //   const cards = k || '';
-    //   this.canSubmit = false
-    //   let data = {}
-    //   let url = ''
-    //   if (this.isLogin) {
-    //     url = `/web/member/order/tax`
-    //     data = {
-    //       addressId: this.address.id,
-    //       cards: cards,
-    //       // preferFee: this.preferFee,
-    //       cartIds: this.idList.join(',')
-    //     }
-    //   } else {
-    //     // console.log("this.list",this.list)
-    //     url = `/web/member/order-tourist/tax`
-    //     const goodsCartList=[]
-    //     for (const i in this.list) {
-    //       const o = {
-    //         createTime: this.list[i].createTime,
-    //         goods_num: 1,
-    //         goodsDetailsId: this.list[i].goodsDetailsId,
-    //         goods_id: this.list[i].goodsDetailsId,
-    //         group_id: this.list[i].groupId,
-    //         goods_type: this.list[i].goodsStatus,
-    //         group_type:
-    //           this.list[i].groupType !== 0 ? this.list[i].groupType : null
-    //       }
-    //       goodsCartList.push(o)
-    //       // console.log("list........",o)
-    //     }
-    //     data = {goodsCartList:goodsCartList}
-    //     // console.log("list........",data)
-    //   }
-
-    //   this.$axios({
-    //     method: 'post',
-    //     url: url,
-    //     data: data
-    //   })
-    //     .then(res => {
-    //       // console.log("费用",res)
-    //       this.canSubmit = true
-    //       this.allFee = res
-
-    //       if(res.cards !== undefined){
-    //         this.useAmount = JSON.parse(JSON.stringify(res.cards))
-    //       }
-
-    //       this.orderTotalAmount = res.orderAmount;
-    //       this.ultimatelyPay = res.payAmount;
-    //       this.currency = res.currency;
-
-    //       this.planDays = this.allFee.planDays
-
-    //       // this.info=res.details
-    //       // console.log("费用>>>>>>>>",this.info)
-    //     })
-    //     .catch(err => {
-    //       this.canSubmit = false
-    //       this.$toast.show(err.message)
-    //       this.allFee = this.defaultAllFeeInfo()
-
-    //       // console.log("ggg",this.allFee)
-    //     })
-
-
     // 登录下获取相关费用
     getTex(k) {
       var cards = k || [];
