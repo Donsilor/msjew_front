@@ -1349,6 +1349,7 @@
         "payWay": "Select payment method",
         "orderInfo": "Order details",
         "PayPal": "Using PayPal's secure payment solution",
+        "Stripe": "Using Stripe's secure payment solution",
         "visa": "Pay By Credit Card (VISA, Master Card, Discover Card, AMEX), Secure Payment",
         "UnionPay": "Using UnionPay cards’secure payment solution",
         "AliPay": "Easier and safer online payment",
