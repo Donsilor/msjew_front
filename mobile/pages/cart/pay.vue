@@ -137,7 +137,7 @@
       </ul>
 
       <div class="tips">
-        <i v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21">{{ lang.tips }}</span>
+        <i v-show="this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 21">{{ lang.tips }}</span>
       </div>
       <div class="btn" @click="PayWechat" v-if="this.$store.state.platform == 21">
         <span v-if="this.$store.state.platform == 21">{{ list[typeIndex].title }}</span>

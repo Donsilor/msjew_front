@@ -392,7 +392,7 @@ export default {
     }
     return {
       lang,
-      payWay: 0,
+      payWay: 6,
       answer: false,
       pay: false,
       isPay: false,
