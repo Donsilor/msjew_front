@@ -30,7 +30,7 @@
               </div>
               <!-- <i class="iconfont iconphone"></i>
               <span v-if="this.$store.state.platform === 20">0755-25160872-8005</span>
-              <span v-else>(852) 2165 3908</span> -->
+              <span v-else>0755-25160872-8005</span> -->
               <!--          <span class="gap-line"></span>-->
               <!--          <span>聯系 24/7</span>-->
             </div>
