@@ -137,7 +137,7 @@
       </ul>
 
       <div class="tips">
-        <i v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 11 || this.$store.state.platform == 21">{{ lang.tips }}</span>
+        <i v-show="this.$store.state.platform == 21" class="icon iconfont icongantanhao1"></i><span v-show="this.$store.state.platform == 21">{{ lang.tips }}</span>
       </div>
       <div class="btn" @click="PayWechat" v-if="this.$store.state.platform == 21">
         <span v-if="this.$store.state.platform == 21">{{ list[typeIndex].title }}</span>
@@ -281,34 +281,10 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/visa_1.png',
-          type: 61,
-          title: this.LANGUAGE.cart.pay.payType6,
-          des: this.LANGUAGE.cart.pay.type6Text
-        },
-        {
-          url: '/cart/ap-HK.png',
-          type: 84,
-          title: this.LANGUAGE.cart.pay.payType3+'  ',
-          des: this.LANGUAGE.cart.pay.type3Text
-        },
-        {
-          url: '/cart/wac.png',
-          type: 83,
-          title: this.LANGUAGE.cart.pay.payType4,
-          des: this.LANGUAGE.cart.pay.type4Text
-        },
-        {
-          url: '/cart/up.png',
-          type: 81,
-          title: this.LANGUAGE.cart.pay.payType1,
-          des: this.LANGUAGE.cart.pay.type1Text
-        },
-        {
-          url: '/cart/ph.png',
-          type: 89,
-          title: this.LANGUAGE.cart.pay.payType5,
-          des: this.LANGUAGE.cart.pay.type5Text,
+          url: '/cart/Stripe.png',
+          type: 9,
+          title: this.LANGUAGE.cart.pay.payType9,
+          des: this.LANGUAGE.cart.pay.type9Text
         }
       ],
       // 台湾支付
@@ -341,10 +317,10 @@ export default {
           des: this.LANGUAGE.cart.pay.type0Text
         },
         {
-          url: '/cart/visa_1.png',
-          type: 61,
-          title: this.LANGUAGE.cart.pay.payType6,
-          des: this.LANGUAGE.cart.pay.type6Text
+          url: '/cart/Stripe.png',
+          type: 9,
+          title: this.LANGUAGE.cart.pay.payType9,
+          des: this.LANGUAGE.cart.pay.type9Text
         }
       ],
       sum: '2,120.00',
@@ -388,7 +364,7 @@ export default {
       if(this.$store.state.platform === 41){
         if (ind === 2) {
           this.paylist = false
-          this.transfer = true
+          this.transfer = true 
           // this.price = this.info.payAmount * 0.985
         } else {
           this.price = this.info.payAmount
@@ -431,7 +407,7 @@ export default {
         if(this.$store.state.platform === 21){
           pay = 1
         } else{
-          pay = 61
+          pay = 9
         }
       }else if(this.typeIndex == 2){
         if(this.$store.state.platform === 11){
@@ -447,21 +423,15 @@ export default {
         pay = 89
       }
 
-      // if (this.typeIndex === 5) {
-      //   pay = 1
-      // } else if (this.typeIndex === 1 || this.typeIndex === 0) {
-      //   pay = 2
-      // } else if (
-      //   this.typeIndex === 4 ||
-      //   this.typeIndex === 3 ||
-      //   this.typeIndex === 2
-      // ) {
-      //   pay = 7
-      // }
       // console.log("paytype",pay)
       let baseUrl=this.$store.getters.baseUrl
+      let returnUrl = baseUrl+'/complete-paySuccess?orderId='+this.info.orderId
+      if(pay == 6){
+        returnUrl = baseUrl+'/complete/paySuccess?orderId='+this.info.orderId
+      }else {
+        returnUrl = baseUrl+'/complete/paySuccess?order_sn='+this.info.orderId
+      }
       this.$axios({
-        // http://localhost:8328/     https://www2.bddco.com   https://wap2.bddco.com/ http://wap.bdd.bddia.com https://wap.bddco.com/complete/paySuccess
         method: 'post',
         url: `/web/pay/create`,
         data: {
@@ -469,14 +439,31 @@ export default {
           coinType: this.info.coinType,
           payType: pay,
           tradeType:'wap',
-          returnUrl:baseUrl+'/complete/paySuccess?orderId='+this.info.orderId
+          returnUrl:returnUrl
         }
       })
         .then(res => {
           // console.log("config",res)
           if(res){
             if (res.config) {
-              window.location.replace(res.config)
+              if(pay == 9){
+                // 测试key
+                let TestKey = "pk_test_51Hh91GEg2ty3UyHNujJu3xu3nemS1rzfb14kys3CImsO1iCtpprr082i0Gfbe9EQ3cWLc5KBoKS2azrE4IIFB5Gu00GgMY0bLj"
+                // 正式key
+                let formalKey = "pk_live_51Hh91GEg2ty3UyHNGwh4IfEY1BgtJ1FHVNy0zQBoVclAfEp1YX7W8kOmpYaUvoxwKtYvfbPQ1HlOzj1wksI7sPN900zzHU8v9c"
+
+                let stripe = Stripe(TestKey);
+                let host = window.location.host
+                if ((/(msjew)\.com/).test(host)) {
+                  stripe = Stripe(formalKey);// 正式key
+                } else if((/(msjew.bddco)\.cn/).test(host)){
+                  stripe = Stripe(TestKey); // 测试key
+                }
+          
+                return stripe.redirectToCheckout({ sessionId: res.config });
+              } else {
+                window.location.replace(res.config)
+              }
             } else {
               // console.log(88888888)
               this.isPay = false

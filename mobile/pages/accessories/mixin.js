@@ -71,7 +71,7 @@ export default {
       ],
       conditionWord: this.CONDITION_INFO.sortBy.default[0].content,
       isResetProgress: false,
-      category : [4,5,6,7,8,9,16,17,18]
+      category : [4]
     }
   },
   watch: {

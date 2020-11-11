@@ -55,7 +55,7 @@ export default {
     //当前网址域名
     baseUrl () {
         let host = window.location.host;
-        if ((/(bddia|bddco)\.com/).test(host)) {
+        if ((/(msjew)\.com/).test(host)) {
             host = 'https://' + host
         } else {
             //测试

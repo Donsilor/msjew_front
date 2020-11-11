@@ -113,7 +113,7 @@ export default {
   methods: {
     goIndex() {
       this.$router.replace({
-        path: '/marriage-ring/single-ring?style=160'
+        path: '/marriage-ring/single-ring'
       })
     },
     getOrder() {

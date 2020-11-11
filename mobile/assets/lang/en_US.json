@@ -243,6 +243,8 @@
       "type5Text": "Secure bank wire-transfer payment ",
       "payType6": "Visa / MasterCard",
       "type6Text": "Pay By Credit Card (VISA, Master Card, Discover Card, AMEX)",
+      "payType9": "Stripe",
+      "type9Text": "Using Stripe’s secure payment solution",
       "type5Text2": "Please note that e-Cheques are not T/T.",
       "paytip1": "Since Alipay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
       "paytip2": "Since WeChat Pay does not support 'USD' for settlement, please switch to other currencies to complete this order, thank you!",
@@ -331,7 +333,7 @@
     },
     "payFailed": {
       "title": "Sorry, the order payment failed! Please repay",
-      "phone": "For any questions, contact customer service (852)-2165 3908",
+      "phone": "For any questions, contact customer service 0755-25160872-8005",
       "phoneCn": "For any questions, contact customer service 0755-25160872-8005",
       "orderNo": "Order#：",
       "payAgain": "PAY AGAIN",
@@ -626,7 +628,8 @@
       "payType11": "Wechat",
       "payType12": "Alipay HK",
       "payType13": "CARD",
-      "payType14": "WireTransfer"
+      "payType14": "WireTransfer",
+      "payType16": "Stripe"
     },
     "logisticInfo":{
       "title": "Order",
@@ -841,7 +844,7 @@
     "headline2":"Hot sale",
     "headline3":"Explore personality Interpret the true self",
     "headline4":"Fashion magic,Create treasures",
-    "subtitle1":"Morshine's Moissan diamonds are all imported from the United States, cut from the origin, and one diamond One certificate, supporting official testing, each Moissanite can reach DF color, and the crystal is stable. The dazzling fire, the exquisite heart and arrow cut to create the top Moissan diamond.",
+    "subtitle1":"Moreshine's Moissan diamonds are all imported from the United States, cut from the origin, and one diamond One certificate, supporting official testing, each Moissanite can reach DF color, and the crystal is stable. The dazzling fire, the exquisite heart and arrow cut to create the top Moissan diamond.",
     "subtitle2":"Exclusive customization, copy your time stamp",
     "subtitle3":"Creative design to conclude unique true love accessories",
     "ringTitle":"Promise on the finger",
@@ -2188,7 +2191,7 @@
         "tbody21": "0%",
         "tbody51": "0%",
         "web": "www.customs.gov.hk",
-        "tel": "Phone:(852)2815-7711"
+        "tel": "Phone:0755-25160872-8005"
       },
       "table4": {
         "country": "Japan",

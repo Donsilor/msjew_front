@@ -42,12 +42,7 @@
       </div>
       <div class="pay-blocks">
         <!-- paypal -->
-        <div
-          v-show="this.$store.state.platform !== 20"
-          :class="{ 'pay-choose': payWay == 6 }"
-          class="pay-block"
-          @click="payWay = 6"
-        >
+        <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 6 }" class="pay-block" @click="payWay = 6">
           <div class="pay-img">
             <img src="../../static/order/paypalpay.png" alt="" />
           </div>
@@ -65,13 +60,28 @@
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div>
+
+        <!-- Stripe -->
+        <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="payWay = 9">
+          <div class="pay-img">
+            <img src="../../static/order/stripe.png" alt="" />
+          </div>
+          <div class="pay-desc">{{ $t(`${lang}.Stripe`) }}</div>
+          <div v-if="this.$store.state.platform == 40" v-show="payWay == 9" class="pay-price">
+            {{ formatCoin(coinType) }} {{ formatAmount(price) }}
+          </div>
+          <div v-else v-show="payWay == 9" class="pay-price">
+            {{ formatCoin(coinType) }} {{ formatMoney(price) }}
+          </div>
+          <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
+            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
+          </div> -->
+          <div v-show="payWay == 9" class="choose-tick">
+            <img src="../../static/order/tick.png" alt="" />
+          </div>
+        </div>
         <!-- vise -->
-          <div
-          v-show="this.$store.state.platform !== 20"
-          :class="{ 'pay-choose': payWay == 61 }"
-          class="pay-block"
-          @click="payWay = 61"
-        >
+        <!-- <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 61 }" class="pay-block" @click="payWay = 61">
           <div class="pay-img">
             <img src="../../static/order/visa.png" alt="" />
           </div>
@@ -82,13 +92,10 @@
           <div v-else v-show="payWay === 61" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <!-- <div v-show="payWay === 61 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
-            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div> -->
           <div v-show="payWay == 61" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div>
+        </div> -->
         <!-- 支付宝 -->
         <div
           v-show="this.$store.state.platform == 20"
@@ -113,12 +120,7 @@
         </div>
 
         <!-- 香港支付宝 -->
-        <div
-          v-show="this.$store.state.platform == 10"
-          :class="{ 'pay-choose': payWay == 84 }"
-          class="pay-block"
-          @click="payWay = 84"
-        >
+        <!-- <div v-show="this.$store.state.platform == 10" :class="{ 'pay-choose': payWay == 84 }" class="pay-block" @click="payWay = 84">
           <div class="pay-img">
             <img src="../../static/order/alipay-HK.png" alt="" class="initial"/>
           </div>
@@ -126,14 +128,10 @@
           <div v-show="payWay == 84" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <!-- <div v-show="payWay == 84 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
-            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div> -->
           <div v-show="payWay == 84" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-          <!-- <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div> -->
-        </div>
+        </div> -->
 
         <!-- <div
           :class="{ 'pay-choose': payWay === 8 }"
@@ -151,13 +149,8 @@
             <img src="../../static/order/tick.png" alt="" />
           </div>
         </div> -->
-        <!-- 微信 -->
-        <div
-          v-show="this.$store.state.platform == 10"
-          :class="{ 'pay-choose': payWay == 83 }"
-          class="pay-block"
-          @click="payWay = 83"
-        >
+        <!-- 微信(香港) -->
+        <!-- <div v-show="this.$store.state.platform == 10" :class="{ 'pay-choose': payWay == 83 }" class="pay-block" @click="payWay = 83">
           <div class="pay-img">
             <img src="../../static/order/wechatpay.png" alt="" />
           </div>
@@ -165,15 +158,10 @@
           <div v-show="payWay == 83" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
-            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div> -->
           <div v-show="payWay == 83" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-          <!-- <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
-          "><span>*</span> {{ $t(`${lang}.msg11`) }}</div> -->
-        </div>
+        </div> -->
 
         <!-- 微信（大陆） -->
         <div
@@ -200,12 +188,7 @@
         </div>
 
         <!-- 信用卡 -->
-        <div
-          v-show="this.$store.state.platform == 10"
-          :class="{ 'pay-choose': payWay == 81 }"
-          class="pay-block"
-          @click="payWay = 81"
-        >
+        <!-- <div v-show="this.$store.state.platform == 10" :class="{ 'pay-choose': payWay == 81 }" class="pay-block" @click="payWay = 81">
           <div class="pay-img">
             <img src="../../static/order/unionpay.png" alt="" />
           </div>
@@ -213,22 +196,14 @@
           <div v-show="payWay === 81" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <!-- <div v-show="payWay === 81 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
-            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div> -->
           <div v-show="payWay == 81" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
           <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div>
-        </div>
+        </div> -->
 
         <!-- 电汇 -->
-        <div
-           v-show="this.$store.state.platform == 10 || this.$store.state.platform == 40"
-          :class="{ 'pay-choose': payWay == 88 }"
-          class="pay-block"
-          @click="payWay = 88;wire()"
-        >
+        <!-- <div v-show="this.$store.state.platform == 10 || this.$store.state.platform == 40" :class="{ 'pay-choose': payWay == 88 }" class="pay-block" @click="payWay = 88;wire()">
           <div class="pay-img">
             <img src="../../static/order/epay.png" alt="" />
           </div>
@@ -239,13 +214,10 @@
           <div v-else v-show="payWay == 88" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
-          <!-- <div v-show="payWay == 88 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
-            ({{ coinHKD }} {{ formatMoney(priceHKD) }})
-          </div> -->
           <div v-show="payWay == 88" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div>
+        </div> -->
         <!-- <div
           :class="{ 'pay-choose': payWay == 1 }"
           class="pay-block"
@@ -266,7 +238,8 @@
         <!-- <div class="pay-question" @click="answer = true">?</div> mainland -->
       </div>
       <div v-if="this.$store.state.platform === 20" class="pay-btn" @click="mainLandPay()">{{ $t(`${lang}.pay`) }}</div>
-      <div v-else class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
+      <div v-else-if="this.$store.state.platform === 10 || this.$store.state.platform === 30" class="pay-btn" @click="goPay()">{{ $t(`${lang}.pay`) }}</div>
+      <!-- <div class="pay-btn" @click="StripePay()">{{ $t(`${lang}.pay`) }}</div> -->
     </div>
     <!-- 电汇弹窗 -->
     <div class="wireTransfer" v-show="transfer">
@@ -419,7 +392,7 @@ export default {
     }
     return {
       lang,
-      payWay: 0,
+      payWay: 6,
       answer: false,
       pay: false,
       isPay: false,
@@ -473,6 +446,7 @@ export default {
     }
   },
   mounted(){
+    console.log("stripe",window.location.host)
     this.language = this.$store.state.language
     let element = document.querySelector('.el-upload ')
 
@@ -640,6 +614,8 @@ export default {
       let pay = ""
       if(this.payWay==6){
         pay = 6
+      }else if(this.payWay==9){
+        pay = 9
       }else if(this.payWay==61){
         pay = 61
       }else if(this.payWay==81){
@@ -653,66 +629,46 @@ export default {
       }else if(this.payWay==84){
         pay = 84
       }
-
-      // const data = this.$helpers.transformRequest(
-      //   JSON.parse(
-      //     JSON.stringify({
-      //       orderId: this.$route.query.orderId,
-      //       // // visa付款自动转成PayPal付款
-      //       // payChannel: pay
-      //       payType: 2,
-      //       tradeType:"pc",
-      //       // data:{
-      //       //    orderId: this.$route.query.orderId,
-      //       // }
-      //     })
-      //   ),
-      //   false
-      // )
+      
       let baseUrl=this.$store.getters.baseUrl
+      let returnUrl = baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
+      if(pay == 6){
+        returnUrl = baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
+      }else {
+        returnUrl = baseUrl+'/complete-paySuccess?order_sn='+this.$route.query.orderId
+      }
       const data ={
         orderId: this.$route.query.orderId,
         coinType: this.$route.query.coinType,
-        // // visa付款自动转成PayPal付款 https://www2.bddco.com   http://localhost:8318   https://www.bdd.bddia.com https://www.bddco.com/
-        // payChannel: pay
         payType: pay,
         tradeType:"pc",
-        returnUrl:baseUrl+'/complete-paySuccess?orderId='+this.$route.query.orderId
+        returnUrl: returnUrl
       }
       this.goingPay = true
       this.$axios
         .post('/web/pay/create', data)
         .then(res => {
-          // console.log("url",res)
+          console.log("url",res.data)
           if (res.data.config) {
-            if (pay !== 7) {
-              window.location.replace(res.data.config)
+            if(pay == 9){
+              // 测试key
+              let TestKey = "pk_test_51Hh91GEg2ty3UyHNujJu3xu3nemS1rzfb14kys3CImsO1iCtpprr082i0Gfbe9EQ3cWLc5KBoKS2azrE4IIFB5Gu00GgMY0bLj"
+              // 正式key
+              let formalKey = "pk_live_51Hh91GEg2ty3UyHNGwh4IfEY1BgtJ1FHVNy0zQBoVclAfEp1YX7W8kOmpYaUvoxwKtYvfbPQ1HlOzj1wksI7sPN900zzHU8v9c"
+
+              let stripe = Stripe(TestKey);
+              let host = window.location.host
+              if ((/(msjew)\.com/).test(host)) {
+                stripe = Stripe(formalKey);// 正式key
+              } else if((/(msjew.bddco)\.cn/).test(host)){
+                stripe = Stripe(TestKey); // 测试key
+              }
+        
+              return stripe.redirectToCheckout({ sessionId: res.data.config });
             } else {
-              const promise = new Promise((resolve, reject) => {
-                this.form = []
-                const obj = JSON.parse(res.data.config)
-                const objKey = Object.keys(obj)
-                for (const i in objKey) {
-                  if (objKey[i] === 'url') {
-                    this.actionLink = obj[objKey[i]]
-                    continue
-                  }
-                  const o = {
-                    name: objKey[i],
-                    val: obj[objKey[i]]
-                  }
-                  this.form.push(o)
-                }
-                resolve()
-              })
-              promise.then(() => {
-                setTimeout(() => {
-                  this.isPay = false
-                  document.getElementById('unionPay').click()
-                }, 2000)
-              })
+              window.location.replace(res.data.config)
             }
-          } else {
+          }else {
             this.$router.replace({
               path: '/complete-paySuccess',
               query: {

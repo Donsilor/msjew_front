@@ -2556,7 +2556,7 @@ export default {
     .img-center{
       position: relative;
       .info{
-        width: 260px;
+        width: 262px;
         position: absolute;
         left:15.5%;
         top:50%;
@@ -2630,7 +2630,7 @@ export default {
     .img-center{
       position: relative;
       .info{
-        width: 330px;
+        width: 343px;
         position: absolute;
         right:10%;
         top:40%;
