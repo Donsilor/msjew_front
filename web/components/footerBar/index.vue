@@ -27,7 +27,9 @@
           </div>
         </div>
         <div class="right-item">
-          <div class="code"><img src="/index-ms/ewm.png" alt=""></div>
+          <div v-if="this.$store.state.platform === 10" class="code"><img src="/index-ms/hk_ewm.png" alt=""></div>
+          <div v-else-if="this.$store.state.platform === 20" class="code"><img src="/index-ms/ewm.png" alt=""></div>
+          <div v-else-if="this.$store.state.platform === 30" class="code"><img src="/index-ms/us_ewm.png" alt=""></div>
         </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
@@ -423,13 +425,13 @@ export default {
                 // path: '/brand-story'
               }
             },
-            {
-              icon: '',
-              name: this.$t(`${lang}.Call`),
-              to: {
-                // path: '/education/diamonds/carat'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.Call`),
+            //   to: {
+            //     // path: '/education/diamonds/carat'
+            //   }
+            // },
             {
               icon: '',
               name: this.$t(`${lang}.Email`),

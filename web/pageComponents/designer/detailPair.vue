@@ -1621,7 +1621,7 @@ export default {
     width: 230px;
   }
   .right-properties {
-    width: 420px;
+    // width: 420px;
   }
 
   .left-properties,
