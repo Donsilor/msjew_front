@@ -7,7 +7,7 @@
         <!-- <div class="line"></div> -->
       </div>
       <div class="menus">
-         <div class="left-item">
+        <div class="left-item" v-if="this.$store.state.platform === 20">
           <div v-for="(group, index) in menusCn" :key="index" class="menu-group">
             <dl>
               <dt class="group-name">{{ group.groupName }}</dt>
@@ -26,7 +26,26 @@
             </dl>
           </div>
         </div>
-        <div class="right-item">
+        <div class="left-item" v-else>
+          <div v-for="(group, index) in menus" :key="index" class="menu-group">
+            <dl>
+              <dt class="group-name">{{ group.groupName }}</dt>
+              <dd
+                v-for="(item, itemIndex) in group.children"
+                :key="itemIndex"
+                class="item"
+              >
+                <div v-if="item.icon" class="item-icon">
+                  <i :class="['iconfont', item.icon]"></i>
+                </div>
+                <div class="item-name">
+                  <nuxt-link :to="item.to">{{ item.name }}</nuxt-link>
+                </div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+        <div class="right-item" >
           <div v-if="this.$store.state.platform === 10" class="code"><img src="/index-ms/hk_ewm.png" alt=""></div>
           <div v-else-if="this.$store.state.platform === 20" class="code"><img src="/index-ms/ewm.png" alt=""></div>
           <div v-else-if="this.$store.state.platform === 30" class="code"><img src="/index-ms/us_ewm.png" alt=""></div>
@@ -127,123 +146,61 @@ export default {
       lang,
       menus: [
         {
-          groupName: this.$t(`${lang}.chooseMORESHINE`),
+          groupName: this.$t(`${lang}.helpCenter`),
           children: [
-            // {
-            //   icon: '',
-            //   name: this.$t(`${lang}.qualityAndValue`),
-            //   to: {
-            //     path: '/policies/quality-value'
-            //   }
-            // },
             {
               icon: '',
-              name: this.$t(`${lang}.returnAndRefundPolicy`),
+              name: this.$t(`${lang}.ShoppingGuide`),
               to: {
-                path: '/policies/return-refund-policy'
+                // path: '/policies/quality-value'
               }
             },
             {
               icon: '',
-              name: this.$t(`${lang}.findYourRingSize`),
+              name: this.$t(`${lang}.MemberCentre`),
               to: {
-                path: '/education/rings/size'
+                // path: '/policies/return-refund-policy'
+              }
+            },
+            {
+              icon: '',
+              name: this.$t(`${lang}.WorryFreeAfterSales`),
+              to: {
+                // path: '/education/rings/size'
+              }
+            },
+            {
+              icon: '',
+              name: this.$t(`${lang}.ConvenientDelivery`),
+              to: {
+                // path: '/education/rings/size'
               }
             }
           ]
         },
         {},
         {
-          groupName: this.$t(`${lang}.aboutMORESHINE`),
+          groupName: this.$t(`${lang}.contactUs`),
           children: [
+            {
+              icon: '',
+              name: this.$t(`${lang}.Address`),
+              to: {
+                // path: '/brand-story'
+              }
+            },
             // {
             //   icon: '',
-            //   name: this.$t(`${lang}.MORESHINEBrandStory`),
+            //   name: this.$t(`${lang}.Call`),
             //   to: {
-            //     path: '/brand-story'
+            //     // path: '/education/diamonds/carat'
             //   }
             // },
-            
-            // {
-            //   icon: '',
-            //   name: this.$t(`${lang}.diamondKnowledge`),
-            //   to: {
-            //     path: '/education/diamonds/carat'
-            //   }
-            // },
             {
               icon: '',
-              name: this.$t(`${lang}.paymentMethods`),
+              name: this.$t(`${lang}.Email`),
               to: {
-                path: '/policies/payment-methods'
-              }
-            }
-          ]
-        },
-        {},
-        {
-          groupName: this.$t(`${lang}.MORESHINEPolicy`),
-          children: [
-            {
-              icon: '',
-              name: this.$t(`${lang}.freeShippingService`),
-              to: {
-                path: '/policies/free-shipping'
-              }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.deliveryPolicy`),
-              to: {
-                path: '/policies/shipping'
-              }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.internationalPolicy`),
-              to: {
-                path: '/policies/international'
-              }
-            },
-            {
-              icon: '',
-              name: this.$t(`${lang}.privacyPolicy`),
-              to: {
-                path: '/policies/privacy-policy'
-              }
-            },
-            // {
-            //   icon: '',
-            //   name: this.$t(`${lang}.termsAndConditions`),
-            //   to: {
-            //     path: '/policies/terms-and-conditions'
-            //   }
-            // }
-          ]
-        },
-        {},
-        {
-          groupName: this.$t(`${lang}.contact`),
-          children: [
-            {
-              icon: 'iconicon-xiaoxi',
-              name: this.$t(`${lang}.contactTime`),
-              to: {
-                path: '/contact-us'
-              }
-            },
-            {
-              icon: 'iconphone',
-              name: this.$t(`${lang}.contactTel`),
-              to: {
-                path: '/contact-us'
-              }
-            },
-            {
-              icon: 'iconyouxiang',
-              name: this.$t(`${lang}.contactEmail`),
-              to: {
-                path: '/contact-us'
+                // path: '/policies/payment-methods'
               }
             }
           ]
@@ -425,13 +382,13 @@ export default {
                 // path: '/brand-story'
               }
             },
-            // {
-            //   icon: '',
-            //   name: this.$t(`${lang}.Call`),
-            //   to: {
-            //     // path: '/education/diamonds/carat'
-            //   }
-            // },
+            {
+              icon: '',
+              name: this.$t(`${lang}.Call`),
+              to: {
+                // path: '/education/diamonds/carat'
+              }
+            },
             {
               icon: '',
               name: this.$t(`${lang}.Email`),

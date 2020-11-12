@@ -38,12 +38,12 @@
               <div >{{ lang.Address }}</div> 
             </div>
           </li>
-          <!-- <li >
+          <li v-if="this.$store.state.platform === 21">
             <div class="item">
               <span >{{ lang.CallTile }}</span>
               <div >{{ lang.Call }}</div>
             </div>
-          </li> -->
+          </li>
           <li >
             <div class="item">
               <span >{{ lang.EmailTile }} </span>
