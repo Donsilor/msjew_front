@@ -107,7 +107,8 @@ module.exports = {
     { src: '~assets/css/iconfont.css' },
     { src: '~assets/css/common.css' },
     { src: 'element-ui/lib/theme-chalk/index.css' },
-    { src: '~assets/css/element-customize.css' }
+    { src: '~assets/css/element-customize.css' },
+    { src: 'swiper/swiper-bundle.css' }
   ],
   transition: {
     name: 'layout',
@@ -124,7 +125,8 @@ module.exports = {
     { src: '@/plugins/ssr-helpers', ssr: true },
     { src: '@/plugins/vue-components', ssr: true },
     { src: '@/plugins/vue-https', ssr: true },
-    { src: '@/plugins/element-ui', ssr: true }
+    { src: '@/plugins/element-ui', ssr: true },
+    { src: "~/plugins/vue-swiper.js", ssr: false}
   ],
 
   /*

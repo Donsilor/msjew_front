@@ -65,12 +65,11 @@ module.exports = {
         type: 'text/javascript',
         charset: 'utf-8'
       },
-     {
-        src: 'https://pwt.zoosnet.net/JS/LsJS.aspx?siteid=PWT48608987&float=1&lng=cn',
-        type: 'text/javascript',
-        charset: 'utf-8',
-        //async: true
-      },      
+    //  {
+    //     src: 'https://pwt.zoosnet.net/JS/LsJS.aspx?siteid=PWT48608987&float=1&lng=cn',
+    //     type: 'text/javascript',
+    //     charset: 'utf-8',
+    //   },      
       {
         src: '/google-layer.js',
         type: 'text/javascript',
