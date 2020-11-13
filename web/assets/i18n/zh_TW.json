@@ -652,6 +652,7 @@
             "copyrightRight1": "粵ICP備",
             "copyrightRight2": "號/Copyright©2018-2020 MORESHINE官网   All Rights Reserved.",
             "copyrightRightMs": "Copyright©2018-2020 MORESHINE官網 All Rights Reserved.",
+            "copyrightRightMsCn": "粤ICP備20035106號/Copyright©2018-2020 MORESHINE官網 All Rights Reserved.",
             "helpCenter":"幫助中心",
             "contactUs":"與我們珠寶顧問聯絡",
             "ShoppingGuide":"購物指南",
@@ -660,7 +661,9 @@
             "ConvenientDelivery":"便捷配送",
             "Address":"地址：廣東省深圳市羅湖區布心路3008號IBC中心A座1306室",
             "Call":"電話：0755 - 25160872 - 8005",
-            "Email":"電郵：service@msjew.com"
+            "Email":"電郵：service@msjew.com",
+            "scanIt":"掃壹掃",
+            "coming":"進入移動官網"
         },
         "sendEmailCode": {
             "sendCode": "發送驗證碼",
@@ -1383,7 +1386,7 @@
         "payWay": "選擇支付方式",
         "orderInfo": "訂單详情",
         "PayPal": "使用PayPal安全支付",
-        "Stripe": "使用Stripe安全支付",
+        "Stripe": "使用借记卡或信用卡付款",
         "visa": "使用VISA，Master Card，DISCOVER，AMEX 等信用卡，安全支付",
         "UnionPay": "使用中國銀聯銀行卡，安全支付",
         "AliPay": "網上付款，方便，快捷",
