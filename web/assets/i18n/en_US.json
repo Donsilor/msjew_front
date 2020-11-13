@@ -649,6 +649,7 @@
             "copyrightRight1": "Canton ICP No.",
             "copyrightRight2": "©2018-2020 MORESHINE All Rights Reserved.",
             "copyrightRightMs": "©2018-2020 MORESHINE All Rights Reserved.",
+            "copyrightRightMsCn": "Canton ICP No.20035106©2018-2020 MORESHINE All Rights Reserved.",
             "helpCenter":"Help center",
             "contactUs":"Contact Our Jewelry Consultant",
             "ShoppingGuide":"Shopping guide",
@@ -657,7 +658,9 @@
             "ConvenientDelivery":"Convenient delivery",
             "Address":"Address：Room 1306, Block A, IBC Center, No. 3008 Buxin Road, Luohu District, Shenzhen, Guangdong, China",
             "Call":"Phone：0755 - 25160872 - 8005",
-            "Email":"Email：service@msjew.com"
+            "Email":"Email：service@msjew.com",
+            "scanIt":"Scan to enter",
+            "coming":"the mobile website"
         },
         "sendEmailCode": {
             "sendCode": "Verification",
@@ -1379,7 +1382,7 @@
         "payWay": "Select payment method",
         "orderInfo": "Order details",
         "PayPal": "Using PayPal's secure payment solution",
-        "Stripe": "Using Stripe's secure payment solution",
+        "Stripe": "Pay with a debit or credit card",
         "visa": "Pay By Credit Card (VISA, Master Card, Discover Card, AMEX), Secure Payment",
         "UnionPay": "Using UnionPay cards’secure payment solution",
         "AliPay": "Easier and safer online payment",

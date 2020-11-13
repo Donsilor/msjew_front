@@ -46,9 +46,22 @@
           </div>
         </div>
         <div class="right-item" >
-          <div v-if="this.$store.state.platform === 10" class="code"><img src="/index-ms/hk_ewm.png" alt=""></div>
-          <div v-else-if="this.$store.state.platform === 20" class="code"><img src="/index-ms/ewm.png" alt=""></div>
-          <div v-else-if="this.$store.state.platform === 30" class="code"><img src="/index-ms/us_ewm.png" alt=""></div>
+          <div v-if="this.$store.state.platform === 10" class="code">
+            <img src="/index-ms/hk_ewm.png" alt="">
+            <div>{{ $t(`${lang}.scanIt`) }}</div>
+            <div>{{ $t(`${lang}.coming`) }}</div>
+          </div>
+          <div v-else-if="this.$store.state.platform === 20" class="code">
+            <img src="/index-ms/ewm.png" alt="">
+            <div>{{ $t(`${lang}.scanIt`) }}</div>
+            <div>{{ $t(`${lang}.coming`) }}</div>
+          </div>
+          <div v-else-if="this.$store.state.platform === 30" class="code">
+            <img src="/index-ms/us_ewm.png" alt="">
+            <div>{{ $t(`${lang}.scanIt`) }}</div>
+            <div>{{ $t(`${lang}.coming`) }}</div>
+            <div></div>
+          </div>
         </div>
         <div class="Shadow" @click="setCoin()"></div>
       </div>
@@ -126,7 +139,8 @@
     </div>-->
     <footer class="copy-right">
       <div class="copy-right-content">
-        <div >{{ $t(`${lang}.copyrightRightMs`) }}</div>
+        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRightMsCn`) }}</div>
+        <div v-else>{{ $t(`${lang}.copyrightRightMs`) }}</div>
         <!-- <div v-else>{{ $t(`${lang}.copyrightLeft`) }}</div> -->
         <!-- <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRight1`) }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ $t(`${lang}.copyrightRight2`) }}</div>
         <div v-else>{{ $t(`${lang}.copyrightRight`) }}</div> -->
@@ -182,13 +196,13 @@ export default {
         {
           groupName: this.$t(`${lang}.contactUs`),
           children: [
-            {
-              icon: '',
-              name: this.$t(`${lang}.Address`),
-              to: {
-                // path: '/brand-story'
-              }
-            },
+            // {
+            //   icon: '',
+            //   name: this.$t(`${lang}.Address`),
+            //   to: {
+            //     // path: '/brand-story'
+            //   }
+            // },
             // {
             //   icon: '',
             //   name: this.$t(`${lang}.Call`),
@@ -465,6 +479,13 @@ export default {
 <style lang="less" scoped>
 .footer-bar {
   margin-top: 40px;
+  .code{
+    div{
+      color: #666666;
+      font-size: 12px;
+      line-height: 20px;
+    }
+  }
   .slogan{
     border-top:5px solid #d4e8ec;
     border-bottom:5px solid #d4e8ec;
