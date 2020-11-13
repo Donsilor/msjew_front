@@ -728,7 +728,7 @@ export default {
       let tradeType = ''
       let data = {}
       
-      if(pay !== 1 || pay !== 2){
+      if(pay !== 1 && pay !== 2){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         return 
       }
