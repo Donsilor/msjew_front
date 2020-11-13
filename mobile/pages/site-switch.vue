@@ -117,7 +117,7 @@ export default {
   layout: 'no-footer-bar',
   head() {
     return {
-      title: `BBD&Co.`
+      title: `MORESHINE`
     }
   },
   data() {
