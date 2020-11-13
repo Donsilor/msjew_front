@@ -99,21 +99,21 @@
         <!-- 支付宝 -->
         <div
           v-show="this.$store.state.platform == 20"
-          :class="{ 'pay-choose': payWay == 2 }"
+          :class="{ 'pay-choose': payWayCn == 2 }"
           class="pay-block"
-          @click="payWay = 2"
+          @click="payWayCn = 2"
         >
           <div class="pay-img">
             <img src="../../static/order/alipay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay == 2" class="pay-price">
+          <div v-show="payWayCn == 2" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <!-- <div v-show="payWay == 82 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
           </div> -->
-          <div v-show="payWay == 2" class="choose-tick">
+          <div v-show="payWayCn == 2" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
           <!-- <div class="hint_pay"><span>*</span> {{ $t(`${lang}.msg12`) }}</div> -->
@@ -166,21 +166,21 @@
         <!-- 微信（大陆） -->
         <div
           v-show="this.$store.state.platform == 20"
-          :class="{ 'pay-choose': payWay == 1 }"
+          :class="{ 'pay-choose': payWayCn == 1 }"
           class="pay-block"
-          @click="payWay = 1"
+          @click="payWayCn = 1"
         >
           <div class="pay-img">
             <img src="../../static/order/wechatpay.png" alt="" />
           </div>
           <div class="pay-desc">{{ $t(`${lang}.AliPay`) }}</div>
-          <div v-show="payWay == 1" class="pay-price">
+          <div v-show="payWayCn == 1" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
           </div>
           <!-- <div v-show="payWay == 83 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
           </div> -->
-          <div v-show="payWay == 1" class="choose-tick">
+          <div v-show="payWayCn == 1" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
           <!-- <div class="hint_pay" :class="language == 'en_US' ? 'en' : ''
@@ -393,6 +393,7 @@ export default {
     return {
       lang,
       payWay: 6,
+      payWayCn:2, 
       answer: false,
       pay: false,
       isPay: false,
@@ -431,7 +432,7 @@ export default {
     }
   },
   created(){
-    if(this.payWay == 1){
+    if(this.payWayCn == 1){
         //实现轮询
         this.interval = window.setInterval(() => {
           setTimeout(this.payVerify(), 0);
@@ -439,7 +440,7 @@ export default {
     }
   },
   beforeDestroy() {
-    if(this.payWay == 1){
+    if(this.payWayCn == 1){
       //清除轮询   
       clearInterval(this.interval)
       this.interval = null
@@ -698,26 +699,26 @@ export default {
     // 大陆支付
     mainLandPay(){
       if(this.$store.state.coin === 'USD'){
-        if(this.payWay == 2 || this.payWay == 83|| this.payWay == 1||this.payWay == 81||this.payWay == 84){
+        if(this.payWayCn == 2 || this.payWayCn == 83|| this.payWayCn == 1||this.payWayCn == 81||this.payWayCn == 84){
           this.$errorMessage(this.$t(`${lang}.NotSupportPay`))
           return
         }
       }
 
       let pay = ""
-      if(this.payWay==6){
+      if(this.payWayCn==6){
         pay = 6
-      }else if(this.payWay==61){
+      }else if(this.payWayCn==61){
         pay = 61
-      }else if(this.payWay==81){
+      }else if(this.payWayCn==81){
         pay = 81
-      }else if(this.payWay==2){
+      }else if(this.payWayCn==2){
         pay = 2
-      }else if(this.payWay==83){
+      }else if(this.payWayCn==83){
         pay = 83
-      }else if(this.payWay==1){
+      }else if(this.payWayCn==1){
         pay = 1
-      }else if(this.payWay==84){
+      }else if(this.payWayCn==84){
         pay = 84
       }
       console.log("方式",pay)
@@ -726,7 +727,8 @@ export default {
 
       let tradeType = ''
       let data = {}
-      if(pay == ''){
+      
+      if(pay !== 1 || pay !== 2){
         this.$errorMessage(this.$t(`${lang}.msg9`))
         return 
       }
