@@ -1528,7 +1528,8 @@
         "newPrice": "Discount price",
         "needLogin": "Please login before redeem the coupon. ",
         "buyNow":"Order Now",
-        "firstLogin": "Please login or register!"
+        "firstLogin": "Please login or register!",
+        "scan": "Scan the code to experience the wearing effect"
     },
     "policies": {
         "layout": {

@@ -4,7 +4,7 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails" @getIdx="getIndex" :coupon="coupons"></product-images>
+        <product-images :images="thumbnails" @getIdx="getIndex" :coupon="coupons" :ifCode="ifShowCode"></product-images>
 		
         <div class="magn-box">
           <bdd-magnifying :msg="magnifying"></bdd-magnifying>
@@ -630,7 +630,8 @@ export default {
           config_id:'',
           config_attr_id:''
         }
-      ]
+      ],
+      ifShowCode: false
     }
   },
   computed: {
@@ -803,11 +804,13 @@ export default {
     }
   },
   mounted() {
-    console.log("ppppppp",this.productInfo)
+    // console.log("ppppppp",this.productInfo)
     const _this = this
     if(this.info.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
     }
+
+    this.ifShowCode = !!this.info.arImage
 
     _this.$nextTick(() => {
       // console.log(this.$helpers.base64Decode(this.$route.query.steps))

@@ -1532,7 +1532,8 @@
         "newPrice": "折後價",
         "needLogin": "請先登錄，才能領取優惠券",
         "buyNow":"立即購買",
-        "firstLogin": "請先登錄或註冊！"
+        "firstLogin": "請先登錄或註冊！",
+        "scan": "手機掃碼，感受上手效果"
     },
     "policies": {
         "layout": {
