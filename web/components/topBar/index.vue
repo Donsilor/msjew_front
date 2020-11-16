@@ -74,7 +74,12 @@
                 </span> -->
                 <span v-else  class="row-flex align-item-center el-dropdown-link span">
                   <i class="iconfont icongerenzhongxin"></i>
-                  {{ userInfo.realname}}
+                  <span v-if="language === 'zh_CN'">
+                    {{ userInfo.lastname}}{{ userInfo.firstname}}
+                  </span>
+                  <span v-else>
+                    {{ userInfo.firstname}}{{ userInfo.lastname}}
+                  </span>
                   <i class="iconfont iconkuozhan"></i>
                 </span>
 
