@@ -1572,7 +1572,8 @@
         "newPrice": "折后价",
         "needLogin": "请先登录，才能领取优惠券",
         "buyNow":"立即购买",
-        "firstLogin": "请先登录或注册！"
+        "firstLogin": "请先登录或注册！",
+        "scan": "扫一扫，感受上手效果"
     },
     "policies": {
         "layout": {
