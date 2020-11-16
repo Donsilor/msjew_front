@@ -23,7 +23,7 @@ export default {
   layout: 'login',
   head() {
     return {
-      title: `BBD&Co.`
+      title: `MORESHINE`
     }
   },
   data() {

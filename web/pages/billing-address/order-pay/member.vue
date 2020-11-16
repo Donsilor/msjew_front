@@ -2094,7 +2094,7 @@ export default {
       mobileMax: 20,
       currency: '',
       platform: this.$store.state.platform,
-      addressIdx: -1,
+      addressIdx: 0,
       delIdx: -2,
       couponCodeR: {
         couponId: ''

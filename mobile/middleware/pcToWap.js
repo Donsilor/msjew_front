@@ -70,8 +70,8 @@ export default function ({ req, res, redirect, store, route }) {
             //生产环境
             host = 'https://' + headerHost.replace('wap-', '');
         } else if ((/bddco\.cn/).test(headerHost)) {
-            //大陆站点bddco.cn
-            if ((/^(wap-hk|wap-us|wap-tw)-bdd\.msjew\.cn/).test(headerHost)) {
+            //大陆站点bddco.cn  // https://wap-hk-msjew.bddco.cn/ 
+            if ((/^(wap-hk|wap-us|wap-tw)-msjew\.bddco\.cn/).test(headerHost)) {
                 host = 'https://' + headerHost.replace('wap-', '');
             } else if (headerHost == 'wap-msjew.bddco.cn') {
                 host = 'https://www-msjew.bddco.cn'
