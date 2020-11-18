@@ -3,14 +3,14 @@
     <span class="name">{{ name }}</span>
     <div class="radio">
       <div
-        v-for="(item, index) in list"
+        v-for="(item, index) in lists"
         :key="index"
         class="radio-content"
-        @click="changeVal(index)"
+        @click="changeVal(item.gender_id)"
       >
-        <span class="title">{{ item }}</span>
+        <span class="title">{{ item.gender_name }}</span>
         <div class="circular">
-          <span :class="index == indexs ? 'active' : ''"></span>
+          <span :class="item.gender_id == indexs ? 'active' : ''"></span>
         </div>
       </div>
     </div>
@@ -41,8 +41,21 @@ export default {
       indexs: this.val
     }
   },
+  computed:{
+    lists(){
+      let arrList = [];
+      for (let i in this.list) {
+        var j = {};
+        j.gender_id = parseFloat(i)+1
+        j.gender_name = this.list[i]
+        arrList.push(j);
+      }
+      // console.log('22', arrList)
+      return arrList
+    }
+  },
   created() {
-    console.log('22', this.val, this.list)
+    console.log('22', this.val, this.lists)
   },
   methods: {
     changeVal(val) {
@@ -56,14 +69,16 @@ export default {
 <style scoped lang="less">
 .single {
   width: 100%;
-  height: 80px;
+  // height: 80px;
   text-align: left;
+  display: flex;
   .name {
-    height: 14px;
+    // height: 14px;
     font-size: 14px;
     line-height: 40px;
     font-weight: 400;
     color: rgba(102, 102, 102, 1);
+    margin-right: 10px;
   }
   .radio {
     display: flex;

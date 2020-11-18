@@ -363,7 +363,6 @@
       "title": "Login email",
       "sex": "Gender",
       "sexList": [
-        "General model",
         "Men",
         "Women"
       ],
@@ -374,8 +373,7 @@
       "marriage": "Marital status",
       "marriageList": [
         "Married",
-        "Unmarried",
-        "Remarriage"
+        "Unmarried"
       ],
       "birthday": "Choose date of birth",
       "tips": "Tips: Date of birth can be chosen only once. Receive double points in month of birth.",
