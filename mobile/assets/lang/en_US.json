@@ -360,7 +360,7 @@
     },
     "account": {
       "header": "Account information",
-      "title": "Login email",
+      "title": "Current account",
       "sex": "Gender",
       "sexList": [
         "Men",
@@ -376,7 +376,7 @@
         "Unmarried"
       ],
       "birthday": "Choose date of birth",
-      "tips": "Tips: Date of birth can be chosen only once. Receive double points in month of birth.",
+      "tips": "Tips: Date of birth can be chosen only once.",
       "saveInfo": "SAVE",
       "toast1": "Enter correct last name，Up to 20 characters for last name",
       "toast2": "Enter correct first name，Up to 20 characters for first name",
