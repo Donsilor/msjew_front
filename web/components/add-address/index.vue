@@ -451,6 +451,10 @@ export default {
         this.$message.error(this.$t(`${lang}.wip11`))
         return
       }
+
+      if (this.using.zip_code == null) {
+        this.using.zip_code = ''
+      }
       
       const json = {
         id: this.using.id,

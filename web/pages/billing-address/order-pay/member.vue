@@ -77,7 +77,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.realname }}</div>
+            <div>{{ a.lastname }}{{ a.firstname }}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -151,7 +151,7 @@
         <div class="left-side">
           <!--          姓名-->
           <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 1 },
@@ -179,11 +179,11 @@
 
           <!--          姓名-->
           <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 2 },
-                { 'border-wrong': wrongInput.firstname }
+                { 'border-wrong': wrongInput.firstName }
               ]"
               class="input-box"
             >
@@ -1020,7 +1020,7 @@
       <i class="iconfont iconrentou" />
       <div>
         {{ $t(`${lang}.darling`) }}{{ $store.state.userInfo.name
-        }}{{ $store.state.userInfo.firstname }}
+        }}
       </div>
       <div
         v-show="!addressMore && address.length !== 0"
@@ -1058,7 +1058,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.realname}}</div>
+            <div>{{ a.firstname }} {{ a.lastname }}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -1133,10 +1133,10 @@
         <div class="left-side">
           <!--          名-->
           <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
             <div
               :class="[
-                { 'border-change': borderChange === 2 },
+                { 'border-change': borderChange === 1 },
                 { 'border-wrong': wrongInput.firstname }
               ]"
               class="input-box"
@@ -1148,7 +1148,7 @@
                 maxlength="30"
                 autocomplete="off"
                 @focus="
-                  borderChange = 2
+                  borderChange = 1
                   wrongInput.firstname = false
                 "
                 @blur="borderChange = 0"
@@ -1158,12 +1158,13 @@
               </div>
             </div>
           </div>
+
           <!--          姓-->
           <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
             <div
               :class="[
-                { 'border-change': borderChange === 1 },
+                { 'border-change': borderChange === 2 },
                 { 'border-wrong': wrongInput.lastname }
               ]"
               class="input-box"
@@ -1175,7 +1176,7 @@
                 maxlength="30"
                 autocomplete="off"
                 @focus="
-                  borderChange = 1
+                  borderChange = 2
                   wrongInput.lastname = false
                 "
                 @blur="borderChange = 0"
@@ -1185,7 +1186,6 @@
               </div>
             </div>
           </div>
-
 
           <!--          电话-->
           <div class="input-line">
@@ -2094,7 +2094,7 @@ export default {
       mobileMax: 20,
       currency: '',
       platform: this.$store.state.platform,
-      addressIdx: 0,
+      addressIdx: -1,
       delIdx: -2,
       couponCodeR: {
         couponId: ''
