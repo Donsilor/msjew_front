@@ -77,7 +77,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.lastname }}{{ a.firstname }}</div>
+            <div>{{ a.firstname }}{{ a.lastname }}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -155,13 +155,13 @@
             <div
               :class="[
                 { 'border-change': borderChange === 1 },
-                { 'border-wrong': wrongInput.lastname }
+                { 'border-wrong': wrongInput.firstname }
               ]"
               class="input-box"
             >
               <input
-                v-model="addressData.lastname"
-                :class="{ 'wrong-input': wrongInput.lastname }"
+                v-model="addressData.firstname"
+                :class="{ 'wrong-input': wrongInput.firstname }"
                 type="text"
                 autocomplete="off"
                 @focus="
@@ -183,13 +183,13 @@
             <div
               :class="[
                 { 'border-change': borderChange === 2 },
-                { 'border-wrong': wrongInput.firstname }
+                { 'border-wrong': wrongInput.lastname }
               ]"
               class="input-box"
             >
               <input
-                v-model="addressData.firstname"
-                :class="{ 'wrong-input': wrongInput.firstname }"
+                v-model="addressData.lastname"
+                :class="{ 'wrong-input': wrongInput.lastname }"
                 type="text"
                 autocomplete="off"
                 @focus="
@@ -1020,7 +1020,7 @@
       <i class="iconfont iconrentou" />
       <div>
         {{ $t(`${lang}.darling`) }}{{ $store.state.userInfo.name
-        }}{{ $store.state.userInfo.firstname }}
+        }}
       </div>
       <div
         v-show="!addressMore && address.length !== 0"
@@ -1058,7 +1058,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.firstname }} {{ a.lastname }}</div>
+            <div>{{ a.lastname }} {{ a.firstname }}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -1136,33 +1136,6 @@
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
             <div
               :class="[
-                { 'border-change': borderChange === 2 },
-                { 'border-wrong': wrongInput.firstname }
-              ]"
-              class="input-box"
-            >
-              <input
-                v-model="addressData.firstname"
-                :class="{ 'wrong-input': wrongInput.firstname }"
-                type="text"
-                maxlength="30"
-                autocomplete="off"
-                @focus="
-                  borderChange = 2
-                  wrongInput.firstname = false
-                "
-                @blur="borderChange = 0"
-              />
-              <div v-show="wrongInput.firstname" class="wrong-alert">
-                {{ $t(`${lang}.wrongInput`) }}
-              </div>
-            </div>
-          </div>
-          <!--          姓-->
-          <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
-            <div
-              :class="[
                 { 'border-change': borderChange === 1 },
                 { 'border-wrong': wrongInput.lastname }
               ]"
@@ -1186,6 +1159,33 @@
             </div>
           </div>
 
+          <!--          姓-->
+          <div class="input-line">
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+            <div
+              :class="[
+                { 'border-change': borderChange === 2 },
+                { 'border-wrong': wrongInput.firstname }
+              ]"
+              class="input-box"
+            >
+              <input
+                v-model="addressData.firstname"
+                :class="{ 'wrong-input': wrongInput.firstname }"
+                type="text"
+                maxlength="30"
+                autocomplete="off"
+                @focus="
+                  borderChange = 2
+                  wrongInput.firstname = false
+                "
+                @blur="borderChange = 0"
+              />
+              <div v-show="wrongInput.firstname" class="wrong-alert">
+                {{ $t(`${lang}.wrongInput`) }}
+              </div>
+            </div>
+          </div>
 
           <!--          电话-->
           <div class="input-line">
