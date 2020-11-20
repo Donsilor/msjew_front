@@ -77,7 +77,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.realname }}</div>
+            <div>{{ a.lastname }}{{ a.firstname }}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -151,7 +151,7 @@
         <div class="left-side">
           <!--          姓名-->
           <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 1 },
@@ -179,7 +179,7 @@
 
           <!--          姓名-->
           <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 2 },
@@ -1058,7 +1058,7 @@
             <!--              <div>CHN</div>-->
           </div>
           <div class="addr-user">
-            <div>{{ a.realname}}</div>
+            <div>{{ a.firstname }} {{ a.lastname }}</div>
             <div>（{{ $t(`${lang}.get`) }}）</div>
           </div>
           <div class="addr-address">
@@ -1133,7 +1133,7 @@
         <div class="left-side">
           <!--          名-->
           <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 2 },
@@ -1160,7 +1160,7 @@
           </div>
           <!--          姓-->
           <div class="input-line">
-            <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
+            <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
             <div
               :class="[
                 { 'border-change': borderChange === 1 },
@@ -2094,7 +2094,7 @@ export default {
       mobileMax: 20,
       currency: '',
       platform: this.$store.state.platform,
-      addressIdx: 0,
+      addressIdx: -1,
       delIdx: -2,
       couponCodeR: {
         couponId: ''

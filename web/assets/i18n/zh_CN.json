@@ -1182,7 +1182,7 @@
             "useAnyway": "所有金额可用",
             "get": "（收）",
             "mrAddress": "默认地址",
-            "setDefaultAddress": "设置默认地址",
+            "setDefaultAddress": "设为默认地址",
             "setSuccess": "默认地址设置成功",
             "change": "更改",
             "newAddress": "新增收货地址",
@@ -2849,7 +2849,7 @@
         "needRegister": "请先登录，才能使用优惠券",
         "msgTitle2": "提示：",
         "msgContent2": "没有选择商品！",
-        "setDefaultAddr": "设置默认地址",
+        "setDefaultAddr": "设为默认地址",
         "setSuccess": "默认地址设置成功",
         "point":"*注：订单金额已做抹零处理"
     },
