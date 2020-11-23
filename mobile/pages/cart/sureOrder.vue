@@ -11,7 +11,8 @@
     <div class="address">
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
-          <span>{{ address.firstname }} {{ address.lastname }}</span>
+          <span v-if="language == 'zh_CN'">{{ address.lastname }}{{ address.firstname }}</span>
+          <span else>{{ address.firstname }} {{ address.lastname }}</span>
           <!-- <span v-if="!this.queryId">{{ lang.default }}</span> -->
         </div>
         <p>{{ address.mobile_code }} {{ address.mobile }}</p>
@@ -460,6 +461,7 @@ export default {
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
       coin: this.$store.state.coin,
+      language: this.$store.state.language,
       form: [],
       actionLink: '',
       // 大陆支付
