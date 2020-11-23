@@ -11,7 +11,7 @@
     <div class="address">
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
-          <span v-if="language == 'zh_CN'">{{ address.lastname }}{{ address.firstname }}</span>
+          <span v-if="language == 'zh-CN'">{{ address.lastname }}{{ address.firstname }}</span>
           <span else>{{ address.firstname }} {{ address.lastname }}</span>
           <!-- <span v-if="!this.queryId">{{ lang.default }}</span> -->
         </div>
