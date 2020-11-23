@@ -572,6 +572,7 @@
               "
               @blur="borderChange = 0"
             />
+            <span class="tex-count" :class="{'color-red':remark.length == 500}">{{texsum}}/500</span>
           </div>
 
           <!-- 发票按钮 -->
@@ -1556,6 +1557,7 @@
               "
               @blur="borderChange = 0"
             />
+            <span class="tex-count" :class="{'color-red':remark.length == 500}">{{texsum}}/500</span>
           </div>
 
           <!-- 发票按钮 -->
@@ -1993,6 +1995,7 @@ export default {
   mixins: [Address],
   data() {
     return {
+      texsum:0,
       aa:this.$t(`${lang2}.PaperInvoice`),
       bb:this.$t(`${lang2}.ElectronicInvoice`),
       iconShow:false,
@@ -2109,6 +2112,11 @@ export default {
       coinTypes:{
         coin:''
       }
+    }
+  },
+  watch:{
+    remark(){
+      this.texsum = this.remark.length;
     }
   },
   computed: {
@@ -4516,6 +4524,7 @@ div {
         margin-top: 19px;
         font-size: 14px;
         color: #333333;
+        position: relative;
         textarea {
           width: 100%;
           height: 80px;
@@ -4530,6 +4539,15 @@ div {
         }
         .border-change {
           border: 1px solid rgba(170, 138, 123, 1);
+        }
+        .tex-count{
+          position: absolute;
+          right:0;
+          bottom: 50px;
+        }
+
+        .color-red{
+          color: red;
         }
       }
       .border-change {
