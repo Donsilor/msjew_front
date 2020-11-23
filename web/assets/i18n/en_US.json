@@ -1138,8 +1138,9 @@
             "psw9": "Enter new password of 6-18 characters",
             "success": "The password is reset successfully. You do not need to log in this time. You need to log in with a new password next time.",
             "email": "Login Email：",
-            "lastName": "Last Name",
-            "firstName": "First Name",
+            "myName": "Name",
+            "lastName": "First Name",
+            "firstName": "Last Name",
             "bookEmail": "E-mail Subscription",
             "yes": "Yes",
             "no": "No",
@@ -1194,7 +1195,16 @@
             "wip8": "Enter phone numbere",
             "wip9": "Enter correct phone number",
             "wip10": "Select country/regional information",
-            "wip11": "Enter full address"
+            "wip11": "Enter full address",
+            "saveSuccess": "Saved successfully",
+            "addAddressSuccess": "The delivery address is added successfully",
+            "forget": "Retrieve Password >",
+            "affirmAdd": "Confirm add",
+            "affirmChanges": "Confirm changes",
+            "country": "Country",
+            "province": "Province/State",
+            "city": "City",
+            "mailAvenue": "Can be used to receive order mail"
         },
         "userOrder": {
             "myOrder": "Order",
@@ -1561,7 +1571,8 @@
         "newPrice": "Discount price",
         "needLogin": "Please login before redeem the coupon. ",
         "buyNow":"Order Now",
-        "firstLogin": "Please login or register!"
+        "firstLogin": "Please login or register!",
+        "scan": "Scan the code to experience the wearing effect"
     },
     "policies": {
         "layout": {
@@ -2746,8 +2757,8 @@
         "change": "Change",
         "address": "Shipping address",
         "mustInput": "* is required",
-        "lastName": "Last name",
-        "firstName": "First name",
+        "lastName": "First name",
+        "firstName": "Last Name",
         "wrongInput": "Wrong",
         "telephone": "Phone",
         "email": "Email",

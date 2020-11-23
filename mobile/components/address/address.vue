@@ -17,7 +17,10 @@
           >
             <div class="left" @click="selectAddress(item)">
             <!-- <div class="left"> -->
-              <p class="p1 ow-h1">{{ item.firstname }} {{ item.lastname }}</p>
+              <p class="p1 ow-h1">
+                <span v-if="language == 'zh_CN'">{{ item.lastname }}{{ item.firstname }}</span>
+                <span v-else>{{ item.firstname }} {{ item.lastname }}</span>
+              </p>
               <p class="p2">{{ item.mobile_code }} {{ item.mobile }}</p>
               <p class="p3">{{ item.email }}</p>
               <p class="p4 ellipsis-address ow-h2">
@@ -77,6 +80,7 @@ export default {
       move: false,
       name: '',
       isLogin: !!this.$store.state.token,
+      language: this.$store.state.language,
       address: [],
       ifShowAditAddress:false,
       editVal:'',

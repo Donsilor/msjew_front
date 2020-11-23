@@ -5,51 +5,48 @@
       <div class="title-name">{{ $t(`${lang}.base`) }}</div>
     </div>
     <div class="base-info">
-      <div>
-        <div  class="base-info-line">
-          <div class="base-info-line-title">{{ $t(`${lang}.account`) }}</div>
-          <div class="base-info-line-content">{{ userInfo.username }}</div>
-        </div>
-        <!-- <div v-else class="base-info-line">
-          <div class="base-info-line-title">{{ $t(`${lang}.email`) }}</div>
-          <div class="base-info-line-content">{{ userInfo.username }}</div>
-        </div> -->
+      <div  class="base-info-line">
+        <div class="base-info-line-title">{{ $t(`${lang}.account`) }}：</div>
+        <div class="base-info-line-content">{{ userInfo.username }}</div>
       </div>
+      <!-- <div v-else class="base-info-line">
+        <div class="base-info-line-title">{{ $t(`${lang}.email`) }}</div>
+        <div class="base-info-line-content">{{ userInfo.username }}</div>
+      </div> -->
       <div class="base-info-line">
-        <div class="base-info-line" v-if="this.language==='zh_CN'">
-           <input
+        <div class="base-info-line-title name"><span class="red">*</span>{{ $t(`${lang}.myName`) }}：</div>
+        <div v-if="language === 'zh_CN'" class="base-info-line-content">
+          <input
             v-model="userInfo.lastname"
-            class="base-name-input"
-            :placeholder="$t(`${lang}.lastName`)"
-            type="text"
-            maxlength="30"
-          />
-
-          <input
-            v-model="userInfo.firstname"
-            class="base-name-input"
-            :placeholder="$t(`${lang}.firstName`)"
-            type="text"
-            maxlength="30"
-          />
-        </div>
-        <div class="base-info-line" v-else>
-          <input
-            v-model="userInfo.firstname"
             class="base-name-input"
             :placeholder="$t(`${lang}.firstName`)"
             type="text"
             maxlength="30"
           />
           <input
-            v-model="userInfo.lastname"
+            v-model="userInfo.firstname"
             class="base-name-input"
             :placeholder="$t(`${lang}.lastName`)"
             type="text"
             maxlength="30"
           />
         </div>
-
+        <div v-else class="base-info-line-content">
+          <input
+            v-model="userInfo.firstname"
+            class="base-name-input"
+            :placeholder="$t(`${lang}.lastName`)"
+            type="text"
+            maxlength="30"
+          />
+          <input
+            v-model="userInfo.lastname"
+            class="base-name-input"
+            :placeholder="$t(`${lang}.firstName`)"
+            type="text"
+            maxlength="30"
+          />
+        </div>
       </div>
       <div class="base-info-line">
         <div class="base-info-line-title">{{ $t(`${lang}.sex`) }}：</div>
@@ -69,14 +66,6 @@
               @click="userInfo.gender = 2"
             />
             <span @click="userInfo.gender = 2">{{ $t(`${lang}.female`) }}</span>
-          </div>
-          <div class="single-radio">
-            <input
-              :checked="userInfo.gender == 0"
-              type="radio"
-              @click="userInfo.gender = 0"
-            />
-            <span @click="userInfo.gender = 3">{{ $t(`${lang}.secret`) }}</span>
           </div>
         </div>
       </div>
@@ -107,43 +96,98 @@
       </div>
       <div class="base-info-line">
         <div class="base-info-line-title">{{ $t(`${lang}.birthday`) }}：</div>
-        <div class="base-info-line-content birthday-choose">
-          <div class="single-radio">
-            <span>{{ $t(`${lang}.year`) }}</span
-            ><span>{{ year }}</span
-            ><i class="iconfont iconxiala" />
-            <select v-if="!userInfo.birthday" v-model="year" @change="doYear()">
-              <option v-for="(y, index) in years" :key="index" :value="y">{{
-                y
-              }}</option>
-            </select>
-            <div class="once-tell">{{ $t(`${lang}.msg`) }}</div>
+        <div v-if="this.language==='en_US'">
+          <div class="base-info-line-content birthday-choose">
+            <div class="single-radio">
+              <div class="box-border">
+                <span>{{ month }}</span
+                ><i class="iconfont iconxiala" />
+              </div>
+              <span>{{ $t(`${lang}.month`) }}</span>
+              <select
+                v-if="!userInfo.birthday"
+                v-model="month"
+                @change="doMonth()"
+              >
+                <option v-for="(m, index) in months" :key="index" :value="m">{{
+                  m
+                }}</option>
+              </select>
+            </div>
+            <div class="single-radio">
+              <div class="box-border">
+                <span>{{ day }}</span
+                ><i class="iconfont iconxiala" />
+              </div>
+              <span>{{ $t(`${lang}.day`) }}</span>
+              <select v-if="!userInfo.birthday" v-model="day">
+                <option v-for="(d, index) in days" :key="index" :value="d">{{
+                  d
+                }}</option>
+              </select>
+            </div>
+            <div class="single-radio">
+              <div class="box-border">
+                <span>{{ year }}</span
+                ><i class="iconfont iconxiala" />
+              </div>
+              <span>{{ $t(`${lang}.year`) }}</span>
+              <select v-if="!userInfo.birthday" v-model="year" @change="doYear()">
+                <option v-for="(y, index) in years" :key="index" :value="y">{{
+                  y
+                }}</option>
+              </select>
+            </div>
           </div>
-          <div class="single-radio">
-            <span>{{ $t(`${lang}.month`) }}</span
-            ><span>{{ month }}</span
-            ><i class="iconfont iconxiala" />
-            <select
-              v-if="!userInfo.birthday"
-              v-model="month"
-              @change="doMonth()"
-            >
-              <option v-for="(m, index) in months" :key="index" :value="m">{{
-                m
-              }}</option>
-            </select>
-          </div>
-          <div class="single-radio">
-            <span>{{ $t(`${lang}.day`) }}</span
-            ><span>{{ day }}</span
-            ><i class="iconfont iconxiala" />
-            <select v-if="!userInfo.birthday" v-model="day">
-              <option v-for="(d, index) in days" :key="index" :value="d">{{
-                d
-              }}</option>
-            </select>
-          </div>
+          <div class="once-tell">{{ $t(`${lang}.msg`) }}</div>
         </div>
+        <div v-else>
+          <div class="base-info-line-content birthday-choose">
+            <div class="single-radio">
+              <div class="box-border">
+                <span>{{ year }}</span
+                ><i class="iconfont iconxiala" />
+              </div>
+              <span>{{ $t(`${lang}.year`) }}</span>
+              <select v-if="!userInfo.birthday" v-model="year" @change="doYear()">
+                <option v-for="(y, index) in years" :key="index" :value="y">{{
+                  y
+                }}</option>
+              </select>
+            </div>
+            <div class="single-radio">
+              <div class="box-border">
+                <span>{{ month }}</span
+                ><i class="iconfont iconxiala" />
+              </div>
+              <span>{{ $t(`${lang}.month`) }}</span>
+              <select
+                v-if="!userInfo.birthday"
+                v-model="month"
+                @change="doMonth()"
+              >
+                <option v-for="(m, index) in months" :key="index" :value="m">{{
+                  m
+                }}</option>
+              </select>
+            </div>
+            <div class="single-radio">
+              <div class="box-border">
+                <span>{{ day }}</span
+                ><i class="iconfont iconxiala" />
+              </div>
+              <span>{{ $t(`${lang}.day`) }}</span>
+              <select v-if="!userInfo.birthday" v-model="day">
+                <option v-for="(d, index) in days" :key="index" :value="d">{{
+                  d
+                }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="once-tell">{{ $t(`${lang}.msg`) }}</div>
+        </div>
+
+
       </div>
     </div>
     <div class="base-btn" @click="saveInfo()">{{ $t(`${lang}.save`) }}</div>
@@ -415,7 +459,7 @@ export default {
             throw new Error(res.message)
           }
           this.$message({
-            message: this.$t(`${lang}.success`),
+            message: this.$t(`${lang}.saveSuccess`),
             type: 'success'
           })
         })
@@ -486,24 +530,29 @@ export default {
       display: flex;
       font-size: 14px;
       color: #333;
+      line-height: 30px;
       margin-bottom: 30px;
       .base-info-line-title {
         width: 110px;
         margin-right: 20px;
       }
       .base-name-input {
-        display: block;
+        // display: block;
         width: 190px;
-        height: 41px;
-        line-height: 41px;
+        height: 30px;
+        line-height: 30px;
         -webkit-appearance: none;
         outline: 0;
         padding: 0;
         margin: 0 27px 0 0;
         border: 0;
         border-bottom: 1px solid #999;
-        color: #999;
+        color: #333;
         font-size: 14px;
+
+        &::placeholder{
+          color: #bbb;
+        }
       }
       .gender-choose,
       .marriage-choose {
@@ -526,33 +575,40 @@ export default {
         display: flex;
         align-items: center;
         .single-radio {
-          width: 120px;
+          width: 130px;
           position: relative;
           margin-right: 30px;
-          border-bottom: 1px solid rgba(153, 153, 153, 1);
           font-size: 14px;
           color: #333;
-          span:nth-child(1) {
-            display: inline-block;
-          }
-          span:nth-child(2) {
-            width: 50px;
-            display: inline-block;
-            text-align: center;
-            color: #999;
-            font-size: 14px;
-          }
-          .iconxiala {
-            position: absolute;
-            font-size: 12px;
-            width: 12px;
-            height: 12px;
-            line-height: 12px;
-            display: block;
-            color: #999;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
+          display: flex;
+          .box-border{
+            border: 1px solid #999;
+            padding-right: 6px;
+            margin-right: 10px;
+
+            span:nth-child(2) {
+              display: inline-block;
+              margin-left: 30px;
+            }
+            span:nth-child(1) {
+              width: 50px;
+              display: inline-block;
+              text-align: center;
+              color: #999;
+              font-size: 14px;    
+            }
+            .iconxiala {
+              // position: absolute;
+              font-size: 12px;
+              width: 12px;
+              height: 12px;
+              line-height: 12px;
+              // display: block;
+              color: #999;
+              right: 0;
+              top: 50%;
+              transform: translateY(-50%);
+            }
           }
           select {
             position: absolute;
@@ -562,22 +618,25 @@ export default {
             left: 0;
             opacity: 0;
           }
-          .once-tell {
-            /*width: max-content;*/
-            white-space: nowrap;
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            transform: translateY(100%);
-            font-size: 12px;
-            color: #999;
-          }
+          
         }
+      }
+
+      .once-tell {
+        /*width: max-content;*/
+        white-space: nowrap;
+        // position: absolute;
+        // left: 0;
+        // bottom: -10px;
+        // transform: translateY(100%);
+        font-size: 12px;
+        margin-top: 10px;
+        color: #999;
       }
     }
   }
   .base-btn {
-    width: 190px;
+    width: 150px;
     height: 40px;
     line-height: 40px;
     border: 1px solid #8b766c;
@@ -642,5 +701,14 @@ export default {
       }
     }
   }
+}
+
+.name{
+  height: 30px;
+  line-height: 30px;
+}
+
+.red{
+  color: #f00;
 }
 </style>

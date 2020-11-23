@@ -2,7 +2,8 @@
   <div class="personal">
     <div class="top" @click="toAccount('personal-account')">
       <img :src="headImg" />
-      <p>{{ date.lastname }} {{ date.firstname }}</p>
+      <p v-if="language == 'zh_CN'">{{ date.lastname }}{{ date.firstname }}</p>
+      <p v-else>{{ date.firstname }} {{ date.lastname }}</p>
       <p>{{ replacepos(date.username, 2, 4, '***') }}</p>
       <i
         class="icon iconfont icongerenzhongxin-_xiugai font-size-18 color-999 margin-bottom-10"
@@ -98,7 +99,8 @@ export default {
       headImg: require('~/static/personal/unknown.png'),
       orderCount: 0,
       couponCount: 0,
-      date: ''
+      date: '',
+      language: this.$store.state.language
     }
   },
   created() {

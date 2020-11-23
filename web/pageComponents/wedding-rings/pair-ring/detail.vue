@@ -4,7 +4,7 @@
     <section class="detail">
       <!--      左侧-->
       <div class="left-detail">
-        <product-images :images="thumbnails" @getIdx="getIndex" :coupon="coupons"></product-images>
+        <product-images :images="thumbnails" @getIdx="getIndex" :coupon="coupons" :ifCode="ifShowCode"></product-images>
 
 		<div class="magn-box">
 			<bdd-magnifying :msg="magnifying"></bdd-magnifying>
@@ -956,7 +956,8 @@ export default {
           config_attr_id:''
         }
       ],
-      doubleRingColorAttrs:[]
+      doubleRingColorAttrs:[],
+      ifShowCode: false
     }
   },
   computed: {
@@ -1225,9 +1226,9 @@ export default {
     if(this.info.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.info.coupon.discount.end_time)
     }
-    _this.$nextTick(() => {})
 
-  this.magnifying = this.thumbnails[0]
+    this.ifShowCode = !!this.info.arImage;
+    this.magnifying = this.thumbnails[0]
   },
   methods: {
     getRecommendProductRouteInfo(product = {}) {
