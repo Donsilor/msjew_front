@@ -639,6 +639,7 @@
           <div class="message">
             <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
             <textarea
+              maxlength="500"
               v-model="remark"
               :class="[
                 { 'border-change': borderChange === 9 },
@@ -651,6 +652,7 @@
               "
               @blur="borderChange = 0"
             />
+            <span class="tex-count" :class="{'color-red':remark.length == 500}">{{texsum}}/500</span>
           </div>
 
           <!-- 发票按钮 -->
@@ -1643,6 +1645,7 @@
           <div class="message">
             <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
             <textarea
+              maxlength="500"
               v-model="remark"
               :class="[
                 { 'border-change': borderChange === 9 },
@@ -1655,6 +1658,7 @@
               "
               @blur="borderChange = 0"
             />
+            <span class="tex-count" :class="{'color-red':remark.length == 500}">{{texsum}}/500</span>
           </div>
 
           <!-- 发票按钮 -->
@@ -2033,6 +2037,7 @@ export default {
   mixins: [Address],
   data() {
     return {
+      texsum:0,
       aa:this.$t(`${lang3}.PaperInvoice`),
       bb:this.$t(`${lang3}.ElectronicInvoice`),
       iconShow:false,
@@ -2134,16 +2139,19 @@ export default {
       loginType: 2
     }
   },
-  // watch:{
-  //   email(){
-  //     if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
-  //       this.emailShow=true
-  //     }else{
-  //       this.emailShow=false
-  //       this.isActivemail=false
-  //     }
-  //   },
-  // },
+  watch:{
+    remark(){
+      this.texsum = this.remark.length;
+    }
+    // email(){
+    //   if(!(/^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/)){
+    //     this.emailShow=true
+    //   }else{
+    //     this.emailShow=false
+    //     this.isActivemail=false
+    //   }
+    // },
+  },
   computed: {
     pnN() {
       if (this.$store.state.language === 'en_US') {
@@ -3935,6 +3943,7 @@ div {
         margin-top: 19px;
         font-size: 14px;
         color: #333333;
+        position: relative;
 
         textarea {
           width: 100%;
@@ -3955,6 +3964,15 @@ div {
 
         .border-wrong {
           border: 1px solid #d9423e;
+        }
+        .tex-count{
+          position: absolute;
+          right:0;
+          bottom: 50px;
+        }
+
+        .color-red{
+          color: red;
         }
       }
 
