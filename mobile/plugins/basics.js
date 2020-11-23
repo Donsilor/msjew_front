@@ -31,7 +31,7 @@ export default ({ req, app, store, $axios }, inject) => {
             language = 'zh_CN'
             coin = 'CNY'
             areaId = 1
-            platform = 11 //移动-大陆
+            platform = 21 //移动-大陆
         }
         if (req.headers.cookie) {
             const cookie = cookieparser.parse(req.headers.cookie || '')
