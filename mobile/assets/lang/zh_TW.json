@@ -191,7 +191,7 @@
       "aftermailbox": "接收售後憑證的電郵地址",
       "mailbox": "電郵地址",
       "remark": "訂單備註",
-      "more": "可輸300個字符",
+      "more": "可輸500個字符",
       "cupon": "優惠碼",
       "allFee": "商品總額：",
       "itemsNum": "商品件數",

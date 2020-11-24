@@ -216,9 +216,10 @@
           <textarea
             v-model="userRemark"
             cols="38"
-            maxlength="300"
+            maxlength="500"
             :placeholder="lang.more"
           ></textarea>
+          <span class="tex-count" :class="{'color-red':userRemark.length == 500}">{{texsum}}/500</span>
         </div>
 
         <!-- 添加购物卡 -->
@@ -454,6 +455,7 @@ export default {
   },
   data() {
     return {
+      texsum:0,
       kai:false,
       url:'',
       lang: this.LANGUAGE.cart.sureOrder,
@@ -592,6 +594,11 @@ export default {
       queryId:'',
       code:'',
       ifShowPop: false
+    }
+  },
+  watch:{
+    userRemark(){
+      this.texsum = this.userRemark.length;
     }
   },
   computed: {
@@ -1646,6 +1653,7 @@ export default {
       }
       .text-area {
         margin-bottom: 20px;
+        position: relative;
         p {
           font-size: 14px;
           font-weight: 400;
@@ -1674,6 +1682,15 @@ export default {
         }
         textarea::-ms-input-placeholder {
           color: #999999;
+        }
+        .tex-count{
+          position: absolute;
+          right:0;
+          bottom: 50px;
+        }
+
+        .color-red{
+          color: red;
         }
       }
       .coupon {

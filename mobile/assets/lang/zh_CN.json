@@ -191,7 +191,7 @@
         "aftermailbox": "接收售后凭证的电邮地址",
         "mailbox": "电邮地址",
         "remark": "订单备注",
-        "more": "可输300个字符",
+        "more": "可输500个字符",
         "cupon": "优惠码",
         "allFee": "商品总额：",
         "itemsNum": "商品件数",
