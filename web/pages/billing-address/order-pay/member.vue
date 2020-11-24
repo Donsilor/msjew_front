@@ -3092,7 +3092,7 @@ export default {
         return false
       }
 
-      if (this.remark.length >= 300) {
+      if (this.remark.length > 500) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
         this.alertBox = true
@@ -3209,7 +3209,7 @@ export default {
       //   return false
       // }
 
-      if (this.remark.length >= 300) {
+      if (this.remark.length > 500) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
         this.alertBox = true
