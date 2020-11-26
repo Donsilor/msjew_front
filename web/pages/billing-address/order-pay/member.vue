@@ -559,6 +559,7 @@
           <div class="message">
             <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
             <textarea
+              maxlength="500"
               v-model="remark"
               :class="[
                 { 'border-change': borderChange === 9 },
@@ -1544,6 +1545,7 @@
           <div class="message">
             <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
             <textarea
+              maxlength="500"
               v-model="remark"
               :class="[
                 { 'border-change': borderChange === 9 },
