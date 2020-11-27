@@ -28,7 +28,7 @@
                   item.city_name
                 }}-{{ item.address_details }}
               </p>
-              <span v-if="item.is_default == 1" class="btn btn-active">{{
+              <span v-if="item.is_default == 1 || is_default == 1" class="btn btn-active">{{
                 lang.default
               }}</span>
               <span
@@ -49,8 +49,14 @@
         </ul>
         <bdd-empty v-if="address.length == 0" :type="'address'"></bdd-empty>
       </div>
-      <div class="btn-fixed">
-        <div class="btn-common btn-pink" @click="editAddress(null)">
+      <div v-if="isLogin" class="btn-fixed">
+        <div class="btn-common btn-white" @click="editAddress(null)">
+          <i class="icon iconfont iconicon-test"></i>
+          {{ lang.add }}
+        </div>
+      </div>
+      <div v-else v-show="address.length !== 1 " class="btn-fixed">
+        <div class="btn-common btn-white" @click="editAddress(null)">
           <i class="icon iconfont iconicon-test"></i>
           {{ lang.add }}
         </div>
@@ -63,6 +69,7 @@
 <script>
 import Header from '@/components/personal/header.vue'
 import AditAddress from '@/components/address/editAddress.vue'
+const storage = process.client ? require('good-storage').default : {}
 export default {
   name: 'Address',
   layout: 'no-bar',
@@ -84,7 +91,9 @@ export default {
       address: [],
       ifShowAditAddress:false,
       editVal:'',
-      addVal:''
+      addVal:'',
+      myAddr:{},
+      is_default:''
     }
   },
   mounted() {
@@ -97,21 +106,31 @@ export default {
     },
     getData() {
       const _this = this
-      _this
-        .$axios({
-          method: 'get',
-          url: `/web/member/address`
-        })
-        .then(res => {
-          _this.address = res
-
-          if(res[0].is_default !=1){
-            this.setDefaultAddress(res[res.length-1].id)
-          }
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      if(this.isLogin){
+        _this
+          .$axios({
+            method: 'get',
+            url: `/web/member/address`
+          })
+          .then(res => {
+            _this.address = res
+  
+            if(res[0].is_default !=1){
+              this.setDefaultAddress(res[res.length-1].id)
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        this.is_default = 1
+        let myAddress = []
+        this.myAddr = (storage.get('myAdders'))
+        if(this.myAddr){
+          myAddress.push(this.myAddr)
+          this.address = myAddress
+        }
+      }
     },
     moveLeft(val) {
       // console.log("move",this.move)
@@ -153,21 +172,27 @@ export default {
     // 刪除地址
     deleteAddress(id) {
       const _this = this
-      _this
-        .$axios({
-          method: 'post',
-          url: `/web/member/address/del`,
-          data: {
-            id: id
-          }
-        })
-        .then(res => {
-          this.getData()
-          this.$toast.show(this.lang.toast)
-        })
-        .catch(err => {
-          this.$toast.show(err.message)
-        })
+      if(this.isLogin){
+        _this
+          .$axios({
+            method: 'post',
+            url: `/web/member/address/del`,
+            data: {
+              id: id
+            }
+          })
+          .then(res => {
+            this.getData()
+            this.$toast.show(this.lang.toast)
+          })
+          .catch(err => {
+            this.$toast.show(err.message)
+          })
+      } else {
+        storage && storage.remove('myAdders')
+        this.address = []
+        this.getData()
+      }
     },
     selectAddress(val) {
       // if (this.id == '1') {
@@ -179,8 +204,13 @@ export default {
         this.ifShowAditAddress = true
         this.editVal = val
       } else if (val === null){
-        this.ifShowAditAddress = true
-        this.addVal = 'add'
+        if(this.isLogin){
+          this.ifShowAditAddress = true
+          this.addVal = 'add'
+        } else {
+          this.ifShowAditAddress = true
+          this.addVal = 'TouristAdd'
+        }
       }
     },
     closeAditAddressPop(){
@@ -190,6 +220,8 @@ export default {
     // 返回
     quit(){
       this.$emit('closeAP',this.queryId); 
+      this.getData() 
+      // this.getAddr()
     },
   }
 }

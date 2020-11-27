@@ -223,7 +223,8 @@
       "couponAmount": "Coupon",
       "msg12": "Please login before redeem the coupon. ",
       "useCoupons": "Use Coupons",
-      "point":"*Note：The Order Amount has been rounded "
+      "point":"*Note：The Order Amount has been rounded ",
+      "addrTip":"Please fill in the consignee information"
     },
     "pay": {
       "pay": "Order payment",
@@ -300,6 +301,7 @@
       "lookBill": "VIEW ORDER",
       "orderDetails": "Order Details",
       "continue": "CONTINUE",
+      "payAgain": "PAY AGAIN",
       "text1": "Wire Transfer",
       "text2": "Paypal",
       "text3": "WeChat Pay",

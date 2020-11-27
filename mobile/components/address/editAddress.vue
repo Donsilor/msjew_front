@@ -138,13 +138,26 @@
               <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
             </div>
 
-            <div v-if="loginType == 2 " class="btn-common btn-pink btn-address cn" @click="createAddressCN">
-              {{ lang.storage }}
+            <div v-if="isLogin">
+              <div v-if="loginType == 2 " class="btn-common btn-white btn-address cn" @click="createAddressCN">
+                {{ lang.storage }}
+              </div>
+              <div v-else class="btn-common btn-white btn-address" @click="createAddress">
+                {{ lang.storage }}
+              </div>
             </div>
-            <div v-else class="btn-common btn-pink btn-address" @click="createAddress">
-              {{ lang.storage }}
+
+            <div v-else>
+              <div v-if="language === 'zh_CN'" class="btn-common btn-white btn-address cn" @click="createAddressCN">
+                {{ lang.storage }}
+              </div>
+              <div v-else class="btn-common btn-white btn-address" @click="createAddress">
+                {{ lang.storage }}
+              </div>
             </div>
-            <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
+
+
+            <div v-if="id" class="btn-common btn-white btn-address2" @click="deleteAddress(id)">
               {{ lang.deleteAddress }}
             </div>
             <swiper-tap
@@ -357,6 +370,7 @@ export default {
     this.getArealist()
   },
   mounted() {
+    console.log("this.addVal",this.addVal,this.editVal)
     this.loginType=localStorage.getItem('loginType')
     this.language = this.$store.state.language
 
@@ -821,11 +835,62 @@ export default {
               // console.log(err)
             })
 
-        }else{
+        }else if(!this.isLogin&&this.addVal!=="TouristAdd"){
+          console.log(11111)
+          const TouristJson = {
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
+          }
+          const TouristData = JSON.parse(JSON.stringify(TouristJson))
+          storage && storage.set('myAdders', TouristData)
+          console.log("myAdders简体",TouristData)
+          setTimeout(() => {
+            this.$emit('closeADP',true);
+            // this.$router.go(-1)
+            this.isOver = true
+          }, 1500)
+        }else if(this.addVal === 'TouristAdd'){
+          const TouristJson = {
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
+          }
+          const TouristData = JSON.parse(JSON.stringify(TouristJson))
+          storage && storage.set('myAdders', TouristData)
+          console.log("myAdders简体",TouristData)
+          setTimeout(() => {
+            this.$emit('closeADP',true);
+            // this.$router.go(-1)
+            this.isOver = true
+          }, 1500)
+        } else{
           const json2 = {
             id: this.editVal.id ? this.editVal.id : null,
-            name: this.name,
-            surname: this.surname,
+            lastname: this.name,
+            firstname: this.surname,
             userTelCode: this.userTelCode,
             phone: this.phone,
             mailbox: this.mailbox,
@@ -917,7 +982,32 @@ export default {
               console.log(err)
             })
 
-        }else{
+        }else if(this.addVal === 'TouristAdd'){
+          const TouristJson = {
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
+          }
+          const TouristData = JSON.parse(JSON.stringify(TouristJson))
+          storage && storage.set('myAdders', TouristData)
+          console.log("myAdders繁体",TouristData)
+          setTimeout(() => {
+            this.$emit('closeADP',true);
+            // this.$router.go(-1)
+            this.isOver = true
+          }, 1500)
+        } else{
           const json2 = {
             id: this.editVal.id ? this.editVal.id : null,
             name: this.name,
@@ -1080,7 +1170,7 @@ export default {
       width: 100%;
       margin: 20px 0 50px;
       border: 1px solid rgba(221, 221, 221, 1); /*no*/
-      color: #999999;
+      // color: #999999;
     }
   }
 }
