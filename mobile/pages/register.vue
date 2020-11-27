@@ -12,29 +12,10 @@
         </div>
 
         <div class="info">
-          <!-- 名称 -->
-          <div class="line-box input-line">
-            <bdd-input
-              v-model="info.name"
-              :placeholder="`${lang.name}`"
-              :padding="'0 3% 0 3%'"
-              @blur="inputKey('name')"
-              @keydown="keydown('30')"
-              :maxl="maxlength"
-            ></bdd-input>
-            <!-- <div
-              :class="[
-                'error-message',
-                { active: hadInput('name') && !info.name }
-              ]"
-            >
-              {{ lang.nameError }}
-            </div> -->
-          </div>
           <!-- 姓氏 -->
-          <div class="line-box input-line">
+          <div v-if="language == 'zh_CN'" class="line-box input-line">
             <bdd-input
-              v-model="info.surname"
+              v-model="info.lastname"
               :placeholder="`${lang.surname}`"
               :padding="'0 3% 0 3%'"
               @blur="inputKey('surname')"
@@ -44,12 +25,53 @@
             <!-- <div
               :class="[
                 'error-message',
-                { active: hadInput('surname') && !info.surname }
+                { active: hadInput('surname') && !info.lastname }
               ]"
             >
               {{ lang.surnameError }}
             </div> -->
           </div>
+
+          <!-- 名称 -->
+          <div class="line-box input-line">
+            <bdd-input
+              v-model="info.firstname"
+              :placeholder="`${lang.name}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('name')"
+              @keydown="keydown('30')"
+              :maxl="maxlength"
+            ></bdd-input>
+            <!-- <div
+              :class="[
+                'error-message',
+                { active: hadInput('name') && !info.firstname }
+              ]"
+            >
+              {{ lang.nameError }}
+            </div> -->
+          </div>
+
+          <!-- 姓氏 -->
+          <div v-if="language != 'zh_CN'" class="line-box input-line">
+            <bdd-input
+              v-model="info.lastname"
+              :placeholder="`${lang.surname}`"
+              :padding="'0 3% 0 3%'"
+              @blur="inputKey('surname')"
+              :maxl="maxlength"
+              @keydown="keydown('30')"
+            ></bdd-input>
+            <!-- <div
+              :class="[
+                'error-message',
+                { active: hadInput('surname') && !info.lastname }
+              ]"
+            >
+              {{ lang.surnameError }}
+            </div> -->
+          </div>
+          
           <!-- 手机号 -->
           <div class="line-box input-line mobile email-val-box" v-if="loginType == 2 ">
             <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div>
@@ -274,8 +296,8 @@ export default {
         mobile:'',
         password: '',
         password_repetition: '',
-        surname: '', // 姓氏
-        name: '', // 名
+        firstname: '', // 姓氏
+        lastname : '', // 名
         code: '',
       },
       hadSendCode: false,
@@ -294,10 +316,10 @@ export default {
   },
   computed: {
     // trueName() {
-    //   return this.info.name
+    //   return this.info.firstname
     // },
     // trueSurname() {
-    //   return this.info.surname
+    //   return this.info.lastname
     // },
     trueEmail() {
       return this.$helpers && this.$helpers.trueEmail(this.info.email)
