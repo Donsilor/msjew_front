@@ -705,15 +705,13 @@ export default {
       
       // this.getCouponList() // 获取优惠券列表
       this.getData()
-      if(this.isLogin){
+      // if(this.isLogin){
         // this.getData() // 获取地址
         let ua = window.navigator.userAgent.toLowerCase();
         if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){
           this.getCode()
         }
-      } else {
-        // this.getAddr()
-      }
+      // } 
       // let isWeiXin = ()=>{
       //   return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
       // }
