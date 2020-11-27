@@ -547,10 +547,10 @@ export default {
         })
     },
     goOrder() {
-      if(this.$store.state.platform == 20 && !this.$store.state.token){
-        this.ifShowLoginPop = true
-        return
-      }
+      // if(this.$store.state.platform == 20 && !this.$store.state.token){
+      //   this.ifShowLoginPop = true
+      //   return
+      // }
 
       const data = []
       for (const i in this.good) {

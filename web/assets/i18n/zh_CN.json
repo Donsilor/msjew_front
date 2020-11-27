@@ -2842,7 +2842,10 @@
         "msgContent2": "没有选择商品！",
         "setDefaultAddr": "设置默认地址",
         "setSuccess": "默认地址设置成功",
-        "point":"*注：订单金额已做抹零处理"
+        "point":"*注：订单金额已做抹零处理",
+        "accountNum":"手机号/邮箱",
+        "code":"验证码",
+        "agreeTip":"使用该手机号码/邮箱注册账号，注册后可在个人中心查看订单信息"
     },
     "invoice": {
         "personal": "个人",

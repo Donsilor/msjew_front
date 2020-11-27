@@ -2832,7 +2832,10 @@
         "msgContent2": "No product selected!",
         "setDefaultAddr": "Set The Default Address",
         "setSuccess": "The default address setting was successful!",
-        "point":"*Note：The Order Amount has been rounded "
+        "point":"*Note：The Order Amount has been rounded ",
+        "accountNum":"Phone/Email",
+        "code":"Verification",
+        "agreeTip":"使用该手机号码/邮箱注册账号，注册后可在个人中心查看订单信息"
     },
     "invoice": {
         "personal": "personal",
