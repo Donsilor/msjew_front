@@ -17,13 +17,13 @@
         <p>{{ address.mobile_code }} {{ address.mobile }}</p>
         <p class="p ow-h2">
           {{ address.country_name }}-{{ address.province_name }}-{{
-            address.country_name
+            address.city_name
           }}-{{ address.address_details }}
         </p>
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <div v-if="!hasAddress&&isLogin" class="no-address" @click="goAddress">
+      <div v-if="!hasAddress" class="no-address" @click="goAddress">
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
@@ -591,7 +591,8 @@ export default {
       id:'',
       queryId:'',
       code:'',
-      ifShowPop: false
+      ifShowPop: false,
+      order_sn:''
     }
   },
   computed: {
@@ -692,13 +693,17 @@ export default {
         })
       }
 
-      this.getData() // 获取地址
+      
       // this.getCouponList() // 获取优惠券列表
+      this.getData()
       if(this.isLogin){
+        // this.getData() // 获取地址
         let ua = window.navigator.userAgent.toLowerCase();
         if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){
           this.getCode()
         }
+      } else {
+        // this.getAddr()
       }
       // let isWeiXin = ()=>{
       //   return navigator.userAgent.toLowerCase().indexOf('micromessenger')!==-1
@@ -754,47 +759,36 @@ export default {
       this.invoices = val
     },
     changeType(ind) {
-      console.log("选择哪一个",ind)
+      
       this.typeIndex = ind
       let pay = 0
       if(this.typeIndex == 0){
         if(this.$store.state.platform === 21){
-          pay = 82
+          pay = 2
         } else {
           pay = 6
         }
       }else if(this.typeIndex == 1){
         if(this.$store.state.platform === 21){
-          pay = 83
+          pay = 1
         }else{
           pay = 9
         }
-      }else if(this.typeIndex == 2){
-        if(this.$store.state.platform === 11){
-          pay = 84
-        }else if(this.$store.state.platform === 41){
-          pay = 89
-        }
-      }else if(this.typeIndex == 3){
-        pay = 83
-      }else if(this.typeIndex == 4){
-        pay = 81
-      }else if(this.typeIndex == 5){
-        pay = 89
       }
+      console.log("选择哪一个",ind,pay)
 
-      if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89 || pay == 9){
-        this.ifShowPop = true
-        return
+      // if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89 || pay == 9){
+      //   this.ifShowPop = true
+      //   return
         
-        this.$toast.show(this.lang.firstLogin)
-        // 点击修改滚顶到地址编辑模块
-        document.getElementById('loginBox').scrollIntoView({
-          block: 'center',
-          inline: 'nearest',
-          behavior: 'smooth'
-        })
-      }
+      //   this.$toast.show(this.lang.firstLogin)
+      //   // 点击修改滚顶到地址编辑模块
+      //   document.getElementById('loginBox').scrollIntoView({
+      //     block: 'center',
+      //     inline: 'nearest',
+      //     behavior: 'smooth'
+      //   })
+      // }
       if (ind === 5) {
         this.price = this.info.orderAmount
       } else {
@@ -869,9 +863,16 @@ export default {
       // })
     },
     closeAddressPop(id){
+      let addr = storage.get('myAdders', '')
       this.ifShowAddress = false
-      this.queryId = id
-      this.getData()
+      this.getData() 
+      if(addr == ''){
+        this.hasAddress = false
+        this.address=''
+      } else {
+        this.queryId = id
+      }
+      // console.log("this.addr",addr) 
     },
     // 登录下获取相关费用
     getTex(k) {
@@ -1072,20 +1073,23 @@ export default {
       } else {
         const address = storage.get('myAdders', 0)
         if (address) {
+        // console.log("address",address)
           this.hasAddress = true
           this.address = {
-            firstName: address.name,
-            lastName: address.surname,
-            userTelCode: address.userTelCode,
-            userTel: address.phone,
-            countryName: address.country,
-            provinceName: address.province,
-            cityName: address.city,
-            countryId: address.countryId,
-            provinceId: address.provinceId,
-            cityId: address.cityId,
-            userMail: address.mailbox,
-            address: address.details
+            // id: address.id,
+            firstname: address.firstname,
+            lastname: address.lastname,
+            mobile_code: address.mobile_code,
+            mobile: address.mobile,
+            country_name: address.country_name,
+            province_name: address.province_name,
+            city_name: address.city_name,
+            country_id: address.country_id,
+            province_id: address.province_id,
+            city_id: address.city_id,
+            email: address.email,
+            address_details: address.address_details,
+            zip_code: address.zip_code
           }
         }
         // if (this.hasAddress) {
@@ -1144,41 +1148,37 @@ export default {
     // 支付
     //  已登录创建订单
     createOrder() {
+      // 创建订单后删除地址
       if(this.typeIndex != 0 && this.typeIndex != 1){
         this.ifShowPop = true
         return
       }
-      console.log("this.invoices",this.invoices)
       this.$nuxt.$loading.start()
-      // if (!this.canSubmit) {
-      //   return
-      // }
-      console.log("this.address",this.address)
       let pay = 0
       if(this.typeIndex == 0){
-        pay = 6
+        if(this.$store.state.platform === 21){
+          pay = 2
+        }else {
+          pay = 6
+        }
       }else if(this.typeIndex == 1){
-        pay = 61
-      }else if(this.typeIndex == 2){
-        pay = 82
-      }else if(this.typeIndex == 3){
-        pay = 83
-      }else if(this.typeIndex == 4){
-        pay = 81
-      }else if(this.typeIndex == 5){
-        pay = 84
+        if(this.$store.state.platform === 21){
+          pay = 1
+        } else{
+          pay = 9
+        }
       }
-       if (!this.isLogin) {
+      if (!this.isLogin) {
           if(this.typeIndex===''){
            this.$toast.show(this.lang.toast4)
            this.$nuxt.$loading.finish()
            return
          }
-         if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
-            this.$toast.show(this.lang.firstLogin)
-            this.$nuxt.$loading.finish()
-            return
-         }
+        //  if(this.typeIndex == 2 || this.typeIndex == 3 || this.typeIndex == 4 || this.typeIndex == 5){
+        //     this.$toast.show(this.lang.firstLogin)
+        //     this.$nuxt.$loading.finish()
+        //     return
+        //  }
        }
       if (this.isLogin) {
         if (!this.hasAddress) {
@@ -1210,46 +1210,50 @@ export default {
           this.$nuxt.$loading.finish()
           return
         }
-      }
-      // if (!Email.test(this.mailbox)) {
-      //   this.$toast.show(this.lang.toast3)
-      //   return
-      // }
-      let info = {}
-      if(this.kai == true){
-        // info = this.$route.params.invoice
-        info = this.invoices
-      }
+      } else {
+        if (!this.hasAddress) {
+          this.$toast.show(this.lang.addrTip)
+          const topC = document.getElementsByClassName('layout-main')[0];
 
-      const arr = [];
-      var obj = {cart_id: '', coupon_id: ''};
-      for (const i in this.list) {
-        arr.push({...obj})
-        arr[i].cart_id = this.list[i].id;
-
-        if(this.list[i].coupon.hasOwnProperty('discount')){
-          arr[i].coupon_id = this.list[i].coupon.discount.coupon_id
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-this.scrollTop / 5)
+            topC.scrollTop = this.scrollTop + ispeed
+            if (this.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
+          this.$nuxt.$loading.finish()
+          return
         }
       }
+      let info = {}
+      if(this.kai == true){
+        info = this.invoices
+      }
+      
 
       if (this.isLogin) {
+        const arr = [];
+        var obj = {cart_id: '', coupon_id: ''};
+        for (const i in this.list) {
+          arr.push({...obj})
+          arr[i].cart_id = this.list[i].id;
+
+          if(this.list[i].coupon.hasOwnProperty('discount')){
+            arr[i].coupon_id = this.list[i].coupon.discount.coupon_id
+          }
+        }
         this.$axios({
           method: 'post',
           url: `/web/member/order/create`,
           data: {
             carts: arr,
-            // allSend: this.isSend ? 1 : 2,
             buyer_remark: this.userRemark,
-            // productAmount: this.allFee.productAmount,
             order_amount: this.allFee.orderAmount,
             buyer_address_id: this.address.id,
             invoice: info,
             card: this.cardList,
             coupon_id: this.couponCodeR.couponId
-            // afterMail: this.mailbox,
-            // recvType: 1,
-            // preferId: this.selectCouponId ? this.selectCouponId : null,
-            // preferCode: this.inputCouponCode ? this.inputCouponCode : null
           }
         })
           .then(res => {
@@ -1274,103 +1278,274 @@ export default {
             this.$toast.show(err.message)
           })
       } else {
-        const data = []
-        let baseUrl=this.$store.getters.baseUrl
-        // console.log("未登录",this.list)
-        for (const i in this.list) {
-          let coupon_discount = ""
-          if(this.list[i].coupon.hasOwnProperty('discount')){
-            coupon_discount = this.list[i].coupon.discount.coupon_id;
-          }
-          for(var k in this.list[i].goodsAttr){
-            for(var j in this.list[i].goodsAttr[k]){
-              if(j == 'goodsId'){
-                this.list[i].goodsAttr[k]['goods_id'] = this.list[i].goodsAttr[k][j]
-                delete this.list[i].goodsAttr[k]['goodsId']
-              }
-              if(j == 'configId'){
-                this.list[i].goodsAttr[k]['config_id'] = this.list[i].goodsAttr[k][j]
-                delete  this.list[i].goodsAttr[k]['configId']
-              }
-              if(j == 'configAttrId'){
-                this.list[i].goodsAttr[k]['config_attr_id'] = this.list[i].goodsAttr[k][j]
-                delete  this.list[i].goodsAttr[k]['configAttrId']
-              }
-              if( this.list[i].goodsAttr[k]['goods_id'] == null){
-                delete this.list[i].goodsAttr[k]['goods_id']
-              }
-              delete this.list[i].goodsAttr[k]['configVal']
-              delete this.list[i].goodsAttr[k]['configAttrIVal']
-             
+        if(this.$store.state.platform === 21){
+          this.PayWechat()
+        }else {
+          const data = []
+          let baseUrl=this.$store.getters.baseUrl
+          for (const i in this.list) {
+            let coupon_discount = ""
+            if(this.list[i].coupon.hasOwnProperty('discount')){
+              coupon_discount = this.list[i].coupon.discount.coupon_id;
             }
+            for(var k in this.list[i].goodsAttr){
+              for(var j in this.list[i].goodsAttr[k]){
+                if(j == 'goodsId'){
+                  this.list[i].goodsAttr[k]['goods_id'] = this.list[i].goodsAttr[k][j]
+                  delete this.list[i].goodsAttr[k]['goodsId']
+                }
+                if(j == 'configId'){
+                  this.list[i].goodsAttr[k]['config_id'] = this.list[i].goodsAttr[k][j]
+                  delete  this.list[i].goodsAttr[k]['configId']
+                }
+                if(j == 'configAttrId'){
+                  this.list[i].goodsAttr[k]['config_attr_id'] = this.list[i].goodsAttr[k][j]
+                  delete  this.list[i].goodsAttr[k]['configAttrId']
+                }
+                if( this.list[i].goodsAttr[k]['goods_id'] == null){
+                  delete this.list[i].goodsAttr[k]['goods_id']
+                }
+                delete this.list[i].goodsAttr[k]['configVal']
+                delete this.list[i].goodsAttr[k]['configAttrIVal']
+               
+              }
+            }
+            // console.log("ddddd",this.list[i].goodsAttr)
+            const o = {
+              createTime: this.list[i].createTime,
+              goods_num: 1,
+              goodsDetailsId: this.list[i].goodsDetailsId,
+              goods_id: this.list[i].goodsDetailsId,
+              group_id: this.list[i].groupId,
+              goods_type: this.list[i].goodsStatus,
+              group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
+              coupon_id: coupon_discount,
+              goods_attr:this.list[i].goodsAttr
+            }
+            data.push(o)
           }
-          // console.log("ddddd",this.list[i].goodsAttr)
-          const o = {
-            createTime: this.list[i].createTime,
-            goods_num: 1,
-            goodsDetailsId: this.list[i].goodsDetailsId,
-            goods_id: this.list[i].goodsDetailsId,
-            group_id: this.list[i].groupId,
-            goods_type: this.list[i].goodsStatus,
-            group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
-            coupon_id: coupon_discount,
-            goods_attr:this.list[i].goodsAttr
-          }
-          data.push(o)
-        }
+          if(data.length){
+            this.$axios({
+              method: 'post',
+              url: `/web/member/order-tourist/create`,
+              data: {
+                goodsCartList:data,
+                address:this.address,
+                invoice: info,
+                tradeType:'wap',
+                payType: pay,
+                coinType:this.$store.state.coin,
+                returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}', //http://localhost:8328
+                buyer_remark: this.userRemark,
+              }
+            })
+              .then(res => {
+                console.log("返回结果",res)
+                if (res.config) {
+                  if(pay == 9){
+                    // 测试key
+                    let TestKey = "pk_test_51Hh91GEg2ty3UyHNujJu3xu3nemS1rzfb14kys3CImsO1iCtpprr082i0Gfbe9EQ3cWLc5KBoKS2azrE4IIFB5Gu00GgMY0bLj"
+                    // 正式key
+                    let formalKey = "pk_live_51Hh91GEg2ty3UyHNGwh4IfEY1BgtJ1FHVNy0zQBoVclAfEp1YX7W8kOmpYaUvoxwKtYvfbPQ1HlOzj1wksI7sPN900zzHU8v9c"
 
-        // console.log("data",data)
-        // console.log("paytype",this.$route.query)
-        if(data.length){
-          this.$axios({
-            method: 'post',
-            url: `/web/member/order-tourist/create`,
-            data: {
-              goodsCartList:data,
-              invoice: info,
-              tradeType:'wap',
-              payType: pay,
-              coinType:this.$store.state.coin,
-              returnUrl:baseUrl+'/complete/paySuccess?order_sn={order_sn}', //http://localhost:8328
-              buyer_remark: this.userRemark,
-            }
-          })
-            .then(res => {
-              // console.log("返回结果",res)
-              // const arr = []
-              // this.list.map((item, index) => {
-              //   console.log(arr)
-              //   arr.push(item.localSn)
-              //   this.$store.dispatch('removeCart', arr)
-              // })
-              if (res.config) {
-                window.location.replace(res.config)
-              } else if (!res.config){
-                this.isPay = false
-                this.$router.replace({
-                  name: 'complete-paySuccess-orderId-price-coinType',
-                  params: {
-                    orderId: this.info.orderId,
-                    price: this.info.orderAmount,
-                    coinType: this.info.coinType
+                    let stripe = Stripe(TestKey);
+                    let host = window.location.host
+                    if ((/(msjew)\.com/).test(host)) {
+                      stripe = Stripe(formalKey);// 正式key
+                    } else if((/(msjew.bddco)\.cn/).test(host)){
+                      stripe = Stripe(TestKey); // 测试key
+                    }
+              
+                    return stripe.redirectToCheckout({ sessionId: res.config });
+                  } else {
+
+                    window.location.replace(res.config)
                   }
-                })
-              }
-              // this.$router.replace({
-              //   name: 'cart-pay',
-              //   query: {
-              //     info: JSON.stringify(res)
-              //   }
-              // })
-            })
-            .catch(err => {
-              this.$nuxt.$loading.finish()
-              this.$toast.show(err.message)
-            })
+                } else if (!res.config){
+                  this.isPay = false
+                  this.$router.replace({
+                    name: 'complete-paySuccess-orderId-price-coinType',
+                    params: {
+                      orderId: this.info.orderId,
+                      price: this.info.orderAmount,
+                      coinType: this.info.coinType
+                    }
+                  })
+                }
+                // this.$router.replace({
+                //   name: 'cart-pay',
+                //   query: {
+                //     info: JSON.stringify(res)
+                //   }
+                // })
+              })
+              .catch(err => {
+                this.$nuxt.$loading.finish()
+                this.$toast.show(err.message)
+              })
           }else{
             // console.log('')
           }
+        }
       }
+    },
+    // 大陆微信支付
+    PayWechat() {
+      this.isPay = true
+      console.log("aaa",this.address)
+      if(this.info.coinType === 'USD'){
+        if(this.typeIndex == 2){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+        if(this.typeIndex == 3){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+        if(this.typeIndex == 4){
+          this.$toast.show(this.lang.NotSupportPay)
+          return
+        }
+      }
+      let pay = ""
+      if(this.typeIndex == 0){
+        if(this.$store.state.platform === 21){
+          pay = 2
+        } else {
+          pay = 6
+        }
+      }else if(this.typeIndex == 1){
+        if(this.$store.state.platform === 21){
+          pay = 1
+        } else{
+          pay = 9
+        }
+      }
+
+      let info = {}
+      if(this.kai == true){
+        info = this.invoices
+      }
+
+      let baseUrl=this.$store.getters.baseUrl
+      let orderId = this.info.orderId
+      let tradeType = ''
+      const data = []
+
+      for (const i in this.list) {
+        let coupon_discount = ""
+        if(this.list[i].coupon.hasOwnProperty('discount')){
+          coupon_discount = this.list[i].coupon.discount.coupon_id;
+        }
+        for(var k in this.list[i].goodsAttr){
+          for(var j in this.list[i].goodsAttr[k]){
+            if(j == 'goodsId'){
+              this.list[i].goodsAttr[k]['goods_id'] = this.list[i].goodsAttr[k][j]
+              delete this.list[i].goodsAttr[k]['goodsId']
+            }
+            if(j == 'configId'){
+              this.list[i].goodsAttr[k]['config_id'] = this.list[i].goodsAttr[k][j]
+              delete  this.list[i].goodsAttr[k]['configId']
+            }
+            if(j == 'configAttrId'){
+              this.list[i].goodsAttr[k]['config_attr_id'] = this.list[i].goodsAttr[k][j]
+              delete  this.list[i].goodsAttr[k]['configAttrId']
+            }
+            if( this.list[i].goodsAttr[k]['goods_id'] == null){
+              delete this.list[i].goodsAttr[k]['goods_id']
+            }
+            delete this.list[i].goodsAttr[k]['configVal']
+            delete this.list[i].goodsAttr[k]['configAttrIVal']
+            
+          }
+        }
+        // console.log("ddddd",this.list[i].goodsAttr)
+        const o = {
+          createTime: this.list[i].createTime,
+          goods_num: 1,
+          goodsDetailsId: this.list[i].goodsDetailsId,
+          goods_id: this.list[i].goodsDetailsId,
+          group_id: this.list[i].groupId,
+          goods_type: this.list[i].goodsStatus,
+          group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
+          coupon_id: coupon_discount,
+          goods_attr:this.list[i].goodsAttr
+        }
+        data.push(o)
+      }
+      if(pay == 1){
+        let ua = window.navigator.userAgent.toLowerCase();
+        if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){  //企业微信客户端
+          tradeType = 'js'
+        }else{
+          tradeType = 'mweb'
+        }
+      }else {
+        tradeType = 'wap'
+      }
+      // this.getCode()
+      // console.log("code",this.code) 
+      const openid = localStorage.getItem('openid')
+      this.$axios({ 
+        method: 'post',
+        url: `/web/member/order-tourist/create`,
+        data: {
+          goodsCartList:data,
+          address:this.address,
+          invoice: info,
+          openid: openid,
+          orderId: orderId,
+          coinType:this.$store.state.coin,
+          payType: pay,
+          tradeType: tradeType,
+          buyer_remark: this.userRemark,
+          returnUrl: baseUrl+'/complete/paySuccess?order_sn={order_sn}'
+        }
+      })
+      .then(res => {
+        this.order_sn = res.order_sn
+        if(tradeType == 'mweb'){
+          window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn={order_sn}'+'&payType='+pay))
+        }
+        if(tradeType == 'js'){
+          function onBridgeReady(){
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest', {
+                  "appId":res.appId,     //公众号名称，由商户传入     
+                  "timeStamp":res.timeStamp,         //时间戳，自1970年以来的秒数     
+                  "nonceStr":res.nonceStr, //随机串     
+                  "package":res.package,     
+                  "signType":res.signType,         //微信签名方式：     
+                  "paySign":res.paySign //微信签名 
+                },
+                function(url){
+                  return function(res) {
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ){
+                      window.location.replace(url)
+                  }
+                }
+            }(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay)); 
+          }
+          if (typeof WeixinJSBridge == "undefined"){
+            if( document.addEventListener ){
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            }else if (document.attachEvent){
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+          }else{
+            onBridgeReady();
+          }
+        }
+        if (res.config) {
+          window.location.replace(res.config)
+        }
+      })
+      .catch(err => {
+        this.$nuxt.$loading.finish()
+        console.log(err)
+        this.$toast.show(err.message)
+      })
     },
     gologin() {
       this.ifShowPop = true

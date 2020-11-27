@@ -364,10 +364,10 @@ export default {
       })
     },
     goPay() {
-      if(!this.isLogin && this.$store.state.platform == 21){
-        this.ifShowPop = true
-        return
-      }
+      // if(!this.isLogin && this.$store.state.platform == 21){
+      //   this.ifShowPop = true
+      //   return
+      // }
 
       const arr = []
       for (let i = 0; i < this.list.length; i++) {

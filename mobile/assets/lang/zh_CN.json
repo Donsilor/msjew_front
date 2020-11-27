@@ -223,7 +223,8 @@
         "couponAmount": "优惠券",
         "msg12": "请先登录才能使用优惠券",
         "useCoupons": "使用优惠券",
-        "point":"*注：订单金额已做抹零处理"
+        "point":"*注：订单金额已做抹零处理",
+        "addrTip":"请填写收货人信息"
       },
       "pay": {
         "pay": "订单支付",
@@ -300,6 +301,7 @@
         "lookBill": "查看订单",
         "orderDetails": "订单详情",
         "continue": "继续购物",
+        "payAgain": "重新支付",
         "text1": "电汇",
         "text2": "paypal",
         "text3": "微信",
