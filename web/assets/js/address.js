@@ -12,7 +12,8 @@ export default {
       city: { areaId: '', areaName: '- - -' },
       cityList: [{ areaId: '', areaName: '- - -' }],
       phoneJson: PhoneJson,
-      phoneNum: { cn: '', en: '', zh: '', phone_code: '' }
+      phoneNum: { cn: '', en: '', zh: '', phone_code: '' },
+      isLogin:this.$store.getters.hadLogin
     }
   },
   beforeMount() {
@@ -174,10 +175,18 @@ export default {
           if (res) {
             // console.log('拿到了城市',res);
             this.cityList = res.data
-            this.cityList.unshift({
-              areaId: '',
-              areaName: '- - -'
-            })
+            if(this.isLogin){
+              this.cityList.unshift({
+                areaId: '',
+                areaName: '- - -'
+              })
+            } else {
+              this.cityList.unshift({
+                areaId: '0',
+                areaName: '- - -'
+              })
+            }
+            
             this.city = obj.city_id
               ? { areaId: obj.city_id, areaName: obj.city_name }
               : this.cityList[0]

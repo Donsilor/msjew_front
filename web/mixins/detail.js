@@ -129,10 +129,10 @@ export default {
     },
     // 立即购买
     orderNow(){
-      if(this.$store.state.platform == 20 && !this.$store.state.token){
-        this.ifShowLoginPop = true
-        return
-      }
+      // if(this.$store.state.platform == 20 && !this.$store.state.token){
+      //   this.ifShowLoginPop = true
+      //   return
+      // }
       
       const _this = this
 

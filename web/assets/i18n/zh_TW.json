@@ -2846,7 +2846,10 @@
         "msgContent2": "没有選擇商品！",
         "setDefaultAddr": "設為默認地址",
         "setSuccess": "默認地址設置成功",
-        "point":"*註：訂單金額已做抹零處理"
+        "point":"*註：訂單金額已做抹零處理",
+        "accountNum":"手機號/郵箱",
+        "code":"驗證碼",
+        "agreeTip":"使用該手機號碼/郵箱註冊賬號，註冊後可在個人中心查看訂單信息"
     },
     "invoice": {
         "personal": "個人",
