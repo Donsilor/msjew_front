@@ -1196,6 +1196,7 @@
             "wip9": "Enter correct phone number",
             "wip10": "Select country/regional information",
             "wip11": "Enter full address",
+            "wip12": "Please add shipping address",
             "saveSuccess": "Saved successfully",
             "addAddressSuccess": "The delivery address is added successfully",
             "forget": "Retrieve Password >",

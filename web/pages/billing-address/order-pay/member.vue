@@ -2176,7 +2176,8 @@ export default {
   methods: {
     // 点击提示修改地址确认按钮触发
     alertTipBox(){
-      this.alertBox = false
+      this.alertBox = false;
+      this.newAddress = true;
       // 点击修改滚顶到地址选择模块
       document.getElementById('step').scrollIntoView({
         block: 'center',
@@ -2279,7 +2280,7 @@ export default {
             this.getTex(k)
             this.resetAddressInp()
           }else{
-            this.wrongMsg = '请添加收获地址'
+            this.wrongMsg = this.$t(`${langs}.wip12`)
             this.alertBox = true
           }
         })
