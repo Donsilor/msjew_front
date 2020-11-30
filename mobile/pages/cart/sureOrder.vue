@@ -1492,7 +1492,7 @@ export default {
           address:this.address,
           invoice: info,
           openid: openid,
-          orderId: orderId,
+          // orderId: orderId,
           coinType:this.$store.state.coin,
           payType: pay,
           tradeType: tradeType,
@@ -1504,6 +1504,7 @@ export default {
         console.log("res1111111",res)
         this.order_sn = res.order_sn
         if(tradeType == 'mweb'){
+          alert(111111111111)
           window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay))
         }
         if(tradeType == 'js'){

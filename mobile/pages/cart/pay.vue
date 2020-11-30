@@ -585,6 +585,7 @@ export default {
         // alert('11111',res)
         if(tradeType == 'mweb'){
           // alert('22222',res)
+          console.log(444444,res)
           window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
         }
         if(tradeType == 'js'){
