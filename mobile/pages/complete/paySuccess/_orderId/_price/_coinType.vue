@@ -242,7 +242,11 @@ export default {
         let baseUrl=this.$store.getters.baseUrl
         let return_url = ''
         if(this.$route.query.payType == 1){
-          return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
+          if(this.$route.query.order_sn){
+            return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
+          } else {
+            return_url = baseUrl+'/verify?orderId='+this.$route.query.orderId
+          }
         } else {
           return_url = backUrl
         }
