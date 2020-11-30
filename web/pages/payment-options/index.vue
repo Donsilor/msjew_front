@@ -823,7 +823,7 @@ export default {
         correctLevel : QRCode.CorrectLevel.H
       });
 
-      if(this.payWay == 1){
+      if(this.payWayCn == 1){
         //实现轮询
         this.interval = window.setInterval(() => {
           setTimeout(this.payVerify(), 0);

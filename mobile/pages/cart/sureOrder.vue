@@ -1424,7 +1424,7 @@ export default {
       if(this.kai == true){
         info = this.invoices
       }
-
+  console.log("sssswsinfo",this.order_sn)
       let baseUrl=this.$store.getters.baseUrl
       let orderId = this.info.orderId
       let tradeType = ''
@@ -1501,9 +1501,10 @@ export default {
         }
       })
       .then(res => {
+        console.log("res1111111",res)
         this.order_sn = res.order_sn
         if(tradeType == 'mweb'){
-          window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn={order_sn}'+'&payType='+pay))
+          window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay))
         }
         if(tradeType == 'js'){
           function onBridgeReady(){
