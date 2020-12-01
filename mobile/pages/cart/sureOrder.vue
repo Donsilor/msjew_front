@@ -8,7 +8,7 @@
       <a @click="gologin">{{ lang.accont }}</a>
       <span>{{ lang.any }}</span>
     </div>
-    <div class="address">
+    <div class="address" v-if="this.selectPay !== 6">
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
           <span>{{ address.firstname }} {{ address.lastname }}</span>
@@ -23,7 +23,7 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <div v-if="!hasAddress" class="no-address" @click="goAddress">
+      <div v-if="!hasAddress && this.selectPay !== 6" class="no-address" @click="goAddress"> 
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
@@ -532,6 +532,7 @@ export default {
       info:'',
       price:'',
       typeIndex:0,
+      selectPay:'',
       // info: JSON.parse(this.$route.query.info),
       // price: JSON.parse(this.$route.query.info).orderAmount,
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
@@ -668,6 +669,19 @@ export default {
     this.$nextTick(() => {
       // this.kai = typeof this.invoices !== 'undefined' && this.invoices.invoice_title != ''
       // console.log(this.kai)
+       if(this.typeIndex == 0){
+        if(this.$store.state.platform === 21){
+          this.selectPay = 2
+        } else {
+          this.selectPay = 6
+        }
+      }else if(this.typeIndex == 1){
+        if(this.$store.state.platform === 21){
+          this.selectPay = 1
+        }else{
+          this.selectPay = 9
+        }
+      }
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
       } else {
@@ -763,17 +777,21 @@ export default {
       if(this.typeIndex == 0){
         if(this.$store.state.platform === 21){
           pay = 2
+          this.selectPay = 2
         } else {
           pay = 6
+          this.selectPay = 6
         }
       }else if(this.typeIndex == 1){
         if(this.$store.state.platform === 21){
           pay = 1
+          this.selectPay = 1
         }else{
           pay = 9
+          this.selectPay = 9
         }
       }
-      console.log("选择哪一个",ind,pay)
+      console.log("选择哪一个",ind,pay,this.selectPay)
 
       // if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89 || pay == 9){
       //   this.ifShowPop = true
@@ -1209,19 +1227,21 @@ export default {
           return
         }
       } else {
-        if (!this.hasAddress) {
-          this.$toast.show(this.lang.addrTip)
-          const topC = document.getElementsByClassName('layout-main')[0];
-
-          let timer = setInterval(() => {
-            let ispeed = Math.floor(-this.scrollTop / 5)
-            topC.scrollTop = this.scrollTop + ispeed
-            if (this.scrollTop === 0) {
-              clearInterval(timer)
-            }
-          }, 22)
-          this.$nuxt.$loading.finish()
-          return
+        if(pay!== 6){
+          if (!this.hasAddress) {
+            this.$toast.show(this.lang.addrTip)
+            const topC = document.getElementsByClassName('layout-main')[0];
+  
+            let timer = setInterval(() => {
+              let ispeed = Math.floor(-this.scrollTop / 5)
+              topC.scrollTop = this.scrollTop + ispeed
+              if (this.scrollTop === 0) {
+                clearInterval(timer)
+              }
+            }, 22)
+            this.$nuxt.$loading.finish()
+            return
+          }
         }
       }
       let info = {}
@@ -1501,13 +1521,12 @@ export default {
         }
       })
       .then(res => {
-        console.log("res1111111",res)
+        // console.log("res1111111",res)
         this.order_sn = res.order_sn
         if(tradeType == 'mweb'){
-          alert(111111111111)
+          // alert(111111111111)
           window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay))
-        }
-        if(tradeType == 'js'){
+        }else if(tradeType == 'js'){
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
@@ -1536,9 +1555,10 @@ export default {
           }else{
             onBridgeReady();
           }
-        }
-        if (res.config) {
-          window.location.replace(res.config)
+        }else{
+          if(res.config){
+            window.location.replace(res.config)
+          }
         }
       })
       .catch(err => {

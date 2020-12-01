@@ -1155,7 +1155,7 @@
           <div class="left-side">
             <!--          名-->
             <div class="input-line">
-              <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+              <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
               <div :class="[{ 'border-change': borderChange === 2 },{ 'border-wrong': wrongInput.firstname }]" class="input-box">
                 <input
                   v-model="addressData.firstname"
@@ -1176,7 +1176,7 @@
             </div>
             <!--          姓-->
             <div class="input-line">
-              <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
+              <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
               <div :class="[{ 'border-change': borderChange === 1 },{ 'border-wrong': wrongInput.lastname }]" class="input-box">
                 <input
                   v-model="addressData.lastname"

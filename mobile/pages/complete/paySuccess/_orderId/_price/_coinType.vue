@@ -403,7 +403,7 @@ export default {
             }
           } else {
             if(data.verification_status === 'completed') {
-              localStorage.removeItem('myAdders')
+              // localStorage.removeItem('myAdders')
               this.goPaySuccess()
             } else if(data.verification_status === 'failed') {
               this.goPayFailed()

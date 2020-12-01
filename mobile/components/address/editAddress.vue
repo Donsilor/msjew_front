@@ -112,10 +112,16 @@
               {{ province }}
               <i class="icon iconfont iconxiala"></i>
             </div>
+            <div :class="['error-message', { active: provinceTrue }]">
+              {{ provinceText }}
+            </div>
 
             <div class="test-mod" @click="showCity">
               {{ city }}
               <i class="icon iconfont iconxiala"></i>
+            </div>
+            <div :class="['error-message', { active: cityTrue }]">
+              {{ cityText }}
             </div>
 
             <div class="input-mod">
@@ -325,7 +331,11 @@ export default {
       countryTrue: false,
       countryText: '',
       province: this.LANGUAGE.personal.editAddress.province,
+      provinceTrue: false,
+      provinceText: '',
       city: this.LANGUAGE.personal.editAddress.city,
+      cityTrue: false,
+      cityText: '',
       postal: '',
       countryList: [],
       countryId: '',
@@ -613,6 +623,7 @@ export default {
       this.provinceId = this.provinceList[val.index].id
       this.province = this.provinceList[val.index].content
       this.getListThree()
+      this.check(8)
     },
     showCity() {
       this.cityId = ''
@@ -635,30 +646,45 @@ export default {
     // 刪除地址
     deleteAddress(id) {
       const _this = this
-      _this
-        .$axios({
-          method: 'post',
-          url: `/web/member/address/del`,
-          data: {
-            id: id
-          }
-        })
-        .then(res => {
-          this.$toast.show(this.lang.toast1)
-          setTimeout(() => {
-            this.$emit('closeADP',true);
-          }, 2000)
-        })
-        .catch(err => {
-          this.$toast.show(err.message)
-        })
+      if(this.isLogin){
+        _this
+          .$axios({
+            method: 'post',
+            url: `/web/member/address/del`,
+            data: {
+              id: id
+            }
+          })
+          .then(res => {
+            this.$toast.show(this.lang.toast1)
+            setTimeout(() => {
+              this.$emit('closeADP',true);
+            }, 2000)
+          })
+          .catch(err => {
+            this.$toast.show(err.message)
+          })
+      } else {
+        // console.log("this.address",this.address)
+        storage && storage.remove('myAdders')
+        setTimeout(() => {
+          this.$emit('closeADP',true);
+          this.$emit('delete',true);
+        }, 2000)
+        // this.address = []
+      }
     },
     citySure(val) {
       this.cityId = this.cityList[val.index].id
       this.city = this.cityList[val.index].content
+      this.check(9)
     },
     check(val) {
-      this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = false
+      if(!this.isLogin){
+        this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = this.provinceTrue = this.cityTrue = false
+      } else {
+        this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = false
+      }
 
       if ((val === 1 || val === 0) && this.name === '') {
         this.nameText = this.lang.nameText1
@@ -745,6 +771,24 @@ export default {
       if ((val === 6 || val === 0) && this.countryId === '') {
         this.countryText = this.lang.countryText
         this.countryTrue = true
+        return
+      }
+
+      if(!this.isLogin){
+        if(this.provinceList.length >2){
+          if ((val === 8 || val === 0) && this.provinceId === '') {
+            this.provinceText = this.lang.provinceText
+            this.provinceTrue = true
+            return
+          }
+        }
+        if(this.cityList.length >2){
+          if ((val === 9 || val === 0) && this.cityId === '') {
+            this.cityText = this.lang.cityText
+            this.cityTrue = true
+            return
+          }
+        }
       }
 
     },
@@ -758,6 +802,8 @@ export default {
         this.phoneTrue === false &&
         this.detailsTrue === false &&
         this.countryTrue === false &&
+        this.provinceTrue === false &&
+        this.cityTrue === false &&
         this.isOver === true
       ) {
         this.isOver = false
@@ -839,6 +885,7 @@ export default {
           }
           const TouristData = JSON.parse(JSON.stringify(TouristJson))
           storage && storage.set('myAdders', TouristData)
+          this.$toast.show(this.lang.toast3)
           console.log("myAdders简体",TouristData)
           setTimeout(() => {
             this.$emit('closeADP',true);
@@ -865,6 +912,7 @@ export default {
           const TouristData = JSON.parse(JSON.stringify(TouristJson))
           storage && storage.set('myAdders', TouristData)
           console.log("myAdders简体",TouristData)
+          this.$toast.show(this.lang.toast2)
           setTimeout(() => {
             this.$emit('closeADP',true);
             // this.$router.go(-1)
@@ -872,20 +920,20 @@ export default {
           }, 1500)
         } else{
           const json2 = {
-            id: this.editVal.id ? this.editVal.id : null,
-            lastname: this.name,
-            firstname: this.surname,
-            userTelCode: this.userTelCode,
-            phone: this.phone,
-            mailbox: this.mailbox,
-            country: this.country,
-            countryId: this.countryId,
-            province: this.province,
-            provinceId: this.provinceId,
-            city: this.city,
-            cityId: this.cityId,
-            details: this.details,
-            postal: this.postal
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
           }
           const data2 = JSON.parse(JSON.stringify(json2))
           storage && storage.set('myAdders', data2)
@@ -907,6 +955,8 @@ export default {
         this.phoneTrue === false &&
         this.detailsTrue === false &&
         this.countryTrue === false &&
+        this.provinceTrue === false &&
+        this.cityTrue === false &&
         this.isOver === true
       ) {
         this.isOver = false
@@ -925,6 +975,7 @@ export default {
         }
         const data = JSON.parse(JSON.stringify(json))
         if (this.isLogin&&this.addVal!=="add") {
+          console.log(11111)
           const _this = this
           _this
             .$axios({
@@ -946,6 +997,7 @@ export default {
               console.log(err)
             })
         } else if(this.addVal=="add"){
+           console.log(22222)
           const _this = this
           _this
             .$axios({
@@ -966,6 +1018,32 @@ export default {
               console.log(err)
             })
 
+        }else if(!this.isLogin&&this.addVal!=="TouristAdd"){
+          const TouristJson = {
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
+          }
+          const TouristData = JSON.parse(JSON.stringify(TouristJson))
+          storage && storage.set('myAdders', TouristData)
+          this.$toast.show(this.lang.toast3)
+          console.log("myAdders简体",TouristData)
+          setTimeout(() => {
+            this.$emit('closeADP',true);
+            // this.$router.go(-1)
+            this.isOver = true
+          }, 1500)
         }else if(this.addVal === 'TouristAdd'){
           const TouristJson = {
             id: 1,
@@ -985,6 +1063,7 @@ export default {
           }
           const TouristData = JSON.parse(JSON.stringify(TouristJson))
           storage && storage.set('myAdders', TouristData)
+          this.$toast.show(this.lang.toast2)
           console.log("myAdders繁体",TouristData)
           setTimeout(() => {
             this.$emit('closeADP',true);
