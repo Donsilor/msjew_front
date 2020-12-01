@@ -16,7 +16,7 @@ export default {
       isLogin:this.$store.getters.hadLogin
     }
   },
-  beforeMount() {
+  mounted() {
     if(this.$store.state.language === 'zh_CN'){
       this.country={areaId:'7',areaName: '中国'}
       this.countryList=[{ areaId:'7',areaName: '中国'}]
@@ -67,7 +67,7 @@ export default {
           params: { pid: this.country.areaId }
         })
         .then(res => {
-          // console.log('省份=====>', res)
+          console.log('省份=====>', res)
           if (!res.data.length==0) {
             this.provinceList = res.data
             this.provinceList.unshift({

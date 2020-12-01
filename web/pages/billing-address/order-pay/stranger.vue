@@ -70,9 +70,9 @@
             <div class="addr-board" @click="changeAddress(index)" />
             <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
             <i class="iconfont iconlajitong" @click="deleteAddressId = a.id; delIdx = index; confirmBox = true"/>
-            <div v-if="is_default == 1" class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;">
+            <!-- <div v-if="is_default == 1" class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;">
               {{ $t(`${langs}.mrAddress`) }}
-            </div>
+            </div> -->
             <div v-if="is_default != 1 && addressIdx == index"  class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;" @click="setDefaultAddr(a)">
               {{ $t(`${lang}.setDefaultAddr`) }}
             </div>
@@ -80,7 +80,7 @@
               {{ $t(`${lang}.change`) }}
             </div>
             <img
-              v-show="a.is_default == 1"
+              v-show="is_default == 1"
               src="../../../static/personal/account/address-bar.png"
             />
           </div>
@@ -88,7 +88,7 @@
       </div>
 
       <!--    新增&修改地址模块-->
-      <div :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
+      <div v-if="this.payWay !== 6" :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
         <div class="new-address-title">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.address`) }}</div>
@@ -1129,9 +1129,9 @@
             <div class="addr-board" @click="changeAddress(index)" />
             <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
             <i class="iconfont iconlajitong" @click="deleteAddressId = a.id;delIdx = index;confirmBox = true"/>
-            <div v-if="is_default == 1" class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;">
+            <!-- <div v-if="is_default == 1" class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;">
               {{ $t(`${langs}.mrAddress`) }}
-            </div>
+            </div> -->
             <div v-if="is_default != 1 && addressIdx == index" class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;" @click="setDefaultAddr(a)">
               {{ $t(`${lang}.setDefaultAddr`) }}
             </div>
@@ -1144,7 +1144,7 @@
       </div>
 
       <!--    新增&修改地址模块-->
-      <div :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
+      <div v-if="this.payWay !== 6" :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
         <div class="new-address-title">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.address`) }}</div>
@@ -2124,23 +2124,6 @@ export default {
     madeUp
   },
   mixins: [Address],
-  props: {
-    className: {
-      type: Array,
-      required: false,
-      default() {
-        return []
-      }
-    },
-    type: {
-      type: String,
-      required: false,
-      default: 'send',
-      validator(value) {
-        return ['send', 'reset'].includes(value)
-      }
-    }
-  },
   data() {
     return {
       checked:false,
@@ -2163,7 +2146,7 @@ export default {
       Active:false,
       emailShow:false,
       mailShow:false,
-      language:'',
+      language:this.$store.state.language,
       lang,
       langs,
       lang2,
@@ -2281,7 +2264,7 @@ export default {
       is_electronic:'',
       // ultimatelyPay:'',
       isLogin:this.$store.getters.hadLogin,
-      loginType: 2,
+      loginType: 1,
       waitingTime: defaultTime,
       waiting: false,
       waitingText: this.$t(`${langcode}.sendCode`),
@@ -2346,7 +2329,7 @@ export default {
   },
   created() {
     // console.log('this.pathTakeIds',this.pathTakeIds)
-    console.log("planDays",this.$route.query.orderId)
+    // console.log("planDays",this.$route.query.orderId)
     if(this.payWayCn == 1){
         //实现轮询
         this.interval = window.setInterval(() => {
@@ -2398,9 +2381,15 @@ export default {
     }
   },
   mounted() {
-    console.log("rrr",this.isLogin)
-    this.language = this.$store.state.language
+    // this.language = this.$store.state.language
+    console.log("当前语言",this.language)
     window.addEventListener('scroll', this.scrollToTop);
+    if(this.$store.state.platform == 20){
+      this.payWay = 2
+    } else {
+      this.payWay = 6
+    }
+    console.log("payWayCn",this.payWay,this.payWayCn) 
 
     // 大陆站点 登录方式为手机登录
     if(this.$store.state.platform == 20){
@@ -2478,6 +2467,7 @@ export default {
     },
     // 简体创建地址
     createAddressCn() {
+      // console.log(1111,this.countryList ,this.provinceList,this.cityList)
       // console.log('create')  /[^\d]/g,''
       if (this.addressData.lastname === '') {
         this.wrongMsg = this.$t(`${lang}.wip1`)
@@ -2505,10 +2495,26 @@ export default {
         this.wrongInput.mobile = true
         return false
       }
+     
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
         return false
+      }
+      if(this.provinceList >2){
+
+        if (!this.province.areaId) {
+          this.wrongMsg = this.$t(`${lang}.wip10`)
+          this.alertBox = true
+          return false
+        }
+      }
+      if(this.cityList.length >2){
+        if (!this.city.areaId) {
+          this.wrongMsg = this.$t(`${lang}.wip11`)
+          this.alertBox = true
+          return false
+        }
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2626,6 +2632,20 @@ export default {
         this.alertBox = true
         return false
       }
+      if(this.provinceList >2){
+        if (!this.province.areaId) {
+          this.wrongMsg = this.$t(`${lang}.wip10`)
+          this.alertBox = true
+          return false
+        }
+      }
+      if(this.cityList.length >2){
+        if (!this.city.areaId) {
+          this.wrongMsg = this.$t(`${lang}.wip11`)
+          this.alertBox = true
+          return false
+        }
+      }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
@@ -2712,6 +2732,20 @@ export default {
         this.alertBox = true
         return false
       }
+      if(this.provinceList >2){
+        if (!this.province.areaId) {
+          this.wrongMsg = this.$t(`${lang}.wip10`)
+          this.alertBox = true
+          return false
+        }
+      }
+      if(this.cityList.length >2){
+        if (!this.city.areaId) {
+          this.wrongMsg = this.$t(`${lang}.wip11`)
+          this.alertBox = true
+          return false
+        }
+      }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
@@ -2797,6 +2831,20 @@ export default {
         this.alertBox = true
         return false
       }
+      if(this.provinceList >2){
+        if (!this.province.areaId) {
+          this.wrongMsg = this.$t(`${lang}.wip10`)
+          this.alertBox = true
+          return false
+        }
+      }
+      if(this.cityList.length >2){
+        if (!this.city.areaId) {
+          this.wrongMsg = this.$t(`${lang}.wip11`)
+          this.alertBox = true
+          return false
+        }
+      }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
@@ -2841,7 +2889,7 @@ export default {
       this.resetAddressInp()
       this.address = []
 
-      console.log("gsgdggg",this.address)
+      // console.log("gsgdggg",this.address)
     },
     keydown(){
       var reg = /^[0-9a-zA-Z\-]{1}$/;
@@ -3061,6 +3109,22 @@ export default {
         }, 22)
         return
       }
+      // console.log("dddddd",this.addr)
+      if( pay !== 6){
+        if(JSON.stringify(this.addr) == "{}"|| this.address==''){
+          this.$errorMessage(this.$t(`${lang}.msg4`)) 
+          const topB = document.getElementsByClassName('layout-box')[0];
+          const that = this
+          let timer = setInterval(() => {
+            let ispeed = Math.floor(-that.scrollTop / 5)
+            topB.scrollTop = that.scrollTop + ispeed
+            if (that.scrollTop === 0) {
+              clearInterval(timer)
+            }
+          }, 22)
+          return
+        }
+      }
 
       let baseUrl=this.$store.getters.baseUrl
       let returnUrl = baseUrl+'/complete-paySuccess?order_sn={order_sn}'
@@ -3129,7 +3193,7 @@ export default {
         data: {
           orderSn:this.orderSn,
           goodsCartList:json,
-          address:this.address,
+          address:this.addr,
           invoice:invoice,
           tradeType:'pc',
           coinType:this.$store.state.coin,
@@ -3212,10 +3276,19 @@ export default {
         this.$errorMessage(this.$t(`${lang}.msg9`))
         return 
       }
-      console.log("方式",pay)
+      console.log("方式",this.address)
 
-      if(JSON.stringify(this.addr) == "{}"){
-        this.$errorMessage(this.$t(`${lang}.msg4`))
+      if(JSON.stringify(this.addr) == "{}"|| this.address==''){
+        this.$errorMessage(this.$t(`${lang}.msg4`)) 
+        const topB = document.getElementsByClassName('layout-box')[0];
+        const that = this
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 5)
+          topB.scrollTop = that.scrollTop + ispeed
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
         return
       }
 
