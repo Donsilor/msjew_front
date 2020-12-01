@@ -2811,6 +2811,8 @@
         "wip7": "Up to 20 characters for last name",
         "wip8": "Enter first name",
         "wip9": "Up to 20 characters for first name",
+        "wip10": "The province cannot be empty!",
+        "wip11": "The city cannot be empty!",
         "msg3": "Failed to create",
         "msg4": "Please add the shipping address first!",
         "msg5": "Your e-mail is incorrect. Please enter again!",
