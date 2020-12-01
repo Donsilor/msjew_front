@@ -8,7 +8,22 @@
             </span>
             <i class="icon iconfont iconicon-test2" @click="close()"></i>
           </div>
+
+          
           <div class="mod">
+            <div v-if="language==='zh_CN'" class="input-mod">
+              <bdd-input
+                v-model="surname"
+                :placeholder="lang.surname"
+                @input="check(2)"
+                :maxl="maxlength"
+                @focus="focusFn(2)"
+              ></bdd-input>
+            </div>
+            <div v-if="language==='zh_CN'" :class="['error-message', { active: surnameTrue }]">
+              {{ surnameText }}
+            </div>
+
             <div class="input-mod">
               <bdd-input
                 v-model="name"
@@ -22,7 +37,7 @@
               {{ nameText }}
             </div>
 
-            <div class="input-mod">
+            <div v-if="language!=='zh_CN'" class="input-mod">
               <bdd-input
                 v-model="surname"
                 :placeholder="lang.surname"
@@ -31,9 +46,10 @@
                 @focus="focusFn(2)"
               ></bdd-input>
             </div>
-            <div :class="['error-message', { active: surnameTrue }]">
+            <div v-if="language!=='zh_CN'" :class="['error-message', { active: surnameTrue }]">
               {{ surnameText }}
             </div>
+
             <div v-if="language==='zh_CN'" class="input-mod">
               <bdd-input
                 v-model="mailbox"
