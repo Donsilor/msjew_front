@@ -384,14 +384,17 @@ export default {
     this.loginType=localStorage.getItem('loginType')
     this.language = this.$store.state.language
 
-    if(this.language === 'zh_CN'){
-      this.userTelCode='+86'
-      this.area=this.lang.areaCN   //"中国 +86"
-      this.countryId = 7
-      this.country = this.lang.china   //'中国'
-    }else {
-      this.userTelCode='+852'
+    if(this.addVal=="add" || this.addVal == "TouristAdd"){
+      if(this.language === 'zh_CN'){
+        this.userTelCode='+86'
+        this.area=this.lang.areaCN   //"中国 +86"
+        this.countryId = 7
+        this.country = this.lang.china   //'中国'
+      }else {
+        this.userTelCode='+852'
+      }
     }
+
   },
   methods: {
     close() {
