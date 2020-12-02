@@ -376,7 +376,7 @@ export default {
       // console.log("backUrl",backUrl)
       let baseUrl=this.$store.getters.baseUrl
       let return_url = ''
-      if(this.info.payChannel == 1 || this.orderinfo.payChannel == 1){
+      if(this.$route.query.payType == 1){
         if(this.$route.query.order_sn){
           return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
         } else {
