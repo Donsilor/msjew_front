@@ -55,7 +55,7 @@
           {{ lang.add }}
         </div>
       </div>
-      <div v-else v-show="address.length !== 1 " class="btn-fixed">
+      <div v-else-if="!isLogin&&address.length !== 1 " class="btn-fixed">
         <div class="btn-common btn-white" @click="editAddress(null)">
           <i class="icon iconfont iconicon-test"></i>
           {{ lang.add }}
