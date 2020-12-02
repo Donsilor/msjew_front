@@ -2495,8 +2495,8 @@ export default {
         this.alertBox = true
         return false
       }
-      if(this.provinceList >2){
-
+        console.log("sssss",this.provinceList)
+      if(this.provinceList.length >2){
         if (!this.province.areaId) {
           this.wrongMsg = this.$t(`${lang}.wip10`)
           this.alertBox = true
@@ -2825,7 +2825,7 @@ export default {
         this.alertBox = true
         return false
       }
-      if(this.provinceList >2){
+      if(this.provinceList.length >2){
         if (!this.province.areaId) {
           this.wrongMsg = this.$t(`${lang}.wip10`)
           this.alertBox = true
