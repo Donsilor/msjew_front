@@ -8,7 +8,7 @@
       <a @click="gologin">{{ lang.accont }}</a>
       <span>{{ lang.any }}</span>
     </div>
-    <div class="address" v-if="this.selectPay !== 6">
+    <div class="address" >
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
           <span v-if="language == 'zh_CN'">{{ address.lastname }}{{ address.firstname }}</span>
@@ -24,7 +24,7 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <div v-if="!hasAddress && this.selectPay !== 6" class="no-address" @click="goAddress"> 
+      <div v-if="!hasAddress" class="no-address" @click="goAddress"> 
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
@@ -534,7 +534,6 @@ export default {
       info:'',
       price:'',
       typeIndex:0,
-      selectPay:'',
       // info: JSON.parse(this.$route.query.info),
       // price: JSON.parse(this.$route.query.info).orderAmount,
       // typeIndex: JSON.parse(this.$route.query.info).orderAmount === 0 ? 5 : 0,
@@ -671,19 +670,6 @@ export default {
     this.$nextTick(() => {
       // this.kai = typeof this.invoices !== 'undefined' && this.invoices.invoice_title != ''
       // console.log(this.kai)
-       if(this.typeIndex == 0){
-        if(this.$store.state.platform === 21){
-          this.selectPay = 2
-        } else {
-          this.selectPay = 6
-        }
-      }else if(this.typeIndex == 1){
-        if(this.$store.state.platform === 21){
-          this.selectPay = 1
-        }else{
-          this.selectPay = 9
-        }
-      }
       if (localStorage.getItem('session')) {
         this.session = localStorage.getItem('session')
       } else {
@@ -779,21 +765,17 @@ export default {
       if(this.typeIndex == 0){
         if(this.$store.state.platform === 21){
           pay = 2
-          this.selectPay = 2
         } else {
           pay = 6
-          this.selectPay = 6
         }
       }else if(this.typeIndex == 1){
         if(this.$store.state.platform === 21){
           pay = 1
-          this.selectPay = 1
         }else{
           pay = 9
-          this.selectPay = 9
         }
       }
-      console.log("选择哪一个",ind,pay,this.selectPay)
+      console.log("选择哪一个",ind,pay)
 
       // if(pay == 81 || pay == 82 || pay == 83 || pay == 84 || pay == 89 || pay == 9){
       //   this.ifShowPop = true
@@ -1119,7 +1101,7 @@ export default {
     getCode() { // 静默授权
       var local = window.location.href // 获取页面url
       // console.log("url",this.code)
-      var appid = 'wxdac61ce65e15cfc4' 
+      var appid = 'wx8333dcbf196b0ad3' 
       this.code = this.getUrlCode().code // 截取code
       let wxid =  localStorage.getItem('openid') 
       // localStorage.setItem('WeiXin_Code',this.code)
@@ -1446,7 +1428,7 @@ export default {
       if(this.kai == true){
         info = this.invoices
       }
-  console.log("sssswsinfo",this.order_sn)
+      console.log("sssswsinfo",this.order_sn)
       let baseUrl=this.$store.getters.baseUrl
       let orderId = this.info.orderId
       let tradeType = ''
