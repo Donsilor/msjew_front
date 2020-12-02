@@ -395,7 +395,7 @@ export default {
             }
         })
         .then(data => {
-          if(this.info.payChannel == 1){
+          if(this.$route.query.payType == 1){
             if(data.verification_status === 'completed') {
               this.goPaySuccess()
             }else{
