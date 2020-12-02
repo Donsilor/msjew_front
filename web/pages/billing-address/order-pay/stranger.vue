@@ -88,7 +88,7 @@
       </div>
 
       <!--    新增&修改地址模块-->
-      <div v-if="this.payWay !== 6" :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
+      <div  :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
         <div class="new-address-title">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.address`) }}</div>
@@ -99,7 +99,7 @@
           <div class="left-side">
             <!--          姓名-->
             <div class="input-line">
-              <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
+              <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
               <div :class="[ { 'border-change': borderChange === 1 }, { 'border-wrong': wrongInput.lastname }]" class="input-box">
                 <input v-model="addressData.lastname" :class="{ 'wrong-input': wrongInput.lastname }" type="text" autocomplete="off"
                   @focus="
@@ -117,7 +117,7 @@
 
             <!--          姓名-->
             <div class="input-line">
-              <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+              <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
               <div :class="[ { 'border-change': borderChange === 2 }, { 'border-wrong': wrongInput.firstname } ]" class="input-box">
                 <input
                   v-model="addressData.firstname"
@@ -1044,21 +1044,21 @@
       </div>
 
 
-     <message-box
-      v-show="confirmBox"
-      :title="$t(`${lang}.msgTitle1`)"
-      :message="$t(`${lang}.msgContent1`)"
-      type="two"
-      @cancel="confirmBox = false"
-      @sure="deleteAddress()"
-    />
-    <message-box
-      v-show="alertBox"
-      :message="wrongMsg"
-      :title="$t(`${lang}.msgTitle1`)"
-      type="one"
-      @done="alertTipBox"
-    />
+      <message-box
+        v-show="confirmBox"
+        :title="$t(`${lang}.msgTitle1`)"
+        :message="$t(`${lang}.msgContent1`)"
+        type="two"
+        @cancel="confirmBox = false"
+        @sure="deleteAddress()"
+      />
+      <message-box
+        v-show="alertBox"
+        :message="wrongMsg"
+        :title="$t(`${lang}.msgTitle1`)"
+        type="one"
+        @done="alertTipBox"
+      />
     </div>
     <!-- 繁体和英文 -->
     <div v-else class="order">
@@ -1146,7 +1146,7 @@
       </div>
 
       <!--    新增&修改地址模块-->
-      <div v-if="this.payWay !== 6" :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
+      <div  :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
         <div class="new-address-title">
           <div class="na-line" />
           <div class="na-title">{{ $t(`${lang}.address`) }}</div>
@@ -1157,7 +1157,7 @@
           <div class="left-side">
             <!--          名-->
             <div class="input-line">
-              <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
+              <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
               <div :class="[{ 'border-change': borderChange === 2 },{ 'border-wrong': wrongInput.firstname }]" class="input-box">
                 <input
                   v-model="addressData.firstname"
@@ -1178,7 +1178,7 @@
             </div>
             <!--          姓-->
             <div class="input-line">
-              <div class="label"><span class="star">*</span>{{ $t(`${lang}.lastName`) }}</div>
+              <div class="label"><span class="star">*</span>{{ $t(`${lang}.firstName`) }}</div>
               <div :class="[{ 'border-change': borderChange === 1 },{ 'border-wrong': wrongInput.lastname }]" class="input-box">
                 <input
                   v-model="addressData.lastname"
@@ -2074,20 +2074,20 @@
 
 
       <message-box
-      v-show="confirmBox"
-      :title="$t(`${lang}.msgTitle1`)"
-      :message="$t(`${lang}.msgContent1`)"
-      type="two"
-      @cancel="confirmBox = false"
-      @sure="deleteAddress()"
-    />
-    <message-box
-      v-show="alertBox"
-      :message="wrongMsg"
-      :title="$t(`${lang}.msgTitle1`)"
-      type="one"
-      @done="alertTipBox"
-    />
+        v-show="confirmBox"
+        :title="$t(`${lang}.msgTitle1`)"
+        :message="$t(`${lang}.msgContent1`)"
+        type="two"
+        @cancel="confirmBox = false"
+        @sure="deleteAddress()"
+      />
+      <message-box
+        v-show="alertBox"
+        :message="wrongMsg"
+        :title="$t(`${lang}.msgTitle1`)"
+        type="one"
+        @done="alertTipBox"
+      />
     </div>
     <!-- 微信二维码弹窗 -->
     <div v-show="showEwm" class="qr_wrap">
@@ -2392,12 +2392,6 @@ export default {
     // this.language = this.$store.state.language
     console.log("当前语言",this.language)
     window.addEventListener('scroll', this.scrollToTop);
-    if(this.$store.state.platform == 20){
-      this.payWay = 2
-    } else {
-      this.payWay = 6
-    }
-    console.log("payWayCn",this.payWay,this.payWayCn) 
 
     // 大陆站点 登录方式为手机登录
     if(this.$store.state.platform == 20){
@@ -3118,20 +3112,18 @@ export default {
         return
       }
       // console.log("dddddd",this.addr)
-      if( pay !== 6){
-        if(JSON.stringify(this.addr) == "{}"|| this.address==''){
-          this.$errorMessage(this.$t(`${lang}.msg4`)) 
-          const topB = document.getElementsByClassName('layout-box')[0];
-          const that = this
-          let timer = setInterval(() => {
-            let ispeed = Math.floor(-that.scrollTop / 5)
-            topB.scrollTop = that.scrollTop + ispeed
-            if (that.scrollTop === 0) {
-              clearInterval(timer)
-            }
-          }, 22)
-          return
-        }
+      if(JSON.stringify(this.addr) == "{}"|| this.address==''){
+        this.$errorMessage(this.$t(`${lang}.msg4`)) 
+        const topB = document.getElementsByClassName('layout-box')[0];
+        const that = this
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 5)
+          topB.scrollTop = that.scrollTop + ispeed
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+        return
       }
 
       let baseUrl=this.$store.getters.baseUrl
@@ -3304,6 +3296,7 @@ export default {
       let invoice = {}
       let json=[]
       let arr = []
+      let tradeType = ''
       let data = {}
       
       for (const i in this.good) {
@@ -3362,6 +3355,7 @@ export default {
           orderSn:this.orderSn,
           goodsCartList:json,
           address:this.addr,
+          orderSn:this.order_sn, 
           invoice:invoice,
           coinType: this.$store.state.coin,
           payType: pay,
@@ -3391,7 +3385,7 @@ export default {
             this.ewm = res.data.config
           }
           this.getEwm()
-          console.log("url",this.ewm)
+          console.log("url",res.data)
           if (res.data.config) {
             if (pay !== 1) {
               window.location.replace(res.data.config)
@@ -3400,7 +3394,7 @@ export default {
               this.goingPay = false
             }
           }
-        })
+        }) 
         .catch(err => {
           this.goingPay = false
           if (!err.response) {

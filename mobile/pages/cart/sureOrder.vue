@@ -8,7 +8,7 @@
       <a @click="gologin">{{ lang.accont }}</a>
       <span>{{ lang.any }}</span>
     </div>
-    <div class="address">
+    <div class="address" >
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
           <span v-if="language == 'zh_CN'">{{ address.lastname }}{{ address.firstname }}</span>
@@ -24,7 +24,7 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <div v-if="!hasAddress" class="no-address" @click="goAddress">
+      <div v-if="!hasAddress" class="no-address" @click="goAddress"> 
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
@@ -1108,7 +1108,7 @@ export default {
     getCode() { // 静默授权
       var local = window.location.href // 获取页面url
       // console.log("url",this.code)
-      var appid = 'wxdac61ce65e15cfc4' 
+      var appid = 'wx8333dcbf196b0ad3' 
       this.code = this.getUrlCode().code // 截取code
       let wxid =  localStorage.getItem('openid') 
       // localStorage.setItem('WeiXin_Code',this.code)
@@ -1218,19 +1218,21 @@ export default {
           return
         }
       } else {
-        if (!this.hasAddress) {
-          this.$toast.show(this.lang.addrTip)
-          const topC = document.getElementsByClassName('layout-main')[0];
-
-          let timer = setInterval(() => {
-            let ispeed = Math.floor(-this.scrollTop / 5)
-            topC.scrollTop = this.scrollTop + ispeed
-            if (this.scrollTop === 0) {
-              clearInterval(timer)
-            }
-          }, 22)
-          this.$nuxt.$loading.finish()
-          return
+        if(pay!== 6){
+          if (!this.hasAddress) {
+            this.$toast.show(this.lang.addrTip)
+            const topC = document.getElementsByClassName('layout-main')[0];
+  
+            let timer = setInterval(() => {
+              let ispeed = Math.floor(-this.scrollTop / 5)
+              topC.scrollTop = this.scrollTop + ispeed
+              if (this.scrollTop === 0) {
+                clearInterval(timer)
+              }
+            }, 22)
+            this.$nuxt.$loading.finish()
+            return
+          }
         }
       }
       let info = {}
@@ -1433,7 +1435,7 @@ export default {
       if(this.kai == true){
         info = this.invoices
       }
-  console.log("sssswsinfo",this.order_sn)
+      console.log("sssswsinfo",this.order_sn)
       let baseUrl=this.$store.getters.baseUrl
       let orderId = this.info.orderId
       let tradeType = ''
@@ -1510,13 +1512,12 @@ export default {
         }
       })
       .then(res => {
-        console.log("res1111111",res)
+        // console.log("res1111111",res)
         this.order_sn = res.order_sn
         if(tradeType == 'mweb'){
-          alert(111111111111)
+          // alert(111111111111)
           window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay))
-        }
-        if(tradeType == 'js'){
+        }else if(tradeType == 'js'){
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
@@ -1545,9 +1546,10 @@ export default {
           }else{
             onBridgeReady();
           }
-        }
-        if (res.config) {
-          window.location.replace(res.config)
+        }else{
+          if(res.config){
+            window.location.replace(res.config)
+          }
         }
       })
       .catch(err => {

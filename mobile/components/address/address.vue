@@ -61,7 +61,7 @@
           {{ lang.add }}
         </div>
       </div>
-      <AditAddress v-if="ifShowAditAddress" @closeADP="closeAditAddressPop" :editVal="editVal"  :addVal="addVal"></AditAddress>
+      <AditAddress v-if="ifShowAditAddress" @closeADP="closeAditAddressPop" :editVal="editVal"  :addVal="addVal" @delete="deleteAddress"></AditAddress>
     </div>
   </div>
 </template>
