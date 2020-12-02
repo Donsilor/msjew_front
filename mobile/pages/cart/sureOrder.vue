@@ -1503,6 +1503,7 @@ export default {
           address:this.address,
           invoice: info,
           openid: openid,
+          orderSn:this.order_sn, 
           // orderId: orderId,
           coinType:this.$store.state.coin,
           payType: pay,

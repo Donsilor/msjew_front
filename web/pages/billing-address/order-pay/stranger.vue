@@ -3352,7 +3352,6 @@ export default {
 
       if(pay == 1){
         data ={
-          orderSn:this.orderSn,
           goodsCartList:json,
           address:this.addr,
           orderSn:this.order_sn, 
@@ -3365,7 +3364,7 @@ export default {
         }
       } else{
         data ={
-          orderSn:this.orderSn,
+          orderSn:this.order_sn,
           goodsCartList:json,
           address:this.addr,
           invoice:invoice,
