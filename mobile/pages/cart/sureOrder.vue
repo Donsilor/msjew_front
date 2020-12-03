@@ -702,6 +702,7 @@ export default {
         // this.getData() // 获取地址
         let ua = window.navigator.userAgent.toLowerCase();
         if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){
+          console.log(111111111)
           this.getCode()
         }
       // } 
