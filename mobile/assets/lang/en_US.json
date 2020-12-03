@@ -417,7 +417,7 @@
       "setDefault": "Set As Default",
       "remove": "Delete",
       "add": "NEW ADDRESS",
-      "toast": "Deleted",
+      "toast": "Successfully deleted",
       "setSuccess": "The default address setting was successful!"
     },
     "coupon": {
@@ -503,9 +503,9 @@
       "province2": "Select province/state",
       "city2": "Region",
       "pleaseChoose": "Select",
-      "toast1": "Deleted",
+      "toast1": "Successfully deleted",
       "toast2": "Added",
-      "toast3": "Modified",
+      "toast3": "Successfully modified",
       "countryText": "Select country/regional information",
       "provinceText": "Select Province/State",
       "cityText": "Select Region",

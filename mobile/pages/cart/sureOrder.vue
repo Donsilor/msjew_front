@@ -1401,7 +1401,7 @@ export default {
     // 大陆微信支付
     PayWechat() {
       this.isPay = true
-      console.log("aaa",this.address)
+      // console.log("aaa",this.address)
       if(this.info.coinType === 'USD'){
         if(this.typeIndex == 2){
           this.$toast.show(this.lang.NotSupportPay)
@@ -1512,13 +1512,12 @@ export default {
         }
       })
       .then(res => {
-        // console.log("res1111111",res)
+         console.log("res1111111",res)
+        this.order_sn = res.order_sn
         if(tradeType == 'mweb'){
-          this.order_sn = res.order_sn
           // alert(111111111111)
-          window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay))
+          window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+res.order_sn+'&payType='+pay))
         }else if(tradeType == 'js'){
-          this.order_sn = res.data.order_sn
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
@@ -1535,7 +1534,7 @@ export default {
                       window.location.replace(url)
                   }
                 }
-            }(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay)); 
+            }(baseUrl+'/complete/paySuccess?order_sn='+res.order_sn+'&payType='+pay)); 
           }
           if (typeof WeixinJSBridge == "undefined"){
             if( document.addEventListener ){
@@ -2029,6 +2028,7 @@ export default {
     background: #ffffff;
     border-top: 1px solid #ffffff;
     box-shadow: 0px -1px 2px 0px rgba(172, 172, 172, 0.4);
+    z-index: 99;
 
     span {
       display: inline-block;
