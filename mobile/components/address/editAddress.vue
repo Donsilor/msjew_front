@@ -8,8 +8,6 @@
             </span>
             <i class="icon iconfont iconicon-test2" @click="close()"></i>
           </div>
-
-          
           <div class="mod">
             <div v-if="language==='zh_CN'" class="input-mod">
               <bdd-input
@@ -467,8 +465,8 @@ export default {
       }
       this.title = this.lang.header1
       const address = storage.get('myAdders', 0)
-      // console.log("地址",this.editVal)
-      if (this.editVal.id) {
+      console.log("地址11111111111",address,this.editVal,this.addVal)
+      if (this.isLogin && this.editVal.id) {
         this.title = this.lang.header2
         this.id = this.editVal.id
         this.name = this.editVal.firstname
@@ -486,7 +484,8 @@ export default {
         if(this.editVal.zip_code != null){
           this.postal = this.editVal.zip_code.toString()
         }
-      } else if (address && this.addVal !== 'add') {
+      } else if (address) {
+        console.log("地址",this.editVal,this.addVal)
         this.title = this.lang.header2
         this.id = address.id
         this.name = address.firstname
@@ -686,10 +685,11 @@ export default {
       } else {
         // console.log("this.address",this.address)
         storage && storage.remove('myAdders')
+        this.$emit('delete',true);
         setTimeout(() => {
           this.$emit('closeADP',true);
-          this.$emit('delete',true);
         }, 2000)
+        this.$toast.show(this.lang.toast1)
         // this.address = []
       }
     },
@@ -909,7 +909,7 @@ export default {
           setTimeout(() => {
             this.$emit('closeADP',true);
             // this.$router.go(-1)
-            this.isOver = true
+            this.isOver = false
           }, 1500)
         }else if(this.addVal === 'TouristAdd'){
           const TouristJson = {
@@ -935,7 +935,7 @@ export default {
           setTimeout(() => {
             this.$emit('closeADP',true);
             // this.$router.go(-1)
-            this.isOver = true
+            this.isOver = false
           }, 1500)
         } else{
           const json2 = {
@@ -1061,7 +1061,7 @@ export default {
           setTimeout(() => {
             this.$emit('closeADP',true);
             // this.$router.go(-1)
-            this.isOver = true
+            this.isOver = false
           }, 1500)
         }else if(this.addVal === 'TouristAdd'){
           const TouristJson = {

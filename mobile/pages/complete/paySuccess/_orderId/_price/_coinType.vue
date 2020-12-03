@@ -237,6 +237,7 @@ export default {
         }, 3000);
       })
       if (this.$route.query.success === "false") {
+        alert(111111111,this.$route.query.success)
         this.goPayFailed()
         //失败后，继续调用验证api，写入支付日志
         let baseUrl=this.$store.getters.baseUrl
@@ -327,6 +328,10 @@ export default {
 
         this.goodsInfo.value = res.payAmount;
         this.goodsInfo.currency = res.coinCode;
+
+        this.memberInfos.orderId=res.id
+        this.memberInfos.coinType=res.coinCode
+        this.memberInfos.payAmount=res.payAmount
 
         var details = res.details;
 
