@@ -1435,7 +1435,7 @@ export default {
       if(this.kai == true){
         info = this.invoices
       }
-      console.log("sssswsinfo",this.order_sn)
+      // console.log("sssswsinfo",this.order_sn)
       let baseUrl=this.$store.getters.baseUrl
       let orderId = this.info.orderId
       let tradeType = ''
@@ -1513,11 +1513,12 @@ export default {
       })
       .then(res => {
         // console.log("res1111111",res)
-        this.order_sn = res.order_sn
         if(tradeType == 'mweb'){
+          this.order_sn = res.order_sn
           // alert(111111111111)
           window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay))
         }else if(tradeType == 'js'){
+          this.order_sn = res.data.order_sn
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
@@ -1538,10 +1539,10 @@ export default {
           }
           if (typeof WeixinJSBridge == "undefined"){
             if( document.addEventListener ){
-                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+              document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
             }else if (document.attachEvent){
-                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
-                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+              document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+              document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
             }
           }else{
             onBridgeReady();
