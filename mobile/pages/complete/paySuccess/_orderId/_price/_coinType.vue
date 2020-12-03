@@ -9,7 +9,7 @@
       <div class="btn-common btn-gray" @click="goIndex">
         {{ lang.continue }}
       </div>
-      <div v-if="showBtn && info.payChannel === 1">
+      <div v-if="showBtn && this.$route.query.payType == 1">
         <div v-if="hadLogin" class="btn-common btn-gray" @click="returnBack">
           {{ lang.payAgain }}
         </div>
@@ -248,7 +248,7 @@ export default {
             return_url = baseUrl+'/verify?orderId='+this.$route.query.orderId
           }
         } else {
-          return_url = backUrl
+          return_url = back_url
         }
         this.$axios({
             url: '/web/pay/verify',
