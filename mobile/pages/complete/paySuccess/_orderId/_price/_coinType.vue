@@ -237,7 +237,7 @@ export default {
         }, 3000);
       })
       if (this.$route.query.success === "false") {
-        alert(111111111,this.$route.query.success)
+        alert(this.$route.query.success)
         this.goPayFailed()
         //失败后，继续调用验证api，写入支付日志
         let baseUrl=this.$store.getters.baseUrl
@@ -263,8 +263,10 @@ export default {
         .catch(err => {})
       } else {
         if (this.isLogin) {
+          alert(7777)
           this.getOrder()
         }else{
+          alert(6666666666)
           this.getTouristOrder()
         }
 
@@ -472,6 +474,7 @@ export default {
     },
     TouristReturnBack(){
       const res = this.orderinfo
+      alert(33333,this.orderinfo)
       this.$router.push({
         name: 'cart-sureOrder',
         query: {
