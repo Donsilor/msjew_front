@@ -220,7 +220,8 @@ export default {
         coinType:'',
         price:''
       },
-      showBtn:false
+      showBtn:false,
+      verification:true
     }
   },
   computed: {
@@ -237,7 +238,7 @@ export default {
         }, 3000);
       })
       if (this.$route.query.success === "false") {
-        alert(this.$route.query.success)
+
         this.goPayFailed()
         //失败后，继续调用验证api，写入支付日志
         let baseUrl=this.$store.getters.baseUrl
@@ -263,10 +264,8 @@ export default {
         .catch(err => {})
       } else {
         if (this.isLogin) {
-          alert(7777)
           this.getOrder()
         }else{
-          alert(6666666666)
           this.getTouristOrder()
         }
 
@@ -402,6 +401,7 @@ export default {
             }
         })
         .then(data => {
+          console.loh("dddd",this.$route.query.payType,this.verification)
           if(this.$route.query.payType == 1){
             if(data.verification_status === 'completed') {
               this.goPaySuccess()
@@ -409,17 +409,22 @@ export default {
               setTimeout(this.payVerify, 3000)
             }
           } else {
-            if(data.verification_status === 'completed') {
-              // localStorage.removeItem('myAdders')
-              this.goPaySuccess()
-            } else if(data.verification_status === 'failed') {
-              this.goPayFailed()
-            } else {
-              if(this.verifyCount < 2) {
-                setTimeout(this.payVerify, 15000)
-              }
-              else {
-                this.showPayPending()
+            if(this.verification == false){
+              this.verification = true
+              return
+            }else {
+              if(data.verification_status === 'completed') {
+                // localStorage.removeItem('myAdders')
+                this.goPaySuccess()
+              } else if(data.verification_status === 'failed') {
+                this.goPayFailed()
+              } else {
+                if(this.verifyCount < 2) {
+                  setTimeout(this.payVerify, 15000)
+                }
+                else {
+                  this.showPayPending()
+                }
               }
             }
           }
@@ -464,6 +469,7 @@ export default {
       }
     },
     returnBack() {
+      this.verification = false
       const res = this.memberInfos
       this.$router.push({
         name: 'cart-pay',
@@ -473,8 +479,8 @@ export default {
       })
     },
     TouristReturnBack(){
+      this.verification = false
       const res = this.orderinfo
-      alert(33333,this.orderinfo)
       this.$router.push({
         name: 'cart-sureOrder',
         query: {
