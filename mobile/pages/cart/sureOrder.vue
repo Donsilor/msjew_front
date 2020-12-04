@@ -1343,7 +1343,7 @@ export default {
               }
             })
               .then(res => {
-                console.log("返回结果",res)
+                console.log("返回结果",res.config)
                 if (res.config) {
                   if(pay == 9){
                     // 测试key
@@ -1358,7 +1358,7 @@ export default {
                     } else if((/(msjew.bddco)\.cn/).test(host)){
                       stripe = Stripe(TestKey); // 测试key
                     }
-              
+
                     return stripe.redirectToCheckout({ sessionId: res.config });
                   } else {
 

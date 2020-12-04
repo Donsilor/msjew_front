@@ -22,7 +22,7 @@
               {{ surnameText }}
             </div>
 
-            <div class="input-mod">
+            <div v-if="language==='zh_CN'" class="input-mod">
               <bdd-input
                 v-model="name"
                 :placeholder="lang.name"
@@ -31,7 +31,20 @@
                 @focus="focusFn(1)"
               ></bdd-input>
             </div>
-            <div :class="['error-message', { active: nameTrue }]">
+            <div v-if="language==='zh_CN'" :class="['error-message', { active: nameTrue }]">
+              {{ nameText }}
+            </div>
+
+            <div v-if="language!=='zh_CN'" class="input-mod">
+              <bdd-input
+                v-model="name"
+                :placeholder="lang.name"
+                @input="check(1)"
+                :maxl="maxlength"
+                @focus="focusFn(1)"
+              ></bdd-input>
+            </div>
+            <div v-if="language!=='zh_CN'" :class="['error-message', { active: nameTrue }]">
               {{ nameText }}
             </div>
 
@@ -47,6 +60,7 @@
             <div v-if="language!=='zh_CN'" :class="['error-message', { active: surnameTrue }]">
               {{ surnameText }}
             </div>
+
 
             <div v-if="language==='zh_CN'" class="input-mod">
               <bdd-input
