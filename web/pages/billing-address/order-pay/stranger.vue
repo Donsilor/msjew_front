@@ -2944,6 +2944,7 @@ export default {
       this.confirmBox = false
       this.newAddress = true
       this.addressBox = false
+      this.addAddress = true
       this.resetAddressInp()
       this.address = []
 

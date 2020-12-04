@@ -1080,6 +1080,7 @@ export default {
           })
       } else {
         const address = storage.get('myAdders', 0)
+        console.log("dfsadfsa",address)
         if (address) {
         // console.log("address",address)
           this.hasAddress = true
