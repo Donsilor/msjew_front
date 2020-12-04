@@ -201,11 +201,13 @@ export default {
       // }
     },
     editAddress(val) {
-      console.log("this.myAddr",val,this.address)
+      console.log("1111",this.addVal)
+      this.addVal = ''
       if (val) {
         this.ifShowAditAddress = true
         this.editVal = val
       } else if (val === null){
+        console.log("2222",val)
         if(this.isLogin){
           this.ifShowAditAddress = true
           this.addVal = 'add'
