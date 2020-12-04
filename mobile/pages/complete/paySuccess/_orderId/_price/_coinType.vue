@@ -230,7 +230,6 @@ export default {
     }
   },
   mounted() {
-      this.verification = true
       this.$nextTick(() => {
         localStorage.setItem("back_url",window.location.href)
         const back_url = localStorage.getItem("back_url")
@@ -379,7 +378,6 @@ export default {
     },
     //支付校验
     payVerify(){
-      this.verification = true
       const backUrl = localStorage.getItem("back_url")
       // console.log("backUrl",backUrl)
       let baseUrl=this.$store.getters.baseUrl
