@@ -465,8 +465,8 @@ export default {
       }
       this.title = this.lang.header1
       const address = storage.get('myAdders', 0)
-      console.log("地址11111111111",address,this.editVal,this.addVal)
       if (this.isLogin && this.editVal.id) {
+        console.log("已登录",address,this.editVal,this.addVal)
         this.title = this.lang.header2
         this.id = this.editVal.id
         this.name = this.editVal.firstname
@@ -484,23 +484,44 @@ export default {
         if(this.editVal.zip_code != null){
           this.postal = this.editVal.zip_code.toString()
         }
-      } else if (address) {
-        console.log("地址",this.editVal,this.addVal)
-        this.title = this.lang.header2
-        this.id = address.id
-        this.name = address.firstname
-        this.surname = address.lastname
-        this.userTelCode = address.mobile_code
-        this.phone = address.mobile
-        this.mailbox = address.email
-        this.country = address.country_name
-        this.countryId = address.country_id
-        this.province = address.province_name
-        this.provinceId = address.province_id
-        this.city = address.city_name
-        this.cityId = address.city_id
-        this.details = address.address_details
-        this.postal = address.zip_code.toString()
+      } else if (!this.isLogin &&address) {
+        console.log("未登录",address,this.editVal,this.addVal)
+        if (this.editVal.id) {
+          this.title = this.lang.header2
+          this.id = this.editVal.id
+          this.name = this.editVal.firstname
+          this.surname = this.editVal.lastname
+          this.userTelCode = this.editVal.mobile_code
+          this.phone = this.editVal.mobile
+          this.mailbox = this.editVal.email
+          this.country = this.editVal.country_name
+          this.countryId = this.editVal.country_id
+          this.province = this.editVal.province_name
+          this.provinceId = this.editVal.province_id
+          this.city = this.editVal.city_name
+          this.cityId = this.editVal.city_id
+          this.details = this.editVal.address_details
+          if(this.editVal.zip_code != null){
+            this.postal = this.editVal.zip_code.toString()
+          }
+        } else {
+          console.log("地址",this.editVal,this.addVal)
+          this.title = this.lang.header2
+          this.id = address.id
+          this.name = address.firstname
+          this.surname = address.lastname
+          this.userTelCode = address.mobile_code
+          this.phone = address.mobile
+          this.mailbox = address.email
+          this.country = address.country_name
+          this.countryId = address.country_id
+          this.province = address.province_name
+          this.provinceId = address.province_id
+          this.city = address.city_name
+          this.cityId = address.city_id
+          this.details = address.address_details
+          this.postal = address.zip_code.toString()
+        }
       }
     },
     // 获取国家列表

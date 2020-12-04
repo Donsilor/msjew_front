@@ -401,7 +401,11 @@ export default {
             }
         })
         .then(data => {
-          console.loh("dddd",this.$route.query.payType,this.verification)
+          // console.loh("dddd",this.$route.query.payType,this.verification)
+          if(this.verification == false){
+            this.verification = true
+            return
+          }
           if(this.$route.query.payType == 1){
             if(data.verification_status === 'completed') {
               this.goPaySuccess()
@@ -409,22 +413,17 @@ export default {
               setTimeout(this.payVerify, 3000)
             }
           } else {
-            if(this.verification == false){
-              this.verification = true
-              return
-            }else {
-              if(data.verification_status === 'completed') {
-                // localStorage.removeItem('myAdders')
-                this.goPaySuccess()
-              } else if(data.verification_status === 'failed') {
-                this.goPayFailed()
-              } else {
-                if(this.verifyCount < 2) {
-                  setTimeout(this.payVerify, 15000)
-                }
-                else {
-                  this.showPayPending()
-                }
+            if(data.verification_status === 'completed') {
+              // localStorage.removeItem('myAdders')
+              this.goPaySuccess()
+            } else if(data.verification_status === 'failed') {
+              this.goPayFailed()
+            } else {
+              if(this.verifyCount < 2) {
+                setTimeout(this.payVerify, 15000)
+              }
+              else {
+                this.showPayPending()
               }
             }
           }
