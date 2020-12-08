@@ -232,8 +232,8 @@ export default {
 </script>
 
 <style scoped lang="less">
-.address {
-  min-height: 100%;
+.address { 
+  min-height: 101%;
   background: #f5f5f5;
   position: fixed;
   top: 0;

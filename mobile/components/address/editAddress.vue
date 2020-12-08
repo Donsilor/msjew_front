@@ -84,8 +84,8 @@
               {{ mailboxText }}
             </div>
 
-            <div class="test-mod" @click="showSwiperTap">
-              {{ area }}
+            <div class="test-mod sds" @click="showSwiperTap">
+              {{ userTelCode }}
               <i class="icon iconfont iconxiala"></i>
             </div>
             <div :class="['error-message', { active: areaTrue }]">
@@ -398,15 +398,18 @@ export default {
 
     if(this.addVal=="add" || this.addVal == "TouristAdd"){
       if(this.language === 'zh_CN'){
-        this.userTelCode='+86'
-        this.area=this.lang.areaCN   //"中国 +86"
-        this.countryId = 7
-        this.country = this.lang.china   //'中国'
+        if(this.userTelCode == ""){
+          this.userTelCode='+86'
+          this.area=this.lang.areaCN   //"中国 +86"
+        }
+        if(this.countryId==""){
+          this.countryId = 7
+          this.country = this.lang.china   //'中国'
+        }
       }else {
         this.userTelCode='+852'
       }
     }
-
   },
   methods: {
     close() {
@@ -479,6 +482,7 @@ export default {
       }
       this.title = this.lang.header1
       const address = storage.get('myAdders', 0)
+     
       if (this.isLogin && this.editVal.id) {
         console.log("已登录",address,this.editVal,this.addVal)
         this.title = this.lang.header2
@@ -1179,7 +1183,7 @@ export default {
 <style scoped lang="less">
 .edit-address {
   padding: 0 20px;
-  min-height: 100%;
+  min-height: 101%;
   background: #f5f5f5;
   position: fixed;
   top: 0;
