@@ -181,9 +181,9 @@ export default {
   mounted() {
     console.log("conditions",this.conditions)
     var _this = this;
-    _this.$nextTick(() => {
-      _this.$nuxt.$loading.start()
-    })
+    // _this.$nextTick(() => {
+    //   _this.$nuxt.$loading.start()
+    // })
   }
 }
 </script>

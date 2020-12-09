@@ -191,7 +191,7 @@
       "aftermailbox": "Email for receiving order confirmation email",
       "mailbox": "E-mail",
       "remark": "Order Remarks",
-      "more": "Up To 300 Characters",
+      "more": "Up To 500 Characters",
       "cupon": "Coupon",
       "allFee": "Item Total：",
       "itemsNum": "Qty of commodities",
@@ -223,7 +223,8 @@
       "couponAmount": "Coupon",
       "msg12": "Please login before redeem the coupon. ",
       "useCoupons": "Use Coupons",
-      "point":"*Note：The Order Amount has been rounded "
+      "point":"*Note：The Order Amount has been rounded ",
+      "addrTip":"Please fill in the consignee information"
     },
     "pay": {
       "pay": "Order payment",
@@ -300,6 +301,7 @@
       "lookBill": "VIEW ORDER",
       "orderDetails": "Order Details",
       "continue": "CONTINUE",
+      "payAgain": "PAY AGAIN",
       "text1": "Wire Transfer",
       "text2": "Paypal",
       "text3": "WeChat Pay",
@@ -415,7 +417,7 @@
       "setDefault": "Set As Default",
       "remove": "Delete",
       "add": "NEW ADDRESS",
-      "toast": "Deleted",
+      "toast": "Successfully deleted",
       "setSuccess": "The default address setting was successful!"
     },
     "coupon": {
@@ -501,9 +503,12 @@
       "province2": "Select province/state",
       "city2": "Region",
       "pleaseChoose": "Select",
-      "toast1": "Deleted",
+      "toast1": "Successfully deleted",
       "toast2": "Added",
+      "toast3": "Successfully modified",
       "countryText": "Select country/regional information",
+      "provinceText": "Select Province/State",
+      "cityText": "Select Region",
       "tips": "Prompts",
       "text": "Address is not saved, leave now?",
       "cancel": "CANCEL",

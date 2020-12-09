@@ -643,7 +643,7 @@ export default {
         coinType: this.$route.query.coinType,
         payType: pay,
         tradeType:"pc",
-        returnUrl: returnUrl
+        returnUrl: returnUrl,
       }
       this.goingPay = true
       this.$axios
@@ -823,7 +823,7 @@ export default {
         correctLevel : QRCode.CorrectLevel.H
       });
 
-      if(this.payWay == 1){
+      if(this.payWayCn == 1){
         //实现轮询
         this.interval = window.setInterval(() => {
           setTimeout(this.payVerify(), 0);

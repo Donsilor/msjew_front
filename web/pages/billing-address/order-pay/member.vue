@@ -559,6 +559,7 @@
           <div class="message">
             <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
             <textarea
+              maxlength="500"
               v-model="remark"
               :class="[
                 { 'border-change': borderChange === 9 },
@@ -572,6 +573,7 @@
               "
               @blur="borderChange = 0"
             />
+            <span class="tex-count" :class="{'color-red':remark.length == 500}">{{texsum}}/500</span>
           </div>
 
           <!-- 发票按钮 -->
@@ -1543,6 +1545,7 @@
           <div class="message">
             <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
             <textarea
+              maxlength="500"
               v-model="remark"
               :class="[
                 { 'border-change': borderChange === 9 },
@@ -1556,6 +1559,7 @@
               "
               @blur="borderChange = 0"
             />
+            <span class="tex-count" :class="{'color-red':remark.length == 500}">{{texsum}}/500</span>
           </div>
 
           <!-- 发票按钮 -->
@@ -1993,6 +1997,7 @@ export default {
   mixins: [Address],
   data() {
     return {
+      texsum:0,
       aa:this.$t(`${lang2}.PaperInvoice`),
       bb:this.$t(`${lang2}.ElectronicInvoice`),
       iconShow:false,
@@ -2111,6 +2116,11 @@ export default {
       }
     }
   },
+  watch:{
+    remark(){
+      this.texsum = this.remark.length;
+    }
+  },
   computed: {
     pnN() {
       if (this.$store.state.language === 'en_US') {
@@ -2176,7 +2186,8 @@ export default {
   methods: {
     // 点击提示修改地址确认按钮触发
     alertTipBox(){
-      this.alertBox = false
+      this.alertBox = false;
+      this.newAddress = true;
       // 点击修改滚顶到地址选择模块
       document.getElementById('step').scrollIntoView({
         block: 'center',
@@ -2279,7 +2290,7 @@ export default {
             this.getTex(k)
             this.resetAddressInp()
           }else{
-            this.wrongMsg = '请添加收获地址'
+            this.wrongMsg = this.$t(`${langs}.wip12`)
             this.alertBox = true
           }
         })
@@ -3084,7 +3095,7 @@ export default {
         return false
       }
 
-      if (this.remark.length >= 300) {
+      if (this.remark.length > 500) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
         this.alertBox = true
@@ -3201,7 +3212,7 @@ export default {
       //   return false
       // }
 
-      if (this.remark.length >= 300) {
+      if (this.remark.length > 500) {
         this.wrongMsg = this.$t(`${lang}.msg6`)
         this.wrongInput.remark = true
         this.alertBox = true
@@ -4516,6 +4527,7 @@ div {
         margin-top: 19px;
         font-size: 14px;
         color: #333333;
+        position: relative;
         textarea {
           width: 100%;
           height: 80px;
@@ -4530,6 +4542,15 @@ div {
         }
         .border-change {
           border: 1px solid rgba(170, 138, 123, 1);
+        }
+        .tex-count{
+          position: absolute;
+          right:0;
+          bottom: 50px;
+        }
+
+        .color-red{
+          color: red;
         }
       }
       .border-change {

@@ -191,7 +191,7 @@
       "aftermailbox": "接收售後憑證的電郵地址",
       "mailbox": "電郵地址",
       "remark": "訂單備註",
-      "more": "可輸300個字符",
+      "more": "可輸500個字符",
       "cupon": "優惠碼",
       "allFee": "商品總額：",
       "itemsNum": "商品件數",
@@ -223,7 +223,8 @@
       "couponAmount": "優惠券",
       "msg12": "請先登錄才能使用優惠券",
       "useCoupons": "使用優惠券",
-      "point":"*註：訂單金額已做抹零處理"
+      "point":"*註：訂單金額已做抹零處理",
+      "addrTip":"請填寫收貨人信息"
     },
     "pay": {
       "pay": "訂單支付",
@@ -300,6 +301,7 @@
       "lookBill": "查看訂單",
       "orderDetails": "訂單詳情",
       "continue": "繼續購物",
+      "payAgain": "重新支付",
       "text1": "电汇",
       "text2": "paypal",
       "text3": "微信",
@@ -503,7 +505,10 @@
       "pleaseChoose": "請選擇",
       "toast1": "刪除成功",
       "toast2": "添加成功",
+      "toast3": "修改成功",
       "countryText": "請選擇國家／地區訊息",
+      "provinceText": "請選擇省份/州",
+      "cityText": "請選擇城市",
       "tips": "提示",
       "text": "地址還未保存，是否確認離開？",
       "cancel": "取消",

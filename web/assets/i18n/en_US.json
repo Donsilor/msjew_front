@@ -1196,6 +1196,7 @@
             "wip9": "Enter correct phone number",
             "wip10": "Select country/regional information",
             "wip11": "Enter full address",
+            "wip12": "Please add shipping address",
             "saveSuccess": "Saved successfully",
             "addAddressSuccess": "The delivery address is added successfully",
             "forget": "Retrieve Password >",
@@ -2806,6 +2807,7 @@
         "insuranceSay": "Insurance premium is charged based on your delivery address.",
         "totalMoney": "Total",
         "beiQin": "CHECKOUT NOW",
+        "pay": "Check out now",
         "msgTitle1": "Error!",
         "msgContent1": "Delete the address?",
         "msg1": "Please confirm to add address before selecting the coupon!",
@@ -2822,6 +2824,8 @@
         "wip7": "Up to 20 characters for last name",
         "wip8": "Enter first name",
         "wip9": "Up to 20 characters for first name",
+        "wip10": "Select Province/State",
+        "wip11": "Select City",
         "msg3": "Failed to create",
         "msg4": "Please add the shipping address first!",
         "msg5": "Your e-mail is incorrect. Please enter again!",
@@ -2843,7 +2847,10 @@
         "msgContent2": "No product selected!",
         "setDefaultAddr": "Set The Default Address",
         "setSuccess": "The default address setting was successful!",
-        "point":"*Note：The Order Amount has been rounded "
+        "point":"*Note：The Order Amount has been rounded ",
+        "accountNum":"Phone/Email",
+        "code":"Verification",
+        "agreeTip":"使用该手机号码/邮箱注册账号，注册后可在个人中心查看订单信息"
     },
     "invoice": {
         "personal": "personal",

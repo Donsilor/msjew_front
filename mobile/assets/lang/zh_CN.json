@@ -191,7 +191,7 @@
         "aftermailbox": "接收售后凭证的电邮地址",
         "mailbox": "电邮地址",
         "remark": "订单备注",
-        "more": "可输300个字符",
+        "more": "可输500个字符",
         "cupon": "优惠码",
         "allFee": "商品总额：",
         "itemsNum": "商品件数",
@@ -223,7 +223,8 @@
         "couponAmount": "优惠券",
         "msg12": "请先登录才能使用优惠券",
         "useCoupons": "使用优惠券",
-        "point":"*注：订单金额已做抹零处理"
+        "point":"*注：订单金额已做抹零处理",
+        "addrTip":"请填写收货人信息"
       },
       "pay": {
         "pay": "订单支付",
@@ -300,6 +301,7 @@
         "lookBill": "查看订单",
         "orderDetails": "订单详情",
         "continue": "继续购物",
+        "payAgain": "重新支付",
         "text1": "电汇",
         "text2": "paypal",
         "text3": "微信",
@@ -503,7 +505,10 @@
         "pleaseChoose": "请选择",
         "toast1": "删除成功",
         "toast2": "添加成功",
+        "toast3": "修改成功",
         "countryText": "请选择国家／地区讯息",
+        "provinceText": "请选择省份/州",
+        "cityText": "请选择城市",
         "tips": "提示",
         "text": "地址还未保存，是否确认离开？",
         "cancel": "取消",

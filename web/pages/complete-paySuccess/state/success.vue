@@ -114,118 +114,7 @@
           </div>
         </div> -->
       </div>
-      <!-- <div class="middle-bar">
-        <i class="iconfont icongantanhao" /><span>{{
-          $t(`${lang}.balabalaAgain`)
-        }}</span>
-      </div> -->
       <div class="order-info">
-        <!-- <div class="left-info">
-          <div class="address-info">
-            <div class="new-address-title">
-              <div class="na-line" />
-              <div class="na-title">{{ $t(`${lang}.address`) }}</div>
-            </div>
-            <div class="user-info">
-              <div class="user-name">
-                {{ data.address.lastName }}{{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span>
-              </div>
-              <div class="user-phone"><span>{{ data.orderAddress.userTelCode }}</span>{{ data.orderAddress.userTel }}</div>
-            </div>
-            <div class="user-address">
-              {{ data.address.countryName }}-{{
-              data.address.provinceName
-              }}{{data.address.cityName }}{{ data.address.address }}
-            </div>
-            <div class="user-phone">
-              <div>{{data.address.userTelCode }}</div>
-              <div>{{ data.address.userTel }}</div>
-            </div>
-            <div class="post-num">{{ data.address.zipCode }}</div>
-            <div class="email-address">{{ data.address.userMail }}</div>
-            <div class="country-code">CHN</div>
-            <div class="line">
-              <img
-                src="../../../static/personal/account/address-bar.png"
-                alt=""
-              />
-            </div>
-          </div>
-          <div class="send-info">
-            <div class="new-address-title">
-              <div class="na-line" />
-              <div class="na-title">{{ $t(`${lang}.faFoInfo`) }}</div>
-            </div>
-            <div class="send-infos">
-              <div>{{ $t(`${lang}.newinfo1`) }}</div>
-              <div>{{ $t(`${lang}.newinfo2`) }} {{ data.afterMail }}</div>
-              <dl>
-                <dt>{{ $t(`${lang}.newinfo3`) }}</dt>
-                <dd>{{ $t(`${lang}.newinfo4`) }}</dd>
-                <dd>{{ $t(`${lang}.newinfo5`) }}</dd>
-                <dd>{{ $t(`${lang}.newinfo6`) }}</dd>
-              </dl>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="right-info">
-          <div class="new-address-title">
-            <div class="na-line" />
-            <div class="na-title">{{ $t(`${lang}.orderInfo`) }}</div>
-          </div>
-          <div class="order-infos">
-            <div class="info-line">
-              <div class="label">{{ $t(`${lang}.orderNum`) }}</div>
-              <div class="clearboth">
-                {{ data.orderNo }}
-              </div>
-            </div>
-            <div class="info-line">
-              <div class="label">{{ $t(`${lang}.goodsNum`) }}</div>
-              <div class="ff">{{ formatMoney(data.productCount, 0) }}</div>
-            </div>
-            <div class="info-line">
-              <div class="label">{{ $t(`${lang}.goodsPrice`) }}</div>
-              <div class="ff">
-                {{ data.coinCode }} {{ formatMoney(data.productAmount) }}
-              </div>
-            </div>
-            <div class="info-line">
-              <div class="label">{{ $t(`${lang}.coupon`) }}</div>
-              <div class="ff color-pink">
-                -{{ data.coinCode }} {{ formatMoney(data.preferFee) }}
-              </div>
-            </div>
-            <div class="info-line">
-              <div class="label">{{ $t(`${lang}.freight`) }}</div>
-              <div class="ff">
-                +{{ data.coinCode }} {{ formatMoney(data.logisticsFee) }}
-              </div>
-            </div>
-            <div class="info-line">
-              <div class="label">{{ $t(`${lang}.tex`) }}</div>
-              <div class="ff">
-                +{{ data.coinCode }} {{ formatMoney(data.taxFee) }}
-              </div>
-            </div>
-            <div class="info-line">
-              <div class="label">{{ $t(`${lang}.insurance`) }}</div>
-              <div class="ff">
-                +{{ data.coinCode }} {{ formatMoney(data.safeFee) }}
-              </div>
-            </div>
-            <div v-if="data.transPreferFee" class="info-line">
-              <div class="label">{{ $t(`${lang}.transPreferFee`) }}</div>
-              <div class="ff color-pink">
-                -{{ data.coinCode }} {{ formatMoney(data.transPreferFee) }}
-              </div>
-            </div>
-            <div class="big-info">
-              <div>{{ $t(`${lang}.orderTotal`) }}</div>
-              <div>{{ data.coinCode }} {{ formatMoney(data.orderAmount) }}</div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </no-ssr>
   </div>
@@ -242,18 +131,8 @@ export default {
     return {
       lang,
       oid: this.$route.query.order_sn||this.$route.query.orderId,
+      orderSn:this.$route.query.orderSn,
       return_url:'',
-      // data: {
-      //   address: {
-      //     countryName: '',  http://localhost:8318/complete-payment    http://localhost:8328/cart/paySuccess
-      //     provinceName: '',  https://bdd.bddia.com/api/index.php/api/web/member/order-tourist/detail?order_sn=MORESHINE202003098114447
-      //     cityName: '',
-      //     address: '',
-      //     firstName: '',
-      //     lastName: '',
-      //     userMail: ''
-      //   }
-      // }
       data: {
         allSend: null,
         coinCode: null,
@@ -340,7 +219,8 @@ export default {
         currency: '',
         content_ids: [],
         content_type: 'product'
-      }
+      },
+      ChannelType:this.$route.query.ChannelType,
     }
   },
   mounted() {
@@ -403,85 +283,80 @@ export default {
       this.stepPayVerify = false
     },
     orderInfo() {
-        if(this.$store.getters.hadLogin){
-            this.$axios
-              .get('/web/member/order/detail', {
-                params: {
-                  orderId: this.oid
-                }
-              })
-              .then(res => {
-                // console.log(7777,this.goodsInfo)
-                // console.log("window",this.$route.query);
-                // console.log('res',res.data)
-                this.data = res.data
-                // /*setTimeout(() => {
-                //   this.$router.push({path: "/"}); // 强制切换当前路由 path
-                // }, 5000);*/
-                // // console.log("wwwww",this.data)
-                this.goodsInfo.value = res.data.payAmount;
-                this.goodsInfo.currency = res.data.coinCode;
+    if(this.$store.getters.hadLogin){
+        this.$axios
+          .get('/web/member/order/detail', {
+            params: {
+              orderId: this.oid
+            }
+          })
+          .then(res => {
+            // console.log('res',res.data)
+            this.data = res.data
+            this.goodsInfo.value = res.data.payAmount;
+            this.goodsInfo.currency = res.data.coinCode;
 
-                var details = res.data.details;
+            var details = res.data.details;
 
-                details.forEach((o, i) =>{
-                   this.goodsInfo.content_ids[i] = o.goodsId
-                })
-
-                // console.log(777, this.goodsInfo)
-
-              })
-              .catch(err => {
-                if (!err.response) {
-                  this.$message.error(err.message)
-                } else {
-                  // console.log(err)
-                }
+            details.forEach((o, i) =>{
+                this.goodsInfo.content_ids[i] = o.goodsId
             })
-          }else{
-            this.$axios
-              .get('/web/member/order-tourist/detail', {
-                params: {
-                  order_sn: this.oid
-                }
-              })
-              .then(res => {
-                this.data2 = res.data
-                // http://localhost:8318/complete-payment?order_sn=MORESHINE202002254136556&success=true&paymentId=PAYID-LZKNA5Y2RG00076G1872113M&token=EC-9LP10841H1659180J&PayerID=ZMUBN8MYV9Q5N
-                /*setTimeout(() => {
-                  this.$router.push({path: "/"}); // 强制切换当前路由 path
-                }, 5000);*/
-                // console.log("wwwww",this.data)
 
-                this.goodsInfo.value = res.data.payAmount;
-                this.goodsInfo.currency = res.data.coinCode;
+            // console.log(777, this.goodsInfo)
 
-                var details = res.data.details;
+          })
+          .catch(err => {
+            if (!err.response) {
+              this.$message.error(err.message)
+            } else {
+              // console.log(err)
+            }
+        })
+      }else{
+        this.$axios
+          .get('/web/member/order-tourist/detail', {
+            params: {
+              order_sn: this.oid
+            }
+          })
+          .then(res => {
+            this.data2 = res.data
+            this.goodsInfo.value = res.data.payAmount;
+            this.goodsInfo.currency = res.data.coinCode;
 
-                details.forEach((o, i) => {
-                  this.goodsInfo.content_ids[i] = o.goodsId
-                })
+            var details = res.data.details;
 
-
-              })
-              .catch(err => {
-                if (!err.response) {
-                  this.$message.error(err.message)
-                } else {
-                  // console.log(err)
-                }
+            details.forEach((o, i) => {
+              this.goodsInfo.content_ids[i] = o.goodsId
             })
-          }
+
+
+          })
+          .catch(err => {
+            if (!err.response) {
+              this.$message.error(err.message)
+            } else {
+              // console.log(err)
+            }
+        })
+      }
     },
     payVerify() {
+      let baseUrl=this.$store.getters.baseUrl
       this.verifyCount++
-
+      let order_sn = this.orderSn
+      let return_url =''
+      if(this.ChannelType == 1){
+        return_url = baseUrl+'/verify?order_sn='+order_sn
+      } else {
+        return_url = window.location.href
+      }
       this.$axios({
           url: '/web/pay/verify',
           method: 'post',
           //timeout:60000,
           data: {
-            return_url: window.location.href
+            return_url: return_url
           }
       }).then(res => {
           const data = res.data
