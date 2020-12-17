@@ -8,7 +8,7 @@
       <a @click="gologin">{{ lang.accont }}</a>
       <span>{{ lang.any }}</span>
     </div>
-    <div class="address" >
+    <div class="address">
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
           <span v-if="language == 'zh_CN'">{{ address.lastname }}{{ address.firstname }}</span>
@@ -24,7 +24,7 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <div v-if="!hasAddress" class="no-address" @click="goAddress"> 
+      <div v-if="!hasAddress&&isLogin" class="no-address" @click="goAddress">
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
@@ -452,7 +452,8 @@ export default {
     NeedKnow,
     ShoppingCard,
     Invoice,
-    Address
+    Address,
+    addressLength: 0
   },
   data() {
     return {
@@ -709,7 +710,6 @@ export default {
         // this.getData() // 获取地址
         let ua = window.navigator.userAgent.toLowerCase();
         if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){
-          console.log(111111111)
           this.getCode()
         }
       // } 
@@ -861,6 +861,14 @@ export default {
     goAddress() {
       this.ifShowAddress = true
       this.id = this.isLogin ? '1' : null
+      
+      if(!this.addressLength){
+        var _this = this;
+        var timeOut = setTimeout(function() {
+          _this.$children[6].editAddress(null)
+          clearTimeout(timeOut)
+        },100)
+      }
       // const name = this.isLogin ? 'personal-address' : 'personal-editAddress'
       // const id = this.isLogin ? '1' : null
       // this.$router.push({
@@ -1050,8 +1058,9 @@ export default {
             url: `/web/member/address`
           })
           .then(res => {
-            _this.address = ''
-            _this.hasAddress = false
+            _this.addressLength = res.length;
+            _this.address = '';
+            _this.hasAddress = false;
             // console.log("address",res.data)
             if (res && res.length > 0) {
               res.map((item, index) => {
@@ -1080,9 +1089,7 @@ export default {
           })
       } else {
         const address = storage.get('myAdders', 0)
-        console.log("dfsadfsa",address)
         if (address) {
-        // console.log("address",address)
           this.hasAddress = true
           this.address = {
             // id: address.id,
