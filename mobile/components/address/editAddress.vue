@@ -134,11 +134,17 @@
               {{ province }}
               <i class="icon iconfont iconxiala"></i>
             </div>
+            <div :class="['error-message', { active: provinceTrue }]">
+              {{ provinceText }}
+            </div>
 
             <!-- 市 -->
             <div class="test-mod" @click="showCity">
               {{ city }}
               <i class="icon iconfont iconxiala"></i>
+            </div>
+            <div :class="['error-message', { active: cityTrue }]">
+              {{ cityText }}
             </div>
 
             <!-- 详细地址-繁体 -->
@@ -232,7 +238,11 @@ export default {
       countryTrue: false,
       countryText: '',
       province: this.LANGUAGE.personal.editAddress.province,
+      provinceTrue: false,
+      provinceText: '',
       city: this.LANGUAGE.personal.editAddress.city,
+      cityTrue: false,
+      cityText: '',
       postal: '',
       countryList: [],
       countryId: '',
@@ -243,6 +253,7 @@ export default {
       isLogin: !!this.$store.state.token,
       isOver: true,
       postals: false,
+      isDefault: 0,
       language:'',
       loginType:'',
       maxlength: '30'
@@ -258,7 +269,7 @@ export default {
     this.loginType=localStorage.getItem('loginType')
     this.language = this.$store.state.language
 
-    if(this.addVal == 'add' || this.addVal == "TouristAdd") {
+    if(this.addVal=='add' || this.addVal == 'TouristAdd'){
       this.resetData()
     }
   },
@@ -388,6 +399,7 @@ export default {
         this.city = this.editVal.city_name
         this.cityId = this.editVal.city_id
         this.details = this.editVal.address_details
+	this.isDefault = this.editVal.is_default
         if(this.editVal.zip_code != null){
           this.postal = this.editVal.zip_code.toString()
         }
@@ -557,6 +569,15 @@ export default {
       }
     },
     countrySure(val) {
+      if(val.item.id != this.countryId){
+        this.province = this.LANGUAGE.personal.editAddress.province;
+        this.city = this.LANGUAGE.personal.editAddress.city;
+        this.provinceList = [];
+        this.provinceId = '';
+        this.cityList = [];
+        this.cityId = '';
+      }
+
       this.countryId = this.countryList[val.index].id
       this.country = this.countryList[val.index].content
       this.getListTwo()
@@ -577,6 +598,12 @@ export default {
       }
     },
     provinceSure(val) {
+      if(val.item.id != this.provinceId){
+        this.city = this.LANGUAGE.personal.editAddress.city;
+        this.cityList = [];
+        this.cityId = '';
+      }
+
       this.provinceId = this.provinceList[val.index].id
       this.province = this.provinceList[val.index].content
       this.getListThree()
@@ -622,14 +649,12 @@ export default {
             this.$toast.show(err.message)
           })
       } else {
-        // console.log("this.address",this.address)
         storage && storage.remove('myAdders')
         this.$emit('delete',true);
         setTimeout(() => {
           this.$emit('closeADP',true);
         }, 2000)
         this.$toast.show(this.lang.toast1)
-        // this.address = []
       }
     },
     citySure(val) {
@@ -774,7 +799,8 @@ export default {
           province_id: this.provinceId,
           city_id: this.cityId,
           address_details: this.details,
-          zip_code: this.postal
+          zip_code: this.postal,
+          is_default: this.isDefault
         }
         const data = JSON.parse(JSON.stringify(json))
 
@@ -787,13 +813,13 @@ export default {
               data: data
             })
             .then(res => {
-              this.$toast.show(this.lang.toast2)
+              this.$toast.show(this.lang.toast3)
               setTimeout(() => {
                 this.$emit('closeADP',true);
                 this.$emit('updataAddress');
                 // this.$router.go(-1)
                 this.isOver = true
-              }, 3000)
+              }, 1000)
             })
             .catch(err => {
               this.isOver = true
@@ -813,7 +839,7 @@ export default {
                 this.$emit('closeADP',true);
                 // this.$router.go(-1)
                 this.isOver = true
-              }, 3000)
+              }, 1000)
             })
             .catch(err => {
               _this.$toast.show(err.message)
@@ -821,7 +847,7 @@ export default {
               // console.log(err)
             })
 
-        }else if(!this.isLogin&&this.addVal!=="TouristAdd"){
+        }else if(!this.isLogin&&this.addVal!=='TouristAdd'){
           console.log(11111)
           const TouristJson = {
             id: 1,
@@ -925,7 +951,8 @@ export default {
           province_id: this.provinceId,
           city_id: this.cityId,
           address_details: this.details,
-          zip_code: this.postal
+          zip_code: this.postal,
+          is_default: this.isDefault
         }
         const data = JSON.parse(JSON.stringify(json))
         if (this.isLogin&&this.addVal!=="add") {
@@ -937,13 +964,13 @@ export default {
               data: data
             })
             .then(res => {
-              this.$toast.show(this.lang.toast2)
+              this.$toast.show(this.lang.toast3)
               setTimeout(() => {
                 // this.$router.go(-1)
                 this.$emit('closeADP',true);
                 this.$emit('updataAddress');
                 this.isOver = true
-              }, 3000)
+              }, 1000)
             })
             .catch(err => {
               this.isOver = true
@@ -963,14 +990,14 @@ export default {
                 // this.$router.go(-1)
                 this.$emit('closeADP',true);
                 this.isOver = true
-              }, 3000)
+              }, 1000)
             })
             .catch(err => {
               this.isOver = true
               console.log(err)
             })
 
-        }else if(!this.isLogin&&this.addVal!=="TouristAdd"){
+        }else if(!this.isLogin&&this.addVal!=='TouristAdd'){
           const TouristJson = {
             id: 1,
             firstname: this.name,

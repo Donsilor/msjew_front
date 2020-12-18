@@ -531,6 +531,15 @@ export default {
       }
     },
     countrySure(val) {
+      if(val.item.id != this.countryId){
+        this.province = this.LANGUAGE.personal.editAddress.province;
+        this.city = this.LANGUAGE.personal.editAddress.city;
+        this.provinceList = [];
+        this.provinceId = '';
+        this.cityList = [];
+        this.cityId = '';
+      }
+      
       this.countryId = this.countryList[val.index].id
       this.country = this.countryList[val.index].content
       this.getListTwo()
@@ -551,6 +560,12 @@ export default {
       }
     },
     provinceSure(val) {
+      if(val.item.id != this.provinceId){
+        this.city = this.LANGUAGE.personal.editAddress.city;
+        this.cityList = [];
+        this.cityId = '';
+      }
+
       this.provinceId = this.provinceList[val.index].id
       this.province = this.provinceList[val.index].content
       this.getListThree()
