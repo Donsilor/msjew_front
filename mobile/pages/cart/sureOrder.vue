@@ -233,7 +233,7 @@
             <span>{{ lang3.invo }}</span>
             <div>
               <span class="underline" v-show="!kai" @click="show()">{{ lang3.NotInvoiced }}</span>
-              <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
+              <span class="no-color" v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
         </div>
@@ -423,7 +423,7 @@
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
-    <Invoice v-if="ifShowInvoice" @closeIP="closeInvoicePop" :kai="kai" :totlePrice="totlePrice" :ultimatelyPay="ultimatelyPay" ></Invoice>
+    <Invoice v-if="ifShowInvoice" @closeIP="closeInvoicePop" :kai="kai" :totlePrice="totlePrice" :ultimatelyPay="ultimatelyPay" :invoiceInfo="this.invoices" ></Invoice>
     <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
     <use-coupon v-if="ifShowCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR"></use-coupon>
     <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
@@ -761,10 +761,16 @@ export default {
      // 关闭发票弹窗
     closeInvoicePop(val){
       this.ifShowInvoice = false
-      if(val == true){
-        this.kai = !this.kai
+
+      if(val){
+        this.invoices = val
       }
-      this.invoices = val
+
+      if(this.invoices){
+        this.kai = true
+      }else{
+        this.kai = false
+      }
     },
     changeType(ind) {
       
@@ -2074,14 +2080,17 @@ export default {
 // 发票
 .invoice{
   .underline{
-    text-decoration: underline;
     color:#75BEEE;
+    border-bottom: 1px solid #75BEEE;
   }
   .title{
     font-size: 14px;
     color: rgba(51, 51, 51, 1);
     display: flex;
     justify-content: space-between;
+  }
+  .no-color{
+    border-bottom: 1px solid #333;
   }
 }
 // 支付方式
