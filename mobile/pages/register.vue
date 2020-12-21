@@ -71,7 +71,7 @@
               {{ lang.surnameError }}
             </div> -->
           </div>
-          
+
           <!-- 手机号 -->
           <div class="line-box input-line mobile email-val-box" v-if="loginType == 2 ">
             <div class="area-code">{{ lang['area-code'] }} +86<i class="iconfont iconxiala"></i></div>
@@ -142,7 +142,7 @@
                 :padding="'0 30% 0 3%'"
                 @blur="inputKey('code')"
                 :maxl="maxlength"
-                @keydown="keydown('15')"
+                @input="keydown('15')"
               ></bdd-input>
               <div class="send-code">
                 <!-- <send-email-code
@@ -176,7 +176,7 @@
                 :padding="'0 30% 0 3%'"
                 @blur="inputKey('code')"
                 :maxl="maxCode"
-                @keydown="keydown('15')"
+                @input="keydown('15')"
               ></bdd-input>
               <div class="send-code">
                 <button :class="['getCode', className]" :disabled="waiting" @click="sendEmailCode">
@@ -204,7 +204,7 @@
               :padding="'0 3% 0 3%'"
               @blur="inputKey('password')"
               :maxl="maxlength"
-              @keydown="keydown('60')"
+              @input="keydown('18')"
             ></bdd-input>
             <div
               :class="[
@@ -224,7 +224,7 @@
               :padding="'0 3% 0 3%'"
               @blur="inputKey('repassword')"
               :maxl="maxlength"
-              @keydown="keydown('60')"
+              @input="keydown('18')"
             ></bdd-input>
             <div
               :class="[

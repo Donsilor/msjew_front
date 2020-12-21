@@ -75,7 +75,9 @@ export default {
     }
   },
   mounted() {
-    this.getData()
+    this.$nextTick(() => {
+      this.getData()
+    })
   },
   methods: {
     touch() {
@@ -209,7 +211,6 @@ export default {
       }
     },
     editAddress(val) {
-      // console.log(val, '444')
       if (val) {
         this.$router.push({
           name: 'personal-editAddress',
@@ -342,5 +343,10 @@ export default {
       }
     }
   }
+}
+
+.btn-pink {
+  background-color: #f29b87;
+  color: #fff;
 }
 </style>

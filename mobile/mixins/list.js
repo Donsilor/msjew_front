@@ -18,13 +18,13 @@ export default {
       requestings: {}, // 正在请求的页码
       listData: {},
       ifLoadFinish: true,
-      load:false
+      load:false,
+      isLogin: !!this.$store.state.token
     }
   },
   computed: {
     // 所有已请求的页码的数据集合
     showData() {
-      
       if(this.listData.length == 0){
         this.loading = true
         setTimeout(() => {
