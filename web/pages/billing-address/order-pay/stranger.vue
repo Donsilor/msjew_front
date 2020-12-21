@@ -46,42 +46,71 @@
       </div>
 
       <div v-if="showAddress" class="address">
-        <!--    地址列表模块 v-show="address.length !== 0" :style="{ height: addressMore ? `${270 * Math.ceil(address.length / 2)}px` : '250px'}"-->
-        <!-- v-for="(a, index) in address" :key="index" -->
-        <div v-show="addressBox" class="address-box">
-          <div class="addr-blocks" v-for="(a, index) in address" :key="index">
-            <div  :class="{ 'addr-active': addressIdx == index }" class="addr-block">
-              <div class="addr-title">
-                <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
-              </div>
-              <div class="addr-user">
-                <div>{{ a.lastname }}{{a.firstname}}</div>
-                <div>（{{ $t(`${lang}.get`) }}）</div>
-              </div>
-              <div class="addr-address">
-              {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
-              }}{{ a.address_details }}
-              </div>
+        <!--    地址列表模块-->
+        <div
+          v-show="address.length !== 0"
+          :style="{
+            height: addressMore
+              ? `${270 * Math.ceil(address.length / 2)}px`
+              : '250px'
+          }"
+          class="address-box"
+        >
+          <div class="addr-blocks">
+            <div
+              v-for="(a, index) in address"
+              :key="index"
+              :class="{ 'addr-active': addressIdx == index }"
+              class="addr-block"
+            >
+              <div class="addr-user">{{ a.lastname }}{{ a.firstname }}</div>
               <div class="addr-user-phone">
                 <div>{{ a.mobile_code }}</div>
                 <div>{{ a.mobile }}</div>
               </div>
-              <div class="font-size-14 color-333">{{ a.zip_code }}</div>
-              <div class="font-size-14 color-333">{{ a.email }}</div>
+              <div class="addr-user-email">{{ a.email }}</div>
+              <div class="addr-address">
+                <div>{{ a.country_name }} {{ a.province_name }} {{ a.city_name }}</div>
+                <div>{{ a.address_details }}</div>
+              </div>
+              
+              <div>{{ a.zip_code }}</div>
               <div class="addr-board" @click="changeAddress(index)" />
               <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
-              <i class="iconfont iconlajitong" @click="deleteAddressId = a.id; delIdx = index; confirmBox = true"/>
-              <!-- <div v-if="is_default == 1" class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;">
+              <i
+                class="iconfont iconlajitong"
+                @click="
+                  deleteAddressId = a.id
+                  delIdx = index
+                  confirmBox = true
+                "
+              />
+              <div
+                v-if="a.is_default == 1"
+                class="font-size-14 mrAdd"
+                style="color: #f29b87; margin-top: 6px;"
+              >
                 {{ $t(`${langs}.mrAddress`) }}
-              </div> -->
-              <div v-if="is_default != 1 && addressIdx == index"  class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;" @click="setDefaultAddr(a)">
+              </div>
+              <div
+                v-if="a.is_default != 1 && addressIdx == index"
+                class="font-size-14 mrAdd"
+                style="color: #f29b87; margin-top: 6px;"
+                @click="setDefaultAddr(a)"
+              >
                 {{ $t(`${lang}.setDefaultAddr`) }}
               </div>
-              <div class="addr-btn" @click=" newAddress = true; changeAddressInfo(a) ">
+              <div
+                class="addr-btn"
+                @click="
+                  newAddress = true
+                  changeAddressInfo(a)
+                "
+              >
                 {{ $t(`${lang}.change`) }}
               </div>
               <img
-                v-show="is_default == 1"
+                v-show="a.is_default == 1"
                 src="../../../static/personal/account/address-bar.png"
               />
             </div>
@@ -143,7 +172,7 @@
                 <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
                 <div class="tel-special">
                   <div class="tel-area">
-                    <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
+                    <input :value="phoneNum.phone_code" type="text" autocomplete="off" />
                     <select v-model="phoneNum">
                       <option
                         v-for="(p, index) in phoneJson"
@@ -1040,11 +1069,7 @@
         <div v-else-if="this.$store.state.platform === 10 || this.$store.state.platform === 30" :class="['buy-btn', { disabled: !canSubmit }]" @click.stop="createOrder()">
           <span>{{ $t(`${lang}.pay`) }}</span>
         </div>
-        
       </div>
-
-
-
 
       <message-box
         v-show="confirmBox"
@@ -1062,6 +1087,7 @@
         @done="alertTipBox"
       />
     </div>
+
     <!-- 繁体和英文 -->
     <div v-else class="order">
       <!--    步骤模块-->
@@ -1109,45 +1135,75 @@
 
       <div v-show="showAddress" class="address">
         <!--    地址列表模块-->
-        <div v-show="addressBox" :style="{ height: addressMore ? `${270 * Math.ceil(address.length / 2)}px`: '250px'}" class="address-box">
+        <div
+          v-show="address.length !== 0"
+          :style="{
+            height: addressMore
+              ? `${270 * Math.ceil(address.length / 2)}px`
+              : '250px'
+          }"
+          class="address-box"
+        >
           <div class="addr-blocks">
-            <div v-for="(a, index) in address" :key="index" :class="{ 'addr-active': addressIdx == index }" class="addr-block">
-              <div class="addr-title">
-                <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
-                <!--              <div>CHN</div>-->
-              </div>
-              <div class="addr-user">
-                <div>{{a.firstname}} {{ a.lastname }}</div>
-                <div>（{{ $t(`${lang}.get`) }}）</div>
-              </div>
-              <div class="addr-address">
-              {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
-              }}{{ a.address_details }}
-              </div>
+            <div
+              v-for="(a, index) in address"
+              :key="index"
+              :class="{ 'addr-active': addressIdx == index }"
+              class="addr-block"
+            >
+              <div class="addr-user">{{ a.lastname }}{{ a.firstname }}</div>
               <div class="addr-user-phone">
                 <div>{{ a.mobile_code }}</div>
                 <div>{{ a.mobile }}</div>
               </div>
-              <div class="font-size-14 color-333">{{ a.zip_code }}</div>
-              <div class="font-size-14 color-333">{{ a.email }}</div>
-
+              <div class="addr-user-email">{{ a.email }}</div>
+              <div class="addr-address">
+                <div>{{ a.country_name }} {{ a.province_name }} {{ a.city_name }}</div>
+                <div>{{ a.address_details }}</div>
+              </div>
+              
+              <div>{{ a.zip_code }}</div>
               <div class="addr-board" @click="changeAddress(index)" />
               <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
-              <i class="iconfont iconlajitong" @click="deleteAddressId = a.id;delIdx = index;confirmBox = true"/>
-              <!-- <div v-if="is_default == 1" class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;">
+              <i
+                class="iconfont iconlajitong"
+                @click="
+                  deleteAddressId = a.id
+                  delIdx = index
+                  confirmBox = true
+                "
+              />
+              <div
+                v-if="a.is_default == 1"
+                class="font-size-14 mrAdd"
+                style="color: #f29b87; margin-top: 6px;"
+              >
                 {{ $t(`${langs}.mrAddress`) }}
-              </div> -->
-              <div v-if="is_default != 1 && addressIdx == index" class="font-size-14 mrAdd" style="color: #f29b87; margin-top: 6px;" @click="setDefaultAddr(a)">
+              </div>
+              <div
+                v-if="a.is_default != 1 && addressIdx == index"
+                class="font-size-14 mrAdd"
+                style="color: #f29b87; margin-top: 6px;"
+                @click="setDefaultAddr(a)"
+              >
                 {{ $t(`${lang}.setDefaultAddr`) }}
               </div>
-              <div class="addr-btn" @click="newAddress = true;changeAddressInfo(a)">
+              <div
+                class="addr-btn"
+                @click="
+                  newAddress = true
+                  changeAddressInfo(a)
+                "
+              >
                 {{ $t(`${lang}.change`) }}
               </div>
-              <img v-show="is_default == 1" src="../../../static/personal/account/address-bar.png"/>
+              <img
+                v-show="a.is_default == 1"
+                src="../../../static/personal/account/address-bar.png"
+              />
             </div>
           </div>
         </div>
-
         <!--    新增&修改地址模块-->
         <div v-show="addAddress" :style="[{ height: newAddress ? '360px' : '0px' },{ padding: newAddress ? '20px 51px 0 36px' : '0' }]" class="new-address" id="addbox">
           <div class="new-address-title">
@@ -1207,7 +1263,7 @@
                 <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
                 <div class="tel-special">
                   <div class="tel-area">
-                    <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
+                    <input :value="phoneNum.phone_code" type="text" autocomplete="off" />
                     <select v-model="phoneNum">
                       <option v-for="(p, index) in phoneJson" :key="index" :value="p" >{{ psn ? p.en :psn ? p.cn :p.zh }}{{ p.phone_code }}</option>
                     </select>
@@ -1842,7 +1898,6 @@
         </div>
       </div>
 
-
       <!-- 发送验证码 -->
       <!-- <div class="verification-code">
         <div class="code">
@@ -2081,10 +2136,6 @@
         </div>
       </div>
 
-     
-
-
-
       <message-box
         v-show="confirmBox"
         :title="$t(`${lang}.msgTitle1`)"
@@ -2290,7 +2341,6 @@ export default {
       showEwm:false, //是否显示二维码弹窗
       interval:null,
       addr:{},
-      is_default:1,
       order_sn:'',
       showAddress:true,
       SubmitPayment:false,
@@ -2404,10 +2454,11 @@ export default {
     }
   },
   mounted() {
-    // this.language = this.$store.state.language
-    console.log("当前语言",this.language)
     window.addEventListener('scroll', this.scrollToTop);
+
+    this.defaultAddress()
     this.getAddress()
+
     if(this.orderSn){
       this.showAddress = false
       this.SubmitPayment = true
@@ -2588,12 +2639,12 @@ export default {
         city_id: this.city.areaId,
         address_details: this.addressData.address_details,
         zip_code: this.addressData.zip_code,
-        // is_default: 0
+        is_default: 0
       }
 
-      // if(this.address.length == 0){
-      //   data.is_default = 1
-      // }
+      if(this.address.length == 0){
+        data.is_default = 1
+      }
 
       if(this.address.length > 0){
         this.addressIdx = 1
@@ -2636,7 +2687,7 @@ export default {
         city_id: data.city_id,
         address_details: data.address_details,
         zip_code: data.zip_code,
-        // is_default: data.is_default
+        is_default: data.is_default
       }
       // console.log("code",this.addressData)
       const code = data.mobile_code.split('+').reverse()
@@ -2725,7 +2776,7 @@ export default {
         city_name: this.city.areaName,
         address_details: this.addressData.address_details,
         zip_code: this.addressData.zip_code,
-        // is_default: this.addressData.is_default
+        is_default: this.addressData.is_default
       }
       this.addr = data
       content.push(data)
@@ -2821,12 +2872,12 @@ export default {
         city_id: this.city.areaId,
         address_details: this.addressData.address_details,
         zip_code: this.addressData.zip_code,
-        // is_default: 0
+        is_default: 0
       }
 
-      // if(this.address.length == 0){
-      //   data.is_default = 1
-      // }
+      if(this.address.length == 0){
+        data.is_default = 1
+      }
 
       this.addressBox = true
       this.newAddress = false
@@ -2927,7 +2978,7 @@ export default {
         city_name: this.city.areaName,
         address_details: this.addressData.address_details,
         zip_code: this.addressData.zip_code,
-        // is_default: this.addressData.is_default
+        is_default: this.addressData.is_default
       }
       this.addr = data
       content.push(data)
@@ -3890,7 +3941,7 @@ div {
     overflow: hidden;
     transition: 0.3s linear;
     margin-bottom: 22px;
-
+    box-sizing: border-box;
     .addr-blocks {
       max-width: 1300px;
       min-width: 1200px;
@@ -3898,88 +3949,49 @@ div {
       align-items: center;
       flex-wrap: wrap;
       justify-content: space-between;
-
+      box-sizing: border-box;
       .addr-block {
         position: relative;
         width: 49%;
         height: 250px;
         padding: 25px 30px 0;
-        margin-bottom: 20px;
+        box-sizing: border-box;
+        margin: 0 auto 20px;
         border: 1px solid rgba(230, 230, 230, 1);
         background-color: #ffffff;
         box-sizing: border-box;
-
-        .addr-title {
-          max-width: 82%;
-          display: flex;
-          align-items: flex-end;
-          margin-bottom: 10px;
-
-          div {
-            font-size: 20px;
-            color: #333;
-          }
-
-          div:nth-child(2) {
-            font-size: 14px;
-            margin-left: 7px;
-          }
-        }
-
+        font-size: 16px;
+        color: #333;
         .addr-user {
-          max-width: 82%;
-          display: flex;
-          font-size: 22px;
-          align-items: center;
-          color: #333;
-
-          div:nth-child(1) {
-            min-height: 22px;
-            max-height: 22 * 2px;
-            line-height: 22px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            word-break: break-all;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          }
-          div:nth-child(2) {
-            font-size: 16px;
-            margin-left: 10px;
-          }
-        }
-
-        .addr-address {
-          max-width: 82%;
-          color: #333;
-          font-size: 14px;
-          height: 16 * 3px;
-          line-height: 16px;
+          max-width: 70%;
+          font-size: 26px;
+          height: 40px;
+          line-height: 40px;
           overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
           word-break: break-all;
-          -webkit-line-clamp: 3;
-          -webkit-box-orient: vertical;
-          margin-bottom: 10px;
+          margin-bottom: 14px;
         }
-
         .addr-user-phone {
-          max-width: 82%;
+          max-width: 70%;
           display: flex;
           align-items: flex-end;
           font-family: twCenMt;
-          font-size: 18px;
-          color: #333;
-          margin-bottom: 5px;
-
+          margin-bottom: 2px;
           div:nth-child(1) {
-            font-size: 14px;
             margin-right: 5px;
           }
         }
-
+        .addr-user-email{
+          max-width: 70%;
+          margin-bottom: 14px;
+        }
+        .addr-address {
+          max-width: 70%;
+          line-height: 20px;
+          word-break: break-all;
+          margin-bottom: 10px;
+        }
+        
         .addr-board {
           display: block;
           width: 100%;
@@ -3990,7 +4002,6 @@ div {
           cursor: pointer;
           z-index: 10;
         }
-
         .iconlajitong {
           position: absolute;
           bottom: 36px;
@@ -4001,34 +4012,33 @@ div {
           z-index: 39;
           cursor: pointer;
         }
-
         .addr-btn {
           position: absolute;
           /*width: 50px;*/
           padding: 0 10px;
-          height: 22px;
-          line-height: 20px;
+          height: 28px;
+          line-height: 26px;
           border: 1px solid #aa8a7b;
           border-radius: 4px;
           background: rgba(251, 247, 245, 1);
           color: #aa8a7b;
           text-align: center;
           cursor: pointer;
-          top: 30px;
-          right: 28px;
+          bottom: 36px;
+          right: 80px;
           z-index: 40;
         }
-
         .mrAdd{
           position: absolute;
           text-align: center;
           cursor: pointer;
           background: #fff;
-          top: 0px;
+          top: 16px;
           right: 28px;
           z-index: 40;
+          width: 28%;
+          text-align: right;
         }
-
         img {
           display: block;
           width: 100%;
@@ -4037,7 +4047,6 @@ div {
           left: 0;
         }
       }
-
       .addr-active {
         border: 1px solid rgba(212, 196, 188, 1);
       }
