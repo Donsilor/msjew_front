@@ -204,7 +204,7 @@
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
+                <input :value="phoneNum.phone_code" type="text" autocomplete="off" />
                 <select v-model="phoneNum">
                   <option
                     v-for="(p, index) in phoneJson"
@@ -1180,7 +1180,7 @@
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
+                <input :value="phoneNum.phone_code" type="text" autocomplete="off" />
                 <select v-model="phoneNum">
                   <option
                     v-for="(p, index) in phoneJson"
