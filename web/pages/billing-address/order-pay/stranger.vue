@@ -109,10 +109,7 @@
               >
                 {{ $t(`${lang}.change`) }}
               </div>
-              <img
-                v-show="a.is_default == 1"
-                src="../../../static/personal/account/address-bar.png"
-              />
+              <img src="../../../static/personal/account/address-bar.png" />
             </div>
           </div>
         </div>
@@ -1197,10 +1194,7 @@
               >
                 {{ $t(`${lang}.change`) }}
               </div>
-              <img
-                v-show="a.is_default == 1"
-                src="../../../static/personal/account/address-bar.png"
-              />
+              <img src="../../../static/personal/account/address-bar.png" />
             </div>
           </div>
         </div>
@@ -2637,8 +2631,7 @@ export default {
         province_id: this.province.areaId,
         city_id: this.city.areaId,
         address_details: this.addressData.address_details,
-        zip_code: this.addressData.zip_code,
-        is_default: 1
+        zip_code: this.addressData.zip_code
       }
 
       if(this.address.length > 0){
@@ -2681,8 +2674,7 @@ export default {
         province_id: data.province_id,
         city_id: data.city_id,
         address_details: data.address_details,
-        zip_code: data.zip_code,
-        is_default: data.is_default
+        zip_code: data.zip_code
       }
       // console.log("code",this.addressData)
       const code = data.mobile_code.split('+').reverse()
@@ -2770,8 +2762,7 @@ export default {
         province_name: this.province.areaName,
         city_name: this.city.areaName,
         address_details: this.addressData.address_details,
-        zip_code: this.addressData.zip_code,
-        is_default: 1
+        zip_code: this.addressData.zip_code
       }
       this.addr = data
       content.push(data)
@@ -2866,8 +2857,7 @@ export default {
         province_id: this.province.areaId,
         city_id: this.city.areaId,
         address_details: this.addressData.address_details,
-        zip_code: this.addressData.zip_code,
-        is_default: 1
+        zip_code: this.addressData.zip_code
       }
 
       this.addressBox = true
@@ -2968,8 +2958,7 @@ export default {
         province_name: this.province.areaName,
         city_name: this.city.areaName,
         address_details: this.addressData.address_details,
-        zip_code: this.addressData.zip_code,
-        is_default: 1
+        zip_code: this.addressData.zip_code
       }
       this.addr = data
       content.push(data)
