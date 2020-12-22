@@ -85,21 +85,21 @@
                   confirmBox = true
                 "
               />
-              <div
+              <!-- <div
                 v-if="a.is_default == 1"
                 class="font-size-14 mrAdd"
                 style="color: #f29b87; margin-top: 6px;"
               >
                 {{ $t(`${langs}.mrAddress`) }}
-              </div>
-              <div
+              </div> -->
+              <!-- <div
                 v-if="a.is_default != 1 && addressIdx == index"
                 class="font-size-14 mrAdd"
                 style="color: #f29b87; margin-top: 6px;"
                 @click="setDefaultAddr(a)"
               >
                 {{ $t(`${lang}.setDefaultAddr`) }}
-              </div>
+              </div> -->
               <div
                 class="addr-btn"
                 @click="
@@ -109,10 +109,7 @@
               >
                 {{ $t(`${lang}.change`) }}
               </div>
-              <img
-                v-show="a.is_default == 1"
-                src="../../../static/personal/account/address-bar.png"
-              />
+              <img src="../../../static/personal/account/address-bar.png" />
             </div>
           </div>
         </div>
@@ -1173,21 +1170,21 @@
                   confirmBox = true
                 "
               />
-              <div
+              <!-- <div
                 v-if="a.is_default == 1"
                 class="font-size-14 mrAdd"
                 style="color: #f29b87; margin-top: 6px;"
               >
                 {{ $t(`${langs}.mrAddress`) }}
-              </div>
-              <div
+              </div> -->
+              <!-- <div
                 v-if="a.is_default != 1 && addressIdx == index"
                 class="font-size-14 mrAdd"
                 style="color: #f29b87; margin-top: 6px;"
                 @click="setDefaultAddr(a)"
               >
                 {{ $t(`${lang}.setDefaultAddr`) }}
-              </div>
+              </div> -->
               <div
                 class="addr-btn"
                 @click="
@@ -1197,10 +1194,7 @@
               >
                 {{ $t(`${lang}.change`) }}
               </div>
-              <img
-                v-show="a.is_default == 1"
-                src="../../../static/personal/account/address-bar.png"
-              />
+              <img src="../../../static/personal/account/address-bar.png" />
             </div>
           </div>
         </div>
@@ -1256,7 +1250,6 @@
                   </div>
                 </div>
               </div>
-
 
               <!--          电话-->
               <div class="input-line">
@@ -2638,12 +2631,7 @@ export default {
         province_id: this.province.areaId,
         city_id: this.city.areaId,
         address_details: this.addressData.address_details,
-        zip_code: this.addressData.zip_code,
-        is_default: 0
-      }
-
-      if(this.address.length == 0){
-        data.is_default = 1
+        zip_code: this.addressData.zip_code
       }
 
       if(this.address.length > 0){
@@ -2686,8 +2674,7 @@ export default {
         province_id: data.province_id,
         city_id: data.city_id,
         address_details: data.address_details,
-        zip_code: data.zip_code,
-        is_default: data.is_default
+        zip_code: data.zip_code
       }
       // console.log("code",this.addressData)
       const code = data.mobile_code.split('+').reverse()
@@ -2775,8 +2762,7 @@ export default {
         province_name: this.province.areaName,
         city_name: this.city.areaName,
         address_details: this.addressData.address_details,
-        zip_code: this.addressData.zip_code,
-        is_default: this.addressData.is_default
+        zip_code: this.addressData.zip_code
       }
       this.addr = data
       content.push(data)
@@ -2871,12 +2857,7 @@ export default {
         province_id: this.province.areaId,
         city_id: this.city.areaId,
         address_details: this.addressData.address_details,
-        zip_code: this.addressData.zip_code,
-        is_default: 0
-      }
-
-      if(this.address.length == 0){
-        data.is_default = 1
+        zip_code: this.addressData.zip_code
       }
 
       this.addressBox = true
@@ -2977,8 +2958,7 @@ export default {
         province_name: this.province.areaName,
         city_name: this.city.areaName,
         address_details: this.addressData.address_details,
-        zip_code: this.addressData.zip_code,
-        is_default: this.addressData.is_default
+        zip_code: this.addressData.zip_code
       }
       this.addr = data
       content.push(data)
@@ -2998,8 +2978,6 @@ export default {
       this.addAddress = true
       this.resetAddressInp()
       this.address = []
-
-      // console.log("gsgdggg",this.address)
     },
     keydown(){
       var reg = /^[0-9a-zA-Z\-]{1}$/;
