@@ -85,21 +85,21 @@
                   confirmBox = true
                 "
               />
-              <div
+              <!-- <div
                 v-if="a.is_default == 1"
                 class="font-size-14 mrAdd"
                 style="color: #f29b87; margin-top: 6px;"
               >
                 {{ $t(`${langs}.mrAddress`) }}
-              </div>
-              <div
+              </div> -->
+              <!-- <div
                 v-if="a.is_default != 1 && addressIdx == index"
                 class="font-size-14 mrAdd"
                 style="color: #f29b87; margin-top: 6px;"
                 @click="setDefaultAddr(a)"
               >
                 {{ $t(`${lang}.setDefaultAddr`) }}
-              </div>
+              </div> -->
               <div
                 class="addr-btn"
                 @click="
@@ -1173,21 +1173,21 @@
                   confirmBox = true
                 "
               />
-              <div
+              <!-- <div
                 v-if="a.is_default == 1"
                 class="font-size-14 mrAdd"
                 style="color: #f29b87; margin-top: 6px;"
               >
                 {{ $t(`${langs}.mrAddress`) }}
-              </div>
-              <div
+              </div> -->
+              <!-- <div
                 v-if="a.is_default != 1 && addressIdx == index"
                 class="font-size-14 mrAdd"
                 style="color: #f29b87; margin-top: 6px;"
                 @click="setDefaultAddr(a)"
               >
                 {{ $t(`${lang}.setDefaultAddr`) }}
-              </div>
+              </div> -->
               <div
                 class="addr-btn"
                 @click="
@@ -1256,7 +1256,6 @@
                   </div>
                 </div>
               </div>
-
 
               <!--          电话-->
               <div class="input-line">
@@ -2639,11 +2638,7 @@ export default {
         city_id: this.city.areaId,
         address_details: this.addressData.address_details,
         zip_code: this.addressData.zip_code,
-        is_default: 0
-      }
-
-      if(this.address.length == 0){
-        data.is_default = 1
+        is_default: 1
       }
 
       if(this.address.length > 0){
@@ -2776,7 +2771,7 @@ export default {
         city_name: this.city.areaName,
         address_details: this.addressData.address_details,
         zip_code: this.addressData.zip_code,
-        is_default: this.addressData.is_default
+        is_default: 1
       }
       this.addr = data
       content.push(data)
@@ -2872,11 +2867,7 @@ export default {
         city_id: this.city.areaId,
         address_details: this.addressData.address_details,
         zip_code: this.addressData.zip_code,
-        is_default: 0
-      }
-
-      if(this.address.length == 0){
-        data.is_default = 1
+        is_default: 1
       }
 
       this.addressBox = true
@@ -2978,7 +2969,7 @@ export default {
         city_name: this.city.areaName,
         address_details: this.addressData.address_details,
         zip_code: this.addressData.zip_code,
-        is_default: this.addressData.is_default
+        is_default: 1
       }
       this.addr = data
       content.push(data)
@@ -2998,8 +2989,6 @@ export default {
       this.addAddress = true
       this.resetAddressInp()
       this.address = []
-
-      // console.log("gsgdggg",this.address)
     },
     keydown(){
       var reg = /^[0-9a-zA-Z\-]{1}$/;

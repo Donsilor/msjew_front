@@ -8,8 +8,7 @@
             </span>
             <i class="icon iconfont iconicon-test2" @click="close()"></i>
           </div>
-
-          
+ 
           <div class="mod">
             <!-- 姓名 -->
             <div v-if="language==='zh_CN'" class="compellation">
@@ -1104,7 +1103,7 @@ export default {
 <style scoped lang="less">
 .edit-address {
   padding: 0 20px;
-  min-height: 100%;
+  min-height: 101%;
   background: #fff;
   position: fixed;
   top: 0;
