@@ -9,7 +9,7 @@
       <div class="btn-common btn-gray" @click="goIndex">
         {{ lang.continue }}
       </div>
-      <div v-if="showBtn && info.payChannel === 1">
+      <div v-if="showBtn && this.$route.query.payType == 1">
         <div v-if="hadLogin" class="btn-common btn-gray" @click="returnBack">
           {{ lang.payAgain }}
         </div>
@@ -220,7 +220,8 @@ export default {
         coinType:'',
         price:''
       },
-      showBtn:false
+      showBtn:false,
+      verification:true
     }
   },
   computed: {
@@ -237,14 +238,19 @@ export default {
         }, 3000);
       })
       if (this.$route.query.success === "false") {
+
         this.goPayFailed()
         //失败后，继续调用验证api，写入支付日志
         let baseUrl=this.$store.getters.baseUrl
         let return_url = ''
         if(this.$route.query.payType == 1){
-          return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
+          if(this.$route.query.order_sn){
+            return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
+          } else {
+            return_url = baseUrl+'/verify?orderId='+this.$route.query.orderId
+          }
         } else {
-          return_url = backUrl
+          return_url = back_url
         }
         this.$axios({
             url: '/web/pay/verify',
@@ -324,6 +330,10 @@ export default {
         this.goodsInfo.value = res.payAmount;
         this.goodsInfo.currency = res.coinCode;
 
+        this.memberInfos.orderId=res.id
+        this.memberInfos.coinType=res.coinCode
+        this.memberInfos.payAmount=res.payAmount
+
         var details = res.details;
 
         details.forEach((o, i) =>{
@@ -372,8 +382,12 @@ export default {
       // console.log("backUrl",backUrl)
       let baseUrl=this.$store.getters.baseUrl
       let return_url = ''
-      if(this.info.payChannel == 1 || this.orderinfo.payChannel == 1){
-        return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
+      if(this.$route.query.payType == 1){
+        if(this.$route.query.order_sn){
+          return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
+        } else {
+          return_url = baseUrl+'/verify?orderId='+this.$route.query.orderId
+        }
       } else {
         return_url = backUrl
       }
@@ -387,7 +401,12 @@ export default {
             }
         })
         .then(data => {
-          if(this.info.payChannel == 1){
+          // console.loh("dddd",this.$route.query.payType,this.verification)
+          if(this.verification == false){
+            this.verification = true
+            return
+          }
+          if(this.$route.query.payType == 1){
             if(data.verification_status === 'completed') {
               this.goPaySuccess()
             }else{
@@ -395,7 +414,7 @@ export default {
             }
           } else {
             if(data.verification_status === 'completed') {
-              localStorage.removeItem('myAdders')
+              // localStorage.removeItem('myAdders')
               this.goPaySuccess()
             } else if(data.verification_status === 'failed') {
               this.goPayFailed()
@@ -449,6 +468,7 @@ export default {
       }
     },
     returnBack() {
+      this.verification = false
       const res = this.memberInfos
       this.$router.push({
         name: 'cart-pay',
@@ -458,6 +478,7 @@ export default {
       })
     },
     TouristReturnBack(){
+      this.verification = false
       const res = this.orderinfo
       this.$router.push({
         name: 'cart-sureOrder',

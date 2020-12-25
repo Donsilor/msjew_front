@@ -8,10 +8,11 @@
       <a @click="gologin">{{ lang.accont }}</a>
       <span>{{ lang.any }}</span>
     </div>
-    <div class="address">
+    <div class="address" >
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
-          <span>{{ address.firstname }} {{ address.lastname }}</span>
+          <span v-if="language == 'zh_CN'">{{ address.lastname }}{{ address.firstname }}</span>
+          <span v-else>{{ address.firstname }} {{ address.lastname }}</span>
           <!-- <span v-if="!this.queryId">{{ lang.default }}</span> -->
         </div>
         <p>{{ address.mobile_code }} {{ address.mobile }}</p>
@@ -23,7 +24,7 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <div v-if="!hasAddress" class="no-address" @click="goAddress">
+      <div v-if="!hasAddress" class="no-address" @click="goAddress"> 
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
@@ -460,6 +461,7 @@ export default {
       lang2: this.LANGUAGE.cart.pay,
       lang3: this.LANGUAGE.cart.invoice,
       coin: this.$store.state.coin,
+      language: this.$store.state.language,
       form: [],
       actionLink: '',
       // 大陆支付
@@ -700,6 +702,7 @@ export default {
         // this.getData() // 获取地址
         let ua = window.navigator.userAgent.toLowerCase();
         if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){
+          console.log(111111111)
           this.getCode()
         }
       // } 
@@ -1074,6 +1077,7 @@ export default {
           })
       } else {
         const address = storage.get('myAdders', 0)
+        console.log("dfsadfsa",address)
         if (address) {
         // console.log("address",address)
           this.hasAddress = true
@@ -1103,7 +1107,7 @@ export default {
     getCode() { // 静默授权
       var local = window.location.href // 获取页面url
       // console.log("url",this.code)
-      var appid = 'wxdac61ce65e15cfc4' 
+      var appid = 'wx8333dcbf196b0ad3' 
       this.code = this.getUrlCode().code // 截取code
       let wxid =  localStorage.getItem('openid') 
       // localStorage.setItem('WeiXin_Code',this.code)
@@ -1213,19 +1217,21 @@ export default {
           return
         }
       } else {
-        if (!this.hasAddress) {
-          this.$toast.show(this.lang.addrTip)
-          const topC = document.getElementsByClassName('layout-main')[0];
-
-          let timer = setInterval(() => {
-            let ispeed = Math.floor(-this.scrollTop / 5)
-            topC.scrollTop = this.scrollTop + ispeed
-            if (this.scrollTop === 0) {
-              clearInterval(timer)
-            }
-          }, 22)
-          this.$nuxt.$loading.finish()
-          return
+        if(pay!== 6){
+          if (!this.hasAddress) {
+            this.$toast.show(this.lang.addrTip)
+            const topC = document.getElementsByClassName('layout-main')[0];
+  
+            let timer = setInterval(() => {
+              let ispeed = Math.floor(-this.scrollTop / 5)
+              topC.scrollTop = this.scrollTop + ispeed
+              if (this.scrollTop === 0) {
+                clearInterval(timer)
+              }
+            }, 22)
+            this.$nuxt.$loading.finish()
+            return
+          }
         }
       }
       let info = {}
@@ -1342,7 +1348,7 @@ export default {
               }
             })
               .then(res => {
-                console.log("返回结果",res)
+                console.log("返回结果",res.config)
                 if (res.config) {
                   if(pay == 9){
                     // 测试key
@@ -1357,7 +1363,7 @@ export default {
                     } else if((/(msjew.bddco)\.cn/).test(host)){
                       stripe = Stripe(TestKey); // 测试key
                     }
-              
+
                     return stripe.redirectToCheckout({ sessionId: res.config });
                   } else {
 
@@ -1394,7 +1400,7 @@ export default {
     // 大陆微信支付
     PayWechat() {
       this.isPay = true
-      console.log("aaa",this.address)
+      // console.log("aaa",this.address)
       if(this.info.coinType === 'USD'){
         if(this.typeIndex == 2){
           this.$toast.show(this.lang.NotSupportPay)
@@ -1428,7 +1434,7 @@ export default {
       if(this.kai == true){
         info = this.invoices
       }
-  console.log("sssswsinfo",this.order_sn)
+      // console.log("sssswsinfo",this.order_sn)
       let baseUrl=this.$store.getters.baseUrl
       let orderId = this.info.orderId
       let tradeType = ''
@@ -1496,7 +1502,7 @@ export default {
           address:this.address,
           invoice: info,
           openid: openid,
-          orderId: orderId,
+          // orderId: orderId,
           coinType:this.$store.state.coin,
           payType: pay,
           tradeType: tradeType,
@@ -1505,12 +1511,12 @@ export default {
         }
       })
       .then(res => {
-        console.log("res1111111",res)
+         console.log("res1111111",res)
         this.order_sn = res.order_sn
         if(tradeType == 'mweb'){
-          window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay))
-        }
-        if(tradeType == 'js'){
+          // alert(111111111111)
+          window.location.replace(res.config+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?order_sn='+res.order_sn+'&payType='+pay))
+        }else if(tradeType == 'js'){
           function onBridgeReady(){
             WeixinJSBridge.invoke(
                 'getBrandWCPayRequest', {
@@ -1527,21 +1533,22 @@ export default {
                       window.location.replace(url)
                   }
                 }
-            }(baseUrl+'/complete/paySuccess?order_sn='+this.order_sn+'&payType='+pay)); 
+            }(baseUrl+'/complete/paySuccess?order_sn='+res.order_sn+'&payType='+pay)); 
           }
           if (typeof WeixinJSBridge == "undefined"){
             if( document.addEventListener ){
-                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+              document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
             }else if (document.attachEvent){
-                document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
-                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+              document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+              document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
             }
           }else{
             onBridgeReady();
           }
-        }
-        if (res.config) {
-          window.location.replace(res.config)
+        }else{
+          if(res.config){
+            window.location.replace(res.config)
+          }
         }
       })
       .catch(err => {
@@ -2010,6 +2017,7 @@ export default {
     background: #ffffff;
     border-top: 1px solid #ffffff;
     box-shadow: 0px -1px 2px 0px rgba(172, 172, 172, 0.4);
+    z-index: 99;
 
     span {
       display: inline-block;

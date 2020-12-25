@@ -17,7 +17,10 @@
           >
             <div class="left" @click="selectAddress(item)">
             <!-- <div class="left"> -->
-              <p class="p1 ow-h1">{{ item.firstname }} {{ item.lastname }}</p>
+              <p class="p1 ow-h1">
+                <span v-if="language == 'zh_CN'">{{ item.lastname }}{{ item.firstname }}</span>
+                <span v-else>{{ item.firstname }} {{ item.lastname }}</span>
+              </p>
               <p class="p2">{{ item.mobile_code }} {{ item.mobile }}</p>
               <p class="p3">{{ item.email }}</p>
               <p class="p4 ellipsis-address ow-h2">
@@ -52,13 +55,13 @@
           {{ lang.add }}
         </div>
       </div>
-      <div v-else v-show="address.length !== 1 " class="btn-fixed">
+      <div v-else-if="!isLogin&&address.length == 0 " class="btn-fixed">
         <div class="btn-common btn-white" @click="editAddress(null)">
           <i class="icon iconfont iconicon-test"></i>
           {{ lang.add }}
         </div>
       </div>
-      <AditAddress v-if="ifShowAditAddress" @closeADP="closeAditAddressPop" :editVal="editVal"  :addVal="addVal"></AditAddress>
+      <AditAddress v-if="ifShowAditAddress" @closeADP="closeAditAddressPop" :editVal="editVal"  :addVal="addVal" @delete="deleteAddress"></AditAddress>
     </div>
   </div>
 </template>
@@ -84,6 +87,7 @@ export default {
       move: false,
       name: '',
       isLogin: !!this.$store.state.token,
+      language: this.$store.state.language,
       address: [],
       ifShowAditAddress:false,
       editVal:'',
@@ -186,6 +190,7 @@ export default {
           })
       } else {
         storage && storage.remove('myAdders')
+        this.$toast.show(this.lang.toast)
         this.address = []
         this.getData()
       }
@@ -196,14 +201,17 @@ export default {
       // }
     },
     editAddress(val) {
+      console.log("1111",this.addVal)
+      this.addVal = ''
       if (val) {
         this.ifShowAditAddress = true
         this.editVal = val
       } else if (val === null){
+        console.log("2222",val)
         if(this.isLogin){
           this.ifShowAditAddress = true
           this.addVal = 'add'
-        } else {
+        } else if(this.address.length == 0){
           this.ifShowAditAddress = true
           this.addVal = 'TouristAdd'
         }
@@ -224,8 +232,8 @@ export default {
 </script>
 
 <style scoped lang="less">
-.address {
-  min-height: 100%;
+.address { 
+  min-height: 101%;
   background: #f5f5f5;
   position: fixed;
   top: 0;

@@ -4,6 +4,9 @@
       <div class="pink-line" />
       <div class="title-name">{{ $t(`${lang}.address`) }}</div>
     </div>
+    <div class="clf" style="padding: 0 28px; width: 100%">
+      <div class="add-btn fr" @click="newAddress()">+ {{ $t(`${lang}.newAddress`) }}</div>
+    </div>
     <div class="addr-blocks" :class="{'en': language == 'en_US'}">
       <div
         v-for="(a, index) in address"
@@ -16,7 +19,10 @@
             <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
           </div>
           <div class="addr-user">
-            <div>{{ a.realname }}</div>
+            <div>
+              <span v-if="language == 'zh_CN'">{{ a.lastname }}{{ a.firstname }}</span>
+              <span v-else>{{ a.firstname }} {{ a.lastname }}</span>
+            </div>
             <div>{{ $t(`${lang}.get`) }}</div>
           </div>
           <div class="addr-address">
@@ -69,488 +75,7 @@
         </div>
       </div>
     </div>
-    <div class="addr-mid dle-btn" id="addbox">
-      <div v-show="!isShow" style="cursor: pointer;" class="middle-btn-show" @click="newAddress()">
-        + {{ $t(`${lang}.newAddress`) }}
-      </div>
-      <div v-show="isShow"  class="middle-btn-title">
-        <span v-show="isNew" style="cursor: pointer;" class="middle-btn-title-name">{{
-          $t(`${lang}.newAddress`)
-        }}</span
-        ><span v-show="isEdit" style="cursor: pointer;" class="middle-btn-title-name">{{
-          $t(`${lang}.editAddress`)
-        }}</span
-        ><span class="middle-btn-title-hide" style="cursor: pointer;margin-left:50px;" @click="resetAddress()">{{
-          $t(`${lang}.show-hey`)
-        }}</span>
-      </div>
-      <!-- 中文简体 -->
-      <div v-if="language==='zh_CN'">
-        <div v-show="isNew && isShow" class="new-addr">
-          <div class="new-addr-name">
 
-            <div>
-              <input
-                v-model="using.lastname"
-                :placeholder="$t(`${lang}.lastName`) + '*'"
-                type="text"
-                maxlength="30"
-              />
-            </div>
-
-             <div>
-              <input
-                v-model="using.firstname"
-                :placeholder="$t(`${lang}.firstName`) + '*'"
-                type="text"
-                maxlength="30"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="using.email"
-                :placeholder="$t(`${lang}.addEmail`)"
-                type="text"
-                maxlength="60"
-              />
-            </div>
-          </div>
-          <div class="new-addr-phone">
-            <div>
-              <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
-              <select v-model="phoneNum">
-                <option v-for="(p, index) in phoneJson" :key="index" :value="p">{{
-                  psn ? p.en :psn ? p.cn :p.zh
-                }}</option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input
-                v-model="using.mobile"
-                :placeholder="$t(`${lang}.phone`) + '*'"
-                type="tel"
-                :maxlength="mobileMax"
-                @input="mobileIpt"
-              />
-            </div>
-          </div>
-          <div class="new-addr-address">
-            <div>
-              <input :value="country.areaName" type="text" />
-              <select v-model="country" @change="getListTwo">
-                <option
-                  v-for="(c, index) in countryList"
-                  :key="index"
-                  :value="c"
-                  >{{ c.areaName }}</option
-                >
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input :value="province.areaName" type="text" />
-              <select v-model="province" @change="getListThree">
-                <option
-                  v-for="(p, index) in provinceList"
-                  :key="index"
-                  :value="p"
-                  >{{ p.areaName }}</option
-                >
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input :value="city.areaName" type="text" />
-              <select v-model="city">
-                <option v-for="(c, index) in cityList" :key="index" :value="c">{{
-                  c.areaName
-                }}</option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="using.address_details"
-                :placeholder="$t(`${lang}.longAddress`) + '*'"
-                type="text"
-                maxlength="300"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="using.zip_code"
-                :placeholder="$t(`${lang}.zip`) + '*'"
-                type="text"
-                maxlength="11"
-                @input="keydown"
-              />
-            </div>
-          </div>
-          <div class="new-addr-btn" @click="createAddress1()">
-            {{ $t(`${lang}.save`) }}
-          </div>
-        </div>
-        <div v-show="isEdit && isShow" class="new-addr" >
-          <div class="new-addr-name">
-            <div>
-              <input
-                v-model="clone.lastname"
-                :placeholder="$t(`${lang}.lastName`) + '*'"
-                type="text"
-                maxlength="30"
-              />
-            </div>
-
-            <div>
-              <input
-                v-model="clone.firstname"
-                :placeholder="$t(`${lang}.firstName`) + '*'"
-                type="text"
-                maxlength="30"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="clone.email"
-                :placeholder="$t(`${lang}.addEmail`)"
-                type="text"
-                maxlength="60"
-              />
-            </div>
-          </div>
-          <div class="new-addr-phone">
-            <div>
-              <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
-              <select v-model="phoneNum">
-                <option v-for="(p, index) in phoneJson" :key="index" :value="p">{{
-                  psn ? p.en :psn ? p.cn :p.zh
-                }}</option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input
-                v-model="clone.mobile"
-                :placeholder="$t(`${lang}.phone`) + '*'"
-                type="tel"
-                :maxlength="mobileMax"
-                @input="mobileIpt"
-              />
-            </div>
-          </div>
-          <div class="new-addr-address">
-            <div>
-              <input :value="country.areaName" type="text" />
-              <select v-model="country" @change="getListTwo">
-                <option
-                  v-for="(c, index) in countryList.slice(2,3)"
-                  :key="index"
-                  :value="c"
-                  >{{ c.areaName }}</option
-                >
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input :value="province.areaName" type="text" />
-              <select v-model="province" @change="getListThree">
-                <option
-                  v-for="(p, index) in provinceList"
-                  :key="index"
-                  :value="p"
-                  >{{ p.areaName }}</option
-                >
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input :value="city.areaName" type="text" />
-              <select v-model="city">
-                <option v-for="(c, index) in cityList" :key="index" :value="c">{{
-                  c.areaName
-                }}</option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="clone.address_details"
-                :placeholder="$t(`${lang}.longAddress`) + '*'"
-                type="text"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="clone.zip_code"
-                :placeholder="$t(`${lang}.zip`) + '*'"
-                type="text"
-                maxlength="11"
-                @input="keydown"
-              />
-            </div>
-          </div>
-          <div class="new-addr-btn" @click="changeSave()">
-            {{ $t(`${lang}.save`) }}
-          </div>
-        </div>
-      </div>
-      <!-- 中文繁体 -->
-      <div v-else>
-        <div v-show="isNew && isShow" class="new-addr">
-          <div class="new-addr-name">
-            <div>
-              <input
-                v-model="using.firstname"
-                :placeholder="$t(`${lang}.firstName`) + '*'"
-                type="text"
-                maxlength="30"
-              />
-            </div>
-
-            <div>
-              <input
-                v-model="using.lastname"
-                :placeholder="$t(`${lang}.lastName`) + '*'"
-                type="text"
-                maxlength="30"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="using.email"
-                :placeholder="$t(`${lang}.addEmail`) + '*'"
-                type="text"
-                maxlength="60"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="checkEmail"
-                :placeholder="$t(`${lang}.sureEmail`) + '*'"
-                type="text"
-                maxlength="60"
-              />
-            </div>
-          </div>
-          <div class="new-addr-phone">
-            <div>
-              <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
-              <select v-model="phoneNum">
-                <option v-for="(p, index) in phoneJson" :key="index" :value="p">{{
-                  psn ? p.en :psn ? p.cn :p.zh
-                }}</option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input
-                v-model="using.mobile"
-                :placeholder="$t(`${lang}.phone`) + '*'"
-                type="tel"
-                :maxlength="mobileMax"
-                @input="mobileIpt"
-              />
-            </div>
-          </div>
-          <div class="new-addr-address">
-            <div>
-              <input :value="country.areaName" type="text" />
-              <select v-model="country" @change="getListTwo">
-                <option
-                  v-for="(c, index) in countryList"
-                  :key="index"
-                  :value="c"
-                  >{{ c.areaName }}</option
-                >
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input :value="province.areaName" type="text" />
-              <select v-model="province" @change="getListThree">
-                <option
-                  v-for="(p, index) in provinceList"
-                  :key="index"
-                  :value="p"
-                  >{{ p.areaName }}</option
-                >
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input :value="city.areaName" type="text" />
-              <select v-model="city">
-                <option v-for="(c, index) in cityList" :key="index" :value="c">{{
-                  c.areaName
-                }}</option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="using.address_details"
-                :placeholder="$t(`${lang}.longAddress`) + '*'"
-                type="text"
-                maxlength="300"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="using.zip_code"
-                :placeholder="$t(`${lang}.zip`) + '*'"
-                type="text"
-                maxlength="11"
-                @input="keydown"
-              />
-            </div>
-          </div>
-          <div class="new-addr-btn" @click="createAddress()">
-            {{ $t(`${lang}.save`) }}
-          </div>
-        </div>
-        <div v-show="isEdit && isShow" class="new-addr">
-          <div class="new-addr-name">
-            <div>
-              <input
-                v-model="clone.lastname"
-                :placeholder="$t(`${lang}.firstName`) + '*'"
-                type="text"
-                maxlength="30"
-              />
-            </div>
-
-            <div>
-              <input
-                v-model="clone.firstname"
-                :placeholder="$t(`${lang}.lastName`) + '*'"
-                type="text"
-                maxlength="30"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="clone.email"
-                :placeholder="$t(`${lang}.addEmail`) + '*'"
-                type="text"
-                maxlength="60"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="checkEmail"
-                :placeholder="$t(`${lang}.sureEmail`) + '*'"
-                type="text"
-                maxlength="60"
-              />
-            </div>
-          </div>
-          <div class="new-addr-phone">
-            <div>
-              <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
-              <select v-model="phoneNum">
-                <option v-for="(p, index) in phoneJson" :key="index" :value="p">{{
-                  psn ? p.en :psn ? p.cn :p.zh
-                }}</option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input
-                v-model="clone.mobile"
-                :placeholder="$t(`${lang}.phone`) + '*'"
-                type="tel"
-                :maxlength="mobileMax"
-                @input="mobileIpt"
-              />
-            </div>
-          </div>
-          <div class="new-addr-address">
-            <div>
-              <input :value="country.areaName" type="text" />
-              <select v-model="country" @change="getListTwo">
-                <option
-                  v-for="(c, index) in countryList"
-                  :key="index"
-                  :value="c"
-                  >{{ c.areaName }}</option
-                >
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input :value="province.areaName" type="text" />
-              <select v-model="province" @change="getListThree">
-                <option
-                  v-for="(p, index) in provinceList"
-                  :key="index"
-                  :value="p"
-                  >{{ p.areaName }}</option
-                >
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-            <div>
-              <input :value="city.areaName" type="text" />
-              <select v-model="city">
-                <option v-for="(c, index) in cityList" :key="index" :value="c">{{
-                  c.areaName
-                }}</option>
-              </select>
-              <i class="iconfont iconxiala" />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="clone.address_details"
-                :placeholder="$t(`${lang}.longAddress`) + '*'"
-                type="text"
-                maxlength="300"
-              />
-            </div>
-          </div>
-          <div class="new-addr-email">
-            <div>
-              <input
-                v-model="clone.zip_code"
-                :placeholder="$t(`${lang}.zip`) + '*'"
-                type="text"
-                maxlength="11"
-                @input="keydown"
-              />
-            </div>
-          </div>
-          <div class="new-addr-btn" @click="changeSave()">
-            {{ $t(`${lang}.save`) }}
-          </div>
-        </div>
-      </div>
-    </div>
     <message-box
       v-show="isDel"
       :title="$t(`${lang}.tips`)"
@@ -559,12 +84,14 @@
       @sure="deleteAddress"
       @cancel="isDel = false"
     />
+    <add-address v-if="ifShowPop" @close="closePop" :editData="popData" @addSuccess="addSuccess" @editSuccess="editSuccess" @anewDefault="anewDefault"></add-address>
   </div>
 </template>
 
 <script>
 import Address from '@/assets/js/address.js'
 import { Email, RegMobile, RegTelephone, RegMobiles } from '@/assets/js/require-lee.js'
+import termsAndConditionsVue from '../../../pages/policies/terms-and-conditions.vue'
 const lang = 'personal.account'
 export default {
   name: 'Index',
@@ -605,8 +132,9 @@ export default {
       },
       checkEmail: ``,
       language:'',
-      isDefault:{},
-      mobileMax: 20
+      mobileMax: 20,
+      ifShowPop: false,
+      popData: null
     }
   },
   computed: {
@@ -629,12 +157,16 @@ export default {
     this.language = this.$store.state.language
   },
   methods: {
+    closePop() {
+      this.ifShowPop = false;
+      this.popData = null;
+    },
     // 获取地址
     getData() {
       this.$axios
         .get('/web/member/address')
         .then(res => {
-            this.address = res.data
+            this.address = res.data;
         })
         .catch(err => {
           if (!err.response) {
@@ -644,29 +176,15 @@ export default {
           }
         })
     },
+    // 新建地址
+    newAddress() {
+      this.popData = null;
+      this.ifShowPop = true;
+    },
     // 修改地址
     changeAddress(obj) {
-      document.getElementById('addbox').scrollIntoView({
-        block: 'center',
-        inline: 'nearest',
-        behavior: 'smooth'
-      })
-      this.resetAddress()
-      this.clone = this.$helpers.cloneObject(obj)
-      this.checkEmail = obj.email
-
-      const code = obj.mobile_code.split('+').reverse()
-      JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
-        if (o.phone_code === '+' + code[0]) this.phoneNum = o
-      })
-
-      this.setAddress(obj).then(res => {
-        if (!res) {
-          this.isShow = !this.isShow
-          this.isNew = false
-          this.isEdit = true
-        }
-      })
+      this.popData = obj;
+      this.ifShowPop = true;
     },
     // 修改默认地址
     changeDefaultAddress(id) {
@@ -691,12 +209,6 @@ export default {
             // console.log(err)
           }
         })
-    },
-    newAddress() {
-      this.resetAddress()
-      this.isShow = !this.isShow
-      this.isNew = true
-      this.isEdit = false
     },
     // 新增地址以后清空新建地址模板
     resetAddress() {
@@ -730,278 +242,7 @@ export default {
       this.checkEmail = ``
       this.delId = ``
     },
-    // 新建地址
-    createAddress() {
-      if (this.using.firstname === '') {
-        this.$message.error(this.$t(`${lang}.wip1`))
-        return
-      }
-      if (this.using.firstname.length > 20) {
-        this.$message.error(this.$t(`${lang}.wip2`))
-        return
-      }
-      if (this.using.lastname === '') {
-        this.$message.error(this.$t(`${lang}.wip3`))
-        return
-      }
-      if (this.using.lastname.length > 20) {
-        this.$message.error(this.$t(`${lang}.wip4`))
-        return
-      }
-      if (this.using.email === '') {
-        this.$message.error(this.$t(`${lang}.wip5`))
-        return
-      }
-      if (!Email.test(this.using.email)) {
-        this.$message.error(this.$t(`${lang}.wip6`))
-        return
-      }
-      if (this.using.email !== this.checkEmail) {
-        this.$message.error(this.$t(`${lang}.wip7`))
-        return
-      }
-      if (this.using.mobile === '') {
-        this.$message.error(this.$t(`${lang}.wip8`))
-        return
-      }
-      if(this.phoneNum.phone_code == '+86'){
-        if (!RegMobiles.test(this.using.mobile) // && // !RegTelephone.test(this.using.mobile)
-        ) {
-          this.$message.error(this.$t(`${lang}.wip9`))
-          return
-        }
-      }
-      if (!RegMobile.test(this.using.mobile)) {
-        this.$message.error(this.$t(`${lang}.wip9`))
-        return
-      }
-      if (!this.country.areaId) {
-        this.$message.error(this.$t(`${lang}.wip10`))
-        return false
-      }
-      if (this.using.address_details === '') {
-        this.$message.error(this.$t(`${lang}.wip11`))
-        return
-      }
-
-      var isDefault = 0;
-      if(!this.address.length){
-        isDefault = 1
-      }
-
-      const json = {
-        firstname: this.using.firstname,
-        lastname: this.using.lastname,
-        mobile_code: this.phoneNum.phone_code,
-        mobile: this.using.mobile,
-        email: this.using.email,
-        country_id: this.country.areaId,
-        province_id: this.province.areaId,
-        city_id: this.city.areaId,
-        address_details: this.using.address_details,
-        zip_code: this.using.zip_code,
-        is_default: isDefault
-      }
-      // const data = this.$helpers.transformRequest(
-      //   JSON.parse(JSON.stringify(json)),
-      //   false
-      // )
-      this.$axios
-        .post('web/member/address/add',json)
-        .then(res => {
-          if(res.code==200){
-            // console.log("新增地址成功",res)
-            this.getData()
-            this.resetAddress()
-          }else {
-            throw new Error (res.message)
-          }
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
-    },
-    // 新建地址简体
-    createAddress1() {
-      // console.log("this.u",this.using)
-      if (this.using.firstname === '') {
-        this.$message.error(this.$t(`${lang}.wip1`))
-        return
-      }
-      if (this.using.firstname.length > 20) {
-        this.$message.error(this.$t(`${lang}.wip2`))
-        return
-      }
-      if (this.using.lastname === '') {
-        this.$message.error(this.$t(`${lang}.wip3`))
-        return
-      }
-      if (this.using.lastname.length > 20) {
-        this.$message.error(this.$t(`${lang}.wip4`))
-        return
-      }
-      // if (this.using.email === '') {
-      //   this.$message.error(this.$t(`${lang}.wip5`))
-      //   return
-      // }
-      // if (!Email.test(this.using.email)) {
-      //   this.$message.error(this.$t(`${lang}.wip6`))
-      //   return
-      // }
-      if (this.using.mobile === '') {
-        this.$message.error(this.$t(`${lang}.wip8`))
-        return
-      }
-      if(this.phoneNum.phone_code == '+86'){
-        if (!RegMobiles.test(this.using.mobile)) {
-          this.$message.error(this.$t(`${lang}.wip9`))
-          return
-        }
-      }
-      if (!RegTelephone.test(this.using.mobile)) {
-        this.$message.error(this.$t(`${lang}.wip9`))
-        return
-      }
-      if (!this.country.areaId) {
-        this.$message.error(this.$t(`${lang}.wip10`))
-        return false
-      }
-      if (this.using.address_details === '') {
-        this.$message.error(this.$t(`${lang}.wip11`))
-        return
-      }
-
-      var isDefault = 0;
-      if(!this.address.length){
-        isDefault = 1
-      }
-
-      const json = {
-        firstname: this.using.firstname,
-        lastname: this.using.lastname,
-        mobile_code: this.phoneNum.phone_code,
-        mobile: this.using.mobile,
-        email: this.using.email,
-        country_id: this.country.areaId,
-        province_id: this.province.areaId,
-        city_id: this.city.areaId,
-        address_details: this.using.address_details,
-        zip_code: this.using.zip_code,
-        is_default: isDefault
-      }
-      // const data = this.$helpers.transformRequest(
-      //   JSON.parse(JSON.stringify(json)),
-      //   false
-      // )
-      this.$axios
-        .post('web/member/address/add',json)
-        .then(res => {
-          if(res.code==200){
-            // console.log("新增地址成功",res)
-            this.getData()
-            this.resetAddress()
-          }else {
-            throw new Error (res.message)
-          }
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
-    },
-    // 保存修改
-    changeSave() {
-      if (this.clone.firstname === '') {
-        this.$message.error(this.$t(`${lang}.wip1`))
-        return
-      }
-      if (this.clone.firstname.length > 20) {
-        this.$message.error(this.$t(`${lang}.wip2`))
-        return
-      }
-      if (this.clone.lastname === '') {
-        this.$message.error(this.$t(`${lang}.wip3`))
-        return
-      }
-      if (this.clone.lastname.length > 20) {
-        this.$message.error(this.$t(`${lang}.wip4`))
-        return
-      }
-      // if (this.clone.email === '') {
-      //   this.$message.error(this.$t(`${lang}.wip5`))
-      //   return
-      // }
-      // if (!Email.test(this.clone.email)) {
-      //   this.$message.error(this.$t(`${lang}.wip6`))
-      //   return
-      // }
-      // if (this.clone.email !== this.checkEmail) {
-      //   this.$message.error(this.$t(`${lang}.wip7`))
-      //   return
-      // }
-      if (this.clone.mobile === '') {
-        this.$message.error(this.$t(`${lang}.wip8`))
-        return
-      }
-      if (
-        !RegMobile.test(this.clone.mobile) &&
-        !RegTelephone.test(this.clone.mobile)
-      ) {
-        this.$message.error(this.$t(`${lang}.wip9`))
-        return
-      }
-      if (!this.country.areaId) {
-        this.$message.error(this.$t(`${lang}.wip10`))
-        return false
-      }
-      if (this.clone.address_details === '') {
-        this.$message.error(this.$t(`${lang}.wip11`))
-        return
-      }
-      const json = {
-        id: this.clone.id,
-        firstname: this.clone.firstname,
-        lastname: this.clone.lastname,
-        mobile_code: this.phoneNum.phone_code,
-        mobile: this.clone.mobile,
-        email: this.clone.email,
-        country_id: this.country.areaId,
-        province_id: this.province.areaId,
-        city_id: this.city.areaId,
-        address_details: this.clone.address_details,
-        zip_code: this.clone.zip_code
-      }
-      const data = this.$helpers.transformRequest(
-        JSON.parse(JSON.stringify(json)),
-        false
-      )
-      // console.log("json",json)
-      this.$axios
-        .post('/web/member/address/edit', data)
-        .then(res => {
-          if(res.code==200){
-            // console.log("修改成功",res)
-            this.getData()
-            this.resetAddress()
-          }else {
-            throw new Error (res.message)
-          }
-        })
-        .catch(err => {
-          if (!err.response) {
-            this.$message.error(err.message)
-          } else {
-            // console.log(err)
-          }
-        })
-    },
+    // 删除地址
     deleteAddress() {
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ id: this.delId })),
@@ -1019,7 +260,6 @@ export default {
               this.getData()
             }
 
-            return
             this.resetAddress()
             // console.log("删除",res)
           }else {
@@ -1035,18 +275,32 @@ export default {
           this.isDel = false
         })
     },
-    keydown(){
-      var reg = /^[0-9a-zA-Z\-]{1}$/;
-      var k = this.using.zip_code.slice(-1);
-      if(!reg.test(k)){
-        this.using.zip_code = this.using.zip_code.slice(0,-1)
-      }
+    addSuccess() {
+      this.ifShowPop = false;
+      this.getData()
+      this.resetAddress()
     },
-    mobileIpt(){
-      if(this.pnN == '中国' || this.pnN == '中國' || this.pnN == 'China'){
-        this.mobileMax = 11
+    editSuccess() {
+      this.ifShowPop = false;
+      this.getData()
+      this.resetAddress()
+    },
+    anewDefault(noId) {
+      var index;
+      for(let i=0; i<this.address.length;i++){
+        if(this.address[i].id == noId){
+          index = i;
+        }
+      }
+
+      if(this.address.length != 1){
+        if(index == (this.address.length-1)){
+          this.changeDefaultAddress(this.address[this.address.length-2].id)
+        }else{
+          this.changeDefaultAddress(this.address[this.address.length-1].id)
+        }
       }else{
-        this.mobileMax = 20
+        this.changeDefaultAddress(this.address[0].id)
       }
     }
   }
@@ -1093,13 +347,13 @@ export default {
       justify-content: space-between;
       
       .box-left{
-        width: 68%;
+        width: calc(100% - 160px);
       }
       .box-right{
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        width: 27%;
+        width: 140px;
         text-align: right;
 
         .default-address{
@@ -1107,10 +361,12 @@ export default {
           color: #f29b87;
           margin-top: 6px;
           cursor: pointer;
+          border-bottom: 1px solid #f29b87;
         }
 
         .default-address.active{
           cursor: initial;
+          border-bottom-color: transparent;
         }
 
         .addr-btn {
@@ -1398,5 +654,18 @@ export default {
 
 .en .addr-btn{
   font-size: 13px !important;
+}
+
+.add-btn{
+  height: 30px;
+  line-height: 30px;
+  margin-right: 5%;
+  background-color: #fbf7f5;
+  text-align: center;
+  color: #aa8a7b;
+  border: 1px solid #aa8a7b;
+  border-radius: 4px;
+  padding: 0 10px;
+  cursor: pointer;
 }
 </style>
