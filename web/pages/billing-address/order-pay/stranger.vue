@@ -475,6 +475,7 @@
             <div class="message">
               <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
               <textarea
+                maxlength="500"
                 v-model="remark"
                 :class="[
                   { 'border-change': borderChange === 9 },
@@ -487,6 +488,7 @@
                 "
                 @blur="borderChange = 0"
               />
+              <span class="tex-count" :class="{'color-red':remark.length == 500}">{{texsum}}/500</span>
             </div>
 
             <!-- 发票按钮 -->
@@ -1544,6 +1546,7 @@
             <div class="message">
               <div class="message-title">{{ $t(`${lang}.remark`) }}</div>
               <textarea
+                maxlength="500"
                 v-model="remark"
                 :class="[
                   { 'border-change': borderChange === 9 },
@@ -1556,6 +1559,7 @@
                 "
                 @blur="borderChange = 0"
               />
+              <span class="tex-count" :class="{'color-red':remark.length == 500}">{{texsum}}/500</span>
             </div>
 
             <!-- 发票按钮 -->
@@ -3182,6 +3186,12 @@ export default {
         pay = 1
       }else if(this.payWay==84){
         pay = 84
+      }
+      if (this.remark.length > 500) {
+        this.wrongMsg = this.$t(`${lang}.msg6`)
+        this.wrongInput.remark = true
+        this.alertBox = true
+        return false
       }
 
       if(this.payWay==''){
