@@ -9,20 +9,7 @@
             <i class="icon iconfont iconicon-test2" @click="close()"></i>
           </div>
           <div class="mod">
-            <div class="input-mod">
-              <bdd-input
-                v-model="name"
-                :placeholder="lang.name"
-                @input="check(1)"
-                :maxl="maxlength"
-                @focus="focusFn(1)"
-              ></bdd-input>
-            </div>
-            <div :class="['error-message', { active: nameTrue }]">
-              {{ nameText }}
-            </div>
-
-            <div class="input-mod">
+            <div v-if="language==='zh_CN'" class="input-mod">
               <bdd-input
                 v-model="surname"
                 :placeholder="lang.surname"
@@ -31,9 +18,50 @@
                 @focus="focusFn(2)"
               ></bdd-input>
             </div>
-            <div :class="['error-message', { active: surnameTrue }]">
+            <div v-if="language==='zh_CN'" :class="['error-message', { active: surnameTrue }]">
               {{ surnameText }}
             </div>
+
+            <div v-if="language==='zh_CN'" class="input-mod">
+              <bdd-input
+                v-model="name"
+                :placeholder="lang.name"
+                @input="check(1)"
+                :maxl="maxlength"
+                @focus="focusFn(1)"
+              ></bdd-input>
+            </div>
+            <div v-if="language==='zh_CN'" :class="['error-message', { active: nameTrue }]">
+              {{ nameText }}
+            </div>
+
+            <div v-if="language!=='zh_CN'" class="input-mod">
+              <bdd-input
+                v-model="name"
+                :placeholder="lang.name"
+                @input="check(1)"
+                :maxl="maxlength"
+                @focus="focusFn(1)"
+              ></bdd-input>
+            </div>
+            <div v-if="language!=='zh_CN'" :class="['error-message', { active: nameTrue }]">
+              {{ nameText }}
+            </div>
+
+            <div v-if="language!=='zh_CN'" class="input-mod">
+              <bdd-input
+                v-model="surname"
+                :placeholder="lang.surname"
+                @input="check(2)"
+                :maxl="maxlength"
+                @focus="focusFn(2)"
+              ></bdd-input>
+            </div>
+            <div v-if="language!=='zh_CN'" :class="['error-message', { active: surnameTrue }]">
+              {{ surnameText }}
+            </div>
+
+
             <div v-if="language==='zh_CN'" class="input-mod">
               <bdd-input
                 v-model="mailbox"
@@ -56,8 +84,8 @@
               {{ mailboxText }}
             </div>
 
-            <div class="test-mod" @click="showSwiperTap">
-              {{ area }}
+            <div class="test-mod sds" @click="showSwiperTap">
+              {{ userTelCode }}
               <i class="icon iconfont iconxiala"></i>
             </div>
             <div :class="['error-message', { active: areaTrue }]">
@@ -112,23 +140,42 @@
               {{ province }}
               <i class="icon iconfont iconxiala"></i>
             </div>
+            <div :class="['error-message', { active: provinceTrue }]">
+              {{ provinceText }}
+            </div>
 
             <div class="test-mod" @click="showCity">
               {{ city }}
               <i class="icon iconfont iconxiala"></i>
+            </div>
+            <div :class="['error-message', { active: cityTrue }]">
+              {{ cityText }}
             </div>
 
             <div class="input-mod">
               <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
             </div>
 
-            <div v-if="loginType == 2 " class="btn-common btn-pink btn-address cn" @click="createAddressCN">
-              {{ lang.storage }}
+            <div v-if="isLogin">
+              <div v-if="loginType == 2 " class="btn-common btn-white btn-address cn" @click="createAddressCN">
+                {{ lang.storage }}
+              </div>
+              <div v-else class="btn-common btn-white btn-address" @click="createAddress">
+                {{ lang.storage }}
+              </div>
             </div>
-            <div v-else class="btn-common btn-pink btn-address" @click="createAddress">
-              {{ lang.storage }}
+
+            <div v-else>
+              <div v-if="language === 'zh_CN'" class="btn-common btn-white btn-address cn" @click="createAddressCN">
+                {{ lang.storage }}
+              </div>
+              <div v-else class="btn-common btn-white btn-address" @click="createAddress">
+                {{ lang.storage }}
+              </div>
             </div>
-            <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
+
+
+            <div v-if="id" class="btn-common btn-white btn-address2" @click="deleteAddress(id)">
               {{ lang.deleteAddress }}
             </div>
             <swiper-tap
@@ -312,7 +359,11 @@ export default {
       countryTrue: false,
       countryText: '',
       province: this.LANGUAGE.personal.editAddress.province,
+      provinceTrue: false,
+      provinceText: '',
       city: this.LANGUAGE.personal.editAddress.city,
+      cityTrue: false,
+      cityText: '',
       postal: '',
       countryList: [],
       countryId: '',
@@ -341,16 +392,23 @@ export default {
     this.getArealist()
   },
   mounted() {
+    console.log("this.addVal",this.addVal,this.editVal)
     this.loginType=localStorage.getItem('loginType')
     this.language = this.$store.state.language
 
-    if(this.language === 'zh_CN'){
-      this.userTelCode='+86'
-      this.area=this.lang.areaCN   //"中国 +86"
-      this.countryId = 7
-      this.country = this.lang.china   //'中国'
-    }else {
-      this.userTelCode='+852'
+    if(this.addVal=="add" || this.addVal == "TouristAdd"){
+      if(this.language === 'zh_CN'){
+        if(this.userTelCode == ""){
+          this.userTelCode='+86'
+          this.area=this.lang.areaCN   //"中国 +86"
+        }
+        if(this.countryId==""){
+          this.countryId = 7
+          this.country = this.lang.china   //'中国'
+        }
+      }else {
+        this.userTelCode='+852'
+      }
     }
   },
   methods: {
@@ -424,8 +482,9 @@ export default {
       }
       this.title = this.lang.header1
       const address = storage.get('myAdders', 0)
-      // console.log("地址",this.editVal)
-      if (this.editVal.id) {
+     
+      if (this.isLogin && this.editVal.id) {
+        console.log("已登录",address,this.editVal,this.addVal)
         this.title = this.lang.header2
         this.id = this.editVal.id
         this.name = this.editVal.firstname
@@ -443,22 +502,44 @@ export default {
         if(this.editVal.zip_code != null){
           this.postal = this.editVal.zip_code.toString()
         }
-      } else if (address && this.addVal !== 'add') {
-        this.title = this.lang.header2
-        this.id = address.id
-        this.name = address.firstname
-        this.surname = address.lastname
-        this.userTelCode = address.mobile_code
-        this.phone = address.mobile
-        this.mailbox = address.email
-        this.country = address.country_name
-        this.countryId = address.country_id
-        this.province = address.province_name
-        this.provinceId = address.province_id
-        this.city = address.city_name
-        this.cityId = address.city_id
-        this.details = address.address_details
-        this.postal = address.zip_code.toString()
+      } else if (!this.isLogin &&address) {
+        console.log("未登录",address,this.editVal,this.addVal)
+        if (this.editVal.id) {
+          this.title = this.lang.header2
+          this.id = this.editVal.id
+          this.name = this.editVal.firstname
+          this.surname = this.editVal.lastname
+          this.userTelCode = this.editVal.mobile_code
+          this.phone = this.editVal.mobile
+          this.mailbox = this.editVal.email
+          this.country = this.editVal.country_name
+          this.countryId = this.editVal.country_id
+          this.province = this.editVal.province_name
+          this.provinceId = this.editVal.province_id
+          this.city = this.editVal.city_name
+          this.cityId = this.editVal.city_id
+          this.details = this.editVal.address_details
+          if(this.editVal.zip_code != null){
+            this.postal = this.editVal.zip_code.toString()
+          }
+        } else {
+          console.log("地址",this.editVal,this.addVal)
+          this.title = this.lang.header2
+          this.id = address.id
+          this.name = address.firstname
+          this.surname = address.lastname
+          this.userTelCode = address.mobile_code
+          this.phone = address.mobile
+          this.mailbox = address.email
+          this.country = address.country_name
+          this.countryId = address.country_id
+          this.province = address.province_name
+          this.provinceId = address.province_id
+          this.city = address.city_name
+          this.cityId = address.city_id
+          this.details = address.address_details
+          this.postal = address.zip_code.toString()
+        }
       }
     },
     // 获取国家列表
@@ -599,6 +680,7 @@ export default {
       this.provinceId = this.provinceList[val.index].id
       this.province = this.provinceList[val.index].content
       this.getListThree()
+      this.check(8)
     },
     showCity() {
       this.cityId = ''
@@ -621,30 +703,46 @@ export default {
     // 刪除地址
     deleteAddress(id) {
       const _this = this
-      _this
-        .$axios({
-          method: 'post',
-          url: `/web/member/address/del`,
-          data: {
-            id: id
-          }
-        })
-        .then(res => {
-          this.$toast.show(this.lang.toast1)
-          setTimeout(() => {
-            this.$emit('closeADP',true);
-          }, 2000)
-        })
-        .catch(err => {
-          this.$toast.show(err.message)
-        })
+      if(this.isLogin){
+        _this
+          .$axios({
+            method: 'post',
+            url: `/web/member/address/del`,
+            data: {
+              id: id
+            }
+          })
+          .then(res => {
+            this.$toast.show(this.lang.toast1)
+            setTimeout(() => {
+              this.$emit('closeADP',true);
+            }, 2000)
+          })
+          .catch(err => {
+            this.$toast.show(err.message)
+          })
+      } else {
+        // console.log("this.address",this.address)
+        storage && storage.remove('myAdders')
+        this.$emit('delete',true);
+        setTimeout(() => {
+          this.$emit('closeADP',true);
+        }, 2000)
+        this.$toast.show(this.lang.toast1)
+        // this.address = []
+      }
     },
     citySure(val) {
       this.cityId = this.cityList[val.index].id
       this.city = this.cityList[val.index].content
+      this.check(9)
     },
     check(val) {
-      this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = false
+      if(!this.isLogin){
+        this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = this.provinceTrue = this.cityTrue = false
+      } else {
+        this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = false
+      }
 
       if ((val === 1 || val === 0) && this.name === '') {
         this.nameText = this.lang.nameText1
@@ -731,6 +829,24 @@ export default {
       if ((val === 6 || val === 0) && this.countryId === '') {
         this.countryText = this.lang.countryText
         this.countryTrue = true
+        return
+      }
+
+      if(!this.isLogin){
+        if(this.provinceList.length >2){
+          if ((val === 8 || val === 0) && this.provinceId === '') {
+            this.provinceText = this.lang.provinceText
+            this.provinceTrue = true
+            return
+          }
+        }
+        if(this.cityList.length >2){
+          if ((val === 9 || val === 0) && this.cityId === '') {
+            this.cityText = this.lang.cityText
+            this.cityTrue = true
+            return
+          }
+        }
       }
 
     },
@@ -744,6 +860,8 @@ export default {
         this.phoneTrue === false &&
         this.detailsTrue === false &&
         this.countryTrue === false &&
+        this.provinceTrue === false &&
+        this.cityTrue === false &&
         this.isOver === true
       ) {
         this.isOver = false
@@ -805,22 +923,75 @@ export default {
               // console.log(err)
             })
 
-        }else{
+        }else if(!this.isLogin&&this.addVal!=="TouristAdd"){
+          console.log(11111)
+          const TouristJson = {
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
+          }
+          const TouristData = JSON.parse(JSON.stringify(TouristJson))
+          storage && storage.set('myAdders', TouristData)
+          this.$toast.show(this.lang.toast3)
+          console.log("myAdders简体",TouristData)
+          setTimeout(() => {
+            this.$emit('closeADP',true);
+            // this.$router.go(-1)
+            this.isOver = false
+          }, 1500)
+        }else if(this.addVal === 'TouristAdd'){
+          const TouristJson = {
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
+          }
+          const TouristData = JSON.parse(JSON.stringify(TouristJson))
+          storage && storage.set('myAdders', TouristData)
+          console.log("myAdders简体",TouristData)
+          this.$toast.show(this.lang.toast2)
+          setTimeout(() => {
+            this.$emit('closeADP',true);
+            // this.$router.go(-1)
+            this.isOver = false
+          }, 1500)
+        } else{
           const json2 = {
-            id: this.editVal.id ? this.editVal.id : null,
-            name: this.name,
-            surname: this.surname,
-            userTelCode: this.userTelCode,
-            phone: this.phone,
-            mailbox: this.mailbox,
-            country: this.country,
-            countryId: this.countryId,
-            province: this.province,
-            provinceId: this.provinceId,
-            city: this.city,
-            cityId: this.cityId,
-            details: this.details,
-            postal: this.postal
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
           }
           const data2 = JSON.parse(JSON.stringify(json2))
           storage && storage.set('myAdders', data2)
@@ -842,6 +1013,8 @@ export default {
         this.phoneTrue === false &&
         this.detailsTrue === false &&
         this.countryTrue === false &&
+        this.provinceTrue === false &&
+        this.cityTrue === false &&
         this.isOver === true
       ) {
         this.isOver = false
@@ -860,6 +1033,7 @@ export default {
         }
         const data = JSON.parse(JSON.stringify(json))
         if (this.isLogin&&this.addVal!=="add") {
+          console.log(11111)
           const _this = this
           _this
             .$axios({
@@ -881,6 +1055,7 @@ export default {
               console.log(err)
             })
         } else if(this.addVal=="add"){
+           console.log(22222)
           const _this = this
           _this
             .$axios({
@@ -901,7 +1076,59 @@ export default {
               console.log(err)
             })
 
-        }else{
+        }else if(!this.isLogin&&this.addVal!=="TouristAdd"){
+          const TouristJson = {
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
+          }
+          const TouristData = JSON.parse(JSON.stringify(TouristJson))
+          storage && storage.set('myAdders', TouristData)
+          this.$toast.show(this.lang.toast3)
+          console.log("myAdders简体",TouristData)
+          setTimeout(() => {
+            this.$emit('closeADP',true);
+            // this.$router.go(-1)
+            this.isOver = false
+          }, 1500)
+        }else if(this.addVal === 'TouristAdd'){
+          const TouristJson = {
+            id: 1,
+            firstname: this.name,
+            lastname: this.surname,
+            mobile_code: this.userTelCode,
+            mobile: this.phone,
+            email: this.mailbox,
+            country_name: this.country,
+            country_id: this.countryId,
+            province_name: this.province,
+            province_id: this.provinceId,
+            city_name: this.city,
+            city_id: this.cityId,
+            address_details: this.details,
+            zip_code: this.postal
+          }
+          const TouristData = JSON.parse(JSON.stringify(TouristJson))
+          storage && storage.set('myAdders', TouristData)
+          this.$toast.show(this.lang.toast2)
+          console.log("myAdders繁体",TouristData)
+          setTimeout(() => {
+            this.$emit('closeADP',true);
+            // this.$router.go(-1)
+            this.isOver = true
+          }, 1500)
+        } else{
           const json2 = {
             id: this.editVal.id ? this.editVal.id : null,
             name: this.name,
@@ -956,7 +1183,7 @@ export default {
 <style scoped lang="less">
 .edit-address {
   padding: 0 20px;
-  min-height: 100%;
+  min-height: 101%;
   background: #f5f5f5;
   position: fixed;
   top: 0;
@@ -1064,7 +1291,7 @@ export default {
       width: 100%;
       margin: 20px 0 50px;
       border: 1px solid rgba(221, 221, 221, 1); /*no*/
-      color: #999999;
+      // color: #999999;
     }
   }
 }

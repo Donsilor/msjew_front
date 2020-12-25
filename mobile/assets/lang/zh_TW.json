@@ -223,7 +223,8 @@
       "couponAmount": "優惠券",
       "msg12": "請先登錄才能使用優惠券",
       "useCoupons": "使用優惠券",
-      "point":"*註：訂單金額已做抹零處理"
+      "point":"*註：訂單金額已做抹零處理",
+      "addrTip":"請填寫收貨人信息"
     },
     "pay": {
       "pay": "訂單支付",
@@ -300,6 +301,7 @@
       "lookBill": "查看訂單",
       "orderDetails": "訂單詳情",
       "continue": "繼續購物",
+      "payAgain": "重新支付",
       "text1": "电汇",
       "text2": "paypal",
       "text3": "微信",
@@ -360,10 +362,9 @@
     },
     "account": {
       "header": "我的賬戶",
-      "title": "登入電郵地址",
+      "title": "當前賬號",
       "sex": "性別",
       "sexList": [
-        "保密",
         "男",
         "女"
       ],
@@ -374,11 +375,10 @@
       "marriage": "婚姻狀況",
       "marriageList": [
         "已婚",
-        "未婚",
-        "再婚"
+        "未婚"
       ],
       "birthday": "設置生日日期",
-      "tips": "Tips：生日設定一次不可修改，生日當月雙倍積分哦！",
+      "tips": "Tips：生日設定一次不可修改！",
       "saveInfo": "儲 存",
       "toast1": "請正確填寫姓氏，姓氏最長20個字符！",
       "toast2": "請正確填寫名字，名字最長20個字符！",
@@ -505,7 +505,10 @@
       "pleaseChoose": "請選擇",
       "toast1": "刪除成功",
       "toast2": "添加成功",
+      "toast3": "修改成功",
       "countryText": "請選擇國家／地區訊息",
+      "provinceText": "請選擇省份/州",
+      "cityText": "請選擇城市",
       "tips": "提示",
       "text": "地址還未保存，是否確認離開？",
       "cancel": "取消",

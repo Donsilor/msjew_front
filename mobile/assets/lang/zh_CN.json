@@ -223,7 +223,8 @@
         "couponAmount": "优惠券",
         "msg12": "请先登录才能使用优惠券",
         "useCoupons": "使用优惠券",
-        "point":"*注：订单金额已做抹零处理"
+        "point":"*注：订单金额已做抹零处理",
+        "addrTip":"请填写收货人信息"
       },
       "pay": {
         "pay": "订单支付",
@@ -300,6 +301,7 @@
         "lookBill": "查看订单",
         "orderDetails": "订单详情",
         "continue": "继续购物",
+        "payAgain": "重新支付",
         "text1": "电汇",
         "text2": "paypal",
         "text3": "微信",
@@ -360,10 +362,9 @@
       },
       "account": {
         "header": "我的账户",
-        "title": "登入电邮地址",
+        "title": "当前账号",
         "sex": "性別",
         "sexList": [
-          "保密",
           "男",
           "女"
         ],
@@ -374,11 +375,10 @@
         "marriage": "婚姻状况",
         "marriageList": [
           "已婚",
-          "未婚",
-          "再婚"
+          "未婚"
         ],
         "birthday": "设置生日日期",
-        "tips": "Tips：生日设定一次不可修改，生日当月双倍积分哦！",
+        "tips": "Tips：生日设定一次不可修改！",
         "saveInfo": "储 存",
         "toast1": "请正确填写姓氏，姓氏最长20个字符！",
         "toast2": "请正确填写名字，名字最长20个字符！",
@@ -505,7 +505,10 @@
         "pleaseChoose": "请选择",
         "toast1": "删除成功",
         "toast2": "添加成功",
+        "toast3": "修改成功",
         "countryText": "请选择国家／地区讯息",
+        "provinceText": "请选择省份/州",
+        "cityText": "请选择城市",
         "tips": "提示",
         "text": "地址还未保存，是否确认离开？",
         "cancel": "取消",

@@ -9,6 +9,14 @@
       <div class="btn-common btn-gray" @click="goIndex">
         {{ lang.continue }}
       </div>
+      <div v-if="showBtn && this.$route.query.payType == 1">
+        <div v-if="hadLogin" class="btn-common btn-gray" @click="returnBack">
+          {{ lang.payAgain }}
+        </div>
+        <div v-else class="btn-common btn-gray" @click="TouristReturnBack">
+          {{ lang.payAgain }}
+        </div>
+      </div>
     </div>
     <div v-show="stepPaySuccess">
       <!-- 已登录 -->
@@ -206,7 +214,14 @@ export default {
         currency: '',
         content_ids: [],
         content_type: 'product'
-      }
+      },
+      memberInfos:{
+        orderId:'',
+        coinType:'',
+        price:''
+      },
+      showBtn:false,
+      verification:true
     }
   },
   computed: {
@@ -218,16 +233,31 @@ export default {
       this.$nextTick(() => {
         localStorage.setItem("back_url",window.location.href)
         const back_url = localStorage.getItem("back_url")
+        setTimeout(()=>  {
+          this.showBtn = true
+        }, 3000);
       })
       if (this.$route.query.success === "false") {
+
         this.goPayFailed()
         //失败后，继续调用验证api，写入支付日志
+        let baseUrl=this.$store.getters.baseUrl
+        let return_url = ''
+        if(this.$route.query.payType == 1){
+          if(this.$route.query.order_sn){
+            return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
+          } else {
+            return_url = baseUrl+'/verify?orderId='+this.$route.query.orderId
+          }
+        } else {
+          return_url = back_url
+        }
         this.$axios({
             url: '/web/pay/verify',
             method: 'post',
             timeout:3000,
             data: {
-                return_url: back_url
+              return_url: return_url
             }
         })
         .then(data => {})
@@ -272,12 +302,12 @@ export default {
       // facebook 购买成功统计-end
     },
     goPayFailed(){
-        this.$router.push({
-            name: 'cart-payFailed-orderId-price-coinType',
-            query: {
-                orderId: this.$route.query.orderId || this.$route.query.order_sn,
-            }
-        })
+      this.$router.push({
+          name: 'cart-payFailed-orderId-price-coinType',
+          query: {
+              orderId: this.$route.query.orderId || this.$route.query.order_sn,
+          }
+      })
     },
     goIndex() {
       this.$router.replace({
@@ -299,6 +329,10 @@ export default {
 
         this.goodsInfo.value = res.payAmount;
         this.goodsInfo.currency = res.coinCode;
+
+        this.memberInfos.orderId=res.id
+        this.memberInfos.coinType=res.coinCode
+        this.memberInfos.payAmount=res.payAmount
 
         var details = res.details;
 
@@ -346,26 +380,51 @@ export default {
     payVerify(){
       const backUrl = localStorage.getItem("back_url")
       // console.log("backUrl",backUrl)
+      let baseUrl=this.$store.getters.baseUrl
+      let return_url = ''
+      if(this.$route.query.payType == 1){
+        if(this.$route.query.order_sn){
+          return_url = baseUrl+'/verify?order_sn='+this.$route.query.order_sn
+        } else {
+          return_url = baseUrl+'/verify?orderId='+this.$route.query.orderId
+        }
+      } else {
+        return_url = backUrl
+      }
       this.verifyCount ++
       this.$axios({
             url: '/web/pay/verify',
             method: 'post',
             timeout:8000,
             data: {
-                return_url: backUrl
+              return_url: return_url
             }
         })
         .then(data => {
-          if(data.verification_status === 'completed') {
-            this.goPaySuccess()
-          } else if(data.verification_status === 'failed') {
-            this.goPayFailed()
-          } else {
-            if(this.verifyCount < 2) {
-              setTimeout(this.payVerify, 15000)
+          // console.loh("dddd",this.$route.query.payType,this.verification)
+          if(this.verification == false){
+            this.verification = true
+            return
+          }
+          if(this.$route.query.payType == 1){
+            if(data.verification_status === 'completed') {
+              this.goPaySuccess()
+            }else{
+              setTimeout(this.payVerify, 3000)
             }
-            else {
-              this.showPayPending()
+          } else {
+            if(data.verification_status === 'completed') {
+              // localStorage.removeItem('myAdders')
+              this.goPaySuccess()
+            } else if(data.verification_status === 'failed') {
+              this.goPayFailed()
+            } else {
+              if(this.verifyCount < 2) {
+                setTimeout(this.payVerify, 15000)
+              }
+              else {
+                this.showPayPending()
+              }
             }
           }
       })
@@ -409,12 +468,22 @@ export default {
       }
     },
     returnBack() {
-      this.$router.replace({
-        name: 'pay',
-        params: {
-          orderId: this.$route.params.orderId,
-          price: this.$route.params.price,
-          coinType: this.$route.params.coinType
+      this.verification = false
+      const res = this.memberInfos
+      this.$router.push({
+        name: 'cart-pay',
+        query: {
+          info: JSON.stringify(res)
+        }
+      })
+    },
+    TouristReturnBack(){
+      this.verification = false
+      const res = this.orderinfo
+      this.$router.push({
+        name: 'cart-sureOrder',
+        query: {
+          info: JSON.stringify(res)
         }
       })
     },

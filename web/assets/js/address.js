@@ -12,10 +12,11 @@ export default {
       city: { areaId: '', areaName: '- - -' },
       cityList: [{ areaId: '', areaName: '- - -' }],
       phoneJson: PhoneJson,
-      phoneNum: { cn: '', en: '', zh: '', phone_code: '' }
+      phoneNum: { cn: '', en: '', zh: '', phone_code: '' },
+      isLogin:this.$store.getters.hadLogin
     }
   },
-  beforeMount() {
+  mounted() {
     if(this.$store.state.language === 'zh_CN'){
       this.country={areaId:'7',areaName: '中国'}
       this.countryList=[{ areaId:'7',areaName: '中国'}]
@@ -66,7 +67,7 @@ export default {
           params: { pid: this.country.areaId }
         })
         .then(res => {
-          // console.log('省份=====>', res)
+          console.log('省份=====>', res)
           if (!res.data.length==0) {
             this.provinceList = res.data
             this.provinceList.unshift({
@@ -171,14 +172,21 @@ export default {
           params: { pid: obj.province_id }
         })
         .then(res => {
-          // console.log(res)
           if (res) {
             // console.log('拿到了城市',res);
             this.cityList = res.data
-            this.cityList.unshift({
-              areaId: '',
-              areaName: '- - -'
-            })
+            if(this.isLogin){
+              this.cityList.unshift({
+                areaId: '',
+                areaName: '- - -'
+              })
+            } else {
+              this.cityList.unshift({
+                areaId: '0',
+                areaName: '- - -'
+              })
+            }
+            
             this.city = obj.city_id
               ? { areaId: obj.city_id, areaName: obj.city_name }
               : this.cityList[0]

@@ -223,7 +223,8 @@
       "couponAmount": "Coupon",
       "msg12": "Please login before redeem the coupon. ",
       "useCoupons": "Use Coupons",
-      "point":"*Note：The Order Amount has been rounded "
+      "point":"*Note：The Order Amount has been rounded ",
+      "addrTip":"Please fill in the consignee information"
     },
     "pay": {
       "pay": "Order payment",
@@ -300,6 +301,7 @@
       "lookBill": "VIEW ORDER",
       "orderDetails": "Order Details",
       "continue": "CONTINUE",
+      "payAgain": "PAY AGAIN",
       "text1": "Wire Transfer",
       "text2": "Paypal",
       "text3": "WeChat Pay",
@@ -360,10 +362,9 @@
     },
     "account": {
       "header": "Account information",
-      "title": "Login email",
+      "title": "Current account",
       "sex": "Gender",
       "sexList": [
-        "General model",
         "Men",
         "Women"
       ],
@@ -374,11 +375,10 @@
       "marriage": "Marital status",
       "marriageList": [
         "Married",
-        "Unmarried",
-        "Remarriage"
+        "Unmarried"
       ],
       "birthday": "Choose date of birth",
-      "tips": "Tips: Date of birth can be chosen only once. Receive double points in month of birth.",
+      "tips": "Tips: Date of birth can be chosen only once.",
       "saveInfo": "SAVE",
       "toast1": "Enter correct last name，Up to 20 characters for last name",
       "toast2": "Enter correct first name，Up to 20 characters for first name",
@@ -417,7 +417,7 @@
       "setDefault": "Set As Default",
       "remove": "Delete",
       "add": "NEW ADDRESS",
-      "toast": "Deleted",
+      "toast": "Successfully deleted",
       "setSuccess": "The default address setting was successful!"
     },
     "coupon": {
@@ -503,9 +503,12 @@
       "province2": "Select province/state",
       "city2": "Region",
       "pleaseChoose": "Select",
-      "toast1": "Deleted",
+      "toast1": "Successfully deleted",
       "toast2": "Added",
+      "toast3": "Successfully modified",
       "countryText": "Select country/regional information",
+      "provinceText": "Select Province/State",
+      "cityText": "Select Region",
       "tips": "Prompts",
       "text": "Address is not saved, leave now?",
       "cancel": "CANCEL",

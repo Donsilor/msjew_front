@@ -5,12 +5,6 @@
       <h5>{{ lang.title }}</h5>
       <p class="email">{{ date.username }}</p>
       <div class="mod">
-        <Single
-          :name="lang.sex"
-          :list="lang.sexList"
-          :val="date.gender"
-          @close="choice1"
-        />
         <div v-if="this.language==='zh_CN'">
           <div class="input-mod">
             <bdd-input
@@ -63,6 +57,12 @@
 
 
         </div>
+        <Single
+          :name="lang.sex"
+          :list="lang.sexList"
+          :val="date.gender"
+          @close="choice1"
+        />
 
         <Single
           :name="lang.marriage"
@@ -77,7 +77,7 @@
           </div>
         </div>
         <p class="tips">{{ lang.tips }}</p>
-        <div class="btn-common btn-pink btn" @click="saveInfo">
+        <div class="btn-common btn-white btn" @click="saveInfo">
           {{ lang.saveInfo }}
         </div>
       </div>
@@ -116,7 +116,7 @@ export default {
   created() {
     this.getinfo()
   },
-  mounted() {
+  mounted() { 
     this.language = this.$store.state.language
   },
   methods: {
@@ -142,7 +142,7 @@ export default {
           url: `/web/member/member/me`
         })
         .then(res => {
-          // console.log("info",res)
+          console.log("info",res)
           this.date = res
           if (this.date.birthday) {
             this.birthday =
@@ -161,22 +161,23 @@ export default {
       this.date.gender = val
     },
     choice2(val) {
-      console.log(val)
-      this.date.marStatus = val
+      console.log(val,"marStatus")
+      this.date.marriage = val
     },
     textSurname() {
       // console.log(this.date.lastname.length, 'dsgdf')
-      if (this.date.lastname === '' || this.date.lastname.length > 30) {
-        this.$toast.show(this.lang.toast1)
-      }
+      // if (this.date.lastname === '' || this.date.lastname.length > 30) {
+      //   this.$toast.show(this.lang.toast1)
+      // }
     },
     textName() {
-      // console.log(this.date.lastname, 'dsgdf')
-      if (this.date.firstname === '' || this.date.firstname.length > 30) {
-        this.$toast.show(this.lang.toast2)
-      }
+      console.log(this.date, 'dsgdf')
+      // if (this.date.firstname === '' || this.date.firstname.length > 30) {
+      //   this.$toast.show(this.lang.toast2)
+      // }
     },
     saveInfo() {
+      console.log(this.date, 'dsgdf')
       if (this.date.lastname === '' || this.date.lastname.length > 20) {
         this.$toast.show(this.lang.toast1)
         return
@@ -185,9 +186,10 @@ export default {
         this.$toast.show(this.lang.toast2)
         return
       }
-      if (this.birthday) {
-        this.date.birthday = moment(this.birthday).format('x')
-      }
+      // if (this.birthday) {
+      //   this.date.birthday = moment(this.birthday).format('x')
+      //   console.log(this.birthday)
+      // }
       this.$axios({
         method: 'post',
         url: '/web/member/member/edit',

@@ -585,7 +585,8 @@ export default {
         // alert('11111',res)
         if(tradeType == 'mweb'){
           // alert('22222',res)
-          window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId))
+          console.log(444444,res)
+          window.location.replace(res+'&redirect_url='+encodeURIComponent(baseUrl+'/complete/paySuccess?orderId='+orderId+'&payType='+pay))
         }
         if(tradeType == 'js'){
           function onBridgeReady(){
@@ -617,7 +618,7 @@ export default {
                       //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
                   }
                 }
-            }(baseUrl+'/complete/paySuccess?orderId='+orderId)); 
+            }(baseUrl+'/complete/paySuccess?orderId='+orderId+'&payType='+pay)); 
           }
           if (typeof WeixinJSBridge == "undefined"){
             if( document.addEventListener ){

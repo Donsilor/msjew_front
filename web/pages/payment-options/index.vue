@@ -643,7 +643,7 @@ export default {
         coinType: this.$route.query.coinType,
         payType: pay,
         tradeType:"pc",
-        returnUrl: returnUrl
+        returnUrl: returnUrl,
       }
       this.goingPay = true
       this.$axios
