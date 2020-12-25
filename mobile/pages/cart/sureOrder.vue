@@ -864,11 +864,15 @@ export default {
       let addr = storage.get('myAdders', '')
       this.ifShowAddress = false
       this.getData() 
-      if(addr == ''){
-        this.hasAddress = false
-        this.address=''
-      } else {
+      if(this.isLogin){
         this.queryId = id
+      }else {
+        if(addr == ''){
+          this.hasAddress = false
+          this.address=''
+        } else {
+          this.queryId = id
+        }
       }
       // console.log("this.addr",addr) 
     },
