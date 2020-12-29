@@ -105,23 +105,25 @@
             <div>{{ $t(`${lang}.address`) }}</div>
           </div>
           <div class="addr-list">
-            <div class="address">
-              {{ data.address.countryName }}-{{ data.address.provinceName
-              }}{{ data.address.cityName }}
-            </div>
             <div class="user-info">
-              <div>
-                {{ data.address.realName }}<span>{{ $t(`${lang}.get`) }}</span>
-              </div>
+              <div>{{ data.address.realName }}<span>{{ $t(`${lang}.get`) }}</span></div>
               <div>
                 <span>{{ data.address.userTelCode }}</span>
                 <span>{{ data.address.userTel }}</span>
               </div>
             </div>
+            <div class="other-info">
+              <span>{{ data.address.userMail }}</span>
+            </div>
+            <div class="address">
+              {{ data.address.countryName }}-{{ data.address.provinceName
+              }}{{ data.address.cityName }}
+            </div>
+            
             <div class="full-address">{{ data.address.address }}</div>
             <div class="other-info">
-              <span v-if="data.address.zipCode">{{ data.address.zipCode }}</span
-              ><span>{{ data.address.userMail }}</span>
+              <span v-if="data.address.zipCode">{{ data.address.zipCode }}</span>
+              <!-- <span>{{ data.address.userMail }}</span> -->
             </div>
           </div>
         </div>
@@ -865,12 +867,13 @@ export default {
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            margin: 10px 0 5px 0;
           }
           .user-info {
             width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            // display: flex;
+            // align-items: center;
+            // justify-content: space-between;
             margin: 9px 0 5px;
             div:nth-child(1) {
               width: 468 * 0.6px;
@@ -893,13 +896,14 @@ export default {
               width: 468 * 0.4px;
               height: 14px;
               display: flex;
-              align-items: flex-end;
+              // align-items: flex-end;
               color: #333;
               overflow: hidden;
               text-overflow: ellipsis;
               white-space: nowrap;
               text-align: right;
-              justify-content: flex-end;
+              // justify-content: flex-end;
+              margin: 10px 0;
               span:nth-child(1) {
                 display: block;
                 font-size: 14px;
@@ -932,6 +936,7 @@ export default {
             color: #333;
             font-size: 12px;
             line-height: 12px;
+            margin: 10px 0;
             span:nth-child(1) {
               margin-right: 63px;
             }
