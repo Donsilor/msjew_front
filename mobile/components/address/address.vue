@@ -50,7 +50,7 @@
         <bdd-empty v-if="address.length == 0" :type="'address'"></bdd-empty>
       </div>
       <div v-if="isLogin" class="btn-fixed">
-        <div class="btn-common btn-white" @click="editAddress(null)">
+        <div class="btn-common btn-pink" @click="editAddress(null)">
           <i class="icon iconfont iconicon-test"></i>
           {{ lang.add }}
         </div>
@@ -377,5 +377,10 @@ export default {
       }
     }
   }
+}
+
+.btn-pink {
+  background-color: #f29b87;
+  color: #fff;
 }
 </style>

@@ -72,24 +72,18 @@
           :class="{ 'addr-active': addressIdx == index }"
           class="addr-block"
         >
-          <div class="addr-title">
-            <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
-            <!--              <div>CHN</div>-->
-          </div>
-          <div class="addr-user">
-            <div>{{ a.lastname }}{{ a.firstname }}</div>
-            <div>（{{ $t(`${lang}.get`) }}）</div>
-          </div>
-          <div class="addr-address">
-           {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
-          }}{{ a.address_details }}
-          </div>
+          <div class="addr-user">{{ a.lastname }}{{ a.firstname }}</div>
           <div class="addr-user-phone">
             <div>{{ a.mobile_code }}</div>
             <div>{{ a.mobile }}</div>
           </div>
-          <div class="font-size-14 color-333">{{ a.zip_code }}</div>
-          <div class="font-size-14 color-333">{{ a.email }}</div>
+          <div class="addr-user-email">{{ a.email }}</div>
+          <div class="addr-address">
+            <div>{{ a.country_name }} {{ a.province_name }} {{ a.city_name }}</div>
+            <div>{{ a.address_details }}</div>
+          </div>
+          
+          <div>{{ a.zip_code }}</div>
           <div class="addr-board" @click="changeAddress(index)" />
           <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
           <i
@@ -183,7 +177,7 @@
             <div
               :class="[
                 { 'border-change': borderChange === 2 },
-                { 'border-wrong': wrongInput.firstName }
+                { 'border-wrong': wrongInput.firstname }
               ]"
               class="input-box"
             >
@@ -210,7 +204,7 @@
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
+                <input :value="phoneNum.phone_code" type="text" autocomplete="off" />
                 <select v-model="phoneNum">
                   <option
                     v-for="(p, index) in phoneJson"
@@ -437,10 +431,7 @@
     <div
       v-show="!newAddress"
       class="is-new-address"
-      @click="
-        newAddress = true
-        isEdit = false
-      "
+      @click="addAddress()"
     >
       + {{ $t(`${lang}.addAddress`) }}
     </div>
@@ -1022,7 +1013,7 @@
       <i class="iconfont iconrentou" />
       <div>
         {{ $t(`${lang}.darling`) }}{{ $store.state.userInfo.name
-        }}
+        }}{{ $store.state.userInfo.firstname }}
       </div>
       <div
         v-show="!addressMore && address.length !== 0"
@@ -1055,24 +1046,18 @@
           :class="{ 'addr-active': addressIdx == index }"
           class="addr-block"
         >
-          <div class="addr-title">
-            <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
-            <!--              <div>CHN</div>-->
-          </div>
-          <div class="addr-user">
-            <div>{{ a.firstname }} {{ a.lastname }}</div>
-            <div>（{{ $t(`${lang}.get`) }}）</div>
-          </div>
-          <div class="addr-address">
-           {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
-          }}{{ a.address_details }}
-          </div>
+          <div class="addr-user">{{ a.firstname }} {{ a.lastname }}</div>
           <div class="addr-user-phone">
             <div>{{ a.mobile_code }}</div>
             <div>{{ a.mobile }}</div>
           </div>
-          <div class="font-size-14 color-333">{{ a.zip_code }}</div>
-          <div class="font-size-14 color-333">{{ a.email }}</div>
+          <div class="addr-user-email">{{ a.email }}</div>
+          <div class="addr-address">
+            <div>{{ a.address_details }}</div>
+            <div>{{ a.city_name }} {{ a.province_name }} {{ a.country_name }}</div>
+          </div>
+          
+          <div>{{ a.zip_code }}</div>
 
           <div class="addr-board" @click="changeAddress(index)" />
 		      <span class="ifChoose" :class="{'on': addressIdx == index}"></span>
@@ -1189,12 +1174,13 @@
             </div>
           </div>
 
+
           <!--          电话-->
           <div class="input-line">
             <div class="label"><span class="star">*</span>{{ $t(`${lang}.telephone`) }}</div>
             <div class="tel-special">
               <div class="tel-area">
-                <input :value="pnN + ' ' + phoneNum.phone_code" type="text" autocomplete="off" />
+                <input :value="phoneNum.phone_code" type="text" autocomplete="off" />
                 <select v-model="phoneNum">
                   <option
                     v-for="(p, index) in phoneJson"
@@ -1423,10 +1409,7 @@
     <div
       v-show="!newAddress"
       class="is-new-address"
-      @click="
-        newAddress = true
-        isEdit = false
-      "
+      @click="addAddress()"
     >
       + {{ $t(`${lang}.addAddress`) }}
     </div>
@@ -2184,10 +2167,22 @@ export default {
     this.language = this.$store.state.language
   },
   methods: {
+    addAddress() {
+      this.defaultAddress()
+      this.getListTwo()
+      this.getListOne()
+      this.newAddress = true
+      this.isEdit = false
+    },
     // 点击提示修改地址确认按钮触发
     alertTipBox(){
       this.alertBox = false;
-      this.newAddress = true;
+      if(this.address.length){
+        this.newAddress = false
+      }else{
+        this.newAddress = true
+      }
+
       // 点击修改滚顶到地址选择模块
       document.getElementById('step').scrollIntoView({
         block: 'center',
@@ -3520,71 +3515,38 @@ div {
         border: 1px solid rgba(230, 230, 230, 1);
         background-color: #ffffff;
         box-sizing: border-box;
-        .addr-title {
-          max-width: 82%;
-          display: flex;
-          align-items: flex-end;
-          margin-bottom: 10px;
-          div {
-            font-size: 20px;
-            color: #333;
-          }
-          div:nth-child(2) {
-            font-size: 14px;
-            margin-left: 7px;
-          }
-        }
+        font-size: 16px;
+        color: #333;
         .addr-user {
-          max-width: 82%;
-          display: flex;
-          font-size: 22px;
-          align-items: center;
-          color: #333;
-          div:nth-child(1) {
-            min-height: 22px;
-            max-height: 22 * 2px;
-            line-height: 22px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            word-break: break-all;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          }
-          div:nth-child(2) {
-            font-size: 16px;
-            margin-left: 10px;
-          }
-        }
-        .addr-address {
-          max-width: 82%;
-          color: #333;
-          font-size: 14px;
-          /*width: 220px;*/
-          min-height: 16px;
-          max-height: 16 * 2px;
-          line-height: 16px;
+          max-width: 70%;
+          font-size: 26px;
+          height: 40px;
+          line-height: 40px;
           overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
           word-break: break-all;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          margin-bottom: 10px;
+          margin-bottom: 14px;
         }
         .addr-user-phone {
-          max-width: 82%;
+          max-width: 70%;
           display: flex;
           align-items: flex-end;
           font-family: twCenMt;
-          font-size: 18px;
-          color: #333;
-          margin-bottom: 5px;
+          margin-bottom: 2px;
           div:nth-child(1) {
-            font-size: 14px;
             margin-right: 5px;
           }
         }
+        .addr-user-email{
+          max-width: 70%;
+          margin-bottom: 14px;
+        }
+        .addr-address {
+          max-width: 70%;
+          line-height: 20px;
+          word-break: break-all;
+          margin-bottom: 10px;
+        }
+        
         .addr-board {
           display: block;
           width: 100%;
@@ -3609,16 +3571,16 @@ div {
           position: absolute;
           /*width: 50px;*/
           padding: 0 10px;
-          height: 22px;
-          line-height: 20px;
+          height: 28px;
+          line-height: 26px;
           border: 1px solid #aa8a7b;
           border-radius: 4px;
           background: rgba(251, 247, 245, 1);
           color: #aa8a7b;
           text-align: center;
           cursor: pointer;
-          top: 30px;
-          right: 28px;
+          bottom: 36px;
+          right: 80px;
           z-index: 40;
         }
         .mrAdd{
@@ -3626,9 +3588,11 @@ div {
           text-align: center;
           cursor: pointer;
           background: #fff;
-          top: 0px;
+          top: 16px;
           right: 28px;
           z-index: 40;
+          width: 28%;
+          text-align: right;
         }
         img {
           display: block;

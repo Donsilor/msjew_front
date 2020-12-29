@@ -47,17 +47,15 @@
                     <input v-model="invoice.email" type="text" :placeholder="lang.holder3">
                 </div>
             </div>
-            <div class="line">
-                
-            </div>
+            <div class="line" :class="{'height30': invoice.is_electronic == 1}"></div>
             <div class="totle">
                 <div class="title"><span>{{ lang.totalAmount }}</span></div>
                 <div class="rise_select">
                     <span>{{ formatCoin(coin) }}{{ultimatelyPay}}</span>
                 </div>
             </div>
-            <div class="tips">
-            <p>{{ lang.tips }}</p>
+            <div v-if="invoice.is_electronic == 0" class="tips">
+                <p>{{ lang.tips }}</p>
             </div>
             <div class="btn">
                 <button @click="submit">{{ lang.confirm }}</button>
@@ -73,7 +71,7 @@ export default {
     components: {
         Header,
     },
-    props: ['kai','totlePrice','ultimatelyPay'],
+    props: ['kai','totlePrice','ultimatelyPay','invoiceInfo'],
     data(){
         return{
             select1:false,
@@ -88,8 +86,6 @@ export default {
                 is_electronic:'0',
                 email:''
             },
-            // totolPrice:this.$route.query.price,
-            // kai:this.$route.query.kai,
             coin: this.$store.state.coin,
             lang: this.LANGUAGE.cart.invoice,
             lang_header: this.LANGUAGE.components.personal,
@@ -103,7 +99,14 @@ export default {
         if(this.invoice.invoice_type == 2){
             this.select2 = true
         }
-        // console.log(this.kai)
+
+        if(this.invoiceInfo){
+            this.invoice.invoice_type = this.invoiceInfo.invoice_type
+            this.invoice.invoice_title = this.invoiceInfo.invoice_title
+            this.invoice.tax_number = this.invoiceInfo.tax_number
+            this.invoice.is_electronic = this.invoiceInfo.is_electronic
+            this.invoice.email = this.invoiceInfo.email
+        }
     },
     methods:{
         zhizhi(or){
@@ -163,17 +166,10 @@ export default {
                 }
             }
             this.$emit('closeIP',this.invoice); 
-            // this.$router.push({
-            //     name: 'cart-sureOrder',
-            //     params:{
-            //         invoice:this.invoice
-            //     }
-            // })
         },
         // 返回
         quit(){
-
-            this.$emit('closeIP',true); 
+            this.$emit('closeIP');
         },
     }
 }
@@ -196,19 +192,7 @@ export default {
         width: 100%;
         box-sizing: border-box;
     }
-//   .title{
-//     height: 50px;
-//     line-height: 50px;
-//     text-align: center;
-//     position: relative;
-//     // font-size: 16px;
-//     color: #666;
-//     border-bottom: 1px solid rgba(110,112,110,0.2);
-//   }
-    // .title{
-    //     font-size: 13px;
-    //     position: relative;
-    // }
+
     .quit{
         position: absolute;
         top: 0%;
@@ -226,7 +210,6 @@ export default {
         font-size: 16px;
         position: relative;
         color: #333;
-        // color:#eee;
     }
     .select{
         display: flex;
@@ -254,16 +237,12 @@ export default {
     }
     .type{
         padding: 20px;
-        // height: 20px;
         display: flex;
         justify-content: space-between;
         border-bottom:1px solid #ddd;
         .type_select{
             width:220px;
             display: flex;
-            // justify-content: space-around;
-            // height: 20px;
-            // margin-left: 30px;
             margin-top: 10px;
             div:first-child{
                 margin-bottom: 10px;
@@ -286,7 +265,6 @@ export default {
             background: rgba(255, 255, 255, 1);
             border: 1px solid rgba(153, 153, 153, 1);
             border-radius: 50%;
-            // margin-left: 35px;
             cursor: pointer;
             display: block;
         }
@@ -319,6 +297,10 @@ export default {
         height: 65px;
         border-bottom: 10px solid #ddd;
     }
+
+    .line.height30{
+        height: 30px;
+    }
     .totle{
         padding: 10px 20px;
         display: flex;
@@ -330,14 +312,13 @@ export default {
             color: #f29b87;
             font-size: 16px;
         }
-        // justify-content: space-between
     }
     .tips{
-        margin: 15px 0;
+        margin-top: 15px;
         color:#bbb;
     }
     .btn{
-      padding: 60px 20px;  
+      padding: 30px 20px;  
       button{
         width: 130px;
         height: 30px;

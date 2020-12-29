@@ -15,27 +15,29 @@
         class="addr-block"
       >
         <div class="box-left">
-          <div class="addr-title">
-            <div>{{ a.country_name }}{{ a.province_name }}-{{ a.city_name }}</div>
-          </div>
           <div class="addr-user">
-            <div>
               <span v-if="language == 'zh_CN'">{{ a.lastname }}{{ a.firstname }}</span>
               <span v-else>{{ a.firstname }} {{ a.lastname }}</span>
-            </div>
-            <div>{{ $t(`${lang}.get`) }}</div>
           </div>
-          <div class="addr-address">
-            <!-- {{ a.address_name }}{{ a.address_details }} -->
-            {{ a.country_name }}-{{ a.province_name }}{{ a.city_name
-            }}{{ a.address_details }}
-          </div>
+
           <div class="addr-user-phone">
             <div>{{ a.mobile_code }}</div>
             <div>{{ a.mobile }}</div>
           </div>
+
+          <div class="user-email">{{ a.email }}</div>
+
+          <div class="addr-address">
+            <div v-if="language == 'zh_CN'">
+              <div>{{ a.country_name }} {{ a.province_name }} {{ a.city_name }}</div>
+              <div>{{ a.address_details }}</div>
+            </div>
+            <div v-else>
+              <div>{{ a.address_details }}</div>
+              <div>{{ a.city_name }} {{ a.province_name }} {{ a.country_name }}</div>
+            </div>
+          </div>
           <div class="font-size-14 color-333">{{ a.zip_code }}</div>
-          <div class="font-size-14 color-333">{{ a.email }}</div>
           
           <!-- <div class="addr-board" @click="changeDefaultAddress(a.id)" /> -->
                     
@@ -355,6 +357,7 @@ export default {
         align-items: flex-end;
         width: 140px;
         text-align: right;
+        position: relative;
 
         .default-address{
           font-size: 14px;
@@ -379,7 +382,9 @@ export default {
           color: #aa8a7b;
           text-align: center;
           cursor: pointer;
-          margin-top: 20px;
+          position: absolute;
+          right: 50px;
+          bottom: 40px;
         }
 
         .iconlajitong {
@@ -388,17 +393,19 @@ export default {
           color: #999;
           z-index: 39;
           cursor: pointer;
-          margin: 90px 4px 0 0;
+          position: absolute;
+          right: 4px;
+          bottom: 41px;
         }
       }
 
       .addr-title {
         display: flex;
         align-items: flex-end;
-        margin-bottom: 10px;
+        margin-bottom: 2px;
 
         div {
-          font-size: 20px;
+          font-size: 13px;
           color: #333;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -410,51 +417,34 @@ export default {
         }
       }
       .addr-user {
-        display: flex;
-        font-size: 22px;
-        align-items: center;
+        font-size: 24px;
         color: #333;
         margin-bottom: 10px;
-        div:nth-child(1) {
-          min-height: 22px;
-          max-height: 22 * 2px;
-          line-height: 22px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          word-break: break-all;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-        }
-        div:nth-child(2) {
-          font-size: 16px;
-          margin-left: 10px;
-        }
+        min-height: 22px;
+        max-height: 22 * 2px;
+        line-height: 22px;
+        word-break: break-all;
+        overflow: hidden;
+      }
+      .user-email{
+        margin-bottom: 14px;
+        font-size: 14px;
+        color: #333;
       }
       .addr-address {
         color: #333;
         font-size: 14px;
-        /*width: 220px;*/
-        max-height: 16 * 2px;
-        min-height: 16px;
-        line-height: 16px;
-        margin-bottom: 10px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        word-break: break-all;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
+        line-height: 18px;
+        margin-bottom: 2px;
       }
       .addr-user-phone {
         display: flex;
         align-items: flex-end;
         font-family: twCenMt;
-        font-size: 18px;
+        font-size: 14px;
         color: #333;
         margin-bottom: 5px;
         div:nth-child(1) {
-          font-size: 14px;
           margin-right: 5px;
         }
       }
