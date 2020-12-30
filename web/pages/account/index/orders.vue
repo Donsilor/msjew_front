@@ -1,6 +1,6 @@
 <template>
 
-  <div class="orders">
+  <div class="orders" v-loading="ordersLoading">
     <div class="pink-title">
       <div class="pink-line" />
       <div class="title-name">{{ $t(`${lang}.myOrder`) }}</div>
@@ -465,11 +465,15 @@ export default {
       cid: ``,
       rid: ``,
       doubleRingGoodPrice:'',
-      proCategoryId:''
+      proCategoryId:'',
+      ordersLoading:false
     }
   },
   created() {
-    this.getList()
+    const _this = this
+    _this.$nextTick(() => {
+      _this.getList()
+    })
     this.getStatusOrders(0)
   },
   computed:{
@@ -504,11 +508,17 @@ export default {
       return Obj 
     },
     getList() {
+      // this.$nuxt.$loading.start()
+      this.ordersLoading = true
       this.$axios
         .get('/web/member/order', {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
+          if(res){
+            // this.$nuxt.$loading.finish()
+            this.ordersLoading = false
+          }
           // console.log("订单0",res.data)
           if(res.code != 200){
             return

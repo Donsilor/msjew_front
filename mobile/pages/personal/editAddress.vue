@@ -1,287 +1,193 @@
 <template>
   <div>
     <div  class="edit-address">
-      <div class="header">
-        <span>
-          {{ title }}
-        </span>
-        <i class="icon iconfont iconicon-test2" @click="goBack"></i>
-      </div>
-      <div class="mod">
-        <div v-if="language == 'zh_CN'" class="input-mod">
-          <bdd-input
-            v-model="surname"
-            :placeholder="lang.surname"
-            @input="check(2)"
-             :maxl="maxlength"
-             @focus="focusFn(2)"
-          ></bdd-input>
+      <div class="box">
+        <div class="header">
+          <span>
+            {{ title }}
+          </span>
+          <i class="icon iconfont iconicon-test2" @click="goBack"></i>
         </div>
 
-        <div v-if="language != 'zh_CN'" :class="['error-message', { active: surnameTrue }]">
-          {{ surnameText }}
-        </div>
+        <div class="mod">
+          <!-- 姓名 -->
+          <div v-if="language==='zh_CN'" class="compellation">
+            <div class="input-mod">
+              <bdd-input
+                v-model="surname"
+                :placeholder="lang.surname"
+                @input="check(2)"
+                :maxl="maxlength"
+                @focus="focusFn(2)"
+              ></bdd-input>
+            </div>
+          </div>
 
-        <div class="input-mod">
-          <bdd-input
-            v-model="name"
-            :placeholder="lang.name"
-            @input="check(1)"
-             :maxl="maxlength"
-             @focus="focusFn(1)"
-          ></bdd-input>
-        </div>
-        <div :class="['error-message', { active: nameTrue }]">
-          {{ nameText }}
-        </div>
+          <div class="compellation" :class="{'margin-left': language==='zh_CN'}">
+            <div class="input-mod">
+              <bdd-input
+                v-model="name"
+                :placeholder="lang.name"
+                @input="check(1)"
+                :maxl="maxlength"
+                @focus="focusFn(1)"
+              ></bdd-input>
+            </div>
+          </div>
+          
+          <div v-if="language!=='zh_CN'" class="compellation" :class="{'margin-left': language!=='zh_CN'}">
+            <div class="input-mod">
+              <bdd-input
+                v-model="surname"
+                :placeholder="lang.surname"
+                @input="check(2)"
+                :maxl="maxlength"
+                @focus="focusFn(2)"
+              ></bdd-input>
+            </div>
+          </div>
 
-        <div v-if="language != 'zh_CN'" class="input-mod">
-          <bdd-input
-            v-model="surname"
-            :placeholder="lang.surname"
-            @input="check(2)"
-             :maxl="maxlength"
-             @focus="focusFn(2)"
-          ></bdd-input>
-        </div>
+          <div :class="['error-message', { active: nameTrue }]">
+            {{ nameText }}
+          </div>
+          <div :class="['error-message', { active: surnameTrue }]">
+            {{ surnameText }}
+          </div>
 
-        <div v-if="language != 'zh_CN'" :class="['error-message', { active: surnameTrue }]">
-          {{ surnameText }}
-        </div>
-        <div v-if="language==='zh_CN'" class="input-mod" @click="showSelect">
-          <bdd-input
-            v-model="mailbox"
-            :placeholder="lang.mailbox"
-            @input="check(3)"
-             :maxl="maxlength"
-             @focus="focusFn(3)"
-          ></bdd-input>
-        </div>
-        <div v-else class="input-mod" @click="showSelect">
-          <bdd-input
-            v-model="mailbox"
-            :placeholder="lang.mailbox"
-            @input="check(3)"
-            :maxl="maxlength"
-            @focus="focusFn(3)"
-          ></bdd-input>
-        </div>
-        <div :class="['error-message', { active: mailboxTrue }]">
-          {{ mailboxText }}
-        </div>
+          <!-- 电话区号 -->
+          <div class="area-code">
+            <div class="test-mod" @click="showSwiperTap">
+              <div class="area">{{ userTelCode }}</div>
+              <i class="icon iconfont iconxiala"></i>
+            </div>
+          </div>
+          
+          <!-- 电话号码 -->
+          <div class="phone-code">
+            <div v-if="language==='zh_CN'" class="input-mod">
+              <bdd-input
+                v-model="phone"
+                :placeholder="`*${lang.phone}`"
+                @input="check(4)"
+                :maxl="maxlength"
+                @focus="focusFn(4)"
+              ></bdd-input>
+            </div>
+            <div v-else class="input-mod">
+              <bdd-input
+                v-model="phone"
+                :placeholder="`*${lang.phone}`"
+                @input="check(4)"
+                :maxl="maxlength"
+                @focus="focusFn(4)"
+              ></bdd-input>
+            </div>
+          </div>
+          <div :class="['error-message', { active: areaTrue }]">
+            {{ areaText }}
+          </div>
+          <div :class="['error-message', { active: phoneTrue }]">
+            {{ phoneText }}
+          </div>
 
-        <div class="test-mod" @click="showSwiperTap">
-          {{ area }}
-          <i class="icon iconfont iconxiala"></i>
-        </div>
-        <div :class="['error-message', { active: areaTrue }]">
-          {{ areaText }}
-        </div>
+          <!-- 电邮地址 -->
+          <div class="input-mod">
+            <bdd-input
+              v-model="mailbox"
+              :placeholder="lang.mailbox"
+              @blur="check(3)"
+              :maxl="maxlength"
+              @focus="focusFn(3)"
+            ></bdd-input>
+          </div>
+          <div :class="['error-message', { active: mailboxTrue }]">
+            {{ mailboxText }}
+          </div>
 
-        <div v-if="language==='zh_CN'" class="input-mod">
-          <bdd-input
-            v-model="phone"
-            :placeholder="`*${lang.phone}`"
-            @input="check(4)"
-            :maxl="maxlength"
-            @focus="focusFn(4)"
-          ></bdd-input>
-        </div>
-        <div v-else class="input-mod">
-          <bdd-input
-            v-model="phone"
-            :placeholder="`*${lang.phone}`"
-            @input="check(4)"
-            :maxl="maxlength"
-            @focus="focusFn(4)"
-          ></bdd-input>
-        </div>
-        <div :class="['error-message', { active: phoneTrue }]">
-          {{ phoneText }}
-        </div>
+          <!-- 详细地址-简体 -->
+          <div v-if="language!=='zh_CN'" class="text-area">
+            <textarea
+              v-model="details"
+              maxlength="300"
+              :placeholder="lang.details"
+              @keyup="check(5)"
+              :maxl="maxlength"
+              @focus="focusFn(5)"
+            ></textarea>
+          </div>
+          <div v-if="language!=='zh_CN'" :class="['error-message', { active: detailsTrue }]">
+            {{ detailsText }}
+          </div>
 
-        <div class="text-area">
-          <textarea
-            v-model="details"
-            maxlength="300"
-            :placeholder="lang.details"
-            @keyup="check(5)"
-            :maxl="maxlength"
-            @focus="focusFn(5)"
-          ></textarea>
-        </div>
-        <div :class="['error-message', { active: detailsTrue }]">
-          {{ detailsText }}
-        </div>
+          <!-- 国家 -->
+          <div class="test-mod" @click="showCountry">
+            {{ country }}
+            <i class="icon iconfont iconxiala"></i>
+          </div>
+          <div :class="['error-message', { active: countryTrue }]">
+            {{ countryText }}
+          </div>
 
-        <div class="test-mod" @click="showCountry">
-          {{ country }}
-          <i class="icon iconfont iconxiala"></i>
-        </div>
-        <div :class="['error-message', { active: countryTrue }]">
-          {{ countryText }}
-        </div>
+          <!-- 省 -->
+          <div class="test-mod" @click="showProvince">
+            {{ province }}
+            <i class="icon iconfont iconxiala"></i>
+          </div>
 
-        <div class="test-mod" @click="showProvince">
-          {{ province }}
-          <i class="icon iconfont iconxiala"></i>
-        </div>
+          <!-- 市 -->
+          <div class="test-mod" @click="showCity">
+            {{ city }}
+            <i class="icon iconfont iconxiala"></i>
+          </div>
 
-        <div class="test-mod" @click="showCity">
-          {{ city }}
-          <i class="icon iconfont iconxiala"></i>
-        </div>
+          <!-- 详细地址-繁体 -->
+          <div v-if="language==='zh_CN'" class="text-area">
+            <textarea
+              v-model="details"
+              maxlength="300"
+              :placeholder="lang.details"
+              @keyup="check(5)"
+              :maxl="maxlength"
+              @focus="focusFn(5)"
+            ></textarea>
+          </div>
+          <div v-if="language==='zh_CN'" :class="['error-message', { active: detailsTrue }]">
+            {{ detailsText }}
+          </div>
 
-        <div class="input-mod">
-          <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
-        </div>
+          <div class="input-mod">
+            <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
+          </div>
 
-        <div v-if="loginType == 2 " class="btn-common btn-pink btn-address cn" @click="createAddressCN">
-          {{ lang.storage }}
+          <div v-if="loginType == 2 " class="btn-common btn-pink btn-address cn" @click="createAddressCN">
+            {{ lang.storage }}
+          </div>
+          <div v-else class="btn-common btn-pink btn-address" @click="createAddress">
+            {{ lang.storage }}
+          </div>
+          <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
+            {{ lang.deleteAddress }}
+          </div>
+
+          <swiper-tap
+            ref="suitability1"
+            :list="arealist"
+            @clear="sureArea"
+          ></swiper-tap>
+          <swiper-tap
+            ref="country"
+            :list="countryList"
+            @clear="countrySure"
+          ></swiper-tap>
+          <swiper-tap
+            ref="province"
+            :list="provinceList"
+            @clear="provinceSure"
+          ></swiper-tap>
+          <swiper-tap ref="city" :list="cityList" @clear="citySure"></swiper-tap>
         </div>
-        <div v-else class="btn-common btn-pink btn-address" @click="createAddress">
-          {{ lang.storage }}
-        </div>
-        <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
-          {{ lang.deleteAddress }}
-        </div>
-        <swiper-tap
-          ref="suitability1"
-          :list="arealist"
-          @clear="sureArea"
-        ></swiper-tap>
-        <swiper-tap
-          ref="country"
-          :list="countryList"
-          @clear="countrySure"
-        ></swiper-tap>
-        <swiper-tap
-          ref="province"
-          :list="provinceList"
-          @clear="provinceSure"
-        ></swiper-tap>
-        <swiper-tap ref="city" :list="cityList" @clear="citySure"></swiper-tap>
       </div>
     </div>
-    <!-- 繁体 -->
-    <!-- <div  class="edit-address">
-      <div class="header">
-        <span>
-          {{ title }}
-        </span>
-        <i class="icon iconfont iconicon-test2" @click="goBack"></i>
-      </div>
-      <div class="mod">
-        <div class="input-mod">
-          <bdd-input
-            v-model="name"
-            :placeholder="lang.name"
-            @input="check(1)"
-          ></bdd-input>
-        </div>
-        <div :class="['error-message', { active: nameTrue }]">
-          {{ nameText }}
-        </div>
-
-        <div class="input-mod">
-          <bdd-input
-            v-model="surname"
-            :placeholder="lang.surname"
-            @input="check(2)"
-          ></bdd-input>
-        </div>
-        <div :class="['error-message', { active: surnameTrue }]">
-          {{ surnameText }}
-        </div>
-
-        <div class="input-mod" @click="showSelect">
-          <bdd-input
-            v-model="mailbox"
-            :placeholder="lang.mailbox"
-            @input="check(3)"
-          ></bdd-input>
-        </div>
-        <div :class="['error-message', { active: mailboxTrue }]">
-          {{ mailboxText }}
-        </div>
-
-        <div class="test-mod" @click="showSwiperTap">
-          {{ area }}
-          <i class="icon iconfont iconxiala"></i>
-        </div>
-        <div :class="['error-message', { active: areaTrue }]">
-          {{ areaText }}
-        </div>
-
-        <div class="input-mod">
-          <bdd-input
-            v-model="phone"
-            :placeholder="lang.phone"
-            @input="check(4)"
-          ></bdd-input>
-        </div>
-        <div :class="['error-message', { active: phoneTrue }]">
-          {{ phoneText }}
-        </div>
-
-        <div class="text-area">
-          <textarea
-            v-model="details"
-            maxlength="300"
-            :placeholder="lang.details"
-            @keyup="check(5)"
-          ></textarea>
-        </div>
-        <div :class="['error-message', { active: detailsTrue }]">
-          {{ detailsText }}
-        </div>
-
-        <div class="test-mod" @click="showCountry">
-          {{ country }}
-          <i class="icon iconfont iconxiala"></i>
-        </div>
-        <div :class="['error-message', { active: countryTrue }]">
-          {{ countryText }}
-        </div>
-
-        <div class="test-mod" @click="showProvince">
-          {{ province }}
-          <i class="icon iconfont iconxiala"></i>
-        </div>
-
-        <div class="test-mod" @click="showCity">
-          {{ city }}
-          <i class="icon iconfont iconxiala"></i>
-        </div>
-
-        <div class="input-mod">
-          <bdd-input v-model="postal" :placeholder="lang.postal"></bdd-input>
-        </div>
-
-        <div class="btn-common btn-pink btn-address" @click="createAddress">
-          {{ lang.storage }}
-        </div>
-        <div v-if="id" class="btn-common btn-address2" @click="deleteAddress(id)">
-          {{ lang.deleteAddress }}
-        </div>
-        <swiper-tap
-          ref="suitability1"
-          :list="arealist"
-          @clear="sureArea"
-        ></swiper-tap>
-        <swiper-tap
-          ref="country"
-          :list="countryList"
-          @clear="countrySure"
-        ></swiper-tap>
-        <swiper-tap
-          ref="province"
-          :list="provinceList"
-          @clear="provinceSure"
-        ></swiper-tap>
-        <swiper-tap ref="city" :list="cityList" @clear="citySure"></swiper-tap>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -307,7 +213,7 @@ export default {
       mailbox: '',
       mailboxTrue: false,
       mailboxText: '',
-      area: this.LANGUAGE.personal.editAddress.area,
+      area: '',
       areaCN: this.LANGUAGE.personal.editAddress.areaCN,
       userTelCode: '',
       arealist: PhoneJson,
@@ -340,39 +246,65 @@ export default {
       maxlength: '30'
     }
   },
-  // beforeMount(){
-  //   if(this.language === 'zh_CN'){
-  //     console.log(444444)
-  //     this.countryList=[{ id:'7',content: '中国'}]
-  //     this.getListOne()
-  //   }
-
-  // },
   created() {
+    this.initializeData()
     this.getinfo()
     this.getListOne()
     this.getArealist()
   },
   mounted() {
     this.loginType=localStorage.getItem('loginType')
-    this.language = this.$store.state.language
+    this.language = this.$store.state.language;
 
-    if(this.language === 'zh_CN'){
-      this.userTelCode='+86'
-      this.area=this.lang.areaCN   //"中国 +86"
-      this.countryId = 7
-      this.country = this.lang.china   //'中国'
-    }else {
-      this.userTelCode='+852'
+    if(this.addVal == 'add') {
+      this.resetData()
     }
   },
   methods: {
+    initializeData() {
+      var len = this.$store.state.language,childLen='cn';
+      if(len == 'zh_CN'){
+        childLen = 'zh'
+      }else if(len == 'zh_TW'){
+        childLen = 'cn'
+      }else if(len == 'en_US'){
+        childLen = 'en'
+      }
+
+      if(this.$store.state.platform == '21'){
+        this.country = PhoneJson[1][childLen]
+        this.countryId = 7
+        this.userTelCode = PhoneJson[1]['phone_code']
+      }else if(this.$store.state.platform == '11'){
+        this.country = PhoneJson[0][childLen]
+        this.countryId = 279
+        this.userTelCode = PhoneJson[0]['phone_code']
+      }else if(this.$store.state.platform == '31'){
+        this.country = PhoneJson[219][childLen]
+        this.countryId = 140
+        this.userTelCode = PhoneJson[219]['phone_code']
+      }else if(this.$store.state.platform == '41'){
+        this.country = PhoneJson[3][childLen]
+        this.countryId = 278
+        this.userTelCode = PhoneJson[3]['phone_code']
+      }
+    },
+    resetData() {
+      this.name = '';
+      this.surname = '';
+      this.mailbox = '';
+      this.phone = '';
+      this.details = '';
+      this.postal = '';
+      this.country = '';
+      this.province = '';
+      this.city = '';
+    },
     goBack() {
       if (this.$route.query.type === 'add') {
         if (
           this.name &&
           this.surname &&
-          this.mailbox &&
           this.phone &&
           this.details &&
           this.country
@@ -482,7 +414,6 @@ export default {
           url: `/web/common/area`
         })
         .then(res => {
-          // console.log("area",res.data)
           _this.countryList = []
           for (let i = 0; i < res.length; i++) {
             const o = {
@@ -492,6 +423,17 @@ export default {
               _this.countryList.push(o)
           }
           _this.countryList.unshift({ id: '', content: this.lang.pleaseChoose })
+
+          if(this.countryId){
+            for(var i=0; i<_this.countryList.length; i++){
+              if(_this.countryList[i].id == this.countryId){
+                _this.country = _this.countryList[i].content;
+                _this.$refs.country.nowIndex = i;
+                break
+              }
+            }
+          }
+          
           // console.log("国家",_this.countryList)
           this.getListTwo()
           this.getListThree()
@@ -576,30 +518,39 @@ export default {
       // if(this.$store.state.language === 'zh_CN'){
       //   this.country = '中国'
       // }
-      this.countryId = ''
-      this.country = this.lang.country
-      this.provinceList = []
-      this.provinceId = ''
-      this.province = this.lang.province
-      this.cityList = []
-      this.cityId = ''
-      this.city = this.lang.city
+      // this.countryId = ''
+      // this.country = this.lang.country
+      // this.provinceList = []
+      // this.provinceId = ''
+      // this.province = this.lang.province
+      // this.cityList = []
+      // this.cityId = ''
+      // this.city = this.lang.city
       if (this.countryList.length > 1) {
         this.$refs.country.show()
       }
     },
     countrySure(val) {
+      if(val.item.id != this.countryId){
+        this.province = this.LANGUAGE.personal.editAddress.province;
+        this.city = this.LANGUAGE.personal.editAddress.city;
+        this.provinceList = [];
+        this.provinceId = '';
+        this.cityList = [];
+        this.cityId = '';
+      }
+      
       this.countryId = this.countryList[val.index].id
       this.country = this.countryList[val.index].content
       this.getListTwo()
       this.check(6)
     },
     showProvince() {
-      this.provinceId = ''
-      this.province = this.lang.province
-      this.cityList = []
-      this.cityId = ''
-      this.city = this.lang.city
+      // this.provinceId = ''
+      // this.province = this.lang.province
+      // this.cityList = []
+      // this.cityId = ''
+      // this.city = this.lang.city
       if (!this.countryId) {
         this.$toast.show(this.lang.country2)
         return
@@ -609,12 +560,18 @@ export default {
       }
     },
     provinceSure(val) {
+      if(val.item.id != this.provinceId){
+        this.city = this.LANGUAGE.personal.editAddress.city;
+        this.cityList = [];
+        this.cityId = '';
+      }
+
       this.provinceId = this.provinceList[val.index].id
       this.province = this.provinceList[val.index].content
       this.getListThree()
     },
     showCity() {
-      this.cityId = ''
+      // this.cityId = ''
 
       if(this.cityList.length == 0){
         this.city = '------'
@@ -628,7 +585,6 @@ export default {
       }
       this.$refs.city.show()
       // if (this.cityList.length > 1) {
-      //   console.log("4444")
       //   this.$refs.city.show()
       // }
     },
@@ -659,7 +615,6 @@ export default {
     },
     check(val) {
       this.nameTrue = this.surnameTrue = this.mailboxTrue = this.phoneTrue = this.detailsTrue = this.countryTrue = false
-
       if ((val === 1 || val === 0) && this.name === '') {
         this.nameText = this.lang.nameText1
         this.nameTrue = true
@@ -939,9 +894,6 @@ export default {
         }
       }
     },
-    showSelect() {
-      console.log('6767')
-    },
     focusFn(k){
       switch (k){
         case 1: this.maxlength = '30';
@@ -970,6 +922,24 @@ export default {
 <style scoped lang="less">
 .edit-address {
   padding: 0 20px;
+  min-height: 100%;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  overflow-y: scroll;
+  .box{
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
+    font-size: 0;
+  }
   .header {
     span {
       display: inline-block;
@@ -1055,7 +1025,7 @@ export default {
     }
     .btn-address {
       width: 100%;
-      margin-top: 30px;
+      margin-top: 10px;
     }
     .btn-address2 {
       width: 100%;
@@ -1063,6 +1033,60 @@ export default {
       border: 1px solid rgba(221, 221, 221, 1); /*no*/
       color: #999999;
     }
+  }
+}
+
+.btn-pink {
+  background-color: #f29b87;
+  color: #fff;
+}
+
+.compellation {
+  width: 47%;
+  display: inline-block;
+  font-size: 0;
+}
+.margin-left {
+  margin-left: 6%;
+}
+
+.area-code {
+  width: 36%;
+  height: 40px;
+  display: inline-block;
+  font-size: 0;
+  margin: 10px 0;
+  vertical-align: middle;
+}
+.area-code .test-mod{
+  position: relative;
+  margin: 0 !important;
+}
+.area-code .area {
+  width: 76px;
+  height: 20px;
+  margin: 10px 0;
+  line-height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.area-code i {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.phone-code {
+  width: 58%;
+  height: 40px;
+  display: inline-block;
+  font-size: 0;
+  margin: 10px 0 10px 6%;
+  vertical-align: middle;
+
+  .input-mod{
+    padding: 0 !important;
   }
 }
 </style>

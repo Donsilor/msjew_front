@@ -8,7 +8,7 @@
       <a @click="gologin">{{ lang.accont }}</a>
       <span>{{ lang.any }}</span>
     </div>
-    <div class="address" >
+    <div class="address">
       <div v-if="hasAddress" class="has-address" @click="goAddress">
         <div>
           <span v-if="language == 'zh_CN'">{{ address.lastname }}{{ address.firstname }}</span>
@@ -24,7 +24,7 @@
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />
       </div>
-      <div v-if="!hasAddress" class="no-address" @click="goAddress"> 
+      <div v-if="!hasAddress" class="no-address" @click="goAddress">
         <i class="icon iconfont iconweizhiyuyan"></i>
         <span>{{ lang.address }}</span>
         <i class="icon iconfont iconyou"></i>
@@ -233,7 +233,7 @@
             <span>{{ lang3.invo }}</span>
             <div>
               <span class="underline" v-show="!kai" @click="show()">{{ lang3.NotInvoiced }}</span>
-              <span v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
+              <span class="no-color" v-show="kai" @click="show">{{ lang3.Invoicing }}</span>
             </div>
           </div>
         </div>
@@ -423,7 +423,7 @@
     <order-tex ref="orderTex"></order-tex>
     <order-safe ref="orderSafe"></order-safe>
     <order-coupon-tips ref="order-coupon-tips"></order-coupon-tips>
-    <Invoice v-if="ifShowInvoice" @closeIP="closeInvoicePop" :kai="kai" :totlePrice="totlePrice" :ultimatelyPay="ultimatelyPay" ></Invoice>
+    <Invoice v-if="ifShowInvoice" @closeIP="closeInvoicePop" :kai="kai" :totlePrice="totlePrice" :ultimatelyPay="ultimatelyPay" :invoiceInfo="this.invoices" ></Invoice>
     <shopping-card v-if="ifShowShoppingCard" @closePop="closeCardPop" :cardType="useAmount" :goodsLine ="goodsListLine" :currencyType="currency"></shopping-card>
     <use-coupon v-if="ifShowCoupon" @closeCoupon="closeCo" :couponAll="this.couponAll" :couponAlready="this.couponAlready" :useC="couponCodeR"></use-coupon>
     <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
@@ -452,7 +452,8 @@ export default {
     NeedKnow,
     ShoppingCard,
     Invoice,
-    Address
+    Address,
+    addressLength: 0
   },
   data() {
     return {
@@ -709,7 +710,6 @@ export default {
         // this.getData() // 获取地址
         let ua = window.navigator.userAgent.toLowerCase();
         if((ua.match(/MicroMessenger/i)) && !(ua.match(/wxwork/i)) ){
-          console.log(111111111)
           this.getCode()
         }
       // } 
@@ -761,10 +761,16 @@ export default {
      // 关闭发票弹窗
     closeInvoicePop(val){
       this.ifShowInvoice = false
-      if(val == true){
-        this.kai = !this.kai
+
+      if(val){
+        this.invoices = val
       }
-      this.invoices = val
+
+      if(this.invoices){
+        this.kai = true
+      }else{
+        this.kai = false
+      }
     },
     changeType(ind) {
       
@@ -861,6 +867,14 @@ export default {
     goAddress() {
       this.ifShowAddress = true
       this.id = this.isLogin ? '1' : null
+      
+      if(!this.addressLength){
+        var _this = this;
+        var timeOut = setTimeout(function() {
+          _this.$children[6].editAddress(null)
+          clearTimeout(timeOut)
+        },100)
+      }
       // const name = this.isLogin ? 'personal-address' : 'personal-editAddress'
       // const id = this.isLogin ? '1' : null
       // this.$router.push({
@@ -874,11 +888,15 @@ export default {
       let addr = storage.get('myAdders', '')
       this.ifShowAddress = false
       this.getData() 
-      if(addr == ''){
-        this.hasAddress = false
-        this.address=''
-      } else {
+      if(this.isLogin){
         this.queryId = id
+      }else {
+        if(addr == ''){
+          this.hasAddress = false
+          this.address=''
+        } else {
+          this.queryId = id
+        }
       }
       // console.log("this.addr",addr) 
     },
@@ -1050,8 +1068,9 @@ export default {
             url: `/web/member/address`
           })
           .then(res => {
-            _this.address = ''
-            _this.hasAddress = false
+            _this.addressLength = res.length;
+            _this.address = '';
+            _this.hasAddress = false;
             // console.log("address",res.data)
             if (res && res.length > 0) {
               res.map((item, index) => {
@@ -1080,9 +1099,7 @@ export default {
           })
       } else {
         const address = storage.get('myAdders', 0)
-        console.log("dfsadfsa",address)
         if (address) {
-        // console.log("address",address)
           this.hasAddress = true
           this.address = {
             // id: address.id,
@@ -2067,14 +2084,17 @@ export default {
 // 发票
 .invoice{
   .underline{
-    text-decoration: underline;
     color:#75BEEE;
+    border-bottom: 1px solid #75BEEE;
   }
   .title{
     font-size: 14px;
     color: rgba(51, 51, 51, 1);
     display: flex;
     justify-content: space-between;
+  }
+  .no-color{
+    border-bottom: 1px solid #333;
   }
 }
 // 支付方式

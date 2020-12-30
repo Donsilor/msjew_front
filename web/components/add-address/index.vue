@@ -61,7 +61,7 @@
         <div class="form-list clf">
           <div class="list-l fl"><span class="required">*</span>{{ $t(`${lang}.phone`) }}</div>
           <div class="phone-json fl">
-            <input :value="pnN + ' ' + phoneNum.phone_code" type="text" />
+            <input :value="phoneNum.phone_code" type="text" />
             <select v-model="phoneNum">
               <option v-for="(p, index) in phoneJson" :key="index" :value="p">{{
                 psn ? p.en :psn ? p.cn :p.zh

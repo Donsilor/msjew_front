@@ -16,23 +16,40 @@ export default {
       isLogin:this.$store.getters.hadLogin
     }
   },
-  mounted() {
-    if(this.$store.state.language === 'zh_CN'){
-      this.country={areaId:'7',areaName: '中国'}
-      this.countryList=[{ areaId:'7',areaName: '中国'}]
-      this.getListTwo()
-    }
+  beforeMount() {
+    this.defaultAddress()
+    this.getListTwo()
     this.getListOne()
-    
-    // this.phoneNum = this.phoneJson[0]
-  
-    if (this.$store.state.language === 'en_US' || this.$store.state.language === 'zh_TW') {
-      return this.phoneNum = this.phoneJson[0]
-    }else if(this.$store.state.language === 'zh_CN'){
-      return this.phoneNum = this.phoneJson[1]
-    }
   },
   methods: {
+    defaultAddress() {
+      var len = this.$store.state.language,childLen='cn';
+      if(len == 'zh_CN'){
+        childLen = 'cn'
+      }else if(len == 'zh_TW'){
+        childLen = 'zh'
+      }else if(len == 'en_US'){
+        childLen = 'en'
+      }
+  
+      if(this.$store.state.platform == '20'){
+        this.country={areaId:'7',areaName: this.phoneJson[1][childLen]}
+        this.countryList=[{ areaId:'7',areaName: this.phoneJson[1][childLen]}]
+        this.phoneNum = this.phoneJson[1]
+      }else if(this.$store.state.platform == '10'){
+        this.country={areaId:'279',areaName: this.phoneJson[0][childLen]}
+        this.countryList=[{ areaId:'279',areaName: this.phoneJson[0][childLen]}]
+        this.phoneNum = this.phoneJson[0]
+      }else if(this.$store.state.platform == '30'){
+        this.country={areaId:'140',areaName: this.phoneJson[219][childLen]}
+        this.countryList=[{ areaId:'140',areaName: this.phoneJson[219][childLen]}]
+        this.phoneNum = this.phoneJson[219]
+      }else if(this.$store.state.platform == '40'){
+        this.country={areaId:'278',areaName: this.phoneJson[3][childLen]}
+        this.countryList=[{ areaId:'278',areaName: this.phoneJson[3][childLen]}]
+        this.phoneNum = this.phoneJson[3]
+      }
+    },
     getListOne() {
       this.$axios
         .get('/web/common/area')
@@ -43,8 +60,16 @@ export default {
             //   areaName: this.$t(`${lang}.select`)
             // })
 
-            
-            // console.log('country===>', res.countryList.areaName) 
+            // console.log('country===>', res)
+
+            if(this.country.areaId){
+              for(var i=0; i<res.data.length; i++){
+                if(res.data[i].areaId == this.country.areaId){
+                  this.country={areaId: res.data[i].areaId,areaName: res.data[i].areaName}
+                  // this.countryList=[{ areaId: res.data[i].areaId,areaName: res.data[i].areaName}]
+                }
+              }
+            }
         })
         .catch(err => {
           if (!err.response) {
@@ -67,7 +92,7 @@ export default {
           params: { pid: this.country.areaId }
         })
         .then(res => {
-          console.log('省份=====>', res)
+          // console.log('省份=====>', res)
           if (!res.data.length==0) {
             this.provinceList = res.data
             this.provinceList.unshift({
@@ -211,11 +236,8 @@ export default {
       this.city = { areaId: '', areaName: '- - -' }
       this.cityList = [{ areaId: '', areaName: '- - -' }]
 
-      if(this.$store.state.language === 'zh_CN'){
-        this.country={areaId:'7',areaName: '中国'}
-        // this.countryList=[{ areaId:'7',areaName: '中国'}]
-        this.getListTwo()
-      }
+      this.defaultAddress()
+      this.getListTwo()
     }
   }
 }
