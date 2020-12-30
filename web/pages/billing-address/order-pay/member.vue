@@ -3741,7 +3741,7 @@ div {
             outline: 0;
             font-size: 14px;
             padding: 0 13px;
-            background: rgba(249, 249, 249, 1);
+            background: #fff;
           }
           select {
             position: absolute;
@@ -3805,7 +3805,7 @@ div {
               height: 100%;
               line-height: 38px;
               text-align: left;
-              background: rgba(248, 248, 248, 1);
+              background: #fff;
               -webkit-appearance: none;
               border: 0;
               padding: 0 28px 0 14px;
@@ -5070,7 +5070,7 @@ div {
         outline: 0;
         font-size: 14px;
         padding: 0 13px;
-        background: rgba(249, 249, 249, 1);
+        background: #fff;
       }
       select {
         position: absolute;
@@ -5134,7 +5134,7 @@ div {
           height: 100%;
           line-height: 38px;
           text-align: left;
-          background: rgba(248, 248, 248, 1);
+          background: #fff;
           -webkit-appearance: none;
           border: 0;
           padding: 0 0 0 13px;
