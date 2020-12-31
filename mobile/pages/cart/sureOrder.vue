@@ -16,10 +16,13 @@
           <!-- <span v-if="!this.queryId">{{ lang.default }}</span> -->
         </div>
         <p>{{ address.mobile_code }} {{ address.mobile }}</p>
-        <p class="p ow-h2">
-          {{ address.country_name }}-{{ address.province_name }}-{{
-            address.city_name
-          }}-{{ address.address_details }}
+        <p v-if="language == 'zh_CN'" class="p ow-h2">
+          <span v-if="address.city_name == '------'">{{ address.country_name }}-{{ address.province_name }}-{{ address.address_details }}</span>
+          <span v-else>{{ address.country_name }}-{{ address.province_name }}-{{ address.city_name}}-{{ address.address_details }}</span>
+        </p>
+        <p v-else class="p ow-h2">
+          <span v-if="address.city_name == '------'">{{ address.address_details }}-{{ address.province_name }}-{{ address.country_name}}</span>
+          <span v-else>{{ address.address_details }}-{{address.city_name}}-{{ address.province_name }}-{{ address.country_name}}</span>
         </p>
         <i class="icon iconfont iconyou"></i>
         <img src="~/static/cart/address.png" />

@@ -300,6 +300,7 @@ export default {
         this.countryId = 278
         this.userTelCode = PhoneJson[3]['phone_code']
       }
+      console.log("sdssa",this.userTelCode)
     },
     resetData() {
       this.name = '';
@@ -689,21 +690,15 @@ export default {
       }
 
       if(this.language === 'zh_CN'){
-        if(this.mailbox !== ''){
-          if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
-            this.mailboxText = this.lang.mailboxText2
-            this.mailboxTrue = true
-            return
-          }
-        }
-         if ((val === 4 || val === 0) && this.phone === '') {
+        if ((val === 4 || val === 0) && this.phone === '') {
           this.phoneText = this.lang.phoneText1
           this.phoneTrue = true
           return
         }
-        if(this.area === '中国 +86'||this.area === '中國 +86'|| this.area === 'China +86'){
+        if(this.userTelCode === '+86'){
           if ((val === 7 || val === 0) && !RegMobiles.test(this.phone) ) {
             this.phoneText = this.lang.phoneText2
+            this.$toast.show(this.lang.phoneText2)
             this.phoneTrue = true
             return
           }
@@ -714,7 +709,34 @@ export default {
             return
           }
         }
+        if(this.mailbox !== ''){
+          if ((val === 3 || val === 0) && !Email.test(this.mailbox)) {
+            this.mailboxText = this.lang.mailboxText2
+            this.mailboxTrue = true
+            return
+          }
+        }
       } else {
+        
+        if ((val === 4|| val === 0 ) && this.phone === '') {
+          this.phoneText = this.lang.phoneText1
+          this.phoneTrue = true
+          return
+        }
+        if(this.userTelCode === '+86'){
+          if ((val === 7 || val === 0) && !RegMobiles.test(this.phone) ) {
+            this.phoneText = this.lang.phoneText2
+            this.$toast.show(this.lang.phoneText2)
+            this.phoneTrue = true
+            return
+          }
+        } else {
+          if ((val === 7 || val === 0) && !RegMobile.test(this.phone) ) {
+            this.phoneText = this.lang.phoneText2
+            this.phoneTrue = true
+            return
+          }
+        }
         if ((val === 3 || val === 0) && this.mailbox === '') {
           this.mailboxText = this.lang.mailboxText1
           this.mailboxTrue = true
@@ -724,24 +746,6 @@ export default {
           this.mailboxText = this.lang.mailboxText2
           this.mailboxTrue = true
           return
-        }
-        if ((val === 4|| val === 0 ) && this.phone === '') {
-          this.phoneText = this.lang.phoneText1
-          this.phoneTrue = true
-          return
-        }
-        if(this.area === '中国 +86'||this.area === '中國 +86'|| this.area === 'China +86'){
-          if ((val === 7 || val === 0) && !RegMobiles.test(this.phone) ) {
-            this.phoneText = this.lang.phoneText2
-            this.phoneTrue = true
-            return
-          }
-        } else {
-          if ((val === 7 || val === 0) && !RegMobile.test(this.phone) ) {
-            this.phoneText = this.lang.phoneText2
-            this.phoneTrue = true
-            return
-          }
         }
       }
 
@@ -1084,7 +1088,7 @@ export default {
         case 3: this.maxlength = '60';
           break;
         case 4:
-          if(this.area.split('+')[1] == '86'){
+          if(this.userTelCode.split('+')[1] == '86'){
             this.maxlength = '11'
           }else{
             this.maxlength = '20'

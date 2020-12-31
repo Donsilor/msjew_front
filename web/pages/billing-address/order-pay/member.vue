@@ -2177,9 +2177,7 @@ export default {
     // 点击提示修改地址确认按钮触发
     alertTipBox(){
       this.alertBox = false;
-      if(this.address.length){
-        this.newAddress = false
-      }else{
+      if(!this.address.length){
         this.newAddress = true
       }
 
@@ -2447,7 +2445,7 @@ export default {
         .post('/web/member/address/add', data)
         .then(res => {
           this.$message({
-            message: this.$t(`${lang}.success`),
+            message: this.$t(`${lang}.prompt1`),
             type: 'success'
           })
 
@@ -2558,7 +2556,7 @@ export default {
         .then(res => {
           // console.log("添加地址",res)
           this.$message({
-            message: this.$t(`${lang}.success`),
+            message: this.$t(`${lang}.prompt1`),
             type: 'success'
           })
 
@@ -2711,7 +2709,7 @@ export default {
           this.getAddress()
           this.resetAddressInp()
           this.$message({
-            message: this.$t(`${lang}.msg3`),
+            message: this.$t(`${lang}.prompt2`),
             type: 'success'
           })
         })
@@ -2809,7 +2807,7 @@ export default {
             zip_code: this.addressData.zip_code,
             is_default: this.addressData.is_default
           })
-        ),
+        ), 
         false
       )
       this.$axios
@@ -2819,7 +2817,7 @@ export default {
           this.getAddress()
           this.resetAddressInp()
           this.$message({
-            message: this.$t(`${lang}.msg3`),
+            message: this.$t(`${lang}.prompt2`),
             type: 'success'
           })
         })
@@ -2842,7 +2840,7 @@ export default {
         .post('/web/member/address/del', data)
         .then(res => {
           // console.log("删除地址",res)
-
+          this.$errorMessage(this.$t(`${lang}.prompt3`))
           if(this.delIdx == 0){
             this.setDefaultAddr(this.address[this.address.length-1])
           }else{

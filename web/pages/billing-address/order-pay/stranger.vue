@@ -2649,6 +2649,7 @@ export default {
       this.addr = data
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address)); 
+      this.$successMessage(this.$t(`${lang}.prompt1`))
       console.log(this.address)
       // this.resetAddressInp()
     },
@@ -2774,6 +2775,7 @@ export default {
       this.newAddress = false
       this.address = content
       localStorage.setItem("myAddress", JSON.stringify(this.address));
+      this.$successMessage(this.$t(`${lang}.prompt2`))
       console.log('this.address',content, this.address)
 
     },
@@ -2869,6 +2871,7 @@ export default {
       this.addr = data
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address));
+      this.$successMessage(this.$t(`${lang}.prompt1`))
       console.log(this.address)
     },
     // 繁体保存地址
@@ -2970,6 +2973,7 @@ export default {
       this.newAddress = false
       this.address = content
       localStorage.setItem("myAddress", JSON.stringify(this.address));
+      this.$successMessage(this.$t(`${lang}.prompt2`))
       console.log('this.address',content, this.address)
 
     },
@@ -2982,6 +2986,7 @@ export default {
       this.addAddress = true
       this.resetAddressInp()
       this.address = []
+      this.$errorMessage(this.$t(`${lang}.prompt3`))
     },
     keydown(){
       var reg = /^[0-9a-zA-Z\-]{1}$/;
