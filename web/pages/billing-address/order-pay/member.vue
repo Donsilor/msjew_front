@@ -2182,11 +2182,11 @@ export default {
       }
 
       // 点击修改滚顶到地址选择模块
-      document.getElementById('step').scrollIntoView({
-        block: 'center',
-        inline: 'nearest',
-        behavior: 'smooth'
-      })
+      // document.getElementById('step').scrollIntoView({
+      //   block: 'center',
+      //   inline: 'nearest',
+      //   behavior: 'smooth'
+      // })
     },
     zhizhi(or){
       // console.log("纸质",or)

@@ -1150,7 +1150,7 @@
               :class="{ 'addr-active': addressIdx == index }"
               class="addr-block"
             >
-              <div class="addr-user">{{ a.lastname }}{{ a.firstname }}</div>
+              <div class="addr-user">{{ a.lastname }} {{ a.firstname }}</div>
               <div class="addr-user-phone">
                 <div>{{ a.mobile_code }}</div>
                 <div>{{ a.mobile }}</div>
@@ -2512,11 +2512,11 @@ export default {
     alertTipBox(){
       this.alertBox = false
       // 点击修改滚顶到地址选择模块
-      document.getElementById('step').scrollIntoView({
-        block: 'center',
-        inline: 'nearest',
-        behavior: 'smooth'
-      })
+      // document.getElementById('step').scrollIntoView({
+      //   block: 'center',
+      //   inline: 'nearest',
+      //   behavior: 'smooth'
+      // })
     },
     resetAddressInp() {
       // this.phoneNum = this.phoneJson[0]

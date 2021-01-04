@@ -57,7 +57,7 @@
             <!-- 电话区号 -->
             <div class="area-code">
               <div class="test-mod" @click="showSwiperTap">
-                <div class="area">{{ userTelCode }}</div>
+                <div class="area" :class="{'font-color': userTelCode !==''}">{{ userTelCode }}</div>
                 <i class="icon iconfont iconxiala"></i>
               </div>
             </div>
@@ -120,7 +120,7 @@
             </div>
 
             <!-- 国家 -->
-            <div class="test-mod" @click="showCountry">
+            <div class="test-mod font-color" @click="showCountry">
               {{ country }}
               <i class="icon iconfont iconxiala"></i>
             </div>
@@ -129,7 +129,7 @@
             </div>
 
             <!-- 省 -->
-            <div class="test-mod" @click="showProvince">
+            <div class="test-mod" @click="showProvince" :class="{'font-color':  addVal==''}">
               {{ province }}
               <i class="icon iconfont iconxiala"></i>
             </div>
@@ -138,7 +138,7 @@
             </div>
 
             <!-- 市 -->
-            <div class="test-mod" @click="showCity">
+            <div class="test-mod" @click="showCity" :class="{'font-color':  addVal==''}">
               {{ city }}
               <i class="icon iconfont iconxiala"></i>
             </div>
@@ -1255,6 +1255,9 @@ export default {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.font-color{
+  color: #000!important;
 }
 .area-code i {
   position: absolute;
