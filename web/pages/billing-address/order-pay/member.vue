@@ -2181,12 +2181,15 @@ export default {
         this.newAddress = true
       }
 
-      // 点击修改滚顶到地址选择模块
-      // document.getElementById('step').scrollIntoView({
-      //   block: 'center',
-      //   inline: 'nearest',
-      //   behavior: 'smooth'
-      // })
+      if(!this.isEdit){
+        // 点击修改滚顶到地址选择模块
+        document.getElementById('step').scrollIntoView({
+          block: 'center',
+          inline: 'nearest',
+          behavior: 'smooth'
+        })
+      }
+
     },
     zhizhi(or){
       // console.log("纸质",or)
@@ -2841,7 +2844,7 @@ export default {
         .then(res => {
           // console.log("删除地址",res)
           this.$errorMessage(this.$t(`${lang}.prompt3`))
-          if(this.delIdx == 0){
+           if((this.delIdx == 0) && (this.address.length != 1)){
             this.setDefaultAddr(this.address[this.address.length-1])
           }else{
             if(this.delIdx == this.addressIdx){
@@ -2851,7 +2854,11 @@ export default {
             }
           }
 
+          this.isEdit = false
           this.getAddress()
+          this.resetAddressInp()
+          this.getListTwo()
+          this.getListOne()
         })
         .catch(err => {
           // if (!err.response) {
