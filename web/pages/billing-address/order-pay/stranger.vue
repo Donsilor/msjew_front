@@ -1150,15 +1150,15 @@
               :class="{ 'addr-active': addressIdx == index }"
               class="addr-block"
             >
-              <div class="addr-user">{{ a.lastname }} {{ a.firstname }}</div>
+              <div class="addr-user"> {{ a.firstname }} {{ a.lastname }}</div>
               <div class="addr-user-phone">
                 <div>{{ a.mobile_code }}</div>
                 <div>{{ a.mobile }}</div>
               </div>
               <div class="addr-user-email">{{ a.email }}</div>
               <div class="addr-address">
-                <div>{{ a.country_name }} {{ a.province_name }} {{ a.city_name }}</div>
                 <div>{{ a.address_details }}</div>
+                <div> {{ a.city_name }} {{ a.province_name }} {{ a.country_name }}</div>
               </div>
               
               <div>{{ a.zip_code }}</div>
