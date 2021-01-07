@@ -771,6 +771,10 @@ export default {
       }else{
         this.kai = false
       }
+
+      if(this.invoices.invoice_title == ''&&this.invoices.tax_number == ''&&this.invoices.email == ''){
+        this.kai = false
+      }
     },
     changeType(ind) {
       
