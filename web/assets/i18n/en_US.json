@@ -2834,6 +2834,7 @@
         "msg8": "Failed to acquire data, please return to cart and try again!",
         "msg9": "Please select a payment method!",
         "msg12":"The shipping address is different from billing address ,please contact our customer service or re-select a shipping address. ",
+        "msg13":"You are modifying the address, please confirm the modification information.",
         "useShoppingCard": "Use Shopping Card",
         "editOrUnbound": "Edit/Remove Card",
         "shoppingCard": "Shopping Card",
