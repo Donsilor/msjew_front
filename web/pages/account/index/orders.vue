@@ -508,16 +508,16 @@ export default {
       return Obj 
     },
     getList() {
-      // this.$nuxt.$loading.start()
-      this.ordersLoading = true
+      this.$nuxt.$loading.start()
+      // this.ordersLoading = true
       this.$axios
         .get('/web/member/order', {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
           if(res){
-            // this.$nuxt.$loading.finish()
-            this.ordersLoading = false
+            this.$nuxt.$loading.finish()
+            // this.ordersLoading = false
           }
           // console.log("订单0",res.data)
           if(res.code != 200){
@@ -600,6 +600,7 @@ export default {
           // this.tabsParam[4].num = this.list.finished.length
         })
         .catch(err => {
+          this.$nuxt.$loading.finish()
           if (!err.response) {
             this.$message.error(err.message)
           } else {
