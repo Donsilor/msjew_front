@@ -2529,12 +2529,14 @@ export default {
     // 点击提示修改地址确认按钮触发
     alertTipBox(){
       this.alertBox = false
-      // 点击修改滚顶到地址选择模块
-      document.getElementById('step').scrollIntoView({
-        block: 'center',
-        inline: 'nearest',
-        behavior: 'smooth'
-      })
+      if(this.isEdit){
+        // 点击修改滚顶到地址选择模块
+        document.getElementById('step').scrollIntoView({
+          block: 'center',
+          inline: 'nearest',
+          behavior: 'smooth'
+        })
+      }
     },
     resetAddressInp() {
       // this.phoneNum = this.phoneJson[0]
