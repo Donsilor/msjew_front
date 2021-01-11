@@ -1386,7 +1386,10 @@
         "searchSimilar": "找类似",
         "discounts1": "優惠券",
         "discounts2": "折",
-        "firstLogin": "請先登錄或註冊！"
+        "firstLogin": "請先登錄或註冊！",
+        "changeAttrSuccess": "更換參數成功",
+        "cancle": "取消",
+        "confirm": "確定"
     },
     "pay": {
         "confirmOrder": "購物車",

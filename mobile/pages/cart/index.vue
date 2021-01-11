@@ -44,6 +44,7 @@
                       {{
                         getconfig(item.config, item.simpleGoodsEntity.specs,item.goodsAttr)
                       }}
+                      <span class="edit" @click.stop="showEdit(item, index, 'single')"></span>
                     </p>
                     <b v-if="!item.coupon.discount">{{  formatCoin(coin) }} {{ formatMoney(item.salePrice) }}</b>
                     <div class="discount-price" v-else>
@@ -295,6 +296,166 @@
         </div>
       </div>
     </div>
+
+    <div v-if="ifShowEditPopup" class="edit-popup">
+      <div class="edit-box">
+        <div class="edit-info">
+          <div class="quit" @click="ifShowEditPopup = false">x</div>
+          <div class="info-top">
+            <div class="goods-img">
+              <img :src="goods.url" alt="">
+            </div>
+            <div class="goods-price">
+              <span>{{ formatCoin(goods.coin) }}</span>
+              <span>{{ formatMoney(goods.price) }}</span>
+            </div>
+          </div>
+          
+          <!-- 单品属性 -->
+          <div v-if="type == 'single'">
+            <!-- 主石大小 -->
+            <div v-if="carats.length" class="attr-list">
+              <div class="attr-text">{{ caratsText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == selected.caratIndex}" v-for="(item, index) in carats" :key="index" @click="chooseAttr('carats', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 成色 -->
+            <div v-if="materials.length" class="attr-list">
+              <div class="attr-text">{{ materialsText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == selected.materialIndex}" v-for="(item, index) in materials" :key="index" @click="chooseAttr('materials', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 尺寸 -->
+            <div v-if="sizes.length" class="attr-list sizes">
+              <div class="attr-text">{{ sizesText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == selected.sizeIndex}" v-for="(item, index) in sizes" :key="index" @click="chooseAttr('size', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 主石色彩 -->
+            <div v-if="colorDetail.length" class="attr-list colors">
+              <div class="attr-text">{{ colorText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == selected.colorIndex}" v-for="(item, index) in colorDetail" :key="index" @click="chooseAttr('color', index)">{{ item.name }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 对戒一属性 -->
+          <div v-if="type == 'doubleA'">
+            <!-- 主石大小 -->
+            <div v-if="caratsA.length" class="attr-list">
+              <div class="attr-text">{{ caratsText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == doubleSelectedA.caratIndex}" v-for="(item, index) in caratsA" :key="index" @click="chooseAttr('carats', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 成色 -->
+            <div v-if="materialsA.length" class="attr-list">
+              <div class="attr-text">{{ materialsText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == doubleSelectedA.materialIndex}" v-for="(item, index) in materialsA" :key="index" @click="chooseAttr('materials', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 尺寸 -->
+            <div v-if="sizesA.length" class="attr-list sizes">
+              <div class="attr-text">{{ sizesText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == doubleSelectedA.sizeIndex}" v-for="(item, index) in sizesA" :key="index" @click="chooseAttr('size', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 主石色彩 -->
+            <div v-if="firstRingColorDetail.length" class="attr-list colors">
+              <div class="attr-text">{{ colorText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == doubleSelectedA.colorIndex}" v-for="(item, index) in firstRingColorDetail" :key="index" @click="chooseAttr('color', index)">{{ item.name }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 对戒二属性 -->
+          <div v-if="type == 'doubleB'">
+            <!-- 主石大小 -->
+            <div v-if="caratsB.length" class="attr-list">
+              <div class="attr-text">{{ caratsText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == doubleSelectedB.caratIndex}" v-for="(item, index) in caratsB" :key="index" @click="chooseAttr('carats', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 成色 -->
+            <div v-if="materialsB.length" class="attr-list">
+              <div class="attr-text">{{ materialsText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == doubleSelectedB.materialIndex}" v-for="(item, index) in materialsB" :key="index" @click="chooseAttr('materials', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 尺寸 -->
+            <div v-if="sizesB.length" class="attr-list sizes">
+              <div class="attr-text">{{ sizesText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == doubleSelectedB.sizeIndex}" v-for="(item, index) in sizesB" :key="index" @click="chooseAttr('size', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 主石色彩 -->
+            <div v-if="secondRingColorDetail.length" class="attr-list colors">
+              <div class="attr-text">{{ colorText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == doubleSelectedB.colorIndex}" v-for="(item, index) in secondRingColorDetail" :key="index" @click="chooseAttr('color', index)">{{ item.name }}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 定制戒托属性 -->
+          <div v-if="type == 'madeUpB'">
+            <!-- 主石大小 -->
+            <div v-if="caratsB.length" class="attr-list">
+              <div class="attr-text">{{ caratsText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == madeUpSelectedB.caratIndex}" v-for="(item, index) in caratsB" :key="index" @click="chooseAttr('carats', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 成色 -->
+            <div v-if="materialsB.length" class="attr-list">
+              <div class="attr-text">{{ materialsText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == madeUpSelectedB.materialIndex}" v-for="(item, index) in materialsB" :key="index" @click="chooseAttr('materials', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 尺寸 -->
+            <div v-if="sizesB.length" class="attr-list sizes">
+              <div class="attr-text">{{ sizesText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == madeUpSelectedB.sizeIndex}" v-for="(item, index) in sizesB" :key="index" @click="chooseAttr('size', index)">{{ item.name }}</div>
+              </div>
+            </div>
+
+            <!-- 主石色彩 -->
+            <div v-if="secondRingColorDetail.length" class="attr-list colors">
+              <div class="attr-text">{{ colorText }}</div>
+              <div class="attr-box">
+                <div class="attr-child" :class="{'active': index == madeUpSelectedB.colorIndex}" v-for="(item, index) in secondRingColorDetail" :key="index" @click="chooseAttr('color', index)">{{ item.name }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="confirm" @click="confirmAttr()">{{ lang.confirm }}</div>
+        </div>
+      </div>
+    </div>
+
     <bdd-empty
       v-if="list.length <= 0 && this.isLoading !==''"
       :type="'cart'"
@@ -330,7 +491,407 @@ export default {
       soudout:'',
       language: this.$store.state.language,
       isLoading:'',
-      ifShowPop: false
+      ifShowPop: false,
+      ifShowEditPopup: false,
+      goods: {
+        url: '',
+        coin: '',
+        price: 0,
+      },
+      goodsId: -1,
+      info: {},
+      type: '',
+      selectIndex: -1,
+
+      // 单品
+      productData: {},
+      selected: {
+        materialIndex: -1,
+        caratIndex: -1,
+        sizeIndex: -1,
+        colorIndex: -1,
+      },
+      colorAttrs: [
+        {
+          config_id:'',
+          config_attr_id:''
+        }
+      ],
+      materialsText: '',
+      caratsText: '',
+      sizesText: '',
+      colorText: '',
+      cartEditId: '',
+
+      // 对戒
+      productDataA: {},
+      productDataB: {},
+      doubleSelectedA: {
+        materialIndex: -1,
+        caratIndex: -1,
+        sizeIndex: -1,
+        colorIndex: -1,
+      },
+      doubleSelectedB: {
+        materialIndex: -1,
+        caratIndex: -1,
+        sizeIndex: -1,
+        colorIndex: -1,
+      },
+      firstRingColorAttrs: [
+        {
+          goods_id:'',
+          config_id:'',
+          config_attr_id:''
+        }
+      ],
+      secondRingColorAttrs: [
+        {
+          goods_id:'',
+          config_id:'',
+          config_attr_id:''
+        }
+      ],
+      categoryId: '',
+      goodsDetailsId: '',
+
+      // 定制
+      madeUpSelectedA: {
+        materialIndex: -1,
+        caratIndex: -1,
+        sizeIndex: -1,
+        colorIndex: -1,
+      },
+      madeUpSelectedB: {
+        materialIndex: -1,
+        caratIndex: -1,
+        sizeIndex: -1,
+        colorIndex: -1,
+      },
+      madeUpColorAttrs: [
+        {
+          config_id:'',
+          config_attr_id:''
+        }
+      ],
+      diamondPrice: 0,
+      diamondGoodInfo: {
+        goodsDetailsId: '',
+        goods_id: '',
+        goods_type: '',
+      }
+    }
+  },
+  computed: {
+    // -------------------单品------------------
+    // 成色
+    materials() {
+      if(this.productData.materials){
+        return this.productData.materials
+      }else{
+        return []
+      }
+    },
+    // 主石大小
+    carats() {
+      if(this.productData.carats){
+        return this.productData.carats
+      }else{
+        return []
+      }
+    },
+    // 尺寸
+    sizes() {
+      if(this.productData.sizes){
+        return this.productData.sizes
+      }else{
+        return []
+      }
+    },
+    //色彩  start
+    colorDetail(){
+      const Spec = this.productData.specs
+
+      let colors = []
+      let colorSpec = ''
+      let colorId = ''
+      // let configId = ''
+      if(Spec){
+        Spec.forEach(item => {
+          if (item.configId === '63') {
+            colorSpec = item.configAttrVal
+            colorId = item.configAttrId
+            this.configId = item.configId
+          }
+          if((colorId && colorSpec)!== ""){
+            let ids = colorId.split("|")
+            let specs = colorSpec.split("|")
+            if((ids && specs) !== ''){
+              colors = ids.map((id,i) => ({
+                id, 
+                name: specs[i]
+              }));
+            }
+          }
+        })
+        return colors
+      }else{
+        return []
+      }
+    },
+    goodsAttrs(){
+      const _this = this
+      const ringChecked = _this.selected.colorIndex
+      const colorDetail = _this.colorDetail
+
+      const color =
+        colorDetail.length > 0 && colorDetail[ringChecked]
+          ? colorDetail[ringChecked].id
+          : null
+      _this.colorAttrs[0].config_id = _this.configId
+      _this.colorAttrs[0].config_attr_id = color
+
+      return _this.colorAttrs
+    },
+    simpleDetail() {
+      const _this = this
+      const productData = _this.productData
+      const details = productData.details
+
+      const material =
+        productData.materials.length > 0 &&
+        productData.materials[this.selected.materialIndex]
+          ? productData.materials[this.selected.materialIndex].id
+          : null
+      const size =
+        productData.sizes.length > 0 &&
+        productData.sizes[this.selected.sizeIndex]
+          ? productData.sizes[this.selected.sizeIndex].id
+          : null
+      const carat =
+        productData.carats.length > 0 &&
+        productData.carats[this.selected.caratIndex]
+          ? productData.carats[this.selected.caratIndex].id
+          : null
+
+      let result = null
+
+      for (let n = 0, length = details.length; n < length; n++) {
+        const item = details[n]
+        if (item.material === material && item.size === size && item.carat === carat) {
+          result = item
+          break
+        }
+      }
+
+      return result
+    },
+
+    // -------------------对戒------------------
+    // 成色
+    materialsA() {
+      if(this.productDataA.materials){
+        return this.productDataA.materials
+      }else{
+        return []
+      }
+    },
+    materialsB() {
+      if(this.productDataB.materials){
+        return this.productDataB.materials
+      }else{
+        return []
+      }
+    },
+    // 主石大小
+    caratsA() {
+      if(this.productDataA.carats){
+        return this.productDataA.carats
+      }else{
+        return []
+      }
+    },
+    caratsB() {
+      if(this.productDataB.carats){
+        return this.productDataB.carats
+      }else{
+        return []
+      }
+    },
+    // 尺寸
+    sizesA() {
+      if(this.productDataA.sizes){
+        return this.productDataA.sizes
+      }else{
+        return []
+      }
+    },
+    sizesB() {
+      if(this.productDataB.sizes){
+        return this.productDataB.sizes
+      }else{
+        return []
+      }
+    },
+    // 色彩  start
+    firstRingColorDetail(){
+      const Spec = this.productDataA.specs
+      let colors = []
+      let colorSpec = ''
+      let colorId = ''
+
+      if(Spec){
+        Spec.forEach(item => {
+          if (item.configId === '63') {
+            colorSpec = item.configAttrVal
+            colorId = item.configAttrId
+            this.configId = item.configId
+          }
+          if((colorId && colorSpec)!== ""){
+            let ids = colorId.split("|")
+            let specs = colorSpec.split("|")
+            if((ids && specs) !== ''){
+              colors = ids.map((id,i) => ({
+                id, 
+                name: specs[i]
+              }));
+            }
+          }
+        })
+      }
+      return colors
+    },
+    secondRingColorDetail(){
+      const Spec = this.productDataB.specs
+      let colors = []
+      let colorSpec = ''
+      let colorId = ''
+
+      if(Spec){
+        Spec.forEach(item => {
+          if (item.configId === '63') {
+            colorSpec = item.configAttrVal
+            colorId = item.configAttrId
+            this.configId = item.configId
+          }
+          if((colorId && colorSpec)!== ""){
+            let ids = colorId.split("|")
+            let specs = colorSpec.split("|")
+            if((ids && specs) !== ''){
+              colors = ids.map((id,i) => ({
+                id, 
+                name: specs[i]
+              }));
+            }
+          }
+        })
+      }
+      return colors
+    },
+    firstRingGoodsAttrs(){
+      const _this = this
+      const ringChecked = _this.doubleSelectedA
+      const firstRingColorDetail = _this.firstRingColorDetail
+
+      const color =
+        firstRingColorDetail.length > 0 && firstRingColorDetail[ringChecked.colorIndex]
+          ? firstRingColorDetail[ringChecked.colorIndex].id
+          : null
+
+      // _this.firstRingColorAttrs[0].goods_id = _this.firstRingGoodsId
+      _this.firstRingColorAttrs[0].config_id = _this.configId
+      _this.firstRingColorAttrs[0].config_attr_id = color
+      // console.log('rrrrrrrrrrrr1',_this.firstRingColorAttrs)
+      return _this.firstRingColorAttrs
+    },
+    secondRingGoodsAttrs(){
+      const _this = this
+      const ringChecked = _this.doubleSelectedB
+      const secondRingColorDetail = _this.secondRingColorDetail
+
+      const color =
+        secondRingColorDetail.length > 0 && secondRingColorDetail[ringChecked.colorIndex]
+          ? secondRingColorDetail[ringChecked.colorIndex].id
+          : null
+
+      // _this.secondRingColorAttrs[0].goods_id = _this.secondRingGoodsId
+      _this.secondRingColorAttrs[0].config_id = _this.configId
+      _this.secondRingColorAttrs[0].config_attr_id = color
+      // console.log('rrrrrrrrrrrr2',_this.secondRingColorAttrs)
+      return _this.secondRingColorAttrs
+    },
+    doubleRingGoodsAttrs(){
+      this.doubleRingColorAttrs = this.firstRingGoodsAttrs.concat(this.secondRingGoodsAttrs)
+      let arr = this.doubleRingColorAttrs.filter(item=>item.goods_id !== ''&&item.config_id !== ''&&item.config_attr_id !== '')
+      // console.log('mmmmm',arr)
+      return arr
+    },
+    // 色彩  end
+
+    // -------------------定制------------------
+    //色彩  start
+    colorDetailB(){
+      const Spec = this.productDataB.specs
+
+      let colors = []
+      let colorSpec = ''
+      let colorId = ''
+      // let configId = ''
+      if(Spec){
+        Spec.forEach(item => {
+          if (item.configId === '63') {
+            colorSpec = item.configAttrVal
+            colorId = item.configAttrId
+            this.configId = item.configId
+          }
+          if((colorId && colorSpec)!== ""){
+            let ids = colorId.split("|")
+            let specs = colorSpec.split("|")
+            if((ids && specs) !== ''){
+              colors = ids.map((id,i) => ({
+                id, 
+                name: specs[i]
+              }));
+            }
+          }
+        })
+        return colors
+      }else{
+        return []
+      }
+    },
+    madeUpDetailB() {
+      const _this = this
+      const productDataB = _this.productDataB
+      const details = productDataB.details
+
+      const material =
+        productDataB.materials.length > 0 &&
+        productDataB.materials[this.madeUpSelectedB.materialIndex]
+          ? productDataB.materials[this.madeUpSelectedB.materialIndex].id
+          : null
+      const size =
+        productDataB.sizes.length > 0 &&
+        productDataB.sizes[this.madeUpSelectedB.sizeIndex]
+          ? productDataB.sizes[this.madeUpSelectedB.sizeIndex].id
+          : null
+      const carat =
+        productDataB.carats.length > 0 &&
+        productDataB.carats[this.madeUpSelectedB.caratIndex]
+          ? productDataB.carats[this.madeUpSelectedB.caratIndex].id
+          : null
+
+      let result = null
+
+      for (let n = 0, length = details.length; n < length; n++) {
+        const item = details[n]
+        if (item.material === material && item.size === size && item.carat === carat) {
+          result = item
+          break
+        }
+      }
+
+      return result
     }
   },
   mounted() {
@@ -739,7 +1300,7 @@ export default {
           keys.forEach(item => {
             result.push(res[item])
           })
-          console.log("线上llll",result)
+          // console.log("线上llll",result)
           this.doFormat(result)
           // this.doFormat(res)
         })
@@ -958,6 +1519,780 @@ export default {
     },
     closePop() {
       this.ifShowPop = false
+    },
+    // 编辑商品属性
+    showEdit(attr, i, type, typeB=null) {
+      this.ifShowEditPopup = true;
+      this.goods.url = attr.goodsImages;
+      this.goods.coin = this.$store.state.coin;
+      this.goods.price = attr.salePrice;
+      this.goodsId = attr.goodsId;
+
+      if(typeB != null){
+          this.type = typeB == 0 ? 'doubleA' : 'doubleB'
+      }else{
+        this.type = type
+      }
+
+      this.selectIndex = i;
+
+      this.cartEditId = attr.id;
+
+      if(this.goodsId != -1){
+        this.getAttrData()
+      }
+    },
+    // 获取商品属性
+    getAttrData() {
+      this.$axios({
+        method: 'post',
+        url: '/web/goods/style/detail',
+        data: {
+          goodsId: this.goodsId || '',
+          backend: ''
+        },
+        transformRequest: [
+          function(data) {
+            let ret = ''
+            for (const it in data) {
+              // 过滤空元素
+              if (data[it] === '' || data[it] === null) {
+                continue
+              }
+              ret +=
+                encodeURIComponent(it) +
+                '=' +
+                encodeURIComponent(data[it]) +
+                '&'
+            }
+            return ret
+          }
+        ],
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(res => {
+          this.info = res;
+          if(this.type == 'single'){
+            this.getRingInfo()
+          }else if(this.type == 'doubleA' || this.type == 'doubleB'){
+            this.getDoubleInfoA()
+            this.getDoubleInfoB()
+          }else if(this.type == 'madeUpA'){
+            this.getMakeUpInfoA()
+          }else if(this.type == 'madeUpB'){
+            this.getMakeUpInfoB()
+          }
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    getRingInfo() {
+      const _this = this;
+      let product = this.info ? JSON.parse(JSON.stringify(this.info)) : {};
+
+      this.productData = Object.assign({}, product, {
+        targetUser: (() => {
+          const specs = product.specs || []
+          let result = '--'
+          specs.forEach(item => {
+            if (item.configId === 26) {
+              result = item.configAttrVal
+            }
+          })
+          return result
+        })(),
+        materials: product.materials || [],
+        // sizes: product.sizes || [],
+        sizes:(() =>{
+            const sizes = product.sizes || []
+            // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return sizes;
+        })(),
+        carats:(() =>{
+            const carats = product.carats || []
+            // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return carats;
+        })(),
+        specs: product.specs || [],
+        details: product.details || [],
+        goodsServicesJsons: (product.goodsServicesJsons || []).map(item => {
+          item.img = _this.imageStrToArray(item.img)
+          return item
+        })
+      })
+
+      var attrs = this.list[this.selectIndex].simpleGoodsEntity.detailConfig,
+          attrCarats = this.productData.carats,
+          attrMaterials = this.productData.materials,
+          attrSizes = this.productData.sizes;
+
+      for(let n=0; n<attrCarats.length; n++){
+        for(let o=0; o<attrs.length; o++){
+          if(attrs[o].configId == 59 && attrCarats[n].id == attrs[o].configAttrId){
+            this.selected.caratIndex = n;
+            this.caratsText = attrs[o].configVal;
+            break;
+          }
+        }
+      }
+        
+      for(let i=0; i<attrMaterials.length; i++){
+        for(let j=0; j<attrs.length; j++){
+          if(attrs[j].configId == 10 && attrMaterials[i].id == attrs[j].configAttrId){
+            this.selected.materialIndex = i;
+            this.materialsText = attrs[j].configVal;
+            break;
+          }
+        }
+      }
+        
+      for(let k=0; k<attrSizes.length; k++){
+        for(let l=0; l<attrs.length; l++){
+          if(attrs[l].configId == 38 && attrSizes[k].id == attrs[l].configAttrId){
+            this.selected.sizeIndex = k;
+            this.sizesText = attrs[l].configVal;
+            break;
+          }
+        }
+      }
+
+      if(this.colorDetail.length){
+        var attrColorId = this.list[this.selectIndex].goodsAttr[0].configAttrId;
+
+        for(let m=0; m<this.colorDetail.length; m++){
+          if(this.colorDetail[m].id == attrColorId){
+            this.selected.colorIndex = m;
+            this.colorText = this.list[this.selectIndex].goodsAttr[0].configVal;
+            break;
+          }
+        }
+      }
+    },
+    getDoubleInfoA() {
+      const _this = this;
+      let productA = _this.info && _this.info.ring && _this.info.ring[0]
+      ? JSON.parse(JSON.stringify(_this.info.ring[0])) : {};
+
+      this.productDataA = Object.assign({}, productA, {
+        targetUser: (() => {
+          const specs = productA.specs || []
+          let result = '--'
+          specs.forEach(item => {
+            if (item.configId === 26) {
+              result = item.configAttrVal
+            }
+          })
+          return result
+        })(),
+        materials: productA.materials || [],
+        // sizes: product.sizes || [],
+        sizes:(() =>{
+            const sizes = productA.sizes || []
+            // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return sizes;
+        })(),
+        carats:(() =>{
+            const carats = productA.carats || []
+            // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return carats;
+        })(),
+        specs: productA.specs || [],
+        details: productA.details || [],
+        goodsServicesJsons: (productA.goodsServicesJsons || []).map(item => {
+          item.img = _this.imageStrToArray(item.img)
+          return item
+        })
+      })
+
+      var attrs = this.list[this.selectIndex].sku[0].lang.goods_spec,
+          attrCarats = this.productDataA.carats,
+          attrMaterials = this.productDataA.materials,
+          attrSizes = this.productDataA.sizes;
+
+      for(let n=0; n<attrCarats.length; n++){
+        for(let o=0; o<attrs.length; o++){
+          if(attrs[o].attr_id == 59 && attrCarats[n].id == attrs[o].value_id){
+            this.doubleSelectedA.caratIndex = n;
+            break;
+          }
+        }
+      }
+        
+      for(let i=0; i<attrMaterials.length; i++){
+        for(let j=0; j<attrs.length; j++){
+          if(attrs[j].attr_id == 10 && attrMaterials[i].id == attrs[j].value_id){
+            this.doubleSelectedA.materialIndex = i;
+            break;
+          }
+        }
+      }
+        
+      for(let k=0; k<attrSizes.length; k++){
+        for(let l=0; l<attrs.length; l++){
+          if(attrs[l].attr_id == 38 && attrSizes[k].id == attrs[l].value_id){
+            this.doubleSelectedA.sizeIndex = k;
+            break;
+          }
+        }
+      }
+
+      if(this.firstRingColorDetail.length){
+        var attrColorId = this.list[this.selectIndex].goodsAttr[0].configAttrId;
+
+        for(let m=0; m<this.firstRingColorDetail.length; m++){
+          if(this.firstRingColorDetail[m].id == attrColorId){
+            this.doubleSelectedA.colorIndex = m;
+            break;
+          }
+        }
+      }
+    },
+    getDoubleInfoB() {
+      const _this = this;
+      let productB = _this.info && _this.info.ring && _this.info.ring[1]
+       ? JSON.parse(JSON.stringify(_this.info.ring[1])) : {};
+
+      this.productDataB = Object.assign({}, productB, {
+        targetUser: (() => {
+          const specs = productB.specs || []
+          let result = '--'
+          specs.forEach(item => {
+            if (item.configId === 26) {
+              result = item.configAttrVal
+            }
+          })
+          return result
+        })(),
+        materials: productB.materials || [],
+        // sizes: product.sizes || [],
+        sizes:(() =>{
+            const sizes = productB.sizes || []
+            // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return sizes;
+        })(),
+        carats:(() =>{
+            const carats = productB.carats || []
+            // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return carats;
+        })(),
+        specs: productB.specs || [],
+        details: productB.details || [],
+        goodsServicesJsons: (productB.goodsServicesJsons || []).map(item => {
+          item.img = _this.imageStrToArray(item.img)
+          return item
+        })
+      })
+
+      var attrs = this.list[this.selectIndex].sku[1].lang.goods_spec,
+          attrCarats = this.productDataB.carats,
+          attrMaterials = this.productDataB.materials,
+          attrSizes = this.productDataB.sizes;
+
+      for(let n=0; n<attrCarats.length; n++){
+        for(let o=0; o<attrs.length; o++){
+          if(attrs[o].attr_id == 59 && attrCarats[n].id == attrs[o].value_id){
+            this.doubleSelectedB.caratIndex = n;
+            break;
+          }
+        }
+      }
+      
+      for(let i=0; i<attrMaterials.length; i++){
+        for(let j=0; j<attrs.length; j++){
+          if(attrs[j].attr_id == 10 && attrMaterials[i].id == attrs[j].value_id){
+            this.doubleSelectedB.materialIndex = i;
+            break;
+          }
+        }
+      }
+        
+      for(let k=0; k<attrSizes.length; k++){
+        for(let l=0; l<attrs.length; l++){
+          if(attrs[l].attr_id == 38 && attrSizes[k].id == attrs[l].value_id){
+            this.doubleSelectedB.sizeIndex = k;
+            break;
+          }
+        }
+      }
+
+      if(this.secondRingColorDetail.length){
+        var attrColorId = this.list[this.selectIndex].goodsAttr[1].configAttrId;
+
+        for(let n=0; n<this.secondRingColorDetail.length; n++){
+          if(this.secondRingColorDetail[n].id == attrColorId){
+            this.doubleSelectedB.colorIndex = n;
+            break;
+          }
+        }
+      }
+    },
+    getMakeUpInfoA() {
+      // const _this = this;
+      // let productA = this.info ? JSON.parse(JSON.stringify(this.info)) : {};
+
+      // this.productDataA = Object.assign({}, productA, {
+      //   targetUser: (() => {
+      //     const specs = productA.specs || []
+      //     let result = '--'
+      //     specs.forEach(item => {
+      //       if (item.configId === 26) {
+      //         result = item.configAttrVal
+      //       }
+      //     })
+      //     return result
+      //   })(),
+      //   materials: productA.materials || [],
+      //   // sizes: product.sizes || [],
+      //   sizes:(() =>{
+      //       const sizes = productA.sizes || []
+      //       // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+      //       return sizes;
+      //   })(),
+      //   carats:(() =>{
+      //       const carats = productA.carats || []
+      //       // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+      //       return carats;
+      //   })(),
+      //   specs: productA.specs || [],
+      //   details: productA.details || [],
+      //   goodsServicesJsons: (productA.goodsServicesJsons || []).map(item => {
+      //     item.img = _this.imageStrToArray(item.img)
+      //     return item
+      //   })
+      // })
+
+      // var attrs = this.good[this.index].data[1].simpleGoodsEntity.detailConfig,
+      // attrCarats = this.productDataA.carats,
+      // attrMaterials = this.productDataA.materials,
+      // attrSizes = this.productDataA.sizes;
+
+      // for(let n=0; n<attrCarats.length; n++){
+      //   for(let o=0; o<attrs.length; o++){
+      //     if(attrs[o].configId == 59 && attrCarats[n].id == attrs[o].configAttrId){
+      //       this.madeUpSelectedA.caratIndex = n;
+      //       break;
+      //     }
+      //   }
+      // }
+        
+      // for(let i=0; i<attrMaterials.length; i++){
+      //   for(let j=0; j<attrs.length; j++){
+      //     if(attrs[j].configId == 10 && attrMaterials[i].id == attrs[j].configAttrId){
+      //       this.madeUpSelectedA.materialIndex = i;
+      //       break;
+      //     }
+      //   }
+      // }
+        
+      // for(let k=0; k<attrSizes.length; k++){
+      //   for(let l=0; l<attrs.length; l++){
+      //     if(attrs[l].configId == 38 && attrSizes[k].id == attrs[l].configAttrId){
+      //       this.madeUpSelectedA.sizeIndex = k;
+      //       break;
+      //     }
+      //   }
+      // }
+
+      // if(this.colorDetailA.length){
+      //   var attrColorId = this.good[this.index].data[0].goodsAttr[0].configAttrId;
+
+      //   for(let m=0; m<this.colorDetailA.length; m++){
+      //     if(this.colorDetailA[m].id == attrColorId){
+      //       this.madeUpSelectedA.colorIndex = m;
+      //       break;
+      //     }
+      //   }
+      // }
+    },
+    getMakeUpInfoB() {
+      const _this = this;
+      let productB = this.info ? JSON.parse(JSON.stringify(this.info)) : {};
+
+      this.productDataB = Object.assign({}, productB, {
+        targetUser: (() => {
+          const specs = productB.specs || []
+          let result = '--'
+          specs.forEach(item => {
+            if (item.configId === 26) {
+              result = item.configAttrVal
+            }
+          })
+          return result
+        })(),
+        materials: productB.materials || [],
+        // sizes: product.sizes || [],
+        sizes:(() =>{
+            const sizes = productB.sizes || []
+            // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return sizes;
+        })(),
+        carats:(() =>{
+            const carats = productB.carats || []
+            // sizes.unshift({id:'',name: this.$t(`personal.index.select`)})
+            return carats;
+        })(),
+        specs: productB.specs || [],
+        details: productB.details || [],
+        goodsServicesJsons: (productB.goodsServicesJsons || []).map(item => {
+          item.img = _this.imageStrToArray(item.img)
+          return item
+        })
+      })
+
+
+      var attrs = this.list[this.selectIndex].simpleGoodsEntity.detailConfig,
+      attrCarats = this.productDataB.carats,
+      attrMaterials = this.productDataB.materials,
+      attrSizes = this.productDataB.sizes;
+
+      for(let n=0; n<attrCarats.length; n++){
+        for(let o=0; o<attrs.length; o++){
+          if(attrs[o].configId == 59 && attrCarats[n].id == attrs[o].configAttrId){
+            this.madeUpSelectedB.caratIndex = n;
+            break;
+          }
+        }
+      }
+        
+      for(let i=0; i<attrMaterials.length; i++){
+        for(let j=0; j<attrs.length; j++){
+          if(attrs[j].configId == 10 && attrMaterials[i].id == attrs[j].configAttrId){
+            this.madeUpSelectedB.materialIndex = i;
+            break;
+          }
+        }
+      }
+        
+      for(let k=0; k<attrSizes.length; k++){
+        for(let l=0; l<attrs.length; l++){
+          if(attrs[l].configId == 38 && attrSizes[k].id == attrs[l].configAttrId){
+            this.madeUpSelectedB.sizeIndex = k;
+            break;
+          }
+        }
+      }
+
+      if(this.colorDetailB.length){
+        var attrColorId = this.list[this.selectIndex].goodsAttr[0].configAttrId;
+
+        for(let m=0; m<this.colorDetailB.length; m++){
+          if(this.colorDetailB[m].id == attrColorId){
+            this.madeUpSelectedB.colorIndex = m;
+            break;
+          }
+        }
+      }
+
+      this.goodsId = this.list[this.selectIndex].goodsId;
+
+      this.$axios({
+        method: 'post',
+        url: '/web/goods/style/detail',
+        data: {
+          goodsId: this.goodsId || '',
+          backend: ''
+        },
+        transformRequest: [
+          function(data) {
+            let ret = ''
+            for (const it in data) {
+              // 过滤空元素
+              if (data[it] === '' || data[it] === null) {
+                continue
+              }
+              ret +=
+                encodeURIComponent(it) +
+                '=' +
+                encodeURIComponent(data[it]) +
+                '&'
+            }
+            return ret
+          }
+        ],
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      })
+        .then(res => {
+          this.info = res;
+          this.diamondPrice = res.salePrice
+          this.diamondGoodInfo.goodsDetailsId = res.details[0].id,
+          this.diamondGoodInfo.goods_id = res.details[0].goodsId,
+          this.diamondGoodInfo.goods_type = res.details[0].categoryId
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    // 选择成色
+    chooseAttr(type, i) {
+      if(this.type == 'single'){
+        switch (type) {
+          case 'carats':
+            this.selected.caratIndex = i;
+            break;
+          case 'materials':
+            this.selected.materialIndex = i;
+            break;
+          case 'size':
+            this.selected.sizeIndex = i;
+            break;
+          case 'color':
+            this.selected.colorIndex = i;
+            break;
+          default:
+            break;
+        }
+
+        this.price = this.simpleDetail.retailMallPrice
+      }else if(this.type == 'doubleA'){
+        switch (type) {
+          case 'carats':
+            this.doubleSelectedA.caratIndex = i;
+            break;
+          case 'materials':
+            this.doubleSelectedA.materialIndex = i;
+            break;
+          case 'size':
+            this.doubleSelectedA.sizeIndex = i;
+            break;
+          case 'color':
+            this.doubleSelectedA.colorIndex = i;
+            break;
+          default:
+            break;
+        }
+
+        this.getCategoryId()
+      }else if(this.type == 'doubleB'){
+        switch (type) {
+          case 'carats':
+            this.doubleSelectedB.caratIndex = i;
+            break;
+          case 'materials':
+            this.doubleSelectedB.materialIndex = i;
+            break;
+          case 'size':
+            this.doubleSelectedB.sizeIndex = i;
+            break;
+          case 'color':
+            this.doubleSelectedB.colorIndex = i;
+            break;
+          default:
+            break;
+        }
+
+        this.getCategoryId()
+      }else if(this.type == 'madeUpB'){
+        switch (type) {
+          case 'carats':
+            this.madeUpSelectedB.caratIndex = i;
+            break;
+          case 'materials':
+            this.madeUpSelectedB.materialIndex = i;
+            break;
+          case 'size':
+            this.madeUpSelectedB.sizeIndex = i;
+            break;
+          case 'color':
+            this.madeUpSelectedB.colorIndex = i;
+            break;
+          default:
+            break;
+        }
+
+        this.price = this.madeUpDetailB.retailMallPrice
+      }
+    },
+    // 获取对戒ID
+    getCategoryId() {
+      var goosIdA = -1, goosIdB = -1;
+
+      let lenA = this.productDataA.details.length;
+      for(let o=0; o<lenA; o++){
+        if(this.caratsA[this.doubleSelectedA.caratIndex].id == this.productDataA.details[o].carat &&
+          this.materialsA[this.doubleSelectedA.materialIndex].id == this.productDataA.details[o].material &&
+          this.sizesA[this.doubleSelectedA.sizeIndex].id == this.productDataA.details[o].size)
+        {
+          goosIdA = this.productDataA.details[o].id;
+          this.firstRingColorAttrs[0].goods_id = this.productDataA.details[o].id;
+          break
+        }
+      }
+
+      let lenB = this.productDataB.details.length;
+      for(let p=0; p<lenA; p++){
+        if(this.caratsB[this.doubleSelectedB.caratIndex].id == this.productDataB.details[p].carat &&
+          this.materialsB[this.doubleSelectedB.materialIndex].id == this.productDataB.details[p].material &&
+          this.sizesB[this.doubleSelectedB.sizeIndex].id == this.productDataB.details[p].size)
+        {
+          goosIdB = this.productDataB.details[p].id;
+          this.secondRingColorAttrs[0].goods_id = this.productDataB.details[p].id;
+          break
+        }
+      }
+      
+      let lenC = this.info.details.length;
+      for(let q=0; q<lenC; q++){
+        if(this.info.details[q].ladyRing == goosIdA && this.info.details[q].menRing == goosIdB || 
+          this.info.details[q].ladyRing == goosIdB && this.info.details[q].menRing == goosIdA)
+        {
+          this.categoryId = this.info.details[q].categoryId;
+          this.goodsDetailsId = this.info.details[q].id;
+          this.goods.price = this.info.details[q].retailMallPrice;
+          break
+        }
+      }
+    },
+    // 重置数据
+    resetData() {
+      this.type = '';
+      this.productData = {}
+      this.productDataA = {}
+      this.productDataB = {}
+      this.selected = {
+        caratIndex : -1,
+        materialIndex : -1,
+        sizeIndex : -1,
+        colorIndex : -1
+      }
+      this.doubleSelectedA = {
+        caratIndex : -1,
+        materialIndex : -1,
+        sizeIndex : -1,
+        colorIndex : -1
+      }
+      this.doubleSelectedB = {
+        caratIndex : -1,
+        materialIndex : -1,
+        sizeIndex : -1,
+        colorIndex : -1
+      }
+      this.madeUpSelectedA = {
+        caratIndex : -1,
+        materialIndex : -1,
+        sizeIndex : -1,
+        colorIndex : -1
+      }
+      this.madeUpSelectedB = {
+        caratIndex : -1,
+        materialIndex : -1,
+        sizeIndex : -1,
+        colorIndex : -1
+      }
+      this.colorAttrs = [
+        {
+          config_id:'',
+          config_attr_id:''
+        }
+      ]
+      this.firstRingColorAttrs = [
+        {
+          goods_id:'',
+          config_id:'',
+          config_attr_id:''
+        }
+      ]
+      this.secondRingColorAttrs = [
+        {
+          goods_id:'',
+          config_id:'',
+          config_attr_id:''
+        }
+      ]
+      this.madeUpColorAttrs = [
+        {
+          config_id:'',
+          config_attr_id:''
+        }
+      ]
+    },
+    // 确认选择属性
+    confirmAttr() {
+      var _this = this;
+      var goodInfo = [];
+
+      if(this.type == 'single'){
+        let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null && item.config_attr_id !== null)   //筛选色彩中为空的对象
+
+        goodInfo = [
+          {
+            goodsCount: 1,
+            goodsDetailsId: _this.simpleDetail.id,
+            goodsId: _this.goodsId,
+            groupId: null,
+            groupType: null,
+            goodsType:_this.simpleDetail.categoryId,
+            serviceId: 0,
+            serviceVal: 'string',
+            goods_attr: colorArr,   //色彩
+            id: this.cartEditId
+          }
+        ]
+      }else if(this.type == 'doubleA' || this.type == 'doubleB'){
+        goodInfo = [
+          {
+            goodsCount: 1,
+            goodsDetailsId: _this.goodsDetailsId,
+            goodsId: _this.goodsDetailsId,
+            groupId: null,
+            groupType: null,
+            serviceId: 0,
+            serviceVal: 'string',
+            goodsType: _this.categoryId,
+            goods_attr: _this.doubleRingGoodsAttrs,  //色彩
+            id: this.cartEditId
+          }
+        ]
+      }else if(this.type == 'madeUpB'){
+        const timeSock = new Date().getTime()
+        goodInfo = [
+          {
+            goodsCount: 1,
+            goodsDetailsId: this.diamondGoodInfo.goodsDetailsId,
+            goodsId: this.diamondGoodInfo.goods_id,
+            goodsType: this.diamondGoodInfo.goods_type,
+            groupId: timeSock,
+            groupType: 2,
+            serviceId: 0,
+            serviceVal: 'string',
+            id: this.cartEditId
+          },
+          {
+            goodsCount: 1,
+            goodsDetailsId: _this.madeUpDetailB.id,
+            goodsId: _this.madeUpDetailB.id,
+            goodsType:_this.madeUpDetailB.categoryId,
+            groupId: timeSock,
+            groupType: 2,
+            serviceId: 0,
+            serviceVal: 'string',
+            id: this.cartEditId
+          }
+        ]
+      }
+
+      let goodsIndex = _this.selectIndex;
+      _this.$store
+        .dispatch('editCart', [goodInfo,goodsIndex])
+        .then(data => {
+          _this.$toast.show('编辑成功')
+          _this.ifShowEditPopup = false;
+          _this.resetData()
+          if(_this.isLogin){
+            _this.getList()
+          }else{
+            _this.getLocalCart()
+          }
+        })
+        .catch(err => {
+          _this.ifShowEditPopup = false;
+          _this.resetData()
+          console.log(err)
+        })
     }
   }
 }
@@ -1397,5 +2732,129 @@ export default {
   i{
     font-style: normal;
   }
+
+  .edit-popup{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 22;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .edit-box{
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      background-color: #fff;
+      padding: 20px 20px 12px;
+
+      .quit{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        font-size: 18px;
+      }
+
+      .edit-info{
+        width: 100%;
+        height: 100%;
+
+        .info-top{
+          height: 80px;
+          display: flex;
+          align-items: flex-end;
+
+          .goods-img{
+            width: 80px;
+            height: 80px;
+            overflow: hidden;
+
+            img{
+              width: 100%;
+              height: 100%;
+            }
+          }
+
+          .goods-price{
+            font-size: 18px;
+            font-weight: bold;
+            margin-left: 20px;
+          }
+        }
+
+        .attr-list{
+          margin-top: 20px;
+          .attr-text{
+            text-align: left;
+            margin-bottom: 14px;
+          }
+          .attr-box{
+            display: flex;
+            flex-wrap: wrap;
+
+            .attr-child{
+              width: 80px;
+              height: 30px;
+              text-align: center;
+              line-height: 30px;
+              border: 1px solid #ccc;
+              border-radius: 2px;
+              color: #555;
+              margin: 0 10px 20px 0;
+              padding: 0 2px;
+              box-sizing: border-box;
+              white-space: nowrap;
+              overflow: hidden;
+            }
+
+            .active{
+              background-color: #f29b87;
+              border-color: #f29b87;
+              color: #fff;
+            }
+          }
+        }
+
+        .sizes{
+          .attr-child{
+            width: 36px !important;
+            height: 30px;
+          }
+        }
+
+        .colors{
+          .attr-child{
+            width: 46px !important;
+            height: 30px;
+          }
+
+        }
+
+        .confirm{
+          width: 100%;
+          height: 40px;
+          background-color: #ff6900;
+          line-height: 40px;
+          text-align: center;
+          color: #fff;
+          border-radius: 4px;
+          margin-top: 30px;
+        }
+      }
+    }
+  }
+}
+
+.edit{
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background: url(/icon/edit.png) no-repeat center;
+  background-size: 100% 100%;
+  margin-left: 20px;
 }
 </style>

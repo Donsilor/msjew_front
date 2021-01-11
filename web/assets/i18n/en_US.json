@@ -1382,7 +1382,10 @@
         "searchSimilar": "search similar",
         "discounts1": "Coupon",
         "discounts2": "off",
-        "firstLogin": "Please login or register!"
+        "firstLogin": "Please login or register!",
+        "changeAttrSuccess": "Successfully changed parameters",
+        "cancle": "Cancel",
+        "confirm": "Confirm"
     },
     "pay": {
         "confirmOrder": "Shopping cart",

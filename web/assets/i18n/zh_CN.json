@@ -1392,7 +1392,10 @@
         "searchSimilar": "找类似",
         "discounts1": "优惠券",
         "discounts2": "折",
-        "firstLogin": "请先登录或注册！"
+        "firstLogin": "请先登录或注册！",
+        "changeAttrSuccess": "更换参数成功",
+        "cancle": "取消",
+        "confirm": "确定"
     },
     "pay": {
         "confirmOrder": "购物车",

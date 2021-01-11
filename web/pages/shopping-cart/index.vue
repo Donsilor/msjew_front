@@ -11,7 +11,7 @@
         ><span>{{ $t(`${lang}.option`) }}</span>
       </div>
       <div class="cart-goods">
-        <div v-for="(g, index) in good" :key="index">
+        <div v-for="(g, index) in good" :key="index" :class="[{'action': activeIndex == index}]">
           <div v-if="g.groupType === null && Number(g.data[0].goodsType) !== 19" class="finished"> 
             <div
               v-if="g.data[0].simpleGoodsEntity.goodsStatus === 2"
@@ -30,7 +30,7 @@
             </div>
             <div v-else class="cart-radio"></div>
             <!-- :num='totalNum' :price='totalPrice' @totalprice='changePrice'-->
-            <single :g="g" @reloadList="getList"   @bottomData='refreshData' ></single>
+            <single :g="g" :index="index" :good="good" @reloadList="getList" @bottomData='refreshData' @getIndex="getIndex" @closeAttr="closeAttr"></single>
           </div>
           <div v-if="g.data[0].goodsType == '19'" class="couple">
             <!-- <div
@@ -198,7 +198,9 @@ export default {
       soudout:'',
       coinType:'',
       isLogin:this.$store.getters.hadLogin,
-      ifShowLoginPop: false
+      ifShowLoginPop: false,
+      isActive: -1,
+      activeIndex: -1
     }
   },
   computed: {
@@ -223,7 +225,7 @@ export default {
       this.totalPrice=0
       this.allTick=false
       this.tickNum = 0
-      window.location.reload()
+      // window.location.reload()
     },
     handleScroll(e){
         // 为了计算距离顶部的高度，当高度大于150显示回顶部图标，小于150则隐藏
@@ -263,7 +265,7 @@ export default {
           } else {
             window.addEventListener('scroll', this.handleScroll, true)
           }
-          this.defaultAll()
+          // this.defaultAll()
         })
         .catch(err => {
           console.log(err)
@@ -503,8 +505,8 @@ export default {
           this.totalNum=0
           this.totalPrice=0
           this.allTick=false
-          this.$successMessage(this.$t(`${lang}.deleteSuccess`))
           this.getList()
+          this.$successMessage(this.$t(`${lang}.deleteSuccess`))
         })
         .catch(err => {
           if (!err.response) {
@@ -569,6 +571,12 @@ export default {
     },
     closeLogin() {
       this.ifShowLoginPop = false
+    },
+    getIndex(index) {
+      this.activeIndex = this.activeIndex == index ? -1 : index
+    },
+    closeAttr() {
+      this.activeIndex = -1
     }
   }
 }
@@ -745,13 +753,13 @@ export default {
   min-width: 1200px;
   width: 100%;
   text-align: left;
-  overflow: hidden;
+  // overflow: hidden;
   margin: 0 auto;
   position: relative;
 
   .cart-container{
     position: relative;
-    overflow: hidden;
+    // overflow: hidden;
     max-width: 1360px;
     min-width: 1200px;
     width: 100%;
@@ -804,7 +812,7 @@ export default {
     .cart-goods {
       width: 100%;
       position: relative;
-      overflow: hidden;
+      // overflow: hidden;
       background: rgba(255, 255, 255, 1);
       margin-bottom: 17px;
       .finished {
@@ -813,7 +821,7 @@ export default {
         display: flex;
         align-items: center;
         position: relative;
-        overflow: hidden;
+        // overflow: hidden;
         .cart-radio {
           width: 49px;
           height: 178px;
@@ -824,7 +832,7 @@ export default {
         display: flex;
         align-items: center;
         position: relative;
-        overflow: hidden;
+        // overflow: hidden;
         .cart-radio {
           width: 49px;
           height: 174 * 2+2px;
@@ -835,7 +843,7 @@ export default {
         display: flex;
         align-items: center;
         position: relative;
-        overflow: hidden;
+        // overflow: hidden;
         .cart-radio {
           width: 49px;
           height: 282px;
