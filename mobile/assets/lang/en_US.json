@@ -170,6 +170,7 @@
       "totalAmount": "Total Amount",
       "tips": "* A paper invoice will be delivered to you with the order product later, please check it!",
       "confirm": "Confirm submission",
+      "cancel":"Cancel invoice",
       "hint1": "Header type cannot be empty",
       "hint2": "Invoice header cannot be empty",
       "hint3": "Tax ID cannot be empty",
