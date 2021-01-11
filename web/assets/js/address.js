@@ -238,6 +238,7 @@ export default {
 
       this.defaultAddress()
       this.getListTwo()
+      this.getListOne()
     }
   }
 }

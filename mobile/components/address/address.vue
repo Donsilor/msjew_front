@@ -23,10 +23,13 @@
               </p>
               <p class="p2">{{ item.mobile_code }} {{ item.mobile }}</p>
               <p class="p3">{{ item.email }}</p>
-              <p class="p4 ellipsis-address ow-h2">
-                {{ item.country_name}}-{{ item.province_name }}-{{
-                  item.city_name
-                }}-{{ item.address_details }}
+              <p v-if="language == 'zh_CN'" class="p4 ellipsis-address ow-h2">
+                <span v-if="item.city_name == '------'">{{ item.country_name}}-{{ item.province_name }}-{{ item.address_details }}</span>
+                <span v-else>{{ item.country_name}}-{{ item.province_name }}-{{item.city_name}}-{{ item.address_details }}</span>
+              </p>
+              <p v-else class="p4 ellipsis-address ow-h2">
+                <span v-if="item.city_name == '------'">{{ item.address_details }}-{{ item.province_name }}-{{ item.country_name}}</span>
+                <span v-else>{{ item.address_details }}-{{item.city_name}}-{{ item.province_name }}-{{ item.country_name}}</span>
               </p>
               <span v-if="item.is_default == 1 || is_default == 1" class="btn btn-active">{{
                 lang.default

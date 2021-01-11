@@ -1150,15 +1150,15 @@
               :class="{ 'addr-active': addressIdx == index }"
               class="addr-block"
             >
-              <div class="addr-user">{{ a.lastname }}{{ a.firstname }}</div>
+              <div class="addr-user"> {{ a.firstname }} {{ a.lastname }}</div>
               <div class="addr-user-phone">
                 <div>{{ a.mobile_code }}</div>
                 <div>{{ a.mobile }}</div>
               </div>
               <div class="addr-user-email">{{ a.email }}</div>
               <div class="addr-address">
-                <div>{{ a.country_name }} {{ a.province_name }} {{ a.city_name }}</div>
                 <div>{{ a.address_details }}</div>
+                <div> {{ a.city_name }} {{ a.province_name }} {{ a.country_name }}</div>
               </div>
               
               <div>{{ a.zip_code }}</div>
@@ -2512,11 +2512,11 @@ export default {
     alertTipBox(){
       this.alertBox = false
       // 点击修改滚顶到地址选择模块
-      document.getElementById('step').scrollIntoView({
-        block: 'center',
-        inline: 'nearest',
-        behavior: 'smooth'
-      })
+      // document.getElementById('step').scrollIntoView({
+      //   block: 'center',
+      //   inline: 'nearest',
+      //   behavior: 'smooth'
+      // })
     },
     resetAddressInp() {
       // this.phoneNum = this.phoneJson[0]
@@ -2649,6 +2649,7 @@ export default {
       this.addr = data
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address)); 
+      this.$successMessage(this.$t(`${lang}.prompt1`))
       console.log(this.address)
       // this.resetAddressInp()
     },
@@ -2774,6 +2775,7 @@ export default {
       this.newAddress = false
       this.address = content
       localStorage.setItem("myAddress", JSON.stringify(this.address));
+      this.$successMessage(this.$t(`${lang}.prompt2`))
       console.log('this.address',content, this.address)
 
     },
@@ -2869,6 +2871,7 @@ export default {
       this.addr = data
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address));
+      this.$successMessage(this.$t(`${lang}.prompt1`))
       console.log(this.address)
     },
     // 繁体保存地址
@@ -2970,6 +2973,7 @@ export default {
       this.newAddress = false
       this.address = content
       localStorage.setItem("myAddress", JSON.stringify(this.address));
+      this.$successMessage(this.$t(`${lang}.prompt2`))
       console.log('this.address',content, this.address)
 
     },
@@ -2982,6 +2986,7 @@ export default {
       this.addAddress = true
       this.resetAddressInp()
       this.address = []
+      this.$errorMessage(this.$t(`${lang}.prompt3`))
     },
     keydown(){
       var reg = /^[0-9a-zA-Z\-]{1}$/;
@@ -4149,7 +4154,7 @@ div {
             outline: 0;
             font-size: 14px;
             padding: 0 13px;
-            background: rgba(249, 249, 249, 1);
+            background: #fff;
           }
 
           select {
@@ -4222,7 +4227,7 @@ div {
               height: 100%;
               line-height: 38px;
               text-align: left;
-              background: rgba(248, 248, 248, 1);
+              background: #fff;
               -webkit-appearance: none;
               border: 0;
               padding: 0 0 0 13px;
@@ -5893,7 +5898,7 @@ div {
             outline: 0;
             font-size: 14px;
             padding: 0 13px;
-            background: rgba(249, 249, 249, 1);
+            background: #fff;
           }
           select {
             position: absolute;
@@ -5957,7 +5962,7 @@ div {
               height: 100%;
               line-height: 38px;
               text-align: left;
-              background: rgba(248, 248, 248, 1);
+              background: #fff;
               -webkit-appearance: none;
               border: 0;
               padding: 0 0 0 13px;
