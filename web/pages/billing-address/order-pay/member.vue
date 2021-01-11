@@ -65,7 +65,7 @@
       }"
       class="address-box"
     >
-      <div class="addr-blocks">
+      <div class="addr-blocks" id="aleart">
         <div
           v-for="(a, index) in address"
           :key="index"
@@ -1039,7 +1039,7 @@
       }"
       class="address-box"
     >
-      <div class="addr-blocks">
+      <div class="addr-blocks" id="aleart">
         <div
           v-for="(a, index) in address"
           :key="index"
@@ -2181,6 +2181,7 @@ export default {
         this.newAddress = true
       }
 
+      console.log("this.isEdit",this.isEdit)
       if(!this.isEdit){
         // 点击修改滚顶到地址选择模块
         document.getElementById('step').scrollIntoView({
@@ -2300,6 +2301,7 @@ export default {
     },
     resetAddressInp() {
       // this.phoneNum = this.phoneJson[0]
+      this.isEdit = false
       this.addressData = {
         lastname: '',
         firstname: '',
@@ -2697,7 +2699,7 @@ export default {
             email: this.addressData.email,
             country_id: this.country.areaId,
             province_id: this.province.areaId,
-            city_id: this.city.areaId,
+            city_id: this.city.areaId =='' ? 0 :this.city.areaId,
             address_details: this.addressData.address_details,
             zip_code: this.addressData.zip_code,
             is_default: this.addressData.is_default
@@ -2805,7 +2807,7 @@ export default {
             email: this.addressData.email,
             country_id: this.country.areaId,
             province_id: this.province.areaId,
-            city_id: this.city.areaId,
+            city_id: this.city.areaId =='' ? 0 :this.city.areaId,
             address_details: this.addressData.address_details,
             zip_code: this.addressData.zip_code,
             is_default: this.addressData.is_default
@@ -3084,15 +3086,12 @@ export default {
 
       if(this.newAddress == true){
         this.$errorMessage(this.$t(`${lang}.msg13`)) 
-        const topB = document.getElementsByClassName('layout-box')[0];
-        const that = this
-        let timer = setInterval(() => {
-          let ispeed = Math.floor(-that.scrollTop / 5)
-          topB.scrollTop = that.scrollTop + ispeed
-          if (that.scrollTop === 0) {
-            clearInterval(timer)
-          }
-        }, 22)
+        // 点击修改滚顶到地址编辑模块
+        document.getElementById('aleart').scrollIntoView({
+          block: 'center',
+          inline: 'nearest',
+          behavior: 'smooth'
+        })
         return
       }
 
@@ -3204,15 +3203,12 @@ export default {
 
       if(this.newAddress == true){
         this.$errorMessage(this.$t(`${lang}.msg13`)) 
-        const topB = document.getElementsByClassName('layout-box')[0];
-        const that = this
-        let timer = setInterval(() => {
-          let ispeed = Math.floor(-that.scrollTop / 5)
-          topB.scrollTop = that.scrollTop + ispeed
-          if (that.scrollTop === 0) {
-            clearInterval(timer)
-          }
-        }, 22)
+         // 点击修改滚顶到地址编辑模块
+        document.getElementById('aleart').scrollIntoView({
+          block: 'center',
+          inline: 'nearest',
+          behavior: 'smooth'
+        })
         return
       }
 
