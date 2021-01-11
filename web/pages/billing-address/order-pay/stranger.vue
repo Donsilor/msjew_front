@@ -2451,6 +2451,7 @@ export default {
     }
   },
   mounted() {
+    console.log(1111,this.countryList ,this.provinceList,this.cityList) 
     window.addEventListener('scroll', this.scrollToTop);
 
     this.defaultAddress()
@@ -2490,6 +2491,23 @@ export default {
           clearInterval(timer)
         }
       }, 22)
+
+      // 【499】
+      if(this.addAddress == true && this.address.length > 0){
+        this.$errorMessage(this.$t(`${lang}.msg13`)) 
+        const topB = document.getElementsByClassName('layout-box')[0];
+        const that = this
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 5)
+          topB.scrollTop = that.scrollTop + ispeed
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+        return
+      }
+
+
       console.log("sssss",this.address)
       if(this.address.length == 0){
         this.$errorMessage(this.$t(`${lang}.msg4`)) 
@@ -2650,6 +2668,7 @@ export default {
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address)); 
       this.$successMessage(this.$t(`${lang}.prompt1`))
+      this.addAddress = false
       console.log(this.address)
       // this.resetAddressInp()
     },
@@ -2774,6 +2793,7 @@ export default {
       this.addressBox = true
       this.newAddress = false
       this.address = content
+      this.addAddress = false 
       localStorage.setItem("myAddress", JSON.stringify(this.address));
       this.$successMessage(this.$t(`${lang}.prompt2`))
       console.log('this.address',content, this.address)
@@ -2872,6 +2892,7 @@ export default {
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address));
       this.$successMessage(this.$t(`${lang}.prompt1`))
+      this.addAddress = false
       console.log(this.address)
     },
     // 繁体保存地址
@@ -2972,6 +2993,7 @@ export default {
       this.addressBox = true
       this.newAddress = false
       this.address = content
+      this.addAddress = false
       localStorage.setItem("myAddress", JSON.stringify(this.address));
       this.$successMessage(this.$t(`${lang}.prompt2`))
       console.log('this.address',content, this.address)

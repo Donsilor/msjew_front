@@ -3082,6 +3082,20 @@ export default {
 
       }
 
+      if(this.newAddress == true){
+        this.$errorMessage(this.$t(`${lang}.msg13`)) 
+        const topB = document.getElementsByClassName('layout-box')[0];
+        const that = this
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 5)
+          topB.scrollTop = that.scrollTop + ispeed
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+        return
+      }
+
       var address = {};
       if(this.addressIdx != -1){
         address = this.address[this.addressIdx]
@@ -3186,6 +3200,20 @@ export default {
         this.wrongMsg = this.$t(`${lang}.msg4`)
         this.alertBox = true
         return false
+      }
+
+      if(this.newAddress == true){
+        this.$errorMessage(this.$t(`${lang}.msg13`)) 
+        const topB = document.getElementsByClassName('layout-box')[0];
+        const that = this
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 5)
+          topB.scrollTop = that.scrollTop + ispeed
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+        return
       }
 
       var address = {};
