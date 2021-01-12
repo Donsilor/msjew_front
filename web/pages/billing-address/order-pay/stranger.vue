@@ -885,7 +885,7 @@
                   </div>
                 </div>
                 <!-- Stripe -->
-                <div v-if="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="Way(9)">
+                <!-- <div v-if="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="Way(9)">
                   <div class="pay-img">
                     <img src="../../../static/order/stripe.png" alt="" class="initial" />
                   </div>
@@ -895,9 +895,9 @@
                   </div>
                   <div v-show="payWay == 9" class="choose-tick">
                     <img src="../../../static/order/tick.png" alt="" />
-                  </div>
+                  </div> -->
                   <!-- <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div> -->
-                </div>
+                <!-- </div> -->
                 <!-- vise -->
                 <!-- <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 61 }" class="pay-block" @click="Way(61)">
                   <div class="pay-img">
@@ -1955,7 +1955,7 @@
                   </div>
                 </div>
                 <!-- Stripe -->
-                <div v-if="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="Way(9)">
+                <!-- <div v-if="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="Way(9)">
                   <div class="pay-img">
                     <img src="../../../static/order/stripe.png" alt="" class="initial" />
                   </div>
@@ -1965,9 +1965,9 @@
                   </div>
                   <div v-show="payWay == 9" class="choose-tick">
                     <img src="../../../static/order/tick.png" alt="" />
-                  </div>
+                  </div> -->
                   <!-- <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div> -->
-                </div>
+                <!-- </div> -->
                 <!-- vise -->
                 <!-- <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 61 }" class="pay-block" @click="Way(61)">
                   <div class="pay-img">
