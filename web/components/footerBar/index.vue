@@ -139,8 +139,8 @@
     </div>-->
     <footer class="copy-right">
       <div class="copy-right-content">
-        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRightMsCn`) }}</div>
-        <div v-else>{{ $t(`${lang}.copyrightRightMs`) }}</div>
+        <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRightMsCn1`) }}<a target="_blank" href="https://beian.miit.gov.cn">20035106</a>{{ $t(`${lang}.copyrightRightMsCn2`) }}</div>
+        <div v-else>{{ $t(`${lang}.copyrightRightMs1`) }}<a target="_blank" href="https://beian.miit.gov.cn">20035106</a>{{ $t(`${lang}.copyrightRightMs2`) }}</div>
         <!-- <div v-else>{{ $t(`${lang}.copyrightLeft`) }}</div> -->
         <!-- <div v-if="this.$store.state.platform === 20">{{ $t(`${lang}.copyrightRight1`) }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ $t(`${lang}.copyrightRight2`) }}</div>
         <div v-else>{{ $t(`${lang}.copyrightRight`) }}</div> -->
