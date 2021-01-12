@@ -57,8 +57,8 @@
     </section>
     <!-- 备案号 -->
     <div class="copy-right">
-      <div v-if="this.$store.state.platform === 21" class="record-number">{{ lang.copyrightRightMsCn }}</div>
-      <div v-else class="record-number">{{ lang.copyrightRightMs }}</div>
+      <div v-if="this.$store.state.platform === 21" class="record-number">{{ lang.copyrightRightMsCn1 }}<a target="_blank" href="https://beian.miit.gov.cn">20035106</a>{{ lang.copyrightRightMsCn2}}</div>
+      <div v-else class="record-number">{{ lang.copyrightRightMs1 }}<a target="_blank" href="https://beian.miit.gov.cn">20035106</a>{{ lang.copyrightRightMs2}}</div>
       <!-- <div v-if="this.$store.state.platform === 21" style="font-size:9px;margin-top:20px;">{{ lang.copyrightRight1 }}<a target="_blank" href="http://www.beian.miit.gov.cn/">20035106</a> {{ lang.copyrightRight2}}</div>
       <span v-else class="text" >Copyright © 2020 MORESHINE</span> -->
     </div>
