@@ -280,12 +280,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        {
-          url: '/cart/Stripe.png',
-          type: 9,
-          title: this.LANGUAGE.cart.pay.payType9,
-          des: this.LANGUAGE.cart.pay.type9Text
-        }
+        // {
+        //   url: '/cart/Stripe.png',
+        //   type: 9,
+        //   title: this.LANGUAGE.cart.pay.payType9,
+        //   des: this.LANGUAGE.cart.pay.type9Text
+        // }
       ],
       // 台湾支付
       listTw: [
@@ -316,12 +316,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        {
-          url: '/cart/Stripe.png',
-          type: 9,
-          title: this.LANGUAGE.cart.pay.payType9,
-          des: this.LANGUAGE.cart.pay.type9Text
-        }
+        // {
+        //   url: '/cart/Stripe.png',
+        //   type: 9,
+        //   title: this.LANGUAGE.cart.pay.payType9,
+        //   des: this.LANGUAGE.cart.pay.type9Text
+        // }
       ],
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
