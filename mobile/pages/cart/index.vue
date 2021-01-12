@@ -297,10 +297,10 @@
       </div>
     </div>
 
-    <div v-if="ifShowEditPopup" class="edit-popup">
+    <div v-if="ifShowEditPopup && showAttr" class="edit-popup">
       <div class="edit-box">
         <div class="edit-info">
-          <div class="quit" @click="ifShowEditPopup = false">x</div>
+          <div class="quit" @click="ifShowEditPopup = false, resetData()">x</div>
           <div class="info-top">
             <div class="goods-img">
               <img :src="goods.url" alt="">
@@ -892,6 +892,30 @@ export default {
       }
 
       return result
+    },
+    showAttr() {
+      var res = false;
+      if(this.type == 'single'){
+        if(this.carats.length || this.materials.length || this.sizes.length || this.colorDetail.length){
+          res = true
+        }else{
+          res = false
+        }
+      }else if(this.type == 'doubleA'){
+        if(this.caratsA.length || this.materialsA.length || this.sizesA.length || this.firstRingColorDetail.length){
+          res = true
+        }else{
+          res = false
+        }
+      }else if(this.type == 'doubleB' || this.type == 'madeUpB'){
+        if(this.caratsB.length || this.materialsB.length || this.sizesB.length || this.secondRingColorDetail.length){
+          res = true
+        }else{
+          res = false
+        }
+      }
+
+      return res
     }
   },
   mounted() {
@@ -2047,7 +2071,7 @@ export default {
             break;
         }
 
-        this.price = this.simpleDetail.retailMallPrice
+        this.goods.price = this.simpleDetail.retailMallPrice
       }else if(this.type == 'doubleA'){
         switch (type) {
           case 'carats':
@@ -2104,7 +2128,7 @@ export default {
             break;
         }
 
-        this.price = this.madeUpDetailB.retailMallPrice
+        this.goods.price = this.madeUpDetailB.retailMallPrice
       }
     },
     // 获取对戒ID
@@ -2279,7 +2303,7 @@ export default {
       _this.$store
         .dispatch('editCart', [goodInfo,goodsIndex])
         .then(data => {
-          _this.$toast.show('编辑成功')
+          _this.$toast.show(this.lang.changeAttrSuccess)
           _this.ifShowEditPopup = false;
           _this.resetData()
           if(_this.isLogin){
@@ -2856,5 +2880,6 @@ export default {
   background: url(/icon/edit.png) no-repeat center;
   background-size: 100% 100%;
   margin-left: 20px;
+  vertical-align: sub;
 }
 </style>

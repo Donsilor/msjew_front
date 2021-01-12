@@ -55,7 +55,7 @@
             <div>{{ i.configAttrIVal }}</div>
           </div>
 
-          <div class="goods-attr">
+          <div v-if="type == 'single' && showAttr" class="goods-attr">
             <div class="triangle">
               <span></span>
               <span></span>

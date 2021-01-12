@@ -49,6 +49,38 @@ export default {
       colorText: '色彩'
     }
   },
+  computed: {
+    showAttr() {
+      var res = false;
+      if(this.type == 'single'){
+        if(this.carats.length || this.materials.length || this.sizes.length || this.colorDetail.length){
+          res = true
+        }else{
+          res = false
+        }
+      }else if(this.type == 'doubleA'){
+        if(this.caratsA.length || this.materialsA.length || this.sizesA.length || this.firstRingColorDetail.length){
+          res = true
+        }else{
+          res = false
+        }
+      }else if(this.type == 'doubleB'){
+        if(this.caratsB.length || this.materialsB.length || this.sizesB.length || this.secondRingColorDetail.length){
+          res = true
+        }else{
+          res = false
+        }
+      }else if(this.type == 'madeUpB'){
+        if(this.caratsB.length || this.materialsB.length || this.sizesB.length || this.colorDetailB.length){
+          res = true
+        }else{
+          res = false
+        }
+      }
+
+      return res
+    }
+  },
   methods: {
     // 编辑商品属性
     editAttr(type) {
@@ -606,8 +638,7 @@ export default {
             break;
         }
 
-        console.log(1212, this.simpleDetail)
-        // this.price = this.simpleDetail.retailMallPrice
+        this.price = this.simpleDetail.retailMallPrice
       }else if(this.type == 'doubleA'){
         switch (type) {
           case 'carats':
