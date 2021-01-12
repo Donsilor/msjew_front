@@ -439,6 +439,113 @@ export default {
             }
         })
     },
+
+    // 编辑购物车
+    editCart ({ $axios, state, getters, commit, dispatch }, goodsData = []) {
+        let goodsD = goodsData
+        let goods = goodsData[0]
+        // console.log("lalal",goods)
+        let data = null
+        if (Array.isArray(goods)) {
+            data = goods
+        } else if (goods instanceof Object) {
+            data = [goods]
+        } else {
+            return Promise.reject(new Error('goods must be Array or Object'))
+        }
+
+        if (data.length === 0) {
+            return Promise.reject(new Error('goods can not be null'))
+        }
+
+        let request = null
+        if (getters.hadLogin) {
+            // 已登录的操作
+            // console.log('已登录的操作')
+            request = dispatch('editOnlineCart', goods)
+        } else {
+            // 未登录的操作
+            request = dispatch('editLocalCart', goodsD)
+            // setTimeout(() => {
+            //     this.$router.push(`/login`)
+            // }, 2000)
+            // return Promise.reject(new Error('请先登陆！'))
+        }
+        request
+            .then(data => {
+                // 编辑成功后，重新获取购物车数据
+                dispatch('getCart')
+                return Promise.resolve(data)
+            })
+            .catch(err => {
+                return Promise.reject(err)
+            })
+        return request
+    },
+    // 编辑本地购物车
+    editLocalCart ({ $axios, state, getters, commit, dispatch }, goodsData = []) {
+        // console.log('editLocalCart=====>',goodsData)
+        let goods = goodsData[0]
+        let listIndex = goodsData[1]
+        // console.log("2222", goods)
+        const time = getTimestampUuid()
+        const addInfo = {
+            id: time,
+            createTime: time,
+            updateTime: time,
+            data: goods
+        }
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                let cart = await dispatch('getLocalCart')
+                let site = cart.length-listIndex-1
+                cart.splice(site, 1, addInfo)
+                if (cart.length > 30) {
+                    return reject(new Error(lang.cartIsFull))
+                }
+                // cart = cart.concat(goods)
+                // 本地加入购物车数据
+                localStorage.setItem(CART, JSON.stringify(cart))
+                return resolve(cart)
+            } catch (e) {
+                // console.log("eeeeee", e)
+                return reject(e)
+            }
+        })
+    },
+     // 编辑线上购物车
+    editOnlineCart ({ $axios, state, getters, commit, dispatch }, goodsData = []) {
+        // console.log('editOnlineCart=====>',goodsData)
+        const time = getTimestampUuid()
+
+        var goods = goodsData.map(item => {
+            item.createTime = time
+            item.updateTime = time
+            item.goods_id = item.goodsDetailsId
+            return item
+        })
+
+        // console.log('goods-------->', goods)
+
+        return this.$axios({
+            method: 'post',
+            url: 'web/member/cart/add',
+            data: {
+                // goods_type: 1, // 类别(1:普通批量添加,2:登录批量添加
+                goodsCartList: goods
+            }
+        })
+            .then(data => {
+                // console.log("添加购物车", data)
+                // 重新请求购物车数量（和购物车列表）
+                return Promise.resolve('success')
+            })
+            .catch(err => {
+                return Promise.reject(err)
+            })
+    },
+    
     //保存游客订单id 后加
     setLocalCartOrder ({ $axios, state, getters, commit, dispatch }, orderSn) {
         const cartOrderSn = 'cartOrderSn'

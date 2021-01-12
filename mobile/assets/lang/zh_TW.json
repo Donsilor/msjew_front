@@ -146,7 +146,9 @@
       "toast1": "請選擇要結賬商品",
       "toast2": "移除成功",
       "discounts1": "優惠券",
-      "discounts2": "折"
+      "discounts2": "折",
+      "changeAttrSuccess": "更換參數成功",
+      "confirm": "確定"
     },
     "invoice":{
       "personal":"個人",

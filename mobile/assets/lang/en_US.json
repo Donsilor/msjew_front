@@ -146,7 +146,10 @@
       "toast1": "Choose products before you pay",
       "toast2": "Deleted",
       "discounts1": "Coupon",
-      "discounts2": "off"
+      "discounts2": "off",
+      "changeAttrSuccess": "Successfully changed parameters",
+      "confirm": "Confirm"
+
     },
     "invoice": {
       "personal":"personal",
