@@ -148,7 +148,9 @@
       "discounts1": "優惠券",
       "discounts2": "折",
       "changeAttrSuccess": "更換參數成功",
-      "confirm": "確定"
+      "confirm": "確定",
+      "guessLike":"猜妳喜歡",
+      "lookMore":"查看更多"
     },
     "invoice":{
       "personal":"個人",
@@ -955,7 +957,8 @@
       "addressMessage": "暫無地址訊息",
       "chooseDiamondContrast": "選擇需要對比的莫桑石",
       "cartMessage": "您的購物車內暫無商品，去看看心儀的商品",
-      "soleOut": "商品已售罄"
+      "soleOut": "商品已售罄",
+      "emptyCart":"購物車內暫無商品，去逛逛吧"
     },
     "footerBar": {
       "custoService": "客戶服務",

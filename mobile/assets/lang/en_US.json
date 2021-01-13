@@ -148,8 +148,9 @@
       "discounts1": "Coupon",
       "discounts2": "off",
       "changeAttrSuccess": "Successfully changed parameters",
-      "confirm": "Confirm"
-
+      "confirm": "Confirm",
+      "guessLike":"Maybe you like",
+      "lookMore":"More"
     },
     "invoice": {
       "personal":"personal",
@@ -955,7 +956,8 @@
       "addressMessage": "No address information",
       "chooseDiamondContrast": "Choose diamonds to compare",
       "cartMessage": "Your cart is empty now. Go and look for your favorites.",
-      "soleOut": "The Goods Have Sold Out"
+      "soleOut": "The Goods Have Sold Out",
+      "emptyCart":"There are no products in the shopping cart Let's go shopping"
     },
     "footerBar": {
       "custoService": "Customer Service",

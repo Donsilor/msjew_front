@@ -1398,7 +1398,12 @@
         "firstLogin": "请先登录或注册！",
         "changeAttrSuccess": "更换参数成功",
         "cancle": "取消",
-        "confirm": "确定"
+        "confirm": "确定",
+        "emptyCart":"购物车内暂无商品，去逛逛吧",
+        "emptyCart1":"购物车内暂无商品，",
+        "emptyCart2":"去逛逛吧",
+        "Pick":"去挑选",
+        "guessLike":"猜你喜欢"
     },
     "pay": {
         "confirmOrder": "购物车",

@@ -1388,7 +1388,12 @@
         "firstLogin": "Please login or register!",
         "changeAttrSuccess": "Successfully changed parameters",
         "cancle": "Cancel",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "emptyCart":"There are no products in the shopping cart Let's go shopping",
+        "emptyCart1":"There are no products in the shopping cart ",
+        "emptyCart2":"Let's go shopping",
+        "Pick":"Go shopping",
+        "guessLike":"Maybe you like"
     },
     "pay": {
         "confirmOrder": "Shopping cart",

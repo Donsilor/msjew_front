@@ -1392,7 +1392,12 @@
         "firstLogin": "請先登錄或註冊！",
         "changeAttrSuccess": "更換參數成功",
         "cancle": "取消",
-        "confirm": "確定"
+        "confirm": "確定",
+        "emptyCart":"購物車內暫無商品，去逛逛吧",
+        "emptyCart1":"購物車內暫無商品，",
+        "emptyCart2":"去逛逛吧",
+        "Pick":"去挑選",
+        "guessLike":"猜妳喜歡"
     },
     "pay": {
         "confirmOrder": "購物車",
