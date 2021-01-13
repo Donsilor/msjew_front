@@ -146,7 +146,9 @@
         "toast1": "请选择要结账商品",
         "toast2": "移除成功",
         "discounts1": "优惠券",
-        "discounts2": "折"
+        "discounts2": "折",
+        "guessLike":"猜你喜欢",
+        "lookMore":"查看更多"
       },
       "invoice":{
         "personal":"个人",
@@ -953,7 +955,8 @@
         "addressMessage": "暂无地址讯息",
         "chooseDiamondContrast": "选择需要对比的莫桑石",
         "cartMessage": "您的购物车内暂无商品，去看看心仪的商品",
-        "soleOut": "商品已售罄"
+        "soleOut": "商品已售罄",
+        "emptyCart":"购物车内暂无商品，去逛逛吧"
       },
       "footerBar": {
         "custoService": "客户服务",

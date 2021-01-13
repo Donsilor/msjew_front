@@ -1395,7 +1395,12 @@
         "searchSimilar": "找类似",
         "discounts1": "优惠券",
         "discounts2": "折",
-        "firstLogin": "请先登录或注册！"
+        "firstLogin": "请先登录或注册！",
+        "emptyCart":"购物车内暂无商品，去逛逛吧",
+        "emptyCart1":"购物车内暂无商品，",
+        "emptyCart2":"去逛逛吧",
+        "Pick":"去挑选",
+        "guessLike":"猜你喜欢"
     },
     "pay": {
         "confirmOrder": "购物车",

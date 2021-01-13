@@ -1385,7 +1385,12 @@
         "searchSimilar": "search similar",
         "discounts1": "Coupon",
         "discounts2": "off",
-        "firstLogin": "Please login or register!"
+        "firstLogin": "Please login or register!",
+        "emptyCart":"There are no products in the shopping cart Let's go shopping",
+        "emptyCart1":"There are no products in the shopping cart ",
+        "emptyCart2":"Let's go shopping",
+        "Pick":"Go shopping",
+        "guessLike":"Maybe you like"
     },
     "pay": {
         "confirmOrder": "Shopping cart",

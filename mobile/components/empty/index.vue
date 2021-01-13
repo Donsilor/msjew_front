@@ -54,7 +54,7 @@ export default {
         },
         cart: {
           image: '/empty/list.png',
-          message: this.LANGUAGE.components.empty.cartMessage,
+          message: this.LANGUAGE.components.empty.emptyCart,
           button: [
             {
               text: this.LANGUAGE.components.empty.toShopping,
@@ -157,7 +157,7 @@ export default {
 
 <style lang="less" scoped="scoped">
 .empty-container {
-  padding-top: 100px;
+  padding-top: 50px;
 
   .empty-image {
     img {
@@ -188,13 +188,13 @@ export default {
     button {
       width: 120px;
       height: 36px;
-      background: rgba(250, 250, 250, 1);
-      border: 1px solid rgba(221, 221, 221, 1);
+      background: #f29b87;
+      border: 1px solid #f29b87;
       border-radius: 5px;
 
       font-size: 14px;
       font-weight: 400;
-      color: rgba(102, 102, 102, 1);
+      color: #fff;
     }
   }
 }

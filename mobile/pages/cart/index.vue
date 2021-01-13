@@ -1,7 +1,7 @@
 <template>
   <div class="address">
     <Header :title="`${lang.order}(${num})`" />
-    <div v-if="!noListData" class="content">
+    <div v-if="!noData" class="content">
       <div class="mod">
         <ul>
           <li
@@ -295,11 +295,82 @@
         </div>
       </div>
     </div>
-    <bdd-empty
-      v-if="list.length <= 0 && this.isLoading !==''"
-      :type="'cart'"
-      @toShopping="toShopping"
-    ></bdd-empty>
+    <div v-if="list.length == 0">
+      <bdd-empty
+        v-if="(list.length <= 0 && this.isLoading !=='' && isLogin) || (list.length <= 0 && !isLogin)"
+        :type="'cart'"
+        @toShopping="toShopping"
+      ></bdd-empty>
+      <!--猜你彩泥喜欢商品列表 -->
+      <div class="product-list" v-if="showData.length > 0">
+        <div class="list-part" >
+          <div class="title" v-show="pageInfo && pageInfo.total_count">
+            {{lang.guessLike}}
+          </div>
+          <div class="list">
+            <div v-for="(each, n) in getRandomArray(showData,10)" :key="n" @click="toDetail(each)">
+              <div class="info-image">
+                <img
+                  :src="imageStrToArray(each.goodsImages)[0] || '/luanlai.jpg'"
+                  :alt="each.goodsName"
+                  @error="imageError"
+                />
+
+                <!-- 折扣 -->
+                <div class="discount-a-icon" v-if="couponType(each.coupon) == 'discount'">
+                  <div>{{ language == 'en_US' ? discountUs(each.coupon.discount.discount)+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</div>
+                </div>
+
+                <!-- 优惠券 -->
+                <div class="discount-a-icon" v-if="couponType(each.coupon) == 'money'">
+                  <div>{{ lang.discounts1 }}</div>
+                </div>
+
+              </div>
+
+              <!-- 折扣 -->
+              <div class="info-title ow-h2" v-if="couponType(each.coupon) == 'discount'">
+                <span class="discount-a-icon2">{{ language == 'en_US' ? discountUs(each.coupon.discount.discount)+'%' : discountConversion(each.coupon.discount.discount)}}{{ lang.discounts2 }}</span>
+                {{ each.goodsName }}
+              </div>
+
+              <!-- 优惠券 -->
+              <div class="info-title ow-h2" v-else-if="couponType(each.coupon) == 'money'">
+                <span class="discount-b-icon2">￥</span>
+                {{ each.goodsName }}
+              </div>
+
+              <div v-else class="info-title ow-h2">
+                {{ each.goodsName }}
+              </div>
+
+              <div class="product-price">
+                <div class="list-discount-price" v-if="couponType(each.coupon) !== 'discount'">
+                  <div class="info-price">
+                    <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                    <span class="price">{{ formatNumber(each.salePrice) }}</span>
+                  </div>
+                </div>
+              
+                <!-- 折扣 -->
+                <div class="list-discount-price" v-if="couponType(each.coupon) == 'discount'">
+                  <div class="info-price old-price-2">
+                    <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                    <span class="price">{{ formatNumber(each.salePrice) }}</span>
+                  </div>
+                  <div class="info-price">
+                    <span class="coin">{{ formatCoin(each.coinType) }}</span>
+                    <span class="price">{{ formatNumber(each.coupon.discount.price) }}</span>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+        <div class="look_more" @click="goRing"><span>{{lang.lookMore}}</span></div>
+      </div>
+    </div>
     <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
   </div>
 </template>
@@ -307,6 +378,8 @@
 <script>
 import Header from '@/components/personal/header.vue'
 import { formatMoney } from '@/assets/js/filterUtil.js'
+import List from '@/mixins/list.js'
+import GoodListProps from '@/mixins/good-search-list-props.js'
 const storage = process.client ? require('good-storage').default : {}
 export default {
   name: 'Cart',
@@ -314,13 +387,14 @@ export default {
   components: {
     Header
   },
+  mixins: [List,GoodListProps], 
   data() {
     return {
       coin: this.$store.state.coin,
       list: [],
       selectAll: false,
       sumPrice: 0,
-      noListData: true,
+      noData: true,
       isLogin: !!this.$store.getters.hadLogin,
       cartList: [],
       sumNum: 0,
@@ -330,11 +404,29 @@ export default {
       soudout:'',
       language: this.$store.state.language,
       isLoading:'',
-      ifShowPop: false
+      ifShowPop: false,
+      similarGoodsId: '',
+    }
+  },
+  computed: {
+    // 列表特定query参数
+    specialParams() {
+      // console.log("dssada",this.showData) 
+      // this.list = this.showData
+      return {
+        categoryId: this.categoryId,
+        similarGoodsId: this.similarGoodsId
+      }
     }
   },
   mounted() {
     this.$nextTick(() => {
+      if (this.$route.query) {
+        this.keyword = this.$helpers.base64Decode(
+          this.$route.query.keyword || ''
+        )
+      }
+      this.research()
       if(this.list.length > 0){
         this.$nuxt.$loading.start()
       }
@@ -347,10 +439,131 @@ export default {
     })
   },
   methods: {
+    goRing() {
+      this.$router.replace({
+        path: '/marriage-ring/single-ring'
+      })
+    },
+    /* 随机获取数组中的数据*/
+    getRandomArray(arr,num){
+      // console.log(111111111,this.num)
+      //新建一个数组,将传入的数组复制过来,用于运算,而不要直接操作传入的数组;
+      var temp_array = new Array();
+      for (var index in arr) {
+        if(arr[index].goodsImages !== '?x-oss-process=style/400X400' && (parseInt(arr[index].categoryId) !== 15)&& (parseInt(arr[index].categoryId) !== 12)&& (parseInt(arr[index].categoryId) !== 20)){
+          // console.log(111111111,arr[index])
+            temp_array.push(arr[index]);
+        }
+      }
+      //取出的数值项,保存在此数组
+      var return_array = new Array();
+      for (var i = 0; i<num; i++) {
+          //判断如果数组还有可以取出的元素,以防下标越界
+          if (temp_array.length>0) {
+              //在数组中产生一个随机索引
+              var arrIndex = Math.floor(Math.random()*temp_array.length);
+              //将此随机索引的对应的数组元素值复制出来
+              return_array[i] = temp_array[arrIndex];
+              //然后删掉此索引的数组元素,这时候temp_array变为新的数组
+              temp_array.splice(arrIndex, 1);
+          } else {
+              //数组中数据项取完后,退出循环,比如数组本来只有10项,但要求取出20项.
+              break;
+          }
+      }
+      console.log("Dsdas",return_array) 
+      return return_array;
+    },
+    toDetail(info) {
+      let routerName = ''
+      switch (info.categoryId) {
+        case 15:
+          // 钻石
+          routerName = 'diamond-diamonds'
+          break
+        case 2:
+          // 戒指
+          routerName = 'marriage-ring-single-ring-detail'
+          break
+        case 3:
+          // 珠宝饰品
+          routerName = 'accessories-accessories'
+          break
+        case 4:
+          // 项链
+          routerName = 'accessories-accessories'
+          break
+        case 5:
+          // 吊坠
+          routerName = 'accessories-accessories'
+          break
+        case 6:
+          // 耳钉
+          routerName = 'accessories-accessories'
+          break
+        case 7:
+          // 耳环
+          routerName = 'accessories-accessories'
+          break
+        case 8:
+          // 手链
+          routerName = 'accessories-accessories'
+          break
+        case 9:
+          // 手镯
+          routerName = 'accessories-accessories'
+          break
+        case 17:
+          // 手镯
+          routerName = 'accessories-accessories'
+          break
+        case 18:
+          // 手镯
+          routerName = 'accessories-accessories'
+          break
+        case 16:
+          // 手镯
+          routerName = 'accessories-accessories'
+          break
+        case 12:
+          routerName = 'engagement-engagement-rings'
+          break
+        // 对戒
+        case 19:
+          routerName = 'marriage-ring-pair-ring-detail'
+          break
+      }
+
+      if(info.categoryId == 2){
+          this.$router.push({
+            name: routerName,
+            query: {
+              goodId: info.goodsId || info.id,
+              ringType : 'single'
+            }
+          })
+      }else if(info.categoryId == -1){
+        this.$router.push({
+          name: routerName,
+          query: {
+            goodId: info.goodsId || info.id,
+            ringType : 'pair'
+          }
+        })
+      }else{
+        this.$router.push({
+          name: routerName,
+          query: {
+            goodId: info.goodsId || info.id,
+          }
+        })
+      }
+
+    },
     formatMoney: formatMoney,
     toShopping() {
       this.$router.push({
-        name: 'index'
+        path: '/marriage-ring/single-ring'
       })
     },
     // 去找类似
@@ -675,7 +888,7 @@ export default {
       this.$store.dispatch('getLocalCart').then(res => {
         // console.log("djkashdkasjdklasj",res)
         if (res.length > 0) {
-          this.noListData = false
+          this.noData = false
           this.cartList = []
           res.map((item, index) => {
             console.log("item",item)
@@ -754,7 +967,7 @@ export default {
       // console.log("res",res)
       this.list = []
       if (res && res.length > 0) {
-        this.noListData = false
+        this.noData = false
         res.map((item, index) => {
           // console.log("dddd",item) 
           this.coin = item.simpleGoodsEntity.coinType
@@ -829,7 +1042,7 @@ export default {
         }
         this.getNum()
       } else {
-        this.noListData = true
+        this.noData = true
         this.num = 0
       }
     },
@@ -1397,5 +1610,34 @@ export default {
   i{
     font-style: normal;
   }
+}
+
+.product-list{
+  margin-top: 50px;
+  background: #fff;
+  .list-part{
+    background: #fff;
+    .list{
+      background: #f5f5f5;
+      padding: 5px;
+    }
+    .title{
+      text-align: center;
+      display: block!important;
+      font-size:14px;
+      padding: 5px!important;
+    }
+  }
+  .look_more{
+    margin: 6px 0;
+    span{
+      color:#FF6900;
+      text-decoration: underline;
+      font-size: 14px;
+    }
+  }
+}
+.list-part {
+  @listPart();
 }
 </style>
