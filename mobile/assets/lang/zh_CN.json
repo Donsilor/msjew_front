@@ -1266,7 +1266,16 @@
       "oddPrice": "原  价",
       "newPrice": "折后价",
       "needLogin": "请先登录，才能领取优惠券",
-      "buyNow":"立即购买"
+      "buyNow":"立即购买",
+      "Whitespace":"空格",
+      "EmptySpace":"(空一格)",
+      "Seal":"篆刻内容:",
+      "Preview":"预览",
+      "confirm":"确认刻字",
+      "tip":"*仅作为样式参考，具体效果请咨询客服",
+      "placeHold":"限5个中文或10个字母",
+      "prompt":"*限5个汉字或10个字母",
+      "engravingContent":"刻字内容"
     },
     "listCommons": {
       "sliders": [

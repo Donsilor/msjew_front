@@ -1254,7 +1254,8 @@
             "hadReturn": "Products returned",
             "cancelTransaction": "Cancel Order",
             "pending": "Pending",
-            "PayFailed": "Payment failed "
+            "PayFailed": "Payment failed ",
+            "engravingContent":"Engraving content"
         },
         "wish": {
             "myWish": "Wish List",
@@ -1337,7 +1338,8 @@
                 "Cancel order"
             ],
             "copySuccess": "Copy successful!",
-            "copyFail": "Copy failed, please copy order number manually!"
+            "copyFail": "Copy failed, please copy order number manually!",
+            "engravingContent":"Engraving content"
         },
         "logisticInfo":{
             "title": "Order",
@@ -1385,7 +1387,8 @@
         "searchSimilar": "search similar",
         "discounts1": "Coupon",
         "discounts2": "off",
-        "firstLogin": "Please login or register!"
+        "firstLogin": "Please login or register!",
+        "engravingContent":"Engraving content"
     },
     "pay": {
         "confirmOrder": "Shopping cart",
@@ -1576,7 +1579,16 @@
         "needLogin": "Please login before redeem the coupon. ",
         "buyNow":"Order Now",
         "firstLogin": "Please login or register!",
-        "scan": "Scan the code to experience the wearing effect"
+        "scan": "Scan the code to experience the wearing effect",
+        "Whitespace":"Space",
+        "EmptySpace":"(A space)",
+        "Seal":"Lettering",
+        "Preview":"Preview",
+        "confirm":"Confirm",
+        "tip":"*For reference only, please consult customer service for specific effects",
+        "placeHold":"enter up to 10 letters",
+        "prompt":"*Up to 10 letters",
+        "engravingContent":"Engraving content"
     },
     "policies": {
         "layout": {

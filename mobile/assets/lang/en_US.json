@@ -1262,7 +1262,16 @@
     "oddPrice": "Original price",
     "newPrice": "Discount price",
     "needLogin": "Please login before redeem the coupon.",
-    "buyNow":"Order Now"
+    "buyNow":"Order Now",
+    "Whitespace":"Space",
+    "EmptySpace":"(A space)",
+    "Seal":"Lettering content:",
+    "Preview":"Preview",
+    "confirm":"Confirm",
+    "tip":"*For reference only, please consult customer service for specific effects",
+    "placeHold":"enter up to 10 letters",
+    "prompt":"*Up to 10 letters",
+    "engravingContent":"Engraving content"
   },
   "listCommons": {
     "sliders": [

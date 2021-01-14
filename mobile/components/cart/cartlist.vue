@@ -40,7 +40,7 @@
                   <p>SKU：{{ item.sku }}</p>
                   <p class="p">
                     {{
-                      getconfig(item.config, item.simpleGoodsEntity.baseConfig,item.goodsAttr)
+                      getconfig(item.config, item.simpleGoodsEntity.baseConfig,item.goodsAttr,item.lettering)
                     }}
                   </p>
 
@@ -255,7 +255,7 @@ export default {
   methods: {
     formatMoney: formatMoney,
     // 属性数值转化成字符串
-    getconfig(list, list2, attr) {
+    getconfig(list, list2, attr,lettering) {
       // console.log("itemlist2",list2)
       let config = list.concat(attr)
       let text = ''
@@ -288,6 +288,10 @@ export default {
             text = text + ' /  ' + item.configAttrIVal
           }
         })
+      }
+       // 刻字
+      if(lettering){
+        text = text+' /  '+ lettering 
       }
       
       return text

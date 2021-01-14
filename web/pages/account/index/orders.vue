@@ -89,6 +89,11 @@
                       <span>{{ i.configAttrIVal }}</span>
                     </div>
                   </nuxt-link>
+                  <!-- 刻字 -->
+                    <div class="color lettering" v-if="detail.lettering">
+                      <span>{{  $t(`${lang}.engravingContent`)}}:</span>
+                      <span>{{ detail.lettering }}</span>
+                    </div>
                 </div>
 
                 <div class="right">
@@ -1089,6 +1094,7 @@ div {
             height: 110px;
             padding: 20px;
             border-top: 1px solid #e6e6e6;
+            position: relative;
             display: flex;
             .left {
               width: 70px;
@@ -1102,7 +1108,7 @@ div {
                 height: 100%;
               }
             }
-            .mid {
+             .mid {
               width: calc((100% - 70px) * 0.57);
               height: 70px;
               padding-left: 20px;
@@ -1114,6 +1120,12 @@ div {
               overflow: hidden;
               cursor: pointer;
               box-sizing: border-box;
+              
+              .lettering{
+                position: absolute;
+                left: 110px;
+                bottom: 3px;
+              } 
               h5 {
                 font-size: 14px;
                 line-height: 18px;

@@ -94,6 +94,7 @@ export default {
       let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null && item.config_attr_id !== null)   //筛选色彩中为空的对象
       const goodInfo = [
         {
+          lettering:this.substance,
           goods_num: 1,
           goodsDetailsId: _this.simpleDetail.id,
           goods_id: _this.simpleDetail.id,
@@ -149,6 +150,7 @@ export default {
       let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null&&item.config_attr_id !== null)  //筛选色彩中为空的对象
       let goodInfo = [
         {
+          lettering:this.substance,
           goods_num: 1,
           goodsDetailsId: _this.simpleDetail.id,
           goods_id: _this.simpleDetail.id,
@@ -196,6 +198,7 @@ export default {
         let colorArr = this.goodsAttrs.filter(item=>item.config_id !== null&&item.config_attr_id !== null)  //筛选色彩中为空的对象
         let goodInfo = [
           {
+            lettering:this.substance,
             goods_num: 1,
             goodsDetailsId: _this.simpleDetail.id,
             goods_id: _this.simpleDetail.id,

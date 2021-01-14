@@ -171,6 +171,11 @@
                         {{ v.configVal }}：{{ v.configAttrIVal }}
                       </span>
                     </div>
+                    <!-- 刻字 -->
+                    <div class="color" v-if="detail.lettering">
+                      <span>{{  $t(`${lang}.engravingContent`)}}:</span>
+                      <span>{{ detail.lettering }}</span>
+                    </div>
                     </div>
                   </div>
                 </div>
@@ -1037,7 +1042,7 @@ export default {
               // height: 70px;
               color: #333;
               margin-left: 20px;
-              overflow: hidden;
+              // overflow: hidden;
               margin: 0 30px 0 20px;
               .good-name {
                 font-size: 16px;

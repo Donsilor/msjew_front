@@ -48,7 +48,7 @@
                   </h4>
                   <span>x 1</span>
                   <p>SKU：{{ detail.data[0].goodsCode }}</p>
-                  <p>{{ getconfig(detail.data[0].detailSpecs,detail.data[0].goodsAttr) }}</p> 
+                  <p>{{ getconfig(detail.data[0].detailSpecs,detail.data[0].goodsAttr,detail.data[0].lettering) }}</p> 
                   <div v-if="detail.data[0].couponInfo.type === 2">
                     <div class="old-price" >{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
                     <b>{{ formatCoin(order.coinCode) }} {{ detail.data[0].goodsPayPrice}}</b>
@@ -501,7 +501,7 @@ export default {
     }
   },
   methods: {
-    getconfig(detailSpecs,attr){
+    getconfig(detailSpecs,attr,lettering){
       // console.log("fffffff",attr)
       let text = ''
       if (attr.length > 0) {
@@ -515,6 +515,10 @@ export default {
         text = detailSpecs + ' /  '+ text 
       }else {
         text = detailSpecs
+      }
+      // 刻字
+      if(lettering){
+        text = text+' /  '+ lettering 
       }
       // console.log("fffffff",text)
       return text
