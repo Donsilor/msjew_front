@@ -280,12 +280,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        // {
-        //   url: '/cart/Stripe.png',
-        //   type: 9,
-        //   title: this.LANGUAGE.cart.pay.payType9,
-        //   des: this.LANGUAGE.cart.pay.type9Text
-        // }
+        {
+          url: '/cart/Stripe.png',
+          type: 9,
+          title: this.LANGUAGE.cart.pay.payType9,
+          des: this.LANGUAGE.cart.pay.type9Text
+        }
       ],
       // 台湾支付
       listTw: [
@@ -316,12 +316,12 @@ export default {
           title: this.LANGUAGE.cart.pay.payType0,
           des: this.LANGUAGE.cart.pay.type0Text
         },
-        // {
-        //   url: '/cart/Stripe.png',
-        //   type: 9,
-        //   title: this.LANGUAGE.cart.pay.payType9,
-        //   des: this.LANGUAGE.cart.pay.type9Text
-        // }
+        {
+          url: '/cart/Stripe.png',
+          type: 9,
+          title: this.LANGUAGE.cart.pay.payType9,
+          des: this.LANGUAGE.cart.pay.type9Text
+        }
       ],
       sum: '2,120.00',
       info: JSON.parse(this.$route.query.info),
@@ -448,9 +448,9 @@ export default {
             if (res.config) {
               if(pay == 9){
                 // 测试key
-                let TestKey = "pk_test_51Hh91GEg2ty3UyHNujJu3xu3nemS1rzfb14kys3CImsO1iCtpprr082i0Gfbe9EQ3cWLc5KBoKS2azrE4IIFB5Gu00GgMY0bLj"
+                let TestKey = "pk_test_51I8gP9BKNsZ08dndJriGqzIJM8fC5WjcYobJKBHjxsq9rZuVLeieAJ93dQmzLPHIn70c04s4nXVM0k7iPS8Phedg00COtLVuTR"
                 // 正式key
-                let formalKey = "pk_live_51Hh91GEg2ty3UyHNGwh4IfEY1BgtJ1FHVNy0zQBoVclAfEp1YX7W8kOmpYaUvoxwKtYvfbPQ1HlOzj1wksI7sPN900zzHU8v9c"
+                let formalKey = "pk_live_51I8gP9BKNsZ08dnd9IYZ0DXD6YY5ZFcJx17F7taXmRFOldLTT5xqU6hBNaeR9zlweH8CpJBrNYWJ3XkRKgPj4uyz00C1Bnqfvf"
 
                 let stripe = Stripe(TestKey);
                 let host = window.location.host
