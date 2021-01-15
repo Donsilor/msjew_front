@@ -42,7 +42,7 @@
                     <p>SKU：{{ item.sku }}</p>
                     <p class="p">
                       {{
-                        getconfig(item.config, item.simpleGoodsEntity.specs,item.goodsAttr)
+                        getconfig(item.config, item.simpleGoodsEntity.specs,item.goodsAttr,item.lettering)
                       }}
                       <span class="edit" @click.stop="showEdit(item, index, 'single')"></span>
                     </p>
@@ -1343,7 +1343,7 @@ export default {
       }
     },
     // 属性数值转化成字符串
-    getconfig(list, list2, attr) {
+    getconfig(list, list2, attr,lettering) {
       let config = []
       if(attr){
         config = list.concat(attr)
@@ -1367,6 +1367,12 @@ export default {
             text = text + ' /  ' + item.configAttrIVal
           }
         })
+      }
+
+      // 刻字
+      if(lettering){
+         text = text + ' /  ' + lettering
+        console.log('text', text)
       }
       
       return text
@@ -1499,6 +1505,7 @@ export default {
                     : null,
                 group_type: val.groupType,
                 goods_attr:val.goods_attr,
+                lettering:val.lettering,
                 updateTime: item.id // 这里改了啊，大佬！！！！！！！！！！！！！！！！！！！！！
               }
               // console.log("ooooo>>>",val)
@@ -1571,6 +1578,7 @@ export default {
                 ? item.simpleGoodsEntity.detailConfig
                 : item.simpleGoodsEntity.detailConfig,
             goodsAttr:item.goodsAttr,
+            lettering:item.lettering,
             sku:
               item.goodsType == 19
                 ? item.ring
@@ -1686,7 +1694,7 @@ export default {
               cartId: this.isLogin ? item.id : item.localSn
             }
           })
-        } else if (item.simpleGoodsEntity.categoryId === 2) {
+        } else if (parseInt(item.simpleGoodsEntity.categoryId) === 2) {
           //  console.log('还是个結婚戒指💍')
             this.$router.push({
               name: 'marriage-ring-single-ring-detail',
@@ -1697,7 +1705,7 @@ export default {
 
               }
             })
-        }else if (item.simpleGoodsEntity.categoryId === 12) {
+        }else if (parseInt(item.simpleGoodsEntity.categoryId) === 12) {
           // console.log('还是个訂婚戒指💍')
             this.$router.push({
               name: 'engagement-engagement-rings',

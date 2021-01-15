@@ -125,6 +125,38 @@
           </span>
         </div>
         <!-- 色彩 end -->
+
+        <!-- 刻字效果 start -->
+        <div class="seal">
+          <div class="bd-b"></div>
+          <div  class="buycort_Lettering">
+            <span  class="txt">{{lang.Seal}}</span>
+            <input id="input" v-model="text"  type="text" :placeholder="lang.placeHold" >
+          </div>
+          <!-- <div class="prompt" v-show="prompt">
+            <span>{{ lang.prompt }}</span>
+          </div> -->
+          <div class="preview-btn">
+            <em  class="em1" v-for="(a,index) in content" :key="index" @click="choose('input',a)">{{a}}</em>
+            <i class="looktokz" @click="Preview">{{lang.Preview}}</i>
+            <!-- <i class="looktokz" @click="ConfirmLetter">{{lang.confirm}}</i> -->
+          </div>
+          <div v-show="showPop" class="pop">
+            <div class="ms-overlay" @click="cancelPop($event)" style="z-index: 2003;"></div>
+            <div class="ms-popup ms-popup--center" style="width: 100%; z-index: 2004;">
+              <div class="close" @click="CloseSealBox">
+                <i class="el-icon-close"></i>
+              </div>
+              <div  class="buy_kzyl">
+                <img  src="../../static/icon/seal.png">
+                <span >{{msg}}</span>
+                <p class="tips">{{ lang.tip}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 刻字效果 end -->
+
         <div
           v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"
           class="custom-made-word"
@@ -400,7 +432,16 @@ export default {
       ifShowVR: false,
       ifShowMore: false,
       detailNum: 4,
-      ifShowPop: false
+      ifShowPop: false,
+      content:['♥','&',this.LANGUAGE.detailCommons.Whitespace],
+      text:'',
+      Mark:'',
+      showSealBox:false,
+      centerDialogVisible: false,
+      msg:'',
+      border:false,
+      maxlength:0,
+      showPop:false,
     }
   },
   computed: {
@@ -430,6 +471,10 @@ export default {
       }else{
         return false
       }
+    },
+    engravingContent(){
+      this.msg = this.text.replace(/\(\A space\)|\(\空一格\)/g, '\xa0');
+      return this.msg
     }
   },
   mounted() {
@@ -441,6 +486,71 @@ export default {
     // this.language = this.getCookie('language')
   },
   methods:{
+     // 点击弹窗以外页面关闭弹窗
+    cancelPop(event) {
+      let tp = document.querySelector(".ms-popup");
+      if (tp) {
+        if (!tp.contains(event.target)) {
+          this.showPop = false
+        }
+      }
+    },
+    // 点击关闭按钮关闭弹窗
+    CloseSealBox(){
+      this.showPop = false
+    },
+    // 选择字母
+    choose(id,val){
+      if(val == '空格'||val == 'Space'){
+        val =this.LANGUAGE.detailCommons.EmptySpace
+      }
+      var elInput =document.getElementById(id);
+      var startPos = elInput.selectionStart;
+      var endPos = elInput.selectionEnd;
+      if(startPos ===undefined|| endPos ===undefined)return 
+      var txt = elInput.value;
+      var result = txt.substring(0, startPos) + val + txt.substring(endPos)    
+      elInput.value = result;    
+      elInput.focus();  
+      this.$nextTick(() => {
+        elInput.selectionStart = startPos + val.length;    
+        elInput.selectionEnd = startPos + val.length;
+      })
+      this.text = result
+      // console.log("zzzzzzzzz",result)  
+    },
+    // 点击预览刻字效果
+    Preview(){
+      this.msg = this.text.replace(/\(\A space\)|\(\空一格\)/g, '\xa0'); 
+      this.showPop =true
+      // this.centerDialogVisible = true
+    },
+    ConfirmLetter(){
+      var str = this.text.replace(/\(\A space\)|\(\空一格\)/g, '\xa0');
+      let regEn = /.*[\u4e00-\u9fa5]+.*$/;
+      this.prompt  = false
+      if(regEn.test(str)){
+        if(str.length>5){
+          this.prompt = true
+          return
+          // this.maxlength = 5 
+        }
+      }else {
+        if(str.length>10){
+          this.prompt = true
+          return
+          // this.maxlength = 10 
+        }
+        
+      }
+      // console.log("this.maxlength",this.prompt)
+      if(this.prompt  == true){
+        return
+      }
+      this.showSealBox = false 
+      this.substance = this.text
+      this.ShowContent = true
+    },
     closeCo() {
       this.ifShowCoupon = false
     },
@@ -474,6 +584,160 @@ export default {
 </script>
 
 <style scoped lang="less">
+.seal{
+  margin-bottom: 10px;
+  .buycort_Lettering {
+    // display: flex;
+    // justify-content: space-between;
+    // margin: 0 10px;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 346px;
+    padding: 10px 0;
+    position: relative;
+    background: #fff;
+    .txt {
+      // width: 70px;
+      display: inline-block;
+      margin-right: 5px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      color: #947465;
+      font-size: 14px;
+      border-radius: 5px;
+      vertical-align: middle;
+    }
+    input {
+        width: 150px;
+        height: 30px;
+        line-height: 30px;
+        color: #333;
+        font-size: 12px;
+        border: 0;
+    }
+  }
+  .prompt{
+    position: absolute;
+    left: 10px;
+    top:5px;
+    text-align: left;
+    font-size: 12px;
+    padding: 5px 0;
+    color:red;
+  }
+  .preview-btn{
+    margin-left: auto;
+    margin-right: auto;
+    width: 346px;
+    text-align: right;
+    .em1:nth-of-type(2) {
+      margin: 0 3px;
+    }
+    em {
+      width:40px;
+      padding:0px 2px;
+      height: 30px;
+      line-height: 30px; 
+      text-align: center;
+      color: #000;
+      font-size: 12px;
+      background-color: #ebecee;
+      font-style: normal;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    i{
+      // width: 30px;
+      // height: 20px;
+      // line-height: 20px; 
+      height: 16px;
+      padding: 5px 8px;
+      text-align: center;
+      color: #333;
+      font-size: 12px;
+      font-style: normal;
+      border:1px solid #000;
+      border-radius: 3px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+  .ms_sametc{
+    position: static;
+    margin: 0 auto;
+    img{
+      width: 100%;
+    }
+  }
+  .ms-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.7);
+  }
+  .ms-popup--center {
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%,-50%,0);
+    transform: translate3d(-50%,-50%,0);
+    position: relative;
+    .close{
+      position: absolute;
+      right:10px;
+      top:10px;
+      text-align: right ;
+      margin-bottom: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      z-index: 20;
+    }
+  }
+  .ms-popup {
+    position: fixed;
+    max-height: 100%;
+    overflow-y: auto;
+    background-color: #fff;
+    -webkit-transition: -webkit-transform .3s;
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s,-webkit-transform .3s;
+    -webkit-overflow-scrolling: touch;
+  }
+  .buy_kzyl {
+    position: relative;
+    z-index: 11;
+    text-align: center;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+    span {
+      color: #8f8f93;
+      font-size: 12px;
+      position: absolute;
+      width: 100%;
+      left: 4px;
+      bottom: 59.5%;
+      display: inline-block;
+      height: 31px;
+      line-height: 30px;
+    }
+    .tips{
+      color: #606266;
+      font-size: 12px;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      bottom: 12.5%;
+    }
+  }
+ 
+}
 .box{
   display: flex;
   margin: 0 15px;

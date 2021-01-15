@@ -3305,7 +3305,8 @@ export default {
             group_type:item.groupType,
             goods_type: item.goodsType,
             coupon_id: arr[i],
-            goods_attr:item.goodsAttr
+            goods_attr:item.goodsAttr,
+            lettering:item.lettering
           }
         })
 
@@ -3472,7 +3473,8 @@ export default {
             group_type:item.groupType,
             goods_type: item.goodsType,
             coupon_id: arr[i],
-            goods_attr:item.goodsAttr
+            goods_attr:item.goodsAttr,
+            lettering:item.lettering
           }
         })
 

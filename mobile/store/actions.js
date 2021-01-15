@@ -261,6 +261,7 @@ export default {
                 item.group_id = good.groupId
                 item.goodsDetailsId = good.goodsDetailsId
                 item.goods_attr = good.goods_attr
+                item.lettering = good.lettering
                 return item
             })
             sendData = sendData.concat(data)
@@ -355,7 +356,8 @@ export default {
                 serviceId: 0,
                 serviceVal: 'string',
                 goods_type: item.goodsType,
-                goods_attr: item.goods_attr
+                goods_attr: item.goods_attr,
+                lettering: item.lettering
             }
         });
 

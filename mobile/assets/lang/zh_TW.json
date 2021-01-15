@@ -1270,7 +1270,16 @@
     "oddPrice": "原  價",
     "newPrice": "折後價",
     "needLogin": "請先登錄，才能領取優惠券",
-    "buyNow":"立即購買"
+    "buyNow":"立即購買",
+    "Whitespace":"空格",
+    "EmptySpace":"(空一格)",
+    "Seal":"篆刻內容:",
+    "Preview":"預覽",
+    "confirm":"確認刻字",
+    "tip":"*僅作為樣式參考，具體效果請咨詢客服",
+    "placeHold":"限5個中文或10個字母",
+    "prompt":"*限5個漢字或10個字母",
+    "engravingContent":"刻字內容"
   },
   "listCommons": {
     "sliders": [

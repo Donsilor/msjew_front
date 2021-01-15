@@ -54,7 +54,12 @@
             <div>{{ i.configVal }}</div>
             <div>{{ i.configAttrIVal }}</div>
           </div>
-
+          <!-- 刻字内容 -->
+          <div class="infos" v-if="g.data[0].lettering">
+            <div>{{$t(`${lang}.engravingContent`)}}</div>
+            <div>{{g.data[0].lettering}}</div>
+          </div>
+          
           <div v-if="type == 'single' && showAttr" class="goods-attr">
             <div class="triangle">
               <span></span>
@@ -410,6 +415,7 @@ export default {
 </script>
 
 <style scoped lang="less">
+
 .single {
   border-bottom: 1px solid rgba(239, 239, 239, 1);
   width: calc(100% - 49px);

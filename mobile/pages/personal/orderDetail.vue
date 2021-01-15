@@ -63,7 +63,7 @@
               </h4>
               <span>x 1</span>
               <p>SKU：{{ detail.data[0].goodsCode }}</p>
-              <p>{{ getconfig(detail.data[0].detailSpecs,detail.data[0].goodsAttr) }}</p>
+              <p>{{ getconfig(detail.data[0].detailSpecs,detail.data[0].goodsAttr,detail.data[0].lettering) }}</p>
               <!-- <b>{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice }}</b> -->
               <div v-if="detail.data[0].couponInfo.type === 2">
                 <div class="old-price" >{{ formatCoin(info.coinCode) }} {{ detail.data[0].goodsPrice}}</div>
@@ -498,7 +498,7 @@ export default {
     })
   },
   methods: {
-    getconfig(detailSpecs,attr){
+    getconfig(detailSpecs,attr,lettering){
       // console.log("fffffff",attr)
       let text = ''
       if (attr.length > 0) {
@@ -514,6 +514,10 @@ export default {
         text = detailSpecs
       }
       // console.log("fffffff",text)
+      // 刻字
+      if(lettering){
+        text = text+' /  '+ lettering 
+      }
       return text
     },
     // 对戒属性数值转化成字符串

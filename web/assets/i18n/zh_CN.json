@@ -1264,7 +1264,8 @@
             "hadReturn": "已退货",
             "cancelTransaction": "取消交易",
             "pending": "待确认",
-            "PayFailed": "支付失败"
+            "PayFailed": "支付失败",
+            "engravingContent":"刻字内容"
         },
         "wish": {
             "myWish": "我的心愿单",
@@ -1347,7 +1348,8 @@
                 "取消交易"
             ],
             "copySuccess": "复制成功！",
-            "copyFail": "复制失败，请手动复制订单号！"
+            "copyFail": "复制失败，请手动复制订单号！",
+            "engravingContent":"刻字内容"
         },
         "logisticInfo":{
             "title": "我的订单",
@@ -1403,7 +1405,8 @@
         "emptyCart1":"购物车内暂无商品，",
         "emptyCart2":"去逛逛吧",
         "Pick":"去挑选",
-        "guessLike":"猜你喜欢"
+        "guessLike":"猜你喜欢",
+        "engravingContent":"刻字内容"
     },
     "pay": {
         "confirmOrder": "购物车",
@@ -1594,7 +1597,16 @@
         "needLogin": "请先登录，才能领取优惠券",
         "buyNow":"立即购买",
         "firstLogin": "请先登录或注册！",
-        "scan": "扫一扫，感受上手效果"
+        "scan": "扫一扫，感受上手效果",
+        "Whitespace":"空格",
+        "EmptySpace":"(空一格)",
+        "Seal":"篆刻预览",
+        "Preview":"预览",
+        "confirm":"确认刻字",
+        "tip":"*仅作为样式参考，具体效果请咨询客服",
+        "placeHold":"限输入长度5个汉字或10个字母",
+        "prompt":"*限5个汉字或10个字母",
+        "engravingContent":"刻字内容"
     },
     "policies": {
         "layout": {

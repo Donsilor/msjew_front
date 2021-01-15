@@ -368,6 +368,21 @@ export default {
       this.$refs.colorsSuitability.show()
     },
     addCart() {
+      // 刻字字段判断 start
+      let regEn = /.*[\u4e00-\u9fa5]+.*$/;
+      if(regEn.test(this.engravingContent)){
+        if(this.engravingContent.length>5){
+          this.$toast(this.lang.prompt)
+          return
+        }
+      }else {
+        if(this.engravingContent.length>10){
+          this.$toast(this.lang.prompt)
+          return
+        }
+        
+      }
+      // 刻字字段判断 end
       // console.log("this.s",this.sendDetailsId)
       if (!(this.canAddCart && this.inSale)) {
         return
@@ -378,6 +393,7 @@ export default {
       }
       let colorArr = this.colorAttrs.filter(item=>item.config_id !== ''&&item.config_attr_id !== '')
       const goodInfo = {
+        lettering:this.engravingContent, //刻字内容
         goodsCount: 1,
         goodsDetailsId: this.sendDetailsId,
         goodsId: this.sendGoodsId,
@@ -451,6 +467,7 @@ export default {
                     : null,
                 group_type: val.groupType,
                 goods_attr:val.goods_attr,
+                lettering:val.lettering,
                 updateTime: item.id 
               }
               this.cartList.push(o)
@@ -482,6 +499,7 @@ export default {
                 ? item.simpleGoodsEntity.baseConfig
                 : item.simpleGoodsEntity.detailConfig,
             goodsAttr:item.goodsAttr,
+            lettering:item.lettering, 
             sku:
               item.goodsType == 19
                 ? item.ring
@@ -557,6 +575,19 @@ export default {
       //   this.ifShowPop = true
       //   return
       // }
+      // 刻字字段判断 start
+      let regEn = /.*[\u4e00-\u9fa5]+.*$/;
+      if(regEn.test(this.engravingContent)){
+        if(this.engravingContent.length>5){
+          this.$toast(this.lang.prompt)
+          return
+        }
+      }else {
+        if(this.engravingContent.length>10){
+          this.$toast(this.lang.prompt)
+          return
+        }
+      }
       
       if (!(this.canAddCart && this.inSale)) {
         return
@@ -567,6 +598,7 @@ export default {
       }
       const time = this.getTimestampUuid
       let goodInfo =[{
+        lettering:this.engravingContent,
         goodsCount: 1,
         goodsDetailsId: this.sendDetailsId,
         goodsId: this.sendGoodsId,
@@ -592,7 +624,8 @@ export default {
           serviceId: 0,
           serviceVal: 'string',
           goods_type: item.goodsType,
-          goods_attr: colorArr
+          goods_attr: colorArr,
+          lettering: item.lettering
         }
       });
 
@@ -619,6 +652,7 @@ export default {
         let colorArr = this.colorAttrs.filter(item=>item.config_id !== ''&&item.config_attr_id !== '')
         let goodInfo = [
           {
+            lettering:this.engravingContent,
             goodsCount: 1,
             goodsDetailsId: this.sendDetailsId,
             goodsId: this.sendGoodsId,

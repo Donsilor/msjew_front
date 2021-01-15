@@ -1355,7 +1355,8 @@ export default {
               goods_type: this.list[i].goodsStatus,
               group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
               coupon_id: coupon_discount,
-              goods_attr:this.list[i].goodsAttr
+              goods_attr:this.list[i].goodsAttr,
+              lettering:this.list[i].lettering
             }
             data.push(o)
           }
@@ -1504,7 +1505,8 @@ export default {
           goods_type: this.list[i].goodsStatus,
           group_type: this.list[i].groupType !== 0 ? this.list[i].groupType : null,
           coupon_id: coupon_discount,
-          goods_attr:this.list[i].goodsAttr
+          goods_attr:this.list[i].goodsAttr,
+          lettering:this.list[i].lettering
         }
         data.push(o)
       }
