@@ -717,11 +717,11 @@ export default {
       width: 100%;
     }
     span {
-      color: #b1b2b5;
+      color: #8f8f93;
       font-size: 12px;
       position: absolute;
       width: 100%;
-      left: 0;
+      left: 4px;
       bottom: 59.5%;
       display: inline-block;
       height: 31px;

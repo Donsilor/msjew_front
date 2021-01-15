@@ -1237,6 +1237,7 @@ export default {
     transform: translateX(-50%);
     top: 168px;
     font-size: 18px;
+    color:#8f8f93;
   }
   .tips {
     text-align: center;
