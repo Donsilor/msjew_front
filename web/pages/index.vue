@@ -1243,6 +1243,10 @@ export default {
   },
   mounted () {
     const _this = this
+
+    const Cookie = require('js-cookie');
+    Cookie && Cookie.remove('language')  
+
     _this.$nextTick(() => {
       _this.onResize()
     })
