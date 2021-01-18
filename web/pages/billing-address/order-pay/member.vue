@@ -35,7 +35,7 @@
     </div>
 
     <!--    用户名称和提示登陆-->
-    <div class="user-info" >
+    <div class="user-info">
       <i class="iconfont iconrentou" />
       <div>
         {{ $t(`${lang}.darling`) }}{{ $store.state.userInfo.name
@@ -755,6 +755,60 @@
 
         </div>
         <div class="right-info">
+          <!-- <div v-show="!makeGay" class="coupon">
+            <div class="two-on-one">
+              <input
+                ref="too"
+                v-model="tooInp"
+                :placeholder="$t(`${lang}.tooInp`)"
+                :style="[{ opacity: isToo ? 0 : 1 }]"
+                type="text"
+                class="too-input"
+                @input="fuckYouM(`mother`)"
+              />
+              <i class="iconfont iconxiala" />
+              <div v-show="isToo" class="too-tell" @click="tooFocus">
+                {{ coupon.couponCode }}
+              </div>
+              <select
+                v-model="coupon"
+                class="too-select"
+                @click="
+                  isToo = true
+                  tooInp = ''
+                  die = false
+                  fuckYouM(`father`)
+                "
+                @change="fuckYouM(`father`)"
+              >
+                <option v-for="(c, index) in coupons" :key="index" :value="c"
+                  >{{ c.couponCode }}
+                  {{ c.discountType === 1 ? `${c.discountAmount}%` : `` }}
+                  {{
+                    c.discountType === 2 ? `HKD${c.discountAmount}` : ``
+                  }}</option
+                >
+              </select>
+            </div>
+            <div
+              :style="[
+                { backgroundColor: fuckYou ? 'rgba(170,138,123,1)' : '#eee' }
+              ]"
+              class="too-btn"
+              @click="checkCount"
+            >
+              {{ $t(`${lang}.exchange`) }}
+            </div>
+            <div v-show="die" class="too-die">{{ familyDie }}</div>
+            <div class="too-wenhao">
+              ?
+              <div class="too-gay">
+                <div>{{ $t(`${lang}.gay1`) }}</div>
+                <div>{{ $t(`${lang}.gay2`) }}</div>
+                <div>{{ $t(`${lang}.gay3`) }}</div>
+              </div>
+            </div>
+          </div> -->
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
@@ -771,7 +825,12 @@
                 {{ formatCoin(coinType) }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
-            
+            <!-- <div class="detail-line" v-for="item in useAmount">
+              <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+              <div class="hkd color-pink">
+                -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
+              </div>
+            </div> -->
             <div v-show="makeGay" class="detail-line">
               <div>
                 *{{ $t(`${lang}.coupon`) }}:
@@ -1668,6 +1727,60 @@
           </div>
         </div>
         <div class="right-info">
+          <!-- <div v-show="!makeGay" class="coupon">
+            <div class="two-on-one">
+              <input
+                ref="too"
+                v-model="tooInp"
+                :placeholder="$t(`${lang}.tooInp`)"
+                :style="[{ opacity: isToo ? 0 : 1 }]"
+                type="text"
+                class="too-input"
+                @input="fuckYouM(`mother`)"
+              />
+              <i class="iconfont iconxiala" />
+              <div v-show="isToo" class="too-tell" @click="tooFocus">
+                {{ coupon.couponCode }}
+              </div>
+              <select
+                v-model="coupon"
+                class="too-select"
+                @click="
+                  isToo = true
+                  tooInp = ''
+                  die = false
+                  fuckYouM(`father`)
+                "
+                @change="fuckYouM(`father`)"
+              >
+                <option v-for="(c, index) in coupons" :key="index" :value="c"
+                  >{{ c.couponCode }}
+                  {{ c.discountType === 1 ? `${c.discountAmount}%` : `` }}
+                  {{
+                    c.discountType === 2 ? `HKD${c.discountAmount}` : ``
+                  }}</option
+                >
+              </select>
+            </div>
+            <div
+              :style="[
+                { backgroundColor: fuckYou ? 'rgba(170,138,123,1)' : '#eee' }
+              ]"
+              class="too-btn"
+              @click="checkCount"
+            >
+              {{ $t(`${lang}.exchange`) }}
+            </div>
+            <div v-show="die" class="too-die">{{ familyDie }}</div>
+            <div class="too-wenhao">
+              ?
+              <div class="too-gay">
+                <div>{{ $t(`${lang}.gay1`) }}</div>
+                <div>{{ $t(`${lang}.gay2`) }}</div>
+                <div>{{ $t(`${lang}.gay3`) }}</div>
+              </div>
+            </div>
+          </div> -->
           <div class="new-address-title" style="width: auto;position: relative;">
             <div class="na-line" />
             <div class="na-title">{{ $t(`${lang}.kouMaiInfo`) }}</div>
@@ -1684,6 +1797,12 @@
                 {{ formatCoin(coinType) }} {{ formatMoney(tex.productAmount) }}
               </div>
             </div>
+            <!-- <div class="detail-line" v-for="item in useAmount">
+              <div>{{ $t(`${lang}.shoppingCard`) }} (<span class="shopping-card-num">{{item.sn}}</span>)</div>
+              <div class="hkd color-pink">
+                -{{ formatCoin(coinType) }} {{ formatMoney(item.useAmount) }}
+              </div>
+            </div> -->
 
             <div v-show="makeGay" class="detail-line">
               <div>
@@ -1888,6 +2007,7 @@ export default {
       address: [],
       addressMore: false,
       orderAddress:{email:''},
+      // orderAddress: ,
       newAddress: false,
       isEdit: false,
       noWay: false,
@@ -1925,9 +2045,12 @@ export default {
       makeGay: false,
       fuckYou: false,
       familyDie: ``,
+      // isAllPack: false,
       isSameEmail: false,
       orderEmail: ``,
       remark: '',
+      // coupons: [{ couponCode: '- - -', couponId: '' }],
+      // coupon: { couponCode: '- - -', couponId: '' },
       goodsPrice: 0,
       preferFee: 0,
       tex: {
@@ -1989,6 +2112,7 @@ export default {
         return this.phoneNum.cn
       }else
         return this.phoneNum.zh
+        // console.log("代码",this.phoneNum.zh)
     },
     psn() {
       return this.$store.state.language === 'en_US'
@@ -2000,18 +2124,25 @@ export default {
         .dispatch(`getCartGoodsByCartId`, this.pathTakeIds)
         .then(res => {
           this.good = res
+          // console.log("this.good",this.good)
+          // console.log("this.pathTakeIds", this.pathTakeIds)
           this.productCount = this.good.length
           for(var i=0; i<res.length; i++){
             this.goodsListLine.push(res[i].data[0].goodsType)
             if(res[i].groupType === 2){
               this.productCount = this.productCount + 1
+            //  console.log("ffff", this.productCount)
             }
           }
 
           resolve()
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
           resolve()
         })
     })
@@ -2019,11 +2150,20 @@ export default {
       .then(() => {
         this.getAddress()
       })
+      .then(() => {
+        // this.getAddress()
+        // this.getCouponList()
+      })
       .catch(err => {
-        this.$message.error(err.message)
+        // if (!err.response) {
+          this.$message.error(err.message)
+        // } else {
+        //   // console.log(err)
+        // }
       })
   },
   mounted() {
+    // this.getAddress();
     this.language = this.$store.state.language
   },
   methods: {
@@ -2040,6 +2180,7 @@ export default {
       if(!this.address.length){
         this.newAddress = true
       }
+
       console.log("this.isEdit",this.isEdit)
       if(!this.isEdit){
         // 点击修改滚顶到地址选择模块
@@ -2049,13 +2190,16 @@ export default {
           behavior: 'smooth'
         })
       }
+
     },
     zhizhi(or){
+      // console.log("纸质",or)
       this.invoice.is_electronic = or;
       this.isactive = true
       this.Active = false
     },
     dianzi(or){
+      // console.log("电子",or)
       this.invoice.is_electronic = or;
       this.isactive = false
       this.Active = true
@@ -2098,6 +2242,11 @@ export default {
           this.mailShow = true
           return
         }
+        // if(){
+        //   this.mailShow=true
+        //   this.emailShow = false
+        //   return
+        // }
       }
       this.gou = true
       this.content = false
@@ -2109,14 +2258,24 @@ export default {
     },
     complete(){
       this.invoiceBox = false
+      // this.iconShow = false
     },
     // 获取地址
     getAddress() {
       this.$axios
         .get('/web/member/address')
         .then(res => {
+          // console.log("地址",res.data)
           this.address = res.data
           if(this.address.length != 0){
+            // for (const i in res.data) {
+            //   if (res.data[i].is_default === 1) {
+            //     this.address.unshift(res.data[i])
+            //   } else {
+            //     this.address.push(res.data[i])
+            //   }
+            // }
+
             this.newAddress = false
             this.isEdit = false
             this.noWay = true
@@ -2133,10 +2292,15 @@ export default {
           }
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+            // console.log(err)
+          // }
         })
     },
     resetAddressInp() {
+      // this.phoneNum = this.phoneJson[0]
       this.isEdit = false
       this.addressData = {
         lastname: '',
@@ -2186,6 +2350,7 @@ export default {
         .post('/web/member/address/edit',data)
         .then(res => {
           this.addressIdx = 0
+          // console.log("设置默认地址",res)
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -2194,21 +2359,25 @@ export default {
           })
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
         })
 
 
     },
-    // 简体创建地址
     createAddress() {
+      // console.log('create')  /[^\d]/g,''
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
@@ -2253,17 +2422,6 @@ export default {
         this.alertBox = true
         return false
       }
-      if (!this.province.areaId) {
-        this.wrongMsg = this.$t(`${lang}.wip10`)
-        this.alertBox = true
-        return false
-      }
-      if(this.cityList.length > 1 && this.city.areaId == 0){
-        this.wrongMsg = this.$t(`${lang}.wip11`)
-        this.alertBox = true
-        return false
-      }
-
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
@@ -2306,19 +2464,24 @@ export default {
           this.resetAddressInp()
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
-    // 繁体创建地址
+    // 繁体
     createAddress1() {
+      // console.log('create')
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
       }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
@@ -2369,24 +2532,12 @@ export default {
         this.alertBox = true
         return false
       }
-      if (!this.province.areaId) {
-        this.wrongMsg = this.$t(`${lang}.wip10`)
-        this.alertBox = true
-        return false
-      }
-      if(this.cityList.length > 1 && this.city.areaId == 0){
-        this.wrongMsg = this.$t(`${lang}.wip11`)
-        this.alertBox = true
-        return false
-      }
-
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
         this.wrongInput.address_details = true
         return false
       }
-
       const data = {
         firstname: this.addressData.firstname,
         lastname: this.addressData.lastname,
@@ -2408,6 +2559,7 @@ export default {
       this.$axios
         .post('/web/member/address/add', data)
         .then(res => {
+          // console.log("添加地址",res)
           this.$message({
             message: this.$t(`${lang}.prompt1`),
             type: 'success'
@@ -2423,7 +2575,11 @@ export default {
           this.resetAddressInp()
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     changeAddressInfo(obj) {
@@ -2433,26 +2589,12 @@ export default {
         inline: 'nearest',
         behavior: 'smooth'
       })
-
-      this.wrongMsg = '';
-      this.wrongInput = {
-        firstname: false,
-        lastname: false,
-        mobile: false,
-        email: false,
-        checkEmail: false,
-        address: false,
-        zipCode: false,
-        odMail: false,
-        remark: false
-      }
-      
+      // console.log('需要修改的对象：', obj);
       this.isEdit = true
       const data = this.$helpers.cloneObject(obj)
       if(data.zip_code == null){
         data.zip_code = ''
       }
-
       this.addressData = {
         id: data.id,
         firstname: data.firstname,
@@ -2467,14 +2609,13 @@ export default {
         zip_code: data.zip_code,
         is_default: data.is_default
       }
-
+      // console.log("code",this.addressData)
       const code = data.mobile_code.split('+').reverse()
       JSON.parse(JSON.stringify(this.phoneJson)).forEach(o => {
         if (o.phone_code === '+' + code[0]) {
           this.phoneNum = o
         }
       })
-
       const setAddr = new Promise((resolve, reject) => {
         this.setAddress(data)
         resolve()
@@ -2483,16 +2624,15 @@ export default {
         // console.log('赋值后的B：', this.addressData);
       })
     },
-    // 简体保存修改
     saveAddress1() {
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
@@ -2539,17 +2679,6 @@ export default {
         this.alertBox = true
         return false
       }
-      if (!this.province.areaId) {
-        this.wrongMsg = this.$t(`${lang}.wip10`)
-        this.alertBox = true
-        return false
-      }
-      if(this.cityList.length > 1 && this.city.areaId == 0){
-        this.wrongMsg = this.$t(`${lang}.wip11`)
-        this.alertBox = true
-        return false
-      }
-
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
@@ -2581,6 +2710,7 @@ export default {
       this.$axios
         .post('/web/member/address/edit',data)
         .then(res => {
+          // console.log("修改地址",res)
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -2589,19 +2719,24 @@ export default {
           })
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
-    // 繁体保存修改
+    // 繁体
     saveAddress() {
+      // console.log('save')
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip8`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
       }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip6`)
+        this.wrongMsg = this.$t(`${lang}.wip1`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
@@ -2626,7 +2761,6 @@ export default {
         this.wrongInput.mobile = true
         return false
       }
-
       // if (
       //   !RegMobile.test(this.addressData.mobile) &&
       //   !RegTelephone.test(this.addressData.mobile)
@@ -2636,10 +2770,9 @@ export default {
       //   this.wrongInput.mobile = true
       //   return false
       // }
-      
       if (!Email.test(this.addressData.email)) {
         this.wrongMsg = this.$t(`${lang}.wip3`)
-        // this.alertBox = true
+        this.alertBox = true
         this.wrongInput.email = true
         return false
       }
@@ -2649,23 +2782,11 @@ export default {
         this.wrongInput.checkEmail = true
         return false
       }
-
       if (!this.country.areaId) {
         this.wrongMsg = this.$t(`${lang}.wip4`)
         this.alertBox = true
         return false
       }
-      if (!this.province.areaId) {
-        this.wrongMsg = this.$t(`${lang}.wip10`)
-        this.alertBox = true
-        return false
-      }
-      if(this.cityList.length > 1 && this.city.areaId == 0){
-        this.wrongMsg = this.$t(`${lang}.wip11`)
-        this.alertBox = true
-        return false
-      }
-
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
         this.alertBox = true
@@ -2697,6 +2818,7 @@ export default {
       this.$axios
         .post('/web/member/address/edit', data)
         .then(res => {
+          // console.log("修改地址",res)
           this.getAddress()
           this.resetAddressInp()
           this.$message({
@@ -2705,11 +2827,16 @@ export default {
           })
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     deleteAddress() {
       this.confirmBox = false
+
       const data = this.$helpers.transformRequest(
         JSON.parse(JSON.stringify({ id: this.deleteAddressId })),
         false
@@ -2717,8 +2844,9 @@ export default {
       this.$axios
         .post('/web/member/address/del', data)
         .then(res => {
+          // console.log("删除地址",res)
           this.$errorMessage(this.$t(`${lang}.prompt3`))
-          if((this.delIdx == 0) && (this.address.length != 1)){
+           if((this.delIdx == 0) && (this.address.length != 1)){
             this.setDefaultAddr(this.address[this.address.length-1])
           }else{
             if(this.delIdx == this.addressIdx){
@@ -2727,7 +2855,7 @@ export default {
               this.addressIdx -= 1
             }
           }
-          
+
           this.isEdit = false
           this.getAddress()
           this.resetAddressInp()
@@ -2735,7 +2863,11 @@ export default {
           this.getListOne()
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     fuckYouM(who) {
@@ -2892,6 +3024,8 @@ export default {
         }
 
       }
+      
+      // console.log(778,arr)
 
       const datas={
         carts: arr,
@@ -2910,6 +3044,7 @@ export default {
       this.$axios
         .post('/web/member/order/tax', datas)
         .then(res => {
+          // console.log("tex",res)
           this.canSubmit = true
           this.tex = res.data
 
@@ -2932,8 +3067,11 @@ export default {
           this.coupons = [{ couponCode: '- - -', couponId: '' }]
           this.coupon = { couponCode: '- - -', couponId: '' }
           this.canSubmit = false
-
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     createOrder() {
@@ -3011,6 +3149,7 @@ export default {
       if(this.iconShow ){
         invoice = this.invoice
       }
+      // console.log("arr",arr)
 
       const data = {
         carts: arr,
@@ -3021,10 +3160,11 @@ export default {
         card: this.cardList,
         coupon_id: this.couponCodeR.couponId
       }
-
+      // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
+          // console.log("创建订单",res.data.orderAmount)
           if(res.data.payStatus == 1){
             that.$successMessage(that.$t(`${lang2}.submitSuccessfully`));
             that.$router.replace({
@@ -3138,9 +3278,10 @@ export default {
       if(this.iconShow){
         invoice = this.invoice
       }
-
+      // console.log("arr",arr)
       const data = {
         carts: arr,
+        // allSend: this.isAllPack ? 1 : 2,
         buyer_remark: this.remark,
         order_amount: this.tex.orderAmount,
         buyer_address_id: address.id,
@@ -3152,9 +3293,11 @@ export default {
         // : this.orderEmail,
       }
 
+      // console.log("pppp",data)
       this.$axios
         .post('/web/member/order/create', data)
         .then(res => {
+          // console.log("创建订单",res.data.orderAmount)
           if(res.data.payStatus == 1){
             that.$successMessage(that.$t(`${lang2}.submitSuccessfully`));
             that.$router.replace({
@@ -3174,7 +3317,11 @@ export default {
           }
         })
         .catch(err => {
-          this.$message.error(err.message)
+          // if (!err.response) {
+            this.$message.error(err.message)
+          // } else {
+          //   // console.log(err)
+          // }
         })
     },
     // 添加购物卡
@@ -3218,10 +3365,10 @@ export default {
      },
      closeCo(g){
        this.showUseCoupon = false;
-
+      console.log("g",g)
        if(g && g!==-1){
          this.couponCodeR = JSON.parse(JSON.stringify(g));
-
+         console.log(this.couponCodeR)
          var k = [];
          if(this.cardList){
            k = this.cardList
@@ -3232,6 +3379,7 @@ export default {
          this.getTex();
        }
      } 
+
   }
 }
 </script>

@@ -241,19 +241,19 @@ export default {
     // 新建地址
     createAddress() {
       if (this.using.firstname === '') {
-        this.$message.error(this.$t(`${lang}.wip3`))
-        return
-      }
-      if (this.using.firstname.length > 20) {
-        this.$message.error(this.$t(`${lang}.wip4`))
-        return
-      }
-      if (this.using.lastname === '') {
         this.$message.error(this.$t(`${lang}.wip1`))
         return
       }
-      if (this.using.lastname.length > 20) {
+      if (this.using.firstname.length > 20) {
         this.$message.error(this.$t(`${lang}.wip2`))
+        return
+      }
+      if (this.using.lastname === '') {
+        this.$message.error(this.$t(`${lang}.wip3`))
+        return
+      }
+      if (this.using.lastname.length > 20) {
+        this.$message.error(this.$t(`${lang}.wip4`))
         return
       }
       if (this.language !== 'zh_CN' && this.using.email === '') {
@@ -291,15 +291,6 @@ export default {
         this.$message.error(this.$t(`${lang}.wip10`))
         return false
       }
-      if (!this.province.areaId) {
-        this.$message.error(this.$t(`${lang}.wip13`))
-        return false
-      }
-      if(this.cityList.length > 1 && this.city.areaId == 0){
-        this.$message.error(this.$t(`${lang}.wip14`))
-        return false
-      }
-
       if (this.using.address_details === '') {
         this.$message.error(this.$t(`${lang}.wip11`))
         return
@@ -414,19 +405,19 @@ export default {
     changeSave() {
       var that = this;
       if (this.using.firstname === '') {
-        this.$message.error(this.$t(`${lang}.wip3`))
-        return
-      }
-      if (this.using.firstname.length > 20) {
-        this.$message.error(this.$t(`${lang}.wip4`))
-        return
-      }
-      if (this.using.lastname === '') {
         this.$message.error(this.$t(`${lang}.wip1`))
         return
       }
-      if (this.using.lastname.length > 20) {
+      if (this.using.firstname.length > 20) {
         this.$message.error(this.$t(`${lang}.wip2`))
+        return
+      }
+      if (this.using.lastname === '') {
+        this.$message.error(this.$t(`${lang}.wip3`))
+        return
+      }
+      if (this.using.lastname.length > 20) {
+        this.$message.error(this.$t(`${lang}.wip4`))
         return
       }
       // if (this.using.email === '') {
@@ -456,18 +447,13 @@ export default {
         this.$message.error(this.$t(`${lang}.wip10`))
         return false
       }
-      if (!this.province.areaId) {
-        this.$message.error(this.$t(`${lang}.wip13`))
-        return false
-      }
-      if(this.cityList.length > 1 && this.city.areaId == 0){
-        this.$message.error(this.$t(`${lang}.wip14`))
-        return false
-      }
-
-       if (this.using.address_details === '') {
+      if (this.using.address_details === '') {
         this.$message.error(this.$t(`${lang}.wip11`))
         return
+      }
+
+      if (this.using.zip_code == null) {
+        this.using.zip_code = ''
       }
       
       const json = {
