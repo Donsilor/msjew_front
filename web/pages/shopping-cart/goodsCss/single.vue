@@ -412,7 +412,7 @@ export default {
 <style scoped lang="less">
 .single {
   border-bottom: 1px solid rgba(239, 239, 239, 1);
-  width: calc(100% - 49px);
+  width: calc(100% - 50px);
   .good-info {
     position: relative;
     height: 179px;
@@ -437,7 +437,7 @@ export default {
       }
     }
     .good-desc-wrap{
-      width: calc((100% - 140px) * 0.32);
+      width: calc((60% - 140px) * 0.56);
       padding-right: 20px;
       box-sizing: border-box;
 
@@ -460,7 +460,7 @@ export default {
     }
     .good-information {
       position: relative;
-      width: calc((100% - 140px) * 0.3);
+      width: calc((60% - 140px) * 0.44);
       padding-right: 20px;
       box-sizing: border-box;
       display: flex;
@@ -500,9 +500,11 @@ export default {
       .goods-attr{
         position: absolute;
         top: calc(100% + 14px);
-        left: 0px;
+        left: -10px;
         z-index: 6;
-        width: 278px;
+        width: 288px;
+        min-height: 100px;
+        background-color: #fff;
         font-size: 12px;
         display: none;
 
@@ -543,28 +545,27 @@ export default {
           .attrs-content{
             width: 100%;
             min-height: 60px;
+            padding-right: 10px;
 
             .attr-list{
               min-height: 38px;
 
               .attr{
                 width: 68px;
-                height: 38px;
-                text-align: center;
-                padding: 0 10px;
+                height: 48px;
+                padding: 6px 10px;
                 box-sizing: border-box;
                 display: flex;
                 align-items: center;
-                justify-content: center;
                 overflow: hidden;
               }
 
               .val{
-                width: calc(100% - 68px);
+                width: calc(100% - 78px);
                 min-height: 38px;
                 border-bottom: 1px solid #ccc;
                 box-sizing: border-box;
-                padding: 6px 4px;
+                padding: 10px 4px;
 
                 .val-child{
                   width: 66px;
@@ -660,7 +661,7 @@ export default {
       -webkit-box-orient: vertical;
     }
     .good-num {
-      width: calc((100% - 140px) * 0.1);
+      width: 6.7%;
       text-align: center;
       font-size: 18px;
       color: #333;
@@ -668,7 +669,7 @@ export default {
       box-sizing: border-box;
     }
     .good-price {
-      width: calc((100% - 140px) * 0.14);
+      width: 11%;
       font-family: twCenMt;
       font-size: 18px;
       color: #99999991;
@@ -677,7 +678,7 @@ export default {
       box-sizing: border-box;
     }
     .now-price{
-      width: calc((100% - 140px) * 0.14);
+      width: 11%;
       font-family: twCenMt;
       font-size: 18px;
       color: #f29b87;
@@ -685,22 +686,27 @@ export default {
       padding: 0 10px;
       box-sizing: border-box;
     }
-    .good-btn {
-      height: 21px;
-      line-height: 21px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .btn-box{
+      width: 11.3%;
 
-      i {
-        display: block;
-        width: 18px;
+      .good-btn {
         height: 21px;
         line-height: 21px;
-        color: #999999;
-        font-size: 20px;
-        cursor: pointer;
-        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        i {
+          display: block;
+          width: 18px;
+          height: 21px;
+          line-height: 21px;
+          color: #999999;
+          font-size: 20px;
+          cursor: pointer;
+          margin: 0 auto;
+        }
       }
     }
   }
@@ -759,8 +765,9 @@ export default {
     line-height: 21px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin: 0 auto;
+    text-align: center;
 
     div:nth-child(1) {
       /*width: 43px;*/
