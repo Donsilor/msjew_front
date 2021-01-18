@@ -151,6 +151,7 @@ export default {
         })
     },
     async setAddress(obj) {
+      this.getListOne()
       let step = false
       this.country = {areaId: obj.country_id, areaName: obj.country_name }
       await this.$axios
@@ -212,9 +213,9 @@ export default {
               })
             }
             
-            this.city = obj.city_id
-              ? { areaId: obj.city_id, areaName: obj.city_name }
-              : this.cityList[0]
+            this.city = Number(obj.city_id)
+            ? { areaId: obj.city_id, areaName: obj.city_name }
+            : this.cityList[0]
           } else {
             this.cityList = [{ areaId: '', areaName: '- - -' }]
             this.city = { areaId: '', areaName: '- - -' }

@@ -2564,6 +2564,7 @@ export default {
       }
       this.resetAddress()
     },
+    // 修改地址按钮触发
     changeAddress(l) {
       this.addressIdx = l;
       
@@ -2573,6 +2574,7 @@ export default {
       // }
       // this.getTex(k)
     },
+    // 设置默认地址
     setDefaultAddr(obj) {
       const setDefaultData = this.$helpers.cloneObject(obj)
       const data = this.$helpers.transformRequest(
@@ -2590,13 +2592,13 @@ export default {
       // console.log(1111,this.countryList ,this.provinceList,this.cityList)
       // console.log('create')  /[^\d]/g,''
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
@@ -2621,7 +2623,6 @@ export default {
         this.alertBox = true
         return false
       }
-        // console.log("sssss",this.provinceList)
       if(this.provinceList.length >2){
         if (!this.province.areaId) {
           this.wrongMsg = this.$t(`${lang}.wip10`)
@@ -2629,12 +2630,10 @@ export default {
           return false
         }
       }
-      if(this.cityList.length >2){
-        if (!this.city.areaId) {
-          this.wrongMsg = this.$t(`${lang}.wip11`)
-          this.alertBox = true
-          return false
-        }
+      if(this.cityList.length > 1 && this.city.areaId == 0){
+        this.wrongMsg = this.$t(`${lang}.wip11`)
+        this.alertBox = true
+        return false
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2682,6 +2681,20 @@ export default {
         inline: 'nearest',
         behavior: 'smooth'
       })
+
+      this.wrongMsg = '';
+      this.wrongInput = {
+        firstname: false,
+        lastname: false,
+        mobile: false,
+        email: false,
+        checkEmail: false,
+        address: false,
+        zipCode: false,
+        odMail: false,
+        remark: false
+      }
+      
       // console.log('需要修改的对象：', obj);
       this.isEdit = true
       this.addAddress = true
@@ -2720,13 +2733,13 @@ export default {
     // 简体保存地址
     saveAddressCn() {
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
@@ -2757,12 +2770,10 @@ export default {
           return false
         }
       }
-      if(this.cityList.length >2){
-        if (!this.city.areaId) {
-          this.wrongMsg = this.$t(`${lang}.wip11`)
-          this.alertBox = true
-          return false
-        }
+      if(this.cityList.length > 1 && this.city.areaId == 0){
+        this.wrongMsg = this.$t(`${lang}.wip11`)
+        this.alertBox = true
+        return false
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2795,22 +2806,22 @@ export default {
       this.addressBox = true
       this.newAddress = false
       this.address = content
-      this.addAddress = false 
+      this.addAddress = false
       localStorage.setItem("myAddress", JSON.stringify(this.address));
       this.$successMessage(this.$t(`${lang}.prompt2`))
-      console.log('this.address',content, this.address)
+      console.log('this.address',this.addAddress)
 
     },
     // 繁体创建地址
     createAddressEn() {
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
       }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
@@ -2859,12 +2870,10 @@ export default {
           return false
         }
       }
-      if(this.cityList.length >2){
-        if (!this.city.areaId) {
-          this.wrongMsg = this.$t(`${lang}.wip11`)
-          this.alertBox = true
-          return false
-        }
+      if(this.cityList.length > 1 && this.city.areaId == 0){
+        this.wrongMsg = this.$t(`${lang}.wip11`)
+        this.alertBox = true
+        return false
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2894,20 +2903,20 @@ export default {
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address));
       this.$successMessage(this.$t(`${lang}.prompt1`))
-      this.addAddress = false
-      console.log(this.address)
+       this.addAddress = false
+      // console.log(this.address)
     },
     // 繁体保存地址
     saveAddressEn() {
       // console.log('save')
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
       }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
@@ -2956,12 +2965,10 @@ export default {
           return false
         }
       }
-      if(this.cityList.length >2){
-        if (!this.city.areaId) {
-          this.wrongMsg = this.$t(`${lang}.wip11`)
-          this.alertBox = true
-          return false
-        }
+      if(this.cityList.length > 1 && this.city.areaId == 0){
+        this.wrongMsg = this.$t(`${lang}.wip11`)
+        this.alertBox = true
+        return false
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2998,12 +3005,13 @@ export default {
       this.addAddress = false
       localStorage.setItem("myAddress", JSON.stringify(this.address));
       this.$successMessage(this.$t(`${lang}.prompt2`))
-      console.log('this.address',content, this.address)
+      // console.log('this.address',content, this.address)
 
     },
     // 删除地址
     deleteAddress() {
       localStorage.removeItem("myAddress");
+      this.isEdit = false
       this.confirmBox = false
       this.newAddress = true
       this.addressBox = false
@@ -3026,11 +3034,13 @@ export default {
         this.mobileMax = 20
       }
     },
+    // 选择纸质发票
     zhizhi(or){
       this.invoice.is_electronic = or;
       this.isactive = true
       this.Active = false
     },
+    // 选择电子发票
     dianzi(or){
       this.invoice.is_electronic = or;
       this.isactive = false
@@ -3133,6 +3143,7 @@ export default {
       this.preferFee = 0
       this.fuckYou = false
     },
+    // 获取税费
     getTex() {
       this.canSubmit = false;
       let json=[];
