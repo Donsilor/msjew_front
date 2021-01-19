@@ -57,8 +57,9 @@
             <div v-if="invoice.is_electronic == 0" class="tips">
                 <p>{{ lang.tips }}</p>
             </div>
-            <div class="btn">
-                <button @click="submit">{{ lang.confirm }}</button>
+            <div class="btn" :class="{'flex':showFlex}">
+                <button class="cancel" v-if="showCancel" @click="cancel">{{ lang.cancel }}</button>
+                <button class="confirm" @click="submit">{{ lang.confirm }}</button>
             </div>
         </div>
     </div>
@@ -92,12 +93,22 @@ export default {
             isLogin: !!this.$store.state.token,
             // ultimatelyPay: this.$route.query.ultimatelyPay,
             isactive:true,
-            Active:false
+            Active:false,
+            showFlex:false,
+            showCancel:false
         }
     },
     mounted(){
-        if(this.invoice.invoice_type == 2){
+        // if(this.invoice.invoice_type == 2){
+        //     this.select2 = true
+        // }
+        if(this.invoiceInfo.invoice_type == 1){
+            this.select1 = true
+        } else if(this.invoiceInfo.invoice_type == 2){
             this.select2 = true
+        } else {
+            this.select2 = true
+            this.select1 = false
         }
 
         if(this.invoiceInfo){
@@ -106,6 +117,18 @@ export default {
             this.invoice.tax_number = this.invoiceInfo.tax_number
             this.invoice.is_electronic = this.invoiceInfo.is_electronic
             this.invoice.email = this.invoiceInfo.email
+        }
+
+        if(this.invoice.is_electronic == 1){
+            if(this.invoiceInfo.invoice_title &&this.invoiceInfo.tax_number&&this.invoiceInfo.email){
+                this.showFlex = true
+                this.showCancel = true
+            }
+        }else if(this.invoice.is_electronic == 0){
+            if(this.invoiceInfo.invoice_title &&this.invoiceInfo.tax_number){
+                this.showFlex = true
+                this.showCancel = true
+            }
         }
     },
     methods:{
@@ -166,6 +189,17 @@ export default {
                 }
             }
             this.$emit('closeIP',this.invoice); 
+        },
+         // 取消发票
+        cancel(){
+            // console.log("ssss",this.invoice)
+            this.invoice.invoice_title = ''
+            this.invoice.tax_number = ''
+            this.invoice.email = ''
+            this.invoice.invoice_type = 2
+            this.invoice.is_electronic = 0
+            // this.invoice = {}
+            this.$emit('closeIP',this.invoice);
         },
         // 返回
         quit(){
@@ -317,16 +351,38 @@ export default {
         margin-top: 15px;
         color:#bbb;
     }
+    .flex{
+        display: flex;
+        justify-content: space-between;
+    }
     .btn{
       padding: 30px 20px;  
-      button{
+      .confirm{
         width: 130px;
         height: 30px;
+        line-height: 30px;
         background: rgba(170, 138, 123, 1);
         border-radius: 4px;
         color:#FFF;
         cursor: pointer;
+      } 
+      .cancel{
+        width: 130px;
+        height: 32px;
+        line-height: 30px;
+        background: #F2F2F2;
+        border-radius: 4px;
+        color:#000;
+        cursor: pointer;
       }
+    //   button{
+    //     width: 130px;
+    //     height: 30px;
+    //     background: rgba(170, 138, 123, 1);
+    //     border-radius: 4px;
+    //     color:#FFF;
+    //     cursor: pointer;
+    //   }
     }
     .star{
         display: inline-block;

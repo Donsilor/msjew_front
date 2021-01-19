@@ -232,6 +232,7 @@ export default {
   mounted() {
       this.$nextTick(() => {
         localStorage.setItem("back_url",window.location.href)
+        localStorage.setItem("orderId",this.$route.query.orderId || this.$route.query.order_sn)
         const back_url = localStorage.getItem("back_url")
         setTimeout(()=>  {
           this.showBtn = true
@@ -302,10 +303,11 @@ export default {
       // facebook 购买成功统计-end
     },
     goPayFailed(){
+      const localOrderId = localStorage.getItem("orderId")
       this.$router.push({
           name: 'cart-payFailed-orderId-price-coinType',
           query: {
-              orderId: this.$route.query.orderId || this.$route.query.order_sn,
+              orderId: this.$route.query.orderId || this.$route.query.order_sn || localOrderId,
           }
       })
     },

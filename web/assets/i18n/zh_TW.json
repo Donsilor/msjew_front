@@ -1258,7 +1258,8 @@
             "hadReturn": "已退货",
             "cancelTransaction": "取消交易",
             "pending": "待確認",
-            "PayFailed": "支付失敗"
+            "PayFailed": "支付失敗",
+            "engravingContent":"刻字内容"
         },
         "wish": {
             "myWish": "我的心願單",
@@ -1341,7 +1342,8 @@
                 "取消交易"
             ],
             "copySuccess": "复製成功！",
-            "copyFail": "复製失败，请手动复製订单号！"
+            "copyFail": "复製失败，请手动复製订单号！",
+            "engravingContent":"刻字内容"
         },
         "logisticInfo":{
             "title": "我的訂單",
@@ -1389,7 +1391,16 @@
         "searchSimilar": "找类似",
         "discounts1": "優惠券",
         "discounts2": "折",
-        "firstLogin": "請先登錄或註冊！"
+        "firstLogin": "請先登錄或註冊！",
+        "changeAttrSuccess": "更換參數成功",
+        "cancle": "取消",
+        "confirm": "確定",
+        "emptyCart":"購物車內暫無商品，去逛逛吧",
+        "emptyCart1":"購物車內暫無商品，",
+        "emptyCart2":"去逛逛吧",
+        "Pick":"去挑選",
+        "guessLike":"猜妳喜歡",
+        "engravingContent":"刻字內容"
     },
     "pay": {
         "confirmOrder": "購物車",
@@ -1580,7 +1591,16 @@
         "needLogin": "請先登錄，才能領取優惠券",
         "buyNow":"立即購買",
         "firstLogin": "請先登錄或註冊！",
-        "scan": "手機掃碼，感受上手效果"
+        "scan": "手機掃碼，感受上手效果",
+        "Whitespace":"空格",
+        "EmptySpace":"(空一格)",
+        "Seal":"篆刻預覽",
+        "Preview":"預覽",
+        "confirm":"確認刻字",
+        "tip":"*僅作為樣式參考，具體效果請咨詢客服",
+        "placeHold":"最多可輸入5個漢字或10個字母",
+        "prompt":"*限5個漢字或10個字母",
+        "engravingContent":"刻字內容"
     },
     "policies": {
         "layout": {
@@ -2840,6 +2860,10 @@
         "msg8": "数据获取失败，请返回購物车重试！",
         "msg9": "請選擇支付方式!",
         "msg12":"您選擇的配送地址跟當前所在地區不一致，請重新選擇或聯繫客服處理！",
+        "prompt1":"添加成功",
+        "prompt2":"修改成功",
+        "prompt3":"删除成功",
+        "msg13":"您正在修改地址，請確認修改信息",
         "useShoppingCard": "使用購物卡",
         "editOrUnbound": "編輯/解綁購物卡",
         "shoppingCard": "購物卡",

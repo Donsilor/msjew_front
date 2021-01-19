@@ -20,140 +20,189 @@
             {{ info.goodsName }}
           </h2>
         </div>
-        <div class="product-code">{{ $t(`${lang}.goodsId`) }}: {{ info.goodsCode }}</div>
+        <!-- 刻字预览 start -->
+        <div class="seal">
+          <div class="product-code">{{ $t(`${lang}.goodsId`) }}: {{ info.goodsCode }}</div>
+          <div class="seal-carving"> 
+            <button class="seal-btn" @click="EngravedPreview">{{ $t(`${lang}.Seal`) }}</button>
+            <div class="seal-box" v-if="showSealBox">
+              <div class="close" @click="CloseSealBox">
+                <i class="el-icon-close"></i>
+              </div>
+              <div class="import-box">
+                <input :maxlength="maxlength" id="input" v-model="text" type="text"  :placeholder="$t(`${lang}.placeHold`)" ref="count" :class="{border:border}">
+              </div>
+              <div class="prompt" v-show="prompt">
+                <span>{{ $t(`${lang}.prompt`) }}</span>
+              </div>
+              <div class="main-edit">
+                <i v-for="(a,index) in content" :key="index" @click="choose('input',a)">{{a}}</i>
+              </div>
+              <div class="preview">
+                <button class="preview-btn" @click="Preview">{{ $t(`${lang}.Preview`) }}</button>
+                <button class="confirm-btn" @click="ConfirmLetter">{{ $t(`${lang}.confirm`) }}</button>
+              </div>
+              <div class="tip">
+                <p>{{ $t(`${lang}.tip`) }}</p>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="dialog-box"> -->
+            <el-dialog
+              :visible.sync="centerDialogVisible"
+              width="50%"
+              center>
+              <div  class="ms_sametc ms">
+                <div  class="ms_sametcborder">
+                  <img  src="../../../static/icon/seal.png">
+                  <p  class="ms_con">{{msg}}</p>
+                </div> 
+                <p class="tips">{{ $t(`${lang}.tip`) }}</p>
+              </div>
+            </el-dialog>
+          <!-- </div> -->
+        </div>
+        <!-- 刻字预览 end -->
+        <!-- <div class="product-code">{{ $t(`${lang}.goodsId`) }}: {{ info.goodsCode }}</div> -->
         <div v-if="productInfo.carats.length == ''">
           <div class="sku" v-if="productInfo.materials.length > 0 ||colorDetail.length > 0 || productInfo.sizes.length > 1">
-            <!-- 成色 -->
-            <div class="left-properties" v-if="productInfo.materials.length > 0">
-              <div  class="property-item">
-                <span class="item-name">
-                  {{ $t(`${lang}.color`) }}
-                </span>
-                <div class="property">
-                  <div class="had-checked">
-                    <i
-                      :class="[
-                        'iconfont',
-                        'iconmaterial-big-pt',
-                        'color-icon',
-                        materialColors[
-                          productInfo.materials[ringChecked.materialIndex].id
-                        ]
-                      ]"
-                    ></i>
-                    <span class="name ow-h1">
-                      {{ productInfo.materials[ringChecked.materialIndex].name }}
-                    </span>
-                    <i class="iconfont iconxiala drop-down-icon"></i>
-                  </div>
-                  <ul class="options">
-                    <li
-                      v-for="(item, index) in productInfo.materials"
-                      :key="index"
-                      :class="[
-                        'item',
-                        { active: ringChecked.materialIndex === index }
-                      ]"
-                      @click="changeRingChecked('materialIndex', index)"
-                    >
+            <div class="parameter">
+              <!-- 成色 -->
+              <div class="left-properties" v-if="productInfo.materials.length > 0">
+                <div  class="property-item">
+                  <span class="item-name">
+                    {{ $t(`${lang}.color`) }}
+                  </span>
+                  <div class="property">
+                    <div class="had-checked">
                       <i
                         :class="[
                           'iconfont',
                           'iconmaterial-big-pt',
                           'color-icon',
-                          materialColors[item.id]
+                          materialColors[
+                            productInfo.materials[ringChecked.materialIndex].id
+                          ]
                         ]"
                       ></i>
-                      <span class="name ow-h1">{{ item.name }}</span>
-                    </li>
-                  </ul>
+                      <span class="name ow-h1">
+                        {{ productInfo.materials[ringChecked.materialIndex].name }}
+                      </span>
+                      <i class="iconfont iconxiala drop-down-icon"></i>
+                    </div>
+                    <ul class="options">
+                      <li
+                        v-for="(item, index) in productInfo.materials"
+                        :key="index"
+                        :class="[
+                          'item',
+                          { active: ringChecked.materialIndex === index }
+                        ]"
+                        @click="changeRingChecked('materialIndex', index)"
+                      >
+                        <i
+                          :class="[
+                            'iconfont',
+                            'iconmaterial-big-pt',
+                            'color-icon',
+                            materialColors[item.id]
+                          ]"
+                        ></i>
+                        <span class="name ow-h1">{{ item.name }}</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
-            </div>
-            <!-- 色彩 -->
-            <div class="left-properties" v-if="colorDetail.length > 0">
-              <div  class="property-item">
-                <span class="item-name">
-                  {{ $t(`${lang}.shade`) }}
-                </span>
-                <div class="property">
-                  <div class="had-checked">
-                    <!-- <i
-                      :class="[
-                        'iconfont',
-                        'iconmaterial-big-pt',
-                        'color-icon',
-                          colorDetail[ringChecked.colorIndex].id
-                      ]"
-                    ></i> -->
-                    <span class="name ow-h1">
-                      {{ colorDetail[ringChecked.colorIndex].name }}
-                    </span>
-                    <i class="iconfont iconxiala drop-down-icon"></i>
-                  </div>
-                  <ul class="options">
-                    <li
-                      v-for="(item, index) in colorDetail"
-                      :key="index"
-                      :class="[
-                        'item',
-                        { active: ringChecked.colorIndex === index }
-                      ]"
-                      @click="changeRingChecked('colorIndex', index)"
-                    >
+              <!-- 色彩 -->
+              <div class="left-properties" v-if="colorDetail.length > 0">
+                <div  class="property-item">
+                  <span class="item-name">
+                    {{ $t(`${lang}.shade`) }}
+                  </span>
+                  <div class="property">
+                    <div class="had-checked">
                       <!-- <i
                         :class="[
                           'iconfont',
                           'iconmaterial-big-pt',
                           'color-icon',
-                          colorDetail[item.id]
+                            colorDetail[ringChecked.colorIndex].id
                         ]"
                       ></i> -->
-                      <span class="name ow-h1">{{ item.name }}</span>
-                    </li>
-                  </ul>
+                      <span class="name ow-h1">
+                        {{ colorDetail[ringChecked.colorIndex].name }}
+                      </span>
+                      <i class="iconfont iconxiala drop-down-icon"></i>
+                    </div>
+                    <ul class="options">
+                      <li
+                        v-for="(item, index) in colorDetail"
+                        :key="index"
+                        :class="[
+                          'item',
+                          { active: ringChecked.colorIndex === index }
+                        ]"
+                        @click="changeRingChecked('colorIndex', index)"
+                      >
+                        <!-- <i
+                          :class="[
+                            'iconfont',
+                            'iconmaterial-big-pt',
+                            'color-icon',
+                            colorDetail[item.id]
+                          ]"
+                        ></i> -->
+                        <span class="name ow-h1">{{ item.name }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- 尺寸 -->
+              <div class="right-properties" v-if="productInfo.sizes.length > 1">
+                <div  class="property-item">
+                  <span class="item-name">
+                    {{ $t(`${lang}.size`) }}
+                  </span>
+                  <div class="property">
+                    <div class="had-checked">
+                      <span class="name ow-h1">
+                        {{ productInfo.sizes[ringChecked.sizeIndex].name }}
+                      </span>
+                      <i class="iconfont iconxiala drop-down-icon"></i>
+                    </div>
+                    <ul class="options">
+                      <li
+                        v-for="(item, index) in productInfo.sizes"
+                        :key="index"
+                        :class="[
+                          'item',
+                          { active: ringChecked.sizeIndex === index }
+                        ]"
+                        @click="changeRingChecked('sizeIndex', index)"
+                      >
+                        <span class="name ow-h1">{{ item.name }}</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="helper-popover">
+                    <span class="helper-name">
+                      {{ $t(`${lang}.USEdition`) }}
+                    </span>
+                    <el-popover placement="bottom" trigger="hover">
+                      <ring-size></ring-size>
+                      <b slot="reference" class="prompt-icon">!</b>
+                    </el-popover>
+                  </div>
+                  <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
                 </div>
               </div>
             </div>
-            <!-- 尺寸 -->
-            <div class="right-properties" v-if="productInfo.sizes.length > 1">
-              <div  class="property-item">
-                <span class="item-name">
-                  {{ $t(`${lang}.size`) }}
-                </span>
-                <div class="property">
-                  <div class="had-checked">
-                    <span class="name ow-h1">
-                      {{ productInfo.sizes[ringChecked.sizeIndex].name }}
-                    </span>
-                    <i class="iconfont iconxiala drop-down-icon"></i>
-                  </div>
-                  <ul class="options">
-                    <li
-                      v-for="(item, index) in productInfo.sizes"
-                      :key="index"
-                      :class="[
-                        'item',
-                        { active: ringChecked.sizeIndex === index }
-                      ]"
-                      @click="changeRingChecked('sizeIndex', index)"
-                    >
-                      <span class="name ow-h1">{{ item.name }}</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="helper-popover">
-                  <span class="helper-name">
-                    {{ $t(`${lang}.USEdition`) }}
-                  </span>
-                  <el-popover placement="bottom" trigger="hover">
-                    <ring-size></ring-size>
-                    <b slot="reference" class="prompt-icon">!</b>
-                  </el-popover>
-                </div>
-                <a href="/education/rings/size" class="choose-size">{{ $t(`${lang}.chooseSize`) }}></a>
-              </div>
+            <div class="engraving" v-show="ShowContent">
+              <span class="engraving-title">{{ $t(`${lang}.engravingContent`)}}</span>
+              <span class="engraving-content" @click="editContent">{{substance}}</span>
             </div>
           </div>
         </div>
@@ -325,7 +374,10 @@
               </div>
             </div>
           </div>
-
+          <div class="engraving" v-show="ShowContent">
+            <span class="engraving-title">{{ $t(`${lang}.engravingContent`)}}</span>
+            <span class="engraving-content" @click="editContent">{{substance}}</span>
+          </div>
         </div>
         <ul class="services-list">
           <li
@@ -631,7 +683,18 @@ export default {
           config_attr_id:''
         }
       ],
-      ifShowCode: false
+      ifShowCode: false,
+      content:['♥','&',this.$t(`${lang}.Whitespace`)],
+      text:'',
+      Mark:'',
+      showSealBox:false,
+      centerDialogVisible: false,
+      msg:'',
+      border:false,
+      maxlength:'',
+      prompt:false,
+      substance:'',
+      ShowContent:false
     }
   },
   computed: {
@@ -826,6 +889,97 @@ export default {
     // this.language = this.getCookie('language')
   },
   methods: {
+    Seal(){
+      let maxlen = 10
+      if(this.maxlength > maxlen){
+        // console.log(666666)
+        return false
+      }
+    },
+    EngravedPreview(){
+      this.showSealBox = true
+    },
+    CloseSealBox(){
+      this.text = this.substance
+      this.showSealBox = false
+      this.prompt = false
+    },
+    insertInputTxt(id, insertTxt){
+      var elInput =document.getElementById(id);
+      var startPos = elInput.selectionStart;
+      var endPos = elInput.selectionEnd;
+      if(startPos ===undefined|| endPos ===undefined)return 
+      var txt = elInput.value;
+      var result = txt.substring(0, startPos) + insertTxt + txt.substring(endPos)    
+      elInput.value = result;    
+      elInput.focus(); 
+      this.$nextTick(() => {
+            elInput.selectionStart = startPos + insertTxt.length;    
+        elInput.selectionEnd = startPos + insertTxt.length;
+          })
+          console.log(1111111,result)
+    },
+ 
+    // 选择字母
+    choose(id,val){
+      if(val == '空格'||val == 'Space'){
+        val =this.$t(`${lang}.EmptySpace`)
+      }
+      var elInput =document.getElementById(id);
+      var startPos = elInput.selectionStart;
+      var endPos = elInput.selectionEnd;
+      if(startPos ===undefined|| endPos ===undefined)return 
+      var txt = elInput.value;
+      var result = txt.substring(0, startPos) + val + txt.substring(endPos)    
+      elInput.value = result;    
+      elInput.focus();
+      this.$nextTick(() => {
+        elInput.selectionStart = startPos + val.length;    
+        elInput.selectionEnd = startPos + val.length;
+      })
+      this.text = result
+      // console.log("zzzzzzzzz",result)
+    },
+    // 刻字预览
+    Preview(){
+      // if(this.prompt  == true){
+      //   return
+      // }
+      
+      this.msg = this.text.replace(/\(\A space\)|\(\空一格\)/g, '\xa0'); 
+      this.centerDialogVisible = true
+      // this.text = this.substance
+      console.log("this.msg",this.substance,this.text)
+    },
+    // 确认刻字
+    ConfirmLetter(){
+      this.msg = this.text.replace(/\(\A space\)|\(\空一格\)/g, '\xa0'); 
+      var str=this.text.replace(/\(\A space\)|\(\空一格\)/g, '\xa0');
+      let regEn = /.*[\u4e00-\u9fa5]+.*$/;
+      this.prompt  = false
+      if(regEn.test(str)){
+        if(str.length>5){
+          this.prompt = true
+          return
+        }
+      }else {
+        if(str.length>10){
+          this.prompt = true
+          return
+        }   
+      }
+      if(this.prompt  == true){
+        return
+      }
+      this.showSealBox = false 
+      this.substance = this.msg
+      this.ShowContent = true
+    },
+    // 修改刻字内容
+    editContent(){
+      this.prompt = false
+      this.showSealBox = true
+    },
     getRecommendProductRouteInfo(product = {}) {
       return {
         path: `/ring/wedding-rings/${product.id}`,
@@ -951,6 +1105,159 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.sku{
+  display: block!important;
+  .parameter{
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+.seal{
+  display: flex;
+  justify-content: space-between;
+  .seal-carving{
+    color: #aaa;
+    font-size:16px;
+    margin-right: 10px;
+    position: relative;
+    .seal-btn{
+      padding: 5px 15px;
+      // border:1px solid #aa8a7b;
+      color:#aa8a7b;
+      cursor: pointer;
+      margin-bottom: 5px;
+    }
+    .seal-box{
+      position: absolute;
+      right:0px;
+      top:33px;
+      padding: 10px;
+      border:1px solid #ddd;
+      width: 245px;
+      background: #fff;
+      z-index: 2;
+      .close{
+        text-align: right ;
+        margin-bottom: 5px;
+        cursor: pointer;
+      }
+      .import-box{
+        input{
+          width: 100%;
+          border: 1px solid #ddd;
+          height: 50px;
+          line-height: 35px;
+          padding-left: 10px;
+          background-color: #fff;
+          background-image: none;
+          box-sizing: border-box;
+          color: #606266;
+          display: inline-block;
+          font-size: inherit;
+          padding: 0 15px;
+          transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+          font-size: 12px;
+        }
+        input:-ms-input-placeholder,textarea:-ms-input-placeholder {
+          color: #A5A5A5;
+        }
+      }
+      .main-edit{
+        width: 80%;
+        margin: 0 auto;
+        text-align: center;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        i{
+          color: #22282d;
+          display: inline-block;
+          width: 40px;
+          font-size: 12px;
+          line-height: 36px;
+          background-color: #ebecee;
+          vertical-align: middle;
+          text-align: center;
+          cursor: pointer;
+          font-style: inherit;
+        }
+      }
+      .preview{
+        text-align: center;
+        padding: 20px 0 10px 0;
+        display: flex;
+        justify-content: space-around;
+        .preview-btn{
+          width: 90px;
+          height: 27px;
+          background: #fff;
+          border: 1px solid #169BD5;
+          color:#169BD5;
+          font-size:14px;
+        }
+        .confirm-btn{
+          width: 90px;
+          height: 27px;
+          background: #169BD5;
+          border: 1px solid #169BD5;
+          color:#fff;
+          font-size:14px;
+        }
+      }
+      .prompt{
+        text-align: left;
+        font-size: 12px;
+        padding: 5px 0;
+        color:red;
+      }
+      .tip{
+        font-size: 12px;
+        text-align: center;
+        color:#A5A5A5;
+      }
+    }
+  }
+  .ms_sametc{
+    position: static;
+    margin: 0 auto;
+    img{
+      width: 100%;
+    }
+  }
+  .ms_sametcborder{
+    border: 2px solid #5e5d62;
+    width: 486px;
+    padding-bottom: 14px;
+    position: relative;
+    margin: 0 auto;
+  }
+  .ms_con{
+    position: absolute;
+    left: 51%;
+    transform: translateX(-50%);
+    top: 168px;
+    font-size: 18px;
+    color:#8f8f93;
+  }
+  .tips {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .border{
+    border:1px solid red!important;
+  }
+}
+.engraving{
+  margin-top: 10px;
+  font-size: 14px;
+  .engraving-title{
+    margin-right: 5px;
+  }
+  .engraving-content{
+    color:#ff6900;
+    cursor: pointer;
+  }
+}
 .recommend{
   margin: 110px 0; 
 }
@@ -977,6 +1284,9 @@ export default {
 }
 .detail-page {
   margin: auto;
+}
+.sku{
+  padding: 15px 25px!important;
 }
 .sku2 {
   // width: 720px;
@@ -1176,5 +1486,8 @@ export default {
   }
 // }
 
-
+// elementUi
+/deep/.el-dialog{
+  background: #fff!important;
+}
 </style>

@@ -885,7 +885,7 @@
                   </div>
                 </div>
                 <!-- Stripe -->
-                <!-- <div v-if="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="Way(9)">
+                <div v-if="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="Way(9)">
                   <div class="pay-img">
                     <img src="../../../static/order/stripe.png" alt="" class="initial" />
                   </div>
@@ -895,9 +895,9 @@
                   </div>
                   <div v-show="payWay == 9" class="choose-tick">
                     <img src="../../../static/order/tick.png" alt="" />
-                  </div> -->
+                  </div>
                   <!-- <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div> -->
-                <!-- </div> -->
+                </div>
                 <!-- vise -->
                 <!-- <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 61 }" class="pay-block" @click="Way(61)">
                   <div class="pay-img">
@@ -1150,15 +1150,15 @@
               :class="{ 'addr-active': addressIdx == index }"
               class="addr-block"
             >
-              <div class="addr-user">{{ a.lastname }}{{ a.firstname }}</div>
+              <div class="addr-user"> {{ a.firstname }} {{ a.lastname }}</div>
               <div class="addr-user-phone">
                 <div>{{ a.mobile_code }}</div>
                 <div>{{ a.mobile }}</div>
               </div>
               <div class="addr-user-email">{{ a.email }}</div>
               <div class="addr-address">
-                <div>{{ a.country_name }} {{ a.province_name }} {{ a.city_name }}</div>
                 <div>{{ a.address_details }}</div>
+                <div> {{ a.city_name }} {{ a.province_name }} {{ a.country_name }}</div>
               </div>
               
               <div>{{ a.zip_code }}</div>
@@ -1955,7 +1955,7 @@
                   </div>
                 </div>
                 <!-- Stripe -->
-                <!-- <div v-if="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="Way(9)">
+                <div v-if="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="Way(9)">
                   <div class="pay-img">
                     <img src="../../../static/order/stripe.png" alt="" class="initial" />
                   </div>
@@ -1965,9 +1965,9 @@
                   </div>
                   <div v-show="payWay == 9" class="choose-tick">
                     <img src="../../../static/order/tick.png" alt="" />
-                  </div> -->
+                  </div>
                   <!-- <div class="hint_pay needlogin"><span>*</span> {{ $t(`${lang}.needlogin`) }}</div> -->
-                <!-- </div> -->
+                </div>
                 <!-- vise -->
                 <!-- <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 61 }" class="pay-block" @click="Way(61)">
                   <div class="pay-img">
@@ -2451,6 +2451,7 @@ export default {
     }
   },
   mounted() {
+    console.log(1111,this.countryList ,this.provinceList,this.cityList) 
     window.addEventListener('scroll', this.scrollToTop);
 
     this.defaultAddress()
@@ -2490,6 +2491,23 @@ export default {
           clearInterval(timer)
         }
       }, 22)
+
+      // 【499】
+      if(this.addAddress == true && this.address.length > 0){
+        this.$errorMessage(this.$t(`${lang}.msg13`)) 
+        const topB = document.getElementsByClassName('layout-box')[0];
+        const that = this
+        let timer = setInterval(() => {
+          let ispeed = Math.floor(-that.scrollTop / 5)
+          topB.scrollTop = that.scrollTop + ispeed
+          if (that.scrollTop === 0) {
+            clearInterval(timer)
+          }
+        }, 22)
+        return
+      }
+
+
       console.log("sssss",this.address)
       if(this.address.length == 0){
         this.$errorMessage(this.$t(`${lang}.msg4`)) 
@@ -2511,12 +2529,14 @@ export default {
     // 点击提示修改地址确认按钮触发
     alertTipBox(){
       this.alertBox = false
-      // 点击修改滚顶到地址选择模块
-      document.getElementById('step').scrollIntoView({
-        block: 'center',
-        inline: 'nearest',
-        behavior: 'smooth'
-      })
+      if(this.isEdit){
+        // 点击修改滚顶到地址选择模块
+        document.getElementById('step').scrollIntoView({
+          block: 'center',
+          inline: 'nearest',
+          behavior: 'smooth'
+        })
+      }
     },
     resetAddressInp() {
       // this.phoneNum = this.phoneJson[0]
@@ -2544,6 +2564,7 @@ export default {
       }
       this.resetAddress()
     },
+    // 修改地址按钮触发
     changeAddress(l) {
       this.addressIdx = l;
       
@@ -2553,6 +2574,7 @@ export default {
       // }
       // this.getTex(k)
     },
+    // 设置默认地址
     setDefaultAddr(obj) {
       const setDefaultData = this.$helpers.cloneObject(obj)
       const data = this.$helpers.transformRequest(
@@ -2570,13 +2592,13 @@ export default {
       // console.log(1111,this.countryList ,this.provinceList,this.cityList)
       // console.log('create')  /[^\d]/g,''
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
@@ -2601,7 +2623,6 @@ export default {
         this.alertBox = true
         return false
       }
-        // console.log("sssss",this.provinceList)
       if(this.provinceList.length >2){
         if (!this.province.areaId) {
           this.wrongMsg = this.$t(`${lang}.wip10`)
@@ -2609,12 +2630,10 @@ export default {
           return false
         }
       }
-      if(this.cityList.length >2){
-        if (!this.city.areaId) {
-          this.wrongMsg = this.$t(`${lang}.wip11`)
-          this.alertBox = true
-          return false
-        }
+      if(this.cityList.length > 1 && this.city.areaId == 0){
+        this.wrongMsg = this.$t(`${lang}.wip11`)
+        this.alertBox = true
+        return false
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2649,6 +2668,8 @@ export default {
       this.addr = data
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address)); 
+      this.$successMessage(this.$t(`${lang}.prompt1`))
+      this.addAddress = false
       console.log(this.address)
       // this.resetAddressInp()
     },
@@ -2660,6 +2681,20 @@ export default {
         inline: 'nearest',
         behavior: 'smooth'
       })
+
+      this.wrongMsg = '';
+      this.wrongInput = {
+        firstname: false,
+        lastname: false,
+        mobile: false,
+        email: false,
+        checkEmail: false,
+        address: false,
+        zipCode: false,
+        odMail: false,
+        remark: false
+      }
+      
       // console.log('需要修改的对象：', obj);
       this.isEdit = true
       this.addAddress = true
@@ -2698,13 +2733,13 @@ export default {
     // 简体保存地址
     saveAddressCn() {
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
       }
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
@@ -2735,12 +2770,10 @@ export default {
           return false
         }
       }
-      if(this.cityList.length >2){
-        if (!this.city.areaId) {
-          this.wrongMsg = this.$t(`${lang}.wip11`)
-          this.alertBox = true
-          return false
-        }
+      if(this.cityList.length > 1 && this.city.areaId == 0){
+        this.wrongMsg = this.$t(`${lang}.wip11`)
+        this.alertBox = true
+        return false
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2773,20 +2806,22 @@ export default {
       this.addressBox = true
       this.newAddress = false
       this.address = content
+      this.addAddress = false
       localStorage.setItem("myAddress", JSON.stringify(this.address));
-      console.log('this.address',content, this.address)
+      this.$successMessage(this.$t(`${lang}.prompt2`))
+      console.log('this.address',this.addAddress)
 
     },
     // 繁体创建地址
     createAddressEn() {
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
       }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
@@ -2835,12 +2870,10 @@ export default {
           return false
         }
       }
-      if(this.cityList.length >2){
-        if (!this.city.areaId) {
-          this.wrongMsg = this.$t(`${lang}.wip11`)
-          this.alertBox = true
-          return false
-        }
+      if(this.cityList.length > 1 && this.city.areaId == 0){
+        this.wrongMsg = this.$t(`${lang}.wip11`)
+        this.alertBox = true
+        return false
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2869,19 +2902,21 @@ export default {
       this.addr = data
       this.address.push(data)
       localStorage.setItem("myAddress", JSON.stringify(this.address));
-      console.log(this.address)
+      this.$successMessage(this.$t(`${lang}.prompt1`))
+       this.addAddress = false
+      // console.log(this.address)
     },
     // 繁体保存地址
     saveAddressEn() {
       // console.log('save')
       if (this.addressData.firstname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip8`)
         this.alertBox = true
         this.wrongInput.firstname = true
         return false
       }
       if (this.addressData.lastname === '') {
-        this.wrongMsg = this.$t(`${lang}.wip1`)
+        this.wrongMsg = this.$t(`${lang}.wip6`)
         this.alertBox = true
         this.wrongInput.lastname = true
         return false
@@ -2930,12 +2965,10 @@ export default {
           return false
         }
       }
-      if(this.cityList.length >2){
-        if (!this.city.areaId) {
-          this.wrongMsg = this.$t(`${lang}.wip11`)
-          this.alertBox = true
-          return false
-        }
+      if(this.cityList.length > 1 && this.city.areaId == 0){
+        this.wrongMsg = this.$t(`${lang}.wip11`)
+        this.alertBox = true
+        return false
       }
       if (!this.addressData.address_details) {
         this.wrongMsg = this.$t(`${lang}.wip5`)
@@ -2969,19 +3002,23 @@ export default {
       this.addressBox = true
       this.newAddress = false
       this.address = content
+      this.addAddress = false
       localStorage.setItem("myAddress", JSON.stringify(this.address));
-      console.log('this.address',content, this.address)
+      this.$successMessage(this.$t(`${lang}.prompt2`))
+      // console.log('this.address',content, this.address)
 
     },
     // 删除地址
     deleteAddress() {
       localStorage.removeItem("myAddress");
+      this.isEdit = false
       this.confirmBox = false
       this.newAddress = true
       this.addressBox = false
       this.addAddress = true
       this.resetAddressInp()
       this.address = []
+      this.$errorMessage(this.$t(`${lang}.prompt3`))
     },
     keydown(){
       var reg = /^[0-9a-zA-Z\-]{1}$/;
@@ -2997,11 +3034,13 @@ export default {
         this.mobileMax = 20
       }
     },
+    // 选择纸质发票
     zhizhi(or){
       this.invoice.is_electronic = or;
       this.isactive = true
       this.Active = false
     },
+    // 选择电子发票
     dianzi(or){
       this.invoice.is_electronic = or;
       this.isactive = false
@@ -3104,6 +3143,7 @@ export default {
       this.preferFee = 0
       this.fuckYou = false
     },
+    // 获取税费
     getTex() {
       this.canSubmit = false;
       let json=[];
@@ -3276,7 +3316,8 @@ export default {
             group_type:item.groupType,
             goods_type: item.goodsType,
             coupon_id: arr[i],
-            goods_attr:item.goodsAttr
+            goods_attr:item.goodsAttr,
+            lettering:item.lettering
           }
         })
 
@@ -3306,9 +3347,9 @@ export default {
           if(res.data.config){
             if(pay == 9){
               // 测试key
-              let TestKey = "pk_test_51Hh91GEg2ty3UyHNujJu3xu3nemS1rzfb14kys3CImsO1iCtpprr082i0Gfbe9EQ3cWLc5KBoKS2azrE4IIFB5Gu00GgMY0bLj"
+              let TestKey = "pk_test_51I8gP9BKNsZ08dndJriGqzIJM8fC5WjcYobJKBHjxsq9rZuVLeieAJ93dQmzLPHIn70c04s4nXVM0k7iPS8Phedg00COtLVuTR"
               // 正式key
-              let formalKey = "pk_live_51Hh91GEg2ty3UyHNGwh4IfEY1BgtJ1FHVNy0zQBoVclAfEp1YX7W8kOmpYaUvoxwKtYvfbPQ1HlOzj1wksI7sPN900zzHU8v9c"
+              let formalKey = "pk_live_51I8gP9BKNsZ08dnd9IYZ0DXD6YY5ZFcJx17F7taXmRFOldLTT5xqU6hBNaeR9zlweH8CpJBrNYWJ3XkRKgPj4uyz00C1Bnqfvf"
 
               let stripe = Stripe(TestKey);
               let host = window.location.host
@@ -3443,7 +3484,8 @@ export default {
             group_type:item.groupType,
             goods_type: item.goodsType,
             coupon_id: arr[i],
-            goods_attr:item.goodsAttr
+            goods_attr:item.goodsAttr,
+            lettering:item.lettering
           }
         })
 
@@ -4149,7 +4191,7 @@ div {
             outline: 0;
             font-size: 14px;
             padding: 0 13px;
-            background: rgba(249, 249, 249, 1);
+            background: #fff;
           }
 
           select {
@@ -4222,7 +4264,7 @@ div {
               height: 100%;
               line-height: 38px;
               text-align: left;
-              background: rgba(248, 248, 248, 1);
+              background: #fff;
               -webkit-appearance: none;
               border: 0;
               padding: 0 0 0 13px;
@@ -5893,7 +5935,7 @@ div {
             outline: 0;
             font-size: 14px;
             padding: 0 13px;
-            background: rgba(249, 249, 249, 1);
+            background: #fff;
           }
           select {
             position: absolute;
@@ -5957,7 +5999,7 @@ div {
               height: 100%;
               line-height: 38px;
               text-align: left;
-              background: rgba(248, 248, 248, 1);
+              background: #fff;
               -webkit-appearance: none;
               border: 0;
               padding: 0 0 0 13px;

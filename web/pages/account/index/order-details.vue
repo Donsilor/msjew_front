@@ -104,26 +104,34 @@
             <div />
             <div>{{ $t(`${lang}.address`) }}</div>
           </div>
-          <div class="addr-list">
+           <div class="addr-list">
             <div class="user-info">
-              <div>{{ data.address.realName }}<span>{{ $t(`${lang}.get`) }}</span></div>
+              <div v-if="this.$store.state.language === 'zh_CN'">{{ data.address.lastName }}{{ data.address.firstName }}<span>{{ $t(`${lang}.get`) }}</span></div>
+              <div v-else>{{ data.address.firstName }} {{ data.address.lastName }}<span>{{ $t(`${lang}.get`) }}</span></div>
               <div>
                 <span>{{ data.address.userTelCode }}</span>
                 <span>{{ data.address.userTel }}</span>
               </div>
             </div>
-            <div class="other-info">
+            <div v-if="data.address.userMail" class="other-info">
               <span>{{ data.address.userMail }}</span>
             </div>
-            <div class="address">
-              {{ data.address.countryName }}-{{ data.address.provinceName
-              }}{{ data.address.cityName }}
+            <div v-if="this.$store.state.language === 'zh_CN'">
+              <div class="address">
+                {{ data.address.countryName }} {{ data.address.provinceName
+                }} {{ data.address.cityName }}
+              </div>
+              <div class="full-address">{{ data.address.address }}</div>
             </div>
-            
-            <div class="full-address">{{ data.address.address }}</div>
+            <div v-else>
+              <div class="full-address">{{ data.address.address }}</div>
+              <div class="address">
+                {{ data.address.cityName }} {{ data.address.provinceName
+                }} {{ data.address.countryName }}
+              </div>
+            </div>
             <div class="other-info">
               <span v-if="data.address.zipCode">{{ data.address.zipCode }}</span>
-              <!-- <span>{{ data.address.userMail }}</span> -->
             </div>
           </div>
         </div>
@@ -170,6 +178,11 @@
                       <span v-for="(v, k) in detail.goodsAttr" :key="'color='+k">
                         {{ v.configVal }}：{{ v.configAttrIVal }}
                       </span>
+                    </div>
+                    <!-- 刻字 -->
+                    <div class="color" v-if="detail.lettering">
+                      <span>{{  $t(`${lang}.engravingContent`)}}:</span>
+                      <span>{{ detail.lettering }}</span>
                     </div>
                     </div>
                   </div>
@@ -730,7 +743,7 @@ export default {
 .status{
   text-align: right;
   span{
-    margin-right: 105px;
+    margin-right: 30px;
     font-size: 14px;
   }
 }
@@ -893,7 +906,7 @@ export default {
               }
             }
             div:nth-child(2) {
-              width: 468 * 0.4px;
+              width: 468 * 0.6px;
               height: 14px;
               display: flex;
               // align-items: flex-end;
@@ -970,6 +983,7 @@ export default {
           color: #333;
           font-size: 14px;
           line-height: 14px;
+          margin-left: 20px;
           div:nth-child(3) {
             color: #f29b87;
             cursor: pointer;
@@ -1037,7 +1051,7 @@ export default {
               // height: 70px;
               color: #333;
               margin-left: 20px;
-              overflow: hidden;
+              // overflow: hidden;
               margin: 0 30px 0 20px;
               .good-name {
                 font-size: 16px;

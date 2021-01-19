@@ -146,7 +146,11 @@
       "toast1": "請選擇要結賬商品",
       "toast2": "移除成功",
       "discounts1": "優惠券",
-      "discounts2": "折"
+      "discounts2": "折",
+      "changeAttrSuccess": "更換參數成功",
+      "confirm": "確定",
+      "guessLike":"猜妳喜歡",
+      "lookMore":"查看更多"
     },
     "invoice":{
       "personal":"個人",
@@ -170,6 +174,7 @@
       "totalAmount":"總金額",
       "tips":"*稍後紙質發票會隨訂單商品一起快遞給您,請注意查收！",
       "confirm":"確認提交",
+      "cancel":"取消發票",
       "hint1":"抬頭類型不能為空",
       "hint2":"發票抬頭不能為空",
       "hint3":"稅號不能為空",
@@ -952,7 +957,8 @@
       "addressMessage": "暫無地址訊息",
       "chooseDiamondContrast": "選擇需要對比的莫桑石",
       "cartMessage": "您的購物車內暫無商品，去看看心儀的商品",
-      "soleOut": "商品已售罄"
+      "soleOut": "商品已售罄",
+      "emptyCart":"購物車內暫無商品，去逛逛吧"
     },
     "footerBar": {
       "custoService": "客戶服務",
@@ -1264,7 +1270,16 @@
     "oddPrice": "原  價",
     "newPrice": "折後價",
     "needLogin": "請先登錄，才能領取優惠券",
-    "buyNow":"立即購買"
+    "buyNow":"立即購買",
+    "Whitespace":"空格",
+    "EmptySpace":"(空一格)",
+    "Seal":"篆刻內容:",
+    "Preview":"預覽",
+    "confirm":"確認刻字",
+    "tip":"*僅作為樣式參考，具體效果請咨詢客服",
+    "placeHold":"限5個中文或10個字母",
+    "prompt":"*限5個漢字或10個字母",
+    "engravingContent":"刻字內容"
   },
   "listCommons": {
     "sliders": [

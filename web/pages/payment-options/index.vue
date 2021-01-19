@@ -62,7 +62,7 @@
         </div>
 
         <!-- Stripe -->
-        <!-- <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="payWay = 9">
+        <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 9 }" class="pay-block" @click="payWay = 9">
           <div class="pay-img">
             <img src="../../static/order/stripe.png" alt="" />
           </div>
@@ -72,14 +72,14 @@
           </div>
           <div v-else v-show="payWay == 9" class="pay-price">
             {{ formatCoin(coinType) }} {{ formatMoney(price) }}
-          </div> -->
+          </div>
           <!-- <div v-show="payWay == 6 && this.$store.state.coin == 'CNY' && this.$store.state.platform === 20" class="pay-price-change">
             ({{ coinHKD }} {{ formatMoney(priceHKD) }})
           </div> -->
-          <!-- <div v-show="payWay == 9" class="choose-tick">
+          <div v-show="payWay == 9" class="choose-tick">
             <img src="../../static/order/tick.png" alt="" />
           </div>
-        </div> -->
+        </div>
         <!-- vise -->
         <!-- <div v-show="this.$store.state.platform !== 20" :class="{ 'pay-choose': payWay == 61 }" class="pay-block" @click="payWay = 61">
           <div class="pay-img">
@@ -653,9 +653,9 @@ export default {
           if (res.data.config) {
             if(pay == 9){
               // 测试key
-              let TestKey = "pk_test_51Hh91GEg2ty3UyHNujJu3xu3nemS1rzfb14kys3CImsO1iCtpprr082i0Gfbe9EQ3cWLc5KBoKS2azrE4IIFB5Gu00GgMY0bLj"
+              let TestKey = "pk_test_51I8gP9BKNsZ08dndJriGqzIJM8fC5WjcYobJKBHjxsq9rZuVLeieAJ93dQmzLPHIn70c04s4nXVM0k7iPS8Phedg00COtLVuTR"
               // 正式key
-              let formalKey = "pk_live_51Hh91GEg2ty3UyHNGwh4IfEY1BgtJ1FHVNy0zQBoVclAfEp1YX7W8kOmpYaUvoxwKtYvfbPQ1HlOzj1wksI7sPN900zzHU8v9c"
+              let formalKey = "pk_live_51I8gP9BKNsZ08dnd9IYZ0DXD6YY5ZFcJx17F7taXmRFOldLTT5xqU6hBNaeR9zlweH8CpJBrNYWJ3XkRKgPj4uyz00C1Bnqfvf"
 
               let stripe = Stripe(TestKey);
               let host = window.location.host

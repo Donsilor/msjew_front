@@ -986,7 +986,7 @@ export default {
       padding: 0 14px;
       margin: 10px 0;
       text-align: left;
-      background: rgba(249, 249, 249, 1);
+      background: #fff;
       border: 1px solid rgba(187, 187, 187, 1); /*no*/
       font-size: 15px;
       line-height: 40px;

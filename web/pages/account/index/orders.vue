@@ -89,6 +89,11 @@
                       <span>{{ i.configAttrIVal }}</span>
                     </div>
                   </nuxt-link>
+                  <!-- 刻字 -->
+                    <div class="color lettering" v-if="detail.lettering">
+                      <span>{{  $t(`${lang}.engravingContent`)}}:</span>
+                      <span>{{ detail.lettering }}</span>
+                    </div>
                 </div>
 
                 <div class="right">
@@ -508,16 +513,16 @@ export default {
       return Obj 
     },
     getList() {
-      // this.$nuxt.$loading.start()
-      this.ordersLoading = true
+      this.$nuxt.$loading.start()
+      // this.ordersLoading = true
       this.$axios
         .get('/web/member/order', {
           params: { orderStatus: 0, page: 1, page_size: 9999 }
         })
         .then(res => {
           if(res){
-            // this.$nuxt.$loading.finish()
-            this.ordersLoading = false
+            this.$nuxt.$loading.finish()
+            // this.ordersLoading = false
           }
           // console.log("订单0",res.data)
           if(res.code != 200){
@@ -600,6 +605,7 @@ export default {
           // this.tabsParam[4].num = this.list.finished.length
         })
         .catch(err => {
+          this.$nuxt.$loading.finish()
           if (!err.response) {
             this.$message.error(err.message)
           } else {
@@ -1089,6 +1095,7 @@ div {
             height: 110px;
             padding: 20px;
             border-top: 1px solid #e6e6e6;
+            position: relative;
             display: flex;
             .left {
               width: 70px;
@@ -1102,7 +1109,7 @@ div {
                 height: 100%;
               }
             }
-            .mid {
+             .mid {
               width: calc((100% - 70px) * 0.57);
               height: 70px;
               padding-left: 20px;
@@ -1114,6 +1121,12 @@ div {
               overflow: hidden;
               cursor: pointer;
               box-sizing: border-box;
+              
+              .lettering{
+                position: absolute;
+                left: 110px;
+                bottom: 3px;
+              } 
               h5 {
                 font-size: 14px;
                 line-height: 18px;

@@ -1254,7 +1254,8 @@
             "hadReturn": "Products returned",
             "cancelTransaction": "Cancel Order",
             "pending": "Pending",
-            "PayFailed": "Payment failed "
+            "PayFailed": "Payment failed ",
+            "engravingContent":"Engraving content"
         },
         "wish": {
             "myWish": "Wish List",
@@ -1337,7 +1338,8 @@
                 "Cancel order"
             ],
             "copySuccess": "Copy successful!",
-            "copyFail": "Copy failed, please copy order number manually!"
+            "copyFail": "Copy failed, please copy order number manually!",
+            "engravingContent":"Engraving content"
         },
         "logisticInfo":{
             "title": "Order",
@@ -1385,7 +1387,16 @@
         "searchSimilar": "search similar",
         "discounts1": "Coupon",
         "discounts2": "off",
-        "firstLogin": "Please login or register!"
+        "firstLogin": "Please login or register!",
+        "changeAttrSuccess": "Successfully changed parameters",
+        "cancle": "Cancel",
+        "confirm": "Confirm",
+        "emptyCart":"There are no products in the shopping cart Let's go shopping",
+        "emptyCart1":"There are no products in the shopping cart ",
+        "emptyCart2":"Let's go shopping",
+        "Pick":"Go shopping",
+        "guessLike":"Maybe you like",
+        "engravingContent":"Engraving content"
     },
     "pay": {
         "confirmOrder": "Shopping cart",
@@ -1576,7 +1587,16 @@
         "needLogin": "Please login before redeem the coupon. ",
         "buyNow":"Order Now",
         "firstLogin": "Please login or register!",
-        "scan": "Scan the code to experience the wearing effect"
+        "scan": "Scan the code to experience the wearing effect",
+        "Whitespace":"Space",
+        "EmptySpace":"(A space)",
+        "Seal":"Lettering",
+        "Preview":"Preview",
+        "confirm":"Confirm",
+        "tip":"*For reference only, please consult customer service for specific effects",
+        "placeHold":"enter up to 10 letters",
+        "prompt":"*Up to 10 letters",
+        "engravingContent":"Engraving content"
     },
     "policies": {
         "layout": {
@@ -2837,6 +2857,10 @@
         "msg8": "Failed to acquire data, please return to cart and try again!",
         "msg9": "Please select a payment method!",
         "msg12":"The shipping address is different from billing address ,please contact our customer service or re-select a shipping address. ",
+        "prompt1":"Added successfully",
+        "prompt2":"Successfully modified",
+        "prompt3":"Successfully deleted",
+        "msg13":"You are modifying the address, please confirm the modification information.",
         "useShoppingCard": "Use Shopping Card",
         "editOrUnbound": "Edit/Remove Card",
         "shoppingCard": "Shopping Card",
