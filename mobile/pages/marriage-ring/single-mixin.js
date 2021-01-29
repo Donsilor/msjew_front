@@ -49,9 +49,11 @@ export default {
       chooseSizeId: ``,
       chooseCarats:``,
       chooseCaratsId:``,
+      chooseMaterials:``,
+      chooseMaterialId:``,
       chooseColors:``,
       chooseColorId:``,
-      showPi: this.goodInfo.salePrice,
+      showPi: ``,
       showP2: 0,
       sendGoodsId: null,
       sendDetailsId: null,
@@ -116,28 +118,30 @@ export default {
     }
   },
   created() {
-    // console.log("9999",this.colorDetail)
-    // console.log("gggg",this.goodInfo)
-    // this.$nextTick(() => {
-    // })
     if(this.goodInfo.materials){
-      var id = '';
+      var materialId = '';
       if(this.goodInfo.materials.length > 0){
-        id = this.goodInfo.materials[0].id
+        materialId = this.goodInfo.materials[0].id
       }
 
       this.conditions.push({
         type: 'eject-choose-pro',
         key: 'quality',
         name: this.lang.fineness,
-        checked: id,
+        checked: materialId,
         options: this.goodInfo.materials
       })
-      this.chooseSize = '';
-      // this.chooseSize = this.goodInfo.sizes[0].content
-      if(this.goodInfo.carats !== undefined){
+      if(this.goodInfo.sizes !== undefined && this.goodInfo.sizes.length >0){
+        this.chooseSize = this.goodInfo.sizes[0].content
+        this.chooseSizeId = this.goodInfo.sizes[0].sortBy
+      }
+      if(this.goodInfo.carats !== undefined && this.goodInfo.carats.length >0){
         this.chooseCarats = this.goodInfo.carats[0].content
         this.chooseCaratsId = this.goodInfo.carats[0].sortBy
+      }
+      if(this.goodInfo.materials !== undefined && this.goodInfo.materials.length >0){
+        this.chooseMaterials = this.goodInfo.materials[0].name
+        this.chooseMaterialId = this.goodInfo.materials[0].id
       }
       if(this.goodInfo.colors !== undefined && this.goodInfo.colors.length >0){
         this.chooseColors = this.goodInfo.colors[0].content
@@ -145,12 +149,25 @@ export default {
         this.colorAttrs[0].config_id = this.colorDetail
         this.colorAttrs[0].config_attr_id = this.chooseColorId
       }
-    }
 
-    if(this.couponType(this.goodInfo.coupon) == 'discount'){
-      this.showP2 = this.goodInfo.coupon.discount.price
-    }else{
-      this.showP2 = this.goodInfo.salePrice
+      this.goodInfo.details.map(item => {
+        if (
+          item.carat == (this.chooseCaratsId ? this.chooseCaratsId : item.carat) &&
+          item.material == (this.chooseMaterialId ? this.chooseMaterialId : item.material) &&
+          item.size == (this.chooseSizeId ? this.chooseSizeId : item.size)
+        ) {
+          this.showPi = item.retailMallPrice
+          this.sendGoodsId = item.goodsId
+          this.sendDetailsId = item.id
+          this.categoryId = item.categoryId
+
+          if(this.couponType(item.coupon) == 'discount'){
+            this.showP2 = item.coupon.discount.price
+          }else{
+            this.showP2 = item.retailMallPrice
+          }
+        }
+      })
     }
   },
   mounted() {

@@ -1279,7 +1279,16 @@
     "tip":"*僅作為樣式參考，具體效果請咨詢客服",
     "placeHold":"限5個中文或10個字母",
     "prompt":"*限5個漢字或10個字母",
-    "engravingContent":"刻字內容"
+    "engravingContent":"刻字內容",
+    "goodsMaterial": "成色",
+    "goodsCarat": "克拉",
+    "goodsSize": "尺寸",
+    "goodsColor": "主石色彩",
+    "submit":"確定",
+    "pleaseChooseMaterial": "請選擇成色",
+    "pleaseChooseCarat": "請選擇克拉",
+    "pleaseChooseSize": "請選擇尺寸",
+    "pleaseChooseColor": "請選擇主石色彩"
   },
   "listCommons": {
     "sliders": [

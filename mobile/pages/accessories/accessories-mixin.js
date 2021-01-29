@@ -56,6 +56,8 @@ export default {
       chooseSizeId: ``,
       chooseCarats:``,
       chooseCaratsId:``,
+      chooseMaterials:``,
+      chooseMaterialId:``,
       chooseColors:``,
       chooseColorId:``,
       showPi: 0,
@@ -122,35 +124,63 @@ export default {
   },
   mounted() {
     // console.log("this.chooseCarats",this.goodInfo.carats)
-    if(this.goodInfo.materials||this.goodInfo.sizes){
+    if(this.goodInfo.materials){
       this.conditions[0].checked = [
         this.goodInfo.materials.length > 0
           ? this.goodInfo.materials[0].id
           : ``
       ]
       this.conditions[0].options = this.goodInfo.materials
-      // this.chooseSize = this.goodInfo.sizes
-      //   ? this.goodInfo.sizes[0].content
-      //   : ``
-      // this.chooseSizeId =this.goodInfo.sizes
-      //   ? this.goodInfo.sizes[0].sortBy
-      //   :``
-      this.chooseCarats = this.goodInfo.carats
-        ? this.goodInfo.carats[0].content
-        : ``
-      this.chooseCaratsId =this.goodInfo.carats
-        ? this.goodInfo.carats[0].sortBy
-        :``
-      this.showPi = this.goodInfo.salePrice
-      this.iAmShowMaker()
-      this.iAmShowMaker1()
+
+      if(this.goodInfo.sizes !== undefined && this.goodInfo.sizes.length >0){
+        this.chooseSize = this.goodInfo.sizes[0].content
+        this.chooseSizeId = this.goodInfo.sizes[0].sortBy
+      }
+      if(this.goodInfo.carats !== undefined && this.goodInfo.carats.length >0){
+        this.chooseCarats = this.goodInfo.carats[0].content
+        this.chooseCaratsId = this.goodInfo.carats[0].sortBy
+      }
+      if(this.goodInfo.materials !== undefined && this.goodInfo.materials.length >0){
+        this.chooseMaterials = this.goodInfo.materials[0].name
+        this.chooseMaterialId = this.goodInfo.materials[0].id
+      }
+      if(this.goodInfo.colors !== undefined && this.goodInfo.colors.length >0){
+        this.chooseColors = this.goodInfo.colors[0].content
+        this.chooseColorId = this.goodInfo.colors[0].sortBy
+        this.colorAttrs[0].config_id = this.colorDetail
+        this.colorAttrs[0].config_attr_id = this.chooseColorId
+      }
+
+      this.goodInfo.details.map(item => {
+        if (
+          item.carat == (this.chooseCaratsId ? this.chooseCaratsId : item.carat) &&
+          item.material == (this.chooseMaterialId ? this.chooseMaterialId : item.material) &&
+          item.size == (this.chooseSizeId ? this.chooseSizeId : item.size)
+        ) {
+          this.showPi = item.retailMallPrice
+          this.sendGoodsId = item.goodsId
+          this.sendDetailsId = item.id
+          this.categoryId = item.categoryId
+
+          if(this.couponType(item.coupon) == 'discount'){
+            this.showP2 = item.coupon.discount.price
+          }else{
+            this.showP2 = item.retailMallPrice
+          }
+        }
+      })
+
+      // this.iAmShowMaker()
+      // this.iAmShowMaker1()
     }
+
     if(this.goodInfo.colors !== undefined && this.goodInfo.colors.length >0){
       this.chooseColors = this.goodInfo.colors[0].content
       this.chooseColorId = this.goodInfo.colors[0].sortBy
       this.colorAttrs[0].config_id = this.colorDetail
       this.colorAttrs[0].config_attr_id = this.chooseColorId
     }
+    
     // this.$axios
     //   .get(`/wap/goodsComments/getAvgLevel`, {
     //     params: {

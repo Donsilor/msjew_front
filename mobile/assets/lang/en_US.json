@@ -1277,7 +1277,16 @@
     "tip":"*For reference only, please consult customer service for specific effects",
     "placeHold":"enter up to 10 letters",
     "prompt":"*Up to 10 letters",
-    "engravingContent":"Engraving content"
+    "engravingContent":"Engraving content",
+    "goodsMaterial": "Metal",
+    "goodsCarat": "Carat",
+    "goodsSize": "Size",
+    "goodsColor": "Color",
+    "submit":"Confirm",
+    "pleaseChooseMaterial": "Please choose material",
+    "pleaseChooseCarat": "Please choose carat",
+    "pleaseChooseSize": "Please choose size",
+    "pleaseChooseColor": "Please choose color"
   },
   "listCommons": {
     "sliders": [
