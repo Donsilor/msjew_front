@@ -78,312 +78,307 @@
           </div>
           <span>{{ lang.pairRing }}*1</span>
         </div>
-      <div>
-            <!--      第一个戒指-->
-        <div class="select-line">
-          <span>
-            <span
-              :class="[
-                'sex-icon',
-                ['lady', 'gentlemen', 'neutral'][firstRing.userSex]
-              ]"
-            >
-              <!--            <i v-if="firstRing.userSex === 0" class="iconfont icon_nv" />-->
-              <!--            <i v-if="firstRing.userSex === 1" class="iconfont icon_nan" />-->
-              <i
-                :class="[
-                  'iconfont',
-                  ['icon_nv', 'icon_nan', 'iconnannv'][firstRing.userSex]
-                ]"
-              />
-            </span>
-            {{ lang.chooseColor }}
-          </span>
-          <span @click="showFirstRingQualityChoose">
-            {{ firstRingQualityText }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
-        <div class="bd-b"></div>
-        <div class="select-line first" v-if="firstRing.carats.length >0">
-          <span>
-            {{ lang.chooseCarat }}
-          </span>
-          <span @click="showFirstRingCaratChoose">
-            {{ firstRingCaratText }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
-        <div class="bd-b" v-if="firstRing.carats.length >0"></div>
-        <div class="select-line">
-          <span>
-            <span>{{ lang.chooseSize }}</span>
-            <span>（{{ lang['us-version'] }}）</span>
-            <div @click="openSize()">!</div>
-          </span>
-          <span @click="showFirstRingSizeChoose">
-            {{ firstRingSizeText }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
-        <div class="bd-b"></div>
-        <!-- 色彩 start -->
-        <div class="select-line first" v-if="firstRing.colors.length >0">
-          <span>
-            {{ lang.chooseShade }}
-          </span>
-          <span @click="showFirstRingColorChoose">
-            {{ firstRingColorText }}
-            <i class="iconfont iconyou" /> 
-          </span>
-        </div>
-        <div class="bd-b" v-if="firstRing.colors.length >0"></div>
-        <!-- 色彩 end -->
-        <!--      第二个戒指-->
-        
-        <div class="select-line">
-          <span>
-            <span
-              :class="[
-                'sex-icon',
-                ['lady', 'gentlemen', 'neutral'][secondRing.userSex]
-              ]"
-            >
-              <i
+
+        <div>
+          <!-- 第一个戒指 -->
+          <div class="select-box">
+            <div class="select-line">
+              <span>
+                <span
                   :class="[
-                    'iconfont',
-                    ['icon_nv', 'icon_nan', 'iconnannv'][firstRing.userSex]
+                    'sex-icon',
+                    ['lady', 'gentlemen', 'neutral'][firstRing.userSex]
                   ]"
-                />
+                >
+                  <i
+                    :class="[
+                      'iconfont',
+                      ['icon_nv', 'icon_nan', 'iconnannv'][firstRing.userSex]
+                    ]"
+                  />
+                </span>
+                {{ lang.goodsMaterial }}：
               </span>
-            {{ lang.chooseColor }}
-          </span>
-          <span @click="showSecondRingQualityChoose">
-            {{ secondRingQualityText }}
-            <i class="iconfont iconyou" />
-          </span>
+              <span>{{ firstRingMaterialText }}</span>
+            </div>
+            <!-- <div class="bd-b"></div> -->
+            <div class="select-line first" v-if="firstRing.carats.length >0">
+              <span>{{ lang.goodsCarat }}：</span>
+              <span>{{ firstRingCaratText }}</span>
+            </div>
+            <!-- <div class="bd-b" v-if="firstRing.carats.length >0"></div> -->
+            <div class="select-line">
+              <span>
+                <span>{{ lang.chooseSize }}（{{ lang['us-version'] }}）</span>
+                <div @click="openSize()">!</div>：
+              </span>
+              <span>{{ firstRingSizeText }}</span>
+            </div>
+            <!-- <div class="bd-b"></div> -->
+            <!-- 色彩 start -->
+            <div class="select-line first" v-if="firstRing.colors.length >0">
+              <span>{{ lang.goodsColor }}：</span>
+              <span>{{ firstRingColorText }}</span>
+            </div>
+            <!-- 色彩 end -->
+            <!-- <div class="bd-b" v-if="firstRing.colors.length >0"></div> -->
+
+            <i class="iconfont iconyou" @click="showAttr=true, double='doubleA'" />
+          </div>
+
+          <!--      第二个戒指-->
+          <div class="select-box">
+            <div class="select-line">
+              <span>
+                <span
+                  :class="[
+                    'sex-icon',
+                    ['lady', 'gentlemen', 'neutral'][secondRing.userSex]
+                  ]"
+                >
+                  <i
+                      :class="[
+                        'iconfont',
+                        ['icon_nv', 'icon_nan', 'iconnannv'][firstRing.userSex]
+                      ]"
+                    />
+                  </span>
+                {{ lang.goodsMaterial }}：
+              </span>
+              <span>{{ secondRingmaterialText }}</span>
+            </div>
+            <!-- <div class="bd-b"></div> -->
+            <div class="select-line second" v-if="secondRing.carats.length >0">
+              <span>{{ lang.goodsCarat }}：</span>
+              <span>{{ secondRingCaratText }}</span>
+            </div>
+            <!-- <div class="bd-b" v-if="secondRing.carats.length >0"></div> -->
+            <div class="select-line">
+              <span>
+                <span>{{ lang.chooseSize }}（{{ lang['us-version'] }}）</span>
+                <div @click="openSize()">!</div>：
+              </span>
+              <span>{{ secondRingSizeText }}</span>
+            </div>
+            <!-- 色彩 start -->
+            <!-- <div class="bd-b" v-if="secondRing.colors.length >0"></div> -->
+            <div class="select-line second" v-if="secondRing.colors.length >0">
+              <span>{{ lang.goodsColor }}：</span>
+              <span>{{ secondRingColorText }}</span>
+            </div>
+            <!-- 色彩 end -->
+
+            <i class="iconfont iconyou" @click="showAttr=true, double='doubleB'"/>
+          </div>
         </div>
-        <div class="bd-b"></div>
-        <div class="select-line second" v-if="secondRing.carats.length >0">
-          <span>
-            {{ lang.chooseCarat }}
-          </span>
-          <span @click="showSecondRingCaratChoose">
-            {{ secondRingCaratText }}
-            <i class="iconfont iconyou" />
-          </span>
+
+        <div
+          :class="['btn-common btn-gray', { btnActive: canAddCart }]"
+          
+          @click="orderNow"
+        >
+        {{
+            lang.buyNow
+          }}
+          <!-- {{
+            inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
+          }} -->
         </div>
-        <div class="bd-b" v-if="secondRing.carats.length >0"></div>
-        <div class="select-line">
-          <span>
-            <span>{{ lang.chooseSize }}</span>
-            <span>（{{ lang['us-version'] }}）</span>
-            <div @click="openSize()">!</div>
-          </span>
-          <span @click="showSecondRingSizeChoose">
-            {{ secondRingSizeText }}
-            <i class="iconfont iconyou" />
-          </span>
+        <!-- ['btn-common', canAddCart ? 'btn-gray' : 'btn-pink'] :disabled="!canAddCart"-->
+        <div
+          :class="['btn-common btn-gray', { btnActivePink: canAddCart }]"
+          
+          @click="addCart"
+        >
+        {{
+            lang.addCart
+          }}
+          <!-- {{
+            inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
+          }} -->
         </div>
-        <!-- 色彩 start -->
-        <div class="bd-b" v-if="secondRing.colors.length >0"></div>
-        <div class="select-line second" v-if="secondRing.colors.length >0">
-          <span>
-            {{ lang.chooseShade }}
-          </span>
-          <span @click="showSecondRingColorChoose">
-            {{ secondRingColorText }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
-        <!-- 色彩 end -->
-      </div>
-      <div
-        :class="['btn-common btn-gray', { btnActive: canAddCart }]"
-        
-        @click="orderNow"
-      >
-      {{
-          lang.buyNow
-        }}
-        <!-- {{
-          inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
-        }} -->
-      </div>
-      <!-- ['btn-common', canAddCart ? 'btn-gray' : 'btn-pink'] :disabled="!canAddCart"-->
-      <div
-        :class="['btn-common btn-gray', { btnActivePink: canAddCart }]"
-        
-        @click="addCart"
-      >
-      {{
-          lang.addCart
-        }}
-        <!-- {{
-          inSale ? canAddCart ? lang.addCart : lang.noTotalStock: lang.notInSale
-        }} -->
       </div>
       
-    </div>
-      
-    <!-- <div class="wish-and-share">
-      <i
-        :class="[
-          'iconfont',
-          { 'iconicon-xinyuandan': !inWish },
-          { 'iconxinyuandan-dianji': inWish },
-          { active: inWish }
-        ]"
-        @click="setWish"
-      />
-      <div />
-      <i class="iconfont iconfb" @click="$shareFacelook()" />
-    </div> -->
+      <!-- <div class="wish-and-share">
+        <i
+          :class="[
+            'iconfont',
+            { 'iconicon-xinyuandan': !inWish },
+            { 'iconxinyuandan-dianji': inWish },
+            { active: inWish }
+          ]"
+          @click="setWish"
+        />
+        <div />
+        <i class="iconfont iconfb" @click="$shareFacelook()" />
+      </div> -->
     
 
-    <div class="ring-details">
-      <div class="details-title">
-        {{ lang.goodsDetail }}
-      </div>
-      <div class="details-sku">{{ lang.goods }}ID：{{ goodInfo.goodsCode }}</div>
-      <div class="base-info">
+      <div class="ring-details">
         <div class="details-title">
-          {{ firstRing.userSexText }}
+          {{ lang.goodsDetail }}
         </div>
-        <div class="sku-table">
-          <div v-if="index < detailNum" v-for="(b, index) in firstRing.specs" :key="index">
-            <span>{{ b.configName }}</span>
-            <span>{{ b.configAttrVal }}</span>
+        <div class="details-sku">{{ lang.goods }}ID：{{ goodInfo.goodsCode }}</div>
+        <div class="base-info">
+          <div class="details-title">
+            {{ firstRing.userSexText }}
           </div>
-
-          <div v-if="specsLength" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
-        </div>
-      </div>
-      <div class="base-info">
-        <div class="details-title">
-          {{ secondRing.userSexText }}
-        </div>
-        <div class="sku-table">
-          <div v-if="index < detailNumT" v-for="(b, index) in secondRing.specs" :key="index">
-            <span>{{ b.configName }}</span>
-            <span>{{ b.configAttrVal }}</span>
-          </div>
-
-          <div v-if="specsLengthT" :class="['icon',{'reverse': ifShowMoreT}]" @click="showMoreT"></div>
-        </div>
-      </div>
-      <div class="desc-content" v-html="ringDetail"></div>
-    </div>
-    <!-- <div class="comment">
-      <div class="comment-title">
-        {{ lang.clientSay }} <span>({{ total_count }})</span>
-      </div>
-      <div class="comment-stars">
-        <i
-          v-for="index in 5"
-          :key="index"
-          :class="[
-            `iconfont`,
-            `iconxing`,
-            { light: index <= Math.round(starNum) },
-            { dark: index > Math.round(starNum) }
-          ]"
-        ></i>
-        <span>{{ starNum.toFixed(1) }}</span>
-      </div>
-      <template v-if="total_count > 0">
-        <div class="comment-box">
-          <div class="client-user">{{ showEmail(comments.userAccount) }}</div>
-          <div class="time-and-stars">
-            <div class="about-time">
-              {{ comments.createTime }}
+          <div class="sku-table">
+            <div v-if="index < detailNum" v-for="(b, index) in firstRing.specs" :key="index">
+              <span>{{ b.configName }}</span>
+              <span>{{ b.configAttrVal }}</span>
             </div>
-            <div class="about-stars">
-              <i
-                v-for="index in 5"
-                :key="index"
-                :class="[
-                  `iconfont`,
-                  `iconxing`,
-                  { light: index <= Math.round(comments.commentsLevel) },
-                  { dark: index > Math.round(comments.commentsLevel) }
-                ]"
-              ></i>
+
+            <div v-if="specsLength" :class="['icon',{'reverse': ifShowMore}]" @click="showMore"></div>
+          </div>
+        </div>
+        <div class="base-info">
+          <div class="details-title">
+            {{ secondRing.userSexText }}
+          </div>
+          <div class="sku-table">
+            <div v-if="index < detailNumT" v-for="(b, index) in secondRing.specs" :key="index">
+              <span>{{ b.configName }}</span>
+              <span>{{ b.configAttrVal }}</span>
+            </div>
+
+            <div v-if="specsLengthT" :class="['icon',{'reverse': ifShowMoreT}]" @click="showMoreT"></div>
+          </div>
+        </div>
+        <div class="desc-content" v-html="ringDetail"></div>
+      </div>
+
+      <!-- <div class="comment">
+        <div class="comment-title">
+          {{ lang.clientSay }} <span>({{ total_count }})</span>
+        </div>
+        <div class="comment-stars">
+          <i
+            v-for="index in 5"
+            :key="index"
+            :class="[
+              `iconfont`,
+              `iconxing`,
+              { light: index <= Math.round(starNum) },
+              { dark: index > Math.round(starNum) }
+            ]"
+          ></i>
+          <span>{{ starNum.toFixed(1) }}</span>
+        </div>
+        <template v-if="total_count > 0">
+          <div class="comment-box">
+            <div class="client-user">{{ showEmail(comments.userAccount) }}</div>
+            <div class="time-and-stars">
+              <div class="about-time">
+                {{ comments.createTime }}
+              </div>
+              <div class="about-stars">
+                <i
+                  v-for="index in 5"
+                  :key="index"
+                  :class="[
+                    `iconfont`,
+                    `iconxing`,
+                    { light: index <= Math.round(comments.commentsLevel) },
+                    { dark: index > Math.round(comments.commentsLevel) }
+                  ]"
+                ></i>
+              </div>
+            </div>
+            <div class="comment-content ow-h2">
+              {{ comments.commentsDesc }}
             </div>
           </div>
-          <div class="comment-content ow-h2">
-            {{ comments.commentsDesc }}
+          <div
+            class="comment-btn"
+            @click="$router.push(`/comments?groupId=${$route.query.ringId}`)"
+          >
+            {{ lang.allComments }} >
           </div>
-        </div>
-        <div
-          class="comment-btn"
-          @click="$router.push(`/comments?groupId=${$route.query.ringId}`)"
-        >
-          {{ lang.allComments }} >
-        </div>
-      </template>
-      <template v-else>
-        <div class="no-comment">
-          {{ lang.noComments }}
-        </div>
-      </template>
-    </div> -->
-    <footer-bar></footer-bar>
-    <swiper-tap
-      ref="first-ring-carat"
-      :title="`${lang.carat}`"
-      :list="firstRing.carats"
-      @clear="firstRingClearCarat"
-    ></swiper-tap>
-    <swiper-tap
-      ref="first-ring-suitability"
-      :list="firstRing.sizes"
-      @clear="firstRingClearSize"
-    ></swiper-tap>
-    <swiper-tap
-      ref="first-ring-color"
-      :title="`${lang.shade}`"
-      :list="firstRing.colors"
-      @clear="firstRingClearColor"
-    ></swiper-tap>
-    <choose-eject
-      ref="first-ring-quality-choose"
-      :title="`${lang.fineness}`"
-      :type="'quality'"
-      :required="true"
-      :options="firstRingQuality.options"
-      @clear="firstRingClearQuality"
-    ></choose-eject>
+        </template>
+        <template v-else>
+          <div class="no-comment">
+            {{ lang.noComments }}
+          </div>
+        </template>
+      </div> -->
 
-    <swiper-tap
-      ref="second-ring-carat"
-      :title="`${lang.carat}`"
-      :list="secondRing.carats"
-      @clear="secondRingClearCarat"
-    ></swiper-tap>
-    <swiper-tap
-      ref="second-ring-suitability"
-      :list="secondRing.sizes"
-      @clear="secondRingClearSize"
-    ></swiper-tap>
-    <swiper-tap
-      ref="second-ring-color"
-      :title="`${lang.shade}`"
-      :list="secondRing.colors"
-      @clear="secondRingClearColor"
-    ></swiper-tap>
-    <choose-eject
-      ref="second-ring-quality-choose"
-      :title="`${lang.fineness}`"
-      :type="'quality'"
-      :required="true"
-      :options="secondRingQuality.options"
-      @clear="secondRingClearQuality"
-    ></choose-eject>
-    <size-board ref="size-board"></size-board>
-    <!-- 获取优惠券 -->
-    <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
-    <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
+      <footer-bar></footer-bar>
+      <swiper-tap
+        ref="first-ring-carat"
+        :title="`${lang.carat}`"
+        :list="firstRing.carats"
+        @clear="firstRingClearCarat"
+      ></swiper-tap>
+      <swiper-tap
+        ref="first-ring-suitability"
+        :list="firstRing.sizes"
+        @clear="firstRingClearSize"
+      ></swiper-tap>
+      <swiper-tap
+        ref="first-ring-color"
+        :title="`${lang.shade}`"
+        :list="firstRing.colors"
+        @clear="firstRingClearColor"
+      ></swiper-tap>
+      <choose-eject
+        ref="first-ring-quality-choose"
+        :title="`${lang.fineness}`"
+        :type="'quality'"
+        :required="true"
+        :options="firstRingQuality.options"
+        @clear="firstRingClearQuality"
+      ></choose-eject>
+
+      <swiper-tap
+        ref="second-ring-carat"
+        :title="`${lang.carat}`"
+        :list="secondRing.carats"
+        @clear="secondRingClearCarat"
+      ></swiper-tap>
+      <swiper-tap
+        ref="second-ring-suitability"
+        :list="secondRing.sizes"
+        @clear="secondRingClearSize"
+      ></swiper-tap>
+      <swiper-tap
+        ref="second-ring-color"
+        :title="`${lang.shade}`"
+        :list="secondRing.colors"
+        @clear="secondRingClearColor"
+      ></swiper-tap>
+      <choose-eject
+        ref="second-ring-quality-choose"
+        :title="`${lang.fineness}`"
+        :type="'quality'"
+        :required="true"
+        :options="secondRingQuality.options"
+        @clear="secondRingClearQuality"
+      ></choose-eject>
+      <size-board ref="size-board"></size-board>
+      <!-- 获取优惠券 -->
+      <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
+      <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
+
+      <!-- 商品属性 -->
+      <goods-attr
+        v-if="showAttr"
+        :info="goodInfo"
+        :doubleType="double"
+        :attrIndex="attrIndex"
+        :attrIndexB="attrIndexB"
+        @close="showAttr=false"
+        @changeAttr="changeAttr"
+        :firstRing="firstRing"
+        :secondRing="secondRing"
+        :goodsAttrA="goodsAttrA"
+        :goodsAttrB="goodsAttrB"
+        :firstRingId="firstRingId"
+        :secondRingId="secondRingId"
+        :attrRegroupA="attrRegroupA"
+        :attrRegroupB="attrRegroupB"
+      ></goods-attr>
+
     </div>
     <div v-else >
       <soleOut></soleOut>
@@ -433,7 +428,14 @@ export default {
       detailNum: 4,
       ifShowMoreT: false,
       detailNumT: 4,
-      ifShowPop: false
+      ifShowPop: false,
+      isLogin: !!this.$store.state.token,
+      showAttr: false,
+      attrIndex: null,
+      attrIndexB: null,
+      double: '',
+      attrRegroupA: '',
+      attrRegroupB: ''
     }
   },
   computed: {
@@ -512,6 +514,85 @@ export default {
     closePop() {
       this.ifShowPop = false
     },
+    changeAttr(select) {
+      if(select.type == 'doubleA'){
+        this.firstRingMaterial = {
+          id: select.material.id,
+          text: select.material.name
+        }
+
+        this.firstRingCarat = {
+          id: select.carat.sortBy,
+          text: select.carat.content
+        }
+
+        this.firstRingSize = {
+          id: select.size.sortType,
+          text: select.size.content
+        }
+
+        this.firstRingColor = {
+          id: select.color.sortType,
+          text: select.color.content
+        }
+        this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
+        this.firstRingColorAttrs[0].config_attr_id = this.firstRingColor.id
+
+        this.attrIndex = select.select
+
+        if(select.attrRegroup){
+          this.attrRegroupA = select.attrRegroup
+        }
+      }else{
+        this.secondRingMaterial = {
+          id: select.material.id,
+          text: select.material.name
+        }
+
+        this.secondRingCarat = {
+          id: select.carat.sortBy,
+          text: select.carat.content
+        }
+
+        this.secondRingSize = {
+          id: select.size.sortType,
+          text: select.size.content
+        }
+
+        this.secondRingColor = {
+          id: select.color.sortType,
+          text: select.color.content
+        }
+        this.secondRingColorAttrs[0].config_id = this.secondRingColorDetail
+        this.secondRingColorAttrs[0].config_attr_id = this.secondRingColor.id
+
+        this.attrIndexB = select.select
+
+        if(select.attrRegroup){
+          this.attrRegroupB = select.attrRegroup
+        }
+      }
+
+      this.showPi = select.price
+      this.sendDetailsId = select.id
+
+      let item;
+      for(let i=0, len=this.goodInfo.details.length; i<len; i++){
+        item = this.goodInfo.details[i]
+        if(item.id == select.id){
+          this.coupleLadyId = item.ladyRing
+          this.coupleMenId = item.menRing
+          this.goodsId = item.id
+          this.styleId = item.goodsId
+          this.categoryId = item.categoryId
+          this.goodInfo.salePrice = item.retailMallPrice
+          if(this.goodInfo.coupon.discount){
+            this.goodInfo.coupon.discount.price = item.coupon.discount.price
+          }
+          this.stock = item.stock
+        }
+      }
+    }
   }
 }
 </script>

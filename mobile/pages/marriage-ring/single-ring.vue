@@ -50,14 +50,26 @@ export default {
       this.$refs['data-list'].getNextPage()
     },
     clickData(data) {
-      // console.log(333333333)
-      this.$router.push({
-        name: 'marriage-ring-single-ring-detail',
-        query: {
-          goodId: data.id,
-          ringType : 'single'
-        }
-      })
+      let ringType = ''
+      if(data.categoryId == 19){
+        ringType = 'pair'
+        this.$router.push({
+          name: 'marriage-ring-pair-ring-detail',
+          query: {
+            goodId: data.id,
+            ringType : ringType
+          }
+        })
+      } else if(data.categoryId == 2){
+        ringType = 'single'
+        this.$router.push({
+          name: 'marriage-ring-single-ring-detail',
+          query: {
+            goodId: data.id,
+            ringType : ringType
+          }
+        })
+      }
     }
   }
 }

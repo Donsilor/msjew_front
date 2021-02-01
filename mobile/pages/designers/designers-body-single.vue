@@ -91,7 +91,8 @@
             <span>{{ chooseMaterials }}</span>
           </div>
           <!-- <div class="bd-b"></div> -->
-          <div class="select-line" v-if="goodInfo.sizesConfig">
+          <!-- <div class="select-line" v-if="goodInfo.sizesConfig"> -->
+          <div class="select-line" v-if="goodInfo.sizes.length">
             <span>{{ lang.goodsSize }}：</span>
             <span>{{ chooseSize }}</span>
           </div>
@@ -366,7 +367,7 @@ export default {
     }
   },
   mounted() {
-    // console.log("good777777",this.goodInfo.colors)
+    console.log("good777777",this.goodInfo)
     const _this = this
     if(this.goodInfo.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)

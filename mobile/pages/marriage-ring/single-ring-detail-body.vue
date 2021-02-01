@@ -467,7 +467,6 @@ export default {
     }
   },
   mounted() {
-    // console.log("good777777",this.goodInfo.colors)
     const _this = this
     if(this.goodInfo.coupon.hasOwnProperty('discount')){
       this.activeTime = this.changeTime(this.goodInfo.coupon.discount.end_time)

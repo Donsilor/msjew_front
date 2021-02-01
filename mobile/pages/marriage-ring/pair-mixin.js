@@ -34,6 +34,10 @@ export default {
         id: '',
         text: ''
       },
+      firstRingMaterial: {
+        id: '',
+        text: ''
+      },
       firstRingSize: {
         id: '',
         text: ''
@@ -48,6 +52,10 @@ export default {
       },
       // 第二个戒指
       secondRingCarat: {
+        id: '',
+        text: ''
+      },
+      secondRingMaterial: {
         id: '',
         text: ''
       },
@@ -92,7 +100,35 @@ export default {
           config_attr_id:''
         }
       ],
-      doubleRingColorAttrs:[]
+      doubleRingColorAttrs:[],
+      seleceIndexA: {
+        caratsIndex: 0,
+        materialsIndex: 0,
+        sizesIndex: 0,
+        colorsIndex: 0
+      },
+      seleceIndexB: {
+        caratsIndex: 0,
+        materialsIndex: 0,
+        sizesIndex: 0,
+        colorsIndex: 0
+      },
+      firstStock: '',
+      secondStock: '',
+      defaultAs: {},
+      defaultBs: {},
+      goodsAttrA: {
+        materials: [],
+        sizes: [],
+        carats: [],
+        colors: []
+      },
+      goodsAttrB: {
+        materials: [],
+        sizes: [],
+        carats: [],
+        colors: []
+      }
     }
   },
   computed: {
@@ -353,6 +389,12 @@ export default {
       }
       return result.length === 0 ? this.lang.stArrContent : result.join(',')
     },
+    firstRingMaterialText() {
+      return this.firstRingMaterial.text
+    },
+    secondRingmaterialText() {
+      return this.secondRingMaterial.text
+    },
     firstRingCaratText() {
       return this.firstRingCarat.text
     },
@@ -371,63 +413,10 @@ export default {
     secondRingSizeText() {
       return this.secondRingSize.text || this.lang.stArrContent
     },
-    // firstRingSimpleDetail() {
-    //   const list = this.firstRing.details
-    //   let result = null
-
-    //   // console.log(
-    //   //   'this.firstRingQuality.checked=====>',
-    //   //   this.firstRingQuality.checked
-    //   // )
-
-    //   for (let n = 0, length = list.length; n < length; n++) {
-    //     if (
-    //       list[n].hasOwnProperty('material') &&
-    //       list[n].hasOwnProperty('size') &&
-    //       // list[n].hasOwnProperty('carat') &&
-    //       this.firstRingQuality.checked.indexOf(list[n].material) > -1 &&
-    //       this.firstRingSize.id === list[n].size 
-    //       // this.firstRingCarat.id === list[n].carat
-    //     ) {
-    //       // 同时具有选项的字段，才表示该配置选项已启用
-    //       result = list[n]
-    //       break
-    //     }
-    //   }
-    //   console.log("result",result)
-    //   this.firstRingId = result.id
-    //   return result
-    // },
-    // secondRingSimpleDetail() {
-    //   const list = this.secondRing.details
-    //   let result = null
-
-    //   for (let n = 0, length = list.length; n < length; n++) {
-    //     if (
-    //       list[n].hasOwnProperty('material') &&
-    //       list[n].hasOwnProperty('size') &&
-    //       // list[n].hasOwnProperty('carat') &&
-    //       this.secondRingQuality.checked.indexOf(list[n].material) > -1 &&
-    //       this.secondRingSize.id === list[n].size
-    //       // this.firstRingCarat.id === list[n].carat
-    //     ) {
-    //       // 同时具有选项的字段，才表示该配置选项已启用
-    //       result = list[n]
-    //       break
-    //     }
-    //   }
-    //   console.log("result2",result)
-    //   this.secondRingId = result.id
-    //   return result
-    // },
     firstRingSimpleDetail() {
       const list = this.firstRing.details
       let result = null
-      // console.log("ggg",this.firstRing)
-      // console.log(
-      //   'this.firstRingQuality.checked=====>',
-      //   this.firstRingQuality.checked
-      // )
+
       if(this.firstRing.carats.length >0){
         for (let n = 0, length = list.length; n < length; n++) {
           if (
@@ -457,9 +446,10 @@ export default {
           }
         }
       }
+
       this.firstRingId = result
       // console.log("result",this.firstRingId)
-      return this.changeChecked()
+      // return this.changeChecked()
     },
     secondRingSimpleDetail() {
       const list = this.secondRing.details
@@ -497,7 +487,7 @@ export default {
       this.secondRingId = result
       // console.log("result2",result)
       // this.secondRingId = result.id
-      return this.changeChecked()
+      // return this.changeChecked()
     },
     showAverageScores() {
       return parseInt(this.averageScores || '0')
@@ -508,80 +498,9 @@ export default {
     }
   },
   created() {
-    // console.log('vvvvv',this.doubleRingGoodsAttrs) 
-    if(this.firstRing.carats.length>0){
-      this.firstRingCarat = {
-        id: this.firstRing.carats[0].sortType,
-        text: this.firstRing.carats[0].content
-      }
-    }
-    // 色彩
-    if(this.firstRing.colors.length>0){
-      this.firstRingColor = {
-        id: this.firstRing.colors[0].sortType,
-        text: this.firstRing.colors[0].content
-      }
-      this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
-      this.firstRingColorAttrs[0].config_attr_id = this.firstRingColor.id
-    }
-    this.firstRingSize = {
-      id: this.firstRing.sizes[0].sortType,
-      text: this.firstRing.sizes[0].content
-    }
-    if(this.firstRing.materials.length>0){
-      this.firstRingQuality = {
-        checked: this.firstRing.materials[0].id
-          ? [this.firstRing.materials[0].id]
-          : [],
-        options: this.firstRing.materials
-      }
-    }
-    if(this.secondRing.carats.length>0){
-      this.secondRingCarat = {
-        id: this.secondRing.carats[0].sortType,
-        text: this.secondRing.carats[0].content
-      }
-    }
-    // 色彩
-    if(this.secondRing.colors.length>0){
-      this.secondRingColor = {
-        id: this.secondRing.colors[0].sortType,
-        text: this.secondRing.colors[0].content
-      }
-      this.secondRingColorAttrs[0].config_id = this.secondRingColorDetail
-      this.secondRingColorAttrs[0].config_attr_id = this.secondRingColor.id
-    }
-    this.secondRingSize = {
-      id: this.secondRing.sizes[0].sortType,
-      text: this.secondRing.sizes[0].content
-    }
-    if(this.secondRing.materials.length>0){
-      this.secondRingQuality = {
-        checked: this.secondRing.materials[0].id
-          ? [this.secondRing.materials[0].id]
-          : [],
-        options: this.secondRing.materials
-      }
-      // this.secondRingCarat = {
-      //   id: this.secondRing.carats[0].sortType,
-      //   text: this.secondRing.carats[0].content
-      // }
-      if(this.secondRing.materials[0].id){
-        // this.secondRingSize = {
-        //   id: this.secondRing.sizes[0].sortType,
-        //   text: this.secondRing.sizes[0].content
-        // }
-        this.secondRingQuality = {
-          checked: this.secondRing.materials[0].id
-            ? [this.secondRing.materials[0].id]
-            : [],
-          options: this.secondRing.materials
-        }
-      }
-    }
+    this.defaultAttr()
   },
   mounted() {
-
     // this.$axios carats
     //   .get(`/wap/goodsComments/getAvgLevel`, {
     //     params: {
@@ -618,6 +537,254 @@ export default {
     //   })
   },
   methods: {
+    // 获取默认属性
+    defaultAttr() {
+      // -----------------戒指一属性---------------------
+      this.defaultAs = this.firstRing.details;
+      let repetitionA = false, materialsA=[], caratsA=[], sizesA=[];
+
+      this.defaultAs.forEach(item => {
+        repetitionA = false
+        materialsA.forEach(m => {
+          if(m == item.material){
+            repetitionA = true;
+          }
+        })
+
+        if(!repetitionA){
+          materialsA.push(item.material)
+        }
+
+        repetitionA = false
+        caratsA.forEach(m => {
+          if(m == item.carat){
+            repetitionA = true;
+          }
+        })
+
+        if(!repetitionA && item.material == materialsA[0]){
+          caratsA.push(item.carat)
+        }
+
+        repetitionA = false
+        sizesA.forEach(m => {
+          if(m == item.sizes){
+            repetitionA = true;
+          }
+        })
+
+        if(!repetitionA && item.material == materialsA[0] && item.carat == caratsA[0]){
+          sizesA.push(item.size)
+        }
+
+      })
+
+      // id转换为具体数据
+      this.firstRing.materials.forEach(n => {
+        materialsA.forEach(o => {
+          if(o == n.id){
+            this.goodsAttrA.materials.push(n)
+          }
+        })
+      })
+
+      this.firstRing.carats.forEach(p => {
+        caratsA.forEach(q => {
+          if(q == p.sortBy){
+            this.goodsAttrA.carats.push(p)
+          }
+        })
+      })
+
+      this.firstRing.sizes.forEach(r => {
+        sizesA.forEach(s => {
+          if(s == r.sortBy){
+            this.goodsAttrA.sizes.push(r)
+          }
+        })
+      })
+
+      if(this.firstRing.colors.length){
+        this.firstRing.colors.forEach(u => {
+          this.goodsAttrA.colors.push(u)
+        })
+      }
+
+      if(this.firstRing.materials.length){
+        this.firstRingMaterial = {
+          id: this.goodsAttrA.materials[0].id,
+          text: this.goodsAttrA.materials[0].name
+        }
+      }
+
+      if(this.firstRing.carats.length){
+        this.firstRingCarat = {
+          id: this.goodsAttrA.carats[0].sortBy,
+          text: this.goodsAttrA.carats[0].content
+        }
+      }
+
+      if(this.firstRing.sizes.length){
+        this.firstRingSize = {
+          id: this.goodsAttrA.sizes[0].sortType,
+          text: this.goodsAttrA.sizes[0].content
+        }
+      }
+
+      if(this.firstRing.colors.length){
+        if(this.firstRing.colors.length>0){
+          this.firstRingColor = {
+            id: this.firstRing.colors[0].sortType,
+            text: this.firstRing.colors[0].content
+          }
+          this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
+          this.firstRingColorAttrs[0].config_attr_id = this.firstRingColor.id
+        }
+      }
+
+      // 获取已选中属性的戒指一ID
+      this.firstRing.details.forEach(t => {
+        if(t.material == this.goodsAttrA.materials.length ? this.goodsAttrA.materials[0].id : t.material &&
+          t.carat == this.goodsAttrA.carats.length ? this.goodsAttrA.carats[0].sortBy : t.carat &&
+          t.size == this.goodsAttrA.size.length ? this.goodsAttrA.sizes[0].sortBy : t.size
+        ){
+          this.firstRingId = t.id
+          this.firstStock = t.stock;
+        }
+      })
+
+
+      // -----------------戒指二属性---------------------
+      this.defaultBs = this.secondRing.details;
+      let repetitionB = false, materialsB=[], caratsB=[], sizesB=[];
+
+      this.defaultBs.forEach(item => {
+        repetitionB = false
+        materialsB.forEach(m => {
+          if(m == item.material){
+            repetitionB = true;
+          }
+        })
+
+        if(!repetitionB){
+          materialsB.push(item.material)
+        }
+
+        repetitionB = false
+        caratsB.forEach(m => {
+          if(m == item.carat){
+            repetitionB = true;
+          }
+        })
+
+        if(!repetitionB && item.material == materialsB[0]){
+          caratsB.push(item.carat)
+        }
+
+        repetitionB = false
+        sizesB.forEach(m => {
+          if(m == item.sizes){
+            repetitionB = true;
+          }
+        })
+
+        if(!repetitionB && item.material == materialsB[0] && item.carat == caratsB[0]){
+          sizesB.push(item.size)
+        }
+      })
+
+      // id转换为具体数据
+      this.secondRing.materials.forEach(n => {
+        materialsB.forEach(o => {
+          if(o == n.id){
+            this.goodsAttrB.materials.push(n)
+          }
+        })
+      })
+
+      this.secondRing.carats.forEach(p => {
+        caratsB.forEach(q => {
+          if(q == p.sortBy){
+            this.goodsAttrB.carats.push(p)
+          }
+        })
+      })
+
+      if(this.secondRing.sizes.length){
+        this.secondRing.sizes.forEach(r => {
+          sizesB.forEach(s => {
+            if(s == r.sortBy){
+              this.goodsAttrB.sizes.push(r)
+            }
+          })
+        })
+      }
+
+      if(this.secondRing.colors.length){
+        this.secondRing.colors.forEach(u => {
+          this.goodsAttrB.colors.push(u)
+        })
+      }
+
+      if(this.secondRing.materials.length){
+        this.secondRingMaterial = {
+          id: this.goodsAttrB.materials[0].id,
+          text: this.goodsAttrB.materials[0].name
+        }
+      }
+
+      if(this.secondRing.carats.length){
+        this.secondRingCarat = {
+          id: this.goodsAttrB.carats[0].sortBy,
+          text: this.goodsAttrB.carats[0].content
+        }
+      }
+
+      if(this.secondRing.sizes.length){
+        this.secondRingSize = {
+          id: this.goodsAttrB.sizes[0].sortType,
+          text: this.goodsAttrB.sizes[0].content
+        }
+      }
+
+      if(this.secondRing.colors.length>0){
+        this.secondRingColor = {
+          id: this.secondRing.colors[0].sortType,
+          text: this.secondRing.colors[0].content
+        }
+        this.secondRingColorAttrs[0].config_id = this.secondRingColorDetail
+        this.secondRingColorAttrs[0].config_attr_id = this.secondRingColor.id
+      }
+
+      // 获取已选中属性的戒指二ID
+      this.secondRing.details.forEach(t => {
+        if(t.material == this.goodsAttrB.materials.length ? this.goodsAttrB.materials[0].id : t.material &&
+          t.carat == this.goodsAttrB.carats.length ? this.goodsAttrB.carats[0].sortBy : t.carat &&
+          t.size == this.goodsAttrB.size.length ? this.goodsAttrB.sizes[0].sortBy : t.size
+        ){
+          this.secondRingId = t.id
+          this.secondStock = t.stock;
+        }
+      })
+
+      // 获取最终对戒ID及价格
+      let item = '';
+      for(let i=0, len=this.goodInfo.details.length; i<len; i++){
+        item = this.goodInfo.details[i]
+        if((this.firstRingId == item.ladyRing && this.secondRingId == item.menRing) || (this.firstRingId == item.menRing && this.secondRingId == item.ladyRing)){
+          this.coupleLadyId = item.ladyRing
+          this.coupleMenId = item.menRing
+          this.goodsId = item.id
+          this.styleId = item.goodsId
+          this.categoryId = item.categoryId
+          this.goodInfo.salePrice = item.retailMallPrice
+          if(this.goodInfo.coupon.discount){
+            this.goodInfo.coupon.discount.price = item.coupon.discount.price
+          }
+          this.stock = item.stock
+        }
+      }
+    },
     //下拉框更新后触发
     changeChecked() {
       const _this = this
@@ -722,11 +889,11 @@ export default {
         }
         stArr.push(o)
       }
-      stArr.unshift({
-        content: this.lang.stArrContent,
-        sortType: ``,
-        sortBy: ``
-      })
+      // stArr.unshift({
+      //   content: this.lang.stArrContent,
+      //   sortType: ``,
+      //   sortBy: ``
+      // })
       for (const i in goodInfo.carats) {
         const o = {
           content: goodInfo.carats[i].name,

@@ -185,15 +185,15 @@ export default {
 
     this.coinType = this.info.coinType
 
+    if(this.attrIndex && JSON.stringify(this.attrIndex) != "{}" && this.doubleType != 'doubleB'){
+      this.selectIndex = this.attrIndex
+    }
+
     if(this.doubleType == 'doubleA'){
       this.goodsInfo = this.goodsAttrA
 
       if(this.attrRegroupA){
         this.goodsInfo = this.attrRegroupA
-      }
-
-      if(this.attrIndex && JSON.stringify(this.attrIndex) != "{}"){
-        this.selectIndex = this.attrIndex
       }
     }else if(this.doubleType == 'doubleB'){
       this.goodsInfo = this.goodsAttrB
@@ -207,7 +207,7 @@ export default {
       }
     }
 
-    this.chooseAttr()
+    // this.chooseAttr()
   },
   methods: {
     chooseAttr(type, index) {
@@ -263,6 +263,7 @@ export default {
 
         // 对戒一
         if(this.doubleType == 'doubleA'){
+          return
           let materialA = this.selectIndex.materialsIndex == -1 ? -1 : this.goodsInfo.materials[this.selectIndex.materialsIndex].id,
               caratA = this.selectIndex.caratsIndex == -1 ? -1 : this.goodsInfo.carats[this.selectIndex.caratsIndex].sortBy,
               sizesA = this.selectIndex.sizesIndex == -1 ? -1 : this.goodsInfo.sizes[this.selectIndex.sizesIndex].sortBy,
@@ -526,6 +527,7 @@ export default {
             this.doubleSelect.price = priceA[0]
           }
         }else if(this.doubleType == 'doubleB'){
+          return
           let materialB = this.selectIndex.materialsIndex == -1 ? -1 : this.goodsInfo.materials[this.selectIndex.materialsIndex].id,
               caratB = this.selectIndex.caratsIndex == -1 ? -1 : this.goodsInfo.carats[this.selectIndex.caratsIndex].sortBy,
               sizesB = this.selectIndex.sizesIndex == -1 ? -1 : this.goodsInfo.sizes[this.selectIndex.sizesIndex].sortBy,
