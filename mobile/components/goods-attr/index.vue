@@ -263,11 +263,22 @@ export default {
 
         // 对戒一
         if(this.doubleType == 'doubleA'){
-          return
-          let materialA = this.selectIndex.materialsIndex == -1 ? -1 : this.goodsInfo.materials[this.selectIndex.materialsIndex].id,
-              caratA = this.selectIndex.caratsIndex == -1 ? -1 : this.goodsInfo.carats[this.selectIndex.caratsIndex].sortBy,
-              sizesA = this.selectIndex.sizesIndex == -1 ? -1 : this.goodsInfo.sizes[this.selectIndex.sizesIndex].sortBy,
+          let materialA = this.goodsInfo.materials.length ? this.selectIndex.materialsIndex == -1 ? -1 : this.goodsInfo.materials[this.selectIndex.materialsIndex].id : null,
+              caratA = this.goodsInfo.carats.length ? this.selectIndex.caratsIndex == -1 ? -1 : this.goodsInfo.carats[this.selectIndex.caratsIndex].sortBy : null,
+              sizesA = this.goodsInfo.sizes.length ? this.selectIndex.sizesIndex == -1 ? -1 : this.goodsInfo.sizes[this.selectIndex.sizesIndex].sortBy : null,
               repetitionA = false;
+
+          if(!this.goodsInfo.materials.length){
+            newIndex.materialsIndex = null
+          }
+
+          if(!this.goodsInfo.carats.length){
+            newIndex.caratsIndex = null
+          }
+
+          if(!this.goodsInfo.sizes.length){
+            newIndex.sizesIndex = null
+          }
 
           this.firstRing.details.forEach(item => {
             repetitionA = false
@@ -845,17 +856,17 @@ export default {
       }
     },
     confirm() {
-      if(this.selectIndex.materialsIndex == -1){
+      if(this.selectIndex.materialsIndex != null && this.selectIndex.materialsIndex == -1){
           this.$toast.show(this.lang.pleaseChooseMaterial)
           return
       }
 
-      if(this.selectIndex.caratsIndex == -1){
+      if(this.selectIndex.caratsIndex != null && this.selectIndex.caratsIndex == -1){
           this.$toast.show(this.lang.pleaseChooseCarat)
           return
       }
 
-      if(this.selectIndex.sizesIndex == -1){
+      if(this.selectIndex.sizesIndex != null &&  this.selectIndex.sizesIndex == -1){
           this.$toast.show(this.lang.pleaseChooseSize)
           return
       }
