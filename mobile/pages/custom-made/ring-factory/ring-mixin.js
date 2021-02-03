@@ -17,6 +17,8 @@ export default {
       chooseSizeId: ``,
       chooseCarat: ``,
       chooseCaratId:``,
+      chooseMaterials:``,
+      chooseMaterialId:``,
       sizeLine: 0,
       caratLine: 0,
       showPi: 0,
@@ -106,7 +108,6 @@ export default {
     })
       .then(res => {
         this.$nuxt.$loading.finish()
-        // console.log(4444,res)
         const mcArr = []
         for (const i in res.materials) {
           const o = {
@@ -149,7 +150,45 @@ export default {
         res.materials = mcArr
         // res.goodsDesc = res.goodsDesc.includes(`<script>`) ? '' : res.goodsDesc
         this.goodInfo = res
-        // console.log("res",res)
+
+        if(this.goodInfo.sizes !== undefined && this.goodInfo.sizes.length >0){
+          this.chooseSize = this.goodInfo.sizes[0].content
+          this.chooseSizeId = this.goodInfo.sizes[0].sortBy
+        }
+        if(this.goodInfo.carats !== undefined && this.goodInfo.carats.length >0){
+          this.chooseCarats = this.goodInfo.carats[0].name
+          this.chooseCaratsId = this.goodInfo.carats[0].id
+        }
+        if(this.goodInfo.materials !== undefined && this.goodInfo.materials.length >0){
+          this.chooseMaterials = this.goodInfo.materials[0].name
+          this.chooseMaterialId = this.goodInfo.materials[0].id
+        }
+        if(this.goodInfo.colors !== undefined && this.goodInfo.colors.length >0){
+          this.chooseColors = this.goodInfo.colors[0].name
+          this.chooseColorId = this.goodInfo.colors[0].id
+          this.colorAttrs[0].config_id = this.colorDetail
+          this.colorAttrs[0].config_attr_id = this.chooseColorId
+        }
+        
+        this.goodInfo.details.map(item => {
+          if (
+            item.carat == (this.chooseCaratsId ? this.chooseCaratsId : item.carat) &&
+            item.material == (this.chooseMaterialId ? this.chooseMaterialId : item.material) &&
+            item.sizes == (this.chooseSizeId ? this.chooseSizeId : item.size)
+          ) {
+            this.showPi = item.retailMallPrice
+            this.sendGoodsId = item.goodsId
+            this.sendDetailsId = item.id
+            this.categoryId = item.categoryId
+          }
+        })
+        
+        this.addBrowseRecords() 
+        if(!this.isLogin){
+          this.recordings()    
+        }  else {
+          this.onlinerecordings()
+        }    
 
         if(res.coupon){
           for(var i in res.coupon){
@@ -159,7 +198,6 @@ export default {
 
         this.conditions[0].options = this.goodInfo.materials
         if (this.$route.query.isBack) {
-          console.log(11111111)
           const melo = JSON.parse(
             this.$helpers.base64Decode(this.$route.query.melo)
           )
@@ -208,7 +246,10 @@ export default {
               this.goodInfo.materials[0].id || ''
             ]
           }
-          this.chooseSize = ''
+          if(this.goodInfo.sizes){
+            this.chooseSizeId = this.goodInfo.sizes[0].sortBy
+            this.chooseSize = this.goodInfo.sizes[0].content
+          }
           // this.chooseSize = this.goodInfo.sizes[0].content
           if(this.goodInfo.carats){
             this.chooseCaratId = this.goodInfo.carats[0].sortBy
@@ -650,10 +691,10 @@ export default {
     },
     // 立即购买
     orderNow(){
-      if(!this.isLogin && this.$store.state.platform == 21){
-        this.ifShowPop = true
-        return
-      }
+      // if(!this.isLogin && this.$store.state.platform == 21){
+      //   this.ifShowPop = true
+      //   return
+      // }
       
       if (!(this.canAddCart && this.inSale)) {
         return

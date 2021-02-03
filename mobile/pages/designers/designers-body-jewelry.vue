@@ -332,17 +332,17 @@ export default {
       this.chooseMaterialId = this.goodInfo.materials[select.materialsIndex].id;
       this.chooseMaterials = this.goodInfo.materials[select.materialsIndex].name;
 
-      if(this.goodInfo.hasOwnProperty('sizes') && this.goodInfo.sizes.length){
+      if(this.goodInfo.hasOwnProperty('sizes') && Array.isArray(this.goodInfo.sizes) && this.goodInfo.sizes.length){
         this.chooseSize = this.goodInfo.sizes[select.sizesIndex].content
         this.chooseSizeId = this.goodInfo.sizes[select.sizesIndex].sortBy
       }
 
-      if(this.goodInfo.hasOwnProperty('carats') && this.goodInfo.carats.length){
+      if(this.goodInfo.hasOwnProperty('carats') && Array.isArray(this.goodInfo.carats) && this.goodInfo.carats.length){
         this.chooseCarats = this.goodInfo.carats[select.caratsIndex].content
         this.chooseCaratsId = this.goodInfo.carats[select.caratsIndex].sortBy
       }
 
-      if(this.goodInfo.hasOwnProperty('colors') && this.goodInfo.colors.length){
+      if(this.goodInfo.hasOwnProperty('colors') && Array.isArray(this.goodInfo.colors) && this.goodInfo.colors.length){
         this.chooseColors = this.goodInfo.colors[select.colorsIndex].content
         this.chooseColorId = this.goodInfo.colors[select.colorsIndex].sortBy
       }

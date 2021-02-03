@@ -80,11 +80,11 @@ export default {
           }
           stArr.push(o)
         }
-        stArr.unshift({
-          content: lang.stArrContent,
-          sortType: ``,
-          sortBy: ``
-        })
+        // stArr.unshift({
+        //   content: lang.stArrContent,
+        //   sortType: ``,
+        //   sortBy: ``
+        // })
         if(infos.carats){
           const carats = []
           for (const i in infos.carats) {

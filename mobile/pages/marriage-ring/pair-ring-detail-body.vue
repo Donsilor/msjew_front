@@ -516,27 +516,39 @@ export default {
     },
     changeAttr(select) {
       if(select.type == 'doubleA'){
-        this.firstRingMaterial = {
-          id: select.material.id,
-          text: select.material.name
+        if(select.firstId){
+          this.firstRingId = select.firstId
         }
 
-        this.firstRingCarat = {
-          id: select.carat.sortBy,
-          text: select.carat.content
+        if(typeof(select.material) == 'object'){
+          this.firstRingMaterial = {
+            id: select.material.id,
+            text: select.material.name
+          }
         }
 
-        this.firstRingSize = {
-          id: select.size.sortType,
-          text: select.size.content
+        if(typeof(select.carat) == 'object'){
+          this.firstRingCarat = {
+            id: select.carat.sortBy,
+            text: select.carat.content
+          }
         }
 
-        this.firstRingColor = {
-          id: select.color.sortType,
-          text: select.color.content
+        if(typeof(select.size) == 'object'){
+          this.firstRingSize = {
+            id: select.size.sortType,
+            text: select.size.content
+          }
         }
-        this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
-        this.firstRingColorAttrs[0].config_attr_id = this.firstRingColor.id
+
+        if(typeof(select.color) == 'object'){
+          this.firstRingColor = {
+            id: select.color.sortType,
+            text: select.color.content
+          }
+          this.firstRingColorAttrs[0].config_id = this.firstRingColorDetail
+          this.firstRingColorAttrs[0].config_attr_id = this.firstRingColor.id
+        }
 
         this.attrIndex = select.select
 
@@ -544,27 +556,39 @@ export default {
           this.attrRegroupA = select.attrRegroup
         }
       }else{
-        this.secondRingMaterial = {
-          id: select.material.id,
-          text: select.material.name
+        if(select.secondId){
+          this.secondRingId = select.secondId
         }
 
-        this.secondRingCarat = {
-          id: select.carat.sortBy,
-          text: select.carat.content
+        if(typeof(select.material) == 'object'){
+          this.secondRingMaterial = {
+            id: select.material.id,
+            text: select.material.name
+          }
         }
 
-        this.secondRingSize = {
-          id: select.size.sortType,
-          text: select.size.content
+        if(typeof(select.carat) == 'object'){
+          this.secondRingCarat = {
+            id: select.carat.sortBy,
+            text: select.carat.content
+          }
         }
 
-        this.secondRingColor = {
-          id: select.color.sortType,
-          text: select.color.content
+        if(typeof(select.size) == 'object'){
+          this.secondRingSize = {
+            id: select.size.sortType,
+            text: select.size.content
+          }
         }
-        this.secondRingColorAttrs[0].config_id = this.secondRingColorDetail
-        this.secondRingColorAttrs[0].config_attr_id = this.secondRingColor.id
+
+        if(typeof(select.color) == 'object'){
+          this.secondRingColor = {
+            id: select.color.sortType,
+            text: select.color.content
+          }
+          this.secondRingColorAttrs[0].config_id = this.secondRingColorDetail
+          this.secondRingColorAttrs[0].config_attr_id = this.secondRingColor.id
+        }
 
         this.attrIndexB = select.select
 

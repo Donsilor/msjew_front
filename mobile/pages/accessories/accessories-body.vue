@@ -87,23 +87,24 @@
 
         <div class="select-box" @click="showAttr = true">
           <div class="select-line" v-if="goodInfo.carats">
-            <span>{{ lang.goodsCarat }}</span>
+            <span>{{ lang.goodsCarat }}：</span>
             <span>{{ chooseCarats }}</span>
           </div>
           <!-- <div class="bd-b" v-if="goodInfo.carats"></div> -->
-          <div class="select-line">
-            <span>{{ lang.goodsMaterial }}</span>
+          <div class="select-line" v-if="goodInfo.materials.length > 0">
+            <span>{{ lang.goodsMaterial }}：</span>
             <span>{{ chooseMaterials }}</span>
           </div>
           <!-- <div v-if="goodInfo.sizesConfig" class="bd-b"></div> -->
           <div v-if="goodInfo.sizesConfig" class="select-line margin-bottom-10">
-            <span>{{ lang.goodsSize }}</span>
+            <span>{{ lang.goodsSize }}：</span>
             <span>{{ chooseSize }}</span>
           </div>
+          
           <!-- 色彩 start -->
           <!-- <div class="bd-b" v-if="goodInfo.colors.length > 0"></div> -->
           <div class="select-line" v-if="goodInfo.colors.length > 0">
-            <span>{{ lang.goodsColor }}</span>
+            <span>{{ lang.goodsColor }}：</span>
             <span>{{ chooseColors }}</span>
           </div>
           <!-- 色彩 end -->
@@ -111,20 +112,6 @@
           <i class="iconfont iconyou"></i>
         </div>
 
-        <!--    <div-->
-        <!--      v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"-->
-        <!--      class="custom-made-word"-->
-        <!--    >-->
-        <!--      {{ lang.cmw }}-->
-        <!--      <div class="triangle" />-->
-        <!--    </div>-->
-        <!--    <div-->
-        <!--      v-if="goodInfo.goodsMod === 1 && inSale && canAddCart"-->
-        <!--      class="btn-common btn-pink"-->
-        <!--      @click="startCustomMade"-->
-        <!--    >-->
-        <!--      {{ lang.startDJ }}-->
-        <!--    </div>-->
         <div
           v-if="goodInfo.goodsMod === 1"
           :class="['btn-common', inSale && canAddCart ? 'btn-pink' : 'btn-gray']"
@@ -346,17 +333,17 @@ export default {
       this.chooseMaterialId = this.goodInfo.materials[select.materialsIndex].id;
       this.chooseMaterials = this.goodInfo.materials[select.materialsIndex].name;
 
-      if(this.goodInfo.hasOwnProperty('sizes') && this.goodInfo.sizes.length){
+      if(this.goodInfo.hasOwnProperty('sizes') && Array.isArray(this.goodInfo.sizes) && this.goodInfo.sizes.length){
         this.chooseSize = this.goodInfo.sizes[select.sizesIndex].content
         this.chooseSizeId = this.goodInfo.sizes[select.sizesIndex].sortBy
       }
 
-      if(this.goodInfo.hasOwnProperty('carats') && this.goodInfo.carats.length){
+      if(this.goodInfo.hasOwnProperty('carats') && Array.isArray(this.goodInfo.carats) && this.goodInfo.carats.length){
         this.chooseCarats = this.goodInfo.carats[select.caratsIndex].content
         this.chooseCaratsId = this.goodInfo.carats[select.caratsIndex].sortBy
       }
 
-      if(this.goodInfo.hasOwnProperty('colors') && this.goodInfo.colors.length){
+      if(this.goodInfo.hasOwnProperty('colors') && Array.isArray(this.goodInfo.colors) && this.goodInfo.colors.length){
         this.chooseColors = this.goodInfo.colors[select.colorsIndex].content
         this.chooseColorId = this.goodInfo.colors[select.colorsIndex].sortBy
       }

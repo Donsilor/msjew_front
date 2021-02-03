@@ -79,35 +79,30 @@
           <!--        <i class="iconfont iconicon-zuanshi" />-->
           <!--      </div>-->
         </div>
-        <div class="select-line" v-if="goodInfo.carats">
-          <span>
-            <span>{{ lang.inlay }}</span>
-          </span>
-          <span @click="showSwiperTap1">
-            {{ chooseCarat }}
-            <i class="iconfont iconyou" />
-          </span>
+
+        <div class="select-box" @click="showAttr = true">
+          <div class="select-line" v-if="goodInfo.carats">
+            <span>{{ lang.inlay }}：</span>
+            <span>{{ chooseCarat }}</span>
+          </div>
+          <!-- <div class="bd-b" v-if="goodInfo.carats"></div> -->
+          <div class="select-line">
+            <span>{{ lang.goodsMaterial }}：</span>
+            <span>{{ chooseMaterials }}</span>
+          </div>
+          <!-- <div class="bd-b"></div> -->
+          <div class="select-line margin-bottom-10">
+            <span>
+              <span>{{ lang.goodsSize }}（{{ lang['us-version'] }}）</span>
+              <div @click="openSize()">!</div>：
+            </span>
+            <span>{{ chooseSize }}</span>
+            <!-- <span>{{ chooseSize ? chooseSize : lang.stArrContent }}</span> -->
+          </div>
+
+          <i class="iconfont iconyou"></i>
         </div>
-        <div class="bd-b" v-if="goodInfo.carats"></div>
-        <div class="select-line">
-          <span>{{ lang.chooseColor }}</span>
-          <span @click="showChooseEject(conditions[0])">
-            {{ conditionText() }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
-        <div class="bd-b"></div>
-        <div class="select-line margin-bottom-10">
-          <span>
-            <span>{{ lang.chooseSize }}</span>
-            <span>（{{ lang['us-version'] }}）</span>
-            <div @click="openSize()">!</div>
-          </span>
-          <span @click="showSwiperTap">
-            {{ chooseSize ? chooseSize : lang.stArrContent }}
-            <i class="iconfont iconyou" />
-          </span>
-        </div>
+
         <!--首次进入-->
         <div
           v-if="
@@ -121,6 +116,7 @@
           {{ lang.cmw }}
           <div class="triangle" />
         </div>
+        
         <div
             v-if="
               parseInt($route.query.step) === 1 &&
@@ -317,6 +313,8 @@
       <!-- 获取优惠券 -->
       <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
       <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
+      <!-- 商品属性 -->
+      <goods-attr v-if="showAttr" :info="goodInfo" :attrIndex="attrIndex" @close="showAttr=false" @changeAttr="changeAttr"></goods-attr>
     </div>
     <!-- <div v-else > -->
       <!-- <soleOut></soleOut> -->
@@ -354,7 +352,10 @@ export default {
       activeTime:'',
       ifShowMore: false,
       detailNum: 4,
-      ifShowPop: false
+      ifShowPop: false,
+      isLogin: !!this.$store.state.token,
+      showAttr: false,
+      attrIndex: null
     }
   },
   mixins: [Mx],
@@ -412,6 +413,51 @@ export default {
     },
     closePop() {
       this.ifShowPop = false
+    },
+    changeAttr(select) {
+      this.attrIndex = select
+   
+      if(this.goodInfo.hasOwnProperty('materials') && Array.isArray(this.goodInfo.materials) && this.goodInfo.materials.length){
+        this.chooseMaterialId = this.goodInfo.materials[select.materialsIndex].id;
+        this.chooseMaterials = this.goodInfo.materials[select.materialsIndex].name;
+      }
+
+      if(this.goodInfo.hasOwnProperty('sizes') && Array.isArray(this.goodInfo.sizes) && this.goodInfo.sizes.length){
+        this.chooseSize = this.goodInfo.sizes[select.sizesIndex].content
+        this.chooseSizeId = this.goodInfo.sizes[select.sizesIndex].sortBy
+      }
+
+      if(this.goodInfo.hasOwnProperty('carats') && Array.isArray(this.goodInfo.carats) && this.goodInfo.carats.length){
+        this.chooseCarats = this.goodInfo.carats[select.caratsIndex].content
+        this.chooseCaratsId = this.goodInfo.carats[select.caratsIndex].sortBy
+      }
+
+      if(this.goodInfo.hasOwnProperty('colors') && Array.isArray(this.goodInfo.colors) && this.goodInfo.colors.length){
+        this.chooseColors = this.goodInfo.colors[select.colorsIndex].content
+        this.chooseColorId = this.goodInfo.colors[select.colorsIndex].sortBy
+      }
+
+      // this.colorAttrs[0].config_id = this.colorDetail
+      // this.colorAttrs[0].config_attr_id = this.chooseColorId
+
+      this.goodInfo.details.map(item => {
+        if (
+          item.carat == (this.chooseCaratsId ? this.chooseCaratsId : item.carat) &&
+          item.material == (this.chooseMaterialId ? this.chooseMaterialId : item.material) &&
+          item.size == (this.chooseSizeId ? this.chooseSizeId : item.size)
+        ) {
+          this.showPi = item.retailMallPrice
+          this.sendGoodsId = item.goodsId
+          this.sendDetailsId = item.id
+          this.categoryId = item.categoryId
+
+          if(this.couponType(item.coupon) == 'discount'){
+            this.showP2 = item.coupon.discount.price
+          }else{
+            this.showP2 = item.retailMallPrice
+          }
+        }
+      })
     }
   }
 }

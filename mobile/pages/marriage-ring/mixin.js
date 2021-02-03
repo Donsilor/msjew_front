@@ -2,13 +2,6 @@ export default {
   data() {
     return {
       conditions: [
-        // {
-        //   type: 'eject-choose-pro',
-        //   key: 'series',
-        //   name: this.LANGUAGE.listCommons.series,
-        //   checked: typeof this.$route.query.series !== 'undefined' ? this.$route.query.series:'',
-        //   options: []
-        // },
         {
           type: 'eject-choose-pro',
           key: 'style',
@@ -48,7 +41,7 @@ export default {
       const result = []
       const checked = info.checked
       const options = info.options
-      // console.log("this.CONDITION_INFO.quality.rings",info)
+
       for (let n = 0, length = options.length; n < length; n++) {
         // if (checked.indexOf(options[n].id) > -1) {
         if (checked == options[n].id) {
@@ -74,12 +67,6 @@ export default {
       }
       return result.join(',')
     },
-    // clearSeries(data) {
-    //   const conditions = JSON.parse(JSON.stringify(this.conditions))
-    //   conditions[0].checked = this.getCheckedIds(data)
-    //   this.conditions = conditions
-    //   this.madeUpEv()
-    // },
     clearStyle(data) {
       const conditions = JSON.parse(JSON.stringify(this.conditions))
       conditions[0].checked = this.getCheckedIds(data)

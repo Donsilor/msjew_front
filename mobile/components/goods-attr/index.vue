@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <div class="confirm" @click="confirm()">{{ lang.submit }}</div>
+      <div class="confirm" @click="confirm()">{{ lang.confirmed }}</div>
     </div>
   </div>
 </template>
@@ -165,6 +165,8 @@ export default {
         size: '',
         color: '',
         price: '',
+        firstId: '',
+        secondId: '',
         id: '',
         index: {},
         attrRegroup: ''
@@ -175,7 +177,7 @@ export default {
     var that = this;
     setTimeout(function() {
       that.$refs['attr-wrap'].classList.add('active')
-    }, 20) 
+    }, 20)
 
     this.goodsInfo = this.info;
 
@@ -207,7 +209,7 @@ export default {
       }
     }
 
-    // this.chooseAttr()
+    this.chooseAttr()
   },
   methods: {
     chooseAttr(type, index) {
@@ -231,9 +233,11 @@ export default {
           color: ''
         }
 
-        oldId.material = this.goodsInfo.materials[this.selectIndex.materialsIndex]
-        oldId.carat = this.goodsInfo.carats[this.selectIndex.caratsIndex]
-        oldId.size = this.goodsInfo.sizes[this.selectIndex.sizesIndex]
+        // return
+
+        oldId.material = this.goodsInfo.materials.length ? this.goodsInfo.materials[this.selectIndex.materialsIndex] : ''
+        oldId.carat = this.goodsInfo.carats.length ? this.goodsInfo.carats[this.selectIndex.caratsIndex] : ''
+        oldId.size = this.goodsInfo.sizes.length ? this.goodsInfo.sizes[this.selectIndex.sizesIndex] : ''
 
         let newIndex = {
           materialsIndex: -1,
@@ -263,22 +267,21 @@ export default {
 
         // 对戒一
         if(this.doubleType == 'doubleA'){
-          let materialA = this.goodsInfo.materials.length ? this.selectIndex.materialsIndex == -1 ? -1 : this.goodsInfo.materials[this.selectIndex.materialsIndex].id : null,
-              caratA = this.goodsInfo.carats.length ? this.selectIndex.caratsIndex == -1 ? -1 : this.goodsInfo.carats[this.selectIndex.caratsIndex].sortBy : null,
-              sizesA = this.goodsInfo.sizes.length ? this.selectIndex.sizesIndex == -1 ? -1 : this.goodsInfo.sizes[this.selectIndex.sizesIndex].sortBy : null,
-              repetitionA = false;
+          let materialA = -1, caratA = -1, sizesA = -1, repetitionA = false, that = this;
 
-          if(!this.goodsInfo.materials.length){
-            newIndex.materialsIndex = null
+          if(this.goodsInfo.materials.length && this.selectIndex.materialsIndex != -1){
+            materialA = this.goodsInfo.materials[this.selectIndex.materialsIndex].id
+          }
+          if(this.goodsInfo.carats.length && this.selectIndex.caratsIndex != -1){
+            caratA = this.goodsInfo.carats[this.selectIndex.caratsIndex].sortBy
+          }
+          if(this.goodsInfo.sizes.length && this.selectIndex.sizesIndex != -1){
+            sizesA = this.goodsInfo.sizes[this.selectIndex.sizesIndex].sortBy
           }
 
-          if(!this.goodsInfo.carats.length){
-            newIndex.caratsIndex = null
-          }
-
-          if(!this.goodsInfo.sizes.length){
-            newIndex.sizesIndex = null
-          }
+          this.doubleSelect.material = materialA
+          this.doubleSelect.carat = caratA
+          this.doubleSelect.size = sizesA
 
           this.firstRing.details.forEach(item => {
             repetitionA = false
@@ -318,10 +321,6 @@ export default {
               attrPrice.materials[0] = materialA
               attrPrice.carats[0] = caratA
               attrPrice.sizes[0] = sizesA
-
-              this.doubleSelect.material = materialA
-              this.doubleSelect.carat = caratA
-              this.doubleSelect.size = sizesA
             }else if(materialA == -1 && caratA != -1 && sizesA != -1){
               repetitionA = false
               attrRegroup.sizes.forEach(m => {
@@ -514,6 +513,7 @@ export default {
                 attrPrice.sizes.forEach(e => {
                   if(b.material==c && b.carat==d && b.size==e){
                     adsA.push(b.id)
+                    this.doubleSelect.firstId = b.id
                   }
                 })
               })
@@ -538,11 +538,21 @@ export default {
             this.doubleSelect.price = priceA[0]
           }
         }else if(this.doubleType == 'doubleB'){
-          return
-          let materialB = this.selectIndex.materialsIndex == -1 ? -1 : this.goodsInfo.materials[this.selectIndex.materialsIndex].id,
-              caratB = this.selectIndex.caratsIndex == -1 ? -1 : this.goodsInfo.carats[this.selectIndex.caratsIndex].sortBy,
-              sizesB = this.selectIndex.sizesIndex == -1 ? -1 : this.goodsInfo.sizes[this.selectIndex.sizesIndex].sortBy,
-              repetitionB = false;
+          let materialB = -1, caratB = -1, sizesB = -1, repetitionB = false, that = this;
+
+          if(this.goodsInfo.materials.length && this.selectIndex.materialsIndex != -1){
+            materialB = this.goodsInfo.materials[this.selectIndex.materialsIndex].id
+          }
+          if(this.goodsInfo.carats.length && this.selectIndex.caratsIndex != -1){
+            caratB = this.goodsInfo.carats[this.selectIndex.caratsIndex].sortBy
+          }
+          if(this.goodsInfo.sizes.length && this.selectIndex.sizesIndex != -1){
+            sizesB = this.goodsInfo.sizes[this.selectIndex.sizesIndex].sortBy
+          }
+
+          this.doubleSelect.material = materialB
+          this.doubleSelect.carat = caratB
+          this.doubleSelect.size = sizesB
 
           this.secondRing.details.forEach(item => {
             repetitionB = false
@@ -582,10 +592,6 @@ export default {
               attrPrice.materials[0] = materialB
               attrPrice.carats[0] = caratB
               attrPrice.sizes[0] = sizesB
-
-              this.doubleSelect.material = materialB
-              this.doubleSelect.carat = caratB
-              this.doubleSelect.size = sizesB
             }else if(materialB == -1 && caratB != -1 && sizesB != -1){
               repetitionB = false
               attrRegroup.sizes.forEach(m => {
@@ -777,6 +783,7 @@ export default {
                 attrPrice.sizes.forEach(e => {
                   if(b.material==c && b.carat==d && b.size==e){
                     adsB.push(b.id)
+                    this.doubleSelect.secondId = b.id
                   }
                 })
               })
@@ -815,25 +822,26 @@ export default {
       const { carats, materials, sizes, colors } = this.goodsInfo;
 
       let arr=[], caratsId, materialsId, sizesId;
-      if(carats && carats.length){
-        caratsId = caratsIndex == -1 ? null : carats[caratsIndex].sortBy
-      }else{
-        this.selectIndex.caratsIndex = null
-      }
 
-      if(materials && materials.length){
+      if(materials && Array.isArray(materials) && materials.length){
         materialsId = materialsIndex == -1 ? null : materials[materialsIndex].id
       }else{
         this.selectIndex.materialsIndex = null
       }
 
-      if(sizes && sizes.length){
+      if(carats && Array.isArray(carats) && carats.length){
+        caratsId = caratsIndex == -1 ? null : carats[caratsIndex].sortBy
+      }else{
+        this.selectIndex.caratsIndex = null
+      }
+
+      if(sizes && Array.isArray(sizes) && sizes.length){
         sizesId = sizesIndex == -1 ? null : sizes[sizesIndex].sortBy
       }else{
         this.selectIndex.sizesIndex = null
       }
 
-      if(!colors || !colors.length){
+      if(!colors || !Array.isArray(colors) || !colors.length){
         this.selectIndex.colorsIndex = null
       }
 
@@ -856,25 +864,26 @@ export default {
       }
     },
     confirm() {
-      if(this.selectIndex.materialsIndex != null && this.selectIndex.materialsIndex == -1){
+      if(this.goodsInfo.hasOwnProperty('materials') && Array.isArray(this.goodsInfo.materials) && this.goodsInfo.materials.length && this.selectIndex.materialsIndex == -1){
           this.$toast.show(this.lang.pleaseChooseMaterial)
           return
       }
 
-      if(this.selectIndex.caratsIndex != null && this.selectIndex.caratsIndex == -1){
+      if(this.goodsInfo.hasOwnProperty('carats') && Array.isArray(this.goodsInfo.carats) && this.goodsInfo.carats.length && this.selectIndex.caratsIndex == -1){
           this.$toast.show(this.lang.pleaseChooseCarat)
           return
       }
 
-      if(this.selectIndex.sizesIndex != null &&  this.selectIndex.sizesIndex == -1){
+      if(this.goodsInfo.hasOwnProperty('sizes') && Array.isArray(this.goodsInfo.sizes) && this.goodsInfo.sizes.length && this.selectIndex.sizesIndex == -1){
           this.$toast.show(this.lang.pleaseChooseSize)
           return
       }
 
-      if(this.selectIndex.colorsIndex == -1){
+      if(this.goodsInfo.hasOwnProperty('colors') && Array.isArray(this.goodsInfo.colors) && this.goodsInfo.colors.length && this.selectIndex.colorsIndex == -1){
           this.$toast.show(this.lang.pleaseChooseColor)
           return
       }
+
       if(this.doubleType){
         this.$emit('changeAttr', this.doubleSelect)
       }else{

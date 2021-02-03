@@ -79,7 +79,7 @@
             <i class="iconfont iconicon-zuanshi" />
           </div>
         </div>
-
+        
         <div class="select-box" @click="showAttr = true">
           <div class="select-line" v-if="goodInfo.carats">
             <span>{{ lang.goodsCarat }}：</span>
@@ -263,8 +263,9 @@
           @click="setWish"
         />
         <div />
-        <i class="iconfont iconfb" @click="$shareFacelook()" /> 
+        <i class="iconfont iconfb" @click="$shareFacelook()" />
       </div> -->
+
       <div class="ring-details">
         <div class="details-title">
           {{ lang.goodsDetail }}
@@ -282,60 +283,7 @@
         </div>
         <div class="desc-content" v-html="goodInfo.goodsDesc"></div>
       </div>
-      <!-- <div class="comment">
-        <div class="comment-title">
-          {{ lang.clientSay }} <span>({{ total_count }})</span>
-        </div>
-        <div class="comment-stars">
-          <i
-            v-for="index in 5"
-            :key="index"
-            :class="[
-              `iconfont`,
-              `iconxing`,
-              { light: index <= Math.round(starNum) },
-              { dark: index > Math.round(starNum) }
-            ]"
-          ></i>
-          <span>{{ starNum.toFixed(1) }}</span>
-        </div>
-        <template v-if="total_count > 0">
-          <div class="comment-box">
-            <div class="client-user">{{ showEmail(comments.userAccount) }}</div>
-            <div class="time-and-stars">
-              <div class="about-time">
-                {{ comments.createTime }}
-              </div>
-              <div class="about-stars">
-                <i
-                  v-for="index in 5"
-                  :key="index"
-                  :class="[
-                    `iconfont`,
-                    `iconxing`,
-                    { light: index <= Math.round(comments.commentsLevel) },
-                    { dark: index > Math.round(comments.commentsLevel) }
-                  ]"
-                ></i>
-              </div>
-            </div>
-            <div class="comment-content ow-h2">
-              {{ comments.commentsDesc }}
-            </div>
-          </div>
-          <div
-            class="comment-btn"
-            @click="$router.push(`/comments?goodId=${$route.query.goodId}`)"
-          >
-            {{ lang.allComments }} >
-          </div>
-        </template>
-        <template v-else>
-          <div class="no-comment">
-            {{ lang.noComments }}
-          </div>
-        </template>
-      </div> -->
+     
       <footer-bar></footer-bar>
       <swiper-tap
         ref="caratsSuitability"
@@ -370,9 +318,9 @@
       
       <!-- 获取优惠券 -->
       <get-coupon v-if="ifShowCoupon" @closeCoupon="closeCo()" :moneyInfo="this.goodInfo.coupon.money"></get-coupon>
+
       <!-- VR试戴 -->
       <vr-tryOn v-show="ifShowVR" @closeVR="closeV()"  :goodName="this.goodInfo.goodsName" :showImg="img"></vr-tryOn>
-
       <login-pop v-if="ifShowPop" @closePop="closePop"></login-pop>
 
       <!-- 商品属性 -->
@@ -505,7 +453,6 @@ export default {
         elInput.selectionEnd = startPos + val.length;
       })
       this.text = result
-      // console.log("zzzzzzzzz",result)  
     },
     // 点击预览刻字效果
     Preview(){
@@ -550,14 +497,11 @@ export default {
     getCoupon() {
       if(!this.$store.getters.hadLogin) {
         this.ifShowPop = true
-        // this.$toast.show(this.lang.needLogin)
       }else{
         this.ifShowCoupon = true
       }
     },
     VRTryOn(){
-      // this.baseUrl = this.$store.getters.baseUrl
-      // console.log("baseUrl",this.baseUrl)
       this.ifShowVR = true
     },
     showMore(){
@@ -572,17 +516,17 @@ export default {
       this.chooseMaterialId = this.goodInfo.materials[select.materialsIndex].id;
       this.chooseMaterials = this.goodInfo.materials[select.materialsIndex].name;
 
-      if(this.goodInfo.hasOwnProperty('sizes') && this.goodInfo.sizes.length){
+      if(this.goodInfo.hasOwnProperty('sizes') && Array.isArray(this.goodInfo.sizes) && this.goodInfo.sizes.length){
         this.chooseSize = this.goodInfo.sizes[select.sizesIndex].content
         this.chooseSizeId = this.goodInfo.sizes[select.sizesIndex].sortBy
       }
 
-      if(this.goodInfo.hasOwnProperty('carats') && this.goodInfo.carats.length){
+      if(this.goodInfo.hasOwnProperty('carats') && Array.isArray(this.goodInfo.carats) && this.goodInfo.carats.length){
         this.chooseCarats = this.goodInfo.carats[select.caratsIndex].content
         this.chooseCaratsId = this.goodInfo.carats[select.caratsIndex].sortBy
       }
 
-      if(this.goodInfo.hasOwnProperty('colors') && this.goodInfo.colors.length){
+      if(this.goodInfo.hasOwnProperty('colors') && Array.isArray(this.goodInfo.colors) && this.goodInfo.colors.length){
         this.chooseColors = this.goodInfo.colors[select.colorsIndex].content
         this.chooseColorId = this.goodInfo.colors[select.colorsIndex].sortBy
       }

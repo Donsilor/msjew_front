@@ -51,10 +51,12 @@ export default {
           options: this.goodInfo.materials
         }
       ],
-      chooseSize: this.goodInfo.sizes[0].content,
+      chooseSize: ``,
       chooseSizeId: ``,
       chooseCarat: ``,
       chooseCaratId:``,
+      chooseMaterials:``,
+      chooseMaterialId:``,
       showPi: this.goodInfo.salePrice,
       showP2: 0,
       sendGoodsId: null,
@@ -92,6 +94,36 @@ export default {
       this.chooseCarat = this.goodInfo.carats[0].content
       this.chooseCaratId = this.goodInfo.carats[0].sortBy
     }
+
+    if(this.goodInfo.sizes !== undefined && this.goodInfo.sizes.length >0){
+      this.chooseSize = this.goodInfo.sizes[0].content
+      this.chooseSizeId = this.goodInfo.sizes[0].sortBy
+    }
+
+    if(this.goodInfo.materials !== undefined && this.goodInfo.materials.length >0){
+      this.chooseMaterials = this.goodInfo.materials[0].name
+      this.chooseMaterialId = this.goodInfo.materials[0].id
+    }
+
+    this.goodInfo.details.map(item => {
+      if (
+        item.carat == (this.chooseCaratsId ? this.chooseCaratsId : item.carat) &&
+        item.material == (this.chooseMaterialId ? this.chooseMaterialId : item.material) &&
+        item.size == (this.chooseSizeId ? this.chooseSizeId : item.size)
+      ) {
+        this.showPi = item.retailMallPrice
+        this.sendGoodsId = item.goodsId
+        this.sendDetailsId = item.id
+        this.categoryId = item.categoryId
+
+        if(this.couponType(item.coupon) == 'discount'){
+          this.showP2 = item.coupon.discount.price
+        }else{
+          this.showP2 = item.retailMallPrice
+        }
+      }
+    })
+
     // this.$axios
     //   .get(`/wap/goodsComments/getAvgLevel`, {
     //     params: {

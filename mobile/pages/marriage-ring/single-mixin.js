@@ -131,6 +131,7 @@ export default {
         checked: materialId,
         options: this.goodInfo.materials
       })
+
       if(this.goodInfo.sizes !== undefined && this.goodInfo.sizes.length >0){
         this.chooseSize = this.goodInfo.sizes[0].content
         this.chooseSizeId = this.goodInfo.sizes[0].sortBy
@@ -166,6 +167,7 @@ export default {
           }else{
             this.showP2 = item.retailMallPrice
           }
+      
         }
       })
     }
@@ -397,10 +399,8 @@ export default {
           this.$toast(this.lang.prompt)
           return
         }
-        
       }
       // 刻字字段判断 end
-      // console.log("this.s",this.sendDetailsId)
       if (!(this.canAddCart && this.inSale)) {
         return
       }
@@ -588,10 +588,6 @@ export default {
     },
     // 立即购买
     orderNow(){
-      // if(!this.isLogin && this.$store.state.platform == 21){
-      //   this.ifShowPop = true
-      //   return
-      // }
       // 刻字字段判断 start
       let regEn = /.*[\u4e00-\u9fa5]+.*$/;
       if(regEn.test(this.engravingContent)){
@@ -605,6 +601,11 @@ export default {
           return
         }
       }
+      // 刻字字段判断 end
+      // if(!this.isLogin && this.$store.state.platform == 21){
+      //   this.ifShowPop = true
+      //   return
+      // }
       
       if (!(this.canAddCart && this.inSale)) {
         return
