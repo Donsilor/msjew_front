@@ -441,14 +441,7 @@ export default {
   computed: {
     canAddCart() {
       if (this.firstRing.totalStock > 0 && this.secondRing.totalStock > 0) {
-        if (
-           (this.firstRingSimpleDetail &&
-            this.firstRingSimpleDetail.stock &&
-            this.firstRingSimpleDetail.stock <= 0) ||
-          (this.secondRingSimpleDetail &&
-            this.secondRingSimpleDetail.stock &&
-            this.secondRingSimpleDetail.stock <= 0)
-        ) {
+        if (this.firstStock <= 0 || this.secondStock <= 0){
           return false
         }
       } else{
@@ -457,9 +450,8 @@ export default {
       if(this.goodsId){
         return true
       }
-      // console.log("this.goodsId",this.goodsId)
+      
       return false
-      // return this.firstRing.totalStock > 0 && this.secondRing.totalStock > 0
     },
     inSale() {
       return (
